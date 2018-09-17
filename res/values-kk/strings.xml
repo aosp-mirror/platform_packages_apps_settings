@@ -1374,7 +1374,7 @@
     <string name="storage_wizard_format_confirm_public_body" msgid="1516932692920060272">"Бұл үшін <xliff:g id="NAME_0">^1</xliff:g> құрылғысын пішімдеу қажет. \n\n"<b>"Пішімдегеннен кейін <xliff:g id="NAME_1">^1</xliff:g> ішінде сақталып тұрған деректердің барлығы өшеді."</b>" Жоғалып қалмауы үшін деректердің сақтық көшірмесін жасаңыз."</string>
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"Өшіру және пішімдеу"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"<xliff:g id="NAME">^1</xliff:g> пішімделуде…"</string>
-    <string name="storage_wizard_format_progress_body" msgid="3983764797223576658">"<xliff:g id="NAME">^1</xliff:g> картасын форматтау барысында оны алып тастауға болмайды."</string>
+    <string name="storage_wizard_format_progress_body" msgid="3983764797223576658">"<xliff:g id="NAME">^1</xliff:g> құрылғысын форматтау барысында оны алып тастауға болмайды."</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"Деректерді жаңа жадқа аудару"</string>
     <string name="storage_wizard_migrate_body" msgid="890751699549542345">"Фотосуреттеріңізді, файлдарыңызды және кейбір қолданбаларыңызды осы жаңа <xliff:g id="NAME">^1</xliff:g> ішіне тасымалдауға болады. \n\nТасымалдауға шамамен <xliff:g id="TIME">^2</xliff:g> жұмсалады және ішкі жадтың <xliff:g id="SIZE">^3</xliff:g> көлемін босатады. Тасымалданып жатқан кезде, кейбір қолданбалар жұмыс істемейді."</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"Қазір аудару"</string>
@@ -3429,7 +3429,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Осы құрылғыны іске қосу үшін PIN кодын енгізгенде <xliff:g id="SERVICE">%1$s</xliff:g> сияқты арнайы мүмкіндіктер қызметтері әлі қол жетімді болмайды."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Осы құрылғыны іске қосу үшін өрнекті енгізгенде <xliff:g id="SERVICE">%1$s</xliff:g> сияқты арнайы мүмкіндіктер қызметтері әлі қол жетімді болмайды."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Осы құрылғыны іске қосу үшін құпия сөзді енгізгенде <xliff:g id="SERVICE">%1$s</xliff:g> сияқты арнайы мүмкіндіктер қызметтері әлі қол жетімді болмайды."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Ескертпе: қайта жүктегеннен кейін, телефонның құлпын ашпайынша, бұл қолданба іске қосылмайды"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Ескертпе: телефоныңызды қайта қоссаңыз және экран құлыпталса, телефонның құлпы ашылмайынша, қолданба іске қосылмайды."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI ақпараты"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI кодына қатысты ақпарат"</string>
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g> ұяшығы)"</string>
@@ -3722,7 +3722,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS жіберуге рұқсат берілмеген"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"Камераны пайдалануға рұқсат берілмеген"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"Скриншот жасауға рұқсат берілмеген"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"Сақтық көшірмелер өшірілмейді"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"Бұл қолданба ашылмайды"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"Сұрақтарыңыз болса, әкімшіге хабарласыңыз"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Қосымша мәліметтер"</string>
@@ -3886,11 +3885,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ешқайсысы"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Рейтинг нысаны жоқ."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Рейтинг нысанында бұл кілт табылмады."</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Экран ойығы"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"экран кесіндісі, кесік"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Құрылғыны әдепкісінше реттеу"</string>
     <string name="special_access" msgid="3458780842491881155">"Арнайы рұқсат"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> қолданба деректерді шексіз пайдалана алады</item>
@@ -3912,11 +3909,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> құрылғысына қосылған"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Түрлі құрылғыларға қосылған"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Жүйе интерфейсінің демо режимі"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"Түнгі режим"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"Түнгі режимді орнату"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"Күңгірт режим"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"Күңгірт режимді орнату"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Жылдам реттеудің әзірлеу бөлшектері"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope трассасы"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Жұмыс профилінің параметрлері"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Контакт іздеу"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Қоңырау шалушылар мен контактілерді анықтау үшін ұйым бойынша контакт іздеуге рұқсат беру"</string>
@@ -3964,12 +3960,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Уақытты, хабарландыруларды және басқа ақпаратты көру үшін телефоныңызды таңдаңыз."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Уақытты, хабарландыруларды және басқа ақпаратты көру үшін планшетіңізді таңдаңыз."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Уақытты, хабарландыруларды және басқа ақпаратты көру үшін құрылғыңызды таңдаңыз."</string>
-    <string name="ambient_display_reach_title" product="default" msgid="8922978048080725179">"Телефонды тексеру үшін оны қолыңызға алыңыз"</string>
-    <string name="ambient_display_reach_title" product="tablet" msgid="2003954050799022314">"Планшетті тексеру үшін оны қолыңызға алыңыз"</string>
-    <string name="ambient_display_reach_title" product="device" msgid="4936469171466002668">"Құрылғыны тексеру үшін оны қолыңызға алыңыз"</string>
-    <string name="ambient_display_reach_summary" product="default" msgid="4244514681312536449">"Уақытты, хабарландыруларды және басқа ақпаратты көру үшін телефонды қолыңызға алыңыз."</string>
-    <string name="ambient_display_reach_summary" product="tablet" msgid="2321551792287654898">"Уақытты, хабарландыруларды және басқа ақпаратты көру үшін планшетті қолыңызға алыңыз."</string>
-    <string name="ambient_display_reach_summary" product="device" msgid="1953312292453084907">"Уақытты, хабарландыруларды және басқа ақпаратты көру үшін құрылғыны қолыңызға алыңыз."</string>
+    <string name="ambient_display_reach_title" msgid="6519700935117799437">"Кіру мүмкіндігін алуға арналған қимыл"</string>
+    <string name="ambient_display_reach_summary" product="default" msgid="1220765153509895824"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Хабарландыруларды көру үшін саусақ ізін пайдалану"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Саусақ ізі сканері"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Хабарландыруларды көру үшін телефонның артындағы саусақ ізін оқу сканерін саусақпен төмен қарай сипап өтіңіз."</string>
@@ -4049,7 +4041,6 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> әрекет</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> әрекет</item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"Бұл құрылғы деректерінің сақтық көшірмесі жасалып жатыр"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"Бұл құрылғыны ұйым басқарады."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Бұл құрылғыны <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> басқарады."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4155,4 +4146,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Желі деректері"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Құрылғыңыздың аты телефоныңыздағы қолданбаларға көрінеді. Сонымен қатар Bluetooth құрылғыларына қосылғанда немесе Wi-Fi хотспотын орнатқанда, басқа адамдарға көрінуі мүмкін."</string>
     <string name="devices_title" msgid="7701726109334110391">"Құрылғылар"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Жоғары жиілік панелі"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Виртуалды жоғары жиілік панелін қосу"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"Барлық параметрлер"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"Параметрлеріңіз"</string>
 </resources>

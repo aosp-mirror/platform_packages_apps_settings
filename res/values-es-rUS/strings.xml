@@ -532,7 +532,7 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Cambiar pant. bloqueada"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Cambiar/inhab. patrón/PIN/contraseña"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Elige un método para bloquear la pantalla."</string>
-    <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Ninguna"</string>
+    <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"Ninguno"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"Deslizar"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Sin seguridad"</string>
@@ -3427,7 +3427,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Cuando ingreses el PIN para iniciar el dispositivo, los servicios de accesibilidad, como <xliff:g id="SERVICE">%1$s</xliff:g>, aún no estarán disponibles."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Cuando ingreses el patrón para iniciar el dispositivo, los servicios de accesibilidad, como <xliff:g id="SERVICE">%1$s</xliff:g>, aún no estarán disponibles."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Cuando ingreses la contraseña para iniciar el dispositivo, los servicios de accesibilidad, como <xliff:g id="SERVICE">%1$s</xliff:g>, aún no estarán disponibles."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Nota: Luego de reiniciar el dispositivo, esta app no podrá iniciarse hasta que desbloquees tu teléfono"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Nota: Si reinicias el teléfono y tienes configurado un bloqueo de pantalla, no podrá iniciarse la app hasta que lo desbloquees"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Información de IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Información relacionada con IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Ranura <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3526,7 +3526,7 @@
     <string name="permit_usage_access" msgid="4012876269445832300">"Apps con acceso de uso"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Preferencias de uso de la aplicación"</string>
     <string name="time_spent_in_app_pref_title" msgid="649419747540933845">"Tiempo que se usó la app"</string>
-    <string name="usage_access_description" msgid="1352111094596416795">"El acceso a los datos de uso permite que una aplicación realice un seguimiento de qué otras aplicaciones usas y de la frecuencia con que las usas, además de conocer tu proveedor, configuración de idioma y otros detalles."</string>
+    <string name="usage_access_description" msgid="1352111094596416795">"El acceso a los datos de uso permite que una aplicación controle qué otras aplicaciones utilizas y con qué frecuencia, así como el operador, la configuración de idioma y otros detalles."</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"Memoria"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"Detalles de la memoria"</string>
     <string name="always_running" msgid="6042448320077429656">"Siempre en ejecución (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3630,7 +3630,7 @@
     <string name="running_frequency" msgid="6622624669948277693">"Frecuencia"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Uso máximo"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"No se utilizaron datos."</string>
-    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"¿Quieres que la app <xliff:g id="APP">%1$s</xliff:g> tenga acceso en No interrumpir?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"¿Quieres que la app <xliff:g id="APP">%1$s</xliff:g> tenga acceso a No interrumpir?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"La aplicación podrá activar y desactivar la función No interrumpir y realizar cambios de configuración relacionados."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"Debe seguir activado porque el acceso a las notificaciones está activado"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"¿Quieres revocar el acceso de la app <xliff:g id="APP">%1$s</xliff:g> en No interrumpir?"</string>
@@ -3720,7 +3720,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"No está permitido enviar SMS"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"No está permitido usar la cámara"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"No está permitido tomar capturas de pantalla"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"No se pueden desactivar las copias de seguridad"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"No se puede abrir esta app"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"Si tienes alguna pregunta, comunícate con tu administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Más detalles"</string>
@@ -3884,11 +3883,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ninguno"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Falta el objeto de la clasificación."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"El objeto de la clasificación no incluye esta tecla."</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Corte de pantalla"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"recorte de la pantalla, corte"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Predeterminado del dispositivo"</string>
     <string name="special_access" msgid="3458780842491881155">"Acceso especial a apps"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps pueden usar datos sin restricción</item>
@@ -3910,11 +3907,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Conectado a <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Conectado a varios dispositivos"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modo demostración de la IU del sistema"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"Modo nocturno"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"Configurar modo nocturno"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"Modo oscuro"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"Configurar modo oscuro"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Mosaicos de configuración rápida para programadores"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Seguimiento de Winscope"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Configuración del perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Búsqueda de contactos"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Permitir que tu organización busque contactos para identificar a emisores y contactos"</string>
@@ -3962,13 +3958,9 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Para consultar la hora, las notificaciones y otra información, levanta el teléfono."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Para consultar la hora, las notificaciones y otra información, levanta la tablet."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Para consultar la hora, las notificaciones y otra información, levanta el dispositivo."</string>
-    <string name="ambient_display_reach_title" product="default" msgid="8922978048080725179">"Toma el teléfono para revisarlo"</string>
-    <string name="ambient_display_reach_title" product="tablet" msgid="2003954050799022314">"Toma la tablet para revisarla"</string>
-    <string name="ambient_display_reach_title" product="device" msgid="4936469171466002668">"Toma el dispositivo para revisarlo"</string>
-    <string name="ambient_display_reach_summary" product="default" msgid="4244514681312536449">"Para consultar la hora, las notificaciones y otra información, toma el teléfono."</string>
-    <string name="ambient_display_reach_summary" product="tablet" msgid="2321551792287654898">"Para consultar la hora, las notificaciones y otra información, toma la tablet."</string>
-    <string name="ambient_display_reach_summary" product="device" msgid="1953312292453084907">"Para consultar la hora, las notificaciones y otra información, toma el dispositivo."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Desliza tu huella para ver notificaciones"</string>
+    <string name="ambient_display_reach_title" msgid="6519700935117799437">"Gesto tomar"</string>
+    <string name="ambient_display_reach_summary" product="default" msgid="1220765153509895824"></string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Deslizar tu huella para ver notificaciones"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Deslizar huella digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Para ver las notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales ubicado en la parte posterior del teléfono."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Para ver las notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales ubicado en la parte posterior de la tablet."</string>
@@ -4047,7 +4039,6 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> intentos</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> intento</item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"Es necesario crear una copia de seguridad de los datos de este dispositivo"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"Tu organización administra este dispositivo."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> administra este dispositivo."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4153,4 +4144,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalles de la red"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"El nombre de tu dispositivo es visible para las apps del teléfono. Es posible que también lo vean otras personas cuando te conectes a dispositivos Bluetooth o configures un hotspot de Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositivos"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Panel de alta frecuencia"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Habilitar panel virtual de alta frecuencia"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"Toda la configuración"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"Tu configuración"</string>
 </resources>
