@@ -39,10 +39,10 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 public class DeviceNamePreferenceController extends BasePreferenceController
         implements ValidatedEditTextPreference.Validator,
-                Preference.OnPreferenceChangeListener,
-                LifecycleObserver,
-                OnSaveInstanceState,
-                OnCreate {
+        Preference.OnPreferenceChangeListener,
+        LifecycleObserver,
+        OnSaveInstanceState,
+        OnCreate {
     private static final String PREF_KEY = "device_name";
     public static final int DEVICE_NAME_SET_WARNING_ID = 1;
     private static final String KEY_PENDING_DEVICE_NAME = "key_pending_device_name";
@@ -116,9 +116,11 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         return mWifiDeviceNameTextValidator.isTextValid(deviceName);
     }
 
-    public void confirmDeviceName() {
-        if (mPendingDeviceName != null) {
+    public void updateDeviceName(boolean update) {
+        if (update && mPendingDeviceName != null) {
             setDeviceName(mPendingDeviceName);
+        } else {
+            mPreference.setText(getSummary().toString());
         }
     }
 
@@ -153,7 +155,8 @@ public class DeviceNamePreferenceController extends BasePreferenceController
      * For more information, see {@link com.android.settings.bluetooth.BluetoothNameDialogFragment}.
      */
     private static final String getFilteredBluetoothString(final String deviceName) {
-        CharSequence filteredSequence = new BluetoothLengthDeviceNameFilter().filter(deviceName, 0, deviceName.length(),
+        CharSequence filteredSequence = new BluetoothLengthDeviceNameFilter().filter(deviceName, 0,
+                deviceName.length(),
                 new SpannedString(""),
                 0, 0);
         // null -> use the original

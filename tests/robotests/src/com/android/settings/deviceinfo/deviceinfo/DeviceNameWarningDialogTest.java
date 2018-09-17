@@ -30,7 +30,7 @@ public class DeviceNameWarningDialogTest {
         fragmentController.create().start().resume();
         fragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
 
-        verify(deviceInfoFragment).onSetDeviceNameConfirm();
+        verify(deviceInfoFragment).onSetDeviceNameConfirm(true);
     }
 
     @Test
@@ -43,6 +43,6 @@ public class DeviceNameWarningDialogTest {
         fragmentController.create().start().resume();
         fragment.onClick(null, DialogInterface.BUTTON_NEGATIVE);
 
-        verify(deviceInfoFragment, never()).onSetDeviceNameConfirm();
+        verify(deviceInfoFragment).onSetDeviceNameConfirm(false);
     }
 }
