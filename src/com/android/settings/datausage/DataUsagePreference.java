@@ -17,6 +17,7 @@ package com.android.settings.datausage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -81,6 +82,8 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
             args.putParcelable(DataUsageListV2.EXTRA_NETWORK_TEMPLATE, mTemplate);
             args.putInt(DataUsageListV2.EXTRA_SUB_ID, mSubId);
+            args.putInt(DataUsageListV2.EXTRA_NETWORK_TYPE, mTemplate.isMatchRuleMobile()
+                ? ConnectivityManager.TYPE_MOBILE : ConnectivityManager.TYPE_WIFI);
             launcher = new SubSettingLauncher(getContext())
                 .setArguments(args)
                 .setDestination(DataUsageListV2.class.getName())
