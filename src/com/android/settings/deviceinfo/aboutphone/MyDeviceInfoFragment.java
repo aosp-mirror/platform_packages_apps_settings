@@ -178,9 +178,9 @@ public class MyDeviceInfoFragment extends DashboardFragment
         DeviceNameWarningDialog.show(this);
     }
 
-    public void onSetDeviceNameConfirm() {
+    public void onSetDeviceNameConfirm(boolean confirm) {
         final DeviceNamePreferenceController controller = use(DeviceNamePreferenceController.class);
-        controller.confirmDeviceName();
+        controller.updateDeviceName(confirm);
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {

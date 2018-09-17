@@ -66,7 +66,9 @@ public class DeviceNameWarningDialog extends InstrumentedDialogFragment
     public void onClick(DialogInterface dialog, int which) {
         final MyDeviceInfoFragment host = (MyDeviceInfoFragment) getTargetFragment();
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            host.onSetDeviceNameConfirm();
+            host.onSetDeviceNameConfirm(true);
+        } else {
+            host.onSetDeviceNameConfirm(false);
         }
     }
 }
