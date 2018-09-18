@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -179,6 +180,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         mController.setActiveBluetoothDevice(mLeftBluetoothHapDevice);
 
         verify(mHearingAidProfile).setActiveDevice(mLeftBluetoothHapDevice);
+        verify(mHeadsetProfile, never()).setActiveDevice(mLeftBluetoothHapDevice);
     }
 
     /**
@@ -192,6 +194,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         mController.setActiveBluetoothDevice(mBluetoothDevice);
 
         verify(mHeadsetProfile).setActiveDevice(mBluetoothDevice);
+        verify(mHearingAidProfile, never()).setActiveDevice(mBluetoothDevice);
     }
 
     /**
