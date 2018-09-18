@@ -16,25 +16,28 @@
 
 package com.android.settings.homepage;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import static com.android.settings.homepage.SettingsHomepageActivity.PERSONAL_SETTINGS_TAG;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 import android.util.FeatureFlagUtils;
 
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class SettingsHomepageActivityTest {
 
     private Context mContext;
@@ -42,16 +45,27 @@ public class SettingsHomepageActivityTest {
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = InstrumentationRegistry.getTargetContext();
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DYNAMIC_HOMEPAGE, true);
+    }
+
+    @After
+    public void tearDown() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DYNAMIC_HOMEPAGE, false);
     }
 
     @Test
     public void launchHomepage_shouldOpenPersonalSettings() {
-        mActivity = Robolectric.setupActivity(SettingsHomepageActivity.class);
+        final Intent intent = new Intent().setClass(mContext, SettingsHomepageActivity.class)
+                .addFlags(FLAG_ACTIVITY_NEW_TASK);
+
+        mActivity = (SettingsHomepageActivity) InstrumentationRegistry.getInstrumentation()
+                .startActivitySync(intent);
+
         final Fragment fragment = mActivity.getSupportFragmentManager()
                 .findFragmentByTag(PERSONAL_SETTINGS_TAG);
 
         assertThat(fragment).isInstanceOf(PersonalSettingsFragment.class);
     }
+
 }
