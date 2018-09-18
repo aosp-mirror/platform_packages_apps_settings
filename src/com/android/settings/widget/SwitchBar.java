@@ -21,6 +21,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.SpannableStringBuilder;
@@ -32,6 +33,7 @@ import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -64,14 +66,15 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             R.attr.switchBarMarginStart,
             R.attr.switchBarMarginEnd,
             R.attr.switchBarBackgroundColor,
-            R.attr.switchBarBackgroundActivatedColor};
+            R.attr.switchBarBackgroundActivatedColor,
+            R.attr.switchBarRestrictionIcon};
 
     private final List<OnSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final TextAppearanceSpan mSummarySpan;
 
     private ToggleSwitch mSwitch;
-    private View mRestrictedIcon;
+    private ImageView mRestrictedIcon;
     private TextView mTextView;
     private String mLabel;
     private String mSummary;
@@ -108,10 +111,11 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         LayoutInflater.from(context).inflate(R.layout.switch_bar, this);
 
         final TypedArray a = context.obtainStyledAttributes(attrs, XML_ATTRIBUTES);
-        int switchBarMarginStart = (int) a.getDimension(0, 0);
-        int switchBarMarginEnd = (int) a.getDimension(1, 0);
+        final int switchBarMarginStart = (int) a.getDimension(0, 0);
+        final int switchBarMarginEnd = (int) a.getDimension(1, 0);
         mBackgroundColor = a.getColor(2, 0);
         mBackgroundActivatedColor = a.getColor(3, 0);
+        final Drawable restrictedIconDrawable = a.getDrawable(4);
         a.recycle();
 
         mTextView = findViewById(R.id.switch_text);
@@ -134,14 +138,15 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
                 (switchView, isChecked) -> setTextViewLabelAndBackground(isChecked));
 
         mRestrictedIcon = findViewById(R.id.restricted_icon);
+        mRestrictedIcon.setImageDrawable(restrictedIconDrawable);
         mRestrictedIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mDisabledByAdmin) {
                     mMetricsFeatureProvider.count(mContext,
-                        mMetricsTag + "/switch_bar|restricted", 1);
+                            mMetricsTag + "/switch_bar|restricted", 1);
                     RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context,
-                        mEnforcedAdmin);
+                            mEnforcedAdmin);
                 }
             }
         });
@@ -235,7 +240,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             setEnabled(true);
         }
         setTouchDelegate(new TouchDelegate(new Rect(0, 0, getWidth(), getHeight()),
-            getDelegatingView()));
+                getDelegatingView()));
     }
 
     public final ToggleSwitch getSwitch() {
@@ -249,7 +254,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             // Make the entire bar work as a switch
             post(() -> setTouchDelegate(
                     new TouchDelegate(new Rect(0, 0, getWidth(), getHeight()),
-                        getDelegatingView())));
+                            getDelegatingView())));
         }
     }
 
@@ -264,7 +269,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         if ((w > 0) && (h > 0)) {
             setTouchDelegate(new TouchDelegate(new Rect(0, 0, w, h),
-                getDelegatingView()));
+                    getDelegatingView()));
         }
     }
 
