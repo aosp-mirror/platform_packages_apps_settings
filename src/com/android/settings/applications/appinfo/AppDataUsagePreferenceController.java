@@ -132,7 +132,7 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
     }
 
     private static NetworkTemplate getTemplate(Context context) {
-        if (DataUsageList.hasReadyMobileRadio(context)) {
+        if (DataUsageUtils.hasReadyMobileRadio(context)) {
             return NetworkTemplate.buildTemplateMobileWildcard();
         }
         if (DataUsageUtils.hasWifiRadio(context)) {
