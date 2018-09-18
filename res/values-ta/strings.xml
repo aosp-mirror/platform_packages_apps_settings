@@ -3429,7 +3429,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"இந்தச் சாதனத்தைத் துவக்க பின்னை நீங்கள் பயன்படுத்தினால், <xliff:g id="SERVICE">%1$s</xliff:g> போன்ற அணுகல்தன்மை சேவைகள் கிடைக்காது."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"இந்தச் சாதனத்தைத் துவக்க வடிவத்தை நீங்கள் பயன்படுத்தினால், <xliff:g id="SERVICE">%1$s</xliff:g> போன்ற அணுகல்தன்மை சேவைகள் கிடைக்காது."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"இந்தச் சாதனத்தைத் துவக்க கடவுச்சொல்லை நீங்கள் பயன்படுத்தினால், <xliff:g id="SERVICE">%1$s</xliff:g> போன்ற அணுகல்தன்மை சேவைகள் கிடைக்காது."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"குறிப்பு: மறுதொடக்கம் செய்த பிறகு, மொபைலைத் திறக்கும் வரை இந்தப் பயன்பாட்டால் தொடங்க முடியாது"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"கவனத்திற்கு: உங்கள் மொபைலை மீண்டும் தொடங்கும்போது அதில் திரைப் பூட்டு அமைக்கப்பட்டிருந்தால், மொபைலைத் திறக்கும் வரை இந்த ஆப்ஸால் செயல்பட முடியாது"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI தகவல்"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI தொடர்புடைய தகவல்"</string>
     <string name="slot_number" msgid="3762676044904653577">"(ஸ்லாட்<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3722,7 +3722,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS அனுமதிக்கப்படவில்லை"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"கேமரா அனுமதிக்கப்படவில்லை"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"ஸ்கிரீன்ஷாட் அனுமதிக்கப்படவில்லை"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"காப்புப்பிரதிகள் எடுப்பதை ஆஃப் செய்ய முடியாது"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"இந்தப் பயன்பாட்டைத் திறக்க முடியாது"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"கேள்விகள் இருந்தால், IT நிர்வாகியைத் தொடர்புகொள்ளவும்"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"மேலும் விவரங்கள்"</string>
@@ -3886,11 +3885,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"எதுவுமில்லை"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"மதிப்பீட்டுத் தகவல் இல்லை."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"மதிப்பீட்டுத் தகவலில் இந்த விசை இல்லை."</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"டிஸ்ப்ளே கட்அவுட்"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"கட்அவுட் காட்சி, நோட்ச்"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"சாதனத்தின் இயல்புநிலை"</string>
     <string name="special_access" msgid="3458780842491881155">"பயன்பாட்டின் சிறப்பு அணுகல்"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> பயன்பாடுகளால் எல்லா தகவலையும் பயன்படுத்த முடியும்</item>
@@ -3912,11 +3909,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> உடன் இணைக்கப்பட்டுள்ளது"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"பல சாதனங்களுடன் இணைக்கப்பட்டுள்ளது"</string>
     <string name="demo_mode" msgid="2798762752209330277">"சிஸ்டம் பயனர் இடைமுக டெமோ பயன்முறை"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"இரவுப் பயன்முறை"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"இரவுப் பயன்முறையை அமை"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"டார்க் பயன்முறை"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"\'டார்க் பயன்முறையை\' அமை"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"விரைவு அமைப்புகளின் டெவெலப்பர் கட்டங்கள்"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"வின்ஸ்கோப் டிரேஸ்"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"பணிச் சுயவிவர அமைப்புகள்"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"தொடர்புகளில் தேடு"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"எனது நிறுவனத்தின்படி அழைப்பாளர்களையும் தொடர்புகளையும் கண்டறிய, ”தொடர்புகளில் தேடு” அம்சத்தை அனுமதி"</string>
@@ -3964,18 +3960,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"நேரம், அறிவிப்புகள் மற்றும் பிற தகவலைப் பார்க்க உங்கள் மொபைலைக் கையில் எடுக்கவும்."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"நேரம், அறிவிப்புகள் மற்றும் பிற தகவலைப் பார்க்க உங்கள் டேப்லெட்டைக் கையில் எடுக்கவும்."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"நேரம், அறிவிப்புகள் மற்றும் பிற தகவலைப் பார்க்க உங்கள் சாதனத்தைக் கையில் எடுக்கவும்."</string>
-    <!-- no translation found for ambient_display_reach_title (8922978048080725179) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_title (2003954050799022314) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_title (4936469171466002668) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (4244514681312536449) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (2321551792287654898) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (1953312292453084907) -->
-    <skip />
+    <string name="ambient_display_reach_title" msgid="6519700935117799437">"பார்க்கும் சைகை"</string>
+    <string name="ambient_display_reach_summary" product="default" msgid="1220765153509895824"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"அறிவிப்புகளைப் பெற சென்சாரில் ஸ்வைப் செய்தல்"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"கைரேகை ஸ்வைப்"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"அறிவிப்புகளைப் பார்க்க, மொபைலின் பின்புறத்தில் உள்ள கைரேகை சென்சாரில் கீழ் நோக்கி ஸ்வைப் செய்தல்."</string>
@@ -4055,7 +4041,6 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g></item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g></item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"இந்தச் சாதனத்தின் தரவு காப்புப் பிரதி எடுக்கப்படுகிறது"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"இந்தச் சாதனத்தை உங்கள் நிறுவனம் நிர்வகிக்கிறது."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"இந்தச் சாதனத்தை நிர்வகிப்பது: <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4161,4 +4146,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"நெட்வொர்க் விவரங்கள்"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"உங்களது மொபைலில் உள்ள ஆப்ஸிற்கு, உங்கள் சாதனத்தின் பெயர் தெரியும். புளூடூத் சாதனங்களுடன் இணைக்கும்போது அல்லது வைஃபை ஹாட்ஸ்பாட்டை அமைக்கும்போது, அப்பெயர் பிறருக்குக் காட்டப்படலாம்."</string>
     <string name="devices_title" msgid="7701726109334110391">"சாதனங்கள்"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"உயர் அதிர்வெண் பேனல்"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"விரிச்சுவல் உயர் அதிர்வெண் பேனலை இயக்கு"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"அனைத்து அமைப்புகளும்"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"உங்கள் அமைப்புகள்"</string>
 </resources>

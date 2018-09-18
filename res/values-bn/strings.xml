@@ -3429,7 +3429,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার পিন লিখবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার প্যাটার্ন আঁকবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার পাসওয়ার্ড লিখবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"দ্রষ্টব্য: পুনরায় চালু করার পরে, আপনি আপনার ফোন আনলক না করা পর্যন্ত এই অ্যাপটিকে চালু করতে পারবেন না"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"দ্রষ্টব্য: আপনি যদি নিজের ফোন রিস্টার্ট করেন এবং স্ক্রিন লক সেট করা থাকে, তাহলে আপনার ফোন আনলক না করা পর্যন্ত আপনি এই অ্যাপটিকে চালু করতে পারবেন না"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI তথ্য"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI আপেক্ষিক তথ্য"</string>
     <string name="slot_number" msgid="3762676044904653577">"(স্লট<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3722,7 +3722,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"এসএমএস পাঠানোর অনুমতি নেই"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"ক্যামেরা ব্যবহারের অনুমতি নেই"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"স্ক্রিনশটের অনুমতি নেই"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"ব্যাক-আপ বন্ধ করা যাবে না"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"এই অ্যাপটি চালু করা যাবে না"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"আপনার যদি কোনও প্রশ্ন থাকে তাহলে আপনার আইটি অ্যাডমিনের সাথে যোগাযোগ করুন"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"আরো বিশদ বিবরণ"</string>
@@ -3886,11 +3885,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"কোনো কিছুই নয়"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"রেঙ্কিং অবজেক্ট অনুপস্থিত।"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"রেঙ্কিং অবজেক্টে এই কী থাকে না।"</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"ডিসপ্লে কাট-আউট"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ডিসপ্লে কাট-আউট, নচ"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"ডিভাইসের ডিফল্ট"</string>
     <string name="special_access" msgid="3458780842491881155">"বিশেষ অ্যাপ অ্যাক্সেস করুন"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g>টি অ্যাপ অপরিমিত ডেটা ব্যবহার করতে পারে</item>
@@ -3912,11 +3909,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> এর সাথে কানেক্ট আছে"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"একাধিক ডিভাইসের সাথে কানেক্ট আছে"</string>
     <string name="demo_mode" msgid="2798762752209330277">"সিস্টেম UI ডেমো মোড"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"রাতের মোড"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"রাতের মোড সেট করুন"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"গাঢ় মোড"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"গাঢ় মোড সেট করুন"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"দ্রুত সেটিংস ডেভেলপার টাইলস"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"উইনস্কোপ ট্রেস"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"কর্মস্থলের প্রোফাইলের সেটিংস"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"পরিচিতির সার্চ"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"কলারদের এবং পরিচিতিগুলিকে চিহ্নিত করতে আপনার প্রতিষ্ঠান দ্বারা পরিচিতি সার্চের অনুমতি দিন"</string>
@@ -3964,18 +3960,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"সময়, বিজ্ঞপ্তি এবং অন্যান্য তথ্য দেখতে আপনার ফোনটি তুলে ধরুন।"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"সময়, বিজ্ঞপ্তি এবং অন্যান্য তথ্য দেখতে আপনার ট্যাবলেটটি তুলে ধরুন।"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"সময়, বিজ্ঞপ্তি এবং অন্যান্য তথ্য দেখতে আপনার ডিভাইসটি তুলে ধরুন।"</string>
-    <!-- no translation found for ambient_display_reach_title (8922978048080725179) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_title (2003954050799022314) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_title (4936469171466002668) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (4244514681312536449) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (2321551792287654898) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (1953312292453084907) -->
-    <skip />
+    <string name="ambient_display_reach_title" msgid="6519700935117799437">"সহজ অ্যাক্সেসের ইঙ্গিত"</string>
+    <string name="ambient_display_reach_summary" product="default" msgid="1220765153509895824"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"বিজ্ঞপ্তির জন্য আঙ্গুলের ছাপ সোয়াইপ করুন"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"আঙ্গুলের ছাপ সোয়াইপ করুন"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ফোনের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নিচের দিকে সোয়াইপ করুন৷"</string>
@@ -4055,7 +4041,6 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি প্রচেষ্টা</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি প্রচেষ্টা</item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"এই ডিভাইসের ডেটার ব্যাক-আপ নেওয়া হয়েছে"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"আপনার প্রতিষ্ঠান এই ডিভাইসটি পরিচালনা করে।"</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"এই ডিভাইসটি <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> দ্বারা পরিচালিত।"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4161,4 +4146,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"নেটওয়ার্কের বিবরণ"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"আপনার ডিভাইসের নাম আপনার ফোনে থাকা অ্যাপে দেখা যাবে। আপনি যখন এটিকে ব্লুটুথ ডিভাইসের সাথে কানেক্ট করেন বা ওয়াই-ফাই হটস্পট সেট-আপ করেন তখন এটি অন্যরাও দেখতে পেতে পারেন।"</string>
     <string name="devices_title" msgid="7701726109334110391">"ডিভাইস"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"উচ্চ ফ্রিকোয়েন্সি প্যানেল"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"ভার্চুয়াল উচ্চ ফ্রিকোয়েন্সি প্যানেল চালু করুন"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"সমস্ত সেটিংস"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"আপনার সেটিংস"</string>
 </resources>

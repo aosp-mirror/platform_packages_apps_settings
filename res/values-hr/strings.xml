@@ -3477,7 +3477,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Kada unesete PIN za pokretanje uređaja, usluge pristupačnosti, kao što je <xliff:g id="SERVICE">%1$s</xliff:g>, još neće biti dostupne."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Kada unesete uzorak za pokretanje uređaja, usluge pristupačnosti, kao što je <xliff:g id="SERVICE">%1$s</xliff:g>, još neće biti dostupne."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Kada unesete zaporku za pokretanje uređaja, usluge pristupačnosti, kao što je <xliff:g id="SERVICE">%1$s</xliff:g>, još neće biti dostupne."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Napomena: ova se aplikacija ne može pokrenuti nakon ponovnog pokretanja dok ne otključate telefon"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Napomena: ako ponovo pokrenete telefon i postavite zaključavanje zaslona, ova se aplikacija ne može pokrenuti dok ne otključate telefon"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Informacije IMEI-ja"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Relativne informacije IMEI-ja"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Utor <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3779,7 +3779,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS nije dopušten"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"Fotoaparat nije dopušten"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"Snimka zaslona nije dopuštena"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"Sigurnosno kopiranje ne može se isključiti"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"Aplikacija se ne može otvoriti"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"Ako imate pitanja, obratite se administratoru"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Više pojedinosti"</string>
@@ -3948,11 +3947,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ništa"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Objekt rangiranja nedostaje."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Objekt rangiranja ne sadrži tu tipku."</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Urez na zaslonu"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"obrezana slika za zaslon, urez"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Zadana postavka uređaja"</string>
     <string name="special_access" msgid="3458780842491881155">"Poseban pristup za aplikacije"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> aplikacija može upotrebljavati neograničene podatke</item>
@@ -3975,11 +3972,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Povezano s uređajem <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Povezano s više uređaja"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demo način korisničkog sučelja sustava"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"Noćni način rada"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"Postavi noćni način rada"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"Tamni način"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"Postavite Tamni način"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Pločice brzih postavki za razvojne programere"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope praćenje"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> – <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Postavke radnog profila"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Pretraživanje kontakata"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Omogućuje pretraživanjima kontakata vaše organizacije da identificiraju pozivatelje i kontakte"</string>
@@ -4030,12 +4026,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Da biste pogledali vrijeme, obavijesti i druge informacije, podignite telefon."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Da biste pogledali vrijeme, obavijesti i druge informacije, podignite tablet."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Da biste pogledali vrijeme, obavijesti i druge informacije, podignite uređaj."</string>
-    <string name="ambient_display_reach_title" product="default" msgid="8922978048080725179">"Podignite da biste provjerili telefon"</string>
-    <string name="ambient_display_reach_title" product="tablet" msgid="2003954050799022314">"Podignite da biste provjerili tablet"</string>
-    <string name="ambient_display_reach_title" product="device" msgid="4936469171466002668">"Podignite da biste provjerili uređaj"</string>
-    <string name="ambient_display_reach_summary" product="default" msgid="4244514681312536449">"Da biste pogledali vrijeme, obavijesti i druge informacije, podignite telefon."</string>
-    <string name="ambient_display_reach_summary" product="tablet" msgid="2321551792287654898">"Da biste pogledali vrijeme, obavijesti i druge informacije, podignite tablet."</string>
-    <string name="ambient_display_reach_summary" product="device" msgid="1953312292453084907">"Da biste pogledali vrijeme, obavijesti i druge informacije, podignite uređaj."</string>
+    <string name="ambient_display_reach_title" msgid="6519700935117799437">"Pokret dohvaćanja"</string>
+    <string name="ambient_display_reach_summary" product="default" msgid="1220765153509895824"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Otisak prsta za obavijesti"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Pokret za otisak prsta"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Da biste pogledali obavijesti, prijeđite prstom prema dolje po senzoru otiska prsta na stražnjoj strani telefona."</string>
@@ -4119,7 +4111,6 @@
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> pokušaja</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> pokušaja</item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"Podaci s uređaja sigurnosno se kopiraju"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"Ovim uređajem upravlja vaša organizacija."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Ovim uređajem upravlja <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4222,10 +4213,14 @@
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Vibriranje"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Isključi zvuk"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Ne poduzimaj ništa"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"Uključi (vibriraj)"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"Uključeno (vibracija)"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="4472465110708640980">"Uključi (isključi zvuk)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="5013718946609276137">"Isključi"</string>
     <string name="pref_title_network_details" msgid="7186418845727358964">"Pojedinosti o mreži"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Naziv vašeg uređaja vidljiv je aplikacijama na vašem telefonu. Mogu ga vidjeti i drugi ljudi kada se povežete s Bluetooth uređajima ili postavite Wi-Fi žarišnu točku."</string>
     <string name="devices_title" msgid="7701726109334110391">"Uređaji"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Ploča visoke frekvencije"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Omogući virtualnu ploču visoke frekvencije"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"Sve postavke"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"Vaše postavke"</string>
 </resources>
