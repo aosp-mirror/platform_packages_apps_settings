@@ -14,7 +14,9 @@
 
 package com.android.settings.datausage;
 
+import static android.net.ConnectivityManager.TYPE_MOBILE;
 import static android.net.ConnectivityManager.TYPE_WIFI;
+import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -31,6 +33,7 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
+import android.util.Log;
 
 import java.util.List;
 
@@ -40,7 +43,9 @@ import java.util.List;
 public final class DataUsageUtils {
     static final boolean TEST_RADIOS = false;
     static final String TEST_RADIOS_PROP = "test.radios";
+    private static final boolean LOGD = false;
     private static final String ETHERNET = "ethernet";
+    private static final String TAG = "DataUsageUtils";
 
     private DataUsageUtils() {
     }
@@ -96,6 +101,42 @@ public final class DataUsageUtils {
         ConnectivityManager connectivityManager = ConnectivityManager.from(context);
         return connectivityManager != null && connectivityManager
                 .isNetworkSupported(ConnectivityManager.TYPE_MOBILE);
+    }
+
+    /**
+     * Test if device has a mobile data radio with SIM in ready state.
+     */
+    public static boolean hasReadyMobileRadio(Context context) {
+        if (DataUsageUtils.TEST_RADIOS) {
+            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
+        }
+        final List<SubscriptionInfo> subInfoList =
+            SubscriptionManager.from(context).getActiveSubscriptionInfoList();
+        // No activated Subscriptions
+        if (subInfoList == null) {
+            if (LOGD) {
+                Log.d(TAG, "hasReadyMobileRadio: subInfoList=null");
+            }
+            return false;
+        }
+        final TelephonyManager tele = TelephonyManager.from(context);
+        // require both supported network and ready SIM
+        boolean isReady = true;
+        for (SubscriptionInfo subInfo : subInfoList) {
+            isReady = isReady & tele.getSimState(subInfo.getSimSlotIndex()) == SIM_STATE_READY;
+            if (LOGD) {
+                Log.d(TAG, "hasReadyMobileRadio: subInfo=" + subInfo);
+            }
+        }
+        final ConnectivityManager conn = ConnectivityManager.from(context);
+        final boolean retVal = conn.isNetworkSupported(TYPE_MOBILE) && isReady;
+        if (LOGD) {
+            Log.d(TAG, "hasReadyMobileRadio:"
+                + " conn.isNetworkSupported(TYPE_MOBILE)="
+                + conn.isNetworkSupported(TYPE_MOBILE)
+                + " isReady=" + isReady);
+        }
+        return retVal;
     }
 
     /**
