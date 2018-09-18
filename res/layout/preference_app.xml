@@ -34,12 +34,10 @@
         android:paddingEnd="8dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp">
-        <androidx.preference.internal.PreferenceImageView
+        <ImageView
             android:id="@android:id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            settings:maxWidth="@dimen/secondary_app_icon_size"
-            settings:maxHeight="@dimen/secondary_app_icon_size" />
+            android:layout_width="@dimen/secondary_app_icon_size"
+            android:layout_height="@dimen/secondary_app_icon_size"/>
     </LinearLayout>
 
     <LinearLayout

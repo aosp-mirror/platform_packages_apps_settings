@@ -85,7 +85,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
         mType = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, BluetoothDevice.ERROR);
         mPasskey = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
-        mDeviceName = mBluetoothManager.getCachedDeviceManager().findDevice(mDevice).getName();
+        mDeviceName = mBluetoothManager.getCachedDeviceManager().getName(mDevice);
         mPbapClientProfile = mBluetoothManager.getProfileManager().getPbapClientProfile();
         mPasskeyFormatted = formatKey(mPasskey);
     }

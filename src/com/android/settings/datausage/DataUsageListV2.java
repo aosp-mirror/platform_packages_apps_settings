@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -21,6 +21,8 @@ import static android.net.TrafficStats.UID_TETHERING;
 import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
 import android.app.ActivityManager;
+import android.app.usage.NetworkStats;
+import android.app.usage.NetworkStats.Bucket;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
@@ -28,7 +30,6 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
-import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
 import android.net.TrafficStats;
@@ -65,7 +66,7 @@ import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoaderCompat;
-import com.android.settingslib.net.SummaryForAllUidLoaderCompat;
+import com.android.settingslib.net.NetworkStatsDetailLoader;
 import com.android.settingslib.net.UidDetailProvider;
 
 import java.util.ArrayList;
@@ -75,18 +76,14 @@ import java.util.List;
 /**
  * Panel showing data usage history across various networks, including options
  * to inspect based on usage cycle and control through {@link NetworkPolicy}.
-
- * Deprecated in favor of {@link DataUsageListV2}
- *
- * @deprecated
  */
-@Deprecated
-public class DataUsageList extends DataUsageBaseFragment {
+public class DataUsageListV2 extends DataUsageBaseFragment {
 
-    public static final String EXTRA_SUB_ID = "sub_id";
-    public static final String EXTRA_NETWORK_TEMPLATE = "network_template";
+    static final String EXTRA_SUB_ID = "sub_id";
+    static final String EXTRA_NETWORK_TEMPLATE = "network_template";
+    static final String EXTRA_NETWORK_TYPE = "network_type";
 
-    private static final String TAG = "DataUsageList";
+    private static final String TAG = "DataUsageListV2";
     private static final boolean LOGD = false;
 
     private static final String KEY_USAGE_AMOUNT = "usage_amount";
@@ -111,6 +108,8 @@ public class DataUsageList extends DataUsageBaseFragment {
     NetworkTemplate mTemplate;
     @VisibleForTesting
     int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    @VisibleForTesting
+    int mNetworkType;
     private ChartData mChartData;
 
     private LoadingViewController mLoadingViewController;
@@ -158,7 +157,7 @@ public class DataUsageList extends DataUsageBaseFragment {
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
         mHeader.findViewById(R.id.filter_settings).setOnClickListener(btn -> {
             final Bundle args = new Bundle();
-            args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
+            args.putParcelable(DataUsageListV2.EXTRA_NETWORK_TEMPLATE, mTemplate);
             new SubSettingLauncher(getContext())
                     .setDestination(BillingCycleSettings.class.getName())
                     .setTitleRes(R.string.billing_cycle)
@@ -254,6 +253,7 @@ public class DataUsageList extends DataUsageBaseFragment {
         if (args != null) {
             mSubId = args.getInt(EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
             mTemplate = args.getParcelable(EXTRA_NETWORK_TEMPLATE);
+            mNetworkType = args.getInt(EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_MOBILE);
         }
         if (mTemplate == null && mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final Intent intent = getIntent();
@@ -341,8 +341,8 @@ public class DataUsageList extends DataUsageBaseFragment {
         }
 
         // kick off loader for detailed stats
-        getLoaderManager().restartLoader(LOADER_SUMMARY,
-                SummaryForAllUidLoaderCompat.buildArgs(mTemplate, start, end), mSummaryCallbacks);
+        getLoaderManager().restartLoader(LOADER_SUMMARY, null /* args */,
+                mNetworkStatsDetailCallbacks);
 
         final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
         final CharSequence totalPhrase = DataUsageUtils.formatDataUsage(context, totalBytes);
@@ -353,22 +353,26 @@ public class DataUsageList extends DataUsageBaseFragment {
      * Bind the given {@link NetworkStats}, or {@code null} to clear list.
      */
     public void bindStats(NetworkStats stats, int[] restrictedUids) {
-        ArrayList<AppItem> items = new ArrayList<>();
+        mApps.removeAll();
+        if (stats == null) {
+            if (LOGD) {
+                Log.d(TAG, "No network stats data. App list cleared.");
+            }
+            return;
+        }
+
+        final ArrayList<AppItem> items = new ArrayList<>();
         long largest = 0;
 
         final int currentUserId = ActivityManager.getCurrentUser();
-        UserManager userManager = UserManager.get(getContext());
+        final UserManager userManager = UserManager.get(getContext());
         final List<UserHandle> profiles = userManager.getUserProfiles();
         final SparseArray<AppItem> knownItems = new SparseArray<AppItem>();
 
-        NetworkStats.Entry entry = null;
-        final int size = stats != null ? stats.size() : 0;
-        for (int i = 0; i < size; i++) {
-            entry = stats.getValues(i, entry);
-
+        final Bucket bucket = new Bucket();
+        while (stats.hasNextBucket() && stats.getNextBucket(bucket)) {
             // Decide how to collapse items together
-            final int uid = entry.uid;
-
+            final int uid = bucket.getUid();
             final int collapseKey;
             final int category;
             final int userId = UserHandle.getUserId(uid);
@@ -377,8 +381,8 @@ public class DataUsageList extends DataUsageBaseFragment {
                     if (userId != currentUserId) {
                         // Add to a managed user item.
                         final int managedKey = UidDetailProvider.buildKeyForUser(userId);
-                        largest = accumulate(managedKey, knownItems, entry, AppItem.CATEGORY_USER,
-                                items, largest);
+                        largest = accumulate(managedKey, knownItems, bucket,
+                            AppItem.CATEGORY_USER, items, largest);
                     }
                     // Add to app item.
                     collapseKey = uid;
@@ -402,8 +406,9 @@ public class DataUsageList extends DataUsageBaseFragment {
                 collapseKey = android.os.Process.SYSTEM_UID;
                 category = AppItem.CATEGORY_APP;
             }
-            largest = accumulate(collapseKey, knownItems, entry, category, items, largest);
+            largest = accumulate(collapseKey, knownItems, bucket, category, items, largest);
         }
+        stats.close();
 
         final int restrictedUidsMax = restrictedUids.length;
         for (int i = 0; i < restrictedUidsMax; ++i) {
@@ -424,7 +429,6 @@ public class DataUsageList extends DataUsageBaseFragment {
         }
 
         Collections.sort(items);
-        mApps.removeAll();
         for (int i = 0; i < items.size(); i++) {
             final int percentTotal = largest != 0 ? (int) (items.get(i).total * 100 / largest) : 0;
             AppDataUsagePreference preference = new AppDataUsagePreference(getContext(),
@@ -461,12 +465,12 @@ public class DataUsageList extends DataUsageBaseFragment {
      *
      * @param collapseKey  the collapse key used to map the item.
      * @param knownItems   collection of known (already existing) items.
-     * @param entry        the network stats entry to extract data usage from.
+     * @param bucket       the network stats bucket to extract data usage from.
      * @param itemCategory the item is categorized on the list view by this category. Must be
      */
     private static long accumulate(int collapseKey, final SparseArray<AppItem> knownItems,
-            NetworkStats.Entry entry, int itemCategory, ArrayList<AppItem> items, long largest) {
-        final int uid = entry.uid;
+            Bucket bucket, int itemCategory, ArrayList<AppItem> items, long largest) {
+        final int uid = bucket.getUid();
         AppItem item = knownItems.get(collapseKey);
         if (item == null) {
             item = new AppItem(collapseKey);
@@ -475,7 +479,7 @@ public class DataUsageList extends DataUsageBaseFragment {
             knownItems.put(item.key, item);
         }
         item.addUid(uid);
-        item.total += entry.rxBytes + entry.txBytes;
+        item.total += bucket.getRxBytes() + bucket.getTxBytes();
         return Math.max(largest, item.total);
     }
 
@@ -584,11 +588,16 @@ public class DataUsageList extends DataUsageBaseFragment {
         }
     };
 
-    private final LoaderCallbacks<NetworkStats> mSummaryCallbacks = new LoaderCallbacks<
-            NetworkStats>() {
+    private final LoaderCallbacks<NetworkStats> mNetworkStatsDetailCallbacks =
+            new LoaderCallbacks<NetworkStats>() {
         @Override
         public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
-            return new SummaryForAllUidLoaderCompat(getActivity(), mStatsSession, args);
+            return new NetworkStatsDetailLoader.Builder(getContext())
+                    .setStartTime(mChart.getInspectStart())
+                    .setEndTime(mChart.getInspectEnd())
+                    .setNetworkType(mNetworkType)
+                    .setSubscriptionId(mSubId)
+                    .build();
         }
 
         @Override
