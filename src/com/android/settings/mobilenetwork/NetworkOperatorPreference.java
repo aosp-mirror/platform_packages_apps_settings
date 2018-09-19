@@ -21,7 +21,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.preference.Preference;
 import android.telephony.CellInfo;
 import android.telephony.SignalStrength;
 import android.util.Log;
@@ -31,6 +30,8 @@ import com.android.settings.R;
 import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 /**
  * A Preference represents a network operator in the NetworkSelectSetting fragment.
