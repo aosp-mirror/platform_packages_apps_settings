@@ -54,8 +54,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
     // Bluetooth dependencies for the connection we are trying to establish
     private LocalBluetoothManager mBluetoothManager;
-    @VisibleForTesting
-    BluetoothDevice mDevice;
+    private BluetoothDevice mDevice;
     @VisibleForTesting
     int mType;
     private String mUserInput;
@@ -189,16 +188,16 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      *
      */
      public void  setContactSharingState() {
-        if ((mDevice.getPhonebookAccessPermission() != BluetoothDevice.ACCESS_ALLOWED)
-                && (mDevice.getPhonebookAccessPermission() != BluetoothDevice.ACCESS_REJECTED)) {
-                 if (mDevice.getBluetoothClass().getDeviceClass()
-                        == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE) {
-                    onCheckedChanged(null, true);
-            } else {
-                onCheckedChanged(null, false);
-            }
-        }
-    }
+         final int permission = mDevice.getPhonebookAccessPermission();
+         if (permission == BluetoothDevice.ACCESS_ALLOWED
+                 || (permission == BluetoothDevice.ACCESS_UNKNOWN && mDevice.getBluetoothClass().
+                        getDeviceClass() == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE)) {
+             onCheckedChanged(null, true);
+         } else {
+             onCheckedChanged(null, false);
+         }
+
+     }
 
     /**
      * A method for querying if the provided editable is a valid passkey/pin format for this device.
