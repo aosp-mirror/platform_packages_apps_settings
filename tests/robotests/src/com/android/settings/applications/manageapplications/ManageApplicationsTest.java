@@ -282,6 +282,28 @@ public class ManageApplicationsTest {
     }
 
     @Test
+    public void applicationsAdapter_onBindViewHolder_notifications_wrongExtraInfo() {
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        mFragment.mListType = LIST_TYPE_NOTIFICATION;
+        ApplicationViewHolder holder = mock(ApplicationViewHolder.class);
+        ReflectionHelpers.setField(holder, "itemView", mock(View.class));
+        ManageApplications.ApplicationsAdapter adapter =
+                new ManageApplications.ApplicationsAdapter(mState,
+                        mFragment, mock(AppFilterItem.class),
+                        mock(Bundle.class));
+        final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
+        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
+        appEntry.info = mock(ApplicationInfo.class);
+        appEntry.extraInfo = mock(AppFilterItem.class);
+        appList.add(appEntry);
+        ReflectionHelpers.setField(adapter, "mEntries", appList);
+
+        adapter.onBindViewHolder(holder, 0);
+        // no crash? yay!
+    }
+
+    @Test
     public void applicationsAdapter_onBindViewHolder_updateSwitch_notifications() {
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
         ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
