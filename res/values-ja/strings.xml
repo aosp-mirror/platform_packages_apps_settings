@@ -1123,7 +1123,7 @@
     <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"電池使用量が増えます"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"周囲に合わせて明るさを最適化します。この機能が ON の場合でも、一時的に明るさを調整できます。"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"画面の明るさは環境やアクティビティに応じて自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
-    <string name="night_display_title" msgid="2626451512200357686">"読書灯"</string>
+    <string name="night_display_title" msgid="2626451512200357686">"ナイトライト"</string>
     <string name="night_display_text" msgid="1837277457033025056">"読書灯を利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"スケジュール"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"使用しない"</string>
@@ -3429,7 +3429,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"PINを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"パターンを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"パスワードを入力してこの端末を開始する場合、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"注: 再起動後、スマートフォンのロックを解除するまでこのアプリを起動することはできません"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"注: スマートフォンを再起動したときに画面ロックが設定されている場合は、スマートフォンのロックを解除するまでこのアプリは起動できません"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI情報"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI関連情報"</string>
     <string name="slot_number" msgid="3762676044904653577">"（スロット<xliff:g id="SLOT_NUM">%1$d</xliff:g>）"</string>
@@ -3722,7 +3722,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS は許可されていません"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"カメラは許可されていません"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"スクリーンショットは許可されていません"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"バックアップを無効にすることはできません"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"このアプリを開くことはできません"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"ご不明な点がある場合は、IT 管理者にお問い合わせください"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"詳細"</string>
@@ -3886,11 +3885,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"なし"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"ランキング オブジェクトがありません。"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"ランキング オブジェクトにこのキーが含まれていません。"</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"ディスプレイ カットアウト"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ディスプレイ カットアウト, ノッチ"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"端末のデフォルト"</string>
     <string name="special_access" msgid="3458780842491881155">"特別なアプリアクセス"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other">データの無制限使用が可能なアプリは <xliff:g id="COUNT">%d</xliff:g> 個です</item>
@@ -3912,11 +3909,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> に接続しました"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"複数のデバイスに接続しました"</string>
     <string name="demo_mode" msgid="2798762752209330277">"システム UI デモモード"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"夜間モード"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"夜間モードの設定"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"ダークモード"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"ダークモードの設定"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"クイック設定開発者用タイル"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"ウィンスコープ トレース"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"仕事用プロファイルの設定"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"連絡先の検索"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"発信者や連絡先を特定するために組織による連絡先の検索を許可します"</string>
@@ -3964,12 +3960,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"時刻、通知などの情報を確認するには、スマートフォンを持ち上げます。"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"時刻、通知などの情報を確認するには、タブレットを持ち上げます。"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"時刻、通知などの情報を確認するには、端末を持ち上げます。"</string>
-    <string name="ambient_display_reach_title" product="default" msgid="8922978048080725179">"スマートフォンを持ち上げて通知をチェック"</string>
-    <string name="ambient_display_reach_title" product="tablet" msgid="2003954050799022314">"タブレットを持ち上げて通知をチェック"</string>
-    <string name="ambient_display_reach_title" product="device" msgid="4936469171466002668">"端末を持ち上げて通知をチェック"</string>
-    <string name="ambient_display_reach_summary" product="default" msgid="4244514681312536449">"時刻、通知などの情報を確認するには、スマートフォンを持ち上げます。"</string>
-    <string name="ambient_display_reach_summary" product="tablet" msgid="2321551792287654898">"時刻、通知などの情報を確認するには、タブレットを持ち上げます。"</string>
-    <string name="ambient_display_reach_summary" product="device" msgid="1953312292453084907">"時刻、通知などの情報を確認するには、端末を持ち上げます。"</string>
+    <string name="ambient_display_reach_title" msgid="6519700935117799437">"リーチ操作"</string>
+    <string name="ambient_display_reach_summary" product="default" msgid="1220765153509895824"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"指紋センサーをスワイプして通知を表示"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"指紋センサーのスワイプ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"通知を確認するには、スマートフォンの背面にある指紋認証センサーを下にスワイプします。"</string>
@@ -4049,7 +4041,6 @@
       <item quantity="other">パスワードの入力回数: <xliff:g id="COUNT_1">%d</xliff:g></item>
       <item quantity="one">パスワードの入力回数: <xliff:g id="COUNT_0">%d</xliff:g></item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"この端末のデータはバックアップされます"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"この端末は組織によって管理されています。"</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"この端末は <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> により管理されています。"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4155,4 +4146,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ネットワークの詳細"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"端末名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーも端末名を確認できるようになります。"</string>
     <string name="devices_title" msgid="7701726109334110391">"端末"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"高頻度パネル"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"高頻度仮装パネルを有効にする"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"すべての設定"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"カスタマイズした設定"</string>
 </resources>

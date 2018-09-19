@@ -3429,7 +3429,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Lorsque vous entrez votre NIP pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Lorsque vous entrez votre schéma pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Lorsque vous entrez votre mot de passe pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Remarque : Après un redémarrage, vous ne pouvez pas lancer cette application tant que vous n\'avez pas déverrouillé votre téléphone."</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Remarque : Si vous redémarrez votre téléphone et que vous avez défini un verrouillage de l\'écran, cette application ne peut pas démarrer tant que vous n\'avez pas déverrouillé votre téléphone"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Information concernant le code IIEM"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Information concernant le code IIEM"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Fente <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3722,7 +3722,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"La messagerie texte est désactivée"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"L\'appareil photo est désactivé"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"Les captures d\'écran sont désactivées"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"Impossible de désactiver les sauvegardes"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"Impossible d\'ouvrir cette application"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"Si vous avez des questions, veuillez communiquer avec votre administrateur informatique"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Détails supplémentaires"</string>
@@ -3886,11 +3885,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"aucun(e)"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"L\'objet de classement est manquant."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"L\'objet de classement ne contient pas cette touche."</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Encoche de l\'écran"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"découpe d\'affichage, encoche"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Par défaut de l\'appareil"</string>
     <string name="special_access" msgid="3458780842491881155">"Accès spéciaux applis"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> application peut utiliser les données sans restriction</item>
@@ -3912,11 +3909,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Connecté à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Connecté à plusieurs appareils"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Mode de démonstration de l\'interface système"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"Mode Nuit"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"Activer le mode Nuit"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"Mode Sombre"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"Définir le mode Sombre"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Paramètres rapides, tuiles de concepteur"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Traçage Winscope"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Paramètres du profil professionnel"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Recherche de contacts"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Autoriser les recherches de contacts dans votre organisation à identifier les appelants et les contacts"</string>
@@ -3964,12 +3960,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Pour vérifier l\'heure, vos notifications et d\'autres renseignements, saisissez votre téléphone."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Pour vérifier l\'heure, vos notifications et d\'autres renseignements, saisissez votre tablette."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Pour vérifier l\'heure, vos notifications et d\'autres renseignements, saisissez votre appareil."</string>
-    <string name="ambient_display_reach_title" product="default" msgid="8922978048080725179">"Saisissez le téléphone pour consulter les notifications"</string>
-    <string name="ambient_display_reach_title" product="tablet" msgid="2003954050799022314">"Saisissez la tablette pour consulter les notifications"</string>
-    <string name="ambient_display_reach_title" product="device" msgid="4936469171466002668">"Saisissez l\'appareil pour consulter les notifications"</string>
-    <string name="ambient_display_reach_summary" product="default" msgid="4244514681312536449">"Pour vérifier l\'heure, vos notifications et d\'autres renseignements, saisissez votre téléphone."</string>
-    <string name="ambient_display_reach_summary" product="tablet" msgid="2321551792287654898">"Pour vérifier l\'heure, vos notifications et d\'autres renseignements, saisissez votre tablette."</string>
-    <string name="ambient_display_reach_summary" product="device" msgid="1953312292453084907">"Pour vérifier l\'heure, vos notifications et d\'autres renseignements, saisissez votre appareil."</string>
+    <string name="ambient_display_reach_title" msgid="6519700935117799437">"Geste atteindre"</string>
+    <string name="ambient_display_reach_summary" product="default" msgid="1220765153509895824"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Balayer lecteur d\'empreintes pour voir notif."</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Balayer empreinte"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Pour consulter vos notifications, passer votre doigt de haut en bas sur le capteur d\'empreintes digitales à l\'arrière du téléphone."</string>
@@ -4049,7 +4041,6 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> tentative</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> tentatives</item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"Les données de cet appareil sont en cours de sauvegarde"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"Cet appareil est géré par votre organisation."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Cet appareil est géré par <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4155,4 +4146,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Détails du réseau"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Le nom de votre appareil est visible pour les applications de votre téléphone. Il est aussi possible que d\'autres personnes le voient lorsque vous vous connectez à des appareils Bluetooth ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Appareils"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Panneau haute fréquence"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Activer le panneau virtuel haute fréquence"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"Tous les paramètres"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"Vos paramètres"</string>
 </resources>

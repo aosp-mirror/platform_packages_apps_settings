@@ -479,63 +479,6 @@ public class DataUsageList extends DataUsageBaseFragment {
         return Math.max(largest, item.total);
     }
 
-    /**
-     * Test if device has a mobile data radio with SIM in ready state.
-     */
-    public static boolean hasReadyMobileRadio(Context context) {
-        if (DataUsageUtils.TEST_RADIOS) {
-            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
-        }
-
-        final ConnectivityManager conn = ConnectivityManager.from(context);
-        final TelephonyManager tele = TelephonyManager.from(context);
-
-        final List<SubscriptionInfo> subInfoList =
-                SubscriptionManager.from(context).getActiveSubscriptionInfoList();
-        // No activated Subscriptions
-        if (subInfoList == null) {
-            if (LOGD) Log.d(TAG, "hasReadyMobileRadio: subInfoList=null");
-            return false;
-        }
-        // require both supported network and ready SIM
-        boolean isReady = true;
-        for (SubscriptionInfo subInfo : subInfoList) {
-            isReady = isReady & tele.getSimState(subInfo.getSimSlotIndex()) == SIM_STATE_READY;
-            if (LOGD) Log.d(TAG, "hasReadyMobileRadio: subInfo=" + subInfo);
-        }
-        boolean retVal = conn.isNetworkSupported(TYPE_MOBILE) && isReady;
-        if (LOGD) {
-            Log.d(TAG, "hasReadyMobileRadio:"
-                    + " conn.isNetworkSupported(TYPE_MOBILE)="
-                    + conn.isNetworkSupported(TYPE_MOBILE)
-                    + " isReady=" + isReady);
-        }
-        return retVal;
-    }
-
-    /*
-     * TODO: consider adding to TelephonyManager or SubscriptionManager.
-     */
-    public static boolean hasReadyMobileRadio(Context context, int subId) {
-        if (DataUsageUtils.TEST_RADIOS) {
-            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
-        }
-
-        final ConnectivityManager conn = ConnectivityManager.from(context);
-        final TelephonyManager tele = TelephonyManager.from(context);
-        final int slotId = SubscriptionManager.getSlotIndex(subId);
-        final boolean isReady = tele.getSimState(slotId) == SIM_STATE_READY;
-
-        boolean retVal = conn.isNetworkSupported(TYPE_MOBILE) && isReady;
-        if (LOGD) {
-            Log.d(TAG, "hasReadyMobileRadio: subId=" + subId
-                    + " conn.isNetworkSupported(TYPE_MOBILE)="
-                    + conn.isNetworkSupported(TYPE_MOBILE)
-                    + " isReady=" + isReady);
-        }
-        return retVal;
-    }
-
     private OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

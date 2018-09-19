@@ -85,6 +85,7 @@
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
         <item name="switchBarBackgroundColor">@color/switch_bar_background</item>
         <item name="switchBarBackgroundActivatedColor">?android:attr/colorAccent</item>
+        <item name="switchBarRestrictionIcon">@*android:drawable/ic_info</item>
     </style>
 
     <style name="Widget.SwitchBar.Switch" parent="@android:style/Widget.Material.CompoundButton.Switch">
@@ -165,14 +166,18 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Settings.Home" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Color names copied from frameworks/base/core/res/res/values/themes_device_defaults.xml -->
-        <!-- TODO (b/113964702) : fix theme color -->
+    <style name="Theme.Settings.HomeBase" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
-        <item name="colorPrimaryDark">@*android:color/primary_dark_device_default_settings_light</item>
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
         <item name="preferenceTheme">@style/PreferenceTheme</item>
+    </style>
+
+    <style name="Theme.Settings.Home" parent="Theme.Settings.HomeBase">
+        <item name="colorPrimaryDark">@*android:color/primary_dark_device_default_settings_light</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarDividerColor">@*android:color/ripple_material_light</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 
 </resources>
