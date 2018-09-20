@@ -18,6 +18,9 @@ package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -26,12 +29,19 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.text.SpannableStringBuilder;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -44,18 +54,30 @@ import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.AdditionalMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.Collections;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(
+        shadows = {
+                ShadowUserManager.class,
+                ShadowDevicePolicyManager.class
+        })
 public class UserSettingsTest {
 
     private static final String KEY_USER_GUEST = "user_guest";
@@ -91,7 +113,8 @@ public class UserSettingsTest {
         mUserCapabilities = UserCapabilities.create(mContext);
         when((Object) mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
         doReturn(mActivity).when(mFragment).getActivity();
-
+        doReturn(mContext).when(mFragment).getContext();
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         mProvisioned = Settings.Global.getInt(mContext.getContentResolver(),
             Settings.Global.DEVICE_PROVISIONED, 0);
         final SharedPreferences prefs = mock(SharedPreferences .class);
@@ -209,7 +232,75 @@ public class UserSettingsTest {
         mFragment.updateUserList();
 
         verify(addUser, never()).setVisible(true);
+    }
 
+    @Test
+    public void withDisallowRemoveUser_ShouldDisableRemoveUser() {
+        // TODO(b/115781615): Tidy robolectric tests
+        // Arrange
+        final int userId = UserHandle.myUserId();
+        final List<UserManager.EnforcingUser> enforcingUsers = Collections.singletonList(
+                new UserManager.EnforcingUser(userId,
+                        UserManager.RESTRICTION_SOURCE_DEVICE_OWNER)
+        );
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_REMOVE_USER,
+                UserHandle.of(userId),
+                enforcingUsers);
+
+        ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(
+                new ComponentName("test", "test"));
+
+        doReturn(true).when(mUserManager).canSwitchUsers();
+        mUserCapabilities.mIsAdmin = false;
+
+        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+
+        Menu menu = mock(Menu.class);
+        MenuItem menuItem = mock(MenuItem.class);
+        final String title = "title";
+
+        doReturn(title).when(menuItem).getTitle();
+        doReturn(menuItem).when(menu).add(
+                anyInt(), eq(Menu.FIRST), anyInt(), any(CharSequence.class));
+
+        // Act
+        mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
+
+        // Assert
+        // Expect that the click will be overridden and the color will be faded
+        // (by RestrictedLockUtilsInternal)
+        verify(menuItem).setOnMenuItemClickListener(notNull());
+        SpannableStringBuilder defaultTitle = new SpannableStringBuilder(title);
+        verify(menuItem).setTitle(AdditionalMatchers.not(eq(defaultTitle)));
+    }
+
+    @Test
+    public void withoutDisallowRemoveUser_ShouldNotDisableRemoveUser() {
+        // Arrange
+        doReturn(true).when(mUserManager).canSwitchUsers();
+        mUserCapabilities.mIsAdmin = false;
+
+        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mock(UserManager.class));
+
+        Menu menu = mock(Menu.class);
+        MenuItem menuItem = mock(MenuItem.class);
+        final String title = "title";
+
+        doReturn(title).when(menuItem).getTitle();
+        doReturn(menuItem).when(menu).add(
+                anyInt(), eq(Menu.FIRST), anyInt(), any(CharSequence.class));
+
+        // Act
+        mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
+
+        // Assert
+        // Expect that a click listener will not be added and the title will not be changed
+        verify(menuItem, never()).setOnMenuItemClickListener(notNull());
+        SpannableStringBuilder defaultTitle = new SpannableStringBuilder(title);
+        verify(menuItem, never()).setTitle(AdditionalMatchers.not(eq(defaultTitle)));
     }
 
     @Test

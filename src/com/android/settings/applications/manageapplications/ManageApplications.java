@@ -1335,7 +1335,8 @@ public class ManageApplications extends InstrumentedFragment
         private void updateSummary(ApplicationViewHolder holder, AppEntry entry) {
             switch (mManageApplications.mListType) {
                 case LIST_TYPE_NOTIFICATION:
-                    if (entry.extraInfo != null) {
+                    if (entry.extraInfo != null
+                            && entry.extraInfo instanceof NotificationsSentState) {
                         holder.setSummary(AppStateNotificationBridge.getSummary(mContext,
                                 (NotificationsSentState) entry.extraInfo,
                                 (mLastSortMode == R.id.sort_order_recent_notification)));
@@ -1384,7 +1385,8 @@ public class ManageApplications extends InstrumentedFragment
                                     .getSwitchOnClickListener(entry),
                             AppStateNotificationBridge.enableSwitch(entry),
                             AppStateNotificationBridge.checkSwitch(entry));
-                    if (entry.extraInfo != null) {
+                    if (entry.extraInfo != null
+                            && entry.extraInfo instanceof NotificationsSentState) {
                         holder.setSummary(AppStateNotificationBridge.getSummary(mContext,
                                 (NotificationsSentState) entry.extraInfo,
                                 (mLastSortMode == R.id.sort_order_recent_notification)));

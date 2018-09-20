@@ -117,7 +117,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
                 for (int i = 0; i < apps.size(); i++) {
                     ApplicationInfo app = apps.get(i);
                     try {
-                        mNm.setNotificationsEnabledForPackage(app.packageName, app.uid, true);
+                        mNm.clearData(app.packageName, app.uid, false);
                     } catch (android.os.RemoteException ex) {
                     }
                     if (!app.enabled) {
