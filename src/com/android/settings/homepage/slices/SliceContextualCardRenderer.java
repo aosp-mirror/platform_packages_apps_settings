@@ -84,7 +84,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
 
         cardHolder.sliceView.setTag(uri);
         //TODO(b/114009676): We will soon have a field to decide what slice mode we should set.
-        cardHolder.sliceView.setMode(SliceView.MODE_SHORTCUT);
+        cardHolder.sliceView.setMode(SliceView.MODE_LARGE);
         LiveData<Slice> sliceLiveData = mSliceLiveDataMap.get(uri.toString());
 
         if (sliceLiveData == null) {
