@@ -15,6 +15,8 @@
  */
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
@@ -28,7 +30,10 @@ import static org.mockito.Mockito.when;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorDescription;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -56,12 +61,14 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,7 +164,8 @@ public class RemoveAccountPreferenceControllerTest {
 
     @Test
     @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
-    public void confirmRemove_shouldRemoveAccount() {
+    public void confirmRemove_shouldRemoveAccount()
+            throws AuthenticatorException, OperationCanceledException, IOException {
         when(mFragment.isAdded()).thenReturn(true);
         FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
@@ -170,7 +178,18 @@ public class RemoveAccountPreferenceControllerTest {
                         mFragment, account, userHandle);
         dialog.onCreate(new Bundle());
         dialog.onClick(null, 0);
+        ArgumentCaptor<AccountManagerCallback<Bundle>> callbackCaptor = ArgumentCaptor.forClass(
+                AccountManagerCallback.class);
         verify(mAccountManager).removeAccountAsUser(eq(account), nullable(Activity.class),
-                nullable(AccountManagerCallback.class), nullable(Handler.class), eq(userHandle));
+                callbackCaptor.capture(), nullable(Handler.class), eq(userHandle));
+
+        AccountManagerCallback<Bundle> callback = callbackCaptor.getValue();
+        assertThat(callback).isNotNull();
+        AccountManagerFuture<Bundle> future = mock(AccountManagerFuture.class);
+        Bundle resultBundle = new Bundle();
+        resultBundle.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, true);
+        when(future.getResult()).thenReturn(resultBundle);
+        callback.run(future);
+        verify(activity).finish();
     }
 }

@@ -16,6 +16,7 @@
 package com.android.settings.accounts;
 
 import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -87,6 +88,28 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
             getActivity().setTitle(mAccountLabel);
         }
         updateUi();
+    }
+
+    @VisibleForTesting
+    void finishIfAccountMissing() {
+        AccountManager accountManager = (AccountManager) getContext().getSystemService(
+                Context.ACCOUNT_SERVICE);
+        boolean accountExists = false;
+        for (Account account : accountManager.getAccountsByType(mAccount.type)) {
+            if (account.equals(mAccount)) {
+                accountExists = true;
+                break;
+            }
+        }
+        if (!accountExists) {
+            finish();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        finishIfAccountMissing();
     }
 
     @Override

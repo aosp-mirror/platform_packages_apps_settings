@@ -157,10 +157,6 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
                     new AccountManagerCallback<Bundle>() {
                         @Override
                         public void run(AccountManagerFuture<Bundle> future) {
-                            // If already out of this screen, don't proceed.
-                            if (!getTargetFragment().isResumed()) {
-                                return;
-                            }
                             boolean failed = true;
                             try {
                                 if (future.getResult()
