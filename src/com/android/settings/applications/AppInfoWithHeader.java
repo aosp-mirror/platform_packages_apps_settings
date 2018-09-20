@@ -30,6 +30,8 @@ import com.android.settingslib.applications.AppUtils;
 
 public abstract class AppInfoWithHeader extends AppInfoBase {
 
+    private static final String TAG = "AppInfoWithHeader";
+
     private boolean mCreated;
 
     @Override
