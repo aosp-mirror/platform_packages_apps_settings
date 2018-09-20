@@ -45,8 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="16dip"
-        android:layout_marginBottom="16dip">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,15 +75,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="6dp">
+            android:orientation="vertical">
 
             <SeekBar
                 android:id="@*android:id/seekbar"
                 android:layout_gravity="center_vertical"
                 android:paddingStart="12dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="48dp"/>
 
             <TextView
                 android:id="@+id/suppression_text"
