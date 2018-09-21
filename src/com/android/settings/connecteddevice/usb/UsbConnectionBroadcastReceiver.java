@@ -49,8 +49,8 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
         mUsbBackend = backend;
 
         mFunctions = UsbManager.FUNCTION_NONE;
-        mDataRole = UsbPort.DATA_ROLE_NONE;
-        mPowerRole = UsbPort.POWER_ROLE_NONE;
+        mDataRole = UsbPortStatus.DATA_ROLE_NONE;
+        mPowerRole = UsbPortStatus.POWER_ROLE_NONE;
     }
 
     @Override

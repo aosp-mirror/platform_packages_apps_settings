@@ -16,8 +16,13 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE;
+
 import android.content.Context;
 import android.hardware.usb.UsbPort;
+import android.hardware.usb.UsbPortStatus;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
@@ -40,16 +45,16 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
     private int mNextPowerRole;
 
     private final Runnable mFailureCallback = () -> {
-        if (mNextPowerRole != UsbPort.POWER_ROLE_NONE) {
+        if (mNextPowerRole != POWER_ROLE_NONE) {
             mSwitchPreference.setSummary(R.string.usb_switching_failed);
-            mNextPowerRole = UsbPort.POWER_ROLE_NONE;
+            mNextPowerRole = POWER_ROLE_NONE;
         }
     };
 
     public UsbDetailsPowerRoleController(Context context, UsbDetailsFragment fragment,
             UsbBackend backend) {
         super(context, fragment, backend);
-        mNextPowerRole = UsbPort.POWER_ROLE_NONE;
+        mNextPowerRole = POWER_ROLE_NONE;
     }
 
     @Override
@@ -70,20 +75,21 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
         } else if (connected && mUsbBackend.areAllRolesSupported()){
             mFragment.getPreferenceScreen().addPreference(mPreferenceCategory);
         }
-        if (powerRole == UsbPort.POWER_ROLE_SOURCE) {
+        if (powerRole == POWER_ROLE_SOURCE) {
             mSwitchPreference.setChecked(true);
             mPreferenceCategory.setEnabled(true);
-        } else if (powerRole == UsbPort.POWER_ROLE_SINK) {
+        } else if (powerRole == POWER_ROLE_SINK) {
             mSwitchPreference.setChecked(false);
             mPreferenceCategory.setEnabled(true);
-        } else if (!connected || powerRole == UsbPort.POWER_ROLE_NONE){
+        } else if (!connected || powerRole == POWER_ROLE_NONE){
             mPreferenceCategory.setEnabled(false);
-            if (mNextPowerRole == UsbPort.POWER_ROLE_NONE) {
+            if (mNextPowerRole == POWER_ROLE_NONE) {
                 mSwitchPreference.setSummary("");
             }
         }
 
-        if (mNextPowerRole != UsbPort.POWER_ROLE_NONE && powerRole != UsbPort.POWER_ROLE_NONE) {
+        if (mNextPowerRole != POWER_ROLE_NONE
+                && powerRole != POWER_ROLE_NONE) {
             if (mNextPowerRole == powerRole) {
                 // Clear switching text if switch succeeded
                 mSwitchPreference.setSummary("");
@@ -91,16 +97,16 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
                 // Set failure text if switch failed
                 mSwitchPreference.setSummary(R.string.usb_switching_failed);
             }
-            mNextPowerRole = UsbPort.POWER_ROLE_NONE;
+            mNextPowerRole = POWER_ROLE_NONE;
             mHandler.removeCallbacks(mFailureCallback);
         }
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        int newRole = mSwitchPreference.isChecked() ? UsbPort.POWER_ROLE_SOURCE
-                : UsbPort.POWER_ROLE_SINK;
-        if (mUsbBackend.getPowerRole() != newRole && mNextPowerRole == UsbPort.POWER_ROLE_NONE
+        int newRole = mSwitchPreference.isChecked() ? POWER_ROLE_SOURCE
+                : POWER_ROLE_SINK;
+        if (mUsbBackend.getPowerRole() != newRole && mNextPowerRole == POWER_ROLE_NONE
                 && !Utils.isMonkeyRunning()) {
             mUsbBackend.setPowerRole(newRole);
 
