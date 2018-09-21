@@ -14,12 +14,11 @@
 
 package com.android.settings.datausage;
 
-import static android.net.ConnectivityManager.TYPE_MOBILE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import static android.net.TrafficStats.UID_REMOVED;
 import static android.net.TrafficStats.UID_TETHERING;
-import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStats.Bucket;
@@ -28,15 +27,12 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
-import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
-import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -64,9 +60,10 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoaderCompat;
-import com.android.settingslib.net.NetworkStatsDetailLoader;
+import com.android.settingslib.net.NetworkCycleDataLoader;
+import com.android.settingslib.net.NetworkCycleData;
+import com.android.settingslib.net.NetworkStatsSummaryLoader;
 import com.android.settingslib.net.UidDetailProvider;
 
 import java.util.ArrayList;
@@ -101,8 +98,8 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
                 }
             };
 
-    private INetworkStatsSession mStatsSession;
     private ChartDataUsagePreference mChart;
+    private TelephonyManager mTelephonyManager;
 
     @VisibleForTesting
     NetworkTemplate mTemplate;
@@ -110,7 +107,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
     int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     @VisibleForTesting
     int mNetworkType;
-    private ChartData mChartData;
+    private List<NetworkCycleData> mCycleData;
 
     private LoadingViewController mLoadingViewController;
     private UidDetailProvider mUidDetailProvider;
@@ -120,7 +117,6 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
     private PreferenceGroup mApps;
     private View mHeader;
 
-
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_LIST;
@@ -129,21 +125,15 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Context context = getActivity();
+        final Activity activity = getActivity();
 
         if (!isBandwidthControlEnabled()) {
             Log.w(TAG, "No bandwidth control; leaving");
-            getActivity().finish();
+            activity.finish();
         }
 
-        try {
-            mStatsSession = services.mStatsService.openSession();
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-
-        mUidDetailProvider = new UidDetailProvider(context);
-
+        mUidDetailProvider = new UidDetailProvider(activity);
+        mTelephonyManager = activity.getSystemService(TelephonyManager.class);
         mUsageAmount = findPreference(KEY_USAGE_AMOUNT);
         mChart = (ChartDataUsagePreference) findPreference(KEY_CHART_DATA);
         mApps = (PreferenceGroup) findPreference(KEY_APPS_GROUP);
@@ -233,8 +223,6 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         mUidDetailProvider.clearCache();
         mUidDetailProvider = null;
 
-        TrafficStats.closeQuietly(mStatsSession);
-
         super.onDestroy();
     }
 
@@ -277,7 +265,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         // TODO: consider chaining two loaders together instead of reloading
         // network history when showing app detail.
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoaderCompat.buildArgs(mTemplate, null), mChartDataCallbacks);
+                ChartDataLoaderCompat.buildArgs(mTemplate, null), mNetworkCycleDataCallbacks);
 
         // detail mode can change visible menus, invalidate
         getActivity().invalidateOptionsMenu();
@@ -316,7 +304,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         }
 
         // generate cycle list based on policy and available history
-        if (mCycleAdapter.updateCycleList(policy, mChartData)) {
+        if (mCycleAdapter.updateCycleList(mCycleData)) {
             updateDetailData();
         }
     }
@@ -329,30 +317,20 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
     private void updateDetailData() {
         if (LOGD) Log.d(TAG, "updateDetailData()");
 
-        final long start = mChart.getInspectStart();
-        final long end = mChart.getInspectEnd();
-        final long now = System.currentTimeMillis();
-
-        final Context context = getActivity();
-
-        NetworkStatsHistory.Entry entry = null;
-        if (mChartData != null) {
-            entry = mChartData.network.getValues(start, end, now, null);
-        }
-
         // kick off loader for detailed stats
         getLoaderManager().restartLoader(LOADER_SUMMARY, null /* args */,
                 mNetworkStatsDetailCallbacks);
 
-        final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
-        final CharSequence totalPhrase = DataUsageUtils.formatDataUsage(context, totalBytes);
+        final long totalBytes = mCycleData != null
+            ? mCycleData.get(mCycleSpinner.getSelectedItemPosition()).totalUsage : 0;
+        final CharSequence totalPhrase = DataUsageUtils.formatDataUsage(getActivity(), totalBytes);
         mUsageAmount.setTitle(getString(R.string.data_used_template, totalPhrase));
     }
 
     /**
      * Bind the given {@link NetworkStats}, or {@code null} to clear list.
      */
-    public void bindStats(NetworkStats stats, int[] restrictedUids) {
+    private void bindStats(NetworkStats stats, int[] restrictedUids) {
         mApps.removeAll();
         if (stats == null) {
             if (LOGD) {
@@ -496,7 +474,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
 
             // update chart to show selected cycle, and update detail data
             // to match updated sweep bounds.
-            mChart.setVisibleRange(cycle.start, cycle.end);
+            mChart.setNetworkCycleData(mCycleData.get(position));
 
             updateDetailData();
         }
@@ -507,27 +485,30 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         }
     };
 
-    private final LoaderCallbacks<ChartData> mChartDataCallbacks = new LoaderCallbacks<
-            ChartData>() {
+    private final LoaderCallbacks<List<NetworkCycleData>> mNetworkCycleDataCallbacks =
+            new LoaderCallbacks<List<NetworkCycleData>>() {
         @Override
-        public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-            return new ChartDataLoaderCompat(getActivity(), mStatsSession, args);
+        public Loader<List<NetworkCycleData>> onCreateLoader(int id, Bundle args) {
+            return new NetworkCycleDataLoader.Builder(getContext())
+                    .setNetworkPolicy(services.mPolicyEditor.getPolicy(mTemplate))
+                    .setNetworkType(mNetworkType)
+                    .setNetworkTemplate(mTemplate)
+                    .setSubscriberId(mTelephonyManager.getSubscriberId(mSubId))
+                    .build();
         }
 
         @Override
-        public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
+        public void onLoadFinished(Loader<List<NetworkCycleData>> loader,
+                List<NetworkCycleData> data) {
             mLoadingViewController.showContent(false /* animate */);
-            mChartData = data;
-            mChart.setNetworkStats(mChartData.network);
-
+            mCycleData = data;
             // calculate policy cycles based on available data
             updatePolicy();
         }
 
         @Override
-        public void onLoaderReset(Loader<ChartData> loader) {
-            mChartData = null;
-            mChart.setNetworkStats(null);
+        public void onLoaderReset(Loader<List<NetworkCycleData>> loader) {
+            mCycleData = null;
         }
     };
 
@@ -535,11 +516,11 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
             new LoaderCallbacks<NetworkStats>() {
         @Override
         public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
-            return new NetworkStatsDetailLoader.Builder(getContext())
+            return new NetworkStatsSummaryLoader.Builder(getContext())
                     .setStartTime(mChart.getInspectStart())
                     .setEndTime(mChart.getInspectEnd())
                     .setNetworkType(mNetworkType)
-                    .setSubscriptionId(mSubId)
+                    .setSubscriberId(mTelephonyManager.getSubscriberId(mSubId))
                     .build();
         }
 

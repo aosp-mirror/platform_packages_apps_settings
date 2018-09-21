@@ -23,6 +23,8 @@ import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.util.FeatureFlagUtils;
+import android.util.Pair;
 import android.util.SparseIntArray;
 
 import androidx.annotation.VisibleForTesting;
@@ -31,7 +33,11 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.widget.UsageView;
+import com.android.settingslib.net.NetworkCycleData;
+
+import java.util.List;
 
 public class ChartDataUsagePreference extends Preference {
 
@@ -45,7 +51,9 @@ public class ChartDataUsagePreference extends Preference {
     private NetworkPolicy mPolicy;
     private long mStart;
     private long mEnd;
+    @Deprecated
     private NetworkStatsHistory mNetwork;
+    private NetworkCycleData mNetworkCycleData;
     private int mSecondaryColor;
     private int mSeriesColor;
 
@@ -60,13 +68,25 @@ public class ChartDataUsagePreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        UsageView chart = (UsageView) holder.findViewById(R.id.data_usage);
-        if (mNetwork == null) return;
+        final UsageView chart = (UsageView) holder.findViewById(R.id.data_usage);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
+            if (mNetworkCycleData == null) {
+                return;
+            }
+        } else {
+            if (mNetwork == null) {
+                return;
+            }
+        }
 
-        int top = getTop();
+        final int top = getTop();
         chart.clearPaths();
         chart.configureGraph(toInt(mEnd - mStart), top);
-        calcPoints(chart);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
+            calcPoints(chart, mNetworkCycleData.usageBuckets);
+        } else {
+            calcPoints(chart);
+        }
         chart.setBottomLabels(new CharSequence[] {
                 Utils.formatDateRange(getContext(), mStart, mStart),
                 Utils.formatDateRange(getContext(), mEnd, mEnd),
@@ -76,21 +96,26 @@ public class ChartDataUsagePreference extends Preference {
     }
 
     public int getTop() {
-        NetworkStatsHistory.Entry entry = null;
         long totalData = 0;
-        final int start = mNetwork.getIndexBefore(mStart);
-        final int end = mNetwork.getIndexAfter(mEnd);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
+            totalData = mNetworkCycleData.totalUsage;
+        } else {
+            NetworkStatsHistory.Entry entry = null;
+            final int start = mNetwork.getIndexBefore(mStart);
+            final int end = mNetwork.getIndexAfter(mEnd);
 
-        for (int i = start; i <= end; i++) {
-            entry = mNetwork.getValues(i, entry);
+            for (int i = start; i <= end; i++) {
+                entry = mNetwork.getValues(i, entry);
 
-            // increment by current bucket total
-            totalData += entry.rxBytes + entry.txBytes;
+                // increment by current bucket total
+                totalData += entry.rxBytes + entry.txBytes;
+            }
         }
         long policyMax = mPolicy != null ? Math.max(mPolicy.limitBytes, mPolicy.warningBytes) : 0;
         return (int) (Math.max(totalData, policyMax) / RESOLUTION);
     }
 
+    @Deprecated
     @VisibleForTesting
     void calcPoints(UsageView chart) {
         SparseIntArray points = new SparseIntArray();
@@ -114,6 +139,33 @@ public class ChartDataUsagePreference extends Preference {
 
             if (i == 0) {
                 points.put(toInt(startTime - mStart) - 1, -1);
+            }
+            points.put(toInt(startTime - mStart + 1), (int) (totalData / RESOLUTION));
+            points.put(toInt(endTime - mStart), (int) (totalData / RESOLUTION));
+        }
+        if (points.size() > 1) {
+            chart.addPath(points);
+        }
+    }
+
+    @VisibleForTesting
+    void calcPoints(UsageView chart, List<NetworkCycleData> usageSummary) {
+        if (usageSummary == null) {
+            return;
+        }
+        final SparseIntArray points = new SparseIntArray();
+        points.put(0, 0);
+
+        long totalData = 0;
+        for (NetworkCycleData data : usageSummary) {
+            final long startTime = data.startTime;
+            final long endTime = data.endTime;
+
+            // increment by current bucket total
+            totalData += data.totalUsage;
+
+            if (points.size() == 1) {
+                points.put(toInt(data.startTime - mStart) - 1, -1);
             }
             points.put(toInt(startTime - mStart + 1), (int) (totalData / RESOLUTION));
             points.put(toInt(endTime - mStart), (int) (totalData / RESOLUTION));
@@ -168,6 +220,7 @@ public class ChartDataUsagePreference extends Preference {
         notifyChanged();
     }
 
+    @Deprecated
     public void setVisibleRange(long start, long end) {
         mStart = start;
         mEnd = end;
@@ -182,8 +235,16 @@ public class ChartDataUsagePreference extends Preference {
         return mEnd;
     }
 
+    @Deprecated
     public void setNetworkStats(NetworkStatsHistory network) {
         mNetwork = network;
+        notifyChanged();
+    }
+
+    public void setNetworkCycleData(NetworkCycleData data) {
+        mNetworkCycleData = data;
+        mStart = data.startTime;
+        mEnd = data.endTime;
         notifyChanged();
     }
 
