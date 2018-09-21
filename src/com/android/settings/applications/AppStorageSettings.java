@@ -510,7 +510,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                             public void onClick(DialogInterface dialog, int which) {
                                 mButtonsPref.setButton1Enabled(false);
                                 //force to recompute changed value
-                                setIntentAndFinish(false, false);
+                                setIntentAndFinish(false  /* appChanged */);
                             }
                         })
                         .create();
