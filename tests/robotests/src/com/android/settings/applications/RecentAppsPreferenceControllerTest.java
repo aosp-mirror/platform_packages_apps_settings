@@ -40,6 +40,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.PowerManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -50,6 +51,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowPowerManager;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -193,6 +195,35 @@ public class RecentAppsPreferenceControllerTest {
         verify(mSeeAllPref).setSummary(null);
         verify(mSeeAllPref).setIcon(R.drawable.ic_chevron_right_24dp);
         verify(mDivider).setVisible(true);
+    }
+
+    @Test
+    public void display_powerSaverMode_showNoRecents() {
+        mContext.getSystemService(PowerManager.class).setPowerSaveMode(true);
+
+        final List<UsageStats> stats = new ArrayList<>();
+        final UsageStats stat1 = new UsageStats();
+
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "pkg.class";
+        stats.add(stat1);
+
+        // stat1, stat2 are valid apps. stat3 is invalid.
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mAppEntry);
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+                .thenReturn(new ResolveInfo());
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(stats);
+        mAppEntry.info = mApplicationInfo;
+
+        mController.displayPreference(mScreen);
+
+        verify(mCategory, never()).addPreference(any(Preference.class));
+        verify(mCategory).setTitle(null);
+        verify(mSeeAllPref).setTitle(R.string.applications_settings);
+        verify(mSeeAllPref).setIcon(null);
+        verify(mDivider).setVisible(false);
     }
 
     @Test
