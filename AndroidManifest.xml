@@ -1818,6 +1818,7 @@
 
         <activity android:name="SetFullBackupPassword"
                   android:label="@string/local_backup_password_title"
+                  android:parentActivityName="Settings$DevelopmentSettingsDashboardActivity"
                   android:exported="false" />
 
         <activity android:name=".security.CredentialStorage"
