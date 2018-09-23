@@ -38,7 +38,8 @@
         android:tint="?android:attr/colorAccent"
         android:theme="@android:style/Theme.Material"
         android:layout_gravity="center_vertical"
-        android:layout_marginEnd="@dimen/restricted_icon_margin_end"/>
+        android:layout_marginEnd="@dimen/restricted_icon_margin_end"
+        android:visibility="gone" />
 
     <com.android.settings.widget.ToggleSwitch
         android:id="@+id/switch_widget"

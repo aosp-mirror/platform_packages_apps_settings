@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
@@ -43,8 +44,14 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  * Dialog fragment for renaming a Bluetooth device.
  */
 abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
-        implements TextWatcher {
-    private AlertDialog mAlertDialog;
+        implements TextWatcher, TextView.OnEditorActionListener {
+
+    // Key to save the edited name and edit status for restoring after rotation
+    private static final String KEY_NAME = "device_name";
+    private static final String KEY_NAME_EDITED = "device_name_edited";
+
+    @VisibleForTesting
+    AlertDialog mAlertDialog;
     private Button mOkButton;
 
     EditText mDeviceNameView;
@@ -54,10 +61,6 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
 
     // This flag is set when the user edits the name (preserved on rotation)
     private boolean mDeviceNameEdited;
-
-    // Key to save the edited name and edit status for restoring after rotation
-    private static final String KEY_NAME = "device_name";
-    private static final String KEY_NAME_EDITED = "device_name_edited";
 
     /**
      * @return the title to use for the dialog.
@@ -123,19 +126,21 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
         }
         mDeviceNameView.addTextChangedListener(this);
         com.android.settings.Utils.setEditTextCursorPosition(mDeviceNameView);
-        mDeviceNameView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    setDeviceName(v.getText().toString());
-                    mAlertDialog.dismiss();
-                    return true;    // action handled
-                } else {
-                    return false;   // not handled
-                }
-            }
-        });
+        mDeviceNameView.setOnEditorActionListener(this);
         return view;
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            setDeviceName(v.getText().toString());
+            if (mAlertDialog != null && mAlertDialog.isShowing()) {
+                mAlertDialog.dismiss();
+            }
+            return true;    // action handled
+        } else {
+            return false;   // not handled
+        }
     }
 
     @Override

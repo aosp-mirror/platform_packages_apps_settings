@@ -20,9 +20,12 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.collection.ArraySet;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.homepage.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.conditional.ConditionContextualCardRenderer;
+import com.android.settings.homepage.slices.SliceContextualCardController;
+import com.android.settings.homepage.slices.SliceContextualCardRenderer;
 
 import java.util.Set;
 
@@ -64,7 +67,8 @@ public class ControllerRendererPool {
         return mControllers;
     }
 
-    public ContextualCardRenderer getRenderer(Context context, @ContextualCard.CardType int cardType) {
+    public ContextualCardRenderer getRenderer(Context context, LifecycleOwner lifecycleOwner,
+            @ContextualCard.CardType int cardType) {
         final Class<? extends ContextualCardRenderer> clz =
                 ContextualCardLookupTable.getCardRendererClasses(cardType);
         for (ContextualCardRenderer renderer : mRenderers) {
@@ -74,7 +78,7 @@ public class ControllerRendererPool {
             }
         }
 
-        final ContextualCardRenderer renderer = createCardRenderer(context, clz);
+        final ContextualCardRenderer renderer = createCardRenderer(context, lifecycleOwner, clz);
         if (renderer != null) {
             mRenderers.add(renderer);
         }
@@ -85,15 +89,19 @@ public class ControllerRendererPool {
             Class<? extends ContextualCardController> clz) {
         if (ConditionContextualCardController.class == clz) {
             return new ConditionContextualCardController(context);
+        } else if (SliceContextualCardController.class == clz) {
+            return new SliceContextualCardController();
         }
         return null;
     }
 
-    private ContextualCardRenderer createCardRenderer(Context context, Class<?> clz) {
+    private ContextualCardRenderer createCardRenderer(Context context,
+            LifecycleOwner lifecycleOwner, Class<?> clz) {
         if (ConditionContextualCardRenderer.class == clz) {
             return new ConditionContextualCardRenderer(context, this /*controllerRendererPool*/);
+        } else if (SliceContextualCardRenderer.class == clz) {
+            return new SliceContextualCardRenderer(context, lifecycleOwner);
         }
         return null;
     }
-
 }

@@ -60,8 +60,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     public static final String ARG_PACKAGE_NAME = "package";
     public static final String ARG_PACKAGE_UID = "uid";
 
-    protected static final String TAG = AppInfoBase.class.getSimpleName();
-    protected static final boolean localLOGV = false;
+    private static final String TAG = "AppInfoBase";
 
     protected EnforcedAdmin mAppsControlDisallowedAdmin;
     protected boolean mAppsControlDisallowedBySystem;
@@ -113,7 +112,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                 getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
         if (!refreshUi()) {
-            setIntentAndFinish(true, true);
+            setIntentAndFinish(true /* appChanged */);
         }
     }
 
@@ -159,8 +158,8 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         return mPackageName;
     }
 
-    protected void setIntentAndFinish(boolean finish, boolean appChanged) {
-        if (localLOGV) Log.i(TAG, "appChanged=" + appChanged);
+    protected void setIntentAndFinish(boolean appChanged) {
+        Log.i(TAG, "appChanged=" + appChanged);
         Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
         SettingsActivity sa = (SettingsActivity) getActivity();
@@ -216,7 +215,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     @Override
     public void onPackageListChanged() {
         if (!refreshUi()) {
-            setIntentAndFinish(true, true);
+            setIntentAndFinish(true /* appChanged */);
         }
     }
 

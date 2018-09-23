@@ -648,7 +648,6 @@ public class SettingsActivity extends SettingsBaseActivity
         PackageManager pm = getPackageManager();
         final UserManager um = UserManager.get(this);
         final boolean isAdmin = um.isAdminUser();
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(this);
         boolean somethingChanged = false;
         final String packageName = getPackageName();
         final StringBuilder changedList = new StringBuilder();
@@ -660,7 +659,6 @@ public class SettingsActivity extends SettingsBaseActivity
                         Settings.BluetoothSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
                 || somethingChanged;
-
 
         // Enable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
         // enable DataPlanUsageSummaryActivity.
