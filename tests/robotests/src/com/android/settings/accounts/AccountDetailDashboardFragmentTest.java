@@ -23,9 +23,13 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -49,6 +53,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowAccountManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -73,10 +79,11 @@ public class AccountDetailDashboardFragmentTest {
         final Bundle args = new Bundle();
         args.putParcelable(METADATA_USER_HANDLE, UserHandle.CURRENT);
 
-        mFragment = new AccountDetailDashboardFragment();
+        mFragment = spy(new AccountDetailDashboardFragment());
         mFragment.setArguments(args);
         mFragment.mAccountType = "com.abc";
         mFragment.mAccount = new Account("name1@abc.com", "com.abc");
+        when(mFragment.getContext()).thenReturn(mContext);
     }
 
     @Test
@@ -142,5 +149,21 @@ public class AccountDetailDashboardFragmentTest {
         final Intent intent = Shadows.shadowOf(activity).getNextStartedActivityForResult().intent;
 
         assertThat(intent.getStringExtra("extra.accountName")).isEqualTo("name1@abc.com");
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class})
+    public void onResume_accountMissing_shouldFinish() {
+        mFragment.finishIfAccountMissing();
+        verify(mFragment).finish();
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class})
+    public void onResume_accountPresent_shouldNotFinish() {
+        AccountManager mgr = mContext.getSystemService(AccountManager.class);
+        Shadows.shadowOf(mgr).addAccount(mFragment.mAccount);
+        mFragment.finishIfAccountMissing();
+        verify(mFragment, never()).finish();
     }
 }
