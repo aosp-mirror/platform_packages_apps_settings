@@ -240,7 +240,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
         if (configManager != null) {
-            PersistableBundle b = configManager.getConfig();
+            PersistableBundle b = configManager.getConfigForSubId(mSubId);
             if (b != null) {
                 mReadOnlyApnTypes = b.getStringArray(
                         CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
