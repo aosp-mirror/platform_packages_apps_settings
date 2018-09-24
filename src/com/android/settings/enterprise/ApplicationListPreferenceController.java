@@ -27,8 +27,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.UserAppInfo;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.List;
 
@@ -80,6 +80,7 @@ public class ApplicationListPreferenceController extends AbstractPreferenceContr
 
     /**
      * Simple interface for building application list within {
+     *
      * @link ApplicationListPreferenceController}
      */
     public interface ApplicationListBuilder {

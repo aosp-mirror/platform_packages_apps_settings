@@ -55,8 +55,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.widget.AppPreference;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -356,7 +356,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                                     printJob.getCreationTime(), printJob.getCreationTime(),
                                     DateFormat.SHORT, DateFormat.SHORT)));
 
-                    TypedArray a = getActivity().obtainStyledAttributes(new int[] {
+                    TypedArray a = getActivity().obtainStyledAttributes(new int[]{
                             android.R.attr.colorControlNormal});
                     int tintColor = a.getColor(0, 0);
                     a.recycle();

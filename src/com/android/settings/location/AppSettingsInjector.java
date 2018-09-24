@@ -21,10 +21,10 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
-import com.android.settings.widget.AppPreference;
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.location.InjectedSetting;
 import com.android.settingslib.location.SettingsInjector;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 /**
  * Adds the preferences specified by the {@link InjectedSetting} objects to a preference group.
