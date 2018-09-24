@@ -19,6 +19,8 @@ package com.android.settings.applications;
 import static android.text.format.DateUtils.DAY_IN_MILLIS;
 
 import static com.android.settings.applications.AppStateNotificationBridge
+        .FILTER_APP_NOTIFICATION_BLOCKED;
+import static com.android.settings.applications.AppStateNotificationBridge
         .FILTER_APP_NOTIFICATION_FREQUENCY;
 import static com.android.settings.applications.AppStateNotificationBridge
         .FILTER_APP_NOTIFICATION_RECENCY;
@@ -379,10 +381,11 @@ public class AppStateNotificationBridgeTest {
         NotificationsSentState sent = new NotificationsSentState();
         sent.lastSent = System.currentTimeMillis() - (2 * DAY_IN_MILLIS);
 
-        assertThat(AppStateNotificationBridge.getSummary(mContext, neverSent, true)).isEqualTo(
-                mContext.getString(R.string.notifications_sent_never));
-        assertThat(AppStateNotificationBridge.getSummary(mContext, sent, true).toString())
-                .contains("2");
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, neverSent, R.id.sort_order_recent_notification)).isEqualTo(
+                        mContext.getString(R.string.notifications_sent_never));
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sent, R.id.sort_order_recent_notification).toString()).contains("2");
     }
 
     @Test
@@ -392,10 +395,21 @@ public class AppStateNotificationBridgeTest {
         NotificationsSentState sentOften = new NotificationsSentState();
         sentOften.avgSentDaily = 8;
 
-        assertThat(AppStateNotificationBridge.getSummary(mContext, sentRarely, false).toString())
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentRarely, R.id.sort_order_frequent_notification).toString())
                 .contains("1");
-        assertThat(AppStateNotificationBridge.getSummary(mContext, sentOften, false).toString())
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentOften, R.id.sort_order_frequent_notification).toString())
                 .contains("8");
+    }
+
+    @Test
+    public void testSummary_alpha() {
+        NotificationsSentState sentRarely = new NotificationsSentState();
+        sentRarely.avgSentWeekly = 1;
+        assertThat(AppStateNotificationBridge.getSummary(
+                mContext, sentRarely, R.id.sort_order_alpha).toString())
+                .isEqualTo("");
     }
 
     @Test
@@ -430,6 +444,23 @@ public class AppStateNotificationBridgeTest {
         deny.extraInfo = denyState;
 
         assertFalse(FILTER_APP_NOTIFICATION_FREQUENCY.filterApp(deny));
+    }
+
+    @Test
+    public void testFilterBlocked() {
+        NotificationsSentState allowState = new NotificationsSentState();
+        allowState.blocked = true;
+        AppEntry allow = mock(AppEntry.class);
+        allow.extraInfo = allowState;
+
+        assertTrue(FILTER_APP_NOTIFICATION_BLOCKED.filterApp(allow));
+
+        NotificationsSentState denyState = new NotificationsSentState();
+        denyState.blocked = false;
+        AppEntry deny = mock(AppEntry.class);
+        deny.extraInfo = denyState;
+
+        assertFalse(FILTER_APP_NOTIFICATION_BLOCKED.filterApp(deny));
     }
 
     @Test
