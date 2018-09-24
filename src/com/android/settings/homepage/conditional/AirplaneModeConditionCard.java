@@ -47,7 +47,7 @@ public class AirplaneModeConditionCard implements ConditionalCard {
 
     @Override
     public Drawable getIcon() {
-        return mAppContext.getDrawable(R.drawable.ic_airplane);
+        return mAppContext.getDrawable(R.drawable.ic_airplanemode_active);
     }
 
     @Override
