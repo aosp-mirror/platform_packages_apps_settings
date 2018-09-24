@@ -20,6 +20,7 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
@@ -35,7 +36,9 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class PreviouslyConnectedDevicePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback {
 
-    private Preference mPreference;
+    private static final int MAX_DEVICE_NUM = 3;
+
+    private PreferenceGroup mPreferenceGroup;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private DockUpdater mSavedDockUpdater;
     private int mPreferenceSize;
@@ -57,8 +60,10 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceGroup = (PreferenceGroup) screen.findPreference(getPreferenceKey());
+        mPreferenceGroup.setVisible(false);
+
         if (isAvailable()) {
-            mPreference = screen.findPreference(getPreferenceKey());
             final Context context = screen.getContext();
             mBluetoothDeviceUpdater.setPrefContext(context);
             mSavedDockUpdater.setPreferenceContext(context);
@@ -69,7 +74,6 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     public void onStart() {
         mBluetoothDeviceUpdater.registerCallback();
         mSavedDockUpdater.registerCallback();
-        updatePreferenceOnSizeChanged();
     }
 
     @Override
@@ -86,13 +90,17 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     @Override
     public void onDeviceAdded(Preference preference) {
         mPreferenceSize++;
-        updatePreferenceOnSizeChanged();
+        if (mPreferenceSize <= MAX_DEVICE_NUM) {
+            mPreferenceGroup.addPreference(preference);
+        }
+        updatePreferenceVisiblity();
     }
 
     @Override
     public void onDeviceRemoved(Preference preference) {
         mPreferenceSize--;
-        updatePreferenceOnSizeChanged();
+        mPreferenceGroup.removePreference(preference);
+        updatePreferenceVisiblity();
     }
 
     @VisibleForTesting
@@ -106,18 +114,12 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     }
 
     @VisibleForTesting
-    void setPreferenceSize(int size) {
-        mPreferenceSize = size;
+    void setPreferenceGroup(PreferenceGroup preferenceGroup) {
+        mPreferenceGroup = preferenceGroup;
     }
 
     @VisibleForTesting
-    void setPreference(Preference preference) {
-        mPreference = preference;
-    }
-
-    private void updatePreferenceOnSizeChanged() {
-        if (isAvailable()) {
-            mPreference.setEnabled(mPreferenceSize != 0);
-        }
+    void updatePreferenceVisiblity() {
+        mPreferenceGroup.setVisible(mPreferenceSize > 0);
     }
 }
