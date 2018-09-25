@@ -53,6 +53,7 @@ public class SlicesIndexerTest {
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
     private final boolean PLATFORM_DEFINED = true;
+    private final boolean IS_DYNAMIC_SUMMARY_ALLOWED = true;
     private final int SLICE_TYPE = SliceData.SliceType.SLIDER;
 
     private Context mContext;
@@ -131,6 +132,9 @@ public class SlicesIndexerTest {
                     1 /* true */);
             assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.SLICE_TYPE))).isEqualTo(
                     SLICE_TYPE);
+            assertThat(cursor.getInt(
+                    cursor.getColumnIndex(IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE))).isEqualTo(
+                    1 /* true */);
             cursor.moveToNext();
         }
     }
@@ -154,7 +158,8 @@ public class SlicesIndexerTest {
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .setPlatformDefined(PLATFORM_DEFINED)
-                .setSliceType(SLICE_TYPE);
+                .setSliceType(SLICE_TYPE)
+                .setDynamicSummaryAllowed(IS_DYNAMIC_SUMMARY_ALLOWED);
 
         for (int i = 0; i < KEYS.length; i++) {
             builder.setKey(KEYS[i]).setTitle(TITLES[i]);

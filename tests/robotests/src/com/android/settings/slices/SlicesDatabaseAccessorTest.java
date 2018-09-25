@@ -97,6 +97,45 @@ public class SlicesDatabaseAccessorTest {
         assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
         assertThat(data.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
+        assertThat(data.isDynamicSummaryAllowed()).isFalse(); /* default value */
+    }
+
+    @Test
+    public void testGetSliceDataFromKey_allowDynamicSummary_validSliceReturned() {
+        String key = "key";
+        insertSpecialCase(key, true /* isPlatformSlice */, true /* isDynamicSummaryAllowed */);
+
+        SliceData data = mAccessor.getSliceDataFromKey(key);
+
+        assertThat(data.getKey()).isEqualTo(key);
+        assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
+        assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
+        assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
+        assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
+        assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
+        assertThat(data.getUri()).isNull();
+        assertThat(data.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
+        assertThat(data.isDynamicSummaryAllowed()).isTrue();
+    }
+
+    @Test
+    public void testGetSliceDataFromKey_doNotAllowDynamicSummary_validSliceReturned() {
+        String key = "key";
+        insertSpecialCase(key, true /* isPlatformSlice */, false /* isDynamicSummaryAllowed */);
+
+        SliceData data = mAccessor.getSliceDataFromKey(key);
+
+        assertThat(data.getKey()).isEqualTo(key);
+        assertThat(data.getTitle()).isEqualTo(FAKE_TITLE);
+        assertThat(data.getSummary()).isEqualTo(FAKE_SUMMARY);
+        assertThat(data.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
+        assertThat(data.getKeywords()).isEqualTo(FAKE_KEYWORDS);
+        assertThat(data.getIconResource()).isEqualTo(FAKE_ICON);
+        assertThat(data.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_NAME);
+        assertThat(data.getUri()).isNull();
+        assertThat(data.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
+        assertThat(data.isDynamicSummaryAllowed()).isFalse();
     }
 
     @Test(expected = IllegalStateException.class)
@@ -198,6 +237,11 @@ public class SlicesDatabaseAccessorTest {
     }
 
     private void insertSpecialCase(String key, boolean isPlatformSlice) {
+        insertSpecialCase(key, isPlatformSlice, false /* isDynamicSummaryAllowed */);
+    }
+
+    private void insertSpecialCase(String key, boolean isPlatformSlice,
+            boolean isDynamicSummaryAllowed) {
         ContentValues values = new ContentValues();
         values.put(SlicesDatabaseHelper.IndexColumns.KEY, key);
         values.put(SlicesDatabaseHelper.IndexColumns.TITLE, FAKE_TITLE);
@@ -208,6 +252,8 @@ public class SlicesDatabaseAccessorTest {
         values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, FAKE_FRAGMENT_NAME);
         values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, FAKE_CONTROLLER_NAME);
         values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
+        values.put(SlicesDatabaseHelper.IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
+                isDynamicSummaryAllowed);
         values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
 
         mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);

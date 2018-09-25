@@ -111,6 +111,8 @@ class SlicesIndexer implements Runnable {
             values.put(IndexColumns.CONTROLLER, dataRow.getPreferenceController());
             values.put(IndexColumns.PLATFORM_SLICE, dataRow.isPlatformDefined());
             values.put(IndexColumns.SLICE_TYPE, dataRow.getSliceType());
+            values.put(IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
+                    dataRow.isDynamicSummaryAllowed());
 
             database.replaceOrThrow(Tables.TABLE_SLICES_INDEX, null /* nullColumnHack */,
                     values);

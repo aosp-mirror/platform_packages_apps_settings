@@ -124,6 +124,7 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
         assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
         assertThat(fakeSlice.isPlatformDefined()).isTrue(); // from XML
+        assertThat(fakeSlice.isDynamicSummaryAllowed()).isTrue(); // from XML
     }
 
     private void assertFakeA11ySlice(SliceData fakeSlice) {
