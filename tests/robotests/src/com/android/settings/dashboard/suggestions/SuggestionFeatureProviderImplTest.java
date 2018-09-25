@@ -143,20 +143,4 @@ public class SuggestionFeatureProviderImplTest {
                 anyString());
         verify(mSuggestionControllerMixin).dismissSuggestion(mSuggestion);
     }
-
-    @Test
-    public void filterExclusiveSuggestions_shouldOnlyKeepFirst3() {
-        final List<Tile> suggestions = new ArrayList<>();
-        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
-        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
-        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
-        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
-        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
-        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
-        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
-
-        mProvider.filterExclusiveSuggestions(suggestions);
-
-        assertThat(suggestions).hasSize(3);
-    }
 }

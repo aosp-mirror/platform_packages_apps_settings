@@ -45,7 +45,6 @@ import java.util.List;
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
 
     private static final String TAG = "SuggestionFeature";
-    private static final int EXCLUSIVE_SUGGESTION_MAX_COUNT = 3;
 
     private static final String SHARED_PREF_FILENAME = "suggestions";
 
@@ -95,17 +94,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         final Context appContext = context.getApplicationContext();
         mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
                 .getMetricsFeatureProvider();
-    }
-
-    @Override
-    public void filterExclusiveSuggestions(List<Tile> suggestions) {
-        if (suggestions == null) {
-            return;
-        }
-        for (int i = suggestions.size() - 1; i >= EXCLUSIVE_SUGGESTION_MAX_COUNT; i--) {
-            Log.d(TAG, "Removing exclusive suggestion");
-            suggestions.remove(i);
-        }
     }
 
     @Override

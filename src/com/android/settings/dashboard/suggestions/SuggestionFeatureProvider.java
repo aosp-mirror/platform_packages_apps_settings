@@ -23,10 +23,7 @@ import android.service.settings.suggestions.Suggestion;
 
 import androidx.annotation.NonNull;
 
-import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
-
-import java.util.List;
 
 /** Interface should be implemented if you have added new suggestions */
 public interface SuggestionFeatureProvider {
@@ -48,11 +45,6 @@ public interface SuggestionFeatureProvider {
      * Returns the {@link SharedPreferences} that holds metadata for suggestions.
      */
     SharedPreferences getSharedPrefs(Context context);
-
-    /**
-     * Only keep top few suggestions from exclusive suggestions.
-     */
-    void filterExclusiveSuggestions(List<Tile> suggestions);
 
     /**
      * Dismisses a suggestion.
