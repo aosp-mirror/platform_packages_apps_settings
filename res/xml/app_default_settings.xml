@@ -21,59 +21,59 @@
     android:key="app_default_settings_screen"
     android:title="@string/app_default_dashboard_title">
 
-    <com.android.settings.widget.AppPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="assist_and_voice_input"
         android:title="@string/assist_and_voice_input_title"
         android:fragment="com.android.settings.applications.assist.ManageAssist"
         settings:searchable="false"/>
 
-    <com.android.settings.widget.AppPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="default_browser"
         android:title="@string/default_browser_title"
         android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker"
         settings:keywords="@string/keywords_default_browser">
         <extra android:name="for_work" android:value="false" />
-    </com.android.settings.widget.AppPreference>
+    </com.android.settingslib.widget.apppreference.AppPreference>
 
-    <com.android.settings.widget.GearPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="default_home"
         android:title="@string/home_app"
         android:fragment="com.android.settings.applications.defaultapps.DefaultHomePicker"
         settings:keywords="@string/keywords_home" />
 
-    <com.android.settings.widget.AppPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="default_phone_app"
         android:title="@string/default_phone_title"
         android:fragment="com.android.settings.applications.defaultapps.DefaultPhonePicker"
         settings:keywords="@string/keywords_default_phone_app" />
 
-    <com.android.settings.widget.AppPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="default_sms_app"
         android:title="@string/sms_application_title"
         android:fragment="com.android.settings.applications.defaultapps.DefaultSmsPicker"
         settings:keywords="@string/keywords_more_default_sms_app" />
 
-    <com.android.settings.widget.AppPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="default_payment_app"
         android:title="@string/nfc_payment_settings_title"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.nfc.PaymentSettings"
         settings:keywords="@string/keywords_default_payment_app"/>
 
-    <com.android.settings.widget.AppPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="default_emergency_app"
         android:title="@string/default_emergency_app"
         settings:keywords="@string/keywords_emergency_app" />
 
     <!--
-    <com.android.settings.widget.AppPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="default_notification_asst_app"
         android:title="@string/default_notification_assistant"
         android:fragment="com.android.settings.applications.defaultapps.DefaultNotificationAssistantPicker"
         />
      -->
 
-    <com.android.settings.widget.AppPreference
+    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="domain_urls"
         android:title="@string/domain_urls_title"
         android:fragment="com.android.settings.applications.managedomainurls.ManageDomainUrls"
@@ -83,21 +83,21 @@
         android:key="work_app_defaults"
         android:title="@string/default_for_work">
 
-        <com.android.settings.widget.AppPreference
+        <com.android.settingslib.widget.apppreference.AppPreference
             android:key="work_default_browser"
             android:title="@string/default_browser_title"
             android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker"
             settings:searchable="false">
             <extra android:name="for_work" android:value="true" />
-        </com.android.settings.widget.AppPreference>
+        </com.android.settingslib.widget.apppreference.AppPreference>
 
-        <com.android.settings.widget.AppPreference
+        <com.android.settingslib.widget.apppreference.AppPreference
             android:key="work_default_phone_app"
             android:title="@string/default_phone_title"
             android:fragment="com.android.settings.applications.defaultapps.DefaultPhonePicker"
             settings:searchable="false">
             <extra android:name="for_work" android:value="true" />
-        </com.android.settings.widget.AppPreference>
+        </com.android.settingslib.widget.apppreference.AppPreference>
 
     </com.android.settings.widget.WorkOnlyCategory>
 

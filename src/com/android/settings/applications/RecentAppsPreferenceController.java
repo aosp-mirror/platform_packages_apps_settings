@@ -42,11 +42,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.AppPreference;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;

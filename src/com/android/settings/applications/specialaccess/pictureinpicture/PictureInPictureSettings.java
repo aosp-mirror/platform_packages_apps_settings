@@ -42,9 +42,9 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.widget.AppPreference;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
