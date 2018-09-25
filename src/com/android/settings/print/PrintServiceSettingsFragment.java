@@ -190,8 +190,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             if (emptyView == null) {
                 emptyView = getActivity().getLayoutInflater().inflate(
                         R.layout.empty_print_state, contentRoot, false);
-                ImageView iconView = (ImageView) emptyView.findViewById(R.id.icon);
-                iconView.setContentDescription(getString(R.string.print_service_disabled));
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_service_disabled);
                 contentRoot.addView(emptyView);
@@ -216,8 +214,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             if (emptyView == null) {
                 emptyView = getActivity().getLayoutInflater().inflate(
                         R.layout.empty_print_state, contentRoot, false);
-                ImageView iconView = (ImageView) emptyView.findViewById(R.id.icon);
-                iconView.setContentDescription(getString(R.string.print_no_printers_found));
                 TextView textView = (TextView) emptyView.findViewById(R.id.message);
                 textView.setText(R.string.print_no_printers_found);
                 contentRoot.addView(emptyView);
