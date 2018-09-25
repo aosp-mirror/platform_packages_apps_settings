@@ -893,6 +893,12 @@
     <string name="security_settings_face_settings_use_face_category">Use your face to</string>
     <!-- Text shown on a toggle which allows or disallows the device to use face for unlocking the device. [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_use_face_unlock_phone">Unlock your device</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use face authentication for apps. This will be presented to the user together with the context of security_settings_face_settings_use_face_category. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_settings_use_face_for_apps">App sign-in \u0026 payments</string>
+    <!-- Text shown on a toggle which disables/enables face authentication, depending if the user's eyes are open. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_settings_require_attention">Eyes open to unlock</string>
+    <!-- Text shown on the details of a toggle which disables/enables face authentication, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">When using face authentication, your eyes must be open</string>
     <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_remove_face_data">Remove face data</string>
     <!-- Text shown in face settings allowing the user to update/improve the enrolled face. This brings the user back to the enrollment flow. [CHAR LIMIT=30] -->
@@ -6949,7 +6955,7 @@
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
-    <string name="keywords_face_unlock">face, unlock</string>
+    <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>

@@ -22,21 +22,34 @@
 
     <com.android.settings.widget.VideoPreference
         android:key="security_settings_face_video"
+        android:title="@string/summary_placeholder"
         app:animation="@raw/gesture_fingerprint_swipe"
-        app:preview="@drawable/face_enroll_introduction" />
+        app:preview="@drawable/face_enroll_introduction"
+        app:controller="com.android.settings.widget.VideoPreferenceController"/>
 
     <PreferenceCategory
         android:key="security_settings_face_unlock_category"
         android:title="@string/security_settings_face_settings_use_face_category">
         <SwitchPreference
-            android:key="security_settings_face_unlock"
+            android:key="security_settings_face_keyguard"
             android:title="@string/security_settings_face_settings_use_face_unlock_phone"
             app:keywords="@string/keywords_face_unlock"
-            app:controller="com.android.settings.biometrics.face.FaceSettingsUnlockPreferenceController"/>
+            app:controller="com.android.settings.biometrics.face.FaceSettingsKeyguardPreferenceController"/>
+        <SwitchPreference
+            android:key="security_settings_face_app"
+            android:title="@string/security_settings_face_settings_use_face_for_apps"
+            app:keywords="@string/keywords_face_unlock"
+            app:controller="com.android.settings.biometrics.face.FaceSettingsAppPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="security_settings_face_manage_category">
+        <SwitchPreference
+            android:key="security_settings_face_require_attention"
+            android:title="@string/security_settings_face_settings_require_attention"
+            app:keywords="@string/keywords_face_unlock"
+            app:controller="com.android.settings.biometrics.face.FaceSettingsAttentionPreferenceController"/>
+
         <Preference
             android:key="security_settings_face_improve"
             android:title="@string/security_settings_face_settings_improve_face">
