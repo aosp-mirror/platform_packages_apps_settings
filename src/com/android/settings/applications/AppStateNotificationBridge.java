@@ -100,18 +100,20 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
     }
 
     public static CharSequence getSummary(Context context, NotificationsSentState state,
-            boolean sortByRecency) {
-        if (sortByRecency) {
+            int sortOrder) {
+        if (sortOrder == R.id.sort_order_recent_notification) {
             if (state.lastSent == 0) {
                 return context.getString(R.string.notifications_sent_never);
             }
             return StringUtil.formatRelativeTime(
                     context, System.currentTimeMillis() - state.lastSent, true);
-        } else {
+        } else if (sortOrder == R.id.sort_order_frequent_notification) {
             if (state.avgSentWeekly > 0) {
                 return context.getString(R.string.notifications_sent_weekly, state.avgSentWeekly);
             }
             return context.getString(R.string.notifications_sent_daily, state.avgSentDaily);
+        } else {
+            return "";
         }
     }
 
@@ -262,6 +264,21 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
             NotificationsSentState state = getNotificationsSentState(info);
             if (state != null) {
                 return state.sentCount != 0;
+            }
+            return false;
+        }
+    };
+
+    public static final AppFilter FILTER_APP_NOTIFICATION_BLOCKED = new AppFilter() {
+        @Override
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry info) {
+            NotificationsSentState state = getNotificationsSentState(info);
+            if (state != null) {
+                return state.blocked;
             }
             return false;
         }
