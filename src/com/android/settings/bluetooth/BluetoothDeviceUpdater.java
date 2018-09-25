@@ -272,6 +272,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
                     ", is connected : " + device.isConnected() + " , is profile connected : "
                     + cachedDevice.isConnected());
         }
-        return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
+        return device.getBondState() == BluetoothDevice.BOND_BONDED && cachedDevice.isConnected();
     }
 }
