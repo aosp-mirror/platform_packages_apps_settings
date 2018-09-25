@@ -125,7 +125,7 @@ public class EntityHeaderControllerTest {
         mController.setLabel(testString);
         mController.setSummary(testString);
         mController.setSecondSummary(testString);
-        mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
+        mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add_24dp));
         mController.done(mActivity);
 
         assertThat(label).isNotNull();
@@ -238,7 +238,7 @@ public class EntityHeaderControllerTest {
         when(mFragment.getActivity()).thenReturn(mock(FragmentActivity.class));
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         String description = "Fake Description";
-        mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
+        mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add_24dp));
         mController.setIconContentDescription(description);
         mController.done(mActivity);
         assertThat(view.findViewById(R.id.entity_header_icon).getContentDescription().toString())
