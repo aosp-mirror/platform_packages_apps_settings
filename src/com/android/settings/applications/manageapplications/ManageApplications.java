@@ -21,6 +21,8 @@ import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_BLOCKED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_DISABLED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ENABLED;
@@ -409,6 +411,7 @@ public class ManageApplications extends InstrumentedFragment
         if (mListType == LIST_TYPE_NOTIFICATION) {
             mFilterAdapter.enableFilter(FILTER_APPS_RECENT);
             mFilterAdapter.enableFilter(FILTER_APPS_FREQUENT);
+            mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
             mFilterAdapter.disableFilter(FILTER_APPS_ALL);
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
@@ -955,6 +958,8 @@ public class ManageApplications extends InstrumentedFragment
                 rebuild(R.id.sort_order_frequent_notification);
             } else if (FILTER_APPS_RECENT == appFilter.getFilterType()) {
                 rebuild(R.id.sort_order_recent_notification);
+            } else if (FILTER_APPS_BLOCKED == appFilter.getFilterType()) {
+                rebuild(R.id.sort_order_alpha);
             } else {
                 rebuild();
             }
@@ -1111,16 +1116,7 @@ public class ManageApplications extends InstrumentedFragment
 
         @VisibleForTesting
         static boolean shouldUseStableItemHeight(int listType) {
-            switch (listType) {
-                case LIST_TYPE_NOTIFICATION:
-                    // Most entries in notification type has no summary. Don't use stable height
-                    // so height is short for most entries.
-                    return false;
-                default:
-                    // Other types have non-empty summary, so keep the height as we expect summary
-                    // to fill in.
-                    return true;
-            }
+            return true;
         }
 
         private static boolean packageNameEquals(PackageItemInfo info1, PackageItemInfo info2) {
@@ -1338,8 +1334,7 @@ public class ManageApplications extends InstrumentedFragment
                     if (entry.extraInfo != null
                             && entry.extraInfo instanceof NotificationsSentState) {
                         holder.setSummary(AppStateNotificationBridge.getSummary(mContext,
-                                (NotificationsSentState) entry.extraInfo,
-                                (mLastSortMode == R.id.sort_order_recent_notification)));
+                                (NotificationsSentState) entry.extraInfo, mLastSortMode));
                     } else {
                         holder.setSummary(null);
                     }
@@ -1388,8 +1383,7 @@ public class ManageApplications extends InstrumentedFragment
                     if (entry.extraInfo != null
                             && entry.extraInfo instanceof NotificationsSentState) {
                         holder.setSummary(AppStateNotificationBridge.getSummary(mContext,
-                                (NotificationsSentState) entry.extraInfo,
-                                (mLastSortMode == R.id.sort_order_recent_notification)));
+                                (NotificationsSentState) entry.extraInfo, mLastSortMode));
                     } else {
                         holder.setSummary(null);
                     }

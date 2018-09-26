@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -26,7 +25,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.widget.AppPreference;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 /**
  * Custom preference for displaying battery usage info as a bar and an icon on

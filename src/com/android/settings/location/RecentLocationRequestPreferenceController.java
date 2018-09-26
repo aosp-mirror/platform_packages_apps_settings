@@ -26,9 +26,9 @@ import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
     private PreferenceCategory mCategoryRecentLocationRequests;
     private Preference mSeeAllButton;
 
-    /** Used in this class and {@link RecentLocationRequestSeeAllPreferenceController}*/
+    /** Used in this class and {@link RecentLocationRequestSeeAllPreferenceController} */
     static class PackageEntryClickedListener implements Preference.OnPreferenceClickListener {
         private final DashboardFragment mFragment;
         private final String mPackage;
@@ -111,7 +111,7 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
 
         if (recentLocationRequests.size() > 3) {
             // Display the top 3 preferences to container in original order.
-            for (int i = 0; i < 3; i ++) {
+            for (int i = 0; i < 3; i++) {
                 mCategoryRecentLocationRequests.addPreference(
                         createAppPreference(prefContext, recentLocationRequests.get(i)));
             }

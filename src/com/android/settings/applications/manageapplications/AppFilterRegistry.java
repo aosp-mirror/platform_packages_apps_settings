@@ -49,6 +49,7 @@ public class AppFilterRegistry {
             FILTER_APPS_WITH_OVERLAY,
             FILTER_APPS_WRITE_SETTINGS,
             FILTER_APPS_INSTALL_SOURCES,
+            FILTER_APPS_BLOCKED,
     })
     @interface FilterType {
     }
@@ -71,14 +72,15 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_INSTALL_SOURCES = 13;
     public static final int FILTER_APP_HAS_DIRECTORY_ACCESS = 14;
     public static final int FILTER_APP_CAN_CHANGE_WIFI_STATE = 15;
-    // Next id: 16
+    public static final int FILTER_APPS_BLOCKED = 16;
+    // Next id: 17
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[16];
+        mFilters = new AppFilterItem[17];
 
         // High power whitelist, on
         mFilters[FILTER_APPS_POWER_WHITELIST] = new AppFilterItem(
@@ -178,6 +180,12 @@ public class AppFilterRegistry {
                 AppStateChangeWifiStateBridge.FILTER_CHANGE_WIFI_STATE,
                 FILTER_APP_CAN_CHANGE_WIFI_STATE,
                 R.string.filter_write_settings_apps);
+
+        // Blocked Notifications
+        mFilters[FILTER_APPS_BLOCKED] = new AppFilterItem(
+                AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,
+                FILTER_APPS_BLOCKED,
+                R.string.filter_notif_blocked_apps);
     }
 
     public static AppFilterRegistry getInstance() {

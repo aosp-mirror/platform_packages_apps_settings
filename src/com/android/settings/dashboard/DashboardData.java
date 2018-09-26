@@ -41,7 +41,6 @@ import java.util.List;
  */
 public class DashboardData {
     public static final int POSITION_NOT_FOUND = -1;
-    public static final int MAX_SUGGESTION_COUNT = 2;
 
     // stable id for different type of items.
     @VisibleForTesting
@@ -185,7 +184,7 @@ public class DashboardData {
         final List<ConditionalCard> conditions = mConditions;
         final boolean hasConditions = sizeOf(conditions) > 0;
 
-        final List<Suggestion> suggestions = getSuggestionsToShow(mSuggestions);
+        final List<Suggestion> suggestions = mSuggestions;
         final boolean hasSuggestions = sizeOf(suggestions) > 0;
 
         /* Suggestion container. This is the card view that contains the list of suggestions.
@@ -223,20 +222,6 @@ public class DashboardData {
 
     private static int sizeOf(List<?> list) {
         return list == null ? 0 : list.size();
-    }
-
-    private List<Suggestion> getSuggestionsToShow(List<Suggestion> suggestions) {
-        if (suggestions == null) {
-            return null;
-        }
-        if (suggestions.size() <= MAX_SUGGESTION_COUNT) {
-            return suggestions;
-        }
-        final List<Suggestion> suggestionsToShow = new ArrayList<>(MAX_SUGGESTION_COUNT);
-        for (int i = 0; i < MAX_SUGGESTION_COUNT; i++) {
-            suggestionsToShow.add(suggestions.get(i));
-        }
-        return suggestionsToShow;
     }
 
     /**

@@ -42,10 +42,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.location.RecentLocationApps.Request;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -173,7 +173,7 @@ public class RecentLocationRequestPreferenceControllerTest {
 
     @Test
     public void onPreferenceClick_shouldLaunchAppDetails() {
-        final Context context= mock(Context.class);
+        final Context context = mock(Context.class);
         when(mFragment.getContext()).thenReturn(context);
 
         final List<RecentLocationApps.Request> requests = new ArrayList<>();
@@ -210,7 +210,7 @@ public class RecentLocationRequestPreferenceControllerTest {
             AppPreference appPreference = mock(AppPreference.class, "AppPreference" + i);
             doReturn(title).when(appPreference).getTitle();
             doReturn(appPreference)
-                .when(mController).createAppPreference(any(Context.class), eq(req));
+                    .when(mController).createAppPreference(any(Context.class), eq(req));
         }
         return requests;
     }

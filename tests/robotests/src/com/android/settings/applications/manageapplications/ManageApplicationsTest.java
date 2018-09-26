@@ -200,13 +200,13 @@ public class ManageApplicationsTest {
     }
 
     @Test
-    public void shouldUseStableItemHeight_mainType_yes() {
+    public void shouldUseStableItemHeight() {
         assertThat(ManageApplications.ApplicationsAdapter.shouldUseStableItemHeight(
                 LIST_TYPE_MAIN))
                 .isTrue();
         assertThat(ManageApplications.ApplicationsAdapter.shouldUseStableItemHeight(
                 LIST_TYPE_NOTIFICATION))
-                .isFalse();
+                .isTrue();
     }
 
     @Test
