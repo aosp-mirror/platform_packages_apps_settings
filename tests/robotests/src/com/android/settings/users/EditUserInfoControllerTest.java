@@ -39,7 +39,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
@@ -50,6 +49,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -94,7 +94,7 @@ public class EditUserInfoControllerTest {
         MockitoAnnotations.initMocks(this);
         mUserManager = ShadowUserManager.getShadow();
         mUserManager.setUserInfo(0, mUserInfo);
-        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
+        mActivity = spy(ActivityController.of(new FragmentActivity()).get());
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mActivity.getLayoutInflater()).thenReturn(mInflater);
         when(mInflater.inflate(eq(R.layout.edit_user_info_dialog_content), any())).thenReturn(

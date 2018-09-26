@@ -26,13 +26,13 @@ import android.view.View;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
@@ -44,7 +44,7 @@ public class AddNetworkFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mAddNetworkFragment = spy(new AddNetworkFragment());
-        FragmentTestUtils.startFragment(mAddNetworkFragment);
+        FragmentController.setupFragment(mAddNetworkFragment);
     }
 
     @Test
