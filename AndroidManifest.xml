@@ -727,7 +727,6 @@
             android:label="@string/zen_mode_settings_title"
             android:icon="@drawable/ic_notifications"
             android:exported="true"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_SETTINGS" />
@@ -929,7 +928,6 @@
             android:label="@string/night_display_title"
             android:enabled="@*android:bool/config_nightDisplayAvailable"
             android:icon="@drawable/ic_settings_night_display"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -2616,7 +2614,6 @@
         <activity
             android:name="Settings$ZenAccessSettingsActivity"
             android:label="@string/manage_zen_access_title"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS" />
