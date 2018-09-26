@@ -106,7 +106,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         }
 
         @Override
-        public boolean isConnectable() {
+        public boolean accessProfileEnabled() {
             return true;
         }
 
