@@ -23,12 +23,14 @@ import static org.mockito.Mockito.verify;
 import android.app.Dialog;
 import android.hardware.fingerprint.Fingerprint;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
-import com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.DeleteFingerprintDialog;
+import com.android.settings.biometrics.fingerprint.FingerprintSettings
+        .FingerprintSettingsFragment.DeleteFingerprintDialog;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowFragment;
-import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +38,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowFragment.class, SettingsShadowResourcesImpl.class})
@@ -56,7 +59,8 @@ public class DeleteFingerprintDialogTest {
 
     @Test
     public void launchDialog_clickPositive_shouldDeleteFingerprint() {
-        FragmentTestUtils.startFragment(mFragment);
+        FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
 
         mFragment.onClick(mFragment.getDialog(), Dialog.BUTTON_POSITIVE);
 
@@ -65,7 +69,8 @@ public class DeleteFingerprintDialogTest {
 
     @Test
     public void launchDialog_clickNegative_shouldDoNothing() {
-        FragmentTestUtils.startFragment(mFragment);
+        FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
 
         mFragment.onClick(mFragment.getDialog(), Dialog.BUTTON_NEGATIVE);
 

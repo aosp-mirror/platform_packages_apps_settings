@@ -26,16 +26,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.XmlRes;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
@@ -46,7 +47,8 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void createFragment_shouldOnlyAddPreferencesOnce() {
         mFragment = spy(new ToggleFeaturePreferenceFragmentTestable());
-        FragmentTestUtils.startFragment(mFragment);
+        FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId*/,
+                null /* bundle */);
 
         // execute exactly once
         verify(mFragment).addPreferencesFromResource(R.xml.placeholder_prefs);

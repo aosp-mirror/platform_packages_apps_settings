@@ -32,6 +32,7 @@ import android.util.IconDrawableFactory;
 import android.util.SparseLongArray;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
@@ -48,7 +49,6 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +58,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +168,8 @@ public class RestrictedAppDetailsTest {
         final BatteryTipDialogFragment dialogFragment = mRestrictedAppDetails.createDialogFragment(
                 mAppInfo, true);
 
-        FragmentTestUtils.startFragment(dialogFragment);
+        FragmentController.setupFragment(dialogFragment, FragmentActivity.class,
+                0 /* containerViewId */, null /* bundle */);
 
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
@@ -179,7 +181,8 @@ public class RestrictedAppDetailsTest {
         final BatteryTipDialogFragment dialogFragment = mRestrictedAppDetails.createDialogFragment(
                 mAppInfo, false);
 
-        FragmentTestUtils.startFragment(dialogFragment);
+        FragmentController.setupFragment(dialogFragment, FragmentActivity.class,
+                0 /* containerViewId */, null /* bundle */);
 
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
