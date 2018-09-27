@@ -2252,7 +2252,7 @@
     <string name="battery_auto_restriction_title" msgid="6553271897488963709">"Upotreba Upravitelja baterije"</string>
     <string name="battery_auto_restriction_summary" msgid="8561335400991281062">"Otkrij kada aplikacije troše bateriju"</string>
     <string name="battery_manager_on" msgid="8643310865054362396">"Uključeno / Otkrivanje kada aplikacije troše bateriju"</string>
-    <string name="battery_manager_off" msgid="5473135235710343576">"Isključi"</string>
+    <string name="battery_manager_off" msgid="5473135235710343576">"Isključeno"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="1026141135861471129">
       <item quantity="one">Ograničena je %1$d aplikacija</item>
       <item quantity="few">Ograničene su %1$d aplikacije</item>
@@ -3498,7 +3498,7 @@
     <string name="notifications_label" msgid="2872668710589600731">"Obavještenja"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Uključeno"</string>
     <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g>/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <string name="notifications_disabled" msgid="1262114548434938079">"Isključi"</string>
+    <string name="notifications_disabled" msgid="1262114548434938079">"Isključeno"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"Isključene kategorije: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Bez zvuka"</string>
     <string name="notifications_redacted" msgid="4493588975742803160">"Osjetljivi sadržaj nije na zaključanom ekranu."</string>
@@ -3535,7 +3535,8 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Lične"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Work"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"Aplikacije: Sve"</string>
-    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"Aplikacije: Isključene"</string>
+    <!-- no translation found for filter_notif_blocked_apps (3383043508771300704) -->
+    <skip />
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"Kategorije: hitno"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"Kategorije: niska važnost"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"Kategorije: Isključene"</string>
@@ -4009,7 +4010,7 @@
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Prelazak na kameru"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Dodirnite dvaput dugme za uključivanje za brzo otvaranje kamere. Funkcionira na svakom ekranu."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Brzo otvorite kameru"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Okretanje kamere"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Obrtanje kamere"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Snimajte selfije brže"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="2513907834903543667">"Prevucite prema gore na dugmetu za Početni ekran"</string>
@@ -4215,7 +4216,7 @@
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Ne čini ništa"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"Uključeno (vibracija)"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="4472465110708640980">"Uključeno (isključen zvuk)"</string>
-    <string name="prevent_ringing_option_none_summary" msgid="5013718946609276137">"Isključi"</string>
+    <string name="prevent_ringing_option_none_summary" msgid="5013718946609276137">"Isključeno"</string>
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalji o mreži"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Naziv uređaja mogu vidjeti aplikacije na telefonu. Mogu ga vidjeti i druge osobe kada se povežete na Bluetooth uređaje ili postavite WiFi pristupnu tačku."</string>
     <string name="devices_title" msgid="7701726109334110391">"Uređaji"</string>
@@ -4223,24 +4224,16 @@
     <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Omogućite Virtuelnu ploču visoke frekventnosti"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Sve postavke"</string>
     <string name="homepage_personal_settings" msgid="3998213046366125494">"Vaše postavke"</string>
-    <!-- no translation found for cbrs_data_switch (2438108549734702331) -->
-    <skip />
-    <!-- no translation found for cbrs_data_switch_summary (1359701543634843588) -->
-    <skip />
-    <!-- no translation found for choose_network_title (5702586742615861037) -->
-    <skip />
-    <!-- no translation found for network_disconnected (2933191767567503504) -->
-    <skip />
-    <!-- no translation found for network_connected (4943925032253989621) -->
-    <skip />
-    <!-- no translation found for network_connecting (76404590784733557) -->
-    <skip />
-    <!-- no translation found for network_could_not_connect (1113813392274155369) -->
-    <skip />
-    <!-- no translation found for empty_networks_list (2578752112731781190) -->
-    <skip />
-    <!-- no translation found for network_query_error (7487714485362598410) -->
-    <skip />
-    <!-- no translation found for forbidden_network (4626592887509826545) -->
+    <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS podaci"</string>
+    <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS podaci"</string>
+    <string name="choose_network_title" msgid="5702586742615861037">"Odaberite mrežu"</string>
+    <string name="network_disconnected" msgid="2933191767567503504">"Veza je prekinuta"</string>
+    <string name="network_connected" msgid="4943925032253989621">"Povezano"</string>
+    <string name="network_connecting" msgid="76404590784733557">"Povezivanje…"</string>
+    <string name="network_could_not_connect" msgid="1113813392274155369">"Povezivanje nije uspjelo"</string>
+    <string name="empty_networks_list" msgid="2578752112731781190">"Nije pronađena nijedna mreža."</string>
+    <string name="network_query_error" msgid="7487714485362598410">"Nisu pronađene mreže. Pokušajte ponovo."</string>
+    <string name="forbidden_network" msgid="4626592887509826545">"(zabranjeno)"</string>
+    <!-- no translation found for no_sim_card (1360669528113557381) -->
     <skip />
 </resources>
