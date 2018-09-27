@@ -235,7 +235,7 @@ public class CardContentProviderTest {
                 "content://com.android.settings.slices/action/auto_rotate");
         values.put(CardDatabaseHelper.CardColumns.CATEGORY, 2);
         values.put(CardDatabaseHelper.CardColumns.PACKAGE_NAME, "com.android.settings");
-        values.put(CardDatabaseHelper.CardColumns.APP_VERSION, "1.0.0");
+        values.put(CardDatabaseHelper.CardColumns.APP_VERSION, 10001);
 
         return values;
     }
@@ -252,7 +252,7 @@ public class CardContentProviderTest {
                 "content://com.android.settings.slices/action/toggle_airplane");
         values.put(CardDatabaseHelper.CardColumns.CATEGORY, 2);
         values.put(CardDatabaseHelper.CardColumns.PACKAGE_NAME, "com.android.settings");
-        values.put(CardDatabaseHelper.CardColumns.APP_VERSION, "1.0.0");
+        values.put(CardDatabaseHelper.CardColumns.APP_VERSION, 10001);
         twoRows[1] = values;
 
         return twoRows;
