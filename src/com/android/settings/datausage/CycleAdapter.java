@@ -25,9 +25,11 @@ import android.widget.ArrayAdapter;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.net.ChartData;
+import com.android.settingslib.net.NetworkCycleData;
 
 import java.time.ZonedDateTime;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
@@ -68,7 +70,8 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
      * {@link NetworkStatsHistory} data. Always selects the newest item,
      * updating the inspection range on chartData.
      */
-     public boolean updateCycleList(NetworkPolicy policy, ChartData chartData) {
+    @Deprecated
+    public boolean updateCycleList(NetworkPolicy policy, ChartData chartData) {
         // stash away currently selected cycle to try restoring below
         final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
                 mSpinner.getSelectedItem();
@@ -131,6 +134,37 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
                 }
                 cycleEnd = cycleStart;
             }
+        }
+
+        // force pick the current cycle (first item)
+        if (getCount() > 0) {
+            final int position = findNearestPosition(previousItem);
+            mSpinner.setSelection(position);
+
+            // only force-update cycle when changed; skipping preserves any
+            // user-defined inspection region.
+            final CycleAdapter.CycleItem selectedItem = getItem(position);
+            if (!Objects.equals(selectedItem, previousItem)) {
+                mListener.onItemSelected(null, null, position, 0);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Rebuild list based on network data. Always selects the newest item,
+     * updating the inspection range on chartData.
+     */
+    public boolean updateCycleList(List<NetworkCycleData> cycleData) {
+        // stash away currently selected cycle to try restoring below
+        final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
+            mSpinner.getSelectedItem();
+        clear();
+
+        final Context context = getContext();
+        for (NetworkCycleData data : cycleData) {
+            add(new CycleAdapter.CycleItem(context, data.startTime, data.endTime));
         }
 
         // force pick the current cycle (first item)

@@ -352,7 +352,7 @@ public class DataUsageList extends DataUsageBaseFragment {
     /**
      * Bind the given {@link NetworkStats}, or {@code null} to clear list.
      */
-    public void bindStats(NetworkStats stats, int[] restrictedUids) {
+    private void bindStats(NetworkStats stats, int[] restrictedUids) {
         ArrayList<AppItem> items = new ArrayList<>();
         long largest = 0;
 
@@ -464,7 +464,7 @@ public class DataUsageList extends DataUsageBaseFragment {
      * @param entry        the network stats entry to extract data usage from.
      * @param itemCategory the item is categorized on the list view by this category. Must be
      */
-    private static long accumulate(int collapseKey, final SparseArray<AppItem> knownItems,
+    private long accumulate(int collapseKey, final SparseArray<AppItem> knownItems,
             NetworkStats.Entry entry, int itemCategory, ArrayList<AppItem> items, long largest) {
         final int uid = entry.uid;
         AppItem item = knownItems.get(collapseKey);
