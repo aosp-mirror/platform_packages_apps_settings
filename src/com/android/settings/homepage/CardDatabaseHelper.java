@@ -30,7 +30,7 @@ import androidx.annotation.VisibleForTesting;
 public class CardDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "CardDatabaseHelper";
     private static final String DATABASE_NAME = "homepage_cards.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public static final String CARD_TABLE = "cards";
 
@@ -143,7 +143,7 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
                     CardColumns.PACKAGE_NAME +
                     " TEXT NOT NULL, " +
                     CardColumns.APP_VERSION +
-                    " TEXT NOT NULL, " +
+                    " INTEGER NOT NULL, " +
                     CardColumns.TITLE_RES_NAME +
                     " TEXT, " +
                     CardColumns.TITLE_TEXT +

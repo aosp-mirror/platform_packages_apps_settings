@@ -50,7 +50,7 @@ public class ContextualCard {
     private final int mCategory;
     private final String mLocalizedToLocale;
     private final String mPackageName;
-    private final String mAppVersion;
+    private final long mAppVersion;
     private final String mTitleResName;
     private final String mTitleText;
     private final String mSummaryResName;
@@ -94,7 +94,7 @@ public class ContextualCard {
         return mPackageName;
     }
 
-    public String getAppVersion() {
+    public long getAppVersion() {
         return mAppVersion;
     }
 
@@ -172,7 +172,7 @@ public class ContextualCard {
         mLocalizedToLocale = c.getString(
                 c.getColumnIndex(CardDatabaseHelper.CardColumns.LOCALIZED_TO_LOCALE));
         mPackageName = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.PACKAGE_NAME));
-        mAppVersion = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.APP_VERSION));
+        mAppVersion = c.getLong(c.getColumnIndex(CardDatabaseHelper.CardColumns.APP_VERSION));
         mTitleResName = c.getString(
                 c.getColumnIndex(CardDatabaseHelper.CardColumns.TITLE_RES_NAME));
         mTitleText = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.TITLE_TEXT));
@@ -217,7 +217,7 @@ public class ContextualCard {
         private int mCategory;
         private String mLocalizedToLocale;
         private String mPackageName;
-        private String mAppVersion;
+        private long mAppVersion;
         private String mTitleResName;
         private String mTitleText;
         private String mSummaryResName;
@@ -264,7 +264,7 @@ public class ContextualCard {
             return this;
         }
 
-        public Builder setAppVersion(String appVersion) {
+        public Builder setAppVersion(long appVersion) {
             mAppVersion = appVersion;
             return this;
         }
