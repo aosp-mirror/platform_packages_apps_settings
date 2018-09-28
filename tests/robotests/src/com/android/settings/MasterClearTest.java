@@ -18,7 +18,6 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -51,7 +50,6 @@ import android.widget.ScrollView;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -61,6 +59,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
@@ -358,8 +357,9 @@ public class MasterClearTest {
         when(mPackageManager.resolveActivity(any(), eq(0))).thenReturn(resolveInfo);
 
         Intent actualIntent = mMasterClear.getAccountConfirmationIntent();
-        assertEquals(TEST_CONFIRMATION_PACKAGE, actualIntent.getComponent().getPackageName());
-        assertEquals(TEST_CONFIRMATION_CLASS, actualIntent.getComponent().getClassName());
+        assertThat(TEST_CONFIRMATION_PACKAGE).isEqualTo(
+                actualIntent.getComponent().getPackageName());
+        assertThat(TEST_CONFIRMATION_CLASS).isEqualTo(actualIntent.getComponent().getClassName());
     }
 
     @Test
