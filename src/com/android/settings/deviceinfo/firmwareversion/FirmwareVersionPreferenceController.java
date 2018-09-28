@@ -56,4 +56,9 @@ public class FirmwareVersionPreferenceController extends BasePreferenceControlle
         FirmwareVersionDialogFragment.show(mFragment);
         return true;
     }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
 }

@@ -48,7 +48,7 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DeviceModelPreferenceControllerTest {
 
-    private final String KEY = "device_model_key";
+    private final String KEY = "device_model";
 
     @Mock
     private Fragment mFragment;
@@ -99,6 +99,11 @@ public class DeviceModelPreferenceControllerTest {
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
         verify(fragmentManager.beginTransaction())
                 .add(any(HardwareInfoDialogFragment.class), eq(HardwareInfoDialogFragment.TAG));
+    }
+
+    @Test
+    public void isSliceable_shouldBeTrue() {
+        assertThat(mController.isSliceable()).isTrue();
     }
 
     private boolean containBuildModel(CharSequence result) {

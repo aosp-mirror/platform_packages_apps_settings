@@ -73,6 +73,11 @@ public class DeviceModelPreferenceController extends BasePreferenceController {
         return true;
     }
 
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
     public static String getDeviceModel() {
         FutureTask<String> msvSuffixTask = new FutureTask<String>(new Callable<String>() {
             @Override
