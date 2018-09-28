@@ -33,12 +33,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
-public class ReachGestureSettings extends DashboardFragment {
+public class WakeLockScreenGestureSettings extends DashboardFragment {
 
-    private static final String TAG = "ReachGestureSettings";
+    private static final String TAG = "WakeLockScreenGestureSettings";
 
     public static final String PREF_KEY_SUGGESTION_COMPLETE =
-            "pref_reach_gesture_suggestion_complete";
+            "pref_wake_lock_screen_gesture_suggestion_complete";
 
     @Override
     public void onAttach(Context context) {
@@ -48,13 +48,13 @@ public class ReachGestureSettings extends DashboardFragment {
         SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
         prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
 
-        use(ReachGesturePreferenceController.class)
+        use(WakeLockScreenGesturePreferenceController.class)
             .setConfig(new AmbientDisplayConfiguration(context));
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_GESTURE_REACH;
+        return MetricsProto.MetricsEvent.SETTINGS_GESTURE_WAKE_LOCK_SCREEN;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ReachGestureSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.reach_gesture_settings;
+        return R.xml.wake_lock_screen_gesture_settings;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -73,7 +73,7 @@ public class ReachGestureSettings extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.reach_gesture_settings;
+                    sir.xmlResId = R.xml.wake_lock_screen_gesture_settings;
                     return Arrays.asList(sir);
                 }
             };

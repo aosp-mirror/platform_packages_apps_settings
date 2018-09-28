@@ -30,19 +30,19 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ReachGestureSettingsTest {
+public class WakeLockScreenGestureSettingsTest {
 
-    private ReachGestureSettings mSettings;
+    private WakeLockScreenGestureSettings mSettings;
 
     @Before
     public void setUp() {
-        mSettings = new ReachGestureSettings();
+        mSettings = new WakeLockScreenGestureSettings();
     }
 
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-            ReachGestureSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+            WakeLockScreenGestureSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
                 RuntimeEnvironment.application, true /* enabled */);
 
         assertThat(indexRes).isNotNull();

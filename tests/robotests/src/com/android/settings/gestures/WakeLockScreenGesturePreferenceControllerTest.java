@@ -37,41 +37,41 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ReachGesturePreferenceControllerTest {
+public class WakeLockScreenGesturePreferenceControllerTest {
 
-    private static final String KEY_REACH = "gesture_reach";
+    private static final String KEY_WAKE_LOCK_SCREEN = "gesture_wake_lock_screen";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private AmbientDisplayConfiguration mAmbientDisplayConfiguration;
 
-    private ReachGesturePreferenceController mController;
+    private WakeLockScreenGesturePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new ReachGesturePreferenceController(mContext, KEY_REACH);
+        mController = new WakeLockScreenGesturePreferenceController(mContext, KEY_WAKE_LOCK_SCREEN);
         mController.setConfig(mAmbientDisplayConfiguration);
     }
 
     @Test
     public void testIsChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        when(mAmbientDisplayConfiguration.reachGestureEnabled(anyInt())).thenReturn(true);
+        when(mAmbientDisplayConfiguration.wakeLockScreenGestureEnabled(anyInt())).thenReturn(true);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void testIsChecked_configIsNotSet_shouldReturnFalse() {
         // Set the setting to be disabled.
-        when(mAmbientDisplayConfiguration.reachGestureEnabled(anyInt())).thenReturn(false);
+        when(mAmbientDisplayConfiguration.wakeLockScreenGestureEnabled(anyInt())).thenReturn(false);
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void getAvailabilityStatus_gestureNotSupported_UNSUPPORTED_ON_DEVICE() {
-        when(mAmbientDisplayConfiguration.reachGestureAvailable()).thenReturn(false);
+        when(mAmbientDisplayConfiguration.wakeLockScreenGestureAvailable()).thenReturn(false);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
         assertThat(availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE);
@@ -79,7 +79,7 @@ public class ReachGesturePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gestureSupported_AVAILABLE() {
-        when(mAmbientDisplayConfiguration.reachGestureAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.wakeLockScreenGestureAvailable()).thenReturn(true);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
         assertThat(availabilityStatus).isEqualTo(AVAILABLE);
@@ -87,15 +87,15 @@ public class ReachGesturePreferenceControllerTest {
 
     @Test
     public void isSliceableCorrectKey_returnsTrue() {
-        final ReachGesturePreferenceController controller =
-                new ReachGesturePreferenceController(mContext, "gesture_reach");
+        final WakeLockScreenGesturePreferenceController controller =
+                new WakeLockScreenGesturePreferenceController(mContext, KEY_WAKE_LOCK_SCREEN);
         assertThat(controller.isSliceable()).isTrue();
     }
 
     @Test
     public void isSliceableIncorrectKey_returnsFalse() {
-        final ReachGesturePreferenceController controller =
-                new ReachGesturePreferenceController(mContext, "bad_key");
+        final WakeLockScreenGesturePreferenceController controller =
+                new WakeLockScreenGesturePreferenceController(mContext, "bad_key");
         assertThat(controller.isSliceable()).isFalse();
     }
 }

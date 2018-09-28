@@ -18,20 +18,20 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:key="gesture_reach_screen"
-    android:title="@string/ambient_display_reach_title">
+    android:key="gesture_wake_lock_screen_screen"
+    android:title="@string/ambient_display_wake_lock_screen_title">
 
     <com.android.settings.widget.VideoPreference
-        android:key="gesture_reach_video"
-        app:animation="@raw/gesture_ambient_reach"
-        app:preview="@drawable/gesture_ambient_reach" />
+        android:key="gesture_wake_lock_screen_video"
+        app:animation="@raw/gesture_ambient_wake_lock_screen"
+        app:preview="@drawable/gesture_ambient_wake_lock_screen" />
 
     <SwitchPreference
-        android:key="gesture_reach"
-        android:title="@string/ambient_display_reach_title"
-        android:summary="@string/ambient_display_reach_summary"
+        android:key="gesture_wake_lock_screen"
+        android:title="@string/ambient_display_wake_lock_screen_title"
+        android:summary="@string/ambient_display_wake_lock_screen_summary"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.ReachGesturePreferenceController"
+        app:controller="com.android.settings.gestures.WakeLockScreenGesturePreferenceController"
         app:allowDividerAbove="true" />
 
 </PreferenceScreen>

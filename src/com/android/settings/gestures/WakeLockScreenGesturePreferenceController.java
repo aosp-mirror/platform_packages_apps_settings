@@ -16,7 +16,7 @@
 
 package com.android.settings.gestures;
 
-import static android.provider.Settings.Secure.DOZE_REACH_GESTURE;
+import static android.provider.Settings.Secure.DOZE_WAKE_LOCK_SCREEN_GESTURE;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
@@ -26,33 +26,34 @@ import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 
-public class ReachGesturePreferenceController extends GesturePreferenceController {
+public class WakeLockScreenGesturePreferenceController extends GesturePreferenceController {
 
     private static final int ON = 1;
     private static final int OFF = 0;
 
-    private static final String PREF_KEY_VIDEO = "gesture_reach_video";
-    private final String mReachUpPrefKey;
+    private static final String PREF_KEY_VIDEO = "gesture_wake_lock_screen_video";
+    private final String mWakeLockScreenPrefKey;
 
     private AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
     private final int mUserId;
 
-    public ReachGesturePreferenceController(Context context, String key) {
+    public WakeLockScreenGesturePreferenceController(Context context, String key) {
         super(context, key);
         mUserId = UserHandle.myUserId();
-        mReachUpPrefKey = key;
+        mWakeLockScreenPrefKey = key;
     }
 
-    public ReachGesturePreferenceController setConfig(AmbientDisplayConfiguration config) {
+    public WakeLockScreenGesturePreferenceController
+        setConfig(AmbientDisplayConfiguration config) {
         mAmbientConfig = config;
         return this;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // No hardware support for Reach Gesture
-        if (!getAmbientConfig().reachGestureAvailable()) {
+        // No hardware support for this Gesture
+        if (!getAmbientConfig().wakeLockScreenGestureAvailable()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
@@ -61,7 +62,7 @@ public class ReachGesturePreferenceController extends GesturePreferenceControlle
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "gesture_reach");
+        return TextUtils.equals(getPreferenceKey(), "gesture_wake_lock_screen");
     }
 
     @Override
@@ -71,17 +72,17 @@ public class ReachGesturePreferenceController extends GesturePreferenceControlle
 
     @Override
     public boolean isChecked() {
-        return getAmbientConfig().reachGestureEnabled(mUserId);
+        return getAmbientConfig().wakeLockScreenGestureEnabled(mUserId);
     }
 
     @Override
     public String getPreferenceKey() {
-        return mReachUpPrefKey;
+        return mWakeLockScreenPrefKey;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(), DOZE_REACH_GESTURE,
+        return Settings.Secure.putInt(mContext.getContentResolver(), DOZE_WAKE_LOCK_SCREEN_GESTURE,
                 isChecked ? ON : OFF);
     }
 
