@@ -184,12 +184,23 @@ public class SliceBuilderUtils {
      */
     public static CharSequence getSubtitleText(Context context,
             AbstractPreferenceController controller, SliceData sliceData) {
-        CharSequence summaryText = sliceData.getScreenTitle();
+        final boolean isDynamicSummaryAllowed = sliceData.isDynamicSummaryAllowed();
+        CharSequence summaryText = controller.getSummary();
+
+        // Priority 1 : User prefers showing the dynamic summary in slice view rather than static
+        // summary.
+        if (isDynamicSummaryAllowed && isValidSummary(context, summaryText)) {
+            return summaryText;
+        }
+
+        // Priority 2 : Show screen title.
+        summaryText = sliceData.getScreenTitle();
         if (isValidSummary(context, summaryText) && !TextUtils.equals(summaryText,
                 sliceData.getTitle())) {
             return summaryText;
         }
 
+        // Priority 3 : Show dynamic summary from preference controller.
         if (controller != null) {
             summaryText = controller.getSummary();
 
@@ -198,11 +209,13 @@ public class SliceBuilderUtils {
             }
         }
 
+        // Priority 4 : Show summary from slice data.
         summaryText = sliceData.getSummary();
         if (isValidSummary(context, summaryText)) {
             return summaryText;
         }
 
+        // Priority 5 : Show empty text.
         return "";
     }
 
@@ -217,7 +230,7 @@ public class SliceBuilderUtils {
                 .build();
     }
 
-    public static Intent  buildSearchResultPageIntent(Context context, String className, String key,
+    public static Intent buildSearchResultPageIntent(Context context, String className, String key,
             String screenTitle, int sourceMetricsCategory) {
         final Bundle args = new Bundle();
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);

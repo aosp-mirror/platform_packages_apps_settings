@@ -74,6 +74,8 @@ public class SliceData {
 
     private final boolean mIsPlatformDefined;
 
+    private final boolean mIsDynamicSummaryAllowed;
+
     public String getKey() {
         return mKey;
     }
@@ -118,6 +120,10 @@ public class SliceData {
         return mIsPlatformDefined;
     }
 
+    public boolean isDynamicSummaryAllowed() {
+        return mIsDynamicSummaryAllowed;
+    }
+
     private SliceData(Builder builder) {
         mKey = builder.mKey;
         mTitle = builder.mTitle;
@@ -130,6 +136,7 @@ public class SliceData {
         mPreferenceController = builder.mPrefControllerClassName;
         mSliceType = builder.mSliceType;
         mIsPlatformDefined = builder.mIsPlatformDefined;
+        mIsDynamicSummaryAllowed = builder.mIsDynamicSummaryAllowed;
     }
 
     @Override
@@ -168,6 +175,8 @@ public class SliceData {
         private int mSliceType;
 
         private boolean mIsPlatformDefined;
+
+        private boolean mIsDynamicSummaryAllowed;
 
         public Builder setKey(String key) {
             mKey = key;
@@ -221,6 +230,11 @@ public class SliceData {
 
         public Builder setPlatformDefined(boolean isPlatformDefined) {
             mIsPlatformDefined = isPlatformDefined;
+            return this;
+        }
+
+        public Builder setDynamicSummaryAllowed(boolean isDynamicSummaryAllowed) {
+            mIsDynamicSummaryAllowed = isDynamicSummaryAllowed;
             return this;
         }
 

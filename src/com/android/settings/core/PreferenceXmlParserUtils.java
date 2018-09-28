@@ -69,7 +69,8 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_PREF_TITLE,
             MetadataFlag.FLAG_NEED_PREF_SUMMARY,
             MetadataFlag.FLAG_NEED_PREF_ICON,
-            MetadataFlag.FLAG_NEED_SEARCHABLE})
+            MetadataFlag.FLAG_NEED_SEARCHABLE,
+            MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MetadataFlag {
         int FLAG_INCLUDE_PREF_SCREEN = 1;
@@ -82,6 +83,7 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PLATFORM_SLICE_FLAG = 1 << 7;
         int FLAG_NEED_KEYWORDS = 1 << 8;
         int FLAG_NEED_SEARCHABLE = 1 << 9;
+        int FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE = 1 << 10;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -93,6 +95,8 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_PLATFORM_SLICE_FLAG = "platform_slice";
     public static final String METADATA_KEYWORDS = "keywords";
     public static final String METADATA_SEARCHABLE = "searchable";
+    public static final String METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE =
+            "allow_dynamic_summary_in_slice";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -228,6 +232,10 @@ public class PreferenceXmlParserUtils {
                 preferenceMetadata.putBoolean(METADATA_SEARCHABLE,
                         isSearchable(preferenceAttributes));
             }
+            if (hasFlag(flags, MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE)) {
+                preferenceMetadata.putBoolean(METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
+                        isDynamicSummaryAllowed(preferenceAttributes));
+            }
             metadata.add(preferenceMetadata);
 
             preferenceAttributes.recycle();
@@ -310,6 +318,11 @@ public class PreferenceXmlParserUtils {
 
     private static boolean isSearchable(TypedArray styledAttributes) {
         return styledAttributes.getBoolean(R.styleable.Preference_searchable, true /* default */);
+    }
+
+    private static boolean isDynamicSummaryAllowed(TypedArray styledAttributes) {
+        return styledAttributes.getBoolean(R.styleable.Preference_allowDynamicSummaryInSlice,
+                false /* default */);
     }
 
     private static String getKeywords(TypedArray styleAttributes) {
