@@ -31,19 +31,19 @@ import com.android.settings.core.TogglePreferenceController;
  * Preference controller for Face settings page controlling the ability to unlock the phone
  * with face.
  */
-public class FaceSettingsUnlockPreferenceController extends TogglePreferenceController {
+public class FaceSettingsKeyguardPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY = "security_settings_face_unlock";
+    private static final String KEY = "security_settings_face_keyguard";
 
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final int DEFAULT = ON;  // face unlock is enabled on keyguard by default
 
-    public FaceSettingsUnlockPreferenceController(Context context, String preferenceKey) {
+    public FaceSettingsKeyguardPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
-    public FaceSettingsUnlockPreferenceController(Context context) {
+    public FaceSettingsKeyguardPreferenceController(Context context) {
         this(context, KEY);
     }
 

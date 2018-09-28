@@ -84,7 +84,7 @@ public final class SetNewPasswordControllerTest {
         when(mFingerprintManager.preEnroll()).thenReturn(FINGERPRINT_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FINGERPRINT))).thenReturn(true);
 
-        when(mFaceManager.preEnroll()).thenReturn(FACE_CHALLENGE);
+        when(mFaceManager.generateChallenge()).thenReturn(FACE_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FACE))).thenReturn(true);
     }
 
