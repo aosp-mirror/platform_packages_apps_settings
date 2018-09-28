@@ -156,7 +156,7 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
      * Rebuild list based on network data. Always selects the newest item,
      * updating the inspection range on chartData.
      */
-    public boolean updateCycleList(List<NetworkCycleData> cycleData) {
+    public boolean updateCycleList(List<? extends NetworkCycleData> cycleData) {
         // stash away currently selected cycle to try restoring below
         final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
             mSpinner.getSelectedItem();
@@ -164,7 +164,7 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
 
         final Context context = getContext();
         for (NetworkCycleData data : cycleData) {
-            add(new CycleAdapter.CycleItem(context, data.startTime, data.endTime));
+            add(new CycleAdapter.CycleItem(context, data.getStartTime(), data.getEndTime()));
         }
 
         // force pick the current cycle (first item)
