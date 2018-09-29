@@ -52,6 +52,7 @@ public interface SearchFeatureProvider {
         return "com.android.settings.intelligence";
     }
 
+
     /**
      * Initializes the search toolbar.
      */
