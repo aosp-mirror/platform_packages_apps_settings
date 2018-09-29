@@ -61,8 +61,8 @@ import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.ChartDataLoaderCompat;
-import com.android.settingslib.net.NetworkCycleDataLoader;
-import com.android.settingslib.net.NetworkCycleData;
+import com.android.settingslib.net.NetworkCycleChartDataLoader;
+import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkStatsSummaryLoader;
 import com.android.settingslib.net.UidDetailProvider;
 
@@ -107,7 +107,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
     int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     @VisibleForTesting
     int mNetworkType;
-    private List<NetworkCycleData> mCycleData;
+    private List<NetworkCycleChartData> mCycleData;
 
     private LoadingViewController mLoadingViewController;
     private UidDetailProvider mUidDetailProvider;
@@ -322,7 +322,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
                 mNetworkStatsDetailCallbacks);
 
         final long totalBytes = mCycleData != null
-            ? mCycleData.get(mCycleSpinner.getSelectedItemPosition()).totalUsage : 0;
+            ? mCycleData.get(mCycleSpinner.getSelectedItemPosition()).getTotalUsage() : 0;
         final CharSequence totalPhrase = DataUsageUtils.formatDataUsage(getActivity(), totalBytes);
         mUsageAmount.setTitle(getString(R.string.data_used_template, totalPhrase));
     }
@@ -485,11 +485,11 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         }
     };
 
-    private final LoaderCallbacks<List<NetworkCycleData>> mNetworkCycleDataCallbacks =
-            new LoaderCallbacks<List<NetworkCycleData>>() {
+    private final LoaderCallbacks<List<NetworkCycleChartData>> mNetworkCycleDataCallbacks =
+            new LoaderCallbacks<List<NetworkCycleChartData>>() {
         @Override
-        public Loader<List<NetworkCycleData>> onCreateLoader(int id, Bundle args) {
-            return new NetworkCycleDataLoader.Builder(getContext())
+        public Loader<List<NetworkCycleChartData>> onCreateLoader(int id, Bundle args) {
+            return NetworkCycleChartDataLoader.builder(getContext())
                     .setNetworkPolicy(services.mPolicyEditor.getPolicy(mTemplate))
                     .setNetworkType(mNetworkType)
                     .setNetworkTemplate(mTemplate)
@@ -498,8 +498,8 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         }
 
         @Override
-        public void onLoadFinished(Loader<List<NetworkCycleData>> loader,
-                List<NetworkCycleData> data) {
+        public void onLoadFinished(Loader<List<NetworkCycleChartData>> loader,
+                List<NetworkCycleChartData> data) {
             mLoadingViewController.showContent(false /* animate */);
             mCycleData = data;
             // calculate policy cycles based on available data
@@ -507,7 +507,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         }
 
         @Override
-        public void onLoaderReset(Loader<List<NetworkCycleData>> loader) {
+        public void onLoaderReset(Loader<List<NetworkCycleChartData>> loader) {
             mCycleData = null;
         }
     };

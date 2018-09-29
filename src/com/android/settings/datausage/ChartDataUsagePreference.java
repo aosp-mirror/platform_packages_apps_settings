@@ -24,7 +24,6 @@ import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.FeatureFlagUtils;
-import android.util.Pair;
 import android.util.SparseIntArray;
 
 import androidx.annotation.VisibleForTesting;
@@ -35,6 +34,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.widget.UsageView;
+import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleData;
 
 import java.util.List;
@@ -53,7 +53,7 @@ public class ChartDataUsagePreference extends Preference {
     private long mEnd;
     @Deprecated
     private NetworkStatsHistory mNetwork;
-    private NetworkCycleData mNetworkCycleData;
+    private NetworkCycleChartData mNetworkCycleChartData;
     private int mSecondaryColor;
     private int mSeriesColor;
 
@@ -70,7 +70,7 @@ public class ChartDataUsagePreference extends Preference {
         super.onBindViewHolder(holder);
         final UsageView chart = (UsageView) holder.findViewById(R.id.data_usage);
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
-            if (mNetworkCycleData == null) {
+            if (mNetworkCycleChartData == null) {
                 return;
             }
         } else {
@@ -83,7 +83,7 @@ public class ChartDataUsagePreference extends Preference {
         chart.clearPaths();
         chart.configureGraph(toInt(mEnd - mStart), top);
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
-            calcPoints(chart, mNetworkCycleData.usageBuckets);
+            calcPoints(chart, mNetworkCycleChartData.getUsageBuckets());
         } else {
             calcPoints(chart);
         }
@@ -98,7 +98,7 @@ public class ChartDataUsagePreference extends Preference {
     public int getTop() {
         long totalData = 0;
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
-            totalData = mNetworkCycleData.totalUsage;
+            totalData = mNetworkCycleChartData.getTotalUsage();
         } else {
             NetworkStatsHistory.Entry entry = null;
             final int start = mNetwork.getIndexBefore(mStart);
@@ -158,14 +158,14 @@ public class ChartDataUsagePreference extends Preference {
 
         long totalData = 0;
         for (NetworkCycleData data : usageSummary) {
-            final long startTime = data.startTime;
-            final long endTime = data.endTime;
+            final long startTime = data.getStartTime();
+            final long endTime = data.getEndTime();
 
             // increment by current bucket total
-            totalData += data.totalUsage;
+            totalData += data.getTotalUsage();
 
             if (points.size() == 1) {
-                points.put(toInt(data.startTime - mStart) - 1, -1);
+                points.put(toInt(startTime - mStart) - 1, -1);
             }
             points.put(toInt(startTime - mStart + 1), (int) (totalData / RESOLUTION));
             points.put(toInt(endTime - mStart), (int) (totalData / RESOLUTION));
@@ -241,10 +241,10 @@ public class ChartDataUsagePreference extends Preference {
         notifyChanged();
     }
 
-    public void setNetworkCycleData(NetworkCycleData data) {
-        mNetworkCycleData = data;
-        mStart = data.startTime;
-        mEnd = data.endTime;
+    public void setNetworkCycleData(NetworkCycleChartData data) {
+        mNetworkCycleChartData = data;
+        mStart = data.getStartTime();
+        mEnd = data.getEndTime();
         notifyChanged();
     }
 
