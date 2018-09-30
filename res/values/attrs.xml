@@ -75,6 +75,8 @@
         <attr name="controller" format="string" />
         <!-- {@code true} when the controller declared represents a slice from {@link android.app.SettingsSliceContract} -->
         <attr name="platform_slice" format="boolean" />
+        <!-- Whether or not dynamic summary text from PreferenceController is allowed when creating slice object, by default it's false. -->
+        <attr name="allowDynamicSummaryInSlice" format="boolean" />
     </declare-styleable>
 
     <!-- For DotsPageIndicator -->

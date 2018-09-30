@@ -23,7 +23,6 @@ import android.os.storage.VolumeInfo;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 
@@ -32,6 +31,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -44,8 +44,12 @@ public class PrivateVolumeUnmountTest {
     public void setUp() {
         Bundle bundle = new Bundle();
         bundle.putString(VolumeInfo.EXTRA_VOLUME_ID, "id");
-        mFragment = Robolectric.buildFragment(PrivateVolumeUnmount.class,
-                bundle).create().start().resume().get();
+        mFragment = FragmentController.of(new PrivateVolumeUnmount(), bundle)
+                .create()
+                .start()
+                .resume()
+                .visible()
+                .get();
     }
 
     @After
@@ -57,7 +61,7 @@ public class PrivateVolumeUnmountTest {
     public void OnClickListener_shouldCallUnmount() {
         assertThat(ShadowStorageManager.isUnmountCalled()).isFalse();
 
-        Button confirm = (Button) mFragment.getView().findViewById(R.id.confirm);
+        final Button confirm = mFragment.getView().findViewById(R.id.confirm);
 
         confirm.performClick();
 

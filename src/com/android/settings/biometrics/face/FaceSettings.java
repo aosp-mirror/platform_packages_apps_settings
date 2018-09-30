@@ -16,11 +16,16 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.app.Activity.RESULT_OK;
+
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
 
@@ -30,6 +35,7 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.VideoPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -47,7 +53,11 @@ public class FaceSettings extends DashboardFragment {
     private static final String TAG = "FaceSettings";
     private static final String KEY_LAUNCHED_CONFIRM = "key_launched_confirm";
 
+    private FaceManager mFaceManager;
+    private int mUserId;
     private boolean mLaunchedConfirm;
+    private byte[] mToken;
+    private FaceSettingsAttentionPreferenceController mAttentionController;
 
     public static boolean isAvailable(Context context) {
         FaceManager manager = Utils.getFaceManagerOrNull(context);
@@ -79,14 +89,20 @@ public class FaceSettings extends DashboardFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mFaceManager = getPrefContext().getSystemService(FaceManager.class);
+        mUserId = getActivity().getIntent().getIntExtra(
+                Intent.EXTRA_USER_ID, UserHandle.myUserId());
+
         if (savedInstanceState != null) {
             mLaunchedConfirm = savedInstanceState.getBoolean(KEY_LAUNCHED_CONFIRM, false);
         }
 
         if (!mLaunchedConfirm) {
+            final long challenge = mFaceManager.generateChallenge();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(R.string.security_settings_face_preference_title))) {
+                    getString(R.string.security_settings_face_preference_title),
+                    null, null, challenge, mUserId)) {
                 Log.e(TAG, "Password not set");
                 finish();
             }
@@ -94,16 +110,59 @@ public class FaceSettings extends DashboardFragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CONFIRM_REQUEST) {
+            if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
+                // The pin/pattern/password was set.
+                if (data != null) {
+                    mToken = data.getByteArrayExtra(
+                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                    if (mToken != null) {
+                        mAttentionController.setToken(mToken);
+                    }
+                }
+            }
+        }
+
+        if (mToken == null) {
+            // Didn't get an authentication, finishing
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (getActivity().isFinishing()) {
+            final int result = mFaceManager.revokeChallenge();
+            if (result < 0) {
+                Log.w(TAG, "revokeChallenge failed, result: " + result);
+            }
+        }
+    }
+
+    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
+        final List<AbstractPreferenceController> controllers =
+                buildPreferenceControllers(context, getSettingsLifecycle());
+        for (AbstractPreferenceController controller : controllers) {
+            if (controller instanceof FaceSettingsAttentionPreferenceController) {
+                mAttentionController = (FaceSettingsAttentionPreferenceController) controller;
+                break;
+            }
+        }
+
+        return controllers;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new FaceSettingsVideoPreferenceController(context));
         controllers.add(new FaceSettingsImprovePreferenceController(context));
-        controllers.add(new FaceSettingsUnlockPreferenceController(context));
+        controllers.add(new FaceSettingsKeyguardPreferenceController(context));
+        controllers.add(new FaceSettingsAppPreferenceController(context));
+        controllers.add(new FaceSettingsAttentionPreferenceController(context));
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
         controllers.add(new FaceSettingsFooterPreferenceController(context));
         return controllers;

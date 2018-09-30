@@ -1,7 +1,6 @@
 package com.android.settings.deviceinfo.deviceinfo;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -9,12 +8,11 @@ import android.content.DialogInterface;
 
 import com.android.settings.deviceinfo.aboutphone.DeviceNameWarningDialog;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
-import com.android.settings.testutils.FragmentController;
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DeviceNameWarningDialogTest {
@@ -23,7 +21,7 @@ public class DeviceNameWarningDialogTest {
     @Test
     public void onClick_okSetsName() {
         final FragmentController<DeviceNameWarningDialog> fragmentController =
-                Robolectric.buildFragment(DeviceNameWarningDialog.class);
+                FragmentController.of(new DeviceNameWarningDialog());
         final DeviceNameWarningDialog fragment = spy(fragmentController.get());
         final MyDeviceInfoFragment deviceInfoFragment = mock(MyDeviceInfoFragment.class);
         fragment.setTargetFragment(deviceInfoFragment, 0);
@@ -36,7 +34,7 @@ public class DeviceNameWarningDialogTest {
     @Test
     public void onClick_cancelDoesNothing() {
         final FragmentController<DeviceNameWarningDialog> fragmentController =
-                Robolectric.buildFragment(DeviceNameWarningDialog.class);
+                FragmentController.of(new DeviceNameWarningDialog());
         final DeviceNameWarningDialog fragment = spy(fragmentController.get());
         final MyDeviceInfoFragment deviceInfoFragment = mock(MyDeviceInfoFragment.class);
         fragment.setTargetFragment(deviceInfoFragment, 0);

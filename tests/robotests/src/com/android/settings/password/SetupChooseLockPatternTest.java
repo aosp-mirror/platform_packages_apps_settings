@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.view.View;
@@ -36,7 +37,6 @@ import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
@@ -47,6 +47,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
@@ -72,14 +73,13 @@ public class SetupChooseLockPatternTest {
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
 
-        mActivity = Robolectric.buildActivity(
-                SetupChooseLockPattern.class,
+        final Intent intent =
                 SetupChooseLockPattern.modifyIntentForSetup(
                         application,
                         new IntentBuilder(application)
                                 .setUserId(UserHandle.myUserId())
-                                .build()))
-                .setup().get();
+                                .build());
+        mActivity = ActivityController.of(new SetupChooseLockPattern(), intent).setup().get();
     }
 
     @Test
@@ -173,16 +173,17 @@ public class SetupChooseLockPatternTest {
 
     @Test
     public void skipButton_shouldNotBeVisible_duringFingerprintFlow() {
-        mActivity = Robolectric.buildActivity(
-                SetupChooseLockPattern.class,
+        final Intent intent =
                 SetupChooseLockPattern.modifyIntentForSetup(
                         application,
                         new IntentBuilder(application)
                                 .setUserId(UserHandle.myUserId())
                                 .setForFingerprint(true)
-                                .build()))
-                .setup().get();
+                                .build());
+
+        mActivity = ActivityController.of(new SetupChooseLockPattern(), intent).setup().get();
         Button skipButton = mActivity.findViewById(R.id.skip_button);
+
         assertThat(skipButton).isNotNull();
         assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
     }

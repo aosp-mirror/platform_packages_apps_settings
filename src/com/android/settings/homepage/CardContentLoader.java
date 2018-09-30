@@ -17,16 +17,21 @@
 package com.android.settings.homepage;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.homepage.deviceinfo.DataUsageSlice;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
+    private static final String TAG = "CardContentLoader";
     static final int CARD_CONTENT_LOADER_ID = 1;
 
     private Context mContext;
@@ -49,9 +54,9 @@ public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
     @Override
     public List<ContextualCard> loadInBackground() {
         final List<ContextualCard> result = new ArrayList<>();
-        try (Cursor cursor = CardDatabaseHelper.getInstance(mContext).getContextualCards()) {
+        try (Cursor cursor = getContextualCardsFromProvider()) {
             if (cursor.getCount() == 0) {
-                //TODO(b/113372471): Load Default static cards and return 3 static cards
+                result.addAll(createStaticCards());
                 return result;
             }
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
@@ -64,5 +69,59 @@ public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
             }
         }
         return result;
+    }
+
+    @VisibleForTesting
+    Cursor getContextualCardsFromProvider() {
+        return CardDatabaseHelper.getInstance(mContext).getContextualCards();
+    }
+
+    @VisibleForTesting
+    List<ContextualCard> createStaticCards() {
+        final long appVersionCode = getAppVersionCode();
+        final String packageName = mContext.getPackageName();
+        final double rankingScore = 0.0;
+        final List<ContextualCard> result = new ArrayList() {{
+            add(new ContextualCard.Builder()
+                    .setSliceUri(DataUsageSlice.DATA_USAGE_CARD_URI.toString())
+                    .setName(packageName + "/" + DataUsageSlice.PATH_DATA_USAGE_CARD)
+                    .setPackageName(packageName)
+                    .setRankingScore(rankingScore)
+                    .setAppVersion(appVersionCode)
+                    .setCardType(ContextualCard.CardType.SLICE)
+                    .setIsHalfWidth(true)
+                    .build());
+            //TODO(b/115971399): Will change following values of SliceUri and Name
+            // after landing these slice cards.
+            add(new ContextualCard.Builder()
+                    .setSliceUri("content://com.android.settings.slices/intent/battery_card")
+                    .setName(packageName + "/" + "battery_card")
+                    .setPackageName(packageName)
+                    .setRankingScore(rankingScore)
+                    .setAppVersion(appVersionCode)
+                    .setCardType(ContextualCard.CardType.SLICE)
+                    .setIsHalfWidth(true)
+                    .build());
+            add(new ContextualCard.Builder()
+                    .setSliceUri("content://com.android.settings.slices/intent/device_info_card")
+                    .setName(packageName + "/" + "device_info_card")
+                    .setPackageName(packageName)
+                    .setRankingScore(rankingScore)
+                    .setAppVersion(appVersionCode)
+                    .setCardType(ContextualCard.CardType.SLICE)
+                    .setIsHalfWidth(true)
+                    .build());
+        }};
+        return result;
+    }
+
+    private long getAppVersionCode() {
+        try {
+            return mContext.getPackageManager().getPackageInfo(mContext.getPackageName(),
+                    0 /* flags */).getLongVersionCode();
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Invalid package name for context", e);
+        }
+        return -1L;
     }
 }

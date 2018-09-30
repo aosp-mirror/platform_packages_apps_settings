@@ -25,7 +25,6 @@ import android.os.storage.VolumeInfo;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 
@@ -36,6 +35,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -49,8 +49,12 @@ public class PrivateVolumeFormatTest {
     public void setUp() {
         final Bundle bundle = new Bundle();
         bundle.putString(VolumeInfo.EXTRA_VOLUME_ID, "id");
-        mFragment = Robolectric.buildFragment(PrivateVolumeFormat.class,
-                bundle).create().start().resume().get();
+        mFragment = FragmentController.of(new PrivateVolumeFormat(), bundle)
+                .create()
+                .start()
+                .resume()
+                .visible()
+                .get();
         mShadowActivity = Shadows.shadowOf(mFragment.getActivity());
     }
 

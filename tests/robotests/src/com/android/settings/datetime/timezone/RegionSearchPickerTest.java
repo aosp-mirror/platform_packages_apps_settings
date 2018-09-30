@@ -32,13 +32,13 @@ import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.ItemViewHolder;
 import com.android.settings.datetime.timezone.RegionSearchPicker.RegionItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import libcore.util.CountryZonesFinder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;

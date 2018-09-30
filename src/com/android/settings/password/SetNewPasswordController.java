@@ -148,7 +148,7 @@ final class SetNewPasswordController {
 
     private Bundle getFaceChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        long challenge = mFaceManager.preEnroll();
+        long challenge = mFaceManager.generateChallenge();
         chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(

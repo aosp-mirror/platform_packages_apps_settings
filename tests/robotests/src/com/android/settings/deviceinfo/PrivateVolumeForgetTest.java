@@ -28,7 +28,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.deviceinfo.PrivateVolumeForget.ForgetConfirmFragment;
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
@@ -38,6 +37,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowStorageManager.class, SettingsShadowResourcesImpl.class})
@@ -50,8 +50,12 @@ public class PrivateVolumeForgetTest {
     public void setUp() {
         final Bundle bundle = new Bundle();
         bundle.putString(VolumeRecord.EXTRA_FS_UUID, "id");
-        mFragment = Robolectric.buildFragment(PrivateVolumeForget.class,
-                bundle).create().start().resume().get();
+        mFragment = FragmentController.of(new PrivateVolumeForget(), bundle)
+                .create()
+                .start()
+                .resume()
+                .visible()
+                .get();
         mActivity = mFragment.getActivity();
     }
 

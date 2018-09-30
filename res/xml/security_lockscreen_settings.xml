@@ -70,6 +70,12 @@
             android:fragment="com.android.settings.gestures.PickupGestureSettings"
             settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
+        <Preference
+            android:key="ambient_display_wake_screen"
+            android:title="@string/ambient_display_wake_screen_title"
+            android:fragment="com.android.settings.gestures.WakeScreenGestureSettings"
+            settings:controller="com.android.settings.gestures.WakeScreenGesturePreferenceController" />
+
         <SwitchPreference
             android:key="ambient_display_notification"
             android:title="@string/doze_title"

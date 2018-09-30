@@ -16,6 +16,8 @@
 
 package com.android.settings.slices;
 
+import static com.android.settings.core.PreferenceXmlParserUtils
+        .METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
@@ -186,7 +188,8 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_TITLE
                             | MetadataFlag.FLAG_NEED_PREF_ICON
                             | MetadataFlag.FLAG_NEED_PREF_SUMMARY
-                            | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG);
+                            | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG
+                            | MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE);
 
             for (Bundle bundle : metadata) {
                 // TODO (b/67996923) Non-controller Slices should become intent-only slices.
@@ -203,6 +206,8 @@ class SliceDataConverter {
                 final int sliceType = SliceBuilderUtils.getSliceType(mContext, controllerClassName,
                         key);
                 final boolean isPlatformSlice = bundle.getBoolean(METADATA_PLATFORM_SLICE_FLAG);
+                final boolean isDynamicSummaryAllowed = bundle.getBoolean(
+                        METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE);
 
                 final SliceData xmlSlice = new SliceData.Builder()
                         .setKey(key)
@@ -214,6 +219,7 @@ class SliceDataConverter {
                         .setFragmentName(fragmentName)
                         .setSliceType(sliceType)
                         .setPlatformDefined(isPlatformSlice)
+                        .setDynamicSummaryAllowed(isDynamicSummaryAllowed)
                         .build();
 
                 final BasePreferenceController controller =

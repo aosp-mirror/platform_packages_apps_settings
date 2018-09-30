@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -93,6 +93,12 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * {@link SliceData.SliceType} representing the inline type of the result.
          */
         String SLICE_TYPE = "slice_type";
+
+        /**
+         * Boolean flag, {@code true} when the slice object prefers using the dynamic summary from
+         * preference controller.
+         */
+        String ALLOW_DYNAMIC_SUMMARY_IN_SLICE = "allow_dynamic_summary_in_slice";
     }
 
     private static final String CREATE_SLICES_TABLE =
@@ -117,6 +123,8 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.PLATFORM_SLICE +
                     ", " +
                     IndexColumns.SLICE_TYPE +
+                    ", " +
+                    IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE +
                     ");";
 
     private final Context mContext;

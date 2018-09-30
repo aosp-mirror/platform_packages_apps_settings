@@ -14,44 +14,38 @@
  * limitations under the License.
  */
 
-package com.android.settings.homepage;
-
-import static com.android.settings.homepage.SettingsHomepageActivity.PERSONAL_SETTINGS_TAG;
+package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
-import android.util.FeatureFlagUtils;
+import android.provider.SearchIndexableResource;
 
-import androidx.fragment.app.Fragment;
-
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-public class SettingsHomepageActivityTest {
+import java.util.List;
 
-    private Context mContext;
-    private SettingsHomepageActivity mActivity;
+@RunWith(SettingsRobolectricTestRunner.class)
+public class WakeLockScreenGestureSettingsTest {
+
+    private WakeLockScreenGestureSettings mSettings;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DYNAMIC_HOMEPAGE, true);
+        mSettings = new WakeLockScreenGestureSettings();
     }
 
     @Test
-    public void launchHomepage_shouldOpenPersonalSettings() {
-        mActivity = Robolectric.setupActivity(SettingsHomepageActivity.class);
-        final Fragment fragment = mActivity.getSupportFragmentManager()
-                .findFragmentByTag(PERSONAL_SETTINGS_TAG);
+    public void testSearchIndexProvider_shouldIndexResource() {
+        final List<SearchIndexableResource> indexRes =
+            WakeLockScreenGestureSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                RuntimeEnvironment.application, true /* enabled */);
 
-        assertThat(fragment).isInstanceOf(PersonalSettingsFragment.class);
+        assertThat(indexRes).isNotNull();
+        assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());
     }
 }

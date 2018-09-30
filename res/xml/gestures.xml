@@ -28,10 +28,16 @@
         settings:controller="com.android.settings.gestures.AssistGestureSettingsPreferenceController" />
 
     <Preference
-        android:key="gesture_reach_summary"
-        android:title="@string/ambient_display_reach_title"
-        android:fragment="com.android.settings.gestures.ReachGestureSettings"
-        settings:controller="com.android.settings.gestures.ReachGesturePreferenceController" />
+        android:key="gesture_wake_screen_input_summary"
+        android:title="@string/ambient_display_wake_screen_title"
+        android:fragment="com.android.settings.gestures.WakeScreenGestureSettings"
+        settings:controller="com.android.settings.gestures.WakeScreenGesturePreferenceController" />
+
+    <Preference
+        android:key="gesture_wake_lock_screen_summary"
+        android:title="@string/ambient_display_wake_lock_screen_title"
+        android:fragment="com.android.settings.gestures.WakeLockScreenGestureSettings"
+        settings:controller="com.android.settings.gestures.WakeLockScreenGesturePreferenceController" />
 
     <Preference
         android:key="gesture_swipe_down_fingerprint_input_summary"
