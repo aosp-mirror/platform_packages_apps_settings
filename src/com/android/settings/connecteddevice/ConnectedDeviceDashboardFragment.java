@@ -15,7 +15,6 @@
  */
 package com.android.settings.connecteddevice;
 
-import android.app.Activity;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
@@ -24,7 +23,6 @@ import androidx.annotation.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -91,35 +89,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
         use(DiscoverableFooterPreferenceController.class).init(this);
     }
-
-    @VisibleForTesting
-    static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                mSummaryLoader.setSummary(this, mContext.getText(AdvancedConnectedDeviceController.
-                        getConnectedDevicesSummaryResourceId(mContext)));
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 
     /**
      * For Search.

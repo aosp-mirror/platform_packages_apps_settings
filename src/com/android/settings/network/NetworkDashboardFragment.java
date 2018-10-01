@@ -15,29 +15,20 @@
  */
 package com.android.settings.network;
 
-import static android.provider.Settings.ACTION_DATA_USAGE_SETTINGS;
 import static com.android.settings.network.MobilePlanPreferenceController
         .MANAGE_MOBILE_PLAN_DIALOG_ID;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
-import android.text.BidiFormatter;
-import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
@@ -48,7 +39,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.BooleanSupplier;
 import java.util.List;
 
 @SearchIndexable
@@ -152,84 +142,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         }
         return 0;
     }
-
-    // TODO(b/110405144): Remove SummaryProvider
-    @VisibleForTesting
-    static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-        private final WifiMasterSwitchPreferenceController mWifiPreferenceController;
-        private final MobileNetworkPreferenceController mMobileNetworkPreferenceController;
-        private final TetherPreferenceController mTetherPreferenceController;
-        private final BooleanSupplier mHasDataUsageActivity;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            this(context, summaryLoader,
-                    new WifiMasterSwitchPreferenceController(context, null),
-                    new MobileNetworkPreferenceController(context),
-                    new TetherPreferenceController(context, null /* lifecycle */),
-                    () -> {
-                        final Intent intent = new Intent(ACTION_DATA_USAGE_SETTINGS);
-                        final PackageManager pm = context.getPackageManager();
-                        return intent.resolveActivity(pm) != null;
-                    });
-        }
-
-        @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-        SummaryProvider(Context context, SummaryLoader summaryLoader,
-                WifiMasterSwitchPreferenceController wifiPreferenceController,
-                MobileNetworkPreferenceController mobileNetworkPreferenceController,
-                TetherPreferenceController tetherPreferenceController,
-                BooleanSupplier hasDataUsageActivity) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-            mWifiPreferenceController = wifiPreferenceController;
-            mMobileNetworkPreferenceController = mobileNetworkPreferenceController;
-            mTetherPreferenceController = tetherPreferenceController;
-            mHasDataUsageActivity = hasDataUsageActivity;
-        }
-
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                final String wifiSummary = BidiFormatter.getInstance()
-                    .unicodeWrap(mContext.getString(R.string.wifi_settings_title));
-                final String mobileSummary = mContext.getString(
-                    R.string.network_dashboard_summary_mobile);
-                final String dataUsageSummary = mContext.getString(
-                    R.string.network_dashboard_summary_data_usage);
-                final String hotspotSummary = mContext.getString(
-                    R.string.network_dashboard_summary_hotspot);
-
-                final List<String> summaries = new ArrayList<>();
-                if (mWifiPreferenceController.isAvailable() && !TextUtils.isEmpty(wifiSummary)) {
-                    summaries.add(wifiSummary);
-                }
-                if (mMobileNetworkPreferenceController.isAvailable() && !TextUtils.isEmpty(mobileSummary)) {
-                    summaries.add(mobileSummary);
-                }
-                if (!TextUtils.isEmpty(dataUsageSummary) && mHasDataUsageActivity.getAsBoolean()) {
-                    summaries.add(dataUsageSummary);
-                }
-                if (mTetherPreferenceController.isAvailable() && !TextUtils.isEmpty(hotspotSummary)) {
-                    summaries.add(hotspotSummary);
-                }
-                mSummaryLoader.setSummary(this, ListFormatter.getInstance().format(summaries));
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
-
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {

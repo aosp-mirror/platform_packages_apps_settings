@@ -18,21 +18,16 @@ package com.android.settings.security;
 import static com.android.settings.security.EncryptionStatusPreferenceController
         .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.face.FaceManager;
-import android.hardware.fingerprint.FingerprintManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
 import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -164,46 +159,6 @@ public class SecuritySettings extends DashboardFragment {
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* host*/);
-                }
-            };
-
-    static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                final FingerprintManager fpm =
-                        Utils.getFingerprintManagerOrNull(mContext);
-                final FaceManager faceManager =
-                        Utils.getFaceManagerOrNull(mContext);
-                if (faceManager != null && faceManager.isHardwareDetected()) {
-                    mSummaryLoader.setSummary(this,
-                            mContext.getString(R.string.security_dashboard_summary_face));
-                } else if (fpm != null && fpm.isHardwareDetected()) {
-                    mSummaryLoader.setSummary(this,
-                            mContext.getString(R.string.security_dashboard_summary));
-                } else {
-                    mSummaryLoader.setSummary(this, mContext.getString(
-                            R.string.security_dashboard_summary_no_fingerprint));
-                }
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
-            new SummaryLoader.SummaryProviderFactory() {
-                @Override
-                public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                        SummaryLoader summaryLoader) {
-                    return new SummaryProvider(activity, summaryLoader);
                 }
             };
 }
