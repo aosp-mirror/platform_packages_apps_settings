@@ -37,12 +37,12 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,6 +51,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})
@@ -190,7 +191,8 @@ public class BluetoothPairingDialogTest {
         BluetoothPairingDialogFragment frag = new BluetoothPairingDialogFragment();
 
         // this should throw an error
-        FragmentTestUtils.startFragment(frag);
+        FragmentController.setupFragment(frag, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
         fail("Starting the fragment with no controller set should have thrown an exception.");
     }
 
@@ -286,7 +288,7 @@ public class BluetoothPairingDialogTest {
 
         // verify that the checkbox is visible and that the device name is correct
         CheckBox sharingCheckbox =
-            frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
+                frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
         assertThat(sharingCheckbox.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
@@ -304,7 +306,7 @@ public class BluetoothPairingDialogTest {
 
         // verify that the checkbox is gone
         CheckBox sharingCheckbox =
-            frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
+                frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
         assertThat(sharingCheckbox.getVisibility()).isEqualTo(View.GONE);
     }
 
@@ -450,7 +452,8 @@ public class BluetoothPairingDialogTest {
         frag.setPairingController(controller);
         assertThat(frag.isPairingDialogActivitySet()).isFalse();
         frag.setPairingDialogActivity(dialogActivity);
-        FragmentTestUtils.startFragment(frag);
+        FragmentController.setupFragment(frag, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
         assertThat(frag.getmDialog()).isNotNull();
         assertThat(frag.isPairingControllerSet()).isTrue();
         assertThat(frag.isPairingDialogActivitySet()).isTrue();

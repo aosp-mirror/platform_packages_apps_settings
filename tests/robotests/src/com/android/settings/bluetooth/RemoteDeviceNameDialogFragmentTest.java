@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -38,7 +39,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowDynamicLayout;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +48,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResourcesImpl.class, ShadowDynamicLayout.class})
@@ -77,7 +78,8 @@ public class RemoteDeviceNameDialogFragmentTest {
      */
     AlertDialog startDialog(String deviceName) {
         when(mCachedDevice.getName()).thenReturn(deviceName);
-        FragmentTestUtils.startFragment(mFragment);
+        FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
         return (AlertDialog) ShadowDialog.getLatestDialog();
     }
 
