@@ -19,14 +19,15 @@ package com.android.settings.notification;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.BidiFormatter;
 import android.view.View;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 public class ZenDeleteRuleDialog extends InstrumentedDialogFragment {
     protected static final String TAG = "ZenDeleteRuleDialog";
@@ -43,8 +44,9 @@ public class ZenDeleteRuleDialog extends InstrumentedDialogFragment {
 
     public static void show(Fragment parent, String ruleName, String id, PositiveClickListener
             listener) {
+        final BidiFormatter bidi = BidiFormatter.getInstance();
         final Bundle args = new Bundle();
-        args.putString(EXTRA_ZEN_RULE_NAME, ruleName);
+        args.putString(EXTRA_ZEN_RULE_NAME, bidi.unicodeWrap(ruleName));
         args.putString(EXTRA_ZEN_RULE_ID, id);
         mPositiveClickListener = listener;
 
