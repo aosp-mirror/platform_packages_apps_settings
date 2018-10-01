@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -96,7 +97,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         verify(mHeaderController).setIcon(any(Drawable.class));
         verify(mHeaderController).setIconContentDescription(any(String.class));
         verify(mHeaderController).setSummary(any(String.class));
-        verify(mHeaderController).setSecondSummary(any(String.class));
+        verify(mHeaderController, never()).setSecondSummary(any(String.class));
         verify(mHeaderController).done(mActivity, true);
     }
 
@@ -118,5 +119,13 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         mController.onDeviceAttributesChanged();
         inOrder.verify(mHeaderController)
             .setSummary(mContext.getString(R.string.bluetooth_connecting));
+    }
+
+    @Test
+    public void testSecondSummary_isHearingAidDevice_showSecondSummary() {
+        when(mCachedDevice.isHearingAidDevice()).thenReturn(true);
+        showScreen(mController);
+
+        verify(mHeaderController).setSecondSummary(any(String.class));
     }
 }
