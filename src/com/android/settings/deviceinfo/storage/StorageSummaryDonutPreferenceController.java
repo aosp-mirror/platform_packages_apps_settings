@@ -43,6 +43,20 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
         super(context);
     }
 
+    /**
+     * Converts a used storage amount to a formatted text.
+     *
+     * @param context Context
+     * @param usedBytes used bytes of storage
+     * @return a formatted text.
+     */
+    public static CharSequence convertUsedBytesToFormattedText(Context context, long usedBytes) {
+        final Formatter.BytesResult result = Formatter.formatBytes(context.getResources(),
+                usedBytes, 0);
+        return TextUtils.expandTemplate(context.getText(R.string.storage_size_large_alternate),
+                result.value, result.units);
+    }
+
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mSummary = (StorageSummaryDonutPreference) screen.findPreference("pref_summary");
@@ -53,11 +67,7 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
     public void updateState(Preference preference) {
         super.updateState(preference);
         StorageSummaryDonutPreference summary = (StorageSummaryDonutPreference) preference;
-        final Formatter.BytesResult result = Formatter.formatBytes(mContext.getResources(),
-                mUsedBytes, 0);
-        summary.setTitle(TextUtils.expandTemplate(
-                mContext.getText(R.string.storage_size_large_alternate), result.value,
-                result.units));
+        summary.setTitle(convertUsedBytesToFormattedText(mContext, mUsedBytes));
         summary.setSummary(mContext.getString(R.string.storage_volume_total,
                 Formatter.formatShortFileSize(mContext, mTotalBytes)));
         summary.setPercent(mUsedBytes, mTotalBytes);
@@ -83,6 +93,7 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
 
     /**
      * Updates the state of the donut preference for the next update.
+     *
      * @param used Total number of used bytes on the summarized volume.
      * @param total Total number of bytes on the summarized volume.
      */
@@ -94,6 +105,7 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
 
     /**
      * Updates the state of the donut preference for the next update using volume to summarize.
+     *
      * @param volume VolumeInfo to use to populate the informayion.
      */
     public void updateSizes(StorageVolumeProvider svp, VolumeInfo volume) {
