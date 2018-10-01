@@ -17,11 +17,14 @@
 package com.android.settings.search.actionbar;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings.Global;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -35,6 +38,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SearchMenuControllerTest {
@@ -43,12 +47,16 @@ public class SearchMenuControllerTest {
     private Menu mMenu;
     private TestPreferenceFragment mPreferenceHost;
     private ObservableFragment mHost;
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mHost = new ObservableFragment();
+        mContext = RuntimeEnvironment.application;
+        mHost = spy(new ObservableFragment());
+        when(mHost.getContext()).thenReturn(mContext);
         mPreferenceHost = new TestPreferenceFragment();
+        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
 
         when(mMenu.add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu))
                 .thenReturn(mock(MenuItem.class));
@@ -81,9 +89,23 @@ public class SearchMenuControllerTest {
         verifyZeroInteractions(mMenu);
     }
 
+    @Test
+    public void init_deviceNotProvisioned_shouldNotAddMenu() {
+        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        SearchMenuController.init(mHost);
+        mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+
+        verifyZeroInteractions(mMenu);
+    }
+
     private static class TestPreferenceFragment extends ObservablePreferenceFragment {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        }
+
+        @Override
+        public Context getContext() {
+            return RuntimeEnvironment.application;
         }
     }
 }
