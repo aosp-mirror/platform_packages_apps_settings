@@ -25,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -52,6 +53,9 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (!Utils.isDeviceProvisioned(mHost.getContext())) {
+            return;
+        }
         if (menu == null) {
             return;
         }
