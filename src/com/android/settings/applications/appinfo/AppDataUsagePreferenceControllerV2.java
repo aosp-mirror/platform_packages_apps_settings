@@ -45,19 +45,13 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoaderCompat;
 
-/**
- * Deprecated in favor of {@link AppDataUsagePreferenceControllerV2}
- *
- * @deprecated
- */
-@Deprecated
-public class AppDataUsagePreferenceController extends AppInfoPreferenceControllerBase
+public class AppDataUsagePreferenceControllerV2 extends AppInfoPreferenceControllerBase
         implements LoaderManager.LoaderCallbacks<ChartData>, LifecycleObserver, OnResume, OnPause {
 
     private ChartData mChartData;
     private INetworkStatsSession mStatsSession;
 
-    public AppDataUsagePreferenceController(Context context,String key) {
+    public AppDataUsagePreferenceControllerV2(Context context,String key) {
         super(context, key);
     }
 
