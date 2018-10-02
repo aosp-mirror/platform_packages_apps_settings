@@ -94,4 +94,22 @@ public class SpecialAppAccessPreferenceControllerTest {
                 .isEqualTo(mContext.getResources().getQuantityString(
                         R.plurals.special_access_summary, 1, 1));
     }
+
+    @Test
+    public void updateState_wrongExtraInfo_shouldNotIncludeInSummary() {
+        final ArrayList<ApplicationsState.AppEntry> apps = new ArrayList<>();
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.hasLauncherEntry = true;
+        entry.info = new ApplicationInfo();
+        entry.extraInfo = new AppStateNotificationBridge.NotificationsSentState();
+        apps.add(entry);
+        when(mSession.getAllApps()).thenReturn(apps);
+
+        mController.displayPreference(mScreen);
+        mController.onExtraInfoUpdated();
+
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getResources().getQuantityString(
+                        R.plurals.special_access_summary, 0, 0));
+    }
 }
