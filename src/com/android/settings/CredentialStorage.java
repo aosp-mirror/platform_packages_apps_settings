@@ -205,7 +205,7 @@ public final class CredentialStorage extends FragmentActivity {
         try {
             final ASN1InputStream bIn = new ASN1InputStream(new ByteArrayInputStream(keyData));
             final PrivateKeyInfo pki = PrivateKeyInfo.getInstance(bIn.readObject());
-            final String algOid = pki.getAlgorithmId().getAlgorithm().getId();
+            final String algOid = pki.getPrivateKeyAlgorithm().getAlgorithm().getId();
             final String algName = new AlgorithmId(new ObjectIdentifier(algOid)).getName();
 
             return KeyChain.isBoundKeyAlgorithm(algName);
