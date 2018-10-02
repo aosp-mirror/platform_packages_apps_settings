@@ -28,19 +28,20 @@ import android.content.Context;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResourcesImpl.class, ShadowAlertDialogCompat.class})
@@ -53,7 +54,8 @@ public class ChooseLockTypeDialogFragmentTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mFragment = new TestFragment();
-        FragmentTestUtils.startFragment(mFragment);
+        FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
     }
 
     @Test

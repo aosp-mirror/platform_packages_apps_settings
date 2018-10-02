@@ -44,7 +44,7 @@ import org.robolectric.annotation.Resetter;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class FirmwareVersionPreferenceControllerTest {
 
-    private final String KEY = "firmware_key";
+    private final String KEY = "firmware_version";
 
     @Mock
     private Fragment mFragment;
@@ -101,6 +101,11 @@ public class FirmwareVersionPreferenceControllerTest {
 
         assertThat(ShadowFirmwareVersionDialogFragment.isShowing).isFalse();
         assertThat(result).isFalse();
+    }
+
+    @Test
+    public void isSliceable_shouldBeTrue() {
+        assertThat(mController.isSliceable()).isTrue();
     }
 
     @Implements(FirmwareVersionDialogFragment.class)
