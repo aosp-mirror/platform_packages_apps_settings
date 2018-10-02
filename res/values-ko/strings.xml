@@ -976,7 +976,7 @@
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"로밍 환경설정"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi를 기본으로 설정"</item>
-    <item msgid="1335127656328817518">"모바일에 최적화됨"</item>
+    <item msgid="1335127656328817518">"모바일을 기본으로 설정"</item>
     <item msgid="3132912693346866895">"Wi-Fi에서만"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -991,7 +991,7 @@
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"Wi-Fi를 기본으로 설정"</item>
-    <item msgid="5074515506087318555">"모바일에 최적화됨"</item>
+    <item msgid="5074515506087318555">"모바일을 기본으로 설정"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1098,11 +1098,11 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"주변의 밝기에 맞춰 밝기 수준을 최적화합니다. 이 기능이 사용 설정되어 있는 동안에도 밝기를 일시 조정할 수 있습니다."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"화면 밝기가 환경 및 활동에 맞게 자동으로 조정됩니다. 슬라이더를 수동으로 이동하여 밝기 자동 조절 기능이 사용자의 환경설정을 학습하도록 할 수 있습니다."</string>
     <string name="night_display_title" msgid="2626451512200357686">"야간 조명"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"야간 조명을 사용하면 밤에 화면이 황색광으로 표시되어 희미한 빛에서도 편안하게 읽을 수 있으며 수면 방해 효과가 줄어듭니다."</string>
+    <string name="night_display_text" msgid="1837277457033025056">"야간 조명을 사용하면 화면이 황색광으로 표시되어 희미한 빛에서도 편안하게 화면을 보고 읽을 수 있으며 수면 방해 효과가 줄어듭니다."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"예약"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"없음"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"맞춤 시간에 켜짐"</string>
-    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"일몰부터 일출까지 사용"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"일몰부터 일출까지 켜짐"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"시작 시간"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"종료 시간"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"상태"</string>
@@ -1692,7 +1692,7 @@
     <string name="data_size_label" msgid="6117971066063850416">"사용자 데이터"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB 저장소 데이터"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD 카드"</string>
-    <string name="uninstall_text" msgid="3644892466144802466">"제거"</string>
+    <string name="uninstall_text" msgid="3644892466144802466">"설치 제거"</string>
     <string name="uninstall_all_users_text" msgid="851857393177950340">"모든 사용자에 대해 제거"</string>
     <string name="install_text" msgid="884360662922471113">"설치"</string>
     <string name="disable_text" msgid="6544054052049395202">"사용 안함"</string>
@@ -2563,7 +2563,7 @@
     <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"잘못된 PIN"</string>
     <string name="checking_decryption" msgid="8287458611802609493">"확인 중..."</string>
     <string name="starting_android" msgid="4001324195902252681">"Android 시작하는 중..."</string>
-    <string name="delete" msgid="4219243412325163003">"삭제"</string>
+    <string name="delete" msgid="4219243412325163003">"홈 화면에서 삭제"</string>
     <string name="misc_files" msgid="6720680815969643497">"기타 파일"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="TOTAL">%2$d</xliff:g>개 중 <xliff:g id="NUMBER">%1$d</xliff:g>개가 선택됨"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g>/<xliff:g id="TOTAL">%2$s</xliff:g>"</string>
@@ -2813,10 +2813,10 @@
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"모든 앱과 데이터가 삭제됩니다."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"새 사용자 추가 중..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"사용자 삭제"</string>
-    <string name="user_delete_button" msgid="5131259553799403201">"삭제"</string>
-    <string name="user_guest" msgid="8475274842845401871">"손님"</string>
-    <string name="user_exit_guest_title" msgid="5613997155527410675">"손님 삭제"</string>
-    <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"손님을 삭제하시겠습니까?"</string>
+    <string name="user_delete_button" msgid="5131259553799403201">"홈 화면에서 삭제"</string>
+    <string name="user_guest" msgid="8475274842845401871">"게스트"</string>
+    <string name="user_exit_guest_title" msgid="5613997155527410675">"게스트 삭제"</string>
+    <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"게스트를 삭제하시겠습니까?"</string>
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"이 세션에 있는 모든 앱과 데이터가 삭제됩니다."</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"삭제"</string>
     <string name="user_enable_calling" msgid="5128605672081602348">"통화 기능 사용"</string>
@@ -2957,7 +2957,7 @@
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"앱 및 알림"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"권한, 기본 앱"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"계정"</string>
-    <string name="account_dashboard_default_summary" msgid="3998347400161811075">"추가된 계정이 없습니다."</string>
+    <string name="account_dashboard_default_summary" msgid="3998347400161811075">"추가된 계정 없음"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"기본 앱"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"언어, 시간, 백업, 업데이트"</string>
     <string name="search_results_title" msgid="1796252422574886932">"설정"</string>
@@ -3889,9 +3889,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"없음"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"순위 개체가 없습니다."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"순위 개체가 이 키를 포함하지 않습니다."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"컷아웃이 있는 디스플레이 시뮬레이션"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"디스플레이 컷아웃"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"디스플레이 컷아웃, 노치"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"없음"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"기기 기본값"</string>
     <string name="special_access" msgid="3458780842491881155">"특수 앱 액세스"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other">앱 <xliff:g id="COUNT">%d</xliff:g>개에서 무제한 데이터 사용 가능</item>
@@ -4152,5 +4152,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"네트워크 세부정보"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"휴대전화에 설치된 앱에 기기 이름이 표시됩니다. 기기 이름은 블루투스 기기에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게 표시될 수도 있습니다."</string>
     <string name="devices_title" msgid="7701726109334110391">"기기"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"기본값"</string>
 </resources>

@@ -487,11 +487,11 @@
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Avviso. I dati del dispositivo verranno cancellati dopo altri <xliff:g id="COUNT">^1</xliff:g> tentativi di sblocco non riusciti."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Digita la password"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Crittografia non riuscita"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"La crittografia è stata interrotta e non è possibile portarla a termine. Di conseguenza, i dati memorizzati sul tablet non sono più accessibili. \n\nPer riprendere a utilizzare il tablet devi effettuare un ripristino dei dati di fabbrica. Quando configuri il tablet dopo il ripristino, hai la possibilità di ripristinare i dati di cui hai effettuato il backup nel tuo account Google."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"La crittografia è stata interrotta e non è possibile portarla a termine. Di conseguenza, i dati memorizzati sul telefono non sono più accessibili. \n\nPer riprendere a utilizzare il telefono devi effettuare il ripristino dei dati di fabbrica. Quando configuri il telefono dopo il ripristino, hai la possibilità di ripristinare i dati di cui hai effettuato il backup nel tuo account Google."</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"La crittografia è stata interrotta e non è possibile portarla a termine. Di conseguenza, i dati memorizzati sul tablet non sono più accessibili. \n\nPer riprendere a utilizzare il tablet devi effettuare un ripristino dei dati di fabbrica. Quando configuri il tablet dopo il ripristino, hai la possibilità di ripristinare i dati di cui hai effettuato il backup nel tuo Account Google."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"La crittografia è stata interrotta e non è possibile portarla a termine. Di conseguenza, i dati memorizzati sul telefono non sono più accessibili. \n\nPer riprendere a utilizzare il telefono devi effettuare il ripristino dei dati di fabbrica. Quando configuri il telefono dopo il ripristino, hai la possibilità di ripristinare i dati di cui hai effettuato il backup nel tuo Account Google."</string>
     <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Decrittografia non riuscita"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"La password inserita è corretta ma purtroppo i tuoi dati sono danneggiati. \n\nPer riprendere a utilizzare il tablet, devi eseguire un ripristino dei dati di fabbrica. Durante la configurazione del tablet dopo il ripristino, potrai ripristinare i dati di cui hai effettuato il backup nel tuo account Google."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"La password inserita è corretta ma purtroppo i tuoi dati sono danneggiati. \n\nPer riprendere a utilizzare il telefono, devi eseguire un ripristino dei dati di fabbrica. Durante la configurazione del telefono dopo il ripristino, potrai ripristinare i dati di cui hai effettuato il backup nel tuo account Google."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"La password inserita è corretta ma purtroppo i tuoi dati sono danneggiati. \n\nPer riprendere a utilizzare il tablet, devi eseguire un ripristino dei dati di fabbrica. Durante la configurazione del tablet dopo il ripristino, potrai ripristinare i dati di cui hai effettuato il backup nel tuo Account Google."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"La password inserita è corretta ma purtroppo i tuoi dati sono danneggiati. \n\nPer riprendere a utilizzare il telefono, devi eseguire un ripristino dei dati di fabbrica. Durante la configurazione del telefono dopo il ripristino, potrai ripristinare i dati di cui hai effettuato il backup nel tuo Account Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Cambia metodo di immissione"</string>
     <string name="suggested_lock_settings_title" msgid="8498743819223200961">"Proteggi il tuo telefono"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"Imposta un blocco schermo per proteggere il tablet"</string>
@@ -976,7 +976,7 @@
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Preferenze durante il roaming"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Reta preferita: Wi-Fi"</item>
-    <item msgid="1335127656328817518">"Modalità preferita: rete mobile"</item>
+    <item msgid="1335127656328817518">"Modalità preferita: dati mobili"</item>
     <item msgid="3132912693346866895">"Solo Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -991,7 +991,7 @@
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"Rete preferita: Wi-Fi"</item>
-    <item msgid="5074515506087318555">"Modalità preferita: rete mobile"</item>
+    <item msgid="5074515506087318555">"Modalità preferita: dati mobili"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1594,7 +1594,7 @@
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Le password non corrispondono"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"I PIN non corrispondono"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="2872194349688886781">"Traccia di nuovo la sequenza"</string>
-    <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Selezione metodo di sblocco"</string>
+    <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Seleziona metodo di sblocco"</string>
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Password impostata"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN impostato"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Sequenza impostata"</string>
@@ -1677,7 +1677,7 @@
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilità schermo"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Autorizzazioni"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
-    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Cancella cache"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Svuota cache"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
     <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
       <item quantity="other">%d elementi</item>
@@ -1927,7 +1927,7 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Accessibilità"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Impostazioni di accessibilità"</string>
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Screen reader, display, controlli di interazione"</string>
-    <string name="vision_settings_title" msgid="4204111425716868288">"Impostazioni vista"</string>
+    <string name="vision_settings_title" msgid="4204111425716868288">"Impostazioni visive"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Puoi personalizzare questo dispositivo in base alle tue esigenze. Queste funzioni di accessibilità possono essere modificate in un secondo momento nelle Impostazioni."</string>
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Cambia dimensioni carattere"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Screen reader"</string>
@@ -2625,8 +2625,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Questa funzione può causare l\'interruzione del funzionamento di un\'applicazione che dipende dai dati in background quando sono disponibili solo le reti mobili.\n\nPuoi trovare controlli di utilizzo dei dati più appropriati nelle impostazioni disponibili all\'interno dell\'applicazione."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"La limitazione dei dati in background è possibile solo se hai impostato un limite per i dati mobili."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Attivare sincron. automatica?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Tutte le modifiche che apporti ai tuoi account sul Web verranno automaticamente copiate sul tablet.\n\nAlcuni account potrebbero inoltre copiare automaticamente sul Web tutte le modifiche che apporti sul tablet. Gli account Google funzionano in questo modo."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Tutte le modifiche che apporti ai tuoi account sul Web verranno automaticamente copiate sul telefono.\n\nAlcuni account potrebbero inoltre copiare automaticamente sul Web tutte le modifiche che apporti sul telefono. Gli account Google funzionano in questo modo."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Tutte le modifiche che apporti ai tuoi account sul Web verranno automaticamente copiate sul tablet.\n\nAlcuni account potrebbero inoltre copiare automaticamente sul Web tutte le modifiche che apporti sul tablet. Gli Account Google funzionano in questo modo."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Tutte le modifiche che apporti ai tuoi account sul Web verranno automaticamente copiate sul telefono.\n\nAlcuni account potrebbero inoltre copiare automaticamente sul Web tutte le modifiche che apporti sul telefono. Gli Account Google funzionano in questo modo."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Disattivare sincron. automatica?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"In questo modo limiterai l\'utilizzo di dati e della batteria, ma dovrai sincronizzare ciascun account manualmente per ottenere le informazioni recenti. Inoltre non riceverai notifiche di aggiornamenti disponibili."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data reimpostazione ciclo utilizzo"</string>
@@ -2842,7 +2842,7 @@
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Tranne quando è aperta un\'altra app per il pagamento"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Se è disponibile un terminale Tocca e paga, paga con:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Pagamento al terminale"</string>
-    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Configura un\'app per il pagamento e appoggia il retro del telefono su qualsiasi terminale con il simbolo del pagamento senza contatto."</string>
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Configura un\'app per il pagamento e appoggia il retro del telefono su qualsiasi terminale con il simbolo del pagamento contactless."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"OK"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Altro..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Impostare come preferenza?"</string>
@@ -2853,7 +2853,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Cambia PIN"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Mostra notifiche"</string>
     <string name="help_label" msgid="6886837949306318591">"Guida e feedback"</string>
-    <string name="support_summary" msgid="2705726826263742491">"Articoli della guida, assistenza telefonica e chat, guida introduttiva"</string>
+    <string name="support_summary" msgid="2705726826263742491">"Guida, assistenza telefonica e chat, primi passi"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Account per i contenuti"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"ID foto"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"Minacce estreme"</string>
@@ -3758,7 +3758,7 @@
     <string name="night_display_suggestion_title" msgid="6602129097059325291">"Programma Luminosità notturna"</string>
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"Riduci automaticamente la luminosità dello schermo ogni notte"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Luminosità notturna attiva"</string>
-    <string name="condition_night_display_summary" msgid="5443722724310650381">"Lo schermo è diventato color ambra. Potrebbe conciliare il sonno."</string>
+    <string name="condition_night_display_summary" msgid="5443722724310650381">"Lo schermo è diventato color ambra per aiutare a conciliare il sonno."</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"Consigliate per te"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Suggerimenti"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+ <xliff:g id="ID_1">%1$d</xliff:g>"</string>
@@ -3889,9 +3889,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"nessuno"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Oggetto di ranking mancante."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"L\'oggetto di ranking non contiene questa chiave."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simula un display con ritaglio"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Ritaglio display"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ritaglio display, tacca"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Nessuno"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Predefinita dispositivo"</string>
     <string name="special_access" msgid="3458780842491881155">"Accesso speciale alle app"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> app possono usare dati senza limitazioni</item>
@@ -4152,5 +4152,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Dettagli rete"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Il nome del tuo dispositivo è visibile alle app installate sul telefono. Potrebbe essere visibile anche ad altre persone se ti connetti a dispositivi Bluetooth o configuri un hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositivi"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Valore predefinito"</string>
 </resources>
