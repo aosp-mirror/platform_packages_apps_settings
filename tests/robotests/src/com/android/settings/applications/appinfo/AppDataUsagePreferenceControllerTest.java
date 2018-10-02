@@ -115,6 +115,7 @@ public class AppDataUsagePreferenceControllerTest {
 
     @Test
     public void onPause_shouldDestroyDataLoader() {
+        ReflectionHelpers.setField(mController, "mStatsSession", mock(INetworkStatsSession.class));
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
 
         mController.onPause();
