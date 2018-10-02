@@ -3192,6 +3192,15 @@
             android:exported="true"
             android:permission="android.permission.WRITE_SETTINGS_HOMEPAGE_DATA" />
 
+        <provider
+            android:name=".homepage.contextualcards.SettingsContextualCardProvider"
+            android:authorities="com.android.settings.homepage.contextualcards"
+            android:permission="android.permission.WRITE_SETTINGS_HOMEPAGE_DATA"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.content.action.SETTINGS_HOMEPAGE_DATA"/>
+            </intent-filter>
+        </provider>
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

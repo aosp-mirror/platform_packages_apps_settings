@@ -41,6 +41,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     androidx.lifecycle_lifecycle-extensions \
     guava \
     jsr305 \
+    contextualcards \
     settings-logtags \
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
@@ -56,6 +57,13 @@ include frameworks/base/packages/SettingsLib/common.mk
 include frameworks/base/packages/SettingsLib/search/common.mk
 
 include $(BUILD_PACKAGE)
+
+# ====  prebuilt library  ========================
+include $(CLEAR_VARS)
+
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
+    contextualcards:libs/contextualcards.aar
+include $(BUILD_MULTI_PREBUILT)
 
 # Use the following include to make our test apk.
 ifeq (,$(ONE_SHOT_MAKEFILE))
