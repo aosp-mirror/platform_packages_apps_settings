@@ -97,6 +97,11 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
             if (DBG) {
                 Log.d(TAG, "isFilterMatched() current audio profile : " + currentAudioProfile);
             }
+            // If device is Hearing Aid, it is compatible with HFP and A2DP.
+            // It would not show in Connected Devices group.
+            if (cachedDevice.isConnectedHearingAidDevice()) {
+                return false;
+            }
             // According to the current audio profile type,
             // this page will show the bluetooth device that doesn't have corresponding profile.
             // For example:
