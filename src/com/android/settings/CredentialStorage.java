@@ -218,7 +218,7 @@ public final class CredentialStorage extends Activity {
         try {
             ASN1InputStream bIn = new ASN1InputStream(new ByteArrayInputStream(keyData));
             PrivateKeyInfo pki = PrivateKeyInfo.getInstance(bIn.readObject());
-            String algOid = pki.getAlgorithmId().getAlgorithm().getId();
+            String algOid = pki.getPrivateKeyAlgorithm().getAlgorithm().getId();
             String algName = new AlgorithmId(new ObjectIdentifier(algOid)).getName();
 
             return KeyChain.isBoundKeyAlgorithm(algName);
