@@ -18,10 +18,11 @@ package com.android.settings.development.featureflags;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.FeatureFlags;
 
