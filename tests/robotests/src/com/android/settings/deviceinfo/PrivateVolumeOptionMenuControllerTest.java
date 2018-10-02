@@ -63,6 +63,7 @@ public class PrivateVolumeOptionMenuControllerTest {
         MockitoAnnotations.initMocks(this);
 
         when(mVolumeInfo.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
+        when(mVolumeInfo.isMountedWritable()).thenReturn(true);
         when(mPrimaryInfo.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
         when(mMenu.findItem(anyInt())).thenReturn(mMigrateMenuItem);
         when(mMigrateMenuItem.getItemId()).thenReturn(100);
@@ -81,6 +82,7 @@ public class PrivateVolumeOptionMenuControllerTest {
     @Test
     public void testMigrateDataIsNotVisibleNormally() {
         when(mPm.getPrimaryStorageCurrentVolume()).thenReturn(mPrimaryInfo);
+        when(mPrimaryInfo.isMountedWritable()).thenReturn(true);
 
         mController.onCreateOptionsMenu(mMenu, mMenuInflater);
         mController.onPrepareOptionsMenu(mMenu);
@@ -96,6 +98,17 @@ public class PrivateVolumeOptionMenuControllerTest {
         mController.onPrepareOptionsMenu(mMenu);
 
         verify(mMigrateMenuItem).setVisible(true);
+    }
+
+    @Test
+    public void testMigrateDataIsNotVisibleWhenExternalVolumeIsNotMounted() {
+        when(mPm.getPrimaryStorageCurrentVolume()).thenReturn(mVolumeInfo);
+        when(mVolumeInfo.isMountedWritable()).thenReturn(false);
+
+        mController.onCreateOptionsMenu(mMenu, mMenuInflater);
+        mController.onPrepareOptionsMenu(mMenu);
+
+        verify(mMigrateMenuItem).setVisible(false);
     }
 
     @Test
