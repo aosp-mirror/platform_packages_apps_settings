@@ -29,15 +29,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhoneNumberPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     private final static String KEY_PHONE_NUMBER = "phone_number";
 
@@ -45,21 +43,20 @@ public class PhoneNumberPreferenceController extends AbstractPreferenceControlle
     private final SubscriptionManager mSubscriptionManager;
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
-    public PhoneNumberPreferenceController(Context context) {
-        super(context);
-        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        mSubscriptionManager = (SubscriptionManager) context.getSystemService(
-                Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+    public PhoneNumberPreferenceController(Context context, String key) {
+        super(context, key);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mSubscriptionManager =  mContext.getSystemService(SubscriptionManager.class);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_PHONE_NUMBER;
+    public int getAvailabilityStatus() {
+        return mTelephonyManager.isVoiceCapable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public boolean isAvailable() {
-        return mTelephonyManager.isVoiceCapable();
+    public CharSequence getSummary() {
+        return getFirstPhoneNumber();
     }
 
     @Override
@@ -89,10 +86,26 @@ public class PhoneNumberPreferenceController extends AbstractPreferenceControlle
         }
     }
 
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    private CharSequence getFirstPhoneNumber() {
+        final List<SubscriptionInfo> subscriptionInfoList =
+                mSubscriptionManager.getActiveSubscriptionInfoList();
+        if (subscriptionInfoList == null) {
+            return mContext.getText(R.string.device_info_default);
+        }
+
+        // For now, We only return first result for slice view.
+        return getFormattedPhoneNumber(subscriptionInfoList.get(0));
+    }
+
     private CharSequence getPhoneNumber(int simSlot) {
         final SubscriptionInfo subscriptionInfo = getSubscriptionInfo(simSlot);
         if (subscriptionInfo == null) {
-            return mContext.getString(R.string.device_info_default);
+            return mContext.getText(R.string.device_info_default);
         }
 
         return getFormattedPhoneNumber(subscriptionInfo);
