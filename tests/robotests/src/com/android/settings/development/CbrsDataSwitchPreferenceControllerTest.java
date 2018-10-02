@@ -62,19 +62,19 @@ public final class CbrsDataSwitchPreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_shouldEnableANAS() {
         mController.onPreferenceChange(mPreference, true);
 
-        assertThat(mTelephonyManager.isAlternativeNetworkAccessEnabled()).isTrue();
+        assertThat(mTelephonyManager.isAlternativeNetworkEnabled()).isTrue();
     }
 
     @Test
     public void onPreferenceChanged_settingDisabled_shouldDisableANAS() {
         mController.onPreferenceChange(mPreference, false);
 
-        assertThat(mTelephonyManager.isAlternativeNetworkAccessEnabled()).isFalse();
+        assertThat(mTelephonyManager.isAlternativeNetworkEnabled()).isFalse();
     }
 
     @Test
     public void updateState_settingEnabled_shouldEnablePreference() {
-        mTelephonyManager.setAlternativeNetworkAccessState(true);
+        mTelephonyManager.setAlternativeNetworkState(true);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isChecked()).isTrue();
@@ -82,7 +82,7 @@ public final class CbrsDataSwitchPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_shouldDisablePreference() {
-        mTelephonyManager.setAlternativeNetworkAccessState(false);
+        mTelephonyManager.setAlternativeNetworkState(false);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isChecked()).isFalse();
