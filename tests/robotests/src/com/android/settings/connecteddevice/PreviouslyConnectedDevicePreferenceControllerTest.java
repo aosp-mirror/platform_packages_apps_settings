@@ -28,6 +28,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
@@ -54,10 +57,12 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     private DockUpdater mDockUpdater;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private PreferenceManager mPreferenceManager;
 
     private Context mContext;
     private PreviouslyConnectedDevicePreferenceController mPreConnectedDeviceController;
-    private Preference mPreference;
+    private PreferenceGroup mPreferenceGroup;
 
     @Before
     public void setUp() {
@@ -70,8 +75,10 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
         mPreConnectedDeviceController.setSavedDockUpdater(mDockUpdater);
 
-        mPreference = new Preference(mContext);
-        mPreConnectedDeviceController.setPreference(mPreference);
+        mPreferenceGroup = spy(new PreferenceCategory(mContext));
+        doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
+        mPreferenceGroup.setVisible(false);
+        mPreConnectedDeviceController.setPreferenceGroup(mPreferenceGroup);
     }
 
     @Test
@@ -101,20 +108,34 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
-    public void onDeviceAdded_addFirstDevice_preferenceIsEnable() {
-        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
-        mPreConnectedDeviceController.setPreferenceSize(0);
-        mPreConnectedDeviceController.onDeviceAdded(mPreference);
+    public void onDeviceAdded_addDevicePreference_displayIt() {
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreferenceGroup.isVisible()).isTrue();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
     }
 
     @Test
-    public void onDeviceRemoved_removeLastDevice_preferenceIsDisable() {
-        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
-        mPreConnectedDeviceController.setPreferenceSize(1);
-        mPreConnectedDeviceController.onDeviceRemoved(mPreference);
+    public void onDeviceAdded_addFourDevicePreference_onlyDisplayThree() {
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
+        mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
 
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreferenceGroup.isVisible()).isTrue();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(3);
     }
+
+    @Test
+    public void onDeviceRemoved_removeLastDevice_setInvisible() {
+        final Preference preference = new Preference(mContext);
+        mPreferenceGroup.addPreference(preference);
+        mPreferenceGroup.setVisible(true);
+
+        mPreConnectedDeviceController.onDeviceRemoved(preference);
+
+        assertThat(mPreferenceGroup.isVisible()).isFalse();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
+    }
+
 }
