@@ -77,8 +77,11 @@ public class CardContentProvider extends ContentProvider {
 
             final String table = getTableFromMatch(uri);
             database.beginTransaction();
+
+            // Here deletion first is avoiding redundant insertion. According to cl/215350754
+            database.delete(table, null /* whereClause */, null /* whereArgs */);
             for (ContentValues value : values) {
-                long ret = database.insert(table, null, value);
+                long ret = database.insert(table, null /* nullColumnHack */, value);
                 if (ret != -1L) {
                     numInserted++;
                 } else {
@@ -87,7 +90,7 @@ public class CardContentProvider extends ContentProvider {
                 }
             }
             database.setTransactionSuccessful();
-            getContext().getContentResolver().notifyChange(uri, null);
+            getContext().getContentResolver().notifyChange(uri, null /* observer */);
         } finally {
             database.endTransaction();
             StrictMode.setThreadPolicy(oldPolicy);
@@ -103,7 +106,7 @@ public class CardContentProvider extends ContentProvider {
             final SQLiteDatabase database = mDBHelper.getWritableDatabase();
             final String table = getTableFromMatch(uri);
             final int rowsDeleted = database.delete(table, selection, selectionArgs);
-            getContext().getContentResolver().notifyChange(uri, null);
+            getContext().getContentResolver().notifyChange(uri, null /* observer */);
             return rowsDeleted;
         } finally {
             StrictMode.setThreadPolicy(oldPolicy);
@@ -127,7 +130,8 @@ public class CardContentProvider extends ContentProvider {
             queryBuilder.setTables(table);
             final SQLiteDatabase database = mDBHelper.getReadableDatabase();
             final Cursor cursor = queryBuilder.query(database,
-                    projection, selection, selectionArgs, null, null, sortOrder);
+                    projection, selection, selectionArgs, null /* groupBy */, null /* having */,
+                    sortOrder);
 
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
             return cursor;
@@ -145,7 +149,7 @@ public class CardContentProvider extends ContentProvider {
             final SQLiteDatabase database = mDBHelper.getWritableDatabase();
             final String table = getTableFromMatch(uri);
             final int rowsUpdated = database.update(table, values, selection, selectionArgs);
-            getContext().getContentResolver().notifyChange(uri, null);
+            getContext().getContentResolver().notifyChange(uri, null /* observer */);
             return rowsUpdated;
         } finally {
             StrictMode.setThreadPolicy(oldPolicy);
