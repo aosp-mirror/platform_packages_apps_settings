@@ -33,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.support.SupportPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -65,6 +66,12 @@ public class TopLevelSettings extends DashboardFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DASHBOARD_SUMMARY;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(SupportPreferenceController.class).setActivity(getActivity());
     }
 
     @Override

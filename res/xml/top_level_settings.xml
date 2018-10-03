@@ -120,6 +120,7 @@
         android:summary="@string/support_summary"
         android:title="@string/page_tab_title_support"
         android:icon="@drawable/ic_homepage_support"
-        android:order="100"/>
+        android:order="100"
+        settings:controller="com.android.settings.support.SupportPreferenceController"/>
 
 </PreferenceScreen>
