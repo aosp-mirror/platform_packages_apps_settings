@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<!--
+    Copyright (C) 2008 The Android Open Source Project
 
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+         http://www.apache.org/licenses/LICENSE-2.0
 
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.android.phone.CdmaSystemSelectListPreference
+    <com.android.settings.mobilenetwork.CdmaSystemSelectListPreference
         android:key="cdma_system_select_key"
         android:title="@string/cdma_system_select_title"
         android:summary="@string/cdma_system_select_summary"
@@ -24,7 +25,7 @@
         android:entryValues="@array/cdma_system_select_values"
         android:dialogTitle="@string/cdma_system_select_dialogtitle" />
 
-    <com.android.phone.CdmaSubscriptionListPreference
+    <com.android.settings.mobilenetwork.CdmaSubscriptionListPreference
         android:key="cdma_subscription_key"
         android:title="@string/cdma_subscription_title"
         android:summary="@string/cdma_subscription_summary"
@@ -37,7 +38,7 @@
     <PreferenceCategory
         android:key="category_cdma_apn_key">
         <!-- The launching Intent will be defined thru code as we need to pass some Extra -->
-        <com.android.phone.RestrictedPreference
+        <com.android.settingslib.RestrictedPreference
             android:key="button_cdma_apn_key"
             android:title="@string/apn_settings"
             android:persistent="false"/>
@@ -46,9 +47,7 @@
     <Preference
         android:key="carrier_settings_key"
         android:title="@string/carrier_settings_title">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="@string/carrier_settings"
-                android:targetClass="@string/carrier_settings_menu" />
+        <!-- b/114749736, create a preference controller to build intent -->
     </Preference>
 
 </PreferenceScreen>

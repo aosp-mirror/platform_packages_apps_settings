@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2008 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,21 @@ package com.android.settings.mobilenetwork;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PersistableBundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
-import com.android.phone.INetworkQueryService;
-import com.android.phone.MobileNetworkSettings;
-import com.android.phone.PhoneGlobals;
-import com.android.phone.RestrictedPreference;
+import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * List of Network-specific settings screens.
@@ -54,11 +53,11 @@ public class GsmUmtsOptions {
     private static final String BUTTON_CARRIER_SETTINGS_KEY = "carrier_settings_key";
 
     public static final String EXTRA_SUB_ID = "sub_id";
-    private PreferenceFragment mPrefFragment;
+    private PreferenceFragmentCompat mPrefFragment;
     private PreferenceScreen mPrefScreen;
 
-    public GsmUmtsOptions(PreferenceFragment prefFragment, PreferenceScreen prefScreen,
-            final int subId, INetworkQueryService queryService) {
+    public GsmUmtsOptions(PreferenceFragmentCompat prefFragment, PreferenceScreen prefScreen,
+            final int subId) {
         final Context context = prefFragment.getContext();
         mPrefFragment = prefFragment;
         mPrefScreen = prefScreen;
@@ -72,18 +71,19 @@ public class GsmUmtsOptions {
 
         mNetworkOperator.initialize();
 
-        update(subId, queryService);
+        update(subId);
     }
 
-    // Unlike mPrefFragment or mPrefScreen, subId or queryService may change during lifecycle of
-    // GsmUmtsOptions. When that happens, we update GsmUmtsOptions with new parameters.
-    protected void update(final int subId, INetworkQueryService queryService) {
+    // Unlike mPrefFragment or mPrefScreen, subId  may change during lifecycle of GsmUmtsOptions.
+    // When that happens, we update GsmUmtsOptions with new parameters.
+    protected void update(final int subId) {
         boolean addAPNExpand = true;
         boolean addNetworkOperatorsCategory = true;
         boolean addCarrierSettings = true;
         final TelephonyManager telephonyManager = TelephonyManager.from(mPrefFragment.getContext())
                 .createForSubscriptionId(subId);
-        Phone phone = PhoneGlobals.getPhone(subId);
+        //TODO(b/115429509): Get phone from subId
+        Phone phone = null;
         if (phone == null) return;
         if (telephonyManager.getPhoneType() != PhoneConstants.PHONE_TYPE_GSM) {
             log("Not a GSM phone");
@@ -128,9 +128,9 @@ public class GsmUmtsOptions {
         if (addAPNExpand) {
             log("update: addAPNExpand");
             mButtonAPNExpand.setDisabledByAdmin(
-                    MobileNetworkSettings.isDpcApnEnforced(mButtonAPNExpand.getContext())
+                    MobileNetworkUtils.isDpcApnEnforced(mButtonAPNExpand.getContext())
                             ? RestrictedLockUtilsInternal.getDeviceOwner(
-                                    mButtonAPNExpand.getContext())
+                            mButtonAPNExpand.getContext())
                             : null);
             mButtonAPNExpand.setOnPreferenceClickListener(
                     new Preference.OnPreferenceClickListener() {
@@ -156,7 +156,7 @@ public class GsmUmtsOptions {
 
         if (addNetworkOperatorsCategory) {
             mPrefScreen.addPreference(mNetworkOperator);
-            mNetworkOperator.update(subId, queryService);
+            mNetworkOperator.update(subId);
         } else {
             mPrefScreen.removePreference(mNetworkOperator);
         }
@@ -177,3 +177,4 @@ public class GsmUmtsOptions {
         android.util.Log.d(LOG_TAG, s);
     }
 }
+

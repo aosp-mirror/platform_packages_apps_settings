@@ -19,21 +19,22 @@ package com.android.settings.mobilenetwork;
 import android.content.Intent;
 import android.os.PersistableBundle;
 import android.os.SystemProperties;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
-import com.android.phone.MobileNetworkSettings;
-import com.android.phone.RestrictedPreference;
+import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * List of Phone-specific settings screens.
@@ -54,11 +55,11 @@ public class CdmaOptions {
     private static final String BUTTON_APN_EXPAND_KEY = "button_cdma_apn_key";
     private static final String CATEGORY_APN_EXPAND_KEY = "category_cdma_apn_key";
 
-    private PreferenceFragment mPrefFragment;
+    private PreferenceFragmentCompat mPrefFragment;
     private PreferenceScreen mPrefScreen;
     private int mSubId;
 
-    public CdmaOptions(PreferenceFragment prefFragment, PreferenceScreen prefScreen, int subId) {
+    public CdmaOptions(PreferenceFragmentCompat prefFragment, PreferenceScreen prefScreen, int subId) {
         mPrefFragment = prefFragment;
         mPrefScreen = prefScreen;
         mPrefFragment.addPreferencesFromResource(R.xml.cdma_options);
@@ -99,7 +100,7 @@ public class CdmaOptions {
         if (addAPNExpand) {
             log("update: addAPNExpand");
             mButtonAPNExpand.setDisabledByAdmin(
-                    MobileNetworkSettings.isDpcApnEnforced(mButtonAPNExpand.getContext())
+                    MobileNetworkUtils.isDpcApnEnforced(mButtonAPNExpand.getContext())
                             ? RestrictedLockUtilsInternal.getDeviceOwner(
                                     mButtonAPNExpand.getContext())
                             : null);

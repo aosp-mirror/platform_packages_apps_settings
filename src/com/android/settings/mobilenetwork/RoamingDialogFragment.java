@@ -17,9 +17,6 @@ package com.android.settings.mobilenetwork;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -27,11 +24,19 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+
+import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
 /**
  * A dialog fragment that asks the user if they are sure they want to turn on data roaming
  * to avoid accidental charges.
  */
-public class RoamingDialogFragment extends DialogFragment implements OnClickListener {
+public class RoamingDialogFragment extends InstrumentedDialogFragment implements OnClickListener {
 
     public static final String SUB_ID_KEY = "sub_id_key";
 
@@ -55,9 +60,8 @@ public class RoamingDialogFragment extends DialogFragment implements OnClickList
         mSubId = args.getInt(SUB_ID_KEY);
         mCarrierConfigManager = new CarrierConfigManager(context);
 
-        // Verify host activity implemented callback interface
-        FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.network_setting_content);
+        //TODO(b/114749736): set target fragment in host fragment
+        Fragment fragment = getTargetFragment();
         try {
             mListener = (RoamingDialogListener) fragment;
         } catch (ClassCastException e) {
@@ -68,7 +72,7 @@ public class RoamingDialogFragment extends DialogFragment implements OnClickList
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         int title = R.string.roaming_alert_title;
         PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (carrierConfig != null && carrierConfig.getBoolean(
@@ -81,6 +85,12 @@ public class RoamingDialogFragment extends DialogFragment implements OnClickList
                 .setPositiveButton(android.R.string.yes, this)
                 .setNegativeButton(android.R.string.no, this);
         return builder.create();
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        //TODO(b/114749736): add category for roaming dialog
+        return 0;
     }
 
     @Override

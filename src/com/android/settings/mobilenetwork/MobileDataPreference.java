@@ -25,8 +25,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.DialogPreference;
-import android.preference.PreferenceScreen;
 import android.provider.Settings.Global;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -36,8 +34,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Checkable;
 
+import androidx.preference.DialogPreference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 
 import java.util.List;
 
@@ -45,7 +48,8 @@ import java.util.List;
  * Customized Preference to enable / disable mobile data.
  * Basically copy of with com.android.settings.CellDataPreference.
  */
-public class MobileDataPreference extends DialogPreference {
+public class MobileDataPreference extends DialogPreference implements
+        DialogInterface.OnClickListener {
 
     private static final boolean DBG = false;
     private static final String TAG = "MobileDataPreference";
@@ -92,8 +96,8 @@ public class MobileDataPreference extends DialogPreference {
     }
 
     @Override
-    protected void onAttachedToActivity() {
-        super.onAttachedToActivity();
+    public void onAttached() {
+        super.onAttached();
         mListener.setListener(true, mSubId, getContext());
     }
 
@@ -124,7 +128,7 @@ public class MobileDataPreference extends DialogPreference {
     }
 
     @Override
-    public void performClick(PreferenceScreen preferenceScreen) {
+    public void performClick() {
         if (!isEnabled() || !SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return;
         }
@@ -141,7 +145,7 @@ public class MobileDataPreference extends DialogPreference {
                 // disabling data; show confirmation dialog which eventually
                 // calls setMobileDataEnabled() once user confirms.
                 mMultiSimDialog = false;
-                super.performClick(preferenceScreen);
+                super.performClick();
             } else {
                 // Don't show any dialog.
                 setMobileDataEnabled(false /* enabled */, false /* disableOtherSubscriptions */);
@@ -151,7 +155,7 @@ public class MobileDataPreference extends DialogPreference {
                 // enabling data and setting to default; show confirmation dialog which eventually
                 // calls setMobileDataEnabled() once user confirms.
                 mMultiSimDialog = true;
-                super.performClick(preferenceScreen);
+                super.performClick();
             } else {
                 // Don't show any dialog.
                 setMobileDataEnabled(true /* enabled */, false /* disableOtherSubscriptions */);
@@ -181,14 +185,14 @@ public class MobileDataPreference extends DialogPreference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
-        View checkableView = view.findViewById(com.android.internal.R.id.switch_widget);
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        View checkableView = holder.findViewById(com.android.internal.R.id.switch_widget);
         checkableView.setClickable(false);
         ((Checkable) checkableView).setChecked(mChecked);
     }
 
-    @Override
+    //TODO(b/114749736): move it to preference controller
     protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
         if (mMultiSimDialog) {
             showMultiSimDialog(builder);
@@ -217,7 +221,7 @@ public class MobileDataPreference extends DialogPreference {
                 String.valueOf(currentSir != null ? currentSir.getDisplayName() : null),
                 previousName));
 
-        builder.setPositiveButton(R.string.ok, this);
+        builder.setPositiveButton(android.R.string.ok, this);
         builder.setNegativeButton(R.string.cancel, null);
     }
 

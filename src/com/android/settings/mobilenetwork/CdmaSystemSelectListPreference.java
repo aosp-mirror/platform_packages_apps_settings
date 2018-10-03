@@ -20,7 +20,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.ListPreference;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
@@ -28,9 +27,11 @@ import android.util.Log;
 
 import com.android.settingslib.utils.ThreadUtils;
 
+import androidx.preference.ListPreference;
+
 public class CdmaSystemSelectListPreference extends ListPreference {
 
-    private static final String LOG_TAG = "CdmaRoamingListPreference";
+    private static final String LOG_TAG = "CdmaRoamingListPref";
     private static final boolean DBG = false;
 
     private TelephonyManager mTelephonyManager;
@@ -57,17 +58,15 @@ public class CdmaSystemSelectListPreference extends ListPreference {
         queryCdmaRoamingMode();
     }
 
-    @Override
+    //TODO(b/114749736): Move this to preference controller
     protected void showDialog(Bundle state) {
         if (!mTelephonyManager.getEmergencyCallbackMode()) {
-            super.showDialog(state);
+            // show Dialog
         }
     }
 
-    @Override
+    //TODO(b/114749736): Move this to preference controller
     protected void onDialogClosed(boolean positiveResult) {
-        super.onDialogClosed(positiveResult);
-
         if (positiveResult && (getValue() != null)) {
             int buttonCdmaRoamingMode = Integer.parseInt(getValue());
             int settingsCdmaRoamingMode = Settings.Global.getInt(

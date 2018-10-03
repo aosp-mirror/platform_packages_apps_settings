@@ -20,12 +20,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
-import android.preference.Preference;
+import androidx.preference.Preference;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
 
+import com.android.settings.R;
 import com.android.settingslib.net.DataUsageController;
 
 /**

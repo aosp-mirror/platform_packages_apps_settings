@@ -21,9 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.TwoStatePreference;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -31,9 +28,13 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.TwoStatePreference;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.phone.NetworkSelectSettingActivity;
+import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
 /**
@@ -273,7 +274,8 @@ public class NetworkOperators extends PreferenceCategory
      * Open the Choose network page via {@alink NetworkSelectSettingActivity}
      */
     public void openChooseNetworkPage() {
-        Intent intent = NetworkSelectSettingActivity.getIntent(getContext(), mSubId);
+        //TODO(b/114749736): Build intent without calling static method
+        Intent intent = new Intent();
         getContext().startActivity(intent);
     }
 

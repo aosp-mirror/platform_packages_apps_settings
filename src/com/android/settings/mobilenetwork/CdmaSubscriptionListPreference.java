@@ -18,7 +18,7 @@ package com.android.settings.mobilenetwork;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.preference.ListPreference;
+import androidx.preference.ListPreference;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
@@ -29,7 +29,7 @@ import com.android.settingslib.utils.ThreadUtils;
 
 public class CdmaSubscriptionListPreference extends ListPreference {
 
-    private static final String LOG_TAG = "CdmaSubscriptionListPreference";
+    private static final String LOG_TAG = "CdmaSubListPref";
 
     // Used for CDMA subscription mode
     private static final int CDMA_SUBSCRIPTION_RUIM_SIM = 0;
@@ -67,17 +67,13 @@ public class CdmaSubscriptionListPreference extends ListPreference {
         mTelephonyManager = TelephonyManager.from(getContext()).createForSubscriptionId(subId);
     }
 
-    @Override
+    //TODO(b/114749736): move this logic to preference controller
     protected void showDialog(Bundle state) {
         setCurrentCdmaSubscriptionModeValue();
-
-        super.showDialog(state);
     }
 
-    @Override
+    //TODO(b/114749736): move this logic to preference controller
     protected void onDialogClosed(boolean positiveResult) {
-        super.onDialogClosed(positiveResult);
-
         if (!positiveResult) {
             //The button was dismissed - no need to set new value
             return;

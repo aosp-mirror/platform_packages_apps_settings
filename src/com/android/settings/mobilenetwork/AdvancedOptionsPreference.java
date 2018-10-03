@@ -16,27 +16,31 @@
 package com.android.settings.mobilenetwork;
 
 import android.content.Context;
-import android.preference.Preference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
+
+import com.android.settings.R;
 
 /**
  * Customized preference class representing the "Advanced" button that expands to fields that
  * are hidden by default.
  */
+//TODO(b/114749736): Change it back to normal preference
 public class AdvancedOptionsPreference extends Preference {
     public AdvancedOptionsPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
 
         setIcon(R.drawable.ic_expand_more);
         setTitle(R.string.advanced_options_title);
-        TextView summary = view.findViewById(android.R.id.summary);
+        TextView summary = (TextView) holder.findViewById(android.R.id.summary);
         summary.setMaxLines(1);
     }
 }

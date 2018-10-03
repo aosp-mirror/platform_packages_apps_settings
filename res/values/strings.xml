@@ -10186,23 +10186,10 @@
     <!-- Configuration setting for world mode Format is <true;GID if any to be checked> [CHAR LIMIT=NONE] -->
     <string translatable="false" name="config_world_mode"/>
 
-    <!-- Available networks screen, text when no networks connected [CHAR LIMIT=NONE] -->
-    <string name="network_disconnected">Disconnected</string>
-    <!-- Available networks screen, text when network connected [CHAR LIMIT=NONE] -->
-    <string name="network_connected">Connected</string>
-    <!-- Available networks screen, text when a network is connecting [CHAR LIMIT=NONE] -->
-    <string name="network_connecting">Connecting\u2026</string>
-    <!-- Available networks screen, text when a network cannot be connected [CHAR LIMIT=NONE] -->
-    <string name="network_could_not_connect">Couldn’t connect</string>
-
     <!-- Available networks screen title/heading [CHAR LIMIT=NONE] -->
     <string name="label_available">Available networks</string>
     <!-- Mobile network settings screen, toast when searching for available networks [CHAR LIMIT=NONE] -->
     <string name="load_networks_progress">Searching\u2026</string>
-    <!-- Available networks screen, text when no networks are found [CHAR LIMIT=NONE] -->
-    <string name="empty_networks_list">No networks found.</string>
-    <!-- Available networks screen, toast when an error is encountered when searching for networks [CHAR LIMIT=NONE] -->
-    <string name="network_query_error">Couldn\u2019t find networks. Try again.</string>
     <!-- Available networks screen, toast when registering on a specific network [CHAR LIMIT=NONE] -->
     <string name="register_on_network">Registering on <xliff:g id="network" example="Verizon">%s</xliff:g>\u2026</string>
     <!-- Available networks screen, toast when SIM card isn't allowed on a network [CHAR LIMIT=NONE] -->
@@ -10215,8 +10202,6 @@
     <!-- Available networks screen, name of switch button for whether to select network automatically [CHAR LIMIT=NONE] -->
     <string name="select_automatically">Automatically select network</string>
 
-    <!-- Available networks screen, name of button when user wants to select network manually [CHAR LIMIT=NONE] -->
-    <string name="choose_network_title">Choose network</string>
     <!-- A menu item in "Mobile network settings" that allows the user to update the phone
      with mobile operator specific settings. [CHAR LIMIT=25] -->
     <string name="carrier_settings_title">Carrier settings</string>
@@ -10259,4 +10244,16 @@
     <string name="cdma_subscription_summary">Change between RUIM/SIM and NV</string>
     <!-- Dialog title for CDMA subscription [CHAR LIMIT=30] -->
     <string name="cdma_subscription_dialogtitle">subscription</string>
+
+    <!-- Mobile network settings screen, Advanced button to show more items when clicked [CHAR LIMIT=50] -->
+    <string name="advanced_options_title">Advanced</string>
+    <!-- Title to register automatically [CHAR LIMIT=NONE] -->
+    <string name="register_automatically">Automatic registration\u2026</string>
+    <!-- Mobile network settings screen, dialog message title when user selects the Data roaming check box [CHAR LIMIT=120] -->
+    <string name="roaming_alert_title">Allow data roaming?</string>
+    <!-- Mobile network settings screen, message asking the user to check their pricing with their Carrier, when enabling Data roaming. [CHAR LIMIT=NONE] -->
+    <string name="roaming_check_price_warning">Check with your network provider for pricing.</string>
+
+    <!-- Available networks screen, summary when button disallowed due to permanent automatic mode [CHAR LIMIT=NONE] -->
+    <string name="manual_mode_disallowed_summary">Unavailable when connected to <xliff:g id="carrier" example="verizon">%1$s</xliff:g></string>
 </resources>

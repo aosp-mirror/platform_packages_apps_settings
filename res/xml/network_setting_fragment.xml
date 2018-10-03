@@ -20,23 +20,23 @@
         android:title="@string/cdma_lte_data_service">
     </PreferenceScreen>
 
-    <com.android.phone.MobileDataPreference
+    <com.android.settings.mobilenetwork.MobileDataPreference
         android:key="mobile_data_enable"
         android:title="@string/mobile_data_settings_title"
         android:summary="@string/mobile_data_settings_summary"/>
 
-    <com.android.phone.RestrictedSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="button_roaming_key"
         android:title="@string/roaming"
         android:persistent="false"
         android:summaryOn="@string/roaming_enable"
         android:summaryOff="@string/roaming_disable"/>
 
-    <com.android.phone.DataUsagePreference
+    <com.android.settings.mobilenetwork.DataUsagePreference
         android:key="data_usage_summary"
         android:title="@string/data_usage_title" />
 
-    <com.android.phone.AdvancedOptionsPreference
+    <com.android.settings.mobilenetwork.AdvancedOptionsPreference
         android:key="advanced_options"/>
 
     <SwitchPreference

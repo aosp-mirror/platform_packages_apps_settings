@@ -27,7 +27,6 @@ import android.telephony.TelephonyScanManager;
 import android.util.Log;
 
 import com.android.internal.telephony.CellNetworkScanResult;
-import com.android.phone.CellInfoUtil;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;

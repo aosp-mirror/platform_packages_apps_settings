@@ -19,8 +19,6 @@ package com.android.settings.mobilenetwork;
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,12 +34,6 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -67,26 +59,29 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.phone.AdvancedOptionsPreference;
-import com.android.phone.CdmaOptions;
-import com.android.phone.CdmaSystemSelectListPreference;
-import com.android.phone.DataUsagePreference;
-import com.android.phone.EmergencyCallbackModeExitDialog;
-import com.android.phone.GsmUmtsOptions;
-import com.android.phone.MobileDataPreference;
-import com.android.phone.MobileNetworkSettings;
-import com.android.phone.NetworkOperators;
-import com.android.phone.NetworkSelectListPreference;
-import com.android.phone.RestrictedSwitchPreference;
-import com.android.phone.RoamingDialogFragment;
+import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public static class MobileNetworkFragment extends PreferenceFragment implements
-        Preference.OnPreferenceChangeListener, com.android.phone.RoamingDialogFragment.RoamingDialogListener {
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
+public class MobileNetworkFragment extends DashboardFragment implements
+        Preference.OnPreferenceChangeListener, RoamingDialogFragment.RoamingDialogListener {
 
     // debug data
     private static final String LOG_TAG = "NetworkSettings";
@@ -125,10 +120,14 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
     private static final String BUTTON_GSM_APN_EXPAND_KEY = "button_gsm_apn_key";
     private static final String BUTTON_CDMA_APN_EXPAND_KEY = "button_cdma_apn_key";
 
+    private static final String EXTRA_EXIT_ECM_RESULT = "exit_ecm_result";
+    private static final String LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT =
+            "android.telecom.action.CONNECTION_SERVICE_CONFIGURE";
+
     private final BroadcastReceiver
-            mPhoneChangeReceiver = new MobileNetworkSettings.MobileNetworkFragment.PhoneChangeReceiver();
+            mPhoneChangeReceiver = new PhoneChangeReceiver();
     private final ContentObserver
-            mDpcEnforcedContentObserver = new MobileNetworkSettings.MobileNetworkFragment.DpcApnEnforcedObserver();
+            mDpcEnforcedContentObserver = new DpcApnEnforcedObserver();
 
     static final int preferredNetworkMode = Phone.PREFERRED_NT_MODE;
 
@@ -142,13 +141,17 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
     //Intent extra to indicate expand all fields.
     private static final String EXPAND_EXTRA = "expandable";
 
+    private enum TabState {
+        NO_TABS, UPDATE, DO_NOTHING
+    }
+
     private SubscriptionManager mSubscriptionManager;
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
     private int mSubId;
 
     //UI objects
-    private com.android.phone.AdvancedOptionsPreference mAdvancedOptions;
+    private AdvancedOptionsPreference mAdvancedOptions;
     private ListPreference mButtonPreferredNetworkMode;
     private ListPreference mButtonEnabledNetworks;
     private RestrictedSwitchPreference mButtonDataRoam;
@@ -159,15 +162,15 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
     private Preference mWiFiCallingPref;
     private SwitchPreference mVideoCallingPref;
     private NetworkSelectListPreference mButtonNetworkSelect;
-    private com.android.phone.MobileDataPreference mMobileDataPref;
-    private com.android.phone.DataUsagePreference mDataUsagePref;
+    private MobileDataPreference mMobileDataPref;
+    private DataUsagePreference mDataUsagePref;
 
     private static final String iface = "rmnet0"; //TODO: this will go away
     private List<SubscriptionInfo> mActiveSubInfos;
 
     private UserManager mUm;
     private ImsManager mImsMgr;
-    private MobileNetworkSettings.MobileNetworkFragment.MyHandler mHandler;
+    private MyHandler mHandler;
     private boolean mOkClicked;
     private boolean mExpandAdvancedFields;
 
@@ -175,8 +178,8 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
     private TabHost mTabHost;
 
     //GsmUmts options and Cdma options
-    com.android.phone.GsmUmtsOptions mGsmUmtsOptions;
-    com.android.phone.CdmaOptions mCdmaOptions;
+    GsmUmtsOptions mGsmUmtsOptions;
+    CdmaOptions mCdmaOptions;
 
     private Preference mClickedPreference;
     private boolean mShow4GForLTE;
@@ -205,11 +208,11 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
          * Listen to different subId if it's changed.
          */
         protected void updateSubscriptionId(Integer subId) {
-            if (subId.equals(MobileNetworkSettings.MobileNetworkFragment.PhoneCallStateListener.this.mSubId)) {
+            if (subId.equals(PhoneCallStateListener.this.mSubId)) {
                 return;
             }
 
-            MobileNetworkSettings.MobileNetworkFragment.PhoneCallStateListener.this.mSubId = subId;
+            PhoneCallStateListener.this.mSubId = subId;
 
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
 
@@ -220,29 +223,29 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         }
     }
 
-    private final MobileNetworkSettings.MobileNetworkFragment.PhoneCallStateListener
-            mPhoneStateListener = new MobileNetworkSettings.MobileNetworkFragment.PhoneCallStateListener();
+    private final PhoneCallStateListener
+            mPhoneStateListener = new PhoneCallStateListener();
+
+    //TODO(b/114749736): figure out a way to update this fragment from intent
+    public void onIntentUpdate(Intent intent) {
+        if (!mUnavailable) {
+            updateCurrentTab(intent);
+        }
+    }
 
     @Override
-    public void onPositiveButtonClick(DialogFragment dialog) {
+    public int getMetricsCategory() {
+        //TODO(b/114749736): add metrics id for it
+        return 0;
+    }
+
+    @Override
+    public void onPositiveButtonClick(androidx.fragment.app.DialogFragment dialog) {
         mTelephonyManager.setDataRoamingEnabled(true);
         mButtonDataRoam.setChecked(true);
         MetricsLogger.action(getContext(),
                 getMetricsEventCategory(getPreferenceScreen(), mButtonDataRoam),
                 true);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        if (getListView() != null) {
-            getListView().setDivider(null);
-        }
-    }
-
-    public void onIntentUpdate(Intent intent) {
-        if (!mUnavailable) {
-            updateCurrentTab(intent);
-        }
     }
 
     /**
@@ -251,9 +254,8 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
      * preference click events.
      */
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-            Preference preference) {
-        sendMetricsEventPreferenceClicked(preferenceScreen, preference);
+    public boolean onPreferenceTreeClick(Preference preference) {
+        sendMetricsEventPreferenceClicked(getPreferenceScreen(), preference);
 
         /** TODO: Refactor and get rid of the if's using subclasses */
         if (preference.getKey().equals(BUTTON_4G_LTE_KEY)) {
@@ -283,7 +285,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
             return true;
         } else if (preference == mLteDataServicePref) {
             String tmpl = android.provider.Settings.Global.getString(
-                    getActivity().getContentResolver(),
+                    getContext().getContentResolver(),
                     android.provider.Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL);
             if (!TextUtils.isEmpty(tmpl)) {
                 String imsi = mTelephonyManager.getSubscriberId();
@@ -323,7 +325,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
             // if the button is anything but the simple toggle preference,
             // we'll need to disable all preferences to reject all click
             // events until the sub-activity's UI comes up.
-            preferenceScreen.setEnabled(false);
+            getPreferenceScreen().setEnabled(false);
             // Let the intents be launched by the Preference manager
             return false;
         }
@@ -349,8 +351,8 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
     }
 
     private void initializeSubscriptions() {
-        final Activity activity = getActivity();
-        if (activity == null || activity.isDestroyed()) {
+        final FragmentActivity activity = getActivity();
+        if (activity == null) {
             // Process preferences in activity only if its not destroyed
             return;
         }
@@ -360,7 +362,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         // Before updating the the active subscription list check
         // if tab updating is needed as the list is changing.
         List<SubscriptionInfo> sil = mSubscriptionManager.getActiveSubscriptionInfoList();
-        MobileNetworkSettings.TabState state = isUpdateTabsNeeded(sil);
+        TabState state = isUpdateTabsNeeded(sil);
 
         // Update to the active subscription list
         mActiveSubInfos.clear();
@@ -430,19 +432,19 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         if (DBG) log("initializeSubscriptions:-");
     }
 
-    private MobileNetworkSettings.TabState isUpdateTabsNeeded(List<SubscriptionInfo> newSil) {
-        MobileNetworkSettings.TabState state = MobileNetworkSettings.TabState.DO_NOTHING;
+    private TabState isUpdateTabsNeeded(List<SubscriptionInfo> newSil) {
+        TabState state = TabState.DO_NOTHING;
         if (newSil == null) {
             if (mActiveSubInfos.size() >= TAB_THRESHOLD) {
                 if (DBG) log("isUpdateTabsNeeded: NO_TABS, size unknown and was tabbed");
-                state = MobileNetworkSettings.TabState.NO_TABS;
+                state = TabState.NO_TABS;
             }
         } else if (newSil.size() < TAB_THRESHOLD && mActiveSubInfos.size() >= TAB_THRESHOLD) {
             if (DBG) log("isUpdateTabsNeeded: NO_TABS, size went to small");
-            state = MobileNetworkSettings.TabState.NO_TABS;
+            state = TabState.NO_TABS;
         } else if (newSil.size() >= TAB_THRESHOLD && mActiveSubInfos.size() < TAB_THRESHOLD) {
             if (DBG) log("isUpdateTabsNeeded: UPDATE, size changed");
-            state = MobileNetworkSettings.TabState.UPDATE;
+            state = TabState.UPDATE;
         } else if (newSil.size() >= TAB_THRESHOLD) {
             Iterator<SubscriptionInfo> siIterator = mActiveSubInfos.iterator();
             for(SubscriptionInfo newSi : newSil) {
@@ -450,7 +452,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
                 if (!newSi.getDisplayName().equals(curSi.getDisplayName())) {
                     if (DBG) log("isUpdateTabsNeeded: UPDATE, new name="
                             + newSi.getDisplayName());
-                    state = MobileNetworkSettings.TabState.UPDATE;
+                    state = TabState.UPDATE;
                     break;
                 }
             }
@@ -530,27 +532,25 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
     public void onCreate(Bundle icicle) {
         Log.i(LOG_TAG, "onCreate:+");
         super.onCreate(icicle);
+        final Context context = getContext();
 
-        final Activity activity = getActivity();
-        if (activity == null || activity.isDestroyed()) {
+        if (context == null) {
             Log.e(LOG_TAG, "onCreate:- with no valid activity.");
             return;
         }
 
-        mHandler = new MobileNetworkSettings.MobileNetworkFragment.MyHandler();
-        mUm = (UserManager) activity.getSystemService(Context.USER_SERVICE);
-        mSubscriptionManager = SubscriptionManager.from(activity);
-        mTelephonyManager = (TelephonyManager) activity.getSystemService(
+        mHandler = new MyHandler();
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mSubscriptionManager = SubscriptionManager.from(context);
+        mTelephonyManager = (TelephonyManager) context.getSystemService(
                 Context.TELEPHONY_SERVICE);
         mCarrierConfigManager = new CarrierConfigManager(getContext());
 
         if (icicle != null) {
             mExpandAdvancedFields = icicle.getBoolean(EXPAND_ADVANCED_FIELDS, false);
-        } else if (getActivity().getIntent().getBooleanExtra(EXPAND_EXTRA, false)) {
+        } else if (getIntent().getBooleanExtra(EXPAND_EXTRA, false)) {
             mExpandAdvancedFields = true;
         }
-
-        addPreferencesFromResource(R.xml.network_setting_fragment);
 
         mButton4glte = (SwitchPreference)findPreference(BUTTON_4G_LTE_KEY);
         mButton4glte.setOnPreferenceChangeListener(this);
@@ -562,7 +562,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         mDataUsagePref = (DataUsagePreference) findPreference(BUTTON_DATA_USAGE_KEY);
 
         try {
-            Context con = activity.createPackageContext("com.android.systemui", 0);
+            Context con = context.createPackageContext("com.android.systemui", 0);
             int id = con.getResources().getIdentifier("config_show4GForLTE",
                     "bool", "com.android.systemui");
             mShow4GForLTE = con.getResources().getBoolean(id);
@@ -614,7 +614,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)
                 || !mUm.isSystemUser()) {
             mUnavailable = true;
-            getActivity().setContentView(R.layout.telephony_disallowed_preference_screen);
+            //TODO(b/114749736): migrate telephony_disallowed_preference_screen.xml
         } else {
             initializeSubscriptions();
             updateCurrentTab(getActivity().getIntent());
@@ -692,7 +692,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
 
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
 
-        final Context context = getActivity();
+        final Context context = getContext();
         IntentFilter intentFilter = new IntentFilter(
                 TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
         context.registerReceiver(mPhoneChangeReceiver, intentFilter);
@@ -703,13 +703,23 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
 
     }
 
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.network_setting_fragment;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return null;
+    }
+
     private boolean hasActiveSubscriptions() {
         return mActiveSubInfos.size() > 0;
     }
 
-    private void updateBodyBasicFields(Activity activity, PreferenceScreen prefSet,
+    private void updateBodyBasicFields(FragmentActivity activity, PreferenceScreen prefSet,
             int phoneSubId, boolean hasActiveSubscriptions) {
-        Context context = activity.getApplicationContext();
+        Context context = getContext();
 
         ActionBar actionBar = activity.getActionBar();
         if (actionBar != null) {
@@ -732,7 +742,6 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
 
             // Initialize states of mButtonDataRoam.
             mButtonDataRoam.setChecked(mTelephonyManager.isDataRoamingEnabled());
-            mButtonDataRoam.setDisabledByAdmin(false);
             if (mButtonDataRoam.isEnabled()) {
                 if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                         UserManager.DISALLOW_DATA_ROAMING, UserHandle.myUserId())) {
@@ -746,11 +755,11 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
     }
 
     private void updateBody() {
-        final Activity activity = getActivity();
+        final FragmentActivity activity = getActivity();
         final PreferenceScreen prefSet = getPreferenceScreen();
         final boolean hasActiveSubscriptions = hasActiveSubscriptions();
 
-        if (activity == null || activity.isDestroyed()) {
+        if (activity == null) {
             Log.e(LOG_TAG, "updateBody with no valid activity.");
             return;
         }
@@ -772,14 +781,14 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
             }
         } else {
             // Shows the "Carrier" preference that allows user to add a e-sim profile.
-            if (showEuiccSettings(getContext())) {
+            if (MobileNetworkUtils.showEuiccSettings(getContext())) {
                 mEuiccSettingsPref.setSummary(null /* summary */);
                 prefSet.addPreference(mEuiccSettingsPref);
             }
         }
     }
 
-    private void updateBodyAdvancedFields(Activity activity, PreferenceScreen prefSet,
+    private void updateBodyAdvancedFields(FragmentActivity activity, PreferenceScreen prefSet,
             int phoneSubId, boolean hasActiveSubscriptions) {
         boolean isLteOnCdma = mTelephonyManager.getLteOnCdmaMode()
                 == PhoneConstants.LTE_ON_CDMA_TRUE;
@@ -792,7 +801,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         prefSet.addPreference(mButtonEnabledNetworks);
         prefSet.addPreference(mButton4glte);
 
-        if (showEuiccSettings(getActivity())) {
+        if (MobileNetworkUtils.showEuiccSettings(getContext())) {
             prefSet.addPreference(mEuiccSettingsPref);
             String spn = mTelephonyManager.getSimOperatorName();
             if (TextUtils.isEmpty(spn)) {
@@ -895,11 +904,11 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         UpdatePreferredNetworkModeSummary(settingsNetworkMode);
         UpdateEnabledNetworksValueAndSummary(settingsNetworkMode);
         // Display preferred network type based on what modem returns b/18676277
-        new MobileNetworkSettings.SetPreferredNetworkAsyncTask(
+        new SetPreferredNetworkAsyncTask(
                 mTelephonyManager,
                 mSubId,
                 settingsNetworkMode,
-                mHandler.obtainMessage(MobileNetworkSettings.MobileNetworkFragment.MyHandler.MESSAGE_SET_PREFERRED_NETWORK_TYPE))
+                mHandler.obtainMessage(MyHandler.MESSAGE_SET_PREFERRED_NETWORK_TYPE))
                 .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         /**
@@ -934,7 +943,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         if (ps != null) {
             ps.setEnabled(hasActiveSubscriptions);
         }
-        ps = findPreference(com.android.phone.NetworkOperators.CATEGORY_NETWORK_OPERATORS_KEY);
+        ps = findPreference(NetworkOperators.CATEGORY_NETWORK_OPERATORS_KEY);
         if (ps != null) {
             ps.setEnabled(hasActiveSubscriptions);
         }
@@ -950,7 +959,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         if (ps != null) {
             ps.setEnabled(hasActiveSubscriptions);
         }
-        ps = findPreference(com.android.phone.NetworkOperators.BUTTON_AUTO_SELECT_KEY);
+        ps = findPreference(NetworkOperators.BUTTON_AUTO_SELECT_KEY);
         if (ps != null) {
             ps.setSummary(null);
             if (mTelephonyManager.getServiceState().getRoaming()) {
@@ -1143,11 +1152,11 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
                         android.provider.Settings.Global.PREFERRED_NETWORK_MODE + phoneSubId,
                         buttonNetworkMode );
                 //Set the modem network mode
-                new MobileNetworkSettings.SetPreferredNetworkAsyncTask(
+                new SetPreferredNetworkAsyncTask(
                         mTelephonyManager,
                         mSubId,
                         modemNetworkMode,
-                        mHandler.obtainMessage(MobileNetworkSettings.MobileNetworkFragment.MyHandler.MESSAGE_SET_PREFERRED_NETWORK_TYPE))
+                        mHandler.obtainMessage(MyHandler.MESSAGE_SET_PREFERRED_NETWORK_TYPE))
                         .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         } else if (preference == mButtonEnabledNetworks) {
@@ -1195,11 +1204,11 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
                         android.provider.Settings.Global.PREFERRED_NETWORK_MODE + phoneSubId,
                         buttonNetworkMode );
                 //Set the modem network mode
-                new MobileNetworkSettings.SetPreferredNetworkAsyncTask(
+                new SetPreferredNetworkAsyncTask(
                         mTelephonyManager,
                         mSubId,
                         modemNetworkMode,
-                        mHandler.obtainMessage(MobileNetworkSettings.MobileNetworkFragment.MyHandler.MESSAGE_SET_PREFERRED_NETWORK_TYPE))
+                        mHandler.obtainMessage(MyHandler.MESSAGE_SET_PREFERRED_NETWORK_TYPE))
                         .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         } else if (preference == mButton4glte) {
@@ -1225,8 +1234,8 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
                             getMetricsEventCategory(getPreferenceScreen(), mButtonDataRoam));
                     // First confirm with a warning dialog about charges
                     mOkClicked = false;
-                    com.android.phone.RoamingDialogFragment
-                            fragment = new com.android.phone.RoamingDialogFragment();
+                    RoamingDialogFragment
+                            fragment = new RoamingDialogFragment();
                     Bundle b = new Bundle();
                     b.putInt(RoamingDialogFragment.SUB_ID_KEY, mSubId);
                     fragment.setArguments(b);
@@ -1287,7 +1296,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         }
 
         private void handleSetPreferredNetworkTypeResponse(Message msg) {
-            final Activity activity = getActivity();
+            final FragmentActivity activity = getActivity();
             if (activity == null || activity.isDestroyed()) {
                 // Access preferences of activity only if it is not destroyed
                 // or if fragment is not attached to an activity.
@@ -1589,7 +1598,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         switch(requestCode) {
             case REQUEST_CODE_EXIT_ECM:
                 Boolean isChoiceYes = data.getBooleanExtra(
-                        EmergencyCallbackModeExitDialog.EXTRA_EXIT_ECM_RESULT, false);
+                        EXTRA_EXIT_ECM_RESULT, false);
                 if (isChoiceYes) {
                     // If the phone exits from ECM mode, show the CDMA Options
                     mCdmaOptions.showDialog(mClickedPreference);
@@ -1609,7 +1618,8 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         }
 
         // Removes the preference if the wifi calling is disabled.
-        if (!isWifiCallingEnabled(getContext(), SubscriptionManager.getPhoneId(mSubId))) {
+        if (!MobileNetworkUtils.isWifiCallingEnabled(getContext(),
+                SubscriptionManager.getPhoneId(mSubId))) {
             mCallingCategory.removePreference(mWiFiCallingPref);
             return;
         }
@@ -1618,8 +1628,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
                 TelecomManager.from(getContext()).getSimCallManager();
 
         if (simCallManager != null) {
-            Intent intent = MobileNetworkSettings.buildPhoneAccountConfigureIntent(
-                    getContext(), simCallManager);
+            Intent intent = buildPhoneAccountConfigureIntent(getContext(), simCallManager);
             PackageManager pm = getContext().getPackageManager();
             List<ResolveInfo> resolutions = pm.queryIntentActivities(intent, 0);
             mWiFiCallingPref.setTitle(resolutions.get(0).loadLabel(pm));
@@ -1664,7 +1673,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         if ((mImsMgr == null
                 || !mImsMgr.isVolteEnabledByPlatform()
                 || !mImsMgr.isVolteProvisionedOnDevice()
-                || !isImsServiceStateReady(mImsMgr)
+                || !MobileNetworkUtils.isImsServiceStateReady(mImsMgr)
                 || carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL))) {
             getPreferenceScreen().removePreference(mButton4glte);
@@ -1687,7 +1696,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         if (mImsMgr != null
                 && mImsMgr.isVtEnabledByPlatform()
                 && mImsMgr.isVtProvisionedOnDevice()
-                && isImsServiceStateReady(mImsMgr)
+                && MobileNetworkUtils.isImsServiceStateReady(mImsMgr)
                 && (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS)
                 || mTelephonyManager.isDataEnabled())) {
@@ -1802,7 +1811,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
 
         PreferenceCategory networkOperatorCategory =
                 (PreferenceCategory) prefSet.findPreference(
-                        com.android.phone.NetworkOperators.CATEGORY_NETWORK_OPERATORS_KEY);
+                        NetworkOperators.CATEGORY_NETWORK_OPERATORS_KEY);
         Preference carrierSettings = prefSet.findPreference(BUTTON_CARRIER_SETTINGS_KEY);
         if (networkOperatorCategory != null) {
             if (enable) {
@@ -1822,7 +1831,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
             return;
         }
         updateCdmaOptions(this, prefSet, mSubId);
-        com.android.phone.CdmaSystemSelectListPreference systemSelect =
+        CdmaSystemSelectListPreference systemSelect =
                 (CdmaSystemSelectListPreference)prefSet.findPreference
                         (BUTTON_CDMA_SYSTEM_SELECT_KEY);
         systemSelect.setSubscriptionId(mSubId);
@@ -1929,7 +1938,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         } else if (preference == mVideoCallingPref) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_VIDEO_CALLING_TOGGLE;
         } else if (preference == preferenceScreen
-                .findPreference(com.android.phone.NetworkOperators.BUTTON_AUTO_SELECT_KEY)) {
+                .findPreference(NetworkOperators.BUTTON_AUTO_SELECT_KEY)) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_AUTO_SELECT_NETWORK_TOGGLE;
         } else if (preference == preferenceScreen
                 .findPreference(NetworkOperators.BUTTON_NETWORK_SELECT_KEY)) {
@@ -1950,7 +1959,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         }
     }
 
-    private void updateGsmUmtsOptions(PreferenceFragment prefFragment,
+    private void updateGsmUmtsOptions(PreferenceFragmentCompat prefFragment,
             PreferenceScreen prefScreen, final int subId) {
         // We don't want to re-create GsmUmtsOptions if already exists. Otherwise, the
         // preferences inside it will also be re-created which causes unexpected behavior.
@@ -1962,7 +1971,7 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
         }
     }
 
-    private void updateCdmaOptions(PreferenceFragment prefFragment, PreferenceScreen prefScreen,
+    private void updateCdmaOptions(PreferenceFragmentCompat prefFragment, PreferenceScreen prefScreen,
             int subId) {
         // We don't want to re-create CdmaOptions if already exists. Otherwise, the preferences
         // inside it will also be re-created which causes unexpected behavior. For example,
@@ -1973,31 +1982,80 @@ public static class MobileNetworkFragment extends PreferenceFragment implements
             mCdmaOptions.updateSubscriptionId(subId);
         }
     }
-}
 
-private static final class SetPreferredNetworkAsyncTask extends AsyncTask<Void, Void, Boolean> {
+    private static Intent buildPhoneAccountConfigureIntent(
+            Context context, PhoneAccountHandle accountHandle) {
+        Intent intent = buildConfigureIntent(
+                context, accountHandle, TelecomManager.ACTION_CONFIGURE_PHONE_ACCOUNT);
 
-    private final TelephonyManager mTelephonyManager;
-    private final int mSubId;
-    private final int mNetworkType;
-    private final Message mCallback;
-
-    SetPreferredNetworkAsyncTask(
-            TelephonyManager tm, int subId, int networkType, Message callback) {
-        mTelephonyManager = tm;
-        mSubId = subId;
-        mNetworkType = networkType;
-        mCallback = callback;
+        if (intent == null) {
+            // If the new configuration didn't work, try the old configuration intent.
+            intent = buildConfigureIntent(
+                    context, accountHandle, LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT);
+            if (intent != null) {
+                Log.w(MobileNetworkFragment.LOG_TAG,
+                        "Phone account using old configuration intent: " + accountHandle);
+            }
+        }
+        return intent;
     }
 
-    @Override
-    protected Boolean doInBackground(Void... voids) {
-        return mTelephonyManager.setPreferredNetworkType(mSubId, mNetworkType);
+    private static Intent buildConfigureIntent(
+            Context context, PhoneAccountHandle accountHandle, String actionStr) {
+        if (accountHandle == null || accountHandle.getComponentName() == null
+                || TextUtils.isEmpty(accountHandle.getComponentName().getPackageName())) {
+            return null;
+        }
+
+        // Build the settings intent.
+        Intent intent = new Intent(actionStr);
+        intent.setPackage(accountHandle.getComponentName().getPackageName());
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, accountHandle);
+
+        // Check to see that the phone account package can handle the setting intent.
+        PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> resolutions = pm.queryIntentActivities(intent, 0);
+        if (resolutions.size() == 0) {
+            intent = null;  // set no intent if the package cannot handle it.
+        }
+
+        return intent;
     }
 
-    @Override
-    protected void onPostExecute(Boolean isSuccessed) {
-        mCallback.obj = isSuccessed;
-        mCallback.sendToTarget();
+    //TODO(b/114749736): update search provider
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return false;
+                }
+            };
+
+    private static final class SetPreferredNetworkAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final TelephonyManager mTelephonyManager;
+        private final int mSubId;
+        private final int mNetworkType;
+        private final Message mCallback;
+
+        SetPreferredNetworkAsyncTask(
+                TelephonyManager tm, int subId, int networkType, Message callback) {
+            mTelephonyManager = tm;
+            mSubId = subId;
+            mNetworkType = networkType;
+            mCallback = callback;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            return mTelephonyManager.setPreferredNetworkType(mSubId, mNetworkType);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean isSuccessed) {
+            mCallback.obj = isSuccessed;
+            mCallback.sendToTarget();
+        }
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.phone;
+package com.android.settings.mobilenetwork;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,8 +24,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoCdma;
 import android.telephony.CellInfoGsm;
@@ -43,7 +41,7 @@ import android.widget.Toast;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.OperatorInfo;
-import com.android.phone.NetworkScanHelper.NetworkScanCallback;
+import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -51,6 +49,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 
 
 /**
@@ -159,25 +160,26 @@ public class NetworkSelectListPreference extends ListPreference
         }
     };
 
-    private final NetworkScanHelper.NetworkScanCallback mCallback = new NetworkScanCallback() {
-        public void onResults(List<CellInfo> results) {
-            if (DBG) logd("get scan results: " + results.toString());
-            Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_RESULTS, results);
-            msg.sendToTarget();
-        }
+    private final NetworkScanHelper.NetworkScanCallback mCallback =
+            new NetworkScanHelper.NetworkScanCallback() {
+                public void onResults(List<CellInfo> results) {
+                    if (DBG) logd("get scan results: " + results.toString());
+                    Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_RESULTS, results);
+                    msg.sendToTarget();
+                }
 
-        public void onComplete() {
-            if (DBG) logd("network scan completed.");
-            Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_COMPLETED);
-            msg.sendToTarget();
-        }
+                public void onComplete() {
+                    if (DBG) logd("network scan completed.");
+                    Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_COMPLETED);
+                    msg.sendToTarget();
+                }
 
-        public void onError(int error) {
-            if (DBG) logd("network scan error.");
-            Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_ERROR);
-            msg.sendToTarget();
-        }
-    };
+                public void onError(int error) {
+                    if (DBG) logd("network scan error.");
+                    Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_ERROR);
+                    msg.sendToTarget();
+                }
+            };
 
     @Override
     //implemented for DialogInterface.OnCancelListener
@@ -189,9 +191,8 @@ public class NetworkSelectListPreference extends ListPreference
         mNetworkOperators.getNetworkSelectionMode();
     }
 
-    @Override
+    //TODO(b/114749736): move this logic to preference controller
     protected void onDialogClosed(boolean positiveResult) {
-        super.onDialogClosed(positiveResult);
         // If dismissed, we query NetworkSelectMode and update states of AutoSelect button.
         if (!positiveResult) {
             mNetworkOperators.getNetworkSelectionMode();
