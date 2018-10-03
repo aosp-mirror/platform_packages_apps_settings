@@ -231,9 +231,13 @@ public class ApnEditor extends SettingsPreferenceFragment
 
         final Intent intent = getIntent();
         final String action = intent.getAction();
+        if (TextUtils.isEmpty(action)) {
+            finish();
+            return;
+        }
+
         mSubId = intent.getIntExtra(ApnSettings.SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-
         mReadOnlyApn = false;
         mReadOnlyApnTypes = null;
         mReadOnlyApnFields = null;

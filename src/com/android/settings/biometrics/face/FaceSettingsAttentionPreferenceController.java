@@ -18,8 +18,8 @@ package com.android.settings.biometrics.face;
 
 import android.content.Context;
 import android.hardware.face.FaceManager;
-import android.util.Log;
 
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
 import androidx.preference.PreferenceScreen;
@@ -39,7 +39,7 @@ public class FaceSettingsAttentionPreferenceController extends TogglePreferenceC
 
     public FaceSettingsAttentionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mFaceManager = context.getSystemService(FaceManager.class);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     public FaceSettingsAttentionPreferenceController(Context context) {

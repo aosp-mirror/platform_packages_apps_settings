@@ -17,35 +17,44 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.os.UserHandle;
 import android.os.UserManager;
-
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.RestrictedSwitchPreference;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class})
 public class ExternalSourcesDetailsTest {
 
     @Mock
     private UserManager mUserManager;
     @Mock
     private RestrictedSwitchPreference mSwitchPref;
+    @Mock
+    private RestrictedPreferenceHelper mHelper;
     @Mock
     private PackageInfo mPackageInfo;
 
@@ -90,5 +99,128 @@ public class ExternalSourcesDetailsTest {
         mFragment.refreshUi();
 
         assertThat(mFragment.refreshUi()).isTrue();
+        assertThat(mSwitchPref.isDisabledByAdmin()).isFalse();
+    }
+
+    @Test
+    public void refreshUi_userRestrictionsUnknownSources_disablesSwitchPreference() {
+        // Mocks set up
+        final ExternalSourcesDetails fragment = new ExternalSourcesDetails();
+        final ContextWrapper context = RuntimeEnvironment.application;
+        final UserManager userManager = (UserManager) context.getSystemService(
+                Context.USER_SERVICE);
+        final ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+
+        ReflectionHelpers.setField(fragment, "mSwitchPref", mSwitchPref);
+        ReflectionHelpers.setField(fragment, "mPackageInfo", mPackageInfo);
+        mPackageInfo.applicationInfo = new ApplicationInfo();
+        ReflectionHelpers.setField(fragment, "mUserManager", userManager);
+        ReflectionHelpers.setField(mSwitchPref, "mHelper", mHelper);
+
+        final AppStateInstallAppsBridge appBridge = mock(AppStateInstallAppsBridge.class);
+        ReflectionHelpers.setField(fragment, "mAppBridge", appBridge);
+        when(appBridge.createInstallAppsStateFor(nullable(String.class), anyInt()))
+                .thenReturn(mock(InstallAppsState.class));
+
+        // Test restriction set up
+        shadowUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, true);
+        doAnswer((answer) -> {
+            when(mSwitchPref.isDisabledByAdmin()).thenReturn(true);
+            return null;
+        }).when(mSwitchPref).checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
+
+        // Code execution
+        assertThat(fragment.refreshUi()).isTrue();
+
+        // Assertions
+        assertThat(shadowUserManager.hasUserRestriction(
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
+                UserHandle.of(UserHandle.myUserId()))).isTrue();
+        assertThat(mSwitchPref.isDisabledByAdmin()).isTrue();
+    }
+
+    @Test
+    public void refreshUi_userRestrictionsUnknownSourcesGlobally_disablesSwitchPreference() {
+        // Mocks set up
+        final ExternalSourcesDetails fragment = new ExternalSourcesDetails();
+        final ContextWrapper context = RuntimeEnvironment.application;
+        final UserManager userManager = (UserManager) context.getSystemService(
+                Context.USER_SERVICE);
+        final ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+
+        ReflectionHelpers.setField(fragment, "mSwitchPref", mSwitchPref);
+        ReflectionHelpers.setField(fragment, "mPackageInfo", mPackageInfo);
+        mPackageInfo.applicationInfo = new ApplicationInfo();
+        ReflectionHelpers.setField(fragment, "mUserManager", userManager);
+        ReflectionHelpers.setField(mSwitchPref, "mHelper", mHelper);
+
+        final AppStateInstallAppsBridge appBridge = mock(AppStateInstallAppsBridge.class);
+        ReflectionHelpers.setField(fragment, "mAppBridge", appBridge);
+        when(appBridge.createInstallAppsStateFor(nullable(String.class), anyInt()))
+                .thenReturn(mock(InstallAppsState.class));
+
+        // Test restriction set up
+        shadowUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY, true);
+        doAnswer((answer) -> {
+            when(mSwitchPref.isDisabledByAdmin()).thenReturn(true);
+            return null;
+        }).when(mSwitchPref).checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY);
+
+        // Code execution
+        assertThat(fragment.refreshUi()).isTrue();
+
+        // Assertions
+        assertThat(shadowUserManager.hasUserRestriction(
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
+                UserHandle.of(UserHandle.myUserId()))).isTrue();
+        assertThat(mSwitchPref.isDisabledByAdmin()).isTrue();
+    }
+
+    @Test
+    public void refreshUi_bothUnknownSourcesUserRestrictions_disableSwitchPreference() {
+        // Mocks set up
+        final ExternalSourcesDetails fragment = new ExternalSourcesDetails();
+        final ContextWrapper context = RuntimeEnvironment.application;
+        final UserManager userManager = (UserManager) context.getSystemService(
+                Context.USER_SERVICE);
+        final ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+
+        ReflectionHelpers.setField(fragment, "mSwitchPref", mSwitchPref);
+        ReflectionHelpers.setField(fragment, "mPackageInfo", mPackageInfo);
+        mPackageInfo.applicationInfo = new ApplicationInfo();
+        ReflectionHelpers.setField(fragment, "mUserManager", userManager);
+        ReflectionHelpers.setField(mSwitchPref, "mHelper", mHelper);
+
+        final AppStateInstallAppsBridge appBridge = mock(AppStateInstallAppsBridge.class);
+        ReflectionHelpers.setField(fragment, "mAppBridge", appBridge);
+        when(appBridge.createInstallAppsStateFor(nullable(String.class), anyInt()))
+                .thenReturn(mock(InstallAppsState.class));
+
+        // Test restriction set up
+        shadowUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY, true);
+        shadowUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, true);
+        doAnswer((answer) -> {
+            when(mSwitchPref.isDisabledByAdmin()).thenReturn(true);
+            return null;
+        }).when(mSwitchPref).checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY);
+
+        // Code execution
+        assertThat(fragment.refreshUi()).isTrue();
+
+        // Assertions
+        assertThat(shadowUserManager.hasUserRestriction(
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
+                UserHandle.of(UserHandle.myUserId()))).isTrue();
+        assertThat(shadowUserManager.hasUserRestriction(
+                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
+                UserHandle.of(UserHandle.myUserId()))).isTrue();
+        assertThat(mSwitchPref.isDisabledByAdmin()).isTrue();
     }
 }

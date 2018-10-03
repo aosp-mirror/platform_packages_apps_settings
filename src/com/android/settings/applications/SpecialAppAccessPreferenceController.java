@@ -23,6 +23,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.datausage.AppStateDataUsageBridge;
+import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -108,8 +109,8 @@ public class SpecialAppAccessPreferenceController extends BasePreferenceControll
             if (!ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER.filterApp(entry)) {
                 continue;
             }
-            if (entry.extraInfo != null && ((AppStateDataUsageBridge.DataUsageState)
-                    entry.extraInfo).isDataSaverWhitelisted) {
+            if (entry.extraInfo instanceof DataUsageState
+                    && ((DataUsageState) entry.extraInfo).isDataSaverWhitelisted) {
                 count++;
             }
         }
