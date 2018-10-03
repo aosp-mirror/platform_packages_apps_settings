@@ -122,8 +122,8 @@ public class MasterClearTest {
 
         verify(context).startActivity(intent.capture());
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-            .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
-            .isTrue();
+                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+                .isTrue();
     }
 
     @Test
@@ -139,8 +139,8 @@ public class MasterClearTest {
 
         verify(context).startActivity(intent.capture());
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-            .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
-            .isFalse();
+                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+                .isFalse();
     }
 
     @Test
@@ -210,11 +210,10 @@ public class MasterClearTest {
         ShadowUtils.setIsDemoUser(true);
 
         final ComponentName componentName =
-            ComponentName.unflattenFromString("com.android.retaildemo/.DeviceAdminReceiver");
+                ComponentName.unflattenFromString("com.android.retaildemo/.DeviceAdminReceiver");
         ShadowUtils.setDeviceOwnerComponent(componentName);
 
-        mMasterClear.mInitiateListener
-            .onClick(mContentView.findViewById(R.id.initiate_master_clear));
+        mMasterClear.mInitiateListener.onClick(mContentView);
         final Intent intent = mShadowActivity.getNextStartedActivity();
         assertThat(Intent.ACTION_FACTORY_RESET).isEqualTo(intent.getAction());
         assertThat(componentName).isNotNull();
@@ -240,7 +239,8 @@ public class MasterClearTest {
         doNothing().when(mMasterClear).establishInitialState();
 
         mMasterClear
-            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED, null);
+                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED,
+                        null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(1)).establishInitialState();
@@ -255,7 +255,7 @@ public class MasterClearTest {
         doNothing().when(mMasterClear).showAccountCredentialConfirmation(eq(mMockIntent));
 
         mMasterClear
-            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(0)).establishInitialState();
@@ -270,7 +270,7 @@ public class MasterClearTest {
         doNothing().when(mMasterClear).showFinalConfirmation();
 
         mMasterClear
-            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(0)).establishInitialState();
@@ -281,14 +281,14 @@ public class MasterClearTest {
     @Test
     public void testOnActivityResultInternal_confirmRequestTriggeringShowFinal() {
         doReturn(true).when(mMasterClear)
-            .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
         doNothing().when(mMasterClear).showFinalConfirmation();
 
         mMasterClear.onActivityResultInternal(
-            MasterClear.CREDENTIAL_CONFIRM_REQUEST, Activity.RESULT_OK, null);
+                MasterClear.CREDENTIAL_CONFIRM_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMasterClear, times(1))
-            .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
         verify(mMasterClear, times(0)).establishInitialState();
         verify(mMasterClear, times(0)).getAccountConfirmationIntent();
         verify(mMasterClear, times(1)).showFinalConfirmation();
@@ -306,9 +306,9 @@ public class MasterClearTest {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
-            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+                .thenReturn(TEST_CONFIRMATION_PACKAGE);
         when(mMockActivity.getString(R.string.account_confirmation_class))
-            .thenReturn(TEST_CONFIRMATION_CLASS);
+                .thenReturn(TEST_CONFIRMATION_CLASS);
 
         Account[] accounts = new Account[0];
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
@@ -321,10 +321,10 @@ public class MasterClearTest {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
-            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+                .thenReturn(TEST_CONFIRMATION_PACKAGE);
         when(mMockActivity.getString(R.string.account_confirmation_class))
-            .thenReturn(TEST_CONFIRMATION_CLASS);
-        Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
+                .thenReturn(TEST_CONFIRMATION_CLASS);
+        Account[] accounts = new Account[]{new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE)};
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
         // The package manager should not resolve the confirmation intent targeting the non-existent
@@ -339,11 +339,11 @@ public class MasterClearTest {
         // Only try to show account confirmation if the appropriate resource overlays are available.
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
-            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+                .thenReturn(TEST_CONFIRMATION_PACKAGE);
         when(mMockActivity.getString(R.string.account_confirmation_class))
-            .thenReturn(TEST_CONFIRMATION_CLASS);
+                .thenReturn(TEST_CONFIRMATION_CLASS);
         // Add accounts to trigger the search for a resolving intent.
-        Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
+        Account[] accounts = new Account[]{new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE)};
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
         // The package manager should not resolve the confirmation intent targeting the non-existent
@@ -366,17 +366,19 @@ public class MasterClearTest {
     public void testShowAccountCredentialConfirmation() {
         // Finally mock out the startActivityForResultCall
         doNothing().when(mMasterClear)
-            .startActivityForResult(eq(mMockIntent), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                .startActivityForResult(eq(mMockIntent),
+                        eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
         mMasterClear.showAccountCredentialConfirmation(mMockIntent);
         verify(mMasterClear, times(1))
-            .startActivityForResult(eq(mMockIntent), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                .startActivityForResult(eq(mMockIntent),
+                        eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
     }
 
     @Test
     public void testIsValidRequestCode() {
         assertThat(mMasterClear.isValidRequestCode(MasterClear.KEYGUARD_REQUEST)).isTrue();
         assertThat(mMasterClear.isValidRequestCode(MasterClear.CREDENTIAL_CONFIRM_REQUEST))
-            .isTrue();
+                .isTrue();
         assertThat(mMasterClear.isValidRequestCode(0)).isFalse();
     }
 
