@@ -34,6 +34,8 @@ import android.net.Network;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -46,6 +48,8 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.net.InetAddress;
 import java.util.List;
@@ -134,6 +138,19 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
                         : res.getString(R.string.private_dns_mode_provider_failure);
         }
         return "";
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        //TODO(b/112982691): Add policy transparency explaining why this setting is disabled.
+        preference.setEnabled(!isManagedByAdmin());
+    }
+
+    private boolean isManagedByAdmin() {
+        EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_PRIVATE_DNS, UserHandle.myUserId());
+        return enforcedAdmin != null;
     }
 
     private class PrivateDnsSettingsObserver extends ContentObserver {
