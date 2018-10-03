@@ -25,6 +25,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
@@ -35,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageUtils;
@@ -63,6 +65,9 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.DATA_USAGE_V2)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return isBandwidthControlEnabled() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -99,7 +104,9 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
 
     @Override
     public void onPause() {
-        mParent.getLoaderManager().destroyLoader(mParent.LOADER_CHART_DATA);
+        if (mStatsSession != null) {
+            mParent.getLoaderManager().destroyLoader(mParent.LOADER_CHART_DATA);
+        }
     }
 
     @Override

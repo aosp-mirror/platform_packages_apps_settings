@@ -426,11 +426,11 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
 
     private void startAppDataUsage(AppItem item) {
         final Bundle args = new Bundle();
-        args.putParcelable(AppDataUsage.ARG_APP_ITEM, item);
-        args.putParcelable(AppDataUsage.ARG_NETWORK_TEMPLATE, mTemplate);
+        args.putParcelable(AppDataUsageV2.ARG_APP_ITEM, item);
+        args.putParcelable(AppDataUsageV2.ARG_NETWORK_TEMPLATE, mTemplate);
 
         new SubSettingLauncher(getContext())
-                .setDestination(AppDataUsage.class.getName())
+                .setDestination(AppDataUsageV2.class.getName())
                 .setTitleRes(R.string.app_data_usage)
                 .setArguments(args)
                 .setSourceMetricsCategory(getMetricsCategory())
@@ -490,8 +490,6 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         @Override
         public Loader<List<NetworkCycleChartData>> onCreateLoader(int id, Bundle args) {
             return NetworkCycleChartDataLoader.builder(getContext())
-                    .setNetworkPolicy(services.mPolicyEditor.getPolicy(mTemplate))
-                    .setNetworkType(mNetworkType)
                     .setNetworkTemplate(mTemplate)
                     .setSubscriberId(mTelephonyManager.getSubscriberId(mSubId))
                     .build();

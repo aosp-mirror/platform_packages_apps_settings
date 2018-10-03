@@ -68,6 +68,12 @@
         settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
 
     <Preference
+        android:key="data_settings_v2"
+        android:title="@string/data_usage_app_summary_title"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceControllerV2" />
+
+    <Preference
         android:key="time_spent_in_app"
         android:title="@string/time_spent_in_app_pref_title"
         settings:controller="com.android.settings.applications.appinfo.TimeSpentInAppPreferenceController" />
