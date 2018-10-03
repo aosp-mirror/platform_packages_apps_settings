@@ -41,8 +41,6 @@ import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
-import com.android.settings.search.DeviceIndexFeatureProvider;
-import com.android.settings.search.DeviceIndexFeatureProviderImpl;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
@@ -73,7 +71,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private UserFeatureProvider mUserFeatureProvider;
     private SlicesFeatureProvider mSlicesFeatureProvider;
     private AccountFeatureProvider mAccountFeatureProvider;
-    private DeviceIndexFeatureProviderImpl mDeviceIndexFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -210,13 +207,5 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mAccountFeatureProvider = new AccountFeatureProviderImpl();
         }
         return mAccountFeatureProvider;
-    }
-
-    @Override
-    public DeviceIndexFeatureProvider getDeviceIndexFeatureProvider() {
-        if (mDeviceIndexFeatureProvider == null) {
-            mDeviceIndexFeatureProvider = new DeviceIndexFeatureProviderImpl();
-        }
-        return mDeviceIndexFeatureProvider;
     }
 }
