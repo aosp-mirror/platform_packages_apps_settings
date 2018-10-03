@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.android.phone.NetworkOperators
+        android:key="network_operators_category_key"
+        android:title="@string/network_operator_category"
+        android:persistent="false">
+
+        <SwitchPreference
+            android:key="button_auto_select_key"
+            android:title="@string/select_automatically"
+            android:persistent="false"/>
+
+        <com.android.phone.NetworkSelectListPreference
+            android:key="button_network_select_key"
+            android:title="@string/network_select_title"
+            android:persistent="false"/>
+
+        <Preference
+            android:key="button_choose_network_key"
+            android:title="@string/choose_network_title"
+            android:fragment="com.android.phone.NetworkSelectSetting" />
+    </com.android.phone.NetworkOperators>
+
+    <!--We want separate APN setting from reset of settings because-->
+    <!--we want user to change it with caution.-->
+    <PreferenceCategory
+        android:key="category_gsm_apn_key"
+        android:layout="@layout/preference_category_no_label">
+
+        <com.android.phone.RestrictedPreference
+            android:key="button_gsm_apn_key"
+            android:title="@string/apn_settings"
+            android:persistent="false" />
+    </PreferenceCategory>
+
+    <PreferenceScreen
+        android:key="carrier_settings_key"
+        android:title="@string/carrier_settings_title">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="@string/carrier_settings"
+                android:targetClass="@string/carrier_settings_menu" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

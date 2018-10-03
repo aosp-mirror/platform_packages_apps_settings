@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceScreen
+        android:key="cdma_lte_data_service_key"
+        android:title="@string/cdma_lte_data_service">
+    </PreferenceScreen>
+
+    <com.android.phone.MobileDataPreference
+        android:key="mobile_data_enable"
+        android:title="@string/mobile_data_settings_title"
+        android:summary="@string/mobile_data_settings_summary"/>
+
+    <com.android.phone.RestrictedSwitchPreference
+        android:key="button_roaming_key"
+        android:title="@string/roaming"
+        android:persistent="false"
+        android:summaryOn="@string/roaming_enable"
+        android:summaryOff="@string/roaming_disable"/>
+
+    <com.android.phone.DataUsagePreference
+        android:key="data_usage_summary"
+        android:title="@string/data_usage_title" />
+
+    <com.android.phone.AdvancedOptionsPreference
+        android:key="advanced_options"/>
+
+    <SwitchPreference
+        android:key="enhanced_4g_lte"
+        android:title="@string/enhanced_4g_lte_mode_title"
+        android:persistent="false"
+        android:summary="@string/enhanced_4g_lte_mode_summary"/>
+
+    <ListPreference
+        android:key="preferred_network_mode_key"
+        android:title="@string/preferred_network_mode_title"
+        android:summary="@string/preferred_network_mode_summary"
+        android:entries="@array/preferred_network_mode_choices"
+        android:entryValues="@array/preferred_network_mode_values"
+        android:dialogTitle="@string/preferred_network_mode_dialogtitle" />
+
+    <ListPreference
+        android:key="enabled_networks_key"
+        android:title="@string/preferred_network_mode_title"
+        android:summary="@string/preferred_network_mode_summary"
+        android:entries="@array/enabled_networks_choices"
+        android:entryValues="@array/enabled_networks_values"
+        android:dialogTitle="@string/preferred_network_mode_dialogtitle" />
+
+    <Preference
+        android:key="carrier_settings_euicc_key"
+        android:title="@string/carrier_settings_euicc" />
+
+    <PreferenceCategory
+        android:key="calling"
+        android:title="@string/call_category">
+
+        <PreferenceScreen
+            android:key="wifi_calling_key"
+            android:title="@string/wifi_calling_settings_title">
+
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.Settings$WifiCallingSettingsActivity">
+                        <extra android:name="show_drawer_menu" android:value="true" />
+            </intent>
+
+        </PreferenceScreen>
+
+        <SwitchPreference
+            android:key="video_calling_key"
+            android:title="@string/video_calling_settings_title"
+            android:persistent="true"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
