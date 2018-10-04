@@ -105,7 +105,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private CountDownTimer mCountdownTimer;
         private boolean mIsAlpha;
         private InputMethodManager mImm;
-        private boolean mUsingFingerprint = false;
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
 
@@ -243,7 +242,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mCancelButton.setAlpha(0f);
             mPasswordEntry.setAlpha(0f);
             mErrorTextView.setAlpha(0f);
-            mFingerprintIcon.setAlpha(0f);
         }
 
         private View[] getActiveViews() {
@@ -255,9 +253,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
             result.add(mPasswordEntry);
             result.add(mErrorTextView);
-            if (mFingerprintIcon.getVisibility() == View.VISIBLE) {
-                result.add(mFingerprintIcon);
-            }
             return result.toArray(new View[] {});
         }
 
@@ -303,17 +298,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mCredentialCheckResultTracker.setResult(true, new Intent(), 0, mEffectiveUserId);
         }
 
-        @Override
-        public void onFingerprintIconVisibilityChanged(boolean visible) {
-            mUsingFingerprint = visible;
-        }
-
         private void updatePasswordEntry() {
             final boolean isLockedOut =
                     mLockPatternUtils.getLockoutAttemptDeadline(mEffectiveUserId) != 0;
             mPasswordEntry.setEnabled(!isLockedOut);
             mPasswordEntryInputDisabler.setInputEnabled(!isLockedOut);
-            if (isLockedOut || mUsingFingerprint) {
+            if (isLockedOut) {
                 mImm.hideSoftInputFromWindow(mPasswordEntry.getWindowToken(), 0 /*flags*/);
             } else {
                 mPasswordEntry.scheduleShowSoftInput();
