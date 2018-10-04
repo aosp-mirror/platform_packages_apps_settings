@@ -19,13 +19,19 @@ package com.android.settings.datausage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
 import android.util.DataUnit;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -42,6 +48,9 @@ public final class DataUsageUtilsTest {
     private ConnectivityManager mManager;
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private NetworkStatsManager mNetworkStatsManager;
+
     private Context mContext;
 
     @Before
@@ -51,6 +60,7 @@ public final class DataUsageUtilsTest {
         mContext = shadowContext.getApplicationContext();
         shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
         shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
+        shadowContext.setSystemService(Context.NETWORK_STATS_SERVICE, mNetworkStatsManager);
     }
 
     @Test
@@ -87,5 +97,18 @@ public final class DataUsageUtilsTest {
                 mContext, DataUnit.GIBIBYTES.toBytes(1));
 
         assertThat(formattedDataUsage).isEqualTo("1.00 GB");
+    }
+
+    @Test
+    public void hasEthernet_shouldQueryEthernetSummaryForUser() throws Exception {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DATA_USAGE_V2, true);
+        when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
+        final String subscriber = "TestSub";
+        when(mTelephonyManager.getSubscriberId()).thenReturn(subscriber);
+
+        DataUsageUtils.hasEthernet(mContext);
+
+        verify(mNetworkStatsManager).querySummaryForUser(eq(ConnectivityManager.TYPE_ETHERNET),
+            eq(subscriber), anyLong() /* startTime */, anyLong() /* endTime */);
     }
 }
