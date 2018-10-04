@@ -64,13 +64,13 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     public static final String TITLE_TEXT = PACKAGE + ".ConfirmCredentials.title";
     public static final String HEADER_TEXT = PACKAGE + ".ConfirmCredentials.header";
     public static final String DETAILS_TEXT = PACKAGE + ".ConfirmCredentials.details";
-    public static final String ALLOW_FP_AUTHENTICATION =
-            PACKAGE + ".ConfirmCredentials.allowFpAuthentication";
     public static final String DARK_THEME = PACKAGE + ".ConfirmCredentials.darkTheme";
     public static final String SHOW_CANCEL_BUTTON =
             PACKAGE + ".ConfirmCredentials.showCancelButton";
     public static final String SHOW_WHEN_LOCKED =
             PACKAGE + ".ConfirmCredentials.showWhenLocked";
+    public static final String USE_FADE_ANIMATION =
+            PACKAGE + ".ConfirmCredentials.useFadeAnimation";
 
     protected static final int USER_TYPE_PRIMARY = 1;
     protected static final int USER_TYPE_MANAGED_PROFILE = 2;
