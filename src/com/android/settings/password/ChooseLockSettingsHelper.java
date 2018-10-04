@@ -78,7 +78,13 @@ public final class ChooseLockSettingsHelper {
      * @see Activity#onActivityResult(int, int, android.content.Intent)
      */
     public boolean launchConfirmationActivity(int request, CharSequence title) {
-        return launchConfirmationActivity(request, title, null, null, false, false);
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                null /* header */,
+                null /* description */,
+                false /* returnCredentials */,
+                false /* external */);
     }
 
     /**
@@ -91,7 +97,13 @@ public final class ChooseLockSettingsHelper {
      * @see Activity#onActivityResult(int, int, android.content.Intent)
      */
     public boolean launchConfirmationActivity(int request, CharSequence title, boolean returnCredentials) {
-        return launchConfirmationActivity(request, title, null, null, returnCredentials, false);
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                null /* header */,
+                null /* description */,
+                returnCredentials /* returnCredentials */,
+                false /* external */);
     }
 
     /**
@@ -106,8 +118,16 @@ public final class ChooseLockSettingsHelper {
      */
     public boolean launchConfirmationActivity(int request, CharSequence title,
             boolean returnCredentials, int userId) {
-        return launchConfirmationActivity(request, title, null, null,
-                returnCredentials, false, false, 0, Utils.enforceSameOwner(mActivity, userId));
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                null /* header */,
+                null /* description */,
+                returnCredentials /* returnCredentials */,
+                false /* external */,
+                false /* hasChallenge */,
+                0 /* challenge */,
+                Utils.enforceSameOwner(mActivity, userId) /* userId */);
     }
 
     /**
@@ -127,8 +147,16 @@ public final class ChooseLockSettingsHelper {
     boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external) {
-        return launchConfirmationActivity(request, title, header, description,
-                returnCredentials, external, false, 0, Utils.getCredentialOwnerUserId(mActivity));
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                header /* header */,
+                description /* description */,
+                returnCredentials /* returnCredentials */,
+                external /* external */,
+                false /* hasChallenge */,
+                0 /* challenge */,
+                Utils.getCredentialOwnerUserId(mActivity) /* userId */);
     }
 
     /**
@@ -149,8 +177,16 @@ public final class ChooseLockSettingsHelper {
     boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, int userId) {
-        return launchConfirmationActivity(request, title, header, description,
-                returnCredentials, external, false, 0, Utils.enforceSameOwner(mActivity, userId));
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                header /* header */,
+                description /* description */,
+                returnCredentials /* returnCredentials */,
+                external /* external */,
+                false /* hasChallenge */,
+                0 /* challenge */,
+                Utils.enforceSameOwner(mActivity, userId) /* userId */);
     }
 
     /**
@@ -166,8 +202,16 @@ public final class ChooseLockSettingsHelper {
     public boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             long challenge) {
-        return launchConfirmationActivity(request, title, header, description,
-                true, false, true, challenge, Utils.getCredentialOwnerUserId(mActivity));
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                header /* header */,
+                description /* description */,
+                true /* returnCredentials */,
+                false /* external */,
+                true /* hasChallenge */,
+                challenge /* challenge */,
+                Utils.getCredentialOwnerUserId(mActivity) /* userId */);
     }
 
     /**
@@ -184,8 +228,16 @@ public final class ChooseLockSettingsHelper {
     public boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             long challenge, int userId) {
-        return launchConfirmationActivity(request, title, header, description,
-                true, false, true, challenge, Utils.enforceSameOwner(mActivity, userId));
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                header /* header */,
+                description /* description */,
+                true /* returnCredentials */,
+                false /* external */,
+                true /* hasChallenge */,
+                challenge /* challenge */,
+                Utils.enforceSameOwner(mActivity, userId) /* userId */);
     }
 
     /**
@@ -205,8 +257,16 @@ public final class ChooseLockSettingsHelper {
     public boolean launchConfirmationActivityWithExternalAndChallenge(int request,
             @Nullable CharSequence title, @Nullable CharSequence header,
             @Nullable CharSequence description, boolean external, long challenge, int userId) {
-        return launchConfirmationActivity(request, title, header, description, false,
-                external, true, challenge, Utils.enforceSameOwner(mActivity, userId));
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                header /* header */,
+                description /* description */,
+                false /* returnCredentials */,
+                external /* external */,
+                true /* hasChallenge */,
+                challenge /* challenge */,
+                Utils.enforceSameOwner(mActivity, userId) /* userId */);
     }
 
     /**
@@ -219,31 +279,69 @@ public final class ChooseLockSettingsHelper {
             @Nullable CharSequence description, int userId) {
         final Bundle extras = new Bundle();
         extras.putBoolean(EXTRA_ALLOW_ANY_USER, true);
-        return launchConfirmationActivity(request, title, header, description, false,
-                false, true, 0, userId, extras);
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                header /* header */,
+                description /* description */,
+                false /* returnCredentials */,
+                false /* external */,
+                true /* hasChallenge */,
+                0 /* challenge */,
+                userId /* userId */,
+                extras /* extras */);
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,
             long challenge, int userId) {
-        return launchConfirmationActivity(request, title, header, description, returnCredentials,
-                external, hasChallenge, challenge, userId, null /* alternateButton */, null);
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                header /* header */,
+                description /* description */,
+                returnCredentials /* returnCredentials */,
+                external /* external */,
+                hasChallenge /* hasChallenge */,
+                challenge /* challenge */,
+                userId /* userId */,
+                null /* alternateButton */,
+                null /* extras */);
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,
             long challenge, int userId, Bundle extras) {
-        return launchConfirmationActivity(request, title, header, description, returnCredentials,
-                external, hasChallenge, challenge, userId, null /* alternateButton */, extras);
+        return launchConfirmationActivity(
+                request /* request */,
+                title /* title */,
+                header /* header */,
+                description /* description */,
+                returnCredentials /* returnCredentials */,
+                external /* external */,
+                hasChallenge /* hasChallenge */,
+                challenge /* challenge */,
+                userId /* userId */,
+                null /* alternateButton */,
+                extras /* extras */);
     }
 
     public boolean launchFrpConfirmationActivity(int request, @Nullable CharSequence header,
             @Nullable CharSequence description, @Nullable CharSequence alternateButton) {
-        return launchConfirmationActivity(request, null /* title */, header, description,
-                false /* returnCredentials */, true /* external */, false /* hasChallenge */,
-                0 /* challenge */, LockPatternUtils.USER_FRP, alternateButton, null);
+        return launchConfirmationActivity(
+                request /* request */,
+                null /* title */,
+                header /* header */,
+                description /* description */,
+                false /* returnCredentials */,
+                true /* external */,
+                false /* hasChallenge */,
+                0 /* challenge */,
+                LockPatternUtils.USER_FRP /* userId */,
+                alternateButton /* alternateButton */,
+                null /* extras */);
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
