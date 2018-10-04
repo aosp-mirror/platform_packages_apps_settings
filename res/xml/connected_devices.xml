@@ -41,18 +41,24 @@
         settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
 
-    <Preference
+    <PreferenceCategory
         android:key="previously_connected_devices"
         android:title="@string/connected_device_previously_connected_title"
-        android:icon="@drawable/ic_devices_other_black"
-        android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"
-        settings:allowDividerAbove="true"
-        settings:controller="com.android.settings.connecteddevice.PreviouslyConnectedDevicePreferenceController"/>
+        settings:controller="com.android.settings.connecteddevice.PreviouslyConnectedDevicePreferenceController">
+
+        <Preference
+            android:key="previously_connected_devices_see_all"
+            android:title="@string/previous_connected_see_all"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:order="10"
+            android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
+    </PreferenceCategory>
 
     <Preference
         android:key="connection_preferences"
         android:title="@string/connected_device_connections_title"
         android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
+        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController"/>
 
 </PreferenceScreen>

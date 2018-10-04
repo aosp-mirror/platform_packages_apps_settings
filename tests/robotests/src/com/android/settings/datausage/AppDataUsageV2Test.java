@@ -19,6 +19,7 @@ package com.android.settings.datausage;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doNothing;
@@ -28,12 +29,14 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
 import android.util.ArraySet;
 import android.view.View;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -45,6 +48,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.net.NetworkCycleDataForUid;
 
 import org.junit.After;
 import org.junit.Before;
@@ -56,6 +60,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtilsInternal.class})
@@ -171,5 +178,50 @@ public class AppDataUsageV2Test {
 
         verify(restrictBackgroundPref).setDisabledByAdmin(any(EnforcedAdmin.class));
         verify(unrestrictedDataPref).setDisabledByAdmin(any(EnforcedAdmin.class));
+    }
+
+    @Test
+    public void bindData_noAppUsageData_shouldHideCycleSpinner() {
+        mFragment = spy(new AppDataUsageV2());
+        final SpinnerPreference cycle = mock(SpinnerPreference.class);
+        ReflectionHelpers.setField(mFragment, "mCycle", cycle);
+        final Preference preference = mock(Preference.class);
+        ReflectionHelpers.setField(mFragment, "mBackgroundUsage", preference);
+        ReflectionHelpers.setField(mFragment, "mForegroundUsage", preference);
+        ReflectionHelpers.setField(mFragment, "mTotalUsage", preference);
+        doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
+
+        mFragment.bindData(0 /* position */);
+
+        verify(cycle).setVisible(false);
+    }
+
+    @Test
+    public void bindData_hasAppUsageData_shouldShowCycleSpinnerAndUpdateUsageSummary() {
+        mFragment = spy(new AppDataUsageV2());
+        final Context context = RuntimeEnvironment.application;
+        doReturn(context).when(mFragment).getContext();
+        final long backgroundBytes = 1234L;
+        final long foregroundBytes = 5678L;
+        final List<NetworkCycleDataForUid> appUsage = new ArrayList<>();
+        appUsage.add(new NetworkCycleDataForUid.Builder()
+            .setBackgroundUsage(backgroundBytes).setForegroundUsage(foregroundBytes).build());
+        ReflectionHelpers.setField(mFragment, "mUsageData", appUsage);
+        final Preference backgroundPref = mock(Preference.class);
+        ReflectionHelpers.setField(mFragment, "mBackgroundUsage", backgroundPref);
+        final Preference foregroundPref = mock(Preference.class);
+        ReflectionHelpers.setField(mFragment, "mForegroundUsage", foregroundPref);
+        final Preference totalPref = mock(Preference.class);
+        ReflectionHelpers.setField(mFragment, "mTotalUsage", totalPref);
+        final SpinnerPreference cycle = mock(SpinnerPreference.class);
+        ReflectionHelpers.setField(mFragment, "mCycle", cycle);
+
+        mFragment.bindData(0 /* position */);
+
+        verify(cycle).setVisible(true);
+        verify(totalPref).setSummary(
+            DataUsageUtils.formatDataUsage(context, backgroundBytes + foregroundBytes));
+        verify(backgroundPref).setSummary(DataUsageUtils.formatDataUsage(context, backgroundBytes));
+        verify(foregroundPref).setSummary(DataUsageUtils.formatDataUsage(context, foregroundBytes));
     }
 }

@@ -14,122 +14,125 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.setupwizardlib.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/SuwThemeGlifV3.Light"
+    android:icon="@drawable/ic_delete_accent"
+    app:suwHeaderText="@string/master_clear_title">
 
     <ScrollView
-            android:id="@+id/master_clear_scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_marginStart="@dimen/reset_master_clear_margin_start"
-            android:layout_marginEnd="@dimen/reset_master_clear_margin_end"
-            android:layout_marginTop="12dp"
-            android:layout_weight="1">
+        android:id="@+id/master_clear_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/reset_master_clear_margin_start"
+        android:layout_marginEnd="@dimen/reset_master_clear_margin_end">
+
         <LinearLayout
             android:id="@+id/master_clear_container"
+            style="@style/SuwContentFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
+                style="@style/TextAppearance.SuwGlifItemSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/master_clear_item_label"
-                android:includeFontPadding="false"
-                android:text="@string/master_clear_desc" />
-            <TextView android:id="@+id/also_erases_external"
+                android:text="@string/master_clear_desc"/>
+            <TextView
+                android:id="@+id/also_erases_external"
+                style="@style/TextAppearance.SuwGlifItemSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/master_clear_item_label"
-                android:includeFontPadding="false"
                 android:visibility="gone"
-                android:text="@string/master_clear_desc_also_erases_external" />
-            <TextView android:id="@+id/also_erases_esim"
+                android:text="@string/master_clear_desc_also_erases_external"/>
+            <TextView
+                android:id="@+id/also_erases_esim"
+                style="@style/TextAppearance.SuwGlifItemSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/master_clear_item_label"
-                android:includeFontPadding="false"
                 android:visibility="gone"
-                android:text="@string/master_clear_desc_also_erases_esim" />
-            <TextView android:id="@+id/accounts_label"
+                android:text="@string/master_clear_desc_also_erases_esim"/>
+            <TextView
+                android:id="@+id/accounts_label"
+                style="@style/TextAppearance.SuwGlifItemSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/master_clear_item_label"
                 android:visibility="gone"
-                android:text="@string/master_clear_accounts" />
-            <LinearLayout android:id="@+id/accounts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                android:text="@string/master_clear_accounts"/>
+            <LinearLayout
+                android:id="@+id/accounts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
                 <!-- Do not add any children here as they will be removed in the MasterClear.java
                     code. A list of accounts will be inserted programmatically. -->
             </LinearLayout>
-            <TextView android:id="@+id/other_users_present"
+            <TextView
+                android:id="@+id/other_users_present"
+                style="@style/TextAppearance.SuwGlifItemSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textSize="18sp"
-                android:text="@string/master_clear_other_users_present" />
-            <TextView android:id="@+id/no_cancel_mobile_plan"
+                android:text="@string/master_clear_other_users_present"/>
+            <TextView
+                android:id="@+id/no_cancel_mobile_plan"
+                style="@style/TextAppearance.SuwGlifItemSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textSize="18sp"
-                android:text="@string/master_clear_desc_no_cancel_mobile_plan" />
-            <TextView android:id="@+id/erase_external_option_text"
+                android:text="@string/master_clear_desc_no_cancel_mobile_plan"/>
+            <TextView
+                android:id="@+id/erase_external_option_text"
+                style="@style/TextAppearance.SuwGlifItemSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="@string/master_clear_desc_erase_external_storage" />
-            <LinearLayout android:id="@+id/erase_external_container"
+                android:text="@string/master_clear_desc_erase_external_storage"/>
+            <LinearLayout
+                android:id="@+id/erase_external_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:focusable="true"
+                android:clickable="true">
+                <CheckBox
+                    android:id="@+id/erase_external"
+                    style="@style/SuwCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:duplicateParentState="true"/>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:focusable="true"
-                    android:clickable="true">
-                <CheckBox android:id="@+id/erase_external"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:paddingEnd="@dimen/reset_checkbox_padding_end"
-                        android:focusable="false"
-                        android:clickable="false"
-                        android:duplicateParentState="true" />
-                <LinearLayout android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:orientation="vertical">
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
                     <TextView
+                        style="@style/TextAppearance.SuwGlifItemTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/reset_checkbox_title_padding_top"
-                        android:textSize="@dimen/reset_checkbox_title_text_size"
-                        android:text="@string/erase_external_storage" />
+                        android:text="@string/erase_external_storage"/>
                     <TextView
+                        style="@style/TextAppearance.SuwGlifItemSummary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/reset_checkbox_summary_padding_top"
-                        android:textSize="@dimen/reset_checkbox_summary_text_size"
-                        android:text="@string/erase_external_storage_description" />
+                        android:text="@string/erase_external_storage_description"/>
                 </LinearLayout>
             </LinearLayout>
-            <include layout="@layout/reset_esim_checkbox"
-                 android:layout_marginTop="40dp"
-                 android:id="@+id/erase_esim_container"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content" />
+            <include
+                layout="@layout/reset_esim_checkbox"
+                android:layout_marginTop="40dp"
+                android:id="@+id/erase_esim_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
-    <Button
-            android:id="@+id/initiate_master_clear"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dip"
-            android:layout_marginBottom="12dip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/master_clear_button_text"
-            android:gravity="center" />
-
-</LinearLayout>
+</com.android.setupwizardlib.GlifLayout>

@@ -16,18 +16,23 @@
 
 package com.android.settings;
 
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
 import android.service.persistentdata.PersistentDataBlockManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +42,9 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.setupwizardlib.TemplateLayout;
+import com.android.setupwizardlib.template.ButtonFooterMixin;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -51,6 +57,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
  * This is the confirmation screen.
  */
 public class MasterClearConfirm extends InstrumentedFragment {
+    private final static String TAG = "MasterClearConfirm";
 
     private View mContentView;
     private boolean mEraseSdCard;
@@ -103,9 +110,11 @@ public class MasterClearConfirm extends InstrumentedFragment {
                         mProgressDialog.show();
 
                         // need to prevent orientation changes as we're about to go into
-                        // a long IO request, so we won't be able to access inflate resources on flash
+                        // a long IO request, so we won't be able to access inflate resources on
+                        // flash
                         mOldOrientation = getActivity().getRequestedOrientation();
-                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                        getActivity().setRequestedOrientation(
+                                ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                     }
                 }.execute();
             } else {
@@ -140,8 +149,29 @@ public class MasterClearConfirm extends InstrumentedFragment {
      * Configure the UI for the final confirmation interaction
      */
     private void establishFinalConfirmationState() {
-        mContentView.findViewById(R.id.execute_master_clear)
-                .setOnClickListener(mFinalClickListener);
+        final TemplateLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
+
+        final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
+        buttonFooterMixin.removeAllViews();
+        buttonFooterMixin.addSpace();
+        buttonFooterMixin.addSpace();
+        buttonFooterMixin.addButton(R.string.master_clear_button_text,
+                R.style.SuwGlifButton_Primary).setOnClickListener(mFinalClickListener);
+    }
+
+    private void setUpActionBarAndTitle() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            Log.e(TAG, "No activity attached, skipping setUpActionBarAndTitle");
+            return;
+        }
+        final ActionBar actionBar = activity.getActionBar();
+        if (actionBar == null) {
+            Log.e(TAG, "No actionbar, skipping setUpActionBarAndTitle");
+            return;
+        }
+        actionBar.hide();
+        activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
     @Override
@@ -160,6 +190,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
             return new View(getActivity());
         }
         mContentView = inflater.inflate(R.layout.master_clear_confirm, null);
+        setUpActionBarAndTitle();
         establishFinalConfirmationState();
         setAccessibilityTitle();
         return mContentView;
@@ -167,8 +198,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
     private void setAccessibilityTitle() {
         CharSequence currentTitle = getActivity().getTitle();
-        TextView confirmationMessage =
-                (TextView) mContentView.findViewById(R.id.master_clear_confirm);
+        TextView confirmationMessage = mContentView.findViewById(R.id.master_clear_confirm);
         if (confirmationMessage != null) {
             String accessibleText = new StringBuilder(currentTitle).append(",").append(
                     confirmationMessage.getText()).toString();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -22,13 +22,8 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.net.INetworkStatsSession;
-import android.net.NetworkPolicy;
-import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
-import android.net.TrafficStats;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
@@ -51,10 +46,12 @@ import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.net.ChartData;
-import com.android.settingslib.net.ChartDataLoaderCompat;
+import com.android.settingslib.net.NetworkCycleDataForUid;
+import com.android.settingslib.net.NetworkCycleDataForUidLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+
+import java.util.List;
 
 public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -73,7 +70,7 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
     private static final String KEY_CYCLE = "cycle";
     private static final String KEY_UNRESTRICTED_DATA = "unrestricted_data_saver";
 
-    private static final int LOADER_CHART_DATA = 2;
+    private static final int LOADER_APP_USAGE_DATA = 2;
     private static final int LOADER_APP_PREF = 3;
 
     private PackageManager mPackageManager;
@@ -88,14 +85,10 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
     private Drawable mIcon;
     private CharSequence mLabel;
     private String mPackageName;
-    private INetworkStatsSession mStatsSession;
     private CycleAdapter mCycleAdapter;
 
-    private long mStart;
-    private long mEnd;
-    private ChartData mChartData;
+    private List<NetworkCycleDataForUid> mUsageData;
     private NetworkTemplate mTemplate;
-    private NetworkPolicy mPolicy;
     private AppItem mAppItem;
     private Intent mAppSettingsIntent;
     private SpinnerPreference mCycle;
@@ -107,12 +100,6 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
         super.onCreate(icicle);
         mPackageManager = getPackageManager();
         final Bundle args = getArguments();
-
-        try {
-            mStatsSession = services.mStatsService.openSession();
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
 
         mAppItem = (args != null) ? (AppItem) args.getParcelable(ARG_APP_ITEM) : null;
         mTemplate = (args != null) ? (NetworkTemplate) args.getParcelable(ARG_NETWORK_TEMPLATE)
@@ -209,20 +196,12 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
     }
 
     @Override
-    public void onDestroy() {
-        TrafficStats.closeQuietly(mStatsSession);
-        super.onDestroy();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         if (mDataSaverBackend != null) {
             mDataSaverBackend.addListener(this);
         }
-        mPolicy = services.mPolicyEditor.getPolicy(mTemplate);
-        getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoaderCompat.buildArgs(mTemplate, mAppItem), mChartDataCallbacks);
+        getLoaderManager().restartLoader(LOADER_APP_USAGE_DATA, null /* args */, mUidDataCallbacks);
         updatePrefs();
     }
 
@@ -300,19 +279,17 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
         }
     }
 
-    private void bindData() {
+    @VisibleForTesting
+    void bindData(int position) {
         final long backgroundBytes, foregroundBytes;
-        if (mChartData == null || mStart == 0) {
+        if (mUsageData == null || position >= mUsageData.size()) {
             backgroundBytes = foregroundBytes = 0;
             mCycle.setVisible(false);
         } else {
             mCycle.setVisible(true);
-            final long now = System.currentTimeMillis();
-            NetworkStatsHistory.Entry entry = null;
-            entry = mChartData.detailDefault.getValues(mStart, mEnd, now, entry);
-            backgroundBytes = entry.rxBytes + entry.txBytes;
-            entry = mChartData.detailForeground.getValues(mStart, mEnd, now, entry);
-            foregroundBytes = entry.rxBytes + entry.txBytes;
+            final NetworkCycleDataForUid data = mUsageData.get(position);
+            backgroundBytes = data.getBackgroudUsage();
+            foregroundBytes = data.getForegroudUsage();
         }
         final long totalBytes = backgroundBytes + foregroundBytes;
         final Context context = getContext();
@@ -376,11 +353,7 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
             new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            final CycleAdapter.CycleItem cycle = (CycleAdapter.CycleItem) mCycle.getSelectedItem();
-
-            mStart = cycle.start;
-            mEnd = cycle.end;
-            bindData();
+            bindData(position);
         }
 
         @Override
@@ -389,24 +362,30 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
         }
     };
 
-    private final LoaderManager.LoaderCallbacks<ChartData> mChartDataCallbacks =
-            new LoaderManager.LoaderCallbacks<ChartData>() {
-        @Override
-        public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-            return new ChartDataLoaderCompat(getActivity(), mStatsSession, args);
-        }
+    private final LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>> mUidDataCallbacks =
+        new LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>>() {
+            @Override
+            public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
+                return NetworkCycleDataForUidLoader.builder(getContext())
+                    .setUid(mAppItem.key)
+                    .setRetrieveDetail(true)
+                    .setNetworkTemplate(mTemplate)
+                    .setSubscriberId(mTemplate.getSubscriberId())
+                    .build();
+            }
 
-        @Override
-        public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
-            mChartData = data;
-            mCycleAdapter.updateCycleList(mPolicy, mChartData);
-            bindData();
-        }
+            @Override
+            public void onLoadFinished(Loader<List<NetworkCycleDataForUid>> loader,
+                    List<NetworkCycleDataForUid> data) {
+                mUsageData = data;
+                mCycleAdapter.updateCycleList(data);
+                bindData(0 /* position */);
+            }
 
-        @Override
-        public void onLoaderReset(Loader<ChartData> loader) {
-        }
-    };
+            @Override
+            public void onLoaderReset(Loader<List<NetworkCycleDataForUid>> loader) {
+            }
+        };
 
     private final LoaderManager.LoaderCallbacks<ArraySet<Preference>> mAppPrefCallbacks =
         new LoaderManager.LoaderCallbacks<ArraySet<Preference>>() {
