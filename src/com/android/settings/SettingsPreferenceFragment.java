@@ -454,7 +454,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         if (mDialogFragment != null) {
             Log.e(TAG, "Old dialog fragment not null!");
         }
-        mDialogFragment = new SettingsDialogFragment(this, dialogId);
+        mDialogFragment = SettingsDialogFragment.newInstance(this, dialogId);
         mDialogFragment.show(getChildFragmentManager(), Integer.toString(dialogId));
     }
 
@@ -541,22 +541,26 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         private DialogInterface.OnCancelListener mOnCancelListener;
         private DialogInterface.OnDismissListener mOnDismissListener;
 
-        public SettingsDialogFragment(DialogCreatable fragment, int dialogId) {
-            super(fragment, dialogId);
+        public static SettingsDialogFragment newInstance(DialogCreatable fragment, int dialogId) {
             if (!(fragment instanceof Fragment)) {
                 throw new IllegalArgumentException("fragment argument must be an instance of "
                         + Fragment.class.getName());
             }
-            mParentFragment = (Fragment) fragment;
-        }
 
+            final SettingsDialogFragment settingsDialogFragment = new SettingsDialogFragment();
+            settingsDialogFragment.setParentFragment(fragment);
+            settingsDialogFragment.setDialogId(dialogId);
+
+            return settingsDialogFragment;
+        }
 
         @Override
         public int getMetricsCategory() {
-            if (mDialogCreatable == null) {
+            if (mParentFragment == null) {
                 return Instrumentable.METRICS_CATEGORY_UNKNOWN;
             }
-            final int metricsCategory = mDialogCreatable.getDialogMetricsCategory(mDialogId);
+            final int metricsCategory =
+                    ((DialogCreatable) mParentFragment).getDialogMetricsCategory(mDialogId);
             if (metricsCategory <= 0) {
                 throw new IllegalStateException("Dialog must provide a metrics category");
             }
@@ -638,6 +642,14 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                     ((SettingsPreferenceFragment) mParentFragment).mDialogFragment = null;
                 }
             }
+        }
+
+        private void setParentFragment(DialogCreatable fragment) {
+            mParentFragment = (Fragment) fragment;
+        }
+
+        private void setDialogId(int dialogId) {
+            mDialogId = dialogId;
         }
     }
 

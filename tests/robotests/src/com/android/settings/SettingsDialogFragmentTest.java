@@ -51,8 +51,8 @@ public class SettingsDialogFragmentTest {
     public void testGetMetrics_shouldGetMetricFromDialogCreatable() {
         when(mDialogCreatable.getDialogMetricsCategory(DIALOG_ID)).thenReturn(1);
 
-        mDialogFragment =
-                new SettingsPreferenceFragment.SettingsDialogFragment(mDialogCreatable, DIALOG_ID);
+        mDialogFragment = SettingsPreferenceFragment.SettingsDialogFragment.newInstance(
+                mDialogCreatable, DIALOG_ID);
         mDialogFragment.onAttach(RuntimeEnvironment.application);
         mDialogFragment.getMetricsCategory();
 
@@ -65,8 +65,8 @@ public class SettingsDialogFragmentTest {
         when(mDialogCreatable.getDialogMetricsCategory(DIALOG_ID)).thenReturn(-1);
 
         try {
-            mDialogFragment =
-                new SettingsPreferenceFragment.SettingsDialogFragment(mDialogCreatable, DIALOG_ID);
+            mDialogFragment = SettingsPreferenceFragment.SettingsDialogFragment.newInstance(
+                    mDialogCreatable, DIALOG_ID);
             mDialogFragment.onAttach(RuntimeEnvironment.application);
             fail("Should fail with IllegalStateException");
         } catch (IllegalStateException e) {
