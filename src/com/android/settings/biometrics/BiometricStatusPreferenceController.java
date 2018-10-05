@@ -33,7 +33,7 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
     protected final UserManager mUm;
     protected final LockPatternUtils mLockPatternUtils;
 
-    protected final int mUserId = UserHandle.myUserId();
+    private final int mUserId = UserHandle.myUserId();
     protected final int mProfileChallengeUserId;
 
     /**
