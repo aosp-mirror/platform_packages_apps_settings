@@ -20,6 +20,7 @@ import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
 import android.annotation.Nullable;
 
+import com.android.settings.homepage.deviceinfo.BatterySlice;
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
 import com.android.settings.homepage.deviceinfo.StorageSlice;
@@ -63,12 +64,18 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .setSliceUri(EmergencyInfoSlice.EMERGENCY_INFO_CARD_URI.toString())
                         .setCardName(EmergencyInfoSlice.PATH_EMERGENCY_INFO_CARD)
                         .build();
+        final ContextualCard batteryInfoCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(BatterySlice.BATTERY_CARD_URI.toSafeString())
+                        .setCardName(BatterySlice.PATH_BATTERY_INFO)
+                        .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)
                 .addCard(dataUsageCard)
                 .addCard(deviceInfoCard)
                 .addCard(storageInfoCard)
                 .addCard(emergencyInfoCard)
+                .addCard(batteryInfoCard)
                 .build();
 
         return cards;
