@@ -13,7 +13,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    settings:initialExpandedChildrenCount="4">
 
     <PreferenceScreen
         android:key="cdma_lte_data_service_key"
@@ -35,9 +38,6 @@
     <com.android.settings.mobilenetwork.DataUsagePreference
         android:key="data_usage_summary"
         android:title="@string/data_usage_title" />
-
-    <com.android.settings.mobilenetwork.AdvancedOptionsPreference
-        android:key="advanced_options"/>
 
     <SwitchPreference
         android:key="enhanced_4g_lte"

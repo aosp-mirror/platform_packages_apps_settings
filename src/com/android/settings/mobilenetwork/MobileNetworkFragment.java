@@ -146,7 +146,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private int mSubId;
 
     //UI objects
-    private AdvancedOptionsPreference mAdvancedOptions;
     private ListPreference mButtonPreferredNetworkMode;
     private ListPreference mButtonEnabledNetworks;
     private RestrictedSwitchPreference mButtonDataRoam;
@@ -167,7 +166,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private ImsManager mImsMgr;
     private MyHandler mHandler;
     private boolean mOkClicked;
-    private boolean mExpandAdvancedFields;
 
     //GsmUmts options and Cdma options
     GsmUmtsOptions mGsmUmtsOptions;
@@ -302,10 +300,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref
                 || preference == mMobileDataPref || preference == mDataUsagePref) {
             return false;
-        } else if (preference == mAdvancedOptions) {
-            mExpandAdvancedFields = true;
-            updateBody();
-            return true;
         } else {
             // if the button is anything but the simple toggle preference,
             // we'll need to disable all preferences to reject all click
@@ -390,15 +384,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // If advanced fields are already expanded, we save it and expand it
-        // when it's re-created.
-        outState.putBoolean(EXPAND_ADVANCED_FIELDS, mExpandAdvancedFields);
-    }
-
-    @Override
     public void onCreate(Bundle icicle) {
         Log.i(LOG_TAG, "onCreate:+");
         super.onCreate(icicle);
@@ -415,12 +400,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         mTelephonyManager = (TelephonyManager) context.getSystemService(
                 Context.TELEPHONY_SERVICE);
         mCarrierConfigManager = new CarrierConfigManager(getContext());
-
-        if (icicle != null) {
-            mExpandAdvancedFields = icicle.getBoolean(EXPAND_ADVANCED_FIELDS, false);
-        } else if (getIntent().getBooleanExtra(EXPAND_EXTRA, false)) {
-            mExpandAdvancedFields = true;
-        }
 
         mButton4glte = (SwitchPreference)findPreference(BUTTON_4G_LTE_KEY);
         mButton4glte.setOnPreferenceChangeListener(this);
@@ -450,8 +429,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 BUTTON_PREFERED_NETWORK_MODE);
         mButtonEnabledNetworks = (ListPreference) prefSet.findPreference(
                 BUTTON_ENABLED_NETWORKS_KEY);
-        mAdvancedOptions = (AdvancedOptionsPreference) prefSet.findPreference(
-                BUTTON_ADVANCED_OPTIONS_KEY);
         mButtonDataRoam.setOnPreferenceChangeListener(this);
 
         mLteDataServicePref = prefSet.findPreference(BUTTON_CDMA_LTE_DATA_SERVICE_KEY);
@@ -637,11 +614,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         updateBodyBasicFields(activity, prefSet, mSubId, hasActiveSubscriptions);
 
         if (hasActiveSubscriptions) {
-            if (mExpandAdvancedFields) {
-                updateBodyAdvancedFields(activity, prefSet, mSubId, hasActiveSubscriptions);
-            } else {
-                prefSet.addPreference(mAdvancedOptions);
-            }
+            updateBodyAdvancedFields(activity, prefSet, mSubId, hasActiveSubscriptions);
         } else {
             // Shows the "Carrier" preference that allows user to add a e-sim profile.
             if (MobileNetworkUtils.showEuiccSettings(getContext())) {
@@ -1740,7 +1713,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // open the list dialog. When a value is chosen, another MetricsEvent is logged with
         // new value in onPreferenceChange.
         if (preference == mLteDataServicePref || preference == mDataUsagePref
-                || preference == mEuiccSettingsPref || preference == mAdvancedOptions
+                || preference == mEuiccSettingsPref
                 || preference == mWiFiCallingPref || preference == mButtonPreferredNetworkMode
                 || preference == mButtonEnabledNetworks
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
@@ -1786,8 +1759,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_DATA_USAGE;
         } else if (preference == mLteDataServicePref) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_SET_UP_DATA_SERVICE;
-        } else if (preference == mAdvancedOptions) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_EXPAND_ADVANCED_FIELDS;
         } else if (preference == mButton4glte) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_ENHANCED_4G_LTE_MODE_TOGGLE;
         } else if (preference == mButtonPreferredNetworkMode) {

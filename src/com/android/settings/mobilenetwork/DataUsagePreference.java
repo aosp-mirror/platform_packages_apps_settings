@@ -47,16 +47,15 @@ public class DataUsagePreference extends Preference {
      * initialize which subID it connects to.
      */
     public void initialize(int subId) {
-        Activity activity = (Activity) getContext();
-
+        final Context context = getContext();
         mSubId = subId;
-        mTemplate = getNetworkTemplate(activity, subId);
+        mTemplate = getNetworkTemplate(context, subId);
 
-        DataUsageController controller = new DataUsageController(activity);
+        DataUsageController controller = new DataUsageController(context);
 
         DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
-        setSummary(activity.getString(R.string.data_usage_template,
-                Formatter.formatFileSize(activity, usageInfo.usageLevel), usageInfo.period));
+        setSummary(context.getString(R.string.data_usage_template,
+                Formatter.formatFileSize(context, usageInfo.usageLevel), usageInfo.period));
         setIntent(getIntent());
     }
 
@@ -70,8 +69,8 @@ public class DataUsagePreference extends Preference {
         return intent;
     }
 
-    private NetworkTemplate getNetworkTemplate(Activity activity, int subId) {
-        TelephonyManager tm = (TelephonyManager) activity
+    private NetworkTemplate getNetworkTemplate(Context context, int subId) {
+        TelephonyManager tm = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);
         NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
                 tm.getSubscriberId(subId));
