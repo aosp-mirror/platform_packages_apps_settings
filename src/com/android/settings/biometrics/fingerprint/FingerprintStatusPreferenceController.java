@@ -45,12 +45,12 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
 
     @Override
     protected boolean hasEnrolledBiometrics() {
-        return mFingerprintManager.hasEnrolledFingerprints(mUserId);
+        return mFingerprintManager.hasEnrolledFingerprints(getUserId());
     }
 
     @Override
     protected String getSummaryTextEnrolled() {
-        final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
+        final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(getUserId()).size();
         return mContext.getResources().getQuantityString(
                 R.plurals.security_settings_fingerprint_preference_summary,
                 numEnrolled, numEnrolled);
