@@ -493,7 +493,7 @@ public class DataUsageSummaryPreferenceTest {
         mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
         final String cycleText = "The quick fox";
         mSummaryPreference.setWifiMode(true, cycleText);
-        doReturn(200L).when(mSummaryPreference).getHistoriclUsageLevel();
+        doReturn(200L).when(mSummaryPreference).getHistoricalUsageLevel();
 
         bindViewHolder();
         assertThat(mUsageTitle.getText().toString())
@@ -529,7 +529,7 @@ public class DataUsageSummaryPreferenceTest {
     public void testSetWifiMode_noUsageInfo_shouldDisableLaunchButton() {
         mSummaryPreference = spy(mSummaryPreference);
         mSummaryPreference.setWifiMode(true, "Test cycle text");
-        doReturn(0L).when(mSummaryPreference).getHistoriclUsageLevel();
+        doReturn(0L).when(mSummaryPreference).getHistoricalUsageLevel();
 
         bindViewHolder();
 

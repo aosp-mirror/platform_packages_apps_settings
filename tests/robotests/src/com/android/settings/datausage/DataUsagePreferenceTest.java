@@ -57,7 +57,7 @@ public class DataUsagePreferenceTest {
 
     @Test
     public void setTemplate_noDataUsage_shouldDisablePreference() {
-        doReturn(0L).when(mController).getHistoriclUsageLevel(any(NetworkTemplate.class));
+        doReturn(0L).when(mController).getHistoricalUsageLevel(any(NetworkTemplate.class));
 
         mPreference.setTemplate(
                 NetworkTemplate.buildTemplateMobileWildcard(), 5 /* subId */, null /* services */);
@@ -68,7 +68,7 @@ public class DataUsagePreferenceTest {
 
     @Test
     public void setTemplate_hasDataUsage_shouldNotDisablePreference() {
-        doReturn(200L).when(mController).getHistoriclUsageLevel(any(NetworkTemplate.class));
+        doReturn(200L).when(mController).getHistoricalUsageLevel(any(NetworkTemplate.class));
 
         mPreference.setTemplate(
                 NetworkTemplate.buildTemplateMobileWildcard(), 5 /* subId */, null /* services */);
