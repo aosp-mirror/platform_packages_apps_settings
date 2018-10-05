@@ -33,14 +33,4 @@ public class AdvancedOptionsPreference extends Preference {
     public AdvancedOptionsPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-
-        setIcon(R.drawable.ic_expand_more);
-        setTitle(R.string.advanced_options_title);
-        TextView summary = (TextView) holder.findViewById(android.R.id.summary);
-        summary.setMaxLines(1);
-    }
 }

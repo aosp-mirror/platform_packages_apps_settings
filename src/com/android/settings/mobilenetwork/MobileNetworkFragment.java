@@ -46,11 +46,7 @@ import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TabHost;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
@@ -67,7 +63,6 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -174,9 +169,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private boolean mOkClicked;
     private boolean mExpandAdvancedFields;
 
-    // We assume the the value returned by mTabHost.getCurrentTab() == slotId
-    private TabHost mTabHost;
-
     //GsmUmts options and Cdma options
     GsmUmtsOptions mGsmUmtsOptions;
     CdmaOptions mCdmaOptions;
@@ -225,13 +217,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
     private final PhoneCallStateListener
             mPhoneStateListener = new PhoneCallStateListener();
-
-    //TODO(b/114749736): figure out a way to update this fragment from intent
-    public void onIntentUpdate(Intent intent) {
-        if (!mUnavailable) {
-            updateCurrentTab(intent);
-        }
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -356,78 +341,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
             // Process preferences in activity only if its not destroyed
             return;
         }
-        int currentTab = 0;
-        if (DBG) log("initializeSubscriptions:+");
-
-        // Before updating the the active subscription list check
-        // if tab updating is needed as the list is changing.
-        List<SubscriptionInfo> sil = mSubscriptionManager.getActiveSubscriptionInfoList();
-        TabState state = isUpdateTabsNeeded(sil);
-
-        // Update to the active subscription list
-        mActiveSubInfos.clear();
-        if (sil != null) {
-            mActiveSubInfos.addAll(sil);
-            // If there is only 1 sim then currenTab should represent slot no. of the sim.
-            if (sil.size() == 1) {
-                currentTab = sil.get(0).getSimSlotIndex();
-            }
-        }
-
-        switch (state) {
-            case UPDATE: {
-                if (DBG) log("initializeSubscriptions: UPDATE");
-                currentTab = mTabHost != null ? mTabHost.getCurrentTab() : 0;
-
-                mTabHost = (TabHost) getActivity().findViewById(android.R.id.tabhost);
-                mTabHost.setup();
-
-                // Update the tabName. Since the mActiveSubInfos are in slot order
-                // we can iterate though the tabs and subscription info in one loop. But
-                // we need to handle the case where a slot may be empty.
-
-                Iterator<SubscriptionInfo> siIterator = mActiveSubInfos.listIterator();
-                SubscriptionInfo si = siIterator.hasNext() ? siIterator.next() : null;
-                for (int simSlotIndex = 0; simSlotIndex  < mActiveSubInfos.size();
-                        simSlotIndex++) {
-                    String tabName;
-                    if (si != null && si.getSimSlotIndex() == simSlotIndex) {
-                        // Slot is not empty and we match
-                        tabName = String.valueOf(si.getDisplayName());
-                        si = siIterator.hasNext() ? siIterator.next() : null;
-                    } else {
-                        // Slot is empty, set name to unknown
-                        tabName = getResources().getString(R.string.unknown);
-                    }
-                    if (DBG) {
-                        log("initializeSubscriptions:tab=" + simSlotIndex + " name=" + tabName);
-                    }
-
-                    mTabHost.addTab(buildTabSpec(String.valueOf(simSlotIndex), tabName));
-                }
-
-                mTabHost.setOnTabChangedListener(mTabListener);
-                mTabHost.setCurrentTab(currentTab);
-                break;
-            }
-            case NO_TABS: {
-                if (DBG) log("initializeSubscriptions: NO_TABS");
-
-                if (mTabHost != null) {
-                    mTabHost.clearAllTabs();
-                    mTabHost = null;
-                }
-                break;
-            }
-            case DO_NOTHING: {
-                if (DBG) log("initializeSubscriptions: DO_NOTHING");
-                if (mTabHost != null) {
-                    currentTab = mTabHost.getCurrentTab();
-                }
-                break;
-            }
-        }
-        updatePhone(currentTab);
+        updatePhone();
         updateBody();
         if (DBG) log("initializeSubscriptions:-");
     }
@@ -465,58 +379,14 @@ public class MobileNetworkFragment extends DashboardFragment implements
         return state;
     }
 
-    private TabHost.OnTabChangeListener mTabListener = new TabHost.OnTabChangeListener() {
-        @Override
-        public void onTabChanged(String tabId) {
-            if (DBG) log("onTabChanged:");
-            // The User has changed tab; update the body.
-            updatePhone(Integer.parseInt(tabId));
-            updateBody();
-        }
-    };
-
-    private void updatePhone(int slotId) {
-        final SubscriptionInfo sir = mSubscriptionManager
-                .getActiveSubscriptionInfoForSimSlotIndex(slotId);
-
-        if (sir != null) {
-            mSubId = sir.getSubscriptionId();
-
-            Log.i(LOG_TAG, "updatePhone:- slotId=" + slotId + " sir=" + sir);
-
+    private void updatePhone() {
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mImsMgr = ImsManager.getInstance(getContext(),
                     SubscriptionManager.getPhoneId(mSubId));
             mTelephonyManager = new TelephonyManager(getContext(), mSubId);
-            if (mImsMgr == null) {
-                log("updatePhone :: Could not get ImsManager instance!");
-            } else if (DBG) {
-                log("updatePhone :: mImsMgr=" + mImsMgr);
-            }
-        } else {
-            // There is no active subscription in the given slot.
-            mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         }
 
         mPhoneStateListener.updateSubscriptionId(mSubId);
-    }
-
-    private TabHost.TabContentFactory mEmptyTabContent = new TabHost.TabContentFactory() {
-        @Override
-        public View createTabContent(String tag) {
-            return new View(mTabHost.getContext());
-        }
-    };
-
-    private TabHost.TabSpec buildTabSpec(String tag, String title) {
-        return mTabHost.newTabSpec(tag).setIndicator(title).setContent(
-                mEmptyTabContent);
-    }
-
-    private void updateCurrentTab(Intent intent) {
-        int slotId = getSlotIdFromIntent(intent);
-        if (slotId >= 0 && mTabHost != null && mTabHost.getCurrentTab() != slotId) {
-            mTabHost.setCurrentTab(slotId);
-        }
     }
 
     @Override
@@ -591,21 +461,15 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         // Initialize mActiveSubInfo
         int max = mSubscriptionManager.getActiveSubscriptionInfoCountMax();
-        mActiveSubInfos = new ArrayList<SubscriptionInfo>(max);
+        mActiveSubInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
+        mSubId = getArguments().getInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
-        int currentTab = mTabHost != null ? mTabHost.getCurrentTab() : 0;
-        updatePhone(currentTab);
+        updatePhone();
         if (hasActiveSubscriptions()) {
             updateEnabledNetworksEntries();
         }
         Log.i(LOG_TAG, "onCreate:-");
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return inflater.inflate(com.android.internal.R.layout.common_tab_settings,
-                container, false);
     }
 
     @Override
@@ -617,7 +481,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             //TODO(b/114749736): migrate telephony_disallowed_preference_screen.xml
         } else {
             initializeSubscriptions();
-            updateCurrentTab(getActivity().getIntent());
         }
     }
 
@@ -714,7 +577,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
     }
 
     private boolean hasActiveSubscriptions() {
-        return mActiveSubInfos.size() > 0;
+        return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     private void updateBodyBasicFields(FragmentActivity activity, PreferenceScreen prefSet,
