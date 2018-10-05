@@ -16,76 +16,79 @@
 
 package com.android.settings.password;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.robolectric.RuntimeEnvironment.application;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
-import android.os.Bundle;
 import android.provider.Settings.Global;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
+import androidx.annotation.Nullable;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowStorageManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(
+        shadows = {
+                SettingsShadowResources.class,
+                SettingsShadowTheme.class,
+                ShadowLockPatternUtils.class,
+                ShadowStorageManager.class,
+                ShadowUserManager.class,
+                ShadowUtils.class
+        })
 public class ChooseLockGenericTest {
 
-    private Context mContext;
     private ChooseLockGenericFragment mFragment;
-    private FragmentActivity mActivity;
+    private ChooseLockGeneric mActivity;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mFragment = spy(new ChooseLockGenericFragment());
-        mActivity = mock(FragmentActivity.class);
-        when(mFragment.getActivity()).thenReturn(mActivity);
-        when(mFragment.getFragmentManager()).thenReturn(mock(FragmentManager.class));
-        doNothing().when(mFragment).startActivity(any(Intent.class));
+        Global.putInt(
+                application.getContentResolver(),
+                Global.DEVICE_PROVISIONED, 1);
+        mFragment = new ChooseLockGenericFragment();
     }
 
     @After
     public void tearDown() {
-        Global.putInt(RuntimeEnvironment.application.getContentResolver(),
+        Global.putInt(
+                application.getContentResolver(),
                 Global.DEVICE_PROVISIONED, 1);
+        ShadowStorageManager.reset();
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void onCreate_deviceNotProvisioned_shouldFinishActivity() {
-        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
-        when(mActivity.getContentResolver()).thenReturn(mContext.getContentResolver());
-        when(mActivity.getTheme()).thenReturn(mContext.getTheme());
-        when(mFragment.getArguments()).thenReturn(Bundle.EMPTY);
+        Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
 
-        mFragment.onCreate(Bundle.EMPTY);
-        verify(mActivity).finish();
+        initActivity(null);
+        assertThat(mActivity.isFinishing()).isTrue();
     }
 
     @Test
     public void onActivityResult_nullIntentData_shouldNotCrash() {
-        doNothing().when(mFragment).updatePreferencesOrFinish(anyBoolean());
-
+        initActivity(null);
         mFragment.onActivityResult(
                 ChooseLockGenericFragment.CONFIRM_EXISTING_REQUEST, Activity.RESULT_OK,
                 null /* data */);
@@ -93,45 +96,90 @@ public class ChooseLockGenericTest {
     }
 
     @Test
+    public void updatePreferencesOrFinish_passwordTypeSetPin_shouldStartChooseLockPassword() {
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        assertThat(shadowOf(mActivity).getNextStartedActivity()).isNotNull();
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_passwordTypeSetPinNotFbe_shouldNotStartChooseLock() {
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        assertThat(shadowOf(mActivity).getNextStartedActivity()).isNull();
+    }
+
+    @Test
     public void onActivityResult_requestcode0_shouldNotFinish() {
+        initActivity(null);
+
         mFragment.onActivityResult(
                 SearchFeatureProvider.REQUEST_CODE, Activity.RESULT_OK, null /* data */);
 
-        verify(mFragment, never()).finish();
+        assertThat(mActivity.isFinishing()).isFalse();
     }
 
     @Test
     public void onActivityResult_requestcode101_shouldFinish() {
+        initActivity(null);
+
         mFragment.onActivityResult(
                 ChooseLockGenericFragment.ENABLE_ENCRYPTION_REQUEST, Activity.RESULT_OK,
                 null /* data */);
 
-        verify(mFragment).finish();
+        assertThat(mActivity.isFinishing()).isTrue();
     }
 
     @Test
     public void onActivityResult_requestcode102_shouldFinish() {
+        initActivity(null);
+
         mFragment.onActivityResult(
                 ChooseLockGenericFragment.CHOOSE_LOCK_REQUEST, Activity.RESULT_OK, null /* data */);
 
-        verify(mFragment).finish();
+        assertThat(mActivity.isFinishing()).isTrue();
     }
 
     @Test
     public void onActivityResult_requestcode103_shouldFinish() {
+        initActivity(null);
+
         mFragment.onActivityResult(
                 ChooseLockGenericFragment.CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST,
                 BiometricEnrollBase.RESULT_FINISHED, null /* data */);
 
-        verify(mFragment).finish();
+        assertThat(mActivity.isFinishing()).isTrue();
     }
 
     @Test
     public void onActivityResult_requestcode104_shouldFinish() {
+        initActivity(null);
+
         mFragment.onActivityResult(
                 ChooseLockGenericFragment.SKIP_FINGERPRINT_REQUEST, Activity.RESULT_OK,
                 null /* data */);
 
-        verify(mFragment).finish();
+        assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    private void initActivity(@Nullable Intent intent) {
+        if (intent == null) {
+            intent = new Intent();
+        }
+        intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
+        mActivity = Robolectric.buildActivity(ChooseLockGeneric.InternalActivity.class, intent)
+                .setup().get();
+        mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commitNow();
     }
 }

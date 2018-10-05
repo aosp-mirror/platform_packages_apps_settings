@@ -30,15 +30,13 @@ import android.widget.Button;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
-import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroductionTest
-        .ShadowStorageManagerWrapper;
 import com.android.settings.password.SetupChooseLockGeneric.SetupChooseLockGenericFragment;
 import com.android.settings.password.SetupSkipDialog;
-import com.android.settings.password.StorageManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowFingerprintManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.After;
@@ -51,8 +49,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
 import org.robolectric.shadows.ShadowKeyguardManager;
@@ -61,7 +57,7 @@ import org.robolectric.shadows.ShadowKeyguardManager;
 @Config(shadows = {
     ShadowFingerprintManager.class,
     ShadowLockPatternUtils.class,
-    ShadowStorageManagerWrapper.class,
+    ShadowStorageManager.class,
     ShadowUserManager.class
 })
 public class SetupFingerprintEnrollIntroductionTest {
@@ -89,7 +85,7 @@ public class SetupFingerprintEnrollIntroductionTest {
 
     @After
     public void tearDown() {
-        ShadowStorageManagerWrapper.reset();
+        ShadowStorageManager.reset();
         ShadowFingerprintManager.reset();
     }
 
@@ -209,7 +205,7 @@ public class SetupFingerprintEnrollIntroductionTest {
 
     @Test
     public void testLockPattern() {
-        ShadowStorageManagerWrapper.sIsFileEncrypted = false;
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
 
         mController.create().postCreate(null).resume();
 
@@ -227,20 +223,5 @@ public class SetupFingerprintEnrollIntroductionTest {
 
     private ShadowKeyguardManager getShadowKeyguardManager() {
         return Shadows.shadowOf(application.getSystemService(KeyguardManager.class));
-    }
-
-    @Implements(StorageManagerWrapper.class)
-    public static class ShadowStorageManagerWrapper {
-
-        private static boolean sIsFileEncrypted = true;
-
-        public static void reset() {
-            sIsFileEncrypted = true;
-        }
-
-        @Implementation
-        public static boolean isFileEncryptedNativeOrEmulated() {
-            return sIsFileEncrypted;
-        }
     }
 }

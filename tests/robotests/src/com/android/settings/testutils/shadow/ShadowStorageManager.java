@@ -30,6 +30,7 @@ public class ShadowStorageManager {
 
     private static boolean sIsUnmountCalled;
     private static boolean sIsForgetCalled;
+    private static boolean sIsFileEncryptedNativeOrEmulated = true;
 
     public static boolean isUnmountCalled() {
         return sIsUnmountCalled;
@@ -43,7 +44,7 @@ public class ShadowStorageManager {
     public static void reset() {
         sIsUnmountCalled = false;
         sIsForgetCalled = false;
-
+        sIsFileEncryptedNativeOrEmulated = true;
     }
 
     @Implementation
@@ -69,6 +70,15 @@ public class ShadowStorageManager {
     @Implementation
     public void forgetVolume(String fsUuid) {
         sIsForgetCalled = true;
+    }
+
+    @Implementation
+    protected static boolean isFileEncryptedNativeOrEmulated() {
+        return sIsFileEncryptedNativeOrEmulated;
+    }
+
+    public static void setIsFileEncryptedNativeOrEmulated(boolean encrypted) {
+        sIsFileEncryptedNativeOrEmulated = encrypted;
     }
 
     private VolumeInfo createVolumeInfo(String volumeId) {

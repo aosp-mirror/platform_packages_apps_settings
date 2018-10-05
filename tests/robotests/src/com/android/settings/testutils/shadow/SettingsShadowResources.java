@@ -209,6 +209,10 @@ public class SettingsShadowResources extends ShadowResources {
                             node.setNodeValue("@style/FingerprintLayoutTheme");
                         } else if (attributeValue.startsWith("@*android:string")) {
                             node.setNodeValue("PLACEHOLDER");
+                        } else if (attributeValue.startsWith("@*android:dimen")) {
+                            node.setNodeValue("321dp");
+                        } else if (attributeValue.startsWith("@*android:drawable")) {
+                            node.setNodeValue("");
                         }
                     }
                 }
