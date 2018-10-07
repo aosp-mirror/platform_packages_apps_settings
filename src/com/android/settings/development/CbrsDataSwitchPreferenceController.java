@@ -54,12 +54,12 @@ public class CbrsDataSwitchPreferenceController extends DeveloperOptionsPreferen
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean state = (Boolean)newValue;
-        return mTelephonyManager.setAlternativeNetworkAccessState(state);
+        return mTelephonyManager.setAlternativeNetworkState(state);
     }
 
     @Override
     public void updateState(Preference preference) {
-        boolean state = mTelephonyManager.isAlternativeNetworkAccessEnabled();
+        boolean state = mTelephonyManager.isAlternativeNetworkEnabled();
         ((SwitchPreference) mPreference).setChecked(state);
     }
 
