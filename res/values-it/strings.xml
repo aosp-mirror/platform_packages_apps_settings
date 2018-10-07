@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Dispositivi connessi in precedenza"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Connessi in precedenza"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Bluetooth attivato"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"Mostra tutto"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data e ora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Scegli il fuso orario"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -403,12 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Fine"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"Usa il viso per"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"Sblocca dispositivo"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Accesso all\'app e pagamenti"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"Occhi aperti per sbloccare"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"Quando usi l\'autenticazione volti, gli occhi devono essere aperti"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Rimuovi dati viso"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"Migliora i dati del viso"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Il tuo viso può essere utilizzato per sbloccare il tuo dispositivo e accedere alle app. "<annotation id="url">"Ulteriori informazioni"</annotation></string>
@@ -2995,8 +2993,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"paga, tocca, pagamenti"</string>
     <string name="keywords_backup" msgid="470070289135403022">"backup, back up"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gesto"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"viso, sblocco, autenticazione, accesso"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, versione prl, imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"rete, stato rete mobile, stato servizio, intensità segnale, tipo di rete mobile, roaming, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"numero di serie, versione hardware"</string>
@@ -3963,11 +3960,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Solleva per controllare il telefono"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Solleva il tablet per controllare le notifiche"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Solleva il dispositivo per controllare le notifiche"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"Riattiva schermo"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Per controllare l\'ora, le notifiche e altre informazioni, solleva il telefono."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Per controllare l\'ora, le notifiche e altre informazioni, solleva il tablet."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Per controllare l\'ora, le notifiche e altre informazioni, solleva il dispositivo."</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Gesto sullo schermo per wakelock"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Usa l\'impronta digitale per le notifiche"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Usa l\'impronta digitale"</string>
@@ -4113,12 +4111,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Mostra sempre finestra di dialogo di arresti anomali"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Mostra finestra di dialogo a ogni arresto anomalo delle app"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"Seleziona le app che supportano ANGLE"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"Nessuna app che supporta ANGLE impostata"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"App che supporta ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"Accesso alla directory"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"accesso alla directory"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>

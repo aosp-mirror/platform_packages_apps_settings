@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Pajisjet e lidhura më parë"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Të lidhura më parë"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Bluetooth-i është i aktivizuar"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"Shiko të gjitha"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data dhe ora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Zgjidh brezin orar"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -403,12 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"U krye"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"Përdor fytyrën për të"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"Shkyç pajisjen tënde"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Identifikimi dhe pagesat e aplikacionit"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"Hap sytë për të shkyçur"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"Kur përdor vërtetimin me fytyrë, sytë duhet të jenë të hapur"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Hiq të dhënat e fytyrës"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"Përmirëso të dhënat e fytyrës"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Fytyra jote mund të përdoret për të shkyçur pajisjen tënde dhe për të pasur qasje tek aplikacionet. "<annotation id="url">"Mëso më shumë"</annotation></string>
@@ -2995,8 +2993,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"paguaj, trokit, pagesa"</string>
     <string name="keywords_backup" msgid="470070289135403022">"rezervim, rezervo"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gjesti"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"fytyrë, shkyçje, autorizim, identifikim"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, versioni prl, imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"rrjeti, gjendja e rrjetit celular, gjendja e shërbimit, fuqia e sinjalit, lloji i rrjetit celular, roaming, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"numri i serisë, versioni i harduerit"</string>
@@ -3963,11 +3960,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Ngrije për ta kontrolluar telefonin"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Ngrije për ta kontrolluar tabletin"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Ngrije për ta kontrolluar pajisjen"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"Ekrani i zgjimit"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Për të kontrolluar orën, njoftimet dhe informacione të tjera, merre në duar telefonin tënd."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Për të kontrolluar orën, njoftimet dhe informacione të tjera, merre në duar tabletin tënd."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Për të kontrolluar orën, njoftimet dhe informacione të tjera, merre në duar pajisjen tënde."</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Gjesti i shfaqjes së ekranit të kyçjes"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Rrëshqit gjurmën e gishtit për njoftimet"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Rrëshqit gjurmën e gishtit"</string>
@@ -4113,12 +4111,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Gjurmo të gjitha koleksionet dhe frekuencat e GNSS pa ciklim të detyruar"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Gjithmonë shfaq dialogun e ndërprerjes aksidentale"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Shfaq dialogun sa herë që një aplikacion pëson ndërprerje aksidentale"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"Zgjidh aplikacionin e aktivizuar për ANGLE"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"Nuk është caktuar aplikacion i aktivizuar për ANGLE"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"Aplikacioni i aktivizuar për ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"Qasja në direktori"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"qasja në direktori"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>

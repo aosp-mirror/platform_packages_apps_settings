@@ -181,6 +181,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Ранее подключенные устройства"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Ранее подключенные устройства"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Модуль Bluetooth включен"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"Показать все"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Дата и время"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Выбрать часовой пояс"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -407,12 +408,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"ОК"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"Возможности"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"Разблокировка устройства"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Вход в приложения и оплата"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"Для разблокировки нужно открыть глаза"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"Распознавание лиц будет работать, только когда глаза открыты."</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Удалить данные лица"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"Улучшить распознавание лица"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Снимайте блокировку экрана и получайте доступ к приложениям с помощью распознавания лица. "<annotation id="url">"Подробнее…"</annotation></string>
@@ -3071,8 +3069,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"Бесконтактная оплата"</string>
     <string name="keywords_backup" msgid="470070289135403022">"создать резервную копию"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"жест"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"лицо, разблокировать, аутентификация, вход"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, версия prl, imeisv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"сеть, подключение к мобильной сети, доступность мобильной сети, уровень сигнала, тип мобильной сети, роуминг, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"серийный номер, версия аппаратного обеспечения"</string>
@@ -4095,11 +4092,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Поднять, чтобы проверить уведомления"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Просмотр уведомлений в вертикальном положении планшета"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Просмотр уведомлений в вертикальном положении устройства"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"Включить экран"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Чтобы увидеть время, уведомления и другую информацию, возьмите телефон."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Чтобы увидеть время, уведомления и другую информацию, возьмите планшет."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Чтобы увидеть время, уведомления и другую информацию, возьмите устройство."</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Показать экран блокировки"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Использовать сканер отпечатков для просмотра уведомлений"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Сканер отпечатков"</string>
@@ -4259,12 +4257,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Отслеживать все выкладки и частоты GNSS без рабочего цикла"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Всегда показывать сообщение об ошибке"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Показывать диалог при каждом сбое приложения"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"Выбрать приложение с поддержкой ANGLE"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"Приложение с поддержкой ANGLE не выбрано"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"Приложение с поддержкой ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"Доступ к каталогам"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"доступ к каталогам"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>

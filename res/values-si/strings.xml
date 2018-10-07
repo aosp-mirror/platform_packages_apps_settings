@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"පෙර සම්බන්ධිත උපාංග"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"පෙර සම්බන්ධිත"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"බ්ලූටූත් ක්‍රියාත්මක කරන ලදී"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"සියල්ල බලන්න"</string>
     <string name="date_and_time" msgid="9062980487860757694">"දිනය සහ වේලාව"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"වේලා කලාපය තෝරන්න"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -403,12 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"නිමයි"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"ඔබේ මුහුණ භාවිතා කරන්න"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"ඔබේ උපාංගය අගුලු හරින්න"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"යෙදුම් පිරීම සහ ගෙවීම"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"අගුලු හැරීමට විවෘත ඇස්"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"මුහුණු සත්‍යාපනය භාවිතා කරන විට, ඔබේ ඇස් විවෘත විය යුතුය"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"මුහුණ දත්ත ඉවත් කරන්න"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"ඔබේ මුහුණු දත්ත වැඩි දියුණු කරන්න"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"ඔබගේ උපාංගය අගුලු හැරීමට සහ යෙදුම් වෙත පිවිසීමට ඔබේ මුහුණ භාවිතා කළ හැකිය. "<annotation id="url">"තව දැන ගන්න"</annotation></string>
@@ -2995,8 +2993,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"ගෙවීම, තට්ටු කිරීම, ගෙවීම්"</string>
     <string name="keywords_backup" msgid="470070289135403022">"උපස්ථ, උපස්ථ"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"ඉංගිතය"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"මුහුණ, අගුලු හැරීම, සත්‍යාපනය, පිරීම"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl version, imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"ජාලය, ජංගම ජාල තත්ත්වය, සේවා තත්ත්වය, සංඥා ප්‍රබලතාව, ජංගම ජාල වර්ගය, රෝමිං, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"අනුක්‍රමික අංකය, දෘඪාංග අනුවාදය"</string>
@@ -3489,8 +3486,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"පුද්ගලික"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"කාර්යාලය"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"යෙදුම්: සියල්ල"</string>
-    <!-- no translation found for filter_notif_blocked_apps (3383043508771300704) -->
-    <skip />
+    <string name="filter_notif_blocked_apps" msgid="3383043508771300704">"ක්‍රියාවිරහිතයි"</string>
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"ප්‍රවර්ග: හදිසි වැදගත්කම"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"ප්‍රවර්ග: අඩු වැදගත්කම"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"ප්‍රවර්ග: අක්‍රිය කර ඇත"</string>
@@ -3964,11 +3960,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"දුරකථනය පරීක්ෂාවට ඔසවන්න"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"ටැබ්ලට් පරිගණකය පරීක්ෂා කිරීමට ඔසවන්න"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"උපාංගය පරීක්ෂා කිරීමට ඔසවන්න"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"සංදර්ශකය අවදි කරන්න"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"වේලාව, දැනුම්දීම් සහ වෙනත් තොරතුරු පරීක්ෂා කිරීමට, ඔබේ දුරකථනය ඔසවන්න."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"වේලාව, දැනුම්දීම් සහ වෙනත් තොරතුරු පරීක්ෂා කිරීමට, ඔබේ ටැබ්ලටය ඔසවන්න."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"වේලාව, දැනුම්දීම් සහ වෙනත් තොරතුරු පරීක්ෂා කිරීමට, ඔබේ උපාංගය ඔසවන්න."</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"අගුලු තිරය අවදි කිරීමේ අභිනය"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"දැනුම්දීම් සඳහා ඇඟිලි සලකුණ ස්වයිප් කරන්න"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"ඇඟිලි සලකුණ ස්වයිප් කරන්න"</string>
@@ -4114,12 +4111,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"කාර්ය චක්‍රය රහිත සියලු GNSS සබැඳි තාරකා ගෝල සහ සංඛ්‍යාත"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"බිඳ වැටීම් සංවාදය සැම විට පෙන්වන්න"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"යෙදුමක් බිඳ වැටෙන සෑම විටම සංවාදය පෙන්වන්න"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"ANGLE සබල යෙදුමක් තෝරන්න"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"ANGLE සබල යෙදුමක් සකසා නැත"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"ANGLE සබල යෙදුම: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"නාමාවලි ප්‍රවේශය"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"නාමාවලි ප්‍රවේශය"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
@@ -4174,6 +4168,5 @@
     <string name="empty_networks_list" msgid="2578752112731781190">"ජාලයක් හමු නොවීය."</string>
     <string name="network_query_error" msgid="7487714485362598410">"ජාල සොයා ගත නොහැකි විය. නැවත උත්සාහ කරන්න."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(තහනම්)"</string>
-    <!-- no translation found for no_sim_card (1360669528113557381) -->
-    <skip />
+    <string name="no_sim_card" msgid="1360669528113557381">"SIM කාඩ්පතක් නැත"</string>
 </resources>

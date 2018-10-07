@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"ከዚህ ቀደም የተገናኙ መሣሪያዎች"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"ከዚህ ቀደም የተገናኘ"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"ብሉቱዝ በርቷል"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"ሁሉንም ይመልከቱ"</string>
     <string name="date_and_time" msgid="9062980487860757694">"ቀን እና ሰዓት"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"የጊዜ ሰቅ ምረጥ"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -403,12 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"ተከናውኗል"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"የእርስዎ ፊትን ለዚህ ይጠቀሙ"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"መሣሪያዎን ይክፈቱት"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"የመተግበሪያ በመለያ መግቢያ እና ክፍያዎች"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"ለመክፈት ዓይኖችን ይክፈቱ"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"የፊት ማረጋገጫን በሚጠቀሙበት ጊዜ የእርስዎ ዓይኖች ክፍት መሆን አለባቸው"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"የፊት ውሂብ አስወግድ"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"የእርስዎን የፊት ውሂብ ያሻሽሉ"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"የእርስዎ ፊት የእርስዎን መሣሪያ ለመክፈት እና መተግበሪያዎችን ለመድረስ ጥቅም ላይ ሊውል ይችላል። "<annotation id="url">"የበለጠ ለመረዳት"</annotation></string>
@@ -2995,8 +2993,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"ይክፈሉ፣ መታ ያድርጉ፣ ክፍያዎች"</string>
     <string name="keywords_backup" msgid="470070289135403022">"ምትኬ"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"የጣት ምልክት"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"ፊት፣ ክፈት፣ ፈቀዳ፣ በመለያ መግቢያ"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei፣ meid፣ ደቂቃ፣ prl ስሪት፣ imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"አውታረ መረብ፣ የተንቀሳቃሽ ስልክ አውታረ መረብ ሁኔታ፣ አገልግሎት ሁኔታ፣ የሲግናል ጥንካሬ፣ የተንቀሳቃሽ ስልክ አውታረ መረብ ዓይነት፣ ከአገልግሎት መስጫ ክልል ውጭ፣ iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"ተከታታይ ቁጥር፣ የሃርድዌር ስሪት"</string>
@@ -3963,11 +3960,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"ስልኩን ለማረጋገጥ ያንሱ"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"ጡባዊውን ለማረጋገጥ ያንሱ"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"መሣሪያውን ለማረጋገጥ ያንሱ"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"ማሳያን ቀስቅስ"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"ጊዜን፣ ማሳወቂያዎችን እና ሌላ መረጃን ለማረጋገጥ የእርስዎን ስልክ ያንሱት።"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"ጊዜን፣ ማሳወቂያዎችን እና ሌላ መረጃን ለማረጋገጥ የእርስዎን ጡባዊ ያንሱት።"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"ጊዜን፣ ማሳወቂያዎችን እና ሌላ መረጃን ለማረጋገጥ የእርስዎን መሣሪያ ያንሱት።"</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"የመቀስቀሻ ቁልፍ ማያ ገጽ ጣት ምልክት"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"ማሳወቂያዎችን ለማግኘት የጣት አሻራን ያንሸራትቱ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"የጣት አሻራን ያንሸራቱ"</string>
@@ -4113,12 +4111,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"ሁሉንም የGNSS ህብረ ፎቶዎችን እና ድግምግሞሾችን ያለምንም የሥራ ብስክሌት ግልቢያ ዱካቸውን ይከታተሉ"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"የስንክል ንግግር ሳጥንን ሁልጊዜ አሳይ"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"መተግበሪያ በሚሰናከልበት እያንዳንዱ ጊዜ የንግግር ሳጥን አሳይ"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"በANGLE የነቃ መተግበሪያ ይምረጡ"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"ምንም በANGLE የነቃ መተግበሪያ አልተቀናበረም"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"በANGLE የነቃ መተግበሪያ፦ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"የማውጫ መዳረሻ"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"የማውጫ መዳረሻ"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
