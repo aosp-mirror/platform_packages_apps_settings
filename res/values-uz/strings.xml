@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Avval ulangan qurilmalar"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Avval ulangan qurilmalar"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Bluetooth yoqildi"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"Hammasi"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Sana va vaqt"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Vaqt zonasini tanlang"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -403,12 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Tayyor"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"Yuz yordamida"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"Qulfni ochish"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Ilovaga kirish va to‘lov"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"Qulfdan chiqarish uchun ko‘zlarni ochish kerak"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"Yuz tekshiruvi faqat ko‘zlar ochiqligida ishlaydi"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Yuzni olib tashlash"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"Yuzga oid axborotni yangilang"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Qurilmani ochish va ilovalarga kirishda yuzingizdan foydalanishingiz mumkin. "<annotation id="url">"Batafsil"</annotation></string>
@@ -3011,8 +3009,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"to‘lash, bosish, to‘lovlar"</string>
     <string name="keywords_backup" msgid="470070289135403022">"zaxira, zaxira nusxa olish"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"imo-ishora"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"yuz, qulfdan chiqarish, tekshiruv, kirish"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl versiyasi, imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"tarmoq, mobil tarmoq holati, xizmat holati, signal kuchi, mobil tarmoq turi, rouming, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"seriya raqami, apparat versiyasi"</string>
@@ -3979,11 +3976,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Telefonni olib bildirishnomalarni tekshirish"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Tekshirish uchun planshetni yuqoriga ko‘taring"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Tekshirish uchun qurilmani yuqoriga ko‘taring"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"Ekranni yoqish"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Vaqt, bildirishnoma va boshqa ma’lumotlarni tekshirish uchun telefonni qo‘lingizga oling."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Vaqt, bildirishnoma va boshqa ma’lumotlarni tekshirish uchun planshetni qo‘lingizga oling."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Vaqt, bildirishnoma va boshqa ma’lumotlarni tekshirish uchun qurilmani qo‘lingizga oling."</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Ekran qulfini ko‘rsatish"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Bildirishnomalarni ochish uchun barmoq izi skaneridan foydalanish"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Barmoq izi skaneri"</string>
@@ -4129,12 +4127,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Siklsiz barcha GNSS sxema va davriyliklarini kuzatish"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Buzilish oynasi doim ko‘rsatilsin"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Ilova ishdan chiqqanda har safar muloqot oynasi ko‘rsatilsin"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"ANGLE yoqilgan ilovani tanlang"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"ANGLE yoqilgan ilova tanlanmagan"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"ANGLE yoqilgan ilova: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"Kataloglarga kirish"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"kataloglarga kirish"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
@@ -4189,5 +4184,5 @@
     <string name="empty_networks_list" msgid="2578752112731781190">"Birorta ham tarmoq topilmadi."</string>
     <string name="network_query_error" msgid="7487714485362598410">"Hech qanday tarmoq topilmadi. Qaytadan urining."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(taqiqlangan)"</string>
-    <string name="no_sim_card" msgid="1360669528113557381">"SIM karta yo‘q"</string>
+    <string name="no_sim_card" msgid="1360669528113557381">"SIM karta solinmagan"</string>
 </resources>

@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"이전에 연결된 기기"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"이전에 연결됨"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"블루투스가 사용 설정됨"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"전체 보기"</string>
     <string name="date_and_time" msgid="9062980487860757694">"날짜 및 시간"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"시간대 선택"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -403,12 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"완료"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"얼굴로 다음을 인증"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"기기 잠금 해제"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"앱 로그인 &amp; 결제"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"눈을 떠 잠금 해제"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"얼굴 인증을 사용하는 경우 눈을 떠야 합니다."</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"얼굴 데이터 삭제"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"얼굴 데이터 향상"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"얼굴로 기기를 잠금 해제하고 앱에 액세스할 수 있습니다. "<annotation id="url">"자세히 알아보기"</annotation></string>
@@ -2995,8 +2993,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"결제, 탭, 결제"</string>
     <string name="keywords_backup" msgid="470070289135403022">"백업, 백 업"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"동작"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"얼굴, 잠금 해제, 승인, 로그인"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"IMEI, MEID, MIN, PRL 버전, IMEI SV"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"네트워크, 모바일 네트워크 상태, 서비스 상태, 신호 강도, 모바일 네트워크 유형, 로밍, ICCID"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"일련번호, 하드웨어 버전"</string>
@@ -3963,11 +3960,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"들어올려 휴대전화 확인"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"들어서 태블릿 확인"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"들어서 기기 확인"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"디스플레이 대기 모드 해제"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"시간, 알림, 기타 정보를 확인하려면 휴대전화를 들어 올리세요."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"시간, 알림, 기타 정보를 확인하려면 태블릿을 들어 올리세요."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"시간, 알림, 기타 정보를 확인하려면 기기를 들어 올리세요."</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Wake lock 화면 동작"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"지문을 스와이프하여 알림 보기"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"지문 스와이프"</string>
@@ -4113,12 +4111,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"사용률 없이 모든 GNSS 배열 및 빈도를 추적"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"비정상 종료 대화상자 항상 표시"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"앱이 비정상 종료될 때마다 대화상자 표시"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"ANGLE 사용 앱 선택"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"ANGLE을 사용하도록 설정된 애플리케이션 없음"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"ANGLE 사용 애플리케이션: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"디렉토리 액세스"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"디렉토리 액세스"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g>(<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
@@ -4148,7 +4143,7 @@
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"휴대전화 배터리 수명 향상"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"벨 울림 방지"</string>
-    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"전원 및 볼륨 크게 버튼 함께 누르기"</string>
+    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"전원 및 볼륨 업 버튼 함께 누르기"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"벨 울림 방지 단축키"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"진동"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"음소거"</string>

@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"دستگاه‌هایی که قبلاً متصل شده‌اند"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"قبلاً متصل‌شده"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"بلوتوث روشن شد"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"دیدن همه"</string>
     <string name="date_and_time" msgid="9062980487860757694">"تاریخ و زمان"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"انتخاب منطقهٔ زمانی"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -403,12 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"تمام"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"استفاده از چهره برای"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"باز کردن قفل دستگاه"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"ورودبه‌سیستم برنامه و پرداخت‌ها"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"برای باز کردن قفل، چشم‌هایتان را باز کنید"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"هنگام استفاده از احراز هویت چهره، چشم‌هایتان باید باز باشد"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"حذف داده‌های چهره"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"بهبود داده‌های چهره"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"می‌توانید از چهره‌تان برای باز کردن قفل دستگاه و دسترسی به برنامه‌ها استفاده کنید. "<annotation id="url">"بیشتر بدانید"</annotation></string>
@@ -2995,8 +2993,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"پرداخت کردن، ضربه زدن، پرداخت‌ها"</string>
     <string name="keywords_backup" msgid="470070289135403022">"پشتیبان‌گیری، پشتیبان"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"اشاره"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"چهره، باز کردن قفل، احراز هویت، ورود به سیستم"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"‏imei، ‏meid،‏ min، نسخه prl، ‏imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"‏شبکه، وضعیت شبکه همراه، وضعیت سرویس، شدت سیگنال، نوع شبکه همراه، رومینگ، iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"شماره سریال، نسخه سخت‌افزار"</string>
@@ -3963,11 +3960,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"برای بررسی تلفن، آن را بردارید"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"برای بررسی رایانه لوحی، آن را بردارید"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"برای بررسی دستگاه، آن را بردارید"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"روشن کردن نمایشگر"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"برای بررسی زمان، اعلان‌ها و اطلاعات دیگر، تلفنتان را انتخاب کنید"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"برای بررسی زمان، اعلان‌ها و اطلاعات دیگر، رایانه لوحی‌تان را انتخاب کنید"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"برای بررسی زمان، اعلان‌ها و اطلاعات دیگر، دستگاهتان را انتخاب کنید"</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"اشاره بیدار کردن صفحه قفل"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"تند کشیدن اثرانگشت برای اعلان‌ها"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"تند کشیدن اثرانگشت"</string>
@@ -4113,12 +4111,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"بدون دوره کاری همه زنجیره عکس‌های پانوراما و فرکانس‌ها را ردیابی کنید."</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"همیشه کادر گفتگوی خرابی نمایش داده شود"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"نمایش کادر گفتگو هنگامی که برنامه‌ای خراب می‌شود"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"‏برنامه دارای ANGLE فعال انتخاب کنید"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"‏هیچ برنامه دارای ANGLE فعال تنظیم نشده است"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"‏برنامه دارای ANGLE فعال: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"دسترسی به فهرست راهنما"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"دسترسی به فهرست راهنما"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
