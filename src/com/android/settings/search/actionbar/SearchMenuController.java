@@ -17,6 +17,7 @@
 package com.android.settings.search.actionbar;
 
 import android.annotation.NonNull;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +26,7 @@ import android.view.MenuItem;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
@@ -70,10 +72,12 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         searchItem.setOnMenuItemClickListener(target -> {
+            final Context context = mHost.getContext();
             final Intent intent = SearchFeatureProvider.SEARCH_UI_INTENT;
             intent.setPackage(FeatureFactory.getFactory(mHost.getContext())
                     .getSearchFeatureProvider().getSettingsIntelligencePkgName());
-
+            FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                    .action(context, MetricsProto.MetricsEvent.ACTION_SEARCH_RESULTS);
             mHost.startActivityForResult(intent, 0 /* requestCode */);
             return true;
         });
