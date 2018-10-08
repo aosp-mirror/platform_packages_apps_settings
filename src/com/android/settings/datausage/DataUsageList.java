@@ -14,18 +14,15 @@
 
 package com.android.settings.datausage;
 
-import static android.net.ConnectivityManager.TYPE_MOBILE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import static android.net.TrafficStats.UID_REMOVED;
 import static android.net.TrafficStats.UID_TETHERING;
-import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
 import android.net.NetworkStats;
@@ -35,13 +32,11 @@ import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.SparseArray;
