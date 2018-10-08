@@ -28,7 +28,6 @@ import android.content.pm.UserInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicy;
-import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -252,8 +251,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
     }
 
     /**
-     * Update body content based on current tab. Loads
-     * {@link NetworkStatsHistory} and {@link NetworkPolicy} from system, and
+     * Update body content based on current tab. Loads network cycle data from system, and
      * binds them to visible controls.
      */
     private void updateBody() {
