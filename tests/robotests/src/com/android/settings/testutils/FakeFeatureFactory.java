@@ -33,7 +33,6 @@ import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
-import com.android.settings.search.DeviceIndexFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
@@ -62,7 +61,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
-    public final DeviceIndexFeatureProvider deviceIndexFeatureProvider;
 
     public SlicesFeatureProvider slicesFeatureProvider;
     public SearchFeatureProvider searchFeatureProvider;
@@ -104,7 +102,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
         slicesFeatureProvider = mock(SlicesFeatureProvider.class);
         mAccountFeatureProvider = mock(AccountFeatureProvider.class);
-        deviceIndexFeatureProvider = mock(DeviceIndexFeatureProvider.class);
     }
 
     @Override
@@ -185,10 +182,5 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AccountFeatureProvider getAccountFeatureProvider() {
         return mAccountFeatureProvider;
-    }
-
-    @Override
-    public DeviceIndexFeatureProvider getDeviceIndexFeatureProvider() {
-        return deviceIndexFeatureProvider;
     }
 }

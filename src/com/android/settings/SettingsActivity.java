@@ -65,14 +65,12 @@ import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DeviceIndexFeatureProvider;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -514,7 +512,6 @@ public class SettingsActivity extends SettingsBaseActivity
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         updateTilesList();
-        updateDeviceIndex();
     }
 
     @Override
@@ -634,14 +631,6 @@ public class SettingsActivity extends SettingsBaseActivity
                 doUpdateTilesList();
             }
         });
-    }
-
-    private void updateDeviceIndex() {
-        DeviceIndexFeatureProvider indexProvider = FeatureFactory.getFactory(
-                this).getDeviceIndexFeatureProvider();
-
-        ThreadUtils.postOnBackgroundThread(
-                () -> indexProvider.updateIndex(SettingsActivity.this, false /* force */));
     }
 
     private void doUpdateTilesList() {
