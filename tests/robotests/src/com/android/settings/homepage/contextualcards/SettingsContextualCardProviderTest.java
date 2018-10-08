@@ -24,17 +24,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import com.google.android.settings.intelligence.libs.contextualcards.ContextualCard;
 import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SettingsContextualCardProviderTest {
@@ -54,11 +52,12 @@ public class SettingsContextualCardProviderTest {
     }
 
     @Test
-    public void contentProviderCall_returnCorrectSize() {
+    public void contentProviderCall_returnCorrectSize() throws Exception {
         final Bundle returnValue =
                 mResolver.call(mUri, ContextualCardProvider.METHOD_GET_CARD_LIST, "", null);
-        final ArrayList<ContextualCard> cards =
-                returnValue.getParcelableArrayList(ContextualCardProvider.BUNDLE_CARD_LIST);
-        assertThat(cards.size()).isEqualTo(2);
+        final ContextualCardList cards =
+              ContextualCardList.parseFrom(
+                  returnValue.getByteArray(ContextualCardProvider.BUNDLE_CARD_LIST));
+        assertThat(cards.getCardCount()).isEqualTo(2);
     }
 }

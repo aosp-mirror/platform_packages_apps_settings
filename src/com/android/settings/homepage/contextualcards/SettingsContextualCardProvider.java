@@ -21,13 +21,11 @@ import static android.provider.SettingsSlicesContract.KEY_WIFI;
 import android.annotation.Nullable;
 
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
+import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
+import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.wifi.WifiSlice;
 
-import com.google.android.settings.intelligence.libs.contextualcards.ContextualCard;
 import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardProvider;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /** Provides dynamic card for SettingsIntelligence. */
 public class SettingsContextualCardProvider extends ContextualCardProvider {
@@ -36,21 +34,22 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
 
     @Override
     @Nullable
-    public List<ContextualCard> getContextualCards() {
-        final List<ContextualCard> cards = new ArrayList<>();
+    public ContextualCardList getContextualCards() {
         final ContextualCard wifiCard =
-                new ContextualCard.Builder()
+                ContextualCard.newBuilder()
                         .setSliceUri(WifiSlice.WIFI_URI.toString())
-                        .setName(KEY_WIFI)
+                        .setCardName(KEY_WIFI)
                         .build();
         final ContextualCard dataUsageCard =
-                new ContextualCard.Builder()
+                ContextualCard.newBuilder()
                         .setSliceUri(DataUsageSlice.DATA_USAGE_CARD_URI.toString())
-                        .setName(DataUsageSlice.PATH_DATA_USAGE_CARD)
+                        .setCardName(DataUsageSlice.PATH_DATA_USAGE_CARD)
                         .build();
+        final ContextualCardList cards = ContextualCardList.newBuilder()
+                .addCard(wifiCard)
+                .addCard(dataUsageCard)
+                .build();
 
-        cards.add(wifiCard);
-        cards.add(dataUsageCard);
         return cards;
     }
 }
