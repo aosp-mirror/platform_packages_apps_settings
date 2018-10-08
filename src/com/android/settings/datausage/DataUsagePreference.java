@@ -51,8 +51,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
     }
 
     @Override
-    public void setTemplate(NetworkTemplate template, int subId,
-            NetworkServices services) {
+    public void setTemplate(NetworkTemplate template, int subId, NetworkServices services) {
         mTemplate = template;
         mSubId = subId;
         final DataUsageController controller = getDataUsageController();
@@ -66,7 +65,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
                     DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
                     usageInfo.period));
         }
-        final long usageLevel = controller.getHistoriclUsageLevel(template);
+        final long usageLevel = controller.getHistoricalUsageLevel(template);
         if (usageLevel > 0L) {
             setIntent(getIntent());
         } else {
