@@ -37,12 +37,6 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
     private static final String TAG = "WifiDialogActivity";
 
-    private static final int RESULT_CONNECTED = RESULT_FIRST_USER;
-    private static final int RESULT_FORGET = RESULT_FIRST_USER + 1;
-
-    private static final String KEY_ACCESS_POINT_STATE = "access_point_state";
-    private static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
-
     /**
      * Boolean extra indicating whether this activity should connect to an access point on the
      * caller's behalf. If this is set to false, the caller should check
@@ -51,6 +45,11 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
      */
     @VisibleForTesting
     static final String KEY_CONNECT_FOR_CALLER = "connect_for_caller";
+    static final String KEY_ACCESS_POINT_STATE = "access_point_state";
+    private static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
+
+    private static final int RESULT_CONNECTED = RESULT_FIRST_USER;
+    private static final int RESULT_FORGET = RESULT_FIRST_USER + 1;
 
     private WifiDialog mDialog;
 

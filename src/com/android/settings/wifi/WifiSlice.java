@@ -29,6 +29,9 @@ import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 
@@ -42,8 +45,16 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.slices.CustomSliceable;
+import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.WifiTracker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility class to build a Wifi Slice, and handle all associated actions.
@@ -96,14 +107,73 @@ public class WifiSlice implements CustomSliceable {
         final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
                 isWifiEnabled);
 
-        return new ListBuilder(mContext, WIFI_URI, ListBuilder.INFINITY)
+        final ListBuilder listBuilder = new ListBuilder(mContext, WIFI_URI, ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new RowBuilder()
                         .setTitle(title)
                         .setSubtitle(summary)
                         .addEndItem(toggleSliceAction)
-                        .setPrimaryAction(primarySliceAction))
-                .build();
+                        .setPrimaryAction(primarySliceAction));
+
+        if (isWifiEnabled) {
+            final List<AccessPoint> result = getBackgroundWorker().getResults();
+            if (result != null && !result.isEmpty()) {
+                for (AccessPoint ap : result) {
+                    listBuilder.addRow(getAccessPointRow(ap));
+                }
+                listBuilder.setSeeMoreAction(primaryAction);
+            }
+        }
+        return listBuilder.build();
+    }
+
+    private RowBuilder getAccessPointRow(AccessPoint accessPoint) {
+        final String title = accessPoint.getConfigName();
+        final IconCompat levelIcon = IconCompat.createWithResource(mContext,
+                com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
+        final RowBuilder rowBuilder = new RowBuilder()
+                .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
+                .setTitle(title)
+                .setSubtitle(accessPoint.getSettingsSummary())
+                .setPrimaryAction(new SliceAction(
+                        getAccessPointAction(accessPoint), levelIcon, title));
+
+        final IconCompat endIcon = getEndIcon(accessPoint);
+        if (endIcon != null) {
+            rowBuilder.addEndItem(endIcon, ListBuilder.ICON_IMAGE);
+        }
+        return rowBuilder;
+    }
+
+    private IconCompat getEndIcon(AccessPoint accessPoint) {
+        if (accessPoint.isActive()) {
+            return IconCompat.createWithResource(mContext, R.drawable.ic_settings);
+        } else if (accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
+            return IconCompat.createWithResource(mContext, R.drawable.ic_friction_lock_closed);
+        } else if (accessPoint.isMetered()) {
+            return IconCompat.createWithResource(mContext, R.drawable.ic_friction_money);
+        }
+        return null;
+    }
+
+    private PendingIntent getAccessPointAction(AccessPoint accessPoint) {
+        final Bundle extras = new Bundle();
+        accessPoint.saveWifiState(extras);
+
+        Intent intent;
+        if (accessPoint.isActive()) {
+            intent = new SubSettingLauncher(mContext)
+                    .setTitleRes(R.string.pref_title_network_details)
+                    .setDestination(WifiNetworkDetailsFragment.class.getName())
+                    .setArguments(extras)
+                    .setSourceMetricsCategory(MetricsEvent.WIFI)
+                    .toIntent();
+        } else {
+            intent = new Intent(mContext, WifiDialogActivity.class);
+            intent.putExtra(WifiDialogActivity.KEY_ACCESS_POINT_STATE, extras);
+        }
+        return PendingIntent.getActivity(mContext, accessPoint.hashCode() /* requestCode */,
+                intent, 0 /* flags */);
     }
 
     /**
@@ -175,5 +245,76 @@ public class WifiSlice implements CustomSliceable {
         final Intent intent = getIntent();
         return PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 intent, 0 /* flags */);
+    }
+
+    @Override
+    public SliceBackgroundWorker getBackgroundWorker() {
+        return WifiScanWorker.getInstance(mContext, WIFI_URI);
+    }
+
+    private static class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
+            implements WifiTracker.WifiListener {
+
+        private static WifiScanWorker mWifiScanWorker;
+
+        private final Context mContext;
+
+        private WifiTracker mWifiTracker;
+        private WifiManager mWifiManager;
+
+        private WifiScanWorker(Context context, Uri uri) {
+            super(context.getContentResolver(), uri);
+            mContext = context;
+        }
+
+        public static WifiScanWorker getInstance(Context context, Uri uri) {
+            if (mWifiScanWorker == null) {
+                mWifiScanWorker = new WifiScanWorker(context, uri);
+            }
+            return mWifiScanWorker;
+        }
+
+        @Override
+        protected void onSlicePinned() {
+            new Handler(Looper.getMainLooper()).post(() -> {
+                mWifiTracker = new WifiTracker(mContext, this, true, true);
+                mWifiManager = mWifiTracker.getManager();
+                mWifiTracker.onStart();
+                onAccessPointsChanged();
+            });
+        }
+
+        @Override
+        protected void onSliceUnpinned() {
+            mWifiTracker.onStop();
+            mWifiTracker.onDestroy();
+            mWifiScanWorker = null;
+        }
+
+        @Override
+        public void onWifiStateChanged(int state) {
+        }
+
+        @Override
+        public void onConnectedChanged() {
+        }
+
+        @Override
+        public void onAccessPointsChanged() {
+            // in case state has changed
+            if (!mWifiManager.isWifiEnabled()) {
+                updateResults(null);
+                return;
+            }
+            // AccessPoints are sorted by the WifiTracker
+            final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
+            final List<AccessPoint> resultList = new ArrayList<>();
+            for (AccessPoint ap : accessPoints) {
+                if (ap.isReachable()) {
+                    resultList.add(ap);
+                }
+            }
+            updateResults(resultList);
+        }
     }
 }
