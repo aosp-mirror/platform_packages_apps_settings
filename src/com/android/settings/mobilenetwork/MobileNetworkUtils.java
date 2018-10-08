@@ -22,13 +22,14 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.os.PersistableBundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.telephony.ims.feature.ImsFeature;
@@ -169,5 +170,31 @@ public class MobileNetworkUtils {
     public static PersistableBundle getCarrierConfigBySubId(int mSubId) {
         //TODO(b/114749736): get carrier config from subId
         return new PersistableBundle();
+    }
+
+    /**
+     * Set whether to enable data for {@code subId}, also whether to disable data for other
+     * subscription
+     */
+    public static void setMobileDataEnabled(Context context, int subId, boolean enabled,
+            boolean disableOtherSubscriptions) {
+        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+                .createForSubscriptionId(subId);
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        telephonyManager.setDataEnabled(enabled);
+
+        if (disableOtherSubscriptions) {
+            List<SubscriptionInfo> subInfoList =
+                    subscriptionManager.getActiveSubscriptionInfoList();
+            if (subInfoList != null) {
+                for (SubscriptionInfo subInfo : subInfoList) {
+                    if (subInfo.getSubscriptionId() != subId) {
+                        TelephonyManager.from(context).createForSubscriptionId(
+                                subInfo.getSubscriptionId()).setDataEnabled(false);
+                    }
+                }
+            }
+        }
     }
 }

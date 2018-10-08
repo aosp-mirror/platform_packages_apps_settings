@@ -16,6 +16,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="mobile_network_pref_screen"
+    android:title="@string/network_settings_title"
     settings:initialExpandedChildrenCount="4">
 
     <PreferenceScreen
@@ -23,10 +25,11 @@
         android:title="@string/cdma_lte_data_service">
     </PreferenceScreen>
 
-    <com.android.settings.mobilenetwork.MobileDataPreference
+    <SwitchPreference
         android:key="mobile_data_enable"
         android:title="@string/mobile_data_settings_title"
-        android:summary="@string/mobile_data_settings_summary"/>
+        android:summary="@string/mobile_data_settings_summary"
+        settings:controller="com.android.settings.mobilenetwork.MobileDataPreferenceController"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="button_roaming_key"
