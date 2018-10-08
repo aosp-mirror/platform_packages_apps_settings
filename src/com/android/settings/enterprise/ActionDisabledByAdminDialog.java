@@ -59,11 +59,15 @@ public class ActionDisabledByAdminDialog extends Activity
         }
         admin.component = intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN);
 
-        int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        if (userId == UserHandle.USER_NULL) {
-            admin.user = null;
+        if (intent.hasExtra(Intent.EXTRA_USER)) {
+            admin.user = intent.getParcelableExtra(Intent.EXTRA_USER);
         } else {
-            admin.user = UserHandle.of(userId);
+            int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+            if (userId == UserHandle.USER_NULL) {
+                admin.user = null;
+            } else {
+                admin.user = UserHandle.of(userId);
+            }
         }
         return admin;
     }
