@@ -43,7 +43,7 @@ public class ActionDisabledByAdminDialogTest {
     public void testGetAdminDetailsFromIntent() {
         final int userId = 123;
         final ComponentName component = new ComponentName("com.some.package", ".SomeClass");
-        final EnforcedAdmin expectedAdmin = new EnforcedAdmin(component, userId);
+        final EnforcedAdmin expectedAdmin = new EnforcedAdmin(component, UserHandle.of(userId));
 
         final Intent intent = new Intent();
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, component);
@@ -54,7 +54,7 @@ public class ActionDisabledByAdminDialogTest {
     @Test
     public void testGetAdminDetailsFromNullIntent() {
         final int userId = UserHandle.myUserId();
-        final EnforcedAdmin expectedAdmin = new EnforcedAdmin(null, userId);
+        final EnforcedAdmin expectedAdmin = new EnforcedAdmin(null, UserHandle.of(userId));
 
         Assert.assertEquals(expectedAdmin, mDialog.getAdminDetailsFromIntent(null));
     }

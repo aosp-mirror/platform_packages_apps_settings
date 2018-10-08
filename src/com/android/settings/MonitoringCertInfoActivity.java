@@ -46,10 +46,17 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
 
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
 
+        final UserHandle user;
+        if (mUserId == UserHandle.USER_NULL) {
+            user = null;
+        } else {
+            user = UserHandle.of(mUserId);
+        }
+
         DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
         final int numberOfCertificates = getIntent().getIntExtra(
                 Settings.EXTRA_NUMBER_OF_CERTIFICATES, 1);
-        final int titleId = RestrictedLockUtils.getProfileOrDeviceOwner(this, mUserId) != null
+        final int titleId = RestrictedLockUtils.getProfileOrDeviceOwner(this, user) != null
                 ? R.plurals.ssl_ca_cert_settings_button // Check certificate
                 : R.plurals.ssl_ca_cert_dialog_title; // Trust or remove certificate
         final CharSequence title = getResources().getQuantityText(titleId, numberOfCertificates);

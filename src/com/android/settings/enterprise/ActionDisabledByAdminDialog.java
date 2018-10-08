@@ -53,12 +53,18 @@ public class ActionDisabledByAdminDialog extends Activity
 
     @androidx.annotation.VisibleForTesting
     EnforcedAdmin getAdminDetailsFromIntent(Intent intent) {
-        final EnforcedAdmin admin = new EnforcedAdmin(null, UserHandle.myUserId());
+        final EnforcedAdmin admin = new EnforcedAdmin(null, UserHandle.of(UserHandle.myUserId()));
         if (intent == null) {
             return admin;
         }
         admin.component = intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN);
-        admin.userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+
+        int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        if (userId == UserHandle.USER_NULL) {
+            admin.user = null;
+        } else {
+            admin.user = UserHandle.of(userId);
+        }
         return admin;
     }
 

@@ -229,7 +229,7 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
                     && !mDpm.isCaCertApproved(certHolder.getAlias(), certHolder.getUserId());
 
             final boolean isProfileOrDeviceOwner = RestrictedLockUtils.getProfileOrDeviceOwner(
-                    mActivity, certHolder.getUserId()) != null;
+                    mActivity, UserHandle.of(certHolder.getUserId())) != null;
 
             // Show trust button only when it requires consumer user (non-PO/DO) to approve
             CharSequence displayText = mActivity.getText(!isProfileOrDeviceOwner && mNeedsApproval
