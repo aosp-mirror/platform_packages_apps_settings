@@ -36,9 +36,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.utils.ZenServiceListing;
@@ -48,6 +45,9 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
     private static final String TAG = "ZenRuleSelectionDialog";
@@ -170,7 +170,8 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
 
     private ZenRuleInfo defaultNewEvent() {
         final ZenModeConfig.EventInfo event = new ZenModeConfig.EventInfo();
-        event.calendar = null; // any calendar
+        event.calName = null; // any calendar
+        event.calendarId = null;
         event.reply = ZenModeConfig.EventInfo.REPLY_ANY_EXCEPT_NO;
         final ZenRuleInfo rt = new ZenRuleInfo();
         rt.settingsAction = ZenModeEventRuleSettings.ACTION;
