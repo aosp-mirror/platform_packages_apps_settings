@@ -67,7 +67,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 
@@ -128,6 +127,7 @@ import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -757,7 +757,7 @@ public class ManageApplications extends InstrumentedFragment
         }
     }
 
-    static class FilterSpinnerAdapter extends ArrayAdapter<CharSequence> {
+    static class FilterSpinnerAdapter extends SettingsSpinnerAdapter<CharSequence> {
 
         private final ManageApplications mManageApplications;
         private final Context mContext;
@@ -767,10 +767,9 @@ public class ManageApplications extends InstrumentedFragment
         private final ArrayList<AppFilterItem> mFilterOptions = new ArrayList<>();
 
         public FilterSpinnerAdapter(ManageApplications manageApplications) {
-            super(manageApplications.getContext(), R.layout.filter_spinner_item);
+            super(manageApplications.getContext());
             mContext = manageApplications.getContext();
             mManageApplications = manageApplications;
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         }
 
         public AppFilterItem getFilter(int position) {
