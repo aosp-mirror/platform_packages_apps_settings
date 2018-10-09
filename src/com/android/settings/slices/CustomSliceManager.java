@@ -22,6 +22,7 @@ import android.util.ArrayMap;
 
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.deviceinfo.StorageSlice;
 import com.android.settings.wifi.WifiSlice;
 
 import java.util.Map;
@@ -91,5 +92,6 @@ public class CustomSliceManager {
         mUriMap.put(WifiSlice.WIFI_URI, WifiSlice.class);
         mUriMap.put(DataUsageSlice.DATA_USAGE_CARD_URI, DataUsageSlice.class);
         mUriMap.put(DeviceInfoSlice.DEVICE_INFO_CARD_URI, DeviceInfoSlice.class);
+        mUriMap.put(StorageSlice.STORAGE_CARD_URI, StorageSlice.class);
     }
 }
