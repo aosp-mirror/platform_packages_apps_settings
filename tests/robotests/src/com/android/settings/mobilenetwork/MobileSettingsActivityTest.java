@@ -25,6 +25,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.view.Menu;
@@ -45,6 +46,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
@@ -120,7 +122,7 @@ public class MobileSettingsActivityTest {
 
     @Test
     public void switchFragment_hidePreviousFragment() {
-        mMobileSettingsActivity.mPrevSubscriptionId = PREV_SUB_ID;
+        mMobileSettingsActivity.mCurSubscriptionId = PREV_SUB_ID;
 
         mMobileSettingsActivity.switchFragment(mShowFragment, CURRENT_SUB_ID);
 
@@ -129,12 +131,25 @@ public class MobileSettingsActivityTest {
 
     @Test
     public void switchFragment_fragmentExist_showItWithArguments() {
-        mMobileSettingsActivity.mPrevSubscriptionId = PREV_SUB_ID;
+        mMobileSettingsActivity.mCurSubscriptionId = PREV_SUB_ID;
 
         mMobileSettingsActivity.switchFragment(mShowFragment, CURRENT_SUB_ID);
 
         assertThat(mShowFragment.getArguments().getInt(
                 MobileSettingsActivity.KEY_SUBSCRIPTION_ID)).isEqualTo(CURRENT_SUB_ID);
         verify(mFragmentTransaction).show(mShowFragment);
+    }
+
+    @Test
+    public void onSaveInstanceState_saveCurrentSubId() {
+        mMobileSettingsActivity = Robolectric.buildActivity(
+                MobileSettingsActivity.class).get();
+        mMobileSettingsActivity.mCurSubscriptionId = PREV_SUB_ID;
+        final Bundle bundle = new Bundle();
+
+        mMobileSettingsActivity.saveInstanceState(bundle);
+
+        assertThat(bundle.getInt(MobileSettingsActivity.KEY_CUR_SUBSCRIPTION_ID)).isEqualTo(
+                PREV_SUB_ID);
     }
 }
