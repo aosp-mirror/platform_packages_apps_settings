@@ -18,128 +18,92 @@ package com.android.settings.homepage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-
 import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
+import android.net.Uri;
 
+import com.android.settings.homepage.deviceinfo.DataUsageSlice;
+import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
+import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowContentResolver;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class CardContentLoaderTest {
-    private static final String[] QUERY_PROJECTION = {
-            CardDatabaseHelper.CardColumns.NAME,
-            CardDatabaseHelper.CardColumns.TYPE,
-            CardDatabaseHelper.CardColumns.SCORE,
-            CardDatabaseHelper.CardColumns.SLICE_URI,
-            CardDatabaseHelper.CardColumns.CATEGORY,
-            CardDatabaseHelper.CardColumns.LOCALIZED_TO_LOCALE,
-            CardDatabaseHelper.CardColumns.PACKAGE_NAME,
-            CardDatabaseHelper.CardColumns.APP_VERSION,
-            CardDatabaseHelper.CardColumns.TITLE_RES_NAME,
-            CardDatabaseHelper.CardColumns.TITLE_TEXT,
-            CardDatabaseHelper.CardColumns.SUMMARY_RES_NAME,
-            CardDatabaseHelper.CardColumns.SUMMARY_TEXT,
-            CardDatabaseHelper.CardColumns.ICON_RES_NAME,
-            CardDatabaseHelper.CardColumns.ICON_RES_ID,
-            CardDatabaseHelper.CardColumns.CARD_ACTION,
-            CardDatabaseHelper.CardColumns.EXPIRE_TIME_MS,
-            CardDatabaseHelper.CardColumns.SUPPORT_HALF_WIDTH
-    };
 
     private Context mContext;
     private CardContentLoader mCardContentLoader;
+    private SettingsSliceProvider mProvider;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mCardContentLoader = spy(new CardContentLoader(mContext));
+        mCardContentLoader = new CardContentLoader(mContext);
+        mProvider = new SettingsSliceProvider();
+        ShadowContentResolver.registerProviderInternal(SettingsSliceProvider.SLICE_AUTHORITY,
+                mProvider);
     }
 
     @Test
-    public void loadInBackground_hasDataInDb_shouldReturnData() {
-        final Cursor cursor = generateTwoRowContextualCards();
-        doReturn(cursor).when(mCardContentLoader).getContextualCardsFromProvider();
+    public void createStaticCards_shouldReturnTwoCards() {
+        final List<ContextualCard> defaultData = mCardContentLoader.createStaticCards();
 
-        final List<ContextualCard> contextualCards = mCardContentLoader.loadInBackground();
-
-        assertThat(contextualCards.size()).isEqualTo(cursor.getCount());
+        assertThat(defaultData).hasSize(2);
     }
 
     @Test
-    public void loadInBackground_hasNoData_shouldReturnThreeDefaultData() {
-        final Cursor cursor = generateEmptyContextualCards();
-        doReturn(cursor).when(mCardContentLoader).getContextualCardsFromProvider();
+    public void createStaticCards_shouldContainDataUsageAndDeviceInfo() {
+        final Uri dataUsage = DataUsageSlice.DATA_USAGE_CARD_URI;
+        final Uri deviceInfo = DeviceInfoSlice.DEVICE_INFO_CARD_URI;
+        final List<Uri> expectedUris = Arrays.asList(dataUsage, deviceInfo);
 
-        final List<ContextualCard> contextualCards = mCardContentLoader.loadInBackground();
+        final List<Uri> actualCardUris = mCardContentLoader.createStaticCards().stream().map(
+                ContextualCard::getSliceUri).collect(Collectors.toList());
 
-        assertThat(contextualCards.size()).isEqualTo(mCardContentLoader.createStaticCards().size());
+        assertThat(actualCardUris).containsExactlyElementsIn(expectedUris);
     }
 
-    private MatrixCursor generateEmptyContextualCards() {
-        final MatrixCursor result = new MatrixCursor(QUERY_PROJECTION);
-        return result;
+    @Test
+    public void isCardEligibleToDisplay_customCard_returnTrue() {
+        final ContextualCard customCard = new ContextualCard.Builder()
+                .setName("custom_card")
+                .setCardType(ContextualCard.CardType.DEFAULT)
+                .setTitleText("custom_title")
+                .setSummaryText("custom_summary")
+                .build();
+
+        assertThat(mCardContentLoader.isCardEligibleToDisplay(customCard)).isTrue();
     }
 
-    private MatrixCursor generateTwoRowContextualCards() {
-        final MatrixCursor result = generateEmptyContextualCards();
-        result.addRow(generateFirstFakeData());
-        result.addRow(generateSecondFakeData());
-        return result;
+    @Test
+    public void isCardEligibleToDisplay_invalidScheme_returnFalse() {
+        final String sliceUri = "contet://com.android.settings.slices/action/flashlight";
+
+        assertThat(
+                mCardContentLoader.isCardEligibleToDisplay(getContextualCard(sliceUri))).isFalse();
     }
 
-    private Object[] generateFirstFakeData() {
-        final Object[] ref = new Object[]{
-                "auto_rotate", /* NAME */
-                ContextualCard.CardType.SLICE, /* TYPE */
-                0.5, /* SCORE */
-                "content://com.android.settings.slices/action/auto_rotate", /* SLICE_URI */
-                2, /* CATEGORY */
-                "", /* LOCALIZED_TO_LOCALE */
-                "com.android.settings", /* PACKAGE_NAME */
-                1l, /* APP_VERSION */
-                "", /* TITLE_RES_NAME */
-                "", /* TITLE_TEXT */
-                "", /* SUMMARY_RES_NAME */
-                "", /* SUMMARY_TEXT */
-                "", /* ICON_RES_NAME */
-                0, /* ICON_RES_ID */
-                0, /* CARD_ACTION */
-                -1, /* EXPIRE_TIME_MS */
-                0 /* SUPPORT_HALF_WIDTH */
-        };
-        return ref;
+    @Test
+    public void isCardEligibleToDisplay_noProvider_returnFalse() {
+        final String sliceUri = "content://com.android.settings.test.slices/action/flashlight";
+
+        assertThat(
+                mCardContentLoader.isCardEligibleToDisplay(getContextualCard(sliceUri))).isFalse();
     }
 
-    private Object[] generateSecondFakeData() {
-        final Object[] ref = new Object[]{
-                "toggle_airplane", /* NAME */
-                ContextualCard.CardType.SLICE, /* TYPE */
-                0.5, /* SCORE */
-                "content://com.android.settings.slices/action/toggle_airplane", /* SLICE_URI */
-                2, /* CATEGORY */
-                "", /* LOCALIZED_TO_LOCALE */
-                "com.android.settings", /* PACKAGE_NAME */
-                1l, /* APP_VERSION */
-                "", /* TITLE_RES_NAME */
-                "", /* TITLE_TEXT */
-                "", /* SUMMARY_RES_NAME */
-                "", /* SUMMARY_TEXT */
-                "", /* ICON_RES_NAME */
-                0, /* ICON_RES_ID */
-                0, /* CARD_ACTION */
-                -1, /* EXPIRE_TIME_MS */
-                0 /* SUPPORT_HALF_WIDTH */
-        };
-        return ref;
+    private ContextualCard getContextualCard(String sliceUri) {
+        return new ContextualCard.Builder()
+                .setName("test_card")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(sliceUri)
+                .build();
     }
 }
