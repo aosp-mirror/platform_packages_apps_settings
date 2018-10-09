@@ -49,6 +49,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.MetricsLogger;
@@ -58,6 +66,7 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -67,14 +76,6 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkFragment extends DashboardFragment implements
@@ -159,6 +160,8 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private SwitchPreference mVideoCallingPref;
     private NetworkSelectListPreference mButtonNetworkSelect;
     private DataUsagePreference mDataUsagePref;
+
+    private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
 
     private static final String iface = "rmnet0"; //TODO: this will go away
     private List<SubscriptionInfo> mActiveSubInfos;
@@ -394,6 +397,9 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
+
+        mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
+        mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
     }
 
     @Override
@@ -721,10 +727,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         /**
          * Listen to extra preference changes that need as Metrics events logging.
          */
-        if (prefSet.findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY) != null) {
-            prefSet.findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
-                    .setOnPreferenceChangeListener(this);
-        }
 
         if (prefSet.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY) != null) {
             prefSet.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)
@@ -781,10 +783,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             ps.setEnabled(hasActiveSubscriptions);
         }
         ps = findPreference(BUTTON_CARRIER_SETTINGS_KEY);
-        if (ps != null) {
-            ps.setEnabled(hasActiveSubscriptions);
-        }
-        ps = findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY);
         if (ps != null) {
             ps.setEnabled(hasActiveSubscriptions);
         }
@@ -1096,8 +1094,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 return false;
             }
         } else if (preference == getPreferenceScreen()
-                .findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
-                || preference == getPreferenceScreen()
                 .findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)) {
             return true;
         }
@@ -1429,13 +1425,18 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch(requestCode) {
+        switch (requestCode) {
             case REQUEST_CODE_EXIT_ECM:
                 Boolean isChoiceYes = data.getBooleanExtra(
                         EXTRA_EXIT_ECM_RESULT, false);
                 if (isChoiceYes) {
                     // If the phone exits from ECM mode, show the CDMA Options
-                    mCdmaOptions.showDialog(mClickedPreference);
+                    if (TextUtils.equals(mClickedPreference.getKey(),
+                            mCdmaSystemSelectPreferenceController.getPreferenceKey())) {
+                        mCdmaSystemSelectPreferenceController.showDialog();
+                    } else {
+                        mCdmaOptions.showDialog(mClickedPreference);
+                    }
                 } else {
                     // do nothing
                 }
@@ -1665,13 +1666,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             return;
         }
         updateCdmaOptions(this, prefSet, mSubId);
-        CdmaSystemSelectListPreference systemSelect =
-                (CdmaSystemSelectListPreference)prefSet.findPreference
-                        (BUTTON_CDMA_SYSTEM_SELECT_KEY);
-        systemSelect.setSubscriptionId(mSubId);
-        if (systemSelect != null) {
-            systemSelect.setEnabled(enable);
-        }
     }
 
     private boolean isSupportTdscdma() {
