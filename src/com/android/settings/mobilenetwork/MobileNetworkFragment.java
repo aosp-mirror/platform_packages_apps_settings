@@ -1074,6 +1074,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
                     Bundle b = new Bundle();
                     b.putInt(RoamingDialogFragment.SUB_ID_KEY, mSubId);
                     fragment.setArguments(b);
+                    fragment.setTargetFragment(this, 0 /* requestCode */);
                     fragment.show(getFragmentManager(), ROAMING_TAG);
                     // Don't update the toggle unless the confirm button is actually pressed.
                     return false;
