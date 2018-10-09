@@ -131,6 +131,13 @@
                   android:launchMode="singleTask">
         </activity>
 
+        <activity android:name=".mobilenetwork.MobileSettingsActivity"
+                  android:label="@string/network_settings_title"
+                  android:theme="@style/Theme.Settings.Home"
+                  android:launchMode="singleTask">
+            <!-- TODO(b/114749736): add intent filter here and disable the one in telephony -->
+        </activity>
+
         <!-- Alias for launcher activity only, as this belongs to each profile. -->
         <activity-alias android:name="Settings"
                 android:taskAffinity="com.android.settings.root"
@@ -3028,9 +3035,6 @@
             android:name=".SettingsDumpService"
             android:exported="true"
             android:permission="android.permission.DUMP" />
-
-         <service android:name=".search.DeviceIndexUpdateJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <!-- Quick Settings tiles for Developer Options -->
         <service

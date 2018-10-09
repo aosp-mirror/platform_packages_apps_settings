@@ -178,7 +178,7 @@ public class DataUsageSummaryPreference extends Preference {
             carrierInfo.setVisibility(View.GONE);
             limitInfo.setVisibility(View.GONE);
 
-            final long usageLevel = getHistoriclUsageLevel();
+            final long usageLevel = getHistoricalUsageLevel();
             if (usageLevel > 0L) {
                 launchButton.setOnClickListener((view) -> {
                     launchWifiDataUsage(getContext());
@@ -339,9 +339,9 @@ public class DataUsageSummaryPreference extends Preference {
     }
 
     @VisibleForTesting
-    long getHistoriclUsageLevel() {
+    long getHistoricalUsageLevel() {
         final DataUsageController controller = new DataUsageController(getContext());
-        return controller.getHistoriclUsageLevel(NetworkTemplate.buildTemplateWifiWildcard());
+        return controller.getHistoricalUsageLevel(NetworkTemplate.buildTemplateWifiWildcard());
     }
 
 }

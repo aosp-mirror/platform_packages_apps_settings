@@ -29,7 +29,6 @@ import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
-import com.android.settings.search.DeviceIndexFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
@@ -105,8 +104,6 @@ public abstract class FeatureFactory {
     public abstract SlicesFeatureProvider getSlicesFeatureProvider();
 
     public abstract AccountFeatureProvider getAccountFeatureProvider();
-
-    public abstract DeviceIndexFeatureProvider getDeviceIndexFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

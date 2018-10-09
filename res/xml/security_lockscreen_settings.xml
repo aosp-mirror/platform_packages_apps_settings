@@ -27,7 +27,8 @@
         <com.android.settings.RestrictedListPreference
             android:key="security_setting_lock_screen_notif"
             android:title="@string/lock_screen_notifications_title"
-            android:summary="@string/summary_placeholder" />
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_lock_screen_notif"/>
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="security_lockscreen_add_users_when_locked"

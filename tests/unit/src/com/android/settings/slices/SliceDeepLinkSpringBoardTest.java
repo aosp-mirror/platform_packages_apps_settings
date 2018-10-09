@@ -16,7 +16,7 @@
 
 package com.android.settings.slices;
 
-import static com.android.settings.search.DeviceIndexFeatureProvider.createDeepLink;
+import static com.android.settings.slices.SliceDeepLinkSpringBoard.createDeepLink;
 
 import android.content.Context;
 import android.content.Intent;

@@ -435,7 +435,14 @@ public class ChooseLockGeneric extends SettingsActivity {
         @VisibleForTesting
         void updatePreferencesOrFinish(boolean isRecreatingActivity) {
             Intent intent = getActivity().getIntent();
-            int quality = intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
+            int quality = -1;
+            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+                quality = intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
+            } else {
+                // For non-file encrypted devices we need to show encryption interstitial, so always
+                // show the lock type picker and ignore PASSWORD_TYPE_KEY.
+                Log.i(TAG, "Ignoring PASSWORD_TYPE_KEY because device is not file encrypted");
+            }
             if (quality == -1) {
                 // If caller didn't specify password quality, show UI and allow the user to choose.
                 quality = intent.getIntExtra(MINIMUM_QUALITY_KEY, -1);

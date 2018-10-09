@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.search.SearchIndexableResources;
 
@@ -63,10 +64,12 @@ public interface SearchFeatureProvider {
         view.setOnClickListener(tb -> {
             final Intent intent = SEARCH_UI_INTENT;
             intent.setPackage(getSettingsIntelligencePkgName());
+            final Context context = activity.getApplicationContext();
 
-            FeatureFactory.getFactory(
-                    activity.getApplicationContext()).getSlicesFeatureProvider()
+            FeatureFactory.getFactory(context).getSlicesFeatureProvider()
                     .indexSliceDataAsync(activity.getApplicationContext());
+            FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                    .action(context, MetricsProto.MetricsEvent.ACTION_SEARCH_RESULTS);
             activity.startActivityForResult(intent, REQUEST_CODE);
         });
     }

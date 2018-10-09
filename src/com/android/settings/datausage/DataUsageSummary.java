@@ -283,8 +283,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
                                     formatUsedData()));
                 } else {
                     final DataUsageController.DataUsageInfo info =
-                            mDataController
-                                    .getDataUsageInfo(NetworkTemplate.buildTemplateWifiWildcard());
+                            mDataController.getWifiDataUsageInfo();
 
                     if (info == null) {
                         mSummaryLoader.setSummary(this, null);

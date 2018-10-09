@@ -1133,4 +1133,186 @@
         <item>4</item> <!-- AutofillManager.FLAG_ADD_CLIENT_VERBOSE -->
     </string-array>
 
+    <string-array name="enabled_networks_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_3G</item>
+        <item>@string/network_2G</item>
+    </string-array>
+    <string-array name="enabled_networks_4g_choices" translatable="false">
+        <item>@string/network_4G</item>
+        <item>@string/network_3G</item>
+        <item>@string/network_2G</item>
+    </string-array>
+    <string-array name="enabled_networks_values" translatable="false">
+        <item>"9"</item>
+        <item>"0"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <string-array name="cdma_system_select_choices">
+        <!-- System select dialog screen, setting option name -->
+        <item>Home only</item>
+        <!-- Remove the following option "Affiliated Networks" from the option list -->
+        <!-- <item>Affiliated Networks</item> -->
+        <!-- System select dialog screen, setting option name -->
+        <item>Automatic</item>
+    </string-array>
+    <string-array name="cdma_system_select_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>"0"</item>
+        <!-- Remove the following value "1" which corresponds to "Affiliated Networks" above -->
+        <!-- <item>"1"</item>  -->
+        <!-- Do not translate. -->
+        <item>"2"</item>
+    </string-array>
+
+    <!-- The preferred network modes in Mobile network settings -->
+    <string-array name="preferred_network_mode_choices">
+        <item>GSM/WCDMA preferred</item>
+        <item>GSM only</item>
+        <item>WCDMA only</item>
+        <item>GSM/WCDMA auto</item>
+        <item>CDMA/EvDo auto</item>
+        <item>CDMA w/o EvDo</item>
+        <item>EvDo only</item>
+        <item>CDMA/EvDo/GSM/WCDMA</item>
+        <item>CDMA + LTE/EvDo</item>
+        <item>GSM/WCDMA/LTE</item>
+        <item>Global</item>
+        <item>LTE</item>
+        <item>LTE / WCDMA</item>
+        <item>TDSCDMA only</item>
+        <item>TDSCDMA/WCDMA</item>
+        <item>LTE/TDSCDMA</item>
+        <item>TDSCDMA/GSM</item>
+        <item>LTE/TDSCDMA/GSM</item>
+        <item>TDSCDMA/GSM/WCDMA</item>
+        <item>LTE/TDSCDMA/WCDMA</item>
+        <item>LTE/TDSCDMA/GSM/WCDMA</item>
+        <item>TDSCDMA/CDMA/EVDO/GSM/WCDMA </item>
+        <item>LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA</item>
+    </string-array>
+    <!-- The preferred network modes RIL constants, in order of the modes above,
+         e.g. the choice "GSM/WCDMA preferred" has the corresponding value "0" -->
+    <string-array name="preferred_network_mode_values"  translatable="false">
+        <item>"0"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"6"</item>
+        <item>"7"</item>
+        <item>"8"</item>
+        <item>"9"</item>
+        <item>"10"</item>
+        <item>"11"</item>
+        <item>"12"</item>
+        <item>"13"</item>
+        <item>"14"</item>
+        <item>"15"</item>
+        <item>"16"</item>
+        <item>"17"</item>
+        <item>"18"</item>
+        <item>"19"</item>
+        <item>"20"</item>
+        <item>"21"</item>
+        <item>"22"</item>
+    </string-array>
+
+    <!-- Choices for CDMA subscription-->
+    <string-array name="cdma_subscription_choices">
+        <item>RUIM/SIM</item>
+        <item>NV</item>
+    </string-array>
+    <!-- Values for CDMA subscription-->
+    <string-array name="cdma_subscription_values">
+        <item>"0"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_except_gsm_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_3G</item>
+    </string-array>
+    <string-array name="enabled_networks_except_gsm_4g_choices" translatable="false">
+        <item>@string/network_4G</item>
+        <item>@string/network_3G</item>
+    </string-array>
+    <string-array name="enabled_networks_except_gsm_values" translatable="false">
+        <item>"9"</item>
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_except_lte_choices" translatable="false">
+        <item>@string/network_3G</item>
+        <item>@string/network_2G</item>
+    </string-array>
+    <string-array name="enabled_networks_except_lte_values" translatable="false">
+        <item>"0"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_except_gsm_lte_choices" translatable="false">
+        <item>@string/network_3G</item>
+    </string-array>
+    <string-array name="enabled_networks_except_gsm_lte_values" translatable="false">
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_cdma_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_3G</item>
+        <item>@string/network_1x</item>
+        <item>@string/network_global</item>
+    </string-array>
+    <string-array name="enabled_networks_cdma_values" translatable="false">
+        <item>"8"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"10"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_cdma_no_lte_choices" translatable="false">
+        <item>@string/network_3G</item>
+        <item>@string/network_1x</item>
+    </string-array>
+    <string-array name="enabled_networks_cdma_no_lte_values" translatable="false">
+        <item>"4"</item>
+        <item>"5"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_cdma_only_lte_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_global</item>
+    </string-array>
+    <string-array name="enabled_networks_cdma_only_lte_values" translatable="false">
+        <item>"8"</item>
+        <item>"10"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_tdscdma_choices" translatable="false">
+        <item>@string/network_lte</item>
+        <item>@string/network_3G</item>
+        <item>@string/network_2G</item>
+    </string-array>
+    <string-array name="enabled_networks_tdscdma_values" translatable="false">
+        <item>"22"</item>
+        <item>"18"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <!--String arrays for World preferred netwrok modes -->
+    <string-array name="preferred_network_mode_choices_world_mode">
+        <item>Global</item>
+        <item>LTE / CDMA</item>
+        <item>LTE / GSM / UMTS</item>
+    </string-array>
+
+    <string-array name="preferred_network_mode_values_world_mode">
+        <item>"10"</item>
+        <item>"8"</item>
+        <item>"9"</item>
+    </string-array>
+
 </resources>
