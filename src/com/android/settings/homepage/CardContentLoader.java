@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
+import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -103,8 +104,8 @@ public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
                     .setIsHalfWidth(true)
                     .build());
             add(new ContextualCard.Builder()
-                    .setSliceUri("content://com.android.settings.slices/intent/device_info_card")
-                    .setName(packageName + "/" + "device_info_card")
+                    .setSliceUri(DeviceInfoSlice.DEVICE_INFO_CARD_URI.toString())
+                    .setName(packageName + "/" + DeviceInfoSlice.PATH_DEVICE_INFO_CARD)
                     .setPackageName(packageName)
                     .setRankingScore(rankingScore)
                     .setAppVersion(appVersionCode)
