@@ -18,7 +18,6 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -27,7 +26,6 @@ import static org.mockito.Mockito.verify;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
@@ -84,11 +82,6 @@ public class SliceBuilderUtilsTest {
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mLoggingArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
-
-        // Prevent crash in SliceMetadata.
-        Resources resources = spy(mContext.getResources());
-        doReturn(60).when(resources).getDimensionPixelSize(anyInt());
-        doReturn(resources).when(mContext).getResources();
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);

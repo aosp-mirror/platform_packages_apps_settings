@@ -23,7 +23,6 @@ import static android.app.slice.SliceItem.FORMAT_TEXT;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -32,7 +31,6 @@ import static org.mockito.Mockito.when;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.telephony.CarrierConfigManager;
 
 import androidx.slice.Slice;
@@ -97,11 +95,6 @@ public class Enhanced4gLteSliceHelperTest {
 
         //setup for SliceBroadcastReceiver test
         mReceiver = spy(new SliceBroadcastReceiver());
-
-        // Prevent crash in SliceMetadata.
-        Resources resources = spy(mContext.getResources());
-        doReturn(60).when(resources).getDimensionPixelSize(anyInt());
-        doReturn(resources).when(mContext).getResources();
 
         mEnhanced4gLteSliceHelper = new FakeEnhanced4gLteSliceHelper(mContext);
 
