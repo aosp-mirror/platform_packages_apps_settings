@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package com.android.settings.intelligence;
+option java_outer_classname = "ContextualCardProto";
+
+message ContextualCardList {
+  repeated ContextualCard card = 1;
+}
+
+message ContextualCard {
+  // Slice uri of the contextual card
+  optional string sliceUri = 1;
+
+  // {@link ContextualCardCategory}.
+  optional int32 category = 2;
+
+  // Name of the card. It should be identical in every app
+  optional string cardName = 3;
+}
