@@ -16,12 +16,15 @@
  */
 package com.android.settings.search;
 
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
+
 import android.annotation.NonNull;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toolbar;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.overlay.FeatureFactory;
@@ -53,15 +56,23 @@ public interface SearchFeatureProvider {
         return "com.android.settings.intelligence";
     }
 
-
     /**
      * Initializes the search toolbar.
      */
-    default void initSearchToolbar(Activity activity, View view) {
-        if (activity == null || view == null) {
+    default void initSearchToolbar(Activity activity, Toolbar toolbar) {
+        if (activity == null || toolbar == null) {
             return;
         }
-        view.setOnClickListener(tb -> {
+        // Please forgive me for what I am about to do.
+        //
+        // Need to make the navigation icon non-clickable so that the entire card is clickable
+        // and goes to the search UI. Also set the background to null so there's no ripple.
+        final View navView = toolbar.getNavigationView();
+        navView.setClickable(false);
+        navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+        navView.setBackground(null);
+
+        toolbar.setOnClickListener(tb -> {
             final Intent intent = SEARCH_UI_INTENT;
             intent.setPackage(getSettingsIntelligencePkgName());
             final Context context = activity.getApplicationContext();
