@@ -172,8 +172,7 @@ public final class DataUsageUtils {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("wifi");
         }
 
-        ConnectivityManager connectivityManager =
-                context.getSystemService(ConnectivityManager.class);
+        final ConnectivityManager connectivityManager = ConnectivityManager.from(context);
         return connectivityManager != null && connectivityManager.isNetworkSupported(TYPE_WIFI);
     }
 
