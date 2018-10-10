@@ -23,6 +23,7 @@ import android.net.Uri;
 
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.deviceinfo.StorageSlice;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -56,14 +57,15 @@ public class CardContentLoaderTest {
     public void createStaticCards_shouldReturnTwoCards() {
         final List<ContextualCard> defaultData = mCardContentLoader.createStaticCards();
 
-        assertThat(defaultData).hasSize(2);
+        assertThat(defaultData).hasSize(3);
     }
 
     @Test
     public void createStaticCards_shouldContainDataUsageAndDeviceInfo() {
         final Uri dataUsage = DataUsageSlice.DATA_USAGE_CARD_URI;
         final Uri deviceInfo = DeviceInfoSlice.DEVICE_INFO_CARD_URI;
-        final List<Uri> expectedUris = Arrays.asList(dataUsage, deviceInfo);
+        final Uri storageInfo = StorageSlice.STORAGE_CARD_URI;
+        final List<Uri> expectedUris = Arrays.asList(dataUsage, deviceInfo, storageInfo);
 
         final List<Uri> actualCardUris = mCardContentLoader.createStaticCards().stream().map(
                 ContextualCard::getSliceUri).collect(Collectors.toList());
