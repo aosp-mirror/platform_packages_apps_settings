@@ -518,6 +518,11 @@
         <Preference
             android:key="reset_shortcut_manager_throttling"
             android:title="@string/reset_shortcut_manager_throttling" />
+
+        <SwitchPreference
+            android:key="sms_access_restriction_enabled"
+            android:title="@string/sms_access_restriction_enabled"
+            android:summary="@string/sms_access_restriction_enabled_summary" />
     </PreferenceCategory>
 
     <com.android.settings.development.autofill.AutofillPreferenceCategory
