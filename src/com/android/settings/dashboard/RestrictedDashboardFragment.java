@@ -215,8 +215,8 @@ public abstract class RestrictedDashboardFragment extends DashboardFragment {
     public EnforcedAdmin getRestrictionEnforcedAdmin() {
         mEnforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getActivity(),
                 mRestrictionKey, UserHandle.myUserId());
-        if (mEnforcedAdmin != null && mEnforcedAdmin.userId == UserHandle.USER_NULL) {
-            mEnforcedAdmin.userId = UserHandle.myUserId();
+        if (mEnforcedAdmin != null && mEnforcedAdmin.user == null) {
+            mEnforcedAdmin.user = UserHandle.of(UserHandle.myUserId());
         }
         return mEnforcedAdmin;
     }

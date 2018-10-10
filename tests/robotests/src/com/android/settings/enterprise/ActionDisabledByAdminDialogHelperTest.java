@@ -27,6 +27,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Process;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -76,7 +77,7 @@ public class ActionDisabledByAdminDialogHelperTest {
         final int userId = 123;
         final ComponentName component = new ComponentName("some.package.name",
                 "some.package.name.SomeClass");
-        final EnforcedAdmin admin = new EnforcedAdmin(component, userId);
+        final EnforcedAdmin admin = new EnforcedAdmin(component, UserHandle.of(userId));
 
         mHelper.showAdminPolicies(admin, mActivity);
 
@@ -90,7 +91,7 @@ public class ActionDisabledByAdminDialogHelperTest {
     @Test
     public void testShowAdminPoliciesWithoutComponent() {
         final int userId = 123;
-        final EnforcedAdmin admin = new EnforcedAdmin(null, userId);
+        final EnforcedAdmin admin = new EnforcedAdmin(null, UserHandle.of(userId));
         mHelper.showAdminPolicies(admin, mActivity);
         final Intent intent = mActivityShadow.getNextStartedActivity();
         assertEquals(intent.getComponent(), new ComponentName(mActivity,
@@ -146,7 +147,7 @@ public class ActionDisabledByAdminDialogHelperTest {
         final ViewGroup view = new FrameLayout(mActivity);
         final ComponentName component = new ComponentName("some.package.name",
                 "some.package.name.SomeClass");
-        final EnforcedAdmin admin = new EnforcedAdmin(component, 123);
+        final EnforcedAdmin admin = new EnforcedAdmin(component, UserHandle.of(123));
         final TextView textView = new TextView(mActivity);
 
         textView.setId(R.id.admin_support_msg);
@@ -169,7 +170,7 @@ public class ActionDisabledByAdminDialogHelperTest {
         final ShadowUserManager userManagerShadow = Shadow.extract(userManager);
         final ComponentName component = new ComponentName("some.package.name",
                 "some.package.name.SomeClass");
-        final EnforcedAdmin admin = new EnforcedAdmin(component, 123);
+        final EnforcedAdmin admin = new EnforcedAdmin(component, UserHandle.of(123));
 
         dpmShadow.setShortSupportMessageForUser(component, 123, "some message");
         dpmShadow.setIsAdminActiveAsUser(false);
