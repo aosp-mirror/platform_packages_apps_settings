@@ -15,31 +15,30 @@
      limitations under the License.
 -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/actionBarSize"
-    android:background="?android:attr/colorAccent"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content">
 
-    <Spinner
+    <com.android.settingslib.widget.settingsspinner.SettingsSpinner
         android:id="@+id/filter_spinner"
         android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:paddingStart="64dp"
-        android:background="@drawable/app_filter_spinner_background"/>
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"/>
 
     <ImageView
         android:id="@+id/filter_settings"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="56dp"
         android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:layout_toRightOf="@id/filter_spinner"
         android:contentDescription="@string/configure"
         android:scaleType="center"
         android:src="@drawable/ic_settings_24dp"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
-</LinearLayout>
+</RelativeLayout>
 

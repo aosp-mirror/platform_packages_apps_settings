@@ -27,11 +27,7 @@ import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.EventInfo;
 
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceScreen;
-
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -40,6 +36,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
 
 public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_CALENDAR = "calendar";
@@ -51,7 +53,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private DropDownPreference mReply;
 
     private EventInfo mEvent;
-    private List<CalendarInfo> mCalendars;
+
     private boolean mCreate;
 
     @Override
@@ -91,23 +93,19 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     }
 
     private void reloadCalendar() {
-        mCalendars = getCalendars(mContext);
+        List<CalendarInfo> calendars = getCalendars(mContext);
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
         entries.add(getString(R.string.zen_mode_event_rule_calendar_any));
-        values.add(key(0, null));
-        final String eventCalendar = mEvent != null ? mEvent.calendar : null;
-        boolean found = false;
-        for (CalendarInfo calendar : mCalendars) {
+        values.add(key(0, null, ""));
+        final String eventCalendar = mEvent != null ? mEvent.calName : null;
+        for (CalendarInfo calendar : calendars) {
             entries.add(calendar.name);
             values.add(key(calendar));
-            if (eventCalendar != null && eventCalendar.equals(calendar.name)) {
-                found = true;
+            if (eventCalendar != null && (mEvent.calendarId == null
+                    && eventCalendar.equals(calendar.name))) {
+                mEvent.calendarId = calendar.calendarId;
             }
-        }
-        if (eventCalendar != null && !found) {
-            entries.add(eventCalendar);
-            values.add(key(mEvent.userId, eventCalendar));
         }
         mCalendar.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mCalendar.setEntryValues(values.toArray(new CharSequence[values.size()]));
@@ -124,12 +122,10 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final String calendarKey = (String) newValue;
                 if (calendarKey.equals(key(mEvent))) return false;
-                final int i = calendarKey.indexOf(':');
-                mEvent.userId = Integer.parseInt(calendarKey.substring(0, i));
-                mEvent.calendar = calendarKey.substring(i + 1);
-                if (mEvent.calendar.isEmpty()) {
-                    mEvent.calendar = null;
-                }
+                String[] key = calendarKey.split(":", 3);
+                mEvent.userId = Integer.parseInt(key[0]);
+                mEvent.calendarId = key[1].equals("") ? null : Long.parseLong(key[1]);
+                mEvent.calName = key[2].equals("") ? null : key[2];
                 updateRule(ZenModeConfig.toEventConditionId(mEvent));
                 return true;
             }
@@ -172,18 +168,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_EVENT_RULE;
     }
 
-    public static CalendarInfo findCalendar(Context context, EventInfo event) {
-        if (context == null || event == null) return null;
-        final String eventKey = key(event);
-        for (CalendarInfo calendar : getCalendars(context)) {
-            if (eventKey.equals(key(calendar))) {
-                return calendar;
-            }
-        }
-        return null;
-    }
-
-    private static List<CalendarInfo> getCalendars(Context context) {
+    private List<CalendarInfo> getCalendars(Context context) {
         final List<CalendarInfo> calendars = new ArrayList<>();
         for (UserHandle user : UserManager.get(context).getUserProfiles()) {
             final Context userContext = getContextForUser(context, user);
@@ -203,11 +188,11 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         }
     }
 
-    public static void addCalendars(Context context, List<CalendarInfo> outCalendars) {
-        final String primary = "\"primary\"";
-        final String[] projection = { Calendars._ID, Calendars.CALENDAR_DISPLAY_NAME,
-                "(" + Calendars.ACCOUNT_NAME + "=" + Calendars.OWNER_ACCOUNT + ") AS " + primary };
-        final String selection = primary + " = 1";
+    private void addCalendars(Context context, List<CalendarInfo> outCalendars) {
+        final String[] projection = { Calendars._ID, Calendars.CALENDAR_DISPLAY_NAME };
+        final String selection = Calendars.CALENDAR_ACCESS_LEVEL + " >= "
+                + Calendars.CAL_ACCESS_CONTRIBUTOR
+                + " AND " + Calendars.SYNC_EVENTS + " = 1";
         Cursor cursor = null;
         try {
             cursor = context.getContentResolver().query(Calendars.CONTENT_URI, projection,
@@ -216,10 +201,8 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
                 return;
             }
             while (cursor.moveToNext()) {
-                final CalendarInfo ci = new CalendarInfo();
-                ci.name = cursor.getString(1);
-                ci.userId = context.getUserId();
-                outCalendars.add(ci);
+                addCalendar(cursor.getLong(0), cursor.getString(1),
+                        context.getUserId(), outCalendars);
             }
         } finally {
             if (cursor != null) {
@@ -228,16 +211,29 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         }
     }
 
+    @VisibleForTesting
+    void addCalendar(long calendarId, String calName, int userId, List<CalendarInfo>
+            outCalendars) {
+        final CalendarInfo ci = new CalendarInfo();
+        ci.calendarId = calendarId;
+        ci.name = calName;
+        ci.userId = userId;
+        if (!outCalendars.contains(ci)) {
+            outCalendars.add(ci);
+        }
+    }
+
     private static String key(CalendarInfo calendar) {
-        return key(calendar.userId, calendar.name);
+        return key(calendar.userId, calendar.calendarId, calendar.name);
     }
 
     private static String key(EventInfo event) {
-        return key(event.userId, event.calendar);
+        return key(event.userId, event.calendarId, event.calName);
     }
 
-    private static String key(int userId, String calendar) {
-        return EventInfo.resolveUserId(userId) + ":" + (calendar == null ? "" : calendar);
+    private static String key(int userId, Long calendarId, String displayName) {
+        return EventInfo.resolveUserId(userId) + ":" + (calendarId == null ? "" : calendarId)
+                + ":" + displayName;
     }
 
     private static final Comparator<CalendarInfo> CALENDAR_NAME = new Comparator<CalendarInfo>() {
@@ -250,5 +246,20 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     public static class CalendarInfo {
         public String name;
         public int userId;
+        public Long calendarId;
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof CalendarInfo)) return false;
+            if (o == this) return true;
+            final CalendarInfo other = (CalendarInfo) o;
+            return Objects.equals(other.name, name)
+                    && Objects.equals(other.calendarId, calendarId);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name,  calendarId);
+        }
     }
 }
