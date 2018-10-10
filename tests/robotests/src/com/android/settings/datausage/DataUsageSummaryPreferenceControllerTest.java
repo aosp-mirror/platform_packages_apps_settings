@@ -121,7 +121,7 @@ public class DataUsageSummaryPreferenceControllerTest {
 
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mActivity.getSystemService(ConnectivityManager.class))
+        when(mActivity.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
         when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_READY);
         when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
