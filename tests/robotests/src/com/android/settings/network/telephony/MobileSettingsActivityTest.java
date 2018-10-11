@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
-import static com.android.settings.mobilenetwork.MobileSettingsActivity.MOBILE_SETTINGS_TAG;
+import static com.android.settings.network.telephony.MobileSettingsActivity.MOBILE_SETTINGS_TAG;
 
 import static com.google.common.truth.Truth.assertThat;
 

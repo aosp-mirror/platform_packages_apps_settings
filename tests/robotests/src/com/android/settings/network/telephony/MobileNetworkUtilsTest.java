@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;

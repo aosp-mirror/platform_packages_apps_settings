@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
 import android.annotation.IntDef;
 import android.telephony.AccessNetworkConstants.AccessNetworkType;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 

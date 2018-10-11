@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
