@@ -30,6 +30,10 @@ import android.telephony.SubscriptionManager;
 import android.view.Menu;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -45,10 +49,6 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class MobileSettingsActivityTest {

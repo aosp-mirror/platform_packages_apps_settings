@@ -34,6 +34,7 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -61,8 +62,11 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -156,7 +160,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private Preference mWiFiCallingPref;
     private SwitchPreference mVideoCallingPref;
     private NetworkSelectListPreference mButtonNetworkSelect;
-    private MobileDataPreference mMobileDataPref;
     private DataUsagePreference mDataUsagePref;
 
     private static final String iface = "rmnet0"; //TODO: this will go away
@@ -238,6 +241,9 @@ public class MobileNetworkFragment extends DashboardFragment implements
      */
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (super.onPreferenceTreeClick(preference)) {
+            return true;
+        }
         sendMetricsEventPreferenceClicked(getPreferenceScreen(), preference);
 
         /** TODO: Refactor and get rid of the if's using subclasses */
@@ -298,7 +304,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
             startActivity(intent);
             return true;
         } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref
-                || preference == mMobileDataPref || preference == mDataUsagePref) {
+                || preference == mDataUsagePref) {
             return false;
         } else {
             // if the button is anything but the simple toggle preference,
@@ -384,6 +390,15 @@ public class MobileNetworkFragment extends DashboardFragment implements
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mSubId = getArguments().getInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         Log.i(LOG_TAG, "onCreate:+");
         super.onCreate(icicle);
@@ -407,7 +422,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         mCallingCategory = (PreferenceCategory) findPreference(CATEGORY_CALLING_KEY);
         mWiFiCallingPref = findPreference(BUTTON_WIFI_CALLING_KEY);
         mVideoCallingPref = (SwitchPreference) findPreference(BUTTON_VIDEO_CALLING_KEY);
-        mMobileDataPref = (MobileDataPreference) findPreference(BUTTON_MOBILE_DATA_ENABLE_KEY);
         mDataUsagePref = (DataUsagePreference) findPreference(BUTTON_DATA_USAGE_KEY);
 
         try {
@@ -439,8 +453,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // Initialize mActiveSubInfo
         int max = mSubscriptionManager.getActiveSubscriptionInfoCountMax();
         mActiveSubInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
-        mSubId = getArguments().getInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID,
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         updatePhone();
         if (hasActiveSubscriptions()) {
@@ -487,14 +499,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 return;
             }
             updateBody();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mMobileDataPref != null) {
-            mMobileDataPref.dispose();
         }
     }
 
@@ -567,17 +571,14 @@ public class MobileNetworkFragment extends DashboardFragment implements
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        prefSet.addPreference(mMobileDataPref);
         prefSet.addPreference(mButtonDataRoam);
         prefSet.addPreference(mDataUsagePref);
 
-        mMobileDataPref.setEnabled(hasActiveSubscriptions);
         mButtonDataRoam.setEnabled(hasActiveSubscriptions);
         mDataUsagePref.setEnabled(hasActiveSubscriptions);
 
         if (hasActiveSubscriptions) {
             // Customized preferences needs to be initialized with subId.
-            mMobileDataPref.initialize(phoneSubId);
             mDataUsagePref.initialize(phoneSubId);
 
             // Initialize states of mButtonDataRoam.
@@ -608,8 +609,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             Log.e(LOG_TAG, "updateBody with no null prefSet.");
             return;
         }
-
-        prefSet.removeAll();
 
         updateBodyBasicFields(activity, prefSet, mSubId, hasActiveSubscriptions);
 
@@ -1751,8 +1750,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         if (preference == null) {
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
-        } else if (preference == mMobileDataPref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_MOBILE_DATA_TOGGLE;
         } else if (preference == mButtonDataRoam) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_DATA_ROAMING_TOGGLE;
         } else if (preference == mDataUsagePref) {
@@ -1863,6 +1860,17 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return false;
+                }
+
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.network_setting_fragment;
+                    result.add(sir);
+                    return result;
                 }
             };
 

@@ -23,6 +23,11 @@ import android.telephony.SubscriptionManager;
 import android.view.Menu;
 import android.view.View;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.SettingsBaseActivity;
@@ -30,11 +35,6 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 public class MobileSettingsActivity extends SettingsBaseActivity {
 
