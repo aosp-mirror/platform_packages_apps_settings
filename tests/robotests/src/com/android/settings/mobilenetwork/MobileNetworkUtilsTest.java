@@ -16,13 +16,24 @@
 
 package com.android.settings.mobilenetwork;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.telecom.PhoneAccountHandle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -36,10 +47,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class MobileNetworkUtilsTest {
+    private static final String PACKAGE_NAME = "com.android.app";
     private static final int SUB_ID_1 = 1;
     private static final int SUB_ID_2 = 2;
 
@@ -53,6 +66,14 @@ public class MobileNetworkUtilsTest {
     private SubscriptionInfo mSubscriptionInfo1;
     @Mock
     private SubscriptionInfo mSubscriptionInfo2;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private PhoneAccountHandle mPhoneAccountHandle;
+    @Mock
+    private ComponentName mComponentName;
+    @Mock
+    private ResolveInfo mResolveInfo;
 
     private Context mContext;
 
@@ -65,6 +86,9 @@ public class MobileNetworkUtilsTest {
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID_1);
         doReturn(mTelephonyManager2).when(mTelephonyManager).createForSubscriptionId(SUB_ID_2);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mComponentName).when(mPhoneAccountHandle).getComponentName();
+        doReturn(PACKAGE_NAME).when(mComponentName).getPackageName();
 
         doReturn(SUB_ID_1).when(mSubscriptionInfo1).getSubscriptionId();
         doReturn(SUB_ID_2).when(mSubscriptionInfo2).getSubscriptionId();
@@ -95,5 +119,28 @@ public class MobileNetworkUtilsTest {
 
         verify(mTelephonyManager).setDataEnabled(true);
         verify(mTelephonyManager2).setDataEnabled(false);
+    }
+
+    @Test
+    public void buildConfigureIntent_nullHandle_returnNull() {
+        assertThat(MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext, null)).isNull();
+    }
+
+    @Test
+    public void buildConfigureIntent_noActivityHandleIntent_returnNull() {
+        doReturn(new ArrayList<ResolveInfo>()).when(mPackageManager).queryIntentActivities(
+                nullable(Intent.class), anyInt());
+
+        assertThat(MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
+                mPhoneAccountHandle)).isNull();
+    }
+
+    @Test
+    public void buildConfigureIntent_hasActivityHandleIntent_returnIntent() {
+        doReturn(Arrays.asList(mResolveInfo)).when(mPackageManager).queryIntentActivities(
+                nullable(Intent.class), anyInt());
+
+        assertThat(MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
+                mPhoneAccountHandle)).isNotNull();
     }
 }
