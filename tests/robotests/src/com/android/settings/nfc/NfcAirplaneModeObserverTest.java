@@ -34,7 +34,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -48,10 +47,10 @@ public class NfcAirplaneModeObserverTest {
 
     @Before
     public void setUp() {
-        mContext = ShadowApplication.getInstance().getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mNfcAdapter = NfcAdapter.getDefaultAdapter(mContext);
 
-        mNfcPreference = new SwitchPreference(RuntimeEnvironment.application);
+        mNfcPreference = new SwitchPreference(mContext);
 
         mNfcAirplaneModeObserver =
                 new NfcAirplaneModeObserver(mContext, mNfcAdapter, mNfcPreference);
@@ -76,7 +75,7 @@ public class NfcAirplaneModeObserverTest {
         final ContentResolver contentResolver = mContext.getContentResolver();
         Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 1);
         Settings.Global.putString(contentResolver,
-            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
 
         mNfcAirplaneModeObserver.onChange(false, NfcAirplaneModeObserver.AIRPLANE_MODE_URI);
 
@@ -89,7 +88,7 @@ public class NfcAirplaneModeObserverTest {
         final ContentResolver contentResolver = mContext.getContentResolver();
         Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 1);
         Settings.Global.putString(contentResolver,
-            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Global.RADIO_WIFI);
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Global.RADIO_WIFI);
 
         mNfcAirplaneModeObserver.onChange(false, NfcAirplaneModeObserver.AIRPLANE_MODE_URI);
 

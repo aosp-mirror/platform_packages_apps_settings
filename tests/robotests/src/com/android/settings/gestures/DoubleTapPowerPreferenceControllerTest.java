@@ -82,7 +82,7 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Test
     public void testIsChecked_configIsNotSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        Settings.System.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
+        Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
         mController = new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
 
         assertThat(mController.isChecked()).isTrue();
@@ -91,7 +91,7 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Test
     public void testIsChecked_configIsSet_shouldReturnFalse() {
         // Set the setting to be disabled.
-        Settings.System.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
+        Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
         mController = new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
 
         assertThat(mController.isChecked()).isFalse();

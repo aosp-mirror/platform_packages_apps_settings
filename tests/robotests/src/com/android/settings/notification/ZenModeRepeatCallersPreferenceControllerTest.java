@@ -71,7 +71,7 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
@@ -142,7 +142,8 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allow);
 
         verify(mBackend)
-            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, allow);
+                .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS,
+                        allow);
     }
 
     @Test
@@ -151,6 +152,7 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allow);
 
         verify(mBackend)
-            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, allow);
+                .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS,
+                        allow);
     }
 }

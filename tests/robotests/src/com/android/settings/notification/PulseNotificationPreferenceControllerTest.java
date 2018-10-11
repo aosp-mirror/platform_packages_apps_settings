@@ -138,14 +138,14 @@ public class PulseNotificationPreferenceControllerTest {
 
     @Test
     public void isChecked_configOn_shouldReturnTrue() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1);
+        Settings.System.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void isChecked_configOff_shouldReturnFalse() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0);
+        Settings.System.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0);
 
         assertThat(mController.isChecked()).isFalse();
     }
@@ -156,7 +156,7 @@ public class PulseNotificationPreferenceControllerTest {
 
         assertThat(mController.isChecked()).isTrue();
         assertThat(
-                Settings.Secure.getInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0))
+                Settings.System.getInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0))
                 .isEqualTo(1);
     }
 
@@ -166,7 +166,7 @@ public class PulseNotificationPreferenceControllerTest {
 
         assertThat(mController.isChecked()).isFalse();
         assertThat(
-                Settings.Secure.getInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1))
+                Settings.System.getInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1))
                 .isEqualTo(0);
     }
 }

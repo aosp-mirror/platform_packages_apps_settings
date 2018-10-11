@@ -25,13 +25,13 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHearingAid;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
@@ -53,7 +53,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
@@ -71,7 +71,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private BluetoothManager mBluetoothManager;
     private BluetoothDevice mBluetoothDevice;
-    private Context mContext;
+    private Activity mContext;
     private Preference mHearingAidPreference;
     private AccessibilityHearingAidPreferenceController mPreferenceController;
 
@@ -89,7 +89,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(Robolectric.setupActivity(Activity.class));
         setupBluetoothEnvironment();
         setupHearingAidEnvironment();
         mHearingAidPreference = new Preference(mContext);
@@ -145,8 +145,8 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     }
 
     @Test
-    public void handleHearingAidPreferenceClick_withHearingAid_launchBluetoothDeviceDetailSetting()
-    {
+    public void handleHearingAidPreferenceClick_withHearingAid_launchBluetoothDeviceDetailSetting
+            () {
         mPreferenceController = spy(new AccessibilityHearingAidPreferenceController(mContext,
                 HEARING_AID_PREFERENCE));
         mPreferenceController.setPreference(mHearingAidPreference);
@@ -161,7 +161,8 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     public void onNotSupportHearingAidProfile_doNotDoReceiverOperation() {
         //clear bluetooth supported profile
         mShadowBluetoothAdapter.clearSupportedProfiles();
-        mPreferenceController = new AccessibilityHearingAidPreferenceController(mContext, HEARING_AID_PREFERENCE);
+        mPreferenceController = new AccessibilityHearingAidPreferenceController(mContext,
+                HEARING_AID_PREFERENCE);
         mPreferenceController.setPreference(mHearingAidPreference);
         //not call registerReceiver()
         mPreferenceController.onResume();

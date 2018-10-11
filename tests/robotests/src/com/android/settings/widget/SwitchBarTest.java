@@ -60,11 +60,10 @@ public class SwitchBarTest {
 
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(defaultOffText));
-        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND));
 
         mBar.setChecked(true);
 
-        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND_ACTIVATED));
+        assertThat(mBar.getBackground()).isInstanceOf(ColorDrawable.class);
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(defaultOnText));
     }
@@ -75,12 +74,12 @@ public class SwitchBarTest {
         final int offText = R.string.manage_space_text;
 
         mBar.setSwitchBarText(onText, offText);
-        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND));
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(offText));
 
         mBar.setChecked(true);
-        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND_ACTIVATED));
+        assertThat(mBar.getBackground()).isInstanceOf(ColorDrawable.class);
+
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(onText));
     }

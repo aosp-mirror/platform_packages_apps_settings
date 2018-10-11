@@ -23,6 +23,7 @@ import android.content.Context;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,18 +35,20 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResources.class)
+@Config(shadows = {SettingsShadowResources.class, ShadowUserManager.class})
 public class SystemDashboardFragmentTest {
 
     @Before
     public void setup() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_supportSystemNavigationKeys, true);
+        ShadowUserManager.getShadow().setIsAdminUser(true);
     }
 
     @After
     public void tearDown() {
         SettingsShadowResources.reset();
+        ShadowUserManager.getShadow().reset();
     }
 
     @Test

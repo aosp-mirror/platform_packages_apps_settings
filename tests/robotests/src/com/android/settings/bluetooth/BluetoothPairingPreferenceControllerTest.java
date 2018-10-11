@@ -32,6 +32,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -72,10 +73,10 @@ public class BluetoothPairingPreferenceControllerTest {
         Preference pref = mController.createBluetoothPairingPreference(ORDER);
 
         assertThat(pref.getKey()).isEqualTo(BluetoothPairingPreferenceController.KEY_PAIRING);
-        assertThat(pref.getIcon()).isEqualTo(mContext.getDrawable(R.drawable.ic_menu_add));
+        DrawableTestHelper.assertDrawableResId(pref.getIcon(), R.drawable.ic_menu_add);
         assertThat(pref.getOrder()).isEqualTo(ORDER);
         assertThat(pref.getTitle())
-            .isEqualTo(mContext.getString(R.string.bluetooth_pairing_pref_title));
+                .isEqualTo(mContext.getString(R.string.bluetooth_pairing_pref_title));
     }
 
     @Test

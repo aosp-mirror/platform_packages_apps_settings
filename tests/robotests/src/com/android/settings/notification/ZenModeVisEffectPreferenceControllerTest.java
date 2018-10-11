@@ -47,6 +47,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -62,7 +63,8 @@ public class ZenModeVisEffectPreferenceControllerTest {
     private FakeFeatureFactory mFeatureFactory;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock NotificationManager mNotificationManager;
+    @Mock
+    NotificationManager mNotificationManager;
 
     private static final String PREF_KEY = "main_pref";
     private static final int PREF_METRICS = 1;
@@ -73,7 +75,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(
@@ -129,7 +131,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
     public void updateState_checkedFalse_parentChecked() {
         mController = new ZenModeVisEffectPreferenceController(mContext, mock(Lifecycle.class),
                 PREF_KEY, SUPPRESSED_EFFECT_PEEK, PREF_METRICS,
-                new int[] {PARENT_EFFECT1, PARENT_EFFECT2});
+                new int[]{PARENT_EFFECT1, PARENT_EFFECT2});
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mBackend.isVisualEffectSuppressed(SUPPRESSED_EFFECT_PEEK)).thenReturn(false);
         when(mBackend.isVisualEffectSuppressed(PARENT_EFFECT1)).thenReturn(false);
@@ -145,7 +147,7 @@ public class ZenModeVisEffectPreferenceControllerTest {
     public void updateState_checkedFalse_parentNotChecked() {
         mController = new ZenModeVisEffectPreferenceController(mContext, mock(Lifecycle.class),
                 PREF_KEY, SUPPRESSED_EFFECT_PEEK, PREF_METRICS,
-                new int[] {PARENT_EFFECT1, PARENT_EFFECT2});
+                new int[]{PARENT_EFFECT1, PARENT_EFFECT2});
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mBackend.isVisualEffectSuppressed(SUPPRESSED_EFFECT_PEEK)).thenReturn(false);
         when(mBackend.isVisualEffectSuppressed(PARENT_EFFECT1)).thenReturn(false);

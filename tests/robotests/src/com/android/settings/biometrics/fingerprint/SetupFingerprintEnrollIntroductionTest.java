@@ -73,7 +73,6 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         Shadows.shadowOf(application.getPackageManager())
             .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
-        ShadowFingerprintManager.addToServiceMap();
 
         FakeFeatureFactory.setupForTest();
 
@@ -86,7 +85,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     @After
     public void tearDown() {
         ShadowStorageManager.reset();
-        ShadowFingerprintManager.reset();
     }
 
     @Test

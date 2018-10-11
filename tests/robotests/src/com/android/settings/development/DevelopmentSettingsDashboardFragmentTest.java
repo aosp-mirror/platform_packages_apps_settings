@@ -25,7 +25,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
@@ -33,6 +32,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
@@ -44,16 +44,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowUserManager.class)
 public class DevelopmentSettingsDashboardFragmentTest {
 
     private ToggleSwitch mSwitch;
@@ -69,14 +68,14 @@ public class DevelopmentSettingsDashboardFragmentTest {
         mSwitch = switchBar.getSwitch();
         mDashboard = spy(new DevelopmentSettingsDashboardFragment());
         ReflectionHelpers.setField(mDashboard, "mSwitchBar", switchBar);
-        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        mShadowUserManager = Shadows.shadowOf(userManager);
+        mShadowUserManager = ShadowUserManager.getShadow();
         mShadowUserManager.setIsAdminUser(true);
     }
 
     @After
     public void tearDown() {
         ShadowEnableDevelopmentSettingWarningDialog.reset();
+        mShadowUserManager.reset();
     }
 
     @Test
@@ -87,7 +86,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     public void shouldLogAsFeatureFlagPage() {
         assertThat(mDashboard.getMetricsCategory())
-            .isEqualTo(MetricsProto.MetricsEvent.DEVELOPMENT);
+                .isEqualTo(MetricsProto.MetricsEvent.DEVELOPMENT);
     }
 
     @Test
@@ -184,7 +183,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     public void onOemUnlockDialogConfirmed_shouldCallControllerOemConfirmed() {
         final OemUnlockPreferenceController controller = mock(OemUnlockPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(OemUnlockPreferenceController.class);
+                .getDevelopmentOptionsController(OemUnlockPreferenceController.class);
         mDashboard.onOemUnlockDialogConfirmed();
         verify(controller).onOemUnlockConfirmed();
     }
@@ -193,7 +192,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     public void onOemUnlockDialogConfirmed_shouldCallControllerOemDismissed() {
         final OemUnlockPreferenceController controller = mock(OemUnlockPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(OemUnlockPreferenceController.class);
+                .getDevelopmentOptionsController(OemUnlockPreferenceController.class);
         mDashboard.onOemUnlockDialogDismissed();
         verify(controller).onOemUnlockDismissed();
     }
@@ -202,7 +201,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     public void onAdbDialogConfirmed_shouldCallControllerDialogConfirmed() {
         final AdbPreferenceController controller = mock(AdbPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(AdbPreferenceController.class);
+                .getDevelopmentOptionsController(AdbPreferenceController.class);
         mDashboard.onEnableAdbDialogConfirmed();
 
         verify(controller).onAdbDialogConfirmed();
@@ -212,7 +211,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     public void onAdbDialogDismissed_shouldCallControllerOemDismissed() {
         final AdbPreferenceController controller = mock(AdbPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(AdbPreferenceController.class);
+                .getDevelopmentOptionsController(AdbPreferenceController.class);
         mDashboard.onEnableAdbDialogDismissed();
 
         verify(controller).onAdbDialogDismissed();
@@ -221,9 +220,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     public void onAdbClearKeysDialogConfirmed_shouldCallControllerDialogConfirmed() {
         final ClearAdbKeysPreferenceController controller =
-            mock(ClearAdbKeysPreferenceController.class);
+                mock(ClearAdbKeysPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(ClearAdbKeysPreferenceController.class);
+                .getDevelopmentOptionsController(ClearAdbKeysPreferenceController.class);
         mDashboard.onAdbClearKeysDialogConfirmed();
 
         verify(controller).onClearAdbKeysConfirmed();
@@ -232,9 +231,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     public void onDisableLogPersistDialogConfirmed_shouldCallControllerDialogConfirmed() {
         final LogPersistPreferenceController controller =
-            mock(LogPersistPreferenceController.class);
+                mock(LogPersistPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(LogPersistPreferenceController.class);
+                .getDevelopmentOptionsController(LogPersistPreferenceController.class);
         mDashboard.onDisableLogPersistDialogConfirmed();
 
         verify(controller).onDisableLogPersistDialogConfirmed();
@@ -243,9 +242,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Test
     public void onDisableLogPersistDialogRejected_shouldCallControllerDialogRejected() {
         final LogPersistPreferenceController controller =
-            mock(LogPersistPreferenceController.class);
+                mock(LogPersistPreferenceController.class);
         doReturn(controller).when(mDashboard)
-            .getDevelopmentOptionsController(LogPersistPreferenceController.class);
+                .getDevelopmentOptionsController(LogPersistPreferenceController.class);
         mDashboard.onDisableLogPersistDialogRejected();
 
         verify(controller).onDisableLogPersistDialogRejected();

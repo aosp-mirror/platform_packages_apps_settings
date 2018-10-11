@@ -16,10 +16,12 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 
@@ -34,12 +36,14 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -100,7 +104,10 @@ public class UsbDetailsHeaderControllerTest {
         mDetailsHeaderController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
                 UsbPort.DATA_ROLE_DEVICE);
         verify(mHeaderController).setLabel(mContext.getString(R.string.usb_pref));
-        verify(mHeaderController).setIcon(mContext.getDrawable(R.drawable.ic_usb));
+        verify(mHeaderController).setIcon(argThat((ArgumentMatcher<Drawable>) t -> {
+            DrawableTestHelper.assertDrawableResId(t, R.drawable.ic_usb);
+            return true;
+        }));
         verify(mHeaderController).done(mActivity, true);
     }
 }

@@ -31,16 +31,16 @@ public class AppLocationPermissionPreferenceControllerTest {
 
     @Test
     public void isAvailable_noLocationLinkPermission_shouldReturnFalse() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED, 0);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED, 0);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void displayPreference_hasLocationLinkPermission_shouldReturnTrue() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED, 1);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED, 1);
 
         assertThat(mController.isAvailable()).isTrue();
     }

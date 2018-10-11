@@ -28,7 +28,6 @@ import android.os.UserManager;
 import android.util.Log;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -81,24 +80,6 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             return !mChannelGroup.isBlocked();
         }
         return true;
-    }
-
-    // finds the preference recursively and removes it from its parent
-    private void findAndRemovePreference(PreferenceGroup prefGroup, String key) {
-        final int preferenceCount = prefGroup.getPreferenceCount();
-        for (int i = preferenceCount - 1; i >= 0; i--) {
-            final Preference preference = prefGroup.getPreference(i);
-            final String curKey = preference.getKey();
-
-            if (curKey != null && curKey.equals(key)) {
-                mPreference = preference;
-                prefGroup.removePreference(preference);
-            }
-
-            if (preference instanceof PreferenceGroup) {
-                findAndRemovePreference((PreferenceGroup) preference, key);
-            }
-        }
     }
 
     protected void onResume(NotificationBackend.AppRow appRow,

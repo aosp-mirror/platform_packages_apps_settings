@@ -72,7 +72,7 @@ public class ZenModeRemindersPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
@@ -80,7 +80,7 @@ public class ZenModeRemindersPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mockPref);
+                .thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -127,7 +127,7 @@ public class ZenModeRemindersPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allow);
 
         verify(mBackend)
-            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS, allow);
+                .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS, allow);
     }
 
     @Test
@@ -136,6 +136,6 @@ public class ZenModeRemindersPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allow);
 
         verify(mBackend)
-            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS, allow);
+                .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS, allow);
     }
 }

@@ -38,6 +38,7 @@ import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -79,7 +80,7 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
+                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
     }
 
     @Test
@@ -90,7 +91,7 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
+                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
     }
 
     @Test
@@ -103,9 +104,10 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
         verify(mMetricsFeatureProvider, never())
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
+                .action(mContext,
+                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
     }
 
     @Test
@@ -118,9 +120,10 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onClicked();
 
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
         verify(mMetricsFeatureProvider)
-            .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
+                .action(mContext,
+                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
     }
 
     @Test
@@ -164,13 +167,12 @@ public class BluetoothDevicePreferenceTest {
     @Test
     public void imagingDeviceIcon_isICSettingsPrint() {
         when(mCachedBluetoothDevice.getBatteryLevel())
-            .thenReturn(BluetoothDevice.BATTERY_LEVEL_UNKNOWN);
+                .thenReturn(BluetoothDevice.BATTERY_LEVEL_UNKNOWN);
         when(mCachedBluetoothDevice.getBtClass())
-            .thenReturn(new BluetoothClass(BluetoothClass.Device.Major.IMAGING));
+                .thenReturn(new BluetoothClass(BluetoothClass.Device.Major.IMAGING));
 
         mPreference.onDeviceAttributesChanged();
-        assertThat(mPreference.getIcon()).isEqualTo(
-                mContext.getDrawable(R.drawable.ic_settings_print));
+        DrawableTestHelper.assertDrawableResId(mPreference.getIcon(), R.drawable.ic_settings_print);
     }
 
     @Test

@@ -226,7 +226,7 @@ class SliceDataConverter {
                         SliceBuilderUtils.getPreferenceController(mContext, xmlSlice);
 
                 // Only add pre-approved Slices available on the device.
-                if (controller.isAvailable() && controller.isSliceable()) {
+                if (controller.isSliceable() && controller.isAvailable()) {
                     xmlSliceData.add(xmlSlice);
                 }
             }

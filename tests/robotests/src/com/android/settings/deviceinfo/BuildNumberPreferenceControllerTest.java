@@ -81,10 +81,8 @@ public class BuildNumberPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        final UserManager userManager =
-                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        mShadowUserManager = Shadows.shadowOf(userManager);
-        mShadowUserManager.setIsAdminUser(true);
+        mShadowUserManager = Shadows.shadowOf(
+                RuntimeEnvironment.application.getSystemService(UserManager.class));
         mFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
@@ -101,8 +99,6 @@ public class BuildNumberPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
-        mShadowUserManager.setIsAdminUser(false);
-        mShadowUserManager.setIsDemoUser(false);
     }
 
     @Test
@@ -201,6 +197,7 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
+        mShadowUserManager.setIsAdminUser(true);
         mController =
                 new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
 

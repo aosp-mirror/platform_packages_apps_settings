@@ -23,7 +23,6 @@ public class AppLocationPermissionPreferenceController extends
     @Override
     public boolean isAvailable() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                android.provider.Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED, 1)
-                == 1;
+                Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED, 1) == 1;
     }
 }

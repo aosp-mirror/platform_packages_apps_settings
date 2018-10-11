@@ -16,12 +16,12 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+
+import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
 
 import com.android.settings.Settings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -31,32 +31,34 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WorkModeConditionControllerTest {
 
     @Mock
     private ConditionManager mConditionManager;
-    private Context mContext;
+    private Activity mActivity;
     private WorkModeConditionController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mController = new WorkModeConditionController(mContext, mConditionManager);
+        mActivity = spy(Robolectric.setupActivity(Activity.class));
+        mController = new WorkModeConditionController(mActivity, mConditionManager);
     }
 
     @Test
     public void onPrimaryClick_shouldLaunchAccountsSetting() {
         final ComponentName componentName =
-                new ComponentName(mContext, Settings.AccountDashboardActivity.class);
+                new ComponentName(mActivity, Settings.AccountDashboardActivity.class);
 
-        mController.onPrimaryClick(mContext);
+        mController.onPrimaryClick(mActivity);
 
-        verify(mContext).startActivity(
-                argThat(intent -> intent.getComponent().equals(componentName)));
+        final ShadowActivity shadowActivity = Shadow.extract(mActivity);
+        assertThat(shadowActivity.getNextStartedActivity().getComponent()).isEqualTo(componentName);
     }
 
 }

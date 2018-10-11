@@ -61,7 +61,7 @@ public class DebugViewAttributesPreferenceControllerTest {
     public void onPreferenceChanged_turnOnViewAttributes() {
         mController.onPreferenceChange(null, true);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, -1);
 
         assertThat(mode).isEqualTo(DebugViewAttributesPreferenceController.SETTING_VALUE_ON);
@@ -71,7 +71,7 @@ public class DebugViewAttributesPreferenceControllerTest {
     public void onPreferenceChanged_turnOffViewAttributes() {
         mController.onPreferenceChange(null, false);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, -1);
 
         assertThat(mode).isEqualTo(DebugViewAttributesPreferenceController.SETTING_VALUE_OFF);
@@ -79,7 +79,7 @@ public class DebugViewAttributesPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.Global.DEBUG_VIEW_ATTRIBUTES,
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEBUG_VIEW_ATTRIBUTES,
                 DebugViewAttributesPreferenceController.SETTING_VALUE_ON);
         mController.updateState(mPreference);
 
@@ -88,7 +88,7 @@ public class DebugViewAttributesPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.Global.DEBUG_VIEW_ATTRIBUTES,
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEBUG_VIEW_ATTRIBUTES,
                 DebugViewAttributesPreferenceController.SETTING_VALUE_OFF);
         mController.updateState(mPreference);
 
@@ -98,7 +98,7 @@ public class DebugViewAttributesPreferenceControllerTest {
     @Test
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, -1);
 
         assertThat(mode).isEqualTo(DebugViewAttributesPreferenceController.SETTING_VALUE_OFF);

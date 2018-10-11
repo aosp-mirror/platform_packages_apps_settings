@@ -24,13 +24,10 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.android.XmlResourceParserImpl;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
-import org.robolectric.shadows.ShadowAssetManager;
 import org.robolectric.shadows.ShadowResources;
 import org.robolectric.util.ReflectionHelpers;
 import org.robolectric.util.ReflectionHelpers.ClassParameter;
@@ -40,7 +37,7 @@ import org.w3c.dom.Node;
  * Shadow Resources and Theme classes to handle resource references that Robolectric shadows cannot
  * handle because they are too new or private.
  */
-@Implements(value = Resources.class, inheritImplementationMethods = true)
+@Implements(value = Resources.class)
 public class SettingsShadowResources extends ShadowResources {
 
     @RealObject
@@ -178,17 +175,14 @@ public class SettingsShadowResources extends ShadowResources {
                 ClassParameter.from(int.class, id));
     }
 
-    @Implements(value = Theme.class, inheritImplementationMethods = true)
-    public static class SettingsShadowTheme extends ShadowTheme {
+    @Implements(value = Theme.class)
+    public static class SettingsShadowTheme extends ShadowLegacyTheme {
 
         @RealObject
         Theme realTheme;
 
-        private ShadowAssetManager mAssetManager = Shadows.shadowOf(
-                RuntimeEnvironment.application.getAssets());
-
         @Implementation
-        public TypedArray obtainStyledAttributes(
+        protected TypedArray obtainStyledAttributes(
                 AttributeSet set, int[] attrs, int defStyleAttr, int defStyleRes) {
             // Replace all private string references with a placeholder.
             if (set != null) {
@@ -228,7 +222,7 @@ public class SettingsShadowResources extends ShadowResources {
         }
 
         private Resources getResources() {
-            return ReflectionHelpers.callInstanceMethod(ShadowTheme.class, this, "getResources");
+            return ReflectionHelpers.callInstanceMethod(ShadowLegacyTheme.class, this, "getResources");
         }
     }
 }

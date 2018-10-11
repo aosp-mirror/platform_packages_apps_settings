@@ -22,6 +22,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.storage.VolumeInfo;
 import android.view.Menu;
@@ -37,7 +38,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -68,7 +69,7 @@ public class PrivateVolumeOptionMenuControllerTest {
         when(mMigrateMenuItem.getItemId()).thenReturn(100);
 
         mController = new PrivateVolumeOptionMenuController(
-                RuntimeEnvironment.application, mPrimaryInfo, mPm);
+                Robolectric.setupActivity(Activity.class), mPrimaryInfo, mPm);
     }
 
     @Test

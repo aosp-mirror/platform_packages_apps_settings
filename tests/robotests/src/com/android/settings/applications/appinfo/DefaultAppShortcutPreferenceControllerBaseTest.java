@@ -23,11 +23,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -39,7 +39,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultAppShortcutPreferenceControllerBaseTest {
@@ -49,19 +49,17 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     @Mock
     private AppInfoDashboardFragment mFragment;
     @Mock
-    private PreferenceScreen mScreen;
-    @Mock
     private Preference mPreference;
 
-    private Context mContext;
+    private Activity mActivity;
     private TestPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = new TestPreferenceController(mContext, mFragment);
+        mActivity = spy(Robolectric.setupActivity(Activity.class));
+        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        mController = new TestPreferenceController(mActivity, mFragment);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
     }
@@ -95,7 +93,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
         mController.isDefault = true;
 
         mController.updateState(mPreference);
-        String yesString = mContext.getString(R.string.yes);
+        String yesString = mActivity.getString(R.string.yes);
         verify(mPreference).setSummary(yesString);
     }
 
@@ -105,7 +103,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
 
         mController.updateState(mPreference);
 
-        String noString = mContext.getString(R.string.no);
+        String noString = mActivity.getString(R.string.no);
         verify(mPreference).setSummary(noString);
     }
 
@@ -113,7 +111,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     public void handlePreferenceTreeClick_shouldStartDefaultAppSettings() {
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mContext).startActivity(argThat(intent -> intent != null
+        verify(mActivity).startActivity(argThat(intent -> intent != null
                 && intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT).equals(
                 DefaultAppSettings.class.getName())
                 && intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)

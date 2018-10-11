@@ -75,7 +75,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -348,8 +347,7 @@ public class DashboardFeatureProviderImplTest {
         ReflectionHelpers.setField(
                 mImpl, "mPackageManager", RuntimeEnvironment.application.getPackageManager());
         FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).get();
-        final ShadowApplication application = ShadowApplication.getInstance();
-        final Preference preference = new Preference(application.getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
         mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");

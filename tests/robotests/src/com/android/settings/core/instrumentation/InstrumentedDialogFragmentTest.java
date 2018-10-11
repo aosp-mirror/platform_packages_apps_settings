@@ -24,6 +24,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -56,7 +57,7 @@ public class InstrumentedDialogFragmentTest {
         // Precondition: no metrics feature
         assertThat(fragment.getMetricsFeatureProvider()).isNull();
 
-        fragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        fragment.onAttach(RuntimeEnvironment.application);
 
         // Verify: has metrics feature
         assertThat(fragment.getMetricsFeatureProvider()).isNotNull();

@@ -24,49 +24,54 @@ import static com.android.settings.security.EncryptionStatusPreferenceController
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.os.UserManager;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowLockPatternUtils.class)
+@Config(shadows = {ShadowLockPatternUtils.class, ShadowUserManager.class})
 public class EncryptionStatusPreferenceControllerTest {
 
     private Context mContext;
     private EncryptionStatusPreferenceController mController;
     private Preference mPreference;
+    private ShadowUserManager mShadowUserManager;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mController =
-            new EncryptionStatusPreferenceController(mContext, PREF_KEY_ENCRYPTION_DETAIL_PAGE);
+                new EncryptionStatusPreferenceController(mContext, PREF_KEY_ENCRYPTION_DETAIL_PAGE);
+        mShadowUserManager = ShadowUserManager.getShadow();
         mPreference = new Preference(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        mShadowUserManager.reset();
     }
 
     @Test
     public void isAvailable_admin_true() {
-        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        Shadows.shadowOf(userManager).setIsAdminUser(true);
+        mShadowUserManager.setIsAdminUser(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_notAdmin_false() {
-        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        Shadows.shadowOf(userManager).setIsAdminUser(false);
+        mShadowUserManager.setIsAdminUser(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -83,8 +88,7 @@ public class EncryptionStatusPreferenceControllerTest {
         mController = new EncryptionStatusPreferenceController(mContext,
                 PREF_KEY_ENCRYPTION_SECURITY_PAGE);
 
-        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        Shadows.shadowOf(userManager).setIsAdminUser(true);
+        mShadowUserManager.setIsAdminUser(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -114,7 +118,8 @@ public class EncryptionStatusPreferenceControllerTest {
     @Test
     public void updateSummary_unencrypted_securityPage_shouldNotHaveEncryptionFragment() {
         mController =
-            new EncryptionStatusPreferenceController(mContext, PREF_KEY_ENCRYPTION_SECURITY_PAGE);
+                new EncryptionStatusPreferenceController(mContext,
+                        PREF_KEY_ENCRYPTION_SECURITY_PAGE);
         ShadowLockPatternUtils.setDeviceEncryptionEnabled(false);
 
         mController.updateState(mPreference);

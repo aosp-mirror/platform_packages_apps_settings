@@ -59,6 +59,7 @@ public class RoamingPreferenceController extends TogglePreferenceController impl
 
     public RoamingPreferenceController(Context context, String key) {
         super(context, key);
+        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;

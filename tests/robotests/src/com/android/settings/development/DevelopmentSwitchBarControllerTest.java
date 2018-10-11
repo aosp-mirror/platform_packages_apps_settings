@@ -24,11 +24,11 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserManager;
 
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
@@ -41,14 +41,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@Config(shadows = {ShadowUtils.class, ShadowUserManager.class})
 public class DevelopmentSwitchBarControllerTest {
 
     @Mock
@@ -61,8 +60,7 @@ public class DevelopmentSwitchBarControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         final Context context = RuntimeEnvironment.application;
-        UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Shadows.shadowOf(userManager).setIsAdminUser(true);
+        ShadowUserManager.getShadow().setIsAdminUser(true);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mSwitchBar = new SwitchBar(context);
@@ -72,6 +70,7 @@ public class DevelopmentSwitchBarControllerTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
+        ShadowUserManager.getShadow().reset();
     }
 
     @Test

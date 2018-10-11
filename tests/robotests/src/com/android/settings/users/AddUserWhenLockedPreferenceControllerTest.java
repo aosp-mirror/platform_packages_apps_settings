@@ -38,6 +38,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -57,9 +58,8 @@ public class AddUserWhenLockedPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
+        mContext = RuntimeEnvironment.application;
         mUserManager = ShadowUserManager.getShadow();
-        mContext = shadowContext.getApplicationContext();
         mController = new AddUserWhenLockedPreferenceController(mContext, "fake_key");
     }
 

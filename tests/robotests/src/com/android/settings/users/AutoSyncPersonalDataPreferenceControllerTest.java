@@ -36,6 +36,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -58,9 +59,9 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
-        mContext = shadowContext.getApplicationContext();
         mController = new AutoSyncPersonalDataPreferenceController(mContext, mFragment);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());

@@ -57,26 +57,26 @@ public class InstantAppWebActionPreferenceControllerTest {
         mContentResolver = mContext.getContentResolver();
         mController = new InstantAppWebActionPreferenceController(mContext, PREF_KEY);
         mSwitchPreference = new SwitchPreference(mContext);
-        mEnableEphemeralFeature = Settings.Secure.getInt(mContentResolver,
+        mEnableEphemeralFeature = Settings.Global.getInt(mContentResolver,
                 ENABLE_EPHEMERAL_FEATURE, 1);
     }
 
     @After
     public void tearDown() {
-        Settings.Secure.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE,
+        Settings.Global.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE,
                 mEnableEphemeralFeature);
     }
 
     @Test
     public void testGetAvailabilityStatus_enableWebActions() {
-        Settings.Secure.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE, 1);
+        Settings.Global.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE, 1);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void testGetAvailabilityStatus_disableWebActions() {
-        Settings.Secure.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE, 0);
+        Settings.Global.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE, 0);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
