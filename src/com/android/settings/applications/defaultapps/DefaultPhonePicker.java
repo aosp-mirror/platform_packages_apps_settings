@@ -58,7 +58,7 @@ public class DefaultPhonePicker extends DefaultAppPickerFragment {
         final Context context = getContext();
         for (String packageName : dialerPackages) {
             try {
-                candidates.add(new DefaultAppInfo(context, mPm,
+                candidates.add(new DefaultAppInfo(context, mPm, mUserId,
                         mPm.getApplicationInfoAsUser(packageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.

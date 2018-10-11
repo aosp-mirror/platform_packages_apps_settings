@@ -43,12 +43,11 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;import android.net.INetworkStatsSession;
+import org.mockito.Mock;
 import android.util.FeatureFlagUtils;
 
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
 import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;

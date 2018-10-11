@@ -19,6 +19,7 @@ package com.android.settings.development;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -66,7 +67,7 @@ public class WebViewAppPreferenceController extends DeveloperOptionsPreferenceCo
     @VisibleForTesting
     DefaultAppInfo getDefaultAppInfo() {
         final PackageInfo currentPackage = mWebViewUpdateServiceWrapper.getCurrentWebViewPackage();
-        return new DefaultAppInfo(mContext, mPackageManager,
+        return new DefaultAppInfo(mContext, mPackageManager, UserHandle.myUserId(),
                 currentPackage == null ? null : currentPackage.applicationInfo);
     }
 

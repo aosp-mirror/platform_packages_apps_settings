@@ -62,7 +62,7 @@ public class DefaultBrowserPicker extends DefaultAppPickerFragment {
 
         for (ResolveInfo info : list) {
             try {
-                candidates.add(new DefaultAppInfo(context, mPm,
+                candidates.add(new DefaultAppInfo(context, mPm, mUserId,
                         mPm.getApplicationInfoAsUser(info.activityInfo.packageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.

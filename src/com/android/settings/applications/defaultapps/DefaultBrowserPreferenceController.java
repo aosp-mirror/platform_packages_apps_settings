@@ -29,6 +29,7 @@ import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -75,8 +76,8 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         try {
             final String packageName = mPackageManager.getDefaultBrowserPackageNameAsUser(mUserId);
             Log.d(TAG, "Get default browser package: " + packageName);
-            return new DefaultAppInfo(mContext, mPackageManager,
-                    mPackageManager.getApplicationInfo(packageName, 0));
+            return new DefaultAppInfo(mContext, mPackageManager, mUserId,
+                    mPackageManager.getApplicationInfoAsUser(packageName, 0, mUserId));
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
@@ -143,7 +144,8 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         return null;
     }
 
-    private Drawable getOnlyAppIcon() {
+    @VisibleForTesting
+    Drawable getOnlyAppIcon() {
         final List<ResolveInfo> list = getCandidates(mPackageManager, mUserId);
         if (list != null && list.size() == 1) {
             final ResolveInfo info = list.get(0);
@@ -154,7 +156,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
             }
             final ApplicationInfo appInfo;
             try {
-                appInfo = mPackageManager.getApplicationInfo(packageName, 0);
+                appInfo = mPackageManager.getApplicationInfoAsUser(packageName, 0, mUserId);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Error getting app info for " + packageName);
                 return null;
@@ -169,11 +171,11 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
     /**
      * Whether or not the pkg contains browser capability
      */
-    public static boolean hasBrowserPreference(String pkg, Context context) {
+    public static boolean hasBrowserPreference(String pkg, Context context, int userId) {
         final Intent intent = new Intent(BROWSE_PROBE);
         intent.setPackage(pkg);
-        final List<ResolveInfo> resolveInfos =
-                context.getPackageManager().queryIntentActivities(intent, 0);
+        final List<ResolveInfo> resolveInfos = context.getPackageManager()
+                .queryIntentActivitiesAsUser(intent, 0 /* flags */, userId);
         return resolveInfos != null && resolveInfos.size() != 0;
     }
 

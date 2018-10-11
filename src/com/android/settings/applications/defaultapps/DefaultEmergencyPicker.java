@@ -58,7 +58,7 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
                 final PackageInfo packageInfo =
                         mPm.getPackageInfo(info.activityInfo.packageName, 0);
                 final ApplicationInfo appInfo = packageInfo.applicationInfo;
-                candidates.add(new DefaultAppInfo(context, mPm, appInfo));
+                candidates.add(new DefaultAppInfo(context, mPm, mUserId, appInfo));
                 // Get earliest installed system app.
                 if (isSystemApp(appInfo) && (bestMatch == null ||
                         bestMatch.firstInstallTime > packageInfo.firstInstallTime)) {
