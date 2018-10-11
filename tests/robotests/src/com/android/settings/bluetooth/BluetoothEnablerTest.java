@@ -31,6 +31,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.View;
 
@@ -67,7 +68,8 @@ public class BluetoothEnablerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        sFakeEnforcedAdmin = new EnforcedAdmin(new ComponentName("test.package", "test.Class"), 10);
+        sFakeEnforcedAdmin = new EnforcedAdmin(new ComponentName("test.package", "test.Class"),
+                UserHandle.of(10));
     }
 
     @Mock

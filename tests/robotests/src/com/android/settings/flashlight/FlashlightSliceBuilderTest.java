@@ -19,12 +19,9 @@ package com.android.settings.flashlight;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.provider.Settings;
 
 import androidx.slice.Slice;
@@ -54,11 +51,6 @@ public class FlashlightSliceBuilderTest {
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
-
-        // Prevent crash in SliceMetadata.
-        Resources resources = spy(mContext.getResources());
-        doReturn(60).when(resources).getDimensionPixelSize(anyInt());
-        doReturn(resources).when(mContext).getResources();
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);

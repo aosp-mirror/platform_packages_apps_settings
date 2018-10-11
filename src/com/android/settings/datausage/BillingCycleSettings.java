@@ -73,7 +73,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
     static final String KEY_SET_DATA_LIMIT = "set_data_limit";
     private static final String KEY_DATA_LIMIT = "data_limit";
 
-    private NetworkTemplate mNetworkTemplate;
+    @VisibleForTesting
+    NetworkTemplate mNetworkTemplate;
     private Preference mBillingCycle;
     private Preference mDataWarning;
     private SwitchPreference mEnableDataWarning;
@@ -100,10 +101,15 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mDataUsageController = new DataUsageController(getContext());
+        final Context context = getContext();
+        mDataUsageController = new DataUsageController(context);
 
         Bundle args = getArguments();
         mNetworkTemplate = args.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE);
+        if (mNetworkTemplate == null) {
+            mNetworkTemplate = DataUsageUtils.getDefaultTemplate(context,
+                DataUsageUtils.getDefaultSubscriptionId(context));
+        }
 
         mBillingCycle = findPreference(KEY_BILLING_CYCLE);
         mEnableDataWarning = (SwitchPreference) findPreference(KEY_SET_DATA_WARNING);
