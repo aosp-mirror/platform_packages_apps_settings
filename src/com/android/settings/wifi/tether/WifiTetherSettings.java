@@ -71,6 +71,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private WifiManager mWifiManager;
     private boolean mRestartWifiApAfterConfigChange;
+    private boolean mUnavailable;
 
     @VisibleForTesting
     TetherChangeReceiver mTetherChangeReceiver;
@@ -95,6 +96,15 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setIfOnlyAvailableForAdmins(true);
+        if (isUiRestricted()) {
+            mUnavailable = true;
+        }
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -109,6 +119,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (mUnavailable) {
+            return;
+        }
         // Assume we are in a SettingsActivity. This is only safe because we currently use
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
@@ -122,6 +135,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onStart() {
         super.onStart();
+        if (mUnavailable) {
+            if (!isUiRestrictedByOnlyAdmin()) {
+                getEmptyTextView().setText(R.string.tethering_settings_not_available);
+            }
+            getPreferenceScreen().removeAll();
+            return;
+        }
         final Context context = getContext();
         if (context != null) {
             context.registerReceiver(mTetherChangeReceiver, TETHER_STATE_CHANGE_FILTER);
@@ -131,6 +151,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onStop() {
         super.onStop();
+        if (mUnavailable) {
+            return;
+        }
         final Context context = getContext();
         if (context != null) {
             context.unregisterReceiver(mTetherChangeReceiver);
