@@ -30,6 +30,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
 
 public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         implements OnItemSelectedListener {
@@ -104,9 +105,8 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         super.onViewCreated(view, savedInstanceState);
         mSpinnerHeader = (ViewGroup) setPinnedHeaderView(R.layout.apps_filter_spinner);
         mFilterSpinner = (Spinner) mSpinnerHeader.findViewById(R.id.filter_spinner);
-        mFilterAdapter = new ArrayAdapter<String>(mFilterSpinner.getContext(),
-                R.layout.filter_spinner_item);
-        mFilterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mFilterAdapter = new SettingsSpinnerAdapter<String>(mFilterSpinner.getContext());
+
         for (int i = 0; i < NUM_DURATIONS; i++) {
             mFilterAdapter.add(getString(sDurationLabels[i]));
         }
