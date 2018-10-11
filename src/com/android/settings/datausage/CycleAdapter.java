@@ -20,28 +20,25 @@ import android.net.NetworkStatsHistory;
 import android.text.format.DateUtils;
 import android.util.Pair;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
-import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.NetworkCycleData;
+import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
 
 import java.time.ZonedDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
+public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem> {
 
     private final SpinnerInterface mSpinner;
     private final AdapterView.OnItemSelectedListener mListener;
 
     public CycleAdapter(Context context, SpinnerInterface spinner,
-            AdapterView.OnItemSelectedListener listener, boolean isHeader) {
-        super(context, isHeader ? R.layout.filter_spinner_item
-                : R.layout.data_usage_cycle_item);
-        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            AdapterView.OnItemSelectedListener listener) {
+        super(context);
         mSpinner = spinner;
         mListener = listener;
         mSpinner.setAdapter(this);
@@ -159,7 +156,7 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
     public boolean updateCycleList(List<? extends NetworkCycleData> cycleData) {
         // stash away currently selected cycle to try restoring below
         final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
-            mSpinner.getSelectedItem();
+                mSpinner.getSelectedItem();
         clear();
 
         final Context context = getContext();
@@ -223,8 +220,11 @@ public class CycleAdapter extends ArrayAdapter<CycleAdapter.CycleItem> {
 
     public interface SpinnerInterface {
         void setAdapter(CycleAdapter cycleAdapter);
+
         void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener);
+
         Object getSelectedItem();
+
         void setSelection(int position);
     }
 }
