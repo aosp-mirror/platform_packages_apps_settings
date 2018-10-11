@@ -60,7 +60,6 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
         mSubId = args.getInt(SUB_ID_KEY);
         mCarrierConfigManager = new CarrierConfigManager(context);
 
-        //TODO(b/114749736): set target fragment in host fragment
         Fragment fragment = getTargetFragment();
         try {
             mListener = (RoamingDialogListener) fragment;
