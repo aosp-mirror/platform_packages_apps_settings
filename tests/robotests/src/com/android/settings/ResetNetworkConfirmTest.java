@@ -24,6 +24,7 @@ import android.app.Activity;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRecoverySystem;
+import com.android.settings.testutils.shadow.ShadowWifiP2pManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -35,7 +36,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowRecoverySystem.class})
+@Config(shadows = {ShadowRecoverySystem.class, ShadowWifiP2pManager.class})
 public class ResetNetworkConfirmTest {
 
     private Activity mActivity;
@@ -52,6 +53,7 @@ public class ResetNetworkConfirmTest {
     @After
     public void tearDown() {
         ShadowRecoverySystem.reset();
+        ShadowWifiP2pManager.reset();
     }
 
     @Test
@@ -75,5 +77,17 @@ public class ResetNetworkConfirmTest {
         assertThat(mResetNetworkConfirm.mEraseEsimTask).isNull();
         assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount())
                 .isEqualTo(0);
+    }
+
+    /**
+     * Test for WifiP2pManager factoryReset method.
+     */
+    @Test
+    public void testResetNetworkData_resetP2p() {
+
+        mResetNetworkConfirm.p2pFactoryReset(mActivity);
+
+        assertThat(ShadowWifiP2pManager.getFactoryResetCount())
+                .isEqualTo(1);
     }
 }
