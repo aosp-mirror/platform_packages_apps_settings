@@ -71,6 +71,7 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.mobile_settings_container);
+        setActionBar(findViewById(R.id.action_bar));
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
         mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
         mCurSubscriptionId = savedInstanceState != null
