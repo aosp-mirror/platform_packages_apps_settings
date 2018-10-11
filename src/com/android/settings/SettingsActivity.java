@@ -299,15 +299,6 @@ public class SettingsActivity extends SettingsBaseActivity
             FeatureFactory.getFactory(this).getSearchFeatureProvider()
                     .initSearchToolbar(this, toolbar);
             setActionBar(toolbar);
-
-            // Please forgive me for what I am about to do.
-            //
-            // Need to make the navigation icon non-clickable so that the entire card is clickable
-            // and goes to the search UI. Also set the background to null so there's no ripple.
-            View navView = toolbar.getNavigationView();
-            navView.setClickable(false);
-            navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-            navView.setBackground(null);
         }
 
         ActionBar actionBar = getActionBar();
