@@ -2,7 +2,7 @@ package com.android.settings.slices;
 
 import android.content.Context;
 
-import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
+import com.android.settings.network.telephony.Enhanced4gLteSliceHelper;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.utils.ThreadUtils;
 

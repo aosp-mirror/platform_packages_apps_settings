@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
 import android.content.Context;
 import android.os.AsyncTask;

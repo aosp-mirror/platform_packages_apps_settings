@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -26,7 +26,6 @@ import android.telephony.CarrierConfigManager;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 
 import com.android.settings.R;

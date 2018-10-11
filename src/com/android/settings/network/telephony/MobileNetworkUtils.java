@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 
