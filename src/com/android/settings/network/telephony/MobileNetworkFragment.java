@@ -66,6 +66,7 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -162,6 +163,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private DataUsagePreference mDataUsagePref;
 
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
+    private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
 
     private static final String iface = "rmnet0"; //TODO: this will go away
     private List<SubscriptionInfo> mActiveSubInfos;
@@ -400,6 +402,8 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
+        mCdmaSubscriptionPreferenceController = use(CdmaSubscriptionPreferenceController.class);
+        mCdmaSubscriptionPreferenceController.init(getPreferenceManager(), mSubId);
     }
 
     @Override
@@ -722,15 +726,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             if (ps != null) {
                 root.removePreference(ps);
             }
-        }
-
-        /**
-         * Listen to extra preference changes that need as Metrics events logging.
-         */
-
-        if (prefSet.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY) != null) {
-            prefSet.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)
-                    .setOnPreferenceChangeListener(this);
         }
 
         // Get the networkMode from Settings.System and displays it
@@ -1093,9 +1088,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 mVideoCallingPref.setEnabled(false);
                 return false;
             }
-        } else if (preference == getPreferenceScreen()
-                .findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)) {
-            return true;
         }
 
         updateBody();
@@ -1431,11 +1423,13 @@ public class MobileNetworkFragment extends DashboardFragment implements
                         EXTRA_EXIT_ECM_RESULT, false);
                 if (isChoiceYes) {
                     // If the phone exits from ECM mode, show the CDMA Options
-                    if (TextUtils.equals(mClickedPreference.getKey(),
+                    final String key = mClickedPreference.getKey();
+                    if (TextUtils.equals(key,
                             mCdmaSystemSelectPreferenceController.getPreferenceKey())) {
                         mCdmaSystemSelectPreferenceController.showDialog();
-                    } else {
-                        mCdmaOptions.showDialog(mClickedPreference);
+                    } else if (TextUtils.equals(key,
+                            mCdmaSubscriptionPreferenceController.getPreferenceKey())) {
+                        mCdmaSubscriptionPreferenceController.showDialog();
                     }
                 } else {
                     // do nothing

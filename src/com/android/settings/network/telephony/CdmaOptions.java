@@ -43,7 +43,6 @@ public class CdmaOptions {
     private static final String LOG_TAG = "CdmaOptions";
 
     private CarrierConfigManager mCarrierConfigManager;
-    private CdmaSubscriptionListPreference mButtonCdmaSubscription;
     private RestrictedPreference mButtonAPNExpand;
     private Preference mCategoryAPNExpand;
     private Preference mButtonCarrierSettings;
@@ -65,8 +64,6 @@ public class CdmaOptions {
         mCarrierConfigManager = new CarrierConfigManager(prefFragment.getContext());
 
         // Initialize preferences.
-        mButtonCdmaSubscription = (CdmaSubscriptionListPreference) mPrefScreen
-                .findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY);
         mButtonCarrierSettings = mPrefScreen.findPreference(BUTTON_CARRIER_SETTINGS_KEY);
         mButtonAPNExpand = (RestrictedPreference) mPrefScreen.findPreference(BUTTON_APN_EXPAND_KEY);
         mCategoryAPNExpand = mPrefScreen.findPreference(CATEGORY_APN_EXPAND_KEY);
@@ -82,8 +79,6 @@ public class CdmaOptions {
         PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         // Some CDMA carriers want the APN settings.
         boolean addAPNExpand = shouldAddApnExpandPreference(phoneType, carrierConfig);
-        boolean addCdmaSubscription =
-                deviceSupportsNvAndRuim();
         // Read platform settings for carrier settings
         boolean addCarrierSettings =
                 carrierConfig.getBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL);
@@ -120,15 +115,6 @@ public class CdmaOptions {
             mPrefScreen.removePreference(mCategoryAPNExpand);
         }
 
-        if (addCdmaSubscription) {
-            log("Both NV and Ruim supported, ENABLE subscription type selection");
-            mPrefScreen.addPreference(mButtonCdmaSubscription);
-            mButtonCdmaSubscription.setEnabled(true);
-        } else {
-            log("Both NV and Ruim NOT supported, REMOVE subscription type selection");
-            mPrefScreen.removePreference(mButtonCdmaSubscription);
-        }
-
         if (addCarrierSettings) {
             mPrefScreen.addPreference(mButtonCarrierSettings);
         } else {
@@ -146,32 +132,6 @@ public class CdmaOptions {
                 && config.getBoolean(CarrierConfigManager.KEY_SHOW_APN_SETTING_CDMA_BOOL);
     }
 
-    private boolean deviceSupportsNvAndRuim() {
-        // retrieve the list of subscription types supported by device.
-        String subscriptionsSupported = SystemProperties.get("ril.subscription.types");
-        boolean nvSupported = false;
-        boolean ruimSupported = false;
-
-        log("deviceSupportsnvAnRum: prop=" + subscriptionsSupported);
-        if (!TextUtils.isEmpty(subscriptionsSupported)) {
-            // Searches through the comma-separated list for a match for "NV"
-            // and "RUIM" to update nvSupported and ruimSupported.
-            for (String subscriptionType : subscriptionsSupported.split(",")) {
-                subscriptionType = subscriptionType.trim();
-                if (subscriptionType.equalsIgnoreCase("NV")) {
-                    nvSupported = true;
-                }
-                if (subscriptionType.equalsIgnoreCase("RUIM")) {
-                    ruimSupported = true;
-                }
-            }
-        }
-
-        log("deviceSupportsnvAnRum: nvSupported=" + nvSupported +
-                " ruimSupported=" + ruimSupported);
-        return (nvSupported && ruimSupported);
-    }
-
     public boolean preferenceTreeClick(Preference preference) {
         if (preference.getKey().equals(BUTTON_CDMA_SYSTEM_SELECT_KEY)) {
             log("preferenceTreeClick: return BUTTON_CDMA_ROAMING_KEY true");
@@ -182,12 +142,6 @@ public class CdmaOptions {
             return true;
         }
         return false;
-    }
-
-    public void showDialog(Preference preference) {
-        if (preference.getKey().equals(BUTTON_CDMA_SUBSCRIPTION_KEY)) {
-            mButtonCdmaSubscription.showDialog(null);
-        }
     }
 
     protected void log(String s) {

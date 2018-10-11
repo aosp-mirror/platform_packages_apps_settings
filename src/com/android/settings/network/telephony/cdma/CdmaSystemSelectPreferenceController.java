@@ -17,64 +17,20 @@
 package com.android.settings.network.telephony.cdma;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
-
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.network.telephony.MobileNetworkUtils;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Preference controller for "System Select"
  */
-public class CdmaSystemSelectPreferenceController extends BasePreferenceController
-        implements LifecycleObserver, OnStart, OnStop, ListPreference.OnPreferenceChangeListener {
-
-    @VisibleForTesting
-    ListPreference mPreference;
-    private TelephonyManager mTelephonyManager;
-    private PreferenceManager mPreferenceManager;
-    private DataContentObserver mDataContentObserver;
-    private int mSubId;
+public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceController
+        implements ListPreference.OnPreferenceChangeListener {
 
     public CdmaSystemSelectPreferenceController(Context context, String key) {
         super(context, key);
-        mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
-    }
-
-    @Override
-    public void onStart() {
-        mDataContentObserver.register(mContext, mSubId);
-    }
-
-    @Override
-    public void onStop() {
-        mDataContentObserver.unRegister(mContext);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return MobileNetworkUtils.isCdmaOptions(mContext, mSubId)
-                ? AVAILABLE
-                : CONDITIONALLY_UNAVAILABLE;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -106,12 +62,6 @@ public class CdmaSystemSelectPreferenceController extends BasePreferenceControll
         return false;
     }
 
-    public void init(PreferenceManager preferenceManager, int subId) {
-        mPreferenceManager = preferenceManager;
-        mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
-    }
-
     public void showDialog() {
         if (!mTelephonyManager.getEmergencyCallbackMode()) {
             mPreferenceManager.showDialog(mPreference);
@@ -119,37 +69,13 @@ public class CdmaSystemSelectPreferenceController extends BasePreferenceControll
     }
 
     private void resetCdmaRoamingModeToDefault() {
+        final ListPreference listPreference = (ListPreference) mPreference;
         //set the mButtonCdmaRoam
-        mPreference.setValue(Integer.toString(TelephonyManager.CDMA_ROAMING_MODE_ANY));
+        listPreference.setValue(Integer.toString(TelephonyManager.CDMA_ROAMING_MODE_ANY));
         //set the Settings.System
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.CDMA_ROAMING_MODE,
                 TelephonyManager.CDMA_ROAMING_MODE_ANY);
         //Set the Status
         mTelephonyManager.setCdmaRoamingMode(TelephonyManager.CDMA_ROAMING_MODE_ANY);
-    }
-
-    /**
-     * Listener that listens mobile data state change.
-     */
-    public class DataContentObserver extends ContentObserver {
-
-        public DataContentObserver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-            updateState(mPreference);
-        }
-
-        public void register(Context context, int subId) {
-            Uri uri = Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + subId);
-            context.getContentResolver().registerContentObserver(uri, false, this);
-        }
-
-        public void unRegister(Context context) {
-            context.getContentResolver().unregisterContentObserver(this);
-        }
     }
 }
