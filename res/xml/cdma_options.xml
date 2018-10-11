@@ -17,17 +17,6 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--We want separate APN setting from reset of settings because-->
-    <!--we want user to change it with caution.-->
-    <PreferenceCategory
-        android:key="category_cdma_apn_key">
-        <!-- The launching Intent will be defined thru code as we need to pass some Extra -->
-        <com.android.settingslib.RestrictedPreference
-            android:key="button_cdma_apn_key"
-            android:title="@string/apn_settings"
-            android:persistent="false"/>
-    </PreferenceCategory>
-
     <Preference
         android:key="carrier_settings_key"
         android:title="@string/carrier_settings_title">

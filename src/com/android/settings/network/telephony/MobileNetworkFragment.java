@@ -66,6 +66,7 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.cdma.CdmaApnPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -399,6 +400,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
+        use(CdmaApnPreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);

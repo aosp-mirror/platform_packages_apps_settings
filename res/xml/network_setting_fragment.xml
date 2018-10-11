@@ -109,4 +109,14 @@
         android:dialogTitle="@string/cdma_subscription_dialogtitle"
         settings:controller="com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController"/>
 
+    <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
+    <PreferenceCategory
+        android:key="category_cdma_apn_key">
+        <com.android.settingslib.RestrictedPreference
+            android:key="button_cdma_apn_key"
+            android:title="@string/apn_settings"
+            android:persistent="false"
+            settings:controller="com.android.settings.network.telephony.cdma.CdmaApnPreferenceController"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>

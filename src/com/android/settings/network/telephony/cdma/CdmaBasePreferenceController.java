@@ -74,6 +74,10 @@ public abstract class CdmaBasePreferenceController extends BasePreferenceControl
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
     }
 
+    public void init(int subId) {
+        init(null, subId);
+    }
+
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
