@@ -401,6 +401,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(CdmaApnPreferenceController.class).init(mSubId);
+        use(CarrierPreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
@@ -1798,8 +1799,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // the open dialog gets dismissed or detached after pause / resume.
         if (mCdmaOptions == null) {
             mCdmaOptions = new CdmaOptions(prefFragment, prefScreen, subId);
-        } else {
-            mCdmaOptions.updateSubscriptionId(subId);
         }
     }
 

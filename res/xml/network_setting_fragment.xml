@@ -119,4 +119,10 @@
             settings:controller="com.android.settings.network.telephony.cdma.CdmaApnPreferenceController"/>
     </PreferenceCategory>
 
+    <Preference
+        android:key="carrier_settings_key"
+        android:title="@string/carrier_settings_title"
+        settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
+    </Preference>
+
 </PreferenceScreen>

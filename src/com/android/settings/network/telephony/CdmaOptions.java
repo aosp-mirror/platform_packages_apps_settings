@@ -16,10 +16,6 @@
 
 package com.android.settings.network.telephony;
 
-import android.os.PersistableBundle;
-import android.telephony.CarrierConfigManager;
-import android.telephony.TelephonyManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
@@ -32,50 +28,18 @@ import com.android.settings.R;
 public class CdmaOptions {
     private static final String LOG_TAG = "CdmaOptions";
 
-    private CarrierConfigManager mCarrierConfigManager;
-    private Preference mButtonCarrierSettings;
-
     private static final String BUTTON_CDMA_SYSTEM_SELECT_KEY = "cdma_system_select_key";
     private static final String BUTTON_CDMA_SUBSCRIPTION_KEY = "cdma_subscription_key";
-    private static final String BUTTON_CARRIER_SETTINGS_KEY = "carrier_settings_key";
 
     private PreferenceFragmentCompat mPrefFragment;
-    private PreferenceScreen mPrefScreen;
-    private int mSubId;
 
     public CdmaOptions(PreferenceFragmentCompat prefFragment, PreferenceScreen prefScreen,
             int subId) {
         mPrefFragment = prefFragment;
-        mPrefScreen = prefScreen;
-        mPrefFragment.addPreferencesFromResource(R.xml.cdma_options);
-        mCarrierConfigManager = new CarrierConfigManager(prefFragment.getContext());
-
-        // Initialize preferences.
-        mButtonCarrierSettings = mPrefScreen.findPreference(BUTTON_CARRIER_SETTINGS_KEY);
-
-        updateSubscriptionId(subId);
-    }
-
-    protected void updateSubscriptionId(int subId) {
-        mSubId = subId;
-
-        PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-        // Read platform settings for carrier settings
-        boolean addCarrierSettings =
-                carrierConfig.getBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL);
-
-        // Making no assumptions of whether they are added or removed at this point.
-        // Calling add or remove explicitly to make sure they are updated.
-
-
-        if (addCarrierSettings) {
-            mPrefScreen.addPreference(mButtonCarrierSettings);
-        } else {
-            mPrefScreen.removePreference(mButtonCarrierSettings);
-        }
     }
 
     public boolean preferenceTreeClick(Preference preference) {
+        //TODO(b/114749736): handle it in preferenceController and remove this file
         if (preference.getKey().equals(BUTTON_CDMA_SYSTEM_SELECT_KEY)) {
             log("preferenceTreeClick: return BUTTON_CDMA_ROAMING_KEY true");
             return true;
