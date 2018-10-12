@@ -37,6 +37,7 @@ import android.net.NetworkRequest;
 import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncResult;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -1364,25 +1365,26 @@ public class RadioInfo extends Activity {
         imsVolteProvisionedSwitch.setOnCheckedChangeListener(null);
         imsVolteProvisionedSwitch.setChecked(isImsVolteProvisioned());
         imsVolteProvisionedSwitch.setOnCheckedChangeListener(mImsVolteCheckedChangeListener);
-        imsVolteProvisionedSwitch.setEnabled(
-                mImsManager.isVolteEnabledByPlatform(phone.getContext()));
+        imsVolteProvisionedSwitch.setEnabled(!Build.IS_USER
+                && mImsManager.isVolteEnabledByPlatform(phone.getContext()));
 
         imsVtProvisionedSwitch.setOnCheckedChangeListener(null);
         imsVtProvisionedSwitch.setChecked(isImsVtProvisioned());
         imsVtProvisionedSwitch.setOnCheckedChangeListener(mImsVtCheckedChangeListener);
-        imsVtProvisionedSwitch.setEnabled(
-            mImsManager.isVtEnabledByPlatform(phone.getContext()));
+        imsVtProvisionedSwitch.setEnabled(!Build.IS_USER
+                && mImsManager.isVtEnabledByPlatform(phone.getContext()));
 
         imsWfcProvisionedSwitch.setOnCheckedChangeListener(null);
         imsWfcProvisionedSwitch.setChecked(isImsWfcProvisioned());
         imsWfcProvisionedSwitch.setOnCheckedChangeListener(mImsWfcCheckedChangeListener);
-        imsWfcProvisionedSwitch.setEnabled(
-            mImsManager.isWfcEnabledByPlatform(phone.getContext()));
+        imsWfcProvisionedSwitch.setEnabled(!Build.IS_USER
+                && mImsManager.isWfcEnabledByPlatform(phone.getContext()));
 
         eabProvisionedSwitch.setOnCheckedChangeListener(null);
         eabProvisionedSwitch.setChecked(isEabProvisioned());
         eabProvisionedSwitch.setOnCheckedChangeListener(mEabCheckedChangeListener);
-        eabProvisionedSwitch.setEnabled(isEabEnabledByPlatform(phone.getContext()));
+        eabProvisionedSwitch.setEnabled(!Build.IS_USER
+                && isEabEnabledByPlatform(phone.getContext()));
     }
 
     OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
