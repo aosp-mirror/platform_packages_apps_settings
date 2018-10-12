@@ -85,9 +85,13 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
         FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
                 MetricsEvent.ACTION_STORAGE_MIGRATE_LATER);
 
-        final Intent intent = new Intent(this, StorageWizardReady.class);
-        intent.putExtra(EXTRA_MIGRATE_SKIP, true);
-        startActivity(intent);
+        if (mDisk != null) {
+            final Intent intent = new Intent(this, StorageWizardReady.class);
+            intent.putExtra(EXTRA_MIGRATE_SKIP, true);
+            startActivity(intent);
+        } else {
+            finishAffinity();
+        }
     }
 
     @Override
