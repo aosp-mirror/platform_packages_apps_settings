@@ -54,6 +54,18 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
+    public void bindView_shouldSetScrollableToFalse() {
+        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
+        RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+
+        mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
+
+        assertThat(
+                ((SliceContextualCardRenderer.SliceViewHolder) viewHolder).sliceView.isScrollable
+                        ()).isFalse();
+    }
+
+    @Test
     public void bindView_invalidScheme_sliceShouldBeNull() {
         final String sliceUri = "contet://com.android.settings.slices/action/flashlight";
         RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
