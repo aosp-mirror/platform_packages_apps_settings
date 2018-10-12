@@ -79,7 +79,7 @@ public class Enhanced4gLteSliceHelperTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSlicesFeatureProvider = mFeatureFactory.getSlicesFeatureProvider();
