@@ -34,7 +34,6 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.legacy_legacy-preference-v14 \
 
 LOCAL_JAVA_LIBRARIES := \
-    bouncycastle \
     telephony-common \
     ims-common
 
