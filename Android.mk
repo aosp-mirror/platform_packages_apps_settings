@@ -32,7 +32,6 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     com.google.android.material_material \
 
 LOCAL_JAVA_LIBRARIES := \
-    bouncycastle \
     telephony-common \
     ims-common
 
