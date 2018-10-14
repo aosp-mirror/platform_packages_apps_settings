@@ -86,7 +86,7 @@ public class WifiCallingSliceHelperTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
 
         //setup for SettingsSliceProvider tests
         mProvider = spy(new SettingsSliceProvider());

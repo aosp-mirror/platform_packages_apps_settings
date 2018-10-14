@@ -56,7 +56,7 @@ public class DataUsageSliceTest {
 
     @Before
     public void setUp() {
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);

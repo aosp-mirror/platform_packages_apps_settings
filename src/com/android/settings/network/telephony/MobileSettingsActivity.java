@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,12 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.view.Menu;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
@@ -31,22 +37,27 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 public class MobileSettingsActivity extends SettingsBaseActivity {
 
     @VisibleForTesting
     static final String MOBILE_SETTINGS_TAG = "mobile_settings:";
     public static final String KEY_SUBSCRIPTION_ID = "key_subscription_id";
+    public static final String KEY_CUR_SUBSCRIPTION_ID = "key_cur_subscription_id";
 
     private SubscriptionManager mSubscriptionManager;
     @VisibleForTesting
-    int mPrevSubscriptionId;
+    Integer mCurSubscriptionId;
     @VisibleForTesting
     List<SubscriptionInfo> mSubscriptionInfos;
+
+    private final SubscriptionManager.OnSubscriptionsChangedListener
+            mOnSubscriptionsChangeListener
+            = new SubscriptionManager.OnSubscriptionsChangedListener() {
+        @Override
+        public void onSubscriptionsChanged() {
+            updateSubscriptions(null);
+        }
+    };
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -58,18 +69,42 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSubscriptionManager = getSystemService(SubscriptionManager.class);
-        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
-        mPrevSubscriptionId = CollectionUtils.isEmpty(mSubscriptionInfos)
-                ? SubscriptionManager.INVALID_SUBSCRIPTION_ID
-                : mSubscriptionInfos.get(0).getSubscriptionId();
 
         setContentView(R.layout.mobile_settings_container);
+        mSubscriptionManager = getSystemService(SubscriptionManager.class);
+        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
+        mCurSubscriptionId = savedInstanceState != null
+                ? savedInstanceState.getInt(KEY_CUR_SUBSCRIPTION_ID)
+                : null;
+
+        mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
+
+        updateSubscriptions(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveInstanceState(outState);
+    }
+
+    @VisibleForTesting
+    void saveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(KEY_CUR_SUBSCRIPTION_ID, mCurSubscriptionId);
+    }
+
+    @VisibleForTesting
+    void updateSubscriptions(Bundle savedInstanceState) {
+        //TODO(b/114749736): Sort it by phoneId
+        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
+        final int subId = CollectionUtils.isEmpty(mSubscriptionInfos)
+                ? SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                : mSubscriptionInfos.get(0).getSubscriptionId();
 
         updateBottomNavigationView();
 
         if (savedInstanceState == null) {
-            switchFragment(new MobileNetworkFragment(), mPrevSubscriptionId);
+            switchFragment(new MobileNetworkFragment(), subId);
         }
     }
 
@@ -89,24 +124,27 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
             }
             navigation.setOnNavigationItemSelectedListener(item -> {
                 switchFragment(new MobileNetworkFragment(), item.getItemId());
-                mPrevSubscriptionId = item.getItemId();
                 return true;
             });
-
         }
     }
 
     @VisibleForTesting
     void switchFragment(Fragment fragment, int subscriptionId) {
+        if (mCurSubscriptionId != null && subscriptionId == mCurSubscriptionId) {
+            return;
+        }
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_SUBSCRIPTION_ID, subscriptionId);
 
-        final Fragment hideFragment = fragmentManager.findFragmentByTag(
-                buildFragmentTag(mPrevSubscriptionId));
-        if (hideFragment != null) {
-            fragmentTransaction.hide(hideFragment);
+        if (mCurSubscriptionId != null) {
+            final Fragment hideFragment = fragmentManager.findFragmentByTag(
+                    buildFragmentTag(mCurSubscriptionId));
+            if (hideFragment != null) {
+                fragmentTransaction.hide(hideFragment);
+            }
         }
 
         Fragment showFragment = fragmentManager.findFragmentByTag(buildFragmentTag(subscriptionId));
@@ -118,6 +156,7 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
             fragmentTransaction.show(showFragment);
         }
         fragmentTransaction.commit();
+        mCurSubscriptionId = subscriptionId;
     }
 
     private String buildFragmentTag(int subscriptionId) {

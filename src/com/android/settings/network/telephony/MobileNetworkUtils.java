@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mobilenetwork;
+package com.android.settings.network.telephony;
 
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 
@@ -29,11 +29,15 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.telephony.ims.feature.ImsFeature;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
@@ -53,6 +57,8 @@ public class MobileNetworkUtils {
     // the default value is false.
     private static final String KEY_ENABLE_ESIM_UI_BY_DEFAULT =
             "esim.enable_esim_system_ui_by_default";
+    private static final String LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT =
+            "android.telecom.action.CONNECTION_SERVICE_CONFIGURE";
 
     /**
      * Returns if DPC APNs are enforced.
@@ -90,11 +96,10 @@ public class MobileNetworkUtils {
 
         boolean isWifiCallingEnabled;
         if (simCallManager != null) {
-            //TODO(b/114749736): build intent to query wifi calling feature
-            final Intent intent = null;
-            PackageManager pm = context.getPackageManager();
-            isWifiCallingEnabled = intent != null
-                    && !pm.queryIntentActivities(intent, 0 /* flags */).isEmpty();
+            Intent intent = buildPhoneAccountConfigureIntent(
+                    context, simCallManager);
+
+            isWifiCallingEnabled = intent != null;
         } else {
             ImsManager imsMgr = ImsManager.getInstance(context, phoneId);
             isWifiCallingEnabled = imsMgr != null
@@ -104,6 +109,43 @@ public class MobileNetworkUtils {
         }
 
         return isWifiCallingEnabled;
+    }
+
+    @VisibleForTesting
+    static Intent buildPhoneAccountConfigureIntent(
+            Context context, PhoneAccountHandle accountHandle) {
+        Intent intent = buildConfigureIntent(
+                context, accountHandle, TelecomManager.ACTION_CONFIGURE_PHONE_ACCOUNT);
+
+        if (intent == null) {
+            // If the new configuration didn't work, try the old configuration intent.
+            intent = buildConfigureIntent(context, accountHandle,
+                    LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT);
+        }
+        return intent;
+    }
+
+    private static Intent buildConfigureIntent(
+            Context context, PhoneAccountHandle accountHandle, String actionStr) {
+        if (accountHandle == null || accountHandle.getComponentName() == null
+                || TextUtils.isEmpty(accountHandle.getComponentName().getPackageName())) {
+            return null;
+        }
+
+        // Build the settings intent.
+        Intent intent = new Intent(actionStr);
+        intent.setPackage(accountHandle.getComponentName().getPackageName());
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, accountHandle);
+
+        // Check to see that the phone account package can handle the setting intent.
+        PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> resolutions = pm.queryIntentActivities(intent, 0);
+        if (resolutions.size() == 0) {
+            intent = null;  // set no intent if the package cannot handle it.
+        }
+
+        return intent;
     }
 
     public static boolean isImsServiceStateReady(ImsManager imsMgr) {
@@ -169,5 +211,31 @@ public class MobileNetworkUtils {
     public static PersistableBundle getCarrierConfigBySubId(int mSubId) {
         //TODO(b/114749736): get carrier config from subId
         return new PersistableBundle();
+    }
+
+    /**
+     * Set whether to enable data for {@code subId}, also whether to disable data for other
+     * subscription
+     */
+    public static void setMobileDataEnabled(Context context, int subId, boolean enabled,
+            boolean disableOtherSubscriptions) {
+        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+                .createForSubscriptionId(subId);
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        telephonyManager.setDataEnabled(enabled);
+
+        if (disableOtherSubscriptions) {
+            List<SubscriptionInfo> subInfoList =
+                    subscriptionManager.getActiveSubscriptionInfoList();
+            if (subInfoList != null) {
+                for (SubscriptionInfo subInfo : subInfoList) {
+                    if (subInfo.getSubscriptionId() != subId) {
+                        TelephonyManager.from(context).createForSubscriptionId(
+                                subInfo.getSubscriptionId()).setDataEnabled(false);
+                    }
+                }
+            }
+        }
     }
 }

@@ -79,7 +79,7 @@ public class SliceBuilderUtilsTest {
 
     @Before
     public void setUp() {
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mLoggingArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
 

@@ -36,7 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.mobilenetwork.MobileSettingsActivity;
+import com.android.settings.network.telephony.MobileSettingsActivity;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;

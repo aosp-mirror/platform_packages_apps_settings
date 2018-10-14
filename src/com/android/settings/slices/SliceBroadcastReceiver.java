@@ -19,7 +19,7 @@ package com.android.settings.slices;
 import static com.android.settings.bluetooth.BluetoothSliceBuilder.ACTION_BLUETOOTH_SLICE_CHANGED;
 import static com.android.settings.flashlight.FlashlightSliceBuilder
         .ACTION_FLASHLIGHT_SLICE_CHANGED;
-import static com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper
+import static com.android.settings.network.telephony.Enhanced4gLteSliceHelper
         .ACTION_ENHANCED_4G_LTE_CHANGED;
 import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;

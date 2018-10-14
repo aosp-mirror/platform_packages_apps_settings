@@ -2,8 +2,6 @@ package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.content.Context;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -32,7 +30,7 @@ public class LocationSliceBuilderTest {
 
     @Before
     public void setUp() {
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);

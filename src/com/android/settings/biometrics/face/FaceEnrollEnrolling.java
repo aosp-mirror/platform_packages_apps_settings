@@ -171,6 +171,11 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         // TODO: Update the actual animation
         showError("Steps: " + steps + " Remaining: " + remaining);
+
+        // TODO: Have this match any animations that UX comes up with
+        if (remaining == 0) {
+            launchFinish(mToken);
+        }
     }
 
     @Override

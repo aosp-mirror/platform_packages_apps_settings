@@ -82,6 +82,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
             return;
         }
 
+        cardHolder.sliceView.setScrollable(false);
         cardHolder.sliceView.setTag(uri);
         //TODO(b/114009676): We will soon have a field to decide what slice mode we should set.
         cardHolder.sliceView.setMode(SliceView.MODE_LARGE);

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
+import android.widget.Toolbar;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -32,7 +33,6 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SettingsHomepageActivity extends SettingsBaseActivity {
 
@@ -54,9 +54,9 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
 
         setContentView(R.layout.settings_homepage_container);
 
-        final FloatingActionButton searchButton = findViewById(R.id.search_fab);
+        final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                .initSearchToolbar(this, searchButton);
+                .initSearchToolbar(this, toolbar);
 
         final BottomNavigationView navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(item -> {

@@ -19,8 +19,6 @@ package com.android.settings.flashlight;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.content.Context;
 import android.provider.Settings;
 
@@ -50,7 +48,7 @@ public class FlashlightSliceBuilderTest {
 
     @Before
     public void setUp() {
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);

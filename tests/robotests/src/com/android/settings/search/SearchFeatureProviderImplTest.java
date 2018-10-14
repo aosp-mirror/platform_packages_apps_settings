@@ -44,7 +44,7 @@ public class SearchFeatureProviderImplTest {
     @Before
     public void setUp() {
         FakeFeatureFactory.setupForTest();
-        mActivity = Robolectric.buildActivity(Activity.class).create().visible().get();
+        mActivity = Robolectric.setupActivity(Activity.class);
         mProvider = spy(new SearchFeatureProviderImpl());
     }
 
@@ -54,6 +54,8 @@ public class SearchFeatureProviderImplTest {
         // Should not crash.
 
         final Toolbar toolbar = new Toolbar(mActivity);
+        // This ensures navigationView is created.
+        toolbar.setNavigationContentDescription("test");
         mProvider.initSearchToolbar(mActivity, toolbar);
 
         toolbar.performClick();

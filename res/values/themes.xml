@@ -170,6 +170,9 @@
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
         <item name="preferenceTheme">@style/PreferenceTheme</item>
+
+        <!-- action bar, needed for search bar icon tinting -->
+        <item name="android:actionBarTheme">@*android:style/ThemeOverlay.DeviceDefault.ActionBar.Accent</item>
     </style>
 
     <style name="Theme.Settings.Home" parent="Theme.Settings.HomeBase">
