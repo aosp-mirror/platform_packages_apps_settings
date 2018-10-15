@@ -261,10 +261,12 @@ public abstract class DeviceListPreferenceFragment extends
         cacheRemoveAllPrefs(preferenceGroup);
         preferenceGroup.setTitle(titleId);
         mDeviceListGroup = preferenceGroup;
-        setFilter(filter);
         if (addCachedDevices) {
+            // Don't show bonded devices when screen turned back on
+            setFilter(BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
             addCachedDevices();
         }
+        setFilter(filter);
         preferenceGroup.setEnabled(true);
         removeCachedPrefs(preferenceGroup);
     }
