@@ -18,8 +18,8 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -66,8 +66,8 @@ public class DefaultBrowserShortcutPreferenceControllerTest {
     public void hasAppCapability_hasBrowserCapability_shouldReturnTrue() {
         List<ResolveInfo> resolveInfos = new ArrayList<>();
         resolveInfos.add(new ResolveInfo());
-        when(mPackageManager.queryIntentActivities(argThat(intent-> intent != null
-                && intent.getCategories().contains(Intent.CATEGORY_BROWSABLE)), anyInt()))
+        when(mPackageManager.queryIntentActivitiesAsUser(argThat(intent-> intent != null
+                && intent.getCategories().contains(Intent.CATEGORY_BROWSABLE)), anyInt(), anyInt()))
                 .thenReturn(resolveInfos);
 
         assertThat(mController.hasAppCapability()).isTrue();
