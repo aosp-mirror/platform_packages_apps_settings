@@ -41,6 +41,9 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
+import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.R;
 
 import java.util.Arrays;
 import java.util.List;
@@ -237,5 +240,87 @@ public class MobileNetworkUtils {
                 }
             }
         }
+    }
+
+    /**
+     * Return {@code true} if show CDMA category
+     */
+    public static boolean isCdmaOptions(Context context, int subId) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return false;
+        }
+        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+                .createForSubscriptionId(subId);
+
+        if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA) {
+            return true;
+        }
+
+        if (isWorldMode(context, subId)) {
+            final int settingsNetworkMode = android.provider.Settings.Global.getInt(
+                    context.getContentResolver(),
+                    android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
+                    Phone.PREFERRED_NT_MODE);
+            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA
+                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO) {
+                return true;
+            }
+
+            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA
+                    && !isTdscdmaSupported(context, telephonyManager)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return {@code true} if it is world mode, and we may show advanced options in telephony
+     * settings
+     */
+    public static boolean isWorldMode(Context context, int subId) {
+        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+                .createForSubscriptionId(subId);
+        boolean worldModeOn = false;
+        final String configString = context.getString(R.string.config_world_mode);
+
+        if (!TextUtils.isEmpty(configString)) {
+            String[] configArray = configString.split(";");
+            // Check if we have World mode configuration set to True only or config is set to True
+            // and SIM GID value is also set and matches to the current SIM GID.
+            if (configArray != null &&
+                    ((configArray.length == 1 && configArray[0].equalsIgnoreCase("true"))
+                            || (configArray.length == 2 && !TextUtils.isEmpty(configArray[1])
+                            && telephonyManager != null
+                            && configArray[1].equalsIgnoreCase(
+                            telephonyManager.getGroupIdLevel1())))) {
+                worldModeOn = true;
+            }
+        }
+
+        Log.d(TAG, "isWorldMode=" + worldModeOn);
+
+        return worldModeOn;
+    }
+
+    //TODO(b/117651939): move it to telephony
+    private static boolean isTdscdmaSupported(Context context, TelephonyManager telephonyManager) {
+        if (context.getResources().getBoolean(R.bool.config_support_tdscdma)) {
+            return true;
+        }
+
+        String operatorNumeric = telephonyManager.getServiceState().getOperatorNumeric();
+        String[] numericArray = context.getResources().getStringArray(
+                R.array.config_support_tdscdma_roaming_on_networks);
+        if (numericArray.length == 0 || operatorNumeric == null) {
+            return false;
+        }
+        for (String numeric : numericArray) {
+            if (operatorNumeric.equals(numeric)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
