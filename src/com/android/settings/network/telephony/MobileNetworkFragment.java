@@ -161,7 +161,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private Preference mWiFiCallingPref;
     private SwitchPreference mVideoCallingPref;
     private NetworkSelectListPreference mButtonNetworkSelect;
-    private DataUsagePreference mDataUsagePref;
 
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
     private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
@@ -307,8 +306,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
             Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
             startActivity(intent);
             return true;
-        } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref
-                || preference == mDataUsagePref) {
+        } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref) {
             return false;
         } else {
             // if the button is anything but the simple toggle preference,
@@ -402,6 +400,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(CdmaApnPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
+        use(DataUsagePreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
@@ -433,7 +432,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         mCallingCategory = (PreferenceCategory) findPreference(CATEGORY_CALLING_KEY);
         mWiFiCallingPref = findPreference(BUTTON_WIFI_CALLING_KEY);
         mVideoCallingPref = (SwitchPreference) findPreference(BUTTON_VIDEO_CALLING_KEY);
-        mDataUsagePref = (DataUsagePreference) findPreference(BUTTON_DATA_USAGE_KEY);
 
         try {
             Context con = context.createPackageContext("com.android.systemui", 0);
@@ -583,14 +581,10 @@ public class MobileNetworkFragment extends DashboardFragment implements
         }
 
         prefSet.addPreference(mButtonDataRoam);
-        prefSet.addPreference(mDataUsagePref);
 
         mButtonDataRoam.setEnabled(hasActiveSubscriptions);
-        mDataUsagePref.setEnabled(hasActiveSubscriptions);
 
         if (hasActiveSubscriptions) {
-            // Customized preferences needs to be initialized with subId.
-            mDataUsagePref.initialize(phoneSubId);
 
             // Initialize states of mButtonDataRoam.
             mButtonDataRoam.setChecked(mTelephonyManager.isDataRoamingEnabled());
@@ -1701,7 +1695,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // For ListPreferences, we log it here without a value, only indicating it's clicked to
         // open the list dialog. When a value is chosen, another MetricsEvent is logged with
         // new value in onPreferenceChange.
-        if (preference == mLteDataServicePref || preference == mDataUsagePref
+        if (preference == mLteDataServicePref
                 || preference == mEuiccSettingsPref
                 || preference == mWiFiCallingPref || preference == mButtonPreferredNetworkMode
                 || preference == mButtonEnabledNetworks
@@ -1742,8 +1736,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
         } else if (preference == mButtonDataRoam) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_DATA_ROAMING_TOGGLE;
-        } else if (preference == mDataUsagePref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_DATA_USAGE;
         } else if (preference == mLteDataServicePref) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_SET_UP_DATA_SERVICE;
         } else if (preference == mButton4glte) {

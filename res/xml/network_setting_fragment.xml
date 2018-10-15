@@ -38,9 +38,10 @@
         android:summaryOn="@string/roaming_enable"
         android:summaryOff="@string/roaming_disable"/>
 
-    <com.android.settings.network.telephony.DataUsagePreference
+    <Preference
         android:key="data_usage_summary"
-        android:title="@string/data_usage_title" />
+        android:title="@string/mobile_data_usage_title"
+        settings:controller="com.android.settings.network.telephony.DataUsagePreferenceController"/>
 
     <SwitchPreference
         android:key="enhanced_4g_lte"
