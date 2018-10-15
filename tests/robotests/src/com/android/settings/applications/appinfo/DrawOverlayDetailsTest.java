@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.appinfo;
 
-import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.eq;
@@ -91,7 +91,7 @@ public class DrawOverlayDetailsTest {
         when(mWindow.getAttributes()).thenReturn(layoutParams);
 
         mFragment.onResume();
-        verify(mWindow).addPrivateFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        verify(mWindow).addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
 
         mFragment.onPause();
 
@@ -99,6 +99,6 @@ public class DrawOverlayDetailsTest {
         ArgumentCaptor<LayoutParams> paramCaptor = ArgumentCaptor.forClass(LayoutParams.class);
         verify(mWindow).setAttributes(paramCaptor.capture());
         assertEquals(0,
-                paramCaptor.getValue().privateFlags & PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+                paramCaptor.getValue().privateFlags & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
     }
 }
