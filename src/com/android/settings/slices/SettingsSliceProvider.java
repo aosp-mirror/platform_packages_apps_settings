@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flashlight.FlashlightSliceBuilder;
+import com.android.settings.homepage.deviceinfo.EmergencyInfoSlice;
 import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.network.telephony.Enhanced4gLteSliceHelper;
 import com.android.settings.notification.ZenModeSliceBuilder;
@@ -178,6 +179,8 @@ public class SettingsSliceProvider extends SliceProvider {
             registerIntentToUri(FlashlightSliceBuilder.INTENT_FILTER, sliceUri);
             mRegisteredUris.add(sliceUri);
             return;
+        } else if (EmergencyInfoSlice.EMERGENCY_INFO_CARD_URI.equals(sliceUri)) {
+            return;
         }
 
         // Start warming the slice, we expect someone will want it soon.
@@ -241,6 +244,8 @@ public class SettingsSliceProvider extends SliceProvider {
                         .createWifiCallingPreferenceSlice(sliceUri);
             } else if (FlashlightSliceBuilder.FLASHLIGHT_URI.equals(sliceUri)) {
                 return FlashlightSliceBuilder.getSlice(getContext());
+            } else if (EmergencyInfoSlice.EMERGENCY_INFO_CARD_URI.equals(sliceUri)) {
+                return EmergencyInfoSlice.getSlice(getContext());
             }
 
             SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
