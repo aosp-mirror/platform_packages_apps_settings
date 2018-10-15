@@ -67,7 +67,7 @@
   </string-array>
   <string-array name="wifi_status">
     <item msgid="1922181315419294640"></item>
-    <item msgid="8934131797783724664">"جارٍ الفحص..."</item>
+    <item msgid="8934131797783724664">"البحث عن الشبكات..."</item>
     <item msgid="8513729475867537913">"جارٍ الاتصال…"</item>
     <item msgid="515055375277271756">"جارٍ المصادقة…"</item>
     <item msgid="1943354004029184381">"‏جارٍ الحصول على عنوان IP…"</item>
@@ -81,7 +81,7 @@
   </string-array>
   <string-array name="wifi_status_with_ssid">
     <item msgid="7714855332363650812"></item>
-    <item msgid="8878186979715711006">"جارٍ الفحص..."</item>
+    <item msgid="8878186979715711006">"البحث عن الشبكات..."</item>
     <item msgid="355508996603873860">"جارٍ الاتصال بجهاز <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="554971459996405634">"جارٍ المصادقة مع <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="7928343808033020343">"‏جارٍ الحصول على عنوان IP من <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
@@ -100,9 +100,15 @@
     <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
     <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_tether_security:0 (1748357338693290598) -->
+    <!-- no translation found for wifi_tether_security:1 (4760482622566629462) -->
+  <string-array name="wifi_tether_security_values">
+    <item msgid="2252927183588236198">"4"</item>
+    <item msgid="5900372418924184351">"0"</item>
+  </string-array>
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
-    <item msgid="7981731051382306293">"طبقة النقل الآمنة"</item>
+    <item msgid="7981731051382306293">"TLS"</item>
     <item msgid="2892994535305020162">"TTLS"</item>
     <item msgid="435667726254379514">"PWD"</item>
     <item msgid="8549485714107012129">"SIM"</item>
@@ -115,11 +121,6 @@
     <item msgid="3079489731769553856">"TTLS"</item>
     <item msgid="35269224158638258">"PWD"</item>
   </string-array>
-    <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
-    <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
-    <!-- no translation found for wifi_ap_band_config_full:2 (3580217704310339410) -->
-    <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
-    <!-- no translation found for wifi_ap_band_config_2G_only:1 (8904289885593822837) -->
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"زر الدفع"</item>
     <item msgid="1624323946324499595">"رقم تعريف شخصي من جهاز نظير"</item>
@@ -138,12 +139,14 @@
     <item msgid="477015974247590543">"ساعة واحدة"</item>
     <item msgid="5198271470953124739">"بلا مهلة"</item>
   </string-array>
-    <!-- no translation found for bluetooth_max_connected_audio_devices:0 (834764606877643762) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:1 (4428462068012149533) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:2 (2620881722754455257) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:3 (402831176731135702) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:4 (4923580285404888038) -->
-    <!-- no translation found for bluetooth_max_connected_audio_devices:5 (3643103044864989283) -->
+  <string-array name="bluetooth_max_connected_audio_devices">
+    <item msgid="834764606877643762">"استخدام الإعداد التلقائي للنظام: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
+    <item msgid="4428462068012149533">"1"</item>
+    <item msgid="2620881722754455257">"2"</item>
+    <item msgid="402831176731135702">"3"</item>
+    <item msgid="4923580285404888038">"4"</item>
+    <item msgid="3643103044864989283">"5"</item>
+  </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"ضعيفة"</item>
     <item msgid="2042505933058940139">"ضعيفة"</item>
@@ -162,12 +165,12 @@
   </string-array>
   <string-array name="wifi_eap_entries">
     <item msgid="8615575908717909498">"PEAP"</item>
-    <item msgid="8667872640594311615">"طبقة النقل الآمنة"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
     <item msgid="7182812872984827322">"TTLS"</item>
     <item msgid="2318274046749286642">"PWD"</item>
   </string-array>
   <string-array name="wifi_peap_phase2_entries">
-    <item msgid="2577747762745812488">"لا شيء"</item>
+    <item msgid="2577747762745812488">"بدون"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
   </string-array>
@@ -180,7 +183,7 @@
     <item msgid="8926455723452645935">"AKA\'‎"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
-    <item msgid="1818786254010764570">"لا شيء"</item>
+    <item msgid="1818786254010764570">"بدون"</item>
     <item msgid="6189918678874123056">"بروتوكول مصادقة كلمات المرور"</item>
     <item msgid="1524112260493662517">"MSCHAP"</item>
     <item msgid="5923246669412752932">"MSCHAPV2"</item>
@@ -191,12 +194,12 @@
     <item msgid="628395202971532382">"ثابت"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4473276491748503377">"لا شيء"</item>
+    <item msgid="4473276491748503377">"بدون"</item>
     <item msgid="8673874894887358090">"يدويًا"</item>
     <item msgid="168893341855953140">"تهيئة تلقائية للوكيل"</item>
   </string-array>
   <string-array name="apn_auth_entries">
-    <item msgid="3856896061242872146">"لا شيء"</item>
+    <item msgid="3856896061242872146">"بدون"</item>
     <item msgid="5756844015743664882">"بروتوكول مصادقة كلمات المرور"</item>
     <item msgid="535934025797984365">"‏بروتوكول CHAP"</item>
     <item msgid="8383098660619805783">"‏بروتوكول مصادقة كلمات المرور أو بروتوكول CHAP"</item>
@@ -280,7 +283,7 @@
     <item msgid="7136963238377062018">"مستوى الصوت"</item>
     <item msgid="4270236897655923007">"مستوى صوت الرنين"</item>
     <item msgid="6325739889222559394">"مستوى صوت الوسائط"</item>
-    <item msgid="5762123934816216821">"مستوى صوت المنبه"</item>
+    <item msgid="5762123934816216821">"مستوى صوت المنبّه"</item>
     <item msgid="785049718065337473">"مستوى صوت الإشعار"</item>
     <item msgid="6700305533746877052">"مستوى صوت البلوتوث"</item>
     <item msgid="2029227495214047094">"البقاء في الوضع النشط"</item>
@@ -290,7 +293,7 @@
     <item msgid="3073734345226842233">"كتم صوت/إلغاء كتم صوت الميكروفون"</item>
     <item msgid="2111767435887685265">"عرض الإعلام المنبثق"</item>
     <item msgid="1091168669714823370">"وسائط المشروع"</item>
-    <item msgid="485564189219029300">"تنشيط الشبكة الافتراضية الخاصة"</item>
+    <item msgid="485564189219029300">"تفعيل الشبكة الافتراضية الخاصة"</item>
     <item msgid="7155384795265164395">"كتابة الخلفية"</item>
     <item msgid="1835836196806147034">"تركيبة مساعدة"</item>
     <item msgid="5989890403088155055">"لقطة شاشة مساعدة"</item>
@@ -357,7 +360,7 @@
     <item msgid="1312534577834048535">"كتم صوت/إلغاء كتم صوت الميكروفون"</item>
     <item msgid="427580389823724225">"عرض الإعلام المنبثق"</item>
     <item msgid="4992007785575926253">"وسائط المشروع"</item>
-    <item msgid="2482631530338029480">"تنشيط الشبكة الافتراضية الخاصة"</item>
+    <item msgid="2482631530338029480">"تفعيل الشبكة الافتراضية الخاصة"</item>
     <item msgid="1662979573471871926">"كتابة الخلفية"</item>
     <item msgid="5964768335278263478">"تركيبة مساعدة"</item>
     <item msgid="2657138701132782702">"لقطة شاشة مساعدة"</item>
@@ -400,7 +403,7 @@
     <item msgid="9044232017390975191">"كبير جدًا"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
-    <item msgid="4733815704128258753">"الافتراضية"</item>
+    <item msgid="4733815704128258753">"التلقائية"</item>
     <item msgid="3217099060748617005">"بدون"</item>
     <item msgid="7467615139904599420">"مخطط"</item>
     <item msgid="5623165557468608975">"تظليل القطرات"</item>
@@ -414,7 +417,7 @@
     <item msgid="8342334626783983353">"٪۱۰۰"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="7009918361545506251">"استخدام الإعدادات الافتراضية للتطبيق"</item>
+    <item msgid="7009918361545506251">"استخدام الإعدادات التلقائية للتطبيق"</item>
     <item msgid="1770533843436933500">"أبيض في أسود"</item>
     <item msgid="758587126802411846">"أسود في أبيض"</item>
     <item msgid="1495307195241623402">"أصفر في أسود"</item>
@@ -485,13 +488,20 @@
     <item msgid="5692284879054004388">"أكثر من 90 يومًا"</item>
   </string-array>
   <string-array name="wifi_metered_entries">
-    <item msgid="2975784243692054526">"استخدام تفضيل الشبكة"</item>
-    <item msgid="8745603368609022803">"معاملة الشبكة باعتبارها ذات سعة استخدام محدودة"</item>
+    <item msgid="5200910605264415911">"الاكتشاف التلقائي"</item>
+    <item msgid="8745603368609022803">"معاملة الشبكة باعتبارها ذات سعة محدودة"</item>
     <item msgid="2266114985518865625">"معاملة الشبكة باعتبارها ذات سعة غير محدودة"</item>
+  </string-array>
+  <string-array name="wifi_hidden_entries">
+    <item msgid="234221371123852300">"لا"</item>
+    <item msgid="3863157480502955888">"نعم"</item>
   </string-array>
   <string-array name="dark_ui_mode_entries">
     <item msgid="146804192658443142">"تلقائي (حسب الوقت من اليوم)"</item>
     <item msgid="6620560879508595181">"التشغيل دائمًا"</item>
     <item msgid="6385301106124765323">"إيقاف دائمًا"</item>
   </string-array>
+    <!-- no translation found for systemui_theme_entries:0 (2470122177508109711) -->
+    <!-- no translation found for systemui_theme_entries:1 (5595198131199979987) -->
+    <!-- no translation found for systemui_theme_entries:2 (883155044873038544) -->
 </resources>
