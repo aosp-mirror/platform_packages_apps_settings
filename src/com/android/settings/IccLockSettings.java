@@ -46,6 +46,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.telephony.CommandException;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.TelephonyIntents;
@@ -123,7 +124,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
             AsyncResult ar = (AsyncResult) msg.obj;
             switch (msg.what) {
                 case MSG_ENABLE_ICC_PIN_COMPLETE:
-                    iccLockChanged(ar.exception == null, msg.arg1);
+                    iccLockChanged(ar.exception == null, msg.arg1, ar.exception);
                     break;
                 case MSG_CHANGE_ICC_PIN_COMPLETE:
                     iccPinChanged(ar.exception == null, msg.arg1);
@@ -453,12 +454,25 @@ public class IccLockSettings extends SettingsPreferenceFragment
         mPinToggle.setEnabled(false);
     }
 
-    private void iccLockChanged(boolean success, int attemptsRemaining) {
+    private void iccLockChanged(boolean success, int attemptsRemaining, Throwable exception) {
         if (success) {
             mPinToggle.setChecked(mToState);
         } else {
-            Toast.makeText(getContext(), getPinPasswordErrorMessage(attemptsRemaining),
-                    Toast.LENGTH_LONG).show();
+            if (exception instanceof CommandException) {
+                CommandException.Error err = ((CommandException)(exception)).getCommandError();
+                if (err == CommandException.Error.PASSWORD_INCORRECT) {
+                    Toast.makeText(getContext(), getPinPasswordErrorMessage(attemptsRemaining),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    if (mToState) {
+                        Toast.makeText(getContext(), mRes.getString
+                               (R.string.sim_pin_enable_failed), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), mRes.getString
+                               (R.string.sim_pin_disable_failed), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
         }
         mPinToggle.setEnabled(true);
         resetDialogState();
