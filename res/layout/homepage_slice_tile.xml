@@ -20,12 +20,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/homepage_card_top_margin"
-    android:layout_marginBottom="@dimen/homepage_card_bottom_margin"
-    android:layout_marginStart="@dimen/homepage_card_side_margin"
-    android:layout_marginEnd="@dimen/homepage_card_side_margin"
-    app:cardCornerRadius="@dimen/homepage_card_corner_radius"
-    app:cardElevation="@dimen/homepage_card_elevation">
+    style="@style/ContextualCardStyle">
 
     <androidx.slice.widget.SliceView
         android:id="@+id/slice_view"
