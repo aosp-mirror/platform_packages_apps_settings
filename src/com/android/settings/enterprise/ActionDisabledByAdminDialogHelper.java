@@ -44,6 +44,8 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
+import libcore.util.NonNull;
+
 import java.util.Objects;
 
 /**
@@ -61,12 +63,16 @@ public class ActionDisabledByAdminDialogHelper {
         mActivity = activity;
     }
 
-    private @UserIdInt int getEnforcementAdminUserId() {
-        if (mEnforcedAdmin.user == null) {
+    private @UserIdInt int getEnforcementAdminUserId(@NonNull EnforcedAdmin admin) {
+        if (admin.user == null) {
             return UserHandle.USER_NULL;
         } else {
-            return mEnforcedAdmin.user.getIdentifier();
+            return admin.user.getIdentifier();
         }
+    }
+
+    private @UserIdInt int getEnforcementAdminUserId() {
+        return getEnforcementAdminUserId(mEnforcedAdmin);
     }
 
     public AlertDialog.Builder prepareDialogBuilder(String restriction,
@@ -170,18 +176,11 @@ public class ActionDisabledByAdminDialogHelper {
             return;
         }
 
-        final int userId;
-        if (enforcedAdmin.user == null) {
-            userId = UserHandle.USER_NULL;
-        } else {
-            userId = enforcedAdmin.user.getIdentifier();
-        }
-
         final DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         if (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(activity,
                 enforcedAdmin.component) || !RestrictedLockUtils.isCurrentUserOrProfile(
-                activity, userId)) {
+                activity, getEnforcementAdminUserId(enforcedAdmin))) {
             enforcedAdmin.component = null;
         } else {
             if (enforcedAdmin.user == null) {
@@ -189,7 +188,8 @@ public class ActionDisabledByAdminDialogHelper {
             }
             CharSequence supportMessage = null;
             if (UserHandle.isSameApp(Process.myUid(), Process.SYSTEM_UID)) {
-                supportMessage = dpm.getShortSupportMessageForUser(enforcedAdmin.component, userId);
+                supportMessage = dpm.getShortSupportMessageForUser(enforcedAdmin.component,
+                        getEnforcementAdminUserId(enforcedAdmin));
             }
             if (supportMessage != null) {
                 final TextView textView = root.findViewById(R.id.admin_support_msg);
