@@ -17,6 +17,8 @@
 package com.android.settings.development.featureflags;
 
 import android.content.Context;
+import android.util.Log;
+
 import androidx.preference.SwitchPreference;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
