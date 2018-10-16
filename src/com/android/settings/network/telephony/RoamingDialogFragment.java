@@ -23,10 +23,10 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -42,15 +42,14 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
     private CarrierConfigManager mCarrierConfigManager;
     private int mSubId;
 
-    /**
-     * The interface we expect a host activity to implement.
-     */
-    public interface RoamingDialogListener {
-        void onPositiveButtonClick(DialogFragment dialog);
-    }
+    public static RoamingDialogFragment newInstance(int subId) {
+        final RoamingDialogFragment dialogFragment = new RoamingDialogFragment();
+        Bundle args = new Bundle();
+        args.putInt(SUB_ID_KEY, subId);
+        dialogFragment.setArguments(args);
 
-    // the host activity which implements the listening interface
-    private RoamingDialogListener mListener;
+        return dialogFragment;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -58,14 +57,6 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
         Bundle args = getArguments();
         mSubId = args.getInt(SUB_ID_KEY);
         mCarrierConfigManager = new CarrierConfigManager(context);
-
-        Fragment fragment = getTargetFragment();
-        try {
-            mListener = (RoamingDialogListener) fragment;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(fragment.toString() +
-                    "must implement RoamingDialogListener");
-        }
     }
 
     @Override
@@ -95,7 +86,8 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
     public void onClick(DialogInterface dialog, int which) {
         // let the host know that the positive button has been clicked
         if (which == dialog.BUTTON_POSITIVE) {
-            mListener.onPositiveButtonClick(this);
+            TelephonyManager.from(getContext()).createForSubscriptionId(
+                    mSubId).setDataRoamingEnabled(true);
         }
     }
 }

@@ -36,7 +36,9 @@
         android:title="@string/roaming"
         android:persistent="false"
         android:summaryOn="@string/roaming_enable"
-        android:summaryOff="@string/roaming_disable"/>
+        android:summaryOff="@string/roaming_disable"
+        settings:userRestriction="no_data_roaming"
+        settings:controller="com.android.settings.network.telephony.RoamingPreferenceController"/>
 
     <Preference
         android:key="data_usage_summary"
