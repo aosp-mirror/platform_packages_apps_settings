@@ -16,6 +16,7 @@
 
 package com.android.settings.enterprise;
 
+import android.annotation.NonNull;
 import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -43,8 +44,6 @@ import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAd
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-
-import libcore.util.NonNull;
 
 import java.util.Objects;
 
