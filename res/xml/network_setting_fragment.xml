@@ -57,7 +57,8 @@
         android:summary="@string/preferred_network_mode_summary"
         android:entries="@array/preferred_network_mode_choices"
         android:entryValues="@array/preferred_network_mode_values"
-        android:dialogTitle="@string/preferred_network_mode_dialogtitle" />
+        android:dialogTitle="@string/preferred_network_mode_dialogtitle"
+        settings:controller="com.android.settings.network.telephony.PreferredNetworkModePreferenceController"/>
 
     <ListPreference
         android:key="enabled_networks_key"
