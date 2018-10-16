@@ -19,6 +19,8 @@ package com.android.settings.homepage.conditional;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -53,7 +55,7 @@ public class ConditionManagerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mManager = new ConditionManager(mContext, mConditionListener);
+        mManager = spy(new ConditionManager(mContext, mConditionListener));
 
         assertThat(mManager.mCandidates.size()).isEqualTo(mManager.mCardControllers.size());
 
@@ -94,11 +96,13 @@ public class ConditionManagerTest {
 
     @Test
     public void startMonitoringStateChange_multipleTimes_shouldRegisterOnce() {
-        mManager.startMonitoringStateChange();
-        mManager.startMonitoringStateChange();
-        mManager.startMonitoringStateChange();
+        final int loopCount = 10;
+        for (int i = 0; i < loopCount; i++) {
+            mManager.startMonitoringStateChange();
+        }
 
         verify(mController).startMonitoringStateChange();
+        verify(mManager, times(loopCount)).onConditionChanged();
     }
 
     @Test

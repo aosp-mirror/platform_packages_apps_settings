@@ -37,6 +37,8 @@ import java.util.Map;
 public class ConditionContextualCardController implements ContextualCardController,
         ConditionListener, LifecycleObserver, OnStart, OnStop {
 
+    private static final String TAG = "ConditionCtxCardCtrl";
+
     private final Context mContext;
     private final ConditionManager mConditionManager;
 
