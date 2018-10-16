@@ -17,7 +17,7 @@
 
 <!-- SUW related themes -->
 <resources>
-    <style name="GlifTheme" parent="SuwThemeGlif">
+    <style name="GlifTheme" parent="SuwThemeGlif.DayNight">
         <!-- For all AndroidX Alert Dialogs -->
         <item name="alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
@@ -55,7 +55,7 @@
         <item name="*android:colorError">@color/glif_error_color</item>
     </style>
 
-    <style name="GlifV2Theme" parent="SuwThemeGlifV2">
+    <style name="GlifV2Theme" parent="SuwThemeGlifV2.DayNight">
         <!-- For all AndroidX Alert Dialogs -->
         <item name="alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
@@ -93,7 +93,7 @@
         <item name="*android:colorError">@color/glif_error_color</item>
     </style>
 
-    <style name="GlifV3Theme" parent="SuwThemeGlifV3">
+    <style name="GlifV3Theme" parent="SuwThemeGlifV3.DayNight">
         <!-- For all AndroidX Alert Dialogs -->
         <item name="alertDialogTheme">@style/GlifV2ThemeAlertDialog</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
