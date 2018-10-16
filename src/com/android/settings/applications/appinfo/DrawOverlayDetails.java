@@ -15,7 +15,7 @@
  */
 package com.android.settings.applications.appinfo;
 
-import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import android.app.AppOpsManager;
 import android.content.Context;
@@ -83,7 +83,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().getWindow().addPrivateFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        getActivity().getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         super.onPause();
         Window window = getActivity().getWindow();
         WindowManager.LayoutParams attrs = window.getAttributes();
-        attrs.privateFlags &= ~PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+        attrs.privateFlags &= ~SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
         window.setAttributes(attrs);
     }
 

@@ -34,6 +34,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.os.UserManager;
 
 import androidx.preference.Preference;
@@ -131,6 +132,16 @@ public class DefaultBrowserPreferenceControllerTest {
     }
 
     @Test
+    public void getDefaultApp_shouldGetApplicationInfoAsUser() throws NameNotFoundException {
+        final String PACKAGE_NAME = "com.test.package";
+        when(mPackageManager.getDefaultBrowserPackageNameAsUser(anyInt())).thenReturn(PACKAGE_NAME);
+
+        mController.getDefaultAppInfo();
+
+        verify(mPackageManager).getApplicationInfoAsUser(eq(PACKAGE_NAME), anyInt(), anyInt());
+    }
+
+    @Test
     public void isBrowserDefault_onlyApp_shouldReturnTrue() {
         when(mPackageManager.getDefaultBrowserPackageNameAsUser(anyInt())).thenReturn(null);
         final List<ResolveInfo> resolveInfos = new ArrayList<>();
@@ -168,6 +179,33 @@ public class DefaultBrowserPreferenceControllerTest {
     public void getCandidates_shouldQueryActivityWithFlagsEquals0() {
 
         mController.getCandidates(mPackageManager, 0 /* userId */);
+
+        verify(mPackageManager).queryIntentActivitiesAsUser(
+            any(Intent.class), eq(0) /* flags */, eq(0) /* userId */);
+    }
+
+    @Test
+    public void getOnlyAppIcon_shouldGetApplicationInfoAsUser() throws NameNotFoundException {
+        final List<ResolveInfo> resolveInfos = new ArrayList<>();
+        final String PACKAGE_NAME = "com.test.package";
+        resolveInfos.add(createResolveInfo(PACKAGE_NAME));
+        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
+            .thenReturn(resolveInfos);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mContext.getResources()).thenReturn(mock(Resources.class));
+
+        mController.getOnlyAppIcon();
+
+        verify(mPackageManager).getApplicationInfoAsUser(
+            eq(PACKAGE_NAME), eq(0) /* flags */, eq(0) /* userId */);
+    }
+
+    @Test
+    public void hasBrowserPreference_shouldQueryIntentActivitiesAsUser() {
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+
+        mController.hasBrowserPreference("com.test.package", mContext, 0 /* userId */);
 
         verify(mPackageManager).queryIntentActivitiesAsUser(
             any(Intent.class), eq(0) /* flags */, eq(0) /* userId */);

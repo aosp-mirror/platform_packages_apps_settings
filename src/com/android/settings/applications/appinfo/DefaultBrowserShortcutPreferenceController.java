@@ -30,7 +30,8 @@ public class DefaultBrowserShortcutPreferenceController
 
     @Override
     protected boolean hasAppCapability() {
-        return DefaultBrowserPreferenceController.hasBrowserPreference(mPackageName, mContext);
+        return DefaultBrowserPreferenceController
+                .hasBrowserPreference(mPackageName, mContext, UserHandle.myUserId());
     }
 
     @Override

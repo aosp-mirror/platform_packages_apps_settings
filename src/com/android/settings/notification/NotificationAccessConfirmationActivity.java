@@ -87,13 +87,13 @@ public class NotificationAccessConfirmationActivity extends Activity
     public void onResume() {
         super.onResume();
         getWindow().addFlags(
-                WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
     }
 
     @Override
     public void onPause() {
         getWindow().clearFlags(
-                WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         super.onPause();
     }
 

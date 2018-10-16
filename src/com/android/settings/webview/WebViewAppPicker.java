@@ -118,9 +118,9 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     }
 
     private static class WebViewAppInfo extends DefaultAppInfo {
-        public WebViewAppInfo(Context context, PackageManager pm,
+        public WebViewAppInfo(Context context, PackageManager pm, int userId,
                 PackageItemInfo packageItemInfo, String summary, boolean enabled) {
-            super(context, pm, packageItemInfo, summary, enabled);
+            super(context, pm, userId, packageItemInfo, summary, enabled);
         }
 
         @Override
@@ -138,7 +138,7 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     @VisibleForTesting
     DefaultAppInfo createDefaultAppInfo(Context context, PackageManager pm,
             PackageItemInfo packageItemInfo, String disabledReason) {
-        return new WebViewAppInfo(context, pm, packageItemInfo, disabledReason,
+        return new WebViewAppInfo(context, pm, mUserId, packageItemInfo, disabledReason,
                 TextUtils.isEmpty(disabledReason) /* enabled */);
     }
 

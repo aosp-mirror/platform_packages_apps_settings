@@ -43,7 +43,6 @@ public class CdmaOptions {
     private static final String LOG_TAG = "CdmaOptions";
 
     private CarrierConfigManager mCarrierConfigManager;
-    private CdmaSystemSelectListPreference mButtonCdmaSystemSelect;
     private CdmaSubscriptionListPreference mButtonCdmaSubscription;
     private RestrictedPreference mButtonAPNExpand;
     private Preference mCategoryAPNExpand;
@@ -66,8 +65,6 @@ public class CdmaOptions {
         mCarrierConfigManager = new CarrierConfigManager(prefFragment.getContext());
 
         // Initialize preferences.
-        mButtonCdmaSystemSelect = (CdmaSystemSelectListPreference) mPrefScreen
-                .findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY);
         mButtonCdmaSubscription = (CdmaSubscriptionListPreference) mPrefScreen
                 .findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY);
         mButtonCarrierSettings = mPrefScreen.findPreference(BUTTON_CARRIER_SETTINGS_KEY);
@@ -90,9 +87,6 @@ public class CdmaOptions {
         // Read platform settings for carrier settings
         boolean addCarrierSettings =
                 carrierConfig.getBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL);
-
-        mPrefScreen.addPreference(mButtonCdmaSystemSelect);
-        mButtonCdmaSystemSelect.setEnabled(true);
 
         // Making no assumptions of whether they are added or removed at this point.
         // Calling add or remove explicitly to make sure they are updated.
@@ -191,9 +185,7 @@ public class CdmaOptions {
     }
 
     public void showDialog(Preference preference) {
-        if (preference.getKey().equals(BUTTON_CDMA_SYSTEM_SELECT_KEY)) {
-            mButtonCdmaSystemSelect.showDialog(null);
-        } else if (preference.getKey().equals(BUTTON_CDMA_SUBSCRIPTION_KEY)) {
+        if (preference.getKey().equals(BUTTON_CDMA_SUBSCRIPTION_KEY)) {
             mButtonCdmaSubscription.showDialog(null);
         }
     }

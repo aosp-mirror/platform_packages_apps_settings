@@ -59,7 +59,8 @@ public class DefaultPhonePreferenceController extends DefaultAppPreferenceContro
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
         try {
-            return new DefaultAppInfo(mContext, mPackageManager, mPackageManager.getApplicationInfo(
+            return new DefaultAppInfo(mContext, mPackageManager, mUserId,
+                    mPackageManager.getApplicationInfo(
                     DefaultDialerManager.getDefaultDialerApplication(mContext, mUserId), 0));
         } catch (PackageManager.NameNotFoundException e) {
             return null;

@@ -55,7 +55,7 @@ public class DefaultSmsPicker extends DefaultAppPickerFragment {
 
         for (SmsApplication.SmsApplicationData smsApplicationData : smsApplications) {
             try {
-                candidates.add(new DefaultAppInfo(context, mPm,
+                candidates.add(new DefaultAppInfo(context, mPm, mUserId,
                         mPm.getApplicationInfoAsUser(smsApplicationData.mPackageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.

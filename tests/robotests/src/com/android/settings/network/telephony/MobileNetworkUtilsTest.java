@@ -18,7 +18,6 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
@@ -32,11 +31,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -141,5 +143,23 @@ public class MobileNetworkUtilsTest {
 
         assertThat(MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
                 mPhoneAccountHandle)).isNotNull();
+    }
+
+    @Test
+    public void isCdmaOptions_phoneTypeCdma_returnTrue() {
+        doReturn(PhoneConstants.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
+
+        assertThat(MobileNetworkUtils.isCdmaOptions(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void isCdmaOptions_worldModeWithGsmWcdma_returnTrue() {
+        doReturn(PhoneConstants.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
+        doReturn("true").when(mContext).getString(R.string.config_world_mode);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
+                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+
+        assertThat(MobileNetworkUtils.isCdmaOptions(mContext, SUB_ID_1)).isTrue();
     }
 }
