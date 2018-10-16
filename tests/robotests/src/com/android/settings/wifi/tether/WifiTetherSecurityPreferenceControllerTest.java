@@ -66,7 +66,7 @@ public class WifiTetherSecurityPreferenceControllerTest {
     public void onPreferenceChange_securityValueUpdated() {
         mController.onPreferenceChange(mPreference, WPA2_PSK);
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
-        assertThat(mPreference.getSummary()).isEqualTo("WPA2 PSK");
+        assertThat(mPreference.getSummary()).isEqualTo("WPA2-Personal");
 
         mController.onPreferenceChange(mPreference, NONE);
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.NONE);
@@ -75,11 +75,11 @@ public class WifiTetherSecurityPreferenceControllerTest {
 
     @Test
     public void updateDisplay_preferenceUpdated() {
-        // test defaulting to WPA2 PSK on new config
+        // test defaulting to WPA2-Personal on new config
         when(mWifiManager.getWifiApConfiguration()).thenReturn(null);
         mController.updateDisplay();
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
-        assertThat(mPreference.getSummary()).isEqualTo("WPA2 PSK");
+        assertThat(mPreference.getSummary()).isEqualTo("WPA2-Personal");
 
         // test open tether network
         when(mWifiManager.getWifiApConfiguration()).thenReturn(mConfig);
@@ -89,11 +89,11 @@ public class WifiTetherSecurityPreferenceControllerTest {
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.NONE);
         assertThat(mPreference.getSummary()).isEqualTo("None");
 
-        // test WPA2 PSK tether network
+        // test WPA2-Personal tether network
         mConfig.allowedKeyManagement.clear();
         mConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA2_PSK);
         mController.updateDisplay();
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
-        assertThat(mPreference.getSummary()).isEqualTo("WPA2 PSK");
+        assertThat(mPreference.getSummary()).isEqualTo("WPA2-Personal");
     }
 }

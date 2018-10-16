@@ -488,7 +488,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
                 NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
                 if (nfcAdapter != null && nfcAdapter.isEnabled() &&
-                        mSelectedAccessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
+                        (!(mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
+                                (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE))) {
                     // Only allow writing of NFC tags for password-protected networks.
                     menu.add(Menu.NONE, MENU_ID_WRITE_NFC, 0, R.string.wifi_menu_write_to_nfc);
                 }
@@ -506,7 +507,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 boolean isSavedNetwork = mSelectedAccessPoint.isSaved();
                 if (isSavedNetwork) {
                     connect(mSelectedAccessPoint.getConfig(), isSavedNetwork);
-                } else if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) {
+                } else if ((mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
+                        (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
                     connect(mSelectedAccessPoint.getConfig(), isSavedNetwork);
@@ -552,7 +554,8 @@ public class WifiSettings extends RestrictedSettingsFragment
              * networks, or Passpoint provided networks.
              */
             WifiConfiguration config = mSelectedAccessPoint.getConfig();
-            if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) {
+            if ((mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
+                    (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
                 connect(mSelectedAccessPoint.getConfig(), mSelectedAccessPoint.isSaved());
             } else if (mSelectedAccessPoint.isSaved() && config != null
@@ -772,7 +775,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 preference.setKey(key);
                 preference.setOrder(index);
                 if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
-                        && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
+                        && (accessPoint.getSecurity() != AccessPoint.SECURITY_NONE &&
+                        accessPoint.getSecurity() != AccessPoint.SECURITY_OWE)) {
                     if (!accessPoint.isSaved() || isDisabledByWrongPassword(accessPoint)) {
                         onPreferenceTreeClick(preference);
                         mOpenSsid = null;
