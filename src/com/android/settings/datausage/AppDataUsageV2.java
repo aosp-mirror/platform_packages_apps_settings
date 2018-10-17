@@ -131,7 +131,7 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
 
         mCycle = (SpinnerPreference) findPreference(KEY_CYCLE);
-        mCycleAdapter = new CycleAdapter(getContext(), mCycle, mCycleListener, false);
+        mCycleAdapter = new CycleAdapter(getContext(), mCycle, mCycleListener);
 
         if (mAppItem.key > 0) {
             if (mPackages.size() != 0) {

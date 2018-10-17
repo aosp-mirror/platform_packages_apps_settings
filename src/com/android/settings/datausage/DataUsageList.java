@@ -182,7 +182,7 @@ public class DataUsageList extends DataUsageBaseFragment {
             public void setSelection(int position) {
                 mCycleSpinner.setSelection(position);
             }
-        }, mCycleListener, true);
+        }, mCycleListener);
 
         mLoadingViewController = new LoadingViewController(
                 getView().findViewById(R.id.loading_container), getListView());
