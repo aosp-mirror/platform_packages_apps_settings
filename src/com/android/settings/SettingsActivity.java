@@ -296,9 +296,9 @@ public class SettingsActivity extends SettingsBaseActivity
                     deviceProvisioned ? View.VISIBLE : View.INVISIBLE);
             findViewById(R.id.action_bar).setVisibility(View.GONE);
             final Toolbar toolbar = findViewById(R.id.search_action_bar);
+            setActionBar(toolbar);
             FeatureFactory.getFactory(this).getSearchFeatureProvider()
                     .initSearchToolbar(this, toolbar);
-            setActionBar(toolbar);
         }
 
         ActionBar actionBar = getActionBar();
