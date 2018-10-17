@@ -41,6 +41,7 @@ import androidx.slice.widget.SliceLiveData;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeCopyableController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
@@ -67,6 +68,7 @@ public class SliceBuilderUtilsTest {
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final Class TOGGLE_CONTROLLER = FakeToggleController.class;
     private final Class SLIDER_CONTROLLER = FakeSliderController.class;
+    private final Class COPYABLE_CONTROLLER = FakeCopyableController.class;
     private final Class CONTEXT_CONTROLLER = FakeContextOnlyPreferenceController.class;
     private final boolean IS_DYNAMIC_SUMMARY_ALLOWED = false;
 
@@ -116,7 +118,6 @@ public class SliceBuilderUtilsTest {
     public void buildSliderSlice_returnsMatchingSlice() {
         final SliceData data = getDummyData(SLIDER_CONTROLLER, SliceData.SliceType.SLIDER);
 
-
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
@@ -128,6 +129,23 @@ public class SliceBuilderUtilsTest {
         assertThat(capturedLoggingPair.second)
                 .isEqualTo(data.getKey());
         SliceTester.testSettingsSliderSlice(mContext, slice, data);
+    }
+
+    @Test
+    public void buildCopyableSlice_returnsMatchingSlice() {
+        final SliceData dummyData = getDummyData(COPYABLE_CONTROLLER, -1);
+
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, dummyData);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
+                        mLoggingArgumentCatpor.capture());
+        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
+
+        assertThat(capturedLoggingPair.first)
+                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
+        assertThat(capturedLoggingPair.second)
+                .isEqualTo(dummyData.getKey());
+        SliceTester.testSettingsCopyableSlice(mContext, slice, dummyData);
     }
 
     @Test

@@ -24,6 +24,7 @@ import static com.android.settings.network.telephony.Enhanced4gLteSliceHelper
 import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
+import static com.android.settings.slices.SettingsSliceProvider.ACTION_COPY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
@@ -115,6 +116,9 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             case ACTION_FLASHLIGHT_SLICE_CHANGED:
                 FlashlightSliceBuilder.handleUriChange(context, intent);
                 break;
+            case ACTION_COPY:
+                handleCopyAction(context, key, isPlatformSlice);
+                break;
         }
     }
 
@@ -182,6 +186,29 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         sliderController.setSliderPosition(newPosition);
         logSliceValueChange(context, key, newPosition);
         updateUri(context, key, isPlatformSlice);
+    }
+
+    private void handleCopyAction(Context context, String key, boolean isPlatformSlice) {
+        if (TextUtils.isEmpty(key)) {
+            throw new IllegalArgumentException("No key passed to Intent for controller");
+        }
+
+        final BasePreferenceController controller = getPreferenceController(context, key);
+
+        if (!(controller instanceof CopyableSlice)) {
+            throw new IllegalArgumentException(
+                    "Copyable action passed for a non-copyable key:" + key);
+        }
+
+        if (!controller.isAvailable()) {
+            Log.w(TAG, "Can't update " + key + " since the setting is unavailable");
+            if (!controller.hasAsyncUpdate()) {
+                updateUri(context, key, isPlatformSlice);
+            }
+            return;
+        }
+
+        ((CopyableSlice) controller).copy();
     }
 
     /**
