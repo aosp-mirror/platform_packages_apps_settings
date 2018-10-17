@@ -113,7 +113,7 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
         if (mDialogFragment != null) {
             Log.e(TAG, "Old dialog fragment not null!");
         }
-        mDialogFragment = new SettingsDialogFragment(this, dialogId);
+        mDialogFragment = SettingsDialogFragment.newInstance(this, dialogId);
         mDialogFragment.show(getActivity().getSupportFragmentManager(), Integer.toString(dialogId));
     }
 
