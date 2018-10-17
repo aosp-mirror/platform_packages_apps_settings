@@ -34,7 +34,6 @@ import androidx.slice.Slice;
 
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
-import com.android.settings.homepage.deviceinfo.StorageSlice;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -94,13 +93,13 @@ public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
         final double rankingScore = 0.0;
         final List<ContextualCard> result = new ArrayList() {{
             add(new ContextualCard.Builder()
-                    .setSliceUri(DataUsageSlice.DATA_USAGE_CARD_URI.toString())
-                    .setName(packageName + "/" + DataUsageSlice.PATH_DATA_USAGE_CARD)
+                    .setSliceUri(DataUsageSlice.DATA_USAGE_CARD_URI)
+                    .setName(DataUsageSlice.PATH_DATA_USAGE)
                     .setPackageName(packageName)
                     .setRankingScore(rankingScore)
                     .setAppVersion(appVersionCode)
                     .setCardType(ContextualCard.CardType.SLICE)
-                    .setIsHalfWidth(true)
+                    .setIsHalfWidth(false)
                     .build());
             //TODO(b/115971399): Will change following values of SliceUri and Name
             // after landing these slice cards.
@@ -114,22 +113,13 @@ public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 //                    .setIsHalfWidth(true)
 //                    .build());
             add(new ContextualCard.Builder()
-                    .setSliceUri(DeviceInfoSlice.DEVICE_INFO_CARD_URI.toString())
-                    .setName(packageName + "/" + DeviceInfoSlice.PATH_DEVICE_INFO_CARD)
+                    .setSliceUri(DeviceInfoSlice.DEVICE_INFO_CARD_URI)
+                    .setName(DeviceInfoSlice.PATH_DEVICE_INFO)
                     .setPackageName(packageName)
                     .setRankingScore(rankingScore)
                     .setAppVersion(appVersionCode)
                     .setCardType(ContextualCard.CardType.SLICE)
-                    .setIsHalfWidth(true)
-                    .build());
-            add(new ContextualCard.Builder()
-                    .setSliceUri(StorageSlice.STORAGE_CARD_URI.toString())
-                    .setName(StorageSlice.PATH_STORAGE_CARD)
-                    .setPackageName(packageName)
-                    .setRankingScore(rankingScore)
-                    .setAppVersion(appVersionCode)
-                    .setCardType(ContextualCard.CardType.SLICE)
-                    .setIsHalfWidth(true)
+                    .setIsHalfWidth(false)
                     .build());
         }};
         return result;
