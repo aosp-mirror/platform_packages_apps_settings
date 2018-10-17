@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -135,6 +136,11 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             return true;
         }
 
+        @Override
+        protected Class<? extends ChooseLockGeneric.InternalActivity> getInternalActivityClass() {
+            return SetupChooseLockGeneric.InternalActivity.class;
+        }
+
         /***
          * Disables preferences that are less secure than required quality and shows only secure
          * screen lock options here.
@@ -207,4 +213,25 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             return intent;
         }
     }
+
+    public static class InternalActivity extends ChooseLockGeneric.InternalActivity {
+        @Override
+        protected boolean isValidFragment(String fragmentName) {
+            return InternalSetupChooseLockGenericFragment.class.getName().equals(fragmentName);
+        }
+
+        @Override
+        /* package */ Class<? extends Fragment> getFragmentClass() {
+            return InternalSetupChooseLockGenericFragment.class;
+        }
+
+        public static class InternalSetupChooseLockGenericFragment
+                extends ChooseLockGenericFragment {
+            @Override
+            protected boolean canRunBeforeDeviceProvisioned() {
+                return true;
+            }
+        }
+    }
+
 }
