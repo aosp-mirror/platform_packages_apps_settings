@@ -17,12 +17,9 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/SuggestionConditionStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    app:cardElevation="@dimen/condition_card_elevation"
-    app:cardCornerRadius="@dimen/suggestion_card_corner_radius">
+    style="@style/ContextualCardStyle">
 
     <include layout="@layout/condition_tile"/>
 
