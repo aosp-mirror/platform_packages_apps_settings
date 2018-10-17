@@ -66,6 +66,8 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.cdma.CdmaApnPreferenceController;
+import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -159,9 +161,9 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private Preference mWiFiCallingPref;
     private SwitchPreference mVideoCallingPref;
     private NetworkSelectListPreference mButtonNetworkSelect;
-    private DataUsagePreference mDataUsagePref;
 
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
+    private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
 
     private static final String iface = "rmnet0"; //TODO: this will go away
     private List<SubscriptionInfo> mActiveSubInfos;
@@ -304,8 +306,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
             Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
             startActivity(intent);
             return true;
-        } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref
-                || preference == mDataUsagePref) {
+        } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref) {
             return false;
         } else {
             // if the button is anything but the simple toggle preference,
@@ -397,9 +398,14 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
+        use(CdmaApnPreferenceController.class).init(mSubId);
+        use(CarrierPreferenceController.class).init(mSubId);
+        use(DataUsagePreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
+        mCdmaSubscriptionPreferenceController = use(CdmaSubscriptionPreferenceController.class);
+        mCdmaSubscriptionPreferenceController.init(getPreferenceManager(), mSubId);
     }
 
     @Override
@@ -426,7 +432,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         mCallingCategory = (PreferenceCategory) findPreference(CATEGORY_CALLING_KEY);
         mWiFiCallingPref = findPreference(BUTTON_WIFI_CALLING_KEY);
         mVideoCallingPref = (SwitchPreference) findPreference(BUTTON_VIDEO_CALLING_KEY);
-        mDataUsagePref = (DataUsagePreference) findPreference(BUTTON_DATA_USAGE_KEY);
 
         try {
             Context con = context.createPackageContext("com.android.systemui", 0);
@@ -576,14 +581,10 @@ public class MobileNetworkFragment extends DashboardFragment implements
         }
 
         prefSet.addPreference(mButtonDataRoam);
-        prefSet.addPreference(mDataUsagePref);
 
         mButtonDataRoam.setEnabled(hasActiveSubscriptions);
-        mDataUsagePref.setEnabled(hasActiveSubscriptions);
 
         if (hasActiveSubscriptions) {
-            // Customized preferences needs to be initialized with subId.
-            mDataUsagePref.initialize(phoneSubId);
 
             // Initialize states of mButtonDataRoam.
             mButtonDataRoam.setChecked(mTelephonyManager.isDataRoamingEnabled());
@@ -722,15 +723,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             if (ps != null) {
                 root.removePreference(ps);
             }
-        }
-
-        /**
-         * Listen to extra preference changes that need as Metrics events logging.
-         */
-
-        if (prefSet.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY) != null) {
-            prefSet.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)
-                    .setOnPreferenceChangeListener(this);
         }
 
         // Get the networkMode from Settings.System and displays it
@@ -1093,9 +1085,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 mVideoCallingPref.setEnabled(false);
                 return false;
             }
-        } else if (preference == getPreferenceScreen()
-                .findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)) {
-            return true;
         }
 
         updateBody();
@@ -1431,11 +1420,13 @@ public class MobileNetworkFragment extends DashboardFragment implements
                         EXTRA_EXIT_ECM_RESULT, false);
                 if (isChoiceYes) {
                     // If the phone exits from ECM mode, show the CDMA Options
-                    if (TextUtils.equals(mClickedPreference.getKey(),
+                    final String key = mClickedPreference.getKey();
+                    if (TextUtils.equals(key,
                             mCdmaSystemSelectPreferenceController.getPreferenceKey())) {
                         mCdmaSystemSelectPreferenceController.showDialog();
-                    } else {
-                        mCdmaOptions.showDialog(mClickedPreference);
+                    } else if (TextUtils.equals(key,
+                            mCdmaSubscriptionPreferenceController.getPreferenceKey())) {
+                        mCdmaSubscriptionPreferenceController.showDialog();
                     }
                 } else {
                     // do nothing
@@ -1704,7 +1695,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // For ListPreferences, we log it here without a value, only indicating it's clicked to
         // open the list dialog. When a value is chosen, another MetricsEvent is logged with
         // new value in onPreferenceChange.
-        if (preference == mLteDataServicePref || preference == mDataUsagePref
+        if (preference == mLteDataServicePref
                 || preference == mEuiccSettingsPref
                 || preference == mWiFiCallingPref || preference == mButtonPreferredNetworkMode
                 || preference == mButtonEnabledNetworks
@@ -1745,8 +1736,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
         } else if (preference == mButtonDataRoam) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_DATA_ROAMING_TOGGLE;
-        } else if (preference == mDataUsagePref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_DATA_USAGE;
         } else if (preference == mLteDataServicePref) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_SET_UP_DATA_SERVICE;
         } else if (preference == mButton4glte) {
@@ -1802,8 +1791,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // the open dialog gets dismissed or detached after pause / resume.
         if (mCdmaOptions == null) {
             mCdmaOptions = new CdmaOptions(prefFragment, prefScreen, subId);
-        } else {
-            mCdmaOptions.updateSubscriptionId(subId);
         }
     }
 

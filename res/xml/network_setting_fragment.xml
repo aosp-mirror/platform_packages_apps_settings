@@ -38,9 +38,10 @@
         android:summaryOn="@string/roaming_enable"
         android:summaryOff="@string/roaming_disable"/>
 
-    <com.android.settings.network.telephony.DataUsagePreference
+    <Preference
         android:key="data_usage_summary"
-        android:title="@string/data_usage_title" />
+        android:title="@string/mobile_data_usage_title"
+        settings:controller="com.android.settings.network.telephony.DataUsagePreferenceController"/>
 
     <SwitchPreference
         android:key="enhanced_4g_lte"
@@ -99,5 +100,30 @@
         android:entryValues="@array/cdma_system_select_values"
         android:dialogTitle="@string/cdma_system_select_dialogtitle"
         settings:controller="com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController"/>
+
+    <ListPreference
+        android:key="cdma_subscription_key"
+        android:title="@string/cdma_subscription_title"
+        android:summary="@string/cdma_subscription_summary"
+        android:entries="@array/cdma_subscription_choices"
+        android:entryValues="@array/cdma_subscription_values"
+        android:dialogTitle="@string/cdma_subscription_dialogtitle"
+        settings:controller="com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController"/>
+
+    <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
+    <PreferenceCategory
+        android:key="category_cdma_apn_key">
+        <com.android.settingslib.RestrictedPreference
+            android:key="button_cdma_apn_key"
+            android:title="@string/apn_settings"
+            android:persistent="false"
+            settings:controller="com.android.settings.network.telephony.cdma.CdmaApnPreferenceController"/>
+    </PreferenceCategory>
+
+    <Preference
+        android:key="carrier_settings_key"
+        android:title="@string/carrier_settings_title"
+        settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
+    </Preference>
 
 </PreferenceScreen>
