@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Toolbar;
 
@@ -35,7 +36,7 @@ import com.android.settingslib.search.SearchIndexableResources;
  */
 public interface SearchFeatureProvider {
 
-    Intent SEARCH_UI_INTENT = new Intent("com.android.settings.action.SETTINGS_SEARCH");
+    Intent SEARCH_UI_INTENT = new Intent(Settings.ACTION_APP_SEARCH_SETTINGS);
     int REQUEST_CODE = 0;
 
     /**
