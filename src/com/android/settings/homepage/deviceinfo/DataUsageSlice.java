@@ -53,7 +53,7 @@ public class DataUsageSlice implements CustomSliceable {
     /**
      * The path denotes the unique name of data usage slice.
      */
-    public static final String PATH_DATA_USAGE_CARD = "data_usage_card";
+    public static final String PATH_DATA_USAGE = "data_usage_card";
 
     /**
      * Backing Uri for the Data usage Slice.
@@ -61,7 +61,7 @@ public class DataUsageSlice implements CustomSliceable {
     public static final Uri DATA_USAGE_CARD_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_DATA_USAGE_CARD)
+            .appendPath(PATH_DATA_USAGE)
             .build();
 
     private final Context mContext;
@@ -88,8 +88,8 @@ public class DataUsageSlice implements CustomSliceable {
         final DataUsageController.DataUsageInfo info = dataUsageController.getDataUsageInfo();
         final ListBuilder listBuilder =
                 new ListBuilder(mContext, DATA_USAGE_CARD_URI, ListBuilder.INFINITY)
-                .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
-                .setHeader(new ListBuilder.HeaderBuilder().setTitle(title));
+                        .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
+                        .setHeader(new ListBuilder.HeaderBuilder().setTitle(title));
         if (DataUsageUtils.hasSim(mContext)) {
             listBuilder.addRow(new ListBuilder.RowBuilder()
                     .setTitle(getDataUsageText(info))
@@ -106,9 +106,9 @@ public class DataUsageSlice implements CustomSliceable {
     @Override
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.data_usage_wifi_title).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_DATA_USAGE_CARD).build();
+        final Uri contentUri = new Uri.Builder().appendPath(PATH_DATA_USAGE).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                DataUsageSummary.class.getName(), PATH_DATA_USAGE_CARD, screenTitle,
+                DataUsageSummary.class.getName(), PATH_DATA_USAGE, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);

@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -108,7 +109,7 @@ public class SliceContextualCardRendererTest {
     private ContextualCard buildContextualCard(String sliceUri) {
         return new ContextualCard.Builder()
                 .setName("test_name")
-                .setSliceUri(sliceUri)
+                .setSliceUri(Uri.parse(sliceUri))
                 .build();
     }
 }

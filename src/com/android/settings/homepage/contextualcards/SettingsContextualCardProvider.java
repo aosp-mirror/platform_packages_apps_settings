@@ -21,6 +21,8 @@ import static android.provider.SettingsSlicesContract.KEY_WIFI;
 import android.annotation.Nullable;
 
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
+import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.deviceinfo.StorageSlice;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.wifi.WifiSlice;
@@ -43,11 +45,23 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
         final ContextualCard dataUsageCard =
                 ContextualCard.newBuilder()
                         .setSliceUri(DataUsageSlice.DATA_USAGE_CARD_URI.toString())
-                        .setCardName(DataUsageSlice.PATH_DATA_USAGE_CARD)
+                        .setCardName(DataUsageSlice.PATH_DATA_USAGE)
+                        .build();
+        final ContextualCard deviceInfoCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(DeviceInfoSlice.DEVICE_INFO_CARD_URI.toString())
+                        .setCardName(DeviceInfoSlice.PATH_DEVICE_INFO)
+                        .build();
+        final ContextualCard storageInfoCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(StorageSlice.STORAGE_CARD_URI.toString())
+                        .setCardName(StorageSlice.PATH_STORAGE_INFO)
                         .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)
                 .addCard(dataUsageCard)
+                .addCard(deviceInfoCard)
+                .addCard(storageInfoCard)
                 .build();
 
         return cards;

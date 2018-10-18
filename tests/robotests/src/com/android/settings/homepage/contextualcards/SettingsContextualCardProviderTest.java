@@ -58,6 +58,6 @@ public class SettingsContextualCardProviderTest {
         final ContextualCardList cards =
               ContextualCardList.parseFrom(
                   returnValue.getByteArray(ContextualCardProvider.BUNDLE_CARD_LIST));
-        assertThat(cards.getCardCount()).isEqualTo(2);
+        assertThat(cards.getCardCount()).isEqualTo(4);
     }
 }
