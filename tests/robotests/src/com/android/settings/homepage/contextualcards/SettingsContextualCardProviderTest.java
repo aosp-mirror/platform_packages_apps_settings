@@ -32,6 +32,7 @@ import com.google.android.settings.intelligence.libs.contextualcards.ContextualC
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -40,6 +41,7 @@ public class SettingsContextualCardProviderTest {
     private Context mContext;
     private ContentResolver mResolver;
     private Uri mUri;
+    private SettingsContextualCardProvider mProvider;
 
     @Before
     public void setUp() {
@@ -49,15 +51,18 @@ public class SettingsContextualCardProviderTest {
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsContextualCardProvider.CARD_AUTHORITY)
                 .build();
+        mProvider = Robolectric.setupContentProvider(SettingsContextualCardProvider.class);
     }
 
     @Test
     public void contentProviderCall_returnCorrectSize() throws Exception {
+        final int actualNo = mProvider.getContextualCards().getCardCount();
+
         final Bundle returnValue =
                 mResolver.call(mUri, ContextualCardProvider.METHOD_GET_CARD_LIST, "", null);
         final ContextualCardList cards =
-              ContextualCardList.parseFrom(
-                  returnValue.getByteArray(ContextualCardProvider.BUNDLE_CARD_LIST));
-        assertThat(cards.getCardCount()).isEqualTo(4);
+                ContextualCardList.parseFrom(
+                        returnValue.getByteArray(ContextualCardProvider.BUNDLE_CARD_LIST));
+        assertThat(cards.getCardCount()).isEqualTo(actualNo);
     }
 }

@@ -23,6 +23,7 @@ import android.annotation.Nullable;
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
 import com.android.settings.homepage.deviceinfo.StorageSlice;
+import com.android.settings.homepage.deviceinfo.EmergencyInfoSlice;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.wifi.WifiSlice;
@@ -57,11 +58,17 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .setSliceUri(StorageSlice.STORAGE_CARD_URI.toString())
                         .setCardName(StorageSlice.PATH_STORAGE_INFO)
                         .build();
+        final ContextualCard emergencyInfoCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(EmergencyInfoSlice.EMERGENCY_INFO_CARD_URI.toString())
+                        .setCardName(EmergencyInfoSlice.PATH_EMERGENCY_INFO_CARD)
+                        .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)
                 .addCard(dataUsageCard)
                 .addCard(deviceInfoCard)
                 .addCard(storageInfoCard)
+                .addCard(emergencyInfoCard)
                 .build();
 
         return cards;
