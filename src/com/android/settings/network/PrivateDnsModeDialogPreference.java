@@ -27,6 +27,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.NetworkUtils;
 import android.provider.Settings;
 import android.system.Os;
 import android.text.Editable;
@@ -71,8 +72,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_OPPORTUNISTIC, R.id.private_dns_mode_opportunistic);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME, R.id.private_dns_mode_provider);
     }
-
-    private static final int[] ADDRESS_FAMILIES = new int[] {AF_INET, AF_INET6};
 
     @VisibleForTesting
     static final String MODE_KEY = Settings.Global.PRIVATE_DNS_MODE;
@@ -203,23 +202,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         updateDialogInfo();
     }
 
-    private boolean isWeaklyValidatedHostname(String hostname) {
-        // TODO(b/34953048): Use a validation method that permits more accurate,
-        // but still inexpensive, checking of likely valid DNS hostnames.
-        final String WEAK_HOSTNAME_REGEX = "^[a-zA-Z0-9_.-]+$";
-        if (!hostname.matches(WEAK_HOSTNAME_REGEX)) {
-            return false;
-        }
-
-        for (int address_family : ADDRESS_FAMILIES) {
-            if (Os.inet_pton(address_family, hostname) != null) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     private Button getSaveButton() {
         final AlertDialog dialog = (AlertDialog) getDialog();
         if (dialog == null) {
@@ -236,7 +218,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         final Button saveButton = getSaveButton();
         if (saveButton != null) {
             saveButton.setEnabled(modeProvider
-                    ? isWeaklyValidatedHostname(mEditText.getText().toString())
+                    ? NetworkUtils.isWeaklyValidatedHostname(mEditText.getText().toString())
                     : true);
         }
     }

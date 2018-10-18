@@ -275,6 +275,20 @@ public class MobileNetworkUtils {
         return false;
     }
 
+    public static boolean isGsmOptions(Context context, int subId) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return false;
+        }
+        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+                .createForSubscriptionId(subId);
+
+        if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_GSM) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Return {@code true} if it is world mode, and we may show advanced options in telephony
      * settings

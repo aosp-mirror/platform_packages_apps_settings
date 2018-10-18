@@ -66,6 +66,8 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.cdma.CdmaApnPreferenceController;
+import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -79,7 +81,7 @@ import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkFragment extends DashboardFragment implements
-        Preference.OnPreferenceChangeListener, RoamingDialogFragment.RoamingDialogListener {
+        Preference.OnPreferenceChangeListener {
 
     // debug data
     private static final String LOG_TAG = "NetworkSettings";
@@ -151,7 +153,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     //UI objects
     private ListPreference mButtonPreferredNetworkMode;
     private ListPreference mButtonEnabledNetworks;
-    private RestrictedSwitchPreference mButtonDataRoam;
     private SwitchPreference mButton4glte;
     private Preference mLteDataServicePref;
     private Preference mEuiccSettingsPref;
@@ -159,9 +160,9 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private Preference mWiFiCallingPref;
     private SwitchPreference mVideoCallingPref;
     private NetworkSelectListPreference mButtonNetworkSelect;
-    private DataUsagePreference mDataUsagePref;
 
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
+    private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
 
     private static final String iface = "rmnet0"; //TODO: this will go away
     private List<SubscriptionInfo> mActiveSubInfos;
@@ -226,15 +227,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         return 0;
     }
 
-    @Override
-    public void onPositiveButtonClick(androidx.fragment.app.DialogFragment dialog) {
-        mTelephonyManager.setDataRoamingEnabled(true);
-        mButtonDataRoam.setChecked(true);
-        MetricsLogger.action(getContext(),
-                getMetricsEventCategory(getPreferenceScreen(), mButtonDataRoam),
-                true);
-    }
-
     /**
      * Invoked on each preference click in this hierarchy, overrides
      * PreferenceActivity's implementation.  Used to make sure we track the
@@ -297,15 +289,11 @@ public class MobileNetworkFragment extends DashboardFragment implements
                     preferredNetworkMode);
             mButtonEnabledNetworks.setValue(Integer.toString(settingsNetworkMode));
             return true;
-        } else if (preference == mButtonDataRoam) {
-            // Do not disable the preference screen if the user clicks Data roaming.
-            return true;
         } else if (preference == mEuiccSettingsPref) {
             Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
             startActivity(intent);
             return true;
-        } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref
-                || preference == mDataUsagePref) {
+        } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref) {
             return false;
         } else {
             // if the button is anything but the simple toggle preference,
@@ -397,9 +385,15 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
+        use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
+        use(CdmaApnPreferenceController.class).init(mSubId);
+        use(CarrierPreferenceController.class).init(mSubId);
+        use(DataUsagePreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
+        mCdmaSubscriptionPreferenceController = use(CdmaSubscriptionPreferenceController.class);
+        mCdmaSubscriptionPreferenceController.init(getPreferenceManager(), mSubId);
     }
 
     @Override
@@ -426,7 +420,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         mCallingCategory = (PreferenceCategory) findPreference(CATEGORY_CALLING_KEY);
         mWiFiCallingPref = findPreference(BUTTON_WIFI_CALLING_KEY);
         mVideoCallingPref = (SwitchPreference) findPreference(BUTTON_VIDEO_CALLING_KEY);
-        mDataUsagePref = (DataUsagePreference) findPreference(BUTTON_DATA_USAGE_KEY);
 
         try {
             Context con = context.createPackageContext("com.android.systemui", 0);
@@ -441,13 +434,10 @@ public class MobileNetworkFragment extends DashboardFragment implements
         //get UI object references
         PreferenceScreen prefSet = getPreferenceScreen();
 
-        mButtonDataRoam = (RestrictedSwitchPreference) prefSet.findPreference(
-                BUTTON_ROAMING_KEY);
         mButtonPreferredNetworkMode = (ListPreference) prefSet.findPreference(
                 BUTTON_PREFERED_NETWORK_MODE);
         mButtonEnabledNetworks = (ListPreference) prefSet.findPreference(
                 BUTTON_ENABLED_NETWORKS_KEY);
-        mButtonDataRoam.setOnPreferenceChangeListener(this);
 
         mLteDataServicePref = prefSet.findPreference(BUTTON_CDMA_LTE_DATA_SERVICE_KEY);
 
@@ -520,11 +510,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // preferences.
         getPreferenceScreen().setEnabled(true);
 
-        // Set UI state in onResume because a user could go home, launch some
-        // app to change this setting's backend, and re-launch this settings app
-        // and the UI state would be inconsistent with actual state
-        mButtonDataRoam.setChecked(mTelephonyManager.isDataRoamingEnabled());
-
         if (getPreferenceScreen().findPreference(BUTTON_PREFERED_NETWORK_MODE) != null
                 || getPreferenceScreen().findPreference(BUTTON_ENABLED_NETWORKS_KEY) != null)  {
             updatePreferredNetworkUIFromDb();
@@ -573,29 +558,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         if (actionBar != null) {
             // android.R.id.home will be triggered in onOptionsItemSelected()
             actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        prefSet.addPreference(mButtonDataRoam);
-        prefSet.addPreference(mDataUsagePref);
-
-        mButtonDataRoam.setEnabled(hasActiveSubscriptions);
-        mDataUsagePref.setEnabled(hasActiveSubscriptions);
-
-        if (hasActiveSubscriptions) {
-            // Customized preferences needs to be initialized with subId.
-            mDataUsagePref.initialize(phoneSubId);
-
-            // Initialize states of mButtonDataRoam.
-            mButtonDataRoam.setChecked(mTelephonyManager.isDataRoamingEnabled());
-            if (mButtonDataRoam.isEnabled()) {
-                if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
-                        UserManager.DISALLOW_DATA_ROAMING, UserHandle.myUserId())) {
-                    mButtonDataRoam.setEnabled(false);
-                } else {
-                    mButtonDataRoam.checkRestrictionAndSetDisabled(
-                            UserManager.DISALLOW_DATA_ROAMING);
-                }
-            }
         }
     }
 
@@ -722,15 +684,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             if (ps != null) {
                 root.removePreference(ps);
             }
-        }
-
-        /**
-         * Listen to extra preference changes that need as Metrics events logging.
-         */
-
-        if (prefSet.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY) != null) {
-            prefSet.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)
-                    .setOnPreferenceChangeListener(this);
         }
 
         // Get the networkMode from Settings.System and displays it
@@ -1046,42 +999,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             boolean enhanced4gMode = !mButton4glte.isChecked();
             mButton4glte.setChecked(enhanced4gMode);
             mImsMgr.setEnhanced4gLteModeSetting(mButton4glte.isChecked());
-        } else if (preference == mButtonDataRoam) {
-            if (DBG) log("onPreferenceTreeClick: preference == mButtonDataRoam.");
-
-            //normally called on the toggle click
-            if (!mButtonDataRoam.isChecked()) {
-                PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(
-                        mSubId);
-                if (carrierConfig != null && carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_DISABLE_CHARGE_INDICATION_BOOL)) {
-                    mTelephonyManager.setDataRoamingEnabled(true);
-                    MetricsLogger.action(getContext(),
-                            getMetricsEventCategory(getPreferenceScreen(), mButtonDataRoam),
-                            true);
-                } else {
-                    // MetricsEvent with no value update.
-                    MetricsLogger.action(getContext(),
-                            getMetricsEventCategory(getPreferenceScreen(), mButtonDataRoam));
-                    // First confirm with a warning dialog about charges
-                    mOkClicked = false;
-                    RoamingDialogFragment
-                            fragment = new RoamingDialogFragment();
-                    Bundle b = new Bundle();
-                    b.putInt(RoamingDialogFragment.SUB_ID_KEY, mSubId);
-                    fragment.setArguments(b);
-                    fragment.setTargetFragment(this, 0 /* requestCode */);
-                    fragment.show(getFragmentManager(), ROAMING_TAG);
-                    // Don't update the toggle unless the confirm button is actually pressed.
-                    return false;
-                }
-            } else {
-                mTelephonyManager.setDataRoamingEnabled(false);
-                MetricsLogger.action(getContext(),
-                        getMetricsEventCategory(getPreferenceScreen(), mButtonDataRoam),
-                        false);
-                return true;
-            }
         } else if (preference == mVideoCallingPref) {
             // If mButton4glte is not checked, mVideoCallingPref should be disabled.
             // So it only makes sense to call phoneMgr.enableVideoCalling if it's checked.
@@ -1093,9 +1010,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 mVideoCallingPref.setEnabled(false);
                 return false;
             }
-        } else if (preference == getPreferenceScreen()
-                .findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)) {
-            return true;
         }
 
         updateBody();
@@ -1431,11 +1345,13 @@ public class MobileNetworkFragment extends DashboardFragment implements
                         EXTRA_EXIT_ECM_RESULT, false);
                 if (isChoiceYes) {
                     // If the phone exits from ECM mode, show the CDMA Options
-                    if (TextUtils.equals(mClickedPreference.getKey(),
+                    final String key = mClickedPreference.getKey();
+                    if (TextUtils.equals(key,
                             mCdmaSystemSelectPreferenceController.getPreferenceKey())) {
                         mCdmaSystemSelectPreferenceController.showDialog();
-                    } else {
-                        mCdmaOptions.showDialog(mClickedPreference);
+                    } else if (TextUtils.equals(key,
+                            mCdmaSubscriptionPreferenceController.getPreferenceKey())) {
+                        mCdmaSubscriptionPreferenceController.showDialog();
                     }
                 } else {
                     // do nothing
@@ -1704,7 +1620,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // For ListPreferences, we log it here without a value, only indicating it's clicked to
         // open the list dialog. When a value is chosen, another MetricsEvent is logged with
         // new value in onPreferenceChange.
-        if (preference == mLteDataServicePref || preference == mDataUsagePref
+        if (preference == mLteDataServicePref
                 || preference == mEuiccSettingsPref
                 || preference == mWiFiCallingPref || preference == mButtonPreferredNetworkMode
                 || preference == mButtonEnabledNetworks
@@ -1743,10 +1659,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         if (preference == null) {
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
-        } else if (preference == mButtonDataRoam) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_DATA_ROAMING_TOGGLE;
-        } else if (preference == mDataUsagePref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_DATA_USAGE;
         } else if (preference == mLteDataServicePref) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_SET_UP_DATA_SERVICE;
         } else if (preference == mButton4glte) {
@@ -1802,8 +1714,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // the open dialog gets dismissed or detached after pause / resume.
         if (mCdmaOptions == null) {
             mCdmaOptions = new CdmaOptions(prefFragment, prefScreen, subId);
-        } else {
-            mCdmaOptions.updateSubscriptionId(subId);
         }
     }
 

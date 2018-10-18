@@ -24,11 +24,11 @@
 
     <Toolbar
         android:id="@+id/action_bar"
+        style="?android:attr/actionBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:navigationContentDescription="@*android:string/action_bar_up_description"
-        android:theme="?android:attr/actionBarTheme"
-        style="?android:attr/actionBarStyle"/>
+        android:theme="?android:attr/actionBarTheme"/>
 
     <FrameLayout
         android:id="@+id/main_content"
