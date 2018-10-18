@@ -73,7 +73,8 @@
 
     <Preference
         android:key="carrier_settings_euicc_key"
-        android:title="@string/carrier_settings_euicc" />
+        android:title="@string/carrier_settings_euicc"
+        settings:controller="com.android.settings.network.telephony.EuiccPreferenceController" />
 
     <PreferenceCategory
         android:key="calling"
