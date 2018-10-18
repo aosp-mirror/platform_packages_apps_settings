@@ -49,7 +49,8 @@
         android:key="enhanced_4g_lte"
         android:title="@string/enhanced_4g_lte_mode_title"
         android:persistent="false"
-        android:summary="@string/enhanced_4g_lte_mode_summary"/>
+        android:summary="@string/enhanced_4g_lte_mode_summary"
+        settings:controller="com.android.settings.network.telephony.Enhanced4gLtePreferenceController"/>
 
     <ListPreference
         android:key="preferred_network_mode_key"
