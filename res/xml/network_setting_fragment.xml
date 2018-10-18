@@ -20,10 +20,11 @@
     android:title="@string/network_settings_title"
     settings:initialExpandedChildrenCount="4">
 
-    <PreferenceScreen
+    <Preference
         android:key="cdma_lte_data_service_key"
-        android:title="@string/cdma_lte_data_service">
-    </PreferenceScreen>
+        android:title="@string/cdma_lte_data_service"
+        settings:controller="com.android.settings.network.telephony.DataServiceSetupPreferenceController">
+    </Preference>
 
     <SwitchPreference
         android:key="mobile_data_enable"

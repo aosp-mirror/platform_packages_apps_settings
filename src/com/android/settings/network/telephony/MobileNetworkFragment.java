@@ -122,7 +122,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
     //UI objects
     private SwitchPreference mButton4glte;
-    private Preference mLteDataServicePref;
     private Preference mEuiccSettingsPref;
     private PreferenceCategory mCallingCategory;
     private Preference mWiFiCallingPref;
@@ -223,23 +222,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                         REQUEST_CODE_EXIT_ECM);
             }
             return true;
-        } else if (preference == mLteDataServicePref) {
-            String tmpl = android.provider.Settings.Global.getString(
-                    getContext().getContentResolver(),
-                    android.provider.Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL);
-            if (!TextUtils.isEmpty(tmpl)) {
-                String imsi = mTelephonyManager.getSubscriberId();
-                if (imsi == null) {
-                    imsi = "";
-                }
-                final String url = TextUtils.isEmpty(tmpl) ? null
-                        : TextUtils.expandTemplate(tmpl, imsi).toString();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-            } else {
-                android.util.Log.e(LOG_TAG, "Missing SETUP_PREPAID_DATA_SERVICE_URL");
-            }
-            return true;
         } else if (preference == mEuiccSettingsPref) {
             Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
             startActivity(intent);
@@ -296,6 +278,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(EnabledNetworkModePreferenceController.class).init(mSubId);
         use(Enhanced4gLtePreferenceController.class).init(mSubId);
+        use(DataServiceSetupPreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
@@ -338,8 +321,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         //get UI object references
         PreferenceScreen prefSet = getPreferenceScreen();
-
-        mLteDataServicePref = prefSet.findPreference(BUTTON_CDMA_LTE_DATA_SERVICE_KEY);
 
         mEuiccSettingsPref = prefSet.findPreference(BUTTON_CARRIER_SETTINGS_EUICC_KEY);
         mEuiccSettingsPref.setOnPreferenceChangeListener(this);
@@ -507,7 +488,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
         if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)) {
-            prefSet.removePreference(mLteDataServicePref);
         } else if (carrierConfig.getBoolean(CarrierConfigManager
                 .KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)
                 && !mTelephonyManager.getServiceState().getRoaming()
@@ -526,8 +506,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
             // in case it is currently something else. That is possible if user
             // changed the setting while roaming and is now back to home network.
             settingsNetworkMode = preferredNetworkMode;
-        } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_WORLD_PHONE_BOOL) == true) {
+        } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             // set the listener for the mButtonPreferredNetworkMode list preference so we can issue
             // change Preferred Network Mode.
 
@@ -538,11 +517,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         final boolean missingDataServiceUrl = TextUtils.isEmpty(
                 android.provider.Settings.Global.getString(activity.getContentResolver(),
                         android.provider.Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL));
-        if (!isLteOnCdma || missingDataServiceUrl) {
-            prefSet.removePreference(mLteDataServicePref);
-        } else {
-            android.util.Log.d(LOG_TAG, "keep ltePref");
-        }
 
         updatePreferredNetworkType();
         updateCallingCategory();
@@ -561,7 +535,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         mOnlyAutoSelectInHomeNW = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL);
-        mLteDataServicePref.setEnabled(hasActiveSubscriptions);
         Preference ps;
         ps = findPreference(BUTTON_CELL_BROADCAST_SETTINGS);
         if (ps != null) {
@@ -907,8 +880,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // For ListPreferences, we log it here without a value, only indicating it's clicked to
         // open the list dialog. When a value is chosen, another MetricsEvent is logged with
         // new value in onPreferenceChange.
-        if (preference == mLteDataServicePref
-                || preference == mEuiccSettingsPref
+        if (preference == mEuiccSettingsPref
                 || preference == mWiFiCallingPref
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)
@@ -943,8 +915,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         if (preference == null) {
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
-        } else if (preference == mLteDataServicePref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_SET_UP_DATA_SERVICE;
         } else if (preference == mEuiccSettingsPref) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_EUICC_SETTING;
         } else if (preference == mWiFiCallingPref) {
