@@ -18,7 +18,7 @@ package com.android.settings.homepage.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.net.Uri;
@@ -26,8 +26,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.slice.Slice;
 
 import com.android.settings.homepage.ContextualCard;
 import com.android.settings.homepage.PersonalSettingsFragment;
@@ -36,11 +38,15 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SliceContextualCardRendererTest {
+
+    @Mock
+    private LiveData<Slice> mSliceLiveData;
 
     private Context mContext;
     private SliceContextualCardRenderer mRenderer;
@@ -94,6 +100,16 @@ public class SliceContextualCardRendererTest {
         mRenderer.bindView(getSliceViewHolder(), buildContextualCard(sliceUri));
 
         assertThat(mRenderer.mSliceLiveDataMap.get(sliceUri).hasObservers()).isTrue();
+    }
+
+    @Test
+    public void bindview_sliceLiveDataShouldRemoveObservers() {
+        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
+        mRenderer.mSliceLiveDataMap.put(sliceUri, mSliceLiveData);
+
+        mRenderer.bindView(getSliceViewHolder(), buildContextualCard(sliceUri));
+
+        verify(mSliceLiveData).removeObservers(mLifecycleOwner);
     }
 
     private RecyclerView.ViewHolder getSliceViewHolder() {
