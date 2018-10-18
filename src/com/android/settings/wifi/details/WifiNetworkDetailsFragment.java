@@ -135,6 +135,10 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
         controllers.add(mWifiDetailPreferenceController);
         controllers.add(new WifiMeteredPreferenceController(context, mAccessPoint.getConfig()));
+        WifiPrivacyPreferenceController preferenceController = new WifiPrivacyPreferenceController(
+                context);
+        preferenceController.setWifiConfiguration(mAccessPoint.getConfig());
+        controllers.add(preferenceController);
 
         return controllers;
     }
