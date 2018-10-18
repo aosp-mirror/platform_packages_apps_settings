@@ -338,14 +338,10 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
 
         boolean show4GForLTE = false;
-        try {
-            final Context con = mContext.createPackageContext(
-                    "com.android.systemui", 0 /* flags */);
-            final int id = con.getResources().getIdentifier("config_show4GForLTE",
-                    "bool" /* default type */, "com.android.systemui" /* default package */);
-            show4GForLTE = con.getResources().getBoolean(id);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "NameNotFoundException for show4GForLTE");
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        if (carrierConfig != null) {
+            show4GForLTE = carrierConfig.getBoolean(
+                    CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
         }
 
         if (show4GForLTE) {
