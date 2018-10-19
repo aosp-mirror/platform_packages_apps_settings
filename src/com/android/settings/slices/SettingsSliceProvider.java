@@ -28,6 +28,7 @@ import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.KeyValueListParser;
 import android.util.Log;
@@ -132,6 +133,8 @@ public class SettingsSliceProvider extends SliceProvider {
 
     final Set<Uri> mRegisteredUris = new ArraySet<>();
 
+    final Map<Uri, SliceBackgroundWorker> mWorkerMap = new ArrayMap<>();
+
     public SettingsSliceProvider() {
         super(READ_SEARCH_INDEXABLES);
     }
@@ -166,6 +169,7 @@ public class SettingsSliceProvider extends SliceProvider {
             if (filter != null) {
                 registerIntentToUri(filter, sliceUri);
             }
+            startBackgroundWorker(sliceable);
             return;
         }
 
@@ -194,6 +198,7 @@ public class SettingsSliceProvider extends SliceProvider {
             SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
             mRegisteredUris.remove(sliceUri);
         }
+        stopBackgroundWorker(sliceUri);
         mSliceDataCache.remove(sliceUri);
     }
 
@@ -350,6 +355,31 @@ public class SettingsSliceProvider extends SliceProvider {
             for (String toPackage : whitelistPackages) {
                 sliceManager.grantSlicePermission(toPackage, descendant);
             }
+        }
+    }
+
+    private void startBackgroundWorker(CustomSliceable sliceable) {
+        final SliceBackgroundWorker worker = sliceable.getBackgroundWorker();
+        if (worker == null) {
+            return;
+        }
+
+        final Uri uri = sliceable.getUri();
+        Log.d(TAG, "Starting background worker for: " + uri);
+        if (mWorkerMap.containsKey(uri)) {
+            return;
+        }
+
+        mWorkerMap.put(uri, worker);
+        worker.onSlicePinned();
+    }
+
+    private void stopBackgroundWorker(Uri uri) {
+        final SliceBackgroundWorker worker = mWorkerMap.get(uri);
+        if (worker != null) {
+            Log.d(TAG, "Stopping background worker for: " + uri);
+            worker.onSliceUnpinned();
+            mWorkerMap.remove(uri);
         }
     }
 

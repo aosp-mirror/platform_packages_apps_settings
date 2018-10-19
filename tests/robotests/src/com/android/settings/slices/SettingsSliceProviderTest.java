@@ -118,7 +118,7 @@ public class SettingsSliceProviderTest {
         mProvider.mSliceWeakDataCache = new HashMap<>();
         mProvider.mSliceDataCache = new HashMap<>();
         mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
-        mProvider.mCustomSliceManager = new CustomSliceManager(mContext);
+        mProvider.mCustomSliceManager = spy(new CustomSliceManager(mContext));
         when(mProvider.getContext()).thenReturn(mContext);
 
         mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
@@ -479,6 +479,44 @@ public class SettingsSliceProviderTest {
                 .build();
 
         mProvider.onSlicePinned(uri);
+    }
+
+    private SliceBackgroundWorker initBackgroundWorker(Uri uri) {
+        final SliceBackgroundWorker worker = spy(new SliceBackgroundWorker(
+                mContext.getContentResolver(), uri) {
+            @Override
+            public void onSlicePinned() {
+            }
+
+            @Override
+            public void onSliceUnpinned() {
+            }
+        });
+        final WifiSlice wifiSlice = spy(new WifiSlice(mContext));
+        when(wifiSlice.getBackgroundWorker()).thenReturn(worker);
+        when(mProvider.mCustomSliceManager.getSliceableFromUri(uri)).thenReturn(wifiSlice);
+        return worker;
+    }
+
+    @Test
+    public void onSlicePinned_backgroundWorker_started() {
+        final Uri uri = WifiSlice.WIFI_URI;
+        final SliceBackgroundWorker worker = initBackgroundWorker(uri);
+
+        mProvider.onSlicePinned(uri);
+
+        verify(worker).onSlicePinned();
+    }
+
+    @Test
+    public void onSlicePinned_backgroundWorker_stopped() {
+        final Uri uri = WifiSlice.WIFI_URI;
+        final SliceBackgroundWorker worker = initBackgroundWorker(uri);
+
+        mProvider.onSlicePinned(uri);
+        mProvider.onSliceUnpinned(uri);
+
+        verify(worker).onSliceUnpinned();
     }
 
     @Test
