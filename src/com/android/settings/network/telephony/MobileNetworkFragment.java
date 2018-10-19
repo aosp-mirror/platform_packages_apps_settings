@@ -26,22 +26,17 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
 import android.os.PersistableBundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
-import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -51,9 +46,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
-import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
@@ -93,8 +86,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private static final String BUTTON_CDMA_SUBSCRIPTION_KEY = "cdma_subscription_key";
     private static final String BUTTON_CARRIER_SETTINGS_EUICC_KEY =
             "carrier_settings_euicc_key";
-    private static final String BUTTON_WIFI_CALLING_KEY = "wifi_calling_key";
-    private static final String BUTTON_VIDEO_CALLING_KEY = "video_calling_key";
     private static final String BUTTON_MOBILE_DATA_ENABLE_KEY = "mobile_data_enable";
     private static final String BUTTON_DATA_USAGE_KEY = "data_usage_summary";
     private static final String BUTTON_ADVANCED_OPTIONS_KEY = "advanced_options";
@@ -120,13 +111,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private CarrierConfigManager mCarrierConfigManager;
     private int mSubId;
 
-    //UI objects
-    private SwitchPreference mButton4glte;
-    private PreferenceCategory mCallingCategory;
-    private Preference mWiFiCallingPref;
-    private SwitchPreference mVideoCallingPref;
-    private NetworkSelectListPreference mButtonNetworkSelect;
-
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
     private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
 
@@ -146,44 +130,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private boolean mIsGlobalCdma;
     private boolean mOnlyAutoSelectInHomeNW;
     private boolean mUnavailable;
-
-    private class PhoneCallStateListener extends PhoneStateListener {
-        /*
-         * Enable/disable the 'Enhanced 4G LTE Mode' when in/out of a call
-         * and depending on TTY mode and TTY support over VoLTE.
-         * @see android.telephony.PhoneStateListener#onCallStateChanged(int,
-         * java.lang.String)
-         */
-        @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-            if (DBG) log("PhoneStateListener.onCallStateChanged: state=" + state);
-
-            updateWiFiCallState();
-            updateVideoCallState();
-            updatePreferredNetworkType();
-        }
-
-        /**
-         * Listen to different subId if it's changed.
-         */
-        protected void updateSubscriptionId(Integer subId) {
-            if (subId.equals(PhoneCallStateListener.this.mSubId)) {
-                return;
-            }
-
-            PhoneCallStateListener.this.mSubId = subId;
-
-            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
-
-            // Now, listen to new subId if it's valid.
-            if (SubscriptionManager.isValidSubscriptionId(subId)) {
-                mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
-            }
-        }
-    }
-
-    private final PhoneCallStateListener
-            mPhoneStateListener = new PhoneCallStateListener();
 
     @Override
     public int getMetricsCategory() {
@@ -221,11 +167,9 @@ public class MobileNetworkFragment extends DashboardFragment implements
                         REQUEST_CODE_EXIT_ECM);
             }
             return true;
-        } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref) {
-            return false;
         }
 
-        return true;
+        return false;
     }
 
     private final SubscriptionManager.OnSubscriptionsChangedListener
@@ -255,8 +199,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                     SubscriptionManager.getPhoneId(mSubId));
             mTelephonyManager = new TelephonyManager(getContext(), mSubId);
         }
-
-        mPhoneStateListener.updateSubscriptionId(mSubId);
     }
 
     @Override
@@ -272,14 +214,19 @@ public class MobileNetworkFragment extends DashboardFragment implements
         use(DataUsagePreferenceController.class).init(mSubId);
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(EnabledNetworkModePreferenceController.class).init(mSubId);
-        use(Enhanced4gLtePreferenceController.class).init(mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
         use(EuiccPreferenceController.class).init(mSubId);
+        use(WifiCallingPreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
         mCdmaSubscriptionPreferenceController = use(CdmaSubscriptionPreferenceController.class);
         mCdmaSubscriptionPreferenceController.init(getPreferenceManager(), mSubId);
+
+        final VideoCallingPreferenceController videoCallingPreferenceController =
+                use(VideoCallingPreferenceController.class).init(mSubId);
+        use(Enhanced4gLtePreferenceController.class).init(mSubId)
+                .addListener(videoCallingPreferenceController);
     }
 
     @Override
@@ -298,12 +245,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         mTelephonyManager = (TelephonyManager) context.getSystemService(
                 Context.TELEPHONY_SERVICE);
         mCarrierConfigManager = new CarrierConfigManager(getContext());
-
-        mButton4glte = (SwitchPreference)findPreference(BUTTON_4G_LTE_KEY);
-
-        mCallingCategory = (PreferenceCategory) findPreference(CATEGORY_CALLING_KEY);
-        mWiFiCallingPref = findPreference(BUTTON_WIFI_CALLING_KEY);
-        mVideoCallingPref = (SwitchPreference) findPreference(BUTTON_VIDEO_CALLING_KEY);
 
         try {
             Context con = context.createPackageContext("com.android.systemui", 0);
@@ -377,11 +318,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // upon resumption from the sub-activity, make sure we re-enable the
         // preferences.
         getPreferenceScreen().setEnabled(true);
-
-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-
-        // Video calling and WiFi calling state might have changed.
-        updateCallingCategory();
 
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
 
@@ -492,9 +428,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 android.provider.Settings.Global.getString(activity.getContentResolver(),
                         android.provider.Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL));
 
-        updatePreferredNetworkType();
-        updateCallingCategory();
-
         // Enable link to CMAS app settings depending on the value in config.xml.
         final boolean isCellBroadcastAppLinkEnabled = activity.getResources().getBoolean(
                 com.android.internal.R.bool.config_cellBroadcastAppLinks);
@@ -555,8 +488,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         super.onPause();
         if (DBG) log("onPause:+");
 
-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
-
         mSubscriptionManager
                 .removeOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
 
@@ -576,18 +507,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
      */
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         sendMetricsEventPreferenceChanged(getPreferenceScreen(), preference, objValue);
-        if (preference == mVideoCallingPref) {
-            // If mButton4glte is not checked, mVideoCallingPref should be disabled.
-            // So it only makes sense to call phoneMgr.enableVideoCalling if it's checked.
-            if (mButton4glte.isChecked()) {
-                mImsMgr.setVtSetting((boolean) objValue);
-                return true;
-            } else {
-                loge("mVideoCallingPref should be disabled if mButton4glte is not checked.");
-                mVideoCallingPref.setEnabled(false);
-                return false;
-            }
-        }
 
         updateBody();
         // always let the preference setting proceed.
@@ -626,111 +545,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
             default:
                 break;
-        }
-    }
-
-    private void updateWiFiCallState() {
-        if (mWiFiCallingPref == null || mCallingCategory == null) {
-            return;
-        }
-
-        // Removes the preference if the wifi calling is disabled.
-        if (!MobileNetworkUtils.isWifiCallingEnabled(getContext(),
-                SubscriptionManager.getPhoneId(mSubId))) {
-            mCallingCategory.removePreference(mWiFiCallingPref);
-            return;
-        }
-
-        final PhoneAccountHandle simCallManager =
-                TelecomManager.from(getContext()).getSimCallManager();
-
-        if (simCallManager != null) {
-            Intent intent = buildPhoneAccountConfigureIntent(getContext(), simCallManager);
-            PackageManager pm = getContext().getPackageManager();
-            List<ResolveInfo> resolutions = pm.queryIntentActivities(intent, 0);
-            mWiFiCallingPref.setTitle(resolutions.get(0).loadLabel(pm));
-            mWiFiCallingPref.setSummary(null);
-            mWiFiCallingPref.setIntent(intent);
-        } else {
-            int resId = com.android.internal.R.string.wifi_calling_off_summary;
-            if (mImsMgr.isWfcEnabledByUser()) {
-                boolean isRoaming = mTelephonyManager.isNetworkRoaming();
-                int wfcMode = mImsMgr.getWfcMode(isRoaming);
-
-                switch (wfcMode) {
-                    case ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY:
-                        resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
-                        break;
-                    case ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED:
-                        resId = com.android.internal.R.string
-                                .wfc_mode_cellular_preferred_summary;
-                        break;
-                    case ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED:
-                        resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
-                        break;
-                    default:
-                        if (DBG) log("Unexpected WFC mode value: " + wfcMode);
-                }
-            }
-            mWiFiCallingPref.setSummary(resId);
-        }
-
-        mCallingCategory.addPreference(mWiFiCallingPref);
-        mWiFiCallingPref.setEnabled(mTelephonyManager.getCallState(mSubId)
-                == TelephonyManager.CALL_STATE_IDLE && hasActiveSubscriptions());
-    }
-
-    private void updateVideoCallState() {
-        if (mVideoCallingPref == null || mCallingCategory == null) {
-            return;
-        }
-
-        PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-
-        if (mImsMgr != null
-                && mImsMgr.isVtEnabledByPlatform()
-                && mImsMgr.isVtProvisionedOnDevice()
-                && MobileNetworkUtils.isImsServiceStateReady(mImsMgr)
-                && (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS)
-                || mTelephonyManager.isDataEnabled())) {
-            mCallingCategory.addPreference(mVideoCallingPref);
-            if (!mButton4glte.isChecked()) {
-                mVideoCallingPref.setEnabled(false);
-                mVideoCallingPref.setChecked(false);
-            } else {
-                mVideoCallingPref.setEnabled(mTelephonyManager.getCallState(mSubId)
-                        == TelephonyManager.CALL_STATE_IDLE && hasActiveSubscriptions());
-                mVideoCallingPref.setChecked(mImsMgr.isVtEnabledByUser());
-                mVideoCallingPref.setOnPreferenceChangeListener(this);
-            }
-        } else {
-            mCallingCategory.removePreference(mVideoCallingPref);
-        }
-    }
-
-    private void updatePreferredNetworkType() {
-        boolean enabled = mTelephonyManager.getCallState(
-                mSubId) == TelephonyManager.CALL_STATE_IDLE
-                && hasActiveSubscriptions();
-        Log.i(LOG_TAG, "updatePreferredNetworkType: " + enabled);
-    }
-
-    private void updateCallingCategory() {
-        if (mCallingCategory == null) {
-            return;
-        }
-
-        updateWiFiCallState();
-        updateVideoCallState();
-
-        // If all items in calling category is removed, we remove it from
-        // the screen. Otherwise we'll see title of the category but nothing
-        // is in there.
-        if (mCallingCategory.getPreferenceCount() == 0) {
-            getPreferenceScreen().removePreference(mCallingCategory);
-        } else {
-            getPreferenceScreen().addPreference(mCallingCategory);
         }
     }
 
@@ -854,8 +668,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // For ListPreferences, we log it here without a value, only indicating it's clicked to
         // open the list dialog. When a value is chosen, another MetricsEvent is logged with
         // new value in onPreferenceChange.
-        if (preference == mWiFiCallingPref
-                || preference == preferenceScreen.findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
+        if (preference == preferenceScreen.findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)
                 || preference == preferenceScreen.findPreference(BUTTON_GSM_APN_EXPAND_KEY)
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_APN_EXPAND_KEY)
@@ -872,9 +685,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         }
 
         // MetricsEvent logging with new value, for SwitchPreferences and ListPreferences.
-        if (preference == mVideoCallingPref) {
-            MetricsLogger.action(getContext(), category, (Boolean) newValue);
-        } else if (preference == preferenceScreen
+        if (preference == preferenceScreen
                 .findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || preference == preferenceScreen
                 .findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)) {
@@ -888,10 +699,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         if (preference == null) {
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
-        } else if (preference == mWiFiCallingPref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_WIFI_CALLING;
-        } else if (preference == mVideoCallingPref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_VIDEO_CALLING_TOGGLE;
         } else if (preference == preferenceScreen
                 .findPreference(NetworkOperators.BUTTON_AUTO_SELECT_KEY)) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_AUTO_SELECT_NETWORK_TOGGLE;
@@ -995,31 +802,4 @@ public class MobileNetworkFragment extends DashboardFragment implements
                     return result;
                 }
             };
-
-    private static final class SetPreferredNetworkAsyncTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final TelephonyManager mTelephonyManager;
-        private final int mSubId;
-        private final int mNetworkType;
-        private final Message mCallback;
-
-        SetPreferredNetworkAsyncTask(
-                TelephonyManager tm, int subId, int networkType, Message callback) {
-            mTelephonyManager = tm;
-            mSubId = subId;
-            mNetworkType = networkType;
-            mCallback = callback;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            return mTelephonyManager.setPreferredNetworkType(mSubId, mNetworkType);
-        }
-
-        @Override
-        protected void onPostExecute(Boolean isSuccessed) {
-            mCallback.obj = isSuccessed;
-            mCallback.sendToTarget();
-        }
-    }
 }
