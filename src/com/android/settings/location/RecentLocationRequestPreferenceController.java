@@ -16,12 +16,10 @@ package com.android.settings.location;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -29,7 +27,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
-
 import java.util.List;
 
 public class RecentLocationRequestPreferenceController extends LocationBasePreferenceController {

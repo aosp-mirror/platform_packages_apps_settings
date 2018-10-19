@@ -17,12 +17,11 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 

@@ -30,11 +30,10 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
+import androidx.preference.Preference;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.preference.Preference;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto;

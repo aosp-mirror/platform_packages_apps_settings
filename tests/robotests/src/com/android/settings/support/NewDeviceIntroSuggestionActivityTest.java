@@ -16,17 +16,14 @@
 
 package com.android.settings.support;
 
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PERMANENT_DISMISS_THRESHOLD;
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PREF_KEY_SUGGGESTION_COMPLETE;
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PERMANENT_DISMISS_THRESHOLD;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PREF_KEY_SUGGGESTION_COMPLETE;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
+
 import static com.android.settings.support.NewDeviceIntroSuggestionActivity.TIPS_PACKAGE_NAME;
 import static com.android.settings.support.NewDeviceIntroSuggestionActivity.isSuggestionComplete;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 

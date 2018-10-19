@@ -22,7 +22,6 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 

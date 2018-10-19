@@ -1,10 +1,8 @@
 package com.android.settings.testutils.shadow;
 
 import android.content.Context;
-
 import com.android.settings.bluetooth.RestrictionUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

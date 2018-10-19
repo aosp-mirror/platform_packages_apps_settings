@@ -20,7 +20,6 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED
 
 import android.content.Context;
 import android.os.UserHandle;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

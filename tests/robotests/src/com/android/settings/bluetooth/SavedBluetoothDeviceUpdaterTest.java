@@ -22,8 +22,8 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;

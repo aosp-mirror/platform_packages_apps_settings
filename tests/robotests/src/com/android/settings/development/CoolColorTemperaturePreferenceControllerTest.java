@@ -16,19 +16,15 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.CoolColorTemperaturePreferenceController
-        .COLOR_TEMPERATURE_PROPERTY;
-
+import static com.android.settings.development.CoolColorTemperaturePreferenceController.COLOR_TEMPERATURE_PROPERTY;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.SystemProperties;
-
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

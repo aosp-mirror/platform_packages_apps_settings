@@ -32,9 +32,9 @@ import android.os.UserManager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtils;
 
 /**

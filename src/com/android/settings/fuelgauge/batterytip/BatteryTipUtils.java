@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
-
 import androidx.annotation.NonNull;
 
 import com.android.internal.util.CollectionUtils;

@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 
 import android.os.Build;

@@ -18,7 +18,6 @@
 package com.android.settings.testutils.shadow;
 
 import android.os.AsyncTask;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowAsyncTask;

@@ -17,9 +17,7 @@
 package com.android.settings.fingerprint;
 
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;

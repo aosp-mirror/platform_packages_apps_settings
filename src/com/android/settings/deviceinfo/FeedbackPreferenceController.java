@@ -18,9 +18,8 @@ package com.android.settings.deviceinfo;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
-
 import androidx.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;

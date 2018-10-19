@@ -20,7 +20,6 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.provider.Settings;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

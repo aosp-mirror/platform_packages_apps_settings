@@ -18,20 +18,21 @@ package com.android.settings.slices;
 
 import static com.android.settings.slices.SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+
+import android.content.Context;
 import android.os.Binder;
 import android.util.Pair;
-
-import androidx.slice.Slice;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.slice.Slice;
 
 /**
  * Class used to map a {@link Uri} from {@link SettingsSliceProvider} to a Slice.

@@ -20,11 +20,10 @@ import android.content.Context;
 import android.content.pm.IShortcutService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
-
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

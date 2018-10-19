@@ -15,6 +15,7 @@
  */
 package com.android.settings.applications;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;

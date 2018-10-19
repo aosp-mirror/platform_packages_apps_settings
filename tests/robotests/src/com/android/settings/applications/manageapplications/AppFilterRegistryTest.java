@@ -16,43 +16,26 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_ALL;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_INSTALL_SOURCES;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_POWER_WHITELIST;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_INSTALL_SOURCES;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_WHITELIST;
+
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_RECENT;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_USAGE_ACCESS;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_WITH_OVERLAY;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_WRITE_SETTINGS;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_GAMES;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_HIGH_POWER;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_MAIN;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_MANAGE_SOURCES;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_MOVIES;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_NOTIFICATION;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_OVERLAY;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_PHOTOGRAPHY;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_STORAGE;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_USAGE_ACCESS;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_WRITE_SETTINGS;
-
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_USAGE_ACCESS;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WITH_OVERLAY;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WRITE_SETTINGS;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_GAMES;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_HIGH_POWER;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MANAGE_SOURCES;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MOVIES;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_OVERLAY;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_PHOTOGRAPHY;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_STORAGE;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_USAGE_ACCESS;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WRITE_SETTINGS;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

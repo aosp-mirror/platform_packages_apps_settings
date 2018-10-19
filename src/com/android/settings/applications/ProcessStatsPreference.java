@@ -20,8 +20,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.util.Log;
 
+import android.util.Log;
 import com.android.settings.widget.AppPreference;
 
 public class ProcessStatsPreference extends AppPreference {

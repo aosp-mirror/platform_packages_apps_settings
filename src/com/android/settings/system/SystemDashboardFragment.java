@@ -18,7 +18,6 @@ package com.android.settings.system;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;

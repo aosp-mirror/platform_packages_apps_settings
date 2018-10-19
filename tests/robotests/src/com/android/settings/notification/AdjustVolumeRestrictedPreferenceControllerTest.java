@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doCallRealMethod;
@@ -28,7 +27,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.UserManager;
-
 import androidx.preference.Preference;
 
 import com.android.settings.accounts.AccountRestrictionHelper;

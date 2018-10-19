@@ -17,7 +17,6 @@
 package com.android.settings.dashboard.suggestions;
 
 import static android.content.Intent.EXTRA_COMPONENT_NAME;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 

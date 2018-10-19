@@ -23,12 +23,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import androidx.preference.Preference;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.preference.Preference;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;

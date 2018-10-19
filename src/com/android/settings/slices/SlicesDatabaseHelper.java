@@ -17,12 +17,12 @@
 package com.android.settings.slices;
 
 import android.content.Context;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
+import android.util.Log;
 
 import java.util.Locale;
 

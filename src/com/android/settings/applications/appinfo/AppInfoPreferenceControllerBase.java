@@ -18,10 +18,9 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;

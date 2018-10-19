@@ -20,9 +20,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
+import android.util.Log;
 
 public class SuppressorHelper {
     private static final String TAG = "SuppressorHelper";

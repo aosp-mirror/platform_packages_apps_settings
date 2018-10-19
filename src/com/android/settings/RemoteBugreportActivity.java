@@ -24,6 +24,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
+import android.widget.LinearLayout;
+
+import com.android.settings.R;
 
 /**
  * UI for the remote bugreport dialog. Shows one of 3 possible dialogs:

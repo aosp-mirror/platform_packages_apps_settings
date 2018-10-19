@@ -16,11 +16,6 @@
 
 package com.android.settings;
 
-import static android.content.pm.PackageManager.GET_ACTIVITIES;
-import static android.content.pm.PackageManager.GET_META_DATA;
-import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
-import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
-
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,14 +27,18 @@ import android.content.pm.ShortcutManager;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
-
-import com.android.settings.shortcut.CreateShortcut;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.pm.PackageManager.GET_ACTIVITIES;
+import static android.content.pm.PackageManager.GET_META_DATA;
+import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
+import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
+
+import com.android.settings.shortcut.CreateShortcut;
 
 /**
  * Listens to {@link Intent.ACTION_PRE_BOOT_COMPLETED} and {@link Intent.ACTION_USER_INITIALIZED}

@@ -5,7 +5,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.Application;
 import android.content.ComponentName;
 import android.provider.Settings.Secure;
-
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
@@ -16,8 +15,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {

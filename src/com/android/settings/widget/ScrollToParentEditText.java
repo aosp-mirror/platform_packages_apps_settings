@@ -21,6 +21,9 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewParent;
+import android.widget.EditText;
+
+import com.android.settings.widget.ImeAwareEditText;
 
 /**
  * An EditText that, instead of scrolling to itself when focused, will request scrolling to its

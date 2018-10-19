@@ -18,10 +18,9 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import android.text.TextUtils;
-
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;

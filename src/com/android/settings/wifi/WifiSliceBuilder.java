@@ -19,6 +19,8 @@ package com.android.settings.wifi;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
+import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
+
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
@@ -30,12 +32,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
 import android.provider.SettingsSlicesContract;
-import android.text.TextUtils;
-
-import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -43,6 +39,14 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.slices.SliceBroadcastReceiver;
+import com.android.settings.slices.SliceBuilderUtils;
+
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
+
+import androidx.core.graphics.drawable.IconCompat;
+import android.text.TextUtils;
 
 /**
  * Utility class to build a Wifi Slice, and handle all associated actions.

@@ -23,12 +23,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.provider.Settings;
+import androidx.core.app.NotificationCompat;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-
-import androidx.core.app.NotificationCompat;
 
 import com.android.internal.telephony.IccCardConstants;
 import com.android.settings.R;

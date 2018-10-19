@@ -17,7 +17,6 @@ package com.android.settings.search;
 import static android.app.slice.Slice.HINT_LARGE;
 import static android.app.slice.Slice.HINT_TITLE;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
-
 import static com.android.settings.search.DeviceIndexFeatureProvider.createDeepLink;
 
 import android.app.job.JobParameters;
@@ -29,14 +28,6 @@ import android.net.Uri.Builder;
 import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
-import androidx.slice.Slice;
-import androidx.slice.SliceItem;
-import androidx.slice.SliceMetadata;
-import androidx.slice.SliceViewManager;
-import androidx.slice.SliceViewManager.SliceCallback;
-import androidx.slice.core.SliceQuery;
-import androidx.slice.widget.ListContent;
-
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SettingsSliceProvider;
@@ -44,6 +35,14 @@ import com.android.settings.slices.SliceDeepLinkSpringBoard;
 
 import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
+
+import androidx.slice.Slice;
+import androidx.slice.SliceItem;
+import androidx.slice.SliceViewManager;
+import androidx.slice.SliceViewManager.SliceCallback;
+import androidx.slice.SliceMetadata;
+import androidx.slice.core.SliceQuery;
+import androidx.slice.widget.ListContent;
 
 public class DeviceIndexUpdateJobService extends JobService {
 

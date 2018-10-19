@@ -26,7 +26,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.media.RingtoneManager;
-
 import androidx.preference.Preference;
 
 import com.android.settings.R;

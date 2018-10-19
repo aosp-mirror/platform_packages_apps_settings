@@ -21,10 +21,9 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.util.IconDrawableFactory;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
+import android.util.IconDrawableFactory;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;

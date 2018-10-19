@@ -18,11 +18,10 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import android.text.TextUtils;
-import android.view.ThreadedRenderer;
-
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import android.text.TextUtils;
+import android.view.ThreadedRenderer;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

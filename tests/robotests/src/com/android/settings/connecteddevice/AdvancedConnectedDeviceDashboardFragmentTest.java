@@ -16,7 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
-
+;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -33,8 +33,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
-
-;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothPan.class, ShadowUserManager.class,

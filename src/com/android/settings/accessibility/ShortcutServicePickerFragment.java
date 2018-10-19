@@ -16,11 +16,8 @@
 package com.android.settings.accessibility;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-
-import static com.android.internal.accessibility.AccessibilityShortcutController
-        .COLOR_INVERSION_COMPONENT_NAME;
-import static com.android.internal.accessibility.AccessibilityShortcutController
-        .DALTONIZER_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
@@ -42,9 +39,8 @@ import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
-import com.android.internal.accessibility.AccessibilityShortcutController
-        .ToggleableFrameworkFeatureInfo;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.accessibility.AccessibilityShortcutController.ToggleableFrameworkFeatureInfo;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.widget.RadioButtonPickerFragment;

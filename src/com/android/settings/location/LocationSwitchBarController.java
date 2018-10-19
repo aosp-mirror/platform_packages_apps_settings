@@ -16,7 +16,6 @@ package com.android.settings.location;
 import android.content.Context;
 import android.os.UserHandle;
 import android.widget.Switch;
-
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;

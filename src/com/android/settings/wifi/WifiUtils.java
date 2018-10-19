@@ -28,8 +28,6 @@ import android.text.TextUtils;
 
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-import java.nio.charset.StandardCharsets;
-
 public class WifiUtils {
 
     private static final int SSID_ASCII_MIN_LENGTH = 1;
@@ -42,7 +40,7 @@ public class WifiUtils {
         if (TextUtils.isEmpty(ssid)) {
             return false;
         }
-        return ssid.getBytes(StandardCharsets.UTF_8).length > SSID_ASCII_MAX_LENGTH;
+        return ssid.length() > SSID_ASCII_MAX_LENGTH;
     }
 
     public static boolean isSSIDTooShort(String ssid) {
@@ -63,9 +61,8 @@ public class WifiUtils {
 
     /**
      * This method is a stripped and negated version of WifiConfigStore.canModifyNetwork.
-     *
      * @param context Context of caller
-     * @param config  The WiFi config.
+     * @param config The WiFi config.
      * @return true if Settings cannot modify the config due to lockDown.
      */
     public static boolean isNetworkLockedDown(Context context, WifiConfiguration config) {

@@ -27,11 +27,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -40,12 +40,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import org.robolectric.shadow.api.Shadow;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)

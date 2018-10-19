@@ -24,8 +24,8 @@ import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnPause;
 
 /**
  * Receiver to receive usb update and use {@link UsbConnectionListener} to invoke callback

@@ -17,9 +17,7 @@
 package com.android.settings.security;
 
 import static com.android.settings.security.EncryptionAndCredential.SEARCH_INDEX_DATA_PROVIDER;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;

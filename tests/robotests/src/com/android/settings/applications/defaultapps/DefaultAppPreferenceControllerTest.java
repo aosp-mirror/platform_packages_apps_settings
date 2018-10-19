@@ -18,14 +18,12 @@ package com.android.settings.applications.defaultapps;
 
 
 import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.UserManager;
-
 import androidx.preference.Preference;
 
 import com.android.settings.R;

@@ -18,15 +18,19 @@ package com.android.settings.utils;
 import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Slog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 

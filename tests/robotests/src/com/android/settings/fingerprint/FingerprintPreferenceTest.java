@@ -17,15 +17,13 @@
 package com.android.settings.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import androidx.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.fingerprint.FingerprintSettings.FingerprintPreference;

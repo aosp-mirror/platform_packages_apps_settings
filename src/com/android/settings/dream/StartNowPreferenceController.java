@@ -17,11 +17,9 @@
 package com.android.settings.dream;
 
 import android.content.Context;
-import android.widget.Button;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-
+import android.widget.Button;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;

@@ -17,7 +17,6 @@
 package com.android.settings.wifi.p2p;
 
 import android.content.Context;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;

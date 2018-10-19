@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.app.IActivityManager;
 import android.content.Context;
 import android.os.RemoteException;
-
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 

@@ -16,11 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.HdcpCheckingPreferenceController
-        .HDCP_CHECKING_PROPERTY;
-
+import static com.android.settings.development.HdcpCheckingPreferenceController.HDCP_CHECKING_PROPERTY;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -28,7 +25,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.SystemProperties;
-
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 

@@ -25,7 +25,6 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
-
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -148,8 +147,10 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
     }
 
     private boolean getLockscreenNotificationsEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
+        final UserInfo parentUser = mUm.getProfileParent(UserHandle.myUserId());
+        final int primaryUserId = parentUser != null ? parentUser.id : UserHandle.myUserId();
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, primaryUserId) != 0;
     }
 
     private boolean getLockscreenAllowPrivateNotifications() {

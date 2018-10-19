@@ -17,9 +17,7 @@
 package com.android.settings.display;
 
 import static android.content.Context.POWER_SERVICE;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.reset;
@@ -31,7 +29,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings.System;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

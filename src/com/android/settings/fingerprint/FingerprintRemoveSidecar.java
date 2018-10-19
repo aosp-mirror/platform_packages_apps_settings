@@ -17,17 +17,16 @@
 package com.android.settings.fingerprint;
 
 import android.annotation.Nullable;
+import android.content.Context;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.util.Log;
-
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
-
-import java.util.LinkedList;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import android.os.UserHandle;
 import java.util.Queue;
+import java.util.LinkedList;
+import android.util.Log;
 
 /**
  * Sidecar fragment to handle the state around fingerprint removal.

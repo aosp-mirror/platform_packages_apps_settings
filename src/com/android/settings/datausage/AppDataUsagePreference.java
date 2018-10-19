@@ -15,10 +15,9 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
+import androidx.preference.PreferenceViewHolder;
 import android.view.View;
 import android.widget.ProgressBar;
-
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.AppItem;

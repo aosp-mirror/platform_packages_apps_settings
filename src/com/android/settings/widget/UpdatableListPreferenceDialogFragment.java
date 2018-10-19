@@ -18,12 +18,10 @@ package com.android.settings.widget;
 import android.app.AlertDialog;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
 import androidx.preference.PreferenceDialogFragment;
-
+import androidx.preference.ListPreference;
+import android.widget.ArrayAdapter;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;

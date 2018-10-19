@@ -17,8 +17,8 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.PackageManager;
 import android.os.UserHandle;
 
 import com.android.settingslib.wrapper.PackageManagerWrapper;

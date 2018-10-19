@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
 import android.hardware.usb.UsbPort;
-
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 

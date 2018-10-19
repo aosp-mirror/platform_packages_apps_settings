@@ -16,12 +16,9 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ID;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .EXTRA_WORK_ONLY;
+import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ONLY;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -39,11 +36,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
+import androidx.preference.PreferenceScreen;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

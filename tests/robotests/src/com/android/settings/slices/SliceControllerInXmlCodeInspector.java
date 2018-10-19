@@ -17,7 +17,6 @@
 package com.android.settings.slices;
 
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
-
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 

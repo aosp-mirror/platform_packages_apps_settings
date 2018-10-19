@@ -18,12 +18,11 @@ package com.android.settings;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import androidx.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
@@ -31,8 +30,8 @@ import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResourcesImpl.class)

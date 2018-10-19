@@ -21,10 +21,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
-
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

@@ -21,16 +21,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.RecurrenceRule;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;

@@ -22,10 +22,9 @@ import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.format.Formatter;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;

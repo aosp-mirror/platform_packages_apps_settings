@@ -33,10 +33,10 @@ import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
+import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;

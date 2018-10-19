@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.any;
@@ -42,6 +41,7 @@ import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.R;
+import com.android.settingslib.utils.PowerUtil;
 
 import org.junit.Before;
 import org.junit.Test;

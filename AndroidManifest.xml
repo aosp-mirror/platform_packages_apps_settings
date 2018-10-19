@@ -463,6 +463,20 @@
                 android:value="com.android.settings.TetherSettings" />
         </activity>
 
+        <activity
+            android:name="Settings$WifiTetherSettingsActivity"
+            android:label="@string/wifi_hotspot_checkbox_text"
+            android:icon="@drawable/ic_wifi_tethering"
+            android:parentActivityName="Settings">
+            <intent-filter>
+                <action android:name="com.android.settings.WIFI_TETHER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.tether.WifiTetherSettings" />
+        </activity>
+
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".TetherSettings"
                   android:label="@string/tether_settings_title_all"
@@ -2620,6 +2634,7 @@
             android:name="Settings$ConfigureNotificationSettingsActivity"
             android:label="@string/configure_notification_settings"
             android:exported="true"
+            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_SETTINGS" />
@@ -2949,6 +2964,7 @@
         <activity
             android:name="Settings$AppDrawOverlaySettingsActivity"
             android:label="@string/draw_overlay"
+            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />

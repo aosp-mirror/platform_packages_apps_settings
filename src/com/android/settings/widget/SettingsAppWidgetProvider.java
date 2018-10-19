@@ -16,6 +16,7 @@
 
 package com.android.settings.widget;
 
+import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -32,10 +33,14 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.IPowerManager;
 import android.os.PowerManager;
 import android.os.Process;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.widget.RemoteViews;
 

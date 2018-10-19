@@ -27,6 +27,8 @@ import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
 import android.text.format.Time;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -35,9 +37,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
-
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

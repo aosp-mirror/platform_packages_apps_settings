@@ -4,7 +4,6 @@ import android.content.Context;
 import android.telephony.SubscriptionManager;
 
 import com.android.settings.datausage.DataUsageUtils;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

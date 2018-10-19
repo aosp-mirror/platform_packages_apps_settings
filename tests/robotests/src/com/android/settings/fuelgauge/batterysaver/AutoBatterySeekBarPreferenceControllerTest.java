@@ -17,10 +17,9 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.provider.Settings;
-
-import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;

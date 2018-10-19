@@ -22,7 +22,6 @@ import android.nfc.NfcAdapter;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

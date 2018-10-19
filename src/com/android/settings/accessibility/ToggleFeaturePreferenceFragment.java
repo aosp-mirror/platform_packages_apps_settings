@@ -19,10 +19,9 @@ package com.android.settings.accessibility;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.view.View;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;

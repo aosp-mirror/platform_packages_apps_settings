@@ -24,7 +24,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 

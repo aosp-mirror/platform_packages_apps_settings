@@ -17,17 +17,14 @@
 package com.android.settings.development.featureflags;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
-
 import androidx.lifecycle.LifecycleOwner;
+import android.content.Context;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

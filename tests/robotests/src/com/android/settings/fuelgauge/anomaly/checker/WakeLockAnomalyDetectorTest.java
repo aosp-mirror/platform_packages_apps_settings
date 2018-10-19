@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.anomaly.checker;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;

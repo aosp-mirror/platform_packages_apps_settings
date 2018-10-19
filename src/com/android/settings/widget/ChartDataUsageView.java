@@ -16,8 +16,6 @@
 
 package com.android.settings.widget;
 
-import static android.net.TrafficStats.MB_IN_BYTES;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.NetworkPolicy;
@@ -43,6 +41,8 @@ import com.android.settings.widget.ChartSweepView.OnSweepListener;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Objects;
+
+import static android.net.TrafficStats.MB_IN_BYTES;
 
 /**
  * Specific {@link ChartView} that displays {@link ChartNetworkSeriesView} along

@@ -20,13 +20,12 @@ import android.annotation.XmlRes;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableResource;
+import androidx.annotation.CallSuper;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
-
-import androidx.annotation.CallSuper;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;

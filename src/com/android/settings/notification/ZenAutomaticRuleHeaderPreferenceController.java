@@ -25,11 +25,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.service.notification.ZenModeConfig;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.Preference;
 import android.util.Slog;
 import android.view.View;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

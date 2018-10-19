@@ -22,7 +22,6 @@ import static org.mockito.Mockito.doReturn;
 
 import android.content.Context;
 import android.provider.Settings;
-
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;

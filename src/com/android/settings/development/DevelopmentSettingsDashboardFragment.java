@@ -28,14 +28,13 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import androidx.annotation.VisibleForTesting;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

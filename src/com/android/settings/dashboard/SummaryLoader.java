@@ -25,12 +25,11 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;

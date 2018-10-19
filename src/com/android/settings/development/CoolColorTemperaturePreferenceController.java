@@ -18,11 +18,10 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import android.widget.Toast;
-
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

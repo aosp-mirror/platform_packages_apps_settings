@@ -17,15 +17,12 @@
 package com.android.settings.dream;
 
 import android.content.Context;
-
 import androidx.preference.Preference;
-
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
-
 import java.util.Optional;
 
 public class CurrentDreamPreferenceController extends AbstractPreferenceController implements

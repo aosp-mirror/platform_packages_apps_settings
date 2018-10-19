@@ -22,6 +22,7 @@ import android.content.Context;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.applications.AppStateAppOpsBridge;
+import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;

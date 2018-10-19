@@ -18,7 +18,6 @@ package com.android.settings.security.trustagent;
 
 import android.content.Context;
 import android.os.UserHandle;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

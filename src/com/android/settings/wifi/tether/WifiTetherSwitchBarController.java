@@ -27,7 +27,6 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.datausage.DataSaverBackend;

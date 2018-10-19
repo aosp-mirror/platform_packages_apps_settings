@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -29,12 +28,11 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.telephony.TelephonyManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;

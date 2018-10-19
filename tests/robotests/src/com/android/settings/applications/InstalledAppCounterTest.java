@@ -17,9 +17,7 @@
 package com.android.settings.applications;
 
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.argThat;

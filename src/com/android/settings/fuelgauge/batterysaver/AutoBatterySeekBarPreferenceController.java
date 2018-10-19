@@ -22,12 +22,11 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.util.Log;
-import android.view.accessibility.AccessibilityNodeInfo;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.util.Log;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

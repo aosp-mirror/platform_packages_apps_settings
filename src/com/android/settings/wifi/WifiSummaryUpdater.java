@@ -24,9 +24,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkScoreManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.text.TextUtils;
-
 import androidx.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;

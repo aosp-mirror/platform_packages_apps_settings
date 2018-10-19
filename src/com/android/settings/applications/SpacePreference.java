@@ -17,13 +17,11 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.util.AttributeSet;
-import android.view.ViewGroup.LayoutParams;
-
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
-
+import android.util.AttributeSet;
+import android.view.ViewGroup.LayoutParams;
 import com.android.settings.R;
 
 /**

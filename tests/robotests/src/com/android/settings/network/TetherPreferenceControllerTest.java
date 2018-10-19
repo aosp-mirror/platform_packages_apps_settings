@@ -34,7 +34,6 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
-
 import androidx.preference.Preference;
 
 import com.android.settings.R;

@@ -17,7 +17,6 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.os.UserManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

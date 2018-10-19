@@ -16,9 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.EXTRA_DO_NOT_DISTURB_MODE_ENABLED;
-import static android.provider.Settings.EXTRA_DO_NOT_DISTURB_MODE_MINUTES;
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +32,9 @@ import com.android.settings.R;
 import com.android.settings.utils.VoiceSettingsActivity;
 
 import java.util.Locale;
+
+import static android.provider.Settings.EXTRA_DO_NOT_DISTURB_MODE_ENABLED;
+import static android.provider.Settings.EXTRA_DO_NOT_DISTURB_MODE_MINUTES;
 
 /**
  * Activity for modifying the Zen mode (Do not disturb) by voice

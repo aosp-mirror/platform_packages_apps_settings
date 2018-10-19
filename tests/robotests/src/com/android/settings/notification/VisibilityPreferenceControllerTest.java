@@ -23,10 +23,8 @@ import static android.app.NotificationManager.IMPORTANCE_MIN;
 import static android.app.NotificationManager.VISIBILITY_NO_OVERRIDE;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
-
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -203,6 +201,31 @@ public class VisibilityPreferenceControllerTest {
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
             ArgumentCaptor.forClass(CharSequence[].class);
+        verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
+        assertFalse(toStringList(argumentCaptor.getValue())
+                .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
+        assertFalse(toStringList(argumentCaptor.getValue())
+                .contains(String.valueOf(VISIBILITY_PRIVATE)));
+    }
+
+    @Test
+    public void testUpdateState_noLockScreenNotificationsGloballyInProfile() {
+        final int primaryUserId = 2;
+        final UserInfo primaryUserInfo = new UserInfo(primaryUserId, "user 2", 0);
+        when(mUm.getProfileParent(anyInt())).thenReturn(primaryUserInfo);
+
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, primaryUserId);
+
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = mock(NotificationChannel.class);
+        mController.onResume(appRow, channel, null, null);
+
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
+        mController.updateState(pref);
+
+        ArgumentCaptor<CharSequence[]> argumentCaptor =
+                ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         assertFalse(toStringList(argumentCaptor.getValue())
                 .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));

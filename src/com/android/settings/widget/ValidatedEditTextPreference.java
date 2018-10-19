@@ -18,17 +18,17 @@ package com.android.settings.widget;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceViewHolder;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.CustomEditTextPreference;
 

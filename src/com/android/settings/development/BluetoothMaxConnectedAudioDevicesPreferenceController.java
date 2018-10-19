@@ -18,7 +18,6 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;

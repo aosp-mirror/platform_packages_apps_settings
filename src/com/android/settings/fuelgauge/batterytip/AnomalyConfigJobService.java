@@ -25,11 +25,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;

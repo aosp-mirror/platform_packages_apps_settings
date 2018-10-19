@@ -18,12 +18,11 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.res.TypedArrayUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.core.content.res.TypedArrayUtils;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;

@@ -39,13 +39,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DeviceAdminAdd;
@@ -67,7 +66,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 
 /**
  * Dashboard fragment to display application information from Settings. This activity presents
@@ -358,10 +356,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
         final boolean uninstallUpdateDisabled = getContext().getResources().getBoolean(
                 R.bool.config_disable_uninstall_update);
-        uninstallUpdatesItem.setVisible(mUserManager.isAdminUser()
-                && mUpdatedSysApp
-                && !mAppsControlDisallowedBySystem
-                && !uninstallUpdateDisabled);
+        uninstallUpdatesItem.setVisible(
+                mUpdatedSysApp && !mAppsControlDisallowedBySystem && !uninstallUpdateDisabled);
         if (uninstallUpdatesItem.isVisible()) {
             RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getActivity(),
                     uninstallUpdatesItem, mAppsControlDisallowedAdmin);

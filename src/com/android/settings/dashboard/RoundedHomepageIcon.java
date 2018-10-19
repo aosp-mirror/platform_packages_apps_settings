@@ -22,7 +22,6 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;

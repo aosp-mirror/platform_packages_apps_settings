@@ -16,18 +16,19 @@
 
 package com.android.settings.testutils.shadow;
 
-import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
-
 import android.accounts.Account;
 import android.content.ContentResolver;
 import android.content.SyncAdapterType;
+
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.SearchIndexablesContract;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
+
+import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 
 import java.util.HashMap;
 import java.util.Map;

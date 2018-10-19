@@ -17,14 +17,13 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import androidx.annotation.StringRes;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.annotation.StringRes;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 

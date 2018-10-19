@@ -31,12 +31,11 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
 import android.speech.tts.UtteranceProgressListener;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
-
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

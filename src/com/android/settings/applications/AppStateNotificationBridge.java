@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.UserHandle;

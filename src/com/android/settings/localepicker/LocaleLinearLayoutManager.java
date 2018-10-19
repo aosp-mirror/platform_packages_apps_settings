@@ -18,11 +18,10 @@ package com.android.settings.localepicker;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.view.View;
 
 import com.android.settings.R;
 

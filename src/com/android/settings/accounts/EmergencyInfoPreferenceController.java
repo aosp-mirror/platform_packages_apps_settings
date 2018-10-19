@@ -22,7 +22,6 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
-
 import androidx.preference.Preference;
 
 import com.android.settings.R;

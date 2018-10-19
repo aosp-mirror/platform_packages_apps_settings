@@ -18,9 +18,7 @@
 package com.android.settings.slices;
 
 import static android.content.ContentResolver.SCHEME_CONTENT;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -37,8 +35,6 @@ import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.SettingsSlicesContract;
 import android.util.ArraySet;
-
-import androidx.slice.Slice;
 
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.location.LocationSliceBuilder;
@@ -66,6 +62,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.slice.Slice;
 
 /**
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)

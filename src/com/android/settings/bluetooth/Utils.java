@@ -22,9 +22,8 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.provider.Settings;
-import android.widget.Toast;
-
 import androidx.annotation.VisibleForTesting;
+import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

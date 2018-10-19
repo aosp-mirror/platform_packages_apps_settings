@@ -45,7 +45,7 @@
     <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Presence-г бэлтгэсэн"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Мобайл радио цахилгаан"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM хаягийн лавлахыг харах"</string>
-    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Тогтвортой залгах дугаарыг харах"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Тогтсон залгах дугааруудыг харах"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Үйлчилгээний Залгах Дугаарыг харах"</string>
     <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS үйлчилгээний төлөв"</string>
     <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS төлөв"</string>
@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Автомат"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 ГГц зурвас"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 Гц зурвас"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0 Гц Зурвасыг тохиромжтой гэж үздэг"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 Гц"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 Гц"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi-Fi сүлжээний цэгт хамгийн багадаа нэг зурвасыг сонгоно уу:"</string>
@@ -972,8 +973,8 @@
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Роуминг тохиргоо"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Wi-Fi илүү эрхэмлэдэг"</item>
-    <item msgid="1335127656328817518">"Давуу эрхтэй мобайл"</item>
+    <item msgid="2124257075906188844">"Wi-Fi давуу эрхтэй"</item>
+    <item msgid="1335127656328817518">"Мобайл давуу эрхтэй"</item>
     <item msgid="3132912693346866895">"Зөвхөн Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -987,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Wi-Fi-г эрхэмлэдэг"</item>
-    <item msgid="5074515506087318555">"Давуу эрхтэй мобайл"</item>
+    <item msgid="5782108782860004851">"Wi-Fi давуу эрхтэй"</item>
+    <item msgid="5074515506087318555">"Мобайл давуу эрхтэй"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Байгалийн"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Өдөөсөн"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Өнгө ялгасан"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Автомат"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Дасан зохицох"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Зөвхөн оновчтой өнгийг ашиглах"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Тод болон оновчтой өнгө хооронд тохируулах"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Таблетыг эргүүлбэл харагдацыг автоматаар эргүүлэх"</string>
@@ -3038,10 +3039,10 @@
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Хонхыг чичиргээтэй болгож тохируулсан"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Хонхыг чимээгүй болгож тохируулсан"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Хонх дуугаргах түвшин 80%-д"</string>
-    <string name="media_volume_option_title" msgid="2811531786073003825">"Медиа дууны хэмжээ"</string>
+    <string name="media_volume_option_title" msgid="2811531786073003825">"Медиа дууны түвшин"</string>
     <string name="call_volume_option_title" msgid="1265865226974255384">"Дуудлагын дууны түвшин"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Сэрүүлгийн дууны түвшин"</string>
-    <string name="ring_volume_option_title" msgid="6767101703671248309">"Хонхны дууны хэмжээ"</string>
+    <string name="ring_volume_option_title" msgid="6767101703671248309">"Хонхны дууны түвшин"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Мэдэгдлийн дууны хэмжээ"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Утасны хонхны ая"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Мэдэгдлийн өгөгдмөл ая"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Дууг хаасан хэдий ч <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> болон <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>-г зөвшөөрдөг"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Дууг хаасан хэдий ч <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> болон <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>-г зөвшөөрдөг"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Зурвас, арга хэмжээ &amp; сануулагч"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Бүү саад бол горим асаалттай үед зурвас, сануулагч, үйл ажиллагааны дууг таны зөвшөөрснөөс бусад зүйлд хаах болно. Та найз нөхөд, гэр бүлийнхэн эсвэл бусад харилцагчдаа тантай холбоо барихыг зөвшөөрөхийн тулд зурвасын тохиргоог өөрчлөх боломжтой."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Бүү саад бол горим асаалттай үед зурвас, сануулагч, үйл ажиллагааны дууг таны зөвшөөрснөөс бусад зүйлд хаах болно. Та найз нөхөд, гэр бүлийнхэн эсвэл бусад харилцагчдаа тантай холбоо барихыг зөвшөөрөхийн тулд зурвасын тохиргоог өөрчлөх боломжтой."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Дууссан"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Тохиргоо"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Мэдэгдэл харагдахгүй бөгөөд дуугарахгүй"</string>
@@ -3425,7 +3426,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Та энэ төхөөрөмжийг эхлүүлэхдээ PIN оруулах үед <xliff:g id="SERVICE">%1$s</xliff:g> мэтийн хандалтын үйлчилгээнүүд хараахан ашиглах боломжгүй байна."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Та энэ төхөөрөмжийг эхлүүлэхдээ хээ оруулах үед <xliff:g id="SERVICE">%1$s</xliff:g> мэтийн хандалтын үйлчилгээнүүд хараахан ашиглах боломжгүй байна."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Та энэ төхөөрөмжийг эхлүүлэхдээ нууц үг оруулах үед <xliff:g id="SERVICE">%1$s</xliff:g> мэтийн хандалтын үйлчилгээнүүд хараахан ашиглах боломжгүй байна."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Санамж: Дахин асаасны дараа энэ апп нь таныг утасны түгжээгээ тайлах хүртэл эхлэх боломжгүй"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Санамж: Хэрэв та утсаа дахин эхлүүлэх болон дэлгэцийн түгжээ тохируулбал энэ апп таныг утасныхаа түгжээг тайлах хүртэл эхлэх боломжгүй"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI мэдээлэл"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI хамаарах мэдээлэл"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Слот<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>

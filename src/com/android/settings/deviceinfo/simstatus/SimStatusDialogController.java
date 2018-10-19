@@ -30,6 +30,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellBroadcastMessage;
 import android.telephony.PhoneStateListener;
@@ -43,9 +45,6 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;

@@ -18,7 +18,6 @@ package com.android.settings.development;
 
 
 import android.content.Context;
-
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 

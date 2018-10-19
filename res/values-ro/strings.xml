@@ -369,7 +369,7 @@
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mesaj pe ecranul de blocare"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Activați widgeturi"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Dezactivat de administrator"</string>
-    <string name="lockdown_settings_title" msgid="7393790212603280213">"Afișați opțiunea de blocare"</string>
+    <string name="lockdown_settings_title" msgid="7393790212603280213">"Afișați opțiunea de blocare strictă"</string>
     <string name="lockdown_settings_summary" msgid="429230431748285997">"Afișați opțiunea butonului de pornire care dezactivează Smart Lock, deblocarea cu amprentă și notificările pe ecranul de blocare."</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Niciunul"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
@@ -502,7 +502,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="5738274583658668124"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="5738274583658668124"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="5738274583658668124"></string>
-    <string name="lock_settings_picker_title" msgid="1095755849152582712">"Alegeți blocarea ecranului"</string>
+    <string name="lock_settings_picker_title" msgid="1095755849152582712">"Opțiuni blocare ecran"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Alegeți blocarea pentru serviciu"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protejați tableta"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Protejați dispozitivul"</string>
@@ -865,6 +865,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automat"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Se preferă banda de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Alegeți cel puțin o bandă pentru hotspot Wi-Fi:"</string>
@@ -1077,7 +1078,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Intensificat"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturat"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automat"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Adaptiv"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Utilizați numai culori exacte"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Ajustați între culorile vii și cele exacte"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Doresc comutarea automată a orientării atunci când se rotește tableta"</string>
@@ -1547,10 +1548,10 @@
     <string name="location_category_location_services" msgid="7437150886946685979">"Servicii de localizare"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Utilizare intensă a bateriei"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Utilizare redusă a bateriei"</string>
-    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Scanare"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Căutare de rețele Wi-Fi"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Căutare"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Căutare Wi-Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Permiteți aplicațiilor și serviciilor să caute permanent rețele Wi-Fi, chiar și atunci când setarea Wi-Fi este dezactivată. Această permisiune poate fi folosită, de exemplu, pentru a îmbunătăți funcțiile și serviciile bazate pe locație."</string>
-    <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Căutare de dispozitive Bluetooth"</string>
+    <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Căutare Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Permiteți aplicațiilor și serviciilor să caute permanent dispozitive din apropiere, chiar și atunci când setarea Bluetooth este dezactivată. Această permisiune poate fi folosită, de exemplu, pentru a îmbunătăți funcțiile și serviciile bazate pe locație."</string>
     <string name="location_network_based" msgid="9134175479520582215">"Localizare prin Wi-Fi și mobil"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Aplicațiile estimează mai rapid locația cu serviciul de localizare Google. Se colectează/trimit la Google date anonime de localizare."</string>
@@ -2966,7 +2967,7 @@
     <string name="sim_notification_title" msgid="6272913297433198340">"Cardurile SIM au fost schimbate."</string>
     <string name="sim_notification_summary" msgid="8858043655706669772">"Atingeți pentru a configura"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Cartelă SIM preferată pentru"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Întreabă mereu"</string>
+    <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Întreabă de fiecare dată"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Selectați o opțiune"</string>
     <string name="sim_selection_channel_title" msgid="2760909074892782589">"Selectare SIM"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Setări"</string>
@@ -3198,7 +3199,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Sunetul este dezactivat, dar permiteți <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> și <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Sunetul este dezactivat, dar permiteți <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> și <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mesaje, evenimente și mementouri"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Când este activată funcția Nu deranja, sunetele pentru mesaje, mementouri și evenimente vor fi dezactivate, cu excepția elementelor pe care le permiteți mai sus. Puteți să modificați setările pentru mesaje ca să le permiteți prietenilor, familiei sau altor persoane de contact să vă contacteze."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Când este activat modul Nu deranja, sunetele pentru mesaje, mementouri și evenimente vor fi dezactivate, cu excepția elementelor pe care le permiteți mai sus. Puteți să modificați setările pentru mesaje ca să le permiteți prietenilor, familiei sau altor persoane de contact să vă contacteze."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Gata"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Setări"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Fără imagini sau sunet de la notificări"</string>
@@ -3335,7 +3336,7 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Terminat"</string>
     <string name="app_notification_importance_title" msgid="8002263131149345584">"Importanță"</string>
     <string name="notification_show_lights_title" msgid="7671781299688190532">"Lumină intermitentă"</string>
-    <string name="notification_vibrate_title" msgid="1646667807969755957">"Vibrații"</string>
+    <string name="notification_vibrate_title" msgid="1646667807969755957">"Vibrează"</string>
     <string name="notification_channel_sound_title" msgid="3899212238513507941">"Sunet"</string>
     <string name="zen_mode_rule_delete_button" msgid="903658142711011617">"Ștergeți"</string>
     <string name="zen_mode_rule_rename_button" msgid="4642843370946599164">"Redenumiți"</string>
@@ -3471,7 +3472,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Când introduceți codul PIN pentru a porni acest dispozitiv, serviciile de accesibilitate, cum ar fi <xliff:g id="SERVICE">%1$s</xliff:g>, nu vor fi disponibile."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Când introduceți modelul pentru a porni acest dispozitiv, serviciile de accesibilitate, cum ar fi <xliff:g id="SERVICE">%1$s</xliff:g>, nu vor fi disponibile."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Când introduceți parola pentru a porni acest dispozitiv, serviciile de accesibilitate, cum ar fi <xliff:g id="SERVICE">%1$s</xliff:g>, nu vor fi disponibile."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Notă: după repornire, această aplicație nu poate porni până nu deblocați telefonul"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Notă: dacă reporniți telefonul și aveți activată blocarea ecranului, această aplicație nu poate porni până nu deblocați telefonul."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Informații despre IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informații referitoare la IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slotul<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3939,7 +3940,7 @@
     <string name="notification_log_details_parcel" msgid="243148037601903212">"dimensiune pachet"</string>
     <string name="notification_log_details_ashmem" msgid="7241814108477320636">"ashmem"</string>
     <string name="notification_log_details_sound" msgid="5506232879598808099">"sunet"</string>
-    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibrare"</string>
+    <string name="notification_log_details_vibrate" msgid="6890065466625335940">"vibrează"</string>
     <string name="notification_log_details_default" msgid="2345249399796730861">"prestabilit"</string>
     <string name="notification_log_details_none" msgid="184131801230614059">"niciunul"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Obiectul clasificării lipsește."</string>
@@ -4209,7 +4210,7 @@
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Dezactivați soneria"</string>
     <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Apăsați în același timp pe butonul de pornire și pe creșterea volumului"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Comandă rapidă pentru dezactivarea soneriei"</string>
-    <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Vibrații"</string>
+    <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Vibrează"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Dezactivați sunetul"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Nicio acțiune"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"Activată (vibrații)"</string>

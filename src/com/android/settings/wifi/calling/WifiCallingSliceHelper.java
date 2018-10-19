@@ -26,13 +26,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.PersistableBundle;
 import android.provider.Settings;
+import androidx.core.graphics.drawable.IconCompat;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;

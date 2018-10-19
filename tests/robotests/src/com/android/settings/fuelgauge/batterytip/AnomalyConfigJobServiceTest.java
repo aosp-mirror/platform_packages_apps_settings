@@ -34,6 +34,7 @@ import android.app.StatsManager;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.Settings;
 
 import com.android.settings.R;

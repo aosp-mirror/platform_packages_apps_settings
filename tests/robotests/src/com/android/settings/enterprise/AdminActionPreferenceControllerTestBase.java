@@ -17,14 +17,12 @@
 package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.text.format.DateUtils;
-
 import androidx.preference.Preference;
+import android.text.format.DateUtils;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;

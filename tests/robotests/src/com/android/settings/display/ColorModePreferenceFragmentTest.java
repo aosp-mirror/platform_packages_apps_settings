@@ -16,7 +16,6 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -27,7 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.os.Bundle;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

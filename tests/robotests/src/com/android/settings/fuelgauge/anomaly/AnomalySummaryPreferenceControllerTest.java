@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -26,7 +25,6 @@ import static org.mockito.Mockito.when;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

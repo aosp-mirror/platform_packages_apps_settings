@@ -28,14 +28,13 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
-import android.text.format.DateFormat;
-import android.util.Log;
-import android.widget.TimePicker;
-
+import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import android.text.format.DateFormat;
+import android.util.Log;
+import android.widget.TimePicker;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

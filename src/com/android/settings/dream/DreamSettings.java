@@ -23,7 +23,6 @@ import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

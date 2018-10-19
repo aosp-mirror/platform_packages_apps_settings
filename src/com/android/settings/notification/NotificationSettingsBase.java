@@ -18,9 +18,9 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -37,13 +37,12 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;

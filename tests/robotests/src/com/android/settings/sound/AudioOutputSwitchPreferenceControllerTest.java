@@ -36,20 +36,20 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.content.pm.PackageManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.util.FeatureFlagUtils;
-
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
@@ -186,6 +186,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
         AudioSwitchPreferenceController controller = new AudioSwitchPreferenceControllerTestable(
                 mContext, TEST_KEY);
+        controller.onStart();
+        controller.onStop();
 
         assertThat(mLocalBluetoothManager).isNull();
     }

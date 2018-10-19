@@ -17,7 +17,6 @@
 package com.android.settings.language;
 
 import android.content.Context;
-
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;

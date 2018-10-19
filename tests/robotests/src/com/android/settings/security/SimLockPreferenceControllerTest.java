@@ -17,9 +17,7 @@
 package com.android.settings.security;
 
 import static android.telephony.TelephonyManager.SIM_STATE_READY;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -27,13 +25,12 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.os.UserManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

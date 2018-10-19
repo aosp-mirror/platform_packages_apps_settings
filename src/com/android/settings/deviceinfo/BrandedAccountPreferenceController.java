@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo;
 import android.accounts.Account;
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

@@ -27,7 +27,6 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.UserManager;
 import android.provider.Settings;
-
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 

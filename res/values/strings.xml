@@ -1986,8 +1986,10 @@
     <string name="wifi_ap_choose_auto">Auto</string>
     <!-- Label for the radio button to choose wifi ap 2.4 GHz band -->
     <string name="wifi_ap_choose_2G">2.4 GHz Band</string>
-    <!-- Label for the radio button to choose wifi ap 5GHz band -->
+    <!-- Label for the radio button to only choose wifi ap 5GHz band -->
     <string name="wifi_ap_choose_5G">5.0 GHz Band</string>
+    <!-- Label for the radio button to prefer 5GHz wifi ap band  [CHAR LIMIT=80]-->
+    <string name="wifi_ap_prefer_5G">5.0 GHz Band preferred</string>
     <!-- Label for adding to the list of selected bands when 2.4 GHz is selected -->
     <string name="wifi_ap_2G">2.4 GHz</string>
     <!-- Label for adding to the list of selected bands when 5.0 GHz is selected -->
@@ -2491,11 +2493,11 @@
     <string name="color_mode_option_boosted">Boosted</string>
     <!-- Display settings screen, Color mode option for "Saturated color"  [CHAR LIMIT=45] -->
     <string name="color_mode_option_saturated">Saturated</string>
-    <!-- Display settings screen, Color mode option for "Automatic color"  [CHAR LIMIT=45] -->
-    <string name="color_mode_option_automatic">Automatic</string>
+    <!-- Display settings screen, Color mode option for "Adaptive color"  [CHAR LIMIT=45] -->
+    <string name="color_mode_option_automatic">Adaptive</string>
     <!-- Display settings screen, "natural(sRGB) color" setting option summary [CHAR LIMIT=NONE] -->
     <string name="color_mode_summary_natural">Use accurate colors only</string>
-    <!-- Display settings screen, "Automatic color" setting option summary [CHAR LIMIT=NONE] -->
+    <!-- Display settings screen, "Adaptive color" setting option summary [CHAR LIMIT=NONE] -->
     <string name="color_mode_summary_automatic">Adjust between vivid and accurate colors</string>
 
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
@@ -7421,7 +7423,7 @@
     <!-- Do not disturb settings, messages, events and reminders title [CHAR LIMIT=100]-->
     <string name="zen_msg_event_reminder_title">Messages, events &amp; reminders</string>
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
-    <string name="zen_msg_event_reminder_footer">When Do Not Disturb is on, messages, reminders, and events will muted, except for the items you allow above. You can adjust messages settings to allow your friends, family, or other contacts to reach you.</string>
+    <string name="zen_msg_event_reminder_footer">When Do Not Disturb is on, messages, reminders, and events will be muted, except for the items you allow above. You can adjust messages settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- Do not disturb onboarding dialog, accept new settings [CHAR LIMIT=30]-->
     <string name="zen_onboarding_ok">Done</string>
@@ -9925,6 +9927,9 @@
 
     <!-- Help URI, smart battery page [DO NOT TRANSLATE] -->
     <string name="help_uri_smart_battery_settings" translatable="false"></string>
+
+    <!-- Help URI, prevent ringing gesture [DO NOT TRANSLATE] -->
+    <string name="help_uri_prevent_ringing_gesture" translatable="false"></string>
 
     <!-- Title label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="zen_suggestion_title">Update Do Not Disturb</string>

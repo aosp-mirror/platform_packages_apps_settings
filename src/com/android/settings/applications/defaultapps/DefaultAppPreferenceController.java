@@ -23,10 +23,9 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

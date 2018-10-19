@@ -18,9 +18,8 @@ package com.android.settings.applications.manageapplications;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-
 import androidx.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;

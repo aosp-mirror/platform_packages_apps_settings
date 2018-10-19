@@ -22,8 +22,8 @@ import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CH
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
-import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
+import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED;
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;

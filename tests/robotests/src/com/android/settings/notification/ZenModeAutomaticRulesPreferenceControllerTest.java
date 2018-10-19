@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import static junit.framework.Assert.assertEquals;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +25,6 @@ import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.provider.Settings;
-
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 

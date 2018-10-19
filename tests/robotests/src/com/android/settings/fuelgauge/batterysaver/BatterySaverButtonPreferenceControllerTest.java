@@ -17,16 +17,14 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.PowerManager;
-import android.widget.Button;
-
 import androidx.preference.PreferenceScreen;
+import android.widget.Button;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.TwoStateButtonPreference;

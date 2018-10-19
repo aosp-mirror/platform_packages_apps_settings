@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.QueuedWork;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;

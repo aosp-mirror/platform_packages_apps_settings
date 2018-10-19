@@ -16,9 +16,6 @@
 
 package com.android.settings.widget;
 
-import static android.text.format.DateUtils.DAY_IN_MILLIS;
-import static android.text.format.DateUtils.WEEK_IN_MILLIS;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -35,6 +32,9 @@ import android.view.View;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
+
+import static android.text.format.DateUtils.DAY_IN_MILLIS;
+import static android.text.format.DateUtils.WEEK_IN_MILLIS;
 
 /**
  * {@link NetworkStatsHistory} series to render inside a {@link ChartView},

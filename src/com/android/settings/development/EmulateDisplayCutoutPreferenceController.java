@@ -19,21 +19,18 @@ package com.android.settings.development;
 import static android.os.UserHandle.USER_SYSTEM;
 
 import android.content.Context;
-import android.content.om.IOverlayManager;
-import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.text.TextUtils;
-import android.view.DisplayCutout;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
+import android.view.DisplayCutout;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.wrapper.OverlayManagerWrapper;
+import com.android.settings.wrapper.OverlayManagerWrapper.OverlayInfo;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 import java.util.List;
@@ -44,7 +41,7 @@ public class EmulateDisplayCutoutPreferenceController extends
 
     private static final String KEY = "display_cutout_emulation";
 
-    private final IOverlayManager mOverlayManager;
+    private final OverlayManagerWrapper mOverlayManager;
     private final boolean mAvailable;
 
     private ListPreference mPreference;
@@ -52,7 +49,7 @@ public class EmulateDisplayCutoutPreferenceController extends
 
     @VisibleForTesting
     EmulateDisplayCutoutPreferenceController(Context context, PackageManager packageManager,
-            IOverlayManager overlayManager) {
+            OverlayManagerWrapper overlayManager) {
         super(context);
         mOverlayManager = overlayManager;
         mPackageManager = packageManager;
@@ -60,8 +57,7 @@ public class EmulateDisplayCutoutPreferenceController extends
     }
 
     public EmulateDisplayCutoutPreferenceController(Context context) {
-        this(context, context.getPackageManager(), IOverlayManager.Stub
-                .asInterface(ServiceManager.getService(Context.OVERLAY_SERVICE)));
+        this(context, context.getPackageManager(), new OverlayManagerWrapper());
     }
 
     @Override
@@ -106,14 +102,10 @@ public class EmulateDisplayCutoutPreferenceController extends
         }
 
         final boolean result;
-        try {
-            if (TextUtils.isEmpty(packageName)) {
-                result = mOverlayManager.setEnabled(currentPackageName, false, USER_SYSTEM);
-            } else {
-                result = mOverlayManager.setEnabledExclusiveInCategory(packageName, USER_SYSTEM);
-            }
-        } catch (RemoteException re) {
-            throw re.rethrowFromSystemServer();
+        if (TextUtils.isEmpty(packageName)) {
+            result = mOverlayManager.setEnabled(currentPackageName, false, USER_SYSTEM);
+        } else {
+            result = mOverlayManager.setEnabledExclusiveInCategory(packageName, USER_SYSTEM);
         }
         updateState(mPreference);
         return result;
@@ -153,17 +145,13 @@ public class EmulateDisplayCutoutPreferenceController extends
     }
 
     private OverlayInfo[] getOverlayInfos() {
-        List<OverlayInfo> overlayInfos;
-        try {
-            overlayInfos = mOverlayManager.getOverlayInfosForTarget("android", USER_SYSTEM);
-            for (int i = overlayInfos.size() - 1; i >= 0; i--) {
-                if (!DisplayCutout.EMULATION_OVERLAY_CATEGORY.equals(
-                        overlayInfos.get(i).category)) {
-                    overlayInfos.remove(i);
-                }
+        @SuppressWarnings("unchecked") List<OverlayInfo> overlayInfos =
+                mOverlayManager.getOverlayInfosForTarget("android", USER_SYSTEM);
+        for (int i = overlayInfos.size() - 1; i >= 0; i--) {
+            if (!DisplayCutout.EMULATION_OVERLAY_CATEGORY.equals(
+                    overlayInfos.get(i).category)) {
+                overlayInfos.remove(i);
             }
-        } catch (RemoteException re) {
-            throw re.rethrowFromSystemServer();
         }
         return overlayInfos.toArray(new OverlayInfo[overlayInfos.size()]);
     }

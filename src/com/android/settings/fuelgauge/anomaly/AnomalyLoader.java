@@ -21,13 +21,15 @@ import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserManager;
+import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.utils.AsyncLoader;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 

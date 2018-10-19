@@ -19,12 +19,11 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import androidx.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;

@@ -25,12 +25,11 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.SystemUpdateManager;
 import android.os.UserManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

@@ -15,14 +15,14 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
+
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
 

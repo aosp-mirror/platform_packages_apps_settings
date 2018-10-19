@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;

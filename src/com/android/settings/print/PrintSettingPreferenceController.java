@@ -24,7 +24,6 @@ import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

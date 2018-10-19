@@ -1,14 +1,13 @@
 package com.android.settings.testutils;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Xml;
-
 import com.android.settings.core.PreferenceXmlParserUtils;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 

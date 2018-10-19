@@ -16,13 +16,9 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController
-        .BASEBAND_PROPERTY;
-import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController
-        .BASEBAND_VERSION_LABEL_ID;
-import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController
-        .BASEBAND_VERSION_VALUE_ID;
-
+import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController.BASEBAND_PROPERTY;
+import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController.BASEBAND_VERSION_LABEL_ID;
+import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController.BASEBAND_VERSION_VALUE_ID;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.shadow.api.Shadow.extract;

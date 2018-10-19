@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -32,7 +31,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

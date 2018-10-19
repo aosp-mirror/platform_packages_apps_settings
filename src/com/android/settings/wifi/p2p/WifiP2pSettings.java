@@ -38,6 +38,8 @@ import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.net.wifi.p2p.WifiP2pManager.PersistentGroupInfoListener;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
@@ -46,9 +48,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

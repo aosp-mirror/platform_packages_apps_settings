@@ -19,12 +19,11 @@ package com.android.settings.datetime;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
-
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;

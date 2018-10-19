@@ -18,10 +18,9 @@ package com.android.settings.bluetooth;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.text.TextUtils;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.overlay.FeatureFactory;

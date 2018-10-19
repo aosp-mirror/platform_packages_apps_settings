@@ -20,10 +20,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.text.TextUtils;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.internal.app.AssistUtils;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;

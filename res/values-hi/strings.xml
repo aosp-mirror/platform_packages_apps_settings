@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"अपने आप"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz बैंड"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 गीगाहर्ट्ज़ का बैंड"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0 गीगाहर्ट्ज़ बैंड का इस्तेमाल करना बेहतर होगा"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 गीगाहर्ट्ज़"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 गीगाहर्ट्ज़"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"वाई-फ़ाई हॉटस्पॉट से डिवाइस काे जाेड़ने के लिए कम से कम एक बैंड चुनें:"</string>
@@ -965,7 +966,7 @@
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"वाई-फ़ाई कॉलिंग"</string>
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"वाई-फ़ाई के ज़रिए कॉल करने की सुविधा चालू करें"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"वाई-फ़ाई कॉलिंग चालू करके कॉल करने का एक और विकल्प पाएं"</string>
-    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"कॉल को प्राथमिकता"</string>
+    <string name="wifi_calling_mode_title" msgid="2164073796253284289">"कॉल करने का प्राथमिक तरीका"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"वाई-फ़ाई कॉलिंग मोड"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"रोमिंग की प्राथमिकताएं"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"बिना किसी बदलाव के"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"बढ़ाया गया"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"सैचुरेट किया गया"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"अपने आप रंग चुनकर दिखाने वाला मोड"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"आस-पास की रोशनी के अनुसार स्क्रीन की चमक बदले"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"सिर्फ़ सटीक रंगों का इस्तेमाल करें"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"चटख और सटीक रंगों के बीच मनमुताबिक बदलाव करें"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"टैबलेट घुमाने पर स्क्रीन की दिशा अपने आप बदलें"</string>
@@ -3048,7 +3049,7 @@
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"ऐप की ओर से दी जाने वाली ध्वनि"</string>
     <string name="notification_sound_default" msgid="565135733949733766">"सूचना की डिफ़ॉल्ट टोन"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"अलार्म की डिफ़ॉल्ट आवाज़"</string>
-    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"कॉल के लिए भी कंपन (वाइब्रेशन) करें"</string>
+    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"कॉल आने पर वाइब्रेट भी करें"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"अन्य आवाज़ें"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"डायल पैड टोन"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"स्क्रीन लॉक करने की आवाज़ें"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"म्यूट किया गया है लेकिन <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> और <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> को मंज़ूरी दें"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"म्यूट किया गया है लेकिन <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> और <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> को मंज़ूरी दी गई है"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"मैसेज, इवेंट और रिमाइंडर"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"\'परेशान न करें\' सुविधा चालू होने पर मैसेज, रिमाइंडर और इवेंट की सूचनाएं म्यूट कर दी जाएंगी. आपको सिर्फ़ उन ही सूचनाओं की आवाज़ सुनाई देगी या वाइब्रेशन महसूस होगा जिनके लिए आप मंज़ूरी देंगे. आप मैसेज सेटिंग में बदलाव कर अपने दोस्तों, परिवार के लोगों और अन्य संपर्कों के मैसेज की सूचना मिलने की मंज़ूरी दे सकते हैं."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"\'परेशान न करें\' सुविधा चालू होने पर मैसेज (एसएमएस), रिमाइंडर और इवेंट की सूचनाएं म्यूट कर दी जाएंगी. आपको सिर्फ़ उन ही सूचनाओं की आवाज़ सुनाई देगी या वाइब्रेशन महसूस होगा जिनके लिए आप मंज़ूरी देंगे. आप मैसेज सेटिंग में बदलाव करके अपने दोस्तों, परिवार के लोगों या दूसरे संपर्कों के मैसेज (एसएमएस) मिलने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"हो गया"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"सेटिंग"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखे और न ही कोई आवाज़ सुनाई दे"</string>
@@ -3284,7 +3285,7 @@
     <string name="notification_content_block_title" msgid="5854232570963006360">"सूचना दिखाएं"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"सूचना कभी भी शेड में या पेरिफ़ेरल डिवाइस पर ना दिखाएं"</string>
     <string name="notification_badge_title" msgid="6370122441168519809">"नई सूचनाएं बताने वाले गोल निशान की अनुमति दें"</string>
-    <string name="notification_channel_badge_title" msgid="2240827899882847087">"सूचना बिंदु दिखाएं"</string>
+    <string name="notification_channel_badge_title" msgid="2240827899882847087">"नई सूचनाएं बताने वाला गोल निशान दिखाएं"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\'परेशान न करें\' मोड बंद करें"</string>
     <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"\'परेशान न करें\' मोड चालू होने पर भी ये सूचनाएं दिखाना जारी रखें"</string>
     <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"लॉक स्क्रीन पर दिखाई दे"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"जब आप इस डिवाइस को प्रारंभ करने के लिए अपना पिन डालते हैं, तो <xliff:g id="SERVICE">%1$s</xliff:g> जैसी सरल उपयोग सेवाएं अभी भी उपलब्ध नहीं होंगी."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"जब आप इस डिवाइस को प्रारंभ करने के लिए अपना पैटर्न डालते हैं, तो <xliff:g id="SERVICE">%1$s</xliff:g> जैसी सरल उपयोग सेवाएं अभी भी उपलब्ध नहीं होंगी."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"जब आप इस डिवाइस को प्रारंभ करने के लिए अपना पासवर्ड डालते हैं, तो <xliff:g id="SERVICE">%1$s</xliff:g> जैसी सरल उपयोग सेवाएं अभी भी उपलब्ध नहीं होंगी."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"नोट: पुनः बूट करने के बाद, यह ऐप्लिकेशन तब तक शुरू नहीं हो सकता है जब तक कि आप अपना फ़ोन अनलॉक ना कर लें"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"ध्यान दें: अगर फ़ोन को रीस्टार्ट करते समय उसकी स्क्रीन लॉक है, तो यह ऐप्लिकेशन तब तक शुरू नहीं होगा, जब तक आप फ़ोन को अनलॉक नहीं करते"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI की जानकारी"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI से जुड़ी जानकारी"</string>
     <string name="slot_number" msgid="3762676044904653577">"(स्लॉट<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>

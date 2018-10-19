@@ -21,11 +21,9 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
-
+import java.util.Locale;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-
-import java.util.Locale;
 
 /**
  * Important: The current robolectric doesn't support API 24, so I copy the code

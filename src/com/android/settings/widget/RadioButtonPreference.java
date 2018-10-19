@@ -17,14 +17,13 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.CheckBoxPreference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 

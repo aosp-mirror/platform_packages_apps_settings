@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -30,10 +29,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
-
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.testutils.FakeFeatureFactory;

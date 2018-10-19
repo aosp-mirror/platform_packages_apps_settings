@@ -18,10 +18,9 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.text.TextUtils;
-
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;

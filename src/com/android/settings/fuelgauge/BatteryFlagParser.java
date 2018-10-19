@@ -17,7 +17,6 @@ package com.android.settings.fuelgauge;
 import android.os.BatteryStats.HistoryItem;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
-
 import com.android.settings.fuelgauge.BatteryActiveView.BatteryActiveProvider;
 
 public class BatteryFlagParser implements BatteryInfo.BatteryDataParser, BatteryActiveProvider {

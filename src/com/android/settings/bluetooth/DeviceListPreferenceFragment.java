@@ -20,13 +20,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import android.text.BidiFormatter;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
+import android.text.BidiFormatter;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;

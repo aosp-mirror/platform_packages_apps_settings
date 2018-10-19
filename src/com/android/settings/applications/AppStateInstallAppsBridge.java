@@ -25,6 +25,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;

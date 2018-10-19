@@ -20,19 +20,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.storage.StorageManager;
-import android.text.TextPaint;
-import android.text.style.StyleSpan;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.Button;
-
+import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
+import android.util.AttributeSet;
+import android.util.MathUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.DonutView;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * StorageSummaryDonutPreference is a preference which summarizes the used and remaining storage left

@@ -19,10 +19,9 @@ package com.android.settings.notification;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.provider.Settings;
-import android.util.Log;
-
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 

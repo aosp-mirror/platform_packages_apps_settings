@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automatikus"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz-es sáv"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5 GHz-es sáv"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Előnyben részesített sáv: 5 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Válasszon legalább egy sávot a Wi-Fi-hotspot számára:"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Természetes"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Élénk"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Telített"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatikus"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Adaptív"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Csak pontos színek használata"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Váltás élénk és pontos színek között"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Tájolás automatikus váltása a táblagép forgatásakor"</string>
@@ -2331,7 +2332,7 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Automatikus bekapcsolás"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Soha"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"<xliff:g id="PERCENT">%1$s</xliff:g> töltöttségnél"</string>
-    <string name="battery_percentage" msgid="723291197508049369">"Az akkumulátor töltöttségi szintje (%%)"</string>
+    <string name="battery_percentage" msgid="723291197508049369">"Az akkumulátor töltöttségi szintje"</string>
     <string name="battery_percentage_description" msgid="8511658577507384014">"Megjeleníti az akkumulátor százalékban kifejezett töltöttségi szintjét az állapotsoron"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Folyamatstatisztikák"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"A futó folyamatok statisztikái"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Némítva, de a(z) <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> és a(z) <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> hangjainak engedélyezése"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Némítva, de a(z) <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> és <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> hangjainak engedélyezése"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Üzenetek, események és emlékeztetők"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Ha a „Ne zavarjanak” mód aktív, akkor az SMS-ek, emlékeztetők és események némítva lesznek, kivéve a fent engedélyezett elemeket. Az üzenetek beállításainak megadásával lehetővé teheti, hogy ismerősei, családtagjai vagy más névjegyei elérhessék Önt."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Ha a „Ne zavarjanak” mód aktív, akkor az üzenetek, emlékeztetők és események némítva lesznek, kivéve a fent engedélyezett elemeket. Az üzenetek beállításainak megadásával lehetővé teheti, hogy ismerősei, családtagjai vagy más névjegyei elérhessék Önt."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Kész"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Beállítások"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Nincs hang vagy vizuális jelzés az értesítéseknél"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Amikor megadja a PIN-kódot az eszköz indításához, a(z) <xliff:g id="SERVICE">%1$s</xliff:g> funkcióhoz hasonló kisegítő lehetőségek még nem lesznek elérhetők."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Amikor megadja a mintát az eszköz indításához, a(z) <xliff:g id="SERVICE">%1$s</xliff:g> funkcióhoz hasonló kisegítő lehetőségek még nem lesznek elérhetők."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Amikor megadja a jelszót az eszköz indításához, a(z) <xliff:g id="SERVICE">%1$s</xliff:g> funkcióhoz hasonló kisegítő lehetőségek még nem lesznek elérhetők."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Megjegyzés: Újraindítás után ez az alkalmazás csak a telefon feloldását követően indul el"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Megjegyzés: Ha újraindítja a telefont, és képernyőzárat állított be, ez az alkalmazás csak a telefon feloldását követően indul el."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-információ"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Relatív IMEI-információ"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Hely: <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3952,7 +3953,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Az alkalmazások közti váltáshoz csúsztassa gyorsan ujját felfelé a Kezdőképernyő gombon. A műveletet megismételve az összes alkalmazást megtekintheti. Minden képernyőn működik. Az Áttekintés gomb többé nem jelenik meg a képernyő jobb alsó sarkában."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Az új Kezdőképernyő gomb kipróbálása"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Új kézmozdulat bekapcsolása az alkalmazások közti váltáshoz"</string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Koppintson duplán a telefon képernyőjének megtekintéséhez"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dupla koppintás a képernyő megtekintéséhez"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Koppintson duplán a táblagép képernyőjének megtekintéséhez"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Koppintson duplán az eszköz képernyőjének megtekintéséhez"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Az idő, az értesítési ikonok és egyéb információk megjelenítéséhez koppintson kétszer a képernyőre."</string>

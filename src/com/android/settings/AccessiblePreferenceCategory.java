@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.content.Context;
-
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 

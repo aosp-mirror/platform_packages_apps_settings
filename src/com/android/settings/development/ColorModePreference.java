@@ -21,10 +21,9 @@ import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManager.DisplayListener;
 import android.os.Handler;
 import android.os.Looper;
+import androidx.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.view.Display;
-
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 

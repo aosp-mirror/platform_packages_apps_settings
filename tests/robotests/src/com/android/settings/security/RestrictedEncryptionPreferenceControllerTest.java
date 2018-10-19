@@ -18,10 +18,9 @@ package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
-
-import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;

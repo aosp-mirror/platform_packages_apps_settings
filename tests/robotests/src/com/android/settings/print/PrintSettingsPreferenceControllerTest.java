@@ -18,22 +18,19 @@ package com.android.settings.print;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
 import android.print.PrintJob;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
-
-import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

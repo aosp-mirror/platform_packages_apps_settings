@@ -23,7 +23,6 @@ import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_I
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_MEID_NUMBER_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_MIN_NUMBER_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_PRL_VERSION_VALUE;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;

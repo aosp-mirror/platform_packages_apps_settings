@@ -17,7 +17,6 @@ package com.android.settings.users;
 
 import android.content.Context;
 import android.provider.Settings.Global;
-
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;

@@ -16,22 +16,28 @@
 
 package com.android.settings.wifi;
 
+import android.Manifest.permission;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Bundle;
-
+import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+
 import com.android.settings.wifi.AppStateChangeWifiStateBridge.WifiSettingsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.AppFilter;
+
+import static android.app.AppOpsManager.MODE_ALLOWED;
+import static android.app.AppOpsManager.MODE_IGNORED;
 
 public class ChangeWifiStateDetails extends AppInfoWithHeader
         implements OnPreferenceChangeListener {

@@ -19,12 +19,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.SettingInjectorService;
 import android.os.UserHandle;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;

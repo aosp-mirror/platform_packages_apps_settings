@@ -18,13 +18,9 @@ package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.content.Context;
-import android.widget.ArrayAdapter;
-
 import androidx.preference.ListPreference;
-
+import android.widget.ArrayAdapter;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
@@ -37,6 +33,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+
+import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowBluetoothUtils.class)

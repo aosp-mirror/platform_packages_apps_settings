@@ -198,7 +198,7 @@
     <string name="proxy_settings_title" msgid="9049437837600320881">"Proxy"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Borrar"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Puerto del proxy"</string>
-    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Omitir proxy para"</string>
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Saltarproxy para"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Restaurar valores predeterminados"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Ok"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Nombre de host del proxy"</string>
@@ -220,7 +220,7 @@
     <string name="radio_info_gprs_service_label" msgid="4209624131644060517">"Servicio de datos:"</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"Itinerancia:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
-    <string name="radio_info_call_redirect_label" msgid="2743797189722106231">"Desvío de llamada:"</string>
+    <string name="radio_info_call_redirect_label" msgid="2743797189722106231">"Desvío de llamadas:"</string>
     <string name="radio_info_ppp_resets_label" msgid="3587319503902576102">"Número de PPP restablecido desde el inicio:"</string>
     <string name="radio_info_current_network_label" msgid="9151285540639134945">"Red actual:"</string>
     <string name="radio_info_ppp_received_label" msgid="363579470428151850">"Datos recibidos:"</string>
@@ -389,7 +389,7 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Establecer Mi ubicación, bloqueo de pantalla, bloqueo de tarjeta SIM y bloqueo de almacenamiento de credenciales"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Establecer ubicación, bloqueo de pantalla y bloqueo de almacenamiento de credenciales"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"Privacidad"</string>
-    <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Inhabilitada por el administrador"</string>
+    <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Inhabilitado por el administrador"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Estado de seguridad"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Bloqueo de pantalla y huella digital"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Bloqueo de pantalla"</string>
@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automática"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Banda preferida: 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Selecciona al menos una banda para el punto de acceso Wi‑Fi:"</string>
@@ -972,8 +973,8 @@
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Preferencia de itinerancia"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Preferir Wi-Fi"</item>
-    <item msgid="1335127656328817518">"Preferir datos móviles"</item>
+    <item msgid="2124257075906188844">"Dar preferencia a Wi-Fi"</item>
+    <item msgid="1335127656328817518">"Dar prioridad a datos móviles"</item>
     <item msgid="3132912693346866895">"Solo conexión Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -987,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Preferir Wi-Fi"</item>
-    <item msgid="5074515506087318555">"Preferir datos móviles"</item>
+    <item msgid="5782108782860004851">"Dar preferencia a Wi-Fi"</item>
+    <item msgid="5074515506087318555">"Dar prioridad a datos móviles"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturales"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Mejorados"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturados"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automático"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Automático"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Usar solo colores reales"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Ajustar entre colores vívidos y reales"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Cambiar orientación al girar el tablet"</string>
@@ -1099,7 +1100,7 @@
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Programación"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Ninguna"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Activar a una hora personalizada"</string>
-    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Activar de anochecer a amanecer"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Activar del anochecer al amanecer"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Hora de inicio"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Hora de finalización"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"Estado"</string>
@@ -1115,7 +1116,7 @@
     <string name="night_display_activation_on_manual" msgid="277343561277625826">"Activar ahora"</string>
     <string name="night_display_activation_off_manual" msgid="4074557720918572883">"Desactivar ahora"</string>
     <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"Activar hasta el amanecer"</string>
-    <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Desactivar hasta el atardecer"</string>
+    <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Desactivar hasta el anochecer"</string>
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Activar hasta las <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Desactivar hasta las <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Suspender después de"</string>
@@ -1923,7 +1924,7 @@
     <string name="usage_time_label" msgid="295954901452833058">"Tiempo de uso"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Accesibilidad"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Ajustes de accesibilidad"</string>
-    <string name="accessibility_settings_summary" msgid="981260486011624939">"Lectores de pantalla, pantalla, controles de interacción"</string>
+    <string name="accessibility_settings_summary" msgid="981260486011624939">"Lectores de pantalla, pantalla, interacción"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Ajustes de visión"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Personaliza este dispositivo para adaptarlo a tus necesidades. Puedes modificar las funciones de accesibilidad posteriormente en Ajustes."</string>
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Cambiar el tamaño de la fuente"</string>
@@ -2956,7 +2957,7 @@
     <string name="account_dashboard_title" msgid="5895948991491438911">"Cuentas"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"No se ha añadido ninguna cuenta"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Aplicaciones predeter."</string>
-    <string name="system_dashboard_summary" msgid="5797743225249766685">"Idiomas, hora, copias de seguridad y actualizaciones"</string>
+    <string name="system_dashboard_summary" msgid="5797743225249766685">"Idioma, hora, copias de seg. y actualizaciones"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Ajustes"</string>
     <string name="search_menu" msgid="6283419262313758339">"Buscar ajustes"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wifi, wi‑fi, conexión de red, internet, inalámbrica, datos, wi fi"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Silenciados, pero permitir <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> y <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Silenciados, permitir <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> y <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mensajes, eventos y recordatorios"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Cuando el modo No molestar esté activado, los mensajes, recordatorios y eventos se silenciarán, excepto los que permitas más arriba. Ajusta la configuración de los mensajes para que tus amigos, familiares u otros puedan contactarte."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Cuando el modo No molestar esté activado, los mensajes, recordatorios y eventos se silenciarán, excepto los que permitas más arriba. Ajusta la configuración de los mensajes para que tus amigos, familiares u otras personas puedan ponerse en contacto contigo."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Listo"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Ajustes"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Notificaciones sin sonido ni elementos visuales"</string>
@@ -3396,7 +3397,7 @@
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"Permitir que las notificaciones silenciadas por el modo No molestar activen la pantalla"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Ajustes de notificaciones"</string>
     <string name="suggestion_button_text" msgid="3275010948381252006">"Aceptar"</string>
-    <string name="device_feedback" msgid="3238056036766293294">"Enviar sugerencias sobre el dispositivo"</string>
+    <string name="device_feedback" msgid="3238056036766293294">"Enviar comentarios sobre el dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"Introducir el PIN del administrador"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Activado"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivado"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Cuando introduzcas tu PIN para iniciar este dispositivo, los servicios de accesibilidad como <xliff:g id="SERVICE">%1$s</xliff:g> aún no estarán disponibles."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Cuando introduzcas tu patrón para iniciar este dispositivo, los servicios de accesibilidad como <xliff:g id="SERVICE">%1$s</xliff:g> aún no estarán disponibles."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Cuando introduzcas tu contraseña para iniciar este dispositivo, los servicios de accesibilidad como <xliff:g id="SERVICE">%1$s</xliff:g> aún no estarán disponibles."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Nota: Después de reiniciar, tienes que desbloquear el teléfono para que esta aplicación se pueda iniciar"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Nota: Si reinicias el teléfono y has definido un bloqueo de pantalla, esta aplicación no se podrá iniciar hasta que desbloquees el teléfono"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Información del IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Información relacionada con el IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(N.º <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3701,7 +3702,7 @@
     <string name="notification_summary_none" msgid="4586376436702610">"Activadas para todas las aplicaciones"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> aplicaciones instaladas"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 aplicaciones instaladas"</string>
-    <string name="storage_summary" msgid="3801281635351732202">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> usado - <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponible"</string>
+    <string name="storage_summary" msgid="3801281635351732202">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> usado - <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponibles"</string>
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Almacenamiento interno: <xliff:g id="PERCENTAGE">%1$s</xliff:g> usado (<xliff:g id="FREE_SPACE">%2$s</xliff:g> disponible)"</string>
     <string name="display_summary" msgid="6737806235882127328">"Suspender tras <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fondo de pantalla, suspensión, tamaño de la fuente"</string>
@@ -3909,7 +3910,7 @@
     <string name="bluetooth_disabled" msgid="6244000672828617410">"Desactivado"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Conectado a <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Conectado a varios dispositivos"</string>
-    <string name="demo_mode" msgid="2798762752209330277">"Modo de demostración de IU del sistema"</string>
+    <string name="demo_mode" msgid="2798762752209330277">"Modo de demostración de UI del sistema"</string>
     <string name="dark_ui_mode" msgid="2112241426441807273">"Modo nocturno"</string>
     <string name="dark_ui_mode_title" msgid="975299966259850992">"Definir modo nocturno"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Ajustes rápidos de mosaicos de desarrolladores"</string>

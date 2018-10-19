@@ -18,12 +18,11 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.os.UserHandle;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;

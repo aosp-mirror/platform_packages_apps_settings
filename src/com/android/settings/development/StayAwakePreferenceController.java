@@ -23,7 +23,6 @@ import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.provider.Settings;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;

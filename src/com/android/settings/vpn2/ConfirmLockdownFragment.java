@@ -15,9 +15,10 @@
  */
 package com.android.settings.vpn2;
 
+import android.app.Fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 

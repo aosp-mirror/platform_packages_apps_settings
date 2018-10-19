@@ -19,10 +19,9 @@ package com.android.settings.inputmethod;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.provider.Settings;
-import android.view.InputDevice;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.view.InputDevice;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

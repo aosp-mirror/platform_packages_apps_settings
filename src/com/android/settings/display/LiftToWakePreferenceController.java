@@ -13,18 +13,17 @@
  */
 package com.android.settings.display;
 
-import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
-
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.provider.Settings;
-
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
 
 public class LiftToWakePreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

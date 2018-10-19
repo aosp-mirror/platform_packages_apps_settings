@@ -22,9 +22,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.view.LayoutInflater;
-
 import androidx.preference.PreferenceViewHolder;
+import android.view.LayoutInflater;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

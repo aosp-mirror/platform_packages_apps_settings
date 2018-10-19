@@ -26,6 +26,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -46,6 +47,7 @@ import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
+import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.slices.SliceData;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;

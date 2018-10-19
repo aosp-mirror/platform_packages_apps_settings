@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BATTERY;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -36,6 +35,7 @@ import static org.mockito.Mockito.when;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -49,6 +49,8 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -388,6 +390,34 @@ public class PowerUsageSummaryTest {
         info.remainingLabel = "Phone will shut down soon";
         assertThat(PowerUsageSummary.getDashboardLabel(mRealContext, info))
                 .isEqualTo("3% - Phone will shut down soon");
+    }
+
+    @Test
+    public void percentageSettingAvailable_shouldNotBeHiddenInSearch() {
+        final Resources resources = spy(mRealContext.getResources());
+        doReturn(true).when(resources).getBoolean(anyInt());
+        doReturn(resources).when(mRealContext).getResources();
+        final String prefKey = new BatteryPercentagePreferenceController(mRealContext)
+                .getPreferenceKey();
+
+        final List<String> nonIndexableKeys =
+                PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mRealContext);
+
+        assertThat(nonIndexableKeys).doesNotContain(prefKey);
+    }
+
+    @Test
+    public void percentageSettingNotAvailable_shouldBeHiddenInSearch() {
+        final Resources resources = spy(mRealContext.getResources());
+        doReturn(false).when(resources).getBoolean(anyInt());
+        doReturn(resources).when(mRealContext).getResources();
+        final String prefKey = new BatteryPercentagePreferenceController(mRealContext)
+                .getPreferenceKey();
+
+        final List<String> nonIndexableKeys =
+                PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mRealContext);
+
+        assertThat(nonIndexableKeys).contains(prefKey);
     }
 
     public static class TestFragment extends PowerUsageSummary {

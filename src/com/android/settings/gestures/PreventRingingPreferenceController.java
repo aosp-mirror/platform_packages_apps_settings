@@ -24,7 +24,6 @@ import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;

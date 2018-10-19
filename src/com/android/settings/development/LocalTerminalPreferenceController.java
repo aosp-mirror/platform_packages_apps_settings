@@ -3,11 +3,10 @@ package com.android.settings.development;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
-
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;

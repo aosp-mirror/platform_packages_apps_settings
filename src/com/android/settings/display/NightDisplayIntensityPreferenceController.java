@@ -17,10 +17,9 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.text.TextUtils;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.SliderPreferenceController;

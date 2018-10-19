@@ -28,13 +28,12 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.CryptKeeperConfirm;

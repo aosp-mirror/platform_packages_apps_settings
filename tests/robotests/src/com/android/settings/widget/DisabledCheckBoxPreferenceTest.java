@@ -27,11 +27,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.R;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -39,6 +34,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.R;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import android.widget.LinearLayout;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DisabledCheckBoxPreferenceTest {

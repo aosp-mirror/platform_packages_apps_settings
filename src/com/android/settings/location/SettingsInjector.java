@@ -37,13 +37,12 @@ import android.os.Messenger;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Xml;
-
-import androidx.preference.Preference;
 
 import com.android.settings.widget.AppPreference;
 import com.android.settings.widget.RestrictedAppPreference;

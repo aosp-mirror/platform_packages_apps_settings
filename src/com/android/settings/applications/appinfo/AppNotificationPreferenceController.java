@@ -20,7 +20,6 @@ import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.preference.Preference;
 
 import com.android.settings.R;

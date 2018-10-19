@@ -17,7 +17,6 @@
 package com.android.settings.development;
 
 import android.content.Context;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 

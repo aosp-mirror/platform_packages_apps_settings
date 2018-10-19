@@ -21,7 +21,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;

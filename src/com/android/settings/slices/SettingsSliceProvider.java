@@ -26,15 +26,12 @@ import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.slice.Slice;
-import androidx.slice.SliceProvider;
 
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
@@ -56,6 +53,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import androidx.slice.Slice;
+import androidx.slice.SliceProvider;
 
 /**
  * A {@link SliceProvider} for Settings to enabled inline results in system apps.

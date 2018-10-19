@@ -17,7 +17,6 @@
 package com.android.settings.development;
 
 import static com.android.settings.development.KeepActivitiesPreferenceController.SETTING_VALUE_OFF;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,9 +26,8 @@ import android.app.IActivityManager;
 import android.content.Context;
 import android.os.RemoteException;
 import android.provider.Settings;
-
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

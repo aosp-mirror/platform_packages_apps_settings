@@ -39,6 +39,8 @@ import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -48,9 +50,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

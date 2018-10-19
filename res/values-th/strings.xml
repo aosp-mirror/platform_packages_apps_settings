@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"อัตโนมัติ"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"ย่านความถี่ 2.4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"ย่านความถี่ 5 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"ต้องการใช้ย่านความถี่ 5.0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"เลือกอย่างน้อยหนึ่งย่านความถี่สำหรับฮอตสปอต Wi‑Fi:"</string>
@@ -949,7 +950,7 @@
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"อุปกรณ์อื่นๆ สามารถเชื่อมต่อกับ <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"รหัสผ่านฮอตสปอต"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"ย่านความถี่ AP"</string>
-    <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"ใช้ฮอตสปอตเพื่อสร้างเครือข่าย Wi‑Fi สำหรับอุปกรณ์อื่นๆ ฮอตสปอตจะแชร์อินเทอร์เน็ตโดยใช้การเชื่อมต่อข้อมูลผ่านมือถือ อาจมีค่าบริการเน็ตมือถือเพิ่มเติม"</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"ใช้ฮอตสปอตเพื่อสร้างเครือข่าย Wi‑Fi สำหรับอุปกรณ์อื่นๆ ฮอตสปอตจะแชร์อินเทอร์เน็ตโดยใช้การเชื่อมต่อเน็ตมือถือ อาจมีค่าบริการเน็ตมือถือเพิ่มเติม"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"แอปสามารถสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="1590313508558948079">"ปิดฮอตสปอตโดยอัตโนมัติ"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="5858098059725925084">"ฮอตสปอต Wi‑Fi จะปิดถ้าไม่มีอุปกรณ์ที่เชื่อมต่อ"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ธรรมชาติ"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"บูสต์"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"อิ่มตัว"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"อัตโนมัติ"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"ปรับอัตโนมัติ"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"ใช้สีที่ตรงตามจริงเท่านั้น"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"ปรับระหว่างสีที่สดใสและสีที่ตรงตามจริง"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"เปลี่ยนการวางแนวโดยอัตโนมัติเมื่อหมุนแท็บเล็ต"</string>
@@ -1099,7 +1100,7 @@
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"กำหนดการ"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"ไม่มี"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"เปิดในเวลาที่กำหนด"</string>
-    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"เปิดจากอาทิตย์ตกจนอาทิตย์ขึ้น"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"เปิดตั้งแต่อาทิตย์ตกจนขึ้น"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"เวลาเริ่มต้น"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"เวลาสิ้นสุด"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"สถานะ"</string>
@@ -1508,7 +1509,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="376389105752995580">"กำลังแชร์การเชื่อมต่ออินเทอร์เน็ตของ <xliff:g id="DEVICE_NAME">%1$d</xliff:g> นี้ผ่านบลูทูธ"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"ไม่สามารถปล่อยการเชื่อมต่อมากกว่า <xliff:g id="MAXCONNECTION">%1$d</xliff:g> อุปกรณ์"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> จะถูกยกเลิกการปล่อยสัญญาณ"</string>
-    <string name="tethering_footer_info" msgid="7112228674056306147">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ เพื่อให้อุปกรณ์อื่นๆ ใช้อินเทอร์เน็ตจากการเชื่อมต่อข้อมูลผ่านมือถือได้ และแอปยังสามารถสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
+    <string name="tethering_footer_info" msgid="7112228674056306147">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ เพื่อให้อุปกรณ์อื่นๆ ใช้อินเทอร์เน็ตจากการเชื่อมต่อเน็ตมือถือได้ และแอปยังสามารถสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"ความช่วยเหลือ"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"เครือข่ายมือถือ"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"แพ็กเกจอินเทอร์เน็ต"</string>
@@ -2520,8 +2521,8 @@
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"นำโปรไฟล์งานออก"</string>
     <string name="background_data" msgid="5779592891375473817">"ข้อมูลพื้นหลัง"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"แอปพลิเคชันสามารถซิงค์ ส่ง และรับข้อมูลได้ตลอดเวลา"</string>
-    <string name="background_data_dialog_title" msgid="6059217698124786537">"ปิดข้อมูลแบ็กกราวด์"</string>
-    <string name="background_data_dialog_message" msgid="6981661606680941633">"การปิดใช้งานข้อมูลแบ็กกราวด์จะทำให้แบตเตอรี่ใช้งานได้ยาวนานขึ้นและลดการใช้ข้อมูลลง แอปพลิเคชันบางอย่างอาจยังคงใช้การเชื่อมต่อข้อมูลแบ็กกราวด์อยู่"</string>
+    <string name="background_data_dialog_title" msgid="6059217698124786537">"ปิดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลัง"</string>
+    <string name="background_data_dialog_message" msgid="6981661606680941633">"การปิดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังจะทำให้แบตเตอรี่ใช้งานได้ยาวนานขึ้นและลดการใช้ข้อมูลลง แอปพลิเคชันบางอย่างอาจยังคงใช้การเชื่อมต่ออินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังอยู่"</string>
     <string name="sync_automatically" msgid="1682730255435062059">"ซิงค์ข้อมูลแอปพลิเคชันโดยอัตโนมัติ"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"เปิดใช้การซิงค์"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"ปิดการซิงค์"</string>
@@ -2551,7 +2552,7 @@
     <string name="really_remove_account_message" product="device" msgid="7507474724882080166">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดออกจากอุปกรณ์!"</string>
     <string name="remove_account_failed" msgid="3901397272647112455">"ผู้ดูแลระบบไม่อนุญาตให้ทำการเปลี่ยนแปลงนี้"</string>
     <string name="cant_sync_dialog_title" msgid="2777238588398046285">"ซิงค์ด้วยตนเองไม่ได้"</string>
-    <string name="cant_sync_dialog_message" msgid="1938380442159016449">"รายการนี้ถูกปิดใช้งานการซิงค์อยู่ หากต้องการเปลี่ยนการตั้งค่า ให้เปิดใช้งานข้อมูลแบ็กกราวด์และการซิงค์อัตโนมัติชั่วคราว"</string>
+    <string name="cant_sync_dialog_message" msgid="1938380442159016449">"รายการนี้ปิดการซิงค์อยู่ หากต้องการเปลี่ยนการตั้งค่า ให้เปิดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังและการซิงค์อัตโนมัติชั่วคราว"</string>
     <string name="enter_password" msgid="8035706727471334122">"ป้อนรหัสผ่านเพื่อเริ่มต้นใช้งาน Android"</string>
     <string name="enter_pin" msgid="5305333588093263790">"ป้อน PIN เพื่อเริ่มต้นใช้งาน Android"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"วาดรูปแบบเพื่อเริ่มต้นใช้งาน Android"</string>
@@ -2575,8 +2576,8 @@
     <string name="data_usage_cycle" msgid="5652529796195787949">"รอบการใช้ข้อมูล"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"การใช้งานแอป"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"การโรมมิ่งอินเทอร์เน็ต"</string>
-    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"จำกัดข้อมูลแบ็กกราวด์"</string>
-    <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"อนุญาตข้อมูลแบ็กกราวด์"</string>
+    <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"จำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลัง"</string>
+    <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"อนุญาตอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลัง"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"แยกการใช้งาน 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="2296217964873872571">"แสดง Wi-Fi"</string>
     <string name="data_usage_menu_hide_wifi" msgid="7290056718050186769">"ซ่อน Wi‑Fi"</string>
@@ -2618,8 +2619,8 @@
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"ข้อมูลพื้นหลัง"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="5853552187570622572">"เปิดใช้อินเทอร์เน็ตมือถือในเบื้องหลัง"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"ก่อนอื่นให้ตั้งค่าขีดจำกัดในการใช้เน็ตมือถือก่อน เพื่อจำกัดอินเทอร์เน็ตที่แอปนี้ใช้งานอยู่เบื้องหลัง"</string>
-    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"ต้องการจำกัดข้อมูลแบ็กกราวด์หรือไม่"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"ฟีเจอร์นี้อาจทำให้แอปพลิเคชันที่ต้องอาศัยข้อมูลแบ็กกราวด์หยุดทำงานเมื่อมีแต่เครือข่ายมือถือเท่านั้นที่ใช้งานได้\n\nคุณสามารถดูการควบคุมการใช้งานข้อมูลที่เหมาะสมกว่านี้ได้ในการตั้งค่าที่มีอยู่ภายในแอปพลิเคชัน"</string>
+    <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"ต้องการจำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังหรือไม่"</string>
+    <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"ฟีเจอร์นี้อาจทำให้แอปพลิเคชันที่ต้องอาศัยอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังหยุดทำงานเมื่อมีแต่เครือข่ายมือถือเท่านั้นที่ใช้งานได้\n\nคุณสามารถดูการควบคุมการใช้งานข้อมูลที่เหมาะสมกว่านี้ได้ในการตั้งค่าที่มีอยู่ภายในแอปพลิเคชัน"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"คุณสามารถจำกัดอินเทอร์เน็ตในพื้นหลังได้เมื่อคุณได้ตั้งค่าขีดจำกัดอินเทอร์เน็ตมือถือไว้เท่านั้น"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"เปิดซิงค์ข้อมูลอัตโนมัติหรือไม่"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"การเปลี่ยนแปลงใดๆ ที่คุณทำกับบัญชีของคุณบนเว็บจะมีการคัดลอกไปยังแท็บเล็ตโดยอัตโนมัติ\n\nบางบัญชีอาจคัดลอกการเปลี่ยนแปลงที่คุณทำบนแท็บเล็ตไปยังเว็บโดยอัตโนมัติ นี่คือการทำงานของบัญชี Google"</string>
@@ -2634,7 +2635,7 @@
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"การจำกัดการใช้อินเทอร์เน็ต"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="4983487893343645667">"แท็บเล็ตจะปิดอินเทอร์เน็ตมือถือเมื่อถึงขีดจำกัดที่คุณตั้งไว้\n\nเนื่องจากว่าปริมาณการใช้อินเทอร์เน็ตนั้นวัดโดยแท็บเล็ตของคุณ ผู้ให้บริการอาจมีวิธีบันทึกการใช้ที่แตกต่างออกไป ดังนั้น โปรดกำหนดขีดจำกัดอย่างระมัดระวัง"</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="3926320594049434225">"โทรศัพท์ของคุณจะปิดอินเทอร์เน็ตมือถือเมื่อถึงขีดจำกัดที่คุณตั้งไว้\n\nเนื่องจากว่าปริมาณการใช้อินเทอร์เน็ตนั้นวัดโดยโทรศัพท์ของคุณ ผู้ให้บริการอาจมีวิธีบันทึกการใช้ที่แตกต่างออกไป ดังนั้น โปรดกำหนดขีดจำกัดอย่างระมัดระวัง"</string>
-    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"ต้องการจำกัดข้อมูลแบ็กกราวด์หรือไม่"</string>
+    <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"ต้องการจำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังหรือไม่"</string>
     <string name="data_usage_restrict_background" msgid="434093644726734586">"หากคุณจำกัดอินเทอร์เน็ตมือถือในพื้นหลัง แอปและบริการบางอย่างจะไม่ทำงานเว้นแต่คุณจะเชื่อมต่อ Wi-Fi"</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"หากคุณจำกัดอินเทอร์เน็ตมือถือในพื้นหลัง แอปและบริการบางอย่างจะไม่ทำงานเว้นแต่คุณจะเชื่อมต่อ Wi-Fi\n\nการตั้งค่านี้ส่งผลต่อผู้ใช้แท็บเล็ตนี้ทุกราย"</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"หากคุณจำกัดอินเทอร์เน็ตมือถือในพื้นหลัง แอปและบริการบางอย่างจะไม่ทำงานเว้นแต่คุณจะเชื่อมต่อ Wi-Fi\n\nการตั้งค่านี้ส่งผลต่อผู้ใช้โทรศัพท์นี้ทุกราย"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"ปิดเสียงแล้ว แต่อนุญาตให้ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> และ <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"ปิดเสียงแล้ว แต่อนุญาตให้ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> และ <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"ข้อความ เหตุการณ์ และการช่วยเตือน"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"เมื่อเปิด \"ห้ามรบกวน\" ข้อความ การช่วยเตือน และเหตุการณ์ต่างๆ จะถูกปิดเสียงยกเว้นรายการที่คุณอนุญาตข้างต้น คุณปรับเปลี่ยนการตั้งค่าเพื่ออนุญาตให้เพื่อน ครอบครัว หรือรายชื่อติดต่อคนอื่นๆ ติดต่อคุณได้"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"เมื่อเปิด \"ห้ามรบกวน\" ข้อความ การช่วยเตือน และเหตุการณ์ต่างๆ จะถูกปิดเสียงยกเว้นรายการที่คุณอนุญาตข้างต้น คุณปรับเปลี่ยนการตั้งค่าเพื่ออนุญาตให้เพื่อน ครอบครัว หรือรายชื่อติดต่อคนอื่นๆ ติดต่อคุณได้"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"เสร็จ"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"การตั้งค่า"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"ไม่มีภาพหรือเสียงจากการแจ้งเตือน"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"เมื่อคุณป้อน PIN เพื่อเริ่มใช้งานอุปกรณ์นี้ บริการความสามารถในการเข้าถึงอย่างเช่น <xliff:g id="SERVICE">%1$s</xliff:g> จะยังไม่พร้อมใช้งาน"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"เมื่อคุณป้อนรูปแบบเพื่อเริ่มใช้งานอุปกรณ์นี้ บริการความสามารถในการเข้าถึงอย่างเช่น <xliff:g id="SERVICE">%1$s</xliff:g> จะยังไม่พร้อมใช้งาน"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"เมื่อคุณป้อนรหัสผ่านเพื่อเริ่มใช้งานอุปกรณ์นี้ บริการความสามารถในการเข้าถึงอย่างเช่น <xliff:g id="SERVICE">%1$s</xliff:g> จะยังไม่พร้อมใช้งาน"</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"หมายเหตุ: หลังจากเริ่มต้นใหม่ แอปนี้จะไม่สามารถเริ่มการทำงานได้จนกว่าคุณจะปลดล็อกโทรศัพท์"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"หมายเหตุ: หากคุณรีสตาร์ทโทรศัพท์และตั้งการล็อกหน้าจอไว้ แอปนี้จะเริ่มทำงานไม่ได้จนกว่าคุณจะปลดล็อกโทรศัพท์"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"ข้อมูล IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"ข้อมูลที่เกี่ยวข้องกับ IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(ช่อง<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3741,7 +3742,7 @@
     <string name="condition_cellular_title" msgid="1327317003797575735">"อินเทอร์เน็ตมือถือปิดอยู่"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"สามารถใช้อินเทอร์เน็ตผ่าน Wi-Fi ได้เท่านั้น"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"โปรแกรมประหยัดอินเทอร์เน็ตเปิดอยู่"</string>
-    <string name="condition_bg_data_summary" msgid="656957852895282228">"สามารถใช้ข้อมูลแบ็กกราวด์ผ่าน Wi-Fi ได้เท่านั้น ซึ่งอาจส่งผลกระทบต่อแอปหรือบริการบางอย่างเมื่อไม่มี Wi-Fi"</string>
+    <string name="condition_bg_data_summary" msgid="656957852895282228">"สามารถใช้อินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังผ่าน Wi-Fi ได้เท่านั้น ซึ่งอาจส่งผลกระทบต่อแอปหรือบริการบางอย่างเมื่อไม่มี Wi-Fi"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"โปรไฟล์งานปิดอยู่"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"ปิดใช้แอป การซิงค์ในแบ็กกราวด์ และฟีเจอร์อื่นๆ เกี่ยวกับโปรไฟล์งานของคุณอยู่"</string>
     <string name="condition_device_muted_action_turn_on_sound" msgid="4930240942726349213">"เปิดเสียง"</string>
@@ -3832,7 +3833,7 @@
     <string name="launch_wifi_text" msgid="2311424914664372687">"ดูรายละเอียด"</string>
     <string name="data_saver_title" msgid="8034286939200289826">"การประหยัดอินเทอร์เน็ต"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"ไม่จำกัดการใช้อินเทอร์เน็ต"</string>
-    <string name="restrict_background_blacklisted" msgid="3995443391711013068">"ปิดใช้ข้อมูลแบ็กกราวด์"</string>
+    <string name="restrict_background_blacklisted" msgid="3995443391711013068">"ปิดใช้อินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลัง"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"เปิด"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"ปิด"</string>
     <string name="data_saver_switch_title" msgid="836312690356005669">"ใช้โปรแกรมประหยัดอินเทอร์เน็ต"</string>
@@ -3952,7 +3953,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"หากต้องการสลับแอป ให้เลื่อนนิ้วขึ้นบนปุ่มหน้าแรก จากนั้นเลื่อนขึ้นอีกครั้งเพื่อดูแอปทั้งหมดจากหน้าจอใดก็ได้ คุณจะไม่มีปุ่มภาพรวมที่ด้านขวาล่างของหน้าจออีกต่อไป"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"ลองใช้ปุ่มหน้าแรกใหม่"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"เปิดท่าทางสัมผัสใหม่เพื่อสลับแอป"</string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"แตะ 2 ครั้งเพื่อตรวจสอบโทรศัพท์"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"แตะ 2 ครั้งเพื่อดูโทรศัพท์"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"แตะ 2 ครั้งเพื่อตรวจสอบแท็บเล็ต"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"แตะ 2 ครั้งเพื่อตรวจสอบอุปกรณ์"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"หากต้องการดูเวลา ไอคอนการแจ้งเตือน และข้อมูลอื่นๆ ให้แตะหน้าจอ 2 ครั้ง"</string>
@@ -4053,8 +4054,8 @@
     <string name="default_calendar_app_title" msgid="3545972964391065220">"แอปปฏิทิน"</string>
     <string name="default_contacts_app_title" msgid="3497370557378660098">"แอปรายชื่อติดต่อ"</string>
     <plurals name="default_email_app_title" formatted="false" msgid="42826975161049245">
-      <item quantity="other">แอปโปรแกรมรับส่งเมล</item>
-      <item quantity="one">แอปโปรแกรมรับส่งเมล</item>
+      <item quantity="other">แอปโปรแกรมรับส่งอีเมล</item>
+      <item quantity="one">แอปโปรแกรมรับส่งอีเมล</item>
     </plurals>
     <string name="default_map_app_title" msgid="7560143381633608567">"แอปแผนที่"</string>
     <plurals name="default_phone_app_title" formatted="false" msgid="6714041230953195024">

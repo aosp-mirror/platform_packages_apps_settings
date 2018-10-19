@@ -21,13 +21,13 @@ import android.content.Intent;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.RemoteException;
+import androidx.preference.Preference;
 import android.util.AttributeSet;
 import android.util.FeatureFlagUtils;
 
-import androidx.preference.Preference;
-
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CellDataPreference.DataStateListener;

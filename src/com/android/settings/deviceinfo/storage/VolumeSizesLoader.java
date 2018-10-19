@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo.storage;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.os.storage.VolumeInfo;
-
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;

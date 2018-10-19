@@ -25,10 +25,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
+import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuInflater;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

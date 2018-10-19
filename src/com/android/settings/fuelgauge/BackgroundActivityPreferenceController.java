@@ -18,7 +18,6 @@ import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserManager;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

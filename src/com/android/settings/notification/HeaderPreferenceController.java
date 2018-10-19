@@ -19,16 +19,16 @@ package com.android.settings.notification;
 import static com.android.settings.widget.EntityHeaderController.PREF_KEY_APP_HEADER;
 
 import android.app.Activity;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import android.content.Context;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.Preference;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.util.Slog;
 import android.view.View;
-
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;

@@ -21,13 +21,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.speech.tts.TextToSpeech.EngineInfo;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.util.Log;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;

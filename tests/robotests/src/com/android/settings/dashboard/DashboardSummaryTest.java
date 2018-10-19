@@ -17,7 +17,6 @@
 package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
@@ -30,7 +29,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.settings.dashboard.conditional.ConditionManager;

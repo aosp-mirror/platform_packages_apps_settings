@@ -29,9 +29,8 @@ import android.accounts.AuthenticatorDescription;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
-
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;

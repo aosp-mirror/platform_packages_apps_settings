@@ -18,7 +18,6 @@ package com.android.settings.datetime;
 
 import android.content.Context;
 import android.provider.Settings;
-
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;

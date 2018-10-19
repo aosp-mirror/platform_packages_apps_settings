@@ -282,7 +282,7 @@
     <string name="action_drag_label_move_up" msgid="9052210023727612540">"Mou amunt"</string>
     <string name="action_drag_label_move_down" msgid="7448713844582912157">"Mou avall"</string>
     <string name="action_drag_label_move_top" msgid="557081389352288310">"Mou a la part superior"</string>
-    <string name="action_drag_label_move_bottom" msgid="2468642142414126482">"Mou al final"</string>
+    <string name="action_drag_label_move_bottom" msgid="2468642142414126482">"Mou a la part inferior"</string>
     <string name="action_drag_label_remove" msgid="2861038147166966206">"Suprimeix l\'idioma"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Selecció de l\'activitat"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Informació del dispositiu"</string>
@@ -422,7 +422,7 @@
     <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="1466238255429527112">"Les funcions de protecció del dispositiu no s\'activaran. Si perds el dispositiu o te\'l roben, no podràs evitar que altres persones l\'utilitzin."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Les funcions de protecció del dispositiu no s\'activaran. Si perds el telèfon o te\'l roben, no podràs evitar que altres persones l\'utilitzin."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Omet de totes maneres"</string>
-    <string name="go_back_button_label" msgid="4745265266186209467">"Enrere"</string>
+    <string name="go_back_button_label" msgid="4745265266186209467">"Torna"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Toca el sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Es troba a la part posterior del telèfon. Utilitza el dit índex."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Il·lustració amb la ubicació del sensor d\'empremtes digitals i de dispositiu"</string>
@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automàtica"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Preferència per la banda de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Tria almenys una banda per al punt d\'accés Wi-Fi:"</string>
@@ -1056,7 +1057,7 @@
     <string name="account_settings" msgid="6403589284618783461">"Comptes"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"Comptes del perfil professional: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"Comptes del perfil personal"</string>
-    <string name="accessibility_work_account_title" msgid="1231830766637939527">"Compte professional: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_work_account_title" msgid="1231830766637939527">"Compte de la feina: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Compte personal: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Cerca"</string>
     <string name="display_settings" msgid="7965901687241669598">"Pantalla"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Millorat"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturat"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automàtic"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Automàtic"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Fes servir només colors precisos"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Ajusta entre colors vius i precisos"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Canvia l\'orientació automàticament en girar la tauleta"</string>
@@ -1095,10 +1096,10 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimitza la brillantor segons la llum. Quan aquesta funció està activada, pots ajustar la brillantor temporalment."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"La brillantor de la pantalla s\'ajustarà automàticament al teu entorn i a la teva activitat. Pots moure el control lliscant manualment perquè la brillantor automàtica aprengui les teves preferències."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Llum nocturna"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"La llum nocturna dona un to ambre a la pantalla. D\'aquesta manera, costa menys mirar-la o llegir-hi amb poca llum i és més fàcil adormir-se."</string>
+    <string name="night_display_text" msgid="1837277457033025056">"La funció Llum nocturna dona un to ambre a la pantalla. D\'aquesta manera, costa menys mirar-la o llegir-hi amb poca llum i és més fàcil adormir-se."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Programació"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Cap"</string>
-    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"S\'activa a una hora determinada"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"S\'activa a una hora personalitzada"</string>
     <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"S\'activa del vespre a l\'alba"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Hora d’inici"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Hora de finalització"</string>
@@ -1115,7 +1116,7 @@
     <string name="night_display_activation_on_manual" msgid="277343561277625826">"Activa ara"</string>
     <string name="night_display_activation_off_manual" msgid="4074557720918572883">"Desactiva ara"</string>
     <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"Activa fins a l\'alba"</string>
-    <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Desactiva fins a la posta de sol"</string>
+    <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Desactiva fins al vespre"</string>
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Activa fins a les <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Desactiva fins a les <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Repòs després de"</string>
@@ -1147,7 +1148,7 @@
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Quan es mostra"</string>
     <string name="doze_title" msgid="2375510714460456687">"Notificacions noves"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activa la pantalla en rebre notificacions"</string>
-    <string name="doze_always_on_title" msgid="1046222370442629646">"Sempre activat"</string>
+    <string name="doze_always_on_title" msgid="1046222370442629646">"Sempre activada"</string>
     <string name="doze_always_on_summary" msgid="6978257596231155345">"Mostra l\'hora, les icones de notificació i altres dades. Consumeix més bateria."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Mida de la lletra"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Amplia o redueix el text"</string>
@@ -3109,7 +3110,7 @@
     <string name="zen_mode_block_effects_screen_off" msgid="4276414460889400625">"Quan la pantalla estigui desactivada"</string>
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Silencia el so i la vibració"</string>
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"No activis la pantalla"</string>
-    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Desactiva la llum intermitent"</string>
+    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Desactiva el llum intermitent"</string>
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"No mostris les notificacions a la pantalla"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Amaga les icones de la barra d\'estat"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Amaga els punts de notificació"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Silenciat, però permet <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> i <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Silenciat, però permet <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> i <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Missatges, esdeveniments i recordatoris"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Quan actives el mode No molestis, els missatges, els recordatoris i els esdeveniments se silencien, excepte aquells elements que hagis permès més amunt. Pots ajustar la configuració dels missatges per permetre que amics, familiars i altres contactes puguin contactar amb tu."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Quan actives el mode No molestis, els missatges, els recordatoris i els esdeveniments se silencien, excepte aquells elements que hagis permès més amunt. Pots ajustar la configuració dels missatges per permetre que amics, familiars i altres contactes puguin contactar amb tu."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Fet"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Configuració"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Notificacions sense so ni elements visuals"</string>
@@ -3172,8 +3173,8 @@
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons del perfil professional"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Utilitza sons del perfil pers."</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Els sons del perfil professional i personal són els mateixos"</string>
-    <string name="work_ringtone_title" msgid="5806657896300235315">"So de trucada professional"</string>
-    <string name="work_notification_ringtone_title" msgid="6081247402404510004">"So de notificació professional predeterminat"</string>
+    <string name="work_ringtone_title" msgid="5806657896300235315">"So de trucada de la feina"</string>
+    <string name="work_notification_ringtone_title" msgid="6081247402404510004">"So de notificació de la feina predeterminat"</string>
     <string name="work_alarm_ringtone_title" msgid="1441926676833738891">"So d\'alarma de la feina predeterminat"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"Igual que al perfil personal"</string>
     <string name="work_sync_dialog_title" msgid="7123973297187354813">"Vols substituir els sons?"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Quan introdueixis el teu PIN per iniciar aquest dispositiu, els serveis d\'accessibilitat com ara <xliff:g id="SERVICE">%1$s</xliff:g> encara no estaran disponibles."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Quan introdueixis el teu patró per iniciar aquest dispositiu, els serveis d\'accessibilitat com ara <xliff:g id="SERVICE">%1$s</xliff:g> encara no estaran disponibles."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Quan introdueixis la teva contrasenya per iniciar aquest dispositiu, els serveis d\'accessibilitat com ara <xliff:g id="SERVICE">%1$s</xliff:g> encara no estaran disponibles."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Nota: després de reiniciar, l\'aplicació no s\'iniciarà fins que no desbloquegis el telèfon"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Nota: si reinicies el telèfon i has definit un bloqueig de pantalla, l\'aplicació no s\'iniciarà fins que no desbloquegis el telèfon"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Informació sobre l\'IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informació relativa a l\'IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Ranura <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3632,7 +3633,7 @@
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Ús màxim"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"No s\'han fet servir dades"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Vols que <xliff:g id="APP">%1$s</xliff:g> tingui accés a No molestis?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"L\'aplicació podrà activar o desactivar No molestis i fer canvis en paràmetres relacionats."</string>
+    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"L\'aplicació podrà activar o desactivar No molestis i fer canvis a les opcions de configuració relacionades."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"Ha d\'estar activat perquè l\'accés a les notificacions també ho està"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"Vols revocar l\'accés de l\'aplicació <xliff:g id="APP">%1$s</xliff:g> a No molestis?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"Se suprimiran totes les regles del mode No molestis creades per aquesta aplicació."</string>
@@ -3999,7 +4000,7 @@
     <string name="enterprise_privacy_exposure_category" msgid="7313392680107938517">"Tipus d\'informació que la teva organització pot veure"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="9079283547182933771">"Canvis fets per l\'administrador de la teva organització"</string>
     <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"El teu accés a aquest dispositiu"</string>
-    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Dades associades al teu compte professional, com ara el correu electrònic i el calendari"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Dades associades al teu compte de la feina, com ara el correu electrònic i el calendari"</string>
     <string name="enterprise_privacy_installed_packages" msgid="2313698828178764590">"Llista de les aplicacions que hi ha al dispositiu"</string>
     <string name="enterprise_privacy_usage_stats" msgid="4398411405572759370">"Temps dedicat i dades utilitzades en cada aplicació"</string>
     <string name="enterprise_privacy_network_logs" msgid="161722817268849590">"Registre del trànsit de xarxa més recent"</string>

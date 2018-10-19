@@ -16,7 +16,6 @@
 package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -30,7 +29,6 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

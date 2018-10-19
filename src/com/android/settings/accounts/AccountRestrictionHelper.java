@@ -17,11 +17,9 @@ package com.android.settings.accounts;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
-
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
-
 import java.util.ArrayList;
 
 public class AccountRestrictionHelper {

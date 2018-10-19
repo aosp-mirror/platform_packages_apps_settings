@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Tự động"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Băng tần 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Băng tần 5 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Ưu tiên băng tần 5 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Chọn ít nhất một băng tần cho điểm phát sóng Wi‑Fi:"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Tự nhiên"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Tăng độ nét"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Bão hòa"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Tự động"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Thích ứng"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Chỉ sử dụng màu chính xác"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Điều chỉnh giữa màu rực rỡ và màu chính xác"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Tự động chuyển hướng khi xoay máy tính bảng"</string>
@@ -2373,7 +2374,7 @@
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Nhập bằng giọng nói"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Dịch vụ nhập bằng giọng nói"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Tương tác và từ nóng đầy đủ"</string>
-    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Ngôn từ đơn giản dễ nhắn tin"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Lời nói thành văn bản đơn giản"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Dịch vụ nhập bằng giọng nói này có thể thực hiện theo dõi bằng giọng nói luôn bật và kiểm soát các ứng dụng hỗ trợ giọng nói thay mặt cho bạn. Dịch vụ này đến từ <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Cho phép sử dụng dịch vụ này?"</string>
     <string name="tts_engine_preference_title" msgid="1578826947311494239">"Công cụ ưu tiên"</string>
     <string name="tts_engine_settings_title" msgid="6886964122861384818">"Cài đặt công cụ"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Đã tắt tiếng nhưng cho phép <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> và <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Đã tắt tiếng nhưng cho phép <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> và <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Tin nhắn, sự kiện và lời nhắc"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Khi chế độ Không làm phiền đang bật, tin nhắn, lời nhắc và sự kiện sẽ bị ẩn trừ các mục mà bạn cho phép ở trên. Bạn có thể điều chỉnh mục cài đặt tin nhắn để cho phép bạn bè, gia đình hoặc những người khác liên hệ với bạn."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Khi chế độ Không làm phiền đang bật, tin nhắn, lời nhắc và sự kiện sẽ bị ẩn trừ các mục mà bạn cho phép ở trên. Bạn có thể điều chỉnh mục cài đặt tin nhắn để cho phép bạn bè, gia đình hoặc những người khác liên hệ với mình."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Xong"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Cài đặt"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Không có hình ảnh hoặc âm thanh khi có thông báo"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Khi bạn nhập mã PIN để khởi động thiết bị này, các dịch vụ hỗ trợ tiếp cận như <xliff:g id="SERVICE">%1$s</xliff:g> sẽ chưa sẵn sàng để sử dụng."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Khi bạn nhập hình mở khóa để khởi động thiết bị này, các dịch vụ hỗ trợ tiếp cận như <xliff:g id="SERVICE">%1$s</xliff:g> sẽ chưa sẵn sàng để sử dụng."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Khi bạn nhập mật khẩu để khởi động thiết bị này, các dịch vụ hỗ trợ tiếp cận như <xliff:g id="SERVICE">%1$s</xliff:g> sẽ chưa sẵn sàng để sử dụng."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Lưu ý: Sau khi khởi động lại, ứng dụng này không thể khởi động cho đến khi bạn mở khóa điện thoại"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Lưu ý: Nếu bạn khởi động lại điện thoại và đặt khóa màn hình, thì ứng dụng này không thể khởi động cho đến khi bạn mở khóa điện thoại."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Thông tin IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Thông tin liên quan đến IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Khe cắm<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3631,8 +3632,8 @@
     <string name="running_frequency" msgid="6622624669948277693">"Tần suất"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Mức sử dụng tối đa"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"Không có dữ liệu nào được sử dụng"</string>
-    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Cho phép truy cập vào Không làm phiền cho <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Ứng dụng có thể bật/tắt Không làm phiền và thực hiện thay đổi đối với các cài đặt liên quan."</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Cho phép <xliff:g id="APP">%1$s</xliff:g> truy cập chế độ Không làm phiền?"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Ứng dụng có thể bật/tắt chế độ Không làm phiền và thay đổi các mục cài đặt liên quan."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"Phải luôn bật vì quyền truy cập thông báo được bật"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"Thu hồi quyền truy cập vào chế độ Không làm phiền của <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"Mọi quy tắc Không làm phiền do ứng dụng này tạo sẽ đều bị xóa."</string>
@@ -3740,7 +3741,7 @@
     <string name="condition_battery_summary" msgid="507347940746895275">"Trình tiết kiệm pin sẽ tắt một số tính năng của thiết bị và hạn chế ứng dụng"</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Dữ liệu di động đang tắt"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"Internet chỉ khả dụng qua Wi-Fi"</string>
-    <string name="condition_bg_data_title" msgid="2483860304802846542">"Trình tiết kiệm dữ liệu bật"</string>
+    <string name="condition_bg_data_title" msgid="2483860304802846542">"Trình tiết kiệm dữ liệu đang bật"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Dữ liệu nền chỉ khả dụng qua Wi-Fi. Điều này có thể ảnh hưởng đến một số ứng dụng hoặc dịch vụ khi không có Wi-Fi."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Hồ sơ công việc đã tắt"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Ứng dụng, đồng bộ hóa dưới nền và các tính năng khác có liên quan đến hồ sơ công việc của bạn bị tắt."</string>

@@ -20,12 +20,16 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-
+import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.SwitchPreference;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 /**

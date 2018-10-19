@@ -20,9 +20,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.service.settings.suggestions.Suggestion;
-import android.util.Pair;
-
 import androidx.annotation.NonNull;
+import android.util.Pair;
 
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;

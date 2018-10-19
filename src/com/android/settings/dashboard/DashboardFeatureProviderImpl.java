@@ -29,13 +29,12 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.provider.Settings;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

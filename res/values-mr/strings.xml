@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"आपोआप"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz बँड"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"५.० GHz बँड"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"५.० GHz बँडला प्राधान्य दिले"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"२.४ GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"५.० GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"वाय-फाय हॉटस्‍पॉटसाठी किमान एक बँड निवडा:"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"नैसर्गिक"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"बूस्ट केलेला"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"संपृक्त"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"आपोआप"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"अॅडॅप्टिव्ह"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"फक्त अचूक रंग वापरा"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"उठावदार आणि अचूक रंगामध्ये अॅडजस्‍ट करा"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"टॅब्लेट फिरवताना ओरिएंटेशन आपोआप स्विच करा"</string>
@@ -1095,13 +1096,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"उपलब्ध प्रकाशासाठी उज्ज्वलता स्तर अनुकूल करा. हे वैशिष्ट्य चालू असताना, तुम्ही तरीही उज्ज्वलता तात्पुरती समायोजित करू शकता."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"तुमच्या स्क्रीनची चमक तुमच्या वातावरण आणि अॅक्टिव्हिटीशी आपोआप समायोजित होईल. अनुकूलित चमकेला तुमची प्राधान्ये जाणून घेण्यात मदत करण्यासाठी तुम्ही स्लाइडर व्यक्तिचलितपणे हलवू शकता."</string>
     <string name="night_display_title" msgid="2626451512200357686">"रात्रीचा प्रकाश"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"रात्रीचा प्रकाश तुमच्या स्क्रीनला पिवळसर तपकिरी रंगछटा देतो. यामुळे मंद प्रकाशात तुमचा स्क्रीन पाहणे किंवा वाचणे सोपे होते आणि तुम्हाला झोप येण्यात मदत होऊ शकते."</string>
-    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"शेड्यूल"</string>
+    <string name="night_display_text" msgid="1837277457033025056">"रात्रीचा प्रकाश तुमच्या स्क्रीनला पिवळसर तपकिरी छटा देतो. यामुळे मंद प्रकाशात तुमची स्क्रीन पाहणे किंवा वाचणे सोपे होते आणि तुम्हाला झोप येण्यात मदत होऊ शकते."</string>
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"शेड्युल"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"काहीही नाही"</string>
-    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"कस्टम वेळी चालू होते"</string>
-    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"सूर्योदय ते सूर्यास्तादरम्यान चालू होते"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"ठराविक वेळी चालू होतो"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"सूर्यास्त-सूर्योदय चालू राहतो"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"प्रारंभ वेळ"</string>
-    <string name="night_display_end_time_title" msgid="8286061578083519350">"समाप्ती वेळ"</string>
+    <string name="night_display_end_time_title" msgid="8286061578083519350">"संपण्याची वेळ"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"स्थिती"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"तीव्रता"</string>
     <string name="night_display_summary_off" msgid="1792750041697946539">"बंद / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -3162,7 +3163,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"म्यूट केले आहे पण <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> आणि <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> ला अनुमती द्या"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"म्यूट केले आहे पण <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> आणि <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> ला अनुमती द्या"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"मेसेज, इव्हेंट आणि रिमाइंडर"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"जेव्हा व्यत्यय आणू नका सुरू असते तेव्हा मेसेज, रिमाइंडर आणि इव्हेंट म्यूट असतील, तुम्ही वरती अनुमती दिलेल्या आयटम व्यतिरिक्त. तुम्ही सेटिंग्ज मध्ये बदल करून तुमच्या मित्रमैत्रिणींना, कुटुंबियांना आणि इतर संपर्कांना तुमच्यापर्यंत पोहोचण्याची अनुमती देऊ शकता."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"जेव्हा व्यत्यय आणू नका सुरू असते तेव्हा मेसेज, रिमाइंडर आणि इव्हेंट म्यूट असतील, तुम्ही वरती अनुमती दिलेल्या आयटम व्यतिरिक्त. तुम्ही सेटिंग्ज मध्ये बदल करून तुमच्या मित्रमैत्रिणींना, कुटुंबियांना आणि इतर संपर्कांना तुमच्यापर्यंत पोहोचण्याची अनुमती देऊ शकता."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"झाले"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"सेटिंग्ज"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"सूचना आल्यावर व्हिज्युअल किंवा आवाज नाही"</string>
@@ -3376,7 +3377,7 @@
     <string name="zen_mode_when_never" msgid="8809494351918405602">"कधीही नाही"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"प्रत्येक रात्री"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"आठवड्याच्या रात्री"</string>
-    <string name="zen_mode_start_time" msgid="8102602297273744441">"प्रारंभ वेळ"</string>
+    <string name="zen_mode_start_time" msgid="8102602297273744441">"सुरू होण्याची वेळ"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"समाप्ती वेळ"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> पुढील दिवशी"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="2061973221027570123">"अनिश्चितपणे केवळ अलार्म वर बदला"</string>
@@ -3428,7 +3429,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"या डिव्हाइसचा प्रारंभ करण्यासाठी तुम्ही तुमचा पिन एंटर करता, तेव्हा <xliff:g id="SERVICE">%1$s</xliff:g> सारख्या सेवांची प्रवेशयोग्यता उपलब्धता असणार नाही."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"हे डिव्हाइस सुरू करण्यासाठी तुम्ही तुमचा पॅटर्न एंटर करता, तेव्हा <xliff:g id="SERVICE">%1$s</xliff:g> सारख्या सेवांची प्रवेशयोग्यता उपलब्ध असणार नाही."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"या डिव्हाइसचा प्रारंभ करण्यासाठी तुम्ही तुमचा पासवर्ड एंटर करता, तेव्हा <xliff:g id="SERVICE">%1$s</xliff:g> सारख्या सेवांची प्रवेशयोग्यता उपलब्ध असणार नाही."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"टीप: रीबूट केल्यानंतर, तुम्ही तुमचा फोन अनलॉक करे पर्यंत हे अॅप सुरू होऊ शकत नाही"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"टीप: तुम्ही तुमचा फोन रीस्टार्ट केल्यास आणि स्क्रीन लॉक सेट केले असल्यास, तुम्ही तुमचा फोन अनलॉक करेपर्यंत हे अॅप सुरू होऊ शकत नाही"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI माहिती"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI सापेक्ष माहिती"</string>
     <string name="slot_number" msgid="3762676044904653577">"(स्लॉट<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3632,7 +3633,7 @@
     <string name="running_frequency" msgid="6622624669948277693">"वारंवारता"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"कमाल वापर"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"कोणताही डेटा वापरला नाही"</string>
-    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g> साठी व्यत्यय आणू नका ला प्रवेशाची अनुमती द्यायची?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g> वर व्यत्यय आणू नका ला अॅक्सेस द्यायचा का?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"व्यत्यय आणू नका चालू/बंद करण्‍यात आणि संबंधित स्‍ट्रिंगमध्‍ये बदल करण्‍यात अ‍ॅप सक्षम असेल."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"सूचना प्रवेश चालू असल्याने चालू केलेले ठेवणे आवश्यक आहे"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"<xliff:g id="APP">%1$s</xliff:g> साठी व्यत्यय आणू नका मध्‍ये प्रवेश करणे रद्द करायचे?"</string>
@@ -3872,7 +3873,7 @@
     <string name="notification_log_details_badge" msgid="3258183328267662285">"बॅज दर्शवू शकता"</string>
     <string name="notification_log_details_content_intent" msgid="1113554570409128083">"हेतू"</string>
     <string name="notification_log_details_delete_intent" msgid="905118520685297007">"हेतू हटवा"</string>
-    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"पूर्ण स्क्रीन हेतू"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="7118560817013522978">"फुल स्क्रीन हेतू"</string>
     <string name="notification_log_details_actions" msgid="242523930165118066">"कृती:"</string>
     <string name="notification_log_details_title" msgid="7177091647508863295">"शीर्षक"</string>
     <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"दूरस्थ इनपुट"</string>

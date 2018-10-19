@@ -15,10 +15,8 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import android.util.AttributeSet;
-
 import androidx.preference.Preference;
-
+import android.util.AttributeSet;
 import com.android.settings.R;
 
 public class DataSaverPreference extends Preference implements DataSaverBackend.Listener {

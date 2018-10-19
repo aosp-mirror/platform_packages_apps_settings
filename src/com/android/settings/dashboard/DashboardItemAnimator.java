@@ -18,7 +18,6 @@ package com.android.settings.dashboard;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-
 import com.android.settingslib.drawer.Tile;
 
 public class DashboardItemAnimator extends DefaultItemAnimator {

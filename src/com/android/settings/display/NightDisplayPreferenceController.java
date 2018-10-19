@@ -16,9 +16,9 @@ package com.android.settings.display;
 import android.content.Context;
 
 import com.android.internal.app.ColorDisplayController;
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.R;
 
 public class NightDisplayPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

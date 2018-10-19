@@ -33,15 +33,15 @@ import android.os.RecoverySystem;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
+import androidx.annotation.VisibleForTesting;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

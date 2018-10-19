@@ -24,11 +24,10 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.text.BidiFormatter;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.BidiFormatter;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

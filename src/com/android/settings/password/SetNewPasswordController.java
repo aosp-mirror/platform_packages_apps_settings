@@ -19,7 +19,6 @@ package com.android.settings.password;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
-
 import static com.android.internal.util.Preconditions.checkNotNull;
 
 import android.annotation.Nullable;

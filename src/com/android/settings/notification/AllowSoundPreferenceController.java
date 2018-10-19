@@ -22,9 +22,8 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationChannel;
 import android.content.Context;
-import android.util.Log;
-
 import androidx.preference.Preference;
+import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;

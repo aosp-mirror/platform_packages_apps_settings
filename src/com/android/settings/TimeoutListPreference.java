@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -29,6 +27,8 @@ import android.view.View;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class TimeoutListPreference extends RestrictedListPreference {
     private EnforcedAdmin mAdmin;

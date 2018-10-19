@@ -17,7 +17,6 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -25,6 +24,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.text.format.Formatter;
 
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 

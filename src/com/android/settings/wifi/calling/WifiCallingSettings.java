@@ -19,14 +19,13 @@ package com.android.settings.wifi.calling;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import androidx.legacy.app.FragmentPagerAdapter;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.legacy.app.FragmentPagerAdapter;
 
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

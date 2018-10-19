@@ -19,9 +19,7 @@ package com.android.settings.testutils.shadow;
 
 import android.content.Context;
 import android.content.pm.ResolveInfo;
-
 import com.android.settings.search.DatabaseIndexingUtils;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

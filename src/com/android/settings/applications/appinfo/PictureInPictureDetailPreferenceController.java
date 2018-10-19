@@ -20,10 +20,9 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
 

@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
 import android.os.PowerManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

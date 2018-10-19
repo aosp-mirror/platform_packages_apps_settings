@@ -24,21 +24,15 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.net.wifi.WifiManager;
-
-import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
-import androidx.slice.SliceItem;
-import androidx.slice.SliceMetadata;
-import androidx.slice.SliceProvider;
-import androidx.slice.core.SliceAction;
-import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
+
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.wifi.WifiManager;
+import androidx.core.graphics.drawable.IconCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +40,13 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
+
+import androidx.slice.Slice;
+import androidx.slice.SliceItem;
+import androidx.slice.SliceMetadata;
+import androidx.slice.SliceProvider;
+import androidx.slice.core.SliceAction;
+import androidx.slice.widget.SliceLiveData;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WifiSliceBuilderTest {

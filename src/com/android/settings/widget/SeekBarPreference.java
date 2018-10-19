@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -28,9 +30,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.PreferenceViewHolder;
-
+import com.android.settings.widget.DefaultIndicatorSeekBar;
 import com.android.settingslib.RestrictedPreference;
 
 /**

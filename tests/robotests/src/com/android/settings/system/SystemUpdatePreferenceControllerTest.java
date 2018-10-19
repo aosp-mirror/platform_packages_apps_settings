@@ -20,9 +20,7 @@ import static android.os.SystemUpdateManager.KEY_TITLE;
 import static android.os.SystemUpdateManager.STATUS_IDLE;
 import static android.os.SystemUpdateManager.STATUS_UNKNOWN;
 import static android.os.SystemUpdateManager.STATUS_WAITING_DOWNLOAD;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -30,7 +28,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemUpdateManager;
 import android.os.UserManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

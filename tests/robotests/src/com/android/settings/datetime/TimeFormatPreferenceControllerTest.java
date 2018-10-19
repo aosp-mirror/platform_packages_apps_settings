@@ -17,15 +17,13 @@
 package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

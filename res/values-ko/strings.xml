@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"자동"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4GHz 대역"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0GHz 대역"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0GHz 대역 사용 선호"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi 핫스팟 대역을 한 개 이상 선택하세요."</string>
@@ -973,7 +974,7 @@
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"로밍 환경설정"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi를 기본으로 설정"</item>
-    <item msgid="1335127656328817518">"모바일에 최적화됨"</item>
+    <item msgid="1335127656328817518">"모바일을 기본으로 설정"</item>
     <item msgid="3132912693346866895">"Wi-Fi에서만"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -988,7 +989,7 @@
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"Wi-Fi를 기본으로 설정"</item>
-    <item msgid="5074515506087318555">"모바일에 최적화됨"</item>
+    <item msgid="5074515506087318555">"모바일을 기본으로 설정"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"자연스럽게"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"부스트"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"선명하게"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"자동"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"색상 자동 조절"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"정확한 색상만 사용"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"색상 선명도와 정확도 간 조정"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"태블릿 회전 시 자동으로 방향 바꾸기"</string>
@@ -1095,11 +1096,11 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"주변의 밝기에 맞춰 밝기 수준을 최적화합니다. 이 기능이 사용 설정되어 있는 동안에도 밝기를 일시 조정할 수 있습니다."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"화면 밝기가 환경 및 활동에 맞게 자동으로 조정됩니다. 슬라이더를 수동으로 이동하여 밝기 자동 조절 기능이 사용자의 환경설정을 학습하도록 할 수 있습니다."</string>
     <string name="night_display_title" msgid="2626451512200357686">"야간 조명"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"야간 조명을 사용하면 밤에 화면이 황색광으로 표시되어 희미한 빛에서도 편안하게 읽을 수 있으며 수면 방해 효과가 줄어듭니다."</string>
+    <string name="night_display_text" msgid="1837277457033025056">"야간 조명을 사용하면 화면이 황색광으로 표시되어 희미한 빛에서도 편안하게 화면을 보고 읽을 수 있으며 수면 방해 효과가 줄어듭니다."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"예약"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"없음"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"맞춤 시간에 켜짐"</string>
-    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"일몰부터 일출까지 사용"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"일몰부터 일출까지 켜짐"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"시작 시간"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"종료 시간"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"상태"</string>
@@ -1689,7 +1690,7 @@
     <string name="data_size_label" msgid="6117971066063850416">"사용자 데이터"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="7533821466482000453">"USB 저장소 데이터"</string>
     <string name="external_data_size_label" product="default" msgid="626414192825329708">"SD 카드"</string>
-    <string name="uninstall_text" msgid="3644892466144802466">"제거"</string>
+    <string name="uninstall_text" msgid="3644892466144802466">"설치 제거"</string>
     <string name="uninstall_all_users_text" msgid="851857393177950340">"모든 사용자에 대해 제거"</string>
     <string name="install_text" msgid="884360662922471113">"설치"</string>
     <string name="disable_text" msgid="6544054052049395202">"사용 안함"</string>
@@ -2560,7 +2561,7 @@
     <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"잘못된 PIN"</string>
     <string name="checking_decryption" msgid="8287458611802609493">"확인 중..."</string>
     <string name="starting_android" msgid="4001324195902252681">"Android 시작하는 중..."</string>
-    <string name="delete" msgid="4219243412325163003">"삭제"</string>
+    <string name="delete" msgid="4219243412325163003">"홈 화면에서 삭제"</string>
     <string name="misc_files" msgid="6720680815969643497">"기타 파일"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="TOTAL">%2$d</xliff:g>개 중 <xliff:g id="NUMBER">%1$d</xliff:g>개가 선택됨"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g>/<xliff:g id="TOTAL">%2$s</xliff:g>"</string>
@@ -2810,10 +2811,10 @@
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"모든 앱과 데이터가 삭제됩니다."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"새 사용자 추가 중..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"사용자 삭제"</string>
-    <string name="user_delete_button" msgid="5131259553799403201">"삭제"</string>
-    <string name="user_guest" msgid="8475274842845401871">"손님"</string>
-    <string name="user_exit_guest_title" msgid="5613997155527410675">"손님 삭제"</string>
-    <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"손님을 삭제하시겠습니까?"</string>
+    <string name="user_delete_button" msgid="5131259553799403201">"홈 화면에서 삭제"</string>
+    <string name="user_guest" msgid="8475274842845401871">"게스트"</string>
+    <string name="user_exit_guest_title" msgid="5613997155527410675">"게스트 삭제"</string>
+    <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"게스트를 삭제하시겠습니까?"</string>
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"이 세션에 있는 모든 앱과 데이터가 삭제됩니다."</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"삭제"</string>
     <string name="user_enable_calling" msgid="5128605672081602348">"통화 기능 사용"</string>
@@ -2954,7 +2955,7 @@
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"앱 및 알림"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"권한, 기본 앱"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"계정"</string>
-    <string name="account_dashboard_default_summary" msgid="3998347400161811075">"추가된 계정이 없습니다."</string>
+    <string name="account_dashboard_default_summary" msgid="3998347400161811075">"추가된 계정 없음"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"기본 앱"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"언어, 시간, 백업, 업데이트"</string>
     <string name="search_results_title" msgid="1796252422574886932">"설정"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> 및 <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>을(를) 제외하고 음소거됨"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>, <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>을(를) 제외하고 음소거됨"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"메시지, 일정, 알림"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"알림 일시중지가 사용 설정되어 있으면 위에서 허용한 항목을 제외한 메시지, 알림, 일정이 음소거됩니다. 메시지 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자가 나에게 연락하도록 허용할 수 있습니다."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"알림 일시중지가 사용 설정되어 있으면 위에서 허용한 항목을 제외한 메시지, 알림, 일정이 음소거됩니다. 메시지 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자가 나에게 연락하도록 허용할 수 있습니다."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"완료"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"설정"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"알림 표시 및 소리 차단"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"기기를 시작하기 위해 PIN을 입력할 때에는 <xliff:g id="SERVICE">%1$s</xliff:g> 등의 접근성 서비스가 지원되지 않습니다."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"기기를 시작하기 위해 패턴을 입력할 때에는 <xliff:g id="SERVICE">%1$s</xliff:g> 등의 접근성 서비스가 지원되지 않습니다."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"기기를 시작하기 위해 비밀번호를 입력할 때에는 <xliff:g id="SERVICE">%1$s</xliff:g> 등의 접근성 서비스가 지원되지 않습니다."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"참고: 재부팅한 후 이 앱은 휴대전화를 잠금 해제해야 시작됩니다."</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"참고: 화면 잠금이 설정되어 있다면 휴대전화를 다시 시작한 후 이 앱을 시작하려면 휴대전화를 잠금 해제해야 합니다."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 정보"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 상대 정보"</string>
     <string name="slot_number" msgid="3762676044904653577">"(슬롯 <xliff:g id="SLOT_NUM">%1$d</xliff:g>개)"</string>
@@ -4138,7 +4139,7 @@
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"휴대전화 배터리 수명 향상"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"벨 울림 방지"</string>
-    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"전원 및 볼륨 크게 버튼 함께 누르기"</string>
+    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"전원 및 볼륨 업 버튼 함께 누르기"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"벨 울림 방지 단축키"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"진동"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"음소거"</string>

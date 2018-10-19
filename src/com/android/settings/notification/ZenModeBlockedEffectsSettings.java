@@ -27,6 +27,7 @@ import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_STATUS_BA
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import androidx.preference.CheckBoxPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

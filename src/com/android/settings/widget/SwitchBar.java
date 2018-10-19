@@ -23,6 +23,9 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
+import androidx.annotation.ColorInt;
+import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
@@ -35,10 +38,6 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.StringRes;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;

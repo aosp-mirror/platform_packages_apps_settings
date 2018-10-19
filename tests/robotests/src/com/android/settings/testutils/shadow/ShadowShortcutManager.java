@@ -20,13 +20,11 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-
+import java.util.List;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
-
-import java.util.List;
 
 @Implements(ShortcutManager.class)
 public class ShadowShortcutManager extends org.robolectric.shadows.ShadowShortcutManager {

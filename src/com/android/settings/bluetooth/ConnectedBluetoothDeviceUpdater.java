@@ -19,10 +19,9 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.media.AudioManager;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import android.util.Log;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;

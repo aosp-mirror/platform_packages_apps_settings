@@ -21,8 +21,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
+import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.Utils;
 

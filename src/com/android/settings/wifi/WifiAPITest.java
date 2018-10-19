@@ -22,11 +22,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.text.Editable;
-import android.widget.EditText;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.Editable;
+import android.widget.EditText;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

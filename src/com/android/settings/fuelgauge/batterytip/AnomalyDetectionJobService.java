@@ -34,11 +34,10 @@ import android.os.Bundle;
 import android.os.StatsDimensionsValue;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.util.Log;
-import android.util.Pair;
-
 import androidx.annotation.GuardedBy;
 import androidx.annotation.VisibleForTesting;
+import android.util.Log;
+import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.ArrayUtils;

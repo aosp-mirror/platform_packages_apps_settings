@@ -23,8 +23,8 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import com.android.settings.R;
 import com.android.settings.widget.GearPreference;
+import com.android.settings.R;
 
 /**
  * This class sets appropriate enabled state and user admin message when userId is set

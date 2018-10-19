@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

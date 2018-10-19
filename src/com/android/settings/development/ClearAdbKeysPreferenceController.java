@@ -22,12 +22,11 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserManager;
-import android.text.TextUtils;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;

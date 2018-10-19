@@ -17,9 +17,7 @@
 package com.android.settings.security.screenlock;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;

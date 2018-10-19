@@ -16,9 +16,9 @@
 
 package com.android.settings.testutils.shadow;
 
-import static org.robolectric.RuntimeEnvironment.application;
-
 import android.media.MediaRouter;
+
+import static org.robolectric.RuntimeEnvironment.application;
 
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;

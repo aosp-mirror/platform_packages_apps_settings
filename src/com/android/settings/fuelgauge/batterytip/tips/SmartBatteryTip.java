@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.content.Context;
 import android.os.Parcel;
+import android.provider.Settings;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

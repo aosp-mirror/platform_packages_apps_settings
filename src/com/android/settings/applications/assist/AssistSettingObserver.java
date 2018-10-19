@@ -20,7 +20,6 @@ import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.provider.Settings;
-
 import androidx.annotation.MainThread;
 
 import com.android.settingslib.utils.ThreadUtils;

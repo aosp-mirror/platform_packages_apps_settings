@@ -19,14 +19,13 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 import android.util.Log;
 import android.util.TimeUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 import com.android.internal.app.procstats.ProcessStats;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

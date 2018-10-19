@@ -16,14 +16,13 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
-
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.MasterSwitchController;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
+import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.MasterSwitchController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;

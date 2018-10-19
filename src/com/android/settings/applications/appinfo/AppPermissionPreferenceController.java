@@ -21,10 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.PermissionsSummaryHelper;

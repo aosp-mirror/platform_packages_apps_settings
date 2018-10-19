@@ -17,7 +17,6 @@
 package com.android.settings.password;
 
 import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
-
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
         .HIDE_DISABLED_PREFS;
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
@@ -25,9 +24,7 @@ import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericF
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;

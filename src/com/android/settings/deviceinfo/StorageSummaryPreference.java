@@ -18,13 +18,12 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.graphics.Color;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.util.MathUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 

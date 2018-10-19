@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
@@ -26,9 +25,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Vibrator;
 import android.provider.Settings.System;
-
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

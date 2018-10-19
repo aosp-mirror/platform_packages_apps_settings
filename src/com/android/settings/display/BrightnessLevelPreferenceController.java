@@ -28,11 +28,10 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.service.vr.IVrManager;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;

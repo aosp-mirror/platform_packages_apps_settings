@@ -27,7 +27,6 @@ import android.nfc.NfcManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

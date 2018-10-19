@@ -19,18 +19,18 @@ package com.android.settings.bluetooth;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
-import android.util.Pair;
-
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
+import android.util.Pair;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
  * This class adds a header with device name and status (connected/disconnected, etc.).

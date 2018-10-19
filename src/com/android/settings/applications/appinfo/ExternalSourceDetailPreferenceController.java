@@ -19,7 +19,6 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.UserManager;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

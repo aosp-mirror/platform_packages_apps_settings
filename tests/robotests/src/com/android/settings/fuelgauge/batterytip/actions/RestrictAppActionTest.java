@@ -15,9 +15,12 @@
  */
 package com.android.settings.fuelgauge.batterytip.actions;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.app.AppOpsManager;
+import android.content.Context;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;

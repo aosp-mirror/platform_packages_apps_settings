@@ -16,9 +16,7 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.BuildNumberDialogController
-        .BUILD_NUMBER_VALUE_ID;
-
+import static com.android.settings.deviceinfo.firmwareversion.BuildNumberDialogController.BUILD_NUMBER_VALUE_ID;
 import static org.mockito.Mockito.verify;
 
 import android.os.Build;

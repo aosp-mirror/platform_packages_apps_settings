@@ -17,14 +17,12 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.TextView;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
-
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.graph.UsageView;

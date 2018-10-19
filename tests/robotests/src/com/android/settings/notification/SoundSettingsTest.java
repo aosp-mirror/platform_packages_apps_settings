@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -27,8 +26,8 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.UserManager;
-import android.preference.SeekBarVolumizer;
 
+import android.preference.SeekBarVolumizer;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;

@@ -19,11 +19,11 @@ package com.android.settings.applications.manageapplications;
 import androidx.annotation.IntDef;
 
 import com.android.settings.R;
-import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
+import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;

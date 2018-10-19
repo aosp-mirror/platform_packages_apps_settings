@@ -18,11 +18,10 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.text.TextUtils;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

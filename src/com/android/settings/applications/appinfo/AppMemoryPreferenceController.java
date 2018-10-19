@@ -20,10 +20,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.AsyncTask;
-import android.text.format.Formatter;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;

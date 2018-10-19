@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -26,11 +25,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.telephony.SubscriptionInfo;
-import android.telephony.TelephonyManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.telephony.SubscriptionInfo;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

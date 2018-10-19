@@ -17,11 +17,10 @@
 package com.android.settings.accessibility;
 
 import android.os.Bundle;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.Preference;
 import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;

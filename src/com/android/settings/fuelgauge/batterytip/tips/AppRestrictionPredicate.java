@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.app.AppOpsManager;
 import android.content.Context;
 
+import com.android.settings.Utils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 
 import java.util.function.Predicate;

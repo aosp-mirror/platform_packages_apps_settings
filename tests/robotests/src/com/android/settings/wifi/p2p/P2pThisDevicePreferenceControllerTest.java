@@ -17,12 +17,10 @@
 package com.android.settings.wifi.p2p;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 import android.net.wifi.p2p.WifiP2pDevice;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

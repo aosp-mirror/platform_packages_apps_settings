@@ -15,13 +15,9 @@
  */
 package com.android.settings.accounts;
 
-import static com.android.settings.accounts.AccountDashboardFragmentTest
-        .ShadowAuthenticationHelper.LABELS;
-import static com.android.settings.accounts.AccountDashboardFragmentTest
-        .ShadowAuthenticationHelper.TYPES;
-
+import static com.android.settings.accounts.AccountDashboardFragmentTest.ShadowAuthenticationHelper.LABELS;
+import static com.android.settings.accounts.AccountDashboardFragmentTest.ShadowAuthenticationHelper.TYPES;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 

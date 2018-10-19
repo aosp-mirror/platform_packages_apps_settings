@@ -29,7 +29,6 @@ import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 

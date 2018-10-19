@@ -26,11 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
-
 import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -40,6 +36,10 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
 
 public class BluetoothSliceBuilder {
 

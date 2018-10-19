@@ -16,11 +16,10 @@ package com.android.settings.deletionhelper;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.text.format.DateUtils;
-import android.text.format.Formatter;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.format.DateUtils;
+import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

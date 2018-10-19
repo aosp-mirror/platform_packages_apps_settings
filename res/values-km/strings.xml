@@ -595,7 +595,7 @@
     <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"ដោយសារ​មាន​ការព្យាយាម​ដោះសោ​មិនត្រឹមត្រូវ​ច្រើនដងពេក ទិន្នន័យ​របស់​ឧបករណ៍នេះនឹងត្រូវបានលុប។"</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"ដោយសារមានការព្យាយាមដោះសោមិនត្រឹមត្រូវច្រើនដងពេក អ្នកប្រើប្រាស់នេះនឹងត្រូវបានលុប។"</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"ដោយសារមានការព្យាយាមដោះសោមិនត្រឹមត្រូវច្រើនដងពេក កម្រងព័ត៌មានការងារនេះ និងទិន្នន័យរបស់វានឹងត្រូវបានលុប។"</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"បដិសេធ"</string>
+    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"ច្រានចោល"</string>
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"ត្រូវ​​មាន​យ៉ាង​ហោច​ណាស់ <xliff:g id="COUNT">%d</xliff:g> តួ"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"កូដ PIN ​ត្រូវ​មាន​លេខ​យ៉ាង​ហោច​ណាស់ <xliff:g id="COUNT">%d</xliff:g> ខ្ទង់"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"បន្ត"</string>
@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"ស្វ័យប្រវត្តិ"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"រលកសញ្ញា 2.4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"រលកសញ្ញា 5.0 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"ប្រើ​រលកសញ្ញា 5.0 GHz ជា​អាទិភាព"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"សូម​ជ្រើសរើស​ប៊ែន​យ៉ាង​ហោចណាស់​មួយសម្រាប់​ហតស្ប៉ត Wi‑Fi៖"</string>
@@ -966,13 +967,13 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"ពង្រីក​វិសាលភាពនៃការ​ហៅ​ទូសព្ទ​តាម Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"បើក​ការហៅ​តាម Wi‑Fi ដើម្បី​ពង្រីក​ដែន​សេវា"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"ចំណូលចិត្តលើការហៅ"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"របៀបហៅតាម Wi-Fi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"មុខងារហៅតាម Wi-Fi"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"ចំណូលចិត្តរ៉ូមីង"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"ចំណូលចិត្តរ៉ូមីង"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"គួរប្រើ Wi-Fi"</item>
+    <item msgid="2124257075906188844">"Wi-Fi ជាអាទិភាព"</item>
     <item msgid="1335127656328817518">"បាន​ជ្រើសរើសប្រើទិន្នន័យចល័ត"</item>
     <item msgid="3132912693346866895">"Wi-Fi តែប៉ុណ្ណោះ"</item>
   </string-array>
@@ -987,7 +988,7 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"ប្រើ Wi-Fi"</item>
+    <item msgid="5782108782860004851">"Wi-Fi ជាអាទិភាព"</item>
     <item msgid="5074515506087318555">"បាន​ជ្រើសរើសប្រើទិន្នន័យចល័ត"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ធម្មជាតិ"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"បង្កើនពន្លឺ"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"ឆ្អែត"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"ស្វ័យប្រវត្តិ"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"បត់បែន"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"ប្រើតែ​ពណ៌​ត្រូវ​ប៉ុណ្ណោះ"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"កែ​តម្រូវ​រវាង​ពណ៌ស្រស់ និង​ពណ៌​ដែលត្រូវ"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ប្ដូរ​ទិស​ស្វ័យ​ប្រវត្តិ​ពេល​បង្វិល​កុំព្យូទ័រ​បន្ទះ"</string>
@@ -1209,7 +1210,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"ស្ថានភាព​ថ្ម បណ្ដាញ និង​ព័ត៌មាន​ផ្សេងៗ"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"លេខ​ទូរស័ព្ទ សញ្ញា ។ល។"</string>
     <string name="storage_settings" msgid="4211799979832404953">"ទំហំ​ផ្ទុក"</string>
-    <string name="storage_usb_settings" msgid="7293054033137078060">"ឧបករណ៍​ផ្ទុក"</string>
+    <string name="storage_usb_settings" msgid="7293054033137078060">"ទំហំ​ផ្ទុក"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"កំណត់​ការ​​ផ្ទុក"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"ផ្ដាច់​​ឧបករណ៍​ផ្ទុក​យូអេសប៊ី មើល​ទំហំ​ដែល​មាន"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"ផ្ដាច់​​កាត​អេស​ឌី មើល​ទំហំ​ដែល​មាន"</string>
@@ -2683,7 +2684,7 @@
     <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"អាសយដ្ឋាន​ម៉ាស៊ីនមេ DNS ត្រូវតែជាលេខសម្រាប់ VPN ដែលបើកជានិច្ច"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="5959352052515258208">"ព័ត៌មានដែល​បានបញ្ចូល​មិនស្គាល់ VPN ដែលបើកជានិច្ចទេ"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"បោះ​បង់​"</string>
-    <string name="vpn_done" msgid="8678655203910995914">"បដិសេធ"</string>
+    <string name="vpn_done" msgid="8678655203910995914">"ច្រានចោល"</string>
     <string name="vpn_save" msgid="4233484051644764510">"រក្សាទុក"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"តភ្ជាប់"</string>
     <string name="vpn_replace" msgid="5442836256121957861">"ជំនួស"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"បានបិទ​សំឡេង ប៉ុន្តែ​អនុញ្ញាត​ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> និង <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"បានបិទ​សំឡេង​ ប៉ុន្តែ​អនុញ្ញាត​ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> និង <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"សារ ព្រឹត្តិការណ៍ និងការរំលឹក"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"នៅ​ពេល​មុខងារ​កុំរំខាន​បើក សារ ការរំលឹក និង​ព្រឹត្តិការណ៍​នឹង​​ត្រូវបានបិទ​សំឡេង លើក​លែង​តែធាតុ​ដែល​អ្នកអនុញ្ញាត​ខាង​លើតែប៉ុណ្ណោះ។ អ្នក​អាច​កែតម្រូវ​ការកំណត់​សារ ដើម្បី​អនុញ្ញាត​​ឱ្យ​មិត្តភ័ក្តិ ក្រុមគ្រួសារ ឬ​ទំនាក់ទំនង​ផ្សេង​ទៀត​របស់អ្នកអាច​ទាក់ទង​អ្នកបាន។"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"នៅ​ពេល​មុខងារ​កុំរំខាន​បើក សារ ការរំលឹក និង​ព្រឹត្តិការណ៍​នានានឹង​​ត្រូវបានបិទ​សំឡេង លើក​លែង​តែធាតុ​ដែល​អ្នកអនុញ្ញាត​ខាង​លើតែប៉ុណ្ណោះ។ អ្នក​អាច​កែតម្រូវ​ការកំណត់​សារ ដើម្បី​អនុញ្ញាត​​ឱ្យ​មិត្តភ័ក្តិ គ្រួសារ ឬ​ទំនាក់ទំនង​ផ្សេង​ទៀត​របស់អ្នកអាច​ទាក់ទង​អ្នកបាន។"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"រួចរាល់"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"ការកំណត់"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"គ្មាន​រូបភាព ឬសំឡេងពីការជូនដំណឹង​ទេ"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"នៅ​ពេល​អ្នក​បញ្ចូល​​កូដ PIN ដើម្បី​ចាប់ផ្ដើម​ឧបករណ៍​នេះ សេវាកម្ម​ភាព​ងាយស្រួល​ដូច​ជា <xliff:g id="SERVICE">%1$s</xliff:g> នឹង​មិន​អាច​ប្រើ​បាន​នៅ​ឡើយ​ទេ។"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"នៅ​ពេល​អ្នក​បញ្ចូល​​លំនាំ​ដើម្បី​ចាប់ផ្ដើម​ឧបករណ៍​នេះ សេវាកម្ម​ភាព​ងាយស្រួល​ដូច​ជា <xliff:g id="SERVICE">%1$s</xliff:g> នឹង​មិន​អាច​ប្រើ​បាន​នៅ​ឡើយ​ទេ។"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"នៅ​ពេល​អ្នក​បញ្ចូល​ពាក្យ​សម្ងាត់​ដើម្បី​ចាប់ផ្ដើម​ឧបករណ៍​នេះ សេវាកម្ម​ភាព​ងាយស្រួល​ដូច​ជា <xliff:g id="SERVICE">%1$s</xliff:g> នឹង​មិន​អាច​ប្រើ​បាន​នៅ​ឡើយ​ទេ។"</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"ចំណាំ៖ បន្ទាប់ពីបិទបើកឡើងវិញហើយ កម្មវិធីនេះមិនអាចចាប់ផ្តើមបានទេ រហូតទាល់តែអ្នកដោះសោទូរស័ព្ទរបស់អ្នក"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"ចំណាំ៖ ប្រសិនបើ​អ្នកចាប់ផ្ដើម​ទូរសព្ទ​របស់អ្នក​ឡើងវិញ និងបានកំណត់​ការចាក់សោលើ​អេក្រង់ កម្មវិធីនេះនឹង​មិនអាច​ចាប់ផ្តើម​បានទេ រហូតទាល់តែ​អ្នកដោះសោ​ទូរសព្ទ​របស់អ្នក"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"ព័ត៌មាន IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"ព័ត៌មាន​ទាក់ទង​នឹង IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(រន្ធ <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3887,7 +3888,7 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"បានបាត់វត្ថុដាក់ចំណាត់ថ្នាក់"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"វត្ថុដាក់ចំណាត់ថ្នាក់មិនផ្ទុកគន្លឹះនេះទេ"</string>
     <string name="display_cutout_emulation" msgid="6306593933746393170">"ត្រាប់អេក្រង់ដែលមានក្បាលឆក"</string>
-    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ស្នាមចោះ​ផ្ទាំងអេក្រង់ ស្នាមក្រិត"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"សក់សេះ, ក្បាលឆក"</string>
     <string name="display_cutout_emulation_none" msgid="5144174674654097316">"គ្មាន"</string>
     <string name="special_access" msgid="3458780842491881155">"ការចូលប្រើប្រាស់កម្មវិធីពិសេស"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
@@ -3942,7 +3943,7 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"ធ្វើកាយវិការរហ័សដើម្បីគ្រប់គ្រងទូរស័ព្ទរបស់អ្នក"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"ធ្វើកាយវិការរហ័សដើម្បីគ្រប់គ្រងថេប្លេតរបស់អ្នក"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"ធ្វើកាយវិការរហ័សដើម្បីគ្រប់គ្រងឧបករណ៍របស់អ្នក"</string>
-    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"លោតទៅកាមេរ៉ា"</string>
+    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"ប្តូរទៅកាមេរ៉ា"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"ដើម្បីបើកកាមេរ៉ាឲ្យបានរហ័ស សូមចុចប៊ូតុងថាមពលពីរដង។ ដំណើរការនៅលើអេក្រង់ណាមួយក៏បាន។"</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"បើក​កាមេរ៉ា​យ៉ាង​រហ័ស"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"ត្រឡប់កាមេរ៉ា"</string>

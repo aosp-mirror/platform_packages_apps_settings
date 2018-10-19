@@ -17,9 +17,8 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.util.AttributeSet;
-
 import androidx.preference.CheckBoxPreference;
+import android.util.AttributeSet;
 
 import com.android.settings.R;
 

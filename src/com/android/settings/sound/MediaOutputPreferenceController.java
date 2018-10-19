@@ -21,14 +21,14 @@ import static android.media.AudioManager.STREAM_MUSIC;
 import static android.media.AudioSystem.DEVICE_OUT_REMOTE_SUBMIX;
 import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
 
+import com.android.settingslib.Utils;
+
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.media.AudioManager;
-
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 

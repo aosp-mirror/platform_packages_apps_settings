@@ -17,10 +17,6 @@
 
 package com.android.settings.search.indexing;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.spy;
-
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
@@ -43,6 +39,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(qualifiers = "mcc999")

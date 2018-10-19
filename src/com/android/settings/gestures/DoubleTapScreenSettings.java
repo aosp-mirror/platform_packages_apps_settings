@@ -18,6 +18,7 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
@@ -28,6 +29,7 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

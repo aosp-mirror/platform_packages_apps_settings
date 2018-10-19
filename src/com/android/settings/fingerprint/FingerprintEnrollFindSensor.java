@@ -20,10 +20,9 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.annotation.Nullable;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

@@ -15,7 +15,6 @@
 package com.android.settings.fuelgauge;
 
 import android.os.Bundle;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

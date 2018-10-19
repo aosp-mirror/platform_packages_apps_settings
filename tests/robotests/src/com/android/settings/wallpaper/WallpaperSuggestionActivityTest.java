@@ -17,7 +17,6 @@
 package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 

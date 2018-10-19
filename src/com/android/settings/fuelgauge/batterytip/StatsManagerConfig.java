@@ -18,6 +18,9 @@ package com.android.settings.fuelgauge.batterytip;
 
 import androidx.annotation.IntDef;
 
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

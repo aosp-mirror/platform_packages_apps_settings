@@ -23,7 +23,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Vibrator;
 import android.provider.Settings;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

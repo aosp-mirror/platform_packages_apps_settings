@@ -24,7 +24,6 @@ import android.icu.util.BasicTimeZone;
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
 import android.icu.util.TimeZoneTransition;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

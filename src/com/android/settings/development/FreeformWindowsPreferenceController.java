@@ -19,11 +19,10 @@ package com.android.settings.development;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
-import android.text.TextUtils;
-
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;

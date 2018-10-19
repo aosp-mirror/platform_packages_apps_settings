@@ -17,7 +17,6 @@
 package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -26,9 +25,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.view.autofill.AutofillManager;
-
 import androidx.preference.Preference;
+import android.view.autofill.AutofillManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

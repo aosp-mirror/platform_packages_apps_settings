@@ -18,6 +18,7 @@ import android.content.res.Resources;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.ToggleFontSizePreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
 
 public class FontSizePreferenceController extends BasePreferenceController {

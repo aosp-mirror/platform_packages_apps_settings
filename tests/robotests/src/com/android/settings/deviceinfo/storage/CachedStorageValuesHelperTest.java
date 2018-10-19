@@ -18,28 +18,21 @@ package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.CACHE_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_APP_BYTES;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
-        .EXTERNAL_AUDIO_BYTES;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
-        .EXTERNAL_IMAGE_BYTES;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
-        .EXTERNAL_TOTAL_BYTES;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
-        .EXTERNAL_VIDEO_BYTES;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_AUDIO_BYTES;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_IMAGE_BYTES;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_TOTAL_BYTES;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_VIDEO_BYTES;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.FREE_BYTES_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.GAME_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.MUSIC_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.OTHER_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.PHOTO_APPS_SIZE_KEY;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
-        .SHARED_PREFERENCES_NAME;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.SHARED_PREFERENCES_NAME;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.TIMESTAMP_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.TOTAL_BYTES_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.USER_ID_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.VIDEO_APPS_SIZE_KEY;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.Context;

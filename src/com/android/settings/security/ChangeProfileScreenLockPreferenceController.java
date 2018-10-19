@@ -21,9 +21,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.TextUtils;
-
 import androidx.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

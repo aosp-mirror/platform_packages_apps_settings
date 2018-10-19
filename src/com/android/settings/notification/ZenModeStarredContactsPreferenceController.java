@@ -27,7 +27,6 @@ import android.database.Cursor;
 import android.icu.text.ListFormatter;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

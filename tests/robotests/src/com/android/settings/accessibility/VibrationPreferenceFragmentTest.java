@@ -21,12 +21,11 @@ import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_MEDIUM;
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_OFF;
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_ON;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserManager;
@@ -34,8 +33,7 @@ import android.os.Vibrator;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.VibrationPreferenceFragment
-        .VibrationIntensityCandidateInfo;
+import com.android.settings.accessibility.VibrationPreferenceFragment.VibrationIntensityCandidateInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.widget.CandidateInfo;
@@ -43,6 +41,7 @@ import com.android.settingslib.widget.CandidateInfo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;

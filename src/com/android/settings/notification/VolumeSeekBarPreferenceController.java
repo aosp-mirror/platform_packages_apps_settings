@@ -16,10 +16,9 @@
 
 package com.android.settings.notification;
 
-import android.content.Context;
-
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
+import android.content.Context;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;

@@ -36,15 +36,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.text.BidiFormatter;
-import android.util.ArrayMap;
-import android.util.Log;
-import android.util.SparseArray;
-
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+import android.text.BidiFormatter;
+import android.util.ArrayMap;
+import android.util.Log;
+import android.util.SparseArray;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.AccessiblePreferenceCategory;

@@ -18,11 +18,10 @@ package com.android.settings.core;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-
 import androidx.annotation.XmlRes;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;

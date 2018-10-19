@@ -15,7 +15,7 @@
  */
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
+import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.*;
 
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -23,9 +23,8 @@ import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.view.Menu;
-
 import androidx.annotation.VisibleForTesting;
+import android.view.Menu;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.dashboard.DashboardFragment;

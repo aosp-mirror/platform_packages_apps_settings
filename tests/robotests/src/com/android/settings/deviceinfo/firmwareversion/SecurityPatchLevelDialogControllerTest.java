@@ -16,11 +16,8 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController
-        .SECURITY_PATCH_LABEL_ID;
-import static com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController
-        .SECURITY_PATCH_VALUE_ID;
-
+import static com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController.SECURITY_PATCH_LABEL_ID;
+import static com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController.SECURITY_PATCH_VALUE_ID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;

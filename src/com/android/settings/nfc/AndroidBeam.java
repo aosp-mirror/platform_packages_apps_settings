@@ -16,8 +16,6 @@
 
 package com.android.settings.nfc;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -30,13 +28,15 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settingslib.HelpUtils;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class AndroidBeam extends InstrumentedFragment
         implements SwitchBar.OnSwitchChangeListener {

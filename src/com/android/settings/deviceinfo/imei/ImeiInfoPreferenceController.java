@@ -20,11 +20,10 @@ import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.telephony.TelephonyManager;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

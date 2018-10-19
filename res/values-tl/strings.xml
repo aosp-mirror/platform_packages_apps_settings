@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Awtomatiko"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz Band"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 GHz Band"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Mas gusto ang 5.0 GHz Band"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Pumili ng kahit isang band para sa Wi‑Fi hotspot:"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Naka-boost"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturated"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Awtomatiko"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Adaptive"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Gumamit lang ng mga tumpak na kulay"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"I-adjust sa pagitan ng mga matingkad at tumpak na kulay"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Awtomatikong ilipat ang oryentasyon kapag iniikot ang tablet"</string>
@@ -1107,15 +1108,15 @@
     <string name="night_display_summary_off" msgid="1792750041697946539">"Naka-off / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"Hindi awtomatikong mag-o-on kailanman"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"Awtomatikong mag-o-on nang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"Awtomatikong mag-o-on sa paglubog ng araw"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"Awtomatikong mag-o-on sa sunset"</string>
     <string name="night_display_summary_on" msgid="1355713529996456744">"Naka-on / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"Hindi awtomatikong mag-o-off kailanman"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"Awtomatikong mag-o-off nang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Awtomatikong mag-o-off sa pagsikat ng araw"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Awtomatikong mag-o-off sa sunrise"</string>
     <string name="night_display_activation_on_manual" msgid="277343561277625826">"I-on ngayon"</string>
     <string name="night_display_activation_off_manual" msgid="4074557720918572883">"I-off ngayon"</string>
-    <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"I-on hanggang pagsikat ng araw"</string>
-    <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"I-off hanggang paglubog ng araw"</string>
+    <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"I-on hanggang sunrise"</string>
+    <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"I-off hanggang sunset"</string>
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"I-on hanggang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"I-off hanggang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Sleep"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Naka-mute, pero payagan ang <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> at <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Naka-mute, pero payagan ang <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>, at <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mga mensahe, event, at paalala"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Kapag naka-on ang Huwag Istorbohin, mamu-mute ang mga mensahe, paalala, at event, maliban sa mga item na pinapayagan mo sa itaas. Maaari mong isaayos ang mga setting ng mensahe para payagan ang iyong mga kaibigan, pamilya, o iba pang contact na makipag-ugnayan sa iyo."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Kapag naka-on ang Huwag Istorbohin, mamu-mute ang mga mensahe, paalala, at event, maliban sa mga item na pinapayagan mo sa itaas. Maaari mong isaayos ang mga setting ng mga mensahe para payagan ang iyong mga kaibigan, pamilya, o iba pang contact na makipag-ugnayan sa iyo."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Tapos na"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Mga Setting"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Walang visual o tunog mula sa mga notification"</string>
@@ -3210,7 +3211,7 @@
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Huwag kailanman magpakita ng mga notification"</string>
     <string name="notification_importance_min" msgid="9054819132085066824">"Ipakita nang tahimik at i-minimize"</string>
     <string name="notification_importance_low" msgid="2445139943005315690">"Ipakita nang tahimik"</string>
-    <string name="notification_importance_default" msgid="5958338024601957516">"Gumawa ng tunog"</string>
+    <string name="notification_importance_default" msgid="5958338024601957516">"Tumunog"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Gumawa ng tunog at mag-pop up sa screen"</string>
     <string name="notification_importance_high_silent" msgid="2667033773703765252">"Mag-pop sa screen"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"Mababa"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Kapag inilagay mo ang PIN upang buksan ang device na ito, hindi pa magiging available ang mga serbisyo sa pagiging naa-access tulad ng <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Kapag inilagay mo ang pattern upang buksan ang device na ito, hindi pa magiging available ang mga serbisyo sa pagiging naa-access tulad ng <xliff:g id="SERVICE">%1$s</xliff:g> ."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Kapag inilagay mo ang iyong password upang buksan ang device na ito, hindi pa magiging available ang mga serbisyo sa pagiging naa-access tulad ng <xliff:g id="SERVICE">%1$s</xliff:g>."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Tandaan: Pagkatapos ng pag-reboot, hindi makakapagsimula ang app na ito hangga\'t hindi mo ina-unlock ang iyong telepono"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Tandaan: Kung ire-restart mo ang iyong telepono at may nakatakdang lock ng screen, hindi makakapagsimula ang app na ito hanggang sa i-unlock mo ang telepono mo"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Impormasyon ng IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Kaugnay na impormasyon ng IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>

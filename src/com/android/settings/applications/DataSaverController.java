@@ -18,11 +18,10 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 
 public class DataSaverController extends BasePreferenceController {
 

@@ -17,10 +17,9 @@
 package com.android.settings.localepicker;
 
 import android.content.Context;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 class LocaleRecyclerView extends RecyclerView {
     public LocaleRecyclerView(Context context) {

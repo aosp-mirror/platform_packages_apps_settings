@@ -19,11 +19,10 @@ package com.android.settings.development;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.view.IWindowManager;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import android.view.IWindowManager;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;

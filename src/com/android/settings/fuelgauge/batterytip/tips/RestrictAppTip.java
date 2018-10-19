@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.os.Parcel;
+import android.text.TextUtils;
 import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;

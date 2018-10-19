@@ -22,6 +22,7 @@ import android.text.TextUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 /**
  * Data class representing a slice stored by {@link SlicesIndexer}.

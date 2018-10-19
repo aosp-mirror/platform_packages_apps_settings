@@ -487,7 +487,7 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"暗号化できませんでした"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="8219375738445017266">"暗号化処理が中断されて完了できなかったためタブレット上のデータにアクセスできなくなりました。\n\nタブレットの使用を再開するには出荷時設定にリセットする必要があります。リセット後、タブレットのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3270131542549577953">"暗号化処理が中断されて完了できなかったため端末上のデータにアクセスできなくなりました。\n\n端末の使用を再開するには出荷時設定にリセットする必要があります。リセット後、端末のセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"復号化の失敗"</string>
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"復号の失敗"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"入力したパスワードは正しいのですが、データが破損しています。\n\nタブレットの使用を再開するには出荷時設定にリセットする必要があります。リセット後、タブレットのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"入力したパスワードは正しいのですが、データが破損しています。\n\nスマートフォンの使用を再開するには出荷時設定にリセットする必要があります。リセット後、スマートフォンのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"入力方法の切り替え"</string>
@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"自動"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz 帯"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 GHz 帯"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0 GHz 帯を優先"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi アクセス ポイントの帯域幅を少なくとも 1 つ選択してください。"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ナチュラル"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"ブースト"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"ビビッド"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"自動"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"アダプティブ"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"正確な色のみを使用"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"鮮明な色と正確な色の間で調整"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"画面の向きに合わせて縦横表示を切り替える"</string>
@@ -1094,8 +1095,8 @@
     <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"電池使用量が増えます"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"周囲に合わせて明るさを最適化します。この機能が ON の場合でも、一時的に明るさを調整できます。"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"画面の明るさは環境やアクティビティに応じて自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
-    <string name="night_display_title" msgid="2626451512200357686">"読書灯"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"読書灯を利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
+    <string name="night_display_title" msgid="2626451512200357686">"夜間モード"</string>
+    <string name="night_display_text" msgid="1837277457033025056">"夜間モードを利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"スケジュール"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"使用しない"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"指定した時間に ON"</string>
@@ -3052,7 +3053,7 @@
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"アプリの通知音"</string>
     <string name="notification_sound_default" msgid="565135733949733766">"デフォルトの通知音"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"デフォルトのアラーム音"</string>
-    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"着信時もバイブレーションON"</string>
+    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"着信時にバイブレーションもON"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"その他の音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ダイヤルパッドの操作音"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"画面ロック音"</string>
@@ -3165,7 +3166,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"ミュート中（<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>、<xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>を除く）"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"ミュート中（<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>、<xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>、<xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>を除く）"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"メッセージ、予定、リマインダー"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"マナーモードが ON の場合、上記の許可した項目を除き、メッセージ、リマインダー、予定はミュートされます。メッセージの設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"マナーモードが ON の場合、上記の許可した項目を除き、メッセージ、リマインダー、予定はミュートされます。メッセージの設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"完了"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"設定"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"通知の非表示、通知音なし"</string>
@@ -3214,8 +3215,8 @@
     <string name="notification_importance_blocked" msgid="7938180808339386300">"通知を表示しない"</string>
     <string name="notification_importance_min" msgid="9054819132085066824">"マナーモードで表示し最小化"</string>
     <string name="notification_importance_low" msgid="2445139943005315690">"マナーモードで表示する"</string>
-    <string name="notification_importance_default" msgid="5958338024601957516">"音声で知らせる"</string>
-    <string name="notification_importance_high" msgid="2082429479238228527">"音声とポップアップで知らせる"</string>
+    <string name="notification_importance_default" msgid="5958338024601957516">"音で知らせる"</string>
+    <string name="notification_importance_high" msgid="2082429479238228527">"音とポップアップで知らせる"</string>
     <string name="notification_importance_high_silent" msgid="2667033773703765252">"ポップアップ"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"低"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"中"</string>
@@ -3289,8 +3290,8 @@
     <string name="notification_content_block_summary" msgid="7746185794438882389">"シェードにも周辺端末にも通知を表示しない"</string>
     <string name="notification_badge_title" msgid="6370122441168519809">"通知ドットの許可"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"通知ドットの表示"</string>
-    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"マナーモードのオーバーライド"</string>
-    <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"マナーモードが ON の場合もこの通知を引き続き表示します"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"ミュートの例外"</string>
+    <string name="app_notification_override_dnd_summary" msgid="2612502099373472686">"ミュートが ON の場合もこの通知を引き続き表示します"</string>
     <string name="app_notification_visibility_override_title" msgid="7821124557634786985">"ロック画面上"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ブロック済み"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"優先"</string>
@@ -3431,7 +3432,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"PINを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"パターンを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"パスワードを入力してこの端末を開始する場合、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"注: 再起動後、スマートフォンのロックを解除するまでこのアプリを起動することはできません"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"注: スマートフォンを再起動したときに画面ロックが設定されている場合は、スマートフォンのロックを解除するまでこのアプリは起動できません"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI情報"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI関連情報"</string>
     <string name="slot_number" msgid="3762676044904653577">"（スロット<xliff:g id="SLOT_NUM">%1$d</xliff:g>）"</string>
@@ -3756,9 +3757,9 @@
     <string name="condition_device_vibrate_title" product="default" msgid="1087633233379991925">"スマートフォンはバイブレーションに設定されています"</string>
     <string name="condition_device_vibrate_summary" product="tablet" msgid="433514444618164607">"着信と通知を端末のバイブレーションで知らせます"</string>
     <string name="condition_device_vibrate_summary" product="default" msgid="5877034997839162763">"着信と通知をスマートフォンのバイブレーションで知らせます"</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"読書灯のスケジュールの設定"</string>
+    <string name="night_display_suggestion_title" msgid="6602129097059325291">"夜間モードのスケジュールの設定"</string>
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"夜間に画面の色みを自動的に変えて見やすくします"</string>
-    <string name="condition_night_display_title" msgid="5599814941976856183">"読書灯 ON"</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"夜間モード ON"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"画面が黄味がかった色になります。寝付きを良くする効果も期待できます。"</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"おすすめ"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"候補"</string>

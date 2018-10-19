@@ -29,16 +29,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 
-import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.search.DatabaseIndexingUtils;
+
+import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
+
+import androidx.core.graphics.drawable.IconCompat;
 
 /**
  * Utility class to build an intent-based Location Slice.

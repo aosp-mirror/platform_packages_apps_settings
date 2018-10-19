@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import androidx.annotation.VisibleForTesting;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,8 +34,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

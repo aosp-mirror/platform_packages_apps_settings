@@ -17,11 +17,10 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.View;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+import android.util.AttributeSet;
+import android.view.View;
 
 /**
  * A category with a progress spinner

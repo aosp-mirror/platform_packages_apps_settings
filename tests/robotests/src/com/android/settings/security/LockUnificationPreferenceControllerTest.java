@@ -17,14 +17,12 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

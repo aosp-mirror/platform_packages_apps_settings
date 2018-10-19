@@ -23,11 +23,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.android.settings.R;
+
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;

@@ -15,7 +15,6 @@
 package com.android.settings.datausage;
 
 import android.net.NetworkPolicy;
-
 import com.android.settingslib.net.DataUsageController.DataUsageInfo;
 
 /**

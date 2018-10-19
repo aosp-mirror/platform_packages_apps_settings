@@ -22,10 +22,9 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;

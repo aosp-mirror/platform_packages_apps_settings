@@ -17,7 +17,6 @@
 package com.android.settings.language;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -28,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import androidx.lifecycle.LifecycleObserver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -40,8 +40,6 @@ import android.view.autofill.AutofillManager;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.textservice.TextServicesManager;
-
-import androidx.lifecycle.LifecycleObserver;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;

@@ -18,10 +18,9 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.util.IconDrawableFactory;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.util.IconDrawableFactory;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationFeatureProvider;

@@ -20,11 +20,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
+import androidx.preference.PreferenceFragment;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
-
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 

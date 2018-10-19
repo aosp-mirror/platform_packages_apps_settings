@@ -23,13 +23,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.TimeZone;
 import android.os.Bundle;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceCategory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceCategory;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

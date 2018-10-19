@@ -18,12 +18,11 @@ package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
 import android.hardware.usb.UsbPort;
-
+import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

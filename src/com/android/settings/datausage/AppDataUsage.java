@@ -32,15 +32,14 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;

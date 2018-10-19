@@ -22,12 +22,11 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
-import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;

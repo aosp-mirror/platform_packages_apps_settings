@@ -19,7 +19,6 @@ package com.android.settings.wifi.tether;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

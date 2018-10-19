@@ -19,7 +19,6 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.UserManager;
 import android.security.KeyStore;
-
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.RestrictedPreference;

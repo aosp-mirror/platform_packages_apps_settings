@@ -15,9 +15,8 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.provider.Settings;
-
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;

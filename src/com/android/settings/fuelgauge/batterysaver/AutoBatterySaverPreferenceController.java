@@ -17,7 +17,6 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
 import android.provider.Settings;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

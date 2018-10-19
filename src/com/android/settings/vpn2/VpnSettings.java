@@ -16,8 +16,6 @@
 
 package com.android.settings.vpn2;
 
-import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
-
 import android.annotation.UiThread;
 import android.annotation.WorkerThread;
 import android.app.Activity;
@@ -42,15 +40,14 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.annotations.VisibleForTesting;
@@ -73,6 +70,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
 /**
  * Settings screen listing VPNs. Configured VPNs and networks managed by apps

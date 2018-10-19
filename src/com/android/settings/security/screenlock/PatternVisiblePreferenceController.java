@@ -18,7 +18,6 @@ package com.android.settings.security.screenlock;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 

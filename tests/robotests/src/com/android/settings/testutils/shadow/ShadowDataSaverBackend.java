@@ -1,7 +1,6 @@
 package com.android.settings.testutils.shadow;
 
 import com.android.settings.datausage.DataSaverBackend;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

@@ -17,28 +17,6 @@
 
 package com.android.settings.search.indexing;
 
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_CLASS_NAME;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ENTRIES;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ICON_RESID;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_ACTION;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_CLASS;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEY;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEYWORDS;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_RANK;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SCREEN_TITLE;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_OFF;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_ON;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_TITLE;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_USER_ID;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_CLASS_NAME;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_ICON_RESID;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_ACTION;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE;
-import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
-
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -61,6 +39,29 @@ import com.android.settings.search.SettingsSearchIndexablesProvider;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_CLASS_NAME;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_ICON_RESID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
+
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_CLASS_NAME;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ENTRIES;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ICON_RESID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_ACTION;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_CLASS;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEY;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEYWORDS;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_RANK;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SCREEN_TITLE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_OFF;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_ON;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_TITLE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_USER_ID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_ACTION;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE;
 
 /**
  * Collects all data from {@link android.provider.SearchIndexablesProvider} to be indexed.

@@ -17,11 +17,10 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.text.format.Formatter;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.applications.ProcStatsData;

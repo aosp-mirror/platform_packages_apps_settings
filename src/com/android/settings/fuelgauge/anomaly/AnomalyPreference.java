@@ -1,8 +1,9 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
-
 import androidx.preference.Preference;
+
+import com.android.settings.R;
 
 /**
  * Preference that stores {@link Anomaly}

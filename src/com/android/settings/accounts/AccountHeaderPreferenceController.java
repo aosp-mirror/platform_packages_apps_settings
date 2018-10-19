@@ -24,7 +24,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 

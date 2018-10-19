@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.os.Bundle;
 import android.os.UserManager;
-
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

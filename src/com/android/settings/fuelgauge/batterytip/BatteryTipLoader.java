@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
-
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatteryStatsHelper;
@@ -27,8 +26,8 @@ import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
-import com.android.settings.fuelgauge.batterytip.detectors.RestrictAppDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
+import com.android.settings.fuelgauge.batterytip.detectors.RestrictAppDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SummaryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;

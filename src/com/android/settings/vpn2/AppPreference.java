@@ -21,7 +21,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
-
 import androidx.preference.Preference;
 
 import com.android.internal.net.LegacyVpnInfo;

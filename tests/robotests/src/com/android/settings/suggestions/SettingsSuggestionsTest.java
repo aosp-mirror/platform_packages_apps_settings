@@ -30,6 +30,7 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
+import com.android.settings.notification.ZenOnboardingActivity;
 import com.android.settings.notification.ZenSuggestionActivity;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

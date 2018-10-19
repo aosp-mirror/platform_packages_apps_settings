@@ -24,11 +24,10 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings.System;
-import android.text.TextUtils;
-import android.util.AttributeSet;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.AttributeSet;
 
 /**
  * A {@link Preference} that allows the user to choose a ringtone from those on the device.

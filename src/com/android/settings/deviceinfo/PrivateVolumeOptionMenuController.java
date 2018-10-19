@@ -24,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;

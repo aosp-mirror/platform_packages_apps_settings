@@ -17,7 +17,7 @@
 package com.android.settings.widget;
 
 import androidx.preference.Preference;
-
+import android.widget.Switch;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /*

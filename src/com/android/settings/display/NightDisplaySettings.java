@@ -21,7 +21,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-
 import androidx.preference.Preference;
 
 import com.android.internal.app.ColorDisplayController;

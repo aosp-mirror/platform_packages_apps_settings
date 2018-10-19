@@ -19,6 +19,8 @@ package com.android.settings.password;
 import android.content.Context;
 import android.content.Intent;
 
+import com.android.settings.R;
+
 /**
  * Helper for handling managed passwords in security settings UI.
  * It provides resources that should be shown in settings UI when lock password quality is set to

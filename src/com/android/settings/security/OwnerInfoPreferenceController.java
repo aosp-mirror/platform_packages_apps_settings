@@ -18,7 +18,6 @@ package com.android.settings.security;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.UserHandle;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;

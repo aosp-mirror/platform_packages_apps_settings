@@ -19,8 +19,8 @@ package com.android.settings.notification;
 import static com.android.settings.notification.SettingPref.TYPE_SYSTEM;
 
 import android.content.Context;
-import android.provider.Settings.System;
 
+import android.provider.Settings.System;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;

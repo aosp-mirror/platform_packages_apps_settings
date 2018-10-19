@@ -16,8 +16,6 @@
 
 package com.android.settings.datetime.timezone;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import android.icu.text.Collator;
 
 import com.android.settings.datetime.timezone.RegionZonePicker.TimeZoneInfoComparator;
@@ -32,6 +30,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RegionZonePickerTest {

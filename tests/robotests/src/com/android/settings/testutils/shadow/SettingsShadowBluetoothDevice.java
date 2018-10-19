@@ -17,7 +17,10 @@
 package com.android.settings.testutils.shadow;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import org.robolectric.shadows.ShadowBluetoothDevice;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

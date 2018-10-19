@@ -17,16 +17,13 @@
 package com.android.settings.location;
 
 import android.content.Context;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
-
 import java.util.List;
 
 /** Preference controller for preference category displaying all recent location requests. */

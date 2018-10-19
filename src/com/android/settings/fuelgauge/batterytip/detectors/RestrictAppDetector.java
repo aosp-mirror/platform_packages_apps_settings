@@ -17,9 +17,8 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import android.content.Context;
-import android.text.format.DateUtils;
-
 import androidx.annotation.VisibleForTesting;
+import android.text.format.DateUtils;
 
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;

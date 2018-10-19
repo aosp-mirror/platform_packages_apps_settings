@@ -17,7 +17,6 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

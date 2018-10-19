@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.app.FragmentManager;
 import android.content.Context;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

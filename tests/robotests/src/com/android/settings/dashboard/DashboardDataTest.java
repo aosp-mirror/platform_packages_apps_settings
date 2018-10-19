@@ -20,15 +20,12 @@ import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_C
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_FOOTER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_DIVIDER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.service.settings.suggestions.Suggestion;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;

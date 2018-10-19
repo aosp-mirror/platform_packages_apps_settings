@@ -16,13 +16,9 @@
 
 package com.android.settings.security.trustagent;
 
-import static com.android.settings.security.trustagent.TrustAgentListPreferenceController
-        .PREF_KEY_SECURITY_CATEGORY;
-import static com.android.settings.security.trustagent.TrustAgentListPreferenceController
-        .PREF_KEY_TRUST_AGENT;
-
+import static com.android.settings.security.trustagent.TrustAgentListPreferenceController.PREF_KEY_SECURITY_CATEGORY;
+import static com.android.settings.security.trustagent.TrustAgentListPreferenceController.PREF_KEY_TRUST_AGENT;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
@@ -31,10 +27,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.Context;
-
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;

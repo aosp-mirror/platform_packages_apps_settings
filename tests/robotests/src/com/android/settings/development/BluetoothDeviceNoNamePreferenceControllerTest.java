@@ -16,18 +16,14 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.BluetoothDeviceNoNamePreferenceController
-        .BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY;
-
+import static com.android.settings.development.BluetoothDeviceNoNamePreferenceController.BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

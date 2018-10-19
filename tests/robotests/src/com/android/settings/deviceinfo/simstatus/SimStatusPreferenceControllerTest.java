@@ -27,10 +27,9 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.telephony.TelephonyManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

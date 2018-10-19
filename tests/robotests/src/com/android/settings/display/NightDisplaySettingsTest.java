@@ -21,8 +21,8 @@ import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.drawer.CategoryKey;
 
+import com.android.settingslib.drawer.CategoryKey;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;

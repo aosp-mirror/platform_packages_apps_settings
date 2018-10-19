@@ -16,10 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import android.content.pm.PackageManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

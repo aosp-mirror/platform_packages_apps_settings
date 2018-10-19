@@ -17,10 +17,10 @@ package com.android.settings.core;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import com.android.settings.widget.SeekBarPreference;
 
 import com.android.settings.slices.SliceData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.SeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Test;

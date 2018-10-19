@@ -17,14 +17,20 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

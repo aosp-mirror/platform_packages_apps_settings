@@ -17,22 +17,19 @@
 package com.android.settings.accounts;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
 import android.app.Activity;
+import androidx.lifecycle.LifecycleOwner;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.widget.TextView;
-
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;

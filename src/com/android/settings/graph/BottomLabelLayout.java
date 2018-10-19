@@ -19,12 +19,11 @@ package com.android.settings.graph;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.R;
 

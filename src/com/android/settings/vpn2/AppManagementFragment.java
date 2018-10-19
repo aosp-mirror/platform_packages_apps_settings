@@ -34,10 +34,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

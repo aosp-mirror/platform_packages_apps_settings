@@ -24,10 +24,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.provider.Settings.Secure;
-
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 

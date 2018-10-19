@@ -16,7 +16,6 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-
 import com.android.internal.telephony.ISms;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settingslib.applications.ApplicationsState;

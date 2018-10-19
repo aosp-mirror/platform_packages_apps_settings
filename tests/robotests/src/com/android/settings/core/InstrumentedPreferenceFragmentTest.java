@@ -25,7 +25,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.os.Bundle;
-
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 

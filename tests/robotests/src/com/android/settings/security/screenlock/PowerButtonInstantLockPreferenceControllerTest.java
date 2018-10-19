@@ -17,13 +17,11 @@
 package com.android.settings.security.screenlock;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;

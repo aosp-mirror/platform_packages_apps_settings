@@ -20,7 +20,6 @@ import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;

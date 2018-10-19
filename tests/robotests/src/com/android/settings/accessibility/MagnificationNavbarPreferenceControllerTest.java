@@ -27,7 +27,6 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
-
 import androidx.preference.Preference;
 
 import com.android.settings.R;

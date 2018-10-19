@@ -16,7 +16,6 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;

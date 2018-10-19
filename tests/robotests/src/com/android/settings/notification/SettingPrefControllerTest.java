@@ -17,9 +17,7 @@
 package com.android.settings.notification;
 
 import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -29,7 +27,6 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings.Global;
-
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;

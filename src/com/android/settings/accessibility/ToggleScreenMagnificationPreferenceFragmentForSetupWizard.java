@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.os.Bundle;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard

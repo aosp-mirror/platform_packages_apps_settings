@@ -19,22 +19,32 @@ package com.android.settings.gestures;
 import static android.provider.Settings.Secure.VOLUME_HUSH_GESTURE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
+import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static junit.framework.Assert.assertEquals;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.Settings;
-
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
+import com.android.settings.search.InlinePayload;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -43,6 +53,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PreventRingingPreferenceControllerTest {

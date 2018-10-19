@@ -19,7 +19,6 @@ package com.android.settings.testutils.shadow;
 import android.os.Bundle;
 
 import com.android.settings.SettingsPreferenceFragment;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

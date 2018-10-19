@@ -16,11 +16,14 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
+import android.app.PendingIntent;
 import android.app.StatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import com.android.internal.annotations.VisibleForTesting;
 
 /**
  * Receive broadcast when {@link StatsManager} restart, then check the anomaly config and

@@ -1,7 +1,6 @@
 package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -11,7 +10,6 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.Activity;
 import android.content.Intent;
-
 import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

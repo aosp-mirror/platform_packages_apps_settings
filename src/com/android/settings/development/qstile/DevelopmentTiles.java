@@ -25,14 +25,13 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
+import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.IWindowManager;
 import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.WindowManagerGlobal;
 import android.widget.Toast;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.LocalePicker;
 import com.android.settingslib.development.SystemPropPoker;

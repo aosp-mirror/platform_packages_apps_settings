@@ -1,7 +1,6 @@
 package com.android.settings.survey;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
@@ -13,7 +12,6 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
-
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;

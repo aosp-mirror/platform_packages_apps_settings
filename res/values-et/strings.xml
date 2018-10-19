@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automaatne"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz riba"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 GHz riba"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Eelistatud on 5,0 GHz riba"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Valige WiFi-leviala lubamiseks vähemalt üks sagedusriba:"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Loomulikud"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Võimendatud"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Küllastatud"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automaatne"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Kohanduv"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Kasuta ainult täpseid värve"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Eredate ja täpsete värvide vahel kohandamine"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Tahvelarvuti pööramisel automaatselt paigutuse ümberlülitamine"</string>
@@ -1095,7 +1096,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Heledust optimeeritakse valgustingimuste järgi. Kui funktsioon on sisse lülitatud, saate heledust siiski ajutiselt reguleerida."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Teie ekraanikuva eredust kohandatakse automaatselt teie keskkonna ja tegevuste järgi. Võite liugurit käsitsi liigutada, et aidata kohanduval eredusel teie eelistusi õppida."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Öövalgus"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"Funktsioon Öövalgus toonib ekraani kollaseks. Nii on hämaras ekraani mugavam vaadata ja sellelt teksti lugeda. See võib aidata teil ka hõlpsamini magama jääda."</string>
+    <string name="night_display_text" msgid="1837277457033025056">"Funktsioon Öövalgus toonib ekraani oranžkollaseks. Nii on hämaras ekraani mugavam vaadata ja sellelt teksti lugeda. See võib aidata teil ka hõlpsamini magama jääda."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Ajastamine"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Mitte kunagi"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Lülitub sisse kohandatud ajal"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Vaigistatud, kuid lubatakse <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> ja <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Vaigistatud, kuid lubatakse <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> ja <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Sõnumid, sündmused ja meeldetuletused"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Kui funktsioon Mitte segada on sisse lülitatud, vaigistatakse sõnumid, meeldetuletused ja sündmused. Teil on võimalik sõnumite seadeid kohandada, et võimaldada sõpradel, pereliikmetel või muudel kontaktidel teiega ühendust võtta."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Kui funktsioon Mitte segada on sisse lülitatud, vaigistatakse sõnumid, meeldetuletused ja sündmused, välja arvatud teie ülal lubatud üksuste puhul. Võite sõnumite seadeid kohandada, et lubada sõpradel, pereliikmetel või muudel kontaktidel teiega ühendust võtta."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Valmis"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Seaded"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Hääletud ja ekraanilt peidetud märguanded"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Kui sisestate PIN-koodi seadme käivitamiseks, siis pole juurdepääsetavusteenused (nagu <xliff:g id="SERVICE">%1$s</xliff:g>) saadaval."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Kui sisestate mustri seadme käivitamiseks, siis pole juurdepääsetavusteenused (nagu <xliff:g id="SERVICE">%1$s</xliff:g>) saadaval."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Kui sisestate parooli seadme käivitamiseks, siis pole juurdepääsetavusteenused (nagu <xliff:g id="SERVICE">%1$s</xliff:g>) saadaval."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Märkus. Pärast taaskäivitamist ei saa see rakendus käivituda enne, kui olete telefoni avanud"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Märkus. Kui telefoni taaskäivitate ja määratud on ekraanilukk, ei saa see rakendus käivituda enne, kui olete telefoni avanud"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI teave"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI suhteline teave"</string>
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g>. pesa)"</string>
@@ -3631,7 +3632,7 @@
     <string name="running_frequency" msgid="6622624669948277693">"Sagedus"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Maksimaalne kasutus"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"Andmeid pole kasutatud"</string>
-    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Kas lubada rakenduse <xliff:g id="APP">%1$s</xliff:g> juurdepääs funktsioonile Mitte segada?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Rakenduse <xliff:g id="APP">%1$s</xliff:g> juurdepääs funktsioonile Mitte segada"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Rakendus saab funktsiooni Mitte segada sisse/välja lülitada ja muuta sellega seotud seadeid."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"Peab jääma sisselülitatud asendisse, kuna juurdepääs märguannetele on sisse lülitatud"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"Kas tühistada rakenduse <xliff:g id="APP">%1$s</xliff:g> juurdepääs režiimile Mitte segada?"</string>

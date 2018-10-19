@@ -23,7 +23,6 @@ import android.content.pm.PackageInfo;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserManager;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;

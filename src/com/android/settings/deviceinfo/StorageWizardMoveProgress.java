@@ -16,19 +16,19 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.content.Intent.EXTRA_TITLE;
-import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
-
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.MoveCallback;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.settings.R;
+
+import static android.content.Intent.EXTRA_TITLE;
+import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 public class StorageWizardMoveProgress extends StorageWizardBase {
     private int mMoveId;

@@ -16,11 +16,8 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_ENABLED;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_USAGE_ACCESS;
-
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ENABLED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_USAGE_ACCESS;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.R;

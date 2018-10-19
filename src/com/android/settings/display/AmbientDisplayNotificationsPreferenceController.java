@@ -21,10 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.text.TextUtils;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;

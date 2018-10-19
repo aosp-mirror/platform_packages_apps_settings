@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.provider.Settings;
-
 import androidx.annotation.VisibleForTesting;
 
 public class NotificationVibrationIntensityPreferenceController

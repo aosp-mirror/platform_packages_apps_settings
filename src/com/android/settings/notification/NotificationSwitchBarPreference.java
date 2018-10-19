@@ -17,10 +17,9 @@
 package com.android.settings.notification;
 
 import android.content.Context;
+import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
-
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.ToggleSwitch;

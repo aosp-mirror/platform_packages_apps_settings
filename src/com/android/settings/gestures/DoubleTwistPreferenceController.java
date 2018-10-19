@@ -24,9 +24,8 @@ import android.hardware.SensorManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.text.TextUtils;
-
 import androidx.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

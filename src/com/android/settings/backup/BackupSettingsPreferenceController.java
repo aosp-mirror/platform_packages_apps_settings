@@ -19,7 +19,6 @@ package com.android.settings.backup;
 
 import android.content.Context;
 import android.content.Intent;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

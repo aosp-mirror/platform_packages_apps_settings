@@ -16,8 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
-
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -25,14 +23,13 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.widget.ImageView;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -40,6 +37,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote

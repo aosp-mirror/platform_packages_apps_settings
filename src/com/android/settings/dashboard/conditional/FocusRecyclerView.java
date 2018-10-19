@@ -16,10 +16,9 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.Context;
-import android.util.AttributeSet;
-
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import android.util.AttributeSet;
 
 /**
  * Version of RecyclerView that can have listeners for onWindowFocusChanged.

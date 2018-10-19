@@ -20,13 +20,12 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
-import android.util.SparseArray;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+import android.util.SparseArray;
 
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;

@@ -25,11 +25,10 @@ import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import androidx.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;

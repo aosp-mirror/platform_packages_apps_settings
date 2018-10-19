@@ -23,7 +23,6 @@ import android.content.res.Resources;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;

@@ -18,10 +18,9 @@ package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.Tile;

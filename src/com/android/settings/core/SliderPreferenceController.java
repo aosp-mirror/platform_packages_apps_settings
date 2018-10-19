@@ -15,7 +15,6 @@
 package com.android.settings.core;
 
 import android.content.Context;
-
 import androidx.preference.Preference;
 
 import com.android.settings.slices.SliceData;

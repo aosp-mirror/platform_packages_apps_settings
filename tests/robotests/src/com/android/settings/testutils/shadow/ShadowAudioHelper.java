@@ -18,9 +18,7 @@ package com.android.settings.testutils.shadow;
 
 import android.os.UserHandle;
 import android.os.UserManager;
-
 import com.android.settings.notification.AudioHelper;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 

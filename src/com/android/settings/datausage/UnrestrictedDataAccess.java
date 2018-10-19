@@ -20,13 +20,12 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

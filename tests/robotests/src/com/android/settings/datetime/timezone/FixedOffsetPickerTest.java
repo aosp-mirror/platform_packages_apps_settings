@@ -16,11 +16,6 @@
 
 package com.android.settings.datetime.timezone;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 
 import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
@@ -38,6 +33,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class FixedOffsetPickerTest {

@@ -23,11 +23,10 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.text.TextUtils;
-
 import androidx.core.text.BidiFormatter;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

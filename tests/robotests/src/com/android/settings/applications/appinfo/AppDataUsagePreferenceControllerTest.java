@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -34,7 +33,6 @@ import android.content.pm.ApplicationInfo;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
 import android.os.Bundle;
-
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;

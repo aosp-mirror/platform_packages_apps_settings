@@ -17,14 +17,12 @@
 package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.robolectric.shadow.api.Shadow.extract;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
-
 import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

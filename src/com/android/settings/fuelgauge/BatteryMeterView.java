@@ -22,10 +22,9 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

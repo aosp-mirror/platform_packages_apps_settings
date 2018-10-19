@@ -25,13 +25,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.VisibleForTesting;
 
 import java.util.Locale;
 

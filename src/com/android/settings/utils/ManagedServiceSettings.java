@@ -30,12 +30,11 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
-
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

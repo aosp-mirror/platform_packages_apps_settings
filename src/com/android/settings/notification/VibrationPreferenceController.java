@@ -16,10 +16,10 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Vibrator;
-
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;

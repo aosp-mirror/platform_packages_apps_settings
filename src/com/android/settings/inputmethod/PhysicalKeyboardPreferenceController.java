@@ -18,7 +18,6 @@ package com.android.settings.inputmethod;
 
 import android.content.Context;
 import android.hardware.input.InputManager;
-
 import androidx.preference.Preference;
 
 import com.android.settings.R;

@@ -19,9 +19,9 @@ import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.INetworkManagementService;
 import android.os.UserManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-
 import com.android.settingslib.NetworkPolicyEditor;
 
 public interface TemplatePreference {

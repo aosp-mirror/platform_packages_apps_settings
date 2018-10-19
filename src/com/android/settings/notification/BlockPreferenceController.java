@@ -16,15 +16,15 @@
 
 package com.android.settings.notification;
 
+import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.widget.Switch;
-
 import androidx.preference.Preference;
+import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;

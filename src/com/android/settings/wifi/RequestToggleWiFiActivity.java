@@ -26,12 +26,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
 import com.android.internal.app.AlertActivity;
 import com.android.settings.R;
 

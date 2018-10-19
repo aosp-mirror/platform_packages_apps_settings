@@ -21,10 +21,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-
+import android.os.Handler;
 import androidx.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /** Helper class, intended to be used by an Activity, to keep the local Bluetooth adapter in
  *  discoverable mode indefinitely. By default setting the scan mode to

@@ -19,8 +19,8 @@ package com.android.settings.language;
 import android.content.Context;
 import android.speech.tts.TtsEngines;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class TtsPreferenceController extends AbstractPreferenceController

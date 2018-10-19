@@ -17,8 +17,8 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import androidx.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,8 +37,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;

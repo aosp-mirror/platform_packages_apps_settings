@@ -17,7 +17,6 @@
 package com.android.settings.language;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TtsEngines;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

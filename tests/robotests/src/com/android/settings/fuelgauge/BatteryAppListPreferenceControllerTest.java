@@ -17,18 +17,16 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import androidx.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.FeatureFlagUtils;
 import android.util.SparseArray;
-
-import androidx.preference.PreferenceGroup;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsImpl;

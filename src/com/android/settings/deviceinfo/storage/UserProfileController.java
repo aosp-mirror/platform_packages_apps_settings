@@ -21,10 +21,9 @@ import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
-import android.util.SparseArray;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import android.util.SparseArray;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.Preconditions;

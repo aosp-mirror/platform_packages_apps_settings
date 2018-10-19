@@ -18,19 +18,18 @@ package com.android.settings.wifi;
 
 import static android.provider.Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE;
 import static android.provider.Settings.Global.WIFI_WAKEUP_ENABLED;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.location.LocationManager;
 import android.provider.Settings;
-
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;

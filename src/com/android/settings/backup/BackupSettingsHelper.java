@@ -24,9 +24,8 @@ import android.content.Intent;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.util.Log;
-
 import androidx.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Settings.PrivacySettingsActivity;
