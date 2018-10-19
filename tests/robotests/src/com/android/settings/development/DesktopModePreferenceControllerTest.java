@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.FreeformWindowsPreferenceController
-        .SETTING_VALUE_OFF;
-import static com.android.settings.development.FreeformWindowsPreferenceController.SETTING_VALUE_ON;
+import static android.provider.Settings.Global.DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS;
+
+import static com.android.settings.development.DesktopModePreferenceController.SETTING_VALUE_OFF;
+import static com.android.settings.development.DesktopModePreferenceController.SETTING_VALUE_ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -43,7 +44,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class FreeformWindowsPreferenceControllerTest {
+public class DesktopModePreferenceControllerTest {
 
     private static final String ENG_BUILD_TYPE = "eng";
     private static final String USER_BUILD_TYPE = "user";
@@ -54,13 +55,13 @@ public class FreeformWindowsPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private Context mContext;
-    private FreeformWindowsPreferenceController mController;
+    private DesktopModePreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new FreeformWindowsPreferenceController(mContext);
+        mController = new DesktopModePreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
     }
@@ -86,7 +87,7 @@ public class FreeformWindowsPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, -1 /* default */);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, -1 /* default */);
         assertThat(mode).isEqualTo(SETTING_VALUE_ON);
     }
 
@@ -95,14 +96,14 @@ public class FreeformWindowsPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, -1 /* default */);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, -1 /* default */);
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
     }
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, SETTING_VALUE_ON);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, SETTING_VALUE_ON);
 
         mController.updateState(mPreference);
 
@@ -112,7 +113,7 @@ public class FreeformWindowsPreferenceControllerTest {
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, SETTING_VALUE_OFF);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, SETTING_VALUE_OFF);
 
         mController.updateState(mPreference);
 
@@ -124,7 +125,7 @@ public class FreeformWindowsPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchDisabled();
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, -1 /* default */);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, -1 /* default */);
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
         verify(mPreference).setEnabled(false);
     }
