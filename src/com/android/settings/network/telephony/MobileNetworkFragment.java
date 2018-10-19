@@ -122,7 +122,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
     //UI objects
     private SwitchPreference mButton4glte;
-    private Preference mLteDataServicePref;
     private Preference mEuiccSettingsPref;
     private PreferenceCategory mCallingCategory;
     private Preference mWiFiCallingPref;
@@ -160,7 +159,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         public void onCallStateChanged(int state, String incomingNumber) {
             if (DBG) log("PhoneStateListener.onCallStateChanged: state=" + state);
 
-            updateEnhanced4gLteState();
             updateWiFiCallState();
             updateVideoCallState();
             updatePreferredNetworkType();
@@ -224,23 +222,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                         REQUEST_CODE_EXIT_ECM);
             }
             return true;
-        } else if (preference == mLteDataServicePref) {
-            String tmpl = android.provider.Settings.Global.getString(
-                    getContext().getContentResolver(),
-                    android.provider.Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL);
-            if (!TextUtils.isEmpty(tmpl)) {
-                String imsi = mTelephonyManager.getSubscriberId();
-                if (imsi == null) {
-                    imsi = "";
-                }
-                final String url = TextUtils.isEmpty(tmpl) ? null
-                        : TextUtils.expandTemplate(tmpl, imsi).toString();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-            } else {
-                android.util.Log.e(LOG_TAG, "Missing SETUP_PREPAID_DATA_SERVICE_URL");
-            }
-            return true;
         } else if (preference == mEuiccSettingsPref) {
             Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
             startActivity(intent);
@@ -296,6 +277,8 @@ public class MobileNetworkFragment extends DashboardFragment implements
         use(DataUsagePreferenceController.class).init(mSubId);
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(EnabledNetworkModePreferenceController.class).init(mSubId);
+        use(Enhanced4gLtePreferenceController.class).init(mSubId);
+        use(DataServiceSetupPreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
@@ -321,7 +304,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         mCarrierConfigManager = new CarrierConfigManager(getContext());
 
         mButton4glte = (SwitchPreference)findPreference(BUTTON_4G_LTE_KEY);
-        mButton4glte.setOnPreferenceChangeListener(this);
 
         mCallingCategory = (PreferenceCategory) findPreference(CATEGORY_CALLING_KEY);
         mWiFiCallingPref = findPreference(BUTTON_WIFI_CALLING_KEY);
@@ -339,8 +321,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         //get UI object references
         PreferenceScreen prefSet = getPreferenceScreen();
-
-        mLteDataServicePref = prefSet.findPreference(BUTTON_CDMA_LTE_DATA_SERVICE_KEY);
 
         mEuiccSettingsPref = prefSet.findPreference(BUTTON_CARRIER_SETTINGS_EUICC_KEY);
         mEuiccSettingsPref.setOnPreferenceChangeListener(this);
@@ -409,9 +389,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         getPreferenceScreen().setEnabled(true);
 
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-
-        // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
-        updateEnhanced4gLteState();
 
         // Video calling and WiFi calling state might have changed.
         updateCallingCategory();
@@ -490,7 +467,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         if (DBG) {
             log("updateBody: isLteOnCdma=" + isLteOnCdma + " phoneSubId=" + phoneSubId);
         }
-        prefSet.addPreference(mButton4glte);
 
         if (MobileNetworkUtils.showEuiccSettings(getContext())) {
             prefSet.addPreference(mEuiccSettingsPref);
@@ -512,7 +488,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
         if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)) {
-            prefSet.removePreference(mLteDataServicePref);
         } else if (carrierConfig.getBoolean(CarrierConfigManager
                 .KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)
                 && !mTelephonyManager.getServiceState().getRoaming()
@@ -531,8 +506,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
             // in case it is currently something else. That is possible if user
             // changed the setting while roaming and is now back to home network.
             settingsNetworkMode = preferredNetworkMode;
-        } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_WORLD_PHONE_BOOL) == true) {
+        } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             // set the listener for the mButtonPreferredNetworkMode list preference so we can issue
             // change Preferred Network Mode.
 
@@ -543,13 +517,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         final boolean missingDataServiceUrl = TextUtils.isEmpty(
                 android.provider.Settings.Global.getString(activity.getContentResolver(),
                         android.provider.Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL));
-        if (!isLteOnCdma || missingDataServiceUrl) {
-            prefSet.removePreference(mLteDataServicePref);
-        } else {
-            android.util.Log.d(LOG_TAG, "keep ltePref");
-        }
 
-        updateEnhanced4gLteState();
         updatePreferredNetworkType();
         updateCallingCategory();
 
@@ -565,25 +533,8 @@ public class MobileNetworkFragment extends DashboardFragment implements
             }
         }
 
-        /**
-         * Enable/disable depending upon if there are any active subscriptions.
-         *
-         * I've decided to put this enable/disable code at the bottom as the
-         * code above works even when there are no active subscriptions, thus
-         * putting it afterwards is a smaller change. This can be refined later,
-         * but you do need to remember that this all needs to work when subscriptions
-         * change dynamically such as when hot swapping sims.
-         */
-        boolean useVariant4glteTitle = carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_BOOL);
-        int enhanced4glteModeTitleId = useVariant4glteTitle ?
-                R.string.enhanced_4g_lte_mode_title_variant :
-                R.string.enhanced_4g_lte_mode_title;
-
         mOnlyAutoSelectInHomeNW = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL);
-        mButton4glte.setTitle(enhanced4glteModeTitleId);
-        mLteDataServicePref.setEnabled(hasActiveSubscriptions);
         Preference ps;
         ps = findPreference(BUTTON_CELL_BROADCAST_SETTINGS);
         if (ps != null) {
@@ -651,13 +602,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
      */
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         sendMetricsEventPreferenceChanged(getPreferenceScreen(), preference, objValue);
-
-        final int phoneSubId = mSubId;
-        if (preference == mButton4glte) {
-            boolean enhanced4gMode = !mButton4glte.isChecked();
-            mButton4glte.setChecked(enhanced4gMode);
-            mImsMgr.setEnhanced4gLteModeSetting(mButton4glte.isChecked());
-        } else if (preference == mVideoCallingPref) {
+        if (preference == mVideoCallingPref) {
             // If mButton4glte is not checked, mVideoCallingPref should be disabled.
             // So it only makes sense to call phoneMgr.enableVideoCalling if it's checked.
             if (mButton4glte.isChecked()) {
@@ -759,29 +704,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         mCallingCategory.addPreference(mWiFiCallingPref);
         mWiFiCallingPref.setEnabled(mTelephonyManager.getCallState(mSubId)
                 == TelephonyManager.CALL_STATE_IDLE && hasActiveSubscriptions());
-    }
-
-    private void updateEnhanced4gLteState() {
-        if (mButton4glte == null) {
-            return;
-        }
-
-        PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-
-        if ((mImsMgr == null
-                || !mImsMgr.isVolteEnabledByPlatform()
-                || !mImsMgr.isVolteProvisionedOnDevice()
-                || !MobileNetworkUtils.isImsServiceStateReady(mImsMgr)
-                || carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL))) {
-            getPreferenceScreen().removePreference(mButton4glte);
-        } else {
-            mButton4glte.setEnabled(is4gLtePrefEnabled(carrierConfig)
-                    && hasActiveSubscriptions());
-            boolean enh4glteMode = mImsMgr.isEnhanced4gLteModeSettingEnabledByUser()
-                    && mImsMgr.isNonTtyOrTtyOnVolteEnabled();
-            mButton4glte.setChecked(enh4glteMode);
-        }
     }
 
     private void updateVideoCallState() {
@@ -958,8 +880,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // For ListPreferences, we log it here without a value, only indicating it's clicked to
         // open the list dialog. When a value is chosen, another MetricsEvent is logged with
         // new value in onPreferenceChange.
-        if (preference == mLteDataServicePref
-                || preference == mEuiccSettingsPref
+        if (preference == mEuiccSettingsPref
                 || preference == mWiFiCallingPref
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)
@@ -978,7 +899,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         }
 
         // MetricsEvent logging with new value, for SwitchPreferences and ListPreferences.
-        if (preference == mButton4glte || preference == mVideoCallingPref) {
+        if (preference == mVideoCallingPref) {
             MetricsLogger.action(getContext(), category, (Boolean) newValue);
         } else if (preference == preferenceScreen
                 .findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
@@ -994,10 +915,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         if (preference == null) {
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
-        } else if (preference == mLteDataServicePref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_SET_UP_DATA_SERVICE;
-        } else if (preference == mButton4glte) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_ENHANCED_4G_LTE_MODE_TOGGLE;
         } else if (preference == mEuiccSettingsPref) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_EUICC_SETTING;
         } else if (preference == mWiFiCallingPref) {
