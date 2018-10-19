@@ -66,7 +66,8 @@
         android:summary="@string/preferred_network_mode_summary"
         android:entries="@array/enabled_networks_choices"
         android:entryValues="@array/enabled_networks_values"
-        android:dialogTitle="@string/preferred_network_mode_dialogtitle" />
+        android:dialogTitle="@string/preferred_network_mode_dialogtitle"
+        settings:controller="com.android.settings.network.telephony.EnabledNetworkModePreferenceController"/>
 
     <Preference
         android:key="carrier_settings_euicc_key"
