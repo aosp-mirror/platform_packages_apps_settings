@@ -24,6 +24,7 @@ import static org.mockito.Mockito.spy;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.provider.Settings;
 import android.widget.Toolbar;
 
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -63,7 +64,7 @@ public class SearchFeatureProviderImplTest {
         final Intent launchIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
 
         assertThat(launchIntent.getAction())
-                .isEqualTo("com.android.settings.action.SETTINGS_SEARCH");
+                .isEqualTo(Settings.ACTION_APP_SEARCH_SETTINGS);
     }
 
     @Test(expected = IllegalArgumentException.class)
