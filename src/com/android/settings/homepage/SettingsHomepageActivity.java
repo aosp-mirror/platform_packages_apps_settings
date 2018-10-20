@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 import android.widget.Toolbar;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -32,13 +31,10 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 public class SettingsHomepageActivity extends SettingsBaseActivity {
 
-    @VisibleForTesting
-    static final String PERSONAL_SETTINGS_TAG = "personal_settings";
-    private static final String ALL_SETTINGS_TAG = "all_settings";
+    private static final String SUGGESTION_TAG = "suggestion";
+    private static final String MAIN_TAG = "main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,49 +54,18 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
                 .initSearchToolbar(this, toolbar);
 
-        final BottomNavigationView navigation = findViewById(R.id.bottom_nav);
-        navigation.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.homepage_personal_settings:
-                    switchFragment(new PersonalSettingsFragment(), PERSONAL_SETTINGS_TAG,
-                            ALL_SETTINGS_TAG);
-                    return true;
-
-                case R.id.homepage_all_settings:
-                    switchFragment(new TopLevelSettings(), ALL_SETTINGS_TAG,
-                            PERSONAL_SETTINGS_TAG);
-                    return true;
-            }
-            return false;
-        });
-
-        if (savedInstanceState == null) {
-            // savedInstanceState is null, this is first load.
-            // Default to open contextual cards.
-            switchFragment(new PersonalSettingsFragment(), PERSONAL_SETTINGS_TAG,
-                    ALL_SETTINGS_TAG);
-        }
+        showFragment(new PersonalSettingsFragment(), R.id.suggestion_content, SUGGESTION_TAG);
+        showFragment(new TopLevelSettings(), R.id.main_content, MAIN_TAG);
     }
 
     public static boolean isDynamicHomepageEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlags.DYNAMIC_HOMEPAGE);
     }
 
-    private void switchFragment(Fragment fragment, String showFragmentTag, String hideFragmentTag) {
+    private void showFragment(Fragment fragment, int id, String tag) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        final Fragment hideFragment = fragmentManager.findFragmentByTag(hideFragmentTag);
-        if (hideFragment != null) {
-            fragmentTransaction.hide(hideFragment);
-        }
-
-        Fragment showFragment = fragmentManager.findFragmentByTag(showFragmentTag);
-        if (showFragment == null) {
-            fragmentTransaction.add(R.id.main_content, fragment, showFragmentTag);
-        } else {
-            fragmentTransaction.show(showFragment);
-        }
+        fragmentTransaction.add(id, fragment, tag);
         fragmentTransaction.commit();
     }
 }
