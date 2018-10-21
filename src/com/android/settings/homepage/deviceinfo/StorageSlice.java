@@ -48,7 +48,7 @@ public class StorageSlice implements CustomSliceable {
     /**
      * The path denotes the unique name of storage slicel
      */
-    public static final String PATH_STORAGE_CARD = "storage_card";
+    public static final String PATH_STORAGE_INFO = "storage_card";
 
     /**
      * Backing Uri for the storage slice.
@@ -56,7 +56,7 @@ public class StorageSlice implements CustomSliceable {
     public static final Uri STORAGE_CARD_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_STORAGE_CARD)
+            .appendPath(PATH_STORAGE_INFO)
             .build();
 
     private final Context mContext;
@@ -93,9 +93,9 @@ public class StorageSlice implements CustomSliceable {
     @Override
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.storage_label).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_STORAGE_CARD).build();
+        final Uri contentUri = new Uri.Builder().appendPath(PATH_STORAGE_INFO).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                StorageDashboardFragment.class.getName(), PATH_STORAGE_CARD, screenTitle,
+                StorageDashboardFragment.class.getName(), PATH_STORAGE_INFO, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);

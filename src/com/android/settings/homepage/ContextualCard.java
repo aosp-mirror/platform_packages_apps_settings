@@ -244,8 +244,8 @@ public class ContextualCard {
             return this;
         }
 
-        public Builder setSliceUri(String sliceUri) {
-            mSliceUri = sliceUri;
+        public Builder setSliceUri(Uri sliceUri) {
+            mSliceUri = sliceUri.toString();
             return this;
         }
 

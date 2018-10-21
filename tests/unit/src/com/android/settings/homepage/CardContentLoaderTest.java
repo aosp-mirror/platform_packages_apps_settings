@@ -19,6 +19,7 @@ package com.android.settings.homepage;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -61,7 +62,7 @@ public class CardContentLoaderTest {
         return new ContextualCard.Builder()
                 .setName("test_card")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(sliceUri)
+                .setSliceUri(Uri.parse(sliceUri))
                 .build();
     }
 }

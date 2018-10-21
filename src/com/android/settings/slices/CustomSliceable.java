@@ -90,6 +90,16 @@ public interface CustomSliceable {
     }
 
     /**
+     * Settings Slices which can represent component lists that are updatable by the
+     * {@link SliceBackgroundWorker} returned here.
+     *
+     * @return a {@link SliceBackgroundWorker} for fetching the list of results in the background.
+     */
+    default SliceBackgroundWorker getBackgroundWorker() {
+        return null;
+    }
+
+    /**
      * Standardize the intents returned to indicate actions by the Slice.
      * <p>
      *     The {@link PendingIntent} is linked to {@link SliceBroadcastReceiver} where the Intent

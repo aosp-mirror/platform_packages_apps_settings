@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -53,7 +52,7 @@ public class DeviceInfoSlice implements CustomSliceable {
     /**
      * The path denotes the unique name of device info slice
      */
-    public static final String PATH_DEVICE_INFO_CARD = "device_info_card";
+    public static final String PATH_DEVICE_INFO = "device_info_card";
 
     /**
      * Backing Uri for the Device info Slice.
@@ -61,16 +60,14 @@ public class DeviceInfoSlice implements CustomSliceable {
     public static final Uri DEVICE_INFO_CARD_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_DEVICE_INFO_CARD)
+            .appendPath(PATH_DEVICE_INFO)
             .build();
 
     private final Context mContext;
-    private final TelephonyManager mTelephonyManager;
     private final SubscriptionManager mSubscriptionManager;
 
     public DeviceInfoSlice(Context context) {
         mContext = context;
-        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
     }
 
@@ -101,9 +98,9 @@ public class DeviceInfoSlice implements CustomSliceable {
     @Override
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.device_info_label).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_DEVICE_INFO_CARD).build();
+        final Uri contentUri = new Uri.Builder().appendPath(PATH_DEVICE_INFO).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                MyDeviceInfoFragment.class.getName(), PATH_DEVICE_INFO_CARD, screenTitle,
+                MyDeviceInfoFragment.class.getName(), PATH_DEVICE_INFO, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
