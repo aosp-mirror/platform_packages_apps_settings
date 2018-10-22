@@ -483,6 +483,27 @@
 
             </LinearLayout>
 
+            <LinearLayout android:id="@+id/privacy_settings_fields"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item"
+                          android:visibility="gone">
+
+                <TextView android:id="@+id/privacy_settings_title"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item_label"
+                          android:text="@string/wifi_privacy_settings" />
+
+                <Spinner android:id="@+id/privacy_settings"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         style="@style/wifi_item_spinner"
+                         android:prompt="@string/wifi_privacy_settings"
+                         android:entries="@array/wifi_privacy_entries"/>
+
+            </LinearLayout>
+
             <LinearLayout android:id="@+id/staticip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
