@@ -91,13 +91,15 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         if (sliceLiveData == null) {
             sliceLiveData = SliceLiveData.fromUri(mContext, uri);
             mSliceLiveDataMap.put(uri.toString(), sliceLiveData);
-            sliceLiveData.observe(mLifecycleOwner, slice -> {
-                if (slice == null) {
-                    Log.w(TAG, "Slice is null");
-                }
-                cardHolder.sliceView.setSlice(slice);
-            });
         }
+
+        sliceLiveData.removeObservers(mLifecycleOwner);
+        sliceLiveData.observe(mLifecycleOwner, slice -> {
+            if (slice == null) {
+                Log.w(TAG, "Slice is null");
+            }
+            cardHolder.sliceView.setSlice(slice);
+        });
 
         // Set this listener so we can log the interaction users make on the slice
         cardHolder.sliceView.setOnSliceActionListener(this);
