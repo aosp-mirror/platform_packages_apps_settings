@@ -61,6 +61,7 @@ public class MobileDataPreferenceController extends TogglePreferenceController
         super(context, key);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
+        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override

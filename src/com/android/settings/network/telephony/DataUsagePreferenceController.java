@@ -43,6 +43,7 @@ public class DataUsagePreferenceController extends BasePreferenceController {
 
     public DataUsagePreferenceController(Context context, String key) {
         super(context, key);
+        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
