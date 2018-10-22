@@ -122,7 +122,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
     //UI objects
     private SwitchPreference mButton4glte;
-    private Preference mEuiccSettingsPref;
     private PreferenceCategory mCallingCategory;
     private Preference mWiFiCallingPref;
     private SwitchPreference mVideoCallingPref;
@@ -222,10 +221,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
                         REQUEST_CODE_EXIT_ECM);
             }
             return true;
-        } else if (preference == mEuiccSettingsPref) {
-            Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
-            startActivity(intent);
-            return true;
         } else if (preference == mWiFiCallingPref || preference == mVideoCallingPref) {
             return false;
         }
@@ -279,6 +274,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         use(EnabledNetworkModePreferenceController.class).init(mSubId);
         use(Enhanced4gLtePreferenceController.class).init(mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
+        use(EuiccPreferenceController.class).init(mSubId);
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
@@ -318,12 +314,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             Log.e(LOG_TAG, "NameNotFoundException for show4GFotLTE");
             mShow4GForLTE = false;
         }
-
-        //get UI object references
-        PreferenceScreen prefSet = getPreferenceScreen();
-
-        mEuiccSettingsPref = prefSet.findPreference(BUTTON_CARRIER_SETTINGS_EUICC_KEY);
-        mEuiccSettingsPref.setOnPreferenceChangeListener(this);
 
         // Initialize mActiveSubInfo
         int max = mSubscriptionManager.getActiveSubscriptionInfoCountMax();
@@ -450,12 +440,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         if (hasActiveSubscriptions) {
             updateBodyAdvancedFields(activity, prefSet, mSubId, hasActiveSubscriptions);
-        } else {
-            // Shows the "Carrier" preference that allows user to add a e-sim profile.
-            if (MobileNetworkUtils.showEuiccSettings(getContext())) {
-                mEuiccSettingsPref.setSummary(null /* summary */);
-                prefSet.addPreference(mEuiccSettingsPref);
-            }
         }
     }
 
@@ -466,16 +450,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         if (DBG) {
             log("updateBody: isLteOnCdma=" + isLteOnCdma + " phoneSubId=" + phoneSubId);
-        }
-
-        if (MobileNetworkUtils.showEuiccSettings(getContext())) {
-            prefSet.addPreference(mEuiccSettingsPref);
-            String spn = mTelephonyManager.getSimOperatorName();
-            if (TextUtils.isEmpty(spn)) {
-                mEuiccSettingsPref.setSummary(null);
-            } else {
-                mEuiccSettingsPref.setSummary(spn);
-            }
         }
 
         int settingsNetworkMode = android.provider.Settings.Global.getInt(
@@ -880,8 +854,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // For ListPreferences, we log it here without a value, only indicating it's clicked to
         // open the list dialog. When a value is chosen, another MetricsEvent is logged with
         // new value in onPreferenceChange.
-        if (preference == mEuiccSettingsPref
-                || preference == mWiFiCallingPref
+        if (preference == mWiFiCallingPref
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || preference == preferenceScreen.findPreference(BUTTON_CDMA_SUBSCRIPTION_KEY)
                 || preference == preferenceScreen.findPreference(BUTTON_GSM_APN_EXPAND_KEY)
@@ -915,8 +888,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         if (preference == null) {
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
-        } else if (preference == mEuiccSettingsPref) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_EUICC_SETTING;
         } else if (preference == mWiFiCallingPref) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_WIFI_CALLING;
         } else if (preference == mVideoCallingPref) {
