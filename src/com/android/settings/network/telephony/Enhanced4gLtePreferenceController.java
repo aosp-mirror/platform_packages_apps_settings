@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
@@ -53,7 +54,7 @@ public class Enhanced4gLtePreferenceController extends TogglePreferenceControlle
     public Enhanced4gLtePreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mPhoneStateListener = new PhoneCallStateListener();
+        mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
         mSubId =  SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
@@ -131,6 +132,11 @@ public class Enhanced4gLtePreferenceController extends TogglePreferenceControlle
     }
 
     private class PhoneCallStateListener extends PhoneStateListener {
+
+        public PhoneCallStateListener(Looper looper) {
+            super(looper);
+        }
+
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             updateState(mPreference);
