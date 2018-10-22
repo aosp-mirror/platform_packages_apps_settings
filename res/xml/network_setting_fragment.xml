@@ -99,7 +99,7 @@
 
     </PreferenceCategory>
 
-    <ListPreference
+    <com.android.settings.network.telephony.cdma.CdmaListPreference
         android:key="cdma_system_select_key"
         android:title="@string/cdma_system_select_title"
         android:summary="@string/cdma_system_select_summary"
@@ -108,7 +108,7 @@
         android:dialogTitle="@string/cdma_system_select_dialogtitle"
         settings:controller="com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController"/>
 
-    <ListPreference
+    <com.android.settings.network.telephony.cdma.CdmaListPreference
         android:key="cdma_subscription_key"
         android:title="@string/cdma_subscription_title"
         android:summary="@string/cdma_subscription_summary"

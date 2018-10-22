@@ -77,14 +77,6 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
         return false;
     }
 
-    public void showDialog() {
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.CDMA_SUBSCRIPTION_MODE, Phone.PREFERRED_CDMA_SUBSCRIPTION);
-
-        mPreference.setValue(Integer.toString(mode));
-        mPreferenceManager.showDialog(mPreference);
-    }
-
     @VisibleForTesting
     boolean deviceSupportsNvAndRuim() {
         // retrieve the list of subscription types supported by device.
