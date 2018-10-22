@@ -19,7 +19,6 @@ package com.android.settings.wifi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.FeatureFlagUtils;
 import android.view.View;
 import android.widget.Button;
 
@@ -93,14 +92,6 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
 
         if (mAccessPoint == null) {
             mController.hideForgetButton();
-        }
-
-        if (FeatureFlagUtils.isEnabled(getContext(),
-                com.android.settings.core.FeatureFlags.WIFI_MAC_RANDOMIZATION)) {
-            View view = mView.findViewById(R.id.privacy_settings_fields);
-            if (view != null) {
-                view.setVisibility(View.VISIBLE);
-            }
         }
     }
 
