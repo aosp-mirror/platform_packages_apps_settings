@@ -16,9 +16,11 @@
 
 package com.android.settings.slices;
 
+import android.annotation.MainThread;
 import android.content.ContentResolver;
 import android.net.Uri;
 
+import java.io.Closeable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ import java.util.List;
  * {@link SliceBackgroundWorker} caches the results, uses the cache to compare if there is any data
  * changed, and then notifies the Slice {@link Uri} to update.
  */
-public abstract class SliceBackgroundWorker<E> {
+public abstract class SliceBackgroundWorker<E> implements Closeable {
 
     private final ContentResolver mContentResolver;
     private final Uri mUri;
@@ -48,12 +50,14 @@ public abstract class SliceBackgroundWorker<E> {
      * Called when the Slice is pinned. This is the place to register callbacks or initialize scan
      * tasks.
      */
+    @MainThread
     protected abstract void onSlicePinned();
 
     /**
      * Called when the Slice is unpinned. This is the place to unregister callbacks or perform any
      * final cleanup.
      */
+    @MainThread
     protected abstract void onSliceUnpinned();
 
     /**
