@@ -26,12 +26,12 @@ import android.telephony.SignalStrength;
 import android.util.Log;
 import android.view.Gravity;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.List;
-
-import androidx.preference.Preference;
 
 /**
  * A Preference represents a network operator in the NetworkSelectSetting fragment.
@@ -45,16 +45,18 @@ public class NetworkOperatorPreference extends Preference {
     private CellInfo mCellInfo;
     private List<String> mForbiddenPlmns;
     private int mLevel = -1;
+    private boolean mShow4GForLTE;
 
     // The following constants are used to draw signal icon.
     private static final Drawable EMPTY_DRAWABLE = new ColorDrawable(Color.TRANSPARENT);
     private static final int NO_CELL_DATA_CONNECTED_ICON = 0;
 
     public NetworkOperatorPreference(
-            CellInfo cellinfo, Context context, List<String> forbiddenPlmns) {
+            CellInfo cellinfo, Context context, List<String> forbiddenPlmns, boolean show4GForLTE) {
         super(context);
         mCellInfo = cellinfo;
         mForbiddenPlmns = forbiddenPlmns;
+        mShow4GForLTE = show4GForLTE;
         refresh();
     }
 
@@ -87,15 +89,21 @@ public class NetworkOperatorPreference extends Preference {
         updateIcon(level);
     }
 
-    private static int getIconIdForCell(CellInfo ci) {
+    private int getIconIdForCell(CellInfo ci) {
         final int type = ci.getCellIdentity().getType();
         switch (type) {
-            case CellInfo.TYPE_GSM: return R.drawable.signal_strength_g;
+            case CellInfo.TYPE_GSM:
+                return R.drawable.signal_strength_g;
             case CellInfo.TYPE_WCDMA: // fall through
-            case CellInfo.TYPE_TDSCDMA: return R.drawable.signal_strength_3g;
-            case CellInfo.TYPE_LTE: return R.drawable.signal_strength_lte;
-            case CellInfo.TYPE_CDMA: return R.drawable.signal_strength_1x;
-            default: return 0;
+            case CellInfo.TYPE_TDSCDMA:
+                return R.drawable.signal_strength_3g;
+            case CellInfo.TYPE_LTE:
+                return mShow4GForLTE
+                        ? R.drawable.ic_signal_strength_4g : R.drawable.signal_strength_lte;
+            case CellInfo.TYPE_CDMA:
+                return R.drawable.signal_strength_1x;
+            default:
+                return 0;
         }
     }
 
@@ -117,7 +125,7 @@ public class NetworkOperatorPreference extends Preference {
                 iconType == NO_CELL_DATA_CONNECTED_ICON
                         ? EMPTY_DRAWABLE
                         : getContext()
-                        .getResources().getDrawable(iconType, getContext().getTheme());
+                                .getResources().getDrawable(iconType, getContext().getTheme());
 
         // Overlay the two drawables
         Drawable[] layers = {networkDrawable, signalDrawable};

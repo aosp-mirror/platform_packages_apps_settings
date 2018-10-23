@@ -15,13 +15,17 @@
  */
 package com.android.settings.network.telephony;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.MOBILE_NETWORK_SELECT;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.provider.SearchIndexableResource;
 import android.telephony.AccessNetworkConstants;
+import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
 import android.telephony.CellInfo;
 import android.telephony.NetworkRegistrationState;
@@ -30,6 +34,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -50,6 +55,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * "Choose network" settings UI for the Phone app.
@@ -58,10 +65,8 @@ import java.util.Map;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class NetworkSelectSettings extends DashboardFragment {
 
-    private static final String TAG = "NetworkSelectSetting";
+    private static final String TAG = "NetworkSelectSettings";
     private static final boolean DBG = true;
-
-    public static final String KEY_SUBSCRIPTION_ID = "subscription_id";
 
     private static final int EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE = 1;
     private static final int EVENT_NETWORK_SCAN_RESULTS = 2;
@@ -81,36 +86,26 @@ public class NetworkSelectSettings extends DashboardFragment {
     private Preference mStatusMessagePreference;
     private List<CellInfo> mCellInfoList;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private ViewGroup mFrameLayout;
     private NetworkOperatorPreference mSelectedNetworkOperatorPreference;
     private TelephonyManager mTelephonyManager;
     private List<String> mForbiddenPlmns;
-    //Flag indicating whether we have called bind on the service.
-    private boolean mShouldUnbind;
+    private boolean mShow4GForLTE = true;
+    private NetworkScanHelper mNetworkScanHelper;
+    private final ExecutorService mNetworkScanExecutor = Executors.newFixedThreadPool(1);
 
     private final Runnable mUpdateNetworkOperatorsRunnable = () -> {
         updateNetworkOperatorsPreferenceCategory();
     };
-
-    /**
-     * Create a new instance of this fragment.
-     */
-    public static NetworkSelectSettings newInstance(int subId) {
-        Bundle args = new Bundle();
-        args.putInt(KEY_SUBSCRIPTION_ID, subId);
-        NetworkSelectSettings
-                fragment = new NetworkSelectSettings();
-        fragment.setArguments(args);
-
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle icicle) {
         if (DBG) logd("onCreate");
         super.onCreate(icicle);
 
-        mSubId = getArguments().getInt(KEY_SUBSCRIPTION_ID);
+        mSubId = getArguments().getInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID);
 
+        addPreferencesFromResource(R.xml.choose_network);
         mConnectedNetworkOperatorsPreference =
                 (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_NETWORK_OPERATOR);
         mNetworkOperatorsPreferences =
@@ -118,21 +113,29 @@ public class NetworkSelectSettings extends DashboardFragment {
         mStatusMessagePreference = new Preference(getContext());
         mSelectedNetworkOperatorPreference = null;
         mTelephonyManager = TelephonyManager.from(getContext()).createForSubscriptionId(mSubId);
+        mNetworkScanHelper = new NetworkScanHelper(
+                mTelephonyManager, mCallback, mNetworkScanExecutor);
+        PersistableBundle bundle = ((CarrierConfigManager) getContext().getSystemService(
+                Context.CARRIER_CONFIG_SERVICE)).getConfigForSubId(mSubId);
+        if (bundle != null) {
+            mShow4GForLTE = bundle.getBoolean(
+                    CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
+        }
         setRetainInstance(true);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        if (DBG) logd("onViewCreated");
         super.onViewCreated(view, savedInstanceState);
 
-        mProgressHeader = setPinnedHeaderView(R.layout.wifi_progress_header)
-                .findViewById(R.id.progress_bar_animation);
-        setProgressBarVisible(false);
+        // TODO(b/114749736): build the progress bar
         forceConfigConnectedNetworkOperatorsPreferenceCategory();
     }
 
     @Override
     public void onStart() {
+        if (DBG) logd("onStart");
         super.onStart();
         new AsyncTask<Void, Void, List<String>>() {
             @Override
@@ -144,7 +147,7 @@ public class NetworkSelectSettings extends DashboardFragment {
             @Override
             protected void onPostExecute(List<String> result) {
                 mForbiddenPlmns = result;
-                bindNetworkQueryService();
+                loadNetworksList();
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -199,7 +202,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                 ThreadUtils.postOnBackgroundThread(() -> {
                     Message msg = mHandler.obtainMessage(EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
                     msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
-                            operatorInfo.getOperatorNumeric(), true /* persistSelection */);
+                            operatorInfo, true /* persistSelection */);
                     msg.sendToTarget();
                 });
 
@@ -223,8 +226,6 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (DBG) logd("onStop");
         getView().removeCallbacks(mUpdateNetworkOperatorsRunnable);
         stopNetworkQuery();
-        // Unbind the NetworkQueryService
-        unbindNetworkQueryService();
     }
 
     @Override
@@ -239,8 +240,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/114749736): add metrics id for this page
-        return 0;
+        return MOBILE_NETWORK_SELECT;
     }
 
     private final Handler mHandler = new Handler() {
@@ -258,7 +258,6 @@ public class NetworkSelectSettings extends DashboardFragment {
                         mSelectedNetworkOperatorPreference.setSummary(R.string.network_connected);
                     } else {
                         if (DBG) logd("manual network selection: failed! ");
-                        updateNetworkSelection();
                         // Set summary as "Couldn't connect" to the selected network.
                         mSelectedNetworkOperatorPreference.setSummary(
                                 R.string.network_could_not_connect);
@@ -297,6 +296,35 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
     };
 
+    private void loadNetworksList() {
+        if (DBG) logd("load networks list...");
+        setProgressBarVisible(true);
+        mNetworkScanHelper.startNetworkScan(
+                NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS);
+    }
+
+    private final NetworkScanHelper.NetworkScanCallback mCallback =
+            new NetworkScanHelper.NetworkScanCallback() {
+                public void onResults(List<CellInfo> results) {
+                    if (DBG) logd("get scan results.");
+                    Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_RESULTS, results);
+                    msg.sendToTarget();
+                }
+
+                public void onComplete() {
+                    if (DBG) logd("network scan completed.");
+                    Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_COMPLETED);
+                    msg.sendToTarget();
+                }
+
+                public void onError(int error) {
+                    if (DBG) logd("get onError callback with error code: " + error);
+                    Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_ERROR, error,
+                            0 /* arg2 */);
+                    msg.sendToTarget();
+                }
+            };
+
     private void updateNetworkOperators() {
         if (DBG) logd("updateNetworkOperators");
         if (getActivity() != null) {
@@ -324,7 +352,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         for (int index = 0; index < mCellInfoList.size(); index++) {
             if (!mCellInfoList.get(index).isRegistered()) {
                 NetworkOperatorPreference pref = new NetworkOperatorPreference(
-                        mCellInfoList.get(index), getContext(), mForbiddenPlmns);
+                        mCellInfoList.get(index), getContext(), mForbiddenPlmns, mShow4GForLTE);
                 pref.setKey(CellInfoUtil.getNetworkTitle(mCellInfoList.get(index)));
                 pref.setOrder(index);
                 mNetworkOperatorsPreferences.addPreference(pref);
@@ -335,15 +363,15 @@ public class NetworkSelectSettings extends DashboardFragment {
     /**
      * Config the connected network operator preference when the page was created. When user get
      * into this page, the device might or might not have data connection.
-     * - If the device has data:
-     * 1. use {@code ServiceState#getNetworkRegistrationStates()} to get the currently
-     * registered cellIdentity, wrap it into a CellInfo;
-     * 2. set the signal strength level as strong;
-     * 3. use {@link TelephonyManager#getNetworkOperatorName()} to get the title of the
-     * previously connected network operator, since the CellIdentity got from step 1 only has
-     * PLMN.
-     * - If the device has no data, we will remove the connected network operators list from the
-     * screen.
+     *   - If the device has data:
+     *     1. use {@code ServiceState#getNetworkRegistrationStates()} to get the currently
+     *        registered cellIdentity, wrap it into a CellInfo;
+     *     2. set the signal strength level as strong;
+     *     3. use {@link TelephonyManager#getNetworkOperatorName()} to get the title of the
+     *        previously connected network operator, since the CellIdentity got from step 1 only has
+     *        PLMN.
+     *   - If the device has no data, we will remove the connected network operators list from the
+     *     screen.
      */
     private void forceConfigConnectedNetworkOperatorsPreferenceCategory() {
         if (DBG) logd("Force config ConnectedNetworkOperatorsPreferenceCategory");
@@ -362,8 +390,8 @@ public class NetworkSelectSettings extends DashboardFragment {
             CellInfo cellInfo = CellInfoUtil.wrapCellInfoWithCellIdentity(cellIdentity);
             if (cellInfo != null) {
                 if (DBG) logd("Currently registered cell: " + cellInfo.toString());
-                NetworkOperatorPreference pref =
-                        new NetworkOperatorPreference(cellInfo, getContext(), mForbiddenPlmns);
+                NetworkOperatorPreference pref = new NetworkOperatorPreference(
+                        cellInfo, getContext(), mForbiddenPlmns, mShow4GForLTE);
                 pref.setTitle(mTelephonyManager.getNetworkOperatorName());
                 pref.setSummary(R.string.network_connected);
                 // Update the signal strength icon, since the default signalStrength value would be
@@ -396,7 +424,7 @@ public class NetworkSelectSettings extends DashboardFragment {
             removeConnectedNetworkOperatorPreference();
         }
         CellInfo connectedNetworkOperator = null;
-        for (CellInfo cellInfo : mCellInfoList) {
+        for (CellInfo cellInfo: mCellInfoList) {
             if (cellInfo.isRegistered()) {
                 connectedNetworkOperator = cellInfo;
                 break;
@@ -443,8 +471,8 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (DBG) logd("addConnectedNetworkOperatorPreference");
         // Remove the current ConnectedNetworkOperatorsPreference
         removeConnectedNetworkOperatorPreference();
-        final NetworkOperatorPreference pref =
-                new NetworkOperatorPreference(cellInfo, getContext(), mForbiddenPlmns);
+        final NetworkOperatorPreference pref = new NetworkOperatorPreference(
+                cellInfo, getContext(), mForbiddenPlmns, mShow4GForLTE);
         pref.setSummary(R.string.network_connected);
         mConnectedNetworkOperatorsPreference.addPreference(pref);
         PreferenceScreen preferenceScreen = getPreferenceScreen();
@@ -483,7 +511,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     private List<CellInfo> aggregateCellInfoList(List<CellInfo> cellInfoList) {
         if (DBG) logd("before aggregate: " + cellInfoList.toString());
         Map<String, CellInfo> map = new HashMap<>();
-        for (CellInfo cellInfo : cellInfoList) {
+        for (CellInfo cellInfo: cellInfoList) {
             String plmn = CellInfoUtil.getOperatorInfoFromCellInfo(cellInfo).getOperatorNumeric();
             if (cellInfo.isRegistered() || !map.containsKey(plmn)) {
                 map.put(plmn, cellInfo);
@@ -501,36 +529,16 @@ public class NetworkSelectSettings extends DashboardFragment {
         return new ArrayList<>(map.values());
     }
 
-    private void loadNetworksList() {
-        if (DBG) logd("load networks list...");
-        setProgressBarVisible(true);
-        //TODO(b/114749736): load network list once b/115401728 is done
-    }
-
-    private void bindNetworkQueryService() {
-        if (DBG) logd("bindNetworkQueryService");
-        //TODO(b/114749736): bind service/manager once b/115401728 is done
-        mShouldUnbind = true;
-    }
-
-    private void unbindNetworkQueryService() {
-        if (DBG) logd("unbindNetworkQueryService");
-        if (mShouldUnbind) {
-            if (DBG) logd("mShouldUnbind is true");
-            // unbind the service.
-            //TODO(b/114749736): unbind service/manager once b/115401728 is done
-            mShouldUnbind = false;
+    private void stopNetworkQuery() {
+        if (mNetworkScanHelper != null) {
+            mNetworkScanHelper.stopNetworkQuery();
         }
     }
 
-    private void updateNetworkSelection() {
-        if (DBG) logd("Update notification about no service of user selected operator");
-        //TODO(b/114749736): update network selection once b/115429509 is done
-    }
-
-    private void stopNetworkQuery() {
-        // Stop the network query process
-        //TODO(b/114749736): stop service/manager query once b/115401728 is done
+    @Override
+    public void onDestroy() {
+        mNetworkScanExecutor.shutdown();
+        super.onDestroy();
     }
 
     private void logd(String msg) {
