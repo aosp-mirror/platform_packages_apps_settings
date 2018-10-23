@@ -115,10 +115,6 @@ public class ContextualCardManager implements CardContentLoader.CardContentLoade
 
     @Override
     public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> updateList) {
-        //TODO(b/112245748): Should implement a DiffCallback.
-        //Keep the old list for comparison.
-        final List<ContextualCard> prevCards = mContextualCards;
-
         final Set<Integer> cardTypes = updateList.keySet();
         //Remove the existing data that matches the certain cardType before inserting new data.
         final List<ContextualCard> cardsToKeep = mContextualCards
