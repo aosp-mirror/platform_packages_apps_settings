@@ -73,7 +73,8 @@
 
     <Preference
         android:key="carrier_settings_euicc_key"
-        android:title="@string/carrier_settings_euicc" />
+        android:title="@string/carrier_settings_euicc"
+        settings:controller="com.android.settings.network.telephony.EuiccPreferenceController" />
 
     <PreferenceCategory
         android:key="calling"
@@ -81,20 +82,20 @@
 
         <PreferenceScreen
             android:key="wifi_calling_key"
-            android:title="@string/wifi_calling_settings_title">
-
+            android:title="@string/wifi_calling_settings_title"
+            settings:controller="com.android.settings.network.telephony.WifiCallingPreferenceController" >
             <intent android:action="android.intent.action.MAIN"
                     android:targetPackage="com.android.settings"
                     android:targetClass="com.android.settings.Settings$WifiCallingSettingsActivity">
                         <extra android:name="show_drawer_menu" android:value="true" />
             </intent>
-
         </PreferenceScreen>
 
         <SwitchPreference
             android:key="video_calling_key"
             android:title="@string/video_calling_settings_title"
-            android:persistent="true"/>
+            android:persistent="true"
+            settings:controller="com.android.settings.network.telephony.VideoCallingPreferenceController" />
 
     </PreferenceCategory>
 

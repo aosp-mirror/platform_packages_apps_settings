@@ -17,11 +17,13 @@
 package com.android.settings.homepage;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -108,14 +110,15 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> cards) {
         final List<ContextualCard> contextualCards = cards.get(ContextualCard.CardType.DEFAULT);
-        //TODO(b/112245748): Should implement a DiffCallback so we can use notifyItemChanged()
-        // instead.
         if (contextualCards == null) {
             mContextualCards.clear();
+            notifyDataSetChanged();
         } else {
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
+                    new ContextualCardsDiffCallback(mContextualCards, contextualCards));
             mContextualCards.clear();
             mContextualCards.addAll(contextualCards);
+            diffResult.dispatchUpdatesTo(this);
         }
-        notifyDataSetChanged();
     }
 }

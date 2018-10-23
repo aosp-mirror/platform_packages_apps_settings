@@ -17,51 +17,55 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
+import android.telephony.euicc.EuiccManager;
+import android.text.TextUtils;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * Preference controller for "Carrier Settings"
+ * Preference controller for "Euicc preference"
  */
-public class CarrierPreferenceController extends BasePreferenceController {
+public class EuiccPreferenceController extends BasePreferenceController {
 
-    @VisibleForTesting
-    CarrierConfigManager mCarrierConfigManager;
+    private TelephonyManager mTelephonyManager;
     private int mSubId;
 
-    public CarrierPreferenceController(Context context, String key) {
+    public EuiccPreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = new CarrierConfigManager(context);
+        mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-    }
-
-    public void init(int subId) {
-        mSubId = subId;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-
-        // Return available if it is in CDMA or GSM mode, and the flag is on
-        return carrierConfig != null
-                && carrierConfig.getBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL)
-                && (MobileNetworkUtils.isCdmaOptions(mContext, mSubId)
-                || MobileNetworkUtils.isGsmOptions(mContext, mSubId))
+        return MobileNetworkUtils.showEuiccSettings(mContext)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
+    public CharSequence getSummary() {
+        return mTelephonyManager.getSimOperatorName();
+    }
+
+    public void init(int subId) {
+        mSubId = subId;
+        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+    }
+
+    @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (getPreferenceKey().equals(preference.getKey())) {
-            //TODO(b/117651939): start carrier settings activity
+        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
+            mContext.startActivity(intent);
             return true;
         }
 

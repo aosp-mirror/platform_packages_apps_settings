@@ -107,12 +107,12 @@ public class ConditionManager {
      */
     public void startMonitoringStateChange() {
         if (mIsListeningToStateChange) {
-            Log.d(TAG, "Already listening to condition state changes, skipping");
-            return;
-        }
-        mIsListeningToStateChange = true;
-        for (ConditionalCardController controller : mCardControllers) {
-            controller.startMonitoringStateChange();
+            Log.d(TAG, "Already listening to condition state changes, skipping monitor setup");
+        } else {
+            mIsListeningToStateChange = true;
+            for (ConditionalCardController controller : mCardControllers) {
+                controller.startMonitoringStateChange();
+            }
         }
         // Force a refresh on listener
         onConditionChanged();
