@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -73,6 +75,8 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private static final String LOG_TAG = "NetworkSettings";
     private static final boolean DBG = true;
     public static final int REQUEST_CODE_EXIT_ECM = 17;
+    @VisibleForTesting
+    static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
     //String keys for preference lookup
     private static final String BUTTON_PREFERED_NETWORK_MODE = "preferred_network_mode_key";
@@ -123,9 +127,8 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
     //GsmUmts options and Cdma options
     GsmUmtsOptions mGsmUmtsOptions;
-    CdmaOptions mCdmaOptions;
 
-    private Preference mClickedPreference;
+    private String mClickedPrefKey;
     private boolean mShow4GForLTE;
     private boolean mIsGlobalCdma;
     private boolean mOnlyAutoSelectInHomeNW;
@@ -148,6 +151,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
             return true;
         }
         sendMetricsEventPreferenceClicked(getPreferenceScreen(), preference);
+        final String key = preference.getKey();
 
         /** TODO: Refactor and get rid of the if's using subclasses */
         if (preference.getKey().equals(BUTTON_4G_LTE_KEY)) {
@@ -155,16 +159,13 @@ public class MobileNetworkFragment extends DashboardFragment implements
         } else if (mGsmUmtsOptions != null &&
                 mGsmUmtsOptions.preferenceTreeClick(preference) == true) {
             return true;
-        } else if (mCdmaOptions != null &&
-                mCdmaOptions.preferenceTreeClick(preference) == true) {
+        } else if (TextUtils.equals(key, BUTTON_CDMA_SYSTEM_SELECT_KEY)
+                || TextUtils.equals(key, BUTTON_CDMA_SUBSCRIPTION_KEY)) {
             if (mTelephonyManager.getEmergencyCallbackMode()) {
-
-                mClickedPreference = preference;
-
-                // In ECM mode launch ECM app dialog
                 startActivityForResult(
                         new Intent(TelephonyIntents.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
                         REQUEST_CODE_EXIT_ECM);
+                mClickedPrefKey = key;
             }
             return true;
         }
@@ -262,6 +263,15 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         updatePhone();
         Log.i(LOG_TAG, "onCreate:-");
+
+        onRestoreInstance(icicle);
+    }
+
+    @VisibleForTesting
+    void onRestoreInstance(Bundle icicle) {
+        if (icicle != null) {
+            mClickedPrefKey = icicle.getString(KEY_CLICKED_PREF);
+        }
     }
 
     @Override
@@ -342,6 +352,12 @@ public class MobileNetworkFragment extends DashboardFragment implements
         return null;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_CLICKED_PREF, mClickedPrefKey);
+    }
+
     private boolean hasActiveSubscriptions() {
         return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
@@ -405,9 +421,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
                 == ServiceState.STATE_IN_SERVICE) {
 
             final int phoneType = mTelephonyManager.getPhoneType();
-            if (phoneType == PhoneConstants.PHONE_TYPE_CDMA) {
-                updateCdmaOptions(this, prefSet, mSubId);
-            } else if (phoneType == PhoneConstants.PHONE_TYPE_GSM) {
+            if (phoneType == PhoneConstants.PHONE_TYPE_GSM) {
                 updateGsmUmtsOptions(this, prefSet, phoneSubId);
             } else {
                 throw new IllegalStateException("Unexpected phone type: " + phoneType);
@@ -420,7 +434,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             // set the listener for the mButtonPreferredNetworkMode list preference so we can issue
             // change Preferred Network Mode.
 
-            updateCdmaOptions(this, prefSet, mSubId);
             updateGsmUmtsOptions(this, prefSet, phoneSubId);
         }
 
@@ -513,33 +526,17 @@ public class MobileNetworkFragment extends DashboardFragment implements
         return true;
     }
 
-    private boolean is4gLtePrefEnabled(PersistableBundle carrierConfig) {
-        return (mTelephonyManager.getCallState(mSubId)
-                == TelephonyManager.CALL_STATE_IDLE)
-                && mImsMgr != null
-                && mImsMgr.isNonTtyOrTtyOnVolteEnabled()
-                && carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_CODE_EXIT_ECM:
-                Boolean isChoiceYes = data.getBooleanExtra(
-                        EXTRA_EXIT_ECM_RESULT, false);
-                if (isChoiceYes) {
-                    // If the phone exits from ECM mode, show the CDMA Options
-                    final String key = mClickedPreference.getKey();
-                    if (TextUtils.equals(key,
-                            mCdmaSystemSelectPreferenceController.getPreferenceKey())) {
-                        mCdmaSystemSelectPreferenceController.showDialog();
-                    } else if (TextUtils.equals(key,
-                            mCdmaSubscriptionPreferenceController.getPreferenceKey())) {
-                        mCdmaSubscriptionPreferenceController.showDialog();
+                if (resultCode != Activity.RESULT_CANCELED) {
+                    // If the phone exits from ECM mode, show the CDMA
+                    final Preference preference = getPreferenceScreen()
+                            .findPreference(mClickedPrefKey);
+                    if (preference != null) {
+                        preference.performClick();
                     }
-                } else {
-                    // do nothing
                 }
                 break;
 
@@ -622,14 +619,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         if (carrierSettings != null) {
             prefSet.removePreference(carrierSettings);
         }
-    }
-
-    private void controlCdmaOptions(boolean enable) {
-        PreferenceScreen prefSet = getPreferenceScreen();
-        if (prefSet == null) {
-            return;
-        }
-        updateCdmaOptions(this, prefSet, mSubId);
     }
 
     private boolean isSupportTdscdma() {
@@ -730,16 +719,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
             mGsmUmtsOptions = new GsmUmtsOptions(prefFragment, prefScreen, subId);
         } else {
             mGsmUmtsOptions.update(subId);
-        }
-    }
-
-    private void updateCdmaOptions(PreferenceFragmentCompat prefFragment, PreferenceScreen prefScreen,
-            int subId) {
-        // We don't want to re-create CdmaOptions if already exists. Otherwise, the preferences
-        // inside it will also be re-created which causes unexpected behavior. For example,
-        // the open dialog gets dismissed or detached after pause / resume.
-        if (mCdmaOptions == null) {
-            mCdmaOptions = new CdmaOptions(prefFragment, prefScreen, subId);
         }
     }
 
