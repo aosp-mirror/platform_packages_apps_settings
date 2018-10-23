@@ -35,6 +35,7 @@ import android.os.Looper;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -61,6 +62,7 @@ import java.util.List;
  */
 public class WifiSlice implements CustomSliceable {
 
+
     /**
      * Backing Uri for the Wifi Slice.
      */
@@ -70,6 +72,9 @@ public class WifiSlice implements CustomSliceable {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(KEY_WIFI)
             .build();
+
+    @VisibleForTesting
+    static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
     private final Context mContext;
 
@@ -115,26 +120,43 @@ public class WifiSlice implements CustomSliceable {
                         .addEndItem(toggleSliceAction)
                         .setPrimaryAction(primarySliceAction));
 
-        if (isWifiEnabled) {
-            final List<AccessPoint> result = getBackgroundWorker().getResults();
-            if (result != null && !result.isEmpty()) {
-                for (AccessPoint ap : result) {
-                    listBuilder.addRow(getAccessPointRow(ap));
-                }
-                listBuilder.setSeeMoreAction(primaryAction);
+        if (!isWifiEnabled) {
+            return listBuilder.build();
+        }
+
+        List<AccessPoint> result = getBackgroundWorker().getResults();
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        final int apCount = result.size();
+        // Add AP rows
+        final CharSequence placeholder = mContext.getText(R.string.summary_placeholder);
+        for (int i = 0; i < DEFAULT_EXPANDED_ROW_COUNT; i++) {
+            if (i < apCount) {
+                listBuilder.addRow(getAccessPointRow(result.get(i)));
+            } else {
+                listBuilder.addRow(new RowBuilder()
+                        .setTitle(placeholder)
+                        .setSubtitle(placeholder));
             }
         }
-        return listBuilder.build();
+        // Add more button
+        return listBuilder
+                .setSeeMoreAction(primaryAction)
+                .build();
     }
 
     private RowBuilder getAccessPointRow(AccessPoint accessPoint) {
         final String title = accessPoint.getConfigName();
         final IconCompat levelIcon = IconCompat.createWithResource(mContext,
                 com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
+        final CharSequence apSummary = accessPoint.getSettingsSummary();
         final RowBuilder rowBuilder = new RowBuilder()
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
                 .setTitle(title)
-                .setSubtitle(accessPoint.getSettingsSummary())
+                .setSubtitle(!TextUtils.isEmpty(apSummary)
+                        ? apSummary
+                        : mContext.getText(R.string.summary_placeholder))
                 .setPrimaryAction(new SliceAction(
                         getAccessPointAction(accessPoint), levelIcon, title));
 

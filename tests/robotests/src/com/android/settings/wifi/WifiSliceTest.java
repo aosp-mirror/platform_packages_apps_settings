@@ -17,6 +17,11 @@
 
 package com.android.settings.wifi;
 
+import static android.app.slice.Slice.HINT_LIST_ITEM;
+import static android.app.slice.SliceItem.FORMAT_SLICE;
+
+import static com.android.settings.wifi.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -29,6 +34,7 @@ import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
+import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
@@ -60,7 +66,7 @@ public class WifiSliceTest {
     }
 
     @Test
-    public void getWifiSlice_correctSliceContent() {
+    public void getWifiSlice_shouldHaveTitleAndToggle() {
         final Slice wifiSlice = mWifiSlice.getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
 
@@ -74,6 +80,17 @@ public class WifiSliceTest {
 
         final List<SliceItem> sliceItems = wifiSlice.getItems();
         SliceTester.assertTitle(sliceItems, mContext.getString(R.string.wifi_settings));
+    }
+
+    @Test
+    public void getWifiSlice_noAp_shouldReturnPlaceholder() {
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        int rows = SliceQuery.findAll(wifiSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null /* nonHints */).size();
+        // All AP rows + title row + see more row
+        // (see more row will drop the last AP row, thus -1)
+        assertThat(rows).isEqualTo(DEFAULT_EXPANDED_ROW_COUNT - 1 + 2);
     }
 
     @Test

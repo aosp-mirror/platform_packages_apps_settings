@@ -154,6 +154,7 @@ public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
         final Slice slice = Slice.bindSlice(mContext, uri, SUPPORTED_SPECS);
         if (slice == null || slice.hasHint(HINT_ERROR)) {
+            Log.w(TAG, "Failed to bind slice, not eligible for display " + uri);
             return false;
         }
 
