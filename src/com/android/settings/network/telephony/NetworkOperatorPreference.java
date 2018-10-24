@@ -22,6 +22,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.telephony.CellInfo;
+import android.telephony.CellSignalStrength;
 import android.telephony.SignalStrength;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,11 +41,14 @@ public class NetworkOperatorPreference extends Preference {
 
     private static final String TAG = "NetworkOperatorPref";
     private static final boolean DBG = false;
+
+    private static final int LEVEL_NONE = -1;
+
     // number of signal strength level
     public static final int NUMBER_OF_LEVELS = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
     private CellInfo mCellInfo;
     private List<String> mForbiddenPlmns;
-    private int mLevel = -1;
+    private int mLevel = LEVEL_NONE;
     private boolean mShow4GForLTE;
 
     // The following constants are used to draw signal icon.
@@ -74,7 +78,9 @@ public class NetworkOperatorPreference extends Preference {
             networkTitle += " " + getContext().getResources().getString(R.string.forbidden_network);
         }
         setTitle(networkTitle);
-        int level = mCellInfo.getCellSignalStrength().getLevel();
+
+        final CellSignalStrength signalStrength = mCellInfo.getCellSignalStrength();
+        final int level = signalStrength != null ? signalStrength.getLevel() : LEVEL_NONE;
         if (DBG) Log.d(TAG, "refresh level: " + String.valueOf(level));
         if (mLevel != level) {
             mLevel = level;
