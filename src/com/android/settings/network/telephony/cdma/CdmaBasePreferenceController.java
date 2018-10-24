@@ -82,6 +82,9 @@ public abstract class CdmaBasePreferenceController extends BasePreferenceControl
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference instanceof CdmaListPreference) {
+            ((CdmaListPreference) mPreference).setSubId(mSubId);
+        }
     }
 
     /**

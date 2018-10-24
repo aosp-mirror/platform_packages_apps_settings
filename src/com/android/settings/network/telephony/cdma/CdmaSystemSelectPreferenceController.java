@@ -62,12 +62,6 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
         return false;
     }
 
-    public void showDialog() {
-        if (!mTelephonyManager.getEmergencyCallbackMode()) {
-            mPreferenceManager.showDialog(mPreference);
-        }
-    }
-
     private void resetCdmaRoamingModeToDefault() {
         final ListPreference listPreference = (ListPreference) mPreference;
         //set the mButtonCdmaRoam

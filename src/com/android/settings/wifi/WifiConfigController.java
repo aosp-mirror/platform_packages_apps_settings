@@ -41,6 +41,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -155,6 +156,7 @@ public class WifiConfigController implements TextWatcher,
     private Spinner mProxySettingsSpinner;
     private Spinner mMeteredSettingsSpinner;
     private Spinner mHiddenSettingsSpinner;
+    private Spinner mPrivacySettingsSpinner;
     private TextView mHiddenWarningView;
     private TextView mProxyHostView;
     private TextView mProxyPortView;
@@ -220,6 +222,12 @@ public class WifiConfigController implements TextWatcher,
         mSharedCheckBox = (CheckBox) mView.findViewById(R.id.shared);
         mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
+        mPrivacySettingsSpinner = mView.findViewById(R.id.privacy_settings);
+        if (FeatureFlagUtils.isEnabled(mContext,
+                com.android.settings.core.FeatureFlags.WIFI_MAC_RANDOMIZATION)) {
+            View privacySettingsLayout = mView.findViewById(R.id.privacy_settings_fields);
+            privacySettingsLayout.setVisibility(View.VISIBLE);
+        }
         mHiddenSettingsSpinner.setOnItemSelectedListener(this);
         mHiddenWarningView = mView.findViewById(R.id.hidden_settings_warning);
         mHiddenWarningView.setVisibility(
@@ -261,6 +269,7 @@ public class WifiConfigController implements TextWatcher,
                 mHiddenSettingsSpinner.setSelection(config.hiddenSSID
                         ? HIDDEN_NETWORK
                         : NOT_HIDDEN_NETWORK);
+                //TODO(b/117957974): set MAC randomization value to mPrivacySettingsSpinner
                 if (config.getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                     showAdvancedFields = true;
@@ -700,6 +709,10 @@ public class WifiConfigController implements TextWatcher,
                                     mStaticIpConfiguration, mHttpProxy));
         if (mMeteredSettingsSpinner != null) {
             config.meteredOverride = mMeteredSettingsSpinner.getSelectedItemPosition();
+        }
+
+        if (mPrivacySettingsSpinner != null) {
+            //TODO(b/117957974): set MAC randomization value to WifiConfiguration
         }
 
         return config;
