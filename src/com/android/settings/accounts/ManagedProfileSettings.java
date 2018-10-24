@@ -23,17 +23,25 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Setting page for managed profile.
  * FIXME: It currently assumes there is only one managed profile.
  */
+@SearchIndexable
 public class ManagedProfileSettings extends DashboardFragment {
 
     private UserManager mUserManager;
@@ -63,6 +71,7 @@ public class ManagedProfileSettings extends DashboardFragment {
         }
         use(WorkModePreferenceController.class).setManagedUser(mManagedUser);
         use(ContactSearchPreferenceController.class).setManagedUser(mManagedUser);
+        use(CrossProfileCalendarPreferenceController.class).setManagedUser(mManagedUser);
     }
 
     @Override
@@ -98,6 +107,23 @@ public class ManagedProfileSettings extends DashboardFragment {
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ACCOUNTS_WORK_PROFILE_SETTINGS;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.managed_profile_settings;
+                    result.add(sir);
+                    return result;
+                }
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return false;
+                }
+            };
 
     private class ManagedProfileBroadcastReceiver extends BroadcastReceiver {
 
