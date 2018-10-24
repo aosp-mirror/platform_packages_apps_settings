@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.net.Uri;
 
+import com.android.settings.homepage.deviceinfo.BatterySlice;
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
 import com.android.settings.homepage.deviceinfo.StorageSlice;
@@ -54,17 +55,18 @@ public class CardContentLoaderTest {
     }
 
     @Test
-    public void createStaticCards_shouldReturnTwoCards() {
+    public void createStaticCards_shouldReturnFourCards() {
         final List<ContextualCard> defaultData = mCardContentLoader.createStaticCards();
 
-        assertThat(defaultData).hasSize(2);
+        assertThat(defaultData).hasSize(3);
     }
 
     @Test
-    public void createStaticCards_shouldContainDataUsageAndDeviceInfo() {
+    public void createStaticCards_shouldContainCorrectCards() {
         final Uri dataUsage = DataUsageSlice.DATA_USAGE_CARD_URI;
         final Uri deviceInfo = DeviceInfoSlice.DEVICE_INFO_CARD_URI;
-        final List<Uri> expectedUris = Arrays.asList(dataUsage, deviceInfo);
+        final Uri batteryInfo = BatterySlice.BATTERY_CARD_URI;
+        final List<Uri> expectedUris = Arrays.asList(dataUsage, deviceInfo, batteryInfo);
 
         final List<Uri> actualCardUris = mCardContentLoader.createStaticCards().stream().map(
                 ContextualCard::getSliceUri).collect(Collectors.toList());

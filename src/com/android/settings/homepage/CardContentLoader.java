@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
+import com.android.settings.homepage.deviceinfo.BatterySlice;
 import com.android.settings.homepage.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
 import com.android.settingslib.utils.AsyncLoaderCompat;
@@ -101,17 +102,15 @@ public class CardContentLoader extends AsyncLoaderCompat<List<ContextualCard>> {
                     .setCardType(ContextualCard.CardType.SLICE)
                     .setIsHalfWidth(false)
                     .build());
-            //TODO(b/115971399): Will change following values of SliceUri and Name
-            // after landing these slice cards.
-//            add(new ContextualCard.Builder()
-//                    .setSliceUri("content://com.android.settings.slices/battery_card")
-//                    .setName(packageName + "/" + "battery_card")
-//                    .setPackageName(packageName)
-//                    .setRankingScore(rankingScore)
-//                    .setAppVersion(appVersionCode)
-//                    .setCardType(ContextualCard.CardType.SLICE)
-//                    .setIsHalfWidth(true)
-//                    .build());
+            add(new ContextualCard.Builder()
+                    .setSliceUri(BatterySlice.BATTERY_CARD_URI)
+                    .setName(BatterySlice.PATH_BATTERY_INFO)
+                    .setPackageName(packageName)
+                    .setRankingScore(rankingScore)
+                    .setAppVersion(appVersionCode)
+                    .setCardType(ContextualCard.CardType.SLICE)
+                    .setIsHalfWidth(false)
+                    .build());
             add(new ContextualCard.Builder()
                     .setSliceUri(DeviceInfoSlice.DEVICE_INFO_CARD_URI)
                     .setName(DeviceInfoSlice.PATH_DEVICE_INFO)
