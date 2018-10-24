@@ -65,7 +65,13 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
     private void showFragment(Fragment fragment, int id, String tag) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(id, fragment, tag);
+        final Fragment showFragment = fragmentManager.findFragmentById(id);
+
+        if (showFragment == null) {
+            fragmentTransaction.add(id, fragment, tag);
+        } else {
+            fragmentTransaction.show(showFragment);
+        }
         fragmentTransaction.commit();
     }
 }
