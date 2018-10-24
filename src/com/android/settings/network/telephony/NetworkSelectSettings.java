@@ -81,7 +81,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     @VisibleForTesting
     TelephonyManager mTelephonyManager;
     private List<String> mForbiddenPlmns;
-    private boolean mShow4GForLTE = true;
+    private boolean mShow4GForLTE = false;
     private NetworkScanHelper mNetworkScanHelper;
     private final ExecutorService mNetworkScanExecutor = Executors.newFixedThreadPool(1);
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -95,7 +95,6 @@ public class NetworkSelectSettings extends DashboardFragment {
                 com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
         mSubId = getArguments().getInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID);
 
-        addPreferencesFromResource(R.xml.choose_network);
         mConnectedPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_NETWORK_OPERATOR);
         mPreferenceCategory =
@@ -389,6 +388,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     }
 
     private void stopNetworkQuery() {
+        setProgressBarVisible(false);
         if (mNetworkScanHelper != null) {
             mNetworkScanHelper.stopNetworkQuery();
         }

@@ -68,6 +68,7 @@ public class CarrierPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        doReturn(mCarrierConfigManager).when(mContext).getSystemService(CarrierConfigManager.class);
 
         mPreference = new RestrictedPreference(mContext);
         mController = new CarrierPreferenceController(mContext, "mobile_data");

@@ -127,6 +127,23 @@
             settings:controller="com.android.settings.network.telephony.cdma.CdmaApnPreferenceController"/>
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="network_operators_category_key"
+        android:title="@string/network_operator_category"
+        settings:controller="com.android.settings.widget.PreferenceCategoryController">
+
+        <SwitchPreference
+            android:key="auto_select_key"
+            android:title="@string/select_automatically"
+            settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
+
+        <Preference
+            android:key="choose_network_key"
+            android:title="@string/choose_network_title"
+            android:fragment="com.android.phone.NetworkSelectSetting"
+            settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
+    </PreferenceCategory>
+
     <Preference
         android:key="carrier_settings_key"
         android:title="@string/carrier_settings_title"

@@ -46,8 +46,6 @@ public class GsmUmtsOptions {
     private Preference mCategoryAPNExpand;
     Preference mCarrierSettingPref;
 
-    private NetworkOperators mNetworkOperator;
-
     private static final String BUTTON_APN_EXPAND_KEY = "button_gsm_apn_key";
     private static final String CATEGORY_APN_EXPAND_KEY = "category_gsm_apn_key";
     private static final String BUTTON_CARRIER_SETTINGS_KEY = "carrier_settings_key";
@@ -65,11 +63,7 @@ public class GsmUmtsOptions {
         mPrefFragment.addPreferencesFromResource(R.xml.gsm_umts_options);
         mButtonAPNExpand = (RestrictedPreference) mPrefScreen.findPreference(BUTTON_APN_EXPAND_KEY);
         mCategoryAPNExpand = mPrefScreen.findPreference(CATEGORY_APN_EXPAND_KEY);
-        mNetworkOperator = (NetworkOperators) mPrefScreen
-                .findPreference(NetworkOperators.CATEGORY_NETWORK_OPERATORS_KEY);
         mCarrierSettingPref = mPrefScreen.findPreference(BUTTON_CARRIER_SETTINGS_KEY);
-
-        mNetworkOperator.initialize();
 
         update(subId);
     }
@@ -78,7 +72,7 @@ public class GsmUmtsOptions {
     // When that happens, we update GsmUmtsOptions with new parameters.
     protected void update(final int subId) {
         boolean addAPNExpand = true;
-        boolean addNetworkOperatorsCategory = true;
+
         boolean addCarrierSettings = true;
         final TelephonyManager telephonyManager = TelephonyManager.from(mPrefFragment.getContext())
                 .createForSubscriptionId(subId);
@@ -88,7 +82,6 @@ public class GsmUmtsOptions {
         if (telephonyManager.getPhoneType() != PhoneConstants.PHONE_TYPE_GSM) {
             log("Not a GSM phone");
             addAPNExpand = false;
-            mNetworkOperator.setEnabled(false);
         } else {
             log("Not a CDMA phone");
             PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
@@ -101,20 +94,6 @@ public class GsmUmtsOptions {
             if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_APN_EXPAND_BOOL)
                     && mCategoryAPNExpand != null) {
                 addAPNExpand = false;
-            }
-            if (!carrierConfig.getBoolean(
-                    CarrierConfigManager.KEY_OPERATOR_SELECTION_EXPAND_BOOL)) {
-                addNetworkOperatorsCategory = false;
-            }
-
-            if (carrierConfig.getBoolean(CarrierConfigManager.KEY_CSP_ENABLED_BOOL)) {
-                if (phone.isCspPlmnEnabled()) {
-                    log("[CSP] Enabling Operator Selection menu.");
-                    mNetworkOperator.setEnabled(true);
-                } else {
-                    log("[CSP] Disabling Operator Selection menu.");
-                    addNetworkOperatorsCategory = false;
-                }
             }
 
             // Read platform settings for carrier settings
@@ -154,13 +133,6 @@ public class GsmUmtsOptions {
             mPrefScreen.removePreference(mCategoryAPNExpand);
         }
 
-        if (addNetworkOperatorsCategory) {
-            mPrefScreen.addPreference(mNetworkOperator);
-            mNetworkOperator.update(subId);
-        } else {
-            mPrefScreen.removePreference(mNetworkOperator);
-        }
-
         if (addCarrierSettings) {
             mPrefScreen.addPreference(mCarrierSettingPref);
         } else {
@@ -170,11 +142,10 @@ public class GsmUmtsOptions {
     }
 
     protected boolean preferenceTreeClick(Preference preference) {
-        return mNetworkOperator.preferenceTreeClick(preference);
+        return false;
     }
 
     protected void log(String s) {
         android.util.Log.d(LOG_TAG, s);
     }
 }
-
