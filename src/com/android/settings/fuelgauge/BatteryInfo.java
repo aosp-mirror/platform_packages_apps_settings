@@ -148,49 +148,7 @@ public class BatteryInfo {
         new AsyncTask<Void, Void, BatteryInfo>() {
             @Override
             protected BatteryInfo doInBackground(Void... params) {
-                final BatteryStats stats;
-                final long batteryStatsTime = System.currentTimeMillis();
-                if (statsHelper == null) {
-                    final BatteryStatsHelper localStatsHelper = new BatteryStatsHelper(context,
-                            true);
-                    localStatsHelper.create((Bundle) null);
-                    stats = localStatsHelper.getStats();
-                } else {
-                    stats = statsHelper.getStats();
-                }
-                BatteryUtils.logRuntime(LOG_TAG, "time for getStats", batteryStatsTime);
-
-                final long startTime = System.currentTimeMillis();
-                PowerUsageFeatureProvider provider =
-                        FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
-                final long elapsedRealtimeUs =
-                        PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
-
-                Intent batteryBroadcast = context.registerReceiver(null,
-                        new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                // 0 means we are discharging, anything else means charging
-                boolean discharging =
-                        batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
-
-                if (discharging && provider != null
-                        && provider.isEnhancedBatteryPredictionEnabled(context)) {
-                    Estimate estimate = provider.getEnhancedBatteryPrediction(context);
-                    if (estimate != null) {
-                        BatteryUtils
-                                .logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
-                        return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
-                                estimate, elapsedRealtimeUs, shortString);
-                    }
-                }
-                long prediction = discharging
-                        ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0;
-                Estimate estimate = new Estimate(
-                        PowerUtil.convertUsToMs(prediction),
-                        false, /* isBasedOnUsage */
-                        Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
-                BatteryUtils.logRuntime(LOG_TAG, "time for regular BatteryInfo", startTime);
-                return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
-                        estimate, elapsedRealtimeUs, shortString);
+                return getBatteryInfo(context, statsHelper, shortString);
             }
 
             @Override
@@ -200,6 +158,53 @@ public class BatteryInfo {
                 BatteryUtils.logRuntime(LOG_TAG, "time for callback", startTime);
             }
         }.execute();
+    }
+
+    public static BatteryInfo getBatteryInfo(final Context context,
+            final BatteryStatsHelper statsHelper, boolean shortString) {
+        final BatteryStats stats;
+        final long batteryStatsTime = System.currentTimeMillis();
+        if (statsHelper == null) {
+            final BatteryStatsHelper localStatsHelper = new BatteryStatsHelper(context,
+                    true);
+            localStatsHelper.create((Bundle) null);
+            stats = localStatsHelper.getStats();
+        } else {
+            stats = statsHelper.getStats();
+        }
+        BatteryUtils.logRuntime(LOG_TAG, "time for getStats", batteryStatsTime);
+
+        final long startTime = System.currentTimeMillis();
+        PowerUsageFeatureProvider provider =
+                FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
+        final long elapsedRealtimeUs =
+                PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
+
+        final Intent batteryBroadcast = context.registerReceiver(null,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        // 0 means we are discharging, anything else means charging
+        final boolean discharging =
+                batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+
+        if (discharging && provider != null
+                && provider.isEnhancedBatteryPredictionEnabled(context)) {
+            Estimate estimate = provider.getEnhancedBatteryPrediction(context);
+            if (estimate != null) {
+                BatteryUtils
+                        .logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
+                return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
+                        estimate, elapsedRealtimeUs, shortString);
+            }
+        }
+        final long prediction = discharging
+                ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0;
+        final Estimate estimate = new Estimate(
+                PowerUtil.convertUsToMs(prediction),
+                false, /* isBasedOnUsage */
+                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
+        BatteryUtils.logRuntime(LOG_TAG, "time for regular BatteryInfo", startTime);
+        return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
+                estimate, elapsedRealtimeUs, shortString);
     }
 
     @WorkerThread

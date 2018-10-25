@@ -20,7 +20,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.PixelFormat;
 import android.os.AsyncResult;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,9 +32,11 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -40,6 +44,7 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.preference.Preference;
@@ -117,6 +122,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private static final int MSG_ENABLE_ICC_PIN_COMPLETE = 100;
     private static final int MSG_CHANGE_ICC_PIN_COMPLETE = 101;
     private static final int MSG_SIM_STATE_CHANGED = 102;
+
+    // @see android.widget.Toast$TN
+    private static final long LONG_DURATION_TIMEOUT = 7000;
 
     // For replies from IccCard interface
     private Handler mHandler = new Handler() {
@@ -461,8 +469,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
             if (exception instanceof CommandException) {
                 CommandException.Error err = ((CommandException)(exception)).getCommandError();
                 if (err == CommandException.Error.PASSWORD_INCORRECT) {
-                    Toast.makeText(getContext(), getPinPasswordErrorMessage(attemptsRemaining),
-                            Toast.LENGTH_LONG).show();
+                    createCustomTextToast(getPinPasswordErrorMessage(attemptsRemaining));
                 } else {
                     if (mToState) {
                         Toast.makeText(getContext(), mRes.getString
@@ -478,11 +485,56 @@ public class IccLockSettings extends SettingsPreferenceFragment
         resetDialogState();
     }
 
+    private void createCustomTextToast(CharSequence errorMessage) {
+        // Cannot overlay Toast on PUK unlock screen.
+        // The window type of Toast is set by NotificationManagerService.
+        // It can't be overwritten by LayoutParams.type.
+        // Ovarlay a custom window with LayoutParams (TYPE_STATUS_BAR_PANEL) on PUK unlock screen.
+        View v = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+                .inflate(com.android.internal.R.layout.transient_notification, null);
+        TextView tv = (TextView) v.findViewById(com.android.internal.R.id.message);
+        tv.setText(errorMessage);
+
+        final WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        final Configuration config = v.getContext().getResources().getConfiguration();
+        final int gravity = Gravity.getAbsoluteGravity(
+                getContext().getResources().getInteger(
+                        com.android.internal.R.integer.config_toastDefaultGravity),
+                config.getLayoutDirection());
+        params.gravity = gravity;
+        if ((gravity & Gravity.HORIZONTAL_GRAVITY_MASK) == Gravity.FILL_HORIZONTAL) {
+            params.horizontalWeight = 1.0f;
+        }
+        if ((gravity & Gravity.VERTICAL_GRAVITY_MASK) == Gravity.FILL_VERTICAL) {
+            params.verticalWeight = 1.0f;
+        }
+        params.y = getContext().getResources().getDimensionPixelSize(
+                com.android.internal.R.dimen.toast_y_offset);
+
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.format = PixelFormat.TRANSLUCENT;
+        params.windowAnimations = com.android.internal.R.style.Animation_Toast;
+        params.type = WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL;
+        params.setTitle(errorMessage);
+        params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        wm.addView(v, params);
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                wm.removeViewImmediate(v);
+            }
+        }, LONG_DURATION_TIMEOUT);
+    }
+
     private void iccPinChanged(boolean success, int attemptsRemaining) {
         if (!success) {
-            Toast.makeText(getContext(), getPinPasswordErrorMessage(attemptsRemaining),
-                    Toast.LENGTH_LONG)
-                    .show();
+            createCustomTextToast(getPinPasswordErrorMessage(attemptsRemaining));
         } else {
             Toast.makeText(getContext(), mRes.getString(R.string.sim_change_succeeded),
                     Toast.LENGTH_SHORT)

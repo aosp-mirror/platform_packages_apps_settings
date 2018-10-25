@@ -213,7 +213,7 @@ public class SliceTester {
             for (SliceItem subTitleItem : titleItems) {
                 if (TextUtils.equals(subTitleItem.getText(), title)) {
                     hasTitle = true;
-                    assertThat(subTitleItem.getText()).isEqualTo(title);
+                    break;
                 }
             }
         }
