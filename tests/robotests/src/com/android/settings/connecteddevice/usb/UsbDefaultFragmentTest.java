@@ -16,12 +16,21 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.net.ConnectivityManager.TETHERING_USB;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.hardware.usb.UsbManager;
+import android.net.ConnectivityManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -31,13 +40,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class UsbDefaultFragmentTest {
 
     @Mock
     private UsbBackend mUsbBackend;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
 
     private UsbDefaultFragment mFragment;
 
@@ -46,6 +59,7 @@ public class UsbDefaultFragmentTest {
         MockitoAnnotations.initMocks(this);
         mFragment = new UsbDefaultFragment();
         mFragment.mUsbBackend = mUsbBackend;
+        mFragment.mConnectivityManager = mConnectivityManager;
     }
 
     @Test
@@ -102,12 +116,6 @@ public class UsbDefaultFragmentTest {
     }
 
     @Test
-    public void setDefaultKey_isRndis_shouldSetRndis() {
-        mFragment.setDefaultKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
-    }
-
-    @Test
     public void setDefaultKey_isMidi_shouldSetMidi() {
         mFragment.setDefaultKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MIDI));
         verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_MIDI);
@@ -118,6 +126,39 @@ public class UsbDefaultFragmentTest {
     public void setDefaultKey_isMonkey_shouldDoNothing() {
         ShadowUtils.setIsUserAMonkey(true);
         mFragment.setDefaultKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
-        verifyZeroInteractions(mUsbBackend);
+
+        verify(mUsbBackend, never()).setDefaultUsbFunctions(anyLong());
+    }
+
+    @Test
+    public void setDefaultKey_functionRndis_startTetheringInvoked() {
+        doReturn(UsbManager.FUNCTION_MTP).when(mUsbBackend).getCurrentFunctions();
+
+        mFragment.setDefaultKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
+
+        verify(mConnectivityManager).startTethering(TETHERING_USB, true,
+                mFragment.mOnStartTetheringCallback);
+        assertThat(mFragment.mPreviousFunctions).isEqualTo(
+                UsbManager.FUNCTION_MTP);
+    }
+
+    @Test
+    public void setDefaultKey_functionOther_setCurrentFunctionInvoked() {
+        doReturn(UsbManager.FUNCTION_MTP).when(mUsbBackend).getCurrentFunctions();
+
+        mFragment.setDefaultKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_PTP));
+
+        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_PTP);
+        assertThat(mFragment.mPreviousFunctions).isEqualTo(
+                UsbManager.FUNCTION_MTP);
+    }
+
+    @Test
+    public void onTetheringStarted_setDefaultUsbFunctions() {
+        mFragment.mPreviousFunctions = UsbManager.FUNCTION_PTP;
+
+        mFragment.mOnStartTetheringCallback.onTetheringStarted();
+
+        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
     }
 }
