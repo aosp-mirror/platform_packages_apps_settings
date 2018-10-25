@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
@@ -70,6 +71,8 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //TODO(b/114749736): add phone change receiver here: ACTION_RADIO_TECHNOLOGY_CHANGED
+
         setContentView(R.layout.mobile_settings_container);
         setActionBar(findViewById(R.id.mobile_action_bar));
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
@@ -79,6 +82,12 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
                 : null;
 
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
+
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            // android.R.id.home will be triggered in onOptionsItemSelected()
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         updateSubscriptions(savedInstanceState);
     }
