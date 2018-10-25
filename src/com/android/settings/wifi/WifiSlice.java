@@ -74,7 +74,7 @@ public class WifiSlice implements CustomSliceable {
             .build();
 
     @VisibleForTesting
-    static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
+    static final int DEFAULT_EXPANDED_ROW_COUNT = 4;
 
     private final Context mContext;
 
