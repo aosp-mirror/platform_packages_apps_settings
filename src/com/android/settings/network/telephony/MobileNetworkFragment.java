@@ -56,7 +56,6 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.network.telephony.cdma.CdmaApnPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
@@ -128,9 +127,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private ImsManager mImsMgr;
     private boolean mOkClicked;
 
-    //GsmUmts options and Cdma options
-    GsmUmtsOptions mGsmUmtsOptions;
-
     private String mClickedPrefKey;
     private boolean mShow4GForLTE;
     private boolean mIsGlobalCdma;
@@ -158,9 +154,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         /** TODO: Refactor and get rid of the if's using subclasses */
         if (preference.getKey().equals(BUTTON_4G_LTE_KEY)) {
-            return true;
-        } else if (mGsmUmtsOptions != null &&
-                mGsmUmtsOptions.preferenceTreeClick(preference) == true) {
             return true;
         } else if (TextUtils.equals(key, BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || TextUtils.equals(key, BUTTON_CDMA_SUBSCRIPTION_KEY)) {
@@ -213,7 +206,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
-        use(CdmaApnPreferenceController.class).init(mSubId);
+        use(ApnPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
@@ -693,11 +686,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // We don't want to re-create GsmUmtsOptions if already exists. Otherwise, the
         // preferences inside it will also be re-created which causes unexpected behavior.
         // For example, the open dialog gets dismissed or detached after pause / resume.
-        if (mGsmUmtsOptions == null) {
-            mGsmUmtsOptions = new GsmUmtsOptions(prefFragment, prefScreen, subId);
-        } else {
-            mGsmUmtsOptions.update(subId);
-        }
     }
 
     private static Intent buildPhoneAccountConfigureIntent(
