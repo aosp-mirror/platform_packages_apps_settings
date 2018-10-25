@@ -20,10 +20,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.ArrayMap;
 
-import com.android.settings.homepage.deviceinfo.BatterySlice;
-import com.android.settings.homepage.deviceinfo.DataUsageSlice;
-import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
-import com.android.settings.homepage.deviceinfo.StorageSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.wifi.WifiSlice;
 
 import java.util.Map;
