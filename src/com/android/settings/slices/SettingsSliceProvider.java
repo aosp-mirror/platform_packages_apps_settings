@@ -52,6 +52,7 @@ import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,6 +135,7 @@ public class SettingsSliceProvider extends SliceProvider {
     final Set<Uri> mRegisteredUris = new ArraySet<>();
 
     final Map<Uri, SliceBackgroundWorker> mWorkerMap = new ArrayMap<>();
+    final Set<SliceBackgroundWorker> mLiveWorkers = new ArraySet<>();
 
     public SettingsSliceProvider() {
         super(READ_SEARCH_INDEXABLES);
@@ -169,7 +171,9 @@ public class SettingsSliceProvider extends SliceProvider {
             if (filter != null) {
                 registerIntentToUri(filter, sliceUri);
             }
-            startBackgroundWorker(sliceable);
+            ThreadUtils.postOnMainThread(() -> {
+                startBackgroundWorker(sliceable);
+            });
             return;
         }
 
@@ -198,7 +202,9 @@ public class SettingsSliceProvider extends SliceProvider {
             SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
             mRegisteredUris.remove(sliceUri);
         }
-        stopBackgroundWorker(sliceUri);
+        ThreadUtils.postOnMainThread(() -> {
+            stopBackgroundWorker(sliceUri);
+        });
         mSliceDataCache.remove(sliceUri);
     }
 
@@ -365,12 +371,15 @@ public class SettingsSliceProvider extends SliceProvider {
         }
 
         final Uri uri = sliceable.getUri();
-        Log.d(TAG, "Starting background worker for: " + uri);
         if (mWorkerMap.containsKey(uri)) {
             return;
         }
 
+        Log.d(TAG, "Starting background worker for: " + uri);
         mWorkerMap.put(uri, worker);
+        if (!mLiveWorkers.contains(worker)) {
+            mLiveWorkers.add(worker);
+        }
         worker.onSlicePinned();
     }
 
@@ -381,6 +390,20 @@ public class SettingsSliceProvider extends SliceProvider {
             worker.onSliceUnpinned();
             mWorkerMap.remove(uri);
         }
+    }
+
+    @Override
+    public void shutdown() {
+        for (SliceBackgroundWorker worker : mLiveWorkers) {
+            ThreadUtils.postOnMainThread(() -> {
+                try {
+                    worker.close();
+                } catch (IOException e) {
+                    Log.w(TAG, "Exception when shutting down worker", e);
+                }
+            });
+        }
+        mLiveWorkers.clear();
     }
 
     private List<Uri> buildUrisFromKeys(List<String> keys, String authority) {
