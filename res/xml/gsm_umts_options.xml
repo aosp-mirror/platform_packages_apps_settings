@@ -16,28 +16,6 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <com.android.settings.network.telephony.NetworkOperators
-        android:key="network_operators_category_key"
-        android:title="@string/network_operator_category"
-        android:persistent="false">
-
-        <SwitchPreference
-            android:key="button_auto_select_key"
-            android:title="@string/select_automatically"
-            android:persistent="false"/>
-
-        <com.android.settings.network.telephony.NetworkSelectListPreference
-            android:key="button_network_select_key"
-            android:title="@string/network_select_title"
-            android:persistent="false"/>
-
-        <Preference
-            android:key="button_choose_network_key"
-            android:title="@string/choose_network_title"
-            android:fragment="com.android.phone.NetworkSelectSetting" />
-    </com.android.settings.network.telephony.NetworkOperators>
-
     <!--We want separate APN setting from reset of settings because-->
     <!--we want user to change it with caution.-->
     <PreferenceCategory

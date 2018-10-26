@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.network.telephony.cdma;
+package com.android.settings.network.telephony;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
@@ -47,7 +47,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class CdmaApnPreferenceControllerTest {
+public class ApnPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
     @Mock
@@ -59,7 +59,7 @@ public class CdmaApnPreferenceControllerTest {
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
 
-    private CdmaApnPreferenceController mController;
+    private ApnPreferenceController mController;
     private RestrictedPreference mPreference;
     private Context mContext;
 
@@ -73,11 +73,12 @@ public class CdmaApnPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        doReturn(mCarrierConfigManager).when(mContext).getSystemService(CarrierConfigManager.class);
 
         mPreference = new RestrictedPreference(mContext);
-        mController = new CdmaApnPreferenceController(mContext, "mobile_data");
+        mController = new ApnPreferenceController(mContext, "mobile_data");
         mController.init(SUB_ID);
-        mController.mPreference = mPreference;
+        mController.setPreference(mPreference);
         mController.mCarrierConfigManager = mCarrierConfigManager;
         mPreference.setKey(mController.getPreferenceKey());
     }
@@ -97,6 +98,16 @@ public class CdmaApnPreferenceControllerTest {
         doReturn(PhoneConstants.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_SHOW_APN_SETTING_CDMA_BOOL, true);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_apnSettingsSupportedWithGsm_returnAvailable() {
+        doReturn(PhoneConstants.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
+        final PersistableBundle bundle = new PersistableBundle();
+        bundle.putBoolean(CarrierConfigManager.KEY_APN_EXPAND_BOOL, true);
         doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);

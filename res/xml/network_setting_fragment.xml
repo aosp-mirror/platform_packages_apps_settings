@@ -117,15 +117,30 @@
         android:dialogTitle="@string/cdma_subscription_dialogtitle"
         settings:controller="com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController"/>
 
-    <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
     <PreferenceCategory
-        android:key="category_cdma_apn_key">
-        <com.android.settingslib.RestrictedPreference
-            android:key="button_cdma_apn_key"
-            android:title="@string/apn_settings"
-            android:persistent="false"
-            settings:controller="com.android.settings.network.telephony.cdma.CdmaApnPreferenceController"/>
+        android:key="network_operators_category_key"
+        android:title="@string/network_operator_category"
+        settings:controller="com.android.settings.widget.PreferenceCategoryController">
+
+        <SwitchPreference
+            android:key="auto_select_key"
+            android:title="@string/select_automatically"
+            settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
+
+        <Preference
+            android:key="choose_network_key"
+            android:title="@string/choose_network_title"
+            android:fragment="com.android.phone.NetworkSelectSetting"
+            settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
     </PreferenceCategory>
+
+    <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
+    <com.android.settingslib.RestrictedPreference
+        android:key="telephony_apn_key"
+        android:persistent="false"
+        android:title="@string/apn_settings"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.network.telephony.ApnPreferenceController"/>
 
     <Preference
         android:key="carrier_settings_key"

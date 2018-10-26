@@ -45,7 +45,6 @@ import android.view.MenuItem;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
@@ -57,14 +56,17 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.network.telephony.cdma.CdmaApnPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
+import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
+import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -125,9 +127,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
     private ImsManager mImsMgr;
     private boolean mOkClicked;
 
-    //GsmUmts options and Cdma options
-    GsmUmtsOptions mGsmUmtsOptions;
-
     private String mClickedPrefKey;
     private boolean mShow4GForLTE;
     private boolean mIsGlobalCdma;
@@ -155,9 +154,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         /** TODO: Refactor and get rid of the if's using subclasses */
         if (preference.getKey().equals(BUTTON_4G_LTE_KEY)) {
-            return true;
-        } else if (mGsmUmtsOptions != null &&
-                mGsmUmtsOptions.preferenceTreeClick(preference) == true) {
             return true;
         } else if (TextUtils.equals(key, BUTTON_CDMA_SYSTEM_SELECT_KEY)
                 || TextUtils.equals(key, BUTTON_CDMA_SUBSCRIPTION_KEY)) {
@@ -210,7 +206,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
-        use(CdmaApnPreferenceController.class).init(mSubId);
+        use(ApnPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
@@ -218,6 +214,15 @@ public class MobileNetworkFragment extends DashboardFragment implements
         use(DataServiceSetupPreferenceController.class).init(mSubId);
         use(EuiccPreferenceController.class).init(mSubId);
         use(WifiCallingPreferenceController.class).init(mSubId);
+
+        final OpenNetworkSelectPagePreferenceController openNetworkSelectPagePreferenceController =
+                use(OpenNetworkSelectPagePreferenceController.class).init(mSubId);
+        final AutoSelectPreferenceController autoSelectPreferenceController =
+                use(AutoSelectPreferenceController.class)
+                        .init(mSubId)
+                        .addListener(openNetworkSelectPagePreferenceController);
+        use(PreferenceCategoryController.class).setChildren(
+                Arrays.asList(autoSelectPreferenceController));
 
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
@@ -468,10 +473,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         if (ps != null) {
             ps.setEnabled(hasActiveSubscriptions);
         }
-        ps = findPreference(NetworkOperators.CATEGORY_NETWORK_OPERATORS_KEY);
-        if (ps != null) {
-            ps.setEnabled(hasActiveSubscriptions);
-        }
         ps = findPreference(BUTTON_CARRIER_SETTINGS_KEY);
         if (ps != null) {
             ps.setEnabled(hasActiveSubscriptions);
@@ -479,20 +480,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         ps = findPreference(CATEGORY_CALLING_KEY);
         if (ps != null) {
             ps.setEnabled(hasActiveSubscriptions);
-        }
-        ps = findPreference(NetworkOperators.BUTTON_AUTO_SELECT_KEY);
-        if (ps != null) {
-            ps.setSummary(null);
-            if (mTelephonyManager.getServiceState().getRoaming()) {
-                ps.setEnabled(true);
-            } else {
-                ps.setEnabled(!mOnlyAutoSelectInHomeNW);
-                if (mOnlyAutoSelectInHomeNW) {
-                    ps.setSummary(getResources().getString(
-                            R.string.manual_mode_disallowed_summary,
-                            mTelephonyManager.getSimOperatorName()));
-                }
-            }
         }
     }
 
@@ -605,17 +592,7 @@ public class MobileNetworkFragment extends DashboardFragment implements
 
         updateGsmUmtsOptions(this, prefSet, mSubId);
 
-        PreferenceCategory networkOperatorCategory =
-                (PreferenceCategory) prefSet.findPreference(
-                        NetworkOperators.CATEGORY_NETWORK_OPERATORS_KEY);
         Preference carrierSettings = prefSet.findPreference(BUTTON_CARRIER_SETTINGS_KEY);
-        if (networkOperatorCategory != null) {
-            if (enable) {
-                networkOperatorCategory.setEnabled(true);
-            } else {
-                prefSet.removePreference(networkOperatorCategory);
-            }
-        }
         if (carrierSettings != null) {
             prefSet.removePreference(carrierSettings);
         }
@@ -689,12 +666,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         if (preference == null) {
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
         } else if (preference == preferenceScreen
-                .findPreference(NetworkOperators.BUTTON_AUTO_SELECT_KEY)) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_AUTO_SELECT_NETWORK_TOGGLE;
-        } else if (preference == preferenceScreen
-                .findPreference(NetworkOperators.BUTTON_NETWORK_SELECT_KEY)) {
-            return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_MANUAL_SELECT_NETWORK;
-        } else if (preference == preferenceScreen
                 .findPreference(BUTTON_CDMA_SYSTEM_SELECT_KEY)) {
             return MetricsProto.MetricsEvent.ACTION_MOBILE_NETWORK_CDMA_SYSTEM_SELECT;
         } else if (preference == preferenceScreen
@@ -715,11 +686,6 @@ public class MobileNetworkFragment extends DashboardFragment implements
         // We don't want to re-create GsmUmtsOptions if already exists. Otherwise, the
         // preferences inside it will also be re-created which causes unexpected behavior.
         // For example, the open dialog gets dismissed or detached after pause / resume.
-        if (mGsmUmtsOptions == null) {
-            mGsmUmtsOptions = new GsmUmtsOptions(prefFragment, prefScreen, subId);
-        } else {
-            mGsmUmtsOptions.update(subId);
-        }
     }
 
     private static Intent buildPhoneAccountConfigureIntent(
