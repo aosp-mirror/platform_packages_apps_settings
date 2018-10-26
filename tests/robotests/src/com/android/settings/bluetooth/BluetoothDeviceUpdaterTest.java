@@ -63,7 +63,11 @@ public class BluetoothDeviceUpdaterTest {
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
+    private CachedBluetoothDevice mSubCachedBluetoothDevice;
+    @Mock
     private BluetoothDevice mBluetoothDevice;
+    @Mock
+    private BluetoothDevice mSubBluetoothDevice;
     @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
@@ -86,6 +90,7 @@ public class BluetoothDeviceUpdaterTest {
         mCachedDevices.add(mCachedBluetoothDevice);
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mSubCachedBluetoothDevice.getDevice()).thenReturn(mSubBluetoothDevice);
         when(mLocalManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
 
@@ -144,6 +149,20 @@ public class BluetoothDeviceUpdaterTest {
         mBluetoothDeviceUpdater.removePreference(mCachedBluetoothDevice);
 
         verify(mDevicePreferenceCallback, never()).onDeviceRemoved(any(Preference.class));
+    }
+
+    @Test
+    public void testRemovePreference_subDeviceExist_removePreference() {
+        when(mCachedBluetoothDevice.getSubDevice()).thenReturn(mSubCachedBluetoothDevice);
+        mBluetoothDeviceUpdater.mPreferenceMap.put(mSubBluetoothDevice, mPreference);
+
+        assertThat(mBluetoothDeviceUpdater.mPreferenceMap.
+                containsKey(mSubBluetoothDevice)).isTrue();
+        mBluetoothDeviceUpdater.removePreference(mCachedBluetoothDevice);
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(mPreference);
+        assertThat(mBluetoothDeviceUpdater.mPreferenceMap.
+                containsKey(mSubBluetoothDevice)).isFalse();
     }
 
     @Test

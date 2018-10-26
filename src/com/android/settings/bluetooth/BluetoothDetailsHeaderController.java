@@ -65,12 +65,10 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
                 .getBtClassDrawableWithDescription(mContext, mCachedDevice,
                 mContext.getResources().getFraction(R.fraction.bt_battery_scale_fraction, 1, 1));
         String summaryText = mCachedDevice.getConnectionSummary();
-        // If both the hearing aids are connected, two battery status should be shown.
-        final String pairDeviceSummary = mDeviceManager
-            .getHearingAidPairDeviceSummary(mCachedDevice);
-        if (pairDeviceSummary != null) {
-            mHeaderController.setSecondSummary(pairDeviceSummary);
-        }
+        // If both the hearing aids are connected, two device status should be shown.
+        // If Second Summary is unavailable, to set it to null.
+        mHeaderController.setSecondSummary(
+                mDeviceManager.getSubDeviceSummary(mCachedDevice));
         mHeaderController.setLabel(mCachedDevice.getName());
         mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);
