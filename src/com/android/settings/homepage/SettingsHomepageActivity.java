@@ -29,12 +29,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
 
 public class SettingsHomepageActivity extends SettingsBaseActivity {
-
-    private static final String SUGGESTION_TAG = "suggestion";
-    private static final String MAIN_TAG = "main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,21 +52,21 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
                 .initSearchToolbar(this, toolbar);
 
-        showFragment(new PersonalSettingsFragment(), R.id.suggestion_content, SUGGESTION_TAG);
-        showFragment(new TopLevelSettings(), R.id.main_content, MAIN_TAG);
+        showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
+        showFragment(new TopLevelSettings(), R.id.main_content);
     }
 
     public static boolean isDynamicHomepageEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlags.DYNAMIC_HOMEPAGE);
     }
 
-    private void showFragment(Fragment fragment, int id, String tag) {
+    private void showFragment(Fragment fragment, int id) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         final Fragment showFragment = fragmentManager.findFragmentById(id);
 
         if (showFragment == null) {
-            fragmentTransaction.add(id, fragment, tag);
+            fragmentTransaction.add(id, fragment);
         } else {
             fragmentTransaction.show(showFragment);
         }
