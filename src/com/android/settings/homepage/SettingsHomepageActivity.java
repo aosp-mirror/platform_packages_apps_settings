@@ -16,7 +16,6 @@
 
 package com.android.settings.homepage;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
@@ -27,6 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
@@ -38,9 +38,8 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!isDynamicHomepageEnabled(this)) {
-            final Intent settings = new Intent();
-            settings.setAction("android.settings.SETTINGS");
+        if (!FeatureFlagUtils.isEnabled(this, FeatureFlags.DYNAMIC_HOMEPAGE)) {
+            final Intent settings = new Intent(this, SettingsActivity.class);
             startActivity(settings);
             finish();
             return;
@@ -54,10 +53,6 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
 
         showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
         showFragment(new TopLevelSettings(), R.id.main_content);
-    }
-
-    public static boolean isDynamicHomepageEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlags.DYNAMIC_HOMEPAGE);
     }
 
     private void showFragment(Fragment fragment, int id) {
