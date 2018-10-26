@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Chọn ít nhất một băng tần cho điểm phát sóng Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Cài đặt IP"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"Chia sẻ với những người khác cũng dùng thiết bị này"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(không thay đổi)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Vui lòng chọn"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Không thể thay đổi mã PIN.\nCó thể mã PIN không đúng."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"Mã PIN của SIM đã được thay đổi thành công"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Không thể thay đổi trạng thái khóa thẻ SIM.\nCó thể mã PIN không đúng."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Không thể tắt mã PIN."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Không thể bật mã PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Hủy"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Tìm thấy nhiều SIM"</string>
@@ -3001,6 +3005,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"chủ đề màu tối"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"lỗi"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Màn hình sáng, Màn hình ở chế độ màn hình khóa"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"thông báo trên màn hình khóa"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"khuôn mặt"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"vân tay"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"làm mờ màn hình, màn hình cảm ứng, pin, độ sáng thông minh, độ sáng động"</string>
@@ -3528,7 +3533,7 @@
     <string name="system_default_app" msgid="3091113402349739037">"(Mặc định của hệ thống)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"Bộ nhớ ứng dụng"</string>
     <string name="usage_access" msgid="5479504953931038165">"Truy cập dữ liệu sử dụng"</string>
-    <string name="permit_usage_access" msgid="4012876269445832300">"Cho phép quyền truy cập sử dụng"</string>
+    <string name="permit_usage_access" msgid="4012876269445832300">"Cho phép truy cập dữ liệu sử dụng"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"Tùy chọn sử dụng ứng dụng"</string>
     <string name="time_spent_in_app_pref_title" msgid="649419747540933845">"Thời gian dùng ứng dụng"</string>
     <string name="usage_access_description" msgid="1352111094596416795">"Quyền truy cập vào dữ liệu sử dụng cho phép một ứng dụng theo dõi các ứng dụng khác mà bạn đang sử dụng và tần suất sử dụng cũng như thông tin nhà mạng, thông tin cài đặt ngôn ngữ và các chi tiết khác."</string>
@@ -4154,10 +4159,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Thông tin chi tiết về mạng"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Tên thiết bị của bạn sẽ hiển thị với các ứng dụng trên điện thoại. Những người khác cũng có thể thấy tên thiết bị này khi bạn kết nối với thiết bị Bluetooth hoặc thiết lập điểm phát sóng Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Thiết bị"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Bảng tần suất làm mới cao"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Bật Bảng ảo tần suất làm mới cao"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Tất cả tùy chọn cài đặt"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Tùy chọn cài đặt của bạn"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Đề xuất"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Dữ liệu CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Dữ liệu CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Chọn mạng"</string>
@@ -4169,4 +4172,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"Không tìm thấy mạng. Hãy thử lại."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(cấm)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Không có thẻ SIM nào"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Gọi nâng cao"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Chế độ mạng ưa thích: ưu tiên WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Chế độ mạng ưa thích: chỉ GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Chế độ mạng ưa thích: chỉ WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Chế độ mạng ưa thích: GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Chế độ mạng ưa thích: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Chế độ mạng ưa thích: CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Chế độ mạng ưa thích: chỉ CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Chế độ mạng ưa thích: chỉ EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Chế độ mạng ưa thích: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Chế độ mạng ưa thích: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Chế độ mạng ưa thích: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Chế độ mạng ưa thích: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Chế độ mạng ưa thích: Toàn cầu"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Chế độ mạng ưa thích: LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Chế độ mạng ưa thích: LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Chế độ mạng ưa thích: LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Chế độ mạng ưa thích: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Chế độ mạng ưa thích: TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Chế độ mạng ưa thích: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Chế độ mạng ưa thích: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Chế độ mạng ưa thích: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Chế độ mạng ưa thích: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Chế độ mạng ưa thích: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Chế độ mạng ưa thích: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Chế độ mạng ưa thích: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Chế độ mạng ưa thích: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (đề xuất)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (đề xuất)"</string>
+    <string name="network_global" msgid="959947774831178632">"Toàn cầu"</string>
+    <string name="label_available" msgid="1731547832803057893">"Mạng có sẵn"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Đang tìm kiếm…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"Đang đăng ký trên <xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"Thẻ SIM của bạn không cho phép kết nối với mạng này."</string>
+    <string name="connect_later" msgid="978991102125216741">"Không thể kết nối với mạng này ngay bây giờ. Hãy thử lại sau."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Đã đăng ký trên mạng."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Tự động chọn mạng"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Cài đặt nhà mạng"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Thiết lập dịch vụ dữ liệu"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Dữ liệu di động"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Truy cập dữ liệu bằng mạng di động"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Loại mạng ưa thích"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Thay đổi chế độ hoạt động của mạng"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Loại mạng ưa thích"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Nhà mạng"</string>
+    <string name="call_category" msgid="8108654745239563833">"Gọi điện"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Tính năng gọi video của nhà mạng"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Chọn hệ thống"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Thay đổi chế độ chuyển vùng CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Chọn hệ thống"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Mạng"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Mạng"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"Gói đăng ký CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Thay đổi giữa RUIM/SIM và NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"gói đăng ký"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Đăng ký tự động..."</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Cho phép chuyển vùng dữ liệu?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Hãy liên hệ với nhà mạng của bạn để biết giá cước."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Mức sử dụng dữ liệu của ứng dụng"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Không sử dụng được khi kết nối với <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"Xem bớt"</string>
 </resources>

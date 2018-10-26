@@ -892,6 +892,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"ເລືອກແຖບຄວາມຖີ່ຢ່າງໜ້ອຍໜຶ່ງອັນສຳລັບ Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"ຕັ້ງຄ່າ IP"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"ຄວາມເປັນສ່ວນຕົວ"</string>
     <string name="wifi_shared" msgid="844142443226926070">"ແບ່ງປັນກັບຜູ້ໃຊ້ອຸປະກອນອື່ນ"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ບໍ່ມີການປ່ຽນແປງ)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"ກະລຸນາເລືອກ"</string>
@@ -1205,6 +1206,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"ບໍ່ສາມາດປ່ຽນລະຫັດ PIN ໄດ້.\nອາດເປັນເພາະລະຫັດ PIN ບໍ່ຖືກຕ້ອງ."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"ລະຫັດ PIN ຂອງ SIM ຖືກປ່ຽນສຳເລັດແລ້ວ"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"ບໍ່ສາມາດປ່ຽນສະຖານະການລັອກ SIM card ໄດ້.\nອາດເປັນຍ້ອນ PIN ບໍ່ຖືກຕ້ອງ."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"ບໍ່ສາມາດປິດການນຳໃຊ້ PIN ໄດ້."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"ບໍ່ສາມາດເປີດການນຳໃຊ້ PIN ໄດ້."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"ຕົກລົງ"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"ຍົກເລີກ"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"ພົບຫຼາຍ SIM"</string>
@@ -3001,6 +3004,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"ສີສັນໜ້າຕາແບບມືດ"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"ຂໍ້ຜິດພາດ"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"ການສະແດງຜົນຕາມແສງສະພາບແວດລ້ອມ, ໜ້າຈໍລັອກ"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"ການແຈ້ງເຕືອນໃນໜ້າຈໍລັອກ"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"ໃບໜ້າ"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"ລາຍນີ້ວມື"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"ຫຼຸດແສງໜ້າຈໍ, ໜ້າຈໍສຳຜັດ, ແບັດເຕີຣີ, ຄວາມສະຫວ່າງອັດສະລິຍະ, ຄວາມສະຫວ່າງແບບໄດນາມິກ"</string>
@@ -4154,10 +4158,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ລາຍລະອຽດເຄືອຂ່າຍ"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"ຊື່ອຸປະກອນຂອງທ່ານຈະສາມາດເບິ່ງເຫັນໄດ້ໂດຍແອັບຢູ່ໂທລະສັບຂອງທ່ານ. ນອກຈາກນັ້ນ, ຄົນອື່ນອາດຈະເຫັນມັນໄດ້ເມື່ອທ່ານເຊື່ອມຕໍ່ຫາອຸປະກອນ Bluetooth ຫຼື ຕັ້ງ Wi-Fi ຮັອດສະປອດ."</string>
     <string name="devices_title" msgid="7701726109334110391">"ອຸປະກອນ"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"ແຜງຄວາມຖີ່ສູງ"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"ເປີດໃຊ້ແຜງຄວາມຖີ່ສູງແບບສະເໝືອນ"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"ການຕັ້ງຄ່າທັງໝົດ"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"ການຕັ້ງຄ່າຂອງທ່ານ"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"ຄຳແນະນຳ"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"ຂໍ້ມູນ CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"ຂໍ້ມູນ CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"ເລືອກເຄືອຂ່າຍ"</string>
@@ -4169,4 +4171,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"ບໍ່ພົບເຄືອຂ່າຍ. ກະລຸນາລອງໃໝ່ອີກເທື່ອໜຶ່ງ."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(ຕ້ອງຫ້າມ)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"ບໍ່ມີຊິມກາດ"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"ການໂທຂັ້ນສູງ"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: ຕ້ອງການ WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: GSM ເທົ່ານັ້ນ"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: WCDMA ເທົ່ານັ້ນ"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: CDMA ເທົ່ານັ້ນ"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: EvDo ເທົ່ານັ້ນ"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: ທົ່ວໂລກ"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"ໂໝດເຄືອຂ່າຍທີ່ຕ້ອງການ: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (ແນະນຳ)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (ແນະນຳ)"</string>
+    <string name="network_global" msgid="959947774831178632">"ທົ່ວໂລກ"</string>
+    <string name="label_available" msgid="1731547832803057893">"ເຄືອຂ່າຍທີ່ສາມາດໃຊ້ໄດ້"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"ກຳລັງຊອກຫາ..."</string>
+    <string name="register_on_network" msgid="766516026652295941">"ກຳລັງລົງທະບຽນໃນ <xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"SIM ກາດຂອງທ່ານບໍ່ອະນຸຍາດໃຫ້ເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍນີ້."</string>
+    <string name="connect_later" msgid="978991102125216741">"ບໍ່ສາມາດເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍນີ້ໄດ້ໃນຂະນະນີ້. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ."</string>
+    <string name="registration_done" msgid="4573820010512184521">"ລົງທະບຽນໃນເຄືອຂ່າຍແລ້ວ."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"ເລືອກເຄືອຂ່າຍອັດຕະໂນມັດ"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"ການຕັ້ງຄ່າຜູ້ໃຫ້ບໍລິການ"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"ຕັ້ງຄ່າການບໍລິການຂໍ້ມູນ"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"ອິນເຕີເນັດມືຖື"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"ເຂົ້າເຖິງອິນເຕີເນັດຜ່ານເຄືອຂ່າຍມືຖື"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"ປະເພດເຄືອຂ່າຍທີ່ຕ້ອງການ"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"ປ່ຽນໂໝດປະຕິບັດການຂອງເຄືອຂ່າຍ"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"ປະເພດເຄືອຂ່າຍທີ່ຕ້ອງການ"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"ຜູ້ໃຫ້ບໍລິການ"</string>
+    <string name="call_category" msgid="8108654745239563833">"ກຳລັງໂທ"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"ການໂທວິດີໂອຂອງຜູ້ໃຫ້ບໍລິການ"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"ການເລືອກລະບົບ"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"ປ່ຽນໂໝດໂຣມມິງ CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"ການເລືອກລະບົບ"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"ເຄືອຂ່າຍ"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"ເຄືອຂ່າຍ"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"ການສະໝັກໃຊ້ CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"ປ່ຽນລະຫວ່າງ RUIM/SIM ແລະ NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"ການສະໝັກໃຊ້"</string>
+    <string name="register_automatically" msgid="518185886971595020">"ການລົງທະບຽນອັດຕະໂນມັດ..."</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"ອະນຸຍາດໃຫ້ໂຣມມິງຂໍ້ມູນບໍ?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"ກະລຸນາກວດສອບລາຄາກັບຜູ້ໃຫ້ບໍລິການເຄືອຂ່າຍຂອງທ່ານ."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"ການໃຊ້ຂໍ້ມູນແອັບ"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"ໂໝດເຄືອຂ່າຍ <xliff:g id="NETWORKMODEID">%1$d</xliff:g> ບໍ່ຖືກຕ້ອງ. ບໍ່ສົນໃຈ."</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"ບໍ່ສາມາດໃຊ້ໄດ້ເມື່ອເຊື່ອມຕໍ່ກັບ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <string name="see_more" msgid="5953815986207345223">"ເບິ່ງເພີ່ມເຕີມ"</string>
+    <string name="see_less" msgid="1250265310929558370">"​​ເບິ່ງ​ໜ້ອຍ​ລົງ"</string>
 </resources>

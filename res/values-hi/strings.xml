@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 गीगाहर्ट्ज़"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"वाई-फ़ाई हॉटस्पॉट से डिवाइस काे जाेड़ने के लिए कम से कम एक बैंड चुनें:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP सेटिंग"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"अन्‍य डिवाइस उपयोगकर्ताओं से शेयर करें"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(अपरिवर्तित)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"कृपया चुनें"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"पिन नहीं बदल सकता.\nसंभवत: गलत पिन."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"सिम पिन सफलतापूर्वक बदला गया"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"सिम कार्ड लॉक स्‍थिति नहीं बदल सकता.\nसंभवत: गलत पिन."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"पिन को बंद नहीं किया जा सकता."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"पिन को चालू नहीं किया जा सकता."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"ठीक है"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"रद्द करें"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"एकाधिक सिम मिलीं"</string>
@@ -3001,6 +3005,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"गहरे रंग वाली थीम"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"गड़बड़ी"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"हमेशा चालू स्क्रीन, लॉक स्क्रीन डिसप्ले"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"लॉक स्क्रीन सूचना"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"चेहरा"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"फ़िंगरप्रिंट"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"हल्की रोशनी वाली स्क्रीन, टचस्क्रीन, बैटरी, स्मार्ट ब्राइटनेस, डाइनैमिक ब्राइटनेस"</string>
@@ -4154,10 +4159,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"नेटवर्क के बारे में जानकारी"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"आपके फ़ोन पर मौजूद ऐप्लिकेशन, आपके डिवाइस का नाम जान सकते हैं. ब्लूटूथ डिवाइस जोड़ते समय या वाई-फ़ाई हॉटस्पॉट सेटअप करते समय, इसे दूसरे लोग भी देख सकते हैं."</string>
     <string name="devices_title" msgid="7701726109334110391">"डिवाइस"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"हाई फ़्रीक्वेंसी पैनल"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"वर्चुअल \'हाई फ़्रीक्वेंसी पैनल\' को चालू करें"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"सभी सेटिंग"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"आपकी सेटिंग"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"सुझाव"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS डेटा"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS डेटा"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"नेटवर्क चुनें"</string>
@@ -4169,4 +4172,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"कोई नेटवर्क नहीं मिला. फिर से कोशिश करें."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(मना है)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"कोई SIM कार्ड नहीं है"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"बेहतर कॉलिंग"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"पसंदीदा नेटवर्क मोड: WCDMA को प्राथमिकता"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"पसंदीदा नेटवर्क मोड: सिर्फ़ GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"पसंदीदा नेटवर्क मोड: सिर्फ़ WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"पसंदीदा नेटवर्क मोड: CDMA / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"पसंदीदा नेटवर्क मोड: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"पसंदीदा नेटवर्क मोड: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"पसंदीदा नेटवर्क मोड: सिर्फ़ CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"पसंदीदा नेटवर्क मोड: सिर्फ़ EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"पसंदीदा नेटवर्क मोड: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"पसंदीदा नेटवर्क मोड: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"पसंदीदा नेटवर्क मोड: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"पसंदीदा नेटवर्क मोड: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"पसंदीदा नेटवर्क मोड: सभी जगह लागू"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"पसंदीदा नेटवर्क मोड: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"पसंदीदा नेटवर्क मोड: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"पसंदीदा नेटवर्क मोड: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"पसंदीदा नेटवर्क मोड: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"पसंदीदा नेटवर्क मोड: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"पसंदीदा नेटवर्क मोड: LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"पसंदीदा नेटवर्क मोड: TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"पसंदीदा नेटवर्क मोड: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"पसंदीदा नेटवर्क मोड: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"पसंदीदा नेटवर्क मोड: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"पसंदीदा नेटवर्क मोड: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"पसंदीदा नेटवर्क मोड: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"पसंदीदा नेटवर्क मोड: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (सुझाया गया)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (सुझाया गया)"</string>
+    <string name="network_global" msgid="959947774831178632">"हर जगह लागू"</string>
+    <string name="label_available" msgid="1731547832803057893">"उपलब्ध नेटवर्क"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"खोज की जा रही है…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"<xliff:g id="NETWORK">%s</xliff:g> पर रजिस्टर किया जा रहा है…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"इस नेटवर्क पर आपका सिम कार्ड कनेक्शन की अनुमति नहीं देता है."</string>
+    <string name="connect_later" msgid="978991102125216741">"फ़िलहाल इस नेटवर्क से कनेक्ट नहीं कर सकते. कुछ देर बाद कोशिश करके देखें."</string>
+    <string name="registration_done" msgid="4573820010512184521">"नेटवर्क पर रजिस्टर किया गया."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"अपने आप नेटवर्क चुनें"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी से जुड़ी सेटिंग"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"डेटा सेवा सेट अप करें"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"मोबाइल डेटा"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"मोबाइल नेटवर्क का इस्तेमाल करके डेटा एक्सेस करें"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"पसंदीदा नेटवर्क प्रकार"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"नेटवर्क संचालन मोड बदलें"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"पसंदीदा नेटवर्क प्रकार"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी"</string>
+    <string name="call_category" msgid="8108654745239563833">"कॉल करना"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी की वीडियो कॉलिंग सुविधा"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"सिस्टम चुनें"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"CDMA रोमिंग मोड बदलें"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"सिस्टम चुनें"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"नेटवर्क"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"नेटवर्क"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA सदस्यता"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"RUIM/सिम और NV में बदलाव करें"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"सदस्यता"</string>
+    <string name="register_automatically" msgid="518185886971595020">"अपने आप रजिस्ट्रेशन…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"डेटा रोमिंग की अनुमति दें?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"कीमतों की जानकारी के लिए आपको नेटवर्क सेवा देने वाली कंपनी से संपर्क करें."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"ऐप्लिकेशन का डेटा इस्तेमाल"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g> से कनेक्ट होने पर उपलब्ध नहीं है"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"कम देखें"</string>
 </resources>

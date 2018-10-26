@@ -836,7 +836,7 @@
     <string name="wifi_error" msgid="3207971103917128179">"שגיאה"</string>
     <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"‏רצועת התדרים של ‎5 GHz אינה זמינה במדינה זו"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"במצב טיסה"</string>
-    <string name="wifi_notify_open_networks" msgid="76298880708051981">"הודעה על רשתות פתוחות"</string>
+    <string name="wifi_notify_open_networks" msgid="76298880708051981">"התראה על רשתות פתוחות"</string>
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"הצג הודעה כאשר רשת ציבורית באיכות גבוהה זמינה"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"‏הפעל Wi‑Fi באופן אוטומטי"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"‏Wi‑Fi יחזור לפעול בסביבת רשתות שמורות באיכות גבוהה, כמו הרשת הביתית שלך"</string>
@@ -922,6 +922,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"‎5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"‏יש לבחור תדר אחד לכל הפחות לנקודת Wi‑Fi לשיתוף אינטרנט:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"‏הגדרות IP"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"שתף עם משתמשים אחרים במכשיר"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ללא שינוי)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"בחר"</string>
@@ -1096,7 +1098,7 @@
     <string name="audio_record_proc_title" msgid="4271091199976457534">"ביטול רעש"</string>
     <string name="volume_media_description" msgid="7949355934788807863">"פריטי מוזיקה, סרטוני וידאו, משחקים ומדיה נוספת"</string>
     <string name="volume_ring_description" msgid="5936851631698298989">"רינגטונים והודעות"</string>
-    <string name="volume_notification_description" msgid="5810902320215328321">"הודעות"</string>
+    <string name="volume_notification_description" msgid="5810902320215328321">"התראות"</string>
     <string name="volume_alarm_description" msgid="8322615148532654841">"התראות"</string>
     <string name="volume_ring_mute" msgid="3018992671608737202">"השתק רינגטון והודעות"</string>
     <string name="volume_media_mute" msgid="3399059928695998166">"השתק מוזיקה וסוגי מדיה אחרים"</string>
@@ -1237,6 +1239,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"לא ניתן לשנות את קוד הגישה‏.\nכנראה שקוד הגישה שגוי."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"‏קוד הגישה של ה-SIM השתנה בהצלחה"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"‏לא ניתן לשנות מצב נעילה של כרטיס SIM‏.\nקוד הגישה שגוי."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"לא ניתן להשבית את קוד האימות."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"לא ניתן להפעיל את קוד האימות."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"אישור"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"ביטול"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"‏נמצאו מספר כרטיסי SIM"</string>
@@ -2528,7 +2532,7 @@
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"אפשרויות אחרות מושבתות על ידי מנהל המכשיר."</string>
     <string name="admin_more_details" msgid="7901420667346456102">"פרטים נוספים"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"כללי"</string>
-    <string name="notification_log_title" msgid="3766148588239398464">"יומן הודעות"</string>
+    <string name="notification_log_title" msgid="3766148588239398464">"יומן התראות"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"צלצול ורטט שיחה"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"מערכת"</string>
     <string name="wifi_setup_title" msgid="2970260757780025029">"‏הגדרת Wi-Fi"</string>
@@ -3079,6 +3083,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"עיצוב כהה"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"באג"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"תצוגה רגישה לסביבה, תצוגה של מסך נעילה"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"הודעות במסך הנעילה"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"פנים"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"טביעת אצבע"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"עמעום מסך, מסך מגע, סוללה, בהירות חכמה, בהירות דינמית"</string>
@@ -3116,9 +3121,9 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"עוצמת צלצול"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"עוצמת קול של הודעות"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"רינגטון של טלפון"</string>
-    <string name="notification_ringtone_title" msgid="4468722874617061231">"צליל ברירת המחדל להודעות"</string>
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"צליל ברירת המחדל להתראות"</string>
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"צליל שסיפקה האפליקציה"</string>
-    <string name="notification_sound_default" msgid="565135733949733766">"צליל ברירת המחדל להודעות"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"צליל ברירת המחדל להתראות"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"צליל לשעון מעורר"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"הפעלת רטט גם עבור שיחות"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"צלילים אחרים"</string>
@@ -3165,7 +3170,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"חסימת הפרעות חזותיות"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"הפעלת אותות חזותיים"</string>
     <string name="zen_mode_settings_category" msgid="3982039687186952865">"כשמצב \'נא לא להפריע\' פועל"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"הודעות"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"התראות"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="3690261619682396872">"ללא צליל מהודעות"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"יוצגו הודעות במסך"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"כשיגיעו הודעות, הטלפון לא ישמיע צליל ולא יפעיל רטט."</string>
@@ -3186,7 +3191,7 @@
     <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"אל תציג אור מהבהב"</string>
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"אל תציג הודעות קופצות במסך"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"הסתרה של סמלי שורת הסטטוס"</string>
-    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"הסתרה של סימני ההודעות"</string>
+    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"הסתרה של סימני ההתראות"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"אני לא רוצה להציג הודעות"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"הסתרה מרשימת ההודעות"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"אף פעם"</string>
@@ -3261,26 +3266,26 @@
     <string name="ringtones_install_custom_sound_content" msgid="2195581481608512786">"קובץ זה יועתק לתיקייה <xliff:g id="FOLDER_NAME">%s</xliff:g>"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"רינגטונים"</string>
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"צלילים אחרים ורטט"</string>
-    <string name="configure_notification_settings" msgid="7616737397127242615">"הודעות"</string>
+    <string name="configure_notification_settings" msgid="7616737397127242615">"התראות"</string>
     <string name="recent_notifications" msgid="5660639387705060156">"נשלחו לאחרונה"</string>
     <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"הצגת כל האפליקציות מ-7 הימים האחרונים"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"אפשרויות מתקדמות"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"הודעות עבודה"</string>
-    <string name="notification_badging_title" msgid="5938709971403474078">"הצגה של סימני הודעות"</string>
+    <string name="notification_badging_title" msgid="5938709971403474078">"הצגה של סימני התראות"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"אור מהבהב"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"במסך הנעילה"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"כשפרופיל העבודה נעול"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"תוכן ההודעות יופיע במלואו"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"תוכן ההתראות יופיע במלואו"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"הסתרה של תוכן רגיש"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"לא יוצגו הודעות בכלל"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"איך להציג הודעות כשהמכשיר נעול?"</string>
-    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"הודעות"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"הצג את כל התוכן של הודעות מהעבודה"</string>
+    <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"התראות"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"הצג את כל התוכן של התראות מהעבודה"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"הסתרה של תוכן עבודה רגיש"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"כיצד אתה רוצה שיוצגו הודעות פרופיל כאשר המכשיר נעול?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"הודעות פרופיל"</string>
-    <string name="notifications_title" msgid="8086372779371204971">"הודעות"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"הודעות אפליקציה"</string>
+    <string name="notifications_title" msgid="8086372779371204971">"התראות"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"התראות אפליקציה"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"קטגוריית הודעות"</string>
     <string name="notification_group_title" msgid="7180506440133859601">"קבוצת קטגוריות של הודעות"</string>
     <string name="notification_importance_title" msgid="4368578960344731828">"התנהגות"</string>
@@ -3302,11 +3307,11 @@
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"חשיבות גבוהה"</string>
     <string name="notification_channel_summary_high" msgid="2085017556511003283">"חשיבות דחופה"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"הצגת הודעות"</string>
-    <string name="default_notification_assistant" msgid="7631945224761430146">"אסיסטנט ההודעות"</string>
+    <string name="default_notification_assistant" msgid="7631945224761430146">"אסיסטנט ההתראות"</string>
     <string name="notifications_sent_daily" msgid="3584506541352710975">"~<xliff:g id="NUMBER">%1$s</xliff:g> ביום"</string>
     <string name="notifications_sent_weekly" msgid="1030525736746720584">"~<xliff:g id="NUMBER">%1$s</xliff:g> בשבוע"</string>
     <string name="notifications_sent_never" msgid="1001964786456700536">"אף פעם"</string>
-    <string name="manage_notification_access_title" msgid="7510080164564944891">"גישה אל הודעות"</string>
+    <string name="manage_notification_access_title" msgid="7510080164564944891">"גישה אל התראות"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"הגישה להודעות של פרופיל העבודה חסומה"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"אפליקציות לא יכולות לקרוא הודעות"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
@@ -3315,8 +3320,8 @@
       <item quantity="other">‏%d אפליקציות יכולות לקרוא הודעות</item>
       <item quantity="one">‏אפליקציה %d יכולה לקרוא הודעות</item>
     </plurals>
-    <string name="no_notification_listeners" msgid="3487091564454192821">"אין אפליקציות מותקנות שביקשו גישה להודעות."</string>
-    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"האם להתיר ל-<xliff:g id="SERVICE">%1$s</xliff:g> לגשת אל הודעות?"</string>
+    <string name="no_notification_listeners" msgid="3487091564454192821">"אין אפליקציות מותקנות שביקשו גישה להתראות."</string>
+    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"האם להתיר ל-<xliff:g id="SERVICE">%1$s</xliff:g> לגשת אל התראות?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> יוכל לקרוא את כל ההודעות, כולל מידע אישי כמו שמות של אנשי קשר והודעות טקסט שתקבל. הוא יוכל גם לבטל הודעות או להפעיל לחצני פעולה שהן כוללות. \n\nכמו כן, הדבר יאפשר לאפליקציה להפעיל או לכבות את התכונה \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"אם תכבה ל-<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> את הגישה להודעות, ניתן יהיה לכבות גם את הגישה לתכונה \'נא לא להפריע\'."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"כבה"</string>
@@ -3548,7 +3553,7 @@
     <string name="storage_used" msgid="7128074132917008743">"שטח אחסון מנוצל"</string>
     <string name="change" msgid="6657848623929839991">"שינוי"</string>
     <string name="change_storage" msgid="600475265207060436">"שינוי אחסון"</string>
-    <string name="notifications_label" msgid="2872668710589600731">"הודעות"</string>
+    <string name="notifications_label" msgid="2872668710589600731">"התראות"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"מופעל"</string>
     <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"כבויות"</string>
@@ -4029,7 +4034,7 @@
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"‏אפס הגבלת דירוג ב-ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"‏אופסה הגבלת דירוג ב-ShortcutManager"</string>
     <string name="notification_suggestion_title" msgid="387052719462473500">"בחירת הפרטים שמופיעים במסך הנעילה"</string>
-    <string name="notification_suggestion_summary" msgid="8521159741445416875">"הצג או הסתר תוכן הודעה"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"הצגה או הסתרה של תוכן ההתראה"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"הכול"</string>
     <string name="page_tab_title_support" msgid="4407600495101788249">"טיפים ותמיכה"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"הרוחב הקטן ביותר"</string>
@@ -4302,10 +4307,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"פרטי הרשת"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"‏שם המכשיר שלך גלוי לאפליקציות בטלפון שלך. כמו כן, ייתכן שאנשים אחרים יראו אותו בהתחברות למכשירי Bluetooth או כשמגדירים נקודת Wi-Fi לשיתוף אינטרנט."</string>
     <string name="devices_title" msgid="7701726109334110391">"מכשירים"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"חלונית בתדר גבוה"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"הפעלה של חלונית וירטואלית בתדר גבוה"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"כל ההגדרות"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"ההגדרות שלך"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"הצעות"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"‏נתוני CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"‏נתוני CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"בחירת רשת"</string>
@@ -4317,4 +4320,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"לא נמצאו רשתות. אפשר לנסות שוב."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(אסור)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"‏אין כרטיס SIM"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"שיחה משופרת"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"‏מצב רשת מועדפת: WCDMA מועדף"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"‏מצב רשת מועדפת: GSM בלבד"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"‏מצב רשת מועדפת: WCDMA בלבד"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"‏מצב רשת מועדפת: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"‏מצב רשת מועדפת: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"‏מצב רשת מועדפת: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"‏מצב רשת מועדפת: CDMA בלבד"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"‏מצב רשת מועדפת: EvDo בלבד"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"‏מצב רשת מועדפת: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"‏מצב רשת מועדפת: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"‏מצב רשת מועדפת: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"‏מצב רשת מועדפת: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"מצב רשת מועדפת: גלובלי"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"‏מצב רשת מועדפת: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"‏מצב רשת מועדפת: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"‏מצב רשת מועדפת: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"‏מצב רשת מועדפת: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"‏מצב רשת מועדפת: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"‏מצב רשת מועדפת: LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"‏מצב רשת מועדפת: TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"‏מצב רשת מועדפת: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"‏מצב רשת מועדפת: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"‏מצב רשת מועדפת: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"‏מצב רשת מועדפת: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"‏מצב רשת מועדפת: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"‏מצב רשת מועדפת: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"‏LTE (מומלץ)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"‏4G (מומלץ)"</string>
+    <string name="network_global" msgid="959947774831178632">"כללי"</string>
+    <string name="label_available" msgid="1731547832803057893">"רשתות זמינות"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"מחפש…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"מתבצע רישום ב-<xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"‏כרטיס ה-SIM לא מאפשר חיבור לרשת זו."</string>
+    <string name="connect_later" msgid="978991102125216741">"לא ניתן להתחבר לרשת זו כעת. יש לנסות שוב מאוחר יותר."</string>
+    <string name="registration_done" msgid="4573820010512184521">"רשום ברשת."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"בחירה אוטומטית של הרשת"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"הגדרות ספק"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"הגדרת שירות נתונים"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"חבילת גלישה"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"שימוש בחבילת הגלישה דרך הרשת הסלולרית"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"סוג רשת מועדפת"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"שינוי מצב ההפעלה של הרשת"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"סוג רשת מועדפת"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"ספק"</string>
+    <string name="call_category" msgid="8108654745239563833">"שיחות"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"שיחות וידאו באמצעות הספק הסלולרי"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"בחירת מערכת"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"‏שינוי מצב נדידת CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"בחירת מערכת"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"רשת"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"רשת"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"‏הרשמה ל-CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"‏החלפה בין RUIM/SIM ל-NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"מינוי"</string>
+    <string name="register_automatically" msgid="518185886971595020">"רישום אוטומטי…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"האם לאפשר נדידה?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"למידע נוסף על המחירים, יש לפנות לספק השירות."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"שימוש בחבילת גלישה באפליקציה"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"לא זמין כשהמכשיר מחובר ל-<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"הצג פחות"</string>
 </resources>

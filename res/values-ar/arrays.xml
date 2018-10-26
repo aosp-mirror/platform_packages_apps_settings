@@ -219,7 +219,7 @@
     <item msgid="2681427309183221543">"GID"</item>
   </string-array>
   <string-array name="app_install_location_entries">
-    <item msgid="8151497958991952759">"سعة تخزين الجهاز الداخلية"</item>
+    <item msgid="8151497958991952759">"مساحة تخزين الجهاز الداخلية"</item>
     <item msgid="3738430123799803530">"‏بطاقة SD قابلة للإزالة"</item>
     <item msgid="4498124044785815005">"ترك القرار للنظام"</item>
   </string-array>
@@ -290,8 +290,8 @@
     <item msgid="5895843015407713543">"أجهزة استشعار الجسم"</item>
     <item msgid="1436446526955010826">"قراءة رسائل البث الخلوي"</item>
     <item msgid="884172201575690484">"موقع وهمي"</item>
-    <item msgid="3591971310048485247">"قراءة سعة التخزين"</item>
-    <item msgid="4041187808621866119">"كتابة سعة التخزين"</item>
+    <item msgid="3591971310048485247">"قراءة مساحة التخزين"</item>
+    <item msgid="4041187808621866119">"كتابة مساحة التخزين"</item>
     <item msgid="6628873315024166197">"تشغيل الشاشة"</item>
     <item msgid="3253368931113490863">"الحصول على الحسابات"</item>
     <item msgid="780392378084812901">"التشغيل في الخلفية"</item>
@@ -357,8 +357,8 @@
     <item msgid="7864822459293570891">"أجهزة استشعار الجسم"</item>
     <item msgid="6798698496904810960">"قراءة رسائل البث الخلوي"</item>
     <item msgid="5242052845700875820">"موقع وهمي"</item>
-    <item msgid="1246296877820358565">"قراءة سعة التخزين"</item>
-    <item msgid="2404067308793740341">"كتابة سعة التخزين"</item>
+    <item msgid="1246296877820358565">"قراءة مساحة التخزين"</item>
+    <item msgid="2404067308793740341">"كتابة مساحة التخزين"</item>
     <item msgid="5832543806893763620">"تشغيل الشاشة"</item>
     <item msgid="5258373962467495905">"الحصول على الحسابات"</item>
     <item msgid="334625385979270703">"التشغيل في الخلفية"</item>
@@ -477,6 +477,10 @@
     <item msgid="8745603368609022803">"معاملة الشبكة باعتبارها ذات سعة محدودة"</item>
     <item msgid="2266114985518865625">"معاملة الشبكة باعتبارها ذات سعة غير محدودة"</item>
   </string-array>
+  <string-array name="wifi_privacy_entries">
+    <item msgid="5222330396373765981">"‏الإعداد التلقائي (استخدام عنوان MAC عشوائي)"</item>
+    <item msgid="5398461510512959597">"موثوق به"</item>
+  </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="234221371123852300">"لا"</item>
     <item msgid="3863157480502955888">"نعم"</item>
@@ -490,5 +494,52 @@
     <item msgid="1036676483322832067">"إيقاف"</item>
     <item msgid="2182686878828390312">"تصحيح الأخطاء"</item>
     <item msgid="5286514712714822064">"مطوّل"</item>
+  </string-array>
+  <string-array name="cdma_system_select_choices">
+    <item msgid="8727887686723706826">"الرئيسية فقط"</item>
+    <item msgid="5034813753274486448">"تلقائي"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices">
+    <item msgid="4168919392737496563">"‏GSM/WCDMA المُفضَّل"</item>
+    <item msgid="807926878589867564">"‏نظام GSM فقط"</item>
+    <item msgid="488474605709912156">"‏WCDMA فقط"</item>
+    <item msgid="1912421096218750039">"‏GSM/WCDMA تلقائي"</item>
+    <item msgid="5072198667819683600">"‏CDMA/EvDo تلقائي"</item>
+    <item msgid="370391313511477301">"‏CDMA بدون EvDo"</item>
+    <item msgid="4678789463133969294">"‏EvDo فقط"</item>
+    <item msgid="3960210542349075517">"CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="2961817320209454599">"CDMA + LTE/EvDo"</item>
+    <item msgid="8008611169788556519">"GSM/WCDMA/LTE"</item>
+    <item msgid="4486851520863433847">"عام"</item>
+    <item msgid="8516691658640163073">"LTE"</item>
+    <item msgid="3108828968591899719">"LTE / WCDMA"</item>
+    <item msgid="1879225673847443662">"‏TDSCDMA فقط"</item>
+    <item msgid="8373504428469988469">"TDSCDMA/WCDMA"</item>
+    <item msgid="8097271911945758303">"LTE/TDSCDMA"</item>
+    <item msgid="2272560096982726294">"TDSCDMA/GSM"</item>
+    <item msgid="131738018826229696">"LTE/TDSCDMA/GSM"</item>
+    <item msgid="629422387044789699">"TDSCDMA/GSM/WCDMA"</item>
+    <item msgid="5686260911275077041">"LTE/TDSCDMA/WCDMA"</item>
+    <item msgid="4545655348143499596">"LTE/TDSCDMA/GSM/WCDMA"</item>
+    <item msgid="4107769721462339672">"TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
+    <item msgid="8811683254058088466">"LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
+  </string-array>
+  <string-array name="cdma_subscription_choices">
+    <item msgid="8753271080005095725">"‏بطاقة RUIM/شريحة SIM"</item>
+    <item msgid="2214656470548320124">"NV"</item>
+  </string-array>
+  <string-array name="cdma_subscription_values">
+    <item msgid="3697517500945829780">"0"</item>
+    <item msgid="8113210705878681550">"1"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices_world_mode">
+    <item msgid="1054992858056320116">"عام"</item>
+    <item msgid="817971827645657949">"LTE / CDMA"</item>
+    <item msgid="519208953133334357">"LTE / GSM / UMTS"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_values_world_mode">
+    <item msgid="3904215366284600030">"10"</item>
+    <item msgid="4187053702071521357">"8"</item>
+    <item msgid="5461421967189969022">"9"</item>
   </string-array>
 </resources>

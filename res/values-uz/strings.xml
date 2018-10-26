@@ -892,6 +892,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GGs"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi hotspot uchun kamida bitta chastota tanlang:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP sozlamalari"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Maxfiylik"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Qurilmaning boshqa foydalanuvchilari bilan ulashish"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(o‘zgartirilmagan)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Tanlang"</string>
@@ -916,7 +917,7 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ULANISH"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Bu tarmoqda internet aloqasi yo‘q. Shu tarmoqda qolasizmi?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Bu tarmoq uchun boshqa so‘ralmasin"</string>
-    <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi-Fi aloqasi bor, lekin Internetga ulanmagan"</string>
+    <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi-Fi aloqasi bor, lekin Internetga ulanmagansiz"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Agar Wi-Fi signali yomon bo‘lsa, istalgan vaqtda mobil internetga o‘tishingiz mumkin. Sarflangan trafik uchun haq olinishi mumkin."</string>
     <string name="lost_internet_access_switch" msgid="2262459569601190039">"Mobil internetni yoqish"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"Wi-Fi tarmog‘ida qoling"</string>
@@ -1205,6 +1206,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN-kod o‘zgartirilmadi.\nNoto‘g‘ri PIN-kod terildi shekilli."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM karta PIN kodi o‘zgartirildi"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"SIM karta qulfi holati o‘zgarmadi.\nPIN-kod noto‘g‘ri kiritildi shekilli."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN kod faolsizlantirilmadi."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN kod yoqilmadi."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Bekor qilish"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Bir nechta SIM karta topildi"</string>
@@ -3017,6 +3020,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"tungi mavzu"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"xato"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ekranning avtomatik yonishi, ekran qulfi"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"qulflangan ekrandagi bildirishnoma"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"yuz"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"barmoq izi"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"xira ekran, sensorli ekran, batareya, smart yorqinlik, dinamik yorqinlik"</string>
@@ -3259,7 +3263,7 @@
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Xiralikni kamaytirish (tavsiya etiladi)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Miltillashni kamaytirish"</string>
     <string name="picture_in_picture_title" msgid="5824849294270017113">"Tasvir ustida tasvir"</string>
-    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"O‘rnatilgan ilovalar Tasvir ustida tasvir rejimi bilan mos emas"</string>
+    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Oʻrnatilgan ilovalar Tasvir ustida tasvir rejimi bilan mos emas"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"tasvir ustida tasvir"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Tasvir ustida tasvir"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Tasvir ustida tasvir rejimiga ruxsat berish"</string>
@@ -3497,7 +3501,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Hech qanday ruxsat berilmagan"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Hech qanday ruxsat so‘ralmagan"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Barcha ilovalar"</string>
-    <string name="filter_enabled_apps" msgid="5395727306799456250">"O‘rnatilgan ilovalar"</string>
+    <string name="filter_enabled_apps" msgid="5395727306799456250">"Oʻrnatilgan ilovalar"</string>
     <string name="filter_instant_apps" msgid="574277769963965565">"Darhol ochiladigan ilovalar"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Shaxsiy"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Ishga oid"</string>
@@ -4001,7 +4005,7 @@
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Havolalarni ilovalarda (hatto ular o‘rnatilmagan bo‘lsa ham) ochish"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Darhol ochiladigan ilovalar"</string>
     <string name="instant_apps_settings" msgid="8827777916518348213">"Darhol ochiladigan ilovalar sozlamalari"</string>
-    <string name="domain_url_section_title" msgid="7046835219056428883">"O‘rnatilgan ilovalar"</string>
+    <string name="domain_url_section_title" msgid="7046835219056428883">"Oʻrnatilgan ilovalar"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Xotirangiz hozirda xotira boshqaruvi tomonidan boshqarilmoqda"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> – hisoblar"</string>
     <string name="configure_section_header" msgid="7391183586410814450">"Sozlash"</string>
@@ -4027,7 +4031,7 @@
     <string name="enterprise_privacy_bug_reports" msgid="843225086779037863">"Eng oxirgi xatoliklar hisoboti"</string>
     <string name="enterprise_privacy_security_logs" msgid="5377362481617301074">"Eng oxirgi xavfsizlik jurnali"</string>
     <string name="enterprise_privacy_none" msgid="7706621148858381189">"Hech qanday"</string>
-    <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"O‘rnatilgan ilovalar"</string>
+    <string name="enterprise_privacy_enterprise_installed_packages" msgid="6353757812144878828">"Oʻrnatilgan ilovalar"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7433213592572082606">"Ilovalar soni hisoblanmoqda. Play Market orqali o‘rnatilmagan ilovalar hisoblanmasligi mumkin."</string>
     <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="3005116533873542976">
       <item quantity="other">Kamida <xliff:g id="COUNT_1">%d</xliff:g> ta ilova</item>
@@ -4170,10 +4174,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Tarmoq tafsilotlari"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Telefoningizdagi barcha ilovalarga qurilma nomi ko‘rinadi. Qurilmalarga Bluetooth orqali ulanganingizda yoki Wi-Fi hotspot sozlaganingizda boshqa foydalanuvchilarni ularni ko‘rishi mumkin."</string>
     <string name="devices_title" msgid="7701726109334110391">"Qurilmalar"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Yuqori chastota paneli"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Virtual yuqori chastota panelini yoqish"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Barcha sozlamalar"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Sozlamalaringiz"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Takliflar"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS axboroti"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS axboroti"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Tarmoqni tanlash"</string>
@@ -4185,4 +4187,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"Hech qanday tarmoq topilmadi. Qaytadan urining."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(taqiqlangan)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"SIM karta solinmagan"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Kengaytirilgan chaqiruv"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Tanlangan tarmoq rejimi: WCDMA tanlangan"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Tanlangan tarmoq rejimi: faqat GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Tanlangan tarmoq rejimi: faqat WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Tanlangan tarmoq rejimi: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Tanlangan tarmoq rejimi: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Tanlangan tarmoq rejimi: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Tanlangan tarmoq rejimi: faqat CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Tanlangan tarmoq rejimi: faqat EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Tanlangan tarmoq rejimi: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Tanlangan tarmoq rejimi: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Tanlangan tarmoq rejimi: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Tanlangan tarmoq rejimi: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Tanlangan tarmoq rejimi: Global"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Tanlangan tarmoq rejimi: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Ma’qul tarmoq rejimi: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Ma’qul tarmoq rejimi: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Tanlangan tarmoq rejimi: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Tavsiya etilgan tarmoq rejimi: TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Tavsiya etilgan tarmoq rejimi: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Tavsiya etilgan tarmoq rejimi: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Tavsiya etilgan tarmoq rejimi: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Tavsiya etilgan tarmoq rejimi: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Tavsiya etilgan tarmoq rejimi: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Tavsiya etilgan tarmoq rejimi: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Tavsiya etilgan tarmoq rejimi: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Tavsiya etilgan tarmoq rejimi: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (tavsiya etiladi)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (tavsiya etiladi)"</string>
+    <string name="network_global" msgid="959947774831178632">"Global"</string>
+    <string name="label_available" msgid="1731547832803057893">"Mavjud tarmoqlar"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Qidirilmoqda…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"<xliff:g id="NETWORK">%s</xliff:g> tarmogʻiga qayd qilinmoqda…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"SIM kartangiz ushbu tarmoqqa ulanishga ruxsat bermaydi."</string>
+    <string name="connect_later" msgid="978991102125216741">"Hozirda bu tarmoqqa ulanish imkonsiz. Keyinroq qaytadan urining."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Tarmoqda qayd qilingan."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Tarmoqni avtomatik tanlash"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Operator sozlamalari"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Internet xizmatini sozlash"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Mobil internet"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Mobil tarmoq orqali internetdan foydalanish"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Tarmoq turi"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Tarmoq rejimini almashtiring"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Tarmoq turi"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Aloqa operatori"</string>
+    <string name="call_category" msgid="8108654745239563833">"Chaqiruvlar"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Operator orqali videomuloqot"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Tizimni tanlang"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"CDMA tarmoq rouming rejimini almashtirish"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Tizimni tanlang"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Tarmoq"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Tarmoq"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA uchun obuna"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"RUIM/SIM va NV orasida almashish"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"obuna"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Avtomatik registratsiya…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Internet-roumingga ruxsat berilsinmi?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Paketlar narxlari haqidagi ma’lumotni internet provayderingizdan olishingiz mumkin."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Ilova sarflagan trafik"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Notanish tarmoq rejimi: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Inkor qilish"</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g> bilan ishlamaydi"</string>
+    <string name="see_more" msgid="5953815986207345223">"Yana"</string>
+    <string name="see_less" msgid="1250265310929558370">"Kamroq"</string>
 </resources>

@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 ГХц"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Изберете поне една честота за точката за достъп до Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Настройки за IP"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"Споделяне с другите потребители на устройството"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(непроменени)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Моля, изберете"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"ПИН кодът не може да се промени.\nВъзможен неправилен ПИН."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"Успешна промяна на PIN за SIM карта"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Не може да се промени състоянието на заключване на SIM картата.\nВъзможен неправилен ПИН."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"ПИН кодът не може да бъде деактивиран."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"ПИН кодът не може да бъде активиран."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Отказ"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Открити са няколко SIM карти"</string>
@@ -3001,6 +3005,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"тъмна тема"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"програмна грешка"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Дисплей, открояващ важни неща, дисплей на заключения екран"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"известие на заключения екран"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"лице"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"отпечатък"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"затъмняване на екрана, сензорен екран, батерия, интелигентна яркост, динамична яркост"</string>
@@ -4154,10 +4159,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Подробности за мрежата"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Името на устройството ви е видимо за приложенията на телефона ви. То може да се вижда и от други хора, когато се свържете с устройства с Bluetooth или настроите точка за достъп до Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Устройства"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Панел за висока честота"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Активиране на виртуалния панел за висока честота"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Всички настройки"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Вашите настройки"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Предложения"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Данни чрез CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Данни чрез CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Избиране на мрежа"</string>
@@ -4169,4 +4172,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"Не можаха да бъдат намерени мрежи. Опитайте отново."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(забранено)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Няма SIM карта"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Разширени обаждания"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Предпочитан режим на мрежата: Предпочита се WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Предпочитан режим на мрежата: Само GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Предпочитан режим на мрежата: Само WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Предпочитан режим на мрежата: GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Предпочитан режим на мрежата: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Предпочитан режим на мрежата: CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Предпочитан режим на мрежата: Само CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Предпочитан режим на мрежата: Само EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Предпочитан режим на мрежата: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Предпочитан режим на мрежата: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Предпочитан режим на мрежата: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Предпочитан режим на мрежата: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Предпочитан режим на мрежата: Глобална мрежа"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Предпочитан режим на мрежата: LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Предпочитан мрежов режим: LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Предпочитан режим на мрежата: LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Предпочитан режим на мрежата: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Предпочитан режим на мрежата: TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Предпочитан режим на мрежата: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Предпочитан режим на мрежата: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Предпочитан режим на мрежата: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Предпочитан режим на мрежата: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Предпочитан режим на мрежата: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Предпочитан режим на мрежата: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Предпочитан режим на мрежата: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Предпочитан режим на мрежата: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (препоръчително)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (препоръчително)"</string>
+    <string name="network_global" msgid="959947774831178632">"Глобална мрежа"</string>
+    <string name="label_available" msgid="1731547832803057893">"Налични мрежи"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Търси се…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"Извършва се регистрация в(ъв) <xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"SIM картата ви не позволява връзка с тази мрежа."</string>
+    <string name="connect_later" msgid="978991102125216741">"В момента не може да се осъществи връзка с тази мрежа. Опитайте отново по-късно."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Извършена е регистрация в мрежа."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Автоматично избиране на мрежа"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Настройки за оператора"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Настройка на услугата за данни"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Мобилни данни"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Достъп до данните през мобилната мрежа"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Предпочитан тип мрежа"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Промяна на операционния режим на мрежата"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Предпочитан тип мрежа"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Оператор"</string>
+    <string name="call_category" msgid="8108654745239563833">"Обаждания"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Видеообаждания от оператора"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Избор на система"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Промяна на режима на роуминг на CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Избор на система"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Мрежа"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Мрежа"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"Абонамент за CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Промяна между RUIM/SIM и NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"абонамент"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Регистрира се автоматично..."</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Да се разреши ли роуминг на данни?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"За цени се обърнете към оператора си."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Пренос на данни от приложенията"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Не е налице, когато е установена връзка с(ъс) <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"Преглед на по-малко"</string>
 </resources>
