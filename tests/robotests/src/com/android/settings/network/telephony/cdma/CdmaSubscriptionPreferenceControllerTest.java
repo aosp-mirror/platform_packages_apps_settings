@@ -21,10 +21,13 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.PersistableBundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -53,9 +56,12 @@ public class CdmaSubscriptionPreferenceControllerTest {
     private TelephonyManager mInvalidTelephonyManager;
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private CarrierConfigManager mCarrierConfigManager;
 
     private CdmaSubscriptionPreferenceController mController;
     private ListPreference mPreference;
+    private PersistableBundle mCarrierConfig;
     private Context mContext;
 
     @Before
@@ -68,6 +74,10 @@ public class CdmaSubscriptionPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        doReturn(mCarrierConfigManager).when(mContext).getSystemService(CarrierConfigManager.class);
+
+        mCarrierConfig = new PersistableBundle();
+        when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
 
         mPreference = new ListPreference(mContext);
         mController = new CdmaSubscriptionPreferenceController(mContext, "mobile_data");
