@@ -16,36 +16,29 @@
 
 package com.android.settings.notification;
 
-import android.app.NotificationManager;
 import android.content.Context;
-import android.provider.Settings;
-import android.text.TextUtils;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeCallsPreferenceController extends AbstractZenModePreferenceController implements
-        Preference.OnPreferenceChangeListener {
+import androidx.preference.Preference;
 
-    protected static final String KEY = "zen_mode_calls";
-    private final ZenModeBackend mBackend;
-    private ListPreference mPreference;
-    private final String[] mListValues;
+public class ZenModeCallsPreferenceController extends
+        AbstractZenModePreferenceController implements PreferenceControllerMixin {
 
-    public ZenModeCallsPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, KEY, lifecycle);
-        mBackend = ZenModeBackend.getInstance(context);
-        mListValues = context.getResources().getStringArray(R.array.zen_mode_contacts_values);
+    private final String KEY_BEHAVIOR_SETTINGS;
+    private final ZenModeSettings.SummaryBuilder mSummaryBuilder;
+
+    public ZenModeCallsPreferenceController(Context context, Lifecycle lifecycle,
+            String key) {
+        super(context, key, lifecycle);
+        KEY_BEHAVIOR_SETTINGS = key;
+        mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY;
+        return KEY_BEHAVIOR_SETTINGS;
     }
 
     @Override
@@ -54,54 +47,9 @@ public class ZenModeCallsPreferenceController extends AbstractZenModePreferenceC
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = (ListPreference) screen.findPreference(KEY);
-    }
-
-    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        updateFromContactsValue(preference);
-    }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object selectedContactsFrom) {
-        mBackend.saveSenders(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS,
-                ZenModeBackend.getSettingFromPrefKey(selectedContactsFrom.toString()));
-        updateFromContactsValue(preference);
-        return true;
-    }
-
-    private void updateFromContactsValue(Preference preference) {
-        mPreference = (ListPreference) preference;
-        switch (getZenMode()) {
-            case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
-            case Settings.Global.ZEN_MODE_ALARMS:
-                mPreference.setEnabled(false);
-                mPreference.setValue(ZenModeBackend.ZEN_MODE_FROM_NONE);
-                mPreference.setSummary(mBackend.getContactsSummary(ZenModeBackend.SOURCE_NONE));
-                break;
-            default:
-                preference.setEnabled(true);
-                preference.setSummary(mBackend.getContactsSummary(
-                        NotificationManager.Policy.PRIORITY_CATEGORY_CALLS));
-
-                final String currentVal = ZenModeBackend.getKeyFromSetting(
-                        mBackend.getPriorityCallSenders());
-                mPreference.setValue(mListValues[getIndexOfSendersValue(currentVal)]);
-        }
-    }
-
-    @VisibleForTesting
-    protected int getIndexOfSendersValue(String currentVal) {
-        int index = 3; // defaults to "none" based on R.array.zen_mode_contacts_values
-        for (int i = 0; i < mListValues.length; i++) {
-            if (TextUtils.equals(currentVal, mListValues[i])) {
-                return i;
-            }
-        }
-
-        return index;
+        preference.setSummary(mSummaryBuilder.getCallsSettingSummary(getPolicy()));
     }
 }

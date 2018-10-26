@@ -43,7 +43,7 @@ public class ZenModeCallsSettings extends ZenModeSettingsBase implements Indexab
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeCallsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModePriorityCallsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
                 PRIORITY_CATEGORY_CALLS, "zen_mode_starred_contacts_callers"));
         controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,

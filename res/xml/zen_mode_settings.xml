@@ -25,62 +25,59 @@
     <PreferenceCategory
         android:key="zen_mode_settings_category_behavior"
         android:title="@string/zen_category_behavior">
-        <!-- sound vibration -->
+        <!-- Calls -->
+        <Preference
+            android:key="zen_mode_behavior_calls"
+            android:title="@string/zen_mode_calls_title"
+            android:fragment="com.android.settings.notification.ZenModeCallsSettings" />
+
+        <!-- Messages -->
+        <Preference
+            android:key="zen_mode_behavior_messages"
+            android:title="@string/zen_mode_messages_title"
+            android:fragment="com.android.settings.notification.ZenModeMessagesSettings" />
+
+        <!-- Alarms -->
+        <SwitchPreference
+            android:key="zen_mode_behavior_alarms"
+            android:title="@string/zen_mode_alarms"/>
+
+        <!-- All sounds -->
         <Preference
             android:key="zen_sound_vibration_settings"
             android:title="@string/zen_sound_title"
-            android:fragment="com.android.settings.notification.ZenModeSoundVibrationSettings"/>
-
-        <!-- What to block (effects) -->
-        <Preference
-            android:key="zen_mode_block_effects_settings"
-            android:title="@string/zen_mode_restrict_notifications_title"
-            android:fragment="com.android.settings.notification.ZenModeRestrictNotificationsSettings" />
+            android:fragment="com.android.settings.notification.ZenModeSoundVibrationSettings"
+            android:icon="@drawable/ic_chevron_right_24dp"/>
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="zen_mode_settings_category_exceptions"
-        android:title="@string/zen_category_exceptions">
-        <Preference
-            android:key="zen_mode_calls_settings"
-            android:title="@string/zen_mode_calls"
-            android:fragment="com.android.settings.notification.ZenModeCallsSettings" />
-        <Preference
-            android:key="zen_mode_msg_event_reminder_settings"
-            android:title="@string/zen_msg_event_reminder_title"
-            android:fragment="com.android.settings.notification.ZenModeMsgEventReminderSettings" />
+    <!-- What to block (effects) -->
+    <Preference
+        android:key="zen_mode_block_effects_settings"
+        android:title="@string/zen_mode_restrict_notifications_title"
+        android:fragment="com.android.settings.notification.ZenModeRestrictNotificationsSettings"
+        settings:allowDividerAbove="true"/>
 
-    </PreferenceCategory>
+    <!-- DND duration settings -->
+    <com.android.settings.notification.ZenDurationDialogPreference
+        android:key="zen_mode_duration_settings"
+        android:title="@string/zen_mode_duration_settings_title"
+        android:widgetLayout="@null"/>
 
-    <PreferenceCategory
-        android:key="zen_mode_settings_category_schedule"
-        android:title="@string/zen_category_schedule">
-        <!-- DND duration settings -->
-        <com.android.settings.notification.ZenDurationDialogPreference
-            android:key="zen_mode_duration_settings"
-            android:title="@string/zen_mode_duration_settings_title"
-            android:widgetLayout="@null"/>
-
-        <!-- Automatic rules -->
-        <Preference
-            android:key="zen_mode_automation_settings"
-            android:title="@string/zen_mode_automation_settings_title"
-            android:fragment="com.android.settings.notification.ZenModeAutomationSettings" />
-    </PreferenceCategory>
+    <!-- Automatic rules -->
+    <Preference
+        android:key="zen_mode_automation_settings"
+        android:title="@string/zen_mode_automation_settings_title"
+        android:fragment="com.android.settings.notification.ZenModeAutomationSettings"/>
 
     <!-- Turn on DND button -->
-    <!-- Layout preference doesn't obey allowDividerAbove, so put it in a PreferenceCategory -->
-    <PreferenceCategory
-        android:key="zen_mode_settings_button_category">
-        <com.android.settings.applications.LayoutPreference
-            android:key="zen_mode_settings_button_container"
-            android:selectable="false"
-            android:layout="@layout/zen_mode_settings_button" />
-    </PreferenceCategory>
+    <com.android.settings.applications.LayoutPreference
+        android:key="zen_mode_settings_button_container"
+        android:selectable="false"
+        android:layout="@layout/zen_mode_settings_button"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="true"/>
 
-    <PreferenceCategory
-        android:key="zen_mode_footer_container">
-        <com.android.settingslib.widget.FooterPreference />
-    </PreferenceCategory>
+    <!-- Footer that shows if user is put into alarms only or total silence mode by an app -->
+    <com.android.settingslib.widget.FooterPreference/>
 
 </PreferenceScreen>

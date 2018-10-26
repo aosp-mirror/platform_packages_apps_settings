@@ -82,9 +82,12 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, FragmentManager fragmentManager) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeBehaviorMsgEventReminderPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeBehaviorSoundPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeBehaviorCallsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeCallsPreferenceController(context, lifecycle,
+                "zen_mode_behavior_calls"));
+        controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
+                "zen_mode_behavior_messages"));
+        controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle,
+                "zen_mode_behavior_alarms"));
         controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeDurationPreferenceController(context, lifecycle));
         controllers.add(new ZenModeAutomationPreferenceController(context));
