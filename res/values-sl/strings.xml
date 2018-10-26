@@ -922,6 +922,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Izberite vsaj en pas za dostopno točko Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Nastavitve naslova IP"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Zasebnost"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Skupna raba z drugimi uporabniki naprave"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nespremenjeno)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Izberite"</string>
@@ -1237,6 +1238,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Kode PIN ni mogoče spremeniti.\nKoda PIN je morda napačna."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"Sprememba kode PIN za kartico SIM je uspela"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Zaklepanja kartice SIM ni mogoče spremeniti.\nMorda je koda PIN napačna."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Kode PIN ni mogoče onemogočiti."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Kode PIN ni mogoče omogočiti."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"V redu"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Prekliči"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Najdenih je bilo več kartic SIM"</string>
@@ -3077,6 +3080,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"temna tema"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"napaka"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"prikaz na podlagi okolja, prikaz na zaklenjenem zaslonu"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"obvestilo na zaklenjenem zaslonu"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"obraz"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"prstni odtis"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"zatemnitev zaslona, zaslon na dotik, akumulator, pametna svetlost, dinamična svetlost"</string>
@@ -4081,7 +4085,7 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Obrat fotoaparata"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Hitrejši vklop načina za sebke"</string>
-    <string name="swipe_up_to_switch_apps_title" msgid="2513907834903543667">"Povlecite navzgor po gumbu za začetni zaslon"</string>
+    <string name="swipe_up_to_switch_apps_title" msgid="2513907834903543667">"Vlečenje navzgor po gumbu za začetni zaslon"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Če želite preklopiti med aplikacijami, povlecite navzgor po gumbu za začetni zaslon. Znova povlecite navzgor, da prikažete vse aplikacije. To deluje na katerem koli zaslonu. Gumb »Pregled« ne bo več prikazan v spodnjem desnem delu zaslona."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Preskus novega gumba za začetni zaslon"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Vklop nove poteze za preklop aplikacij"</string>
@@ -4300,10 +4304,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"O omrežju"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Ime naprave je vidno aplikacijam v telefonu. Ko vzpostavite povezavo z napravami Bluetooth ali nastavite dostopno točko Wi-Fi, ga bodo morda videle tudi druge osebe."</string>
     <string name="devices_title" msgid="7701726109334110391">"Naprave"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Plošča za hitro osvežev."</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Omogoči navidezno ploščo za hitro osveževanje"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Vse nastavitve"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Vaše nastavitve"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Predlogi"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Podatki CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Podatki CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Izbira omrežja"</string>
@@ -4315,4 +4317,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"Omrežij ni bilo mogoče najti. Poskusite znova."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(prepovedano)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Ni kartice SIM"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Napredno klicanje"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Prednostni način omrežja: prednostno WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Prednostni način omrežja: samo GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Prednostni način omrežja: samo WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Prednostni način omrežja: GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Želeni način omrežja: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Želeni način omrežja: CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Prednostni način omrežja: samo CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Prednostni način omrežja: samo EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Prednostni način omrežja: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Prednostni način omrežja: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Prednostni način omrežja: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Prednostni način omrežja: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Prednostni način omrežja: globalno"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Prednostni način omrežja: LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Prednostni omrežni način: LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Prednostni način omrežja: LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Prednostni način omrežja: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Prednostni način omrežja: TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Prednostni način omrežja: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Prednostni način omrežja: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Prednostni način omrežja: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Prednostni način omrežja: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Prednostni način omrežja: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Prednostni način omrežja: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Prednostni način omrežja: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Prednostni način omrežja: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (priporočeno)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (priporočeno)"</string>
+    <string name="network_global" msgid="959947774831178632">"Globalno"</string>
+    <string name="label_available" msgid="1731547832803057893">"Razpoložljiva omrežja"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Iskanje …"</string>
+    <string name="register_on_network" msgid="766516026652295941">"Registriranje v omrežje <xliff:g id="NETWORK">%s</xliff:g>"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"Kartica SIM ne dovoljuje povezave s tem omrežjem."</string>
+    <string name="connect_later" msgid="978991102125216741">"S tem omrežjem trenutno ni mogoče vzpostaviti povezave. Poskusite znova pozneje."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Registrirano v omrežju."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Samodejno izberi omrežje"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Nastavitve operaterja"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Nastavitev podatkovne storitve"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Prenos podatkov v mobilnem omrežju"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Dostop do podatkov prek mobilnega omrežja"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Prednostna vrsta omrežja"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Sprememba načina delovanja omrežja"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Prednostna vrsta omrežja"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Operater"</string>
+    <string name="call_category" msgid="8108654745239563833">"Klicanje"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Videoklicanje prek operaterja"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Sistemska izbira"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Spremeni način gostovanja CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Sistemska izbira"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Omrežje"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Omrežje"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"Naročnina CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Preklopi med RUIM/SIM in NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"naročnina"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Samodejna registracija …"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Želite dovoliti podatkovno gostovanje?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Preverite cene pri operaterju omrežja."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Prenesena količina podatkov aplikacije"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Neveljaven način omrežja: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Prezri."</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Ni na voljo ob vzpostavljeni povezavi z operaterjem <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <string name="see_more" msgid="5953815986207345223">"Pokaži več"</string>
+    <string name="see_less" msgid="1250265310929558370">"Pokaži manj"</string>
 </resources>

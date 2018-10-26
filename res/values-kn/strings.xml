@@ -892,6 +892,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"ವೈ-ಫೈ ಹಾಟ್‌ಸ್ಪಾಟ್‌ಗಾಗಿ ಕನಿಷ್ಠ ಒಂದು ಬ್ಯಾಂಡ್ ಆಯ್ಕೆಮಾಡಿ:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"ಗೌಪ್ಯತೆ"</string>
     <string name="wifi_shared" msgid="844142443226926070">"ಇತರ ಸಾಧನ ಬಳಕೆದಾರರ ಜೊತೆಗೆ ಹಂಚಿಕೊಳ್ಳಿ"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ಬದಲಾವಣೆಯಾಗದ)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"ದಯವಿಟ್ಟು ಆಯ್ಕೆಮಾಡಿ"</string>
@@ -1205,6 +1206,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"ಪಿನ್‌ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.\nಬಹುಶಃ ತಪ್ಪಾದ ಪಿನ್‌."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"ಸಿಮ್‌ ಪಿನ್‌ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಬದಲಾಯಿಸಲಾಗಿದೆ"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"ಸಿಮ್‌ ಕಾರ್ಡ್ ಲಾಕ್ ಸ್ಥಿತಿಯನ್ನು ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.\nಬಹುಶಃ ತಪ್ಪಾದ ಪಿನ್‌."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"ಪಿನ್‌ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"ಪಿನ್‌ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"ಸರಿ"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"ರದ್ದುಮಾಡಿ"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"ಬಹು ಸಿಮ್‌ ಗಳು ಕಂಡುಬಂದಿವೆ"</string>
@@ -3001,6 +3004,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"ಗಾಢವಾದ ಥೀಮ್"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"ದೋಷ"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"ಆಂಬಿಯೆಂಟ್ ಡಿಸ್‌ಪ್ಲೇ, ಲಾಕ್ ಸ್ಕ್ರೀನ್ ಡಿಸ್‌ಪ್ಲೇ"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"ಲಾಕ್ ಸ್ಕ್ರೀನ್ ಅಧಿಸೂಚನೆ"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"ಮುಖ"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"ಫಿಂಗರ್‌ ಪ್ರಿಂಟ್"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"ಮಂದ ಪರದೆ, ಟಚ್‌ಸ್ಕ್ರೀನ್, ಬ್ಯಾಟರಿ, ಸ್ಮಾರ್ಟ್ ಪ್ರಖರತೆ, ಡೈನಾಮಿಕ್ ಪ್ರಖರತೆ"</string>
@@ -4154,10 +4158,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ನೆಟ್‌ವರ್ಕ್‌ ವಿವರಗಳು"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"ನಿಮ್ಮ ಸಾಧನದ ಹೆಸರು ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿರುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಗೋಚರಿಸುತ್ತದೆ. ನೀವು ಬ್ಲೂಟೂತ್ ಸಾಧನಗಳನ್ನು ಸಂಪರ್ಕಿಸಿದಾಗ ಅಥವಾ ವೈ-ಫೈ ಹಾಟ್‌ಸ್ಪಾಟ್ ಅನ್ನು ಹೊಂದಿಸಿದಾಗ ಇತರ ಜನರು ಸಹ ಅದನ್ನು ನೋಡಬಹುದು."</string>
     <string name="devices_title" msgid="7701726109334110391">"ಸಾಧನಗಳು"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"ಅಧಿಕ ಆವರ್ತನ ಫಲಕ"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"ವರ್ಚುವಲ್ ಅಧಿಕ ಆವರ್ತನ ಫಲಕವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"ಎಲ್ಲಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"ನಿಮ್ಮ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"ಸಲಹೆಗಳು"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS ಡೇಟಾ"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS ಡೇಟಾ"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"ನೆಟ್‌ವರ್ಕ್ ಆಯ್ಕೆಮಾಡಿ"</string>
@@ -4169,4 +4171,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"ನೆಟ್‌ವರ್ಕ್‌ಗಳನ್ನು ಹುಡುಕಲಾಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(ನಿಷೇಧಿತ)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"ಯಾವುದೇ ಸಿಮ್ ಕಾರ್ಡ್ ಇಲ್ಲ"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"ಸುಧಾರಿತ ಕರೆ ಮಾಡುವಿಕೆ"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: WCDMA ಗೆ ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಲಾಗಿದೆ"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: GSM ಮಾತ್ರ"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: WCDMA ಮಾತ್ರ"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್ ಮೋಡ್‌: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: CDMA ಮಾತ್ರ"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: EvDo ಮಾತ್ರ"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: ಜಾಗತಿಕ"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್ ಮೋಡ್: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌‌: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ)"</string>
+    <string name="network_global" msgid="959947774831178632">"ಜಾಗತಿಕ"</string>
+    <string name="label_available" msgid="1731547832803057893">"ಲಭ್ಯವಿರುವ ನೆಟ್‌ವರ್ಕ್‌ಗಳು"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"ಹುಡುಕಲಾಗುತ್ತಿದೆ..."</string>
+    <string name="register_on_network" msgid="766516026652295941">"<xliff:g id="NETWORK">%s</xliff:g> ನಲ್ಲಿ ನೋಂದಾಯಿಸಲಾಗುತ್ತಿದೆ…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"ನಿಮ್ಮ ಸಿಮ್‌ ಕಾರ್ಡ್‌ ಈ ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಸಂಪರ್ಕವನ್ನು ಅನುಮತಿಸುವುದಿಲ್ಲ."</string>
+    <string name="connect_later" msgid="978991102125216741">"ಈಗ ಈ ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."</string>
+    <string name="registration_done" msgid="4573820010512184521">"ನೆಟ್‌ವರ್ಕ್‌ನಲ್ಲಿ ನೋಂದಾಯಿಸಲಾಗಿದೆ."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"ನೆಟ್‌ವರ್ಕ್‌ ಅನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆಯ್ಕೆಮಾಡಿ"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"ಕ್ಯಾರಿಯರ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"ಡೇಟಾ ಸೇವೆಯನ್ನು ಸೆಟಪ್ ಮಾಡಿ"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"ಮೊಬೈಲ್ ಡೇಟಾ"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್‌ ಬಳಸಿ ಡೇಟಾ ಪ್ರವೇಶಿಸಿ"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಪ್ರಕಾರ"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"ನೆಟ್‌ವರ್ಕ್‌ ಕಾರ್ಯಾಚರಣೆ ಮೋಡ್‌ ಬದಲಾಯಿಸಿ"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"ಪ್ರಾಶಸ್ತ್ಯ ನೀಡಿದ ನೆಟ್‌ವರ್ಕ್‌ ಪ್ರಕಾರ"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"ಕ್ಯಾರಿಯರ್"</string>
+    <string name="call_category" msgid="8108654745239563833">"ಕರೆಮಾಡಲಾಗುತ್ತಿದೆ"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"ವಾಹಕ ವೀಡಿಯೊ ಕರೆ ಮಾಡುವಿಕೆ"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"ಸಿಸ್ಟಂ ಆಯ್ಕೆ"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"CDMA ರೋಮಿಂಗ್ ಮೋಡ್ ಬದಲಾಯಿಸಿ"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"ಸಿಸ್ಟಂ ಆಯ್ಕೆ"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"ನೆಟ್‌ವರ್ಕ್"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"ನೆಟ್‌ವರ್ಕ್"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA ಸಬ್‌ಸ್ಕ್ರಿಪ್ಶನ್"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"RUIM/ಸಿಮ್‌ ಮತ್ತು NV ನಡುವೆ ಬದಲಾಯಿಸಿ"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"ಸಬ್‌ಸ್ಕ್ರಿಪ್ಶನ್"</string>
+    <string name="register_automatically" msgid="518185886971595020">"ಸ್ವಯಂಚಾಲಿತ ನೋಂದಣಿ…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"ಡೇಟಾ ರೋಮಿಂಗ್ ಅನುಮತಿಸುವುದೇ?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"ಬೆಲೆ ನಿಗದಿಗಾಗಿ ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್ ಪೂರೈಕೆದಾರರೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"ಆ್ಯಪ್ ಡೇಟಾ ಬಳಕೆ"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"ಅಮಾನ್ಯ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. ನಿರ್ಲಕ್ಷಿಸಿ."</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g> ಗೆ ಸಂಪರ್ಕಿಸಿದಾಗ ಲಭ್ಯವಿರುವುದಿಲ್ಲ"</string>
+    <string name="see_more" msgid="5953815986207345223">"ಇನ್ನಷ್ಟು ನೋಡಿ"</string>
+    <string name="see_less" msgid="1250265310929558370">"ಕಡಿಮೆ ನೋಡಿ"</string>
 </resources>

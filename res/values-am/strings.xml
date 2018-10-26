@@ -892,6 +892,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 ጊኸ"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"ለWi-Fi መገናኛ ነጥብ ቢያንስ አንድ ሞገድ ይምረጡ፦"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP ቅንብሮች"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"ግላዊነት"</string>
     <string name="wifi_shared" msgid="844142443226926070">"ለሌሎች የመሣሪያ ተጠቃሚዎች አጋራ"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ያልተለወጠ)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"እባክዎ ይምረጡ"</string>
@@ -1205,6 +1206,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"ፒን መለወጥ አይቻልም::\n ምናልባት ልክ ያልኾነ ፒን ሊሆን ይችላል::"</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM ፒን  በተሳካ ተለውጧል"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"የሲም ካርድን ቆልፍ ሁኔታ ለመለወጥ አይቻልም። \n የተሳሳተ ፒን ሊሆን ይችላል።"</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"ፒንን ማሰናከል አልተቻለም።"</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"ፒንን ማንቃት አልተቻለም።"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"እሺ"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"ይቅር"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"በርካታ ሲሞች ተገኝተዋል"</string>
@@ -3001,6 +3004,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"ጨለማ ገጽታ"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"ሳንካ"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"ድባባዊ ማሳያ፣ የማያ ገጽ ቁልፍ ማሳያ"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"የማያ ገጽ ቁልፍ ማሳወቂያ"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"መልክ"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"የጣት አሻራ"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"የደበዘዘ ማያ ገጽ፣ ማያንካ፣ ባትሪ፣ ዘመናዊ ብሩህነት፣ ተለዋዋጭ ብሩህነት"</string>
@@ -4154,10 +4158,9 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"የአውታረ መረብ ዝርዝሮች"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"የእርስዎ መሣሪያ በእርስዎ ስልክ ላይ ላሉ መተግበሪያዎች የሚታይ ነው። ወድ ብሉቱዝ መሣሪያዎች ሲያገኙ ወይም የWi-Fi መገናኛ ነጥብን ሲያቀናብሩ በተጨማሪ በሌሎች ሰዎች የሚታይ ይሆናል።"</string>
     <string name="devices_title" msgid="7701726109334110391">"መሣሪያዎች"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"ከፍተኛ ድግምግሞሽ ፓነል"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"ምናባዊ የፈጣን ድግግሞሽ ፓነልን አንቃ"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"ሁሉም ቅንብሮች"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"የእርስዎ ቅንብሮች"</string>
+    <!-- no translation found for homepage_personal_settings (1570415428680432319) -->
+    <skip />
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS ውሂብ"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS ውሂብ"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"አውታረ መረብ ይምረጡ"</string>
@@ -4169,4 +4172,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"አውታረ መረቦችን ማግኘት አልተቻለም። እንደገና ይሞክሩ።"</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(የተከለከለ)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"ምንም ሲም ካርድ የለም"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"የላቀ ጥሪ ማድረግ"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"ተመራጭ የአውታረ መረብ፦ WCDMA ሁነታ ተመራጭ"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"ተመራጭ የአውታረ መረብ፦ GSM ብቻ"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"ተመራጭ የአውታረ መረብ፦ WCDMA ብቻ"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"ተመራጭ የአውታረ መረብ ሁነታ፦ GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"ተመራጭ የአውታረ መረብ፦ CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"ተመራጭ የአውታረ መረብ፦ CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"ተመራጭ የአውታረ መረብ፦ CDMA ብቻ"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"ተመራጭ የአውታረ መረብ ሁነታ፦ EvDo ብቻ"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"ተመራጭ የአውታረ መረብ ሁነታ፦ CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"ተመራጭ የአውታረ መረብ ሁነታ፦ LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"ተመራጭ የአውታረ መረብ ሁነታ፦ GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"ተመራጭ የአውታረ መረብ ሁነታ፦ CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"ተመራጭ የአውታረ መረብ ሁነታ፦ አለምአቀፍ"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"ተመራጭ የአውታረ መረብ ሁነታ፦ LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"ተመራጭ የአውታረ መረብ ሁነታ፦ LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"ተመራጭ የአውታረ መረብ ሁነታ፦ LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"የተመረጠው የአውታረ መረብ ሁነታ፦ TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"የተመረጠው የአውታረ መረብ ሁነታ፦ TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"የተመረጠው የአውታረ መረብ ሁነታ፦ LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"የተመረጠው የአውታረ መረብ ሁነታ፦ TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"የተመረጠው የአውታረ መረብ ሁነታ፦ LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"የተመረጠው የአውታረ መረብ ሁነታ፦ TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"የተመረጠው የአውታረ መረብ ሁነታ፦ LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"የተመረጠው የአውታረ መረብ ሁነታ፦ LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"የተመረጠው የአውታረ መረብ ሁነታ፦ CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"የተመረጠው የአውታረ መረብ ሁነታ፦ LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (የሚመከር)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4ጂ (የሚመከር)"</string>
+    <string name="network_global" msgid="959947774831178632">"ሁለንተናዊ"</string>
+    <string name="label_available" msgid="1731547832803057893">"የሚገኙ አውታረ መረቦች"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"በመፈለግ ላይ…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"በ<xliff:g id="NETWORK">%s</xliff:g> ላይ በመመዝገብ ላይ…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"የእርስዎ ሲም ካርድ ከዚህ አውታረ መረብ ጋር ግንኙነት አይፈቅድም።"</string>
+    <string name="connect_later" msgid="978991102125216741">"በአሁኑ ጊዜ ከዚህ አውታረ መረብ ጋር መገናኘት አልተቻለም። ቆይተው እንደገና ይሞክሩ።"</string>
+    <string name="registration_done" msgid="4573820010512184521">"በአውታረ መረብ ላይ የተመዘገበ።"</string>
+    <string name="select_automatically" msgid="7318032984017853975">"አውታረ መረብን በራስ-ሰር ይምረጡ"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"የአገልግሎት አቅራቢ ቅንብሮች"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"የውሂብ አግልግሎት አዋቅር"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"የተንቀሳቃሽ ስልክ ውሂብ"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"የተንቀሳቃሽ ስልክ አውታረ መረብን በመጠቀም ውሂብን ይድረሱበት"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"የሚመረጠው የአውታረ መረብ አይነት"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"የአውታረ መረቡን የክወና ሁነታን ለውጥ"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"የሚመረጠው የአውታረ መረብ አይነት"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"አገልግሎት አቅራቢ"</string>
+    <string name="call_category" msgid="8108654745239563833">"በመደወል ላይ"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"የአገልግሎት አቅራቢ የቪዲዮ ጥሪ"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"የሥርዓት ምርጫ"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"የCDMA በእንቅስቃሴ ላይ ሁነታ ለውጥ"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"የሥርዓት ምርጫ"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"አውታረ መረብ"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"አውታረ መረብ"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"የCDMA ደንበኝነት ምዝገባ"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"በRUIM/SIM እና NV መካከል ለውጥ"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"የደንበኝነት ምዝገባ"</string>
+    <string name="register_automatically" msgid="518185886971595020">"ራስ-ሰር ምዝገባ…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"የውሂብ ዝውውር ይፈቀድ?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"ለዋጋው የአውታረ መረብ አቅራቢዎ ጋር ይመልከቱ።"</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"የመተግበሪያ ውሂብ አጠቃቀም"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"ልክ ያልሆነ አውታረ መረብ ሁነታ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>። ችላ በል።"</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"ከ<xliff:g id="CARRIER">%1$s</xliff:g> ጋር ሲገናኝ የማይገኝ"</string>
+    <string name="see_more" msgid="5953815986207345223">"ተጨማሪ ይመልከቱ"</string>
+    <string name="see_less" msgid="1250265310929558370">"ያነሰ ይመልከቱ"</string>
 </resources>

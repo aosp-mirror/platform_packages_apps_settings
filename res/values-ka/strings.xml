@@ -892,6 +892,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 გჰც"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"აირჩიეთ მინიმუმ ერთი დიაპაზონი Wi‑Fi უსადენო ქსელისთვის:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP პარამეტრები"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"კონფიდენციალურობა"</string>
     <string name="wifi_shared" msgid="844142443226926070">"მოწყობილობის სხვა მომხმარებლებთან გაზიარება"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(უცვლელი)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"გთხოვთ, აირჩიოთ"</string>
@@ -1205,6 +1206,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN-ის შეცვლა შეუძლებელია.\nშესაძლოა შეყვანილია არასწორი PIN."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM-ის PIN-ი წარმატებით შეიცვალა"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"შეუძლებელი იყო SIM-ბარათის დაბლოკვის მდგომარეობის ცვლილება.\nშესაძლებელია, PIN-კოდი არასწორია."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN-კოდის გათიშვა ვერ მოხერხდა."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN-კოდის ჩართვა ვერ მოხერხდა."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"კარგი"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"გაუქმება"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"მოიძებნა სხვადასხვა SIM-ები"</string>
@@ -3001,6 +3004,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"მუქი თემა"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"ხარვეზი"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"ემბიენტური ეკრანი, ჩაკეტილი ეკრანი"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"შეტყობინება ჩაკეტილ ეკრანზე"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"სახე"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"თითის ანაბეჭდი"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"ეკრანის გამქრქალება, სენსორული ეკრანი, ბატარეა, გონივრული სიკაშკაშე, დინამიკური სიკაშკაშე"</string>
@@ -4154,10 +4158,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ქსელის დეტალები"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"თქვენი მოწყობილობის სახელი ხილულია თქვენს ტელეფონზე არსებული აპებისთვის. მისი დანახვას ასევე შეძლებენ სხვა პირები, როცა Bluetooth მოწყობილობებს დაუკავშირდებით ან Wi-Fi უსადენო ქსელით ისარგებლებთ."</string>
     <string name="devices_title" msgid="7701726109334110391">"მოწყობილობები"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"მაღალი სიხშირეების პანელი"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"მაღალი სიხშირეების ვირტუალური პანელის ჩართვა"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"ყველა პარამეტრი"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"თქვენი პარამეტრები"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"შემოთავაზებები"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS მონაცემები"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS მონაცემები"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"ქსელის არჩევა"</string>
@@ -4169,4 +4171,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"ქსელები ვერ მოიძებნა. ცადეთ ხელახლა."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(აკრძალული)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"SIM ბარათი არ არის"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"გაფართოებული დარეკვა"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"ქსელის სასურველი რეჟიმი: სასურველია WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"ქსელის სასურველი რეჟიმი: მხოლოდ GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"ქსელის სასურველი რეჟიმი: მხოლოდ WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"ქსელის სასურველი რეჟიმი: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"ქსელის სასურველი რეჟიმი: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"ქსელის სასურველი რეჟიმი: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"ქსელის სასურველი რეჟიმი: მხოლოდ CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"ქსელის სასურველი რეჟიმი: მხოლოდ EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"ქსელის სასურველი რეჟიმი: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"ქსელის სასურველი რეჟიმი: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"ქსელის სასურველი რეჟიმი: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"ქსელის სასურველი რეჟიმი: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"ქსელის სასურველი რეჟიმი: გლობალური"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"ქსელის სასურველი რეჟიმი: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"სასურველი ქსელის რეჟიმი: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"ქსელის სასურველი რეჟიმი: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"ქსელის სასურველი რეჟიმი: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"ქსელის სასურველი რეჟიმი: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"ქსელის სასურველი რეჟიმი: LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"ქსელის სასურველი რეჟიმი: TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"ქსელის სასურველი რეჟიმი: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"ქსელის სასურველი რეჟიმი: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"ქსელის სასურველი რეჟიმი: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"ქსელის სასურველი რეჟიმი: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"ქსელის სასურველი რეჟიმი: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"ქსელის სასურველი რეჟიმი: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (რეკომენდებული)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (რეკომენდებული)"</string>
+    <string name="network_global" msgid="959947774831178632">"გლობალური"</string>
+    <string name="label_available" msgid="1731547832803057893">"ხელმისაწვდომი ქსელები"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"მიმდინარეობს ძიება…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"მიმდინარეობს <xliff:g id="NETWORK">%s</xliff:g>-ზე რეგისტრაცია…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"თქვენი SIM ბარათი ამ ქსელთან დაკავშირების უფლებას არ იძლევა."</string>
+    <string name="connect_later" msgid="978991102125216741">"ამჟამად ამ ქსელთან დაკავშირება ვერ ხერხდება. ცადეთ მოგვიანებით."</string>
+    <string name="registration_done" msgid="4573820010512184521">"რეგისტრირებულია ქსელში."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"ქსელის ავტომატურად არჩევა"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"ოპერატორის პარამეტრები"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"მონაცემთა სერვისის დაყენება"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"მობილური ინტერნეტი"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"მობილურ ინტერნეტზე წვდომა მობილური ქსელით"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"ქსელის სასურველი ტიპი"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"ქსელის მუშაობის რეჟიმის შეცვლა"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"ქსელის სასურველი ტიპი"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"ოპერატორი"</string>
+    <string name="call_category" msgid="8108654745239563833">"დარეკვა"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"ვიდეო დარეკვა ოპერატორით"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"სისტემის არჩევა"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"CDMA როუმინგის რეჟიმის შეცვლა"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"სისტემის არჩევა"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"ქსელი"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"ქსელი"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA აბონირება"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"RUIM/SIM-სა და NV-ს შორის მონაცვლეობა"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"აბონირება"</string>
+    <string name="register_automatically" msgid="518185886971595020">"ავტომატური რეგისტრაცია…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"გსურთ, ჩაირთოს მობილური ინტერნეტის როუმინგი?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"ფასები შეამოწმეთ თქვენს ოპერატორთან."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"აპის მიერ მონაცემთა მოხმარება"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"ქსელის რეჟიმი (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>) არასწორია. იგნორირება."</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"მიუწვდომელია, როცა დაკავშირებულია <xliff:g id="CARRIER">%1$s</xliff:g>-თან"</string>
+    <string name="see_more" msgid="5953815986207345223">"მეტის ნახვა"</string>
+    <string name="see_less" msgid="1250265310929558370">"ნაკლების ნახვა"</string>
 </resources>

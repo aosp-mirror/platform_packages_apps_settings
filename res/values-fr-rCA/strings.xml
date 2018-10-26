@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Choisissez au moins une bande pour le point d\'accès Wi-Fi :"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Paramètres IP"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"Partager avec d\'autres utilisateurs d\'appareils"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(aucune modification)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Veuillez choisir"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Impossible de modifier le NIP.\nLe NIP est peut-être incorrect."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"Le NIP de la carte SIM a été modifié."</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Impossible de changer l\'état de verrouillage de la carte SIM.\nLe NIP est peut-être incorrect."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Impossible de désactiver le NIP."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Impossible d\'activer le NIP."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Annuler"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Plusieurs cartes SIM détectées"</string>
@@ -1476,7 +1480,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Rétablir les valeurs par défaut"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"La réinitialisation des paramètres APN par défaut est terminée."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Options de réinitialisation"</string>
-    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Impossible de réinitialiser le réseau, les applications ou l\'appareil"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"Vous pouvez réinitialiser le réseau, les applications ou l\'appareil"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Réinitialiser les paramètres Wi-Fi, cellulaires et Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Cette opération entraîne la réinitialisation de tous les paramètres réseau, y compris :\n\n"<li>"Le Wi‑Fi"</li>\n<li>"Les données cellulaires"</li>\n<li>"Le Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="2419812515540592802">"Réinitialiser aussi la carte eSIM"</string>
@@ -3001,6 +3005,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"thème sombre"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"bogue"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Affichage en mode Veille, écran de verrouillage"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"notification sur l\'écran de verrouillage"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"visage"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"empreintes digitales"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"réduire la luminosité de l\'écran, écran tactile, pile, réglage intelligent de la luminosité, luminosité dynamique"</string>
@@ -4154,10 +4159,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Détails du réseau"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Le nom de votre appareil est visible pour les applications de votre téléphone. Il est aussi possible que d\'autres personnes le voient lorsque vous vous connectez à des appareils Bluetooth ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Appareils"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Panneau haute fréquence"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Activer le panneau virtuel haute fréquence"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Tous les paramètres"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Vos paramètres"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Suggestions"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Données CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Données CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Choisir un réseau"</string>
@@ -4169,4 +4172,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"Impossible de trouver des réseaux. Réessayez."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(interdit)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Aucune carte SIM"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Appels avancés"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Mode réseau préféré : WCDMA de préférence"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Mode réseau préféré : GSM uniquement"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Mode réseau préféré : WCDMA uniquement"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Mode réseau préféré : GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Mode réseau préféré : CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Mode réseau préféré : CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Mode réseau préféré : CDMA uniquement"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Mode réseau préféré : EvDo uniquement"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Mode réseau préféré : CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Mode réseau préféré : LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Mode réseau préféré : GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Mode réseau préféré : CDMA+LTE/EvDo"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Mode réseau préféré : global"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Mode réseau préféré : LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Mode réseau préféré : LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Mode réseau préféré : LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Mode réseau préféré : TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Mode réseau préféré : TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Mode réseau préféré : LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Mode réseau préféré : TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Mode réseau préféré : LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Mode réseau préféré : TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Mode réseau préféré : LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Mode réseau préféré : LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Mode réseau préféré : TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Mode réseau préféré : LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (recommandé)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (recommandé)"</string>
+    <string name="network_global" msgid="959947774831178632">"Global"</string>
+    <string name="label_available" msgid="1731547832803057893">"Réseaux disponibles"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Recherche en cours…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"Enregistrement sur <xliff:g id="NETWORK">%s</xliff:g> en cours…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"Votre carte SIM ne vous permet pas de vous connecter à ce réseau."</string>
+    <string name="connect_later" msgid="978991102125216741">"Impossible de se connecter à ce réseau pour le moment. Veuillez réessayer plus tard."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Enregistré sur le réseau."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Sélectionner automatiquement le réseau"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Param. du fourn. de serv."</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Configurer service de données"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Données cellulaires"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Accéder aux données sur réseau cellulaire"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Type de réseau préféré"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Changer le mode de fonctionnement du réseau"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Type de réseau préféré"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Fournisseur de services"</string>
+    <string name="call_category" msgid="8108654745239563833">"Appels"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Appels vidéo par l\'entremise du fournisseur de services"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Sélection système"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Modifier le mode d\'itinérance CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Sélection système"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Réseau"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Réseau"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"Abonnement CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Basculer entre les cartes RUIM/SIM et NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"abonnement"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Enregistrement automatique en cours…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Autoriser les données en itinérance?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Communiquez avec votre fournisseur réseau pour connaître les tarifs."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Utilisation des données par l\'application"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Indisponible lorsque vous êtes connectés au réseau de <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"En voir moins"</string>
 </resources>

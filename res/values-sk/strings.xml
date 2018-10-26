@@ -922,6 +922,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Vyberte aspoň jedno pásmo pre hotspot Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Nastavenia adresy IP"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Ochrana súkromia"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Zdieľať s ostatnými používateľmi zariadenia"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nezmenené)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Vyberte"</string>
@@ -1237,6 +1238,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Kód PIN nie je možné zmeniť.\nKód PIN je zrejme nesprávny."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"Kód PIN SIM karty bol zmenený."</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Stav zámku SIM karty nie je možné zmeniť.\nZrejme ste zadali nesprávny kód PIN."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Kód PIN sa nedá deaktivovať."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Kód PIN sa nedá aktivovať."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Zrušiť"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Našlo sa viacero SIM kariet"</string>
@@ -3077,6 +3080,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"tmavý motív"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"chyba"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ambientné zobrazenie, zobrazenie uzamknutej obrazovky"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"upozornenie na uzamknutej obrazovke"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"tvár"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"odtlačok prsta"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"stmavenie obrazovky, dotyková obrazovka, batéria, inteligentný jas, dynamický jas"</string>
@@ -4300,10 +4304,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Podrobnosti siete"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Názov zariadenia je viditeľný pre aplikácie v telefóne. Môže sa zobrazovať aj ostatným používateľom po pripojení k zariadeniu Bluetooth alebo nastavení hotspotu Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Zariadenia"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Vysokofrekvenčný panel"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Povoliť virtuálny vysokofrekvenčný panel"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Všetky nastavenia"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Vaše nastavenia"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Návrhy"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Dáta CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Dáta CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Vybrať sieť"</string>
@@ -4315,4 +4317,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"Nepodarilo sa nájsť siete. Skúste to znova."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(zakázané)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Žiadna SIM karta"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Rozšírené volanie"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Preferovaný režim siete: preferované WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Preferovaný režim siete: iba GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Preferovaný režim siete: iba WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Preferovaný režim siete: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Preferovaný režim siete: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Preferovaný režim siete: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Preferovaný režim siete: iba CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Preferovaný režim siete: iba EVDO"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Preferovaný režim siete: CDMA / EvDo / GSM / WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Preferovaný režim siete: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Preferovaný režim siete: GSM / WCDMA / LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Preferovaný režim siete: CDMA + LTE / EvDo"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Preferovaný režim siete: globálny"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Preferovaný režim siete: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Uprednostňovaný režim siete: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Preferovaný režim siete: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Preferovaný režim siete: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Preferovaný režim siete: TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Preferovaný režim siete: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Preferovaný režim siete: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Preferovaný režim siete: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Preferovaný režim siete: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Preferovaný režim siete: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Preferovaný režim siete: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Preferovaný režim siete: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Preferovaný režim siete: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (odporúčané)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (odporúčané)"</string>
+    <string name="network_global" msgid="959947774831178632">"Globálne"</string>
+    <string name="label_available" msgid="1731547832803057893">"Dostupné siete"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Hľadá sa…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"Prebieha registrácia v sieti <xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"Vaša SIM karta nepovoľuje pripojenie k tejto sieti."</string>
+    <string name="connect_later" msgid="978991102125216741">"V tejto chvíli sa nedá pripojiť k sieti. Skúste to znova neskôr."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Prihlásenie k sieti prebehlo úspešne."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Vybrať sieť automaticky"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Nastavenia operátora"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Nastaviť dátovú službu"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Mobilné dáta"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Prístup k dátam pomocou mobilnej siete"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Preferovaný typ siete"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Zmeniť prevádzkový režim siete"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Preferovaný typ siete"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Operátor"</string>
+    <string name="call_category" msgid="8108654745239563833">"Volanie"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Videohovory prostredníctvom operátora"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Výber systému"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Zmeniť režim roamingu CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Výber systému"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Sieť"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Sieť"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"Odber CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Prepnúť medzi RUIM/SIM a NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"odber"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Automatická registrácia…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Chcete povoliť dátový roaming?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Informácie o cenách získate od svojho poskytovateľa siete."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Spotreba dát aplikácie"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Neplatný režim siete <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorovať."</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Nie je k dispozícii pri pripojení k operátorovi <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <string name="see_more" msgid="5953815986207345223">"Zobraziť viac"</string>
+    <string name="see_less" msgid="1250265310929558370">"Zobraziť menej"</string>
 </resources>
