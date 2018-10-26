@@ -16,11 +16,15 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.net.ConnectivityManager.TETHERING_USB;
+
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
+import android.net.ConnectivityManager;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -46,10 +50,18 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     }
 
     private PreferenceCategory mProfilesContainer;
+    private ConnectivityManager mConnectivityManager;
+    @VisibleForTesting
+    OnStartTetheringCallback mOnStartTetheringCallback;
+    @VisibleForTesting
+    long mPreviousFunction;
 
     public UsbDetailsFunctionsController(Context context, UsbDetailsFragment fragment,
             UsbBackend backend) {
         super(context, fragment, backend);
+        mConnectivityManager = context.getSystemService(ConnectivityManager.class);
+        mOnStartTetheringCallback = new OnStartTetheringCallback();
+        mPreviousFunction = mUsbBackend.getCurrentFunctions();
     }
 
     @Override
@@ -96,9 +108,28 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference preference) {
-        long function = UsbBackend.usbFunctionsFromString(preference.getKey());
-        if (function != mUsbBackend.getCurrentFunctions() && !Utils.isMonkeyRunning()) {
-            mUsbBackend.setCurrentFunctions(function);
+        final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
+        final long previousFunction = mUsbBackend.getCurrentFunctions();
+        if (function != previousFunction && !Utils.isMonkeyRunning()) {
+            mPreviousFunction = previousFunction;
+
+            if (function == UsbManager.FUNCTION_RNDIS) {
+                //Update the UI in advance to make it looks smooth
+                final RadioButtonPreference prevPref =
+                        (RadioButtonPreference) mProfilesContainer.findPreference(
+                                UsbBackend.usbFunctionsToString(mPreviousFunction));
+                if (prevPref != null) {
+                    prevPref.setChecked(false);
+                    preference.setChecked(true);
+                }
+
+                // We need to have entitlement check for usb tethering, so use API in
+                // ConnectivityManager.
+                mConnectivityManager.startTethering(TETHERING_USB, true /* showProvisioningUi */,
+                        mOnStartTetheringCallback);
+            } else {
+                mUsbBackend.setCurrentFunctions(function);
+            }
         }
     }
 
@@ -110,5 +141,16 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     @Override
     public String getPreferenceKey() {
         return "usb_details_functions";
+    }
+
+    @VisibleForTesting
+    final class OnStartTetheringCallback extends
+            ConnectivityManager.OnStartTetheringCallback {
+
+        @Override
+        public void onTetheringFailed() {
+            super.onTetheringFailed();
+            mUsbBackend.setCurrentFunctions(mPreviousFunction);
+        }
     }
 }
