@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
@@ -93,7 +94,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
         mUseNewApi = getContext().getResources().getBoolean(
                 com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
-        mSubId = getArguments().getInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID);
+        mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
 
         mConnectedPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_NETWORK_OPERATOR);
