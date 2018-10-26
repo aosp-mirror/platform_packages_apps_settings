@@ -43,6 +43,8 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private final List<ContextualCard> mContextualCards;
     private final LifecycleOwner mLifecycleOwner;
 
+    private RecyclerView mRecyclerView;
+
     public ContextualCardsAdapter(Context context, LifecycleOwner lifecycleOwner,
             ContextualCardManager manager) {
         mContext = context;
@@ -89,6 +91,7 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
         final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
@@ -109,6 +112,8 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> cards) {
         final List<ContextualCard> contextualCards = cards.get(ContextualCard.CardType.DEFAULT);
+        final boolean previouslyEmpty = mContextualCards.isEmpty();
+        final boolean nowEmpty = contextualCards == null || contextualCards.isEmpty();
         if (contextualCards == null) {
             mContextualCards.clear();
             notifyDataSetChanged();
@@ -118,6 +123,11 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             mContextualCards.clear();
             mContextualCards.addAll(contextualCards);
             diffResult.dispatchUpdatesTo(this);
+        }
+
+        if (mRecyclerView != null && previouslyEmpty && !nowEmpty) {
+            // Adding items to empty list, should animate.
+            mRecyclerView.scheduleLayoutAnimation();
         }
     }
 }
