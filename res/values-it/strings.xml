@@ -892,6 +892,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Scegli almeno una banda per l\'hotspot Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Impostazioni IP"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Privacy"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Condividi con altri utenti del dispositivo"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(invariato)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Seleziona un\'opzione"</string>
@@ -1205,6 +1206,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Impossibile cambiare il PIN.\nIl PIN potrebbe essere errato."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN della SIM modificato"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Impossibile modificare lo stato di blocco della scheda SIM.\nIl PIN potrebbe essere errato."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Impossibile disattivare PIN."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Impossibile attivare PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Annulla"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Trovate più SIM"</string>
@@ -3001,6 +3004,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"tema scuro"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"bug"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Display ambient, display della schermata di blocco"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"notifica schermata di blocco"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"volto"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"impronta digitale"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"attenuazione schermo, touchscreen, batteria, luminosità intelligente, luminosità dinamica"</string>
@@ -3188,7 +3192,7 @@
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Con profilo di lavoro bloccato"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostra tutti i contenuti delle notifiche"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Nascondi contenuti sensibili"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Non visualizzare del tutto le notifiche"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Non mostrare le notifiche"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Quando il dispositivo è bloccato, come desideri che vengano visualizzate le notifiche?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notifiche"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Mostra tutti i contenuti delle notifiche di lavoro"</string>
@@ -3325,7 +3329,7 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"Giorni"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Nessuno"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Ogni giorno"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"La sveglia può sostituire l\'ora di fine"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"La sveglia può ignorare l\'ora di fine"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Interrompi all\'ora di fine o alla prossima sveglia, a seconda dell\'evento che si verifica per primo"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -4154,10 +4158,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Dettagli rete"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Il nome del tuo dispositivo è visibile alle app installate sul telefono. Potrebbe essere visibile anche ad altre persone se ti connetti a dispositivi Bluetooth o configuri un hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositivi"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Riquadro Alta frequenza"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Attiva il riquadro virtuale Alta frequenza"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Tutte le impostazioni"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Le tue impostazioni"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Suggerimenti"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Dati CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Dati CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Scegli rete"</string>
@@ -4169,4 +4171,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"Impossibile trovare reti. Riprova."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(vietato)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Nessuna scheda SIM"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Chiamata avanzata"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Modalità di rete preferita: WCDMA (preferita)"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Modalità di rete preferita: solo GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Modalità di rete preferita: solo WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Modalità di rete preferita: GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Modalità di rete preferita: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Modalità di rete preferita: CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Modalità di rete preferita: solo CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Modalità di rete preferita: solo EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Modalità di rete preferita: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Modalità di rete preferita: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Modalità di rete preferita: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Modalità di rete preferita: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Modalità di rete preferita: globale"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Modalità di rete preferita: LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Modalità di rete preferita: LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Modalità di rete preferita: LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Modalità di rete preferita: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Modalità di rete preferita: TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Modalità di rete preferita: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Modalità di rete preferita: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Modalità di rete preferita: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Modalità di rete preferita: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Modalità di rete preferita: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Modalità di rete preferita: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Modalità di rete preferita: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Modalità di rete preferita: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (opzione consigliata)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (opzione consigliata)"</string>
+    <string name="network_global" msgid="959947774831178632">"Globale"</string>
+    <string name="label_available" msgid="1731547832803057893">"Reti disponibili"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Ricerca…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"Registrazione su <xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"La scheda SIM non consente la connessione a questa rete."</string>
+    <string name="connect_later" msgid="978991102125216741">"Impossibile connettersi a questa rete in questo momento. Riprova più tardi."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Registrato sulla rete."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Seleziona rete automaticamente"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Impostazioni operatore"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Imposta servizio dati"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Dati mobili"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Accedi ai dati tramite la rete mobile"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Tipo di rete preferito"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Cambia la modalità di funzionamento della rete"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Tipo di rete preferito"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Operatore"</string>
+    <string name="call_category" msgid="8108654745239563833">"Chiamata"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Videochiamata dell\'operatore"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Selezione sistema"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Cambia la modalità roaming CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Selezione sistema"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Rete"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Rete"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"Abbonamento CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Cambia tra RUIM/SIM e NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"abbonamento"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Registrazione automatica..."</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Consentire il roaming dei dati?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Verifica i costi con il tuo fornitore di rete."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Utilizzo dati dell\'app"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Modalità di rete <xliff:g id="NETWORKMODEID">%1$d</xliff:g> non valida. Ignora."</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Non disponibile se è attiva la connessione a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <string name="see_more" msgid="5953815986207345223">"Altro"</string>
+    <string name="see_less" msgid="1250265310929558370">"Comprimi"</string>
 </resources>

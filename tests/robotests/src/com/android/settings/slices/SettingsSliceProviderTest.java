@@ -67,6 +67,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -485,11 +486,15 @@ public class SettingsSliceProviderTest {
         final SliceBackgroundWorker worker = spy(new SliceBackgroundWorker(
                 mContext.getContentResolver(), uri) {
             @Override
-            public void onSlicePinned() {
+            protected void onSlicePinned() {
             }
 
             @Override
-            public void onSliceUnpinned() {
+            protected void onSliceUnpinned() {
+            }
+
+            @Override
+            public void close() {
             }
         });
         final WifiSlice wifiSlice = spy(new WifiSlice(mContext));
@@ -517,6 +522,17 @@ public class SettingsSliceProviderTest {
         mProvider.onSliceUnpinned(uri);
 
         verify(worker).onSliceUnpinned();
+    }
+
+    @Test
+    public void shutdown_backgroundWorker_closed() throws IOException {
+        final Uri uri = WifiSlice.WIFI_URI;
+        final SliceBackgroundWorker worker = initBackgroundWorker(uri);
+
+        mProvider.onSlicePinned(uri);
+        mProvider.shutdown();
+
+        verify(worker).close();
     }
 
     @Test

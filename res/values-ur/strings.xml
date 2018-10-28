@@ -404,12 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"ہو گیا"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"چہرے کے استعمال سے"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"اپنے آلہ کو غیر مقفل کریں"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_for_apps (5751549943998662469) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention (1638445716306615123) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_attention_details (5749808567341263288) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"ایپ سائن ان اور ادائیگی"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"غیر مقفل کرنے کیلئے آنکھیں کھلی ہونا"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"چہرے کی شناخت کرتے وقت، آپ کی آنکھیں کھلی ہونی چاہئیں"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"چہرے کا ڈیتا ہٹائیں"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"اپنے چہرے کا ڈیٹا بہتر بنائیں"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"آپ کے چہرے کے استعمال سے آپ آلہ غیر مقفل کیا جا سکتا ہے اور ایپس تک رسائی حاصل کی جا سکتی ہے۔ "<annotation id="url">"مزید جانیں"</annotation></string>
@@ -895,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"‎5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"‏Wi‑Fi ہاٹ اسپاٹ کیلئے کم از کم ایک بینڈ منتخب کریں:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"‏IP ترتیبات"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"دوسرے آلہ صارفین کے ساتھ اشتراک کریں"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(غیر تبدیل شدہ)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"براہ مہربانی منتخب کریں"</string>
@@ -1208,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"‏PIN تبدیل نہیں کر سکتے ہیں۔\nممکنہ طور پر غلط PIN۔"</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"‏SIM PIN کامیابی کے ساتھ تبدیل ہو گیا"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"‏SIM کارڈ لاک کی حالت کو تبدیل نہيں کر سکتے ہیں۔\nممکنہ طور پر غلط PIN۔"</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"‏PIN کو غیر فعال نہیں کیا جا سکتا۔"</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"‏PIN کو فعال نہیں کیا جا سکتا۔"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"ٹھیک ہے"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"منسوخ کریں"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"‏متعدد SIMs ملے"</string>
@@ -2994,8 +2995,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"ادائیگی کریں، تھپتھپائیں، ادائیگیاں"</string>
     <string name="keywords_backup" msgid="470070289135403022">"بیک اپ، بیک اپ لیں"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"اشارہ"</string>
-    <!-- no translation found for keywords_face_unlock (254144854349092754) -->
-    <skip />
+    <string name="keywords_face_unlock" msgid="254144854349092754">"چہرہ، غیر مقفل کرنا، اجازت دینا، سائن ان"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"‏imei, meid, min, prl ورژن، imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"‏نیٹ ورک، موبائل نیٹ ورک کی صورت حال، سروس کی صورت حال، سگنل کی قوت، موبائل نیٹ ورک کی قسم، رومنگ، iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"نمبر شمار، ہارڈ ویئر کا ورژن"</string>
@@ -3003,6 +3003,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"گہری تھیم"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"بگ"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"ايمبيئنٹ ڈسپلے، لاک اسکرین ڈسپلے"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"مقفل اسکرین کی اطلاع"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"چہرہ"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"فنگر پرنٹ"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"مدھم اسکرین، ٹچ اسکرین، بیٹری، اسمارٹ چمک، ڈائنیمک چمک"</string>
@@ -3962,14 +3963,12 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"چیک کرنے کیلئے فون کو اٹھائیں"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"چیک کرنے کیلئے ٹیبلیٹ کو اٹھائیں"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"چیک کرنے کیلئے آلہ کو اٹھائیں"</string>
-    <!-- no translation found for ambient_display_wake_screen_title (4091523525326925790) -->
-    <skip />
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"بیداری کا ڈسپلے"</string>
     <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنا فون اٹھائیں۔"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنا ٹیبلیٹ اٹھائیں۔"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنا آلہ اٹھائیں۔"</string>
-    <!-- no translation found for ambient_display_wake_lock_screen_title (562547995385322349) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"بیداری کے قفل کی اسکرین کا اشارہ"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"اطلاعات کیلئے فنگر پرنٹ سوائپ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"فنگر پرنٹ سوائپ کریں"</string>
@@ -4115,12 +4114,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"‏ڈیوٹی سائیکلنگ کے بغیر سبھی GNSS مجموعوں اور کثرتوں کو ٹریک کریں"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"ہمیشہ ناکامی کا ڈائیلاگ دکھائیں"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"جب بھی ایپ ناکام ہو تو ڈائیلاگ دکھائیں"</string>
-    <!-- no translation found for angle_enabled_app (1841862539745838255) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_not_set (864740024581634768) -->
-    <skip />
-    <!-- no translation found for angle_enabled_app_set (226015765615525056) -->
-    <skip />
+    <string name="angle_enabled_app" msgid="1841862539745838255">"‏ANGLE کے لیے فعال ایپ منتخب کریں"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"‏ANGLE کے لیے فعال کردہ کوئی ایپلیکیشن سیٹ نہیں ہے"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"‏ANGLE کے لیے فعال ایپلیکیشن: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"ڈائرکٹری تک رسائی"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"ڈائرکٹری تک رسائی"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
@@ -4161,10 +4157,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"نیٹ ورک کی تفصیلات"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"‏آپ کے آلہ کا نام آپ کے فون پر موجود ایپس میں مرئی ہوتا ہے۔ جب آپ بلوٹوتھ آلات سے منسلک ہوتے ہیں یا Wi-Fi ہاٹ اسپاٹ سیٹ اپ کرتے ہیں تو دوسرے لوگ بھی اسے دیکھ سکتے ہیں۔"</string>
     <string name="devices_title" msgid="7701726109334110391">"آلات"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"اعلی فریکوئنسی پینل"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"ورچوئل اعلی فریکوئنسی پینل فعال کریں"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"تمام ترتیبات"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"آپ کی ترتیبات"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"تجاویز"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"‏CBRS ڈیٹا"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"‏CBRS ڈیٹا"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"نیٹ ورک کا انتخاب کریں"</string>
@@ -4176,4 +4170,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"نیٹ ورکس نہیں مل سکے۔ دوبارہ کوشش کریں۔"</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(ممنوع)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"‏کوئی SIM کارڈ نہیں ہے"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"اعلی درجے کی کالنگ"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"‏ترجیحی نیٹ ورک کی وضع: WCDMA ترجیحی"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"‏ترجیحی نیٹ ورک کی وضع: صرف GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"‏ترجیحی نیٹ ورک کی وضع: صرف WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"‏ترجیحی نیٹ ورک کی وضع: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"‏ترجیحی نیٹ ورک کی وضع: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"‏ترجیحی نیٹ ورک کی وضع: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"‏ترجیحی نیٹ ورک کی وضع: صرف CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"‏ترجیحی نیٹ ورک کی وضع: صرف EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"‏ترجیحی نیٹ ورک کی وضع: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"‏ترجیحی نیٹ ورک کی وضع: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"‏ترجیحی نیٹ ورک کی وضع: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"‏ترجیحی نیٹ ورک کی وضع: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"ترجیحی نیٹ ورک کی وضع: عالمی"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"‏ترجیحی نیٹ ورک کی وضع: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"‏ترجیحی نیٹ ورک کی وضع: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"‏ترجیحی نیٹ ورک کی وضع: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"‏ترجیحی نیٹ ورک کی وضع: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"‏ترجیحی نیٹ ورک کی وضع: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"‏ترجیحی نیٹ ورک کی وضع: LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"‏ترجیحی نیٹ ورک کی وضع: TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"‏ترجیحی نیٹ ورک کی وضع: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"‏ترجیحی نیٹ ورک کی وضع: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"‏ترجیحی نیٹ ورک کی وضع: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"‏ترجیحی نیٹ ورک کی وضع: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"‏ترجیحی نیٹ ورک کی وضع: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"‏ترجیحی نیٹ ورک کی وضع: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"‏LTE (تجویز کردہ)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"‏4G (تجویز کردہ)"</string>
+    <string name="network_global" msgid="959947774831178632">"عالمی"</string>
+    <string name="label_available" msgid="1731547832803057893">"دستیاب نیٹ ورکس"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"تلاش کیا جا رہا ہے…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"<xliff:g id="NETWORK">%s</xliff:g> پر رجسٹر کیا جا رہا ہے…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"‏آپ کے SIM کارڈ کو اس نیٹ ورک سے منسلک ہونے کی اجازت نہیں ہے۔"</string>
+    <string name="connect_later" msgid="978991102125216741">"ابھی اس نیٹ ورک سے منسلک نہیں ہو سکتا۔ بعد میں دوبارہ کوشش کریں۔"</string>
+    <string name="registration_done" msgid="4573820010512184521">"نیٹ ورک پر رجسٹرڈ ہو گیا۔"</string>
+    <string name="select_automatically" msgid="7318032984017853975">"خودکار طور پر نیٹ ورک منتخب کریں"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"کیریئر کی ترتیبات"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"ڈیٹا سروس سیٹ اپ کریں"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"موبائل ڈیٹا"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"موبائل نیٹ ورک استعمال کر کے ڈیٹا تک رسائی حاصل کریں"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"ترجیحی نیٹ ورک کی قسم"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"نیٹ ورک آپریٹ کرنے کی وضع تبدیل کریں"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"ترجیحی نیٹ ورک کی قسم"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"کیریئر"</string>
+    <string name="call_category" msgid="8108654745239563833">"کالنگ"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"کیرئیر ویڈیو کالنگ"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"سسٹم کا انتخاب"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"‏CDMA رومنگ وضع تبدیل کریں"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"سسٹم کا انتخاب"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"نیٹ ورک"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"نیٹ ورک"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"‏CDMA سبسکرپشن"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"‏RUIM/SIM اور NV کے درمیان تبدیل کریں"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"سبسکرپشن"</string>
+    <string name="register_automatically" msgid="518185886971595020">"خود کار رجسٹریشن…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"ڈیٹا رومنگ کی اجازت دیں؟"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"اپنے نیٹ ورک فراہم کنندہ سے قیمت معلوم کریں۔"</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"ایپ ڈیٹا کا استعمال"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g> سے منسلک ہونے پر دستیاب نہیں ہے"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"کم دیکھیں"</string>
 </resources>

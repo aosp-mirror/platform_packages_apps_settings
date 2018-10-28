@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Tria almenys una banda per al punt d\'accés Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Configuració IP"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"Comparteix amb altres usuaris del dispositiu"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(sense canvis)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Selecciona"</string>
@@ -1089,7 +1091,7 @@
     <string name="account_settings" msgid="6403589284618783461">"Comptes"</string>
     <string name="accessibility_category_work" msgid="4339262969083355720">"Comptes del perfil professional: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="1263518850905945594">"Comptes del perfil personal"</string>
-    <string name="accessibility_work_account_title" msgid="1231830766637939527">"Compte professional: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_work_account_title" msgid="1231830766637939527">"Compte de la feina: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Compte personal: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Cerca"</string>
     <string name="display_settings" msgid="7965901687241669598">"Pantalla"</string>
@@ -1178,7 +1180,7 @@
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Quan es mostra"</string>
     <string name="doze_title" msgid="2375510714460456687">"Notificacions noves"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Activa la pantalla en rebre notificacions"</string>
-    <string name="doze_always_on_title" msgid="1046222370442629646">"Sempre activat"</string>
+    <string name="doze_always_on_title" msgid="1046222370442629646">"Sempre activada"</string>
     <string name="doze_always_on_summary" msgid="6978257596231155345">"Mostra l\'hora, les icones de notificació i altres dades. Consumeix més bateria."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Mida de la lletra"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Amplia o redueix el text"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"No es pot canviar el PIN.\nÉs possible que sigui incorrecte."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN de la SIM canviat correctament"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"No es pot canviar l\'estat de bloqueig de la targeta SD.\nÉs possible que el PIN sigui incorrecte."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"No es pot desactivar el PIN."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"No es pot activar el PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"D\'acord"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Cancel·la"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Diverses SIM detectades"</string>
@@ -3001,6 +3005,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"tema fosc"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"error"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Pantalla ambient, pantalla de bloqueig"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"notificació en pantalla de bloqueig"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"cara"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"empremta digital"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"pantalla atenuada, pantalla tàctil, bateria, brillantor intel·ligent, brillantor dinàmica"</string>
@@ -3187,7 +3192,7 @@
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"A la pantalla de bloqueig"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Si perfil professional bloquejat"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostra tot el contingut de les notificacions"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Amaga el contingut confidencial"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Amaga el contingut sensible"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"No mostris les notificacions"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Com vols que es mostrin les notificacions quan el dispositiu estigui bloquejat?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificacions"</string>
@@ -3967,7 +3972,7 @@
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Per veure l\'hora, les notificacions i altres dades, agafa el dispositiu."</string>
     <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Gest per activar la pantalla de bloqueig"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Fes lliscar el sensor d\'empremtes per veure notificacions"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Llisca al sensor d\'empremtes per consultar les notificacions"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Fes lliscar l\'empremta digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals de la part posterior del telèfon."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes digitals situat a la part posterior de la tauleta."</string>
@@ -4004,7 +4009,7 @@
     <string name="enterprise_privacy_exposure_category" msgid="7313392680107938517">"Tipus d\'informació que la teva organització pot veure"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="9079283547182933771">"Canvis fets per l\'administrador de la teva organització"</string>
     <string name="enterprise_privacy_device_access_category" msgid="5423434164248819058">"El teu accés a aquest dispositiu"</string>
-    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Dades associades al teu compte professional, com ara el correu electrònic i el calendari"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Dades associades al teu compte de la feina, com ara el correu electrònic i el calendari"</string>
     <string name="enterprise_privacy_installed_packages" msgid="2313698828178764590">"Llista de les aplicacions que hi ha al dispositiu"</string>
     <string name="enterprise_privacy_usage_stats" msgid="4398411405572759370">"Temps dedicat i dades utilitzades en cada aplicació"</string>
     <string name="enterprise_privacy_network_logs" msgid="161722817268849590">"Registre del trànsit de xarxa més recent"</string>
@@ -4154,10 +4159,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalls de la xarxa"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"El nom del dispositiu és visible per a les aplicacions del telèfon. També el poden veure altres persones si el connectes a un dispositiu Bluetooth o si configures un punt d\'accés Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositius"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Tauler d\'alta freqüència"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Activa el tauler virtual d\'alta freqüència"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Tota la configuració"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"La teva configuració"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Suggeriments"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Dades CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Dades CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Tria la xarxa"</string>
@@ -4169,4 +4172,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"No s\'ha pogut trobar cap xarxa. Torna-ho a provar."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(prohibida)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"No hi ha cap targeta SIM"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Trucades avançades"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Mode de xarxa preferit: WCDMA preferit"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Mode de xarxa preferit: només GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Mode de xarxa preferit: només WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Mode de xarxa preferit: GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Mode de xarxa preferit: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Mode de xarxa preferit: CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Mode de xarxa preferit: només CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Mode de xarxa preferit: només EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Mode de xarxa preferit: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Mode de xarxa preferit: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Mode de xarxa preferit: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Mode de xarxa preferit: CDMA+LTE/EvDo"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Mode de xarxa preferit: Global"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Mode de xarxa preferit: LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Mode de xarxa preferit: LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Mode de xarxa preferit: LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Mode de xarxa preferit: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Mode de xarxa preferit: TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Mode de xarxa preferit: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Mode de xarxa preferit: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Mode de xarxa preferit: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Mode de xarxa preferit: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Mode de xarxa preferit: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Mode de xarxa preferit: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Mode de xarxa preferit: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Mode de xarxa preferit: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (opció recomanada)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (opció recomanada)"</string>
+    <string name="network_global" msgid="959947774831178632">"Global"</string>
+    <string name="label_available" msgid="1731547832803057893">"Xarxes disponibles"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"S\'està cercant…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"S\'està registrant a <xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"La targeta SIM no et permet connectar-te a aquesta xarxa."</string>
+    <string name="connect_later" msgid="978991102125216741">"No es pot connectar a aquesta xarxa ara mateix. Torna-ho a provar més tard."</string>
+    <string name="registration_done" msgid="4573820010512184521">"S\'ha registrat a la xarxa."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Selecciona la xarxa automàticament"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Configuració de l\'operador"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Configura el servei de dades"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Dades mòbils"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Accedeix a les dades amb la xarxa mòbil"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Tipus de xarxa preferit"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Canvia el mode de funcionament de la xarxa"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Tipus de xarxa preferit"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Operador de telefonia mòbil"</string>
+    <string name="call_category" msgid="8108654745239563833">"Trucades"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Videotrucades amb l\'operador de telefonia mòbil"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Selecció del sistema"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Canvia el mode d\'itinerància CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Selecció del sistema"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Xarxa"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Xarxa"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"Subscripció CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Canvia entre RUIM/SIM i NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"subscripció"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Registre automàtic…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Vols permetre la itinerància de dades?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Contacta amb el proveïdor de xarxa per saber els preus."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Ús de dades de l\'aplicació"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"No està disponible quan està connectat a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"Mostra\'n menys"</string>
 </resources>

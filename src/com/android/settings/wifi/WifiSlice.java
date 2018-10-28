@@ -30,8 +30,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 
@@ -62,7 +60,6 @@ import java.util.List;
  */
 public class WifiSlice implements CustomSliceable {
 
-
     /**
      * Backing Uri for the Wifi Slice.
      */
@@ -74,7 +71,7 @@ public class WifiSlice implements CustomSliceable {
             .build();
 
     @VisibleForTesting
-    static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
+    static final int DEFAULT_EXPANDED_ROW_COUNT = 4;
 
     private final Context mContext;
 
@@ -124,16 +121,16 @@ public class WifiSlice implements CustomSliceable {
             return listBuilder.build();
         }
 
-        List<AccessPoint> result = getBackgroundWorker().getResults();
-        if (result == null) {
-            result = new ArrayList<>();
+        List<AccessPoint> results = getBackgroundWorker().getResults();
+        if (results == null) {
+            results = new ArrayList<>();
         }
-        final int apCount = result.size();
+        final int apCount = results.size();
         // Add AP rows
         final CharSequence placeholder = mContext.getText(R.string.summary_placeholder);
         for (int i = 0; i < DEFAULT_EXPANDED_ROW_COUNT; i++) {
             if (i < apCount) {
-                listBuilder.addRow(getAccessPointRow(result.get(i)));
+                listBuilder.addRow(getAccessPointRow(results.get(i)));
             } else {
                 listBuilder.addRow(new RowBuilder()
                         .setTitle(placeholder)
@@ -277,12 +274,12 @@ public class WifiSlice implements CustomSliceable {
     private static class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
             implements WifiTracker.WifiListener {
 
+        // TODO: enforce all the SliceBackgroundWorkers being singletons at syntax level
         private static WifiScanWorker mWifiScanWorker;
 
         private final Context mContext;
 
         private WifiTracker mWifiTracker;
-        private WifiManager mWifiManager;
 
         private WifiScanWorker(Context context, Uri uri) {
             super(context.getContentResolver(), uri);
@@ -298,17 +295,20 @@ public class WifiSlice implements CustomSliceable {
 
         @Override
         protected void onSlicePinned() {
-            new Handler(Looper.getMainLooper()).post(() -> {
+            if (mWifiTracker == null) {
                 mWifiTracker = new WifiTracker(mContext, this, true, true);
-                mWifiManager = mWifiTracker.getManager();
-                mWifiTracker.onStart();
-                onAccessPointsChanged();
-            });
+            }
+            mWifiTracker.onStart();
+            onAccessPointsChanged();
         }
 
         @Override
         protected void onSliceUnpinned() {
             mWifiTracker.onStop();
+        }
+
+        @Override
+        public void close() {
             mWifiTracker.onDestroy();
             mWifiScanWorker = null;
         }
@@ -324,7 +324,7 @@ public class WifiSlice implements CustomSliceable {
         @Override
         public void onAccessPointsChanged() {
             // in case state has changed
-            if (!mWifiManager.isWifiEnabled()) {
+            if (!mWifiTracker.getManager().isWifiEnabled()) {
                 updateResults(null);
                 return;
             }

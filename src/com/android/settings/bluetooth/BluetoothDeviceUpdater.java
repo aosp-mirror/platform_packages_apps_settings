@@ -230,9 +230,19 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      */
     protected void removePreference(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
+        final CachedBluetoothDevice subCachedDevice = cachedDevice.getSubDevice();
         if (mPreferenceMap.containsKey(device)) {
             mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(device));
             mPreferenceMap.remove(device);
+        } else if (subCachedDevice != null) {
+            // When doing remove, to check if preference maps to sub device.
+            // This would happen when connection state is changed in detail page that there is no
+            // callback from SettingsLib.
+            final BluetoothDevice subDevice = subCachedDevice.getDevice();
+            if (mPreferenceMap.containsKey(subDevice)) {
+                mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(subDevice));
+                mPreferenceMap.remove(subDevice);
+            }
         }
     }
 

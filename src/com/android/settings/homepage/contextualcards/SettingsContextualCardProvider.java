@@ -20,11 +20,11 @@ import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
 import android.annotation.Nullable;
 
-import com.android.settings.homepage.deviceinfo.BatterySlice;
-import com.android.settings.homepage.deviceinfo.DataUsageSlice;
-import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
-import com.android.settings.homepage.deviceinfo.StorageSlice;
-import com.android.settings.homepage.deviceinfo.EmergencyInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.wifi.WifiSlice;

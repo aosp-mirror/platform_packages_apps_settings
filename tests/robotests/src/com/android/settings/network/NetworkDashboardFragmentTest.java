@@ -17,17 +17,10 @@ package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
@@ -65,90 +58,4 @@ public class NetworkDashboardFragmentTest {
         assertThat(indexRes).hasSize(1);
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
     }
-
-    @Test
-    public void summaryProviderSetListening_hasMobileAndHotspot_shouldReturnMobileSummary() {
-        final WifiMasterSwitchPreferenceController wifiPreferenceController =
-                mock(WifiMasterSwitchPreferenceController.class);
-        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
-                mock(MobileNetworkPreferenceController.class);
-        final TetherPreferenceController tetherPreferenceController =
-                mock(TetherPreferenceController.class);
-
-        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
-        final SummaryLoader.SummaryProvider provider =
-                new NetworkDashboardFragment.SummaryProvider(mContext, summaryLoader,
-                        wifiPreferenceController, mobileNetworkPreferenceController,
-                        tetherPreferenceController, () -> true);
-
-        provider.setListening(false);
-
-        verifyZeroInteractions(summaryLoader);
-
-        when(wifiPreferenceController.isAvailable()).thenReturn(true);
-        when(mobileNetworkPreferenceController.isAvailable()).thenReturn(true);
-        when(tetherPreferenceController.isAvailable()).thenReturn(true);
-
-        provider.setListening(true);
-
-        verify(summaryLoader).setSummary(provider, "Wi\u2011Fi, mobile, data usage, and hotspot");
-    }
-
-    @Test
-    public void summaryProviderSetListening_noMobileOrHotspot_shouldReturnSimpleSummary() {
-        final WifiMasterSwitchPreferenceController wifiPreferenceController =
-                mock(WifiMasterSwitchPreferenceController.class);
-        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
-                mock(MobileNetworkPreferenceController.class);
-        final TetherPreferenceController tetherPreferenceController =
-                mock(TetherPreferenceController.class);
-
-        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
-        final SummaryLoader.SummaryProvider provider =
-                new NetworkDashboardFragment.SummaryProvider(mContext, summaryLoader,
-                        wifiPreferenceController, mobileNetworkPreferenceController,
-                        tetherPreferenceController, () -> true);
-
-        provider.setListening(false);
-
-        verifyZeroInteractions(summaryLoader);
-
-        when(wifiPreferenceController.isAvailable()).thenReturn(true);
-        when(mobileNetworkPreferenceController.isAvailable()).thenReturn(false);
-        when(tetherPreferenceController.isAvailable()).thenReturn(false);
-
-        provider.setListening(true);
-
-        verify(summaryLoader).setSummary(provider, "Wi\u2011Fi and data usage");
-    }
-
-    @Test
-    public void summaryProviderSetListening_noDataUsageActivity_shouldReturnNoDataUsageSummary() {
-        final WifiMasterSwitchPreferenceController wifiPreferenceController =
-                mock(WifiMasterSwitchPreferenceController.class);
-        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
-                mock(MobileNetworkPreferenceController.class);
-        final TetherPreferenceController tetherPreferenceController =
-                mock(TetherPreferenceController.class);
-
-        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
-        final SummaryLoader.SummaryProvider provider =
-                new NetworkDashboardFragment.SummaryProvider(mContext, summaryLoader,
-                        wifiPreferenceController, mobileNetworkPreferenceController,
-                        tetherPreferenceController, () -> false);
-
-        provider.setListening(false);
-
-        verifyZeroInteractions(summaryLoader);
-
-        when(wifiPreferenceController.isAvailable()).thenReturn(true);
-        when(mobileNetworkPreferenceController.isAvailable()).thenReturn(true);
-        when(tetherPreferenceController.isAvailable()).thenReturn(true);
-
-        provider.setListening(true);
-
-        verify(summaryLoader).setSummary(provider, "Wi\u2011Fi, mobile, and hotspot");
-    }
-
-
 }

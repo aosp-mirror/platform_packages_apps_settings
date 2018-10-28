@@ -61,8 +61,6 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.dashboard.DashboardSummary;
-import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -393,14 +391,9 @@ public class SettingsActivity extends SettingsBaseActivity
         } else {
             // Show search icon as up affordance if we are displaying the main Dashboard
             mInitialTitleResId = R.string.dashboard_title;
+            switchToFragment(TopLevelSettings.class.getName(), null /* args */, false, false,
+                    mInitialTitleResId, mInitialTitle, false);
 
-            if (SettingsHomepageActivity.isDynamicHomepageEnabled(this)) {
-                switchToFragment(TopLevelSettings.class.getName(), null /* args */, false, false,
-                        mInitialTitleResId, mInitialTitle, false);
-            } else {
-                switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
-                        mInitialTitleResId, mInitialTitle, false);
-            }
         }
     }
 

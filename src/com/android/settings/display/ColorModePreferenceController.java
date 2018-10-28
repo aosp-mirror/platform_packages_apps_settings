@@ -29,7 +29,7 @@ import com.android.settings.core.BasePreferenceController;
 public class ColorModePreferenceController extends BasePreferenceController {
     private static final String TAG = "ColorModePreference";
 
-    private static final int SURFACE_FLINGER_TRANSACTION_QUERY_WIDE_COLOR = 1024;
+    private static final int SURFACE_FLINGER_TRANSACTION_QUERY_COLOR_MANAGEMENT = 1030;
 
     private final ConfigurationWrapper mConfigWrapper;
     private ColorDisplayController mColorDisplayController;
@@ -41,7 +41,7 @@ public class ColorModePreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return mConfigWrapper.isScreenWideColorGamut()
+        return mConfigWrapper.isDeviceColorManaged()
                 && !getColorDisplayController().getAccessibilityTransformActivated() ?
                 AVAILABLE_UNSEARCHABLE : DISABLED_FOR_USER;
     }
@@ -77,17 +77,17 @@ public class ColorModePreferenceController extends BasePreferenceController {
             mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
         }
 
-        boolean isScreenWideColorGamut() {
+        boolean isDeviceColorManaged() {
             if (mSurfaceFlinger != null) {
                 final Parcel data = Parcel.obtain();
                 final Parcel reply = Parcel.obtain();
                 data.writeInterfaceToken("android.ui.ISurfaceComposer");
                 try {
-                    mSurfaceFlinger.transact(SURFACE_FLINGER_TRANSACTION_QUERY_WIDE_COLOR,
+                    mSurfaceFlinger.transact(SURFACE_FLINGER_TRANSACTION_QUERY_COLOR_MANAGEMENT,
                             data, reply, 0);
                     return reply.readBoolean();
                 } catch (RemoteException ex) {
-                    Log.e(TAG, "Failed to query wide color support", ex);
+                    Log.e(TAG, "Failed to query color management support", ex);
                 } finally {
                     data.recycle();
                     reply.recycle();

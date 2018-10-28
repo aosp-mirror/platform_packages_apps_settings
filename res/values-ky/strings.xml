@@ -878,7 +878,7 @@
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA тастыктамасы"</string>
     <string name="wifi_eap_domain" msgid="8471124344218082064">"Домен"</string>
     <string name="wifi_eap_user_cert" msgid="1291089413368160789">"Колдонуучунун тастыктамасы"</string>
-    <string name="wifi_eap_identity" msgid="4359453783379679103">"Аныктыгы"</string>
+    <string name="wifi_eap_identity" msgid="4359453783379679103">"Идентификация"</string>
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Аныктыгы жашыруун"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Сырсөз"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Сырсөздү көрсөтүү"</string>
@@ -891,6 +891,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 ГГц"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi туташуу түйүнүн иштетүү үчүн кеминде бир жыштыкты тандаңыз:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP жөндөөлөрү"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"Түзмөктүн башка колдонуучулары менен бөлүшүлсүн"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(өзгөрбөгөн)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Тандаңыз"</string>
@@ -1204,6 +1206,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN\'ди алмаштыруу мүмкүн эмес.\nPIN туура эмес өңдөнөт."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM картанын PIN коду алмаштырылды"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"SIM-картаны бөгөттөн чыгаруу мүмкүн эмес.\nPIN туура эмес өңдөнөт."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN код өчүрүлбөй жатат."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN код иштетилбей жатат."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Жарайт"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Жокко чыгаруу"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Бир нече SIM табылды"</string>
@@ -3000,6 +3004,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"түнкү режим"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"мүчүлүштүк"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Экран автоматтык түрдө күйөт, экран кулпусу"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"кулпуланган экрандагы билдирме"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"жүз"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"манжа изи"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"күңүрт экран, сенсордук экран, батарея, акылдуу жарыктык, динамикалык жарыктык"</string>
@@ -3983,7 +3988,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Ыкчам ачылуучу колдонмолор"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Түзмөктө орнотулган эмес болсо да, колдонмолордогу шилтемелерди ачасыз"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Ыкчам ачылуучу колдонмолор"</string>
-    <string name="instant_apps_settings" msgid="8827777916518348213">"Ыкчам ачылуучу колдонмолордун параметрлери"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Ыкчам ачылуучу колдонмолордун жөндөөлөрү"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Орнотулган колдонмолор"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Учурда сактагычыңыз сактагычты көзөмөлдөгүч тарабынан башкарылууда"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> таандык аккаунттар"</string>
@@ -4153,10 +4158,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Тармактын чоо-жайы"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Түзмөгүңүздүн аталышы телефонуңуздагы колдонмолорго көрүнүктүү. Bluetooth түзмөктөрүнө туташканыңызда же Wi‑Fi туташуу түйүнүн жөндөгөнүңүздө, аны башка адамдар да көрүшү мүмкүн."</string>
     <string name="devices_title" msgid="7701726109334110391">"Түзмөктөр"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Жогорку жыштык панели"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Виртуалдык жогорку жыштык панелин иштетүү"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Бардык жөндөөлөр"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Жөндөөлөр"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Сунуштар"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Жарандык радио кызматынын дайындары"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Жарандык радио кызматынын дайындары"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Тармакты тандоо"</string>
@@ -4168,4 +4171,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"Тармактар табылбай койду. Кайра аракет кылыңыз."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(тыюу салынган)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"SIM-карта жок"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Өркүндөтүлгөн чалуу"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Тандалган тармак режими: WCDMA тандалган"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Тандалган тармак режими: GSM гана"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Тандалган тармак режими: WCDMA гана"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Тандалган тармак режими: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Тандалган тармак режими: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Тандалган тармак режими: CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Тандалган тармак режими: CDMA гана"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Тандалган тармак режими: EvDo гана"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Тандалган тармак режими: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Тандалган тармак режими: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Тандалган тармак режими: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Тандалган тармак режими: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Тандалган тармак режими: Жалпы"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Тандалган тармак режими: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Тандалган тармак режими: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Тандалган тармак режими: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Тандалган тармак режими: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Тандалган тармак режими: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Тандалган тармак режими: LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Тандалган тармак режими: TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Тандалган тармак режими: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Тандалган тармак режими: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Тандалган тармак режими: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Тандалган тармак режими: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Тандалган тармак режими: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Тандалган тармак режими: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (сунушталат)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (сунушталат)"</string>
+    <string name="network_global" msgid="959947774831178632">"Жалпы"</string>
+    <string name="label_available" msgid="1731547832803057893">"Жеткиликтүү тармактар"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Издөөдө…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"<xliff:g id="NETWORK">%s</xliff:g> тармагына катталууда…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"Сиздин SIM-картаңыз менен бул тармакка туташууга болбойт."</string>
+    <string name="connect_later" msgid="978991102125216741">"Бул тармакка азыр кошулуу мүмкүн эмес. Кийинчерээк кайра аракет кылыңыз."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Тармакка катталды."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Тармак автоматтык түрдө тандалат"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Оператордун жөндөөлөрү"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Тарифтик планды жөндөө"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Мобилдик Интернет"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Интернетке мобилдик тармак аркылуу чыгуу"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Тандалган тармактын түрү"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Тармактын иштөө режимин өзгөртүңүз"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Тармактын түрү"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Байланыш оператору"</string>
+    <string name="call_category" msgid="8108654745239563833">"Чалуулар"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Видео чалуулар"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Тутум тандоо"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"CDMA роуминг режимин алмаштыруу"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Тутум тандоо"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Тармак"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Тармак"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA жазылуу"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"RUIM/SIM жана NV ортосунда которуштуруу"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"жазылуу"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Автоматтык катталуу…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Интернет-роумингди иштетесизби?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Бааларын байланыш операторуңуздан сурашыңыз керек."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Колдонмолордун трафиги"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g> операторуна туташып турганда жеткиликсиз"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"Азыраак көрүү"</string>
 </resources>

@@ -24,7 +24,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/card_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layoutAnimation="@anim/layout_animation_fall_down"/>
 
     <RelativeLayout
         android:id="@+id/suggestion_footer"

@@ -872,7 +872,7 @@
     <string name="wifi_speed" msgid="3526198708812322037">"လိုင်းအမြန်နှုန်း"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"လှိုင်းနှုန်း"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"အိုင်ပီလိပ်စာ"</string>
-    <string name="passpoint_label" msgid="6381371313076009926">"မှတဆင့် သိမ်းဆည်းရန်"</string>
+    <string name="passpoint_label" msgid="6381371313076009926">"မှတဆင့် သိမ်းရန်"</string>
     <string name="passpoint_content" msgid="8447207162397870483">"<xliff:g id="NAME">%1$s</xliff:g> အထောက်အထားများ"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"EAPနည်းလမ်း"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"အဆင့်(၂) စစ်မှန်ကြောင်းအတည်ပြုခြင်း"</string>
@@ -892,6 +892,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"၅.၀ GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi ဟော့စပေါ့အတွက် အနည်းဆုံး လိုင်းတစ်လိုင်းရွေးပါ−"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP ဆက်တင်များ"</string>
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"ပုဂ္ဂိုလ်ရေး"</string>
     <string name="wifi_shared" msgid="844142443226926070">"အခြားစက်ပစ္စည်းအသုံးပြုသူများဖြင့် မျှဝေ"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ပြောင်းလဲခြင်းမရှိ)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"ကျေးဇူးပြု၍ ရွေးချယ်ပါ"</string>
@@ -1205,6 +1206,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"ပင်နံပါတ်ပြောင်း၍မရပါ\nပင်နံပါတ်အမှား ဖြစ်နိုင်သည်"</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"ဆင်းကဒ် ပင်နံပါတ် ပြောင်းခြင်းအောင်မြင်ပါသည်"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"ဆင်းမ်ကဒ်သော့ကျနေမှုအခြေအနေအား ပြောင်းမရပါ။ \nပင်နံပါတ်မှားယွင်းမှု ဖြစ်နိုင်သည်။"</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"ပင်နံပါတ်ကို ပိတ်၍မရပါ။"</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"ပင်နံပါတ်ကို ဖွင့်၍မရပါ။"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"မလုပ်တော့"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"ဆင်းမ်များ အများအပြား တွေ့ထား"</string>
@@ -1366,7 +1369,7 @@
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> အား လေ့လာပါ"</string>
     <string name="storage_detail_dialog_other" msgid="8845766044697204852">"အခြားပါဝင်မှုများမှာ အက်ပ်များမှ သိမ်းဆည်းလိုက်သည့် မျှဝေထားသော ဖိုင်များ၊ အင်တာနက် သို့မဟုတ် ဘလူးတုသ်မှ ဒေါင်းလုဒ်လုပ်ထားသည့် ဖိုင်များ၊ Android ဖိုင်များ စသည်တို့ဖြစ်သည်။ \n\n ဤ <xliff:g id="NAME">^1</xliff:g> ၏ မြင်နိုင်သော အကြောင်းအရာများကိုကြည့်ရန် လေ့လာရန် ကိုတို့ပါ။"</string>
     <string name="storage_detail_dialog_system" msgid="862835644848361569">"စနစ်တွင် Android ဗားရှင်း <xliff:g id="VERSION">%s</xliff:g> ဖြင့် ဖွင့်ခဲ့သည့်ဖိုင်များ ပါဝင်သည်"</string>
-    <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> သည် ဓာတ်ပုံ၊ ဂီတ၊ အက်ပ် သို့မဟုတ် အခြားဒေတာများအား သိမ်းဆည်းရန် သိုလှောင်ခန်း၏ <xliff:g id="SIZE">^2</xliff:g> အထိ နေရာယူထားသည်။\n\nအသေးစိတ်ကို ကြည့်ရန် <xliff:g id="USER_1">^1</xliff:g> သို့ ပြောင်းပါ။"</string>
+    <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> သည် ဓာတ်ပုံ၊ ဂီတ၊ အက်ပ် သို့မဟုတ် အခြားဒေတာများအား သိမ်းရန် သိုလှောင်ခန်း၏ <xliff:g id="SIZE">^2</xliff:g> အထိ နေရာယူထားသည်။\n\nအသေးစိတ်ကို ကြည့်ရန် <xliff:g id="USER_1">^1</xliff:g> သို့ ပြောင်းပါ။"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"သင့် <xliff:g id="NAME">^1</xliff:g> ကိုတပ်ဆင်မည်"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"ရွှေ့လျားနိုင်သည့် သိုလှောင်မှုအဖြစ် သုံးမည်"</string>
     <string name="storage_wizard_init_external_summary" msgid="7476105886344565074">"စက်ပစ္စည်းများအကြား ပုံများနှင့် အခြားမီဒီယာများရွှေ့လျားရန်အတွက်။"</string>
@@ -1411,7 +1414,7 @@
     <string name="storage_wizard_init_v2_external_action" msgid="8662451480642784031">"ဖြုတ်လွယ်သွင်းလွယ် သိုလှောင်ခန်း"</string>
     <string name="storage_wizard_init_v2_later" msgid="1080613420170749130">"နောက်မှ စနစ်သတ်မှတ်ရန်"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="5744790239994621663">"<xliff:g id="NAME">^1</xliff:g> ကို ဖော်မက်လုပ်လိုပါသလား။"</string>
-    <string name="storage_wizard_format_confirm_v2_body" msgid="4614199613500900975">"ဤ <xliff:g id="NAME_0">^1</xliff:g> တွင် အက်ပ်၊ ဖိုင်နှင့် မီဒီယာများကို သိမ်းဆည်းရန် ဖော်မက်လုပ်ရပါမည်။ \n\nဖော်မက်လုပ်ခြင်းဖြင့် <xliff:g id="NAME_1">^2</xliff:g> ရှိ အရာအားလုံးကို ဖျက်လိုက်ပါမည်။ အကြောင်းအရာများ မဆုံးရှုံးစေရန် အခြား <xliff:g id="NAME_2">^3</xliff:g> သို့မဟုတ် စက်ပစ္စည်းတစ်ခုသို့ မိတ္တူကူးထားပါ။"</string>
+    <string name="storage_wizard_format_confirm_v2_body" msgid="4614199613500900975">"ဤ <xliff:g id="NAME_0">^1</xliff:g> တွင် အက်ပ်၊ ဖိုင်နှင့် မီဒီယာများကို သိမ်းရန် ဖော်မက်လုပ်ရပါမည်။ \n\nဖော်မက်လုပ်ခြင်းဖြင့် <xliff:g id="NAME_1">^2</xliff:g> ရှိ အရာအားလုံးကို ဖျက်လိုက်ပါမည်။ အကြောင်းအရာများ မဆုံးရှုံးစေရန် အခြား <xliff:g id="NAME_2">^3</xliff:g> သို့မဟုတ် စက်ပစ္စည်းတစ်ခုသို့ မိတ္တူကူးထားပါ။"</string>
     <string name="storage_wizard_format_confirm_v2_action" msgid="8258363472135537500">"<xliff:g id="NAME">^1</xliff:g> ဖော်မက်လုပ်ရန်"</string>
     <string name="storage_wizard_migrate_v2_title" msgid="31406330052996898">"အကြောင်းအရာကို <xliff:g id="NAME">^1</xliff:g> သို့ ရွှေ့မလား။"</string>
     <string name="storage_wizard_migrate_v2_body" product="tablet" msgid="4476553430145054781">"ဖိုင်၊ မီဒီယာနှင့် အချို့သော အက်ပ်များကို ဤ <xliff:g id="NAME">^1</xliff:g> သို့ ရွှေ့နိုင်ပါသည်။ \n\nဤသို့ ရွှေ့ခြင်းအားဖြင့် သင့်တက်ဘလက်သိုလှောင်ခန်းတွင် <xliff:g id="SIZE">^2</xliff:g> နေရာလွတ်သွားစေမည်ဖြစ်ပြီး <xliff:g id="DURATION">^3</xliff:g> ခန့် ကြာနိုင်ပါသည်။"</string>
@@ -3001,6 +3004,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"မှောင်သည့် အပြင်အဆင်"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"ချွတ်ယွင်းမှု"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"ဝန်းကျင်ကို ပြကွက်၊ လော့ခ်ချထားချိန် မျက်နှာပြင်"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"လော့ခ်ချထားချိန် မျက်နှာပြင် အကြောင်းကြားချက်"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"မျက်နှာ"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"လက်ဗွေ"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"မျက်နှာပြင် အမှိန်၊ တို့ထိမျက်နှာပြင်၊ ဘက်ထရီ၊ အဆင့်မြင့် တောက်ပမှု၊ အားကောင်းသောတောက်ပမှု"</string>
@@ -4154,10 +4158,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ကွန်ရက် အသေးစိတ်များ"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"သင့်စက်ပစ္စည်းအမည်ကို သင့်ဖုန်းပေါ်ရှိ အက်ပ်များက မြင်ရပါသည်။ သင် \'ဘလူးတုသ်\' စက်ပစ္စည်းများသို့ ချိတ်ဆက်သည့်အခါ သို့မဟုတ် Wi-Fi ဟော့စပေါ့ ထုတ်လွှင့်သည့်အခါ အခြားသူများက မြင်နိုင်ပါသည်။"</string>
     <string name="devices_title" msgid="7701726109334110391">"စက်များ"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"ကြိမ်နှုန်းမြင့် အကန့်"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"ပကတိအသွင် ကြိမ်နှုန်းမြင့် အကန့်ကို အသုံးပြုသည်"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"ဆက်တင်အားလုံး"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"သင့်ဆက်တင်များ"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"အကြံပြုချက်များ"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS ဒေတာ"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS ဒေတာ"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"ကွန်ရက် ရွေးရန်"</string>
@@ -4169,4 +4171,67 @@
     <string name="network_query_error" msgid="7487714485362598410">"ကွန်ရက် ရှာမတွေ့ပါ။ ထပ်စမ်းကြည့်ပါ။"</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(တားမြစ်ထားသည်)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"ဆင်းမ်ကတ် မရှိပါ"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"အဆင့်မြင့်ဖုန်းခေါ်ဆိုခြင်း"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- GSM သီးသန့်"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- WCDMA သာ"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- CDMA only"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- EvDo သီးသန့်"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- ကမ္ဘာအနှံ့"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"အသုံးပြုလိုသော ကွန်ရက်မုဒ်- LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (အကြံပြုထားသည်)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (အကြုံပြုထားသည်)"</string>
+    <string name="network_global" msgid="959947774831178632">"ကမ္ဘာအနှံ့"</string>
+    <string name="label_available" msgid="1731547832803057893">"ရရှိနိုင်သော ကွန်ရက်များ"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"ရှာဖွေနေသည်…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"<xliff:g id="NETWORK">%s</xliff:g> တွင် မှတ်ပုံတင်နေသည်…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"ဤကွန်ရက်နှင့် ချိတ်ဆက်ခြင်းအား သင့်ဆင်းမ်ကတ်က ခွင့်မပြုပါ။"</string>
+    <string name="connect_later" msgid="978991102125216741">"ဤကွန်ရက်ကို ဆက်သွယ်၍ မရပါ။ နောက်မှ ပြန်ကြိုးစားပါ။"</string>
+    <string name="registration_done" msgid="4573820010512184521">"ကွန်ရက်ပေါ်တွင် မှတ်ပုံတင်ထားသည်။"</string>
+    <string name="select_automatically" msgid="7318032984017853975">"ကွန်ရက်ကို အလိုအလျောက် ရွေးချယ်ရန်"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"ဖုန်းကုမ္ပဏီ ဆက်တင်များ"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"ဒေတာဝန်ဆောင်မှု စတင်ရန်"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"မိုဘိုင်းဒေတာ"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"မိုဘိုင်းကွန်ရက်သုံးပြီး ဒေတာကို ဝင်သုံးခွင့်ပေးပါ"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"အသုံးပြုလိုသော ကွန်ရက် အမျိုးအစား"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"ကွန်ရက် လုပ်ဆောင်မှုစနစ်ကို ပြောင်းပါ"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"အသုံးပြုလိုသော ကွန်ရက် အမျိုးအစား"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"ဝန်ဆောင်မှုပေးသူ"</string>
+    <string name="call_category" msgid="8108654745239563833">"ခေါ်ဆိုနေသည်"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"ဝန်ဆောင်မှုပေးသူ ဗီဒီယိုခေါ်ဆိုခြင်း"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"စနစ်ကို ရွေးချယ်ရန်"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"CDMA ပြင်ပကွန်ရက်နှင့် ချိတ်ဆက်ခြင်းစနစ်ကို ပြောင်းရန်"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"စနစ်ကို ရွေးချယ်ရန်"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"ကွန်ရက်"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"ကွန်ရက်"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA လျှောက်ထားမှု"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"RUIM/SIM နှင့် NV အကြားပြောင်းလဲခြင်း"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"စာရင်းသွင်းမှု"</string>
+    <string name="register_automatically" msgid="518185886971595020">"အလိုအလျောက် မှတ်ပုံတင်ခြင်း…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"ကွန်ရက်ပြင်ပဒေတာ သုံးခွင့်​ပြုမလား။"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"ဈေးနှုန်းသိရှိရန် သင်၏ ကွန်ရက်ဝန်ဆောင်မှုပေးသူကို မေးပါ။"</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"အက်ပ်ဒေတာ သုံးစွဲမှု"</string>
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"မမှန်ကန်သည့် ကွန်ရက်မုဒ် <xliff:g id="NETWORKMODEID">%1$d</xliff:g>။ လျစ်လျူရှုပါ။"</string>
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g> တွင် ချိတ်ဆက်ထားသည့်အခါ မရနိုင်ပါ"</string>
+    <string name="see_more" msgid="5953815986207345223">"ပိုပြရန်"</string>
+    <string name="see_less" msgid="1250265310929558370">"လျှော့ ကြည့်ရန်"</string>
 </resources>

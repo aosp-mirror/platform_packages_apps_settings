@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"請為 Wi-Fi 熱點至少選擇一個頻段："</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP 設定"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"與其他裝置使用者分享"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(未變更)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"請選取"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"無法更改 PIN 碼。\nPIN 碼可能不正確。"</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"成功更改 SIM PIN"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"無法更改 SIM 卡鎖定狀態。\n可能輸入了不正確的 PIN 碼。"</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"無法停用 PIN。"</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"無法啟用 PIN。"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"確定"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"取消"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"找到多張 SIM 卡"</string>
@@ -3002,6 +3006,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"深色主題背景"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"錯誤"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"環境顯示，上鎖畫面顯示"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"上鎖畫面通知"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"臉孔"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"指紋"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"螢幕變暗, 觸控螢幕, 電池, 智能亮度, 動態亮度"</string>
@@ -3483,7 +3488,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"沒有要求權限"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"所有應用程式"</string>
     <string name="filter_enabled_apps" msgid="5395727306799456250">"已安裝的應用程式"</string>
-    <string name="filter_instant_apps" msgid="574277769963965565">"即時應用程式"</string>
+    <string name="filter_instant_apps" msgid="574277769963965565">"免安裝應用程式"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"個人"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"工作"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"應用程式：全部"</string>
@@ -3982,10 +3987,10 @@
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"無法在已遭流動網絡供應商鎖定的裝置上啟用"</string>
     <string name="oem_lock_info_message" msgid="9218313722236417510">"請重新啟動裝置以啟用裝置保護功能。"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已釋放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次執行時間：<xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="web_action_enable_title" msgid="4051513950976670853">"即時應用程式"</string>
+    <string name="web_action_enable_title" msgid="4051513950976670853">"免安裝應用程式"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"即使您沒有安裝應用程式，亦可在應用程式內開啟連結"</string>
-    <string name="web_action_section_title" msgid="7364647086538399136">"即時應用程式"</string>
-    <string name="instant_apps_settings" msgid="8827777916518348213">"即時應用程式偏好設定"</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"免安裝應用程式"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"免安裝應用程式偏好設定"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"已安裝的應用程式"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"您的儲存空間即將由儲存空間管理員管理"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g>的帳戶"</string>
@@ -4077,7 +4082,7 @@
     <string name="storage_volume_total" msgid="3499221850532701342">"已使用 (共 <xliff:g id="TOTAL">%1$s</xliff:g>)"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"已使用"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"清除應用程式"</string>
-    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"您要移除此即時應用程式嗎？"</string>
+    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"您要移除此免安裝應用程式嗎？"</string>
     <string name="launch_instant_app" msgid="391581144859010499">"開啟"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"遊戲"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"音訊檔案"</string>
@@ -4100,7 +4105,7 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"儲存空間管理員：<xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"關閉"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"開啟"</string>
-    <string name="install_type_instant" msgid="3174425974536078647">"即時應用程式"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"免安裝應用程式"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"要停用儲存空間管理員嗎？"</string>
     <string name="storage_movies_tv" msgid="5498394447562086890">"電影和電視應用程式"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"流動網絡供應商佈建資料"</string>
@@ -4155,10 +4160,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"網絡詳細資料"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"您的裝置名稱會在手機的應用程式上顯示。當您連接藍牙裝置或設定 Wi-Fi 熱點時，其他人亦可能會看到您的裝置名稱。"</string>
     <string name="devices_title" msgid="7701726109334110391">"裝置"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"高頻率面板"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"啟用虛擬高頻率面板"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"所有設定"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"您的設定"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"建議"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS 數據"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS 數據"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"選擇網絡"</string>
@@ -4170,4 +4173,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"找不到網絡，請再試一次。"</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(禁止)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"沒有 SIM 卡"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"進階通話"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"首選網絡模式：首選 WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"首選網絡模式：僅限 GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"首選網絡模式：僅限 WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"首選網絡模式：GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"首選網絡模式：CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"首選網絡模式：CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"首選網絡模式：僅限 CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"首選網絡模式：僅限 EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"首選網絡模式：CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"首選網絡模式：LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"首選網絡模式：GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"首選網絡模式：CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"首選網絡模式：全球"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"首選網絡模式：LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"首選網絡模式：LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"首選網絡模式：LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"首選網絡模式：TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"首選網絡模式：TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"首選網絡模式：LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"首選網絡模式：TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"首選網絡模式：LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"首選網絡模式：TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"首選網絡模式：LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"首選網絡模式：LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"首選網絡模式：TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"首選網絡模式：LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (建議)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (建議)"</string>
+    <string name="network_global" msgid="959947774831178632">"全球"</string>
+    <string name="label_available" msgid="1731547832803057893">"可用的網絡"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"正在搜尋…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"正在註冊<xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"您的 SIM 卡無法連接這個網絡。"</string>
+    <string name="connect_later" msgid="978991102125216741">"目前無法連接這個網絡，請稍後再試。"</string>
+    <string name="registration_done" msgid="4573820010512184521">"已在網絡上註冊。"</string>
+    <string name="select_automatically" msgid="7318032984017853975">"自動選取網絡"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"流動網絡供應商設定"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"設定數據服務"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"流動數據"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"使用流動網絡存取數據"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"首選網絡類型"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"更改網絡操作模式"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"首選網絡類型"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"流動網絡供應商"</string>
+    <string name="call_category" msgid="8108654745239563833">"通話"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"流動網絡供應商視像通話"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"系統選擇"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"更改 CDMA 漫遊模式"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"系統選擇"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"網絡"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"網絡"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA 訂閱"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"在 RUIM/SIM 和 NV 之間切換"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"訂閱"</string>
+    <string name="register_automatically" msgid="518185886971595020">"自動註冊…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"要允許數據漫遊嗎？"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"請聯絡您的網絡供應商查詢定價。"</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"應用程式數據用量"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"無法在連接至<xliff:g id="CARRIER">%1$s</xliff:g>時使用"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"顯示較少"</string>
 </resources>

@@ -17,9 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
-import static com.android.settings.fuelgauge.TopLevelBatteryPreferenceController.getDashboardLabel;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.BatteryStats;
 import android.os.Bundle;
@@ -43,7 +41,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -389,35 +386,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         restartBatteryTipLoader();
     }
 
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-        private final Context mContext;
-        private final SummaryLoader mLoader;
-        private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
-
-        private SummaryProvider(Context context, SummaryLoader loader) {
-            mContext = context;
-            mLoader = loader;
-            mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
-            mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
-                BatteryInfo.getBatteryInfo(mContext, new BatteryInfo.Callback() {
-                    @Override
-                    public void onBatteryInfoLoaded(BatteryInfo info) {
-                        mLoader.setSummary(SummaryProvider.this, getDashboardLabel(mContext, info));
-                    }
-                }, true /* shortString */);
-            });
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                mBatteryBroadcastReceiver.register();
-            } else {
-                mBatteryBroadcastReceiver.unRegister();
-            }
-        }
-    }
-
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
@@ -429,13 +397,4 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     return Collections.singletonList(sir);
                 }
             };
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 }

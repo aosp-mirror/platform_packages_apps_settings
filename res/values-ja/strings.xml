@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi アクセス ポイントの帯域幅を少なくとも 1 つ選択してください。"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP設定"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"他の端末ユーザーと共有する"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"（変更なし）"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"選択してください"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PINを変更できません。\nPINが正しくない可能性があります。"</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM PINが変更されました"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"SIMカードのロック状態を変更できません。\nPINが正しくない可能性があります。"</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN を無効にできません。"</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN を有効にできません。"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"キャンセル"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"複数のSIMが見つかりました"</string>
@@ -3001,6 +3005,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"ダークテーマ"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"バグ"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"アンビエント表示, ロック画面表示"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"ロック画面の通知"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"顔"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"指紋"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"画面を暗くする, タッチスクリーン, 電池, スマート ブライトネス, ダイナミック ブライトネス"</string>
@@ -4154,10 +4159,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ネットワークの詳細"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"端末名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーも端末名を確認できるようになります。"</string>
     <string name="devices_title" msgid="7701726109334110391">"端末"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"高頻度パネル"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"高頻度仮装パネルを有効にする"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"すべての設定"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"カスタマイズした設定"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"おすすめの設定"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS データ"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS データ"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"ネットワークを選択"</string>
@@ -4169,4 +4172,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"ネットワークが見つかりませんでした。もう一度お試しください。"</string>
     <string name="forbidden_network" msgid="4626592887509826545">"（禁止）"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"SIM カードなし"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"拡張モードでの通話"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"優先ネットワーク モード: WCDMA 優先"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"優先ネットワーク モード: GSM のみ"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"優先ネットワーク モード: WCDMA のみ"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"優先ネットワーク モード: GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"優先ネットワーク モード: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"優先ネットワーク モード: CDMA / EV-DO"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"優先ネットワーク モード: CDMA のみ"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"優先ネットワーク モード: EV-DO のみ"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"優先ネットワーク モード: CDMA / EV-DO / GSM / WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"優先ネットワーク モード: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"優先ネットワーク モード: GSM / WCDMA / LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"優先ネットワーク モード: CDMA+LTE / EV-DO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"優先ネットワーク モード: グローバル"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"優先ネットワーク モード: LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"推奨ネットワーク モード: LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"優先ネットワーク モード: LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"優先ネットワーク モード: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"優先ネットワーク モード: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"優先ネットワーク モード: LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"優先ネットワーク モード: TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"優先ネットワーク モード: LTE / GSM / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"優先ネットワーク モード: TDSCDMA / GSM / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"優先ネットワーク モード: LTE / TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"優先ネットワーク モード: LTE / TDSCDMA / GSM / WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"優先ネットワーク モード: TDSCDMA / CDMA / EV-DO / GSM / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"優先ネットワーク モード: LTE / TDSCDMA / CDMA / EV-DO / GSM / WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE（推奨）"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G（推奨）"</string>
+    <string name="network_global" msgid="959947774831178632">"グローバル"</string>
+    <string name="label_available" msgid="1731547832803057893">"利用可能なネットワーク"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"検索しています…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"<xliff:g id="NETWORK">%s</xliff:g> に登録しています…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"お使いの SIM カードではこのネットワークに接続できません。"</string>
+    <string name="connect_later" msgid="978991102125216741">"現在このネットワークに接続できません。しばらくしてからもう一度お試しください。"</string>
+    <string name="registration_done" msgid="4573820010512184521">"ネットワークに登録しました。"</string>
+    <string name="select_automatically" msgid="7318032984017853975">"ネットワークを自動的に選択"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"携帯通信会社の設定"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"データサービスの設定"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"モバイルデータ"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"モバイル ネットワーク経由でデータにアクセス"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"優先ネットワークの種類"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"ネットワーク動作モードの変更"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"優先ネットワークの種類"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"携帯通信会社"</string>
+    <string name="call_category" msgid="8108654745239563833">"通話"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"携帯通信会社のビデオ通話"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"システムの選択"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"CDMA ローミング モードを変更する"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"システムの選択"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"ネットワーク"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"ネットワーク"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA 登録"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"RUIM / SIM と NV を切り替える"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"登録"</string>
+    <string name="register_automatically" msgid="518185886971595020">"自動登録..."</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"データ ローミングを許可しますか？"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"価格設定については、ネットワーク プロバイダにお問い合わせください。"</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"アプリのデータ使用量"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g> への接続時は利用できません"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"一部を表示"</string>
 </resources>

@@ -29,6 +29,8 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -275,14 +277,42 @@ public class MobileNetworkUtils {
         return false;
     }
 
+    /**
+     * return {@code true} if we need show Gsm related settings
+     */
     public static boolean isGsmOptions(Context context, int subId) {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return false;
         }
+        if (isGsmBasicOptions(context, subId)) {
+            return true;
+        }
+        final int settingsNetworkMode = android.provider.Settings.Global.getInt(
+                context.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
+                Phone.PREFERRED_NT_MODE);
+        if (isWorldMode(context, subId)) {
+            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+                return true;
+            } else if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA
+                    && !MobileNetworkUtils.isTdscdmaSupported(context, subId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean isGsmBasicOptions(Context context, int subId) {
         final TelephonyManager telephonyManager = TelephonyManager.from(context)
                 .createForSubscriptionId(subId);
+        final PersistableBundle carrierConfig = context.getSystemService(
+                CarrierConfigManager.class).getConfigForSubId(subId);
 
         if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_GSM) {
+            return true;
+        } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             return true;
         }
 
@@ -316,6 +346,39 @@ public class MobileNetworkUtils {
         Log.d(TAG, "isWorldMode=" + worldModeOn);
 
         return worldModeOn;
+    }
+
+    /**
+     * Return {@code true} if we need show settings for network selection(i.e. Verizon)
+     */
+    public static boolean shouldDisplayNetworkSelectOptions(Context context, int subId) {
+        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+                .createForSubscriptionId(subId);
+        final PersistableBundle carrierConfig = context.getSystemService(
+                CarrierConfigManager.class).getConfigForSubId(subId);
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                || !carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_OPERATOR_SELECTION_EXPAND_BOOL)
+                || (carrierConfig.getBoolean(CarrierConfigManager.KEY_CSP_ENABLED_BOOL)
+                && !telephonyManager.isManualNetworkSelectionAllowed())) {
+            return false;
+        }
+
+        if (isGsmBasicOptions(context, subId)) {
+            return true;
+        }
+
+        final int settingsNetworkMode = android.provider.Settings.Global.getInt(
+                context.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
+                Phone.PREFERRED_NT_MODE);
+        if (isWorldMode(context, subId)) {
+            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static boolean isShow4GForLTE(Context context) {

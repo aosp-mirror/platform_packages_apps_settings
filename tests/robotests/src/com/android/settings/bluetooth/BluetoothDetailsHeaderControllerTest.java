@@ -72,7 +72,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         FakeFeatureFactory.setupForTest();
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
-        when(mCachedDeviceManager.getHearingAidPairDeviceSummary(mCachedDevice)).thenReturn("abc");
+        when(mCachedDeviceManager.getSubDeviceSummary(mCachedDevice)).thenReturn("abc");
         mController =
             new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle,
                 mBluetoothManager);

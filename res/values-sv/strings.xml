@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Välj minst ett band för Wi‑Fi-surfzon:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-inställningar"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"Dela med andra som använder enheten"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(oförändrat)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Välj"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Det går inte att ändra PIN-koden.\n Du kan ha angett fel PIN-kod."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM-kortets PIN-kod har ändrats"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Det gick inte att ändra SIM-kortets låsstatus.\nDu kan ha angett fel PIN-kod."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Det gick inte att inaktivera pinkoden."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Det gick inte att aktivera pinkoden."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Avbryt"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Flera SIM-kort har hittats"</string>
@@ -1668,7 +1672,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Gör grafiskt lösenord synligt"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Gör det grafiska lösenordet för profilen synligt"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibrera vid tryck"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Avstängningsknappen låser direkt"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Strömbrytaren låser direkt"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Ange grafiskt lösenord"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Byt grafiskt lösenord"</string>
@@ -3001,6 +3005,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"mörkt tema"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"fel"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Aktiv låsskärm, visning av låsskärm"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"avisering på låsskärm"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"ansikte"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"fingeravtryck"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"nedtonad skärm, pekskärm, batteri, intelligent ljusstyrka, dynamisk ljusstyrka"</string>
@@ -4154,10 +4159,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Nätverksinformation"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Enhetens namn är synligt för appar i mobilen. Det kan också vara synligt för andra personer när du ansluter till Bluetooth-enheter eller om du skapar en Wi-Fi-surfzon."</string>
     <string name="devices_title" msgid="7701726109334110391">"Enheter"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Panel för hög frekvens"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Aktivera den virtuella panelen för hög frekvens"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Alla inställningar"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Dina inställningar"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Förslag"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"Data via CBRS"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"Data via CBRS"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Välj nätverk"</string>
@@ -4169,4 +4172,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"Det gick inte att hitta nätverk. Försök igen."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(förbjudet)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Inget SIM-kort"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Avancerade samtal"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Föredraget nätverksläge: Föredrar WCDMA"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Föredraget nätverksläge: Endast GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Föredraget nätverksläge: Endast WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Föredraget nätverksläge: GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Föredraget nätverksläge: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Föredraget nätverksläge: CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Föredraget nätverksläge: Endast CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Föredraget nätverksläge: Endast EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Föredraget nätverksläge: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Föredraget nätverksläge: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Föredraget nätverksläge: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Föredraget nätverksläge: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Föredraget nätverksläge: globalt"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Föredraget nätverksläge: LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Föredraget nätverksläge: LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Föredraget nätverksläge: LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Föredraget nätverksläge: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Föredraget nätverksläge: TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Föredraget nätverksläge: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Föredraget nätverksläge: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Föredraget nätverksläge: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Föredraget nätverksläge: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Föredraget nätverksläge: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Föredraget nätverksläge: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Föredraget nätverksläge: TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Föredraget nätverksläge: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (rekommenderas)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (rekommenderas)"</string>
+    <string name="network_global" msgid="959947774831178632">"Globalt"</string>
+    <string name="label_available" msgid="1731547832803057893">"Tillgängliga nätverk"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Söker …"</string>
+    <string name="register_on_network" msgid="766516026652295941">"Registrerar på <xliff:g id="NETWORK">%s</xliff:g> …"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"Ditt SIM-kort tillåter inte anslutning till detta nätverk."</string>
+    <string name="connect_later" msgid="978991102125216741">"Det går inte att ansluta till det här nätverket just nu. Försök igen senare."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Registrerad på nätverk."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Välj nätverk automatiskt"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Operatörsinställningar"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Konfigurera datatjänst"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Mobildata"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Få åtkomst till data via mobilt nätverk"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Önskad nätverkstyp"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Ändra nätverksläge"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Önskad nätverkstyp"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Operatör"</string>
+    <string name="call_category" msgid="8108654745239563833">"Ringer upp"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Videosamtal via operatören"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Systemval"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Ändra CDMA-roamingläge"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Systemval"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Nätverk"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Nätverk"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA-prenumeration"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Växla mellan RUIM/SIM och NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"prenumeration"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Automatisk registrering …"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Vill du tillåta dataroaming?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Kontakta din nätoperatör för priser."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Appens dataanvändning"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Inte tillgänglig vid anslutning till <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"Visa färre"</string>
 </resources>

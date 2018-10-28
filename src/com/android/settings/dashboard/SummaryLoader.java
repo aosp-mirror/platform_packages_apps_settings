@@ -44,7 +44,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class SummaryLoader {
-    private static final boolean DEBUG = DashboardSummary.DEBUG;
+    private static final boolean DEBUG = false;
     private static final String TAG = "SummaryLoader";
 
     public static final String SUMMARY_PROVIDER_FACTORY = "SUMMARY_PROVIDER_FACTORY";

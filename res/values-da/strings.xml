@@ -892,6 +892,8 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Vælg mindst ét frekvensbånd til Wi‑Fi-hotspottet:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-indstillinger"</string>
+    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
+    <skip />
     <string name="wifi_shared" msgid="844142443226926070">"Del med andre enhedsbrugere"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(uændret)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Vælg"</string>
@@ -1205,6 +1207,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Pinkoden kan ikke ændres.\nPinkoden er muligvis forkert."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN-koden til SIM-kortet er ændret"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"SIM-kortets tilstand kan ikke ændres.\nMuligvis pga. en forkert pinkode."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Pinkoden kan ikke deaktiveres."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Pinkoden kan ikke aktiveres."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Annuller"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Der blev fundet flere SIM-kort"</string>
@@ -3001,6 +3005,7 @@
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"mørkt tema"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"fejl"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Aktiv låseskærm, visning af låseskærm"</string>
+    <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"underretning på låseskærm"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"ansigt"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"fingeraftryk"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"dæmp skærmlys, touchskærm, batteri, intelligent lysstyrke, dynamisk klarhed"</string>
@@ -3160,7 +3165,7 @@
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Indstillinger"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Ingen lyd eller visuelle signaler fra underretninger"</string>
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"Ingen lyd fra underretninger"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"Underretninger kan ikke ses eller høres. Opkald fra stjernemarkerede kontaktpersoner og gentagne opkald er tilladt."</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"Underretninger kan ikke ses eller høres. Opkald fra stjernemarkerede kontakter og gentagne opkald er tilladt."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="1280614488924843713">"(aktuel indstilling)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="1352808651270918932">"Vil du ændre underretningsindstillingerne for Forstyr ikke?"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Lyde for arbejdsprofil"</string>
@@ -3333,7 +3338,7 @@
     <string name="zen_mode_calls" msgid="7051492091133751208">"Opkald"</string>
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Tillad opkald"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Når Forstyr ikke er aktiveret, blokeres indgående opkald. Du kan ændre indstillingerne, så dine venner, dine familie eller andre kontaktpersoner kan få fat i dig."</string>
-    <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Stjernemarkerede kontaktpersoner"</string>
+    <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Stjernemarkerede kontakter"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
       <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> anden</item>
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> andre</item>
@@ -3346,8 +3351,8 @@
     <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"nogle beskeder"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Fra hvem som helst"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Kun fra kontaktpersoner"</string>
-    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Kun fra stjernemarkerede kontaktpersoner"</string>
-    <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"Fra stjernemarkerede kontaktpersoner og ved gentagne opkald"</string>
+    <string name="zen_mode_from_starred" msgid="2678345811950997027">"Kun fra stjernemarkerede kontakter"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"Fra stjernemarkerede kontakter og ved gentagne opkald"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"Fra kontaktpersoner og ved gentagne opkald"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Kun ved gentagne opkald"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ingen"</string>
@@ -3365,7 +3370,7 @@
     <string name="zen_mode_events_title" msgid="5597241655883329085">"Tillad begivenheder"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"alle"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"kontaktpersoner"</string>
-    <string name="zen_mode_starred_callers" msgid="1023167821338514140">"stjernemarkerede kontaktpersoner"</string>
+    <string name="zen_mode_starred_callers" msgid="1023167821338514140">"stjernemarkerede kontakter"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Gentagne opkald"</string>
     <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"gentagne opkald"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Tillad gentagne opkald"</string>
@@ -4124,7 +4129,7 @@
     <string name="disabled_dependent_setting_summary" msgid="8291322239940946902">"Er afhængig af en anden indstilling"</string>
     <string name="unknown_unavailability_setting_summary" msgid="4589584678033059435">"Indstillingen er ikke tilgængelig"</string>
     <string name="my_device_info_account_preference_title" msgid="342933638925781861">"Konto"</string>
-    <string name="my_device_info_device_name_preference_title" msgid="7104085224684165324">"Enhedsnavn"</string>
+    <string name="my_device_info_device_name_preference_title" msgid="7104085224684165324">"Enhedens navn"</string>
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"Brug Bluetooth, når du kører"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Aktivér Bluetooth automatisk, når du kører"</string>
     <string name="change_wifi_state_title" msgid="3261945855372885427">"Styring af Wi-Fi"</string>
@@ -4154,10 +4159,8 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Netværksoplysninger"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Navnet på din enhed er synligt for apps på din telefon. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller konfigurerer et Wi-Fi-hotspot."</string>
     <string name="devices_title" msgid="7701726109334110391">"Enheder"</string>
-    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Panel for høj frekvens"</string>
-    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Aktivér det virtuelle panel for høj frekvens"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Alle indstillinger"</string>
-    <string name="homepage_personal_settings" msgid="3998213046366125494">"Dine indstillinger"</string>
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"Forslag"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS-data"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS-data"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"Vælg netværk"</string>
@@ -4169,4 +4172,69 @@
     <string name="network_query_error" msgid="7487714485362598410">"Der kunne ikke findes nogen netværk. Prøv igen."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(forbudt)"</string>
     <string name="no_sim_card" msgid="1360669528113557381">"Intet SIM-kort"</string>
+    <string name="enhanced_4g_lte_mode_title_variant" msgid="758804404006513787">"Avancerede opkald"</string>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Foretrukken netværkstilstand: WCDMA foretrækkes"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Foretrukken netværkstilstand: Kun GSM"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Foretrukken netværkstilstand: Kun WCDMA"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="4290654515569144276">"Foretrukken netværkstilstand: GSM/WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="854981096234906594">"Foretrukken netværkstilstand: CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="2578065433446506616">"Foretrukken netværkstilstand: CDMA/EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="6604102246309629962">"Foretrukken netværkstilstand: Kun CDMA"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="7558385602277592784">"Foretrukken netværkstilstand: Kun EvDo"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="1742638677806401815">"Foretrukken netværkstilstand: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8528755811985330696">"Foretrukken netværkstilstand: LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="6632007438739933645">"Foretrukken netværkstilstand: GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5464960267483576515">"Foretrukken netværkstilstand: CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_global_summary" msgid="8552400100470153638">"Foretrukken netværkstilstand: Global"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="8037915274486919940">"Foretrukken netværkstilstand: LTE/WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="104110625441127919">"Foretrukket netværkstilstand: LTE/GSM/UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="2561159741461407053">"Foretrukken netværkstilstand: LTE/CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="1111689194136766011">"Foretrukken netværkstilstand: TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="4272515966019344433">"Foretrukken netværkstilstand: TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3138210224248737600">"Foretrukken netværkstilstand: LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="7575595856957063853">"Foretrukken netværkstilstand: TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1512046749970721629">"Foretrukken netværkstilstand: LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="1038314909945393905">"Foretrukken netværkstilstand: TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="3277980364222159279">"Foretrukken netværkstilstand: LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="1572937828071126891">"Foretrukken netværkstilstand: LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="8393145171649288912">"Foretrukken netværkstilstand: CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="5544016990994809932">"Foretrukken netværkstilstand: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="network_lte" msgid="1287709529829131860">"LTE (anbefalet)"</string>
+    <string name="network_4G" msgid="8611758013994499559">"4G (anbefalet)"</string>
+    <string name="network_global" msgid="959947774831178632">"Global"</string>
+    <string name="label_available" msgid="1731547832803057893">"Tilgængelige netværk"</string>
+    <string name="load_networks_progress" msgid="7709402068413190831">"Søger…"</string>
+    <string name="register_on_network" msgid="766516026652295941">"Registrerer på <xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="1667079919821581706">"Dit SIM-kort tillader ikke en forbindelse til dette netværk."</string>
+    <string name="connect_later" msgid="978991102125216741">"Der kan ikke oprettes forbindelse til dette netværk lige nu. Prøv igen senere."</string>
+    <string name="registration_done" msgid="4573820010512184521">"Registreret på netværket."</string>
+    <string name="select_automatically" msgid="7318032984017853975">"Vælg netværk automatisk"</string>
+    <string name="carrier_settings_title" msgid="3503012527671299886">"Indst. for mobilselskab"</string>
+    <string name="cdma_lte_data_service" msgid="8507044148856536098">"Konfiguration af datatjeneste"</string>
+    <string name="mobile_data_settings_title" msgid="7674604042461065482">"Mobildata"</string>
+    <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Få adgang til data via mobilnetværk"</string>
+    <string name="preferred_network_mode_title" msgid="6505630109389684100">"Foretrukken netværkstype"</string>
+    <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Skift driftstilstand for netværket"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Foretrukken netværkstype"</string>
+    <string name="carrier_settings_euicc" msgid="8658562169133242581">"Mobilselskab"</string>
+    <string name="call_category" msgid="8108654745239563833">"Opkald"</string>
+    <string name="video_calling_settings_title" msgid="8153216918491498505">"Videoopkald via mobilselskab"</string>
+    <string name="cdma_system_select_title" msgid="7210256688912895790">"Systemvalg"</string>
+    <string name="cdma_system_select_summary" msgid="3413863051181111941">"Skift CDMA-roamingtilstand"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="1198883288864916563">"Systemvalg"</string>
+    <string name="network_operator_category" msgid="8451238364605724918">"Netværk"</string>
+    <string name="network_select_title" msgid="8394621216255081026">"Netværk"</string>
+    <string name="cdma_subscription_title" msgid="1473189596933979467">"CDMA-abonnement"</string>
+    <string name="cdma_subscription_summary" msgid="7191590908367194209">"Skift mellem RUIM/SIM og NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"abonnement"</string>
+    <string name="register_automatically" msgid="518185886971595020">"Automatisk registrering…"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Vil du tillade dataroaming?"</string>
+    <string name="roaming_check_price_warning" msgid="4979418631753681300">"Kontakt din netværksudbyder for at få oplyst priser."</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Dataforbrug for apps"</string>
+    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
+    <skip />
+    <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Utilgængelig ved forbindelse til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <!-- no translation found for see_more (5953815986207345223) -->
+    <skip />
+    <string name="see_less" msgid="1250265310929558370">"Se mindre"</string>
 </resources>
