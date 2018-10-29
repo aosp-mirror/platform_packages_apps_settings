@@ -321,6 +321,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         displayResourceTiles();
 
         refreshDashboardTiles(TAG);
+
+        final Activity activity = getActivity();
+        if (activity != null) {
+            Log.d(TAG, "All preferences added, reporting fully drawn");
+            activity.reportFullyDrawn();
+        }
     }
 
     /**

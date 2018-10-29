@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
-
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
@@ -248,10 +246,8 @@ public class SettingsActivity extends SettingsBaseActivity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
 
-        final ComponentName cn = intent.getComponent();
-        final String className = cn.getClassName();
-
-        mIsShowingDashboard = className.equals(Settings.class.getName());
+        mIsShowingDashboard = TextUtils.equals(
+                SettingsActivity.class.getName(), intent.getComponent().getClassName());
 
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
