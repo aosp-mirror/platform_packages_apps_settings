@@ -24,6 +24,7 @@ import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
+import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
 import com.android.settings.wifi.WifiSlice;
 
 import java.util.Map;
@@ -103,5 +104,6 @@ public class CustomSliceManager {
         mUriMap.put(DeviceInfoSlice.DEVICE_INFO_CARD_URI, DeviceInfoSlice.class);
         mUriMap.put(StorageSlice.STORAGE_CARD_URI, StorageSlice.class);
         mUriMap.put(BatterySlice.BATTERY_CARD_URI, BatterySlice.class);
+        mUriMap.put(ConnectedDeviceSlice.CONNECTED_DEVICE_URI, ConnectedDeviceSlice.class);
     }
 }
