@@ -124,6 +124,8 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
             // * always
             // * ask
             // * never
+            //
+            // Make sure to update linkStateToIndex() if this presentation order is changed.
             mAppLinkState.setEntries(new CharSequence[] {
                     getString(R.string.app_link_open_always),
                     getString(R.string.app_link_open_ask),
@@ -141,10 +143,7 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
                 // purposes of the UI (and does the right thing around pending domain
                 // verifications that might arrive after the user chooses 'ask' in this UI).
                 final int state = mPm.getIntentVerificationStatusAsUser(mPackageName, UserHandle.myUserId());
-                mAppLinkState.setValue(
-                        Integer.toString((state == INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED)
-                                ? INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK
-                                        : state));
+                mAppLinkState.setValueIndex(linkStateToIndex(state));
 
                 // Set the callback only after setting the initial selected item
                 mAppLinkState.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -154,6 +153,17 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
                     }
                 });
             }
+        }
+    }
+
+    private int linkStateToIndex(final int state) {
+        switch (state) {
+            case INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS:
+                return 0; // Always
+            case INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER:
+                return 2; // Never
+            default:
+                return 1; // Ask
         }
     }
 
