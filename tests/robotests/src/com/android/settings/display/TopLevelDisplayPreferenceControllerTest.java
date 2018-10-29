@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
 
 package com.android.settings.display;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -41,51 +43,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class WallpaperPreferenceControllerTest {
-
-    private static final String WALLPAPER_PACKAGE = "TestPkg";
-    private static final String WALLPAPER_CLASS = "TestCls";
-    private static final String TEST_KEY = "test_key";
-
+public class TopLevelDisplayPreferenceControllerTest {
     @Mock
     private Context mContext;
     @Mock
     private PackageManager mPackageManager;
 
-    private WallpaperPreferenceController mController;
+    private TopLevelDisplayPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getString(R.string.config_wallpaper_picker_package))
-                .thenReturn(WALLPAPER_PACKAGE);
-        when(mContext.getString(R.string.config_wallpaper_picker_class))
-                .thenReturn(WALLPAPER_CLASS);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getString(R.string.config_wallpaper_picker_package))
+                .thenReturn("pkg");
+        when(mContext.getString(R.string.config_wallpaper_picker_class))
+                .thenReturn("cls");
 
-        mController = new WallpaperPreferenceController(mContext, TEST_KEY);
+        mController = new TopLevelDisplayPreferenceController(mContext, "test_key");
     }
 
     @Test
-    public void isAvailable_wallpaperPickerEnabled_shouldReturnTrue() {
+    public void getAvailability_alwaysAvailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getSummary_hasWallpaper_shouldReturnWallpaperSummary() {
         final List<ResolveInfo> resolveInfos = new ArrayList<>();
         resolveInfos.add(mock(ResolveInfo.class));
         when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt()))
                 .thenReturn(resolveInfos);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getText(R.string.display_dashboard_summary));
     }
 
     @Test
-    public void isAvailable_wallpaperPickerDisabled_shouldReturnFalse() {
-        when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt())).thenReturn(null);
-
-        assertThat(mController.isAvailable()).isFalse();
-
+    public void getSummary_hasWallpaper_shouldReturnNoWallpaperSummary() {
         final List<ResolveInfo> resolveInfos = new ArrayList<>();
         when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt()))
                 .thenReturn(resolveInfos);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getText(R.string.display_dashboard_nowallpaper_summary));
     }
+
 }

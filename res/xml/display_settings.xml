@@ -52,7 +52,7 @@
         android:title="@string/wallpaper_settings_title"
         settings:keywords="@string/keywords_display_wallpaper"
         settings:useAdminDisabledSummary="true"
-        settings:searchable="false">
+        settings:controller="com.android.settings.display.WallpaperPreferenceController">
         <intent
             android:targetPackage="@string/config_wallpaper_picker_package"
             android:targetClass="@string/config_wallpaper_picker_class" />

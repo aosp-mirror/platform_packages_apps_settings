@@ -27,34 +27,30 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
-public class WallpaperPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class WallpaperPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "WallpaperPrefController";
-
-    public static final String KEY_WALLPAPER = "wallpaper";
 
     private final String mWallpaperPackage;
     private final String mWallpaperClass;
 
-    public WallpaperPreferenceController(Context context) {
-        super(context);
+    public WallpaperPreferenceController(Context context, String key) {
+        super(context, key);
         mWallpaperPackage = mContext.getString(R.string.config_wallpaper_picker_package);
         mWallpaperClass = mContext.getString(R.string.config_wallpaper_picker_class);
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         if (TextUtils.isEmpty(mWallpaperPackage) || TextUtils.isEmpty(mWallpaperClass)) {
             Log.e(TAG, "No Wallpaper picker specified!");
-            return false;
+            return UNSUPPORTED_ON_DEVICE;
         }
         final ComponentName componentName =
                 new ComponentName(mWallpaperPackage, mWallpaperClass);
@@ -63,12 +59,8 @@ public class WallpaperPreferenceController extends AbstractPreferenceController 
         intent.setComponent(componentName);
         final List<ResolveInfo> resolveInfos =
                 pm.queryIntentActivities(intent, 0 /* flags */);
-        return resolveInfos != null && resolveInfos.size() != 0;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_WALLPAPER;
+        return resolveInfos != null && !resolveInfos.isEmpty()
+                ? AVAILABLE_UNSEARCHABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
