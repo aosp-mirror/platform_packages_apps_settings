@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,6 +60,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     private static final String TAG = "NetworkSelectSettings";
 
+    private static final int EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE = 1;
     private static final int EVENT_NETWORK_SCAN_RESULTS = 2;
     private static final int EVENT_NETWORK_SCAN_ERROR = 3;
     private static final int EVENT_NETWORK_SCAN_COMPLETED = 4;
@@ -134,13 +136,10 @@ public class NetworkSelectSettings extends DashboardFragment {
         mForbiddenPlmns = Arrays.asList(mTelephonyManager.getForbiddenPlmns());
         setProgressBarVisible(true);
 
-        if (mUseNewApi) {
-            mNetworkScanHelper.startNetworkScan(
-                    NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS);
-        } else {
-            mNetworkScanHelper.startNetworkScan(
-                    NetworkScanHelper.NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS);
-        }
+        mNetworkScanHelper.startNetworkScan(
+                mUseNewApi
+                        ? NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS
+                        : NetworkScanHelper.NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS);
     }
 
     @Override
@@ -153,7 +152,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference != mSelectedPreference) {
             stopNetworkQuery();
-            setProgressBarVisible(false);
             // Refresh the last selected item in case users reselect network.
             if (mSelectedPreference != null) {
                 mSelectedPreference.setSummary(null);
@@ -161,6 +159,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
             mSelectedPreference = (NetworkOperatorPreference) preference;
             CellInfo cellInfo = mSelectedPreference.getCellInfo();
+            mSelectedPreference.setSummary(R.string.network_connecting);
 
             mMetricsFeatureProvider.action(getContext(),
                     MetricsEvent.ACTION_MOBILE_NETWORK_MANUAL_SELECT_NETWORK);
@@ -175,11 +174,17 @@ public class NetworkSelectSettings extends DashboardFragment {
                 }
             }
 
+            setProgressBarVisible(true);
+            // Disable the screen until network is manually set
+            getPreferenceScreen().setEnabled(false);
+
             final OperatorInfo operatorInfo = CellInfoUtil.getOperatorInfoFromCellInfo(cellInfo);
-            final boolean isSuccess = mTelephonyManager.setNetworkSelectionModeManual(
-                    operatorInfo, true /* persistSelection */);
-            mSelectedPreference.setSummary(
-                    isSuccess ? R.string.network_connected : R.string.network_could_not_connect);
+            ThreadUtils.postOnBackgroundThread(() -> {
+                Message msg = mHandler.obtainMessage(EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
+                msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
+                        operatorInfo, true /* persistSelection */);
+                msg.sendToTarget();
+            });
         }
 
         return true;
@@ -204,6 +209,15 @@ public class NetworkSelectSettings extends DashboardFragment {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE:
+                    setProgressBarVisible(false);
+                    getPreferenceScreen().setEnabled(true);
+
+                    boolean isSucceed = (boolean) msg.obj;
+                    mSelectedPreference.setSummary(isSucceed
+                            ? R.string.network_connected
+                            : R.string.network_could_not_connect);
+                    break;
                 case EVENT_NETWORK_SCAN_RESULTS:
                     List<CellInfo> results = aggregateCellInfoList((List<CellInfo>) msg.obj);
                     mCellInfoList = new ArrayList<>(results);
@@ -267,7 +281,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         for (int index = 0; index < mCellInfoList.size(); index++) {
             if (!mCellInfoList.get(index).isRegistered()) {
                 NetworkOperatorPreference pref = new NetworkOperatorPreference(
-                        mCellInfoList.get(index), getContext(), mForbiddenPlmns, mShow4GForLTE);
+                        mCellInfoList.get(index), getPrefContext(), mForbiddenPlmns, mShow4GForLTE);
                 pref.setKey(CellInfoUtil.getNetworkTitle(mCellInfoList.get(index)));
                 pref.setOrder(index);
                 mPreferenceCategory.addPreference(pref);
@@ -303,7 +317,7 @@ public class NetworkSelectSettings extends DashboardFragment {
             CellInfo cellInfo = CellInfoUtil.wrapCellInfoWithCellIdentity(cellIdentity);
             if (cellInfo != null) {
                 NetworkOperatorPreference pref = new NetworkOperatorPreference(
-                        cellInfo, getContext(), mForbiddenPlmns, mShow4GForLTE);
+                        cellInfo, getPrefContext(), mForbiddenPlmns, mShow4GForLTE);
                 pref.setTitle(mTelephonyManager.getNetworkOperatorName());
                 pref.setSummary(R.string.network_connected);
                 // Update the signal strength icon, since the default signalStrength value would be
@@ -342,7 +356,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     private void addConnectedNetworkOperatorPreference(CellInfo cellInfo) {
         mConnectedPreferenceCategory.removeAll();
         final NetworkOperatorPreference pref = new NetworkOperatorPreference(
-                cellInfo, getContext(), mForbiddenPlmns, mShow4GForLTE);
+                cellInfo, getPrefContext(), mForbiddenPlmns, mShow4GForLTE);
         pref.setSummary(R.string.network_connected);
         mConnectedPreferenceCategory.addPreference(pref);
         mConnectedPreferenceCategory.setVisible(true);

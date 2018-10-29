@@ -81,6 +81,9 @@ public class NetworkSelectSettingsTest {
 
         mNetworkSelectSettings = spy(new NetworkSelectSettings());
         doReturn(mContext).when(mNetworkSelectSettings).getContext();
+        doReturn(mPreferenceManager).when(mNetworkSelectSettings).getPreferenceManager();
+        doReturn(mContext).when(mPreferenceManager).getContext();
+
         mNetworkSelectSettings.mTelephonyManager = mTelephonyManager;
         mNetworkSelectSettings.mConnectedPreferenceCategory = mConnectedPreferenceCategory;
         mNetworkSelectSettings.mPreferenceCategory = mPreferenceCategory;
