@@ -16,6 +16,9 @@
 
 package com.android.settings.development.autofill;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
+import static androidx.lifecycle.Lifecycle.Event.ON_DESTROY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -25,18 +28,25 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.view.autofill.AutofillManager;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AutofillLoggingLevelPreferenceControllerTest {
@@ -57,18 +67,28 @@ public class AutofillLoggingLevelPreferenceControllerTest {
     private String[] mListValues;
     private String[] mListSummaries;
 
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this); // TODO: use @Rule
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = RuntimeEnvironment.application;
         mHelper = new AutofillTestingHelper(mContext);
         final Resources resources = mContext.getResources();
         mListValues = resources.getStringArray(R.array.autofill_logging_level_values);
         mListSummaries = resources.getStringArray(R.array.autofill_logging_level_entries);
-        mController = new AutofillLoggingLevelPreferenceController(mContext);
+        mController = new AutofillLoggingLevelPreferenceController(mContext, mLifecycle);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAutofillLoggingLevelPreferenceController.reset();
     }
 
     @Test
@@ -140,5 +160,29 @@ public class AutofillLoggingLevelPreferenceControllerTest {
 
         verify(mPreference).setValue(mListValues[IDX_VERBOSE]);
         verify(mPreference).setSummary(mListSummaries[IDX_VERBOSE]);
+    }
+
+    @Test
+    @Config(shadows = ShadowAutofillLoggingLevelPreferenceController.class)
+    public void onDestory_shouldUnregisterObserver() {
+        mLifecycle.handleLifecycleEvent(ON_CREATE);
+        mLifecycle.handleLifecycleEvent(ON_DESTROY);
+
+        assertThat(ShadowAutofillLoggingLevelPreferenceController.isUnregisterObserver).isTrue();
+    }
+
+    @Implements(AutofillLoggingLevelPreferenceController.class)
+    public static class ShadowAutofillLoggingLevelPreferenceController {
+        private static boolean isUnregisterObserver = false;
+
+        @Implementation
+        public void onDestroy() {
+            isUnregisterObserver = true;
+        }
+
+        @Resetter
+        public static void reset() {
+            isUnregisterObserver = false;
+        }
     }
 }
