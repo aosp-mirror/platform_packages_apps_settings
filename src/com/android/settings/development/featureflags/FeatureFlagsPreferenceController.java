@@ -59,8 +59,7 @@ public class FeatureFlagsPreferenceController extends BasePreferenceController
         }
         mGroup.removeAll();
         final Context prefContext = mGroup.getContext();
-        for (String feature : featureMap.keySet()) {
-            mGroup.addPreference(new FeatureFlagPreference(prefContext, feature));
-        }
+        featureMap.keySet().stream().sorted().forEach(feature ->
+            mGroup.addPreference(new FeatureFlagPreference(prefContext, feature)));
     }
 }
