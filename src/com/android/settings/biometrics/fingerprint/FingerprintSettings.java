@@ -55,6 +55,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.utils.AnnotationSpan;
+import com.android.settings.widget.ImeAwareEditText;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -708,11 +709,7 @@ public class FingerprintSettings extends SubSettings {
         public static class RenameDialog extends InstrumentedDialogFragment {
 
             private Fingerprint mFp;
-            private EditText mDialogTextField;
-            private String mFingerName;
-            private Boolean mTextHadFocus;
-            private int mTextSelectionStart;
-            private int mTextSelectionEnd;
+            private ImeAwareEditText mDialogTextField;
             private AlertDialog mAlertDialog;
             private boolean mDeleteInProgress;
 
@@ -723,11 +720,17 @@ public class FingerprintSettings extends SubSettings {
             @Override
             public Dialog onCreateDialog(Bundle savedInstanceState) {
                 mFp = getArguments().getParcelable("fingerprint");
+                final String fingerName;
+                final int textSelectionStart;
+                final int textSelectionEnd;
                 if (savedInstanceState != null) {
-                    mFingerName = savedInstanceState.getString("fingerName");
-                    mTextHadFocus = savedInstanceState.getBoolean("textHadFocus");
-                    mTextSelectionStart = savedInstanceState.getInt("startSelection");
-                    mTextSelectionEnd = savedInstanceState.getInt("endSelection");
+                    fingerName = savedInstanceState.getString("fingerName");
+                    textSelectionStart = savedInstanceState.getInt("startSelection", -1);
+                    textSelectionEnd = savedInstanceState.getInt("endSelection", -1);
+                } else {
+                    fingerName = null;
+                    textSelectionStart = -1;
+                    textSelectionEnd = -1;
                 }
                 mAlertDialog = new AlertDialog.Builder(getActivity())
                         .setView(R.layout.fingerprint_rename_dialog)
@@ -756,26 +759,21 @@ public class FingerprintSettings extends SubSettings {
                 mAlertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialog) {
-                        mDialogTextField = (EditText) mAlertDialog.findViewById(
-                                R.id.fingerprint_rename_field);
-                        CharSequence name = mFingerName == null ? mFp.getName() : mFingerName;
+                        mDialogTextField = mAlertDialog.findViewById(R.id.fingerprint_rename_field);
+                        CharSequence name = fingerName == null ? mFp.getName() : fingerName;
                         mDialogTextField.setText(name);
-                        if (mTextHadFocus == null) {
-                            mDialogTextField.selectAll();
+                        if (textSelectionStart != -1 && textSelectionEnd != -1) {
+                            mDialogTextField.setSelection(textSelectionStart, textSelectionEnd);
                         } else {
-                            mDialogTextField.setSelection(mTextSelectionStart, mTextSelectionEnd);
+                            mDialogTextField.selectAll();
                         }
                         if (mDeleteInProgress) {
                             mAlertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);
                         }
                         mDialogTextField.requestFocus();
+                        mDialogTextField.scheduleShowSoftInput();
                     }
                 });
-                if (mTextHadFocus == null || mTextHadFocus) {
-                    // Request the IME
-                    mAlertDialog.getWindow().setSoftInputMode(
-                            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-                }
                 return mAlertDialog;
             }
 
@@ -791,7 +789,6 @@ public class FingerprintSettings extends SubSettings {
                 super.onSaveInstanceState(outState);
                 if (mDialogTextField != null) {
                     outState.putString("fingerName", mDialogTextField.getText().toString());
-                    outState.putBoolean("textHadFocus", mDialogTextField.hasFocus());
                     outState.putInt("startSelection", mDialogTextField.getSelectionStart());
                     outState.putInt("endSelection", mDialogTextField.getSelectionEnd());
                 }
