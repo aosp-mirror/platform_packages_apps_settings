@@ -21,10 +21,6 @@ import static android.provider.SettingsSlicesContract.KEY_WIFI;
 import android.annotation.Nullable;
 
 import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
@@ -45,26 +41,6 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .setSliceUri(WifiSlice.WIFI_URI.toString())
                         .setCardName(KEY_WIFI)
                         .build();
-        final ContextualCard dataUsageCard =
-                ContextualCard.newBuilder()
-                        .setSliceUri(DataUsageSlice.DATA_USAGE_CARD_URI.toString())
-                        .setCardName(DataUsageSlice.PATH_DATA_USAGE)
-                        .build();
-        final ContextualCard deviceInfoCard =
-                ContextualCard.newBuilder()
-                        .setSliceUri(DeviceInfoSlice.DEVICE_INFO_CARD_URI.toString())
-                        .setCardName(DeviceInfoSlice.PATH_DEVICE_INFO)
-                        .build();
-        final ContextualCard storageInfoCard =
-                ContextualCard.newBuilder()
-                        .setSliceUri(StorageSlice.STORAGE_CARD_URI.toString())
-                        .setCardName(StorageSlice.PATH_STORAGE_INFO)
-                        .build();
-        final ContextualCard emergencyInfoCard =
-                ContextualCard.newBuilder()
-                        .setSliceUri(EmergencyInfoSlice.EMERGENCY_INFO_CARD_URI.toString())
-                        .setCardName(EmergencyInfoSlice.PATH_EMERGENCY_INFO_CARD)
-                        .build();
         final ContextualCard batteryInfoCard =
                 ContextualCard.newBuilder()
                         .setSliceUri(BatterySlice.BATTERY_CARD_URI.toSafeString())
@@ -77,10 +53,6 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)
-                .addCard(dataUsageCard)
-                .addCard(deviceInfoCard)
-                .addCard(storageInfoCard)
-                .addCard(emergencyInfoCard)
                 .addCard(batteryInfoCard)
                 .addCard(connectedDeviceCard)
                 .build();

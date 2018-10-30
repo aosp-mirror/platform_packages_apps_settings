@@ -33,8 +33,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
 import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -94,26 +92,8 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         final double rankingScore = 0.0;
         final List<ContextualCard> result = new ArrayList();
         result.add(new ContextualCard.Builder()
-                .setSliceUri(DataUsageSlice.DATA_USAGE_CARD_URI)
-                .setName(DataUsageSlice.PATH_DATA_USAGE)
-                .setPackageName(packageName)
-                .setRankingScore(rankingScore)
-                .setAppVersion(appVersionCode)
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setIsHalfWidth(false)
-                .build());
-        result.add(new ContextualCard.Builder()
                 .setSliceUri(BatterySlice.BATTERY_CARD_URI)
                 .setName(BatterySlice.PATH_BATTERY_INFO)
-                .setPackageName(packageName)
-                .setRankingScore(rankingScore)
-                .setAppVersion(appVersionCode)
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setIsHalfWidth(false)
-                .build());
-        result.add(new ContextualCard.Builder()
-                .setSliceUri(DeviceInfoSlice.DEVICE_INFO_CARD_URI)
-                .setName(DeviceInfoSlice.PATH_DEVICE_INFO)
                 .setPackageName(packageName)
                 .setRankingScore(rankingScore)
                 .setAppVersion(appVersionCode)

@@ -20,7 +20,6 @@ package com.android.settings.homepage.contextualcards;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -38,15 +37,13 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SettingsContextualCardProviderTest {
 
-    private Context mContext;
     private ContentResolver mResolver;
     private Uri mUri;
     private SettingsContextualCardProvider mProvider;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mResolver = mContext.getContentResolver();
+        mResolver = RuntimeEnvironment.application.getContentResolver();
         mUri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsContextualCardProvider.CARD_AUTHORITY)
