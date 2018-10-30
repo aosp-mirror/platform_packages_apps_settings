@@ -22,8 +22,6 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -54,18 +52,9 @@ public class ContextualCardLoaderTest {
     }
 
     @Test
-    public void createStaticCards_shouldReturnFourCards() {
-        final List<ContextualCard> defaultData = mContextualCardLoader.createStaticCards();
-
-        assertThat(defaultData).hasSize(3);
-    }
-
-    @Test
     public void createStaticCards_shouldContainCorrectCards() {
-        final Uri dataUsage = DataUsageSlice.DATA_USAGE_CARD_URI;
-        final Uri deviceInfo = DeviceInfoSlice.DEVICE_INFO_CARD_URI;
         final Uri batteryInfo = BatterySlice.BATTERY_CARD_URI;
-        final List<Uri> expectedUris = Arrays.asList(dataUsage, deviceInfo, batteryInfo);
+        final List<Uri> expectedUris = Arrays.asList(batteryInfo);
 
         final List<Uri> actualCardUris = mContextualCardLoader.createStaticCards().stream().map(
                 ContextualCard::getSliceUri).collect(Collectors.toList());
@@ -90,7 +79,8 @@ public class ContextualCardLoaderTest {
         final String sliceUri = "contet://com.android.settings.slices/action/flashlight";
 
         assertThat(
-                mContextualCardLoader.isCardEligibleToDisplay(getContextualCard(sliceUri))).isFalse();
+                mContextualCardLoader.isCardEligibleToDisplay(
+                        getContextualCard(sliceUri))).isFalse();
     }
 
     @Test
@@ -98,7 +88,8 @@ public class ContextualCardLoaderTest {
         final String sliceUri = "content://com.android.settings.test.slices/action/flashlight";
 
         assertThat(
-                mContextualCardLoader.isCardEligibleToDisplay(getContextualCard(sliceUri))).isFalse();
+                mContextualCardLoader.isCardEligibleToDisplay(
+                        getContextualCard(sliceUri))).isFalse();
     }
 
     private ContextualCard getContextualCard(String sliceUri) {
