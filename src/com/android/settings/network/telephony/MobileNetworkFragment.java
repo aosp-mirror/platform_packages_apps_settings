@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -106,7 +107,7 @@ public class MobileNetworkFragment extends RestrictedDashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mSubId = getArguments().getInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID,
+        mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);

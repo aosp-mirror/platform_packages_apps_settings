@@ -23,9 +23,12 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.view.Menu;
@@ -69,6 +72,8 @@ public class MobileSettingsActivityTest {
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
+    private SubscriptionInfo mSubscriptionInfo2;
+    @Mock
     private FragmentManager mFragmentManager;
     @Mock
     private FragmentTransaction mFragmentTransaction;
@@ -85,6 +90,9 @@ public class MobileSettingsActivityTest {
         mShowFragment = new Fragment();
         mHideFragment = new Fragment();
         mMobileSettingsActivity.mSubscriptionInfos = mSubscriptionInfos;
+        mMobileSettingsActivity.mSubscriptionManager = mSubscriptionManager;
+        when(mSubscriptionInfo.getSubscriptionId()).thenReturn(PREV_SUB_ID);
+        when(mSubscriptionInfo2.getSubscriptionId()).thenReturn(CURRENT_SUB_ID);
 
         doReturn(mSubscriptionManager).when(mMobileSettingsActivity).getSystemService(
                 SubscriptionManager.class);
@@ -121,23 +129,32 @@ public class MobileSettingsActivityTest {
     }
 
     @Test
-    public void switchFragment_hidePreviousFragment() {
+    public void switchFragment_newFragment_replaceIt() {
         mMobileSettingsActivity.mCurSubscriptionId = PREV_SUB_ID;
 
         mMobileSettingsActivity.switchFragment(mShowFragment, CURRENT_SUB_ID);
 
-        verify(mFragmentTransaction).hide(mHideFragment);
+        verify(mFragmentTransaction).replace(R.id.main_content, mShowFragment,
+                MOBILE_SETTINGS_TAG + CURRENT_SUB_ID);
     }
 
     @Test
-    public void switchFragment_fragmentExist_showItWithArguments() {
-        mMobileSettingsActivity.mCurSubscriptionId = PREV_SUB_ID;
+    public void getSubscriptionId_hasIntent_getIdFromIntent() {
+        final Intent intent = new Intent();
+        intent.putExtra(Settings.EXTRA_SUB_ID, CURRENT_SUB_ID);
+        doReturn(intent).when(mMobileSettingsActivity).getIntent();
+        doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(CURRENT_SUB_ID);
 
-        mMobileSettingsActivity.switchFragment(mShowFragment, CURRENT_SUB_ID);
+        assertThat(mMobileSettingsActivity.getSubscriptionId()).isEqualTo(CURRENT_SUB_ID);
+    }
 
-        assertThat(mShowFragment.getArguments().getInt(
-                MobileSettingsActivity.KEY_SUBSCRIPTION_ID)).isEqualTo(CURRENT_SUB_ID);
-        verify(mFragmentTransaction).show(mShowFragment);
+    @Test
+    public void getSubscriptionId_noIntent_firstIdInList() {
+        doReturn(null).when(mMobileSettingsActivity).getIntent();
+        mSubscriptionInfos.add(mSubscriptionInfo);
+        mSubscriptionInfos.add(mSubscriptionInfo2);
+
+        assertThat(mMobileSettingsActivity.getSubscriptionId()).isEqualTo(PREV_SUB_ID);
     }
 
     @Test
@@ -149,7 +166,7 @@ public class MobileSettingsActivityTest {
 
         mMobileSettingsActivity.saveInstanceState(bundle);
 
-        assertThat(bundle.getInt(MobileSettingsActivity.KEY_CUR_SUBSCRIPTION_ID)).isEqualTo(
+        assertThat(bundle.getInt(Settings.EXTRA_SUB_ID)).isEqualTo(
                 PREV_SUB_ID);
     }
 }

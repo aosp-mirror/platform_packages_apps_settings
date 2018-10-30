@@ -18,6 +18,7 @@ package com.android.settings.network.telephony.gsm;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -84,7 +85,7 @@ public class OpenNetworkSelectPagePreferenceController extends BasePreferenceCon
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             final Bundle bundle = new Bundle();
-            bundle.putInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID, mSubId);
+            bundle.putInt(Settings.EXTRA_SUB_ID, mSubId);
             new SubSettingLauncher(mContext)
                     .setDestination(NetworkSelectSettings.class.getName())
                     .setSourceMetricsCategory(MetricsProto.MetricsEvent.MOBILE_NETWORK_SELECT)
