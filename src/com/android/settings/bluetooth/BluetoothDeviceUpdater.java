@@ -171,6 +171,15 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     }
 
     @Override
+    public void onAclConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
+        if (DBG) {
+            Log.d(TAG, "onAclConnectionStateChanged() device: " + cachedDevice.getName()
+                    + ", state: " + state);
+        }
+        update(cachedDevice);
+    }
+
+    @Override
     public void onServiceConnected() {
         // When bluetooth service connected update the UI
         forceUpdate();
@@ -282,6 +291,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
                     ", is connected : " + device.isConnected() + " , is profile connected : "
                     + cachedDevice.isConnected());
         }
-        return device.getBondState() == BluetoothDevice.BOND_BONDED && cachedDevice.isConnected();
+        return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
     }
 }
