@@ -20,21 +20,17 @@
     android:key="tts_settings_screen"
     android:title="@string/tts_settings_title">
 
-    <PreferenceCategory android:key="tts_engine_section">
+   <com.android.settings.widget.GearPreference
+       android:key="tts_engine_preference"
+       android:title="@string/tts_engine_preference_title"
+       android:fragment="com.android.settings.tts.TtsEnginePreferenceFragment"
+       settings:searchable="false"/>
 
-        <com.android.settings.widget.GearPreference
-            android:key="tts_engine_preference"
-            android:title="@string/tts_engine_preference_title"
-            android:fragment="com.android.settings.tts.TtsEnginePreferenceFragment"
-            settings:searchable="false"/>
-
-        <ListPreference
-            android:key="tts_default_lang"
-            android:title="@string/tts_default_lang_title"
-            android:summary="@string/tts_default_lang_summary"
-            android:persistent="false" />
-
-    </PreferenceCategory>
+   <ListPreference
+       android:key="tts_default_lang"
+       android:title="@string/tts_default_lang_title"
+       android:summary="@string/tts_default_lang_summary"
+       android:persistent="false" />
 
     <PreferenceCategory android:key="tts_general_section">
 

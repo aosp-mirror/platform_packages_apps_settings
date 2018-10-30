@@ -71,10 +71,9 @@ public class SettingsActivityTest {
     @Test
     public void onCreate_deviceNotProvisioned_shouldDisableSearch() {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
-        final Intent intent = new Intent(mContext, Settings.class);
-        final SettingsActivity activity =
-                Robolectric.buildActivity(SettingsActivity.class, intent).create(
-                        Bundle.EMPTY).get();
+        final SettingsActivity activity = Robolectric.buildActivity(SettingsActivity.class)
+                .create(Bundle.EMPTY)
+                .get();
 
         assertThat(activity.findViewById(R.id.search_bar).getVisibility())
                 .isEqualTo(View.INVISIBLE);
@@ -83,10 +82,9 @@ public class SettingsActivityTest {
     @Test
     public void onCreate_deviceProvisioned_shouldEnableSearch() {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
-        final Intent intent = new Intent(mContext, Settings.class);
-        final SettingsActivity activity =
-                Robolectric.buildActivity(SettingsActivity.class, intent).create(
-                        Bundle.EMPTY).get();
+        final SettingsActivity activity = Robolectric.buildActivity(SettingsActivity.class)
+                .create(Bundle.EMPTY)
+                .get();
 
         assertThat(activity.findViewById(R.id.search_bar).getVisibility()).isEqualTo(View.VISIBLE);
     }

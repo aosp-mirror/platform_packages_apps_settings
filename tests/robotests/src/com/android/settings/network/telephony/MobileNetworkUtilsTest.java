@@ -21,18 +21,20 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -75,27 +77,35 @@ public class MobileNetworkUtilsTest {
     private ComponentName mComponentName;
     @Mock
     private ResolveInfo mResolveInfo;
+    @Mock
+    private CarrierConfigManager mCarrierConfigManager;
 
     private Context mContext;
+    private PersistableBundle mCarrierConfig;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
-        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
-        doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID_1);
-        doReturn(mTelephonyManager2).when(mTelephonyManager).createForSubscriptionId(SUB_ID_2);
-        doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(mComponentName).when(mPhoneAccountHandle).getComponentName();
-        doReturn(PACKAGE_NAME).when(mComponentName).getPackageName();
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.createForSubscriptionId(SUB_ID_1)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.createForSubscriptionId(SUB_ID_2)).thenReturn(mTelephonyManager2);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPhoneAccountHandle.getComponentName()).thenReturn(mComponentName);
+        when(mComponentName.getPackageName()).thenReturn(PACKAGE_NAME);
+        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
+                mCarrierConfigManager);
 
-        doReturn(SUB_ID_1).when(mSubscriptionInfo1).getSubscriptionId();
-        doReturn(SUB_ID_2).when(mSubscriptionInfo2).getSubscriptionId();
+        mCarrierConfig = new PersistableBundle();
+        when(mCarrierConfigManager.getConfigForSubId(SUB_ID_1)).thenReturn(mCarrierConfig);
 
-        doReturn(Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2)).when(
-                mSubscriptionManager).getActiveSubscriptionInfoList();
+        when(mSubscriptionInfo1.getSubscriptionId()).thenReturn(SUB_ID_1);
+        when(mSubscriptionInfo2.getSubscriptionId()).thenReturn(SUB_ID_2);
+
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
     }
 
     @Test
@@ -129,8 +139,8 @@ public class MobileNetworkUtilsTest {
 
     @Test
     public void buildConfigureIntent_noActivityHandleIntent_returnNull() {
-        doReturn(new ArrayList<ResolveInfo>()).when(mPackageManager).queryIntentActivities(
-                nullable(Intent.class), anyInt());
+        when(mPackageManager.queryIntentActivities(nullable(Intent.class), anyInt()))
+                .thenReturn(new ArrayList<>());
 
         assertThat(MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
                 mPhoneAccountHandle)).isNull();
@@ -138,8 +148,8 @@ public class MobileNetworkUtilsTest {
 
     @Test
     public void buildConfigureIntent_hasActivityHandleIntent_returnIntent() {
-        doReturn(Arrays.asList(mResolveInfo)).when(mPackageManager).queryIntentActivities(
-                nullable(Intent.class), anyInt());
+        when(mPackageManager.queryIntentActivities(nullable(Intent.class), anyInt()))
+                .thenReturn(Arrays.asList(mResolveInfo));
 
         assertThat(MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
                 mPhoneAccountHandle)).isNotNull();
@@ -147,18 +157,28 @@ public class MobileNetworkUtilsTest {
 
     @Test
     public void isCdmaOptions_phoneTypeCdma_returnTrue() {
-        doReturn(PhoneConstants.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
+        when(mTelephonyManager.getPhoneType()).thenReturn(PhoneConstants.PHONE_TYPE_CDMA);
 
         assertThat(MobileNetworkUtils.isCdmaOptions(mContext, SUB_ID_1)).isTrue();
     }
 
     @Test
     public void isCdmaOptions_worldModeWithGsmWcdma_returnTrue() {
-        doReturn(PhoneConstants.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
-        doReturn("true").when(mContext).getString(R.string.config_world_mode);
+        when(mTelephonyManager.getPhoneType()).thenReturn(PhoneConstants.PHONE_TYPE_GSM);
+        when(mContext.getString(R.string.config_world_mode)).thenReturn("true");
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
                 TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+
+        assertThat(MobileNetworkUtils.isCdmaOptions(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void isCdmaOptions_carrierWorldModeWithoutHideCarrier_returnTrue() {
+        when(mTelephonyManager.getPhoneType()).thenReturn(PhoneConstants.PHONE_TYPE_GSM);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
+                false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL, true);
 
         assertThat(MobileNetworkUtils.isCdmaOptions(mContext, SUB_ID_1)).isTrue();
     }

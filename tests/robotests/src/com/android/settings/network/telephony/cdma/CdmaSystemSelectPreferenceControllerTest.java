@@ -21,9 +21,12 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.PersistableBundle;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -51,9 +54,12 @@ public class CdmaSystemSelectPreferenceControllerTest {
     private TelephonyManager mInvalidTelephonyManager;
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private CarrierConfigManager mCarrierConfigManager;
 
     private CdmaSystemSelectPreferenceController mController;
     private ListPreference mPreference;
+    private PersistableBundle mCarrierConfig;
     private Context mContext;
 
     @Before
@@ -66,6 +72,12 @@ public class CdmaSystemSelectPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        doReturn(mCarrierConfigManager).when(mContext).getSystemService(CarrierConfigManager.class);
+
+        mCarrierConfig = new PersistableBundle();
+        when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
+
 
         mPreference = new ListPreference(mContext);
         mController = new CdmaSystemSelectPreferenceController(mContext, "mobile_data");
@@ -100,6 +112,20 @@ public class CdmaSystemSelectPreferenceControllerTest {
         assertThat(mPreference.getValue()).isEqualTo(
                 Integer.toString(TelephonyManager.CDMA_ROAMING_MODE_HOME));
     }
+
+    @Test
+    public void updateState_LteGSMWcdma_disabled() {
+        doReturn(TelephonyManager.CDMA_ROAMING_MODE_HOME).when(
+                mTelephonyManager).getCdmaRoamingMode();
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
+                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
 
     @Test
     public void updateState_stateOther_resetToDefault() {

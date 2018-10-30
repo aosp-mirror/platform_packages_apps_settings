@@ -30,7 +30,6 @@ import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -213,11 +212,6 @@ public class MobileNetworkUtils {
                 || (!esimIgnoredDevice && enabledEsimUiByDefault && inEsimSupportedCountries));
     }
 
-    public static PersistableBundle getCarrierConfigBySubId(int mSubId) {
-        //TODO(b/114749736): get carrier config from subId
-        return new PersistableBundle();
-    }
-
     /**
      * Set whether to enable data for {@code subId}, also whether to disable data for other
      * subscription
@@ -253,8 +247,16 @@ public class MobileNetworkUtils {
         }
         final TelephonyManager telephonyManager = TelephonyManager.from(context)
                 .createForSubscriptionId(subId);
+        final PersistableBundle carrierConfig = context.getSystemService(
+                CarrierConfigManager.class).getConfigForSubId(subId);
+
 
         if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA) {
+            return true;
+        } else if (carrierConfig != null
+                && !carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
+                && carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             return true;
         }
 
@@ -312,7 +314,10 @@ public class MobileNetworkUtils {
 
         if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_GSM) {
             return true;
-        } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
+        } else if (carrierConfig != null
+                && !carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
+                && carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             return true;
         }
 

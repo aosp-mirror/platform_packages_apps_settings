@@ -111,13 +111,9 @@
         <uses-library android:name="org.apache.http.legacy" />
         <!-- Settings -->
 
-        <activity android:name="Settings"
+        <activity android:name="SettingsActivity"
                 android:label="@string/settings_label_launcher"
                 android:launchMode="singleTask">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -126,6 +122,12 @@
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
                   android:launchMode="singleTask">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity android:name=".network.telephony.MobileSettingsActivity"
@@ -2974,15 +2976,12 @@
 
         <receiver
             android:name=".slices.SliceBroadcastReceiver"
-            android:exported="false">
-        </receiver>
+            android:exported="false" />
 
         <receiver
             android:name=".slices.SliceRelayReceiver"
             android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
-            android:exported="true">
-
-        </receiver>
+            android:exported="true" />
 
         <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send
              PendingIntent to it-->
