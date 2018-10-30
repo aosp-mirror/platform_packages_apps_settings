@@ -550,7 +550,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
             Drawable icon;
             if (resolveInfo.getIconResource() == 0) {
-                icon = ContextCompat.getDrawable(getContext(), R.mipmap.ic_accessibility_generic);
+                icon = ContextCompat.getDrawable(getContext(), R.drawable.ic_accessibility_generic);
             } else {
                 icon = resolveInfo.loadIcon(getPackageManager());
             }

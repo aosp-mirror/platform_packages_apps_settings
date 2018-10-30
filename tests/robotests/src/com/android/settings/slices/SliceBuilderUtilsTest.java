@@ -433,6 +433,25 @@ public class SliceBuilderUtilsTest {
     }
 
     @Test
+    public void buildDisabledDependentSlice_noIconPassed_returnsSliceWithIcon() {
+        final int expectedIconResource = IconCompat.createWithResource(mContext,
+                R.drawable.ic_settings).toIcon().getResId();
+        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
+                SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE, 0 /* icon */,
+                IS_DYNAMIC_SUMMARY_ALLOWED);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
+                BasePreferenceController.DISABLED_DEPENDENT_SETTING);
+
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final int actualIconResource = primaryAction.getIcon().toIcon().getResId();
+        assertThat(actualIconResource).isEqualTo(expectedIconResource);
+    }
+
+    @Test
     public void buildToggleSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings).toIcon().getResId();
