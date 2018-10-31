@@ -19,14 +19,16 @@ package com.android.settings.network.telephony;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.telecom.PhoneAccountHandle;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
@@ -47,9 +49,12 @@ public class WifiCallingPreferenceControllerTest {
     private TelephonyManager mTelephonyManager;
     @Mock
     private ImsManager mImsManager;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     private WifiCallingPreferenceController mController;
     private Preference mPreference;
+    private PreferenceCategory mPreferenceCategory;
     private Context mContext;
 
     @Before
@@ -57,22 +62,29 @@ public class WifiCallingPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
-        doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
+        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
 
         mPreference = new Preference(mContext);
         mController = new WifiCallingPreferenceController(mContext, "wifi_calling");
         mController.init(SUB_ID);
         mController.mImsManager = mImsManager;
         mPreference.setKey(mController.getPreferenceKey());
+
+        mPreferenceCategory = new PreferenceCategory(mContext);
+        when(mPreferenceScreen.findPreference(
+                WifiCallingPreferenceController.KEY_PREFERENCE_CATEGORY)).thenReturn(
+                mPreferenceCategory);
+
     }
 
     @Test
     public void updateState_noSimCallManager_setCorrectSummary() {
         mController.mSimCallManager = null;
-        doReturn(true).when(mImsManager).isWfcEnabledByUser();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY).when(mImsManager).getWfcMode(
-                anyBoolean());
+        when(mImsManager.isWfcEnabledByUser()).thenReturn(true);
+        when(mImsManager.getWfcMode(anyBoolean())).thenReturn(
+                ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY);
 
         mController.updateState(mPreference);
 
@@ -82,11 +94,21 @@ public class WifiCallingPreferenceControllerTest {
 
     @Test
     public void updateState_notCallIdle_disable() {
-        doReturn(TelephonyManager.CALL_STATE_RINGING).when(mTelephonyManager).getCallState(SUB_ID);
+        when(mTelephonyManager.getCallState(SUB_ID)).thenReturn(
+                TelephonyManager.CALL_STATE_RINGING);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_notAvailable_setCategoryInvisible() {
+        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        mController.displayPreference(mPreferenceScreen);
+
+        assertThat(mPreferenceCategory.isVisible()).isFalse();
     }
 
 }

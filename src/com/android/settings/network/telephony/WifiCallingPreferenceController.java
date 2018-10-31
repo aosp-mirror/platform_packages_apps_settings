@@ -46,6 +46,9 @@ import java.util.List;
 public class WifiCallingPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
+    @VisibleForTesting
+    static final String KEY_PREFERENCE_CATEGORY = "calling_category";
+
     private TelephonyManager mTelephonyManager;
     @VisibleForTesting
     ImsManager mImsManager;
@@ -86,6 +89,13 @@ public class WifiCallingPreferenceController extends BasePreferenceController im
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        if (!isAvailable()) {
+            // Set category as invisible
+            final Preference preferenceCateogry = screen.findPreference(KEY_PREFERENCE_CATEGORY);
+            if (preferenceCateogry != null) {
+                preferenceCateogry.setVisible(false);
+            }
+        }
     }
 
     @Override

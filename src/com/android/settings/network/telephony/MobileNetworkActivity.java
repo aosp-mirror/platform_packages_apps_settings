@@ -48,7 +48,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class MobileSettingsActivity extends SettingsBaseActivity {
+public class MobileNetworkActivity extends SettingsBaseActivity {
 
     private static final String TAG = "MobileSettingsActivity";
     @VisibleForTesting
@@ -79,7 +79,8 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mobile_settings_container);
+
+        setContentView(R.layout.mobile_network_settings_container);
         setActionBar(findViewById(R.id.mobile_action_bar));
         mPhoneChangeReceiver = new PhoneChangeReceiver();
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
@@ -130,7 +131,7 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
         updateBottomNavigationView();
 
         if (savedInstanceState == null) {
-            switchFragment(new MobileNetworkFragment(), getSubscriptionId());
+            switchFragment(new MobileNetworkSettings(), getSubscriptionId());
         }
     }
 
@@ -172,7 +173,7 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
                         .setIcon(R.drawable.ic_settings_sim);
             }
             navigation.setOnNavigationItemSelectedListener(item -> {
-                switchFragment(new MobileNetworkFragment(), item.getItemId());
+                switchFragment(new MobileNetworkSettings(), item.getItemId());
                 return true;
             });
         }
@@ -211,7 +212,7 @@ public class MobileSettingsActivity extends SettingsBaseActivity {
             // When the radio changes (ex: CDMA->GSM), refresh the fragment.
             // This is very rare to happen.
             if (mCurSubscriptionId != SUB_ID_NULL) {
-                switchFragment(new MobileNetworkFragment(), mCurSubscriptionId,
+                switchFragment(new MobileNetworkSettings(), mCurSubscriptionId,
                         true /* forceUpdate */);
             }
         }
