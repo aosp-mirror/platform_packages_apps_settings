@@ -45,7 +45,8 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
     private PersistableBundle mPersistableBundle;
     private int mSubId;
     private boolean mIsGlobalCdma;
-    private boolean mShow4GForLTE;
+    @VisibleForTesting
+    boolean mShow4GForLTE;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
@@ -111,12 +112,10 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
                 mTelephonyManager.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
         mIsGlobalCdma = isLteOnCdma
                 && mPersistableBundle.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
-        initShow4GForLTE();
-    }
-
-    @VisibleForTesting
-    void initShow4GForLTE() {
-        mShow4GForLTE = MobileNetworkUtils.isShow4GForLTE(mContext);
+        mShow4GForLTE = mPersistableBundle != null
+                ? mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL)
+                : false;
     }
 
     private int getPreferredNetworkMode() {
