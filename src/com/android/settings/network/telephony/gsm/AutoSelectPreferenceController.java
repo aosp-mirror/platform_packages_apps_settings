@@ -19,6 +19,7 @@ package com.android.settings.network.telephony.gsm;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -96,7 +97,7 @@ public class AutoSelectPreferenceController extends TogglePreferenceController {
                     == TelephonyManager.NETWORK_SELECTION_MODE_AUTO;
         } else {
             final Bundle bundle = new Bundle();
-            bundle.putInt(MobileSettingsActivity.KEY_SUBSCRIPTION_ID, mSubId);
+            bundle.putInt(Settings.EXTRA_SUB_ID, mSubId);
             new SubSettingLauncher(mContext)
                     .setDestination(NetworkSelectSettings.class.getName())
                     .setSourceMetricsCategory(MetricsProto.MetricsEvent.MOBILE_NETWORK_SELECT)

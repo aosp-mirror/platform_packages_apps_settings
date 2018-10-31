@@ -190,7 +190,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
             if (mPackages.size() > 1) {
                 mAppList = (PreferenceCategory) findPreference(KEY_APP_LIST);
-                getLoaderManager().initLoader(LOADER_APP_PREF, Bundle.EMPTY, mAppPrefCallbacks);
+                LoaderManager.getInstance(this).restartLoader(LOADER_APP_PREF, Bundle.EMPTY,
+                        mAppPrefCallbacks);
             } else {
                 removePreference(KEY_APP_LIST);
             }
@@ -221,7 +222,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             mDataSaverBackend.addListener(this);
         }
         mPolicy = services.mPolicyEditor.getPolicy(mTemplate);
-        getLoaderManager().restartLoader(LOADER_CHART_DATA,
+        LoaderManager.getInstance(this).restartLoader(LOADER_CHART_DATA,
                 ChartDataLoaderCompat.buildArgs(mTemplate, mAppItem), mChartDataCallbacks);
         updatePrefs();
     }

@@ -59,10 +59,11 @@
     <Preference
         android:key="top_level_display"
         android:title="@string/display_settings"
-        android:summary="@string/display_dashboard_summary"
+        android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_homepage_display"
         android:order="-70"
-        android:fragment="com.android.settings.DisplaySettings"/>
+        android:fragment="com.android.settings.DisplaySettings"
+        settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
     <Preference
         android:key="top_level_sound"

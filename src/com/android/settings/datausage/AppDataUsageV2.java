@@ -177,7 +177,8 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
 
             if (mPackages.size() > 1) {
                 mAppList = (PreferenceCategory) findPreference(KEY_APP_LIST);
-                getLoaderManager().initLoader(LOADER_APP_PREF, Bundle.EMPTY, mAppPrefCallbacks);
+                LoaderManager.getInstance(this).restartLoader(LOADER_APP_PREF, Bundle.EMPTY,
+                        mAppPrefCallbacks);
             } else {
                 removePreference(KEY_APP_LIST);
             }
@@ -201,7 +202,8 @@ public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenc
         if (mDataSaverBackend != null) {
             mDataSaverBackend.addListener(this);
         }
-        getLoaderManager().restartLoader(LOADER_APP_USAGE_DATA, null /* args */, mUidDataCallbacks);
+        LoaderManager.getInstance(this).restartLoader(LOADER_APP_USAGE_DATA, null /* args */,
+                mUidDataCallbacks);
         updatePrefs();
     }
 
