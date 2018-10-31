@@ -116,14 +116,9 @@ public class NetworkOperatorPreference extends Preference {
     private void updateIcon(int level) {
         if (level < 0 || level >= NUMBER_OF_LEVELS) return;
         Context context = getContext();
-        // Make the signal strength drawable
-        int iconId = 0;
-        if (DBG) Log.d(TAG, "updateIcon level: " + String.valueOf(level));
-        iconId = SignalDrawable.getState(level, NUMBER_OF_LEVELS, false /* cutOut */);
-
         SignalDrawable signalDrawable = new SignalDrawable(getContext());
-        signalDrawable.setLevel(iconId);
-        signalDrawable.setDarkIntensity(0);
+        signalDrawable.setLevel(
+                SignalDrawable.getState(level, NUMBER_OF_LEVELS, false /* cutOut */));
 
         // Make the network type drawable
         int iconType = getIconIdForCell(mCellInfo);
@@ -134,7 +129,7 @@ public class NetworkOperatorPreference extends Preference {
                                 .getResources().getDrawable(iconType, getContext().getTheme());
 
         // Overlay the two drawables
-        Drawable[] layers = {networkDrawable, signalDrawable};
+        final Drawable[] layers = {networkDrawable, signalDrawable};
         final int iconSize =
                 context.getResources().getDimensionPixelSize(R.dimen.signal_strength_icon_size);
 
