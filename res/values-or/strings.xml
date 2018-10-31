@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"ତିଆରି କରନ୍ତୁ"</string>
     <string name="allow" msgid="3349662621170855910">"ଅନୁମତି"</string>
     <string name="deny" msgid="6947806159746484865">"ପ୍ରତ୍ୟାଖ୍ୟାନ"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"ବନ୍ଦ କରନ୍ତୁ"</string>
     <string name="device_info_default" msgid="7847265875578739287">"ଅଜଣା"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">ଜଣେ ଡେଭଲପର୍ ହେବାରେ ଆପଣ ବର୍ତ୍ତମାନ <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ଟି ପଦାଙ୍କ ଦୂରରେ ଅଛନ୍ତି।</item>
@@ -891,8 +890,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"2.4 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"ୱାଇ-ଫାଇ ହଟସ୍ପଟ୍ ପାଇଁ ଅତିକମ୍‌ରେ ଗୋଟିଏ ବ୍ୟାଣ୍ଡକୁ ଚୟନ କରନ୍ତୁ:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP ସେଟିଙ୍ଗ"</string>
-    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
-    <skip />
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"ଗୋପନୀୟତା"</string>
     <string name="wifi_shared" msgid="844142443226926070">"ଅନ୍ୟାନ୍ୟ ଡିଭାଇସ୍‌ ଉପଯୋଗକର୍ତ୍ତାଙ୍କ ସହ ଶେୟାର୍‌ କରନ୍ତୁ"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ଅପରିବର୍ତ୍ତିତ)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"ଦୟାକରି ଚୟନ କରନ୍ତୁ"</string>
@@ -2934,7 +2932,6 @@
       <item quantity="other">ଲୁଚିଥିବା %d ଆଇଟମ୍‌ଗୁଡ଼ିକୁ ଦେଖାନ୍ତୁ</item>
       <item quantity="one">ଲୁଚିଥିବା %d ଆଇଟମ୍ ଦେଖାନ୍ତୁ</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"କୋଲାପ୍ସ"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"ନେଟ୍‌ୱର୍କ ଓ ଇଣ୍ଟରନେଟ୍‌"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"ମୋବାଇଲ୍"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"ଡାଟା ଉପଯୋଗ"</string>
@@ -3717,6 +3714,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"ଇଣ୍ଟର୍‌ନାଲ୍‌ ଷ୍ଟୋରେଜ୍‌: <xliff:g id="PERCENTAGE">%1$s</xliff:g> ବ୍ୟବହୃତ - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ଖାଲି"</string>
     <string name="display_summary" msgid="6737806235882127328">"ନିଷ୍କ୍ରିୟତାର <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ପରେ ସୁପ୍ତାବସ୍ଥା"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"ୱାଲ୍‌ପେପର୍‌, ସୁପ୍ତ, ଫଣ୍ଟ ସାଇଜ୍‌"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"କାମ ନ କରିବାର ୧୦ ମିନିଟ ପରେ ଶୁଆଇଦିଅ"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> ମେମୋରୀର ହାରାହାରି <xliff:g id="USED_MEMORY">%1$s</xliff:g> ବ୍ୟବହୃତ"</string>
     <string name="users_summary" msgid="1674864467098487328">"<xliff:g id="USER_NAME">%1$s</xliff:g> ଭାବରେ ସାଇନ୍‌ ଇନ୍‌ କରିଛନ୍ତି"</string>
@@ -4233,11 +4232,12 @@
     <string name="roaming_alert_title" msgid="7458177294163751484">"ଡାଟା ରୋମିଂର ଅନୁମତି ଦେବେ?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"ମୂଲ୍ୟ ଜାଣିବା ପାଇଁ ନିଜର ନେଟ୍‌ୱର୍କ ପ୍ରଦାତାଙ୍କ ସହ ସମ୍ପର୍କ କରନ୍ତୁ।"</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"ଆପ୍‌ର ଡାଟା ବ୍ୟବହାର"</string>
-    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
-    <skip />
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"ଅବୈଧ ନେଟ୍‍ୱର୍କ ମୋଡ୍‍ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>। ଅବଜ୍ଞା କରନ୍ତୁ।"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g>କୁ ସଂଯୁକ୍ତ ହୋଇଥିବା ସମୟରେ ଉପଲବ୍ଧ ନଥାଏ"</string>
-    <!-- no translation found for see_more (5953815986207345223) -->
-    <skip />
+    <string name="see_more" msgid="5953815986207345223">"ଅଧିକ ଦେଖନ୍ତୁ"</string>
     <!-- no translation found for see_less (1250265310929558370) -->
+    <skip />
+    <!-- no translation found for show_connected_devices (5484062660312192006) -->
+    <!-- no translation found for no_connected_devices (6657176404588389594) -->
     <skip />
 </resources>

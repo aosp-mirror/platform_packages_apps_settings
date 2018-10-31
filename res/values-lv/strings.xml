@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"Izveidot"</string>
     <string name="allow" msgid="3349662621170855910">"Atļaut"</string>
     <string name="deny" msgid="6947806159746484865">"Aizliegt"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"Aizvērt"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Nezināms"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="zero">Lai jūs kļūtu par izstrādātāju, atlikušas <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> darbības.</item>
@@ -907,8 +906,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Izvēlieties vismaz vienu joslu Wi‑Fi tīklājam:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP iestatījumi"</string>
-    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
-    <skip />
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Konfidencialitāte"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Koplietot ar citiem ierīces lietotājiem"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(bez izmaiņām)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Lūdzu, atlasiet"</string>
@@ -2973,7 +2971,6 @@
       <item quantity="one">Rādīt %d slēptu vienumu</item>
       <item quantity="other">Rādīt %d slēptus vienumus</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"Sakļaut"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"Tīkls un internets"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobilais tīkls"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"datu lietojums"</string>
@@ -3772,6 +3769,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Iekšējā krātuve: <xliff:g id="PERCENTAGE">%1$s</xliff:g> izmantota, <xliff:g id="FREE_SPACE">%2$s</xliff:g> brīva"</string>
     <string name="display_summary" msgid="6737806235882127328">"Pāriešana miega režīmā, ja <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nav aktivitātes"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fona tapete, miega režīms, fonta lielums"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"Miega režīms pēc 10 minūšu neaktivitātes"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Izmantotais atmiņas apjoms: vidēji <xliff:g id="USED_MEMORY">%1$s</xliff:g> no <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Pierakstījies kā: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4304,10 +4303,14 @@
     <string name="roaming_alert_title" msgid="7458177294163751484">"Vai atļaut datu viesabonēšanu?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Sazinieties ar savu tīkla pakalpojumu sniedzēju, lai uzzinātu par tarifiem."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Lietotnes datu lietojums"</string>
-    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
-    <skip />
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Nederīgs tīkla režīms: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorēt."</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Nav pieejams, ja izveidots savienojums ar operatoru <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (5953815986207345223) -->
-    <skip />
+    <string name="see_more" msgid="5953815986207345223">"Skatīt vairāk"</string>
     <string name="see_less" msgid="1250265310929558370">"Skatīt mazāk"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="zero">Pievienotas <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ierīces</item>
+      <item quantity="one">Pievienota <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ierīce</item>
+      <item quantity="other">Pievienotas <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ierīces</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"Nav pievienota neviena ierīce"</string>
 </resources>

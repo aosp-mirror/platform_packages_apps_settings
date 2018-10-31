@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"Létrehozás"</string>
     <string name="allow" msgid="3349662621170855910">"Engedélyezés"</string>
     <string name="deny" msgid="6947806159746484865">"Elutasítás"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"Bezárás"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Ismeretlen"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> lépésre van attól, hogy fejlesztő legyen.</item>
@@ -892,8 +891,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Válasszon legalább egy sávot a Wi-Fi-hotspot számára:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-beállítások"</string>
-    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
-    <skip />
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Adatvédelem"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Megosztás az eszköz más felhasználóival"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nem változott)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Kérjük, válasszon"</string>
@@ -2935,7 +2933,6 @@
       <item quantity="other">%d rejtett elem megjelenítése</item>
       <item quantity="one">%d rejtett elem megjelenítése</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"Összecsukás"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"Hálózat és internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobil"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"adathasználat"</string>
@@ -3715,6 +3712,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Belső tárhely: Felhasznált: <xliff:g id="PERCENTAGE">%1$s</xliff:g> – Szabad: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Alvó mód bekapcsolása <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktivitás után"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Háttérkép, Alvó mód, betűméret"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"Alvó mód bekapcsolása 10 perc inaktivitás után"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Átlagosan <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>/<xliff:g id="USED_MEMORY">%1$s</xliff:g> memória használatban"</string>
     <string name="users_summary" msgid="1674864467098487328">"Bejelentkezve mint <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4231,10 +4230,13 @@
     <string name="roaming_alert_title" msgid="7458177294163751484">"Engedélyezi az adatbarangolást?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Az árakat a szolgáltatótól tudhatja meg."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Alkalmazás adathasználata"</string>
-    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
-    <skip />
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Érvénytelen hálózati mód: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Figyelmen kívül hagyás."</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Nem hozzáférhető, amikor a következőhöz csatlakozik: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (5953815986207345223) -->
-    <skip />
+    <string name="see_more" msgid="5953815986207345223">"Továbbiak"</string>
     <string name="see_less" msgid="1250265310929558370">"Kevesebb megjelenítése"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> eszköz csatlakoztatva</item>
+      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> eszköz csatlakoztatva</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"Nincsenek csatlakoztatott eszközök"</string>
 </resources>
