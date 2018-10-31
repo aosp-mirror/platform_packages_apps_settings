@@ -23,7 +23,8 @@
     <PreferenceCategory
         android:key="user_list"
         android:title="@string/user_list_title"
-        android:order="10">
+        android:order="10"
+        settings:searchable="false">
     </PreferenceCategory>
 
     <com.android.settingslib.RestrictedPreference
