@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"Kurti"</string>
     <string name="allow" msgid="3349662621170855910">"Leisti"</string>
     <string name="deny" msgid="6947806159746484865">"Atmesti"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"Uždaryti"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Nežinomas"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="one">Liko atlikti <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> veiksmą ir būsite kūrėjas.</item>
@@ -922,8 +921,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Pasirinkite bent vieną „Wi‑Fi“ viešosios interneto prieigos taško dažnio juostą:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP nustatymai"</string>
-    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
-    <skip />
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Privatumas"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Bendrinti su kitais įrenginio naudotojais"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nepakeista)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Pasirinkite"</string>
@@ -3011,7 +3009,6 @@
       <item quantity="many">Rodyti %d paslėpto elemento</item>
       <item quantity="other">Rodyti %d paslėptų elementų</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"Sutraukti"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"Tinklas ir internetas"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobilusis"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"duomenų naudojimas"</string>
@@ -3829,6 +3826,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Vidinė saugykla: panaudota: <xliff:g id="PERCENTAGE">%1$s</xliff:g>, laisva: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Įjungti miego būseną, jei <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neatliekama jokių veiksmų"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Ekrano fonas, miego būsena, šrifto dydis"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"Įjungti miego būseną, jei 10 minučių neatliekama jokių veiksmų"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Vid. naudojama atminties: <xliff:g id="USED_MEMORY">%1$s</xliff:g> iš <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Prisijungta kaip <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4377,10 +4376,15 @@
     <string name="roaming_alert_title" msgid="7458177294163751484">"Leisti tarptinklinį duomenų ryšį?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Daugiau kainodaros informacijos galite gauti susisiekę su tinklo paslaugų teikėju."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Programos duomenų naudojimas"</string>
-    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
-    <skip />
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Netinkamas tinklo režimas (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Nepaisyti."</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Nepasiekiama, kai prisijungta prie „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
-    <!-- no translation found for see_more (5953815986207345223) -->
-    <skip />
+    <string name="see_more" msgid="5953815986207345223">"Žr. daugiau"</string>
     <string name="see_less" msgid="1250265310929558370">"Žr. mažiau"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> įrenginys prijungtas</item>
+      <item quantity="few"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> įrenginiai prijungti</item>
+      <item quantity="many"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> įrenginio prijungta</item>
+      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> įrenginių prijungta</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"Nėra jokių prijungtų įrenginių"</string>
 </resources>

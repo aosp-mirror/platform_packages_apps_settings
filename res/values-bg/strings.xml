@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"Създаване"</string>
     <string name="allow" msgid="3349662621170855910">"Разрешаване"</string>
     <string name="deny" msgid="6947806159746484865">"Отказ"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"Затваряне"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Неизвестно"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">Вече сте на <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> стъпки от това, да бъдете програмист.</item>
@@ -892,8 +891,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 ГХц"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Изберете поне една честота за точката за достъп до Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Настройки за IP"</string>
-    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
-    <skip />
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Поверителност"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Споделяне с другите потребители на устройството"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(непроменени)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Моля, изберете"</string>
@@ -2935,7 +2933,6 @@
       <item quantity="other">Показване на %d скрити елемента</item>
       <item quantity="one">Показване на %d скрит елемент</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"Свиване"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"Мрежа и интернет"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"мобилна мрежа"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"пренос на данни"</string>
@@ -3715,6 +3712,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Вътрешно хранилище: Използвано място: <xliff:g id="PERCENTAGE">%1$s</xliff:g> – свободно място: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Преминаване в спящ режим след неактивност в продължение на <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Тапет, спящ режим, размер на шрифта"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"Преминаване в спящ режим след 10-минутна неактивност"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Използвана памет: Средно <xliff:g id="USED_MEMORY">%1$s</xliff:g> от <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Влезли сте като <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4231,10 +4230,13 @@
     <string name="roaming_alert_title" msgid="7458177294163751484">"Да се разреши ли роуминг на данни?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"За цени се обърнете към оператора си."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Пренос на данни от приложенията"</string>
-    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
-    <skip />
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Невалиден мрежов режим <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Пренебрегване."</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Не е налице, когато е установена връзка с(ъс) <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (5953815986207345223) -->
-    <skip />
+    <string name="see_more" msgid="5953815986207345223">"Вижте още"</string>
     <string name="see_less" msgid="1250265310929558370">"Преглед на по-малко"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="other">Свързани са <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> устройства</item>
+      <item quantity="one">Свързано е <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> устройство</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"Няма свързани устройства"</string>
 </resources>
