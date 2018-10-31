@@ -21,6 +21,7 @@ import static com.android.settings.network.MobilePlanPreferenceController
 import android.app.Dialog;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -28,6 +29,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -59,7 +61,11 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.network_and_internet;
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
+            return R.xml.network_and_internet_v2;
+        } else {
+            return R.xml.network_and_internet;
+        }
     }
 
     @Override
