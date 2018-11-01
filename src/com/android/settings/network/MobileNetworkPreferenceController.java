@@ -36,7 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.network.telephony.MobileSettingsActivity;
+import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
@@ -147,7 +147,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey())) {
             if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2)) {
-                final Intent intent = new Intent(mContext, MobileSettingsActivity.class);
+                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                 mContext.startActivity(intent);
             } else {
                 final Intent intent = new Intent(Intent.ACTION_MAIN);

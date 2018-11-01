@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"Направи"</string>
     <string name="allow" msgid="3349662621170855910">"Дозволи"</string>
     <string name="deny" msgid="6947806159746484865">"Одбиј"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"Затвори"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Непознато"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="one">Треба да обавите још <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> корак да бисте постали програмер.</item>
@@ -907,8 +906,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Изаберите барем један опсег за Wi‑Fi хотспот:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP подешавања"</string>
-    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
-    <skip />
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Приватност"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Дели са другим корисницима уређаја"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(непромењено)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Изаберите"</string>
@@ -1301,7 +1299,7 @@
     <string name="memory_media_usage" msgid="3738830697707880405">"Медији"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"Преузимања"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"Слике, видео снимци"</string>
-    <string name="memory_music_usage" msgid="1363785144783011606">"Аудио (музика, звукови звона, поткастови итд.)"</string>
+    <string name="memory_music_usage" msgid="1363785144783011606">"Аудио (музика, звукови звона, поткасти итд.)"</string>
     <string name="memory_media_misc_usage" msgid="6094866738586451683">"Друге датотеке"</string>
     <string name="memory_media_cache_usage" msgid="6704293333141177910">"Кеширани подаци"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Искљ. дељене меморије"</string>
@@ -2973,7 +2971,6 @@
       <item quantity="few">Прикажи %d скривене ставке</item>
       <item quantity="other">Прикажи %d скривених ставки</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"Скупи"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"Мрежа и интернет"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"мобилна мрежа"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"потрошња података"</string>
@@ -3772,6 +3769,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Интерна меморија: <xliff:g id="PERCENTAGE">%1$s</xliff:g> је искоришћено – <xliff:g id="FREE_SPACE">%2$s</xliff:g> је слободно"</string>
     <string name="display_summary" msgid="6737806235882127328">"Пређи у режим спавања после <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Позадина, режим спавања, величина фонта"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"Прелазак у режим спавања после 10 минута неактивности"</string>
     <string name="memory_summary" msgid="8080825904671961872">"У просеку је коришћено <xliff:g id="USED_MEMORY">%1$s</xliff:g> од <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> меморије"</string>
     <string name="users_summary" msgid="1674864467098487328">"Пријављени сте као <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4304,10 +4303,14 @@
     <string name="roaming_alert_title" msgid="7458177294163751484">"Желите ли да дозволите пренос података у ромингу?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Цене проверите код мобилног оператера."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Потрошња података апликације"</string>
-    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
-    <skip />
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Неважећи режим мреже <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Игноришите."</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Недоступно када је успостављена веза са оператером <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (5953815986207345223) -->
-    <skip />
+    <string name="see_more" msgid="5953815986207345223">"Прикажи још"</string>
     <string name="see_less" msgid="1250265310929558370">"Прикажи мање"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="one">Повезан је <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> уређај</item>
+      <item quantity="few">Повезана су <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> уређаја</item>
+      <item quantity="other">Повезано је <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> уређаја</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"Нема повезаних уређаја"</string>
 </resources>

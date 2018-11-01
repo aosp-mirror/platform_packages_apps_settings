@@ -49,7 +49,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class MobileNetworkFragment extends RestrictedDashboardFragment {
+public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     private static final String LOG_TAG = "NetworkSettings";
     public static final int REQUEST_CODE_EXIT_ECM = 17;
@@ -69,7 +69,7 @@ public class MobileNetworkFragment extends RestrictedDashboardFragment {
     private UserManager mUserManager;
     private String mClickedPrefKey;
 
-    public MobileNetworkFragment() {
+    public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
     }
 
@@ -107,6 +107,7 @@ public class MobileNetworkFragment extends RestrictedDashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
@@ -162,7 +163,7 @@ public class MobileNetworkFragment extends RestrictedDashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.network_setting_fragment;
+        return R.xml.mobile_network_settings;
     }
 
     @Override
@@ -209,7 +210,7 @@ public class MobileNetworkFragment extends RestrictedDashboardFragment {
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.network_setting_fragment;
+                    sir.xmlResId = R.xml.mobile_network_settings;
                     result.add(sir);
                     return result;
                 }

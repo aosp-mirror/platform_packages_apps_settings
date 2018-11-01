@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"إنشاء"</string>
     <string name="allow" msgid="3349662621170855910">"سماح"</string>
     <string name="deny" msgid="6947806159746484865">"رفض"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"إغلاق"</string>
     <string name="device_info_default" msgid="7847265875578739287">"غير معروف"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="zero">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج أي خطوة (<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>).</item>
@@ -374,7 +373,7 @@
     <string name="location_settings_title" msgid="1369675479310751735">"الموقع"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"استخدام الموقع الجغرافي"</string>
     <string name="account_settings_title" msgid="626177544686329806">"الحسابات"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"الحماية والموقع"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"الأمان والموقع الجغرافي"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"التشفير وبيانات الاعتماد"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"تم تشفير الهاتف"</string>
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"الهاتف ليس مشفّرًا."</string>
@@ -3086,7 +3085,6 @@
       <item quantity="other">‏عرض %d عنصر مخفي</item>
       <item quantity="one">‏عرض %d عنصر مخفي</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"تصغير"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"الشبكة والإنترنت"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"الجوّال"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"استخدام البيانات"</string>
@@ -3942,6 +3940,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"وحدة التخزين الداخلية: <xliff:g id="PERCENTAGE">%1$s</xliff:g> مستخدمة - <xliff:g id="FREE_SPACE">%2$s</xliff:g> فارغة"</string>
     <string name="display_summary" msgid="6737806235882127328">"السكون بعد <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> من عدم النشاط"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"خلفية، سكون، حجم الخط"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"السكون بعد 10 دقائق من عدم النشاط"</string>
     <string name="memory_summary" msgid="8080825904671961872">"تم استخدام متوسط ذاكرة بحجم <xliff:g id="USED_MEMORY">%1$s</xliff:g> من إجمالي <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"تم تسجيل الدخول باسم <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4526,4 +4526,13 @@
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"عدم التوفُّر عند الربط بمشغّل شبكة الجوّال <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="5953815986207345223">"عرض المزيد"</string>
     <string name="see_less" msgid="1250265310929558370">"عرض عناصر أقل"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="zero">تمَّ توصيل <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> جهاز.</item>
+      <item quantity="two">تمَّ توصيل جهازَين (<xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>).</item>
+      <item quantity="few">تمَّ توصيل <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> أجهزة.</item>
+      <item quantity="many">تمَّ توصيل <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> جهازًا.</item>
+      <item quantity="other">تمَّ توصيل <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> جهاز.</item>
+      <item quantity="one">تمَّ توصيل جهاز واحد (<xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g>).</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"ليست هناك أجهزة متصلة."</string>
 </resources>

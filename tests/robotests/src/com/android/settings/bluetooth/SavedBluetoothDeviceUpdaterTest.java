@@ -77,7 +77,7 @@ public class SavedBluetoothDeviceUpdaterTest {
     @Test
     public void update_filterMatch_addPreference() {
         doReturn(BluetoothDevice.BOND_BONDED).when(mBluetoothDevice).getBondState();
-        doReturn(false).when(mCachedBluetoothDevice).isConnected();
+        doReturn(false).when(mBluetoothDevice).isConnected();
 
         mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
 
@@ -87,7 +87,7 @@ public class SavedBluetoothDeviceUpdaterTest {
     @Test
     public void update_filterNotMatch_removePreference() {
         doReturn(BluetoothDevice.BOND_NONE).when(mBluetoothDevice).getBondState();
-        doReturn(true).when(mCachedBluetoothDevice).isConnected();
+        doReturn(true).when(mBluetoothDevice).isConnected();
 
         mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
 
@@ -96,7 +96,7 @@ public class SavedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_deviceConnected_removePreference() {
-        when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
+        when(mBluetoothDevice.isConnected()).thenReturn(true);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_CONNECTED, BluetoothProfile.A2DP);
@@ -106,7 +106,7 @@ public class SavedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_deviceDisconnected_addPreference() {
-        when(mCachedBluetoothDevice.isConnected()).thenReturn(false);
+        when(mBluetoothDevice.isConnected()).thenReturn(false);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_DISCONNECTED, BluetoothProfile.A2DP);

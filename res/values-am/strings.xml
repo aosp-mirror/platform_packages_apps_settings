@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"ፍጠር"</string>
     <string name="allow" msgid="3349662621170855910">"ይፍቀዱ"</string>
     <string name="deny" msgid="6947806159746484865">"ይከልክሉ"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"ዝጋ"</string>
     <string name="device_info_default" msgid="7847265875578739287">"ያልታወቀ"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="one">አሁን ገንቢ ለመሆን <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ደረጃዎች ይቀርዎታል።</item>
@@ -2934,7 +2933,6 @@
       <item quantity="one">%d የተደበቁ ንጥሎችን አሳይ</item>
       <item quantity="other">%d የተደበቁ ንጥሎችን አሳይ</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"ሰብስብ"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"አውታረ መረብ እና በይነመረብ"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"ሞባይል"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"የውሂብ አጠቃቀም"</string>
@@ -3714,6 +3712,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"ውስጣዊ ማከማቻ፦ <xliff:g id="PERCENTAGE">%1$s</xliff:g> ጥቅም ላይ ውሏል - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ነጻ"</string>
     <string name="display_summary" msgid="6737806235882127328">"ከ<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> እንቅስቃሴ-አልባነት በኋላ ተኛ"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"ልጣፍ፣ እንቅልፍ፣ የቅርጸ-ቁምፊ መጠን"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"ከ10 ደቂቃዎች እንቅስቃሴ-አልባነት በኋላ ተኛ"</string>
     <string name="memory_summary" msgid="8080825904671961872">"በአማካይ <xliff:g id="USED_MEMORY">%1$s</xliff:g> ከ<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> ማህደረ ትውስጥ ስራ ላይ ውሏል"</string>
     <string name="users_summary" msgid="1674864467098487328">"እንደ <xliff:g id="USER_NAME">%1$s</xliff:g> ሆነው ገብተዋል።"</string>
@@ -4159,8 +4159,7 @@
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"የእርስዎ መሣሪያ በእርስዎ ስልክ ላይ ላሉ መተግበሪያዎች የሚታይ ነው። ወድ ብሉቱዝ መሣሪያዎች ሲያገኙ ወይም የWi-Fi መገናኛ ነጥብን ሲያቀናብሩ በተጨማሪ በሌሎች ሰዎች የሚታይ ይሆናል።"</string>
     <string name="devices_title" msgid="7701726109334110391">"መሣሪያዎች"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"ሁሉም ቅንብሮች"</string>
-    <!-- no translation found for homepage_personal_settings (1570415428680432319) -->
-    <skip />
+    <string name="homepage_personal_settings" msgid="1570415428680432319">"የአስተያየት ጥቆማዎች"</string>
     <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS ውሂብ"</string>
     <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS ውሂብ"</string>
     <string name="choose_network_title" msgid="5702586742615861037">"አውታረ መረብ ይምረጡ"</string>
@@ -4235,4 +4234,9 @@
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"ከ<xliff:g id="CARRIER">%1$s</xliff:g> ጋር ሲገናኝ የማይገኝ"</string>
     <string name="see_more" msgid="5953815986207345223">"ተጨማሪ ይመልከቱ"</string>
     <string name="see_less" msgid="1250265310929558370">"ያነሰ ይመልከቱ"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> መሣሪያዎች ተገናኝተዋል</item>
+      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> መሣሪያዎች ተገናኝተዋል</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"ምንም የተገናኙ መሣሪያዎች የሉም"</string>
 </resources>

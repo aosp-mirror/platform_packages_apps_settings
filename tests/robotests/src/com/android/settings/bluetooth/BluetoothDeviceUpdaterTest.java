@@ -180,7 +180,7 @@ public class BluetoothDeviceUpdaterTest {
     @Test
     public void isDeviceConnected_deviceConnected() {
         doReturn(BluetoothDevice.BOND_BONDED).when(mBluetoothDevice).getBondState();
-        doReturn(true).when(mCachedBluetoothDevice).isConnected();
+        doReturn(true).when(mBluetoothDevice).isConnected();
 
         assertThat(mBluetoothDeviceUpdater.isDeviceConnected(mCachedBluetoothDevice)).isTrue();
     }
@@ -188,7 +188,7 @@ public class BluetoothDeviceUpdaterTest {
     @Test
     public void isDeviceConnected_deviceNotConnected() {
         doReturn(BluetoothDevice.BOND_BONDED).when(mBluetoothDevice).getBondState();
-        doReturn(false).when(mCachedBluetoothDevice).isConnected();
+        doReturn(false).when(mBluetoothDevice).isConnected();
 
         assertThat(mBluetoothDeviceUpdater.isDeviceConnected(mCachedBluetoothDevice)).isFalse();
     }

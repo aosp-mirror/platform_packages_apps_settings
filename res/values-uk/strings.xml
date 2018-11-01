@@ -21,7 +21,6 @@
     <string name="create" msgid="3578857613172647409">"Створити"</string>
     <string name="allow" msgid="3349662621170855910">"Дозволити"</string>
     <string name="deny" msgid="6947806159746484865">"Заборонити"</string>
-    <string name="dlg_close" msgid="7471087791340790015">"Закрити"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Невідомо"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="one">Щоб стати розробником, залишився ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> крок.</item>
@@ -922,8 +921,7 @@
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 ГГц"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Виберіть принаймні один діапазон для точки доступу Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Налаштування IP"</string>
-    <!-- no translation found for wifi_privacy_settings (5500777170960315928) -->
-    <skip />
+    <string name="wifi_privacy_settings" msgid="5500777170960315928">"Конфіденційність"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Надати доступ іншим користувачам пристрою"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(без змін)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Виберіть"</string>
@@ -3011,7 +3009,6 @@
       <item quantity="many">Показати %d схованих елементів</item>
       <item quantity="other">Показати %d схованого елемента</item>
     </plurals>
-    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"Згорнути"</string>
     <string name="network_dashboard_title" msgid="3135144174846753758">"Мережа й Інтернет"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"мобільна мережа"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"використання трафіку"</string>
@@ -3829,6 +3826,8 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Внутрішня пам’ять: використано <xliff:g id="PERCENTAGE">%1$s</xliff:g>, вільно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Перейти в режим сну після <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездіяльності"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Фоновий малюнок, режим сну та розмір шрифту"</string>
+    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"Перейти в режим сну після 10 хвилин бездіяльності"</string>
     <string name="memory_summary" msgid="8080825904671961872">"У середньому використовується <xliff:g id="USED_MEMORY">%1$s</xliff:g> пам’яті з <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Ви ввійшли як <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4377,10 +4376,15 @@
     <string name="roaming_alert_title" msgid="7458177294163751484">"Дозволити роумінг даних?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Докладніше про ціни можна дізнатися в оператора мережі."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Використання трафіку додатків"</string>
-    <!-- no translation found for mobile_network_mode_error (4784347953600013818) -->
-    <skip />
+    <string name="mobile_network_mode_error" msgid="4784347953600013818">"Недійсний режим мережі: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ігнорувати."</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Недоступно, коли підключено до оператора <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (5953815986207345223) -->
-    <skip />
+    <string name="see_more" msgid="5953815986207345223">"Докладніше"</string>
     <string name="see_less" msgid="1250265310929558370">"Показати менше"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="one">Підключено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> пристрій</item>
+      <item quantity="few">Підключено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> пристрої</item>
+      <item quantity="many">Підключено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> пристроїв</item>
+      <item quantity="other">Підключено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> пристрою</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"Немає підключених пристроїв"</string>
 </resources>
