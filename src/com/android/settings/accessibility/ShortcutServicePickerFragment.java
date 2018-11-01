@@ -258,7 +258,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
         public Drawable loadIcon() {
             final ResolveInfo resolveInfo = mServiceInfo.getResolveInfo();
             return (resolveInfo.getIconResource() == 0)
-                    ? getContext().getDrawable(R.mipmap.ic_accessibility_generic)
+                    ? getContext().getDrawable(R.drawable.ic_accessibility_generic)
                     : resolveInfo.loadIcon(getContext().getPackageManager());
         }
 

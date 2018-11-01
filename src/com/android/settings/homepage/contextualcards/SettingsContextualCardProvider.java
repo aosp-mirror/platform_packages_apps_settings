@@ -43,7 +43,7 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .build();
         final ContextualCard batteryInfoCard =
                 ContextualCard.newBuilder()
-                        .setSliceUri(BatterySlice.BATTERY_CARD_URI.toSafeString())
+                        .setSliceUri(BatterySlice.BATTERY_CARD_URI.toString())
                         .setCardName(BatterySlice.PATH_BATTERY_INFO)
                         .build();
         final ContextualCard connectedDeviceCard =

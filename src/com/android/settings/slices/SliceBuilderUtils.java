@@ -385,7 +385,7 @@ public class SliceBuilderUtils {
         final Set<String> keywords = buildSliceKeywords(data);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final CharSequence summary = context.getText(R.string.disabled_dependent_setting_summary);
-        final IconCompat icon = IconCompat.createWithResource(context, data.getIconResource());
+        final IconCompat icon = getSafeIcon(context, data);
         final SliceAction primaryAction = new SliceAction(getContentPendingIntent(context, data),
                 icon, title);
 
