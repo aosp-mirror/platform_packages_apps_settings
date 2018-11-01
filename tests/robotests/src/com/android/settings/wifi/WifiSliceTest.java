@@ -88,9 +88,8 @@ public class WifiSliceTest {
 
         int rows = SliceQuery.findAll(wifiSlice, FORMAT_SLICE, HINT_LIST_ITEM,
                 null /* nonHints */).size();
-        // All AP rows + title row + see more row
-        // (see more row will drop the last AP row, thus -1)
-        assertThat(rows).isEqualTo(DEFAULT_EXPANDED_ROW_COUNT - 1 + 2);
+        // All AP rows + title row
+        assertThat(rows).isEqualTo(DEFAULT_EXPANDED_ROW_COUNT + 1);
     }
 
     @Test
