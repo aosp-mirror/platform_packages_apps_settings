@@ -1524,6 +1524,15 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".biometrics.BiometricEnrollActivity"
+            android:exported="true"
+            android:theme="@style/GlifTheme.Light">
+            <intent-filter>
+                <action android:name="android.settings.BIOMETRIC_ENROLL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".biometrics.fingerprint.FingerprintSettings" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
