@@ -139,7 +139,7 @@ public class DoubleTwistPreferenceControllerTest {
     public void testIsChecked_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
         final Context context = RuntimeEnvironment.application;
-        Settings.System.putInt(context.getContentResolver(),
+        Settings.Secure.putInt(context.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
         mController = new DoubleTwistPreferenceController(context, KEY_DOUBLE_TWIST);
 
@@ -150,7 +150,7 @@ public class DoubleTwistPreferenceControllerTest {
     public void testIsChecked_configIsNotSet_shouldReturnFalse() {
         // Set the setting to be disabled.
         final Context context = RuntimeEnvironment.application;
-        Settings.System.putInt(context.getContentResolver(),
+        Settings.Secure.putInt(context.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0);
         mController = new DoubleTwistPreferenceController(context, KEY_DOUBLE_TWIST);
 

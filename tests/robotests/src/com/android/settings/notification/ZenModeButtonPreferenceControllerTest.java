@@ -77,7 +77,7 @@ public class ZenModeButtonPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         mController = new ZenModeButtonPreferenceController(mContext, mock(Lifecycle.class),
                 mock(FragmentManager.class));

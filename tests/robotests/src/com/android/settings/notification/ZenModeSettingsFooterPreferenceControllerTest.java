@@ -88,12 +88,12 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getZenModeConfig()).thenReturn(mZenModeConfig);
 
         mController =
-            new ZenModeSettingsFooterPreferenceController(mContext, mock(Lifecycle.class));
+                new ZenModeSettingsFooterPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mZenModeConfig, AUTOMATIC_RULES_FIELD, mInjectedAutomaticRules);
         ReflectionHelpers.setField(mController, "mZenModeConfigWrapper", mConfigWrapper);
 
@@ -276,7 +276,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
         injectedManualRule.conditionId = mock(Uri.class);
         when(mConfigWrapper.parseManualRuleTime(injectedManualRule.conditionId)).thenReturn(time);
         when(mConfigWrapper.getFormattedTime(time, mContext.getUserId()))
-            .thenReturn(timePlaceholder);
+                .thenReturn(timePlaceholder);
         ReflectionHelpers.setField(mZenModeConfig, MANUAL_RULE_FIELD, injectedManualRule);
     }
 

@@ -67,7 +67,7 @@ public class ActionDisabledByAdminDialogHelperTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.buildActivity(CustomActivity.class).get();
+        mActivity = Robolectric.setupActivity(CustomActivity.class);
         mActivityShadow = Shadow.extract(mActivity);
         mHelper = new ActionDisabledByAdminDialogHelper(mActivity);
     }

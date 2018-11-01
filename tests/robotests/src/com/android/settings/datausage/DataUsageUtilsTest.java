@@ -39,6 +39,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -57,7 +58,7 @@ public final class DataUsageUtilsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
-        mContext = shadowContext.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
         shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
         shadowContext.setSystemService(Context.NETWORK_STATS_SERVICE, mNetworkStatsManager);
@@ -109,6 +110,6 @@ public final class DataUsageUtilsTest {
         DataUsageUtils.hasEthernet(mContext);
 
         verify(mNetworkStatsManager).querySummaryForUser(eq(ConnectivityManager.TYPE_ETHERNET),
-            eq(subscriber), anyLong() /* startTime */, anyLong() /* endTime */);
+                eq(subscriber), anyLong() /* startTime */, anyLong() /* endTime */);
     }
 }

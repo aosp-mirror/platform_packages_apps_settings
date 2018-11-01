@@ -85,7 +85,7 @@ public class LightsPreferenceControllerTest {
         // By default allow lights
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_intrusiveNotificationLed, true);
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1);
+        Settings.System.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class LightsPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfSettingNotAllowed() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0);
+        Settings.System.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
         mController.onResume(appRow, channel, null, null);

@@ -86,7 +86,7 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getZenModeConfig()).thenReturn(mZenModeConfig);
 
@@ -95,7 +95,7 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mZenModeConfigWrapper", mConfigWrapper);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mockPref);
+                .thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 

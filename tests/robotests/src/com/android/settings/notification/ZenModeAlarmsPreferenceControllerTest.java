@@ -72,14 +72,14 @@ public class ZenModeAlarmsPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         mController = new ZenModeAlarmsPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mockPref);
+                .thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -124,7 +124,7 @@ public class ZenModeAlarmsPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allowAlarms);
 
         verify(mBackend)
-            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
+                .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
     }
 
     @Test
@@ -133,6 +133,6 @@ public class ZenModeAlarmsPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allowAlarms);
 
         verify(mBackend)
-            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
+                .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
     }
 }

@@ -57,7 +57,7 @@ public class ZenModeDurationPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         mController = new ZenModeDurationPreferenceController(mContext, mock(Lifecycle.class));
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);

@@ -36,6 +36,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class EncryptionAndCredentialTest {
         ShadowApplication application = ShadowApplication.getInstance();
         application.setSystemService(Context.DEVICE_POLICY_SERVICE, mDevicePolicyManager);
         application.setSystemService(Context.USER_SERVICE, mUserManager);
-        mContext = application.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
     }
 
     @Test

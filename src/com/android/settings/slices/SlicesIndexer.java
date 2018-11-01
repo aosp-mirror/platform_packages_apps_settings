@@ -66,12 +66,11 @@ class SlicesIndexer implements Runnable {
             return;
         }
 
-        SQLiteDatabase database = mHelper.getWritableDatabase();
+        final SQLiteDatabase database = mHelper.getWritableDatabase();
 
+        long startTime = System.currentTimeMillis();
+        database.beginTransaction();
         try {
-            long startTime = System.currentTimeMillis();
-            database.beginTransaction();
-
             mHelper.reconstruct(mHelper.getWritableDatabase());
             List<SliceData> indexData = getSliceData();
             insertSliceData(database, indexData);
@@ -85,6 +84,7 @@ class SlicesIndexer implements Runnable {
         } finally {
             database.endTransaction();
         }
+        database.close();
     }
 
     @VisibleForTesting

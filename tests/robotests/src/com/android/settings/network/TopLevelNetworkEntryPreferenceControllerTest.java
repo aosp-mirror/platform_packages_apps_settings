@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
@@ -32,8 +33,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.util.ReflectionHelpers;
+
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
@@ -53,6 +57,10 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        final ShadowUserManager um = Shadows.shadowOf(
+                RuntimeEnvironment.application.getSystemService(UserManager.class));
+        um.setIsAdminUser(true);
+
         mController = new TopLevelNetworkEntryPreferenceController(mContext, "test_key");
 
         ReflectionHelpers.setField(mController, "mWifiPreferenceController",
@@ -61,7 +69,6 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
                 mMobileNetworkPreferenceController);
         ReflectionHelpers.setField(mController, "mTetherPreferenceController",
                 mTetherPreferenceController);
-
     }
 
     @Test

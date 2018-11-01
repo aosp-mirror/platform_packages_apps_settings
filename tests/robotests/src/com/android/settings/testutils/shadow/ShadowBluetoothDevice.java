@@ -21,7 +21,7 @@ import android.bluetooth.BluetoothDevice;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@Implements(value = BluetoothDevice.class, inheritImplementationMethods = true)
+@Implements(value = BluetoothDevice.class)
 public class ShadowBluetoothDevice extends org.robolectric.shadows.ShadowBluetoothDevice {
 
     private int mMessageAccessPermission = BluetoothDevice.ACCESS_UNKNOWN;

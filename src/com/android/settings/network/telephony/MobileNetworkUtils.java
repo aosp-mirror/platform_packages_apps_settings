@@ -82,7 +82,7 @@ public class MobileNetworkUtils {
      * Returns true if Wifi calling is enabled for at least one phone.
      */
     public static boolean isWifiCallingEnabled(Context context) {
-        int phoneCount = TelephonyManager.from(context).getPhoneCount();
+        int phoneCount = context.getSystemService(TelephonyManager.class).getPhoneCount();
         for (int i = 0; i < phoneCount; i++) {
             if (isWifiCallingEnabled(context, i)) {
                 return true;
@@ -218,7 +218,7 @@ public class MobileNetworkUtils {
      */
     public static void setMobileDataEnabled(Context context, int subId, boolean enabled,
             boolean disableOtherSubscriptions) {
-        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class);
@@ -230,7 +230,7 @@ public class MobileNetworkUtils {
             if (subInfoList != null) {
                 for (SubscriptionInfo subInfo : subInfoList) {
                     if (subInfo.getSubscriptionId() != subId) {
-                        TelephonyManager.from(context).createForSubscriptionId(
+                        context.getSystemService(TelephonyManager.class).createForSubscriptionId(
                                 subInfo.getSubscriptionId()).setDataEnabled(false);
                     }
                 }
@@ -245,7 +245,7 @@ public class MobileNetworkUtils {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return false;
         }
-        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final PersistableBundle carrierConfig = context.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(subId);
@@ -307,7 +307,7 @@ public class MobileNetworkUtils {
     }
 
     private static boolean isGsmBasicOptions(Context context, int subId) {
-        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final PersistableBundle carrierConfig = context.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(subId);
@@ -329,7 +329,7 @@ public class MobileNetworkUtils {
      * settings
      */
     public static boolean isWorldMode(Context context, int subId) {
-        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         boolean worldModeOn = false;
         final String configString = context.getString(R.string.config_world_mode);
@@ -392,7 +392,7 @@ public class MobileNetworkUtils {
             Context con = context.createPackageContext("com.android.systemui", 0);
             int id = con.getResources().getIdentifier("config_show4GForLTE",
                     "bool", "com.android.systemui");
-             return con.getResources().getBoolean(id);
+            return con.getResources().getBoolean(id);
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "NameNotFoundException for show4GFotLTE");
             return false;
@@ -404,7 +404,7 @@ public class MobileNetworkUtils {
      */
     public static boolean isTdscdmaSupported(Context context, int subId) {
         return isTdscdmaSupported(context,
-                TelephonyManager.from(context).createForSubscriptionId(subId));
+                context.getSystemService(TelephonyManager.class).createForSubscriptionId(subId));
     }
 
     //TODO(b/117651939): move it to telephony

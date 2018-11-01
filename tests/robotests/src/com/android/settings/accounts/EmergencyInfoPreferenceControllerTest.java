@@ -25,6 +25,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -45,6 +46,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
@@ -69,7 +71,7 @@ public class EmergencyInfoPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new EmergencyInfoPreferenceController(mContext);
-        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference = new Preference(Robolectric.setupActivity(Activity.class));
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
@@ -136,16 +138,16 @@ public class EmergencyInfoPreferenceControllerTest {
         mController.updateState(preference);
 
         verify(preference).setSummary(
-            mContext.getString(R.string.emergency_info_summary, "user 1"));
+                mContext.getString(R.string.emergency_info_summary, "user 1"));
     }
 
     @Test
     public void handlePreferenceTreeClick_shouldStartActivity() {
         final ShadowApplication application = ShadowApplication.getInstance();
-        final Context context = RuntimeEnvironment.application;
-        final Preference preference = new Preference(context);
+        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Preference preference = new Preference(activity);
         preference.setKey("emergency_info");
-        mController = new EmergencyInfoPreferenceController(context);
+        mController = new EmergencyInfoPreferenceController(activity);
 
         mController.handlePreferenceTreeClick(preference);
 

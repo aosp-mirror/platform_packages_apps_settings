@@ -31,14 +31,13 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.testutils.DrawableTestHelper;
 import com.android.setupwizardlib.GlifLayout;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowDrawable;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -103,9 +102,8 @@ public class ChooseLockPatternTest {
         ChooseLockPattern activity = createActivity(true);
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
                 activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
-
-        ShadowDrawable drawable = Shadows.shadowOf(((GlifLayout) fragment.getView()).getIcon());
-        assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);
+        DrawableTestHelper.assertDrawableResId(((GlifLayout) fragment.getView()).getIcon(),
+                R.drawable.ic_fingerprint_header);
     }
 
     @Config(qualifiers = "sw300dp")

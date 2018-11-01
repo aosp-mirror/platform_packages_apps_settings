@@ -29,6 +29,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -41,7 +42,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
@@ -62,7 +63,7 @@ public class SecurityPatchLevelDialogControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(Robolectric.setupActivity(Activity.class));
         when(mDialog.getContext()).thenReturn(mContext);
     }
 
@@ -91,7 +92,7 @@ public class SecurityPatchLevelDialogControllerTest {
     @Test
     public void onClick_noActivityIntent_shouldDoNothing() {
         when(mPackageManager.queryIntentActivities(any(), anyInt()))
-            .thenReturn(Collections.emptyList());
+                .thenReturn(Collections.emptyList());
         mController = new SecurityPatchLevelDialogController(mDialog);
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
 
@@ -103,7 +104,7 @@ public class SecurityPatchLevelDialogControllerTest {
     @Test
     public void onClick_activityIntentFound_shouldStartActivity() {
         when(mPackageManager.queryIntentActivities(any(), anyInt()))
-            .thenReturn(Collections.singletonList(null));
+                .thenReturn(Collections.singletonList(null));
         mController = new SecurityPatchLevelDialogController(mDialog);
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
 

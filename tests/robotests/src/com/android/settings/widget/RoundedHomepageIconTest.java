@@ -40,6 +40,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,8 +68,8 @@ public class RoundedHomepageIconTest {
                 new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
 
         assertThat(icon.getNumberOfLayers()).isEqualTo(2);
-        assertThat(icon.getDrawable(0))
-                .isEqualTo(mContext.getDrawable(R.drawable.ic_homepage_generic_background));
+        DrawableTestHelper.assertDrawableResId(icon.getDrawable(0),
+                R.drawable.ic_homepage_generic_background);
     }
 
     @Test

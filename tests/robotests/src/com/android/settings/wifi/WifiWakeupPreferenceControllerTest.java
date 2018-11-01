@@ -48,16 +48,14 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WifiWakeupPreferenceControllerTest {
 
-    private static final String NO_LOCATION_STRING =
-            "Unavailable because location is turned off. Turn on location.";
     private Context mContext;
     private WifiWakeupPreferenceController mController;
     @Mock
-    DashboardFragment mFragment;
+    private DashboardFragment mFragment;
     @Mock
-    LocationManager mLocationManager;
+    private LocationManager mLocationManager;
     @Mock
-    SwitchPreference mPreference;
+    private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
@@ -67,7 +65,7 @@ public class WifiWakeupPreferenceControllerTest {
         mController.mLocationManager = mLocationManager;
         mController.mPreference = mPreference;
 
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 1);
         doReturn(true).when(mLocationManager).isLocationEnabled();
     }
 
@@ -105,7 +103,8 @@ public class WifiWakeupPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetCheckedWhenWakeupSettingEnabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 1);
 
         mController.updateState(preference);
 
@@ -116,7 +115,7 @@ public class WifiWakeupPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetUncheckedWhenWakeupSettingDisabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0);
 
         mController.updateState(preference);
 
@@ -127,8 +126,8 @@ public class WifiWakeupPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetUncheckedWhenWifiScanningDisabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 0);
 
         mController.updateState(preference);
 
@@ -138,7 +137,7 @@ public class WifiWakeupPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetUncheckedWhenWakeupSettingEnabledNoLocation() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
         doReturn(false).when(mLocationManager).isLocationEnabled();
 
         mController.updateState(preference);
@@ -150,7 +149,7 @@ public class WifiWakeupPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetUncheckedWhenWakeupSettingDisabledLocationEnabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0);
         doReturn(false).when(mLocationManager).isLocationEnabled();
 
         mController.updateState(preference);
@@ -162,8 +161,8 @@ public class WifiWakeupPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetUncheckedWhenWifiScanningDisabledLocationEnabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
-        Settings.System.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), WIFI_SCAN_ALWAYS_AVAILABLE, 0);
         doReturn(false).when(mLocationManager).isLocationEnabled();
 
         mController.updateState(preference);

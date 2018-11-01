@@ -59,6 +59,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -90,7 +91,7 @@ public class SoundPreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         SettingsShadowResources.overrideResource(com.android.internal.R.string.ringtone_silent,
                 "silent");
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = spy(new SoundPreferenceController(
                 mContext, mFragment, mImportanceListener, mBackend));
     }

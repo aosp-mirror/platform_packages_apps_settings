@@ -26,15 +26,14 @@ import com.android.settings.R;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.shadows.ShadowResourcesImpl;
+import org.robolectric.shadows.ShadowLegacyResourcesImpl;
 
 @Implements(
         value = ResourcesImpl.class,
-        inheritImplementationMethods = true,
         isInAndroidSdk = false,
         minSdk = 26
 )
-public class SettingsShadowResourcesImpl extends ShadowResourcesImpl {
+public class SettingsShadowResourcesImpl extends ShadowLegacyResourcesImpl {
 
     @Implementation
     public Drawable loadDrawable(Resources wrapper, TypedValue value, int id, int density,

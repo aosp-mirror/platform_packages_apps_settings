@@ -68,7 +68,7 @@ public class AdbPreferenceControllerTest {
     @Test
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ADB_ENABLED, -1);
 
         assertThat(mode).isEqualTo(AdbPreferenceController.ADB_SETTING_OFF);
@@ -79,7 +79,7 @@ public class AdbPreferenceControllerTest {
     @Test
     public void onAdbDialogConfirmed_shouldEnableAdbSetting() {
         mController.onAdbDialogConfirmed();
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ADB_ENABLED, -1);
 
         assertThat(mode).isEqualTo(AdbPreferenceController.ADB_SETTING_ON);
@@ -87,7 +87,7 @@ public class AdbPreferenceControllerTest {
 
     @Test
     public void onAdbDialogDismissed_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED,
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.ADB_ENABLED,
                 AdbPreferenceController.ADB_SETTING_OFF);
         mController.onAdbDialogDismissed();
 

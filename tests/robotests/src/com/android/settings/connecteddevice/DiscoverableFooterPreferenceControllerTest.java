@@ -49,7 +49,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -75,7 +74,6 @@ public class DiscoverableFooterPreferenceControllerTest {
     private DiscoverableFooterPreferenceController mDiscoverableFooterPreferenceController;
     private BroadcastReceiver mBluetoothChangedReceiver;
     private ShadowApplication mShadowApplication;
-    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
@@ -91,7 +89,6 @@ public class DiscoverableFooterPreferenceControllerTest {
                 mAlwaysDiscoverable);
         mBluetoothChangedReceiver = mDiscoverableFooterPreferenceController
                 .mBluetoothChangedReceiver;
-        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
     }
 
     @Test
@@ -137,15 +134,15 @@ public class DiscoverableFooterPreferenceControllerTest {
 
     @Test
     public void onBluetoothStateChanged_bluetoothOn_updateTitle() {
-        mShadowBluetoothAdapter.setName(DEVICE_NAME);
+        BluetoothAdapter.getDefaultAdapter().setName(DEVICE_NAME);
         sendBluetoothStateChangedIntent(BluetoothAdapter.STATE_ON);
 
         assertThat(mPreference.getTitle()).isEqualTo(generateTitle(DEVICE_NAME));
     }
 
     @Test
-    public void onBluetoothStateChanged_bluetoothOff_updateTitle(){
-        mShadowBluetoothAdapter.setName(DEVICE_NAME);
+    public void onBluetoothStateChanged_bluetoothOff_updateTitle() {
+        BluetoothAdapter.getDefaultAdapter().setName(DEVICE_NAME);
         sendBluetoothStateChangedIntent(BluetoothAdapter.STATE_OFF);
 
         assertThat(mPreference.getTitle()).isEqualTo(generateTitle(null));

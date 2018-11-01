@@ -79,13 +79,13 @@ public class ZenModeCallsPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mValues = mContext.getResources().getStringArray(R.array.zen_mode_contacts_values);
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
         when(mBackend.getPriorityCallSenders())
-            .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
+                .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
         when(mBackend.getContactsSummary(ZenModeBackend.SOURCE_NONE))
                 .thenCallRealMethod();
         when(mBackend.getContactsSummary(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS))

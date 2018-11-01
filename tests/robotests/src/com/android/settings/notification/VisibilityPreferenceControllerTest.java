@@ -59,6 +59,7 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -91,7 +92,7 @@ public class VisibilityPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         shadowApplication.setSystemService(Context.DEVICE_POLICY_SERVICE, mDm);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = spy(new VisibilityPreferenceController(mContext, mLockUtils, mBackend));
 
         // by default the lockscreen is secure
@@ -202,7 +203,7 @@ public class VisibilityPreferenceControllerTest {
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
-            ArgumentCaptor.forClass(CharSequence[].class);
+                ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         assertFalse(toStringList(argumentCaptor.getValue())
                 .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
@@ -250,7 +251,7 @@ public class VisibilityPreferenceControllerTest {
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
-            ArgumentCaptor.forClass(CharSequence[].class);
+                ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         assertEquals(2, toStringList(argumentCaptor.getValue()).size());
         assertFalse(toStringList(argumentCaptor.getValue())
@@ -267,7 +268,7 @@ public class VisibilityPreferenceControllerTest {
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
-            ArgumentCaptor.forClass(CharSequence[].class);
+                ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         List<String> values = toStringList(argumentCaptor.getValue());
         assertEquals(3, values.size());

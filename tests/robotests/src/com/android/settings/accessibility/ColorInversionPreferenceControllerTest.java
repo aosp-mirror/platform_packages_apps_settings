@@ -59,7 +59,7 @@ public class ColorInversionPreferenceControllerTest {
 
     @Test
     public void isChecked_enabled() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, ON);
 
         mController.updateState(mPreference);
@@ -70,7 +70,7 @@ public class ColorInversionPreferenceControllerTest {
 
     @Test
     public void isChecked_disabled() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, OFF);
 
         mController.updateState(mPreference);

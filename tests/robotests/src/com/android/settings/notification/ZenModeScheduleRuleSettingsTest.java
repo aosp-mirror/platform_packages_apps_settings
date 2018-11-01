@@ -40,6 +40,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowToast;
@@ -66,7 +67,7 @@ public class ZenModeScheduleRuleSettingsTest {
 
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
 
         mFragment = spy(new TestFragment());
         mFragment.onAttach(application);

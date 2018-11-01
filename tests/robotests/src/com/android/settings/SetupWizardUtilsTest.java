@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static com.android.settings.testutils.ResIdSubject.assertResId;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Intent;
@@ -33,7 +31,7 @@ import org.junit.runner.RunWith;
 public class SetupWizardUtilsTest {
 
     @Test
-    public void testCopySetupExtras() throws Throwable {
+    public void testCopySetupExtras() {
         Intent fromIntent = new Intent();
         final String theme = "TEST_THEME";
         fromIntent.putExtra(WizardManagerHelper.EXTRA_THEME, theme);
@@ -53,7 +51,7 @@ public class SetupWizardUtilsTest {
         Intent intent = new Intent();
         intent.putExtra(WizardManagerHelper.EXTRA_THEME, WizardManagerHelper.THEME_GLIF_V2);
 
-        assertResId(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV2Theme);
+        assertThat(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV2Theme);
     }
 
     @Test
@@ -62,7 +60,7 @@ public class SetupWizardUtilsTest {
                 WizardManagerHelper.THEME_GLIF_V2_LIGHT);
         Intent intent = new Intent();
 
-        assertResId(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV2Theme_Light);
+        assertThat(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV2Theme_Light);
     }
 
     @Test
@@ -71,8 +69,8 @@ public class SetupWizardUtilsTest {
                 WizardManagerHelper.THEME_GLIF_V3_LIGHT);
         Intent intent = new Intent();
 
-        assertResId(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV3Theme_Light);
-        assertResId(SetupWizardUtils.getTransparentTheme(intent))
+        assertThat(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV3Theme_Light);
+        assertThat(SetupWizardUtils.getTransparentTheme(intent))
                 .isEqualTo(R.style.GlifV3Theme_Light_Transparent);
     }
 }

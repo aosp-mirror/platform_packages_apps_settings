@@ -165,7 +165,6 @@ public class MediaOutputPreferenceControllerTest {
     @After
     public void tearDown() {
         mShadowAudioManager.reset();
-        mShadowMediaRouter.reset();
         ShadowBluetoothUtils.reset();
     }
 

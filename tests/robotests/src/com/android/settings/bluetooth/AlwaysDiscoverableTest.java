@@ -26,18 +26,14 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class})
 public class AlwaysDiscoverableTest {
 
     @Mock
@@ -45,14 +41,12 @@ public class AlwaysDiscoverableTest {
 
     private AlwaysDiscoverable mAlwaysDiscoverable;
     private BluetoothAdapter mBluetoothAdapter;
-    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mAlwaysDiscoverable = new AlwaysDiscoverable(mContext);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
     }
 
     @Test
@@ -82,7 +76,7 @@ public class AlwaysDiscoverableTest {
 
     @Test
     public void startSetsModeAndRegistersReceiver() {
-        mShadowBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_NONE);
+        mBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_NONE);
         mAlwaysDiscoverable.start();
         assertThat(mBluetoothAdapter.getScanMode())
                 .isEqualTo(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
@@ -110,7 +104,7 @@ public class AlwaysDiscoverableTest {
     }
 
     private void sendScanModeChangedIntent(int newMode, int previousMode) {
-        mShadowBluetoothAdapter.setScanMode(newMode);
+        mBluetoothAdapter.setScanMode(newMode);
         Intent intent = new Intent(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
         intent.putExtra(BluetoothAdapter.EXTRA_SCAN_MODE, newMode);
         intent.putExtra(BluetoothAdapter.EXTRA_PREVIOUS_SCAN_MODE, previousMode);

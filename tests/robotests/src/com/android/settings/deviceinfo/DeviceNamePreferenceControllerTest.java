@@ -44,6 +44,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -67,7 +68,7 @@ public class DeviceNamePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.WIFI_SERVICE, mWifiManager);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mPreference = new ValidatedEditTextPreference(mContext);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         final WifiConfiguration configuration = new WifiConfiguration();

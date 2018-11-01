@@ -45,6 +45,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -78,7 +79,7 @@ public class ZenModeStarredContactsPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         when(testIntent.resolveActivity(any())).thenReturn(mComponentName);
 
@@ -163,8 +164,8 @@ public class ZenModeStarredContactsPreferenceControllerTest {
 
         // expected - no null  values
         List<String> contacts = mMessagesController.getStarredContacts(testCursorWithNullValues);
-        for (int i = 0 ; i < contacts.size(); i++) {
-            assertThat(contacts.get(i)).isNotNull();
+        for (String contact : contacts) {
+            assertThat(contact).isNotNull();
         }
     }
 
@@ -183,6 +184,7 @@ public class ZenModeStarredContactsPreferenceControllerTest {
 
         doAnswer(new Answer<Boolean>() {
             int count = 0;
+
             @Override
             public Boolean answer(InvocationOnMock invocation) throws Throwable {
                 if (count < size) {

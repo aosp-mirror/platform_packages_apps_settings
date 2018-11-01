@@ -18,10 +18,10 @@ package com.android.settings.system;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.os.UserManager;
 import android.provider.Settings;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
@@ -29,10 +29,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowUserManager;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowUserManager.class)
 public class FactoryResetPreferenceControllerTest {
 
     private static final String FACTORY_RESET_KEY = "factory_reset";
@@ -45,8 +45,7 @@ public class FactoryResetPreferenceControllerTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        mShadowUserManager = Shadows.shadowOf(userManager);
+        mShadowUserManager = ShadowUserManager.getShadow();
 
         mController = new FactoryResetPreferenceController(mContext);
     }

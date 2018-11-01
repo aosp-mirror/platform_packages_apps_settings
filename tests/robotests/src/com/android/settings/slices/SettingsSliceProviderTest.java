@@ -25,7 +25,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -41,6 +40,7 @@ import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.util.ArraySet;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
@@ -54,18 +54,26 @@ import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.wifi.WifiSlice;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowAccessibilityManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,7 +89,9 @@ import java.util.Set;
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowThreadUtils.class)
+@Config(shadows = {ShadowUserManager.class, ShadowThreadUtils.class, ShadowUtils.class,
+        SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
+        ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class})
 public class SettingsSliceProviderTest {
 
     private static final String KEY = "KEY";
@@ -97,7 +107,7 @@ public class SettingsSliceProviderTest {
 
     private Context mContext;
     private SettingsSliceProvider mProvider;
-    private SQLiteDatabase mDb;
+    @Mock
     private SliceManager mManager;
 
     private static final List<Uri> SPECIAL_CASE_PLATFORM_URIS = Arrays.asList(
@@ -113,7 +123,13 @@ public class SettingsSliceProviderTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        // Register the fake a11y Service
+        ShadowAccessibilityManager shadowAccessibilityManager = Shadow.extract(
+                RuntimeEnvironment.application.getSystemService(AccessibilityManager.class));
+        shadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
+
         mProvider = spy(new SettingsSliceProvider());
         ShadowStrictMode.reset();
         mProvider.mSliceWeakDataCache = new HashMap<>();
@@ -122,10 +138,9 @@ public class SettingsSliceProviderTest {
         mProvider.mCustomSliceManager = spy(new CustomSliceManager(mContext));
         when(mProvider.getContext()).thenReturn(mContext);
 
-        mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
-        mManager = mock(SliceManager.class);
-        when(mContext.getSystemService(SliceManager.class)).thenReturn(mManager);
+
+        doReturn(mManager).when(mContext).getSystemService(SliceManager.class);
         when(mManager.getPinnedSlices()).thenReturn(Collections.emptyList());
 
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -562,7 +577,7 @@ public class SettingsSliceProviderTest {
     }
 
     private void insertSpecialCase(String key, boolean isPlatformSlice) {
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(SlicesDatabaseHelper.IndexColumns.KEY, key);
         values.put(SlicesDatabaseHelper.IndexColumns.TITLE, TITLE);
         values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, "s");
@@ -572,8 +587,15 @@ public class SettingsSliceProviderTest {
         values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, PREF_CONTROLLER);
         values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
         values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
-
-        mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
+        final SQLiteDatabase db = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        db.close();
     }
 
     private static SliceData getDummyData() {
@@ -589,7 +611,7 @@ public class SettingsSliceProviderTest {
                 .build();
     }
 
-    @Implements(value = StrictMode.class, inheritImplementationMethods = true)
+    @Implements(value = StrictMode.class)
     public static class ShadowStrictMode {
 
         private static int sSetThreadPolicyCount;

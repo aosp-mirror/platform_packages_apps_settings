@@ -30,7 +30,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
 import org.robolectric.shadows.ShadowTypedArray;
 
-@Implements(value = TypedArray.class, inheritImplementationMethods = true)
+@Implements(value = TypedArray.class)
 public class SettingsShadowTypedArray extends ShadowTypedArray {
 
     @RealObject

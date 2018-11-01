@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
+import android.os.UserManager;
 import android.service.quicksettings.Tile;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -35,6 +36,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DevelopmentTilesTest {
@@ -50,6 +54,9 @@ public class DevelopmentTilesTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mService = spy(Robolectric.setupService(DevelopmentTiles.ShowLayout.class));
+        final ShadowUserManager um = Shadows.shadowOf(
+                RuntimeEnvironment.application.getSystemService(UserManager.class));
+        um.setIsAdminUser(true);
         doReturn(mTile).when(mService).getQsTile();
     }
 
