@@ -71,7 +71,7 @@ public class WifiSlice implements CustomSliceable {
             .build();
 
     @VisibleForTesting
-    static final int DEFAULT_EXPANDED_ROW_COUNT = 4;
+    static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
     private final Context mContext;
 
@@ -137,10 +137,7 @@ public class WifiSlice implements CustomSliceable {
                         .setSubtitle(placeholder));
             }
         }
-        // Add more button
-        return listBuilder
-                .setSeeMoreAction(primaryAction)
-                .build();
+        return listBuilder.build();
     }
 
     private RowBuilder getAccessPointRow(AccessPoint accessPoint) {
