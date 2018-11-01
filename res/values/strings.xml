@@ -7185,19 +7185,25 @@
     <string name="zen_mode_behavior_alarms_only">No sound except alarms and media</string>
 
     <!--  Do not disturb: Title for the zen mode automation option in Settings. [CHAR LIMIT=40] -->
-    <string name="zen_mode_automation_settings_title">Turn on automatically</string>
+    <string name="zen_mode_automation_settings_title">Schedules</string>
 
     <!--  Do not disturb: Title for the zen mode automatic rules page in settings. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automation_settings_page_title">Automatic rules</string>
+    <string name="zen_mode_automation_settings_page_title">Do Not Disturb</string>
 
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_rule_settings_page_title">Automatic rule</string>
+
+    <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
+    <string name="zen_mode_schedule_category_title">Schedule</string>
 
     <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=46] -->
     <string name="zen_mode_automation_suggestion_title">Silence phone at certain times</string>
 
     <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=55] -->
     <string name="zen_mode_automation_suggestion_summary">Set Do Not Disturb rules</string>
+
+    <!--  Do not disturb: Header for the Do Not Disturb automatic rules. [CHAR LIMIT=55] -->
+    <string name="zen_mode_schedule_title">Schedule</string>
 
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
     <string name="zen_mode_use_automatic_rule">Use rule</string>
@@ -7221,10 +7227,10 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_settings_category">When Do Not Disturb is turned on</string>
+    <string name="zen_mode_settings_category">When Do Not Disturb is on</string>
 
-    <!-- Do not disturb: restrict notifications title [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_title">Notifications</string>
+    <!-- Do not disturb: restrict notifications title [CHAR LIMIT=80] -->
+    <string name="zen_mode_restrict_notifications_title">Notification restrictions</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_mute">No sound from notifications</string>
     <!-- Do not disturb:Mute notifications summary [CHAR LIMIT=NONE] -->
@@ -7356,15 +7362,15 @@
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
     </plurals>
 
-    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
-    <string name="zen_category_behavior">Behavior</string>
-    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
+    <!-- Do not disturb settings, category header [CHAR LIMIT=120]-->
+    <string name="zen_category_behavior">Mute phone, but allow exceptions</string>
+    <!-- Do not disturb settings, exceptions to dnd title [CHAR LIMIT=100]-->
     <string name="zen_category_exceptions">Exceptions</string>
     <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
     <string name="zen_category_schedule">Schedule</string>
 
-    <!-- Do not disturb settings, sound and vibrations title [CHAR LIMIT=100]-->
-    <string name="zen_sound_title">Sound &amp; vibration</string>
+    <!-- Do not disturb settings, sound and vibrations exceptions title [CHAR LIMIT=100]-->
+    <string name="zen_sound_title">See all exceptions</string>
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
     <!-- Do not disturb settings, sound and vibrations screen category [CHAR LIMIT=100]-->
@@ -7816,8 +7822,8 @@
     <!-- [CHAR LIMIT=100] Zen mode settings: Warning text for invalid zen rule names -->
     <string name="zen_mode_rule_name_warning">Rule name already in use</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Add rule menu option name -->
-    <string name="zen_mode_add_rule">Add rule</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Add another automatic zen rule option name-->
+    <string name="zen_mode_add_rule">Add more</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add event-based rule, set rule name title -->
     <string name="zen_mode_add_event_rule">Add event rule</string>
@@ -7942,6 +7948,9 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
 
+    <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_messages_footer">When Do Not Disturb is on, incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages toggle title -->
     <string name="zen_mode_messages_title">Allow messages</string>
 
@@ -7978,41 +7987,35 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: None -->
     <string name="zen_mode_from_none">None</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option -->
-    <string name="zen_mode_alarms">Alarms</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
+    <string name="zen_mode_alarms">Allow alarms</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option (ie: sound from alarm clock) -->
     <string name="zen_mode_alarms_list">alarms</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Media option -->
-    <string name="zen_mode_media">Media</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
+    <string name="zen_mode_media">Allow media</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: System option which includes sounds such as touch sounds -->
-    <string name="zen_mode_system">Touch sounds</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
+    <string name="zen_mode_system">Allow touch sounds</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Reminders option -->
-    <string name="zen_mode_reminders">Reminders</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow reminder notifications/sounds to bypass DND  -->
+    <string name="zen_mode_reminders">Allow reminders</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders are allowed to bypass dnd) -->
     <string name="zen_mode_reminders_list">reminders</string>
 
-    <!-- [CHAR LIMIT=70] Zen mode settings: Allow reminders toggle title -->
-    <string name="zen_mode_reminders_title">Allow reminders</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Events option -->
-    <string name="zen_mode_events">Events</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
+    <string name="zen_mode_events">Allow events</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
     <string name="zen_mode_events_list">events</string>
-
-    <!-- [CHAR LIMIT=70] Zen mode settings: Allow events toggle title -->
-    <string name="zen_mode_events_title">Allow events</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: All callers summary -->
     <string name="zen_mode_all_callers">anyone</string>

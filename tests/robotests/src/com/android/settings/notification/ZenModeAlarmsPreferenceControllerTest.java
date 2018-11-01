@@ -30,9 +30,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
-
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -44,6 +41,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeAlarmsPreferenceControllerTest {
@@ -75,7 +75,8 @@ public class ZenModeAlarmsPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
-        mController = new ZenModeAlarmsPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new ZenModeAlarmsPreferenceController(mContext, mock(Lifecycle.class),
+                "zen_mode_behavior_alarms");
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
