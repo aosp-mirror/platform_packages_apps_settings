@@ -27,11 +27,15 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public final class AutofillLoggingLevelPreferenceController
         extends DeveloperOptionsPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnDestroy {
 
     private static final String TAG = "AutofillLoggingLevelPreferenceController";
     private static final String AUTOFILL_LOGGING_LEVEL_KEY = "autofill_logging_level";
@@ -40,7 +44,7 @@ public final class AutofillLoggingLevelPreferenceController
     private final String[] mListSummaries;
     private final AutofillDeveloperSettingsObserver mObserver;
 
-    public AutofillLoggingLevelPreferenceController(Context context) {
+    public AutofillLoggingLevelPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
 
         Resources resources = context.getResources();
@@ -48,7 +52,15 @@ public final class AutofillLoggingLevelPreferenceController
         mListSummaries = resources.getStringArray(R.array.autofill_logging_level_entries);
         mObserver = new AutofillDeveloperSettingsObserver(mContext, () -> updateOptions());
         mObserver.register();
-        // TODO: there should be a hook on AbstractPreferenceController where we could unregister it
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        mObserver.unregister();
     }
 
     @Override
