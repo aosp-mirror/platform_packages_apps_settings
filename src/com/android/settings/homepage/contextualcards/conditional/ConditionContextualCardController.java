@@ -26,7 +26,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -84,24 +83,7 @@ public class ConditionContextualCardController implements ContextualCardControll
 
     @Override
     public void onConditionsChanged() {
-        final List<ContextualCard> conditionCards = new ArrayList<>();
-        final List<ConditionalCard> conditionList = mConditionManager.getDisplayableCards();
-
-        for (ConditionalCard condition : conditionList) {
-            final ContextualCard conditionCard =
-                    new ConditionalContextualCard.Builder()
-                            .setConditionId(condition.getId())
-                            .setMetricsConstant(condition.getMetricsConstant())
-                            .setActionText(condition.getActionText())
-                            .setName(mContext.getPackageName() + "/"
-                                    + condition.getTitle().toString())
-                            .setTitleText(condition.getTitle().toString())
-                            .setSummaryText(condition.getSummary().toString())
-                            .setIconDrawable(condition.getIcon())
-                            .build();
-
-            conditionCards.add(conditionCard);
-        }
+        final List<ContextualCard> conditionCards = mConditionManager.getDisplayableCards();
 
         if (mListener != null) {
             final Map<Integer, List<ContextualCard>> conditionalCards = new ArrayMap<>();

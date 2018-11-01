@@ -23,8 +23,11 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.TelephonyIntents;
+import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.homepage.contextualcards.ContextualCard;
 
 import java.util.Objects;
 
@@ -73,6 +76,20 @@ public class CellularDataConditionController implements ConditionalCardControlle
     @Override
     public void onActionClick() {
         mTelephonyManager.setDataEnabled(true);
+    }
+
+    @Override
+    public ContextualCard buildContextualCard() {
+        return new ConditionalContextualCard.Builder()
+                .setConditionId(ID)
+                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_CELLULAR_DATA)
+                .setActionText(mAppContext.getText(R.string.condition_turn_on))
+                .setName(mAppContext.getPackageName() + "/"
+                        + mAppContext.getText(R.string.condition_cellular_title))
+                .setTitleText(mAppContext.getText(R.string.condition_cellular_title).toString())
+                .setSummaryText(mAppContext.getText(R.string.condition_cellular_summary).toString())
+                .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_cellular_off))
+                .build();
     }
 
     @Override

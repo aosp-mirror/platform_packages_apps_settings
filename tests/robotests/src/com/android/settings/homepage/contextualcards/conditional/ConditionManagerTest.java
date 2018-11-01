@@ -41,8 +41,6 @@ public class ConditionManagerTest {
     private static final long ID = 123L;
 
     @Mock
-    private ConditionalCard mCard;
-    @Mock
     private ConditionalCardController mController;
     @Mock
     private ConditionListener mConditionListener;
@@ -57,14 +55,11 @@ public class ConditionManagerTest {
         mContext = RuntimeEnvironment.application;
         mManager = spy(new ConditionManager(mContext, mConditionListener));
 
-        assertThat(mManager.mCandidates.size()).isEqualTo(mManager.mCardControllers.size());
-
         when(mController.getId()).thenReturn(ID);
-        when(mCard.getId()).thenReturn(ID);
-
-        mManager.mCandidates.clear();
+        when(mController.buildContextualCard()).thenReturn(
+                new ConditionalContextualCard.Builder()
+                        .build());
         mManager.mCardControllers.clear();
-        mManager.mCandidates.add(mCard);
         mManager.mCardControllers.add(mController);
     }
 

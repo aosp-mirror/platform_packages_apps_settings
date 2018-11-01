@@ -29,6 +29,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.notification.ZenModeSettings;
 
 import java.util.Objects;
@@ -86,6 +87,20 @@ public class DndConditionCardController implements ConditionalCardController {
     @Override
     public void onActionClick() {
         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
+    }
+
+    @Override
+    public ContextualCard buildContextualCard() {
+        return new ConditionalContextualCard.Builder()
+                .setConditionId(ID)
+                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_DND)
+                .setActionText(mAppContext.getText(R.string.condition_turn_off))
+                .setName(mAppContext.getPackageName() + "/"
+                        + mAppContext.getText(R.string.condition_zen_title))
+                .setTitleText(mAppContext.getText(R.string.condition_zen_title).toString())
+                .setSummaryText(getSummary().toString())
+                .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
+                .build();
     }
 
     public CharSequence getSummary() {

@@ -23,6 +23,9 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
+import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settingslib.WirelessUtils;
 
 import java.util.Objects;
@@ -63,6 +66,20 @@ public class AirplaneModeConditionController implements ConditionalCardControlle
     @Override
     public void onActionClick() {
         ConnectivityManager.from(mAppContext).setAirplaneMode(false);
+    }
+
+    @Override
+    public ContextualCard buildContextualCard() {
+        return new ConditionalContextualCard.Builder()
+                .setConditionId(ID)
+                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_AIRPLANE_MODE)
+                .setActionText(mAppContext.getText(R.string.condition_turn_off))
+                .setName(mAppContext.getPackageName() + "/"
+                        + mAppContext.getText(R.string.condition_airplane_title))
+                .setTitleText(mAppContext.getText(R.string.condition_airplane_title).toString())
+                .setSummaryText(mAppContext.getText(R.string.condition_airplane_summary).toString())
+                .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_airplanemode_active))
+                .build();
     }
 
     @Override
