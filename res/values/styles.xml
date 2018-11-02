@@ -16,12 +16,15 @@
 
 <resources>
 
-    <style name="Theme.ActionBar"
-           parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid">
+    <style name="Widget.ActionBar.Base"
+            parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid"/>
+
+    <style name="Widget.ActionBar"
+           parent="Widget.ActionBar.Base">
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
-    <style name="Theme.ActionBar.SubSettings" parent="Theme.ActionBar">
+    <style name="Widget.ActionBar.SubSettings" parent="Widget.ActionBar">
         <item name="android:contentInsetStart">@dimen/actionbar_subsettings_contentInsetStart</item>
     </style>
 
