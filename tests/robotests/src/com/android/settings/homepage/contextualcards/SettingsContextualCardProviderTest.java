@@ -23,9 +23,12 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.wifi.WifiSlice;
 
+import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardCategory;
 import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardProvider;
 
 import org.junit.Before;
@@ -61,5 +64,18 @@ public class SettingsContextualCardProviderTest {
                 ContextualCardList.parseFrom(
                         returnValue.getByteArray(ContextualCardProvider.BUNDLE_CARD_LIST));
         assertThat(cards.getCardCount()).isEqualTo(actualNo);
+    }
+
+    @Test
+    public void getContextualCards_wifiSlice_shouldGetCorrectCategory() {
+        final ContextualCardList cards = mProvider.getContextualCards();
+        ContextualCard wifiCard = null;
+        for (ContextualCard card : cards.getCardList()) {
+            if (card.getSliceUri().equals(WifiSlice.WIFI_URI.toString())) {
+                wifiCard = card;
+            }
+        }
+
+        assertThat(wifiCard.getCategory()).isEqualTo(ContextualCardCategory.IMPORTANT);
     }
 }
