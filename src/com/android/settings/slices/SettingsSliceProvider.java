@@ -382,7 +382,7 @@ public class SettingsSliceProvider extends SliceProvider {
     void registerIntentToUri(IntentFilter intentFilter, Uri sliceUri) {
         Log.d(TAG, "Registering Uri for broadcast relay: " + sliceUri);
         mRegisteredUris.add(sliceUri);
-        SliceBroadcastRelay.registerReceiver(getContext(), sliceUri, SliceBroadcastReceiver.class,
+        SliceBroadcastRelay.registerReceiver(getContext(), sliceUri, SliceRelayReceiver.class,
                 intentFilter);
     }
 
