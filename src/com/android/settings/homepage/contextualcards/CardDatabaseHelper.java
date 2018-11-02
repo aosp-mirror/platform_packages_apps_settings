@@ -30,7 +30,7 @@ import androidx.annotation.VisibleForTesting;
 public class CardDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "CardDatabaseHelper";
     private static final String DATABASE_NAME = "homepage_cards.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     public static final String CARD_TABLE = "cards";
 
@@ -56,7 +56,7 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
         String SLICE_URI = "slice_uri";
 
         /**
-         * Category of the card. The value is between 0 to 3.
+         * Category of the card.
          */
         String CATEGORY = "category";
 
@@ -133,11 +133,7 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
                     CardColumns.SLICE_URI +
                     " TEXT, " +
                     CardColumns.CATEGORY +
-                    " INTEGER DEFAULT 0 CHECK (" +
-                    CardColumns.CATEGORY +
-                    " >= 0 AND " +
-                    CardColumns.CATEGORY +
-                    " <= 3), " +
+                    " INTEGER DEFAULT 0, " +
                     CardColumns.LOCALIZED_TO_LOCALE +
                     " TEXT, " +
                     CardColumns.PACKAGE_NAME +
