@@ -45,6 +45,7 @@ import java.util.Map;
  */
 public class SliceContextualCardRenderer implements ContextualCardRenderer,
         SliceView.OnSliceActionListener {
+    public static final int VIEW_TYPE = R.layout.homepage_slice_tile;
 
     private static final String TAG = "SliceCardRenderer";
 
@@ -61,8 +62,8 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
     }
 
     @Override
-    public int getViewType() {
-        return R.layout.homepage_slice_tile;
+    public int getViewType(boolean isHalfWidth) {
+        return VIEW_TYPE;
     }
 
     @Override
