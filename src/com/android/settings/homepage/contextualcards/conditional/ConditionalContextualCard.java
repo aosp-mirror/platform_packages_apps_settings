@@ -22,7 +22,7 @@ import com.android.settings.homepage.contextualcards.ContextualCard;
  * Data class representing a conditional {@link ContextualCard}.
  *
  * Use this class to store additional attributes on top of {@link ContextualCard} for
- * {@link ConditionalCard}.
+ * {@link ConditionalCardController}.
  */
 public class ConditionalContextualCard extends ContextualCard {
 

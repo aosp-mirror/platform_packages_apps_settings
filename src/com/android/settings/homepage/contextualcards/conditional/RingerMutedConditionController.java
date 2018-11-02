@@ -23,15 +23,21 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.provider.Settings;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
+import com.android.settings.homepage.contextualcards.ContextualCard;
+
 import java.util.Objects;
 
 public class RingerMutedConditionController extends AbnormalRingerConditionController {
     static final int ID = Objects.hash("RingerMutedConditionController");
 
     private final NotificationManager mNotificationManager;
+    private final Context mAppContext;
 
     public RingerMutedConditionController(Context appContext, ConditionManager conditionManager) {
         super(appContext, conditionManager);
+        mAppContext = appContext;
         mNotificationManager =
                 (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
     }
@@ -51,5 +57,21 @@ public class RingerMutedConditionController extends AbnormalRingerConditionContr
         final boolean isSilent =
                 mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
         return isSilent && !zenModeEnabled;
+    }
+
+    @Override
+    public ContextualCard buildContextualCard() {
+        return new ConditionalContextualCard.Builder()
+                .setConditionId(ID)
+                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_DEVICE_MUTED)
+                .setActionText(
+                        mAppContext.getText(R.string.condition_device_muted_action_turn_on_sound))
+                .setName(mAppContext.getPackageName() + "/"
+                        + mAppContext.getText(R.string.condition_device_muted_title))
+                .setTitleText(mAppContext.getText(R.string.condition_device_muted_title).toString())
+                .setSummaryText(
+                        mAppContext.getText(R.string.condition_device_muted_summary).toString())
+                .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_notifications_off_24dp))
+                .build();
     }
 }

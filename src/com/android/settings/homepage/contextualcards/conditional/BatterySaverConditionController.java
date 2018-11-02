@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
+import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 import java.util.Objects;
@@ -68,6 +69,20 @@ public class BatterySaverConditionController implements ConditionalCardControlle
     public void onActionClick() {
         BatterySaverUtils.setPowerSaveMode(mAppContext, false,
                 /*needFirstTimeWarning*/ false);
+    }
+
+    @Override
+    public ContextualCard buildContextualCard() {
+        return new ConditionalContextualCard.Builder()
+                .setConditionId(ID)
+                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_BATTERY_SAVER)
+                .setActionText(mAppContext.getText(R.string.condition_turn_off))
+                .setName(mAppContext.getPackageName() + "/"
+                        + mAppContext.getText(R.string.condition_battery_title))
+                .setTitleText(mAppContext.getText(R.string.condition_battery_title).toString())
+                .setSummaryText(mAppContext.getText(R.string.condition_battery_summary).toString())
+                .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_battery_saver_accent_24dp))
+                .build();
     }
 
     @Override

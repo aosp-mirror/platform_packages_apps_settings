@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 
+import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -78,6 +79,11 @@ public class AbnormalRingerConditionControllerBaseTest {
         @Override
         public boolean isDisplayable() {
             return false;
+        }
+
+        @Override
+        public ContextualCard buildContextualCard() {
+            return new ConditionalContextualCard.Builder().build();
         }
     }
 }

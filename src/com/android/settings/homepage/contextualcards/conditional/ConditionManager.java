@@ -22,6 +22,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.homepage.contextualcards.ContextualCard;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -36,8 +38,6 @@ public class ConditionManager {
     private static final String TAG = "ConditionManager";
 
     @VisibleForTesting
-    final List<ConditionalCard> mCandidates;
-    @VisibleForTesting
     final List<ConditionalCardController> mCardControllers;
 
     private static final long DISPLAYABLE_CHECKER_TIMEOUT_MS = 20;
@@ -51,29 +51,27 @@ public class ConditionManager {
     public ConditionManager(Context context, ConditionListener listener) {
         mAppContext = context.getApplicationContext();
         mExecutorService = Executors.newCachedThreadPool();
-        mCandidates = new ArrayList<>();
         mCardControllers = new ArrayList<>();
         mListener = listener;
         initCandidates();
     }
 
     /**
-     * Returns a list of {@link ConditionalCard}s eligible for display.
+     * Returns a list of {@link ContextualCard}s eligible for display.
      */
-    public List<ConditionalCard> getDisplayableCards() {
-        final List<ConditionalCard> cards = new ArrayList<>();
-        final List<Future<ConditionalCard>> displayableCards = new ArrayList<>();
+    public List<ContextualCard> getDisplayableCards() {
+        final List<ContextualCard> cards = new ArrayList<>();
+        final List<Future<ContextualCard>> displayableCards = new ArrayList<>();
         // Check displayable future
-        for (ConditionalCard card : mCandidates) {
-            final DisplayableChecker future = new DisplayableChecker(
-                    card, getController(card.getId()));
+        for (ConditionalCardController card : mCardControllers) {
+            final DisplayableChecker future = new DisplayableChecker(getController(card.getId()));
             displayableCards.add(mExecutorService.submit(future));
         }
         // Collect future and add displayable cards
-        for (Future<ConditionalCard> cardFuture : displayableCards) {
+        for (Future<ContextualCard> cardFuture : displayableCards) {
             try {
-                final ConditionalCard card = cardFuture.get(DISPLAYABLE_CHECKER_TIMEOUT_MS,
-                        TimeUnit.MILLISECONDS);
+                final ContextualCard card = cardFuture.get(
+                        DISPLAYABLE_CHECKER_TIMEOUT_MS, TimeUnit.MILLISECONDS);
                 if (card != null) {
                     cards.add(card);
                 }
@@ -142,7 +140,7 @@ public class ConditionManager {
     }
 
     @NonNull
-    <T extends ConditionalCardController> T getController(long id) {
+    private <T extends ConditionalCardController> T getController(long id) {
         for (ConditionalCardController controller : mCardControllers) {
             if (controller.getId() == id) {
                 return (T) controller;
@@ -164,36 +162,22 @@ public class ConditionManager {
         mCardControllers.add(new RingerVibrateConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new RingerMutedConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new WorkModeConditionController(mAppContext, this /* manager */));
-
-        // Initialize ui model later. UI model depends on controller.
-        mCandidates.add(new AirplaneModeConditionCard(mAppContext));
-        mCandidates.add(new BackgroundDataConditionCard(mAppContext));
-        mCandidates.add(new BatterySaverConditionCard(mAppContext));
-        mCandidates.add(new CellularDataConditionCard(mAppContext));
-        mCandidates.add(new DndConditionCard(mAppContext, this /* manager */));
-        mCandidates.add(new HotspotConditionCard(mAppContext, this /* manager */));
-        mCandidates.add(new NightDisplayConditionCard(mAppContext));
-        mCandidates.add(new RingerMutedConditionCard(mAppContext));
-        mCandidates.add(new RingerVibrateConditionCard(mAppContext));
-        mCandidates.add(new WorkModeConditionCard(mAppContext));
     }
 
     /**
      * Returns card if controller says it's displayable. Otherwise returns null.
      */
-    public static class DisplayableChecker implements Callable<ConditionalCard> {
+    public static class DisplayableChecker implements Callable<ContextualCard> {
 
-        private final ConditionalCard mCard;
         private final ConditionalCardController mController;
 
-        private DisplayableChecker(ConditionalCard card, ConditionalCardController controller) {
-            mCard = card;
+        private DisplayableChecker(ConditionalCardController controller) {
             mController = controller;
         }
 
         @Override
-        public ConditionalCard call() throws Exception {
-            return mController.isDisplayable() ? mCard : null;
+        public ContextualCard call() throws Exception {
+            return mController.isDisplayable() ? mController.buildContextualCard() : null;
         }
     }
 }
