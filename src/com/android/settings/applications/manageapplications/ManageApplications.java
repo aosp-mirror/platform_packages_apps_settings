@@ -90,7 +90,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
-import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
@@ -101,7 +100,6 @@ import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.DefaultAppSettings;
-import com.android.settings.applications.DirectoryAccessDetails;
 import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
@@ -218,7 +216,6 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_GAMES = 9;
     public static final int LIST_TYPE_MOVIES = 10;
     public static final int LIST_TYPE_PHOTOGRAPHY = 11;
-    public static final int LIST_TYPE_DIRECTORY_ACCESS = 12;
     public static final int LIST_TYPE_WIFI_ACCESS = 13;
 
     // List types that should show instant apps.
@@ -293,9 +290,6 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_PHOTOGRAPHY;
             mSortOrder = R.id.sort_order_size;
             mStorageType = args.getInt(EXTRA_STORAGE_TYPE, STORAGE_TYPE_DEFAULT);
-        } else if (className.equals(Settings.DirectoryAccessSettingsActivity.class.getName())) {
-            mListType = LIST_TYPE_DIRECTORY_ACCESS;
-            screenTitle = R.string.directory_access;
         } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
             mListType = LIST_TYPE_WIFI_ACCESS;
             screenTitle = R.string.change_wifi_state_title;
@@ -479,8 +473,6 @@ public class ManageApplications extends InstrumentedFragment
                 return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
             case LIST_TYPE_MANAGE_SOURCES:
                 return MetricsEvent.MANAGE_EXTERNAL_SOURCES;
-            case LIST_TYPE_DIRECTORY_ACCESS:
-                return MetricsEvent.DIRECTORY_ACCESS;
             case LIST_TYPE_WIFI_ACCESS:
                 return MetricsEvent.CONFIGURE_WIFI;
             default:
@@ -577,9 +569,6 @@ public class ManageApplications extends InstrumentedFragment
                 break;
             case LIST_TYPE_PHOTOGRAPHY:
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_photos_videos);
-                break;
-            case LIST_TYPE_DIRECTORY_ACCESS:
-                startAppInfoFragment(DirectoryAccessDetails.class, R.string.directory_access);
                 break;
             case LIST_TYPE_WIFI_ACCESS:
                 startAppInfoFragment(ChangeWifiStateDetails.class,
@@ -916,8 +905,6 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateWriteSettingsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_MANAGE_SOURCES) {
                 mExtraInfoBridge = new AppStateInstallAppsBridge(mContext, mState, this);
-            } else if (mManageApplications.mListType == LIST_TYPE_DIRECTORY_ACCESS) {
-                mExtraInfoBridge = new AppStateDirectoryAccessBridge(mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_WIFI_ACCESS) {
                 mExtraInfoBridge = new AppStateChangeWifiStateBridge(mContext, mState, this);
             } else {
@@ -1359,9 +1346,6 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 case LIST_TYPE_MANAGE_SOURCES:
                     holder.setSummary(ExternalSourcesDetails.getPreferenceSummary(mContext, entry));
-                    break;
-                case LIST_TYPE_DIRECTORY_ACCESS:
-                    holder.setSummary(null);
                     break;
                 case LIST_TYPE_WIFI_ACCESS:
                     holder.setSummary(ChangeWifiStateDetails.getSummary(mContext, entry));

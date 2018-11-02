@@ -18,13 +18,10 @@ package com.android.settings.applications;
 
 import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
-import static android.os.storage.StorageVolume.ScopedAccessProviderContract.AUTHORITY;
-import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS;
 
 import android.app.ActivityManager;
 import android.app.AppGlobals;
 import android.app.GrantedUriPermission;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,7 +29,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -460,17 +456,6 @@ public class AppStorageSettings extends AppInfoWithHeader
         final ActivityManager am = (ActivityManager) context.getSystemService(
                 Context.ACTIVITY_SERVICE);
         am.clearGrantedUriPermissions(packageName);
-
-
-        // Also update the Scoped Directory Access UI permissions
-        final Uri providerUri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(AUTHORITY).appendPath(TABLE_PERMISSIONS).appendPath("*")
-                .build();
-        Log.v(TAG, "Asking " + providerUri + " to delete permissions for " + packageName);
-        final int deleted = context.getContentResolver().delete(providerUri, null, new String[] {
-                packageName
-        });
-        Log.d(TAG, "Deleted " + deleted + " entries for package " + packageName);
 
         // Update UI
         refreshGrantedUriPermissions();

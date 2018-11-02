@@ -121,16 +121,6 @@
     </Preference>
 
     <Preference
-        android:key="special_app_directory_access"
-        android:title="@string/directory_access"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_directory_access">
-        <extra
-            android:name="classname"
-            android:value="com.android.settings.Settings$DirectoryAccessSettingsActivity" />
-    </Preference>
-
-    <Preference
         android:key="change_wifi_state"
         android:title="@string/change_wifi_state_title"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
