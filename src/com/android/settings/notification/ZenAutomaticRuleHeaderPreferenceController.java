@@ -24,12 +24,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.service.notification.ZenModeConfig;
+import android.text.TextUtils;
 import android.util.Slog;
 import android.view.View;
-
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -37,6 +34,10 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {
@@ -128,9 +129,13 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
 
         @Override
         public void onOk(String ruleName, Fragment parent) {
+            if (TextUtils.equals(ruleName, mRule.getName())) {
+                return;
+            }
             mMetricsFeatureProvider.action(mContext,
                     MetricsProto.MetricsEvent.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
             mRule.setName(ruleName);
+            mRule.setModified(true);
             mBackend.setZenRule(mId, mRule);
         }
     }
