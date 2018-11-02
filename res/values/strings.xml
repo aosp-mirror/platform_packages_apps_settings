@@ -1051,9 +1051,6 @@
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
 
-    <!-- Content description for the fingerprint icon when the user is prompted to enter his credentials. Not shown on the screen. [CHAR LIMIT=NONE] -->
-    <string name="confirm_fingerprint_icon_content_description">Use your fingerprint to continue.</string>
-
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
 
@@ -3709,6 +3706,10 @@
     <!-- About phone settings screen, Safety Legal dialog title until the link is fully loaded -->
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
+    <!-- ConfirmDeviceCredential settings-->
+    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pin/Pattern/Pass) [CHAR LIMIT=30] -->
+    <string name="confirm_device_credential_use_alternate_method">Use alternate method</string>
+
     <!-- Lock Pattern settings -->
     <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_screen_lock_header">Set screen lock</string>
@@ -3771,8 +3772,8 @@
     <string name="lockpassword_confirm_your_password_generic_profile">Enter your work password to continue</string>
 
     <!-- This string shows up on a screen where a user can enter a pattern that
-         unlocks their device. This is an extra security measure that's required for them to
-         continue. [CHAR LIMIT=100] -->
+     unlocks their device. This is an extra security measure that's required for them to
+     continue. [CHAR LIMIT=100] -->
     <string name="lockpassword_strong_auth_required_device_pattern">For added security, use your device pattern</string>
     <!-- This string shows up on a screen where a user can enter a PIN that unlocks their device.
          This is an extra security measure that's required for them to continue. [CHAR LIMIT=100]
@@ -8373,9 +8374,6 @@
 
     <!-- Explanation that the app that will NEVER be launched to open web links to domains that it understands -->
     <string name="app_link_open_never">Don&#8217;t open in this app</string>
-
-    <!-- Fingerprint hint message when finger was not recognized.-->
-    <string name="fingerprint_not_recognized">Not recognized</string>
 
     <!-- Title for Default Apps settings [CHAR LIMIT=30] -->
     <string name="default_apps_title">Default</string>

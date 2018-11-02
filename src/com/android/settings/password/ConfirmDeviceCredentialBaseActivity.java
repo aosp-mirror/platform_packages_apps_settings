@@ -140,6 +140,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        if (getIntent().getBooleanExtra(
+                ConfirmDeviceCredentialBaseFragment.USE_FADE_ANIMATION, false)) {
+            overridePendingTransition(0, R.anim.confirm_credential_biometric_transition_exit);
+        }
+    }
+
     public void prepareEnterAnimation() {
         getFragment().prepareEnterAnimation();
     }

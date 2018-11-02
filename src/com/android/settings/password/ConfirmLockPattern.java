@@ -231,7 +231,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mCancelButton.setAlpha(0f);
             mLockPatternView.setAlpha(0f);
             mDetailsTextView.setAlpha(0f);
-            mFingerprintIcon.setAlpha(0f);
         }
 
         private int getDefaultDetails() {
@@ -264,9 +263,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     row.add(cellStates[i][j]);
                 }
                 result.add(row);
-            }
-            if (mFingerprintIcon.getVisibility() == View.VISIBLE) {
-                result.add(new ArrayList<Object>(Collections.singletonList(mFingerprintIcon)));
             }
             Object[][] resultArr = new Object[result.size()][cellStates[0].length];
             for (int i = 0; i < result.size(); i++) {
@@ -374,16 +370,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             } else {
                 activity.setResult(RESULT_OK, intent);
                 activity.finish();
-            }
-        }
-
-        @Override
-        public void onFingerprintIconVisibilityChanged(boolean visible) {
-            if (mLeftSpacerLandscape != null && mRightSpacerLandscape != null) {
-
-                // In landscape, adjust spacing depending on fingerprint icon visibility.
-                mLeftSpacerLandscape.setVisibility(visible ? View.GONE : View.VISIBLE);
-                mRightSpacerLandscape.setVisibility(visible ? View.GONE : View.VISIBLE);
             }
         }
 
