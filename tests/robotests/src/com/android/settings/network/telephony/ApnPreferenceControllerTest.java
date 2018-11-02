@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
@@ -112,6 +113,14 @@ public class ApnPreferenceControllerTest {
         doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_carrierConfigNull_returnUnavailable() {
+        doReturn(PhoneConstants.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
+        when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(null);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
