@@ -251,15 +251,20 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mTts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String utteranceId) {
+                updateWidgetState(false);
             }
 
             @Override
             public void onDone(String utteranceId) {
+                updateWidgetState(true);
             }
 
             @Override
             public void onError(String utteranceId) {
                 Log.e(TAG, "Error while trying to synthesize sample text");
+                // Re-enable just in case, although there isn't much hope that following synthesis
+                // requests are going to succeed.
+                updateWidgetState(true);
             }
         });
     }
@@ -696,9 +701,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     private void updateWidgetState(boolean enable) {
-        mActionButtons.setButton1Enabled(enable);
-        mDefaultRatePref.setEnabled(enable);
-        mDefaultPitchPref.setEnabled(enable);
+        getActivity().runOnUiThread(() -> {
+            mActionButtons.setButton1Enabled(enable);
+            mDefaultRatePref.setEnabled(enable);
+            mDefaultPitchPref.setEnabled(enable);
+        });
     }
 
     private void displayNetworkAlert() {
