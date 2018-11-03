@@ -23,7 +23,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -80,8 +79,7 @@ public class EnabledNetworkModePreferenceControllerTest {
         mPreference = new ListPreference(mContext);
         mPreference.setEntries(R.array.enabled_networks_choices);
         mPreference.setEntryValues(R.array.enabled_networks_values);
-        mController = spy(new EnabledNetworkModePreferenceController(mContext, "enabled_network"));
-        doNothing().when(mController).initShow4GForLTE();
+        mController = new EnabledNetworkModePreferenceController(mContext, "enabled_network");
         mController.init(SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
     }
@@ -101,6 +99,16 @@ public class EnabledNetworkModePreferenceControllerTest {
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL, false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void init_initShow4GForLTE() {
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL,
+                true);
+
+        mController.init(SUB_ID);
+
+        assertThat(mController.mShow4GForLTE).isTrue();
     }
 
     @Test

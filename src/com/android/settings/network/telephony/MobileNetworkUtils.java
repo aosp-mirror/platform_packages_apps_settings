@@ -386,19 +386,6 @@ public class MobileNetworkUtils {
         return false;
     }
 
-    public static boolean isShow4GForLTE(Context context) {
-        //TODO(b/117882862): move this to framework
-        try {
-            Context con = context.createPackageContext("com.android.systemui", 0);
-            int id = con.getResources().getIdentifier("config_show4GForLTE",
-                    "bool", "com.android.systemui");
-            return con.getResources().getBoolean(id);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "NameNotFoundException for show4GFotLTE");
-            return false;
-        }
-    }
-
     /**
      * Return {@code true} if Tdscdma is supported in current subscription
      */
