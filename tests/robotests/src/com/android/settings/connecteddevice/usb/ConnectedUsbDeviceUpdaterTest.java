@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,8 +69,8 @@ public class ConnectedUsbDeviceUpdaterTest {
         mDeviceUpdater.initUsbPreference(mContext);
 
         assertThat(mDeviceUpdater.mUsbPreference.getTitle()).isEqualTo("USB");
-        assertThat(mDeviceUpdater.mUsbPreference.getIcon())
-            .isEqualTo(mContext.getDrawable(R.drawable.ic_usb));
+        DrawableTestHelper.assertDrawableResId(
+                mDeviceUpdater.mUsbPreference.getIcon(), R.drawable.ic_usb);
         assertThat(mDeviceUpdater.mUsbPreference.isSelectable()).isTrue();
     }
 

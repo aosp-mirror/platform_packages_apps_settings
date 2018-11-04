@@ -100,7 +100,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be enabled.
         final Context context = RuntimeEnvironment.application;
-        Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
+        Settings.Secure.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
         mController = new SwipeToNotificationPreferenceController(context, KEY_SWIPE_DOWN);
 
         assertThat(mController.isChecked()).isTrue();
@@ -112,7 +112,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be disabled.
         final Context context = RuntimeEnvironment.application;
-        Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
+        Settings.Secure.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
         mController = new SwipeToNotificationPreferenceController(context, KEY_SWIPE_DOWN);
 
         assertThat(mController.isChecked()).isFalse();

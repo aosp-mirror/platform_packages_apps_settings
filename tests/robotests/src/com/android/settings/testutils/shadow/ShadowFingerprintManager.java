@@ -16,7 +16,6 @@
 
 package com.android.settings.testutils.shadow;
 
-import android.content.Context;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 
@@ -25,36 +24,16 @@ import androidx.annotation.NonNull;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowContextImpl;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.IntStream;
 
 @Implements(FingerprintManager.class)
-public class ShadowFingerprintManager {
+public class ShadowFingerprintManager extends org.robolectric.shadows.ShadowFingerprintManager {
 
-    private static Map<String, String> getSystemServiceMap() {
-        return ReflectionHelpers.getStaticField(ShadowContextImpl.class, "SYSTEM_SERVICE_MAP");
-    }
-
-    /**
-     * Call this in @Before of a test to add FingerprintManager to Robolectric's system service
-     * map. Otherwise getSystemService(FINGERPRINT_SERVICE) will return null.
-     */
-    public static void addToServiceMap() {
-        getSystemServiceMap().put(Context.FINGERPRINT_SERVICE, FingerprintManager.class.getName());
-    }
-
-    @Resetter
-    public static void reset() {
-        getSystemServiceMap().remove(Context.FINGERPRINT_SERVICE);
-    }
 
     public boolean hardwareDetected = true;
 
@@ -62,22 +41,22 @@ public class ShadowFingerprintManager {
     private List<Fingerprint> mFingerprints = Collections.emptyList();
 
     @Implementation
-    public boolean isHardwareDetected() {
+    protected boolean isHardwareDetected() {
         return hardwareDetected;
     }
 
     @Implementation
-    public boolean hasEnrolledFingerprints() {
+    protected boolean hasEnrolledFingerprints() {
         return !mFingerprints.isEmpty();
     }
 
     @Implementation
-    public List<Fingerprint> getEnrolledFingerprints() {
+    protected List<Fingerprint> getEnrolledFingerprints() {
         return mFingerprints;
     }
 
     @Implementation
-    public List<Fingerprint> getEnrolledFingerprints(int userId) {
+    protected List<Fingerprint> getEnrolledFingerprints(int userId) {
         return mFingerprints;
     }
 

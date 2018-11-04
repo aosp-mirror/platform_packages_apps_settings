@@ -19,18 +19,13 @@ package com.android.settings.biometrics.fingerprint;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
-import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
-import android.media.AudioAttributes;
 import android.os.CancellationSignal;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -39,7 +34,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.testutils.shadow.ShadowVibrator;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -50,15 +45,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
-
-import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
         SettingsShadowResourcesImpl.class,
-        ShadowUtils.class,
-        ShadowVibrator.class})
+        ShadowUtils.class})
 public class FingerprintEnrollEnrollingTest {
 
     @Mock
@@ -70,7 +61,6 @@ public class FingerprintEnrollEnrollingTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowUtils.setFingerprintManager(mFingerprintManager);
-        ShadowVibrator.addToServiceMap();
 
         FakeFeatureFactory.setupForTest();
         mActivity = Robolectric.buildActivity(
@@ -84,11 +74,10 @@ public class FingerprintEnrollEnrollingTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
-        ShadowVibrator.reset();
     }
 
     @Test
-    public void fingerprintEnrollHelp_shouldShowHelpTextAndVibrate() {
+    public void fingerprintEnrollHelp_shouldShowHelpText() {
         EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
 
         enrollmentCallback.onEnrollmentProgress(123);
@@ -98,17 +87,6 @@ public class FingerprintEnrollEnrollingTest {
 
         TextView errorText = mActivity.findViewById(R.id.error_text);
         assertThat(errorText.getText()).isEqualTo("test enrollment help");
-
-        Robolectric.getForegroundThreadScheduler().advanceBy(2, TimeUnit.MILLISECONDS);
-
-        ShadowVibrator shadowVibrator =
-                Shadow.extract(application.getSystemService(Vibrator.class));
-        verify(shadowVibrator.delegate).vibrate(
-                anyInt(),
-                nullable(String.class),
-                any(VibrationEffect.class),
-                nullable(String.class),
-                nullable(AudioAttributes.class));
     }
 
     private EnrollmentCallback verifyAndCaptureEnrollmentCallback() {

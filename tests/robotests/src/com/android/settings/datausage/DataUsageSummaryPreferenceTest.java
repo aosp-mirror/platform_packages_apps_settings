@@ -22,8 +22,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.NetworkTemplate;
@@ -51,7 +51,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
@@ -66,7 +65,7 @@ public class DataUsageSummaryPreferenceTest {
     private static final long UPDATE_LAG_MILLIS = 10000000L;
     private static final String DUMMY_CARRIER = "z-mobile";
 
-    private Context mContext;
+    private Activity mActivity;
     private PreferenceViewHolder mHolder;
     private DataUsageSummaryPreference mSummaryPreference;
     private TextView mUsageTitle;
@@ -87,9 +86,9 @@ public class DataUsageSummaryPreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mSummaryPreference = new DataUsageSummaryPreference(mContext, null /* attrs */);
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        mActivity = spy(Robolectric.setupActivity(Activity.class));
+        mSummaryPreference = new DataUsageSummaryPreference(mActivity, null /* attrs */);
+        LayoutInflater inflater = LayoutInflater.from(mActivity);
         View view = inflater.inflate(mSummaryPreference.getLayoutResource(), null /* root */,
                 false /* attachToRoot */);
 
@@ -227,7 +226,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttrDefaultColor(mContext, android.R.attr.textColorSecondary));
+                Utils.getColorAttrDefaultColor(mActivity, android.R.attr.textColorSecondary));
         assertThat(mCarrierInfo.getTypeface()).isEqualTo(Typeface.SANS_SERIF);
     }
 
@@ -240,7 +239,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorError));
+                Utils.getColorAttrDefaultColor(mActivity, android.R.attr.colorError));
         assertThat(mCarrierInfo.getTypeface()).isEqualTo(
                 DataUsageSummaryPreference.SANS_SERIF_MEDIUM);
     }
@@ -273,7 +272,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCycleTime.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCycleTime.getText()).isEqualTo(
-                mContext.getString(R.string.billing_cycle_less_than_one_day_left));
+                mActivity.getString(R.string.billing_cycle_less_than_one_day_left));
     }
 
     @Test
@@ -285,7 +284,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCycleTime.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCycleTime.getText()).isEqualTo(
-                mContext.getString(R.string.billing_cycle_none_left));
+                mActivity.getString(R.string.billing_cycle_none_left));
     }
 
     @Test
@@ -384,7 +383,7 @@ public class DataUsageSummaryPreferenceTest {
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("9.00 MB left");
         assertThat(mDataRemaining.getVisibility()).isEqualTo(View.VISIBLE);
-        final int colorId = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorAccent);
+        final int colorId = Utils.getColorAttrDefaultColor(mActivity, android.R.attr.colorAccent);
         assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
@@ -400,7 +399,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("11.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("1.00 MB over");
-        final int colorId = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorError);
+        final int colorId = Utils.getColorAttrDefaultColor(mActivity, android.R.attr.colorError);
         assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
@@ -429,7 +428,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mLaunchButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mLaunchButton.getText())
-                .isEqualTo(mContext.getString(R.string.launch_mdp_app_text));
+                .isEqualTo(mActivity.getString(R.string.launch_mdp_app_text));
 
         mLaunchButton.callOnClick();
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
@@ -443,12 +442,12 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withOverflowStrings_dataRemainingNotShown() {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(mActivity);
         View view = inflater.inflate(mSummaryPreference.getLayoutResource(), null /* root */,
                 false /* attachToRoot */);
 
-        TextView dataUsed = spy(new TextView(mContext));
-        TextView dataRemaining = spy(new TextView(mContext));
+        TextView dataUsed = spy(new TextView(mActivity));
+        TextView dataRemaining = spy(new TextView(mActivity));
         doReturn(dataUsed).when(mHolder).findViewById(R.id.data_usage_view);
         doReturn(dataRemaining).when(mHolder).findViewById(R.id.data_remaining_view);
 
@@ -459,10 +458,10 @@ public class DataUsageSummaryPreferenceTest {
                 10 * BillingCycleSettings.MIB_IN_BYTES,
                 true /* hasMobileData */);
 
-        when(mContext.getResources()).thenCallRealMethod();
-        when(mContext.getText(R.string.data_used_formatted))
+        when(mActivity.getResources()).thenCallRealMethod();
+        when(mActivity.getText(R.string.data_used_formatted))
                 .thenReturn("^1 ^2 used with long trailing text");
-        when(mContext.getText(R.string.data_remaining)).thenReturn("^1 left");
+        when(mActivity.getText(R.string.data_remaining)).thenReturn("^1 left");
 
         bindViewHolder();
 
@@ -497,7 +496,7 @@ public class DataUsageSummaryPreferenceTest {
 
         bindViewHolder();
         assertThat(mUsageTitle.getText().toString())
-                .isEqualTo(mContext.getString(R.string.data_usage_wifi_title));
+                .isEqualTo(mActivity.getString(R.string.data_usage_wifi_title));
         assertThat(mUsageTitle.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCycleTime.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCycleTime.getText()).isEqualTo(cycleText);
@@ -505,7 +504,7 @@ public class DataUsageSummaryPreferenceTest {
         assertThat(mDataLimits.getVisibility()).isEqualTo(View.GONE);
         assertThat(mLaunchButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mLaunchButton.getText())
-                .isEqualTo(mContext.getString(R.string.launch_wifi_text));
+                .isEqualTo(mActivity.getString(R.string.launch_wifi_text));
 
         mLaunchButton.callOnClick();
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);

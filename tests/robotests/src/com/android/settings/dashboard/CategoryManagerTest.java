@@ -157,8 +157,7 @@ public class CategoryManagerTest {
         mCategoryByKeyMap.put(CATEGORY_HOMEPAGE, category);
 
         // Sort their priorities
-        mCategoryManager.sortCategories(ShadowApplication.getInstance().getApplicationContext(),
-                mCategoryByKeyMap);
+        mCategoryManager.sortCategories(RuntimeEnvironment.application, mCategoryByKeyMap);
 
         // Verify they are now sorted.
         assertThat(category.getTile(0)).isSameAs(tile3);

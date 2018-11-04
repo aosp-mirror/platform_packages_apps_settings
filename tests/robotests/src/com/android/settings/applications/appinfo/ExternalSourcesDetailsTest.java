@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
@@ -29,12 +30,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.RestrictedSwitchPreference;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -135,7 +138,7 @@ public class ExternalSourcesDetailsTest {
         assertThat(fragment.refreshUi()).isTrue();
 
         // Assertions
-        assertThat(shadowUserManager.hasUserRestriction(
+        assertThat(userManager.hasUserRestriction(
                 UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
                 UserHandle.of(UserHandle.myUserId()))).isTrue();
         assertThat(mSwitchPref.isDisabledByAdmin()).isTrue();
@@ -174,7 +177,7 @@ public class ExternalSourcesDetailsTest {
         assertThat(fragment.refreshUi()).isTrue();
 
         // Assertions
-        assertThat(shadowUserManager.hasUserRestriction(
+        assertThat(userManager.hasUserRestriction(
                 UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
                 UserHandle.of(UserHandle.myUserId()))).isTrue();
         assertThat(mSwitchPref.isDisabledByAdmin()).isTrue();
@@ -215,10 +218,10 @@ public class ExternalSourcesDetailsTest {
         assertThat(fragment.refreshUi()).isTrue();
 
         // Assertions
-        assertThat(shadowUserManager.hasUserRestriction(
+        assertThat(userManager.hasUserRestriction(
                 UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
                 UserHandle.of(UserHandle.myUserId()))).isTrue();
-        assertThat(shadowUserManager.hasUserRestriction(
+        assertThat(userManager.hasUserRestriction(
                 UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
                 UserHandle.of(UserHandle.myUserId()))).isTrue();
         assertThat(mSwitchPref.isDisabledByAdmin()).isTrue();

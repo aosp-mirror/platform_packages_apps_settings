@@ -21,19 +21,20 @@ import android.content.Context;
 import android.provider.Settings;
 import android.util.Log;
 
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
-
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class ZenModeAlarmsPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener {
 
-    protected static final String KEY = "zen_mode_alarms";
+    private final String KEY;
 
-    public ZenModeAlarmsPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, KEY, lifecycle);
+    public ZenModeAlarmsPreferenceController(Context context, Lifecycle lifecycle, String key) {
+        super(context, key, lifecycle);
+        KEY = key;
     }
 
     @Override

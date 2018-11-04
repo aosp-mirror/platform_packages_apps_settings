@@ -26,6 +26,7 @@ import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.wifi.WifiSlice;
 
+import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardCategory;
 import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardProvider;
 
 /** Provides dynamic card for SettingsIntelligence. */
@@ -40,16 +41,19 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                 ContextualCard.newBuilder()
                         .setSliceUri(WifiSlice.WIFI_URI.toString())
                         .setCardName(KEY_WIFI)
+                        .setCategory(ContextualCardCategory.IMPORTANT)
                         .build();
         final ContextualCard batteryInfoCard =
                 ContextualCard.newBuilder()
-                        .setSliceUri(BatterySlice.BATTERY_CARD_URI.toSafeString())
+                        .setSliceUri(BatterySlice.BATTERY_CARD_URI.toString())
                         .setCardName(BatterySlice.PATH_BATTERY_INFO)
+                        .setCategory(ContextualCardCategory.DEFAULT)
                         .build();
         final ContextualCard connectedDeviceCard =
                 ContextualCard.newBuilder()
                         .setSliceUri(ConnectedDeviceSlice.CONNECTED_DEVICE_URI.toString())
                         .setCardName(ConnectedDeviceSlice.PATH_CONNECTED_DEVICE)
+                        .setCategory(ContextualCardCategory.IMPORTANT)
                         .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)

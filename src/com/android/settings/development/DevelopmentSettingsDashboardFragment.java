@@ -458,6 +458,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
         controllers.add(new ResizableActivityPreferenceController(context));
         controllers.add(new FreeformWindowsPreferenceController(context));
+        controllers.add(new SmsAccessRestrictionPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
         controllers.add(new CbrsDataSwitchPreferenceController(context));
@@ -470,7 +471,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
-        controllers.add(new AutofillLoggingLevelPreferenceController(context));
+        controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
         return controllers;
     }

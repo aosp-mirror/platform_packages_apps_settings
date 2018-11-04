@@ -84,7 +84,7 @@ public class KeepActivitiesPreferenceControllerTest {
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ALWAYS_FINISH_ACTIVITIES, SETTING_VALUE_ON);
         mController.updateState(mPreference);
 
@@ -93,7 +93,7 @@ public class KeepActivitiesPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ALWAYS_FINISH_ACTIVITIES, SETTING_VALUE_OFF);
         mController.updateState(mPreference);
 

@@ -27,6 +27,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +60,7 @@ public class BatteryTipTest {
 
         assertThat(preference.getTitle()).isEqualTo(TITLE);
         assertThat(preference.getSummary()).isEqualTo(SUMMARY);
-        assertThat(preference.getIcon()).isEqualTo(mContext.getDrawable(ICON_ID));
+        DrawableTestHelper.assertDrawableResId(preference.getIcon(), ICON_ID);
     }
 
     @Test

@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.Preference;
@@ -48,6 +49,7 @@ public abstract class CdmaBasePreferenceController extends BasePreferenceControl
 
     public CdmaBasePreferenceController(Context context, String key) {
         super(context, key);
+        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
     }
 

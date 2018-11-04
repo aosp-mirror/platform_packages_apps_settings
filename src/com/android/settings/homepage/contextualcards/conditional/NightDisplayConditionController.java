@@ -23,6 +23,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.homepage.contextualcards.ContextualCard;
 
 import java.util.Objects;
 
@@ -30,11 +31,13 @@ public class NightDisplayConditionController implements ConditionalCardControlle
         ColorDisplayController.Callback {
     static final int ID = Objects.hash("NightDisplayConditionController");
 
+    private final Context mAppContext;
     private final ConditionManager mConditionManager;
     private final ColorDisplayController mController;
 
     public NightDisplayConditionController(Context appContext, ConditionManager manager) {
         mController = new ColorDisplayController(appContext);
+        mAppContext = appContext;
         mConditionManager = manager;
     }
 
@@ -60,6 +63,22 @@ public class NightDisplayConditionController implements ConditionalCardControlle
     @Override
     public void onActionClick() {
         mController.setActivated(false);
+    }
+
+    @Override
+    public ContextualCard buildContextualCard() {
+        return new ConditionalContextualCard.Builder()
+                .setConditionId(ID)
+                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_NIGHT_DISPLAY)
+                .setActionText(mAppContext.getText(R.string.condition_turn_off))
+                .setName(mAppContext.getPackageName() + "/"
+                        + mAppContext.getText(R.string.condition_night_display_title))
+                .setTitleText(mAppContext.getText(
+                        R.string.condition_night_display_title).toString())
+                .setSummaryText(
+                        mAppContext.getText(R.string.condition_night_display_summary).toString())
+                .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_settings_night_display))
+                .build();
     }
 
     @Override

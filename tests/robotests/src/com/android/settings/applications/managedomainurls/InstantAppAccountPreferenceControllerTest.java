@@ -62,13 +62,13 @@ public class InstantAppAccountPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mContentResolver = mContext.getContentResolver();
-        mEnableEphemeralFeature = Settings.Secure.getInt(mContentResolver,
+        mEnableEphemeralFeature = Settings.Global.getInt(mContentResolver,
                 ENABLE_EPHEMERAL_FEATURE, 1);
     }
 
     @After
     public void tearDown() {
-        Settings.Secure.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE,
+        Settings.Global.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE,
                 mEnableEphemeralFeature);
     }
 
@@ -81,10 +81,10 @@ public class InstantAppAccountPreferenceControllerTest {
     }
 
     @Test
-    public void testGetAvailabilityStatus_enableWebActiions() {
+    public void testGetAvailabilityStatus_enableWebActions() {
         when(mPackageManager.getInstantAppResolverSettingsComponent()).thenReturn(mComponentName);
         mController = new InstantAppAccountPreferenceController(mContext, PREF_KEY);
-        Settings.Secure.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE, 1);
+        Settings.Global.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE, 1);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -93,7 +93,7 @@ public class InstantAppAccountPreferenceControllerTest {
     public void testGetAvailabilityStatus_disableWebActions() {
         when(mPackageManager.getInstantAppResolverSettingsComponent()).thenReturn(mComponentName);
         mController = new InstantAppAccountPreferenceController(mContext, PREF_KEY);
-        Settings.Secure.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE, 0);
+        Settings.Global.putInt(mContentResolver, ENABLE_EPHEMERAL_FEATURE, 0);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }

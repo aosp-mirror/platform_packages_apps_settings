@@ -38,7 +38,7 @@ import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 
-@Implements(value = AudioManager.class, inheritImplementationMethods = true)
+@Implements(value = AudioManager.class)
 public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManager {
     private int mRingerMode;
     private int mDeviceCodes;

@@ -61,7 +61,7 @@ public class DisableAutomaticUpdatesPreferenceControllerTest {
     public void onPreferenceChanged_turnOnAutomaticUpdates() {
         mController.onPreferenceChange(null, true);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE, -1);
 
         assertThat(mode).isEqualTo(
@@ -72,7 +72,7 @@ public class DisableAutomaticUpdatesPreferenceControllerTest {
     public void onPreferenceChanged_turnOffAutomaticUpdates() {
         mController.onPreferenceChange(null, false);
 
-        final int mode = Settings.System.getInt(mContext.getContentResolver(),
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE, -1);
 
         assertThat(mode).isEqualTo(
@@ -81,7 +81,7 @@ public class DisableAutomaticUpdatesPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        Settings.System
+        Settings.Global
                 .putInt(mContext.getContentResolver(), Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE,
                         DisableAutomaticUpdatesPreferenceController.ENABLE_UPDATES_SETTING);
         mController.updateState(mPreference);
@@ -91,7 +91,7 @@ public class DisableAutomaticUpdatesPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        Settings.System
+        Settings.Global
                 .putInt(mContext.getContentResolver(), Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE,
                         DisableAutomaticUpdatesPreferenceController.DISABLE_UPDATES_SETTING);
         mController.updateState(mPreference);

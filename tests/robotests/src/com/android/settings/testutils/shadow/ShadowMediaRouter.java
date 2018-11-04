@@ -21,12 +21,11 @@ import static org.robolectric.RuntimeEnvironment.application;
 import android.media.MediaRouter;
 
 import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@Implements(value = MediaRouter.class, inheritImplementationMethods = true)
+@Implements(value = MediaRouter.class)
 public class ShadowMediaRouter extends org.robolectric.shadows.ShadowMediaRouter {
     MediaRouter.RouteInfo mSelectedRoute;
 
@@ -42,16 +41,12 @@ public class ShadowMediaRouter extends org.robolectric.shadows.ShadowMediaRouter
     }
 
     public void removeCallback(MediaRouter.Callback cb) {
-        if (mCallbacks.contains(cb))
+        if (mCallbacks.contains(cb)) {
             mCallbacks.remove(cb);
+        }
     }
 
     public static ShadowMediaRouter getShadow() {
         return Shadow.extract(application.getSystemService(MediaRouter.class));
-    }
-
-    @Resetter
-    public void reset() {
-        mCallbacks.clear();
     }
 }

@@ -30,7 +30,7 @@ import org.robolectric.shadow.api.Shadow;
 import java.util.Collections;
 import java.util.List;
 
-@Implements(value = WifiManager.class, inheritImplementationMethods = true)
+@Implements(value = WifiManager.class)
 public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager {
 
     public WifiConfiguration savedWifiConfig;

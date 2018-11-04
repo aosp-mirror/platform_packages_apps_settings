@@ -39,23 +39,27 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @Config(shadows = {
-    SettingsShadowResourcesImpl.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowUtils.class,
-    ShadowDataUsageUtils.class,
-    ShadowDashboardFragment.class
+        SettingsShadowResourcesImpl.class,
+        SettingsShadowResources.SettingsShadowTheme.class,
+        ShadowUtils.class,
+        ShadowDataUsageUtils.class,
+        ShadowDashboardFragment.class,
+        ShadowUserManager.class,
 })
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DataUsageSummaryTest {
@@ -77,13 +81,19 @@ public class DataUsageSummaryTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
+        ShadowUserManager.getShadow().setIsAdminUser(true);
         shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
 
-        mContext = shadowContext.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
 
         mSummaryProvider = DataUsageSummary.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(mActivity, mSummaryLoader);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowUserManager.getShadow().reset();
     }
 
     @Test

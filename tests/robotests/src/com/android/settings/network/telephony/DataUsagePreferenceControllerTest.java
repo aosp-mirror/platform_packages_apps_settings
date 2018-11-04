@@ -22,6 +22,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -39,7 +40,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DataUsagePreferenceControllerTest {
@@ -55,7 +56,7 @@ public class DataUsagePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(Robolectric.setupActivity(Activity.class));
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
 

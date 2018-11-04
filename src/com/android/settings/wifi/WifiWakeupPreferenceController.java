@@ -68,7 +68,7 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean isAvailable() {
-      return true;
+        return true;
     }
 
     @Override
@@ -108,8 +108,8 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         final SwitchPreference enableWifiWakeup = (SwitchPreference) preference;
 
         enableWifiWakeup.setChecked(getWifiWakeupEnabled()
-                        && getWifiScanningEnabled()
-                        && mLocationManager.isLocationEnabled());
+                && getWifiScanningEnabled()
+                && mLocationManager.isLocationEnabled());
         if (!mLocationManager.isLocationEnabled()) {
             preference.setSummary(getNoLocationSummary());
         } else {
@@ -117,7 +117,8 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
         }
     }
 
-    @VisibleForTesting CharSequence getNoLocationSummary() {
+    @VisibleForTesting
+    CharSequence getNoLocationSummary() {
         AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo("link", null);
         CharSequence locationText = mContext.getText(R.string.wifi_wakeup_summary_no_location);
         return AnnotationSpan.linkify(locationText, linkInfo);

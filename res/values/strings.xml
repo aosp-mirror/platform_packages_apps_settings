@@ -1051,9 +1051,6 @@
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
 
-    <!-- Content description for the fingerprint icon when the user is prompted to enter his credentials. Not shown on the screen. [CHAR LIMIT=NONE] -->
-    <string name="confirm_fingerprint_icon_content_description">Use your fingerprint to continue.</string>
-
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
 
@@ -3709,6 +3706,10 @@
     <!-- About phone settings screen, Safety Legal dialog title until the link is fully loaded -->
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
+    <!-- ConfirmDeviceCredential settings-->
+    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pin/Pattern/Pass) [CHAR LIMIT=30] -->
+    <string name="confirm_device_credential_use_alternate_method">Use alternate method</string>
+
     <!-- Lock Pattern settings -->
     <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_screen_lock_header">Set screen lock</string>
@@ -3771,8 +3772,8 @@
     <string name="lockpassword_confirm_your_password_generic_profile">Enter your work password to continue</string>
 
     <!-- This string shows up on a screen where a user can enter a pattern that
-         unlocks their device. This is an extra security measure that's required for them to
-         continue. [CHAR LIMIT=100] -->
+     unlocks their device. This is an extra security measure that's required for them to
+     continue. [CHAR LIMIT=100] -->
     <string name="lockpassword_strong_auth_required_device_pattern">For added security, use your device pattern</string>
     <!-- This string shows up on a screen where a user can enter a PIN that unlocks their device.
          This is an extra security measure that's required for them to continue. [CHAR LIMIT=100]
@@ -5654,12 +5655,18 @@
     <string name="remove_and_uninstall_device_admin">Deactivate &amp; uninstall</string>
     <!-- Label for screen showing to select device admin apps -->
     <string name="select_device_admin_msg">Device admin apps</string>
+
     <!-- Message when there are no available device admin apps to display -->
     <string name="no_device_admins">No device admin apps available</string>
     <!-- Title for personal device admin apps on the list [CHAR_LIMIT=25] -->
     <string name="personal_device_admin_title">Personal</string>
     <!-- Title for managed device admin apps on the list [CHAR_LIMIT=25] -->
     <string name="managed_device_admin_title">Work</string>
+    <!-- Title for whether to enable SMS access restriction [CHAR LIMIT=50]-->
+    <string name="sms_access_restriction_enabled">Restrict SMS &amp; call log access</string>
+    <!-- Summary for whether to enable SMS access restriction [CHAR LIMIT=NONE]-->
+    <string name="sms_access_restriction_enabled_summary">Only default phone and messaging apps have SMS &amp; call log permissions</string>
+
 
     <!-- Message when there are no available trust agents to display -->
     <string name="no_trust_agents">No available trust agents</string>
@@ -7185,19 +7192,25 @@
     <string name="zen_mode_behavior_alarms_only">No sound except alarms and media</string>
 
     <!--  Do not disturb: Title for the zen mode automation option in Settings. [CHAR LIMIT=40] -->
-    <string name="zen_mode_automation_settings_title">Turn on automatically</string>
+    <string name="zen_mode_automation_settings_title">Schedules</string>
 
     <!--  Do not disturb: Title for the zen mode automatic rules page in settings. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automation_settings_page_title">Automatic rules</string>
+    <string name="zen_mode_automation_settings_page_title">Do Not Disturb</string>
 
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_rule_settings_page_title">Automatic rule</string>
+
+    <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
+    <string name="zen_mode_schedule_category_title">Schedule</string>
 
     <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=46] -->
     <string name="zen_mode_automation_suggestion_title">Silence phone at certain times</string>
 
     <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=55] -->
     <string name="zen_mode_automation_suggestion_summary">Set Do Not Disturb rules</string>
+
+    <!--  Do not disturb: Header for the Do Not Disturb automatic rules. [CHAR LIMIT=55] -->
+    <string name="zen_mode_schedule_title">Schedule</string>
 
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
     <string name="zen_mode_use_automatic_rule">Use rule</string>
@@ -7221,10 +7234,10 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_settings_category">When Do Not Disturb is turned on</string>
+    <string name="zen_mode_settings_category">When Do Not Disturb is on</string>
 
-    <!-- Do not disturb: restrict notifications title [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_title">Notifications</string>
+    <!-- Do not disturb: restrict notifications title [CHAR LIMIT=80] -->
+    <string name="zen_mode_restrict_notifications_title">Notification restrictions</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_mute">No sound from notifications</string>
     <!-- Do not disturb:Mute notifications summary [CHAR LIMIT=NONE] -->
@@ -7356,15 +7369,15 @@
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
     </plurals>
 
-    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
-    <string name="zen_category_behavior">Behavior</string>
-    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
+    <!-- Do not disturb settings, category header [CHAR LIMIT=120]-->
+    <string name="zen_category_behavior">Mute phone, but allow exceptions</string>
+    <!-- Do not disturb settings, exceptions to dnd title [CHAR LIMIT=100]-->
     <string name="zen_category_exceptions">Exceptions</string>
     <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
     <string name="zen_category_schedule">Schedule</string>
 
-    <!-- Do not disturb settings, sound and vibrations title [CHAR LIMIT=100]-->
-    <string name="zen_sound_title">Sound &amp; vibration</string>
+    <!-- Do not disturb settings, sound and vibrations exceptions title [CHAR LIMIT=100]-->
+    <string name="zen_sound_title">See all exceptions</string>
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
     <!-- Do not disturb settings, sound and vibrations screen category [CHAR LIMIT=100]-->
@@ -7816,8 +7829,8 @@
     <!-- [CHAR LIMIT=100] Zen mode settings: Warning text for invalid zen rule names -->
     <string name="zen_mode_rule_name_warning">Rule name already in use</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Add rule menu option name -->
-    <string name="zen_mode_add_rule">Add rule</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Add another automatic zen rule option name-->
+    <string name="zen_mode_add_rule">Add more</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add event-based rule, set rule name title -->
     <string name="zen_mode_add_event_rule">Add event rule</string>
@@ -7942,6 +7955,9 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
 
+    <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_messages_footer">When Do Not Disturb is on, incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages toggle title -->
     <string name="zen_mode_messages_title">Allow messages</string>
 
@@ -7978,41 +7994,35 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: None -->
     <string name="zen_mode_from_none">None</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option -->
-    <string name="zen_mode_alarms">Alarms</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
+    <string name="zen_mode_alarms">Allow alarms</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option (ie: sound from alarm clock) -->
     <string name="zen_mode_alarms_list">alarms</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Media option -->
-    <string name="zen_mode_media">Media</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
+    <string name="zen_mode_media">Allow media</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: System option which includes sounds such as touch sounds -->
-    <string name="zen_mode_system">Touch sounds</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
+    <string name="zen_mode_system">Allow touch sounds</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Reminders option -->
-    <string name="zen_mode_reminders">Reminders</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow reminder notifications/sounds to bypass DND  -->
+    <string name="zen_mode_reminders">Allow reminders</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders are allowed to bypass dnd) -->
     <string name="zen_mode_reminders_list">reminders</string>
 
-    <!-- [CHAR LIMIT=70] Zen mode settings: Allow reminders toggle title -->
-    <string name="zen_mode_reminders_title">Allow reminders</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Events option -->
-    <string name="zen_mode_events">Events</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
+    <string name="zen_mode_events">Allow events</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
     <string name="zen_mode_events_list">events</string>
-
-    <!-- [CHAR LIMIT=70] Zen mode settings: Allow events toggle title -->
-    <string name="zen_mode_events_title">Allow events</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: All callers summary -->
     <string name="zen_mode_all_callers">anyone</string>
@@ -8370,9 +8380,6 @@
 
     <!-- Explanation that the app that will NEVER be launched to open web links to domains that it understands -->
     <string name="app_link_open_never">Don&#8217;t open in this app</string>
-
-    <!-- Fingerprint hint message when finger was not recognized.-->
-    <string name="fingerprint_not_recognized">Not recognized</string>
 
     <!-- Title for Default Apps settings [CHAR LIMIT=30] -->
     <string name="default_apps_title">Default</string>
@@ -10269,7 +10276,9 @@
     <!-- See less items in contextual homepage [CHAR LIMIT=30]-->
     <string name="see_less">See less</string>
 
-    <!-- Summary for connected devices count in connected device slice. [CHAR LIMIT=NONE] -->
+    <!-- Title for Network connection request Dialog [CHAR LIMIT=30] -->
+    <string name="network_connection_request_dialog_title">Choose device</string>
+
     <plurals name="show_connected_devices">
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> device connected</item>
         <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> devices connected</item>

@@ -30,9 +30,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
-
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -44,6 +41,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeAlarmsPreferenceControllerTest {
@@ -72,14 +72,15 @@ public class ZenModeAlarmsPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
-        mController = new ZenModeAlarmsPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new ZenModeAlarmsPreferenceController(mContext, mock(Lifecycle.class),
+                "zen_mode_behavior_alarms");
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mockPref);
+                .thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -124,7 +125,7 @@ public class ZenModeAlarmsPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allowAlarms);
 
         verify(mBackend)
-            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
+                .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
     }
 
     @Test
@@ -133,6 +134,6 @@ public class ZenModeAlarmsPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allowAlarms);
 
         verify(mBackend)
-            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
+                .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
     }
 }

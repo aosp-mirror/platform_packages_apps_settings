@@ -23,9 +23,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 
-import com.android.settings.R;
+import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardUpdateListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -74,8 +73,8 @@ public class ConditionContextualCardControllerTest {
 
     @Test
     public void onConditionsChanged_listenerIsSet_shouldUpdateData() {
-        final FakeConditionalCard fakeConditionalCard = new FakeConditionalCard(mContext);
-        final List<ConditionalCard> conditionalCards = new ArrayList<>();
+        final ContextualCard fakeConditionalCard = new ConditionalContextualCard.Builder().build();
+        final List<ContextualCard> conditionalCards = new ArrayList<>();
         conditionalCards.add(fakeConditionalCard);
         when(mConditionManager.getDisplayableCards()).thenReturn(conditionalCards);
         mController.setCardUpdateListener(mListener);
@@ -87,52 +86,13 @@ public class ConditionContextualCardControllerTest {
 
     @Test
     public void onConditionsChanged_listenerNotSet_shouldNotUpdateData() {
-        final FakeConditionalCard fakeConditionalCard = new FakeConditionalCard(mContext);
-        final List<ConditionalCard> conditionalCards = new ArrayList<>();
+        final ContextualCard fakeConditionalCard = new ConditionalContextualCard.Builder().build();
+        final List<ContextualCard> conditionalCards = new ArrayList<>();
         conditionalCards.add(fakeConditionalCard);
         when(mConditionManager.getDisplayableCards()).thenReturn(conditionalCards);
 
         mController.onConditionsChanged();
 
         verify(mListener, never()).onContextualCardUpdated(any());
-    }
-
-    private class FakeConditionalCard implements ConditionalCard {
-
-        private final Context mContext;
-
-        public FakeConditionalCard(Context context) {
-            mContext = context;
-        }
-
-        @Override
-        public long getId() {
-            return 100;
-        }
-
-        @Override
-        public CharSequence getActionText() {
-            return "action_text_test";
-        }
-
-        @Override
-        public int getMetricsConstant() {
-            return 1;
-        }
-
-        @Override
-        public Drawable getIcon() {
-            return mContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp);
-        }
-
-        @Override
-        public CharSequence getTitle() {
-            return "title_text_test";
-        }
-
-        @Override
-        public CharSequence getSummary() {
-            return "summary_text_test";
-        }
     }
 }

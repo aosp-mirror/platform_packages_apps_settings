@@ -69,63 +69,6 @@ public class ZenModeSettingsTest {
     }
 
     @Test
-    public void testGetMsgEventReminderSettingSummary_none() {
-        Policy policy = new Policy(0, 0, 0, 0);
-        assertThat(mBuilder.getMsgEventReminderSettingSummary(policy)).isEqualTo("None");
-    }
-
-    @Test
-    public void testGetMsgEventReminderSettingSummary_single() {
-        Policy policy = new Policy(
-                Policy.PRIORITY_CATEGORY_ALARMS | Policy.PRIORITY_CATEGORY_EVENTS, 0 , 0 , 0);
-        assertThat(mBuilder.getMsgEventReminderSettingSummary(policy)).isEqualTo("Events");
-    }
-
-    @Test
-    public void testGetMsgEventReminderSettingSummary_someMsgs() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_MESSAGES, 0,
-                Policy.PRIORITY_SENDERS_CONTACTS , 0);
-        assertThat(mBuilder.getMsgEventReminderSettingSummary(policy)).isEqualTo("Some messages");
-
-        policy = new Policy(Policy.PRIORITY_CATEGORY_MESSAGES, 0,
-                Policy.PRIORITY_SENDERS_STARRED , 0);
-        assertThat(mBuilder.getMsgEventReminderSettingSummary(policy)).isEqualTo("Some messages");
-    }
-
-    @Test
-    public void testGetMsgEventReminderSettingSummary_msgs() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_MESSAGES, 0, 0, 0);
-        assertThat(mBuilder.getMsgEventReminderSettingSummary(policy)).isEqualTo("Messages");
-    }
-
-    @Test
-    public void testGetMsgEventReminderSettingSummary_someMsgsAndOther() {
-        Policy policy = new Policy(
-                Policy.PRIORITY_CATEGORY_MESSAGES | Policy.PRIORITY_CATEGORY_REMINDERS,
-                0, Policy.PRIORITY_SENDERS_CONTACTS , 0);
-        assertThat(mBuilder.getMsgEventReminderSettingSummary(policy))
-                .isEqualTo("Some messages and reminders");
-    }
-
-    @Test
-    public void testGetMsgEventReminderSettingSummary_someMsgsAndAllOthers() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_EVENTS
-                | Policy.PRIORITY_CATEGORY_MESSAGES | Policy.PRIORITY_CATEGORY_REMINDERS,
-                0, Policy.PRIORITY_SENDERS_CONTACTS , 0);
-        assertThat(mBuilder.getMsgEventReminderSettingSummary(policy))
-                .isEqualTo("Some messages, events, and reminders");
-    }
-
-    @Test
-    public void testGetMsgEventReminderSettingSummary_noMsgsAndOther() {
-        Policy policy = new Policy(
-                Policy.PRIORITY_CATEGORY_EVENTS | Policy.PRIORITY_CATEGORY_REMINDERS,
-                0,0, 0);
-        assertThat(mBuilder.getMsgEventReminderSettingSummary(policy))
-                .isEqualTo("Events and reminders");
-    }
-
-    @Test
     public void testGetCallsSettingSummary_none() {
         Policy policy = new Policy(0, 0, 0, 0);
         assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("None");

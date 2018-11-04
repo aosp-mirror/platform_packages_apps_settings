@@ -21,7 +21,9 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 
 import com.android.internal.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -69,7 +71,14 @@ public class SwipeUpPreferenceControllerTest {
                 mContext.getString(com.android.internal.R.string.config_recentsComponentName));
         final Intent quickStepIntent = new Intent(ACTION_QUICKSTEP)
                 .setPackage(recentsComponentName.getPackageName());
-        mPackageManager.addResolveInfoForIntent(quickStepIntent, new ResolveInfo());
+        final ResolveInfo info = new ResolveInfo();
+        info.serviceInfo = new ServiceInfo();
+        info.resolvePackageName = recentsComponentName.getPackageName();
+        info.serviceInfo.packageName = info.resolvePackageName;
+        info.serviceInfo.name = recentsComponentName.getClassName();
+        info.serviceInfo.applicationInfo = new ApplicationInfo();
+        info.serviceInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
+        mPackageManager.addResolveInfoForIntent(quickStepIntent, info);
 
         assertThat(SwipeUpPreferenceController.isGestureAvailable(mContext)).isTrue();
     }
@@ -121,7 +130,7 @@ public class SwipeUpPreferenceControllerTest {
     @Test
     public void isSliceableCorrectKey_returnsTrue() {
         final SwipeUpPreferenceController controller =
-                new SwipeUpPreferenceController(mContext,"gesture_swipe_up");
+                new SwipeUpPreferenceController(mContext, "gesture_swipe_up");
         assertThat(controller.isSliceable()).isTrue();
     }
 

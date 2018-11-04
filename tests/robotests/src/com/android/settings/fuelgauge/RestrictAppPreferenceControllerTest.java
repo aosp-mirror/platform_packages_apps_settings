@@ -26,6 +26,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.Activity;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -45,7 +46,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +93,7 @@ public class RestrictAppPreferenceControllerTest {
         mOtherUserPackageOps = new AppOpsManager.PackageOps(
                 RESTRICTED_PACKAGE_NAME, OTHER_USER_UID, restrictedOps);
 
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(Robolectric.setupActivity(Activity.class));
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(mContext).when(mFragment).getContext();

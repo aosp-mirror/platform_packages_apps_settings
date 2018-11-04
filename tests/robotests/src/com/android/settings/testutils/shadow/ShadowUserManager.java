@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Implements(value = UserManager.class, inheritImplementationMethods = true)
+@Implements(value = UserManager.class)
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
     private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
@@ -46,7 +46,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private boolean mIsQuietModeEnabled = false;
-    private int[] profileIdsForUser;
+    private int[] profileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
 
 
@@ -59,6 +59,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         mManagedProfiles.clear();
         mIsQuietModeEnabled = false;
         mUserSwitchEnabled = false;
+        profileIdsForUser = new int[0];
     }
 
     public void setUserInfo(int userHandle, UserInfo userInfo) {
@@ -66,7 +67,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public UserInfo getUserInfo(int userHandle) {
+    protected UserInfo getUserInfo(int userHandle) {
         return mUserInfos.get(userHandle);
     }
 
@@ -75,12 +76,12 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public List<UserInfo> getProfiles(@UserIdInt int userHandle) {
+    protected List<UserInfo> getProfiles(@UserIdInt int userHandle) {
         return mUserProfileInfos;
     }
 
     @Implementation
-    public int[] getProfileIds(@UserIdInt int userHandle, boolean enabledOnly) {
+    protected int[] getProfileIds(@UserIdInt int userHandle, boolean enabledOnly) {
         int[] ids = new int[mUserProfileInfos.size()];
         for (int i = 0; i < mUserProfileInfos.size(); i++) {
             ids[i] = mUserProfileInfos.get(i).id;
@@ -99,12 +100,12 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public int getCredentialOwnerProfile(@UserIdInt int userHandle) {
+    protected int getCredentialOwnerProfile(@UserIdInt int userHandle) {
         return userHandle;
     }
 
     @Implementation
-    public boolean hasBaseUserRestriction(String restrictionKey, UserHandle userHandle) {
+    protected boolean hasBaseUserRestriction(String restrictionKey, UserHandle userHandle) {
         return mRestrictions.contains(restrictionKey);
     }
 
@@ -118,7 +119,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public List<EnforcingUser> getUserRestrictionSources(
+    protected List<EnforcingUser> getUserRestrictionSources(
             String restrictionKey, UserHandle userHandle) {
         // Return empty list when there is no enforcing user, otherwise might trigger
         // NullPointer Exception in RestrictedLockUtils.checkIfRestrictionEnforced.
@@ -133,7 +134,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public boolean isManagedProfile(@UserIdInt int userId) {
+    protected boolean isManagedProfile(@UserIdInt int userId) {
         return mManagedProfiles.contains(userId);
     }
 
@@ -142,7 +143,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public boolean isQuietModeEnabled(UserHandle userHandle) {
+    protected boolean isQuietModeEnabled(UserHandle userHandle) {
         return mIsQuietModeEnabled;
     }
 
@@ -151,7 +152,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public int[] getProfileIdsWithDisabled(@UserIdInt int userId) {
+    protected int[] getProfileIdsWithDisabled(@UserIdInt int userId) {
         return profileIdsForUser;
     }
 
@@ -160,7 +161,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public boolean isUserSwitcherEnabled() {
+    protected boolean isUserSwitcherEnabled() {
         return mUserSwitchEnabled;
     }
 

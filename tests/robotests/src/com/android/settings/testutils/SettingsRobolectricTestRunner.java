@@ -88,6 +88,8 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
             paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/main/res")), null));
             paths.add(new ResourcePath(null,
+                    Fs.fromURL(new URL("file:out/target/common/obj/JAVA_LIBRARIES/robolectric_android-all-stub_intermediates/classes/raw-res/res")), null));
+            paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/gingerbread/res")), null));
             paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/recyclerview/res")), null));

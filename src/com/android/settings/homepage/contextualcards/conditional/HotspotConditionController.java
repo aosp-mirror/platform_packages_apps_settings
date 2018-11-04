@@ -30,6 +30,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
@@ -85,6 +86,20 @@ public class HotspotConditionController implements ConditionalCardController {
                     Context.CONNECTIVITY_SERVICE);
             cm.stopTethering(ConnectivityManager.TETHERING_WIFI);
         }
+    }
+
+    @Override
+    public ContextualCard buildContextualCard() {
+        return new ConditionalContextualCard.Builder()
+                .setConditionId(ID)
+                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_HOTSPOT)
+                .setActionText(mAppContext.getText(R.string.condition_turn_off))
+                .setName(mAppContext.getPackageName() + "/"
+                        + mAppContext.getText(R.string.condition_hotspot_title))
+                .setTitleText(mAppContext.getText(R.string.condition_hotspot_title).toString())
+                .setSummaryText(getSummary().toString())
+                .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_hotspot))
+                .build();
     }
 
     @Override

@@ -64,7 +64,7 @@ public class AutoSyncDataPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
-        mContext = shadowContext.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = new AutoSyncDataPreferenceController(mContext, mFragment);
         mConfirmSyncFragment = new AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment();
         mConfirmSyncFragment.setTargetFragment(mFragment, 0);

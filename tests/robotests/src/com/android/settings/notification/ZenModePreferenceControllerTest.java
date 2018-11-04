@@ -41,6 +41,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -64,7 +65,7 @@ public class ZenModePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = new ZenModePreferenceController(mContext, KEY_ZEN_MODE);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         mSummaryBuilder = spy(new ZenModeSettings.SummaryBuilder(mContext));

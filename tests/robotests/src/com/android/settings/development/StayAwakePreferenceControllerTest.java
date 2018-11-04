@@ -72,7 +72,7 @@ public class StayAwakePreferenceControllerTest {
     public void onPreferenceChanged_turnOnStayAwake() {
         mController.onPreferenceChange(null, true);
 
-        final int mode = Settings.System.getInt(mContentResolver,
+        final int mode = Settings.Global.getInt(mContentResolver,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, -1);
 
         assertThat(mode).isEqualTo(StayAwakePreferenceController.SETTING_VALUE_ON);
@@ -82,7 +82,7 @@ public class StayAwakePreferenceControllerTest {
     public void onPreferenceChanged_turnOffStayAwake() {
         mController.onPreferenceChange(null, false);
 
-        final int mode = Settings.System.getInt(mContentResolver,
+        final int mode = Settings.Global.getInt(mContentResolver,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, -1);
 
         assertThat(mode).isEqualTo(StayAwakePreferenceController.SETTING_VALUE_OFF);
@@ -90,7 +90,7 @@ public class StayAwakePreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+        Settings.Global.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.updateState(mPreference);
 
@@ -99,7 +99,7 @@ public class StayAwakePreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+        Settings.Global.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_OFF);
         mController.updateState(mPreference);
 
@@ -119,7 +119,7 @@ public class StayAwakePreferenceControllerTest {
 
     @Test
     public void observerOnChangeCalledWithSameUri_preferenceShouldBeUpdated() {
-        Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+        Settings.Global.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.onResume();
         mController.mSettingsObserver.onChange(false,
@@ -130,7 +130,7 @@ public class StayAwakePreferenceControllerTest {
 
     @Test
     public void observerOnChangeCalledWithDifferentUri_preferenceShouldNotBeUpdated() {
-        Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+        Settings.Global.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
         mController.onResume();
         mController.mSettingsObserver.onChange(false, null);

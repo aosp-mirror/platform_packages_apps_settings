@@ -226,7 +226,7 @@ class SliceDataConverter {
                         SliceBuilderUtils.getPreferenceController(mContext, xmlSlice);
 
                 // Only add pre-approved Slices available on the device.
-                if (controller.isAvailable() && controller.isSliceable()) {
+                if (controller.isSliceable() && controller.isAvailable()) {
                     xmlSliceData.add(xmlSlice);
                 }
             }
@@ -277,7 +277,7 @@ class SliceDataConverter {
             final String title = resolveInfo.loadLabel(packageManager).toString();
             int iconResource = resolveInfo.getIconResource();
             if (iconResource == 0) {
-                iconResource = R.mipmap.ic_accessibility_generic;
+                iconResource = R.drawable.ic_accessibility_generic;
             }
 
             sliceDataBuilder.setKey(flattenedName)

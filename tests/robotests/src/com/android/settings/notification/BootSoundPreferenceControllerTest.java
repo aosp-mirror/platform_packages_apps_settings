@@ -27,6 +27,7 @@ import android.os.SystemProperties;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -35,7 +36,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.shadows.ShadowSystemProperties;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BootSoundPreferenceControllerTest {
@@ -52,8 +52,8 @@ public class BootSoundPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getResources().getBoolean(com.android.settings.R.bool.has_boot_sounds))
-            .thenReturn(true);
+        when(mContext.getResources().getBoolean(R.bool.has_boot_sounds))
+                .thenReturn(true);
         mController = new BootSoundPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
@@ -62,7 +62,7 @@ public class BootSoundPreferenceControllerTest {
     @Test
     public void isAvailable_hasBootSounds_shouldReturnTrue() {
         when(mContext.getResources().getBoolean(
-            com.android.settings.R.bool.has_boot_sounds)).thenReturn(true);
+                R.bool.has_boot_sounds)).thenReturn(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -70,15 +70,14 @@ public class BootSoundPreferenceControllerTest {
     @Test
     public void isAvailable_noBootSounds_shouldReturnFale() {
         when(mContext.getResources().getBoolean(
-            com.android.settings.R.bool.has_boot_sounds)).thenReturn(false);
+                R.bool.has_boot_sounds)).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void displayPreference_bootSoundEnabled_shouldCheckedPreference() {
-        ShadowSystemProperties.native_set(BootSoundPreferenceController.PROPERTY_BOOT_SOUNDS, "1");
-
+        SystemProperties.set(BootSoundPreferenceController.PROPERTY_BOOT_SOUNDS, "true");
         mController.displayPreference(mScreen);
 
         verify(mPreference).setChecked(true);
@@ -86,7 +85,7 @@ public class BootSoundPreferenceControllerTest {
 
     @Test
     public void displayPreference_bootSoundDisabled_shouldUncheckedPreference() {
-        ShadowSystemProperties.native_set(BootSoundPreferenceController.PROPERTY_BOOT_SOUNDS, "0");
+        SystemProperties.set(BootSoundPreferenceController.PROPERTY_BOOT_SOUNDS, "0");
 
         mController.displayPreference(mScreen);
 
@@ -100,7 +99,7 @@ public class BootSoundPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         assertThat(SystemProperties.get(
-            BootSoundPreferenceController.PROPERTY_BOOT_SOUNDS, null)).isEqualTo("1");
+                BootSoundPreferenceController.PROPERTY_BOOT_SOUNDS, null)).isEqualTo("1");
     }
 
     @Test
@@ -110,6 +109,6 @@ public class BootSoundPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         assertThat(SystemProperties.get(
-            BootSoundPreferenceController.PROPERTY_BOOT_SOUNDS, null)).isEqualTo("0");
+                BootSoundPreferenceController.PROPERTY_BOOT_SOUNDS, null)).isEqualTo("0");
     }
 }

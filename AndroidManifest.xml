@@ -59,6 +59,7 @@
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.STATUS_BAR" />
     <uses-permission android:name="android.permission.MANAGE_USB" />
+    <uses-permission android:name="android.permission.MANAGE_DEBUGGING" />
     <uses-permission android:name="android.permission.SET_POINTER_SPEED" />
     <uses-permission android:name="android.permission.SET_KEYBOARD_LAYOUT" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
@@ -80,6 +81,8 @@
     <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.MANAGE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC_INTERNAL" />
     <uses-permission android:name="android.permission.USER_ACTIVITY" />
     <uses-permission android:name="android.permission.CHANGE_APP_IDLE_STATE" />
     <uses-permission android:name="android.permission.PEERS_MAC_ADDRESS"/>
@@ -1451,7 +1454,7 @@
         <!-- Lock screen settings -->
         <activity android:name=".password.ConfirmDeviceCredentialActivity"
             android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL" />
                 <action android:name="android.app.action.CONFIRM_FRP_CREDENTIAL" />
@@ -1523,6 +1526,15 @@
         <activity android:name=".biometrics.face.FaceEnrollFinish"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".biometrics.BiometricEnrollActivity"
+            android:exported="true"
+            android:theme="@style/GlifTheme.Light">
+            <intent-filter>
+                <action android:name="android.settings.BIOMETRIC_ENROLL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".biometrics.fingerprint.FingerprintSettings" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>

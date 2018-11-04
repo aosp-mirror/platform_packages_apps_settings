@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class ZenModeMsgEventReminderSettings extends ZenModeSettingsBase implements Indexable {
+public class ZenModeMessagesSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
@@ -43,19 +43,17 @@ public class ZenModeMsgEventReminderSettings extends ZenModeSettingsBase impleme
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeEventsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeRemindersPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle));
+        controllers.add(new ZenModePriorityMessagesPreferenceController(context, lifecycle));
         controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
                 PRIORITY_CATEGORY_MESSAGES, "zen_mode_starred_contacts_messages"));
-        controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle,
-                R.string.zen_msg_event_reminder_footer));
+        controllers.add(new ZenModeBehaviorFooterPreferenceController(
+                context, lifecycle, R.string.zen_mode_messages_footer));
         return controllers;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_msg_event_reminder_settings;
+        return R.xml.zen_mode_messages_settings;
     }
 
     @Override
@@ -66,7 +64,7 @@ public class ZenModeMsgEventReminderSettings extends ZenModeSettingsBase impleme
     /**
      * For Search.
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
 
                 @Override
@@ -75,14 +73,15 @@ public class ZenModeMsgEventReminderSettings extends ZenModeSettingsBase impleme
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.zen_mode_msg_event_reminder_settings;
+                    sir.xmlResId = R.xml.zen_mode_messages_settings;
                     result.add(sir);
                     return result;
                 }
 
-            @Override
-            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-                return buildPreferenceControllers(context, null);
-            }
-        };
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context, null);
+                }
+            };
 }

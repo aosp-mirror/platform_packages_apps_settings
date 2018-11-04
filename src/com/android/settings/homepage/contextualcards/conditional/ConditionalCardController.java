@@ -18,15 +18,15 @@ package com.android.settings.homepage.contextualcards.conditional;
 
 import android.content.Context;
 
+import com.android.settings.homepage.contextualcards.ContextualCard;
+
 /**
- * Data controller for a {@link ConditionalCard}.
+ * Data controller for a {@link ConditionalContextualCard}.
  */
 public interface ConditionalCardController {
 
     /**
      * A stable ID for this card.
-     *
-     * @see {@link ConditionalCard#getId()}
      */
     long getId();
 
@@ -44,6 +44,11 @@ public interface ConditionalCardController {
      * Handler when the card action is clicked.
      */
     void onActionClick();
+
+    /**
+     * Creates a UI model suitable for display, controlled by this controller.
+     */
+    ContextualCard buildContextualCard();
 
     void startMonitoringStateChange();
 

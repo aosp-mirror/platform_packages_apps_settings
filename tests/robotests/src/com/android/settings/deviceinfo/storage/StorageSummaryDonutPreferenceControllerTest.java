@@ -28,6 +28,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.storage.VolumeInfo;
 import android.text.format.Formatter;
@@ -51,15 +52,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
 import java.io.File;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
-    SettingsShadowResources.class,
-    SettingsShadowResources.SettingsShadowTheme.class
+        SettingsShadowResources.class,
+        SettingsShadowResources.SettingsShadowTheme.class
 })
 public class StorageSummaryDonutPreferenceControllerTest {
 
@@ -74,7 +75,7 @@ public class StorageSummaryDonutPreferenceControllerTest {
     public void setUp() throws Exception {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_headlineFontFamily, "");
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        mContext = spy(Robolectric.setupActivity(Activity.class));
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         mController = new StorageSummaryDonutPreferenceController(mContext);
@@ -82,7 +83,8 @@ public class StorageSummaryDonutPreferenceControllerTest {
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view =
-            inflater.inflate(mPreference.getLayoutResource(), new LinearLayout(mContext), false);
+                inflater.inflate(mPreference.getLayoutResource(), new LinearLayout(mContext),
+                        false);
         mHolder = PreferenceViewHolder.createInstanceForTests(view);
     }
 
@@ -92,37 +94,37 @@ public class StorageSummaryDonutPreferenceControllerTest {
     }
 
     @Test
-    public void testEmpty() throws Exception {
+    public void testEmpty() {
         final long totalSpace = 32 * GIGABYTE;
         final long usedSpace = 0;
         mController.updateBytes(0, 32 * GIGABYTE);
         mController.updateState(mPreference);
 
         final Formatter.BytesResult usedSpaceResults =
-            Formatter.formatBytes(mContext.getResources(), usedSpace, 0 /* flags */);
+                Formatter.formatBytes(mContext.getResources(), usedSpace, 0 /* flags */);
         assertThat(mPreference.getTitle().toString())
-            .isEqualTo(usedSpaceResults.value + " " + usedSpaceResults.units);
+                .isEqualTo(usedSpaceResults.value + " " + usedSpaceResults.units);
         assertThat(mPreference.getSummary().toString())
-            .isEqualTo("Used of " + Formatter.formatShortFileSize(mContext, totalSpace));
+                .isEqualTo("Used of " + Formatter.formatShortFileSize(mContext, totalSpace));
     }
 
     @Test
-    public void testTotalStorage() throws Exception {
+    public void testTotalStorage() {
         final long totalSpace = KILOBYTE * 10;
         final long usedSpace = KILOBYTE;
         mController.updateBytes(KILOBYTE, totalSpace);
         mController.updateState(mPreference);
 
         final Formatter.BytesResult usedSpaceResults =
-            Formatter.formatBytes(mContext.getResources(), usedSpace, 0 /* flags */);
+                Formatter.formatBytes(mContext.getResources(), usedSpace, 0 /* flags */);
         assertThat(mPreference.getTitle().toString())
-            .isEqualTo(usedSpaceResults.value + " " + usedSpaceResults.units);
+                .isEqualTo(usedSpaceResults.value + " " + usedSpaceResults.units);
         assertThat(mPreference.getSummary().toString())
-            .isEqualTo("Used of " + Formatter.formatShortFileSize(mContext, totalSpace));
+                .isEqualTo("Used of " + Formatter.formatShortFileSize(mContext, totalSpace));
     }
 
     @Test
-    public void testPopulateWithVolume() throws Exception {
+    public void testPopulateWithVolume() {
         final long totalSpace = KILOBYTE * 10;
         final long freeSpace = KILOBYTE;
         final long usedSpace = totalSpace - freeSpace;
@@ -138,21 +140,21 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mController.updateState(mPreference);
 
         final Formatter.BytesResult usedSpaceResults =
-            Formatter.formatBytes(mContext.getResources(), usedSpace, 0 /* flags */);
+                Formatter.formatBytes(mContext.getResources(), usedSpace, 0 /* flags */);
         assertThat(mPreference.getTitle().toString())
-            .isEqualTo(usedSpaceResults.value + " " + usedSpaceResults.units);
+                .isEqualTo(usedSpaceResults.value + " " + usedSpaceResults.units);
         assertThat(mPreference.getSummary().toString())
-            .isEqualTo("Used of " + Formatter.formatShortFileSize(mContext, totalSpace));
+                .isEqualTo("Used of " + Formatter.formatShortFileSize(mContext, totalSpace));
     }
 
     @Test
-    public void testFreeUpSpaceMetricIsTriggered() throws Exception {
+    public void testFreeUpSpaceMetricIsTriggered() {
         mPreference.onBindViewHolder(mHolder);
         final Button button = (Button) mHolder.findViewById(R.id.deletion_helper_button);
 
         mPreference.onClick(button);
 
         verify(mMetricsFeatureProvider, times(1))
-            .action(any(Context.class), eq(MetricsEvent.STORAGE_FREE_UP_SPACE_NOW));
+                .action(any(Context.class), eq(MetricsEvent.STORAGE_FREE_UP_SPACE_NOW));
     }
 }

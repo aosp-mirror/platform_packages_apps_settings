@@ -17,11 +17,11 @@ package com.android.settings.homepage.contextualcards.conditional;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.net.NetworkPolicyManager;
 
 import com.android.settings.Settings;
@@ -30,10 +30,11 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -43,7 +44,7 @@ public class BackgroundDataConditionControllerTest {
     private ConditionManager mConditionManager;
     @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
-    private Context mContext;
+    private Activity mActivity;
     private BackgroundDataConditionController mController;
 
     @Before
@@ -51,19 +52,19 @@ public class BackgroundDataConditionControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication.getInstance().setSystemService(Context.NETWORK_POLICY_SERVICE,
                 mNetworkPolicyManager);
-        mContext = spy(RuntimeEnvironment.application);
-        mController = new BackgroundDataConditionController(mContext, mConditionManager);
+        mActivity = Robolectric.setupActivity(Activity.class);
+        mController = new BackgroundDataConditionController(mActivity, mConditionManager);
     }
 
     @Test
     public void onPrimaryClick_shouldReturn2SummaryActivity() {
-        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        mController.onPrimaryClick(mContext);
-        verify(mContext).startActivity(argumentCaptor.capture());
-        Intent intent = argumentCaptor.getValue();
+        final ComponentName componentName =
+                new ComponentName(mActivity, Settings.DataUsageSummaryActivity.class);
 
-        assertThat(intent.getComponent().getClassName()).isEqualTo(
-                Settings.DataUsageSummaryActivity.class.getName());
+        mController.onPrimaryClick(mActivity);
+
+        final ShadowActivity shadowActivity = Shadow.extract(mActivity);
+        assertThat(shadowActivity.getNextStartedActivity().getComponent()).isEqualTo(componentName);
     }
 
     @Test

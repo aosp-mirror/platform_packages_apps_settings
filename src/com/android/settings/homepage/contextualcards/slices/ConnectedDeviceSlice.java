@@ -95,8 +95,6 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     private static final Comparator<CachedBluetoothDevice> COMPARATOR
             = Comparator.naturalOrder();
 
-    private static final int DEFAULT_EXPANDED_ROW_COUNT = 4;
-
     private static final String TAG = "ConnectedDeviceSlice";
 
     private final Context mContext;
@@ -162,13 +160,6 @@ public class ConnectedDeviceSlice implements CustomSliceable {
         for (ListBuilder.RowBuilder rowBuilder : rows) {
             listBuilder.addRow(rowBuilder);
         }
-
-        // Only show "see more" button when the number of data row is more than or equal to 4.
-        // TODO(b/118465996): SHOW MORE button won't work properly when having two data rows
-        if (rows.size() >= DEFAULT_EXPANDED_ROW_COUNT) {
-            listBuilder.setSeeMoreAction(primaryActionIntent);
-        }
-
         return listBuilder.build();
     }
 

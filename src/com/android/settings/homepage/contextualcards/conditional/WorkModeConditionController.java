@@ -25,7 +25,10 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.homepage.contextualcards.ContextualCard;
 
 import java.util.List;
 import java.util.Objects;
@@ -77,6 +80,20 @@ public class WorkModeConditionController implements ConditionalCardController {
         if (mUserHandle != null) {
             mUm.requestQuietModeEnabled(false, mUserHandle);
         }
+    }
+
+    @Override
+    public ContextualCard buildContextualCard() {
+        return new ConditionalContextualCard.Builder()
+                .setConditionId(ID)
+                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_WORK_MODE)
+                .setActionText(mAppContext.getText(R.string.condition_turn_on))
+                .setName(mAppContext.getPackageName() + "/"
+                        + mAppContext.getText(R.string.condition_work_title))
+                .setTitleText(mAppContext.getText(R.string.condition_work_title).toString())
+                .setSummaryText(mAppContext.getText(R.string.condition_work_summary).toString())
+                .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_signal_workmode_enable))
+                .build();
     }
 
     @Override

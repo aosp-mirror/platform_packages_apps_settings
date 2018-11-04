@@ -17,7 +17,6 @@
 
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/ContextualCardStyle">
@@ -25,10 +24,10 @@
     <androidx.slice.widget.SliceView
         android:id="@+id/slice_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/homepage_slice_card_max_height"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/homepage_card_vertical_margin"
+        android:layout_marginTop="@dimen/homepage_card_vertical_margin"
         android:paddingStart="@dimen/homepage_card_padding_start"
-        android:paddingEnd="@dimen/homepage_card_padding_end"
-        android:paddingTop="@dimen/homepage_card_padding_top"
-        android:paddingBottom="@dimen/homepage_card_padding_bottom"/>
+        android:paddingEnd="@dimen/homepage_card_padding_end"/>
 
 </androidx.cardview.widget.CardView>

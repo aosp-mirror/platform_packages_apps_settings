@@ -24,11 +24,9 @@ import org.robolectric.annotation.Implements;
 import java.util.ArrayList;
 import java.util.List;
 
-@Implements(value = BluetoothAdapter.class, inheritImplementationMethods = true)
+@Implements(value = BluetoothAdapter.class)
 public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBluetoothAdapter {
 
-    private String mName;
-    private int mScanMode;
     private int mState;
     private List<Integer> mSupportedProfiles = new ArrayList<Integer>();
 
@@ -43,25 +41,6 @@ public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBlueto
 
     public void clearSupportedProfiles() {
         mSupportedProfiles.clear();
-    }
-
-    public void setName(String name) {
-        mName = name;
-    }
-
-    @Implementation
-    public String getName() {
-        return mName;
-    }
-
-    @Implementation
-    public void setScanMode(int scanMode) {
-        mScanMode = scanMode;
-    }
-
-    @Implementation
-    public int getScanMode() {
-        return mScanMode;
     }
 
     @Implementation

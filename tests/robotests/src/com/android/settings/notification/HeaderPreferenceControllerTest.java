@@ -45,6 +45,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -68,7 +69,7 @@ public class HeaderPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         PreferenceFragmentCompat fragment = mock(PreferenceFragmentCompat.class);
         when(fragment.getContext()).thenReturn(mContext);
         FragmentActivity activity = mock(FragmentActivity.class);

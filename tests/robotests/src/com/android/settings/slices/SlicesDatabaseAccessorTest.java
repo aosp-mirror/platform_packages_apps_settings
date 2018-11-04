@@ -21,6 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 
+import android.app.ApplicationPackageManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -33,6 +35,10 @@ import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -40,6 +46,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
 
@@ -49,6 +57,9 @@ import java.util.Locale;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowUtils.class,
+        SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
+        ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class})
 public class SlicesDatabaseAccessorTest {
 
     private final String FAKE_TITLE = "title";
@@ -66,6 +77,7 @@ public class SlicesDatabaseAccessorTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        ShadowUserManager.getShadow().setIsAdminUser(true);
         mAccessor = spy(new SlicesDatabaseAccessor(mContext));
         mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
@@ -78,6 +90,7 @@ public class SlicesDatabaseAccessorTest {
 
     @After
     public void cleanUp() {
+        ShadowUserManager.getShadow().reset();
         DatabaseTestUtils.clearDb(mContext);
     }
 
@@ -257,5 +270,15 @@ public class SlicesDatabaseAccessorTest {
         values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
 
         mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
+    }
+
+    @Implements(ApplicationPackageManager.class)
+    public static class ShadowApplicationPackageManager extends
+            org.robolectric.shadows.ShadowApplicationPackageManager {
+
+        @Implementation
+        protected ComponentName getInstantAppResolverSettingsComponent() {
+            return null;
+        }
     }
 }

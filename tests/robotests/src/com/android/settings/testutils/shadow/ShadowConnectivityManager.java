@@ -24,7 +24,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 
-@Implements(value = ConnectivityManager.class, inheritImplementationMethods = true)
+@Implements(value = ConnectivityManager.class)
 public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowConnectivityManager {
 
     private final SparseBooleanArray mSupportedNetworkTypes = new SparseBooleanArray();
