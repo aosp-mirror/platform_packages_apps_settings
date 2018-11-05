@@ -77,6 +77,11 @@ public class ConditionContextualCardController implements ContextualCardControll
 
     @Override
     public void onActionClick(ContextualCard contextualCard) {
+
+    }
+
+    @Override
+    public void onDismissed(ContextualCard contextualCard) {
         final ConditionalContextualCard card = (ConditionalContextualCard) contextualCard;
         mConditionManager.onActionClick(card.getConditionId());
     }

@@ -146,12 +146,12 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         onContextualCardUpdated(cards.stream().collect(groupingBy(ContextualCard::getCardType)));
     }
 
-    void setListener(ContextualCardUpdateListener listener) {
-        mListener = listener;
-    }
-
     public ControllerRendererPool getControllerRendererPool() {
         return mControllerRendererPool;
+    }
+
+    void setListener(ContextualCardUpdateListener listener) {
+        mListener = listener;
     }
 
     static class CardContentLoaderCallbacks implements

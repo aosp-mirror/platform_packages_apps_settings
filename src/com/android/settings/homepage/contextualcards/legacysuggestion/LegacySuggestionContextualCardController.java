@@ -87,6 +87,11 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
     }
 
     @Override
+    public void onDismissed(ContextualCard card) {
+
+    }
+
+    @Override
     public void setCardUpdateListener(ContextualCardUpdateListener listener) {
         mCardUpdateListener = listener;
     }
