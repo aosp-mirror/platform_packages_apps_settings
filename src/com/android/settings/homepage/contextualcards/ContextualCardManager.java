@@ -16,7 +16,8 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CARD_CONTENT_LOADER_ID;
+import static com.android.settings.homepage.contextualcards.ContextualCardLoader
+        .CARD_CONTENT_LOADER_ID;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -57,8 +58,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     private static final String TAG = "ContextualCardManager";
     //The list for Settings Custom Card
-    @ContextualCard.CardType
-    private static final int[] SETTINGS_CARDS = {ContextualCard.CardType.CONDITIONAL};
+    private static final int[] SETTINGS_CARDS =
+            {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
@@ -68,14 +69,14 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     private ContextualCardUpdateListener mListener;
 
-    public ContextualCardManager(Context context, @NonNull Lifecycle lifecycle) {
+    public ContextualCardManager(Context context, Lifecycle lifecycle) {
         mContext = context;
         mLifecycle = lifecycle;
         mContextualCards = new ArrayList<>();
         mLifecycleObservers = new ArrayList<>();
         mControllerRendererPool = new ControllerRendererPool();
         //for data provided by Settings
-        for (int cardType : SETTINGS_CARDS) {
+        for (@ContextualCard.CardType int cardType : SETTINGS_CARDS) {
             setupController(cardType);
         }
     }
@@ -94,7 +95,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
     }
 
-    private void setupController(int cardType) {
+    private void setupController(@ContextualCard.CardType int cardType) {
         final ContextualCardController controller = mControllerRendererPool.getController(mContext,
                 cardType);
         if (controller == null) {

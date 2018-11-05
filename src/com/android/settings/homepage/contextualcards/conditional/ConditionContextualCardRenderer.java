@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -37,7 +38,9 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  * Card renderer for {@link ConditionalContextualCard}.
  */
 public class ConditionContextualCardRenderer implements ContextualCardRenderer {
+    @LayoutRes
     public static final int HALF_WIDTH_VIEW_TYPE = R.layout.homepage_condition_half_tile;
+    @LayoutRes
     public static final int FULL_WIDTH_VIEW_TYPE = R.layout.homepage_condition_full_tile;
 
     private final Context mContext;

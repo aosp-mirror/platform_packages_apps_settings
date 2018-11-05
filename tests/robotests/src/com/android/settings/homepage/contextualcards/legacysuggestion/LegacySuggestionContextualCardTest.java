@@ -14,29 +14,42 @@
  * limitations under the License.
  */
 
-package com.android.settings.homepage.contextualcards;
+package com.android.settings.homepage.contextualcards.legacysuggestion;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.homepage.contextualcards.conditional.ConditionalContextualCard;
+import static org.mockito.Mockito.mock;
+
+import android.app.PendingIntent;
+
+import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ConditionalContextualCardTest {
+public class LegacySuggestionContextualCardTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void newInstance_changeCardType_shouldCrash() {
-        new ConditionalContextualCard.Builder()
-                .setCardType(ContextualCard.CardType.LEGACY_SUGGESTION)
+        new LegacySuggestionContextualCard.Builder()
+                .setCardType(ContextualCard.CardType.CONDITIONAL)
                 .build();
     }
 
     @Test
-    public void getCardType_shouldAlwaysBeConditional() {
-        assertThat(new ConditionalContextualCard.Builder().build().getCardType())
-                .isEqualTo(ContextualCard.CardType.CONDITIONAL);
+    public void getCardType_shouldAlwaysBeSuggestionType() {
+        assertThat(new LegacySuggestionContextualCard.Builder().build().getCardType())
+                .isEqualTo(ContextualCard.CardType.LEGACY_SUGGESTION);
     }
+
+    @Test
+    public void build_shouldSetPendingIntent() {
+        assertThat(new LegacySuggestionContextualCard.Builder()
+                .setPendingIntent(mock(PendingIntent.class))
+                .build()
+                .getPendingIntent()).isNotNull();
+    }
+
 }
