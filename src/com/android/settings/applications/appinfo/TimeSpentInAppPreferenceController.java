@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -34,8 +35,7 @@ import java.util.List;
 public class TimeSpentInAppPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
-    static final Intent SEE_TIME_IN_APP_TEMPLATE =
-            new Intent("com.android.settings.action.TIME_SPENT_IN_APP");
+    static final Intent SEE_TIME_IN_APP_TEMPLATE = new Intent(Settings.ACTION_APP_USAGE_SETTINGS);
 
     private final PackageManager mPackageManager;
 
