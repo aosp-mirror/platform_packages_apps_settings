@@ -9033,25 +9033,28 @@
     <string name="condition_expand_hide">Hide</string>
 
     <!-- Title of condition that hotspot is on [CHAR LIMIT=30] -->
-    <string name="condition_hotspot_title">Hotspot is on</string>
+    <string name="condition_hotspot_title">Hotspot</string>
 
     <!-- Summary of condition that hotspot is on [CHAR LIMIT=NONE] -->
-    <string name="condition_hotspot_summary">Portable Wi-Fi hotspot <xliff:g name="ap_name" example="AndroidAP">%1$s</xliff:g> is active, Wi-Fi for this device is turned off.</string>
+    <string name="condition_hotspot_summary"><xliff:g name="ap_name" example="AndroidAP">%1$s</xliff:g> on</string>
 
     <!-- Title of condition that airplane mode is on [CHAR LIMIT=30] -->
     <string name="condition_airplane_title">Airplane mode is on</string>
 
     <!-- Summary of condition that airplane mode is on [CHAR LIMIT=NONE] -->
-    <string name="condition_airplane_summary">When airplane mode is turned on, Wi\u2011Fi, Bluetooth, and mobile network are turned off. Wi\u2011Fi and Bluetooth can be turned back on.</string>
+    <string name="condition_airplane_summary">Networks unavailable</string>
 
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
+
+    <!-- Summary of condition that do not disturb is on [CHAR LIMIT=36] -->
+    <string name="condition_zen_summary">Impacts what you hear and see</string>
 
     <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
     <string name="condition_battery_title">Battery Saver is on</string>
 
     <!-- Summary of condition that battery saver is on [CHAR LIMIT=NONE] -->
-    <string name="condition_battery_summary">Battery Saver turns off some device features and restricts apps</string>
+    <string name="condition_battery_summary">Features restricted</string>
 
     <!-- Title of condition that cellular data is off [CHAR LIMIT=50] -->
     <string name="condition_cellular_title">Mobile data is off</string>
@@ -9060,10 +9063,10 @@
     <string name="condition_cellular_summary">Internet is available only via Wi-Fi</string>
 
     <!-- Title of condition that background data is off [CHAR LIMIT=30] -->
-    <string name="condition_bg_data_title">Data Saver is on</string>
+    <string name="condition_bg_data_title">Data Saver</string>
 
     <!-- Summary of condition that background data is off [CHAR LIMIT=NONE] -->
-    <string name="condition_bg_data_summary">Background data is only available via Wi-Fi. This may affect some apps or services when Wi-Fi is not available.</string>
+    <string name="condition_bg_data_summary">Features restricted</string>
 
     <!-- Title of condition that work mode is off [CHAR LIMIT=30] -->
     <string name="condition_work_title">Work profile is off</string>
@@ -9078,22 +9081,22 @@
     <string name="condition_device_muted_title" product="tablet">Device is muted</string>
 
     <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_muted_title" product="default">Phone is muted</string>
+    <string name="condition_device_muted_title" product="default">Phone muted</string>
 
     <!-- Summary of condition that indicates device is muted -->
-    <string name="condition_device_muted_summary">Calls and notifications will be muted</string>
+    <string name="condition_device_muted_summary">For calls &amp; notifications</string>
 
     <!-- Title of condition that indicates device is set to vibrate [CHAR LIMIT=50] -->
     <string name="condition_device_vibrate_title" product="tablet">Device is set to vibrate</string>
 
     <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_vibrate_title" product="default">Phone is set to vibrate</string>
+    <string name="condition_device_vibrate_title" product="default">Vibration only</string>
 
     <!-- Summary of condition that indicates device is set to vibrate -->
     <string name="condition_device_vibrate_summary" product="tablet">Calls and notifications will vibrate device</string>
 
     <!-- Summary of condition that indicates device is set to vibrate -->
-    <string name="condition_device_vibrate_summary" product="default">Calls and notifications will vibrate phone</string>
+    <string name="condition_device_vibrate_summary" product="default">For calls &amp; notifications</string>
 
     <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=46] -->
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
@@ -9105,7 +9108,7 @@
     <string name="condition_night_display_title">Night Light is on</string>
 
     <!-- Summary of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
-    <string name="condition_night_display_summary">Screen is tinted amber. This may help you fall asleep.</string>
+    <string name="condition_night_display_summary">Screen tinted amber</string>
 
     <!-- Summary for the condition section on the dashboard, representing number of conditions. [CHAR LIMIT=10] -->
     <string name="condition_summary" translatable="false"><xliff:g name="count" example="3">%1$d</xliff:g></string>

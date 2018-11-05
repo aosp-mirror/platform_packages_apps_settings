@@ -98,23 +98,10 @@ public class DndConditionCardController implements ConditionalCardController {
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_zen_title))
                 .setTitleText(mAppContext.getText(R.string.condition_zen_title).toString())
-                .setSummaryText(getSummary().toString())
+                .setSummaryText(mAppContext.getText(R.string.condition_zen_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
                 .setIsHalfWidth(true)
                 .build();
-    }
-
-    public CharSequence getSummary() {
-        final int zen = mNotificationManager.getZenMode();
-        final ZenModeConfig config;
-        boolean zenModeEnabled = zen != Settings.Global.ZEN_MODE_OFF;
-        if (zenModeEnabled) {
-            config = mNotificationManager.getZenModeConfig();
-        } else {
-            config = null;
-        }
-        return ZenModeConfig.getDescription(mAppContext, zen != Settings.Global.ZEN_MODE_OFF,
-                config, true);
     }
 
     public class Receiver extends BroadcastReceiver {
