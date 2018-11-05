@@ -62,7 +62,11 @@ public class ContextualCardLookupTable {
     static final Set<ControllerRendererMapping> LOOKUP_TABLE =
             new TreeSet<ControllerRendererMapping>() {{
                 add(new ControllerRendererMapping(CardType.CONDITIONAL,
-                        ConditionContextualCardRenderer.VIEW_TYPE,
+                        ConditionContextualCardRenderer.HALF_WIDTH_VIEW_TYPE,
+                        ConditionContextualCardController.class,
+                        ConditionContextualCardRenderer.class));
+                add(new ControllerRendererMapping(CardType.CONDITIONAL,
+                        ConditionContextualCardRenderer.FULL_WIDTH_VIEW_TYPE,
                         ConditionContextualCardController.class,
                         ConditionContextualCardRenderer.class));
                 add(new ControllerRendererMapping(CardType.SLICE,
