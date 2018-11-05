@@ -62,12 +62,13 @@ public class ApnPreferenceController extends BasePreferenceController implements
     public int getAvailabilityStatus() {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         final boolean isCdmaApn = MobileNetworkUtils.isCdmaOptions(mContext, mSubId)
+                && carrierConfig != null
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_APN_SETTING_CDMA_BOOL);
         final boolean isGsmApn = MobileNetworkUtils.isGsmOptions(mContext, mSubId)
+                && carrierConfig != null
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_APN_EXPAND_BOOL);
 
-        return carrierConfig != null
-                && (isCdmaApn || isGsmApn)
+        return isCdmaApn || isGsmApn
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
