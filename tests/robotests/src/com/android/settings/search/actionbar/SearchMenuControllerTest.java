@@ -30,6 +30,7 @@ import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
@@ -39,8 +40,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(shadows = ShadowUtils.class)
 public class SearchMenuControllerTest {
 
     @Mock

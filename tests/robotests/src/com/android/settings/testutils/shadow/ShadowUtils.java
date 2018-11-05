@@ -21,9 +21,13 @@ import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 
 import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.SearchFeatureProviderImpl;
 
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
@@ -100,6 +104,11 @@ public class ShadowUtils {
             return sAppNameMap.get(packageName);
         }
         return null;
+    }
+
+    @Implementation
+    public static boolean isPackageEnabled(Context context, String packageName) {
+        return true;
     }
 
     public static void setApplicationLabel(String packageName, String appLabel) {
