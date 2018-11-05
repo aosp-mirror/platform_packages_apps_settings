@@ -16,19 +16,24 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
+import android.annotation.NonNull;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Implements(AccountManager.class)
 public class ShadowAccountManager{
 
     private static final Map<String, AuthenticatorDescription> sAuthenticators = new HashMap<>();
+    private static final Map<Integer, List<Account>> sAccountsByUserId = new HashMap<>();
 
     @Implementation
     public AuthenticatorDescription[] getAuthenticatorTypesAsUser(int userId) {
@@ -39,7 +44,24 @@ public class ShadowAccountManager{
         sAuthenticators.put(authenticator.type, authenticator);
     }
 
-    public static void resetAuthenticator() {
+    public static void reset() {
         sAuthenticators.clear();
+        sAccountsByUserId.clear();
+    }
+
+    @Implementation @NonNull
+    public Account[] getAccountsAsUser(int userId) {
+        if (sAccountsByUserId.containsKey(userId)) {
+            return sAccountsByUserId.get(userId).toArray(new Account[0]);
+        } else {
+            return new Account[0];
+        }
+    }
+
+    public static void addAccountForUser(int userId, Account account) {
+        if (!sAccountsByUserId.containsKey(userId)) {
+            sAccountsByUserId.put(userId, new ArrayList<>());
+        }
+        sAccountsByUserId.get(userId).add(account);
     }
 }
