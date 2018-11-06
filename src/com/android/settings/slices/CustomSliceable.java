@@ -91,11 +91,12 @@ public interface CustomSliceable {
 
     /**
      * Settings Slices which can represent component lists that are updatable by the
-     * {@link SliceBackgroundWorker} returned here.
+     * {@link SliceBackgroundWorker} class returned here.
      *
-     * @return a {@link SliceBackgroundWorker} for fetching the list of results in the background.
+     * @return a {@link SliceBackgroundWorker} class for fetching the list of results in the
+     * background.
      */
-    default SliceBackgroundWorker getBackgroundWorker() {
+    default Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
         return null;
     }
 

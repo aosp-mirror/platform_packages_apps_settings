@@ -19,6 +19,7 @@ package com.android.settings.homepage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
+import android.widget.ImageView;
 import android.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
@@ -50,6 +52,10 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
                 .initSearchToolbar(this, toolbar);
+
+        final ImageView avatarView = findViewById(R.id.account_avatar);
+        final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(this, avatarView);
+        getLifecycle().addObserver(avatarViewMixin);
 
         showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
         showFragment(new TopLevelSettings(), R.id.main_content);

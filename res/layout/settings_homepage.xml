@@ -27,32 +27,5 @@
         android:layout_height="match_parent"
         android:layoutAnimation="@anim/layout_animation_fall_down"/>
 
-    <RelativeLayout
-        android:id="@+id/suggestion_footer"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/condition_header_height"
-        android:layout_centerHorizontal="true">
-
-        <ImageView
-            android:id="@+id/expand_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:paddingTop="4dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"/>
-
-        <TextView
-            android:id="@+id/expand_summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_toStartOf="@id/expand_indicator"
-            android:layout_centerVertical="true"
-            android:gravity="end"
-            android:textAppearance="@style/TextAppearance.SuggestionTitle"
-            android:textColor="?android:attr/colorAccent"/>
-
-    </RelativeLayout>
     <include layout="@layout/horizontal_divider"/>
 </LinearLayout>

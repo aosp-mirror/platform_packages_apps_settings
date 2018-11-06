@@ -45,5 +45,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/search_menu"/>
         </Toolbar>
+        <ImageView
+            android:id="@+id/account_avatar"
+            android:layout_marginStart="@dimen/search_bar_avatar_start_margin"
+            android:layout_marginEnd="@dimen/search_bar_avatar_end_margin"
+            android:layout_width="@dimen/search_bar_avatar_size"
+            android:layout_height="@dimen/search_bar_avatar_size"
+            android:layout_gravity="end|center_vertical"/>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

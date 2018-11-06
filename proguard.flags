@@ -61,3 +61,8 @@
 -keepclasseswithmembers class * implements com.android.settings.slices.CustomSliceable {
     public <init>(android.content.Context);
 }
+
+# Keep classes that extends SliceBackgroundWorker, which are used by reflection.
+-keepclasseswithmembers class * extends com.android.settings.slices.SliceBackgroundWorker {
+    public <init>(android.content.Context, android.net.Uri);
+}

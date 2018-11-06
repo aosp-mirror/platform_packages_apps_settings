@@ -121,7 +121,7 @@ public class WifiSlice implements CustomSliceable {
             return listBuilder.build();
         }
 
-        List<AccessPoint> results = getBackgroundWorker().getResults();
+        List<AccessPoint> results = SliceBackgroundWorker.getInstance(mContext, this).getResults();
         if (results == null) {
             results = new ArrayList<>();
         }
@@ -264,36 +264,27 @@ public class WifiSlice implements CustomSliceable {
     }
 
     @Override
-    public SliceBackgroundWorker getBackgroundWorker() {
-        return WifiScanWorker.getInstance(mContext, WIFI_URI);
+    public Class getBackgroundWorkerClass() {
+        return WifiScanWorker.class;
     }
 
-    private static class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
+    public static class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
             implements WifiTracker.WifiListener {
-
-        // TODO: enforce all the SliceBackgroundWorkers being singletons at syntax level
-        private static WifiScanWorker mWifiScanWorker;
 
         private final Context mContext;
 
         private WifiTracker mWifiTracker;
 
-        private WifiScanWorker(Context context, Uri uri) {
-            super(context.getContentResolver(), uri);
+        public WifiScanWorker(Context context, Uri uri) {
+            super(context, uri);
             mContext = context;
-        }
-
-        public static WifiScanWorker getInstance(Context context, Uri uri) {
-            if (mWifiScanWorker == null) {
-                mWifiScanWorker = new WifiScanWorker(context, uri);
-            }
-            return mWifiScanWorker;
         }
 
         @Override
         protected void onSlicePinned() {
             if (mWifiTracker == null) {
-                mWifiTracker = new WifiTracker(mContext, this, true, true);
+                mWifiTracker = new WifiTracker(mContext, this /* wifiListener */,
+                        true /* includeSaved */, true /* includeScans */);
             }
             mWifiTracker.onStart();
             onAccessPointsChanged();
@@ -307,7 +298,6 @@ public class WifiSlice implements CustomSliceable {
         @Override
         public void close() {
             mWifiTracker.onDestroy();
-            mWifiScanWorker = null;
         }
 
         @Override
