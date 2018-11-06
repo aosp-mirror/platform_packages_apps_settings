@@ -169,6 +169,43 @@ public class SliceTester {
     }
 
     /**
+     * Test the copyable slice, including:
+     * - No intent
+     * - Correct title
+     * - Correct intent
+     * - Correct keywords
+     * - TTL
+     * - Color
+     */
+    public static void testSettingsCopyableSlice(Context context, Slice slice,
+            SliceData sliceData) {
+        final SliceMetadata metadata = SliceMetadata.from(context, slice);
+
+        final SliceItem colorItem = SliceQuery.findSubtype(slice, FORMAT_INT, SUBTYPE_COLOR);
+        final int color = colorItem.getInt();
+        assertThat(color).isEqualTo(Utils.getColorAccentDefaultColor(context));
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+
+        final IconCompat expectedIcon = IconCompat.createWithResource(context,
+                sliceData.getIconResource());
+        assertThat(expectedIcon.toString()).isEqualTo(primaryAction.getIcon().toString());
+
+        final long sliceTTL = metadata.getExpiry();
+        assertThat(sliceTTL).isEqualTo(ListBuilder.INFINITY);
+
+        // Check primary intent
+        final PendingIntent primaryPendingIntent = primaryAction.getAction();
+        assertThat(primaryPendingIntent).isEqualTo(
+                SliceBuilderUtils.getContentPendingIntent(context, sliceData));
+
+        final List<SliceItem> sliceItems = slice.getItems();
+        assertTitle(sliceItems, sliceData.getTitle());
+
+        assertKeywords(metadata, sliceData);
+    }
+
+    /**
      * Test the contents of an unavailable slice, including:
      * - No toggles
      * - Correct title
