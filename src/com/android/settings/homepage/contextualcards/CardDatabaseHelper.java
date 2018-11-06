@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,7 +31,7 @@ import androidx.annotation.VisibleForTesting;
 public class CardDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "CardDatabaseHelper";
     private static final String DATABASE_NAME = "homepage_cards.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     public static final String CARD_TABLE = "cards";
 
@@ -119,6 +120,11 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
          * Decide the card display full-length width or half-width in screen.
          */
         String SUPPORT_HALF_WIDTH = "support_half_width";
+
+        /**
+         * Decide the card is dismissed or not.
+         */
+        String CARD_DISMISSED = "card_dismissed";
     }
 
     private static final String CREATE_CARD_TABLE =
@@ -157,6 +163,8 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
                     CardColumns.EXPIRE_TIME_MS +
                     " INTEGER, " +
                     CardColumns.SUPPORT_HALF_WIDTH +
+                    " INTEGER DEFAULT 0, " +
+                    CardColumns.CARD_DISMISSED +
                     " INTEGER DEFAULT 0 " +
                     ");";
 
@@ -190,9 +198,27 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
 
     Cursor getContextualCards() {
         final SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(CARD_TABLE, null /* columns */, null /* selection */,
+        final String selection = CardColumns.CARD_DISMISSED + "=0";
+        Cursor cursor = db.query(CARD_TABLE, null /* columns */, selection,
                 null /* selectionArgs */, null /* groupBy */, null /* having */,
                 null /* orderBy */);
         return cursor;
+    }
+
+    /**
+     * Mark a specific ContextualCard with dismissal flag in the database to indicate that the
+     * card has been dismissed.
+     *
+     * @param cardName the card name of the ContextualCard which is dismissed by user.
+     * @return updated row number
+     */
+    public int markContextualCardAsDismissed(String cardName) {
+        final SQLiteDatabase database = this.getWritableDatabase();
+        final ContentValues values = new ContentValues();
+        values.put(CardColumns.CARD_DISMISSED, 1);
+        final String selection = CardColumns.NAME + "=?";
+        final String[] selectionArgs = {cardName};
+        final int rowsUpdated = database.update(CARD_TABLE, values, selection, selectionArgs);
+        return rowsUpdated;
     }
 }

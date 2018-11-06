@@ -74,6 +74,7 @@ public class CardDatabaseHelperTest {
                 CardDatabaseHelper.CardColumns.CARD_ACTION,
                 CardDatabaseHelper.CardColumns.EXPIRE_TIME_MS,
                 CardDatabaseHelper.CardColumns.SUPPORT_HALF_WIDTH,
+                CardDatabaseHelper.CardColumns.CARD_DISMISSED,
         };
 
         assertThat(columnNames).isEqualTo(expectedNames);
