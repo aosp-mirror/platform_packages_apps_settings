@@ -84,7 +84,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
-        LoaderManager.getInstance(fragment).initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+        LoaderManager.getInstance(fragment).restartLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
                 cardContentLoaderCallbacks);
     }
 
