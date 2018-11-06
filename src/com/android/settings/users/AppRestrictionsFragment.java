@@ -450,7 +450,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private void addLocationAppRestrictionsPreference(AppRestrictionsHelper.SelectableAppInfo app,
             AppRestrictionsPreference p) {
         String packageName = app.packageName;
-        p.setIcon(R.drawable.ic_settings_location);
+        p.setIcon(R.drawable.ic_preference_location);
         p.setKey(getKeyForPackage(packageName));
         ArrayList<RestrictionEntry> restrictions = RestrictionUtils.getRestrictions(
                 getActivity(), mUser);
