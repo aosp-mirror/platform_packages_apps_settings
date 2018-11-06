@@ -17,33 +17,84 @@
 package com.android.settings.slices;
 
 import android.annotation.MainThread;
-import android.content.ContentResolver;
+import android.content.Context;
 import android.net.Uri;
+import android.util.ArrayMap;
+import android.util.Log;
 
 import java.io.Closeable;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The Slice background worker is used to make Settings Slices be able to work with data that is
  * changing continuously, e.g. available Wi-Fi networks.
  *
- * The background worker will be started at {@link SettingsSliceProvider#onSlicePinned(Uri)}, and be
- * stopped at {@link SettingsSliceProvider#onSliceUnpinned(Uri)}.
+ * The background worker will be started at {@link SettingsSliceProvider#onSlicePinned(Uri)}, be
+ * stopped at {@link SettingsSliceProvider#onSliceUnpinned(Uri)}, and be closed at {@link
+ * SettingsSliceProvider#shutdown()}.
  *
  * {@link SliceBackgroundWorker} caches the results, uses the cache to compare if there is any data
  * changed, and then notifies the Slice {@link Uri} to update.
+ *
+ * It also stores all instances of all workers to ensure each worker is a Singleton.
  */
 public abstract class SliceBackgroundWorker<E> implements Closeable {
 
-    private final ContentResolver mContentResolver;
+    private static final String TAG = "SliceBackgroundWorker";
+
+    private static final Map<Uri, SliceBackgroundWorker> LIVE_WORKERS = new ArrayMap<>();
+
+    private final Context mContext;
     private final Uri mUri;
 
     private List<E> mCachedResults;
 
-    protected SliceBackgroundWorker(ContentResolver cr, Uri uri) {
-        mContentResolver = cr;
+    protected SliceBackgroundWorker(Context context, Uri uri) {
+        mContext = context;
         mUri = uri;
+    }
+
+    /**
+     * Returns the singleton instance of the {@link SliceBackgroundWorker} for specified {@link
+     * CustomSliceable}
+     */
+    public static SliceBackgroundWorker getInstance(Context context, CustomSliceable sliceable) {
+        final Uri uri = sliceable.getUri();
+        final Class<? extends SliceBackgroundWorker> workerClass =
+                sliceable.getBackgroundWorkerClass();
+        SliceBackgroundWorker worker = LIVE_WORKERS.get(uri);
+        if (worker == null) {
+            worker = createInstance(context, uri, workerClass);
+            LIVE_WORKERS.put(uri, worker);
+        }
+        return worker;
+    }
+
+    private static SliceBackgroundWorker createInstance(Context context, Uri uri,
+            Class<? extends SliceBackgroundWorker> clazz) {
+        Log.d(TAG, "create instance: " + clazz);
+        try {
+            return clazz.getConstructor(Context.class, Uri.class).newInstance(context, uri);
+        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException |
+                InvocationTargetException e) {
+            throw new IllegalStateException(
+                    "Invalid slice background worker: " + clazz, e);
+        }
+    }
+
+    static void shutdown() {
+        for (SliceBackgroundWorker worker : LIVE_WORKERS.values()) {
+            try {
+                worker.close();
+            } catch (IOException e) {
+                Log.w(TAG, "Shutting down worker failed", e);
+            }
+        }
+        LIVE_WORKERS.clear();
     }
 
     /**
@@ -83,7 +134,7 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
 
         if (needNotify) {
             mCachedResults = results;
-            mContentResolver.notifyChange(mUri, null);
+            mContext.getContentResolver().notifyChange(mUri, null);
         }
     }
 }

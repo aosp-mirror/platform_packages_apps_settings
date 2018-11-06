@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -60,6 +61,7 @@ import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.wifi.WifiSlice;
+import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.After;
 import org.junit.Before;
@@ -75,7 +77,6 @@ import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -91,7 +92,8 @@ import java.util.Set;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class, ShadowThreadUtils.class, ShadowUtils.class,
         SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
-        ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class})
+        ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class,
+        SettingsSliceProviderTest.ShadowWifiScanWorker.class})
 public class SettingsSliceProviderTest {
 
     private static final String KEY = "KEY";
@@ -135,7 +137,7 @@ public class SettingsSliceProviderTest {
         mProvider.mSliceWeakDataCache = new HashMap<>();
         mProvider.mSliceDataCache = new HashMap<>();
         mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
-        mProvider.mCustomSliceManager = spy(new CustomSliceManager(mContext));
+        mProvider.mCustomSliceManager = new CustomSliceManager(mContext);
         when(mProvider.getContext()).thenReturn(mContext);
 
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
@@ -497,57 +499,52 @@ public class SettingsSliceProviderTest {
         mProvider.onSlicePinned(uri);
     }
 
-    private SliceBackgroundWorker initBackgroundWorker(Uri uri) {
-        final SliceBackgroundWorker worker = spy(new SliceBackgroundWorker(
-                mContext.getContentResolver(), uri) {
-            @Override
-            protected void onSlicePinned() {
-            }
+    @Implements(WifiSlice.WifiScanWorker.class)
+    public static class ShadowWifiScanWorker {
+        private static WifiTracker mWifiTracker;
 
-            @Override
-            protected void onSliceUnpinned() {
-            }
+        @Implementation
+        protected void onSlicePinned() {
+            mWifiTracker = mock(WifiTracker.class);
+            mWifiTracker.onStart();
+        }
 
-            @Override
-            public void close() {
-            }
-        });
-        final WifiSlice wifiSlice = spy(new WifiSlice(mContext));
-        when(wifiSlice.getBackgroundWorker()).thenReturn(worker);
-        when(mProvider.mCustomSliceManager.getSliceableFromUri(uri)).thenReturn(wifiSlice);
-        return worker;
+        @Implementation
+        protected void onSliceUnpinned() {
+            mWifiTracker.onStop();
+        }
+
+        @Implementation
+        public void close() {
+            mWifiTracker.onDestroy();
+        }
+
+        static WifiTracker getWifiTracker() {
+            return mWifiTracker;
+        }
     }
 
     @Test
     public void onSlicePinned_backgroundWorker_started() {
-        final Uri uri = WifiSlice.WIFI_URI;
-        final SliceBackgroundWorker worker = initBackgroundWorker(uri);
+        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
 
-        mProvider.onSlicePinned(uri);
-
-        verify(worker).onSlicePinned();
+        verify(ShadowWifiScanWorker.getWifiTracker()).onStart();
     }
 
     @Test
     public void onSlicePinned_backgroundWorker_stopped() {
-        final Uri uri = WifiSlice.WIFI_URI;
-        final SliceBackgroundWorker worker = initBackgroundWorker(uri);
+        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
+        mProvider.onSliceUnpinned(WifiSlice.WIFI_URI);
 
-        mProvider.onSlicePinned(uri);
-        mProvider.onSliceUnpinned(uri);
-
-        verify(worker).onSliceUnpinned();
+        verify(ShadowWifiScanWorker.getWifiTracker()).onStop();
     }
 
     @Test
-    public void shutdown_backgroundWorker_closed() throws IOException {
-        final Uri uri = WifiSlice.WIFI_URI;
-        final SliceBackgroundWorker worker = initBackgroundWorker(uri);
-
-        mProvider.onSlicePinned(uri);
+    public void shutdown_backgroundWorker_closed() {
+        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
         mProvider.shutdown();
 
-        verify(worker).close();
+        verify(ShadowWifiScanWorker.getWifiTracker()).onDestroy();
     }
 
     @Test
