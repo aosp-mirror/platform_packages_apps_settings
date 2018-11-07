@@ -37,6 +37,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  * Card renderer for {@link ConditionalContextualCard}.
  */
 public class ConditionContextualCardRenderer implements ContextualCardRenderer {
+    public static final int VIEW_TYPE = R.layout.homepage_condition_tile;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
@@ -48,8 +49,8 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
     }
 
     @Override
-    public int getViewType() {
-        return R.layout.homepage_condition_tile;
+    public int getViewType(boolean isHalfWidth) {
+        return VIEW_TYPE;
     }
 
     @Override

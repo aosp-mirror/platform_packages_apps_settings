@@ -61,7 +61,7 @@ public class ConditionContextualCardRendererTest {
 
     @Test
     public void bindView_shouldSetListener() {
-        final int viewType = mRenderer.getViewType();
+        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
@@ -78,7 +78,7 @@ public class ConditionContextualCardRendererTest {
 
     @Test
     public void viewClick_shouldInvokeControllerPrimaryClick() {
-        final int viewType = mRenderer.getViewType();
+        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);

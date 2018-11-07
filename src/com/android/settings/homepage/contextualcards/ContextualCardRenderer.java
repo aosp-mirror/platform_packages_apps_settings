@@ -26,9 +26,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public interface ContextualCardRenderer {
 
     /**
-     * The layout type of the controller.
+     * The layout type of the renderer.
      */
-    int getViewType();
+    int getViewType(boolean isHalfWidth);
 
     /**
      * When {@link ContextualCardsAdapter} calls {@link ContextualCardsAdapter#onCreateViewHolder},
