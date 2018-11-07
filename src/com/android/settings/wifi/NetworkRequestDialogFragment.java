@@ -19,6 +19,8 @@ package com.android.settings.wifi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Message;
 import androidx.appcompat.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,14 +39,16 @@ import java.util.List;
 public class NetworkRequestDialogFragment extends InstrumentedDialogFragment implements
     DialogInterface.OnClickListener {
 
+  /** Message sent to us to stop scanning wifi and pop up timeout dialog. */
+  private static final int MESSAGE_STOP_SCAN_WIFI_LIST = 0;
+
+  /** Delayed time to stop scanning wifi. */
+  private static final int DELAY_TIME_STOP_SCAN_MS = 30*1000;
+
   private List<AccessPoint> mAccessPointList;
 
-  public static NetworkRequestDialogFragment newInstance(int uid, String packageName) {
-    Bundle args = new Bundle();
-    args.putInt("uid", uid);
-    args.putString("packageName", packageName);
+  public static NetworkRequestDialogFragment newInstance() {
     NetworkRequestDialogFragment dialogFragment = new NetworkRequestDialogFragment();
-    dialogFragment.setArguments(args);
     return dialogFragment;
   }
 
@@ -82,6 +86,44 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
   @Override
   public void onClick(DialogInterface dialog, int which) {
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+
+    mHandler.removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    // TODO(b/117399926): Starts to scan current WiFi.
+
+    // Sets time-out to stop scanning.
+    mHandler.sendEmptyMessageDelayed(MESSAGE_STOP_SCAN_WIFI_LIST, DELAY_TIME_STOP_SCAN_MS);
+  }
+
+  private Handler mHandler = new Handler() {
+    @Override
+    public void handleMessage(Message msg) {
+      switch (msg.what) {
+        case MESSAGE_STOP_SCAN_WIFI_LIST:
+          removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
+          stopScanningAndPopTimeoutDialog();
+          break;
+        default:
+          // Do nothing.
+          break;
+      }
+    }
+  };
+
+  protected void stopScanningAndPopTimeoutDialog() {
+    dismiss();
+    NetworkRequestTimeoutDialogFragment fragment = NetworkRequestTimeoutDialogFragment.newInstance();
+    fragment.show(getActivity().getSupportFragmentManager(), null);
   }
 
   @Override
