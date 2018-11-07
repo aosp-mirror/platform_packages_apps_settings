@@ -26,10 +26,14 @@ import androidx.lifecycle.LifecycleOwner;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.conditional
+        .ConditionHeaderContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.legacysuggestion
         .LegacySuggestionContextualCardController;
 import com.android.settings.homepage.contextualcards.legacysuggestion
         .LegacySuggestionContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.conditional
+        .ConditionFooterContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardController;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
@@ -131,6 +135,12 @@ public class ControllerRendererPool {
         } else if (LegacySuggestionContextualCardRenderer.class == clz) {
             return new LegacySuggestionContextualCardRenderer(context,
                     this /* controllerRendererPool */);
+        } else if (ConditionFooterContextualCardRenderer.class == clz) {
+            return new ConditionFooterContextualCardRenderer(context,
+                    this /*controllerRendererPool*/);
+        } else if (ConditionHeaderContextualCardRenderer.class == clz) {
+            return new ConditionHeaderContextualCardRenderer(context,
+                    this /*controllerRendererPool*/);
         }
         return null;
     }
