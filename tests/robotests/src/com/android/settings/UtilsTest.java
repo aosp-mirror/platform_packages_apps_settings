@@ -93,6 +93,7 @@ public class UtilsTest {
         when(mContext.getSystemService(WifiManager.class)).thenReturn(wifiManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(connectivityManager);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
     }
 
     @Test
@@ -199,5 +200,28 @@ public class UtilsTest {
         // Verify that it uses the correct user id
         verify(mPackageManager).getApplicationInfoAsUser(eq(PACKAGE_NAME), anyInt(), eq(USER_ID));
         verify(mIconDrawableFactory).getBadgedIcon(mApplicationInfo, USER_ID);
+    }
+
+    @Test
+    public void isPackageEnabled_appEnabled_returnTrue()
+            throws PackageManager.NameNotFoundException{
+        mApplicationInfo.enabled = true;
+        when(mPackageManager.getApplicationInfo(PACKAGE_NAME, 0)).thenReturn(mApplicationInfo);
+
+        assertThat(Utils.isPackageEnabled(mContext, PACKAGE_NAME)).isTrue();
+    }
+
+    @Test
+    public void isPackageEnabled_appDisabled_returnTrue()
+            throws PackageManager.NameNotFoundException{
+        mApplicationInfo.enabled = false;
+        when(mPackageManager.getApplicationInfo(PACKAGE_NAME, 0)).thenReturn(mApplicationInfo);
+
+        assertThat(Utils.isPackageEnabled(mContext, PACKAGE_NAME)).isFalse();
+    }
+
+    @Test
+    public void isPackageEnabled_noApp_returnFalse() {
+        assertThat(Utils.isPackageEnabled(mContext, PACKAGE_NAME)).isFalse();
     }
 }

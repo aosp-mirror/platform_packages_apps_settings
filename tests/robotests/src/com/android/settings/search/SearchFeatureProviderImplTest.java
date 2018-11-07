@@ -29,12 +29,14 @@ import android.widget.Toolbar;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SearchFeatureProviderImplTest {
@@ -50,6 +52,7 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void initSearchToolbar_shouldInitWithOnClickListener() {
         mProvider.initSearchToolbar(mActivity, null);
         // Should not crash.

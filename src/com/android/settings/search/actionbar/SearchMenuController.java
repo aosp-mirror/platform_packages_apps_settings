@@ -56,7 +56,13 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        final Context context = mHost.getContext();
+        final String SettingsIntelligencePkgName = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSettingsIntelligencePkgName();
         if (!Utils.isDeviceProvisioned(mHost.getContext())) {
+            return;
+        }
+        if (!Utils.isPackageEnabled(mHost.getContext(), SettingsIntelligencePkgName)) {
             return;
         }
         if (menu == null) {
@@ -72,10 +78,8 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         searchItem.setOnMenuItemClickListener(target -> {
-            final Context context = mHost.getContext();
             final Intent intent = SearchFeatureProvider.SEARCH_UI_INTENT;
-            intent.setPackage(FeatureFactory.getFactory(mHost.getContext())
-                    .getSearchFeatureProvider().getSettingsIntelligencePkgName());
+            intent.setPackage(SettingsIntelligencePkgName);
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .action(context, MetricsProto.MetricsEvent.ACTION_SEARCH_RESULTS);
             mHost.startActivityForResult(intent, 0 /* requestCode */);
