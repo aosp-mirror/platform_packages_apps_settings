@@ -22,6 +22,7 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
@@ -63,7 +64,7 @@ public class EmergencyInfoPreferenceController extends AbstractPreferenceControl
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_EMERGENCY_INFO.equals(preference.getKey())) {
-            Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO);
+            Intent intent = new Intent(getIntentAction(mContext));
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(intent);
             return true;
@@ -73,7 +74,7 @@ public class EmergencyInfoPreferenceController extends AbstractPreferenceControl
 
     @Override
     public boolean isAvailable() {
-        Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO).setPackage(PACKAGE_NAME_EMERGENCY);
+        Intent intent = new Intent(getIntentAction(mContext)).setPackage(getPackageName(mContext));
         List<ResolveInfo> infos = mContext.getPackageManager().queryIntentActivities(intent, 0);
         return infos != null && !infos.isEmpty();
     }
@@ -81,5 +82,21 @@ public class EmergencyInfoPreferenceController extends AbstractPreferenceControl
     @Override
     public String getPreferenceKey() {
         return KEY_EMERGENCY_INFO;
+    }
+
+    private String getIntentAction(Context context) {
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SAFETY_HUB)) {
+            return context.getResources().getString(R.string.config_emergency_intent_action);
+        }
+
+        return ACTION_EDIT_EMERGENCY_INFO;
+    }
+
+    private String getPackageName(Context context) {
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SAFETY_HUB)) {
+            return context.getResources().getString(R.string.config_emergency_package_name);
+        }
+
+        return PACKAGE_NAME_EMERGENCY;
     }
 }
