@@ -43,6 +43,11 @@ public class ContextualCardsFragment extends InstrumentedFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContextualCardManager = new ContextualCardManager(getContext(), getSettingsLifecycle());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         mContextualCardManager.loadContextualCards(this);
     }
 

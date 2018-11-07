@@ -76,7 +76,7 @@ public class ChooseAccountPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowContentResolver.reset();
-        ShadowAccountManager.resetAuthenticator();
+        ShadowAccountManager.reset();
         ShadowRestrictedLockUtilsInternal.clearDisabledTypes();
     }
 
