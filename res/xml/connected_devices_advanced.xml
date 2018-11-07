@@ -44,14 +44,6 @@
         android:icon="@drawable/ic_android"
         android:order="-6"/>
 
-    <SwitchPreference
-        android:key="bluetooth_on_while_driving"
-        android:title="@string/bluetooth_on_while_driving_pref"
-        android:icon="@drawable/ic_settings_bluetooth"
-        android:summary="@string/bluetooth_on_while_driving_summary"
-        settings:controller="com.android.settings.connecteddevice.BluetoothOnWhileDrivingPreferenceController"
-        android:order="-4"/>
-
     <com.android.settingslib.RestrictedPreference
         android:key="connected_device_printing"
         android:title="@string/print_settings"
