@@ -308,6 +308,16 @@
         <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
+    <style name="TextAppearance.ConditionCardTitle"
+           parent="@android:style/TextAppearance.Material.Body2">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.ConditionCardSummary"
+           parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
     <style name="TextAppearance.EntityHeaderTitle"
            parent="@android:style/TextAppearance.Material.Subhead">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
@@ -461,6 +471,26 @@
         <item name="android:layout_marginEnd">@dimen/homepage_card_side_margin</item>
         <item name="cardCornerRadius">@dimen/homepage_card_corner_radius</item>
         <item name="cardElevation">@dimen/homepage_card_elevation</item>
+    </style>
+
+    <style name="ConditionCardBorderlessButton"
+           parent="android:Widget.DeviceDefault.Button.Borderless">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="ConditionHalfCardBorderlessButton"
+           parent="@style/ConditionCardBorderlessButton">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:paddingStart">0dp</item>
+    </style>
+
+    <style name="ConditionFullCardBorderlessButton"
+           parent="@style/ConditionCardBorderlessButton">
+        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:paddingEnd">0dp</item>
     </style>
 
 </resources>

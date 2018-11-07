@@ -99,6 +99,7 @@ public class HotspotConditionController implements ConditionalCardController {
                 .setTitleText(mAppContext.getText(R.string.condition_hotspot_title).toString())
                 .setSummaryText(getSummary().toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_hotspot))
+                .setIsHalfWidth(true)
                 .build();
     }
 

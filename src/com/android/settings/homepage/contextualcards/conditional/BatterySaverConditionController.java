@@ -82,6 +82,7 @@ public class BatterySaverConditionController implements ConditionalCardControlle
                 .setTitleText(mAppContext.getText(R.string.condition_battery_title).toString())
                 .setSummaryText(mAppContext.getText(R.string.condition_battery_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_battery_saver_accent_24dp))
+                .setIsHalfWidth(true)
                 .build();
     }
 

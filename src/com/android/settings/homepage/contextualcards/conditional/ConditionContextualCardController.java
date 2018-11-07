@@ -85,6 +85,14 @@ public class ConditionContextualCardController implements ContextualCardControll
     public void onConditionsChanged() {
         final List<ContextualCard> conditionCards = mConditionManager.getDisplayableCards();
 
+        final boolean isOddNumber = conditionCards.size() % 2 == 1;
+        if (isOddNumber) {
+            final int lastIndex = conditionCards.size() - 1;
+            final ConditionalContextualCard card = (ConditionalContextualCard) conditionCards.get(
+                    lastIndex);
+            conditionCards.set(lastIndex, card.mutate().setIsHalfWidth(false).build());
+        }
+
         if (mListener != null) {
             final Map<Integer, List<ContextualCard>> conditionalCards = new ArrayMap<>();
             conditionalCards.put(ContextualCard.CardType.CONDITIONAL, conditionCards);
