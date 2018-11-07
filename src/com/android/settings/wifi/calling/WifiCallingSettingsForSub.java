@@ -401,6 +401,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         // Build and return intent
         Intent intent = new Intent();
         intent.setComponent(componentName);
+        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, mSubId);
         return intent;
     }
 
