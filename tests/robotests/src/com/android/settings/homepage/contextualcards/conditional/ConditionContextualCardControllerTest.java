@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -25,6 +27,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.settings.homepage.contextualcards.ContextualCard;
+import com.android.settings.homepage.contextualcards.ContextualCard.CardType;
 import com.android.settings.homepage.contextualcards.ContextualCardUpdateListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -38,6 +41,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ConditionContextualCardControllerTest {
@@ -94,5 +98,82 @@ public class ConditionContextualCardControllerTest {
         mController.onConditionsChanged();
 
         verify(mListener, never()).onContextualCardUpdated(any());
+    }
+
+    @Test
+    public void getConditionalCards_hasEmptyConditionCards_shouldReturnThreeEmptyList() {
+        final Map<Integer, List<ContextualCard>> conditionalCards =
+                mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(0));
+
+        assertThat(conditionalCards).hasSize(3);
+        for (@CardType int cardType : conditionalCards.keySet()) {
+            assertThat(conditionalCards.get(cardType)).isEmpty();
+        }
+    }
+
+    @Test
+    public void getConditionalCards_hasOneConditionCard_shouldGetOneFullWidthCard() {
+        final Map<Integer, List<ContextualCard>> conditionalCards =
+                mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(1));
+
+        assertThat(conditionalCards).hasSize(3);
+        assertThat(conditionalCards.get(CardType.CONDITIONAL)).hasSize(1);
+        assertThat(conditionalCards.get(CardType.CONDITIONAL).get(0).isHalfWidth()).isFalse();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isEmpty();
+    }
+
+    @Test
+    public void getConditionalCards_hasTwoConditionCards_shouldGetTwoHalfWidthCards() {
+        final Map<Integer, List<ContextualCard>> conditionalCards =
+                mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(2));
+
+        assertThat(conditionalCards).hasSize(3);
+        assertThat(conditionalCards.get(CardType.CONDITIONAL)).hasSize(2);
+        for (ContextualCard card : conditionalCards.get(CardType.CONDITIONAL)) {
+            assertThat(card.isHalfWidth()).isTrue();
+        }
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isEmpty();
+    }
+
+    @Test
+    public void getConditionalCards_hasThreeCardsAndExpanded_shouldGetThreeCardsWithFooter() {
+        mController.setIsExpanded(true);
+        final Map<Integer, List<ContextualCard>> conditionalCards =
+                mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(3));
+
+        assertThat(conditionalCards).hasSize(3);
+        assertThat(conditionalCards.get(CardType.CONDITIONAL)).hasSize(3);
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isNotEmpty();
+    }
+
+    @Test
+    public void getConditionalCards_hasThreeCardsAndCollapsed_shouldGetOneConditionalHeader() {
+        mController.setIsExpanded(false);
+        final Map<Integer, List<ContextualCard>> conditionalCards =
+                mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(3));
+
+        assertThat(conditionalCards).hasSize(3);
+        assertThat(conditionalCards.get(CardType.CONDITIONAL)).isEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isNotEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isEmpty();
+    }
+
+    private List<ContextualCard> generateConditionCards(int numberOfCondition) {
+        final List<ContextualCard> conditionCards = new ArrayList<>();
+        for (int i = 0; i < numberOfCondition; i++) {
+            conditionCards.add(new ConditionalContextualCard.Builder()
+                    .setConditionId(123 + i)
+                    .setMetricsConstant(1)
+                    .setActionText("test_action" + i)
+                    .setName("test_name" + i)
+                    .setTitleText("test_title" + i)
+                    .setSummaryText("test_summary" + i)
+                    .setIsHalfWidth(true)
+                    .build());
+        }
+        return conditionCards;
     }
 }
