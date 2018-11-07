@@ -19,7 +19,12 @@ package com.android.settings.homepage.contextualcards;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
+import android.app.slice.SliceManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -28,30 +33,37 @@ import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSlice;
 
-import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardCategory;
 import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SettingsContextualCardProviderTest {
 
+    @Mock
+    private SliceManager mSliceManager;
     private ContentResolver mResolver;
     private Uri mUri;
     private SettingsContextualCardProvider mProvider;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mResolver = RuntimeEnvironment.application.getContentResolver();
         mUri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsContextualCardProvider.CARD_AUTHORITY)
                 .build();
-        mProvider = Robolectric.setupContentProvider(SettingsContextualCardProvider.class);
+        mProvider = spy(Robolectric.setupContentProvider(SettingsContextualCardProvider.class));
+        final Context context = spy(RuntimeEnvironment.application);
+        doReturn(mSliceManager).when(context).getSystemService(SliceManager.class);
+        doReturn(context).when(mProvider).getContext();
     }
 
     @Test
@@ -59,7 +71,7 @@ public class SettingsContextualCardProviderTest {
         final int actualNo = mProvider.getContextualCards().getCardCount();
 
         final Bundle returnValue =
-                mResolver.call(mUri, ContextualCardProvider.METHOD_GET_CARD_LIST, "", null);
+                mProvider.call(ContextualCardProvider.METHOD_GET_CARD_LIST, "", null);
         final ContextualCardList cards =
                 ContextualCardList.parseFrom(
                         returnValue.getByteArray(ContextualCardProvider.BUNDLE_CARD_LIST));
@@ -76,6 +88,6 @@ public class SettingsContextualCardProviderTest {
             }
         }
 
-        assertThat(wifiCard.getCategory()).isEqualTo(ContextualCardCategory.IMPORTANT);
+        assertThat(wifiCard.getCardCategory()).isEqualTo(ContextualCard.Category.IMPORTANT);
     }
 }

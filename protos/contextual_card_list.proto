@@ -8,12 +8,24 @@ message ContextualCardList {
 }
 
 message ContextualCard {
-  // Slice uri of the contextual card
+
+  /**
+   * The category of a card: this is a hint for how a card should be collected,
+   * ranked, and presented
+   */
+  enum Category {
+    DEFAULT = 0;
+    SUGGESTION = 1;
+    POSSIBLE = 2;
+    IMPORTANT = 3;
+    EXCLUSIVE = 4;
+  }
+
+  /** Slice uri of the contextual card */
   optional string sliceUri = 1;
 
-  // {@link ContextualCardCategory}.
-  optional int32 category = 2;
-
-  // Name of the card. It should be identical in every app
+  /** Name of the card. It should be identical in every app */
   optional string cardName = 3;
+
+  optional Category card_category = 4;
 }
