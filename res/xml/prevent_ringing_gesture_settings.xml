@@ -26,13 +26,8 @@
         app:animation="@raw/gesture_prevent_ringing"
         app:preview="@drawable/gesture_prevent_ringing" />
 
-    <ListPreference
-        android:key="gesture_prevent_ringing"
-        android:title="@string/gesture_prevent_ringing_title"
-        android:entries="@array/gesture_prevent_ringing_entries"
-        android:entryValues="@array/gesture_prevent_ringing_values"
-        app:controller="com.android.settings.gestures.PreventRingingPreferenceController"
-        app:keywords="@string/keywords_gesture"
-        app:allowDividerAbove="true" />
-
+    <PreferenceCategory
+        android:key="gesture_prevent_ringing_category"
+        android:title="@string/gesture_prevent_ringing_title">
+    </PreferenceCategory>
 </PreferenceScreen>
