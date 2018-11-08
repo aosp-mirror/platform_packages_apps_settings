@@ -33,11 +33,11 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.storage.IStorageManager;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
+import android.sysprop.VoldProperties;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
@@ -400,7 +400,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         super.onCreate(savedInstanceState);
 
         // If we are not encrypted or encrypting, get out quickly.
-        final String state = SystemProperties.get("vold.decrypt");
+        final String state = VoldProperties.decrypt().orElse("");
         if (!isDebugView() && ("".equals(state) || DECRYPT_STATE.equals(state))) {
             disableCryptKeeperComponent(this);
             // Typically CryptKeeper is launched as the home app.  We didn't
@@ -468,7 +468,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             return;
         }
 
-        final String progress = SystemProperties.get("vold.encrypt_progress");
+        final String progress = VoldProperties.encrypt_progress().orElse("");
         if (!"".equals(progress) || isDebugView(FORCE_VIEW_PROGRESS)) {
             setContentView(R.layout.crypt_keeper_progress);
             encryptionProgressInit();
@@ -636,7 +636,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void updateProgress() {
-        final String state = SystemProperties.get("vold.encrypt_progress");
+        final String state = VoldProperties.encrypt_progress().orElse("");
 
         if ("error_partially_encrypted".equals(state)) {
             showFactoryReset(false);
@@ -657,8 +657,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         // Now try to get status as time remaining and replace as appropriate
         Log.v(TAG, "Encryption progress: " + progress);
         try {
-            final String timeProperty = SystemProperties.get("vold.encrypt_time_remaining");
-            int time = Integer.parseInt(timeProperty);
+            int time = VoldProperties.encrypt_time_remaining().get();
             if (time >= 0) {
                 // Round up to multiple of 10 - this way display is less jerky
                 time = (time + 9) / 10 * 10;
