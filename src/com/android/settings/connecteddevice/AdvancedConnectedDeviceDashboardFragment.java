@@ -74,7 +74,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
         controllers.add(new BluetoothFilesPreferenceController(context));
-        controllers.add(new BluetoothOnWhileDrivingPreferenceController(context));
 
         final PrintSettingPreferenceController printerController =
                 new PrintSettingPreferenceController(context);

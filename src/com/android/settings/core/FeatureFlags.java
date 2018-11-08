@@ -20,7 +20,6 @@ package com.android.settings.core;
  * This class keeps track of all feature flags in Settings.
  */
 public class FeatureFlags {
-    public static final String BLUETOOTH_WHILE_DRIVING = "settings_bluetooth_while_driving";
     public static final String AUDIO_SWITCHER_SETTINGS = "settings_audio_switcher";
     public static final String DYNAMIC_HOMEPAGE = "settings_dynamic_homepage";
     public static final String HEARING_AID_SETTINGS = "settings_bluetooth_hearing_aid";
