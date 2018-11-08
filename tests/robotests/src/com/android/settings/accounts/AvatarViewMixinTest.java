@@ -18,6 +18,7 @@ package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -29,7 +30,6 @@ import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -69,6 +69,15 @@ public class AvatarViewMixinTest {
     }
 
     @Test
+    public void onStart_configDisabled_doNothing() {
+        final AvatarViewMixin mixin = spy(new AvatarViewMixin(mContext, mImageView));
+        mixin.onStart();
+
+        verify(mixin, never()).hasAccount();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
     public void onStart_useMockAvatarViewMixin_shouldBeExecuted() {
         final AvatarViewMixin mockAvatar = spy(new AvatarViewMixin(mContext, mImageView));
 
@@ -79,7 +88,7 @@ public class AvatarViewMixinTest {
         settingsHomepageActivity.getLifecycle().addObserver(mockAvatar);
         controller.start();
 
-        verify(mockAvatar).onStart();
+        verify(mockAvatar).hasAccount();
     }
 
     @Implements(AccountFeatureProviderImpl.class)
