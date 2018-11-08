@@ -28,15 +28,15 @@ import android.icu.text.ListFormatter;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class ZenModeStarredContactsPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceClickListener {
@@ -134,7 +134,6 @@ public class ZenModeStarredContactsPreferenceController extends
     @VisibleForTesting
     List<String> getStarredContacts(Cursor cursor) {
         List<String> starredContacts = new ArrayList<>();
-
         if (cursor.moveToFirst()) {
             do {
                 String contact = cursor.getString(0);
@@ -147,7 +146,15 @@ public class ZenModeStarredContactsPreferenceController extends
     }
 
     private List<String> getStarredContacts() {
-        return getStarredContacts(queryData());
+        Cursor cursor = null;
+        try {
+            cursor = queryData();
+            return getStarredContacts(cursor);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 
     private Cursor queryData() {

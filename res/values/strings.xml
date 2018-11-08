@@ -8025,6 +8025,19 @@
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
     <string name="zen_mode_events">Allow events</string>
 
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
+    <string name="zen_mode_bypassing_apps">Allow apps to override</string>
+
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
+    <string name="zen_mode_bypassing_apps_title">Overrides Do Not Disturb</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow apps to bypass DND -->
+    <plurals name="zen_mode_bypassing_apps_subtext">
+        <item quantity="zero">No apps can override Do Not Disturb</item>
+        <item quantity="one">1 app can override Do Not Disturb</item>
+        <item quantity="other"><xliff:g id="number" example="2">%1$d</xliff:g> apps can override Do Not Disturb</item>
+    </plurals>
+
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
     <string name="zen_mode_events_list">events</string>
 
