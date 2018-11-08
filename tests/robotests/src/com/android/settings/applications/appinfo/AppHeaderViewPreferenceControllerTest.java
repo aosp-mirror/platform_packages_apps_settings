@@ -106,15 +106,12 @@ public class AppHeaderViewPreferenceControllerTest {
 
 
         final TextView title = mHeader.findViewById(R.id.entity_header_title);
-        final TextView summary = mHeader.findViewById(R.id.entity_header_summary);
 
         mController.displayPreference(mScreen);
         mController.refreshUi();
 
         assertThat(title).isNotNull();
         assertThat(title.getText()).isEqualTo(appLabel);
-        assertThat(summary).isNotNull();
-        assertThat(summary.getText()).isEqualTo(mContext.getString(R.string.installed));
     }
 
     @Test
