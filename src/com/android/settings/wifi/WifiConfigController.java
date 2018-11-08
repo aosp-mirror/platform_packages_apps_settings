@@ -454,6 +454,13 @@ public class WifiConfigController implements TextWatcher,
         return false;
     }
 
+    boolean isValidSaePassword(String password) {
+        if (password.length() >= 1 && password.length() <= 63) {
+            return true;
+        }
+        return false;
+    }
+
     boolean isSubmittable() {
         boolean enabled = false;
         boolean passwordInvalid = false;
@@ -461,7 +468,9 @@ public class WifiConfigController implements TextWatcher,
                 && ((mAccessPointSecurity == AccessPoint.SECURITY_WEP
                         && mPasswordView.length() == 0)
                     || (mAccessPointSecurity == AccessPoint.SECURITY_PSK
-                           && !isValidPsk(mPasswordView.getText().toString())))) {
+                           && !isValidPsk(mPasswordView.getText().toString()))
+                    || (mAccessPointSecurity == AccessPoint.SECURITY_SAE
+                        && !isValidSaePassword(mPasswordView.getText().toString())))) {
             passwordInvalid = true;
         }
         if ((mSsidView != null && mSsidView.length() == 0)
@@ -475,7 +484,9 @@ public class WifiConfigController implements TextWatcher,
         } else {
             enabled = ipAndProxyFieldsAreValid();
         }
-        if (mAccessPointSecurity == AccessPoint.SECURITY_EAP && mEapCaCertSpinner != null
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP ||
+                mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
+                && mEapCaCertSpinner != null
                 && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
             String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
             if (caCertSelection.equals(mUnspecifiedCertString)) {
@@ -492,7 +503,9 @@ public class WifiConfigController implements TextWatcher,
                 enabled = false;
             }
         }
-        if (mAccessPointSecurity == AccessPoint.SECURITY_EAP && mEapUserCertSpinner != null
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP ||
+                mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
+                && mEapUserCertSpinner != null
                 && mView.findViewById(R.id.l_user_cert).getVisibility() != View.GONE
                 && mEapUserCertSpinner.getSelectedItem().equals(mUnspecifiedCertString)) {
             // Disallow submit if the user has not selected a user certificate for an EAP network
@@ -590,8 +603,18 @@ public class WifiConfigController implements TextWatcher,
                 break;
 
             case AccessPoint.SECURITY_EAP:
+            case AccessPoint.SECURITY_EAP_SUITE_B:
                 config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
+                if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
+                    config.allowedKeyManagement.set(KeyMgmt.SUITE_B_192);
+                    config.requirePMF = true;
+                    config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP_256);
+                    config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
+                    config.allowedGroupMgmtCiphers.set(WifiConfiguration.GroupMgmtCipher
+                            .BIP_GMAC_256);
+                    config.allowedSuiteBCiphers.set(WifiConfiguration.SuiteBCipher.ECDHE_RSA);
+                }
                 config.enterpriseConfig = new WifiEnterpriseConfig();
                 int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
                 int phase2Method = mPhase2Spinner.getSelectedItemPosition();
@@ -700,6 +723,20 @@ public class WifiConfigController implements TextWatcher,
                     config.enterpriseConfig.setPassword(mPasswordView.getText().toString());
                 }
                 break;
+            case AccessPoint.SECURITY_SAE:
+                config.allowedKeyManagement.set(KeyMgmt.SAE);
+                config.requirePMF = true;
+                if (mPasswordView.length() != 0) {
+                    String password = mPasswordView.getText().toString();
+                    config.preSharedKey = '"' + password + '"';
+                }
+                break;
+
+            case AccessPoint.SECURITY_OWE:
+                config.allowedKeyManagement.set(KeyMgmt.OWE);
+                config.requirePMF = true;
+                break;
+
             default:
                 return null;
         }
@@ -851,7 +888,8 @@ public class WifiConfigController implements TextWatcher,
     }
 
     private void showSecurityFields() {
-        if (mAccessPointSecurity == AccessPoint.SECURITY_NONE) {
+        if (mAccessPointSecurity == AccessPoint.SECURITY_NONE ||
+                  mAccessPointSecurity == AccessPoint.SECURITY_OWE) {
             mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
             return;
         }
@@ -870,7 +908,8 @@ public class WifiConfigController implements TextWatcher,
             }
         }
 
-        if (mAccessPointSecurity != AccessPoint.SECURITY_EAP) {
+        if (mAccessPointSecurity != AccessPoint.SECURITY_EAP &&
+                mAccessPointSecurity != AccessPoint.SECURITY_EAP_SUITE_B) {
             mView.findViewById(R.id.eap).setVisibility(View.GONE);
             return;
         }
