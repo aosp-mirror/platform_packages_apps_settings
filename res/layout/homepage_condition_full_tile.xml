@@ -24,9 +24,11 @@
     <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/homepage_condition_full_card_height"
+        android:layout_height="wrap_content"
         android:paddingStart="@dimen/homepage_card_padding_start"
         android:paddingEnd="@dimen/homepage_card_padding_end"
+        android:paddingTop="@dimen/homepage_condition_full_card_padding_top"
+        android:paddingBottom="@dimen/homepage_condition_full_card_padding_bottom"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
@@ -59,13 +61,7 @@
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="@dimen/homepage_condition_full_card_divider_width"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/homepage_condition_full_card_divider_padding_top"
-            android:layout_marginBottom="@dimen/homepage_condition_full_card_divider_padding_bottom"
-            android:background="?android:attr/dividerVertical" />
+        <include layout="@layout/vertical_divider"/>
 
         <Button
             android:id="@+id/first_action"
