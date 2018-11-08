@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.deviceinfo;
+package com.android.settings.deviceinfo.aboutphone;
 
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 
@@ -35,7 +35,7 @@ import android.util.ArrayMap;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
+import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;

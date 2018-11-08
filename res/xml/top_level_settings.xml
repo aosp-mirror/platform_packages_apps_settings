@@ -125,6 +125,15 @@
         android:fragment="com.android.settings.system.SystemDashboardFragment"/>
 
     <Preference
+        android:key="top_level_about_device"
+        android:title="@string/about_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_homepage_about"
+        android:order="20"
+        android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
+        settings:controller="com.android.settings.deviceinfo.aboutphone.TopLevelAboutDevicePreferenceController"/>
+
+    <Preference
         android:key="top_level_support"
         android:summary="@string/support_summary"
         android:title="@string/page_tab_title_support"

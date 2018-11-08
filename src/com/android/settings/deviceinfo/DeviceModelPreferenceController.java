@@ -79,12 +79,7 @@ public class DeviceModelPreferenceController extends BasePreferenceController {
     }
 
     public static String getDeviceModel() {
-        FutureTask<String> msvSuffixTask = new FutureTask<String>(new Callable<String>() {
-            @Override
-            public String call() {
-                return DeviceInfoUtils.getMsvSuffix();
-            }
-        });
+        FutureTask<String> msvSuffixTask = new FutureTask<>(() -> DeviceInfoUtils.getMsvSuffix());
 
         msvSuffixTask.run();
         try {
