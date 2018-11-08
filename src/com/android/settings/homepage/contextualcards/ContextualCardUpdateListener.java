@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import androidx.annotation.MainThread;
+
 import java.util.List;
 import java.util.Map;
 
@@ -31,5 +33,6 @@ public interface ContextualCardUpdateListener {
      *              null, which means all cards from corresponding {@link
      *              ContextualCard.CardType} are removed.
      */
+    @MainThread
     void onContextualCardUpdated(Map<Integer, List<ContextualCard>> cards);
 }

@@ -134,6 +134,12 @@
          have distinct intensity levels -->
     <bool name="config_vibration_supports_multiple_intensities">false</bool>
 
+    <!--
+        Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
+        Default to true as not all devices support contextual cards.
+    -->
+    <bool name="config_use_legacy_suggestion">true</bool>
+
     <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
     <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
 
