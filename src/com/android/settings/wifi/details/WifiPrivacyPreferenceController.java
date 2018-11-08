@@ -67,7 +67,7 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (mWifiConfiguration != null) {
-            //TODO(b/117957974): update MAC randomization level to WifiManager
+            mWifiConfiguration.macRandomizationSetting = Integer.parseInt((String) newValue);
             mWifiManager.updateNetwork(mWifiConfiguration);
         }
         updateSummary((DropDownPreference) preference, Integer.parseInt((String) newValue));
@@ -77,10 +77,9 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
     @VisibleForTesting
     int getRandomizationValue() {
         if (mWifiConfiguration != null) {
-            //TODO(b/117957974): get real MAC randomization level from WifiManager
-            return 0;
+            return mWifiConfiguration.macRandomizationSetting;
         }
-        return 0;
+        return WifiConfiguration.RANDOMIZATION_PERSISTENT;
     }
 
     private void updateSummary(DropDownPreference preference, int macRandomized) {
