@@ -165,7 +165,8 @@ public class MobileNetworkUtilsTest {
     @Test
     public void isCdmaOptions_worldModeWithGsmWcdma_returnTrue() {
         when(mTelephonyManager.getPhoneType()).thenReturn(PhoneConstants.PHONE_TYPE_GSM);
-        when(mContext.getString(R.string.config_world_mode)).thenReturn("true");
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
                 TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
