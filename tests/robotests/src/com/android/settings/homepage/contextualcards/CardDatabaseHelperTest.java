@@ -18,10 +18,12 @@ package com.android.settings.homepage.contextualcards;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.android.settings.intelligence.ContextualCardProto;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -29,6 +31,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class CardDatabaseHelperTest {
@@ -79,5 +84,39 @@ public class CardDatabaseHelperTest {
 
         assertThat(columnNames).isEqualTo(expectedNames);
         cursor.close();
+    }
+
+    @Test
+    public void getContextualCards_shouldSortByScore() {
+        insertFakeCard(mDatabase, "card1", 1, "uri1");
+        insertFakeCard(mDatabase, "card2", 0, "uri2");
+        insertFakeCard(mDatabase, "card3", 10, "uri3");
+        // Should sort as 3,1,2
+        try (final Cursor cursor = CardDatabaseHelper.getInstance(mContext).getContextualCards()) {
+            assertThat(cursor.getCount()).isEqualTo(3);
+            final List<ContextualCard> cards = new ArrayList<>();
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                cards.add(new ContextualCard(cursor));
+            }
+            assertThat(cards.get(0).getName()).isEqualTo("card3");
+            assertThat(cards.get(1).getName()).isEqualTo("card1");
+            assertThat(cards.get(2).getName()).isEqualTo("card2");
+        }
+    }
+
+    private static void insertFakeCard(SQLiteDatabase db, String name, double score, String uri) {
+        final ContentValues value = new ContentValues();
+        value.put(CardDatabaseHelper.CardColumns.NAME, name);
+        value.put(CardDatabaseHelper.CardColumns.SCORE, score);
+        value.put(CardDatabaseHelper.CardColumns.SLICE_URI, uri);
+
+        value.put(CardDatabaseHelper.CardColumns.TYPE, ContextualCard.CardType.SLICE);
+        value.put(CardDatabaseHelper.CardColumns.CATEGORY,
+                ContextualCardProto.ContextualCard.Category.DEFAULT.getNumber());
+        value.put(CardDatabaseHelper.CardColumns.PACKAGE_NAME,
+                RuntimeEnvironment.application.getPackageName());
+        value.put(CardDatabaseHelper.CardColumns.APP_VERSION, 1);
+
+        db.insert(CardDatabaseHelper.CARD_TABLE, null, value);
     }
 }
