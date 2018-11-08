@@ -25,9 +25,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.search.SearchIndexableResources;
 
@@ -62,6 +64,13 @@ public interface SearchFeatureProvider {
      */
     default void initSearchToolbar(Activity activity, Toolbar toolbar) {
         if (activity == null || toolbar == null) {
+            return;
+        }
+        if (!Utils.isPackageEnabled(activity, getSettingsIntelligencePkgName())) {
+            final ViewGroup parent = (ViewGroup)toolbar.getParent();
+            if (parent != null) {
+                parent.setVisibility(View.GONE);
+            }
             return;
         }
         // Please forgive me for what I am about to do.

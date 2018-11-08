@@ -16,12 +16,14 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import android.annotation.NonNull;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.collection.ArraySet;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardController;
@@ -63,14 +65,32 @@ public class ControllerRendererPool {
         return (T) controller;
     }
 
-    public Set<ContextualCardController> getControllers() {
+    @VisibleForTesting
+    Set<ContextualCardController> getControllers() {
         return mControllers;
     }
 
-    public ContextualCardRenderer getRenderer(Context context, LifecycleOwner lifecycleOwner,
-            @ContextualCard.CardType int cardType) {
+    @VisibleForTesting
+    Set<ContextualCardRenderer> getRenderers() {
+        return mRenderers;
+    }
+
+    public ContextualCardRenderer getRendererByViewType(Context context,
+            LifecycleOwner lifecycleOwner, int viewType) {
         final Class<? extends ContextualCardRenderer> clz =
-                ContextualCardLookupTable.getCardRendererClasses(cardType);
+                ContextualCardLookupTable.getCardRendererClassByViewType(viewType);
+        return getRenderer(context, lifecycleOwner, clz);
+    }
+
+    public ContextualCardRenderer getRendererByCardType(Context context,
+            LifecycleOwner lifecycleOwner, @ContextualCard.CardType int cardType) {
+        final Class<? extends ContextualCardRenderer> clz =
+                ContextualCardLookupTable.getCardRendererClassByCardType(cardType);
+        return getRenderer(context, lifecycleOwner, clz);
+    }
+
+    private ContextualCardRenderer getRenderer(Context context, LifecycleOwner lifecycleOwner,
+            @NonNull Class<? extends ContextualCardRenderer> clz) {
         for (ContextualCardRenderer renderer : mRenderers) {
             if (renderer.getClass() == clz) {
                 Log.d(TAG, "Renderer is already there.");

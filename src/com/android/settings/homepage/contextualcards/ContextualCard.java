@@ -42,6 +42,7 @@ public class ContextualCard {
         int CONDITIONAL = 3;
     }
 
+    private final Builder mBuilder;
     private final String mName;
     @CardType
     private final int mCardType;
@@ -142,7 +143,12 @@ public class ContextualCard {
         return TextUtils.isEmpty(mSliceUri);
     }
 
+    public Builder mutate() {
+        return mBuilder;
+    }
+
     public ContextualCard(Builder builder) {
+        mBuilder = builder;
         mName = builder.mName;
         mCardType = builder.mCardType;
         mRankingScore = builder.mRankingScore;
@@ -164,28 +170,47 @@ public class ContextualCard {
     }
 
     ContextualCard(Cursor c) {
+        mBuilder = new Builder();
         mName = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.NAME));
+        mBuilder.setName(mName);
         mCardType = c.getInt(c.getColumnIndex(CardDatabaseHelper.CardColumns.TYPE));
+        mBuilder.setCardType(mCardType);
         mRankingScore = c.getDouble(c.getColumnIndex(CardDatabaseHelper.CardColumns.SCORE));
+        mBuilder.setRankingScore(mRankingScore);
         mSliceUri = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.SLICE_URI));
+        mBuilder.setSliceUri(Uri.parse(mSliceUri));
         mCategory = c.getInt(c.getColumnIndex(CardDatabaseHelper.CardColumns.CATEGORY));
+        mBuilder.setCategory(mCategory);
         mLocalizedToLocale = c.getString(
                 c.getColumnIndex(CardDatabaseHelper.CardColumns.LOCALIZED_TO_LOCALE));
+        mBuilder.setLocalizedToLocale(mLocalizedToLocale);
         mPackageName = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.PACKAGE_NAME));
+        mBuilder.setPackageName(mPackageName);
         mAppVersion = c.getLong(c.getColumnIndex(CardDatabaseHelper.CardColumns.APP_VERSION));
+        mBuilder.setAppVersion(mAppVersion);
         mTitleResName = c.getString(
                 c.getColumnIndex(CardDatabaseHelper.CardColumns.TITLE_RES_NAME));
+        mBuilder.setTitleResName(mTitleResName);
         mTitleText = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.TITLE_TEXT));
+        mBuilder.setTitleText(mTitleText);
         mSummaryResName = c.getString(
                 c.getColumnIndex(CardDatabaseHelper.CardColumns.SUMMARY_RES_NAME));
+        mBuilder.setSummaryResName(mSummaryResName);
         mSummaryText = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.SUMMARY_TEXT));
+        mBuilder.setSummaryText(mSummaryText);
         mIconResName = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.ICON_RES_NAME));
+        mBuilder.setIconResName(mIconResName);
         mIconResId = c.getInt(c.getColumnIndex(CardDatabaseHelper.CardColumns.ICON_RES_ID));
+        mBuilder.setIconResId(mIconResId);
         mCardAction = c.getInt(c.getColumnIndex(CardDatabaseHelper.CardColumns.CARD_ACTION));
+        mBuilder.setCardAction(mCardAction);
         mExpireTimeMS = c.getLong(c.getColumnIndex(CardDatabaseHelper.CardColumns.EXPIRE_TIME_MS));
+        mBuilder.setExpireTimeMS(mExpireTimeMS);
         mIsHalfWidth = (c.getInt(
                 c.getColumnIndex(CardDatabaseHelper.CardColumns.SUPPORT_HALF_WIDTH)) == 1);
+        mBuilder.setIsHalfWidth(mIsHalfWidth);
         mIconDrawable = null;
+        mBuilder.setIconDrawable(mIconDrawable);
     }
 
     @Override

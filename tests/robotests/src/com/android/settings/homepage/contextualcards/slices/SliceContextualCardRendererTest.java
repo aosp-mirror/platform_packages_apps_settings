@@ -113,7 +113,7 @@ public class SliceContextualCardRendererTest {
     }
 
     private RecyclerView.ViewHolder getSliceViewHolder() {
-        final int viewType = mRenderer.getViewType();
+        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);

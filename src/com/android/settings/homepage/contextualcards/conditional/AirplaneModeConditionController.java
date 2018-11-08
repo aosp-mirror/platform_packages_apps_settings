@@ -79,6 +79,7 @@ public class AirplaneModeConditionController implements ConditionalCardControlle
                 .setTitleText(mAppContext.getText(R.string.condition_airplane_title).toString())
                 .setSummaryText(mAppContext.getText(R.string.condition_airplane_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_airplanemode_active))
+                .setIsHalfWidth(true)
                 .build();
     }
 

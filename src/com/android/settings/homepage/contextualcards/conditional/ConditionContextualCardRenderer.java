@@ -37,6 +37,8 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  * Card renderer for {@link ConditionalContextualCard}.
  */
 public class ConditionContextualCardRenderer implements ContextualCardRenderer {
+    public static final int HALF_WIDTH_VIEW_TYPE = R.layout.homepage_condition_half_tile;
+    public static final int FULL_WIDTH_VIEW_TYPE = R.layout.homepage_condition_full_tile;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
@@ -48,8 +50,12 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
     }
 
     @Override
-    public int getViewType() {
-        return R.layout.homepage_condition_tile;
+    public int getViewType(boolean isHalfWidth) {
+        if (isHalfWidth) {
+            return HALF_WIDTH_VIEW_TYPE;
+        } else {
+            return FULL_WIDTH_VIEW_TYPE;
+        }
     }
 
     @Override
@@ -87,15 +93,12 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
         view.icon.setImageDrawable(card.getIconDrawable());
         view.title.setText(card.getTitleText());
         view.summary.setText(card.getSummaryText());
-
-        setViewVisibility(view.itemView, R.id.divider, false);
     }
 
     private void initializeActionButton(ConditionalCardHolder view, ConditionalContextualCard card,
             MetricsFeatureProvider metricsFeatureProvider) {
         final CharSequence action = card.getActionText();
         final boolean hasButtons = !TextUtils.isEmpty(action);
-        setViewVisibility(view.itemView, R.id.buttonBar, hasButtons);
 
         final Button button = view.itemView.findViewById(R.id.first_action);
         if (hasButtons) {
@@ -111,13 +114,6 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
             });
         } else {
             button.setVisibility(View.GONE);
-        }
-    }
-
-    private void setViewVisibility(View containerView, int viewId, boolean visible) {
-        View view = containerView.findViewById(viewId);
-        if (view != null) {
-            view.setVisibility(visible ? View.VISIBLE : View.GONE);
         }
     }
 

@@ -100,6 +100,7 @@ public class DndConditionCardController implements ConditionalCardController {
                 .setTitleText(mAppContext.getText(R.string.condition_zen_title).toString())
                 .setSummaryText(getSummary().toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
+                .setIsHalfWidth(true)
                 .build();
     }
 
