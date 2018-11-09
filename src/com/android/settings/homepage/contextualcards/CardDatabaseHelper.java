@@ -201,7 +201,7 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
         final String selection = CardColumns.CARD_DISMISSED + "=0";
         Cursor cursor = db.query(CARD_TABLE, null /* columns */, selection,
                 null /* selectionArgs */, null /* groupBy */, null /* having */,
-                null /* orderBy */);
+                CardColumns.SCORE + " DESC" /* orderBy */);
         return cursor;
     }
 
