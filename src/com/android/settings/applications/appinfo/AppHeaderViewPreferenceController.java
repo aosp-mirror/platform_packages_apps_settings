@@ -90,12 +90,9 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
     private void setAppLabelAndIcon(PackageInfo pkgInfo, AppEntry appEntry) {
         final Activity activity = mParent.getActivity();
         final boolean isInstantApp = AppUtils.isInstant(pkgInfo.applicationInfo);
-        final CharSequence summary = isInstantApp
-                ? null : mContext.getString(Utils.getInstallationStatus(appEntry.info));
         mEntityHeaderController
                 .setLabel(appEntry)
                 .setIcon(appEntry)
-                .setSummary(summary)
                 .setIsInstantApp(isInstantApp)
                 .done(activity, false /* rebindActions */);
     }

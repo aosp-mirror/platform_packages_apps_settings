@@ -320,8 +320,9 @@
 
     <style name="TextAppearance.EntityHeaderTitle"
            parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="TextAppearance.EntityHeaderSummary"
@@ -331,6 +332,7 @@
         <item name="android:gravity">start</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">marquee</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.ZenOnboardingButton">
@@ -397,12 +399,10 @@
     </style>
 
     <style name="EntityHeader">
-        <item name="android:background">?android:attr/colorPrimary</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingStart">16dp</item>
+        <item name="android:background">?android:attr/colorPrimaryDark</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">16dp</item>
         <item name="android:paddingEnd">16dp</item>
-        <item name="android:paddingBottom">8dp</item>
     </style>
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
