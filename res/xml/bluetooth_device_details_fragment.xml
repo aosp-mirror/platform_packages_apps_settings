@@ -16,12 +16,14 @@
   -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/device_details_title">
 
     <com.android.settings.applications.LayoutPreference
         android:key="bluetooth_device_header"
         android:layout="@layout/settings_entity_header"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:allowDividerBelow="true"/>
 
     <com.android.settings.widget.ActionButtonPreference
         android:key="action_buttons" />
