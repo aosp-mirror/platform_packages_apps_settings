@@ -83,11 +83,6 @@ public class StatsLogWriter implements LogWriter {
     }
 
     @Override
-    public void count(Context context, String name, int value) {
-        // No-op
-    }
-
-    @Override
     public void action(int attribution, int action, int pageId, String key, int value) {
         StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* atomName */,
                 attribution,
