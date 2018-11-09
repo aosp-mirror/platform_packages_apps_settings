@@ -23,6 +23,8 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Process;
 import android.os.UserHandle;
@@ -109,16 +111,24 @@ public class ActionDisabledByAdminDialogHelper {
         if (admin == null) {
             return;
         }
+        ImageView supportIconView = root.requireViewById(R.id.admin_support_icon);
         if (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
                 || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId)) {
             admin = null;
+
+            supportIconView.setImageDrawable(
+                    mActivity.getDrawable(com.android.internal.R.drawable.ic_info));
+
+            TypedArray ta = mActivity.obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
+            supportIconView.setImageTintList(ColorStateList.valueOf(ta.getColor(0, 0)));
+            ta.recycle();
         } else {
             final Drawable badgedIcon = Utils.getBadgedIcon(
                     IconDrawableFactory.newInstance(mActivity),
                     mActivity.getPackageManager(),
                     admin.getPackageName(),
                     userId);
-            ((ImageView) root.findViewById(R.id.admin_support_icon)).setImageDrawable(badgedIcon);
+            supportIconView.setImageDrawable(badgedIcon);
         }
 
         setAdminSupportTitle(root, restriction);
