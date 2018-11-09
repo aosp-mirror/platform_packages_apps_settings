@@ -18,6 +18,7 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.VisibleForTesting;
@@ -34,8 +35,10 @@ import com.android.settings.overlay.FeatureFactory;
  * in {@link SettingsHomepageActivity}.
  */
 public class AvatarViewMixin implements LifecycleObserver {
-    private Context mContext;
-    private ImageView mAvatarView;
+    private static final String TAG = "AvatarViewMixin";
+
+    private final Context mContext;
+    private final ImageView mAvatarView;
 
     public AvatarViewMixin(Context context, ImageView avatarView) {
         mContext = context.getApplicationContext();
@@ -44,6 +47,10 @@ public class AvatarViewMixin implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
+        if (!mContext.getResources().getBoolean(R.bool.config_show_avatar_in_homepage)) {
+            Log.d(TAG, "Feature disabled. Skipping");
+            return;
+        }
         if (hasAccount()) {
             //TODO(b/117509285): To migrate account icon on search bar
         } else {
