@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.android.settings.development;
 
+import static android.provider.Settings.Global.DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS;
+
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
@@ -27,30 +29,30 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class FreeformWindowsPreferenceController extends DeveloperOptionsPreferenceController
+public class DesktopModePreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
-    private static final String ENABLE_FREEFORM_SUPPORT_KEY = "enable_freeform_support";
+    private static final String FORCE_DESKTOP_MODE_KEY = "force_desktop_mode_on_external_displays";
 
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
     @VisibleForTesting
     static final int SETTING_VALUE_ON = 1;
 
-    public FreeformWindowsPreferenceController(Context context) {
+    public DesktopModePreferenceController(Context context) {
         super(context);
     }
 
     @Override
     public String getPreferenceKey() {
-        return ENABLE_FREEFORM_SUPPORT_KEY;
+        return FORCE_DESKTOP_MODE_KEY;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT,
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS,
                 isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
         return true;
     }
@@ -58,7 +60,7 @@ public class FreeformWindowsPreferenceController extends DeveloperOptionsPrefere
     @Override
     public void updateState(Preference preference) {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, SETTING_VALUE_OFF);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
@@ -66,7 +68,7 @@ public class FreeformWindowsPreferenceController extends DeveloperOptionsPrefere
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, SETTING_VALUE_OFF);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 
