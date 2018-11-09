@@ -27,15 +27,12 @@ import android.telephony.SubscriptionManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 
 import com.android.settings.R;
 
-public class ApnPreference extends Preference implements
-        CompoundButton.OnCheckedChangeListener, OnClickListener {
+public class ApnPreference extends Preference implements CompoundButton.OnCheckedChangeListener {
     final static String TAG = "ApnPreference";
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -81,11 +78,6 @@ public class ApnPreference extends Preference implements
                 rb.setVisibility(View.GONE);
             }
         }
-
-        View textLayout = view.findViewById(R.id.text_layout);
-        if ((textLayout != null) && textLayout instanceof RelativeLayout) {
-            textLayout.setOnClickListener(this);
-        }
     }
 
     public boolean isChecked() {
@@ -115,16 +107,16 @@ public class ApnPreference extends Preference implements
         }
     }
 
-    public void onClick(android.view.View v) {
-        if ((v != null) && (R.id.text_layout == v.getId())) {
-            Context context = getContext();
-            if (context != null) {
-                int pos = Integer.parseInt(getKey());
-                Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
-                Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
-                editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
-                context.startActivity(editIntent);
-            }
+    @Override
+    protected void onClick() {
+        super.onClick();
+        Context context = getContext();
+        if (context != null) {
+            int pos = Integer.parseInt(getKey());
+            Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
+            Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
+            editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
+            context.startActivity(editIntent);
         }
     }
 
