@@ -15,6 +15,8 @@
  */
 package com.android.settings.dashboard;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.DASHBOARD_CONTAINER;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.nullable;
@@ -25,6 +27,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -185,9 +188,9 @@ public class DashboardFragmentTest {
                 = mFakeFeatureFactory.getMetricsFeatureProvider();
         mTestFragment.onExpandButtonClick();
 
-        verify(metricsFeatureProvider).actionWithSource(
-                RuntimeEnvironment.application, MetricsEvent.DASHBOARD_CONTAINER,
-                MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND);
+        verify(metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND,
+                DASHBOARD_CONTAINER, null, 0);
     }
 
     public static class TestPreferenceController extends AbstractPreferenceController
@@ -243,7 +246,7 @@ public class DashboardFragmentTest {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DASHBOARD_CONTAINER;
+            return DASHBOARD_CONTAINER;
         }
 
         @Override
