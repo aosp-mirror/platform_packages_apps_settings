@@ -16,12 +16,16 @@
 
 package com.android.settings.gestures;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -38,7 +42,7 @@ public class WakeScreenGestureSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_GESTURE_WAKE_SCREEN;
+        return MetricsProto.MetricsEvent.SETTINGS_GESTURE_WAKE_SCREEN;
     }
 
     @Override

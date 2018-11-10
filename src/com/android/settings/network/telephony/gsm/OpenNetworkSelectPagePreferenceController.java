@@ -16,7 +16,6 @@
 
 package com.android.settings.network.telephony.gsm;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -28,6 +27,7 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
@@ -88,7 +88,7 @@ public class OpenNetworkSelectPagePreferenceController extends BasePreferenceCon
             bundle.putInt(Settings.EXTRA_SUB_ID, mSubId);
             new SubSettingLauncher(mContext)
                     .setDestination(NetworkSelectSettings.class.getName())
-                    .setSourceMetricsCategory(SettingsEnums.MOBILE_NETWORK_SELECT)
+                    .setSourceMetricsCategory(MetricsProto.MetricsEvent.MOBILE_NETWORK_SELECT)
                     .setTitleRes(R.string.choose_network_title)
                     .setArguments(bundle)
                     .launch();
