@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony;
 
 import android.app.Activity;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +31,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -75,7 +75,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.MOBILE_NETWORK;
+        return MetricsProto.MetricsEvent.MOBILE_NETWORK;
     }
 
     /**

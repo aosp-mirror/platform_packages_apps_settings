@@ -15,8 +15,9 @@
  */
 package com.android.settings.network.telephony;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.MOBILE_NETWORK_SELECT;
+
 import android.app.Activity;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -202,7 +203,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.MOBILE_NETWORK_SELECT;
+        return MOBILE_NETWORK_SELECT;
     }
 
     private final Handler mHandler = new Handler() {
