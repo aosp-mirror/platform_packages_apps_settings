@@ -50,6 +50,9 @@ public class BiometricFragment extends InstrumentedFragment {
     private Executor mClientExecutor;
     private AuthenticationCallback mClientCallback;
 
+    // Re-settable by the application.
+    private int mUserId;
+
     // Created/Initialized once and retained
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private PromptInfo mPromptInfo;
@@ -96,6 +99,10 @@ public class BiometricFragment extends InstrumentedFragment {
         mClientCallback = callback;
     }
 
+    public void setUser(int userId) {
+        mUserId = userId;
+    }
+
     public void cancel() {
         if (mCancellationSignal != null) {
             mCancellationSignal.cancel();
@@ -126,8 +133,8 @@ public class BiometricFragment extends InstrumentedFragment {
         mCancellationSignal = new CancellationSignal();
 
         // TODO: CC doesn't use crypto for now
-        mBiometricPrompt.authenticate(mCancellationSignal, mClientExecutor,
-                mAuthenticationCallback);
+        mBiometricPrompt.authenticateUser(mCancellationSignal, mClientExecutor,
+                mAuthenticationCallback, mUserId);
     }
 
     @Override

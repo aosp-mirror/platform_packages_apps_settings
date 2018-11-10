@@ -18,17 +18,12 @@
 package com.android.settings.password;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
-import android.app.ActivityOptions;
 import android.app.Dialog;
-import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
-import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.UserInfo;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
@@ -36,7 +31,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RemoteException;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -199,29 +193,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     public void startEnterAnimation() {
     }
 
-    protected void checkForPendingIntent() {
-        int taskId = getActivity().getIntent().getIntExtra(Intent.EXTRA_TASK_ID, -1);
-        if (taskId != -1) {
-            try {
-                IActivityManager activityManager = ActivityManager.getService();
-                final ActivityOptions options = ActivityOptions.makeBasic();
-                activityManager.startActivityFromRecents(taskId, options.toBundle());
-                return;
-            } catch (RemoteException e) {
-                // Do nothing.
-            }
-        }
-        IntentSender intentSender = getActivity().getIntent()
-                .getParcelableExtra(Intent.EXTRA_INTENT);
-        if (intentSender != null) {
-            try {
-                getActivity().startIntentSenderForResult(intentSender, -1, null, 0, 0, 0);
-            } catch (IntentSender.SendIntentException e) {
-                /* ignore */
-            }
-        }
-    }
-
     private void setWorkChallengeBackground(View baseView, int userId) {
         View mainContent = getActivity().findViewById(com.android.settings.R.id.main_content);
         if (mainContent != null) {
@@ -243,15 +214,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             imageView.setLayoutParams(new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     screenSize.y));
-        }
-    }
-
-    protected void reportSuccessfulAttempt() {
-        mLockPatternUtils.reportSuccessfulPasswordAttempt(mEffectiveUserId);
-        if (mUserManager.isManagedProfile(mEffectiveUserId)) {
-            // Keyguard is responsible to disable StrongAuth for primary user. Disable StrongAuth
-            // for work challenge only here.
-            mLockPatternUtils.userPresent(mEffectiveUserId);
         }
     }
 
