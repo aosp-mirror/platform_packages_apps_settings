@@ -235,10 +235,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setLabel(mAppEntry);
             controller.setIcon(mAppEntry);
             boolean isInstantApp = AppUtils.isInstant(mAppEntry.info);
-            CharSequence summary = isInstantApp
-                    ? null : getString(Utils.getInstallationStatus(mAppEntry.info));
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
-            controller.setSummary(summary);
         }
 
         controller.done(context, true /* rebindActions */);

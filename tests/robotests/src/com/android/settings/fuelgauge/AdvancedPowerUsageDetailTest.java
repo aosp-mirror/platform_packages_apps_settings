@@ -258,7 +258,6 @@ public class AdvancedPowerUsageDetailTest {
         verify(mEntityHeaderController).setIcon(mAppEntry);
         verify(mEntityHeaderController).setLabel(mAppEntry);
         verify(mEntityHeaderController).setIsInstantApp(true);
-        verify(mEntityHeaderController).setSummary((CharSequence) null);
     }
 
     @Test

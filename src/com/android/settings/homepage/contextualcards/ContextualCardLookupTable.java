@@ -18,11 +18,16 @@ package com.android.settings.homepage.contextualcards;
 
 import android.util.Log;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.homepage.contextualcards.ContextualCard.CardType;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.legacysuggestion
+        .LegacySuggestionContextualCardController;
+import com.android.settings.homepage.contextualcards.legacysuggestion
+        .LegacySuggestionContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardController;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
@@ -34,6 +39,7 @@ import java.util.stream.Collectors;
 
 public class ContextualCardLookupTable {
     private static final String TAG = "ContextualCardLookup";
+
     static class ControllerRendererMapping implements Comparable<ControllerRendererMapping> {
         @CardType
         final int mCardType;
@@ -41,7 +47,7 @@ public class ContextualCardLookupTable {
         final Class<? extends ContextualCardController> mControllerClass;
         final Class<? extends ContextualCardRenderer> mRendererClass;
 
-        ControllerRendererMapping(@CardType int cardType, int viewType,
+        ControllerRendererMapping(@CardType int cardType, @LayoutRes int viewType,
                 Class<? extends ContextualCardController> controllerClass,
                 Class<? extends ContextualCardRenderer> rendererClass) {
             mCardType = cardType;
@@ -69,6 +75,10 @@ public class ContextualCardLookupTable {
                         ConditionContextualCardRenderer.FULL_WIDTH_VIEW_TYPE,
                         ConditionContextualCardController.class,
                         ConditionContextualCardRenderer.class));
+                add(new ControllerRendererMapping(CardType.LEGACY_SUGGESTION,
+                        LegacySuggestionContextualCardRenderer.VIEW_TYPE,
+                        LegacySuggestionContextualCardController.class,
+                        LegacySuggestionContextualCardRenderer.class));
                 add(new ControllerRendererMapping(CardType.SLICE,
                         SliceContextualCardRenderer.VIEW_TYPE,
                         SliceContextualCardController.class,

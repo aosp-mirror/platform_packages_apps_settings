@@ -16,60 +16,58 @@
   -->
 
 <!-- Entity header -->
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/entity_header"
     style="@style/EntityHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/preference_no_icon_padding_start"
-    android:paddingTop="24dp"
-    android:paddingBottom="32dp"
     android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/entity_header_content"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackground"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/entity_header_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
             android:scaleType="fitXY"
-            android:antialias="true" />
+            android:antialias="true"/>
 
         <TextView
             android:id="@+id/entity_header_title"
             style="@style/TextAppearance.EntityHeaderTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="false"
             android:ellipsize="marquee"
-            android:gravity="start"
-            android:textDirection="locale" />
+            android:textDirection="locale"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/install_type"
             style="@style/TextAppearance.EntityHeaderSummary"
             android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"/>
 
         <TextView
             android:id="@+id/entity_header_summary"
             style="@style/TextAppearance.EntityHeaderSummary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"/>
 
         <TextView
             android:id="@+id/entity_header_second_summary"
             style="@style/TextAppearance.EntityHeaderSummary"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
@@ -78,6 +76,8 @@
         android:id="@+id/entity_header_links"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
         android:orientation="vertical">
 
         <ImageButton
@@ -102,4 +102,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

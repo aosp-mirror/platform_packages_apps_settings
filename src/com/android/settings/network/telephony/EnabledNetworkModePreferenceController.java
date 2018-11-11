@@ -180,7 +180,7 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
                 preference.setEntryValues(
                         R.array.enabled_networks_tdscdma_values);
             } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)
-                    && !resources.getBoolean(R.bool.config_enabled_lte)) {
+                    && !carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL)) {
                 preference.setEntries(R.array.enabled_networks_except_gsm_lte_choices);
                 preference.setEntryValues(R.array.enabled_networks_except_gsm_lte_values);
             } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)) {
@@ -190,7 +190,7 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
                 preference.setEntries(select);
                 preference.setEntryValues(
                         R.array.enabled_networks_except_gsm_values);
-            } else if (!resources.getBoolean(R.bool.config_enabled_lte)) {
+            } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL)) {
                 preference.setEntries(
                         R.array.enabled_networks_except_lte_choices);
                 preference.setEntryValues(

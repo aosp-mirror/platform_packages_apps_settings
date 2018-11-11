@@ -26,6 +26,10 @@ import androidx.lifecycle.LifecycleOwner;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.legacysuggestion
+        .LegacySuggestionContextualCardController;
+import com.android.settings.homepage.contextualcards.legacysuggestion
+        .LegacySuggestionContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardController;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
@@ -111,6 +115,8 @@ public class ControllerRendererPool {
             return new ConditionContextualCardController(context);
         } else if (SliceContextualCardController.class == clz) {
             return new SliceContextualCardController();
+        } else if (LegacySuggestionContextualCardController.class == clz) {
+            return new LegacySuggestionContextualCardController(context);
         }
         return null;
     }
@@ -118,9 +124,12 @@ public class ControllerRendererPool {
     private ContextualCardRenderer createCardRenderer(Context context,
             LifecycleOwner lifecycleOwner, Class<?> clz) {
         if (ConditionContextualCardRenderer.class == clz) {
-            return new ConditionContextualCardRenderer(context, this /*controllerRendererPool*/);
+            return new ConditionContextualCardRenderer(context, this /* controllerRendererPool */);
         } else if (SliceContextualCardRenderer.class == clz) {
             return new SliceContextualCardRenderer(context, lifecycleOwner);
+        } else if (LegacySuggestionContextualCardRenderer.class == clz) {
+            return new LegacySuggestionContextualCardRenderer(context,
+                    this /* controllerRendererPool */);
         }
         return null;
     }

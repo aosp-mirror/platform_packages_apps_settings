@@ -30,7 +30,7 @@ public class ConditionalContextualCardTest {
     @Test(expected = IllegalArgumentException.class)
     public void newInstance_changeCardType_shouldCrash() {
         new ConditionalContextualCard.Builder()
-                .setCardType(ContextualCard.CardType.SUGGESTION)
+                .setCardType(ContextualCard.CardType.LEGACY_SUGGESTION)
                 .build();
     }
 

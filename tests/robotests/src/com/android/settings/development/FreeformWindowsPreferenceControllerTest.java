@@ -19,7 +19,6 @@ package com.android.settings.development;
 import static com.android.settings.development.FreeformWindowsPreferenceController
         .SETTING_VALUE_OFF;
 import static com.android.settings.development.FreeformWindowsPreferenceController.SETTING_VALUE_ON;
-import static com.android.settings.development.FreeformWindowsPreferenceController.USER_BUILD_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -47,6 +46,7 @@ import org.robolectric.RuntimeEnvironment;
 public class FreeformWindowsPreferenceControllerTest {
 
     private static final String ENG_BUILD_TYPE = "eng";
+    private static final String USER_BUILD_TYPE = "user";
 
     @Mock
     private SwitchPreference mPreference;
@@ -74,11 +74,11 @@ public class FreeformWindowsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvaiable_userBuild_shouldBeFalse() {
+    public void isAvaiable_userBuild_shouldBeTrue() {
         mController = spy(mController);
         doReturn(USER_BUILD_TYPE).when(mController).getBuildType();
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test

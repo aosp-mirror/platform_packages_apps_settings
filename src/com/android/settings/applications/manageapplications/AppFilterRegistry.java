@@ -19,7 +19,6 @@ package com.android.settings.applications.manageapplications;
 import androidx.annotation.IntDef;
 
 import com.android.settings.R;
-import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
@@ -70,7 +69,6 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_WITH_OVERLAY = 11;
     public static final int FILTER_APPS_WRITE_SETTINGS = 12;
     public static final int FILTER_APPS_INSTALL_SOURCES = 13;
-    public static final int FILTER_APP_HAS_DIRECTORY_ACCESS = 14;
     public static final int FILTER_APP_CAN_CHANGE_WIFI_STATE = 15;
     public static final int FILTER_APPS_BLOCKED = 16;
     // Next id: 17
@@ -170,12 +168,6 @@ public class AppFilterRegistry {
                 FILTER_APPS_INSTALL_SOURCES,
                 R.string.filter_install_sources_apps);
 
-        // Apps that interacted with directory access permissions (A.K.A. Scoped Directory Access)
-        mFilters[FILTER_APP_HAS_DIRECTORY_ACCESS] = new AppFilterItem(
-                AppStateDirectoryAccessBridge.FILTER_APP_HAS_DIRECTORY_ACCESS,
-                FILTER_APP_HAS_DIRECTORY_ACCESS,
-                R.string.filter_install_sources_apps);
-
         mFilters[FILTER_APP_CAN_CHANGE_WIFI_STATE] = new AppFilterItem(
                 AppStateChangeWifiStateBridge.FILTER_CHANGE_WIFI_STATE,
                 FILTER_APP_CAN_CHANGE_WIFI_STATE,
@@ -208,8 +200,6 @@ public class AppFilterRegistry {
                 return FILTER_APPS_WRITE_SETTINGS;
             case ManageApplications.LIST_TYPE_MANAGE_SOURCES:
                 return FILTER_APPS_INSTALL_SOURCES;
-            case ManageApplications.LIST_TYPE_DIRECTORY_ACCESS:
-                return FILTER_APP_HAS_DIRECTORY_ACCESS;
             case ManageApplications.LIST_TYPE_WIFI_ACCESS:
                 return FILTER_APP_CAN_CHANGE_WIFI_STATE;
             case ManageApplications.LIST_TYPE_NOTIFICATION:

@@ -422,6 +422,10 @@
         <Preference android:key="angle_enabled_app"
             android:title="@string/angle_enabled_app" />
 
+        <Preference android:key="updated_gfx_driver_dev_opt_in_app"
+            android:summary="@string/updated_gfx_driver_dev_opt_in_app_summary"
+            android:title="@string/updated_gfx_driver_dev_opt_in_app" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -509,6 +513,11 @@
             android:key="enable_freeform_support"
             android:title="@string/enable_freeform_support"
             android:summary="@string/enable_freeform_support_summary" />
+
+        <SwitchPreference
+            android:key="force_desktop_mode_on_external_displays"
+            android:title="@string/force_desktop_mode"
+            android:summary="@string/force_desktop_mode_summary" />
 
         <Preference
             android:key="reset_shortcut_manager_throttling"

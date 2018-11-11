@@ -18,6 +18,7 @@ package com.android.settings.homepage.contextualcards;
 
 import android.view.View;
 
+import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -28,6 +29,7 @@ public interface ContextualCardRenderer {
     /**
      * The layout type of the renderer.
      */
+    @LayoutRes
     int getViewType(boolean isHalfWidth);
 
     /**

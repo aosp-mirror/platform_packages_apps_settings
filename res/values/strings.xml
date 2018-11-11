@@ -678,7 +678,7 @@
     <!-- check box to allow data usage when roaming [CHAR LIMIT=41] -->
     <string name="allow_data_usage_title">Allow data usage when roaming</string>
     <!-- mobile network settings screen, setting check box title -->
-    <string name="roaming">Data roaming</string>
+    <string name="roaming">Roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is selected -->
     <string name="roaming_enable">Connect to data services when roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is clear -->
@@ -9964,14 +9964,12 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- Title for Directory Access settings -->
-    <string name="directory_access">Directory access</string>
-    <!-- Keywords for Directory Access settings -->
-    <string name="keywords_directory_access">directory access</string>
-
-    <!-- String used to describe the name of a directory in a volume; it must
-         show both names, with the directory name wrapped in parenthesis -->
-    <string name="directory_on_volume"><xliff:g id="volume" example="SD Card">%1$s</xliff:g> (<xliff:g id="directory" example="Movies">%2$s</xliff:g>)</string>
+    <!-- UI debug setting: select an app to use updated graphics driver [CHAR LIMIT=100] -->
+    <string name="updated_gfx_driver_dev_opt_in_app">Select app to use updated graphics driver</string>
+    <!-- UI debug setting: no app selected to use updated GPU driver [CHAR LIMIT=100] -->
+    <string name="updated_gfx_driver_dev_opt_in_app_not_set">No selected app to use updated graphics driver</string>
+    <!-- UI debug setting: app selected to use updated graphics driver [CHAR LIMIT=NONE] -->
+    <string name="updated_gfx_driver_dev_opt_in_app_set">Opt in application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
     <!-- Slices Strings -->
 
@@ -10009,11 +10007,6 @@
     <string name="my_device_info_account_preference_title">Account</string>
     <!-- Title for preference showing the name of the device. [CHAR LIMIT=60]-->
     <string name="my_device_info_device_name_preference_title">Device name</string>
-
-    <!-- Settings item title for automatic Bluetooth on while driving preference [CHAR LIMIT=35] -->
-    <string name="bluetooth_on_while_driving_pref">Use Bluetooth when driving</string>
-    <!-- Settings item summary for automatic Bluetooth on while driving preference [CHAR LIMIT=100] -->
-    <string name="bluetooth_on_while_driving_summary">Turn on Bluetooth automatically when driving</string>
 
     <!-- Title for Wifi Access settings [CHAR LIMIT=35] -->
     <string name="change_wifi_state_title">Wi-Fi control</string>
@@ -10187,9 +10180,6 @@
     <!-- Text for Network global [CHAR LIMIT=NONE] -->
     <string name="network_global">Global</string>
 
-    <!-- Configuration setting for world mode Format is <true;GID if any to be checked> [CHAR LIMIT=NONE] -->
-    <string translatable="false" name="config_world_mode"/>
-
     <!-- Available networks screen title/heading [CHAR LIMIT=NONE] -->
     <string name="label_available">Available networks</string>
     <!-- Mobile network settings screen, toast when searching for available networks [CHAR LIMIT=NONE] -->
@@ -10260,6 +10250,8 @@
     <string name="mobile_data_usage_title">App data usage</string>
     <!-- Summary to show the current network mode is invalid. [CHAR LIMIT=NONE]-->
     <string name="mobile_network_mode_error">Invalid Network Mode <xliff:g id="networkModeId" example="0">%1$d</xliff:g>. Ignore.</string>
+    <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
+    <string name="mobile_network_apn_title">Access Point Names</string>
 
     <!-- Available networks screen, summary when button disallowed due to permanent automatic mode [CHAR LIMIT=NONE] -->
     <string name="manual_mode_disallowed_summary">Unavailable when connected to <xliff:g id="carrier" example="verizon">%1$s</xliff:g></string>
@@ -10281,4 +10273,9 @@
     </plurals>
     <!-- Title for no connected devices in connected device slice. [CHAR LIMIT=NONE] -->
     <string name="no_connected_devices">No connected devices</string>
+
+    <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
+    <string name="force_desktop_mode">Force desktop mode</string>
+    <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=150] -->
+    <string name="force_desktop_mode_summary">Force experimental desktop mode on secondary displays</string>
 </resources>

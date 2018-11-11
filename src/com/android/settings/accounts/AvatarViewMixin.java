@@ -17,35 +17,81 @@
 package com.android.settings.accounts;
 
 import android.accounts.Account;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.settings.R;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.utils.ThreadUtils;
+
+import java.util.List;
 
 /**
  * Avatar related work to the onStart method of registered observable classes
  * in {@link SettingsHomepageActivity}.
  */
 public class AvatarViewMixin implements LifecycleObserver {
-    private Context mContext;
-    private ImageView mAvatarView;
+    private static final String TAG = "AvatarViewMixin";
 
-    public AvatarViewMixin(Context context, ImageView avatarView) {
-        mContext = context.getApplicationContext();
+    @VisibleForTesting
+    static final Intent INTENT_GET_ACCOUNT_DATA =
+            new Intent("android.content.action.SETTINGS_ACCOUNT_DATA");
+
+    private static final String METHOD_GET_ACCOUNT_AVATAR = "getAccountAvatar";
+    private static final String KEY_AVATAR_BITMAP = "account_avatar";
+    private static final int REQUEST_CODE = 1013;
+
+    private final Context mContext;
+    private final ImageView mAvatarView;
+    private final MutableLiveData<Bitmap> mAvatarImage;
+
+    public AvatarViewMixin(SettingsHomepageActivity activity, ImageView avatarView) {
+        mContext = activity.getApplicationContext();
         mAvatarView = avatarView;
+        mAvatarView.setOnClickListener(v -> {
+            if (hasAccount()) {
+                //TODO(b/117509285) launch the new page of the MeCard
+            } else {
+                final Intent intent = FeatureFactory.getFactory(mContext)
+                        .getAccountFeatureProvider()
+                        .getAccountSettingsDeeplinkIntent();
+
+                if (intent != null) {
+                    activity.startActivityForResult(intent, REQUEST_CODE);
+                }
+            }
+        });
+
+        mAvatarImage = new MutableLiveData<>();
+        mAvatarImage.observe(activity, bitmap -> {
+            avatarView.setImageBitmap(bitmap);
+        });
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
+        if (!mContext.getResources().getBoolean(R.bool.config_show_avatar_in_homepage)) {
+            Log.d(TAG, "Feature disabled. Skipping");
+            return;
+        }
         if (hasAccount()) {
-            //TODO(b/117509285): To migrate account icon on search bar
+            loadAvatar();
         } else {
             mAvatarView.setImageResource(R.drawable.ic_account_circle_24dp);
         }
@@ -56,5 +102,35 @@ public class AvatarViewMixin implements LifecycleObserver {
         final Account accounts[] = FeatureFactory.getFactory(
                 mContext).getAccountFeatureProvider().getAccounts(mContext);
         return (accounts != null) && (accounts.length > 0);
+    }
+
+    private void loadAvatar() {
+        final String authority = queryProviderAuthority();
+        if (TextUtils.isEmpty(authority)) {
+            return;
+        }
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final Uri uri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(authority)
+                    .build();
+            final Bundle bundle = mContext.getContentResolver().call(uri,
+                    METHOD_GET_ACCOUNT_AVATAR, null /* arg */, null /* extras */);
+            final Bitmap bitmap = bundle.getParcelable(KEY_AVATAR_BITMAP);
+            mAvatarImage.postValue(bitmap);
+        });
+    }
+
+    @VisibleForTesting
+    String queryProviderAuthority() {
+        final List<ResolveInfo> providers =
+                mContext.getPackageManager().queryIntentContentProviders(INTENT_GET_ACCOUNT_DATA,
+                        PackageManager.MATCH_SYSTEM_ONLY);
+        if (providers.size() == 1) {
+            return providers.get(0).providerInfo.authority;
+        } else {
+            Log.w(TAG, "The size of the provider is " + providers.size());
+            return null;
+        }
     }
 }

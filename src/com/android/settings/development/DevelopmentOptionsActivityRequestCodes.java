@@ -27,4 +27,6 @@ public interface DevelopmentOptionsActivityRequestCodes {
     int REQUEST_MOCK_LOCATION_APP = 2;
 
     int REQUEST_CODE_ANGLE_ENABLED_APP = 3;
+
+    int REQUEST_CODE_UPDATED_GFX_DRIVER_DEV_OPT_IN_APP = 4;
 }
