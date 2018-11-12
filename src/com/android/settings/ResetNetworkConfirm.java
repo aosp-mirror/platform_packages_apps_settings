@@ -26,6 +26,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RecoverySystem;
@@ -129,6 +130,8 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 wifiManager.factoryReset();
             }
 
+            p2pFactoryReset(context);
+
             TelephonyManager telephonyManager = (TelephonyManager)
                     context.getSystemService(Context.TELEPHONY_SERVICE);
             if (telephonyManager != null) {
@@ -177,6 +180,20 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         } else {
             Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                     .show();
+        }
+    }
+
+    @VisibleForTesting
+    void p2pFactoryReset(Context context) {
+        WifiP2pManager wifiP2pManager = (WifiP2pManager)
+                context.getSystemService(Context.WIFI_P2P_SERVICE);
+        if (wifiP2pManager != null) {
+            WifiP2pManager.Channel channel = wifiP2pManager.initialize(
+                    context.getApplicationContext(), context.getMainLooper(),
+                    null /* listener */);
+            if (channel != null) {
+                wifiP2pManager.factoryReset(channel, null /* listener */);
+            }
         }
     }
 
