@@ -33,6 +33,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
 import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
+import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
+import com.android.settings.wifi.WifiSlice;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -40,8 +42,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
-    private static final String TAG = "ContextualCardLoader";
+
+    @VisibleForTesting
+    static final int DEFAULT_CARD_COUNT = 4;
     static final int CARD_CONTENT_LOADER_ID = 1;
+
+    private static final String TAG = "ContextualCardLoader";
 
     private Context mContext;
 
@@ -77,7 +83,30 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                 }
             }
         }
-        return filterEligibleCards(result);
+        return getFinalDisplayableCards(result);
+    }
+
+    @VisibleForTesting
+    List<ContextualCard> getFinalDisplayableCards(List<ContextualCard> candidates) {
+        List<ContextualCard> eligibleCards = filterEligibleCards(candidates);
+        eligibleCards = eligibleCards.stream().limit(DEFAULT_CARD_COUNT).collect(
+                Collectors.toList());
+
+        if (eligibleCards.size() <= 2 || getNumberOfLargeCard(eligibleCards) == 0) {
+            return eligibleCards;
+        }
+
+        if (eligibleCards.size() == DEFAULT_CARD_COUNT) {
+            eligibleCards.remove(eligibleCards.size() - 1);
+        }
+
+        if (getNumberOfLargeCard(eligibleCards) == 1) {
+            return eligibleCards;
+        }
+
+        eligibleCards.remove(eligibleCards.size() - 1);
+
+        return eligibleCards;
     }
 
     @VisibleForTesting
@@ -137,6 +166,13 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         }
 
         return true;
+    }
+
+    private int getNumberOfLargeCard(List<ContextualCard> cards) {
+        return (int) cards.stream()
+                .filter(card -> card.getSliceUri().equals(WifiSlice.WIFI_URI)
+                        || card.getSliceUri().equals(ConnectedDeviceSlice.CONNECTED_DEVICE_URI))
+                .count();
     }
 
     private long getAppVersionCode() {
