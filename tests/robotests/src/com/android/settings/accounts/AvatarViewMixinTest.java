@@ -40,6 +40,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -99,7 +100,11 @@ public class AvatarViewMixinTest {
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
+    @Config(qualifiers = "mcc999",
+            shadows = {
+                    BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
+                    BatteryFixSliceTest.ShadowBatteryTipLoader.class
+            })
     public void onStart_useMockAvatarViewMixin_shouldBeExecuted() {
         final AvatarViewMixin mockAvatar = spy(new AvatarViewMixin(mActivity, mImageView));
 
