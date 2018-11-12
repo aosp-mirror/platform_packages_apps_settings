@@ -35,7 +35,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -103,7 +103,7 @@ public class SubSettingLauncherTest {
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(SubSettingLauncherTest.class.getName());
         assertThat(intent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
-        assertThat(intent.getIntExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY, -1))
+        assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(123);
     }
 
