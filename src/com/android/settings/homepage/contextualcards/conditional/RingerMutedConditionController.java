@@ -16,12 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
-
-import android.app.NotificationManager;
 import android.content.Context;
 import android.media.AudioManager;
-import android.provider.Settings;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -32,14 +28,11 @@ import java.util.Objects;
 public class RingerMutedConditionController extends AbnormalRingerConditionController {
     static final int ID = Objects.hash("RingerMutedConditionController");
 
-    private final NotificationManager mNotificationManager;
     private final Context mAppContext;
 
     public RingerMutedConditionController(Context appContext, ConditionManager conditionManager) {
         super(appContext, conditionManager);
         mAppContext = appContext;
-        mNotificationManager =
-                (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
     }
 
     @Override
@@ -49,14 +42,7 @@ public class RingerMutedConditionController extends AbnormalRingerConditionContr
 
     @Override
     public boolean isDisplayable() {
-        int zen = Settings.Global.ZEN_MODE_OFF;
-        if (mNotificationManager != null) {
-            zen = mNotificationManager.getZenMode();
-        }
-        final boolean zenModeEnabled = zen != Settings.Global.ZEN_MODE_OFF;
-        final boolean isSilent =
-                mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
-        return isSilent && !zenModeEnabled;
+        return mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
     }
 
     @Override
