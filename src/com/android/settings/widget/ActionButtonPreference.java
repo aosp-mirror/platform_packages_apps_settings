@@ -17,11 +17,15 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -30,6 +34,7 @@ import com.android.settings.R;
 
 public class ActionButtonPreference extends Preference {
 
+    private final String TAG = "ActionButtonPreference";
     private final ButtonInfo mButton1Info = new ButtonInfo();
     private final ButtonInfo mButton2Info = new ButtonInfo();
 
@@ -62,12 +67,11 @@ public class ActionButtonPreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        holder.setDividerAllowedAbove(false);
-        holder.setDividerAllowedBelow(false);
-        mButton1Info.mPositiveButton = (Button) holder.findViewById(R.id.button1_positive);
-        mButton1Info.mNegativeButton = (Button) holder.findViewById(R.id.button1_negative);
-        mButton2Info.mPositiveButton = (Button) holder.findViewById(R.id.button2_positive);
-        mButton2Info.mNegativeButton = (Button) holder.findViewById(R.id.button2_negative);
+        holder.setDividerAllowedAbove(true);
+        holder.setDividerAllowedBelow(true);
+
+        mButton1Info.mButton = (Button) holder.findViewById(R.id.button1);
+        mButton2Info.mButton = (Button) holder.findViewById(R.id.button2);
 
         mButton1Info.setUpButton();
         mButton2Info.setUpButton();
@@ -78,6 +82,22 @@ public class ActionButtonPreference extends Preference {
         if (!TextUtils.equals(newText, mButton1Info.mText)) {
             mButton1Info.mText = newText;
             notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton1Icon(@DrawableRes int iconResId) {
+        if (iconResId == 0) {
+            return this;
+        }
+
+        final Drawable icon;
+        try {
+            icon = getContext().getDrawable(iconResId);
+            mButton1Info.mIcon = icon;
+            notifyChanged();
+        } catch (Resources.NotFoundException exception) {
+            Log.e(TAG, "Resource does not exist: " + iconResId);
         }
         return this;
     }
@@ -95,6 +115,22 @@ public class ActionButtonPreference extends Preference {
         if (!TextUtils.equals(newText, mButton2Info.mText)) {
             mButton2Info.mText = newText;
             notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton2Icon(@DrawableRes int iconResId) {
+        if (iconResId == 0) {
+            return this;
+        }
+
+        final Drawable icon;
+        try {
+            icon = getContext().getDrawable(iconResId);
+            mButton2Info.mIcon = icon;
+            notifyChanged();
+        } catch (Resources.NotFoundException exception) {
+            Log.e(TAG, "Resource does not exist: " + iconResId);
         }
         return this;
     }
@@ -123,65 +159,51 @@ public class ActionButtonPreference extends Preference {
         return this;
     }
 
+    @Deprecated
     public ActionButtonPreference setButton1Positive(boolean isPositive) {
-        if (isPositive != mButton1Info.mIsPositive) {
-            mButton1Info.mIsPositive = isPositive;
-            notifyChanged();
-        }
         return this;
     }
 
+    @Deprecated
     public ActionButtonPreference setButton2Positive(boolean isPositive) {
-        if (isPositive != mButton2Info.mIsPositive) {
-            mButton2Info.mIsPositive = isPositive;
-            notifyChanged();
-        }
         return this;
     }
-    public ActionButtonPreference setButton1Visible(boolean isPositive) {
-        if (isPositive != mButton1Info.mIsVisible) {
-            mButton1Info.mIsVisible = isPositive;
+
+    public ActionButtonPreference setButton1Visible(boolean isVisible) {
+        if (isVisible != mButton1Info.mIsVisible) {
+            mButton1Info.mIsVisible = isVisible;
             notifyChanged();
         }
         return this;
     }
 
-    public ActionButtonPreference setButton2Visible(boolean isPositive) {
-        if (isPositive != mButton2Info.mIsVisible) {
-            mButton2Info.mIsVisible = isPositive;
+    public ActionButtonPreference setButton2Visible(boolean isVisible) {
+        if (isVisible != mButton2Info.mIsVisible) {
+            mButton2Info.mIsVisible = isVisible;
             notifyChanged();
         }
         return this;
     }
 
     static class ButtonInfo {
-        private Button mPositiveButton;
-        private Button mNegativeButton;
+        private Button mButton;
         private CharSequence mText;
+        private Drawable mIcon;
         private View.OnClickListener mListener;
-        private boolean mIsPositive = true;
         private boolean mIsEnabled = true;
         private boolean mIsVisible = true;
 
         void setUpButton() {
-            setUpButton(mPositiveButton);
-            setUpButton(mNegativeButton);
-            if (!mIsVisible) {
-                mPositiveButton.setVisibility(View.INVISIBLE);
-                mNegativeButton.setVisibility(View.INVISIBLE);
-            } else if (mIsPositive) {
-                mPositiveButton.setVisibility(View.VISIBLE);
-                mNegativeButton.setVisibility(View.INVISIBLE);
+            mButton.setText(mText);
+            mButton.setOnClickListener(mListener);
+            mButton.setEnabled(mIsEnabled);
+            mButton.setCompoundDrawablesWithIntrinsicBounds(
+                    null /* left */, mIcon /* top */, null /* right */, null /* bottom */);
+            if (mIsVisible) {
+                mButton.setVisibility(View.VISIBLE);
             } else {
-                mPositiveButton.setVisibility(View.INVISIBLE);
-                mNegativeButton.setVisibility(View.VISIBLE);
+                mButton.setVisibility(View.GONE);
             }
-        }
-
-        private void setUpButton(Button button) {
-            button.setText(mText);
-            button.setOnClickListener(mListener);
-            button.setEnabled(mIsEnabled);
         }
     }
 }

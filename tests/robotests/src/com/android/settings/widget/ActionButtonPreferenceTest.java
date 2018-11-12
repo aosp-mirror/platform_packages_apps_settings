@@ -25,6 +25,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Button;
 
@@ -59,41 +60,17 @@ public class ActionButtonPreferenceTest {
         mPref.setButton1Visible(false).setButton2Visible(false);
         mPref.onBindViewHolder(mHolder);
 
-        assertThat(mRootView.findViewById(R.id.button1_positive).getVisibility())
-                .isEqualTo(View.INVISIBLE);
-        assertThat(mRootView.findViewById(R.id.button1_negative).getVisibility())
-                .isEqualTo(View.INVISIBLE);
-
-        assertThat(mRootView.findViewById(R.id.button2_positive).getVisibility())
-                .isEqualTo(View.INVISIBLE);
-        assertThat(mRootView.findViewById(R.id.button2_negative).getVisibility())
-                .isEqualTo(View.INVISIBLE);
+        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
+                .isEqualTo(View.GONE);
 
         mPref.setButton1Visible(true).setButton2Visible(true);
         mPref.onBindViewHolder(mHolder);
 
-        assertThat(mRootView.findViewById(R.id.button1_positive).getVisibility())
+        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
                 .isEqualTo(View.VISIBLE);
-        assertThat(mRootView.findViewById(R.id.button1_negative).getVisibility())
-                .isEqualTo(View.INVISIBLE);
-        assertThat(mRootView.findViewById(R.id.button2_positive).getVisibility())
-                .isEqualTo(View.VISIBLE);
-        assertThat(mRootView.findViewById(R.id.button2_negative).getVisibility())
-                .isEqualTo(View.INVISIBLE);
-    }
-
-    @Test
-    public void setPositiveNegative_shouldHideOppositeButton() {
-        mPref.setButton1Positive(true).setButton2Positive(false);
-        mPref.onBindViewHolder(mHolder);
-
-        assertThat(mRootView.findViewById(R.id.button1_positive).getVisibility())
-                .isEqualTo(View.VISIBLE);
-        assertThat(mRootView.findViewById(R.id.button1_negative).getVisibility())
-                .isEqualTo(View.INVISIBLE);
-        assertThat(mRootView.findViewById(R.id.button2_positive).getVisibility())
-                .isEqualTo(View.INVISIBLE);
-        assertThat(mRootView.findViewById(R.id.button2_negative).getVisibility())
+        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
                 .isEqualTo(View.VISIBLE);
     }
 
@@ -102,32 +79,67 @@ public class ActionButtonPreferenceTest {
         mPref.setButton1Enabled(true).setButton2Enabled(false);
         mPref.onBindViewHolder(mHolder);
 
-        assertThat(mRootView.findViewById(R.id.button1_positive).isEnabled()).isTrue();
-        assertThat(mRootView.findViewById(R.id.button1_negative).isEnabled()).isTrue();
-        assertThat(mRootView.findViewById(R.id.button2_positive).isEnabled()).isFalse();
-        assertThat(mRootView.findViewById(R.id.button2_negative).isEnabled()).isFalse();
+        assertThat(mRootView.findViewById(R.id.button1).isEnabled()).isTrue();
+        assertThat(mRootView.findViewById(R.id.button2).isEnabled()).isFalse();
     }
 
     @Test
-    public void setText() {
+    public void setText_shouldShowSameText() {
         mPref.setButton1Text(R.string.settings_label);
         mPref.onBindViewHolder(mHolder);
 
-        assertThat(((Button) mRootView.findViewById(R.id.button1_positive)).getText())
+        assertThat(((Button) mRootView.findViewById(R.id.button1)).getText())
                 .isEqualTo(mContext.getText(R.string.settings_label));
-        assertThat(((Button) mRootView.findViewById(R.id.button1_negative)).getText())
-                .isEqualTo(mContext.getText(R.string.settings_label));
+    }
+
+    @Test
+    public void setButtonIcon_iconMustDisplayAboveText() {
+        mPref.setButton1Text(R.string.settings_label);
+        mPref.setButton1Icon(R.drawable.ic_settings);
+        mPref.onBindViewHolder(mHolder);
+        final Drawable[] drawablesAroundText =
+                ((Button) mRootView.findViewById(R.id.button1))
+                        .getCompoundDrawables();
+
+        assertThat(drawablesAroundText[1 /* top */]).isNotNull();
+    }
+
+    @Test
+    public void setButtonIcon_iconResourceIdIsZero_shouldNotDisplayIcon() {
+        mPref.setButton1Text(R.string.settings_label);
+        mPref.setButton1Icon(0);
+        mPref.onBindViewHolder(mHolder);
+        final Drawable[] drawablesAroundText =
+                ((Button) mRootView.findViewById(R.id.button1))
+                        .getCompoundDrawables();
+
+        assertThat(drawablesAroundText[1 /* top */]).isNull();
+    }
+
+    @Test
+    public void setButtonIcon_iconResourceIdNotExisting_shouldNotDisplayIconAndCrash() {
+        mPref.setButton1Text(R.string.settings_label);
+        mPref.setButton1Icon(999999999 /* not existing id */);
+        // Should not crash here
+        mPref.onBindViewHolder(mHolder);
+        final Drawable[] drawablesAroundText =
+                ((Button) mRootView.findViewById(R.id.button1))
+                        .getCompoundDrawables();
+
+        assertThat(drawablesAroundText[1 /* top */]).isNull();
     }
 
     public static ActionButtonPreference createMock() {
         final ActionButtonPreference pref = mock(ActionButtonPreference.class);
         when(pref.setButton1Text(anyInt())).thenReturn(pref);
+        when(pref.setButton1Icon(anyInt())).thenReturn(pref);
         when(pref.setButton1Positive(anyBoolean())).thenReturn(pref);
         when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
         when(pref.setButton1Visible(anyBoolean())).thenReturn(pref);
         when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         when(pref.setButton2Text(anyInt())).thenReturn(pref);
+        when(pref.setButton2Icon(anyInt())).thenReturn(pref);
         when(pref.setButton2Positive(anyBoolean())).thenReturn(pref);
         when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
         when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);

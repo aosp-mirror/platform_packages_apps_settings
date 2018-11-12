@@ -75,12 +75,12 @@ public class LayoutPreferenceTest {
 
     @Test
     public void disableSomeView_shouldMaintainStateAfterBind() {
-        mPreference.findViewById(R.id.button1_positive).setEnabled(false);
-        mPreference.findViewById(R.id.button2_positive).setEnabled(true);
+        mPreference.findViewById(R.id.button1).setEnabled(false);
+        mPreference.findViewById(R.id.button2).setEnabled(true);
 
         mPreference.onBindViewHolder(mHolder);
 
-        assertThat(mPreference.findViewById(R.id.button1_positive).isEnabled()).isFalse();
-        assertThat(mPreference.findViewById(R.id.button2_positive).isEnabled()).isTrue();
+        assertThat(mPreference.findViewById(R.id.button1).isEnabled()).isFalse();
+        assertThat(mPreference.findViewById(R.id.button2).isEnabled()).isTrue();
     }
 }
