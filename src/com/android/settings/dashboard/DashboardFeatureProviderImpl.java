@@ -45,7 +45,6 @@ import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.RoundedHomepageIcon;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -126,7 +125,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             pref.setFragment(clsName);
         } else {
             final Intent intent = new Intent(tile.getIntent());
-            intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
+            intent.putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
                     sourceMetricsCategory);
             if (action != null) {
                 intent.setAction(action);
@@ -160,7 +159,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         final Intent intent = new Intent(tile.getIntent())
-                .putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
+                .putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
                         MetricsEvent.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent, MetricsEvent.DASHBOARD_SUMMARY);
