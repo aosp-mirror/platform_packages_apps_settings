@@ -45,20 +45,11 @@ public class StatsLogWriter implements LogWriter {
                 0 /* changedPreferenceIntValue */);
     }
 
-    @Override
+   @Override
     public void action(Context context, int action, Pair<Integer, Object>... taggedData) {
         action(SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 action,
                 SettingsEnums.PAGE_UNKNOWN /* pageId */,
-                null /* changedPreferenceKey */,
-                0 /* changedPreferenceIntValue */);
-    }
-
-    @Override
-    public void actionWithSource(Context context, int pageId, int action) {
-        action(SettingsEnums.PAGE_UNKNOWN /* attribution */,
-                action,
-                pageId /* pageId */,
                 null /* changedPreferenceKey */,
                 0 /* changedPreferenceIntValue */);
     }

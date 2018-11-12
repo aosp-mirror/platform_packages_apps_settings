@@ -16,6 +16,7 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Icon;
@@ -211,8 +212,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void onExpandButtonClick() {
-        mMetricsFeatureProvider.actionWithSource(getContext(), getMetricsCategory(),
-                MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND);
+        mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND,
+                getMetricsCategory(), null, 0);
     }
 
     protected boolean shouldForceRoundedIcon() {
