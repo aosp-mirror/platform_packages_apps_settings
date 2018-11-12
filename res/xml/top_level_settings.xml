@@ -83,6 +83,14 @@
         settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/>
 
     <Preference
+        android:key="top_level_privacy"
+        android:title="@string/privacy_dashboard_title"
+        android:summary="@string/privacy_dashboard_summary"
+        android:icon="@drawable/ic_homepage_privacy"
+        android:order="-55"
+        android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"/>
+
+    <Preference
         android:key="top_level_location"
         android:title="@string/location_settings_title"
         android:summary="@string/location_settings_summary"
