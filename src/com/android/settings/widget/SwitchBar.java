@@ -18,6 +18,7 @@ package com.android.settings.widget;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
@@ -143,8 +144,13 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             @Override
             public void onClick(View v) {
                 if (mDisabledByAdmin) {
-                    mMetricsFeatureProvider.count(mContext,
-                            mMetricsTag + "/switch_bar|restricted", 1);
+                    mMetricsFeatureProvider.action(
+                            SettingsEnums.PAGE_UNKNOWN,
+                            SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE,
+                            SettingsEnums.PAGE_UNKNOWN,
+                            mMetricsTag + "/switch_bar|restricted",
+                            1);
+
                     RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context,
                             mEnforcedAdmin);
                 }
@@ -287,7 +293,12 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (mLoggingIntialized) {
-            mMetricsFeatureProvider.count(mContext, mMetricsTag + "/switch_bar|" + isChecked, 1);
+            mMetricsFeatureProvider.action(
+                    SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE,
+                    SettingsEnums.PAGE_UNKNOWN,
+                    mMetricsTag + "/switch_bar",
+                    isChecked ? 1 : 0);
         }
         mLoggingIntialized = true;
         propagateChecked(isChecked);
