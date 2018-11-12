@@ -22,6 +22,7 @@ import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLAT
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -77,12 +78,12 @@ public class SliceBuilderUtils {
     public static Slice buildSlice(Context context, SliceData sliceData) {
         Log.d(TAG, "Creating slice for: " + sliceData.getPreferenceController());
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
-        final Pair<Integer, Object> sliceNamePair =
-                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, sliceData.getKey());
-        // Log Slice requests using the same schema as SharedPreferenceLogger (but with a different
-        // action name).
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED, sliceNamePair);
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        sliceData.getKey(),
+                        0);
 
         if (!controller.isAvailable()) {
             // Cannot guarantee setting page is accessible, let the presenter handle error case.

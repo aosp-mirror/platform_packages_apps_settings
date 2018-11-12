@@ -44,6 +44,7 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -126,8 +127,15 @@ public class PremiumSmsAccess extends EmptyTextSettings
                 break;
         }
         if (category != SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN) {
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(
-                    getContext(), category, packageName);
+            // TODO(117860032): Category is wrong. It should be defined in SettingsEnums.
+            final MetricsFeatureProvider metricsFeatureProvider =
+                    FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+            metricsFeatureProvider.action(
+                    metricsFeatureProvider.getAttribution(getActivity()),
+                    category,
+                    getMetricsCategory(),
+                    packageName,
+                    smsState);
         }
     }
 
@@ -214,7 +222,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
                 setIcon(mAppEntry.icon);
             }
             setEntries(R.array.security_settings_premium_sms_values);
-            setEntryValues(new CharSequence[] {
+            setEntryValues(new CharSequence[]{
                     String.valueOf(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER),
                     String.valueOf(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW),
                     String.valueOf(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW),

@@ -16,10 +16,8 @@
 
 package com.android.settings.applications.specialaccess.deviceadmin;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -29,7 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
 import android.app.admin.DeviceAdminInfo;
-import android.content.Context;
+import android.app.settings.SettingsEnums;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -73,12 +71,20 @@ public class DeviceAdminAddTest {
     @Test
     public void logSpecialPermissionChange() {
         mDeviceAdminAdd.logSpecialPermissionChange(true, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_ALLOW), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_ALLOW,
+                SettingsEnums.PAGE_UNKNOWN,
+                "app",
+                0);
 
         mDeviceAdminAdd.logSpecialPermissionChange(false, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_DENY), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_DENY,
+                SettingsEnums.PAGE_UNKNOWN,
+                "app",
+                0);
     }
 
     @Test

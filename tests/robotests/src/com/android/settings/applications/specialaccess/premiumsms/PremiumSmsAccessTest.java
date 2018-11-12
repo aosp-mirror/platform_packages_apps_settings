@@ -16,11 +16,9 @@
 
 package com.android.settings.applications.specialaccess.premiumsms;
 
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
-import android.content.Context;
+import android.app.settings.SettingsEnums;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
@@ -51,18 +49,29 @@ public class PremiumSmsAccessTest {
     public void logSpecialPermissionChange() {
         mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER,
                 "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ASK), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ASK,
+                mFragment.getMetricsCategory(),
+                "app",
+                SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER);
 
         mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW,
                 "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_DENY), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_DENY,
+                mFragment.getMetricsCategory(),
+                "app",
+                SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW);
 
         mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW,
                 "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ALWAYS_ALLOW),
-                eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ALWAYS_ALLOW,
+                mFragment.getMetricsCategory(),
+                "app",
+                SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW);
     }
 }

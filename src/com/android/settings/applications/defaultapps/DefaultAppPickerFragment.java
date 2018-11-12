@@ -17,12 +17,12 @@
 package com.android.settings.applications.defaultapps;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Pair;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -69,11 +69,12 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
 
     @Override
     protected void onRadioButtonConfirmed(String selectedKey) {
-        mMetricsFeatureProvider.action(getContext(),
+        mMetricsFeatureProvider.action(
+                mMetricsFeatureProvider.getAttribution(getActivity()),
                 MetricsEvent.ACTION_SETTINGS_UPDATE_DEFAULT_APP,
+                getMetricsCategory(),
                 selectedKey,
-                Pair.create(MetricsEvent.FIELD_CONTEXT, getMetricsCategory()));
-
+                 0 /* value */);
         super.onRadioButtonConfirmed(selectedKey);
     }
 

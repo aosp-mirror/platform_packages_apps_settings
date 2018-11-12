@@ -16,11 +16,7 @@
 
 package com.android.settings.applications.specialaccess.vrlistener;
 
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-
-import android.content.Context;
+import android.app.settings.SettingsEnums;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -47,11 +43,19 @@ public class VrListenerSettingsTest {
     @Test
     public void logSpecialPermissionChange() {
         mFragment.logSpecialPermissionChange(true, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_ALLOW), eq("app"));
+        mFeatureFactory.metricsFeatureProvider.action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_ALLOW,
+                SettingsEnums.PAGE_UNKNOWN,
+                "app",
+                0);
 
         mFragment.logSpecialPermissionChange(false, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_DENY), eq("app"));
+        mFeatureFactory.metricsFeatureProvider.action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_DENY,
+                SettingsEnums.PAGE_UNKNOWN,
+                "app",
+                0);
     }
 }
