@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.homepage.contextualcards.ContextualCard;
 
 /**
@@ -25,6 +27,9 @@ import com.android.settings.homepage.contextualcards.ContextualCard;
  * {@link ConditionalCardController}.
  */
 public class ConditionalContextualCard extends ContextualCard {
+
+    @VisibleForTesting
+    static final double UNSUPPORTED_RANKING_SCORE = -100.0;
 
     private final long mConditionId;
     private final int mMetricsConstant;
@@ -83,6 +88,7 @@ public class ConditionalContextualCard extends ContextualCard {
         }
 
         public ConditionalContextualCard build() {
+            setRankingScore(UNSUPPORTED_RANKING_SCORE);
             return new ConditionalContextualCard(this);
         }
     }
