@@ -71,6 +71,14 @@
         <SwitchPreference
             android:key="toggle_disable_animations"
             android:title="@string/accessibility_disable_animations" />
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.AccessibilityContentTimeoutPreferenceFragment"
+            android:key="accessibility_content_timeout_preference_fragment"
+            android:title="@string/accessibility_accessibility_content_timeout_preference_title"
+            android:icon="@drawable/ic_accessibility_generic"
+            android:persistent="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -99,6 +107,13 @@
                 android:entries="@array/long_press_timeout_selector_titles"
                 android:entryValues="@array/long_press_timeout_selector_values"
                 android:persistent="false"/>
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.AccessibilityControlTimeoutPreferenceFragment"
+            android:key="accessibility_control_timeout_preference_fragment"
+            android:title="@string/accessibility_accessibility_control_timeout_preference_title"
+            android:icon="@drawable/ic_accessibility_generic"
+            android:persistent="false" />
 
         <Preference
             android:fragment="com.android.settings.accessibility.VibrationSettings"
