@@ -36,6 +36,7 @@ import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeSettings;
+import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.system.SystemDashboardFragment;
@@ -104,6 +105,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_GESTURES);
         PARENT_TO_CATEGORY_KEY_MAP.put(NightDisplaySettings.class.getName(),
                 CategoryKey.CATEGORY_NIGHT_DISPLAY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(PrivacyDashboardFragment.class.getName(),
+                CategoryKey.CATEGORY_PRIVACY);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 

@@ -18,6 +18,7 @@ package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardsAdapter.SPAN_COUNT;
 
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,6 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 
@@ -69,6 +69,6 @@ public class ContextualCardsFragment extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_HOMEPAGE;
+        return SettingsEnums.SETTINGS_HOMEPAGE;
     }
 }

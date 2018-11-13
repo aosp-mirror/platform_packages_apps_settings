@@ -59,7 +59,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -338,7 +338,7 @@ public class DashboardFeatureProviderImplTest {
         final Intent launchIntent = shadowActivity.getNextStartedActivityForResult().intent;
         assertThat(launchIntent.getAction())
                 .isEqualTo("TestAction");
-        assertThat(launchIntent.getIntExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY, 0))
+        assertThat(launchIntent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, 0))
                 .isEqualTo(MetricsEvent.SETTINGS_GESTURES);
     }
 

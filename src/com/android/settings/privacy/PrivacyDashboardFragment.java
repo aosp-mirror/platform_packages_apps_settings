@@ -14,31 +14,29 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.privacy;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.security.ShowPasswordPreferenceController;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class WakeScreenGestureSettings extends DashboardFragment {
-
-    private static final String TAG = "WakeScreenGestureSettings";
-
-    public static final String PREF_KEY_SUGGESTION_COMPLETE =
-            "pref_wake_screen_gesture_suggestion_complete";
+public class PrivacyDashboardFragment extends DashboardFragment {
+    private static final String TAG = "PrivacyDashboardFragment";
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_GESTURE_WAKE_SCREEN;
+        return MetricsEvent.TOP_LEVEL_PRIVACY;
     }
 
     @Override
@@ -48,18 +46,25 @@ public class WakeScreenGestureSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.wake_screen_gesture_settings;
+        return R.xml.privacy_dashboard_settings;
+    }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_privacy_dashboard;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.wake_screen_gesture_settings;
-                    return Arrays.asList(sir);
+                    sir.xmlResId = R.xml.privacy_dashboard_settings;
+                    result.add(sir);
+                    return result;
                 }
             };
-
 }

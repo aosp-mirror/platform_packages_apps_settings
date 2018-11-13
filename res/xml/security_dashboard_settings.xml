@@ -89,20 +89,6 @@
 
     </PreferenceCategory>
 
-    <!-- security_settings_misc.xml -->
-    <PreferenceCategory
-        android:order="30"
-        android:key="security_settings_misc_category"
-        android:title="@string/security_passwords_title">
-
-        <SwitchPreference
-            android:key="show_password"
-            android:title="@string/show_password"
-            android:summary="@string/show_password_summary"
-            settings:controller="com.android.settings.security.ShowPasswordPreferenceController" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory
         android:order="40"
         android:key="security_settings_device_admin_category">

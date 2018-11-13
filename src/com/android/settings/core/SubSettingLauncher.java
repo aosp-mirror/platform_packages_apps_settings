@@ -28,7 +28,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class SubSettingLauncher {
 
@@ -150,7 +150,7 @@ public class SubSettingLauncher {
         if (mLaunchRequest.sourceMetricsCategory < 0) {
             throw new IllegalArgumentException("Source metrics category must be set");
         }
-        intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
+        intent.putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
                 mLaunchRequest.sourceMetricsCategory);
 
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, mLaunchRequest.arguments);

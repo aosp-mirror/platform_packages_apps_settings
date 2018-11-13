@@ -23,6 +23,7 @@ import android.annotation.IdRes;
 import android.annotation.UserIdInt;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -355,14 +356,13 @@ public class EntityHeaderController {
                 if (mAppNotifPrefIntent == null) {
                     button.setVisibility(View.GONE);
                 } else {
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
-                                    .actionWithSource(mAppContext, mMetricsCategory,
-                                            ACTION_OPEN_APP_NOTIFICATION_SETTING);
-                            mFragment.startActivity(mAppNotifPrefIntent);
-                        }
+                    button.setOnClickListener(v -> {
+                        FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
+                                .action(SettingsEnums.PAGE_UNKNOWN,
+                                        ACTION_OPEN_APP_NOTIFICATION_SETTING,
+                                        mMetricsCategory,
+                                        null, 0);
+                        mFragment.startActivity(mAppNotifPrefIntent);
                     });
                     button.setVisibility(View.VISIBLE);
                 }
