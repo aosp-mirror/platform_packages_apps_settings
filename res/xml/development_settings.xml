@@ -403,6 +403,11 @@
             android:entryValues="@array/show_non_rect_clip_values" />
 
         <SwitchPreference
+            android:key="hwui_force_dark"
+            android:title="@string/hwui_force_dark_title"
+            android:summary="@string/hwui_force_dark_summary" />
+
+        <SwitchPreference
             android:key="force_msaa"
             android:title="@string/force_msaa"
             android:summary="@string/force_msaa_summary" />
