@@ -66,4 +66,16 @@ public class StorageSettingsTest {
         verify(mActivity, never()).startActivity(null);
         verify(mActivity).startActivity(any(Intent.class));
     }
+
+    @Test
+    public void handleStubVolumeClick_startsANonNullActivityWhenVolumeHasNoBrowse() {
+        VolumeInfo volumeInfo = mock(VolumeInfo.class, RETURNS_DEEP_STUBS);
+        when(volumeInfo.isMountedReadable()).thenReturn(true);
+
+        StorageSettings.handleStubVolumeClick(mActivity, volumeInfo);
+
+        verify(mActivity, never()).startActivity(null);
+        verify(mActivity).startActivity(any(Intent.class));
+    }
+
 }
