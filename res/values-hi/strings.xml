@@ -301,7 +301,7 @@
     <string name="sms_messages_title" msgid="1778636286080572535">"मैसेज (एसएमएस)"</string>
     <string name="cellular_data_summary" msgid="4660351864416939504">"मोबाइल नेटवर्क पर डेटा खर्च की अनुमति"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"रोमिंग में डेटा खर्च करने की अनुमति दें"</string>
-    <string name="roaming" msgid="3596055926335478572">"रोमिंग डेटा"</string>
+    <string name="roaming" msgid="2619521775007402005">"रोमिंग"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"रोमिंग के समय डेटा सेवाएं कनेक्ट करें"</string>
     <string name="roaming_disable" msgid="1295279574370898378">"रोमिंग के समय डेटा सेवाएं कनेक्ट करें"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"आपने डेटा कनेक्टिविटी खो दी है क्योंकि आपने डेटा रोमिंग बंद रखकर अपना होम नेटवर्क छोड़ दिया."</string>
@@ -364,8 +364,9 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"खाते"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"जगह"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"जगह की जानकारी की सुविधा का इस्तेमाल करें"</string>
+    <string name="location_settings_summary" msgid="1416977959537858343">"Scanning, location history"</string>
     <string name="account_settings_title" msgid="626177544686329806">"खाते"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"सुरक्षा और जगह"</string>
+    <string name="security_settings_title" msgid="7945465324818485460">"सुरक्षा"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"सुरक्षित करना और क्रेडेंशियल"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"फ़ोन सुरक्षित किया गया है"</string>
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"फ़ोन सुरक्षित नहीं है"</string>
@@ -475,7 +476,6 @@
     <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"आप अपना फ़ोन अनलॉक करने, खरीदी अधिकृत करने या ऐप्लिकेशन में प्रवेश करने के लिए अपने फ़िंगरप्रिंट का उपयोग नहीं कर सकेंगे"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"आप अपनी कार्य प्रोफ़ाइल अनलॉक करने, खरीदारी अधिकृत करने या अपने कार्य ऐप्लिकेशन में प्रवेश करने के लिए अपने फ़िंगरप्रिंट का उपयोग नहीं कर सकेंगे."</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"हां, निकालें"</string>
-    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"जारी रखने के लिए अपने फ़िंगरप्रिंट का उपयोग करें."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"सुरक्षित करना"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"टैबलेट सुरक्षित करें"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"फ़ोन सुरक्षित करें"</string>
@@ -1609,6 +1609,7 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"सुरक्षा की जानकारी"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"आपके पास डेटा कनेक्‍शन नहीं है. इस जानकारी को अभी देखने के लिए, इंटरनेट से जुड़े किसी भी कंप्‍यूटर से %s पर जाएं."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"लोड हो रहा है..."</string>
+    <string name="confirm_device_credential_use_alternate_method" msgid="793877757665026949">"दूसरे तरीके का इस्तेमाल करें"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"स्‍क्रीन लॉक सेट करें"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"सुरक्षा के लिए पासवर्ड सेट करें"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"फ़िंगरप्रिंट का उपयोग करने के लिए, पासवर्ड सेट करें"</string>
@@ -2453,6 +2454,8 @@
     <string name="no_device_admins" msgid="4846602835339095768">"कोई भी डिवाइस व्यवस्थापक ऐप्लिकेशन उपलब्ध नहीं है"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"व्यक्तिगत"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"कार्यस्थल"</string>
+    <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"मैसेज (एसएमएस) और कॉल लॉग एक्सेस प्रतिबंधित करें"</string>
+    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"सिर्फ़ डिफ़ॉल्ट फ़ोन और मैसेज-सेवा देने वाले ऐप्लिकेशन के पास मैसेज (एसएमएस) और कॉल लॉग की अनुमतियां होती हैं"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"कोई ट्रस्ट एजेंट उपलब्ध नहीं"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"इस डिवाइस एडमिन ऐप को सक्रिय करें?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"इस डिवाइस एडमिन ऐप को सक्रिय करें"</string>
@@ -3074,11 +3077,13 @@
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"एकदम शांत"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> के अलावा कोई आवाज़ नहीं"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"अलार्म और मीडिया को छोड़कर कोई साउंड नहीं"</string>
-    <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"अपने आप चालू करें"</string>
-    <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"अपने आप लागू होने वाले नियम"</string>
+    <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"शेड्यूल"</string>
+    <string name="zen_mode_automation_settings_page_title" msgid="1843475528715881709">"परेशान न करें"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"अपने आप लागू होने वाला नियम"</string>
+    <string name="zen_mode_schedule_category_title" msgid="5482757877262584975">"शेड्यूल"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="4321254843908888574">"कुछ खास समय पर फ़ोन साइलेंट करें"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="6223252025075862701">"\'परेशान न करें\' सुविधा के नियम सेट करें"</string>
+    <string name="zen_mode_schedule_title" msgid="8616187805239590649">"शेड्यूल"</string>
     <string name="zen_mode_use_automatic_rule" msgid="4509513632574025380">"नियम इस्तेमाल करें"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"सिर्फ़ प्राथमिकता"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"केवल अलार्म"</string>
@@ -3086,8 +3091,8 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"मैसेज पर स्क्रीन चमकने से रोकें"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"संकेत दिखाए जाने की अनुमति दें"</string>
-    <string name="zen_mode_settings_category" msgid="3982039687186952865">"परेशान न करें सुविधा चालू होने पर"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"सूचनाएं"</string>
+    <string name="zen_mode_settings_category" msgid="8404473163624911791">"\'परेशान न करें\' के चालू होने पर"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4332956189625193874">"सूचना पर प्रतिबंध"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="3690261619682396872">"सूचनाएं आने पर कोई आवाज़ सुनाई न दे"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"अगर आप यह सेटिंग चुनते हैं तो, आपको डिवाइस की स्क्रीन पर सूचनाएं दिखाई देंगी"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"सूचनाएं मिलने पर आपका फ़ोन आवाज़ या वाइब्रेट नहीं करेगा."</string>
@@ -3107,8 +3112,8 @@
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"स्क्रीन चालू न करें"</string>
     <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"लाइट को चालू-बंद (ब्लिंक) न करें"</string>
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"स्क्रीन पर सूचनाएं न दिखाएं"</string>
-    <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"स्टेटस बार आइकॉन छिपाएं"</string>
-    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"नए नोटिफ़िकेशन बताने वाले गोल निशान छिपाएं"</string>
+    <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"स्क्रीन के ऊपर दिए स्टेटस बार आइकॉन छिपाएं"</string>
+    <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"ऐप्लिकेशन आइकॉन पर नई सूचनाएं बताने वाले गोल निशान छिपाएं"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"सूचनाएं पाने के लिए ऐप्लिकेशन को न जगाएं"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"सूचना सूची से छिपाएं"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"कभी नहीं"</string>
@@ -3145,10 +3150,10 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> नियम अपने आप चालू हो सकते हैं</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> नियम अपने आप चालू हो सकते हैं</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="2989256030084350296">"\'परेशान न करें\' सुविधा चालू होने पर विकल्पों में बदलाव"</string>
+    <string name="zen_category_behavior" msgid="5463784524322979770">"फ़ोन म्यूट करें, लेकिन अपवादों को मंज़ूरी दें"</string>
     <string name="zen_category_exceptions" msgid="7601136604273265629">"सूचनाएं पाने के लिए इन ऐप्लिकेशन पर रोक न लगाएं"</string>
     <string name="zen_category_schedule" msgid="9000447592251450453">"तय किया गया समय"</string>
-    <string name="zen_sound_title" msgid="424490228488531372">"आवाज़ और वाइब्रेशन"</string>
+    <string name="zen_sound_title" msgid="4461494611692749446">"सभी अपवाद देखें"</string>
     <string name="zen_sound_footer" msgid="7621745273287208979">"\'परेशान न करें\' सुविधा चालू होने पर आवाज़ और वाइब्रेशन बंद रहेंगे. हालांकि, जिन चीजों के लिए आपने मंज़ूरी दी है उनके लिए यह सुविधा काम नहीं करेगी."</string>
     <string name="zen_sound_category_title" msgid="4336596939661729188">"इन्हें छोड़कर, बाकी सभी सूचनाओं को म्यूट करें"</string>
     <string name="zen_sound_all_muted" msgid="4850363350480968114">"म्यूट किया गया"</string>
@@ -3297,7 +3302,7 @@
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"नियम का नाम"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"नियम का नाम डालें"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"नियम नाम पहले से उपयोग में है"</string>
-    <string name="zen_mode_add_rule" msgid="9100929184624317193">"नियम जोड़ें"</string>
+    <string name="zen_mode_add_rule" msgid="7459154136384467057">"ज़्यादा जोड़ें"</string>
     <string name="zen_mode_add_event_rule" msgid="3997335103633946552">"इवेंट से जुड़े नियम जोड़ें"</string>
     <string name="zen_mode_add_time_rule" msgid="5002080000597838703">"समय से जुड़े नियम जोड़ें"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"नियम मिटाएं"</string>
@@ -3341,6 +3346,7 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> और संपर्क</item>
     </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"मैसेज"</string>
+    <string name="zen_mode_messages_footer" msgid="4487026388475642635">"\'परेशान न करें\' सुविधा चालू होने पर आने वाले (इनकमिंग) मैसेज पर रोक लगा दी जाएगी. आप सेटिंग में अपने हिसाब से बदलाव करके अपने दोस्तों, परिवार के सदस्यों और दूसरे संपर्कों को आपसे संपर्क करने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"मैसेज दिखाने की मंज़ूरी दें"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"मैसेज"</string>
     <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"मैसेज (एसएमएस)"</string>
@@ -3353,18 +3359,16 @@
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"सिर्फ़ संपर्कों और बार-बार कॉल करने वाले लोगों के कॉल"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"सिर्फ़ बार-बार कॉल करने वाले लोगों के कॉल"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"कोई नहीं"</string>
-    <string name="zen_mode_alarms" msgid="2165302777886552926">"अलार्म"</string>
+    <string name="zen_mode_alarms" msgid="6510378757005935647">"अलार्म की मंज़ूरी दें"</string>
     <string name="zen_mode_alarms_list" msgid="1090332840207025714">"अलार्म"</string>
-    <string name="zen_mode_media" msgid="8808264142134422380">"मीडिया"</string>
+    <string name="zen_mode_media" msgid="3004088240660865270">"मीडिया की मंज़ूरी दें"</string>
     <string name="zen_mode_media_list" msgid="5483540766397328038">"मीडिया"</string>
-    <string name="zen_mode_system" msgid="2541380718411593581">"छूने पर आने वाली आवाज़ें"</string>
+    <string name="zen_mode_system" msgid="236278770843463810">"स्क्रीन छूने पर आने वाली आवाज़ की मंज़ूरी दें"</string>
     <string name="zen_mode_system_list" msgid="6996104733185177115">"स्क्रीन छूने पर आने वाली आवाज़"</string>
-    <string name="zen_mode_reminders" msgid="5458502056440485730">"रिमाइंडर"</string>
+    <string name="zen_mode_reminders" msgid="5445657061499098675">"रिमाइंडर की मंज़ूरी दें"</string>
     <string name="zen_mode_reminders_list" msgid="2853975802240340190">"रिमाइंडर"</string>
-    <string name="zen_mode_reminders_title" msgid="2345044406347406902">"रिमाइंडर दिखाने की मंज़ूरी दें"</string>
-    <string name="zen_mode_events" msgid="7914446030988618264">"इवेंट"</string>
+    <string name="zen_mode_events" msgid="6154853744271591007">"इवेंट की मंज़ूरी दें"</string>
     <string name="zen_mode_events_list" msgid="5571368229052715098">"इवेंट"</string>
-    <string name="zen_mode_events_title" msgid="5597241655883329085">"इवेंट दिखाने की मंज़ूरी दें"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"सभी के कॉल"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"संपर्क"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"तारे के निशान वाले संपर्क"</string>
@@ -3512,7 +3516,6 @@
     <string name="app_link_open_always" msgid="2474058700623948148">"इस ऐप में खोलें"</string>
     <string name="app_link_open_ask" msgid="7800878430190575991">"हर बार पूछें"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"इस ऐप में ना खोलें"</string>
-    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"पहचाना नहीं गया"</string>
     <string name="default_apps_title" msgid="1660450272764331490">"डिफ़ॉल्ट"</string>
     <string name="default_for_work" msgid="9152194239366247932">"कार्य के लिए डिफ़ॉल्ट"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"सहायक और बोलकर निर्देश देना"</string>
@@ -3712,14 +3715,11 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"डिवाइस की मेमोरी: <xliff:g id="PERCENTAGE">%1$s</xliff:g> इस्तेमाल किया गया - <xliff:g id="FREE_SPACE">%2$s</xliff:g> खाली है"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> तक कोई गतिविधि न होने पर, कम बैटरी मोड में जाएं"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"वॉलपेपर, सुलाएं (कम बैटरी मोड), फ़ॉन्ट आकार"</string>
-    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
-    <skip />
+    <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"स्लीप मोड, फ़ॉन्ट का आकार"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"10 मिनट तक कोई गतिविधि ना होने पर कम बैटरी मोड में जाएं"</string>
     <string name="memory_summary" msgid="8080825904671961872">"औसतन <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> में से <xliff:g id="USED_MEMORY">%1$s</xliff:g> मेमोरी उपयोग की गई"</string>
     <string name="users_summary" msgid="1674864467098487328">"<xliff:g id="USER_NAME">%1$s</xliff:g> के रूप में प्रवेश किया हुआ है"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> डिफ़ॉल्ट है"</string>
-    <string name="location_on_summary" msgid="3637699010986988970">"चालू है"</string>
-    <string name="location_off_summary" msgid="7217264690673949107">"बंद है"</string>
     <string name="backup_disabled" msgid="485189128759595412">"बैक अप बंद किया गया"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> में अपडेट किया गया"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"अपडेट उपलब्ध है"</string>
@@ -4118,9 +4118,6 @@
     <string name="angle_enabled_app" msgid="1841862539745838255">"कोण की सुविधा वाला ऐप्लिकेशन चुनें"</string>
     <string name="angle_enabled_app_not_set" msgid="864740024581634768">"कोण की सुविधा वाला कोई ऐप्लिकेशन सेट नहीं है"</string>
     <string name="angle_enabled_app_set" msgid="226015765615525056">"कोण की सुविधा वाला ऐप्लिकेशन: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="directory_access" msgid="4722237210725864244">"निर्देशिका का एक्सेस"</string>
-    <string name="keywords_directory_access" msgid="360557532842445280">"निर्देशिका का एक्सेस"</string>
-    <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"इस फ़ोन पर सेटिंग नहीं की जा सकती"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"इस टैबलेट पर सेटिंग नहीं की जा सकती"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"इस डिवाइस पर सेटिंग नहीं की जा सकती"</string>
@@ -4129,8 +4126,6 @@
     <string name="unknown_unavailability_setting_summary" msgid="4589584678033059435">"सेटिंग बदलने की सुविधा उपलब्ध नहीं है"</string>
     <string name="my_device_info_account_preference_title" msgid="342933638925781861">"खाता"</string>
     <string name="my_device_info_device_name_preference_title" msgid="7104085224684165324">"डिवाइस का नाम"</string>
-    <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"गाड़ी चलाते समय ब्लूटूथ इस्तेमाल करें"</string>
-    <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"गाड़ी चलाते समय अपने आप ब्लूटूथ चालू करें"</string>
     <string name="change_wifi_state_title" msgid="3261945855372885427">"वाई-फ़ाई नियंत्रण"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"ऐप्लिकेशन को वाई-फ़ाई नियंत्रित करने की मंज़ूरी दें"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"इस ऐप्लिकेशन को वाई-फ़ाई चालू या बंद करने, वाई-फ़ाई नेटवर्क ढूंढने और उससे कनेक्ट करने की अनुमति दें. साथ ही, नेटवर्क जोड़ने या हटाने या सिर्फ़ सीमित दायरे में इस्तेमाल होने वाला हॉटस्पॉट चालू करने की अनुमति दें"</string>
@@ -4147,7 +4142,7 @@
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"फ़ोन की बैटरी लाइफ़ बेहतर बनाएं"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"घंटी बजने से रोकें"</string>
-    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"पावर और आवाज़ बढ़ाने वाले बटन को एक साथ दबाएं"</string>
+    <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"पावर और आवाज़ बढ़ाएं बटनों को एक साथ दबाएं"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"घंटी बजने से रोकने के लिए शॉर्टकट"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"वाइब्रेट (कंपन)"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"म्‍यूट करें"</string>
@@ -4231,10 +4226,16 @@
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"कीमतों की जानकारी के लिए आपको नेटवर्क सेवा देने वाली कंपनी से संपर्क करें."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"ऐप्लिकेशन का डेटा इस्तेमाल"</string>
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"गलत नेटवर्क मोड <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. अनदेखा करें."</string>
+    <string name="mobile_network_apn_title" msgid="7610812642954395440">"एक्सेस पॉइंट नाम"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"<xliff:g id="CARRIER">%1$s</xliff:g> से कनेक्ट होने पर उपलब्ध नहीं है"</string>
     <string name="see_more" msgid="5953815986207345223">"ज़्यादा देखें"</string>
     <string name="see_less" msgid="1250265310929558370">"कम देखें"</string>
-    <!-- no translation found for show_connected_devices (5484062660312192006) -->
-    <!-- no translation found for no_connected_devices (6657176404588389594) -->
-    <skip />
+    <string name="network_connection_request_dialog_title" msgid="9217468796286394920">"डिवाइस चुनें"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस जुड़े हैं</item>
+      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस जुड़े हैं</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"कोई डिवाइस नहीं जुड़ा है"</string>
+    <string name="force_desktop_mode" msgid="4303240595324847998">"बलपूर्वक डेस्कटॉप मोड"</string>
+    <string name="force_desktop_mode_summary" msgid="6259798246015387202">"दूसरी स्क्रीन पर बलपूर्वक प्रयोग के लिए डेस्कटॉप मोड"</string>
 </resources>

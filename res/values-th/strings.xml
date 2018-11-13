@@ -301,7 +301,7 @@
     <string name="sms_messages_title" msgid="1778636286080572535">"ข้อความ SMS"</string>
     <string name="cellular_data_summary" msgid="4660351864416939504">"อนุญาตให้ใช้เน็ตผ่านเครือข่ายมือถือ"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"อนุญาตให้ใช้ข้อมูลเมื่อโรมมิ่ง"</string>
-    <string name="roaming" msgid="3596055926335478572">"การโรมมิ่งอินเทอร์เน็ต"</string>
+    <string name="roaming" msgid="2619521775007402005">"โรมมิ่ง"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"เชื่อมต่ออินเทอร์เน็ตขณะโรมมิ่ง"</string>
     <string name="roaming_disable" msgid="1295279574370898378">"เชื่อมต่ออินเทอร์เน็ตขณะโรมมิ่ง"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"การเชื่อมต่อข้อมูลของคุณหายไปเนื่องจากคุณออกจากเครือข่ายที่บ้านโดยปิดการโรมมิ่งข้อมูลไว้"</string>
@@ -364,8 +364,9 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"บัญชี"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"ตำแหน่ง"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"ใช้ตำแหน่ง"</string>
+    <string name="location_settings_summary" msgid="1416977959537858343">"การสแกน ประวัติตำแหน่ง"</string>
     <string name="account_settings_title" msgid="626177544686329806">"บัญชี"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"ความปลอดภัยและตำแหน่ง"</string>
+    <string name="security_settings_title" msgid="7945465324818485460">"ความปลอดภัย"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"การเข้ารหัสลับและข้อมูลรับรอง"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"โทรศัพท์ที่เข้ารหัส"</string>
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"โทรศัพท์ไม่ได้เข้ารหัส"</string>
@@ -475,7 +476,6 @@
     <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์ อนุญาตให้ซื้อ หรือลงชื่อเข้าใช้แอปต่างๆ ด้วยลายนิ้วมือได้"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกโปรไฟล์งาน อนุญาตการซื้อสินค้า หรือลงชื่อเข้าใช้แอปงาน"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"ใช่ นำออกเลย"</string>
-    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"ใช้ลายนิ้วมือของคุณเพื่อดำเนินการต่อ"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"การเข้ารหัสความปลอดภัย"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"เข้ารหัสความปลอดภัยให้แท็บเล็ต"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"เข้ารหัสความปลอดภัย"</string>
@@ -1609,6 +1609,7 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"ข้อมูลความปลอดภัย"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"คุณไม่มีการเชื่อมต่อข้อมูล หากต้องการดูข้อมูลตอนนี้ ให้ไปที่ %s จากคอมพิวเตอร์ที่เชื่อมต่อกับอินเทอร์เน็ต"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"กำลังโหลด…"</string>
+    <string name="confirm_device_credential_use_alternate_method" msgid="793877757665026949">"ใช้วิธีอื่น"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"ตั้งค่าการล็อกหน้าจอ"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"เพื่อความปลอดภัย โปรดตั้งรหัสผ่าน"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"หากต้องการใช้ลายนิ้วมือ ให้ตั้งรหัสผ่าน"</string>
@@ -2453,6 +2454,8 @@
     <string name="no_device_admins" msgid="4846602835339095768">"ไม่มีแอปผู้ดูแลระบบอุปกรณ์พร้อมใช้งาน"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"ส่วนตัว"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"ที่ทำงาน"</string>
+    <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"จำกัดการเข้าถึง SMS และประวัติการโทร"</string>
+    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"เฉพาะแอปโทรศัพท์และแอปรับส่งข้อความเริ่มต้นเท่านั้นที่มีสิทธิ์เข้าถึง SMS และประวัติการโทร"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"ไม่มีตัวแทนที่เชื่อถือได้"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"เปิดใช้งานแอปผู้ดูแลระบบอุปกรณ์ไหม"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"เปิดใช้งานแอปผู้ดูแลระบบอุปกรณ์นี้"</string>
@@ -3074,11 +3077,13 @@
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"ปิดเสียงทั้งหมด"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"ไม่มีเสียง ยกเว้น<xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"ไม่มีเสียง ยกเว้นการปลุกและสื่อ"</string>
-    <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"เปิดอัตโนมัติ"</string>
-    <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"กฎอัตโนมัติ"</string>
+    <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"กำหนดการ"</string>
+    <string name="zen_mode_automation_settings_page_title" msgid="1843475528715881709">"ห้ามรบกวน"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"กฎอัตโนมัติ"</string>
+    <string name="zen_mode_schedule_category_title" msgid="5482757877262584975">"กำหนดการ"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="4321254843908888574">"ปิดเสียงโทรศัพท์ในบางช่วงเวลา"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="6223252025075862701">"ตั้งกฎห้ามรบกวน"</string>
+    <string name="zen_mode_schedule_title" msgid="8616187805239590649">"กำหนดการ"</string>
     <string name="zen_mode_use_automatic_rule" msgid="4509513632574025380">"ใช้กฎ"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"เฉพาะเรื่องสำคัญ"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"เฉพาะปลุกเท่านั้น"</string>
@@ -3086,8 +3091,8 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"บล็อกสิ่งรบกวนการมองเห็น"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"อนุญาตสัญญาณที่มองเห็น"</string>
-    <string name="zen_mode_settings_category" msgid="3982039687186952865">"เมื่อเปิด \"ห้ามรบกวน\""</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"การแจ้งเตือน"</string>
+    <string name="zen_mode_settings_category" msgid="8404473163624911791">"เมื่อเปิดโหมดห้ามรบกวน"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4332956189625193874">"การจำกัดการแจ้งเตือน"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="3690261619682396872">"ไม่มีเสียงจากการแจ้งเตือน"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"คุณจะเห็นการแจ้งเตือนในหน้าจอ"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"เมื่อมีการแจ้งเตือนเข้ามา โทรศัพท์จะไม่ส่งเสียงหรือสั่น"</string>
@@ -3107,8 +3112,8 @@
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"อย่าเปิดหน้าจอ"</string>
     <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"อย่าเปิดไฟกะพริบ"</string>
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"อย่าแสดงการแจ้งเตือนบนหน้าจอ"</string>
-    <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"ซ่อนไอคอนแถบสถานะ"</string>
-    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"ซ่อนจุดแจ้งเตือน"</string>
+    <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"ซ่อนไอคอนแถบสถานะที่ด้านบนของหน้าจอ"</string>
+    <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"ซ่อนจุดแสดงการแจ้งเตือนบนไอคอนแอป"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"ไม่ต้องปลุกระบบเพื่อแสดงการแจ้งเตือน"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"ซ่อนจากรายการแจ้งเตือน"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"ไม่เลย"</string>
@@ -3145,17 +3150,17 @@
       <item quantity="other">กฎ <xliff:g id="ON_COUNT">%d</xliff:g> ข้อจะเปิดโดยอัตโนมัติ</item>
       <item quantity="one">กฎ 1 ข้อจะเปิดโดยอัตโนมัติ</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="2989256030084350296">"ลักษณะการทำงาน"</string>
+    <string name="zen_category_behavior" msgid="5463784524322979770">"ปิดเสียงโทรศัพท์ แต่อนุญาตข้อยกเว้น"</string>
     <string name="zen_category_exceptions" msgid="7601136604273265629">"ข้อยกเว้น"</string>
     <string name="zen_category_schedule" msgid="9000447592251450453">"กำหนดการ"</string>
-    <string name="zen_sound_title" msgid="424490228488531372">"เสียงและการสั่น"</string>
+    <string name="zen_sound_title" msgid="4461494611692749446">"ดูการจำกัดทั้งหมด"</string>
     <string name="zen_sound_footer" msgid="7621745273287208979">"เมื่อเปิด \"ห้ามรบกวน\" ระบบเสียงและการสั่นจะถูกปิดเสียงยกเว้นรายการที่คุณอนุญาตข้างต้น"</string>
     <string name="zen_sound_category_title" msgid="4336596939661729188">"ปิดเสียงทั้งหมดยกเว้น"</string>
     <string name="zen_sound_all_muted" msgid="4850363350480968114">"ปิดเสียงอยู่"</string>
     <string name="zen_sound_none_muted" msgid="3938508512103612527">"ไม่ได้ปิดเสียง"</string>
-    <string name="zen_sound_one_allowed" msgid="8447313454438932276">"ปิดเสียงแล้ว แต่อนุญาตให้ <xliff:g id="SOUND_TYPE">%1$s</xliff:g>"</string>
-    <string name="zen_sound_two_allowed" msgid="980491120444358550">"ปิดเสียงแล้ว แต่อนุญาตให้ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> และ <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_sound_three_allowed" msgid="3455767205934547985">"ปิดเสียงแล้ว แต่อนุญาตให้ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> และ <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
+    <string name="zen_sound_one_allowed" msgid="8447313454438932276">"ปิดเสียงแล้ว แต่อนุญาต<xliff:g id="SOUND_TYPE">%1$s</xliff:g>"</string>
+    <string name="zen_sound_two_allowed" msgid="980491120444358550">"ปิดเสียงแล้ว แต่อนุญาต<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>และ<xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
+    <string name="zen_sound_three_allowed" msgid="3455767205934547985">"ปิดเสียงแล้ว แต่อนุญาต<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> และ<xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"ข้อความ เหตุการณ์ และการช่วยเตือน"</string>
     <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"เมื่อเปิด \"ห้ามรบกวน\" ข้อความ การช่วยเตือน และเหตุการณ์ต่างๆ จะถูกปิดเสียงยกเว้นรายการที่คุณอนุญาตข้างต้น คุณปรับเปลี่ยนการตั้งค่าเพื่ออนุญาตให้เพื่อน ครอบครัว หรือรายชื่อติดต่อคนอื่นๆ ติดต่อคุณได้"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"เสร็จ"</string>
@@ -3297,7 +3302,7 @@
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"ชื่อกฎ"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"ป้อนชื่อกฎ"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"มีการใช้ชื่อกฎนี้แล้ว"</string>
-    <string name="zen_mode_add_rule" msgid="9100929184624317193">"เพิ่มกฎ"</string>
+    <string name="zen_mode_add_rule" msgid="7459154136384467057">"เพิ่มอีก"</string>
     <string name="zen_mode_add_event_rule" msgid="3997335103633946552">"เพิ่มกฎของกิจกรรม"</string>
     <string name="zen_mode_add_time_rule" msgid="5002080000597838703">"เพิ่มกฎเวลา"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"ลบกฎ"</string>
@@ -3341,6 +3346,7 @@
       <item quantity="one">อีก 1 คน</item>
     </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"ข้อความ"</string>
+    <string name="zen_mode_messages_footer" msgid="4487026388475642635">"เมื่อเปิด \"ห้ามรบกวน\" SMS ขาเข้าจะถูกบล็อก คุณปรับเปลี่ยนการตั้งค่าเพื่ออนุญาตให้เพื่อน ครอบครัว หรือรายชื่อติดต่อคนอื่นๆ ติดต่อคุณได้"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"อนุญาตข้อความ"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"ข้อความ"</string>
     <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"ข้อความ"</string>
@@ -3353,18 +3359,16 @@
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"จากรายชื่อติดต่อและผู้โทรซ้ำ"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"จากผู้โทรซ้ำเท่านั้น"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ไม่มี"</string>
-    <string name="zen_mode_alarms" msgid="2165302777886552926">"การปลุก"</string>
+    <string name="zen_mode_alarms" msgid="6510378757005935647">"อนุญาตการปลุก"</string>
     <string name="zen_mode_alarms_list" msgid="1090332840207025714">"การปลุก"</string>
-    <string name="zen_mode_media" msgid="8808264142134422380">"สื่อ"</string>
+    <string name="zen_mode_media" msgid="3004088240660865270">"อนุญาตสื่อ"</string>
     <string name="zen_mode_media_list" msgid="5483540766397328038">"สื่อ"</string>
-    <string name="zen_mode_system" msgid="2541380718411593581">"เสียงแตะ"</string>
+    <string name="zen_mode_system" msgid="236278770843463810">"อนุญาตเสียงแตะ"</string>
     <string name="zen_mode_system_list" msgid="6996104733185177115">"เสียงแตะ"</string>
-    <string name="zen_mode_reminders" msgid="5458502056440485730">"การช่วยเตือน"</string>
+    <string name="zen_mode_reminders" msgid="5445657061499098675">"อนุญาตการช่วยเตือน"</string>
     <string name="zen_mode_reminders_list" msgid="2853975802240340190">"ช่วยเตือน"</string>
-    <string name="zen_mode_reminders_title" msgid="2345044406347406902">"อนุญาตการช่วยเตือน"</string>
-    <string name="zen_mode_events" msgid="7914446030988618264">"กิจกรรม"</string>
+    <string name="zen_mode_events" msgid="6154853744271591007">"อนุญาตกิจกรรม"</string>
     <string name="zen_mode_events_list" msgid="5571368229052715098">"กิจกรรม"</string>
-    <string name="zen_mode_events_title" msgid="5597241655883329085">"อนุญาตกิจกรรม"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"ทุกคน"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"รายชื่อติดต่อ"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"รายชื่อติดต่อที่ติดดาว"</string>
@@ -3372,7 +3376,7 @@
     <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"ผู้โทรซ้ำ"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"อนุญาตผู้โทรซ้ำ"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"จาก <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
-    <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"จาก <xliff:g id="CALLER_TYPE">%1$s</xliff:g> และ <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
+    <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"จาก<xliff:g id="CALLER_TYPE">%1$s</xliff:g>และ<xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"ถ้าผู้โทรคนเดิมโทรเป็นครั้งที่ 2 ภายใน <xliff:g id="MINUTES">%d</xliff:g> นาที"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"กำหนดเอง"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"เปิดโดยอัตโนมัติ"</string>
@@ -3512,7 +3516,6 @@
     <string name="app_link_open_always" msgid="2474058700623948148">"เปิดในแอปนี้"</string>
     <string name="app_link_open_ask" msgid="7800878430190575991">"ถามทุกครั้ง"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"อย่าเปิดในแอปนี้"</string>
-    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"ไม่รู้จัก"</string>
     <string name="default_apps_title" msgid="1660450272764331490">"ค่าเริ่มต้น"</string>
     <string name="default_for_work" msgid="9152194239366247932">"ค่าเริ่มต้นสำหรับงาน"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"แอปผู้ช่วยและข้อมูลเสียง"</string>
@@ -3712,14 +3715,11 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"พื้นที่เก็บข้อมูลภายใน: ใช้ไป <xliff:g id="PERCENTAGE">%1$s</xliff:g> - เหลือ <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"เข้าสู่โหมดสลีปหลังจากไม่มีการใช้งาน <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"วอลเปเปอร์ สลีป ขนาดตัวอักษร"</string>
-    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
-    <skip />
+    <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"สลีป ขนาดอักษร"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"เข้าโหมดสลีปหลังจากไม่มีการใช้งาน 10 นาที"</string>
     <string name="memory_summary" msgid="8080825904671961872">"ใช้หน่วยความจำไป <xliff:g id="USED_MEMORY">%1$s</xliff:g> จาก <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> โดยเฉลี่ย"</string>
     <string name="users_summary" msgid="1674864467098487328">"ลงชื่อเข้าใช้เป็น <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> เป็นค่าเริ่มต้น"</string>
-    <string name="location_on_summary" msgid="3637699010986988970">"เปิด"</string>
-    <string name="location_off_summary" msgid="7217264690673949107">"ปิด"</string>
     <string name="backup_disabled" msgid="485189128759595412">"ปิดใช้การสำรองข้อมูลอยู่"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"อัปเดตเป็น Android <xliff:g id="VERSION">%1$s</xliff:g> แล้ว"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"มีเวอร์ชันอัปเดต"</string>
@@ -4118,9 +4118,6 @@
     <string name="angle_enabled_app" msgid="1841862539745838255">"เลือกแอปที่พร้อมใช้งาน ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="864740024581634768">"ไม่ได้ตั้งค่าแอปพลิเคชันที่พร้อมใช้งาน ANGLE"</string>
     <string name="angle_enabled_app_set" msgid="226015765615525056">"แอปพลิเคชันที่พร้อมใช้งาน ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="directory_access" msgid="4722237210725864244">"การเข้าถึงไดเรกทอรี"</string>
-    <string name="keywords_directory_access" msgid="360557532842445280">"การเข้าถึงไดเรกทอรี"</string>
-    <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"ไม่รองรับการตั้งค่าในโทรศัพท์นี้"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"ไม่รองรับการตั้งค่าในแท็บเล็ตนี้"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"ไม่รองรับการตั้งค่าในอุปกรณ์นี้"</string>
@@ -4129,8 +4126,6 @@
     <string name="unknown_unavailability_setting_summary" msgid="4589584678033059435">"การตั้งค่าไม่พร้อมใช้งาน"</string>
     <string name="my_device_info_account_preference_title" msgid="342933638925781861">"บัญชี"</string>
     <string name="my_device_info_device_name_preference_title" msgid="7104085224684165324">"ชื่ออุปกรณ์"</string>
-    <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"ใช้บลูทูธขณะขับรถ"</string>
-    <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"เปิดบลูทูธโดยอัตโนมัติขณะขับรถ"</string>
     <string name="change_wifi_state_title" msgid="3261945855372885427">"การควบคุม Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"อนุญาตให้แอปควบคุม Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"อนุญาตให้แอปนี้เปิดหรือปิด Wi-Fi, สแกนหาและเชื่อมต่อเครือข่าย Wi-Fi, เพิ่มหรือนำเครือข่ายออก หรือเริ่มฮอตสปอตในพื้นที่เท่านั้น"</string>
@@ -4147,7 +4142,7 @@
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"เพิ่มอายุการใช้งานแบตเตอรี่ของโทรศัพท์"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"ป้องกันการส่งเสียง"</string>
-    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"กดปุ่มเปิด/ปิดและปุ่มเพิ่มระดับเสียงพร้อมกัน"</string>
+    <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"กดปุ่มเปิด/ปิดและปุ่มเพิ่มระดับเสียงพร้อมกันเพื่อ"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"ทางลัดเพื่อไม่ให้ส่งเสียง"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"สั่น"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"ปิดเสียง"</string>
@@ -4231,10 +4226,16 @@
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"โปรดสอบถามผู้ให้บริการเครือข่ายสำหรับข้อมูลเกี่ยวกับราคา"</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"ปริมาณการใช้อินเทอร์เน็ตของแอป"</string>
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"โหมดเครือข่ายไม่ถูกต้อง <xliff:g id="NETWORKMODEID">%1$d</xliff:g> ไม่สนใจ"</string>
+    <string name="mobile_network_apn_title" msgid="7610812642954395440">"ชื่อจุดเข้าใช้งาน"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"ใช้ไม่ได้เมื่อเชื่อมต่อกับ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="5953815986207345223">"ดูเพิ่ม"</string>
     <string name="see_less" msgid="1250265310929558370">"ดูน้อยลง"</string>
-    <!-- no translation found for show_connected_devices (5484062660312192006) -->
-    <!-- no translation found for no_connected_devices (6657176404588389594) -->
-    <skip />
+    <string name="network_connection_request_dialog_title" msgid="9217468796286394920">"เลือกอุปกรณ์"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="other">เชื่อมต่ออุปกรณ์อยู่ <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> เครื่อง</item>
+      <item quantity="one">เชื่อมต่ออุปกรณ์อยู่ <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> เครื่อง</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"ไม่มีอุปกรณ์ที่เชื่อมต่อ"</string>
+    <string name="force_desktop_mode" msgid="4303240595324847998">"บังคับใช้โหมดเดสก์ท็อป"</string>
+    <string name="force_desktop_mode_summary" msgid="6259798246015387202">"บังคับใช้โหมดเดสก์ท็อปแบบทดลองในจอแสดงผลรอง"</string>
 </resources>
