@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.search.SearchIndexableResources;
@@ -55,8 +56,8 @@ public interface SearchFeatureProvider {
      */
     SearchIndexableResources getSearchIndexableResources();
 
-    default String getSettingsIntelligencePkgName() {
-        return "com.android.settings.intelligence";
+    default String getSettingsIntelligencePkgName(Context context) {
+        return context.getString(R.string.config_settingsintelligence_package_name);
     }
 
     /**
@@ -66,7 +67,7 @@ public interface SearchFeatureProvider {
         if (activity == null || toolbar == null) {
             return;
         }
-        if (!Utils.isPackageEnabled(activity, getSettingsIntelligencePkgName())) {
+        if (!Utils.isPackageEnabled(activity, getSettingsIntelligencePkgName(activity))) {
             final ViewGroup parent = (ViewGroup)toolbar.getParent();
             if (parent != null) {
                 parent.setVisibility(View.GONE);
@@ -84,7 +85,7 @@ public interface SearchFeatureProvider {
 
         toolbar.setOnClickListener(tb -> {
             final Intent intent = SEARCH_UI_INTENT;
-            intent.setPackage(getSettingsIntelligencePkgName());
+            intent.setPackage(getSettingsIntelligencePkgName(activity));
             final Context context = activity.getApplicationContext();
 
             FeatureFactory.getFactory(context).getSlicesFeatureProvider()

@@ -57,8 +57,8 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         final Context context = mHost.getContext();
-        final String SettingsIntelligencePkgName = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider().getSettingsIntelligencePkgName();
+        final String SettingsIntelligencePkgName = context.getString(
+                R.string.config_settingsintelligence_package_name);
         if (!Utils.isDeviceProvisioned(mHost.getContext())) {
             return;
         }

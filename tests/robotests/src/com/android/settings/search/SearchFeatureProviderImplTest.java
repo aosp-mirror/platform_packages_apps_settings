@@ -89,7 +89,7 @@ public class SearchFeatureProviderImplTest {
 
     @Test
     public void verifyLaunchSearchResultPageCaller_settingsIntelligenceCaller_shouldNotCrash() {
-        final String packageName = mProvider.getSettingsIntelligencePkgName();
+        final String packageName = mProvider.getSettingsIntelligencePkgName(mActivity);
         final ComponentName cn = new ComponentName(packageName, "class");
         mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
     }
