@@ -22,6 +22,8 @@ import android.net.Uri;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -37,6 +39,7 @@ import androidx.slice.widget.SliceView;
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.ControllerRendererPool;
 
 import java.util.Map;
 
@@ -54,11 +57,14 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
 
     private final Context mContext;
     private final LifecycleOwner mLifecycleOwner;
+    private final ControllerRendererPool mControllerRendererPool;
 
-    public SliceContextualCardRenderer(Context context, LifecycleOwner lifecycleOwner) {
+    public SliceContextualCardRenderer(Context context, LifecycleOwner lifecycleOwner,
+            ControllerRendererPool controllerRendererPool) {
         mContext = context;
         mLifecycleOwner = lifecycleOwner;
         mSliceLiveDataMap = new ArrayMap<>();
+        mControllerRendererPool = controllerRendererPool;
     }
 
     @Override
@@ -104,6 +110,27 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
 
         // Set this listener so we can log the interaction users make on the slice
         cardHolder.sliceView.setOnSliceActionListener(this);
+
+        initDismissalActions(cardHolder, card);
+    }
+
+    private void initDismissalActions(SliceViewHolder cardHolder, ContextualCard card) {
+        final ViewFlipper viewFlipper = cardHolder.itemView.findViewById(R.id.viewFlipper);
+        cardHolder.sliceView.setOnLongClickListener(v -> {
+            viewFlipper.showNext();
+            return true;
+        });
+
+        final Button btnKeep = cardHolder.itemView.findViewById(R.id.keep);
+        btnKeep.setOnClickListener(v -> {
+            viewFlipper.showPrevious();
+        });
+
+        final Button btnRemove = cardHolder.itemView.findViewById(R.id.remove);
+        btnRemove.setOnClickListener(v -> {
+            mControllerRendererPool.getController(mContext, card.getCardType()).onDismissed(
+                    card);
+        });
     }
 
     @Override
