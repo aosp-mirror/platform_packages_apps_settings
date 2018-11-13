@@ -18,7 +18,6 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +27,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
 
@@ -55,10 +53,9 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * TODO(b/114807655): Contextual Home Page - Connected Device
@@ -66,11 +63,7 @@ import java.util.Map;
  * Show connected device info if one is currently connected. UI for connected device should
  * match Connected Devices > Currently Connected Devices
  *
- * This Slice will show multiple currently connected devices, which includes:
- * 1) Bluetooth.
- * 2) Docks.
- * ...
- * TODO Other device types are under checking to support, will update later.
+ * TODO This class will be refactor for Bluetooth connected devices only.
  */
 public class ConnectedDeviceSlice implements CustomSliceable {
 
@@ -138,7 +131,6 @@ public class ConnectedDeviceSlice implements CustomSliceable {
                         .setAccentColor(Utils.getColorAccentDefaultColor(mContext));
 
         // Get row builders by connected devices, e.g. Bluetooth.
-        // TODO Add other type connected devices, e.g. Docks.
         final List<ListBuilder.RowBuilder> rows = getBluetoothRowBuilder(primarySliceAction);
 
         // Return a header with IsError flag, if no connected devices.
@@ -181,13 +173,18 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     public void onNotifyChange(Intent intent) {
     }
 
+    @Override
+    public Class getBackgroundWorkerClass() {
+        return BluetoothUpdateWorker.class;
+    }
+
     @VisibleForTesting
     List<CachedBluetoothDevice> getBluetoothConnectedDevices() {
         final List<CachedBluetoothDevice> connectedBluetoothList = new ArrayList<>();
 
         // If Bluetooth is disable, skip to get the bluetooth devices.
         if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-            Log.d(TAG, "Cannot get Bluetooth connected devices, Bluetooth is disabled.");
+            Log.i(TAG, "Cannot get Bluetooth connected devices, Bluetooth is disabled.");
             return connectedBluetoothList;
         }
 
@@ -195,25 +192,15 @@ public class ConnectedDeviceSlice implements CustomSliceable {
         final LocalBluetoothManager bluetoothManager =
                 com.android.settings.bluetooth.Utils.getLocalBtManager(mContext);
         if (bluetoothManager == null) {
-            Log.d(TAG, "Cannot get Bluetooth connected devices, Bluetooth is not supported.");
+            Log.i(TAG, "Cannot get Bluetooth connected devices, Bluetooth is unsupported.");
             return connectedBluetoothList;
         }
         final Collection<CachedBluetoothDevice> cachedDevices =
                 bluetoothManager.getCachedDeviceManager().getCachedDevicesCopy();
 
-        // Get all connected Bluetooth devices and use Map to filter duplicated Bluetooth.
-        final Map<BluetoothDevice, CachedBluetoothDevice> connectedBluetoothMap = new ArrayMap<>();
-        for (CachedBluetoothDevice device : cachedDevices) {
-            if (device.isConnected() && !connectedBluetoothMap.containsKey(device.getDevice())) {
-                connectedBluetoothMap.put(device.getDevice(), device);
-            }
-        }
-
-        // Sort connected Bluetooth devices.
-        connectedBluetoothList.addAll(connectedBluetoothMap.values());
-        Collections.sort(connectedBluetoothList, COMPARATOR);
-
-        return connectedBluetoothList;
+        // Get connected Bluetooth devices and sort them.
+        return cachedDevices.stream().filter(device -> device.isConnected()).sorted(
+                COMPARATOR).collect(Collectors.toList());
     }
 
     @VisibleForTesting
