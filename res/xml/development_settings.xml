@@ -485,6 +485,11 @@
             android:title="@string/background_check_pref" />
 
         <SwitchPreference
+            android:key="allow_background_activity_starts"
+            android:title="@string/allow_background_activity_starts"
+            android:summary="@string/allow_background_activity_starts_summary" />
+
+        <SwitchPreference
             android:key="show_first_crash_dialog"
             android:title="@string/show_first_crash_dialog"
             android:summary="@string/show_first_crash_dialog_summary" />
