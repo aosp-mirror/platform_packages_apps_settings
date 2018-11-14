@@ -18,11 +18,11 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -52,7 +52,6 @@ import com.android.settings.testutils.SliceTester;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -77,14 +76,11 @@ public class SliceBuilderUtilsTest {
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-    private ArgumentCaptor<Pair<Integer, Object>> mLoggingArgumentCatpor;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mLoggingArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
-
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
     }
@@ -103,14 +99,11 @@ public class SliceBuilderUtilsTest {
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, dummyData);
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
-                        mLoggingArgumentCatpor.capture());
-        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
-
-        assertThat(capturedLoggingPair.first)
-                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
-        assertThat(capturedLoggingPair.second)
-                .isEqualTo(dummyData.getKey());
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        dummyData.getKey(),
+                        0);
         SliceTester.testSettingsToggleSlice(mContext, slice, dummyData);
     }
 
@@ -120,14 +113,11 @@ public class SliceBuilderUtilsTest {
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
-                        mLoggingArgumentCatpor.capture());
-        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
-
-        assertThat(capturedLoggingPair.first)
-                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
-        assertThat(capturedLoggingPair.second)
-                .isEqualTo(data.getKey());
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        data.getKey(),
+                        0);
         SliceTester.testSettingsSliderSlice(mContext, slice, data);
     }
 
@@ -137,14 +127,11 @@ public class SliceBuilderUtilsTest {
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, dummyData);
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
-                        mLoggingArgumentCatpor.capture());
-        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
-
-        assertThat(capturedLoggingPair.first)
-                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
-        assertThat(capturedLoggingPair.second)
-                .isEqualTo(dummyData.getKey());
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        dummyData.getKey(),
+                        0);
         SliceTester.testSettingsCopyableSlice(mContext, slice, dummyData);
     }
 
@@ -390,14 +377,12 @@ public class SliceBuilderUtilsTest {
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
-                        mLoggingArgumentCatpor.capture());
-        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        data.getKey(),
+                        0);
 
-        assertThat(capturedLoggingPair.first)
-                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
-        assertThat(capturedLoggingPair.second)
-                .isEqualTo(data.getKey());
         SliceTester.testSettingsUnavailableSlice(mContext, slice, data);
     }
 
@@ -412,16 +397,11 @@ public class SliceBuilderUtilsTest {
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(eq(mContext), eq(MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED),
-                        mLoggingArgumentCatpor.capture());
-
-        final Pair<Integer, Object> capturedLoggingPair = mLoggingArgumentCatpor.getValue();
-
-        assertThat(capturedLoggingPair.first)
-                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
-        assertThat(capturedLoggingPair.second)
-                .isEqualTo(data.getKey());
-        assertThat(slice).isNull();
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        data.getKey(),
+                        0);
     }
 
     @Test

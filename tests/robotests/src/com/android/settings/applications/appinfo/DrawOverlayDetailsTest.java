@@ -19,12 +19,10 @@ package com.android.settings.applications.appinfo;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
+import android.app.settings.SettingsEnums;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 
@@ -75,12 +73,14 @@ public class DrawOverlayDetailsTest {
         when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
 
         mFragment.logSpecialPermissionChange(true, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW,
+                mFragment.getMetricsCategory(), "app", 0);
 
         mFragment.logSpecialPermissionChange(false, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_DENY), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_DENY,
+                mFragment.getMetricsCategory(), "app", 0);
     }
 
     @Test

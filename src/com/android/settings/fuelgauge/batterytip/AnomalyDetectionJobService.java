@@ -26,6 +26,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.app.job.JobWorkItem;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -35,7 +36,6 @@ import android.os.StatsDimensionsValue;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.GuardedBy;
 import androidx.annotation.VisibleForTesting;
@@ -146,20 +146,18 @@ public class AnomalyDetectionJobService extends JobService {
             final int uid = extractUidFromStatsDimensionsValue(intentDimsValue);
             final boolean autoFeatureOn = powerUsageFeatureProvider.isSmartBatterySupported()
                     ? Settings.Global.getInt(contentResolver,
-                            Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON) == ON
+                    Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON) == ON
                     : Settings.Global.getInt(contentResolver,
                             Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
             final long versionCode = batteryUtils.getAppLongVersionCode(packageName);
-
+            final String versionedPackage = packageName + "/" + versionCode;
             if (batteryUtils.shouldHideAnomaly(powerWhitelistBackend, uid, anomalyInfo)) {
-                metricsFeatureProvider.action(context,
+                metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                         MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
-                        packageName,
-                        Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE,
-                                anomalyInfo.anomalyType),
-                        Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
-                                versionCode));
+                        SettingsEnums.PAGE_UNKNOWN,
+                        versionedPackage,
+                        anomalyInfo.anomalyType);
             } else {
                 if (autoFeatureOn && anomalyInfo.autoRestriction) {
                     // Auto restrict this app
@@ -173,13 +171,11 @@ public class AnomalyDetectionJobService extends JobService {
                             AnomalyDatabaseHelper.State.NEW,
                             timeMs);
                 }
-                metricsFeatureProvider.action(context,
+                metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                         MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
-                        packageName,
-                        Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE,
-                                anomalyInfo.anomalyType),
-                        Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
-                                versionCode));
+                        SettingsEnums.PAGE_UNKNOWN,
+                        versionedPackage,
+                        anomalyInfo.anomalyType);
             }
 
         } catch (NullPointerException | IndexOutOfBoundsException e) {

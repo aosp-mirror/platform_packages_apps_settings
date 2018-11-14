@@ -17,15 +17,14 @@
 package com.android.settings.applications.defaultapps;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
-import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
@@ -89,10 +88,12 @@ public class DefaultAppPickerFragmentTest {
         mFragment.onAttach((Context) mActivity);
         mFragment.onRadioButtonConfirmed("test_pkg");
 
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_UPDATE_DEFAULT_APP),
-                eq("test_pkg"),
-                any(Pair.class));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_SETTINGS_UPDATE_DEFAULT_APP,
+                mFragment.getMetricsCategory(),
+                "test_pkg",
+                0);
     }
 
     public static class TestFragment extends DefaultAppPickerFragment {

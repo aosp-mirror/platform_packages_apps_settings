@@ -36,6 +36,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
@@ -113,8 +114,14 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     void logSpecialPermissionChange(boolean newState, String packageName) {
         int logCategory = newState ? MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW
                 : MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY;
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
-                logCategory, packageName);
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+        metricsFeatureProvider.action(
+                metricsFeatureProvider.getAttribution(getActivity()),
+                logCategory,
+                getMetricsCategory(),
+                packageName,
+                0);
     }
 
     @Override

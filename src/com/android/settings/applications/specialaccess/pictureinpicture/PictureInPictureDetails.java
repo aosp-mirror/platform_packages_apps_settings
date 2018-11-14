@@ -33,6 +33,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class PictureInPictureDetails extends AppInfoWithHeader
         implements OnPreferenceChangeListener {
@@ -99,7 +100,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
 
     /**
      * @return whether the app associated with the given {@param packageName} is allowed to enter
-     *         picture-in-picture.
+     * picture-in-picture.
      */
     static boolean getEnterPipStateForPackage(Context context, int uid, String packageName) {
         final AppOpsManager appOps = context.getSystemService(AppOpsManager.class);
@@ -108,7 +109,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
 
     /**
      * @return the summary for the current state of whether the app associated with the given
-     *         {@param packageName} is allowed to enter picture-in-picture.
+     * {@param packageName} is allowed to enter picture-in-picture.
      */
     public static int getPreferenceSummary(Context context, int uid, String packageName) {
         final boolean enabled = PictureInPictureDetails.getEnterPipStateForPackage(context, uid,
@@ -122,7 +123,13 @@ public class PictureInPictureDetails extends AppInfoWithHeader
         int logCategory = newState
                 ? MetricsEvent.APP_PICTURE_IN_PICTURE_ALLOW
                 : MetricsEvent.APP_PICTURE_IN_PICTURE_DENY;
-        FeatureFactory.getFactory(getContext())
-                .getMetricsFeatureProvider().action(getContext(), logCategory, packageName);
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+        metricsFeatureProvider.action(
+                metricsFeatureProvider.getAttribution(getActivity()),
+                logCategory,
+                getMetricsCategory(),
+                packageName,
+                0);
     }
 }

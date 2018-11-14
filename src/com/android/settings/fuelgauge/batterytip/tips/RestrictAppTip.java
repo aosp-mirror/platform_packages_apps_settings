@@ -16,11 +16,11 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.os.Parcel;
-import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -126,12 +126,12 @@ public class RestrictAppTip extends BatteryTip {
             for (int i = 0, size = mRestrictAppList.size(); i < size; i++) {
                 final AppInfo appInfo = mRestrictAppList.get(i);
                 for (Integer anomalyType : appInfo.anomalyTypes) {
-                    metricsFeatureProvider.action(context,
+                    metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                             MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
+                            SettingsEnums.PAGE_UNKNOWN,
                             appInfo.packageName,
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, anomalyType));
+                            anomalyType);
                 }
-
             }
         }
     }

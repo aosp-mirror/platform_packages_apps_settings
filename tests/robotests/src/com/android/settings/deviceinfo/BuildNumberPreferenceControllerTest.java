@@ -33,12 +33,12 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.BidiFormatter;
 
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -64,7 +64,7 @@ public class BuildNumberPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Fragment mFragment;
+    private InstrumentedPreferenceFragment mFragment;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
 

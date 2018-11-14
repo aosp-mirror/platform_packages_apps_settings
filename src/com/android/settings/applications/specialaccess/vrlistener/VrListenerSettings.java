@@ -29,6 +29,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -73,8 +74,14 @@ public class VrListenerSettings extends ManagedServiceSettings {
     void logSpecialPermissionChange(boolean enable, String packageName) {
         int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_ALLOW
                 : MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_DENY;
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
-                logCategory, packageName);
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+        metricsFeatureProvider.action(
+                metricsFeatureProvider.getAttribution(getActivity()),
+                logCategory,
+                getMetricsCategory(),
+                packageName,
+                0);
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

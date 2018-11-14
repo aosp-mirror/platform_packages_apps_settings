@@ -18,10 +18,6 @@ package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
@@ -31,13 +27,10 @@ import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.service.settings.suggestions.Suggestion;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
-import com.android.settingslib.drawer.CategoryKey;
-import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
 import org.junit.After;
@@ -48,9 +41,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)
@@ -111,36 +101,8 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    public void isSuggestionV2Enabled_isNotLowMemoryDevice_shouldReturnTrue() {
+    public void isSuggestionEnabled_isNotLowMemoryDevice_shouldReturnTrue() {
         when(mActivityManager.isLowRamDevice()).thenReturn(false);
         assertThat(mProvider.isSuggestionEnabled(mContext)).isTrue();
-    }
-
-    @Test
-    public void dismissSuggestion_noControllerOrSuggestion_noop() {
-        mProvider.dismissSuggestion(mContext, null, null);
-        mProvider.dismissSuggestion(mContext, mSuggestionControllerMixin, null);
-        mProvider.dismissSuggestion(mContext, null, new Suggestion.Builder("id").build());
-
-        verifyZeroInteractions(mFactory.metricsFeatureProvider);
-        verifyZeroInteractions(mSuggestionControllerMixin);
-    }
-
-    @Test
-    public void dismissSuggestion_noContext_shouldDoNothing() {
-        mProvider.dismissSuggestion(null, mSuggestionControllerMixin, mSuggestion);
-
-        verifyZeroInteractions(mFactory.metricsFeatureProvider);
-    }
-
-    @Test
-    public void dismissSuggestion_shouldLogAndDismiss() {
-        mProvider.dismissSuggestion(mContext, mSuggestionControllerMixin, mSuggestion);
-
-        verify(mFactory.metricsFeatureProvider).action(
-                eq(mContext),
-                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
-                anyString());
-        verify(mSuggestionControllerMixin).dismissSuggestion(mSuggestion);
     }
 }

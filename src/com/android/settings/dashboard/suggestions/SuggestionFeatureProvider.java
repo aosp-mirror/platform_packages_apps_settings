@@ -19,11 +19,8 @@ package com.android.settings.dashboard.suggestions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.service.settings.suggestions.Suggestion;
 
 import androidx.annotation.NonNull;
-
-import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
 /** Interface should be implemented if you have added new suggestions */
 public interface SuggestionFeatureProvider {
@@ -45,10 +42,4 @@ public interface SuggestionFeatureProvider {
      * Returns the {@link SharedPreferences} that holds metadata for suggestions.
      */
     SharedPreferences getSharedPrefs(Context context);
-
-    /**
-     * Dismisses a suggestion.
-     */
-    void dismissSuggestion(Context context, SuggestionControllerMixinCompat suggestionMixin,
-            Suggestion suggestion);
 }
