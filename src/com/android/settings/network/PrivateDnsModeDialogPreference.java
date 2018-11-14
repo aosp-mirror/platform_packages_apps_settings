@@ -22,12 +22,16 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME
 import static android.system.OsConstants.AF_INET;
 import static android.system.OsConstants.AF_INET6;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.NetworkUtils;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.system.Os;
 import android.text.Editable;
@@ -43,6 +47,7 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -50,6 +55,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -99,19 +106,23 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
 
     public PrivateDnsModeDialogPreference(Context context) {
         super(context);
+        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        initialize();
     }
 
     private final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
@@ -128,6 +139,30 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
             }
         }
     });
+
+    private void initialize() {
+        // Add the "Restricted" icon resource so that if the preference is disabled by the
+        // admin, an information button will be shown.
+        setWidgetLayoutResource(R.layout.restricted_icon);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        if (isDisabledByAdmin()) {
+            // If the preference is disabled by the admin, set the inner item as enabled so
+            // it could act as a click target. The preference itself will have been disabled
+            // by the controller.
+            holder.itemView.setEnabled(true);
+        }
+
+        final View restrictedIcon = holder.findViewById(R.id.restricted_icon);
+        if (restrictedIcon != null) {
+            // Show the "Restricted" icon if, and only if, the preference was disabled by
+            // the admin.
+            restrictedIcon.setVisibility(isDisabledByAdmin() ? View.VISIBLE : View.GONE);
+        }
+    }
 
     @Override
     protected void onBindDialogView(View view) {
@@ -200,6 +235,28 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
     @Override
     public void afterTextChanged(Editable s) {
         updateDialogInfo();
+    }
+
+    @Override
+    public void performClick() {
+        EnforcedAdmin enforcedAdmin = getEnforcedAdmin();
+
+        if (enforcedAdmin == null) {
+            // If the restriction is not restricted by admin, continue as usual.
+            super.performClick();
+        } else {
+            // Show a dialog explaining to the user why they cannot change the preference.
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), enforcedAdmin);
+        }
+    }
+
+    private EnforcedAdmin getEnforcedAdmin() {
+        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                getContext(), UserManager.DISALLOW_CONFIG_PRIVATE_DNS, UserHandle.myUserId());
+    }
+
+    private boolean isDisabledByAdmin() {
+        return getEnforcedAdmin() != null;
     }
 
     private Button getSaveButton() {
