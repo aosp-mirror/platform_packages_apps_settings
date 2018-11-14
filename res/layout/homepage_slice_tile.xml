@@ -21,13 +21,55 @@
     android:layout_height="wrap_content"
     style="@style/ContextualCardStyle">
 
-    <androidx.slice.widget.SliceView
-        android:id="@+id/slice_view"
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/homepage_card_vertical_margin"
-        android:layout_marginTop="@dimen/homepage_card_vertical_margin"
-        android:paddingStart="@dimen/homepage_card_padding_start"
-        android:paddingEnd="@dimen/homepage_card_padding_end"/>
+        android:layout_height="wrap_content">
 
+        <androidx.slice.widget.SliceView
+            android:id="@+id/slice_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/homepage_card_vertical_margin"
+            android:layout_marginTop="@dimen/homepage_card_vertical_margin"
+            android:paddingStart="@dimen/homepage_card_padding_start"
+            android:paddingEnd="@dimen/homepage_card_padding_end"/>
+
+        <!--dismissal view-->
+        <LinearLayout
+            android:id="@+id/dismissal_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/homepage_card_padding_start"
+                android:layout_marginTop="@dimen/homepage_card_padding_start"
+                android:text="@string/contextual_card_dismiss_confirm_message"
+                style="@style/TextAppearance.ContextualCardDismissalText"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|end">
+
+                <Button
+                    android:id="@+id/keep"
+                    style="@style/ContextualCardDismissalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contextual_card_dismiss_keep"/>
+
+                <Button
+                    android:id="@+id/remove"
+                    style="@style/ContextualCardDismissalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contextual_card_dismiss_remove"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ViewFlipper>
 </androidx.cardview.widget.CardView>

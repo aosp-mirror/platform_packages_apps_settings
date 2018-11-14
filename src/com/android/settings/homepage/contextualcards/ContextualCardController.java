@@ -28,5 +28,7 @@ public interface ContextualCardController {
 
     void onActionClick(ContextualCard card);
 
+    void onDismissed(ContextualCard card);
+
     void setCardUpdateListener(ContextualCardUpdateListener listener);
 }

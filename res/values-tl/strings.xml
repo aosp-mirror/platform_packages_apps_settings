@@ -174,8 +174,8 @@
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Kasalukuyang nakakonekta"</string>
     <string name="connected_device_saved_title" msgid="688364359746674536">"Mga naka-save na device"</string>
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Mag-o-on ang Bluetooth para magpares"</string>
-    <string name="connected_device_connections_title" msgid="5988939345181466770">"Mga kagustuhan sa koneksyon"</string>
-    <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Mga nakakonektang dating device"</string>
+    <string name="connected_device_connections_title" msgid="5988939345181466770">"Kagustuhan sa koneksyon"</string>
+    <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Mga dating nakakonektang device"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Dating nakakonekta"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Naka-on ang Bluetooth"</string>
     <string name="previous_connected_see_all" msgid="3626779872898778415">"Tingnan lahat"</string>
@@ -301,7 +301,7 @@
     <string name="sms_messages_title" msgid="1778636286080572535">"Mga mensaheng SMS"</string>
     <string name="cellular_data_summary" msgid="4660351864416939504">"Payagan ang paggamit ng data sa mobile network"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Payagan data usage pag roaming"</string>
-    <string name="roaming" msgid="3596055926335478572">"Roaming ng data"</string>
+    <string name="roaming" msgid="2619521775007402005">"Pag-roam"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"Kumonekta sa mga serbisyo ng data kapag naka-roaming"</string>
     <string name="roaming_disable" msgid="1295279574370898378">"Kumonekta sa mga serbisyo ng data kapag naka-roaming"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Nawala ang koneksyon ng data dahil iniwan mo ang iyong home network na naka-off ang roaming ng data."</string>
@@ -364,8 +364,9 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Mga Account"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Lokasyon"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Gumamit ng lokasyon"</string>
+    <string name="location_settings_summary" msgid="1416977959537858343">"Pag-scan, history ng lokasyon"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Mga Account"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"Seguridad at lokasyon"</string>
+    <string name="security_settings_title" msgid="7945465324818485460">"Seguridad"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Pag-encrypt at mga kredensyal"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Naka-encrypt ang telepono"</string>
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Hindi naka-encrypt ang telepono"</string>
@@ -475,7 +476,6 @@
     <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"Hindi mo magagamit ang iyong mga fingerprint upang i-unlock ang telepono mo, magpahintulot ng mga pagbili, o mag-sign in sa mga app"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"Hindi mo magagamit ang iyong mga fingerprint upang i-unlock ang profile sa trabaho mo, magpahintulot ng mga pagbili, o mag-sign in sa mga app para sa trabaho"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Oo, alisin"</string>
-    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Gamitin ang iyong fingerprint upang magpatuloy."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Pag-encrypt"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"I-encrypt ang tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"I-encrypt ang telepono"</string>
@@ -1609,6 +1609,7 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Impormasyon sa kaligtasan"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Wala kang koneksyon sa data. Upang tingnan ang impormasyong ito ngayon, pumunta sa %s mula sa anumang computer na nakakonekta sa internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Naglo-load…"</string>
+    <string name="confirm_device_credential_use_alternate_method" msgid="793877757665026949">"Gumamit ng ibang paraan"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Magtakda ng lock ng screen"</string>
     <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Para sa seguridad, magtakda ng password"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Para magamit ang fingerprint, i-set ang pw"</string>
@@ -2159,7 +2160,7 @@
     <string name="controls_subtitle" msgid="390468421138288702">"Isaayos ang paggamit ng power"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Mga kasamang package"</string>
     <string name="battery_tip_summary_title" msgid="368729969313047399">"Gumagana nang normal ang mga app"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"Karaniwan lang ang paggamit ng baterya sa background ng telepono"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"Karaniwan lang ang paggamit ng background ng telepono sa baterya"</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"Karaniwan lang ang paggamit ng baterya sa background ng tablet"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"Karaniwan lang ang paggamit ng baterya sa background ng device"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Paubos na ang baterya"</string>
@@ -2317,7 +2318,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> ng kabuuang baterya"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Breakdown mula noong huling napuno ang baterya"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Noong huling napuno ang baterya"</string>
-    <string name="battery_full_charge_last" msgid="8892335687734288031">"Tumatagal ang kumpletong pag-charge nang humigit-kumulang"</string>
+    <string name="battery_full_charge_last" msgid="8892335687734288031">"Tumatagal ang punong baterya nang halos"</string>
     <string name="battery_footer_summary" msgid="67169726550144016">"Pagtatantya lang ang data ng paggamit ng baterya at maaaring magbago batay sa paggamit"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Habang aktibong ginagamit"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Habang nasa background"</string>
@@ -2453,6 +2454,8 @@
     <string name="no_device_admins" msgid="4846602835339095768">"Walang available na app ng admin ng device"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personal"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Trabaho"</string>
+    <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Paghigpitan ang access sa SMS at log ng tawag"</string>
+    <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Ang mga default na app sa telepono at pagmemensahe lang ang may mga pahintulot sa SMS at log ng tawag"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Walang available na mga trust agent"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"I-activate ang app ng admin ng device?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"I-activate ang app ng admin ng device na ito"</string>
@@ -3074,11 +3077,13 @@
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"Ganap na Katahimikan"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Walang tunog maliban sa <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Walang tunog maliban sa mga alarm at media"</string>
-    <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"Awtomatikong i-on"</string>
-    <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"Mga awtomatikong panuntunan"</string>
+    <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"Mga Iskedyul"</string>
+    <string name="zen_mode_automation_settings_page_title" msgid="1843475528715881709">"Huwag Istorbohin"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"Awtomatikong panuntunan"</string>
+    <string name="zen_mode_schedule_category_title" msgid="5482757877262584975">"Iskedyul"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="4321254843908888574">"I-silent ang phone sa ilang panahon"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="6223252025075862701">"Magtakda ng mga panuntunan ng Huwag Istorbohin"</string>
+    <string name="zen_mode_schedule_title" msgid="8616187805239590649">"Iskedyul"</string>
     <string name="zen_mode_use_automatic_rule" msgid="4509513632574025380">"Gamitin ang panuntunan"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Priyoridad lang"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Mga alarm lang"</string>
@@ -3086,8 +3091,8 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"I-block ang visual na abala"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Payagan ang visual na signal"</string>
-    <string name="zen_mode_settings_category" msgid="3982039687186952865">"Kapag naka-on ang Huwag Istorbohin"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="478040192977063582">"Mga Notification"</string>
+    <string name="zen_mode_settings_category" msgid="8404473163624911791">"Kapag naka-on ang Huwag Istorbohin"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4332956189625193874">"Mga paghihigpit sa notification"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="3690261619682396872">"Walang tunog mula sa mga notification"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"Makikita mo ang mga notification sa iyong screen"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Kapag may dumating na mga notification, hindi tutunog o magva-vibrate ang iyong telepono."</string>
@@ -3107,8 +3112,8 @@
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"Huwag i-on ang screen"</string>
     <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Huwag ipatay-sindi ang ilaw"</string>
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Huwag i-pop ang mga notification sa screen"</string>
-    <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Itago ang mga icon sa status bar"</string>
-    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Itago ang mga notification dot"</string>
+    <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"Itago ang mga icon ng status bar sa itaas ng screen"</string>
+    <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"Itago ang mga notification dot sa mga icon ng app"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Huwag i-wake para sa mga notification"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Itago sa listahan ng notification"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Huwag Kailanman"</string>
@@ -3145,10 +3150,10 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> panuntunan ang maaaring awtomatikong mag-on</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> na panuntunan ang maaaring awtomatikong mag-on</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="2989256030084350296">"Gawi"</string>
+    <string name="zen_category_behavior" msgid="5463784524322979770">"I-mute ang telepono, ngunit payagan ang mga exception"</string>
     <string name="zen_category_exceptions" msgid="7601136604273265629">"Mga Exception"</string>
     <string name="zen_category_schedule" msgid="9000447592251450453">"Iskedyul"</string>
-    <string name="zen_sound_title" msgid="424490228488531372">"Tunog at pag-vibrate"</string>
+    <string name="zen_sound_title" msgid="4461494611692749446">"Tingnan ang lahat ng exception"</string>
     <string name="zen_sound_footer" msgid="7621745273287208979">"Kapag naka-on ang Huwag Istorbohin, mamu-mute ang tunog at pag-vibrate, maliban sa mga item na pinapayagan mo sa itaas."</string>
     <string name="zen_sound_category_title" msgid="4336596939661729188">"I-mute lahat maliban sa"</string>
     <string name="zen_sound_all_muted" msgid="4850363350480968114">"Na-mute"</string>
@@ -3297,7 +3302,7 @@
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Pangalan ng panuntunan"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Ilagay ang pangalan ng panuntunan"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Ginagamit na ang pangalan ng panuntunan"</string>
-    <string name="zen_mode_add_rule" msgid="9100929184624317193">"Magdagdag ng panuntunan"</string>
+    <string name="zen_mode_add_rule" msgid="7459154136384467057">"Magdagdag pa"</string>
     <string name="zen_mode_add_event_rule" msgid="3997335103633946552">"Magdagdag ng panuntunan sa event"</string>
     <string name="zen_mode_add_time_rule" msgid="5002080000597838703">"Magdagdag ng panuntunan sa oras"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"I-delete ang panuntunan"</string>
@@ -3341,6 +3346,7 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> na iba pa</item>
     </plurals>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Mga Mensahe"</string>
+    <string name="zen_mode_messages_footer" msgid="4487026388475642635">"Kapag naka-on ang Huwag Istorbohin, bina-block ang mga papasok na text message. Maaari mong isaayos ang mga setting para payagan ang iyong mga kaibigan, pamilya, o iba pang contact na makipag-ugnayan sa iyo."</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"Payagan ang mga mensahe"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"Mga Mensahe"</string>
     <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"mga mensahe"</string>
@@ -3353,18 +3359,16 @@
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"Mula sa mga contact at umuulit na tumatawag"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Mula sa mga umuulit na tumatawag lang"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Wala"</string>
-    <string name="zen_mode_alarms" msgid="2165302777886552926">"Mga Alarm"</string>
+    <string name="zen_mode_alarms" msgid="6510378757005935647">"Payagan ang mga alarm"</string>
     <string name="zen_mode_alarms_list" msgid="1090332840207025714">"mga alarm"</string>
-    <string name="zen_mode_media" msgid="8808264142134422380">"Media"</string>
+    <string name="zen_mode_media" msgid="3004088240660865270">"Payagan ang media"</string>
     <string name="zen_mode_media_list" msgid="5483540766397328038">"media"</string>
-    <string name="zen_mode_system" msgid="2541380718411593581">"Mga tunog sa pagpindot"</string>
+    <string name="zen_mode_system" msgid="236278770843463810">"Payagan ang mga tunog sa pagpindot"</string>
     <string name="zen_mode_system_list" msgid="6996104733185177115">"mga tunog sa pagpindot"</string>
-    <string name="zen_mode_reminders" msgid="5458502056440485730">"Mga Paalala"</string>
+    <string name="zen_mode_reminders" msgid="5445657061499098675">"Payagan ang mga paalala"</string>
     <string name="zen_mode_reminders_list" msgid="2853975802240340190">"mga paalala"</string>
-    <string name="zen_mode_reminders_title" msgid="2345044406347406902">"Payagan ang mga paalala"</string>
-    <string name="zen_mode_events" msgid="7914446030988618264">"Mga Event"</string>
+    <string name="zen_mode_events" msgid="6154853744271591007">"Payagan ang mga event"</string>
     <string name="zen_mode_events_list" msgid="5571368229052715098">"mga event"</string>
-    <string name="zen_mode_events_title" msgid="5597241655883329085">"Payagan ang mga event"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"kahit sino"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"mga contact"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"mga naka-star na contact"</string>
@@ -3512,7 +3516,6 @@
     <string name="app_link_open_always" msgid="2474058700623948148">"Buksan sa app na ito"</string>
     <string name="app_link_open_ask" msgid="7800878430190575991">"Magtanong palagi"</string>
     <string name="app_link_open_never" msgid="3407647600352398543">"Huwag buksan sa app na ito"</string>
-    <string name="fingerprint_not_recognized" msgid="1739529686957438119">"Hindi nakilala"</string>
     <string name="default_apps_title" msgid="1660450272764331490">"Default"</string>
     <string name="default_for_work" msgid="9152194239366247932">"Default para sa trabaho"</string>
     <string name="assist_and_voice_input_title" msgid="1733165754793221197">"Tulong at voice input"</string>
@@ -3712,14 +3715,11 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Internal storage: <xliff:g id="PERCENTAGE">%1$s</xliff:g> ang ginagamit - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ang bakante"</string>
     <string name="display_summary" msgid="6737806235882127328">"Mag-sleep pagkalipas ng <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> na walang aktibidad"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Wallpaper, sleep, laki ng font"</string>
-    <!-- no translation found for display_dashboard_nowallpaper_summary (7840559323355210111) -->
-    <skip />
+    <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Sleep, laki ng font"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Mag-sleep pagkalipas ng 10 minuto na walang aktibidad"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Avg <xliff:g id="USED_MEMORY">%1$s</xliff:g> ng <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> ng ginamit na memory"</string>
     <string name="users_summary" msgid="1674864467098487328">"Naka-sign in bilang <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> ang default"</string>
-    <string name="location_on_summary" msgid="3637699010986988970">"Naka-on"</string>
-    <string name="location_off_summary" msgid="7217264690673949107">"Naka-off"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Na-disable ang pag-back up"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Na-update sa Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"May available na update"</string>
@@ -4118,9 +4118,6 @@
     <string name="angle_enabled_app" msgid="1841862539745838255">"Pumili ng app na may naka-enable na ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="864740024581634768">"Walang nakatakdang application na may naka-enable na ANGLE"</string>
     <string name="angle_enabled_app_set" msgid="226015765615525056">"Application na may naka-enable na ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="directory_access" msgid="4722237210725864244">"Access sa direktoryo"</string>
-    <string name="keywords_directory_access" msgid="360557532842445280">"access sa direktoryo"</string>
-    <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Hindi sinusuportahan ang setting sa teleponong ito"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Hindi sinusuportahan ang setting sa tablet na ito"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Hindi sinusuportahan ang setting sa device na ito"</string>
@@ -4129,8 +4126,6 @@
     <string name="unknown_unavailability_setting_summary" msgid="4589584678033059435">"Hindi available ang setting"</string>
     <string name="my_device_info_account_preference_title" msgid="342933638925781861">"Account"</string>
     <string name="my_device_info_device_name_preference_title" msgid="7104085224684165324">"Pangalan ng device"</string>
-    <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"Gumamit ng Bluetooth sa pagmamaneho"</string>
-    <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Awtomatikong i-on ang Bluetooth kapag nagmamaneho"</string>
     <string name="change_wifi_state_title" msgid="3261945855372885427">"Pagkontrol sa Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"Payagan ang app na kontrolin ang Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"Payagan ang app na ito na i-on o i-off ang Wi-Fi, mag-scan at kumonekta sa mga Wi-Fi network, magdagdag o magtanggal ng mga network, o magsimula ng lokal lang na hotspot"</string>
@@ -4147,8 +4142,8 @@
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Patagalin ang baterya ng telepono"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Pigilang mag-ring"</string>
-    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Pindutin nang sabay ang Power at Panlakas ng Volume"</string>
-    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Shortcut para mapigilan ang pag-ring"</string>
+    <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"Pindutin nang sabay ang Power at Pataas na Volume para"</string>
+    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Shortcut para hindi mag-ring"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"I-vibrate"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"I-mute"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Walang gawin"</string>
@@ -4231,10 +4226,16 @@
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Magtanong sa iyong network provider para sa pagpepresyo."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Paggamit ng data ng app"</string>
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"Invalid ang Network Mode na <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Balewalain."</string>
+    <string name="mobile_network_apn_title" msgid="7610812642954395440">"Mga Access Point Name"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Hindi available kapag nakakonekta sa <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="5953815986207345223">"Tumingin pa"</string>
     <string name="see_less" msgid="1250265310929558370">"Tumingin nang kaunti"</string>
-    <!-- no translation found for show_connected_devices (5484062660312192006) -->
-    <!-- no translation found for no_connected_devices (6657176404588389594) -->
-    <skip />
+    <string name="network_connection_request_dialog_title" msgid="9217468796286394920">"Pumili ng device"</string>
+    <plurals name="show_connected_devices" formatted="false" msgid="5484062660312192006">
+      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> nakakonektang device</item>
+      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> na nakakonektang device</item>
+    </plurals>
+    <string name="no_connected_devices" msgid="6657176404588389594">"Walang nakakonektang device"</string>
+    <string name="force_desktop_mode" msgid="4303240595324847998">"Force desktop mode"</string>
+    <string name="force_desktop_mode_summary" msgid="6259798246015387202">"Force experimental desktop mode sa mga pangalawang display"</string>
 </resources>

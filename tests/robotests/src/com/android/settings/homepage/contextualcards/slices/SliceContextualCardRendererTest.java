@@ -24,15 +24,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ViewFlipper;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
+import androidx.slice.widget.SliceView;
 
+import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
+import com.android.settings.homepage.contextualcards.ControllerRendererPool;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -47,6 +52,10 @@ public class SliceContextualCardRendererTest {
 
     @Mock
     private LiveData<Slice> mSliceLiveData;
+    @Mock
+    private ControllerRendererPool mControllerRendererPool;
+    @Mock
+    private SliceContextualCardController mController;
 
     private Context mContext;
     private SliceContextualCardRenderer mRenderer;
@@ -57,7 +66,8 @@ public class SliceContextualCardRendererTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = new ContextualCardsFragment();
-        mRenderer = new SliceContextualCardRenderer(mContext, mLifecycleOwner);
+        mRenderer = new SliceContextualCardRenderer(mContext, mLifecycleOwner,
+                mControllerRendererPool);
     }
 
     @Test
@@ -103,7 +113,7 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
-    public void bindview_sliceLiveDataShouldRemoveObservers() {
+    public void bindView_sliceLiveDataShouldRemoveObservers() {
         final String sliceUri = "content://com.android.settings.slices/action/flashlight";
         mRenderer.mSliceLiveDataMap.put(sliceUri, mSliceLiveData);
 
@@ -112,14 +122,45 @@ public class SliceContextualCardRendererTest {
         verify(mSliceLiveData).removeObservers(mLifecycleOwner);
     }
 
+    @Test
+    public void longClick_shouldFlipCard() {
+        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
+        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.viewFlipper);
+        final View dismissalView = viewHolder.itemView.findViewById(R.id.dismissal_view);
+        mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
+
+        assertThat(card).isNotNull();
+        card.performLongClick();
+
+        assertThat(viewFlipper.getCurrentView()).isEqualTo(dismissalView);
+    }
+
+    @Test
+    public void viewClick_keepCard_shouldFlipBackToSlice() {
+        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
+        final Button btnKeep = viewHolder.itemView.findViewById(R.id.keep);
+        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.viewFlipper);
+        mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
+
+        assertThat(card).isNotNull();
+        card.performLongClick();
+        assertThat(btnKeep).isNotNull();
+        btnKeep.performClick();
+
+        assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
+    }
+
     private RecyclerView.ViewHolder getSliceViewHolder() {
         final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
 
-        return viewHolder;
+        return mRenderer.createViewHolder(view);
     }
 
     private ContextualCard buildContextualCard(String sliceUri) {

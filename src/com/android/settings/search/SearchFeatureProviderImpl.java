@@ -41,7 +41,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         }
         final String packageName = caller.getPackageName();
         final boolean isSettingsPackage = TextUtils.equals(packageName, context.getPackageName())
-                || TextUtils.equals(getSettingsIntelligencePkgName(), packageName);
+                || TextUtils.equals(getSettingsIntelligencePkgName(context), packageName);
         final boolean isWhitelistedPackage =
                 isSignatureWhitelisted(context, caller.getPackageName());
         if (isSettingsPackage || isWhitelistedPackage) {

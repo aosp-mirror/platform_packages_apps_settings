@@ -112,8 +112,8 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
                 metricsFeatureProvider.action(
                         viewContext, MetricsProto.MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
                         card.getMetricsConstant());
-                mControllerRendererPool.getController(mContext, card.getCardType()).onActionClick(
-                        card);
+                mControllerRendererPool.getController(mContext, card.getCardType())
+                        .onDismissed(card);
             });
         } else {
             button.setVisibility(View.GONE);

@@ -126,7 +126,8 @@ public class ControllerRendererPool {
         if (ConditionContextualCardRenderer.class == clz) {
             return new ConditionContextualCardRenderer(context, this /* controllerRendererPool */);
         } else if (SliceContextualCardRenderer.class == clz) {
-            return new SliceContextualCardRenderer(context, lifecycleOwner);
+            return new SliceContextualCardRenderer(context, lifecycleOwner,
+                    this /* controllerRendererPool */);
         } else if (LegacySuggestionContextualCardRenderer.class == clz) {
             return new LegacySuggestionContextualCardRenderer(context,
                     this /* controllerRendererPool */);

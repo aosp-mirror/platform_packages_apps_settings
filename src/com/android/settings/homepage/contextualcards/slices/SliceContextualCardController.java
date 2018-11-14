@@ -25,6 +25,10 @@ import com.android.settings.homepage.contextualcards.ContextualCardUpdateListene
  */
 public class SliceContextualCardController implements ContextualCardController {
 
+    private static final String TAG = "SliceCardController";
+
+    private ContextualCardUpdateListener mCardUpdateListener;
+
     @Override
     public int getCardType() {
         return ContextualCard.CardType.SLICE;
@@ -37,11 +41,16 @@ public class SliceContextualCardController implements ContextualCardController {
 
     @Override
     public void onActionClick(ContextualCard card) {
+        //TODO(b/113783548): Implement feedback mechanism
+    }
 
+    @Override
+    public void onDismissed(ContextualCard card) {
+        //TODO(b/113783548): Mark this card as dismissed in db and reload loader.
     }
 
     @Override
     public void setCardUpdateListener(ContextualCardUpdateListener listener) {
-
+            mCardUpdateListener = listener;
     }
 }
