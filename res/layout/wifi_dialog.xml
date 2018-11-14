@@ -83,12 +83,13 @@
                         style="@style/wifi_item_label"
                         android:text="@string/wifi_security" />
 
+                <!-- Entries are added dynamically to this spinner -->
+                <!-- See WifiConfigController.configureSecuritySpinner -->
                 <Spinner android:id="@+id/security"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/wifi_item_spinner"
-                        android:prompt="@string/wifi_security"
-                        android:entries="@array/wifi_security" />
+                        android:prompt="@string/wifi_security" />
             </LinearLayout>
         </LinearLayout>
 
