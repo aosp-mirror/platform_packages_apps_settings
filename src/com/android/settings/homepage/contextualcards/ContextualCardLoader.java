@@ -24,8 +24,11 @@ import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -58,6 +61,19 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     ContextualCardLoader(Context context) {
         super(context);
         mContext = context.getApplicationContext();
+    }
+
+    @Override
+    protected void onStartLoading() {
+        super.onStartLoading();
+        mContext.getContentResolver().registerContentObserver(CardContentProvider.URI,
+                false /*notifyForDescendants*/, mObserver);
+    }
+
+    @Override
+    protected void onStopLoading() {
+        super.onStopLoading();
+        mContext.getContentResolver().unregisterContentObserver(mObserver);
     }
 
     @Override
@@ -184,4 +200,14 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         }
         return -1L;
     }
+
+    private final ContentObserver mObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange) {
+            if (isStarted()) {
+                forceLoad();
+            }
+        }
+    };
 }

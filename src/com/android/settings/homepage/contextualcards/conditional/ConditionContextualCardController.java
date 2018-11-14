@@ -77,13 +77,13 @@ public class ConditionContextualCardController implements ContextualCardControll
 
     @Override
     public void onActionClick(ContextualCard contextualCard) {
-
+        final ConditionalContextualCard card = (ConditionalContextualCard) contextualCard;
+        mConditionManager.onActionClick(card.getConditionId());
     }
 
     @Override
     public void onDismissed(ContextualCard contextualCard) {
-        final ConditionalContextualCard card = (ConditionalContextualCard) contextualCard;
-        mConditionManager.onActionClick(card.getConditionId());
+
     }
 
     @Override
@@ -93,8 +93,8 @@ public class ConditionContextualCardController implements ContextualCardControll
         final boolean isOddNumber = conditionCards.size() % 2 == 1;
         if (isOddNumber) {
             final int lastIndex = conditionCards.size() - 1;
-            final ConditionalContextualCard card = (ConditionalContextualCard) conditionCards.get(
-                    lastIndex);
+            final ConditionalContextualCard card = (ConditionalContextualCard) conditionCards
+                    .get(lastIndex);
             conditionCards.set(lastIndex, card.mutate().setIsHalfWidth(false).build());
         }
 

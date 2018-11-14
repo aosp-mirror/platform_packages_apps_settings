@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards;
 
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -36,10 +37,15 @@ import com.android.settingslib.utils.ThreadUtils;
  */
 public class CardContentProvider extends ContentProvider {
 
-    private static final String TAG = "CardContentProvider";
-
     public static final String CARD_AUTHORITY = "com.android.settings.homepage.CardContentProvider";
 
+    public static final Uri URI = new Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(CardContentProvider.CARD_AUTHORITY)
+                    .appendPath(CardDatabaseHelper.CARD_TABLE)
+                    .build();
+
+    private static final String TAG = "CardContentProvider";
     /** URI matcher for ContentProvider queries. */
     private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
     /** URI matcher type for cards table */
