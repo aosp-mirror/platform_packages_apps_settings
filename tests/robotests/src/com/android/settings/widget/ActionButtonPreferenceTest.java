@@ -133,14 +133,12 @@ public class ActionButtonPreferenceTest {
         final ActionButtonPreference pref = mock(ActionButtonPreference.class);
         when(pref.setButton1Text(anyInt())).thenReturn(pref);
         when(pref.setButton1Icon(anyInt())).thenReturn(pref);
-        when(pref.setButton1Positive(anyBoolean())).thenReturn(pref);
         when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
         when(pref.setButton1Visible(anyBoolean())).thenReturn(pref);
         when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         when(pref.setButton2Text(anyInt())).thenReturn(pref);
         when(pref.setButton2Icon(anyInt())).thenReturn(pref);
-        when(pref.setButton2Positive(anyBoolean())).thenReturn(pref);
         when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
         when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
         when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);

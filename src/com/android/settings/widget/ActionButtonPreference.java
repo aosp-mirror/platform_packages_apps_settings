@@ -159,16 +159,6 @@ public class ActionButtonPreference extends Preference {
         return this;
     }
 
-    @Deprecated
-    public ActionButtonPreference setButton1Positive(boolean isPositive) {
-        return this;
-    }
-
-    @Deprecated
-    public ActionButtonPreference setButton2Positive(boolean isPositive) {
-        return this;
-    }
-
     public ActionButtonPreference setButton1Visible(boolean isVisible) {
         if (isVisible != mButton1Info.mIsVisible) {
             mButton1Info.mIsVisible = isVisible;

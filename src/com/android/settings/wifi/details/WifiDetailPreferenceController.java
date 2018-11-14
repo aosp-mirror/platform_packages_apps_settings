@@ -279,10 +279,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mButtonsPref = ((ActionButtonPreference) screen.findPreference(KEY_BUTTONS_PREF))
                 .setButton1Text(R.string.forget)
                 .setButton1Icon(R.drawable.ic_settings_delete)
-                .setButton1Positive(false)
                 .setButton1OnClickListener(view -> forgetNetwork())
                 .setButton2Text(R.string.wifi_sign_in_button_text)
-                .setButton2Positive(true)
                 .setButton2OnClickListener(view -> signIntoNetwork());
 
         mSignalStrengthPref =

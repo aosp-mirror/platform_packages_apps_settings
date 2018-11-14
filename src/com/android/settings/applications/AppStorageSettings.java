@@ -167,10 +167,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                 .setComputingString(R.string.computing_size)
                 .setErrorString(R.string.invalid_size_value)
                 .build();
-        mButtonsPref = ((ActionButtonPreference) findPreference(KEY_HEADER_BUTTONS))
-                .setButton1Positive(false)
-                .setButton2Positive(false);
-
+        mButtonsPref = ((ActionButtonPreference) findPreference(KEY_HEADER_BUTTONS));
         mStorageUsed = findPreference(KEY_STORAGE_USED);
         mChangeStorageButton = (Button) ((LayoutPreference) findPreference(KEY_CHANGE_STORAGE))
                 .findViewById(R.id.button);

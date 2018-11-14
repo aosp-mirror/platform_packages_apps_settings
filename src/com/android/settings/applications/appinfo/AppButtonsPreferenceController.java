@@ -170,8 +170,6 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                     .setButton2Icon(R.drawable.ic_settings_force_stop)
                     .setButton1OnClickListener(new UninstallAndDisableButtonListener())
                     .setButton2OnClickListener(new ForceStopButtonListener())
-                    .setButton1Positive(false)
-                    .setButton2Positive(false)
                     .setButton2Enabled(false);
         }
     }
@@ -544,18 +542,15 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
             mButtonsPref.setButton1Text(R.string.uninstall_text)
-                    .setButton1Icon(R.drawable.ic_settings_delete)
-                    .setButton1Positive(false);
+                    .setButton1Icon(R.drawable.ic_settings_delete);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
             mButtonsPref.setButton1Text(R.string.uninstall_text)
-                    .setButton1Icon(R.drawable.ic_settings_delete)
-                    .setButton1Positive(false);
+                    .setButton1Icon(R.drawable.ic_settings_delete);
             disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
                     .contains(mAppEntry.info.packageName);
         } else {
             mButtonsPref.setButton1Text(R.string.install_text)
-                    .setButton1Icon(R.drawable.ic_settings_install)
-                    .setButton1Positive(true);
+                    .setButton1Icon(R.drawable.ic_settings_install);
             disableable = true;
         }
 
