@@ -19,6 +19,7 @@ package com.android.settings.display;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
@@ -178,7 +179,7 @@ public class NightDisplaySettings extends DashboardFragment
         return buildPreferenceControllers(context);
     }
 
-    private static List <AbstractPreferenceController> buildPreferenceControllers(Context context) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>(1);
         controllers.add(new NightDisplayFooterPreferenceController(context));
         return controllers;
@@ -198,12 +199,12 @@ public class NightDisplaySettings extends DashboardFragment
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return ColorDisplayController.isAvailable(context);
+                    return ColorDisplayManager.isNightDisplayAvailable(context);
                 }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
-                    Context context) {
+                        Context context) {
                     return buildPreferenceControllers(context);
                 }
             };

@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
@@ -37,7 +38,7 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        if (!ColorDisplayController.isAvailable(mContext)) {
+        if (!ColorDisplayManager.isNightDisplayAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         } else if (!mController.isActivated()) {
             return DISABLED_DEPENDENT_SETTING;
@@ -54,7 +55,7 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final SeekBarPreference preference = (SeekBarPreference) screen.findPreference(
-            getPreferenceKey());
+                getPreferenceKey());
         preference.setContinuousUpdates(true);
         preference.setMax(getMaxSteps());
     }
