@@ -88,7 +88,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     // Result code identifiers
     @VisibleForTesting
     static final int REQUEST_UNINSTALL = 0;
-    private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
+    private static final int REQUEST_REMOVE_DEVICE_ADMIN = 5;
 
     static final int SUB_INFO_FRAGMENT = 1;
 
