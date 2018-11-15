@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.Build;
+import android.provider.Settings.Global;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -49,7 +50,15 @@ public class TopLevelAboutDevicePreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_shouldReturnDeviceModel() {
+    public void getSummary_deviceNameNotSet_shouldReturnDeviceModel() {
         assertThat(mController.getSummary().toString()).isEqualTo(Build.MODEL);
     }
+
+    @Test
+    public void getSummary_deviceNameSet_shouldReturnDeviceName() {
+        Global.putString(mContext.getContentResolver(), Global.DEVICE_NAME, "Test");
+        assertThat(mController.getSummary().toString()).isEqualTo("Test");
+    }
+
+
 }
