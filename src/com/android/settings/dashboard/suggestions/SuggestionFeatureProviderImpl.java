@@ -20,12 +20,9 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.service.settings.suggestions.Suggestion;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
@@ -37,10 +34,6 @@ import com.android.settings.password.ScreenLockSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
-
-import java.util.List;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
 
@@ -94,17 +87,5 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         final Context appContext = context.getApplicationContext();
         mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
                 .getMetricsFeatureProvider();
-    }
-
-    @Override
-    public void dismissSuggestion(Context context, SuggestionControllerMixinCompat mixin,
-            Suggestion suggestion) {
-        if (mixin == null || suggestion == null || context == null) {
-            return;
-        }
-        mMetricsFeatureProvider.action(
-                context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
-                suggestion.getId());
-        mixin.dismissSuggestion(suggestion);
     }
 }

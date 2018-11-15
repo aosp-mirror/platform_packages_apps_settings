@@ -18,8 +18,8 @@ package com.android.settings.core.instrumentation;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.util.Pair;
 import android.util.StatsLog;
+import android.util.Pair;
 
 import com.android.settingslib.core.instrumentation.LogWriter;
 
@@ -45,7 +45,7 @@ public class StatsLogWriter implements LogWriter {
                 0 /* changedPreferenceIntValue */);
     }
 
-   @Override
+    @Override
     public void action(Context context, int action, Pair<Integer, Object>... taggedData) {
         action(SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 action,
@@ -73,8 +73,7 @@ public class StatsLogWriter implements LogWriter {
     }
 
     @Override
-    public void action(Context context, int action, String pkg,
-            Pair<Integer, Object>... taggedData) {
+    public void action(Context context, int action, String pkg) {
         action(SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 action,
                 SettingsEnums.PAGE_UNKNOWN /* pageId */,

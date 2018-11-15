@@ -1463,7 +1463,7 @@
             android:exported="false"
             android:permission="android.permission.MANAGE_USERS"
             android:resizeableActivity="false"
-            android:theme="@android:style/Theme.NoDisplay">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1597,6 +1597,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".password.SetupChooseLockGeneric$InternalActivity"
+            android:theme="@style/GlifTheme.Light"
+            android:exported="false"
+            android:excludeFromRecents="true" />
 
         <activity android:name=".password.ChooseLockGeneric"
             android:label="@string/lockpassword_choose_lock_generic_header"

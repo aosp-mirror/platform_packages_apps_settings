@@ -143,7 +143,6 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        //TODO(b/112982691): Add policy transparency explaining why this setting is disabled.
         preference.setEnabled(!isManagedByAdmin());
     }
 

@@ -17,24 +17,20 @@
 package com.android.settings.slices;
 
 import static com.android.settings.bluetooth.BluetoothSliceBuilder.ACTION_BLUETOOTH_SLICE_CHANGED;
-import static com.android.settings.flashlight.FlashlightSliceBuilder
-        .ACTION_FLASHLIGHT_SLICE_CHANGED;
-import static com.android.settings.network.telephony.Enhanced4gLteSliceHelper
-        .ACTION_ENHANCED_4G_LTE_CHANGED;
+import static com.android.settings.flashlight.FlashlightSliceBuilder.ACTION_FLASHLIGHT_SLICE_CHANGED;
+import static com.android.settings.network.telephony.Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED;
 import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
+import static com.android.settings.slices.SettingsSliceProvider.ACTION_COPY;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
-import static com.android.settings.slices.SettingsSliceProvider.ACTION_COPY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
-import static com.android.settings.wifi.calling.WifiCallingSliceHelper
-        .ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED;
-import static com.android.settings.wifi.calling.WifiCallingSliceHelper
-        .ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY;
-import static com.android.settings.wifi.calling.WifiCallingSliceHelper
-        .ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED;
 
+import android.app.settings.SettingsEnums;
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -44,7 +40,6 @@ import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
@@ -216,12 +211,11 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
      * follows the pattern in SharedPreferenceLogger.
      */
     private void logSliceValueChange(Context context, String sliceKey, int newValue) {
-        final Pair<Integer, Object> namePair = Pair.create(
-                MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, sliceKey);
-        final Pair<Integer, Object> valuePair = Pair.create(
-                MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE, newValue);
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED, namePair, valuePair);
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        sliceKey, newValue);
     }
 
     private BasePreferenceController getPreferenceController(Context context, String key) {

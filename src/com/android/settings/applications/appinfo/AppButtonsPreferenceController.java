@@ -51,6 +51,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
@@ -106,7 +107,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private final UserManager mUserManager;
     private final PackageManager mPm;
     private final SettingsActivity mActivity;
-    private final Fragment mFragment;
+    private final InstrumentedPreferenceFragment mFragment;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final ApplicationFeatureProvider mApplicationFeatureProvider;
     private final int mUserId;
@@ -119,7 +120,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private boolean mFinishing = false;
     private boolean mAppsControlDisallowedBySystem;
 
-    public AppButtonsPreferenceController(SettingsActivity activity, Fragment fragment,
+    public AppButtonsPreferenceController(SettingsActivity activity,
+            InstrumentedPreferenceFragment fragment,
             Lifecycle lifecycle, String packageName, ApplicationsState state,
             int requestUninstall, int requestRemoveDeviceAdmin) {
         super(activity, KEY_ACTION_BUTTONS);
@@ -517,8 +519,12 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
 
     @VisibleForTesting
     void forceStopPackage(String pkgName) {
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(mContext,
-                MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
+        mMetricsFeatureProvider.action(
+                mMetricsFeatureProvider.getAttribution(mActivity),
+                MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP,
+                mFragment.getMetricsCategory(),
+                pkgName,
+                0);
         ActivityManager am = (ActivityManager) mActivity.getSystemService(
                 Context.ACTIVITY_SERVICE);
         Log.d(TAG, "Stopping package " + pkgName);

@@ -23,6 +23,7 @@ import android.app.Dialog;
 import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -489,7 +490,12 @@ public class DeviceAdminAdd extends Activity {
     void logSpecialPermissionChange(boolean allow, String packageName) {
         int logCategory = allow ? MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_ALLOW :
                 MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_DENY;
-        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this, logCategory, packageName);
+        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(
+                SettingsEnums.PAGE_UNKNOWN,
+                logCategory,
+                SettingsEnums.PAGE_UNKNOWN,
+                packageName,
+                0);
     }
 
     @Override

@@ -28,6 +28,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.app.slice.Slice;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -37,7 +38,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
-import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.BasePreferenceController;
@@ -54,7 +54,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -72,8 +71,6 @@ public class SliceBroadcastReceiverTest {
     private SliceBroadcastReceiver mReceiver;
     private SearchFeatureProvider mSearchFeatureProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
-    private ArgumentCaptor<Pair<Integer, Object>> mLoggingNameArgumentCatpor;
-    private ArgumentCaptor<Pair<Integer, Object>> mLoggingValueArgumentCatpor;
 
     @Before
     public void setUp() {
@@ -88,8 +85,6 @@ public class SliceBroadcastReceiverTest {
         CustomSliceManager manager = new CustomSliceManager(mContext);
         when(mFakeFeatureFactory.slicesFeatureProvider.getCustomSliceManager(any()))
                 .thenReturn(manager);
-        mLoggingNameArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
-        mLoggingValueArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
     }
 
     @After
@@ -123,20 +118,12 @@ public class SliceBroadcastReceiverTest {
 
         assertThat(fakeToggleController.isChecked()).isFalse();
         verify(mFakeFeatureFactory.metricsFeatureProvider)
-                .action(eq(mContext),
-                        eq(MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED),
-                        mLoggingNameArgumentCatpor.capture(),
-                        mLoggingValueArgumentCatpor.capture());
-
-        final Pair<Integer, Object> namePair = mLoggingNameArgumentCatpor.getValue();
-        final Pair<Integer, Object> valuePair = mLoggingValueArgumentCatpor.getValue();
-        assertThat(namePair.first).isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
-        assertThat(namePair.second).isEqualTo(fakeToggleController.getPreferenceKey());
-
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        fakeToggleController.getPreferenceKey(),
+                        0);
         verify(resolver).notifyChange(uri, null);
-        assertThat(valuePair.first)
-                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
-        assertThat(valuePair.second).isEqualTo(0);
     }
 
     @Test
@@ -229,20 +216,13 @@ public class SliceBroadcastReceiverTest {
 
         assertThat(fakeSliderController.getSliderPosition()).isEqualTo(position);
         verify(mFakeFeatureFactory.metricsFeatureProvider)
-                .action(eq(mContext),
-                        eq(MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED),
-                        mLoggingNameArgumentCatpor.capture(),
-                        mLoggingValueArgumentCatpor.capture());
-
-        final Pair<Integer, Object> namePair = mLoggingNameArgumentCatpor.getValue();
-        final Pair<Integer, Object> valuePair = mLoggingValueArgumentCatpor.getValue();
-        assertThat(namePair.first).isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME);
-        assertThat(namePair.second).isEqualTo(key);
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        key,
+                        position);
 
         verify(resolver).notifyChange(uri, null);
-        assertThat(valuePair.first)
-                .isEqualTo(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_INT_VALUE);
-        assertThat(valuePair.second).isEqualTo(position);
     }
 
     @Test(expected = IllegalArgumentException.class)

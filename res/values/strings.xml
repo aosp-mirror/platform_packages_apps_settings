@@ -6462,7 +6462,7 @@
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
     <!-- User removal confirmation title [CHAR LIMIT=25] -->
-    <string name="user_confirm_remove_title">Remove this user?</string>
+    <string name="user_confirm_remove_title">Delete this user?</string>
     <!-- Profile removal confirmation title [CHAR LIMIT=25] -->
     <string name="user_profile_confirm_remove_title">Remove this profile?</string>
     <!-- Work profile removal confirmation title [CHAR LIMIT=25] -->
@@ -6500,7 +6500,7 @@
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_sms">Turn on phone calls &amp; SMS</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
-    <string name="user_remove_user">Remove user</string>
+    <string name="user_remove_user">Delete user</string>
     <!-- Title for confirmation of turning on calls [CHAR LIMIT=40] -->
     <string name="user_enable_calling_confirm_title">Turn on phone calls?</string>
     <!-- Message for confirmation of turning on calls [CHAR LIMIT=none] -->
@@ -7112,7 +7112,7 @@
     <string name="alarm_ringtone_title">Default alarm sound</string>
 
     <!-- Sound: Title for the option managing whether or not to vibrate when ringing. [CHAR LIMIT=30] -->
-    <string name="vibrate_when_ringing_title">Also vibrate for calls</string>
+    <string name="vibrate_when_ringing_title">Vibrate for calls</string>
 
     <!-- Sound: Title for the other sounds option and associated settings page. [CHAR LIMIT=30] -->
     <string name="other_sound_settings">Other sounds</string>
@@ -10268,7 +10268,12 @@
 
     <!-- Title for Network connection request Dialog [CHAR LIMIT=30] -->
     <string name="network_connection_request_dialog_title">Choose device</string>
+    <!-- Message for Network connection timeout Dialog [CHAR LIMIT=NONE] -->
+    <string name="network_connection_timeout_dialog_message">No devices found. Make sure the device is turned on and available to connect.</string>
+    <!-- OK button for Network connection timeout Dialog [CHAR LIMIT=30] -->
+    <string name="network_connection_timeout_dialog_ok">Scan again</string>
 
+    <!-- Summary for connected devices count in connected device slice. [CHAR LIMIT=NONE] -->
     <plurals name="show_connected_devices">
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> device connected</item>
         <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> devices connected</item>

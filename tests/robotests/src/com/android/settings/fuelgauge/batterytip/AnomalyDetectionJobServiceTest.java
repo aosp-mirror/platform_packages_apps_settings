@@ -43,13 +43,13 @@ import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
 import android.app.job.JobWorkItem;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.StatsDimensionsValue;
 import android.os.UserManager;
-import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -174,11 +174,11 @@ public class AnomalyDetectionJobServiceTest {
 
         verify(mBatteryDatabaseManager, never()).insertAnomaly(anyInt(), anyString(), anyInt(),
                 anyInt(), anyLong());
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
-                SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
+                SettingsEnums.PAGE_UNKNOWN,
+                SYSTEM_PACKAGE + "/" + VERSION_CODE,
+                 ANOMALY_TYPE);
     }
 
     @Test
@@ -229,11 +229,11 @@ public class AnomalyDetectionJobServiceTest {
 
         verify(mBatteryDatabaseManager).insertAnomaly(anyInt(), anyString(), eq(6),
                 eq(AnomalyDatabaseHelper.State.AUTO_HANDLED), anyLong());
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
-                SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
+                SettingsEnums.PAGE_UNKNOWN,
+                SYSTEM_PACKAGE + "/" + VERSION_CODE,
+                ANOMALY_TYPE);
     }
 
     @Test
@@ -254,11 +254,11 @@ public class AnomalyDetectionJobServiceTest {
 
         verify(mBatteryDatabaseManager).insertAnomaly(anyInt(), anyString(), eq(6),
                 eq(AnomalyDatabaseHelper.State.NEW), anyLong());
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
                 MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
-                SYSTEM_PACKAGE,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_TYPE),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE, VERSION_CODE));
+                SettingsEnums.PAGE_UNKNOWN,
+                SYSTEM_PACKAGE + "/" + VERSION_CODE,
+                ANOMALY_TYPE);
     }
 
     @Test

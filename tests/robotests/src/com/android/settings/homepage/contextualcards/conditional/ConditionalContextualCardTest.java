@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.homepage.contextualcards;
+package com.android.settings.homepage.contextualcards.conditional;
+
+import static com.android.settings.homepage.contextualcards.conditional.ConditionalContextualCard
+        .UNSUPPORTED_RANKING_SCORE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.conditional.ConditionalContextualCard;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -38,5 +42,11 @@ public class ConditionalContextualCardTest {
     public void getCardType_shouldAlwaysBeConditional() {
         assertThat(new ConditionalContextualCard.Builder().build().getCardType())
                 .isEqualTo(ContextualCard.CardType.CONDITIONAL);
+    }
+
+    @Test
+    public void getRankingScore_shouldAlwaysBeUnsupportedScore() {
+        assertThat(new ConditionalContextualCard.Builder().build().getRankingScore())
+                .isEqualTo(UNSUPPORTED_RANKING_SCORE);
     }
 }

@@ -42,6 +42,7 @@ import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStateOverlayBridge.OverlayState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
@@ -129,8 +130,14 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     void logSpecialPermissionChange(boolean newState, String packageName) {
         int logCategory = newState ? MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW
                 : MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_DENY;
-        FeatureFactory.getFactory(getContext())
-                .getMetricsFeatureProvider().action(getContext(), logCategory, packageName);
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+        metricsFeatureProvider.action(
+                metricsFeatureProvider.getAttribution(getActivity()),
+                logCategory,
+                getMetricsCategory(),
+                packageName,
+                0);
     }
 
     @Override

@@ -38,7 +38,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowContentResolver;
-import org.robolectric.shadows.ShadowLog;
 
 import java.util.ArrayList;
 import java.util.Arrays;

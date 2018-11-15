@@ -35,6 +35,7 @@ import static org.mockito.Mockito.when;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -42,10 +43,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 
-import androidx.fragment.app.Fragment;
-
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.ActionButtonPreference;
@@ -377,12 +377,17 @@ public class AppButtonsPreferenceControllerTest {
      * The test fragment which implements
      * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
      */
-    public static class TestFragment extends Fragment
+    public static class TestFragment extends InstrumentedPreferenceFragment
             implements ButtonActionDialogFragment.AppButtonsDialogListener {
 
         @Override
         public void handleDialogClick(int type) {
             // Do nothing
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return SettingsEnums.PAGE_UNKNOWN;
         }
     }
 }

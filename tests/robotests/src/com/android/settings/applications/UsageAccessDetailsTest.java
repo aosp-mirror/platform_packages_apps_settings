@@ -18,12 +18,10 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.content.Context;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -54,12 +52,20 @@ public class UsageAccessDetailsTest {
     @Test
     public void logSpecialPermissionChange() {
         mFragment.logSpecialPermissionChange(true, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW,
+                mFragment.getMetricsCategory(),
+                "app",
+                0);
 
         mFragment.logSpecialPermissionChange(false, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY,
+                mFragment.getMetricsCategory(),
+                "app",
+                0);
     }
 
     @Test

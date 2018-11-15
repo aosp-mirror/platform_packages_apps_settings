@@ -18,6 +18,8 @@ package com.android.settings.display;
 
 import android.content.Context;
 
+import android.hardware.display.ColorDisplayManager;
+
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -39,7 +41,8 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayController.isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

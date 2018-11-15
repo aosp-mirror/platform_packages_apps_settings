@@ -17,8 +17,8 @@
 package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -64,15 +64,18 @@ public class RestrictAppAction extends BatteryTipAction {
                     AppOpsManager.MODE_IGNORED);
             if (CollectionUtils.isEmpty(appInfo.anomalyTypes)) {
                 // Only log context if there is no anomaly type
-                mMetricsFeatureProvider.action(mContext,
-                        MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, packageName,
-                        Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
+                mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP,
+                        metricsKey,
+                        packageName,
+                        0);
             } else {
                 for (int type : appInfo.anomalyTypes) {
-                    mMetricsFeatureProvider.action(mContext,
-                            MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, packageName,
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey),
-                            Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, type));
+                    mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                            MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP,
+                            metricsKey,
+                            packageName,
+                            type);
                 }
             }
         }

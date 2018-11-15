@@ -18,10 +18,14 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
+
 import android.content.DialogInterface;
 import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -29,34 +33,39 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResourcesImpl.class, ShadowAlertDialogCompat.class})
-public class NetworkRequestDialogFragmentTest {
+public class NetworkRequestTimeoutDialogFragmentTest {
 
   private FragmentActivity mActivity;
-  private NetworkRequestDialogFragment networkRequestDialogFragment;
+  private NetworkRequestTimeoutDialogFragment mFragment;
 
   @Before
   public void setUp() {
     mActivity = Robolectric.setupActivity(FragmentActivity.class);
-    networkRequestDialogFragment = spy(NetworkRequestDialogFragment.newInstance());
+    mFragment = spy(NetworkRequestTimeoutDialogFragment.newInstance());
+    mFragment.show(mActivity.getSupportFragmentManager(), null);
   }
 
   @Test
   public void display_shouldShowTheDialog() {
-    networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), null);
     AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+
     assertThat(alertDialog).isNotNull();
     assertThat(alertDialog.isShowing()).isTrue();
+
+    ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(alertDialog);
+    assertThat(RuntimeEnvironment.application
+        .getString(R.string.network_connection_timeout_dialog_message))
+        .isEqualTo(shadowAlertDialog.getMessage());
   }
 
   @Test
-  public void clickPositiveButton_shouldCloseTheDialog() {
-    networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), null);
+  public void clickPositiveButton_shouldCallStartScanningDialog() {
     AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
     assertThat(alertDialog.isShowing()).isTrue();
 
@@ -64,28 +73,18 @@ public class NetworkRequestDialogFragmentTest {
     assertThat(positiveButton).isNotNull();
 
     positiveButton.performClick();
-    assertThat(alertDialog.isShowing()).isFalse();
+    verify(mFragment, times(1)).startScanningDialog();
   }
 
   @Test
-  public void onResumeAndWaitTimeout_shouldCallTimeoutDialog() {
-    FakeNetworkRequestDialogFragment fakeFragment = new FakeNetworkRequestDialogFragment();
-    FakeNetworkRequestDialogFragment spyFakeFragment = spy(fakeFragment);
-    spyFakeFragment.show(mActivity.getSupportFragmentManager(), null);
+  public void clickNegativeButton_shouldCloseTheDialog() {
+    AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+    assertThat(alertDialog.isShowing()).isTrue();
 
-    assertThat(fakeFragment.bCalledStopAndPop).isFalse();
+    Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+    assertThat(negativeButton).isNotNull();
 
-    ShadowLooper.getShadowMainLooper().runToEndOfTasks();
-
-    assertThat(fakeFragment.bCalledStopAndPop).isTrue();
-  }
-
-  class FakeNetworkRequestDialogFragment extends NetworkRequestDialogFragment {
-    boolean bCalledStopAndPop = false;
-
-    @Override
-    public void stopScanningAndPopTimeoutDialog() {
-      bCalledStopAndPop = true;
-    }
+    negativeButton.performClick();
+    assertThat(alertDialog.isShowing()).isFalse();
   }
 }

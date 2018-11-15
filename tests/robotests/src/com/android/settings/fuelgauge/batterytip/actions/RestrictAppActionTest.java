@@ -18,7 +18,7 @@ package com.android.settings.fuelgauge.batterytip.actions;
 import static org.mockito.Mockito.verify;
 
 import android.app.AppOpsManager;
-import android.util.Pair;
+import android.app.settings.SettingsEnums;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -91,16 +91,13 @@ public class RestrictAppActionTest {
                 .setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_IGNORED);
         verify(mBatteryUtils)
                 .setForceAppStandby(UID_2, PACKAGE_NAME_2, AppOpsManager.MODE_IGNORED);
-        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_1, Pair.create(
-                        MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY));
-        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_2,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_WAKEUP));
-        verify(mFeatureFactory.metricsFeatureProvider).action(RuntimeEnvironment.application,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, PACKAGE_NAME_2,
-                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, METRICS_KEY),
-                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, ANOMALY_BT));
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_1, 0);
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_2,
+                ANOMALY_WAKEUP);
+        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
+                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_2,
+                ANOMALY_BT);
     }
 }

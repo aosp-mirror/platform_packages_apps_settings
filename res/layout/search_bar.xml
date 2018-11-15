@@ -21,6 +21,7 @@
     android:id="@+id/search_bar_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:layout_scrollFlags="scroll|enterAlways"
     android:background="?android:attr/colorPrimary">
     <androidx.cardview.widget.CardView
         android:id="@+id/search_bar"

@@ -29,6 +29,7 @@ import android.widget.BaseAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
@@ -109,9 +110,12 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
     }
 
-    //TODO(b/111822376): implement sorting mechanism.
-    private void sortCards(List<ContextualCard> cards) {
+    @VisibleForTesting
+    List<ContextualCard> sortCards(List<ContextualCard> cards) {
         //take mContextualCards as the source and do the ranking based on the rule.
+        return cards.stream()
+                .sorted((c1, c2) -> Double.compare(c2.getRankingScore(), c1.getRankingScore()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -127,10 +131,9 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         allCards.addAll(
                 updateList.values().stream().flatMap(List::stream).collect(Collectors.toList()));
 
-        sortCards(allCards);
         //replace with the new data
         mContextualCards.clear();
-        mContextualCards.addAll(allCards);
+        mContextualCards.addAll(sortCards(allCards));
 
         loadCardControllers();
 
