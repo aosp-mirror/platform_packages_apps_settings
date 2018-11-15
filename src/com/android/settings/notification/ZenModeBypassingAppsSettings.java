@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
@@ -24,47 +26,50 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+
 @SearchIndexable
-public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implements Indexable {
+public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
+        Indexable {
+    private final String TAG = "ZenBypassingApps";
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
+        final Activity activity = getActivity();
+        final Application app;
+        if (activity != null) {
+            app = activity.getApplication();
+        } else {
+            app = null;
+        }
+        return buildPreferenceControllers(context, app, this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
-        List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeCallsPreferenceController(context, lifecycle,
-                "zen_mode_calls_settings"));
-        controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
-                "zen_mode_messages_settings"));
-        controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle,
-                "zen_mode_alarms"));
-        controllers.add(new ZenModeMediaPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeSystemPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeRemindersPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeEventsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle,
-                R.string.zen_sound_footer));
-        controllers.add(new ZenModeBypassingAppsPreferenceController(context, lifecycle));
+            Application app, Fragment host) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModeAllBypassingAppsPreferenceController(context, app, host));
         return controllers;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_sound_vibration_settings;
+        return R.xml.zen_mode_bypassing_apps;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_PRIORITY;
+        return MetricsEvent.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS;
     }
 
     /**
@@ -79,20 +84,15 @@ public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implement
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.zen_mode_sound_vibration_settings;
+                    sir.xmlResId = R.xml.zen_mode_bypassing_apps;
                     result.add(sir);
                     return result;
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context, null, null);
                 }
-
-            @Override
-            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-                return buildPreferenceControllers(context, null);
-            }
-        };
+            };
 }
