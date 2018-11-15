@@ -19,14 +19,15 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 import android.widget.Toolbar;
 
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -37,25 +38,34 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SearchFeatureProviderImplTest {
 
     private SearchFeatureProviderImpl mProvider;
     private Activity mActivity;
+    private ShadowPackageManager mPackageManager;
 
     @Before
     public void setUp() {
         FakeFeatureFactory.setupForTest();
         mActivity = Robolectric.setupActivity(Activity.class);
-        mProvider = spy(new SearchFeatureProviderImpl());
+        mProvider = new SearchFeatureProviderImpl();
+        mPackageManager = Shadows.shadowOf(mActivity.getPackageManager());
     }
 
     @Test
     @Config(shadows = ShadowUtils.class)
-    public void initSearchToolbar_shouldInitWithOnClickListener() {
-        mProvider.initSearchToolbar(mActivity, null);
+    public void initSearchToolbar_hasResolvedInfo_shouldStartCorrectIntent() {
+        final Intent searchIntent = new Intent(SearchFeatureProvider.SEARCH_UI_INTENT)
+                .setPackage(mActivity.getString(R.string.config_settingsintelligence_package_name));
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        mPackageManager.addResolveInfoForIntent(searchIntent, info);
+
         // Should not crash.
+        mProvider.initSearchToolbar(mActivity, null);
 
         final Toolbar toolbar = new Toolbar(mActivity);
         // This ensures navigationView is created.
@@ -68,6 +78,21 @@ public class SearchFeatureProviderImplTest {
 
         assertThat(launchIntent.getAction())
                 .isEqualTo(Settings.ACTION_APP_SEARCH_SETTINGS);
+    }
+
+    @Test
+    @Config(shadows = ShadowUtils.class)
+    public void initSearchToolbar_NotHaveResolvedInfo_shouldNotStartActivity() {
+        final Toolbar toolbar = new Toolbar(mActivity);
+        // This ensures navigationView is created.
+        toolbar.setNavigationContentDescription("test");
+        mProvider.initSearchToolbar(mActivity, toolbar);
+
+        toolbar.performClick();
+
+        final Intent launchIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
+
+        assertThat(launchIntent).isNull();
     }
 
     @Test(expected = IllegalArgumentException.class)
