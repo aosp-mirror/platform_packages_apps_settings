@@ -30,13 +30,10 @@ import android.view.SurfaceHolder;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.RGBLuminanceSource;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 
 import java.util.concurrent.CountDownLatch;
@@ -111,36 +108,17 @@ public class QrCameraTest {
         final String googleUrl = "http://www.google.com";
 
         try {
-            Bitmap bmp = encodeQrCode(googleUrl, 320);
-            int[] intArray = new int[bmp.getWidth() * bmp.getHeight()];
+            final Bitmap bmp = QrCodeGenerator.encodeQrCode(googleUrl, 320);
+            final int[] intArray = new int[bmp.getWidth() * bmp.getHeight()];
             bmp.getPixels(intArray, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
             LuminanceSource source = new RGBLuminanceSource(bmp.getWidth(), bmp.getHeight(),
                     intArray);
-
-            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            final BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
             mCamera.decodeImage(bitmap);
+            bmp.recycle();
         } catch (WriterException e) {
         }
 
         assertThat(mQrCode).isEqualTo(googleUrl);
-    }
-
-    private Bitmap encodeQrCode(String qrCode, int size) throws WriterException {
-        BitMatrix qrBits = null;
-        try {
-            qrBits =
-                    new MultiFormatWriter().encode(qrCode, BarcodeFormat.QR_CODE, size, size, null);
-        } catch (IllegalArgumentException iae) {
-            // Should never reach here.
-        }
-        assertThat(qrBits).isNotNull();
-
-        Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565);
-        for (int x = 0; x < size; ++x) {
-            for (int y = 0; y < size; ++y) {
-                bitmap.setPixel(x, y, qrBits.get(x, y) ? Color.BLACK : Color.WHITE);
-            }
-        }
-        return bitmap;
     }
 }
