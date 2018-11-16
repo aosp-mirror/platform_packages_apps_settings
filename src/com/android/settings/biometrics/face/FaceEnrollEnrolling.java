@@ -94,7 +94,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         if (shouldLaunchConfirmLock()) {
             launchConfirmLock(R.string.security_settings_face_preference_title,
-                    Utils.getFingerprintManagerOrNull(this).preEnroll());
+                    Utils.getFaceManagerOrNull(this).generateChallenge());
             mShouldFinishOnStop = false;
         } else {
             startEnrollment();
