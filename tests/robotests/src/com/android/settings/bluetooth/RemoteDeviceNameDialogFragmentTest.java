@@ -41,6 +41,7 @@ import com.android.settings.testutils.shadow.ShadowDynamicLayout;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -83,6 +84,7 @@ public class RemoteDeviceNameDialogFragmentTest {
         return (AlertDialog) ShadowDialog.getLatestDialog();
     }
 
+    @Ignore("b/119592320")
     @Test
     public void deviceNameDisplayIsCorrect() {
         String deviceName = "ABC Corp Headphones";
@@ -98,6 +100,7 @@ public class RemoteDeviceNameDialogFragmentTest {
         assertThat(negativeButton.isEnabled()).isTrue();
     }
 
+    @Ignore("b/119592320")
     @Test
     public void deviceNameEditSucceeds() {
         String deviceNameInitial = "ABC Corp Headphones";
@@ -120,6 +123,7 @@ public class RemoteDeviceNameDialogFragmentTest {
         verify(mCachedDevice).setName(deviceNameModified);
     }
 
+    @Ignore("b/119592320")
     @Test
     public void deviceNameEditThenCancelDoesntRename() {
         String deviceNameInitial = "ABC Corp Headphones";
