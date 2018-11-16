@@ -22,6 +22,7 @@ import android.annotation.Nullable;
 
 import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
 import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
+import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.wifi.WifiSlice;
@@ -54,10 +55,17 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .setCardName(ConnectedDeviceSlice.PATH_CONNECTED_DEVICE)
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
+        final ContextualCard lowStorageCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(LowStorageSlice.LOW_STORAGE_URI.toString())
+                        .setCardName(LowStorageSlice.PATH_LOW_STORAGE)
+                        .setCardCategory(ContextualCard.Category.IMPORTANT)
+                        .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)
                 .addCard(batteryInfoCard)
                 .addCard(connectedDeviceCard)
+                .addCard(lowStorageCard)
                 .build();
 
         return cards;
