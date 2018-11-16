@@ -167,10 +167,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                 .setComputingString(R.string.computing_size)
                 .setErrorString(R.string.invalid_size_value)
                 .build();
-        mButtonsPref = ((ActionButtonPreference) findPreference(KEY_HEADER_BUTTONS))
-                .setButton1Positive(false)
-                .setButton2Positive(false);
-
+        mButtonsPref = ((ActionButtonPreference) findPreference(KEY_HEADER_BUTTONS));
         mStorageUsed = findPreference(KEY_STORAGE_USED);
         mChangeStorageButton = (Button) ((LayoutPreference) findPreference(KEY_CHANGE_STORAGE))
                 .findViewById(R.id.button);
@@ -178,7 +175,9 @@ public class AppStorageSettings extends AppInfoWithHeader
         mChangeStorageButton.setOnClickListener(this);
 
         // Cache section
-        mButtonsPref.setButton2Text(R.string.clear_cache_btn_text);
+        mButtonsPref
+                .setButton2Text(R.string.clear_cache_btn_text)
+                .setButton2Icon(R.drawable.ic_settings_delete);
 
         // URI permissions section
         mUri = (PreferenceCategory) findPreference(KEY_URI_CATEGORY);
@@ -304,16 +303,20 @@ public class AppStorageSettings extends AppInfoWithHeader
                 || !isManageSpaceActivityAvailable) {
             mButtonsPref
                     .setButton1Text(R.string.clear_user_data_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton1Enabled(false);
             mCanClearData = false;
         } else {
             if (appHasSpaceManagementUI) {
                 mButtonsPref.setButton1Text(R.string.manage_space_text);
             } else {
-                mButtonsPref.setButton1Text(R.string.clear_user_data_text);
+                mButtonsPref
+                        .setButton1Text(R.string.clear_user_data_text)
+                        .setButton1Icon(R.drawable.ic_settings_delete);
             }
             mButtonsPref
                     .setButton1Text(R.string.clear_user_data_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton1OnClickListener(v -> handleClearDataClick());
         }
 
@@ -384,7 +387,9 @@ public class AppStorageSettings extends AppInfoWithHeader
     private void processClearMsg(Message msg) {
         int result = msg.arg1;
         String packageName = mAppEntry.info.packageName;
-        mButtonsPref.setButton1Text(R.string.clear_user_data_text);
+        mButtonsPref
+                .setButton1Text(R.string.clear_user_data_text)
+                .setButton1Icon(R.drawable.ic_settings_delete);
         if (result == OP_SUCCESSFUL) {
             Log.i(TAG, "Cleared user data for package : " + packageName);
             updateSize();

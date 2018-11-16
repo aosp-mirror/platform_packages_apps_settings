@@ -53,8 +53,8 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
     protected void init(PreferenceScreen screen) {
         mActionButtons = ((ActionButtonPreference) screen.findPreference(getPreferenceKey()))
                 .setButton1Text(R.string.forget)
+                .setButton1Icon(R.drawable.ic_settings_delete)
                 .setButton1OnClickListener((view) -> onForgetButtonPressed())
-                .setButton1Positive(false)
                 .setButton1Enabled(true);
     }
 
@@ -68,17 +68,17 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
             if (!mConnectButtonInitialized || !previouslyConnected) {
                 mActionButtons
                         .setButton2Text(R.string.bluetooth_device_context_disconnect)
-                        .setButton2OnClickListener(view -> mCachedDevice.disconnect())
-                        .setButton2Positive(false);
+                        .setButton2Icon(R.drawable.ic_settings_close)
+                        .setButton2OnClickListener(view -> mCachedDevice.disconnect());
                 mConnectButtonInitialized = true;
             }
         } else {
             if (!mConnectButtonInitialized || previouslyConnected) {
                 mActionButtons
                         .setButton2Text(R.string.bluetooth_device_context_connect)
+                        // TODO (b/119646923) Icon is not ready.
                         .setButton2OnClickListener(
-                                view -> mCachedDevice.connect(true /* connectAllProfiles */))
-                        .setButton2Positive(true);
+                                view -> mCachedDevice.connect(true /* connectAllProfiles */));
                 mConnectButtonInitialized = true;
             }
         }
