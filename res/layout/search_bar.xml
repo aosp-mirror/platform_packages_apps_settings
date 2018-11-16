@@ -21,15 +21,15 @@
     android:id="@+id/search_bar_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_scrollFlags="scroll|enterAlways"
-    android:background="?android:attr/colorPrimary">
+    android:background="?android:attr/colorBackground"
+    android:theme="@style/ThemeOverlay.Settings.SearchBar"
+    app:layout_scrollFlags="scroll|enterAlways">
     <androidx.cardview.widget.CardView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/search_bar_margin"
         app:cardCornerRadius="@dimen/search_bar_corner_radius"
-        app:cardBackgroundColor="?android:attr/colorBackground"
         app:cardElevation="@dimen/search_bar_card_elevation">
         <Toolbar
             android:id="@+id/search_action_bar"
@@ -37,8 +37,7 @@
             android:layout_height="@dimen/search_bar_height"
             android:background="?android:attr/selectableItemBackground"
             android:contentInsetStartWithNavigation="@dimen/search_bar_content_inset"
-            android:navigationIcon="@drawable/ic_search_24dp"
-            android:theme="?android:attr/actionBarTheme">
+            android:navigationIcon="@drawable/ic_search_24dp">
             <TextView
                 android:id="@+id/search_action_bar_title"
                 style="@style/TextAppearance.SearchBar"
