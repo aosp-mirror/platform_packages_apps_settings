@@ -26,8 +26,10 @@ import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.CardDatabaseHelper;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardController;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeedbackDialog;
 import com.android.settings.homepage.contextualcards.ContextualCardUpdateListener;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.ThreadUtils;
 
 /**
@@ -67,6 +69,9 @@ public class SliceContextualCardController implements ContextualCardController {
             dbHelper.markContextualCardAsDismissed(mContext, card.getName());
         });
         showFeedbackDialog(card);
+        final ContextualCardFeatureProvider contexualCardFeatureProvider =
+                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
+        contexualCardFeatureProvider.logContextualCardDismiss(mContext, card);
     }
 
     @Override

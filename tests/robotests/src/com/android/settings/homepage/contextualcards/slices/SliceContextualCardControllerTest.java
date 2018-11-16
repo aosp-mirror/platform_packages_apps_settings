@@ -18,9 +18,10 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -33,6 +34,7 @@ import com.android.settings.homepage.contextualcards.CardDatabaseHelper;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardFeedbackDialog;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -57,6 +59,7 @@ public class SliceContextualCardControllerTest {
     private CardContentProvider mProvider;
     private ContentResolver mResolver;
     private SliceContextualCardController mController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
@@ -67,6 +70,7 @@ public class SliceContextualCardControllerTest {
                 mProvider);
         mResolver = mContext.getContentResolver();
         mController = spy(new SliceContextualCardController(mContext));
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
@@ -75,7 +79,8 @@ public class SliceContextualCardControllerTest {
         mResolver.insert(providerUri, generateOneRow());
         doNothing().when(mController).showFeedbackDialog(any(ContextualCard.class));
 
-        mController.onDismissed(getTestSliceCard());
+        final ContextualCard card = getTestSliceCard();
+        mController.onDismissed(card);
 
         final String[] columns = {CardDatabaseHelper.CardColumns.CARD_DISMISSED};
         final String selection = CardDatabaseHelper.CardColumns.NAME + "=?";
@@ -86,6 +91,8 @@ public class SliceContextualCardControllerTest {
         cr.close();
 
         assertThat(qryDismissed).isEqualTo(1);
+        verify(mFeatureFactory.mContextualCardFeatureProvider).logContextualCardDismiss(
+                mContext, card);
     }
 
     @Test
