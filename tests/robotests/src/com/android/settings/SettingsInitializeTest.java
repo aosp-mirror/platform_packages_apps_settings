@@ -78,4 +78,23 @@ public class SettingsInitializeTest {
         assertThat(flags & Intent.FLAG_ACTIVITY_CLEAR_TOP).isEqualTo(
                 Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
+
+    @Test
+    public void refreshExistingShortcuts_shouldNotUpdateImmutableShortcut() {
+        final String id = "test_shortcut_id";
+        final ShortcutInfo info = new ShortcutInfo.Builder(mContext, id)
+            .setShortLabel("test123")
+            .setIntent(new Intent(Intent.ACTION_DEFAULT))
+            .build();
+        info.addFlags(ShortcutInfo.FLAG_IMMUTABLE);
+        final List<ShortcutInfo> shortcuts = new ArrayList<>();
+        shortcuts.add(info);
+        ShadowShortcutManager.get().setPinnedShortcuts(shortcuts);
+
+        mSettingsInitialize.refreshExistingShortcuts(mContext);
+
+        final List<ShortcutInfo> updatedShortcuts =
+            ShadowShortcutManager.get().getLastUpdatedShortcuts();
+        assertThat(updatedShortcuts).isEmpty();
+    }
 }
