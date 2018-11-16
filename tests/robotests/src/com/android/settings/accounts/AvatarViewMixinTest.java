@@ -18,16 +18,25 @@ package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.accounts.Account;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.android.settings.homepage.SettingsHomepageActivity;
@@ -44,6 +53,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowContentResolver;
 import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -51,6 +61,7 @@ public class AvatarViewMixinTest {
     private static final String DUMMY_ACCOUNT = "test@domain.com";
     private static final String DUMMY_DOMAIN = "domain.com";
     private static final String DUMMY_AUTHORITY = "authority.domain.com";
+    private static final String METHOD_GET_ACCOUNT_AVATAR = "getAccountAvatar";
 
     private Context mContext;
     private ImageView mImageView;
@@ -126,6 +137,31 @@ public class AvatarViewMixinTest {
         shadowPackageManager.addResolveInfoForIntent(AvatarViewMixin.INTENT_GET_ACCOUNT_DATA,
                 resolveInfo);
         assertThat(avatarViewMixin.queryProviderAuthority()).isEqualTo(DUMMY_AUTHORITY);
+    }
+
+    @Test
+    public void callWithGetAccountAvatarMethod_useDummyData_shouldReturnAccountNameAndAvatar() {
+        final ShadowContentResolver shadowContentResolver = Shadow.extract(
+                mContext.getContentResolver());
+        final Uri uri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT).authority(
+                DUMMY_AUTHORITY).build();
+        final ContentProvider mockContentProvider = mock(ContentProvider.class);
+
+        ShadowContentResolver.registerProviderInternal(DUMMY_AUTHORITY, mockContentProvider);
+
+        final Bundle bundle = new Bundle();
+        final Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        bundle.putParcelable("account_avatar", bitmap);
+        bundle.putString("account_name", DUMMY_ACCOUNT);
+        doReturn(bundle).when(mockContentProvider).call(anyString(), anyString(),
+                any(Bundle.class));
+
+        final Bundle expectBundle = shadowContentResolver.call(uri, METHOD_GET_ACCOUNT_AVATAR,
+                null /* arg */, null /* extras */);
+
+        final Object object = bundle.getParcelable("account_avatar");
+        assertThat(object instanceof Bitmap).isTrue();
+        assertThat(bundle.getString("account_name")).isEqualTo(DUMMY_ACCOUNT);
     }
 
     @Implements(value = AccountFeatureProviderImpl.class)
