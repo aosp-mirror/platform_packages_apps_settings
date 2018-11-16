@@ -34,6 +34,7 @@ import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import com.android.settings.R;
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
@@ -258,13 +259,16 @@ public final class ApplicationFeatureProviderImplTest {
     public void getKeepEnabledPackages_shouldContainDefaultPhoneAndSms() {
         final String testDialer = "com.android.test.defaultdialer";
         final String testSms = "com.android.test.defaultsms";
+        final String settingsIntelligence = RuntimeEnvironment.application.getString(
+                R.string.config_settingsintelligence_package_name);
         ShadowSmsApplication.setDefaultSmsApplication(new ComponentName(testSms, "receiver"));
         ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
         ReflectionHelpers.setField(mProvider, "mContext", RuntimeEnvironment.application);
 
         final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
 
-        final List<String> expectedPackages = Arrays.asList(testDialer, testSms);
+        final List<String> expectedPackages = Arrays.asList(testDialer, testSms,
+                settingsIntelligence);
         assertThat(keepEnabledPackages).containsExactlyElementsIn(expectedPackages);
     }
 

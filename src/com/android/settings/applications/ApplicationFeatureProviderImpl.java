@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 
 import com.android.internal.telephony.SmsApplication;
+import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +139,9 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         if (defaultSms != null) {
             keepEnabledPackages.add(defaultSms.getPackageName());
         }
+        // Keep Settings intelligence enabled, otherwise search feature will be disabled.
+        keepEnabledPackages.add(
+                mContext.getString(R.string.config_settingsintelligence_package_name));
         return keepEnabledPackages;
     }
 
