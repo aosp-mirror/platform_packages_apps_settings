@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -48,6 +49,8 @@ public class DataUsagePreferenceControllerTest {
 
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private NetworkStatsManager mNetworkStatsManager;
     private DataUsagePreferenceController mController;
     private SwitchPreference mPreference;
     private Context mContext;
@@ -59,6 +62,7 @@ public class DataUsagePreferenceControllerTest {
         mContext = spy(Robolectric.setupActivity(Activity.class));
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
+        doReturn(mNetworkStatsManager).when(mContext).getSystemService(NetworkStatsManager.class);
 
         mPreference = new SwitchPreference(mContext);
         mController = new DataUsagePreferenceController(mContext, "data_usage");
