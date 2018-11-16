@@ -27,7 +27,7 @@ import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import libcore.util.CountryZonesFinder;
+import libcore.timezone.CountryZonesFinder;
 
 import org.junit.Before;
 import org.junit.Test;

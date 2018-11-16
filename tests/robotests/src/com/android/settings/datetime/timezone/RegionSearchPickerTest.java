@@ -34,7 +34,7 @@ import com.android.settings.datetime.timezone.RegionSearchPicker.RegionItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import libcore.util.CountryZonesFinder;
+import libcore.timezone.CountryZonesFinder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
