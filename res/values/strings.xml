@@ -4002,8 +4002,6 @@
     <string name="uninstall_all_users_text">Uninstall for all users</string>
     <!-- [CHAR LIMIT=NONE] Manage applications, individual application info screen, button label under Storage heading. Button to install an application for the user. -->
     <string name="install_text">Install</string>
-    <!-- [CHAR LIMIT=25] Manage applications, individual application info screen, button label under Storage heading. Button to disable an existing application. -->
-    <string name="disable_text">Disable</string>
     <!-- [CHAR LIMIT=25] Manage applications, individual application info screen, button label under Storage heading. Button to re-enable an existing application. -->
     <string name="enable_text">Enable</string>
     <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for example, remove all cached emails for an Email app) -->
@@ -4575,6 +4573,24 @@
     <string name="accessibility_toggle_master_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for master mono. [CHAR LIMIT=50] -->
     <string name="accessibility_toggle_master_mono_summary">Combine channels when playing audio</string>
+
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_default">Default</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_10secs">10 seconds</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_30secs">30 seconds</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_1min">1 minute</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_2mins">2 minutes</string>
+    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_accessibility_content_timeout_preference_title">Content Timeout</string>
+    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_accessibility_control_timeout_preference_title">Control Timeout</string>
+    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_accessibility_timeout_preference_summary">Choose how long it takes before automatically disappearing messages go away.\nSome apps may not support this setting yet.</string>
+
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
     <!-- Title for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
@@ -8025,6 +8041,19 @@
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
     <string name="zen_mode_events">Allow events</string>
 
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
+    <string name="zen_mode_bypassing_apps">Allow apps to override</string>
+
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
+    <string name="zen_mode_bypassing_apps_title">Overrides Do Not Disturb</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow apps to bypass DND -->
+    <plurals name="zen_mode_bypassing_apps_subtext">
+        <item quantity="zero">No apps can override Do Not Disturb</item>
+        <item quantity="one">1 app can override Do Not Disturb</item>
+        <item quantity="other"><xliff:g id="number" example="2">%1$d</xliff:g> apps can override Do Not Disturb</item>
+    </plurals>
+
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
     <string name="zen_mode_events_list">events</string>
 
@@ -10302,4 +10331,7 @@
     <string name="contextual_card_dismiss_keep">Keep</string>
     <!-- String for contextual card dismissal [CHAR LIMIT=NONE] -->
     <string name="contextual_card_dismiss_confirm_message">Remove this suggestion?</string>
+
+    <!-- Summary for low storage slice. [CHAR LIMIT=NONE] -->
+    <string name="low_storage_summary">Storage is low. <xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
 </resources>

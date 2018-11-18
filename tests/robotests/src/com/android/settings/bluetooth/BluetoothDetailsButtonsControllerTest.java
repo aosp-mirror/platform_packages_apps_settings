@@ -56,8 +56,8 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
         super.setUp();
         final View buttons = View.inflate(
                 RuntimeEnvironment.application, R.layout.two_action_buttons, null /* parent */);
-        mConnectButton = buttons.findViewById(R.id.button2_positive);
-        mForgetButton = buttons.findViewById(R.id.button1_positive);
+        mConnectButton = buttons.findViewById(R.id.button2);
+        mForgetButton = buttons.findViewById(R.id.button1);
         mController =
             new BluetoothDetailsButtonsController(mContext, mFragment, mCachedDevice, mLifecycle);
         mButtonsPref = ActionButtonPreferenceTest.createMock();

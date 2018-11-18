@@ -697,6 +697,33 @@
         <item>Accessibility volume</item>
     </string-array>
 
+    <!-- Keys for the list of accessibility timeouts xml. -->
+    <string-array name="accessibility_timeout_content_selector_keys" translatable="false">
+        <item>accessibility_content_timeout_default</item>
+        <item>accessibility_content_timeout_10secs</item>
+        <item>accessibility_content_timeout_30secs</item>
+        <item>accessibility_content_timeout_1min</item>
+        <item>accessibility_content_timeout_2mins</item>
+    </string-array>
+
+    <!-- Keys for the list of accessibility timeouts xml. -->
+    <string-array name="accessibility_timeout_control_selector_keys" translatable="false">
+        <item>accessibility_control_timeout_default</item>
+        <item>accessibility_control_timeout_10secs</item>
+        <item>accessibility_control_timeout_30secs</item>
+        <item>accessibility_control_timeout_1min</item>
+        <item>accessibility_control_timeout_2mins</item>
+    </string-array>
+
+    <!-- Values for the list of accessibility timeouts, pairs to Keys . -->
+    <integer-array name="accessibility_timeout_selector_values" translatable="false">
+        <item>0</item>
+        <item>10000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+    </integer-array>
+
     <!-- Titles for the list of long press timeout options. -->
     <string-array name="long_press_timeout_selector_titles">
         <!-- A title for the option for short long-press timeout [CHAR LIMIT=25] -->

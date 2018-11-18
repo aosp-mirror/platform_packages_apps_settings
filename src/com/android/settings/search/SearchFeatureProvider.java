@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,11 @@ public interface SearchFeatureProvider {
             final Intent intent = SEARCH_UI_INTENT;
             intent.setPackage(getSettingsIntelligencePkgName(activity));
             final Context context = activity.getApplicationContext();
+
+            if (activity.getPackageManager().queryIntentActivities(intent,
+                    PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
+                return;
+            }
 
             FeatureFactory.getFactory(context).getSlicesFeatureProvider()
                     .indexSliceDataAsync(activity.getApplicationContext());

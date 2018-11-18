@@ -63,7 +63,7 @@ public class ContextualCard {
     private final boolean mIsHalfWidth;
     private final Drawable mIconDrawable;
 
-    String getName() {
+    public String getName() {
         return mName;
     }
 

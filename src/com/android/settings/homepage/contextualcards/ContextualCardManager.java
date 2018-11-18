@@ -62,10 +62,12 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     private static final int[] SETTINGS_CARDS =
             {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
 
+    @VisibleForTesting
+    final List<ContextualCard> mContextualCards;
+
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
     private final Lifecycle mLifecycle;
-    private final List<ContextualCard> mContextualCards;
     private final List<LifecycleObserver> mLifecycleObservers;
 
     private ContextualCardUpdateListener mListener;
@@ -122,10 +124,23 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> updateList) {
         final Set<Integer> cardTypes = updateList.keySet();
         //Remove the existing data that matches the certain cardType before inserting new data.
-        final List<ContextualCard> cardsToKeep = mContextualCards
-                .stream()
-                .filter(card -> !cardTypes.contains(card.getCardType()))
-                .collect(Collectors.toList());
+        List<ContextualCard> cardsToKeep;
+
+        // We are not sure how many card types will be in the database, so when the list coming
+        // from the database is empty (e.g. no eligible cards/cards are dismissed), we cannot
+        // assign a specific card type for its map which is sending here. Thus, we assume that
+        // except Conditional cards, all other cards are from the database. So when the map sent
+        // here is empty, we only keep Conditional cards.
+        if (cardTypes.isEmpty()) {
+            cardsToKeep = mContextualCards.stream()
+                    .filter(card -> card.getCardType() == ContextualCard.CardType.CONDITIONAL)
+                    .collect(Collectors.toList());
+        } else {
+            cardsToKeep = mContextualCards.stream()
+                    .filter(card -> !cardTypes.contains(card.getCardType()))
+                    .collect(Collectors.toList());
+        }
+
         final List<ContextualCard> allCards = new ArrayList<>();
         allCards.addAll(cardsToKeep);
         allCards.addAll(

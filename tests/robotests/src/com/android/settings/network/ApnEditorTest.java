@@ -57,6 +57,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ApnEditorTest {
@@ -113,6 +114,7 @@ public class ApnEditorTest {
         doReturn(mResources).when(mApnEditorUT).getResources();
         doNothing().when(mApnEditorUT).finish();
         doNothing().when(mApnEditorUT).showError();
+        when(mApnEditorUT.getContext()).thenReturn(RuntimeEnvironment.application);
 
         setMockPreference(mActivity);
         mApnEditorUT.mApnData = new FakeApnData(APN_DATA);

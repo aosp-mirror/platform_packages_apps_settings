@@ -69,6 +69,7 @@ public class SettingsPreferenceFragmentTest {
         mContext = RuntimeEnvironment.application;
         mFragment = spy(new TestFragment());
         doReturn(mActivity).when(mFragment).getActivity();
+        when(mFragment.getContext()).thenReturn(mContext);
 
         mEmptyView = new View(mContext);
         ReflectionHelpers.setField(mFragment, "mEmptyView", mEmptyView);

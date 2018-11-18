@@ -143,7 +143,7 @@ public class AppPermissionsPreferenceControllerTest {
         when(mPackageManager.queryPermissionsByGroup(anyString(), anyInt()))
                 .thenReturn(permissions);
 
-        mController = spy(new AppPermissionsPreferenceController(mContext));
+        mController = spy(new AppPermissionsPreferenceController(mContext, "pref_key"));
     }
 
     @Test

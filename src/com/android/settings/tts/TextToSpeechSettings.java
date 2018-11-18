@@ -171,11 +171,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
         mActionButtons = ((ActionButtonPreference) findPreference(KEY_ACTION_BUTTONS))
                 .setButton1Text(R.string.tts_play)
-                .setButton1Positive(true)
                 .setButton1OnClickListener(v -> speakSampleText())
                 .setButton1Enabled(false)
                 .setButton2Text(R.string.tts_reset)
-                .setButton2Positive(false)
                 .setButton2OnClickListener(v -> resetTts())
                 .setButton1Enabled(true);
 

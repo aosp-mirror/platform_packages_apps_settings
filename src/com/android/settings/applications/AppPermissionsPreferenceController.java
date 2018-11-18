@@ -33,7 +33,6 @@ import java.util.Set;
 public class AppPermissionsPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "AppPermissionPrefCtrl";
-    private static final String KEY_APP_PERMISSION_GROUPS = "manage_perms";
     private static final String[] PERMISSION_GROUPS = new String[]{
             "android.permission-group.LOCATION",
             "android.permission-group.MICROPHONE",
@@ -46,8 +45,8 @@ public class AppPermissionsPreferenceController extends BasePreferenceController
 
     private final PackageManager mPackageManager;
 
-    public AppPermissionsPreferenceController(Context context) {
-        super(context, KEY_APP_PERMISSION_GROUPS);
+    public AppPermissionsPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mPackageManager = context.getPackageManager();
     }
 

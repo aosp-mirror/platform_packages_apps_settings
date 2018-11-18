@@ -167,11 +167,11 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (isAvailable()) {
             mButtonsPref = ((ActionButtonPreference) screen.findPreference(KEY_ACTION_BUTTONS))
                     .setButton1Text(R.string.uninstall_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton2Text(R.string.force_stop)
+                    .setButton2Icon(R.drawable.ic_settings_force_stop)
                     .setButton1OnClickListener(new UninstallAndDisableButtonListener())
                     .setButton2OnClickListener(new ForceStopButtonListener())
-                    .setButton1Positive(false)
-                    .setButton2Positive(false)
                     .setButton2Enabled(false);
         }
     }
@@ -547,16 +547,16 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
-            mButtonsPref.setButton1Text(R.string.disable_text)
-                    .setButton1Positive(false);
+            mButtonsPref.setButton1Text(R.string.uninstall_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-            mButtonsPref.setButton1Text(R.string.disable_text)
-                    .setButton1Positive(false);
+            mButtonsPref.setButton1Text(R.string.uninstall_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete);
             disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
                     .contains(mAppEntry.info.packageName);
         } else {
-            mButtonsPref.setButton1Text(R.string.enable_text)
-                    .setButton1Positive(true);
+            mButtonsPref.setButton1Text(R.string.install_text)
+                    .setButton1Icon(R.drawable.ic_settings_install);
             disableable = true;
         }
 

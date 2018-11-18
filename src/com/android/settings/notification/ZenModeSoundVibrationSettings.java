@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
-
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
@@ -55,6 +53,7 @@ public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implement
         controllers.add(new ZenModeEventsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle,
                 R.string.zen_sound_footer));
+        controllers.add(new ZenModeBypassingAppsPreferenceController(context, lifecycle));
         return controllers;
     }
 
