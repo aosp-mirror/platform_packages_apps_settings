@@ -29,6 +29,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.biometrics.BiometricEnrollSidecar;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * A drawable containing the circle cutout as well as the animations.
@@ -41,17 +42,17 @@ public class FaceEnrollAnimationDrawable extends Drawable
     private static final int BORDER_BOUNDS = 20;
 
     private final Context mContext;
-    private final ParticleCollection.Listener mListener;
+    private final FaceFeatureProvider.Listener mListener;
     private Rect mBounds;
     private final Paint mSquarePaint;
     private final Paint mCircleCutoutPaint;
 
-    private ParticleCollection mParticleCollection;
+    private FaceFeatureProvider.EnrollingAnimation mEnrollingAnimation;
 
     private TimeAnimator mTimeAnimator;
 
-    private final ParticleCollection.Listener mAnimationListener
-            = new ParticleCollection.Listener() {
+    private final FaceFeatureProvider.Listener mAnimationListener
+            = new FaceFeatureProvider.Listener() {
         @Override
         public void onEnrolled() {
             if (mTimeAnimator != null && mTimeAnimator.isStarted()) {
@@ -61,7 +62,7 @@ public class FaceEnrollAnimationDrawable extends Drawable
         }
     };
 
-    public FaceEnrollAnimationDrawable(Context context, ParticleCollection.Listener listener) {
+    public FaceEnrollAnimationDrawable(Context context, FaceFeatureProvider.Listener listener) {
         mContext = context;
         mListener = listener;
 
@@ -77,29 +78,29 @@ public class FaceEnrollAnimationDrawable extends Drawable
 
     @Override
     public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-        mParticleCollection.onEnrollmentHelp(helpMsgId, helpString);
+        mEnrollingAnimation.onEnrollmentHelp(helpMsgId, helpString);
     }
 
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
-        mParticleCollection.onEnrollmentError(errMsgId, errString);
+        mEnrollingAnimation.onEnrollmentError(errMsgId, errString);
     }
 
     @Override
     public void onEnrollmentProgressChange(int steps, int remaining) {
-        mParticleCollection.onEnrollmentProgressChange(steps, remaining);
+        mEnrollingAnimation.onEnrollmentProgressChange(steps, remaining);
     }
 
     @Override
     protected void onBoundsChange(Rect bounds) {
         mBounds = bounds;
-        mParticleCollection =
-                new ParticleCollection(mContext, mAnimationListener, bounds, BORDER_BOUNDS);
+        mEnrollingAnimation = FeatureFactory.getFactory(mContext).getFaceFeatureProvider()
+                .getEnrollingAnimation(mContext, mAnimationListener, bounds, BORDER_BOUNDS);
 
         if (mTimeAnimator == null) {
             mTimeAnimator = new TimeAnimator();
             mTimeAnimator.setTimeListener((animation, totalTimeMs, deltaTimeMs) -> {
-                mParticleCollection.update(totalTimeMs, deltaTimeMs);
+                mEnrollingAnimation.update(totalTimeMs, deltaTimeMs);
                 FaceEnrollAnimationDrawable.this.invalidateSelf();
             });
             mTimeAnimator.start();
@@ -121,7 +122,7 @@ public class FaceEnrollAnimationDrawable extends Drawable
                 mBounds.height() / 2 - BORDER_BOUNDS, mCircleCutoutPaint);
 
         // Draw the animation
-        mParticleCollection.draw(canvas);
+        mEnrollingAnimation.draw(canvas);
 
         canvas.restore();
     }
