@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.core.FeatureFlags.DATA_USAGE_V2;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,6 +35,7 @@ import android.content.pm.ApplicationInfo;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
@@ -65,6 +68,7 @@ public class AppDataUsagePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        FeatureFlagUtils.setEnabled(mContext, DATA_USAGE_V2, false);
         mController = spy(new AppDataUsagePreferenceController(mContext, "test_key"));
         mController.setParentFragment(mFragment);
     }
