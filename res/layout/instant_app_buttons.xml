@@ -20,44 +20,48 @@
     android:id="@+id/instant_app_button_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:paddingTop="24dp"
-    android:paddingStart="68dp"
-    android:paddingEnd="24dp"
-    android:orientation="horizontal">
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
 
     <FrameLayout
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/install"
-            style="@style/ActionPrimaryButton"
+            style="@style/SettingsActionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="@string/install_text"/>
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/install_text"
+            android:drawableTop="@drawable/ic_settings_install"/>
+
         <Button
             android:id="@+id/launch"
-            style="@style/ActionPrimaryButton"
+            style="@style/SettingsActionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="@string/launch_instant_app"/>
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/launch_instant_app"
+            android:drawableTop="@drawable/ic_settings_open"/>
     </FrameLayout>
+
     <Space
-        android:layout_width="16dp"
+        android:layout_width="8dp"
         android:layout_height="wrap_content" />
-    <FrameLayout
+
+    <Button
+        android:id="@+id/clear_data"
+        style="@style/SettingsActionButton"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/clear_data"
-            style="@style/ActionSecondaryButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="@string/clear_instant_app_data"/>
-    </FrameLayout>
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="@string/clear_instant_app_data"
+        android:drawableTop="@drawable/ic_settings_delete"/>
+
 </LinearLayout>
