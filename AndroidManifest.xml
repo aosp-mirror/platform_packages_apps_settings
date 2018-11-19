@@ -3018,6 +3018,9 @@
                 <action android:name="android.content.action.SETTINGS_HOMEPAGE_DATA"/>
             </intent-filter>
         </provider>
+
+        <activity
+            android:name=".wifi.dpp.WifiDppConfiguratorActivity"/>
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
