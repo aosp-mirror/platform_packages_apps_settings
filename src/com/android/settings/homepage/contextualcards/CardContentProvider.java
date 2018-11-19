@@ -98,17 +98,7 @@ public class CardContentProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
-        try {
-            maybeEnableStrictMode();
-            final SQLiteDatabase database = mDBHelper.getWritableDatabase();
-            final String table = getTableFromMatch(uri);
-            final int rowsDeleted = database.delete(table, selection, selectionArgs);
-            getContext().getContentResolver().notifyChange(uri, null /* observer */);
-            return rowsDeleted;
-        } finally {
-            StrictMode.setThreadPolicy(oldPolicy);
-        }
+        throw new UnsupportedOperationException("delete operation not supported currently.");
     }
 
     @Override
@@ -140,18 +130,7 @@ public class CardContentProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
-        try {
-            maybeEnableStrictMode();
-
-            final SQLiteDatabase database = mDBHelper.getWritableDatabase();
-            final String table = getTableFromMatch(uri);
-            final int rowsUpdated = database.update(table, values, selection, selectionArgs);
-            getContext().getContentResolver().notifyChange(uri, null /* observer */);
-            return rowsUpdated;
-        } finally {
-            StrictMode.setThreadPolicy(oldPolicy);
-        }
+        throw new UnsupportedOperationException("update operation not supported currently.");
     }
 
     @VisibleForTesting
