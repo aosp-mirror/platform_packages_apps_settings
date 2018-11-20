@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 @Implements(AccountManager.class)
-public class ShadowAccountManager{
+public class ShadowAccountManager {
 
     private static final Map<String, AuthenticatorDescription> sAuthenticators = new HashMap<>();
     private static final Map<Integer, List<Account>> sAccountsByUserId = new HashMap<>();

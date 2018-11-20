@@ -100,8 +100,8 @@ public class MediaOutputPreferenceControllerTest {
     private Context mContext;
     private PreferenceScreen mScreen;
     private ListPreference mPreference;
+    private AudioManager mAudioManager;
     private ShadowAudioManager mShadowAudioManager;
-    private ShadowMediaRouter mShadowMediaRouter;
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
@@ -118,8 +118,8 @@ public class MediaOutputPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         mShadowAudioManager = ShadowAudioManager.getShadow();
-        mShadowMediaRouter = ShadowMediaRouter.getShadow();
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
         mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
@@ -164,7 +164,6 @@ public class MediaOutputPreferenceControllerTest {
 
     @After
     public void tearDown() {
-        mShadowAudioManager.reset();
         ShadowBluetoothUtils.reset();
     }
 
@@ -174,7 +173,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void setActiveBluetoothDevice_btDeviceWithHisyncId_shouldSetBtDeviceActive() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mHearingAidProfile.getHiSyncId(mLeftBluetoothHapDevice)).thenReturn(HISYNCID1);
 
         mController.setActiveBluetoothDevice(mLeftBluetoothHapDevice);
@@ -189,7 +188,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void setActiveBluetoothDevice_btDeviceWithoutHisyncId_shouldSetBtDeviceActive() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
 
         mController.setActiveBluetoothDevice(mBluetoothDevice);
 
@@ -204,7 +203,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void setActiveBluetoothDevice_setNull_shouldSetNullToBothProfiles() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
 
         mController.setActiveBluetoothDevice(null);
 
@@ -218,7 +217,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void setActiveBluetoothDevice_duringACall_shouldNotSetActiveDeviceToA2dpProfile() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
         mController.setActiveBluetoothDevice(mBluetoothDevice);
 
@@ -246,7 +245,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_duringACall_shouldSetDefaultSummary() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
         mController.updateState(mPreference);
 
@@ -262,7 +261,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_noAvailableA2dpBtDevices_shouldDisableAndSetDefaultSummary() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         List<BluetoothDevice> emptyDeviceList = new ArrayList<>();
         when(mA2dpProfile.getConnectedDevices()).thenReturn(emptyDeviceList);
 
@@ -296,7 +295,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_oneA2dpBtDeviceAreAvailable_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
@@ -316,7 +315,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_moreThanOneA2DpBtDevicesAreAvailable_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
@@ -337,7 +336,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_a2dpDevicesAvailableWiredHeadsetIsActivated_shouldSetDefaultSummary() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(null);
@@ -359,7 +358,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_a2dpDevicesAvailableCurrentDeviceActivated_shouldSetDefaultSummary() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
         when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
@@ -379,7 +378,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_oneHapBtDeviceAreAvailable_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
@@ -403,7 +402,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_moreThanOneHapBtDevicesAreAvailable_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
@@ -431,7 +430,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_hapBtDeviceWithSameId_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
@@ -464,7 +463,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_hapBtDeviceWithSameIdButDifferentOrder_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
@@ -496,7 +495,7 @@ public class MediaOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_hapBtDeviceWithDifferentId_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);

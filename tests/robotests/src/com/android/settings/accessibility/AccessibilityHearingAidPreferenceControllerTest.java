@@ -166,11 +166,11 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         mPreferenceController.setPreference(mHearingAidPreference);
         //not call registerReceiver()
         mPreferenceController.onResume();
-        verify(mContext, never()).registerReceiver((BroadcastReceiver) any(), (IntentFilter) any());
+        verify(mContext, never()).registerReceiver(any(), any());
 
         //not call unregisterReceiver()
         mPreferenceController.onPause();
-        verify(mContext, never()).unregisterReceiver((BroadcastReceiver) any());
+        verify(mContext, never()).unregisterReceiver(any());
     }
 
     private void setupBluetoothEnvironment() {
@@ -185,9 +185,9 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
     private void setupHearingAidEnvironment() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
         mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
-        mShadowBluetoothAdapter.enable();
+        mBluetoothAdapter.enable();
         mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
         when(mCachedDeviceManager.findDevice(mBluetoothDevice)).thenReturn(mCachedBluetoothDevice);
         when(mCachedBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME);

@@ -22,12 +22,12 @@ import static android.os.StatsDimensionsValue.TUPLE_VALUE_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -67,10 +67,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.android.controller.ServiceController;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowJobScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,9 +127,8 @@ public class AnomalyDetectionJobServiceTest {
     public void scheduleCleanUp() {
         AnomalyDetectionJobService.scheduleAnomalyDetection(application, new Intent());
 
-        ShadowJobScheduler shadowJobScheduler =
-                Shadows.shadowOf(application.getSystemService(JobScheduler.class));
-        List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
+        JobScheduler jobScheduler = application.getSystemService(JobScheduler.class);
+        List<JobInfo> pendingJobs = jobScheduler.getAllPendingJobs();
         assertThat(pendingJobs).hasSize(1);
 
         JobInfo pendingJob = pendingJobs.get(0);

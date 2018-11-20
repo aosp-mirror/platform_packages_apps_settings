@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.nfc.NfcAdapter;
 import android.provider.Settings;
 
 import com.android.settings.R;
@@ -60,7 +61,7 @@ public class AdvancedConnectedDeviceControllerTest {
         mContentResolver = mContext.getContentResolver();
         mNfcController = new NfcPreferenceController(mContext,
                 NfcPreferenceController.KEY_TOGGLE_NFC);
-        mShadowNfcAdapter = Shadows.shadowOf(ShadowNfcAdapter.getNfcAdapter(mContext));
+        mShadowNfcAdapter = Shadows.shadowOf(NfcAdapter.getNfcAdapter(mContext));
     }
 
     @Test
@@ -68,8 +69,7 @@ public class AdvancedConnectedDeviceControllerTest {
         AdvancedConnectedDeviceController controller =
                 new AdvancedConnectedDeviceController(mContext, KEY);
 
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(
-                AVAILABLE);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

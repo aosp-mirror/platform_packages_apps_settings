@@ -56,10 +56,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowAudioManager.class,
-        ShadowBluetoothUtils.class}
-)
+@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothUtils.class})
 public class AvailableMediaDeviceGroupControllerTest {
 
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
@@ -84,7 +81,7 @@ public class AvailableMediaDeviceGroupControllerTest {
     private Preference mPreference;
     private AvailableMediaDeviceGroupController mAvailableMediaDeviceGroupController;
     private LocalBluetoothManager mLocalBluetoothManager;
-    private ShadowAudioManager mShadowAudioManager;
+    private AudioManager mAudioManager;
 
     @Before
     public void setUp() {
@@ -101,7 +98,7 @@ public class AvailableMediaDeviceGroupControllerTest {
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
         mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
-        mShadowAudioManager = ShadowAudioManager.getShadow();
+        mAudioManager = mContext.getSystemService(AudioManager.class);
         doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
 
         mAvailableMediaDeviceGroupController = new AvailableMediaDeviceGroupController(mContext);
@@ -184,7 +181,7 @@ public class AvailableMediaDeviceGroupControllerTest {
 
     @Test
     public void setTitle_inCallState_showCallStateTitle() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
         mAvailableMediaDeviceGroupController.onAudioModeChanged();
 
         assertThat(mPreferenceGroup.getTitle()).isEqualTo(
@@ -193,7 +190,7 @@ public class AvailableMediaDeviceGroupControllerTest {
 
     @Test
     public void setTitle_notInCallState_showMediaStateTitle() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mAvailableMediaDeviceGroupController.onAudioModeChanged();
 
         assertThat(mPreferenceGroup.getTitle()).isEqualTo(

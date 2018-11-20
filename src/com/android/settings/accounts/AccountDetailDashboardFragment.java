@@ -94,8 +94,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     void finishIfAccountMissing() {
         final Context context = getContext();
         final UserManager um = context.getSystemService(UserManager.class);
-        final AccountManager accountManager = (AccountManager) context.getSystemService(
-                AccountManager.class);
+        final AccountManager accountManager = context.getSystemService(AccountManager.class);
         for (UserHandle userHandle : um.getUserProfiles()) {
             for (Account account : accountManager.getAccountsAsUser(userHandle.getIdentifier())) {
                 if (account.equals(mAccount)) {

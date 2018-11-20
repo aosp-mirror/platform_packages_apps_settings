@@ -155,6 +155,7 @@ public class ActionDisabledByAdminDialogHelperTest {
         dpmShadow.setShortSupportMessageForUser(component, 123, "some message");
         dpmShadow.setIsAdminActiveAsUser(true);
         userManagerShadow.addProfile(new UserInfo(123, null, 0));
+        userManagerShadow.addUserProfile(new UserHandle(123));
         ShadowProcess.setMyUid(Process.SYSTEM_UID);
 
         mHelper.setAdminSupportDetails(mActivity, view, admin);

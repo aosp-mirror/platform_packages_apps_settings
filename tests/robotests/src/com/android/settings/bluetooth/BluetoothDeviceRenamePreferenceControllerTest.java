@@ -18,8 +18,8 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -72,8 +72,8 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mPreference = new Preference(mContext);
         mPreference.setKey(PREF_KEY);
-        mBluetoothAdapter = ShadowBluetoothAdapter.getDefaultAdapter();
-        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
 
         mController = spy(new BluetoothDeviceRenamePreferenceController(mContext, PREF_KEY));
         mController.setFragment(mFragment);

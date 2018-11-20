@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 
+import android.net.wifi.WifiManager;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
@@ -56,14 +57,14 @@ public class SavedAccessPointsPreferenceControllerTest {
     private PreferenceCategory mPreferenceCategory;
 
     private Context mContext;
-    private ShadowWifiManager mWifiManager;
+    private WifiManager mWifiManager;
     private SavedAccessPointsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mWifiManager = ShadowWifiManager.get();
+        mWifiManager = mContext.getSystemService(WifiManager.class);
         mController = spy(new SavedAccessPointsPreferenceController(mContext, "test_key"));
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
