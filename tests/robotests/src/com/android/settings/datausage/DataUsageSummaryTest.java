@@ -95,11 +95,6 @@ public class DataUsageSummaryTest {
                 .createSummaryProvider(mActivity, mSummaryLoader);
     }
 
-    @After
-    public void tearDown() {
-        ShadowUserManager.getShadow().reset();
-    }
-
     @Test
     public void formatUsage_shouldLookLikeFormatFileSize() {
         SettingsShadowResources.overrideResource(com.android.internal.R.string.fileSizeSuffix,
