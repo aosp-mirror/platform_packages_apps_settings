@@ -63,11 +63,6 @@ public class RestrictedEncryptionPreferenceControllerTest {
         mUserManager = ShadowUserManager.getShadow();
     }
 
-    @After
-    public void tearDown() {
-        mUserManager.reset();
-    }
-
     @Test
     public void isAvailable_noRestriction_shouldReturnTrue() {
         assertThat(mCredentialStoragePreferenceController.isAvailable()).isTrue();

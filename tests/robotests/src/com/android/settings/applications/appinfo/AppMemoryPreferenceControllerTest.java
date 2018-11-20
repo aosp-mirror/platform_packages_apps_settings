@@ -77,11 +77,6 @@ public class AppMemoryPreferenceControllerTest {
         when(mFragment.getActivity()).thenReturn(mActivity);
     }
 
-    @After
-    public void tearDown() {
-        ShadowUserManager.getShadow().reset();
-    }
-
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_developmentSettingsEnabled_shouldReturnAvailable() {

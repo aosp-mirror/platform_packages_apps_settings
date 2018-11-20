@@ -75,7 +75,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @After
     public void tearDown() {
         ShadowEnableDevelopmentSettingWarningDialog.reset();
-        mShadowUserManager.reset();
     }
 
     @Test

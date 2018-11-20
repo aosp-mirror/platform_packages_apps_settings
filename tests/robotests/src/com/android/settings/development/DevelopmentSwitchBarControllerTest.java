@@ -70,7 +70,6 @@ public class DevelopmentSwitchBarControllerTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
-        ShadowUserManager.getShadow().reset();
     }
 
     @Test

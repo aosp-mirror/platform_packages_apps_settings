@@ -49,19 +49,6 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private int[] profileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
 
-
-    @Resetter
-    public void reset() {
-        mUserInfos.clear();
-        mRestrictions.clear();
-        mUserProfileInfos.clear();
-        mRestrictionSources.clear();
-        mManagedProfiles.clear();
-        mIsQuietModeEnabled = false;
-        mUserSwitchEnabled = false;
-        profileIdsForUser = new int[0];
-    }
-
     public void setUserInfo(int userHandle, UserInfo userInfo) {
         mUserInfos.put(userHandle, userInfo);
     }
@@ -90,7 +77,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    public List<UserHandle> getUserProfiles(){
+    public List<UserHandle> getUserProfiles() {
         int[] userIds = getProfileIds(UserHandle.myUserId(), true /* enabledOnly */);
         List<UserHandle> result = new ArrayList<>(userIds.length);
         for (int userId : userIds) {
