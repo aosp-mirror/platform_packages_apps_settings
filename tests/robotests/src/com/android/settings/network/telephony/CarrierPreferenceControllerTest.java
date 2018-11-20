@@ -21,10 +21,18 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
@@ -38,12 +46,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.ArgumentCaptor;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class CarrierPreferenceControllerTest {
     private static final int SUB_ID = 2;
+    private static final String CARRIER_SETTINGS_COMPONENT = "packageName/className";
 
     @Mock
     private TelephonyManager mTelephonyManager;
@@ -105,5 +116,56 @@ public class CarrierPreferenceControllerTest {
         doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void handlePreferenceClick_activityFound_openCarrierSettingActivity() {
+        final PersistableBundle bundle = new PersistableBundle();
+        bundle.putString(
+                CarrierConfigManager.KEY_CARRIER_SETTINGS_ACTIVITY_COMPONENT_NAME_STRING,
+                CARRIER_SETTINGS_COMPONENT);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        PackageManager pm = Mockito.mock(PackageManager.class);
+        doReturn(pm).when(mContext).getPackageManager();
+        doReturn(new ResolveInfo()).when(pm).resolveActivity(any(Intent.class), anyInt());
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(captor.capture());
+        final Intent intent = captor.getValue();
+        assertThat(intent.getComponent()).isEqualTo(
+                ComponentName.unflattenFromString(CARRIER_SETTINGS_COMPONENT));
+    }
+
+    @Test
+    public void handlePreferenceClick_activityNotFound_DoNothing() {
+        final PersistableBundle bundle = new PersistableBundle();
+        bundle.putString(
+                CarrierConfigManager.KEY_CARRIER_SETTINGS_ACTIVITY_COMPONENT_NAME_STRING,
+                CARRIER_SETTINGS_COMPONENT);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        PackageManager pm = Mockito.mock(PackageManager.class);
+        doReturn(pm).when(mContext).getPackageManager();
+        doReturn(null).when(pm).resolveActivity(any(Intent.class), anyInt());
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext, never()).startActivity(captor.capture());
+    }
+
+    @Test
+    public void handlePreferenceClick_activityNotConfigured_DoNothing() {
+        final PersistableBundle bundle = new PersistableBundle();
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        PackageManager pm = Mockito.mock(PackageManager.class);
+        doReturn(pm).when(mContext).getPackageManager();
+        doReturn(new ResolveInfo()).when(pm).resolveActivity(any(Intent.class), anyInt());
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext, never()).startActivity(captor.capture());
     }
 }
