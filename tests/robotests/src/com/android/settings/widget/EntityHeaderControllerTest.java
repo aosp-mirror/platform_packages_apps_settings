@@ -96,11 +96,12 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
-    public void testBuildView_withContext_shouldBuildPreference() {
+    public void testBuildView_withContext_shouldBuildPreferenceAllowedBelowDivider() {
         mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
         Preference preference = mController.done(mActivity, mShadowContext);
 
         assertThat(preference instanceof LayoutPreference).isTrue();
+        assertThat(((LayoutPreference)preference).isAllowDividerBelow()).isTrue();
     }
 
     @Test
