@@ -365,6 +365,8 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void openTileIntent_profileSelectionDialog_shouldShow() {
+        ShadowUserManager.getShadow().addUser(10, "Someone", 0);
+
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         final ArrayList<UserHandle> handles = new ArrayList<>();
         handles.add(new UserHandle(0));
@@ -379,6 +381,8 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void openTileIntent_profileSelectionDialog_explicitMetadataShouldShow() {
+        ShadowUserManager.getShadow().addUser(10, "Someone", 0);
+
         mActivityInfo.metaData.putString(META_DATA_KEY_PROFILE, PROFILE_ALL);
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         final ArrayList<UserHandle> handles = new ArrayList<>();
@@ -394,6 +398,8 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void openTileIntent_profileSelectionDialog_shouldNotShow() {
+        ShadowUserManager.getShadow().addUser(10, "Someone", 0);
+
         mActivityInfo.metaData.putString(META_DATA_KEY_PROFILE, PROFILE_PRIMARY);
         final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         final ArrayList<UserHandle> handles = new ArrayList<>();

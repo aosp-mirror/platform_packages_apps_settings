@@ -23,7 +23,6 @@ import static org.robolectric.RuntimeEnvironment.application;
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.view.View;
 import android.widget.Button;
 
@@ -43,8 +42,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
@@ -62,15 +59,10 @@ import org.robolectric.shadows.ShadowKeyguardManager;
 })
 public class SetupFingerprintEnrollIntroductionTest {
 
-    @Mock
-    private UserInfo mUserInfo;
-
     private ActivityController<SetupFingerprintEnrollIntroduction> mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         Shadows.shadowOf(application.getPackageManager())
             .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
 
@@ -78,8 +70,6 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         final Intent intent = new Intent();
         mController = Robolectric.buildActivity(SetupFingerprintEnrollIntroduction.class, intent);
-
-        ShadowUserManager.getShadow().setUserInfo(0, mUserInfo);
     }
 
     @After

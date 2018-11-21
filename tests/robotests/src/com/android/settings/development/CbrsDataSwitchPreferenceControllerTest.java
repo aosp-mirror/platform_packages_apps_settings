@@ -16,7 +16,6 @@
 
 package com.android.settings.development;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static com.google.common.truth.Truth.assertThat;
 
@@ -34,7 +33,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public final class CbrsDataSwitchPreferenceControllerTest {

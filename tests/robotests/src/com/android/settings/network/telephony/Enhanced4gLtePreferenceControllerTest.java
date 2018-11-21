@@ -79,8 +79,8 @@ public class Enhanced4gLtePreferenceControllerTest {
 
         mPreference = new RestrictedSwitchPreference(mContext);
         mController = new Enhanced4gLtePreferenceController(mContext, "roaming");
-        mController.mImsManager = mImsManager;
         mController.init(SUB_ID);
+        mController.mImsManager = mImsManager;
         mPreference.setKey(mController.getPreferenceKey());
     }
 

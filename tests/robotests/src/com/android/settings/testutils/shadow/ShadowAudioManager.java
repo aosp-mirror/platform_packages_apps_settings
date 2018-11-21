@@ -101,11 +101,6 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
         }
     }
 
-    @Resetter
-    public void reset() {
-        mDeviceCallbacks.clear();
-    }
-
     public void setBluetoothScoOn(boolean bluetoothScoOn) {
         mBluetoothScoOn = bluetoothScoOn;
     }

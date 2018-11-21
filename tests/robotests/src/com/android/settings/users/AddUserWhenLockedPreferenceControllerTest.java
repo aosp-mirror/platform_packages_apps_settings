@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.pm.UserInfo;
 import android.provider.Settings.Global;
 
 import androidx.preference.PreferenceScreen;
@@ -32,7 +31,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +38,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class})
@@ -49,7 +46,6 @@ public class AddUserWhenLockedPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
     @Mock(answer = RETURNS_DEEP_STUBS)
-    private UserInfo mUserInfo;
 
     private Context mContext;
     private ShadowUserManager mUserManager;
@@ -65,8 +61,7 @@ public class AddUserWhenLockedPreferenceControllerTest {
 
     @Test
     public void displayPref_NotAdmin_shouldNotDisplay() {
-        mUserManager.setUserInfo(0, mUserInfo);
-        when(mUserInfo.isAdmin()).thenReturn(false);
+        mUserManager.setIsAdminUser(false);
         final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
         when(preference.getKey()).thenReturn(mController.getPreferenceKey());
         when(mScreen.findPreference(preference.getKey())).thenReturn(preference);
