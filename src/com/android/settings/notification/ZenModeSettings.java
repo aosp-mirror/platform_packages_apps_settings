@@ -86,8 +86,6 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 "zen_mode_behavior_calls"));
         controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
                 "zen_mode_behavior_messages"));
-        controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle,
-                "zen_mode_behavior_alarms"));
         controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeDurationPreferenceController(context, lifecycle));
         controllers.add(new ZenModeAutomationPreferenceController(context));
