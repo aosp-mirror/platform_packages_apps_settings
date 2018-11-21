@@ -321,7 +321,7 @@ public class EntityHeaderController {
         }
         actionBar.setBackgroundDrawable(
                 new ColorDrawable(
-                        Utils.getColorAttrDefaultColor(activity, android.R.attr.colorPrimary)));
+                        Utils.getColorAttrDefaultColor(activity, android.R.attr.colorPrimaryDark)));
         actionBar.setElevation(0);
         if (mRecyclerView != null && mLifecycle != null) {
             ActionBarShadowController.attachToRecyclerView(mActivity, mLifecycle, mRecyclerView);
