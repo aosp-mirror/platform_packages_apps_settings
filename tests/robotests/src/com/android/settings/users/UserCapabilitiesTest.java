@@ -45,11 +45,6 @@ public class UserCapabilitiesTest {
         mUserManager = ShadowUserManager.getShadow();
     }
 
-    @After
-    public void tearDown() {
-        mUserManager.reset();
-    }
-
     @Test
     public void disallowUserSwitch_restrictionIsSet_true() {
         mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),

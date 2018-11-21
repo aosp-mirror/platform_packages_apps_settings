@@ -9105,6 +9105,9 @@
     <!-- Summary for the condition section on the dashboard, representing number of conditions. [CHAR LIMIT=10] -->
     <string name="condition_summary" translatable="false"><xliff:g name="count" example="3">%1$d</xliff:g></string>
 
+    <!-- Content description for condition footer button. In talkback mode, double tapping will cause condition list to collapse [CHAR LIMIT=NONE]-->
+    <string name="homepage_condition_footer_content_description">Collapse</string>
+
     <!-- Title for the suggestions section on the dashboard [CHAR LIMIT=30] -->
     <string name="suggestions_title_v2">Suggested for You</string>
 
@@ -10315,10 +10318,10 @@
     <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
     <string name="force_desktop_mode_summary">Force experimental desktop mode on secondary displays</string>
 
-    <!-- UI debug setting: Force enable "smart dark" UI rendering feature [CHAR LIMIT=25] -->
-    <string name="hwui_force_dark_title">Force-enable SmartDark</string>
-    <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=50] -->
-    <string name="hwui_force_dark_summary">Forces the SmartDark feature to be always-on</string>
+    <!-- UI debug setting: Force enable "smart dark" UI rendering feature [CHAR LIMIT=40] -->
+    <string name="hwui_force_dark_title">Override force-dark</string>
+    <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=100] -->
+    <string name="hwui_force_dark_summary">Overrides the force-dark feature to be always-on</string>
 
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>

@@ -90,7 +90,6 @@ public class SlicesDatabaseAccessorTest {
 
     @After
     public void cleanUp() {
-        ShadowUserManager.getShadow().reset();
         DatabaseTestUtils.clearDb(mContext);
     }
 

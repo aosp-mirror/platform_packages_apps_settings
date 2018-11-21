@@ -114,7 +114,7 @@ public class ControllerRendererPool {
         if (ConditionContextualCardController.class == clz) {
             return new ConditionContextualCardController(context);
         } else if (SliceContextualCardController.class == clz) {
-            return new SliceContextualCardController();
+            return new SliceContextualCardController(context);
         } else if (LegacySuggestionContextualCardController.class == clz) {
             return new LegacySuggestionContextualCardController(context);
         }

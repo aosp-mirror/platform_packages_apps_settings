@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards;
 
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -36,10 +37,15 @@ import com.android.settingslib.utils.ThreadUtils;
  */
 public class CardContentProvider extends ContentProvider {
 
-    private static final String TAG = "CardContentProvider";
-
     public static final String CARD_AUTHORITY = "com.android.settings.homepage.CardContentProvider";
 
+    public static final Uri URI = new Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(CardContentProvider.CARD_AUTHORITY)
+                    .appendPath(CardDatabaseHelper.CARD_TABLE)
+                    .build();
+
+    private static final String TAG = "CardContentProvider";
     /** URI matcher for ContentProvider queries. */
     private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
     /** URI matcher type for cards table */
@@ -98,17 +104,7 @@ public class CardContentProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
-        try {
-            maybeEnableStrictMode();
-            final SQLiteDatabase database = mDBHelper.getWritableDatabase();
-            final String table = getTableFromMatch(uri);
-            final int rowsDeleted = database.delete(table, selection, selectionArgs);
-            getContext().getContentResolver().notifyChange(uri, null /* observer */);
-            return rowsDeleted;
-        } finally {
-            StrictMode.setThreadPolicy(oldPolicy);
-        }
+        throw new UnsupportedOperationException("delete operation not supported currently.");
     }
 
     @Override
@@ -140,18 +136,7 @@ public class CardContentProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
-        try {
-            maybeEnableStrictMode();
-
-            final SQLiteDatabase database = mDBHelper.getWritableDatabase();
-            final String table = getTableFromMatch(uri);
-            final int rowsUpdated = database.update(table, values, selection, selectionArgs);
-            getContext().getContentResolver().notifyChange(uri, null /* observer */);
-            return rowsUpdated;
-        } finally {
-            StrictMode.setThreadPolicy(oldPolicy);
-        }
+        throw new UnsupportedOperationException("update operation not supported currently.");
     }
 
     @VisibleForTesting

@@ -28,6 +28,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
 
@@ -68,6 +69,8 @@ public class DataUsageSummaryTest {
     private SummaryLoader mSummaryLoader;
     @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
+    @Mock
+    private NetworkStatsManager mNetworkStatsManager;
     private Context mContext;
     private FragmentActivity mActivity;
     private SummaryLoader.SummaryProvider mSummaryProvider;
@@ -86,14 +89,10 @@ public class DataUsageSummaryTest {
 
         mContext = RuntimeEnvironment.application;
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
+        doReturn(mNetworkStatsManager).when(mActivity).getSystemService(NetworkStatsManager.class);
 
         mSummaryProvider = DataUsageSummary.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(mActivity, mSummaryLoader);
-    }
-
-    @After
-    public void tearDown() {
-        ShadowUserManager.getShadow().reset();
     }
 
     @Test

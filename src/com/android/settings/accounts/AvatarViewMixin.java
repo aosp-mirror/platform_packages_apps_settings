@@ -55,27 +55,37 @@ public class AvatarViewMixin implements LifecycleObserver {
 
     private static final String METHOD_GET_ACCOUNT_AVATAR = "getAccountAvatar";
     private static final String KEY_AVATAR_BITMAP = "account_avatar";
+    private static final String KEY_ACCOUNT_NAME = "account_name";
+    private static final String EXTRA_ACCOUNT_NAME = "extra.accountName";
     private static final int REQUEST_CODE = 1013;
 
     private final Context mContext;
     private final ImageView mAvatarView;
     private final MutableLiveData<Bitmap> mAvatarImage;
 
+    private String mAccountName;
+
     public AvatarViewMixin(SettingsHomepageActivity activity, ImageView avatarView) {
         mContext = activity.getApplicationContext();
         mAvatarView = avatarView;
         mAvatarView.setOnClickListener(v -> {
-            if (hasAccount()) {
-                //TODO(b/117509285) launch the new page of the MeCard
-            } else {
-                final Intent intent = FeatureFactory.getFactory(mContext)
-                        .getAccountFeatureProvider()
-                        .getAccountSettingsDeeplinkIntent();
+            final Intent intent = FeatureFactory.getFactory(mContext)
+                    .getAccountFeatureProvider()
+                    .getAccountSettingsDeeplinkIntent();
 
-                if (intent != null) {
-                    activity.startActivityForResult(intent, REQUEST_CODE);
-                }
+            if (intent == null) {
+                return;
             }
+
+            if (!TextUtils.isEmpty(mAccountName)) {
+                //TODO(b/117509285) launch the new page of the MeCard
+                intent.putExtra(EXTRA_ACCOUNT_NAME, mAccountName);
+            }
+
+            // Here may have two different UI while start the activity.
+            // It will display adding account UI when device has no any account.
+            // It will display account information page when intent added the specified account.
+            activity.startActivityForResult(intent, REQUEST_CODE);
         });
 
         mAvatarImage = new MutableLiveData<>();
@@ -91,7 +101,7 @@ public class AvatarViewMixin implements LifecycleObserver {
             return;
         }
         if (hasAccount()) {
-            loadAvatar();
+            loadAccount();
         } else {
             mAvatarView.setImageResource(R.drawable.ic_account_circle_24dp);
         }
@@ -104,7 +114,7 @@ public class AvatarViewMixin implements LifecycleObserver {
         return (accounts != null) && (accounts.length > 0);
     }
 
-    private void loadAvatar() {
+    private void loadAccount() {
         final String authority = queryProviderAuthority();
         if (TextUtils.isEmpty(authority)) {
             return;
@@ -117,6 +127,7 @@ public class AvatarViewMixin implements LifecycleObserver {
             final Bundle bundle = mContext.getContentResolver().call(uri,
                     METHOD_GET_ACCOUNT_AVATAR, null /* arg */, null /* extras */);
             final Bitmap bitmap = bundle.getParcelable(KEY_AVATAR_BITMAP);
+            mAccountName = bundle.getString(KEY_ACCOUNT_NAME, "" /* defaultValue */);
             mAvatarImage.postValue(bitmap);
         });
     }

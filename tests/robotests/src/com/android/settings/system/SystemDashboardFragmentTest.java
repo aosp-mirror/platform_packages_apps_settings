@@ -48,7 +48,6 @@ public class SystemDashboardFragmentTest {
     @After
     public void tearDown() {
         SettingsShadowResources.reset();
-        ShadowUserManager.getShadow().reset();
     }
 
     @Test

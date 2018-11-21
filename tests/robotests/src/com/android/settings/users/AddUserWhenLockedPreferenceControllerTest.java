@@ -63,11 +63,6 @@ public class AddUserWhenLockedPreferenceControllerTest {
         mController = new AddUserWhenLockedPreferenceController(mContext, "fake_key");
     }
 
-    @After
-    public void tearDown() {
-        mUserManager.reset();
-    }
-
     @Test
     public void displayPref_NotAdmin_shouldNotDisplay() {
         mUserManager.setUserInfo(0, mUserInfo);

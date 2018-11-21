@@ -95,15 +95,12 @@ public class CardContentProviderTest {
         assertThat(count).isGreaterThan(0);
     }
 
-    @Test
+    @Test(expected = UnsupportedOperationException.class)
     public void cardData_delete() {
-        mResolver.insert(mUri, generateOneRow());
         final int delCount = mResolver.delete(mUri, null, null);
-
-        assertThat(delCount).isGreaterThan(0);
     }
 
-    @Test
+    @Test(expected = UnsupportedOperationException.class)
     public void cardData_update() {
         mResolver.insert(mUri, generateOneRow());
 
@@ -113,16 +110,6 @@ public class CardContentProviderTest {
         final String strWhere = CardDatabaseHelper.CardColumns.NAME + "=?";
         final String[] selectionArgs = {"auto_rotate"};
         final int updateCount = mResolver.update(mUri, values, strWhere, selectionArgs);
-
-        assertThat(updateCount).isGreaterThan(0);
-
-        final String[] columns = {CardDatabaseHelper.CardColumns.SCORE};
-        final Cursor cr = mResolver.query(mUri, columns, strWhere, selectionArgs, null);
-        cr.moveToFirst();
-        final double qryScore = cr.getDouble(0);
-
-        cr.close();
-        assertThat(qryScore).isEqualTo(updatingScore);
     }
 
     @Test
@@ -146,28 +133,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    public void delete_isMainThread_shouldEnableStrictMode() {
-        ShadowThreadUtils.setIsMainThread(true);
-        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
-
-        mProvider.delete(mUri, null, null);
-
-        verify(mProvider).enableStrictMode();
-    }
-
-    @Test
-    public void update_isMainThread_shouldEnableStrictMode() {
-        ShadowThreadUtils.setIsMainThread(true);
-        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
-        final ContentValues values = new ContentValues();
-        values.put(CardDatabaseHelper.CardColumns.SCORE, "0.01");
-
-        mProvider.update(mUri, values, null, null);
-
-        verify(mProvider).enableStrictMode();
-    }
-
-    @Test
     public void insert_notMainThread_shouldNotEnableStrictMode() {
         ShadowThreadUtils.setIsMainThread(false);
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
@@ -183,28 +148,6 @@ public class CardContentProviderTest {
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
 
         mProvider.query(mUri, null, null, null);
-
-        verify(mProvider, never()).enableStrictMode();
-    }
-
-    @Test
-    public void delete_notMainThread_shouldNotEnableStrictMode() {
-        ShadowThreadUtils.setIsMainThread(false);
-        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
-
-        mProvider.delete(mUri, null, null);
-
-        verify(mProvider, never()).enableStrictMode();
-    }
-
-    @Test
-    public void update_notMainThread_shouldNotEnableStrictMode() {
-        ShadowThreadUtils.setIsMainThread(false);
-        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
-        final ContentValues values = new ContentValues();
-        values.put(CardDatabaseHelper.CardColumns.SCORE, "0.01");
-
-        mProvider.update(mUri, values, null, null);
 
         verify(mProvider, never()).enableStrictMode();
     }

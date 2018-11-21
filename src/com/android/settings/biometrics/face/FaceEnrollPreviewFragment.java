@@ -17,7 +17,6 @@
 package com.android.settings.biometrics.face;
 
 import android.content.Context;
-import android.graphics.Matrix;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -31,6 +30,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.util.Size;
+import android.util.TypedValue;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -41,11 +41,7 @@ import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * Fragment that contains the logic for showing and controlling the camera preview, circular
@@ -120,7 +116,6 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
         @Override
         public void onOpened(CameraDevice cameraDevice) {
             mCameraDevice = cameraDevice;
-
             try {
                 // Configure the size of default buffer
                 SurfaceTexture texture = mTextureView.getSurfaceTexture();
@@ -245,11 +240,8 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
 
     /**
      * Sets up member variables related to camera.
-     *
-     * @param width  The width of available size for camera preview
-     * @param height The height of available size for camera preview
      */
-    private void setUpCameraOutputs(int width, int height) {
+    private void setUpCameraOutputs() {
         try {
             for (String cameraId : mCameraManager.getCameraIdList()) {
                 CameraCharacteristics characteristics =
@@ -265,8 +257,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
                 // Get the stream configurations
                 StreamConfigurationMap map = characteristics.get(
                         CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-                mPreviewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
-                        width, height, MAX_PREVIEW_WIDTH, MAX_PREVIEW_HEIGHT);
+                mPreviewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class));
                 break;
             }
         } catch (CameraAccessException e) {
@@ -281,7 +272,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
      */
     private void openCamera(int width, int height) {
         try {
-            setUpCameraOutputs(width, height);
+            setUpCameraOutputs();
             mCameraManager.openCamera(mCameraId, mCameraStateCallback, mHandler);
             configureTransform(width, height);
         } catch (CameraAccessException e) {
@@ -292,35 +283,15 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
     /**
      * Chooses the optimal resolution for the camera to open.
      */
-    private Size chooseOptimalSize(Size[] choices, int textureViewWidth, int textureViewHeight,
-            int maxWidth, int maxHeight) {
-        // Collect the supported resolutions that are at least as big as the preview Surface
-        List<Size> bigEnough = new ArrayList<>();
-        // Collect the supported resolutions that are smaller than the preview Surface
-        List<Size> notBigEnough = new ArrayList<>();
-
-        for (Size option : choices) {
-            if (option.getWidth() <= maxWidth && option.getHeight() <= maxHeight &&
-                    option.getHeight() == option.getWidth()) {
-                if (option.getWidth() >= textureViewWidth &&
-                        option.getHeight() >= textureViewHeight) {
-                    bigEnough.add(option);
-                } else {
-                    notBigEnough.add(option);
-                }
+    private Size chooseOptimalSize(Size[] choices) {
+        for (int i = 0; i < choices.length; i++) {
+            if (choices[i].getHeight() == MAX_PREVIEW_HEIGHT
+                    && choices[i].getWidth() == MAX_PREVIEW_WIDTH) {
+                return choices[i];
             }
         }
-
-        // Pick the smallest of those big enough. If there is no one big enough, pick the
-        // largest of those not big enough.
-        if (bigEnough.size() > 0) {
-            return Collections.min(bigEnough, new CompareSizesByArea());
-        } else if (notBigEnough.size() > 0) {
-            return Collections.max(notBigEnough, new CompareSizesByArea());
-        } else {
-            Log.e(TAG, "Couldn't find any suitable preview size");
-            return choices[0];
-        }
+        Log.w(TAG, "Unable to find a good resolution");
+        return choices[0];
     }
 
     /**
@@ -337,19 +308,22 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
         }
 
         // Fix the aspect ratio
-        Matrix matrix = new Matrix();
         float scaleX = (float) viewWidth / mPreviewSize.getWidth();
         float scaleY = (float) viewHeight / mPreviewSize.getHeight();
 
-        // Now divide by smaller one so it fills up the original space
+        // Now divide by smaller one so it fills up the original space.
         float smaller = Math.min(scaleX, scaleY);
         scaleX = scaleX / smaller;
         scaleY = scaleY / smaller;
 
-        // Apply the scale
-        matrix.setScale(scaleX, scaleY);
+        // Apply the transformation/scale
+        mTextureView.setTranslationX(getResources().getDimension(R.dimen.face_preview_translate_x));
+        mTextureView.setTranslationY(getResources().getDimension(R.dimen.face_preview_translate_y));
 
-        mTextureView.setTransform(matrix);
+        final TypedValue scale = new TypedValue();
+        getResources().getValue(R.dimen.face_preview_scale, scale, true /* resolveRefs */);
+        mTextureView.setScaleX(scaleX * scale.getFloat());
+        mTextureView.setScaleY(scaleY * scale.getFloat());
     }
 
     private void closeCamera() {
@@ -362,18 +336,4 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
             mCameraDevice = null;
         }
     }
-
-    /**
-     * Compares two {@code Size}s based on their areas.
-     */
-    private static class CompareSizesByArea implements Comparator<Size> {
-        @Override
-        public int compare(Size lhs, Size rhs) {
-            // We cast here to ensure the multiplications won't overflow
-            return Long.signum((long) lhs.getWidth() * lhs.getHeight() -
-                    (long) rhs.getWidth() * rhs.getHeight());
-        }
-
-    }
-
 }

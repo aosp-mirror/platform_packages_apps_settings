@@ -105,11 +105,6 @@ public class EditUserInfoControllerTest {
         mController = new TestEditUserInfoController();
     }
 
-    @After
-    public void tearDown() {
-        mUserManager.reset();
-    }
-
     @Test
     public void photoControllerOnActivityResult_whenWaiting_isCalled() {
         mController.createDialog(mFragment, mCurrentIcon, "test user",

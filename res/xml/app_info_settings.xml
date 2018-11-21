@@ -32,7 +32,9 @@
         android:key="instant_app_buttons"
         android:layout="@layout/instant_app_buttons"
         android:selectable="false"
-        android:order="-9999" />
+        android:order="-9999"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="true"/>
 
     <com.android.settings.widget.ActionButtonPreference
         android:key="action_buttons"

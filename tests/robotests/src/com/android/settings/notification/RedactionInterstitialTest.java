@@ -48,7 +48,6 @@ public class RedactionInterstitialTest {
 
     @After
     public void tearDown() {
-        ShadowUserManager.getShadow().reset();
         ShadowRestrictedLockUtilsInternal.reset();
     }
 

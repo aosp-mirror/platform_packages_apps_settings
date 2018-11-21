@@ -57,11 +57,6 @@ public class EncryptionStatusPreferenceControllerTest {
         mPreference = new Preference(mContext);
     }
 
-    @After
-    public void tearDown() {
-        mShadowUserManager.reset();
-    }
-
     @Test
     public void isAvailable_admin_true() {
         mShadowUserManager.setIsAdminUser(true);

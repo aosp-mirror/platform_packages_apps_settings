@@ -23,7 +23,8 @@
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        android:order="-10000"/>
+        android:order="-10000"
+        settings:allowDividerBelow="true"/>
 
     <com.android.settings.widget.ActionButtonPreference
         android:key="action_buttons"
