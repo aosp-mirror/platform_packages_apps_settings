@@ -298,16 +298,28 @@ public class QrCamera extends Handler {
         }
     }
 
+    /** Get best preview size from the list of camera supported preview sizes. Compares the
+     * preview size and aspect ratio to choose the best one. */
     private Size getBestPreviewSize(Camera.Parameters parameters) {
+        final double minRatioDiffPercent = 0.1;
         final Size windowSize = mScannerCallback.getViewSize();
+        final double winRatio = getRatio(windowSize.getWidth(), windowSize.getHeight());
+        double bestChoiceRatio = 0;
         Size bestChoice = new Size(0, 0);
         for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
-            if (size.width <= windowSize.getWidth() && size.height <= windowSize.getHeight()) {
+            double ratio = getRatio(size.width, size.height);
+            if (size.height * size.width > bestChoice.getWidth() * bestChoice.getHeight()
+                    && (Math.abs(bestChoiceRatio - winRatio) / winRatio > minRatioDiffPercent
+                    || Math.abs(ratio - winRatio) / winRatio <= minRatioDiffPercent)) {
                 bestChoice = new Size(size.width, size.height);
-                break;
+                bestChoiceRatio = getRatio(size.width, size.height);
             }
         }
         return bestChoice;
+    }
+
+    private double getRatio(double x, double y) {
+        return (x < y) ? x / y : y / x;
     }
 
     @VisibleForTesting
