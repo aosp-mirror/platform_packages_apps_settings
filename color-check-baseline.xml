@@ -2,18 +2,6 @@
 <issues format="4">
 
     <issue
-        id="LintError"
-        severity="Error"
-        message="No `.class` files were found in project &quot;.&quot;, so none of the classfile based checks could be run. Does the project need to be built first?"
-        category="Lint"
-        priority="10"
-        summary="Lint Failure"
-        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.&#xA;These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
-        <location
-            file="."/>
-    </issue>
-
-    <issue
         id="HardCodedColor"
         severity="Error"
         message="Avoid using hardcoded color"
@@ -2553,7 +2541,7 @@
         errorLine2="                                                                                                                                                                       ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rXC/strings.xml"
-            line="2530"
+            line="2533"
             column="168"/>
     </issue>
 
@@ -2569,7 +2557,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rAU/strings.xml"
-            line="2531"
+            line="2534"
             column="64"/>
     </issue>
 
@@ -2585,7 +2573,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rCA/strings.xml"
-            line="2531"
+            line="2534"
             column="64"/>
     </issue>
 
@@ -2601,7 +2589,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rGB/strings.xml"
-            line="2531"
+            line="2534"
             column="64"/>
     </issue>
 
@@ -2617,7 +2605,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rIN/strings.xml"
-            line="2531"
+            line="2534"
             column="64"/>
     </issue>
 
@@ -2633,7 +2621,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="5886"
+            line="5902"
             column="36"/>
     </issue>
 
@@ -2665,7 +2653,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="443"
+            line="448"
             column="44"/>
     </issue>
 
@@ -2681,7 +2669,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="449"
+            line="454"
             column="44"/>
     </issue>
 
@@ -2697,7 +2685,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="450"
+            line="455"
             column="44"/>
     </issue>
 
@@ -2761,7 +2749,7 @@
         errorLine2="                                              ^">
         <location
             file="res/values/themes.xml"
-            line="91"
+            line="90"
             column="47"/>
     </issue>
 
@@ -2777,7 +2765,7 @@
         errorLine2="                                              ^">
         <location
             file="res/values/themes.xml"
-            line="91"
+            line="90"
             column="47"/>
     </issue>
 
@@ -2793,7 +2781,7 @@
         errorLine2="                                       ^">
         <location
             file="res/values/themes.xml"
-            line="97"
+            line="96"
             column="40"/>
     </issue>
 
@@ -2809,7 +2797,7 @@
         errorLine2="                                       ^">
         <location
             file="res/values/themes.xml"
-            line="97"
+            line="96"
             column="40"/>
     </issue>
 
@@ -2825,7 +2813,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="160"
+            line="159"
             column="45"/>
     </issue>
 
@@ -2841,7 +2829,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="161"
+            line="160"
             column="49"/>
     </issue>
 
@@ -2857,7 +2845,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="169"
+            line="168"
             column="45"/>
     </issue>
 
@@ -2873,8 +2861,56 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="170"
+            line="169"
             column="49"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;batteryGoodColor&quot;>@color/battery_good_color_light&lt;/item>"
+        errorLine2="                                      ^">
+        <location
+            file="res/values/themes.xml"
+            line="185"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;batteryMaybeColor&quot;>@color/battery_maybe_color_light&lt;/item>"
+        errorLine2="                                       ^">
+        <location
+            file="res/values/themes.xml"
+            line="186"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;batteryBadColor&quot;>@color/battery_bad_color_light&lt;/item>"
+        errorLine2="                                     ^">
+        <location
+            file="res/values/themes.xml"
+            line="187"
+            column="38"/>
     </issue>
 
     <issue
