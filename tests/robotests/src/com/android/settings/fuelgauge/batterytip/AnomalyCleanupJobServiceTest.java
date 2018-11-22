@@ -19,8 +19,8 @@ package com.android.settings.fuelgauge.batterytip;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -45,9 +45,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowJobScheduler;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -85,9 +83,8 @@ public class AnomalyCleanupJobServiceTest {
     public void scheduleCleanUp() {
         AnomalyCleanupJobService.scheduleCleanUp(mContext);
 
-        ShadowJobScheduler shadowJobScheduler =
-                Shadows.shadowOf(mContext.getSystemService(JobScheduler.class));
-        List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
+        JobScheduler jobScheduler = mContext.getSystemService(JobScheduler.class);
+        List<JobInfo> pendingJobs = jobScheduler.getAllPendingJobs();
         assertEquals(1, pendingJobs.size());
         JobInfo pendingJob = pendingJobs.get(0);
         assertThat(pendingJob.getId()).isEqualTo(R.integer.job_anomaly_clean_up);

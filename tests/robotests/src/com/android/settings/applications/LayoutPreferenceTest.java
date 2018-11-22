@@ -83,4 +83,11 @@ public class LayoutPreferenceTest {
         assertThat(mPreference.findViewById(R.id.button1).isEnabled()).isFalse();
         assertThat(mPreference.findViewById(R.id.button2).isEnabled()).isTrue();
     }
+
+    @Test
+    public void allowDividerBelow_shouldSaveCorrectDividerStatus() {
+        mPreference.setAllowDividerBelow(true);
+
+        assertThat(mPreference.isAllowDividerBelow()).isTrue();
+    }
 }

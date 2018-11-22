@@ -38,6 +38,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.util.FeatureFlagUtils;
 
 import androidx.preference.ListPreference;
@@ -107,8 +108,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private Context mContext;
     private PreferenceScreen mScreen;
     private ListPreference mPreference;
+    private AudioManager mAudioManager;
     private ShadowAudioManager mShadowAudioManager;
-    private ShadowMediaRouter mShadowMediaRouter;
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
@@ -126,8 +127,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
+        mAudioManager = mContext.getSystemService(AudioManager.class);
         mShadowAudioManager = ShadowAudioManager.getShadow();
-        mShadowMediaRouter = ShadowMediaRouter.getShadow();
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
         mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
@@ -168,7 +169,6 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
     @After
     public void tearDown() {
-        mShadowAudioManager.reset();
         ShadowBluetoothUtils.reset();
     }
 

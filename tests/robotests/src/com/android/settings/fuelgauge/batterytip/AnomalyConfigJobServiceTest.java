@@ -45,8 +45,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowJobScheduler;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -82,9 +80,8 @@ public class AnomalyConfigJobServiceTest {
     public void testScheduleConfigUpdate() {
         AnomalyConfigJobService.scheduleConfigUpdate(mContext);
 
-        ShadowJobScheduler shadowJobScheduler =
-                Shadows.shadowOf(mContext.getSystemService(JobScheduler.class));
-        List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
+        JobScheduler jobScheduler = mContext.getSystemService(JobScheduler.class);
+        List<JobInfo> pendingJobs = jobScheduler.getAllPendingJobs();
         assertEquals(1, pendingJobs.size());
         JobInfo pendingJob = pendingJobs.get(0);
         assertThat(pendingJob.getId()).isEqualTo(R.integer.job_anomaly_config_update);

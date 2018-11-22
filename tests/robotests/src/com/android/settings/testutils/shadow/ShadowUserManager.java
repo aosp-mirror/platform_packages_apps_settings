@@ -21,12 +21,10 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.UserManager.EnforcingUser;
-import android.util.SparseArray;
 
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
@@ -40,7 +38,6 @@ import java.util.Set;
 @Implements(value = UserManager.class)
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
-    private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
     private final List<String> mRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
@@ -48,15 +45,6 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private boolean mIsQuietModeEnabled = false;
     private int[] profileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
-
-    public void setUserInfo(int userHandle, UserInfo userInfo) {
-        mUserInfos.put(userHandle, userInfo);
-    }
-
-    @Implementation
-    protected UserInfo getUserInfo(int userHandle) {
-        return mUserInfos.get(userHandle);
-    }
 
     public void addProfile(UserInfo userInfo) {
         mUserProfileInfos.add(userInfo);
@@ -74,16 +62,6 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
             ids[i] = mUserProfileInfos.get(i).id;
         }
         return ids;
-    }
-
-    @Implementation
-    public List<UserHandle> getUserProfiles() {
-        int[] userIds = getProfileIds(UserHandle.myUserId(), true /* enabledOnly */);
-        List<UserHandle> result = new ArrayList<>(userIds.length);
-        for (int userId : userIds) {
-            result.add(UserHandle.of(userId));
-        }
-        return result;
     }
 
     @Implementation

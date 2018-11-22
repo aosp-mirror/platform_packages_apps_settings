@@ -40,6 +40,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -99,7 +100,11 @@ public class AvatarViewMixinTest {
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
+    @Config(qualifiers = "mcc999",
+            shadows = {
+                    BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
+                    BatteryFixSliceTest.ShadowBatteryTipLoader.class
+            })
     public void onStart_useMockAvatarViewMixin_shouldBeExecuted() {
         final AvatarViewMixin mockAvatar = spy(new AvatarViewMixin(mActivity, mImageView));
 
@@ -141,8 +146,7 @@ public class AvatarViewMixinTest {
 
     @Test
     public void callWithGetAccountAvatarMethod_useDummyData_shouldReturnAccountNameAndAvatar() {
-        final ShadowContentResolver shadowContentResolver = Shadow.extract(
-                mContext.getContentResolver());
+        final ContentResolver contentResolver = mContext.getContentResolver();
         final Uri uri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT).authority(
                 DUMMY_AUTHORITY).build();
         final ContentProvider mockContentProvider = mock(ContentProvider.class);
@@ -156,8 +160,7 @@ public class AvatarViewMixinTest {
         doReturn(bundle).when(mockContentProvider).call(anyString(), anyString(),
                 any(Bundle.class));
 
-        final Bundle expectBundle = shadowContentResolver.call(uri, METHOD_GET_ACCOUNT_AVATAR,
-                null /* arg */, null /* extras */);
+        contentResolver.call(uri, METHOD_GET_ACCOUNT_AVATAR, null /* arg */, null /* extras */);
 
         final Object object = bundle.getParcelable("account_avatar");
         assertThat(object instanceof Bitmap).isTrue();

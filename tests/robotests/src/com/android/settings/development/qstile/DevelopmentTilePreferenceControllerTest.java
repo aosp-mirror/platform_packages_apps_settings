@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -82,6 +83,7 @@ public class DevelopmentTilePreferenceControllerTest {
     }
 
     @Test
+    @Ignore("b/119829673")
     public void display_hasTileService_shouldDisplay() {
         final Intent tileProbe = new Intent(TileService.ACTION_QS_TILE)
                 .setPackage(mContext.getPackageName());

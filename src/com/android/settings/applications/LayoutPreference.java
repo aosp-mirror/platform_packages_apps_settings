@@ -24,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -37,9 +36,7 @@ public class LayoutPreference extends Preference {
     private final View.OnClickListener mClickListener = v -> performClick(v);
     private boolean mAllowDividerAbove;
     private boolean mAllowDividerBelow;
-
-    @VisibleForTesting
-    View mRootView;
+    private View mRootView;
 
     public LayoutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -116,4 +113,11 @@ public class LayoutPreference extends Preference {
         return mRootView.findViewById(id);
     }
 
+    public void setAllowDividerBelow(boolean allowed) {
+        mAllowDividerBelow = allowed;
+    }
+
+    public boolean isAllowDividerBelow() {
+        return mAllowDividerBelow;
+    }
 }

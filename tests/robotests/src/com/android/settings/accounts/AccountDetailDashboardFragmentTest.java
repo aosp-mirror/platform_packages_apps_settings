@@ -166,11 +166,11 @@ public class AccountDetailDashboardFragmentTest {
     public void onResume_accountMissing_shouldFinish() {
         ShadowUserManager userManager = Shadow.extract(
                 mContext.getSystemService(UserManager.class));
-        ShadowAccountManager acctMgr = Shadow.extract(
+        ShadowAccountManager accountManager = Shadow.extract(
                 mContext.getSystemService(AccountManager.class));
 
-        userManager.addProfile(new UserInfo(1, null, 0));
-        acctMgr.addAccountForUser(1, new Account("test@test.com", "com.test"));
+        userManager.addUserProfile(new UserHandle(1));
+        accountManager.addAccountForUser(1, new Account("test@test.com", "com.test"));
 
         mFragment.finishIfAccountMissing();
         verify(mFragment).finish();
@@ -180,11 +180,11 @@ public class AccountDetailDashboardFragmentTest {
     public void onResume_accountPresentOneProfile_shouldNotFinish() {
         ShadowUserManager userManager = Shadow.extract(
                 mContext.getSystemService(UserManager.class));
-        ShadowAccountManager acctMgr = Shadow.extract(
+        ShadowAccountManager accountManager = Shadow.extract(
                 mContext.getSystemService(AccountManager.class));
 
-        userManager.addProfile(new UserInfo(1, null, 0));
-        acctMgr.addAccountForUser(1, mFragment.mAccount);
+        userManager.addUserProfile(new UserHandle(1));
+        accountManager.addAccountForUser(1, mFragment.mAccount);
 
         mFragment.finishIfAccountMissing();
         verify(mFragment, never()).finish();
@@ -194,13 +194,13 @@ public class AccountDetailDashboardFragmentTest {
     public void onResume_accountPresentTwoProfiles_shouldNotFinish() {
         ShadowUserManager userManager = Shadow.extract(
                 mContext.getSystemService(UserManager.class));
-        ShadowAccountManager acctMgr = Shadow.extract(
+        ShadowAccountManager accountManager = Shadow.extract(
                 mContext.getSystemService(AccountManager.class));
 
-        userManager.addProfile(new UserInfo(1, null, 0));
-        userManager.addProfile(new UserInfo(2, null, 0));
-        acctMgr.addAccountForUser(1, new Account("test@test.com", "com.test"));
-        acctMgr.addAccountForUser(2, mFragment.mAccount);
+        userManager.addUserProfile(new UserHandle(1));
+        userManager.addUserProfile(new UserHandle(2));
+        accountManager.addAccountForUser(1, new Account("test@test.com", "com.test"));
+        accountManager.addAccountForUser(2, mFragment.mAccount);
 
         mFragment.finishIfAccountMissing();
         verify(mFragment, never()).finish();
