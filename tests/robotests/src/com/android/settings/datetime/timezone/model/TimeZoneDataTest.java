@@ -23,9 +23,9 @@ import static org.mockito.Mockito.when;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import libcore.util.CountryTimeZones;
-import libcore.util.CountryTimeZones.TimeZoneMapping;
-import libcore.util.CountryZonesFinder;
+import libcore.timezone.CountryTimeZones;
+import libcore.timezone.CountryTimeZones.TimeZoneMapping;
+import libcore.timezone.CountryZonesFinder;
 
 import org.junit.Before;
 import org.junit.Test;
