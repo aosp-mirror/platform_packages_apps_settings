@@ -26,9 +26,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import libcore.util.CountryTimeZones;
-import libcore.util.CountryTimeZones.TimeZoneMapping;
-import libcore.util.CountryZonesFinder;
+import libcore.timezone.CountryTimeZones;
+import libcore.timezone.CountryTimeZones.TimeZoneMapping;
+import libcore.timezone.CountryZonesFinder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
