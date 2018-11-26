@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.android.settings.R;
 
@@ -53,6 +54,7 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
     private static CompoundButton mCurrentChecked = null;
     private boolean mProtectFromCheckedChange = false;
     private boolean mSelectable = true;
+    private boolean mHideDetails = false;
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
@@ -112,6 +114,11 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
         super.onClick();
         Context context = getContext();
         if (context != null) {
+            if (mHideDetails) {
+                Toast.makeText(context, context.getString(
+                        R.string.cannot_change_apn_toast), Toast.LENGTH_LONG).show();
+                return;
+            }
             int pos = Integer.parseInt(getKey());
             Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
             Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
@@ -130,5 +137,9 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
 
     public void setSubId(int subId) {
         mSubId = subId;
+    }
+
+    public void setHideDetails() {
+        mHideDetails = true;
     }
 }
