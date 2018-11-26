@@ -22,9 +22,9 @@ import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class NotificationSwitchBarPreference extends LayoutPreference {
     private ToggleSwitch mSwitch;

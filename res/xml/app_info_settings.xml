@@ -21,14 +21,14 @@
     android:key="installed_app_detail_settings_screen"
     settings:initialExpandedChildrenCount="6">
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
         android:order="-10000"
         settings:allowDividerBelow="true"/>
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="instant_app_buttons"
         android:layout="@layout/instant_app_buttons"
         android:selectable="false"

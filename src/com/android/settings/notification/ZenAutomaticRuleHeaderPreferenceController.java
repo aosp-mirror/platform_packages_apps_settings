@@ -28,16 +28,16 @@ import android.text.TextUtils;
 import android.util.Slog;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {

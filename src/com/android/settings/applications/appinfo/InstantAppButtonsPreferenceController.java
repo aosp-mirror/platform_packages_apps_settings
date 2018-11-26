@@ -34,7 +34,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStoreUtil;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -42,6 +41,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;
 import com.android.settingslib.core.lifecycle.events.OnPrepareOptionsMenu;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.List;
 

@@ -37,7 +37,7 @@ import android.view.View;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.android.settings.applications.LayoutPreference;
+import com.android.settingslib.widget.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;

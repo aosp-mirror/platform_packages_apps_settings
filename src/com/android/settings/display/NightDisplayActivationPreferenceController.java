@@ -28,8 +28,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class NightDisplayActivationPreferenceController extends TogglePreferenceController {
 
