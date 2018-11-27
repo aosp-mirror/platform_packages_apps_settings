@@ -38,7 +38,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -169,8 +168,6 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private Button mNextButton;
 
-    private boolean mIsShowingDashboard;
-
     private ViewGroup mContent;
 
     // Categories
@@ -241,9 +238,6 @@ public class SettingsActivity extends SettingsBaseActivity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
 
-        mIsShowingDashboard = TextUtils.equals(
-                SettingsActivity.class.getName(), intent.getComponent().getClassName());
-
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
         // - or :settings:show_fragment_as_subsetting is passed to the Intent
@@ -256,8 +250,7 @@ public class SettingsActivity extends SettingsBaseActivity
             setTheme(R.style.Theme_SubSettings);
         }
 
-        setContentView(mIsShowingDashboard ?
-                R.layout.settings_main_dashboard : R.layout.settings_main_prefs);
+        setContentView(R.layout.settings_main_prefs);
 
         mContent = findViewById(R.id.main_content);
 
@@ -276,25 +269,16 @@ public class SettingsActivity extends SettingsBaseActivity
                 setTitleFromBackStack();
             }
         } else {
-            launchSettingFragment(initialFragmentName, isSubSettings, intent);
+            launchSettingFragment(initialFragmentName, intent);
         }
 
         final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
-        if (mIsShowingDashboard) {
-            findViewById(R.id.search_bar).setVisibility(
-                    deviceProvisioned ? View.VISIBLE : View.INVISIBLE);
-            findViewById(R.id.action_bar).setVisibility(View.GONE);
-            final Toolbar toolbar = findViewById(R.id.search_action_bar);
-            setActionBar(toolbar);
-            FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                    .initSearchToolbar(this, toolbar);
-        }
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
             actionBar.setHomeButtonEnabled(deviceProvisioned);
-            actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
+            actionBar.setDisplayShowTitleEnabled(true);
         }
         mSwitchBar = findViewById(R.id.switch_bar);
         if (mSwitchBar != null) {
@@ -372,8 +356,8 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     @VisibleForTesting
-    void launchSettingFragment(String initialFragmentName, boolean isSubSettings, Intent intent) {
-        if (!mIsShowingDashboard && initialFragmentName != null) {
+    void launchSettingFragment(String initialFragmentName, Intent intent) {
+        if (initialFragmentName != null) {
             setTitleFromIntent(intent);
 
             Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);

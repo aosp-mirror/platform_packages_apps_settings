@@ -53,6 +53,8 @@ public class SearchFeatureProviderImplTest {
         mActivity = Robolectric.setupActivity(Activity.class);
         mProvider = new SearchFeatureProviderImpl();
         mPackageManager = Shadows.shadowOf(mActivity.getPackageManager());
+        Settings.Global.putInt(mActivity.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
     }
 
     @Test
@@ -82,7 +84,7 @@ public class SearchFeatureProviderImplTest {
 
     @Test
     @Config(shadows = ShadowUtils.class)
-    public void initSearchToolbar_NotHaveResolvedInfo_shouldNotStartActivity() {
+    public void initSearchToolbar_noResolvedInfo_shouldNotStartActivity() {
         final Toolbar toolbar = new Toolbar(mActivity);
         // This ensures navigationView is created.
         toolbar.setNavigationContentDescription("test");
@@ -90,9 +92,21 @@ public class SearchFeatureProviderImplTest {
 
         toolbar.performClick();
 
-        final Intent launchIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
+        assertThat(Shadows.shadowOf(mActivity).getNextStartedActivity()).isNull();
+    }
 
-        assertThat(launchIntent).isNull();
+    @Test
+    public void initSearchToolbar_deviceNotProvisioned_shouldNotCreateSearchBar() {
+        final Toolbar toolbar = new Toolbar(mActivity);
+        // This ensures navigationView is created.
+        toolbar.setNavigationContentDescription("test");
+
+        Settings.Global.putInt(mActivity.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0);
+
+        toolbar.performClick();
+
+        assertThat(Shadows.shadowOf(mActivity).getNextStartedActivity()).isNull();
     }
 
     @Test(expected = IllegalArgumentException.class)
