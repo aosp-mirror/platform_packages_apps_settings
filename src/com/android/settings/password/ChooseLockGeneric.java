@@ -19,8 +19,7 @@ package com.android.settings.password;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 
-import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment
-        .RESULT_FINISHED;
+import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
@@ -77,12 +76,6 @@ public class ChooseLockGeneric extends SettingsActivity {
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
-
-        String action = modIntent.getAction();
-        if (ACTION_SET_NEW_PASSWORD.equals(action)
-                || ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(action)) {
-            modIntent.putExtra(EXTRA_HIDE_DRAWER, true);
-        }
         return modIntent;
     }
 
@@ -154,7 +147,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private FingerprintManager mFingerprintManager;
         private FaceManager mFaceManager;
         private int mUserId;
-        private boolean mHideDrawer = false;
         private ManagedLockPasswordProvider mManagedPasswordProvider;
         private boolean mIsSetNewPassword = false;
         private UserManager mUserManager;
@@ -194,7 +186,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mUserPassword = getActivity().getIntent().getStringExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             }
-            mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
 
             mHasChallenge = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
@@ -345,7 +336,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                         mForFingerprint);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE,
                         mForFace);
-                intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
                 startActivityForResult(
                         intent,
                         mIsSetNewPassword && mHasChallenge
@@ -747,9 +737,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                 intent = getLockPasswordIntent(quality);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
                 intent = getLockPatternIntent();
-            }
-            if (intent != null) {
-                intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
             }
             return intent;
         }

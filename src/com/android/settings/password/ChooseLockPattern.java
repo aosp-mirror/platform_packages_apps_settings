@@ -196,7 +196,6 @@ public class ChooseLockPattern extends SettingsActivity {
         private TextView mFooterLeftButton;
         private TextView mFooterRightButton;
         protected List<LockPatternView.Cell> mChosenPattern = null;
-        private boolean mHideDrawer = false;
         private ColorStateList mDefaultHeaderColorList;
 
         // ScrollView that contains title and header, only exist in land mode
@@ -464,7 +463,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 w.start(mChooseLockSettingsHelper.utils(), required,
                         false, 0, LockPatternUtils.stringToPattern(current), current, mUserId);
             }
-            mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
             mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             mForFace = intent.getBooleanExtra(
@@ -808,7 +806,6 @@ public class ChooseLockPattern extends SettingsActivity {
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
-                    intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
                     startActivity(intent);
                 }
             }

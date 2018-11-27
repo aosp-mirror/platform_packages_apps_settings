@@ -84,11 +84,6 @@ public class SubSettingLauncher {
         return this;
     }
 
-    public SubSettingLauncher setIsShortCut(boolean isShortCut) {
-        mLaunchRequest.isShortCut = isShortCut;
-        return this;
-    }
-
     public SubSettingLauncher setArguments(Bundle arguments) {
         mLaunchRequest.arguments = arguments;
         return this;
@@ -159,8 +154,6 @@ public class SubSettingLauncher {
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID,
                 mLaunchRequest.titleResId);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, mLaunchRequest.title);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT,
-                mLaunchRequest.isShortCut);
         intent.addFlags(mLaunchRequest.flags);
         return intent;
     }
@@ -195,7 +188,6 @@ public class SubSettingLauncher {
         int titleResId;
         String titleResPackageName;
         CharSequence title;
-        boolean isShortCut;
         int sourceMetricsCategory = -100;
         int flags;
         Fragment mResultListener;
