@@ -88,8 +88,6 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
                 return getString(R.string.move_error_device_admin);
             case PackageManager.MOVE_FAILED_DOESNT_EXIST:
                 return getString(R.string.does_not_exist);
-            case PackageManager.MOVE_FAILED_FORWARD_LOCKED:
-                return getString(R.string.app_forward_locked);
             case PackageManager.MOVE_FAILED_INVALID_LOCATION:
                 return getString(R.string.invalid_location);
             case PackageManager.MOVE_FAILED_SYSTEM_PACKAGE:
