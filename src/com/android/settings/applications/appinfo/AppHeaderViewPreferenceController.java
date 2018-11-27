@@ -23,8 +23,6 @@ import android.content.pm.PackageInfo;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
@@ -32,6 +30,7 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class AppHeaderViewPreferenceController extends BasePreferenceController
         implements AppInfoDashboardFragment.Callback, LifecycleObserver, OnStart {

@@ -34,7 +34,7 @@
         android:selectable="false"
         android:layout="@layout/horizontal_preference" />
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="change_storage_button"
         android:selectable="false"
         android:layout="@layout/single_button_panel" />
@@ -78,7 +78,7 @@
         android:layout="@layout/preference_category_no_label"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false">
-        <com.android.settings.applications.LayoutPreference
+        <com.android.settingslib.widget.LayoutPreference
             android:key="clear_uri_button"
             android:layout="@layout/single_button_panel"
             android:selectable="false" />

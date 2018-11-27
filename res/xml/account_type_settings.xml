@@ -19,7 +19,7 @@
         android:title="@string/account_settings_title"
         settings:keywords="@string/keywords_accounts">
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="account_header"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
@@ -35,7 +35,7 @@
         android:icon="@drawable/ic_sync"
         android:order="200"/>
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
       android:key="remove_account"
       android:layout="@layout/remove_account_button"
       android:order="1000"

@@ -51,7 +51,6 @@ import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
@@ -61,6 +60,7 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;

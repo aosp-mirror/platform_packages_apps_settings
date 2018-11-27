@@ -29,7 +29,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.accounts.AuthenticatorHelper;
@@ -37,6 +36,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class AccountHeaderPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume {

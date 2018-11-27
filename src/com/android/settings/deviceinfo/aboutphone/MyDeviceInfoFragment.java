@@ -29,9 +29,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.accounts.EmergencyInfoPreferenceController;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.BluetoothAddressPreferenceController;
 import com.android.settings.deviceinfo.BrandedAccountPreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
@@ -53,6 +51,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;

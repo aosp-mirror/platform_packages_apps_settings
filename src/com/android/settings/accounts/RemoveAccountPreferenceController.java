@@ -39,13 +39,13 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.io.IOException;
 

@@ -44,6 +44,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;

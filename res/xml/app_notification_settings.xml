@@ -18,11 +18,11 @@
         xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:key="app_notifications">
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="pref_app_header"
         android:layout="@layout/settings_entity_header" />
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="block"
         android:layout="@layout/styled_switch_bar" />
 

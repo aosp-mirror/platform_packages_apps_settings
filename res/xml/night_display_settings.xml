@@ -43,7 +43,7 @@
         settings:keywords="@string/keywords_display_night_display"
         settings:controller="com.android.settings.display.NightDisplayIntensityPreferenceController" />
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="night_display_activated"
         android:title="@string/night_display_title"
         android:selectable="false"
