@@ -40,7 +40,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,17 +57,6 @@ public class ContextualCardLoaderTest {
         mProvider = new SettingsSliceProvider();
         ShadowContentResolver.registerProviderInternal(SettingsSliceProvider.SLICE_AUTHORITY,
                 mProvider);
-    }
-
-    @Test
-    public void createStaticCards_shouldContainCorrectCards() {
-        final Uri batteryInfo = BatterySlice.BATTERY_CARD_URI;
-        final List<Uri> expectedUris = Arrays.asList(batteryInfo);
-
-        final List<Uri> actualCardUris = mContextualCardLoader.createStaticCards().stream().map(
-                ContextualCard::getSliceUri).collect(Collectors.toList());
-
-        assertThat(actualCardUris).containsExactlyElementsIn(expectedUris);
     }
 
     @Test
