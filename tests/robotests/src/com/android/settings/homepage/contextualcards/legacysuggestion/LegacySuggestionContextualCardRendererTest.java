@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -40,7 +40,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
+import org.robolectric.android.controller.ActivityController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LegacySuggestionContextualCardRendererTest {
@@ -48,26 +49,31 @@ public class LegacySuggestionContextualCardRendererTest {
     private ControllerRendererPool mControllerRendererPool;
     @Mock
     private LegacySuggestionContextualCardController mController;
-    private Context mContext;
+    private Activity mActivity;
     private LegacySuggestionContextualCardRenderer mRenderer;
 
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mRenderer = new LegacySuggestionContextualCardRenderer(mContext, mControllerRendererPool);
+        final ActivityController<Activity> activityController = Robolectric.buildActivity(
+                Activity.class);
+        mActivity = activityController.get();
+        mActivity.setTheme(R.style.Theme_AppCompat);
+        activityController.create();
+
+        mRenderer = new LegacySuggestionContextualCardRenderer(mActivity, mControllerRendererPool);
     }
 
     @Test
     public void bindView_shouldSetListener() {
         final int viewType = mRenderer.getViewType(true /* isHalfWidth */);
-        final RecyclerView recyclerView = new RecyclerView(mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View card = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View card = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
         final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(card);
 
-        when(mControllerRendererPool.getController(mContext,
+        when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.LEGACY_SUGGESTION)).thenReturn(mController);
 
         mRenderer.bindView(viewHolder, buildContextualCard());
@@ -79,11 +85,11 @@ public class LegacySuggestionContextualCardRendererTest {
     @Test
     public void viewClick_shouldInvokeControllerPrimaryClick() {
         final int viewType = mRenderer.getViewType(true /* isHalfWidth */);
-        final RecyclerView recyclerView = new RecyclerView(mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View card = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View card = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
         final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(card);
-        when(mControllerRendererPool.getController(mContext,
+        when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.LEGACY_SUGGESTION)).thenReturn(mController);
 
         mRenderer.bindView(viewHolder, buildContextualCard());
@@ -99,7 +105,7 @@ public class LegacySuggestionContextualCardRendererTest {
                 .setName("test_name")
                 .setTitleText("test_title")
                 .setSummaryText("test_summary")
-                .setIconDrawable(mContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
+                .setIconDrawable(mActivity.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
                 .build();
     }
 }
