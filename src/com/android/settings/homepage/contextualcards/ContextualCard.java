@@ -33,13 +33,16 @@ public class ContextualCard {
     /**
      * Flags indicating the type of the ContextualCard.
      */
-    @IntDef({CardType.DEFAULT, CardType.SLICE, CardType.LEGACY_SUGGESTION, CardType.CONDITIONAL})
+    @IntDef({CardType.DEFAULT, CardType.SLICE, CardType.LEGACY_SUGGESTION, CardType.CONDITIONAL,
+            CardType.CONDITIONAL_HEADER, CardType.CONDITIONAL_FOOTER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface CardType {
         int DEFAULT = 0;
         int SLICE = 1;
         int LEGACY_SUGGESTION = 2;
         int CONDITIONAL = 3;
+        int CONDITIONAL_HEADER = 4;
+        int CONDITIONAL_FOOTER = 5;
     }
 
     private final Builder mBuilder;
