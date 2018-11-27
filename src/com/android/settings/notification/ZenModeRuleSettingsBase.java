@@ -124,7 +124,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
     protected void updateRule(Uri newConditionId) {
         mRule.setConditionId(newConditionId);
-        mBackend.setZenRule(mId, mRule);
+        mBackend.updateZenRule(mId, mRule);
     }
 
     @Override

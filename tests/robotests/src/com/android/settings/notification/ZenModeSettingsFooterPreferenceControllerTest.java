@@ -126,7 +126,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void app_manualRule_setFooterTitle() {
+    public void testDefaultNotifPolicy_app_manualRule_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         injectManualRuleFromApp();
         mController.updateState(mockPref);
@@ -137,7 +137,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void time_manualRule_setFooterTitle() {
+    public void testDefaultNotifPolicy_time_manualRule_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         String placeholder = "placeholder";
         injectManualRuleWithTimeCountdown(1000, placeholder);
@@ -148,7 +148,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void forever_manualRule_setFooterTitle() {
+    public void testDefaultNotifPolicy_forever_manualRule_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         injectManualRuleWithIndefiniteEnd();
         mController.updateState(mockPref);
@@ -158,7 +158,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void automaticRule_noManualRule_setFooterTitle() {
+    public void testDefaultNotifPolicy_automaticRule_noManualRule_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         // no manual rule
         ReflectionHelpers.setField(mZenModeConfig, MANUAL_RULE_FIELD, null);
@@ -174,7 +174,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void manualRuleEndsLast_hasAutomaticRule_setFooterTitle() {
+    public void testDefaultNotifPolicy_manualRuleEndsLast_hasAutomaticRule_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         // manual rule that ends after automatic rule ends
         injectManualRuleWithIndefiniteEnd();
@@ -190,7 +190,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void automaticRuleEndsLast_hasManualRule_setFooterTitle() {
+    public void testDefaultNotifPolicy_automaticRuleEndsLast_hasManualRule_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         // manual rule that ends before automatic rule ends
         injectManualRuleWithTimeCountdown(1000, "");
@@ -208,14 +208,15 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void multipleAutomaticRules_appAutoRuleautomaticRuleApp_setFooterTitle() {
+    public void testDefaultNotifPolicy_multipleAutomaticRules_autoRuleApp_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
         // automatic rule that ends after manual rule ends
         ZenRule rule1 = injectNewAutomaticRule(TEST_RULE_NAME + "1", false, false);
         when(mConfigWrapper.parseAutomaticRuleEndTime(rule1.conditionId)).thenReturn(10000L);
 
-        ZenRule rule2 = injectNewAutomaticRule(TEST_RULE_NAME + "2", true, true);
+        // automatic rule that is an app
+        injectNewAutomaticRule(TEST_RULE_NAME + "2", true, true);
 
         ZenRule rule3 = injectNewAutomaticRule(TEST_RULE_NAME + "3", true, false);
         when(mConfigWrapper.parseAutomaticRuleEndTime(rule3.conditionId)).thenReturn(9000L);
@@ -229,7 +230,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    public void multipleAutomaticRules_setFooterTitle() {
+    public void testDefaultNotifPolicy_multipleAutomaticRules_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
         // automatic rule that ends after manual rule ends
