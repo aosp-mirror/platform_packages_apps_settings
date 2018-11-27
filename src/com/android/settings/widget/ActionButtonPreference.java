@@ -32,11 +32,30 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
+/**
+ * This preference provides a four buttons layout with Settings style.
+ * It looks like below
+ *
+ * --------------------------------------------------
+ *  button1     | button2   | button3   | button4   |
+ * --------------------------------------------------
+ *
+ * User can set title / icon / click listener for each button.
+ *
+ * By default, four buttons are visible.
+ * However, there are two cases which button should be invisible(View.GONE).
+ *
+ * 1. User sets invisible for button. ex: ActionButtonPreference.setButton1Visible(false)
+ * 2. User doesn't set any title or icon for button.
+ *
+ */
 public class ActionButtonPreference extends Preference {
 
     private final String TAG = "ActionButtonPreference";
     private final ButtonInfo mButton1Info = new ButtonInfo();
     private final ButtonInfo mButton2Info = new ButtonInfo();
+    private final ButtonInfo mButton3Info = new ButtonInfo();
+    private final ButtonInfo mButton4Info = new ButtonInfo();
 
     public ActionButtonPreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
@@ -60,7 +79,7 @@ public class ActionButtonPreference extends Preference {
     }
 
     private void init() {
-        setLayoutResource(R.layout.two_action_buttons);
+        setLayoutResource(R.layout.settings_action_buttons);
         setSelectable(false);
     }
 
@@ -72,9 +91,21 @@ public class ActionButtonPreference extends Preference {
 
         mButton1Info.mButton = (Button) holder.findViewById(R.id.button1);
         mButton2Info.mButton = (Button) holder.findViewById(R.id.button2);
+        mButton3Info.mButton = (Button) holder.findViewById(R.id.button3);
+        mButton4Info.mButton = (Button) holder.findViewById(R.id.button4);
 
         mButton1Info.setUpButton();
         mButton2Info.setUpButton();
+        mButton3Info.setUpButton();
+        mButton4Info.setUpButton();
+    }
+
+    public ActionButtonPreference setButton1Visible(boolean isVisible) {
+        if (isVisible != mButton1Info.mIsVisible) {
+            mButton1Info.mIsVisible = isVisible;
+            notifyChanged();
+        }
+        return this;
     }
 
     public ActionButtonPreference setButton1Text(@StringRes int textResId) {
@@ -105,6 +136,22 @@ public class ActionButtonPreference extends Preference {
     public ActionButtonPreference setButton1Enabled(boolean isEnabled) {
         if (isEnabled != mButton1Info.mIsEnabled) {
             mButton1Info.mIsEnabled = isEnabled;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton1OnClickListener(View.OnClickListener listener) {
+        if (listener != mButton1Info.mListener) {
+            mButton1Info.mListener = listener;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton2Visible(boolean isVisible) {
+        if (isVisible != mButton2Info.mIsVisible) {
+            mButton2Info.mIsVisible = isVisible;
             notifyChanged();
         }
         return this;
@@ -143,14 +190,6 @@ public class ActionButtonPreference extends Preference {
         return this;
     }
 
-    public ActionButtonPreference setButton1OnClickListener(View.OnClickListener listener) {
-        if (listener != mButton1Info.mListener) {
-            mButton1Info.mListener = listener;
-            notifyChanged();
-        }
-        return this;
-    }
-
     public ActionButtonPreference setButton2OnClickListener(View.OnClickListener listener) {
         if (listener != mButton2Info.mListener) {
             mButton2Info.mListener = listener;
@@ -159,17 +198,99 @@ public class ActionButtonPreference extends Preference {
         return this;
     }
 
-    public ActionButtonPreference setButton1Visible(boolean isVisible) {
-        if (isVisible != mButton1Info.mIsVisible) {
-            mButton1Info.mIsVisible = isVisible;
+    public ActionButtonPreference setButton3Visible(boolean isVisible) {
+        if (isVisible != mButton3Info.mIsVisible) {
+            mButton3Info.mIsVisible = isVisible;
             notifyChanged();
         }
         return this;
     }
 
-    public ActionButtonPreference setButton2Visible(boolean isVisible) {
-        if (isVisible != mButton2Info.mIsVisible) {
-            mButton2Info.mIsVisible = isVisible;
+    public ActionButtonPreference setButton3Text(@StringRes int textResId) {
+        final String newText = getContext().getString(textResId);
+        if (!TextUtils.equals(newText, mButton3Info.mText)) {
+            mButton3Info.mText = newText;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton3Icon(@DrawableRes int iconResId) {
+        if (iconResId == 0) {
+            return this;
+        }
+
+        final Drawable icon;
+        try {
+            icon = getContext().getDrawable(iconResId);
+            mButton3Info.mIcon = icon;
+            notifyChanged();
+        } catch (Resources.NotFoundException exception) {
+            Log.e(TAG, "Resource does not exist: " + iconResId);
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton3Enabled(boolean isEnabled) {
+        if (isEnabled != mButton3Info.mIsEnabled) {
+            mButton3Info.mIsEnabled = isEnabled;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton3OnClickListener(View.OnClickListener listener) {
+        if (listener != mButton3Info.mListener) {
+            mButton3Info.mListener = listener;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton4Visible(boolean isVisible) {
+        if (isVisible != mButton4Info.mIsVisible) {
+            mButton4Info.mIsVisible = isVisible;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton4Text(@StringRes int textResId) {
+        final String newText = getContext().getString(textResId);
+        if (!TextUtils.equals(newText, mButton4Info.mText)) {
+            mButton4Info.mText = newText;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton4Icon(@DrawableRes int iconResId) {
+        if (iconResId == 0) {
+            return this;
+        }
+
+        final Drawable icon;
+        try {
+            icon = getContext().getDrawable(iconResId);
+            mButton4Info.mIcon = icon;
+            notifyChanged();
+        } catch (Resources.NotFoundException exception) {
+            Log.e(TAG, "Resource does not exist: " + iconResId);
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton4Enabled(boolean isEnabled) {
+        if (isEnabled != mButton4Info.mIsEnabled) {
+            mButton4Info.mIsEnabled = isEnabled;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public ActionButtonPreference setButton4OnClickListener(View.OnClickListener listener) {
+        if (listener != mButton4Info.mListener) {
+            mButton4Info.mListener = listener;
             notifyChanged();
         }
         return this;
@@ -189,11 +310,24 @@ public class ActionButtonPreference extends Preference {
             mButton.setEnabled(mIsEnabled);
             mButton.setCompoundDrawablesWithIntrinsicBounds(
                     null /* left */, mIcon /* top */, null /* right */, null /* bottom */);
-            if (mIsVisible) {
+
+            if (shouldBeVisible()) {
                 mButton.setVisibility(View.VISIBLE);
             } else {
                 mButton.setVisibility(View.GONE);
             }
+        }
+
+        /**
+         * By default, four buttons are visible.
+         * However, there are two cases which button should be invisible.
+         *
+         * 1. User set invisible for this button. ex: mIsVisible = false.
+         * 2. User didn't set any title or icon.
+         *
+         */
+        private boolean shouldBeVisible() {
+            return mIsVisible && (!TextUtils.isEmpty(mText) || mIcon != null);
         }
     }
 }
