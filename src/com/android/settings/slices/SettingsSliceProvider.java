@@ -427,7 +427,7 @@ public class SettingsSliceProvider extends SliceProvider {
         try {
             sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
         } catch (IllegalStateException e) {
-            Log.d(TAG, "Could not create slicedata for uri: " + uri);
+            Log.d(TAG, "Could not create slicedata for uri: " + uri, e);
             return;
         }
 
