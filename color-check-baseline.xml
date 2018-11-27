@@ -2,6 +2,18 @@
 <issues format="4">
 
     <issue
+        id="LintError"
+        severity="Error"
+        message="No `.class` files were found in project &quot;.&quot;, so none of the classfile based checks could be run. Does the project need to be built first?"
+        category="Lint"
+        priority="10"
+        summary="Lint Failure"
+        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.&#xA;These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
+        <location
+            file="."/>
+    </issue>
+
+    <issue
         id="HardCodedColor"
         severity="Error"
         message="Avoid using hardcoded color"
@@ -985,8 +997,8 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;wifi_details_icon_color&quot;>#8A000000&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    &lt;color name=&quot;fallback_tintColor&quot;>#89000000&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
             line="103"
@@ -1769,22 +1781,6 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        android:tint=&quot;@color/wifi_details_icon_color&quot;>"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/drawable/ic_frequency_antenna.xml"
-            line="22"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="                android:color=&quot;@color/homepage_about_background&quot; />"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -2095,22 +2091,6 @@
             file="res/drawable/ic_remove_circle.xml"
             line="19"
             column="5"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        android:tint=&quot;@color/wifi_details_icon_color&quot;>"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/drawable/ic_security_lock_24dp.xml"
-            line="22"
-            column="9"/>
     </issue>
 
     <issue
@@ -2669,7 +2649,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="5907"
+            line="5805"
             column="36"/>
     </issue>
 
@@ -2701,7 +2681,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="427"
+            line="422"
             column="44"/>
     </issue>
 
@@ -2717,7 +2697,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="433"
+            line="428"
             column="44"/>
     </issue>
 
@@ -2733,7 +2713,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="434"
+            line="429"
             column="44"/>
     </issue>
 
@@ -2749,7 +2729,7 @@
         errorLine2="                                 ^">
         <location
             file="res/values/styles.xml"
-            line="461"
+            line="464"
             column="34"/>
     </issue>
 
