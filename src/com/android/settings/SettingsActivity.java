@@ -133,14 +133,9 @@ public class SettingsActivity extends SettingsBaseActivity
             ":settings:show_fragment_title_res_package_name";
     public static final String EXTRA_SHOW_FRAGMENT_TITLE_RESID =
             ":settings:show_fragment_title_resid";
-    public static final String EXTRA_SHOW_FRAGMENT_AS_SHORTCUT =
-            ":settings:show_fragment_as_shortcut";
 
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
-
-    @Deprecated
-    public static final String EXTRA_HIDE_DRAWER = ":settings:hide_drawer";
 
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
             "com.android.settings.FRAGMENT_CLASS";

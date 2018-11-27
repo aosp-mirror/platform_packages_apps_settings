@@ -190,7 +190,6 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mPasswordMinNonLetter = 0;
         private int mPasswordMinLengthToFulfillAllPolicies = 0;
         protected int mUserId;
-        private boolean mHideDrawer = false;
         private byte[] mPasswordHistoryHashFactor;
         /**
          * Password requirements that we need to verify.
@@ -375,7 +374,6 @@ public class ChooseLockPassword extends SettingsActivity {
             mForFace = intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
             processPasswordRequirements(intent);
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
-            mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
 
             if (intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
@@ -975,7 +973,6 @@ public class ChooseLockPassword extends SettingsActivity {
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
-                    intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
                     startActivity(intent);
                 }
             }
