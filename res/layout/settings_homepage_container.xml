@@ -42,7 +42,9 @@
             <FrameLayout
                 android:id="@+id/contextual_cards_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/homepage_card_side_margin"
+                android:layout_marginEnd="@dimen/homepage_card_side_margin"/>
 
             <FrameLayout
                 android:id="@+id/main_content"
