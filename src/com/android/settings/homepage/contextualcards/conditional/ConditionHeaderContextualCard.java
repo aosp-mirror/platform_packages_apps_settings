@@ -16,9 +16,12 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.text.TextUtils;
+
 import com.android.settings.homepage.contextualcards.ContextualCard;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Data class representing a condition header {@link ContextualCard}.
@@ -42,6 +45,25 @@ public class ConditionHeaderContextualCard extends ContextualCard {
 
     public List<ContextualCard> getConditionalCards() {
         return mConditionalCards;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), mConditionalCards);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ConditionHeaderContextualCard)) {
+            return false;
+        }
+        final ConditionHeaderContextualCard that = (ConditionHeaderContextualCard) obj;
+
+        return TextUtils.equals(getName(), that.getName()) && mConditionalCards.equals(
+                that.mConditionalCards);
     }
 
     public static class Builder extends ContextualCard.Builder {

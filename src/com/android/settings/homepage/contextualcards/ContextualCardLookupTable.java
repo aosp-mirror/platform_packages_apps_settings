@@ -24,10 +24,14 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.homepage.contextualcards.ContextualCard.CardType;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.conditional
+        .ConditionHeaderContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.legacysuggestion
         .LegacySuggestionContextualCardController;
 import com.android.settings.homepage.contextualcards.legacysuggestion
         .LegacySuggestionContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.conditional
+        .ConditionFooterContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardController;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
@@ -83,6 +87,14 @@ public class ContextualCardLookupTable {
                         SliceContextualCardRenderer.VIEW_TYPE,
                         SliceContextualCardController.class,
                         SliceContextualCardRenderer.class));
+                add(new ControllerRendererMapping(CardType.CONDITIONAL_FOOTER,
+                        ConditionFooterContextualCardRenderer.VIEW_TYPE,
+                        ConditionContextualCardController.class,
+                        ConditionFooterContextualCardRenderer.class));
+                add(new ControllerRendererMapping(CardType.CONDITIONAL_HEADER,
+                        ConditionHeaderContextualCardRenderer.VIEW_TYPE,
+                        ConditionContextualCardController.class,
+                        ConditionHeaderContextualCardRenderer.class));
             }};
 
     public static Class<? extends ContextualCardController> getCardControllerClass(
