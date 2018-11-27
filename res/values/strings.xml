@@ -4578,22 +4578,24 @@
     <!-- Summary for the accessibility preference for master mono. [CHAR LIMIT=50] -->
     <string name="accessibility_toggle_master_mono_summary">Combine channels when playing audio</string>
 
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_default">Default</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at 10 secs. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_10secs">10 seconds</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at 30 secs. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_30secs">30 seconds</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at 1 min. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_1min">1 minute</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at 2 mins. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_2mins">2 minutes</string>
-    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=35] -->
-    <string name="accessibility_accessibility_content_timeout_preference_title">Content Timeout</string>
-    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=35] -->
-    <string name="accessibility_accessibility_control_timeout_preference_title">Control Timeout</string>
-    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_accessibility_timeout_preference_summary">Choose how long it takes before automatically disappearing messages go away.\nSome apps may not support this setting yet.</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_content_timeout_preference_title">Time to read</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_control_timeout_preference_title">Time to take action</string>
+    <!-- Descriptive text for accessibility preference to accessibility content timeout. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_content_timeout_preference_summary">Choose how much time you want to read and take action on messages that automatically go away.\n\nSupport for this setting is up to each app.</string>
+    <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_control_timeout_preference_summary">Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting.</string>
 
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
