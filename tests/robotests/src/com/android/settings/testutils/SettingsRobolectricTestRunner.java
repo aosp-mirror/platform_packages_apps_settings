@@ -84,6 +84,8 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
             paths.add(new ResourcePath(null,
                     Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/SearchWidget/res/")), null));
             paths.add(new ResourcePath(null,
+                    Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/ActionButtonsPreference/res")), null));
+            paths.add(new ResourcePath(null,
                     Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/SettingsLayoutPreference/res")), null));
             paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:frameworks/base/core/res/res")), null));

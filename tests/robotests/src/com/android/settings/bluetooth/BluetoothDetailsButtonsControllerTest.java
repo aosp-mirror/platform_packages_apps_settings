@@ -18,6 +18,8 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -34,8 +36,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
-import com.android.settings.widget.ActionButtonPreference;
-import com.android.settings.widget.ActionButtonPreferenceTest;
+import com.android.settingslib.widget.ActionButtonsPreference;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +48,7 @@ import org.robolectric.annotation.Config;
 @Config(shadows = SettingsShadowBluetoothDevice.class)
 public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsButtonsController mController;
-    private ActionButtonPreference mButtonsPref;
+    private ActionButtonsPreference mButtonsPref;
     private Button mConnectButton;
     private Button mForgetButton;
 
@@ -60,8 +61,9 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
         mConnectButton = buttons.findViewById(R.id.button2);
         mForgetButton = buttons.findViewById(R.id.button1);
         mController =
-            new BluetoothDetailsButtonsController(mContext, mFragment, mCachedDevice, mLifecycle);
-        mButtonsPref = ActionButtonPreferenceTest.createMock();
+                new BluetoothDetailsButtonsController(mContext, mFragment, mCachedDevice,
+                        mLifecycle);
+        mButtonsPref = createMock();
         when(mButtonsPref.getKey()).thenReturn(mController.getPreferenceKey());
         when(mButtonsPref.setButton2OnClickListener(any(View.OnClickListener.class)))
                 .thenAnswer(invocation -> {
@@ -185,5 +187,22 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
         mController.onDeviceAttributesChanged();
 
         verify(mButtonsPref).setButton2Enabled(false);
+    }
+
+    private ActionButtonsPreference createMock() {
+        final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
+        when(pref.setButton1Text(anyInt())).thenReturn(pref);
+        when(pref.setButton1Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        when(pref.setButton2Text(anyInt())).thenReturn(pref);
+        when(pref.setButton2Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        return pref;
     }
 }

@@ -17,12 +17,14 @@ package com.android.settings.wifi.details;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
@@ -67,11 +69,10 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBidiFormatter;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
-import com.android.settings.widget.ActionButtonPreference;
-import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -142,7 +143,7 @@ public class WifiDetailPreferenceControllerTest {
     private ImageView mockHeaderIcon;
 
     @Mock
-    private ActionButtonPreference mockButtonsPref;
+    private ActionButtonsPreference mockButtonsPref;
     @Mock
     private Preference mockSignalStrengthPref;
     @Mock
@@ -247,7 +248,7 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockNetworkInfo);
         doNothing().when(mockConnectivityManager).registerNetworkCallback(
                 nullable(NetworkRequest.class), mCallbackCaptor.capture(), nullable(Handler.class));
-        mockButtonsPref = ActionButtonPreferenceTest.createMock();
+        mockButtonsPref = createMock();
         when(mockButtonsPref.setButton1OnClickListener(mForgetClickListener.capture()))
                 .thenReturn(mockButtonsPref);
 
@@ -848,5 +849,22 @@ public class WifiDetailPreferenceControllerTest {
 
         verify(mockAccessPoint, times(2)).getLevel();
         verify(mockIconInjector, times(2)).getIcon(anyInt());
+    }
+
+    private ActionButtonsPreference createMock() {
+        final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
+        when(pref.setButton1Text(anyInt())).thenReturn(pref);
+        when(pref.setButton1Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        when(pref.setButton2Text(anyInt())).thenReturn(pref);
+        when(pref.setButton2Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        return pref;
     }
 }
