@@ -202,6 +202,9 @@
 
     <style name="Theme.BottomDialog" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog">
         <item name="android:windowBackground">@drawable/settings_panel_background</item>
+        <item name="android:dividerHorizontal">@*android:drawable/list_divider_material</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
 </resources>
