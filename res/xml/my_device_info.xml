@@ -32,7 +32,8 @@
         android:key="device_name"
         android:order="1"
         android:title="@string/my_device_info_device_name_preference_title"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:enableCopying="true" />
 
     <!-- Account name -->
     <Preference
@@ -50,7 +51,8 @@
         android:selectable="false"
         settings:allowDynamicSummaryInSlice="true"
         settings:controller=
-            "com.android.settings.deviceinfo.PhoneNumberPreferenceController" />
+            "com.android.settings.deviceinfo.PhoneNumberPreferenceController"
+        settings:enableCopying="true" />
 
     <Preference
         android:key="emergency_info"
@@ -129,7 +131,8 @@
         android:title="@string/wifi_ip_address"
         android:summary="@string/summary_placeholder"
         android:selectable="false"
-        settings:allowDividerAbove="true"/>
+        settings:allowDividerAbove="true"
+        settings:enableCopying="true" />
 
     <!-- Wi-Fi MAC address -->
     <Preference
@@ -137,7 +140,8 @@
         android:order="35"
         android:title="@string/status_wifi_mac_address"
         android:summary="@string/summary_placeholder"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:enableCopying="true" />
 
     <!-- Bluetooth address -->
     <Preference
@@ -145,7 +149,8 @@
         android:order="36"
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:enableCopying="true" />
 
     <!-- Device up time -->
     <Preference
@@ -183,6 +188,7 @@
         android:order="43"
         android:title="@string/build_number"
         android:summary="@string/summary_placeholder"
-        settings:allowDividerAbove="true"/>
+        settings:allowDividerAbove="true"
+        settings:enableCopying="true" />
 
 </PreferenceScreen>
