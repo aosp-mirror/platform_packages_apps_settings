@@ -187,11 +187,4 @@ public class AirplaneModePreferenceControllerTest {
                 new AirplaneModePreferenceController(mContext,"toggle_airplane");
         assertThat(controller.isSliceable()).isTrue();
     }
-
-    @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
-        final AirplaneModePreferenceController controller =
-                new AirplaneModePreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
-    }
 }

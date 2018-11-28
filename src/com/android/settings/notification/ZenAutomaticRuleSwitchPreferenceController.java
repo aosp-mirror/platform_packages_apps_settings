@@ -25,9 +25,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class ZenAutomaticRuleSwitchPreferenceController extends
         AbstractZenModeAutomaticRulePreferenceController implements

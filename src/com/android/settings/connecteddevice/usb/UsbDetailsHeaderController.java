@@ -21,8 +21,8 @@ import android.content.Context;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.widget.LayoutPreference;
 
 /**
  * This class adds a header with device name.

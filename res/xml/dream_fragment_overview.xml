@@ -35,7 +35,7 @@
     <!-- Layout preference doesn't obey allowDividerAbove, so put it in a PreferenceCategory -->
     <PreferenceCategory
         android:key="dream_start_now_category">
-        <com.android.settings.applications.LayoutPreference
+        <com.android.settingslib.widget.LayoutPreference
             android:key="dream_start_now_button_container"
             android:selectable="false"
             android:layout="@layout/dream_start_button" />

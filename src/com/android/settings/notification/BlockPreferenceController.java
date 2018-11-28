@@ -27,9 +27,9 @@ import android.widget.Switch;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class BlockPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {

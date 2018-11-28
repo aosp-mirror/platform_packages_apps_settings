@@ -42,7 +42,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.Indexable;
@@ -55,6 +54,7 @@ import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.UUID;
 
@@ -155,13 +155,14 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         checkAvailablePrefs(getPreferenceScreen());
     }
 
-    private void checkAvailablePrefs(PreferenceGroup preferenceGroup) {
+    @VisibleForTesting
+    void checkAvailablePrefs(PreferenceGroup preferenceGroup) {
         if (preferenceGroup == null) return;
         for (int i = 0; i < preferenceGroup.getPreferenceCount(); i++) {
             Preference pref = preferenceGroup.getPreference(i);
             if (pref instanceof SelfAvailablePreference
                     && !((SelfAvailablePreference) pref).isAvailable(getContext())) {
-                preferenceGroup.removePreference(pref);
+                pref.setVisible(false);
             } else if (pref instanceof PreferenceGroup) {
                 checkAvailablePrefs((PreferenceGroup) pref);
             }

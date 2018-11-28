@@ -21,6 +21,7 @@
     android:key="privacy_dashboard_page"
     android:title="@string/privacy_dashboard_title">
 
+    <!-- App permissions -->
     <Preference
         android:key="privacy_manage_perms"
         android:title="@string/app_permissions"
@@ -29,6 +30,14 @@
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
+    <!-- On lock screen notifications -->
+    <com.android.settings.RestrictedListPreference
+        android:key="privacy_lock_screen_notifications"
+        android:title="@string/lock_screen_notifications_title"
+        android:summary="@string/summary_placeholder"
+        settings:searchable="false"/>
+
+    <!-- Show passwords -->
     <SwitchPreference
         android:key="show_password"
         android:title="@string/show_password"
@@ -41,5 +50,21 @@
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"/>
+
+    <!-- Work profile settings are at the bottom with high order value to avoid users thinking that
+         any of the above settings (including dynamic) are specific to the work profile. -->
+    <PreferenceCategory
+        android:key="privacy_work_profile_notifications_category"
+        android:title="@string/profile_section_header"
+        android:order="998"
+        settings:searchable="false">
+
+        <com.android.settings.RestrictedListPreference
+            android:key="privacy_lock_screen_work_profile_notifications"
+            android:title="@string/locked_work_profile_notification_title"
+            android:summary="@string/summary_placeholder"
+            android:order="999"
+            settings:searchable="false"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>

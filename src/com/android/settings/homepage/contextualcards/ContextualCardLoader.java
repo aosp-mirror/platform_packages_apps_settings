@@ -23,7 +23,6 @@ import static androidx.slice.widget.SliceLiveData.SUPPORTED_SPECS;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
@@ -35,7 +34,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
-import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
 import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
 import com.android.settings.wifi.WifiSlice;
 import com.android.settingslib.utils.AsyncLoaderCompat;
@@ -52,11 +50,17 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     private static final String TAG = "ContextualCardLoader";
 
-    private Context mContext;
+    private final ContentObserver mObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange) {
+            if (isStarted()) {
+                forceLoad();
+            }
+        }
+    };
 
-    public interface CardContentLoaderListener {
-        void onFinishCardLoading(List<ContextualCard> contextualCards);
-    }
+    private Context mContext;
 
     ContextualCardLoader(Context context) {
         super(context);
@@ -86,9 +90,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     public List<ContextualCard> loadInBackground() {
         final List<ContextualCard> result = new ArrayList<>();
         try (Cursor cursor = getContextualCardsFromProvider()) {
-            if (cursor.getCount() == 0) {
-                result.addAll(createStaticCards());
-            } else {
+            if (cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                     final ContextualCard card = new ContextualCard(cursor);
                     if (card.isCustomCard()) {
@@ -128,24 +130,6 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     @VisibleForTesting
     Cursor getContextualCardsFromProvider() {
         return CardDatabaseHelper.getInstance(mContext).getContextualCards();
-    }
-
-    @VisibleForTesting
-    List<ContextualCard> createStaticCards() {
-        final long appVersionCode = getAppVersionCode();
-        final String packageName = mContext.getPackageName();
-        final double rankingScore = 0.0;
-        final List<ContextualCard> result = new ArrayList();
-        result.add(new ContextualCard.Builder()
-                .setSliceUri(BatterySlice.BATTERY_CARD_URI)
-                .setName(BatterySlice.PATH_BATTERY_INFO)
-                .setPackageName(packageName)
-                .setRankingScore(rankingScore)
-                .setAppVersion(appVersionCode)
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setIsHalfWidth(false)
-                .build());
-        return result;
     }
 
     @VisibleForTesting
@@ -191,23 +175,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                 .count();
     }
 
-    private long getAppVersionCode() {
-        try {
-            return mContext.getPackageManager().getPackageInfo(mContext.getPackageName(),
-                    0 /* flags */).getLongVersionCode();
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Invalid package name for context", e);
-        }
-        return -1L;
+    public interface CardContentLoaderListener {
+        void onFinishCardLoading(List<ContextualCard> contextualCards);
     }
-
-    private final ContentObserver mObserver = new ContentObserver(
-            new Handler(Looper.getMainLooper())) {
-        @Override
-        public void onChange(boolean selfChange) {
-            if (isStarted()) {
-                forceLoad();
-            }
-        }
-    };
 }

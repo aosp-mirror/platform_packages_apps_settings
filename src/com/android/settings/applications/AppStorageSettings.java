@@ -58,6 +58,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.Collections;
 import java.util.List;

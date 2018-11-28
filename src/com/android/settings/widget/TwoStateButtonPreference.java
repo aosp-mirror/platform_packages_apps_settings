@@ -26,7 +26,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.content.res.TypedArrayUtils;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
+import com.android.settingslib.widget.LayoutPreference;
 
 /**
  * Preference that presents a button with two states(On vs Off)

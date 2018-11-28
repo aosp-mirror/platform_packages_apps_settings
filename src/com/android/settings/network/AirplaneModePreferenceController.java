@@ -93,7 +93,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "toggle_airplane");
+        return true;
     }
 
     @Override

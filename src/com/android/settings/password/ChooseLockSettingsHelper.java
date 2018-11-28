@@ -391,8 +391,6 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, returnCredentials);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, hasChallenge);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
-        // we should never have a drawer when confirming device credentials.
-        intent.putExtra(SettingsActivity.EXTRA_HIDE_DRAWER, true);
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.putExtra(KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL, alternateButton);
         if (extras != null) {
