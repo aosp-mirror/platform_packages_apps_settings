@@ -21,8 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.net.Uri;
 
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wifi.WifiSlice;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class InternetConnectivityPanelTest {
     public void getSlices_containsNecessarySlices() {
         final List<Uri> uris = mPanel.getSlices();
 
-        assertThat(uris).containsExactly(WifiSlice.WIFI_URI,
-                InternetConnectivityPanel.AIRPLANE_URI);
+        assertThat(uris).containsExactly(CustomSliceRegistry.WIFI_SLICE_URI,
+                CustomSliceRegistry.AIRPLANE_URI);
     }
 }

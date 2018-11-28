@@ -17,7 +17,6 @@
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -39,8 +38,8 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
-import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.net.DataUsageController;
 
@@ -50,19 +49,6 @@ public class DataUsageSlice implements CustomSliceable {
     private static final String TAG = "DataUsageSlice";
     private static final long MILLIS_IN_A_DAY = TimeUnit.DAYS.toMillis(1);
 
-    /**
-     * The path denotes the unique name of data usage slice.
-     */
-    public static final String PATH_DATA_USAGE = "data_usage_card";
-
-    /**
-     * Backing Uri for the Data usage Slice.
-     */
-    public static final Uri DATA_USAGE_CARD_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_DATA_USAGE)
-            .build();
 
     private final Context mContext;
 
@@ -72,12 +58,9 @@ public class DataUsageSlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return DATA_USAGE_CARD_URI;
+        return CustomSliceRegistry.DATA_USAGE_SLICE_URI;
     }
 
-    /**
-     * Return a Data usage Slice bound to {@link #DATA_USAGE_CARD_URI}
-     */
     @Override
     public Slice getSlice() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
@@ -87,7 +70,8 @@ public class DataUsageSlice implements CustomSliceable {
         final DataUsageController dataUsageController = new DataUsageController(mContext);
         final DataUsageController.DataUsageInfo info = dataUsageController.getDataUsageInfo();
         final ListBuilder listBuilder =
-                new ListBuilder(mContext, DATA_USAGE_CARD_URI, ListBuilder.INFINITY)
+                new ListBuilder(mContext, CustomSliceRegistry.DATA_USAGE_SLICE_URI,
+                        ListBuilder.INFINITY)
                         .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
                         .setHeader(new ListBuilder.HeaderBuilder().setTitle(title));
         if (DataUsageUtils.hasSim(mContext)) {
@@ -106,12 +90,10 @@ public class DataUsageSlice implements CustomSliceable {
     @Override
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.data_usage_wifi_title).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_DATA_USAGE).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                DataUsageSummary.class.getName(), PATH_DATA_USAGE, screenTitle,
+                DataUsageSummary.class.getName(), "" /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
     }
 
     private PendingIntent getPrimaryAction() {

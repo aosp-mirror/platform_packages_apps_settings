@@ -23,15 +23,13 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.app.slice.SliceManager;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wifi.WifiSlice;
 
 import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardProvider;
 
@@ -48,18 +46,11 @@ public class SettingsContextualCardProviderTest {
 
     @Mock
     private SliceManager mSliceManager;
-    private ContentResolver mResolver;
-    private Uri mUri;
     private SettingsContextualCardProvider mProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mResolver = RuntimeEnvironment.application.getContentResolver();
-        mUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SettingsContextualCardProvider.CARD_AUTHORITY)
-                .build();
         mProvider = spy(Robolectric.setupContentProvider(SettingsContextualCardProvider.class));
         final Context context = spy(RuntimeEnvironment.application);
         doReturn(mSliceManager).when(context).getSystemService(SliceManager.class);
@@ -83,7 +74,7 @@ public class SettingsContextualCardProviderTest {
         final ContextualCardList cards = mProvider.getContextualCards();
         ContextualCard wifiCard = null;
         for (ContextualCard card : cards.getCardList()) {
-            if (card.getSliceUri().equals(WifiSlice.WIFI_URI.toString())) {
+            if (card.getSliceUri().equals(CustomSliceRegistry.WIFI_SLICE_URI.toString())) {
                 wifiCard = card;
             }
         }

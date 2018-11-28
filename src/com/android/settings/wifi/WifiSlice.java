@@ -19,9 +19,10 @@ package com.android.settings.wifi;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
+import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
+
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -30,7 +31,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
 import android.os.Bundle;
-import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -60,16 +60,6 @@ import java.util.List;
  */
 public class WifiSlice implements CustomSliceable {
 
-    /**
-     * Backing Uri for the Wifi Slice.
-     */
-    public static final Uri WIFI_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSlicesContract.AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(KEY_WIFI)
-            .build();
-
     @VisibleForTesting
     static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
@@ -81,7 +71,7 @@ public class WifiSlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return WIFI_URI;
+        return WIFI_SLICE_URI;
     }
 
     @Override
@@ -92,9 +82,6 @@ public class WifiSlice implements CustomSliceable {
         return filter;
     }
 
-    /**
-     * Return a Wifi Slice bound to {@link #WIFI_URI}.
-     */
     @Override
     public Slice getSlice() {
         final boolean isWifiEnabled = isWifiEnabled();
@@ -109,7 +96,8 @@ public class WifiSlice implements CustomSliceable {
         final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
                 isWifiEnabled);
 
-        final ListBuilder listBuilder = new ListBuilder(mContext, WIFI_URI, ListBuilder.INFINITY)
+        final ListBuilder listBuilder = new ListBuilder(mContext, WIFI_SLICE_URI,
+                ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new RowBuilder()
                         .setTitle(title)

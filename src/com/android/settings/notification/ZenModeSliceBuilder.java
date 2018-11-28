@@ -18,16 +18,16 @@ package com.android.settings.notification;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
+import static com.android.settings.notification.ZenModePreferenceController.ZEN_MODE_KEY;
+
 import android.annotation.ColorInt;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.Settings;
-import android.provider.SettingsSlicesContract;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -39,25 +39,13 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.slices.SettingsSliceProvider;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
 
 public class ZenModeSliceBuilder {
 
     private static final String TAG = "ZenModeSliceBuilder";
-
-    private static final String ZEN_MODE_KEY = "zen_mode";
-
-    /**
-     * Backing Uri for the Zen Mode Slice.
-     */
-    public static final Uri ZEN_MODE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(ZEN_MODE_KEY)
-            .build();
 
     /**
      * Action notifying a change on the Zen Mode Slice.
@@ -77,7 +65,7 @@ public class ZenModeSliceBuilder {
     }
 
     /**
-     * Return a ZenMode Slice bound to {@link #ZEN_MODE_URI}.
+     * Return a ZenMode Slice bound to {@link CustomSliceRegistry#ZEN_MODE_URI}.
      * <p>
      * Note that you should register a listener for {@link #INTENT_FILTER} to get changes for
      * ZenMode.
@@ -93,7 +81,8 @@ public class ZenModeSliceBuilder {
         final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
                 isZenModeEnabled);
 
-        return new ListBuilder(context, ZEN_MODE_URI, ListBuilder.INFINITY)
+        return new ListBuilder(context, CustomSliceRegistry.ZEN_MODE_SLICE_URI,
+                ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new RowBuilder()
                         .setTitle(title)

@@ -17,10 +17,8 @@
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -28,39 +26,27 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
-import com.android.settings.slices.SettingsSliceProvider;
+import com.android.settings.slices.CustomSliceRegistry;
 
 // This is a slice helper class for EmergencyInfo
 public class EmergencyInfoSlice {
-    /**
-     * The path denotes the unique name of emergency info slice.
-     */
-    public static final String PATH_EMERGENCY_INFO_CARD = "emergency_info_card";
-
-    /**
-     * Backing Uri for the Emergency Info Slice.
-     */
-    public static final Uri EMERGENCY_INFO_CARD_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_EMERGENCY_INFO_CARD)
-            .build();
 
     private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENCY_INFO";
 
     public static Slice getSlice(Context context) {
-        final ListBuilder listBuilder = new ListBuilder(context, EMERGENCY_INFO_CARD_URI,
+        final ListBuilder listBuilder = new ListBuilder(context,
+                CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI,
                 ListBuilder.INFINITY);
         listBuilder.addRow(
                 new ListBuilder.RowBuilder()
                         .setTitle(context.getText(R.string.emergency_info_title))
                         .setSubtitle(
                                 context.getText(R.string.emergency_info_contextual_card_summary))
-                        .setPrimaryAction(generatePrimaryAction(context)));
+                        .setPrimaryAction(createPrimaryAction(context)));
         return listBuilder.build();
     }
 
-    private static SliceAction generatePrimaryAction(Context context) {
+    private static SliceAction createPrimaryAction(Context context) {
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(
                         context,

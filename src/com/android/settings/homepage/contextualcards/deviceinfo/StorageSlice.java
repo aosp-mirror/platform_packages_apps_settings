@@ -17,7 +17,6 @@
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -36,28 +35,14 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
-import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
 public class StorageSlice implements CustomSliceable {
     private static final String TAG = "StorageSlice";
-
-    /**
-     * The path denotes the unique name of storage slicel
-     */
-    public static final String PATH_STORAGE_INFO = "storage_card";
-
-    /**
-     * Backing Uri for the storage slice.
-     */
-    public static final Uri STORAGE_CARD_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_STORAGE_INFO)
-            .build();
 
     private final Context mContext;
 
@@ -67,12 +52,9 @@ public class StorageSlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return STORAGE_CARD_URI;
+        return CustomSliceRegistry.STORAGE_SLICE_URI;
     }
 
-    /**
-     * Return a storage slice bound to {@link #STORAGE_CARD_URI}
-     */
     @Override
     public Slice getSlice() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
@@ -80,7 +62,8 @@ public class StorageSlice implements CustomSliceable {
         final String title = mContext.getString(R.string.storage_label);
         final SliceAction primaryAction = new SliceAction(getPrimaryAction(), icon, title);
         final PrivateStorageInfo info = getPrivateStorageInfo();
-        return new ListBuilder(mContext, STORAGE_CARD_URI, ListBuilder.INFINITY)
+        return new ListBuilder(mContext, CustomSliceRegistry.STORAGE_SLICE_URI,
+                ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
                 .setHeader(new ListBuilder.HeaderBuilder().setTitle(title))
                 .addRow(new ListBuilder.RowBuilder()
@@ -93,12 +76,10 @@ public class StorageSlice implements CustomSliceable {
     @Override
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.storage_label).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_STORAGE_INFO).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                StorageDashboardFragment.class.getName(), PATH_STORAGE_INFO, screenTitle,
+                StorageDashboardFragment.class.getName(), "" /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
     }
 
     private PendingIntent getPrimaryAction() {

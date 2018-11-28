@@ -27,11 +27,9 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 import android.net.Uri;
 
-import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
-import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.wifi.WifiSlice;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -153,7 +151,7 @@ public class ContextualCardLoaderTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_wifi")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(WifiSlice.WIFI_URI)
+                .setSliceUri(CustomSliceRegistry.WIFI_SLICE_URI)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_flashlight")
@@ -164,7 +162,7 @@ public class ContextualCardLoaderTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_connected")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(ConnectedDeviceSlice.CONNECTED_DEVICE_URI)
+                .setSliceUri(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_gesture")
@@ -175,7 +173,7 @@ public class ContextualCardLoaderTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_battery")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(BatterySlice.BATTERY_CARD_URI)
+                .setSliceUri(CustomSliceRegistry.BATTERY_INFO_SLICE_URI)
                 .build());
         return cards;
     }
@@ -208,7 +206,7 @@ public class ContextualCardLoaderTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_battery")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(BatterySlice.BATTERY_CARD_URI)
+                .setSliceUri(CustomSliceRegistry.BATTERY_INFO_SLICE_URI)
                 .build());
         return cards;
     }

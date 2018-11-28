@@ -17,7 +17,6 @@
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -39,8 +38,8 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.DeviceModelPreferenceController;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
-import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.DeviceInfoUtils;
 
@@ -48,20 +47,6 @@ import java.util.List;
 
 public class DeviceInfoSlice implements CustomSliceable {
     private static final String TAG = "DeviceInfoSlice";
-
-    /**
-     * The path denotes the unique name of device info slice
-     */
-    public static final String PATH_DEVICE_INFO = "device_info_card";
-
-    /**
-     * Backing Uri for the Device info Slice.
-     */
-    public static final Uri DEVICE_INFO_CARD_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_DEVICE_INFO)
-            .build();
 
     private final Context mContext;
     private final SubscriptionManager mSubscriptionManager;
@@ -71,16 +56,14 @@ public class DeviceInfoSlice implements CustomSliceable {
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
     }
 
-    /**
-     * Return a device info slice bound to {@Link #DEVICE_INFO_CARD_URI}
-     */
     @Override
     public Slice getSlice() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_info_outline_24dp);
         final String title = mContext.getString(R.string.device_info_label);
         final SliceAction primaryAction = new SliceAction(getPrimaryAction(), icon, title);
-        return new ListBuilder(mContext, DEVICE_INFO_CARD_URI, ListBuilder.INFINITY)
+        return new ListBuilder(mContext, CustomSliceRegistry.DEVICE_INFO_SLICE_URI,
+                ListBuilder.INFINITY)
                 .setAccentColor((Utils.getColorAccentDefaultColor(mContext)))
                 .setHeader(new ListBuilder.HeaderBuilder().setTitle(title))
                 .addRow(new ListBuilder.RowBuilder()
@@ -92,18 +75,16 @@ public class DeviceInfoSlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return DEVICE_INFO_CARD_URI;
+        return CustomSliceRegistry.DEVICE_INFO_SLICE_URI;
     }
 
     @Override
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.device_info_label).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_DEVICE_INFO).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                MyDeviceInfoFragment.class.getName(), PATH_DEVICE_INFO, screenTitle,
+                MyDeviceInfoFragment.class.getName(), "" /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
     }
 
     private PendingIntent getPrimaryAction() {

@@ -34,8 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
-import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
-import com.android.settings.wifi.WifiSlice;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -170,8 +169,8 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     private int getNumberOfLargeCard(List<ContextualCard> cards) {
         return (int) cards.stream()
-                .filter(card -> card.getSliceUri().equals(WifiSlice.WIFI_URI)
-                        || card.getSliceUri().equals(ConnectedDeviceSlice.CONNECTED_DEVICE_URI))
+                .filter(card -> card.getSliceUri().equals(CustomSliceRegistry.WIFI_SLICE_URI)
+                        || card.getSliceUri().equals(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI))
                 .count();
     }
 

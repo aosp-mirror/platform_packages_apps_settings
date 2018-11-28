@@ -18,9 +18,11 @@ package com.android.settings.wifi.calling;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
+import static com.android.settings.slices.CustomSliceRegistry.WIFI_CALLING_PREFERENCE_URI;
+import static com.android.settings.slices.CustomSliceRegistry.WIFI_CALLING_URI;
+
 import android.app.PendingIntent;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -42,9 +44,7 @@ import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
-import com.android.settings.slices.SliceBuilderUtils;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -102,24 +102,6 @@ public class WifiCallingSliceHelper {
      */
     public static final String ACTION_WIFI_CALLING_SETTINGS_ACTIVITY =
             "android.settings.WIFI_CALLING_SETTINGS";
-
-    /**
-     * Full {@link Uri} for the Wifi Calling Slice.
-     */
-    public static final Uri WIFI_CALLING_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_WIFI_CALLING)
-            .build();
-
-    /**
-     * Full {@link Uri} for the Wifi Calling Preference Slice.
-     */
-    public static final Uri WIFI_CALLING_PREFERENCE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_WIFI_CALLING_PREFERENCE)
-            .build();
 
     /**
      * Timeout for querying wifi calling setting from ims manager.
@@ -246,7 +228,7 @@ public class WifiCallingSliceHelper {
         }
 
         final boolean isWifiCallingPrefEditable = isCarrierConfigManagerKeyEnabled(
-                CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, subId,false);
+                CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, subId, false);
         final boolean isWifiOnlySupported = isCarrierConfigManagerKeyEnabled(
                 CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, subId, true);
         final ImsManager imsManager = getImsManager(subId);
@@ -287,8 +269,8 @@ public class WifiCallingSliceHelper {
      * Returns actionable wifi calling preference slice.
      *
      * @param isWifiOnlySupported adds row for wifi only if this is true
-     * @param currentWfcPref current Preference {@link ImsConfig}
-     * @param sliceUri sliceUri
+     * @param currentWfcPref      current Preference {@link ImsConfig}
+     * @param sliceUri            sliceUri
      * @return Slice for actionable wifi calling preference settings
      */
     private Slice getWifiCallingPreferenceSlice(boolean isWifiOnlySupported,
@@ -299,12 +281,12 @@ public class WifiCallingSliceHelper {
         ListBuilder listBuilder = new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext));
         listBuilder.setHeader(new ListBuilder.HeaderBuilder()
-                        .setTitle(mContext.getText(R.string.wifi_calling_mode_title))
-                        .setSubtitle(getWifiCallingPreferenceSummary(currentWfcPref))
-                        .setPrimaryAction(new SliceAction(
-                                getActivityIntent(ACTION_WIFI_CALLING_SETTINGS_ACTIVITY),
-                                icon,
-                                mContext.getText(R.string.wifi_calling_mode_title))));
+                .setTitle(mContext.getText(R.string.wifi_calling_mode_title))
+                .setSubtitle(getWifiCallingPreferenceSummary(currentWfcPref))
+                .setPrimaryAction(new SliceAction(
+                        getActivityIntent(ACTION_WIFI_CALLING_SETTINGS_ACTIVITY),
+                        icon,
+                        mContext.getText(R.string.wifi_calling_mode_title))));
 
         if (isWifiOnlySupported) {
             listBuilder.addRow(wifiPreferenceRowBuilder(listBuilder,
@@ -329,9 +311,9 @@ public class WifiCallingSliceHelper {
     /**
      * Returns RowBuilder for a new row containing specific wifi calling preference.
      *
-     * @param listBuilder ListBuilder that will be the parent for this RowBuilder
+     * @param listBuilder          ListBuilder that will be the parent for this RowBuilder
      * @param preferenceTitleResId resource Id for the preference row title
-     * @param action action to be added for the row
+     * @param action               action to be added for the row
      * @return RowBuilder for the row
      */
     private RowBuilder wifiPreferenceRowBuilder(ListBuilder listBuilder,
@@ -414,8 +396,7 @@ public class WifiCallingSliceHelper {
         }
         // notify change in slice in any case to get re-queried. This would result in displaying
         // appropriate message with the updated setting.
-        final Uri uri = SliceBuilderUtils.getUri(PATH_WIFI_CALLING, false /*isPlatformSlice*/);
-        mContext.getContentResolver().notifyChange(uri, null);
+        mContext.getContentResolver().notifyChange(WIFI_CALLING_URI, null);
     }
 
     /**
@@ -433,7 +414,7 @@ public class WifiCallingSliceHelper {
 
         if (subId > SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final boolean isWifiCallingPrefEditable = isCarrierConfigManagerKeyEnabled(
-                    CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, subId,false);
+                    CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, subId, false);
             final boolean isWifiOnlySupported = isCarrierConfigManagerKeyEnabled(
                     CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, subId, true);
 
@@ -470,15 +451,13 @@ public class WifiCallingSliceHelper {
 
         // notify change in slice in any case to get re-queried. This would result in displaying
         // appropriate message.
-        final Uri uri = SliceBuilderUtils.getUri(PATH_WIFI_CALLING_PREFERENCE,
-                false /*isPlatformSlice*/);
-        mContext.getContentResolver().notifyChange(uri, null);
+        mContext.getContentResolver().notifyChange(WIFI_CALLING_PREFERENCE_URI, null);
     }
 
     /**
      * Returns Slice with the title and subtitle provided as arguments with wifi signal Icon.
      *
-     * @param title Title of the slice
+     * @param title    Title of the slice
      * @param subtitle Subtitle of the slice
      * @param sliceUri slice uri
      * @return Slice with title and subtitle

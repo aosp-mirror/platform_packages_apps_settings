@@ -42,6 +42,9 @@ import java.util.Map;
  * Controller in charge of the battery tip group
  */
 public class BatteryTipPreferenceController extends BasePreferenceController {
+
+    public static final String PREF_NAME = "battery_tip";
+
     private static final String TAG = "BatteryTipPreferenceController";
     private static final int REQUEST_ANOMALY_ACTION = 0;
     private static final String KEY_BATTERY_TIPS = "key_battery_tips";

@@ -35,6 +35,9 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 public class ZenModePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
+
+    public static final String ZEN_MODE_KEY = "zen_mode";
+
     private SettingObserver mSettingObserver;
     private ZenModeSettings.SummaryBuilder mSummaryBuilder;
 

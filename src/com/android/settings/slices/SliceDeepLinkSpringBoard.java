@@ -62,11 +62,11 @@ public class SliceDeepLinkSpringBoard extends Activity {
                     final CustomSliceable sliceable =
                             customSliceManager.getSliceableFromUri(sliceUri);
                     launchIntent = sliceable.getIntent();
-                } else if (ZenModeSliceBuilder.ZEN_MODE_URI.equals(sliceUri)) {
+                } else if (CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
                     launchIntent = ZenModeSliceBuilder.getIntent(this /* context */);
-                } else if (BluetoothSliceBuilder.BLUETOOTH_URI.equals(sliceUri)) {
+                } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                     launchIntent = BluetoothSliceBuilder.getIntent(this /* context */);
-                } else if (LocationSliceBuilder.LOCATION_URI.equals(sliceUri)) {
+                } else if (CustomSliceRegistry.LOCATION_SLICE_URI.equals(sliceUri)) {
                     launchIntent = LocationSliceBuilder.getIntent(this /* context */);
                 } else {
                     final SlicesDatabaseAccessor slicesDatabaseAccessor =

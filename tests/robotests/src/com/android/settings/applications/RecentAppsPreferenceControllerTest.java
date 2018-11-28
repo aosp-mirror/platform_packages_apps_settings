@@ -51,7 +51,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowPowerManager;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -93,6 +92,8 @@ public class RecentAppsPreferenceControllerTest {
     private ApplicationsState.AppEntry mAppEntry;
     @Mock
     private ApplicationInfo mApplicationInfo;
+    @Mock
+    private PowerManager mPowerManager;
 
     private Context mContext;
     private RecentAppsPreferenceController mController;
@@ -104,6 +105,7 @@ public class RecentAppsPreferenceControllerTest {
         doReturn(mUsageStatsManager).when(mContext).getSystemService(Context.USAGE_STATS_SERVICE);
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
 
         mController = new RecentAppsPreferenceController(mContext, mAppState, null);
         when(mScreen.findPreference(anyString())).thenReturn(mCategory);
@@ -174,15 +176,15 @@ public class RecentAppsPreferenceControllerTest {
 
         // stat1, stat2 are valid apps. stat3 is invalid.
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-            .thenReturn(mAppEntry);
+                .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
-            .thenReturn(mAppEntry);
+                .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat3.mPackageName, UserHandle.myUserId()))
-            .thenReturn(null);
+                .thenReturn(null);
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
-            .thenReturn(new ResolveInfo());
+                .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-            .thenReturn(stats);
+                .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
 
         mController.displayPreference(mScreen);
@@ -199,7 +201,7 @@ public class RecentAppsPreferenceControllerTest {
 
     @Test
     public void display_powerSaverMode_showNoRecents() {
-        mContext.getSystemService(PowerManager.class).setPowerSaveMode(true);
+        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
@@ -251,7 +253,7 @@ public class RecentAppsPreferenceControllerTest {
 
         // Only the regular app stat1 should have its intent resolve.
         when(mPackageManager.resolveActivity(argThat(intentMatcher(stat1.mPackageName)), anyInt()))
-            .thenReturn(new ResolveInfo());
+                .thenReturn(new ResolveInfo());
 
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
@@ -311,13 +313,13 @@ public class RecentAppsPreferenceControllerTest {
 
         // stat1, stat2 are not displayable
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-            .thenReturn(mock(ApplicationsState.AppEntry.class));
+                .thenReturn(mock(ApplicationsState.AppEntry.class));
         when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
-            .thenReturn(mock(ApplicationsState.AppEntry.class));
+                .thenReturn(mock(ApplicationsState.AppEntry.class));
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
-            .thenReturn(new ResolveInfo());
+                .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-            .thenReturn(stats);
+                .thenReturn(stats);
 
         mController.displayPreference(mScreen);
 
@@ -336,11 +338,11 @@ public class RecentAppsPreferenceControllerTest {
         stats.add(stat1);
 
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-            .thenReturn(mAppEntry);
+                .thenReturn(mAppEntry);
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
-            .thenReturn(new ResolveInfo());
+                .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-            .thenReturn(stats);
+                .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
 
         mController.displayPreference(mScreen);
