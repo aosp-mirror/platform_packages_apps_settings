@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.android.ims.ImsManager;
+import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.search.actionbar.SearchMenuController;
@@ -53,6 +54,24 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
     private WifiCallingViewPagerAdapter mPagerAdapter;
     private SlidingTabLayout mTabLayout;
 
+    private final class InternalViewPagerListener implements
+            RtlCompatibleViewPager.OnPageChangeListener {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            // Do nothing.
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            updateTitleForCurrentSub();
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            // Do nothing.
+        }
+    }
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.WIFI_CALLING;
@@ -68,6 +87,7 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
 
         mPagerAdapter = new WifiCallingViewPagerAdapter(getChildFragmentManager(), mViewPager);
         mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.addOnPageChangeListener(new InternalViewPagerListener());
 
         return view;
     }
@@ -93,6 +113,8 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         } else {
             mTabLayout.setVisibility(View.GONE);
         }
+
+        updateTitleForCurrentSub();
     }
 
     @Override
@@ -161,6 +183,15 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
             } else {
                 i++;
             }
+        }
+    }
+
+    private void updateTitleForCurrentSub() {
+        if (CollectionUtils.size(mSil) > 1) {
+            final int subId = mSil.get(mViewPager.getCurrentItem()).getSubscriptionId();
+            final String title = SubscriptionManager.getResourcesForSubId(getContext(), subId)
+                    .getString(R.string.wifi_calling_settings_title);
+            getActivity().getActionBar().setTitle(title);
         }
     }
 }
