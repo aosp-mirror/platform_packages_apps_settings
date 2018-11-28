@@ -155,13 +155,14 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         checkAvailablePrefs(getPreferenceScreen());
     }
 
-    private void checkAvailablePrefs(PreferenceGroup preferenceGroup) {
+    @VisibleForTesting
+    void checkAvailablePrefs(PreferenceGroup preferenceGroup) {
         if (preferenceGroup == null) return;
         for (int i = 0; i < preferenceGroup.getPreferenceCount(); i++) {
             Preference pref = preferenceGroup.getPreference(i);
             if (pref instanceof SelfAvailablePreference
                     && !((SelfAvailablePreference) pref).isAvailable(getContext())) {
-                preferenceGroup.removePreference(pref);
+                pref.setVisible(false);
             } else if (pref instanceof PreferenceGroup) {
                 checkAvailablePrefs((PreferenceGroup) pref);
             }
