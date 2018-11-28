@@ -85,7 +85,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
             Telephony.Carriers.TYPE,
             Telephony.Carriers.MVNO_TYPE,
             Telephony.Carriers.MVNO_MATCH_DATA,
-            Telephony.Carriers.EDITED,
+            Telephony.Carriers.EDITED_STATUS,
     };
 
     private static final int ID_INDEX = 0;
