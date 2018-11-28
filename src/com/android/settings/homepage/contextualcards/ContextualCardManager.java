@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -132,8 +133,13 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         // except Conditional cards, all other cards are from the database. So when the map sent
         // here is empty, we only keep Conditional cards.
         if (cardTypes.isEmpty()) {
+            final Set<Integer> conditionalCardTypes = new TreeSet() {{
+                add(ContextualCard.CardType.CONDITIONAL);
+                add(ContextualCard.CardType.CONDITIONAL_HEADER);
+                add(ContextualCard.CardType.CONDITIONAL_FOOTER);
+            }};
             cardsToKeep = mContextualCards.stream()
-                    .filter(card -> card.getCardType() == ContextualCard.CardType.CONDITIONAL)
+                    .filter(card -> conditionalCardTypes.contains(card.getCardType()))
                     .collect(Collectors.toList());
         } else {
             cardsToKeep = mContextualCards.stream()
