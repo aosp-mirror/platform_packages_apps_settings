@@ -43,6 +43,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 import androidx.annotation.VisibleForTesting;
@@ -85,14 +86,26 @@ public class QrCamera extends Handler {
         mReader.setHints(HINTS);
     }
 
-    void start(SurfaceHolder surfaceHolder) {
+    /**
+     * The function start camera preview and capture pictures to decode QR code continuously in a
+     * background task.
+     *
+     * @param surfaceHolder the Surface to be used for live preview, must already contain a surface
+     *                      when this method is called.
+     */
+    public void start(SurfaceHolder surfaceHolder) {
         if (mDecodeTask == null) {
             mDecodeTask = new DecodingTask(surfaceHolder);
-            mDecodeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            // Execute in the separate thread pool to prevent block other AsyncTask.
+            mDecodeTask.executeOnExecutor(Executors.newSingleThreadExecutor());
         }
     }
 
-    void stop() {
+    /**
+     * The function stop camera preview and background decode task. Caller call this function when
+     * the surface is being destroyed.
+     */
+    public void stop() {
         removeMessages(MSG_AUTO_FOCUS);
         if (mDecodeTask != null) {
             mDecodeTask.cancel(true);
@@ -104,7 +117,7 @@ public class QrCamera extends Handler {
     }
 
     /** The scanner which includes this QrCamera class should implement this */
-    interface ScannerCallback {
+    public interface ScannerCallback {
 
         /**
          * The function used to handle the decoding result of the QR code.
