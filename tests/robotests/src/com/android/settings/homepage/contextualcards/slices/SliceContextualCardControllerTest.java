@@ -18,6 +18,10 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
+
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -27,14 +31,21 @@ import android.net.Uri;
 import com.android.settings.homepage.contextualcards.CardContentProvider;
 import com.android.settings.homepage.contextualcards.CardDatabaseHelper;
 import com.android.settings.homepage.contextualcards.ContextualCard;
+import com.android.settings.homepage.contextualcards.ContextualCardFeedbackDialog;
+import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowContentResolver;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SliceContextualCardControllerTest {
@@ -49,25 +60,22 @@ public class SliceContextualCardControllerTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mProvider = Robolectric.setupContentProvider(CardContentProvider.class);
         ShadowContentResolver.registerProviderInternal(CardContentProvider.CARD_AUTHORITY,
                 mProvider);
         mResolver = mContext.getContentResolver();
-        mController = new SliceContextualCardController(mContext);
+        mController = spy(new SliceContextualCardController(mContext));
     }
 
     @Test
     public void onDismissed_cardShouldBeMarkedAsDismissed() {
         final Uri providerUri = CardContentProvider.URI;
-        final ContextualCard card = new ContextualCard.Builder()
-                .setName(TEST_CARD_NAME)
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(Uri.parse(TEST_SLICE_URI))
-                .build();
         mResolver.insert(providerUri, generateOneRow());
+        doNothing().when(mController).showFeedbackDialog(any(ContextualCard.class));
 
-        mController.onDismissed(card);
+        mController.onDismissed(getTestSliceCard());
 
         final String[] columns = {CardDatabaseHelper.CardColumns.CARD_DISMISSED};
         final String selection = CardDatabaseHelper.CardColumns.NAME + "=?";
@@ -78,6 +86,32 @@ public class SliceContextualCardControllerTest {
         cr.close();
 
         assertThat(qryDismissed).isEqualTo(1);
+    }
+
+    @Test
+    public void onDismissed_noFeedbackEmail_shouldNotShowFeedbackDialog() {
+        mResolver.insert(CardContentProvider.URI, generateOneRow());
+        final ContextualCardsFragment fragment =
+                FragmentController.of(new ContextualCardsFragment()).create().get();
+        final ShadowActivity shadowActivity = Shadows.shadowOf(fragment.getActivity());
+
+        mController.onDismissed(getTestSliceCard());
+
+        assertThat(shadowActivity.getNextStartedActivity()).isNull();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void onDismissed_hasFeedbackEmail_shouldShowFeedbackDialog() {
+        mResolver.insert(CardContentProvider.URI, generateOneRow());
+        final ContextualCardsFragment fragment =
+                FragmentController.of(new ContextualCardsFragment()).create().get();
+        final ShadowActivity shadowActivity = Shadows.shadowOf(fragment.getActivity());
+
+        mController.onDismissed(getTestSliceCard());
+
+        assertThat(shadowActivity.getNextStartedActivity().getComponent().getClassName())
+                .isEqualTo(ContextualCardFeedbackDialog.class.getName());
     }
 
     private ContentValues generateOneRow() {
@@ -92,5 +126,13 @@ public class SliceContextualCardControllerTest {
         values.put(CardDatabaseHelper.CardColumns.CARD_DISMISSED, 0);
 
         return values;
+    }
+
+    private ContextualCard getTestSliceCard() {
+        return new ContextualCard.Builder()
+                .setName(TEST_CARD_NAME)
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(Uri.parse(TEST_SLICE_URI))
+                .build();
     }
 }

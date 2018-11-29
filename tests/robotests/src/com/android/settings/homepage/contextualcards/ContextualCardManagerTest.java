@@ -18,9 +18,6 @@ package com.android.settings.homepage.contextualcards;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyMap;
-import static org.mockito.Mockito.doNothing;
-
 import android.content.Context;
 import android.net.Uri;
 import android.util.ArrayMap;
