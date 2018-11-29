@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"自動"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz 帯"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0 GHz 帯"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0 GHz 帯を優先"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi アクセス ポイントの帯域幅を少なくとも 1 つ選択してください。"</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ナチュラル"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"ブースト"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"ビビッド"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"自動"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"アダプティブ"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"正確な色のみを使用"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"鮮明な色と正確な色の間で調整"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"画面の向きに合わせて縦横表示を切り替える"</string>
@@ -2115,7 +2116,7 @@
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"バックグラウンド アクティビティの制限"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"アプリのバックグラウンド アクティビティを制限すると、アプリが正常に機能しないことがあります"</string>
     <string name="background_activity_disabled_dialog_text" msgid="6133420589651880824">"このアプリは、電池の最適化が設定されていないため、制限することはできません。\n\nこのアプリを制限するには、電池の最適化を ON にしてください。"</string>
-    <string name="device_screen_usage" msgid="3386088035570409683">"フル充電以降の画面の電池使用状況"</string>
+    <string name="device_screen_usage" msgid="3386088035570409683">"フル充電時の使用可能時間"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"画面消費"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"モバイル ネットワークのスキャン"</string>
     <string name="power_usage_list_summary" msgid="5584049564906462506">"フル充電以降の電池使用"</string>
@@ -2307,7 +2308,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"電池使用量全体の <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"前回のフル充電以降の内訳"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"前回のフル充電"</string>
-    <string name="battery_full_charge_last" msgid="8892335687734288031">"フル充電での推定使用時間"</string>
+    <string name="battery_full_charge_last" msgid="8892335687734288031">"フル充電での推定待ち受け可能時間"</string>
     <string name="battery_footer_summary" msgid="67169726550144016">"電池の使用状況データは概算値であり、使用状況によって変わります"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"アクティブ時"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"バックグラウンド時"</string>
@@ -3167,7 +3168,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"ミュート中（<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>、<xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>を除く）"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"ミュート中（<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>、<xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>、<xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>を除く）"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"メッセージ、予定、リマインダー"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"マナーモードが ON の場合、上記の許可した項目を除き、メッセージ、リマインダー、予定はミュートされます。メッセージの設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"マナーモードが ON の場合、上記の許可した項目を除き、メッセージ、リマインダー、予定はミュートされます。メッセージの設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"完了"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"設定"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"通知の非表示、通知音なし"</string>
@@ -3755,7 +3756,7 @@
     <string name="condition_device_muted_title" product="default" msgid="5818278137378379647">"スマートフォンをミュートに設定"</string>
     <string name="condition_device_muted_summary" msgid="5445341185705628047">"着信音と通知音をミュートします"</string>
     <string name="condition_device_vibrate_title" product="tablet" msgid="1983420639621523345">"端末をバイブレーションに設定"</string>
-    <string name="condition_device_vibrate_title" product="default" msgid="1087633233379991925">"スマートフォンをバイブレーションに設定"</string>
+    <string name="condition_device_vibrate_title" product="default" msgid="1087633233379991925">"スマートフォンはバイブレーションに設定されています"</string>
     <string name="condition_device_vibrate_summary" product="tablet" msgid="433514444618164607">"着信と通知を端末のバイブレーションで知らせます"</string>
     <string name="condition_device_vibrate_summary" product="default" msgid="5877034997839162763">"着信と通知をスマートフォンのバイブレーションで知らせます"</string>
     <string name="night_display_suggestion_title" msgid="6602129097059325291">"読書灯のスケジュールの設定"</string>
@@ -4149,10 +4150,11 @@
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"バイブレーション"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"ミュート"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"何もしない"</string>
-    <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"ON（バイブ）"</string>
+    <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"ON（バイブレーション）"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="4472465110708640980">"ON（ミュート）"</string>
     <string name="prevent_ringing_option_none_summary" msgid="5013718946609276137">"OFF"</string>
     <string name="pref_title_network_details" msgid="7186418845727358964">"ネットワークの詳細"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"端末名がスマートフォンのアプリに表示されます。また、Bluetooth デバイスに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーも端末名を確認できるようになります。"</string>
     <string name="devices_title" msgid="7701726109334110391">"端末"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"デフォルト"</string>
 </resources>

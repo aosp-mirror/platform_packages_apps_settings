@@ -689,7 +689,7 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에서 연락처와 통화 기록에 액세스하려고 합니다."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 블루투스를 통해 페어링하려고 합니다. 연결하면 기기가 주소록과 통화 기록에 액세스할 수 있습니다."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"페어링된 기기"</string>
-    <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"사용 가능한 기기"</string>
+    <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"사용할 수 있는 기기"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"사용 가능한 기기가 없습니다."</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"연결"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"연결 끊기"</string>
@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"자동"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4GHz 대역"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5.0GHz 대역"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0GHz 대역 사용 선호"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi 핫스팟 대역을 한 개 이상 선택하세요."</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"자연스럽게"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"부스트"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"선명하게"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"자동"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"색상 자동 조절"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"정확한 색상만 사용"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"색상 선명도와 정확도 간 조정"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"태블릿 회전 시 자동으로 방향 바꾸기"</string>
@@ -3163,7 +3164,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> 및 <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>을(를) 제외하고 음소거됨"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"<xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>, <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>을(를) 제외하고 음소거됨"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"메시지, 일정, 알림"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"알림 일시중지가 사용 설정되어 있으면 위에서 허용한 항목을 제외한 메시지, 알림, 일정이 음소거됩니다. 메시지 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자가 나에게 연락하도록 허용할 수 있습니다."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"알림 일시중지가 사용 설정되어 있으면 위에서 허용한 항목을 제외한 메시지, 알림, 일정이 음소거됩니다. 메시지 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자가 나에게 연락하도록 허용할 수 있습니다."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"완료"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"설정"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"알림 표시 및 소리 차단"</string>
@@ -3239,7 +3240,7 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"설치된 앱 중에서 알림 액세스를 요청한 앱이 없습니다."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>의 알림 액세스를 허용하시겠습니까?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>에서 연락처 이름과 수신 메시지 텍스트 등 개인정보를 포함한 모든 알림을 읽을 수 있게 됩니다. 또한 알림을 삭제하거나 포함된 작업 버튼을 실행하며 \n\n앱에서 알림 일시중지를 사용 또는 사용 중지하고 관련 설정을 변경할 수도 있습니다."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>에서 연락처 이름과 수신 메시지 텍스트 등 개인정보를 포함한 모든 알림을 읽을 수 있게 됩니다. 또한 알림을 삭제하거나 포함된 작업 버튼을 실행할 수 있습니다. \n\n앱에서 알림 일시중지를 사용 또는 사용 중지하고 관련 설정을 변경할 수도 있습니다."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>에서 알림 액세스를 사용 중지하면 알림 일시중지 액세스도 사용 중지됩니다."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"사용 중지"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"취소"</string>
@@ -4151,4 +4152,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"네트워크 세부정보"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"휴대전화에 설치된 앱에 기기 이름이 표시됩니다. 기기 이름은 블루투스 기기에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게 표시될 수도 있습니다."</string>
     <string name="devices_title" msgid="7701726109334110391">"기기"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"기본값"</string>
 </resources>

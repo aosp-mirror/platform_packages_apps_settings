@@ -1990,8 +1990,10 @@
     <string name="wifi_ap_choose_auto">Auto</string>
     <!-- Label for the radio button to choose wifi ap 2.4 GHz band -->
     <string name="wifi_ap_choose_2G">2.4 GHz Band</string>
-    <!-- Label for the radio button to choose wifi ap 5GHz band -->
+    <!-- Label for the radio button to only choose wifi ap 5GHz band -->
     <string name="wifi_ap_choose_5G">5.0 GHz Band</string>
+    <!-- Label for the radio button to prefer 5GHz wifi ap band  [CHAR LIMIT=80]-->
+    <string name="wifi_ap_prefer_5G">5.0 GHz Band preferred</string>
     <!-- Label for adding to the list of selected bands when 2.4 GHz is selected -->
     <string name="wifi_ap_2G">2.4 GHz</string>
     <!-- Label for adding to the list of selected bands when 5.0 GHz is selected -->
@@ -2495,11 +2497,11 @@
     <string name="color_mode_option_boosted">Boosted</string>
     <!-- Display settings screen, Color mode option for "Saturated color"  [CHAR LIMIT=45] -->
     <string name="color_mode_option_saturated">Saturated</string>
-    <!-- Display settings screen, Color mode option for "Automatic color"  [CHAR LIMIT=45] -->
-    <string name="color_mode_option_automatic">Automatic</string>
+    <!-- Display settings screen, Color mode option for "Adaptive color"  [CHAR LIMIT=45] -->
+    <string name="color_mode_option_automatic">Adaptive</string>
     <!-- Display settings screen, "natural(sRGB) color" setting option summary [CHAR LIMIT=NONE] -->
     <string name="color_mode_summary_natural">Use accurate colors only</string>
-    <!-- Display settings screen, "Automatic color" setting option summary [CHAR LIMIT=NONE] -->
+    <!-- Display settings screen, "Adaptive color" setting option summary [CHAR LIMIT=NONE] -->
     <string name="color_mode_summary_automatic">Adjust between vivid and accurate colors</string>
 
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
@@ -9415,13 +9417,13 @@
     <string name="notification_log_details_ranking_none">Ranking object doesn\'t contain this key.</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which turns on emulation of a display cutout. -->
-    <string name="display_cutout_emulation">Simulate a display with a cutout</string>
+    <string name="display_cutout_emulation">Display cutout</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Search keywords for the setting which turns on emulation of a display cutout. -->
     <string name="display_cutout_emulation_keywords">display cutout, notch</string>
 
-    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation. -->
-    <string name="display_cutout_emulation_none">None</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation, (i.e. on devices whose screen actually has a cutout, selecting this option will show that cutout).-->
+    <string name="display_cutout_emulation_device_default">Device default</string>
 
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
     <string name="special_access">Special app access</string>
@@ -9925,6 +9927,9 @@
 
     <!-- Help URI, smart battery page [DO NOT TRANSLATE] -->
     <string name="help_uri_smart_battery_settings" translatable="false"></string>
+
+    <!-- Help URI, prevent ringing gesture [DO NOT TRANSLATE] -->
+    <string name="help_uri_prevent_ringing_gesture" translatable="false"></string>
 
     <!-- Title label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="zen_suggestion_title">Update Do Not Disturb</string>

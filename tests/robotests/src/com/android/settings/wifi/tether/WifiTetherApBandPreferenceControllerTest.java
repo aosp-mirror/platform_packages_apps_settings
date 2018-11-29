@@ -18,6 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,16 +27,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.HotspotApBandSelectionPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -43,8 +43,9 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WifiTetherApBandPreferenceControllerTest {
 
-    private static final String ALL_BANDS = "2.4 GHz and 5.0 GHz";
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private static final String ALL_BANDS = "5.0 GHz Band preferred";
+    private static final String TWO_GHZ_STRING = "2.4 GHz Band";
+    private static final String FIVE_GHZ_STRING = "5.0 GHz Band";
     private Context mContext;
     @Mock
     private ConnectivityManager mConnectivityManager;
@@ -56,12 +57,13 @@ public class WifiTetherApBandPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private WifiTetherApBandPreferenceController mController;
-    private HotspotApBandSelectionPreference mPreference;
+    private ListPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPreference = new HotspotApBandSelectionPreference(RuntimeEnvironment.application);
+        mContext = spy(RuntimeEnvironment.application);
+        mPreference = new ListPreference(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
@@ -71,6 +73,7 @@ public class WifiTetherApBandPreferenceControllerTest {
         WifiConfiguration config = new WifiConfiguration();
         config.apBand = WifiConfiguration.AP_BAND_ANY;
         when(mWifiManager.getWifiApConfiguration()).thenReturn(new WifiConfiguration());
+        when(mWifiManager.isDualModeSupported()).thenReturn(false);
 
         mController = new WifiTetherApBandPreferenceController(mContext, mListener);
     }
@@ -79,9 +82,10 @@ public class WifiTetherApBandPreferenceControllerTest {
     public void display_5GhzSupported_shouldDisplayFullList() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.isDualBandSupported()).thenReturn(true);
+        when(mWifiManager.isDualModeSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
-        mController.onPreferenceChange(mPreference, -1);
+        mController.onPreferenceChange(mPreference, "-1");
 
         assertThat(mPreference.getSummary()).isEqualTo(ALL_BANDS);
     }
@@ -100,6 +104,7 @@ public class WifiTetherApBandPreferenceControllerTest {
 
     @Test
     public void display_5GhzNotSupported_shouldDisable() {
+        when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.isDualBandSupported()).thenReturn(false);
 
         mController.displayPreference(mScreen);
@@ -110,37 +115,71 @@ public class WifiTetherApBandPreferenceControllerTest {
     }
 
     @Test
-    public void changePreference_shouldUpdateValue() {
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
+    public void changePreference_noDualModeWith5G_shouldUpdateValue() {
+        when(mWifiManager.getCountryCode()).thenReturn("US");
+        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+
+        mController.displayPreference(mScreen);
+
+        // -1 is WifiConfiguration.AP_BAND_ANY, for 'Auto' option. This should be prevented from
+        // being set since it is invalid for this configuration
+        mController.onPreferenceChange(mPreference, "-1");
+        assertThat(mController.getBandIndex()).isEqualTo(1);
+        assertThat(mPreference.getSummary()).isEqualTo(FIVE_GHZ_STRING);
+        verify(mListener, times(1)).onTetherConfigUpdated();
+
+        // set to 5 Ghz
+        mController.onPreferenceChange(mPreference, "1");
+        assertThat(mController.getBandIndex()).isEqualTo(1);
+        assertThat(mPreference.getSummary()).isEqualTo(FIVE_GHZ_STRING);
+        verify(mListener, times(2)).onTetherConfigUpdated();
+
+        // set to 2 Ghz
+        mController.onPreferenceChange(mPreference, "0");
+        assertThat(mController.getBandIndex()).isEqualTo(0);
+        assertThat(mPreference.getSummary()).isEqualTo(TWO_GHZ_STRING);
+        verify(mListener, times(3)).onTetherConfigUpdated();
+    }
+
+    @Test
+    public void changePreference_dualModeWith5G_shouldUpdateValue() {
+        when(mWifiManager.getCountryCode()).thenReturn("US");
+        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+        when(mWifiManager.isDualModeSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
 
         // -1 is WifiConfiguration.AP_BAND_ANY, for 'Auto' option.
-        mController.onPreferenceChange(mPreference, -1);
+        mController.onPreferenceChange(mPreference, "-1");
         assertThat(mController.getBandIndex()).isEqualTo(-1);
         assertThat(mPreference.getSummary()).isEqualTo(ALL_BANDS);
+        verify(mListener, times(1)).onTetherConfigUpdated();
 
-        mController.onPreferenceChange(mPreference, 1);
-        assertThat(mController.getBandIndex()).isEqualTo(1);
-        assertThat(mPreference.getSummary()).isEqualTo("5.0 GHz");
+        // should revert to the default for 5 Ghz only since this is not supported with this config
+        mController.onPreferenceChange(mPreference, "1");
+        assertThat(mController.getBandIndex()).isEqualTo(-1);
+        assertThat(mPreference.getSummary()).isEqualTo(ALL_BANDS);
+        verify(mListener, times(2)).onTetherConfigUpdated();
 
-        mController.onPreferenceChange(mPreference, 0);
+        // set to 2 Ghz
+        mController.onPreferenceChange(mPreference, "0");
         assertThat(mController.getBandIndex()).isEqualTo(0);
-        assertThat(mPreference.getSummary()).isEqualTo("2.4 GHz");
-
+        assertThat(mPreference.getSummary()).isEqualTo(TWO_GHZ_STRING);
         verify(mListener, times(3)).onTetherConfigUpdated();
     }
 
     @Test
     public void updateDisplay_shouldUpdateValue() {
+        when(mWifiManager.getCountryCode()).thenReturn("US");
+        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+
         // Set controller band index to 1 and verify is set.
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
         mController.displayPreference(mScreen);
-        mController.onPreferenceChange(mPreference, 1);
+        mController.onPreferenceChange(mPreference, "1");
         assertThat(mController.getBandIndex()).isEqualTo(1);
 
         // Disable 5Ghz band
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(false);
+        when(mWifiManager.isDualBandSupported()).thenReturn(false);
 
         // Call updateDisplay and verify it's changed.
         mController.updateDisplay();

@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automático"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Banda de 5 GHz preferencial"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Escolha pelo menos uma banda para o ponto de acesso Wi-Fi:"</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturais"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Realçadas"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturadas"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automática"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Adaptativo"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Usar apenas cores precisas"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Ajuste entre cores vívidas e precisas"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Alternar orientação automaticamente ao girar o tablet"</string>
@@ -3163,7 +3164,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Som desativado, mas permitido para <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> e <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Som desativado, mas permitido para <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> e <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mensagens, eventos e lembretes"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Quando o \"Não perturbe\" estiver ativado, mensagens, lembretes e eventos serão silenciados, com exceção dos itens permitidos por você acima. É possível ajustar as configurações de mensagens para permitir que seus amigos, familiares ou outros contatos falem com você."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Quando o \"Não perturbe\" estiver ativado, mensagens, lembretes e eventos serão silenciados, com exceção dos itens permitidos por você acima. É possível ajustar as configurações de mensagens para permitir que seus amigos, familiares ou outros contatos falem com você."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Concluído"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Configurações"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Sem aviso visual ou sonoro de notificações"</string>
@@ -3197,11 +3198,11 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todo o conteúdo das notificações"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Ocultar conteúdo confidencial"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Não mostrar notificações"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Quando o dispositivo estiver bloqueado, como você deseja que as notificações sejam exibidas?"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Quando o dispositivo estiver bloqueado, como você quer que as notificações sejam exibidas?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificações"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Mostrar todo o conteúdo de notificação de trabalho"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2005907007779384635">"Ocultar conteúdo de trabalho confidencial"</string>
-    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Como você deseja que as notificações sejam exibidas quando o dispositivo estiver bloqueado?"</string>
+    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Como você quer que as notificações sejam exibidas quando o dispositivo estiver bloqueado?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notificações do perfil"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Notificações"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificações de apps"</string>
@@ -3238,8 +3239,8 @@
       <item quantity="other">%d apps podem ler notificações</item>
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nenhum app instalado solicitou o acesso a notificações."</string>
-    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Permitir o acesso a notificações para <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> conseguirá ler todas as notificações, incluindo informações pessoais, como nomes de contato e o texto das mensagens que você recebe. Ele também conseguirá dispensar notificações ou ativar botões de ação que elas contenham. \n\nIsso também permitira que o app ative ou desative o modo \"Não perturbe\" e alterar as configurações relacionadas."</string>
+    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acesse as notificações?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá ler todas as notificações, incluindo informações pessoais, como nomes de contato e o texto das mensagens que você recebe. O app também poderá dispensar notificações ou ativar botões de ação que elas contenham. \n\nIsso também autoriza o app a ativar ou desativar o modo \"Não perturbe\" e alterar as configurações relacionadas."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Se você desativar o acesso a notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso \"Não perturbe\" também seja desativado."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Desativar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Cancelar"</string>
@@ -4151,4 +4152,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalhes da rede"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"O nome do seu dispositivo está visível para os apps no seu smartphone. Ele também pode ser visto por outras pessoas quando você se conecta a dispositivos Bluetooth ou configura um ponto de acesso Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositivos"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Padrão"</string>
 </resources>
