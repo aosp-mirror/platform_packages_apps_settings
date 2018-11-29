@@ -20,7 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
 
-import android.content.Context;
+import android.app.Activity;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +45,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
+import org.robolectric.android.controller.ActivityController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SliceContextualCardRendererTest {
@@ -54,19 +55,21 @@ public class SliceContextualCardRendererTest {
     private LiveData<Slice> mSliceLiveData;
     @Mock
     private ControllerRendererPool mControllerRendererPool;
-    @Mock
-    private SliceContextualCardController mController;
 
-    private Context mContext;
+    private Activity mActivity;
     private SliceContextualCardRenderer mRenderer;
     private LifecycleOwner mLifecycleOwner;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        final ActivityController<Activity> activityController = Robolectric.buildActivity(
+                Activity.class);
+        mActivity = activityController.get();
+        mActivity.setTheme(R.style.Theme_AppCompat);
+        activityController.create();
         mLifecycleOwner = new ContextualCardsFragment();
-        mRenderer = new SliceContextualCardRenderer(mContext, mLifecycleOwner,
+        mRenderer = new SliceContextualCardRenderer(mActivity, mLifecycleOwner,
                 mControllerRendererPool);
     }
 
@@ -156,9 +159,9 @@ public class SliceContextualCardRendererTest {
 
     private RecyclerView.ViewHolder getSliceViewHolder() {
         final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
-        final RecyclerView recyclerView = new RecyclerView(mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
 
         return mRenderer.createViewHolder(view);
     }

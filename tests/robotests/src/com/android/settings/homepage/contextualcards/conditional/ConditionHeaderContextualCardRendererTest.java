@@ -18,17 +18,17 @@ package com.android.settings.homepage.contextualcards.conditional;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,7 +38,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
+import org.robolectric.android.controller.ActivityController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,24 +51,28 @@ public class ConditionHeaderContextualCardRendererTest {
     private ControllerRendererPool mControllerRendererPool;
     @Mock
     private ConditionContextualCardController mController;
-    private Context mContext;
+    private Activity mActivity;
     private ConditionHeaderContextualCardRenderer mRenderer;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mRenderer = new ConditionHeaderContextualCardRenderer(mContext, mControllerRendererPool);
+        final ActivityController<Activity> activityController = Robolectric.buildActivity(
+                Activity.class);
+        mActivity = activityController.get();
+        mActivity.setTheme(R.style.Theme_AppCompat);
+        activityController.create();
+        mRenderer = new ConditionHeaderContextualCardRenderer(mActivity, mControllerRendererPool);
     }
 
     @Test
     public void bindView_shouldSetClickListener() {
         final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
-        final RecyclerView recyclerView = new RecyclerView(mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
         final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
-        when(mControllerRendererPool.getController(mContext,
+        when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.CONDITIONAL_HEADER)).thenReturn(mController);
 
         mRenderer.bindView(viewHolder, generateConditionHeaderContextualCard());
@@ -79,11 +84,11 @@ public class ConditionHeaderContextualCardRendererTest {
     @Test
     public void bindView_clickView_shouldSetTrueToIsConditionExpanded() {
         final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
-        final RecyclerView recyclerView = new RecyclerView(mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
         final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
-        when(mControllerRendererPool.getController(mContext,
+        when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.CONDITIONAL_HEADER)).thenReturn(mController);
 
         mRenderer.bindView(viewHolder, generateConditionHeaderContextualCard());
