@@ -28,8 +28,11 @@ import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
@@ -51,13 +54,15 @@ import java.util.Set;
  * Card renderer for {@link ContextualCard} built as slices.
  */
 public class SliceContextualCardRenderer implements ContextualCardRenderer,
-        SliceView.OnSliceActionListener {
+        SliceView.OnSliceActionListener, LifecycleObserver {
     public static final int VIEW_TYPE = R.layout.homepage_slice_tile;
 
     private static final String TAG = "SliceCardRenderer";
 
     @VisibleForTesting
     final Map<String, LiveData<Slice>> mSliceLiveDataMap;
+    @VisibleForTesting
+    final Set<SliceViewHolder> mFlippedCardSet;
 
     private final Context mContext;
     private final LifecycleOwner mLifecycleOwner;
@@ -71,6 +76,8 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         mSliceLiveDataMap = new ArrayMap<>();
         mControllerRendererPool = controllerRendererPool;
         mCardSet = new ArraySet<>();
+        mFlippedCardSet = new ArraySet<>();
+        mLifecycleOwner.getLifecycle().addObserver(this);
     }
 
     @Override
@@ -122,20 +129,23 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
     }
 
     private void initDismissalActions(SliceViewHolder cardHolder, ContextualCard card) {
-        final ViewFlipper viewFlipper = cardHolder.itemView.findViewById(R.id.viewFlipper);
         cardHolder.sliceView.setOnLongClickListener(v -> {
-            viewFlipper.showNext();
+            cardHolder.viewFlipper.showNext();
+            mFlippedCardSet.add(cardHolder);
             return true;
         });
 
         final Button btnKeep = cardHolder.itemView.findViewById(R.id.keep);
         btnKeep.setOnClickListener(v -> {
-            viewFlipper.showPrevious();
+            cardHolder.resetCard();
+            mFlippedCardSet.remove(cardHolder);
         });
 
         final Button btnRemove = cardHolder.itemView.findViewById(R.id.remove);
         btnRemove.setOnClickListener(v -> {
             mControllerRendererPool.getController(mContext, card.getCardType()).onDismissed(card);
+            cardHolder.resetCard();
+            mFlippedCardSet.remove(cardHolder);
         });
     }
 
@@ -158,12 +168,24 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         }
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onStop() {
+        mFlippedCardSet.stream().forEach(holder -> holder.resetCard());
+        mFlippedCardSet.clear();
+    }
+
     public static class SliceViewHolder extends RecyclerView.ViewHolder {
         public final SliceView sliceView;
+        public final ViewFlipper viewFlipper;
 
         public SliceViewHolder(View view) {
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
+            viewFlipper = view.findViewById(R.id.viewFlipper);
+        }
+
+        public void resetCard() {
+            viewFlipper.setDisplayedChild(0);
         }
     }
 }
