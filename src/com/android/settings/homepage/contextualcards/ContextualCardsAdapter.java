@@ -99,7 +99,6 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 @Override
                 public int getSpanSize(int position) {
                     final ContextualCard card = mContextualCards.get(position);
-                    //TODO(b/114009676): may use another field to make decision. still under review.
                     if (card.isHalfWidth()) {
                         return HALF_WIDTH;
                     }

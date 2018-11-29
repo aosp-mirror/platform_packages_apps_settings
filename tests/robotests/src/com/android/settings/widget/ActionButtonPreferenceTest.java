@@ -50,52 +50,175 @@ public class ActionButtonPreferenceTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mRootView = View.inflate(mContext, R.layout.two_action_buttons, null /* parent */);
+        mRootView = View.inflate(mContext, R.layout.settings_action_buttons, null /* parent */);
         mHolder = PreferenceViewHolder.createInstanceForTests(mRootView);
         mPref = new ActionButtonPreference(mContext);
     }
 
     @Test
-    public void setVisibility_shouldUpdateButtonVisibility() {
-        mPref.setButton1Visible(false).setButton2Visible(false);
-        mPref.onBindViewHolder(mHolder);
+    public void onBindViewHolder_setTitle_shouldShowButtonByDefault() {
+        mPref.setButton1Text(R.string.settings_label);
+        mPref.setButton2Text(R.string.settings_label);
+        mPref.setButton3Text(R.string.settings_label);
+        mPref.setButton4Text(R.string.settings_label);
 
-        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
-                .isEqualTo(View.GONE);
-        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
-                .isEqualTo(View.GONE);
-
-        mPref.setButton1Visible(true).setButton2Visible(true);
         mPref.onBindViewHolder(mHolder);
 
         assertThat(mRootView.findViewById(R.id.button1).getVisibility())
                 .isEqualTo(View.VISIBLE);
         assertThat(mRootView.findViewById(R.id.button2).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mRootView.findViewById(R.id.button3).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mRootView.findViewById(R.id.button4).getVisibility())
                 .isEqualTo(View.VISIBLE);
     }
 
     @Test
-    public void setEnabled_shouldEnableButton() {
-        mPref.setButton1Enabled(true).setButton2Enabled(false);
+    public void onBindViewHolder_setIcon_shouldShowButtonByDefault() {
+        mPref.setButton1Icon(R.drawable.ic_settings);
+        mPref.setButton2Icon(R.drawable.ic_settings);
+        mPref.setButton3Icon(R.drawable.ic_settings);
+        mPref.setButton4Icon(R.drawable.ic_settings);
+
+        mPref.onBindViewHolder(mHolder);
+
+        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mRootView.findViewById(R.id.button3).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mRootView.findViewById(R.id.button4).getVisibility())
+                .isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void onBindViewHolder_notSetTitleOrIcon_shouldNotShowButtonByDefault() {
+        mPref.onBindViewHolder(mHolder);
+
+        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button3).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button4).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void onBindViewHolder_setVisibleIsGoneAndSetTitle_shouldNotShowButton() {
+        mPref.setButton1Text(R.string.settings_label).setButton1Visible(false);
+        mPref.setButton2Text(R.string.settings_label).setButton2Visible(false);
+        mPref.setButton3Text(R.string.settings_label).setButton3Visible(false);
+        mPref.setButton4Text(R.string.settings_label).setButton4Visible(false);
+
+        mPref.onBindViewHolder(mHolder);
+
+        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button3).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button4).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void onBindViewHolder_setVisibleIsGoneAndSetIcon_shouldNotShowButton() {
+        mPref.setButton1Icon(R.drawable.ic_settings).setButton1Visible(false);
+        mPref.setButton2Icon(R.drawable.ic_settings).setButton2Visible(false);
+        mPref.setButton3Icon(R.drawable.ic_settings).setButton3Visible(false);
+        mPref.setButton4Icon(R.drawable.ic_settings).setButton4Visible(false);
+
+        mPref.onBindViewHolder(mHolder);
+
+        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button3).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button4).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void onBindViewHolder_setVisibility_shouldUpdateButtonVisibility() {
+        mPref.setButton1Text(R.string.settings_label).setButton1Visible(false);
+        mPref.setButton2Text(R.string.settings_label).setButton2Visible(false);
+        mPref.setButton3Text(R.string.settings_label).setButton3Visible(false);
+        mPref.setButton4Text(R.string.settings_label).setButton4Visible(false);
+
+        mPref.onBindViewHolder(mHolder);
+
+        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button3).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(mRootView.findViewById(R.id.button4).getVisibility())
+                .isEqualTo(View.GONE);
+
+        mPref.setButton1Visible(true);
+        mPref.setButton2Visible(true);
+        mPref.setButton3Visible(true);
+        mPref.setButton4Visible(true);
+
+        mPref.onBindViewHolder(mHolder);
+
+        assertThat(mRootView.findViewById(R.id.button1).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mRootView.findViewById(R.id.button2).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mRootView.findViewById(R.id.button3).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(mRootView.findViewById(R.id.button4).getVisibility())
+                .isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void onBindViewHolder_setEnabled_shouldEnableButton() {
+        mPref.setButton1Enabled(true);
+        mPref.setButton2Enabled(false);
+        mPref.setButton3Enabled(true);
+        mPref.setButton4Enabled(false);
+
         mPref.onBindViewHolder(mHolder);
 
         assertThat(mRootView.findViewById(R.id.button1).isEnabled()).isTrue();
         assertThat(mRootView.findViewById(R.id.button2).isEnabled()).isFalse();
+        assertThat(mRootView.findViewById(R.id.button3).isEnabled()).isTrue();
+        assertThat(mRootView.findViewById(R.id.button4).isEnabled()).isFalse();
     }
 
     @Test
-    public void setText_shouldShowSameText() {
+    public void onBindViewHolder_setText_shouldShowSameText() {
         mPref.setButton1Text(R.string.settings_label);
+        mPref.setButton2Text(R.string.settings_label);
+        mPref.setButton3Text(R.string.settings_label);
+        mPref.setButton4Text(R.string.settings_label);
+
         mPref.onBindViewHolder(mHolder);
 
         assertThat(((Button) mRootView.findViewById(R.id.button1)).getText())
                 .isEqualTo(mContext.getText(R.string.settings_label));
+        assertThat(((Button) mRootView.findViewById(R.id.button2)).getText())
+                .isEqualTo(mContext.getText(R.string.settings_label));
+        assertThat(((Button) mRootView.findViewById(R.id.button3)).getText())
+                .isEqualTo(mContext.getText(R.string.settings_label));
+        assertThat(((Button) mRootView.findViewById(R.id.button4)).getText())
+                .isEqualTo(mContext.getText(R.string.settings_label));
     }
 
     @Test
-    public void setButtonIcon_iconMustDisplayAboveText() {
+    public void onBindViewHolder_setButtonIcon_iconMustDisplayAboveText() {
         mPref.setButton1Text(R.string.settings_label);
         mPref.setButton1Icon(R.drawable.ic_settings);
+
         mPref.onBindViewHolder(mHolder);
         final Drawable[] drawablesAroundText =
                 ((Button) mRootView.findViewById(R.id.button1))
@@ -108,6 +231,7 @@ public class ActionButtonPreferenceTest {
     public void setButtonIcon_iconResourceIdIsZero_shouldNotDisplayIcon() {
         mPref.setButton1Text(R.string.settings_label);
         mPref.setButton1Icon(0);
+
         mPref.onBindViewHolder(mHolder);
         final Drawable[] drawablesAroundText =
                 ((Button) mRootView.findViewById(R.id.button1))
@@ -142,6 +266,18 @@ public class ActionButtonPreferenceTest {
         when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
         when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
         when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        when(pref.setButton3Text(anyInt())).thenReturn(pref);
+        when(pref.setButton3Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton3Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton3Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton3OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        when(pref.setButton4Text(anyInt())).thenReturn(pref);
+        when(pref.setButton4Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton4Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton4Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton4OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
         return pref;
     }
 }

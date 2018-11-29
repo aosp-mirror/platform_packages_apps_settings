@@ -19,11 +19,10 @@ package com.android.settings.homepage.contextualcards.conditional;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -40,7 +39,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Robolectric;
+import org.robolectric.android.controller.ActivityController;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ConditionContextualCardRendererTest {
@@ -49,25 +49,29 @@ public class ConditionContextualCardRendererTest {
     private ControllerRendererPool mControllerRendererPool;
     @Mock
     private ConditionContextualCardController mController;
-    private Context mContext;
+    private Activity mActivity;
     private ConditionContextualCardRenderer mRenderer;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mRenderer = new ConditionContextualCardRenderer(mContext, mControllerRendererPool);
+        final ActivityController<Activity> activityController = Robolectric.buildActivity(
+                Activity.class);
+        mActivity = activityController.get();
+        mActivity.setTheme(R.style.Theme_AppCompat);
+        activityController.create();
+        mRenderer = new ConditionContextualCardRenderer(mActivity, mControllerRendererPool);
     }
 
     @Test
     public void bindView_shouldSetListener() {
         final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
-        final RecyclerView recyclerView = new RecyclerView(mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
         final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
         final View card = view.findViewById(R.id.content);
-        when(mControllerRendererPool.getController(mContext,
+        when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.CONDITIONAL)).thenReturn(mController);
 
         mRenderer.bindView(viewHolder, buildConditionContextualCard());
@@ -79,12 +83,12 @@ public class ConditionContextualCardRendererTest {
     @Test
     public void viewClick_shouldInvokeControllerPrimaryClick() {
         final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
-        final RecyclerView recyclerView = new RecyclerView(mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
         final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
         final View card = view.findViewById(R.id.content);
-        when(mControllerRendererPool.getController(mContext,
+        when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.CONDITIONAL)).thenReturn(mController);
 
         mRenderer.bindView(viewHolder, buildConditionContextualCard());
@@ -103,7 +107,7 @@ public class ConditionContextualCardRendererTest {
                 .setName("test_name")
                 .setTitleText("test_title")
                 .setSummaryText("test_summary")
-                .setIconDrawable(mContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
+                .setIconDrawable(mActivity.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
                 .setIsHalfWidth(true)
                 .build();
     }

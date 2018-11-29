@@ -5721,116 +5721,14 @@
     <!-- Message displayed to let the user know that some of the options are disabled by admin. [CHAR LIMIT=NONE] -->
     <string name="admin_disabled_other_options">Other options are disabled by your admin</string>
     <string name="admin_more_details">More details</string>
-
-    <string name="sound_category_sound_title">General</string>
     <string name="notification_log_title">Notification log</string>
 
     <!-- Category title for phone call's ringtone and vibration settings in the Sound Setting.
          [CHAR LIMIT=40] -->
     <string name="sound_category_call_ringtone_vibrate_title">Call ringtone &amp; vibrate</string>
-
-    <!-- Category title for system-wide notification and feedback settings in the Sound Setting.
-         [CHAR LIMIT=40] -->
-    <string name="sound_category_system_title">System</string>
-
-    <!-- Wifi Setup For Setup Wizard with XL screen -->
-    <!-- Title shown in Wifi Setup Wizard with XL screen -->
-    <string name="wifi_setup_title">Wi\u2011Fi setup</string>
-    <!-- Title shown in Wifi Setup Wizard with XL screen when
-         a user is configuring password for a network.
-         The argument should be the name of the network.
-         [CHAR LIMIT=50] -->
-    <string name="wifi_setup_title_editing_network">Connect to Wi\u2011Fi network <xliff:g id="network_name" example="Happy Mobile">%s</xliff:g></string>
-    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen when
-         the device is connecting a network the user specified.
-         The argument should be the name of the network.
-         [CHAR LIMIT=50] -->
-    <string name="wifi_setup_title_connecting_network">Connecting to Wi\u2011Fi network <xliff:g id="network_name" example="Happy Mobile">%s</xliff:g>\u2026</string>
-    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen when
-         the device successfully connected to a network the user specified.
-         The argument should be the name of the network.
-         [CHAR LIMIT=50] -->
-    <string name="wifi_setup_title_connected_network">Connected to Wi\u2011Fi network <xliff:g id="network_name" example="Happy Mobile">%s</xliff:g></string>
-    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen when
-         a user is adding a network.
-         [CHAR LIMIT=50] -->
-    <string name="wifi_setup_title_add_network">Add a network</string>
-    <!-- Text message shown when Wifi is not connected.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_not_connected">Not connected</string>
-    <!-- Button message shown on the button adding manual setting.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_add_network">Add network</string>
-    <!-- Button message shown on the button refreshing a list of network.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_refresh_list">Refresh list</string>
-    <!-- Button message shown on the button enabling users skip Wifi Setup.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=10] -->
-    <string name="wifi_setup_skip">Skip</string>
-    <!-- Button message shown on the button enabling users go the next step.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=10] -->
-    <string name="wifi_setup_next">Next</string>
-    <!-- Button label to go back to previous screen. Used in SetupWizard for
-      XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_back">Back</string>
     <!-- Button label to show detailed dialog for a selected Wi-Fi settings.
          Used in SetupWizard for XLarge screen [CHAR LIMIT=20] -->
     <string name="wifi_setup_detail">Network details</string>
-    <!-- Button label to connect to a Wi-Fi network.
-         Used in SetupWizard for XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_connect">Connect</string>
-    <!-- Button label to delete a Wi-Fi network.
-         Used in SetupWizard for XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_forget">Forget</string>
-    <!-- Button label to save a Wi-Fi network configuration.
-         Used in SetupWizard for XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_save">Save</string>
-    <!-- Button label to dismiss the dialog.
-         Used in SetupWizard for XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_cancel">Cancel</string>
-
-    <!-- The message shown above available networks when the device is scanning
-         available networks [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_scanning">Scanning networks\u2026</string>
-    <!-- Message shown above available network when there's no connected network.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_status_select_network">Tap a network to connect to it</string>
-    <!-- Message shown above available networks when a user clicked one of available
-         networks and the UI is showing one possible existing network.
-         Used in Wifi Setup. -->
-    <string name="wifi_setup_status_existing_network">Connect to existing network</string>
-    <!-- Message shown above available networks when a user clicked one of available
-         networks and the network doesn't require configuration (e.g. password)
-         Used in Wifi Setup with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_unsecured_network">Connect to unsecured network</string>
-    <!-- Message shown above available networks when a user clicked one of available
-         networks and the UI is prompting the user to edit the network configuration
-         if needed. Used in Wifi Setup with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_edit_network">Type network configuration</string>
-    <!-- The message shown above available networks when a user clicked "Add network"
-         button. Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_new_network">Connect to new network</string>
-    <!-- The message shown above available networks when a user clicked one of available
-         networks or created another profile and he/she is waiting for the connection
-         is established.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_connecting">Connecting\u2026</string>
-    <!-- The message shown above available networks when connection is established,
-         letting a user to proceed to the next step of the SetupWizard.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_proceed_to_next">Go to the next step</string>
-    <!-- The message shown above available networks when a user clicked a network secured by
-         EAP. We don't allow the user to connect it.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_eap_not_supported">EAP isn\u2019t supported.</string>
-    <!-- Message shown when users select EAP in Wi-Fi settings for SetupWizard,
-         saying EAP can't be configured in SetupWizard flow.
-         [CHAR LIMIT=NONE] -->
-    <string name="wifi_setup_eap_not_supported">You can\u2019t configure an EAP Wi\u2011Fi connection during setup. After setup, you can do that in Settings &gt; Wireless &amp; networks.</string>
-    <!-- Message shown when the device is connecting a network [CHAR LIMIT=NONE] -->
-    <string name="wifi_setup_description_connecting">Connecting can take a few minutes\u2026</string>
-    <!-- Message shown when the device is connected to a network [CHAR LIMIT=NONE] -->
-    <string name="wifi_setup_description_connected">Tap <b>Next</b> to continue with setup.\n\nTap <b>Back</b> to connect to a different Wi\u2011Fi network.</string>
 
     <!-- Do not translate. This is a stub which will be removed soon. -->
     <string name="time_zone_auto_stub" translatable="false">Select Time Zone</string>
