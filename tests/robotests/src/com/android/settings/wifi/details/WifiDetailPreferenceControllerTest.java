@@ -57,6 +57,7 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
@@ -69,7 +70,6 @@ import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
@@ -144,27 +144,27 @@ public class WifiDetailPreferenceControllerTest {
     @Mock
     private ActionButtonPreference mockButtonsPref;
     @Mock
-    private WifiDetailPreference mockSignalStrengthPref;
+    private Preference mockSignalStrengthPref;
     @Mock
-    private WifiDetailPreference mockLinkSpeedPref;
+    private Preference mockLinkSpeedPref;
     @Mock
-    private WifiDetailPreference mockFrequencyPref;
+    private Preference mockFrequencyPref;
     @Mock
-    private WifiDetailPreference mockSecurityPref;
+    private Preference mockSecurityPref;
     @Mock
-    private WifiDetailPreference mockMacAddressPref;
+    private Preference mockMacAddressPref;
     @Mock
-    private WifiDetailPreference mockIpAddressPref;
+    private Preference mockIpAddressPref;
     @Mock
-    private WifiDetailPreference mockGatewayPref;
+    private Preference mockGatewayPref;
     @Mock
-    private WifiDetailPreference mockSubnetPref;
+    private Preference mockSubnetPref;
     @Mock
-    private WifiDetailPreference mockDnsPref;
+    private Preference mockDnsPref;
     @Mock
     private PreferenceCategory mockIpv6Category;
     @Mock
-    private WifiDetailPreference mockIpv6AddressesPref;
+    private Preference mockIpv6AddressesPref;
     @Mock
     private PackageManager mockPackageManager;
 
@@ -336,7 +336,7 @@ public class WifiDetailPreferenceControllerTest {
     public void securityPreference_stringShouldBeSet() {
         displayAndResume();
 
-        verify(mockSecurityPref).setDetailText(SECURITY);
+        verify(mockSecurityPref).setSummary(SECURITY);
     }
 
     @Test
@@ -413,7 +413,7 @@ public class WifiDetailPreferenceControllerTest {
 
         displayAndResume();
 
-        verify(mockSignalStrengthPref).setDetailText(expectedStrength);
+        verify(mockSignalStrengthPref).setSummary(expectedStrength);
     }
 
     @Test
@@ -422,7 +422,7 @@ public class WifiDetailPreferenceControllerTest {
 
         displayAndResume();
 
-        verify(mockLinkSpeedPref).setDetailText(expectedLinkSpeed);
+        verify(mockLinkSpeedPref).setSummary(expectedLinkSpeed);
     }
 
     @Test
@@ -438,7 +438,7 @@ public class WifiDetailPreferenceControllerTest {
     public void macAddressPref_shouldHaveDetailTextSet() {
         displayAndResume();
 
-        verify(mockMacAddressPref).setDetailText(MAC_ADDRESS);
+        verify(mockMacAddressPref).setSummary(MAC_ADDRESS);
     }
 
     @Test
@@ -447,7 +447,7 @@ public class WifiDetailPreferenceControllerTest {
 
         displayAndResume();
 
-        verify(mockIpAddressPref).setDetailText(Constants.IPV4_ADDR.getAddress().getHostAddress());
+        verify(mockIpAddressPref).setSummary(Constants.IPV4_ADDR.getAddress().getHostAddress());
     }
 
     @Test
@@ -458,8 +458,8 @@ public class WifiDetailPreferenceControllerTest {
 
         displayAndResume();
 
-        verify(mockSubnetPref).setDetailText("255.255.255.128");
-        verify(mockGatewayPref).setDetailText("192.0.2.127");
+        verify(mockSubnetPref).setSummary("255.255.255.128");
+        verify(mockGatewayPref).setSummary("192.0.2.127");
     }
 
     @Test
@@ -470,7 +470,7 @@ public class WifiDetailPreferenceControllerTest {
 
         displayAndResume();
 
-        verify(mockDnsPref).setDetailText(
+        verify(mockDnsPref).setSummary(
                 "8.8.4.4\n" +
                         "8.8.8.8\n" +
                         Constants.IPV6_DNS.getHostAddress());
@@ -551,15 +551,15 @@ public class WifiDetailPreferenceControllerTest {
 
         lp.addRoute(Constants.IPV4_DEFAULT);
         updateLinkProperties(lp);
-        inOrder.verify(mockGatewayPref).setDetailText(Constants.IPV4_GATEWAY.getHostAddress());
+        inOrder.verify(mockGatewayPref).setSummary(Constants.IPV4_GATEWAY.getHostAddress());
         inOrder.verify(mockGatewayPref).setVisible(true);
 
         lp.addLinkAddress(Constants.IPV4_ADDR);
         lp.addRoute(Constants.IPV4_SUBNET);
         updateLinkProperties(lp);
-        inOrder.verify(mockIpAddressPref).setDetailText(asString(Constants.IPV4_ADDR));
+        inOrder.verify(mockIpAddressPref).setSummary(asString(Constants.IPV4_ADDR));
         inOrder.verify(mockIpAddressPref).setVisible(true);
-        inOrder.verify(mockSubnetPref).setDetailText("255.255.255.128");
+        inOrder.verify(mockSubnetPref).setSummary("255.255.255.128");
         inOrder.verify(mockSubnetPref).setVisible(true);
 
         lp.addLinkAddress(Constants.IPV6_GLOBAL1);
@@ -578,13 +578,13 @@ public class WifiDetailPreferenceControllerTest {
 
         lp.addDnsServer(Constants.IPV6_DNS);
         updateLinkProperties(lp);
-        inOrder.verify(mockDnsPref).setDetailText(Constants.IPV6_DNS.getHostAddress());
+        inOrder.verify(mockDnsPref).setSummary(Constants.IPV6_DNS.getHostAddress());
         inOrder.verify(mockDnsPref).setVisible(true);
 
         lp.addDnsServer(Constants.IPV4_DNS1);
         lp.addDnsServer(Constants.IPV4_DNS2);
         updateLinkProperties(lp);
-        inOrder.verify(mockDnsPref).setDetailText(
+        inOrder.verify(mockDnsPref).setSummary(
                 Constants.IPV6_DNS.getHostAddress() + "\n" +
                         Constants.IPV4_DNS1.getHostAddress() + "\n" +
                         Constants.IPV4_DNS2.getHostAddress());
