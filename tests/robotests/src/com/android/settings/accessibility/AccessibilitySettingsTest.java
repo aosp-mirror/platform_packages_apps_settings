@@ -18,10 +18,10 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -32,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -42,31 +43,43 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AccessibilitySettingsTest {
+    private static final String VIBRATION_PREFERENCE_SCREEN = "vibration_preference_screen";
+    private static final String ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE =
+            "accessibility_content_timeout_preference_fragment";
+    private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
+            "accessibility_control_timeout_preference_fragment";
+
+    private Context mContext;
+    private ContentResolver mContentResolver;
+    private AccessibilitySettings mSettings;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
+        mContentResolver = mContext.getContentResolver();
+        mSettings = spy(new AccessibilitySettings());
+        doReturn(mContext).when(mSettings).getContext();
+    }
 
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
-        final Context context = RuntimeEnvironment.application;
         final List<String> niks = AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER
-            .getNonIndexableKeys(context);
+            .getNonIndexableKeys(mContext);
         final List<String> keys = new ArrayList<>();
 
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.accessibility_settings));
+        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings));
 
         assertThat(keys).containsAllIn(niks);
     }
 
     @Test
     public void testUpdateVibrationSummary_shouldUpdateSummary() {
-        MockitoAnnotations.initMocks(this);
-        final Context mContext = RuntimeEnvironment.application;
-        final AccessibilitySettings mSettings = spy(new AccessibilitySettings());
-
         final Preference mVibrationPreferenceScreen = new Preference(mContext);
-        doReturn(mVibrationPreferenceScreen).when(mSettings).findPreference(anyString());
+        doReturn(mVibrationPreferenceScreen).when(mSettings).findPreference(
+                VIBRATION_PREFERENCE_SCREEN);
 
-        doReturn(mContext).when(mSettings).getContext();
-
-        mVibrationPreferenceScreen.setKey("vibration_preference_screen");
+        mVibrationPreferenceScreen.setKey(VIBRATION_PREFERENCE_SCREEN);
 
         Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
@@ -80,5 +93,59 @@ public class AccessibilitySettingsTest {
         assertThat(mVibrationPreferenceScreen.getSummary()).isEqualTo(
                 VibrationIntensityPreferenceController.getIntensityString(mContext,
                         Vibrator.VIBRATION_INTENSITY_OFF));
+    }
+
+    @Test
+    public void testUpdateAccessibilityTimeoutSummary_shouldUpdateSummary() {
+        String[] testingValues = {null, "0", "10000", "30000", "60000", "120000"};
+        int[] exceptedResIds = {R.string.accessibility_timeout_default,
+                R.string.accessibility_timeout_default,
+                R.string.accessibility_timeout_10secs,
+                R.string.accessibility_timeout_30secs,
+                R.string.accessibility_timeout_1min,
+                R.string.accessibility_timeout_2mins
+        };
+
+        for (int i = 0; i < testingValues.length; i++) {
+            Settings.Secure.putString(mContentResolver,
+                    Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, testingValues[i]);
+
+            verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE,
+                    exceptedResIds[i]);
+
+            Settings.Secure.putString(mContentResolver,
+                    Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, testingValues[i]);
+
+            verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE,
+                    exceptedResIds[i]);
+        }
+    }
+
+    @Test
+    public void testUpdateAccessibilityControlTimeoutSummary_invalidData_shouldUpdateSummary() {
+        String[] testingValues = {"-9009", "98277466643738977979666555536362343", "Hello,a prank"};
+
+        for (String value : testingValues) {
+            Settings.Secure.putString(mContentResolver,
+                    Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, value);
+
+            verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE,
+                    R.string.accessibility_timeout_default);
+
+            Settings.Secure.putString(mContentResolver,
+                    Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, value);
+
+            verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE,
+                    R.string.accessibility_timeout_default);
+        }
+    }
+
+    private void verifyAccessibilityTimeoutSummary(String preferenceKey, int resId) {
+        final Preference preference = new Preference(mContext);
+        doReturn(preference).when(mSettings).findPreference(preferenceKey);
+        preference.setKey(preferenceKey);
+        mSettings.updateAccessibilityTimeoutSummary(mContentResolver, preference);
+
+        assertThat(preference.getSummary()).isEqualTo(mContext.getResources().getString(resId));
     }
 }
