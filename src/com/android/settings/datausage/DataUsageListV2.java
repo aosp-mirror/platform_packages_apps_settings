@@ -15,6 +15,8 @@
 package com.android.settings.datausage;
 
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+import static android.net.NetworkStatsHistory.FIELD_RX_BYTES;
+import static android.net.NetworkStatsHistory.FIELD_TX_BYTES;
 import static android.net.TrafficStats.UID_REMOVED;
 import static android.net.TrafficStats.UID_TETHERING;
 
@@ -59,7 +61,6 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.net.ChartDataLoaderCompat;
 import com.android.settingslib.net.NetworkCycleChartDataLoader;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkStatsSummaryLoader;
@@ -85,6 +86,9 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
     private static final String KEY_USAGE_AMOUNT = "usage_amount";
     private static final String KEY_CHART_DATA = "chart_data";
     private static final String KEY_APPS_GROUP = "apps_group";
+    private static final String KEY_TEMPLATE = "template";
+    private static final String KEY_APP = "app";
+    private static final String KEY_FIELDS = "fields";
 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_SUMMARY = 3;
@@ -241,7 +245,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         // TODO: consider chaining two loaders together instead of reloading
         // network history when showing app detail.
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoaderCompat.buildArgs(mTemplate, null), mNetworkCycleDataCallbacks);
+                buildArgs(mTemplate), mNetworkCycleDataCallbacks);
 
         // detail mode can change visible menus, invalidate
         getActivity().invalidateOptionsMenu();
@@ -259,6 +263,14 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         final int secondaryColor = Color.argb(127, Color.red(seriesColor), Color.green(seriesColor),
                 Color.blue(seriesColor));
         mChart.setColors(seriesColor, secondaryColor);
+    }
+
+    private Bundle buildArgs(NetworkTemplate template) {
+        final Bundle args = new Bundle();
+        args.putParcelable(KEY_TEMPLATE, template);
+        args.putParcelable(KEY_APP, null);
+        args.putInt(KEY_FIELDS, FIELD_RX_BYTES | FIELD_TX_BYTES);
+        return args;
     }
 
     /**

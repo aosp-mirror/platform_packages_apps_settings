@@ -21,7 +21,6 @@ import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
@@ -32,7 +31,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.AppDataUsageV2;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settingslib.AppItem;
@@ -56,9 +54,6 @@ public class AppDataUsagePreferenceControllerV2 extends AppInfoPreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.DATA_USAGE_V2)) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         return isBandwidthControlEnabled() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 

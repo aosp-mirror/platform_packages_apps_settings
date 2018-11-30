@@ -34,7 +34,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,7 +48,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.specialaccess.pictureinpicture
         .PictureInPictureDetailPreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -141,11 +139,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final String packageName = getPackageName();
         use(TimeSpentInAppPreferenceController.class).setPackageName(packageName);
 
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.DATA_USAGE_V2)) {
-            use(AppDataUsagePreferenceControllerV2.class).setParentFragment(this);
-        } else {
-            use(AppDataUsagePreferenceController.class).setParentFragment(this);
-        }
+        use(AppDataUsagePreferenceControllerV2.class).setParentFragment(this);
         final AppInstallerInfoPreferenceController installer =
                 use(AppInstallerInfoPreferenceController.class);
         installer.setPackageName(packageName);

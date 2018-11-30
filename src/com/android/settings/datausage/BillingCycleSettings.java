@@ -105,7 +105,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         mDataUsageController = new DataUsageController(context);
 
         Bundle args = getArguments();
-        mNetworkTemplate = args.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE);
+        mNetworkTemplate = args.getParcelable(DataUsageListV2.EXTRA_NETWORK_TEMPLATE);
         if (mNetworkTemplate == null) {
             mNetworkTemplate = DataUsageUtils.getDefaultTemplate(context,
                 DataUsageUtils.getDefaultSubscriptionId(context));

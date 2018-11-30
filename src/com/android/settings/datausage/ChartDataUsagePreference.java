@@ -16,14 +16,12 @@ package com.android.settings.datausage;
 
 import android.content.Context;
 import android.net.NetworkPolicy;
-import android.net.NetworkStatsHistory;
 import android.net.TrafficStats;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
-import android.util.FeatureFlagUtils;
 import android.util.SparseIntArray;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,7 +30,6 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleData;
@@ -51,8 +48,6 @@ public class ChartDataUsagePreference extends Preference {
     private NetworkPolicy mPolicy;
     private long mStart;
     private long mEnd;
-    @Deprecated
-    private NetworkStatsHistory mNetwork;
     private NetworkCycleChartData mNetworkCycleChartData;
     private int mSecondaryColor;
     private int mSeriesColor;
@@ -69,24 +64,14 @@ public class ChartDataUsagePreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         final UsageView chart = (UsageView) holder.findViewById(R.id.data_usage);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
-            if (mNetworkCycleChartData == null) {
-                return;
-            }
-        } else {
-            if (mNetwork == null) {
-                return;
-            }
+        if (mNetworkCycleChartData == null) {
+            return;
         }
 
         final int top = getTop();
         chart.clearPaths();
         chart.configureGraph(toInt(mEnd - mStart), top);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
-            calcPoints(chart, mNetworkCycleChartData.getUsageBuckets());
-        } else {
-            calcPoints(chart);
-        }
+        calcPoints(chart, mNetworkCycleChartData.getUsageBuckets());
         chart.setBottomLabels(new CharSequence[] {
                 Utils.formatDateRange(getContext(), mStart, mStart),
                 Utils.formatDateRange(getContext(), mEnd, mEnd),
@@ -96,56 +81,10 @@ public class ChartDataUsagePreference extends Preference {
     }
 
     public int getTop() {
-        long totalData = 0;
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_V2)) {
-            totalData = mNetworkCycleChartData.getTotalUsage();
-        } else {
-            NetworkStatsHistory.Entry entry = null;
-            final int start = mNetwork.getIndexBefore(mStart);
-            final int end = mNetwork.getIndexAfter(mEnd);
-
-            for (int i = start; i <= end; i++) {
-                entry = mNetwork.getValues(i, entry);
-
-                // increment by current bucket total
-                totalData += entry.rxBytes + entry.txBytes;
-            }
-        }
-        long policyMax = mPolicy != null ? Math.max(mPolicy.limitBytes, mPolicy.warningBytes) : 0;
+        final long totalData = mNetworkCycleChartData.getTotalUsage();
+        final long policyMax =
+            mPolicy != null ? Math.max(mPolicy.limitBytes, mPolicy.warningBytes) : 0;
         return (int) (Math.max(totalData, policyMax) / RESOLUTION);
-    }
-
-    @Deprecated
-    @VisibleForTesting
-    void calcPoints(UsageView chart) {
-        SparseIntArray points = new SparseIntArray();
-        NetworkStatsHistory.Entry entry = null;
-
-        long totalData = 0;
-
-        final int start = mNetwork.getIndexAfter(mStart);
-        final int end = mNetwork.getIndexAfter(mEnd);
-        if (start < 0) return;
-
-        points.put(0, 0);
-        for (int i = start; i <= end; i++) {
-            entry = mNetwork.getValues(i, entry);
-
-            final long startTime = entry.bucketStart;
-            final long endTime = startTime + entry.bucketDuration;
-
-            // increment by current bucket total
-            totalData += entry.rxBytes + entry.txBytes;
-
-            if (i == 0) {
-                points.put(toInt(startTime - mStart) - 1, -1);
-            }
-            points.put(toInt(startTime - mStart + 1), (int) (totalData / RESOLUTION));
-            points.put(toInt(endTime - mStart), (int) (totalData / RESOLUTION));
-        }
-        if (points.size() > 1) {
-            chart.addPath(points);
-        }
     }
 
     @VisibleForTesting
@@ -220,25 +159,12 @@ public class ChartDataUsagePreference extends Preference {
         notifyChanged();
     }
 
-    @Deprecated
-    public void setVisibleRange(long start, long end) {
-        mStart = start;
-        mEnd = end;
-        notifyChanged();
-    }
-
     public long getInspectStart() {
         return mStart;
     }
 
     public long getInspectEnd() {
         return mEnd;
-    }
-
-    @Deprecated
-    public void setNetworkStats(NetworkStatsHistory network) {
-        mNetwork = network;
-        notifyChanged();
     }
 
     public void setNetworkCycleData(NetworkCycleChartData data) {
