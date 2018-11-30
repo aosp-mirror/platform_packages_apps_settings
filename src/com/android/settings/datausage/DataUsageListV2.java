@@ -187,28 +187,6 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         super.onResume();
         mDataStateListener.setListener(true, mSubId, getContext());
         updateBody();
-
-        // kick off background task to update stats
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    // wait a few seconds before kicking off
-                    Thread.sleep(2 * DateUtils.SECOND_IN_MILLIS);
-                    services.mStatsService.forceUpdate();
-                } catch (InterruptedException e) {
-                } catch (RemoteException e) {
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                if (isAdded()) {
-                    updateBody();
-                }
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
