@@ -251,13 +251,13 @@
     <string name="band_mode_failed" msgid="1495968863884716379">"Ezin izan da egin"</string>
     <string name="band_mode_succeeded" msgid="2701016190055887575">"Ongi"</string>
     <string name="sdcard_changes_instructions" msgid="4482324130377280131">"Aldaketek USB kablea berriro konektatzean izango dute eragina."</string>
-    <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"Gaitu USB memoria masiboa"</string>
+    <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"Gaitu USB biltegiratze masiboa"</string>
     <string name="sdcard_settings_total_bytes_label" msgid="9184160745785062144">"Byteak, guztira:"</string>
     <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="1636218515775929394">"Ez da USB memoria muntatu."</string>
     <string name="sdcard_settings_not_present_status" product="default" msgid="2048419626134861599">"Ez dago SD txartelik."</string>
     <string name="sdcard_settings_available_bytes_label" msgid="763232429899373001">"Byte erabilgarriak:"</string>
-    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="7993410985895217054">"Memoria masiboko gailu gisa erabiltzen ari da USB memoria."</string>
-    <string name="sdcard_settings_mass_storage_status" product="default" msgid="2742075324087038036">"SD txartela memoria masiboko gailu gisa erabiltzen ari da."</string>
+    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="7993410985895217054">"USB memoria bilt. masibo gisa."</string>
+    <string name="sdcard_settings_mass_storage_status" product="default" msgid="2742075324087038036">"SD txartela biltegiratze masiboko gailu gisa erabiltzen ari da."</string>
     <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="5128923500235719226">"Segurtasunez ken daiteke USB memoria."</string>
     <string name="sdcard_settings_unmounted_status" product="default" msgid="666233604712540408">"Segurtasunez ken daiteke SD txartela."</string>
     <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"USB mem. erabili bitartean kendu da"</string>
@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automatikoa"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz-ko banda"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 GHz-ko banda"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5,0 GHz-ko banda hobetsia"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Aukeratu gutxienez banda bat Wi-Fi sare publikorako:"</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturalak"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Nabarmenduak"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturatuak"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatikoa"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Doigarria"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Erabili kolore errealistak soilik"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Doitu kolore bizi eta errealisten artean"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Aldatu orientazioa automatikoki tableta biratzean"</string>
@@ -2251,7 +2252,7 @@
     <string name="power_unaccounted" msgid="709925017022660740">"Askotarikoak"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"Uste baino gutxiago erabili da"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"PUZaren erabilera, guztira"</string>
-    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPUaren aurreko planoa"</string>
+    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"PUZaren aurreko planoa"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Mantendu aktibo"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_wifi_running" msgid="3134357198266380400">"Wi-Fia exekutatzen"</string>
@@ -3163,7 +3164,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Audioa eta dardara desaktibatuta, baina baimendu <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> eta <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Audioa eta dardara desaktibatuta, baina baimendu <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> eta <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mezuak, gertaerak eta abisuak"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"\"Ez molestatu\" modua aktibatuta dagoenean, mezu, abisu eta gertaeren audioa eta dardara desaktibatuta egongo dira, goian baimendutako elementuetan izan ezik. Ezarpenak alda ditzakezu lagunak, familia edo beste kontaktuak zurekin harremanetan jarri ahal daitezen."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"\"Ez molestatu\" modua aktibatuta dagoenean, mezu, abisu eta gertaeren audioa eta dardara desaktibatuta egongo dira, goian baimendutako elementuetan izan ezik. Ezarpenak alda ditzakezu lagunak, familia edo beste kontaktuak zurekin harremanetan jarri ahal daitezen."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Eginda"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Ezarpenak"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Ez egin soinurik eta ez erakutsi ezer jakinarazpenak jasotzean"</string>
@@ -4071,7 +4072,7 @@
     <string name="storage_other_apps" msgid="5524321740031718083">"Beste aplikazio batzuk"</string>
     <string name="storage_files" msgid="8581083146777364063">"Fitxategiak"</string>
     <string name="storage_size_large_alternate" msgid="3395208658399637645">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">^2</xliff:g>"</font></small>""</string>
-    <string name="storage_volume_total" msgid="3499221850532701342">"Memoria osotik (<xliff:g id="TOTAL">%1$s</xliff:g>) erabilitakoa"</string>
+    <string name="storage_volume_total" msgid="3499221850532701342">"/ <xliff:g id="TOTAL">%1$s</xliff:g> erabilita"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"erabilita"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Garbitu aplikazioa"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Zuzeneko aplikazio hau kendu nahi duzu?"</string>
@@ -4151,4 +4152,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Sarearen xehetasunak"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Mugikorreko aplikazioek gailuaren izena ikus dezakete. Halaber, jendeak ere ikus dezake Bluetooth gailuetara konektatzean edo Wi-Fi sare publiko bat konfiguratzean."</string>
     <string name="devices_title" msgid="7701726109334110391">"Gailuak"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Lehenetsia"</string>
 </resources>

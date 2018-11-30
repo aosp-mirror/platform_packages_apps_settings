@@ -43,11 +43,7 @@
         android:title="@string/wifi_hotspot_auto_off_title"
         android:summary="@string/wifi_hotspot_auto_off_summary" />
 
-    <com.android.settings.widget.HotspotApBandSelectionPreference
+    <ListPreference
         android:key="wifi_tether_network_ap_band"
-        android:title="@string/wifi_hotspot_ap_band_title"
-        android:dialogLayout="@layout/hotspot_ap_band_selection_dialog"
-        android:dialogTitle="@string/wifi_hotspot_ap_band_title"
-        android:negativeButtonText="@string/cancel"
-        android:positiveButtonText="@string/apply" />
+        android:title="@string/wifi_hotspot_ap_band_title" />
 </PreferenceScreen>

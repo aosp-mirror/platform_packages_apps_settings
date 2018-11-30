@@ -855,6 +855,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"ସ୍ୱତଃ"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz ବ୍ୟାଣ୍ଡ"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5 GHz ବ୍ୟାଣ୍ଡ"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5.0 GHz ବ୍ୟାଣ୍ଡ ପ୍ରାଥମିକତା ଦିଆଗଲା"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"2.4 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"ୱାଇ-ଫାଇ ହଟସ୍ପଟ୍ ପାଇଁ ଅତିକମ୍‌ରେ ଗୋଟିଏ ବ୍ୟାଣ୍ଡକୁ ଚୟନ କରନ୍ତୁ:"</string>
@@ -944,8 +945,7 @@
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"ହଟ୍‌ସ୍ପଟ୍‌ ମାଧ୍ୟମରେ ଏହି ଟାବ୍‌ଲେଟ୍‌ର ଇଣ୍ଟର୍‌ନେଟ୍‌ ସଂଯୋଗ ଶେୟାର୍‌ କରୁଛି"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"ହଟସ୍ପଟ୍‌ ମାଧ୍ୟମରେ ଏହି ଫୋନ‌ର ଇଣ୍ଟର୍ନେଟ୍‌ ସଂଯୋଗ ଶେୟାର୍‌ କରୁଛି"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"ଆପ୍‍ କଣ୍ଟେଣ୍ଟ ଶେୟର୍ କରୁଛି। ଇଣ୍ଟରନେଟ୍‌ ସଂଯୋଜନା ଶେୟାର କରିବାକୁ, ହଟ୍‌ସ୍ପଟ୍‌ ଅଫ୍‌ କରି ଅନ୍‌ କରନ୍ତୁ"</string>
-    <!-- no translation found for wifi_hotspot_no_password_subtext (353306131026431089) -->
-    <skip />
+    <string name="wifi_hotspot_no_password_subtext" msgid="353306131026431089">"କୌଣସି ପାସ୍‌ୱାର୍ଡ୍‌ ସେଭ୍‌ ହୋଇନାହିଁ"</string>
     <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"ହଟସ୍ପଟ୍‌ ନାମ"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ଅନ୍‌ ହେଉଛି..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ସହ ଅନ୍ୟ ଡିଭାଇସ୍‌ଗୁଡ଼ିକ ସଂଯୁକ୍ତ ହୋଇପାରିବ"</string>
@@ -1067,7 +1067,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ପ୍ରାକୃତିକ"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"ବର୍ଦ୍ଧିତ"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"ସାଚୁରେଟେଡ୍"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"ସ୍ଵଚାଳିତ"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"ଖାପ ଖୁଆଇବା"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"କେବଳ ସଠିକ୍ ରଙ୍ଗକୁ ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"ବିଭିନ୍ନ ଓ ସଠିକ୍ ରଙ୍ଗ ମଧ୍ୟରେ ଆଡଜଷ୍ଟ କରନ୍ତୁ"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ଟାବ୍‌ଲେଟ୍‌କୁ ବୁଲାଇଲେ ଅଟୋମେଟିକାଲୀ ଓରିଏଣ୍ଟେଶନ୍‌କୁ ବଦଳାନ୍ତୁ"</string>
@@ -3163,10 +3163,9 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"ମ୍ୟୁଟ୍ ହୋ‍ଇଛି, କିନ୍ତୁ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> ଓ <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>କୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"ମ୍ୟୁଟ୍ ହୋ‍ଇଛି, କିନ୍ତୁ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> ଓ <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>କୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"ମେସେଜ୍, ଇଭେଣ୍ଟ ଓ ରିମାଇଣ୍ଡର୍"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"ଯେତେବେଳେ ’ବିରକ୍ତ କରନ୍ତୁ ନାହିଁ’ ଅନ୍ ଥିବ, ସେତେବେଳେ ଉପରେ ଆପଣ ଅନୁମତି ଦେଇଥିବା ଆଇଟମ୍ ବ୍ୟତୀତ ମେସେଜ୍, ରିମାଇଣ୍ଡର୍ ଓ ଇଭେଣ୍ଟ ମ୍ୟୁଟ୍ ହୋ‍ଇଯିବ। ସାଙ୍ଗ, ପରିବାର ଲୋକେ କିମ୍ବା ଅନ୍ୟାନ୍ୟ ଯୋଗାଯୋଗ ଆପଣଙ୍କୁ ସମ୍ପର୍କ କରିବା ପାଇଁ ଆପଣ ସେଟିଙ୍ଗକୁ ଆଡଜଷ୍ଟ କରିପାରିବେ।"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"ଯେତେବେଳେ ’ଡୁ ନଟ୍‍ ଡିଷ୍ଟ୍ରବ୍‍’ ଅନ୍ ଥିବ, ସେତେବେଳେ ଉପରେ ଆପଣ ଅନୁମତି ଦେଇଥିବା ଉପରୋକ୍ତ ଆଇଟମ୍ ବ୍ୟତୀତ ମେସେଜ୍, ରିମାଇଣ୍ଡର୍ ଓ ଇଭେଣ୍ଟ ମ୍ୟୁଟ୍ ହୋ‍ଇଯିବ। ନିଜର ସାଙ୍ଗ, ପରିବାର କିମ୍ବା ଅନ୍ୟ କଣ୍ଟାକ୍ଟଗୁଡ଼ିକ ଆପଣଙ୍କ ପାଖରେ ପହଞ୍ଚିବା ପାଇଁ ଆପଣ ସେଟିଙ୍ଗକୁ ବ୍ୟବହାର ଉପଯୋଗୀ କରିପାରିବେ।"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"ହୋ‍ଇଗଲା"</string>
-    <!-- no translation found for zen_onboarding_settings (9046451821239946868) -->
-    <skip />
+    <string name="zen_onboarding_settings" msgid="9046451821239946868">"ସେଟିଂ"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"ବିଜ୍ଞପ୍ତି ଆସିଲେ କୌଣସି ଭିଜୁଆଲ୍ ଦେଖାଯିବ ନାହିଁ କିମ୍ବା ସାଉଣ୍ଡ୍‍ ବାହାରିବ ନାହିଁ"</string>
     <string name="zen_onboarding_current_setting_title" msgid="776426065129609376">"ବିଜ୍ଞପ୍ତି ଆସିଲେ କୌଣସି ସାଉଣ୍ଡ ନହେଉ"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="6293026064871880706">"ଆପଣ ବିଜ୍ଞପ୍ତିକୁ ଦେଖି କିମ୍ବା ଶୁଣିପାରିବେ ନାହିଁ। ତାରାଙ୍କିତ ଯୋଗାଯୋଗରୁ ଆସିଥିବା କଲ୍ ଏବଂ ପୁଣି କଲ୍ କରୁଥିବା କଲର୍‍ଙ୍କୁ ଅନୁମତି ଦିଆଯାଇଛି।"</string>
@@ -3228,10 +3227,8 @@
     <string name="notification_channel_summary_high" msgid="2085017556511003283">"ଜରୁରୀ ମହତ୍ତ୍ୱପୂର୍ଣ୍ଣ"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"ବିଜ୍ଞପ୍ତିଗୁଡିକ ଦେଖାନ୍ତୁ"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"ବିଜ୍ଞପ୍ତି ସହାୟକ"</string>
-    <!-- no translation found for notifications_sent_daily (3584506541352710975) -->
-    <skip />
-    <!-- no translation found for notifications_sent_weekly (1030525736746720584) -->
-    <skip />
+    <string name="notifications_sent_daily" msgid="3584506541352710975">"ପ୍ରତି ଦିନ ~<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="notifications_sent_weekly" msgid="1030525736746720584">"ପ୍ରତି ସପ୍ତାହରେ ~<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="notifications_sent_never" msgid="1001964786456700536">"ଆଦୌ ନୁହେଁ"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"ବିଜ୍ଞପ୍ତି ଆକ୍ସେସ୍"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"କାର୍ଯ୍ୟ ପ୍ରୋଫାଇଲ୍‌ ବିଜ୍ଞପ୍ତିଗୁଡିକୁ ଅକସେସ୍‌ ଅବରୋଧିତ"</string>
@@ -4134,8 +4131,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="7942268646980694224">"ୱାଇ-ଫାଇକୁ ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ଆପ୍‌କୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8434262633905502679">"ୱାଇ-ଫାଇକୁ ଚାଲୁ କରିବା କିମ୍ବା ବନ୍ଦ କରିବା, ୱାଇ-ଫାଇ ନେଟୱର୍କକୁ ଖୋଜିବା ଓ କନେକ୍ଟ କରିବା, ନେଟୱର୍କକୁ ଯୋଡ଼ିବା କିମ୍ବା କାଢ଼ିଦେବା କିମ୍ବା କେବଳ ସୀମିତ କ୍ଷେତ୍ରରେ କାମ କରୁଥିବା ହଟସ୍ପଟ୍‌କୁ ଚାଲୁ କରିବା ପାଇଁ ଏହି ଆପ୍‌କୁ ଅନୁମତି ଦେବା"</string>
     <string name="media_output_title" msgid="115223550977351699">"ମିଡିଆ ଚଲାନ୍ତୁ"</string>
-    <!-- no translation found for media_output_default_summary (8115153381240348279) -->
-    <skip />
+    <string name="media_output_default_summary" msgid="8115153381240348279">"ଏହି ଡିଭାଇସ୍‍"</string>
     <string name="media_output_summary" product="default" msgid="6839458453831567167">"ଫୋନ୍"</string>
     <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"ଟାବଲେଟ୍‌"</string>
     <string name="media_output_summary" product="device" msgid="5677420090811068649">"ଡିଭାଇସ୍"</string>
@@ -4158,4 +4154,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ନେଟୱର୍କ୍‌ର ବିବରଣୀ"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"ଆପଣଙ୍କ ଡିଭାଇସ୍‌ରେ ଥିବା ଆପ୍‌ଗୁଡ଼ିକୁ ଆପଣଙ୍କର ଡିଭାଇସ୍‍ ନାମ ଦେଖାଯାଉଛି। ବ୍ଲୁ-ଟୂଥ୍‍ ଡିଭାଇସ୍‍ ସହ ଯୋଡ଼ି ହେବାବେଳେ କିମ୍ୱା ଏକ ୱାଇ-ଫାଇ ହଟସ୍ପଟ୍ ସେଟ୍ କରିବା ସମୟରେ, ଏହା ଅନ୍ୟ ଲୋକମାନଙ୍କୁ ମଧ୍ୟ ଦେଖାଦେଇପାରେ।"</string>
     <string name="devices_title" msgid="7701726109334110391">"ଡିଭାଇସ୍‌"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"ପ୍ରାକ୍‌-ନିର୍ଦ୍ଧାରିତ"</string>
 </resources>

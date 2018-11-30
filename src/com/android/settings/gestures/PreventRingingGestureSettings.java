@@ -58,7 +58,7 @@ public class PreventRingingGestureSettings extends DashboardFragment {
 
     @Override
     public int getHelpResource() {
-        return 0;
+        return R.string.help_uri_prevent_ringing_gesture;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

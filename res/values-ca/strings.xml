@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automàtica"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Preferència per la banda de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Tria almenys una banda per al punt d\'accés Wi-Fi:"</string>
@@ -974,8 +975,8 @@
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Preferència en itinerància"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Preferència per a la Wi-Fi"</item>
-    <item msgid="1335127656328817518">"Preferència per a dades mòbils"</item>
+    <item msgid="2124257075906188844">"Preferència per la Wi-Fi"</item>
+    <item msgid="1335127656328817518">"Preferència per dades mòbils"</item>
     <item msgid="3132912693346866895">"Només Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -989,8 +990,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Preferència per a la Wi-Fi"</item>
-    <item msgid="5074515506087318555">"Preferència per a dades mòbils"</item>
+    <item msgid="5782108782860004851">"Preferència per la Wi-Fi"</item>
+    <item msgid="5074515506087318555">"Preferència per dades mòbils"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natural"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Millorat"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturat"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automàtic"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Automàtic"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Fes servir només colors precisos"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Ajusta entre colors vius i precisos"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Canvia l\'orientació automàticament en girar la tauleta"</string>
@@ -1713,8 +1714,8 @@
     <string name="show_running_services" msgid="5736278767975544570">"Serveis en execució"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Processos a la memòria cau"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplicació en casos d\'emergència"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"Restableix preferències d\'aplicacions"</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Restablir preferències d\'aplicacions?"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Restableix les preferències d\'aplicacions"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Restablir les preferències d\'aplicacions?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Es restabliran les preferències de:\n\n "<li>"Aplicacions desactivades"</li>\n" "<li>"Notificacions d\'aplicacions desactivades"</li>\n" "<li>"Aplicacions predeterminades"</li>\n" "<li>"Restriccions de dades en segon pla d\'aplicacions"</li>\n" "<li>"Restriccions de permisos"</li>\n\n" No es perdran les dades de les aplicacions."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Restableix aplicacions"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Gestiona l\'espai"</string>
@@ -3163,7 +3164,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Silenciat, però permet <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> i <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Silenciat, però permet <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> i <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Missatges, esdeveniments i recordatoris"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Quan actives el mode No molestis, els missatges, els recordatoris i els esdeveniments se silencien, excepte aquells elements que hagis permès més amunt. Pots ajustar la configuració dels missatges per permetre que amics, familiars i altres contactes puguin contactar amb tu."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Quan actives el mode No molestis, els missatges, els recordatoris i els esdeveniments se silencien, excepte aquells elements que hagis permès més amunt. Pots ajustar la configuració dels missatges per permetre que amics, familiars i altres contactes puguin contactar amb tu."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Fet"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Configuració"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Notificacions sense so ni elements visuals"</string>
@@ -4151,4 +4152,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalls de la xarxa"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"El nom del dispositiu és visible per a les aplicacions del telèfon. També el poden veure altres persones si el connectes a un dispositiu Bluetooth o si configures un punt d\'accés Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositius"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Predeterminat"</string>
 </resources>
