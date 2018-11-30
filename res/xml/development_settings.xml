@@ -59,10 +59,12 @@
             android:entries="@array/hdcp_checking_titles"
             android:entryValues="@array/hdcp_checking_values" />
 
-        <SwitchPreference
+        <ListPreference
             android:key="bt_hci_snoop_log"
             android:title="@string/bt_hci_snoop_log"
-            android:summary="@string/bt_hci_snoop_log_summary" />
+            android:dialogTitle="@string/bt_hci_snoop_log_summary"
+            android:entries="@array/bt_hci_snoop_log_entries"
+            android:entryValues="@array/bt_hci_snoop_log_values" />
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="oem_unlock_enable"
