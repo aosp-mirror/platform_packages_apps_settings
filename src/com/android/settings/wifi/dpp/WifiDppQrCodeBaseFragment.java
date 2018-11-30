@@ -22,6 +22,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -29,13 +32,37 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 
+/**
+ * There are below 4 fragments for Wi-Fi DPP UI flow, to reduce redundant code of UI components,
+ * this parent fragment instantiates all UI components and provides setting APIs for them.
+ *
+ * {@code WifiDppQrCodeScannerFragment}
+ * {@code WifiDppQrCodeGeneratorFragment}
+ * {@code WifiDppChooseSavedWifiNetworkFragment}
+ * {@code WifiDppAddDeviceFragment}
+ */
 public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     private TextView mTitle;
     private TextView mDescription;
-    private SurfaceView mPreviewView;
-    private TextView mErrorMessage; //optional, view used to surface connectivity errors to the user
-    private Button mButtonLeft;
-    private Button mButtonRight;
+
+    private SurfaceView mPreviewView;       //optional, for WifiDppQrCodeScannerFragment
+    private ImageView mDecorateViiew;       //optional, for WifiDppQrCodeScannerFragment
+    private TextView mErrorMessage;         //optional, for WifiDppQrCodeScannerFragment
+
+    private ImageView mBarcodeView;         //optional, for WifiDppQrCodeGeneratorFragment
+
+    private ListView mSavedWifiNetworkList; //optional, for WifiDppChooseSavedWifiNetworkFragment
+
+    private ProgressBar mProgressBar;       //optional, for WifiDppAddDeviceFragment
+    private ImageView mWifiApPictureView;   //optional, for WifiDppAddDeviceFragment
+    private TextView mChooseDifferentNetwork;//optional, for WifiDppAddDeviceFragment
+
+    private Button mButtonLeft;             //optional, for WifiDppQrCodeScannerFragment,
+                                            //              WifiDppChooseSavedWifiNetworkFragment,
+                                            //              WifiDppAddDeviceFragment
+    private Button mButtonRight;            //optional, for WifiDppQrCodeScannerFragment,
+                                            //              WifiDppChooseSavedWifiNetworkFragment,
+                                            //              WifiDppAddDeviceFragment
 
     abstract protected int getLayout();
 
@@ -61,8 +88,19 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     private void initView(View view) {
         mTitle = view.findViewById(R.id.title);
         mDescription = view.findViewById(R.id.description);
+
         mPreviewView = view.findViewById(R.id.preview_view);
+        mDecorateViiew = view.findViewById(R.id.decorate_view);
         mErrorMessage = view.findViewById(R.id.error_message);
+
+        mBarcodeView = view.findViewById(R.id.barcode_view);
+
+        mSavedWifiNetworkList = view.findViewById(R.id.saved_wifi_network_list);
+
+        mProgressBar = view.findViewById(R.id.progress_bar);
+        mWifiApPictureView = view.findViewById(R.id.wifi_ap_picture_view);
+        mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
+
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonRight = view.findViewById(R.id.button_right);
     }
@@ -75,33 +113,76 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
         mDescription.setText(description);
     }
 
+    /** optional, for WifiDppQrCodeScannerFragment */
     protected void setErrorMessage(String errorMessage) {
         if (mErrorMessage != null) {
             mErrorMessage.setText(errorMessage);
         }
     }
 
+    /**
+     * optional, for WifiDppQrCodeScannerFragment,
+     *               WifiDppChooseSavedWifiNetworkFragment,
+     *               WifiDppAddDeviceFragment
+     */
     protected void setLeftButtonText(String text) {
-        mButtonLeft.setText(text);
+        if (mButtonLeft != null) {
+            mButtonLeft.setText(text);
+        }
     }
 
+    /**
+     * optional, for WifiDppQrCodeScannerFragment,
+     *               WifiDppChooseSavedWifiNetworkFragment,
+     *               WifiDppAddDeviceFragment
+     */
     protected void setRightButtonText(String text) {
-        mButtonRight.setText(text);
+        if (mButtonRight != null) {
+            mButtonRight.setText(text);
+        }
     }
 
+    /**
+     * optional, for WifiDppQrCodeScannerFragment,
+     *               WifiDppChooseSavedWifiNetworkFragment,
+     *               WifiDppAddDeviceFragment
+     */
     protected void hideLeftButton() {
-        mButtonLeft.setVisibility(View.INVISIBLE);
+        if (mButtonLeft != null) {
+            mButtonLeft.setVisibility(View.INVISIBLE);
+        }
     }
 
+    /**
+     * optional, for WifiDppQrCodeScannerFragment,
+     *               WifiDppChooseSavedWifiNetworkFragment,
+     *               WifiDppAddDeviceFragment
+     */
     protected void hideRightButton() {
-        mButtonRight.setVisibility(View.INVISIBLE);
+        if (mButtonRight != null) {
+            mButtonRight.setVisibility(View.INVISIBLE);
+        }
     }
 
+    /**
+     * optional, for WifiDppQrCodeScannerFragment,
+     *               WifiDppChooseSavedWifiNetworkFragment,
+     *               WifiDppAddDeviceFragment
+     */
     protected void setLeftButtonOnClickListener(View.OnClickListener listener) {
-        mButtonLeft.setOnClickListener(listener);
+        if (mButtonLeft != null) {
+            mButtonLeft.setOnClickListener(listener);
+        }
     }
 
+    /**
+     * optional, for WifiDppQrCodeScannerFragment,
+     *               WifiDppChooseSavedWifiNetworkFragment,
+     *               WifiDppAddDeviceFragment
+     */
     protected void setRightButtonOnClickListener(View.OnClickListener listener) {
-        mButtonRight.setOnClickListener(listener);
+        if (mButtonRight != null) {
+            mButtonRight.setOnClickListener(listener);
+        }
     }
 }

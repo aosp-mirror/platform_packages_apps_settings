@@ -24,25 +24,9 @@
 
     <include layout="@layout/wifi_dpp_fragment_header"/>
 
-    <FrameLayout
+    <ListView android:id="@+id/saved_wifi_network_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <SurfaceView
-            android:id="@+id/preview_view"
-            android:layout_width="320dp"
-            android:layout_height="426dp"
-            android:layout_gravity="center"/>
-        <ImageView
-            android:id="@+id/decorate_view"
-            android:layout_width="320dp"
-            android:layout_height="426dp"
-            android:layout_gravity="center"/>
-    </FrameLayout>
-
-    <TextView android:id="@+id/error_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_height="wrap_content"/>
 
     <include layout="@layout/wifi_dpp_fragment_footer"
         android:gravity="center|bottom"/>

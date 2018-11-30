@@ -19,10 +19,7 @@ package com.android.settings.wifi.dpp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 
-import android.view.ViewGroup;
 import com.android.settings.R;
 
 public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment {

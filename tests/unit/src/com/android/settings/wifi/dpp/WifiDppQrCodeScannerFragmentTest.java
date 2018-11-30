@@ -47,8 +47,9 @@ public class WifiDppQrCodeScannerFragmentTest {
     }
 
     @Test
-    public void testLeftButton_shouldFinishActivityWithResultCodeCanceled() {
+    public void leftButton_shouldFinishActivityWithResultCodeCanceled() {
         onView(withText("Cancel")).perform(click());
+
         assertThat(mActivityRule.getActivityResult().getResultCode()).
                 isEqualTo(Activity.RESULT_CANCELED);
     }

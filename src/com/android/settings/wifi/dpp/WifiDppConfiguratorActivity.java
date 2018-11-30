@@ -67,25 +67,48 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_dpp_activity);
 
-        // Hide action bar
-        ActionBar action = getActionBar();
-        if (action != null) {
-            action.hide();
-        }
-
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         final int launchMode = getIntent().getIntExtra(EXTRA_LAUNCH_MODE,
             LaunchMode.LAUNCH_MODE_NOT_DEFINED.getMode());
         if (launchMode == LaunchMode.LAUNCH_MODE_QR_CODE_SCANNER.getMode()) {
-            WifiDppQrCodeScannerFragment scanFragment = new WifiDppQrCodeScannerFragment();
-            mFragmentTransaction.add(R.id.fragment_container, scanFragment);
-            mFragmentTransaction.commit();
+            addQrCodeScannerFragment();
+        } else if (launchMode == LaunchMode.LAUNCH_MODE_QR_CODE_GENERATOR.getMode()) {
+            addQrCodeGeneratorFragment();
+        } else if (launchMode == LaunchMode.LAUNCH_MODE_CHOOSE_SAVED_WIFI_NETWORK.getMode()) {
+            addChooseSavedWifiNetworkFragment();
         } else {
             Log.e(TAG, "Launch with an invalid mode extra");
             setResult(Activity.RESULT_CANCELED);
             finish();
         }
+    }
+
+    private void addQrCodeScannerFragment() {
+        WifiDppQrCodeScannerFragment fragment = new WifiDppQrCodeScannerFragment();
+        mFragmentTransaction.add(R.id.fragment_container, fragment);
+        mFragmentTransaction.addToBackStack(null);
+        mFragmentTransaction.commit();
+    }
+
+    private void addQrCodeGeneratorFragment() {
+        WifiDppQrCodeGeneratorFragment fragment = new WifiDppQrCodeGeneratorFragment();
+        mFragmentTransaction.add(R.id.fragment_container, fragment);
+        mFragmentTransaction.addToBackStack(null);
+        mFragmentTransaction.commit();
+    }
+
+    private void addChooseSavedWifiNetworkFragment() {
+        ActionBar action = getActionBar();
+        if (action != null) {
+            action.hide();
+        }
+
+        WifiDppChooseSavedWifiNetworkFragment fragment =
+                new WifiDppChooseSavedWifiNetworkFragment();
+        mFragmentTransaction.add(R.id.fragment_container, fragment);
+        mFragmentTransaction.addToBackStack(null);
+        mFragmentTransaction.commit();
     }
 }
