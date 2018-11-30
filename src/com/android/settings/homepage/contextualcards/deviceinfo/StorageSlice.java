@@ -60,7 +60,8 @@ public class StorageSlice implements CustomSliceable {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_homepage_storage);
         final String title = mContext.getString(R.string.storage_label);
-        final SliceAction primaryAction = new SliceAction(getPrimaryAction(), icon, title);
+        final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
+                ListBuilder.ICON_IMAGE, title);
         final PrivateStorageInfo info = getPrivateStorageInfo();
         return new ListBuilder(mContext, CustomSliceRegistry.STORAGE_SLICE_URI,
                 ListBuilder.INFINITY)

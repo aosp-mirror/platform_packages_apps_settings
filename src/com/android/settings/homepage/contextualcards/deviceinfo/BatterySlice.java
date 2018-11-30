@@ -64,7 +64,8 @@ public class BatterySlice implements CustomSliceable {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_battery);
         final CharSequence title = mContext.getText(R.string.power_usage_summary_title);
-        final SliceAction primarySliceAction = new SliceAction(getPrimaryAction(), icon, title);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
+                ListBuilder.ICON_IMAGE, title);
         final Slice slice = new ListBuilder(mContext, BATTERY_INFO_SLICE_URI, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
                 .setHeader(new ListBuilder.HeaderBuilder().setTitle(title))

@@ -61,7 +61,8 @@ public class DeviceInfoSlice implements CustomSliceable {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_info_outline_24dp);
         final String title = mContext.getString(R.string.device_info_label);
-        final SliceAction primaryAction = new SliceAction(getPrimaryAction(), icon, title);
+        final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
+                ListBuilder.ICON_IMAGE, title);
         return new ListBuilder(mContext, CustomSliceRegistry.DEVICE_INFO_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor((Utils.getColorAccentDefaultColor(mContext)))

@@ -54,10 +54,10 @@ public class EmergencyInfoSlice {
                         new Intent(ACTION_EDIT_EMERGENCY_INFO),
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
-        return SliceAction.create(
+        return SliceAction.createDeeplink(
                 pendingIntent,
                 IconCompat.createWithResource(context, R.drawable.empty_icon),
-                ListBuilder.SMALL_IMAGE,
+                ListBuilder.ICON_IMAGE,
                 context.getText(R.string.emergency_info_title));
     }
 }

@@ -194,12 +194,13 @@ public class WifiCallingSliceHelper {
                 .addRow(new RowBuilder()
                         .setTitle(mContext.getText(R.string.wifi_calling_settings_title))
                         .addEndItem(
-                                new SliceAction(
+                                SliceAction.createToggle(
                                         getBroadcastIntent(ACTION_WIFI_CALLING_CHANGED),
                                         null /* actionTitle */, isWifiCallingEnabled))
-                        .setPrimaryAction(new SliceAction(
+                        .setPrimaryAction(SliceAction.createDeeplink(
                                 getActivityIntent(ACTION_WIFI_CALLING_SETTINGS_ACTIVITY),
                                 icon,
+                                ListBuilder.ICON_IMAGE,
                                 mContext.getText(R.string.wifi_calling_settings_title))))
                 .build();
     }
@@ -283,9 +284,10 @@ public class WifiCallingSliceHelper {
         listBuilder.setHeader(new ListBuilder.HeaderBuilder()
                 .setTitle(mContext.getText(R.string.wifi_calling_mode_title))
                 .setSubtitle(getWifiCallingPreferenceSummary(currentWfcPref))
-                .setPrimaryAction(new SliceAction(
+                .setPrimaryAction(SliceAction.createDeeplink(
                         getActivityIntent(ACTION_WIFI_CALLING_SETTINGS_ACTIVITY),
                         icon,
+                        ListBuilder.ICON_IMAGE,
                         mContext.getText(R.string.wifi_calling_mode_title))));
 
         if (isWifiOnlySupported) {
@@ -322,7 +324,7 @@ public class WifiCallingSliceHelper {
                 IconCompat.createWithResource(mContext, R.drawable.radio_button_check);
         return new RowBuilder()
                 .setTitle(mContext.getText(preferenceTitleResId))
-                .setTitleItem(new SliceAction(getBroadcastIntent(action),
+                .setTitleItem(SliceAction.createToggle(getBroadcastIntent(action),
                         icon, mContext.getText(preferenceTitleResId), checked));
     }
 
@@ -470,8 +472,8 @@ public class WifiCallingSliceHelper {
                 .addRow(new RowBuilder()
                         .setTitle(title)
                         .setSubtitle(subtitle)
-                        .setPrimaryAction(new SliceAction(
-                                primaryActionIntent, icon,
+                        .setPrimaryAction(SliceAction.createDeeplink(
+                                primaryActionIntent, icon, ListBuilder.SMALL_IMAGE,
                                 title)))
                 .build();
     }

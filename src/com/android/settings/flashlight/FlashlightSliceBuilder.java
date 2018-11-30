@@ -83,7 +83,7 @@ public class FlashlightSliceBuilder {
                         .setTitle(context.getText(R.string.power_flashlight))
                         .setTitleItem(icon, ICON_IMAGE)
                         .setPrimaryAction(
-                                new SliceAction(toggleAction, null, isFlashlightEnabled(context))))
+                                SliceAction.createToggle(toggleAction, null, isFlashlightEnabled(context))))
                 .build();
     }
 
