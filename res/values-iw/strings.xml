@@ -878,6 +878,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"אוטומטי"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"‏פס של ‎2.4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"‏פס של ‎5.0 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"‏עדיפות לתדר 5.0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"‎2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"‎5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"‏יש לבחור תדר אחד לכל הפחות לנקודת Wi‑Fi לשיתוף אינטרנט:"</string>
@@ -1091,7 +1092,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"טבעי"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"מוגבר"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"רווי"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"אוטומטי"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"ניתן להתאמה"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"שימוש בצבעים מדויקים בלבד"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"כוונון בטווח של צבעים מלאי חיים עד צבעים מדויקים"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"שנה כיוון באופן אוטומטי בעת סיבוב הטאבלט"</string>
@@ -3119,7 +3120,7 @@
     <string name="notification_ringtone_title" msgid="4468722874617061231">"צליל ברירת המחדל להודעות"</string>
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"צליל שסיפקה האפליקציה"</string>
     <string name="notification_sound_default" msgid="565135733949733766">"צליל ברירת המחדל להודעות"</string>
-    <string name="alarm_ringtone_title" msgid="6344025478514311386">"צליל ברירת המחדל להתראה"</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"צליל לשעון מעורר"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"הפעלת רטט גם עבור שיחות"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"צלילים אחרים"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"צלילים של לוח חיוג"</string>
@@ -3239,7 +3240,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"מושתקים, אבל אני רוצה לאפשר <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> וכן <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"מושתקים, אבל אני רוצה לאפשר <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> וכן <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"הודעות, אירועים ותזכורות"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"כשמצב \'נא לא להפריע\' פועל, הודעות, תזכורות ואירועים מושתקים, חוץ מהפריטים שאפשרת למעלה. ניתן לשנות את הגדרות ההודעות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"כשמצב \'נא לא להפריע\' פועל, הודעות, תזכורות ואירועים מושתקים, חוץ מהפריטים שאפשרת למעלה. ניתן לשנות את הגדרות ההודעות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"סיום"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"הגדרות"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"ללא סימנים חזותיים או צלילים מהודעות"</string>
@@ -3676,7 +3677,7 @@
     <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"‏מנהל ה-IT שלך ביקש דוח על באג כדי לסייע בפתרון בעיות במכשיר זה. ייתכן שאפליקציות ונתונים ישותפו. פעילות המכשיר עשויה להאט באופן זמני."</string>
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"‏הדוח על באג זה משותף כעת עם מנהל ה-IT שלך. למידע נוסף, צור איתו קשר."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"שתף"</string>
-    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"לא, אין מצב"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"לא, תודה"</string>
     <string name="usb_use_charging_only" msgid="4800495064747543954">"אין העברת נתונים"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"רק לטעינת המכשיר"</string>
     <string name="usb_use_power_only" msgid="3236391691786786070">"טעינת המכשיר המחובר"</string>
@@ -4291,4 +4292,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"פרטי הרשת"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"‏שם המכשיר שלך גלוי לאפליקציות בטלפון שלך. כמו כן, ייתכן שאנשים אחרים יראו אותו בהתחברות למכשירי Bluetooth או כשמגדירים נקודת Wi-Fi לשיתוף אינטרנט."</string>
     <string name="devices_title" msgid="7701726109334110391">"מכשירים"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"ברירת מחדל"</string>
 </resources>

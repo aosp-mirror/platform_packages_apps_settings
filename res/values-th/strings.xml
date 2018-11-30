@@ -449,8 +449,8 @@
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"การลงทะเบียนลายนิ้วมือไม่ทำงาน โปรดลองอีกครั้งหรือใช้นิ้วอื่น"</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"เพิ่มอีกหนึ่ง"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"ถัดไป"</string>
-    <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"นอกเหนือจากการปลดล็อกโทรศัพท์ คุณยังสามารถใช้ลายนิ้วมือเพื่อให้สิทธิ์การซื้อและการเข้าถึงแอปได้"<annotation id="url">"เรียนรู้เพิ่มเติม"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7846871823167357942">" ตัวเลือกการล็อกหน้าจอปิดอยู่ หากต้องการเรียนรู้เพิ่มเติม ให้ติดต่อผู้ดูแลระบบขององค์กร "<annotation id="admin_details">"รายละเอียดเพิ่มเติม"</annotation>\n\n"คุณยังสามารถใช้ลายนิ้วมือเพื่ออนุญาตให้ซื้อและเข้าถึงแอป "<annotation id="url">"เรียนรู้เพิ่มเติม"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"นอกเหนือจากการปลดล็อกโทรศัพท์ คุณยังสามารถใช้ลายนิ้วมือเพื่อให้สิทธิ์การซื้อและการเข้าถึงแอปได้"<annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7846871823167357942">" ตัวเลือกการล็อกหน้าจอปิดอยู่ หากต้องการดูข้อมูลเพิ่มเติม ให้ติดต่อผู้ดูแลระบบขององค์กร "<annotation id="admin_details">"รายละเอียดเพิ่มเติม"</annotation>\n\n"คุณยังสามารถใช้ลายนิ้วมือเพื่ออนุญาตให้ซื้อและเข้าถึงแอป "<annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"ยกนิ้วขึ้น แล้วแตะเซ็นเซอร์อีกครั้ง"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"คุณสามารถเพิ่มลายนิ้วมือได้ถึง <xliff:g id="COUNT">%d</xliff:g> ลาย"</string>
     <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"คุณได้เพิ่มลายนิ้วมือถึงขีดจำกัดสูงสุดแล้ว"</string>
@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"อัตโนมัติ"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"ย่านความถี่ 2.4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"ย่านความถี่ 5 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"ต้องการใช้ย่านความถี่ 5.0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5.0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"เลือกอย่างน้อยหนึ่งย่านความถี่สำหรับฮอตสปอต Wi‑Fi:"</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ธรรมชาติ"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"บูสต์"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"อิ่มตัว"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"อัตโนมัติ"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"ปรับอัตโนมัติ"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"ใช้สีที่ตรงตามจริงเท่านั้น"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"ปรับระหว่างสีที่สดใสและสีที่ตรงตามจริง"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"เปลี่ยนการวางแนวโดยอัตโนมัติเมื่อหมุนแท็บเล็ต"</string>
@@ -3163,7 +3164,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"ปิดเสียงแล้ว แต่อนุญาตให้ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> และ <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"ปิดเสียงแล้ว แต่อนุญาตให้ <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> และ <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"ข้อความ เหตุการณ์ และการช่วยเตือน"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"เมื่อเปิด \"ห้ามรบกวน\" ข้อความ การช่วยเตือน และเหตุการณ์ต่างๆ จะถูกปิดเสียงยกเว้นรายการที่คุณอนุญาตข้างต้น คุณปรับเปลี่ยนการตั้งค่าเพื่ออนุญาตให้เพื่อน ครอบครัว หรือรายชื่อติดต่อคนอื่นๆ ติดต่อคุณได้"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"เมื่อเปิด \"ห้ามรบกวน\" ข้อความ การช่วยเตือน และเหตุการณ์ต่างๆ จะถูกปิดเสียงยกเว้นรายการที่คุณอนุญาตข้างต้น คุณปรับเปลี่ยนการตั้งค่าเพื่ออนุญาตให้เพื่อน ครอบครัว หรือรายชื่อติดต่อคนอื่นๆ ติดต่อคุณได้"</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"เสร็จ"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"การตั้งค่า"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"ไม่มีภาพหรือเสียงจากการแจ้งเตือน"</string>
@@ -4151,4 +4152,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"รายละเอียดเครือข่าย"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"แอปในโทรศัพท์จะเห็นชื่อของอุปกรณ์ และคนอื่นก็อาจเห็นเช่นกันหากคุณเชื่อมต่อกับอุปกรณ์บลูทูธหรือตั้งค่าฮอตสปอต Wi-Fi"</string>
     <string name="devices_title" msgid="7701726109334110391">"อุปกรณ์"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"ค่าเริ่มต้น"</string>
 </resources>

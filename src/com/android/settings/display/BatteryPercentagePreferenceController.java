@@ -20,6 +20,7 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v14.preference.SwitchPreference;
 
+import com.android.internal.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -40,7 +41,8 @@ public class BatteryPercentagePreferenceController extends AbstractPreferenceCon
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources()
+                .getBoolean(R.bool.config_battery_percentage_setting_available);
     }
 
     @Override

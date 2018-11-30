@@ -114,7 +114,7 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="3995834526315103965">"De verbinding tussen je apparaat en <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wordt verbroken."</string>
     <string name="bluetooth_disconnect_dialog_ok" msgid="3308586619539119106">"Koppel los"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Je hebt geen toestemming om de Bluetooth-instellingen te wijzigen."</string>
-    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"Nieuw apparaat koppelen"</string>
+    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"Apparaat koppelen"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is zichtbaar voor apparaten in de buurt wanneer het venster \'Bluetooth-instellingen\' is geopend."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"Bluetooth-adres van je telefoon: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"Bluetooth-adres van je tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automatisch"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4-GHz-frequentieband"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5-GHz-frequentieband"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Voorkeur voor 5-GHz-frequentieband"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Kies ten minste één band voor je wifi-hotspot:"</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natuurlijk"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Versterkt"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Verzadigd"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatisch"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Aanpasbaar"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Uitsluitend nauwkeurige kleuren gebruiken"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Levendige en nauwkeurige kleuren instellen"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Stand automatisch wijzigen als tablet wordt gedraaid"</string>
@@ -2028,11 +2029,11 @@
     <string name="captioning_preset" msgid="8939737196538429044">"Ondertitelstijl"</string>
     <string name="captioning_custom_options_title" msgid="5067500939930322405">"Aangepaste opties"</string>
     <string name="captioning_background_color" msgid="9053011212948992570">"Achtergrondkleur"</string>
-    <string name="captioning_background_opacity" msgid="6029993616419971202">"Transparantie van achtergrond"</string>
+    <string name="captioning_background_opacity" msgid="6029993616419971202">"Ondoorzichtigheid van achtergrond"</string>
     <string name="captioning_window_color" msgid="6902052743419717394">"Kleur ondertitelingsvenster"</string>
-    <string name="captioning_window_opacity" msgid="5041556024849862376">"Transparantie ondertitelingsvenster"</string>
+    <string name="captioning_window_opacity" msgid="5041556024849862376">"Ondoorzichtigheid ondertitelingsvenster"</string>
     <string name="captioning_foreground_color" msgid="85623486537640059">"Tekstkleur"</string>
-    <string name="captioning_foreground_opacity" msgid="4370967856995419788">"Transparantie van tekst"</string>
+    <string name="captioning_foreground_opacity" msgid="4370967856995419788">"Ondoorzichtigheid van tekst"</string>
     <string name="captioning_edge_color" msgid="3670094753735263238">"Randkleur"</string>
     <string name="captioning_edge_type" msgid="5997247394951682154">"Randtype"</string>
     <string name="captioning_typeface" msgid="1826169240566563259">"Lettertypefamilie"</string>
@@ -3163,7 +3164,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Gedempt, maar <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> en <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> wel toestaan"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Gedempt, maar <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> , <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> en <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> wel toestaan"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Meldingen, afspraken en herinneringen"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Wanneer \'Niet storen\' is ingeschakeld, worden berichten, herinneringen en gebeurtenissen gedempt, met uitzondering van de items die je hierboven toestaat. Je kunt de instellingen aanpassen zodat je vrienden, gezinsleden of andere contacten je kunnen bereiken."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Wanneer \'Niet storen\' is ingeschakeld, worden berichten, herinneringen en afspraken gedempt, met uitzondering van de items die je hierboven toestaat. Je kunt de instellingen aanpassen zodat je vrienden, gezinsleden of andere contacten je kunnen bereiken."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Klaar"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Instellingen"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Geen zichtbare of hoorbare meldingen"</string>
@@ -3239,7 +3240,7 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Er zijn geen geïnstalleerde apps die toegang tot meldingen hebben aangevraagd."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Toegang tot meldingen toestaan voor <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan alle meldingen lezen, waaronder persoonlijke gegevens zoals contactnamen en de tekst van berichten die je ontvangt. De functie kan deze meldingen ook sluiten of actieknoppen die ermee samenhangen activeren. \n\nHierdoor kan de app ook \'Niet storen\' in- of uitschakelen en gerelateerde instellingen wijzigen."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan alle meldingen lezen, waaronder persoonlijke gegevens zoals contactnamen en de tekst van berichten die je ontvangt. De app kan deze meldingen ook sluiten of actieknoppen die ermee samenhangen activeren. \n\nHierdoor kan de app ook \'Niet storen\' in- of uitschakelen en gerelateerde instellingen wijzigen."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Als je toegang tot meldingen uitschakelt voor <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kan toegang tot \'Niet storen\' ook worden uitgeschakeld."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Uitschakelen"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Annuleren"</string>
@@ -4151,4 +4152,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Netwerkgegevens"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"De naam van je apparaat is zichtbaar voor apps op je telefoon. De apparaatnaam kan ook door andere mensen worden gezien wanneer je verbinding maakt met Bluetooth-apparaten of een wifi-hotspot instelt."</string>
     <string name="devices_title" msgid="7701726109334110391">"Apparaten"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Standaard"</string>
 </resources>

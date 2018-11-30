@@ -78,8 +78,8 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Demonter SD-kort"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Slet USB-lager"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Formatér SD-kort"</string>
-    <string name="preview_pager_content_description" msgid="8926235999291761243">"Eksempelvisning"</string>
-    <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Eksempelvisning af skærm <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> af <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"Forhåndsvisning"</string>
+    <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Forhåndsvisning af skærm <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> af <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Gør teksten på skærmen mindre eller større."</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Formindsk"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Forstør"</string>
@@ -184,8 +184,8 @@
     <string name="connected_device_saved_title" msgid="688364359746674536">"Gemte enheder"</string>
     <string name="connected_device_add_device_title" msgid="7803521577708810621">"Tilføj enhed"</string>
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Bluetooth aktiveres for at parre"</string>
-    <string name="connected_device_connections_title" msgid="5988939345181466770">"Præferencer for forbindelse"</string>
-    <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Tidligere tilsluttede enheder"</string>
+    <string name="connected_device_connections_title" msgid="5988939345181466770">"Forbindelsesindstillinger"</string>
+    <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Tidligere forbundne enheder"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Dato og klokkeslæt"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Vælg tidszone"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automatisk"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz-bånd"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 GHz-bånd"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5,0 GHz-bånd foretrækkes"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Vælg mindst ét frekvensbånd til Wi‑Fi-hotspottet:"</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturlig"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Forstærket"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Mættet"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatisk"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Selvjusterende"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Anvend kun nøjagtige farver"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Skift mellem levende og nøjagtige farver"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Skift automatisk retning, når tabletcomputeren drejes"</string>
@@ -1077,7 +1078,7 @@
     <string name="brightness" msgid="8480105032417444275">"Lysstyrke"</string>
     <string name="brightness_title" msgid="5746272622112982836">"Lysstyrke"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Juster skærmens lysstyrke"</string>
-    <string name="auto_brightness_title" msgid="6341042882350279391">"Tilpasset lysstyrke"</string>
+    <string name="auto_brightness_title" msgid="6341042882350279391">"Automatisk lysstyrke"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimer lysstyrken til det omgivende lys"</string>
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Fra"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Den foretrukne lysstyrke er meget lav"</string>
@@ -1095,7 +1096,7 @@
     <string name="auto_brightness_off_summary" msgid="7629228736838155268">"Undlad at justere i forhold til det omgivende lys"</string>
     <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"Øget batteriforbrug"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimer lysstyrken til det omgivende lys. Når denne funktion er slået til, kan du stadig justere lysstyrken midlertidigt."</string>
-    <string name="auto_brightness_description" msgid="7310335517128283729">"Skærmens lysstyrke tilpasses automatisk på baggrund af dine omgivelser og dine aktiviteter. Du kan flytte skyderen manuelt for at hjælpe Tilpasset lysstyrke med at lære dine præferencer."</string>
+    <string name="auto_brightness_description" msgid="7310335517128283729">"Skærmens lysstyrke tilpasses automatisk på baggrund af dine omgivelser og dine aktiviteter. Du kan flytte skyderen manuelt for at hjælpe Automatisk lysstyrke med at lære dine præferencer."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nattelys"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Med Nattelys er farvetonen på skærmen gul. Det gør din skærm mere behagelig at se på i svag belysning og kan gøre det nemmere at falde i søvn."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Planlæg"</string>
@@ -1410,7 +1411,7 @@
     <string name="apn_edit" msgid="1354715499708424718">"Rediger adgangspunkt"</string>
     <string name="apn_not_set" msgid="4974192007399968164">"Ikke angivet"</string>
     <string name="apn_name" msgid="4115580098369824123">"Navn"</string>
-    <string name="apn_apn" msgid="2479425126733513353">"Adgangspunkt"</string>
+    <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
     <string name="apn_http_proxy" msgid="1826885957243696354">"Proxy"</string>
     <string name="apn_http_port" msgid="3763259523984976226">"Port"</string>
     <string name="apn_user" msgid="455637547356117761">"Brugernavn"</string>
@@ -1426,28 +1427,28 @@
     <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP eller CHAP"</string>
-    <string name="apn_type" msgid="469613123902220544">"Adgangspunktstype"</string>
-    <string name="apn_protocol" msgid="3272222921649348640">"Adgangspunktets protokol"</string>
-    <string name="apn_roaming_protocol" msgid="3386954381510788422">"Adgangspunktets roamingprotokol"</string>
-    <string name="carrier_enabled" msgid="407655861175280806">"Aktivér/deaktiver adgangspunkt"</string>
-    <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"Adgangspunktet er aktiveret"</string>
-    <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"Adgangspunktet er deaktiveret"</string>
+    <string name="apn_type" msgid="469613123902220544">"APN-type"</string>
+    <string name="apn_protocol" msgid="3272222921649348640">"APN-protokol"</string>
+    <string name="apn_roaming_protocol" msgid="3386954381510788422">"APN-roamingprotokol"</string>
+    <string name="carrier_enabled" msgid="407655861175280806">"Aktivér/deaktiver APN"</string>
+    <string name="carrier_enabled_summaryOn" msgid="6338915271908057531">"APN er aktiveret"</string>
+    <string name="carrier_enabled_summaryOff" msgid="4300790190221203756">"APN er deaktiveret"</string>
     <string name="bearer" msgid="594270280031923558">"Bærer"</string>
     <string name="mvno_type" msgid="2543253857818336421">"MVNO-type"</string>
     <string name="mvno_match_data" msgid="4560671695220540466">"MVNO-værdi"</string>
-    <string name="menu_delete" msgid="6981294422841124659">"Slet adgangspunkt"</string>
-    <string name="menu_new" msgid="3014205883303921729">"Nyt adgangspunkt"</string>
+    <string name="menu_delete" msgid="6981294422841124659">"Slet APN"</string>
+    <string name="menu_new" msgid="3014205883303921729">"Ny APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"Gem"</string>
     <string name="menu_cancel" msgid="2194502410474697474">"Kassér"</string>
     <string name="error_title" msgid="7631322303341024692"></string>
     <string name="error_name_empty" msgid="5508155943840201232">"Feltet Navn skal udfyldes."</string>
-    <string name="error_apn_empty" msgid="4932211013600863642">"Du skal angive et adgangspunkt."</string>
+    <string name="error_apn_empty" msgid="4932211013600863642">"Du skal angive et APN."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MCC-feltet skal indeholde 3 tal."</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"MNC-feltet skal indeholde 2 eller 3 tal."</string>
     <string name="error_adding_apn_type" msgid="4181334016628549645">"Mobilselskabet tillader ikke, at du tilføjer adgangspunkter af typen %s."</string>
-    <string name="restore_default_apn" msgid="8178010218751639581">"Gendannelse af standardindstillingerne for adgangspunktet."</string>
+    <string name="restore_default_apn" msgid="8178010218751639581">"Gendannelse af standardindstillingerne for APN."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Nulstil til standard"</string>
-    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Standardindstillingerne for adgangspunktet er nulstillet."</string>
+    <string name="restore_default_apn_completed" msgid="2824775307377604897">"Standardindstillingerne for APN er nulstillet."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Nulstil valg"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Netværk, apps eller enheden kan nulstilles"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Nulstil Wi-Fi, mobil og Bluetooth"</string>
@@ -2021,7 +2022,7 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Indstillinger"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Til"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Fra"</string>
-    <string name="captioning_preview_title" msgid="1234015253497016890">"Eksempelvisning"</string>
+    <string name="captioning_preview_title" msgid="1234015253497016890">"Forhåndsvisning"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standardindstillinger"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Sprog"</string>
     <string name="captioning_text_size" msgid="6737002449104466028">"Tekststørrelse"</string>
@@ -2159,7 +2160,7 @@
     <string name="battery_tip_smart_battery_title" product="tablet" msgid="6452567046912954866">"Forlæng din tablets batteritid"</string>
     <string name="battery_tip_smart_battery_title" product="device" msgid="4445149029390556382">"Forlæng enhedens batteritid"</string>
     <string name="battery_tip_smart_battery_summary" msgid="2326809294592208069">"Aktivér batteriadministration"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="5788492366387119807">"Aktivér Batterisparefunktion"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="5788492366387119807">"Aktivér batterisparefunktionen"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="1639271439914224547">"Enheden løber muligvis tør for batteri hurtigere end forventet"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4294083319255926811">"Batterisparefunktion er aktiveret"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7054036010928794364">"Nogle funktioner kan være begrænsede"</string>
@@ -2329,7 +2330,7 @@
     <string name="battery_saver_auto_title" msgid="8368709389419695611">"Aktivér automatisk"</string>
     <string name="battery_saver_seekbar_title" msgid="4705356758573183963">"Ved <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_seekbar_title_placeholder" msgid="1138980155985636295">"Aktivér"</string>
-    <string name="battery_saver_master_switch_title" msgid="622539414546588436">"Brug Batterisparefunktion"</string>
+    <string name="battery_saver_master_switch_title" msgid="622539414546588436">"Brug batterisparefunktionen"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Slå automatisk til"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Aldrig"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"ved batteriniveau på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3163,7 +3164,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Lyden er slået fra, men tillad <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> og <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Lyden er slået fra, men tillad <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> og <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Beskeder, begivenheder og påmindelser"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Når Forstyr ikke er aktiveret, slås lyden fra for beskeder, påmindelser og begivenheder med undtagelse af de elementer, du tillader ovenfor. Du kan ændre beskedindstillingerne, så dine venner, din familie eller andre kontaktpersoner kan få fat i dig."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Når Forstyr ikke er aktiveret, slås lyden fra for beskeder, påmindelser og begivenheder med undtagelse af de elementer, du tillader ovenfor. Du kan ændre beskedindstillingerne, så dine venner, din familie eller andre kontaktpersoner kan få fat i dig."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Udfør"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Indstillinger"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Ingen lyd eller visuelle signaler fra underretninger"</string>
@@ -3239,7 +3240,7 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ingen installerede apps har anmodet om adgang til underretninger."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Tillad adgang til underretninger for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan læse alle underretninger, herunder personlige oplysninger såsom navne på kontaktpersoner og teksten i de meddelelser, du modtager. Underretningslytteren kan også afvise underretninger eller aktivere handlingsknapper, de indeholder. \n\nDette gør det også muligt for appen at slå Forstyr ikke til eller fra og ændre relaterede indstillinger."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan læse alle underretninger, herunder personlige oplysninger såsom navne på kontaktpersoner og teksten i de meddelelser, du modtager. Den kan også afvise underretninger eller aktivere handlingsknapper, de indeholder. \n\nDette gør det også muligt for appen at slå Forstyr ikke til eller fra og ændre relaterede indstillinger."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Hvis du slår adgang til underretninger fra for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, slås adgangen til Forstyr ikke muligvis også fra."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Slå fra"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Annuller"</string>
@@ -3680,7 +3681,7 @@
     <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Gør elementerne på skærmen større eller mindre"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"visningstæthed, zoom på skærmen, skala, skalering"</string>
     <string name="screen_zoom_summary" msgid="6445488991799015407">"Gør elementerne på skærmen mindre eller større. Visse apps på din skærm ændrer muligvis placering."</string>
-    <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Eksempelvisning"</string>
+    <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Forhåndsvisning"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Formindsk"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Forstør"</string>
     <string name="screen_zoom_conversation_icon_alex" msgid="8443032489384985820">"A"</string>
@@ -4151,4 +4152,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Netværksoplysninger"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Navnet på din enhed er synligt for apps på din telefon. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller konfigurerer et Wi-Fi-hotspot."</string>
     <string name="devices_title" msgid="7701726109334110391">"Enheder"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Standard"</string>
 </resources>

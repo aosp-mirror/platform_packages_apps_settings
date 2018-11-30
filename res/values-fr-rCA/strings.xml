@@ -20,7 +20,7 @@
     <string name="no" msgid="6731231425810196216">"Non"</string>
     <string name="create" msgid="3578857613172647409">"Créer"</string>
     <string name="allow" msgid="3349662621170855910">"Autoriser"</string>
-    <string name="deny" msgid="6947806159746484865">"Refusers"</string>
+    <string name="deny" msgid="6947806159746484865">"Refuser"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Fermer"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Changer"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Inconnu"</string>
@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Auto"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Bande de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Bande de 5 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Préférer la bande de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Choisissez au moins une bande pour le point d\'accès Wi-Fi :"</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturelles"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Intenses"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturées"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatique"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Adaptatif"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Utiliser uniquement les couleurs précises"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Ajuster entre les couleurs vives et précises"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Changer automatiquement d\'orientation lors de la rotation de la tablette"</string>
@@ -3163,7 +3164,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Désactivés, mais autoriser : <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> et <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Désactivés, mais autoriser : <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> et <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Messages, événements et rappels"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Lorsque le mode Ne pas déranger est activé, le son des messages, des rappels et des événements est coupé, sauf pour les éléments autorisés ci-dessus. Vous pouvez régler les paramètres des messages pour que vos proches ou d\'autres contacts puissent quand même vous joindre."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Lorsque le mode Ne pas déranger est activé, le son des messages, des rappels et des événements est coupé, sauf pour les éléments autorisés ci-dessus. Vous pouvez régler les paramètres des messages pour que vos proches ou d\'autres contacts puissent quand même vous joindre."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"OK"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Paramètres"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Aucun élément visuel ni son provenant des notifications"</string>
@@ -3238,7 +3239,7 @@
       <item quantity="other">%d application peuvent lire les notifications</item>
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Aucune demande d\'accès aux notifications n\'a été envoyée pour les applications installées."</string>
-    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder aux notifications ?"</string>
+    <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder aux notifications?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra lire toutes les notifications, y compris des données personnelles, telles que des noms de contacts et le texte des messages que vous recevez. Ce service pourra également masquer des notifications ou déclencher les boutons d\'action que celles-ci contiennent. \n\nCela permettra également à l\'application d\'activer et de désactiver la fonction Ne pas déranger et de modifier les paramètres connexes."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès à la fonction Ne pas déranger peut également être désactivé."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Désactiver"</string>
@@ -4151,4 +4152,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Détails du réseau"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Le nom de votre appareil est visible pour les applications de votre téléphone. Il est aussi possible que d\'autres personnes le voient lorsque vous vous connectez à des appareils Bluetooth ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Appareils"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Par défaut"</string>
 </resources>

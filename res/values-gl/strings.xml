@@ -856,6 +856,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automática"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Banda de 5,0 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Banda de 5,0 GHz preferida"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Selecciona polo menos unha banda para a zona wifi:"</string>
@@ -1067,7 +1068,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturais"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Realzados"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturados"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Cor automática"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Automática"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Utiliza só cores precisas"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Axuste entre cores vivas e precisas"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Cambia a orientación automaticamente ao xirar a tableta"</string>
@@ -1641,7 +1642,7 @@
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Bloquear ao acender"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Excepto se <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantén o dispositivo desbloqueado"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Definir padrón de desbloqueo"</string>
-    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Cambiar deseño de desbloqueo"</string>
+    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Cambiar padrón de desbloqueo"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Como debuxar un padrón de desbloqueo"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"Realizáronse demasiados intentos incorrectos. Téntao de novo en <xliff:g id="NUMBER">%d</xliff:g> segundos."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"A aplicación non está instalada no teléfono."</string>
@@ -3164,7 +3165,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Silenciados, pero permítense: <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> e <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Silenciados, pero permítense: <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> e <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mensaxes, eventos e recordatorios"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Cando estea activado o modo Non molestar, silenciaranse as mensaxes, os recordatorios e os eventos, agás nos casos autorizados anteriormente. Podes axustar a configuración para permitir que os amigos, os familiares ou outros contactos se comuniquen contigo."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Cando estea activado o modo Non molestar, silenciaranse as mensaxes, os recordatorios e os eventos, agás nos casos autorizados anteriormente. Podes axustar a configuración para permitir que os amigos, os familiares ou outros contactos se comuniquen contigo."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Feito"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Configuración"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Notificacións sen son nin elementos visuais"</string>
@@ -3898,7 +3899,7 @@
       <item quantity="one">1 aplicación pode usar datos sen restricións</item>
     </plurals>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Seguro que queres limpar os datos de usuario e cambiar á encriptación baseada en ficheiros?"</string>
-    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Limpar e converter"</string>
+    <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Borrar e converter"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Restablecer o límite de velocidade de ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Restableceuse o límite de velocidade de ShortcutManager"</string>
     <string name="notification_suggestion_title" msgid="387052719462473500">"Información de control sobre a pantalla de bloqueo"</string>
@@ -4152,4 +4153,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalles da rede"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"As aplicacións do teu teléfono poden consultar o nome do teu dispositivo. Tamén poden velo outros usuarios cando te conectes a dispositivos Bluetooth ou configures zonas wifi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositivos"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Predeterminado"</string>
 </resources>
