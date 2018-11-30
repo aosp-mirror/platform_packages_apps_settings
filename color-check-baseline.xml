@@ -2473,7 +2473,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="422"
+            line="425"
             column="44"/>
     </issue>
 
@@ -2489,7 +2489,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="428"
+            line="431"
             column="44"/>
     </issue>
 
@@ -2505,7 +2505,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="429"
+            line="432"
             column="44"/>
     </issue>
 
@@ -2521,7 +2521,23 @@
         errorLine2="                                 ^">
         <location
             file="res/values/styles.xml"
-            line="464"
+            line="467"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item name=&quot;strokeColor&quot;>@color/homepage_card_stroke_color&lt;/item>"
+        errorLine2="                                 ^">
+        <location
+            file="res/values/styles.xml"
+            line="474"
             column="34"/>
     </issue>
 
