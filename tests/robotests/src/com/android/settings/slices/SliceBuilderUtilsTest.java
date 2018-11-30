@@ -218,6 +218,19 @@ public class SliceBuilderUtilsTest {
     }
 
     @Test
+    public void getDynamicSummary_allowDynamicSummary_nullSummary_returnsNull() {
+        final SliceData data = getDummyData(true /*isDynamicSummaryAllowed*/);
+        final FakePreferenceController controller = spy(
+                new FakePreferenceController(mContext, KEY));
+        final String controllerSummary = null;
+        doReturn(controllerSummary).when(controller).getSummary();
+
+        final CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+
+        assertThat(summary).isNull();
+    }
+
+    @Test
     public void getDynamicSummary_returnsScreenTitle() {
         final SliceData data = getDummyData();
         final FakePreferenceController controller = new FakePreferenceController(mContext, KEY);

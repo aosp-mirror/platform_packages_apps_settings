@@ -54,7 +54,13 @@ public class PanelSlicesAdapterTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
 
-        final ActivityController<FakeSettingsPanelActivity> activityController =
+        mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
+        mFakePanelContent = new FakePanelContent();
+        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
+
+        ActivityController<FakeSettingsPanelActivity> activityController =
                 Robolectric.buildActivity(FakeSettingsPanelActivity.class);
         activityController.setup();
 
@@ -64,12 +70,6 @@ public class PanelSlicesAdapterTest {
                                 .get()
                                 .getSupportFragmentManager()
                                 .findFragmentById(R.id.main_content));
-
-        mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
-        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
-        mFakePanelContent = new FakePanelContent();
-        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
 
         mAdapter = new PanelSlicesAdapter(mPanelFragment, mFakePanelContent.getSlices());
     }

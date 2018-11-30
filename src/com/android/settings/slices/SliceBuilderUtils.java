@@ -193,8 +193,9 @@ public class SliceBuilderUtils {
         CharSequence summaryText = controller.getSummary();
 
         // Priority 1 : User prefers showing the dynamic summary in slice view rather than static
-        // summary.
-        if (isDynamicSummaryAllowed && isValidSummary(context, summaryText)) {
+        // summary. Note it doesn't require a valid summary - so we can force some slices to have
+        // empty summaries (ex: volume).
+        if (isDynamicSummaryAllowed) {
             return summaryText;
         }
 

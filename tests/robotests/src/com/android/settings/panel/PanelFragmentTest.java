@@ -61,7 +61,6 @@ public class PanelFragmentTest {
         mFakePanelContent = new FakePanelContent();
         doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
 
-
         ActivityController<FakeSettingsPanelActivity> activityController =
                 Robolectric.buildActivity(FakeSettingsPanelActivity.class);
         activityController.setup();
