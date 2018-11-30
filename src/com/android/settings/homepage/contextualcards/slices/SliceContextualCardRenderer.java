@@ -20,6 +20,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.util.ArrayMap;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,10 +39,13 @@ import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Card renderer for {@link ContextualCard} built as slices.
@@ -58,6 +62,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
     private final Context mContext;
     private final LifecycleOwner mLifecycleOwner;
     private final ControllerRendererPool mControllerRendererPool;
+    private final Set<ContextualCard> mCardSet;
 
     public SliceContextualCardRenderer(Context context, LifecycleOwner lifecycleOwner,
             ControllerRendererPool controllerRendererPool) {
@@ -65,6 +70,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         mLifecycleOwner = lifecycleOwner;
         mSliceLiveDataMap = new ArrayMap<>();
         mControllerRendererPool = controllerRendererPool;
+        mCardSet = new ArraySet<>();
     }
 
     @Override
@@ -99,6 +105,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
             sliceLiveData = SliceLiveData.fromUri(mContext, uri);
             mSliceLiveDataMap.put(uri.toString(), sliceLiveData);
         }
+        mCardSet.add(card);
 
         sliceLiveData.removeObservers(mLifecycleOwner);
         sliceLiveData.observe(mLifecycleOwner, slice -> {
@@ -128,14 +135,27 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
 
         final Button btnRemove = cardHolder.itemView.findViewById(R.id.remove);
         btnRemove.setOnClickListener(v -> {
-            mControllerRendererPool.getController(mContext, card.getCardType()).onDismissed(
-                    card);
+            mControllerRendererPool.getController(mContext, card.getCardType()).onDismissed(card);
         });
     }
 
     @Override
     public void onSliceAction(@NonNull EventInfo eventInfo, @NonNull SliceItem sliceItem) {
         //TODO(b/79698338): Log user interaction
+
+        // sliceItem.getSlice().getUri() is like
+        // content://android.settings.slices/action/wifi/_gen/0/_gen/0
+        // contextualCard.getSliceUri() is prefix of sliceItem.getSlice().getUri()
+        for (ContextualCard card : mCardSet) {
+            if (sliceItem.getSlice().getUri().toString().startsWith(
+                    card.getSliceUri().toString())) {
+                ContextualCardFeatureProvider contexualCardFeatureProvider =
+                        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
+                contexualCardFeatureProvider.logContextualCardClick(mContext, card,
+                        eventInfo.rowIndex, eventInfo.actionType);
+                break;
+            }
+        }
     }
 
     public static class SliceViewHolder extends RecyclerView.ViewHolder {

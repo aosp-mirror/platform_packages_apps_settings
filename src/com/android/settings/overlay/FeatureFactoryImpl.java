@@ -40,6 +40,8 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProviderImpl;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProviderImpl;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 import com.android.settings.panel.PanelFeatureProvider;
@@ -75,6 +77,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SlicesFeatureProvider mSlicesFeatureProvider;
     private AccountFeatureProvider mAccountFeatureProvider;
     private PanelFeatureProvider mPanelFeatureProvider;
+    private ContextualCardFeatureProvider mContextualCardFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -219,5 +222,12 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mPanelFeatureProvider = new PanelFeatureProviderImpl();
         }
         return mPanelFeatureProvider;
+    }
+
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider() {
+        if (mContextualCardFeatureProvider == null) {
+            mContextualCardFeatureProvider = new ContextualCardFeatureProviderImpl();
+        }
+        return mContextualCardFeatureProvider;
     }
 }

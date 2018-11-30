@@ -28,6 +28,7 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.panel.PanelFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
@@ -107,6 +108,8 @@ public abstract class FeatureFactory {
     public abstract AccountFeatureProvider getAccountFeatureProvider();
 
     public abstract PanelFeatureProvider getPanelFeatureProvider();
+
+    public abstract ContextualCardFeatureProvider getContextualCardFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
