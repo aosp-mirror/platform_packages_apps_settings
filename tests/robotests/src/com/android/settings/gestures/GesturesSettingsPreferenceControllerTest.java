@@ -16,6 +16,8 @@
 
 package com.android.settings.gestures;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
@@ -81,7 +83,7 @@ public class GesturesSettingsPreferenceControllerTest {
         });
         ReflectionHelpers.setField(mController, "mGestureControllers", mControllers);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
