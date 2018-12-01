@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -86,21 +87,21 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity {
     }
 
     private void addQrCodeScannerFragment() {
-        WifiDppQrCodeScannerFragment fragment = new WifiDppQrCodeScannerFragment();
+        final WifiDppQrCodeScannerFragment fragment = new WifiDppQrCodeScannerFragment();
         mFragmentTransaction.add(R.id.fragment_container, fragment);
-        mFragmentTransaction.addToBackStack(null);
+        mFragmentTransaction.addToBackStack(/* name */ null);
         mFragmentTransaction.commit();
     }
 
     private void addQrCodeGeneratorFragment() {
-        WifiDppQrCodeGeneratorFragment fragment = new WifiDppQrCodeGeneratorFragment();
+        final WifiDppQrCodeGeneratorFragment fragment = new WifiDppQrCodeGeneratorFragment();
         mFragmentTransaction.add(R.id.fragment_container, fragment);
-        mFragmentTransaction.addToBackStack(null);
+        mFragmentTransaction.addToBackStack(/* name */ null);
         mFragmentTransaction.commit();
     }
 
     private void addChooseSavedWifiNetworkFragment() {
-        ActionBar action = getActionBar();
+        final ActionBar action = getActionBar();
         if (action != null) {
             action.hide();
         }
@@ -108,7 +109,18 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity {
         WifiDppChooseSavedWifiNetworkFragment fragment =
                 new WifiDppChooseSavedWifiNetworkFragment();
         mFragmentTransaction.add(R.id.fragment_container, fragment);
-        mFragmentTransaction.addToBackStack(null);
+        mFragmentTransaction.addToBackStack(/* name */ null);
         mFragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onStop() {
+        final Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
+        if (fragment != null) {
+            // Remove it to prevent stacking multiple fragments after screen rotated.
+            mFragmentManager.beginTransaction().remove(fragment).commit();
+        }
+
+        super.onStop();
     }
 }
