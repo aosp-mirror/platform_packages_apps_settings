@@ -78,9 +78,10 @@ public class BluetoothSliceBuilder {
                 context).getDefaultColor();
         final PendingIntent toggleAction = getBroadcastIntent(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
-        final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);
-        final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
-                isBluetoothEnabled);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
+                ListBuilder.ICON_IMAGE, title);
+        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+                null /* actionTitle */, isBluetoothEnabled);
 
         return new ListBuilder(context, CustomSliceRegistry.BLUETOOTH_URI, ListBuilder.INFINITY)
                 .setAccentColor(color)

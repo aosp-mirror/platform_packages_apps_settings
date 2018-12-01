@@ -92,7 +92,7 @@ public class Enhanced4gLteSliceHelper {
      * Enhanced 4g lte mode title variant resource name
      */
     private static final String RESOURCE_ENHANCED_4G_LTE_MODE_TITLE_VARIANT =
-          "enhanced_4g_lte_mode_title_variant";
+            "enhanced_4g_lte_mode_title_variant";
 
     @VisibleForTesting
     public Enhanced4gLteSliceHelper(Context context) {
@@ -172,13 +172,15 @@ public class Enhanced4gLteSliceHelper {
                 .addRow(new RowBuilder()
                         .setTitle(getEnhanced4glteModeTitle(subId))
                         .addEndItem(
-                                new SliceAction(
+                                SliceAction.createToggle(
                                         getBroadcastIntent(ACTION_ENHANCED_4G_LTE_CHANGED),
                                         null /* actionTitle */, isEnhanced4gLteEnabled))
-                        .setPrimaryAction(new SliceAction(
-                                getActivityIntent(ACTION_MOBILE_NETWORK_SETTINGS_ACTIVITY),
-                                icon,
-                                getEnhanced4glteModeTitle(subId))))
+                        .setPrimaryAction(
+                                SliceAction.createDeeplink(
+                                        getActivityIntent(ACTION_MOBILE_NETWORK_SETTINGS_ACTIVITY),
+                                        icon,
+                                        ListBuilder.ICON_IMAGE,
+                                        getEnhanced4glteModeTitle(subId))))
                 .build();
     }
 

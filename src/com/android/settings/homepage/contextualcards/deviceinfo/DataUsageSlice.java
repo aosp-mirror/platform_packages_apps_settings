@@ -66,7 +66,8 @@ public class DataUsageSlice implements CustomSliceable {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_data_usage);
         final String title = mContext.getString(R.string.data_usage_summary_title);
-        final SliceAction primaryAction = new SliceAction(getPrimaryAction(), icon, title);
+        final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
+                ListBuilder.ICON_IMAGE, title);
         final DataUsageController dataUsageController = new DataUsageController(mContext);
         final DataUsageController.DataUsageInfo info = dataUsageController.getDataUsageInfo();
         final ListBuilder listBuilder =

@@ -92,9 +92,10 @@ public class WifiSlice implements CustomSliceable {
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         final PendingIntent toggleAction = getBroadcastIntent(mContext);
         final PendingIntent primaryAction = getPrimaryAction();
-        final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);
-        final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
-                isWifiEnabled);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
+                ListBuilder.ICON_IMAGE, title);
+        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+                null /* actionTitle */, isWifiEnabled);
 
         final ListBuilder listBuilder = new ListBuilder(mContext, WIFI_SLICE_URI,
                 ListBuilder.INFINITY)
@@ -139,8 +140,9 @@ public class WifiSlice implements CustomSliceable {
                 .setSubtitle(!TextUtils.isEmpty(apSummary)
                         ? apSummary
                         : mContext.getText(R.string.summary_placeholder))
-                .setPrimaryAction(new SliceAction(
-                        getAccessPointAction(accessPoint), levelIcon, title));
+                .setPrimaryAction(SliceAction.create(
+                        getAccessPointAction(accessPoint), levelIcon, ListBuilder.ICON_IMAGE,
+                        title));
 
         final IconCompat endIcon = getEndIcon(accessPoint);
         if (endIcon != null) {

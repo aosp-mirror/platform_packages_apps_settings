@@ -88,8 +88,9 @@ public class BatteryFixSlice implements CustomSliceable {
             for (BatteryTip batteryTip : batteryTips) {
                 if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
                     icon = IconCompat.createWithResource(mContext, batteryTip.getIconId());
-                    primaryAction = new SliceAction(getPrimaryAction(),
+                    primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
                             icon,
+                            ListBuilder.ICON_IMAGE,
                             batteryTip.getTitle(mContext));
                     slice = new ListBuilder(mContext, CustomSliceRegistry.BATTERY_FIX_SLICE_URI,
                             ListBuilder.INFINITY)
@@ -107,7 +108,8 @@ public class BatteryFixSlice implements CustomSliceable {
             icon = IconCompat.createWithResource(mContext,
                     R.drawable.ic_battery_status_good_24dp);
             final String title = mContext.getString(R.string.power_usage_summary_title);
-            primaryAction = new SliceAction(getPrimaryAction(), icon, title);
+            primaryAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
+                    ListBuilder.ICON_IMAGE, title);
             slice = new ListBuilder(mContext, CustomSliceRegistry.BATTERY_FIX_SLICE_URI,
                     ListBuilder.INFINITY)
                     .setAccentColor(Utils.getColorAccentDefaultColor(mContext))

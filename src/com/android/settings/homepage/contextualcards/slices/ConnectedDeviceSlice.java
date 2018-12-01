@@ -106,8 +106,8 @@ public class ConnectedDeviceSlice implements CustomSliceable {
                 R.string.no_connected_devices);
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext, 0,
                 getIntent(), 0);
-        final SliceAction primarySliceAction = new SliceAction(primaryActionIntent, icon,
-                title);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryActionIntent, icon,
+                ListBuilder.ICON_IMAGE, title);
         final ListBuilder listBuilder =
                 new ListBuilder(mContext, CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI,
                         ListBuilder.INFINITY)
@@ -232,9 +232,10 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     }
 
     private SliceAction buildBluetoothDetailDeepLinkAction(CachedBluetoothDevice bluetoothDevice) {
-        return new SliceAction(
+        return SliceAction.createDeeplink(
                 getBluetoothDetailIntent(bluetoothDevice),
                 IconCompat.createWithResource(mContext, R.drawable.ic_settings),
+                ListBuilder.ICON_IMAGE,
                 bluetoothDevice.getName());
     }
 

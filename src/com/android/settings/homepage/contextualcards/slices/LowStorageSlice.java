@@ -79,8 +79,9 @@ public class LowStorageSlice implements CustomSliceable {
         // Show Low storage Slice.
         final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.ic_storage);
         final CharSequence title = mContext.getText(R.string.storage_menu_free);
-        final SliceAction primarySliceAction = new SliceAction(
-                PendingIntent.getActivity(mContext, 0, getIntent(), 0), icon, title);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(
+                PendingIntent.getActivity(mContext, 0, getIntent(), 0), icon,
+                ListBuilder.ICON_IMAGE, title);
         final String lowStorageSummary = mContext.getString(R.string.low_storage_summary,
                 NumberFormat.getPercentInstance().format(currentStoragePercentage),
                 Formatter.formatFileSize(mContext, info.freeBytes));

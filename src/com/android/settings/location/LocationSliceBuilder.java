@@ -57,7 +57,8 @@ public class LocationSliceBuilder {
         final String title = context.getString(R.string.location_settings_title);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
-        final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
+                ListBuilder.ICON_IMAGE, title);
 
         return new ListBuilder(context, CustomSliceRegistry.LOCATION_SLICE_URI,
                 ListBuilder.INFINITY)

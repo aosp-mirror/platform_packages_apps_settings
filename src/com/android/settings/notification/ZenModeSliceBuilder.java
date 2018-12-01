@@ -76,9 +76,9 @@ public class ZenModeSliceBuilder {
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final PendingIntent toggleAction = getBroadcastIntent(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
-        final SliceAction primarySliceAction = new SliceAction(primaryAction,
-                (IconCompat) null /* icon */, title);
-        final SliceAction toggleSliceAction = new SliceAction(toggleAction, null /* actionTitle */,
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction,
+                (IconCompat) null /* icon */, ListBuilder.ICON_IMAGE, title);
+        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction, null /* actionTitle */,
                 isZenModeEnabled);
 
         return new ListBuilder(context, CustomSliceRegistry.ZEN_MODE_SLICE_URI,
