@@ -49,4 +49,9 @@ public class InternetConnectivityPanelTest {
         assertThat(uris).containsExactly(CustomSliceRegistry.WIFI_SLICE_URI,
                 CustomSliceRegistry.AIRPLANE_URI);
     }
+
+    @Test
+    public void getSeeMoreIntent_notNull() {
+        assertThat(mPanel.getSeeMoreIntent()).isNotNull();
+    }
 }

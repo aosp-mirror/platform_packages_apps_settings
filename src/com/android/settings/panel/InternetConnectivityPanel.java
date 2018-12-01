@@ -19,6 +19,7 @@ package com.android.settings.panel;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -60,6 +61,6 @@ public class InternetConnectivityPanel implements PanelContent {
 
     @Override
     public Intent getSeeMoreIntent() {
-        return null;
+        return new Intent(Settings.ACTION_WIRELESS_SETTINGS);
     }
 }
