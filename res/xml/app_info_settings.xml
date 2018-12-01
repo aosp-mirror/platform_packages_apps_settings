@@ -66,10 +66,10 @@
         settings:controller="com.android.settings.applications.appinfo.InstantAppDomainsPreferenceController" />
 
     <Preference
-        android:key="data_settings_v2"
+        android:key="data_settings"
         android:title="@string/data_usage_app_summary_title"
         android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceControllerV2" />
+        settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
 
     <Preference
         android:key="time_spent_in_app"

@@ -208,11 +208,11 @@ public class DataUsageSummaryPreference extends Preference {
 
     private static void launchWifiDataUsage(Context context) {
         final Bundle args = new Bundle(1);
-        args.putParcelable(DataUsageListV2.EXTRA_NETWORK_TEMPLATE,
+        args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE,
                 NetworkTemplate.buildTemplateWifiWildcard());
         final SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setArguments(args)
-                .setDestination(DataUsageListV2.class.getName())
+                .setDestination(DataUsageList.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
         launcher.setTitleRes(R.string.wifi_data_usage);
         launcher.launch();

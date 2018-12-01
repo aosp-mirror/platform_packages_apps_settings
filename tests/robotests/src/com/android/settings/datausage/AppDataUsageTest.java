@@ -66,14 +66,14 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtilsInternal.class})
-public class AppDataUsageV2Test {
+public class AppDataUsageTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
     @Mock
     private PackageManager mPackageManager;
 
-    private AppDataUsageV2 mFragment;
+    private AppDataUsage mFragment;
 
     @Before
     public void setUp() {
@@ -92,7 +92,7 @@ public class AppDataUsageV2Test {
         when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
         when(mHeaderController.setUid(anyInt())).thenReturn(mHeaderController);
 
-        mFragment = spy(new AppDataUsageV2());
+        mFragment = spy(new AppDataUsage());
 
         when(mFragment.getPreferenceManager())
             .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
@@ -109,7 +109,7 @@ public class AppDataUsageV2Test {
             PackageManager.NameNotFoundException {
         final int fakeUserId = 100;
 
-        mFragment = spy(new AppDataUsageV2());
+        mFragment = spy(new AppDataUsage());
         final ArraySet<String> packages = new ArraySet<>();
         packages.add("pkg");
         final AppItem appItem = new AppItem(123456789);
@@ -138,7 +138,7 @@ public class AppDataUsageV2Test {
 
     @Test
     public void changePreference_backgroundData_shouldUpdateUI() {
-        mFragment = spy(new AppDataUsageV2());
+        mFragment = spy(new AppDataUsage());
         final AppItem appItem = new AppItem(123456789);
         final RestrictedSwitchPreference pref = mock(RestrictedSwitchPreference.class);
         final DataSaverBackend dataSaverBackend = mock(DataSaverBackend.class);
@@ -155,7 +155,7 @@ public class AppDataUsageV2Test {
 
     @Test
     public void updatePrefs_restrictedByAdmin_shouldDisablePreference() {
-        mFragment = spy(new AppDataUsageV2());
+        mFragment = spy(new AppDataUsage());
         final int testUid = 123123;
         final AppItem appItem = new AppItem(testUid);
         final RestrictedSwitchPreference restrictBackgroundPref
@@ -182,7 +182,7 @@ public class AppDataUsageV2Test {
 
     @Test
     public void bindData_noAppUsageData_shouldHideCycleSpinner() {
-        mFragment = spy(new AppDataUsageV2());
+        mFragment = spy(new AppDataUsage());
         final SpinnerPreference cycle = mock(SpinnerPreference.class);
         ReflectionHelpers.setField(mFragment, "mCycle", cycle);
         final Preference preference = mock(Preference.class);
@@ -198,7 +198,7 @@ public class AppDataUsageV2Test {
 
     @Test
     public void bindData_hasAppUsageData_shouldShowCycleSpinnerAndUpdateUsageSummary() {
-        mFragment = spy(new AppDataUsageV2());
+        mFragment = spy(new AppDataUsage());
         final Context context = RuntimeEnvironment.application;
         doReturn(context).when(mFragment).getContext();
         final long backgroundBytes = 1234L;

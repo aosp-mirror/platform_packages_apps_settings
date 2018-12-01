@@ -76,13 +76,13 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
     public Intent getIntent() {
         final Bundle args = new Bundle();
         final SubSettingLauncher launcher;
-        args.putParcelable(DataUsageListV2.EXTRA_NETWORK_TEMPLATE, mTemplate);
-        args.putInt(DataUsageListV2.EXTRA_SUB_ID, mSubId);
-        args.putInt(DataUsageListV2.EXTRA_NETWORK_TYPE, mTemplate.isMatchRuleMobile()
+        args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
+        args.putInt(DataUsageList.EXTRA_SUB_ID, mSubId);
+        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, mTemplate.isMatchRuleMobile()
             ? ConnectivityManager.TYPE_MOBILE : ConnectivityManager.TYPE_WIFI);
         launcher = new SubSettingLauncher(getContext())
             .setArguments(args)
-            .setDestination(DataUsageListV2.class.getName())
+            .setDestination(DataUsageList.class.getName())
             .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
         if (mTemplate.isMatchRuleMobile()) {
             launcher.setTitleRes(R.string.app_cellular_data_usage);

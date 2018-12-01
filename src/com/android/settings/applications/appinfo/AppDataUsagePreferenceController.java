@@ -31,7 +31,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.datausage.AppDataUsageV2;
+import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -42,13 +42,13 @@ import com.android.settingslib.net.NetworkCycleDataForUidLoader;
 
 import java.util.List;
 
-public class AppDataUsagePreferenceControllerV2 extends AppInfoPreferenceControllerBase
+public class AppDataUsagePreferenceController extends AppInfoPreferenceControllerBase
         implements LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>>, LifecycleObserver,
         OnResume, OnPause {
 
     private List<NetworkCycleDataForUid> mAppUsageData;
 
-    public AppDataUsagePreferenceControllerV2(Context context, String key) {
+    public AppDataUsagePreferenceController(Context context, String key) {
         super(context, key);
     }
 
@@ -110,7 +110,7 @@ public class AppDataUsagePreferenceControllerV2 extends AppInfoPreferenceControl
 
     @Override
     protected Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
-        return AppDataUsageV2.class;
+        return AppDataUsage.class;
     }
 
     private CharSequence getDataSummary() {

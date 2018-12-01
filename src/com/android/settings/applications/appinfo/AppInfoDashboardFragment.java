@@ -139,7 +139,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final String packageName = getPackageName();
         use(TimeSpentInAppPreferenceController.class).setPackageName(packageName);
 
-        use(AppDataUsagePreferenceControllerV2.class).setParentFragment(this);
+        use(AppDataUsagePreferenceController.class).setParentFragment(this);
         final AppInstallerInfoPreferenceController installer =
                 use(AppInstallerInfoPreferenceController.class);
         installer.setPackageName(packageName);

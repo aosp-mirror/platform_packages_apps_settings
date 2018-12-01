@@ -35,7 +35,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.datausage.AppDataUsageV2;
+import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -51,7 +51,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class AppDataUsagePreferenceControllerV2Test {
+public class AppDataUsagePreferenceControllerTest {
 
     @Mock
     private LoaderManager mLoaderManager;
@@ -59,13 +59,13 @@ public class AppDataUsagePreferenceControllerV2Test {
     private AppInfoDashboardFragment mFragment;
 
     private Context mContext;
-    private AppDataUsagePreferenceControllerV2 mController;
+    private AppDataUsagePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mController = spy(new AppDataUsagePreferenceControllerV2(mContext, "test_key"));
+        mController = spy(new AppDataUsagePreferenceController(mContext, "test_key"));
         mController.setParentFragment(mFragment);
     }
 
@@ -126,7 +126,7 @@ public class AppDataUsagePreferenceControllerV2Test {
 
     @Test
     public void getDetailFragmentClass_shouldReturnAppDataUsage() {
-        assertThat(mController.getDetailFragmentClass()).isEqualTo(AppDataUsageV2.class);
+        assertThat(mController.getDetailFragmentClass()).isEqualTo(AppDataUsage.class);
     }
 
     @Test

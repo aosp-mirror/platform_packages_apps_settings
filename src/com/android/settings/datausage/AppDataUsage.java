@@ -53,10 +53,10 @@ import com.android.settingslib.net.UidDetailProvider;
 
 import java.util.List;
 
-public class AppDataUsageV2 extends DataUsageBaseFragment implements OnPreferenceChangeListener,
+public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceChangeListener,
         DataSaverBackend.Listener {
 
-    private static final String TAG = "AppDataUsageV2";
+    private static final String TAG = "AppDataUsage";
 
     public static final String ARG_APP_ITEM = "app_item";
     public static final String ARG_NETWORK_TEMPLATE = "network_template";

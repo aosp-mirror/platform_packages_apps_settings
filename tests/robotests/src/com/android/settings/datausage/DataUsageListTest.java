@@ -47,7 +47,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class DataUsageListV2Test {
+public class DataUsageListTest {
 
     @Mock
     private CellDataPreference.DataStateListener mListener;
@@ -55,14 +55,14 @@ public class DataUsageListV2Test {
     private TemplatePreference.NetworkServices mNetworkServices;
     @Mock
     private Context mContext;
-    private DataUsageListV2 mDataUsageList;
+    private DataUsageList mDataUsageList;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
         mNetworkServices.mPolicyEditor = mock(NetworkPolicyEditor.class);
-        mDataUsageList = spy(DataUsageListV2.class);
+        mDataUsageList = spy(DataUsageList.class);
 
         doReturn(mContext).when(mDataUsageList).getContext();
         ReflectionHelpers.setField(mDataUsageList, "mDataStateListener", mListener);
@@ -88,8 +88,8 @@ public class DataUsageListV2Test {
     @Test
     public void processArgument_shouldGetTemplateFromArgument() {
         final Bundle args = new Bundle();
-        args.putParcelable(DataUsageListV2.EXTRA_NETWORK_TEMPLATE, mock(NetworkTemplate.class));
-        args.putInt(DataUsageListV2.EXTRA_SUB_ID, 3);
+        args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mock(NetworkTemplate.class));
+        args.putInt(DataUsageList.EXTRA_SUB_ID, 3);
         mDataUsageList.setArguments(args);
 
         mDataUsageList.processArgument();
@@ -101,8 +101,8 @@ public class DataUsageListV2Test {
     @Test
     public void processArgument_shouldGetNetworkTypeFromArgument() {
         final Bundle args = new Bundle();
-        args.putInt(DataUsageListV2.EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_WIFI);
-        args.putInt(DataUsageListV2.EXTRA_SUB_ID, 3);
+        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_WIFI);
+        args.putInt(DataUsageList.EXTRA_SUB_ID, 3);
         mDataUsageList.setArguments(args);
 
         mDataUsageList.processArgument();

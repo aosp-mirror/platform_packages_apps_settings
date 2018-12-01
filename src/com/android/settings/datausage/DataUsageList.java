@@ -74,13 +74,13 @@ import java.util.List;
  * Panel showing data usage history across various networks, including options
  * to inspect based on usage cycle and control through {@link NetworkPolicy}.
  */
-public class DataUsageListV2 extends DataUsageBaseFragment {
+public class DataUsageList extends DataUsageBaseFragment {
 
     static final String EXTRA_SUB_ID = "sub_id";
     static final String EXTRA_NETWORK_TEMPLATE = "network_template";
     static final String EXTRA_NETWORK_TYPE = "network_type";
 
-    private static final String TAG = "DataUsageListV2";
+    private static final String TAG = "DataUsageList";
     private static final boolean LOGD = false;
 
     private static final String KEY_USAGE_AMOUNT = "usage_amount";
@@ -150,7 +150,7 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
         mHeader.findViewById(R.id.filter_settings).setOnClickListener(btn -> {
             final Bundle args = new Bundle();
-            args.putParcelable(DataUsageListV2.EXTRA_NETWORK_TEMPLATE, mTemplate);
+            args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
             new SubSettingLauncher(getContext())
                     .setDestination(BillingCycleSettings.class.getName())
                     .setTitleRes(R.string.billing_cycle)
@@ -414,11 +414,11 @@ public class DataUsageListV2 extends DataUsageBaseFragment {
 
     private void startAppDataUsage(AppItem item) {
         final Bundle args = new Bundle();
-        args.putParcelable(AppDataUsageV2.ARG_APP_ITEM, item);
-        args.putParcelable(AppDataUsageV2.ARG_NETWORK_TEMPLATE, mTemplate);
+        args.putParcelable(AppDataUsage.ARG_APP_ITEM, item);
+        args.putParcelable(AppDataUsage.ARG_NETWORK_TEMPLATE, mTemplate);
 
         new SubSettingLauncher(getContext())
-                .setDestination(AppDataUsageV2.class.getName())
+                .setDestination(AppDataUsage.class.getName())
                 .setTitleRes(R.string.app_data_usage)
                 .setArguments(args)
                 .setSourceMetricsCategory(getMetricsCategory())
