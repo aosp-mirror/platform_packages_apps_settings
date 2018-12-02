@@ -35,18 +35,38 @@ public class WifiDppConfiguratorActivityTest {
             new ActivityTestRule<>(WifiDppConfiguratorActivity.class);
 
     @Test
-    public void testLaunchModeQrCodeScanner_shouldNotAutoFinish() {
+    public void launchActivity_modeQrCodeScanner_shouldNotAutoFinish() {
         Intent intent = new Intent();
         intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
                 WifiDppConfiguratorActivity.LaunchMode.LAUNCH_MODE_QR_CODE_SCANNER.getMode());
         mActivityRule.launchActivity(intent);
 
         assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
-        mActivityRule.finishActivity();
     }
 
     @Test
-    public void testNoLaunchMode_shouldFinishActivityWithResultCodeCanceled() {
+    public void launchActivity_modeQrCodeGenerator_shouldNotAutoFinish() {
+        Intent intent = new Intent();
+        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
+                WifiDppConfiguratorActivity.LaunchMode.LAUNCH_MODE_QR_CODE_GENERATOR.getMode());
+        mActivityRule.launchActivity(intent);
+
+        assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
+    }
+
+    @Test
+    public void launchActivity_modeChooseSavedWifiNetwork_shouldNotAutoFinish() {
+        Intent intent = new Intent();
+        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
+                WifiDppConfiguratorActivity.LaunchMode
+                .LAUNCH_MODE_CHOOSE_SAVED_WIFI_NETWORK.getMode());
+        mActivityRule.launchActivity(intent);
+
+        assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
+    }
+
+    @Test
+    public void launchActivity_noLaunchMode_shouldFinishActivityWithResultCodeCanceled() {
         // If we do not specify launch mode, the activity will finish itself right away
         Intent intent = new Intent();
         mActivityRule.launchActivity(intent);

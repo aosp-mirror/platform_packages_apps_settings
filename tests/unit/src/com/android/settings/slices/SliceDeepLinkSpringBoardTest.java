@@ -26,11 +26,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.MediumTest;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.android.settings.bluetooth.BluetoothSliceBuilder;
-import com.android.settings.location.LocationSliceBuilder;
-import com.android.settings.notification.ZenModeSliceBuilder;
-import com.android.settings.wifi.WifiSlice;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,7 +52,8 @@ public class SliceDeepLinkSpringBoardTest {
     @Test
     @Presubmit
     public void launchesDeepLinkIntent_wifiSlice_shouldNotCrash() {
-        final Intent deepLinkIntent = getSpringboardIntent(WifiSlice.WIFI_URI.toString());
+        final Intent deepLinkIntent = getSpringboardIntent(
+                CustomSliceRegistry.WIFI_SLICE_URI.toString());
 
         mContext.startActivity(deepLinkIntent);
     }
@@ -66,7 +62,7 @@ public class SliceDeepLinkSpringBoardTest {
     @Presubmit
     public void launchesDeepLinkIntent_bluetoothSlice_shouldNotCrash() {
         final Intent deepLinkIntent = getSpringboardIntent(
-                BluetoothSliceBuilder.BLUETOOTH_URI.toString());
+                CustomSliceRegistry.BLUETOOTH_URI.toString());
 
         mContext.startActivity(deepLinkIntent);
     }
@@ -75,7 +71,7 @@ public class SliceDeepLinkSpringBoardTest {
     @Presubmit
     public void launchesDeepLinkIntent_dndSlice_shouldNotCrash() {
         final Intent deepLinkIntent = getSpringboardIntent(
-                ZenModeSliceBuilder.ZEN_MODE_URI.toString());
+                CustomSliceRegistry.ZEN_MODE_SLICE_URI.toString());
 
         mContext.startActivity(deepLinkIntent);
     }
@@ -84,7 +80,7 @@ public class SliceDeepLinkSpringBoardTest {
     @Presubmit
     public void launchesDeepLinkIntent_locationSlice_shouldNotCrash() {
         final Intent deepLinkIntent = getSpringboardIntent(
-                LocationSliceBuilder.LOCATION_URI.toString());
+                CustomSliceRegistry.LOCATION_SLICE_URI.toString());
 
         mContext.startActivity(deepLinkIntent);
     }

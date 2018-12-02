@@ -17,7 +17,7 @@
 <resources>
 
     <style name="Widget.ActionBar.Base"
-            parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid"/>
+           parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid"/>
 
     <style name="Widget.ActionBar"
            parent="Widget.ActionBar.Base">
@@ -259,7 +259,8 @@
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium"/>
     <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small"/>
-    <style name="TextAppearance.Switch" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+    <style name="TextAppearance.Switch"
+           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -400,9 +401,11 @@
 
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
 
-    <style name="SettingsActionButton" parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
+    <style name="SettingsActionButton"
+           parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
         <item name="android:drawablePadding">4dp</item>
-        <item name="android:drawableTint">@*android:color/btn_colored_borderless_text_material</item>
+        <item name="android:drawableTint">@*android:color/btn_colored_borderless_text_material
+        </item>
         <item name="android:layout_marginEnd">8dp</item>
         <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">20dp</item>
@@ -461,6 +464,13 @@
         <item name="android:layout_marginEnd">@dimen/homepage_card_side_margin</item>
         <item name="cardCornerRadius">8dp</item>
         <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/homepage_card_stroke_color</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="SearchBarStyle">
+        <item name="android:layout_margin">@dimen/search_bar_margin</item>
+        <item name="cardCornerRadius">8dp</item>
         <item name="strokeColor">@color/homepage_card_stroke_color</item>
         <item name="strokeWidth">1dp</item>
     </style>

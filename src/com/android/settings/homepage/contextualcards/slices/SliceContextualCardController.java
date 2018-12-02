@@ -17,12 +17,19 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 
-import com.android.settings.homepage.contextualcards.CardContentProvider;
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.CardDatabaseHelper;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardController;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.homepage.contextualcards.ContextualCardFeedbackDialog;
 import com.android.settings.homepage.contextualcards.ContextualCardUpdateListener;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.ThreadUtils;
 
 /**
@@ -32,7 +39,8 @@ public class SliceContextualCardController implements ContextualCardController {
 
     private static final String TAG = "SliceCardController";
 
-    private Context mContext;
+    private final Context mContext;
+
     private ContextualCardUpdateListener mCardUpdateListener;
 
     public SliceContextualCardController(Context context) {
@@ -51,7 +59,7 @@ public class SliceContextualCardController implements ContextualCardController {
 
     @Override
     public void onActionClick(ContextualCard card) {
-        //TODO(b/113783548): Implement feedback mechanism
+
     }
 
     @Override
@@ -60,10 +68,33 @@ public class SliceContextualCardController implements ContextualCardController {
             final CardDatabaseHelper dbHelper = CardDatabaseHelper.getInstance(mContext);
             dbHelper.markContextualCardAsDismissed(mContext, card.getName());
         });
+        showFeedbackDialog(card);
+        final ContextualCardFeatureProvider contexualCardFeatureProvider =
+                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
+        contexualCardFeatureProvider.logContextualCardDismiss(mContext, card);
     }
 
     @Override
     public void setCardUpdateListener(ContextualCardUpdateListener listener) {
         mCardUpdateListener = listener;
+    }
+
+    @VisibleForTesting
+    void showFeedbackDialog(ContextualCard card) {
+        final String email = mContext.getString(R.string.config_contextual_card_feedback_email);
+        if (TextUtils.isEmpty(email)) {
+            return;
+        }
+        final Intent feedbackIntent = new Intent(mContext, ContextualCardFeedbackDialog.class);
+        feedbackIntent.putExtra(ContextualCardFeedbackDialog.EXTRA_CARD_NAME,
+                getSimpleCardName(card));
+        feedbackIntent.putExtra(ContextualCardFeedbackDialog.EXTRA_FEEDBACK_EMAIL, email);
+        feedbackIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(feedbackIntent);
+    }
+
+    private String getSimpleCardName(ContextualCard card) {
+        final String[] split = card.getName().split("/");
+        return split[split.length - 1];
     }
 }

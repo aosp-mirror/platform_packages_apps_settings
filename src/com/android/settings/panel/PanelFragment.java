@@ -16,19 +16,20 @@
 
 package com.android.settings.panel;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.lifecycle.LiveData;
-import androidx.slice.Slice;
-import androidx.slice.widget.SliceLiveData;
-import androidx.slice.widget.SliceView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 
 import androidx.annotation.NonNull;
@@ -38,20 +39,24 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.overlay.FeatureFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PanelFragment extends Fragment {
 
     private static final String TAG = "PanelFragment";
 
-    private List<SliceView> mSliceViewList;
-    private List<LiveData<Slice>> mSliceDataList;
-    private LinearLayout mPanelLayout;
+    private TextView mTitleView;
+    private Button mSeeMoreButton;
+    private Button mDoneButton;
+    private RecyclerView mPanelSlices;
+
+    @VisibleForTesting
+    PanelSlicesAdapter mAdapter;
+
+    private View.OnClickListener mDoneButtonListener = (v) -> {
+        Log.d(TAG, "Closing dialog");
+        getActivity().finish();
+    };
 
     public PanelFragment() {
-        mSliceViewList = new ArrayList<>();
-        mSliceDataList = new ArrayList<>();
     }
 
     @Nullable
@@ -61,28 +66,37 @@ public class PanelFragment extends Fragment {
         final FragmentActivity activity = getActivity();
         final View view = inflater.inflate(R.layout.panel_layout, container, false);
 
-        mPanelLayout = view.findViewById(R.id.panel_parent_layout);
-        final Bundle arguments = getArguments();
+        mPanelSlices = view.findViewById(R.id.panel_parent_layout);
+        mSeeMoreButton = view.findViewById(R.id.see_more);
+        mDoneButton = view.findViewById(R.id.done);
+        mTitleView = view.findViewById(R.id.title);
 
+        final Bundle arguments = getArguments();
         final String panelType = arguments.getString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT);
 
         final PanelContent panel = FeatureFactory.getFactory(activity)
                 .getPanelFeatureProvider()
                 .getPanel(activity, panelType);
 
-        activity.setTitle(panel.getTitle());
+        mAdapter = new PanelSlicesAdapter(this, panel.getSlices());
 
+        mPanelSlices.setHasFixedSize(true);
+        mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));
+        mPanelSlices.setAdapter(mAdapter);
 
-        for (Uri uri : panel.getSlices()) {
-            final SliceView sliceView = new SliceView(activity);
-            mPanelLayout.addView(sliceView);
-            final LiveData<Slice> liveData = SliceLiveData.fromUri(activity, uri);
-            liveData.observe(this /* lifecycleOwner */, sliceView);
+        mTitleView.setText(panel.getTitle());
 
-            mSliceDataList.add(liveData);
-            mSliceViewList.add(sliceView);
-        }
+        mSeeMoreButton.setOnClickListener(getSeeMoreListener(panel.getSeeMoreIntent()));
+        mDoneButton.setOnClickListener(mDoneButtonListener);
 
         return view;
+    }
+
+    private View.OnClickListener getSeeMoreListener(final Intent intent) {
+        return (v) -> {
+            final FragmentActivity activity = getActivity();
+            activity.startActivity(intent);
+            activity.finish();
+        };
     }
 }

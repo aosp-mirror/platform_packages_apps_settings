@@ -68,8 +68,10 @@ public interface SearchFeatureProvider {
         if (activity == null || toolbar == null) {
             return;
         }
-        if (!Utils.isPackageEnabled(activity, getSettingsIntelligencePkgName(activity))) {
-            final ViewGroup parent = (ViewGroup)toolbar.getParent();
+
+        if (!Utils.isDeviceProvisioned(activity) ||
+                !Utils.isPackageEnabled(activity, getSettingsIntelligencePkgName(activity))) {
+            final ViewGroup parent = (ViewGroup) toolbar.getParent();
             if (parent != null) {
                 parent.setVisibility(View.GONE);
             }

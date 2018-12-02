@@ -101,7 +101,7 @@ public class RoundedHomepageIconTest {
     public void onBindTile_externalTileWithBackgroundColorHint_shouldUpdateIcon() {
         final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
-                R.color.memory_critical);
+                R.color.material_blue_500);
         doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
                 .when(tile).getIcon(mContext);
 
@@ -110,7 +110,7 @@ public class RoundedHomepageIconTest {
         icon.setBackgroundColor(mContext, tile);
 
         assertThat(icon.mBackgroundColor)
-                .isEqualTo(mContext.getColor(R.color.memory_critical));
+                .isEqualTo(mContext.getColor(R.color.material_blue_500));
     }
 
 }

@@ -44,6 +44,7 @@ import androidx.slice.widget.SliceLiveData;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceManager;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SlicesFeatureProvider;
@@ -107,7 +108,7 @@ public class Enhanced4gLteSliceHelperTest {
         mEnhanced4gLteSliceHelper.setDefaultVoiceSubId(-1);
 
         final Slice slice = mEnhanced4gLteSliceHelper.createEnhanced4gLteSlice(
-                Enhanced4gLteSliceHelper.SLICE_URI);
+                CustomSliceRegistry.ENHANCED_4G_SLICE_URI);
 
         assertThat(slice).isNull();
     }
@@ -117,7 +118,7 @@ public class Enhanced4gLteSliceHelperTest {
         when(mMockImsManager.isVolteEnabledByPlatform()).thenReturn(false);
 
         final Slice slice = mEnhanced4gLteSliceHelper.createEnhanced4gLteSlice(
-                Enhanced4gLteSliceHelper.SLICE_URI);
+                CustomSliceRegistry.ENHANCED_4G_SLICE_URI);
 
         assertThat(mEnhanced4gLteSliceHelper.getDefaultVoiceSubId()).isEqualTo(1);
         assertThat(slice).isNull();
@@ -132,7 +133,7 @@ public class Enhanced4gLteSliceHelperTest {
         when(mMockCarrierConfigManager.getConfigForSubId(1)).thenReturn(null);
 
         final Slice slice = mEnhanced4gLteSliceHelper.createEnhanced4gLteSlice(
-                Enhanced4gLteSliceHelper.SLICE_URI);
+                CustomSliceRegistry.ENHANCED_4G_SLICE_URI);
 
         assertThat(mEnhanced4gLteSliceHelper.getDefaultVoiceSubId()).isEqualTo(1);
         testEnhanced4gLteSettingsToggleSlice(slice);
@@ -148,7 +149,7 @@ public class Enhanced4gLteSliceHelperTest {
         when(mSlicesFeatureProvider.getNewEnhanced4gLteSliceHelper(mContext))
                 .thenReturn(mEnhanced4gLteSliceHelper);
 
-        final Slice slice = mProvider.onBindSlice(Enhanced4gLteSliceHelper.SLICE_URI);
+        final Slice slice = mProvider.onBindSlice(CustomSliceRegistry.ENHANCED_4G_SLICE_URI);
 
         assertThat(mEnhanced4gLteSliceHelper.getDefaultVoiceSubId()).isEqualTo(1);
         testEnhanced4gLteSettingsToggleSlice(slice);

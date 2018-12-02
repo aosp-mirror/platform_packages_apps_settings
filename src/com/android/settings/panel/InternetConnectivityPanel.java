@@ -16,16 +16,13 @@
 
 package com.android.settings.panel;
 
-import androidx.annotation.VisibleForTesting;
-
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.SettingsSlicesContract;
+import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.wifi.WifiSlice;
+import com.android.settings.slices.CustomSliceRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,18 +31,10 @@ import java.util.List;
  * Represents the Internet Connectivity Panel.
  *
  * <p>
- *     Displays Wifi (full Slice) and Airplane mode.
+ * Displays Wifi (full Slice) and Airplane mode.
  * </p>
  */
 public class InternetConnectivityPanel implements PanelContent {
-
-    @VisibleForTesting
-    static final Uri AIRPLANE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSlicesContract.AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(SettingsSlicesContract.KEY_AIRPLANE_MODE)
-            .build();
 
     private final Context mContext;
 
@@ -65,13 +54,13 @@ public class InternetConnectivityPanel implements PanelContent {
     @Override
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
-        uris.add(WifiSlice.WIFI_URI);
-        uris.add(AIRPLANE_URI);
+        uris.add(CustomSliceRegistry.WIFI_SLICE_URI);
+        uris.add(CustomSliceRegistry.AIRPLANE_URI);
         return uris;
     }
 
     @Override
     public Intent getSeeMoreIntent() {
-        return null;
+        return new Intent(Settings.ACTION_WIRELESS_SETTINGS);
     }
 }

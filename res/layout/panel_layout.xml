@@ -14,13 +14,30 @@
     See the License for the specific language governing permissions and
     limitations under the License
   -->
+
+<!-- Note: There is a landscape version of this layout. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/panel_parent_layout"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="8dp"
-        android:layout_margin="4dp"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:paddingBottom="24dp"
+        android:paddingTop="18dp"
+        android:textColor="?android:attr/colorPrimary"
+        android:textSize="20sp"/>
+
+    <include layout="@layout/horizontal_divider"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/panel_parent_layout"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <include layout="@layout/panel_buttons"/>
 </LinearLayout>

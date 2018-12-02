@@ -18,7 +18,6 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -43,8 +42,8 @@ import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
-import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -66,20 +65,6 @@ import java.util.stream.Collectors;
  * TODO This class will be refactor for Bluetooth connected devices only.
  */
 public class ConnectedDeviceSlice implements CustomSliceable {
-
-    /**
-     * The path denotes the unique name of Connected device Slice.
-     */
-    public static final String PATH_CONNECTED_DEVICE = "connected_device";
-
-    /**
-     * Backing Uri for Connected device Slice.
-     */
-    public static final Uri CONNECTED_DEVICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_CONNECTED_DEVICE)
-            .build();
 
     /**
      * To sort the Bluetooth devices by {@link CachedBluetoothDevice}.
@@ -109,12 +94,9 @@ public class ConnectedDeviceSlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return CONNECTED_DEVICE_URI;
+        return CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI;
     }
 
-    /**
-     * Return a Connected Device Slice bound to {@link #CONNECTED_DEVICE_URI}.
-     */
     @Override
     public Slice getSlice() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
@@ -124,10 +106,11 @@ public class ConnectedDeviceSlice implements CustomSliceable {
                 R.string.no_connected_devices);
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext, 0,
                 getIntent(), 0);
-        final SliceAction primarySliceAction = new SliceAction(primaryActionIntent, icon,
-                title);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryActionIntent, icon,
+                ListBuilder.ICON_IMAGE, title);
         final ListBuilder listBuilder =
-                new ListBuilder(mContext, CONNECTED_DEVICE_URI, ListBuilder.INFINITY)
+                new ListBuilder(mContext, CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI,
+                        ListBuilder.INFINITY)
                         .setAccentColor(Utils.getColorAccentDefaultColor(mContext));
 
         // Get row builders by connected devices, e.g. Bluetooth.
@@ -159,14 +142,12 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.connected_devices_dashboard_title)
                 .toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_CONNECTED_DEVICE).build();
 
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                ConnectedDeviceDashboardFragment.class.getName(), PATH_CONNECTED_DEVICE,
+                ConnectedDeviceDashboardFragment.class.getName(), "" /* key */,
                 screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
     }
 
     @Override
@@ -251,9 +232,10 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     }
 
     private SliceAction buildBluetoothDetailDeepLinkAction(CachedBluetoothDevice bluetoothDevice) {
-        return new SliceAction(
+        return SliceAction.createDeeplink(
                 getBluetoothDetailIntent(bluetoothDevice),
                 IconCompat.createWithResource(mContext, R.drawable.ic_settings),
+                ListBuilder.ICON_IMAGE,
                 bluetoothDevice.getName());
     }
 

@@ -16,8 +16,9 @@
 
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
+import static com.android.settings.slices.CustomSliceRegistry.BATTERY_INFO_SLICE_URI;
+
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -37,7 +38,6 @@ import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.slices.CustomSliceable;
-import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;
 
 /**
@@ -45,20 +45,6 @@ import com.android.settings.slices.SliceBuilderUtils;
  */
 public class BatterySlice implements CustomSliceable {
     private static final String TAG = "BatterySlice";
-
-    /**
-     * The path denotes the unique name of battery slice.
-     */
-    public static final String PATH_BATTERY_INFO = "battery_card";
-
-    /**
-     * Backing Uri for the Battery Slice.
-     */
-    public static final Uri BATTERY_CARD_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_BATTERY_INFO)
-            .build();
 
     private final Context mContext;
 
@@ -69,9 +55,6 @@ public class BatterySlice implements CustomSliceable {
         mContext = context;
     }
 
-    /**
-     * Return a {@link BatterySlice} bound to {@link #BATTERY_CARD_URI}
-     */
     @Override
     public Slice getSlice() {
         if (mBatteryInfo == null) {
@@ -81,8 +64,9 @@ public class BatterySlice implements CustomSliceable {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_battery);
         final CharSequence title = mContext.getText(R.string.power_usage_summary_title);
-        final SliceAction primarySliceAction = new SliceAction(getPrimaryAction(), icon, title);
-        final Slice slice = new ListBuilder(mContext, BATTERY_CARD_URI, ListBuilder.INFINITY)
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
+                ListBuilder.ICON_IMAGE, title);
+        final Slice slice = new ListBuilder(mContext, BATTERY_INFO_SLICE_URI, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
                 .setHeader(new ListBuilder.HeaderBuilder().setTitle(title))
                 .addRow(new ListBuilder.RowBuilder()
@@ -97,7 +81,7 @@ public class BatterySlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return BATTERY_CARD_URI;
+        return BATTERY_INFO_SLICE_URI;
     }
 
     @Override
@@ -108,12 +92,10 @@ public class BatterySlice implements CustomSliceable {
     @Override
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.power_usage_summary_title).toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_BATTERY_INFO).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                PowerUsageSummary.class.getName(), PATH_BATTERY_INFO, screenTitle,
+                PowerUsageSummary.class.getName(), "" /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
     }
 
     @Override

@@ -71,6 +71,9 @@ public class SlicesDatabaseAccessor {
      */
     public SliceData getSliceDataFromUri(Uri uri) {
         Pair<Boolean, String> pathData = SliceBuilderUtils.getPathData(uri);
+        if (pathData == null) {
+            throw new IllegalStateException("Invalid Slices uri: " + uri);
+        }
         Cursor cursor = getIndexedSliceData(pathData.second /* key */);
         return buildSliceData(cursor, uri, pathData.first /* isIntentOnly */);
     }

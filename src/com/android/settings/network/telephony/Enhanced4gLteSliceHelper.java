@@ -19,7 +19,6 @@ package com.android.settings.network.telephony;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -40,9 +39,8 @@ import androidx.slice.builders.SliceAction;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.slices.SettingsSliceProvider;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
-import com.android.settings.slices.SliceBuilderUtils;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -57,12 +55,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class Enhanced4gLteSliceHelper {
 
-    private static final String TAG = "Enhanced4gLteSliceHelper";
-
-    /**
-     * Settings slice path to enhanced 4g LTE setting.
-     */
-    public static final String PATH_ENHANCED_4G_LTE = "enhanced_4g_lte";
+    private static final String TAG = "Enhanced4gLteSlice";
 
     /**
      * Action passed for changes to enhanced 4g LTE slice (toggle).
@@ -70,14 +63,6 @@ public class Enhanced4gLteSliceHelper {
     public static final String ACTION_ENHANCED_4G_LTE_CHANGED =
             "com.android.settings.mobilenetwork.action.ENHANCED_4G_LTE_CHANGED";
 
-    /**
-     * Slice Uri for Enhanced 4G slice
-     */
-    public static final Uri SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_ENHANCED_4G_LTE)
-            .build();
     /**
      * Action for mobile network settings activity which
      * allows setting configuration for Enhanced 4G LTE
@@ -107,7 +92,7 @@ public class Enhanced4gLteSliceHelper {
      * Enhanced 4g lte mode title variant resource name
      */
     private static final String RESOURCE_ENHANCED_4G_LTE_MODE_TITLE_VARIANT =
-          "enhanced_4g_lte_mode_title_variant";
+            "enhanced_4g_lte_mode_title_variant";
 
     @VisibleForTesting
     public Enhanced4gLteSliceHelper(Context context) {
@@ -187,13 +172,15 @@ public class Enhanced4gLteSliceHelper {
                 .addRow(new RowBuilder()
                         .setTitle(getEnhanced4glteModeTitle(subId))
                         .addEndItem(
-                                new SliceAction(
+                                SliceAction.createToggle(
                                         getBroadcastIntent(ACTION_ENHANCED_4G_LTE_CHANGED),
                                         null /* actionTitle */, isEnhanced4gLteEnabled))
-                        .setPrimaryAction(new SliceAction(
-                                getActivityIntent(ACTION_MOBILE_NETWORK_SETTINGS_ACTIVITY),
-                                icon,
-                                getEnhanced4glteModeTitle(subId))))
+                        .setPrimaryAction(
+                                SliceAction.createDeeplink(
+                                        getActivityIntent(ACTION_MOBILE_NETWORK_SETTINGS_ACTIVITY),
+                                        icon,
+                                        ListBuilder.ICON_IMAGE,
+                                        getEnhanced4glteModeTitle(subId))))
                 .build();
     }
 
@@ -225,8 +212,7 @@ public class Enhanced4gLteSliceHelper {
         }
         // notify change in slice in any case to get re-queried. This would result in displaying
         // appropriate message with the updated setting.
-        final Uri uri = SliceBuilderUtils.getUri(PATH_ENHANCED_4G_LTE, false /*isPlatformSlice*/);
-        mContext.getContentResolver().notifyChange(uri, null);
+        mContext.getContentResolver().notifyChange(CustomSliceRegistry.ENHANCED_4G_SLICE_URI, null);
     }
 
     private CharSequence getEnhanced4glteModeTitle(int subId) {

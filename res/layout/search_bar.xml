@@ -15,42 +15,33 @@
      limitations under the License.
 -->
 
-<FrameLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/search_bar_container"
+    android:id="@+id/search_bar"
+    style="@style/SearchBarStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/colorBackground"
-    android:theme="@style/ThemeOverlay.Settings.SearchBar"
     app:layout_scrollFlags="scroll|enterAlways">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/search_bar"
+    <Toolbar
+        android:id="@+id/search_action_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/search_bar_margin"
-        app:cardCornerRadius="@dimen/search_bar_corner_radius"
-        app:cardElevation="@dimen/search_bar_card_elevation">
-        <Toolbar
-            android:id="@+id/search_action_bar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/search_bar_height"
-            android:background="?android:attr/selectableItemBackground"
-            android:contentInsetStartWithNavigation="@dimen/search_bar_content_inset"
-            android:navigationIcon="@drawable/ic_search_24dp">
-            <TextView
-                android:id="@+id/search_action_bar_title"
-                style="@style/TextAppearance.SearchBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_menu"/>
-        </Toolbar>
-        <ImageView
-            android:id="@+id/account_avatar"
-            android:layout_marginStart="@dimen/search_bar_avatar_start_margin"
-            android:layout_marginEnd="@dimen/search_bar_avatar_end_margin"
-            android:layout_width="@dimen/search_bar_avatar_size"
-            android:layout_height="@dimen/search_bar_avatar_size"
-            android:layout_gravity="end|center_vertical"/>
-    </androidx.cardview.widget.CardView>
-</FrameLayout>
+        android:layout_height="@dimen/search_bar_height"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentInsetStartWithNavigation="@dimen/search_bar_content_inset"
+        android:navigationIcon="@drawable/ic_search_24dp">
+        <TextView
+            android:id="@+id/search_action_bar_title"
+            style="@style/TextAppearance.SearchBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_menu"/>
+    </Toolbar>
+    <ImageView
+        android:id="@+id/account_avatar"
+        android:layout_marginStart="@dimen/search_bar_avatar_start_margin"
+        android:layout_marginEnd="@dimen/search_bar_avatar_end_margin"
+        android:layout_width="@dimen/search_bar_avatar_size"
+        android:layout_height="@dimen/search_bar_avatar_size"
+        android:layout_gravity="end|center_vertical"/>
+</com.google.android.material.card.MaterialCardView>

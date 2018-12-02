@@ -22,17 +22,14 @@ import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
-import android.net.Uri;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
-import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -43,7 +40,7 @@ import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.slices.SettingsSliceProvider;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
 
 
@@ -54,37 +51,23 @@ public class FlashlightSliceBuilder {
 
     private static final String TAG = "FlashlightSliceBuilder";
 
-    public static final String KEY_FLASHLIGHT = "flashlight";
-
-    /**
-     * Backing Uri for the Flashlight Slice.
-     */
-    public static final Uri FLASHLIGHT_URI = new Uri.Builder()
-        .scheme(ContentResolver.SCHEME_CONTENT)
-        .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-        .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-        .appendPath(KEY_FLASHLIGHT)
-        .build();
-
     /**
      * Action notifying a change on the Flashlight Slice.
      */
     public static final String ACTION_FLASHLIGHT_SLICE_CHANGED =
-        "com.android.settings.flashlight.action.FLASHLIGHT_SLICE_CHANGED";
+            "com.android.settings.flashlight.action.FLASHLIGHT_SLICE_CHANGED";
 
     /**
      * Action broadcasting a change on whether flashlight is on or off.
      */
     public static final String ACTION_FLASHLIGHT_CHANGED =
-        "com.android.settings.flashlight.action.FLASHLIGHT_CHANGED";
+            "com.android.settings.flashlight.action.FLASHLIGHT_CHANGED";
 
     public static final IntentFilter INTENT_FILTER = new IntentFilter(ACTION_FLASHLIGHT_CHANGED);
 
-    private FlashlightSliceBuilder() {}
+    private FlashlightSliceBuilder() {
+    }
 
-    /**
-     * Return a Flashlight Slice bound to {@link #FLASHLIGHT_URI}.
-     */
     public static Slice getSlice(Context context) {
         if (!isFlashlightAvailable(context)) {
             return null;
@@ -93,14 +76,15 @@ public class FlashlightSliceBuilder {
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final IconCompat icon =
                 IconCompat.createWithResource(context, R.drawable.ic_signal_flashlight);
-        return new ListBuilder(context, FLASHLIGHT_URI, ListBuilder.INFINITY)
-            .setAccentColor(color)
-            .addRow(new RowBuilder()
-                .setTitle(context.getText(R.string.power_flashlight))
-                .setTitleItem(icon, ICON_IMAGE)
-                .setPrimaryAction(
-                        new SliceAction(toggleAction, null, isFlashlightEnabled(context))))
-            .build();
+        return new ListBuilder(context, CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                ListBuilder.INFINITY)
+                .setAccentColor(color)
+                .addRow(new RowBuilder()
+                        .setTitle(context.getText(R.string.power_flashlight))
+                        .setTitleItem(icon, ICON_IMAGE)
+                        .setPrimaryAction(
+                                SliceAction.createToggle(toggleAction, null, isFlashlightEnabled(context))))
+                .build();
     }
 
     /**
@@ -119,7 +103,7 @@ public class FlashlightSliceBuilder {
         } catch (CameraAccessException e) {
             Log.e(TAG, "Camera couldn't set torch mode.", e);
         }
-        context.getContentResolver().notifyChange(FLASHLIGHT_URI, null);
+        context.getContentResolver().notifyChange(CustomSliceRegistry.FLASHLIGHT_SLICE_URI, null);
     }
 
     private static String getCameraId(Context context) throws CameraAccessException {
@@ -130,7 +114,7 @@ public class FlashlightSliceBuilder {
             Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
             Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
             if (flashAvailable != null && flashAvailable
-                  && lensFacing != null && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                    && lensFacing != null && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
                 return id;
             }
         }
@@ -141,16 +125,16 @@ public class FlashlightSliceBuilder {
         final Intent intent = new Intent(ACTION_FLASHLIGHT_SLICE_CHANGED);
         intent.setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-            PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
     private static boolean isFlashlightAvailable(Context context) {
         return Settings.Secure.getInt(
-            context.getContentResolver(), Secure.FLASHLIGHT_AVAILABLE, 0) == 1;
+                context.getContentResolver(), Secure.FLASHLIGHT_AVAILABLE, 0) == 1;
     }
 
     private static boolean isFlashlightEnabled(Context context) {
         return Settings.Secure.getInt(
-            context.getContentResolver(), Secure.FLASHLIGHT_ENABLED, 0) == 1;
+                context.getContentResolver(), Secure.FLASHLIGHT_ENABLED, 0) == 1;
     }
 }

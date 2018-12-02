@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -47,9 +48,18 @@ public class WifiDppQrCodeScannerFragmentTest {
     }
 
     @Test
-    public void testLeftButton_shouldFinishActivityWithResultCodeCanceled() {
+    public void leftButton_shouldFinishActivityWithResultCodeCanceled() {
         onView(withText("Cancel")).perform(click());
+
         assertThat(mActivityRule.getActivityResult().getResultCode()).
                 isEqualTo(Activity.RESULT_CANCELED);
+    }
+
+    @Test
+    public void rotateScreen_shouldNotCrash() {
+        mActivityRule.getActivity().setRequestedOrientation(
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        mActivityRule.getActivity().setRequestedOrientation(
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 }

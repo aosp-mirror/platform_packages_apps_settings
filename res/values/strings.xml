@@ -3456,9 +3456,9 @@
     <!-- Button title to factory data reset the entire device. The "(factory reset)" part is optional for translation. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=3531267871084279512]-->
     <string name="master_clear_short_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="master_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
     <string name="master_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
     <!-- SD card & phone storage settings screen, notification if other users are present on the device [CHAR LIMIT=NONE] -->
@@ -3488,17 +3488,17 @@
     <!-- SD card & phone storage settings screen, description for check box to erase eSIMs for tablets [CHAR LIMIT=NONE] -->
     <string name="erase_esim_storage_description" product="tablet">Erase all eSIMs on the tablet. This will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
-    <string name="master_clear_button_text" product="tablet">Reset tablet</string>
+    <string name="master_clear_button_text" product="tablet">Erase all data</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
-    <string name="master_clear_button_text" product="default">Reset phone</string>
+    <string name="master_clear_button_text" product="default">Erase all data</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button -->
-    <string name="master_clear_final_desc">Erase all your personal information and downloaded apps? You can\u2019t undo this action!</string>
+    <string name="master_clear_final_desc">All of your personal information and downloaded apps will be deleted. You can\u2019t undo this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset phone button -->
     <string name="master_clear_final_button_text">Erase everything</string>
     <!-- Master clear failed message -->
     <string name="master_clear_failed">No reset was performed because the System Clear service isn\u2019t available.</string>
     <!-- Master clear confirmation screen title [CHAR LIMIT=30] -->
-    <string name="master_clear_confirm_title">Reset?</string>
+    <string name="master_clear_confirm_title">Erase all data?</string>
     <!-- Error message for users that aren't allowed to factory reset [CHAR LIMIT=none] -->
     <string name="master_clear_not_available">Factory reset is not available for this user</string>
     <!-- Master clear progress screen title [CHAR LIMIT=30] -->
@@ -8931,25 +8931,28 @@
     <string name="condition_expand_hide">Hide</string>
 
     <!-- Title of condition that hotspot is on [CHAR LIMIT=30] -->
-    <string name="condition_hotspot_title">Hotspot is on</string>
+    <string name="condition_hotspot_title">Hotspot</string>
 
     <!-- Summary of condition that hotspot is on [CHAR LIMIT=NONE] -->
-    <string name="condition_hotspot_summary">Portable Wi-Fi hotspot <xliff:g name="ap_name" example="AndroidAP">%1$s</xliff:g> is active, Wi-Fi for this device is turned off.</string>
+    <string name="condition_hotspot_summary"><xliff:g name="ap_name" example="AndroidAP">%1$s</xliff:g> on</string>
 
     <!-- Title of condition that airplane mode is on [CHAR LIMIT=30] -->
     <string name="condition_airplane_title">Airplane mode is on</string>
 
     <!-- Summary of condition that airplane mode is on [CHAR LIMIT=NONE] -->
-    <string name="condition_airplane_summary">When airplane mode is turned on, Wi\u2011Fi, Bluetooth, and mobile network are turned off. Wi\u2011Fi and Bluetooth can be turned back on.</string>
+    <string name="condition_airplane_summary">Networks unavailable</string>
 
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
+
+    <!-- Summary of condition that do not disturb is on [CHAR LIMIT=36] -->
+    <string name="condition_zen_summary">Impacts what you hear and see</string>
 
     <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
     <string name="condition_battery_title">Battery Saver is on</string>
 
     <!-- Summary of condition that battery saver is on [CHAR LIMIT=NONE] -->
-    <string name="condition_battery_summary">Battery Saver turns off some device features and restricts apps</string>
+    <string name="condition_battery_summary">Features restricted</string>
 
     <!-- Title of condition that cellular data is off [CHAR LIMIT=50] -->
     <string name="condition_cellular_title">Mobile data is off</string>
@@ -8958,10 +8961,10 @@
     <string name="condition_cellular_summary">Internet is available only via Wi-Fi</string>
 
     <!-- Title of condition that background data is off [CHAR LIMIT=30] -->
-    <string name="condition_bg_data_title">Data Saver is on</string>
+    <string name="condition_bg_data_title">Data Saver</string>
 
     <!-- Summary of condition that background data is off [CHAR LIMIT=NONE] -->
-    <string name="condition_bg_data_summary">Background data is only available via Wi-Fi. This may affect some apps or services when Wi-Fi is not available.</string>
+    <string name="condition_bg_data_summary">Features restricted</string>
 
     <!-- Title of condition that work mode is off [CHAR LIMIT=30] -->
     <string name="condition_work_title">Work profile is off</string>
@@ -8976,22 +8979,22 @@
     <string name="condition_device_muted_title" product="tablet">Device is muted</string>
 
     <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_muted_title" product="default">Phone is muted</string>
+    <string name="condition_device_muted_title" product="default">Phone muted</string>
 
     <!-- Summary of condition that indicates device is muted -->
-    <string name="condition_device_muted_summary">Calls and notifications will be muted</string>
+    <string name="condition_device_muted_summary">For calls &amp; notifications</string>
 
     <!-- Title of condition that indicates device is set to vibrate [CHAR LIMIT=50] -->
     <string name="condition_device_vibrate_title" product="tablet">Device is set to vibrate</string>
 
     <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_vibrate_title" product="default">Phone is set to vibrate</string>
+    <string name="condition_device_vibrate_title" product="default">Vibration only</string>
 
     <!-- Summary of condition that indicates device is set to vibrate -->
     <string name="condition_device_vibrate_summary" product="tablet">Calls and notifications will vibrate device</string>
 
     <!-- Summary of condition that indicates device is set to vibrate -->
-    <string name="condition_device_vibrate_summary" product="default">Calls and notifications will vibrate phone</string>
+    <string name="condition_device_vibrate_summary" product="default">For calls &amp; notifications</string>
 
     <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=46] -->
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
@@ -9003,7 +9006,7 @@
     <string name="condition_night_display_title">Night Light is on</string>
 
     <!-- Summary of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
-    <string name="condition_night_display_summary">Screen is tinted amber. This may help you fall asleep.</string>
+    <string name="condition_night_display_summary">Screen tinted amber</string>
 
     <!-- Summary for the condition section on the dashboard, representing number of conditions. [CHAR LIMIT=10] -->
     <string name="condition_summary" translatable="false"><xliff:g name="count" example="3">%1$d</xliff:g></string>
@@ -9889,6 +9892,11 @@
     <!-- UI debug setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
     <string name="enable_gnss_raw_meas_full_tracking_summary">Track all GNSS constellations and frequencies with no duty cycling</string>
 
+    <!-- UI debug setting: preference title - allow background activity starts [CHAR LIMIT=60] -->
+    <string name="allow_background_activity_starts">Allow background activity starts</string>
+    <!-- UI debug setting: preference summary - describes the behavior of allowing background activity starts [CHAR LIMIT=NONE] -->
+    <string name="allow_background_activity_starts_summary">Allows all background activity starts</string>
+
     <!-- UI debug setting: preference title - show all crash dialogs [CHAR LIMIT=60] -->
     <string name="show_first_crash_dialog">Always show crash dialog</string>
     <!-- UI debug setting: preference summary - describes the behavior of showing a dialog every time an app crashes [CHAR LIMIT=NONE] -->
@@ -10230,9 +10238,9 @@
     <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
     <string name="force_desktop_mode_summary">Force experimental desktop mode on secondary displays</string>
 
-    <!-- UI debug setting: Force enable "smart dark" UI rendering feature [CHAR LIMIT=40] -->
+    <!-- UI debug setting: Force enable "smart dark" UI rendering feature [CHAR LIMIT=60] -->
     <string name="hwui_force_dark_title">Override force-dark</string>
-    <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=100] -->
+    <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=NONE] -->
     <string name="hwui_force_dark_summary">Overrides the force-dark feature to be always-on</string>
 
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
@@ -10249,4 +10257,9 @@
 
     <!-- Summary for low storage slice. [CHAR LIMIT=NONE] -->
     <string name="low_storage_summary">Storage is low. <xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
+
+    <!-- Label for button in contextual card feedback dialog for users to send feedback [CHAR LIMIT=30] -->
+    <string name="contextual_card_feedback_send">Send feedback</string>
+    <!-- String for contextual card feedback dialog [CHAR LIMIT=NONE] -->
+    <string name="contextual_card_feedback_confirm_message">Would you like to give us feedback on this suggestion?</string>
 </resources>

@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -67,25 +68,59 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_dpp_activity);
 
-        // Hide action bar
-        ActionBar action = getActionBar();
-        if (action != null) {
-            action.hide();
-        }
-
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         final int launchMode = getIntent().getIntExtra(EXTRA_LAUNCH_MODE,
             LaunchMode.LAUNCH_MODE_NOT_DEFINED.getMode());
         if (launchMode == LaunchMode.LAUNCH_MODE_QR_CODE_SCANNER.getMode()) {
-            WifiDppQrCodeScannerFragment scanFragment = new WifiDppQrCodeScannerFragment();
-            mFragmentTransaction.add(R.id.fragment_container, scanFragment);
-            mFragmentTransaction.commit();
+            addQrCodeScannerFragment();
+        } else if (launchMode == LaunchMode.LAUNCH_MODE_QR_CODE_GENERATOR.getMode()) {
+            addQrCodeGeneratorFragment();
+        } else if (launchMode == LaunchMode.LAUNCH_MODE_CHOOSE_SAVED_WIFI_NETWORK.getMode()) {
+            addChooseSavedWifiNetworkFragment();
         } else {
             Log.e(TAG, "Launch with an invalid mode extra");
             setResult(Activity.RESULT_CANCELED);
             finish();
         }
+    }
+
+    private void addQrCodeScannerFragment() {
+        final WifiDppQrCodeScannerFragment fragment = new WifiDppQrCodeScannerFragment();
+        mFragmentTransaction.add(R.id.fragment_container, fragment);
+        mFragmentTransaction.addToBackStack(/* name */ null);
+        mFragmentTransaction.commit();
+    }
+
+    private void addQrCodeGeneratorFragment() {
+        final WifiDppQrCodeGeneratorFragment fragment = new WifiDppQrCodeGeneratorFragment();
+        mFragmentTransaction.add(R.id.fragment_container, fragment);
+        mFragmentTransaction.addToBackStack(/* name */ null);
+        mFragmentTransaction.commit();
+    }
+
+    private void addChooseSavedWifiNetworkFragment() {
+        final ActionBar action = getActionBar();
+        if (action != null) {
+            action.hide();
+        }
+
+        WifiDppChooseSavedWifiNetworkFragment fragment =
+                new WifiDppChooseSavedWifiNetworkFragment();
+        mFragmentTransaction.add(R.id.fragment_container, fragment);
+        mFragmentTransaction.addToBackStack(/* name */ null);
+        mFragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onStop() {
+        final Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
+        if (fragment != null) {
+            // Remove it to prevent stacking multiple fragments after screen rotated.
+            mFragmentManager.beginTransaction().remove(fragment).commit();
+        }
+
+        super.onStop();
     }
 }

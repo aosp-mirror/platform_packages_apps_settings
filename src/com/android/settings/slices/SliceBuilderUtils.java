@@ -279,7 +279,8 @@ public class SliceBuilderUtils {
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(
-                                new SliceAction(contentIntent, icon, sliceData.getTitle()))
+                                SliceAction.createDeeplink(contentIntent, icon,
+                                        ListBuilder.ICON_IMAGE, sliceData.getTitle()))
                         .addEndItem(sliceAction))
                 .setKeywords(keywords)
                 .build();
@@ -299,7 +300,9 @@ public class SliceBuilderUtils {
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(
-                                new SliceAction(contentIntent, icon, sliceData.getTitle())))
+                                SliceAction.createDeeplink(contentIntent, icon,
+                                        ListBuilder.ICON_IMAGE,
+                                        sliceData.getTitle())))
                 .setKeywords(keywords)
                 .build();
     }
@@ -312,8 +315,8 @@ public class SliceBuilderUtils {
         final IconCompat icon = getSafeIcon(context, sliceData);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
-        final SliceAction primaryAction = new SliceAction(contentIntent, icon,
-                sliceData.getTitle());
+        final SliceAction primaryAction = SliceAction.createDeeplink(contentIntent, icon,
+                ListBuilder.ICON_IMAGE, sliceData.getTitle());
         final Set<String> keywords = buildSliceKeywords(sliceData);
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
@@ -334,7 +337,8 @@ public class SliceBuilderUtils {
         final SliceAction copyableAction = getCopyableAction(context, sliceData);
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
         final IconCompat icon = getSafeIcon(context, sliceData);
-        final SliceAction primaryAction = new SliceAction(contentIntent, icon,
+        final SliceAction primaryAction = SliceAction.createDeeplink(contentIntent, icon,
+                ListBuilder.ICON_IMAGE,
                 sliceData.getTitle());
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
@@ -366,7 +370,7 @@ public class SliceBuilderUtils {
             boolean isChecked) {
         PendingIntent actionIntent = getActionIntent(context,
                 SettingsSliceProvider.ACTION_TOGGLE_CHANGED, sliceData);
-        return new SliceAction(actionIntent, null, isChecked);
+        return SliceAction.createToggle(actionIntent, null, isChecked);
     }
 
     private static PendingIntent getSliderAction(Context context, SliceData sliceData) {
@@ -378,7 +382,7 @@ public class SliceBuilderUtils {
                 SettingsSliceProvider.ACTION_COPY, sliceData);
         final IconCompat icon = IconCompat.createWithResource(context,
                 R.drawable.ic_content_copy_grey600_24dp);
-        return new SliceAction(intent, icon, sliceData.getTitle());
+        return SliceAction.create(intent, icon, ListBuilder.ICON_IMAGE, sliceData.getTitle());
     }
 
     private static boolean isValidSummary(Context context, CharSequence summary) {
@@ -421,14 +425,15 @@ public class SliceBuilderUtils {
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final CharSequence summary = context.getText(R.string.disabled_dependent_setting_summary);
         final IconCompat icon = getSafeIcon(context, data);
-        final SliceAction primaryAction = new SliceAction(getContentPendingIntent(context, data),
-                icon, title);
+        final SliceAction primaryAction = SliceAction.createDeeplink(
+                getContentPendingIntent(context, data),
+                icon, ListBuilder.ICON_IMAGE, title);
 
         return new ListBuilder(context, data.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new RowBuilder()
                         .setTitle(title)
-                        .setTitleItem(icon, ListBuilder.SMALL_IMAGE)
+                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                         .setSubtitle(summary)
                         .setPrimaryAction(primaryAction))
                 .setKeywords(keywords)

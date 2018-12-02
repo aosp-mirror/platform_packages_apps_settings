@@ -23,11 +23,9 @@ import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.SettingsSlicesContract;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -39,6 +37,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBuilderUtils;
 
 /**
@@ -46,21 +45,11 @@ import com.android.settings.slices.SliceBuilderUtils;
  */
 public class LocationSliceBuilder {
 
-    /**
-     * Backing Uri for the Location Slice.
-     */
-    public static final Uri LOCATION_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSlicesContract.AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(KEY_LOCATION)
-            .build();
-
     private LocationSliceBuilder() {
     }
 
     /**
-     * Return a Location Slice bound to {@link #LOCATION_URI}.
+     * Return a Location Slice bound to {@link CustomSliceRegistry#LOCATION_SLICE_URI}.
      */
     public static Slice getSlice(Context context) {
         final IconCompat icon = IconCompat.createWithResource(context,
@@ -68,9 +57,11 @@ public class LocationSliceBuilder {
         final String title = context.getString(R.string.location_settings_title);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
-        final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
+                ListBuilder.ICON_IMAGE, title);
 
-        return new ListBuilder(context, LOCATION_URI, ListBuilder.INFINITY)
+        return new ListBuilder(context, CustomSliceRegistry.LOCATION_SLICE_URI,
+                ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new RowBuilder()
                         .setTitle(title)

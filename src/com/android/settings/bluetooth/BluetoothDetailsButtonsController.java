@@ -76,7 +76,7 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
             if (!mConnectButtonInitialized || previouslyConnected) {
                 mActionButtons
                         .setButton2Text(R.string.bluetooth_device_context_connect)
-                        // TODO (b/119646923) Icon is not ready.
+                        .setButton2Icon(R.drawable.ic_add_24dp)
                         .setButton2OnClickListener(
                                 view -> mCachedDevice.connect(true /* connectAllProfiles */));
                 mConnectButtonInitialized = true;
