@@ -28,6 +28,7 @@
         android:icon="@drawable/ic_media_stream"
         android:title="@string/media_volume_option_title"
         android:order="-180"
+        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.MediaVolumePreferenceController"/>
 
     <!-- Media output switcher -->
@@ -44,6 +45,7 @@
         android:icon="@drawable/ic_local_phone_24_lib"
         android:title="@string/call_volume_option_title"
         android:order="-170"
+        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.CallVolumePreferenceController"/>
 
     <!-- Hands free profile output switcher -->
@@ -60,6 +62,7 @@
         android:icon="@drawable/ic_notifications"
         android:title="@string/ring_volume_option_title"
         android:order="-160"
+        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.RingVolumePreferenceController"/>
 
 
@@ -69,6 +72,7 @@
         android:icon="@*android:drawable/ic_audio_alarm"
         android:title="@string/alarm_volume_option_title"
         android:order="-150"
+        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
     <!-- Notification volume -->
