@@ -28,6 +28,7 @@ import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.homepage.TopLevelSettings;
@@ -107,6 +108,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_NIGHT_DISPLAY);
         PARENT_TO_CATEGORY_KEY_MAP.put(PrivacyDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_PRIVACY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(EnterprisePrivacySettings.class.getName(),
+                CategoryKey.CATEGORY_ENTERPRISE_PRIVACY);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 
