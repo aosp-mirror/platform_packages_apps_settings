@@ -3036,7 +3036,14 @@
         </provider>
 
         <activity
-            android:name=".wifi.dpp.WifiDppConfiguratorActivity"/>
+            android:name=".wifi.dpp.WifiDppConfiguratorActivity">
+            <intent-filter>
+                <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER"/>
+                <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR"/>
+                <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
         <activity android:name=".homepage.contextualcards.ContextualCardFeedbackDialog"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
