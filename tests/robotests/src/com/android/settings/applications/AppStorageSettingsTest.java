@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -30,9 +32,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.ActionButtonPreference;
-import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
+import com.android.settingslib.widget.ActionButtonsPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +47,7 @@ public class AppStorageSettingsTest {
 
     @Mock
     private AppStorageSizesController mSizesController;
-    private ActionButtonPreference mButtonsPref;
+    private ActionButtonsPreference mButtonsPref;
     private AppStorageSettings mSettings;
     private Button mLeftButton;
     private Button mRightButton;
@@ -58,7 +59,7 @@ public class AppStorageSettingsTest {
         mRightButton = new Button(RuntimeEnvironment.application);
         mSettings = spy(new AppStorageSettings());
         mSettings.mSizeController = mSizesController;
-        mButtonsPref = ActionButtonPreferenceTest.createMock();
+        mButtonsPref = createMock();
         mSettings.mButtonsPref = mButtonsPref;
 
         when(mButtonsPref.setButton1OnClickListener(any(View.OnClickListener.class)))
@@ -102,6 +103,23 @@ public class AppStorageSettingsTest {
         mRightButton.performClick();
         verify(mSettings).handleClearDataClick();
         verify(mSettings).handleClearCacheClick();
+    }
+
+    private ActionButtonsPreference createMock() {
+        final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
+        when(pref.setButton1Text(anyInt())).thenReturn(pref);
+        when(pref.setButton1Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        when(pref.setButton2Text(anyInt())).thenReturn(pref);
+        when(pref.setButton2Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        return pref;
     }
 }
 

@@ -53,11 +53,11 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
-import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
+import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.Collections;
@@ -107,7 +107,7 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     // Views related to cache info
     @VisibleForTesting
-    ActionButtonPreference mButtonsPref;
+    ActionButtonsPreference mButtonsPref;
 
     private Preference mStorageUsed;
     private Button mChangeStorageButton;
@@ -168,7 +168,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                 .setComputingString(R.string.computing_size)
                 .setErrorString(R.string.invalid_size_value)
                 .build();
-        mButtonsPref = ((ActionButtonPreference) findPreference(KEY_HEADER_BUTTONS));
+        mButtonsPref = ((ActionButtonsPreference) findPreference(KEY_HEADER_BUTTONS));
         mStorageUsed = findPreference(KEY_STORAGE_USED);
         mChangeStorageButton = (Button) ((LayoutPreference) findPreference(KEY_CHANGE_STORAGE))
                 .findViewById(R.id.button);
