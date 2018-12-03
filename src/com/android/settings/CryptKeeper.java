@@ -773,9 +773,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         if (imeSwitcher != null && hasMultipleEnabledIMEsOrSubtypes(imm, false)) {
             imeSwitcher.setVisibility(View.VISIBLE);
             imeSwitcher.setOnClickListener(new OnClickListener() {
-                    @Override
+                @Override
                 public void onClick(View v) {
-                    imm.showInputMethodPicker(false /* showAuxiliarySubtypes */);
+                    imm.showInputMethodPickerFromSystem(false /* showAuxiliarySubtypes */,
+                            v.getDisplay().getDisplayId());
                 }
             });
         }
