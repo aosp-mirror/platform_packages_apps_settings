@@ -28,6 +28,8 @@ import android.content.pm.ActivityInfo;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,18 +43,10 @@ public class WifiDppQrCodeScannerFragmentTest {
 
     @Before
     public void setUp() {
-        Intent intent = new Intent();
-        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
-                WifiDppConfiguratorActivity.LaunchMode.LAUNCH_MODE_QR_CODE_SCANNER.getMode());
+        Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
         mActivityRule.launchActivity(intent);
-    }
-
-    @Test
-    public void leftButton_shouldFinishActivityWithResultCodeCanceled() {
-        onView(withText("Cancel")).perform(click());
-
-        assertThat(mActivityRule.getActivityResult().getResultCode()).
-                isEqualTo(Activity.RESULT_CANCELED);
     }
 
     @Test

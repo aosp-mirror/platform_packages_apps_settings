@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto;
 
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.wifi.qrcode.QrDecorateView;
 import com.android.settings.R;
 
 /**
@@ -46,7 +47,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     private TextView mDescription;
 
     private SurfaceView mPreviewView;       //optional, for WifiDppQrCodeScannerFragment
-    private ImageView mDecorateViiew;       //optional, for WifiDppQrCodeScannerFragment
+    private QrDecorateView mDecorateViiew;  //optional, for WifiDppQrCodeScannerFragment
     private TextView mErrorMessage;         //optional, for WifiDppQrCodeScannerFragment
 
     private ImageView mBarcodeView;         //optional, for WifiDppQrCodeGeneratorFragment
