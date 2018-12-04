@@ -22,10 +22,12 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Toast;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -34,16 +36,23 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.PreferenceXmlParserUtils;
+import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.widget.CandidateInfo;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import org.xmlpull.v1.XmlPullParserException;
 
 public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFragment implements
         RadioButtonPreference.OnClickListener {
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     static final String EXTRA_FOR_WORK = "for_work";
+    private static final String TAG = "RadioButtonPckrFrgmt";
+    @VisibleForTesting
+    boolean mAppendStaticPreferences = false;
 
     private final Map<String, CandidateInfo> mCandidates = new ArrayMap<>();
 
@@ -69,6 +78,19 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
+        try {
+            // Check if the xml specifies if static preferences should go on the top or bottom
+            final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(getContext(),
+                getPreferenceScreenResId(),
+                MetadataFlag.FLAG_INCLUDE_PREF_SCREEN |
+                MetadataFlag.FLAG_NEED_PREF_APPEND);
+            mAppendStaticPreferences = metadata.get(0)
+                    .getBoolean(PreferenceXmlParserUtils.METADATA_APPEND);
+        } catch (IOException e) {
+            Log.e(TAG, "Error trying to open xml file", e);
+        } catch (XmlPullParserException e) {
+            Log.e(TAG, "Error parsing xml", e);
+        }
         updateCandidates();
     }
 
@@ -142,7 +164,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         final String systemDefaultKey = getSystemDefaultKey();
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
-        addStaticPreferences(screen);
+        if (!mAppendStaticPreferences) {
+            addStaticPreferences(screen);
+        }
 
         final int customLayoutResId = getRadioButtonPreferenceCustomLayoutResId();
         if (shouldShowItemNone()) {
@@ -168,6 +192,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             }
         }
         mayCheckOnlyRadioButton();
+        if (mAppendStaticPreferences) {
+            addStaticPreferences(screen);
+        }
     }
 
     @VisibleForTesting

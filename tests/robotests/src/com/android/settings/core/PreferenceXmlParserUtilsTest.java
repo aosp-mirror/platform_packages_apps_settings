@@ -18,6 +18,7 @@ package com.android.settings.core;
 
 import static com.android.settings.core.PreferenceXmlParserUtils
         .METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_APPEND;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SEARCHABLE;
@@ -312,6 +313,32 @@ public class PreferenceXmlParserUtilsTest {
 
         for (Bundle bundle : metadata) {
             assertThat(bundle.getBoolean(METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE)).isTrue();
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestAppendProperty_shouldDefaultToFalse()
+        throws Exception {
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.display_settings,
+                MetadataFlag.FLAG_INCLUDE_PREF_SCREEN | MetadataFlag.FLAG_NEED_PREF_APPEND);
+
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getBoolean(METADATA_APPEND)).isFalse();
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestAppendProperty_shouldReturnCorrectValue()
+        throws Exception {
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.battery_saver_schedule_settings,
+                MetadataFlag.FLAG_INCLUDE_PREF_SCREEN | MetadataFlag.FLAG_NEED_PREF_APPEND);
+
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getBoolean(METADATA_APPEND)).isTrue();
         }
     }
 
