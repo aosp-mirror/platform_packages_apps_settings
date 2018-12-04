@@ -54,6 +54,9 @@ public class SettingsPanelActivity extends FragmentActivity {
     // TODO (b/117804442) move to framework
     public static final String PANEL_TYPE_WIFI = "wifi_panel";
 
+    // TODO (b/117804442) move to framework
+    public static final String PANEL_TYPE_VOLUME = "volume_panel";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

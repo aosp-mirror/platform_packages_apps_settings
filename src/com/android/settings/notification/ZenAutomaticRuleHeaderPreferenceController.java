@@ -136,7 +136,7 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
                     MetricsProto.MetricsEvent.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
             mRule.setName(ruleName);
             mRule.setModified(true);
-            mBackend.setZenRule(mId, mRule);
+            mBackend.updateZenRule(mId, mRule);
         }
     }
 }

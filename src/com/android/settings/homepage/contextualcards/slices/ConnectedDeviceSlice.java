@@ -101,7 +101,7 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     public Slice getSlice() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_homepage_connected_device);
-        final CharSequence title = mContext.getText(R.string.connected_devices_dashboard_title);
+        final CharSequence title = mContext.getText(R.string.bluetooth_connected_devices);
         final CharSequence titleNoConnectedDevices = mContext.getText(
                 R.string.no_connected_devices);
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext, 0,

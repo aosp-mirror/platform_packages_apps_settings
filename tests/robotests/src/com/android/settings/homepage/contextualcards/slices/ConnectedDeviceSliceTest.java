@@ -36,6 +36,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,12 +50,17 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ConnectedDeviceSliceTest {
 
+    private static final String BLUETOOTH_SUMMARY = "BluetoothSummary";
+    private static final String BLUETOOTH_TITLE = "BluetoothTitle";
+
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
 
-    private List<CachedBluetoothDevice> mCachedDevices = new ArrayList<CachedBluetoothDevice>();
-    private Context mContext;
+    private List<CachedBluetoothDevice> mBluetoothConnectedDeviceList;
     private ConnectedDeviceSlice mConnectedDeviceSlice;
+    private Context mContext;
+    private IconCompat mIcon;
+    private PendingIntent mDetailIntent;
 
     @Before
     public void setUp() {
@@ -65,35 +71,63 @@ public class ConnectedDeviceSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
         mConnectedDeviceSlice = spy(new ConnectedDeviceSlice(mContext));
+
+        // Mock the icon and detail intent of Bluetooth.
+        mIcon = IconCompat.createWithResource(mContext, R.drawable.ic_homepage_connected_device);
+        mDetailIntent = PendingIntent.getActivity(mContext, 0, new Intent("test action"), 0);
+        doReturn(mIcon).when(mConnectedDeviceSlice).getConnectedDeviceIcon(any());
+        doReturn(mDetailIntent).when(mConnectedDeviceSlice).getBluetoothDetailIntent(any());
+
+        // Initial Bluetooth connected device list.
+        mBluetoothConnectedDeviceList = new ArrayList<>();
+    }
+
+    @After
+    public void tearDown() {
+        if (!mBluetoothConnectedDeviceList.isEmpty()) {
+            mBluetoothConnectedDeviceList.clear();
+        }
     }
 
     @Test
-    public void getSlice_hasConnectedDevices_shouldBeCorrectSliceContent() {
-        final String title = "BluetoothTitle";
-        final String summary = "BluetoothSummary";
-        final IconCompat icon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_homepage_connected_device);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0,
-                new Intent("test action"), 0);
-        doReturn(title).when(mCachedBluetoothDevice).getName();
-        doReturn(summary).when(mCachedBluetoothDevice).getConnectionSummary();
-        mCachedDevices.add(mCachedBluetoothDevice);
-        doReturn(mCachedDevices).when(mConnectedDeviceSlice).getBluetoothConnectedDevices();
-        doReturn(icon).when(mConnectedDeviceSlice).getConnectedDeviceIcon(any());
-        doReturn(pendingIntent).when(mConnectedDeviceSlice).getBluetoothDetailIntent(any());
+    public void getSlice_hasConnectedDevices_shouldHaveCorrectTitle() {
+        mockBluetoothDeviceList();
+        doReturn(mBluetoothConnectedDeviceList).when(
+                mConnectedDeviceSlice).getBluetoothConnectedDevices();
+
         final Slice slice = mConnectedDeviceSlice.getSlice();
 
         final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, title);
+        SliceTester.assertTitle(sliceItems,
+                mContext.getString(R.string.bluetooth_connected_devices));
     }
 
     @Test
-    public void getSlice_hasNoConnectedDevices_shouldReturnCorrectHeader() {
-        final List<CachedBluetoothDevice> connectedBluetoothList = new ArrayList<>();
-        doReturn(connectedBluetoothList).when(mConnectedDeviceSlice).getBluetoothConnectedDevices();
+    public void getSlice_hasConnectedDevices_shouldHaveCorrectContent() {
+        mockBluetoothDeviceList();
+        doReturn(mBluetoothConnectedDeviceList).when(
+                mConnectedDeviceSlice).getBluetoothConnectedDevices();
+
+        final Slice slice = mConnectedDeviceSlice.getSlice();
+
+        final List<SliceItem> sliceItems = slice.getItems();
+        SliceTester.assertTitle(sliceItems, BLUETOOTH_TITLE);
+    }
+
+    @Test
+    public void getSlice_noConnectedDevices_shouldHaveCorrectTitle() {
+        doReturn(mBluetoothConnectedDeviceList).when(
+                mConnectedDeviceSlice).getBluetoothConnectedDevices();
+
         final Slice slice = mConnectedDeviceSlice.getSlice();
 
         final List<SliceItem> sliceItems = slice.getItems();
         SliceTester.assertTitle(sliceItems, mContext.getString(R.string.no_connected_devices));
+    }
+
+    private void mockBluetoothDeviceList() {
+        doReturn(BLUETOOTH_TITLE).when(mCachedBluetoothDevice).getName();
+        doReturn(BLUETOOTH_SUMMARY).when(mCachedBluetoothDevice).getConnectionSummary();
+        mBluetoothConnectedDeviceList.add(mCachedBluetoothDevice);
     }
 }

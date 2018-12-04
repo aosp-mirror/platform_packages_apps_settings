@@ -16,51 +16,49 @@
 
 package com.android.settings.panel;
 
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_ALARM_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_CALL_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.slices.CustomSliceRegistry;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents the Internet Connectivity Panel.
- *
- * <p>
- * Displays Wifi (full Slice) and Airplane mode.
- * </p>
- */
-public class InternetConnectivityPanel implements PanelContent {
+public class VolumePanel implements PanelContent {
 
     private final Context mContext;
 
-    public static InternetConnectivityPanel create(Context context) {
-        return new InternetConnectivityPanel(context);
+    public static VolumePanel create(Context context) {
+        return new VolumePanel(context);
     }
 
-    private InternetConnectivityPanel(Context context) {
+    private VolumePanel(Context context) {
         mContext = context.getApplicationContext();
     }
 
     @Override
     public CharSequence getTitle() {
-        return mContext.getText(R.string.internet_connectivity_panel_title);
+        return mContext.getText(R.string.volume_connectivity_panel_title);
     }
 
     @Override
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
-        uris.add(CustomSliceRegistry.WIFI_SLICE_URI);
-        uris.add(CustomSliceRegistry.AIRPLANE_URI);
+        uris.add(VOLUME_MEDIA_URI);
+        uris.add(VOLUME_CALL_URI);
+        uris.add(VOLUME_RINGER_URI);
+        uris.add(VOLUME_ALARM_URI);
         return uris;
     }
 
     @Override
     public Intent getSeeMoreIntent() {
-        return new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+        return new Intent(Settings.ACTION_SOUND_SETTINGS);
     }
 }

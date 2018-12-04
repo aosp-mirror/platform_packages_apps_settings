@@ -18,6 +18,7 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -42,18 +43,18 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.ActionButtonPreference;
-import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.ActionButtonsPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -99,7 +100,7 @@ public class AppButtonsPreferenceControllerTest {
     @Mock
     private PackageInfo mPackageInfo;
 
-    private ActionButtonPreference mButtonPrefs;
+    private ActionButtonsPreference mButtonPrefs;
 
     private Intent mUninstallIntent;
     private AppButtonsPreferenceController mController;
@@ -127,7 +128,7 @@ public class AppButtonsPreferenceControllerTest {
         mPackageInfo.packageName = PACKAGE_NAME;
         mPackageInfo.applicationInfo = mAppInfo;
 
-        mButtonPrefs = ActionButtonPreferenceTest.createMock();
+        mButtonPrefs = createMock();
         mController.mButtonsPref = mButtonPrefs;
         mController.mPackageInfo = mPackageInfo;
 
@@ -389,5 +390,16 @@ public class AppButtonsPreferenceControllerTest {
         public int getMetricsCategory() {
             return SettingsEnums.PAGE_UNKNOWN;
         }
+    }
+
+    private ActionButtonsPreference createMock() {
+        final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
+        when(pref.setButton1Text(anyInt())).thenReturn(pref);
+        when(pref.setButton1Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        return pref;
     }
 }

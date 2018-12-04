@@ -88,6 +88,6 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
         final boolean enabled = isChecked;
         if (enabled == mRule.isEnabled()) return;
         mRule.setEnabled(enabled);
-        mBackend.setZenRule(mId, mRule);
+        mBackend.updateZenRule(mId, mRule);
     }
 }

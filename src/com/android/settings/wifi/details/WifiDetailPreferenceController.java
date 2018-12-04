@@ -55,7 +55,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
@@ -66,6 +65,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -130,7 +130,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     // UI elements - in order of appearance
-    private ActionButtonPreference mButtonsPref;
+    private ActionButtonsPreference mButtonsPref;
     private EntityHeaderController mEntityHeaderController;
     private Preference mSignalStrengthPref;
     private Preference mLinkSpeedPref;
@@ -275,7 +275,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         setupEntityHeader(screen);
 
-        mButtonsPref = ((ActionButtonPreference) screen.findPreference(KEY_BUTTONS_PREF))
+        mButtonsPref = ((ActionButtonsPreference) screen.findPreference(KEY_BUTTONS_PREF))
                 .setButton1Text(R.string.forget)
                 .setButton1Icon(R.drawable.ic_settings_delete)
                 .setButton1OnClickListener(view -> forgetNetwork())

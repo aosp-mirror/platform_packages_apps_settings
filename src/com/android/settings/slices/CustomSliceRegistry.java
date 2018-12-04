@@ -25,6 +25,7 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 
@@ -147,6 +148,43 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath("storage_card")
             .build();
+    /**
+     * Full {@link Uri} for the Alarm volume Slice.
+     */
+    public static final Uri VOLUME_ALARM_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("alarm_volume")
+            .build();
+    /**
+     * Full {@link Uri} for the Call Volume Slice.
+     */
+    public static final Uri VOLUME_CALL_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("call_volume")
+            .build();
+    /**
+     * Full {@link Uri} for the Media Volume Slice.
+     */
+    public static final Uri VOLUME_MEDIA_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("media_volume")
+            .build();
+    /**
+     * Full {@link Uri} for the Ringer volume Slice.
+     */
+    public static final Uri VOLUME_RINGER_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("ring_volume")
+            .build();
+
     /**
      * Full {@link Uri} for the Wifi Calling Slice.
      */

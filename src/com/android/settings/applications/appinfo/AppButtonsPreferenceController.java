@@ -54,7 +54,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.applications.AppUtils;
@@ -64,6 +63,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.widget.ActionButtonsPreference;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -99,7 +99,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @VisibleForTesting
     boolean mDisableAfterUninstall = false;
     @VisibleForTesting
-    ActionButtonPreference mButtonsPref;
+    ActionButtonsPreference mButtonsPref;
 
     private final int mRequestUninstall;
     private final int mRequestRemoveDeviceAdmin;
@@ -158,14 +158,15 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     public int getAvailabilityStatus() {
         // TODO(b/37313605): Re-enable once this controller supports instant apps
         return mAppEntry != null && !AppUtils.isInstant(mAppEntry.info)
-            ? AVAILABLE : DISABLED_FOR_USER ;
+                ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mButtonsPref = ((ActionButtonPreference) screen.findPreference(KEY_ACTION_BUTTONS))
+            mButtonsPref = ((ActionButtonsPreference) screen.findPreference(
+                    KEY_ACTION_BUTTONS))
                     .setButton1Text(R.string.uninstall_text)
                     .setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton2Text(R.string.force_stop)
@@ -484,7 +485,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
-            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] {mAppEntry.info.packageName});
+            intent.putExtra(Intent.EXTRA_PACKAGES, new String[]{mAppEntry.info.packageName});
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
             Log.d(TAG, "Sending broadcast to query restart status for "

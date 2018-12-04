@@ -19,17 +19,18 @@ package com.android.settings.notification;
 import android.app.AutomaticZenRule;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.service.notification.ZenModeConfig;
 import android.view.View;
+import android.widget.CheckBox;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
@@ -37,11 +38,11 @@ import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class ZenRulePreference extends TwoTargetPreference {
     private static final ManagedServiceSettings.Config CONFIG =
             ZenModeAutomationSettings.getConditionProviderConfig();
-    final CharSequence mName;
     final String mId;
     boolean appExists;
     final Fragment mParent;
@@ -51,16 +52,23 @@ public class ZenRulePreference extends TwoTargetPreference {
     final ZenServiceListing mServiceListing;
     final PackageManager mPm;
     final MetricsFeatureProvider mMetricsFeatureProvider;
+    final AutomaticZenRule mRule;
+    CharSequence mName;
+
+    private boolean mIsSystemRule;
+    private Intent mIntent;
+    private boolean mChecked;
+    private CheckBox mCheckBox;
 
     public ZenRulePreference(Context context,
             final Map.Entry<String, AutomaticZenRule> ruleEntry,
             Fragment parent, MetricsFeatureProvider metricsProvider) {
         super(context);
-
+        setLayoutResource(R.layout.preference_checkable_two_target);
         mBackend = ZenModeBackend.getInstance(context);
         mContext = context;
-        final AutomaticZenRule rule = ruleEntry.getValue();
-        mName = rule.getName();
+        mRule = ruleEntry.getValue();
+        mName = mRule.getName();
         mId = ruleEntry.getKey();
         mParent = parent;
         mPm = mContext.getPackageManager();
@@ -68,65 +76,97 @@ public class ZenRulePreference extends TwoTargetPreference {
         mServiceListing.reloadApprovedServices();
         mPref = this;
         mMetricsFeatureProvider = metricsProvider;
-
-        setAttributes(rule);
+        mChecked = mRule.isEnabled();
+        setAttributes(mRule);
+        setWidgetLayoutResource(getSecondTargetResId());
     }
 
-    @Override
     protected int getSecondTargetResId() {
-        if (mId != null && ZenModeConfig.DEFAULT_RULE_IDS.contains(mId)) {
-            return 0;
+        if (mIntent != null) {
+            return R.layout.zen_rule_widget;
         }
-
-        return R.layout.zen_rule_widget;
+        return 0;
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
+        View settingsWidget = view.findViewById(android.R.id.widget_frame);
+        View divider = view.findViewById(R.id.two_target_divider);
+        if (mIntent != null) {
+            divider.setVisibility(View.VISIBLE);
+            settingsWidget.setVisibility(View.VISIBLE);
+            settingsWidget.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mContext.startActivity(mIntent);
+                }
+            });
+        } else {
+            divider.setVisibility(View.GONE);
+            settingsWidget.setVisibility(View.GONE);
+            settingsWidget.setOnClickListener(null);
+        }
 
-        View v = view.findViewById(R.id.delete_zen_rule);
-        if (v != null) {
-            v.setOnClickListener(mDeleteListener);
+        View checkboxContainer = view.findViewById(R.id.checkbox_container);
+        if (checkboxContainer != null) {
+            checkboxContainer.setOnClickListener(mOnCheckBoxClickListener);
+        }
+        mCheckBox = (CheckBox) view.findViewById(com.android.internal.R.id.checkbox);
+        if (mCheckBox != null) {
+            mCheckBox.setChecked(mChecked);
         }
     }
 
-    private final View.OnClickListener mDeleteListener = new View.OnClickListener() {
+    public boolean isChecked() {
+        return mChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        mChecked = checked;
+        if (mCheckBox != null) {
+            mCheckBox.setChecked(checked);
+        }
+    }
+
+    public void setName(String name) {
+        if (!Objects.equals(mName, name)) {
+            mName = name;
+            setTitle(mName);
+        }
+    }
+
+    @Override
+    public void onClick() {
+        mOnCheckBoxClickListener.onClick(null);
+    }
+
+    private View.OnClickListener mOnCheckBoxClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            showDeleteRuleDialog(mParent, mId, mName.toString());
+            mRule.setEnabled(!mChecked);
+            mBackend.updateZenRule(mId, mRule);
+            setChecked(mRule.isEnabled());
+            setAttributes(mRule);
         }
     };
-
-    private void showDeleteRuleDialog(final Fragment parent, final String ruleId,
-            final String ruleName) {
-        ZenDeleteRuleDialog.show(parent, ruleName, ruleId,
-                new ZenDeleteRuleDialog.PositiveClickListener() {
-                    @Override
-                    public void onOk(String id) {
-                        mMetricsFeatureProvider.action(mContext,
-                                MetricsProto.MetricsEvent.ACTION_ZEN_DELETE_RULE_OK);
-                        mBackend.removeZenRule(id);
-                    }
-                });
-    }
 
     protected void setAttributes(AutomaticZenRule rule) {
         final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
                 rule.getConditionId(), true);
         final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.getConditionId());
-        final boolean isSystemRule = isSchedule || isEvent;
+        mIsSystemRule = isSchedule || isEvent;
 
         try {
             ApplicationInfo info = mPm.getApplicationInfo(rule.getOwner().getPackageName(), 0);
-            setSummary(computeRuleSummary(rule, isSystemRule, info.loadLabel(mPm)));
+            setSummary(computeRuleSummary(rule, mIsSystemRule, info.loadLabel(mPm)));
         } catch (PackageManager.NameNotFoundException e) {
             appExists = false;
             return;
         }
 
         appExists = true;
-        setTitle(rule.getName());
+        setTitle(mName);
         setPersistent(false);
 
         final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
@@ -134,9 +174,8 @@ public class ZenRulePreference extends TwoTargetPreference {
         ServiceInfo si = mServiceListing.findService(rule.getOwner());
         ComponentName settingsActivity = AbstractZenModeAutomaticRulePreferenceController.
                 getSettingsActivity(si);
-        setIntent(AbstractZenModeAutomaticRulePreferenceController.getRuleIntent(action,
-                settingsActivity, mId));
-        setSelectable(settingsActivity != null || isSystemRule);
+        mIntent = AbstractZenModeAutomaticRulePreferenceController.getRuleIntent(action,
+                settingsActivity, mId);
         setKey(mId);
     }
 

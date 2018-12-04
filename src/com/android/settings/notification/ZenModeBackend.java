@@ -32,6 +32,11 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+
 public class ZenModeBackend {
     @VisibleForTesting
     protected static final String ZEN_MODE_FROM_ANYONE = "zen_mode_from_anyone";
@@ -42,6 +47,7 @@ public class ZenModeBackend {
     @VisibleForTesting
     protected static final String ZEN_MODE_FROM_NONE = "zen_mode_from_none";
     protected static final int SOURCE_NONE = -1;
+    private static List<String> mDefaultRuleIds;
 
     private static ZenModeBackend sInstance;
 
@@ -79,7 +85,7 @@ public class ZenModeBackend {
                 Settings.Global.ZEN_MODE, mZenMode);
     }
 
-    protected boolean setZenRule(String id, AutomaticZenRule rule) {
+    protected boolean updateZenRule(String id, AutomaticZenRule rule) {
         return NotificationManager.from(mContext).updateAutomaticZenRule(id, rule);
     }
 
@@ -294,13 +300,65 @@ public class ZenModeBackend {
         return NotificationManager.from(mContext).removeAutomaticZenRule(ruleId);
     }
 
+    public NotificationManager.Policy getConsolidatedPolicy() {
+        return NotificationManager.from(mContext).getConsolidatedNotificationPolicy();
+    }
+
     protected String addZenRule(AutomaticZenRule rule) {
         try {
-            String id = NotificationManager.from(mContext).addAutomaticZenRule(rule);
-            NotificationManager.from(mContext).getAutomaticZenRule(id);
-            return id;
+            return NotificationManager.from(mContext).addAutomaticZenRule(rule);
         } catch (Exception e) {
             return null;
         }
     }
+
+    protected Map.Entry<String, AutomaticZenRule>[] getAutomaticZenRules() {
+        Map<String, AutomaticZenRule> ruleMap =
+                NotificationManager.from(mContext).getAutomaticZenRules();
+        final Map.Entry<String, AutomaticZenRule>[] rt = ruleMap.entrySet().toArray(
+                new Map.Entry[ruleMap.size()]);
+        Arrays.sort(rt, RULE_COMPARATOR);
+        return rt;
+    }
+
+    protected AutomaticZenRule getAutomaticZenRule(String id) {
+        return NotificationManager.from(mContext).getAutomaticZenRule(id);
+    }
+
+    private static List<String> getDefaultRuleIds() {
+        if (mDefaultRuleIds == null) {
+            mDefaultRuleIds = ZenModeConfig.DEFAULT_RULE_IDS;
+        }
+        return mDefaultRuleIds;
+    }
+
+    @VisibleForTesting
+    public static final Comparator<Map.Entry<String, AutomaticZenRule>> RULE_COMPARATOR =
+            new Comparator<Map.Entry<String, AutomaticZenRule>>() {
+                @Override
+                public int compare(Map.Entry<String, AutomaticZenRule> lhs,
+                        Map.Entry<String, AutomaticZenRule> rhs) {
+                    // if it's a default rule, should be at the top of automatic rules
+                    boolean lhsIsDefaultRule = getDefaultRuleIds().contains(lhs.getKey());
+                    boolean rhsIsDefaultRule = getDefaultRuleIds().contains(rhs.getKey());
+                    if (lhsIsDefaultRule != rhsIsDefaultRule) {
+                        return lhsIsDefaultRule ? -1 : 1;
+                    }
+
+                    int byDate = Long.compare(lhs.getValue().getCreationTime(),
+                            rhs.getValue().getCreationTime());
+                    if (byDate != 0) {
+                        return byDate;
+                    } else {
+                        return key(lhs.getValue()).compareTo(key(rhs.getValue()));
+                    }
+                }
+
+                private String key(AutomaticZenRule rule) {
+                    final int type = ZenModeConfig.isValidScheduleConditionId(rule.getConditionId())
+                            ? 1 : ZenModeConfig.isValidEventConditionId(rule.getConditionId())
+                            ? 2 : 3;
+                    return type + rule.getName().toString();
+                }
+            };
 }

@@ -16,13 +16,17 @@
 
 package com.android.settings.notification;
 
-import static junit.framework.Assert.assertEquals;
-
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AutomaticZenRule;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -31,161 +35,122 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.util.reflection.FieldSetter;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeAutomaticRulesPreferenceControllerTest {
 
-    private static final String GENERIC_RULE_NAME = "test";
-    private static final String DEFAULT_ID_1 = "DEFAULT_1";
-    private static final String DEFAULT_ID_2 = "DEFAULT_2";
-
     private ZenModeAutomaticRulesPreferenceController mController;
-    private final List<String> mDefaultIds = Arrays.asList(DEFAULT_ID_1, DEFAULT_ID_2);
-
     @Mock
     private ZenModeBackend mBackend;
     @Mock
-    private NotificationManager mNotificationManager;
-    @Mock
     private PreferenceCategory mockPref;
     @Mock
-    private NotificationManager.Policy mPolicy;
-    @Mock
     private PreferenceScreen mPreferenceScreen;
-
+    @Mock
+    private ZenRulePreference mZenRulePreference;
     private Context mContext;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowApplication = ShadowApplication.getInstance();
-        shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-
         mContext = RuntimeEnvironment.application;
-        when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
-        mController = new ZenModeAutomaticRulesPreferenceController(mContext, mock(Fragment.class),
-                mock(Lifecycle.class));
-
+        mController = spy(new ZenModeAutomaticRulesPreferenceController(mContext, mock(Fragment.class),
+                null));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
-        ReflectionHelpers.setField(mController, "mDefaultRuleIds", mDefaultIds);
-
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mockPref);
         mController.displayPreference(mPreferenceScreen);
+        doReturn(mZenRulePreference).when(mController).createZenRulePreference(any());
     }
 
     @Test
-    public void updateState_checkRuleOrderingDescending() {
-        final int NUM_RULES = 4;
-        when(mNotificationManager.getAutomaticZenRules()).thenReturn(
-                mockAutoZenRulesDecreasingCreationTime(NUM_RULES));
+    public void testUpdateState_clearsPreferencesWhenAddingNewPreferences() {
+        final int NUM_RULES = 3;
+        Map<String, AutomaticZenRule> rMap = new HashMap<>();
 
-        Map.Entry<String, AutomaticZenRule>[] rules = mController.sortedRules();
-        assertEquals(NUM_RULES, rules.length);
+        String ruleId1 = "test1_id";
+        String ruleId2 = "test2_id";
+        String ruleId3 = "test3_id";
 
-        // check ordering, most recent should be at the bottom/end (ie higher creation time)
-        for (int i = 0; i < NUM_RULES; i++) {
-            assertEquals(GENERIC_RULE_NAME + (NUM_RULES - 1 - i), rules[i].getKey());
-        }
+        AutomaticZenRule autoRule1 = new AutomaticZenRule("test_rule_1", null,
+                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+        AutomaticZenRule autoRule2 = new AutomaticZenRule("test_rule_2", null,
+                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20);
+        AutomaticZenRule autoRule3 = new AutomaticZenRule("test_rule_3", null,
+                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 30);
+
+        rMap.put(ruleId1, autoRule1);
+        rMap.put(ruleId2, autoRule2);
+        rMap.put(ruleId3, autoRule3);
+
+        // should add 3 new preferences to mockPref
+        mockGetAutomaticZenRules(NUM_RULES, rMap);
+        mController.updateState(mockPref);
+        verify(mockPref, times(1)).removeAll();
+        verify(mockPref, times(NUM_RULES)).addPreference(any());
     }
 
     @Test
-    public void updateState_checkRuleOrderingAscending() {
-        final int NUM_RULES = 4;
-        when(mNotificationManager.getAutomaticZenRules()).thenReturn(
-                mockAutoZenRulesAscendingCreationTime(NUM_RULES));
+    public void testUpdateState_clearsPreferencesWhenRemovingPreferences(){
+        final int NUM_RULES = 2;
+        Map<String, AutomaticZenRule> rMap = new HashMap<>();
 
-        Map.Entry<String, AutomaticZenRule>[] rules = mController.sortedRules();
-        assertEquals(NUM_RULES, rules.length);
+        String ruleId1 = "test1_id";
+        String ruleId2 = "test2_id";
 
-        // check ordering, most recent should be at the bottom/end (ie higher creation time)
-        for (int i = 0; i < NUM_RULES; i++) {
-            assertEquals(GENERIC_RULE_NAME + i, rules[i].getKey());
-        }
+        AutomaticZenRule autoRule1 = new AutomaticZenRule("test_rule_1", null,
+                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+        AutomaticZenRule autoRule2 = new AutomaticZenRule("test_rule_2", null,
+                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20);
+
+        rMap.put(ruleId1, autoRule1);
+        rMap.put(ruleId2, autoRule2);
+
+        // update state should re-add all preferences since a preference was deleted
+        when(mockPref.getPreferenceCount()).thenReturn(NUM_RULES + 2);
+        mockGetAutomaticZenRules(NUM_RULES, rMap);
+        mController.updateState(mockPref);
+        verify(mockPref, times(1)).removeAll();
+        verify(mockPref, times(NUM_RULES)).addPreference(any());
     }
 
     @Test
-    public void updateState_checkRuleOrderingDescending_withDefaultRules() {
-        final int NUM_RULES = 4;
+    public void testUpdateState_updateEnableState() throws NoSuchFieldException {
+        final int NUM_RULES = 1;
+        Map<String, AutomaticZenRule> rMap = new HashMap<>();
+        String testId = "test1_id";
+        AutomaticZenRule rule = new AutomaticZenRule("rule_name", null,
+                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+        rMap.put(testId, rule);
 
-        Map<String, AutomaticZenRule> ruleMap = mockAutoZenRulesDecreasingCreationTime(NUM_RULES);
-        ruleMap.put(DEFAULT_ID_2, new AutomaticZenRule("DEFAULT_1_NAME", null,
-                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20));
-        ruleMap.put(DEFAULT_ID_1, new AutomaticZenRule("DEFAULT_1_NAME", null,
-                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10));
-        when(mNotificationManager.getAutomaticZenRules()).thenReturn(ruleMap);
+        when(mockPref.getPreferenceCount()).thenReturn(NUM_RULES);
+        when(mockPref.getPreference(anyInt())).thenReturn(mZenRulePreference);
 
-        Map.Entry<String, AutomaticZenRule>[] rules = mController.sortedRules();
-        assertEquals(NUM_RULES + 2, rules.length);
-
-        assertEquals(rules[0].getKey(), DEFAULT_ID_1);
-        assertEquals(rules[1].getKey(), DEFAULT_ID_2);
-        // NON-DEFAULT RULES check ordering, most recent at the bottom/end
-        for (int i = 0; i < NUM_RULES; i++) {
-            assertEquals(GENERIC_RULE_NAME + (NUM_RULES - 1 - i), rules[i + 2].getKey());
-        }
+        // update state should NOT re-add all the preferences, should only update enable state
+        rule.setEnabled(false);
+        rMap.put(testId, rule);
+        mockGetAutomaticZenRules(NUM_RULES, rMap);
+        FieldSetter.setField(mZenRulePreference, ZenRulePreference.class.getDeclaredField("mId"), testId);
+        mController.updateState(mockPref);
+        verify(mZenRulePreference, times(1)).setChecked(false);
+        verify(mController, never()).reloadAllRules(any());
     }
 
-    @Test
-    public void updateState_checkRuleOrderingMix() {
-        final int NUM_RULES = 4;
-        // map with creation times: 0, 2, 4, 6
-        Map<String,AutomaticZenRule> rMap = mockAutoZenRulesAscendingCreationTime(NUM_RULES);
-
-        final String insertedRule1 = "insertedRule1";
-        rMap.put(insertedRule1, new AutomaticZenRule(insertedRule1, null, null,
-                Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 5));
-
-        final String insertedRule2 = "insertedRule2";
-        rMap.put(insertedRule2, new AutomaticZenRule(insertedRule2, null, null,
-                Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 3));
-
-        // rule map with rule creation times, 0, 2, 4, 6, 5, 3
-        // sort should create ordering based on creation times: 0, 2, 3, 4, 5, 6
-        when(mNotificationManager.getAutomaticZenRules()).thenReturn(rMap);
-
-        Map.Entry<String, AutomaticZenRule>[] rules = mController.sortedRules();
-        assertEquals(NUM_RULES + 2, rules.length); // inserted 2 rules
-
-        // check ordering of inserted rules
-        assertEquals(insertedRule1, rules[4].getKey());
-        assertEquals(insertedRule2, rules[2].getKey());
-    }
-
-    private Map<String, AutomaticZenRule> mockAutoZenRulesAscendingCreationTime(int numRules) {
-        Map<String, AutomaticZenRule> ruleMap = new HashMap<>();
-
-        for (int i = 0; i < numRules; i++) {
-            ruleMap.put(GENERIC_RULE_NAME + i, new AutomaticZenRule(GENERIC_RULE_NAME + i, null,
-                    null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, i * 2));
-        }
-
-        return ruleMap;
-    }
-
-    private Map<String, AutomaticZenRule> mockAutoZenRulesDecreasingCreationTime(int numRules) {
-        Map<String, AutomaticZenRule> ruleMap = new HashMap<>();
-
-        for (int i = 0; i < numRules; i++) {
-            ruleMap.put(GENERIC_RULE_NAME + i, new AutomaticZenRule(GENERIC_RULE_NAME + i, null,
-                    null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, numRules - i));
-        }
-
-        return ruleMap;
+    private void mockGetAutomaticZenRules(int numRules, Map<String, AutomaticZenRule> rules) {
+        Map.Entry<String, AutomaticZenRule>[] arr = new Map.Entry[numRules];
+        rules.entrySet().toArray(arr);
+        when(mBackend.getAutomaticZenRules()).thenReturn(arr);
     }
 }

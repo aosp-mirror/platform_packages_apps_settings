@@ -16,9 +16,15 @@
 
 package com.android.settings.notification;
 
+import android.app.AlertDialog;
+import android.app.AutomaticZenRule;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.provider.SearchIndexableResource;
 import android.service.notification.ConditionProviderService;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.fragment.app.Fragment;
 
@@ -34,10 +40,14 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SearchIndexable
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     protected final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
+    private CharSequence[] mDeleteDialogRuleNames;
+    private String[] mDeleteDialogRuleIds;
+    private boolean[] mDeleteDialogChecked;
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
@@ -73,6 +83,52 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 .setPermission(android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE)
                 .setNoun("condition provider")
                 .build();
+    }
+    private final int DELETE_RULES = 1;
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(Menu.NONE, DELETE_RULES, Menu.NONE, R.string.zen_mode_delete_automatic_rules);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case DELETE_RULES:
+                Map.Entry<String, AutomaticZenRule>[] rules = mBackend.getAutomaticZenRules();
+                mDeleteDialogRuleNames = new CharSequence[rules.length];
+                mDeleteDialogRuleIds = new String[rules.length];
+                mDeleteDialogChecked = new boolean[rules.length];
+                for (int i = 0; i < rules.length; i++) {
+                    mDeleteDialogRuleNames[i] = rules[i].getValue().getName();
+                    mDeleteDialogRuleIds[i] = rules[i].getKey();
+                }
+                new AlertDialog.Builder(mContext)
+                        .setTitle(R.string.zen_mode_delete_automatic_rules)
+                        .setMultiChoiceItems(mDeleteDialogRuleNames, null,
+                                new DialogInterface.OnMultiChoiceClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which,
+                                            boolean isChecked) {
+                                        mDeleteDialogChecked[which] = isChecked;
+                                    }
+                                })
+                        .setPositiveButton(R.string.zen_mode_schedule_delete,
+                                new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for (int i = 0; i < rules.length; i++) {
+                                    if (mDeleteDialogChecked[i]) {
+                                        mBackend.removeZenRule(mDeleteDialogRuleIds[i]);
+                                    }
+                                }
+                            }
+                        }).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**

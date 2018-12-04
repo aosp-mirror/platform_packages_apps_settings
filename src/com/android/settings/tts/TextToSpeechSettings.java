@@ -44,15 +44,14 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.ActionButtonsPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -113,7 +112,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
     private SeekBarPreference mDefaultPitchPref;
     private SeekBarPreference mDefaultRatePref;
-    private ActionButtonPreference mActionButtons;
+    private ActionButtonsPreference mActionButtons;
 
     private int mDefaultPitch = TextToSpeech.Engine.DEFAULT_PITCH;
     private int mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
@@ -169,7 +168,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mDefaultPitchPref = (SeekBarPreference) findPreference(KEY_DEFAULT_PITCH);
         mDefaultRatePref = (SeekBarPreference) findPreference(KEY_DEFAULT_RATE);
 
-        mActionButtons = ((ActionButtonPreference) findPreference(KEY_ACTION_BUTTONS))
+        mActionButtons = ((ActionButtonsPreference) findPreference(KEY_ACTION_BUTTONS))
                 .setButton1Text(R.string.tts_play)
                 .setButton1OnClickListener(v -> speakSampleText())
                 .setButton1Enabled(false)

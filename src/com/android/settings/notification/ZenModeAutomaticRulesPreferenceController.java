@@ -28,6 +28,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class ZenModeAutomaticRulesPreferenceController extends
         AbstractZenModeAutomaticRulePreferenceController {
@@ -62,16 +63,40 @@ public class ZenModeAutomaticRulesPreferenceController extends
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        Map.Entry<String, AutomaticZenRule>[] sortedRules = getRules();
+        final int currNumPreferences = mPreferenceCategory.getPreferenceCount();
+        if (currNumPreferences == sortedRules.length) {
+            for (int i = 0; i < sortedRules.length; i++) {
+                ZenRulePreference pref = (ZenRulePreference) mPreferenceCategory.getPreference(i);
+                // we are either:
+                // 1. updating the enabled state or name of the rule
+                // 2. rule was added or deleted, so reload the entire list
+                if (Objects.equals(pref.mId, sortedRules[i].getKey())) {
+                    AutomaticZenRule rule = sortedRules[i].getValue();
+                    pref.setName(rule.getName());
+                    pref.setChecked(rule.isEnabled());
+                } else {
+                    reloadAllRules(sortedRules);
+                    break;
+                }
+            }
+        } else {
+            reloadAllRules(sortedRules);
+        }
+    }
 
+    @VisibleForTesting
+    void reloadAllRules(Map.Entry<String, AutomaticZenRule>[] rules) {
         mPreferenceCategory.removeAll();
-        Map.Entry<String, AutomaticZenRule>[] sortedRules = sortedRules();
-        for (Map.Entry<String, AutomaticZenRule> sortedRule : sortedRules) {
-            ZenRulePreference pref = new ZenRulePreference(mPreferenceCategory.getContext(),
-                    sortedRule, mParent, mMetricsFeatureProvider);
+        for (Map.Entry<String, AutomaticZenRule> rule : rules) {
+            ZenRulePreference pref = createZenRulePreference(rule);
             mPreferenceCategory.addPreference(pref);
         }
     }
+
+    @VisibleForTesting
+    ZenRulePreference createZenRulePreference(Map.Entry<String, AutomaticZenRule> rule) {
+        return new ZenRulePreference(mPreferenceCategory.getContext(),
+                rule, mParent, mMetricsFeatureProvider);
+    }
 }
-
-
-

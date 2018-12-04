@@ -25,6 +25,8 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
         switch (panelType) {
             case SettingsPanelActivity.PANEL_TYPE_WIFI:
                 return InternetConnectivityPanel.create(context);
+            case SettingsPanelActivity.PANEL_TYPE_VOLUME:
+                return VolumePanel.create(context);
         }
 
         throw new IllegalStateException("No matching panel for: "  + panelType);

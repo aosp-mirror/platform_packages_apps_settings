@@ -7117,6 +7117,12 @@
     <!--  Do not disturb: Title for the zen mode automation option in Settings. [CHAR LIMIT=40] -->
     <string name="zen_mode_automation_settings_title">Schedules</string>
 
+    <!--  Do not disturb: Title for dialog that allows users to delete DND rules/schedules[CHAR LIMIT=40] -->
+    <string name="zen_mode_delete_automatic_rules">Delete schedules</string>
+
+    <!--  Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
+    <string name="zen_mode_schedule_delete">Delete</string>
+
     <!--  Do not disturb: Title for the zen mode automatic rules page in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automation_settings_page_title">Do Not Disturb</string>
 
@@ -7252,6 +7258,9 @@
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer how DND was triggered by an app -->
     <string name="zen_mode_settings_dnd_automatic_rule_app">Do Not Disturb was automatically turned on by an app (<xliff:g id="app_name" example="Android Services">%s</xliff:g>)</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings footer: Footer informing user DND has custom settings. -->
+    <string name="zen_mode_settings_dnd_custom_settings_footer">Do Not Disturb is on for <xliff:g id="rule_names" example="Sleeping and Work">%s</xliff:g> with custom settings.</string>
 
     <!--[CHAR LIMIT=40] Zen Interruption level: Priority.  -->
     <string name="zen_interruption_level_priority">Priority only</string>
@@ -7847,6 +7856,15 @@
 
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Downtime rule setting -->
     <string name="zen_mode_schedule_alarm_summary">Stop at the end time or next alarm, whichever comes first</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Title for preference to allow custom behavior for the dnd schedule -->
+    <string name="zen_mode_custom_behavior_title">Do Not Disturb behavior</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summay text indicating the currenty dnd schedule is using the default dnd settings -->
+    <string name="zen_mode_custom_behavior_summary_default">Use default settings</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summay text indicating the currenty dnd schedule is using custom behavior -->
+    <string name="zen_mode_custom_behavior_summary">Create custom settings for this schedule</string>
 
     <!-- [CHAR LIMIT=40] General divider text when concatenating multiple items in a text summary -->
     <string name="summary_divider_text">,\u0020</string>
@@ -10224,6 +10242,8 @@
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> device connected</item>
         <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> devices connected</item>
     </plurals>
+    <!-- Title for bluetooth connected devices in connected device slice. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_connected_devices">Bluetooth Devices</string>
     <!-- Title for no connected devices in connected device slice. [CHAR LIMIT=NONE] -->
     <string name="no_connected_devices">No connected devices</string>
 
@@ -10232,6 +10252,9 @@
 
     <!-- Title for the Internet Connectivity dialog (settings panel) with Internet related settings [CHAR LIMIT=50] -->
     <string name="internet_connectivity_panel_title">Internet Connectivity</string>
+
+    <!-- Title for the Volume dialog (settings panel) with all volume streams[CHAR LIMIT=50] -->
+    <string name="volume_connectivity_panel_title">Volume</string>
 
     <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
     <string name="force_desktop_mode">Force desktop mode</string>
