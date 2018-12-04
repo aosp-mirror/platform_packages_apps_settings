@@ -76,14 +76,6 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
                 mController = EntityHeaderController
                         .newInstance(mFragment.getActivity(), mFragment,
                                 pref.findViewById(R.id.entity_header));
-
-                mController.setEditListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ZenRuleNameDialog.show(mFragment, mRule.getName(), null,
-                                new RuleNameChangeListener());
-                    }
-                });
             }
 
             pref = mController.setIcon(getIcon())
@@ -122,21 +114,5 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
     protected void onResume(AutomaticZenRule rule, String id) {
         mRule = rule;
         mId = id;
-    }
-
-    public class RuleNameChangeListener implements ZenRuleNameDialog.PositiveClickListener {
-        public RuleNameChangeListener() {}
-
-        @Override
-        public void onOk(String ruleName, Fragment parent) {
-            if (TextUtils.equals(ruleName, mRule.getName())) {
-                return;
-            }
-            mMetricsFeatureProvider.action(mContext,
-                    MetricsProto.MetricsEvent.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
-            mRule.setName(ruleName);
-            mRule.setModified(true);
-            mBackend.updateZenRule(mId, mRule);
-        }
     }
 }

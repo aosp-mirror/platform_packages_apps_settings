@@ -43,6 +43,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     protected String mId;
 
     protected ZenAutomaticRuleHeaderPreferenceController mHeader;
+    protected ZenRuleButtonsPreferenceController mActionButtons;
     protected ZenAutomaticRuleSwitchPreferenceController mSwitch;
 
     abstract protected void onCreateInternal();
@@ -104,6 +105,10 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         mHeader.onResume(mRule, mId);
         mHeader.displayPreference(screen);
         updatePreference(mHeader);
+
+        mActionButtons.onResume(mRule, mId);
+        mActionButtons.displayPreference(screen);
+        updatePreference(mActionButtons);
     }
 
     private void updatePreference(AbstractPreferenceController controller) {
@@ -147,7 +152,8 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
     private void toastAndFinish() {
         Toast.makeText(mContext, R.string.zen_mode_rule_not_found_text, Toast.LENGTH_SHORT)
-                    .show();
+                .show();
+
         getActivity().finish();
     }
 
