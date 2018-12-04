@@ -60,7 +60,7 @@ public class ConditionHeaderContextualCardRendererTest {
         final ActivityController<Activity> activityController = Robolectric.buildActivity(
                 Activity.class);
         mActivity = activityController.get();
-        mActivity.setTheme(R.style.Theme_AppCompat);
+        mActivity.setTheme(R.style.Theme_Settings_Home);
         activityController.create();
         mRenderer = new ConditionHeaderContextualCardRenderer(mActivity, mControllerRendererPool);
     }

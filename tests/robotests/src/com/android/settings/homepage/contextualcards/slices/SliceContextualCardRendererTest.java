@@ -66,7 +66,7 @@ public class SliceContextualCardRendererTest {
         final ActivityController<Activity> activityController = Robolectric.buildActivity(
                 Activity.class);
         mActivity = activityController.get();
-        mActivity.setTheme(R.style.Theme_AppCompat);
+        mActivity.setTheme(R.style.Theme_Settings_Home);
         activityController.create();
         mLifecycleOwner = new ContextualCardsFragment();
         mRenderer = new SliceContextualCardRenderer(mActivity, mLifecycleOwner,
