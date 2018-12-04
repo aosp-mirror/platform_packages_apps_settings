@@ -415,7 +415,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 .getPrimaryStorageCurrentVolume();
         migrate.setVisible((privateVol != null)
                 && (privateVol.getType() == VolumeInfo.TYPE_PRIVATE)
-                && !Objects.equals(mVolume, privateVol));
+                && !Objects.equals(mVolume, privateVol)
+                && privateVol.isMountedWritable());
     }
 
     @Override
