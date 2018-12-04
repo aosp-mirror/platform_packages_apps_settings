@@ -60,7 +60,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
     private static final String TAG = "SliceCardRenderer";
 
     @VisibleForTesting
-    final Map<String, LiveData<Slice>> mSliceLiveDataMap;
+    final Map<Uri, LiveData<Slice>> mSliceLiveDataMap;
     @VisibleForTesting
     final Set<SliceViewHolder> mFlippedCardSet;
 
@@ -95,8 +95,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         final SliceViewHolder cardHolder = (SliceViewHolder) holder;
         final Uri uri = card.getSliceUri();
 
-        //TODO(b/116063073): The URI check should be done earlier when we are performing final
-        // filtering after having the full list.
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
             Log.w(TAG, "Invalid uri, skipping slice: " + uri);
             return;
@@ -106,11 +104,11 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         cardHolder.sliceView.setTag(uri);
         //TODO(b/114009676): We will soon have a field to decide what slice mode we should set.
         cardHolder.sliceView.setMode(SliceView.MODE_LARGE);
-        LiveData<Slice> sliceLiveData = mSliceLiveDataMap.get(uri.toString());
+        LiveData<Slice> sliceLiveData = mSliceLiveDataMap.get(uri);
 
         if (sliceLiveData == null) {
             sliceLiveData = SliceLiveData.fromUri(mContext, uri);
-            mSliceLiveDataMap.put(uri.toString(), sliceLiveData);
+            mSliceLiveDataMap.put(uri, sliceLiveData);
         }
         mCardSet.add(card);
 
@@ -146,6 +144,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
             mControllerRendererPool.getController(mContext, card.getCardType()).onDismissed(card);
             cardHolder.resetCard();
             mFlippedCardSet.remove(cardHolder);
+            mSliceLiveDataMap.get(card.getSliceUri()).removeObservers(mLifecycleOwner);
         });
     }
 
