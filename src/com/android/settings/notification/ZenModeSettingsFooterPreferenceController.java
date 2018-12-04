@@ -16,15 +16,22 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationManager;
 import android.content.Context;
+import android.icu.text.ListFormatter;
 import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
+import android.util.Log;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePreferenceController {
 
@@ -65,6 +72,31 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
 
     protected String getFooterText() {
         ZenModeConfig config = getZenModeConfig();
+
+        NotificationManager.Policy appliedPolicy = mBackend.getConsolidatedPolicy();
+        NotificationManager.Policy defaultPolicy = config.toNotificationPolicy();
+        final boolean usingCustomPolicy = !Objects.equals(appliedPolicy, defaultPolicy);
+
+        if (usingCustomPolicy) {
+            final List<ZenModeConfig.ZenRule> activeRules = getActiveRules(config);
+            final List<String> rulesNames = new ArrayList<>();
+            for (ZenModeConfig.ZenRule rule : activeRules) {
+                if (rule.name != null) {
+                    rulesNames.add(rule.name);
+                }
+            }
+            if (rulesNames.size() > 0) {
+                String rules = ListFormatter.getInstance().format(rulesNames);
+                if (!rules.isEmpty()) {
+                    return mContext.getString(R.string.zen_mode_settings_dnd_custom_settings_footer,
+                            rules);
+                }
+            }
+        }
+        return getFooterUsingDefaultPolicy(config);
+    }
+
+    private String getFooterUsingDefaultPolicy(ZenModeConfig config) {
         String footerText = "";
         long latestEndTime = -1;
 
@@ -115,5 +147,19 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
             }
         }
         return footerText;
+    }
+
+    private List<ZenModeConfig.ZenRule> getActiveRules(ZenModeConfig config) {
+        List<ZenModeConfig.ZenRule> zenRules = new ArrayList<>();
+        if (config.manualRule != null) {
+            zenRules.add(config.manualRule);
+        }
+
+        for (ZenModeConfig.ZenRule automaticRule : config.automaticRules.values()) {
+            if (automaticRule.isAutomaticActive()) {
+                zenRules.add(automaticRule);
+            }
+        }
+        return zenRules;
     }
 }

@@ -25,7 +25,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
-import android.service.notification.ZenModeConfig;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -34,20 +33,15 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {
 
     protected ZenModeBackend mBackend;
     protected Fragment mParent;
-    protected Set<Map.Entry<String, AutomaticZenRule>> mRules;
+    protected Map.Entry<String, AutomaticZenRule>[] mRules;
     protected PackageManager mPm;
-    private static List<String> mDefaultRuleIds;
 
     public AbstractZenModeAutomaticRulePreferenceController(Context context, String key, Fragment
             parent, Lifecycle lifecycle) {
@@ -60,35 +54,19 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        mRules = getZenModeRules();
+        mRules = mBackend.getAutomaticZenRules();
     }
 
-    private static List<String> getDefaultRuleIds() {
-        if (mDefaultRuleIds == null) {
-            mDefaultRuleIds = ZenModeConfig.DEFAULT_RULE_IDS;
+    protected Map.Entry<String, AutomaticZenRule>[] getRules() {
+        if (mRules == null) {
+            mRules = mBackend.getAutomaticZenRules();
         }
-        return mDefaultRuleIds;
-    }
-
-    private Set<Map.Entry<String, AutomaticZenRule>> getZenModeRules() {
-        Map<String, AutomaticZenRule> ruleMap =
-                NotificationManager.from(mContext).getAutomaticZenRules();
-        return ruleMap.entrySet();
+        return mRules;
     }
 
     protected void showNameRuleDialog(final ZenRuleInfo ri, Fragment parent) {
         ZenRuleNameDialog.show(parent, null, ri.defaultConditionId, new
                 RuleNameChangeListener(ri));
-    }
-
-    protected Map.Entry<String, AutomaticZenRule>[] sortedRules() {
-        if (mRules == null) {
-            mRules = getZenModeRules();
-        }
-        final Map.Entry<String, AutomaticZenRule>[] rt =
-                mRules.toArray(new Map.Entry[mRules.size()]);
-        Arrays.sort(rt, RULE_COMPARATOR);
-        return rt;
     }
 
     protected static Intent getRuleIntent(String settingsAction,
@@ -103,35 +81,6 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         }
         return intent;
     }
-
-    private static final Comparator<Map.Entry<String, AutomaticZenRule>> RULE_COMPARATOR =
-            new Comparator<Map.Entry<String, AutomaticZenRule>>() {
-                @Override
-                public int compare(Map.Entry<String, AutomaticZenRule> lhs,
-                        Map.Entry<String, AutomaticZenRule> rhs) {
-                    // if it's a default rule, should be at the top of automatic rules
-                    boolean lhsIsDefaultRule = getDefaultRuleIds().contains(lhs.getKey());
-                    boolean rhsIsDefaultRule = getDefaultRuleIds().contains(rhs.getKey());
-                    if (lhsIsDefaultRule != rhsIsDefaultRule) {
-                        return lhsIsDefaultRule ? -1 : 1;
-                    }
-
-                    int byDate = Long.compare(lhs.getValue().getCreationTime(),
-                            rhs.getValue().getCreationTime());
-                    if (byDate != 0) {
-                        return byDate;
-                    } else {
-                        return key(lhs.getValue()).compareTo(key(rhs.getValue()));
-                    }
-                }
-
-                private String key(AutomaticZenRule rule) {
-                    final int type = ZenModeConfig.isValidScheduleConditionId(rule.getConditionId())
-                            ? 1 : ZenModeConfig.isValidEventConditionId(rule.getConditionId())
-                            ? 2 : 3;
-                    return type + rule.getName().toString();
-                }
-            };
 
     public static ZenRuleInfo getRuleInfo(PackageManager pm, ServiceInfo si) {
         if (si == null || si.metaData == null) {
