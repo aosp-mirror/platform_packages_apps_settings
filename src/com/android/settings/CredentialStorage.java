@@ -172,8 +172,9 @@ public final class CredentialStorage extends FragmentActivity {
                     dialog.show(getSupportFragmentManager(), ConfigureKeyGuardDialog.TAG);
                     return;
                 }
-                installIfAvailable();
-                finish();
+                if (installIfAvailable()) {
+                    finish();
+                }
                 return;
             }
         }
@@ -217,10 +218,13 @@ public final class CredentialStorage extends FragmentActivity {
 
     /**
      * Install credentials if available, otherwise do nothing.
+     *
+     * @return true if the installation is done and the activity should be finished, false if
+     * an asynchronous task is pending and will finish the activity when it's done.
      */
-    private void installIfAvailable() {
+    private boolean installIfAvailable() {
         if (mInstallBundle == null || mInstallBundle.isEmpty()) {
-            return;
+            return true;
         }
 
         final Bundle bundle = mInstallBundle;
@@ -235,16 +239,17 @@ public final class CredentialStorage extends FragmentActivity {
             if (uid != Process.WIFI_UID) {
                 Log.e(TAG, "Failed to install credentials as uid " + uid + ": cross-user installs"
                         + " may only target wifi uids");
-                return;
+                return true;
             }
 
             final Intent installIntent = new Intent(ACTION_INSTALL)
                     .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                     .putExtras(bundle);
             startActivityAsUser(installIntent, new UserHandle(dstUserId));
-            return;
+            return true;
         }
 
+        boolean shouldFinish = true;
         if (bundle.containsKey(Credentials.EXTRA_USER_PRIVATE_KEY_NAME)) {
             final String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
             final byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
@@ -259,7 +264,7 @@ public final class CredentialStorage extends FragmentActivity {
 
             if (!mKeyStore.importKey(key, value, uid, flags)) {
                 Log.e(TAG, "Failed to install " + key + " as uid " + uid);
-                return;
+                return true;
             }
             // The key was prepended USER_PRIVATE_KEY by the CredentialHelper. However,
             // KeyChain internally uses the raw alias name and only prepends USER_PRIVATE_KEY
@@ -270,6 +275,7 @@ public final class CredentialStorage extends FragmentActivity {
             if (uid == Process.SYSTEM_UID || uid == KeyStore.UID_SELF) {
                 new MarkKeyAsUserSelectable(
                         key.replaceFirst("^" + Credentials.USER_PRIVATE_KEY, "")).execute();
+                shouldFinish = false;
             }
         }
 
@@ -281,7 +287,7 @@ public final class CredentialStorage extends FragmentActivity {
 
             if (!mKeyStore.put(certName, certData, uid, flags)) {
                 Log.e(TAG, "Failed to install " + certName + " as uid " + uid);
-                return;
+                return shouldFinish;
             }
         }
 
@@ -291,7 +297,7 @@ public final class CredentialStorage extends FragmentActivity {
 
             if (!mKeyStore.put(caListName, caListData, uid, flags)) {
                 Log.e(TAG, "Failed to install " + caListName + " as uid " + uid);
-                return;
+                return shouldFinish;
             }
         }
 
@@ -300,6 +306,7 @@ public final class CredentialStorage extends FragmentActivity {
         sendBroadcast(broadcast);
 
         setResult(RESULT_OK);
+        return shouldFinish;
     }
 
     /**
@@ -410,6 +417,13 @@ public final class CredentialStorage extends FragmentActivity {
                 Thread.currentThread().interrupt();
                 return false;
             }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            Log.i(TAG, String.format("Marked alias %s as selectable, success? %s",
+                        mAlias, result));
+            CredentialStorage.this.finish();
         }
     }
 
