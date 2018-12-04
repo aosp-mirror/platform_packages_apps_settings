@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static android.app.slice.Slice.HINT_ERROR;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -66,7 +68,7 @@ public class LowStorageSliceTest {
 
     @Test
     @Config(shadows = ShadowPrivateStorageInfo.class)
-    public void getSlice_hasLowStorage_shouldBeCorrectSliceContent() {
+    public void getSlice_lowStorage_shouldHaveStorageFreeTitle() {
         ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(10L, 100L));
 
         final Slice slice = mLowStorageSlice.getSlice();
@@ -77,12 +79,33 @@ public class LowStorageSliceTest {
 
     @Test
     @Config(shadows = ShadowPrivateStorageInfo.class)
-    public void getSlice_hasNoLowStorage_shouldBeNull() {
+    public void getSlice_lowStorage_shouldNotHaveErrorHint() {
+        ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(10L, 100L));
+
+        final Slice slice = mLowStorageSlice.getSlice();
+
+        assertThat(slice.hasHint(HINT_ERROR)).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowPrivateStorageInfo.class)
+    public void getSlice_storageFree_shouldHaveStorageSettingsTitle() {
         ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(100L, 100L));
 
         final Slice slice = mLowStorageSlice.getSlice();
 
-        assertThat(slice).isNull();
+        final List<SliceItem> sliceItems = slice.getItems();
+        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.storage_settings));
+    }
+
+    @Test
+    @Config(shadows = ShadowPrivateStorageInfo.class)
+    public void getSlice_storageFree_shouldHaveErrorHint() {
+        ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(100L, 100L));
+
+        final Slice slice = mLowStorageSlice.getSlice();
+
+        assertThat(slice.hasHint(HINT_ERROR)).isTrue();
     }
 
     @Implements(PrivateStorageInfo.class)
