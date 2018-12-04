@@ -114,6 +114,14 @@
         <uses-library android:name="org.apache.http.legacy" />
         <!-- Settings -->
 
+        <!-- TODO(b/118444000): Remove this. -->
+        <activity android:name="SettingsActivity"
+                  android:label="@string/settings_label_launcher"
+                  android:launchMode="singleTask">
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <activity android:name=".homepage.SettingsHomepageActivity"
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
