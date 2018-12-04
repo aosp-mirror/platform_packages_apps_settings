@@ -29,9 +29,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
 import android.util.DataUnit;
-import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -102,7 +100,6 @@ public final class DataUsageUtilsTest {
 
     @Test
     public void hasEthernet_shouldQueryEthernetSummaryForUser() throws Exception {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DATA_USAGE_V2, true);
         when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
         final String subscriber = "TestSub";
         when(mTelephonyManager.getSubscriberId()).thenReturn(subscriber);

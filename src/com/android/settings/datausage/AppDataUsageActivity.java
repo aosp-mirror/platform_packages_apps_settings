@@ -59,9 +59,9 @@ public class AppDataUsageActivity extends SettingsActivity {
         final Bundle args = new Bundle();
         final AppItem appItem = new AppItem(uid);
         appItem.addUid(uid);
-        args.putParcelable(AppDataUsage.ARG_APP_ITEM, appItem);
+        args.putParcelable(AppDataUsageV2.ARG_APP_ITEM, appItem);
         intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
-        intent.putExtra(EXTRA_SHOW_FRAGMENT, AppDataUsage.class.getName());
+        intent.putExtra(EXTRA_SHOW_FRAGMENT, AppDataUsageV2.class.getName());
         intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.app_data_usage);
 
         super.onCreate(savedInstanceState);
@@ -70,6 +70,6 @@ public class AppDataUsageActivity extends SettingsActivity {
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return super.isValidFragment(fragmentName)
-                || AppDataUsage.class.getName().equals(fragmentName);
+                || AppDataUsageV2.class.getName().equals(fragmentName);
     }
 }

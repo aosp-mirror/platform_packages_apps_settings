@@ -35,7 +35,6 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.AppDataUsageV2;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -44,7 +43,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import android.util.FeatureFlagUtils;
 
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -69,7 +67,6 @@ public class AppDataUsagePreferenceControllerV2Test {
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         mController = spy(new AppDataUsagePreferenceControllerV2(mContext, "test_key"));
         mController.setParentFragment(mFragment);
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DATA_USAGE_V2, true);
     }
 
     @Test
@@ -90,8 +87,8 @@ public class AppDataUsagePreferenceControllerV2Test {
 
     @Test
     public void onResume_notAvailable_shouldNotRestartDataLoader() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DATA_USAGE_V2, false);
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+        doReturn(BasePreferenceController.CONDITIONALLY_UNAVAILABLE).when(mController).getAvailabilityStatus();
 
         mController.onResume();
 
