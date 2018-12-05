@@ -147,7 +147,8 @@ public class ConnectedDeviceSlice implements CustomSliceable {
                 ConnectedDeviceDashboardFragment.class.getName(), "" /* key */,
                 screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
+                .setData(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI);
     }
 
     @Override

@@ -85,7 +85,8 @@ public class DeviceInfoSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 MyDeviceInfoFragment.class.getName(), "" /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
+                .setData(CustomSliceRegistry.DEVICE_INFO_SLICE_URI);
     }
 
     private PendingIntent getPrimaryAction() {

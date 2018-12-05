@@ -16,8 +16,6 @@
 
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
-import static com.android.settings.slices.CustomSliceRegistry.BATTERY_INFO_SLICE_URI;
-
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +35,7 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBuilderUtils;
 
@@ -66,7 +65,8 @@ public class BatterySlice implements CustomSliceable {
         final CharSequence title = mContext.getText(R.string.power_usage_summary_title);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
                 ListBuilder.ICON_IMAGE, title);
-        final Slice slice = new ListBuilder(mContext, BATTERY_INFO_SLICE_URI, ListBuilder.INFINITY)
+        final Slice slice = new ListBuilder(mContext, CustomSliceRegistry.BATTERY_INFO_SLICE_URI,
+                ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
                 .setHeader(new ListBuilder.HeaderBuilder().setTitle(title))
                 .addRow(new ListBuilder.RowBuilder()
@@ -81,7 +81,7 @@ public class BatterySlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return BATTERY_INFO_SLICE_URI;
+        return CustomSliceRegistry.BATTERY_INFO_SLICE_URI;
     }
 
     @Override
@@ -95,7 +95,8 @@ public class BatterySlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 PowerUsageSummary.class.getName(), "" /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
+                .setData(CustomSliceRegistry.BATTERY_INFO_SLICE_URI);
     }
 
     @Override
