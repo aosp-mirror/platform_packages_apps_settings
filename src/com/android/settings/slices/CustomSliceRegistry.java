@@ -25,7 +25,6 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 
@@ -87,6 +86,7 @@ public class CustomSliceRegistry {
     public static final Uri DATA_USAGE_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("data_usage_card")
             .build();
     /**
@@ -95,6 +95,7 @@ public class CustomSliceRegistry {
     public static final Uri DEVICE_INFO_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath("device_info_card")
             .build();
     /**
@@ -103,6 +104,7 @@ public class CustomSliceRegistry {
     public static final Uri EMERGENCY_INFO_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath("emergency_info_card")
             .build();
     /**
@@ -111,6 +113,7 @@ public class CustomSliceRegistry {
     public static final Uri ENHANCED_4G_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("enhanced_4g_lte")
             .build();
     /**
@@ -146,6 +149,7 @@ public class CustomSliceRegistry {
     public static final Uri STORAGE_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath("storage_card")
             .build();
     /**
@@ -191,6 +195,7 @@ public class CustomSliceRegistry {
     public static final Uri WIFI_CALLING_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath(WifiCallingSliceHelper.PATH_WIFI_CALLING)
             .build();
     /**
@@ -199,6 +204,7 @@ public class CustomSliceRegistry {
     public static final Uri WIFI_CALLING_PREFERENCE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(WifiCallingSliceHelper.PATH_WIFI_CALLING_PREFERENCE)
             .build();
     /**
