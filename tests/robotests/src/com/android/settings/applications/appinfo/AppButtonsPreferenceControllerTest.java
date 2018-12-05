@@ -100,9 +100,8 @@ public class AppButtonsPreferenceControllerTest {
     @Mock
     private PackageInfo mPackageInfo;
 
-    private ActionButtonsPreference mButtonPrefs;
-
     private Intent mUninstallIntent;
+    private ActionButtonsPreference mButtonPrefs;
     private AppButtonsPreferenceController mController;
 
     @Before
@@ -176,6 +175,22 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
+    public void updateOpenButton_noLaunchIntent_buttonShouldBeDisable() {
+        mController.updateOpenButton();
+
+        verify(mButtonPrefs).setButton1Visible(false);
+    }
+
+    @Test
+    public void updateOpenButton_haveLaunchIntent_buttonShouldBeEnable() {
+        doReturn(new Intent()).when(mPackageManger).getLaunchIntentForPackage(anyString());
+
+        mController.updateOpenButton();
+
+        verify(mButtonPrefs).setButton1Visible(true);
+    }
+
+    @Test
     public void updateUninstallButton_isSystemApp_handleAsDisableableButton() {
         doReturn(false).when(mController).handleDisableable();
         mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
@@ -183,7 +198,7 @@ public class AppButtonsPreferenceControllerTest {
         mController.updateUninstallButton();
 
         verify(mController).handleDisableable();
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -221,7 +236,7 @@ public class AppButtonsPreferenceControllerTest {
         mController.updateUninstallButton();
 
         verify(mController).handleDisableable();
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -230,7 +245,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -240,7 +255,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -249,7 +264,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -259,7 +274,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -309,7 +324,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton1Text(R.string.uninstall_text);
+        verify(mButtonPrefs).setButton2Text(R.string.uninstall_text);
         assertThat(controllable).isFalse();
     }
 
@@ -321,7 +336,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton1Text(R.string.uninstall_text);
+        verify(mButtonPrefs).setButton2Text(R.string.uninstall_text);
         assertThat(controllable).isTrue();
     }
 
@@ -333,7 +348,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton1Text(R.string.install_text);
+        verify(mButtonPrefs).setButton2Text(R.string.install_text);
         assertThat(controllable).isTrue();
     }
 
@@ -394,11 +409,11 @@ public class AppButtonsPreferenceControllerTest {
 
     private ActionButtonsPreference createMock() {
         final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
-        when(pref.setButton1Text(anyInt())).thenReturn(pref);
-        when(pref.setButton1Icon(anyInt())).thenReturn(pref);
-        when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
-        when(pref.setButton1Visible(anyBoolean())).thenReturn(pref);
-        when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+        when(pref.setButton2Text(anyInt())).thenReturn(pref);
+        when(pref.setButton2Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         return pref;
     }

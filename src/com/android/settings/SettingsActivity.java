@@ -35,9 +35,9 @@ import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -168,6 +168,12 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private Button mNextButton;
 
+    /**
+     * TODO(b/118444000): Remove this and all related code.
+     */
+    @Deprecated
+    private boolean mIsShowingDashboard;
+
     private ViewGroup mContent;
 
     // Categories
@@ -250,7 +256,11 @@ public class SettingsActivity extends SettingsBaseActivity
             setTheme(R.style.Theme_SubSettings);
         }
 
-        setContentView(R.layout.settings_main_prefs);
+        mIsShowingDashboard = TextUtils.equals(
+                SettingsActivity.class.getName(), intent.getComponent().getClassName());
+
+        setContentView(mIsShowingDashboard ?
+                R.layout.settings_main_dashboard : R.layout.settings_main_prefs);
 
         mContent = findViewById(R.id.main_content);
 
@@ -273,12 +283,21 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
+        if (mIsShowingDashboard) {
+            findViewById(R.id.search_bar).setVisibility(
+                    deviceProvisioned ? View.VISIBLE : View.INVISIBLE);
+            findViewById(R.id.action_bar).setVisibility(View.GONE);
+            final Toolbar toolbar = findViewById(R.id.search_action_bar);
+            setActionBar(toolbar);
+            FeatureFactory.getFactory(this).getSearchFeatureProvider()
+                    .initSearchToolbar(this, toolbar);
+        }
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
             actionBar.setHomeButtonEnabled(deviceProvisioned);
-            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
         }
         mSwitchBar = findViewById(R.id.switch_bar);
         if (mSwitchBar != null) {
@@ -292,26 +311,20 @@ public class SettingsActivity extends SettingsBaseActivity
             if (buttonBar != null) {
                 buttonBar.setVisibility(View.VISIBLE);
 
-                Button backButton = (Button) findViewById(R.id.back_button);
-                backButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_CANCELED, null);
-                        finish();
-                    }
+                Button backButton = findViewById(R.id.back_button);
+                backButton.setOnClickListener(v -> {
+                    setResult(RESULT_CANCELED, null);
+                    finish();
                 });
-                Button skipButton = (Button) findViewById(R.id.skip_button);
-                skipButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_OK, null);
-                        finish();
-                    }
+                Button skipButton = findViewById(R.id.skip_button);
+                skipButton.setOnClickListener(v -> {
+                    setResult(RESULT_OK, null);
+                    finish();
                 });
-                mNextButton = (Button) findViewById(R.id.next_button);
-                mNextButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_OK, null);
-                        finish();
-                    }
+                mNextButton = findViewById(R.id.next_button);
+                mNextButton.setOnClickListener(v -> {
+                    setResult(RESULT_OK, null);
+                    finish();
                 });
 
                 // set our various button parameters

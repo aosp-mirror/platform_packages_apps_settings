@@ -52,7 +52,7 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
         for (AbstractPreferenceController controller : mGestureControllers) {
             isAvailable = isAvailable || controller.isAvailable();
         }
-        return isAvailable ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
+        return isAvailable ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     /**

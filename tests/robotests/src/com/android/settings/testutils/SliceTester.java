@@ -110,8 +110,6 @@ public class SliceTester {
 
         final SliceAction mainToggleAction = toggles.get(0);
 
-        final IconCompat expectedToggleIcon = IconCompat.createWithResource(context,
-                sliceData.getIconResource());
         assertThat(mainToggleAction.getIcon()).isNull();
 
         // Check intent in Toggle Action

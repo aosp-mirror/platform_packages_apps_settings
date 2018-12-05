@@ -35,43 +35,42 @@ public class WifiDppConfiguratorActivityTest {
             new ActivityTestRule<>(WifiDppConfiguratorActivity.class);
 
     @Test
-    public void launchActivity_modeQrCodeScanner_shouldNotAutoFinish() {
-        Intent intent = new Intent();
-        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
-                WifiDppConfiguratorActivity.LaunchMode.LAUNCH_MODE_QR_CODE_SCANNER.getMode());
+    public void launchActivity_qrCodeScanner_shouldNotAutoFinish() {
+        Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+
         mActivityRule.launchActivity(intent);
 
         assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
     }
 
     @Test
-    public void launchActivity_modeQrCodeGenerator_shouldNotAutoFinish() {
-        Intent intent = new Intent();
-        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
-                WifiDppConfiguratorActivity.LaunchMode.LAUNCH_MODE_QR_CODE_GENERATOR.getMode());
+    public void launchActivity_qrCodeGenerator_shouldNotAutoFinish() {
+        Intent intent = new Intent(
+                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+
         mActivityRule.launchActivity(intent);
 
         assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
     }
 
     @Test
-    public void launchActivity_modeChooseSavedWifiNetwork_shouldNotAutoFinish() {
-        Intent intent = new Intent();
-        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
-                WifiDppConfiguratorActivity.LaunchMode
-                .LAUNCH_MODE_CHOOSE_SAVED_WIFI_NETWORK.getMode());
+    public void launchActivity_chooseSavedWifiNetwork_shouldNotAutoFinish() {
+        Intent intent = new Intent(
+                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK);
+
         mActivityRule.launchActivity(intent);
 
         assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
     }
 
     @Test
-    public void launchActivity_noLaunchMode_shouldFinishActivityWithResultCodeCanceled() {
-        // If we do not specify launch mode, the activity will finish itself right away
-        Intent intent = new Intent();
-        mActivityRule.launchActivity(intent);
+    public void testActivity_shouldImplementsWifiNetworkConfigRetriever() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
 
-        assertThat(mActivityRule.getActivityResult().getResultCode()).
-                isEqualTo(Activity.RESULT_CANCELED);
+        assertThat(activity instanceof WifiNetworkConfig.Retriever).isEqualTo(true);
     }
 }

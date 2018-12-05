@@ -49,15 +49,12 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
         setTitle(getString(R.string.wifi_dpp_add_device_to_network));
 
-        String ssid = null;
-        final Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            ssid = intent.getStringExtra(WifiDppConfiguratorActivity.EXTRA_SSID);
+        WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
+                .getWifiNetworkConfig();
+        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
+            throw new IllegalArgumentException("Invalid Wi-Fi network for configuring");
         }
-        if (TextUtils.isEmpty(ssid)) {
-            throw new IllegalArgumentException("Invalid SSID");
-        }
-        setDescription(getString(R.string.wifi_dpp_center_qr_code, ssid));
+        setDescription(getString(R.string.wifi_dpp_center_qr_code, wifiNetworkConfig.getSsid()));
 
         hideRightButton();
 

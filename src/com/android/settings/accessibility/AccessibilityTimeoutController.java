@@ -31,6 +31,8 @@ import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import com.google.common.primitives.Ints;
+
 import java.lang.Integer;
 
 import java.util.HashMap;
@@ -38,6 +40,10 @@ import java.util.Map;
 
 public class AccessibilityTimeoutController extends AbstractPreferenceController implements
         LifecycleObserver, RadioButtonPreference.OnClickListener, PreferenceControllerMixin {
+    static final String CONTENT_TIMEOUT_SETTINGS_SECURE =
+            Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS;
+    static final String CONTROL_TIMEOUT_SETTINGS_SECURE =
+            Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS;
 
     // pair the preference key and timeout value
     private final Map<String, Integer> mAccessibilityTimeoutKeyToValueMap = new HashMap<>();
@@ -62,6 +68,15 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
         }
         mPreferenceKey = preferenceKey;
         mfragmentTag = fragmentTag;
+    }
+
+    protected static int getSecureAccessibilityTimeoutValue(ContentResolver resolver, String name) {
+        String timeOutSec = Settings.Secure.getString(resolver, name);
+        if (timeOutSec == null) {
+            return 0;
+        }
+        Integer timeOutValue = Ints.tryParse(timeOutSec);
+        return timeOutValue == null ? 0 : timeOutValue;
     }
 
     public void setOnChangeListener(OnChangeListener listener) {
@@ -131,16 +146,17 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
         }
     }
 
-    protected void getAccessibilityUiValue() {
-        String timeoutValue = null;
-        if (mfragmentTag.equals(AccessibilityContentTimeoutPreferenceFragment.TAG)) {
-            timeoutValue = Settings.Secure.getString(mContentResolver,
-                    Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS);
-        } else if (mfragmentTag.equals(AccessibilityControlTimeoutPreferenceFragment.TAG)) {
-            timeoutValue = Settings.Secure.getString(mContentResolver,
-                    Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS);
+    private int getAccessibilityTimeoutValue(String fragmentTag) {
+        int timeoutValue = 0;
+        // two kinds of Secure value, one is content timeout, the other is control timeout.
+        if (AccessibilityContentTimeoutPreferenceFragment.TAG.equals(fragmentTag)) {
+            timeoutValue = getSecureAccessibilityTimeoutValue(mContentResolver,
+                    CONTENT_TIMEOUT_SETTINGS_SECURE);
+        } else if (AccessibilityControlTimeoutPreferenceFragment.TAG.equals(fragmentTag)) {
+            timeoutValue = getSecureAccessibilityTimeoutValue(mContentResolver,
+                    CONTROL_TIMEOUT_SETTINGS_SECURE);
         }
-        mAccessibilityUiTimeoutValue = timeoutValue == null? 0: Integer.parseInt(timeoutValue);
+        return timeoutValue;
     }
 
     protected void updatePreferenceCheckedState(int value) {
@@ -153,7 +169,7 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        getAccessibilityUiValue();
+        mAccessibilityUiTimeoutValue = getAccessibilityTimeoutValue(mfragmentTag);
 
         // reset RadioButton
         mPreference.setChecked(false);

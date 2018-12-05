@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,12 +26,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.provider.Settings;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceManager;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -44,6 +42,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DataUsageListTest {
@@ -95,6 +96,18 @@ public class DataUsageListTest {
 
         assertThat(mDataUsageList.mTemplate).isNotNull();
         assertThat(mDataUsageList.mSubId).isEqualTo(3);
+    }
+
+    @Test
+    public void processArgument_shouldGetNetworkTypeFromArgument() {
+        final Bundle args = new Bundle();
+        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_WIFI);
+        args.putInt(DataUsageList.EXTRA_SUB_ID, 3);
+        mDataUsageList.setArguments(args);
+
+        mDataUsageList.processArgument();
+
+        assertThat(mDataUsageList.mNetworkType).isEqualTo(ConnectivityManager.TYPE_WIFI);
     }
 
     @Test

@@ -101,6 +101,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @VisibleForTesting
     ActionButtonsPreference mButtonsPref;
 
+    private final int mUserId;
     private final int mRequestUninstall;
     private final int mRequestRemoveDeviceAdmin;
     private final DevicePolicyManager mDpm;
@@ -110,8 +111,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private final InstrumentedPreferenceFragment mFragment;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final ApplicationFeatureProvider mApplicationFeatureProvider;
-    private final int mUserId;
 
+    private Intent mAppLaunchIntent;
     private ApplicationsState.Session mSession;
     private RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
 
@@ -144,6 +145,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         mUserId = UserHandle.myUserId();
         mRequestUninstall = requestUninstall;
         mRequestRemoveDeviceAdmin = requestRemoveDeviceAdmin;
+        mAppLaunchIntent = mPm.getLaunchIntentForPackage(mPackageName);
 
         if (packageName != null) {
             mAppEntry = mState.getEntry(packageName, mUserId);
@@ -167,13 +169,16 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (isAvailable()) {
             mButtonsPref = ((ActionButtonsPreference) screen.findPreference(
                     KEY_ACTION_BUTTONS))
-                    .setButton1Text(R.string.uninstall_text)
-                    .setButton1Icon(R.drawable.ic_settings_delete)
-                    .setButton2Text(R.string.force_stop)
-                    .setButton2Icon(R.drawable.ic_settings_force_stop)
-                    .setButton1OnClickListener(new UninstallAndDisableButtonListener())
-                    .setButton2OnClickListener(new ForceStopButtonListener())
-                    .setButton2Enabled(false);
+                    .setButton1Text(R.string.launch_instant_app)
+                    .setButton1Icon(R.drawable.ic_settings_open)
+                    .setButton1OnClickListener(v -> launchApplication())
+                    .setButton2Text(R.string.uninstall_text)
+                    .setButton2Icon(R.drawable.ic_settings_delete)
+                    .setButton2OnClickListener(new UninstallAndDisableButtonListener())
+                    .setButton3Text(R.string.force_stop)
+                    .setButton3Icon(R.drawable.ic_settings_force_stop)
+                    .setButton3OnClickListener(new ForceStopButtonListener())
+                    .setButton3Enabled(false);
         }
     }
 
@@ -362,6 +367,12 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     }
 
     @VisibleForTesting
+    void updateOpenButton() {
+        mAppLaunchIntent = mPm.getLaunchIntentForPackage(mPackageName);
+        mButtonsPref.setButton1Visible(mAppLaunchIntent != null);
+    }
+
+    @VisibleForTesting
     void updateUninstallButton() {
         final boolean isBundled = (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
         boolean enabled = true;
@@ -431,7 +442,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             enabled = false;
         }
 
-        mButtonsPref.setButton1Enabled(enabled);
+        mButtonsPref.setButton2Enabled(enabled);
     }
 
     /**
@@ -498,9 +509,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @VisibleForTesting
     void updateForceStopButtonInner(boolean enabled) {
         if (mAppsControlDisallowedBySystem) {
-            mButtonsPref.setButton2Enabled(false);
+            mButtonsPref.setButton3Enabled(false);
         } else {
-            mButtonsPref.setButton2Enabled(enabled);
+            mButtonsPref.setButton3Enabled(enabled);
         }
     }
 
@@ -548,16 +559,16 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
-            mButtonsPref.setButton1Text(R.string.uninstall_text)
-                    .setButton1Icon(R.drawable.ic_settings_delete);
+            mButtonsPref.setButton2Text(R.string.uninstall_text)
+                    .setButton2Icon(R.drawable.ic_settings_delete);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-            mButtonsPref.setButton1Text(R.string.uninstall_text)
-                    .setButton1Icon(R.drawable.ic_settings_delete);
+            mButtonsPref.setButton2Text(R.string.uninstall_text)
+                    .setButton2Icon(R.drawable.ic_settings_delete);
             disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
                     .contains(mAppEntry.info.packageName);
         } else {
-            mButtonsPref.setButton1Text(R.string.install_text)
-                    .setButton1Icon(R.drawable.ic_settings_install);
+            mButtonsPref.setButton2Text(R.string.install_text)
+                    .setButton2Icon(R.drawable.ic_settings_install);
             disableable = true;
         }
 
@@ -640,6 +651,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             }
         }
 
+        updateOpenButton();
         updateUninstallButton();
         updateForceStopButton();
 
@@ -664,6 +676,11 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         mActivity.unregisterReceiver(mPackageRemovedReceiver);
     }
 
+    private void launchApplication() {
+        if (mAppLaunchIntent != null) {
+            mContext.startActivityAsUser(mAppLaunchIntent, new UserHandle(mUserId));
+        }
+    }
 
     /**
      * Changes the status of disable/enable for a package
