@@ -20,6 +20,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -104,9 +105,8 @@ public class MobileDataPreferenceControllerTest {
     public void isDialogNeeded_enableNonDefaultSimInMultiSimMode_returnTrue() {
         doReturn(false).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        doReturn(null).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(anyInt());
         doReturn(2).when(mTelephonyManager).getSimCount();
-        doReturn(1).when(mTelephonyManager).getNumberOfModemsWithSimultaneousDataConnections();
 
         assertThat(mController.isDialogNeeded()).isTrue();
         assertThat(mController.mDialogType).isEqualTo(

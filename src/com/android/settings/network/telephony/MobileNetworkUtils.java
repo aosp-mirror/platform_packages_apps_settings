@@ -230,7 +230,8 @@ public class MobileNetworkUtils {
                     subscriptionManager.getActiveSubscriptionInfoList();
             if (subInfoList != null) {
                 for (SubscriptionInfo subInfo : subInfoList) {
-                    if (subInfo.getSubscriptionId() != subId) {
+                    // We never disable mobile data for opportunistic subscriptions.
+                    if (subInfo.getSubscriptionId() != subId && !subInfo.isOpportunistic()) {
                         context.getSystemService(TelephonyManager.class).createForSubscriptionId(
                                 subInfo.getSubscriptionId()).setDataEnabled(false);
                     }
