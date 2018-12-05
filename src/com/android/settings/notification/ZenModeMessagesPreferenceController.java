@@ -18,10 +18,10 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import androidx.preference.Preference;
 
 public class ZenModeMessagesPreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {
@@ -48,6 +48,7 @@ public class ZenModeMessagesPreferenceController extends
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        // TODO: (b/111475013 - beverlyt) set messages summary
+
+        preference.setSummary(mSummaryBuilder.getMessagesSettingSummary(getPolicy()));
     }
 }

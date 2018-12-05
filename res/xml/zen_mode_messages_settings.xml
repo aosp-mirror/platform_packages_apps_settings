@@ -18,7 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="zen_mode_messages_settings_page"
-    android:title="@string/zen_mode_messages" >
+    android:title="@string/zen_mode_messages_title" >
 
     <PreferenceCategory
         android:title="@string/zen_mode_settings_category"
@@ -26,8 +26,8 @@
         <!-- Messages -->
         <ListPreference
             android:key="zen_mode_messages"
-            android:title="@string/zen_mode_messages_title"
-            android:entries="@array/zen_mode_contacts_entries"
+            android:title="@string/zen_mode_messages"
+            android:entries="@array/zen_mode_contacts_messages_entries"
             android:entryValues="@array/zen_mode_contacts_values"/>
 
         <Preference

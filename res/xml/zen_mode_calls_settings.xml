@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_calls_settings_page"
-    android:title="@string/zen_mode_calls" >
+    android:title="@string/zen_mode_calls_title" >
 
    <PreferenceCategory
        android:title="@string/zen_mode_settings_category"
@@ -27,8 +27,8 @@
       <!-- Calls -->
       <ListPreference
           android:key="zen_mode_calls"
-          android:title="@string/zen_mode_calls_title"
-          android:entries="@array/zen_mode_contacts_entries"
+          android:title="@string/zen_mode_calls"
+          android:entries="@array/zen_mode_contacts_calls_entries"
           android:entryValues="@array/zen_mode_contacts_values"/>
 
       <Preference
