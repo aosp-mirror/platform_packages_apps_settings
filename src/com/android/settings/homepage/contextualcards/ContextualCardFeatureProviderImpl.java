@@ -16,8 +16,10 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import android.annotation.NonNull;
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -25,6 +27,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.slice.widget.EventInfo;
 
 import com.android.settings.R;
+import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 
 import java.util.List;
 
@@ -37,10 +40,6 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
 
     // Contextual card shows, log card name and rank
     private static final int CONTEXTUAL_CARD_SHOW = 39;
-
-    // Contextual card is eligible to be shown, but doesn't rank high
-    // enough, log card name and score
-    private static final int CONTEXTUAL_CARD_NOT_SHOW = 40;
 
     // Contextual card is dismissed, log card name
     private static final int CONTEXTUAL_CARD_DISMISS = 41;
@@ -67,6 +66,11 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
     // log type
     private static final String EXTRA_CONTEXTUALCARD_ACTION_TYPE = "type";
 
+    // displayed contextual cards
+    private static final String EXTRA_CONTEXTUALCARD_VISIBLE = "visible";
+
+    // hidden contextual cards
+    private static final String EXTRA_CONTEXTUALCARD_HIDDEN = "hidden";
 
     // Contextual card tap target
     private static final int TARGET_DEFAULT = 0;
@@ -82,6 +86,10 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
 
     @Override
     public void logHomepageDisplay(Context context, Long latency) {
+        final Intent intent = new Intent();
+        intent.putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_HOME_SHOW);
+        intent.putExtra(EXTRA_LATENCY, latency);
+        sendBroadcast(context, intent);
     }
 
     @Override
@@ -94,8 +102,13 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
     }
 
     @Override
-    public void logContextualCardDisplay(Context context, List<ContextualCard> showCards,
+    public void logContextualCardDisplay(Context context, List<ContextualCard> visibleCards,
             List<ContextualCard> hiddenCards) {
+        final Intent intent = new Intent();
+        intent.putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_CARD_SHOW);
+        intent.putExtra(EXTRA_CONTEXTUALCARD_VISIBLE, serialize(visibleCards));
+        intent.putExtra(EXTRA_CONTEXTUALCARD_HIDDEN, serialize(hiddenCards));
+        sendBroadcast(context, intent);
     }
 
     @Override
@@ -116,7 +129,7 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
         final String action = context.getString(R.string.config_settingsintelligence_log_action);
         if (!TextUtils.isEmpty(action)) {
             intent.setAction(action);
-            context.sendBroadcast(intent);
+            context.sendBroadcastAsUser(intent, UserHandle.ALL);
         }
     }
 
@@ -132,5 +145,17 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
                 Log.w(TAG, "unknown type " + actionType);
                 return TARGET_DEFAULT;
         }
+    }
+
+    @VisibleForTesting
+    @NonNull
+    byte[] serialize(List<ContextualCard> cards) {
+        final ContextualCardList.Builder builder = ContextualCardList.newBuilder();
+        cards.stream().forEach(card -> builder.addCard(
+                com.android.settings.intelligence.ContextualCardProto.ContextualCard.newBuilder()
+                        .setSliceUri(card.getSliceUri().toString())
+                        .setCardName(card.getName())
+                        .build()));
+        return builder.build().toByteArray();
     }
 }
