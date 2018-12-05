@@ -27,8 +27,7 @@ public class FakeSettingsPanelActivity extends SettingsPanelActivity {
 
     @Override
     public Intent getIntent() {
-        final Intent intent = new Intent();
-        intent.putExtra(SettingsPanelActivity.EXTRA_PANEL_TYPE, FakePanelContent.FAKE_KEY);
+        final Intent intent = new Intent(FakePanelContent.FAKE_ACTION);
         return intent;
     }
 }

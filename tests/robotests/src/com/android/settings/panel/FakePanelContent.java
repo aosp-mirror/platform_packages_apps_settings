@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class FakePanelContent implements PanelContent {
 
-    public static final String FAKE_KEY = "fake_key";
+    public static final String FAKE_ACTION = "fake_action";
 
     public static final CharSequence TITLE = "title";
 

@@ -16,11 +16,9 @@
 
 package com.android.settings.panel;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
@@ -35,8 +33,6 @@ import com.android.settings.R;
 
 /**
  * Dialog Activity to host Settings Slices.
- *
- * TODO link to action / framework API
  */
 public class SettingsPanelActivity extends FragmentActivity {
 
@@ -47,38 +43,14 @@ public class SettingsPanelActivity extends FragmentActivity {
      */
     public static final String KEY_PANEL_TYPE_ARGUMENT = "PANEL_TYPE_ARGUMENT";
 
-
-    // TODO (b/117804442) move to framework
-    public static final String EXTRA_PANEL_TYPE = "com.android.settings.panel.extra";
-
-    // TODO (b/117804442) move to framework
-    public static final String PANEL_TYPE_WIFI = "wifi_panel";
-
-    // TODO (b/117804442) move to framework
-    public static final String PANEL_TYPE_VOLUME = "volume_panel";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        final ComponentName callingActivityName = getCallingActivity();
-
-        if (callingActivityName == null) {
-            Log.e(TAG, "Must start with startActivityForResult. Closing.");
-            finish();
-            return;
-        }
 
         final Intent callingIntent = getIntent();
         if (callingIntent == null) {
             Log.e(TAG, "Null intent, closing Panel Activity");
             finish();
-            return;
-        }
-
-        final String typeExtra = callingIntent.getStringExtra(EXTRA_PANEL_TYPE);
-        if (TextUtils.isEmpty(typeExtra)) {
-            Log.e(TAG, "No intent passed, closing Panel Activity");
             return;
         }
 
@@ -90,9 +62,8 @@ public class SettingsPanelActivity extends FragmentActivity {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
 
-
         final Bundle bundle = new Bundle();
-        bundle.putString(KEY_PANEL_TYPE_ARGUMENT, typeExtra);
+        bundle.putString(KEY_PANEL_TYPE_ARGUMENT, callingIntent.getAction());
 
         final PanelFragment panelFragment = new PanelFragment();
         panelFragment.setArguments(bundle);

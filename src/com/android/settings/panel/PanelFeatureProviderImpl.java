@@ -17,15 +17,16 @@
 package com.android.settings.panel;
 
 import android.content.Context;
+import android.provider.Settings;
 
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
     public PanelContent getPanel(Context context, String panelType) {
         switch (panelType) {
-            case SettingsPanelActivity.PANEL_TYPE_WIFI:
+            case Settings.Panel.ACTION_INTERNET_CONNECTIVITY:
                 return InternetConnectivityPanel.create(context);
-            case SettingsPanelActivity.PANEL_TYPE_VOLUME:
+            case Settings.Panel.ACTION_VOLUME:
                 return VolumePanel.create(context);
         }
 
