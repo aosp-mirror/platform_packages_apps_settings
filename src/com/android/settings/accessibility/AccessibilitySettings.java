@@ -21,6 +21,7 @@ import static android.os.Vibrator.VibrationIntensity;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -62,6 +63,8 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
+
+import com.google.common.primitives.Ints;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -125,6 +128,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference";
+    private static final String ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE =
+            "accessibility_content_timeout_preference_fragment";
+    private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
+            "accessibility_control_timeout_preference_fragment";
+
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -718,6 +726,31 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
+
+        updateAccessibilityTimeoutSummary(getContentResolver(),
+                findPreference(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE));
+        updateAccessibilityTimeoutSummary(getContentResolver(),
+                findPreference(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE));
+    }
+
+    void updateAccessibilityTimeoutSummary(ContentResolver resolver, Preference pref) {
+
+        String[] timeoutSummarys = getResources().getStringArray(
+                R.array.accessibility_timeout_summaries);
+        int[] timeoutValues = getResources().getIntArray(
+                R.array.accessibility_timeout_selector_values);
+
+        int timeoutValue = 0;
+        if (pref.getKey().equals(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE)) {
+            timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
+                    resolver, AccessibilityTimeoutController.CONTENT_TIMEOUT_SETTINGS_SECURE);
+        } else if (pref.getKey().equals(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE)) {
+            timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
+                    resolver, AccessibilityTimeoutController.CONTROL_TIMEOUT_SETTINGS_SECURE);
+        }
+
+        int idx = Ints.indexOf(timeoutValues, timeoutValue);
+        pref.setSummary(timeoutSummarys[idx == -1 ? 0 : idx]);
     }
 
     private void updateMagnificationSummary(Preference pref) {
