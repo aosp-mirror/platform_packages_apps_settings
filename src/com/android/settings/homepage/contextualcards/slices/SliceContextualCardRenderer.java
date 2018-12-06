@@ -41,6 +41,7 @@ import androidx.slice.widget.SliceLiveData;
 import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
+import com.android.settings.homepage.contextualcards.CardContentProvider;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardRenderer;
@@ -94,6 +95,8 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
     public void bindView(RecyclerView.ViewHolder holder, ContextualCard card) {
         final SliceViewHolder cardHolder = (SliceViewHolder) holder;
         final Uri uri = card.getSliceUri();
+        //TODO(b/120629936): Take this out once blank card issue is fixed.
+        Log.d(TAG, "bindView - uri = " + uri);
 
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
             Log.w(TAG, "Invalid uri, skipping slice: " + uri);
@@ -116,6 +119,11 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         sliceLiveData.observe(mLifecycleOwner, slice -> {
             if (slice == null) {
                 Log.w(TAG, "Slice is null");
+                mContext.getContentResolver().notifyChange(CardContentProvider.URI, null);
+                return;
+            } else {
+                //TODO(b/120629936): Take this out once blank card issue is fixed.
+                Log.d(TAG, "Slice callback - uri = " + slice.getUri());
             }
             cardHolder.sliceView.setSlice(slice);
         });
