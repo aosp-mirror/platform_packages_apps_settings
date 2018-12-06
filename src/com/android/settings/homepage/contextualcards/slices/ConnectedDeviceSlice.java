@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +49,6 @@ import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -194,7 +194,7 @@ public class ConnectedDeviceSlice implements CustomSliceable {
         subSettingLauncher.setDestination(BluetoothDeviceDetailsFragment.class.getName())
                 .setArguments(args)
                 .setTitleRes(R.string.device_details_title)
-                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN);
+                .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_DEVICE_DETAILS);
 
         // The requestCode should be unique, use the hashcode of device as request code.
         return PendingIntent
