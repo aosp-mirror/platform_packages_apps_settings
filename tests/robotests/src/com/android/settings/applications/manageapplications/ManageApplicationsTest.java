@@ -28,11 +28,12 @@ import static com.android.settings.applications.manageapplications.ManageApplica
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -48,9 +49,11 @@ import android.os.Looper;
 import android.os.UserManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -159,6 +162,35 @@ public class ManageApplicationsTest {
     }
 
     @Test
+    public void onCreateOptionsMenu_shouldSetSearchQueryListener() {
+        final SearchView searchView = mock(SearchView.class);
+        final MenuItem searchMenu = mock(MenuItem.class);
+        final MenuItem helpMenu = mock(MenuItem.class);
+        when(searchMenu.getActionView()).thenReturn(searchView);
+        when(mMenu.findItem(R.id.search_app_list_menu)).thenReturn(searchMenu);
+        when(mMenu.add(anyInt() /* groupId */, anyInt() /* itemId */, anyInt() /* order */,
+            anyInt() /* titleRes */)).thenReturn(helpMenu);
+        doReturn("Test").when(mFragment).getText(anyInt() /* resId */);
+        doNothing().when(mFragment).updateOptionsMenu();
+
+        mFragment.onCreateOptionsMenu(mMenu, mock(MenuInflater.class));
+
+        verify(searchView).setOnQueryTextListener(mFragment);
+    }
+
+    @Test
+    public void onQueryTextChange_shouldFilterSearchInApplicationsAdapter() {
+        final ManageApplications.ApplicationsAdapter adapter =
+            mock(ManageApplications.ApplicationsAdapter.class);
+        final String query = "Test App";
+        ReflectionHelpers.setField(mFragment, "mApplications", adapter);
+
+        mFragment.onQueryTextChange(query);
+
+        verify(adapter).filterSearch(query);
+    }
+
+    @Test
     public void updateLoading_appLoaded_shouldNotDelayCallToHandleLoadingContainer() {
         ReflectionHelpers.setField(mFragment, "mLoadingContainer", mock(View.class));
         ReflectionHelpers.setField(mFragment, "mListContainer", mock(View.class));
@@ -247,6 +279,34 @@ public class ManageApplicationsTest {
         adapter.onRebuildComplete(null);
 
         verify(loadingViewController).showContent(true /* animate */);
+    }
+
+    @Test
+    public void onRebuildComplete_hasSearchQuery_shouldFilterSearch() {
+        final String query = "Test";
+        final RecyclerView recyclerView = mock(RecyclerView.class);
+        final View emptyView = mock(View.class);
+        ReflectionHelpers.setField(mFragment, "mRecyclerView", recyclerView);
+        ReflectionHelpers.setField(mFragment, "mEmptyView", emptyView);
+        final SearchView searchView = mock(SearchView.class);
+        ReflectionHelpers.setField(mFragment, "mSearchView", searchView);
+        when(searchView.isVisibleToUser()).thenReturn(true);
+        when(searchView.getQuery()).thenReturn(query);
+        final View listContainer = mock(View.class);
+        when(listContainer.getVisibility()).thenReturn(View.VISIBLE);
+        ReflectionHelpers.setField(mFragment, "mListContainer", listContainer);
+        ReflectionHelpers.setField(
+            mFragment, "mFilterAdapter", mock(ManageApplications.FilterSpinnerAdapter.class));
+        final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
+        appList.add(mock(ApplicationsState.AppEntry.class));
+        final ManageApplications.ApplicationsAdapter adapter =
+            spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
+                AppFilterRegistry.getInstance().get(FILTER_APPS_ALL),
+                null /* savedInstanceState */));
+
+        adapter.onRebuildComplete(appList);
+
+        verify(adapter).filterSearch(query);
     }
 
     @Test
@@ -344,6 +404,48 @@ public class ManageApplicationsTest {
     }
 
     @Test
+    public void applicationsAdapter_filterSearch_emptyQuery_shouldShowFullList() {
+        final ManageApplications.ApplicationsAdapter adapter =
+            new ManageApplications.ApplicationsAdapter(
+                mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
+        final String[] appNames = {"Apricot", "Banana", "Cantaloupe", "Fig", "Mango"};
+        ReflectionHelpers.setField(adapter, "mOriginalEntries", getTestAppList(appNames));
+
+        adapter.filterSearch("");
+
+        assertThat(adapter.getItemCount()).isEqualTo(5);
+    }
+
+    @Test
+    public void applicationsAdapter_filterSearch_noMatch_shouldShowEmptyList() {
+        final ManageApplications.ApplicationsAdapter adapter =
+            new ManageApplications.ApplicationsAdapter(
+                mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
+        final String[] appNames = {"Apricot", "Banana", "Cantaloupe", "Fig", "Mango"};
+        ReflectionHelpers.setField(adapter, "mOriginalEntries", getTestAppList(appNames));
+
+        adapter.filterSearch("orange");
+
+        assertThat(adapter.getItemCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void applicationsAdapter_filterSearch_shouldShowMatchedItemsOnly() {
+        final ManageApplications.ApplicationsAdapter adapter =
+            new ManageApplications.ApplicationsAdapter(
+                mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
+        final String[] appNames = {"Apricot", "Banana", "Cantaloupe", "Fig", "Mango"};
+        ReflectionHelpers.setField(adapter, "mOriginalEntries", getTestAppList(appNames));
+
+        adapter.filterSearch("an");
+
+        assertThat(adapter.getItemCount()).isEqualTo(3);
+        assertThat(adapter.getAppEntry(0).label).isEqualTo("Banana");
+        assertThat(adapter.getAppEntry(1).label).isEqualTo("Cantaloupe");
+        assertThat(adapter.getAppEntry(2).label).isEqualTo("Mango");
+    }
+
+    @Test
     public void sortOrderSavedOnRebuild() {
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
         ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
@@ -374,5 +476,15 @@ public class ManageApplicationsTest {
             }
             return new RoboMenuItem(id);
         });
+    }
+
+    private ArrayList<ApplicationsState.AppEntry> getTestAppList(String[] appNames) {
+        final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
+        for (String name : appNames) {
+            final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
+            appEntry.label = name;
+            appList.add(appEntry);
+        }
+        return appList;
     }
 }

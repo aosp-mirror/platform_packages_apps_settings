@@ -67,11 +67,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Filter;
 import android.widget.FrameLayout;
+import android.widget.SearchView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -140,7 +143,7 @@ import java.util.Set;
  * intent.
  */
 public class ManageApplications extends InstrumentedFragment
-        implements View.OnClickListener, OnItemSelectedListener {
+        implements View.OnClickListener, OnItemSelectedListener, SearchView.OnQueryTextListener {
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = true;
@@ -196,6 +199,7 @@ public class ManageApplications extends InstrumentedFragment
 
     private View mListContainer;
     private RecyclerView mRecyclerView;
+    private SearchView mSearchView;
 
     // Size resource used for packages whose size computation failed for some reason
     CharSequence mInvalidSizeStr;
@@ -599,6 +603,13 @@ public class ManageApplications extends InstrumentedFragment
         mOptionsMenu = menu;
         inflater.inflate(R.menu.manage_apps, menu);
 
+        final MenuItem searchMenuItem = menu.findItem(R.id.search_app_list_menu);
+        if (searchMenuItem != null) {
+            mSearchView = (SearchView) searchMenuItem.getActionView();
+            mSearchView.setQueryHint(getText(R.string.search_settings));
+            mSearchView.setOnQueryTextListener(this);
+        }
+
         updateOptionsMenu();
     }
 
@@ -722,6 +733,17 @@ public class ManageApplications extends InstrumentedFragment
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mApplications.filterSearch(newText);
+        return false;
     }
 
     public void updateView() {
@@ -859,6 +881,7 @@ public class ManageApplications extends InstrumentedFragment
 
         private AppFilterItem mAppFilter;
         private ArrayList<ApplicationsState.AppEntry> mEntries;
+        private ArrayList<ApplicationsState.AppEntry> mOriginalEntries;
         private boolean mResumed;
         private int mLastSortMode = -1;
         private int mWhichSize = SIZE_TOTAL;
@@ -866,6 +889,7 @@ public class ManageApplications extends InstrumentedFragment
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
         private FileViewHolderController mExtraViewController;
+        private SearchFilter mSearchFilter;
 
         // This is to remember and restore the last scroll position when this
         // fragment is paused. We need this special handling because app entries are added gradually
@@ -1100,6 +1124,13 @@ public class ManageApplications extends InstrumentedFragment
             });
         }
 
+        public void filterSearch(String query) {
+            if (mSearchFilter == null) {
+                mSearchFilter = new SearchFilter();
+            }
+            mSearchFilter.filter(query);
+        }
+
         @VisibleForTesting
         static boolean shouldUseStableItemHeight(int listType) {
             return true;
@@ -1146,6 +1177,7 @@ public class ManageApplications extends InstrumentedFragment
                 entries = removeDuplicateIgnoringUser(entries);
             }
             mEntries = entries;
+            mOriginalEntries = entries;
             notifyDataSetChanged();
             if (getItemCount() == 0) {
                 mManageApplications.mRecyclerView.setVisibility(View.GONE);
@@ -1153,6 +1185,14 @@ public class ManageApplications extends InstrumentedFragment
             } else {
                 mManageApplications.mEmptyView.setVisibility(View.GONE);
                 mManageApplications.mRecyclerView.setVisibility(View.VISIBLE);
+
+                if (mManageApplications.mSearchView != null
+                        && mManageApplications.mSearchView.isVisibleToUser()) {
+                    final CharSequence query = mManageApplications.mSearchView.getQuery();
+                    if (!TextUtils.isEmpty(query)) {
+                        filterSearch(query.toString());
+                    }
+                }
             }
             // Restore the last scroll position if the number of entries added so far is bigger than
             // it.
@@ -1403,6 +1443,38 @@ public class ManageApplications extends InstrumentedFragment
                 } else {
                     mDelayNotifyDataChange = true;
                 }
+            }
+        }
+
+        /**
+         * An array filter that constrains the content of the array adapter with a substring.
+         * Item that does not contains the specified substring will be removed from the list.</p>
+         */
+        private class SearchFilter extends Filter {
+            @WorkerThread
+            @Override
+            protected FilterResults performFiltering(CharSequence query) {
+                final ArrayList<ApplicationsState.AppEntry> matchedEntries;
+                if (TextUtils.isEmpty(query)) {
+                    matchedEntries = mOriginalEntries;
+                } else {
+                    matchedEntries = new ArrayList<>();
+                    for (ApplicationsState.AppEntry entry : mOriginalEntries) {
+                        if (entry.label.toLowerCase().contains(query.toString().toLowerCase())) {
+                            matchedEntries.add(entry);
+                        }
+                    }
+                }
+                final FilterResults results = new FilterResults();
+                results.values = matchedEntries;
+                results.count = matchedEntries.size();
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mEntries = (ArrayList<ApplicationsState.AppEntry>) results.values;
+                notifyDataSetChanged();
             }
         }
     }
