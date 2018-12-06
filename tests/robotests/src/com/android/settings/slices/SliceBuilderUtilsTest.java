@@ -505,6 +505,19 @@ public class SliceBuilderUtilsTest {
         assertThat(actualIconResource).isEqualTo(settingsIcon);
     }
 
+    @Test
+    public void getSafeIcon_invalidResource_shouldFallbackToSettingsIcon() {
+        final int settingsIcon = R.drawable.ic_settings;
+        final int badIcon = 0x12345678;
+        final SliceData data = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+                badIcon);
+
+        final IconCompat actualIcon = SliceBuilderUtils.getSafeIcon(mContext, data);
+
+        final int actualIconResource = actualIcon.toIcon().getResId();
+        assertThat(actualIconResource).isEqualTo(settingsIcon);
+    }
+
     private SliceData getDummyData() {
         return getDummyData(TOGGLE_CONTROLLER, SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE,
                 ICON, IS_DYNAMIC_SUMMARY_ALLOWED);
