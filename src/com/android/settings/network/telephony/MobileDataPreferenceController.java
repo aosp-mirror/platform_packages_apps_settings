@@ -22,7 +22,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -131,16 +130,12 @@ public class MobileDataPreferenceController extends TogglePreferenceController
     @VisibleForTesting
     boolean isDialogNeeded() {
         final boolean enableData = !mTelephonyManager.isDataEnabled();
-        final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(
-                mSubId);
-        final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
         final boolean isMultiSim = (mTelephonyManager.getSimCount() > 1);
-        final boolean isMultipleDataOnCapable =
-                (mTelephonyManager.getNumberOfModemsWithSimultaneousDataConnections() > 1);
-        final boolean isDefaultDataSubscription = (nextSir != null && currentSir != null
-                && currentSir.getSubscriptionId() == nextSir.getSubscriptionId());
+        final int defaultSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
+        final boolean needToDisableOthers = mSubscriptionManager
+                .isActiveSubscriptionId(defaultSubId) && defaultSubId != mSubId;
         if (enableData) {
-            if (isMultiSim && !isMultipleDataOnCapable && !isDefaultDataSubscription) {
+            if (isMultiSim && needToDisableOthers) {
                 mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
                 return true;
             }
