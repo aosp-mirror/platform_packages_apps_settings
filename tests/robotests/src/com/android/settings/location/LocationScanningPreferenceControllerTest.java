@@ -18,7 +18,11 @@ package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.Context;
+import android.provider.Settings;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,22 +32,63 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LocationScanningPreferenceControllerTest {
+    private Context mContext;
+    private LocationScanningPreferenceController mController;
 
-  private LocationScanningPreferenceController mController;
+    @Before
+    public void setUp() {
+        mContext = RuntimeEnvironment.application;
+        mController = new LocationScanningPreferenceController(mContext);
+    }
 
-  @Before
-  public void setUp() {
-    mController = new LocationScanningPreferenceController(RuntimeEnvironment.application);
-  }
+    @Test
+    public void testLocationScanning_byDefault_shouldBeShown() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
 
-  @Test
-  public void testLocationScanning_byDefault_shouldBeShown() {
-    assertThat(mController.isAvailable()).isTrue();
-  }
+    @Test
+    public void testLocationScanning_WifiOnBleOn() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 1);
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.scanning_status_text_wifi_on_ble_on));
+    }
 
-  @Test
-  @Config(qualifiers = "mcc999")
-  public void testLocationScanning_ifDisabled_shouldNotBeShown() {
-    assertThat(mController.isAvailable()).isFalse();
-  }
+    @Test
+    public void testLocationScanning_WifiOnBleOff() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0);
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.scanning_status_text_wifi_on_ble_off));
+    }
+
+    @Test
+    public void testLocationScanning_WifiOffBleOn() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 1);
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.scanning_status_text_wifi_off_ble_on));
+    }
+
+    @Test
+    public void testLocationScanning_WifiOffBleOff() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0);
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.scanning_status_text_wifi_off_ble_off));
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testLocationScanning_ifDisabled_shouldNotBeShown() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
 }
