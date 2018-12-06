@@ -144,7 +144,7 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         mockGetAutomaticZenRules(NUM_RULES, rMap);
         FieldSetter.setField(mZenRulePreference, ZenRulePreference.class.getDeclaredField("mId"), testId);
         mController.updateState(mockPref);
-        verify(mZenRulePreference, times(1)).setChecked(false);
+        verify(mZenRulePreference, times(1)).updatePreference(any());
         verify(mController, never()).reloadAllRules(any());
     }
 

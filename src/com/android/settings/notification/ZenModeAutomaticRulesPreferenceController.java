@@ -73,8 +73,7 @@ public class ZenModeAutomaticRulesPreferenceController extends
                 // 2. rule was added or deleted, so reload the entire list
                 if (Objects.equals(pref.mId, sortedRules[i].getKey())) {
                     AutomaticZenRule rule = sortedRules[i].getValue();
-                    pref.setName(rule.getName());
-                    pref.setChecked(rule.isEnabled());
+                    pref.updatePreference(rule);
                 } else {
                     reloadAllRules(sortedRules);
                     break;
