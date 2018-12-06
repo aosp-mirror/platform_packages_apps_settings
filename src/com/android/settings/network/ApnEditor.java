@@ -167,7 +167,7 @@ public class ApnEditor extends SettingsPreferenceFragment
             Telephony.Carriers.ROAMING_PROTOCOL, // 20
             Telephony.Carriers.MVNO_TYPE,   // 21
             Telephony.Carriers.MVNO_MATCH_DATA,  // 22
-            Telephony.Carriers.EDITED,   // 23
+            Telephony.Carriers.EDITED_STATUS,   // 23
             Telephony.Carriers.USER_EDITABLE    //24
     };
 
@@ -1035,7 +1035,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 callUpdate,
                 CARRIER_ENABLED_INDEX);
 
-        values.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
+        values.put(Telephony.Carriers.EDITED_STATUS, Telephony.Carriers.USER_EDITED);
 
         if (callUpdate) {
             final Uri uri = mApnData.getUri() == null ? mCarrierUri : mApnData.getUri();
