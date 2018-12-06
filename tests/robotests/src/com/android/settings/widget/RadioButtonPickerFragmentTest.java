@@ -18,6 +18,7 @@ package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -37,7 +38,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
@@ -96,6 +99,26 @@ public class RadioButtonPickerFragmentTest {
         mFragment.onRadioButtonClicked(pref);
 
         assertThat(mFragment.setDefaultKeyCalled).isTrue();
+    }
+
+    @Test
+    public void staticPreferencesPrepended_addedFirst() {
+        mFragment.mAppendStaticPreferences = false;
+        mFragment.updateCandidates();
+
+        InOrder inOrder = Mockito.inOrder(mFragment);
+        inOrder.verify(mFragment).addStaticPreferences(any());
+        inOrder.verify(mFragment).getRadioButtonPreferenceCustomLayoutResId();
+    }
+
+    @Test
+    public void staticPreferencesAppended_addedLast() {
+        mFragment.mAppendStaticPreferences = true;
+        mFragment.updateCandidates();
+
+        InOrder inOrder = Mockito.inOrder(mFragment);
+        inOrder.verify(mFragment).mayCheckOnlyRadioButton();
+        inOrder.verify(mFragment).addStaticPreferences(any());
     }
 
     @Test

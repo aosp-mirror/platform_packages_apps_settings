@@ -55,6 +55,8 @@ public class PreferenceXmlParserUtils {
     private static final List<String> SUPPORTED_PREF_TYPES = Arrays.asList(
             "Preference", "PreferenceCategory", "PreferenceScreen",
             "com.android.settings.widget.WorkOnlyCategory");
+    public static final int PREPEND_VALUE = 0;
+    public static final int APPEND_VALUE = 1;
 
     /**
      * Flag definition to indicate which metadata should be extracted when
@@ -84,6 +86,7 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_KEYWORDS = 1 << 8;
         int FLAG_NEED_SEARCHABLE = 1 << 9;
         int FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE = 1 << 10;
+        int FLAG_NEED_PREF_APPEND = 1 << 11;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -97,6 +100,7 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_SEARCHABLE = "searchable";
     public static final String METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE =
             "allow_dynamic_summary_in_slice";
+    public static final String METADATA_APPEND = "staticPreferenceLocation";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -184,14 +188,13 @@ public class PreferenceXmlParserUtils {
             // Parse next until start tag is found
         }
         final int outerDepth = parser.getDepth();
-
+        final boolean hasPrefScreenFlag = hasFlag(flags, MetadataFlag.FLAG_INCLUDE_PREF_SCREEN);
         do {
             if (type != XmlPullParser.START_TAG) {
                 continue;
             }
             final String nodeName = parser.getName();
-            if (!hasFlag(flags, MetadataFlag.FLAG_INCLUDE_PREF_SCREEN)
-                    && TextUtils.equals(PREF_SCREEN_TAG, nodeName)) {
+            if (!hasPrefScreenFlag && TextUtils.equals(PREF_SCREEN_TAG, nodeName)) {
                 continue;
             }
             if (!SUPPORTED_PREF_TYPES.contains(nodeName) && !nodeName.endsWith("Preference")) {
@@ -199,8 +202,14 @@ public class PreferenceXmlParserUtils {
             }
             final Bundle preferenceMetadata = new Bundle();
             final AttributeSet attrs = Xml.asAttributeSet(parser);
+
             final TypedArray preferenceAttributes = context.obtainStyledAttributes(attrs,
                     R.styleable.Preference);
+            TypedArray preferenceScreenAttributes = null;
+            if (hasPrefScreenFlag) {
+                preferenceScreenAttributes = context.obtainStyledAttributes(
+                        attrs, R.styleable.PreferenceScreen);
+            }
 
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_TYPE)) {
                 preferenceMetadata.putString(METADATA_PREF_TYPE, nodeName);
@@ -235,6 +244,10 @@ public class PreferenceXmlParserUtils {
             if (hasFlag(flags, MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE)) {
                 preferenceMetadata.putBoolean(METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
                         isDynamicSummaryAllowed(preferenceAttributes));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_APPEND) && hasPrefScreenFlag) {
+                preferenceMetadata.putBoolean(METADATA_APPEND,
+                        isAppended(preferenceScreenAttributes));
             }
             metadata.add(preferenceMetadata);
 
@@ -325,7 +338,12 @@ public class PreferenceXmlParserUtils {
                 false /* default */);
     }
 
-    private static String getKeywords(TypedArray styleAttributes) {
-        return styleAttributes.getString(R.styleable.Preference_keywords);
+    private static String getKeywords(TypedArray styledAttributes) {
+        return styledAttributes.getString(R.styleable.Preference_keywords);
+    }
+
+    private static boolean isAppended(TypedArray styledAttributes) {
+        return styledAttributes.getInt(R.styleable.PreferenceScreen_staticPreferenceLocation,
+            PREPEND_VALUE) == APPEND_VALUE;
     }
 }

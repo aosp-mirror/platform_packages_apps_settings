@@ -209,6 +209,7 @@ public class ColorModePreferenceFragmentTest {
 
     @Test
     public void onCreatePreferences_useNewTitle_shouldAddColorModePreferences() {
+        when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
         doNothing().when(mFragment).addPreferencesFromResource(anyInt());
         doNothing().when(mFragment).updateCandidates();
 
