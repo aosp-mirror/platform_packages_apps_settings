@@ -69,9 +69,9 @@ public class SliceContextualCardController implements ContextualCardController {
             dbHelper.markContextualCardAsDismissed(mContext, card.getName());
         });
         showFeedbackDialog(card);
-        final ContextualCardFeatureProvider contexualCardFeatureProvider =
+        final ContextualCardFeatureProvider contextualCardFeatureProvider =
                 FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
-        contexualCardFeatureProvider.logContextualCardDismiss(mContext, card);
+        contextualCardFeatureProvider.logContextualCardDismiss(mContext, card);
     }
 
     @Override

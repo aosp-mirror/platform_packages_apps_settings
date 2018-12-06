@@ -17,7 +17,6 @@
 package com.android.settings.display;
 
 import android.content.Context;
-
 import android.hardware.display.ColorDisplayManager;
 
 import androidx.preference.DropDownPreference;
