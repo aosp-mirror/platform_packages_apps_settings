@@ -94,7 +94,8 @@ public class DataUsageSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 DataUsageSummary.class.getName(), "" /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
+                .setData(CustomSliceRegistry.DATA_USAGE_SLICE_URI);
     }
 
     private PendingIntent getPrimaryAction() {

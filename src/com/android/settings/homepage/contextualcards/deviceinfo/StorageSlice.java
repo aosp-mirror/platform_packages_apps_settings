@@ -80,7 +80,8 @@ public class StorageSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 StorageDashboardFragment.class.getName(), "" /* key */, screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
+                .setData(CustomSliceRegistry.STORAGE_SLICE_URI);
     }
 
     private PendingIntent getPrimaryAction() {
