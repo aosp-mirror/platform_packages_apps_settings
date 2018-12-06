@@ -24,7 +24,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class LocationSliceBuilderTest {
+public class LocationSliceTest {
 
     private Context mContext;
 
@@ -38,7 +38,7 @@ public class LocationSliceBuilderTest {
 
     @Test
     public void getLocationSlice_correctSliceContent() {
-        final Slice LocationSlice = LocationSliceBuilder.getSlice(mContext);
+        final Slice LocationSlice = new LocationSlice(mContext).getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, LocationSlice);
 
         final List<SliceAction> toggles = metadata.getToggles();

@@ -38,29 +38,31 @@ import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceRegistry;
+import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBuilderUtils;
 
 /**
  * Utility class to build an intent-based Location Slice.
  */
-public class LocationSliceBuilder {
+public class LocationSlice implements CustomSliceable {
 
-    private LocationSliceBuilder() {
+    private final Context mContext;
+
+    public LocationSlice(Context context) {
+        mContext = context;
     }
 
-    /**
-     * Return a Location Slice bound to {@link CustomSliceRegistry#LOCATION_SLICE_URI}.
-     */
-    public static Slice getSlice(Context context) {
-        final IconCompat icon = IconCompat.createWithResource(context,
+    @Override
+    public Slice getSlice() {
+        final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_signal_location);
-        final String title = context.getString(R.string.location_settings_title);
-        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
-        final PendingIntent primaryAction = getPrimaryAction(context);
+        final CharSequence title = mContext.getText(R.string.location_settings_title);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
+        final PendingIntent primaryAction = getPrimaryAction();
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
                 ListBuilder.ICON_IMAGE, title);
 
-        return new ListBuilder(context, CustomSliceRegistry.LOCATION_SLICE_URI,
+        return new ListBuilder(mContext, CustomSliceRegistry.LOCATION_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new RowBuilder()
@@ -70,19 +72,30 @@ public class LocationSliceBuilder {
                 .build();
     }
 
-    public static Intent getIntent(Context context) {
-        final String screenTitle = context.getText(R.string.location_settings_title).toString();
+    @Override
+    public Uri getUri() {
+        return CustomSliceRegistry.LOCATION_SLICE_URI;
+    }
+
+    @Override
+    public void onNotifyChange(Intent intent) {
+
+    }
+
+    @Override
+    public Intent getIntent() {
+        final String screenTitle = mContext.getText(R.string.location_settings_title).toString();
         final Uri contentUri = new Uri.Builder().appendPath(KEY_LOCATION).build();
-        return SliceBuilderUtils.buildSearchResultPageIntent(context,
+        return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 LocationSettings.class.getName(), KEY_LOCATION, screenTitle,
                 MetricsEvent.LOCATION)
-                .setClassName(context.getPackageName(), SubSettings.class.getName())
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }
 
-    private static PendingIntent getPrimaryAction(Context context) {
-        final Intent intent = getIntent(context);
-        return PendingIntent.getActivity(context, 0 /* requestCode */,
+    private PendingIntent getPrimaryAction() {
+        final Intent intent = getIntent();
+        return PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 intent, 0 /* flags */);
     }
 }

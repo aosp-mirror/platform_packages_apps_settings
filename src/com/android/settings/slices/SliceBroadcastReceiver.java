@@ -17,7 +17,6 @@
 package com.android.settings.slices;
 
 import static com.android.settings.bluetooth.BluetoothSliceBuilder.ACTION_BLUETOOTH_SLICE_CHANGED;
-import static com.android.settings.flashlight.FlashlightSliceBuilder.ACTION_FLASHLIGHT_SLICE_CHANGED;
 import static com.android.settings.network.telephony.Enhanced4gLteSliceHelper.ACTION_ENHANCED_4G_LTE_CHANGED;
 import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_COPY;
@@ -46,7 +45,6 @@ import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.flashlight.FlashlightSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -107,9 +105,6 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(context)
                         .handleWifiCallingPreferenceChanged(intent);
-                break;
-            case ACTION_FLASHLIGHT_SLICE_CHANGED:
-                FlashlightSliceBuilder.handleUriChange(context, intent);
                 break;
             case ACTION_COPY:
                 handleCopyAction(context, key, isPlatformSlice);

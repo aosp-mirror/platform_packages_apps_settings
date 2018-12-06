@@ -41,9 +41,6 @@ import androidx.slice.SliceProvider;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flashlight.FlashlightSliceBuilder;
-import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
-import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SliceBroadcastRelay;
@@ -182,12 +179,6 @@ public class SettingsSliceProvider extends SliceProvider {
         } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
             registerIntentToUri(BluetoothSliceBuilder.INTENT_FILTER, sliceUri);
             return;
-        } else if (CustomSliceRegistry.FLASHLIGHT_SLICE_URI.equals(sliceUri)) {
-            registerIntentToUri(FlashlightSliceBuilder.INTENT_FILTER, sliceUri);
-            mRegisteredUris.add(sliceUri);
-            return;
-        } else if (CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI.equals(sliceUri)) {
-            return;
         }
 
         // Start warming the slice, we expect someone will want it soon.
@@ -240,8 +231,6 @@ public class SettingsSliceProvider extends SliceProvider {
                 return ZenModeSliceBuilder.getSlice(getContext());
             } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                 return BluetoothSliceBuilder.getSlice(getContext());
-            } else if (CustomSliceRegistry.LOCATION_SLICE_URI.equals(sliceUri)) {
-                return LocationSliceBuilder.getSlice(getContext());
             } else if (CustomSliceRegistry.ENHANCED_4G_SLICE_URI.equals(sliceUri)) {
                 return FeatureFactory.getFactory(getContext())
                         .getSlicesFeatureProvider()
@@ -252,10 +241,6 @@ public class SettingsSliceProvider extends SliceProvider {
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingPreferenceSlice(sliceUri);
-            } else if (CustomSliceRegistry.FLASHLIGHT_SLICE_URI.equals(sliceUri)) {
-                return FlashlightSliceBuilder.getSlice(getContext());
-            } else if (CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI.equals(sliceUri)) {
-                return EmergencyInfoSlice.getSlice(getContext());
             }
 
             SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
