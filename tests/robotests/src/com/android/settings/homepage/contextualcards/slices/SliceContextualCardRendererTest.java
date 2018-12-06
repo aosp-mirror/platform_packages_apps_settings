@@ -52,7 +52,7 @@ import org.robolectric.android.controller.ActivityController;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SliceContextualCardRendererTest {
 
-    private static final String TEST_SLICE_URI = "content://test/test";
+    private static final Uri TEST_SLICE_URI = Uri.parse("content://test/test");
 
     @Mock
     private LiveData<Slice> mSliceLiveData;
@@ -91,7 +91,7 @@ public class SliceContextualCardRendererTest {
 
     @Test
     public void bindView_invalidScheme_sliceShouldBeNull() {
-        final String sliceUri = "contet://com.android.settings.slices/action/flashlight";
+        final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
         RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
 
         mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
@@ -192,6 +192,23 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
+    public void viewClick_removeCard_sliceLiveDataShouldRemoveObservers() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
+        final Button btnRemove = viewHolder.itemView.findViewById(R.id.remove);
+        final ContextualCard contextualCard = buildContextualCard(TEST_SLICE_URI);
+        mRenderer.mSliceLiveDataMap.put(TEST_SLICE_URI, mSliceLiveData);
+        mRenderer.bindView(viewHolder, contextualCard);
+        doReturn(mController).when(mControllerRendererPool).getController(mActivity,
+                ContextualCard.CardType.SLICE);
+
+        card.performLongClick();
+        btnRemove.performClick();
+
+        assertThat(mRenderer.mSliceLiveDataMap.get(TEST_SLICE_URI).hasObservers()).isFalse();
+    }
+
+    @Test
     public void onStop_cardIsFlipped_shouldFlipBack() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final View card = viewHolder.itemView.findViewById(R.id.slice_view);
@@ -213,11 +230,11 @@ public class SliceContextualCardRendererTest {
         return mRenderer.createViewHolder(view);
     }
 
-    private ContextualCard buildContextualCard(String sliceUri) {
+    private ContextualCard buildContextualCard(Uri sliceUri) {
         return new ContextualCard.Builder()
                 .setName("test_name")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(Uri.parse(sliceUri))
+                .setSliceUri(sliceUri)
                 .build();
     }
 }
