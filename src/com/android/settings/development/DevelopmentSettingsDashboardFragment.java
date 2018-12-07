@@ -221,7 +221,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             if (isChecked) {
                 EnableDevelopmentSettingWarningDialog.show(this /* host */);
             } else {
-                disableDeveloperOptions();
+                final BluetoothA2dpHwOffloadPreferenceController controller =
+                        getDevelopmentOptionsController(
+                                BluetoothA2dpHwOffloadPreferenceController.class);
+                // If A2DP hardware offload isn't default value, we must reboot after disable
+                // developer options. Show a dialog for the user to confirm.
+                if (controller == null || controller.isDefaultValue()) {
+                    disableDeveloperOptions();
+                } else {
+                    DisableDevSettingsDialogFragment.show(this /* host */);
+                }
             }
         }
     }
@@ -378,6 +387,15 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     void onEnableDevelopmentOptionsRejected() {
         // Reset the toggle
         mSwitchBar.setChecked(false);
+    }
+
+    void onDisableDevelopmentOptionsConfirmed() {
+        disableDeveloperOptions();
+    }
+
+    void onDisableDevelopmentOptionsRejected() {
+        // Reset the toggle
+        mSwitchBar.setChecked(true);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
