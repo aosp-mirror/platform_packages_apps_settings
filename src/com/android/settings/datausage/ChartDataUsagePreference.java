@@ -95,9 +95,13 @@ public class ChartDataUsagePreference extends Preference {
         final SparseIntArray points = new SparseIntArray();
         points.put(0, 0);
 
+        final long now = System.currentTimeMillis();
         long totalData = 0;
         for (NetworkCycleData data : usageSummary) {
             final long startTime = data.getStartTime();
+            if (startTime > now) {
+                break;
+            }
             final long endTime = data.getEndTime();
 
             // increment by current bucket total
