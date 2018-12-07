@@ -39,7 +39,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
-import android.sysprop.VoldProperties;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -405,7 +404,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
     }
 
     private boolean isExtStorageEncrypted() {
-        String state = VoldProperties.decrypt().orElse("");
+        String state = SystemProperties.get("vold.decrypt");
         return !"".equals(state);
     }
 
