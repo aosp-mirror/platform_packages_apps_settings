@@ -3054,6 +3054,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".wifi.dpp.WifiDppEnrolleeActivity">
+            <intent-filter>
+                <action android:name="android.settings.WIFI_DPP_ENROLLEE_QR_CODE_SCANNER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".homepage.contextualcards.ContextualCardFeedbackDialog"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
         <!-- This is the longest AndroidManifest.xml ever. -->

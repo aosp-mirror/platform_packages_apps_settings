@@ -16,7 +16,12 @@
 
 package com.android.settings.wifi.dpp;
 
+import android.app.ActionBar;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.settings.R;
 
@@ -30,8 +35,64 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         return R.layout.wifi_dpp_qrcode_generator_fragment;
     }
 
+    // Container Activity must implement this interface
+    public interface OnQrCodeGeneratorFragmentAddButtonClickedListener {
+        public void onQrCodeGeneratorFragmentAddButtonClicked();
+    }
+    OnQrCodeGeneratorFragmentAddButtonClickedListener mListener;
+
     @Override
-    public void onActivityCreated (Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
+                .getWifiNetworkConfig();
+        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
+            throw new IllegalArgumentException("Invalid Wi-Fi network for configuring");
+        }
+        setTitle(getString(R.string.wifi_dpp_share_wifi));
+        setDescription(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
+                wifiNetworkConfig.getSsid()));
+
+        setHasOptionsMenu(true);
+        ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.show();
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mListener = (OnQrCodeGeneratorFragmentAddButtonClickedListener) context;
+    }
+
+    @Override
+    public void onDetach() {
+        mListener = null;
+
+        super.onDetach();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.next_label);
+        item.setIcon(R.drawable.ic_menu_add);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case Menu.FIRST:
+                mListener.onQrCodeGeneratorFragmentAddButtonClicked();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
     }
 }

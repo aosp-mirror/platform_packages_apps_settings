@@ -30,14 +30,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class WifiDppQrCodeScannerFragmentTest {
+public class WifiDppQrCodeGeneratorFragmentTest {
     @Rule
     public final ActivityTestRule<WifiDppConfiguratorActivity> mActivityRule =
             new ActivityTestRule<>(WifiDppConfiguratorActivity.class, true);
 
     @Before
     public void setUp() {
-        Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        Intent intent =
+                new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
         intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
         intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
         mActivityRule.launchActivity(intent);

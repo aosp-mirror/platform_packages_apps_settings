@@ -22,6 +22,27 @@ import android.content.Intent;
  * Here are the items shared by both WifiDppConfiguratorActivity & WifiDppEnrolleeActivity
  */
 public class WifiDppUtils {
+    /**
+     * The fragment tag specified to FragmentManager for container activities to manage fragments.
+     */
+    public static final String TAG_FRAGMENT_QR_CODE_SCANNER = "qr_code_scanner_fragment";
+
+    /**
+     * @see #TAG_FRAGMENT_QR_CODE_SCANNER
+     */
+    public static final String TAG_FRAGMENT_QR_CODE_GENERATOR = "qr_code_generator_fragment";
+
+    /**
+     * @see #TAG_FRAGMENT_QR_CODE_SCANNER
+     */
+    public static final String TAG_FRAGMENT_CHOOSE_SAVED_WIFI_NETWORK =
+            "choose_saved_wifi_network_fragment";
+
+    /**
+     * @see #TAG_FRAGMENT_QR_CODE_SCANNER
+     */
+    public static final String TAG_FRAGMENT_ADD_DEVICE = "add_device_fragment";
+
     /** The data is from {@code com.android.settingslib.wifi.AccessPoint.securityToString} */
     public static final String EXTRA_WIFI_SECURITY = "security";
 

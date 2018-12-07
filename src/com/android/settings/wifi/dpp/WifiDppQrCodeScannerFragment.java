@@ -17,12 +17,15 @@
 package com.android.settings.wifi.dpp;
 
 import android.annotation.Nullable;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Size;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -38,32 +41,60 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     private SurfaceView mSurfaceView;
     private QrDecorateView mDecorateView;
 
+    /** true if the fragment working for configurator, false enrollee*/
+    private final boolean mConfiguratorMode;
+
+    /** The SSID of the Wi-Fi network which the user specify to enroll */
+    private String mSsid;
+
     @Override
     protected int getLayout() {
         return R.layout.wifi_dpp_qrcode_scanner_fragment;
+    }
+
+    /**
+     * Configurator container activity of the fragment should create instance with this constructor.
+     */
+    public WifiDppQrCodeScannerFragment() {
+        super();
+
+        mConfiguratorMode = true;
+    }
+
+    /**
+     * Enrollee container activity of the fragment should create instance with this constructor and
+     * specify the SSID string of the WI-Fi network to be provisioned.
+     */
+    public WifiDppQrCodeScannerFragment(String ssid) {
+        super();
+
+        mConfiguratorMode = false;
+        mSsid = ssid;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setTitle(getString(R.string.wifi_dpp_add_device_to_network));
+        if (mConfiguratorMode) {
+            setTitle(getString(R.string.wifi_dpp_add_device_to_network));
 
-        WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
+            WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
                 .getWifiNetworkConfig();
-        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
-            throw new IllegalArgumentException("Invalid Wi-Fi network for configuring");
+            if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
+                throw new IllegalArgumentException("Invalid Wi-Fi network for configuring");
+            }
+            setDescription(getString(R.string.wifi_dpp_center_qr_code, wifiNetworkConfig.getSsid()));
+        } else {
+            setTitle(getString(R.string.wifi_dpp_scan_qr_code));
+            setDescription(getString(R.string.wifi_dpp_scan_qr_code_join_network, mSsid));
         }
-        setDescription(getString(R.string.wifi_dpp_center_qr_code, wifiNetworkConfig.getSsid()));
 
-        hideRightButton();
-
-        setLeftButtonText(getString(android.R.string.cancel));
-
-        setLeftButtonOnClickListener((view) -> {
-            getActivity().setResult(Activity.RESULT_CANCELED);
-            getActivity().finish();
-        });
+        ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.show();
+        }
     }
 
     @Override
@@ -76,6 +107,21 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         surfaceHolder.addCallback(this);
 
         mDecorateView = (QrDecorateView) view.findViewById(R.id.decorate_view);
+    }
+
+    @Override
+    public void onDestroyView() {
+        SurfaceHolder surfaceHolder = mSurfaceView.getHolder();
+        surfaceHolder.removeCallback(this);
+
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.removeItem(Menu.FIRST);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
