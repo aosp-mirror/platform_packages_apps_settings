@@ -71,7 +71,9 @@ public class BasePreferenceControllerSignatureInspector extends CodeInspector {
                 .that(badClasses.toString())
                 .isEmpty();
 
-        assertWithMessage("Something in the grandfather list is no longer relevant. Please remove")
+        assertWithMessage("Something in the grandfather list is no longer relevant. Please remove"
+            + "it from packages/apps/Settings/tests/robotests/assets/"
+            + "grandfather_invalid_base_preference_controller_constructor")
                 .that(grandfather)
                 .isEmpty();
     }
