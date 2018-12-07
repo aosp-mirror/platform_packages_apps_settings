@@ -42,7 +42,8 @@ public class ContextualCardsFragment extends InstrumentedFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContextualCardManager = new ContextualCardManager(getContext(), getSettingsLifecycle());
+        mContextualCardManager = new ContextualCardManager(getContext(), getSettingsLifecycle(),
+                savedInstanceState);
     }
 
     @Override
