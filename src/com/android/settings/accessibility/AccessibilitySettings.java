@@ -667,6 +667,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     mToggleInversionPreference.getOrder() + 1);
             mToggleDisableAnimationsPreference.setOrder(
                     mToggleLargePointerIconPreference.getOrder() + 1);
+            findPreference(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE).setOrder(
+                    mToggleDisableAnimationsPreference.getOrder() + 1);
             mToggleInversionPreference.setSummary(R.string.summary_empty);
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
