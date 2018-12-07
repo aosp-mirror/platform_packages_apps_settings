@@ -16,18 +16,18 @@
 
 package com.android.settings.applications;
 
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EnterpriseDefaultAppsTest {
     @Test
-    public void testNumberOfIntentsCorrelateWithUI() throws Exception {
+    public void testNumberOfIntentsCorrelateWithUI() {
         final int concatenation_templates[] =
                 new int[]{0 /* no need for single app name */,
                         R.string.app_names_concatenation_template_2,

@@ -26,7 +26,6 @@ import android.content.Context;
 import android.os.UserManager;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.dream.DreamBackend;
 
 import org.junit.Before;
@@ -35,9 +34,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WhenToDreamPickerTest {
 
     private WhenToDreamPicker mPicker;

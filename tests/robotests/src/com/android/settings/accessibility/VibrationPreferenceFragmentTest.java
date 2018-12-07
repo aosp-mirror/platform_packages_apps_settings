@@ -37,7 +37,6 @@ import com.android.settings.R;
 import com.android.settings.accessibility.VibrationPreferenceFragment
         .VibrationIntensityCandidateInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.widget.CandidateInfo;
 
 import org.junit.Before;
@@ -45,13 +44,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class VibrationPreferenceFragmentTest {
 
     private static final Map<Integer, String> INTENSITY_TO_KEY = new HashMap<>(4);

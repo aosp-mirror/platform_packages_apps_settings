@@ -18,8 +18,8 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -30,7 +30,6 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settingslib.wifi.WifiStatusTracker;
 
@@ -39,16 +38,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiSummaryUpdaterTest {
     @Mock private WifiStatusTracker mWifiTracker;
     @Mock private SummaryListener mListener;
 
     private Context mContext;
     private WifiSummaryUpdater mSummaryUpdater;
-
 
     @Before
     public void setUp() {
@@ -127,7 +126,7 @@ public class WifiSummaryUpdaterTest {
     }
 
     private class SummaryListener implements OnSummaryChangeListener {
-        String summary;
+        private String summary;
 
         @Override
         public void onSummaryChanged(String summary) {

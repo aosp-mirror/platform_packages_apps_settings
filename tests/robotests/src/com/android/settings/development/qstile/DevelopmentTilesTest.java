@@ -27,7 +27,6 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.service.quicksettings.Tile;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.Before;
@@ -36,11 +35,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowUserManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DevelopmentTilesTest {
 
     @Mock

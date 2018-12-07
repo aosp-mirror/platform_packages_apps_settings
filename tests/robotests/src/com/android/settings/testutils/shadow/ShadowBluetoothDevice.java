@@ -29,32 +29,32 @@ public class ShadowBluetoothDevice extends org.robolectric.shadows.ShadowBluetoo
     private int mSimAccessPermission = BluetoothDevice.ACCESS_UNKNOWN;
 
     @Implementation
-    public void setMessageAccessPermission(int value) {
+    protected void setMessageAccessPermission(int value) {
         mMessageAccessPermission = value;
     }
 
     @Implementation
-    public int getMessageAccessPermission() {
+    protected int getMessageAccessPermission() {
         return mMessageAccessPermission;
     }
 
     @Implementation
-    public void setPhonebookAccessPermission(int value) {
+    protected void setPhonebookAccessPermission(int value) {
         mPhonebookAccessPermission = value;
     }
 
     @Implementation
-    public int getPhonebookAccessPermission() {
+    protected int getPhonebookAccessPermission() {
         return mPhonebookAccessPermission;
     }
 
     @Implementation
-    public void setSimAccessPermission(int value) {
+    protected void setSimAccessPermission(int value) {
         mSimAccessPermission = value;
     }
 
     @Implementation
-    public int getSimAccessPermission() {
+    protected int getSimAccessPermission() {
         return mSimAccessPermission;
     }
 }

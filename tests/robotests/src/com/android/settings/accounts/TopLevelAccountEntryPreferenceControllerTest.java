@@ -28,20 +28,20 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {TopLevelAccountEntryPreferenceControllerTest.ShadowAuthenticationHelper.class})
 public class TopLevelAccountEntryPreferenceControllerTest {
 
@@ -91,7 +91,7 @@ public class TopLevelAccountEntryPreferenceControllerTest {
         static final String[] LABELS = {"LABEL1", "LABEL2", "LABEL3", "LABEL4"};
         private static String[] sEnabledAccount = TYPES;
 
-        public void __constructor__(Context context, UserHandle userHandle,
+        protected void __constructor__(Context context, UserHandle userHandle,
                 AuthenticatorHelper.OnAccountsUpdateListener listener) {
         }
 
@@ -105,12 +105,12 @@ public class TopLevelAccountEntryPreferenceControllerTest {
         }
 
         @Implementation
-        public String[] getEnabledAccountTypes() {
+        protected String[] getEnabledAccountTypes() {
             return sEnabledAccount;
         }
 
         @Implementation
-        public CharSequence getLabelForType(Context context, final String accountType) {
+        protected CharSequence getLabelForType(Context context, final String accountType) {
             if (TextUtils.equals(accountType, TYPES[0])) {
                 return LABELS[0];
             } else if (TextUtils.equals(accountType, TYPES[1])) {

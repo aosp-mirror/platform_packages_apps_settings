@@ -28,12 +28,12 @@ import org.robolectric.annotation.Implements;
 public class ShadowAudioHelper {
 
     @Implementation
-    public boolean isSingleVolume() {
+    protected boolean isSingleVolume() {
         return true;
     }
 
     @Implementation
-    public int getManagedProfileId(UserManager um) {
+    protected int getManagedProfileId(UserManager um) {
         return UserHandle.USER_CURRENT;
     }
 }

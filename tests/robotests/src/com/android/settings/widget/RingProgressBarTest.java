@@ -16,21 +16,19 @@
 
 package com.android.settings.widget;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import android.content.Context;
 import android.view.View.MeasureSpec;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@org.robolectric.annotation.Config(shadows = SettingsShadowResourcesImpl.class)
+@RunWith(RobolectricTestRunner.class)
 public class RingProgressBarTest {
 
     private Context mContext = RuntimeEnvironment.application;
@@ -62,7 +60,7 @@ public class RingProgressBarTest {
 
     @Test
     public void testDefaultAttributes() {
-        assertEquals(false, mProgressBar.isIndeterminate());
+        assertFalse(mProgressBar.isIndeterminate());
         assertEquals(0, mProgressBar.getProgress());
         assertEquals(10000, mProgressBar.getMax());
     }

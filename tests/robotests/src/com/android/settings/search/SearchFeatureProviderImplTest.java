@@ -29,18 +29,18 @@ import android.widget.Toolbar;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SearchFeatureProviderImplTest {
 
     private SearchFeatureProviderImpl mProvider;
@@ -78,8 +78,7 @@ public class SearchFeatureProviderImplTest {
 
         final Intent launchIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
 
-        assertThat(launchIntent.getAction())
-                .isEqualTo(Settings.ACTION_APP_SEARCH_SETTINGS);
+        assertThat(launchIntent.getAction()).isEqualTo(Settings.ACTION_APP_SEARCH_SETTINGS);
     }
 
     @Test

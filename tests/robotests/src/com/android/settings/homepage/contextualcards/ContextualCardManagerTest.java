@@ -25,19 +25,19 @@ import android.util.ArrayMap;
 import com.android.settings.homepage.contextualcards.conditional.ConditionFooterContextualCard;
 import com.android.settings.homepage.contextualcards.conditional.ConditionHeaderContextualCard;
 import com.android.settings.homepage.contextualcards.conditional.ConditionalContextualCard;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ContextualCardManagerTest {
 
     private static final String TEST_SLICE_URI = "context://test/test";

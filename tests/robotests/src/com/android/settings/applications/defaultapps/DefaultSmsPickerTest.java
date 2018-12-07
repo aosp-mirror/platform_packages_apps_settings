@@ -16,8 +16,8 @@
 
 package com.android.settings.applications.defaultapps;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -29,7 +29,6 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,10 +36,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultSmsPickerTest {
 
     private static final String TEST_APP_KEY = "com.android.settings/PickerTest";
@@ -63,7 +63,7 @@ public class DefaultSmsPickerTest {
         MockitoAnnotations.initMocks(this);
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mPicker = spy(new DefaultSmsPicker());
-        mPicker.onAttach((Context) mActivity);
+        mPicker.onAttach(mActivity);
 
         ReflectionHelpers.setField(mPicker, "mPm", mPackageManager);
         ReflectionHelpers.setField(mPicker, "mDefaultKeyUpdater", mDefaultKeyUpdater);

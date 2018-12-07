@@ -34,17 +34,16 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UpdatedGfxDriverDevOptInPreferenceControllerTest {
 
     @Mock
@@ -72,7 +71,6 @@ public class UpdatedGfxDriverDevOptInPreferenceControllerTest {
     @Test
     public void handlePreferenceTreeClick_preferenceClicked_launchActivity() {
         final Intent activityStartIntent = new Intent(mContext, AppPicker.class);
-        final String preferenceKey = mController.getPreferenceKey();
         doReturn(activityStartIntent).when(mController).getActivityStartIntent();
         mController.handlePreferenceTreeClick(mPreference);
 

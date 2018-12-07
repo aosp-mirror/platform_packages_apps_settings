@@ -33,16 +33,15 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FreeformWindowsPreferenceControllerTest {
 
     private static final String ENG_BUILD_TYPE = "eng";
@@ -74,7 +73,7 @@ public class FreeformWindowsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvaiable_userBuild_shouldBeTrue() {
+    public void isAvailable_userBuild_shouldBeTrue() {
         mController = spy(mController);
         doReturn(USER_BUILD_TYPE).when(mController).getBuildType();
 

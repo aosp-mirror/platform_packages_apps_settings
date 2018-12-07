@@ -18,11 +18,10 @@ package com.android.settings.enterprise;
 
 import static org.mockito.Mockito.when;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CaCertsManagedProfilePreferenceControllerTest
     extends CaCertsPreferenceControllerTestBase {
 

@@ -30,20 +30,20 @@ import android.os.UserManager;
 import android.preference.SeekBarVolumizer;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowAudioHelper;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SoundSettingsTest {
 
     @Test
@@ -74,7 +74,6 @@ public class SoundSettingsTest {
     @Test
     public void onStreamValueChanged_shouldRepostStopSampleMessage() {
         final SoundSettings settings = new SoundSettings();
-        final Handler handler = settings.mHandler;
         ReflectionHelpers.setField(
                 settings.mVolumeCallback, "mCurrent", mock(SeekBarVolumizer.class));
 

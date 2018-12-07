@@ -42,12 +42,12 @@ public class ShadowContentResolver {
     private static Map<Integer, Boolean> sMasterSyncAutomatically = new HashMap<>();
 
     @Implementation
-    public static SyncAdapterType[] getSyncAdapterTypesAsUser(int userId) {
+    protected static SyncAdapterType[] getSyncAdapterTypesAsUser(int userId) {
         return sSyncAdapterTypes;
     }
 
     @Implementation
-    public final Cursor query(Uri uri, String[] projection, String selection,
+    protected final Cursor query(Uri uri, String[] projection, String selection,
             String[] selectionArgs, String sortOrder) {
         MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
         MatrixCursor.RowBuilder builder = cursor.newRow()
@@ -56,26 +56,26 @@ public class ShadowContentResolver {
     }
 
     @Implementation
-    public static int getIsSyncableAsUser(Account account, String authority, int userId) {
+    protected static int getIsSyncableAsUser(Account account, String authority, int userId) {
         return sSyncable.containsKey(authority) ? sSyncable.get(authority) : 1;
     }
 
     @Implementation
-    public static boolean getSyncAutomaticallyAsUser(Account account, String authority,
+    protected static boolean getSyncAutomaticallyAsUser(Account account, String authority,
             int userId) {
         return sSyncAutomatically.containsKey(authority) ? sSyncAutomatically.get(authority) : true;
     }
 
     @Implementation
-    public static void setSyncAutomaticallyAsUser(Account account, String authority, boolean sync,
-            int userId) {
+    protected static void setSyncAutomaticallyAsUser(Account account, String authority,
+            boolean sync, int userId) {
         if (TextUtils.isEmpty(authority)) {
             throw new IllegalArgumentException("Authority must be non-empty");
         }
     }
 
     @Implementation
-    public static boolean getMasterSyncAutomaticallyAsUser(int userId) {
+    protected static boolean getMasterSyncAutomaticallyAsUser(int userId) {
         return sMasterSyncAutomatically.containsKey(userId)
                 ? sMasterSyncAutomatically.get(userId) : true;
     }

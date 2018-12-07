@@ -18,11 +18,11 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,18 +34,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowBluetoothDevice.class)
+@RunWith(RobolectricTestRunner.class)
 public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsButtonsController mController;
     private ActionButtonsPreference mButtonsPref;
@@ -139,7 +136,7 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
         mController.onDeviceAttributesChanged();
         verify(mButtonsPref).setButton2Text(R.string.bluetooth_device_context_disconnect);
 
-        // Click the button and make sure that disconnnect (not connect) gets called.
+        // Click the button and make sure that disconnect (not connect) gets called.
         mConnectButton.callOnClick();
         verify(mCachedDevice).disconnect();
     }

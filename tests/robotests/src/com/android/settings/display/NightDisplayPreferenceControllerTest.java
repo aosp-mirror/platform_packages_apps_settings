@@ -7,19 +7,17 @@ import android.provider.Settings.Secure;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        SettingsShadowResources.class
-})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {SettingsShadowResources.class})
 public class NightDisplayPreferenceControllerTest {
 
   @After

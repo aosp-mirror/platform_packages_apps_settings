@@ -25,13 +25,13 @@ import android.content.Context;
 
 import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import libcore.timezone.CountryZonesFinder;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Collections;
@@ -39,14 +39,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FixedOffsetPickerTest {
 
     private CountryZonesFinder mFinder;
 
     @Before
     public void setUp() {
-        List regionList = Collections.emptyList();
+        List<String> regionList = Collections.emptyList();
         mFinder = mock(CountryZonesFinder.class);
         when(mFinder.lookupAllCountryIsoCodes()).thenReturn(regionList);
     }

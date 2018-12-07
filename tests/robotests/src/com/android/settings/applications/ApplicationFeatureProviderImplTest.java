@@ -36,7 +36,6 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.ApplicationTestUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
 import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
@@ -45,6 +44,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
@@ -58,7 +58,7 @@ import java.util.Set;
 /**
  * Tests for {@link ApplicationFeatureProviderImpl}.
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class ApplicationFeatureProviderImplTest {
 
     private final int MAIN_USER_ID = 0;
@@ -109,8 +109,7 @@ public final class ApplicationFeatureProviderImplTest {
                 .thenReturn(PackageManager.INSTALL_REASON_POLICY);
 
         mAppCount = -1;
-        mProvider.calculateNumberOfPolicyInstalledApps(async,
-                (num) -> mAppCount = num);
+        mProvider.calculateNumberOfPolicyInstalledApps(async, (num) -> mAppCount = num);
         if (async) {
             ShadowApplication.runBackgroundTasks();
         }

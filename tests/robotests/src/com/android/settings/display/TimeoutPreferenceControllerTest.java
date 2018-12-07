@@ -32,7 +32,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -44,6 +43,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDevicePolicyManager.class)
 public class TimeoutPreferenceControllerTest {
 
@@ -134,7 +134,7 @@ public class TimeoutPreferenceControllerTest {
 
         verify(mPreference, times(2))
                 .removeUnusableTimeouts(longCaptor.capture(), adminCaptor.capture());
-        assertThat((long) longCaptor.getValue()).isEqualTo(0);
+        assertThat(longCaptor.getValue()).isEqualTo(0);
         assertThat(adminCaptor.getValue()).isNotNull();
     }
 

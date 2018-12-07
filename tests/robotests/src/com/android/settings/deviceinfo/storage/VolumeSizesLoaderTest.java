@@ -2,20 +2,20 @@ package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.os.storage.VolumeInfo;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class VolumeSizesLoaderTest {
     @Test
     public void getVolumeSize_getsValidSizes() throws Exception {

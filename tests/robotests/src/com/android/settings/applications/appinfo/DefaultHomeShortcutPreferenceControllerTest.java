@@ -27,19 +27,19 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultHomeShortcutPreferenceControllerTest {
 
     @Mock
@@ -89,7 +89,7 @@ public class DefaultHomeShortcutPreferenceControllerTest {
     @Implements(DefaultHomePreferenceController.class)
     public static class ShadowDefaultHomePreferenceController {
         @Implementation
-        public static boolean hasHomePreference(String pkg, Context context) {
+        protected static boolean hasHomePreference(String pkg, Context context) {
             return true;
         }
     }

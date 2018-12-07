@@ -28,8 +28,9 @@ import com.google.android.setupdesign.util.ThemeHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SetupWizardUtilsTest {
 
     @Test

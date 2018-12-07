@@ -16,17 +16,17 @@ public class ShadowParcel {
     public static boolean sReadBoolResult;
 
     @Implementation
-    public int readInt() {
+    protected int readInt() {
         return sReadIntResult;
     }
 
     @Implementation
-    public void writeInt(int val) {
+    protected void writeInt(int val) {
         sWriteIntResult = val;
     }
 
     @Implementation
-    public boolean readBoolean() {
+    protected boolean readBoolean() {
         return sReadBoolResult;
     }
 }

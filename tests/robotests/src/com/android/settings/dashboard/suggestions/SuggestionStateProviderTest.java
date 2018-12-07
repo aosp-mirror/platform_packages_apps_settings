@@ -18,7 +18,7 @@ package com.android.settings.dashboard.suggestions;
 
 import static android.content.Intent.EXTRA_COMPONENT_NAME;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 import android.content.ComponentName;
@@ -26,15 +26,15 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SuggestionStateProviderTest {
 
     private SuggestionStateProvider mProvider;

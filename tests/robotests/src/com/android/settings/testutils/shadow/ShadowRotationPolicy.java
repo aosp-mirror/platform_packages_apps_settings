@@ -25,20 +25,22 @@ import org.robolectric.annotation.Implements;
 
 @Implements(RotationPolicy.class)
 public class ShadowRotationPolicy {
+
     private static boolean rotationLockEnabled = false;
     private static boolean rotationSupported = true;
+
     @Implementation
-    public static void setRotationLock(Context context, final boolean enabled) {
+    protected static void setRotationLock(Context context, final boolean enabled) {
         rotationLockEnabled = enabled;
     }
 
     @Implementation
-    public static boolean isRotationLocked(Context context) {
+    protected static boolean isRotationLocked(Context context) {
         return rotationLockEnabled;
     }
 
     @Implementation
-    public static boolean isRotationSupported(Context context) {
+    protected static boolean isRotationSupported(Context context) {
         return rotationSupported;
     }
 

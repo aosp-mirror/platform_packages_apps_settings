@@ -27,15 +27,13 @@ public class ShadowNotificationManager {
 
     private int mZenMode;
 
-
     @Implementation
-    public void setZenMode(int mode, Uri conditionId, String reason) {
+    protected void setZenMode(int mode, Uri conditionId, String reason) {
         mZenMode = mode;
     }
 
     @Implementation
-    public int getZenMode() {
+    protected int getZenMode() {
         return mZenMode;
     }
 }
-

@@ -29,13 +29,12 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -44,7 +43,7 @@ import org.robolectric.annotation.Implements;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = PaymentSettingsTest.ShadowPaymentBackend.class)
 public class PaymentSettingsTest {
 
@@ -124,7 +123,7 @@ public class PaymentSettingsTest {
         }
 
         @Implementation
-        public List<PaymentBackend.PaymentAppInfo> getPaymentAppInfos() {
+        protected List<PaymentBackend.PaymentAppInfo> getPaymentAppInfos() {
             return mAppInfos;
         }
     }

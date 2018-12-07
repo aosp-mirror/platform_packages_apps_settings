@@ -35,7 +35,7 @@ public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowCon
     }
 
     @Implementation
-    public boolean isNetworkSupported(int networkType) {
+    protected boolean isNetworkSupported(int networkType) {
         return mSupportedNetworkTypes.get(networkType);
     }
 
@@ -44,7 +44,7 @@ public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowCon
     }
 
     @Implementation
-    public boolean isTetheringSupported() {
+    protected boolean isTetheringSupported() {
         return mTetheringSupported;
     }
 

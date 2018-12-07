@@ -23,14 +23,13 @@ import android.icu.util.TimeZone;
 
 import androidx.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RegionZonePreferenceControllerTest {
 
     private Activity mActivity;
@@ -59,6 +58,5 @@ public class RegionZonePreferenceControllerTest {
         assertThat(controller.getSummary().toString()).isEqualTo(expectedSummary);
         assertThat(preference.getSummary().toString()).isEqualTo(expectedSummary);
         assertThat(preference.isEnabled()).isFalse();
-
     }
 }

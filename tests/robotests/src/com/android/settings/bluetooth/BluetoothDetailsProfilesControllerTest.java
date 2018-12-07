@@ -18,7 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -33,8 +33,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settings.testutils.shadow.ShadowBluetoothDevice;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -46,6 +44,7 @@ import com.android.settingslib.bluetooth.PbapServerProfile;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -55,8 +54,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowBluetoothDevice.class, ShadowBluetoothDevice.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowBluetoothDevice.class)
 public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsControllerTestBase {
 
     private BluetoothDetailsProfilesController mController;

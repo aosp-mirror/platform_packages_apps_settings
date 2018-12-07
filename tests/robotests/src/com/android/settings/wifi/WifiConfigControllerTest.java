@@ -22,7 +22,6 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,7 +38,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -48,10 +46,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class WifiConfigControllerTest {
 
@@ -141,7 +140,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(LONG_PSK);
         assertThat(mController.isSubmittable()).isFalse();
-
     }
 
     @Test
@@ -158,7 +156,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(GOOD_PSK);
         assertThat(mController.isSubmittable()).isTrue();
-
     }
 
     @Test
@@ -167,7 +164,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(HEX_PSK);
         assertThat(mController.isSubmittable()).isTrue();
-
     }
 
     @Test
@@ -324,14 +320,14 @@ public class WifiConfigControllerTest {
     private void securitySpinnerTestHelper(boolean saeVisible, boolean suitebVisible,
             boolean oweVisible) {
         WifiManager wifiManager = mock(WifiManager.class);
-        when(wifiManager.isWpa3SaeSupported()).thenReturn(saeVisible ? true : false);
-        when(wifiManager.isWpa3SuiteBSupported()).thenReturn(suitebVisible ? true : false);
-        when(wifiManager.isOweSupported()).thenReturn(oweVisible ? true : false);
+        when(wifiManager.isWpa3SaeSupported()).thenReturn(saeVisible);
+        when(wifiManager.isWpa3SuiteBSupported()).thenReturn(suitebVisible);
+        when(wifiManager.isOweSupported()).thenReturn(oweVisible);
 
         mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
                 WifiConfigUiBase.MODE_MODIFY, wifiManager);
 
-        final Spinner securitySpinner = ((Spinner) mView.findViewById(R.id.security));
+        final Spinner securitySpinner = mView.findViewById(R.id.security);
         final ArrayAdapter<String> adapter = (ArrayAdapter) securitySpinner.getAdapter();
         boolean saeFound = false;
         boolean suitebFound = false;

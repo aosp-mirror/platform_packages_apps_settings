@@ -26,13 +26,13 @@ import android.os.PowerManager;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPowerManager;
@@ -40,7 +40,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.concurrent.TimeUnit;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LowBatteryDetectorTest {
 
     @Mock
@@ -94,8 +94,7 @@ public class LowBatteryDetectorTest {
     public void testDetect_batterySaverOn_tipHandled() {
         mShadowPowerManager.setIsPowerSaveMode(true);
 
-        assertThat(mLowBatteryDetector.detect().getState())
-                .isEqualTo(BatteryTip.StateType.HANDLED);
+        assertThat(mLowBatteryDetector.detect().getState()).isEqualTo(BatteryTip.StateType.HANDLED);
     }
 
     @Test

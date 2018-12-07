@@ -27,16 +27,16 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EnterpriseDisclosurePreferenceControllerTest {
 
     private static final String TEST_DISCLOSURE = "This is a test disclosure.";
@@ -47,7 +47,6 @@ public class EnterpriseDisclosurePreferenceControllerTest {
     private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mPreferenceScreen;
-
 
     @Before
     public void setUp() {

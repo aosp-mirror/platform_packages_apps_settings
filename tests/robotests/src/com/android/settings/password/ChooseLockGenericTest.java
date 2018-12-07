@@ -32,9 +32,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -45,13 +42,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowTheme.class,
                 ShadowLockPatternUtils.class,
                 ShadowStorageManager.class,
                 ShadowUserManager.class,
@@ -64,17 +60,13 @@ public class ChooseLockGenericTest {
 
     @Before
     public void setUp() {
-        Global.putInt(
-                application.getContentResolver(),
-                Global.DEVICE_PROVISIONED, 1);
+        Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         mFragment = new ChooseLockGenericFragment();
     }
 
     @After
     public void tearDown() {
-        Global.putInt(
-                application.getContentResolver(),
-                Global.DEVICE_PROVISIONED, 1);
+        Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         ShadowStorageManager.reset();
     }
 

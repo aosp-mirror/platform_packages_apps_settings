@@ -16,16 +16,17 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class NightDisplayFooterPreferenceControllerTest {
 
@@ -34,6 +35,11 @@ public class NightDisplayFooterPreferenceControllerTest {
     @Before
     public void setUp() {
         mController = new NightDisplayFooterPreferenceController(RuntimeEnvironment.application);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -49,5 +55,4 @@ public class NightDisplayFooterPreferenceControllerTest {
                 com.android.internal.R.bool.config_nightDisplayAvailable, false);
         assertThat(mController.isAvailable()).isFalse();
     }
-
 }

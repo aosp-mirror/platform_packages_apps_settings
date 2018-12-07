@@ -34,17 +34,17 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.slices.SliceData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BasePreferenceControllerTest {
 
     private final String KEY = "fake_key";
@@ -207,9 +207,9 @@ public class BasePreferenceControllerTest {
 
     private class FakeBasePreferenceController extends BasePreferenceController {
 
-        public int mAvailable;
+        private int mAvailable;
 
-        public FakeBasePreferenceController(Context context, String preferenceKey) {
+        private FakeBasePreferenceController(Context context, String preferenceKey) {
             super(context, preferenceKey);
             mAvailable = AVAILABLE;
         }
@@ -219,7 +219,7 @@ public class BasePreferenceControllerTest {
             return mAvailable;
         }
 
-        public void setAvailability(int availability) {
+        private void setAvailability(int availability) {
             mAvailable = availability;
         }
     }

@@ -33,7 +33,6 @@ import android.os.UserManager;
 
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -43,12 +42,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class})
 public class ExternalSourcesDetailsTest {
 

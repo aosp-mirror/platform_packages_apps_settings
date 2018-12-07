@@ -22,7 +22,6 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.util.AttributeSet;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -31,10 +30,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
 public class TimeoutListPreferenceTest {
     private static final CharSequence[] VALUES =
@@ -49,7 +50,10 @@ public class TimeoutListPreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPreference = new TimeoutListPreference(application, mock(AttributeSet.class));
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+
+        mPreference = new TimeoutListPreference(application, attributeSet);
         ReflectionHelpers.setField(mPreference, "mInitialValues", VALUES);
         ReflectionHelpers.setField(mPreference, "mInitialEntries", ENTRIES);
         ReflectionHelpers.setField(mPreference, "mEntries", ENTRIES);

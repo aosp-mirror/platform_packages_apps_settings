@@ -37,8 +37,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -48,6 +46,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
@@ -57,7 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowConnectivityManager.class, ShadowUserManager.class})
 public class MyDeviceInfoFragmentTest {
 
@@ -91,7 +90,6 @@ public class MyDeviceInfoFragmentTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void onCreate_fromSearch_shouldNotOverrideInitialExpandedCount() {
         final Bundle args = new Bundle();
         args.putString(EXTRA_FRAGMENT_ARG_KEY, "search_key");

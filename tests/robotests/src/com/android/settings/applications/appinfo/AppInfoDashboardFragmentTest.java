@@ -48,7 +48,6 @@ import android.view.MenuItem;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -61,6 +60,7 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
@@ -68,7 +68,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class AppInfoDashboardFragmentTest {
 
     private static final String PACKAGE_NAME = "test_package_name";
@@ -239,7 +239,8 @@ public final class AppInfoDashboardFragmentTest {
     public void onActivityResult_uninstalledUpdates_shouldInvalidateOptionsMenu() {
         doReturn(true).when(mFragment).refreshUi();
 
-        mFragment.onActivityResult(mFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
+        mFragment
+            .onActivityResult(AppInfoDashboardFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
     }

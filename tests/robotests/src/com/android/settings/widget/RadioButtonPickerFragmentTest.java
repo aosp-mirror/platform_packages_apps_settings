@@ -31,7 +31,6 @@ import android.os.UserManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
@@ -42,14 +41,14 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RadioButtonPickerFragmentTest {
-
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;

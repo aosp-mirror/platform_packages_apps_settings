@@ -41,7 +41,6 @@ import android.provider.Settings;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,18 +49,19 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenOnboardingActivityTest {
 
     @Mock
-    MetricsLogger mMetricsLogger;
+    private MetricsLogger mMetricsLogger;
     @Mock
-    NotificationManager mNm;
+    private NotificationManager mNm;
 
-    ZenOnboardingActivity mActivity;
+    private ZenOnboardingActivity mActivity;
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;

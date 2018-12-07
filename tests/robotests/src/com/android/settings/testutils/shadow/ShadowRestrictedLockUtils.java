@@ -29,7 +29,7 @@ public class ShadowRestrictedLockUtils {
     private static boolean sAdminSupportDetailsIntentLaunched;
 
     @Implementation
-    public static void sendShowAdminSupportDetailsIntent(Context context, EnforcedAdmin admin) {
+    protected static void sendShowAdminSupportDetailsIntent(Context context, EnforcedAdmin admin) {
         sAdminSupportDetailsIntentLaunched = true;
     }
 
@@ -40,6 +40,4 @@ public class ShadowRestrictedLockUtils {
     public static void clearAdminSupportDetailsIntentLaunch() {
         sAdminSupportDetailsIntentLaunched = false;
     }
-
-
 }

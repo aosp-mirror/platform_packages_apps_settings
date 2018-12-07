@@ -21,8 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.os.Parcel;
 import android.text.format.DateUtils;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,8 +28,9 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppInfoTest {
 
     private static final String PACKAGE_NAME = "com.android.app";

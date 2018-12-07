@@ -42,7 +42,7 @@ public class ShadowInputMethodManagerWithMethodList extends ShadowInputMethodMan
     }
 
     @Implementation
-    public List<InputMethodInfo> getInputMethodList() {
+    protected List<InputMethodInfo> getInputMethodList() {
         return mInputMethodInfos;
     }
 

@@ -16,11 +16,10 @@
 
 package com.android.settings.enterprise;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AdminGrantedPermissionsPreferenceControllerBaseTest
     extends AdminGrantedPermissionsPreferenceControllerTestBase {
 
@@ -47,4 +46,3 @@ public class AdminGrantedPermissionsPreferenceControllerBaseTest
         }
     }
 }
-

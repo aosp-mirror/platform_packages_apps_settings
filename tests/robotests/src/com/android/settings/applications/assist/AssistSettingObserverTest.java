@@ -18,14 +18,13 @@ package com.android.settings.applications.assist;
 
 import android.net.Uri;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AssistSettingObserverTest {
 
     @Test

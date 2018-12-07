@@ -46,11 +46,10 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settings.testutils.shadow.ShadowMediaRouter;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
@@ -65,6 +64,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
@@ -75,10 +75,9 @@ import org.robolectric.shadows.ShadowPackageManager;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowAudioManager.class,
-        ShadowMediaRouter.class,
         ShadowBluetoothUtils.class,
         ShadowBluetoothDevice.class}
 )
@@ -131,7 +130,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
         mShadowAudioManager = ShadowAudioManager.getShadow();
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
-        mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
 
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
@@ -175,7 +174,7 @@ public class AudioOutputSwitchPreferenceControllerTest {
     @Test
     public void constructor_notSupportBluetooth_shouldReturnBeforeUsingLocalBluetoothManager() {
         ShadowBluetoothUtils.reset();
-        mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
 
         AudioSwitchPreferenceController controller = new AudioSwitchPreferenceControllerTestable(
                 mContext, TEST_KEY);

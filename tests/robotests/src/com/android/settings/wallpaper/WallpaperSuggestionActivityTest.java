@@ -20,11 +20,10 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
+import android.app.Application;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.res.Resources;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -32,15 +31,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.android.controller.ActivityController;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WallpaperSuggestionActivityTest {
 
     @Mock
@@ -48,12 +48,14 @@ public class WallpaperSuggestionActivityTest {
     @Mock
     private Resources mResources;
 
-    private ActivityController<WallpaperSuggestionActivity> mController;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = Robolectric.buildActivity(WallpaperSuggestionActivity.class);
+
+        final Application application = RuntimeEnvironment.application;
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(application);
+        ShadowApplication shadowApplication = Shadows.shadowOf(application);
+        shadowApplication.setSystemService(Context.WALLPAPER_SERVICE, wallpaperManager);
     }
 
     @After
@@ -89,7 +91,8 @@ public class WallpaperSuggestionActivityTest {
     }
 
     @Implements(WallpaperManager.class)
-    public static class ShadowWallpaperManager {
+    public static class ShadowWallpaperManager extends
+        org.robolectric.shadows.ShadowWallpaperManager {
 
         private static int sWallpaperId;
 
@@ -103,12 +106,12 @@ public class WallpaperSuggestionActivityTest {
         }
 
         @Implementation
-        public boolean isWallpaperServiceEnabled() {
+        protected boolean isWallpaperServiceEnabled() {
             return true;
         }
 
         @Implementation
-        public int getWallpaperId(int which) {
+        protected int getWallpaperId(int which) {
             return sWallpaperId;
         }
     }

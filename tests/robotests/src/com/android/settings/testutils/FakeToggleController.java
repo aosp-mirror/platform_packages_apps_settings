@@ -26,15 +26,15 @@ import com.android.settings.core.TogglePreferenceController;
 
 public class FakeToggleController extends TogglePreferenceController {
 
-    private String settingKey = "toggle_key";
-
     public static final String AVAILABILITY_KEY = "fake_toggle_availability_key";
 
     public static final IntentFilter INTENT_FILTER = new IntentFilter(
             WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
 
-    private final int ON = 1;
-    private final int OFF = 0;
+    private static final String SETTING_KEY = "toggle_key";
+
+    private static final int ON = 1;
+    private static final int OFF = 0;
 
     private boolean mIsAsyncUpdate = false;
 
@@ -45,12 +45,12 @@ public class FakeToggleController extends TogglePreferenceController {
     @Override
     public boolean isChecked() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                settingKey, OFF) == ON;
+            SETTING_KEY, OFF) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.System.putInt(mContext.getContentResolver(), settingKey,
+        return Settings.System.putInt(mContext.getContentResolver(), SETTING_KEY,
                 isChecked ? ON : OFF);
     }
 

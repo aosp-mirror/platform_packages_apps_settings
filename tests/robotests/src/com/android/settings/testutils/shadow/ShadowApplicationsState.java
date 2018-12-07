@@ -26,7 +26,7 @@ import org.robolectric.annotation.Implements;
 @Implements(ApplicationsState.class)
 public class ShadowApplicationsState {
     @Implementation
-    public Looper getBackgroundLooper() {
+    protected Looper getBackgroundLooper() {
         return Looper.getMainLooper();
     }
 }

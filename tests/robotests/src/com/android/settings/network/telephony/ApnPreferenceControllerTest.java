@@ -37,7 +37,6 @@ import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.network.ApnSettings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -47,8 +46,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ApnPreferenceControllerTest {
     private static final int SUB_ID = 2;
 

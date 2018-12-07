@@ -34,24 +34,25 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.LayoutPreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class ColorModePreferenceFragmentTest {
 
@@ -69,6 +70,11 @@ public class ColorModePreferenceFragmentTest {
 
         mFragment = spy(new ColorModePreferenceFragment());
         ReflectionHelpers.setField(mFragment, "mController", mController);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test

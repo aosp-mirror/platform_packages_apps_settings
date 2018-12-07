@@ -36,16 +36,16 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EnabledNetworkModePreferenceControllerTest {
     private static final int SUB_ID = 2;
 
@@ -149,5 +149,4 @@ public class EnabledNetworkModePreferenceControllerTest {
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isNotEqualTo(
                 TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
     }
-
 }

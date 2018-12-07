@@ -32,7 +32,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -40,9 +39,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RoamingPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
@@ -140,5 +140,4 @@ public class RoamingPreferenceControllerTest {
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isTrue();
     }
-
 }

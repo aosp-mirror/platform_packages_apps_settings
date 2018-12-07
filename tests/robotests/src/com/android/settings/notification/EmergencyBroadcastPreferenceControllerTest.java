@@ -29,7 +29,6 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 
 import com.android.settings.accounts.AccountRestrictionHelper;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -38,8 +37,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EmergencyBroadcastPreferenceControllerTest {
 
     private static final String PREF_TEST_KEY = "test_key";

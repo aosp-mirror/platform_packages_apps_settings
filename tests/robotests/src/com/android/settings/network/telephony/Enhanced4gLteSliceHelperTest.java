@@ -49,7 +49,6 @@ import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,11 +56,12 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class Enhanced4gLteSliceHelperTest {
 
     @Mock
@@ -275,7 +275,7 @@ public class Enhanced4gLteSliceHelperTest {
             return mSubId;
         }
 
-        protected void setDefaultVoiceSubId(int id) {
+        private void setDefaultVoiceSubId(int id) {
             mSubId = id;
         }
     }

@@ -22,15 +22,15 @@ import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ControllerRendererPoolTest {
 
     private static final int UNSUPPORTED_CARD_TYPE = -99999;

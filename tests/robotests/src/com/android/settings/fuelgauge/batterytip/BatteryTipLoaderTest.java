@@ -18,7 +18,7 @@ package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -33,7 +33,6 @@ import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.testutils.BatteryTestUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -42,11 +41,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
+import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryTipLoaderTest {
 
     private static final int[] TIP_ORDER = {
@@ -84,8 +85,8 @@ public class BatteryTipLoaderTest {
 
     @After
     public void tearDown() {
-        BatteryTestUtils.clearStaticInstance(AppLabelPredicate.class, "sInstance");
-        BatteryTestUtils.clearStaticInstance(AppRestrictionPredicate.class, "sInstance");
+        ReflectionHelpers.setStaticField(AppLabelPredicate.class, "sInstance", null);
+        ReflectionHelpers.setStaticField(AppRestrictionPredicate.class, "sInstance", null);
     }
 
     @Test

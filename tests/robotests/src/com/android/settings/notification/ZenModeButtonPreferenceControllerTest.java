@@ -37,7 +37,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -45,11 +44,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeButtonPreferenceControllerTest {
 
     private ZenModeButtonPreferenceController mController;
@@ -86,8 +86,7 @@ public class ZenModeButtonPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mZenButtonOn", mZenButtonOn);
         ReflectionHelpers.setField(mController, "mZenButtonOff", mZenButtonOff);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 

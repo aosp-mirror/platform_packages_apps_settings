@@ -24,7 +24,6 @@ import android.content.Intent;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -32,10 +31,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowPrivacySettingsUtils.class})
 public class DataManagementPreferenceControllerTest {
     private final String KEY = "data_management";
@@ -70,8 +70,7 @@ public class DataManagementPreferenceControllerTest {
         mPSCD.setManageIntent(mIntent);
         mPSCD.setManageLabel(mTitle);
         mController.updateState(mPreference);
-        assertThat(mPreference.getTitle())
-                .isEqualTo(mTitle);
+        assertThat(mPreference.getTitle()).isEqualTo(mTitle);
     }
 
     @Test

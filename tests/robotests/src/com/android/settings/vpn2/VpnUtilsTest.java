@@ -23,12 +23,11 @@ import static org.mockito.Mockito.when;
 
 import android.net.ConnectivityManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class VpnUtilsTest {
     @Test
     public void testIsAlwaysOnVpnSet() {

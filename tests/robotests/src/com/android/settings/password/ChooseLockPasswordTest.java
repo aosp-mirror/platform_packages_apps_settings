@@ -28,9 +28,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupdesign.GlifLayout;
@@ -40,21 +38,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDrawable;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-    SettingsShadowResources.class,
-    SettingsShadowResourcesImpl.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-    ShadowUtils.class
-})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {SettingsShadowResources.class, ShadowUtils.class})
 public class ChooseLockPasswordTest {
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_headlineFontFamily, "");
     }

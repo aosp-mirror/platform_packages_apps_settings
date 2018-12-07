@@ -47,7 +47,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -61,13 +60,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowConnectivityManager.class,
-        ShadowUserManager.class}
-)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowConnectivityManager.class, ShadowUserManager.class})
 public class MobileNetworkPreferenceControllerTest {
 
     private Context mContext;

@@ -21,8 +21,7 @@ import android.content.Context;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.slices.CopyableSlice;
 
-public class FakeCopyableController extends BasePreferenceController implements
-        CopyableSlice {
+public class FakeCopyableController extends BasePreferenceController implements CopyableSlice {
 
     public FakeCopyableController(Context context, String preferenceKey) {
         super(context, preferenceKey);

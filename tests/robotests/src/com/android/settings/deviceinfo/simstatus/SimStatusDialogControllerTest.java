@@ -69,7 +69,6 @@ import android.telephony.euicc.EuiccManager;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -77,12 +76,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SimStatusDialogControllerTest {
 
     @Mock
@@ -398,5 +398,4 @@ public class SimStatusDialogControllerTest {
         verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
         verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
     }
-
 }

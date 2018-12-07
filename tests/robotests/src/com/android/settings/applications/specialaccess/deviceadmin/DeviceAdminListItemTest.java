@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess.deviceadmin;
 
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -31,16 +30,15 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DeviceAdminListItemTest {
 
     @Mock
@@ -73,5 +71,4 @@ public class DeviceAdminListItemTest {
         assertThat(item.getName()).isEqualTo(label);
         assertThat(item.getDescription()).isEqualTo(description);
     }
-
 }

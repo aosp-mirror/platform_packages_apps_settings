@@ -30,8 +30,6 @@ import android.telephony.euicc.EuiccManager;
 
 import androidx.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,8 +37,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EuiccPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
@@ -75,5 +74,4 @@ public class EuiccPreferenceControllerTest {
         assertThat(captor.getValue().getAction()).isEqualTo(
                 EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
     }
-
 }

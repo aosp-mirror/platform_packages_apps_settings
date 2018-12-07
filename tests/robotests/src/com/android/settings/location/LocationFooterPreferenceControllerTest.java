@@ -17,8 +17,8 @@ package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -42,7 +42,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -51,12 +50,13 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LocationFooterPreferenceControllerTest {
 
     @Mock
@@ -88,7 +88,7 @@ public class LocationFooterPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_hasValidFooter_returnsTrue() throws NameNotFoundException {
+    public void isAvailable_hasValidFooter_returnsTrue() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));
@@ -99,7 +99,7 @@ public class LocationFooterPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_noSystemApp_returnsFalse() throws NameNotFoundException {
+    public void isAvailable_noSystemApp_returnsFalse() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ false, /*hasRequiredMetadata*/ true));
@@ -109,7 +109,7 @@ public class LocationFooterPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_noRequiredMetadata_returnsFalse() throws NameNotFoundException {
+    public void isAvailable_noRequiredMetadata_returnsFalse() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ false));
@@ -131,7 +131,7 @@ public class LocationFooterPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_sendBroadcast() throws NameNotFoundException {
+    public void updateState_sendBroadcast() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));
@@ -145,7 +145,7 @@ public class LocationFooterPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_addPreferences() throws NameNotFoundException {
+    public void updateState_addPreferences() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));
@@ -158,7 +158,7 @@ public class LocationFooterPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_notSystemApp_ignore() throws NameNotFoundException {
+    public void updateState_notSystemApp_ignore() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ false, /*hasRequiredMetadata*/ true));
@@ -170,7 +170,7 @@ public class LocationFooterPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_thenOnPause_sendBroadcasts() throws NameNotFoundException {
+    public void updateState_thenOnPause_sendBroadcasts() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
                 getTestResolveInfo(/*isSystemApp*/ true, /*hasRequiredMetadata*/ true));

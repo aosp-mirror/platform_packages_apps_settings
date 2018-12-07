@@ -35,13 +35,13 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.EarlyWarningTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -51,7 +51,7 @@ import org.robolectric.annotation.Resetter;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryFixSliceTest {
 
     private Context mContext;
@@ -123,7 +123,7 @@ public class BatteryFixSliceTest {
             return sBatteryTips;
         }
 
-        public static void setBatteryTips(List<BatteryTip> tips) {
+        private static void setBatteryTips(List<BatteryTip> tips) {
             sBatteryTips = tips;
         }
     }

@@ -25,16 +25,16 @@ import android.content.pm.ResolveInfo;
 
 import com.android.settings.R;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SupportDashboardActivityTest {
 
     private Context mContext;

@@ -27,7 +27,6 @@ import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.util.Pair;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -35,13 +34,13 @@ import com.android.settingslib.drawer.Tile;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CategoryManagerTest {
 
     private ActivityInfo mActivityInfo;

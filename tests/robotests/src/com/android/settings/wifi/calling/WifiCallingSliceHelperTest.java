@@ -55,7 +55,6 @@ import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceData;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,12 +62,13 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiCallingSliceHelperTest {
 
     private Context mContext;
@@ -387,7 +387,6 @@ public class WifiCallingSliceHelperTest {
         rowContent =  (RowContent) rowItems.get(3);
         assertThat(rowContent.getTitleItem().getText()).isEqualTo(mContext.getText(
                 com.android.internal.R.string.wfc_mode_cellular_preferred_summary));
-
     }
 
     private PendingIntent getBroadcastIntent(String action) {
@@ -444,7 +443,7 @@ public class WifiCallingSliceHelperTest {
             return mSubId;
         }
 
-        protected void setDefaultVoiceSubId(int id) {
+        private void setDefaultVoiceSubId(int id) {
             mSubId = id;
         }
 
@@ -463,11 +462,11 @@ public class WifiCallingSliceHelperTest {
             return defaultValue;
         }
 
-        public void setActivationAppIntent(Intent intent) {
+        private void setActivationAppIntent(Intent intent) {
             mActivationAppIntent = intent;
         }
 
-        public void setIsWifiCallingPrefEditable(boolean isWifiCallingPrefEditable) {
+        private void setIsWifiCallingPrefEditable(boolean isWifiCallingPrefEditable) {
             this.isWifiCallingPrefEditable = isWifiCallingPrefEditable;
         }
     }

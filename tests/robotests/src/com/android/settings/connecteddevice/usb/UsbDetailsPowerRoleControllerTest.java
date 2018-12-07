@@ -35,7 +35,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -44,9 +43,10 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UsbDetailsPowerRoleControllerTest {
 
     private UsbDetailsPowerRoleController mDetailsPowerRoleController;
@@ -201,7 +201,6 @@ public class UsbDetailsPowerRoleControllerTest {
                 .isEqualTo(mContext.getString(R.string.usb_switching_failed));
     }
 
-
     @Test
     public void onClickDevice_timedOut_shouldShowFailureText() {
         mDetailsPowerRoleController.displayPreference(mScreen);
@@ -221,7 +220,6 @@ public class UsbDetailsPowerRoleControllerTest {
         assertThat(pref.getSummary())
                 .isEqualTo(mContext.getString(R.string.usb_switching_failed));
     }
-
 
     private SwitchPreference getPreference() {
         return (SwitchPreference) mPreference.getPreference(0);

@@ -26,15 +26,15 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.SparseIntArray;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UsageGraphTest {
 
     private UsageGraph mGraph;

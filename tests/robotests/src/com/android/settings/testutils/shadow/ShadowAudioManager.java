@@ -31,9 +31,9 @@ import android.media.AudioDeviceCallback;
 import android.media.AudioManager;
 import android.os.Handler;
 
+import java.util.List;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
@@ -43,8 +43,7 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
     private int mRingerMode;
     private int mDeviceCodes;
     private boolean mMusicActiveRemotely;
-    private boolean mBluetoothScoOn;
-    private ArrayList<AudioDeviceCallback> mDeviceCallbacks = new ArrayList();
+    private List<AudioDeviceCallback> mDeviceCallbacks = new ArrayList<>();
 
     @Implementation
     private int getRingerModeInternal() {
@@ -100,11 +99,4 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
                 return 0;
         }
     }
-
-    public void setBluetoothScoOn(boolean bluetoothScoOn) {
-        mBluetoothScoOn = bluetoothScoOn;
-    }
-
-    @Implementation
-    public boolean isBluetoothScoOn() { return mBluetoothScoOn; }
 }

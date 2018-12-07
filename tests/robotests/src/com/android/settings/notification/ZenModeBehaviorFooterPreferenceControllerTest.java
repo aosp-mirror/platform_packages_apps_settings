@@ -22,7 +22,7 @@ import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_OFF;
 
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -43,7 +43,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.notification.AbstractZenModePreferenceController.ZenModeConfigWrapper;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -51,11 +50,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeBehaviorFooterPreferenceControllerTest {
 
     private static final String TEST_APP_NAME = "test_app";
@@ -71,8 +71,6 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
     private ZenModeConfig mZenModeConfig;
     @Mock
     private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private ZenModeConfig mConfig;
     @Mock
     private ZenModeConfigWrapper mConfigWrapper;
 

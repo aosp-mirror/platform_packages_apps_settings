@@ -30,16 +30,15 @@ import android.provider.Settings;
 
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class InstantAppWebActionPreferenceControllerTest {
     private static final String PREF_KEY = "instant_app_web_action_toggle";
     private static final String KEY_INSTANT_APPS_ENABLED = Settings.Secure.INSTANT_APPS_ENABLED;
