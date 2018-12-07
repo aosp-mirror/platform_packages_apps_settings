@@ -37,11 +37,14 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ChartDataUsagePreferenceTest {
 
+    // Test cycle start date, 20 Mar 2018 22:00: GMT
     private static final long TIMESTAMP_START = 1521583200000L;
+    // Test bucket end date, 22 Mar 2018 00:00:00
     private static final long TIMESTAMP_END = 1521676800000L;
 
     private List<NetworkCycleData> mNetworkCycleData;
@@ -55,8 +58,6 @@ public class ChartDataUsagePreferenceTest {
 
         mContext = RuntimeEnvironment.application;
         mPreference = new ChartDataUsagePreference(mContext, null);
-        createTestNetworkData();
-        mPreference.setNetworkCycleData(mNetworkCycleChartData);
     }
 
     @Test
@@ -64,11 +65,13 @@ public class ChartDataUsagePreferenceTest {
         final UsageView usageView = mock(UsageView.class);
         final ArgumentCaptor<SparseIntArray> pointsCaptor =
                 ArgumentCaptor.forClass(SparseIntArray.class);
+        createTestNetworkData();
+        mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
         mPreference.calcPoints(usageView, mNetworkCycleData.subList(0, 5));
 
         verify(usageView).addPath(pointsCaptor.capture());
-        SparseIntArray points = pointsCaptor.getValue();
+        final SparseIntArray points = pointsCaptor.getValue();
         // the point should be normal usage data
         assertThat(points.valueAt(1)).isNotEqualTo(-1);
     }
@@ -78,14 +81,71 @@ public class ChartDataUsagePreferenceTest {
         final UsageView usageView = mock(UsageView.class);
         final ArgumentCaptor<SparseIntArray> pointsCaptor =
                 ArgumentCaptor.forClass(SparseIntArray.class);
+        createTestNetworkData();
+        mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
         mPreference.calcPoints(usageView, mNetworkCycleData.subList(2, 7));
 
         verify(usageView).addPath(pointsCaptor.capture());
-        SparseIntArray points = pointsCaptor.getValue();
+        final SparseIntArray points = pointsCaptor.getValue();
         // indicator that no data is available
         assertThat(points.keyAt(1)).isEqualTo(points.keyAt(2) - 1);
         assertThat(points.valueAt(1)).isEqualTo(-1);
+    }
+
+    @Test
+    public void calcPoints_shouldNotDrawPointForFutureDate() {
+        final UsageView usageView = mock(UsageView.class);
+        final ArgumentCaptor<SparseIntArray> pointsCaptor =
+            ArgumentCaptor.forClass(SparseIntArray.class);
+        final long tonight = System.currentTimeMillis() + TimeUnit.HOURS.toMillis(12);
+        mNetworkCycleData = new ArrayList<>();
+        // add test usage data for last 5 days
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight - TimeUnit.DAYS.toMillis(5), tonight - TimeUnit.DAYS.toMillis(4), 743823454L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight - TimeUnit.DAYS.toMillis(4), tonight - TimeUnit.DAYS.toMillis(3), 64396L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight - TimeUnit.DAYS.toMillis(3), tonight - TimeUnit.DAYS.toMillis(2), 2832L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight - TimeUnit.DAYS.toMillis(2), tonight - TimeUnit.DAYS.toMillis(1), 83849690L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight - TimeUnit.DAYS.toMillis(1), tonight, 1883657L));
+        // add dummy usage data for next 5 days
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight, tonight + TimeUnit.DAYS.toMillis(1), 0L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight + TimeUnit.DAYS.toMillis(1), tonight + TimeUnit.DAYS.toMillis(2), 0L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight + TimeUnit.DAYS.toMillis(2), tonight + TimeUnit.DAYS.toMillis(3), 0L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight + TimeUnit.DAYS.toMillis(3), tonight + TimeUnit.DAYS.toMillis(4), 0L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight + TimeUnit.DAYS.toMillis(4), tonight + TimeUnit.DAYS.toMillis(5), 0L));
+        mNetworkCycleData.add(createNetworkCycleData(
+            tonight + TimeUnit.DAYS.toMillis(5), tonight + TimeUnit.DAYS.toMillis(6), 0L));
+
+        final NetworkCycleChartData.Builder builder = new NetworkCycleChartData.Builder();
+        builder.setUsageBuckets(mNetworkCycleData)
+            .setStartTime(tonight - TimeUnit.DAYS.toMillis(5))
+            .setEndTime(tonight + TimeUnit.DAYS.toMillis(6));
+        mNetworkCycleChartData = builder.build();
+        mPreference.setNetworkCycleData(mNetworkCycleChartData);
+
+        mPreference.calcPoints(usageView, mNetworkCycleData);
+
+        verify(usageView).addPath(pointsCaptor.capture());
+        final SparseIntArray points = pointsCaptor.getValue();
+        // should only have 7 points: 1 dummy point indicating the start of data, starting point 0,
+        // and 5 actual data point for each day
+        assertThat(points.size()).isEqualTo(7);
+        assertThat(points.keyAt(0)).isEqualTo(-1);
+        assertThat(points.keyAt(1)).isEqualTo(0);
+        assertThat(points.keyAt(2)).isEqualTo(TimeUnit.DAYS.toMinutes(1));
+        assertThat(points.keyAt(3)).isEqualTo(TimeUnit.DAYS.toMinutes(2));
+        assertThat(points.keyAt(4)).isEqualTo(TimeUnit.DAYS.toMinutes(3));
+        assertThat(points.keyAt(5)).isEqualTo(TimeUnit.DAYS.toMinutes(4));
+        assertThat(points.keyAt(6)).isEqualTo(TimeUnit.DAYS.toMinutes(5));
     }
 
     private void createTestNetworkData() {
