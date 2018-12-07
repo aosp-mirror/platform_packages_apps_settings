@@ -16,13 +16,20 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.UserHandle;
 
+import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -30,6 +37,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ContextualCardFeatureProviderImplTest {
@@ -48,7 +58,7 @@ public class ContextualCardFeatureProviderImplTest {
         final Intent intent = new Intent();
         mImpl.sendBroadcast(mContext, intent);
 
-        verify(mContext, never()).sendBroadcast(intent);
+        verify(mContext, never()).sendBroadcastAsUser(intent, UserHandle.ALL);
     }
 
     @Test
@@ -57,6 +67,37 @@ public class ContextualCardFeatureProviderImplTest {
         final Intent intent = new Intent();
         mImpl.sendBroadcast(mContext, intent);
 
-        verify(mContext).sendBroadcast(intent);
+        verify(mContext).sendBroadcastAsUser(intent, UserHandle.ALL);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void logContextualCardDisplay_hasAction_sendBroadcast() {
+        mImpl.logContextualCardDisplay(mContext, new ArrayList<>(), new ArrayList<>());
+
+        verify(mContext).sendBroadcastAsUser(any(Intent.class), any());
+    }
+
+    @Test
+    public void serialize_hasSizeTwo_returnSizeTwo() {
+        final List<ContextualCard> cards = new ArrayList<>();
+        cards.add(new ContextualCard.Builder()
+                .setName("name1")
+                .setSliceUri(Uri.parse("uri1"))
+                .build());
+        cards.add(new ContextualCard.Builder()
+                .setName("name2")
+                .setSliceUri(Uri.parse("uri2"))
+                .build());
+
+
+        final byte[] data = mImpl.serialize(cards);
+
+        try {
+            assertThat(ContextualCardList
+                    .parseFrom(data).getCardCount()).isEqualTo(cards.size());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

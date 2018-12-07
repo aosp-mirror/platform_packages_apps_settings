@@ -16,8 +16,7 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import static com.android.settings.homepage.contextualcards.ContextualCardLoader
-        .CARD_CONTENT_LOADER_ID;
+import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CARD_CONTENT_LOADER_ID;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -33,6 +32,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
@@ -72,6 +72,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     private final List<LifecycleObserver> mLifecycleObservers;
 
     private ContextualCardUpdateListener mListener;
+    private long mStartTime;
 
     public ContextualCardManager(Context context, Lifecycle lifecycle) {
         mContext = context;
@@ -86,6 +87,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     }
 
     void loadContextualCards(ContextualCardsFragment fragment) {
+        mStartTime = System.currentTimeMillis();
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
@@ -168,6 +170,10 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     @Override
     public void onFinishCardLoading(List<ContextualCard> cards) {
         onContextualCardUpdated(cards.stream().collect(groupingBy(ContextualCard::getCardType)));
+        final long elapsedTime = System.currentTimeMillis() - mStartTime;
+        final ContextualCardFeatureProvider contextualCardFeatureProvider =
+                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
+        contextualCardFeatureProvider.logHomepageDisplay(mContext, elapsedTime);
     }
 
     public ControllerRendererPool getControllerRendererPool() {

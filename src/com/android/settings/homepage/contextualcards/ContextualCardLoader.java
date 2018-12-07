@@ -20,6 +20,9 @@ import static android.app.slice.Slice.HINT_ERROR;
 
 import static androidx.slice.widget.SliceLiveData.SUPPORTED_SPECS;
 
+import static com.android.settings.slices.CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI;
+import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
+
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -34,7 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
-import com.android.settings.slices.CustomSliceRegistry;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -103,27 +106,50 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         return getFinalDisplayableCards(result);
     }
 
+    // Get final displayed cards and log what cards will be displayed/hidden
     @VisibleForTesting
     List<ContextualCard> getFinalDisplayableCards(List<ContextualCard> candidates) {
-        List<ContextualCard> eligibleCards = filterEligibleCards(candidates);
-        eligibleCards = eligibleCards.stream().limit(DEFAULT_CARD_COUNT).collect(
-                Collectors.toList());
+        final List<ContextualCard> eligibleCards = filterEligibleCards(candidates);
+        final List<ContextualCard> visibleCards = new ArrayList<>();
+        final List<ContextualCard> hiddenCards = new ArrayList<>();
 
-        if (eligibleCards.size() <= 2 || getNumberOfLargeCard(eligibleCards) == 0) {
-            return eligibleCards;
+        final int size = eligibleCards.size();
+        for (int i = 0; i < size; i++) {
+            if (i < DEFAULT_CARD_COUNT) {
+                visibleCards.add(eligibleCards.get(i));
+            } else {
+                hiddenCards.add(eligibleCards.get(i));
+            }
         }
 
-        if (eligibleCards.size() == DEFAULT_CARD_COUNT) {
-            eligibleCards.remove(eligibleCards.size() - 1);
+        try {
+            // The maximum cards are four small cards OR
+            // one large card with two small cards OR
+            // two large cards
+            if (visibleCards.size() <= 2 || getNumberOfLargeCard(visibleCards) == 0) {
+                // four small cards
+                return visibleCards;
+            }
+
+            if (visibleCards.size() == DEFAULT_CARD_COUNT) {
+                hiddenCards.add(visibleCards.remove(visibleCards.size() - 1));
+            }
+
+            if (getNumberOfLargeCard(visibleCards) == 1) {
+                // One large card with two small cards
+                return visibleCards;
+            }
+
+            hiddenCards.add(visibleCards.remove(visibleCards.size() - 1));
+
+            // Two large cards
+            return visibleCards;
+        } finally {
+            final ContextualCardFeatureProvider contextualCardFeatureProvider =
+                    FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
+            contextualCardFeatureProvider.logContextualCardDisplay(mContext, visibleCards,
+                    hiddenCards);
         }
-
-        if (getNumberOfLargeCard(eligibleCards) == 1) {
-            return eligibleCards;
-        }
-
-        eligibleCards.remove(eligibleCards.size() - 1);
-
-        return eligibleCards;
     }
 
     @VisibleForTesting
@@ -169,8 +195,8 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     private int getNumberOfLargeCard(List<ContextualCard> cards) {
         return (int) cards.stream()
-                .filter(card -> card.getSliceUri().equals(CustomSliceRegistry.WIFI_SLICE_URI)
-                        || card.getSliceUri().equals(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI))
+                .filter(card -> card.getSliceUri().equals(WIFI_SLICE_URI)
+                        || card.getSliceUri().equals(CONNECTED_DEVICE_SLICE_URI))
                 .count();
     }
 
