@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ConnectedDeviceSliceTest {
+public class BluetoothDevicesSliceTest {
 
     private static final String BLUETOOTH_MOCK_SUMMARY = "BluetoothSummary";
     private static final String BLUETOOTH_MOCK_TITLE = "BluetoothTitle";
@@ -60,8 +60,8 @@ public class ConnectedDeviceSliceTest {
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
 
-    private List<CachedBluetoothDevice> mBluetoothConnectedDeviceList;
-    private ConnectedDeviceSlice mConnectedDeviceSlice;
+    private List<CachedBluetoothDevice> mBluetoothDeviceList;
+    private BluetoothDevicesSlice mBluetoothDevicesSlice;
     private Context mContext;
     private IconCompat mIcon;
     private PendingIntent mDetailIntent;
@@ -74,57 +74,53 @@ public class ConnectedDeviceSliceTest {
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
-        mConnectedDeviceSlice = spy(new ConnectedDeviceSlice(mContext));
+        mBluetoothDevicesSlice = spy(new BluetoothDevicesSlice(mContext));
 
         // Mock the icon and detail intent of Bluetooth.
-        mIcon = IconCompat.createWithResource(mContext, R.drawable.ic_homepage_connected_device);
+        mIcon = IconCompat.createWithResource(mContext, R.drawable.ic_settings_bluetooth);
         mDetailIntent = PendingIntent.getActivity(mContext, 0, new Intent("test action"), 0);
-        doReturn(mIcon).when(mConnectedDeviceSlice).getConnectedDeviceIcon(any());
-        doReturn(mDetailIntent).when(mConnectedDeviceSlice).getBluetoothDetailIntent(any());
+        doReturn(mIcon).when(mBluetoothDevicesSlice).getBluetoothDeviceIcon(any());
+        doReturn(mDetailIntent).when(mBluetoothDevicesSlice).getBluetoothDetailIntent(any());
 
-        // Initial Bluetooth connected device list.
-        mBluetoothConnectedDeviceList = new ArrayList<>();
+        // Initial Bluetooth device list.
+        mBluetoothDeviceList = new ArrayList<>();
     }
 
     @After
     public void tearDown() {
-        if (!mBluetoothConnectedDeviceList.isEmpty()) {
-            mBluetoothConnectedDeviceList.clear();
+        if (!mBluetoothDeviceList.isEmpty()) {
+            mBluetoothDeviceList.clear();
         }
     }
 
     @Test
-    public void getSlice_hasConnectedDevices_shouldHaveConnectedDeviceTitle() {
+    public void getSlice_hasBluetoothDevices_shouldHaveBluetoothDevicesTitle() {
         mockBluetoothDeviceList();
-        doReturn(mBluetoothConnectedDeviceList).when(
-                mConnectedDeviceSlice).getBluetoothConnectedDevices();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
 
-        final Slice slice = mConnectedDeviceSlice.getSlice();
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems,
-                mContext.getString(R.string.bluetooth_connected_devices));
+        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.bluetooth_devices));
     }
 
     @Test
-    public void getSlice_hasConnectedDevices_shouldMatchBluetoothMockTitle() {
+    public void getSlice_hasBluetoothDevices_shouldMatchBluetoothMockTitle() {
         mockBluetoothDeviceList();
-        doReturn(mBluetoothConnectedDeviceList).when(
-                mConnectedDeviceSlice).getBluetoothConnectedDevices();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
 
-        final Slice slice = mConnectedDeviceSlice.getSlice();
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final List<SliceItem> sliceItems = slice.getItems();
         SliceTester.assertTitle(sliceItems, BLUETOOTH_MOCK_TITLE);
     }
 
     @Test
-    public void getSlice_hasConnectedDevices_shouldHavePairNewDevice() {
+    public void getSlice_hasBluetoothDevices_shouldHavePairNewDevice() {
         mockBluetoothDeviceList();
-        doReturn(mBluetoothConnectedDeviceList).when(
-                mConnectedDeviceSlice).getBluetoothConnectedDevices();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
 
-        final Slice slice = mConnectedDeviceSlice.getSlice();
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final List<SliceItem> sliceItems = slice.getItems();
         SliceTester.assertTitle(sliceItems,
@@ -132,22 +128,20 @@ public class ConnectedDeviceSliceTest {
     }
 
     @Test
-    public void getSlice_noConnectedDevices_shouldHaveNoConnectedDeviceTitle() {
-        doReturn(mBluetoothConnectedDeviceList).when(
-                mConnectedDeviceSlice).getBluetoothConnectedDevices();
+    public void getSlice_noBluetoothDevices_shouldHaveNoBluetoothDevicesTitle() {
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
 
-        final Slice slice = mConnectedDeviceSlice.getSlice();
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.no_connected_devices));
+        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.no_bluetooth_devices));
     }
 
     @Test
-    public void getSlice_noConnectedDevices_shouldNotHavePairNewDevice() {
-        doReturn(mBluetoothConnectedDeviceList).when(
-                mConnectedDeviceSlice).getBluetoothConnectedDevices();
+    public void getSlice_noBluetoothDevices_shouldNotHavePairNewDevice() {
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
 
-        final Slice slice = mConnectedDeviceSlice.getSlice();
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         assertThat(hasTitle(metadata,
@@ -157,7 +151,7 @@ public class ConnectedDeviceSliceTest {
     private void mockBluetoothDeviceList() {
         doReturn(BLUETOOTH_MOCK_TITLE).when(mCachedBluetoothDevice).getName();
         doReturn(BLUETOOTH_MOCK_SUMMARY).when(mCachedBluetoothDevice).getConnectionSummary();
-        mBluetoothConnectedDeviceList.add(mCachedBluetoothDevice);
+        mBluetoothDeviceList.add(mCachedBluetoothDevice);
     }
 
     private boolean hasTitle(SliceMetadata metadata, String title) {

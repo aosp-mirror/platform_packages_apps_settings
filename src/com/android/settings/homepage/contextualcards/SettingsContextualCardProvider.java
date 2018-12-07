@@ -40,8 +40,8 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .build();
         final ContextualCard connectedDeviceCard =
                 ContextualCard.newBuilder()
-                        .setSliceUri(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI.toString())
-                        .setCardName(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI.toString())
+                        .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
         final ContextualCard lowStorageCard =

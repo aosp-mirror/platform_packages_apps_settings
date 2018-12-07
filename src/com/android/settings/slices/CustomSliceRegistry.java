@@ -72,13 +72,13 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Backing Uri for Connected device Slice.
+     * Backing Uri for Bluetooth devices Slice.
      */
-    public static final Uri CONNECTED_DEVICE_SLICE_URI = new Uri.Builder()
+    public static final Uri BLUETOOTH_DEVICES_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("connected_device")
+            .appendPath("bluetooth_devices")
             .build();
     /**
      * Backing Uri for the Data usage Slice.

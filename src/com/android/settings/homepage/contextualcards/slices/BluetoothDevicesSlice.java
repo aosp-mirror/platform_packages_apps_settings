@@ -57,19 +57,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * TODO(b/114807655): Contextual Home Page - Connected Device
- *
- * Show connected device info if one is currently connected. UI for connected device should
- * match Connected Devices > Currently Connected Devices
- *
- * TODO This class will be refactor for Bluetooth connected devices only.
- */
-public class ConnectedDeviceSlice implements CustomSliceable {
+public class BluetoothDevicesSlice implements CustomSliceable {
 
     /**
-     * To sort the Bluetooth devices by {@link CachedBluetoothDevice}.
-     * Refer compareTo method from {@link com.android.settings.bluetooth.BluetoothDevicePreference}.
+     * TODO(b/114807655): Contextual Home Page - Connected Device
+     * Re-design sorting for new rule:
+     * Sorting rule: Audio Streaming > Last connected > Recently connected.
      */
     private static final Comparator<CachedBluetoothDevice> COMPARATOR
             = Comparator.naturalOrder();
@@ -80,11 +73,11 @@ public class ConnectedDeviceSlice implements CustomSliceable {
      */
     private static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
-    private static final String TAG = "ConnectedDeviceSlice";
+    private static final String TAG = "BluetoothDevicesSlice";
 
     private final Context mContext;
 
-    public ConnectedDeviceSlice(Context context) {
+    public BluetoothDevicesSlice(Context context) {
         mContext = context;
     }
 
@@ -101,38 +94,38 @@ public class ConnectedDeviceSlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI;
+        return CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
     }
 
     @Override
     public Slice getSlice() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_homepage_connected_device);
-        final CharSequence title = mContext.getText(R.string.bluetooth_connected_devices);
-        final CharSequence titleNoConnectedDevices = mContext.getText(
-                R.string.no_connected_devices);
+                R.drawable.ic_settings_bluetooth);
+        final CharSequence title = mContext.getText(R.string.bluetooth_devices);
+        final CharSequence titleNoBluetoothDevices = mContext.getText(
+                R.string.no_bluetooth_devices);
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext, 0,
                 getIntent(), 0);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryActionIntent, icon,
                 ListBuilder.ICON_IMAGE, title);
         final ListBuilder listBuilder =
-                new ListBuilder(mContext, CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI,
+                new ListBuilder(mContext, CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI,
                         ListBuilder.INFINITY)
                         .setAccentColor(Utils.getColorAccentDefaultColor(mContext));
 
-        // Get row builders by connected devices, e.g. Bluetooth.
+        // Get row builders by Bluetooth devices.
         final List<ListBuilder.RowBuilder> rows = getBluetoothRowBuilder(primarySliceAction);
 
-        // Return a header with IsError flag, if no connected devices.
+        // Return a header with IsError flag, if no Bluetooth devices.
         if (rows.isEmpty()) {
             return listBuilder.setHeader(new ListBuilder.HeaderBuilder()
-                    .setTitle(titleNoConnectedDevices)
+                    .setTitle(titleNoBluetoothDevices)
                     .setPrimaryAction(primarySliceAction))
                     .setIsError(true)
                     .build();
         }
 
-        // According the number of connected devices to set sub title of header.
+        // According the number of Bluetooth devices to set sub title of header.
         listBuilder.setHeader(new ListBuilder.HeaderBuilder()
                 .setTitle(title)
                 .setSubtitle(getSubTitle(rows.size()))
@@ -161,7 +154,7 @@ public class ConnectedDeviceSlice implements CustomSliceable {
                 screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI);
+                .setData(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI);
     }
 
     @Override
@@ -174,25 +167,30 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     }
 
     @VisibleForTesting
-    List<CachedBluetoothDevice> getBluetoothConnectedDevices() {
-        final List<CachedBluetoothDevice> connectedBluetoothList = new ArrayList<>();
+    List<CachedBluetoothDevice> getBluetoothDevices() {
+        final List<CachedBluetoothDevice> bluetoothDeviceList = new ArrayList<>();
 
         // If Bluetooth is disable, skip to get the bluetooth devices.
         if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-            Log.i(TAG, "Cannot get Bluetooth connected devices, Bluetooth is disabled.");
-            return connectedBluetoothList;
+            Log.i(TAG, "Cannot get Bluetooth devices, Bluetooth is disabled.");
+            return bluetoothDeviceList;
         }
 
         // Get the Bluetooth devices from LocalBluetoothManager.
         final LocalBluetoothManager bluetoothManager =
                 com.android.settings.bluetooth.Utils.getLocalBtManager(mContext);
         if (bluetoothManager == null) {
-            Log.i(TAG, "Cannot get Bluetooth connected devices, Bluetooth is unsupported.");
-            return connectedBluetoothList;
+            Log.i(TAG, "Cannot get Bluetooth devices, Bluetooth is unsupported.");
+            return bluetoothDeviceList;
         }
         final Collection<CachedBluetoothDevice> cachedDevices =
                 bluetoothManager.getCachedDeviceManager().getCachedDevicesCopy();
 
+        /**
+         * TODO(b/114807655): Contextual Home Page - Connected Device
+         * Re-design to get all Bluetooth devices and sort them by new rule:
+         * Sorting rule: Audio Streaming > Last connected > Recently connected.
+         */
         // Get connected Bluetooth devices and sort them.
         return cachedDevices.stream().filter(device -> device.isConnected()).sorted(
                 COMPARATOR).collect(Collectors.toList());
@@ -217,25 +215,29 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     }
 
     @VisibleForTesting
-    IconCompat getConnectedDeviceIcon(CachedBluetoothDevice device) {
+    IconCompat getBluetoothDeviceIcon(CachedBluetoothDevice device) {
         final Pair<Drawable, String> pair = BluetoothUtils
                 .getBtClassDrawableWithDescription(mContext, device);
 
         if (pair.first != null) {
             return IconCompat.createWithBitmap(getBitmapFromVectorDrawable(pair.first));
         } else {
-            return IconCompat.createWithResource(mContext, R.drawable.ic_homepage_connected_device);
+            return IconCompat.createWithResource(mContext, R.drawable.ic_settings_bluetooth);
         }
     }
 
     private List<ListBuilder.RowBuilder> getBluetoothRowBuilder(SliceAction primarySliceAction) {
         final List<ListBuilder.RowBuilder> bluetoothRows = new ArrayList<>();
 
-        // According Bluetooth connected device to create row builders.
-        final List<CachedBluetoothDevice> bluetoothDevices = getBluetoothConnectedDevices();
+        /**
+         * TODO(b/114807655): Contextual Home Page - Connected Device
+         * Re-design to do action "activating" in primary action.
+         */
+        // According Bluetooth device to create row builders.
+        final List<CachedBluetoothDevice> bluetoothDevices = getBluetoothDevices();
         for (CachedBluetoothDevice bluetoothDevice : bluetoothDevices) {
             bluetoothRows.add(new ListBuilder.RowBuilder()
-                    .setTitleItem(getConnectedDeviceIcon(bluetoothDevice), ListBuilder.ICON_IMAGE)
+                    .setTitleItem(getBluetoothDeviceIcon(bluetoothDevice), ListBuilder.ICON_IMAGE)
                     .setTitle(bluetoothDevice.getName())
                     .setSubtitle(bluetoothDevice.getConnectionSummary())
                     .setPrimaryAction(primarySliceAction)
@@ -254,7 +256,7 @@ public class ConnectedDeviceSlice implements CustomSliceable {
     }
 
     private CharSequence getSubTitle(int deviceCount) {
-        return mContext.getResources().getQuantityString(R.plurals.show_connected_devices,
+        return mContext.getResources().getQuantityString(R.plurals.show_bluetooth_devices,
                 deviceCount, deviceCount);
     }
 
