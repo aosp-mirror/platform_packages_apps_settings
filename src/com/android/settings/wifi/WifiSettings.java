@@ -66,6 +66,7 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.SearchIndexable;
@@ -175,7 +176,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private PreferenceCategory mConnectedAccessPointPreferenceCategory;
     private PreferenceCategory mAccessPointsPreferenceCategory;
-    private Preference mAddPreference;
+    private ButtonPreference mAddPreference;
     @VisibleForTesting
     Preference mConfigureWifiSettingsPreference;
     @VisibleForTesting
@@ -235,9 +236,17 @@ public class WifiSettings extends RestrictedSettingsFragment
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
 
         Context prefContext = getPrefContext();
-        mAddPreference = new Preference(prefContext);
+        mAddPreference = new ButtonPreference(prefContext);
         mAddPreference.setIcon(R.drawable.ic_menu_add);
         mAddPreference.setTitle(R.string.wifi_add_network);
+        if (WifiDppUtils.isSharingNetworkEnabled(getContext())) {
+            mAddPreference.setButtonIcon(R.drawable.ic_qrcode_24dp);
+            mAddPreference.setButtonOnClickListener((View v) -> {
+                // Launch QR code scanner to join a network.
+                getContext().startActivity(
+                        WifiDppUtils.getConfiguratorQRCodeScannerIntent(/* ssid */ null));
+            });
+        }
         mStatusMessagePreference = (LinkablePreference) findPreference(PREF_KEY_STATUS_MESSAGE);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
