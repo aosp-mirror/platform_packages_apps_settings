@@ -17,6 +17,7 @@
 package com.android.settings.location;
 
 import android.content.Context;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -25,11 +26,31 @@ import com.android.settings.core.BasePreferenceController;
 
 
 public class LocationScanningPreferenceController extends BasePreferenceController {
-
     @VisibleForTesting static final String KEY_LOCATION_SCANNING = "location_scanning";
+    private final Context mContext;
 
     public LocationScanningPreferenceController(Context context) {
         super(context, KEY_LOCATION_SCANNING);
+        mContext = context;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        final boolean wifiScanOn = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+        final boolean bleScanOn = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+        int resId;
+        if (wifiScanOn && bleScanOn) {
+            resId = R.string.scanning_status_text_wifi_on_ble_on;
+        } else if (wifiScanOn && !bleScanOn) {
+            resId = R.string.scanning_status_text_wifi_on_ble_off;
+        } else if (!wifiScanOn && bleScanOn) {
+            resId = R.string.scanning_status_text_wifi_off_ble_on;
+        } else {
+            resId = R.string.scanning_status_text_wifi_off_ble_off;
+        }
+        return mContext.getString(resId);
     }
 
     @AvailabilityStatus
