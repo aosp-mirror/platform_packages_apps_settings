@@ -72,6 +72,14 @@
         <attr name="allowDynamicSummaryInSlice" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="PreferenceScreen">
+        <!-- Determines if static preferences defined in addStaticPreferences are added before or after the radio buttons -->
+        <attr name="staticPreferenceLocation">
+            <enum name="prepend" value="0" />
+            <enum name="append" value="1" />
+        </attr>
+    </declare-styleable>
+
     <!-- For DotsPageIndicator -->
     <declare-styleable name="DotsPageIndicator">
         <attr name="dotDiameter" format="dimension" />

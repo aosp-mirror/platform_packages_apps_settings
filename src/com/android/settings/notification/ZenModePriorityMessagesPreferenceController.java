@@ -21,13 +21,13 @@ import android.content.Context;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModePriorityMessagesPreferenceController extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {
@@ -80,7 +80,8 @@ public class ZenModePriorityMessagesPreferenceController extends AbstractZenMode
             case Settings.Global.ZEN_MODE_ALARMS:
                 mPreference.setEnabled(false);
                 mPreference.setValue(ZenModeBackend.ZEN_MODE_FROM_NONE);
-                mPreference.setSummary(mBackend.getContactsSummary(ZenModeBackend.SOURCE_NONE));
+                mPreference.setSummary(mBackend.getAlarmsTotalSilenceCallsMessagesSummary(
+                        NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES));
                 break;
             default:
                 preference.setEnabled(true);

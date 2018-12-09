@@ -110,7 +110,8 @@ public class LowStorageSlice implements CustomSliceable {
                 StorageSettings.class.getName(), "" /* key */,
                 screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName());
+                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
+                .setData(CustomSliceRegistry.LOW_STORAGE_SLICE_URI);
     }
 
     private RowBuilder buildRowBuilder(CharSequence title, String summary, IconCompat icon) {

@@ -28,6 +28,7 @@ import android.content.IntentFilter;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.net.Uri;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.util.Log;
@@ -41,69 +42,78 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceRegistry;
-import com.android.settings.slices.SliceBroadcastReceiver;
+import com.android.settings.slices.CustomSliceable;
 
 
 /**
  * Utility class to build a Flashlight Slice, and handle all associated actions.
  */
-public class FlashlightSliceBuilder {
+public class FlashlightSlice implements CustomSliceable {
 
-    private static final String TAG = "FlashlightSliceBuilder";
-
-    /**
-     * Action notifying a change on the Flashlight Slice.
-     */
-    public static final String ACTION_FLASHLIGHT_SLICE_CHANGED =
-            "com.android.settings.flashlight.action.FLASHLIGHT_SLICE_CHANGED";
+    private static final String TAG = "FlashlightSlice";
 
     /**
      * Action broadcasting a change on whether flashlight is on or off.
      */
-    public static final String ACTION_FLASHLIGHT_CHANGED =
+    private static final String ACTION_FLASHLIGHT_CHANGED =
             "com.android.settings.flashlight.action.FLASHLIGHT_CHANGED";
 
-    public static final IntentFilter INTENT_FILTER = new IntentFilter(ACTION_FLASHLIGHT_CHANGED);
+    private final Context mContext;
 
-    private FlashlightSliceBuilder() {
+    public FlashlightSlice(Context context) {
+        mContext = context;
     }
 
-    public static Slice getSlice(Context context) {
-        if (!isFlashlightAvailable(context)) {
+    @Override
+    public Slice getSlice() {
+        if (!isFlashlightAvailable(mContext)) {
             return null;
         }
-        final PendingIntent toggleAction = getBroadcastIntent(context);
-        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+        final PendingIntent toggleAction = getBroadcastIntent(mContext);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         final IconCompat icon =
-                IconCompat.createWithResource(context, R.drawable.ic_signal_flashlight);
-        return new ListBuilder(context, CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                IconCompat.createWithResource(mContext, R.drawable.ic_signal_flashlight);
+        return new ListBuilder(mContext, CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new RowBuilder()
-                        .setTitle(context.getText(R.string.power_flashlight))
+                        .setTitle(mContext.getText(R.string.power_flashlight))
                         .setTitleItem(icon, ICON_IMAGE)
                         .setPrimaryAction(
-                                SliceAction.createToggle(toggleAction, null, isFlashlightEnabled(context))))
+                                SliceAction.createToggle(toggleAction, null,
+                                        isFlashlightEnabled(mContext))))
                 .build();
     }
 
-    /**
-     * Update the current flashlight status to the boolean value keyed by
-     * {@link android.app.slice.Slice#EXTRA_TOGGLE_STATE} on {@param intent}.
-     */
-    public static void handleUriChange(Context context, Intent intent) {
+    @Override
+    public Uri getUri() {
+        return CustomSliceRegistry.FLASHLIGHT_SLICE_URI;
+    }
+
+    @Override
+    public IntentFilter getIntentFilter() {
+        return new IntentFilter(ACTION_FLASHLIGHT_CHANGED);
+    }
+
+    @Override
+    public void onNotifyChange(Intent intent) {
         try {
-            final String cameraId = getCameraId(context);
+            final String cameraId = getCameraId(mContext);
             if (cameraId != null) {
                 final boolean state = intent.getBooleanExtra(
-                        EXTRA_TOGGLE_STATE, isFlashlightEnabled(context));
-                final CameraManager cameraManager = context.getSystemService(CameraManager.class);
+                        EXTRA_TOGGLE_STATE, isFlashlightEnabled(mContext));
+                final CameraManager cameraManager = mContext.getSystemService(CameraManager.class);
                 cameraManager.setTorchMode(cameraId, state);
             }
         } catch (CameraAccessException e) {
             Log.e(TAG, "Camera couldn't set torch mode.", e);
         }
-        context.getContentResolver().notifyChange(CustomSliceRegistry.FLASHLIGHT_SLICE_URI, null);
+        mContext.getContentResolver().notifyChange(CustomSliceRegistry.FLASHLIGHT_SLICE_URI, null);
+    }
+
+    @Override
+    public Intent getIntent() {
+        return null;
     }
 
     private static String getCameraId(Context context) throws CameraAccessException {
@@ -121,12 +131,6 @@ public class FlashlightSliceBuilder {
         return null;
     }
 
-    private static PendingIntent getBroadcastIntent(Context context) {
-        final Intent intent = new Intent(ACTION_FLASHLIGHT_SLICE_CHANGED);
-        intent.setClass(context, SliceBroadcastReceiver.class);
-        return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
-    }
 
     private static boolean isFlashlightAvailable(Context context) {
         return Settings.Secure.getInt(

@@ -71,20 +71,20 @@ public class ZenModeSettingsTest {
     @Test
     public void testGetCallsSettingSummary_none() {
         Policy policy = new Policy(0, 0, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("None");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Don\u2019t allow any calls");
     }
 
     @Test
     public void testGetCallsSettingSummary_contacts() {
         Policy policy = new Policy(Policy.PRIORITY_CATEGORY_ALARMS | Policy.PRIORITY_CATEGORY_CALLS,
                 Policy.PRIORITY_SENDERS_CONTACTS, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("From contacts");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Allow from contacts");
     }
 
     @Test
     public void testGetCallsSettingSummary_repeatCallers() {
         Policy policy = new Policy(Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, 0, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("From repeat callers");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Allow from repeat callers");
     }
 
     @Test
@@ -93,7 +93,7 @@ public class ZenModeSettingsTest {
                 Policy.PRIORITY_CATEGORY_REPEAT_CALLERS | Policy.PRIORITY_CATEGORY_CALLS,
                 Policy.PRIORITY_SENDERS_STARRED, 0, 0);
         assertThat(mBuilder.getCallsSettingSummary(policy))
-                .isEqualTo("From starred contacts and repeat callers");
+                .isEqualTo("Allow from starred contacts and repeat callers");
     }
 
     @Test

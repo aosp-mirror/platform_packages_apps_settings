@@ -17,27 +17,23 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_content_timeout_preference"
     android:title="@string/accessibility_content_timeout_preference_title"
     android:persistent="false" >
 
     <com.android.settings.widget.VideoPreference
         android:key="accessibility_content_timeout_video"
-        app:animation="@raw/gesture_swipe_up"
-        app:preview="@drawable/gesture_swipe_up"
-        android:persistent="false" />
-
-    <Preference
-        android:key="accessibility_content_timeout_summary"
-        android:selectable="false"
-        android:enabled="true"
-        android:summary="@string/accessibility_content_timeout_preference_summary"
+        android:title="@string/summary_placeholder"
+        settings:animation="@raw/gesture_swipe_up"
+        settings:preview="@drawable/gesture_swipe_up"
+        settings:controller="com.android.settings.widget.VideoPreferenceController"
         android:persistent="false" />
 
     <com.android.settings.widget.RadioButtonPreference
         android:key="accessibility_content_timeout_default"
         android:title="@string/accessibility_timeout_default"
+        settings:allowDividerAbove="true"
         android:persistent="false" />
 
     <com.android.settings.widget.RadioButtonPreference
@@ -59,5 +55,9 @@
         android:key="accessibility_content_timeout_2mins"
         android:title="@string/accessibility_timeout_2mins"
         android:persistent="false" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/accessibility_content_timeout_preference_summary"
+        android:selectable="false" />
 
 </PreferenceScreen>

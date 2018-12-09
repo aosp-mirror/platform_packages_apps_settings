@@ -236,6 +236,7 @@ public class SliceTester {
         assertKeywords(metadata, sliceData);
     }
 
+    // TODO(b/120592507): Clean up method of SliceTester
     public static void assertTitle(List<SliceItem> sliceItems, String title) {
         boolean hasTitle = false;
         for (SliceItem item : sliceItems) {
@@ -255,6 +256,7 @@ public class SliceTester {
         assertThat(hasTitle).isTrue();
     }
 
+    // TODO(b/120592507): Clean up method of SliceTester
     private static void assertKeywords(SliceMetadata metadata, SliceData data) {
         final List<String> keywords = metadata.getSliceKeywords();
         final Set<String> expectedKeywords = Arrays.stream(data.getKeywords().split(","))

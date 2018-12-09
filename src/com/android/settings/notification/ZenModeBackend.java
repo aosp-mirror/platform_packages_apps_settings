@@ -250,15 +250,17 @@ public class ZenModeBackend {
         }
     }
 
+    protected int getAlarmsTotalSilenceCallsMessagesSummary(int category) {
+        if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
+            return R.string.zen_mode_from_none_messages;
+        } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS){
+            return R.string.zen_mode_from_none_calls;
+        }
+        return 0;
+    }
+
     protected int getContactsSummary(int category) {
         int contactType = -1;
-
-        // SOURCE_NONE can be used when in total silence or alarms only
-        // (policy is based on user's preferences but the UI displayed is based on zenMode)
-        if (category == SOURCE_NONE) {
-            return R.string.zen_mode_from_none;
-        }
-
         if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
             if (isPriorityCategoryEnabled(category)) {
                 contactType = getPriorityMessageSenders();
@@ -273,12 +275,16 @@ public class ZenModeBackend {
             case NotificationManager.Policy.PRIORITY_SENDERS_ANY:
                 return R.string.zen_mode_from_anyone;
             case NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS:
-                return  R.string.zen_mode_from_contacts;
+                return R.string.zen_mode_from_contacts;
             case NotificationManager.Policy.PRIORITY_SENDERS_STARRED:
-                return  R.string.zen_mode_from_starred;
+                return R.string.zen_mode_from_starred;
             case SOURCE_NONE:
             default:
-                return R.string.zen_mode_from_none;
+                if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
+                    return R.string.zen_mode_from_none_messages;
+                } else {
+                    return R.string.zen_mode_from_none_calls;
+                }
         }
     }
 

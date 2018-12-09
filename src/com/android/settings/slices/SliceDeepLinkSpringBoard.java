@@ -24,7 +24,6 @@ import android.util.Log;
 import androidx.annotation.Keep;
 
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
-import com.android.settings.location.LocationSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -66,8 +65,6 @@ public class SliceDeepLinkSpringBoard extends Activity {
                     launchIntent = ZenModeSliceBuilder.getIntent(this /* context */);
                 } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                     launchIntent = BluetoothSliceBuilder.getIntent(this /* context */);
-                } else if (CustomSliceRegistry.LOCATION_SLICE_URI.equals(sliceUri)) {
-                    launchIntent = LocationSliceBuilder.getIntent(this /* context */);
                 } else {
                     final SlicesDatabaseAccessor slicesDatabaseAccessor =
                             new SlicesDatabaseAccessor(this /* context */);

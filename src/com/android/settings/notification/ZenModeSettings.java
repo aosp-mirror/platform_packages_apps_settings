@@ -145,7 +145,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                             || PRIORITY_CATEGORY_REPEAT_CALLERS == category, false);
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
-                return mContext.getString(R.string.zen_mode_no_exceptions);
+                return mContext.getString(R.string.zen_mode_from_none_calls);
             } else if (numCategories == 1) {
                 return mContext.getString(R.string.zen_mode_calls_summary_one,
                         enabledCategories.get(0));
@@ -156,34 +156,14 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             }
         }
 
-        String getMsgEventReminderSettingSummary(Policy policy) {
+        String getMessagesSettingSummary(Policy policy) {
             List<String> enabledCategories = getEnabledCategories(policy,
-                    category -> PRIORITY_CATEGORY_EVENTS == category
-                            || PRIORITY_CATEGORY_REMINDERS == category
-                            || PRIORITY_CATEGORY_MESSAGES == category, true);
+                    category -> PRIORITY_CATEGORY_MESSAGES == category, false);
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
-                return mContext.getString(R.string.zen_mode_no_exceptions);
-            } else if (numCategories == 1) {
-                return enabledCategories.get(0);
-            } else if (numCategories == 2) {
-                return mContext.getString(R.string.join_two_items, enabledCategories.get(0),
-                        enabledCategories.get(1));
-            } else if (numCategories == 3){
-                final List<String> summaries = new ArrayList<>();
-                summaries.add(enabledCategories.get(0));
-                summaries.add(enabledCategories.get(1));
-                summaries.add(enabledCategories.get(2));
-
-                return ListFormatter.getInstance().format(summaries);
+                return mContext.getString(R.string.zen_mode_from_none_messages);
             } else {
-                final List<String> summaries = new ArrayList<>();
-                summaries.add(enabledCategories.get(0));
-                summaries.add(enabledCategories.get(1));
-                summaries.add(enabledCategories.get(2));
-                summaries.add(mContext.getString(R.string.zen_mode_other_options));
-
-                return ListFormatter.getInstance().format(summaries);
+                return enabledCategories.get(0);
             }
         }
 
@@ -292,17 +272,11 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 }
             } else if (category == Policy.PRIORITY_CATEGORY_MESSAGES) {
                 if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
-                    if (isFirst) {
-                        return mContext.getString(R.string.zen_mode_all_messages);
-                    } else {
-                        return mContext.getString(R.string.zen_mode_all_messages_list);
-                    }
+                    return mContext.getString(R.string.zen_mode_from_anyone);
+                } else if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_CONTACTS){
+                    return mContext.getString(R.string.zen_mode_from_contacts);
                 } else {
-                    if (isFirst) {
-                        return mContext.getString(R.string.zen_mode_selected_messages);
-                    } else {
-                        return mContext.getString(R.string.zen_mode_selected_messages_list);
-                    }
+                    return mContext.getString(R.string.zen_mode_from_starred);
                 }
             } else if (category == Policy.PRIORITY_CATEGORY_EVENTS) {
                 if (isFirst) {

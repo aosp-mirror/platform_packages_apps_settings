@@ -670,7 +670,7 @@
     <!-- check box cellular data title [CHAR LIMIT=30] -->
     <string name="cellular_data_title">Mobile data</string>
     <!-- check box Calls title [CHAR LIMIT=30] -->
-    <string name="calls_title">Calls</string>
+    <string name="calls_title">Allow calls</string>
     <!-- check box SMS Messges title [CHAR LIMIT=30] -->
     <string name="sms_messages_title">SMS messages</string>
     <!-- check box cellular data summary [CHAR LIMIT=85] -->
@@ -2878,6 +2878,14 @@
     <string name="status_prl_version">PRL version</string>
     <!-- About phone screen, title for MEID for multi-sim devices -->
     <string name="meid_multi_sim">MEID (sim slot %1$d)</string>
+    <!-- The status text when both Wi-Fi scanning and Bluetooth scanning are on. [CHAR LIMIT=120] -->
+    <string name="scanning_status_text_wifi_on_ble_on">Both Wi\u2011Fi and Bluetooth are allowed to determine location</string>
+    <!-- The status text when Wi-Fi scanning is on and Bluetooth scanning are off. [CHAR LIMIT=120] -->
+    <string name="scanning_status_text_wifi_on_ble_off">Only Wi\u2011Fi is allowed to determine location</string>
+    <!-- The status text when Wi-Fi scanning is off and Bluetooth scanning are on. [CHAR LIMIT=120] -->
+    <string name="scanning_status_text_wifi_off_ble_on">Only Bluetooth is allowed to determine location</string>
+    <!-- The status text when both Wi-Fi scanning and Bluetooth scanning are off. [CHAR LIMIT=120] -->
+    <string name="scanning_status_text_wifi_off_ble_off">Neither Wi\u2011Fi nor Bluetooth is allowed to determine location</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
@@ -3612,8 +3620,8 @@
     <string name="location_high_battery_use">High battery use</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests low battery use-->
     <string name="location_low_battery_use">Low battery use</string>
-    <!-- [CHAR LIMIT=30] Wireless background scanning settings screen, screen title -->
-    <string name="location_scanning_screen_title">Scanning</string>
+    <!-- [CHAR LIMIT=60] Wireless background scanning settings screen, screen title -->
+    <string name="location_scanning_screen_title">Wi\u2011Fi and Bluetooth scanning</string>
     <!-- [CHAR LIMIT=130] Preference title for Wi-Fi always scanning -->
     <string name="location_scanning_wifi_always_scanning_title">Wi\u2011Fi scanning</string>
     <!-- Preference description text for Wi-Fi always scanning -->
@@ -5406,6 +5414,12 @@
     <!-- Battery saver: Label for preference to turn on battery saver automatically when battery is low [CHAR_LIMIT=40] -->
     <string name="battery_saver_auto_title">Turn on automatically</string>
 
+    <!-- Battery saver: Label for preference to indicate there is no battery saver schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_no_schedule">No schedule</string>
+
+    <!-- Battery saver: Title for battery saver schedule screen [CHAR_LIMIT=40] -->
+    <string name="battery_saver_schedule_settings_title">Set a schedule</string>
+
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title">At <xliff:g id="percent">%1$s</xliff:g></string>
 
@@ -7083,8 +7097,8 @@
 
     <!-- Sound: Summary for the Do not Disturb option when at least one automatic rules turned on. [CHAR LIMIT=NONE]-->
     <plurals name="zen_mode_settings_summary_on">
-        <item quantity="one">1 rule</item>
-        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> rules</item>
+        <item quantity="one">1 enabled</item>
+        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> enabled</item>
     </plurals>
 
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
@@ -7124,10 +7138,10 @@
     <string name="zen_mode_schedule_delete">Delete</string>
 
     <!--  Do not disturb: Title for the zen mode automatic rules page in settings. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automation_settings_page_title">Do Not Disturb</string>
+    <string name="zen_mode_automation_settings_page_title">Schedules</string>
 
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automatic_rule_settings_page_title">Automatic rule</string>
+    <string name="zen_mode_automatic_rule_settings_page_title">Schedule</string>
 
     <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_category_title">Schedule</string>
@@ -7142,7 +7156,7 @@
     <string name="zen_mode_schedule_title">Schedule</string>
 
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
-    <string name="zen_mode_use_automatic_rule">Use rule</string>
+    <string name="zen_mode_use_automatic_rule">Use schedule</string>
 
     <!--  Do not disturb: Zen mode option: Important interruptions [CHAR LIMIT=60] -->
     <string name="zen_mode_option_important_interruptions">Priority only</string>
@@ -7166,7 +7180,7 @@
     <string name="zen_mode_settings_category">When Do Not Disturb is on</string>
 
     <!-- Do not disturb: restrict notifications title [CHAR LIMIT=80] -->
-    <string name="zen_mode_restrict_notifications_title">Notification restrictions</string>
+    <string name="zen_mode_restrict_notifications_title">Restrict notifications</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_mute">No sound from notifications</string>
     <!-- Do not disturb:Mute notifications summary [CHAR LIMIT=NONE] -->
@@ -7272,7 +7286,7 @@
     <string name="zen_mode_sound_summary_on_with_info">On / <xliff:g name="dnd_summary" example="No sound except alarms and media">%1$s</xliff:g></string>
 
     <!-- Sound settings screen, summary format of do not disturb when off with extra information. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_sound_summary_off_with_info">Off / <xliff:g name="dnd_summary" example="1 rule can turn on automatically">%1$s</xliff:g></string>
+    <string name="zen_mode_sound_summary_off_with_info">Off / <xliff:g name="dnd_summary" example="1 schedule can turn on automatically">%1$s</xliff:g></string>
 
     <!-- Sound settings screen, summary format of do not disturb when off with no extra information. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_sound_summary_off">Off</string>
@@ -7297,12 +7311,12 @@
 
     <!-- Summary for the Sound Do not Disturb option when at least one automatic rules is enabled. [CHAR LIMIT=NONE]-->
     <plurals name="zen_mode_sound_summary_summary_off_info">
-        <item quantity="one">1 rule can turn on automatically</item>
-        <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
+        <item quantity="one">1 schedule can turn on automatically</item>
+        <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> schedules can turn on automatically</item>
     </plurals>
 
     <!-- Do not disturb settings, category header [CHAR LIMIT=120]-->
-    <string name="zen_category_behavior">Mute phone, but allow exceptions</string>
+    <string name="zen_category_behavior">Mute device but allow exceptions</string>
     <!-- Do not disturb settings, exceptions to dnd title [CHAR LIMIT=100]-->
     <string name="zen_category_exceptions">Exceptions</string>
     <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
@@ -7753,28 +7767,28 @@
     <string name="zen_mode_rule_rename_button">Rename</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule name option and edit dialog title -->
-    <string name="zen_mode_rule_name">Rule name</string>
+    <string name="zen_mode_rule_name">Schedule name</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule name hint text -->
-    <string name="zen_mode_rule_name_hint">Enter rule name</string>
+    <string name="zen_mode_rule_name_hint">Enter schedule name</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Warning text for invalid zen rule names -->
-    <string name="zen_mode_rule_name_warning">Rule name already in use</string>
+    <string name="zen_mode_rule_name_warning">Schedule name already in use</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add another automatic zen rule option name-->
     <string name="zen_mode_add_rule">Add more</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add event-based rule, set rule name title -->
-    <string name="zen_mode_add_event_rule">Add event rule</string>
+    <string name="zen_mode_add_event_rule">Add event schedule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add time-based rule, set rule name title -->
-    <string name="zen_mode_add_time_rule">Add time rule</string>
+    <string name="zen_mode_add_time_rule">Add time schedule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule menu option name -->
-    <string name="zen_mode_delete_rule">Delete rule</string>
+    <string name="zen_mode_delete_rule">Delete schedule</string>
 
     <!-- [CHAR LIMIT=60] Zen mode settings: Choose rule type dialog title -->
-    <string name="zen_mode_choose_rule_type">Choose rule type</string>
+    <string name="zen_mode_choose_rule_type">Choose schedule type</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule dialog confirmation message -->
     <string name="zen_mode_delete_rule_confirmation">Delete \u201c<xliff:g id="rule" example="Weekends">%1$s</xliff:g>\u201d rule?</string>
@@ -7855,7 +7869,7 @@
     <string name="zen_mode_schedule_alarm_title">Alarm can override end time</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Downtime rule setting -->
-    <string name="zen_mode_schedule_alarm_summary">Stop at the end time or next alarm, whichever comes first</string>
+    <string name="zen_mode_schedule_alarm_summary">Schedule turns off when an alarm rings</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Title for preference to allow custom behavior for the dnd schedule -->
     <string name="zen_mode_custom_behavior_title">Do Not Disturb behavior</string>
@@ -7876,10 +7890,10 @@
     <string name="summary_range_verbal_combination"><xliff:g id="start" example="Sun">%1$s</xliff:g> to <xliff:g id="end" example="Thu">%2$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
-    <string name="zen_mode_calls">Calls</string>
+    <string name="zen_mode_calls">Allow calls</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow calls toggle title -->
-    <string name="zen_mode_calls_title">Allow calls</string>
+    <string name="zen_mode_calls_title">Calls</string>
 
     <!-- [CHAR LIMIT=20] Zen mode settings: Calls screen footer -->
     <string name="zen_mode_calls_footer">When Do Not Disturb is on, incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
@@ -7894,25 +7908,13 @@
     </plurals>
 
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
-    <string name="zen_mode_messages">Messages</string>
+    <string name="zen_mode_messages">Allow text messages</string>
 
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
     <string name="zen_mode_messages_footer">When Do Not Disturb is on, incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages toggle title -->
-    <string name="zen_mode_messages_title">Allow messages</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: All messages summary -->
-    <string name="zen_mode_all_messages">Messages</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Messages option (ie: text messages) -->
-    <string name="zen_mode_all_messages_list">messages</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Selected messages summary -->
-    <string name="zen_mode_selected_messages">Some messages</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Selected messages (ie: some text messages are allowed to bypass dnd) -->
-    <string name="zen_mode_selected_messages_list">some messages</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
+    <string name="zen_mode_messages_title">Text messages</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">From anyone</string>
@@ -7932,8 +7934,14 @@
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_repeat_only">From repeat callers only</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: None -->
+    <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
     <string name="zen_mode_from_none">None</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
+    <string name="zen_mode_from_none_calls">Don\u2019t allow any calls</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Messages option value: No messages allowed -->
+    <string name="zen_mode_from_none_messages">Don\u2019t allow any messages</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
     <string name="zen_mode_alarms">Allow alarms</string>
@@ -7942,7 +7950,7 @@
     <string name="zen_mode_alarms_list">alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
-    <string name="zen_mode_media">Allow media</string>
+    <string name="zen_mode_media">Allow media sounds</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
@@ -7966,7 +7974,7 @@
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
-    <string name="zen_mode_bypassing_apps_title">Overrides Do Not Disturb</string>
+    <string name="zen_mode_bypassing_apps_title">App exceptions</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow apps to bypass DND -->
     <plurals name="zen_mode_bypassing_apps_subtext">
@@ -7997,10 +8005,10 @@
     <string name="zen_mode_repeat_callers_title">Allow repeat callers</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_one">From <xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
+    <string name="zen_mode_calls_summary_one">Allow from <xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_two">From <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
+    <string name="zen_mode_calls_summary_two">Allow from <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
     <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
@@ -8976,7 +8984,7 @@
     <string name="condition_cellular_title">Mobile data is off</string>
 
     <!-- Summary of condition that cellular data is off [CHAR LIMIT=NONE] -->
-    <string name="condition_cellular_summary">Internet is available only via Wi-Fi</string>
+    <string name="condition_cellular_summary">Internet only available via Wi\u2011Fi</string>
 
     <!-- Title of condition that background data is off [CHAR LIMIT=30] -->
     <string name="condition_bg_data_title">Data Saver</string>
@@ -8988,7 +8996,7 @@
     <string name="condition_work_title">Work profile is off</string>
 
     <!-- Summary of condition that work mode is off [CHAR LIMIT=NONE] -->
-    <string name="condition_work_summary">Apps, background sync, and other features related to your work profile are turned off.</string>
+    <string name="condition_work_summary">For apps &amp; notifications</string>
 
     <!-- Action label on device muted card - clicking action will turn on ringtone sound [CHAR LIMIT=50] -->
     <string name="condition_device_muted_action_turn_on_sound">Turn on sound</string>

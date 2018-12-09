@@ -42,7 +42,7 @@ import java.util.List;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class FlashlightSliceBuilderTest {
+public class FlashlightSliceTest {
 
     private Context mContext;
 
@@ -58,7 +58,7 @@ public class FlashlightSliceBuilderTest {
     public void getFlashlightSlice_correctData() {
         Settings.Secure.putInt(
                 mContext.getContentResolver(), Settings.Secure.FLASHLIGHT_AVAILABLE, 1);
-        final Slice slice = FlashlightSliceBuilder.getSlice(mContext);
+        final Slice slice = new FlashlightSlice(mContext).getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
 
         final List<SliceAction> toggles = metadata.getToggles();

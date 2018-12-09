@@ -41,6 +41,7 @@ import androidx.slice.widget.SliceLiveData;
 import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
+import com.android.settings.homepage.contextualcards.CardContentProvider;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardRenderer;
@@ -60,7 +61,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
     private static final String TAG = "SliceCardRenderer";
 
     @VisibleForTesting
-    final Map<String, LiveData<Slice>> mSliceLiveDataMap;
+    final Map<Uri, LiveData<Slice>> mSliceLiveDataMap;
     @VisibleForTesting
     final Set<SliceViewHolder> mFlippedCardSet;
 
@@ -94,9 +95,9 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
     public void bindView(RecyclerView.ViewHolder holder, ContextualCard card) {
         final SliceViewHolder cardHolder = (SliceViewHolder) holder;
         final Uri uri = card.getSliceUri();
+        //TODO(b/120629936): Take this out once blank card issue is fixed.
+        Log.d(TAG, "bindView - uri = " + uri);
 
-        //TODO(b/116063073): The URI check should be done earlier when we are performing final
-        // filtering after having the full list.
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
             Log.w(TAG, "Invalid uri, skipping slice: " + uri);
             return;
@@ -106,11 +107,11 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         cardHolder.sliceView.setTag(uri);
         //TODO(b/114009676): We will soon have a field to decide what slice mode we should set.
         cardHolder.sliceView.setMode(SliceView.MODE_LARGE);
-        LiveData<Slice> sliceLiveData = mSliceLiveDataMap.get(uri.toString());
+        LiveData<Slice> sliceLiveData = mSliceLiveDataMap.get(uri);
 
         if (sliceLiveData == null) {
             sliceLiveData = SliceLiveData.fromUri(mContext, uri);
-            mSliceLiveDataMap.put(uri.toString(), sliceLiveData);
+            mSliceLiveDataMap.put(uri, sliceLiveData);
         }
         mCardSet.add(card);
 
@@ -118,6 +119,11 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         sliceLiveData.observe(mLifecycleOwner, slice -> {
             if (slice == null) {
                 Log.w(TAG, "Slice is null");
+                mContext.getContentResolver().notifyChange(CardContentProvider.URI, null);
+                return;
+            } else {
+                //TODO(b/120629936): Take this out once blank card issue is fixed.
+                Log.d(TAG, "Slice callback - uri = " + slice.getUri());
             }
             cardHolder.sliceView.setSlice(slice);
         });
@@ -146,6 +152,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
             mControllerRendererPool.getController(mContext, card.getCardType()).onDismissed(card);
             cardHolder.resetCard();
             mFlippedCardSet.remove(cardHolder);
+            mSliceLiveDataMap.get(card.getSliceUri()).removeObservers(mLifecycleOwner);
         });
     }
 

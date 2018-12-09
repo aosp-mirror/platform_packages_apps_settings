@@ -21,13 +21,20 @@
     android:title="@string/network_dashboard_title"
     settings:initialExpandedChildrenCount="5">
 
+    <PreferenceCategory
+        android:key="multi_network_header"
+        settings:allowDividerBelow="true"
+        android:order="-40"
+        settings:controller="com.android.settings.network.MultiNetworkHeaderController"/>
+
     <com.android.settings.widget.MasterSwitchPreference
         android:fragment="com.android.settings.wifi.WifiSettings"
         android:key="toggle_wifi"
         android:title="@string/wifi_settings"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_settings_wireless"
-        android:order="-30">
+        android:order="-30"
+        settings:allowDividerAbove="true">
         <intent
             android:action="android.settings.WIFI_SETTINGS"
             android:targetClass="Settings$WifiSettingsActivity" />
@@ -44,16 +51,15 @@
         settings:useAdminDisabledSummary="true">
     </com.android.settingslib.RestrictedPreference>
 
-    <com.android.settingslib.RestrictedPreference
-        android:fragment="com.android.settings.TetherSettings"
-        android:key="tether_settings"
-        android:title="@string/tether_settings_title_all"
-        android:icon="@drawable/ic_wifi_tethering"
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="toggle_airplane"
+        android:title="@string/airplane_mode"
+        android:icon="@drawable/ic_airplanemode_active"
+        android:disableDependentsState="true"
         android:order="-5"
-        android:summary="@string/summary_placeholder"
-        settings:keywords="@string/keywords_hotspot_tethering"
-        settings:userRestriction="no_config_tethering"
-        settings:useAdminDisabledSummary="true" />
+        settings:controller="com.android.settings.network.AirplaneModePreferenceController"
+        settings:platform_slice="true"
+        settings:userRestriction="no_airplane_mode"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="manage_mobile_plan"
@@ -63,20 +69,16 @@
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true" />
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="toggle_airplane"
-        android:title="@string/airplane_mode"
-        android:icon="@drawable/ic_airplanemode_active"
-        android:disableDependentsState="true"
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.TetherSettings"
+        android:key="tether_settings"
+        android:title="@string/tether_settings_title_all"
+        android:icon="@drawable/ic_wifi_tethering"
         android:order="5"
-        settings:controller="com.android.settings.network.AirplaneModePreferenceController"
-        settings:platform_slice="true"
-        settings:userRestriction="no_airplane_mode"/>
-
-    <Preference
-        android:fragment="com.android.settings.ProxySelector"
-        android:key="proxy_settings"
-        android:title="@string/proxy_settings_title" />
+        android:summary="@string/summary_placeholder"
+        settings:keywords="@string/keywords_hotspot_tethering"
+        settings:userRestriction="no_config_tethering"
+        settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.vpn2.VpnSettings"

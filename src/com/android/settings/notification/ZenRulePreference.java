@@ -31,6 +31,7 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
@@ -122,23 +123,30 @@ public class ZenRulePreference extends TwoTargetPreference {
         return mChecked;
     }
 
-    public void setChecked(boolean checked) {
-        mChecked = checked;
-        if (mCheckBox != null) {
-            mCheckBox.setChecked(checked);
-        }
-    }
-
-    public void setName(String name) {
-        if (!Objects.equals(mName, name)) {
-            mName = name;
+    public void updatePreference(AutomaticZenRule rule) {
+        if (!mRule.getName().equals(rule.getName())) {
+            mName = rule.getName();
             setTitle(mName);
+            mRule.setName(mName.toString());
+        }
+
+        if (mRule.isEnabled() != rule.isEnabled()) {
+            mRule.setEnabled(rule.isEnabled());
+            setChecked(mRule.isEnabled());
+            setSummary(computeRuleSummary(mRule));
         }
     }
 
     @Override
     public void onClick() {
         mOnCheckBoxClickListener.onClick(null);
+    }
+
+    private void setChecked(boolean checked) {
+        mChecked = checked;
+        if (mCheckBox != null) {
+            mCheckBox.setChecked(checked);
+        }
     }
 
     private View.OnClickListener mOnCheckBoxClickListener = new View.OnClickListener() {
@@ -159,7 +167,7 @@ public class ZenRulePreference extends TwoTargetPreference {
 
         try {
             ApplicationInfo info = mPm.getApplicationInfo(rule.getOwner().getPackageName(), 0);
-            setSummary(computeRuleSummary(rule, mIsSystemRule, info.loadLabel(mPm)));
+            setSummary(computeRuleSummary(rule));
         } catch (PackageManager.NameNotFoundException e) {
             appExists = false;
             return;
@@ -179,8 +187,7 @@ public class ZenRulePreference extends TwoTargetPreference {
         setKey(mId);
     }
 
-    private String computeRuleSummary(AutomaticZenRule rule, boolean isSystemRule,
-            CharSequence providerLabel) {
+    private String computeRuleSummary(AutomaticZenRule rule) {
         return (rule == null || !rule.isEnabled())
                 ? mContext.getResources().getString(R.string.switch_off_text)
                 : mContext.getResources().getString(R.string.switch_on_text);

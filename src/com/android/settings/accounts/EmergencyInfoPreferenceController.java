@@ -36,8 +36,9 @@ import java.util.List;
 public class EmergencyInfoPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
+    public static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENCY_INFO";
+
     private static final String KEY_EMERGENCY_INFO = "emergency_info";
-    private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENCY_INFO";
     private static final String PACKAGE_NAME_EMERGENCY = "com.android.emergency";
 
     public EmergencyInfoPreferenceController(Context context) {
@@ -57,7 +58,7 @@ public class EmergencyInfoPreferenceController extends AbstractPreferenceControl
 
     public void updateState(Preference preference) {
         UserInfo info = mContext.getSystemService(UserManager.class).getUserInfo(
-            UserHandle.myUserId());
+                UserHandle.myUserId());
         preference.setSummary(mContext.getString(R.string.emergency_info_summary, info.name));
     }
 
