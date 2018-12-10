@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -117,6 +118,11 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
     protected abstract String getVibrationIntensitySetting();
 
     /**
+     * Get the setting string of the vibration enabledness setting this preference is dealing with.
+     */
+    protected abstract String getVibrationEnabledSetting();
+
+    /**
      * Get the default intensity for the desired setting.
      */
     protected abstract int getDefaultVibrationIntensity();
@@ -154,8 +160,13 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
 
     @Override
     protected String getDefaultKey() {
-        final int vibrationIntensity = Settings.System.getInt(getContext().getContentResolver(),
+        int vibrationIntensity = Settings.System.getInt(getContext().getContentResolver(),
                 getVibrationIntensitySetting(), getDefaultVibrationIntensity());
+        final boolean vibrationEnabled = Settings.System.getInt(getContext().getContentResolver(),
+                getVibrationEnabledSetting(), 1) == 1;
+        if (!vibrationEnabled) {
+            vibrationIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
+        }
         for (VibrationIntensityCandidateInfo candidate : mCandidates.values()) {
             final boolean matchesIntensity = candidate.getIntensity() == vibrationIntensity;
             final boolean matchesOn = candidate.getKey().equals(KEY_INTENSITY_ON)
@@ -174,8 +185,11 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
             Log.e(TAG, "Tried to set unknown intensity (key=" + key + ")!");
             return false;
         }
-        Settings.System.putInt(getContext().getContentResolver(),
-                getVibrationIntensitySetting(), candidate.getIntensity());
+        if (candidate.getIntensity() != Vibrator.VIBRATION_INTENSITY_OFF ||
+                TextUtils.isEmpty(getVibrationEnabledSetting())) {
+            Settings.System.putInt(getContext().getContentResolver(),
+                    getVibrationIntensitySetting(), candidate.getIntensity());
+        }
         onVibrationIntensitySelected(candidate.getIntensity());
         return true;
     }

@@ -45,6 +45,11 @@ public class NotificationVibrationPreferenceFragment extends VibrationPreference
     }
 
     @Override
+    protected String getVibrationEnabledSetting() {
+        return "";
+    }
+
+    @Override
     protected int getPreviewVibrationAudioAttributesUsage() {
         return AudioAttributes.USAGE_NOTIFICATION;
     }

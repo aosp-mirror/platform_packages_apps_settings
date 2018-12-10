@@ -4693,7 +4693,9 @@
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
-    <string name="accessibility_notification_vibration_title">Ring &amp; notification vibration</string>
+    <string name="accessibility_notification_vibration_title">Notification vibration</string>
+    <!-- Title for accessibility preference for configuring ring vibrations. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_ring_vibration_title">Ring vibration</string>
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch vibration</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
@@ -4763,8 +4765,8 @@
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
     </plurals>
 
-    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=32] -->
-    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%2$s</xliff:g></string>
+    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=50] -->
+    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, notification <xliff:g id="summary_notification" example="Low">%2$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%3$s</xliff:g></string>
 
     <!-- Summary for vibration settings preference when ring & notification are set to off-->
     <string name="accessibility_vibration_summary_off">Ring &amp; notification set to off</string>
@@ -7058,8 +7060,10 @@
     <!-- List of synonyms for touch vibration setting (where you get a haptic response for touching things on the screen), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_touch_vibration">haptics, vibrate, screen, sensitivity</string>
 
-    <!-- List of synonyms for ring and notification vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity</string>
+    <!-- List of synonyms for ring vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity, ring</string>
+    <!-- List of synonyms for notification vibration setting (changes whether your phone vibrates when it shows a notification), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 

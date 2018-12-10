@@ -25,15 +25,15 @@ import com.android.settings.R;
 /**
  * Fragment for picking accessibility shortcut service
  */
-public class TouchVibrationPreferenceFragment extends VibrationPreferenceFragment {
+public class RingVibrationPreferenceFragment extends VibrationPreferenceFragment {
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_VIBRATION_TOUCH;
+        return MetricsEvent.ACCESSIBILITY_VIBRATION_RING;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_touch_vibration_settings;
+        return R.xml.accessibility_ring_vibration_settings;
     }
 
     /**
@@ -41,22 +41,22 @@ public class TouchVibrationPreferenceFragment extends VibrationPreferenceFragmen
      */
     @Override
     protected String getVibrationIntensitySetting() {
-        return Settings.System.HAPTIC_FEEDBACK_INTENSITY;
+        return Settings.System.RING_VIBRATION_INTENSITY;
     }
 
     @Override
     protected String getVibrationEnabledSetting() {
-        return Settings.System.HAPTIC_FEEDBACK_ENABLED;
+        return Settings.System.VIBRATE_WHEN_RINGING;
+    }
+
+    @Override
+    protected int getPreviewVibrationAudioAttributesUsage() {
+        return AudioAttributes.USAGE_NOTIFICATION;
     }
 
     @Override
     protected int getDefaultVibrationIntensity() {
         Vibrator vibrator = getContext().getSystemService(Vibrator.class);
-        return vibrator.getDefaultHapticFeedbackIntensity();
-    }
-
-    @Override
-    protected int getPreviewVibrationAudioAttributesUsage() {
-        return AudioAttributes.USAGE_ASSISTANCE_SONIFICATION;
+        return vibrator.getDefaultRingVibrationIntensity();
     }
 }
