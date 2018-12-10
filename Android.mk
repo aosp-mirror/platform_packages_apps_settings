@@ -15,6 +15,7 @@ LOCAL_PACKAGE_NAME := Settings
 LOCAL_PRIVATE_PLATFORM_APIS := true
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_REQUIRED_MODULES := privapp_whitelist_com.android.settings
 LOCAL_MODULE_TAGS := optional
 LOCAL_USE_AAPT2 := true
 
