@@ -53,14 +53,17 @@ public class WifiSliceTest {
 
     private Context mContext;
 
+    private WifiManager mWifiManager;
     private WifiSlice mWifiSlice;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mWifiManager = mContext.getSystemService(WifiManager.class);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
+        mWifiManager.setWifiEnabled(true);
 
         mWifiSlice = new WifiSlice(mContext);
     }
@@ -83,13 +86,30 @@ public class WifiSliceTest {
     }
 
     @Test
-    public void getWifiSlice_noAp_shouldReturnPlaceholder() {
+    public void getWifiSlice_wifiOff_shouldReturnSingleRow() {
+        mWifiManager.setWifiEnabled(false);
+
         final Slice wifiSlice = mWifiSlice.getSlice();
 
-        int rows = SliceQuery.findAll(wifiSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+        final int rows = SliceQuery.findAll(wifiSlice, FORMAT_SLICE, HINT_LIST_ITEM,
                 null /* nonHints */).size();
+
+        // Title row
+        assertThat(rows).isEqualTo(1);
+    }
+
+    @Test
+    public void getWifiSlice_noAp_shouldReturnLoadingRow() {
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        final int rows = SliceQuery.findAll(wifiSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null /* nonHints */).size();
+        final List<SliceItem> sliceItems = wifiSlice.getItems();
+
         // All AP rows + title row
         assertThat(rows).isEqualTo(DEFAULT_EXPANDED_ROW_COUNT + 1);
+        // Has scanning text
+        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.wifi_empty_list_wifi_on));
     }
 
     @Test
