@@ -21,7 +21,7 @@ import android.content.Context;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.setupdesign.DividerItemDecoration;
+import com.android.setupwizardlib.DividerItemDecoration;
 
 public class SettingsDividerItemDecoration extends DividerItemDecoration {
 
