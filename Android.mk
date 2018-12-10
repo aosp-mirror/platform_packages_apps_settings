@@ -30,8 +30,6 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.preference_preference \
     androidx.recyclerview_recyclerview \
     com.google.android.material_material \
-    setupcompat \
-    setupdesign
 
 LOCAL_JAVA_LIBRARIES := \
     telephony-common \

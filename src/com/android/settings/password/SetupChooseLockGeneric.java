@@ -38,7 +38,7 @@ import com.android.settings.SetupEncryptionInterstitial;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.utils.SettingsDividerItemDecoration;
-import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.android.setupwizardlib.GlifPreferenceLayout;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure
