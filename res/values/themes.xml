@@ -58,6 +58,9 @@
         <!-- TODO(118444000): Remove colorPrimary and colorPrimaryVariant -->
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
         <item name="colorPrimaryVariant">@android:color/white</item>
+
+        <!-- For slice view in settings -->
+        <item name="sliceViewStyle">@style/Widget.SliceView.Settings</item>
     </style>
 
     <!-- Variant of the settings theme with no action bar. -->
