@@ -107,12 +107,12 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                 }
             }
         }
-        return getFinalDisplayableCards(result);
+        return getDisplayableCards(result);
     }
 
     // Get final displayed cards and log what cards will be displayed/hidden
     @VisibleForTesting
-    List<ContextualCard> getFinalDisplayableCards(List<ContextualCard> candidates) {
+    List<ContextualCard> getDisplayableCards(List<ContextualCard> candidates) {
         final List<ContextualCard> eligibleCards = filterEligibleCards(candidates);
         final List<ContextualCard> visibleCards = new ArrayList<>();
         final List<ContextualCard> hiddenCards = new ArrayList<>();

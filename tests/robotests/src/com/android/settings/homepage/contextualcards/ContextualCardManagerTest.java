@@ -32,6 +32,8 @@ import android.util.ArrayMap;
 import com.android.settings.homepage.contextualcards.conditional.ConditionFooterContextualCard;
 import com.android.settings.homepage.contextualcards.conditional.ConditionHeaderContextualCard;
 import com.android.settings.homepage.contextualcards.conditional.ConditionalContextualCard;
+import com.android.settings.intelligence.ContextualCardProto;
+import com.android.settings.slices.CustomSliceRegistry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -203,11 +205,180 @@ public class ContextualCardManagerTest {
         assertThat(actualCards).containsExactlyElementsIn(expectedCards);
     }
 
+
+    @Test
+    public void assignCardWidth_noSuggestionCards_shouldNotHaveHalfCards() {
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE
+        );
+        final List<ContextualCard> noSuggestionCards = buildCategoriedCards(getContextualCardList(),
+                categories);
+
+        final List<ContextualCard> result = mManager.assignCardWidth(noSuggestionCards);
+
+        assertThat(result).hasSize(5);
+        for (ContextualCard card : result) {
+            assertThat(card.isHalfWidth()).isFalse();
+        }
+    }
+
+    @Test
+    public void assignCardWidth_oneSuggestionCards_shouldNotHaveHalfCards() {
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
+        );
+        final List<ContextualCard> oneSuggestionCards = buildCategoriedCards(
+                getContextualCardList(), categories);
+
+        final List<ContextualCard> result = mManager.assignCardWidth(oneSuggestionCards);
+
+        assertThat(result).hasSize(5);
+        for (ContextualCard card : result) {
+            assertThat(card.isHalfWidth()).isFalse();
+        }
+    }
+
+    @Test
+    public void assignCardWidth_twoConsecutiveSuggestionCards_shouldHaveTwoHalfCards() {
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE
+        );
+        final List<ContextualCard> twoConsecutiveSuggestionCards = buildCategoriedCards(
+                getContextualCardList(), categories);
+        final List<Boolean> expectedValues = Arrays.asList(false, false, true, true, false);
+
+        final List<ContextualCard> result = mManager.assignCardWidth(
+                twoConsecutiveSuggestionCards);
+
+        assertThat(result).hasSize(5);
+        for (int i = 0; i < result.size(); i++) {
+            assertThat(result.get(i).isHalfWidth()).isEqualTo(expectedValues.get(i));
+        }
+    }
+
+    @Test
+    public void assignCardWidth_twoNonConsecutiveSuggestionCards_shouldNotHaveHalfCards() {
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
+        );
+        final List<ContextualCard> twoNonConsecutiveSuggestionCards = buildCategoriedCards(
+                getContextualCardList(), categories);
+
+        final List<ContextualCard> result = mManager.assignCardWidth(
+                twoNonConsecutiveSuggestionCards);
+
+        assertThat(result).hasSize(5);
+        for (ContextualCard card : result) {
+            assertThat(card.isHalfWidth()).isFalse();
+        }
+    }
+
+    @Test
+    public void assignCardWidth_threeConsecutiveSuggestionCards_shouldHaveTwoHalfCards() {
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE
+        );
+        final List<ContextualCard> threeConsecutiveSuggestionCards = buildCategoriedCards(
+                getContextualCardList(), categories);
+        final List<Boolean> expectedValues = Arrays.asList(false, true, true, false, false);
+
+        final List<ContextualCard> result = mManager.assignCardWidth(
+                threeConsecutiveSuggestionCards);
+
+        assertThat(result).hasSize(5);
+        for (int i = 0; i < result.size(); i++) {
+            assertThat(result.get(i).isHalfWidth()).isEqualTo(expectedValues.get(i));
+        }
+    }
+
+    @Test
+    public void assignCardWidth_fourConsecutiveSuggestionCards_shouldHaveFourHalfCards() {
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
+        );
+        final List<ContextualCard> fourConsecutiveSuggestionCards = buildCategoriedCards(
+                getContextualCardList(), categories);
+        final List<Boolean> expectedValues = Arrays.asList(false, true, true, true, true);
+
+        final List<ContextualCard> result = mManager.assignCardWidth(
+                fourConsecutiveSuggestionCards);
+
+        assertThat(result).hasSize(5);
+        for (int i = 0; i < result.size(); i++) {
+            assertThat(result.get(i).isHalfWidth()).isEqualTo(expectedValues.get(i));
+        }
+    }
+
     private ContextualCard buildContextualCard(String sliceUri) {
         return new ContextualCard.Builder()
                 .setName(TEST_SLICE_NAME)
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(sliceUri))
                 .build();
+    }
+
+    private List<ContextualCard> buildCategoriedCards(List<ContextualCard> cards,
+            List<Integer> categories) {
+        final List<ContextualCard> result = new ArrayList<>();
+        for (int i = 0; i < cards.size(); i++) {
+            result.add(cards.get(i).mutate().setCategory(categories.get(i)).build());
+        }
+        return result;
+    }
+
+    private List<ContextualCard> getContextualCardList() {
+        final List<ContextualCard> cards = new ArrayList<>();
+        cards.add(new ContextualCard.Builder()
+                .setName("test_wifi")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI)
+                .build());
+        cards.add(new ContextualCard.Builder()
+                .setName("test_flashlight")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(
+                        Uri.parse("content://com.android.settings.test.slices/action/flashlight"))
+                .build());
+        cards.add(new ContextualCard.Builder()
+                .setName("test_connected")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI)
+                .build());
+        cards.add(new ContextualCard.Builder()
+                .setName("test_gesture")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(Uri.parse(
+                        "content://com.android.settings.test.slices/action/gesture_pick_up"))
+                .build());
+        cards.add(new ContextualCard.Builder()
+                .setName("test_battery")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(CustomSliceRegistry.BATTERY_INFO_SLICE_URI)
+                .build());
+        return cards;
     }
 }
