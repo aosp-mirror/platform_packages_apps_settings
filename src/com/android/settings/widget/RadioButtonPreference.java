@@ -44,6 +44,8 @@ public class RadioButtonPreference extends CheckBoxPreference {
     }
 
     private OnClickListener mListener = null;
+    private View appendix;
+    private int appendixVisibility = -1;
 
     public RadioButtonPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -81,6 +83,10 @@ public class RadioButtonPreference extends CheckBoxPreference {
         if (summaryContainer != null) {
             summaryContainer.setVisibility(
                 TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);
+            appendix = view.findViewById(R.id.appendix);
+            if (appendix != null && appendixVisibility != -1) {
+                appendix.setVisibility(appendixVisibility);
+            }
         }
 
         TextView title = (TextView) view.findViewById(android.R.id.title);
@@ -88,5 +94,12 @@ public class RadioButtonPreference extends CheckBoxPreference {
             title.setSingleLine(false);
             title.setMaxLines(3);
         }
+    }
+
+    public void setAppendixVisibility(int visibility) {
+        if (appendix != null) {
+            appendix.setVisibility(visibility);
+        }
+        appendixVisibility = visibility;
     }
 }

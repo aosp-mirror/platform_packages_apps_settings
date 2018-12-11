@@ -5422,11 +5422,23 @@
     <!-- Battery saver: Label for preference to indicate there is no battery saver schedule [CHAR_LIMIT=40] -->
     <string name="battery_saver_auto_no_schedule">No schedule</string>
 
+    <!-- Battery saver: Label for preference to indicate there is a routine based schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_routine">Based on your routine</string>
+
+    <!-- Battery saver: Label for preference to indicate there is a percentage based schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_percentage">Based on percentage</string>
+
+    <!-- Battery saver: Summary for preference to describe what is meant by a routine based schedule [CHAR_LIMIT=NONE] -->
+    <string name="battery_saver_auto_routine_summary">Battery Saver turns on if your battery is likely to run out before your next typical charge</string>
+
+    <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_percentage_summary">Will turn on at <xliff:g id="percent" example="52%">%1$s</xliff:g></string>
+
     <!-- Battery saver: Title for battery saver schedule screen [CHAR_LIMIT=40] -->
     <string name="battery_saver_schedule_settings_title">Set a schedule</string>
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
-    <string name="battery_saver_seekbar_title">At <xliff:g id="percent">%1$s</xliff:g></string>
+    <string name="battery_saver_seekbar_title"><xliff:g id="percent">%1$s</xliff:g></string>
 
     <!-- Battery saver: Placeholder label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title_placeholder">Turn on</string>
