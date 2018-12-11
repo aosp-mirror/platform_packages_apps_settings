@@ -199,10 +199,12 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
                 getSettingsLifecycle());
+        mActionButtons = new ZenRuleButtonsPreferenceController(context, this,
+                getSettingsLifecycle());
         mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this,
                 getSettingsLifecycle());
-
         controllers.add(mHeader);
+        controllers.add(mActionButtons);
         controllers.add(mSwitch);
         return controllers;
     }
