@@ -4830,11 +4830,12 @@
         example="TalkBack">%1$s</xliff:g> affects data encryption, you need to confirm your password.
     </string>
 
-    <!-- Title for the capability of an accessibility service to receive events and keys. -->
-    <string name="capability_title_receiveAccessibilityEvents">Observe your actions</string>
-    <!-- Description for the capability of an accessibility service to receive events and keys. -->
-    <string name="capability_desc_receiveAccessibilityEvents">Receive notifications when you\u2019re
-        interacting with an app.</string>
+    <!-- Warning that explains that accessibility services have a lot of access to user data [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_warning"><xliff:g id="service"
+        example="TalkBack">%1$s</xliff:g> is requesting full control of this device. The service
+        can read the screen and act on behalf of users with accessibility needs.
+        This level of control is not appropriate for most apps.
+    </string>
 
     <!-- Title for a warning about disabling an accessibility service. [CHAR LIMIT=NONE] -->
     <string name="disable_service_title">Stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
