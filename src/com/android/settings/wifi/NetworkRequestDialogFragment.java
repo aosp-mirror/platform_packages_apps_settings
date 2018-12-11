@@ -44,12 +44,18 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
 import com.android.settingslib.Utils;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Fragment sets up callback {@link NetworkRequestMatchCallback} with framework. To handle most
+ * behaviors of the callback when requesting wifi network, except for error message. When error
+ * happens, {@link NetworkRequestErrorDialogFragment} will be called to display error message.
+ */
 public class NetworkRequestDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener, NetworkRequestMatchCallback {
 
@@ -131,7 +137,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     @Override
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
-        // Finishes activity when user clicks back key or outside of dialog.
+        // Finishes the activity when user clicks back key or outside of the dialog.
         getActivity().finish();
     }
 
@@ -166,7 +172,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
             switch (msg.what) {
                 case MESSAGE_STOP_SCAN_WIFI_LIST:
                     removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
-                    stopScanningAndPopTimeoutDialog();
+                    stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE.TIME_OUT);
                     break;
                 default:
                     // Do nothing.
@@ -175,14 +181,18 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         }
     };
 
-    protected void stopScanningAndPopTimeoutDialog() {
+    protected void stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE type) {
         // Dismisses current dialog.
         dismiss();
 
         // Throws new timeout dialog.
-        final NetworkRequestTimeoutDialogFragment fragment = NetworkRequestTimeoutDialogFragment
+        final NetworkRequestErrorDialogFragment fragment = NetworkRequestErrorDialogFragment
                 .newInstance();
-        fragment.show(getActivity().getSupportFragmentManager(), null);
+        final Bundle bundle = new Bundle();
+        bundle.putSerializable(NetworkRequestErrorDialogFragment.DIALOG_TYPE, type);
+        fragment.setArguments(bundle);
+        fragment.show(getActivity().getSupportFragmentManager(),
+                NetworkRequestDialogFragment.class.getSimpleName());
     }
 
     @Override
@@ -239,7 +249,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void onAbort() {
-        // TODO(b/117399926): We should have a UI notify user here.
+        stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE.ABORT);
     }
 
     @Override
