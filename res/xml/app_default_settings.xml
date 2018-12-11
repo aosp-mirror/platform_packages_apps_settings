@@ -79,6 +79,14 @@
         android:fragment="com.android.settings.applications.managedomainurls.ManageDomainUrls"
         settings:keywords="@string/keywords_default_links"/>
 
+    <!--
+     ~ STOPSHIP(b/110557011): Remove once the new UI is ready.
+     -->
+    <Preference
+        android:key="roles"
+        android:title="@string/roles_title"
+        settings:controller="com.android.settings.applications.defaultapps.RolesPreferenceController" />
+
     <com.android.settings.widget.WorkOnlyCategory
         android:key="work_app_defaults"
         android:title="@string/default_for_work">
