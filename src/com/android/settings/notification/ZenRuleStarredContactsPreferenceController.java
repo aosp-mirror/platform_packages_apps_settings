@@ -16,31 +16,29 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
-import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Contacts;
+import android.service.notification.ZenPolicy;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeStarredContactsPreferenceController extends
-        AbstractZenModePreferenceController implements Preference.OnPreferenceClickListener {
+public class ZenRuleStarredContactsPreferenceController extends
+        AbstractZenCustomRulePreferenceController implements Preference.OnPreferenceClickListener {
+
     private Preference mPreference;
-    private final int mPriorityCategory;
+    private final @ZenPolicy.PriorityCategory int mPriorityCategory;
     private final PackageManager mPackageManager;
 
     private Intent mStarredContactsIntent;
     private Intent mFallbackIntent;
 
-    public ZenModeStarredContactsPreferenceController(Context context, Lifecycle lifecycle, int
-            priorityCategory, String key) {
+    public ZenRuleStarredContactsPreferenceController(Context context, Lifecycle lifecycle,
+            @ZenPolicy.PriorityCategory int priorityCategory, String key) {
         super(context, key, lifecycle);
         mPriorityCategory = priorityCategory;
         mPackageManager = mContext.getPackageManager();
@@ -68,14 +66,15 @@ public class ZenModeStarredContactsPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        if (mPriorityCategory == PRIORITY_CATEGORY_CALLS) {
-            return mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CALLS)
-                    && mBackend.getPriorityCallSenders() == PRIORITY_SENDERS_STARRED
-                    && isIntentValid();
-        } else if (mPriorityCategory == PRIORITY_CATEGORY_MESSAGES) {
-            return mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_MESSAGES)
-                    && mBackend.getPriorityMessageSenders() == PRIORITY_SENDERS_STARRED
-                    && isIntentValid();
+        if (!super.isAvailable() || mRule.getZenPolicy() == null || !isIntentValid()) {
+            return false;
+        }
+
+        if (mPriorityCategory == ZenPolicy.PRIORITY_CATEGORY_CALLS) {
+            return mRule.getZenPolicy().getPriorityCallSenders() == ZenPolicy.PEOPLE_TYPE_STARRED;
+        } else if (mPriorityCategory == ZenPolicy.PRIORITY_CATEGORY_MESSAGES) {
+            return mRule.getZenPolicy().getPriorityMessageSenders()
+                    == ZenPolicy.PEOPLE_TYPE_STARRED;
         } else {
             // invalid category
             return false;

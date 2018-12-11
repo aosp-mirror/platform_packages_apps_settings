@@ -16,16 +16,17 @@
 
 package com.android.settings.notification;
 
+import static junit.framework.Assert.assertEquals;
+
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
 
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -40,17 +41,19 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-public final class ZenModeMessagesPreferenceControllerTest {
+public class ZenRulePreferenceControllerTest {
 
-    private ZenModeMessagesPreferenceController mController;
+    @Mock
+    private ZenModeBackend mBackend;
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private NotificationManager.Policy mPolicy;
+    private ZenCustomRadioButtonPreference mockPref;
+    @Mock
+    private PreferenceScreen mScreen;
 
     private Context mContext;
-    @Mock
-    private ZenModeBackend mBackend;
+    private TestablePreferenceController mController;
 
     @Before
     public void setup() {
@@ -59,22 +62,31 @@ public final class ZenModeMessagesPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
         mContext = RuntimeEnvironment.application;
-        when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
-
-        mController = new ZenModeMessagesPreferenceController(
-                mContext, mock(Lifecycle.class), "zen_mode_messages_settings");
+        mController = new TestablePreferenceController(mContext,"test", mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        mController.displayPreference(mScreen);
     }
 
     @Test
-    public void testIsAvailable() {
-        assertTrue(mController.isAvailable());
+    public void onResumeTest() {
+        final String id = "testid";
+        final AutomaticZenRule rule = new AutomaticZenRule("test", null, null,
+                null, null, NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
+
+        assertTrue(mController.mRule == null);
+        assertTrue(mController.mId == null);
+
+        mController.onResume(rule, id);
+
+        assertEquals(mController.mId, id);
+        assertEquals(mController.mRule, rule);
     }
 
-    @Test
-    public void testHasSummary() {
-        Preference pref = mock(Preference.class);
-        mController.updateState(pref);
-        verify(pref).setSummary(any());
+    class TestablePreferenceController extends AbstractZenCustomRulePreferenceController {
+        TestablePreferenceController(Context context, String key,
+                Lifecycle lifecycle) {
+            super(context, key, lifecycle);
+        }
     }
 }

@@ -22,9 +22,8 @@ import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_OFF;
 
-import static org.junit.Assert.assertTrue;
-
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -40,6 +39,7 @@ import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ZenRule;
 import android.util.ArrayMap;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -92,8 +92,8 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getZenModeConfig()).thenReturn(mZenModeConfig);
 
-        mController =
-                new ZenModeSettingsFooterPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new ZenModeSettingsFooterPreferenceController(mContext, mock(Lifecycle.class),
+                mock(FragmentManager.class));
         ReflectionHelpers.setField(mZenModeConfig, AUTOMATIC_RULES_FIELD, mInjectedAutomaticRules);
         ReflectionHelpers.setField(mController, "mZenModeConfigWrapper", mConfigWrapper);
 

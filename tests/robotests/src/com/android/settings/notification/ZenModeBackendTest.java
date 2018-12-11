@@ -1,25 +1,57 @@
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static junit.framework.Assert.assertEquals;
 
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import android.app.AutomaticZenRule;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.database.Cursor;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class ZenModeBackendTest {
+    @Mock
+    private NotificationManager mNotificationManager;
 
     private static final String GENERIC_RULE_NAME = "test";
     private static final String DEFAULT_ID_1 = ZenModeConfig.EVENTS_DEFAULT_RULE_ID;
     private static final String DEFAULT_ID_2 = ZenModeConfig.EVERY_NIGHT_DEFAULT_RULE_ID;
+
+    private Context mContext;
+    private ZenModeBackend mBackend;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
+
+        mContext = RuntimeEnvironment.application;
+        mBackend = new ZenModeBackend(mContext);
+    }
 
     @Test
     public void updateState_checkRuleOrderingDescending() {
@@ -61,6 +93,39 @@ public class ZenModeBackendTest {
         for (int i = 0; i < NUM_RULES; i++) {
             assertEquals(GENERIC_RULE_NAME + (NUM_RULES - 1 - i), rules[i + 2].getKey());
         }
+    }
+
+    @Test
+    public void updateSummary_nullCursorValues() {
+        Cursor testCursorWithNullValues = createMockCursor(3);
+        when(testCursorWithNullValues.getString(0)).thenReturn(null);
+
+        // expected - no null values
+        List<String> contacts = mBackend.getStarredContacts(testCursorWithNullValues);
+        for (String contact : contacts) {
+            assertThat(contact).isNotNull();
+        }
+    }
+
+    private Cursor createMockCursor(int size) {
+        Cursor mockCursor = mock(Cursor.class);
+        when(mockCursor.moveToFirst()).thenReturn(true);
+
+        doAnswer(new Answer<Boolean>() {
+            int count = 0;
+
+            @Override
+            public Boolean answer(InvocationOnMock invocation) throws Throwable {
+                if (count < size) {
+                    count++;
+                    return true;
+                }
+                return false;
+            }
+
+        }).when(mockCursor).moveToNext();
+
+        return mockCursor;
     }
 
     private Map.Entry<String, AutomaticZenRule>[] populateAutoZenRulesAscendingCreationTime(

@@ -50,7 +50,7 @@ abstract public class AbstractZenModePreferenceController extends
     @VisibleForTesting
     protected SettingObserver mSettingObserver;
 
-    private final String KEY;
+    final String KEY;
     final private NotificationManager mNotificationManager;
     protected static ZenModeConfigWrapper mZenModeConfigWrapper;
     protected MetricsFeatureProvider mMetricsFeatureProvider;
