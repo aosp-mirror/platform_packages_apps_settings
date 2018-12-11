@@ -35,15 +35,15 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 
 /**
  * A class that listens to location settings change and modifies location settings
  * settings.
  */
-public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
+public class LocationEnabler implements LifecycleObserver, OnStart, OnStop {
 
     private static final String TAG = "LocationEnabler";
     @VisibleForTesting
@@ -73,7 +73,7 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (mReceiver == null) {
             mReceiver = new BroadcastReceiver() {
                 @Override
@@ -90,12 +90,8 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
     }
 
     @Override
-    public void onPause() {
-        try {
-            mContext.unregisterReceiver(mReceiver);
-        } catch (RuntimeException e) {
-            // Ignore exceptions caused by race condition
-        }
+    public void onStop() {
+        mContext.unregisterReceiver(mReceiver);
     }
 
     void refreshLocationMode() {

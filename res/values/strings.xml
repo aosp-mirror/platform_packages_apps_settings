@@ -827,8 +827,15 @@
     <string name="location_settings_title">Location</string>
     <!-- Used in the location settings to control turning on/off the feature entirely -->
     <string name="location_settings_master_switch_title">Use location</string>
-    <!-- Summary for Location settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="location_settings_summary">Scanning, location history</string>
+    <!-- Summary for Location settings when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_settings_summary_location_off">Off</string>
+    <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
+    <plurals name="location_settings_summary_location_on">
+        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app can access location</item>
+        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps can access location</item>
+    </plurals>
+    <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
+    <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
@@ -3630,7 +3637,22 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">App-level permissions</string>
+    <string name="location_app_level_permissions">App permission</string>
+    <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_app_permission_summary_location_off">Location is off</string>
+    <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
+    <plurals name="location_app_permission_summary_location_on">
+        <item quantity="one">
+            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            of
+            <xliff:g id="total_location_app_count">%2$d</xliff:g>
+            app has unlimited access</item>
+        <item quantity="other">
+            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            of
+            <xliff:g id="total_location_app_count">%2$d</xliff:g>
+            apps have unlimited access</item>
+    </plurals>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
     <string name="location_category_recent_location_access">Recent location access</string>
     <!-- [CHAR LIMIT=30] Location settings screen, button to bring the user to view the details of recent location access -->

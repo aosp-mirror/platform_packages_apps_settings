@@ -5,6 +5,10 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.lifecycle.LifecycleOwner;
+
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,11 +25,16 @@ public class AppLocationPermissionPreferenceControllerTest {
     @Mock
     private Context mContext;
 
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new AppLocationPermissionPreferenceController(mContext);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
+        mController = new AppLocationPermissionPreferenceController(mContext, mLifecycle);
     }
 
     @Test
