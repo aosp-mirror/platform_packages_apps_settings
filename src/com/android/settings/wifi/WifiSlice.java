@@ -37,7 +37,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -64,9 +63,11 @@ public class WifiSlice implements CustomSliceable {
     static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
     private final Context mContext;
+    private final WifiManager mWifiManager;
 
     public WifiSlice(Context context) {
         mContext = context;
+        mWifiManager = mContext.getSystemService(WifiManager.class);
     }
 
     @Override
@@ -100,7 +101,7 @@ public class WifiSlice implements CustomSliceable {
         final ListBuilder listBuilder = new ListBuilder(mContext, WIFI_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(new RowBuilder()
+                .addRow(new ListBuilder.RowBuilder()
                         .setTitle(title)
                         .setSubtitle(summary)
                         .addEndItem(toggleSliceAction)
@@ -110,18 +111,25 @@ public class WifiSlice implements CustomSliceable {
             return listBuilder.build();
         }
 
-        List<AccessPoint> results = SliceBackgroundWorker.getInstance(mContext, this).getResults();
-        if (results == null) {
-            results = new ArrayList<>();
-        }
-        final int apCount = results.size();
+        final List<AccessPoint> results =
+                SliceBackgroundWorker.getInstance(mContext, this).getResults();
+
+        // Need a loading text when results are not ready.
+        boolean needLoadingRow = results == null;
+        final int apCount = needLoadingRow ? 0 : results.size();
+
         // Add AP rows
         final CharSequence placeholder = mContext.getText(R.string.summary_placeholder);
         for (int i = 0; i < DEFAULT_EXPANDED_ROW_COUNT; i++) {
             if (i < apCount) {
                 listBuilder.addRow(getAccessPointRow(results.get(i)));
+            } else if (needLoadingRow) {
+                listBuilder.addRow(new ListBuilder.RowBuilder()
+                        .setTitle(mContext.getText(R.string.wifi_empty_list_wifi_on))
+                        .setSubtitle(placeholder));
+                needLoadingRow = false;
             } else {
-                listBuilder.addRow(new RowBuilder()
+                listBuilder.addRow(new ListBuilder.RowBuilder()
                         .setTitle(placeholder)
                         .setSubtitle(placeholder));
             }
@@ -129,12 +137,12 @@ public class WifiSlice implements CustomSliceable {
         return listBuilder.build();
     }
 
-    private RowBuilder getAccessPointRow(AccessPoint accessPoint) {
+    private ListBuilder.RowBuilder getAccessPointRow(AccessPoint accessPoint) {
         final String title = accessPoint.getConfigName();
         final IconCompat levelIcon = IconCompat.createWithResource(mContext,
                 com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
         final CharSequence apSummary = accessPoint.getSettingsSummary();
-        final RowBuilder rowBuilder = new RowBuilder()
+        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
                 .setTitle(title)
                 .setSubtitle(!TextUtils.isEmpty(apSummary)
@@ -188,10 +196,9 @@ public class WifiSlice implements CustomSliceable {
      */
     @Override
     public void onNotifyChange(Intent intent) {
-        final WifiManager wifiManager = mContext.getSystemService(WifiManager.class);
         final boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
-                wifiManager.isWifiEnabled());
-        wifiManager.setWifiEnabled(newState);
+                mWifiManager.isWifiEnabled());
+        mWifiManager.setWifiEnabled(newState);
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
         // does for the Slice to check the current value again. Let {@link SliceBroadcastRelay}
         // handle it.
@@ -211,26 +218,19 @@ public class WifiSlice implements CustomSliceable {
     }
 
     private boolean isWifiEnabled() {
-        final WifiManager wifiManager = mContext.getSystemService(WifiManager.class);
-
-        switch (wifiManager.getWifiState()) {
+        switch (mWifiManager.getWifiState()) {
             case WifiManager.WIFI_STATE_ENABLED:
             case WifiManager.WIFI_STATE_ENABLING:
                 return true;
-            case WifiManager.WIFI_STATE_DISABLED:
-            case WifiManager.WIFI_STATE_DISABLING:
-            case WifiManager.WIFI_STATE_UNKNOWN:
             default:
                 return false;
         }
     }
 
     private CharSequence getSummary() {
-        final WifiManager wifiManager = mContext.getSystemService(WifiManager.class);
-
-        switch (wifiManager.getWifiState()) {
+        switch (mWifiManager.getWifiState()) {
             case WifiManager.WIFI_STATE_ENABLED:
-                final String ssid = WifiInfo.removeDoubleQuotes(wifiManager.getConnectionInfo()
+                final String ssid = WifiInfo.removeDoubleQuotes(mWifiManager.getConnectionInfo()
                         .getSSID());
                 if (TextUtils.equals(ssid, WifiSsid.NONE)) {
                     return mContext.getText(R.string.disconnected);

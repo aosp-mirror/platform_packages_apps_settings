@@ -162,7 +162,7 @@ public class ContextualCardLoaderTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_connected")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_gesture")

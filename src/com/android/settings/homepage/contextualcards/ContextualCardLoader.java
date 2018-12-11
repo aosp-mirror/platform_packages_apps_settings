@@ -20,7 +20,7 @@ import static android.app.slice.Slice.HINT_ERROR;
 
 import static androidx.slice.widget.SliceLiveData.SUPPORTED_SPECS;
 
-import static com.android.settings.slices.CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI;
+import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 
 import android.content.ContentProviderClient;
@@ -196,7 +196,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     private int getNumberOfLargeCard(List<ContextualCard> cards) {
         return (int) cards.stream()
                 .filter(card -> card.getSliceUri().equals(WIFI_SLICE_URI)
-                        || card.getSliceUri().equals(CONNECTED_DEVICE_SLICE_URI))
+                        || card.getSliceUri().equals(BLUETOOTH_DEVICES_SLICE_URI))
                 .count();
     }
 
