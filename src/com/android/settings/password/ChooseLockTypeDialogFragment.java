@@ -39,7 +39,8 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
-import com.android.setupwizardlib.util.WizardManagerHelper;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.List;
 

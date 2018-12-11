@@ -30,7 +30,8 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.SetupWizardUtils;
 import com.android.settingslib.wifi.AccessPoint;
-import com.android.setupwizardlib.util.WizardManagerHelper;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialogListener,
         DialogInterface.OnDismissListener {

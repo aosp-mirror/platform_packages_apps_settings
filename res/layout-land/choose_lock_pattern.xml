@@ -15,7 +15,7 @@
     limitations under the License.
 -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -164,7 +164,7 @@
         </LinearLayout>
 
         <!-- right side: lock pattern -->
-        <com.android.setupwizardlib.view.FillContentLayout
+        <com.google.android.setupdesign.view.FillContentLayout
             style="@style/LockPatternContainerStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -177,8 +177,8 @@
                 android:layout_gravity="center"
                 android:background="@color/lock_pattern_background" />
 
-        </com.android.setupwizardlib.view.FillContentLayout>
+        </com.google.android.setupdesign.view.FillContentLayout>
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

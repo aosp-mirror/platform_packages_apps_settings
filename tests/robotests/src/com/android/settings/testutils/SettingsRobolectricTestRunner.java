@@ -72,9 +72,9 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
     public static void addIncludedResourcePaths(List<ResourcePath> paths) {
         try {
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:packages/apps/Settings/res")), null));
+                    Fs.fromURL(new URL("file:packages/apps/Settings/res")), null));
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/res")), null));
+                    Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/res")), null));
             paths.add(new ResourcePath(null,
                     Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/AppPreference/res/")), null));
             paths.add(new ResourcePath(null,
@@ -88,21 +88,19 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
             paths.add(new ResourcePath(null,
                     Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/SettingsLayoutPreference/res")), null));
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:frameworks/base/core/res/res")), null));
+                    Fs.fromURL(new URL("file:frameworks/base/core/res/res")), null));
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/main/res")), null));
+                    Fs.fromURL(new URL("file:external/setupcompat/main/res")), null));
+            paths.add(new ResourcePath(null,
+                    Fs.fromURL(new URL("file:external/setupdesign/main/res")), null));
             paths.add(new ResourcePath(null,
                     Fs.fromURL(new URL("file:out/target/common/obj/JAVA_LIBRARIES/robolectric_android-all-stub_intermediates/classes/raw-res/res")), null));
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/gingerbread/res")), null));
+                    Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.appcompat_appcompat-nodeps/android_common/aar/res/")), null));
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/recyclerview/res")), null));
+                    Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/extras/material-design-x/com.google.android.material_material-nodeps/android_common/aar/res/")), null));
             paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.appcompat_appcompat-nodeps/android_common/aar/res/")), null));
-            paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/extras/material-design-x/com.google.android.material_material-nodeps/android_common/aar/res/")), null));
-            paths.add(new ResourcePath(null,
-                Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.cardview_cardview-nodeps/android_common/aar/res")), null));
+                    Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.cardview_cardview-nodeps/android_common/aar/res")), null));
             paths.add(new ResourcePath(null,
                     Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.slice_slice-view-nodeps/android_common/aar/res")), null));
             paths.add(new ResourcePath(null,

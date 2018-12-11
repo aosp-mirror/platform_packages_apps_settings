@@ -19,7 +19,9 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.setupwizardlib.util.WizardManagerHelper;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -109,7 +111,7 @@ public class ChooseLockSettingsHelperTest {
     @Test
     public void testLaunchConfirmationActivity_internal_shouldPropagateTheme() {
         Intent intent = new Intent()
-                .putExtra(WizardManagerHelper.EXTRA_THEME, WizardManagerHelper.THEME_GLIF_V2);
+                .putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_V2);
         Activity activity = Robolectric.buildActivity(Activity.class, intent).get();
         ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
         helper.launchConfirmationActivity(123, "test title", true, 0 /* userId */);
@@ -118,7 +120,7 @@ public class ChooseLockSettingsHelperTest {
         IntentForResult startedActivity = shadowActivity.getNextStartedActivityForResult();
         assertThat(startedActivity.requestCode).isEqualTo(123);
         assertThat(startedActivity.intent.getStringExtra(WizardManagerHelper.EXTRA_THEME))
-                .isEqualTo(WizardManagerHelper.THEME_GLIF_V2);
+                .isEqualTo(ThemeHelper.THEME_GLIF_V2);
     }
 
     private ChooseLockSettingsHelper getChooseLockSettingsHelper(Activity activity) {

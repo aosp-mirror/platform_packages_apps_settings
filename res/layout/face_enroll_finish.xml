@@ -15,14 +15,14 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     style="?attr/face_layout_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:suwFooter="@layout/face_enroll_finish_footer">
+    app:sucFooter="@layout/face_enroll_finish_footer">
 
     <LinearLayout
         style="@style/SuwContentFrame"
@@ -39,7 +39,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -51,10 +51,10 @@
                     android:contentDescription="@null"
                     android:src="@drawable/face_enroll_introduction" />
 
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

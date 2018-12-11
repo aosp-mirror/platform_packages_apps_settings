@@ -15,14 +15,14 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:suwFooter="@layout/fingerprint_enroll_finish_base_footer">
+    app:sucFooter="@layout/fingerprint_enroll_finish_base_footer">
 
     <LinearLayout
         style="@style/SuwContentFrame"
@@ -48,7 +48,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="@dimen/fingerprint_progress_bar_max_size"
                 android:layout_height="@dimen/fingerprint_progress_bar_max_size"
                 android:layout_marginVertical="24dp"
@@ -64,7 +64,7 @@
                     android:padding="7dp"
                     android:contentDescription="@android:string/fingerprint_icon_content_description"
                     android:src="@drawable/fingerprint_enroll_finish" />
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
             <!-- Added to align elements with fingerprint_enroll_enrolling_base -->
             <TextView
@@ -78,4 +78,4 @@
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

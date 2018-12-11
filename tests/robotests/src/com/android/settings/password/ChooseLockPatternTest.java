@@ -32,7 +32,8 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.testutils.DrawableTestHelper;
-import com.android.setupwizardlib.GlifLayout;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
