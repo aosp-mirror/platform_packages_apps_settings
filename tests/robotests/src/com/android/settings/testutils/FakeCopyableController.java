@@ -19,9 +19,9 @@ package com.android.settings.testutils;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.slices.CopyableSlice;
+import com.android.settings.slices.Copyable;
 
-public class FakeCopyableController extends BasePreferenceController implements CopyableSlice {
+public class FakeCopyableController extends BasePreferenceController implements Copyable {
 
     public FakeCopyableController(Context context, String preferenceKey) {
         super(context, preferenceKey);

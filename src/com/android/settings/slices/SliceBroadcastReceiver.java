@@ -185,7 +185,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         final BasePreferenceController controller = getPreferenceController(context, key);
 
-        if (!(controller instanceof CopyableSlice)) {
+        if (!(controller instanceof Copyable)) {
             throw new IllegalArgumentException(
                     "Copyable action passed for a non-copyable key:" + key);
         }
@@ -198,7 +198,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             return;
         }
 
-        ((CopyableSlice) controller).copy();
+        ((Copyable) controller).copy();
     }
 
     /**

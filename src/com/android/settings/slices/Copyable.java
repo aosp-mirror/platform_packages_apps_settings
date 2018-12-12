@@ -19,7 +19,7 @@ package com.android.settings.slices;
 /**
  * Provide the copy ability for preference controller to copy the data to the clipboard.
  */
-public interface CopyableSlice {
+public interface Copyable {
     /**
      * Copy the key slice information to the clipboard.
      * It is highly recommended to show the toast to notify users when implemented this function.
