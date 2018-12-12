@@ -64,6 +64,7 @@ public class ContextualCard {
     private final int mCardAction;
     private final long mExpireTimeMS;
     private final boolean mIsHalfWidth;
+    private final boolean mIsLargeCard;
     private final Drawable mIconDrawable;
 
     public String getName() {
@@ -142,6 +143,10 @@ public class ContextualCard {
         return mIsHalfWidth;
     }
 
+    public boolean isLargeCard() {
+        return mIsLargeCard;
+    }
+
     boolean isCustomCard() {
         return TextUtils.isEmpty(mSliceUri);
     }
@@ -170,6 +175,7 @@ public class ContextualCard {
         mExpireTimeMS = builder.mExpireTimeMS;
         mIconDrawable = builder.mIconDrawable;
         mIsHalfWidth = builder.mIsHalfWidth;
+        mIsLargeCard = builder.mIsLargeCard;
     }
 
     ContextualCard(Cursor c) {
@@ -212,6 +218,8 @@ public class ContextualCard {
         mIsHalfWidth = (c.getInt(
                 c.getColumnIndex(CardDatabaseHelper.CardColumns.SUPPORT_HALF_WIDTH)) == 1);
         mBuilder.setIsHalfWidth(mIsHalfWidth);
+        mIsLargeCard = false;
+        mBuilder.setIsLargeCard(mIsLargeCard);
         mIconDrawable = null;
         mBuilder.setIconDrawable(mIconDrawable);
     }
@@ -256,6 +264,7 @@ public class ContextualCard {
         private long mExpireTimeMS;
         private Drawable mIconDrawable;
         private boolean mIsHalfWidth;
+        private boolean mIsLargeCard;
 
         public Builder setName(String name) {
             mName = name;
@@ -344,6 +353,11 @@ public class ContextualCard {
 
         public Builder setIsHalfWidth(boolean isHalfWidth) {
             mIsHalfWidth = isHalfWidth;
+            return this;
+        }
+
+        public Builder setIsLargeCard(boolean isLargeCard) {
+            mIsLargeCard = isLargeCard;
             return this;
         }
 
