@@ -817,13 +817,12 @@ public class ManageApplications extends InstrumentedFragment
                 mManageApplications.onItemSelected(null, null, 0, 0);
             }
             if (mFilterOptions.size() > 1) {
-                if (filterType == mManageApplications.mFilterType) {
-                    int index = mFilterOptions.indexOf(filter);
-                    if (index != -1) {
-                        mManageApplications.mFilterSpinner.setSelection(index);
-                        mManageApplications.onItemSelected(null, null, index, 0);
-                        mManageApplications.mFilterType = AppFilterRegistry.FILTER_APPS_ALL;
-                    }
+                final AppFilterItem previousFilter = AppFilterRegistry.getInstance().get(
+                        mManageApplications.mFilterType);
+                final int index = mFilterOptions.indexOf(previousFilter);
+                if (index != -1) {
+                    mManageApplications.mFilterSpinner.setSelection(index);
+                    mManageApplications.onItemSelected(null, null, index, 0);
                 }
             }
         }
