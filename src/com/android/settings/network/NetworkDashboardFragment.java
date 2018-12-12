@@ -72,6 +72,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
+        }
         use(AirplaneModePreferenceController.class).setFragment(this);
     }
 
