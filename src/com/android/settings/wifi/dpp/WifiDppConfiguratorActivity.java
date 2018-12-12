@@ -31,8 +31,26 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.R;
 
+/**
+ * To provision "other" device with specified Wi-Fi network.
+ *
+ * Uses different intents to specify different provisioning ways.
+ *
+ * For intent action {@code ACTION_CONFIGURATOR_QR_CODE_SCANNER} and
+ * {@code android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR}, specify the Wi-Fi network to be
+ * provisioned in:
+ *
+ * {@code WifiDppUtils.EXTRA_WIFI_SECURITY}
+ * {@code WifiDppUtils.EXTRA_WIFI_SSID}
+ * {@code WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY}
+ * {@code WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID}
+ *
+ * For intent action {@code ACTION_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK}, specify Wi-Fi (DPP)
+ * QR code in {@code WifiDppUtils.EXTRA_QR_CODE}
+ */
 public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
-        WifiNetworkConfig.Retriever {
+        WifiNetworkConfig.Retriever,
+        WifiDppQrCodeGeneratorFragment.OnQrCodeGeneratorFragmentAddButtonClickedListener {
     private static final String TAG = "WifiDppConfiguratorActivity";
 
     public static final String ACTION_CONFIGURATOR_QR_CODE_SCANNER =
@@ -43,7 +61,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
             "android.settings.WIFI_DPP_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK";
 
     private FragmentManager mFragmentManager;
-    private FragmentTransaction mFragmentTransaction;
 
     /** The Wi-Fi network which will be configured */
     private WifiNetworkConfig mWifiNetworkConfig;
@@ -57,12 +74,20 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.wifi_dpp_activity);
-
         mFragmentManager = getSupportFragmentManager();
-        mFragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        Intent intent = getIntent();
+        handleIntent(getIntent());
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setElevation(0);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
+    }
+
+    private void handleIntent(Intent intent) {
         boolean cancelActivity = false;
         WifiNetworkConfig config;
         switch (intent.getAction()) {
@@ -72,7 +97,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     cancelActivity = true;
                 } else {
                     mWifiNetworkConfig = config;
-                    addQrCodeScannerFragment(/* addToBackStack= */ false);
+                    showQrCodeScannerFragment(/* addToBackStack= */ false);
                 }
                 break;
             case ACTION_CONFIGURATOR_QR_CODE_GENERATOR:
@@ -81,11 +106,11 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     cancelActivity = true;
                 } else {
                     mWifiNetworkConfig = config;
-                    addQrCodeGeneratorFragment();
+                    showQrCodeGeneratorFragment();
                 }
                 break;
             case ACTION_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK:
-                addChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
+                showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
                 break;
             default:
                 cancelActivity = true;
@@ -98,45 +123,55 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         }
     }
 
-    private void addQrCodeScannerFragment(boolean addToBackStack) {
-        WifiDppQrCodeScannerFragment fragment = new WifiDppQrCodeScannerFragment();
-        mFragmentTransaction.add(R.id.fragment_container, fragment);
-        if (addToBackStack) {
-            mFragmentTransaction.addToBackStack(/* name */ null);
+    private void showQrCodeScannerFragment(boolean addToBackStack) {
+        // Avoid to replace the same fragment during configuration change
+        if (mFragmentManager.findFragmentByTag(WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER) != null) {
+            return;
         }
-        mFragmentTransaction.commit();
+
+        WifiDppQrCodeScannerFragment fragment = new WifiDppQrCodeScannerFragment();
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_container, fragment,
+                WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(/* name */ null);
+        }
+        fragmentTransaction.commit();
     }
 
-    private void addQrCodeGeneratorFragment() {
+    private void showQrCodeGeneratorFragment() {
+        // Avoid to replace the same fragment during configuration change
+        if (mFragmentManager.findFragmentByTag(
+                WifiDppUtils.TAG_FRAGMENT_QR_CODE_GENERATOR) != null) {
+            return;
+        }
+
         WifiDppQrCodeGeneratorFragment fragment = new WifiDppQrCodeGeneratorFragment();
-        mFragmentTransaction.add(R.id.fragment_container, fragment);
-        mFragmentTransaction.commit();
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_container, fragment,
+                WifiDppUtils.TAG_FRAGMENT_QR_CODE_GENERATOR);
+        fragmentTransaction.commit();
     }
 
-    private void addChooseSavedWifiNetworkFragment(boolean addToBackStack) {
-        ActionBar action = getActionBar();
-        if (action != null) {
-            action.hide();
+    private void showChooseSavedWifiNetworkFragment(boolean addToBackStack) {
+        // Avoid to replace the same fragment during configuration change
+        if (mFragmentManager.findFragmentByTag(
+                WifiDppUtils.TAG_FRAGMENT_CHOOSE_SAVED_WIFI_NETWORK) != null) {
+            return;
         }
 
         WifiDppChooseSavedWifiNetworkFragment fragment =
                 new WifiDppChooseSavedWifiNetworkFragment();
-        mFragmentTransaction.add(R.id.fragment_container, fragment);
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_container, fragment,
+                WifiDppUtils.TAG_FRAGMENT_CHOOSE_SAVED_WIFI_NETWORK);
         if (addToBackStack) {
-            mFragmentTransaction.addToBackStack(/* name */ null);
+            fragmentTransaction.addToBackStack(/* name */ null);
         }
-        mFragmentTransaction.commit();
-    }
-
-    @Override
-    protected void onStop() {
-        Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
-        if (fragment != null) {
-            // Remove it to prevent stacking multiple fragments after screen rotated.
-            mFragmentManager.beginTransaction().remove(fragment).commit();
-        }
-
-        super.onStop();
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -152,5 +187,23 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
             mWifiNetworkConfig = new WifiNetworkConfig(config);
             return true;
         }
+    }
+
+    @Override
+    public boolean onNavigateUp(){
+        Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
+        if (fragment instanceof WifiDppQrCodeGeneratorFragment) {
+            setResult(Activity.RESULT_CANCELED);
+            finish();
+            return true;
+        } else if (fragment instanceof WifiDppQrCodeScannerFragment) {
+            mFragmentManager.popBackStackImmediate();
+        }
+
+        return false;
+    }
+
+    @Override public void onQrCodeGeneratorFragmentAddButtonClicked() {
+        showQrCodeScannerFragment(/* addToBackStack */ true);
     }
 }
