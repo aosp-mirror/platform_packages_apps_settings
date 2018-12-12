@@ -43,8 +43,9 @@ public class FaceEnrollSidecar extends BiometricEnrollSidecar {
         if (mUserId != UserHandle.USER_NULL) {
             mFaceManager.setActiveUser(mUserId);
         }
+        // TODO: Send the list of disabled features
         mFaceManager.enroll(mToken, mEnrollmentCancel,
-                0 /* flags */, mUserId, mEnrollmentCallback);
+                mEnrollmentCallback, new int[0] /* disabledFeatures */);
     }
 
     private FaceManager.EnrollmentCallback mEnrollmentCallback
