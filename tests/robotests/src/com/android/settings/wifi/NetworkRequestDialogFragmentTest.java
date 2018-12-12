@@ -197,9 +197,12 @@ public class NetworkRequestDialogFragmentTest {
         accessPointList.add(new AccessPoint(mContext, bundle));
         bundle.putString(KEY_SSID, "Test AP 2");
         accessPointList.add(new AccessPoint(mContext, bundle));
+
         bundle.putString(KEY_SSID, "Test AP 3");
         AccessPoint clickedAccessPoint = new AccessPoint(mContext, bundle);
+        clickedAccessPoint.generateOpenNetworkConfig();
         accessPointList.add(clickedAccessPoint);
+
         bundle.putString(KEY_SSID, "Test AP 4");
         accessPointList.add(new AccessPoint(mContext, bundle));
         when(networkRequestDialogFragment.getAccessPointList()).thenReturn(accessPointList);
