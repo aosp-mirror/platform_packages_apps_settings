@@ -66,7 +66,7 @@ public class MobileDataAlwaysOnPreferenceController extends
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.MOBILE_DATA_ALWAYS_ON,
-                SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+                SETTING_VALUE_ON);
+        ((SwitchPreference) mPreference).setChecked(true);
     }
 }

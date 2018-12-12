@@ -96,13 +96,13 @@ public class MobileDataAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeDisabled() {
+    public void onDeveloperOptionsSwitchDisabled_shouldDisableMobileDataAlwaysOn() {
         mController.onDeveloperOptionsSwitchDisabled();
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.MOBILE_DATA_ALWAYS_ON, -1 /* default */);
 
-        assertThat(mode).isEqualTo(MobileDataAlwaysOnPreferenceController.SETTING_VALUE_OFF);
+        assertThat(mode).isEqualTo(MobileDataAlwaysOnPreferenceController.SETTING_VALUE_ON);
         verify(mPreference).setEnabled(false);
-        verify(mPreference).setChecked(false);
+        verify(mPreference).setChecked(true);
     }
 }
