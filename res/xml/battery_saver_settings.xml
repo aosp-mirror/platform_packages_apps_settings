@@ -20,6 +20,12 @@
     android:title="@string/battery_saver"
     android:key="battery_saver_page">
 
+    <Preference
+        android:key="battery_saver_schedule"
+        android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings"
+        android:title="@string/battery_saver_schedule_settings_title"
+        settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverSchedulePreferenceController"/>
+
     <!-- Turn on automatically -->
     <SwitchPreference
         android:key="auto_battery_saver"

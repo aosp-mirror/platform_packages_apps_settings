@@ -20,6 +20,7 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +41,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -54,8 +56,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settings.wifi.dpp.WifiDppConfiguratorActivity;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settings.wifi.WifiUtils;
@@ -280,7 +285,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton1Icon(R.drawable.ic_settings_delete)
                 .setButton1OnClickListener(view -> forgetNetwork())
                 .setButton2Text(R.string.wifi_sign_in_button_text)
-                .setButton2OnClickListener(view -> signIntoNetwork());
+                .setButton2OnClickListener(view -> signIntoNetwork())
+                .setButton3Text(R.string.share)
+                .setButton3Icon(R.drawable.ic_qrcode_24dp)
+                .setButton3OnClickListener(view -> shareNetwork());
 
         mSignalStrengthPref = screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
         mLinkSpeedPref = screen.findPreference(KEY_LINK_SPEED);
@@ -296,7 +304,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mIpv6Category = (PreferenceCategory) screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
-        mSecurityPref.setSummary(mAccessPoint.getSecurityString(false /* concise */));
+        mSecurityPref.setSummary(mAccessPoint.getSecurityString(/* concise */ false));
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {
@@ -425,7 +433,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private void updateIpLayerInfo() {
         mButtonsPref.setButton2Visible(canSignIntoNetwork());
-        mButtonsPref.setVisible(canSignIntoNetwork() || canForgetNetwork());
+        mButtonsPref.setButton3Visible(isSharingNetworkEnabled());
+        mButtonsPref.setVisible(
+                canSignIntoNetwork() || canForgetNetwork() || isSharingNetworkEnabled());
 
         if (mNetwork == null || mLinkProperties == null) {
             mIpAddressPref.setVisible(false);
@@ -511,6 +521,13 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     /**
+     * Returns whether the user can share the network represented by this preference with QR code.
+     */
+    private boolean isSharingNetworkEnabled() {
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.WIFI_SHARING);
+    }
+
+    /**
      * Forgets the wifi network associated with this preference.
      */
     private void forgetNetwork() {
@@ -526,6 +543,42 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mMetricsFeatureProvider.action(
                 mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         mFragment.getActivity().finish();
+    }
+
+    /**
+     * Show QR code to share the network represented by this preference.
+     */
+    public void launchQRCodeGenerator() {
+        final Intent intent = new Intent(
+                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY,
+                mAccessPoint.getSecurityString(/* concise */ false));
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, mAccessPoint.getSsidStr());
+        mContext.startActivity(intent);
+    }
+
+    /**
+     * Share the wifi network with QR code.
+     */
+    private void shareNetwork() {
+        final KeyguardManager keyguardManager = (KeyguardManager) mContext.getSystemService(
+                Context.KEYGUARD_SERVICE);
+        if (keyguardManager.isKeyguardSecure()) {
+            // Show authentication screen to confirm credentials (pin, pattern or password) for
+            // the current user of the device.
+            final String description = String.format(
+                    mContext.getString(R.string.wifi_sharing_message),
+                    mAccessPoint.getSsidStr());
+            final Intent intent = keyguardManager.createConfirmDeviceCredentialIntent(
+                    mContext.getString(R.string.lockpassword_confirm_your_pattern_header),
+                    description);
+            if (intent != null) {
+                mFragment.startActivityForResult(intent,
+                        WifiNetworkDetailsFragment.REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS);
+            }
+        } else {
+            launchQRCodeGenerator();
+        }
     }
 
     /**

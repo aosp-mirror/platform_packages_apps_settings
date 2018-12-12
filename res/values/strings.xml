@@ -653,6 +653,8 @@
     <string name="done">Done</string>
     <!-- Button label for generic apply action [CHAR LIMIT=20] -->
     <string name="apply">Apply</string>
+    <!-- Button label for generic share action [CHAR LIMIT=20] -->
+    <string name="share">Share</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -3765,6 +3767,8 @@
     <string name="lockpassword_choose_your_pattern_header_for_face">To use face authentication, set pattern</string>
     <!-- Header on first screen of choose password/PIN as backup for face authentication flow. If this string cannot be translated in under 40 characters, please translate "Set face authentication backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_face">To use face authentication, set PIN</string>
+    <!-- Message on Wi-Fi Sharing screen [CHAR LIMIT=NONE] -->
+    <string name="wifi_sharing_message">Your Wi\u2011Fi name and password for \"<xliff:g id="SSID" example="GoogleGuest">%1$s</xliff:g>\" will be shared.</string>
 
     <!-- Message to be used to explain the user that he needs to enter his pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
@@ -4826,11 +4830,12 @@
         example="TalkBack">%1$s</xliff:g> affects data encryption, you need to confirm your password.
     </string>
 
-    <!-- Title for the capability of an accessibility service to receive events and keys. -->
-    <string name="capability_title_receiveAccessibilityEvents">Observe your actions</string>
-    <!-- Description for the capability of an accessibility service to receive events and keys. -->
-    <string name="capability_desc_receiveAccessibilityEvents">Receive notifications when you\u2019re
-        interacting with an app.</string>
+    <!-- Warning that explains that accessibility services have a lot of access to user data [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_warning"><xliff:g id="service"
+        example="TalkBack">%1$s</xliff:g> is requesting full control of this device. The service
+        can read the screen and act on behalf of users with accessibility needs.
+        This level of control is not appropriate for most apps.
+    </string>
 
     <!-- Title for a warning about disabling an accessibility service. [CHAR LIMIT=NONE] -->
     <string name="disable_service_title">Stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
@@ -5417,11 +5422,23 @@
     <!-- Battery saver: Label for preference to indicate there is no battery saver schedule [CHAR_LIMIT=40] -->
     <string name="battery_saver_auto_no_schedule">No schedule</string>
 
+    <!-- Battery saver: Label for preference to indicate there is a routine based schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_routine">Based on your routine</string>
+
+    <!-- Battery saver: Label for preference to indicate there is a percentage based schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_percentage">Based on percentage</string>
+
+    <!-- Battery saver: Summary for preference to describe what is meant by a routine based schedule [CHAR_LIMIT=NONE] -->
+    <string name="battery_saver_auto_routine_summary">Battery Saver turns on if your battery is likely to run out before your next typical charge</string>
+
+    <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_percentage_summary">Will turn on at <xliff:g id="percent" example="52%">%1$s</xliff:g></string>
+
     <!-- Battery saver: Title for battery saver schedule screen [CHAR_LIMIT=40] -->
     <string name="battery_saver_schedule_settings_title">Set a schedule</string>
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
-    <string name="battery_saver_seekbar_title">At <xliff:g id="percent">%1$s</xliff:g></string>
+    <string name="battery_saver_seekbar_title"><xliff:g id="percent">%1$s</xliff:g></string>
 
     <!-- Battery saver: Placeholder label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title_placeholder">Turn on</string>
@@ -7137,6 +7154,9 @@
     <!--  Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_delete">Delete</string>
 
+    <!--  Do not disturb: Edit label for button that allows user to edit the dnd schedule name. [CHAR LIMIT=30] -->
+    <string name="zen_mode_rule_name_edit">Edit</string>
+
     <!--  Do not disturb: Title for the zen mode automatic rules page in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automation_settings_page_title">Schedules</string>
 
@@ -7907,7 +7927,7 @@
         <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
 
-    <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
+    <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Allow text messages</string>
 
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
@@ -10248,7 +10268,9 @@
     <!-- Message for Network connection timeout Dialog [CHAR LIMIT=NONE] -->
     <string name="network_connection_timeout_dialog_message">No devices found. Make sure the device is turned on and available to connect.</string>
     <!-- OK button for Network connection timeout Dialog [CHAR LIMIT=30] -->
-    <string name="network_connection_timeout_dialog_ok">Scan again</string>
+    <string name="network_connection_timeout_dialog_ok">Try again</string>
+    <!-- Message for Network connection error state Dialog [CHAR LIMIT=NONE] -->
+    <string name="network_connection_errorstate_dialog_message">Something came up. The application has cancelled the request to choose a device.</string>
 
     <!-- Summary for bluetooth devices count in Bluetooth devices slice. [CHAR LIMIT=NONE] -->
     <plurals name="show_bluetooth_devices">

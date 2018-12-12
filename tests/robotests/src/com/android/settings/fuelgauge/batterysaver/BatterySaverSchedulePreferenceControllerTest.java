@@ -11,22 +11,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
-
 package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.os.PowerManager;
 import android.provider.Settings;
-
-import androidx.lifecycle.LifecycleOwner;
-
+import android.provider.Settings.Global;
+import androidx.preference.Preference;
+import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.widget.SeekBarPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,89 +34,61 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
-public class AutoBatterySeekBarPreferenceControllerTest {
+public class BatterySaverSchedulePreferenceControllerTest {
 
     private static final int TRIGGER_LEVEL = 20;
     private static final int DEFAULT_LEVEL = 15;
-    private static final int INTERVAL = 5;
 
-    private AutoBatterySeekBarPreferenceController mController;
+    private BatterySaverSchedulePreferenceController mController;
     private Context mContext;
-    private SeekBarPreference mPreference;
-    private Lifecycle mLifecycle;
-    private LifecycleOwner mLifecycleOwner;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
 
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.integer.config_lowBatteryWarningLevel, DEFAULT_LEVEL);
         mContext = RuntimeEnvironment.application;
-        mPreference = new SeekBarPreference(mContext);
-        mPreference.setMax(100);
-        mController = new AutoBatterySeekBarPreferenceController(mContext, mLifecycle);
+        mController = new BatterySaverSchedulePreferenceController(mContext);
+        mPreference = new Preference(mContext);
+        mController.mBatterySaverSchedulePreference = mPreference;
     }
 
     @Test
-    public void testPreference_lowPowerLevelZero_preferenceInvisible() {
+    public void testPreference_lowPowerLevelZero_percentageMode_summaryNoSchedule() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Global.AUTOMATIC_POWER_SAVER_MODE, PowerManager.POWER_SAVER_MODE_PERCENTAGE);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isVisible()).isFalse();
+        assertThat(mPreference.getSummary()).isEqualTo("No schedule");
     }
 
     @Test
-    public void testPreference_defaultValue_preferenceNotVisible() {
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.isVisible()).isFalse();
-    }
-
-    @Test
-    public void testPreference_lowPowerLevelNotZero_updatePreference() {
+    public void testPreference_lowPowerLevelNonZero_percentageMode_summaryPercentage() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, TRIGGER_LEVEL);
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getTitle()).isEqualTo("20%");
-        assertThat(mPreference.getProgress()).isEqualTo(TRIGGER_LEVEL / INTERVAL);
-    }
-
-
-    @Test
-    public void testOnPreferenceChange_updateValue() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-
-        mController.onPreferenceChange(mPreference, TRIGGER_LEVEL / INTERVAL);
-
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0)).isEqualTo(TRIGGER_LEVEL);
-    }
-
-    @Test
-    public void testOnPreferenceChange_changeMax() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL_MAX, 50);
+                Global.AUTOMATIC_POWER_SAVER_MODE, PowerManager.POWER_SAVER_MODE_PERCENTAGE);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getMax()).isEqualTo(50 / INTERVAL);
+        assertThat(mPreference.getSummary()).isEqualTo("Will turn on at 20%");
     }
 
     @Test
-    public void testOnPreferenceChange_noChangeMax() {
+    public void testPreference_percentageRoutine_summaryRoutine() {
+        // It doesn't matter what this is set to for routine mode
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL_MAX, 0);
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, TRIGGER_LEVEL);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Global.AUTOMATIC_POWER_SAVER_MODE, PowerManager.POWER_SAVER_MODE_DYNAMIC);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getMax()).isEqualTo(100);
+        assertThat(mPreference.getSummary()).isEqualTo("Based on your routine");
     }
 }

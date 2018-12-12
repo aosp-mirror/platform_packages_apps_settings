@@ -865,6 +865,12 @@ public class WifiDetailPreferenceControllerTest {
         when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
         when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
+        when(pref.setButton3Text(anyInt())).thenReturn(pref);
+        when(pref.setButton3Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton3Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton3Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton3OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
         return pref;
     }
 }

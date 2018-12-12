@@ -85,7 +85,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
         controllers.add(mUseOpenWifiPreferenceController);
         controllers.add(new WifiInfoPreferenceController(context, getSettingsLifecycle(),
                 wifiManager));
-        controllers.add(new CellularFallbackPreferenceController(context));
         controllers.add(new WifiP2pPreferenceController(context, getSettingsLifecycle(),
                 wifiManager));
         return controllers;

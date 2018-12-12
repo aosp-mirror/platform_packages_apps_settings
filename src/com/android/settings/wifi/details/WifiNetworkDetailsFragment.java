@@ -17,8 +17,10 @@ package com.android.settings.wifi.details;
 
 import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -51,6 +53,8 @@ import java.util.List;
 public class WifiNetworkDetailsFragment extends DashboardFragment {
 
     private static final String TAG = "WifiNetworkDetailsFrg";
+
+    public static final int REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS = 1;
 
     private AccessPoint mAccessPoint;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
@@ -141,5 +145,15 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
         controllers.add(preferenceController);
 
         return controllers;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS
+                && resultCode == Activity.RESULT_OK) {
+            mWifiDetailPreferenceController.launchQRCodeGenerator();
+        }
     }
 }

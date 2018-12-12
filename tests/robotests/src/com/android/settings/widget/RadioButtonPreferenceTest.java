@@ -24,6 +24,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.app.Application;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
@@ -92,5 +93,14 @@ public class RadioButtonPreferenceTest {
                 PreferenceViewHolder.createInstanceForTests(view);
         mPreference.onBindViewHolder(preferenceViewHolder);
         assertEquals(View.GONE, summaryContainer.getVisibility());
+    }
+
+    @Test
+    public void hideAppendix_shouldBeGone() {
+        mPreference.setAppendixVisibility(View.GONE);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.preference_radio, null);
+        PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
+        mPreference.onBindViewHolder(holder);
+        assertThat(holder.findViewById(R.id.appendix).getVisibility()).isEqualTo(View.GONE);
     }
 }

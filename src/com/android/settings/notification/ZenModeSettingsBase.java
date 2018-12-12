@@ -52,9 +52,14 @@ abstract public class ZenModeSettingsBase extends RestrictedDashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        mContext = getActivity();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
         mBackend = ZenModeBackend.getInstance(mContext);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         updateZenMode(false /*fireChanged*/);
     }

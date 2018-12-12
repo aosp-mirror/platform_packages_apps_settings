@@ -27,6 +27,11 @@ import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.EventInfo;
 
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -37,11 +42,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-
-import androidx.preference.DropDownPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceScreen;
 
 public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_CALENDAR = "calendar";
@@ -85,9 +85,12 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
                 getSettingsLifecycle());
+        mActionButtons = new ZenRuleButtonsPreferenceController(context, this,
+                getSettingsLifecycle());
         mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this,
                 getSettingsLifecycle());
         controllers.add(mHeader);
+        controllers.add(mActionButtons);
         controllers.add(mSwitch);
         return controllers;
     }
@@ -107,8 +110,16 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
                 mEvent.calendarId = calendar.calendarId;
             }
         }
-        mCalendar.setEntries(entries.toArray(new CharSequence[entries.size()]));
-        mCalendar.setEntryValues(values.toArray(new CharSequence[values.size()]));
+
+        CharSequence[] entriesArr = entries.toArray(new CharSequence[entries.size()]);
+        CharSequence[] valuesArr = values.toArray(new CharSequence[values.size()]);
+        if (!Objects.equals(mCalendar.getEntries(), entriesArr)) {
+            mCalendar.setEntries(entriesArr);
+        }
+
+        if (!Objects.equals(mCalendar.getEntryValues(), valuesArr)) {
+            mCalendar.setEntryValues(valuesArr);
+        }
     }
 
     @Override
@@ -159,8 +170,12 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
 
     @Override
     protected void updateControlsInternal() {
-        mCalendar.setValue(key(mEvent));
-        mReply.setValue(Integer.toString(mEvent.reply));
+        if (!Objects.equals(mCalendar.getValue(), key(mEvent))) {
+            mCalendar.setValue(key(mEvent));
+        }
+        if (!Objects.equals(mReply.getValue(), Integer.toString(mEvent.reply))) {
+            mReply.setValue(Integer.toString(mEvent.reply));
+        }
     }
 
     @Override
@@ -233,7 +248,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
 
     private static String key(int userId, Long calendarId, String displayName) {
         return EventInfo.resolveUserId(userId) + ":" + (calendarId == null ? "" : calendarId)
-                + ":" + displayName;
+                + ":" + (displayName == null ? "" : displayName);
     }
 
     private static final Comparator<CalendarInfo> CALENDAR_NAME = new Comparator<CalendarInfo>() {

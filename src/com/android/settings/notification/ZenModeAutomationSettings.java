@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.service.notification.ConditionProviderService;
 import android.view.Menu;
@@ -44,10 +45,21 @@ import java.util.Map;
 
 @SearchIndexable
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
+    public static final String DELETE = "DELETE_RULE";
     protected final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
     private CharSequence[] mDeleteDialogRuleNames;
     private String[] mDeleteDialogRuleIds;
     private boolean[] mDeleteDialogChecked;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Bundle bundle = getArguments();
+        if (bundle != null && bundle.containsKey(DELETE)) {
+            mBackend.removeZenRule(bundle.getString(DELETE));
+            bundle.remove(DELETE);
+        }
+    }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {

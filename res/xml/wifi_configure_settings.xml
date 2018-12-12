@@ -41,7 +41,8 @@
     <SwitchPreference
         android:key="wifi_cellular_data_fallback"
         android:title="@string/wifi_cellular_data_fallback_title"
-        android:summary="@string/wifi_cellular_data_fallback_summary" />
+        android:summary="@string/wifi_cellular_data_fallback_summary"
+        settings:controller="com.android.settings.wifi.CellularFallbackPreferenceController" />
 
     <Preference
         android:key="install_credentials"

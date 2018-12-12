@@ -18,62 +18,34 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.text.TextUtils;
 
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
-
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
 /**
- * {@link AbstractPreferenceController} that controls whether we should fall back to celluar when
+ * CellularFallbackPreferenceController controls whether we should fall back to celluar when
  * wifi is bad.
  */
-public class CellularFallbackPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class CellularFallbackPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_CELLULAR_FALLBACK = "wifi_cellular_data_fallback";
-
-
-    public CellularFallbackPreferenceController(Context context) {
-        super(context);
+    public CellularFallbackPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public boolean isAvailable() {
-        return !avoidBadWifiConfig();
+    public int getAvailabilityStatus() {
+        return !avoidBadWifiConfig() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_CELLULAR_FALLBACK;
+    public boolean isChecked() {
+        return avoidBadWifiCurrentSettings();
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_CELLULAR_FALLBACK)) {
-            return false;
-        }
-        if (!(preference instanceof SwitchPreference)) {
-            return false;
-        }
+    public boolean setChecked(boolean isChecked) {
         // On: avoid bad wifi. Off: prompt.
-        String settingName = Settings.Global.NETWORK_AVOID_BAD_WIFI;
-        Settings.Global.putString(mContext.getContentResolver(), settingName,
-                ((SwitchPreference) preference).isChecked() ? "1" : null);
-        return true;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        final boolean currentSetting = avoidBadWifiCurrentSettings();
-        // TODO: can this ever be null? The return value of avoidBadWifiConfig() can only
-        // change if the resources change, but if that happens the activity will be recreated...
-        if (preference != null) {
-            SwitchPreference pref = (SwitchPreference) preference;
-            pref.setChecked(currentSetting);
-        }
+        return Settings.Global.putString(mContext.getContentResolver(),
+                Settings.Global.NETWORK_AVOID_BAD_WIFI, isChecked ? "1" : null);
     }
 
     private boolean avoidBadWifiConfig() {

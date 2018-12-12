@@ -43,8 +43,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Utility class for creating the dialog that asks users for explicit permission to grant
- * all of the requested capabilities to an accessibility service before the service is enabled
+ * Utility class for creating the dialog that asks users for explicit permission for an
+ * accessibility service to access user data before the service is enabled
  */
 public class AccessibilityServiceWarning {
     public static Dialog createCapabilitiesDialog(Activity parentActivity,
@@ -117,60 +117,9 @@ public class AccessibilityServiceWarning {
             encryptionWarningView.setVisibility(View.GONE);
         }
 
-        TextView capabilitiesHeaderView = (TextView) content.findViewById(
-                R.id.capabilities_header);
-        capabilitiesHeaderView.setText(context.getString(R.string.capabilities_list_title,
-                getServiceName(context, info)));
-
-        LinearLayout capabilitiesView = (LinearLayout) content.findViewById(R.id.capabilities);
-
-        // This capability is implicit for all services.
-        View capabilityView = inflater.inflate(
-                com.android.internal.R.layout.app_permission_item_old, null);
-
-        ImageView imageView = (ImageView) capabilityView.findViewById(
-                com.android.internal.R.id.perm_icon);
-        imageView.setImageDrawable(context.getDrawable(
-                com.android.internal.R.drawable.ic_text_dot));
-
-        TextView labelView = (TextView) capabilityView.findViewById(
-                com.android.internal.R.id.permission_group);
-        labelView.setText(context.getString(
-                R.string.capability_title_receiveAccessibilityEvents));
-
-        TextView descriptionView = (TextView) capabilityView.findViewById(
-                com.android.internal.R.id.permission_list);
-        descriptionView.setText(
-                context.getString(R.string.capability_desc_receiveAccessibilityEvents));
-
-        List<AccessibilityServiceInfo.CapabilityInfo> capabilities =
-                info.getCapabilityInfos(context);
-
-        capabilitiesView.addView(capabilityView);
-
-        // Service-specific capabilities.
-        final int capabilityCount = capabilities.size();
-        for (int i = 0; i < capabilityCount; i++) {
-            AccessibilityServiceInfo.CapabilityInfo capability = capabilities.get(i);
-
-            capabilityView = inflater.inflate(
-                    com.android.internal.R.layout.app_permission_item_old, null);
-
-            imageView = (ImageView) capabilityView.findViewById(
-                    com.android.internal.R.id.perm_icon);
-            imageView.setImageDrawable(context.getDrawable(
-                    com.android.internal.R.drawable.ic_text_dot));
-
-            labelView = (TextView) capabilityView.findViewById(
-                    com.android.internal.R.id.permission_group);
-            labelView.setText(context.getString(capability.titleResId));
-
-            descriptionView = (TextView) capabilityView.findViewById(
-                    com.android.internal.R.id.permission_list);
-            descriptionView.setText(context.getString(capability.descResId));
-
-            capabilitiesView.addView(capabilityView);
-        }
+        TextView serviceWarningTextView = content.findViewById(R.id.accessibility_service_warning);
+        serviceWarningTextView.setText(context.getString(R.string.accessibility_service_warning,
+            getServiceName(context, info)));
 
         return content;
     }
