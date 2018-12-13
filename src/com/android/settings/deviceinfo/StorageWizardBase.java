@@ -44,7 +44,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settingslib.Utils;
-import com.android.setupwizardlib.GlifLayout;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import java.text.NumberFormat;
 import java.util.List;

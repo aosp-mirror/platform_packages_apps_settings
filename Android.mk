@@ -30,6 +30,8 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.preference_preference \
     androidx.recyclerview_recyclerview \
     com.google.android.material_material \
+    setupcompat \
+    setupdesign
 
 LOCAL_JAVA_LIBRARIES := \
     telephony-common \
@@ -53,7 +55,6 @@ ifneq ($(INCREMENTAL_BUILDS),)
     LOCAL_JACK_FLAGS := --multi-dex native
 endif
 
-include frameworks/opt/setupwizard/library/common-gingerbread.mk
 include frameworks/base/packages/SettingsLib/common.mk
 include frameworks/base/packages/SettingsLib/search/common.mk
 

@@ -29,7 +29,8 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.setupwizardlib.span.LinkSpan;
+
+import com.google.android.setupdesign.span.LinkSpan;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 

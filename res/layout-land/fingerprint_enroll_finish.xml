@@ -15,7 +15,7 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <com.android.setupwizardlib.view.ButtonBarLayout
+                <com.google.android.setupdesign.view.ButtonBarLayout
                     style="@style/SuwGlifButtonBar.Stackable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -103,11 +103,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/security_settings_fingerprint_enroll_done" />
 
-                </com.android.setupwizardlib.view.ButtonBarLayout>
+                </com.google.android.setupdesign.view.ButtonBarLayout>
 
             </LinearLayout>
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent">
@@ -120,8 +120,8 @@
                     android:contentDescription="@android:string/fingerprint_icon_content_description"
                     android:src="@drawable/fingerprint_enroll_finish" />
 
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
         </LinearLayout>
     </ScrollView>
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

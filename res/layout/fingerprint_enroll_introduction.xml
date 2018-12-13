@@ -15,14 +15,14 @@
     limitations under the License
 -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="?attr/fingerprint_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:suwFooter="@layout/fingerprint_enroll_introduction_footer">
+    app:sucFooter="@layout/fingerprint_enroll_introduction_footer">
 
     <LinearLayout
         style="@style/SuwContentFrame"
@@ -32,20 +32,20 @@
         android:clipToPadding="false"
         android:orientation="vertical">
 
-        <com.android.setupwizardlib.view.RichTextView
+        <com.google.android.setupdesign.view.RichTextView
             android:id="@+id/description_text"
             style="@style/SuwDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/security_settings_fingerprint_enroll_introduction_message" />
 
-        <com.android.setupwizardlib.view.RichTextView
+        <com.google.android.setupdesign.view.RichTextView
             android:id="@+id/error_text"
             style="@style/SuwDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <com.android.setupwizardlib.view.FillContentLayout
+        <com.google.android.setupdesign.view.FillContentLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
@@ -57,8 +57,8 @@
                 android:contentDescription="@null"
                 android:src="@drawable/fingerprint_enroll_introduction" />
 
-        </com.android.setupwizardlib.view.FillContentLayout>
+        </com.google.android.setupdesign.view.FillContentLayout>
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

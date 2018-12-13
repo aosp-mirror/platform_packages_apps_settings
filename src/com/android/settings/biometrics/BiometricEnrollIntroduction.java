@@ -28,7 +28,8 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.setupwizardlib.span.LinkSpan;
+
+import com.google.android.setupdesign.span.LinkSpan;
 
 /**
  * Abstract base class for the intro onboarding activity for biometric enrollment.

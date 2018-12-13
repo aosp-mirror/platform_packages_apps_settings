@@ -68,7 +68,8 @@ import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.widget.ImeAwareEditText;
-import com.android.setupwizardlib.GlifLayout;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import java.util.ArrayList;
 import java.util.List;
