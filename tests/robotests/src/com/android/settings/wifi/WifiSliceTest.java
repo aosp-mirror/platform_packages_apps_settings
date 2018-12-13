@@ -20,10 +20,18 @@ package com.android.settings.wifi;
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
 
+import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 import static com.android.settings.wifi.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
@@ -52,13 +60,16 @@ import java.util.List;
 public class WifiSliceTest {
 
     private Context mContext;
-
+    private ContentResolver mResolver;
     private WifiManager mWifiManager;
     private WifiSlice mWifiSlice;
+    private WifiSlice.WifiScanWorker mWifiScanWorker;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        mResolver = mock(ContentResolver.class);
+        doReturn(mResolver).when(mContext).getContentResolver();
         mWifiManager = mContext.getSystemService(WifiManager.class);
 
         // Set-up specs for SliceMetadata.
@@ -66,6 +77,7 @@ public class WifiSliceTest {
         mWifiManager.setWifiEnabled(true);
 
         mWifiSlice = new WifiSlice(mContext);
+        mWifiScanWorker = new WifiSlice.WifiScanWorker(mContext, WIFI_SLICE_URI);
     }
 
     @Test
@@ -121,5 +133,12 @@ public class WifiSliceTest {
         mWifiSlice.onNotifyChange(intent);
 
         assertThat(wifiManager.getWifiState()).isEqualTo(WifiManager.WIFI_STATE_ENABLED);
+    }
+
+    @Test
+    public void onWifiStateChanged_shouldNotifyChange() {
+        mWifiScanWorker.onWifiStateChanged(WifiManager.WIFI_STATE_DISABLED);
+
+        verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
     }
 }

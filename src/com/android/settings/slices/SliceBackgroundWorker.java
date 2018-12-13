@@ -58,6 +58,10 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
         mUri = uri;
     }
 
+    public Uri getUri() {
+        return mUri;
+    }
+
     /**
      * Returns the singleton instance of the {@link SliceBackgroundWorker} for specified {@link
      * CustomSliceable}
