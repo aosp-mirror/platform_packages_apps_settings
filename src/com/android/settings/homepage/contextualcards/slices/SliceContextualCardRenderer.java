@@ -131,6 +131,12 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         // Set this listener so we can log the interaction users make on the slice
         cardHolder.sliceView.setOnSliceActionListener(this);
 
+        // Customize slice view for Settings
+        if (card.isLargeCard()) {
+            cardHolder.sliceView.showHeaderDivider(true);
+            cardHolder.sliceView.showActionDividers(true);
+        }
+
         initDismissalActions(cardHolder, card);
     }
 
