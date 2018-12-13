@@ -17,18 +17,42 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/EntityHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_centerHorizontal="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
 
-    <TextView android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+    <ImageView
+        android:id="@+id/header_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="fitCenter"/>
 
-    <TextView android:id="@+id/description"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/title"
+        style="@style/TextAppearance.EntityHeaderTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_marginTop="8dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"/>
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/TextAppearance.EntityHeaderSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:layout_marginTop="2dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"/>
 
 </LinearLayout>

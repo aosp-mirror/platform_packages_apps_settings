@@ -45,6 +45,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        setHeaderIconImageResource(R.drawable.ic_qrcode_24dp);
         WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
                 .getWifiNetworkConfig();
         if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
@@ -79,7 +80,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.next_label);
-        item.setIcon(R.drawable.ic_menu_add);
+        item.setIcon(R.drawable.ic_scan_24dp);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         super.onCreateOptionsMenu(menu, inflater);

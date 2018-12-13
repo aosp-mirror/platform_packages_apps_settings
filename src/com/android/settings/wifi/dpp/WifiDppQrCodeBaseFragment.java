@@ -47,6 +47,7 @@ import com.android.settings.R;
  * {@code WifiDppAddDeviceFragment}
  */
 public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
+    private ImageView mHeaderIcon;
     private TextView mTitle;
     private TextView mDescription;
 
@@ -89,6 +90,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     }
 
     private void initView(View view) {
+        mHeaderIcon = view.findViewById(R.id.header_icon);
         mTitle = view.findViewById(R.id.title);
         mDescription = view.findViewById(R.id.description);
 
@@ -106,6 +108,10 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
 
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonRight = view.findViewById(R.id.button_right);
+    }
+
+    protected void setHeaderIconImageResource(int resId) {
+        mHeaderIcon.setImageResource(resId);
     }
 
     protected void setTitle(String title) {
