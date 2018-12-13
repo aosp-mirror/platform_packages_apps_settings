@@ -86,9 +86,13 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
             if (scannerButton != null) {
                 scannerButton.setVisibility(View.VISIBLE);
                 scannerButton.setOnClickListener((View v) -> {
+                    String ssid = null;
+                    if (mAccessPoint != null) {
+                        ssid = mAccessPoint.getSsidStr();
+                    }
                     // Launch QR code scanner to join a network.
                     getContext().startActivity(
-                            WifiDppUtils.getConfiguratorQRCodeScannerIntent(/* ssid */ null));
+                            WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid));
                 });
             }
         }

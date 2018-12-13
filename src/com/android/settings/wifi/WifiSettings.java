@@ -244,7 +244,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             mAddPreference.setButtonOnClickListener((View v) -> {
                 // Launch QR code scanner to join a network.
                 getContext().startActivity(
-                        WifiDppUtils.getConfiguratorQRCodeScannerIntent(/* ssid */ null));
+                        WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
             });
         }
         mStatusMessagePreference = (LinkablePreference) findPreference(PREF_KEY_STATUS_MESSAGE);
