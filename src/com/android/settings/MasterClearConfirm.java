@@ -45,7 +45,9 @@ import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.TemplateLayout;
-import com.google.android.setupdesign.template.ButtonFooterMixin;
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.item.FooterButton.ButtonType;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -153,11 +155,14 @@ public class MasterClearConfirm extends InstrumentedFragment {
         final TemplateLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
 
         final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
-        buttonFooterMixin.removeAllViews();
-        buttonFooterMixin.addSpace();
-        buttonFooterMixin.addSpace();
-        buttonFooterMixin.addButton(R.string.master_clear_button_text,
-                R.style.SuwGlifButton_Primary).setOnClickListener(mFinalClickListener);
+        buttonFooterMixin.setPrimaryButton(
+                new FooterButton(
+                        getActivity(),
+                        R.string.master_clear_button_text,
+                        mFinalClickListener,
+                        ButtonType.OTHER,
+                        R.style.SuwGlifButton_Primary)
+        );
     }
 
     private void setUpActionBarAndTitle() {

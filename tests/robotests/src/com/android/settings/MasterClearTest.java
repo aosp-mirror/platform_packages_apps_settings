@@ -51,6 +51,7 @@ import android.widget.ScrollView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.google.android.setupcompat.item.FooterButton;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -386,7 +387,7 @@ public class MasterClearTest {
     public void testOnGlobalLayout_shouldNotRemoveListener() {
         final ViewTreeObserver viewTreeObserver = mock(ViewTreeObserver.class);
         mMasterClear.mScrollView = mScrollView;
-        mMasterClear.mInitiateButton = mock(Button.class);
+        mMasterClear.mInitiateButton = mock(FooterButton.class);
         doReturn(true).when(mMasterClear).hasReachedBottom(any());
         when(mScrollView.getViewTreeObserver()).thenReturn(viewTreeObserver);
 
