@@ -39,11 +39,11 @@
             android:orientation="horizontal">
             <ImageView
                 android:id="@android:id/icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/secondary_app_icon_size"
+                android:layout_height="@dimen/secondary_app_icon_size"
                 android:layout_gravity="center"
-                android:minWidth="48dp"
-                android:scaleType="centerInside"
+                android:minWidth="@dimen/secondary_app_icon_size"
+                android:scaleType="fitCenter"
                 android:layout_marginEnd="@*android:dimen/preference_item_padding_inner"
                  />
         </LinearLayout>
