@@ -34,6 +34,10 @@ import com.android.settings.wifi.qrcode.QrDecorateView;
 import com.android.settings.R;
 
 /**
+ * TODO: Should refine code to only initiate UI component in each child fragment.
+ */
+
+/**
  * There are below 4 fragments for Wi-Fi DPP UI flow, to reduce redundant code of UI components,
  * this parent fragment instantiates all UI components and provides setting APIs for them.
  *
@@ -58,11 +62,9 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     private ImageView mWifiApPictureView;   //optional, for WifiDppAddDeviceFragment
     private TextView mChooseDifferentNetwork;//optional, for WifiDppAddDeviceFragment
 
-    private Button mButtonLeft;             //optional, for WifiDppQrCodeScannerFragment,
-                                            //              WifiDppChooseSavedWifiNetworkFragment,
+    private Button mButtonLeft;             //optional, for WifiDppChooseSavedWifiNetworkFragment,
                                             //              WifiDppAddDeviceFragment
-    private Button mButtonRight;            //optional, for WifiDppQrCodeScannerFragment,
-                                            //              WifiDppChooseSavedWifiNetworkFragment,
+    private Button mButtonRight;            //optional, for WifiDppChooseSavedWifiNetworkFragment,
                                             //              WifiDppAddDeviceFragment
 
     abstract protected int getLayout();
@@ -122,8 +124,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     }
 
     /**
-     * optional, for WifiDppQrCodeScannerFragment,
-     *               WifiDppChooseSavedWifiNetworkFragment,
+     * optional, for WifiDppChooseSavedWifiNetworkFragment,
      *               WifiDppAddDeviceFragment
      */
     protected void setLeftButtonText(String text) {
@@ -133,8 +134,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     }
 
     /**
-     * optional, for WifiDppQrCodeScannerFragment,
-     *               WifiDppChooseSavedWifiNetworkFragment,
+     * optional, for WifiDppChooseSavedWifiNetworkFragment,
      *               WifiDppAddDeviceFragment
      */
     protected void setRightButtonText(String text) {
@@ -144,8 +144,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     }
 
     /**
-     * optional, for WifiDppQrCodeScannerFragment,
-     *               WifiDppChooseSavedWifiNetworkFragment,
+     * optional, for WifiDppChooseSavedWifiNetworkFragment,
      *               WifiDppAddDeviceFragment
      */
     protected void hideLeftButton() {
@@ -155,8 +154,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     }
 
     /**
-     * optional, for WifiDppQrCodeScannerFragment,
-     *               WifiDppChooseSavedWifiNetworkFragment,
+     * optional, for WifiDppChooseSavedWifiNetworkFragment,
      *               WifiDppAddDeviceFragment
      */
     protected void hideRightButton() {
@@ -166,8 +164,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     }
 
     /**
-     * optional, for WifiDppQrCodeScannerFragment,
-     *               WifiDppChooseSavedWifiNetworkFragment,
+     * optional, for WifiDppChooseSavedWifiNetworkFragment,
      *               WifiDppAddDeviceFragment
      */
     protected void setLeftButtonOnClickListener(View.OnClickListener listener) {
@@ -177,8 +174,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     }
 
     /**
-     * optional, for WifiDppQrCodeScannerFragment,
-     *               WifiDppChooseSavedWifiNetworkFragment,
+     * optional, for WifiDppChooseSavedWifiNetworkFragment,
      *               WifiDppAddDeviceFragment
      */
     protected void setRightButtonOnClickListener(View.OnClickListener listener) {

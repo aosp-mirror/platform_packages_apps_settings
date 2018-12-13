@@ -50,13 +50,28 @@
                         android:text="@string/wifi_ssid"
                         android:textDirection="locale" />
 
-                <EditText android:id="@+id/ssid"
+                <RelativeLayout
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+                    <EditText android:id="@+id/ssid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/wifi_item_edit_content"
+                            android:hint="@string/wifi_ssid_hint"
+                            android:singleLine="true"
+                            android:inputType="textNoSuggestions" />
+                    <ImageButton
+                        android:id="@+id/ssid_scanner_button"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/wifi_item_edit_content"
-                        android:hint="@string/wifi_ssid_hint"
-                        android:singleLine="true"
-                        android:inputType="textNoSuggestions" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:src="@drawable/ic_qrcode_24dp"
+                        android:visibility="gone"
+                        android:contentDescription="@string/wifi_add_network" />
+                </RelativeLayout>
 
                 <LinearLayout android:id="@+id/ssid_too_long_warning"
                               android:layout_width="match_parent"
@@ -270,12 +285,28 @@
                         style="@style/wifi_item_label"
                         android:text="@string/wifi_password" />
 
-                <EditText android:id="@+id/password"
-                        android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                    <EditText android:id="@+id/password"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              style="@style/wifi_item_edit_content"
+                              android:singleLine="true"
+                              android:password="true" />
+
+                    <ImageButton
+                        android:id="@+id/password_scanner_button"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/wifi_item_edit_content"
-                        android:singleLine="true"
-                        android:password="true" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:src="@drawable/ic_qrcode_24dp"
+                        android:visibility="gone"
+                        android:contentDescription="@string/wifi_add_network" />
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout android:id="@+id/show_password_layout"

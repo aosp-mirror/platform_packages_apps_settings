@@ -15,7 +15,7 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <com.android.setupwizardlib.view.FillContentLayout
+                <com.google.android.setupdesign.view.FillContentLayout
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginVertical="24dp"
@@ -120,7 +120,7 @@
                          android:layout_width="match_parent"
                          android:layout_height="match_parent"
                          android:layout_gravity="center" />
-                </com.android.setupwizardlib.view.FillContentLayout>
+                </com.google.android.setupdesign.view.FillContentLayout>
 
                 <TextView
                     style="@style/TextAppearance.FingerprintErrorText"
@@ -139,4 +139,4 @@
 
         </LinearLayout>
     </ScrollView>
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

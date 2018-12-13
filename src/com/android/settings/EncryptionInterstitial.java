@@ -39,7 +39,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.setupwizardlib.GlifLayout;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import java.util.List;
 

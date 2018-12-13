@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
@@ -89,7 +89,7 @@
 
         </ScrollView>
 
-        <com.android.setupwizardlib.view.FillContentLayout
+        <com.google.android.setupdesign.view.FillContentLayout
             style="@style/LockPatternContainerStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -102,7 +102,7 @@
                 android:layout_gravity="center"
                 android:background="@color/lock_pattern_background" />
 
-        </com.android.setupwizardlib.view.FillContentLayout>
+        </com.google.android.setupdesign.view.FillContentLayout>
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

@@ -16,14 +16,14 @@
 -->
 
 <!-- Used in phone portrait and tablet, as referenced in alias.xml. -->
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:icon="@drawable/ic_lock"
     android:layout="@layout/suw_glif_blank_template"
-    settings:suwFooter="@layout/choose_lock_pattern_common_footer"
+    settings:sucFooter="@layout/choose_lock_pattern_common_footer"
     settings:suwHeaderText="@string/lockpassword_choose_your_screen_lock_header">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
@@ -85,7 +85,7 @@
                 android:paddingHorizontal="?attr/suwMarginSides"
                 android:textSize="12sp" />
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 style="@style/LockPatternContainerStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -97,7 +97,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center" />
 
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
         </LinearLayout>
 
@@ -119,4 +119,4 @@
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

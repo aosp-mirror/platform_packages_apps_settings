@@ -15,14 +15,14 @@
     limitations under the License
 -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:icon="@drawable/ic_suggested_notifications"
-    settings:suwFooter="@layout/redaction_interstitial_footer"
+    settings:sucFooter="@layout/redaction_interstitial_footer"
     settings:suwHeaderText="@string/lock_screen_notifications_interstitial_title">
 
     <LinearLayout
@@ -78,4 +78,4 @@
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

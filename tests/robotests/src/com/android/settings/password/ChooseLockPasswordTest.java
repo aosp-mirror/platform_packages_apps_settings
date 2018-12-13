@@ -32,7 +32,8 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.setupwizardlib.GlifLayout;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
 import org.junit.Before;

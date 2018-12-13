@@ -73,4 +73,12 @@ public class WifiDppConfiguratorActivityTest {
 
         assertThat(activity instanceof WifiNetworkConfig.Retriever).isEqualTo(true);
     }
+
+    @Test
+    public void testActivity_shouldImplementsQrCodeGeneratorFragmentCallback() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
+
+        assertThat(activity instanceof WifiDppQrCodeGeneratorFragment
+                .OnQrCodeGeneratorFragmentAddButtonClickedListener).isEqualTo(true);
+    }
 }

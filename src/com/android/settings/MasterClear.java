@@ -64,8 +64,9 @@ import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.setupwizardlib.TemplateLayout;
-import com.android.setupwizardlib.template.ButtonFooterMixin;
+
+import com.google.android.setupcompat.TemplateLayout;
+import com.google.android.setupdesign.template.ButtonFooterMixin;
 
 import java.util.List;
 

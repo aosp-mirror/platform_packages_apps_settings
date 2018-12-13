@@ -15,14 +15,14 @@
     limitations under the License.
 -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:suwFooter="@layout/fingerprint_enroll_find_sensor_base_footer">
+    app:sucFooter="@layout/fingerprint_enroll_find_sensor_base_footer">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -77,4 +77,4 @@
 
         </LinearLayout>
     </FrameLayout>
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

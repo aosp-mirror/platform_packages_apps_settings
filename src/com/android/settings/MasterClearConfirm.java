@@ -43,8 +43,9 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.setupwizardlib.TemplateLayout;
-import com.android.setupwizardlib.template.ButtonFooterMixin;
+
+import com.google.android.setupcompat.TemplateLayout;
+import com.google.android.setupdesign.template.ButtonFooterMixin;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"

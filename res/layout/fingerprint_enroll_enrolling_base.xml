@@ -15,14 +15,14 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="?attr/fingerprint_layout_theme"
-    app:suwFooter="@layout/fingerprint_enroll_enrolling_base_footer">
+    app:sucFooter="@layout/fingerprint_enroll_enrolling_base_footer">
 
     <LinearLayout
         style="@style/SuwContentFrame"
@@ -64,7 +64,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="@dimen/fingerprint_progress_bar_max_size"
                 android:layout_height="@dimen/fingerprint_progress_bar_max_size"
                 android:paddingTop="0dp"
@@ -75,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center" />
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
             <TextView
                 style="@style/TextAppearance.FingerprintErrorText"
@@ -91,4 +91,4 @@
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>
