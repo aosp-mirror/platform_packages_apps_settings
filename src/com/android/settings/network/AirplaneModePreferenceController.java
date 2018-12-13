@@ -22,8 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.SystemProperties;
 import android.provider.SettingsSlicesContract;
+import android.sysprop.TelephonyProperties;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -31,7 +31,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -75,8 +74,8 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_AIRPLANE_MODE.equals(preference.getKey()) && Boolean.parseBoolean(
-                SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
+        if (KEY_AIRPLANE_MODE.equals(preference.getKey())
+                && TelephonyProperties.in_ecm_mode().orElse(false)) {
             // In ECM mode launch ECM app dialog
             if (mFragment != null) {
                 mFragment.startActivityForResult(
