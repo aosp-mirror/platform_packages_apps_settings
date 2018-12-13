@@ -18,6 +18,13 @@ package com.android.settings.homepage.contextualcards;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.net.Uri;
 import android.util.ArrayMap;
@@ -36,6 +43,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ContextualCardManagerTest {
@@ -107,6 +115,25 @@ public class ContextualCardManagerTest {
                 .isEqualTo(ContextualCard.CardType.CONDITIONAL_FOOTER);
     }
 
+    @Test
+    public void onFinishCardLoading_fastLoad_shouldCallOnContextualCardUpdated() {
+        mManager.mStartTime = System.currentTimeMillis();
+        final ContextualCardManager manager = spy(mManager);
+        doNothing().when(manager).onContextualCardUpdated(anyMap());
+
+        manager.onFinishCardLoading(new ArrayList<>());
+        verify(manager).onContextualCardUpdated(nullable(Map.class));
+    }
+
+    @Test
+    public void onFinishCardLoading_slowLoad_shouldSkipOnContextualCardUpdated() {
+        mManager.mStartTime = 0;
+        final ContextualCardManager manager = spy(mManager);
+        doNothing().when(manager).onContextualCardUpdated(anyMap());
+
+        manager.onFinishCardLoading(new ArrayList<>());
+        verify(manager, never()).onContextualCardUpdated(anyMap());
+    }
 
     private ContextualCard buildContextualCard(String sliceUri) {
         return new ContextualCard.Builder()

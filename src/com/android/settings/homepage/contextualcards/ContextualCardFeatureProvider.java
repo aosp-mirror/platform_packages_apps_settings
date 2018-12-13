@@ -24,16 +24,16 @@ import java.util.List;
 public interface ContextualCardFeatureProvider {
 
     /** Homepage displays. */
-    public void logHomepageDisplay(Context context, Long latency);
+    void logHomepageDisplay(Context context, long latency);
 
     /** When user clicks dismiss in contextual card */
-    public void logContextualCardDismiss(Context context, ContextualCard card);
+    void logContextualCardDismiss(Context context, ContextualCard card);
 
     /** After ContextualCardManager decides which cards will be displayed/hidden */
-    public void logContextualCardDisplay(Context context, List<ContextualCard> showedCards,
+    void logContextualCardDisplay(Context context, List<ContextualCard> showedCards,
             List<ContextualCard> hiddenCards);
 
     /** When user clicks toggle/title area of a contextual card. */
-    public void logContextualCardClick(Context context, ContextualCard card, int row,
+    void logContextualCardClick(Context context, ContextualCard card, int row,
             int tapTarget);
 }

@@ -85,11 +85,10 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
     private static final int TARGET_SLIDER = 3;
 
     @Override
-    public void logHomepageDisplay(Context context, Long latency) {
-        final Intent intent = new Intent();
-        intent.putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_HOME_SHOW);
-        intent.putExtra(EXTRA_LATENCY, latency);
-        sendBroadcast(context, intent);
+    public void logHomepageDisplay(Context context, long latency) {
+        sendBroadcast(context, new Intent()
+                .putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_HOME_SHOW)
+                .putExtra(EXTRA_LATENCY, latency));
     }
 
     @Override

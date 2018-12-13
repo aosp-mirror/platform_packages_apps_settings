@@ -109,7 +109,6 @@ public class ConditionContextualCardController implements ContextualCardControll
         final Map<Integer, List<ContextualCard>> conditionalCards =
                 buildConditionalCardsWithFooterOrHeader(conditionCards);
         mListener.onContextualCardUpdated(conditionalCards);
-
     }
 
     /**

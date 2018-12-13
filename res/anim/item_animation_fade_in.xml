@@ -18,25 +18,10 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
      android:duration="500">
 
-    <!-- Move up the view by 20% of it’s own height, and let it fall down to its final position -->
-    <translate
-        android:fromYDelta="-20%"
-        android:toYDelta="0"
-        android:interpolator="@android:anim/decelerate_interpolator"/>
-
     <!-- Fade in: alpha from 0 to 100% -->
     <alpha
         android:fromAlpha="0"
         android:toAlpha="1"
         android:interpolator="@android:anim/decelerate_interpolator"/>
 
-    <!-- Shrink from 105% to 100% -->
-    <scale
-        android:fromXScale="105%"
-        android:fromYScale="105%"
-        android:toXScale="100%"
-        android:toYScale="100%"
-        android:pivotX="50%"
-        android:pivotY="50%"
-        android:interpolator="@android:anim/decelerate_interpolator"/>
 </set>

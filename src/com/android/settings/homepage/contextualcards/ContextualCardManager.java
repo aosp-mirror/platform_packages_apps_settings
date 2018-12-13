@@ -59,12 +59,15 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         ContextualCardUpdateListener {
 
     private static final String TAG = "ContextualCardManager";
+
     //The list for Settings Custom Card
     private static final int[] SETTINGS_CARDS =
             {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
 
     @VisibleForTesting
     final List<ContextualCard> mContextualCards;
+    @VisibleForTesting
+    long mStartTime;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
@@ -72,7 +75,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     private final List<LifecycleObserver> mLifecycleObservers;
 
     private ContextualCardUpdateListener mListener;
-    private long mStartTime;
 
     public ContextualCardManager(Context context, Lifecycle lifecycle) {
         mContext = context;
@@ -169,11 +171,14 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     @Override
     public void onFinishCardLoading(List<ContextualCard> cards) {
-        onContextualCardUpdated(cards.stream().collect(groupingBy(ContextualCard::getCardType)));
-        final long elapsedTime = System.currentTimeMillis() - mStartTime;
-        final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
-        contextualCardFeatureProvider.logHomepageDisplay(mContext, elapsedTime);
+        final long loadTime = System.currentTimeMillis() - mStartTime;
+        if (loadTime <= ContextualCardLoader.CARD_CONTENT_LOADER_TIMEOUT_MS) {
+            onContextualCardUpdated(
+                    cards.stream().collect(groupingBy(ContextualCard::getCardType)));
+        }
+        final long totalTime = System.currentTimeMillis() - mStartTime;
+        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider()
+                .logHomepageDisplay(mContext, totalTime);
     }
 
     public ControllerRendererPool getControllerRendererPool() {
