@@ -64,6 +64,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
     private static final String LOG_TAG = "MyDeviceInfoFragment";
     private static final String KEY_MY_DEVICE_INFO_HEADER = "my_device_info_header";
 
+    private BuildNumberPreferenceController mBuildNumberPreferenceController;
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO;
@@ -79,6 +81,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
         super.onAttach(context);
         use(FirmwareVersionPreferenceController.class).setHost(this /*parent*/);
         use(DeviceModelPreferenceController.class).setHost(this /* parent */);
+        mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
+        mBuildNumberPreferenceController.setHost(this /* parent */);
     }
 
     @Override
@@ -126,17 +130,13 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new ManualPreferenceController(context));
         controllers.add(new FeedbackPreferenceController(fragment, context));
         controllers.add(new FccEquipmentIdPreferenceController(context));
-        controllers.add(
-                new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
         controllers.add(new UptimePreferenceController(context, lifecycle));
         return controllers;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final BuildNumberPreferenceController buildNumberPreferenceController =
-                use(BuildNumberPreferenceController.class);
-        if (buildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
+        if (mBuildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);

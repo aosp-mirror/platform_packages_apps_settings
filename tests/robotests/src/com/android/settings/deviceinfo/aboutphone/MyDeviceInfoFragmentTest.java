@@ -104,12 +104,7 @@ public class MyDeviceInfoFragmentTest {
     public void onActivityResult_shouldCallBuildNumberPreferenceController() {
         final BuildNumberPreferenceController controller =
             mock(BuildNumberPreferenceController.class);
-        final Map<Class, List<AbstractPreferenceController>> preferenceControllers =
-            new ArrayMap<>();
-        final List<AbstractPreferenceController> controllerList = new ArrayList<>();
-        controllerList.add(controller);
-        preferenceControllers.put(BuildNumberPreferenceController.class, controllerList);
-        ReflectionHelpers.setField(mSettings, "mPreferenceControllers", preferenceControllers);
+        ReflectionHelpers.setField(mSettings, "mBuildNumberPreferenceController", controller);
 
         final int requestCode = 1;
         final int resultCode = 2;
