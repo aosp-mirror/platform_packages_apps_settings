@@ -21,10 +21,13 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.wifi.dpp.WifiDppUtils;
+
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.wifi.AccessPoint;
@@ -77,7 +80,18 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mView = getLayoutInflater().inflate(R.layout.wifi_dialog, null);
+        mView = getLayoutInflater().inflate(R.layout.wifi_dialog, /* root */ null);
+        if (WifiDppUtils.isSharingNetworkEnabled(getContext())) {
+            final ImageButton scannerButton = mView.findViewById(R.id.password_scanner_button);
+            if (scannerButton != null) {
+                scannerButton.setVisibility(View.VISIBLE);
+                scannerButton.setOnClickListener((View v) -> {
+                    // Launch QR code scanner to join a network.
+                    getContext().startActivity(
+                            WifiDppUtils.getConfiguratorQRCodeScannerIntent(/* ssid */ null));
+                });
+            }
+        }
         setView(mView);
         mController = new WifiConfigController(this, mView, mAccessPoint, mMode);
         super.onCreate(savedInstanceState);
