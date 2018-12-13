@@ -19,10 +19,10 @@ import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BAT
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -50,9 +50,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
@@ -66,18 +64,14 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Improve this test class so that it starts up the real activity and fragment.
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-    SettingsShadowResources.class,
-    SettingsShadowResources.SettingsShadowTheme.class,
-})
+@RunWith(RobolectricTestRunner.class)
 public class PowerUsageSummaryTest {
 
     private static final int UID = 123;
@@ -115,8 +109,6 @@ public class PowerUsageSummaryTest {
     private SettingsActivity mSettingsActivity;
     @Mock
     private LoaderManager mLoaderManager;
-    @Mock
-    private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Menu mMenu;
     @Mock
@@ -240,14 +232,14 @@ public class PowerUsageSummaryTest {
             .thenReturn(true);
         doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) {
                 return mRealContext.getString(
                     R.string.power_usage_old_debug, invocation.getArguments()[0]);
             }
         }).when(mFeatureFactory.powerUsageFeatureProvider).getOldEstimateDebugString(any());
         doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) {
                 return mRealContext.getString(
                     R.string.power_usage_enhanced_debug, invocation.getArguments()[0]);
             }

@@ -22,14 +22,13 @@ import android.content.Context;
 import android.provider.Settings;
 import android.text.format.DateUtils;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryTipPolicyTest {
 
     private static final String BATTERY_TIP_CONSTANTS_VALUE = "battery_tip_enabled=true"

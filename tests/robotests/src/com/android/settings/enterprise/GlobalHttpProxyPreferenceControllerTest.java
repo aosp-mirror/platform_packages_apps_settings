@@ -25,7 +25,6 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +32,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class GlobalHttpProxyPreferenceControllerTest {
 
     private static final String KEY_GLOBAL_HTTP_PROXY = "global_http_proxy";

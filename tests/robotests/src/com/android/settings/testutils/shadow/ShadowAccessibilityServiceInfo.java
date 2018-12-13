@@ -31,7 +31,7 @@ public class ShadowAccessibilityServiceInfo {
     }
 
     @Implementation
-    public ComponentName getComponentName() {
+    protected ComponentName getComponentName() {
         return sComponentName;
     }
 }

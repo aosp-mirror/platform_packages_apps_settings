@@ -73,5 +73,4 @@ public class VideoPreferenceControllerTest {
 
         verify(mPreference).onViewVisible(anyBoolean());
     }
-
 }

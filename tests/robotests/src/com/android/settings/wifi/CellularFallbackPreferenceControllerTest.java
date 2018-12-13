@@ -22,16 +22,15 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CellularFallbackPreferenceControllerTest {
     private static final String KEY_CELLULAR_FALLBACK = "wifi_cellular_data_fallback";
 

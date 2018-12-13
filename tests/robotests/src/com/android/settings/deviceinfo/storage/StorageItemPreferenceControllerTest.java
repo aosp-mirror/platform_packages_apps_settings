@@ -24,7 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -54,22 +54,20 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class StorageItemPreferenceControllerTest {
 
     private Context mContext;
@@ -90,10 +88,8 @@ public class StorageItemPreferenceControllerTest {
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
-        SettingsShadowResources.overrideResource("android:string/fileSizeSuffix", "%1$s %2$s");
-        SettingsShadowResources.overrideResource("android:string/gigabyteShort", "GB");
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
@@ -109,11 +105,6 @@ public class StorageItemPreferenceControllerTest {
         // Inflate the preference and the widget.
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         inflater.inflate(mPreference.getLayoutResource(), new LinearLayout(mContext), false);
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowResources.reset();
     }
 
     @Test

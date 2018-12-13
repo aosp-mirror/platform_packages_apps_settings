@@ -50,7 +50,6 @@ import androidx.slice.widget.SliceLiveData;
 import com.android.settings.R;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
@@ -65,6 +64,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -85,7 +85,7 @@ import java.util.Set;
 /**
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class, ShadowThreadUtils.class, ShadowUtils.class,
         SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
         ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class,
@@ -512,7 +512,7 @@ public class SettingsSliceProviderTest {
         }
 
         @Implementation
-        public void close() {
+        protected void close() {
             mWifiTracker.onDestroy();
         }
 
@@ -545,11 +545,12 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc998")
     public void grantWhitelistedPackagePermissions_noWhitelist_shouldNotGrant() {
         final List<Uri> uris = new ArrayList<>();
         uris.add(Uri.parse("content://settings/slice"));
 
-        mProvider.grantWhitelistedPackagePermissions(mContext, uris);
+        SettingsSliceProvider.grantWhitelistedPackagePermissions(mContext, uris);
 
         verify(mManager, never()).grantSlicePermission(anyString(), any(Uri.class));
     }
@@ -560,7 +561,7 @@ public class SettingsSliceProviderTest {
         final List<Uri> uris = new ArrayList<>();
         uris.add(Uri.parse("content://settings/slice"));
 
-        mProvider.grantWhitelistedPackagePermissions(mContext, uris);
+        SettingsSliceProvider.grantWhitelistedPackagePermissions(mContext, uris);
 
         verify(mManager)
                 .grantSlicePermission("com.android.settings.slice_whitelist_package", uris.get(0));
@@ -616,11 +617,11 @@ public class SettingsSliceProviderTest {
         }
 
         @Implementation
-        public static void setThreadPolicy(final StrictMode.ThreadPolicy policy) {
+        protected static void setThreadPolicy(final StrictMode.ThreadPolicy policy) {
             sSetThreadPolicyCount++;
         }
 
-        public static boolean isThreadPolicyOverridden() {
+        private static boolean isThreadPolicyOverridden() {
             return sSetThreadPolicyCount != 0;
         }
     }

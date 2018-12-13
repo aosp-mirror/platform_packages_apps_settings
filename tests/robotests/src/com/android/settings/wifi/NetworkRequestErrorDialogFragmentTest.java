@@ -30,8 +30,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
 
@@ -39,13 +37,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowResourcesImpl.class, ShadowAlertDialogCompat.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowAlertDialogCompat.class)
 public class NetworkRequestErrorDialogFragmentTest {
 
     private FragmentActivity mActivity;

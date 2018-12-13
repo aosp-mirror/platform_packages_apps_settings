@@ -19,8 +19,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -41,7 +41,6 @@ import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.applications.ApplicationsState;
@@ -52,6 +51,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implements;
@@ -59,7 +59,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowRestrictedLockUtils.class,
         ShadowRestrictedLockUtilsInternal.class,

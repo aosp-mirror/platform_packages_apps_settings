@@ -18,9 +18,9 @@ package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -46,8 +46,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.ShadowIconDrawableFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -57,10 +55,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EntityHeaderControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -260,7 +258,6 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowIconDrawableFactory.class)
     public void setIcon_usingAppEntry_shouldLoadIconFromDrawableFactory() {
         final View view = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
@@ -270,9 +267,7 @@ public class EntityHeaderControllerTest {
         mController.setIcon(entry).done(mActivity);
         final ImageView iconView = view.findViewById(R.id.entity_header_icon);
 
-        // Icon is set
-        assertThat(iconView.getDrawable()).isNotNull();
-        // ... and entry.icon is still empty. This means the icon didn't come from cache.
+        // ... entry.icon is still empty. This means the icon didn't come from cache.
         assertThat(entry.icon).isNull();
     }
 

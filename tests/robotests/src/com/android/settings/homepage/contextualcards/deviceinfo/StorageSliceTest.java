@@ -33,18 +33,18 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class StorageSliceTest {
     private static final String USED_BYTES_TEXT = "test used bytes";
     private static final String SUMMARY_TEXT = "test summary";

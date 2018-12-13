@@ -34,7 +34,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -42,11 +41,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppPermissionPreferenceControllerTest {
 
     @Mock
@@ -77,7 +77,8 @@ public class AppPermissionPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_isAlwaysAvailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(AppPermissionPreferenceController.AVAILABLE);
     }
 
     @Test

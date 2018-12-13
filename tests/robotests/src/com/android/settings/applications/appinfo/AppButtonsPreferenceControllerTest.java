@@ -18,11 +18,11 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -49,7 +49,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -64,9 +63,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppButtonsPreferenceControllerTest {
 
     private static final String PACKAGE_NAME = "com.android.settings";
@@ -202,7 +202,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_nonInstantApp() throws Exception {
+    public void isAvailable_nonInstantApp() {
         mController.mAppEntry = mAppEntry;
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
@@ -215,7 +215,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_instantApp() throws Exception {
+    public void isAvailable_instantApp() {
         mController.mAppEntry = mAppEntry;
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
@@ -371,7 +371,8 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void onPackageListChanged_available_shouldRefreshUi() {
-        doReturn(mController.AVAILABLE).when(mController).getAvailabilityStatus();
+        doReturn(AppButtonsPreferenceController.AVAILABLE)
+            .when(mController).getAvailabilityStatus();
         doReturn(true).when(mController).refreshUi();
 
         mController.onPackageListChanged();
@@ -381,7 +382,8 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void onPackageListChanged_notAvailable_shouldNotRefreshUiAndNoCrash() {
-        doReturn(mController.DISABLED_FOR_USER).when(mController).getAvailabilityStatus();
+        doReturn(AppButtonsPreferenceController.DISABLED_FOR_USER)
+            .when(mController).getAvailabilityStatus();
 
         mController.onPackageListChanged();
 

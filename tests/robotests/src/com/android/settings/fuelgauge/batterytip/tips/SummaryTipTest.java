@@ -24,7 +24,6 @@ import android.os.Parcel;
 import android.text.format.DateUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -32,9 +31,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SummaryTipTest {
 
     private static final long AVERAGE_TIME_MS = DateUtils.HOUR_IN_MILLIS;
@@ -49,8 +49,7 @@ public class SummaryTipTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mSummaryTip =
-                new SummaryTip(BatteryTip.StateType.NEW, AVERAGE_TIME_MS);
+        mSummaryTip = new SummaryTip(BatteryTip.StateType.NEW, AVERAGE_TIME_MS);
     }
 
     @Test

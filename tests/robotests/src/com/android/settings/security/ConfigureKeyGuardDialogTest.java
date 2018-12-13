@@ -22,14 +22,12 @@ import static org.mockito.Mockito.verify;
 
 import android.content.DialogInterface;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConfigureKeyGuardDialogTest {
 
     @Test

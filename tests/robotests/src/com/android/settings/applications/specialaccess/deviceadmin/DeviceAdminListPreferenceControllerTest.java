@@ -32,7 +32,6 @@ import android.os.UserHandle;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
@@ -41,9 +40,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DeviceAdminListPreferenceControllerTest {
 
     @Mock

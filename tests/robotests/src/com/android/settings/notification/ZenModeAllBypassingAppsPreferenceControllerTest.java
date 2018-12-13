@@ -19,8 +19,6 @@ package com.android.settings.notification;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -28,12 +26,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ParceledListSlice;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -41,6 +37,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -50,7 +47,7 @@ import java.util.List;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeAllBypassingAppsPreferenceControllerTest {
     private ZenModeAllBypassingAppsPreferenceController mController;
 
@@ -110,7 +107,7 @@ public class ZenModeAllBypassingAppsPreferenceControllerTest {
 
     @Test
     public void testUpdateNotificationChannelList_emptyChannelsList() {
-        mController.updateNotificationChannelList(new ArrayList<ApplicationsState.AppEntry>());
+        mController.updateNotificationChannelList(new ArrayList<>());
         verify(mPreferenceScreen, never()).addPreference(any());
     }
 }

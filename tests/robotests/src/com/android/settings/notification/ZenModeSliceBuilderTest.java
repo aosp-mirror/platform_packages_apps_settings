@@ -33,20 +33,20 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
 import com.android.settings.testutils.shadow.ShadowNotificationManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @Config(shadows = ShadowNotificationManager.class)
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeSliceBuilderTest {
 
     private Context mContext;

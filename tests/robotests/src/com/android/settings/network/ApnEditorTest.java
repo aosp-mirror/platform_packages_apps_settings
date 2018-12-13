@@ -46,7 +46,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.ApnEditor.ApnData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,12 +56,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ApnEditorTest {
 
-    private static final Object[] APN_DATA = new Object[] {
+    private static final Object[] APN_DATA = {
             0, /* ID */
             "apn_name" /* apn name */,
             "apn.com" /* apn */,
@@ -137,7 +137,7 @@ public class ApnEditorTest {
                 any(String.class),
                 any(String[].class),
                 any(String.class));
-  }
+    }
 
     @Test
     public void testSetStringValue_valueChanged_shouldSetValue() {
@@ -465,7 +465,7 @@ public class ApnEditorTest {
 
     private void initCursor() {
         doReturn(2).when(mCursor).getColumnCount();
-        doReturn(Integer.valueOf(2)).when(mCursor).getInt(CURSOR_INTEGER_INDEX);
+        doReturn(2).when(mCursor).getInt(CURSOR_INTEGER_INDEX);
         doReturn("str").when(mCursor).getString(CURSOR_STRING_INDEX);
         doReturn(Cursor.FIELD_TYPE_INTEGER).when(mCursor).getType(CURSOR_INTEGER_INDEX);
         doReturn(Cursor.FIELD_TYPE_STRING).when(mCursor).getType(CURSOR_STRING_INDEX);

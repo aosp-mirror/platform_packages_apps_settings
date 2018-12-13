@@ -33,16 +33,16 @@ import android.content.res.Resources;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PreventRingingParentPreferenceControllerTest {
 
     @Mock
@@ -50,9 +50,6 @@ public class PreventRingingParentPreferenceControllerTest {
 
     private Context mContext;
     private PreventRingingParentPreferenceController mController;
-    private final String VIBRATE_SUMMARY = "On (vibrate)";
-    private final String MUTE_SUMMARY = "On (mute)";
-    private final String NONE_SUMMARY = "Off";
 
     @Before
     public void setUp() {

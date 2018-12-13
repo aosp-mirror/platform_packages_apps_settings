@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo.aboutphone;
 
-
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -25,14 +24,13 @@ import android.content.Context;
 import android.os.Build;
 import android.provider.Settings.Global;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TopLevelAboutDevicePreferenceControllerTest {
 
     private Context mContext;
@@ -59,6 +57,4 @@ public class TopLevelAboutDevicePreferenceControllerTest {
         Global.putString(mContext.getContentResolver(), Global.DEVICE_NAME, "Test");
         assertThat(mController.getSummary().toString()).isEqualTo("Test");
     }
-
-
 }

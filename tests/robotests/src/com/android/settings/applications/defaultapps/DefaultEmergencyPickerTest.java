@@ -28,18 +28,17 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultEmergencyPickerTest {
 
     private static final String TEST_APP_KEY = "test_app";
@@ -59,7 +58,7 @@ public class DefaultEmergencyPickerTest {
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         mPicker = spy(new DefaultEmergencyPicker());
-        mPicker.onAttach((Context) mActivity);
+        mPicker.onAttach(mActivity);
 
         ReflectionHelpers.setField(mPicker, "mPm", mPackageManager);
 

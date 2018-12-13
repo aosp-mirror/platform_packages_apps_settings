@@ -27,19 +27,18 @@ import android.net.ConnectivityManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TetherSettingsTest {
 
     private Context mContext;
@@ -61,8 +60,8 @@ public class TetherSettingsTest {
 
         setupIsTetherAvailable(true);
 
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{});
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[]{});
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
+        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
     }
 
     @Test
@@ -91,7 +90,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_usbNotAvailable_usbKeyReturned() {
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{});
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -113,7 +112,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_bluetoothNotAvailable_bluetoothKeyReturned() {
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[]{});
+        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);

@@ -28,7 +28,6 @@ import android.net.wifi.WifiManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiConfigController;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -39,9 +38,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SavedAccessPointsWifiSettingsTest {
 
     @Mock
@@ -90,8 +90,7 @@ public class SavedAccessPointsWifiSettingsTest {
 
         mSettings.onForget(mWifiDialog);
 
-        verify(mWifiManager)
-                .forget(mWifiConfiguration.networkId, mSavedApController);
+        verify(mWifiManager).forget(mWifiConfiguration.networkId, mSavedApController);
     }
 
     @Test

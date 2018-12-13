@@ -22,7 +22,7 @@ import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.slices.SlicesDatabaseHelper;
 
-import java.lang.reflect.Field;
+import org.robolectric.util.ReflectionHelpers;
 
 public class DatabaseTestUtils {
 
@@ -36,41 +36,17 @@ public class DatabaseTestUtils {
         SlicesDatabaseHelper helper = SlicesDatabaseHelper.getInstance(context);
         helper.close();
 
-        Field instance;
-        Class clazz = SlicesDatabaseHelper.class;
-        try {
-            instance = clazz.getDeclaredField("sSingleton");
-            instance.setAccessible(true);
-            instance.set(null, null);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        ReflectionHelpers.setStaticField(SlicesDatabaseHelper.class, "sSingleton", null);
     }
 
     private static void clearAnomalyDb(Context context) {
         AnomalyDatabaseHelper helper = AnomalyDatabaseHelper.getInstance(context);
         helper.close();
 
-        Field instance;
-        Class clazz = AnomalyDatabaseHelper.class;
-        try {
-            instance = clazz.getDeclaredField("sSingleton");
-            instance.setAccessible(true);
-            instance.set(null, null);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        ReflectionHelpers.setStaticField(AnomalyDatabaseHelper.class, "sSingleton", null);
     }
 
     private static void clearAnomalyDbManager() {
-        Field instance;
-        Class clazz = BatteryDatabaseManager.class;
-        try {
-            instance = clazz.getDeclaredField("sSingleton");
-            instance.setAccessible(true);
-            instance.set(null, null);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        ReflectionHelpers.setStaticField(BatteryDatabaseManager.class, "sSingleton", null);
     }
 }

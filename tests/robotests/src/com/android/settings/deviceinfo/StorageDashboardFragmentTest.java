@@ -35,7 +35,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -43,11 +42,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class StorageDashboardFragmentTest {
 
     private StorageDashboardFragment mFragment;

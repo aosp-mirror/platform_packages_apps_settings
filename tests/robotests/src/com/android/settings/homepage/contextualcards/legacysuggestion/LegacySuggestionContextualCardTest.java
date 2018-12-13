@@ -23,12 +23,12 @@ import static org.mockito.Mockito.mock;
 import android.app.PendingIntent;
 
 import com.android.settings.homepage.contextualcards.ContextualCard;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LegacySuggestionContextualCardTest {
 
     @Test(expected = IllegalArgumentException.class)
@@ -51,5 +51,4 @@ public class LegacySuggestionContextualCardTest {
                 .build()
                 .getPendingIntent()).isNotNull();
     }
-
 }

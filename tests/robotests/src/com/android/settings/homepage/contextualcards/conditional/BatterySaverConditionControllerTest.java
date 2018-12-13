@@ -27,18 +27,18 @@ import android.content.IntentFilter;
 import android.os.PowerManager;
 
 import com.android.settings.fuelgauge.BatterySaverReceiver;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPowerManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatterySaverConditionControllerTest {
     @Mock
     private ConditionManager mConditionManager;
@@ -83,5 +83,4 @@ public class BatterySaverConditionControllerTest {
 
         assertThat(mController.isDisplayable()).isFalse();
     }
-
 }

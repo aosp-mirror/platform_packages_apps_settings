@@ -19,7 +19,7 @@ package com.android.settings.accounts;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -41,13 +41,13 @@ import android.widget.ImageView;
 
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
@@ -57,7 +57,7 @@ import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowContentResolver;
 import org.robolectric.shadows.ShadowPackageManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AvatarViewMixinTest {
     private static final String DUMMY_ACCOUNT = "test@domain.com";
     private static final String DUMMY_DOMAIN = "domain.com";
@@ -171,9 +171,8 @@ public class AvatarViewMixinTest {
     public static class ShadowAccountFeatureProviderImpl {
 
         @Implementation
-        public Account[] getAccounts(Context context) {
-            Account[] accounts = {new Account(DUMMY_ACCOUNT, DUMMY_DOMAIN)};
-            return accounts;
+        protected Account[] getAccounts(Context context) {
+            return new Account[] {new Account(DUMMY_ACCOUNT, DUMMY_DOMAIN)};
         }
     }
 }

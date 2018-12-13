@@ -18,7 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -36,26 +36,24 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
     WifiTetherPreferenceControllerTest.ShadowWifiTetherSettings.class,
-    WifiTetherPreferenceControllerTest.ShadowWifiTetherSwitchBarController.class,
     WifiTetherPreferenceControllerTest.ShadowWifiTetherSoftApManager.class
 })
 public class WifiTetherPreferenceControllerTest {
@@ -97,11 +95,6 @@ public class WifiTetherPreferenceControllerTest {
         mController = new WifiTetherPreferenceController(mContext, mLifecycle,
                 false /* initSoftApManager */);
         mController.displayPreference(mScreen);
-    }
-
-    @After
-    public void tearDown() {
-        ShadowWifiTetherSwitchBarController.reset();
     }
 
     @Test
@@ -181,7 +174,7 @@ public class WifiTetherPreferenceControllerTest {
     public static final class ShadowWifiTetherSettings {
 
         @Implementation
-        public static boolean isTetherSettingPageEnabled() {
+        protected static boolean isTetherSettingPageEnabled() {
             return true;
         }
     }
@@ -189,35 +182,13 @@ public class WifiTetherPreferenceControllerTest {
     @Implements(WifiTetherSoftApManager.class)
     public static final class ShadowWifiTetherSoftApManager {
         @Implementation
-        public void registerSoftApCallback() {
+        protected void registerSoftApCallback() {
             // do nothing
         }
 
         @Implementation
-        public void unRegisterSoftApCallback() {
+        protected void unRegisterSoftApCallback() {
             // do nothing
-        }
-    }
-
-    @Implements(WifiTetherSwitchBarController.class)
-    public static final class ShadowWifiTetherSwitchBarController {
-
-        private static boolean onStartCalled;
-        private static boolean onStopCalled;
-
-        public static void reset() {
-            onStartCalled = false;
-            onStopCalled = false;
-        }
-
-        @Implementation
-        public void onStart() {
-            onStartCalled = true;
-        }
-
-        @Implementation
-        public void onStop() {
-            onStopCalled = true;
         }
     }
 }

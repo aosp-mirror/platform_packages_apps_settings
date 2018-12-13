@@ -19,8 +19,6 @@ package com.android.settings.testutils;
 import android.content.Intent;
 import android.os.BatteryManager;
 
-import java.lang.reflect.Field;
-
 public class BatteryTestUtils {
 
     public static Intent getChargingIntent() {
@@ -39,7 +37,7 @@ public class BatteryTestUtils {
                 BatteryManager.BATTERY_STATUS_DISCHARGING);
     }
 
-    public static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {
+    private static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {
         Intent intent = new Intent();
         intent.putExtra(BatteryManager.EXTRA_PLUGGED, plugged);
         intent.putExtra(BatteryManager.EXTRA_LEVEL, level);
@@ -48,16 +46,4 @@ public class BatteryTestUtils {
 
         return intent;
     }
-
-    public static void clearStaticInstance(Class clazz, String fieldName) {
-        Field instance;
-        try {
-            instance = clazz.getDeclaredField(fieldName);
-            instance.setAccessible(true);
-            instance.set(null, null);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
-    }
-
 }

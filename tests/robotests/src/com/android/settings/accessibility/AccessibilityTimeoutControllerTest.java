@@ -31,7 +31,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -40,9 +39,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AccessibilityTimeoutControllerTest
         implements AccessibilityTimeoutController.OnChangeListener {
     private static final String PREF_KEY = "accessibility_content_timeout_30secs";
@@ -91,7 +91,7 @@ public class AccessibilityTimeoutControllerTest
 
         mController.updateState(mMockPref);
 
-        // the first checked state is seted to false by control
+        // the first checked state is set to false by control
         verify(mMockPref).setChecked(false);
         verify(mMockPref).setChecked(false);
     }
@@ -103,7 +103,7 @@ public class AccessibilityTimeoutControllerTest
 
         mController.updateState(mMockPref);
 
-        // the first checked state is seted to false by control
+        // the first checked state is set to false by control
         verify(mMockPref).setChecked(false);
         verify(mMockPref).setChecked(true);
     }

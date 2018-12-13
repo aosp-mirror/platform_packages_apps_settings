@@ -42,8 +42,6 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settingslib.Utils;
 
 import org.junit.Before;
@@ -51,14 +49,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
 import java.util.concurrent.TimeUnit;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResourcesImpl.class)
+@RunWith(RobolectricTestRunner.class)
 public class DataUsageSummaryPreferenceTest {
 
     private static final long CYCLE_DURATION_MILLIS = 1000000000L;
@@ -355,7 +352,6 @@ public class DataUsageSummaryPreferenceTest {
         assertThat(mLabelBar.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mProgressBar.getVisibility()).isEqualTo(View.VISIBLE);
     }
-
 
     @Test
     public void testSetProgress_updatesProgressBar() {

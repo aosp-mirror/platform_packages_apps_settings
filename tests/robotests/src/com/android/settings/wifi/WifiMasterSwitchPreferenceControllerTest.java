@@ -18,7 +18,7 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,7 +36,6 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -46,10 +45,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
 public class WifiMasterSwitchPreferenceControllerTest {
 
@@ -91,7 +91,6 @@ public class WifiMasterSwitchPreferenceControllerTest {
     public void testWifiMasterSwitch_ifDisabled_shouldNotBeShown() {
         assertThat(mController.isAvailable()).isFalse();
     }
-
 
     @Test
     public void onResume_shouldRegisterCallback() {

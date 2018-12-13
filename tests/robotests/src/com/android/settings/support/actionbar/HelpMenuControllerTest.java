@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 import org.junit.Before;
@@ -31,8 +30,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class HelpMenuControllerTest {
 
     @Mock

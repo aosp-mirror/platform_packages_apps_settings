@@ -23,14 +23,14 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BottomLabelLayoutTest {
 
     private BottomLabelLayout mBottomLabelLayout;

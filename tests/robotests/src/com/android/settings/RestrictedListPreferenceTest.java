@@ -29,7 +29,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
@@ -37,17 +36,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowKeyguardManager;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        shadows = {
-                ShadowUserManager.class,
-                ShadowKeyguardManager.class,
-        })
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowKeyguardManager.class})
 public class RestrictedListPreferenceTest {
     private static final int PROFILE_USER_ID = 11;
     // From UnlaunchableAppActivity
@@ -67,7 +63,9 @@ public class RestrictedListPreferenceTest {
                 Shadows.shadowOf(application.getSystemService(KeyguardManager.class));
         mMockHelper = mock(RestrictedPreferenceHelper.class);
         mShadowUserManager = ShadowUserManager.getShadow();
-        mPreference = new RestrictedListPreference(mActivity, mock(AttributeSet.class));
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        mPreference = new RestrictedListPreference(mActivity, attributeSet);
         mPreference.setProfileUserId(PROFILE_USER_ID);
         ReflectionHelpers.setField(mPreference, "mHelper", mMockHelper);
     }

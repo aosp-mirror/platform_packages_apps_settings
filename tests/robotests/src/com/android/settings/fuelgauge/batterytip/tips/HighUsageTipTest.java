@@ -25,7 +25,6 @@ import android.text.format.DateUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -33,12 +32,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class HighUsageTipTest {
 
     private static final String PACKAGE_NAME = "com.android.app";

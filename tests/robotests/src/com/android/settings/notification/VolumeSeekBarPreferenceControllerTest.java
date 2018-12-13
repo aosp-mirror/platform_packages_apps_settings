@@ -18,9 +18,9 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,15 +30,14 @@ import android.content.Context;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class VolumeSeekBarPreferenceControllerTest {
 
     @Mock
@@ -59,7 +58,7 @@ public class VolumeSeekBarPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mScreen.findPreference(nullable(String.class))).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn("key");
-        mController = new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback,
+        mController = new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback, true,
                 mPreference.getKey());
         mController.setAudioHelper(mHelper);
     }
@@ -146,11 +145,6 @@ public class VolumeSeekBarPreferenceControllerTest {
         private final static int MUTE_ICON = 2;
 
         private boolean mAvailable;
-
-        VolumeSeekBarPreferenceControllerTestable(Context context,
-            VolumeSeekBarPreference.Callback callback, String key) {
-            this(context, callback, true, key);
-        }
 
         VolumeSeekBarPreferenceControllerTestable(Context context,
             VolumeSeekBarPreference.Callback callback, boolean available, String key) {

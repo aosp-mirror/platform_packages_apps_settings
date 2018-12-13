@@ -12,13 +12,14 @@ import org.robolectric.annotation.Implements;
 @Implements(DoubleTwistPreferenceController.class)
 public class ShadowDoubleTwistPreferenceController {
     private static int sManagedProfileId = UserHandle.USER_NULL;
+
     @Implementation
-    public static boolean isGestureAvailable(Context context) {
+    protected static boolean isGestureAvailable(Context context) {
         return true;
     }
 
     @Implementation
-    public static int getManagedProfileId(UserManager userManager) {
+    protected static int getManagedProfileId(UserManager userManager) {
         return sManagedProfileId;
     }
 

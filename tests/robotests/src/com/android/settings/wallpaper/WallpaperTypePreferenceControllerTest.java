@@ -25,15 +25,15 @@ import android.content.Intent;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WallpaperTypePreferenceControllerTest {
 
     private Context mContext;
@@ -57,7 +57,7 @@ public class WallpaperTypePreferenceControllerTest {
     }
 
     @Test
-    public void testhandlePreferenceTreeClick_intentNull_shouldDoNothing() {
+    public void testHandlePreferenceTreeClick_intentNull_shouldDoNothing() {
         mPreference.setIntent(null);
 
         final boolean handled = mController.handlePreferenceTreeClick(mPreference);
@@ -66,7 +66,7 @@ public class WallpaperTypePreferenceControllerTest {
     }
 
     @Test
-    public void testhandlePreferenceTreeClick_shouldLaunchIntent() {
+    public void testHandlePreferenceTreeClick_shouldLaunchIntent() {
         mPreference.setIntent(mIntent);
         final boolean handled = mController.handlePreferenceTreeClick(mPreference);
 

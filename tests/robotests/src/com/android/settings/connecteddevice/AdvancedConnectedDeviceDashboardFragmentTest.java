@@ -19,8 +19,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowBluetoothPan;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.drawer.CategoryKey;
@@ -29,15 +27,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-;
-
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothPan.class, ShadowUserManager.class,
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class,
         ShadowConnectivityManager.class})
 public class AdvancedConnectedDeviceDashboardFragmentTest {
 

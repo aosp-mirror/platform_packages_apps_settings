@@ -25,12 +25,12 @@ import org.robolectric.annotation.Implements;
 public class ShadowAppInfoBase {
 
     @Implementation
-    public void onResume() {
+    protected void onResume() {
         // No-op.
     }
 
     @Implementation
-    public void onPause() {
+    protected void onPause() {
         // No-op.
     }
 }

@@ -28,10 +28,10 @@ import static com.android.settings.applications.manageapplications.ManageApplica
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -59,7 +59,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -68,13 +67,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.fakes.RoboMenuItem;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ManageApplicationsTest {
 
     @Mock
@@ -143,7 +143,6 @@ public class ManageApplicationsTest {
         assertThat(mMenu.findItem(R.id.sort_order_recent_notification).isVisible()).isFalse();
         assertThat(mMenu.findItem(R.id.sort_order_frequent_notification).isVisible()).isFalse();
     }
-
 
     @Test
     public void onCreateView_shouldNotShowLoadingContainer() {

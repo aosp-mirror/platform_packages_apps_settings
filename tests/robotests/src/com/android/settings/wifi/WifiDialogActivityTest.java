@@ -23,10 +23,6 @@ import static org.mockito.Mockito.doReturn;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
-import com.android.settings.testutils.shadow.SettingsShadowTypedArray;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
@@ -37,17 +33,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
-        SettingsShadowResources.SettingsShadowTheme.class,
         ShadowConnectivityManager.class,
-        SettingsShadowTypedArray.class,
         ShadowWifiManager.class,
-        ShadowAlertDialogCompat.class,
-        SettingsShadowResourcesImpl.class
+        ShadowAlertDialogCompat.class
 })
 public class WifiDialogActivityTest {
 

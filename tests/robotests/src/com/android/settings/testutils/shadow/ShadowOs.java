@@ -40,7 +40,7 @@ public class ShadowOs {
     private static final byte[] IPV6_BYTES = new byte[16];
 
     @Implementation
-    public static InetAddress inet_pton(int family, String address) {
+    protected static InetAddress inet_pton(int family, String address) {
         if ((AF_INET  == family && IPV4_PATTERN.matcher(address).find()) ||
             (AF_INET6 == family && IPV6_PATTERN.matcher(address).find())) {
             try {

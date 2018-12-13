@@ -32,7 +32,6 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.DefaultAppSettings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,8 +39,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultAppShortcutPreferenceControllerBaseTest {
 
     @Mock
@@ -68,7 +68,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     public void getAvailabilityStatus_managedProfile_shouldReturnDisabled() {
         when(mUserManager.isManagedProfile()).thenReturn(true);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(DefaultAppShortcutPreferenceControllerBase.DISABLED_FOR_USER);
     }
 
     @Test
@@ -76,7 +77,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
         mController.capable = true;
         when(mUserManager.isManagedProfile()).thenReturn(false);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(DefaultAppShortcutPreferenceControllerBase.AVAILABLE);
     }
 
     @Test
@@ -85,7 +87,7 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
         when(mUserManager.isManagedProfile()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                mController.UNSUPPORTED_ON_DEVICE);
+            DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

@@ -34,19 +34,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.core.OnActivityResultListener;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsActivityTest {
 
     @Mock
@@ -99,7 +99,7 @@ public class SettingsActivityTest {
 
     public static class ListenerFragment extends Fragment implements OnActivityResultListener {
 
-        public boolean mOnActivityResultCalled;
+        private boolean mOnActivityResultCalled;
 
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {

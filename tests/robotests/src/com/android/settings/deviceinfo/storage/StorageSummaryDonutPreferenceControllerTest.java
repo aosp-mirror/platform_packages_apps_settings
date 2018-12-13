@@ -21,8 +21,8 @@ import static com.android.settings.TestUtils.KILOBYTE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -42,26 +42,19 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.io.File;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        SettingsShadowResources.class,
-        SettingsShadowResources.SettingsShadowTheme.class
-})
+@RunWith(RobolectricTestRunner.class)
 public class StorageSummaryDonutPreferenceControllerTest {
 
     private Context mContext;
@@ -73,8 +66,6 @@ public class StorageSummaryDonutPreferenceControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_headlineFontFamily, "");
         mContext = spy(Robolectric.setupActivity(Activity.class));
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
@@ -86,11 +77,6 @@ public class StorageSummaryDonutPreferenceControllerTest {
                 inflater.inflate(mPreference.getLayoutResource(), new LinearLayout(mContext),
                         false);
         mHolder = PreferenceViewHolder.createInstanceForTests(view);
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowResources.reset();
     }
 
     @Test

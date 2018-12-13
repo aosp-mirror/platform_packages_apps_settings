@@ -24,19 +24,18 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AllowBackgroundActivityStartsPreferenceControllerTest {
 
     @Mock

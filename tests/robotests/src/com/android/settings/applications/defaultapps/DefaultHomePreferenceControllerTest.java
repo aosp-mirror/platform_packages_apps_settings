@@ -18,9 +18,9 @@ package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyList;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -38,19 +38,18 @@ import android.os.UserManager;
 
 import androidx.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultHomePreferenceControllerTest {
 
     private static final String TEST_PACKAGE = "test.pkg";
@@ -168,5 +167,4 @@ public class DefaultHomePreferenceControllerTest {
         when(mPackageManager.getHomeActivities(anyList())).thenReturn(null);
         assertThat(mController.getSettingIntent(mController.getDefaultAppInfo())).isNull();
     }
-
 }

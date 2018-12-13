@@ -48,7 +48,7 @@ public class ShadowRestrictedLockUtilsInternal {
     }
 
     @Implementation
-    public static EnforcedAdmin checkIfMeteredDataRestricted(Context context,
+    protected static EnforcedAdmin checkIfMeteredDataRestricted(Context context,
             String packageName, int userId) {
         if (sIsRestricted) {
             return new EnforcedAdmin();
@@ -60,7 +60,7 @@ public class ShadowRestrictedLockUtilsInternal {
     }
 
     @Implementation
-    public static EnforcedAdmin checkIfAccountManagementDisabled(Context context,
+    protected static EnforcedAdmin checkIfAccountManagementDisabled(Context context,
             String accountType, int userId) {
         if (accountType == null) {
             return null;
@@ -79,25 +79,25 @@ public class ShadowRestrictedLockUtilsInternal {
     }
 
     @Implementation
-    public static EnforcedAdmin checkIfKeyguardFeaturesDisabled(Context context,
+    protected static EnforcedAdmin checkIfKeyguardFeaturesDisabled(Context context,
             int features, final @UserIdInt int userId) {
         return (sKeyguardDisabledFeatures & features) == 0 ? null : new EnforcedAdmin();
     }
 
     @Implementation
-    public static boolean hasBaseUserRestriction(Context context,
+    protected static boolean hasBaseUserRestriction(Context context,
             String userRestriction, int userId) {
         return sIsRestricted;
     }
 
     @Implementation
-    public static EnforcedAdmin checkIfRestrictionEnforced(Context context,
+    protected static EnforcedAdmin checkIfRestrictionEnforced(Context context,
             String userRestriction, int userId) {
         return sIsRestricted ? new EnforcedAdmin() : null;
     }
 
     @Implementation
-    public static EnforcedAdmin checkIfMaximumTimeToLockIsSet(Context context) {
+    protected static EnforcedAdmin checkIfMaximumTimeToLockIsSet(Context context) {
         return sMaximumTimeToLockIsSet ? new EnforcedAdmin() : null;
     }
 
@@ -132,5 +132,4 @@ public class ShadowRestrictedLockUtilsInternal {
     public static void setMaximumTimeToLockIsSet(boolean isSet) {
         sMaximumTimeToLockIsSet = isSet;
     }
-
 }

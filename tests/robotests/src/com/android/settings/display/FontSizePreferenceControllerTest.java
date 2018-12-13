@@ -23,14 +23,14 @@ import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FontSizePreferenceControllerTest {
 
     private static final String TEST_KEY = "test_key";
@@ -54,23 +54,20 @@ public class FontSizePreferenceControllerTest {
 
     @Test
     public void getSummary_noScale_shouldReturnDefaultSummary() {
-        assertThat(mController.getSummary())
-                .isEqualTo(mFontSizeArray[1]);
+        assertThat(mController.getSummary()).isEqualTo(mFontSizeArray[1]);
     }
 
     @Test
     public void getSummary_smallScale_shouldReturnSmall() {
         Settings.System.putFloat(mContext.getContentResolver(),
                 Settings.System.FONT_SCALE, 0.5f);
-        assertThat(mController.getSummary())
-                .isEqualTo(mFontSizeArray[0]);
+        assertThat(mController.getSummary()).isEqualTo(mFontSizeArray[0]);
     }
 
     @Test
     public void getSummary_largeScale_shouldReturnLarge() {
         Settings.System.putFloat(mContext.getContentResolver(),
                 Settings.System.FONT_SCALE, 1.5f);
-        assertThat(mController.getSummary())
-                .isEqualTo(mFontSizeArray[3]);
+        assertThat(mController.getSummary()).isEqualTo(mFontSizeArray[3]);
     }
 }

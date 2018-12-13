@@ -18,8 +18,8 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,7 +36,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.Before;
@@ -45,11 +44,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class KeyboardLayoutPickerControllerTest {
 
     @Mock
@@ -118,7 +118,7 @@ public class KeyboardLayoutPickerControllerTest {
 
         mController.displayPreference(screen);
 
-        // We cretate a keyboard layouts in initializeOneLayout()
+        // We create a keyboard layouts in initializeOneLayout()
         assertThat(screen.getPreferenceCount()).isEqualTo(1);
     }
 
@@ -130,7 +130,7 @@ public class KeyboardLayoutPickerControllerTest {
 
         mController.displayPreference(screen);
 
-        // We cretate two keyboard layouts in initializeOneLayout()
+        // We create two keyboard layouts in initializeOneLayout()
         assertThat(screen.getPreferenceCount()).isEqualTo(2);
     }
 

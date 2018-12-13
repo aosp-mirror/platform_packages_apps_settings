@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 
@@ -32,14 +31,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.util.ReflectionHelpers;
 
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
 public class TopLevelNetworkEntryPreferenceControllerTest {
 
@@ -87,7 +86,6 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
         when(mMobileNetworkPreferenceController.isAvailable()).thenReturn(false);
         when(mTetherPreferenceController.isAvailable()).thenReturn(false);
 
-        assertThat(mController.getSummary())
-                .isEqualTo("Wi\u2011Fi and data usage");
+        assertThat(mController.getSummary()).isEqualTo("Wi\u2011Fi and data usage");
     }
 }

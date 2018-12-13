@@ -20,9 +20,9 @@ import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -39,18 +39,18 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
+import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class AppWithAdminGrantedPermissionsCounterTest {
 
     private final String APP_1 = "app1";
@@ -221,7 +221,7 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
         // granted both permissions by the admin. It should be counted.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
                         | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
-                MANAGED_PROFILE_ID)).thenReturn(Arrays.asList(mApp6));
+                MANAGED_PROFILE_ID)).thenReturn(Collections.singletonList(mApp6));
 
         // app3 and app5 were installed by enterprise policy.
         final UserHandle mainUser = new UserHandle(MAIN_USER_ID);
@@ -239,7 +239,6 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
         final UserHandle managedProfileUser = new UserHandle(MANAGED_PROFILE_ID);
         when(mPackageManager.getInstallReason(APP_6, managedProfileUser))
                 .thenReturn(PackageManager.INSTALL_REASON_UNKNOWN);
-
     }
 
     private void configureUserManager() {

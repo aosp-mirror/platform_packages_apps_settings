@@ -22,16 +22,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.password.ConfirmDeviceCredentialBaseFragment.LastTryDialog;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResourcesImpl.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConfirmCredentialTest {
     @Test
     public void testLastTryDialogShownExactlyOnce() {

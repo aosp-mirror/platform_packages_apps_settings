@@ -31,9 +31,8 @@ import static com.android.settings.applications.AppStateNotificationBridge
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -59,7 +58,6 @@ import android.widget.Switch;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -68,13 +66,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppStateNotificationBridgeTest {
 
     private static String PKG1 = "pkg1";
@@ -151,7 +150,7 @@ public class AppStateNotificationBridgeTest {
                 .thenReturn(usageEvents);
 
         Map<String, NotificationsSentState> map = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
     }
 
     @Test
@@ -173,8 +172,8 @@ public class AppStateNotificationBridgeTest {
                 .thenReturn(usageEvents);
 
         Map<String, NotificationsSentState> map  = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(2);
-        assertThat(map.get(mBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).sentCount).isEqualTo(2);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
     }
 
     @Test
@@ -197,10 +196,10 @@ public class AppStateNotificationBridgeTest {
 
         Map<String, NotificationsSentState> map
                 = mBridge.getAggregatedUsageEvents();
-        assertThat(map.get(mBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
-        assertThat(map.get(mBridge.getKey(0, PKG2)).sentCount).isEqualTo(1);
-        assertThat(map.get(mBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
-        assertThat(map.get(mBridge.getKey(0, PKG2)).lastSent).isEqualTo(1);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).sentCount).isEqualTo(1);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG2)).sentCount).isEqualTo(1);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG1)).lastSent).isEqualTo(6);
+        assertThat(map.get(AppStateNotificationBridge.getKey(0, PKG2)).lastSent).isEqualTo(1);
     }
 
     @Test
@@ -419,6 +418,7 @@ public class AppStateNotificationBridgeTest {
         AppEntry allow = mock(AppEntry.class);
         allow.extraInfo = allowState;
 
+
         assertTrue(FILTER_APP_NOTIFICATION_RECENCY.filterApp(allow));
 
         NotificationsSentState denyState = new NotificationsSentState();
@@ -557,7 +557,7 @@ public class AppStateNotificationBridgeTest {
 
     @Test
     public void testSwitchViews_nullDoesNotCrash() {
-        mBridge.enableSwitch(null);
-        mBridge.checkSwitch(null);
+        AppStateNotificationBridge.enableSwitch(null);
+        AppStateNotificationBridge.checkSwitch(null);
     }
 }

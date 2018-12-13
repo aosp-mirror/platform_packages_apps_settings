@@ -31,24 +31,24 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowAlertDialogCompat.class)
 public class LocalDeviceNameDialogFragmentTest {
 
     @Mock
@@ -73,7 +73,8 @@ public class LocalDeviceNameDialogFragmentTest {
     }
 
     @Test
-    public void diaglogTriggersShowSoftInput() {
+    @Ignore("b/120505691")
+    public void dialogTriggersShowSoftInput() {
         FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,
                 null /* bundle */);
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();

@@ -42,7 +42,7 @@ public class ShadowHelpUtils {
     }
 
     @Implementation
-    public static Intent getHelpIntent(Context context, String helpUriString,
+    protected static Intent getHelpIntent(Context context, String helpUriString,
             String backupContext) {
         mGetHelpIntentCalled = true;
         return new Intent().setClassName(

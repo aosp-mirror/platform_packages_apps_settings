@@ -37,7 +37,6 @@ import android.os.RemoteException;
 import android.view.IWindowManager;
 import android.widget.Toast;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowParcel;
 
 import org.junit.After;
@@ -46,10 +45,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WinscopeTraceTest {
 
     @Mock
@@ -133,7 +133,6 @@ public class WinscopeTraceTest {
         ReflectionHelpers.setField(mWinscopeTrace, "mSurfaceFlinger", null);
         assertThat(mWinscopeTrace.isEnabled()).isFalse();
     }
-
 
     @Test
     public void setIsEnableTrue_shouldEnableWindowTrace() throws RemoteException {

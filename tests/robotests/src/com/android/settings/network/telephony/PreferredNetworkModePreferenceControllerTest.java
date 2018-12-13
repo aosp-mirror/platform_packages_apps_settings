@@ -35,21 +35,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.ListPreference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PreferredNetworkModePreferenceControllerTest {
     private static final int SUB_ID = 2;
 
-    @Mock
-    private FragmentManager mFragmentManager;
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -140,5 +138,4 @@ public class PreferredNetworkModePreferenceControllerTest {
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isNotEqualTo(
                 TelephonyManager.NETWORK_MODE_LTE_TDSCDMA);
     }
-
 }

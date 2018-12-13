@@ -37,23 +37,23 @@ public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager
 
     @HiddenApi // @SystemApi
     @Implementation
-    public void connect(WifiConfiguration config, WifiManager.ActionListener listener) {
+    protected void connect(WifiConfiguration config, WifiManager.ActionListener listener) {
         savedWifiConfig = config;
     }
 
     @HiddenApi
     @Implementation
-    public void save(WifiConfiguration config, WifiManager.ActionListener listener) {
+    protected void save(WifiConfiguration config, WifiManager.ActionListener listener) {
         savedWifiConfig = config;
     }
 
     @Implementation
-    public List<PasspointConfiguration> getPasspointConfigurations() {
+    protected List<PasspointConfiguration> getPasspointConfigurations() {
         return Collections.emptyList();
     }
 
     @Implementation
-    public boolean isDualModeSupported() {
+    protected boolean isDualModeSupported() {
         return false;
     }
 

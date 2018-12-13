@@ -24,19 +24,18 @@ import static org.mockito.Mockito.when;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SubscriptionUtilTest {
     @Mock
     private SubscriptionManager mManager;

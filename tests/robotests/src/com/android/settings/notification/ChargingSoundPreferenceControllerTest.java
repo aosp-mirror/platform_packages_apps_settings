@@ -30,17 +30,16 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ChargingSoundPreferenceControllerTest {
 
     @Mock
@@ -103,8 +102,7 @@ public class ChargingSoundPreferenceControllerTest {
 
         mPreference.getOnPreferenceChangeListener().onPreferenceChange(mPreference, true);
 
-        assertThat(Secure.getInt(mContentResolver, Secure.CHARGING_SOUNDS_ENABLED, 1))
-            .isEqualTo(1);
+        assertThat(Secure.getInt(mContentResolver, Secure.CHARGING_SOUNDS_ENABLED, 1)).isEqualTo(1);
     }
 
     @Test
@@ -113,7 +111,6 @@ public class ChargingSoundPreferenceControllerTest {
 
         mPreference.getOnPreferenceChangeListener().onPreferenceChange(mPreference, false);
 
-        assertThat(Secure.getInt(mContentResolver, Secure.CHARGING_SOUNDS_ENABLED, 1))
-            .isEqualTo(0);
+        assertThat(Secure.getInt(mContentResolver, Secure.CHARGING_SOUNDS_ENABLED, 1)).isEqualTo(0);
     }
 }

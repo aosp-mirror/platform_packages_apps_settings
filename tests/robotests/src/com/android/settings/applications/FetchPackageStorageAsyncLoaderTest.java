@@ -18,9 +18,9 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.UserHandle;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 
@@ -40,8 +39,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FetchPackageStorageAsyncLoaderTest {
 
     private static final String PACKAGE_NAME = "com.test.package";

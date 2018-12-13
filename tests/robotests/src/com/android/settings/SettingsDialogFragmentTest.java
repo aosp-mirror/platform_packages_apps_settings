@@ -24,16 +24,15 @@ import android.app.Dialog;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsDialogFragmentTest {
 
     private static final int DIALOG_ID = 15;
@@ -72,7 +71,6 @@ public class SettingsDialogFragmentTest {
         } catch (IllegalStateException e) {
             // getDialogMetricsCategory called in constructor
             verify(mDialogCreatable).getDialogMetricsCategory(DIALOG_ID);
-            return;
         }
     }
 

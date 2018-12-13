@@ -6,16 +6,15 @@ import android.app.AutomaticZenRule;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeBackendTest {
 
     private static final String GENERIC_RULE_NAME = "test";

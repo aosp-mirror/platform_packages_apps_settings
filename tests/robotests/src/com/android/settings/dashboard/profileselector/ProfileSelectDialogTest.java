@@ -29,7 +29,6 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
@@ -38,8 +37,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ProfileSelectDialogTest {
 
     private static final UserHandle NORMAL_USER = UserHandle.of(1111);
@@ -62,7 +62,6 @@ public class ProfileSelectDialogTest {
         mActivityInfo = new ActivityInfo();
         mActivityInfo.packageName = "pkg";
         mActivityInfo.name = "cls";
-
     }
 
     @Test

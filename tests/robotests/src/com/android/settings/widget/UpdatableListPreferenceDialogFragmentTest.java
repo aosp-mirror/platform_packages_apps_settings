@@ -26,19 +26,19 @@ import android.widget.ArrayAdapter;
 import androidx.preference.ListPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowBluetoothUtils.class)
 public class UpdatableListPreferenceDialogFragmentTest {
 
@@ -78,15 +78,13 @@ public class UpdatableListPreferenceDialogFragmentTest {
 
     @Test
     public void onListPreferenceUpdated_verifyAdapterCanBeUpdate() {
-        assertThat(mUpdatableListPrefDlgFragment.getAdapter().getCount()).
-                isEqualTo(0);
+        assertThat(mUpdatableListPrefDlgFragment.getAdapter().getCount()).isEqualTo(0);
 
         ListPreference listPreference = new ListPreference(mContext);
         final CharSequence[] charSequences = {"Test_DEVICE_1", "Test_DEVICE_2"};
         listPreference.setEntries(charSequences);
         mUpdatableListPrefDlgFragment.onListPreferenceUpdated(listPreference);
 
-        assertThat(mUpdatableListPrefDlgFragment.getAdapter().getCount()).
-                isEqualTo(2);
+        assertThat(mUpdatableListPrefDlgFragment.getAdapter().getCount()).isEqualTo(2);
     }
 }

@@ -18,7 +18,7 @@ package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -32,19 +32,18 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowResourcesImpl.class, ShadowAlertDialogCompat.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowAlertDialogCompat.class)
 public class ChooseLockTypeDialogFragmentTest {
 
     private Context mContext;
@@ -61,8 +60,7 @@ public class ChooseLockTypeDialogFragmentTest {
     @Test
     public void testThatDialog_IsShown() {
         AlertDialog latestDialog = startLockFragment();
-        ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(
-                latestDialog);
+        ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(latestDialog);
 
         assertThat(latestDialog).isNotNull();
         assertThat(latestDialog.isShowing()).isTrue();

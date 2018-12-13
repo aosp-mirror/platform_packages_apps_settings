@@ -36,7 +36,6 @@ import android.os.Bundle;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.datausage.AppDataUsage;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import org.junit.Before;
@@ -45,12 +44,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppDataUsagePreferenceControllerTest {
 
     @Mock

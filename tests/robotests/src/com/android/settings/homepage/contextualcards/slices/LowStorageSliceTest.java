@@ -28,7 +28,6 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
@@ -37,6 +36,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -45,7 +45,7 @@ import org.robolectric.annotation.Resetter;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LowStorageSliceTest {
 
     private Context mContext;
@@ -124,7 +124,7 @@ public class LowStorageSliceTest {
             return sPrivateStorageInfo;
         }
 
-        public static void setPrivateStorageInfo(
+        private static void setPrivateStorageInfo(
                 PrivateStorageInfo privateStorageInfo) {
             sPrivateStorageInfo = privateStorageInfo;
         }

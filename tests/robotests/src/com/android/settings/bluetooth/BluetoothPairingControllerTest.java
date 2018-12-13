@@ -25,20 +25,19 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
-import com.android.settings.testutils.shadow.ShadowBluetoothPan;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothPan.class, ShadowBluetoothAdapter.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothPairingControllerTest {
     private final BluetoothClass mBluetoothClass =
             new BluetoothClass(BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE);

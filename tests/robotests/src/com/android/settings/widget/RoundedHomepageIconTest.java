@@ -37,7 +37,6 @@ import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.testutils.DrawableTestHelper;
@@ -45,9 +44,10 @@ import com.android.settingslib.testutils.DrawableTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RoundedHomepageIconTest {
 
     private Context mContext;
@@ -112,5 +112,4 @@ public class RoundedHomepageIconTest {
         assertThat(icon.mBackgroundColor)
                 .isEqualTo(mContext.getColor(R.color.material_blue_500));
     }
-
 }

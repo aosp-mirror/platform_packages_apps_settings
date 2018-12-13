@@ -39,7 +39,6 @@ import android.content.Context;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -47,11 +46,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeVisEffectsCustomPreferenceControllerTest {
     private ZenModeVisEffectsCustomPreferenceController mController;
 
@@ -60,7 +60,6 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
     @Mock
     private ZenCustomRadioButtonPreference mockPref;
     private Context mContext;
-    private FakeFeatureFactory mFeatureFactory;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -73,7 +72,7 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(
                 mock(NotificationManager.Policy.class));
@@ -96,7 +95,6 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 1);
         assertThat(mController.isAvailable()).isTrue();
     }
-
 
     @Test
     public void updateState_notChecked_noVisEffects() {

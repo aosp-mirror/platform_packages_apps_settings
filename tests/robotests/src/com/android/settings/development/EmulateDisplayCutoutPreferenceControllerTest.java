@@ -36,8 +36,6 @@ import android.view.DisplayCutout;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,8 +44,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EmulateDisplayCutoutPreferenceControllerTest {
 
     private static final OverlayInfo ONE_DISABLED = createFakeOverlay("emulation.one", false, 1);
@@ -86,14 +85,14 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_true() throws Exception {
+    public void isAvailable_true() {
         mockCurrentOverlays(ONE_DISABLED, TWO_DISABLED);
 
         assertThat(createController().isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_false() throws Exception {
+    public void isAvailable_false() {
         mockCurrentOverlays();
 
         assertThat(createController().isAvailable()).isFalse();
@@ -119,7 +118,7 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_enabled() throws Exception {
+    public void updateState_enabled() {
         mockCurrentOverlays(ONE_DISABLED, TWO_ENABLED);
 
         mController.updateState(null);
@@ -128,7 +127,7 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_disabled() throws Exception {
+    public void updateState_disabled() {
         mockCurrentOverlays(ONE_DISABLED, TWO_DISABLED);
 
         mController.updateState(null);
@@ -137,7 +136,7 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     }
 
     @Test
-    public void ordered_by_priority() throws Exception {
+    public void ordered_by_priority() {
         mockCurrentOverlays(TWO_DISABLED, ONE_DISABLED);
 
         mController.updateState(null);

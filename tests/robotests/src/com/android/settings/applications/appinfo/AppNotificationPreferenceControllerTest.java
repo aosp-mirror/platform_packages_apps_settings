@@ -37,7 +37,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -45,10 +44,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppNotificationPreferenceControllerTest {
 
     @Mock
@@ -114,7 +114,7 @@ public class AppNotificationPreferenceControllerTest {
 
     @Test
     public void getNotificationSummary_noCrashOnNull() {
-        mController.getNotificationSummary(null, mContext);
+        AppNotificationPreferenceController.getNotificationSummary(null, mContext);
     }
 
     @Test
@@ -122,8 +122,9 @@ public class AppNotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         appRow.blockedChannelCount = 30;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString())
-                .isEqualTo("Off");
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString())
+            .isEqualTo("Off");
     }
 
     @Test
@@ -132,8 +133,9 @@ public class AppNotificationPreferenceControllerTest {
         appRow.banned = false;
         appRow.blockedChannelCount = 30;
         appRow.channelCount = 30;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString())
-                .isEqualTo("Off");
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString())
+            .isEqualTo("Off");
     }
 
     @Test
@@ -144,10 +146,13 @@ public class AppNotificationPreferenceControllerTest {
         appRow.channelCount = 60;
         appRow.sentByApp = new NotificationBackend.NotificationsSentState();
         appRow.sentByApp.avgSentWeekly = 4;
-        assertThat(mController.getNotificationSummary(
+        assertThat(AppNotificationPreferenceController.getNotificationSummary(
                 appRow, mContext).toString().contains("30")).isTrue();
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString().contains(
-                NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false))).isTrue();
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString()
+                .contains(
+                    NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false)))
+            .isTrue();
     }
 
     @Test
@@ -158,7 +163,9 @@ public class AppNotificationPreferenceControllerTest {
         appRow.channelCount = 10;
         appRow.sentByApp = new NotificationBackend.NotificationsSentState();
         appRow.sentByApp.avgSentDaily = 4;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo(
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString())
+            .isEqualTo(
                 NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false));
     }
 
@@ -170,7 +177,9 @@ public class AppNotificationPreferenceControllerTest {
         appRow.channelCount = 0;
         appRow.sentByApp = new NotificationBackend.NotificationsSentState();
         appRow.sentByApp.avgSentDaily = 7;
-        assertThat(mController.getNotificationSummary(appRow, mContext).toString()).isEqualTo(
+        assertThat(
+            AppNotificationPreferenceController.getNotificationSummary(appRow, mContext).toString())
+            .isEqualTo(
                 NotificationBackend.getSentSummary(mContext, appRow.sentByApp, false));
     }
 }

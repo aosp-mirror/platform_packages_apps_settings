@@ -30,16 +30,16 @@ import android.telephony.ims.feature.ImsFeature;
 import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class VideoCallingPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
@@ -125,5 +125,4 @@ public class VideoCallingPreferenceControllerTest {
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isTrue();
     }
-
 }

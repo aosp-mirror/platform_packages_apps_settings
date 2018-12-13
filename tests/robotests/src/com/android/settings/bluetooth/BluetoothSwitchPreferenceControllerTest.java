@@ -23,9 +23,9 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 import android.provider.Settings;
 
+import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.widget.FooterPreference;
@@ -35,12 +35,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BluetoothSwitchPreferenceControllerTest {
 
-    public static final String BLUETOOTH_INFO_STRING = "When Bluetooth is turned on, your device"
+    private static final String BLUETOOTH_INFO_STRING = "When Bluetooth is turned on, your device"
             + " can communicate with other nearby Bluetooth devices.";
     @Mock
     private RestrictionUtils mRestrictionUtils;
@@ -73,7 +74,7 @@ public class BluetoothSwitchPreferenceControllerTest {
         CharSequence text = AnnotationSpan.linkify(
                 mContext.getText(R.string.bluetooth_scanning_on_info_message), info);
 
-        assertThat(mFooterPreference.getTitle()).isEqualTo(text);
+        assertThat(TextUtils.equals(mFooterPreference.getTitle(), text)).isTrue();
     }
 
     @Test
@@ -83,7 +84,6 @@ public class BluetoothSwitchPreferenceControllerTest {
         mController.updateText(false);
 
         assertThat(mFooterPreference.getTitle()).isEqualTo(BLUETOOTH_INFO_STRING);
-
     }
 
     @Test

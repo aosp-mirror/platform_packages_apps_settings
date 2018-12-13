@@ -36,12 +36,12 @@ public class ShadowInputDevice extends org.robolectric.shadows.ShadowInputDevice
     private int mDeviceId;
 
     @Implementation
-    public static int[] getDeviceIds() {
+    protected static int[] getDeviceIds() {
         return sDeviceIds;
     }
 
     @Implementation
-    public static InputDevice getDevice(int id) {
+    protected static InputDevice getDevice(int id) {
         return sDeviceMap.get(id);
     }
 
@@ -56,7 +56,7 @@ public class ShadowInputDevice extends org.robolectric.shadows.ShadowInputDevice
     }
 
     @Implementation
-    public int getId() {
+    protected int getId() {
         return mDeviceId;
     }
 
@@ -70,6 +70,4 @@ public class ShadowInputDevice extends org.robolectric.shadows.ShadowInputDevice
     public void setId(int id) {
         mDeviceId = id;
     }
-
 }
-

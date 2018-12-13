@@ -28,10 +28,10 @@ import java.util.List;
 public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBluetoothAdapter {
 
     private int mState;
-    private List<Integer> mSupportedProfiles = new ArrayList<Integer>();
+    private List<Integer> mSupportedProfiles = new ArrayList<>();
 
     @Implementation
-    public List<Integer> getSupportedProfiles() {
+    protected List<Integer> getSupportedProfiles() {
         return mSupportedProfiles;
     }
 
@@ -44,7 +44,7 @@ public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBlueto
     }
 
     @Implementation
-    public int getConnectionState() {
+    protected int getConnectionState() {
         return mState;
     }
 

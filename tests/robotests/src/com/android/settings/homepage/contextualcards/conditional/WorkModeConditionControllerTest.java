@@ -24,7 +24,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 
 import com.android.settings.Settings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,10 +31,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivity;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WorkModeConditionControllerTest {
 
     @Mock
@@ -60,5 +60,4 @@ public class WorkModeConditionControllerTest {
         final ShadowActivity shadowActivity = Shadow.extract(mActivity);
         assertThat(shadowActivity.getNextStartedActivity().getComponent()).isEqualTo(componentName);
     }
-
 }

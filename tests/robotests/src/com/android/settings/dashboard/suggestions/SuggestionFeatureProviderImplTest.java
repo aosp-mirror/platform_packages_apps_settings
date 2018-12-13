@@ -28,28 +28,23 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.service.settings.suggestions.Suggestion;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
-import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)
 public class SuggestionFeatureProviderImplTest {
 
     @Mock
     private Context mContext;
-    @Mock
-    private SuggestionControllerMixinCompat mSuggestionControllerMixin;
     @Mock
     private Suggestion mSuggestion;
     @Mock
@@ -60,13 +55,12 @@ public class SuggestionFeatureProviderImplTest {
     private FingerprintManager mFingerprintManager;
 
     private ActivityInfo mActivityInfo;
-    private FakeFeatureFactory mFactory;
     private SuggestionFeatureProviderImpl mProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
         mActivityInfo = new ActivityInfo();
         mActivityInfo.packageName = "pkg";
         mActivityInfo.name = "class";
@@ -80,11 +74,6 @@ public class SuggestionFeatureProviderImplTest {
         when(mActivityManager.isLowRamDevice()).thenReturn(false);
 
         mProvider = new SuggestionFeatureProviderImpl(mContext);
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowResources.reset();
     }
 
     @Test

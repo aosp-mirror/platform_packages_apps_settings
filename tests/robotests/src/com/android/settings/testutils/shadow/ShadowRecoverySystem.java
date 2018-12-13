@@ -29,7 +29,7 @@ public class ShadowRecoverySystem {
     private static int sWipeEuiccCalledCount;
 
     @Implementation
-    public static boolean wipeEuiccData(Context context, final String packageName) {
+    protected static boolean wipeEuiccData(Context context, final String packageName) {
         sWipeEuiccCalledCount++;
         return true;
     }

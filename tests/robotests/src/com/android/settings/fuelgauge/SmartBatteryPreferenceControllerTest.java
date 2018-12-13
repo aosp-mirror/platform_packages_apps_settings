@@ -21,22 +21,21 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SmartBatteryPreferenceControllerTest {
 
     private static final int ON = 1;
@@ -45,9 +44,7 @@ public class SmartBatteryPreferenceControllerTest {
     private SmartBatteryPreferenceController mController;
     private SwitchPreference mPreference;
     private ContentResolver mContentResolver;
-    private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-
 
     @Before
     public void setUp() {
@@ -120,7 +117,7 @@ public class SmartBatteryPreferenceControllerTest {
     @Test
     public void isSliceableCorrectKey_returnsTrue() {
         final SmartBatteryPreferenceController controller =
-                new SmartBatteryPreferenceController(mContext);
+                new SmartBatteryPreferenceController(null);
         assertThat(controller.isSliceable()).isTrue();
     }
 }

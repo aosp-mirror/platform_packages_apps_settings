@@ -34,21 +34,20 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.util.reflection.FieldSetter;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeAutomaticRulesPreferenceControllerTest {
 
     private ZenModeAutomaticRulesPreferenceController mController;
@@ -67,10 +66,10 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = spy(new ZenModeAutomaticRulesPreferenceController(mContext, mock(Fragment.class),
-                null));
+            null));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+            mockPref);
         mController.displayPreference(mPreferenceScreen);
         doReturn(mZenRulePreference).when(mController).createZenRulePreference(any());
     }
@@ -85,11 +84,11 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         String ruleId3 = "test3_id";
 
         AutomaticZenRule autoRule1 = new AutomaticZenRule("test_rule_1", null,
-                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+            null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
         AutomaticZenRule autoRule2 = new AutomaticZenRule("test_rule_2", null,
-                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20);
+            null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20);
         AutomaticZenRule autoRule3 = new AutomaticZenRule("test_rule_3", null,
-                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 30);
+            null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 30);
 
         rMap.put(ruleId1, autoRule1);
         rMap.put(ruleId2, autoRule2);
@@ -111,9 +110,9 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         String ruleId2 = "test2_id";
 
         AutomaticZenRule autoRule1 = new AutomaticZenRule("test_rule_1", null,
-                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+            null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
         AutomaticZenRule autoRule2 = new AutomaticZenRule("test_rule_2", null,
-                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20);
+            null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20);
 
         rMap.put(ruleId1, autoRule1);
         rMap.put(ruleId2, autoRule2);
@@ -132,7 +131,7 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         Map<String, AutomaticZenRule> rMap = new HashMap<>();
         String testId = "test1_id";
         AutomaticZenRule rule = new AutomaticZenRule("rule_name", null,
-                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+            null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
         rMap.put(testId, rule);
 
         when(mockPref.getPreferenceCount()).thenReturn(NUM_RULES);

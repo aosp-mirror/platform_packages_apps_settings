@@ -33,7 +33,6 @@ import com.android.settings.display.AmbientDisplayNotificationsPreferenceControl
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -44,15 +43,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowUtils.class, ShadowLockPatternUtils.class
-})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUtils.class, ShadowLockPatternUtils.class})
 public class LockscreenDashboardFragmentTest {
 
     @Mock

@@ -23,11 +23,11 @@ import com.android.settings.core.SliderPreferenceController;
 
 public class FakeSliderController extends SliderPreferenceController {
 
-    private final String settingKey = "fake_slider_key";
-
     public static final String AVAILABILITY_KEY = "fake_slider_availability_key";
 
     public static final int MAX_STEPS = 9;
+
+    private static final String SETTING_KEY = "fake_slider_key";
 
     public FakeSliderController(Context context, String key) {
         super(context, key);
@@ -35,12 +35,12 @@ public class FakeSliderController extends SliderPreferenceController {
 
     @Override
     public int getSliderPosition() {
-        return Settings.System.getInt(mContext.getContentResolver(), settingKey, 0);
+        return Settings.System.getInt(mContext.getContentResolver(), SETTING_KEY, 0);
     }
 
     @Override
     public boolean setSliderPosition(int position) {
-        return Settings.System.putInt(mContext.getContentResolver(), settingKey, position);
+        return Settings.System.putInt(mContext.getContentResolver(), SETTING_KEY, position);
     }
 
     @Override
@@ -50,8 +50,7 @@ public class FakeSliderController extends SliderPreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                AVAILABILITY_KEY, AVAILABLE);
+        return Settings.Global.getInt(mContext.getContentResolver(), AVAILABILITY_KEY, AVAILABLE);
     }
 
     @Override

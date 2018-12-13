@@ -42,9 +42,8 @@ public class ShadowEntityHeaderController {
     }
 
     @Implementation
-    public static EntityHeaderController newInstance(Activity activity, Fragment fragment,
+    protected static EntityHeaderController newInstance(Activity activity, Fragment fragment,
             View header) {
         return sMockController;
     }
-
 }

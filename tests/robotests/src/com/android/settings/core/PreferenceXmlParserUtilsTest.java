@@ -34,11 +34,12 @@ import android.util.Xml;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import java.util.Objects;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParser;
@@ -54,7 +55,7 @@ import java.util.List;
  * If changing a preference file breaks a test in this test file, please replace its reference
  * with another preference with a matchin replacement attribute.
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PreferenceXmlParserUtilsTest {
 
     private Context mContext;
@@ -370,7 +371,14 @@ public class PreferenceXmlParserUtilsTest {
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && type != XmlPullParser.START_TAG) {
             }
-            while (parser.getName() != xmlType && parser.next() != XmlPullParser.END_DOCUMENT) {
+            while (true) {
+                if (Objects.equals(parser.getName(), xmlType)) {
+                    break;
+                }
+                final int nextEvent = parser.next();
+                if (nextEvent == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
             }
         } catch (Exception e) {
 

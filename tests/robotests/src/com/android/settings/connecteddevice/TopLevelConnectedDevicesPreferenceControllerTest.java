@@ -21,17 +21,17 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TopLevelConnectedDevicesPreferenceControllerTest {
 
     private Context mContext;
@@ -54,7 +54,7 @@ public class TopLevelConnectedDevicesPreferenceControllerTest {
     private static class ShadowAdvancedConnectedDeviceController {
 
         @Implementation
-        public static int getConnectedDevicesSummaryResourceId(Context context) {
+        protected static int getConnectedDevicesSummaryResourceId(Context context) {
             return R.string.settings_label_launcher;
         }
     }

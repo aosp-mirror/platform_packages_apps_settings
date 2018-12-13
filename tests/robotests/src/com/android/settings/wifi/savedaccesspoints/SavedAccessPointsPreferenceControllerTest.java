@@ -32,7 +32,6 @@ import android.net.wifi.WifiManager;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccessPoint;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
@@ -44,10 +43,11 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowThreadUtils.class, ShadowWifiManager.class})
 public class SavedAccessPointsPreferenceControllerTest {
 
@@ -85,7 +85,6 @@ public class SavedAccessPointsPreferenceControllerTest {
 
         verify(mController).refreshSavedAccessPoints();
     }
-
 
     @Test
     public void postRefresh_shouldRefreshApList() {

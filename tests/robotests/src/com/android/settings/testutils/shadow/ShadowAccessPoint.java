@@ -25,7 +25,7 @@ import org.robolectric.annotation.Implements;
 public class ShadowAccessPoint {
 
     @Implementation
-    public String getSavedNetworkSummary() {
+    protected String getSavedNetworkSummary() {
         return "saved";
     }
 }

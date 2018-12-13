@@ -28,15 +28,15 @@ import android.app.Activity;
 import androidx.preference.Preference;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SupportPreferenceControllerTest {
 
 
@@ -74,5 +74,4 @@ public class SupportPreferenceControllerTest {
         assertThat(controller.handlePreferenceTreeClick(mPreference)).isTrue();
         verify(mFeatureFactory.supportFeatureProvider).startSupport(mActivity);
     }
-
 }

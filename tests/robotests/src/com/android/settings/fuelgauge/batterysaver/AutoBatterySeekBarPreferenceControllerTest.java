@@ -22,8 +22,6 @@ import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -31,15 +29,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = SettingsShadowResources.class)
+@RunWith(RobolectricTestRunner.class)
 public class AutoBatterySeekBarPreferenceControllerTest {
 
     private static final int TRIGGER_LEVEL = 20;
-    private static final int DEFAULT_LEVEL = 15;
     private static final int INTERVAL = 5;
 
     private AutoBatterySeekBarPreferenceController mController;
@@ -54,8 +50,6 @@ public class AutoBatterySeekBarPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
 
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.integer.config_lowBatteryWarningLevel, DEFAULT_LEVEL);
         mContext = RuntimeEnvironment.application;
         mPreference = new SeekBarPreference(mContext);
         mPreference.setMax(100);
@@ -89,7 +83,6 @@ public class AutoBatterySeekBarPreferenceControllerTest {
         assertThat(mPreference.getTitle()).isEqualTo("20%");
         assertThat(mPreference.getProgress()).isEqualTo(TRIGGER_LEVEL / INTERVAL);
     }
-
 
     @Test
     public void testOnPreferenceChange_updateValue() {

@@ -26,15 +26,15 @@ import android.net.wifi.WifiConfiguration;
 import androidx.preference.DropDownPreference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiMeteredPreferenceControllerTest {
 
     private static final int METERED_OVERRIDE_NONE = 0;
@@ -91,6 +91,6 @@ public class WifiMeteredPreferenceControllerTest {
         mPreferenceController = spy(new WifiMeteredPreferenceController(mContext, null));
 
         mPreferenceController.getMeteredOverride();
-        mPreferenceController.onPreferenceChange(mDropDownPreference, new Integer(1));
+        mPreferenceController.onPreferenceChange(mDropDownPreference, 1);
     }
 }

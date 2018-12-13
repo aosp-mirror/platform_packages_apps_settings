@@ -18,10 +18,10 @@ package com.android.settings.accounts;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -34,8 +34,6 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -49,27 +47,25 @@ import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
-import com.android.settingslib.accounts.AuthenticatorHelper;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
 public class AccountPreferenceControllerTest {
 
@@ -101,6 +97,11 @@ public class AccountPreferenceControllerTest {
             .thenReturn(new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
         mController = new AccountPreferenceController(mContext, mFragment, null, mAccountHelper);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowContentResolver.reset();
     }
 
     @Test
@@ -216,7 +217,6 @@ public class AccountPreferenceControllerTest {
 
         verify(preferenceGroup).setTitle(
                 mContext.getString(R.string.account_for_section_header, "user 1"));
-
     }
 
     @Test
@@ -338,9 +338,10 @@ public class AccountPreferenceControllerTest {
         Account[] accounts = {new Account("Account1", "com.acct1")};
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(accounts);
 
-        Account[] accountType1 = new Account[2];
-        accountType1[0] = new Account("Account11", "com.acct1");
-        accountType1[1] = new Account("Account12", "com.acct1");
+        Account[] accountType1 = {
+            new Account("Account11", "com.acct1"),
+            new Account("Account12", "com.acct1")
+        };
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
                 .thenReturn(accountType1);
 
@@ -362,8 +363,7 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
-            ShadowAuthenticatorHelper.class})
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_twoAccountsOfSameName_shouldAddFivePreferences() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
@@ -532,9 +532,10 @@ public class AccountPreferenceControllerTest {
         Account[] accounts = {new Account("Acct1", "com.acct1")};
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(accounts);
 
-        Account[] accountType1 = new Account[2];
-        accountType1[0] = new Account("Acct11", "com.acct1");
-        accountType1[1] = new Account("Acct12", "com.acct1");
+        Account[] accountType1 = {
+            new Account("Acct11", "com.acct1"),
+            new Account("Acct12", "com.acct1")
+        };
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
                 .thenReturn(accountType1);
 
@@ -552,8 +553,7 @@ public class AccountPreferenceControllerTest {
         mController.onResume();
 
         // remove an account
-        accountType1 = new Account[1];
-        accountType1[0] = new Account("Acct11", "com.acct1");
+        accountType1 = new Account[] {new Account("Acct11", "com.acct1")};
         when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
                 .thenReturn(accountType1);
 
@@ -605,13 +605,5 @@ public class AccountPreferenceControllerTest {
 
     private static ArgumentMatcher<Preference> titleMatches(String expected) {
         return preference -> TextUtils.equals(expected, preference.getTitle());
-    }
-
-    @Implements(AuthenticatorHelper.class)
-    public static class ShadowAuthenticatorHelper {
-        @Implementation
-        public Drawable getDrawableForType(Context context, final String accountType) {
-            return new ColorDrawable();
-        }
     }
 }

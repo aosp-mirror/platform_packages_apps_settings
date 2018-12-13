@@ -27,7 +27,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.storage.VolumeInfo;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
 import org.junit.Before;
@@ -38,8 +37,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class StorageSettingsTest {
 
     @Mock
@@ -77,5 +77,4 @@ public class StorageSettingsTest {
         verify(mActivity, never()).startActivity(null);
         verify(mActivity).startActivity(any(Intent.class));
     }
-
 }

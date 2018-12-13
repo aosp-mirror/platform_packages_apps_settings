@@ -38,7 +38,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.deviceinfo.StorageProfileFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.drawable.UserIconDrawable;
 
@@ -49,8 +48,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UserProfileControllerTest {
 
     private static final String TEST_NAME = "Fred";

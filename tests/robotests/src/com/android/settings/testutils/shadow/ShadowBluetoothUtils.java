@@ -27,12 +27,11 @@ import org.robolectric.annotation.Resetter;
 
 @Implements(Utils.class)
 public class ShadowBluetoothUtils {
+
     public static LocalBluetoothManager sLocalBluetoothManager;
 
-
-
     @Implementation
-    public static LocalBluetoothManager getLocalBtManager(Context context) {
+    protected static LocalBluetoothManager getLocalBtManager(Context context) {
         return sLocalBluetoothManager;
     }
 

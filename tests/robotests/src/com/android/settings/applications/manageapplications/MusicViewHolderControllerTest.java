@@ -18,7 +18,7 @@ package com.android.settings.applications.manageapplications;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.nullable;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,7 +33,6 @@ import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import org.junit.Before;
@@ -43,9 +42,10 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class MusicViewHolderControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;

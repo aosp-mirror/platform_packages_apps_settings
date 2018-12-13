@@ -18,7 +18,7 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
@@ -26,16 +26,16 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeSettingsTest {
 
     private ZenModeSettings.SummaryBuilder mBuilder;

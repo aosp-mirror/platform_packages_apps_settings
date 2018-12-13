@@ -18,11 +18,10 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CaCertsPreferenceControllerBaseTest extends CaCertsPreferenceControllerTestBase {
 
     private static final String PREF_KEY = "pref";

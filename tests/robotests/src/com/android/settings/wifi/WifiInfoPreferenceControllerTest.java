@@ -21,8 +21,8 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -38,7 +38,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -47,9 +46,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiInfoPreferenceControllerTest {
+
+    private static final String TEST_MAC_ADDRESS = "42:0a:23:43:ac:02";
 
     @Mock
     private Context mContext;
@@ -67,8 +69,6 @@ public class WifiInfoPreferenceControllerTest {
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
     private WifiInfoPreferenceController mController;
-
-    private static final String TEST_MAC_ADDRESS = "42:0a:23:43:ac:02";
 
     @Before
     public void setUp() {
