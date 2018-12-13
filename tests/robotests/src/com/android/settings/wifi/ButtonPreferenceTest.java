@@ -22,18 +22,18 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ButtonPreferenceTest {
 
     private Context mContext;
