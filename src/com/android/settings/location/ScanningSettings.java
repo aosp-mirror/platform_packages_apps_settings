@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * A page that configures the background scanning settings for Wi-Fi and Bluetooth.
  */
-@SearchIndexable
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ScanningSettings extends DashboardFragment {
     private static final String TAG = "ScanningSettings";
 
