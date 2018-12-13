@@ -18,11 +18,14 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static com.android.settings.slices.CustomSliceRegistry.BATTERY_FIX_SLICE_URI;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
@@ -36,13 +39,11 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
-import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
@@ -67,59 +68,44 @@ public class BatteryFixSlice implements CustomSliceable {
 
     @Override
     public Uri getUri() {
-        return CustomSliceRegistry.BATTERY_FIX_SLICE_URI;
+        return BATTERY_FIX_SLICE_URI;
     }
 
     @Override
     public Slice getSlice() {
-        IconCompat icon;
-        SliceAction primaryAction;
-        Slice slice = null;
+        final ListBuilder sliceBuilder =
+                new ListBuilder(mContext, BATTERY_FIX_SLICE_URI, ListBuilder.INFINITY)
+                        .setAccentColor(-1);
 
         // TipType.SUMMARY is battery good
         if (readBatteryTipAvailabilityCache(mContext) == BatteryTip.TipType.SUMMARY) {
-            return null;
+            return buildBatteryGoodSlice(sliceBuilder, true);
         }
 
         final List<BatteryTip> batteryTips = SliceBackgroundWorker.getInstance(mContext,
                 this).getResults();
 
-        if (batteryTips != null) {
-            for (BatteryTip batteryTip : batteryTips) {
-                if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
-                    icon = IconCompat.createWithResource(mContext, batteryTip.getIconId());
-                    primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
-                            icon,
-                            ListBuilder.ICON_IMAGE,
-                            batteryTip.getTitle(mContext));
-                    slice = new ListBuilder(mContext, CustomSliceRegistry.BATTERY_FIX_SLICE_URI,
-                            ListBuilder.INFINITY)
-                            .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
-                            .addRow(new RowBuilder()
-                                    .setTitle(batteryTip.getTitle(mContext))
-                                    .setSubtitle(batteryTip.getSummary(mContext))
-                                    .setPrimaryAction(primaryAction)
-                                    .addEndItem(icon, ListBuilder.ICON_IMAGE))
-                            .build();
-                    break;
-                }
-            }
-        } else {
-            icon = IconCompat.createWithResource(mContext,
-                    R.drawable.ic_battery_status_good_24dp);
-            final String title = mContext.getString(R.string.power_usage_summary_title);
-            primaryAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
-                    ListBuilder.ICON_IMAGE, title);
-            slice = new ListBuilder(mContext, CustomSliceRegistry.BATTERY_FIX_SLICE_URI,
-                    ListBuilder.INFINITY)
-                    .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
-                    .addRow(new RowBuilder()
-                            .setTitle(title)
-                            .setPrimaryAction(primaryAction)
-                            .addEndItem(icon, ListBuilder.ICON_IMAGE))
-                    .build();
+        if (batteryTips == null) {
+            // Because we need wait slice background worker return data
+            return buildBatteryGoodSlice(sliceBuilder, false);
         }
-        return slice;
+
+        for (BatteryTip batteryTip : batteryTips) {
+            if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
+                final IconCompat icon = IconCompat.createWithResource(mContext, batteryTip.getIconId());
+                final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
+                        icon,
+                        ListBuilder.ICON_IMAGE,
+                        batteryTip.getTitle(mContext));
+                sliceBuilder.addRow(new RowBuilder()
+                        .setTitle(batteryTip.getTitle(mContext))
+                        .setSubtitle(batteryTip.getSummary(mContext))
+                        .setPrimaryAction(primaryAction)
+                        .addEndItem(icon, ListBuilder.ICON_IMAGE));
+                break;
+            }
+        }
+        return sliceBuilder.build();
     }
 
     @Override
@@ -149,6 +135,20 @@ public class BatteryFixSlice implements CustomSliceable {
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
         return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
+    }
+
+    private Slice buildBatteryGoodSlice(ListBuilder sliceBuilder, boolean isError) {
+        final IconCompat icon = IconCompat.createWithResource(mContext,
+                R.drawable.ic_battery_status_good_24dp);
+        final String title = mContext.getString(R.string.power_usage_summary_title);
+        final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
+                ListBuilder.ICON_IMAGE, title);
+        sliceBuilder.addRow(new RowBuilder()
+                .setTitle(title)
+                .setPrimaryAction(primaryAction)
+                .addEndItem(icon, ListBuilder.ICON_IMAGE))
+                .setIsError(isError);
+        return sliceBuilder.build();
     }
 
     // TODO(b/114807643): we should find a better way to get current battery tip type quickly
