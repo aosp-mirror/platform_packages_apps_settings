@@ -18,6 +18,7 @@ package com.android.settings.wifi.dpp;
 
 import android.os.Bundle;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
 /**
@@ -28,6 +29,11 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     @Override
     protected int getLayout() {
         return R.layout.wifi_dpp_choose_saved_wifi_network_fragment;
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
     @Override

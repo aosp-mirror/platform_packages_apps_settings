@@ -31,6 +31,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
@@ -51,6 +52,15 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     protected int getLayout() {
         return R.layout.wifi_dpp_qrcode_scanner_fragment;
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        if (mConfiguratorMode) {
+            return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
+        } else {
+            return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_ENROLLEE;
+        }
     }
 
     /**

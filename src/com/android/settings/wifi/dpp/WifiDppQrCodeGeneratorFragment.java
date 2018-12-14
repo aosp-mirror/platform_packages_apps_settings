@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
 /**
@@ -33,6 +34,11 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     @Override
     protected int getLayout() {
         return R.layout.wifi_dpp_qrcode_generator_fragment;
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
     // Container Activity must implement this interface
