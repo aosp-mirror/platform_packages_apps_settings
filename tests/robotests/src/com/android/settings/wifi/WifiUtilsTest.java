@@ -22,6 +22,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
+import static org.mockito.Mockito.spy;
+
+import android.content.Context;
+import android.net.wifi.WifiConfiguration;
+import android.os.Bundle;
+
+import com.android.settingslib.wifi.AccessPoint;
+
+import org.robolectric.RuntimeEnvironment;
+
 @RunWith(RobolectricTestRunner.class)
 public class WifiUtilsTest {
 
@@ -43,5 +53,24 @@ public class WifiUtilsTest {
         assertThat(WifiUtils.isHotspotPasswordValid("1234567890")).isTrue();
         assertThat(WifiUtils.isHotspotPasswordValid(longPassword)).isFalse();
         assertThat(WifiUtils.isHotspotPasswordValid("")).isFalse();
+    }
+
+    @Test
+    public void getWifiConfigByAccessPoint_shouldReturnCorrectConfig() {
+        String testSSID = "WifiUtilsTest";
+        Bundle bundle = new Bundle();
+        bundle.putString("key_ssid", testSSID);
+        Context context = spy(RuntimeEnvironment.application);
+        AccessPoint accessPoint = new AccessPoint(context, bundle);
+
+        WifiConfiguration config = WifiUtils.getWifiConfig(accessPoint, null, null);
+
+        assertThat(config).isNotNull();
+        assertThat(config.SSID).isEqualTo(AccessPoint.convertToQuotedString(testSSID));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getWifiConfigWithNullInput_ThrowIllegalArgumentException() {
+        WifiConfiguration config = WifiUtils.getWifiConfig(null, null, null);
     }
 }

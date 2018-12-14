@@ -129,8 +129,16 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         }
 
         if (which < accessPointList.size()) {
-            WifiConfiguration wifiConfig = accessPointList.get(which).getConfig();
-            mUserSelectionCallback.select(wifiConfig);
+            final AccessPoint selectedAccessPoint = accessPointList.get(which);
+            WifiConfiguration wifiConfig = selectedAccessPoint.getConfig();
+            if (wifiConfig == null) {
+                wifiConfig = WifiUtils.getWifiConfig(selectedAccessPoint, /* scanResult */
+                        null, /* password */ null);
+            }
+
+            if (wifiConfig != null) {
+                mUserSelectionCallback.select(wifiConfig);
+            }
         }
     }
 
