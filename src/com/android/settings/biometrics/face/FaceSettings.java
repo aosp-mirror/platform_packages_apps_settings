@@ -59,6 +59,10 @@ public class FaceSettings extends DashboardFragment {
     private byte[] mToken;
     private FaceSettingsAttentionPreferenceController mAttentionController;
 
+    private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
+        getActivity().finish();
+    };
+
     public static boolean isAvailable(Context context) {
         FaceManager manager = Utils.getFaceManagerOrNull(context);
         return manager != null && manager.isHardwareDetected();
@@ -146,10 +150,13 @@ public class FaceSettings extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers =
                 buildPreferenceControllers(context, getSettingsLifecycle());
+        // There's no great way of doing this right now :/
         for (AbstractPreferenceController controller : controllers) {
             if (controller instanceof FaceSettingsAttentionPreferenceController) {
                 mAttentionController = (FaceSettingsAttentionPreferenceController) controller;
-                break;
+            } else if (controller instanceof FaceSettingsRemoveButtonPreferenceController) {
+                ((FaceSettingsRemoveButtonPreferenceController) controller)
+                        .setListener(mRemovalListener);
             }
         }
 
