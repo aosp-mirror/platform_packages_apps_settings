@@ -28,33 +28,27 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.android.settings.slices.CustomSliceRegistry;
-import com.android.settings.slices.SettingsSliceProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowContentResolver;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RunWith(RobolectricTestRunner.class)
 public class ContextualCardLoaderTest {
 
     private Context mContext;
     private ContextualCardLoader mContextualCardLoader;
-    private SettingsSliceProvider mProvider;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mContextualCardLoader = spy(new ContextualCardLoader(mContext));
-        mProvider = new SettingsSliceProvider();
-        ShadowContentResolver.registerProviderInternal(SettingsSliceProvider.SLICE_AUTHORITY,
-                mProvider);
     }
 
     @Test
