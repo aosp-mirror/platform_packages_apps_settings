@@ -32,15 +32,17 @@ import android.print.PrintDocumentAdapter;
 import android.print.PrintDocumentInfo;
 import android.print.PrintJob;
 import android.print.PrintManager;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.LargeTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings;
 
@@ -52,8 +54,6 @@ import org.junit.runner.RunWith;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.UUID;
-
-import androidx.annotation.NonNull;
 
 @RunWith(AndroidJUnit4.class)
 public class PrintJobSettingsActivityTest {

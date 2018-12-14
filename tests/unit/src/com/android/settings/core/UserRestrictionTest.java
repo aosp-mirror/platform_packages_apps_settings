@@ -24,12 +24,13 @@ import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.MediumTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.MediumTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;

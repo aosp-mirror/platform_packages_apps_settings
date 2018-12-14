@@ -17,12 +17,13 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.test.filters.SmallTest;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiSelector;
 import android.test.InstrumentationTestCase;
 import android.widget.TextView;
+
+import androidx.test.filters.SmallTest;
 
 import com.android.settings.R;
 

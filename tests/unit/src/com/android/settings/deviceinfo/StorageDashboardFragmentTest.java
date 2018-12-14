@@ -1,15 +1,16 @@
 package com.android.settings.deviceinfo;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.filters.SmallTest;
+import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.filters.SmallTest;
 
 import com.android.settings.R;
 import com.android.settings.Settings.StorageDashboardActivity;

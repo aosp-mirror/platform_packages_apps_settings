@@ -27,7 +27,7 @@ LOCAL_JAVA_LIBRARIES := \
     android.test.base
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    android-support-test \
+    androidx.test.rules \
     app-helpers-core \
     launcher-helper-lib \
     metrics-helper-lib \

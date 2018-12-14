@@ -14,10 +14,10 @@ LOCAL_JAVA_LIBRARIES := \
 
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    android-support-test \
-    espresso-core \
-    espresso-contrib-nodep \
-    espresso-intents-nodep \
+    androidx.test.rules \
+    androidx.test.espresso.core \
+    androidx.test.espresso.contrib-nodeps \
+    androidx.test.espresso.intents-nodeps \
     mockito-target-minus-junit4 \
     platform-test-annotations \
     truth-prebuilt \
