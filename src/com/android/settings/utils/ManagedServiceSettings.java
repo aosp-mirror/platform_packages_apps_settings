@@ -240,9 +240,11 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         public final int warningDialogTitle;
         public final int warningDialogSummary;
         public final int emptyText;
+        public final String configIntentAction;
 
-        private Config(String tag, String setting, String intentAction, String permission,
-                String noun, int warningDialogTitle, int warningDialogSummary, int emptyText) {
+        private Config(String tag, String setting, String intentAction, String configIntentAction,
+                String permission, String noun, int warningDialogTitle, int warningDialogSummary,
+                int emptyText) {
             this.tag = tag;
             this.setting = setting;
             this.intentAction = intentAction;
@@ -251,6 +253,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             this.warningDialogTitle = warningDialogTitle;
             this.warningDialogSummary = warningDialogSummary;
             this.emptyText = emptyText;
+            this.configIntentAction = configIntentAction;
         }
 
         public static class Builder{
@@ -262,6 +265,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             private int mWarningDialogTitle;
             private int mWarningDialogSummary;
             private int mEmptyText;
+            private String mConfigIntentAction;
 
             public Builder setTag(String tag) {
                 mTag = tag;
@@ -275,6 +279,11 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
 
             public Builder setIntentAction(String intentAction) {
                 mIntentAction = intentAction;
+                return this;
+            }
+
+            public Builder setConfigurationIntentAction(String action) {
+                mConfigIntentAction = action;
                 return this;
             }
 
@@ -304,8 +313,8 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             }
 
             public Config build() {
-                return new Config(mTag, mSetting, mIntentAction, mPermission, mNoun,
-                        mWarningDialogTitle, mWarningDialogSummary, mEmptyText);
+                return new Config(mTag, mSetting, mIntentAction, mConfigIntentAction, mPermission,
+                        mNoun, mWarningDialogTitle, mWarningDialogSummary, mEmptyText);
             }
         }
     }

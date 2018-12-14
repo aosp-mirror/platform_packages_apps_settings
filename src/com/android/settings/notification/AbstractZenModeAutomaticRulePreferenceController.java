@@ -21,6 +21,8 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.provider.Settings;
@@ -82,33 +84,47 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         return intent;
     }
 
-    public static ZenRuleInfo getRuleInfo(PackageManager pm, ServiceInfo si) {
-        if (si == null || si.metaData == null) {
+    public static ZenRuleInfo getRuleInfo(PackageManager pm, ComponentInfo ci) {
+        if (ci == null || ci.metaData == null) {
             return null;
         }
-        final String ruleType = si.metaData.getString(ConditionProviderService.META_DATA_RULE_TYPE);
-        final ComponentName configurationActivity = getSettingsActivity(si);
+        final String ruleType = (ci instanceof ServiceInfo)
+                ? ci.metaData.getString(ConditionProviderService.META_DATA_RULE_TYPE)
+                : ci.metaData.getString(NotificationManager.META_DATA_AUTOMATIC_RULE_TYPE);
+
+        final ComponentName configurationActivity = getSettingsActivity(null, ci);
         if (ruleType != null && !ruleType.trim().isEmpty() && configurationActivity != null) {
             final ZenRuleInfo ri = new ZenRuleInfo();
-            ri.serviceComponent = new ComponentName(si.packageName, si.name);
+            ri.serviceComponent =
+                    (ci instanceof ServiceInfo) ? new ComponentName(ci.packageName, ci.name) : null;
             ri.settingsAction = Settings.ACTION_ZEN_MODE_EXTERNAL_RULE_SETTINGS;
             ri.title = ruleType;
-            ri.packageName = si.packageName;
-            ri.configurationActivity = getSettingsActivity(si);
-            ri.packageLabel = si.applicationInfo.loadLabel(pm);
-            ri.ruleInstanceLimit =
-                    si.metaData.getInt(ConditionProviderService.META_DATA_RULE_INSTANCE_LIMIT, -1);
+            ri.packageName = ci.packageName;
+            ri.configurationActivity = configurationActivity;
+            ri.packageLabel = ci.applicationInfo.loadLabel(pm);
+            ri.ruleInstanceLimit = (ci instanceof ServiceInfo)
+                    ? ci.metaData.getInt(ConditionProviderService.META_DATA_RULE_INSTANCE_LIMIT, -1)
+                    : ci.metaData.getInt(NotificationManager.META_DATA_RULE_INSTANCE_LIMIT, -1);
             return ri;
         }
         return null;
     }
 
-    protected static ComponentName getSettingsActivity(ServiceInfo si) {
-        if (si == null || si.metaData == null) {
+    protected static ComponentName getSettingsActivity(AutomaticZenRule rule, ComponentInfo ci) {
+        // prefer config activity on the rule itself; fallback to manifest definition
+        if (rule != null && rule.getConfigurationActivity() != null) {
+            return rule.getConfigurationActivity();
+        }
+        if (ci == null) {
             return null;
         }
+        // new activity backed rule
+        if (ci instanceof ActivityInfo) {
+            return new ComponentName(ci.packageName, ci.name);
+        }
+        // old service backed rule
         final String configurationActivity =
-                si.metaData.getString(ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
+                ci.metaData.getString(ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
         if (configurationActivity != null) {
             return ComponentName.unflattenFromString(configurationActivity);
         }
@@ -127,7 +143,7 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
             mMetricsFeatureProvider.action(mContext,
                     MetricsProto.MetricsEvent.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
             AutomaticZenRule rule = new AutomaticZenRule(ruleName, mRuleInfo.serviceComponent,
-                    mRuleInfo.defaultConditionId,
+                    mRuleInfo.configurationActivity, mRuleInfo.defaultConditionId, null,
                     NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
             String savedRuleId = mBackend.addZenRule(rule);
             if (savedRuleId != null) {
