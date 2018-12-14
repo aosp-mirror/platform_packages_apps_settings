@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.telephony.SubscriptionManager;
 
+import com.android.settings.wifi.WifiConnectionPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -55,6 +56,8 @@ public class MultiNetworkHeaderControllerTest {
     @Mock
     private PreferenceCategory mPreferenceCategory;
     @Mock
+    private WifiConnectionPreferenceController mWifiController;
+    @Mock
     private SubscriptionsPreferenceController mSubscriptionsController;
     @Mock
     private SubscriptionManager mSubscriptionManager;
@@ -74,6 +77,7 @@ public class MultiNetworkHeaderControllerTest {
         when(mPreferenceScreen.findPreference(eq(KEY_HEADER))).thenReturn(mPreferenceCategory);
 
         mHeaderController = spy(new MultiNetworkHeaderController(mContext, KEY_HEADER));
+        doReturn(mWifiController).when(mHeaderController).createWifiController(mLifecycle);
         doReturn(mSubscriptionsController).when(mHeaderController).createSubscriptionsController(
                 mLifecycle);
     }
@@ -85,8 +89,9 @@ public class MultiNetworkHeaderControllerTest {
 
     // When calling displayPreference, the header itself should only be visible if the
     // subscriptions controller says it is available. This is a helper for test cases of this logic.
-    private void displayPreferenceTest(boolean subscriptionsAvailable,
+    private void displayPreferenceTest(boolean wifiAvailable, boolean subscriptionsAvailable,
             boolean setVisibleExpectedValue) {
+        when(mWifiController.isAvailable()).thenReturn(wifiAvailable);
         when(mSubscriptionsController.isAvailable()).thenReturn(subscriptionsAvailable);
 
         mHeaderController.init(mLifecycle);
@@ -96,13 +101,23 @@ public class MultiNetworkHeaderControllerTest {
     }
 
     @Test
-    public void displayPreference_subscriptionsNotAvailable_categoryIsNotVisible() {
-        displayPreferenceTest(false, false);
+    public void displayPreference_bothNotAvailable_categoryIsNotVisible() {
+        displayPreferenceTest(false, false, false);
     }
 
     @Test
-    public void displayPreference_subscriptionsAvailable_categoryIsVisible() {
-        displayPreferenceTest(true, true);
+    public void displayPreference_wifiAvailableButNotSubscriptions_categoryIsNotVisible() {
+        displayPreferenceTest(true, false, false);
+    }
+
+    @Test
+    public void displayPreference_subscriptionsAvailableButNotWifi_categoryIsVisible() {
+        displayPreferenceTest(false, true, true);
+    }
+
+    @Test
+    public void displayPreference_bothAvailable_categoryIsVisible() {
+        displayPreferenceTest(true, true, true);
     }
 
     @Test

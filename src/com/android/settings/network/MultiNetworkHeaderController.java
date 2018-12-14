@@ -18,7 +18,9 @@ package com.android.settings.network;
 
 import android.content.Context;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.wifi.WifiConnectionPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import androidx.annotation.VisibleForTesting;
@@ -29,9 +31,11 @@ import androidx.preference.PreferenceScreen;
 // are two or more active mobile subscriptions. It shows an overview of available network
 // connections with an entry for wifi (if connected) and an entry for each subscription.
 public class MultiNetworkHeaderController extends BasePreferenceController implements
+        WifiConnectionPreferenceController.UpdateListener,
         SubscriptionsPreferenceController.UpdateListener {
     public static final String TAG = "MultiNetworkHdrCtrl";
 
+    private WifiConnectionPreferenceController mWifiController;
     private SubscriptionsPreferenceController mSubscriptionsController;
     private PreferenceCategory mPreferenceCategory;
 
@@ -40,13 +44,22 @@ public class MultiNetworkHeaderController extends BasePreferenceController imple
     }
 
     public void init(Lifecycle lifecycle) {
+        mWifiController = createWifiController(lifecycle);
         mSubscriptionsController = createSubscriptionsController(lifecycle);
-        // TODO(asargent) - add in a controller for showing wifi status here
+    }
+
+    @VisibleForTesting
+    WifiConnectionPreferenceController createWifiController(Lifecycle lifecycle) {
+        final int prefOrder = 0;
+        return new WifiConnectionPreferenceController(mContext, lifecycle, this, mPreferenceKey,
+                prefOrder, MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY);
     }
 
     @VisibleForTesting
     SubscriptionsPreferenceController createSubscriptionsController(Lifecycle lifecycle) {
-        return new SubscriptionsPreferenceController(mContext, lifecycle, this, mPreferenceKey, 10);
+        final int prefStartOrder = 10;
+        return new SubscriptionsPreferenceController(mContext, lifecycle, this, mPreferenceKey,
+                prefStartOrder);
     }
 
     @Override
@@ -54,6 +67,7 @@ public class MultiNetworkHeaderController extends BasePreferenceController imple
         super.displayPreference(screen);
         mPreferenceCategory = (PreferenceCategory) screen.findPreference(mPreferenceKey);
         mPreferenceCategory.setVisible(isAvailable());
+        mWifiController.displayPreference(screen);
         mSubscriptionsController.displayPreference(screen);
     }
 
