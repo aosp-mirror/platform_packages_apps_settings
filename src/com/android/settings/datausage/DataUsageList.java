@@ -33,6 +33,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -362,7 +363,8 @@ public class DataUsageList extends DataUsageBaseFragment {
                         category = AppItem.CATEGORY_USER;
                     }
                 }
-            } else if (uid == UID_REMOVED || uid == UID_TETHERING) {
+            } else if (uid == UID_REMOVED || uid == UID_TETHERING
+                    || uid == Process.OTA_UPDATE_UID) {
                 collapseKey = uid;
                 category = AppItem.CATEGORY_APP;
             } else {

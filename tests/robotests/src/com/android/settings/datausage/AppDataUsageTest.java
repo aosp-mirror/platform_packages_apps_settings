@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -31,10 +32,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.os.Process;
 import android.telephony.SubscriptionManager;
 import android.text.format.DateUtils;
 import android.util.ArraySet;
@@ -56,6 +60,8 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.net.NetworkCycleDataForUid;
 import com.android.settingslib.net.NetworkCycleDataForUidLoader;
+import com.android.settingslib.net.UidDetail;
+import com.android.settingslib.net.UidDetailProvider;
 
 import org.junit.After;
 import org.junit.Before;
@@ -93,6 +99,62 @@ public class AppDataUsageTest {
     @After
     public void tearDown() {
         ShadowEntityHeaderController.reset();
+    }
+
+    @Test
+    public void onCreate_appUid_shouldGetAppLabelFromAppInfo() throws NameNotFoundException {
+        mFragment = spy(new AppDataUsage());
+        final FragmentActivity activity = spy(Robolectric.setupActivity(FragmentActivity.class));
+        doReturn(mPackageManager).when(activity).getPackageManager();
+        doReturn(activity).when(mFragment).getActivity();
+        doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
+        ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
+            FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
+        final String packageName = "testPackage";
+        final int uid = (Process.FIRST_APPLICATION_UID + Process.LAST_APPLICATION_UID) / 2;
+        doReturn(new String[] {packageName}).when(mPackageManager).getPackagesForUid(uid);
+        final String label = "testLabel";
+        final AppItem appItem = new AppItem(uid);
+        appItem.uids.put(uid, true);
+        final ApplicationInfo info = spy(new ApplicationInfo());
+        doReturn(label).when(info).loadLabel(mPackageManager);
+        when(mPackageManager.getApplicationInfoAsUser(
+            eq(packageName), anyInt() /* flags */, anyInt() /* userId */)).thenReturn(info);
+        final Bundle args = new Bundle();
+        args.putParcelable(AppDataUsage.ARG_APP_ITEM, appItem);
+        args.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
+        mFragment.setArguments(args);
+
+        mFragment.onCreate(Bundle.EMPTY);
+
+        assertThat(mFragment.mLabel).isEqualTo(label);
+    }
+
+    @Test
+    public void onCreate_notAppUid_shouldGetAppLabelFromUidDetailProvider() {
+        mFragment = spy(new AppDataUsage());
+        ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
+            FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
+        doReturn(Robolectric.setupActivity(FragmentActivity.class)).when(mFragment).getActivity();
+        doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
+        final UidDetailProvider uidDetailProvider = mock(UidDetailProvider.class);
+        doReturn(uidDetailProvider).when(mFragment).getUidDetailProvider();
+        final String label = "testLabel";
+        final int uid = Process.SYSTEM_UID;
+        final UidDetail uidDetail = new UidDetail();
+        uidDetail.label = label;
+        when(uidDetailProvider.getUidDetail(eq(uid), anyBoolean() /* blocking */)).
+            thenReturn(uidDetail);
+        final AppItem appItem = new AppItem(uid);
+        appItem.uids.put(uid, true);
+        final Bundle args = new Bundle();
+        args.putParcelable(AppDataUsage.ARG_APP_ITEM, appItem);
+        args.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
+        mFragment.setArguments(args);
+
+        mFragment.onCreate(Bundle.EMPTY);
+
+        assertThat(mFragment.mLabel).isEqualTo(label);
     }
 
     @Test
