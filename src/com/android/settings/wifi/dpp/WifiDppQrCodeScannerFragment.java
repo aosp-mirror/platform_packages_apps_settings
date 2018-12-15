@@ -21,13 +21,15 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.util.Size;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+import android.view.TextureView;
+import android.view.TextureView.SurfaceTextureListener;
 import android.view.View;
 
 import com.android.settings.R;
@@ -35,10 +37,10 @@ import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
 
 public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment implements
-        SurfaceHolder.Callback,
+        SurfaceTextureListener,
         QrCamera.ScannerCallback {
     private QrCamera mCamera;
-    private SurfaceView mSurfaceView;
+    private TextureView mTextureView;
     private QrDecorateView mDecorateView;
 
     /** true if the fragment working for configurator, false enrollee*/
@@ -101,20 +103,10 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mSurfaceView = (SurfaceView) view.findViewById(R.id.preview_view);
-        final SurfaceHolder surfaceHolder = mSurfaceView.getHolder();
-        surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        surfaceHolder.addCallback(this);
+        mTextureView = (TextureView) view.findViewById(R.id.preview_view);
+        mTextureView.setSurfaceTextureListener(this);
 
         mDecorateView = (QrDecorateView) view.findViewById(R.id.decorate_view);
-    }
-
-    @Override
-    public void onDestroyView() {
-        SurfaceHolder surfaceHolder = mSurfaceView.getHolder();
-        surfaceHolder.removeCallback(this);
-
-        super.onDestroyView();
     }
 
     @Override
@@ -125,28 +117,39 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     @Override
-    public void surfaceCreated(final SurfaceHolder holder) {
-        initCamera(holder);
+    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        initCamera(surface);
     }
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+        // Do nothing
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
         destroyCamera();
+        return true;
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         // Do nothing
     }
 
     @Override
     public Size getViewSize() {
-        return new Size(mSurfaceView.getWidth(), mSurfaceView.getHeight());
+        return new Size(mTextureView.getWidth(), mTextureView.getHeight());
     }
 
     @Override
     public Rect getFramePosition(Size previewSize, int cameraOrientation) {
         return new Rect(0, 0, previewSize.getHeight(), previewSize.getHeight());
+    }
+
+    @Override
+    public void setTransform(Matrix transform) {
+        mTextureView.setTransform(transform);
     }
 
     @Override
@@ -161,11 +164,11 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         destroyCamera();
     }
 
-    private void initCamera(SurfaceHolder holder) {
+    private void initCamera(SurfaceTexture surface) {
         // Check if the camera has already created.
         if (mCamera == null) {
             mCamera = new QrCamera(getContext(), this);
-            mCamera.start(holder);
+            mCamera.start(surface);
         }
     }
 

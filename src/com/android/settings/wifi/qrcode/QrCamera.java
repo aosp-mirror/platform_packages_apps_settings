@@ -17,7 +17,10 @@
 package com.android.settings.wifi.qrcode;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
@@ -29,7 +32,6 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
-import android.view.SurfaceHolder;
 import android.view.WindowManager;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
@@ -50,7 +52,7 @@ import androidx.annotation.VisibleForTesting;
 
 /**
  * Manage the camera for the QR scanner and help the decoder to get the image inside the scanning
- * frame. Caller prepares a {@link SurfaceHolder} then call {@link #start(SurfaceHolder)} to
+ * frame. Caller prepares a {@link SurfaceTexture} then call {@link #start(SurfaceTexture)} to
  * start QR Code scanning. The scanning result will return by ScannerCallback interface. Caller
  * can also call {@link #stop()} to halt QR Code scanning before the result returned.
  */
@@ -90,12 +92,11 @@ public class QrCamera extends Handler {
      * The function start camera preview and capture pictures to decode QR code continuously in a
      * background task.
      *
-     * @param surfaceHolder the Surface to be used for live preview, must already contain a surface
-     *                      when this method is called.
+     * @param surface The surface to be used for live preview.
      */
-    public void start(SurfaceHolder surfaceHolder) {
+    public void start(SurfaceTexture surface) {
         if (mDecodeTask == null) {
-            mDecodeTask = new DecodingTask(surfaceHolder);
+            mDecodeTask = new DecodingTask(surface);
             // Execute in the separate thread pool to prevent block other AsyncTask.
             mDecodeTask.executeOnExecutor(Executors.newSingleThreadExecutor());
         }
@@ -144,6 +145,13 @@ public class QrCamera extends Handler {
          * @return The rectangle would like to crop from the camera preview shot.
          */
         Rect getFramePosition(Size previewSize, int cameraOrientation);
+
+        /**
+         * Sets the transform to associate with preview area.
+         *
+         * @param transform The transform to apply to the content of preview
+         */
+        void setTransform(Matrix transform);
     }
 
     private void setCameraParameter() {
@@ -200,15 +208,15 @@ public class QrCamera extends Handler {
 
     private class DecodingTask extends AsyncTask<Void, Void, String> {
         private QrYuvLuminanceSource mImage;
-        private SurfaceHolder mSurfaceHolder;
+        private SurfaceTexture mSurface;
 
-        private DecodingTask(SurfaceHolder surfaceHolder) {
-            mSurfaceHolder = surfaceHolder;
+        private DecodingTask(SurfaceTexture surface) {
+            mSurface = surface;
         }
 
         @Override
         protected String doInBackground(Void... tmp) {
-            if (!initCamera(mSurfaceHolder)) {
+            if (!initCamera(mSurface)) {
                 return null;
             }
 
@@ -253,7 +261,7 @@ public class QrCamera extends Handler {
             }
         }
 
-        private boolean initCamera(SurfaceHolder surfaceHolder) {
+        private boolean initCamera(SurfaceTexture surface) {
             final int numberOfCameras = Camera.getNumberOfCameras();
             Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
             try {
@@ -261,7 +269,7 @@ public class QrCamera extends Handler {
                     Camera.getCameraInfo(i, cameraInfo);
                     if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
                         mCamera = Camera.open(i);
-                        mCamera.setPreviewDisplay(surfaceHolder);
+                        mCamera.setPreviewTexture(surface);
                         mCameraOrientation = cameraInfo.orientation;
                         break;
                     }
@@ -272,6 +280,7 @@ public class QrCamera extends Handler {
                     return false;
                 }
                 setCameraParameter();
+                setTransformationMatrix(mScannerCallback.getViewSize());
                 if (!startPreview()) {
                     Log.e(TAG, "Error to init Camera");
                     mCamera = null;
@@ -286,6 +295,36 @@ public class QrCamera extends Handler {
                 return false;
             }
         }
+    }
+
+    /** Set transfom matrix to crop and center the preview picture */
+    private void setTransformationMatrix(Size viewSize) {
+        // Check aspect ratio, can only handle square view.
+        final int viewRatio = (int)getRatio(viewSize.getWidth(), viewSize.getHeight());
+        if (viewRatio != 1) {
+            throw new IllegalArgumentException("Preview area should be square");
+        }
+
+        final boolean isPortrait = mContext.get().getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_PORTRAIT ? true : false;
+
+        final int previewWidth = isPortrait ? mPreviewSize.getWidth() : mPreviewSize.getHeight();
+        final int previewHeight = isPortrait ? mPreviewSize.getHeight() : mPreviewSize.getWidth();
+        final float ratioPreview = (float) getRatio(previewWidth, previewHeight);
+
+        // Calculate transformation matrix.
+        float scaleX = 1.0f;
+        float scaleY = 1.0f;
+        if (previewWidth > previewHeight) {
+            scaleY = scaleX / ratioPreview;
+        } else {
+            scaleX = scaleY / ratioPreview;
+        }
+
+        // Set the transform matrix.
+        final Matrix matrix = new Matrix();
+        matrix.setScale(scaleX, scaleY);
+        mScannerCallback.setTransform(matrix);
     }
 
     private QrYuvLuminanceSource getFrameImage(byte[] imageData) {
