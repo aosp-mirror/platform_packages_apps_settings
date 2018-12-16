@@ -17,7 +17,7 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,8 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
@@ -39,12 +37,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowAlertDialogCompat.class, SettingsShadowResourcesImpl.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowAlertDialogCompat.class)
 public class ButtonActionDialogFragmentTest {
 
     private static final int FORCE_STOP_ID = ButtonActionDialogFragment.DialogType.FORCE_STOP;

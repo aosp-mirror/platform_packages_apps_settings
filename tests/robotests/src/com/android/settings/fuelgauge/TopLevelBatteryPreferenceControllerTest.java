@@ -22,14 +22,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TopLevelBatteryPreferenceControllerTest {
 
     private Context mContext;
@@ -43,11 +42,9 @@ public class TopLevelBatteryPreferenceControllerTest {
     public void getDashboardLabel_returnsCorrectLabel() {
         BatteryInfo info = new BatteryInfo();
         info.batteryPercentString = "3%";
-        assertThat(getDashboardLabel(mContext, info))
-                .isEqualTo(info.batteryPercentString);
+        assertThat(getDashboardLabel(mContext, info)).isEqualTo(info.batteryPercentString);
 
         info.remainingLabel = "Phone will shut down soon";
-        assertThat(getDashboardLabel(mContext, info))
-                .isEqualTo("3% - Phone will shut down soon");
+        assertThat(getDashboardLabel(mContext, info)).isEqualTo("3% - Phone will shut down soon");
     }
 }

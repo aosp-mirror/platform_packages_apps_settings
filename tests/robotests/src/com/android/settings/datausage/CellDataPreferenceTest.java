@@ -29,16 +29,15 @@ import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CellDataPreferenceTest {
 
     @Mock
@@ -72,8 +71,7 @@ public class CellDataPreferenceTest {
         mListener.onSubscriptionsChanged();
         assertThat(mPreference.isEnabled()).isFalse();
 
-        when(mSubscriptionManager.getActiveSubscriptionInfo(anyInt()))
-                .thenReturn(mSubInfo);
+        when(mSubscriptionManager.getActiveSubscriptionInfo(anyInt())).thenReturn(mSubInfo);
         mListener.onSubscriptionsChanged();
         assertThat(mPreference.isEnabled()).isTrue();
     }

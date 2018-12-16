@@ -27,19 +27,16 @@ import android.content.Context;
 import android.media.AudioManager;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowAudioManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowAudioManager.class})
+@RunWith(RobolectricTestRunner.class)
 public class CallVolumePreferenceControllerTest {
     private static final String TEST_KEY = "Test_Key";
 
@@ -48,7 +45,7 @@ public class CallVolumePreferenceControllerTest {
 
     private Context mContext;
     private CallVolumePreferenceController mController;
-    private ShadowAudioManager mShadowAudioManager;
+    private AudioManager mAudioManager;
 
     @Before
     public void setUp() {
@@ -56,7 +53,7 @@ public class CallVolumePreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new CallVolumePreferenceController(mContext, TEST_KEY);
         mController.setAudioHelper(mHelper);
-        mShadowAudioManager = ShadowAudioManager.getShadow();
+        mAudioManager = mContext.getSystemService(AudioManager.class);
     }
 
     @Test
@@ -80,14 +77,14 @@ public class CallVolumePreferenceControllerTest {
 
     @Test
     public void getAudioStream_onBluetoothScoOff_shouldEqualToStreamVoiceCall() {
-        mShadowAudioManager.setBluetoothScoOn(false);
+        mAudioManager.setBluetoothScoOn(false);
 
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_VOICE_CALL);
     }
 
     @Test
     public void getAudioStream_onBluetoothScoOn_shouldEqualToStreamBtSco() {
-        mShadowAudioManager.setBluetoothScoOn(true);
+        mAudioManager.setBluetoothScoOn(true);
 
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_BLUETOOTH_SCO);
     }

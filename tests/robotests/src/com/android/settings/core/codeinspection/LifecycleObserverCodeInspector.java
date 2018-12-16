@@ -16,7 +16,7 @@
 
 package com.android.settings.core.codeinspection;
 
-import static junit.framework.Assert.fail;
+import static org.junit.Assert.fail;
 
 import android.util.ArraySet;
 

@@ -17,7 +17,7 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -33,7 +33,6 @@ import androidx.preference.Preference;
 import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -45,6 +44,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
@@ -52,7 +52,7 @@ import org.robolectric.shadow.api.Shadow;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothDeviceUpdaterTest {
 

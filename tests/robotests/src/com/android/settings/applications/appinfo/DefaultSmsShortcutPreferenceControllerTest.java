@@ -25,19 +25,19 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultSmsShortcutPreferenceControllerTest {
 
     @Mock
@@ -84,12 +84,12 @@ public class DefaultSmsShortcutPreferenceControllerTest {
     @Implements(DefaultSmsPreferenceController.class)
     public static class ShadowDefaultSmsPreferenceController {
         @Implementation
-        public static boolean hasSmsPreference(String pkg, Context context) {
+        protected static boolean hasSmsPreference(String pkg, Context context) {
             return true;
         }
 
         @Implementation
-        public static boolean isSmsDefault(String pkg, Context context) {
+        protected static boolean isSmsDefault(String pkg, Context context) {
             return true;
         }
     }

@@ -40,9 +40,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowProcess;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.applications.DefaultAppInfo;
 
@@ -52,17 +49,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowProcess;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-            SettingsShadowResources.SettingsShadowTheme.class,
-            ShadowProcess.class,
-            ShadowSecureSettings.class
-        })
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowSecureSettings.class)
 public class DefaultAutofillPickerTest {
 
     private static final String MAIN_APP_KEY = "main.foo.bar/foo.bar.Baz";
@@ -98,7 +93,7 @@ public class DefaultAutofillPickerTest {
 
         mPicker = spy(new DefaultAutofillPicker());
 
-        doReturn(application.getApplicationContext()).when(mPicker).getContext();
+        doReturn(application).when(mPicker).getContext();
         doReturn(mActivity).when(mPicker).getActivity();
         doReturn(res).when(mPicker).getResources();
         doReturn(mScreen).when(mPicker).getPreferenceScreen();
@@ -141,7 +136,7 @@ public class DefaultAutofillPickerTest {
     public void mUserId_shouldDeriveUidFromManagedCaller() {
         setupUserManager();
         setupCaller();
-        ShadowProcess.setMyUid(MANAGED_PROFILE_UID * UserHandle.PER_USER_RANGE);
+        ShadowProcess.setUid(MANAGED_PROFILE_UID * UserHandle.PER_USER_RANGE);
 
         mPicker.onAttach((Context) mActivity);
         mPicker.onCreate(null);
@@ -153,7 +148,7 @@ public class DefaultAutofillPickerTest {
     public void mUserId_shouldDeriveUidFromMainCaller() {
         setupUserManager();
         setupCaller();
-        ShadowProcess.setMyUid(MAIN_PROFILE_UID * UserHandle.PER_USER_RANGE);
+        ShadowProcess.setUid(MAIN_PROFILE_UID * UserHandle.PER_USER_RANGE);
 
         mPicker.onAttach((Context) mActivity);
         mPicker.onCreate(null);
@@ -165,7 +160,7 @@ public class DefaultAutofillPickerTest {
     public void mUserId_shouldDeriveUidFromManagedClick() {
         setupUserManager();
         setupClick(/* forWork= */ true);
-        ShadowProcess.setMyUid(MAIN_PROFILE_UID * UserHandle.PER_USER_RANGE);
+        ShadowProcess.setUid(MAIN_PROFILE_UID * UserHandle.PER_USER_RANGE);
 
         mPicker.onAttach((Context) mActivity);
         mPicker.onCreate(null);
@@ -177,7 +172,7 @@ public class DefaultAutofillPickerTest {
     public void mUserId_shouldDeriveUidFromMainClick() {
         setupUserManager();
         setupClick(/* forWork= */ false);
-        ShadowProcess.setMyUid(MAIN_PROFILE_UID * UserHandle.PER_USER_RANGE);
+        ShadowProcess.setUid(MAIN_PROFILE_UID * UserHandle.PER_USER_RANGE);
 
         mPicker.onAttach((Context) mActivity);
         mPicker.onCreate(null);
@@ -210,7 +205,6 @@ public class DefaultAutofillPickerTest {
     }
 
     private void assertUserId(int userId) {
-        assertThat((Integer) ReflectionHelpers.getField(mPicker, "mUserId"))
-                .isEqualTo(userId);
+        assertThat((Integer) ReflectionHelpers.getField(mPicker, "mUserId")).isEqualTo(userId);
     }
 }

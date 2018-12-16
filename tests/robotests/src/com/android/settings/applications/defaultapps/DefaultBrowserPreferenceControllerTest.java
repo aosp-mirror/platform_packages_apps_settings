@@ -18,9 +18,9 @@ package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -40,7 +40,6 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,13 +47,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultBrowserPreferenceControllerTest {
 
     @Mock
@@ -119,7 +119,6 @@ public class DefaultBrowserPreferenceControllerTest {
         when(mPackageManager.getApplicationInfoAsUser(
             eq(PACKAGE_NAME.toString()), anyInt(), anyInt()))
             .thenReturn(createApplicationInfo(PACKAGE_NAME.toString()));
-        final Preference pref = mock(Preference.class);
 
         assertThat(spyController.getDefaultAppLabel()).isEqualTo(PACKAGE_NAME);
     }
@@ -170,15 +169,14 @@ public class DefaultBrowserPreferenceControllerTest {
             .thenReturn(createApplicationInfo(PACKAGE_TWO));
 
         final List<ResolveInfo> defaultBrowserInfo =
-            mController.getCandidates(mPackageManager, 0 /* userId */);
+            DefaultBrowserPreferenceController.getCandidates(mPackageManager, 0 /* userId */);
 
         assertThat(defaultBrowserInfo.size()).isEqualTo(2);
     }
 
     @Test
     public void getCandidates_shouldQueryActivityWithFlagsEquals0() {
-
-        mController.getCandidates(mPackageManager, 0 /* userId */);
+        DefaultBrowserPreferenceController.getCandidates(mPackageManager, 0 /* userId */);
 
         verify(mPackageManager).queryIntentActivitiesAsUser(
             any(Intent.class), eq(0) /* flags */, eq(0) /* userId */);
@@ -205,7 +203,8 @@ public class DefaultBrowserPreferenceControllerTest {
     public void hasBrowserPreference_shouldQueryIntentActivitiesAsUser() {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
-        mController.hasBrowserPreference("com.test.package", mContext, 0 /* userId */);
+        DefaultBrowserPreferenceController
+            .hasBrowserPreference("com.test.package", mContext, 0 /* userId */);
 
         verify(mPackageManager).queryIntentActivitiesAsUser(
             any(Intent.class), eq(0) /* flags */, eq(0) /* userId */);

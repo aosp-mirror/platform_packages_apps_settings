@@ -31,7 +31,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.location.RecentLocationApps.Request;
@@ -42,13 +41,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 /** Unit tests for {@link RecentLocationRequestSeeAllPreferenceController} */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RecentLocationRequestSeeAllPreferenceControllerTest {
 
     @Mock

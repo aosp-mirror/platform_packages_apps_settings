@@ -21,15 +21,14 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Intent;
 import android.os.SystemProperties;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SetupWizardUtilsTest {
 
     @Test

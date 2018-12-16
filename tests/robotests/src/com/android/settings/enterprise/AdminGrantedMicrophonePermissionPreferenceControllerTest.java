@@ -18,11 +18,10 @@ package com.android.settings.enterprise;
 
 import android.Manifest;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AdminGrantedMicrophonePermissionPreferenceControllerTest
     extends AdminGrantedPermissionsPreferenceControllerTestBase {
 

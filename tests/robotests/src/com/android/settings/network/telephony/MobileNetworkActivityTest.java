@@ -40,7 +40,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,12 +49,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class MobileNetworkActivityTest {
 
     private static final int CURRENT_SUB_ID = 3;
@@ -159,14 +159,12 @@ public class MobileNetworkActivityTest {
 
     @Test
     public void onSaveInstanceState_saveCurrentSubId() {
-        mMobileNetworkActivity = Robolectric.buildActivity(
-                MobileNetworkActivity.class).get();
+        mMobileNetworkActivity = Robolectric.buildActivity(MobileNetworkActivity.class).get();
         mMobileNetworkActivity.mCurSubscriptionId = PREV_SUB_ID;
         final Bundle bundle = new Bundle();
 
         mMobileNetworkActivity.saveInstanceState(bundle);
 
-        assertThat(bundle.getInt(Settings.EXTRA_SUB_ID)).isEqualTo(
-                PREV_SUB_ID);
+        assertThat(bundle.getInt(Settings.EXTRA_SUB_ID)).isEqualTo(PREV_SUB_ID);
     }
 }

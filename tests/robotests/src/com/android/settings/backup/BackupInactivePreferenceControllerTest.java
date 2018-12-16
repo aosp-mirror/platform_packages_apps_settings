@@ -23,17 +23,17 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowPrivacySettingsUtils.class})
 public class BackupInactivePreferenceControllerTest {
     private Context mContext;

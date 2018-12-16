@@ -20,7 +20,7 @@ import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXAB
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static junit.framework.Assert.fail;
+import static org.junit.Assert.fail;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -31,16 +31,16 @@ import android.text.TextUtils;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeIndexProvider;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSettings;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SearchIndexableResourcesTest {
 
     private SearchFeatureProviderImpl mSearchProvider;

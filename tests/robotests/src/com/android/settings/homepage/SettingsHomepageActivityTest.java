@@ -22,16 +22,16 @@ import android.util.FeatureFlagUtils;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowActivity;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsHomepageActivityTest {
 
     @Test

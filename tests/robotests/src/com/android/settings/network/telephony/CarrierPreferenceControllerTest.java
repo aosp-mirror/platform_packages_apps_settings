@@ -39,7 +39,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.PhoneConstants;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -49,9 +48,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.ArgumentCaptor;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CarrierPreferenceControllerTest {
     private static final int SUB_ID = 2;
     private static final String CARRIER_SETTINGS_COMPONENT = "packageName/className";

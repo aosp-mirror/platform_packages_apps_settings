@@ -46,15 +46,15 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.FakeUnavailablePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SliceBuilderUtilsTest {
 
     private final String KEY = "KEY";

@@ -32,7 +32,6 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,8 +39,9 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RolesPreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "roles";

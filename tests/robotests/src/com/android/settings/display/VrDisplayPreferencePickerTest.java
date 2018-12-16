@@ -26,19 +26,19 @@ import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class VrDisplayPreferencePickerTest {
 
     private VrDisplayPreferencePicker mPicker;

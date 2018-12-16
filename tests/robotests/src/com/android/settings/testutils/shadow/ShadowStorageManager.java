@@ -48,27 +48,27 @@ public class ShadowStorageManager {
     }
 
     @Implementation
-    public VolumeInfo findVolumeById(String id) {
+    protected VolumeInfo findVolumeById(String id) {
         return createVolumeInfo(id);
     }
 
     @Implementation
-    public DiskInfo findDiskById(String id) {
+    protected DiskInfo findDiskById(String id) {
         return new DiskInfo(id, DiskInfo.FLAG_SD);
     }
 
     @Implementation
-    public VolumeRecord findRecordByUuid(String fsUuid) {
+    protected VolumeRecord findRecordByUuid(String fsUuid) {
         return createVolumeRecord(fsUuid);
     }
 
     @Implementation
-    public void unmount(String volId) {
+    protected void unmount(String volId) {
         sIsUnmountCalled = true;
     }
 
     @Implementation
-    public void forgetVolume(String fsUuid) {
+    protected void forgetVolume(String fsUuid) {
         sIsForgetCalled = true;
     }
 

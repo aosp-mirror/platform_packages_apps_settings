@@ -33,7 +33,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
@@ -42,13 +41,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AutofillLoggingLevelPreferenceControllerTest {
 
     private static final int IDX_OFF = 0;
@@ -133,7 +133,7 @@ public class AutofillLoggingLevelPreferenceControllerTest {
     }
 
     @Test
-    public void onSettingsChange_off() throws Exception {
+    public void onSettingsChange_off() {
         mHelper.setLoggingLevel(AutofillManager.NO_LOGGING);
 
         mController.updateState(mPreference);
@@ -143,7 +143,7 @@ public class AutofillLoggingLevelPreferenceControllerTest {
     }
 
     @Test
-    public void onSettingsChange_debug() throws Exception {
+    public void onSettingsChange_debug() {
         mHelper.setLoggingLevel(AutofillManager.FLAG_ADD_CLIENT_DEBUG);
 
         mController.updateState(mPreference);
@@ -153,7 +153,7 @@ public class AutofillLoggingLevelPreferenceControllerTest {
     }
 
     @Test
-    public void onSettingsChange_verbose() throws Exception {
+    public void onSettingsChange_verbose() {
         mHelper.setLoggingLevel(AutofillManager.FLAG_ADD_CLIENT_VERBOSE);
 
         mController.updateState(mPreference);

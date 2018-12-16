@@ -33,7 +33,6 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -42,11 +41,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeMediaPreferenceControllerTest {
     private ZenModeMediaPreferenceController mController;
 

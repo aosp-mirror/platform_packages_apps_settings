@@ -31,16 +31,15 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ShowFirstCrashDialogPreferenceControllerTest {
 
     @Mock

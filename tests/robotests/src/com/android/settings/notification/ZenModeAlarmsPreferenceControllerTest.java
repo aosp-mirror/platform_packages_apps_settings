@@ -30,7 +30,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -38,6 +37,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
@@ -45,7 +45,7 @@ import org.robolectric.util.ReflectionHelpers;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeAlarmsPreferenceControllerTest {
 
     private static final boolean ALARMS_SETTINGS = true;

@@ -94,7 +94,7 @@ public class SliceBuilderUtils {
             return buildUnavailableSlice(context, sliceData);
         }
 
-        if (controller instanceof CopyableSlice) {
+        if (controller instanceof Copyable) {
             return buildCopyableSlice(context, sliceData, controller);
         }
 

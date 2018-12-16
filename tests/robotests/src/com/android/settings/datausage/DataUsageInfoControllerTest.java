@@ -5,14 +5,14 @@ import static com.google.common.truth.Truth.assertThat;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.net.DataUsageController.DataUsageInfo;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DataUsageInfoControllerTest {
 
     private static final int NEGATIVE = -1;

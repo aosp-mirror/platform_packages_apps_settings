@@ -25,16 +25,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SwitchBarTest {
 
     private static final int COLOR_BACKGROUND = 1;

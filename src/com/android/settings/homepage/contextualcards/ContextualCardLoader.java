@@ -31,6 +31,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -49,6 +50,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     @VisibleForTesting
     static final int DEFAULT_CARD_COUNT = 4;
     static final int CARD_CONTENT_LOADER_ID = 1;
+    static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS;
 
     private static final String TAG = "ContextualCardLoader";
 
@@ -97,6 +99,8 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                     final ContextualCard card = new ContextualCard(cursor);
                     if (card.isCustomCard()) {
                         //TODO(b/114688391): Load and generate custom card,then add into list
+                    } else if (isLargeCard(card)) {
+                        result.add(card.mutate().setIsLargeCard(true).build());
                     } else {
                         result.add(card);
                     }
@@ -195,9 +199,13 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     private int getNumberOfLargeCard(List<ContextualCard> cards) {
         return (int) cards.stream()
-                .filter(card -> card.getSliceUri().equals(WIFI_SLICE_URI)
-                        || card.getSliceUri().equals(BLUETOOTH_DEVICES_SLICE_URI))
+                .filter(card -> isLargeCard(card))
                 .count();
+    }
+
+    private boolean isLargeCard(ContextualCard card) {
+        return card.getSliceUri().equals(WIFI_SLICE_URI)
+                || card.getSliceUri().equals(BLUETOOTH_DEVICES_SLICE_URI);
     }
 
     public interface CardContentLoaderListener {

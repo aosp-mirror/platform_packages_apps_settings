@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -28,10 +27,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
 public class FactoryResetPreferenceControllerTest {
 

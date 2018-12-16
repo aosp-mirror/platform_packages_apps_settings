@@ -32,7 +32,6 @@ import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.net.ConnectivityManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -42,6 +41,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -54,7 +54,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UsbDetailsFunctionsControllerTest {
 
     private UsbDetailsFunctionsController mDetailsFunctionsController;

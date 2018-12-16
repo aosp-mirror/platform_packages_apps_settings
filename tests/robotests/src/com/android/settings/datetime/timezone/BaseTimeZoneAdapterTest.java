@@ -20,8 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,8 +28,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BaseTimeZoneAdapterTest {
 
     @Test
@@ -48,7 +47,7 @@ public class BaseTimeZoneAdapterTest {
         items.add(secretCountry);
 
         TestTimeZoneAdapter adapter = new TestTimeZoneAdapter(items);
-        assertSearch(adapter, "", items.toArray(new TestItem[items.size()]));
+        assertSearch(adapter, "", items.toArray(new TestItem[0]));
         assertSearch(adapter, "Unit", US, UK);
         assertSearch(adapter, "kon", HK);
         assertSearch(adapter, "brit", UK);
@@ -71,7 +70,7 @@ public class BaseTimeZoneAdapterTest {
         private final CountDownLatch mLatch = new CountDownLatch(1);
         private final TestTimeZoneAdapter mAdapter;
 
-        public Observer(TestTimeZoneAdapter adapter) {
+        private Observer(TestTimeZoneAdapter adapter) {
             mAdapter = adapter;
             mAdapter.registerAdapterDataObserver(this);
         }
@@ -82,14 +81,14 @@ public class BaseTimeZoneAdapterTest {
             mLatch.countDown();
         }
 
-        public void await() throws InterruptedException {
+        private void await() throws InterruptedException {
             mLatch.await(2L, TimeUnit.SECONDS);
         }
     }
 
     private static class TestTimeZoneAdapter extends BaseTimeZoneAdapter<TestItem> {
 
-        public TestTimeZoneAdapter(List<TestItem> items) {
+        private TestTimeZoneAdapter(List<TestItem> items) {
             super(items, position -> {}, Locale.US, false /* showItemSummary */,
                     null /* headerText */);
         }

@@ -26,16 +26,15 @@ import android.view.autofill.AutofillManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AutofillResetOptionsPreferenceControllerTest {
 
     @Mock
@@ -83,11 +82,9 @@ public class AutofillResetOptionsPreferenceControllerTest {
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
 
-        assertThat(mHelper.getLoggingLevel())
-                .isEqualTo(AutofillManager.DEFAULT_LOGGING_LEVEL);
+        assertThat(mHelper.getLoggingLevel()).isEqualTo(AutofillManager.DEFAULT_LOGGING_LEVEL);
         assertThat(mHelper.getMaxPartitionsSize())
                 .isEqualTo(AutofillManager.DEFAULT_MAX_PARTITIONS_SIZE);
-        assertThat(mHelper.getMaxVisibleDatasets())
-                .isEqualTo(0);
+        assertThat(mHelper.getMaxVisibleDatasets()).isEqualTo(0);
     }
 }

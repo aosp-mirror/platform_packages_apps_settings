@@ -18,13 +18,13 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class GestureSettingsTest {
 
     @Test

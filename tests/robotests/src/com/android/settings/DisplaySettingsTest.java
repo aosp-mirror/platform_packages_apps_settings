@@ -4,20 +4,20 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowPowerManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DisplaySettingsTest {
 
     @Test

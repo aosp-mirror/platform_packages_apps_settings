@@ -16,20 +16,21 @@
 
 package com.android.settings.enterprise;
 
+import static org.junit.Assert.assertEquals;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.UserHandle;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ActionDisabledByAdminDialogTest {
 
     private ActionDisabledByAdminDialog mDialog;
@@ -48,7 +49,7 @@ public class ActionDisabledByAdminDialogTest {
         final Intent intent = new Intent();
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, component);
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
-        Assert.assertEquals(expectedAdmin, mDialog.getAdminDetailsFromIntent(intent));
+        assertEquals(expectedAdmin, mDialog.getAdminDetailsFromIntent(intent));
     }
 
     @Test
@@ -56,7 +57,7 @@ public class ActionDisabledByAdminDialogTest {
         final int userId = UserHandle.myUserId();
         final EnforcedAdmin expectedAdmin = new EnforcedAdmin(null, UserHandle.of(userId));
 
-        Assert.assertEquals(expectedAdmin, mDialog.getAdminDetailsFromIntent(null));
+        assertEquals(expectedAdmin, mDialog.getAdminDetailsFromIntent(null));
     }
 
     @Test
@@ -65,11 +66,11 @@ public class ActionDisabledByAdminDialogTest {
         final Intent intent = new Intent();
 
         intent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, restriction);
-        Assert.assertEquals(restriction, mDialog.getRestrictionFromIntent(intent));
+        assertEquals(restriction, mDialog.getRestrictionFromIntent(intent));
     }
 
     @Test
     public void testGetRestrictionFromNullIntent() {
-        Assert.assertEquals(null, mDialog.getRestrictionFromIntent(null));
+        assertEquals(null, mDialog.getRestrictionFromIntent(null));
     }
 }

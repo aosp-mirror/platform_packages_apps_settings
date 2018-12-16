@@ -37,7 +37,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -48,17 +47,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        shadows = {
-                ShadowUserManager.class
-        })
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUserManager.class)
 public class LocationServicePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -90,7 +87,6 @@ public class LocationServicePreferenceControllerTest {
         when(mCategory.getKey()).thenReturn(key);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
-
     }
 
     @Test

@@ -22,13 +22,12 @@ import static com.android.settings.homepage.contextualcards.conditional.Conditio
 import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.homepage.contextualcards.ContextualCard;
-import com.android.settings.homepage.contextualcards.conditional.ConditionalContextualCard;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConditionalContextualCardTest {
 
     @Test(expected = IllegalArgumentException.class)

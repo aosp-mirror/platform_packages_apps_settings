@@ -22,7 +22,6 @@ import static org.mockito.Mockito.spy;
 
 import android.app.Activity;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRecoverySystem;
 import com.android.settings.testutils.shadow.ShadowWifiP2pManager;
 
@@ -33,9 +32,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowRecoverySystem.class, ShadowWifiP2pManager.class})
 public class ResetNetworkConfirmTest {
 
@@ -64,8 +64,7 @@ public class ResetNetworkConfirmTest {
         Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
 
         assertThat(mResetNetworkConfirm.mEraseEsimTask).isNotNull();
-        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount())
-                .isEqualTo(1);
+        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount()).isEqualTo(1);
     }
 
     @Test
@@ -75,8 +74,7 @@ public class ResetNetworkConfirmTest {
         mResetNetworkConfirm.esimFactoryReset(mActivity, "" /* packageName */);
 
         assertThat(mResetNetworkConfirm.mEraseEsimTask).isNull();
-        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount())
-                .isEqualTo(0);
+        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount()).isEqualTo(0);
     }
 
     /**
@@ -84,10 +82,8 @@ public class ResetNetworkConfirmTest {
      */
     @Test
     public void testResetNetworkData_resetP2p() {
-
         mResetNetworkConfirm.p2pFactoryReset(mActivity);
 
-        assertThat(ShadowWifiP2pManager.getFactoryResetCount())
-                .isEqualTo(1);
+        assertThat(ShadowWifiP2pManager.getFactoryResetCount()).isEqualTo(1);
     }
 }

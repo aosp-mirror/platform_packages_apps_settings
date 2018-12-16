@@ -36,19 +36,19 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = BackupSettingsHelperTest.ShadowBackupManagerStub.class)
 public class BackupSettingsHelperTest {
 
@@ -317,7 +317,7 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testIsBackupProvidedByManufacturer_WithIntent() throws Exception {
+    public void testIsBackupProvidedByManufacturer_WithIntent() {
         String intent = "test_intent";
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -332,7 +332,7 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testIsBackupProvidedByManufacturer_WithoutIntent() throws Exception {
+    public void testIsBackupProvidedByManufacturer_WithoutIntent() {
         String intent = "";
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -347,7 +347,7 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testGetLabelProvidedByManufacturer() throws Exception {
+    public void testGetLabelProvidedByManufacturer() {
         String label = "test_label";
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
@@ -362,7 +362,7 @@ public class BackupSettingsHelperTest {
     }
 
     @Test
-    public void testGetIntentProvidedByManufacturer() throws Exception {
+    public void testGetIntentProvidedByManufacturer() {
         String intent = "test_intent";
 
         when(mContext.getApplicationContext()).thenReturn(mContext);

@@ -33,7 +33,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 
 import com.android.settings.applications.AppStorageSettings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.StorageStatsSource;
 
@@ -42,9 +41,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppStoragePreferenceControllerTest {
 
     @Mock

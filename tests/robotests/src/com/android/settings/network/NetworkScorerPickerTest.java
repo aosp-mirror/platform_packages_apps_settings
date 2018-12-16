@@ -17,8 +17,8 @@ package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -34,7 +34,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 
 import com.google.android.collect.Lists;
@@ -45,11 +44,12 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class NetworkScorerPickerTest {
 
     private static final String TEST_SCORER_PACKAGE_1 = "Test Package 1";

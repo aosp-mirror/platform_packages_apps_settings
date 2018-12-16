@@ -30,16 +30,16 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PowerButtonInstantLockPreferenceControllerTest {
 
     private static final int TEST_USER_ID = 0;

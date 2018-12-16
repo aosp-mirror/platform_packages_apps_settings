@@ -38,7 +38,6 @@ import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 
 import com.android.settings.Settings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
@@ -47,6 +46,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
@@ -58,7 +58,7 @@ import java.util.List;
 /**
  * Tests for {@link CreateShortcutPreferenceController}
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class CreateShortcutPreferenceControllerTest {
 

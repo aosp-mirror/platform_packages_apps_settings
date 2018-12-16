@@ -37,13 +37,13 @@ import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EnterprisePrivacyFeatureProviderImplTest {
 
     private final ComponentName OWNER = new ComponentName("dummy", "component");

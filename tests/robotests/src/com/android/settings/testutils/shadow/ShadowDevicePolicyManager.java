@@ -5,7 +5,6 @@ import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.os.PersistableBundle;
 
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
@@ -13,7 +12,6 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -23,7 +21,7 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     private final Map<Integer, Long> mProfileTimeouts = new HashMap<>();
     private Map<Integer, CharSequence> mSupportMessagesMap = new HashMap<>();
     private boolean mIsAdminActiveAsUser = false;
-    ComponentName mDeviceOwnerComponentName;
+    private ComponentName mDeviceOwnerComponentName;
     private int mDeviceOwnerUserId = -1;
 
     public void setShortSupportMessageForUser(ComponentName admin, int userHandle, String message) {
@@ -31,29 +29,28 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     }
 
     @Implementation
-    public @Nullable
-    CharSequence getShortSupportMessageForUser(@NonNull ComponentName admin,
+    protected @Nullable CharSequence getShortSupportMessageForUser(@NonNull ComponentName admin,
             int userHandle) {
         return mSupportMessagesMap.get(Objects.hash(admin, userHandle));
     }
 
     @Implementation
-    public boolean isAdminActiveAsUser(@NonNull ComponentName admin, int userId) {
+    protected boolean isAdminActiveAsUser(@NonNull ComponentName admin, int userId) {
         return mIsAdminActiveAsUser;
     }
 
     @Implementation
-    public int getDeviceOwnerUserId() {
+    protected int getDeviceOwnerUserId() {
         return mDeviceOwnerUserId;
     }
 
     @Implementation
-    public long getMaximumTimeToLock(ComponentName admin, @UserIdInt int userHandle) {
+    protected long getMaximumTimeToLock(ComponentName admin, @UserIdInt int userHandle) {
         return mProfileTimeouts.getOrDefault(userHandle, 0L);
     }
 
     @Implementation
-    public ComponentName getDeviceOwnerComponentOnAnyUser() {
+    protected ComponentName getDeviceOwnerComponentOnAnyUser() {
         return mDeviceOwnerComponentName;
     }
 
@@ -76,11 +73,5 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     public static ShadowDevicePolicyManager getShadow() {
         return (ShadowDevicePolicyManager) Shadow.extract(
                 RuntimeEnvironment.application.getSystemService(DevicePolicyManager.class));
-    }
-
-    public @Nullable
-    List<PersistableBundle> getTrustAgentConfiguration(
-            @Nullable ComponentName admin, @NonNull ComponentName agent) {
-        return null;
     }
 }

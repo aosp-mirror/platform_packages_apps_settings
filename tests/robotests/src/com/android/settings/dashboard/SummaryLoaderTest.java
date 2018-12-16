@@ -29,7 +29,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -39,9 +38,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SummaryLoaderTest {
 
     private static final String SUMMARY_1 = "summary1";

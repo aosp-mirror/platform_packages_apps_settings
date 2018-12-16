@@ -39,7 +39,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -47,10 +46,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LockScreenPreferenceControllerTest {
 
     private static final int FAKE_PROFILE_USER_ID = 1234;
@@ -68,7 +68,6 @@ public class LockScreenPreferenceControllerTest {
     private Context mContext;
     private LockScreenPreferenceController mController;
     private Preference mPreference;
-
 
     @Before
     public void setUp() {

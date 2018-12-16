@@ -20,7 +20,7 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -38,7 +38,6 @@ import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,12 +45,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowApplicationPackageManager.class)
 public class ConnectedDeviceGroupControllerTest {
 

@@ -20,16 +20,15 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WakeLockScreenGestureSettingsTest {
 
     private WakeLockScreenGestureSettings mSettings;

@@ -19,8 +19,8 @@ package com.android.settings.deviceinfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -40,7 +40,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -52,12 +51,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowUserManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
 public class BuildNumberPreferenceControllerTest {
 

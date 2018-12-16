@@ -32,13 +32,13 @@ import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.ItemViewHolder;
 import com.android.settings.datetime.timezone.RegionSearchPicker.RegionItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import libcore.timezone.CountryZonesFinder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -49,7 +49,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         RegionSearchPickerTest.ShadowBaseTimeZonePicker.class,
         RegionSearchPickerTest.ShadowFragment.class,
@@ -59,7 +59,7 @@ public class RegionSearchPickerTest {
 
     @Test
     public void createAdapter_matchRegionName() {
-        List regionList = new ArrayList();
+        List<String> regionList = new ArrayList<>();
         regionList.add("US");
         CountryZonesFinder finder = mock(CountryZonesFinder.class);
         when(finder.lookupAllCountryIsoCodes()).thenReturn(regionList);
@@ -78,7 +78,7 @@ public class RegionSearchPickerTest {
     // http://b/75322108
     @Test
     public void clickItemView_duringRegionSearch_shouldNotCrash() {
-        List regionList = new ArrayList();
+        List<String> regionList = new ArrayList<>();
         regionList.add("US");
         CountryZonesFinder finder = mock(CountryZonesFinder.class);
         when(finder.lookupAllCountryIsoCodes()).thenReturn(regionList);

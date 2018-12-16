@@ -18,10 +18,10 @@ package com.android.settings.wifi.details;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
@@ -65,8 +65,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowBidiFormatter;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -86,6 +84,7 @@ import org.mockito.InOrder;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -95,12 +94,8 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowDevicePolicyManager.class,
-        ShadowEntityHeaderController.class,
-        ShadowBidiFormatter.class
-})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDevicePolicyManager.class, ShadowEntityHeaderController.class})
 public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;

@@ -21,7 +21,7 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -29,7 +29,6 @@ import android.content.SharedPreferences;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,9 +36,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PickupGesturePreferenceControllerTest {
 
     private static final String KEY_PICK_UP = "gesture_pick_up";

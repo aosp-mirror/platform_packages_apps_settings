@@ -31,17 +31,17 @@ import android.widget.ProgressBar;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.UUID;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DomainAppPreferenceControllerTest {
 
     private ApplicationsState.AppEntry mAppEntry;

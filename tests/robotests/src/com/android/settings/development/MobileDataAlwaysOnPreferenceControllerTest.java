@@ -27,16 +27,15 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class MobileDataAlwaysOnPreferenceControllerTest {
 
     @Mock
@@ -96,13 +95,13 @@ public class MobileDataAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeDisabled() {
+    public void onDeveloperOptionsSwitchDisabled_shouldDisableMobileDataAlwaysOn() {
         mController.onDeveloperOptionsSwitchDisabled();
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.MOBILE_DATA_ALWAYS_ON, -1 /* default */);
 
-        assertThat(mode).isEqualTo(MobileDataAlwaysOnPreferenceController.SETTING_VALUE_OFF);
+        assertThat(mode).isEqualTo(MobileDataAlwaysOnPreferenceController.SETTING_VALUE_ON);
         verify(mPreference).setEnabled(false);
-        verify(mPreference).setChecked(false);
+        verify(mPreference).setChecked(true);
     }
 }

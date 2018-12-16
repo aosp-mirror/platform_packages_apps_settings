@@ -19,7 +19,7 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Matchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
@@ -39,7 +39,6 @@ import android.util.SparseIntArray;
 
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
 
@@ -52,12 +51,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BatteryInfoTest {
 
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
@@ -71,7 +71,7 @@ public class BatteryInfoTest {
             "1 min left until fully charged";
     private static final String TEST_BATTERY_LEVEL_10 = "10%";
     private static final String FIFTEEN_MIN_FORMATTED = "15 min";
-    public static final Estimate DUMMY_ESTIMATE = new Estimate(
+    private static final Estimate DUMMY_ESTIMATE = new Estimate(
             1000, /* estimateMillis */
             false, /* isBasedOnUsage */
             1000 /* averageDischargeTime */);

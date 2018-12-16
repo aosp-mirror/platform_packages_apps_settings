@@ -16,6 +16,10 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -23,6 +27,7 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -30,12 +35,14 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.slices.Copyable;
 import com.android.settingslib.DeviceInfoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhoneNumberPreferenceController extends BasePreferenceController {
+public class PhoneNumberPreferenceController extends BasePreferenceController implements
+        Copyable {
 
     private final static String KEY_PHONE_NUMBER = "phone_number";
 
@@ -46,7 +53,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     public PhoneNumberPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
-        mSubscriptionManager =  mContext.getSystemService(SubscriptionManager.class);
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
     }
 
     @Override
@@ -89,6 +96,17 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     @Override
     public boolean isSliceable() {
         return true;
+    }
+
+    @Override
+    public void copy() {
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(ClipData.newPlainText("text", getFirstPhoneNumber()));
+
+        final String toast = mContext.getString(R.string.copyable_slice_toast,
+                mContext.getText(R.string.status_number));
+        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
     private CharSequence getFirstPhoneNumber() {

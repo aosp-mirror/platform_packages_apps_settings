@@ -49,7 +49,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.widget.LayoutPreference;
@@ -59,10 +58,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class InstantAppButtonsPreferenceControllerTest {
 
     private static final String TEST_INSTALLER_PACKAGE_NAME = "com.installer";
@@ -87,7 +87,7 @@ public class InstantAppButtonsPreferenceControllerTest {
     private InstantAppButtonsPreferenceController mController;
 
     @Before
-    public void setUp() throws PackageManager.NameNotFoundException {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);

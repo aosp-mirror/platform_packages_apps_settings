@@ -20,16 +20,15 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.os.BatteryStats;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 
 import java.time.Duration;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class HighUsageDataParserTest {
 
     private static final long PERIOD_ONE_MINUTE_MS = Duration.ofMinutes(1).toMillis();

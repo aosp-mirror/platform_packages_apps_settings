@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.settings.testutils.shadow;
+package com.android.settings.slices;
 
-import android.bluetooth.BluetoothPan;
-import android.bluetooth.BluetoothProfile;
-import android.content.Context;
-
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-
-@Implements(BluetoothPan.class)
-public class ShadowBluetoothPan {
-    @Implementation
-    public void __constructor__(Context context, BluetoothProfile.ServiceListener l) {
-        // Do nothing, implement it to avoid null pointer error inside BluetoothPan
-    }
+/**
+ * Provide the copy ability for preference controller to copy the data to the clipboard.
+ */
+public interface Copyable {
+    /**
+     * Copy the key slice information to the clipboard.
+     * It is highly recommended to show the toast to notify users when implemented this function.
+     */
+    void copy();
 }

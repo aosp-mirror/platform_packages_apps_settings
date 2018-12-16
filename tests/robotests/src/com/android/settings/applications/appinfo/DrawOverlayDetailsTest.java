@@ -30,7 +30,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAppInfoBase;
 
 import org.junit.Before;
@@ -41,10 +40,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DrawOverlayDetailsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

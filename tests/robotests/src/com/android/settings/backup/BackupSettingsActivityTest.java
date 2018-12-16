@@ -18,9 +18,9 @@ package com.android.settings.backup;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.isA;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,7 +36,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,6 +44,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
@@ -56,7 +56,7 @@ import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {BackupSettingsActivityTest.ShadowBackupSettingsHelper.class,
                 BackupSettingsActivityTest.ShadowUserHandle.class})
 public class BackupSettingsActivityTest {
@@ -155,12 +155,12 @@ public class BackupSettingsActivityTest {
     @Implements(BackupSettingsHelper.class)
     public static class ShadowBackupSettingsHelper {
         @Implementation
-        public Intent getIntentForBackupSettings() {
+        protected Intent getIntentForBackupSettings() {
             return mIntent;
         }
 
         @Implementation
-        public boolean isBackupProvidedByManufacturer() {
+        protected boolean isBackupProvidedByManufacturer() {
             return mIsBackupProvidedByOEM;
         }
     }
@@ -174,7 +174,7 @@ public class BackupSettingsActivityTest {
         }
 
         @Implementation
-        public static int myUserId() {
+        protected static int myUserId() {
             return sUid;
         }
 

@@ -13,7 +13,7 @@ public class ShadowRestrictionUtils {
     private static boolean isRestricted = false;
 
     @Implementation
-    public EnforcedAdmin checkIfRestrictionEnforced(Context context, String restriction) {
+    protected EnforcedAdmin checkIfRestrictionEnforced(Context context, String restriction) {
         if (isRestricted) {
             return new EnforcedAdmin();
         }

@@ -17,25 +17,25 @@ public class ShadowDataUsageUtils {
     public static int DEFAULT_SUBSCRIPTION_ID = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
     @Implementation
-    public static boolean hasMobileData(Context context) {
+    protected static boolean hasMobileData(Context context) {
         return IS_MOBILE_DATA_SUPPORTED;
     }
 
     @Implementation
-    public static boolean hasWifiRadio(Context context) {
+    protected static boolean hasWifiRadio(Context context) {
         return IS_WIFI_SUPPORTED;
     }
 
     @Implementation
-    public static int getDefaultSubscriptionId(Context context) {
+    protected static int getDefaultSubscriptionId(Context context) {
         return DEFAULT_SUBSCRIPTION_ID;
     }
 
     @Implementation
-    public static boolean hasSim(Context context) {
+    protected static boolean hasSim(Context context) {
         return HAS_SIM;
     }
 
     @Implementation
-    public static boolean hasEthernet(Context context) { return false; }
+    protected static boolean hasEthernet(Context context) { return false; }
 }

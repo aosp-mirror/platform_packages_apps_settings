@@ -16,8 +16,8 @@
 
 package com.android.settings.applications.defaultapps;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +27,6 @@ import android.content.pm.PackageManager;
 import android.os.UserManager;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,9 +34,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultBrowserPickerTest {
 
     private static final String TEST_APP_KEY = "";
@@ -58,7 +58,7 @@ public class DefaultBrowserPickerTest {
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         mPicker = new DefaultBrowserPicker();
-        mPicker.onAttach((Context) mActivity);
+        mPicker.onAttach(mActivity);
 
         ReflectionHelpers.setField(mPicker, "mPm", mPackageManager);
     }

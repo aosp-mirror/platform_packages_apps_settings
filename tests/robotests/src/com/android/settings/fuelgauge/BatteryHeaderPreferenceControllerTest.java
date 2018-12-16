@@ -21,9 +21,9 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -43,9 +43,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -57,18 +54,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPowerManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResourcesImpl.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowEntityHeaderController.class
-        })
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowEntityHeaderController.class)
 public class BatteryHeaderPreferenceControllerTest {
 
     private static final String PREF_KEY = "battery_header";

@@ -34,7 +34,6 @@ import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 
@@ -43,9 +42,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiTetherSwitchBarControllerTest {
     @Mock
     private WifiManager mWifiManager;
@@ -79,8 +79,7 @@ public class WifiTetherSwitchBarControllerTest {
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 1);
 
-        final WifiTetherSwitchBarController controller = new WifiTetherSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
+        new WifiTetherSwitchBarController(mContext, new SwitchBarController(mSwitchBar));
 
         assertThat(mSwitchBar.isEnabled()).isFalse();
     }

@@ -35,16 +35,16 @@ import androidx.preference.PreferenceManager;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PreviouslyConnectedDevicePreferenceControllerTest {
 
     private final String KEY = "test_key";
@@ -137,5 +137,4 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         assertThat(mPreferenceGroup.isVisible()).isFalse();
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
     }
-
 }

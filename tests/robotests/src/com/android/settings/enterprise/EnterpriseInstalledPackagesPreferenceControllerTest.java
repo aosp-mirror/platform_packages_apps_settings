@@ -30,7 +30,6 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,8 +39,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EnterpriseInstalledPackagesPreferenceControllerTest {
 
     private static final String KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES

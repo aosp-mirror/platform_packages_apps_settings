@@ -28,7 +28,6 @@ import android.widget.FrameLayout;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -36,10 +35,11 @@ import org.robolectric.Robolectric;
 
 import org.junit.Test;
 
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PanelSlicesAdapterTest {
 
     private Context mContext;

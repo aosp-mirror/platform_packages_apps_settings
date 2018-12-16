@@ -33,11 +33,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
@@ -48,18 +44,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowAlertDialogCompat.class,
-        SettingsShadowResourcesImpl.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowAlertDialogCompat.class})
 public class DevelopmentSettingsDashboardFragmentTest {
 
     private ToggleSwitch mSwitch;
@@ -75,7 +73,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         mSwitch = switchBar.getSwitch();
         mDashboard = spy(new DevelopmentSettingsDashboardFragment());
         ReflectionHelpers.setField(mDashboard, "mSwitchBar", switchBar);
-        mShadowUserManager = ShadowUserManager.getShadow();
+        mShadowUserManager = Shadow.extract(mContext.getSystemService(Context.USER_SERVICE));
         mShadowUserManager.setIsAdminUser(true);
     }
 
@@ -106,7 +104,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void searchIndex_pageDisabledBySetting_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, false);
@@ -119,7 +116,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void searchIndex_pageDisabledForNonAdmin_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, true);
@@ -289,7 +285,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         }
 
         @Implementation
-        public static void show(DevelopmentSettingsDashboardFragment host) {
+        protected static void show(DevelopmentSettingsDashboardFragment host) {
             mShown = true;
         }
     }
@@ -309,7 +305,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Implements(PictureColorModePreferenceController.class)
     public static class ShadowPictureColorModePreferenceController {
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }
@@ -317,16 +313,15 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Implements(AbstractEnableAdbPreferenceController.class)
     public static class ShadowAdbPreferenceController {
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }
 
     @Implements(ClearAdbKeysPreferenceController.class)
     public static class ShadowClearAdbKeysPreferenceController {
-
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }

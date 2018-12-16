@@ -27,15 +27,15 @@ import android.net.wifi.WifiConfiguration;
 import androidx.preference.DropDownPreference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiPrivacyPreferenceControllerTest {
 
     private static final int PRIVACY_RANDOMIZED = 0;
@@ -84,6 +84,6 @@ public class WifiPrivacyPreferenceControllerTest {
         mPreferenceController = spy(new WifiPrivacyPreferenceController(mContext));
 
         mPreferenceController.getRandomizationValue();
-        mPreferenceController.onPreferenceChange(mDropDownPreference, new String("1"));
+        mPreferenceController.onPreferenceChange(mDropDownPreference, "1");
     }
 }

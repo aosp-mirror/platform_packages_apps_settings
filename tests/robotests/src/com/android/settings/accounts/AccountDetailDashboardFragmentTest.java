@@ -20,8 +20,8 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITL
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -29,13 +29,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -45,7 +43,6 @@ import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.drawer.CategoryKey;
@@ -56,13 +53,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAccountManager.class, ShadowUserManager.class})
 public class AccountDetailDashboardFragmentTest {
 
@@ -164,13 +162,11 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void onResume_accountMissing_shouldFinish() {
-        ShadowUserManager userManager = Shadow.extract(
-                mContext.getSystemService(UserManager.class));
-        ShadowAccountManager accountManager = Shadow.extract(
-                mContext.getSystemService(AccountManager.class));
+        ShadowUserManager userManager =
+            Shadow.extract(mContext.getSystemService(UserManager.class));
 
         userManager.addUserProfile(new UserHandle(1));
-        accountManager.addAccountForUser(1, new Account("test@test.com", "com.test"));
+        ShadowAccountManager.addAccountForUser(1, new Account("test@test.com", "com.test"));
 
         mFragment.finishIfAccountMissing();
         verify(mFragment).finish();
@@ -178,13 +174,11 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void onResume_accountPresentOneProfile_shouldNotFinish() {
-        ShadowUserManager userManager = Shadow.extract(
-                mContext.getSystemService(UserManager.class));
-        ShadowAccountManager accountManager = Shadow.extract(
-                mContext.getSystemService(AccountManager.class));
+        ShadowUserManager userManager =
+            Shadow.extract(mContext.getSystemService(UserManager.class));
 
         userManager.addUserProfile(new UserHandle(1));
-        accountManager.addAccountForUser(1, mFragment.mAccount);
+        ShadowAccountManager.addAccountForUser(1, mFragment.mAccount);
 
         mFragment.finishIfAccountMissing();
         verify(mFragment, never()).finish();
@@ -192,15 +186,13 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void onResume_accountPresentTwoProfiles_shouldNotFinish() {
-        ShadowUserManager userManager = Shadow.extract(
-                mContext.getSystemService(UserManager.class));
-        ShadowAccountManager accountManager = Shadow.extract(
-                mContext.getSystemService(AccountManager.class));
+        ShadowUserManager userManager =
+            Shadow.extract(mContext.getSystemService(UserManager.class));
 
         userManager.addUserProfile(new UserHandle(1));
         userManager.addUserProfile(new UserHandle(2));
-        accountManager.addAccountForUser(1, new Account("test@test.com", "com.test"));
-        accountManager.addAccountForUser(2, mFragment.mAccount);
+        ShadowAccountManager.addAccountForUser(1, new Account("test@test.com", "com.test"));
+        ShadowAccountManager.addAccountForUser(2, mFragment.mAccount);
 
         mFragment.finishIfAccountMissing();
         verify(mFragment, never()).finish();

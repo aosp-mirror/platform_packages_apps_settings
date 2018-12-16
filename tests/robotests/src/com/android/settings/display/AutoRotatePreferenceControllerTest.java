@@ -18,8 +18,8 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -33,9 +33,7 @@ import androidx.preference.SwitchPreference;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRotationPolicy;
-import com.android.settings.testutils.shadow.ShadowSystemSettings;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,11 +42,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowSystemSettings.class)
+@RunWith(RobolectricTestRunner.class)
 public class AutoRotatePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -69,11 +67,6 @@ public class AutoRotatePreferenceControllerTest {
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
 
         mController = new AutoRotatePreferenceController(mContext, "auto_rotate");
-    }
-
-    @After
-    public void tearDown() {
-        ShadowSystemSettings.reset();
     }
 
     @Test

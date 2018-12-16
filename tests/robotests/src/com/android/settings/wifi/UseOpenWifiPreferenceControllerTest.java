@@ -24,7 +24,7 @@ import static com.android.settings.wifi.UseOpenWifiPreferenceController
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,7 +43,6 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.common.collect.Lists;
@@ -56,13 +55,14 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UseOpenWifiPreferenceControllerTest {
 
     private static ComponentName sEnableActivityComponent;

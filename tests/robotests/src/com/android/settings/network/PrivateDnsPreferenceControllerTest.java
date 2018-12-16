@@ -31,8 +31,8 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
@@ -60,7 +60,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -72,6 +71,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
@@ -83,7 +83,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
     ShadowUserManager.class,
     ShadowDevicePolicyManager.class

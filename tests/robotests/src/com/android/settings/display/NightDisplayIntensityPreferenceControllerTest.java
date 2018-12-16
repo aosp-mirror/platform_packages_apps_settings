@@ -19,16 +19,17 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.provider.Settings.Secure;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class NightDisplayIntensityPreferenceControllerTest {
 
@@ -40,6 +41,11 @@ public class NightDisplayIntensityPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new NightDisplayIntensityPreferenceController(mContext,
             "night_display_temperature");
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test

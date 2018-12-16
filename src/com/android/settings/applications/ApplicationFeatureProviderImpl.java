@@ -25,6 +25,7 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.location.LocationManager;
 import android.os.RemoteException;
 import android.os.UserManager;
 import android.telecom.DefaultDialerManager;
@@ -142,6 +143,12 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         // Keep Settings intelligence enabled, otherwise search feature will be disabled.
         keepEnabledPackages.add(
                 mContext.getString(R.string.config_settingsintelligence_package_name));
+        final LocationManager locationManager =
+                (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+        final String locationHistoryPackage = locationManager.getLocationControllerExtraPackage();
+        if (locationHistoryPackage != null) {
+            keepEnabledPackages.add(locationHistoryPackage);
+        }
         return keepEnabledPackages;
     }
 

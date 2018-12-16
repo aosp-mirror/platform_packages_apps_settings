@@ -33,7 +33,6 @@ import android.telephony.TelephonyManager;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,8 +41,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DataUsagePreferenceControllerTest {
     private static final int SUB_ID = 2;
 

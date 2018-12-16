@@ -18,12 +18,12 @@ package com.android.settings.datausage;
 import static android.net.NetworkPolicy.CYCLE_NONE;
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.nullable;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -45,7 +45,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
@@ -55,19 +54,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BillingCycleSettingsTest {
 
     private static final int LIMIT_BYTES = 123;
 
     @Mock
-    BillingCycleSettings mMockBillingCycleSettings;
-    BillingCycleSettings.ConfirmLimitFragment mConfirmLimitFragment;
+    private BillingCycleSettings mMockBillingCycleSettings;
+    private BillingCycleSettings.ConfirmLimitFragment mConfirmLimitFragment;
     @Mock
-    PreferenceManager mMockPreferenceManager;
+    private PreferenceManager mMockPreferenceManager;
     @Mock
     private NetworkPolicyEditor mNetworkPolicyEditor;
     @Mock
@@ -87,7 +87,7 @@ public class BillingCycleSettingsTest {
     @Mock
     private SwitchPreference mEnableDataLimit;
 
-    SharedPreferences mSharedPreferences;
+    private SharedPreferences mSharedPreferences;
 
     @Before
     public void setUp() {
@@ -167,5 +167,4 @@ public class BillingCycleSettingsTest {
 
         assertThat(billingCycleSettings.mNetworkTemplate).isNotNull();
     }
-
 }

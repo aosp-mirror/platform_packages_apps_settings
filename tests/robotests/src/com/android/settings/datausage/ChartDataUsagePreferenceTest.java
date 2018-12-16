@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.util.SparseIntArray;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleData;
@@ -33,13 +32,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ChartDataUsagePreferenceTest {
 
     // Test cycle start date, 20 Mar 2018 22:00: GMT

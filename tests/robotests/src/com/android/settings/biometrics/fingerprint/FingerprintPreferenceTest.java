@@ -29,16 +29,16 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FingerprintPreferenceTest {
 
     @Mock

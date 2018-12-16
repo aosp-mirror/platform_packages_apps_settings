@@ -32,7 +32,6 @@ import androidx.preference.SwitchPreference;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -40,9 +39,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class Enhanced4gLtePreferenceControllerTest {
     private static final int SUB_ID = 2;
 
@@ -134,5 +134,4 @@ public class Enhanced4gLtePreferenceControllerTest {
 
         assertThat(mPreference.isChecked()).isTrue();
     }
-
 }

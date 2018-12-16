@@ -36,7 +36,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.Before;
@@ -44,13 +43,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiSettingsTest {
 
     private static final int NUM_NETWORKS = 4;

@@ -19,9 +19,9 @@ package com.android.settings.enterprise;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -36,7 +36,6 @@ import com.android.settings.R;
 import com.android.settings.applications.EnterpriseDefaultApps;
 import com.android.settings.applications.UserAppInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,8 +47,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
 
     private static final String KEY_DEFAULT_APPS = "number_enterprise_set_default_apps";

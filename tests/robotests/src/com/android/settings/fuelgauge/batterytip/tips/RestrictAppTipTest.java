@@ -17,8 +17,8 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
@@ -35,7 +35,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.testutils.BatteryTestUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
@@ -44,12 +43,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RestrictAppTipTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final String UNINSTALL_PACKAGE_NAME = "com.android.app.unintall";
@@ -104,8 +105,8 @@ public class RestrictAppTipTest {
 
     @After
     public void tearDown() {
-        BatteryTestUtils.clearStaticInstance(AppLabelPredicate.class, "sInstance");
-        BatteryTestUtils.clearStaticInstance(AppRestrictionPredicate.class, "sInstance");
+        ReflectionHelpers.setStaticField(AppLabelPredicate.class, "sInstance", null);
+        ReflectionHelpers.setStaticField(AppRestrictionPredicate.class, "sInstance", null);
     }
 
     @Test
@@ -246,6 +247,5 @@ public class RestrictAppTipTest {
                 MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP, BatteryTip.StateType.HANDLED);
         verify(mMetricsFeatureProvider, never()).action(
                 anyInt(), anyInt(), anyInt(), anyString(), anyInt());
-
     }
 }

@@ -18,8 +18,8 @@ package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -42,7 +42,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
 
 import org.junit.Before;
@@ -51,10 +50,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AutomaticStorageManagementSwitchPreferenceControllerTest {
 
     @Mock
@@ -73,7 +73,7 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application.getApplicationContext();
-        final FeatureFactory factory = FeatureFactory.getFactory(mContext);
+        FeatureFactory.getFactory(mContext);
 
         mController = new AutomaticStorageManagementSwitchPreferenceController(mContext, "testkey");
         mController.setFragmentManager(mFragmentManager);

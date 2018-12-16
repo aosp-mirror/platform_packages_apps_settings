@@ -26,21 +26,21 @@ import android.provider.Settings.Global;
 
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowNfcAdapter.class})
 public class NfcAirplaneModeObserverTest {
 
-    Context mContext;
+    private Context mContext;
     private NfcAdapter mNfcAdapter;
     private SwitchPreference mNfcPreference;
     private NfcAirplaneModeObserver mNfcAirplaneModeObserver;

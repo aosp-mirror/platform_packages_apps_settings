@@ -18,8 +18,8 @@ package com.android.settings.applications.specialaccess.pictureinpicture;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import android.content.pm.ActivityInfo;
@@ -31,7 +31,6 @@ import android.os.UserManager;
 import android.util.Pair;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import com.google.common.collect.ImmutableList;
 
@@ -43,8 +42,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PictureInPictureSettingsTest {
 
     private static final int PRIMARY_USER_ID = 0;

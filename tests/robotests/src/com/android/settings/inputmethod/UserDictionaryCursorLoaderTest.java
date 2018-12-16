@@ -25,16 +25,15 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.UserDictionary;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowContentResolver;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UserDictionaryCursorLoaderTest {
 
     private ContentProvider mContentProvider;

@@ -37,10 +37,8 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.testutils.CustomActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowActivity;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
-import com.android.settings.testutils.shadow.ShadowProcess;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -48,17 +46,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowProcess;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowDevicePolicyManager.class,
         ShadowUserManager.class,
-        ShadowActivity.class,
-        ShadowProcess.class
+        ShadowActivity.class
 })
 public class ActionDisabledByAdminDialogHelperTest {
     private ActionDisabledByAdminDialogHelper mHelper;
@@ -156,7 +155,7 @@ public class ActionDisabledByAdminDialogHelperTest {
         dpmShadow.setIsAdminActiveAsUser(true);
         userManagerShadow.addProfile(new UserInfo(123, null, 0));
         userManagerShadow.addUserProfile(new UserHandle(123));
-        ShadowProcess.setMyUid(Process.SYSTEM_UID);
+        ShadowProcess.setUid(Process.SYSTEM_UID);
 
         mHelper.setAdminSupportDetails(mActivity, view, admin);
         assertNotNull(admin.component);

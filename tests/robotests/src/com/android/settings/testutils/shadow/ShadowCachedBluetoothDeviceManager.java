@@ -38,7 +38,7 @@ public class ShadowCachedBluetoothDeviceManager {
     }
 
     @Implementation
-    public synchronized Collection<CachedBluetoothDevice> getCachedDevicesCopy() {
+    protected synchronized Collection<CachedBluetoothDevice> getCachedDevicesCopy() {
         return mCachedDevices;
     }
 }

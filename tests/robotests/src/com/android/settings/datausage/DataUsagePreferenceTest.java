@@ -16,7 +16,7 @@
 
 package com.android.settings.datausage;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.net.DataUsageController;
 
 import org.junit.Before;
@@ -34,9 +33,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DataUsagePreferenceTest {
 
     @Mock
@@ -52,7 +52,6 @@ public class DataUsagePreferenceTest {
         mContext = RuntimeEnvironment.application;
         mPreference = spy(new DataUsagePreference(mContext, null /* attrs */));
         doReturn(mController).when(mPreference).getDataUsageController();
-
     }
 
     @Test

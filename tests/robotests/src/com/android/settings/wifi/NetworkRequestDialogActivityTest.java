@@ -20,26 +20,21 @@ import static com.google.common.truth.Truth.assertThat;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowAlertDialogCompat.class,
-        SettingsShadowResourcesImpl.class
-})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowAlertDialogCompat.class)
 public class NetworkRequestDialogActivityTest {
 
     @Test
     public void LaunchActivity_shouldShowNetworkRequestDialog() {
-        NetworkRequestDialogActivity activity = Robolectric
-                .setupActivity(NetworkRequestDialogActivity.class);
+        Robolectric.setupActivity(NetworkRequestDialogActivity.class);
 
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
 

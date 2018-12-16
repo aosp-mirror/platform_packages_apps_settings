@@ -18,7 +18,7 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,7 +38,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
@@ -53,11 +52,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)
 public class AppInfoWithHeaderTest {
 

@@ -26,22 +26,22 @@ import org.robolectric.annotation.Implements;
 public class ShadowPowerManager {
 
     @Implementation
-    public int getMinimumScreenBrightnessSetting() {
+    protected int getMinimumScreenBrightnessSetting() {
         return 0;
     }
 
     @Implementation
-    public int getMaximumScreenBrightnessSetting() {
+    protected int getMaximumScreenBrightnessSetting() {
         return 0;
     }
 
     @Implementation
-    public int getMinimumScreenBrightnessForVrSetting() {
+    protected int getMinimumScreenBrightnessForVrSetting() {
         return 0;
     }
 
     @Implementation
-    public int getMaximumScreenBrightnessForVrSetting() {
+    protected int getMaximumScreenBrightnessForVrSetting() {
         return 0;
     }
 }

@@ -29,19 +29,18 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AccessibilitySettingsTest {
     private static final String VIBRATION_PREFERENCE_SCREEN = "vibration_preference_screen";
     private static final String ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE =
@@ -66,20 +65,19 @@ public class AccessibilitySettingsTest {
     public void testNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER
             .getNonIndexableKeys(mContext);
-        final List<String> keys = new ArrayList<>();
-
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings));
+        final List<String> keys =
+            XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
 
         assertThat(keys).containsAllIn(niks);
     }
 
     @Test
     public void testUpdateVibrationSummary_shouldUpdateSummary() {
-        final Preference mVibrationPreferenceScreen = new Preference(mContext);
-        doReturn(mVibrationPreferenceScreen).when(mSettings).findPreference(
+        final Preference vibrationPreferenceScreen = new Preference(mContext);
+        doReturn(vibrationPreferenceScreen).when(mSettings).findPreference(
                 VIBRATION_PREFERENCE_SCREEN);
 
-        mVibrationPreferenceScreen.setKey(VIBRATION_PREFERENCE_SCREEN);
+        vibrationPreferenceScreen.setKey(VIBRATION_PREFERENCE_SCREEN);
 
         Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
@@ -89,8 +87,8 @@ public class AccessibilitySettingsTest {
                 Settings.System.HAPTIC_FEEDBACK_INTENSITY,
                 Vibrator.VIBRATION_INTENSITY_OFF);
 
-        mSettings.updateVibrationSummary(mVibrationPreferenceScreen);
-        assertThat(mVibrationPreferenceScreen.getSummary()).isEqualTo(
+        mSettings.updateVibrationSummary(vibrationPreferenceScreen);
+        assertThat(vibrationPreferenceScreen.getSummary()).isEqualTo(
                 VibrationIntensityPreferenceController.getIntensityString(mContext,
                         Vibrator.VIBRATION_INTENSITY_OFF));
     }

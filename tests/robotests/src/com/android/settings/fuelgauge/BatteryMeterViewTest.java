@@ -24,20 +24,15 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.graphics.ColorFilter;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowResources.class, SettingsShadowTheme.class})
+@RunWith(RobolectricTestRunner.class)
 public class BatteryMeterViewTest {
 
     private static final int BATTERY_LEVEL = 100;

@@ -33,7 +33,6 @@ import androidx.preference.PreferenceManager;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -42,11 +41,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SavedDeviceGroupControllerTest {
-    private static final String PREFERENCE_KEY_1 = "pref_key_1";
 
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -54,8 +53,6 @@ public class SavedDeviceGroupControllerTest {
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     @Mock
     private DockUpdater mSavedDockUpdater;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private PreferenceManager mPreferenceManager;
     @Mock
     private PackageManager mPackageManager;
 

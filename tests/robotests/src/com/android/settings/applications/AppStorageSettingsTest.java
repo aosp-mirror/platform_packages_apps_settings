@@ -18,8 +18,8 @@ package com.android.settings.applications;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -31,7 +31,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
@@ -40,9 +39,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppStorageSettingsTest {
 
     @Mock

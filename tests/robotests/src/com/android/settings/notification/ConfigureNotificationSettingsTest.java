@@ -37,7 +37,6 @@ import android.app.Activity;
 
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.ConfigureNotificationSettings.SummaryProvider;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -46,12 +45,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConfigureNotificationSettingsTest {
 
     private Activity mActivity;

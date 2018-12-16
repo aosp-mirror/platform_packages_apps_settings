@@ -19,7 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 
 import android.content.Intent;
@@ -31,8 +31,6 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 
@@ -44,12 +42,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-        SettingsShadowResourcesImpl.class,
-        ShadowUtils.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUtils.class)
 public class FingerprintEnrollEnrollingTest {
 
     @Mock

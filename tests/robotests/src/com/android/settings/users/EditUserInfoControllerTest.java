@@ -38,7 +38,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,9 +45,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EditUserInfoControllerTest {
     @Mock
     private Fragment mFragment;
@@ -69,7 +69,7 @@ public class EditUserInfoControllerTest {
     public class TestEditUserInfoController extends EditUserInfoController {
         private EditUserPhotoController mPhotoController;
 
-        public EditUserPhotoController getPhotoController() {
+        private EditUserPhotoController getPhotoController() {
             return mPhotoController;
         }
 

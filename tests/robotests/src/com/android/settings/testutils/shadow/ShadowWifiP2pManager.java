@@ -23,18 +23,15 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
 /**
- * Shadown class for WifiP2pManager.
+ * Shadow class for WifiP2pManager.
  */
 @Implements(value = WifiP2pManager.class)
 public class ShadowWifiP2pManager extends org.robolectric.shadows.ShadowWifiP2pManager {
 
     private static int sFactoryResetCount;
 
-    /**
-     * factoryReset mock method.
-     */
     @Implementation
-    public void factoryReset(WifiP2pManager.Channel c, WifiP2pManager.ActionListener listener) {
+    protected void factoryReset(WifiP2pManager.Channel c, WifiP2pManager.ActionListener listener) {
         if (c != null) {
             sFactoryResetCount++;
         } else {
@@ -42,9 +39,6 @@ public class ShadowWifiP2pManager extends org.robolectric.shadows.ShadowWifiP2pM
         }
     }
 
-    /**
-     * Reset variables in shadow class.
-     */
     @Resetter
     public static void reset() {
         sFactoryResetCount = 0;

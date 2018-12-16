@@ -19,64 +19,16 @@ package com.android.settings.testutils.shadow;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 
-import androidx.annotation.NonNull;
-
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.shadow.api.Shadow;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Implements(FingerprintManager.class)
 public class ShadowFingerprintManager extends org.robolectric.shadows.ShadowFingerprintManager {
 
-
-    public boolean hardwareDetected = true;
-
-    @NonNull
-    private List<Fingerprint> mFingerprints = Collections.emptyList();
-
-    @Implementation
-    protected boolean isHardwareDetected() {
-        return hardwareDetected;
-    }
-
-    @Implementation
-    protected boolean hasEnrolledFingerprints() {
-        return !mFingerprints.isEmpty();
-    }
-
-    @Implementation
-    protected List<Fingerprint> getEnrolledFingerprints() {
-        return mFingerprints;
-    }
-
     @Implementation
     protected List<Fingerprint> getEnrolledFingerprints(int userId) {
-        return mFingerprints;
-    }
-
-    public void setEnrolledFingerprints(Fingerprint... fingerprints) {
-        mFingerprints = Arrays.asList(fingerprints);
-    }
-
-    public void setDefaultFingerprints(int num) {
-        setEnrolledFingerprints(
-                IntStream.range(0, num)
-                        .mapToObj(i -> new Fingerprint(
-                                "Fingerprint " + i,
-                                0, /* groupId */
-                                i, /* fingerId */
-                                0 /* deviceId */))
-                        .toArray(Fingerprint[]::new));
-    }
-
-    public static ShadowFingerprintManager get() {
-        return (ShadowFingerprintManager) Shadow.extract(
-                RuntimeEnvironment.application.getSystemService(FingerprintManager.class));
+        return getEnrolledFingerprints();
     }
 }

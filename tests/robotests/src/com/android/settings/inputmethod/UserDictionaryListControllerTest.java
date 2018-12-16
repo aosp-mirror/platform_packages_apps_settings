@@ -33,18 +33,17 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.TreeSet;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class UserDictionaryListControllerTest {
 
     private Preference mPreference;

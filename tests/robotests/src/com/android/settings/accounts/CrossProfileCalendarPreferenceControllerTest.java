@@ -32,10 +32,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.util.ArraySet;
-import android.util.Log;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -43,15 +40,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDevicePolicyManager;
 
-import java.util.Collections;
-import java.util.Set;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CrossProfileCalendarPreferenceControllerTest {
 
     private static final String PREF_KEY = "cross_profile_calendar";

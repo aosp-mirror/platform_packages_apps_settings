@@ -32,7 +32,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
@@ -41,12 +40,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DataUsageListTest {
 
     @Mock

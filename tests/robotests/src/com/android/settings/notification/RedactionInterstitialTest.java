@@ -19,9 +19,6 @@ import android.widget.RadioButton;
 import com.android.settings.R;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.notification.RedactionInterstitial.RedactionInterstitialFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -30,14 +27,12 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
-        SettingsShadowResources.class,
-        SettingsShadowResourcesImpl.class,
-        SettingsShadowResources.SettingsShadowTheme.class,
         ShadowUtils.class,
         ShadowRestrictedLockUtilsInternal.class,
         ShadowUserManager.class,

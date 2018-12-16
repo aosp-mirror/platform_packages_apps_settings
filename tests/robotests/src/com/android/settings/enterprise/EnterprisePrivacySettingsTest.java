@@ -25,7 +25,6 @@ import android.content.Context;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
@@ -36,11 +35,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EnterprisePrivacySettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

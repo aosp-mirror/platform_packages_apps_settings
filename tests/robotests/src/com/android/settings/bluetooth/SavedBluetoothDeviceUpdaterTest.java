@@ -15,7 +15,7 @@
  */
 package com.android.settings.bluetooth;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -28,7 +28,6 @@ import android.content.Context;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
@@ -37,10 +36,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothAdapter.class})
 public class SavedBluetoothDeviceUpdaterTest {
 

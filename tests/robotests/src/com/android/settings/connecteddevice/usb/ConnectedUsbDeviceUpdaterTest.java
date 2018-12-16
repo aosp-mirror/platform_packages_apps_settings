@@ -27,7 +27,6 @@ import android.hardware.usb.UsbPort;
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
@@ -35,9 +34,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConnectedUsbDeviceUpdaterTest {
 
     private Context mContext;

@@ -16,11 +16,10 @@
 
 package com.android.settings.datausage;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -41,7 +40,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.widget.EntityHeaderController;
@@ -57,6 +55,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
@@ -64,7 +63,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtilsInternal.class})
 public class AppDataUsageTest {
 
@@ -105,8 +104,8 @@ public class AppDataUsageTest {
     }
 
     @Test
-    public void bindAppHeader_workApp_shouldSetWorkAppUid() throws
-            PackageManager.NameNotFoundException {
+    public void bindAppHeader_workApp_shouldSetWorkAppUid()
+        throws PackageManager.NameNotFoundException {
         final int fakeUserId = 100;
 
         mFragment = spy(new AppDataUsage());

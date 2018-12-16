@@ -36,7 +36,6 @@ import android.printservice.PrintServiceInfo;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -46,13 +45,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PrintSettingsPreferenceControllerTest {
 
     @Mock

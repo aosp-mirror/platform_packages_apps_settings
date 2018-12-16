@@ -32,7 +32,6 @@ import android.util.ArraySet;
 
 import com.android.settings.applications.AppDomainsPreference;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
@@ -41,13 +40,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class InstantAppDomainsPreferenceControllerTest {
 
     @Mock

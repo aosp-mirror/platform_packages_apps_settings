@@ -26,7 +26,7 @@ public class ShadowActivityManager {
     private static int sCurrentUserId = 0;
 
     @Implementation
-    public static int getCurrentUser() {
+    protected static int getCurrentUser() {
         return sCurrentUserId;
     }
 

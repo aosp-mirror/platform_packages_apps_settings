@@ -35,7 +35,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.display.TimeoutListPreference;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 
 import org.junit.Before;
@@ -43,12 +42,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.Collections;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDevicePolicyManager.class)
 public class LockAfterTimeoutPreferenceControllerTest {
 

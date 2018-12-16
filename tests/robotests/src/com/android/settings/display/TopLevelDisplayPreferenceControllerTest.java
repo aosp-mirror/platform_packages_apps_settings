@@ -31,7 +31,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,8 +40,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TopLevelDisplayPreferenceControllerTest {
     @Mock
     private Context mContext;
@@ -55,10 +55,8 @@ public class TopLevelDisplayPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        when(mContext.getString(R.string.config_wallpaper_picker_package))
-                .thenReturn("pkg");
-        when(mContext.getString(R.string.config_wallpaper_picker_class))
-                .thenReturn("cls");
+        when(mContext.getString(R.string.config_wallpaper_picker_package)).thenReturn("pkg");
+        when(mContext.getString(R.string.config_wallpaper_picker_class)).thenReturn("cls");
 
         mController = new TopLevelDisplayPreferenceController(mContext, "test_key");
     }
@@ -88,5 +86,4 @@ public class TopLevelDisplayPreferenceControllerTest {
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getText(R.string.display_dashboard_nowallpaper_summary));
     }
-
 }

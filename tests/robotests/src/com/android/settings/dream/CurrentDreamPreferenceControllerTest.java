@@ -25,7 +25,6 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
@@ -37,12 +36,13 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CurrentDreamPreferenceControllerTest {
 
     private CurrentDreamPreferenceController mController;

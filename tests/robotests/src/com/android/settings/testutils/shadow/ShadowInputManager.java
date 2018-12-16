@@ -27,31 +27,31 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-/*
- * Shadow for {@ InputManager} that has assessors for registered {@link InputDeviceListener}s.
+/**
+ * Shadow for {@link InputManager} that has accessors for registered
+ * {@link InputManager.InputDeviceListener}s.
  */
 @Implements(value = InputManager.class, callThroughByDefault = false)
 public class ShadowInputManager {
 
-    private ArrayList<InputManager.InputDeviceListener> mInputDeviceListeners;
+    private List<InputManager.InputDeviceListener> mInputDeviceListeners;
 
     @Implementation
-    public void __constructor__(IInputManager service) {
+    protected void __constructor__(IInputManager service) {
         mInputDeviceListeners = new ArrayList<>();
     }
 
     @Implementation
-    public static InputManager getInstance() {
+    protected static InputManager getInstance() {
         return ReflectionHelpers.callConstructor(
                 InputManager.class,
                 from(IInputManager.class, null));
     }
 
     @Implementation
-    public void registerInputDeviceListener(InputManager.InputDeviceListener listener,
+    protected void registerInputDeviceListener(InputManager.InputDeviceListener listener,
             Handler handler) {
         // TODO: Use handler.
         if (!mInputDeviceListeners.contains(listener)) {
@@ -60,14 +60,7 @@ public class ShadowInputManager {
     }
 
     @Implementation
-    public void unregisterInputDeviceListener(InputManager.InputDeviceListener listener) {
-        if (mInputDeviceListeners.contains(listener)) {
-            mInputDeviceListeners.remove(listener);
-        }
-    }
-
-    // Non-Android accessor.
-    public List<InputManager.InputDeviceListener> getRegisteredInputDeviceListeners() {
-        return Collections.unmodifiableList(mInputDeviceListeners);
+    protected void unregisterInputDeviceListener(InputManager.InputDeviceListener listener) {
+        mInputDeviceListeners.remove(listener);
     }
 }

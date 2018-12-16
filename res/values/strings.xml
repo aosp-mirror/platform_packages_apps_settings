@@ -798,6 +798,17 @@
     <string name="lockdown_settings_title">Show lockdown option</string>
     <!-- Text shown for the description of the lockdown option -->
     <string name="lockdown_settings_summary">Display power button option that turns off Smart Lock, fingerprint unlocking, and notifications on the lock screen</string>
+
+    <!-- Text shown for the title of the extend unlock mode option for trust agents [CHAR LIMIT=40] -->
+    <string name="trust_agents_extend_unlock_title">SmartLock only extends unlock</string>
+    <!-- Text shown for the description of the extend unlock mode option [CHAR LIMIT=NONE] -->
+    <string name="trust_agents_extend_unlock_summary">If enabled, SmartLock will keep your device unlocked for longer, but can no longer unlock a locked device.</string>
+
+    <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
+    <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
+    <!-- Text shown for the description of the lock when trust lost option [CHAR LIMIT=NONE -->
+    <string name="trust_lost_locks_screen_summary">If enabled, the device will lock when the last trust agent loses trust</string>
+
     <!-- Text shown for summary of owner info setting (if none set) [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary">None</string>
     <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
@@ -10332,4 +10343,7 @@
     <string name="contextual_card_feedback_send">Send feedback</string>
     <!-- String for contextual card feedback dialog [CHAR LIMIT=NONE] -->
     <string name="contextual_card_feedback_confirm_message">Would you like to give us feedback on this suggestion?</string>
+
+    <!-- Toast message for copy action of Copyable Slice [CHAR LIMIT=NONE] -->
+    <string name="copyable_slice_toast"><xliff:g id="copy_content" example="Phone number">%1$s</xliff:g> copied to clipboard.</string>
 </resources>

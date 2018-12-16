@@ -25,7 +25,6 @@ import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -73,14 +72,6 @@ public class WifiSlice implements CustomSliceable {
     @Override
     public Uri getUri() {
         return WIFI_SLICE_URI;
-    }
-
-    @Override
-    public IntentFilter getIntentFilter() {
-        final IntentFilter filter = new IntentFilter();
-        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-        return filter;
     }
 
     @Override
@@ -200,7 +191,7 @@ public class WifiSlice implements CustomSliceable {
                 mWifiManager.isWifiEnabled());
         mWifiManager.setWifiEnabled(newState);
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
-        // does for the Slice to check the current value again. Let {@link SliceBroadcastRelay}
+        // does for the Slice to check the current value again. Let {@link WifiScanWorker}
         // handle it.
     }
 
@@ -292,6 +283,7 @@ public class WifiSlice implements CustomSliceable {
 
         @Override
         public void onWifiStateChanged(int state) {
+            mContext.getContentResolver().notifyChange(getUri(), null);
         }
 
         @Override

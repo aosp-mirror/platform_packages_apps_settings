@@ -18,9 +18,9 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -38,19 +38,19 @@ import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceCon
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultAppSettingsTest {
 
     private Context mContext;
@@ -146,7 +146,6 @@ public class DefaultAppSettingsTest {
         summaryProvider.setListening(true);
 
         verify(summaryLoader, never()).setSummary(summaryProvider, eq(anyString()));
-
     }
 
     @Test

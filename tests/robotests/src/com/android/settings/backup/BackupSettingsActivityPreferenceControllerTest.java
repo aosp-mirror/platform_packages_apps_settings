@@ -18,9 +18,7 @@ package com.android.settings.backup;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.app.backup.BackupManager;
 import android.content.Context;
@@ -29,26 +27,25 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowUserManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = BackupSettingsActivityPreferenceControllerTest.ShadowBackupManager.class)
+@RunWith(RobolectricTestRunner.class)
 public class BackupSettingsActivityPreferenceControllerTest {
 
     private static final String KEY_BACKUP_SETTINGS = "backup_settings";
 
     private Context mContext;
-    @Mock
+    private BackupManager mBackupManager;
     private UserManager mUserManager;
 
     @Mock
@@ -56,20 +53,25 @@ public class BackupSettingsActivityPreferenceControllerTest {
 
     private BackupSettingsActivityPreferenceController mController;
 
-    private static boolean mBackupEnabled;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+
+        mContext = RuntimeEnvironment.application;
+        mBackupManager = new BackupManager(mContext);
+
+        final ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.grantPermissions(android.Manifest.permission.BACKUP);
+        shadowApplication.setSystemService(Context.BACKUP_SERVICE, mBackupManager);
+
+        mUserManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
 
         mController = new BackupSettingsActivityPreferenceController(mContext, KEY_BACKUP_SETTINGS);
     }
 
     @Test
     public void updateState_backupOn() {
-        mBackupEnabled = true;
+        mBackupManager.setBackupEnabled(true);
 
         mController.updateState(mBackupPreference);
         String summaryString = mContext.getString(R.string.backup_summary_state_on);
@@ -78,7 +80,7 @@ public class BackupSettingsActivityPreferenceControllerTest {
 
     @Test
     public void updateState_backupOff() {
-        mBackupEnabled = false;
+        mBackupManager.setBackupEnabled(false);
 
         mController.updateState(mBackupPreference);
         String summaryString = mContext.getString(R.string.backup_summary_state_off);
@@ -87,14 +89,16 @@ public class BackupSettingsActivityPreferenceControllerTest {
 
     @Test
     public void isAvailable_systemUser() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
+        final ShadowUserManager sum = Shadow.extract(mUserManager);
+        sum.setIsAdminUser(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_nonSystemUser() {
-        when(mUserManager.isAdminUser()).thenReturn(false);
+        final ShadowUserManager sum = Shadow.extract(mUserManager);
+        sum.setIsAdminUser(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -102,14 +106,5 @@ public class BackupSettingsActivityPreferenceControllerTest {
     @Test
     public void getPreferenceKey() {
         assertThat(mController.getPreferenceKey()).isEqualTo(KEY_BACKUP_SETTINGS);
-    }
-
-    @Implements(BackupManager.class)
-    public static class ShadowBackupManager {
-
-        @Implementation
-        public boolean isBackupEnabled() {
-            return mBackupEnabled;
-        }
     }
 }

@@ -18,24 +18,24 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import android.app.usage.UsageEvents;
 import android.os.Parcel;
 
 import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class NotificationBackendTest {
 
     @Test

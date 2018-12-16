@@ -38,7 +38,6 @@ import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 
 import com.android.settings.Settings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +46,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowPackageManager;
@@ -54,7 +54,7 @@ import org.robolectric.shadows.ShadowPackageManager;
 import java.util.Arrays;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ShortcutsUpdateTaskTest {
 
     private Context mContext;
@@ -112,7 +112,6 @@ public class ShortcutsUpdateTaskTest {
         ComponentName cn = new ComponentName(mContext, className);
         return makeShortcut(SHORTCUT_ID_PREFIX + cn.flattenToShortString());
     }
-
 
     private ShortcutInfo makeShortcut(String id) {
         return new ShortcutInfo.Builder(mContext, id).build();

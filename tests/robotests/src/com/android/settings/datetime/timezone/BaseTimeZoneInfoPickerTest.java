@@ -22,12 +22,12 @@ import android.content.Context;
 import android.icu.util.TimeZone;
 
 import com.android.settings.datetime.timezone.model.TimeZoneData;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import com.google.common.truth.Truth;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -37,16 +37,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = { BaseTimeZoneInfoPickerTest.ShadowDataFormat.class })
 public class BaseTimeZoneInfoPickerTest {
     @Implements(android.text.format.DateFormat.class)
     public static class ShadowDataFormat {
 
-        public static String sTimeFormatString = "";
+        private static String sTimeFormatString = "";
 
         @Implementation
-        public static String getTimeFormatString(Context context) {
+        protected static String getTimeFormatString(Context context) {
             return sTimeFormatString;
         }
     }
@@ -76,7 +76,7 @@ public class BaseTimeZoneInfoPickerTest {
 
     public static class TestBaseTimeZoneInfoPicker extends BaseTimeZoneInfoPicker {
 
-        public TestBaseTimeZoneInfoPicker() {
+        private TestBaseTimeZoneInfoPicker() {
             super(0, 0, false, false);
         }
 

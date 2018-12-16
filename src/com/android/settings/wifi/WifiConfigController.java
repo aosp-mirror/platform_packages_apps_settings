@@ -279,7 +279,7 @@ public class WifiConfigController implements TextWatcher,
                 mHiddenSettingsSpinner.setSelection(config.hiddenSSID
                         ? HIDDEN_NETWORK
                         : NOT_HIDDEN_NETWORK);
-                //TODO(b/117957974): set MAC randomization value to mPrivacySettingsSpinner
+                mPrivacySettingsSpinner.setSelection(config.macRandomizationSetting);
                 if (config.getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                     showAdvancedFields = true;
@@ -759,7 +759,7 @@ public class WifiConfigController implements TextWatcher,
         }
 
         if (mPrivacySettingsSpinner != null) {
-            //TODO(b/117957974): set MAC randomization value to WifiConfiguration
+            config.macRandomizationSetting = mPrivacySettingsSpinner.getSelectedItemPosition();
         }
 
         return config;

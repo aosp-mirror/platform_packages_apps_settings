@@ -29,7 +29,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.After;
@@ -37,11 +36,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowThreadUtils.class)
 public class CardContentProviderTest {
 
@@ -97,7 +97,7 @@ public class CardContentProviderTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void cardData_delete() {
-        final int delCount = mResolver.delete(mUri, null, null);
+        mResolver.delete(mUri, null, null);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -109,7 +109,7 @@ public class CardContentProviderTest {
         values.put(CardDatabaseHelper.CardColumns.SCORE, updatingScore);
         final String strWhere = CardDatabaseHelper.CardColumns.NAME + "=?";
         final String[] selectionArgs = {"auto_rotate"};
-        final int updateCount = mResolver.update(mUri, values, strWhere, selectionArgs);
+        mResolver.update(mUri, values, strWhere, selectionArgs);
     }
 
     @Test

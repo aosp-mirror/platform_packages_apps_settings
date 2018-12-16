@@ -32,19 +32,17 @@ import java.util.Map;
 @Implements(TileUtils.class)
 public class ShadowTileUtils {
 
-    public static final int ICON_RES_ID = R.drawable.ic_settings;
     public static final String MOCK_SUMMARY = "summary";
 
     @Implementation
-    public static String getTextFromUri(Context context, String uriString,
+    protected static String getTextFromUri(Context context, String uriString,
             Map<String, IContentProvider> providerMap, String key) {
         return MOCK_SUMMARY;
     }
 
     @Implementation
-    public static Pair<String, Integer> getIconFromUri(Context context, String packageName,
+    protected static Pair<String, Integer> getIconFromUri(Context context, String packageName,
             String uriString, Map<String, IContentProvider> providerMap) {
-        return Pair.create(RuntimeEnvironment.application.getPackageName(), ICON_RES_ID);
+        return Pair.create(RuntimeEnvironment.application.getPackageName(), R.drawable.ic_settings);
     }
-
 }

@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
@@ -32,9 +31,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)
 public class AssistGestureSettingsPreferenceControllerTest {
 

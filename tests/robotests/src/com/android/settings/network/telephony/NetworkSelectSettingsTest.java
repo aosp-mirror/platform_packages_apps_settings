@@ -30,18 +30,17 @@ import android.telephony.TelephonyManager;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class NetworkSelectSettingsTest {
     private static final int SUB_ID = 2;
 
@@ -103,5 +102,4 @@ public class NetworkSelectSettingsTest {
                 (NetworkOperatorPreference) mPreferenceCategory.getPreference(0);
         assertThat(preference.getCellInfo()).isEqualTo(mCellInfo2);
     }
-
 }

@@ -15,8 +15,7 @@ public class FakeUnavailablePreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                AVAILABILITY_KEY, 0);
+        return Settings.Global.getInt(mContext.getContentResolver(), AVAILABILITY_KEY, 0);
     }
 
     @Override

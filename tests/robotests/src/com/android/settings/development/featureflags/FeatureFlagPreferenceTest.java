@@ -20,14 +20,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FeatureFlagPreferenceTest {
 
     private static final String KEY = "feature_key";

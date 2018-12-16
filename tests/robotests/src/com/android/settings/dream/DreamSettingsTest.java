@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 
@@ -33,29 +32,30 @@ import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DreamSettingsTest {
 
     private static final List<String> KEYS = Arrays.asList(
-            DreamSettings.WHILE_CHARGING_ONLY,
-            DreamSettings.WHILE_DOCKED_ONLY,
-            DreamSettings.EITHER_CHARGING_OR_DOCKED,
-            DreamSettings.NEVER_DREAM
-        );
+        DreamSettings.WHILE_CHARGING_ONLY,
+        DreamSettings.WHILE_DOCKED_ONLY,
+        DreamSettings.EITHER_CHARGING_OR_DOCKED,
+        DreamSettings.NEVER_DREAM
+    );
 
     private static final @WhenToDream int[] SETTINGS = {
-                DreamBackend.WHILE_CHARGING,
-                DreamBackend.WHILE_DOCKED,
-                DreamBackend.EITHER,
-                DreamBackend.NEVER,
-        };
+        DreamBackend.WHILE_CHARGING,
+        DreamBackend.WHILE_DOCKED,
+        DreamBackend.EITHER,
+        DreamBackend.NEVER,
+    };
 
     private static final int[] RES_IDS = {
-            R.string.screensaver_settings_summary_sleep,
-            R.string.screensaver_settings_summary_dock,
-            R.string.screensaver_settings_summary_either_long,
-            R.string.screensaver_settings_summary_never
+        R.string.screensaver_settings_summary_sleep,
+        R.string.screensaver_settings_summary_dock,
+        R.string.screensaver_settings_summary_either_long,
+        R.string.screensaver_settings_summary_never
     };
 
     @Test

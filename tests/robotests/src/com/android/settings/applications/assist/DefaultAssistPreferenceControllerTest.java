@@ -18,9 +18,9 @@ package com.android.settings.applications.assist;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -40,7 +40,6 @@ import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 
 import com.android.internal.app.AssistUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.applications.DefaultAppInfo;
 
@@ -49,6 +48,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
@@ -56,7 +56,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultAssistPreferenceControllerTest {
 
     private static final String TEST_KEY = "test_pref_key";

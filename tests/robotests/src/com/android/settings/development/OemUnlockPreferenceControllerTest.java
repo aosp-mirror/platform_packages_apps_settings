@@ -38,7 +38,6 @@ import android.telephony.TelephonyManager;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -47,8 +46,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class OemUnlockPreferenceControllerTest {
 
     @Mock
@@ -187,7 +187,6 @@ public class OemUnlockPreferenceControllerTest {
         mController.onDeveloperOptionsEnabled();
 
         verify(mPreference).checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
-
     }
 
     @Test

@@ -23,7 +23,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -31,9 +30,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FloatingAppBarScrollingViewBehaviorTest {
 
     private FloatingAppBarScrollingViewBehavior mScrollingViewBehavior;

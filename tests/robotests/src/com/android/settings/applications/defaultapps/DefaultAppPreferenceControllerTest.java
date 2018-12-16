@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.defaultapps;
 
-
 import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import static org.mockito.Mockito.mock;
@@ -29,7 +28,6 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 
@@ -39,8 +37,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DefaultAppPreferenceControllerTest {
 
     private static final String TEST_APP_NAME = "test";

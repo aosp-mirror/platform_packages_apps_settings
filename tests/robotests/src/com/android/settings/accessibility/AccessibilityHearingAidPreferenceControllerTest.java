@@ -38,7 +38,7 @@ import android.content.IntentFilter;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -47,6 +47,7 @@ import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,13 +55,14 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
 public class AccessibilityHearingAidPreferenceControllerTest {
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
@@ -98,6 +100,11 @@ public class AccessibilityHearingAidPreferenceControllerTest {
                 HEARING_AID_PREFERENCE);
         mPreferenceController.setPreference(mHearingAidPreference);
         mHearingAidPreference.setSummary("");
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
     }
 
     @Test
@@ -175,7 +182,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
     private void setupBluetoothEnvironment() {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
-        mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
         mBluetoothManager = new BluetoothManager(mContext);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
         when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
@@ -197,8 +204,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     private void sendIntent(Intent intent) {
         ArgumentCaptor<BroadcastReceiver> broadcastReceiverCaptor =
                 ArgumentCaptor.forClass(BroadcastReceiver.class);
-        verify(mContext).registerReceiver(
-                broadcastReceiverCaptor.capture(), (IntentFilter) any());
+        verify(mContext).registerReceiver(broadcastReceiverCaptor.capture(), any());
         BroadcastReceiver br = broadcastReceiverCaptor.getValue();
         br.onReceive(mContext, intent);
     }
