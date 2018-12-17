@@ -80,6 +80,17 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("bluetooth_devices")
             .build();
+
+    /**
+     * Backing Uri for the Wifi Slice.
+     */
+    public static final Uri CONTEXTUAL_WIFI_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSlicesContract.AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("contextual_wifi")
+            .build();
+
     /**
      * Backing Uri for the Data usage Slice.
      */
@@ -216,6 +227,7 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(KEY_WIFI)
             .build();
+
     /**
      * Backing Uri for the Zen Mode Slice.
      */

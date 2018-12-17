@@ -70,11 +70,12 @@ public class SettingsContextualCardProviderTest {
     }
 
     @Test
-    public void getContextualCards_wifiSlice_shouldGetCorrectCategory() {
+    public void getContextualCards_wifiSlice_shouldGetImportantCategory() {
         final ContextualCardList cards = mProvider.getContextualCards();
         ContextualCard wifiCard = null;
         for (ContextualCard card : cards.getCardList()) {
-            if (card.getSliceUri().equals(CustomSliceRegistry.WIFI_SLICE_URI.toString())) {
+            if (card.getSliceUri().equals(
+                    CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString())) {
                 wifiCard = card;
             }
         }

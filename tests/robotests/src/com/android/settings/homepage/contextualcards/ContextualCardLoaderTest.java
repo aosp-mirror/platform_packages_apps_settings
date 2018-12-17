@@ -145,7 +145,7 @@ public class ContextualCardLoaderTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_wifi")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.WIFI_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_flashlight")
