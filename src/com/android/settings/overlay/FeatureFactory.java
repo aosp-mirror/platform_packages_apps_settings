@@ -110,7 +110,7 @@ public abstract class FeatureFactory {
 
     public abstract PanelFeatureProvider getPanelFeatureProvider();
 
-    public abstract ContextualCardFeatureProvider getContextualCardFeatureProvider();
+    public abstract ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context);
 
     public abstract FaceFeatureProvider getFaceFeatureProvider();
 

@@ -149,10 +149,10 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             // Two large cards
             return visibleCards;
         } finally {
+            //TODO(b/121196921): Should not call this if user click dismiss
             final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                    FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
-            contextualCardFeatureProvider.logContextualCardDisplay(mContext, visibleCards,
-                    hiddenCards);
+                    FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
+            contextualCardFeatureProvider.logContextualCardDisplay(visibleCards, hiddenCards);
         }
     }
 

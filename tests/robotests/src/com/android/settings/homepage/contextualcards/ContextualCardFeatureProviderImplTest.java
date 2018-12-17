@@ -49,13 +49,13 @@ public class ContextualCardFeatureProviderImplTest {
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
-        mImpl = new ContextualCardFeatureProviderImpl();
+        mImpl = new ContextualCardFeatureProviderImpl(mContext);
     }
 
     @Test
     public void sendBroadcast_emptyAction_notSendBroadcast() {
         final Intent intent = new Intent();
-        mImpl.sendBroadcast(mContext, intent);
+        mImpl.sendBroadcast(intent);
 
         verify(mContext, never()).sendBroadcastAsUser(intent, UserHandle.ALL);
     }
@@ -64,7 +64,7 @@ public class ContextualCardFeatureProviderImplTest {
     @Config(qualifiers = "mcc999")
     public void sendBroadcast_hasAction_sendBroadcast() {
         final Intent intent = new Intent();
-        mImpl.sendBroadcast(mContext, intent);
+        mImpl.sendBroadcast(intent);
 
         verify(mContext).sendBroadcastAsUser(intent, UserHandle.ALL);
     }
@@ -72,7 +72,7 @@ public class ContextualCardFeatureProviderImplTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void logContextualCardDisplay_hasAction_sendBroadcast() {
-        mImpl.logContextualCardDisplay(mContext, new ArrayList<>(), new ArrayList<>());
+        mImpl.logContextualCardDisplay(new ArrayList<>(), new ArrayList<>());
 
         verify(mContext).sendBroadcastAsUser(any(Intent.class), any());
     }
