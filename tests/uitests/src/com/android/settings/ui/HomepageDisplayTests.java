@@ -22,15 +22,16 @@ import static com.android.settings.ui.testutils.SettingsTestUtils.TIMEOUT;
 import android.os.RemoteException;
 import android.platform.test.annotations.Presubmit;
 import android.provider.Settings;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.MediumTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
 import android.system.helpers.SettingsHelper;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.MediumTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.ui.testutils.SettingsTestUtils;
 

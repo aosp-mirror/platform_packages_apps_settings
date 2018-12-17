@@ -18,8 +18,9 @@ package com.android.settings.applications;
 
 import android.app.AppOpsManager;
 import android.provider.Settings;
-import android.support.test.filters.LargeTest;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.test.filters.LargeTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.runner.RunWith;
 
