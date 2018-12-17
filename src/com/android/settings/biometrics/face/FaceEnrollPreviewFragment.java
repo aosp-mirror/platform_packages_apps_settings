@@ -63,7 +63,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
     private CameraCaptureSession mCaptureSession;
     private CaptureRequest mPreviewRequest;
     private Size mPreviewSize;
-    private ParticleCollection.Listener mListener;
+    private FaceFeatureProvider.Listener mListener;
 
     // View used to contain the circular cutout and enrollment animation drawable
     private ImageView mCircleView;
@@ -75,8 +75,8 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
     private FaceSquareTextureView mTextureView;
 
     // Listener sent to the animation drawable
-    private final ParticleCollection.Listener mAnimationListener
-            = new ParticleCollection.Listener() {
+    private final FaceFeatureProvider.Listener mAnimationListener
+            = new FaceFeatureProvider.Listener() {
         @Override
         public void onEnrolled() {
             mListener.onEnrolled();
@@ -234,7 +234,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
         mAnimationDrawable.onEnrollmentProgressChange(steps, remaining);
     }
 
-    public void setListener(ParticleCollection.Listener listener) {
+    public void setListener(FaceFeatureProvider.Listener listener) {
         mListener = listener;
     }
 

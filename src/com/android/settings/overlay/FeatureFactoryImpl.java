@@ -28,6 +28,8 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.biometrics.face.FaceFeatureProvider;
+import com.android.settings.biometrics.face.FaceFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
 import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -78,6 +80,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AccountFeatureProvider mAccountFeatureProvider;
     private PanelFeatureProvider mPanelFeatureProvider;
     private ContextualCardFeatureProvider mContextualCardFeatureProvider;
+    private FaceFeatureProvider mFaceFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -224,10 +227,19 @@ public class FeatureFactoryImpl extends FeatureFactory {
         return mPanelFeatureProvider;
     }
 
+    @Override
     public ContextualCardFeatureProvider getContextualCardFeatureProvider() {
         if (mContextualCardFeatureProvider == null) {
             mContextualCardFeatureProvider = new ContextualCardFeatureProviderImpl();
         }
         return mContextualCardFeatureProvider;
+    }
+
+    @Override
+    public FaceFeatureProvider getFaceFeatureProvider() {
+        if (mFaceFeatureProvider == null) {
+            mFaceFeatureProvider = new FaceFeatureProviderImpl();
+        }
+        return mFaceFeatureProvider;
     }
 }
