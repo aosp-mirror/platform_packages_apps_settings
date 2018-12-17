@@ -34,6 +34,7 @@ import android.net.IConnectivityManager;
 import android.net.NetworkRequest;
 import android.os.IBinder;
 import android.os.UserHandle;
+import android.os.ServiceManager;
 import android.provider.SettingsSlicesContract;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -50,7 +51,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowServiceManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class VpnPreferenceControllerTest {
@@ -78,7 +78,7 @@ public class VpnPreferenceControllerTest {
                 .thenReturn(mConnectivityManager);
         when(mBinder.queryLocalInterface("android.net.IConnectivityManager"))
                 .thenReturn(mConnectivityManagerService);
-        ShadowServiceManager.addService(Context.CONNECTIVITY_SERVICE, mBinder);
+        ServiceManager.addService(Context.CONNECTIVITY_SERVICE, mBinder);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
 
         mController = spy(new VpnPreferenceController(mContext));
