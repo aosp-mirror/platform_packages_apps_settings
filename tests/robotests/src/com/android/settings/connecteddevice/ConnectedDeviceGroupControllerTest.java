@@ -100,7 +100,8 @@ public class ConnectedDeviceGroupControllerTest {
         mConnectedDeviceGroupController.onDeviceAdded(mPreference);
 
         assertThat(mPreferenceGroup.isVisible()).isTrue();
-        assertThat(mPreferenceGroup.findPreference(PREFERENCE_KEY_1)).isEqualTo(mPreference);
+        assertThat((Preference) mPreferenceGroup.findPreference(PREFERENCE_KEY_1))
+                .isEqualTo(mPreference);
     }
 
     @Test

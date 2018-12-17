@@ -218,7 +218,8 @@ public class WorkSoundPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.onResume();
 
-        verify(mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE)).setVisible(false);
+        verify((Preference) mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE))
+                .setVisible(false);
     }
 
     @Test
@@ -242,11 +243,11 @@ public class WorkSoundPreferenceControllerTest {
         verify(mWorkCategory, times(2)).setVisible(true);
 
         // Sound preferences should explain that the profile isn't available yet.
-        verify(mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE))
+        verify((Preference) mWorkCategory.findPreference(KEY_WORK_PHONE_RINGTONE))
                 .setSummary(eq(notAvailable));
-        verify(mWorkCategory.findPreference(KEY_WORK_NOTIFICATION_RINGTONE))
+        verify((Preference) mWorkCategory.findPreference(KEY_WORK_NOTIFICATION_RINGTONE))
                 .setSummary(eq(notAvailable));
-        verify(mWorkCategory.findPreference(KEY_WORK_ALARM_RINGTONE))
+        verify((Preference) mWorkCategory.findPreference(KEY_WORK_ALARM_RINGTONE))
                 .setSummary(eq(notAvailable));
     }
 

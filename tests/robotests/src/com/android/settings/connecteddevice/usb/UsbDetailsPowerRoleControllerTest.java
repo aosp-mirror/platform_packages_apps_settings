@@ -29,6 +29,7 @@ import android.hardware.usb.UsbPort;
 import android.os.Handler;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -122,8 +123,8 @@ public class UsbDetailsPowerRoleControllerTest {
                 UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE);
 
         assertThat(mPreference.isEnabled()).isFalse();
-        assertThat(mScreen.findPreference(mDetailsPowerRoleController.getPreferenceKey()))
-                .isEqualTo(mPreference);
+        assertThat((Preference) mScreen.findPreference(
+                mDetailsPowerRoleController.getPreferenceKey())).isEqualTo(mPreference);
     }
 
     @Test
@@ -134,7 +135,8 @@ public class UsbDetailsPowerRoleControllerTest {
         mDetailsPowerRoleController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
                 UsbPort.DATA_ROLE_DEVICE);
 
-        assertThat(mScreen.findPreference(mDetailsPowerRoleController.getPreferenceKey())).isNull();
+        assertThat((Preference) mScreen.findPreference(
+                mDetailsPowerRoleController.getPreferenceKey())).isNull();
     }
 
     @Test
