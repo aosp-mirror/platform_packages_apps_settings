@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
