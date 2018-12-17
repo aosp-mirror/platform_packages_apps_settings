@@ -20,10 +20,13 @@ import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
+import android.content.Intent;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Map;
@@ -125,7 +128,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSubscriptionPreferences = new ArrayMap<>();
 
         int order = mStartOrder;
-        for (SubscriptionInfo info :  SubscriptionUtil.getAvailableSubscriptions(mManager) ) {
+        for (SubscriptionInfo info :  SubscriptionUtil.getAvailableSubscriptions(mManager)) {
             final int subId = info.getSubscriptionId();
             Preference pref = existingPrefs.remove(subId);
             if (pref == null) {
@@ -139,8 +142,9 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             // TODO(asargent) - set summary here to indicate default for calls/sms and data
 
             pref.setOnPreferenceClickListener(clickedPref -> {
-                // TODO(asargent) - make this start MobileNetworkActivity once we've
-                // added support for it to take a subscription id
+                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                intent.putExtra(Settings.EXTRA_SUB_ID, subId);
+                mContext.startActivity(intent);
                 return true;
             });
 

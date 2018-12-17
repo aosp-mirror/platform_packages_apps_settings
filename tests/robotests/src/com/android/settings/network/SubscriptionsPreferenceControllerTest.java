@@ -16,33 +16,40 @@
 
 package com.android.settings.network;
 
+import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -70,7 +77,7 @@ public class SubscriptionsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(Robolectric.setupActivity(Activity.class));
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
@@ -81,6 +88,11 @@ public class SubscriptionsPreferenceControllerTest {
 
         mController = new SubscriptionsPreferenceController(mContext, mLifecycle, mUpdateListener,
                 KEY, 5);
+    }
+
+    @After
+    public void tearDown() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
     }
 
     @Test
@@ -214,5 +226,58 @@ public class SubscriptionsPreferenceControllerTest {
         assertThat(captor.getValue().getTitle()).isEqualTo("sub2");
         verify(mPreferenceCategory, times(3)).addPreference(captor.capture());
         assertThat(captor.getValue().getTitle()).isEqualTo("sub3");
+    }
+
+
+    /**
+     * Helper to create a specified number of subscriptions, display them, and then click on one and
+     * verify that the intent fires and has the right subscription id extra.
+     *
+     * @param subscriptionCount the number of subscriptions
+     * @param selectedPrefIndex index of the subscription to click on
+     */
+    private void runPreferenceClickTest(int subscriptionCount, int selectedPrefIndex) {
+        final ArrayList<SubscriptionInfo> subscriptions = new ArrayList<>();
+        for (int i = 0; i < subscriptionCount; i++) {
+            final SubscriptionInfo sub = mock(SubscriptionInfo.class);
+            doReturn(i + 1).when(sub).getSubscriptionId();
+            subscriptions.add(sub);
+        }
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(subscriptions);
+        mController.displayPreference(mScreen);
+        final ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
+        verify(mPreferenceCategory, times(subscriptionCount)).addPreference(prefCaptor.capture());
+        final List<Preference> prefs = prefCaptor.getAllValues();
+        final Preference pref = prefs.get(selectedPrefIndex);
+        pref.getOnPreferenceClickListener().onPreferenceClick(pref);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(intentCaptor.capture());
+        final Intent intent = intentCaptor.getValue();
+        assertThat(intent).isNotNull();
+        assertThat(intent.hasExtra(Settings.EXTRA_SUB_ID)).isTrue();
+        final int subIdFromIntent = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                INVALID_SUBSCRIPTION_ID);
+        assertThat(subIdFromIntent).isEqualTo(
+                subscriptions.get(selectedPrefIndex).getSubscriptionId());
+    }
+
+    @Test
+    public void twoPreferences_firstPreferenceClicked_correctIntentFires() {
+        runPreferenceClickTest(2, 0);
+    }
+
+    @Test
+    public void twoPreferences_secondPreferenceClicked_correctIntentFires() {
+        runPreferenceClickTest(2, 1);
+    }
+
+    @Test
+    public void threePreferences_secondPreferenceClicked_correctIntentFires() {
+        runPreferenceClickTest(3, 1);
+    }
+
+    @Test
+    public void threePreferences_thirdPreferenceClicked_correctIntentFires() {
+        runPreferenceClickTest(3, 2);
     }
 }
