@@ -16,11 +16,17 @@
 
 package com.android.settings.password;
 
+import static android.Manifest.permission.GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY;
+import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
+
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +54,7 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
  * Other changes should be done to ChooseLockGeneric class instead and let this class inherit
  * those changes.
  */
+// TODO(b/123225425): Restrict SetupChooseLockGeneric to be accessible by SUW only
 public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
     private static final String KEY_UNLOCK_SET_DO_LATER = "unlock_set_do_later";
@@ -71,6 +78,20 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+
+        if(getIntent().hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)) {
+            IBinder activityToken = getActivityToken();
+            boolean hasPermission = PasswordUtils.isCallingAppPermitted(
+                    this, activityToken, GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
+            if (!hasPermission) {
+                PasswordUtils.crashCallingApplication(activityToken,
+                        "Must have permission " + GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY
+                                + " to use extra " + EXTRA_PASSWORD_COMPLEXITY);
+                finish();
+                return;
+            }
+        }
+
         LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
         layout.setFitsSystemWindows(false);
     }

@@ -16,6 +16,15 @@
 
 package com.android.settings.password;
 
+import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
+import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_HIGH;
+import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
+import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
+import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
+
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.robolectric.RuntimeEnvironment.application;
@@ -27,8 +36,10 @@ import android.content.Intent;
 import android.provider.Settings.Global;
 
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
@@ -36,6 +47,7 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -113,6 +125,70 @@ public class ChooseLockGenericTest {
     }
 
     @Test
+    public void updatePreferencesOrFinish_footerPreferenceAddedHighComplexityText() {
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        Intent intent = new Intent()
+                .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
+                .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);
+        initActivity(intent);
+        CharSequence expectedTitle =
+              mActivity.getString(R.string.unlock_footer_high_complexity_requested, "app name");
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+
+        assertThat(footer.getTitle()).isEqualTo(expectedTitle);
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_footerPreferenceAddedMediumComplexityText() {
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        Intent intent = new Intent()
+                .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
+                .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_MEDIUM);
+        initActivity(intent);
+        CharSequence expectedTitle =
+                mActivity.getString(R.string.unlock_footer_medium_complexity_requested, "app name");
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+
+        assertThat(footer.getTitle()).isEqualTo(expectedTitle);
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_footerPreferenceAddedLowComplexityText() {
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        Intent intent = new Intent()
+                .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
+                .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_LOW);
+        initActivity(intent);
+        CharSequence expectedTitle =
+                mActivity.getString(R.string.unlock_footer_low_complexity_requested, "app name");
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+
+        assertThat(footer.getTitle()).isEqualTo(expectedTitle);
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_footerPreferenceAddedNoneComplexityText() {
+        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        Intent intent = new Intent()
+                .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name")
+                .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
+        initActivity(intent);
+        CharSequence expectedTitle =
+                mActivity.getString(R.string.unlock_footer_none_complexity_requested, "app name");
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+        FooterPreference footer = mFragment.findPreference(FooterPreference.KEY_FOOTER);
+
+        assertThat(footer.getTitle()).isEqualTo(expectedTitle);
+    }
+
+    @Test
     public void onActivityResult_requestcode0_shouldNotFinish() {
         initActivity(null);
 
@@ -163,6 +239,48 @@ public class ChooseLockGenericTest {
                 null /* data */);
 
         assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void onPreferenceTreeClick_fingerprintPassesMinComplexityInfoOntoNextActivity() {
+        Intent intent = new Intent(ACTION_SET_NEW_PASSWORD)
+                .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH)
+                .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name");
+        initActivity(intent);
+
+        Preference fingerprintPref = new Preference(application);
+        fingerprintPref.setKey("unlock_skip_fingerprint");
+        boolean result = mFragment.onPreferenceTreeClick(fingerprintPref);
+
+        assertThat(result).isTrue();
+        Intent actualIntent = shadowOf(mActivity).getNextStartedActivityForResult().intent;
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isTrue();
+        assertThat(actualIntent.getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE))
+                .isEqualTo(PASSWORD_COMPLEXITY_HIGH);
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
+        assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME))
+                .isEqualTo("app name");
+    }
+
+    @Test
+    public void onPreferenceTreeClick_facePassesMinComplexityInfoOntoNextActivity() {
+        Intent intent = new Intent(ACTION_SET_NEW_PASSWORD)
+                .putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH)
+                .putExtra(EXTRA_KEY_CALLER_APP_NAME, "app name");
+        initActivity(intent);
+
+        Preference facePref = new Preference(application);
+        facePref.setKey("unlock_skip_face");
+        boolean result = mFragment.onPreferenceTreeClick(facePref);
+
+        assertThat(result).isTrue();
+        Intent actualIntent = shadowOf(mActivity).getNextStartedActivityForResult().intent;
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isTrue();
+        assertThat(actualIntent.getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE))
+                .isEqualTo(PASSWORD_COMPLEXITY_HIGH);
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
+        assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME))
+                .isEqualTo("app name");
     }
 
     private void initActivity(@Nullable Intent intent) {
