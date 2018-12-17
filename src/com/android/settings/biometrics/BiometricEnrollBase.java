@@ -40,8 +40,10 @@ import com.google.android.setupdesign.GlifLayout;
  */
 public abstract class BiometricEnrollBase extends InstrumentedActivity
         implements View.OnClickListener {
-    public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
 
+    public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
+    public static final String EXTRA_KEY_REQUIRE_VISION = "accessibility_vision";
+    public static final String EXTRA_KEY_REQUIRE_DIVERSITY = "accessibility_diversity";
 
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is
