@@ -24,8 +24,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+
 public class SubscriptionUtil {
+    private static List<SubscriptionInfo> sResultsForTesting;
+
+    @VisibleForTesting
+    static void setAvailableSubscriptionsForTesting(List<SubscriptionInfo> results) {
+        sResultsForTesting = results;
+    }
+
     public static List<SubscriptionInfo> getAvailableSubscriptions(SubscriptionManager manager) {
+        if (sResultsForTesting != null) {
+            return sResultsForTesting;
+        }
         List<SubscriptionInfo> subscriptions = manager.getAvailableSubscriptionInfoList();
         if (subscriptions == null) {
             subscriptions = new ArrayList<>();
