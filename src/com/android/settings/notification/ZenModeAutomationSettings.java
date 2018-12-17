@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -92,6 +93,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         return new ManagedServiceSettings.Config.Builder()
                 .setTag(TAG)
                 .setIntentAction(ConditionProviderService.SERVICE_INTERFACE)
+                .setConfigurationIntentAction(NotificationManager.ACTION_AUTOMATIC_ZEN_RULE)
                 .setPermission(android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE)
                 .setNoun("condition provider")
                 .build();
