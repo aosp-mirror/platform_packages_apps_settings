@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 
 public class TopLevelConnectedDevicesPreferenceController extends BasePreferenceController {
 
@@ -29,7 +30,9 @@ public class TopLevelConnectedDevicesPreferenceController extends BasePreference
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_top_level_connected_devices)
+        ? AVAILABLE_UNSEARCHABLE
+        : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
