@@ -40,6 +40,8 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 import com.google.android.setupdesign.GlifLayout;
 
 import java.util.List;
@@ -86,11 +88,8 @@ public class EncryptionInterstitial extends SettingsActivity {
         layout.setFitsSystemWindows(false);
     }
 
-    public static class EncryptionInterstitialFragment extends InstrumentedFragment
-            implements View.OnClickListener {
+    public static class EncryptionInterstitialFragment extends InstrumentedFragment {
 
-        private View mRequirePasswordToDecrypt;
-        private View mDontRequirePasswordToDecrypt;
         private boolean mPasswordRequired;
         private Intent mUnlockMethodIntent;
         private int mRequestedPasswordQuality;
@@ -110,8 +109,6 @@ public class EncryptionInterstitial extends SettingsActivity {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            mRequirePasswordToDecrypt = view.findViewById(R.id.encrypt_require_password);
-            mDontRequirePasswordToDecrypt = view.findViewById(R.id.encrypt_dont_require_password);
             final boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             final boolean forFace = getActivity().getIntent()
@@ -147,14 +144,30 @@ public class EncryptionInterstitial extends SettingsActivity {
             TextView message = (TextView) getActivity().findViewById(R.id.encryption_message);
             message.setText(msgId);
 
-            mRequirePasswordToDecrypt.setOnClickListener(this);
-            mDontRequirePasswordToDecrypt.setOnClickListener(this);
-
             setRequirePasswordState(getActivity().getIntent().getBooleanExtra(
                     EXTRA_REQUIRE_PASSWORD, true));
 
             GlifLayout layout = (GlifLayout) view;
             layout.setHeaderText(getActivity().getTitle());
+
+            final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
+            buttonFooterMixin.setSecondaryButton(
+                    new FooterButton(
+                            getContext(),
+                            R.string.encryption_interstitial_no,
+                            this::onNoButtonClicked,
+                            FooterButton.ButtonType.SKIP,
+                            R.style.SuwGlifButton_Secondary)
+            );
+
+            buttonFooterMixin.setPrimaryButton(
+                    new FooterButton(
+                            getContext(),
+                            R.string.encryption_interstitial_yes,
+                            this::onYesButtonClicked,
+                            FooterButton.ButtonType.NEXT,
+                            R.style.SuwGlifButton_Primary)
+            );
         }
 
         protected void startLockIntent() {
@@ -176,24 +189,23 @@ public class EncryptionInterstitial extends SettingsActivity {
             }
         }
 
-        @Override
-        public void onClick(View view) {
-            if (view == mRequirePasswordToDecrypt) {
-                final boolean accEn = AccessibilityManager.getInstance(getActivity()).isEnabled();
-                if (accEn && !mPasswordRequired) {
-                    setRequirePasswordState(false); // clear the UI state
-                    AccessibilityWarningDialogFragment.newInstance(mRequestedPasswordQuality)
-                            .show(
-                                    getChildFragmentManager(),
-                                    AccessibilityWarningDialogFragment.TAG);
-                } else {
-                    setRequirePasswordState(true);
-                    startLockIntent();
-                }
+        private void onYesButtonClicked(View view) {
+            final boolean accEn = AccessibilityManager.getInstance(getActivity()).isEnabled();
+            if (accEn && !mPasswordRequired) {
+                setRequirePasswordState(false); // clear the UI state
+                AccessibilityWarningDialogFragment.newInstance(mRequestedPasswordQuality)
+                        .show(
+                                getChildFragmentManager(),
+                                AccessibilityWarningDialogFragment.TAG);
             } else {
-                setRequirePasswordState(false);
+                setRequirePasswordState(true);
                 startLockIntent();
             }
+        }
+
+        private void onNoButtonClicked(View view) {
+            setRequirePasswordState(false);
+            startLockIntent();
         }
 
         private void setRequirePasswordState(boolean required) {
