@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Size;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -87,7 +88,14 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             setDescription(getString(R.string.wifi_dpp_center_qr_code, wifiNetworkConfig.getSsid()));
         } else {
             setTitle(getString(R.string.wifi_dpp_scan_qr_code));
-            setDescription(getString(R.string.wifi_dpp_scan_qr_code_join_network, mSsid));
+
+            String description;
+            if (TextUtils.isEmpty(mSsid)) {
+                description = getString(R.string.wifi_dpp_scan_qr_code_join_unknown_network, mSsid);
+            } else {
+                description = getString(R.string.wifi_dpp_scan_qr_code_join_network, mSsid);
+            }
+            setDescription(description);
         }
 
         ActionBar actionBar = getActivity().getActionBar();

@@ -34,7 +34,7 @@ import com.android.settings.wifi.qrcode.QrDecorateView;
 import com.android.settings.R;
 
 /**
- * TODO: Should refine code to only initiate UI component in each child fragment.
+ * TODO: b/120645817 should refine code to only initiate UI component in each child fragment.
  */
 
 /**
