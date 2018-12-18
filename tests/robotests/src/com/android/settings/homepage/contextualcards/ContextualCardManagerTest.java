@@ -42,13 +42,16 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RunWith(RobolectricTestRunner.class)
 public class ContextualCardManagerTest {
 
     private static final String TEST_SLICE_URI = "context://test/test";
+    private static final String TEST_SLICE_NAME = "test_name";
 
     @Mock
     ContextualCardUpdateListener mListener;
@@ -61,7 +64,8 @@ public class ContextualCardManagerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final ContextualCardsFragment fragment = new ContextualCardsFragment();
-        mManager = new ContextualCardManager(mContext, fragment.getSettingsLifecycle());
+        mManager = new ContextualCardManager(mContext, fragment.getSettingsLifecycle(),
+                null /* bundle */);
     }
 
     @Test
@@ -135,9 +139,74 @@ public class ContextualCardManagerTest {
         verify(manager, never()).onContextualCardUpdated(anyMap());
     }
 
+    @Test
+    public void onFinishCardLoading_newLaunch_twoLoadedCards_shouldShowTwoCards() {
+        mManager.mStartTime = System.currentTimeMillis();
+        mManager.setListener(mListener);
+        final List<ContextualCard> cards = new ArrayList<>();
+        cards.add(buildContextualCard(TEST_SLICE_URI));
+        cards.add(buildContextualCard(TEST_SLICE_URI));
+
+        mManager.onFinishCardLoading(cards);
+
+        assertThat(mManager.mContextualCards).hasSize(2);
+    }
+
+    @Test
+    public void onFinishCardLoading_hasSavedCard_shouldOnlyShowSavedCard() {
+        mManager.setListener(mListener);
+        final List<String> savedCardNames = new ArrayList<>();
+        savedCardNames.add(TEST_SLICE_NAME);
+        mManager.mIsFirstLaunch = false;
+        mManager.mSavedCards = savedCardNames;
+        final ContextualCard newCard =
+                new ContextualCard.Builder()
+                        .setName("test_name2")
+                        .setCardType(ContextualCard.CardType.SLICE)
+                        .setSliceUri(Uri.parse("content://test/test2"))
+                        .build();
+        final List<ContextualCard> loadedCards = new ArrayList<>();
+        loadedCards.add(buildContextualCard(TEST_SLICE_URI));
+        loadedCards.add(newCard);
+
+        mManager.onFinishCardLoading(loadedCards);
+
+        final List<String> actualCards = mManager.mContextualCards.stream()
+                .map(ContextualCard::getName)
+                .collect(Collectors.toList());
+        final List<String> expectedCards = Arrays.asList(TEST_SLICE_NAME);
+        assertThat(actualCards).containsExactlyElementsIn(expectedCards);
+    }
+
+    @Test
+    public void onFinishCardLoading_reloadData_shouldOnlyShowOldCard() {
+        mManager.setListener(mListener);
+        mManager.mIsFirstLaunch = false;
+        //old card
+        mManager.mContextualCards.add(buildContextualCard(TEST_SLICE_URI));
+        final ContextualCard newCard =
+                new ContextualCard.Builder()
+                        .setName("test_name2")
+                        .setCardType(ContextualCard.CardType.SLICE)
+                        .setSliceUri(Uri.parse("content://test/test2"))
+                        .build();
+        final List<ContextualCard> loadedCards = new ArrayList<>();
+        loadedCards.add(buildContextualCard(TEST_SLICE_URI));
+        loadedCards.add(newCard);
+
+        mManager.onFinishCardLoading(loadedCards);
+
+        final List<String> actualCards = mManager.mContextualCards.stream()
+                .map(ContextualCard::getName)
+                .collect(Collectors.toList());
+        final List<String> expectedCards = Arrays.asList(TEST_SLICE_NAME);
+        assertThat(actualCards).containsExactlyElementsIn(expectedCards);
+    }
+
     private ContextualCard buildContextualCard(String sliceUri) {
         return new ContextualCard.Builder()
-                .setName("test_name")
+                .setName(TEST_SLICE_NAME)
+                .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(sliceUri))
                 .build();
     }
