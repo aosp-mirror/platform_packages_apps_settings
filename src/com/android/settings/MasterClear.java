@@ -66,7 +66,9 @@ import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.TemplateLayout;
-import com.google.android.setupdesign.template.ButtonFooterMixin;
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.item.FooterButton.ButtonType;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 
 import java.util.List;
 
@@ -96,7 +98,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
 
     private View mContentView;
     @VisibleForTesting
-    Button mInitiateButton;
+    FooterButton mInitiateButton;
     private View mExternalStorageContainer;
     @VisibleForTesting
     CheckBox mExternalStorage;
@@ -416,12 +418,15 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
 
         final TemplateLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
         final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
-        buttonFooterMixin.removeAllViews();
-        buttonFooterMixin.addSpace();
-        buttonFooterMixin.addSpace();
-        mInitiateButton = buttonFooterMixin.addButton(R.string.master_clear_button_text,
-                R.style.SuwGlifButton_Primary);
-        mInitiateButton.setOnClickListener(mInitiateListener);
+        buttonFooterMixin.setPrimaryButton(
+                new FooterButton(
+                        getActivity(),
+                        R.string.master_clear_button_text,
+                        mInitiateListener,
+                        ButtonType.OTHER,
+                        R.style.SuwGlifButton_Primary)
+        );
+        mInitiateButton = buttonFooterMixin.getPrimaryButton();
     }
 
     private void getContentDescription(View v, StringBuffer description) {
