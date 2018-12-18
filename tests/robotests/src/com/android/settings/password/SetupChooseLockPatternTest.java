@@ -164,23 +164,6 @@ public class SetupChooseLockPatternTest {
         assertThat(findFragment(mActivity).mChosenPattern).isNull();
     }
 
-    @Test
-    public void skipButton_shouldNotBeVisible_duringFingerprintFlow() {
-        final Intent intent =
-                SetupChooseLockPattern.modifyIntentForSetup(
-                        application,
-                        new IntentBuilder(application)
-                                .setUserId(UserHandle.myUserId())
-                                .setForFingerprint(true)
-                                .build());
-
-        mActivity = ActivityController.of(new SetupChooseLockPattern(), intent).setup().get();
-        Button skipButton = mActivity.findViewById(R.id.skip_button);
-
-        assertThat(skipButton).isNotNull();
-        assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
-    }
-
     private ChooseLockPatternFragment findFragment(FragmentActivity activity) {
         return (ChooseLockPatternFragment)
                 activity.getSupportFragmentManager().findFragmentById(R.id.main_content);

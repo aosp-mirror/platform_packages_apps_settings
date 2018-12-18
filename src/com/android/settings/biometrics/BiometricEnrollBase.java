@@ -67,8 +67,11 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity
      */
     public static final int RESULT_TIMEOUT = RESULT_FIRST_USER + 2;
 
-    public static final int CONFIRM_REQUEST = 1;
-    public static final int ENROLLING = 2;
+    public static final int CHOOSE_LOCK_GENERIC_REQUEST = 1;
+    public static final int BIOMETRIC_FIND_SENSOR_REQUEST = 2;
+    public static final int LEARN_MORE_REQUEST = 3;
+    public static final int CONFIRM_REQUEST = 4;
+    public static final int ENROLLING = 5;
 
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
@@ -103,10 +106,6 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         initViews();
-    }
-
-    protected boolean shouldLaunchConfirmLock() {
-        return mToken == null && !mLaunchedConfirmLock;
     }
 
     protected void initViews() {

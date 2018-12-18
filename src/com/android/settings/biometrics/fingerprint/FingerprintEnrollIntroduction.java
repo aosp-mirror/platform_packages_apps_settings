@@ -106,6 +106,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected long getChallenge() {
+        mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
         if (mFingerprintManager == null) {
             return 0;
         }
@@ -120,6 +121,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected Intent getEnrollingIntent() {
         return new Intent(this, FingerprintEnrollFindSensor.class);
+    }
+
+    @Override
+    protected int getConfirmLockTitleResId() {
+        return R.string.security_settings_fingerprint_preference_title;
     }
 
     @Override
