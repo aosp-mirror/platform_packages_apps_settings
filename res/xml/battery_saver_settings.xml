@@ -26,18 +26,6 @@
         android:title="@string/battery_saver_schedule_settings_title"
         settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverSchedulePreferenceController"/>
 
-    <!-- Turn on automatically -->
-    <SwitchPreference
-        android:key="auto_battery_saver"
-        android:title="@string/battery_saver_auto_title"
-        settings:controller="com.android.settings.fuelgauge.batterysaver.AutoBatterySaverPreferenceController" />
-
-    <com.android.settings.widget.SeekBarPreference
-        android:key="battery_saver_seek_bar"
-        android:title="@string/battery_saver_seekbar_title_placeholder"
-        android:max="15"
-        android:min="1" />
-
     <com.android.settings.widget.TwoStateButtonPreference
         android:key="battery_saver"
         android:title="@string/battery_saver"
