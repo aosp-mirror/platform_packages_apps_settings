@@ -22,9 +22,11 @@ import static org.mockito.Mockito.mock;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.graphics.SurfaceTexture;
 import android.util.Size;
-import android.view.SurfaceHolder;
 
 import com.android.settings.R;
 
@@ -48,7 +50,7 @@ import org.robolectric.RuntimeEnvironment;
 public class QrCameraTest {
 
     @Mock
-    private SurfaceHolder mSurfaceHolder;
+    private SurfaceTexture mSurfaceTexture;
 
     private QrCamera mCamera;
     private Context mContext;
@@ -78,6 +80,11 @@ public class QrCameraTest {
             mCameraCallbacked = true;
             mCallbackSignal.countDown();
         }
+
+        @Override
+        public void setTransform(Matrix transform) {
+            // Do nothing
+        }
     }
 
     private ScannerTestCallback mScannerCallback;
@@ -87,7 +94,7 @@ public class QrCameraTest {
         mContext = RuntimeEnvironment.application;
         mScannerCallback = new ScannerTestCallback();
         mCamera = new QrCamera(mContext, mScannerCallback);
-        mSurfaceHolder = mock(SurfaceHolder.class);
+        mSurfaceTexture = mock(SurfaceTexture.class);
         mQrCode = "";
         mCameraCallbacked = false;
         mCallbackSignal = null;
@@ -96,7 +103,7 @@ public class QrCameraTest {
     @Test
     public void testCamera_Init_Callback() throws InterruptedException {
         mCallbackSignal = new CountDownLatch(1);
-        mCamera.start(mSurfaceHolder);
+        mCamera.start(mSurfaceTexture);
         mCallbackSignal.await(5000, TimeUnit.MILLISECONDS);
         assertThat(mCameraCallbacked).isTrue();
     }

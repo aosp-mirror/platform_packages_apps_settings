@@ -18,7 +18,6 @@ package com.android.settings.wifi.dpp;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,7 +29,6 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto;
 
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.wifi.qrcode.QrDecorateView;
 import com.android.settings.R;
 
 /**
@@ -50,14 +48,8 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     private TextView mTitle;
     private TextView mDescription;
 
-    private SurfaceView mPreviewView;       //optional, for WifiDppQrCodeScannerFragment
-    private QrDecorateView mDecorateViiew;  //optional, for WifiDppQrCodeScannerFragment
     private TextView mErrorMessage;         //optional, for WifiDppQrCodeScannerFragment
-
-    private ImageView mBarcodeView;         //optional, for WifiDppQrCodeGeneratorFragment
-
     private ListView mSavedWifiNetworkList; //optional, for WifiDppChooseSavedWifiNetworkFragment
-
     private ProgressBar mProgressBar;       //optional, for WifiDppAddDeviceFragment
     private ImageView mWifiApPictureView;   //optional, for WifiDppAddDeviceFragment
     private TextView mChooseDifferentNetwork;//optional, for WifiDppAddDeviceFragment
@@ -91,12 +83,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     private void initView(View view) {
         mTitle = view.findViewById(R.id.title);
         mDescription = view.findViewById(R.id.description);
-
-        mPreviewView = view.findViewById(R.id.preview_view);
-        mDecorateViiew = view.findViewById(R.id.decorate_view);
         mErrorMessage = view.findViewById(R.id.error_message);
-
-        mBarcodeView = view.findViewById(R.id.barcode_view);
 
         mSavedWifiNetworkList = view.findViewById(R.id.saved_wifi_network_list);
 

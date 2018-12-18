@@ -24,20 +24,19 @@
 
     <include layout="@layout/wifi_dpp_fragment_header"/>
 
-    <FrameLayout
+    <com.android.settings.wifi.qrcode.QrPreviewLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <SurfaceView
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+        <TextureView
             android:id="@+id/preview_view"
-            android:layout_width="426dp"
-            android:layout_height="320dp"
-            android:layout_gravity="center"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
         <com.android.settings.wifi.qrcode.QrDecorateView
             android:id="@+id/decorate_view"
-            android:layout_width="426dp"
-            android:layout_height="320dp"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </com.android.settings.wifi.qrcode.QrPreviewLayout>
 
     <TextView android:id="@+id/error_message"
         android:layout_width="wrap_content"
