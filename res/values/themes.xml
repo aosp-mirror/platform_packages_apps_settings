@@ -32,9 +32,13 @@
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="face_layout_theme">@style/FaceLayoutTheme</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
+
+        <!-- For wifi icon -->
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="wifi_signal_color">?android:attr/colorAccent</item>
         <item name="wifi_friction">@drawable/wifi_friction</item>
+        <item name="frictionIconColor">?android:colorControlNormal</item>
+
         <item name="side_margin">@dimen/settings_side_margin</item>
         <item name="suwListItemIconColor">?android:attr/colorAccent</item>
 
@@ -71,9 +75,6 @@
         <item name="android:actionBarStyle">@style/Widget.ActionBar.SubSettings</item>
 
         <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
-
-        <!-- Friction icon color for wifi preferences -->
-        <item name="frictionIconColor">?android:colorControlNormal</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.SubSettings.Base"/>
