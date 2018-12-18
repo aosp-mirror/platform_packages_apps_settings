@@ -27,7 +27,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.logging.nano.MetricsProto;
-
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.R;
 
@@ -67,8 +66,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
     @Override
     public int getMetricsCategory() {
-        //TODO:Should we use a new metrics category for Wi-Fi DPP?
-        return MetricsProto.MetricsEvent.WIFI_NETWORK_DETAILS;
+        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
     @Override

@@ -26,8 +26,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
-
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 
@@ -60,12 +58,6 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
                                             //              WifiDppAddDeviceFragment
 
     abstract protected int getLayout();
-
-    @Override
-    public int getMetricsCategory() {
-        //TODO:Should we use a new metrics category for Wi-Fi DPP?
-        return MetricsProto.MetricsEvent.WIFI_NETWORK_DETAILS;
-    }
 
     @Override
     public final void onCreate(Bundle savedInstanceState) {
