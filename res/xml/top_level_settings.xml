@@ -93,10 +93,11 @@
     <Preference
         android:key="top_level_location"
         android:title="@string/location_settings_title"
-        android:summary="@string/location_settings_summary"
+        android:summary="@string/location_settings_loading_app_permission_stats"
         android:icon="@drawable/ic_homepage_location"
         android:order="-50"
-        android:fragment="com.android.settings.location.LocationSettings"/>
+        android:fragment="com.android.settings.location.LocationSettings"
+        settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
 
     <Preference
         android:key="top_level_security"
