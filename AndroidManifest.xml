@@ -717,8 +717,7 @@
             android:name="Settings$ZenModeSettingsActivity"
             android:label="@string/zen_mode_settings_title"
             android:icon="@drawable/ic_notifications"
-            android:exported="true"
-            android:parentActivityName="Settings">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -875,8 +874,7 @@
             android:name="Settings$NightDisplaySettingsActivity"
             android:label="@string/night_display_title"
             android:enabled="@*android:bool/config_nightDisplayAvailable"
-            android:icon="@drawable/ic_settings_night_display"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_night_display">
             <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -2821,10 +2819,8 @@
             android:name=".Settings$AppAndNotificationDashboardActivity"
             android:label="@string/app_and_notification_dashboard_title"
             android:icon="@drawable/ic_homepage_apps"
-            android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
+            android:parentActivityName="Settings"
+            android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
         </activity>
