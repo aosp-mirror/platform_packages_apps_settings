@@ -449,12 +449,14 @@ public class BatteryUtils {
         final BatteryStats stats = statsHelper.getStats();
         BatteryInfo batteryInfo;
 
-        final Estimate estimate;
+        Estimate estimate = null;
         // Get enhanced prediction if available
         if (mPowerUsageFeatureProvider != null &&
                 mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
             estimate = mPowerUsageFeatureProvider.getEnhancedBatteryPrediction(mContext);
-        } else {
+        }
+
+        if (estimate == null) {
             estimate = new Estimate(
                     PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
                     false /* isBasedOnUsage */,
