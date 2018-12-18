@@ -19,9 +19,7 @@ package com.android.settings.bluetooth;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.bluetooth.BluetoothDevice;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 
@@ -31,6 +29,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -105,12 +104,10 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         super.onAttach(context);
 
         if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SLICE_INJECTION)) {
-            //TODO(b/120803703): update it to get data from feature provider
-            use(SlicePreferenceController.class).setSliceUri(new Uri.Builder()
-                    .scheme(ContentResolver.SCHEME_CONTENT)
-                    .authority("com.google.android.apps.wearables.maestro.companion")
-                    .appendPath("setting_slice")
-                    .build());
+            final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(context)
+                    .getBluetoothFeatureProvider(context);
+            use(SlicePreferenceController.class).setSliceUri(
+                    featureProvider.getBluetoothDeviceSettingsUri(mDeviceAddress));
         }
     }
 
