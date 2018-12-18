@@ -89,6 +89,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        setHeaderIconImageResource(R.drawable.ic_scan_24dp);
+
         if (mConfiguratorMode) {
             setTitle(getString(R.string.wifi_dpp_add_device_to_network));
 
