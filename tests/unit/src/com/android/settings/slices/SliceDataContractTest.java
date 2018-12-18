@@ -22,11 +22,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.platform.test.annotations.Presubmit;
 import android.provider.SearchIndexableResource;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.filters.MediumTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.MediumTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.overlay.FeatureFactory;

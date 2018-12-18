@@ -73,7 +73,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
                 scannerButton.setOnClickListener((View v) -> {
                     // Launch QR code scanner to join a network.
                     getContext().startActivity(
-                            WifiDppUtils.getConfiguratorQRCodeScannerIntent(/* ssid */ null));
+                            WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
                 });
             }
         }

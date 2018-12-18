@@ -61,21 +61,8 @@ public class BatterySaverSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
-    }
-
-    @Override
     public int getHelpResource() {
         return R.string.help_url_battery_saver_settings;
-    }
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context, Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AutoBatterySaverPreferenceController(context));
-        controllers.add(new AutoBatterySeekBarPreferenceController(context, lifecycle));
-        return controllers;
     }
 
     /**
@@ -89,12 +76,6 @@ public class BatterySaverSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.battery_saver_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null);
                 }
             };
 }

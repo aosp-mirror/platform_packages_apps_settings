@@ -17,12 +17,14 @@
 package com.android.settings.display;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -40,11 +42,13 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.robolectric.annotation.Config;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelDisplayPreferenceControllerTest {
-    @Mock
     private Context mContext;
     @Mock
     private PackageManager mPackageManager;
@@ -54,6 +58,7 @@ public class TopLevelDisplayPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getString(R.string.config_wallpaper_picker_package)).thenReturn("pkg");
         when(mContext.getString(R.string.config_wallpaper_picker_class)).thenReturn("cls");
@@ -62,8 +67,14 @@ public class TopLevelDisplayPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_alwaysAvailable() {
+    public void getAvailibilityStatus_availableByDefault() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getAvailabilityStatus_unsupportedWhenSet() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

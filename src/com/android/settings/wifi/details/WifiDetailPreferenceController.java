@@ -549,11 +549,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Show QR code to share the network represented by this preference.
      */
     public void launchQRCodeGenerator() {
-        final Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
-        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY,
+        Intent intent = WifiDppUtils.getConfiguratorQrCodeGeneratorIntent(mAccessPoint.getSsidStr(),
                 mAccessPoint.getSecurityString(/* concise */ false));
-        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, mAccessPoint.getSsidStr());
         mContext.startActivity(intent);
     }
 

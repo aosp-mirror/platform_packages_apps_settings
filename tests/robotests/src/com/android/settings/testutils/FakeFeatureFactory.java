@@ -23,6 +23,7 @@ import android.content.Context;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
@@ -64,6 +65,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
     public final ContextualCardFeatureProvider mContextualCardFeatureProvider;
+    public final FaceFeatureProvider mFaceFeatureProvider;
 
     public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
@@ -108,6 +110,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAccountFeatureProvider = mock(AccountFeatureProvider.class);
         mContextualCardFeatureProvider = mock(ContextualCardFeatureProvider.class);
         panelFeatureProvider = mock(PanelFeatureProvider.class);
+        mFaceFeatureProvider = mock(FaceFeatureProvider.class);
     }
 
     @Override
@@ -195,7 +198,13 @@ public class FakeFeatureFactory extends FeatureFactory {
         return panelFeatureProvider;
     }
 
+    @Override
     public ContextualCardFeatureProvider getContextualCardFeatureProvider() {
         return mContextualCardFeatureProvider;
+    }
+
+    @Override
+    public FaceFeatureProvider getFaceFeatureProvider() {
+        return mFaceFeatureProvider;
     }
 }

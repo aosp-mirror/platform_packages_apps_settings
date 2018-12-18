@@ -18,24 +18,32 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import androidx.preference.PreferenceScreen;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPreference;
-import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.CandidateInfo;
 import com.google.common.collect.Lists;
 import java.util.List;
 
+/**
+ * Fragment that allows users to customize their automatic battery saver mode settings.
+ *
+ * Location: Settings > Battery > Battery Saver > Set a Schedule
+ * See {@link BatterySaverSchedulePreferenceController} for the controller that manages navigation
+ * to this screen from "Settings > Battery > Battery Saver" and the summary.
+ * See {@link BatterySaverScheduleRadioButtonsController} &
+ * {@link BatterySaverScheduleSeekBarController} for the controller that manages user
+ * interactions in this screen.
+ */
 public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
-    private static final String KEY_NO_SCHEDULE = "key_battery_saver_no_schedule";
-    private static final String KEY_ROUTINE = "key_battery_saver_routine";
-    private static final String KEY_PERCENTAGE = "key_battery_saver_percentage";
-    public static final int MAX_SEEKBAR_VALUE = 15;
-    public static final int MIN_SEEKBAR_VALUE = 1;
-    public static final String KEY_BATTERY_SAVER_SEEK_BAR = "battery_saver_seek_bar";
+    public BatterySaverScheduleRadioButtonsController mRadioButtonController;
+    private BatterySaverScheduleSeekBarController mSeekBarController;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -43,23 +51,44 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mSeekBarController = new BatterySaverScheduleSeekBarController(context);
+        mRadioButtonController = new BatterySaverScheduleRadioButtonsController(
+                context, mSeekBarController);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     protected List<? extends CandidateInfo> getCandidates() {
         Context context = getContext();
         List<CandidateInfo> candidates = Lists.newArrayList();
+        String routineProviderApp = getContext().getResources()
+                .getString(com.android.internal.R.string.config_batterySaverScheduleProvider);
         candidates.add(new BatterySaverScheduleCandidateInfo(
                 context.getText(R.string.battery_saver_auto_no_schedule),
                 /* summary */ null,
-                KEY_NO_SCHEDULE,
+                BatterySaverScheduleRadioButtonsController.KEY_NO_SCHEDULE,
                 /* enabled */ true));
-        candidates.add(new BatterySaverScheduleCandidateInfo(
-                context.getText(R.string.battery_saver_auto_routine),
-                context.getText(R.string.battery_saver_auto_routine_summary),
-                KEY_ROUTINE,
-                /* enabled */ true));
+        // only add routine option if an app has been specified
+        if (!TextUtils.isEmpty(routineProviderApp)) {
+            candidates.add(new BatterySaverScheduleCandidateInfo(
+                    context.getText(R.string.battery_saver_auto_routine),
+                    context.getText(R.string.battery_saver_auto_routine_summary),
+                    BatterySaverScheduleRadioButtonsController.KEY_ROUTINE,
+                    /* enabled */ true));
+        } else {
+            // Make sure routine is not selected if no provider app is configured
+            BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
+        }
         candidates.add(new BatterySaverScheduleCandidateInfo(
                 context.getText(R.string.battery_saver_auto_percentage),
                 /* summary */ null,
-                KEY_PERCENTAGE,
+                BatterySaverScheduleRadioButtonsController.KEY_PERCENTAGE,
                 /* enabled */ true));
 
         return candidates;
@@ -79,22 +108,18 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
     @Override
     protected void addStaticPreferences(PreferenceScreen screen) {
-        SeekBarPreference seekbar = new SeekBarPreference(getContext());
-        seekbar.setMax(MAX_SEEKBAR_VALUE);
-        seekbar.setMin(MIN_SEEKBAR_VALUE);
-        seekbar.setTitle(R.string.battery_saver_seekbar_title_placeholder);
-        seekbar.setKey(KEY_BATTERY_SAVER_SEEK_BAR);
-        screen.addPreference(seekbar);
+        mSeekBarController.updateSeekBar();
+        mSeekBarController.addToScreen(screen);
     }
 
     @Override
     protected String getDefaultKey() {
-        return null;
+        return mRadioButtonController.getDefaultKey();
     }
 
     @Override
     protected boolean setDefaultKey(String key) {
-        return false;
+        return mRadioButtonController.setDefaultKey(key);
     }
 
     @Override

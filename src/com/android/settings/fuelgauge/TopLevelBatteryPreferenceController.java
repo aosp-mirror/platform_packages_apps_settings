@@ -48,7 +48,9 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_top_level_battery)
+        ? AVAILABLE_UNSEARCHABLE
+        : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

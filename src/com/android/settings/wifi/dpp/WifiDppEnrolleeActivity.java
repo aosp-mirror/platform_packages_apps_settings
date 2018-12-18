@@ -35,7 +35,7 @@ import com.android.settings.R;
  * To provision "this" device with specified Wi-Fi network.
  *
  * To use intent action {@code ACTION_ENROLLEE_QR_CODE_SCANNER}, specify the SSID string of the
- * Wi-Fi network to be provisioned in {@code WifiDppUtils.EXTRA_QR_CODE}.
+ * Wi-Fi network to be provisioned in {@code WifiDppUtils.EXTRA_WIFI_SSID}.
  */
 public class WifiDppEnrolleeActivity extends InstrumentedActivity {
     private static final String TAG = "WifiDppEnrolleeActivity";

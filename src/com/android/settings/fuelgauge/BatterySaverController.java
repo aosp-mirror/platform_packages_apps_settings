@@ -15,6 +15,7 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
 
+import android.provider.Settings.Global;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -31,6 +33,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 public class BatterySaverController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
@@ -45,6 +48,7 @@ public class BatterySaverController extends BasePreferenceController
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mBatteryStateChangeReceiver = new BatterySaverReceiver(context);
         mBatteryStateChangeReceiver.setBatterySaverListener(this);
+        BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
     }
 
     @Override
@@ -81,16 +85,23 @@ public class BatterySaverController extends BasePreferenceController
 
     @Override
     public CharSequence getSummary() {
+        final ContentResolver resolver = mContext.getContentResolver();
         final boolean isPowerSaveOn = mPowerManager.isPowerSaveMode();
-        final int percent = Settings.Global.getInt(mContext.getContentResolver(),
+        final int percent = Settings.Global.getInt(resolver,
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+        final int mode = Settings.Global.getInt(resolver,
+                Global.AUTOMATIC_POWER_SAVER_MODE, PowerManager.POWER_SAVER_MODE_PERCENTAGE);
         if (isPowerSaveOn) {
             return mContext.getString(R.string.battery_saver_on_summary);
-        } else if (percent != 0) {
-            return mContext.getString(R.string.battery_saver_off_scheduled_summary,
-                    Utils.formatPercentage(percent));
+        } else if (mode == PowerManager.POWER_SAVER_MODE_PERCENTAGE) {
+            if (percent != 0) {
+                return mContext.getString(R.string.battery_saver_off_scheduled_summary,
+                        Utils.formatPercentage(percent));
+            } else {
+                return mContext.getString(R.string.battery_saver_off_summary);
+            }
         } else {
-            return mContext.getString(R.string.battery_saver_off_summary);
+            return mContext.getString(R.string.battery_saver_auto_routine);
         }
     }
 

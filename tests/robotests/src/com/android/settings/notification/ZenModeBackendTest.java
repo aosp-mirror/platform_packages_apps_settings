@@ -69,13 +69,14 @@ public class ZenModeBackendTest {
 
         for (int i = 0; i < numRules; i++) {
             ruleMap.put(GENERIC_RULE_NAME + i, new AutomaticZenRule(GENERIC_RULE_NAME + i, null,
-                    null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, i * 2));
+                    null, null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true,
+                    i * 2));
         }
 
         if (addDefaultRules) {
-            ruleMap.put(DEFAULT_ID_1, new AutomaticZenRule("DEFAULT_1_NAME", null,
+            ruleMap.put(DEFAULT_ID_1, new AutomaticZenRule("DEFAULT_1_NAME", null, null, null,
                     null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20));
-            ruleMap.put(DEFAULT_ID_2, new AutomaticZenRule("DEFAULT_2_NAME", null,
+            ruleMap.put(DEFAULT_ID_2, new AutomaticZenRule("DEFAULT_2_NAME", null, null, null,
                     null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10));
         }
 
@@ -90,13 +91,14 @@ public class ZenModeBackendTest {
 
         for (int i = 0; i < numRules; i++) {
             ruleMap.put(GENERIC_RULE_NAME + i, new AutomaticZenRule(GENERIC_RULE_NAME + i, null,
-                    null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, numRules - i));
+                    null, null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true,
+                    numRules - i));
         }
 
         if (addDefaultRules) {
-            ruleMap.put(DEFAULT_ID_1, new AutomaticZenRule("DEFAULT_1_NAME", null,
+            ruleMap.put(DEFAULT_ID_1, new AutomaticZenRule("DEFAULT_1_NAME", null, null, null,
                     null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10));
-            ruleMap.put(DEFAULT_ID_2, new AutomaticZenRule("DEFAULT_2_NAME", null,
+            ruleMap.put(DEFAULT_ID_2, new AutomaticZenRule("DEFAULT_2_NAME", null, null, null,
                     null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20));
         }
 

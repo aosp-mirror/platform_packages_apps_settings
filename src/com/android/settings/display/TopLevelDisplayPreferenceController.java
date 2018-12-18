@@ -29,7 +29,9 @@ public class TopLevelDisplayPreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_top_level_display)
+        ? AVAILABLE
+        : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

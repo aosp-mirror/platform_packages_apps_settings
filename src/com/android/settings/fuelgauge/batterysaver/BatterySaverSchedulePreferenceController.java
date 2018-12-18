@@ -26,7 +26,13 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
+/**
+ * Simple controller to navigate users to the scheduling page from
+ * "Settings > Battery > Battery Saver". Also updates the summary for preference based on
+ * the currently selected settings.
+ */
 public class BatterySaverSchedulePreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
@@ -36,6 +42,7 @@ public class BatterySaverSchedulePreferenceController extends BasePreferenceCont
 
     public BatterySaverSchedulePreferenceController(Context context) {
         super(context, KEY_BATTERY_SAVER_SCHEDULE);
+        BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
     }
 
     @Override

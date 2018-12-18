@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.service.notification.ZenModeConfig;
@@ -45,7 +46,6 @@ public class ZenRulePreference extends TwoTargetPreference {
     private static final ManagedServiceSettings.Config CONFIG =
             ZenModeAutomationSettings.getConditionProviderConfig();
     final String mId;
-    boolean appExists;
     final Fragment mParent;
     final Preference mPref;
     final Context mContext;
@@ -56,7 +56,6 @@ public class ZenRulePreference extends TwoTargetPreference {
     final AutomaticZenRule mRule;
     CharSequence mName;
 
-    private boolean mIsSystemRule;
     private Intent mIntent;
     private boolean mChecked;
     private CheckBox mCheckBox;
@@ -163,25 +162,17 @@ public class ZenRulePreference extends TwoTargetPreference {
         final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
                 rule.getConditionId(), true);
         final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.getConditionId());
-        mIsSystemRule = isSchedule || isEvent;
 
-        try {
-            ApplicationInfo info = mPm.getApplicationInfo(rule.getOwner().getPackageName(), 0);
-            setSummary(computeRuleSummary(rule));
-        } catch (PackageManager.NameNotFoundException e) {
-            appExists = false;
-            return;
-        }
+        setSummary(computeRuleSummary(rule));
 
-        appExists = true;
         setTitle(mName);
         setPersistent(false);
 
         final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
                 : isEvent ? ZenModeEventRuleSettings.ACTION : "";
-        ServiceInfo si = mServiceListing.findService(rule.getOwner());
+        ComponentInfo si = mServiceListing.findService(rule.getOwner());
         ComponentName settingsActivity = AbstractZenModeAutomaticRulePreferenceController.
-                getSettingsActivity(si);
+                getSettingsActivity(rule, si);
         mIntent = AbstractZenModeAutomaticRulePreferenceController.getRuleIntent(action,
                 settingsActivity, mId);
         setKey(mId);

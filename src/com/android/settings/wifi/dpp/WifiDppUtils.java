@@ -88,14 +88,14 @@ public class WifiDppUtils {
     }
 
     /**
-     * Returns an intent to launch QR code scanner.
+     * Returns an intent to launch QR code scanner for Wi-Fi DPP enrollee.
      *
      * @param ssid The data corresponding to {@code WifiConfiguration} SSID
      * @return Intent for launching QR code scanner
      */
-    public static Intent getConfiguratorQRCodeScannerIntent(String ssid) {
+    public static Intent getEnrolleeQrCodeScannerIntent(String ssid) {
         final Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+                WifiDppEnrolleeActivity.ACTION_ENROLLEE_QR_CODE_SCANNER);
         if (!TextUtils.isEmpty(ssid)) {
             intent.putExtra(EXTRA_WIFI_SSID, ssid);
         }
@@ -109,7 +109,8 @@ public class WifiDppUtils {
      * @param Security The data is from {@code AccessPoint.securityToString}
      * @return Intent for launching QR code generator
      */
-    public static Intent getConfiguratorQRCodeGeneratorIntent(String ssid, String Security) {
+    public static Intent getConfiguratorQrCodeGeneratorIntent(String ssid, String Security) {
+        //TODO: b/118794858#comment6 should put password & hideSsid in intent extra
         final Intent intent = new Intent(
                 WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
         if (!TextUtils.isEmpty(ssid)) {

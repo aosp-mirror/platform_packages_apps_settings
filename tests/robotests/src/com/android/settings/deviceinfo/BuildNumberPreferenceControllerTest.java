@@ -105,7 +105,7 @@ public class BuildNumberPreferenceControllerTest {
     public void displayPref_shouldAlwaysDisplay() {
         mController.displayPreference(mScreen);
 
-        verify(mScreen.findPreference(mController.getPreferenceKey()))
+        verify((Preference) mScreen.findPreference(mController.getPreferenceKey()))
                 .setSummary(BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
         verify(mScreen, never()).removePreference(any(Preference.class));
     }

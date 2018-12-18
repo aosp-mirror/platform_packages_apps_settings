@@ -28,7 +28,7 @@ import android.test.suitebuilder.annotation.SmallTest;
  *
  * To run the test, use command:
  * adb shell am instrument -e class com.android.settings.UserCredentialsTest
- * -w com.android.settings.tests.unit/android.support.test.runner.AndroidJUnitRunner
+ * -w com.android.settings.tests.unit/androidx.test.runner.AndroidJUnitRunner
  *
  */
 public class UserCredentialsTest extends InstrumentationTestCase {

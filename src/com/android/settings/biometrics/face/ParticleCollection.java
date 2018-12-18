@@ -35,7 +35,7 @@ import java.util.List;
  * are updated/drawn in a special order so that the overlap is correct during the final completion
  * effect.
  */
-public class ParticleCollection implements BiometricEnrollSidecar.Listener {
+public class ParticleCollection implements FaceFeatureProviderImpl.EnrollingAnimation {
 
     private static final String TAG = "AnimationController";
 
@@ -49,11 +49,7 @@ public class ParticleCollection implements BiometricEnrollSidecar.Listener {
     private final List<AnimationParticle> mParticleList;
     private final List<Integer> mPrimariesInProgress; // primary particles not done animating yet
     private int mState;
-    private Listener mListener;
-
-    public interface Listener {
-        void onEnrolled();
-    }
+    private FaceFeatureProvider.Listener mListener;
 
     private final AnimationParticle.Listener mParticleListener = new AnimationParticle.Listener() {
         @Override
@@ -72,7 +68,8 @@ public class ParticleCollection implements BiometricEnrollSidecar.Listener {
         }
     };
 
-    public ParticleCollection(Context context, Listener listener, Rect bounds, int borderWidth) {
+    public ParticleCollection(Context context, FaceFeatureProvider.Listener listener, Rect bounds,
+            int borderWidth) {
         mParticleList = new ArrayList<>();
         mListener = listener;
 
@@ -103,12 +100,14 @@ public class ParticleCollection implements BiometricEnrollSidecar.Listener {
         updateState(STATE_STARTED);
     }
 
+    @Override
     public void update(long t, long dt) {
         for (int i = 0; i < mParticleList.size(); i++) {
             mParticleList.get(i).update(t, dt);
         }
     }
 
+    @Override
     public void draw(Canvas canvas) {
         for (int i = 0; i < mParticleList.size(); i++) {
             mParticleList.get(i).draw(canvas);

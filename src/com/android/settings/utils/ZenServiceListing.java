@@ -20,6 +20,8 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -34,7 +36,7 @@ public class ZenServiceListing {
 
     private final Context mContext;
     private final ManagedServiceSettings.Config mConfig;
-    private final Set<ServiceInfo> mApprovedServices = new ArraySet<ServiceInfo>();
+    private final Set<ComponentInfo> mApprovedComponents = new ArraySet<>();
     private final List<Callback> mZenCallbacks = new ArrayList<>();
     private final NotificationManager mNm;
 
@@ -44,11 +46,14 @@ public class ZenServiceListing {
         mNm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
-    public ServiceInfo findService(final ComponentName cn) {
-        for (ServiceInfo service : mApprovedServices) {
-            final ComponentName serviceCN = new ComponentName(service.packageName, service.name);
-            if (serviceCN.equals(cn)) {
-                return service;
+    public ComponentInfo findService(final ComponentName cn) {
+        if (cn == null) {
+            return null;
+        }
+        for (ComponentInfo component : mApprovedComponents) {
+            final ComponentName ci = new ComponentName(component.packageName, component.name);
+            if (ci.equals(cn)) {
+                return component;
             }
         }
         return null;
@@ -63,32 +68,29 @@ public class ZenServiceListing {
     }
 
     public void reloadApprovedServices() {
-        mApprovedServices.clear();
+        mApprovedComponents.clear();
 
         List<String> enabledNotificationListenerPkgs = mNm.getEnabledNotificationListenerPackages();
-        List<ServiceInfo> services = new ArrayList<>();
-        getServices(mConfig, services, mContext.getPackageManager());
-        for (ServiceInfo service : services) {
-            final String servicePackage = service.getComponentName().getPackageName();
-            if (mNm.isNotificationPolicyAccessGrantedForPackage(servicePackage)
-                || enabledNotificationListenerPkgs.contains(servicePackage)) {
-                mApprovedServices.add(service);
+        List<ComponentInfo> components = new ArrayList<>();
+        getServices(mConfig, components, mContext.getPackageManager());
+        getActivities(mConfig, components, mContext.getPackageManager());
+        for (ComponentInfo componentInfo : components) {
+            final String pkg = componentInfo.getComponentName().getPackageName();
+            if (mNm.isNotificationPolicyAccessGrantedForPackage(pkg)
+                || enabledNotificationListenerPkgs.contains(pkg)) {
+                mApprovedComponents.add(componentInfo);
             }
         }
 
-        if (!mApprovedServices.isEmpty()) {
+        if (!mApprovedComponents.isEmpty()) {
             for (Callback callback : mZenCallbacks) {
-                callback.onServicesReloaded(mApprovedServices);
+                callback.onComponentsReloaded(mApprovedComponents);
             }
         }
     }
 
-    private static int getServices(ManagedServiceSettings.Config c, List<ServiceInfo> list,
+    private static void getServices(ManagedServiceSettings.Config c, List<ComponentInfo> list,
             PackageManager pm) {
-        int services = 0;
-        if (list != null) {
-            list.clear();
-        }
         final int user = ActivityManager.getCurrentUser();
 
         List<ResolveInfo> installedServices = pm.queryIntentServicesAsUser(
@@ -110,12 +112,28 @@ public class ZenServiceListing {
             if (list != null) {
                 list.add(info);
             }
-            services++;
         }
-        return services;
+    }
+
+    private static void getActivities(ManagedServiceSettings.Config c, List<ComponentInfo> list,
+            PackageManager pm) {
+        final int user = ActivityManager.getCurrentUser();
+
+        List<ResolveInfo> resolveInfos = pm.queryIntentActivitiesAsUser(
+                new Intent(c.configIntentAction),
+                PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA,
+                user);
+
+        for (int i = 0, count = resolveInfos.size(); i < count; i++) {
+            ResolveInfo resolveInfo = resolveInfos.get(i);
+            ActivityInfo info = resolveInfo.activityInfo;
+            if (list != null) {
+                list.add(info);
+            }
+        }
     }
 
     public interface Callback {
-        void onServicesReloaded(Set<ServiceInfo> services);
+        void onComponentsReloaded(Set<ComponentInfo> components);
     }
 }

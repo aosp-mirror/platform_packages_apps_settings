@@ -23,6 +23,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
@@ -192,16 +193,17 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
     private final ZenServiceListing.Callback mServiceListingCallback = new
             ZenServiceListing.Callback() {
         @Override
-        public void onServicesReloaded(Set<ServiceInfo> services) {
-            if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
+        public void onComponentsReloaded(Set<ComponentInfo> componentInfos) {
+            if (DEBUG) Log.d(TAG, "Reloaded: count=" + componentInfos.size());
+
             Set<ZenRuleInfo> externalRuleTypes = new TreeSet<>(RULE_TYPE_COMPARATOR);
-            for (ServiceInfo serviceInfo : services) {
+            for (ComponentInfo ci : componentInfos) {
                 final ZenRuleInfo ri = AbstractZenModeAutomaticRulePreferenceController.
-                        getRuleInfo(mPm, serviceInfo);
+                        getRuleInfo(mPm, ci);
                 if (ri != null && ri.configurationActivity != null
                         && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)
                         && (ri.ruleInstanceLimit <= 0 || ri.ruleInstanceLimit
-                        >= (mNm.getRuleInstanceCount(serviceInfo.getComponentName()) + 1))) {
+                        >= (mNm.getRuleInstanceCount(ci.getComponentName()) + 1))) {
                     externalRuleTypes.add(ri);
                 }
             }

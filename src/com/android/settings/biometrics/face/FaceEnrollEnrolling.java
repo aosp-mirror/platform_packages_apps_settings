@@ -47,7 +47,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mShouldFinishOnStop = true;
     private FaceEnrollPreviewFragment mPreviewFragment;
 
-    private ParticleCollection.Listener mListener = new ParticleCollection.Listener() {
+    private FaceFeatureProvider.Listener mListener = new FaceFeatureProvider.Listener() {
         @Override
         public void onEnrolled() {
             FaceEnrollEnrolling.this.launchFinish(mToken);

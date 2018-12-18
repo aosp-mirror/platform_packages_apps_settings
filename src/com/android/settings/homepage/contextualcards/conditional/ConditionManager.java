@@ -154,7 +154,6 @@ public class ConditionManager {
         mCardControllers.add(new AirplaneModeConditionController(mAppContext, this /* manager */));
         mCardControllers.add(
                 new BackgroundDataConditionController(mAppContext, this /* manager */));
-        mCardControllers.add(new BatterySaverConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new CellularDataConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new DndConditionCardController(mAppContext, this /* manager */));
         mCardControllers.add(new HotspotConditionController(mAppContext, this /* manager */));
