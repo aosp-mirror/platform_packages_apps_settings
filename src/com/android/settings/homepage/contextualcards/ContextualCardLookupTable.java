@@ -84,7 +84,11 @@ public class ContextualCardLookupTable {
                         LegacySuggestionContextualCardController.class,
                         LegacySuggestionContextualCardRenderer.class));
                 add(new ControllerRendererMapping(CardType.SLICE,
-                        SliceContextualCardRenderer.VIEW_TYPE,
+                        SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH,
+                        SliceContextualCardController.class,
+                        SliceContextualCardRenderer.class));
+                add(new ControllerRendererMapping(CardType.SLICE,
+                        SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH,
                         SliceContextualCardController.class,
                         SliceContextualCardRenderer.class));
                 add(new ControllerRendererMapping(CardType.CONDITIONAL_FOOTER,
