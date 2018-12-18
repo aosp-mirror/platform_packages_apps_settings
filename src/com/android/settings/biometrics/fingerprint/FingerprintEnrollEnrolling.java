@@ -35,7 +35,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -47,6 +46,9 @@ import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -135,8 +137,15 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
         mVibrator = getSystemService(Vibrator.class);
 
-        Button skipButton = findViewById(R.id.skip_button);
-        skipButton.setOnClickListener(this);
+        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
+        mButtonFooterMixin.setSecondaryButton(
+                new FooterButton(
+                        this,
+                        R.string.security_settings_fingerprint_enroll_enrolling_skip,
+                        this::onSkipButtonClick,
+                        FooterButton.ButtonType.SKIP,
+                        R.style.SuwGlifButton_Secondary)
+        );
 
         final LayerDrawable fingerprintDrawable = (LayerDrawable) mProgressBar.getBackground();
         mIconAnimationDrawable = (AnimatedVectorDrawable)

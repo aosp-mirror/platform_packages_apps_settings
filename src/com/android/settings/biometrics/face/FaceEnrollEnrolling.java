@@ -24,7 +24,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -36,6 +35,8 @@ import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 
 import java.util.ArrayList;
 
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 
 public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
@@ -91,8 +92,15 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
         mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.linear_out_slow_in);
 
-        Button skipButton = findViewById(R.id.skip_button);
-        skipButton.setOnClickListener(this);
+        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
+        mButtonFooterMixin.setSecondaryButton(
+                new FooterButton(
+                        this,
+                        R.string.security_settings_face_enroll_enrolling_skip,
+                        this::onSkipButtonClick,
+                        FooterButton.ButtonType.SKIP,
+                        R.style.SuwGlifButton_Secondary)
+        );
 
         if (!getIntent().getBooleanExtra(BiometricEnrollBase.EXTRA_KEY_REQUIRE_DIVERSITY, true)) {
             mDisabledFeatures.add(FaceManager.FEATURE_REQUIRE_REQUIRE_DIVERSITY);

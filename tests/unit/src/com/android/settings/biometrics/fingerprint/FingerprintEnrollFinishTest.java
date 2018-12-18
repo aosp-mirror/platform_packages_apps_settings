@@ -36,6 +36,9 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.R;
 
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,7 +60,9 @@ public class FingerprintEnrollFinishTest {
         intending(hasComponent(enrollingComponent))
                 .respondWith(new ActivityResult(Activity.RESULT_CANCELED, null));
 
-        onView(withId(R.id.add_another_button)).perform(click());
+        PartnerCustomizationLayout layout =
+                mActivityRule.getActivity().findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
 
         intended(hasComponent(enrollingComponent));
         assertFalse(mActivityRule.getActivity().isFinishing());
@@ -72,7 +77,9 @@ public class FingerprintEnrollFinishTest {
         intending(hasComponent(enrollingComponent))
                 .respondWith(new ActivityResult(Activity.RESULT_OK, null));
 
-        onView(withId(R.id.add_another_button)).perform(click());
+        PartnerCustomizationLayout layout =
+                mActivityRule.getActivity().findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
 
         intended(hasComponent(enrollingComponent));
         assertTrue(mActivityRule.getActivity().isFinishing());

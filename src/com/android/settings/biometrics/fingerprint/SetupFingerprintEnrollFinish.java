@@ -25,6 +25,8 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.google.android.setupcompat.item.FooterButton;
+
 public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish {
 
     @Override
@@ -41,8 +43,8 @@ public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish {
     @Override
     protected void initViews() {
         super.initViews();
-        Button nextButton = findViewById(R.id.next_button);
-        nextButton.setText(R.string.next_label);
+        FooterButton nextButton = getNextButton();
+        nextButton.setText(this, R.string.next_label);
     }
 
     @Override
