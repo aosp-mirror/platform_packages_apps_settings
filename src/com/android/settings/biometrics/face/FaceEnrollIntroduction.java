@@ -102,6 +102,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected long getChallenge() {
+        mFaceManager = Utils.getFaceManagerOrNull(this);
         if (mFaceManager == null) {
             return 0;
         }
@@ -116,6 +117,11 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected Intent getEnrollingIntent() {
         return new Intent(this, FaceEnrollEnrolling.class);
+    }
+
+    @Override
+    protected int getConfirmLockTitleResId() {
+        return R.string.security_settings_face_preference_title;
     }
 
     @Override

@@ -51,12 +51,9 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
         setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
 
-        if (shouldLaunchConfirmLock()) {
-            launchConfirmLock(R.string.security_settings_fingerprint_preference_title,
-                    Utils.getFingerprintManagerOrNull(this).preEnroll());
-        } else if (mToken != null) {
-            startLookingForFingerprint(); // already confirmed, so start looking for fingerprint
-        }
+
+        startLookingForFingerprint(); // already confirmed, so start looking for fingerprint
+
         View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
         if (animationView instanceof FingerprintFindSensorAnimation) {
             mAnimation = (FingerprintFindSensorAnimation) animationView;

@@ -44,7 +44,6 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private TextView mErrorText;
     private Interpolator mLinearOutSlowInInterpolator;
-    private boolean mShouldFinishOnStop = true;
     private FaceEnrollPreviewFragment mPreviewFragment;
 
     private FaceFeatureProvider.Listener mListener = new FaceFeatureProvider.Listener() {
@@ -92,13 +91,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
         Button skipButton = findViewById(R.id.skip_button);
         skipButton.setOnClickListener(this);
 
-        if (shouldLaunchConfirmLock()) {
-            launchConfirmLock(R.string.security_settings_face_preference_title,
-                    Utils.getFaceManagerOrNull(this).generateChallenge());
-            mShouldFinishOnStop = false;
-        } else {
-            startEnrollment();
-        }
+        startEnrollment();
     }
 
     @Override
@@ -127,11 +120,6 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     protected boolean shouldStartAutomatically() {
         return false;
-    }
-
-    @Override
-    protected boolean shouldFinishOnStop() {
-        return mShouldFinishOnStop;
     }
 
     @Override
@@ -175,23 +163,6 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
         // TODO: Have this match any animations that UX comes up with
         if (remaining == 0) {
             launchFinish(mToken);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CONFIRM_REQUEST) {
-            if (resultCode == RESULT_OK && data != null) {
-                mShouldFinishOnStop = true;
-                mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-                overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
-                getIntent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-                startEnrollment();
-            } else {
-                finish();
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

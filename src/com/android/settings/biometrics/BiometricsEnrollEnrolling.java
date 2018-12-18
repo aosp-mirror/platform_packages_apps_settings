@@ -48,13 +48,6 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
      */
     protected abstract boolean shouldStartAutomatically();
 
-    /**
-     * @return true if enrollment should finish when onStop is called.
-     */
-    protected boolean shouldFinishOnStop() {
-        return true;
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -70,7 +63,7 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
             mSidecar.setListener(null);
         }
 
-        if (shouldFinishOnStop() && !isChangingConfigurations()) {
+        if (!isChangingConfigurations()) {
             if (mSidecar != null) {
                 mSidecar.cancelEnrollment();
                 getSupportFragmentManager()
