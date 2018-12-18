@@ -51,6 +51,10 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
+
 import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
@@ -58,16 +62,21 @@ import org.robolectric.shadows.ShadowLooper;
 public class NetworkRequestDialogFragmentTest {
 
     private static final String KEY_SSID = "key_ssid";
+    private static final String KEY_SECURITY = "key_security";
 
     private FragmentActivity mActivity;
     private NetworkRequestDialogFragment networkRequestDialogFragment;
     private Context mContext;
+    private WifiTracker mWifiTracker;
 
     @Before
     public void setUp() {
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
         networkRequestDialogFragment = spy(NetworkRequestDialogFragment.newInstance());
         mContext = spy(RuntimeEnvironment.application);
+
+        mWifiTracker = mock(WifiTracker.class);
+        WifiTrackerFactory.setTestingWifiTracker(mWifiTracker);
     }
 
     @Test
@@ -140,71 +149,47 @@ public class NetworkRequestDialogFragmentTest {
     }
 
     @Test
-    public void updateAccessPointList_onUserSelectionConnectSuccess_updateCorrectly() {
-        List<AccessPoint> accessPointList = spy(new ArrayList<>());
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_SSID, "Test AP 1");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-        bundle.putString(KEY_SSID, "Test AP 2");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-        bundle.putString(KEY_SSID, "Test AP 3");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-        bundle.putString(KEY_SSID, "Test AP 4");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-
+    public void updateAccessPointList_onUserSelectionConnectSuccess_shouldCloseTheDialog() {
+        List<AccessPoint> accessPointList = createAccessPointList();
         when(networkRequestDialogFragment.getAccessPointList()).thenReturn(accessPointList);
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), null);
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(alertDialog.isShowing()).isTrue();
 
         // Test if config would update list.
         WifiConfiguration config = new WifiConfiguration();
         config.SSID = "Test AP 3";
         networkRequestDialogFragment.onUserSelectionConnectSuccess(config);
 
-        AccessPoint verifyAccessPoint = new AccessPoint(mContext, config);
-        verify(accessPointList, times(1)).set(2, verifyAccessPoint);
+        assertThat(alertDialog.isShowing()).isFalse();
     }
 
     @Test
-    public void updateAccessPointList_onUserSelectionConnectFailure_updateCorrectly() {
-        List<AccessPoint> accessPointList = spy(new ArrayList<>());
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_SSID, "Test AP 1");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-        bundle.putString(KEY_SSID, "Test AP 2");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-        bundle.putString(KEY_SSID, "Test AP 3");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-        bundle.putString(KEY_SSID, "Test AP 4");
-        accessPointList.add(new AccessPoint(mContext, bundle));
+    public void updateAccessPointList_onUserSelectionConnectFailure_shouldCallTimeoutDialog() {
+        FakeNetworkRequestDialogFragment fakeFragment = new FakeNetworkRequestDialogFragment();
+        FakeNetworkRequestDialogFragment spyFakeFragment = spy(fakeFragment);
+        List<AccessPoint> accessPointList = createAccessPointList();
+        when(spyFakeFragment.getAccessPointList()).thenReturn(accessPointList);
+        spyFakeFragment.show(mActivity.getSupportFragmentManager(), null);
 
-        when(networkRequestDialogFragment.getAccessPointList()).thenReturn(accessPointList);
-        networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), null);
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(alertDialog.isShowing()).isTrue();
 
         // Test if config would update list.
         WifiConfiguration config = new WifiConfiguration();
         config.SSID = "Test AP 3";
-        networkRequestDialogFragment.onUserSelectionConnectFailure(config);
+        fakeFragment.onUserSelectionConnectFailure(config);
 
-        AccessPoint verifyAccessPoint = new AccessPoint(mContext, config);
-        verify(accessPointList, times(1)).set(2, verifyAccessPoint);
+        assertThat(fakeFragment.bCalledStopAndPop).isTrue();
     }
 
     @Test
-    public void onUserSelectionCallbackRegistration_shouldCallSelect() {
-        List<AccessPoint> accessPointList = spy(new ArrayList<>());
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_SSID, "Test AP 1");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-        bundle.putString(KEY_SSID, "Test AP 2");
-        accessPointList.add(new AccessPoint(mContext, bundle));
-
-        bundle.putString(KEY_SSID, "Test AP 3");
-        AccessPoint clickedAccessPoint = new AccessPoint(mContext, bundle);
+    public void onUserSelectionCallbackRegistration_onClick_shouldCallSelect() {
+        // Assert.
+        final int indexClickItem = 3;
+        List<AccessPoint> accessPointList = createAccessPointList();
+        AccessPoint clickedAccessPoint = accessPointList.get(indexClickItem);
         clickedAccessPoint.generateOpenNetworkConfig();
-        accessPointList.add(clickedAccessPoint);
-
-        bundle.putString(KEY_SSID, "Test AP 4");
-        accessPointList.add(new AccessPoint(mContext, bundle));
         when(networkRequestDialogFragment.getAccessPointList()).thenReturn(accessPointList);
 
         NetworkRequestUserSelectionCallback selectionCallback = mock(
@@ -212,40 +197,66 @@ public class NetworkRequestDialogFragmentTest {
         AlertDialog dialog = mock(AlertDialog.class);
         networkRequestDialogFragment.onUserSelectionCallbackRegistration(selectionCallback);
 
-        networkRequestDialogFragment.onClick(dialog, 2);
+        // Act.
+        networkRequestDialogFragment.onClick(dialog, indexClickItem);
 
+        // Check.
         verify(selectionCallback, times(1)).select(clickedAccessPoint.getConfig());
     }
 
     @Test
     public void onMatch_shouldUpdatedList() {
-        // Prepares WifiManager.
+        // Assert.
         when(networkRequestDialogFragment.getContext()).thenReturn(mContext);
         Context applicationContext = spy(RuntimeEnvironment.application.getApplicationContext());
         when(mContext.getApplicationContext()).thenReturn(applicationContext);
         WifiManager wifiManager = mock(WifiManager.class);
         when(applicationContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
+        networkRequestDialogFragment.onResume();
 
-        List<WifiConfiguration> wifiConfigurationList = new ArrayList<>();
-        WifiConfiguration config = new WifiConfiguration();
+        List<AccessPoint> accessPointList = createAccessPointList();
+        when(mWifiTracker.getAccessPoints()).thenReturn(accessPointList);
+
         final String SSID_AP1 = "Test AP 1";
-        config.SSID = SSID_AP1;
-        wifiConfigurationList.add(config);
-        config = new WifiConfiguration();
         final String SSID_AP2 = "Test AP 2";
-        config.SSID = SSID_AP2;
-        wifiConfigurationList.add(config);
-
-        // Prepares callback converted data.
         List<ScanResult> scanResults = new ArrayList<>();
-        when(wifiManager.getAllMatchingWifiConfigs(scanResults)).thenReturn(wifiConfigurationList);
+        ScanResult scanResult = new ScanResult();
+        scanResult.SSID = SSID_AP1;
+        scanResult.capabilities = "WEP";
+        scanResults.add(scanResult);
+        scanResult = new ScanResult();
+        scanResult.SSID = SSID_AP2;
+        scanResult.capabilities = "WEP";
+        scanResults.add(scanResult);
 
+        // Act.
         networkRequestDialogFragment.onMatch(scanResults);
 
-        List<AccessPoint> accessPointList = networkRequestDialogFragment.getAccessPointList();
-        assertThat(accessPointList).isNotEmpty();
-        assertThat(accessPointList.size()).isEqualTo(2);
-        assertThat(accessPointList.get(0).getSsid()).isEqualTo(SSID_AP1);
-        assertThat(accessPointList.get(1).getSsid()).isEqualTo(SSID_AP2);
+        // Check.
+        List<AccessPoint> returnList = networkRequestDialogFragment.getAccessPointList();
+        assertThat(returnList).isNotEmpty();
+        assertThat(returnList.size()).isEqualTo(2);
+        assertThat(returnList.get(0).getSsid()).isEqualTo(SSID_AP1);
+        assertThat(returnList.get(1).getSsid()).isEqualTo(SSID_AP2);
+    }
+
+    private List<AccessPoint> createAccessPointList() {
+        List<AccessPoint> accessPointList = spy(new ArrayList<>());
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_SSID, "Test AP 1");
+        bundle.putInt(KEY_SECURITY, 1);
+        accessPointList.add(new AccessPoint(mContext, bundle));
+        bundle.putString(KEY_SSID, "Test AP 2");
+        bundle.putInt(KEY_SECURITY, 1);
+        accessPointList.add(new AccessPoint(mContext, bundle));
+        bundle.putString(KEY_SSID, "Test AP 3");
+        bundle.putInt(KEY_SECURITY, 2);
+        AccessPoint clickedAccessPoint = new AccessPoint(mContext, bundle);
+        accessPointList.add(clickedAccessPoint);
+        bundle.putString(KEY_SSID, "Test AP 4");
+        bundle.putInt(KEY_SECURITY, 0);
+        accessPointList.add(new AccessPoint(mContext, bundle));
+
+        return accessPointList;
     }
 }
