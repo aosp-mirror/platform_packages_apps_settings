@@ -25,7 +25,6 @@ import static org.mockito.Mockito.spy;
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.SystemProperties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,8 +65,6 @@ public class SettingsLicenseActivityTest {
 
     @Test
     public void testOnCreateWithValidHtmlFile() {
-        SystemProperties.set("ro.config.license_path", "/system/etc/NOTICE.html.gz");
-
         doReturn(true).when(mActivity).isFileValid(any());
         mActivity.onCreate(null);
 
