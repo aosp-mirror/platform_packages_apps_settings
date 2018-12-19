@@ -21,7 +21,7 @@ import android.content.Context;
 public interface PanelFeatureProvider {
 
     /**
-     * Returns {@link PanelContent} as specified by the {@param panelType}.
+     * Returns {@link PanelContent} as specified by the {@code panelType} and {@code packageName}.
      */
-    PanelContent getPanel(Context context, String panelType);
+    PanelContent getPanel(Context context, String panelType, String packageName);
 }

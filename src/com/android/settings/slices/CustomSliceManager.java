@@ -18,6 +18,7 @@ package com.android.settings.slices;
 
 import android.content.Context;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
@@ -33,6 +34,7 @@ import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlic
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
 import com.android.settings.location.LocationSlice;
+import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 import com.android.settings.wifi.slice.WifiSlice;
 
@@ -65,18 +67,23 @@ public class CustomSliceManager {
      * the only thing that should be needed to create the object.
      */
     public CustomSliceable getSliceableFromUri(Uri uri) {
-        if (mSliceableCache.containsKey(uri)) {
-            return mSliceableCache.get(uri);
+        final Uri newUri = removeParameterFromUri(uri);
+        if (mSliceableCache.containsKey(newUri)) {
+            return mSliceableCache.get(newUri);
         }
 
-        final Class clazz = mUriMap.get(uri);
+        final Class clazz = mUriMap.get(newUri);
         if (clazz == null) {
             throw new IllegalArgumentException("No Slice found for uri: " + uri);
         }
 
         final CustomSliceable sliceable = CustomSliceable.createInstance(mContext, clazz);
-        mSliceableCache.put(uri, sliceable);
+        mSliceableCache.put(newUri, sliceable);
         return sliceable;
+    }
+
+    private Uri removeParameterFromUri(Uri uri) {
+        return uri != null ? uri.buildUpon().clearQuery().build() : null;
     }
 
     /**
@@ -94,7 +101,7 @@ public class CustomSliceManager {
      * {@link CustomSliceManager}.
      */
     public boolean isValidUri(Uri uri) {
-        return mUriMap.containsKey(uri);
+        return mUriMap.containsKey(removeParameterFromUri(uri));
     }
 
     /**
@@ -120,5 +127,6 @@ public class CustomSliceManager {
                 NotificationChannelSlice.class);
         mUriMap.put(CustomSliceRegistry.STORAGE_SLICE_URI, StorageSlice.class);
         mUriMap.put(CustomSliceRegistry.WIFI_SLICE_URI, WifiSlice.class);
+        mUriMap.put(CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
     }
 }
