@@ -23,5 +23,4 @@ import android.content.Intent;
 public interface AccountFeatureProvider {
     String getAccountType();
     Account[] getAccounts(Context context);
-    Intent getAccountSettingsDeeplinkIntent();
 }
