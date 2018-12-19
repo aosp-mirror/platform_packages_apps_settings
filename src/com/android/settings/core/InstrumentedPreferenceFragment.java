@@ -22,7 +22,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.XmlRes;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.overlay.FeatureFactory;
@@ -77,14 +76,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     public void addPreferencesFromResource(@XmlRes int preferencesResId) {
         super.addPreferencesFromResource(preferencesResId);
         updateActivityTitleWithScreenTitle(getPreferenceScreen());
-    }
-
-    @Override
-    public <T extends Preference> T findPreference(CharSequence key) {
-        if (key == null) {
-            return null;
-        }
-        return super.findPreference(key);
     }
 
     protected final Context getPrefContext() {
