@@ -32,7 +32,7 @@
         android:fontFamily="@*android:string/config_headlineFontFamily"
         android:singleLine="true"
         android:textAlignment="center"
-        android:textAppearance="@android:style/TextAppearance.Material.Display1"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Display1"
         android:textSize="36sp" />
 
     <TextView
@@ -43,7 +43,7 @@
         android:layout_marginEnd="4dp"
         android:maxLines="10"
         android:textAlignment="center"
-        android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1" />
 
     <com.android.settings.widget.DonutView
         android:id="@+id/donut"
