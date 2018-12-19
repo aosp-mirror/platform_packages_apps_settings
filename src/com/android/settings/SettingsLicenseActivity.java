@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.FileProvider;
 import android.text.TextUtils;
@@ -43,8 +42,7 @@ public class SettingsLicenseActivity extends Activity implements
             LoaderManager.LoaderCallbacks<File> {
     private static final String TAG = "SettingsLicenseActivity";
 
-    private static final String DEFAULT_LICENSE_PATH = "/system/etc/NOTICE.html.gz";
-    private static final String PROPERTY_LICENSE_PATH = "ro.config.license_path";
+    private static final String LICENSE_PATH = "/system/etc/NOTICE.html.gz";
 
     private static final int LOADER_ID_LICENSE_HTML_LOADER = 0;
 
@@ -52,10 +50,9 @@ public class SettingsLicenseActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final String licenseHtmlPath =
-                SystemProperties.get(PROPERTY_LICENSE_PATH, DEFAULT_LICENSE_PATH);
-        if (isFilePathValid(licenseHtmlPath)) {
-            showSelectedFile(licenseHtmlPath);
+        File file = new File(LICENSE_PATH);
+        if (isFileValid(file)) {
+            showHtmlFromUri(Uri.fromFile(file));
         } else {
             showHtmlFromDefaultXmlFiles();
         }
@@ -94,22 +91,6 @@ public class SettingsLicenseActivity extends Activity implements
         }
     }
 
-    private void showSelectedFile(final String path) {
-        if (TextUtils.isEmpty(path)) {
-            Log.e(TAG, "The system property for the license file is empty");
-            showErrorAndFinish();
-            return;
-        }
-
-        final File file = new File(path);
-        if (!isFileValid(file)) {
-            Log.e(TAG, "License file " + path + " does not exist");
-            showErrorAndFinish();
-            return;
-        }
-        showHtmlFromUri(Uri.fromFile(file));
-    }
-
     private void showHtmlFromUri(Uri uri) {
         // Kick off external viewer due to WebView security restrictions; we
         // carefully point it at HTMLViewer, since it offers to decompress
@@ -136,10 +117,6 @@ public class SettingsLicenseActivity extends Activity implements
         Toast.makeText(this, R.string.settings_license_activity_unavailable, Toast.LENGTH_LONG)
                 .show();
         finish();
-    }
-
-    private boolean isFilePathValid(final String path) {
-        return !TextUtils.isEmpty(path) && isFileValid(new File(path));
     }
 
     @VisibleForTesting
