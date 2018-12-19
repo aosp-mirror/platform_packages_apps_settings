@@ -69,7 +69,7 @@ public class PanelFragment extends Fragment {
         mPanelSlices = view.findViewById(R.id.panel_parent_layout);
         mSeeMoreButton = view.findViewById(R.id.see_more);
         mDoneButton = view.findViewById(R.id.done);
-        mTitleView = view.findViewById(R.id.title);
+        mTitleView = view.findViewById(R.id.panel_title);
 
         final Bundle arguments = getArguments();
         final String panelType = arguments.getString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT);

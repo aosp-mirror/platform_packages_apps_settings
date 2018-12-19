@@ -2973,11 +2973,16 @@
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.BottomDialog"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:exported="true">
                  <intent-filter>
-                     <action android:name="android.settings.SETTINGSPANEL" />
+                     <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />
                      <category android:name="android.intent.category.DEFAULT" />
                  </intent-filter>
+                <intent-filter>
+                    <action android:name="android.settings.panel.action.VOLUME" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
         </activity>
 
         <provider android:name=".slices.SettingsSliceProvider"
