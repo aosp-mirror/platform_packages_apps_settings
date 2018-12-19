@@ -16,6 +16,9 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
+
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -101,8 +104,8 @@ public class UsbDetailsHeaderControllerTest {
     @Test
     public void displayRefresh_charging_shouldSetHeader() {
         mDetailsHeaderController.displayPreference(mScreen);
-        mDetailsHeaderController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsHeaderController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         verify(mHeaderController).setLabel(mContext.getString(R.string.usb_pref));
         verify(mHeaderController).setIcon(argThat((ArgumentMatcher<Drawable>) t -> {
             DrawableTestHelper.assertDrawableResId(t, R.drawable.ic_usb);

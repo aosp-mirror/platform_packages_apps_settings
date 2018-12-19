@@ -15,6 +15,11 @@
  */
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_NONE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -22,7 +27,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 
 import org.junit.Before;
@@ -63,7 +67,7 @@ public class UsbConnectionBroadcastReceiverTest {
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(true /* connected */, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_NONE, UsbPort.DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE);
     }
 
     @Test
@@ -75,7 +79,7 @@ public class UsbConnectionBroadcastReceiverTest {
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(false /* connected */, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_NONE, UsbPort.DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE);
     }
 
     @Test
@@ -89,21 +93,21 @@ public class UsbConnectionBroadcastReceiverTest {
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(true /* connected */, UsbManager.FUNCTION_MTP,
-                UsbPort.POWER_ROLE_NONE, UsbPort.DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE);
     }
 
     @Test
     public void onReceive_usbPortStatus_invokeCallback() {
         final Intent intent = new Intent();
         intent.setAction(UsbManager.ACTION_USB_PORT_CHANGED);
-        final UsbPortStatus status = new UsbPortStatus(0, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE, 0);
+        final UsbPortStatus status = new UsbPortStatus(0, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE, 0);
         intent.putExtra(UsbManager.EXTRA_PORT_STATUS, status);
 
         mReceiver.onReceive(mContext, intent);
 
         verify(mListener).onUsbConnectionChanged(false /* connected */, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE);
+                POWER_ROLE_SINK, DATA_ROLE_DEVICE);
     }
 
     @Test

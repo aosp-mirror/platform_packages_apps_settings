@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
 import static android.net.ConnectivityManager.TETHERING_USB;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -105,8 +107,8 @@ public class UsbDetailsFunctionsControllerTest {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
         mDetailsFunctionsController.displayPreference(mScreen);
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         List<RadioButtonPreference> prefs = getRadioPreferences();
         Iterator<Long> iter = UsbDetailsFunctionsController.FUNCTIONS_MAP.keySet().iterator();
 
@@ -120,7 +122,7 @@ public class UsbDetailsFunctionsControllerTest {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
         mDetailsFunctionsController.refresh(false, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE);
+                POWER_ROLE_SINK, DATA_ROLE_DEVICE);
         assertThat(mPreferenceCategory.isEnabled()).isFalse();
     }
 
@@ -131,8 +133,8 @@ public class UsbDetailsFunctionsControllerTest {
         when(mUsbBackend.areFunctionsSupported(UsbManager.FUNCTION_PTP)).thenReturn(false);
         when(mUsbBackend.areFunctionsSupported(UsbManager.FUNCTION_RNDIS)).thenReturn(false);
 
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         List<RadioButtonPreference> prefs = getRadioPreferences();
         assertThat(prefs.size()).isEqualTo(1);
         assertThat(prefs.get(0).getKey())
@@ -143,8 +145,8 @@ public class UsbDetailsFunctionsControllerTest {
     public void displayRefresh_mtpEnabled_shouldCheckSwitches() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         List<RadioButtonPreference> prefs = getRadioPreferences();
 
         assertThat(prefs.get(0).getKey())
@@ -156,8 +158,8 @@ public class UsbDetailsFunctionsControllerTest {
     public void onClickMtp_noneEnabled_shouldEnableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NONE);
         List<RadioButtonPreference> prefs = getRadioPreferences();
         prefs.get(0).performClick();
@@ -165,8 +167,8 @@ public class UsbDetailsFunctionsControllerTest {
         assertThat(prefs.get(0).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
         verify(mUsbBackend).setCurrentFunctions(UsbManager.FUNCTION_MTP);
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         assertThat(prefs.get(0).isChecked()).isTrue();
     }
 
@@ -174,8 +176,8 @@ public class UsbDetailsFunctionsControllerTest {
     public void onClickMtp_ptpEnabled_shouldEnableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_PTP, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_PTP, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_PTP);
         List<RadioButtonPreference> prefs = getRadioPreferences();
         prefs.get(0).performClick();
@@ -183,8 +185,8 @@ public class UsbDetailsFunctionsControllerTest {
         assertThat(prefs.get(0).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
         verify(mUsbBackend).setCurrentFunctions(UsbManager.FUNCTION_MTP);
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         assertThat(prefs.get(0).isChecked()).isTrue();
         assertThat(prefs.get(3).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_PTP));
@@ -195,8 +197,8 @@ public class UsbDetailsFunctionsControllerTest {
     public void onClickNone_mtpEnabled_shouldDisableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MTP);
         List<RadioButtonPreference> prefs = getRadioPreferences();
         prefs.get(4).performClick();
@@ -204,8 +206,8 @@ public class UsbDetailsFunctionsControllerTest {
         assertThat(prefs.get(4).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_NONE));
         verify(mUsbBackend).setCurrentFunctions(UsbManager.FUNCTION_NONE);
-        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
         assertThat(prefs.get(0).isChecked()).isFalse();
     }
 

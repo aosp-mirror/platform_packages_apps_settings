@@ -16,6 +16,13 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_HOST;
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_NONE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -25,7 +32,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbPort;
 import android.os.Handler;
 
 import androidx.fragment.app.FragmentActivity;
@@ -95,8 +101,8 @@ public class UsbDetailsPowerRoleControllerTest {
         mDetailsPowerRoleController.displayPreference(mScreen);
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
-        mDetailsPowerRoleController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsPowerRoleController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
 
         SwitchPreference pref = getPreference();
         assertThat(pref.isChecked()).isFalse();
@@ -108,7 +114,7 @@ public class UsbDetailsPowerRoleControllerTest {
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
         mDetailsPowerRoleController.refresh(true, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST);
+                POWER_ROLE_SOURCE, DATA_ROLE_HOST);
 
         SwitchPreference pref = getPreference();
         assertThat(pref.isChecked()).isTrue();
@@ -120,7 +126,7 @@ public class UsbDetailsPowerRoleControllerTest {
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
         mDetailsPowerRoleController.refresh(false, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE);
+                POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         assertThat(mPreference.isEnabled()).isFalse();
         assertThat((Preference) mScreen.findPreference(
@@ -132,8 +138,8 @@ public class UsbDetailsPowerRoleControllerTest {
         mDetailsPowerRoleController.displayPreference(mScreen);
         when(mUsbBackend.areAllRolesSupported()).thenReturn(false);
 
-        mDetailsPowerRoleController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
-                UsbPort.DATA_ROLE_DEVICE);
+        mDetailsPowerRoleController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
 
         assertThat((Preference) mScreen.findPreference(
                 mDetailsPowerRoleController.getPreferenceKey())).isNull();
@@ -142,12 +148,12 @@ public class UsbDetailsPowerRoleControllerTest {
     @Test
     public void onClick_sink_shouldSetSource() {
         mDetailsPowerRoleController.displayPreference(mScreen);
-        when(mUsbBackend.getPowerRole()).thenReturn(UsbPort.POWER_ROLE_SINK);
+        when(mUsbBackend.getPowerRole()).thenReturn(POWER_ROLE_SINK);
 
         SwitchPreference pref = getPreference();
         pref.performClick();
 
-        verify(mUsbBackend).setPowerRole(UsbPort.POWER_ROLE_SOURCE);
+        verify(mUsbBackend).setPowerRole(POWER_ROLE_SOURCE);
         assertThat(pref.getSummary())
                 .isEqualTo(mContext.getString(R.string.usb_switching));
     }
@@ -155,7 +161,7 @@ public class UsbDetailsPowerRoleControllerTest {
     @Test
     public void onClickTwice_sink_shouldSetSourceOnce() {
         mDetailsPowerRoleController.displayPreference(mScreen);
-        when(mUsbBackend.getPowerRole()).thenReturn(UsbPort.POWER_ROLE_SINK);
+        when(mUsbBackend.getPowerRole()).thenReturn(POWER_ROLE_SINK);
 
         SwitchPreference pref = getPreference();
         pref.performClick();
@@ -163,42 +169,42 @@ public class UsbDetailsPowerRoleControllerTest {
         assertThat(pref.getSummary())
                 .isEqualTo(mContext.getString(R.string.usb_switching));
         pref.performClick();
-        verify(mUsbBackend, times(1)).setPowerRole(UsbPort.POWER_ROLE_SOURCE);
+        verify(mUsbBackend, times(1)).setPowerRole(POWER_ROLE_SOURCE);
     }
 
     @Test
     public void onClickDeviceAndRefresh_success_shouldClearSubtext() {
         mDetailsPowerRoleController.displayPreference(mScreen);
-        when(mUsbBackend.getPowerRole()).thenReturn(UsbPort.POWER_ROLE_SINK);
+        when(mUsbBackend.getPowerRole()).thenReturn(POWER_ROLE_SINK);
 
         SwitchPreference pref = getPreference();
         pref.performClick();
 
-        verify(mUsbBackend).setPowerRole(UsbPort.POWER_ROLE_SOURCE);
+        verify(mUsbBackend).setPowerRole(POWER_ROLE_SOURCE);
         assertThat(pref.getSummary())
                 .isEqualTo(mContext.getString(R.string.usb_switching));
         mDetailsPowerRoleController.refresh(false /* connected */, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_NONE, UsbPort.DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE);
         mDetailsPowerRoleController.refresh(true /* connected */, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_DEVICE);
+                POWER_ROLE_SOURCE, DATA_ROLE_DEVICE);
         assertThat(pref.getSummary()).isEqualTo("");
     }
 
     @Test
     public void onClickDeviceAndRefresh_failed_shouldShowFailureText() {
         mDetailsPowerRoleController.displayPreference(mScreen);
-        when(mUsbBackend.getPowerRole()).thenReturn(UsbPort.POWER_ROLE_SINK);
+        when(mUsbBackend.getPowerRole()).thenReturn(POWER_ROLE_SINK);
 
         SwitchPreference pref = getPreference();
         pref.performClick();
 
-        verify(mUsbBackend).setPowerRole(UsbPort.POWER_ROLE_SOURCE);
+        verify(mUsbBackend).setPowerRole(POWER_ROLE_SOURCE);
         assertThat(pref.getSummary())
                 .isEqualTo(mContext.getString(R.string.usb_switching));
         mDetailsPowerRoleController.refresh(false /* connected */, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_NONE, UsbPort.DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE);
         mDetailsPowerRoleController.refresh(true /* connected */, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE);
+                POWER_ROLE_SINK, DATA_ROLE_DEVICE);
         assertThat(pref.getSummary())
                 .isEqualTo(mContext.getString(R.string.usb_switching_failed));
     }
@@ -206,18 +212,18 @@ public class UsbDetailsPowerRoleControllerTest {
     @Test
     public void onClickDevice_timedOut_shouldShowFailureText() {
         mDetailsPowerRoleController.displayPreference(mScreen);
-        when(mUsbBackend.getPowerRole()).thenReturn(UsbPort.POWER_ROLE_SINK);
+        when(mUsbBackend.getPowerRole()).thenReturn(POWER_ROLE_SINK);
 
         SwitchPreference pref = getPreference();
         pref.performClick();
 
-        verify(mUsbBackend).setPowerRole(UsbPort.POWER_ROLE_SOURCE);
+        verify(mUsbBackend).setPowerRole(POWER_ROLE_SOURCE);
         ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
         verify(mHandler).postDelayed(captor.capture(), anyLong());
         assertThat(pref.getSummary())
                 .isEqualTo(mContext.getString(R.string.usb_switching));
         mDetailsPowerRoleController.refresh(false /* connected */, UsbManager.FUNCTION_NONE,
-                UsbPort.POWER_ROLE_NONE, UsbPort.DATA_ROLE_NONE);
+                POWER_ROLE_NONE, DATA_ROLE_NONE);
         captor.getValue().run();
         assertThat(pref.getSummary())
                 .isEqualTo(mContext.getString(R.string.usb_switching_failed));

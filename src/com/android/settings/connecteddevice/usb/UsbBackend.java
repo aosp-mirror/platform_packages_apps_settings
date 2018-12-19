@@ -15,6 +15,13 @@
  */
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE;
+import static android.service.usb.UsbPortStatusProto.DATA_ROLE_HOST;
+import static android.service.usb.UsbPortStatusProto.DATA_ROLE_NONE;
+import static android.service.usb.UsbPortStatusProto.POWER_ROLE_SINK;
+
 import android.annotation.Nullable;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -26,6 +33,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import androidx.annotation.VisibleForTesting;
+
+import java.util.List;
 
 /**
  * Provides access to underlying system USB functionality.
@@ -96,30 +105,30 @@ public class UsbBackend {
 
     public int getPowerRole() {
         updatePorts();
-        return mPortStatus == null ? UsbPort.POWER_ROLE_NONE : mPortStatus.getCurrentPowerRole();
+        return mPortStatus == null ? POWER_ROLE_NONE : mPortStatus.getCurrentPowerRole();
     }
 
     public int getDataRole() {
         updatePorts();
-        return mPortStatus == null ? UsbPort.DATA_ROLE_NONE : mPortStatus.getCurrentDataRole();
+        return mPortStatus == null ? DATA_ROLE_NONE : mPortStatus.getCurrentDataRole();
     }
 
     public void setPowerRole(int role) {
         int newDataRole = getDataRole();
         if (!areAllRolesSupported()) {
             switch (role) {
-                case UsbPort.POWER_ROLE_SINK:
-                    newDataRole = UsbPort.DATA_ROLE_DEVICE;
+                case POWER_ROLE_SINK:
+                    newDataRole = DATA_ROLE_DEVICE;
                     break;
-                case UsbPort.POWER_ROLE_SOURCE:
-                    newDataRole = UsbPort.DATA_ROLE_HOST;
+                case POWER_ROLE_SOURCE:
+                    newDataRole = DATA_ROLE_HOST;
                     break;
                 default:
-                    newDataRole = UsbPort.DATA_ROLE_NONE;
+                    newDataRole = DATA_ROLE_NONE;
             }
         }
         if (mPort != null) {
-            mUsbManager.setPortRoles(mPort, role, newDataRole);
+            mPort.setRoles(role, newDataRole);
         }
     }
 
@@ -127,31 +136,27 @@ public class UsbBackend {
         int newPowerRole = getPowerRole();
         if (!areAllRolesSupported()) {
             switch (role) {
-                case UsbPort.DATA_ROLE_DEVICE:
-                    newPowerRole = UsbPort.POWER_ROLE_SINK;
+                case DATA_ROLE_DEVICE:
+                    newPowerRole = POWER_ROLE_SINK;
                     break;
-                case UsbPort.DATA_ROLE_HOST:
-                    newPowerRole = UsbPort.POWER_ROLE_SOURCE;
+                case DATA_ROLE_HOST:
+                    newPowerRole = POWER_ROLE_SOURCE;
                     break;
                 default:
-                    newPowerRole = UsbPort.POWER_ROLE_NONE;
+                    newPowerRole = POWER_ROLE_NONE;
             }
         }
         if (mPort != null) {
-            mUsbManager.setPortRoles(mPort, newPowerRole, role);
+            mPort.setRoles(newPowerRole, role);
         }
     }
 
     public boolean areAllRolesSupported() {
         return mPort != null && mPortStatus != null
-                && mPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE)
-                && mPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_HOST)
-                && mPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_DEVICE)
-                && mPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST);
+                && mPortStatus.isRoleCombinationSupported(POWER_ROLE_SINK, DATA_ROLE_DEVICE)
+                && mPortStatus.isRoleCombinationSupported(POWER_ROLE_SINK, DATA_ROLE_HOST)
+                && mPortStatus.isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_DEVICE)
+                && mPortStatus.isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
 
     public static String usbFunctionsToString(long functions) {
@@ -205,17 +210,14 @@ public class UsbBackend {
     private void updatePorts() {
         mPort = null;
         mPortStatus = null;
-        UsbPort[] ports = mUsbManager.getPorts();
-        if (ports == null) {
-            return;
-        }
+        List<UsbPort> ports = mUsbManager.getPorts();
         // For now look for a connected port, in the future we should identify port in the
         // notification and pick based on that.
-        final int N = ports.length;
+        final int N = ports.size();
         for (int i = 0; i < N; i++) {
-            UsbPortStatus status = mUsbManager.getPortStatus(ports[i]);
+            UsbPortStatus status = ports.get(i).getStatus();
             if (status.isConnected()) {
-                mPort = ports[i];
+                mPort = ports.get(i);
                 mPortStatus = status;
                 break;
             }
