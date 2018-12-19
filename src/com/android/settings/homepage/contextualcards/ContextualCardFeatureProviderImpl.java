@@ -51,6 +51,9 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
     // contextual card name
     private static final String EXTRA_CONTEXTUALCARD_NAME = "name";
 
+    // contextual card uri
+    private static final String EXTRA_CONTEXTUALCARD_URI = "uri";
+
     // contextual card score
     private static final String EXTRA_CONTEXTUALCARD_SCORE = "score";
 
@@ -84,51 +87,59 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
     // Click slider
     private static final int TARGET_SLIDER = 3;
 
+    private final Context mContext;
+
+    public ContextualCardFeatureProviderImpl(Context context) {
+        mContext = context;
+    }
+
     @Override
-    public void logHomepageDisplay(Context context, long latency) {
-        sendBroadcast(context, new Intent()
+    public void logHomepageDisplay(long latency) {
+        sendBroadcast(new Intent()
                 .putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_HOME_SHOW)
                 .putExtra(EXTRA_LATENCY, latency));
     }
 
     @Override
-    public void logContextualCardDismiss(Context context, ContextualCard card) {
+    public void logContextualCardDismiss(ContextualCard card) {
         final Intent intent = new Intent();
         intent.putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_CARD_DISMISS);
         intent.putExtra(EXTRA_CONTEXTUALCARD_NAME, card.getName());
+        intent.putExtra(EXTRA_CONTEXTUALCARD_URI, card.getSliceUri().toString());
         intent.putExtra(EXTRA_CONTEXTUALCARD_SCORE, card.getRankingScore());
-        sendBroadcast(context, intent);
+        sendBroadcast(intent);
     }
 
     @Override
-    public void logContextualCardDisplay(Context context, List<ContextualCard> visibleCards,
+    public void logContextualCardDisplay(List<ContextualCard> visibleCards,
             List<ContextualCard> hiddenCards) {
         final Intent intent = new Intent();
         intent.putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_CARD_SHOW);
         intent.putExtra(EXTRA_CONTEXTUALCARD_VISIBLE, serialize(visibleCards));
         intent.putExtra(EXTRA_CONTEXTUALCARD_HIDDEN, serialize(hiddenCards));
-        sendBroadcast(context, intent);
+        sendBroadcast(intent);
     }
 
     @Override
-    public void logContextualCardClick(Context context, ContextualCard card, int row,
+    public void logContextualCardClick(ContextualCard card, int row,
             int actionType) {
         final Intent intent = new Intent();
         intent.putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_CARD_CLICK);
         intent.putExtra(EXTRA_CONTEXTUALCARD_NAME, card.getName());
+        intent.putExtra(EXTRA_CONTEXTUALCARD_URI, card.getSliceUri().toString());
         intent.putExtra(EXTRA_CONTEXTUALCARD_SCORE, card.getRankingScore());
         intent.putExtra(EXTRA_CONTEXTUALCARD_ROW, row);
         intent.putExtra(EXTRA_CONTEXTUALCARD_TAP_TARGET, actionTypeToTapTarget(actionType));
-        sendBroadcast(context, intent);
+        sendBroadcast(intent);
     }
 
     @VisibleForTesting
-    void sendBroadcast(final Context context, final Intent intent) {
-        intent.setPackage(context.getString(R.string.config_settingsintelligence_package_name));
-        final String action = context.getString(R.string.config_settingsintelligence_log_action);
+    void sendBroadcast(final Intent intent) {
+        intent.setPackage(mContext.getString(R.string.config_settingsintelligence_package_name));
+        final String action = mContext.getString(R.string.config_settingsintelligence_log_action);
         if (!TextUtils.isEmpty(action)) {
             intent.setAction(action);
-            context.sendBroadcastAsUser(intent, UserHandle.ALL);
+            mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
         }
     }
 

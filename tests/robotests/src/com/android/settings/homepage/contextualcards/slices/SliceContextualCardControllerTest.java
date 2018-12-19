@@ -91,8 +91,7 @@ public class SliceContextualCardControllerTest {
         cr.close();
 
         assertThat(qryDismissed).isEqualTo(1);
-        verify(mFeatureFactory.mContextualCardFeatureProvider).logContextualCardDismiss(
-                mContext, card);
+        verify(mFeatureFactory.mContextualCardFeatureProvider).logContextualCardDismiss(card);
     }
 
     @Test

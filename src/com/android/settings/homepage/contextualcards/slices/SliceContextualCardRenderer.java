@@ -173,8 +173,9 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
             if (sliceItem.getSlice().getUri().toString().startsWith(
                     card.getSliceUri().toString())) {
                 ContextualCardFeatureProvider contexualCardFeatureProvider =
-                        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
-                contexualCardFeatureProvider.logContextualCardClick(mContext, card,
+                        FeatureFactory.getFactory(mContext)
+                                .getContextualCardFeatureProvider(mContext);
+                contexualCardFeatureProvider.logContextualCardClick(card,
                         eventInfo.rowIndex, eventInfo.actionType);
                 break;
             }

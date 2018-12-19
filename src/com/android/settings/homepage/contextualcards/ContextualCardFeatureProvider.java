@@ -16,24 +16,21 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import android.content.Context;
-
 import java.util.List;
 
 /** Feature provider for the contextual card feature. */
 public interface ContextualCardFeatureProvider {
 
     /** Homepage displays. */
-    void logHomepageDisplay(Context context, long latency);
+    void logHomepageDisplay(long latency);
 
     /** When user clicks dismiss in contextual card */
-    void logContextualCardDismiss(Context context, ContextualCard card);
+    void logContextualCardDismiss(ContextualCard card);
 
     /** After ContextualCardManager decides which cards will be displayed/hidden */
-    void logContextualCardDisplay(Context context, List<ContextualCard> showedCards,
+    void logContextualCardDisplay(List<ContextualCard> showedCards,
             List<ContextualCard> hiddenCards);
 
     /** When user clicks toggle/title area of a contextual card. */
-    void logContextualCardClick(Context context, ContextualCard card, int row,
-            int tapTarget);
+    void logContextualCardClick(ContextualCard card, int row, int tapTarget);
 }

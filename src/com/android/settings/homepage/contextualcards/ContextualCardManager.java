@@ -201,8 +201,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
                     .collect(groupingBy(ContextualCard::getCardType)));
         }
         final long totalTime = System.currentTimeMillis() - mStartTime;
-        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider()
-                .logHomepageDisplay(mContext, totalTime);
+        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext)
+                .logHomepageDisplay(totalTime);
 
         mIsFirstLaunch = false;
     }

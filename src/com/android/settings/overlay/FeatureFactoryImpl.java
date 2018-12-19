@@ -231,9 +231,10 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public ContextualCardFeatureProvider getContextualCardFeatureProvider() {
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context) {
         if (mContextualCardFeatureProvider == null) {
-            mContextualCardFeatureProvider = new ContextualCardFeatureProviderImpl();
+            mContextualCardFeatureProvider = new ContextualCardFeatureProviderImpl(
+                    context.getApplicationContext());
         }
         return mContextualCardFeatureProvider;
     }

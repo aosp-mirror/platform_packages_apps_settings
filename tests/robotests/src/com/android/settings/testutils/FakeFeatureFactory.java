@@ -201,8 +201,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         return panelFeatureProvider;
     }
 
-    @Override
-    public ContextualCardFeatureProvider getContextualCardFeatureProvider() {
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context) {
         return mContextualCardFeatureProvider;
     }
 
