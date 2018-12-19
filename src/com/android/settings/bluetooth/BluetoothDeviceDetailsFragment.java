@@ -21,12 +21,16 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -98,6 +102,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
         super.onAttach(context);
+
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SLICE_INJECTION)) {
+            final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(context)
+                    .getBluetoothFeatureProvider(context);
+            use(SlicePreferenceController.class).setSliceUri(
+                    featureProvider.getBluetoothDeviceSettingsUri(mDeviceAddress));
+        }
     }
 
     @Override

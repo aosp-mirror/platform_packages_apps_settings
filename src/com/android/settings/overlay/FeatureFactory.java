@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
@@ -113,6 +114,8 @@ public abstract class FeatureFactory {
     public abstract ContextualCardFeatureProvider getContextualCardFeatureProvider();
 
     public abstract FaceFeatureProvider getFaceFeatureProvider();
+
+    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider(Context context);
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
