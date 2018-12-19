@@ -84,30 +84,31 @@ public class LocationEnablerTest {
     }
 
     @Test
-    public void onResume_shouldSetActiveAndRegisterListener() {
-        mEnabler.onResume();
+    public void onStart_shouldSetActiveAndRegisterListener() {
+        mEnabler.onStart();
 
         verify(mContext).registerReceiver(eq(mEnabler.mReceiver),
                 eq(LocationEnabler.INTENT_FILTER_LOCATION_MODE_CHANGED));
     }
 
     @Test
-    public void onResume_shouldRefreshLocationMode() {
-        mEnabler.onResume();
+    public void onStart_shouldRefreshLocationMode() {
+        mEnabler.onStart();
 
         verify(mEnabler).refreshLocationMode();
     }
 
     @Test
-    public void onPause_shouldUnregisterListener() {
-        mEnabler.onPause();
+    public void onStop_shouldUnregisterListener() {
+        mEnabler.onStart();
+        mEnabler.onStop();
 
         verify(mContext).unregisterReceiver(mEnabler.mReceiver);
     }
 
     @Test
     public void onReceive_shouldRefreshLocationMode() {
-        mEnabler.onResume();
+        mEnabler.onStart();
         reset(mListener);
         mEnabler.mReceiver.onReceive(mContext, new Intent());
 

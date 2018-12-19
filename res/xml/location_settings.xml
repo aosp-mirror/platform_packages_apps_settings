@@ -20,21 +20,14 @@
         android:title="@string/location_settings_title"
         settings:keywords="@string/keywords_location">
 
-        <PreferenceCategory
-            android:key="recent_location_requests"
-            android:title="@string/location_category_recent_location_requests"/>
-
-        <Preference
-            android:key="recent_location_requests_see_all_button"
-            android:title="@string/location_recent_location_requests_see_all"
-            android:icon="@drawable/ic_chevron_right_24dp"
-            android:selectable="true"
-            android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"
-            settings:searchable="false"/>
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="apps_dashboard"
+            android:layout="@layout/app_entities_header"
+            settings:allowDividerBelow="true" />
 
         <PreferenceCategory
             android:key="location_advanced_settings"
-            settings:initialExpandedChildrenCount="1">
+            settings:initialExpandedChildrenCount="0">
 
             <!-- This preference category gets removed if new_recent_location_ui is disabled -->
             <Preference
@@ -60,8 +53,7 @@
                 android:selectable="true" />
 
             <PreferenceCategory
-                android:key="location_services"
-                android:title="@string/location_category_location_services"/>
+                android:key="location_services" />
         </PreferenceCategory>
 
         <PreferenceCategory

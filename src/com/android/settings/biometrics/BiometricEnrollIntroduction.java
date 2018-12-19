@@ -37,10 +37,6 @@ import com.google.android.setupdesign.span.LinkSpan;
 public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         implements LinkSpan.OnClickListener {
 
-    public static final int CHOOSE_LOCK_GENERIC_REQUEST = 1;
-    public static final int BIOMETRIC_FIND_SENSOR_REQUEST = 2;
-    public static final int LEARN_MORE_REQUEST = 3;
-
     private UserManager mUserManager;
     private boolean mHasPassword;
     private boolean mBiometricUnlockDisabledByAdmin;
@@ -110,6 +106,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected abstract Intent getEnrollingIntent();
 
     /**
+     * @return the title to be shown on the ConfirmLock screen.
+     */
+    protected abstract int getConfirmLockTitleResId();
+
+    /**
      * @param span
      */
     public abstract void onClick(LinkSpan span);
@@ -133,6 +134,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
         mUserManager = UserManager.get(this);
         updatePasswordQuality();
+
+        if (!mHasPassword) {
+            // No password registered, launch into enrollment wizard.
+            launchChooseLock();
+        } else {
+            launchConfirmLock(getConfirmLockTitleResId(), getChallenge());
+        }
     }
 
     @Override
@@ -157,13 +165,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     @Override
     protected void onNextButtonClick() {
-        if (!mHasPassword) {
-            // No biometrics registered, launch into enrollment wizard.
-            launchChooseLock();
-        } else {
-            // Lock thingy is already set up, launch directly into find sensor step from wizard.
-            launchFindSensor(null);
-        }
+        // Lock thingy is already set up, launch directly to the next page
+        launchNextEnrollingActivity(mToken);
     }
 
     private void launchChooseLock() {
@@ -181,7 +184,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
     }
 
-    private void launchFindSensor(byte[] token) {
+    private void launchNextEnrollingActivity(byte[] token) {
         Intent intent = getEnrollingIntent();
         if (token != null) {
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
@@ -199,9 +202,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final boolean isResultFinished = resultCode == RESULT_FINISHED;
+        final int result = isResultFinished ? RESULT_OK : RESULT_SKIP;
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
             if (isResultFinished || resultCode == RESULT_SKIP) {
-                final int result = isResultFinished ? RESULT_OK : RESULT_SKIP;
                 setResult(result, data);
                 finish();
                 return;
@@ -209,10 +212,21 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
             if (isResultFinished) {
                 updatePasswordQuality();
-                byte[] token = data.getByteArrayExtra(
+                mToken = data.getByteArrayExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-                launchFindSensor(token);
+                overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
                 return;
+            } else {
+                setResult(result, data);
+                finish();
+            }
+        } else if (requestCode == CONFIRM_REQUEST) {
+            if (resultCode == RESULT_OK && data != null) {
+                mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
+            } else {
+                setResult(result, data);
+                finish();
             }
         } else if (requestCode == LEARN_MORE_REQUEST) {
             overridePendingTransition(R.anim.suw_slide_back_in, R.anim.suw_slide_back_out);

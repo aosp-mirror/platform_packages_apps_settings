@@ -9,16 +9,14 @@
 
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
+
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/location_category_recent_location_requests"
-        android:key="recent_location_requests_see_all">
-
-        <PreferenceCategory
-            android:key="all_recent_location_requests"/>
-</PreferenceScreen>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="@string/financial_sms_root_screen_key"
+    android:title="@string/financial_apps_sms_access_title"
+    settings:controller="com.android.settings.applications.specialaccess.financialapps.FinancialAppsController" />

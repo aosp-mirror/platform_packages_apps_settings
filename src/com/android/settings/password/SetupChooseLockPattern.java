@@ -70,17 +70,15 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                         ChooseLockTypeDialogFragment.newInstance(mUserId)
                                 .show(getChildFragmentManager(), null));
             }
-            // enable skip button only during setup wizard and not with fingerprint flow.
-            if (!mForFingerprint) {
-                Button skipButton = view.findViewById(R.id.skip_button);
-                skipButton.setVisibility(View.VISIBLE);
-                skipButton.setOnClickListener(v -> {
-                    SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                            getActivity().getIntent()
-                                    .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
-                    dialog.show(getFragmentManager());
+            // Show the skip button during SUW but not during Settings > Biometric Enrollment
+            Button skipButton = view.findViewById(R.id.skip_button);
+            skipButton.setVisibility(View.VISIBLE);
+            skipButton.setOnClickListener(v -> {
+                SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        getActivity().getIntent()
+                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+                dialog.show(getFragmentManager());
                 });
-            }
             return view;
         }
 

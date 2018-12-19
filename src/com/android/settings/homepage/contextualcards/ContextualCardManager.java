@@ -35,6 +35,7 @@ import androidx.loader.content.Loader;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,9 @@ import java.util.stream.Collectors;
  * get the page refreshed.
  */
 public class ContextualCardManager implements ContextualCardLoader.CardContentLoaderListener,
-        ContextualCardUpdateListener {
+        ContextualCardUpdateListener, LifecycleObserver, OnSaveInstanceState {
+
+    private static final String KEY_CONTEXTUAL_CARDS = "key_contextual_cards";
 
     private static final String TAG = "ContextualCardManager";
 
@@ -68,6 +71,9 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     final List<ContextualCard> mContextualCards;
     @VisibleForTesting
     long mStartTime;
+    boolean mIsFirstLaunch;
+    @VisibleForTesting
+    List<String> mSavedCards;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
@@ -76,12 +82,20 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     private ContextualCardUpdateListener mListener;
 
-    public ContextualCardManager(Context context, Lifecycle lifecycle) {
+    public ContextualCardManager(Context context, Lifecycle lifecycle, Bundle savedInstanceState) {
         mContext = context;
         mLifecycle = lifecycle;
         mContextualCards = new ArrayList<>();
         mLifecycleObservers = new ArrayList<>();
         mControllerRendererPool = new ControllerRendererPool();
+        mLifecycle.addObserver(this);
+
+        if (savedInstanceState == null) {
+            mIsFirstLaunch = true;
+            mSavedCards = null;
+        } else {
+            mSavedCards = savedInstanceState.getStringArrayList(KEY_CONTEXTUAL_CARDS);
+        }
         //for data provided by Settings
         for (@ContextualCard.CardType int cardType : SETTINGS_CARDS) {
             setupController(cardType);
@@ -172,13 +186,34 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     @Override
     public void onFinishCardLoading(List<ContextualCard> cards) {
         final long loadTime = System.currentTimeMillis() - mStartTime;
+        final List<ContextualCard> cardsToKeep = getCardsToKeep(cards);
+
+        //navigate back to the homepage or after card dismissal
+        if (!mIsFirstLaunch) {
+            onContextualCardUpdated(cardsToKeep.stream()
+                    .collect(groupingBy(ContextualCard::getCardType)));
+            return;
+        }
+
+        //only log homepage display upon a fresh launch
         if (loadTime <= ContextualCardLoader.CARD_CONTENT_LOADER_TIMEOUT_MS) {
-            onContextualCardUpdated(
-                    cards.stream().collect(groupingBy(ContextualCard::getCardType)));
+            onContextualCardUpdated(cards.stream()
+                    .collect(groupingBy(ContextualCard::getCardType)));
         }
         final long totalTime = System.currentTimeMillis() - mStartTime;
         FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider()
                 .logHomepageDisplay(mContext, totalTime);
+
+        mIsFirstLaunch = false;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        final ArrayList<String> cards = mContextualCards.stream()
+                .map(ContextualCard::getName)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        outState.putStringArrayList(KEY_CONTEXTUAL_CARDS, cards);
     }
 
     public ControllerRendererPool getControllerRendererPool() {
@@ -187,6 +222,22 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     void setListener(ContextualCardUpdateListener listener) {
         mListener = listener;
+    }
+
+    private List<ContextualCard> getCardsToKeep(List<ContextualCard> cards) {
+        if (mSavedCards != null) {
+            //screen rotate
+            final List<ContextualCard> cardsToKeep = cards.stream()
+                    .filter(card -> mSavedCards.contains(card.getName()))
+                    .collect(Collectors.toList());
+            mSavedCards = null;
+            return cardsToKeep;
+        } else {
+            //navigate back to the homepage or after dismissing a card
+            return cards.stream()
+                    .filter(card -> mContextualCards.contains(card))
+                    .collect(Collectors.toList());
+        }
     }
 
     static class CardContentLoaderCallbacks implements

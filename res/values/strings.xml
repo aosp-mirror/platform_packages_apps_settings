@@ -827,8 +827,15 @@
     <string name="location_settings_title">Location</string>
     <!-- Used in the location settings to control turning on/off the feature entirely -->
     <string name="location_settings_master_switch_title">Use location</string>
-    <!-- Summary for Location settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="location_settings_summary">Scanning, location history</string>
+    <!-- Summary for Location settings when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_settings_summary_location_off">Off</string>
+    <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
+    <plurals name="location_settings_summary_location_on">
+        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app can access location</item>
+        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps can access location</item>
+    </plurals>
+    <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
+    <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
@@ -3630,15 +3637,28 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">App-level permissions</string>
-    <!-- [CHAR LIMIT=42] Location settings screen, sub category for recent location requests -->
-    <string name="location_category_recent_location_requests">Recent location requests</string>
-    <!-- Location settings screen, displayed when there're more than three recent location requests -->
-    <string name="location_recent_location_requests_see_all">See all</string>
+    <string name="location_app_level_permissions">App permission</string>
+    <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_app_permission_summary_location_off">Location is off</string>
+    <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
+    <plurals name="location_app_permission_summary_location_on">
+        <item quantity="one">
+            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            of
+            <xliff:g id="total_location_app_count">%2$d</xliff:g>
+            app has unlimited access</item>
+        <item quantity="other">
+            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            of
+            <xliff:g id="total_location_app_count">%2$d</xliff:g>
+            apps have unlimited access</item>
+    </plurals>
+    <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
+    <string name="location_category_recent_location_access">Recent location access</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, button to bring the user to view the details of recent location access -->
+    <string name="location_recent_location_access_view_details">View details</string>
     <!-- Location settings screen, displayed when there's no recent app accessing location -->
     <string name="location_no_recent_apps">No apps have requested location recently</string>
-    <!-- [CHAR LIMIT=30] Location settings screen, sub category for location services -->
-    <string name="location_category_location_services">Location services</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests high battery use-->
     <string name="location_high_battery_use">High battery use</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests low battery use-->
@@ -6746,7 +6766,7 @@
     <string name="wizard_back">Back</string>
     <!-- Wizard next button label [CHAR LIMIT=25] -->
     <string name="wizard_next">Next</string>
-    <!-- Wizard next button label [CHAR LIMIT=25] -->
+    <!-- Wizard finish button label [CHAR LIMIT=25] -->
     <string name="wizard_finish">Finish</string>
 
     <!-- An option in a photo selection dialog, if there is no photo yet [CHAR LIMIT=50] -->
@@ -6943,6 +6963,8 @@
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
+    <!--Search keywords for financial apps sms access settings -->
+    <string name="keywords_financial_apps_sms_access">financial app, sms, permission</string>
 
     <!-- Search keyword for Device Theme Settings [CHAR LIMIT=NONE] -->
     <string name="keywords_systemui_theme">dark theme</string>
@@ -8833,6 +8855,10 @@
     <!-- Summary of number of apps currently can write system settings [CHAR LIMIT=60] -->
     <string name="write_settings_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to modify system settings</string>
 
+    <!-- Settings title in main settings screen for financial apps sms access [CHAR LIMIT=60] -->
+    <string name="financial_apps_sms_access_title">Financial Apps Sms Access</string>
+    <!-- Preference key for financial apps sms access screen -->
+    <string name="financial_sms_root_screen_key" translatable="false">financial_sms_root_screen_key</string>
     <!-- Label for showing apps that can install other apps [CHAR LIMIT=45] -->
     <string name="filter_install_sources_apps">Can install other apps</string>
     <!-- Label for showing apps that can write system settings [CHAR LIMIT=45] -->

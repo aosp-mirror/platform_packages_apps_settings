@@ -14,30 +14,28 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi.dpp;
+package com.android.settings.bluetooth;
 
-import android.os.Bundle;
+import android.content.Context;
+import android.net.Uri;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
 /**
- * After getting Wi-Fi network information and(or) QR code, this fragment config a device to connect
- * to the Wi-Fi network.
+ * Impl of {@link BluetoothFeatureProvider}
  */
-public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
-    @Override
-    protected int getLayout() {
-        return R.layout.wifi_dpp_add_device_fragment;
+public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
+
+    private Context mContext;
+
+    public BluetoothFeatureProviderImpl(Context context) {
+        mContext = context;
     }
 
     @Override
-    public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
-    }
-
-    @Override
-    public void onActivityCreated (Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public Uri getBluetoothDeviceSettingsUri(String macAddress) {
+        final String uriString = mContext.getString(R.string.config_bluetooth_device_settings_uri,
+                macAddress);
+        return Uri.parse(uriString);
     }
 }

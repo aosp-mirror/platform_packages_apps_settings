@@ -295,7 +295,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 if (!controller.isAvailable()) {
                     continue;
                 }
+
                 final String key = controller.getPreferenceKey();
+                if (TextUtils.isEmpty(key)) {
+                    Log.d(TAG, String.format("Preference key is %s in Controller %s",
+                            key, controller.getClass().getSimpleName()));
+                    continue;
+                }
 
                 final Preference preference = screen.findPreference(key);
                 if (preference == null) {
