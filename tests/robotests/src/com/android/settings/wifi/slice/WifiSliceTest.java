@@ -12,16 +12,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.android.settings.wifi;
+package com.android.settings.wifi.slice;
 
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
 
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
-import static com.android.settings.wifi.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
+import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -29,7 +28,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;

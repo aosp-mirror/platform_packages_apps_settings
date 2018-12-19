@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi;
+package com.android.settings.wifi.slice;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
@@ -46,6 +46,8 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
+import com.android.settings.wifi.WifiDialogActivity;
+import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
@@ -54,15 +56,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility class to build a Wifi Slice, and handle all associated actions.
+ * {@link CustomSliceable} for Wi-Fi, used by generic clients.
  */
 public class WifiSlice implements CustomSliceable {
 
     @VisibleForTesting
     static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
+    protected final WifiManager mWifiManager;
     private final Context mContext;
-    private final WifiManager mWifiManager;
 
     public WifiSlice(Context context) {
         mContext = context;
@@ -77,6 +79,7 @@ public class WifiSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         final boolean isWifiEnabled = isWifiEnabled();
+
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         final String title = mContext.getString(R.string.wifi_settings);
@@ -208,6 +211,13 @@ public class WifiSlice implements CustomSliceable {
         return intent;
     }
 
+    protected String getActiveSSID() {
+        if (mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
+            return WifiSsid.NONE;
+        }
+        return WifiInfo.removeDoubleQuotes(mWifiManager.getConnectionInfo().getSSID());
+    }
+
     private boolean isWifiEnabled() {
         switch (mWifiManager.getWifiState()) {
             case WifiManager.WIFI_STATE_ENABLED:
@@ -221,8 +231,7 @@ public class WifiSlice implements CustomSliceable {
     private CharSequence getSummary() {
         switch (mWifiManager.getWifiState()) {
             case WifiManager.WIFI_STATE_ENABLED:
-                final String ssid = WifiInfo.removeDoubleQuotes(mWifiManager.getConnectionInfo()
-                        .getSSID());
+                final String ssid = getActiveSSID();
                 if (TextUtils.equals(ssid, WifiSsid.NONE)) {
                     return mContext.getText(R.string.disconnected);
                 }
