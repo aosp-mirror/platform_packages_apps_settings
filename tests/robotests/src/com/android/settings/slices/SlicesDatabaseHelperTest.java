@@ -74,6 +74,7 @@ public class SlicesDatabaseHelperTest {
                 IndexColumns.PLATFORM_SLICE,
                 IndexColumns.SLICE_TYPE,
                 IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
+                IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
         };
 
         assertThat(columnNames).isEqualTo(expectedNames);

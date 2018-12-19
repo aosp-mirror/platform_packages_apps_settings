@@ -28,7 +28,6 @@ import java.lang.annotation.RetentionPolicy;
  * Note that {@link #mKey} is treated as a primary key for this class and determines equality.
  */
 public class SliceData {
-
     /**
      * Flags indicating the UI type of the Slice.
      */
@@ -75,6 +74,8 @@ public class SliceData {
     private final boolean mIsPlatformDefined;
 
     private final boolean mIsDynamicSummaryAllowed;
+
+    private final String mUnavailableSliceSubtitle;
 
     public String getKey() {
         return mKey;
@@ -124,6 +125,10 @@ public class SliceData {
         return mIsDynamicSummaryAllowed;
     }
 
+    public String getUnavailableSliceSubtitle() {
+        return mUnavailableSliceSubtitle;
+    }
+
     private SliceData(Builder builder) {
         mKey = builder.mKey;
         mTitle = builder.mTitle;
@@ -137,6 +142,7 @@ public class SliceData {
         mSliceType = builder.mSliceType;
         mIsPlatformDefined = builder.mIsPlatformDefined;
         mIsDynamicSummaryAllowed = builder.mIsDynamicSummaryAllowed;
+        mUnavailableSliceSubtitle = builder.mUnavailableSliceSubtitle;
     }
 
     @Override
@@ -177,6 +183,8 @@ public class SliceData {
         private boolean mIsPlatformDefined;
 
         private boolean mIsDynamicSummaryAllowed;
+
+        private String mUnavailableSliceSubtitle;
 
         public Builder setKey(String key) {
             mKey = key;
@@ -235,6 +243,12 @@ public class SliceData {
 
         public Builder setDynamicSummaryAllowed(boolean isDynamicSummaryAllowed) {
             mIsDynamicSummaryAllowed = isDynamicSummaryAllowed;
+            return this;
+        }
+
+        public Builder setUnavailableSliceSubtitle(
+                String unavailableSliceSubtitle) {
+            mUnavailableSliceSubtitle = unavailableSliceSubtitle;
             return this;
         }
 

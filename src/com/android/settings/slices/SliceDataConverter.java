@@ -16,12 +16,12 @@
 
 package com.android.settings.slices;
 
-import static com.android.settings.core.PreferenceXmlParserUtils
-        .METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_PLATFORM_SLICE_FLAG;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAILABLE_SLICE_SUBTITLE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
 
@@ -189,7 +189,8 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_ICON
                             | MetadataFlag.FLAG_NEED_PREF_SUMMARY
                             | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG
-                            | MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE);
+                            | MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE
+                            | MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE);
 
             for (Bundle bundle : metadata) {
                 // TODO (b/67996923) Non-controller Slices should become intent-only slices.
@@ -208,6 +209,8 @@ class SliceDataConverter {
                 final boolean isPlatformSlice = bundle.getBoolean(METADATA_PLATFORM_SLICE_FLAG);
                 final boolean isDynamicSummaryAllowed = bundle.getBoolean(
                         METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE);
+                final String unavailableSliceSubtitle = bundle.getString(
+                        METADATA_UNAVAILABLE_SLICE_SUBTITLE);
 
                 final SliceData xmlSlice = new SliceData.Builder()
                         .setKey(key)
@@ -220,6 +223,7 @@ class SliceDataConverter {
                         .setSliceType(sliceType)
                         .setPlatformDefined(isPlatformSlice)
                         .setDynamicSummaryAllowed(isDynamicSummaryAllowed)
+                        .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                         .build();
 
                 final BasePreferenceController controller =

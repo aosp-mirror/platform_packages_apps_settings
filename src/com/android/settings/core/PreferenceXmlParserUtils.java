@@ -72,9 +72,11 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_PREF_SUMMARY,
             MetadataFlag.FLAG_NEED_PREF_ICON,
             MetadataFlag.FLAG_NEED_SEARCHABLE,
-            MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE})
+            MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
+            MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MetadataFlag {
+
         int FLAG_INCLUDE_PREF_SCREEN = 1;
         int FLAG_NEED_KEY = 1 << 1;
         int FLAG_NEED_PREF_TYPE = 1 << 2;
@@ -87,6 +89,7 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_SEARCHABLE = 1 << 9;
         int FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE = 1 << 10;
         int FLAG_NEED_PREF_APPEND = 1 << 11;
+        int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 12;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -101,6 +104,8 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE =
             "allow_dynamic_summary_in_slice";
     public static final String METADATA_APPEND = "staticPreferenceLocation";
+    public static final String METADATA_UNAVAILABLE_SLICE_SUBTITLE =
+            "unavailable_slice_subtitle";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -249,6 +254,10 @@ public class PreferenceXmlParserUtils {
                 preferenceMetadata.putBoolean(METADATA_APPEND,
                         isAppended(preferenceScreenAttributes));
             }
+            if (hasFlag(flags, MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE)) {
+                preferenceMetadata.putString(METADATA_UNAVAILABLE_SLICE_SUBTITLE,
+                        getUnavailableSliceSubtitle(preferenceAttributes));
+            }
             metadata.add(preferenceMetadata);
 
             preferenceAttributes.recycle();
@@ -344,6 +353,11 @@ public class PreferenceXmlParserUtils {
 
     private static boolean isAppended(TypedArray styledAttributes) {
         return styledAttributes.getInt(R.styleable.PreferenceScreen_staticPreferenceLocation,
-            PREPEND_VALUE) == APPEND_VALUE;
+                PREPEND_VALUE) == APPEND_VALUE;
+    }
+
+    private static String getUnavailableSliceSubtitle(TypedArray styledAttributes) {
+        return styledAttributes.getString(
+                R.styleable.Preference_unavailableSliceSubtitle);
     }
 }
