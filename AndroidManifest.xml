@@ -139,7 +139,11 @@
                   android:label="@string/network_settings_title"
                   android:theme="@style/Theme.Settings.Home"
                   android:launchMode="singleTask">
-            <!-- TODO(b/114749736): add intent filter here and disable the one in telephony -->
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
+                <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <!-- Alias for launcher activity only, as this belongs to each profile. -->

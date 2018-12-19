@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -109,8 +110,7 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/114749736): add metric id for this fragment
-        return 0;
+        return SettingsEnums.MOBILE_DATA_DIALOG;
     }
 
     @Override
