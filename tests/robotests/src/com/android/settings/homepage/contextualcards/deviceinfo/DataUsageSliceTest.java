@@ -69,24 +69,31 @@ public class DataUsageSliceTest {
         ShadowDataUsageUtils.HAS_SIM = true;
         doReturn(DATA_USAGE_TITLE).when(mDataUsageSlice).getDataUsageText(any());
         doReturn(DATA_USAGE_SUMMARY).when(mDataUsageSlice).getCycleTime(any());
+
         final Slice slice = mDataUsageSlice.getSlice();
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.data_usage_summary_title));
+
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final IconCompat expectedIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_data_usage);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedIcon.toString());
-
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.data_usage_summary_title));
     }
 
     @Test
     public void getSlice_hasNoSim_shouldShowNoSimCard() {
         ShadowDataUsageUtils.HAS_SIM = false;
-        final Slice slice = mDataUsageSlice.getSlice();
-        final List<SliceItem> sliceItems = slice.getItems();
 
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.data_usage_summary_title));
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.no_sim_card));
+        final Slice slice = mDataUsageSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.data_usage_summary_title));
+
+        final List<SliceItem> sliceItems = slice.getItems();
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems,
+                mContext.getString(R.string.no_sim_card));
     }
 }

@@ -26,14 +26,12 @@ import android.content.Intent;
 import android.provider.Settings;
 
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SliceTester;
 import com.android.settings.testutils.shadow.ShadowNotificationManager;
 
 import org.junit.Before;
@@ -62,16 +60,16 @@ public class ZenModeSliceBuilderTest {
     @Test
     public void getZenModeSlice_correctSliceContent() {
         final Slice dndSlice = ZenModeSliceBuilder.getSlice(mContext);
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, dndSlice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.zen_mode_settings_title));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
         assertThat(primaryAction.getIcon()).isNull();
-
-        final List<SliceItem> sliceItems = dndSlice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.zen_mode_settings_title));
     }
 
     @Test

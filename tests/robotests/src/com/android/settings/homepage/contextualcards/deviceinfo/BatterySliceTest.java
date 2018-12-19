@@ -26,22 +26,18 @@ import android.content.Context;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SliceTester;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatterySliceTest {
@@ -64,14 +60,16 @@ public class BatterySliceTest {
         doNothing().when(mBatterySlice).loadBatteryInfo();
         doReturn("10%").when(mBatterySlice).getBatteryPercentString();
         doReturn("test").when(mBatterySlice).getSummary();
+
         final Slice slice = mBatterySlice.getSlice();
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.power_usage_summary_title));
+
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final IconCompat expectedIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_battery);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedIcon.toString());
-
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.power_usage_summary_title));
     }
 }

@@ -26,14 +26,12 @@ import android.content.Context;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 
 import org.junit.Before;
@@ -41,8 +39,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class StorageSliceTest {
@@ -68,14 +64,15 @@ public class StorageSliceTest {
         doReturn(info).when(mStorageSlice).getPrivateStorageInfo();
         doReturn(USED_BYTES_TEXT).when(mStorageSlice).getStorageUsedText(any());
         doReturn(SUMMARY_TEXT).when(mStorageSlice).getStorageSummaryText(any());
+
         final Slice slice = mStorageSlice.getSlice();
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.storage_label));
+
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final IconCompat expectedIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_homepage_storage);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedIcon.toString());
-
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.storage_label));
     }
 }

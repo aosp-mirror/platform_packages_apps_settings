@@ -106,8 +106,8 @@ public class BluetoothDevicesSliceTest {
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.bluetooth_devices));
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.bluetooth_devices));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class BluetoothDevicesSliceTest {
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, BLUETOOTH_MOCK_TITLE);
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, BLUETOOTH_MOCK_TITLE);
     }
 
     @Test
@@ -129,7 +129,7 @@ public class BluetoothDevicesSliceTest {
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems,
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems,
                 mContext.getString(R.string.bluetooth_pairing_pref_title));
     }
 
@@ -139,8 +139,9 @@ public class BluetoothDevicesSliceTest {
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.no_bluetooth_devices));
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.no_bluetooth_devices));
     }
 
     @Test
