@@ -80,6 +80,11 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
+    @Override
+    public boolean isSelectable() {
+        return false;
+    }
+
     public void setStream(int stream) {
         mStream = stream;
         setMax(mAudioManager.getStreamMaxVolume(mStream));

@@ -92,6 +92,11 @@ public class SeekBarPreference extends RestrictedPreference
     }
 
     @Override
+    public boolean isSelectable() {
+        return false;
+    }
+
+    @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         view.itemView.setOnKeyListener(this);
