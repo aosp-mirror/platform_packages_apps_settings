@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -38,7 +39,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -74,6 +78,8 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryUtilsTest {
+
+    private static final String TAG = "BatteryUtilsTest";
 
     // unit that used to converted ms to us
     private static final long UNIT = 1000;
@@ -160,6 +166,7 @@ public class BatteryUtilsTest {
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
     private List<BatterySipper> mUsageList;
+    private Context mContext;
 
     @Before
     public void setUp() throws PackageManager.NameNotFoundException {
@@ -214,10 +221,10 @@ public class BatteryUtilsTest {
         mIdleBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         mIdleBatterySipper.totalPowerMah = BATTERY_IDLE_USAGE;
 
-        final Context shadowContext = spy(RuntimeEnvironment.application);
-        doReturn(mPackageManager).when(shadowContext).getPackageManager();
-        doReturn(mAppOpsManager).when(shadowContext).getSystemService(Context.APP_OPS_SERVICE);
-        mBatteryUtils = spy(new BatteryUtils(shadowContext));
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
+        mBatteryUtils = spy(new BatteryUtils(mContext));
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
         doReturn(0L).when(mBatteryUtils)
             .getForegroundServiceTotalTimeUs(any(BatteryStats.Uid.class), anyLong());
@@ -709,5 +716,16 @@ public class BatteryUtilsTest {
         assertThat(mBatteryUtils.clearForceAppStandby(PACKAGE_NAME)).isFalse();
         verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
                 PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+    }
+
+    @Test
+    public void getBatteryInfo_providerNull_shouldNotCrash() {
+        when(mProvider.isEnhancedBatteryPredictionEnabled(mContext)).thenReturn(true);
+        when(mProvider.getEnhancedBatteryPrediction(mContext)).thenReturn(null);
+        when(mContext.registerReceiver(nullable(BroadcastReceiver.class),
+                any(IntentFilter.class))).thenReturn(new Intent());
+
+        //Should not crash
+        assertThat(mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG)).isNotNull();
     }
 }
