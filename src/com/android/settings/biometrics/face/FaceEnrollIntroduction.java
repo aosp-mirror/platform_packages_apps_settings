@@ -20,7 +20,9 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -37,11 +39,22 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceIntro";
 
     private FaceManager mFaceManager;
+    private FaceEnrollAccessibilityToggle mSwitchVision;
+    private FaceEnrollAccessibilityToggle mSwitchDiversity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFaceManager = Utils.getFaceManagerOrNull(this);
+        final LinearLayout accessibilityLayout = findViewById(R.id.accessibility_layout);
+        final Button accessibilityButton = findViewById(R.id.accessibility_button);
+        accessibilityButton.setOnClickListener(view -> {
+            accessibilityButton.setVisibility(View.INVISIBLE);
+            accessibilityLayout.setVisibility(View.VISIBLE);
+        });
+
+        mSwitchVision = findViewById(R.id.toggle_vision);
+        mSwitchDiversity = findViewById(R.id.toggle_diversity);
     }
 
     @Override
@@ -116,7 +129,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected Intent getEnrollingIntent() {
-        return new Intent(this, FaceEnrollEnrolling.class);
+        final Intent intent = new Intent(this, FaceEnrollEnrolling.class);
+        intent.putExtra(EXTRA_KEY_REQUIRE_VISION, mSwitchVision.isChecked());
+        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, mSwitchDiversity.isChecked());
+        return intent;
     }
 
     @Override

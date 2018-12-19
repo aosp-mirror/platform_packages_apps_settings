@@ -29,11 +29,12 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
-import com.android.settings.password.ChooseLockSettingsHelper;
+
+import java.util.ArrayList;
 
 
 public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
@@ -45,6 +46,8 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     private TextView mErrorText;
     private Interpolator mLinearOutSlowInInterpolator;
     private FaceEnrollPreviewFragment mPreviewFragment;
+
+    private ArrayList<Integer> mDisabledFeatures = new ArrayList<>();
 
     private FaceFeatureProvider.Listener mListener = new FaceFeatureProvider.Listener() {
         @Override
@@ -91,6 +94,13 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
         Button skipButton = findViewById(R.id.skip_button);
         skipButton.setOnClickListener(this);
 
+        if (!getIntent().getBooleanExtra(BiometricEnrollBase.EXTRA_KEY_REQUIRE_DIVERSITY, true)) {
+            mDisabledFeatures.add(FaceManager.FEATURE_REQUIRE_REQUIRE_DIVERSITY);
+        }
+        if (!getIntent().getBooleanExtra(BiometricEnrollBase.EXTRA_KEY_REQUIRE_VISION, true)) {
+            mDisabledFeatures.add(FaceManager.FEATURE_REQUIRE_ATTENTION);
+        }
+
         startEnrollment();
     }
 
@@ -114,7 +124,12 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     protected BiometricEnrollSidecar getSidecar() {
-        return new FaceEnrollSidecar();
+        final int[] disabledFeatures = new int[mDisabledFeatures.size()];
+        for (int i = 0; i < mDisabledFeatures.size(); i++) {
+            disabledFeatures[i] = mDisabledFeatures.get(i);
+        }
+
+        return new FaceEnrollSidecar(disabledFeatures);
     }
 
     @Override

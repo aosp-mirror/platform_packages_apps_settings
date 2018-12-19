@@ -18,6 +18,7 @@
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:FaceEnrollAccessibilitySwitch="http://schemas.android.com/apk/res/com.android.settings"
     style="?attr/face_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
@@ -58,6 +59,41 @@
                 android:src="@drawable/face_enroll_introduction" />
 
         </com.google.android.setupdesign.view.FillContentLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/accessibility_button"
+                style="@style/SuwGlifButton.Secondary"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/security_settings_face_enroll_introduction_accessibility" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/accessibility_layout"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <com.android.settings.biometrics.face.FaceEnrollAccessibilityToggle
+                    android:id="@+id/toggle_diversity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    FaceEnrollAccessibilitySwitch:messageText="@string/security_settings_face_enroll_introduction_accessibility_diversity"/>
+
+                <com.android.settings.biometrics.face.FaceEnrollAccessibilityToggle
+                    android:id="@+id/toggle_vision"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    FaceEnrollAccessibilitySwitch:messageText="@string/security_settings_face_enroll_introduction_accessibility_vision"/>
+
+            </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
 
