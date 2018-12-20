@@ -19,6 +19,7 @@ package com.android.settings.dashboard;
 import android.util.ArrayMap;
 
 import com.android.settings.DisplaySettings;
+import com.android.settings.LegalSettings;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
@@ -27,9 +28,11 @@ import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFrag
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
+import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.language.LanguageAndInputSettings;
@@ -110,6 +113,12 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_PRIVACY);
         PARENT_TO_CATEGORY_KEY_MAP.put(EnterprisePrivacySettings.class.getName(),
                 CategoryKey.CATEGORY_ENTERPRISE_PRIVACY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(LegalSettings.class.getName(),
+                CategoryKey.CATEGORY_ABOUT_LEGAL);
+        PARENT_TO_CATEGORY_KEY_MAP.put(MyDeviceInfoFragment.class.getName(),
+                CategoryKey.CATEGORY_MY_DEVICE_INFO);
+        PARENT_TO_CATEGORY_KEY_MAP.put(BatterySaverSettings.class.getName(),
+                CategoryKey.CATEGORY_BATTERY_SAVER_SETTINGS);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 
