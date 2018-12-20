@@ -19,15 +19,20 @@ package com.android.settings.wifi.dpp;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import androidx.annotation.Keep;
+
 /**
- * Contains the Wi-Fi Network config parameters described in
- * https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11
+ * Wraps the parameters of ZXing reader library's Wi-Fi Network config format.
+ * Please check {@code WifiQrCode} for detail of the format.
  *
  * Checks below members of {@code WifiDppUtils} for more information.
  * EXTRA_WIFI_SECURITY / EXTRA_WIFI_SSID / EXTRA_WIFI_PRE_SHARED_KEY / EXTRA_WIFI_HIDDEN_SSID /
  * EXTRA_QR_CODE
  */
 public class WifiNetworkConfig {
+    // Ignores password if security is NO_PASSWORD or absent
+    public static final String NO_PASSWORD = "nopass";
+
     private String mSecurity;
     private String mSsid;
     private String mPreSharedKey;
@@ -42,9 +47,18 @@ public class WifiNetworkConfig {
     }
 
     public WifiNetworkConfig(WifiNetworkConfig config) {
-        mSecurity = new String(config.mSecurity);
-        mSsid = new String(config.mSsid);
-        mPreSharedKey = new String(config.mPreSharedKey);
+        if (config.mSecurity != null) {
+            mSecurity = new String(config.mSecurity);
+        }
+
+        if (config.mSsid != null) {
+            mSsid = new String(config.mSsid);
+        }
+
+        if (config.mPreSharedKey != null) {
+            mPreSharedKey = new String(config.mPreSharedKey);
+        }
+
         mHiddenSsid = config.mHiddenSsid;
     }
 
@@ -69,12 +83,13 @@ public class WifiNetworkConfig {
         String preSharedKey = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY);
         boolean hiddenSsid = intent.getBooleanExtra(WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID, false);
 
-        if (!isValidConfig(security, ssid, hiddenSsid)) {
-            return null;
-        }
+        return getValidConfigOrNull(security, ssid, preSharedKey, hiddenSsid);
+    }
 
-        if (ssid == null) {
-            ssid = "";
+    public static WifiNetworkConfig getValidConfigOrNull(String security, String ssid,
+            String preSharedKey, boolean hiddenSsid) {
+        if (!isValidConfig(security, ssid, preSharedKey, hiddenSsid)) {
+            return null;
         }
 
         return new WifiNetworkConfig(security, ssid, preSharedKey, hiddenSsid);
@@ -84,13 +99,17 @@ public class WifiNetworkConfig {
         if (config == null) {
             return false;
         } else {
-            return isValidConfig(config.mSecurity, config.mSsid, config.mHiddenSsid);
+            return isValidConfig(config.mSecurity, config.mSsid, config.mPreSharedKey,
+                    config.mHiddenSsid);
         }
     }
 
-    public static boolean isValidConfig(String security, String ssid, boolean hiddenSsid) {
-        if (TextUtils.isEmpty(security)) {
-            return false;
+    public static boolean isValidConfig(String security, String ssid, String preSharedKey,
+            boolean hiddenSsid) {
+        if (!TextUtils.isEmpty(security) && !NO_PASSWORD.equals(security)) {
+            if (TextUtils.isEmpty(preSharedKey)) {
+                return false;
+            }
         }
 
         if (!hiddenSsid && TextUtils.isEmpty(ssid)) {
@@ -100,18 +119,22 @@ public class WifiNetworkConfig {
         return true;
     }
 
+    @Keep
     public String getSecurity() {
-        return new String(mSecurity);
+        return mSecurity;
     }
 
+    @Keep
     public String getSsid() {
-        return new String(mSsid);
+        return mSsid;
     }
 
+    @Keep
     public String getPreSharedKey() {
-        return new String(mPreSharedKey);
+        return mPreSharedKey;
     }
 
+    @Keep
     public boolean getHiddenSsid() {
         return mHiddenSsid;
     }
