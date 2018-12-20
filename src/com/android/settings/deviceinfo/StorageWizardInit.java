@@ -30,7 +30,6 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 
 public class StorageWizardInit extends StorageWizardBase {
-    private Button mExternal;
     private Button mInternal;
 
     private boolean mIsPermittedToAdopt;
@@ -49,7 +48,6 @@ public class StorageWizardInit extends StorageWizardBase {
 
         setHeaderText(R.string.storage_wizard_init_v2_title, getDiskShortDescription());
 
-        mExternal = requireViewById(R.id.storage_wizard_init_external);
         mInternal = requireViewById(R.id.storage_wizard_init_internal);
 
         setBackButtonText(R.string.storage_wizard_init_v2_later);
