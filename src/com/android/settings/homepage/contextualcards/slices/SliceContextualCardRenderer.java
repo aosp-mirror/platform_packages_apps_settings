@@ -196,7 +196,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         public SliceViewHolder(View view) {
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
-            viewFlipper = view.findViewById(R.id.viewFlipper);
+            viewFlipper = view.findViewById(R.id.view_flipper);
         }
 
         public void resetCard() {
