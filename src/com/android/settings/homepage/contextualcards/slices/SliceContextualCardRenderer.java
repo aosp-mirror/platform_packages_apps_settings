@@ -132,6 +132,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         cardHolder.sliceView.setOnSliceActionListener(this);
 
         // Customize slice view for Settings
+        cardHolder.sliceView.showTitleItems(true);
         if (card.isLargeCard()) {
             cardHolder.sliceView.showHeaderDivider(true);
             cardHolder.sliceView.showActionDividers(true);
