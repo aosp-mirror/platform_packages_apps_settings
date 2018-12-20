@@ -64,17 +64,18 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     static final String BLUETOOTH_DEVICE_HASH_CODE = "bluetooth_device_hash_code";
 
     /**
+     * Add the "Pair new device" in the end of slice, when the number of Bluetooth devices is less
+     * than {@link #DEFAULT_EXPANDED_ROW_COUNT}.
+     */
+    @VisibleForTesting
+    static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
+
+    /**
      * Refer {@link com.android.settings.bluetooth.BluetoothDevicePreference#compareTo} to sort the
      * Bluetooth devices by {@link CachedBluetoothDevice}.
      */
     private static final Comparator<CachedBluetoothDevice> COMPARATOR
             = Comparator.naturalOrder();
-
-    /**
-     * Add the "Pair new device" in the end of slice, when the number of Bluetooth devices is less
-     * than {@link #DEFAULT_EXPANDED_ROW_COUNT}.
-     */
-    private static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
     private static final String TAG = "BluetoothDevicesSlice";
 
@@ -127,15 +128,18 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                     .build();
         }
 
-        // According the number of Bluetooth devices to set sub title of header.
+        // Get displayable device count.
+        final int deviceCount = Math.min(rows.size(), DEFAULT_EXPANDED_ROW_COUNT);
+
+        // According to the displayable device count to set sub title of header.
         listBuilder.setHeader(new ListBuilder.HeaderBuilder()
                 .setTitle(title)
-                .setSubtitle(getSubTitle(rows.size()))
+                .setSubtitle(getSubTitle(deviceCount))
                 .setPrimaryAction(primarySliceAction));
 
-        // Add Bluetooth device rows.
-        for (ListBuilder.RowBuilder rowBuilder : rows) {
-            listBuilder.addRow(rowBuilder);
+        // According to the displayable device count to add bluetooth device rows.
+        for (int i = 0; i < deviceCount; i++) {
+            listBuilder.addRow(rows.get(i));
         }
 
         // Add "Pair new device" if need.
@@ -238,7 +242,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     }
 
     private List<ListBuilder.RowBuilder> getBluetoothRowBuilder() {
-        // According Bluetooth devices to create row builders.
+        // According to Bluetooth devices to create row builders.
         final List<ListBuilder.RowBuilder> bluetoothRows = new ArrayList<>();
         final List<CachedBluetoothDevice> bluetoothDevices = getConnectedBluetoothDevices();
         for (CachedBluetoothDevice bluetoothDevice : bluetoothDevices) {
