@@ -119,6 +119,51 @@ public class WifiNetworkConfig {
         return true;
     }
 
+    /**
+     * Escaped special characters "\", ";", ":", "," with a backslash
+     * See https://github.com/zxing/zxing/wiki/Barcode-Contents
+     */
+    private String escapeSpecialCharacters(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return str;
+        }
+
+        StringBuilder buf = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (ch =='\\' || ch == ',' || ch == ';' || ch == ':') {
+                buf.append('\\');
+            }
+            buf.append(ch);
+        }
+
+        return buf.toString();
+    }
+
+    /**
+     * Construct a barcode string for WiFi network login.
+     * See https://en.wikipedia.org/wiki/QR_code#WiFi_network_login
+     */
+    public String getQrCode() {
+        final String empty = "";
+        String barcode = new StringBuilder("WIFI:")
+                .append("S:")
+                .append(escapeSpecialCharacters(mSsid))
+                .append(";")
+                .append("T:")
+                .append(TextUtils.isEmpty(mSecurity) ? empty : mSecurity)
+                .append(";")
+                .append("P:")
+                .append(TextUtils.isEmpty(mPreSharedKey) ? empty
+                        : escapeSpecialCharacters(mPreSharedKey))
+                .append(";")
+                .append("H:")
+                .append(mHiddenSsid)
+                .append(";;")
+                .toString();
+        return barcode;
+    }
+
     @Keep
     public String getSecurity() {
         return mSecurity;

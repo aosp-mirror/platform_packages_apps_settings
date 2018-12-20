@@ -18,8 +18,14 @@ package com.android.settings.wifi.dpp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
+
+import com.android.settingslib.wifi.AccessPoint;
+
+import java.util.List;
 
 /**
  * Here are the items shared by both WifiDppConfiguratorActivity & WifiDppEnrolleeActivity
@@ -84,23 +90,81 @@ public class WifiDppUtils {
         return intent;
     }
 
+    private static String getPresharedKey(WifiManager wifiManager, WifiConfiguration config) {
+        String preSharedKey = config.preSharedKey;
+
+        final List<WifiConfiguration> wifiConfigs = wifiManager.getPrivilegedConfiguredNetworks();
+        for (WifiConfiguration wifiConfig : wifiConfigs) {
+            if (wifiConfig.networkId == config.networkId) {
+                preSharedKey = wifiConfig.preSharedKey;
+                break;
+            }
+        }
+
+        return preSharedKey;
+    }
+
+    private static String removeFirstAndLastDoubleQuotes(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return str;
+        }
+
+        int begin = 0;
+        int end = str.length() - 1;
+        if (str.charAt(begin) == '\"') {
+            begin++;
+        }
+        if (str.charAt(end) == '\"') {
+            end--;
+        }
+        return str.substring(begin, end+1);
+    }
+
+    private static String getSecurityString(AccessPoint accessPoint) {
+        switch(accessPoint.getSecurity()) {
+            case AccessPoint.SECURITY_WEP:
+                return "WEP";
+            case AccessPoint.SECURITY_PSK:
+                return "WPA";
+            default:
+                return "nopass";
+        }
+    }
+
     /**
      * Returns an intent to launch QR code generator.
      *
-     * @param ssid     The data corresponding to {@code WifiConfiguration} SSID
-     * @param Security The data is from {@code AccessPoint.securityToString}
+     * @param context     The context to use for the content resolver
+     * @param wifiManager An instance of {@link WifiManager}
+     * @param accessPoint An instance of {@link AccessPoint}
      * @return Intent for launching QR code generator
      */
-    public static Intent getConfiguratorQrCodeGeneratorIntent(String ssid, String Security) {
-        //TODO: b/118794858#comment6 should put password & hideSsid in intent extra
-        final Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+    public static Intent getConfiguratorQrCodeGeneratorIntent(Context context,
+            WifiManager wifiManager, AccessPoint accessPoint) {
+        final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
+        intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+
+        final WifiConfiguration wifiConfig = accessPoint.getConfig();
+        final String ssid = removeFirstAndLastDoubleQuotes(wifiConfig.SSID);
+        final String security = getSecurityString(accessPoint);
+        String preSharedKey = wifiConfig.preSharedKey;
+
+        if (preSharedKey != null) {
+            // When the value of this key is read, the actual key is not returned, just a "*".
+            // Call privileged system API to obtain actual key.
+            preSharedKey = removeFirstAndLastDoubleQuotes(getPresharedKey(wifiManager, wifiConfig));
+        }
+
         if (!TextUtils.isEmpty(ssid)) {
             intent.putExtra(EXTRA_WIFI_SSID, ssid);
         }
-        if (!TextUtils.isEmpty(Security)) {
-            intent.putExtra(EXTRA_WIFI_SECURITY, Security);
+        if (!TextUtils.isEmpty(security)) {
+            intent.putExtra(EXTRA_WIFI_SECURITY, security);
         }
+        if (!TextUtils.isEmpty(preSharedKey)) {
+            intent.putExtra(EXTRA_WIFI_PRE_SHARED_KEY, preSharedKey);
+        }
+
         return intent;
     }
 }
