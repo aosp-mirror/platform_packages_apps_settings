@@ -37,6 +37,9 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -83,7 +86,10 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         mController.create().resume();
 
-        final Button skipButton = mController.get().findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout =
+                mController.get().findViewById(R.id.setup_wizard_layout);
+        final Button skipButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         assertThat(skipButton.getVisibility()).named("Skip visible").isEqualTo(View.VISIBLE);
         skipButton.performClick();
 
@@ -99,7 +105,10 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         mController.create().resume();
 
-        final Button skipButton = mController.get().findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout =
+                mController.get().findViewById(R.id.setup_wizard_layout);
+        final Button skipButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         assertThat(skipButton.getVisibility()).named("Skip visible").isEqualTo(View.VISIBLE);
         skipButton.performClick();
 
@@ -141,7 +150,9 @@ public class SetupFingerprintEnrollIntroductionTest {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
 
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
-        final Button skipButton = activity.findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        final Button skipButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         getShadowKeyguardManager().setIsKeyguardSecure(true);
         skipButton.performClick();
 
@@ -156,7 +167,9 @@ public class SetupFingerprintEnrollIntroductionTest {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
-        final Button skipButton = activity.findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        final Button skipButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         skipButton.performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
@@ -199,8 +212,9 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         SetupFingerprintEnrollIntroduction activity = mController.get();
 
-        final Button nextButton = activity.findViewById(R.id.fingerprint_next_button);
-        nextButton.performClick();
+        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
+
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         IntentForResult startedActivity = shadowActivity.getNextStartedActivityForResult();

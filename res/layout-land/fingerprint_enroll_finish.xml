@@ -70,41 +70,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <com.google.android.setupdesign.view.ButtonBarLayout
-                    style="@style/SuwGlifButtonBar.Stackable"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:clipChildren="false"
-                    android:clipToPadding="false">
-
-                    <Button
-                        style="@style/SetupWizardButton.Negative"
-                        android:id="@+id/add_another_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/fingerprint_enroll_button_add" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        style="@style/SetupWizardButton.Positive"
-                        android:id="@+id/next_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/security_settings_fingerprint_enroll_done" />
-
-                </com.google.android.setupdesign.view.ButtonBarLayout>
-
             </LinearLayout>
 
             <com.google.android.setupdesign.view.FillContentLayout

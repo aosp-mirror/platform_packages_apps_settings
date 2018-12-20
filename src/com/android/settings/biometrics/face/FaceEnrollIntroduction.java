@@ -32,6 +32,8 @@ import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 import com.google.android.setupdesign.span.LinkSpan;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
@@ -55,6 +57,25 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
         mSwitchVision = findViewById(R.id.toggle_vision);
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
+
+        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
+        mButtonFooterMixin.setSecondaryButton(
+                new FooterButton(
+                        this,
+                        R.string.security_settings_face_enroll_introduction_cancel,
+                        this::onCancelButtonClick,
+                        FooterButton.ButtonType.SKIP,
+                        R.style.SuwGlifButton_Secondary)
+        );
+
+        mButtonFooterMixin.setPrimaryButton(
+                new FooterButton(
+                        this,
+                        R.string.wizard_next,
+                        this::onNextButtonClick,
+                        FooterButton.ButtonType.NEXT,
+                        R.style.SuwGlifButton_Primary)
+        );
     }
 
     @Override
@@ -84,13 +105,19 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected Button getCancelButton() {
-        return findViewById(R.id.face_cancel_button);
+    protected FooterButton getCancelButton() {
+        if (mButtonFooterMixin != null) {
+            return mButtonFooterMixin.getSecondaryButton();
+        }
+        return null;
     }
 
     @Override
-    protected Button getNextButton() {
-        return findViewById(R.id.face_next_button);
+    protected FooterButton getNextButton() {
+        if (mButtonFooterMixin != null) {
+            return mButtonFooterMixin.getPrimaryButton();
+        }
+        return null;
     }
 
     @Override

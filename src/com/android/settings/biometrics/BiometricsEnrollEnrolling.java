@@ -85,16 +85,9 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
         super.onBackPressed();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.skip_button:
-                setResult(RESULT_SKIP);
-                finish();
-                break;
-            default:
-                super.onClick(v);
-        }
+    protected void onSkipButtonClick(View view) {
+        setResult(RESULT_SKIP);
+        finish();
     }
 
     public void startEnrollment() {

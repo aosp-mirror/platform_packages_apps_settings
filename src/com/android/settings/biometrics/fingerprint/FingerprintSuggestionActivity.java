@@ -19,10 +19,11 @@ package com.android.settings.biometrics.fingerprint;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
-import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+
+import com.google.android.setupcompat.item.FooterButton;
 
 public class FingerprintSuggestionActivity extends SetupFingerprintEnrollIntroduction {
 
@@ -30,8 +31,9 @@ public class FingerprintSuggestionActivity extends SetupFingerprintEnrollIntrodu
     protected void initViews() {
         super.initViews();
 
-        final Button cancelButton = findViewById(R.id.fingerprint_cancel_button);
-        cancelButton.setText(R.string.security_settings_fingerprint_enroll_introduction_cancel);
+        final FooterButton cancelButton = getCancelButton();
+        cancelButton.setText(
+                this, R.string.security_settings_fingerprint_enroll_introduction_cancel);
     }
 
     @Override

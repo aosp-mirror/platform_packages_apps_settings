@@ -32,6 +32,9 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,8 +74,8 @@ public class SetupFingerprintEnrollFindSensorTest {
                 Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class,
                         intent).setup().get();
 
-        final Button skipButton = activity.findViewById(R.id.skip_button);
-        skipButton.performClick();
+        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().performClick();
 
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();

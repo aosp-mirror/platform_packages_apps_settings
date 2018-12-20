@@ -20,12 +20,14 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
+
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 
 /**
  * Activity which concludes fingerprint enrollment.
@@ -39,13 +41,32 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_finish);
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
+
+        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
+        mButtonFooterMixin.setSecondaryButton(
+                new FooterButton(
+                        this,
+                        R.string.fingerprint_enroll_button_add,
+                        null,
+                        FooterButton.ButtonType.SKIP,
+                        R.style.SuwGlifButton_Secondary)
+        );
+
+        mButtonFooterMixin.setPrimaryButton(
+                new FooterButton(
+                        this,
+                        R.string.security_settings_fingerprint_enroll_done,
+                        this::onNextButtonClick,
+                        FooterButton.ButtonType.NEXT,
+                        R.style.SuwGlifButton_Primary)
+        );
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Button addButton = (Button) findViewById(R.id.add_another_button);
+        FooterButton addButton = mButtonFooterMixin.getSecondaryButton();
 
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
         boolean hideAddAnother = false;
@@ -59,22 +80,18 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
             // Don't show "Add" button if too many fingerprints already added
             addButton.setVisibility(View.INVISIBLE);
         } else {
-            addButton.setOnClickListener(this);
+            addButton.setOnClickListener(this::onAddAnotherButtonClick);
         }
     }
 
     @Override
-    protected void onNextButtonClick() {
+    protected void onNextButtonClick(View view) {
         setResult(RESULT_FINISHED);
         finish();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.add_another_button) {
-            startActivityForResult(getFingerprintEnrollingIntent(), REQUEST_ADD_ANOTHER);
-        }
-        super.onClick(v);
+    private void onAddAnotherButtonClick(View view) {
+        startActivityForResult(getFingerprintEnrollingIntent(), REQUEST_ADD_ANOTHER);
     }
 
     @Override

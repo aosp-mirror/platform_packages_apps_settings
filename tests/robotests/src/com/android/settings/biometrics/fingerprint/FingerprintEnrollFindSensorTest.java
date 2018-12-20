@@ -37,6 +37,9 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -133,8 +136,8 @@ public class FingerprintEnrollFindSensorTest {
 
     @Test
     public void clickSkip_shouldReturnResultSkip() {
-        Button skipButton = mActivity.findViewById(R.id.skip_button);
-        skipButton.performClick();
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         assertThat(shadowActivity.getResultCode()).named("result code")
