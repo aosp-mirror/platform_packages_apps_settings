@@ -25,6 +25,7 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
+import android.sysprop.DisplayProperties;
 import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.IWindowManager;
@@ -68,12 +69,12 @@ public abstract class DevelopmentTiles extends TileService {
 
         @Override
         protected boolean isEnabled() {
-            return SystemProperties.getBoolean(View.DEBUG_LAYOUT_PROPERTY, false);
+            return DisplayProperties.debug_layout().orElse(false);
         }
 
         @Override
         protected void setIsEnabled(boolean isEnabled) {
-            SystemProperties.set(View.DEBUG_LAYOUT_PROPERTY, isEnabled ? "true" : "false");
+            DisplayProperties.debug_layout(isEnabled);
         }
     }
 
@@ -109,7 +110,7 @@ public abstract class DevelopmentTiles extends TileService {
         protected void setIsEnabled(boolean isEnabled) {
             Settings.Global.putInt(
                     getContentResolver(), Settings.Global.DEVELOPMENT_FORCE_RTL, isEnabled ? 1 : 0);
-            SystemProperties.set(Settings.Global.DEVELOPMENT_FORCE_RTL, isEnabled ? "1" : "0");
+            DisplayProperties.debug_force_rtl(isEnabled);
             LocalePicker.updateLocales(getResources().getConfiguration().getLocales());
         }
     }
