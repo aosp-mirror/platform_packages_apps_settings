@@ -35,7 +35,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,6 +44,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 import com.google.android.setupdesign.GlifLayout;
 
 import java.text.NumberFormat;
@@ -62,8 +63,9 @@ public abstract class StorageWizardBase extends FragmentActivity {
     protected VolumeInfo mVolume;
     protected DiskInfo mDisk;
 
-    private Button mBack;
-    private Button mNext;
+    private ButtonFooterMixin mButtonFooterMixin;
+    private FooterButton mBack;
+    private FooterButton mNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +94,25 @@ public abstract class StorageWizardBase extends FragmentActivity {
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
 
-        mBack = requireViewById(R.id.storage_back_button);
-        mNext = requireViewById(R.id.storage_next_button);
+        mButtonFooterMixin = getGlifLayout().getMixin(ButtonFooterMixin.class);
+        mButtonFooterMixin.setSecondaryButton(
+                new FooterButton(
+                        this,
+                        R.string.wizard_back,
+                        this::onNavigateBack,
+                        FooterButton.ButtonType.OTHER,
+                        R.style.SuwGlifButton_Secondary)
+        );
+        mButtonFooterMixin.setPrimaryButton(
+                new FooterButton(
+                        this,
+                        R.string.wizard_next,
+                        this::onNavigateNext,
+                        FooterButton.ButtonType.NEXT,
+                        R.style.SuwGlifButton_Primary)
+        );
+        mBack = mButtonFooterMixin.getSecondaryButton();
+        mNext = mButtonFooterMixin.getPrimaryButton();
 
         setIcon(com.android.internal.R.drawable.ic_sd_card_48dp);
     }
@@ -104,11 +123,11 @@ public abstract class StorageWizardBase extends FragmentActivity {
         super.onDestroy();
     }
 
-    protected Button getBackButton() {
+    protected FooterButton getBackButton() {
         return mBack;
     }
 
-    protected Button getNextButton() {
+    protected FooterButton getNextButton() {
         return mNext;
     }
 
