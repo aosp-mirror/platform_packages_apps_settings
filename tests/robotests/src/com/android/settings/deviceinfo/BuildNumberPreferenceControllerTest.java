@@ -16,22 +16,22 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
-import android.os.Build;
 import android.os.Process;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.text.BidiFormatter;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -61,6 +61,8 @@ import org.robolectric.shadows.ShadowUserManager;
 @Config(shadows = ShadowUtils.class)
 public class BuildNumberPreferenceControllerTest {
 
+    private static final String KEY_BUILD_NUMBER = "build_number";
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -86,8 +88,8 @@ public class BuildNumberPreferenceControllerTest {
         mFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController =
-                new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
+        mController = new BuildNumberPreferenceController(mContext, KEY_BUILD_NUMBER);
+        mController.setHost(mFragment);
 
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
@@ -99,15 +101,6 @@ public class BuildNumberPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
-    }
-
-    @Test
-    public void displayPref_shouldAlwaysDisplay() {
-        mController.displayPreference(mScreen);
-
-        verify((Preference) mScreen.findPreference(mController.getPreferenceKey()))
-                .setSummary(BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
-        verify(mScreen, never()).removePreference(any(Preference.class));
     }
 
     @Test
@@ -198,8 +191,6 @@ public class BuildNumberPreferenceControllerTest {
     @Test
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
         mShadowUserManager.setIsAdminUser(true);
-        mController =
-                new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
 
         final boolean activityResultHandled = mController.onActivityResult(
                 BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
@@ -208,5 +199,15 @@ public class BuildNumberPreferenceControllerTest {
 
         assertThat(activityResultHandled).isTrue();
         assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isTrue();
+    }
+
+    @Test
+    public void copy_shouldCopyBuildNumberToClipboard() {
+        mController.copy();
+
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
+        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
+        assertThat(data.toString()).isEqualTo(mController.getSummary());
     }
 }
