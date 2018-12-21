@@ -49,8 +49,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     private FaceEnrollPreviewFragment mPreviewFragment;
 
     private ArrayList<Integer> mDisabledFeatures = new ArrayList<>();
-
-    private FaceFeatureProvider.Listener mListener = new FaceFeatureProvider.Listener() {
+    private ParticleCollection.Listener mListener = new ParticleCollection.Listener() {
         @Override
         public void onEnrolled() {
             FaceEnrollEnrolling.this.launchFinish(mToken);
