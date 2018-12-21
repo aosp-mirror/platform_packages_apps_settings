@@ -17,9 +17,11 @@
 package com.android.settings.biometrics.face;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -156,7 +158,15 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected Intent getEnrollingIntent() {
-        final Intent intent = new Intent(this, FaceEnrollEnrolling.class);
+        final String flattenedString = getString(R.string.config_face_enroll);
+        final Intent intent = new Intent();
+        if (!TextUtils.isEmpty(flattenedString)) {
+            ComponentName componentName = ComponentName.unflattenFromString(flattenedString);
+            intent.setComponent(componentName);
+
+        } else {
+            intent.setClass(this, FaceEnrollEnrolling.class);
+        }
         intent.putExtra(EXTRA_KEY_REQUIRE_VISION, mSwitchVision.isChecked());
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, mSwitchDiversity.isChecked());
         return intent;
