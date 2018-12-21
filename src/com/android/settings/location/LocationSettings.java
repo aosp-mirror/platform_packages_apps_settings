@@ -16,7 +16,6 @@
 
 package com.android.settings.location;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
@@ -103,12 +101,8 @@ public class LocationSettings extends DashboardFragment {
 
     static void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {
         // If there's some items to display, sort the items and add them to the container.
-        Collections.sort(prefs, new Comparator<Preference>() {
-            @Override
-            public int compare(Preference lhs, Preference rhs) {
-                return lhs.getTitle().toString().compareTo(rhs.getTitle().toString());
-            }
-        });
+        Collections.sort(prefs,
+                Comparator.comparing(lhs -> lhs.getTitle().toString()));
         for (Preference entry : prefs) {
             container.addPreference(entry);
         }
