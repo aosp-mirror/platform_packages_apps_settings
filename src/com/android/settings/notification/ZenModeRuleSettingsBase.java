@@ -30,12 +30,14 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 
 public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
     protected static final String TAG = ZenModeSettingsBase.TAG;
     protected static final boolean DEBUG = ZenModeSettingsBase.DEBUG;
+
+    private final String CUSTOM_BEHAVIOR_KEY = "zen_custom_setting";
 
     protected Context mContext;
     protected boolean mDisableListeners;
@@ -45,6 +47,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     protected ZenAutomaticRuleHeaderPreferenceController mHeader;
     protected ZenRuleButtonsPreferenceController mActionButtons;
     protected ZenAutomaticRuleSwitchPreferenceController mSwitch;
+    protected Preference mCustomBehaviorPreference;
 
     abstract protected void onCreateInternal();
     abstract protected boolean setRule(AutomaticZenRule rule);
@@ -75,6 +78,21 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         }
 
         super.onCreate(icicle);
+        mCustomBehaviorPreference = getPreferenceScreen().findPreference(CUSTOM_BEHAVIOR_KEY);
+        mCustomBehaviorPreference.setOnPreferenceClickListener(
+                new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString(ZenCustomRuleSettings.RULE_ID, mId);
+                        new SubSettingLauncher(mContext)
+                                .setDestination(ZenCustomRuleSettings.class.getName())
+                                .setArguments(bundle)
+                                .setSourceMetricsCategory(0) // TODO
+                                .launch();
+                        return true;
+                    }
+                });
         onCreateInternal();
     }
 
@@ -84,7 +102,9 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         if (isUiRestricted()) {
             return;
         }
-        updateControls();
+        if (!refreshRuleOrFinish()) {
+            updateControls();
+        }
     }
 
     @Override
@@ -109,22 +129,6 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         mActionButtons.onResume(mRule, mId);
         mActionButtons.displayPreference(screen);
         updatePreference(mActionButtons);
-    }
-
-    private void updatePreference(AbstractPreferenceController controller) {
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (!controller.isAvailable()) {
-            return;
-        }
-        final String key = controller.getPreferenceKey();
-
-        final Preference preference = screen.findPreference(key);
-        if (preference == null) {
-            Log.d(TAG, String.format("Cannot find preference with key %s in Controller %s",
-                    key, controller.getClass().getSimpleName()));
-            return;
-        }
-        controller.updateState(preference);
     }
 
     protected void updateRule(Uri newConditionId) {
@@ -165,6 +169,11 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         mDisableListeners = true;
         updateControlsInternal();
         updateHeader();
+        if (mRule.getZenPolicy() == null) {
+            mCustomBehaviorPreference.setSummary(R.string.zen_mode_custom_behavior_summary_default);
+        } else {
+            mCustomBehaviorPreference.setSummary(R.string.zen_mode_custom_behavior_summary);
+        }
         mDisableListeners = false;
     }
 }

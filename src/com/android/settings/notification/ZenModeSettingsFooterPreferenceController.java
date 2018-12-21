@@ -16,17 +16,29 @@
 
 package com.android.settings.notification;
 
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.icu.text.ListFormatter;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
-import android.util.Log;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -34,11 +46,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePreferenceController {
+    static final String KEY = "footer_preference";
+    private FragmentManager mFragment;
 
-    protected static final String KEY = "footer_preference";
-
-    public ZenModeSettingsFooterPreferenceController(Context context, Lifecycle lifecycle) {
+    public ZenModeSettingsFooterPreferenceController(Context context, Lifecycle lifecycle,
+            FragmentManager fragment) {
         super(context, KEY, lifecycle);
+        mFragment = fragment;
     }
 
     @Override
@@ -70,7 +84,7 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
         }
     }
 
-    protected String getFooterText() {
+    protected CharSequence getFooterText() {
         ZenModeConfig config = getZenModeConfig();
 
         NotificationManager.Policy appliedPolicy = mBackend.getConsolidatedPolicy();
@@ -88,15 +102,25 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
             if (rulesNames.size() > 0) {
                 String rules = ListFormatter.getInstance().format(rulesNames);
                 if (!rules.isEmpty()) {
-                    return mContext.getString(R.string.zen_mode_settings_dnd_custom_settings_footer,
-                            rules);
+                    final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
+                            AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    showCustomSettingsDialog();
+                                }
+                            });
+                    return TextUtils.concat(mContext.getResources().getString(
+                            R.string.zen_mode_settings_dnd_custom_settings_footer, rules),
+                            AnnotationSpan.linkify(mContext.getResources().getText(
+                            R.string.zen_mode_settings_dnd_custom_settings_footer_link),
+                            linkInfo));
                 }
             }
         }
-        return getFooterUsingDefaultPolicy(config);
+        return getDefaultPolicyFooter(config);
     }
 
-    private String getFooterUsingDefaultPolicy(ZenModeConfig config) {
+    private String getDefaultPolicyFooter(ZenModeConfig config) {
         String footerText = "";
         long latestEndTime = -1;
 
@@ -161,5 +185,102 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
             }
         }
         return zenRules;
+    }
+
+    private void showCustomSettingsDialog() {
+        ZenCustomSettingsDialog dialog = new ZenCustomSettingsDialog();
+        dialog.setNotificationPolicy(mBackend.getConsolidatedPolicy());
+        dialog.show(mFragment, ZenCustomSettingsDialog.class.getName());
+    }
+
+    public static class ZenCustomSettingsDialog extends InstrumentedDialogFragment {
+        private String KEY_POLICY = "policy";
+        private NotificationManager.Policy mPolicy;
+        private ZenModeSettings.SummaryBuilder mSummaryBuilder;
+
+        public void setNotificationPolicy(NotificationManager.Policy policy) {
+            mPolicy = policy;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Context context  = getActivity();
+            if (savedInstanceState != null) {
+                NotificationManager.Policy policy = savedInstanceState.getParcelable(KEY_POLICY);
+                if (policy != null) {
+                    mPolicy = policy;
+                }
+            }
+
+            mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
+
+            AlertDialog customSettingsDialog = new AlertDialog.Builder(context)
+                    .setTitle(R.string.zen_custom_settings_dialog_title)
+                    .setNeutralButton(R.string.zen_custom_settings_dialog_review_schedule,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                        int which) {
+                                    new SubSettingLauncher(context)
+                                            .setDestination(
+                                                    ZenModeAutomationSettings.class.getName())
+                                            .setSourceMetricsCategory(
+                                                    MetricsEvent.NOTIFICATION_ZEN_MODE_AUTOMATION)
+                                            .launch();
+                                }
+                            })
+                    .setPositiveButton(R.string.zen_custom_settings_dialog_ok, null)
+                    .setView(LayoutInflater.from(context).inflate(context.getResources().getLayout(
+                            R.layout.zen_custom_settings_dialog), null, false))
+                    .create();
+
+            customSettingsDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    TextView allowCallsText = customSettingsDialog.findViewById(
+                            R.id.zen_custom_settings_dialog_calls_allow);
+                    TextView allowMessagesText = customSettingsDialog.findViewById(
+                            R.id.zen_custom_settings_dialog_messages_allow);
+                    TextView allowAlarmsText = customSettingsDialog.findViewById(
+                            R.id.zen_custom_settings_dialog_alarms_allow);
+                    TextView allowMediaText = customSettingsDialog.findViewById(
+                            R.id.zen_custom_settings_dialog_media_allow);
+                    TextView allowSystemText = customSettingsDialog.findViewById(
+                            R.id.zen_custom_settings_dialog_system_allow);
+                    TextView allowRemindersText = customSettingsDialog.findViewById(
+                            R.id.zen_custom_settings_dialog_reminders_allow);
+                    TextView allowEventsText = customSettingsDialog.findViewById(
+                            R.id.zen_custom_settings_dialog_events_allow);
+                    TextView notificationsText = customSettingsDialog.findViewById(
+                            R.id.zen_custom_settings_dialog_show_notifications);
+
+                    allowCallsText.setText(mSummaryBuilder.getCallsSettingSummary(mPolicy));
+                    allowMessagesText.setText(mSummaryBuilder.getMessagesSettingSummary(mPolicy));
+                    allowAlarmsText.setText(getAllowRes(mPolicy.allowAlarms()));
+                    allowMediaText.setText(getAllowRes(mPolicy.allowMedia()));
+                    allowSystemText.setText(getAllowRes(mPolicy.allowSystem()));
+                    allowRemindersText.setText(getAllowRes(mPolicy.allowReminders()));
+                    allowEventsText.setText(getAllowRes(mPolicy.allowEvents()));
+                    notificationsText.setText(mSummaryBuilder.getBlockedEffectsSummary(mPolicy));
+                }
+            });
+
+            return customSettingsDialog;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.ZEN_CUSTOM_SETTINGS_DIALOG;
+        }
+
+        private int getAllowRes(boolean allow) {
+            return allow ? R.string.zen_mode_sound_summary_on : R.string.zen_mode_sound_summary_off;
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putParcelable(KEY_POLICY, mPolicy);
+        }
     }
 }

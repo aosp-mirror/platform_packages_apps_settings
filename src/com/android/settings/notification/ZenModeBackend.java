@@ -23,15 +23,20 @@ import android.app.ActivityManager;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.database.Cursor;
+import android.icu.text.ListFormatter;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
+import android.service.notification.ZenPolicy;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -116,7 +121,7 @@ public class ZenModeBackend {
         return (mPolicy.priorityCategories & categoryType) != 0;
     }
 
-    protected int getNewPriorityCategories(boolean allow, int categoryType) {
+    protected int getNewDefaultPriorityCategories(boolean allow, int categoryType) {
         int priorityCategories = mPolicy.priorityCategories;
         if (allow) {
             priorityCategories |= categoryType;
@@ -135,7 +140,8 @@ public class ZenModeBackend {
     }
 
     protected int getPriorityMessageSenders() {
-        if (isPriorityCategoryEnabled(NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)) {
+        if (isPriorityCategoryEnabled(
+                NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)) {
             return mPolicy.priorityMessageSenders;
         }
         return SOURCE_NONE;
@@ -151,7 +157,7 @@ public class ZenModeBackend {
     }
 
     protected void saveSoundPolicy(int category, boolean allow) {
-        int priorityCategories = getNewPriorityCategories(allow, category);
+        int priorityCategories = getNewDefaultPriorityCategories(allow, category);
         savePolicy(priorityCategories, mPolicy.priorityCallSenders,
                 mPolicy.priorityMessageSenders, mPolicy.suppressedVisualEffects);
     }
@@ -162,6 +168,7 @@ public class ZenModeBackend {
                 priorityMessageSenders, suppressedVisualEffects);
         mNotificationManager.setNotificationPolicy(mPolicy);
     }
+
 
     private int getNewSuppressedEffects(boolean suppress, int effectType) {
         int effects = mPolicy.suppressedVisualEffects;
@@ -202,7 +209,7 @@ public class ZenModeBackend {
             priorityMessagesSenders = allowSendersFrom;
         }
 
-        savePolicy(getNewPriorityCategories(allowSenders, category),
+        savePolicy(getNewDefaultPriorityCategories(allowSenders, category),
             priorityCallSenders, priorityMessagesSenders, mPolicy.suppressedVisualEffects);
 
         if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allow" +
@@ -234,6 +241,20 @@ public class ZenModeBackend {
         }
 
         return categorySenders;
+    }
+
+    protected static String getKeyFromZenPolicySetting(int contactType) {
+        switch (contactType) {
+            case ZenPolicy.PEOPLE_TYPE_ANYONE:
+                return ZEN_MODE_FROM_ANYONE;
+            case  ZenPolicy.PEOPLE_TYPE_CONTACTS:
+                return ZEN_MODE_FROM_CONTACTS;
+            case ZenPolicy.PEOPLE_TYPE_STARRED:
+                return ZEN_MODE_FROM_STARRED;
+            case ZenPolicy.PEOPLE_TYPE_NONE:
+            default:
+                return ZEN_MODE_FROM_NONE;
+        }
     }
 
     protected static String getKeyFromSetting(int contactType) {
@@ -288,6 +309,50 @@ public class ZenModeBackend {
         }
     }
 
+    protected int getContactsCallsSummary(ZenPolicy policy) {
+        int peopleType = policy.getPriorityCallSenders();
+        switch (peopleType) {
+            case ZenPolicy.PEOPLE_TYPE_ANYONE:
+                return R.string.zen_mode_from_anyone;
+            case ZenPolicy.PEOPLE_TYPE_CONTACTS:
+                return R.string.zen_mode_from_contacts;
+            case ZenPolicy.PEOPLE_TYPE_STARRED:
+                return R.string.zen_mode_from_starred;
+            case ZenPolicy.PEOPLE_TYPE_NONE:
+            default:
+                return R.string.zen_mode_from_none_calls;
+        }
+    }
+
+    protected int getContactsMessagesSummary(ZenPolicy policy) {
+        int peopleType = policy.getPriorityMessageSenders();
+        switch (peopleType) {
+            case ZenPolicy.PEOPLE_TYPE_ANYONE:
+                return R.string.zen_mode_from_anyone;
+            case ZenPolicy.PEOPLE_TYPE_CONTACTS:
+                return R.string.zen_mode_from_contacts;
+            case ZenPolicy.PEOPLE_TYPE_STARRED:
+                return R.string.zen_mode_from_starred;
+            case ZenPolicy.PEOPLE_TYPE_NONE:
+            default:
+                return R.string.zen_mode_from_none_messages;
+        }
+    }
+
+    protected static int getZenPolicySettingFromPrefKey(String key) {
+        switch (key) {
+            case ZEN_MODE_FROM_ANYONE:
+                return ZenPolicy.PEOPLE_TYPE_ANYONE;
+            case ZEN_MODE_FROM_CONTACTS:
+                return ZenPolicy.PEOPLE_TYPE_CONTACTS;
+            case ZEN_MODE_FROM_STARRED:
+                return ZenPolicy.PEOPLE_TYPE_STARRED;
+            case ZEN_MODE_FROM_NONE:
+            default:
+                return ZenPolicy.PEOPLE_TYPE_NONE;
+        }
+    }
+
     protected static int getSettingFromPrefKey(String key) {
         switch (key) {
             case ZEN_MODE_FROM_ANYONE:
@@ -318,6 +383,40 @@ public class ZenModeBackend {
         }
     }
 
+    ZenPolicy setDefaultZenPolicy(ZenPolicy zenPolicy) {
+        int calls;
+        if (mPolicy.allowCalls()) {
+            calls = ZenModeConfig.getZenPolicySenders(mPolicy.allowCallsFrom());
+        } else {
+            calls = ZenPolicy.PEOPLE_TYPE_NONE;
+        }
+
+        int messages;
+        if (mPolicy.allowMessages()) {
+            messages = ZenModeConfig.getZenPolicySenders(mPolicy.allowMessagesFrom());
+        } else {
+            messages = ZenPolicy.PEOPLE_TYPE_NONE;
+        }
+
+        return new ZenPolicy.Builder(zenPolicy)
+                .allowAlarms(mPolicy.allowAlarms())
+                .allowCalls(calls)
+                .allowEvents(mPolicy.allowEvents())
+                .allowMedia(mPolicy.allowMedia())
+                .allowMessages(messages)
+                .allowReminders(mPolicy.allowReminders())
+                .allowRepeatCallers(mPolicy.allowRepeatCallers())
+                .allowSystem(mPolicy.allowSystem())
+                .showFullScreenIntent(mPolicy.showFullScreenIntents())
+                .showLights(mPolicy.showLights())
+                .showInAmbientDisplay(mPolicy.showAmbient())
+                .showInNotificationList(mPolicy.showInNotificationList())
+                .showBadges(mPolicy.showBadges())
+                .showPeeking(mPolicy.showPeeking())
+                .showStatusBarIcons(mPolicy.showStatusBarIcons())
+                .build();
+    }
+
     protected Map.Entry<String, AutomaticZenRule>[] getAutomaticZenRules() {
         Map<String, AutomaticZenRule> ruleMap =
                 NotificationManager.from(mContext).getAutomaticZenRules();
@@ -336,6 +435,70 @@ public class ZenModeBackend {
             mDefaultRuleIds = ZenModeConfig.DEFAULT_RULE_IDS;
         }
         return mDefaultRuleIds;
+    }
+
+    NotificationManager.Policy toNotificationPolicy(ZenPolicy policy) {
+        ZenModeConfig config = new ZenModeConfig();
+        return config.toNotificationPolicy(policy);
+    }
+
+    @VisibleForTesting
+    List<String> getStarredContacts(Cursor cursor) {
+        List<String> starredContacts = new ArrayList<>();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String contact = cursor.getString(0);
+                if (contact != null) {
+                    starredContacts.add(contact);
+                }
+            } while (cursor.moveToNext());
+        }
+        return starredContacts;
+    }
+
+    private List<String> getStarredContacts() {
+        Cursor cursor = null;
+        try {
+            cursor = queryData();
+            return getStarredContacts(cursor);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    public String getStarredContactsSummary() {
+        List<String> starredContacts = getStarredContacts();
+        int numStarredContacts = starredContacts.size();
+
+        List<String> displayContacts = new ArrayList<>();
+
+        if (numStarredContacts == 0) {
+            displayContacts.add(mContext.getString(R.string.zen_mode_from_none));
+        } else {
+            for (int i = 0; i < 2 && i < numStarredContacts; i++) {
+                displayContacts.add(starredContacts.get(i));
+            }
+
+            if (numStarredContacts == 3) {
+                displayContacts.add(starredContacts.get(2));
+            } else if (numStarredContacts > 2) {
+                displayContacts.add(mContext.getResources().getQuantityString(
+                        R.plurals.zen_mode_starred_contacts_summary_additional_contacts,
+                        numStarredContacts - 2, numStarredContacts - 2));
+            }
+        }
+
+        // values in displayContacts must not be null
+        return ListFormatter.getInstance().format(displayContacts);
+    }
+
+    private Cursor queryData() {
+        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
+                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
+                ContactsContract.Data.STARRED + "=1", null,
+                ContactsContract.Data.TIMES_CONTACTED);
     }
 
     @VisibleForTesting

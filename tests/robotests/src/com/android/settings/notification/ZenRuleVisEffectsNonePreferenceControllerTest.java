@@ -16,16 +16,15 @@
 
 package com.android.settings.notification;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.service.notification.ZenPolicy;
 
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -40,41 +39,66 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-public final class ZenModeMessagesPreferenceControllerTest {
+public class ZenRuleVisEffectsNonePreferenceControllerTest extends
+        ZenRuleCustomPrefContrTestBase {
 
-    private ZenModeMessagesPreferenceController mController;
+    @Mock
+    private ZenModeBackend mBackend;
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private NotificationManager.Policy mPolicy;
-
-    private Context mContext;
+    private ZenCustomRadioButtonPreference mockPref;
     @Mock
-    private ZenModeBackend mBackend;
+    private PreferenceScreen mScreen;
+
+    private ZenRuleVisEffectsNonePreferenceController mController;
+    private Context mContext;
+
+    @Override
+    AbstractZenCustomRulePreferenceController getController() {
+        return mController;
+    }
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-
         mContext = RuntimeEnvironment.application;
-        when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
-
-        mController = new ZenModeMessagesPreferenceController(
-                mContext, mock(Lifecycle.class), "zen_mode_messages_settings");
+        mController = new ZenRuleVisEffectsNonePreferenceController(mContext, mock(Lifecycle.class),
+                PREF_KEY);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
+        when(mBackend.getAutomaticZenRule(RULE_ID)).thenReturn(mRule);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        mController.displayPreference(mScreen);
     }
 
     @Test
-    public void testIsAvailable() {
-        assertTrue(mController.isAvailable());
+    public void updateState_noVisEffects() {
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .hideAllVisualEffects()
+                .build());
+        mController.updateState(mockPref);
+        verify(mockPref).setChecked(true);
     }
 
     @Test
-    public void testHasSummary() {
-        Preference pref = mock(Preference.class);
-        mController.updateState(pref);
-        verify(pref).setSummary(any());
+    public void updateState_showAllVisualEffects() {
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .showAllVisualEffects()
+                .build());
+        mController.updateState(mockPref);
+        verify(mockPref).setChecked(false);
+    }
+
+    @Test
+    public void updateState_custom() {
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .showPeeking(true)
+                .showBadges(false)
+                .build());
+        mController.updateState(mockPref);
+
+        verify(mockPref).setChecked(false);
     }
 }

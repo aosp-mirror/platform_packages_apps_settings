@@ -90,7 +90,8 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         controllers.add(new ZenModeDurationPreferenceController(context, lifecycle));
         controllers.add(new ZenModeAutomationPreferenceController(context));
         controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
-        controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle,
+                fragmentManager));
         return controllers;
     }
 

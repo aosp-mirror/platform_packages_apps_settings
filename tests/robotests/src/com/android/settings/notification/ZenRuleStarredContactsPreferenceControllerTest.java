@@ -16,13 +16,9 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
-
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +26,7 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.service.notification.ZenPolicy;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -41,19 +38,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-
 @RunWith(RobolectricTestRunner.class)
-public class ZenModeStarredContactsPreferenceControllerTest {
+public class ZenRuleStarredContactsPreferenceControllerTest extends ZenRuleCustomPrefContrTestBase {
 
-    private ZenModeStarredContactsPreferenceController mCallsController;
-    private ZenModeStarredContactsPreferenceController mMessagesController;
+    private ZenRuleStarredContactsPreferenceController mCallsController;
+    private ZenRuleStarredContactsPreferenceController mMessagesController;
+    private static int CURR_CONTROLLER = ZenPolicy.PRIORITY_CATEGORY_CALLS;
 
     @Mock
     private ZenModeBackend mBackend;
@@ -62,14 +57,21 @@ public class ZenModeStarredContactsPreferenceControllerTest {
     @Mock
     private Preference mockPref;
     @Mock
-    private NotificationManager.Policy mPolicy;
-    @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private Intent testIntent;
     @Mock
     private ComponentName mComponentName;
     private Context mContext;
+
+    @Override
+    AbstractZenCustomRulePreferenceController getController() {
+        if (CURR_CONTROLLER == ZenPolicy.PRIORITY_CATEGORY_MESSAGES) {
+            return mMessagesController;
+        } else {
+            return mCallsController;
+        }
+    }
 
     @Before
     public void setup() {
@@ -78,20 +80,20 @@ public class ZenModeStarredContactsPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
         mContext = RuntimeEnvironment.application;
-        when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         when(testIntent.resolveActivity(any())).thenReturn(mComponentName);
 
-        mCallsController = new ZenModeStarredContactsPreferenceController(
-                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_CALLS,
+        mCallsController = new ZenRuleStarredContactsPreferenceController(
+                mContext, mock(Lifecycle.class), ZenPolicy.PRIORITY_CATEGORY_CALLS,
                 "zen_mode_starred_contacts_callers");
+        when(mBackend.getAutomaticZenRule(RULE_ID)).thenReturn(mRule);
         ReflectionHelpers.setField(mCallsController, "mBackend", mBackend);
         ReflectionHelpers.setField(mCallsController, "mStarredContactsIntent", testIntent);
         when(mPreferenceScreen.findPreference(mCallsController.getPreferenceKey()))
                 .thenReturn(mockPref);
         mCallsController.displayPreference(mPreferenceScreen);
 
-        mMessagesController = new ZenModeStarredContactsPreferenceController(
-                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_MESSAGES,
+        mMessagesController = new ZenRuleStarredContactsPreferenceController(
+                mContext, mock(Lifecycle.class), ZenPolicy.PRIORITY_CATEGORY_MESSAGES,
                 "zen_mode_starred_contacts_messages");
         ReflectionHelpers.setField(mMessagesController, "mBackend", mBackend);
         ReflectionHelpers.setField(mMessagesController, "mStarredContactsIntent", testIntent);
@@ -102,54 +104,58 @@ public class ZenModeStarredContactsPreferenceControllerTest {
 
     @Test
     public void isAvailable_noCallers() {
-        when(mBackend.isPriorityCategoryEnabled(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS))
-                .thenReturn(false);
+        CURR_CONTROLLER = ZenPolicy.PRIORITY_CATEGORY_CALLS;
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .allowCalls(ZenPolicy.PEOPLE_TYPE_NONE)
+                .build());
         assertThat(mCallsController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_anyCallers() {
-        when(mBackend.isPriorityCategoryEnabled(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS))
-                .thenReturn(true);
-        when(mBackend.getPriorityCallSenders())
-                .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_ANY);
+        CURR_CONTROLLER = ZenPolicy.PRIORITY_CATEGORY_CALLS;
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .allowCalls(ZenPolicy.PEOPLE_TYPE_ANYONE)
+                .build());
 
         assertThat(mCallsController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_starredCallers() {
-        when(mBackend.isPriorityCategoryEnabled(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS))
-                .thenReturn(true);
-        when(mBackend.getPriorityCallSenders())
-                .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
+        CURR_CONTROLLER = ZenPolicy.PRIORITY_CATEGORY_CALLS;
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .allowCalls(ZenPolicy.PEOPLE_TYPE_STARRED)
+                .build());
 
         assertThat(mCallsController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_noMessages() {
-        when(mBackend.isPriorityCategoryEnabled(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)).thenReturn(false);
-        assertThat(mMessagesController.isAvailable()).isFalse();
+        CURR_CONTROLLER = ZenPolicy.PRIORITY_CATEGORY_MESSAGES;
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .allowMessages(ZenPolicy.PEOPLE_TYPE_NONE)
+                .build());
+        assertThat(mCallsController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_anyMessages() {
-        when(mBackend.isPriorityCategoryEnabled(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)).thenReturn(true);
-        when(mBackend.getPriorityMessageSenders())
-                .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_ANY);
+        CURR_CONTROLLER = ZenPolicy.PRIORITY_CATEGORY_MESSAGES;
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .allowMessages(ZenPolicy.PEOPLE_TYPE_ANYONE)
+                .build());
 
         assertThat(mMessagesController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_starredMessageContacts() {
-        when(mBackend.isPriorityCategoryEnabled(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)).thenReturn(true);
-        when(mBackend.getPriorityMessageSenders())
-                .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
+        CURR_CONTROLLER = ZenPolicy.PRIORITY_CATEGORY_MESSAGES;
+        updateControllerZenPolicy(new ZenPolicy.Builder()
+                .allowMessages(ZenPolicy.PEOPLE_TYPE_STARRED)
+                .build());
 
         assertThat(mMessagesController.isAvailable()).isTrue();
     }
