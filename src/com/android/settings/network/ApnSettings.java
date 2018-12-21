@@ -276,7 +276,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
     private void fillList() {
         final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
                 : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        final Uri simApnUri = Uri.withAppendedPath(Telephony.Carriers.SIM_APN_LIST,
+        final Uri simApnUri = Uri.withAppendedPath(Telephony.Carriers.SIM_APN_URI,
                 String.valueOf(subId));
         StringBuilder where = new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
                 + "user_visible!=0");
