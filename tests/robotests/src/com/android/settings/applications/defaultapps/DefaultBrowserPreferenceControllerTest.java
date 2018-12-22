@@ -109,10 +109,16 @@ public class DefaultBrowserPreferenceControllerTest {
         doReturn(null).when(spyController).getDefaultAppIcon();
         final List<ResolveInfo> resolveInfos = new ArrayList<>();
         final CharSequence PACKAGE_NAME = "com.test.package";
-        final ResolveInfo info1 = spy(createResolveInfo(PACKAGE_NAME.toString()));
-        when(info1.loadLabel(mPackageManager)).thenReturn(PACKAGE_NAME);
+
+        // This ResolveInfo will return a non-null label from loadLabel.
+        final ResolveInfo info1 = createResolveInfo(PACKAGE_NAME.toString());
+        info1.nonLocalizedLabel = PACKAGE_NAME;
         resolveInfos.add(info1);
-        resolveInfos.add(createResolveInfo(PACKAGE_NAME.toString()));
+
+        // This ResolveInfo will return a null label from loadLabel.
+        final ResolveInfo info2 = createResolveInfo(PACKAGE_NAME.toString());
+        resolveInfos.add(info2);
+
         when(mPackageManager.getDefaultBrowserPackageNameAsUser(anyInt())).thenReturn(null);
         when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
             .thenReturn(resolveInfos);
