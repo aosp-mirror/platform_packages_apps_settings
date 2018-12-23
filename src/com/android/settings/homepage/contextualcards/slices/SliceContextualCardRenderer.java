@@ -132,6 +132,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         cardHolder.sliceView.setOnSliceActionListener(this);
 
         // Customize slice view for Settings
+        cardHolder.sliceView.showTitleItems(true);
         if (card.isLargeCard()) {
             cardHolder.sliceView.showHeaderDivider(true);
             cardHolder.sliceView.showActionDividers(true);
@@ -173,8 +174,9 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
             if (sliceItem.getSlice().getUri().toString().startsWith(
                     card.getSliceUri().toString())) {
                 ContextualCardFeatureProvider contexualCardFeatureProvider =
-                        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
-                contexualCardFeatureProvider.logContextualCardClick(mContext, card,
+                        FeatureFactory.getFactory(mContext)
+                                .getContextualCardFeatureProvider(mContext);
+                contexualCardFeatureProvider.logContextualCardClick(card,
                         eventInfo.rowIndex, eventInfo.actionType);
                 break;
             }
@@ -194,7 +196,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer,
         public SliceViewHolder(View view) {
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
-            viewFlipper = view.findViewById(R.id.viewFlipper);
+            viewFlipper = view.findViewById(R.id.view_flipper);
         }
 
         public void resetCard() {

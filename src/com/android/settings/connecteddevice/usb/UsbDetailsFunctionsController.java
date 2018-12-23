@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
 import static android.net.ConnectivityManager.TETHERING_USB;
 
 import android.content.Context;
@@ -88,7 +89,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
 
     @Override
     protected void refresh(boolean connected, long functions, int powerRole, int dataRole) {
-        if (!connected || dataRole != UsbPort.DATA_ROLE_DEVICE) {
+        if (!connected || dataRole != DATA_ROLE_DEVICE) {
             mProfilesContainer.setEnabled(false);
         } else {
             // Functions are only available in device mode

@@ -128,7 +128,7 @@ public class SliceContextualCardRendererTest {
     public void longClick_shouldFlipCard() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final View card = viewHolder.itemView.findViewById(R.id.slice_view);
-        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.viewFlipper);
+        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
         final View dismissalView = viewHolder.itemView.findViewById(R.id.dismissal_view);
         mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
 
@@ -153,7 +153,7 @@ public class SliceContextualCardRendererTest {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final View card = viewHolder.itemView.findViewById(R.id.slice_view);
         final Button btnKeep = viewHolder.itemView.findViewById(R.id.keep);
-        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.viewFlipper);
+        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
         mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
 
         card.performLongClick();
@@ -212,7 +212,7 @@ public class SliceContextualCardRendererTest {
     public void onStop_cardIsFlipped_shouldFlipBack() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final View card = viewHolder.itemView.findViewById(R.id.slice_view);
-        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.viewFlipper);
+        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
         mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
 
         card.performLongClick();

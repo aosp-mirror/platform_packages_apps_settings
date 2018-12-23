@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -33,15 +32,18 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 import com.google.android.setupdesign.GlifLayout;
 
 /**
  * Base activity for all biometric enrollment steps.
  */
-public abstract class BiometricEnrollBase extends InstrumentedActivity
-        implements View.OnClickListener {
-    public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
+public abstract class BiometricEnrollBase extends InstrumentedActivity {
 
+    public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
+    public static final String EXTRA_KEY_REQUIRE_VISION = "accessibility_vision";
+    public static final String EXTRA_KEY_REQUIRE_DIVERSITY = "accessibility_diversity";
 
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is
@@ -76,6 +78,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
     protected int mUserId;
+    protected ButtonFooterMixin mButtonFooterMixin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,10 +113,6 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity
 
     protected void initViews() {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        Button nextButton = getNextButton();
-        if (nextButton != null) {
-            nextButton.setOnClickListener(this);
-        }
     }
 
     protected GlifLayout getLayout() {
@@ -137,18 +136,14 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity
         setHeaderText(resId, false /* force */);
     }
 
-    protected Button getNextButton() {
-        return (Button) findViewById(R.id.next_button);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == getNextButton()) {
-            onNextButtonClick();
+    protected FooterButton getNextButton() {
+        if (mButtonFooterMixin != null) {
+            return mButtonFooterMixin.getPrimaryButton();
         }
+        return null;
     }
 
-    protected void onNextButtonClick() {
+    protected void onNextButtonClick(View view) {
     }
 
     protected Intent getFingerprintEnrollingIntent() {

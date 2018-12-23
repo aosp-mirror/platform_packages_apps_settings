@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import android.content.Intent;
-import android.os.SystemProperties;
+import android.sysprop.SetupWizardProperties;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -27,13 +27,10 @@ import com.google.android.setupdesign.util.ThemeHelper;
 
 public class SetupWizardUtils {
 
-    @VisibleForTesting
-    static final String SYSTEM_PROP_SETUPWIZARD_THEME = "setupwizard.theme";
-
     public static int getTheme(Intent intent) {
         String theme = intent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
         if (theme == null) {
-            theme = SystemProperties.get(SYSTEM_PROP_SETUPWIZARD_THEME);
+            theme = SetupWizardProperties.theme().orElse("");
         }
         if (theme != null) {
             switch (theme) {

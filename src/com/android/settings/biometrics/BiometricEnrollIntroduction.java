@@ -22,13 +22,13 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.google.android.setupcompat.item.FooterButton;
 import com.google.android.setupdesign.span.LinkSpan;
 
 /**
@@ -70,12 +70,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     /**
      * @return the cancel button
      */
-    protected abstract Button getCancelButton();
+    protected abstract FooterButton getCancelButton();
 
     /**
      * @return the next button
      */
-    protected abstract Button getNextButton();
+    protected abstract FooterButton getNextButton();
 
     /**
      * @return the error TextView
@@ -127,9 +127,6 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             setHeaderText(getHeaderResDefault());
         }
 
-        Button cancelButton = getCancelButton();
-        cancelButton.setOnClickListener(v -> onCancelButtonClick());
-
         mErrorText = getErrorTextView();
 
         mUserManager = UserManager.get(this);
@@ -164,7 +161,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     @Override
-    protected void onNextButtonClick() {
+    protected void onNextButtonClick(View view) {
         // Lock thingy is already set up, launch directly to the next page
         launchNextEnrollingActivity(mToken);
     }
@@ -234,7 +231,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    protected void onCancelButtonClick() {
+    protected void onCancelButtonClick(View view) {
         finish();
     }
 

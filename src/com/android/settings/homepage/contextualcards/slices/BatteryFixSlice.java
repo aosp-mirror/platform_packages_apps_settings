@@ -98,10 +98,10 @@ public class BatteryFixSlice implements CustomSliceable {
                         ListBuilder.ICON_IMAGE,
                         batteryTip.getTitle(mContext));
                 sliceBuilder.addRow(new RowBuilder()
+                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                         .setTitle(batteryTip.getTitle(mContext))
                         .setSubtitle(batteryTip.getSummary(mContext))
-                        .setPrimaryAction(primaryAction)
-                        .addEndItem(icon, ListBuilder.ICON_IMAGE));
+                        .setPrimaryAction(primaryAction));
                 break;
             }
         }
@@ -144,9 +144,9 @@ public class BatteryFixSlice implements CustomSliceable {
         final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
                 ListBuilder.ICON_IMAGE, title);
         sliceBuilder.addRow(new RowBuilder()
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                 .setTitle(title)
-                .setPrimaryAction(primaryAction)
-                .addEndItem(icon, ListBuilder.ICON_IMAGE))
+                .setPrimaryAction(primaryAction))
                 .setIsError(isError);
         return sliceBuilder.build();
     }

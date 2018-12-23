@@ -877,6 +877,12 @@
     <string name="security_settings_face_preference_summary_none">Tap to set up face authentication</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
     <string name="security_settings_face_preference_title">Face authentication</string>
+    <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
+    <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
+    <!-- Message shown for a toggle which when disabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_accessibility_diversity"></string>
+    <!-- Message shown for a toggle which when disabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_accessibility_vision"></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
@@ -6938,7 +6944,7 @@
     <string name="keywords_sounds">speaker beep, speaker, volume, mute, silence, audio, music</string>
     <string name="keywords_sounds_and_notifications_interruptions">dont don\u2019t disturb, interrupt, interruption, break</string>
     <string name="keywords_app">RAM</string>
-    <string name="keywords_location">nearby, location, history, reporting</string>
+    <string name="keywords_location">nearby, location, history, reporting, GPS</string>
     <string name="keywords_accounts">account</string>
     <string name="keywords_users">restriction, restrict, restricted</string>
     <string name="keywords_keyboard_and_ime">text correction, correct, sound, vibrate, auto, language, gesture, suggest, suggestion, theme, offensive, word, type, emoji, international</string>
@@ -7330,14 +7336,17 @@
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing length of DND -->
     <string name="zen_mode_settings_dnd_manual_indefinite">Do Not Disturb will stay on until you turn it off</string>
 
-    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing how DND was triggered by an automatic DND rule -->
-    <string name="zen_mode_settings_dnd_automatic_rule">Do Not Disturb was automatically turned on by a rule (<xliff:g id="rule_name" example="Weeknights">%s</xliff:g>)</string>
+    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing how DND was triggered by an automatic DND schedule -->
+    <string name="zen_mode_settings_dnd_automatic_rule">Do Not Disturb was automatically turned on by a schedule (<xliff:g id="rule_name" example="Weeknights">%s</xliff:g>)</string>
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer how DND was triggered by an app -->
     <string name="zen_mode_settings_dnd_automatic_rule_app">Do Not Disturb was automatically turned on by an app (<xliff:g id="app_name" example="Android Services">%s</xliff:g>)</string>
 
     <!-- [CHAR LIMIT=120] Zen mode settings footer: Footer informing user DND has custom settings. -->
     <string name="zen_mode_settings_dnd_custom_settings_footer">Do Not Disturb is on for <xliff:g id="rule_names" example="Sleeping and Work">%s</xliff:g> with custom settings.</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings footer: Link following zen_mode_settings_dnd_custom_settings_footer to see the currently applied custom dnd settings. -->
+    <string name="zen_mode_settings_dnd_custom_settings_footer_link"><annotation id="link"> View custom settings</annotation></string>
 
     <!--[CHAR LIMIT=40] Zen Interruption level: Priority.  -->
     <string name="zen_interruption_level_priority">Priority only</string>
@@ -7401,6 +7410,17 @@
     <string name="zen_sound_two_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g> and <xliff:g id="sound_type" example="media">%2$s</xliff:g></string>
     <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
     <string name="zen_sound_three_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g>, <xliff:g id="sound_type" example="alarms">%2$s</xliff:g>, and <xliff:g id="sound_type" example="media">%3$s</xliff:g></string>
+
+    <!-- Do not disturb custom settings dialog title [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_dialog_title">Custom settings</string>
+    <!-- Do not disturb custom settings dialog button label [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_dialog_review_schedule">Review schedule</string>
+    <!-- Do not disturb custom settings dialog button label [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_dialog_ok">Got it</string>
+    <!-- Do not disturb custom settings notifications header [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_notifications_header">Notifications</string>
+    <!-- Do not disturb custom settings duration header [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_duration_header">Duration</string>
 
     <!-- Do not disturb settings, messages, events and reminders title [CHAR LIMIT=100]-->
     <string name="zen_msg_event_reminder_title">Messages, events &amp; reminders</string>
@@ -7943,6 +7963,9 @@
     <!-- [CHAR LIMIT=120] Zen mode settings: Summay text indicating the currenty dnd schedule is using custom behavior -->
     <string name="zen_mode_custom_behavior_summary">Create custom settings for this schedule</string>
 
+    <!-- [CHAR LIMIT=100] Zen mode settings: Category text indicating the schedule this custom behavior will be configured for-->
+    <string name="zen_mode_custom_behavior_category_title">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019</string>
+
     <!-- [CHAR LIMIT=40] General divider text when concatenating multiple items in a text summary -->
     <string name="summary_divider_text">,\u0020</string>
 
@@ -7958,8 +7981,11 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow calls toggle title -->
     <string name="zen_mode_calls_title">Calls</string>
 
-    <!-- [CHAR LIMIT=20] Zen mode settings: Calls screen footer -->
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Calls screen footer -->
     <string name="zen_mode_calls_footer">When Do Not Disturb is on, incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Calls screen footer -->
+    <string name="zen_mode_custom_calls_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Starred contacts preference title -->
     <string name="zen_mode_starred_contacts_title">Starred contacts</string>
@@ -7975,6 +8001,9 @@
 
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
     <string name="zen_mode_messages_footer">When Do Not Disturb is on, incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
+    <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
     <string name="zen_mode_messages_title">Text messages</string>
@@ -8039,11 +8068,11 @@
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
     <string name="zen_mode_bypassing_apps_title">App exceptions</string>
 
-    <!-- [CHAR LIMIT=80] Zen mode settings: Allow apps to bypass DND -->
+    <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
     <plurals name="zen_mode_bypassing_apps_subtext">
         <item quantity="zero">No apps can override Do Not Disturb</item>
-        <item quantity="one">1 app can override Do Not Disturb</item>
-        <item quantity="other"><xliff:g id="number" example="2">%1$d</xliff:g> apps can override Do Not Disturb</item>
+        <item quantity="one">Notifications from 1 app can override Do Not Disturb</item>
+        <item quantity="other">Notifications from <xliff:g id="number" example="2">%1$d</xliff:g> apps can override Do Not Disturb</item>
     </plurals>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->

@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -43,14 +42,12 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 public class MobileNetworkActivity extends SettingsBaseActivity {
 
-    private static final String TAG = "MobileSettingsActivity";
+    private static final String TAG = "MobileNetworkActivity";
     @VisibleForTesting
     static final String MOBILE_SETTINGS_TAG = "mobile_settings:";
     @VisibleForTesting
@@ -94,6 +91,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        // Set the title to the name of the subscription. If we don't have subscription info, the
+        // title will just default to the label for this activity that's already specified in
+        // AndroidManifest.xml.
+        final SubscriptionInfo subscription = getSubscription();
+        if (subscription != null) {
+            setTitle(subscription.getDisplayName());
+        }
         updateSubscriptions(savedInstanceState);
     }
 
@@ -136,25 +140,41 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     }
 
     /**
-     * Get the current subId to display. First check whether intent has {@link
-     * Settings#EXTRA_SUB_ID}. If not, just display first one in list
-     * since it is already sorted by sim slot.
+     * Get the current subscription to display. First check whether intent has {@link
+     * Settings#EXTRA_SUB_ID} and if so find the subscription with that id. If not, just return the
+     * first one in the mSubscriptionInfos list since it is already sorted by sim slot.
      */
     @VisibleForTesting
-    int getSubscriptionId() {
+    SubscriptionInfo getSubscription() {
         final Intent intent = getIntent();
         if (intent != null) {
             final int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
-            if (subId != SUB_ID_NULL && mSubscriptionManager.isActiveSubscriptionId(subId)) {
-                return subId;
+            if (subId != SUB_ID_NULL) {
+                for (SubscriptionInfo subscription :
+                        mSubscriptionManager.getAvailableSubscriptionInfoList()) {
+                    if (subscription.getSubscriptionId() == subId) {
+                        return subscription;
+                    }
+                }
             }
         }
 
         if (CollectionUtils.isEmpty(mSubscriptionInfos)) {
-            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+            return null;
         }
+        return mSubscriptionInfos.get(0);
+    }
 
-        return mSubscriptionInfos.get(0).getSubscriptionId();
+    /**
+     * Get the current subId to display.
+     */
+    @VisibleForTesting
+    int getSubscriptionId() {
+        final SubscriptionInfo subscription = getSubscription();
+        if (subscription != null) {
+            return subscription.getSubscriptionId();
+        }
+        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @VisibleForTesting

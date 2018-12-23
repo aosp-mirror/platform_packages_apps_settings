@@ -17,11 +17,15 @@
 package com.android.settings.notification;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
+
+import androidx.preference.Preference;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -67,11 +71,10 @@ public final class ZenModeMessagesPreferenceControllerTest {
         assertTrue(mController.isAvailable());
     }
 
-// TODO: (b/111475013 - beverlyt) set messages summary
-//    @Test
-//    public void testHasSummary() {
-//        Preference pref = mock(Preference.class);
-//        mController.updateState(pref);
-//        verify(pref).setSummary(any());
-//    }
+    @Test
+    public void testHasSummary() {
+        Preference pref = mock(Preference.class);
+        mController.updateState(pref);
+        verify(pref).setSummary(any());
+    }
 }

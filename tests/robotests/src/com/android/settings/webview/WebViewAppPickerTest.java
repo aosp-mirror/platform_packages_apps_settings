@@ -39,6 +39,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.os.UserManager;
 import android.webkit.UserPackage;
 
@@ -56,6 +57,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
@@ -340,6 +343,11 @@ public class WebViewAppPickerTest {
         packageInfo.versionName = "myVersionName";
         when(mPackageManager.getPackageInfo(eq(DEFAULT_PACKAGE_NAME), anyInt())).thenReturn(
                 packageInfo);
+
+        // Subvert attempts to load an unbadged icon for the application.
+        PackageManager pm = RuntimeEnvironment.application.getPackageManager();
+        ShadowPackageManager spm = Shadows.shadowOf(pm);
+        spm.setUnbadgedApplicationIcon(DEFAULT_PACKAGE_NAME, new ColorDrawable());
 
         RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
         mPicker.bindPreference(mockPreference, DEFAULT_PACKAGE_NAME, webviewAppInfo, null);

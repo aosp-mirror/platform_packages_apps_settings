@@ -30,7 +30,6 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -49,7 +48,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class ZenModeStarredContactsPreferenceControllerTest {
@@ -157,44 +155,11 @@ public class ZenModeStarredContactsPreferenceControllerTest {
     }
 
     @Test
-    public void updateSummary_nullCursorValues() {
-        Cursor testCursorWithNullValues = createMockCursor(3);
-        when(testCursorWithNullValues.getString(0)).thenReturn(null);
-
-        // expected - no null  values
-        List<String> contacts = mMessagesController.getStarredContacts(testCursorWithNullValues);
-        for (String contact : contacts) {
-            assertThat(contact).isNotNull();
-        }
-    }
-
-    @Test
     public void nullPreference_displayPreference() {
         when(mPreferenceScreen.findPreference(mMessagesController.getPreferenceKey()))
                 .thenReturn(null);
 
         // should not throw a null pointer
         mMessagesController.displayPreference(mPreferenceScreen);
-    }
-
-    private Cursor createMockCursor(int size) {
-        Cursor mockCursor = mock(Cursor.class);
-        when(mockCursor.moveToFirst()).thenReturn(true);
-
-        doAnswer(new Answer<Boolean>() {
-            int count = 0;
-
-            @Override
-            public Boolean answer(InvocationOnMock invocation) {
-                if (count < size) {
-                    count++;
-                    return true;
-                }
-                return false;
-            }
-
-        }).when(mockCursor).moveToNext();
-
-        return mockCursor;
     }
 }

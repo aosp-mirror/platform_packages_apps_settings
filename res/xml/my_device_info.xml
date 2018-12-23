@@ -33,7 +33,7 @@
         android:order="1"
         android:title="@string/my_device_info_device_name_preference_title"
         android:summary="@string/summary_placeholder"
-        settings:enableCopying="true" />
+        settings:enableCopying="true"/>
 
     <!-- Account name -->
     <Preference
@@ -52,7 +52,7 @@
         settings:allowDynamicSummaryInSlice="true"
         settings:controller=
             "com.android.settings.deviceinfo.PhoneNumberPreferenceController"
-        settings:enableCopying="true" />
+        settings:enableCopying="true"/>
 
     <Preference
         android:key="emergency_info"
@@ -103,7 +103,7 @@
         android:summary="@string/summary_placeholder"
         settings:allowDynamicSummaryInSlice="true"
         settings:controller=
-            "com.android.settings.deviceinfo.DeviceModelPreferenceController" />
+            "com.android.settings.deviceinfo.DeviceModelPreferenceController"/>
 
     <!-- IMEI -->
     <Preference
@@ -122,7 +122,7 @@
         android:summary="@string/summary_placeholder"
         settings:allowDynamicSummaryInSlice="true"
         settings:controller=
-            "com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController" />
+            "com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController"/>
 
     <!--IP address -->
     <Preference
@@ -132,7 +132,7 @@
         android:summary="@string/summary_placeholder"
         android:selectable="false"
         settings:allowDividerAbove="true"
-        settings:enableCopying="true" />
+        settings:enableCopying="true"/>
 
     <!-- Wi-Fi MAC address -->
     <Preference
@@ -141,7 +141,7 @@
         android:title="@string/status_wifi_mac_address"
         android:summary="@string/summary_placeholder"
         android:selectable="false"
-        settings:enableCopying="true" />
+        settings:enableCopying="true"/>
 
     <!-- Bluetooth address -->
     <Preference
@@ -150,7 +150,7 @@
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"
         android:selectable="false"
-        settings:enableCopying="true" />
+        settings:enableCopying="true"/>
 
     <!-- Device up time -->
     <Preference
@@ -158,7 +158,7 @@
         android:order="37"
         android:title="@string/status_up_time"
         android:summary="@string/summary_placeholder"
-        android:selectable="false" />
+        android:selectable="false"/>
 
     <!-- Manual -->
     <Preference
@@ -173,7 +173,7 @@
         android:key="device_feedback"
         android:order="41"
         android:title="@string/device_feedback"
-        settings:keywords="@string/keywords_device_feedback" />
+        settings:keywords="@string/keywords_device_feedback"/>
 
     <!-- Device FCC equipment id -->
     <Preference
@@ -189,6 +189,7 @@
         android:title="@string/build_number"
         android:summary="@string/summary_placeholder"
         settings:allowDividerAbove="true"
-        settings:enableCopying="true" />
+        settings:enableCopying="true"
+        settings:controller="com.android.settings.deviceinfo.BuildNumberPreferenceController"/>
 
 </PreferenceScreen>

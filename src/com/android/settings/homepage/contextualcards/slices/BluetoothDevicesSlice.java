@@ -46,6 +46,7 @@ import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
+import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -59,19 +60,22 @@ import java.util.stream.Collectors;
 
 public class BluetoothDevicesSlice implements CustomSliceable {
 
-    /**
-     * TODO(b/114807655): Contextual Home Page - Connected Device
-     * Re-design sorting for new rule:
-     * Sorting rule: Audio Streaming > Last connected > Recently connected.
-     */
-    private static final Comparator<CachedBluetoothDevice> COMPARATOR
-            = Comparator.naturalOrder();
+    @VisibleForTesting
+    static final String BLUETOOTH_DEVICE_HASH_CODE = "bluetooth_device_hash_code";
 
     /**
      * Add the "Pair new device" in the end of slice, when the number of Bluetooth devices is less
      * than {@link #DEFAULT_EXPANDED_ROW_COUNT}.
      */
-    private static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
+    @VisibleForTesting
+    static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
+
+    /**
+     * Refer {@link com.android.settings.bluetooth.BluetoothDevicePreference#compareTo} to sort the
+     * Bluetooth devices by {@link CachedBluetoothDevice}.
+     */
+    private static final Comparator<CachedBluetoothDevice> COMPARATOR
+            = Comparator.naturalOrder();
 
     private static final String TAG = "BluetoothDevicesSlice";
 
@@ -109,12 +113,11 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryActionIntent, icon,
                 ListBuilder.ICON_IMAGE, title);
         final ListBuilder listBuilder =
-                new ListBuilder(mContext, CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI,
-                        ListBuilder.INFINITY)
+                new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                         .setAccentColor(Utils.getColorAccentDefaultColor(mContext));
 
         // Get row builders by Bluetooth devices.
-        final List<ListBuilder.RowBuilder> rows = getBluetoothRowBuilder(primarySliceAction);
+        final List<ListBuilder.RowBuilder> rows = getBluetoothRowBuilder();
 
         // Return a header with IsError flag, if no Bluetooth devices.
         if (rows.isEmpty()) {
@@ -125,15 +128,18 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                     .build();
         }
 
-        // According the number of Bluetooth devices to set sub title of header.
+        // Get displayable device count.
+        final int deviceCount = Math.min(rows.size(), DEFAULT_EXPANDED_ROW_COUNT);
+
+        // According to the displayable device count to set sub title of header.
         listBuilder.setHeader(new ListBuilder.HeaderBuilder()
                 .setTitle(title)
-                .setSubtitle(getSubTitle(rows.size()))
+                .setSubtitle(getSubTitle(deviceCount))
                 .setPrimaryAction(primarySliceAction));
 
-        // Add bluetooth device rows.
-        for (ListBuilder.RowBuilder rowBuilder : rows) {
-            listBuilder.addRow(rowBuilder);
+        // According to the displayable device count to add bluetooth device rows.
+        for (int i = 0; i < deviceCount; i++) {
+            listBuilder.addRow(rows.get(i));
         }
 
         // Add "Pair new device" if need.
@@ -154,11 +160,19 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI);
+                .setData(getUri());
     }
 
     @Override
     public void onNotifyChange(Intent intent) {
+        // Activate available media device.
+        final int bluetoothDeviceHashCode = intent.getIntExtra(BLUETOOTH_DEVICE_HASH_CODE, -1);
+        for (CachedBluetoothDevice cachedBluetoothDevice : getConnectedBluetoothDevices()) {
+            if (cachedBluetoothDevice.hashCode() == bluetoothDeviceHashCode) {
+                cachedBluetoothDevice.setActive();
+                return;
+            }
+        }
     }
 
     @Override
@@ -167,10 +181,10 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     }
 
     @VisibleForTesting
-    List<CachedBluetoothDevice> getBluetoothDevices() {
+    List<CachedBluetoothDevice> getConnectedBluetoothDevices() {
         final List<CachedBluetoothDevice> bluetoothDeviceList = new ArrayList<>();
 
-        // If Bluetooth is disable, skip to get the bluetooth devices.
+        // If Bluetooth is disable, skip to get the Bluetooth devices.
         if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
             Log.i(TAG, "Cannot get Bluetooth devices, Bluetooth is disabled.");
             return bluetoothDeviceList;
@@ -188,12 +202,13 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
         /**
          * TODO(b/114807655): Contextual Home Page - Connected Device
-         * Re-design to get all Bluetooth devices and sort them by new rule:
-         * Sorting rule: Audio Streaming > Last connected > Recently connected.
+         * It's under discussion for including available media devices and currently connected
+         * devices from Bluetooth. Will update the devices list or remove TODO later.
          */
-        // Get connected Bluetooth devices and sort them.
-        return cachedDevices.stream().filter(device -> device.isConnected()).sorted(
-                COMPARATOR).collect(Collectors.toList());
+        // Get available media device list and sort them.
+        return cachedDevices.stream()
+                .filter(device -> device.isConnected() && device.isConnectedA2dpDevice())
+                .sorted(COMPARATOR).collect(Collectors.toList());
     }
 
     @VisibleForTesting
@@ -226,25 +241,33 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         }
     }
 
-    private List<ListBuilder.RowBuilder> getBluetoothRowBuilder(SliceAction primarySliceAction) {
+    private List<ListBuilder.RowBuilder> getBluetoothRowBuilder() {
+        // According to Bluetooth devices to create row builders.
         final List<ListBuilder.RowBuilder> bluetoothRows = new ArrayList<>();
-
-        /**
-         * TODO(b/114807655): Contextual Home Page - Connected Device
-         * Re-design to do action "activating" in primary action.
-         */
-        // According Bluetooth device to create row builders.
-        final List<CachedBluetoothDevice> bluetoothDevices = getBluetoothDevices();
+        final List<CachedBluetoothDevice> bluetoothDevices = getConnectedBluetoothDevices();
         for (CachedBluetoothDevice bluetoothDevice : bluetoothDevices) {
             bluetoothRows.add(new ListBuilder.RowBuilder()
                     .setTitleItem(getBluetoothDeviceIcon(bluetoothDevice), ListBuilder.ICON_IMAGE)
                     .setTitle(bluetoothDevice.getName())
                     .setSubtitle(bluetoothDevice.getConnectionSummary())
-                    .setPrimaryAction(primarySliceAction)
+                    .setPrimaryAction(buildBluetoothDeviceAction(bluetoothDevice))
                     .addEndItem(buildBluetoothDetailDeepLinkAction(bluetoothDevice)));
         }
 
         return bluetoothRows;
+    }
+
+    private SliceAction buildBluetoothDeviceAction(CachedBluetoothDevice bluetoothDevice) {
+        // Send broadcast to activate available media device.
+        final Intent intent = new Intent(getUri().toString())
+                .setClass(mContext, SliceBroadcastReceiver.class)
+                .putExtra(BLUETOOTH_DEVICE_HASH_CODE, bluetoothDevice.hashCode());
+
+        return SliceAction.create(
+                PendingIntent.getBroadcast(mContext, bluetoothDevice.hashCode(), intent, 0),
+                getBluetoothDeviceIcon(bluetoothDevice),
+                ListBuilder.ICON_IMAGE,
+                bluetoothDevice.getName());
     }
 
     private SliceAction buildBluetoothDetailDeepLinkAction(CachedBluetoothDevice bluetoothDevice) {

@@ -23,25 +23,15 @@ import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.icu.text.ListFormatter;
 import android.provider.Contacts;
-import android.provider.ContactsContract;
 
-import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
 public class ZenModeStarredContactsPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceClickListener {
-
-    protected static String KEY;
     private Preference mPreference;
     private final int mPriorityCategory;
     private final PackageManager mPackageManager;
@@ -52,8 +42,6 @@ public class ZenModeStarredContactsPreferenceController extends
     public ZenModeStarredContactsPreferenceController(Context context, Lifecycle lifecycle, int
             priorityCategory, String key) {
         super(context, key, lifecycle);
-        KEY = key;
-
         mPriorityCategory = priorityCategory;
         mPackageManager = mContext.getPackageManager();
 
@@ -96,29 +84,7 @@ public class ZenModeStarredContactsPreferenceController extends
 
     @Override
     public CharSequence getSummary() {
-        List<String> starredContacts = getStarredContacts();
-        int numStarredContacts = starredContacts.size();
-
-        List<String> displayContacts = new ArrayList<>();
-
-        if (numStarredContacts == 0) {
-            displayContacts.add(mContext.getString(R.string.zen_mode_from_none));
-        } else {
-            for (int i = 0; i < 2 && i < numStarredContacts; i++) {
-                displayContacts.add(starredContacts.get(i));
-            }
-
-            if (numStarredContacts == 3) {
-                displayContacts.add(starredContacts.get(2));
-            } else if (numStarredContacts > 2) {
-                displayContacts.add(mContext.getResources().getQuantityString(
-                        R.plurals.zen_mode_starred_contacts_summary_additional_contacts,
-                        numStarredContacts - 2, numStarredContacts - 2));
-            }
-        }
-
-        // values in displayContacts must not be null
-        return ListFormatter.getInstance().format(displayContacts);
+        return mBackend.getStarredContactsSummary();
     }
 
     @Override
@@ -129,39 +95,6 @@ public class ZenModeStarredContactsPreferenceController extends
             mContext.startActivity(mFallbackIntent);
         }
         return true;
-    }
-
-    @VisibleForTesting
-    List<String> getStarredContacts(Cursor cursor) {
-        List<String> starredContacts = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            do {
-                String contact = cursor.getString(0);
-                if (contact != null) {
-                    starredContacts.add(contact);
-                }
-            } while (cursor.moveToNext());
-        }
-        return starredContacts;
-    }
-
-    private List<String> getStarredContacts() {
-        Cursor cursor = null;
-        try {
-            cursor = queryData();
-            return getStarredContacts(cursor);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
-
-    private Cursor queryData() {
-        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
-                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
-                ContactsContract.Data.STARRED + "=1", null,
-                ContactsContract.Data.TIMES_CONTACTED);
     }
 
     private boolean isIntentValid() {

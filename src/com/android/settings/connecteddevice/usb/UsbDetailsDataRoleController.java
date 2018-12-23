@@ -16,6 +16,10 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_HOST;
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_NONE;
+
 import android.content.Context;
 import android.hardware.usb.UsbPort;
 
@@ -55,23 +59,23 @@ public class UsbDetailsDataRoleController extends UsbDetailsController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceCategory = (PreferenceCategory) screen.findPreference(getPreferenceKey());
-        mHostPref = makeRadioPreference(UsbBackend.dataRoleToString(UsbPort.DATA_ROLE_HOST),
+        mHostPref = makeRadioPreference(UsbBackend.dataRoleToString(DATA_ROLE_HOST),
                 R.string.usb_control_host);
-        mDevicePref = makeRadioPreference(UsbBackend.dataRoleToString(UsbPort.DATA_ROLE_DEVICE),
+        mDevicePref = makeRadioPreference(UsbBackend.dataRoleToString(DATA_ROLE_DEVICE),
                 R.string.usb_control_device);
     }
 
     @Override
     protected void refresh(boolean connected, long functions, int powerRole, int dataRole) {
-        if (dataRole == UsbPort.DATA_ROLE_DEVICE) {
+        if (dataRole == DATA_ROLE_DEVICE) {
             mDevicePref.setChecked(true);
             mHostPref.setChecked(false);
             mPreferenceCategory.setEnabled(true);
-        } else if (dataRole == UsbPort.DATA_ROLE_HOST) {
+        } else if (dataRole == DATA_ROLE_HOST) {
             mDevicePref.setChecked(false);
             mHostPref.setChecked(true);
             mPreferenceCategory.setEnabled(true);
-        } else if (!connected || dataRole == UsbPort.DATA_ROLE_NONE){
+        } else if (!connected || dataRole == DATA_ROLE_NONE){
             mPreferenceCategory.setEnabled(false);
             if (mNextRolePref == null) {
                 // Disconnected with no operation pending, so clear subtexts
@@ -80,7 +84,7 @@ public class UsbDetailsDataRoleController extends UsbDetailsController
             }
         }
 
-        if (mNextRolePref != null && dataRole != UsbPort.DATA_ROLE_NONE) {
+        if (mNextRolePref != null && dataRole != DATA_ROLE_NONE) {
             if (UsbBackend.dataRoleFromString(mNextRolePref.getKey()) == dataRole) {
                 // Clear switching text if switch succeeded
                 mNextRolePref.setSummary("");

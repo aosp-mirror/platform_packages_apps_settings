@@ -80,12 +80,14 @@ public class ShortcutsUpdateTaskTest {
                 .setComponent(new ComponentName(
                         mContext, Settings.ManageApplicationsActivity.class));
         final ResolveInfo ri1 = mock(ResolveInfo.class);
+        ri1.nonLocalizedLabel = "label1";
+
         final Intent shortcut2 = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
                 .setComponent(new ComponentName(
                         mContext, Settings.SoundSettingsActivity.class));
         final ResolveInfo ri2 = mock(ResolveInfo.class);
-        when(ri1.loadLabel(any(PackageManager.class))).thenReturn("label1");
-        when(ri2.loadLabel(any(PackageManager.class))).thenReturn("label2");
+        ri2.nonLocalizedLabel = "label2";
+
         mPackageManager.addResolveInfoForIntent(shortcut1, ri1);
         mPackageManager.addResolveInfoForIntent(shortcut2, ri2);
 

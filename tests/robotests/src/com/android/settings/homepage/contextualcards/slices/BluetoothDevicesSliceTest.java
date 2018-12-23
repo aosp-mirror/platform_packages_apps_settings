@@ -16,11 +16,15 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static android.app.slice.Slice.HINT_LIST_ITEM;
+import static android.app.slice.SliceItem.FORMAT_SLICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
@@ -33,6 +37,7 @@ import androidx.slice.Slice;
 import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
+import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
@@ -54,6 +59,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothDevicesSliceTest {
 
+    private static final String BLUETOOTH_MOCK_ADDRESS = "00:11:00:11:00:11";
     private static final String BLUETOOTH_MOCK_SUMMARY = "BluetoothSummary";
     private static final String BLUETOOTH_MOCK_TITLE = "BluetoothTitle";
 
@@ -95,8 +101,8 @@ public class BluetoothDevicesSliceTest {
 
     @Test
     public void getSlice_hasBluetoothDevices_shouldHaveBluetoothDevicesTitle() {
-        mockBluetoothDeviceList();
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
+        mockBluetoothDeviceList(1);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
@@ -106,8 +112,8 @@ public class BluetoothDevicesSliceTest {
 
     @Test
     public void getSlice_hasBluetoothDevices_shouldMatchBluetoothMockTitle() {
-        mockBluetoothDeviceList();
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
+        mockBluetoothDeviceList(1);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
@@ -117,8 +123,8 @@ public class BluetoothDevicesSliceTest {
 
     @Test
     public void getSlice_hasBluetoothDevices_shouldHavePairNewDevice() {
-        mockBluetoothDeviceList();
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
+        mockBluetoothDeviceList(1);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
@@ -129,7 +135,7 @@ public class BluetoothDevicesSliceTest {
 
     @Test
     public void getSlice_noBluetoothDevices_shouldHaveNoBluetoothDevicesTitle() {
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
@@ -139,7 +145,7 @@ public class BluetoothDevicesSliceTest {
 
     @Test
     public void getSlice_noBluetoothDevices_shouldNotHavePairNewDevice() {
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getBluetoothDevices();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
@@ -148,10 +154,53 @@ public class BluetoothDevicesSliceTest {
                 mContext.getString(R.string.bluetooth_pairing_pref_title))).isFalse();
     }
 
-    private void mockBluetoothDeviceList() {
+    @Test
+    public void getSlice_exceedDefaultRowCount_shouldOnlyShowDefaultRows() {
+        mockBluetoothDeviceList(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 1);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
+
+        // Get the number of RowBuilders from Slice.
+        final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM, null).size();
+        assertThat(rows).isEqualTo(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT);
+    }
+
+    @Test
+    public void getSlice_exceedDefaultRowCount_shouldContainDefaultCountInSubTitle() {
+        mockBluetoothDeviceList(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 1);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getSubtitle()).isEqualTo(
+                mContext.getResources().getQuantityString(R.plurals.show_bluetooth_devices,
+                        BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT,
+                        BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT));
+    }
+
+    @Test
+    public void onNotifyChange_mediaDevice_shouldActivateDevice() {
+        mockBluetoothDeviceList(1);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+        final Intent intent = new Intent().putExtra(
+                BluetoothDevicesSlice.BLUETOOTH_DEVICE_HASH_CODE,
+                mCachedBluetoothDevice.hashCode());
+
+        mBluetoothDevicesSlice.onNotifyChange(intent);
+
+        verify(mCachedBluetoothDevice).setActive();
+    }
+
+    private void mockBluetoothDeviceList(int deviceCount) {
         doReturn(BLUETOOTH_MOCK_TITLE).when(mCachedBluetoothDevice).getName();
         doReturn(BLUETOOTH_MOCK_SUMMARY).when(mCachedBluetoothDevice).getConnectionSummary();
-        mBluetoothDeviceList.add(mCachedBluetoothDevice);
+        doReturn(BLUETOOTH_MOCK_ADDRESS).when(mCachedBluetoothDevice).getAddress();
+        doReturn(true).when(mCachedBluetoothDevice).isConnectedA2dpDevice();
+        for (int i = 0; i < deviceCount; i++) {
+            mBluetoothDeviceList.add(mCachedBluetoothDevice);
+        }
     }
 
     private boolean hasTitle(SliceMetadata metadata, String title) {

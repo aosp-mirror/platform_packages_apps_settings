@@ -58,25 +58,7 @@ public class WifiDppUtils {
     /** The data corresponding to {@code WifiConfiguration} hiddenSSID */
     public static final String EXTRA_WIFI_HIDDEN_SSID = "hiddenSsid";
 
-    /**
-     * Acceptable QR code string may be a standard W-Fi DPP bootstrapping information or the Wi-Fi
-     * Network config format described in
-     * https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11
-     *
-     * Wi-Fi Network config format example:
-     *
-     *     WIFI:T:WPA;S:mynetwork;P:mypass;;
-     *
-     * parameter Example    Description
-     * T         WPA        Authentication type; can be WEP or WPA, or 'nopass' for no password. Or,
-     *                      omit for no password.
-     * S         mynetwork  Network SSID. Required. Enclose in double quotes if it is an ASCII name,
-     *                      but could be interpreted as hex (i.e. "ABCD")
-     * P         mypass     Password, ignored if T is "nopass" (in which case it may be omitted).
-     *                      Enclose in double quotes if it is an ASCII name, but could be interpreted as
-     *                      hex (i.e. "ABCD")
-     * H         true       Optional. True if the network SSID is hidden.
-     */
+    /** @see WifiQrCode */
     public static final String EXTRA_QR_CODE = "qrCode";
 
     /**

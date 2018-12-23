@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -53,7 +54,7 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
     }
 
     @Override
-    protected void onSkipButtonClick() {
+    protected void onSkipButtonClick(View view) {
         new SkipFingerprintDialog().show(getSupportFragmentManager());
     }
 

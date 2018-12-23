@@ -119,15 +119,10 @@ public class LowStorageSlice implements CustomSliceable {
                 PendingIntent.getActivity(mContext, 0, getIntent(), 0), icon,
                 ListBuilder.ICON_IMAGE, title);
 
-        /**
-         * TODO(b/114808204): Contextual Home Page - "Low Storage"
-         * Slices doesn't support "Icon on the left" in header. Now we intend to start with Icon
-         * right aligned. Will update the icon to left until Slices support it.
-         */
         return new RowBuilder()
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                 .setTitle(title)
                 .setSubtitle(summary)
-                .addEndItem(icon, ListBuilder.ICON_IMAGE)
                 .setPrimaryAction(primarySliceAction);
     }
 }

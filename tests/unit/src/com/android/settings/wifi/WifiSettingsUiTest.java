@@ -196,17 +196,6 @@ public class WifiSettingsUiTest {
     }
 
     @Test
-    public void noSavedNetworks_wifiEnabled_shouldNotShowSavedNetworksButton() {
-        setWifiState(WifiManager.WIFI_STATE_ENABLED);
-        when(mWifiTracker.getNumSavedNetworks()).thenReturn(0);
-
-        launchActivity();
-
-        onView(withText(resourceId(STRING, WIFI_SAVED_ACCESS_POINTS_LABEL))).check(
-                matches(not(isDisplayed())));
-    }
-
-    @Test
     public void noSavedNetworks_wifiDisabled_shouldNotShowSavedNetworksButton() {
         setWifiState(WifiManager.WIFI_STATE_DISABLED);
         when(mWifiTracker.getNumSavedNetworks()).thenReturn(0);
@@ -341,25 +330,5 @@ public class WifiSettingsUiTest {
         onView(withText(resourceId(STRING, WIFI_SHOW_PASSWORD))).check(matches(isDisplayed()));
         onView(withId(resourceId(ID, PASSWORD_LAYOUT))).check(matches(isDisplayed()));
         onView(withId(resourceId(ID, PASSWORD))).check(matches(isDisplayed()));
-    }
-
-    @Ignore("b/73796195")
-    @Test
-    public void onConnectedChanged_shouldNotFetchAPs() {
-        setWifiState(WifiManager.WIFI_STATE_ENABLED);
-        when(mWifiTracker.isConnected()).thenReturn(true);
-
-        launchActivity();
-
-        verify(mWifiTracker, times(1)).getAccessPoints();
-        onView(withText(WIFI_DISPLAY_STATUS_CONNECTED)).check(matches(isDisplayed()));
-
-        // Invoke onConnectedChanged
-        when(mWifiTracker.isConnected()).thenReturn(false);
-        mWifiListener.onConnectedChanged();
-
-        // Verify no additional call to getAccessPoints
-        getInstrumentation().waitForIdleSync();
-        verify(mWifiTracker, times(1)).getAccessPoints();
     }
 }

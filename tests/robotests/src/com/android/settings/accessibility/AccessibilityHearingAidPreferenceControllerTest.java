@@ -33,7 +33,6 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.content.IntentFilter;
 
 import androidx.preference.Preference;
 
@@ -51,13 +50,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +75,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     private Activity mContext;
     private Preference mHearingAidPreference;
     private AccessibilityHearingAidPreferenceController mPreferenceController;
+    private ShadowApplication mShadowApplication;
 
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
@@ -91,6 +91,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mShadowApplication = ShadowApplication.getInstance();
         mContext = spy(Robolectric.setupActivity(Activity.class));
         setupBluetoothEnvironment();
         setupHearingAidEnvironment();
@@ -202,11 +203,9 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     }
 
     private void sendIntent(Intent intent) {
-        ArgumentCaptor<BroadcastReceiver> broadcastReceiverCaptor =
-                ArgumentCaptor.forClass(BroadcastReceiver.class);
-        verify(mContext).registerReceiver(broadcastReceiverCaptor.capture(), any());
-        BroadcastReceiver br = broadcastReceiverCaptor.getValue();
-        br.onReceive(mContext, intent);
+        for (BroadcastReceiver receiver : mShadowApplication.getReceiversForIntent(intent)) {
+            receiver.onReceive(mContext, intent);
+        }
     }
 
     private List<BluetoothDevice> generateHearingAidDeviceList() {

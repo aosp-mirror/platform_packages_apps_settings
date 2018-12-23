@@ -17,10 +17,14 @@
 package com.android.settings.biometrics.face;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -30,6 +34,8 @@ import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 import com.google.android.setupdesign.span.LinkSpan;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
@@ -37,11 +43,41 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceIntro";
 
     private FaceManager mFaceManager;
+    private FaceEnrollAccessibilityToggle mSwitchVision;
+    private FaceEnrollAccessibilityToggle mSwitchDiversity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFaceManager = Utils.getFaceManagerOrNull(this);
+        final LinearLayout accessibilityLayout = findViewById(R.id.accessibility_layout);
+        final Button accessibilityButton = findViewById(R.id.accessibility_button);
+        accessibilityButton.setOnClickListener(view -> {
+            accessibilityButton.setVisibility(View.INVISIBLE);
+            accessibilityLayout.setVisibility(View.VISIBLE);
+        });
+
+        mSwitchVision = findViewById(R.id.toggle_vision);
+        mSwitchDiversity = findViewById(R.id.toggle_diversity);
+
+        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
+        mButtonFooterMixin.setSecondaryButton(
+                new FooterButton(
+                        this,
+                        R.string.security_settings_face_enroll_introduction_cancel,
+                        this::onCancelButtonClick,
+                        FooterButton.ButtonType.SKIP,
+                        R.style.SuwGlifButton_Secondary)
+        );
+
+        mButtonFooterMixin.setPrimaryButton(
+                new FooterButton(
+                        this,
+                        R.string.wizard_next,
+                        this::onNextButtonClick,
+                        FooterButton.ButtonType.NEXT,
+                        R.style.SuwGlifButton_Primary)
+        );
     }
 
     @Override
@@ -71,13 +107,19 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected Button getCancelButton() {
-        return findViewById(R.id.face_cancel_button);
+    protected FooterButton getCancelButton() {
+        if (mButtonFooterMixin != null) {
+            return mButtonFooterMixin.getSecondaryButton();
+        }
+        return null;
     }
 
     @Override
-    protected Button getNextButton() {
-        return findViewById(R.id.face_next_button);
+    protected FooterButton getNextButton() {
+        if (mButtonFooterMixin != null) {
+            return mButtonFooterMixin.getPrimaryButton();
+        }
+        return null;
     }
 
     @Override
@@ -116,7 +158,18 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected Intent getEnrollingIntent() {
-        return new Intent(this, FaceEnrollEnrolling.class);
+        final String flattenedString = getString(R.string.config_face_enroll);
+        final Intent intent = new Intent();
+        if (!TextUtils.isEmpty(flattenedString)) {
+            ComponentName componentName = ComponentName.unflattenFromString(flattenedString);
+            intent.setComponent(componentName);
+
+        } else {
+            intent.setClass(this, FaceEnrollEnrolling.class);
+        }
+        intent.putExtra(EXTRA_KEY_REQUIRE_VISION, mSwitchVision.isChecked());
+        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, mSwitchDiversity.isChecked());
+        return intent;
     }
 
     @Override

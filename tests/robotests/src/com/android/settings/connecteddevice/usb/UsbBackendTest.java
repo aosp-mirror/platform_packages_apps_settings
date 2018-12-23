@@ -16,6 +16,11 @@
 
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_HOST;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
@@ -39,6 +44,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+
+import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class UsbBackendTest {
@@ -64,9 +71,9 @@ public class UsbBackendTest {
         when((Object) mContext.getSystemService(UsbManager.class)).thenReturn(mUsbManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
-        when(mUsbManager.getPorts()).thenReturn(new UsbPort[] {mUsbPort});
+        when(mUsbManager.getPorts()).thenReturn(Collections.singletonList(mUsbPort));
         when(mUsbPortStatus.isConnected()).thenReturn(true);
-        when(mUsbManager.getPortStatus(mUsbPort)).thenReturn(mUsbPortStatus);
+        when(mUsbPort.getStatus()).thenReturn(mUsbPortStatus);
     }
 
     @Test
@@ -74,22 +81,22 @@ public class UsbBackendTest {
         final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
 
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE))
+                .isRoleCombinationSupported(POWER_ROLE_SINK, DATA_ROLE_DEVICE))
                 .thenReturn(true);
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_HOST))
+                .isRoleCombinationSupported(POWER_ROLE_SINK, DATA_ROLE_HOST))
                 .thenReturn(true);
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_DEVICE))
+                .isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_DEVICE))
                 .thenReturn(true);
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST))
+                .isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_HOST))
                 .thenReturn(true);
-        when(mUsbPortStatus.getCurrentPowerRole()).thenReturn(UsbPort.POWER_ROLE_SINK);
+        when(mUsbPortStatus.getCurrentPowerRole()).thenReturn(POWER_ROLE_SINK);
 
-        usbBackend.setDataRole(UsbPort.DATA_ROLE_HOST);
+        usbBackend.setDataRole(DATA_ROLE_HOST);
 
-        verify(mUsbManager).setPortRoles(mUsbPort, UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_HOST);
+        verify(mUsbPort).setRoles(POWER_ROLE_SINK, DATA_ROLE_HOST);
     }
 
     @Test
@@ -97,17 +104,16 @@ public class UsbBackendTest {
         final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
 
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE))
+                .isRoleCombinationSupported(POWER_ROLE_SINK, DATA_ROLE_DEVICE))
                 .thenReturn(true);
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST))
+                .isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_HOST))
                 .thenReturn(true);
-        when(mUsbPortStatus.getCurrentPowerRole()).thenReturn(UsbPort.POWER_ROLE_SINK);
+        when(mUsbPortStatus.getCurrentPowerRole()).thenReturn(POWER_ROLE_SINK);
 
-        usbBackend.setDataRole(UsbPort.DATA_ROLE_HOST);
+        usbBackend.setDataRole(DATA_ROLE_HOST);
 
-        verify(mUsbManager)
-                .setPortRoles(mUsbPort, UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST);
+        verify(mUsbPort).setRoles(POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
 
     @Test
@@ -115,23 +121,22 @@ public class UsbBackendTest {
         final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
 
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE))
+                .isRoleCombinationSupported(POWER_ROLE_SINK, DATA_ROLE_DEVICE))
                 .thenReturn(true);
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_HOST))
+                .isRoleCombinationSupported(POWER_ROLE_SINK, DATA_ROLE_HOST))
                 .thenReturn(true);
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_DEVICE))
+                .isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_DEVICE))
                 .thenReturn(true);
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST))
+                .isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_HOST))
                 .thenReturn(true);
-        when(mUsbPortStatus.getCurrentDataRole()).thenReturn(UsbPort.DATA_ROLE_DEVICE);
+        when(mUsbPortStatus.getCurrentDataRole()).thenReturn(DATA_ROLE_DEVICE);
 
-        usbBackend.setPowerRole(UsbPort.POWER_ROLE_SOURCE);
+        usbBackend.setPowerRole(POWER_ROLE_SOURCE);
 
-        verify(mUsbManager)
-                .setPortRoles(mUsbPort, UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_DEVICE);
+        verify(mUsbPort).setRoles(POWER_ROLE_SOURCE, DATA_ROLE_DEVICE);
     }
 
     @Test
@@ -139,17 +144,16 @@ public class UsbBackendTest {
         final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
 
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE))
+                .isRoleCombinationSupported(POWER_ROLE_SINK, DATA_ROLE_DEVICE))
                 .thenReturn(true);
         when(mUsbPortStatus
-                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST))
+                .isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_HOST))
                 .thenReturn(true);
-        when(mUsbPortStatus.getCurrentDataRole()).thenReturn(UsbPort.DATA_ROLE_DEVICE);
+        when(mUsbPortStatus.getCurrentDataRole()).thenReturn(DATA_ROLE_DEVICE);
 
-        usbBackend.setPowerRole(UsbPort.POWER_ROLE_SOURCE);
+        usbBackend.setPowerRole(POWER_ROLE_SOURCE);
 
-        verify(mUsbManager)
-                .setPortRoles(mUsbPort, UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST);
+        verify(mUsbPort).setRoles(POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
 
     @Test

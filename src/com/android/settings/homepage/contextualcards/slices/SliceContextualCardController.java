@@ -70,8 +70,8 @@ public class SliceContextualCardController implements ContextualCardController {
         });
         showFeedbackDialog(card);
         final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider();
-        contextualCardFeatureProvider.logContextualCardDismiss(mContext, card);
+                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
+        contextualCardFeatureProvider.logContextualCardDismiss(card);
     }
 
     @Override

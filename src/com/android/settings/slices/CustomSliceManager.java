@@ -32,7 +32,8 @@ import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.location.LocationSlice;
-import com.android.settings.wifi.WifiSlice;
+import com.android.settings.wifi.slice.ContextualWifiSlice;
+import com.android.settings.wifi.slice.WifiSlice;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -107,6 +108,7 @@ public class CustomSliceManager {
         mUriMap.put(CustomSliceRegistry.BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
         mUriMap.put(CustomSliceRegistry.BATTERY_INFO_SLICE_URI, BatterySlice.class);
         mUriMap.put(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
+        mUriMap.put(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
         mUriMap.put(CustomSliceRegistry.DATA_USAGE_SLICE_URI, DataUsageSlice.class);
         mUriMap.put(CustomSliceRegistry.DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
         mUriMap.put(CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI, EmergencyInfoSlice.class);

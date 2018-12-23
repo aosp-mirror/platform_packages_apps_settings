@@ -16,7 +16,11 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -29,34 +33,30 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.slices.Copyable;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
-public class BuildNumberPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin, LifecycleObserver, OnResume {
+public class BuildNumberPreferenceController extends BasePreferenceController implements Copyable,
+        LifecycleObserver, OnStart {
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
     static final int REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF = 100;
 
-    private static final String KEY_BUILD_NUMBER = "build_number";
-
-    private final Activity mActivity;
-    private final InstrumentedPreferenceFragment mFragment;
+    private Activity mActivity;
+    private InstrumentedPreferenceFragment mFragment;
     private final UserManager mUm;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -66,44 +66,28 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
     private int mDevHitCountdown;
     private boolean mProcessingLastDevHit;
 
-    public BuildNumberPreferenceController(Context context, Activity activity,
-            InstrumentedPreferenceFragment fragment, Lifecycle lifecycle) {
-        super(context);
-        mActivity = activity;
-        mFragment = fragment;
+    public BuildNumberPreferenceController(Context context, String key) {
+        super(context, key);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
+    }
+
+    public void setHost(InstrumentedPreferenceFragment fragment) {
+        mFragment = fragment;
+        mActivity = fragment.getActivity();
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        try {
+            return BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY);
+        } catch (Exception e) {
+            return mContext.getText(R.string.device_info_default);
         }
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference preference = screen.findPreference(KEY_BUILD_NUMBER);
-        if (preference != null) {
-            try {
-                preference.setSummary(BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
-                preference.setEnabled(true);
-            } catch (Exception e) {
-                preference.setSummary(R.string.device_info_default);
-            }
-        }
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_BUILD_NUMBER;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public void onResume() {
+    public void onStart() {
         mDebuggingFeaturesDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
         mDebuggingFeaturesDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
@@ -114,8 +98,30 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
     }
 
     @Override
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public void copy() {
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
+        final ClipData clip = ClipData.newPlainText("text", getSummary());
+        clipboard.setPrimaryClip(clip);
+
+        final String toast = mContext.getString(R.string.copyable_slice_toast,
+                mContext.getText(R.string.build_number));
+        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_BUILD_NUMBER)) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return false;
         }
         if (Utils.isMonkeyRunning()) {

@@ -118,13 +118,13 @@ public class CreateShortcutPreferenceControllerTest {
         ri2.activityInfo.applicationInfo = new ApplicationInfo();
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-        mPackageManager.addResolveInfoForIntent(
+        mPackageManager.setResolveInfosForIntent(
                 new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(1);
-        assertThat(info.get(0)).isEqualTo(ri2);
+        assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
     }
 
     @Test
@@ -143,13 +143,13 @@ public class CreateShortcutPreferenceControllerTest {
         ri2.activityInfo.applicationInfo = new ApplicationInfo();
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-        mPackageManager.addResolveInfoForIntent(
+        mPackageManager.setResolveInfosForIntent(
                 new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(2);
-        assertThat(info.get(0)).isEqualTo(ri2);
-        assertThat(info.get(1)).isEqualTo(ri1);
+        assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
+        assertThat(info.get(1).activityInfo).isEqualTo(ri1.activityInfo);
     }
 }
