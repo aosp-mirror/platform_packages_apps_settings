@@ -125,6 +125,18 @@ public class EnabledNetworkModePreferenceControllerTest {
     }
 
     @Test
+    public void updateState_updateByNetworkMode_useDefaultValue() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
+                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getValue()).isEqualTo(
+                String.valueOf(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA));
+    }
+
+    @Test
     public void onPreferenceChange_updateSuccess() {
         doReturn(true).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
                 TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);

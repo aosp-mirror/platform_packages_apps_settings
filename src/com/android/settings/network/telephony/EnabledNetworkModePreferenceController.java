@@ -126,7 +126,6 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
 
     private void updatePreferenceEntries(ListPreference preference) {
         final int phoneType = mTelephonyManager.getPhoneType();
-        final Resources resources = mContext.getResources();
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (phoneType == PhoneConstants.PHONE_TYPE_CDMA) {
             final int lteForced = android.provider.Settings.Global.getInt(
@@ -216,6 +215,7 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
     }
 
     private void updatePreferenceValueAndSummary(ListPreference preference, int networkMode) {
+        preference.setValue(Integer.toString(networkMode));
         switch (networkMode) {
             case TelephonyManager.NETWORK_MODE_TDSCDMA_WCDMA:
             case TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA:
