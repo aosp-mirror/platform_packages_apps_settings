@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -67,8 +66,14 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     /** Message sent to us to stop scanning wifi and pop up timeout dialog. */
     private static final int MESSAGE_STOP_SCAN_WIFI_LIST = 0;
 
+    /** Message sent to us to finish activity. */
+    private static final int MESSAGE_FINISH_ACTIVITY = 1;
+
     /** Spec defines there should be 5 wifi ap on the list at most. */
     private static final int MAX_NUMBER_LIST_ITEM = 5;
+
+    /** Holding time to let user be aware that selected wifi ap is connected */
+    private static final int DELAY_TIME_USER_AWARE_CONNECTED_MS = 1 * 1000;
 
     /** Delayed time to stop scanning wifi. */
     private static final int DELAY_TIME_STOP_SCAN_MS = 30 * 1000;
@@ -155,7 +160,9 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
         // Finishes the activity when user clicks back key or outside of the dialog.
-        getActivity().finish();
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     }
 
     @Override
@@ -177,6 +184,8 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        mHandler.removeMessages(MESSAGE_FINISH_ACTIVITY);
         if (mFilterWifiTracker != null) {
             mFilterWifiTracker.onDestroy();
             mFilterWifiTracker = null;
@@ -207,7 +216,10 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
             switch (msg.what) {
                 case MESSAGE_STOP_SCAN_WIFI_LIST:
                     removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
-                    stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE.TIME_OUT);
+                    stopScanningAndMaybePopErrorDialog(ERROR_DIALOG_TYPE.TIME_OUT);
+                    break;
+                case MESSAGE_FINISH_ACTIVITY:
+                    stopScanningAndMaybePopErrorDialog(/* ERROR_DIALOG_TYPE */ null);
                     break;
                 default:
                     // Do nothing.
@@ -216,18 +228,29 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         }
     };
 
-    protected void stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE type) {
+    protected void stopScanningAndMaybePopErrorDialog(ERROR_DIALOG_TYPE type) {
         // Dismisses current dialog.
-        dismiss();
+        final Dialog dialog =  getDialog();
+        if (dialog != null && dialog.isShowing()) {
+            dismiss();
+        }
 
-        // Throws new timeout dialog.
-        final NetworkRequestErrorDialogFragment fragment = NetworkRequestErrorDialogFragment
-                .newInstance();
-        final Bundle bundle = new Bundle();
-        bundle.putSerializable(NetworkRequestErrorDialogFragment.DIALOG_TYPE, type);
-        fragment.setArguments(bundle);
-        fragment.show(getActivity().getSupportFragmentManager(),
-                NetworkRequestDialogFragment.class.getSimpleName());
+        if (type  == null) {
+            // If no error, finishes activity.
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+        } else {
+            // Throws error dialog.
+            final NetworkRequestErrorDialogFragment fragment = NetworkRequestErrorDialogFragment
+                    .newInstance();
+            final Bundle bundle = new Bundle();
+            bundle.putSerializable(NetworkRequestErrorDialogFragment.DIALOG_TYPE, type);
+            fragment.setArguments(bundle);
+            fragment.show(getActivity().getSupportFragmentManager(),
+                    NetworkRequestDialogFragment.class.getSimpleName());
+        }
+
     }
 
     @Override
@@ -284,7 +307,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void onAbort() {
-        stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE.ABORT);
+        stopScanningAndMaybePopErrorDialog(ERROR_DIALOG_TYPE.ABORT);
     }
 
     @Override
@@ -295,10 +318,13 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void onMatch(List<ScanResult> scanResults) {
-        mHandler.removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
-        renewAccessPointList(scanResults);
+        // Shouldn't need to renew cached list, since input result is empty.
+        if (scanResults != null && scanResults.size() > 0) {
+            mHandler.removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
+            renewAccessPointList(scanResults);
 
-        notifyAdapterRefresh();
+            notifyAdapterRefresh();
+        }
     }
 
     // Updates internal AccessPoint list from WifiTracker. scanResults are used to update key list
@@ -329,17 +355,24 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void onUserSelectionConnectSuccess(WifiConfiguration wificonfiguration) {
-        // Dismisses current dialog and finishes Activity, since connection is success.
-        dismiss();
-        final Activity activity = getActivity();
-        if (activity != null) {
-            activity.finish();
+        // Removes the progress icon.
+        final Dialog dialog = getDialog();
+        if (dialog != null) {
+            final View view = dialog.findViewById(R.id.network_request_title_progress);
+            if (view != null) {
+                view.setVisibility(View.GONE);
+            }
         }
+
+        // Posts delay to finish self since connection is success.
+        mHandler.removeMessages(MESSAGE_STOP_SCAN_WIFI_LIST);
+        mHandler.sendEmptyMessageDelayed(MESSAGE_FINISH_ACTIVITY,
+                DELAY_TIME_USER_AWARE_CONNECTED_MS);
     }
 
     @Override
     public void onUserSelectionConnectFailure(WifiConfiguration wificonfiguration) {
-        stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE.ABORT);
+        stopScanningAndMaybePopErrorDialog(ERROR_DIALOG_TYPE.ABORT);
     }
 
     private final class FilterWifiTracker {
