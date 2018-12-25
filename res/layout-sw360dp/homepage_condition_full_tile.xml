@@ -25,50 +25,49 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/homepage_condition_half_card_padding_top"
-        android:orientation="vertical">
+        android:paddingStart="@dimen/homepage_card_padding_start"
+        android:paddingEnd="@dimen/homepage_card_padding_end"
+        android:paddingTop="@dimen/homepage_condition_full_card_padding_top"
+        android:paddingBottom="@dimen/homepage_condition_full_card_padding_bottom"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@android:id/icon"
+            android:layout_width="@dimen/homepage_card_icon_size"
+            android:layout_height="@dimen/homepage_card_icon_size"
+            android:tint="?android:attr/colorAccent"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/homepage_card_padding_start"
-            android:paddingEnd="@dimen/homepage_card_padding_end"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/homepage_condition_full_card_padding_start"
+            android:paddingEnd="@dimen/homepage_condition_full_card_padding_end"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@android:id/icon"
-                android:layout_width="@dimen/homepage_card_icon_size"
-                android:layout_height="@dimen/homepage_card_icon_size"
-                android:tint="?android:attr/colorAccent"/>
 
             <TextView
                 android:id="@android:id/title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:layout_marginTop="@dimen/homepage_condition_half_card_title_margin_top"
                 android:layout_marginBottom="@dimen/homepage_condition_card_title_margin_bottom"
                 android:textAppearance="@style/TextAppearance.ConditionCardTitle"/>
 
             <TextView
                 android:id="@android:id/summary"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:layout_marginBottom="@dimen/homepage_condition_half_card_summary_margin_bottom"
                 android:textAppearance="@style/TextAppearance.ConditionCardSummary"/>
 
-            <include layout="@layout/horizontal_divider"/>
-
         </LinearLayout>
+
+        <include layout="@layout/vertical_divider"/>
+
         <Button
             android:id="@+id/first_action"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            style="@style/ConditionHalfCardBorderlessButton"/>
+            style="@style/ConditionFullCardBorderlessButton"/>
 
     </LinearLayout>
 
