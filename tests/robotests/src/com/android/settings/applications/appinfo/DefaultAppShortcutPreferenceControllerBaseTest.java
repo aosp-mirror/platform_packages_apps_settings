@@ -18,13 +18,13 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserManager;
 
 import androidx.preference.Preference;
@@ -40,12 +40,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUserManager.class)
 public class DefaultAppShortcutPreferenceControllerBaseTest {
 
-    @Mock
-    private UserManager mUserManager;
+    private ShadowUserManager mShadowUserManager;
     @Mock
     private AppInfoDashboardFragment mFragment;
     @Mock
@@ -57,8 +60,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy(Robolectric.setupActivity(Activity.class));
-        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        mActivity = Robolectric.setupActivity(Activity.class);
+        mShadowUserManager = shadowOf(mActivity.getSystemService(UserManager.class));
         mController = new TestPreferenceController(mActivity, mFragment);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
@@ -66,28 +69,28 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
 
     @Test
     public void getAvailabilityStatus_managedProfile_shouldReturnDisabled() {
-        when(mUserManager.isManagedProfile()).thenReturn(true);
+        mShadowUserManager.setManagedProfile(true);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(DefaultAppShortcutPreferenceControllerBase.DISABLED_FOR_USER);
+                .isEqualTo(DefaultAppShortcutPreferenceControllerBase.DISABLED_FOR_USER);
     }
 
     @Test
     public void getAvailabilityStatus_hasAppCapability_shouldReturnAvailable() {
         mController.capable = true;
-        when(mUserManager.isManagedProfile()).thenReturn(false);
+        mShadowUserManager.setManagedProfile(false);
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(DefaultAppShortcutPreferenceControllerBase.AVAILABLE);
+                .isEqualTo(DefaultAppShortcutPreferenceControllerBase.AVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_noAppCapability_shouldReturnDisabled() {
         mController.capable = false;
-        when(mUserManager.isManagedProfile()).thenReturn(false);
+        mShadowUserManager.setManagedProfile(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-            DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
+                DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -111,13 +114,17 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
 
     @Test
     public void handlePreferenceTreeClick_shouldStartDefaultAppSettings() {
+        final ShadowActivity shadowActivity = shadowOf(mActivity);
+
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mActivity).startActivity(argThat(intent -> intent != null
-                && intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT).equals(
-                DefaultAppSettings.class.getName())
-                && intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY).equals("TestKey")));
+        final Intent nextIntent = shadowActivity.getNextStartedActivity();
+        assertThat(nextIntent).isNotNull();
+        assertThat(nextIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+                DefaultAppSettings.class.getName());
+        assertThat(
+                nextIntent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS).getString(
+                        SettingsActivity.EXTRA_FRAGMENT_ARG_KEY)).isEqualTo("TestKey");
     }
 
     private class TestPreferenceController extends DefaultAppShortcutPreferenceControllerBase {
