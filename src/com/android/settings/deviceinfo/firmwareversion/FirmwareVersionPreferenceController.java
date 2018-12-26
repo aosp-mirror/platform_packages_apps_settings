@@ -23,9 +23,12 @@ import android.text.TextUtils;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.slices.Copyable;
 
-public class FirmwareVersionPreferenceController extends BasePreferenceController {
+public class FirmwareVersionPreferenceController extends BasePreferenceController implements
+        Copyable {
 
     private Fragment mFragment;
 
@@ -60,5 +63,11 @@ public class FirmwareVersionPreferenceController extends BasePreferenceControlle
     @Override
     public boolean isSliceable() {
         return true;
+    }
+
+    @Override
+    public void copy() {
+        Copyable.setCopyContent(mContext, getSummary(),
+                mContext.getText(R.string.firmware_version));
     }
 }

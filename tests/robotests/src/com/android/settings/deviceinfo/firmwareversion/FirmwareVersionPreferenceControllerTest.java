@@ -16,8 +16,11 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
 
@@ -106,6 +109,17 @@ public class FirmwareVersionPreferenceControllerTest {
     @Test
     public void isSliceable_shouldBeTrue() {
         assertThat(mController.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void copy_shouldCopyVersionNumberToClipboard() {
+        mController.copy();
+
+        final Context context = RuntimeEnvironment.application;
+        final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(
+                CLIPBOARD_SERVICE);
+        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
+        assertThat(data.toString()).isEqualTo(Build.VERSION.RELEASE);
     }
 
     @Implements(FirmwareVersionDialogFragment.class)
