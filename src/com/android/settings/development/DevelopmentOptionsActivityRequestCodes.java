@@ -26,5 +26,5 @@ public interface DevelopmentOptionsActivityRequestCodes {
 
     int REQUEST_MOCK_LOCATION_APP = 2;
 
-    int REQUEST_CODE_UPDATED_GFX_DRIVER_DEV_OPT_IN_APP = 4;
+    int REQUEST_CODE_GUP_DEV_OPT_IN_APPS = 6;
 }

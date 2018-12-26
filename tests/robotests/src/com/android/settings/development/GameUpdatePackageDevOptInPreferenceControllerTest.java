@@ -16,7 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_UPDATED_GFX_DRIVER_DEV_OPT_IN_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_GUP_DEV_OPT_IN_APPS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -34,18 +34,18 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-public class UpdatedGfxDriverDevOptInPreferenceControllerTest {
+@RunWith(RobolectricTestRunner.class)
+public class GameUpdatePackageDevOptInPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -54,13 +54,13 @@ public class UpdatedGfxDriverDevOptInPreferenceControllerTest {
 
     private Context mContext;
     private Preference mPreference;
-    private UpdatedGfxDriverDevOptInPreferenceController mController;
+    private GameUpdatePackageDevOptInPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new UpdatedGfxDriverDevOptInPreferenceController(mContext, mFragment));
+        mController = spy(new GameUpdatePackageDevOptInPreferenceController(mContext, mFragment));
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
 
@@ -77,18 +77,19 @@ public class UpdatedGfxDriverDevOptInPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         verify(mFragment).startActivityForResult(activityStartIntent,
-                REQUEST_CODE_UPDATED_GFX_DRIVER_DEV_OPT_IN_APP);
+                REQUEST_CODE_GUP_DEV_OPT_IN_APPS);
     }
 
     @Test
-    public void updateState_foobarAppSelected_shouldUpdateSummaryWithUpdatedDriverDevOptInAppLabel() {
+    public void updateState_foobarAppSelected_shouldUpdateSummaryWithGUPDevOptInAppLabel() {
         final String selectedApp = "foobar";
         final ContentResolver contentResolver = mContext.getContentResolver();
         Settings.Global.putString(contentResolver,
-                Settings.Global.UPDATED_GFX_DRIVER_DEV_OPT_IN_APP, selectedApp);
+                Settings.Global.GUP_DEV_OPT_IN_APPS, selectedApp);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo(mContext.getString(R.string.updated_gfx_driver_dev_opt_in_app_set, selectedApp));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.gup_dev_opt_in_app_set, selectedApp));
     }
 
     @Test
@@ -96,23 +97,25 @@ public class UpdatedGfxDriverDevOptInPreferenceControllerTest {
         final String selectedApp = null;
         final ContentResolver contentResolver = mContext.getContentResolver();
         Settings.Global.putString(contentResolver,
-                Settings.Global.UPDATED_GFX_DRIVER_DEV_OPT_IN_APP, selectedApp);
+                Settings.Global.GUP_DEV_OPT_IN_APPS, selectedApp);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo(mContext.getString(R.string.updated_gfx_driver_dev_opt_in_app_not_set));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.gup_dev_opt_in_app_not_set));
     }
 
     @Test
-    public void onActivityResult_foobarAppSelected_shouldUpdateSummaryWithUpdatedDriverDevOptInLabel() {
+    public void onActivityResult_foobarAppSelected_shouldUpdateSummaryWithGUPDevOptInLabel() {
         Intent activityResultIntent = new Intent(mContext, AppPicker.class);
         final String appLabel = "foobar";
         activityResultIntent.setAction(appLabel);
         final boolean result = mController
-            .onActivityResult(REQUEST_CODE_UPDATED_GFX_DRIVER_DEV_OPT_IN_APP, Activity.RESULT_OK,
+            .onActivityResult(REQUEST_CODE_GUP_DEV_OPT_IN_APPS, Activity.RESULT_OK,
                     activityResultIntent);
 
         assertThat(result).isTrue();
-        assertThat(mPreference.getSummary()).isEqualTo(mContext.getString(R.string.updated_gfx_driver_dev_opt_in_app_set, appLabel));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.gup_dev_opt_in_app_set, appLabel));
     }
 
     @Test
@@ -126,6 +129,7 @@ public class UpdatedGfxDriverDevOptInPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchDisabled();
 
         assertThat(mPreference.isEnabled()).isFalse();
-        assertThat(mPreference.getSummary()).isEqualTo(mContext.getString(R.string.updated_gfx_driver_dev_opt_in_app_not_set));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.gup_dev_opt_in_app_not_set));
     }
 }
