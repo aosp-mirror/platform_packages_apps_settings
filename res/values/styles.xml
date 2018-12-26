@@ -174,23 +174,6 @@
         <item name="android:background">#ff000000</item>
     </style>
 
-    <style name="SecurityPreferenceButtonContainer"
-           parent="@android:style/Widget.Material.Light.SegmentedButton">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:weightSum">2</item>
-        <item name="android:dividerPadding">8dip</item>
-    </style>
-
-    <style name="SecurityPreferenceButton"
-           parent="@android:style/Widget.Material.Light.Button.Borderless">
-        <item name="android:layout_width">0dip</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:singleLine">true</item>
-    </style>
-
     <style name="SetupWizardButton.Negative" parent="@style/SuwGlifButton.Secondary">
         <!-- Negative margin to offset for padding of the button itself. We want the label to be
              aligned with the text above it -->
@@ -280,17 +263,7 @@
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="TextAppearance.FingerprintErrorText"
-           parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">?android:attr/colorError</item>
-    </style>
-
-    <style name="TextAppearance.FaceErrorText"
-           parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">?android:attr/colorError</item>
-    </style>
-
-    <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
+    <style name="TextAppearance.ErrorText"
            parent="android:TextAppearance.Material.Body1">
         <item name="android:textColor">?android:attr/colorError</item>
     </style>
