@@ -39,12 +39,12 @@ public class FaceEnrollFinish extends BiometricEnrollBase {
 
         mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
         mButtonFooterMixin.setPrimaryButton(
-                new FooterButton(
-                        this,
-                        R.string.security_settings_face_enroll_done,
-                        this::onNextButtonClick,
-                        FooterButton.ButtonType.NEXT,
-                        R.style.SuwGlifButton_Primary)
+                new FooterButton.Builder(this)
+                        .setText(R.string.security_settings_face_enroll_done)
+                        .setListener(this::onNextButtonClick)
+                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .build()
         );
     }
 

@@ -44,21 +44,20 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
         mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
         mButtonFooterMixin.setSecondaryButton(
-                new FooterButton(
-                        this,
-                        R.string.fingerprint_enroll_button_add,
-                        null,
-                        FooterButton.ButtonType.SKIP,
-                        R.style.SuwGlifButton_Secondary)
+                new FooterButton.Builder(this)
+                        .setText(R.string.fingerprint_enroll_button_add)
+                        .setButtonType(FooterButton.ButtonType.SKIP)
+                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .build()
         );
 
         mButtonFooterMixin.setPrimaryButton(
-                new FooterButton(
-                        this,
-                        R.string.security_settings_fingerprint_enroll_done,
-                        this::onNextButtonClick,
-                        FooterButton.ButtonType.NEXT,
-                        R.style.SuwGlifButton_Primary)
+                new FooterButton.Builder(this)
+                        .setText(R.string.security_settings_fingerprint_enroll_done)
+                        .setListener(this::onNextButtonClick)
+                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .build()
         );
     }
 

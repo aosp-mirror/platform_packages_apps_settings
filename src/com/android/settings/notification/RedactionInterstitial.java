@@ -135,12 +135,12 @@ public class RedactionInterstitial extends SettingsActivity {
             final GlifLayout layout = view.findViewById(R.id.setup_wizard_layout);
             final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
             buttonFooterMixin.setPrimaryButton(
-                    new FooterButton(
-                            getContext(),
-                            R.string.app_notifications_dialog_done,
-                            this::onDoneButtonClicked,
-                            FooterButton.ButtonType.NEXT,
-                            R.style.SuwGlifButton_Primary)
+                    new FooterButton.Builder(getContext())
+                            .setText(R.string.app_notifications_dialog_done)
+                            .setListener(this::onDoneButtonClicked)
+                            .setButtonType(FooterButton.ButtonType.NEXT)
+                            .setTheme(R.style.SuwGlifButton_Primary)
+                            .build()
             );
         }
 

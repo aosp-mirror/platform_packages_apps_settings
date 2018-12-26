@@ -419,12 +419,12 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         final TemplateLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
         final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
         buttonFooterMixin.setPrimaryButton(
-                new FooterButton(
-                        getActivity(),
-                        R.string.master_clear_button_text,
-                        mInitiateListener,
-                        ButtonType.OTHER,
-                        R.style.SuwGlifButton_Primary)
+                new FooterButton.Builder(getActivity())
+                        .setText(R.string.master_clear_button_text)
+                        .setListener(mInitiateListener)
+                        .setButtonType(ButtonType.OTHER)
+                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .build()
         );
         mInitiateButton = buttonFooterMixin.getPrimaryButton();
     }
