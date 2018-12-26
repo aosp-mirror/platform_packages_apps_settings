@@ -32,7 +32,6 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -46,8 +45,11 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupdesign.GlifLayout;
 
 public class RedactionInterstitial extends SettingsActivity {
 
@@ -91,7 +93,7 @@ public class RedactionInterstitial extends SettingsActivity {
     }
 
     public static class RedactionInterstitialFragment extends SettingsPreferenceFragment
-            implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+            implements RadioGroup.OnCheckedChangeListener {
 
         private RadioGroup mRadioGroup;
         private RestrictedRadioButton mShowAllButton;
@@ -130,19 +132,24 @@ public class RedactionInterstitial extends SettingsActivity {
                 ((RadioButton) view.findViewById(R.id.hide_all)).setVisibility(View.GONE);
             }
 
-            final Button button = (Button) view.findViewById(R.id.redaction_done_button);
-            button.setOnClickListener(this);
+            final GlifLayout layout = view.findViewById(R.id.setup_wizard_layout);
+            final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
+            buttonFooterMixin.setPrimaryButton(
+                    new FooterButton(
+                            getContext(),
+                            R.string.app_notifications_dialog_done,
+                            this::onDoneButtonClicked,
+                            FooterButton.ButtonType.NEXT,
+                            R.style.SuwGlifButton_Primary)
+            );
         }
 
-        @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.redaction_done_button) {
-                SetupRedactionInterstitial.setEnabled(getContext(), false);
-                final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
-                if (activity != null) {
-                    activity.setResult(RESULT_OK, null);
-                    finish();
-                }
+        private void onDoneButtonClicked(View view) {
+            SetupRedactionInterstitial.setEnabled(getContext(), false);
+            final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
+            if (activity != null) {
+                activity.setResult(RESULT_OK, null);
+                finish();
             }
         }
 
