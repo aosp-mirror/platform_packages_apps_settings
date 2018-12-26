@@ -424,9 +424,10 @@
             android:summary="%s"
             android:title="@string/simulate_color_space" />
 
-        <Preference android:key="updated_gfx_driver_dev_opt_in_app"
-            android:summary="@string/updated_gfx_driver_dev_opt_in_app_summary"
-            android:title="@string/updated_gfx_driver_dev_opt_in_app" />
+        <Preference
+            android:title="@string/gup_dev_opt_in_app"
+            android:key="gup_dev_opt_in_app"
+            android:summary="@string/gup_dev_opt_in_app_summary" />
 
     </PreferenceCategory>
 
