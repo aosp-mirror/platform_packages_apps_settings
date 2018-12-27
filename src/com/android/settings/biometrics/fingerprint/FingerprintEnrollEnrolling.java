@@ -139,12 +139,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
         mButtonFooterMixin.setSecondaryButton(
-                new FooterButton(
-                        this,
-                        R.string.security_settings_fingerprint_enroll_enrolling_skip,
-                        this::onSkipButtonClick,
-                        FooterButton.ButtonType.SKIP,
-                        R.style.SuwGlifButton_Secondary)
+                new FooterButton.Builder(this)
+                        .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
+                        .setListener(this::onSkipButtonClick)
+                        .setButtonType(FooterButton.ButtonType.SKIP)
+                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .build()
         );
 
         final LayerDrawable fingerprintDrawable = (LayerDrawable) mProgressBar.getBackground();

@@ -53,7 +53,7 @@ public class WakeLockScreenGesturePreferenceController extends GesturePreference
     @Override
     public int getAvailabilityStatus() {
         // No hardware support for this Gesture
-        if (!getAmbientConfig().wakeLockScreenGestureAvailable()) {
+        if (!getAmbientConfig().wakeScreenGestureAvailable()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 

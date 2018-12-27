@@ -35,6 +35,9 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.filters.MediumTest;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,10 +66,11 @@ public class EncryptionInterstitialTest {
 
     @Test
     public void clickYes_shouldRequirePassword() {
-        mInstrumentation.startActivitySync(
+        final Activity activity = mInstrumentation.startActivitySync(
                 new Intent(mContext, EncryptionInterstitial.class)
                         .putExtra("extra_unlock_method_intent", new Intent("test.unlock.intent")));
-        onView(withId(R.id.encrypt_require_password)).perform(click());
+        final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
 
         mActivityMonitor.waitForActivityWithTimeout(1000);
         assertEquals(1, mActivityMonitor.getHits());
@@ -77,10 +81,11 @@ public class EncryptionInterstitialTest {
 
     @Test
     public void clickNo_shouldNotRequirePassword() {
-        mInstrumentation.startActivitySync(
+        final Activity activity = mInstrumentation.startActivitySync(
                 new Intent(mContext, EncryptionInterstitial.class)
                         .putExtra("extra_unlock_method_intent", new Intent("test.unlock.intent")));
-        onView(withId(R.id.encrypt_dont_require_password)).perform(click());
+        final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().performClick();
 
         mActivityMonitor.waitForActivityWithTimeout(1000);
         assertEquals(1, mActivityMonitor.getHits());

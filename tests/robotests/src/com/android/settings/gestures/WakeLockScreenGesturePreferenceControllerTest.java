@@ -71,7 +71,7 @@ public class WakeLockScreenGesturePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gestureNotSupported_UNSUPPORTED_ON_DEVICE() {
-        when(mAmbientDisplayConfiguration.wakeLockScreenGestureAvailable()).thenReturn(false);
+        when(mAmbientDisplayConfiguration.wakeScreenGestureAvailable()).thenReturn(false);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
         assertThat(availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE);
@@ -79,7 +79,7 @@ public class WakeLockScreenGesturePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gestureSupported_AVAILABLE() {
-        when(mAmbientDisplayConfiguration.wakeLockScreenGestureAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.wakeScreenGestureAvailable()).thenReturn(true);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
         assertThat(availabilityStatus).isEqualTo(AVAILABLE);

@@ -49,12 +49,12 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
         setContentView(getContentView());
         mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
         mButtonFooterMixin.setSecondaryButton(
-                new FooterButton(
-                        this,
-                        R.string.skip_label,
-                        this::onSkipButtonClick,
-                        FooterButton.ButtonType.SKIP,
-                        R.style.SuwGlifButton_Secondary)
+                new FooterButton.Builder(this)
+                        .setText(R.string.skip_label)
+                        .setListener(this::onSkipButtonClick)
+                        .setButtonType(FooterButton.ButtonType.SKIP)
+                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .build()
         );
 
         setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
