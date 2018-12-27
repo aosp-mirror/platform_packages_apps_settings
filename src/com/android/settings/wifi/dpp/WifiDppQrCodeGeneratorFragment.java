@@ -21,10 +21,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -44,11 +46,6 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     private String mQrCode;
 
     @Override
-    protected int getLayout() {
-        return R.layout.wifi_dpp_qrcode_generator_fragment;
-    }
-
-    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
@@ -63,25 +60,12 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setHeaderIconImageResource(R.drawable.ic_qrcode_24dp);
-        WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
-                .getWifiNetworkConfig();
-        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
-            throw new IllegalArgumentException("Invalid Wi-Fi network for configuring");
-        }
-        setTitle(getString(R.string.wifi_dpp_share_wifi));
-        setDescription(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
-                wifiNetworkConfig.getSsid()));
-
         setHasOptionsMenu(true);
-        ActionBar actionBar = getActivity().getActionBar();
+        final ActionBar actionBar = getActivity().getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.show();
         }
-
-        mQrCode = wifiNetworkConfig.getQrCode();
-        setQrCode();
     }
 
     @Override
@@ -119,9 +103,30 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     }
 
     @Override
+    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.wifi_dpp_qrcode_generator_fragment, container,
+                /* attachToRoot */ false);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mQrCodeView = view.findViewById(R.id.qrcode_view);
+
+        mHeaderIcon.setImageResource(R.drawable.ic_qrcode_24dp);
+        WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
+                .getWifiNetworkConfig();
+        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
+            throw new IllegalStateException("Invalid Wi-Fi network for configuring");
+        }
+        mTitle.setText(R.string.wifi_dpp_share_wifi);
+        mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
+                wifiNetworkConfig.getSsid()));
+
+        mQrCode = wifiNetworkConfig.getQrCode();
+        setQrCode();
     }
 
     private void setQrCode() {

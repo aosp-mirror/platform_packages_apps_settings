@@ -27,13 +27,13 @@
     android:paddingEnd="16dp">
 
     <ImageView
-        android:id="@+id/header_icon"
+        android:id="@android:id/icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="fitCenter"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@android:id/title"
         style="@style/TextAppearance.EntityHeaderTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         android:paddingEnd="32dp"/>
 
     <TextView
-        android:id="@+id/description"
+        android:id="@android:id/summary"
         style="@style/TextAppearance.EntityHeaderSummary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

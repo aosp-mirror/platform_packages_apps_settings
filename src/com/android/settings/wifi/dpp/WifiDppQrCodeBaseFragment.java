@@ -17,25 +17,16 @@
 package com.android.settings.wifi.dpp;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 
 /**
- * TODO: b/120645817 should refine code to only initiate UI component in each child fragment.
- */
-
-/**
  * There are below 4 fragments for Wi-Fi DPP UI flow, to reduce redundant code of UI components,
- * this parent fragment instantiates all UI components and provides setting APIs for them.
+ * this parent fragment instantiates common UI components
  *
  * {@code WifiDppQrCodeScannerFragment}
  * {@code WifiDppQrCodeGeneratorFragment}
@@ -43,135 +34,16 @@ import com.android.settings.R;
  * {@code WifiDppAddDeviceFragment}
  */
 public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
-    private ImageView mHeaderIcon;
-    private TextView mTitle;
-    private TextView mDescription;
-
-    private TextView mErrorMessage;         //optional, for WifiDppQrCodeScannerFragment
-    private ListView mSavedWifiNetworkList; //optional, for WifiDppChooseSavedWifiNetworkFragment
-    private ProgressBar mProgressBar;       //optional, for WifiDppAddDeviceFragment
-    private ImageView mWifiApPictureView;   //optional, for WifiDppAddDeviceFragment
-    private TextView mChooseDifferentNetwork;//optional, for WifiDppAddDeviceFragment
-
-    private Button mButtonLeft;             //optional, for WifiDppChooseSavedWifiNetworkFragment,
-                                            //              WifiDppAddDeviceFragment
-    private Button mButtonRight;            //optional, for WifiDppChooseSavedWifiNetworkFragment,
-                                            //              WifiDppAddDeviceFragment
-
-    abstract protected int getLayout();
+    protected ImageView mHeaderIcon;
+    protected TextView mTitle;
+    protected TextView mSummary;
 
     @Override
-    public final void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-    @Override
-    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayout(), container, false);
-        initView(view);
-        return view;
-    }
-
-    private void initView(View view) {
-        mHeaderIcon = view.findViewById(R.id.header_icon);
-        mTitle = view.findViewById(R.id.title);
-        mDescription = view.findViewById(R.id.description);
-        mErrorMessage = view.findViewById(R.id.error_message);
-
-        mSavedWifiNetworkList = view.findViewById(R.id.saved_wifi_network_list);
-
-        mProgressBar = view.findViewById(R.id.progress_bar);
-        mWifiApPictureView = view.findViewById(R.id.wifi_ap_picture_view);
-        mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
-
-        mButtonLeft = view.findViewById(R.id.button_left);
-        mButtonRight = view.findViewById(R.id.button_right);
-    }
-
-    protected void setHeaderIconImageResource(int resId) {
-        mHeaderIcon.setImageResource(resId);
-    }
-
-    protected void setTitle(String title) {
-        mTitle.setText(title);
-    }
-
-    protected void setDescription(String description) {
-        mDescription.setText(description);
-    }
-
-    /** optional, for WifiDppQrCodeScannerFragment */
-    protected void showErrorMessage(boolean show) {
-        if (mErrorMessage != null) {
-            mErrorMessage.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
-        }
-    }
-
-    /** optional, for WifiDppQrCodeScannerFragment */
-    protected void setErrorMessage(String errorMessage) {
-        if (mErrorMessage != null) {
-            mErrorMessage.setText(errorMessage);
-        }
-    }
-
-    /**
-     * optional, for WifiDppChooseSavedWifiNetworkFragment,
-     *               WifiDppAddDeviceFragment
-     */
-    protected void setLeftButtonText(String text) {
-        if (mButtonLeft != null) {
-            mButtonLeft.setText(text);
-        }
-    }
-
-    /**
-     * optional, for WifiDppChooseSavedWifiNetworkFragment,
-     *               WifiDppAddDeviceFragment
-     */
-    protected void setRightButtonText(String text) {
-        if (mButtonRight != null) {
-            mButtonRight.setText(text);
-        }
-    }
-
-    /**
-     * optional, for WifiDppChooseSavedWifiNetworkFragment,
-     *               WifiDppAddDeviceFragment
-     */
-    protected void hideLeftButton() {
-        if (mButtonLeft != null) {
-            mButtonLeft.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    /**
-     * optional, for WifiDppChooseSavedWifiNetworkFragment,
-     *               WifiDppAddDeviceFragment
-     */
-    protected void hideRightButton() {
-        if (mButtonRight != null) {
-            mButtonRight.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    /**
-     * optional, for WifiDppChooseSavedWifiNetworkFragment,
-     *               WifiDppAddDeviceFragment
-     */
-    protected void setLeftButtonOnClickListener(View.OnClickListener listener) {
-        if (mButtonLeft != null) {
-            mButtonLeft.setOnClickListener(listener);
-        }
-    }
-
-    /**
-     * optional, for WifiDppChooseSavedWifiNetworkFragment,
-     *               WifiDppAddDeviceFragment
-     */
-    protected void setRightButtonOnClickListener(View.OnClickListener listener) {
-        if (mButtonRight != null) {
-            mButtonRight.setOnClickListener(listener);
-        }
+        mHeaderIcon = view.findViewById(android.R.id.icon);
+        mTitle = view.findViewById(android.R.id.title);
+        mSummary = view.findViewById(android.R.id.summary);
     }
 }

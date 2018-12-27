@@ -17,6 +17,13 @@
 package com.android.settings.wifi.dpp;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -26,10 +33,11 @@ import com.android.settings.R;
  * to the Wi-Fi network.
  */
 public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
-    @Override
-    protected int getLayout() {
-        return R.layout.wifi_dpp_add_device_fragment;
-    }
+    private ProgressBar mProgressBar;
+    private ImageView mWifiApPictureView;
+    private TextView mChooseDifferentNetwork;
+    private Button mButtonLeft;
+    private Button mButtonRight;
 
     @Override
     public int getMetricsCategory() {
@@ -37,7 +45,20 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     }
 
     @Override
-    public void onActivityCreated (Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.wifi_dpp_add_device_fragment, container,
+                /* attachToRoot */ false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mProgressBar = view.findViewById(R.id.progress_bar);
+        mWifiApPictureView = view.findViewById(R.id.wifi_ap_picture_view);
+        mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
+        mButtonLeft = view.findViewById(R.id.button_left);
+        mButtonRight = view.findViewById(R.id.button_right);
     }
 }
