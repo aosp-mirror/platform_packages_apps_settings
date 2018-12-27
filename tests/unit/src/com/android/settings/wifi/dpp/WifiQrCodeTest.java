@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
 
 @SmallTest
 @RunWith(AndroidJUnit4.class)
-public class WifiQrCodetest {
+public class WifiQrCodeTest {
     // Valid Wi-Fi DPP QR code & it's parameters
     private static final String VALID_WIFI_DPP_QR_CODE = "DPP:I:SN=4774LH2b4044;M:010203040506;K:"
             + "MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgADURzxmttZoIRIPWGoQMV00XHWCAQIhXruVWOz0NjlkIA=;;";
@@ -56,6 +56,13 @@ public class WifiQrCodetest {
     private static final String SECURITY_OF_VALID_ZXING_WIFI_QR_CODE_NOPASS = "nopass";
     private static final String SSID_OF_VALID_ZXING_WIFI_QR_CODE = "mynetwork";
     private static final String PASSWORD_OF_VALID_ZXING_WIFI_QR_CODE = "mypass";
+
+    // Valid ZXing reader library's Wi-Fi Network config format - escaped characters
+    private static final String VALID_ZXING_WIFI_QR_CODE_SPECIAL_CHARACTERS =
+            "WIFI:T:WPA;S:mynetwork;P:m\\;y\\:p\\\\a\\,ss;H:true;;";
+
+    private static final String PASSWORD_OF_VALID_ZXING_WIFI_QR_CODE_SPECIAL_CHARACTERS =
+            "m;y:p\\a,ss";
 
     // Invalid scheme QR code
     private static final String INVALID_SCHEME_QR_CODE = "BT:T:WPA;S:mynetwork;P:mypass;H:true;;";
@@ -118,19 +125,35 @@ public class WifiQrCodetest {
 
         assertEquals(WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG, wifiQrCode.getScheme());
         assertNotNull(config);
-        assertNull(config.getSecurity());
+        assertEquals("", config.getSecurity());
         assertEquals(SSID_OF_VALID_ZXING_WIFI_QR_CODE, config.getSsid());
-        assertNull(config.getPreSharedKey());
+        assertEquals("", config.getPreSharedKey());
         assertEquals(false, config.getHiddenSsid());
     }
 
     @Test
+    public void parseValidZxingWifiQrCode_specialCharacters() {
+        WifiQrCode wifiQrCode = new WifiQrCode(VALID_ZXING_WIFI_QR_CODE_SPECIAL_CHARACTERS);
+        WifiNetworkConfig config = wifiQrCode.getWifiNetworkConfig();
+
+        assertEquals(WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG, wifiQrCode.getScheme());
+        assertNotNull(config);
+        assertEquals(SECURITY_OF_VALID_ZXING_WIFI_QR_CODE, config.getSecurity());
+        assertEquals(SSID_OF_VALID_ZXING_WIFI_QR_CODE, config.getSsid());
+        assertEquals(PASSWORD_OF_VALID_ZXING_WIFI_QR_CODE_SPECIAL_CHARACTERS,
+                config.getPreSharedKey());
+        assertEquals(true, config.getHiddenSsid());
+    }
+
+    @Test
     public void testRemoveBackSlash() {
-        assertEquals("\\", WifiQrCode.removeBackSlash("\\\\"));
-        assertEquals("ab", WifiQrCode.removeBackSlash("a\\b"));
-        assertEquals("a", WifiQrCode.removeBackSlash("\\a"));
-        assertEquals("\\b", WifiQrCode.removeBackSlash("\\\\b"));
-        assertEquals("c\\", WifiQrCode.removeBackSlash("c\\\\"));
+        WifiQrCode wifiQrCode = new WifiQrCode(VALID_WIFI_DPP_QR_CODE);
+
+        assertEquals("\\", wifiQrCode.removeBackSlash("\\\\"));
+        assertEquals("ab", wifiQrCode.removeBackSlash("a\\b"));
+        assertEquals("a", wifiQrCode.removeBackSlash("\\a"));
+        assertEquals("\\b", wifiQrCode.removeBackSlash("\\\\b"));
+        assertEquals("c\\", wifiQrCode.removeBackSlash("c\\\\"));
     }
 
     @Test
