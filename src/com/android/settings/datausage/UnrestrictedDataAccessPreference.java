@@ -82,7 +82,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         if (mDataUsageState.isDataSaverBlacklisted) {
             // app is blacklisted, launch App Data Usage screen
             AppInfoDashboardFragment.startAppInfoFragment(AppDataUsage.class,
-                    R.string.app_data_usage,
+                    R.string.data_usage_app_summary_title,
                     null /* arguments */,
                     mParentFragment,
                     mEntry);

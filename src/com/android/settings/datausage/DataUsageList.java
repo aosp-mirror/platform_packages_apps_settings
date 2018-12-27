@@ -419,7 +419,7 @@ public class DataUsageList extends DataUsageBaseFragment {
 
         new SubSettingLauncher(getContext())
                 .setDestination(AppDataUsage.class.getName())
-                .setTitleRes(R.string.app_data_usage)
+                .setTitleRes(R.string.data_usage_app_summary_title)
                 .setArguments(args)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
