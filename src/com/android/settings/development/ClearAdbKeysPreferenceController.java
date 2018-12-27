@@ -20,8 +20,8 @@ import android.content.Context;
 import android.hardware.usb.IUsbManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemProperties;
 import android.os.UserManager;
+import android.sysprop.AdbProperties;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -38,9 +38,6 @@ public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreference
     private static final String TAG = "ClearAdbPrefCtrl";
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
 
-    @VisibleForTesting
-    static final String RO_ADB_SECURE_PROPERTY_KEY = "ro.adb.secure";
-
     private final IUsbManager mUsbManager;
     private final DevelopmentSettingsDashboardFragment mFragment;
 
@@ -54,7 +51,7 @@ public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreference
 
     @Override
     public boolean isAvailable() {
-        return SystemProperties.getBoolean(RO_ADB_SECURE_PROPERTY_KEY, false /* default */);
+        return AdbProperties.secure().orElse(false);
     }
 
     @Override
