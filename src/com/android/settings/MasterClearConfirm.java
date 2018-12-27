@@ -156,12 +156,12 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
         final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
         buttonFooterMixin.setPrimaryButton(
-                new FooterButton(
-                        getActivity(),
-                        R.string.master_clear_button_text,
-                        mFinalClickListener,
-                        ButtonType.OTHER,
-                        R.style.SuwGlifButton_Primary)
+                new FooterButton.Builder(getActivity())
+                        .setText(R.string.master_clear_button_text)
+                        .setListener(mFinalClickListener)
+                        .setButtonType(ButtonType.OTHER)
+                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .build()
         );
     }
 

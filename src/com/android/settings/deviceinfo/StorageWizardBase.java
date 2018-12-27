@@ -96,20 +96,20 @@ public abstract class StorageWizardBase extends FragmentActivity {
 
         mButtonFooterMixin = getGlifLayout().getMixin(ButtonFooterMixin.class);
         mButtonFooterMixin.setSecondaryButton(
-                new FooterButton(
-                        this,
-                        R.string.wizard_back,
-                        this::onNavigateBack,
-                        FooterButton.ButtonType.OTHER,
-                        R.style.SuwGlifButton_Secondary)
+                new FooterButton.Builder(this)
+                        .setText(R.string.wizard_back)
+                        .setListener(this::onNavigateBack)
+                        .setButtonType(FooterButton.ButtonType.OTHER)
+                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .build()
         );
         mButtonFooterMixin.setPrimaryButton(
-                new FooterButton(
-                        this,
-                        R.string.wizard_next,
-                        this::onNavigateNext,
-                        FooterButton.ButtonType.NEXT,
-                        R.style.SuwGlifButton_Primary)
+                new FooterButton.Builder(this)
+                        .setText(R.string.wizard_next)
+                        .setListener(this::onNavigateNext)
+                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .build()
         );
         mBack = mButtonFooterMixin.getSecondaryButton();
         mNext = mButtonFooterMixin.getPrimaryButton();

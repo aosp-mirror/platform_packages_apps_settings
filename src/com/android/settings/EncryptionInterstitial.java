@@ -152,21 +152,21 @@ public class EncryptionInterstitial extends SettingsActivity {
 
             final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
             buttonFooterMixin.setSecondaryButton(
-                    new FooterButton(
-                            getContext(),
-                            R.string.encryption_interstitial_no,
-                            this::onNoButtonClicked,
-                            FooterButton.ButtonType.SKIP,
-                            R.style.SuwGlifButton_Secondary)
+                    new FooterButton.Builder(getContext())
+                            .setText(R.string.encryption_interstitial_no)
+                            .setListener(this::onNoButtonClicked)
+                            .setButtonType(FooterButton.ButtonType.SKIP)
+                            .setTheme(R.style.SuwGlifButton_Secondary)
+                            .build()
             );
 
             buttonFooterMixin.setPrimaryButton(
-                    new FooterButton(
-                            getContext(),
-                            R.string.encryption_interstitial_yes,
-                            this::onYesButtonClicked,
-                            FooterButton.ButtonType.NEXT,
-                            R.style.SuwGlifButton_Primary)
+                    new FooterButton.Builder(getContext())
+                            .setText(R.string.encryption_interstitial_yes)
+                            .setListener(this::onYesButtonClicked)
+                            .setButtonType(FooterButton.ButtonType.NEXT)
+                            .setTheme(R.style.SuwGlifButton_Primary)
+                            .build()
             );
         }
 
