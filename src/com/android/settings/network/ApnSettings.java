@@ -60,7 +60,8 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
 
-public class ApnSettings extends RestrictedSettingsFragment {
+public class ApnSettings extends RestrictedSettingsFragment
+        implements Preference.OnPreferenceChangeListener {
     static final String TAG = "ApnSettings";
 
     public static final String EXTRA_POSITION = "position";
@@ -312,6 +313,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
                 pref.setKey(key);
                 pref.setTitle(name);
                 pref.setPersistent(false);
+                pref.setOnPreferenceChangeListener(this);
                 pref.setSubId(subId);
                 if (mHidePresetApnDetails && edited == Telephony.Carriers.UNEDITED) {
                     pref.setHideDetails();
@@ -385,6 +387,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
         startActivity(intent);
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Log.d(TAG, "onPreferenceChange(): Preference - " + preference
                 + ", newValue - " + newValue + ", newValue type - "
