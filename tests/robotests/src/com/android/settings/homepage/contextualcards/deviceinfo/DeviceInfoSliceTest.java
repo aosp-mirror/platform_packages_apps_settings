@@ -70,24 +70,30 @@ public class DeviceInfoSliceTest {
         final String phoneNumber = "1111111111";
         doReturn(mSubscriptionInfo).when(mDeviceInfoSlice).getFirstSubscriptionInfo();
         doReturn(phoneNumber).when(mDeviceInfoSlice).getPhoneNumber();
+
         final Slice slice = mDeviceInfoSlice.getSlice();
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.device_info_label));
+
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final IconCompat expectedIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_info_outline_24dp);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedIcon.toString());
 
         final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.device_info_label));
-        SliceTester.assertTitle(sliceItems, phoneNumber);
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, phoneNumber);
     }
 
     @Test
     public void getSlice_hasNoSubscriptionInfo_shouldShowUnknown() {
         final Slice slice = mDeviceInfoSlice.getSlice();
-        final List<SliceItem> sliceItems = slice.getItems();
 
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.device_info_label));
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.device_info_default));
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.device_info_label));
+
+        final List<SliceItem> sliceItems = slice.getItems();
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems,
+                mContext.getString(R.string.device_info_default));
     }
 }

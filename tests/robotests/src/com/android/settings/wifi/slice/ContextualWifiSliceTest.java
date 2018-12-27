@@ -29,14 +29,12 @@ import android.net.wifi.WifiManager;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SliceTester;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -87,7 +85,9 @@ public class ContextualWifiSliceTest {
         mWifiManager.connect(config, null /* listener */);
 
         final Slice wifiSlice = mWifiSlice.getSlice();
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.wifi_settings));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
@@ -96,8 +96,5 @@ public class ContextualWifiSliceTest {
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
-
-        final List<SliceItem> sliceItems = wifiSlice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.wifi_settings));
     }
 }
