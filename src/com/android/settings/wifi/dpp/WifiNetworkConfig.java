@@ -16,8 +16,18 @@
 
 package com.android.settings.wifi.dpp;
 
+import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_NO_PASSWORD;
+import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WEP;
+import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WPA;
+
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiConfiguration.AuthAlgorithm;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.WifiManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.Keep;
 
@@ -30,8 +40,7 @@ import androidx.annotation.Keep;
  * EXTRA_QR_CODE
  */
 public class WifiNetworkConfig {
-    // Ignores password if security is NO_PASSWORD or absent
-    public static final String NO_PASSWORD = "nopass";
+    private static final String TAG = "WifiNetworkConfig";
 
     private String mSecurity;
     private String mSsid;
@@ -47,18 +56,9 @@ public class WifiNetworkConfig {
     }
 
     public WifiNetworkConfig(WifiNetworkConfig config) {
-        if (config.mSecurity != null) {
-            mSecurity = new String(config.mSecurity);
-        }
-
-        if (config.mSsid != null) {
-            mSsid = new String(config.mSsid);
-        }
-
-        if (config.mPreSharedKey != null) {
-            mPreSharedKey = new String(config.mPreSharedKey);
-        }
-
+        mSecurity = config.mSecurity;
+        mSsid = config.mSsid;
+        mPreSharedKey = config.mPreSharedKey;
         mHiddenSsid = config.mHiddenSsid;
     }
 
@@ -106,7 +106,7 @@ public class WifiNetworkConfig {
 
     public static boolean isValidConfig(String security, String ssid, String preSharedKey,
             boolean hiddenSsid) {
-        if (!TextUtils.isEmpty(security) && !NO_PASSWORD.equals(security)) {
+        if (!TextUtils.isEmpty(security) && !SECURITY_NO_PASSWORD.equals(security)) {
             if (TextUtils.isEmpty(preSharedKey)) {
                 return false;
             }
@@ -182,5 +182,78 @@ public class WifiNetworkConfig {
     @Keep
     public boolean getHiddenSsid() {
         return mHiddenSsid;
+    }
+
+    public void connect(Context context, WifiManager.ActionListener listener) {
+        WifiConfiguration wifiConfiguration = getWifiConfigurationOrNull();
+        if (wifiConfiguration == null) {
+            if (listener != null) {
+                listener.onFailure(WifiManager.ERROR);
+            }
+            return;
+        }
+
+        WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+        wifiManager.connect(wifiConfiguration, listener);
+    }
+
+    /**
+     * This is a simplified method from {@code WifiConfigController.getConfig()}
+     */
+    private WifiConfiguration getWifiConfigurationOrNull() {
+        if (!isValidConfig(this)) {
+            return null;
+        }
+
+        final WifiConfiguration wifiConfiguration = new WifiConfiguration();
+        wifiConfiguration.SSID = addQuotationIfNeeded(mSsid);
+        wifiConfiguration.hiddenSSID = mHiddenSsid;
+
+        if (TextUtils.isEmpty(mSecurity) || SECURITY_NO_PASSWORD.equals(mSecurity)) {
+            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.NONE);
+            return wifiConfiguration;
+        }
+
+        if (mSecurity.startsWith(SECURITY_WEP)) {
+            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.NONE);
+            wifiConfiguration.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
+            wifiConfiguration.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
+
+            // WEP-40, WEP-104, and 256-bit WEP (WEP-232?)
+            final int length = mPreSharedKey.length();
+            if ((length == 10 || length == 26 || length == 58)
+                    && mPreSharedKey.matches("[0-9A-Fa-f]*")) {
+                wifiConfiguration.wepKeys[0] = mPreSharedKey;
+            } else {
+                wifiConfiguration.wepKeys[0] = addQuotationIfNeeded(mPreSharedKey);
+            }
+        } else if (mSecurity.startsWith(SECURITY_WPA)) {
+            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
+
+            if (mPreSharedKey.matches("[0-9A-Fa-f]{64}")) {
+                wifiConfiguration.preSharedKey = mPreSharedKey;
+            } else {
+                wifiConfiguration.preSharedKey = addQuotationIfNeeded(mPreSharedKey);
+            }
+        } else {
+            Log.w(TAG, "Unsupported security");
+            return null;
+        }
+
+        return wifiConfiguration;
+    }
+
+    private String addQuotationIfNeeded(String input) {
+        if (TextUtils.isEmpty(input)) {
+            return "";
+        }
+
+        if (input.length() >= 2 && input.startsWith("\"") && input.endsWith("\"")) {
+            return input;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("\"").append(input).append("\"");
+        return sb.toString();
     }
 }

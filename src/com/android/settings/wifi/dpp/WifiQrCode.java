@@ -65,6 +65,11 @@ public class WifiQrCode {
 
     public static final String DELIMITER_QR_CODE = ";";
 
+    // Ignores password if security is SECURITY_NO_PASSWORD or absent
+    public static final String SECURITY_NO_PASSWORD = "nopass";
+    public static final String SECURITY_WEP = "WEP";
+    public static final String SECURITY_WPA = "WPA";
+
     private String mQrCode;
 
     /**
