@@ -80,4 +80,20 @@ public class WifiDppConfiguratorActivityTest {
         assertThat(activity instanceof WifiDppQrCodeGeneratorFragment
                 .OnQrCodeGeneratorFragmentAddButtonClickedListener).isEqualTo(true);
     }
+
+    @Test
+    public void testActivity_shouldImplementsOnScanWifiDppSuccessCallback() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
+
+        assertThat(activity instanceof WifiDppQrCodeScannerFragment
+                .OnScanWifiDppSuccessListener).isEqualTo(true);
+    }
+
+    @Test
+    public void testActivity_shouldImplementsOnScanZxingWifiFormatSuccessCallback() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
+
+        assertThat(activity instanceof WifiDppQrCodeScannerFragment
+                .OnScanZxingWifiFormatSuccessListener).isEqualTo(true);
+    }
 }

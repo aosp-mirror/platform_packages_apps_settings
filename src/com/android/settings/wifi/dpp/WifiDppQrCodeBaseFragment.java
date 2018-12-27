@@ -102,6 +102,13 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     }
 
     /** optional, for WifiDppQrCodeScannerFragment */
+    protected void showErrorMessage(boolean show) {
+        if (mErrorMessage != null) {
+            mErrorMessage.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+        }
+    }
+
+    /** optional, for WifiDppQrCodeScannerFragment */
     protected void setErrorMessage(String errorMessage) {
         if (mErrorMessage != null) {
             mErrorMessage.setText(errorMessage);

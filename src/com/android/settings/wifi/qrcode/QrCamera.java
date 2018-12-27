@@ -152,6 +152,15 @@ public class QrCamera extends Handler {
          * @param transform The transform to apply to the content of preview
          */
         void setTransform(Matrix transform);
+
+        /**
+         * Verify QR code is valid or not. The camera will stop scanning if this callback returns
+         * true.
+         *
+         * @param qrCode The result QR code after decoding.
+         * @return Returns true if qrCode hold valid information.
+         */
+        boolean isValid(String qrCode);
     }
 
     private void setCameraParameter() {
@@ -245,7 +254,9 @@ public class QrCamera extends Handler {
                         mReader.reset();
                     }
                     if (qrCode != null) {
-                        return qrCode.getText();
+                        if (mScannerCallback.isValid(qrCode.getText())) {
+                            return qrCode.getText();
+                        }
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
