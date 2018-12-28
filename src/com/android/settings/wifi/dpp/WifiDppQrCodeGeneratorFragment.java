@@ -18,19 +18,31 @@ package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.wifi.qrcode.QrCodeGenerator;
+
+import com.google.zxing.WriterException;
 
 /**
  * After sharing a saved Wi-Fi network, {@code WifiDppConfiguratorActivity} start with this fragment
  * to generate a Wi-Fi DPP QR code for other device to initiate as an enrollee.
  */
 public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
+    private static final String TAG = "WifiDppQrCodeGeneratorFragment";
+
+    private ImageView mQrCodeView;
+    private String mQrCode;
+
     @Override
     protected int getLayout() {
         return R.layout.wifi_dpp_qrcode_generator_fragment;
@@ -67,6 +79,9 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.show();
         }
+
+        mQrCode = wifiNetworkConfig.getQrCode();
+        setQrCode();
     }
 
     @Override
@@ -100,6 +115,23 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mQrCodeView = view.findViewById(R.id.qrcode_view);
+    }
+
+    private void setQrCode() {
+        try {
+            final int qrcodeSize = getContext().getResources().getDimensionPixelSize(
+                    R.dimen.qrcode_size);
+            final Bitmap bmp = QrCodeGenerator.encodeQrCode(mQrCode, qrcodeSize);
+            mQrCodeView.setImageBitmap(bmp);
+        } catch (WriterException e) {
+            Log.e(TAG, "Error generatting QR code bitmap " + e);
         }
     }
 }
