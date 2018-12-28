@@ -72,7 +72,7 @@ public class WifiCallingPreferenceController extends BasePreferenceController im
                 && MobileNetworkUtils.isWifiCallingEnabled(mContext,
                 SubscriptionManager.getPhoneId(mSubId))
                 ? AVAILABLE
-                : CONDITIONALLY_UNAVAILABLE;
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
