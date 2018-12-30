@@ -23,14 +23,12 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SliceTester;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,13 +55,13 @@ public class FlashlightSliceTest {
     public void getFlashlightSlice_correctData() {
         Settings.Secure.putInt(
                 mContext.getContentResolver(), Settings.Secure.FLASHLIGHT_AVAILABLE, 1);
+
         final Slice slice = new FlashlightSlice(mContext).getSlice();
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.power_flashlight));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
-
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.power_flashlight));
     }
 }

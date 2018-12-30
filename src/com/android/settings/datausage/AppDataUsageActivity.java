@@ -62,7 +62,7 @@ public class AppDataUsageActivity extends SettingsActivity {
         args.putParcelable(AppDataUsage.ARG_APP_ITEM, appItem);
         intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
         intent.putExtra(EXTRA_SHOW_FRAGMENT, AppDataUsage.class.getName());
-        intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.app_data_usage);
+        intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.data_usage_app_summary_title);
 
         super.onCreate(savedInstanceState);
     }

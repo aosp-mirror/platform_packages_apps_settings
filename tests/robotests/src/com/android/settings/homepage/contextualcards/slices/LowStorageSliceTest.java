@@ -23,12 +23,11 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
@@ -42,8 +41,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
-
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class LowStorageSliceTest {
@@ -73,8 +70,8 @@ public class LowStorageSliceTest {
 
         final Slice slice = mLowStorageSlice.getSlice();
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.storage_menu_free));
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.storage_menu_free));
     }
 
     @Test
@@ -94,8 +91,8 @@ public class LowStorageSliceTest {
 
         final Slice slice = mLowStorageSlice.getSlice();
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.storage_settings));
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.storage_settings));
     }
 
     @Test

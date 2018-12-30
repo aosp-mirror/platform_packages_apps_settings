@@ -81,7 +81,9 @@ public class WifiSliceTest {
     @Test
     public void getWifiSlice_shouldHaveTitleAndToggle() {
         final Slice wifiSlice = mWifiSlice.getSlice();
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.wifi_settings));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
@@ -90,9 +92,6 @@ public class WifiSliceTest {
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
-
-        final List<SliceItem> sliceItems = wifiSlice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.wifi_settings));
     }
 
     @Test
@@ -119,7 +118,8 @@ public class WifiSliceTest {
         // All AP rows + title row
         assertThat(rows).isEqualTo(DEFAULT_EXPANDED_ROW_COUNT + 1);
         // Has scanning text
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.wifi_empty_list_wifi_on));
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems,
+                mContext.getString(R.string.wifi_empty_list_wifi_on));
     }
 
     @Test

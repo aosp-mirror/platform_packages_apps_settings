@@ -25,14 +25,12 @@ import android.content.Intent;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SliceTester;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +58,10 @@ public class BluetoothSliceBuilderTest {
     @Test
     public void getBluetoothSlice_correctSliceContent() {
         final Slice BluetoothSlice = BluetoothSliceBuilder.getSlice(mContext);
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, BluetoothSlice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.bluetooth_settings_title));
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
@@ -69,9 +70,6 @@ public class BluetoothSliceBuilderTest {
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_bluetooth);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
-
-        final List<SliceItem> sliceItems = BluetoothSlice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.bluetooth_settings_title));
     }
 
     @Test
