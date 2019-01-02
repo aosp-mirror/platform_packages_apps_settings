@@ -35,6 +35,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 
@@ -51,15 +54,13 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowWifiManager.class})
 public class WifiTetherSettingsTest {
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
 
     private Context mContext;
+    private WifiTetherSettings mWifiTetherSettings;
 
     @Mock
     private ConnectivityManager mConnectivityManager;
@@ -75,6 +76,8 @@ public class WifiTetherSettingsTest {
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(WIFI_REGEXS).when(mConnectivityManager).getTetherableWifiRegexs();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+
+        mWifiTetherSettings = new WifiTetherSettings();
     }
 
     @Test
@@ -134,6 +137,15 @@ public class WifiTetherSettingsTest {
         settings.onStart();
 
         verify(screen).removeAll();
+    }
+
+    @Test
+    public void createPreferenceControllers_hasAutoOffPreference() {
+        assertThat(mWifiTetherSettings.createPreferenceControllers(mContext)
+                .stream()
+                .filter(controller -> controller instanceof WifiTetherAutoOffPreferenceController)
+                .count())
+                .isEqualTo(1);
     }
 
     private void setupIsTetherAvailable(boolean returnValue) {
