@@ -92,4 +92,13 @@ public class VideoPreferenceTest {
 
         verify(mMediaPlayer, never()).start();
     }
+
+    @Test
+    public void onViewInvisible_shouldReleaseMediaplayer() {
+        mVideoPreference.onViewVisible(false);
+
+        mVideoPreference.onViewInvisible();
+
+        verify(mMediaPlayer).release();
+    }
 }
