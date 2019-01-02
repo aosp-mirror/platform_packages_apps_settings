@@ -35,7 +35,6 @@ import java.util.List;
 public class PreventRingingGestureSettings extends DashboardFragment {
 
     private static final String TAG = "RingingGestureSettings";
-    private static final String KEY_PREVENT_RINGING = "gesture_prevent_ringing";
 
     @Override
     public void onAttach(Context context) {
@@ -51,6 +50,7 @@ public class PreventRingingGestureSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new PreventRingingGesturePreferenceController(context, lifecycle));
+        controllers.add(new PreventRingingSwitchPreferenceController(context));
         return controllers;
     }
 

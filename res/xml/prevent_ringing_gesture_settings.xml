@@ -26,8 +26,11 @@
         app:animation="@raw/gesture_prevent_ringing"
         app:preview="@drawable/gesture_prevent_ringing" />
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="gesture_prevent_ringing_switch"
+        android:layout="@layout/styled_switch_bar" />
+
     <PreferenceCategory
         android:key="gesture_prevent_ringing_category"
-        android:title="@string/gesture_prevent_ringing_title">
-    </PreferenceCategory>
+        android:title="@string/gesture_prevent_ringing_title" />
 </PreferenceScreen>
