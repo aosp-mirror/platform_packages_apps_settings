@@ -85,6 +85,7 @@ public class WifiP2pSettings extends DashboardFragment
     private boolean mWifiP2pSearching;
     private int mConnectedDevices;
     private boolean mLastGroupFormed = false;
+    private boolean mIsIgnoreInitConnectionInfoCallback = false;
 
     private P2pPeerCategoryPreferenceController mPeerCategoryController;
     private P2pPersistentCategoryPreferenceController mPersistentCategoryController;
@@ -131,6 +132,7 @@ public class WifiP2pSettings extends DashboardFragment
                     startSearch();
                 }
                 mLastGroupFormed = wifip2pinfo.groupFormed;
+                mIsIgnoreInitConnectionInfoCallback = true;
             } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
                 mThisDevice = (WifiP2pDevice) intent.getParcelableExtra(
                         WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
@@ -338,6 +340,29 @@ public class WifiP2pSettings extends DashboardFragment
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         if (mWifiP2pManager != null) {
             mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
+            mWifiP2pManager.requestDeviceInfo(mChannel, wifiP2pDevice -> {
+                if (DBG) {
+                    Log.d(TAG, "Get device info: " + wifiP2pDevice);
+                }
+                mThisDevice = wifiP2pDevice;
+                mThisDevicePreferenceController.updateDeviceName(wifiP2pDevice);
+            });
+            mIsIgnoreInitConnectionInfoCallback = false;
+            mWifiP2pManager.requestNetworkInfo(mChannel, networkInfo -> {
+                mWifiP2pManager.requestConnectionInfo(mChannel, wifip2pinfo -> {
+                    if (!mIsIgnoreInitConnectionInfoCallback) {
+                        if (networkInfo.isConnected()) {
+                            if (DBG) {
+                                Log.d(TAG, "Connected");
+                            }
+                        } else if (!mLastGroupFormed) {
+                            // Find peers when p2p doesn't connected.
+                            startSearch();
+                        }
+                        mLastGroupFormed = wifip2pinfo.groupFormed;
+                    }
+                });
+            });
         }
     }
 
