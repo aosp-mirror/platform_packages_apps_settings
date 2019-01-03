@@ -52,8 +52,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         LocalBluetoothProfileManager.ServiceListener {
     private static final String TAG = "BluetoothDeviceUpdater";
     private static final boolean DBG = true;
-    private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
-            "persist.bluetooth.showdeviceswithoutnames";
 
     protected final DevicePreferenceCallback mDevicePreferenceCallback;
     protected final Map<BluetoothDevice, Preference> mPreferenceMap;
@@ -61,8 +59,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     protected DashboardFragment mFragment;
     @VisibleForTesting
     protected LocalBluetoothManager mLocalManager;
-
-    private final boolean mShowDeviceWithoutNames;
 
     @VisibleForTesting
     final GearPreference.OnGearClickListener mDeviceProfilesListener = pref -> {
@@ -79,8 +75,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             DevicePreferenceCallback devicePreferenceCallback, LocalBluetoothManager localManager) {
         mFragment = fragment;
         mDevicePreferenceCallback = devicePreferenceCallback;
-        mShowDeviceWithoutNames = SystemProperties.getBoolean(
-                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
         mPreferenceMap = new HashMap<>();
         mLocalManager = localManager;
     }
@@ -223,7 +217,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         if (!mPreferenceMap.containsKey(device)) {
             BluetoothDevicePreference btPreference =
                     new BluetoothDevicePreference(mPrefContext, cachedDevice,
-                            mShowDeviceWithoutNames);
+                            true /* showDeviceWithoutNames */);
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
             if (this instanceof Preference.OnPreferenceClickListener) {
                 btPreference.setOnPreferenceClickListener(
