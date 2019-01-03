@@ -54,6 +54,7 @@ public class VideoPreference extends Preference {
     private float mAspectRadio = 1.0f;
     private int mPreviewResource;
     private boolean mViewVisible;
+    private Surface mSurface;
 
     public VideoPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -68,17 +69,12 @@ public class VideoPreference extends Preference {
                     .authority(context.getPackageName())
                     .appendPath(String.valueOf(animation))
                     .build();
-            mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
+            mPreviewResource = attributes.getResourceId(
+                    R.styleable.VideoPreference_preview, 0);
+            initMediaPlayer();
             if (mMediaPlayer != null && mMediaPlayer.getDuration() > 0) {
                 setVisible(true);
                 setLayoutResource(R.layout.video_preference);
-
-                mPreviewResource = attributes.getResourceId(
-                        R.styleable.VideoPreference_preview, 0);
-
-                mMediaPlayer.setOnSeekCompleteListener(mp -> mVideoReady = true);
-
-                mMediaPlayer.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
                 mAnimationAvailable = true;
                 updateAspectRatio();
             } else {
@@ -127,9 +123,8 @@ public class VideoPreference extends Preference {
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                     int height) {
                 if (mMediaPlayer != null) {
-                    mMediaPlayer.setSurface(new Surface(surfaceTexture));
-                    mVideoReady = false;
-                    mMediaPlayer.seekTo(0);
+                    mSurface = new Surface(surfaceTexture);
+                    mMediaPlayer.setSurface(mSurface);
                 }
             }
 
@@ -168,26 +163,40 @@ public class VideoPreference extends Preference {
 
     @Override
     public void onDetached() {
-        if (mMediaPlayer != null) {
-            mMediaPlayer.stop();
-            mMediaPlayer.reset();
-            mMediaPlayer.release();
-        }
+        releaseMediaPlayer();
         super.onDetached();
     }
 
     public void onViewVisible(boolean videoPaused) {
         mViewVisible = true;
         mVideoPaused = videoPaused;
-        if (mVideoReady && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
-            mMediaPlayer.seekTo(0);
-        }
+        initMediaPlayer();
     }
 
     public void onViewInvisible() {
         mViewVisible = false;
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
-            mMediaPlayer.pause();
+        releaseMediaPlayer();
+    }
+
+    private void initMediaPlayer() {
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
+            mMediaPlayer.seekTo(0);
+            mMediaPlayer.setOnSeekCompleteListener(mp -> mVideoReady = true);
+            mMediaPlayer.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
+            if (mSurface != null) {
+                mMediaPlayer.setSurface(mSurface);
+            }
+        }
+    }
+
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.stop();
+            mMediaPlayer.reset();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+            mVideoReady = false;
         }
     }
 
@@ -197,7 +206,6 @@ public class VideoPreference extends Preference {
 
     @VisibleForTesting
     void updateAspectRatio() {
-        mAspectRadio = mMediaPlayer.getVideoWidth() / (float)mMediaPlayer.getVideoHeight();
+        mAspectRadio = mMediaPlayer.getVideoWidth() / (float) mMediaPlayer.getVideoHeight();
     }
-
 }
