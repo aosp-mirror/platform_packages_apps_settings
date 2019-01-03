@@ -150,7 +150,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             getNextButton().setVisibility(View.VISIBLE);
         } else {
             mErrorText.setText(errorMsg);
-            getNextButton().setVisibility(View.GONE);
+            getNextButton().setText(getResources().getString(R.string.done));
+            getNextButton().setVisibility(View.VISIBLE);
         }
     }
 
@@ -162,8 +163,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     @Override
     protected void onNextButtonClick(View view) {
-        // Lock thingy is already set up, launch directly to the next page
-        launchNextEnrollingActivity(mToken);
+        if (checkMaxEnrolled() == 0) {
+            // Lock thingy is already set up, launch directly to the next page
+            launchNextEnrollingActivity(mToken);
+        } else {
+            setResult(RESULT_FINISHED);
+            finish();
+        }
     }
 
     private void launchChooseLock() {
