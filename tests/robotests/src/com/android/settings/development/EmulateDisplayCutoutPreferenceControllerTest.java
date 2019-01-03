@@ -18,44 +18,25 @@ package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.AdditionalMatchers.aryEq;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.content.om.IOverlayManager;
-import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
-import android.os.RemoteException;
-import android.view.DisplayCutout;
-
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.ListPreference;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmulateDisplayCutoutPreferenceControllerTest {
-
-    private static final OverlayInfo ONE_DISABLED = createFakeOverlay("emulation.one", false, 1);
-    private static final OverlayInfo ONE_ENABLED = createFakeOverlay("emulation.one", true, 1);
-    private static final OverlayInfo TWO_DISABLED = createFakeOverlay("emulation.two", false, 2);
-    private static final OverlayInfo TWO_ENABLED = createFakeOverlay("emulation.two", true, 2);
-
-    @Mock
-    private Context mContext;
     @Mock
     private IOverlayManager mOverlayManager;
     @Mock
@@ -67,112 +48,19 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.OVERLAY_SERVICE)).thenReturn(mOverlayManager);
-        mockCurrentOverlays();
         when(mPackageManager.getApplicationInfo(any(), anyInt()))
             .thenThrow(PackageManager.NameNotFoundException.class);
         mController = createController();
         mController.setPreference(mPreference);
     }
 
-    Object mockCurrentOverlays(OverlayInfo... overlays) {
-        try {
-            return when(mOverlayManager.getOverlayInfosForTarget(eq("android"), anyInt()))
-                .thenReturn(Arrays.asList(overlays));
-        } catch (RemoteException re) {
-            return new ArrayList<OverlayInfo>();
-        }
-    }
-
     @Test
-    public void isAvailable_true() {
-        mockCurrentOverlays(ONE_DISABLED, TWO_DISABLED);
-
-        assertThat(createController().isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_false() {
-        mockCurrentOverlays();
-
-        assertThat(createController().isAvailable()).isFalse();
-    }
-
-    @Test
-    public void onPreferenceChange_enable() throws Exception {
-        mockCurrentOverlays(ONE_DISABLED, TWO_DISABLED);
-
-        mController.onPreferenceChange(null, TWO_DISABLED.packageName);
-
-        verify(mOverlayManager)
-            .setEnabledExclusiveInCategory(eq(TWO_DISABLED.packageName), anyInt());
-    }
-
-    @Test
-    public void onPreferenceChange_disable() throws Exception {
-        mockCurrentOverlays(ONE_DISABLED, TWO_ENABLED);
-
-        mController.onPreferenceChange(null, "");
-
-        verify(mOverlayManager).setEnabled(eq(TWO_ENABLED.packageName), eq(false), anyInt());
-    }
-
-    @Test
-    public void updateState_enabled() {
-        mockCurrentOverlays(ONE_DISABLED, TWO_ENABLED);
-
-        mController.updateState(null);
-
-        verify(mPreference).setValueIndex(2);
-    }
-
-    @Test
-    public void updateState_disabled() {
-        mockCurrentOverlays(ONE_DISABLED, TWO_DISABLED);
-
-        mController.updateState(null);
-
-        verify(mPreference).setValueIndex(0);
-    }
-
-    @Test
-    public void ordered_by_priority() {
-        mockCurrentOverlays(TWO_DISABLED, ONE_DISABLED);
-
-        mController.updateState(null);
-
-        verify(mPreference).setEntryValues(
-                aryEq(new String[]{"", ONE_DISABLED.packageName, TWO_DISABLED.packageName}));
-    }
-
-    @Test
-    public void onDeveloperOptionsSwitchDisabled() throws Exception {
-        mockCurrentOverlays(ONE_ENABLED, TWO_DISABLED);
-        final PreferenceScreen screen = mock(PreferenceScreen.class);
-        when(screen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        mController.displayPreference(screen);
-
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        verify(mPreference).setEnabled(false);
-        verify(mOverlayManager).setEnabled(eq(ONE_ENABLED.packageName), eq(false), anyInt());
+    public void getKey_returnsDisplayCutoutEmulation() {
+        assertThat(createController().getPreferenceKey()).isEqualTo("display_cutout_emulation");
     }
 
     private EmulateDisplayCutoutPreferenceController createController() {
-        return new EmulateDisplayCutoutPreferenceController(mContext, mPackageManager,
-                mOverlayManager);
-    }
-
-    private static OverlayInfo createFakeOverlay(String pkg, boolean enabled, int priority) {
-        final int state = (enabled) ? OverlayInfo.STATE_ENABLED : OverlayInfo.STATE_DISABLED;
-
-        return new OverlayInfo(pkg /* packageName */,
-                "android" /* targetPackageName */,
-                DisplayCutout.EMULATION_OVERLAY_CATEGORY /* category */,
-                pkg + ".baseCodePath" /* baseCodePath */,
-                state /* state */,
-                0 /* userId */,
-                priority,
-                true /* isStatic */);
+        return new EmulateDisplayCutoutPreferenceController(RuntimeEnvironment.application,
+                mPackageManager, mOverlayManager);
     }
 }
