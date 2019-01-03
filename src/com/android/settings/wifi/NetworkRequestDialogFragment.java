@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -328,8 +329,12 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void onUserSelectionConnectSuccess(WifiConfiguration wificonfiguration) {
-        // Dismisses current dialog, since connection is success.
+        // Dismisses current dialog and finishes Activity, since connection is success.
         dismiss();
+        final Activity activity = getActivity();
+        if (activity != null) {
+            activity.finish();
+        }
     }
 
     @Override

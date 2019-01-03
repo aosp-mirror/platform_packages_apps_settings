@@ -22,7 +22,8 @@ import android.text.TextUtils;
 import androidx.annotation.Keep;
 import androidx.annotation.VisibleForTesting;
 
-import java.util.regex.Matcher;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -62,7 +63,12 @@ public class WifiQrCode {
     public static final String PREFIX_ZXING_PASSWORD = "P:";
     public static final String PREFIX_ZXING_HIDDEN_SSID = "H:";
 
-    public static final String SUFFIX_QR_CODE = ";";
+    public static final String DELIMITER_QR_CODE = ";";
+
+    // Ignores password if security is SECURITY_NO_PASSWORD or absent
+    public static final String SECURITY_NO_PASSWORD = "nopass";
+    public static final String SECURITY_WEP = "WEP";
+    public static final String SECURITY_WPA = "WPA";
 
     private String mQrCode;
 
@@ -100,22 +106,27 @@ public class WifiQrCode {
 
     /** Parses Wi-Fi DPP QR code string */
     private void parseWifiDppQrCode(String qrCode) throws IllegalArgumentException {
-        String publicKey = getSubStringOrNull(qrCode, PREFIX_DPP_PUBLIC_KEY, SUFFIX_QR_CODE);
+        List keyValueList = getKeyValueList(qrCode, PREFIX_DPP, DELIMITER_QR_CODE);
+
+        String publicKey = getValueOrNull(keyValueList, PREFIX_DPP_PUBLIC_KEY);
         if (TextUtils.isEmpty(publicKey)) {
             throw new IllegalArgumentException("Invalid format");
         }
         mPublicKey = publicKey;
 
-        mInformation = getSubStringOrNull(qrCode, PREFIX_DPP_INFORMATION, SUFFIX_QR_CODE);
+        mInformation = getValueOrNull(keyValueList, PREFIX_DPP_INFORMATION);
     }
 
     /** Parses ZXing reader library's Wi-Fi Network config format */
     private void parseZxingWifiQrCode(String qrCode) throws IllegalArgumentException {
-        String security = getSubStringOrNull(qrCode, PREFIX_ZXING_SECURITY, SUFFIX_QR_CODE);
-        String ssid = getSubStringOrNull(qrCode, PREFIX_ZXING_SSID, SUFFIX_QR_CODE);
-        String password = getSubStringOrNull(qrCode, PREFIX_ZXING_PASSWORD, SUFFIX_QR_CODE);
-        String hiddenSsidString = getSubStringOrNull(qrCode, PREFIX_ZXING_HIDDEN_SSID,
-                SUFFIX_QR_CODE);
+        List keyValueList = getKeyValueList(qrCode, PREFIX_ZXING_WIFI_NETWORK_CONFIG,
+                DELIMITER_QR_CODE);
+
+        String security = getValueOrNull(keyValueList, PREFIX_ZXING_SECURITY);
+        String ssid = getValueOrNull(keyValueList, PREFIX_ZXING_SSID);
+        String password = getValueOrNull(keyValueList, PREFIX_ZXING_PASSWORD);
+        String hiddenSsidString = getValueOrNull(keyValueList, PREFIX_ZXING_HIDDEN_SSID);
+
         boolean hiddenSsid = "true".equalsIgnoreCase(hiddenSsidString);
 
         //"\", ";", "," and ":" are escaped with a backslash "\", should remove at first
@@ -132,33 +143,37 @@ public class WifiQrCode {
     }
 
     /**
-     * Gets the substring between prefix & suffix from input.
+     * Splits key/value pairs from qrCode
      *
-     * @param prefix the string before the returned substring
-     * @param suffix the string after the returned substring
-     * @return null if not exists, non-null otherwise
+     * @param qrCode the QR code raw string
+     * @param prefixQrCode the string before all key/value pairs in qrCode
+     * @param delimiter the string to split key/value pairs, can't contain a backslash
+     * @return a list contains string of key/value (e.g. K:key1)
      */
-    private static String getSubStringOrNull(String input, String prefix, String suffix) {
-        StringBuilder sb = new StringBuilder();
-        String regex = sb.append(prefix).append("(.*?)").append(suffix).toString();
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
+    private List<String> getKeyValueList(String qrCode, String prefixQrCode,
+                String delimiter) {
+        String keyValueString = qrCode.substring(prefixQrCode.length());
 
-        if (!matcher.find()) {
-            return null;
+        // Should not treat \delimiter as a delimiter
+        String regex = "(?<!\\\\)" + Pattern.quote(delimiter);
+
+        List<String> result = Arrays.asList(keyValueString.split(regex));
+        return result;
+    }
+
+    private String getValueOrNull(List<String> keyValueList, String prefix) {
+        for (String keyValue : keyValueList) {
+            if (keyValue.startsWith(prefix)) {
+                return  keyValue.substring(prefix.length());
+            }
         }
 
-        String target = matcher.group(1);
-        if (TextUtils.isEmpty(target)) {
-            return null;
-        }
-
-        return target;
+        return null;
     }
 
     @Keep
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    protected static String removeBackSlash(String input) {
+    protected String removeBackSlash(String input) {
         if (input == null) {
             return null;
         }

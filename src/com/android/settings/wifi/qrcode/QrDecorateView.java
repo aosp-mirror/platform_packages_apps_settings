@@ -17,10 +17,13 @@
 package com.android.settings.wifi.qrcode;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -33,11 +36,26 @@ import com.android.settings.R;
  * Draws the lines at the corner of the inner frame.
  */
 public class QrDecorateView extends View {
-    private static final float CORNER_STROKE_WIDTH = 3f;    // 3dp
-    private static final float CORNER_LINE_LENGTH = 20f;    // 20dp
+    private static final float CORNER_STROKE_WIDTH = 4f;    // 4dp
+    private static final float CORNER_LINE_LENGTH = 264f;   // 264dp
+    private static final float CORNER_RADIUS = 16f;         // 16dp
 
-    final private Paint mPaint;
-    private RectF mFrame;
+    final private int mCornerColor;
+    final private int mFocusedCornerColor;
+    final private int mBackgroundColor;
+
+    final private Paint mStrokePaint;
+    final private Paint mTransparentPaint;
+    final private Paint mBackgroundPaint;
+
+    final private float mRadius;
+
+    private Bitmap mMaskBitmap;
+    private Canvas mMaskCanvas;
+
+    private RectF mOuterFrame;
+    private RectF mInnerFrame;
+
     private boolean mFocused;
 
     public QrDecorateView(Context context) {
@@ -54,78 +72,66 @@ public class QrDecorateView extends View {
 
     public QrDecorateView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        final float strokeWidth = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                CORNER_STROKE_WIDTH,
-                getResources().getDisplayMetrics()
-        );
-        mPaint = new Paint();
-        mPaint.setStrokeWidth(strokeWidth);
+
         mFocused = false;
+        mRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, CORNER_RADIUS,
+                getResources().getDisplayMetrics());
+
+        mCornerColor = context.getResources().getColor(R.color.qr_corner_line_color);
+        mFocusedCornerColor = context.getResources().getColor(R.color.qr_focused_corner_line_color);
+        mBackgroundColor = context.getResources().getColor(R.color.qr_background_color);
+
+        mStrokePaint = new Paint();
+        mStrokePaint.setAntiAlias(true);
+
+        mTransparentPaint = new Paint();
+        mTransparentPaint.setAntiAlias(true);
+        mTransparentPaint.setColor(getResources().getColor(android.R.color.transparent));
+        mTransparentPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+
+        mBackgroundPaint = new Paint();
+        mBackgroundPaint.setColor(mBackgroundColor);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+
+        if(mMaskBitmap == null) {
+            mMaskBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+            mMaskCanvas = new Canvas(mMaskBitmap);
+        }
+
+        calculateFramePos();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        calculateFramePos();
-        final float cornerLineLength = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                CORNER_LINE_LENGTH,
-                getResources().getDisplayMetrics()
-        );
-        mPaint.setColor(mFocused ? Color.GREEN : Color.WHITE);
-        drawCorner(mFrame, cornerLineLength, canvas);
-        super.onDraw(canvas);
-    }
+        // Set frame line color.
+        mStrokePaint.setColor(mFocused ? mFocusedCornerColor : mCornerColor);
+        // Draw background color.
+        mMaskCanvas.drawColor(mBackgroundColor);
+        // Draw outer corner.
+        mMaskCanvas.drawRoundRect(mOuterFrame, mRadius, mRadius, mStrokePaint);
+        // Draw inner transparent corner.
+        mMaskCanvas.drawRoundRect(mInnerFrame, mRadius, mRadius, mTransparentPaint);
 
-    private void drawCorner(RectF frame, float lineLength, Canvas canvas) {
-        final float strokeWidth = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                CORNER_STROKE_WIDTH,
-                getResources().getDisplayMetrics()
-        );
-        // Draw top-left corner.
-        canvas.drawLine(
-                frame.left - strokeWidth / 2,
-                frame.top,
-                frame.left + lineLength,
-                frame.top,
-                mPaint);
-        canvas.drawLine(frame.left, frame.top, frame.left, frame.top + lineLength, mPaint);
-        // Draw top-right corner.
-        canvas.drawLine(
-                frame.right + strokeWidth / 2,
-                frame.top,
-                frame.right - lineLength,
-                frame.top,
-                mPaint);
-        canvas.drawLine(frame.right, frame.top, frame.right, frame.top + lineLength, mPaint);
-        // Draw bottom-left corner.
-        canvas.drawLine(
-                frame.left - strokeWidth / 2,
-                frame.bottom,
-                frame.left + lineLength,
-                frame.bottom,
-                mPaint);
-        canvas.drawLine(frame.left, frame.bottom, frame.left, frame.bottom - lineLength, mPaint);
-        // Draw bottom-right corner.
-        canvas.drawLine(
-                frame.right + strokeWidth / 2,
-                frame.bottom,
-                frame.right - lineLength,
-                frame.bottom,
-                mPaint);
-        canvas.drawLine(frame.right, frame.bottom, frame.right, frame.bottom - lineLength, mPaint);
+        canvas.drawBitmap(mMaskBitmap, 0, 0, mBackgroundPaint);
+        super.onDraw(canvas);
     }
 
     private void calculateFramePos() {
         final int centralX = getWidth() / 2;
         final int centralY = getHeight() / 2;
-        final float halfFrameWidth = getWidth() / 3;
-        mFrame = new RectF(
-                centralX - halfFrameWidth,
-                centralY - halfFrameWidth,
-                centralX + halfFrameWidth,
-                centralY + halfFrameWidth);
+        final float cornerLineLength = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                CORNER_LINE_LENGTH, getResources().getDisplayMetrics()) / 2;
+        final float strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                CORNER_STROKE_WIDTH, getResources().getDisplayMetrics()) / 2;
+
+        mOuterFrame = new RectF(centralX - cornerLineLength, centralY - cornerLineLength,
+                centralX + cornerLineLength, centralY + cornerLineLength);
+        mInnerFrame = new RectF(mOuterFrame.left + strokeWidth, mOuterFrame.top + strokeWidth,
+                mOuterFrame.right - strokeWidth, mOuterFrame.bottom - strokeWidth);
     }
 
     // Draws green lines if focued. Otherwise, draws white lines.

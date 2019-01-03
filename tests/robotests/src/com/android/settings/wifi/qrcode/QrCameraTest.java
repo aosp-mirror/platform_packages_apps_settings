@@ -85,6 +85,11 @@ public class QrCameraTest {
         public void setTransform(Matrix transform) {
             // Do nothing
         }
+
+        @Override
+        public boolean isValid(String qrCode) {
+            return true;
+        }
     }
 
     private ScannerTestCallback mScannerCallback;

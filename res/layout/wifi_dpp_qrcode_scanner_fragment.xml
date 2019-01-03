@@ -39,10 +39,15 @@
             android:layout_gravity="center"/>
     </com.android.settings.wifi.qrcode.QrPreviewLayout>
 
-    <TextView android:id="@+id/error_message"
+    <TextView
+        android:id="@+id/error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="@string/wifi_dpp_could_not_detect_valid_qr_code"
+        android:visibility="invisible"
+        android:textColor="?android:attr/colorError"/>
 
 </LinearLayout>
 

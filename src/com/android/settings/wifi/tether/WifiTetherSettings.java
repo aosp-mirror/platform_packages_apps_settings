@@ -178,6 +178,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(new WifiTetherSecurityPreferenceController(context, listener));
         controllers.add(new WifiTetherPasswordPreferenceController(context, listener));
         controllers.add(new WifiTetherApBandPreferenceController(context, listener));
+        controllers.add(
+                new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
 
         return controllers;
     }

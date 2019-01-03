@@ -17,6 +17,11 @@
 package com.android.settings.wifi.dpp;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -26,10 +31,9 @@ import com.android.settings.R;
  * {@code WifiDppConfiguratorActivity} to start with this fragment to choose a saved Wi-Fi network.
  */
 public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFragment {
-    @Override
-    protected int getLayout() {
-        return R.layout.wifi_dpp_choose_saved_wifi_network_fragment;
-    }
+    private ListView mSavedWifiNetworkList;
+    private Button mButtonLeft;
+    private Button mButtonRight;
 
     @Override
     public int getMetricsCategory() {
@@ -37,7 +41,18 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     }
 
     @Override
-    public void onActivityCreated (Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.wifi_dpp_choose_saved_wifi_network_fragment, container,
+                /* attachToRoot */ false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mSavedWifiNetworkList = view.findViewById(R.id.saved_wifi_network_list);
+        mButtonLeft = view.findViewById(R.id.button_left);
+        mButtonRight = view.findViewById(R.id.button_right);
     }
 }

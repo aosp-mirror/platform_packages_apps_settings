@@ -16,9 +16,11 @@
 
 package com.android.settings.wifi.dpp;
 
+import android.provider.Settings;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -36,7 +38,10 @@ import com.android.settings.R;
  * To use intent action {@code ACTION_ENROLLEE_QR_CODE_SCANNER}, specify the SSID string of the
  * Wi-Fi network to be provisioned in {@code WifiDppUtils.EXTRA_WIFI_SSID}.
  */
-public class WifiDppEnrolleeActivity extends InstrumentedActivity {
+public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
+        WifiManager.ActionListener,
+        WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener,
+        WifiDppQrCodeScannerFragment.OnScanZxingWifiFormatSuccessListener {
     private static final String TAG = "WifiDppEnrolleeActivity";
 
     public static final String ACTION_ENROLLEE_QR_CODE_SCANNER =
@@ -100,5 +105,32 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity {
         setResult(Activity.RESULT_CANCELED);
         finish();
         return true;
+    }
+
+    @Override
+    public void onScanWifiDppSuccess(String publicKey, String information) {
+        // TODO(b/1023597): starts DPP enrollee handshake here
+    }
+
+    @Override
+    public void onScanZxingWifiFormatSuccess(WifiNetworkConfig wifiNetworkConfig) {
+        wifiNetworkConfig.connect(/* context */ this, /* listener */ this);
+    }
+
+    @Override
+    public void onSuccess() {
+        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+        setResult(Activity.RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void onFailure(int reason) {
+        Log.d(TAG, "Wi-Fi connect onFailure reason - " + reason);
+
+        final Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
+        if (fragment instanceof WifiDppQrCodeScannerFragment) {
+            ((WifiDppQrCodeScannerFragment)fragment).showErrorMessage(true);
+        }
     }
 }

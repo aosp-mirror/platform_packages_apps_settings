@@ -1,6 +1,5 @@
 package com.android.settings.location;
 
-import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -11,6 +10,7 @@ import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.permission.RuntimePermissionPresenter;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -20,7 +20,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class TopLevelLocationPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
@@ -56,6 +55,12 @@ public class TopLevelLocationPreferenceController extends BasePreferenceControll
         }
     }
 
+    @VisibleForTesting
+    void setLocationAppCount(int numApps) {
+        mNumTotal = numApps;
+        refreshSummary(mPreference);
+    }
+
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
@@ -68,8 +73,7 @@ public class TopLevelLocationPreferenceController extends BasePreferenceControll
         RuntimePermissionPresenter.getInstance(mContext).countPermissionApps(
                 Arrays.asList(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION), false, false,
                 (numApps) -> {
-                    mNumTotal = numApps;
-                    refreshSummary(preference);
+                    setLocationAppCount(numApps);
                 }, null);
     }
 
