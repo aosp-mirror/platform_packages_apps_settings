@@ -53,7 +53,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                         .setText(R.string.security_settings_face_enroll_introduction_cancel)
                         .setListener(this::onCancelButtonClick)
                         .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
         );
 
@@ -62,7 +62,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                         .setText(R.string.wizard_next)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
     }

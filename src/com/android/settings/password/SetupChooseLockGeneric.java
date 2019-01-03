@@ -86,7 +86,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
             layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
             layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
-                    R.dimen.suw_items_glif_text_divider_inset));
+                    R.dimen.sud_items_glif_text_divider_inset));
 
             layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
 

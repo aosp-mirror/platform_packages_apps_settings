@@ -139,7 +139,7 @@ public class RedactionInterstitial extends SettingsActivity {
                             .setText(R.string.app_notifications_dialog_done)
                             .setListener(this::onDoneButtonClicked)
                             .setButtonType(FooterButton.ButtonType.NEXT)
-                            .setTheme(R.style.SuwGlifButton_Primary)
+                            .setTheme(R.style.SudGlifButton_Primary)
                             .build()
             );
         }

@@ -24,7 +24,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        style="@style/SuwContentFrame"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -33,10 +33,10 @@
 
         <TextView
             android:id="@+id/message"
-            style="@style/SuwDescription.Glif"
+            style="@style/SudDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/suw_description_glif_margin_top"
+            android:layout_marginTop="@dimen/sud_description_glif_margin_top"
             android:minLines="3"
             android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
 
@@ -57,7 +57,7 @@
 
                 <ImageView
                     android:id="@+id/fingerprint_in_app_indicator"
-                    style="@style/SuwContentIllustration"
+                    style="@style/SudContentIllustration"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="7dp"

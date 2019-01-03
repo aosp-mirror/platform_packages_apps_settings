@@ -15,7 +15,7 @@
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/SuwDescription"
+    style="@style/SudDescription"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -25,7 +25,7 @@
 
     <CheckBox
         android:id="@+id/erase_esim"
-        style="@style/SuwCheckBox"
+        style="@style/SudCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -42,12 +42,12 @@
 
         <TextView
             android:id="@+id/erase_esim_title"
-            style="@style/TextAppearance.SuwGlifItemTitle"
+            style="@style/TextAppearance.SudGlifItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
-            style="@style/TextAppearance.SuwGlifItemSummary"
+            style="@style/TextAppearance.SudGlifItemSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reset_esim_desc"/>

@@ -143,7 +143,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
                         .setListener(this::onSkipButtonClick)
                         .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
         );
 

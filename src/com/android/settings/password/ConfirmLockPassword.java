@@ -135,7 +135,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
             if (mHeaderTextView == null) {
-                mHeaderTextView = view.findViewById(R.id.suw_layout_title);
+                mHeaderTextView = view.findViewById(R.id.suc_layout_title);
             }
             mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
