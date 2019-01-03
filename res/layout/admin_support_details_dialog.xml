@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/admin_details_dialog_padding"
                 android:text="@string/disabled_by_policy_title"
-                android:textAppearance="@android:style/TextAppearance.Material.Title" />
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title" />
     </LinearLayout>
 
     <ScrollView
@@ -48,7 +48,7 @@
             <TextView android:id="@+id/admin_support_msg"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+                      android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
                       android:text="@string/default_admin_support_msg"
                       android:maxLength="200"
                       android:autoLink="email|phone|web"

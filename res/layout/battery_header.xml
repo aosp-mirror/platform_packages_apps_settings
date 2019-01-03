@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="@*android:string/config_headlineFontFamily"
-            android:textAppearance="@android:style/TextAppearance.Material.Display1"/>
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Display1"/>
 
         <TextView
             android:id="@+id/summary1"
@@ -48,13 +48,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:minLines="2"
-            android:textAppearance="@android:style/TextAppearance.Material.Small"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"/>
 
         <TextView
             android:id="@+id/summary2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.Material.Small"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"/>
 
     </LinearLayout>
 

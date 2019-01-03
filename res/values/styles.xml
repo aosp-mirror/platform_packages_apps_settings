@@ -121,7 +121,7 @@
         <item name="android:paddingStart">8dip</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
@@ -129,13 +129,13 @@
         <item name="android:paddingStart">8dip</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
         <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
     <style name="wifi_item_content">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Subhead</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Subhead</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
@@ -189,13 +189,13 @@
     <style name="vpn_label">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
     </style>
 
     <style name="vpn_value">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
         <item name="android:singleLine">true</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
@@ -205,10 +205,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingStart">8dip</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
     </style>
 
-    <style name="TextAppearance" parent="android:TextAppearance.Material"/>
+    <style name="TextAppearance" parent="android:TextAppearance.DeviceDefault"/>
 
     <style name="TextAppearance.info_label">
         <item name="android:textSize">14sp</item>
@@ -225,14 +225,14 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.Material">
+    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.DeviceDefault">
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.Material">
+    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.DeviceDefault">
         <item name="android:gravity">center_horizontal</item>
         <item name="android:background">@null</item>
         <item name="android:textCursorDrawable">@null</item>
@@ -240,22 +240,22 @@
         <item name="android:imeOptions">flagForceAscii|actionDone</item>
     </style>
 
-    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium"/>
-    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small"/>
+    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.DeviceDefault.Medium"/>
+    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.DeviceDefault.Small"/>
     <style name="TextAppearance.Switch"
            parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.CategoryTitle"
-           parent="@android:style/TextAppearance.Material.Body2">
+           parent="@*android:style/TextAppearance.DeviceDefault.Body2">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Subhead"/>
+    <style name="TextAppearance.TileTitle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead"/>
 
     <style name="TextAppearance.SuggestionTitle"
-           parent="@android:style/TextAppearance.Material.Subhead">
+           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -264,7 +264,7 @@
     </style>
 
     <style name="TextAppearance.ErrorText"
-           parent="android:TextAppearance.Material.Body1">
+           parent="@*android:TextAppearance.DeviceDefault.Body1">
         <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
@@ -274,29 +274,29 @@
     </style>
 
     <style name="TextAppearance.RemoveDialogContent"
-           parent="@android:style/TextAppearance.Material">
+           parent="@android:style/TextAppearance.DeviceDefault">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="TextAppearance.SearchBar"
-           parent="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle">
+           parent="@*android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Subtitle">
         <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
     <style name="TextAppearance.SuggestionHeader"
-           parent="@android:style/TextAppearance.Material.Subhead">
+           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
     <style name="TextAppearance.ConditionCardTitle"
-           parent="@android:style/TextAppearance.Material.Body2">
+           parent="@*android:style/TextAppearance.DeviceDefault.Body2">
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.ConditionCardSummary"
-           parent="@android:style/TextAppearance.Material.Body1">
+           parent="@*android:style/TextAppearance.DeviceDefault.Body1">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
@@ -311,7 +311,7 @@
     </style>
 
     <style name="TextAppearance.ContextualCardDismissalText"
-           parent="@android:style/TextAppearance.Material.Body1">
+           parent="@*android:style/TextAppearance.DeviceDefault.Body1">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textSize">16sp</item>
     </style>
@@ -350,13 +350,13 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="FingerprintHeaderStyle" parent="android:style/TextAppearance.Material.Subhead">
+    <style name="FingerprintHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:paddingTop">16dp</item>
         <item name="android:textColor">@color/primary_dark_material_light</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
-    <style name="FaceHeaderStyle" parent="android:style/TextAppearance.Material.Subhead">
+    <style name="FaceHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:paddingTop">16dp</item>
         <item name="android:textColor">@color/primary_dark_material_light</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
@@ -411,13 +411,13 @@
 
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="device_info_dialog_value">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body2</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body2</item>
         <item name="android:paddingBottom">24dp</item>
     </style>
 
