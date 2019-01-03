@@ -21,8 +21,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
@@ -83,7 +85,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBatteryLayoutPref = (LayoutPreference) screen.findPreference(getPreferenceKey());
+        mBatteryLayoutPref = screen.findPreference(getPreferenceKey());
         mBatteryMeterView = mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
         mBatteryPercentText = mBatteryLayoutPref.findViewById(R.id.battery_percent);
@@ -107,7 +109,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     public void updateHeaderPreference(BatteryInfo info) {
-        mBatteryPercentText.setText(Utils.formatPercentage(info.batteryLevel));
+        mBatteryPercentText.setText(formatBatteryPercentageText(info.batteryLevel));
         if (info.remainingLabel == null) {
             mSummary1.setText(info.statusLabel);
         } else {
@@ -133,6 +135,11 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         mBatteryMeterView.setBatteryLevel(batteryLevel);
         mBatteryMeterView.setCharging(!discharging);
         mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
-        mBatteryPercentText.setText(Utils.formatPercentage(batteryLevel));
+        mBatteryPercentText.setText(formatBatteryPercentageText(batteryLevel));
+    }
+
+    private CharSequence formatBatteryPercentageText(int batteryLevel) {
+        return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
+                NumberFormat.getIntegerInstance().format(batteryLevel));
     }
 }

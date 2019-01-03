@@ -140,8 +140,9 @@ public class BatteryHeaderPreferenceControllerTest {
 
         assertThat(((BatteryMeterView) mBatteryLayoutPref.findViewById(
                 R.id.battery_header_icon)).getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
-        assertThat(((TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent)).getText())
-            .isEqualTo("60%");
+        assertThat(((TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent))
+                .getText().toString())
+                .isEqualTo("60 %");
     }
 
     @Test
@@ -195,7 +196,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         assertThat(mBatteryMeterView.getBatteryLevel()).isEqualTo(BATTERY_LEVEL);
         assertThat(mBatteryMeterView.getCharging()).isTrue();
-        assertThat(mBatteryPercentText.getText()).isEqualTo("60%");
+        assertThat(mBatteryPercentText.getText().toString()).isEqualTo("60 %");
         assertThat(mSummary.getText()).isEqualTo(BATTERY_STATUS);
         assertThat(mSummary2.getText()).isEqualTo(BATTERY_STATUS);
     }
