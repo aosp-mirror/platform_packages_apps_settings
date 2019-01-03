@@ -565,6 +565,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             WifiConfiguration config = mSelectedAccessPoint.getConfig();
             if (mSelectedAccessPoint.isOsuProvider()) {
                 mSelectedAccessPoint.startOsuProvisioning();
+                mClickedConnect = true;
             } else if ((mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
                     (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
