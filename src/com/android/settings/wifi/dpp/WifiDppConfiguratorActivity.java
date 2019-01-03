@@ -273,7 +273,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     public void onScanWifiDppSuccess(String publicKey, String information) {
         mPublicKey = publicKey;
         mInformation = information;
-        mWifiNetworkConfig = null;
 
         showAddDeviceFragment(/* addToBackStack */ true);
     }
