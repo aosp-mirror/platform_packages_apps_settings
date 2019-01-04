@@ -38,6 +38,7 @@ public class WifiDppConfiguratorActivityTest {
         Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
         intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
         intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
 
         mActivityRule.launchActivity(intent);
 
@@ -50,6 +51,7 @@ public class WifiDppConfiguratorActivityTest {
                 WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
         intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
         intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
 
         mActivityRule.launchActivity(intent);
 
@@ -59,7 +61,10 @@ public class WifiDppConfiguratorActivityTest {
     @Test
     public void launchActivity_chooseSavedWifiNetwork_shouldNotAutoFinish() {
         Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK);
+                WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
+        String qrCode = "DPP:I:SN=4774LH2b4044;M:010203040506;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcD"
+               + "IgADURzxmttZoIRIPWGoQMV00XHWCAQIhXruVWOz0NjlkIA=;;";
+        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, qrCode);
 
         mActivityRule.launchActivity(intent);
 

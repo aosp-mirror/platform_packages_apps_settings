@@ -44,7 +44,7 @@ import com.android.settings.R;
  * {@code WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY}
  * {@code WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID}
  *
- * For intent action {@code ACTION_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK}, specify Wi-Fi (DPP)
+ * For intent action {@code ACTION_PROCESS_WIFI_DPP_QR_CODE}, specify Wi-Fi (DPP)
  * QR code in {@code WifiDppUtils.EXTRA_QR_CODE}
  */
 public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
@@ -58,8 +58,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
             "android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER";
     public static final String ACTION_CONFIGURATOR_QR_CODE_GENERATOR =
             "android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR";
-    public static final String ACTION_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK =
-            "android.settings.WIFI_DPP_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK";
+    public static final String ACTION_PROCESS_WIFI_DPP_QR_CODE =
+            "android.settings.PROCESS_WIFI_DPP_QR_CODE";
 
     private FragmentManager mFragmentManager;
 
@@ -71,6 +71,9 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
     /** The information from Wi-Fi DPP QR code */
     private String mInformation;
+
+    /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_DPP_QR_CODE */
+    private WifiQrCode mWifiDppQrCode;
 
     @Override
     public int getMetricsCategory() {
@@ -115,8 +118,14 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     showQrCodeGeneratorFragment();
                 }
                 break;
-            case ACTION_CONFIGURATOR_CHOOSE_SAVED_WIFI_NETWORK:
-                showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
+            case ACTION_PROCESS_WIFI_DPP_QR_CODE:
+                String qrCode = intent.getStringExtra(WifiDppUtils.EXTRA_QR_CODE);
+                mWifiDppQrCode = getValidWiFiDppQrCodeOrNull(qrCode);
+                if (mWifiDppQrCode == null) {
+                    cancelActivity = true;
+                } else {
+                    showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
+                }
                 break;
             default:
                 cancelActivity = true;
@@ -199,6 +208,21 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         fragmentTransaction.commit();
     }
 
+    private WifiQrCode getValidWiFiDppQrCodeOrNull(String qrCode) {
+        WifiQrCode wifiQrCode;
+        try {
+            wifiQrCode = new WifiQrCode(qrCode);
+        } catch(IllegalArgumentException e) {
+            return null;
+        }
+
+        if (WifiQrCode.SCHEME_DPP.equals(wifiQrCode.getScheme())) {
+            return wifiQrCode;
+        }
+
+        return null;
+    }
+
     @Override
     public WifiNetworkConfig getWifiNetworkConfig() {
         return mWifiNetworkConfig;
@@ -212,6 +236,10 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         return mInformation;
     }
 
+    public WifiQrCode getWifiDppQrCode() {
+        return mWifiDppQrCode;
+    }
+
     @Override
     public boolean setWifiNetworkConfig(WifiNetworkConfig config) {
         if(!WifiNetworkConfig.isValidConfig(config)) {
@@ -223,7 +251,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     }
 
     @Override
-    public boolean onNavigateUp(){
+    public boolean onNavigateUp() {
         Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
         if (fragment instanceof WifiDppQrCodeGeneratorFragment) {
             setResult(Activity.RESULT_CANCELED);
