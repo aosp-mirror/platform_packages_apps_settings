@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi.dpp;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +43,16 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+    }
+
+    @Override
     public final View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.wifi_dpp_choose_saved_wifi_network_fragment, container,
@@ -51,8 +63,18 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mSavedWifiNetworkList = view.findViewById(R.id.saved_wifi_network_list);
+        mTitle.setText(R.string.wifi_dpp_choose_network);
+        mSummary.setText(R.string.wifi_dpp_choose_network_to_connect_device);
+
         mButtonLeft = view.findViewById(R.id.button_left);
+        mButtonLeft.setText(R.string.cancel);
+        mButtonLeft.setOnClickListener(v -> {
+            Activity activity = getActivity();
+            activity.setResult(Activity.RESULT_CANCELED);
+            activity.finish();
+        });
+
         mButtonRight = view.findViewById(R.id.button_right);
+        mButtonRight.setVisibility(View.GONE);
     }
 }
