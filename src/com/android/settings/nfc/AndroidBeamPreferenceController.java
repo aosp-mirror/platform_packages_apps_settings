@@ -16,6 +16,7 @@
 package com.android.settings.nfc;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -63,6 +64,10 @@ public class AndroidBeamPreferenceController extends BasePreferenceController
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
+        PackageManager pm = mContext.getPackageManager();
+        if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC_BEAM)) {
+                return UNSUPPORTED_ON_DEVICE;
+        }
         return mNfcAdapter != null
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
