@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  */
 public class ConditionContextualCardController implements ContextualCardController,
         ConditionListener, LifecycleObserver, OnStart, OnStop {
-    public static final int EXPANDING_THRESHOLD = 2;
+    public static final int EXPANDING_THRESHOLD = 0;
 
     private static final double UNSUPPORTED_RANKING = -99999.0;
     private static final String TAG = "ConditionCtxCardCtrl";
