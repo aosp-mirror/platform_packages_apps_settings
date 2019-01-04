@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.permission.PermissionControllerManager;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -24,9 +25,11 @@ public class AppLocationPermissionPreferenceController extends
 
     private static final String KEY_APP_LEVEL_PERMISSIONS = "app_level_permissions";
     /** Total number of apps that has location permission. */
-    private int mNumTotal = -1;
+    @VisibleForTesting
+    int mNumTotal = -1;
     /** Total number of apps that has background location permission. */
-    private int mNumBackground = -1;
+    @VisibleForTesting
+    int mNumBackground = -1;
     private final LocationManager mLocationManager;
     private Preference mPreference;
 
