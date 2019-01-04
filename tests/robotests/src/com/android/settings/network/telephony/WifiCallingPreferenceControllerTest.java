@@ -32,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -108,5 +109,13 @@ public class WifiCallingPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
 
         assertThat(mPreferenceCategory.isVisible()).isFalse();
+    }
+
+    @Test
+    public void getAvailabilityStatus_noWiFiCalling_shouldReturnUnsupported() {
+        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }
