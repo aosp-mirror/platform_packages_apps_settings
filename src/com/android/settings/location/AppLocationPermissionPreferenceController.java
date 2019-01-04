@@ -6,7 +6,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import android.content.Context;
 import android.location.LocationManager;
-import android.permission.RuntimePermissionPresenter;
+import android.permission.PermissionControllerManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -70,7 +70,9 @@ public class AppLocationPermissionPreferenceController extends
         if (!mLocationManager.isLocationEnabled()) {
             return;
         }
-        RuntimePermissionPresenter.getInstance(mContext).countPermissionApps(
+        PermissionControllerManager permController =
+                mContext.getSystemService(PermissionControllerManager.class);
+        permController.countPermissionApps(
                 Arrays.asList(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION), false, false,
                 (numApps) -> {
                     mNumTotal = numApps;
@@ -79,7 +81,7 @@ public class AppLocationPermissionPreferenceController extends
                     }
                 }, null);
 
-        RuntimePermissionPresenter.getInstance(mContext).countPermissionApps(
+        permController.countPermissionApps(
                 Collections.singletonList(ACCESS_BACKGROUND_LOCATION), true, false,
                 (numApps) -> {
                     mNumBackground = numApps;

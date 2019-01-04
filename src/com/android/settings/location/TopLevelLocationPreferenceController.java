@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
-import android.permission.RuntimePermissionPresenter;
+import android.permission.PermissionControllerManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -70,7 +70,7 @@ public class TopLevelLocationPreferenceController extends BasePreferenceControll
         if (!mLocationManager.isLocationEnabled()) {
             return;
         }
-        RuntimePermissionPresenter.getInstance(mContext).countPermissionApps(
+        mContext.getSystemService(PermissionControllerManager.class).countPermissionApps(
                 Arrays.asList(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION), false, false,
                 (numApps) -> {
                     setLocationAppCount(numApps);
