@@ -19,6 +19,7 @@ package com.android.settings.homepage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
@@ -47,6 +48,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
             return;
         }
 
+        updateWindowProperties();
         setContentView(R.layout.settings_homepage_container);
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
@@ -72,5 +74,16 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
             fragmentTransaction.show(showFragment);
         }
         fragmentTransaction.commit();
+    }
+
+    private void updateWindowProperties() {
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                decorView.getSystemUiVisibility() |
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        );
+
+        getWindow().setStatusBarColor(getResources().getColor(R.color.homepage_status_bar_color));
     }
 }

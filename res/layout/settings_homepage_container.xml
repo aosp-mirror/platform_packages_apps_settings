@@ -31,8 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/app_bar_height"
-            android:descendantFocusability="blocksDescendants">
+            android:descendantFocusability="blocksDescendants"
+            android:paddingTop="104dp">
+            <!-- height of status bar(24dp) + height of action bar(48dp) + top/bottom margins(16dp) -->
 
             <FrameLayout
                 android:id="@+id/contextual_cards_content"
@@ -52,6 +53,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@*android:dimen/status_bar_height"
+            android:background="@android:color/transparent"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+
         <include layout="@layout/search_bar"/>
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
