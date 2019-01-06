@@ -273,7 +273,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     private SliceAction buildBluetoothDetailDeepLinkAction(CachedBluetoothDevice bluetoothDevice) {
         return SliceAction.createDeeplink(
                 getBluetoothDetailIntent(bluetoothDevice),
-                IconCompat.createWithResource(mContext, R.drawable.ic_settings),
+                IconCompat.createWithResource(mContext, R.drawable.ic_settings_24dp),
                 ListBuilder.ICON_IMAGE,
                 bluetoothDevice.getName());
     }
@@ -287,9 +287,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         final CharSequence title = mContext.getText(R.string.bluetooth_pairing_pref_title);
         final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.ic_menu_add);
         final SliceAction sliceAction = SliceAction.createDeeplink(
-                getPairNewDeviceIntent(),
-                IconCompat.createWithResource(mContext, R.drawable.ic_settings),
-                ListBuilder.ICON_IMAGE, title);
+                getPairNewDeviceIntent(), icon, ListBuilder.ICON_IMAGE, title);
 
         return new ListBuilder.RowBuilder()
                 .setTitleItem(icon, ListBuilder.ICON_IMAGE)

@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi.dpp;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +35,6 @@ import com.android.settings.R;
  * to the Wi-Fi network.
  */
 public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
-    private ProgressBar mProgressBar;
     private ImageView mWifiApPictureView;
     private TextView mChooseDifferentNetwork;
     private Button mButtonLeft;
@@ -42,6 +43,16 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
     }
 
     @Override
@@ -55,10 +66,26 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mProgressBar = view.findViewById(R.id.progress_bar);
+        final WifiNetworkConfig wifiNetworkConfig = ((WifiDppConfiguratorActivity) getActivity())
+                .getWifiNetworkConfig();
+        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
+            throw new IllegalStateException("Invalid Wi-Fi network for configuring");
+        }
+        mSummary.setText(getString(R.string.wifi_dpp_add_device_to_wifi,
+                wifiNetworkConfig.getSsid()));
+
         mWifiApPictureView = view.findViewById(R.id.wifi_ap_picture_view);
         mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
         mButtonLeft = view.findViewById(R.id.button_left);
+        mButtonLeft.setText(R.string.cancel);
+        mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
+
         mButtonRight = view.findViewById(R.id.button_right);
+        mButtonRight.setText(R.string.wifi_dpp_share_wifi);
+        mButtonRight.setOnClickListener(v -> startWifiDppInitiator());
+    }
+
+    private void startWifiDppInitiator() {
+        //TODO(b/122331217): starts Wi-Fi DPP initiator handshake here
     }
 }

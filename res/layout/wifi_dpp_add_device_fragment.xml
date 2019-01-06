@@ -24,22 +24,19 @@
 
     <include layout="@layout/wifi_dpp_fragment_header"/>
 
-    <ProgressBar
-      android:id="@+id/progress_bar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:indeterminate="true"/>
-
     <ImageView
         android:id="@+id/wifi_ap_picture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"/>
 
-    <TextView android:id="@+id/choose_different_network"
+    <TextView
+        android:id="@+id/choose_different_network"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="@string/wifi_dpp_choose_different_network"/>
 
     <include layout="@layout/wifi_dpp_fragment_footer"
         android:gravity="center|bottom"/>

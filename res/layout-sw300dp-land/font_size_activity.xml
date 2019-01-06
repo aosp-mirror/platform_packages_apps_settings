@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:padding="6dp"
-                android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView"
                 android:elevation="2dp" />
 
             <com.android.settings.widget.LabeledSeekBar
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/font_size_summary"
                 android:layout_marginBottom="16dp"
-                android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

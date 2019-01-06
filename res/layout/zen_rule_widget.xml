@@ -19,14 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-    <ImageView
-            android:id="@+id/zen_automatic_rule_widget"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:paddingStart="16dip"
-            android:paddingEnd="16dip"
-            android:src="@drawable/ic_settings"
-            android:contentDescription="zen_mode_rule_settings"
-            android:layout_gravity="center"
-            android:background="?android:attr/selectableItemBackground" />
+
+    <include layout="@layout/preference_widget_gear"
+             android:id="@+id/zen_automatic_rule_widget" />
 </LinearLayout>

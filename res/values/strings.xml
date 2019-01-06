@@ -2077,13 +2077,13 @@
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
-    <string name="wifi_dpp_add_device_to_network">Add a device to this network</string>
+    <string name="wifi_dpp_add_device_to_network">Add a device</string>
     <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=120] -->
-    <string name="wifi_dpp_center_qr_code">Center the device\u2019s QR code below to add device to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
+    <string name="wifi_dpp_center_qr_code">Center the QR code below to add the device to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Title for the fragment to scan QR code [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_scan_qr_code">Scan QR code</string>
     <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
-    <string name="wifi_dpp_scan_qr_code_join_network">Join \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d by scanning a QR code</string>
+    <string name="wifi_dpp_scan_qr_code_join_network">Center the QR code below to connect to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
     <string name="wifi_dpp_scan_qr_code_join_unknown_network">Join Wi\u2011Fi by scanning a QR code</string>
     <!-- Title for the fragment to share Wi-Fi [CHAR LIMIT=50]  -->
@@ -2091,7 +2091,19 @@
     <!-- Hint for the user to use another device to scan QR code on screen to join Wi-Fi [CHAR LIMIT=NONE] -->
     <string name="wifi_dpp_scan_qr_code_with_another_device">Scan this QR code with another device to join \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Hint for QR code detection [CHAR LIMIT=NONE]  -->
-    <string name="wifi_dpp_could_not_detect_valid_qr_code">Could not detect valid QR code</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code">Couldn\u2019t read QR code</string>
+    <!-- Title for the fragment choose network [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_choose_network">Choose network</string>
+    <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
+    <string name="wifi_dpp_choose_network_to_connect_device">To connect your device, choose a network</string>
+    <!-- Hint for the user to add the device to a Wi-Fi network [CHAR LIMIT=NONE] -->
+    <string name="wifi_dpp_add_device_to_wifi">Add this device to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d?</string>
+    <!-- Title for the fragment to tell the user that Wi-Fi shared with device successfully [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_wifi_shared_with_device">Wi\u2011Fi shared with device</string>
+    <!-- Button label to add another device to Wi-Fi [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_add_another_device">Add another device</string>
+    <!-- Button label to choose different Wi-Fi network [CHAR LIMIT=80]  -->
+    <string name="wifi_dpp_choose_different_network">Choose different network</string>
     <!-- Label for the check box to share a network with other users on the same device -->
     <string name="wifi_shared">Share with other device users</string>
     <!-- Hint for unchanged fields -->
@@ -2645,6 +2657,9 @@
     <string name="auto_brightness_disclaimer">Optimize brightness level for available light. When this feature is on, you can still adjust brightness temporarily.</string>
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
+
+    <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
+    <string name="display_white_balance_title">Display white balance</string>
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
@@ -5222,6 +5237,9 @@
         <item quantity="one">%1$d app restricted</item>
         <item quantity="other">%1$d apps restricted</item>
     </plurals>
+
+    <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
+    <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
 
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
@@ -9455,10 +9473,14 @@
     <string name="notification_log_details_parcel">parcel size</string>
     <!-- Notification log debug tool: notification ashmem size -->
     <string name="notification_log_details_ashmem">ashmem</string>
+    <!-- Notification log debug tool: header: notification alert info -->
+    <string name="notification_log_details_alerted">notification alerted</string>
     <!-- Notification log debug tool: header: notification sound info -->
     <string name="notification_log_details_sound">sound</string>
     <!-- Notification log debug tool: header: notification vibration info -->
     <string name="notification_log_details_vibrate">vibrate</string>
+    <!-- Notification log debug tool: header: notification vibration info -->
+    <string name="notification_log_details_vibrate_pattern">pattern</string>
     <!-- Notification log debug tool: the word 'default' -->
     <string name="notification_log_details_default">default</string>
     <!-- Notification log debug tool: the word 'none' -->
@@ -10036,12 +10058,17 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- UI debug setting: select an app to use updated graphics driver [CHAR LIMIT=100] -->
-    <string name="updated_gfx_driver_dev_opt_in_app">Select app to use updated graphics driver</string>
-    <!-- UI debug setting: no app selected to use updated GPU driver [CHAR LIMIT=100] -->
-    <string name="updated_gfx_driver_dev_opt_in_app_not_set">No selected app to use updated graphics driver</string>
-    <!-- UI debug setting: app selected to use updated graphics driver [CHAR LIMIT=NONE] -->
-    <string name="updated_gfx_driver_dev_opt_in_app_set">Opt in application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
+    <!-- UI debug setting: select an app to use Game Update Package [CHAR LIMIT=100] -->
+    <string name="gup_dev_opt_in_app">Use Game Update Package</string>
+    <!-- UI debug setting: no app selected to use Game Update Package [CHAR LIMIT=100] -->
+    <string name="gup_dev_opt_in_app_not_set">No selected app</string>
+    <!-- UI debug setting: app selected to use Game Update Package [CHAR LIMIT=NONE] -->
+    <string name="gup_dev_opt_in_app_set"><xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
+
+    <!-- Title for Game Update Packages dashboard where developers can configure apps to use GUP or not [CHAR LIMIT=50] -->
+    <string name="gup_dashboard_title">Game Update Packages Preferences</string>
+    <!-- Summary for Game Update Packages dashboard [CHAR LIMIT=50] -->
+    <string name="gup_dashboard_summary">Modify Game Update Packages settings</string>
 
     <!-- Slices Strings -->
 

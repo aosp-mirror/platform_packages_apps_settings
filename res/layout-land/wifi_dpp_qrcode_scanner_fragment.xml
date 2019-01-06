@@ -25,8 +25,8 @@
     <include layout="@layout/wifi_dpp_fragment_header"/>
 
     <com.android.settings.wifi.qrcode.QrPreviewLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/qrcode_preview_size"
+        android:layout_height="@dimen/qrcode_preview_size"
         android:layout_gravity="center">
         <TextureView
             android:id="@+id/preview_view"

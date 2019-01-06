@@ -42,7 +42,7 @@
             android:fontFamily="@*android:string/config_headlineFontFamily"
             android:singleLine="true"
             android:textAlignment="viewStart"
-            android:textAppearance="@android:style/TextAppearance.Material.Display1"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Display1"
             android:textSize="36sp" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:maxLines="10"
             android:paddingBottom="20dp"
             android:textAlignment="viewStart"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1" />
 
         <Button
             android:id="@+id/deletion_helper_button"

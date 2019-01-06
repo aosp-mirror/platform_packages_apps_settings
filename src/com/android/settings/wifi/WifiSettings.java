@@ -240,7 +240,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         mAddPreference.setIcon(R.drawable.ic_menu_add);
         mAddPreference.setTitle(R.string.wifi_add_network);
         if (WifiDppUtils.isSharingNetworkEnabled(getContext())) {
-            mAddPreference.setButtonIcon(R.drawable.ic_qrcode_24dp);
+            mAddPreference.setButtonIcon(R.drawable.ic_scan_24dp);
             mAddPreference.setButtonOnClickListener((View v) -> {
                 // Launch QR code scanner to join a network.
                 getContext().startActivity(

@@ -33,12 +33,17 @@ public class SlicePreference extends LayoutPreference {
 
     public SlicePreference(Context context, AttributeSet attrs) {
         super(context, attrs, R.attr.slicePreferenceStyle);
-        mSliceView = findViewById(R.id.slice_view);
+        init();
     }
 
     public SlicePreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, R.attr.slicePreferenceStyle);
+        super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
         mSliceView = findViewById(R.id.slice_view);
+        mSliceView.showTitleItems(true);
     }
 
     public void onSliceUpdated(Slice slice) {
