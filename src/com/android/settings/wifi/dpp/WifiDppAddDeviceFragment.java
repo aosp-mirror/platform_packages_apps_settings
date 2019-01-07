@@ -28,7 +28,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -41,7 +40,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG = "WifiDppAddDeviceFragment";
 
     private ImageView mWifiApPictureView;
-    private TextView mChooseDifferentNetwork;
+    private Button mChooseDifferentNetwork;
     private Button mButtonLeft;
     private Button mButtonRight;
 
@@ -109,10 +108,16 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 wifiNetworkConfig.getSsid()));
 
         mWifiApPictureView = view.findViewById(R.id.wifi_ap_picture_view);
+
         mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
+        mChooseDifferentNetwork.setOnClickListener(v -> getFragmentManager().popBackStack());
+
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonLeft.setText(R.string.cancel);
-        mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
+        mButtonLeft.setOnClickListener(v -> {
+            getActivity().setResult(Activity.RESULT_CANCELED);
+            getActivity().finish();
+        });
 
         mButtonRight = view.findViewById(R.id.button_right);
         mButtonRight.setText(R.string.wifi_dpp_share_wifi);
