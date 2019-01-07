@@ -82,8 +82,8 @@ public class BatteryFixSlice implements CustomSliceable {
             return buildBatteryGoodSlice(sliceBuilder, true);
         }
 
-        final List<BatteryTip> batteryTips = SliceBackgroundWorker.getInstance(mContext,
-                this).getResults();
+        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(getUri());
+        final List<BatteryTip> batteryTips = worker != null ? worker.getResults() : null;
 
         if (batteryTips == null) {
             // Because we need wait slice background worker return data

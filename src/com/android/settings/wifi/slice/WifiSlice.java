@@ -105,8 +105,8 @@ public class WifiSlice implements CustomSliceable {
             return listBuilder.build();
         }
 
-        final List<AccessPoint> results =
-                SliceBackgroundWorker.getInstance(mContext, this).getResults();
+        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(getUri());
+        final List<AccessPoint> results = worker != null ? worker.getResults() : null;
 
         // Need a loading text when results are not ready.
         boolean needLoadingRow = results == null;
