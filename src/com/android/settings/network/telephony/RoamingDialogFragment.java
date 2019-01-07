@@ -17,6 +17,7 @@ package com.android.settings.network.telephony;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -78,8 +79,7 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/114749736): add category for roaming dialog
-        return 0;
+        return SettingsEnums.MOBILE_ROAMING_DIALOG;
     }
 
     @Override

@@ -196,7 +196,6 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         }
     }
 
-    //TODO(b/114749736): update search provider
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
