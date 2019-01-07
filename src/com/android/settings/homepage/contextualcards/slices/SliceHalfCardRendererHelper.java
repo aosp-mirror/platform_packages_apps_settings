@@ -16,13 +16,24 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
+import androidx.slice.SliceMetadata;
+import androidx.slice.core.SliceAction;
+import androidx.slice.widget.EventInfo;
 
+import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Card renderer helper for {@link ContextualCard} built as slice half card.
@@ -37,10 +48,38 @@ class SliceHalfCardRendererHelper {
     }
 
     RecyclerView.ViewHolder createViewHolder(View view) {
-        return null;
+        return new HalfCardViewHolder(view);
     }
 
     void bindView(RecyclerView.ViewHolder holder, ContextualCard card, Slice slice) {
+        final HalfCardViewHolder view = (HalfCardViewHolder) holder;
+        final SliceMetadata sliceMetadata = SliceMetadata.from(mContext, slice);
+        final SliceAction primaryAction = sliceMetadata.getPrimaryAction();
+        view.icon.setImageDrawable(primaryAction.getIcon().loadDrawable(mContext));
+        view.title.setText(primaryAction.getTitle());
+        view.content.setOnClickListener(v -> {
+            try {
+                primaryAction.getAction().send();
+            } catch (PendingIntent.CanceledException e) {
+                Log.w(TAG, "Failed to start intent " + primaryAction.getTitle());
+            }
+            final ContextualCardFeatureProvider contextualCardFeatureProvider =
+                    FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
+            contextualCardFeatureProvider.logContextualCardClick(card, 0 /* row */,
+                    EventInfo.ACTION_TYPE_CONTENT);
+        });
+    }
 
+    static class HalfCardViewHolder extends RecyclerView.ViewHolder {
+        public final LinearLayout content;
+        public final ImageView icon;
+        public final TextView title;
+
+        public HalfCardViewHolder(View itemView) {
+            super(itemView);
+            content = itemView.findViewById(R.id.content);
+            icon = itemView.findViewById(android.R.id.icon);
+            title = itemView.findViewById(android.R.id.title);
+        }
     }
 }
