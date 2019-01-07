@@ -454,7 +454,8 @@
 
     <style name="ConditionFullCardBorderlessButton"
            parent="@style/ConditionCardBorderlessButton">
-        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:minWidth">24dp</item>
+        <item name="android:layout_marginStart">20dp</item>
     </style>
 
     <style name="ContextualCardDismissalButton"
