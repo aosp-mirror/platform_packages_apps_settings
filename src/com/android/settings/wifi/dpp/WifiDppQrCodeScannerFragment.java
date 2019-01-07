@@ -62,9 +62,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     private static final long SHOW_ERROR_MESSAGE_INTERVAL = 2000;
     private static final long SHOW_SUCCESS_SQUARE_INTERVAL = 1000;
 
-    // Keys for Bundle usage
-    private static final String KEY_PUBLIC_KEY = "key_public_key";
-    private static final String KEY_INFORMATION = "key_information";
+    // Key for Bundle usage
+    private static final String KEY_PUBLIC_URI = "key_public_uri";
 
     private QrCamera mCamera;
     private TextureView mTextureView;
@@ -91,7 +90,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     // Container Activity must implement this interface
     public interface OnScanWifiDppSuccessListener {
-        public void onScanWifiDppSuccess(String publicKey, String information);
+        public void onScanWifiDppSuccess(String uri);
     }
     OnScanWifiDppSuccessListener mScanWifiDppSuccessListener;
 
@@ -269,7 +268,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void handleSuccessfulResult(String qrCode) {
         switch (mWifiQrCode.getScheme()) {
             case WifiQrCode.SCHEME_DPP:
-                handleWifiDpp(mWifiQrCode.getPublicKey(), mWifiQrCode.getInformation());
+                handleWifiDpp(qrCode);
                 break;
 
             case WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG:
@@ -281,13 +280,12 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
     }
 
-    private void handleWifiDpp(String publicKey, String information) {
+    private void handleWifiDpp(String uri) {
         destroyCamera();
         mDecorateView.setFocused(true);
 
         final Bundle bundle = new Bundle();
-        bundle.putString(KEY_PUBLIC_KEY, publicKey);
-        bundle.putString(KEY_INFORMATION, information);
+        bundle.putString(KEY_PUBLIC_URI, uri);
 
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_WIFI_DPP_SUCCESS);
         message.setData(bundle);
@@ -352,10 +350,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                         return;
                     }
                     final Bundle bundle = msg.getData();
-                    final String publicKey = bundle.getString(KEY_PUBLIC_KEY);
-                    final String information = bundle.getString(KEY_INFORMATION);
+                    final String uri = bundle.getString(KEY_PUBLIC_URI);
 
-                    mScanWifiDppSuccessListener.onScanWifiDppSuccess(publicKey, information);
+                    mScanWifiDppSuccessListener.onScanWifiDppSuccess(uri);
                     break;
 
                 case MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS:

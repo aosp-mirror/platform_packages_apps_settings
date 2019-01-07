@@ -64,6 +64,9 @@ public class WifiDppUtils {
     /** The data corresponding to {@code WifiConfiguration} hiddenSSID */
     public static final String EXTRA_WIFI_HIDDEN_SSID = "hiddenSsid";
 
+    /** The data corresponding to {@code WifiConfiguration} networkId */
+    public static final String EXTRA_WIFI_NETWORK_ID = "networkId";
+
     /** @see WifiQrCode */
     public static final String EXTRA_QR_CODE = "qrCode";
 
@@ -163,6 +166,11 @@ public class WifiDppUtils {
         }
         if (!TextUtils.isEmpty(preSharedKey)) {
             intent.putExtra(EXTRA_WIFI_PRE_SHARED_KEY, preSharedKey);
+        }
+        if (wifiConfig.networkId == WifiConfiguration.INVALID_NETWORK_ID) {
+            throw new IllegalArgumentException("Invalid network ID");
+        } else {
+            intent.putExtra(EXTRA_WIFI_NETWORK_ID, wifiConfig.networkId);
         }
 
         return intent;

@@ -18,7 +18,10 @@ package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +38,41 @@ import com.android.settings.R;
  * to the Wi-Fi network.
  */
 public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
+    private static final String TAG = "WifiDppAddDeviceFragment";
+
     private ImageView mWifiApPictureView;
     private TextView mChooseDifferentNetwork;
     private Button mButtonLeft;
     private Button mButtonRight;
+
+    private class DppStatusCallback extends android.net.wifi.DppStatusCallback {
+        @Override
+        public void onEnrolleeSuccess(int newNetworkId) {
+            // Do nothing
+        }
+
+        @Override
+        public void onConfiguratorSuccess(int code) {
+            // Update success UI.
+            mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
+            mSummary.setVisibility(View.INVISIBLE);
+            mButtonLeft.setText(R.string.wifi_dpp_add_another_device);
+            mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
+            mButtonRight.setText(R.string.done);
+            mButtonRight.setOnClickListener(v -> getActivity().finish());
+        }
+
+        @Override
+        public void onFailure(int code) {
+            //TODO(b/122429170): Show DPP configuration error state UI
+            Log.d(TAG, "DppStatusCallback.onFailure " + code);
+        }
+
+        @Override
+        public void onProgress(int code) {
+            // Do nothing
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -86,6 +120,11 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     }
 
     private void startWifiDppInitiator() {
-        //TODO(b/122331217): starts Wi-Fi DPP initiator handshake here
+        final String enrolleeUri = ((WifiDppConfiguratorActivity) getActivity()).getDppUri();
+        final int networkId =
+                ((WifiDppConfiguratorActivity) getActivity()).getWifiNetworkConfig().getNetworkId();
+        final WifiManager wifiManager = getContext().getSystemService(WifiManager.class);
+        wifiManager.startDppAsConfiguratorInitiator(enrolleeUri, networkId,
+                WifiManager.DPP_NETWORK_ROLE_STA, /* handler */ null, new DppStatusCallback());
     }
 }

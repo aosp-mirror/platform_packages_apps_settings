@@ -17,6 +17,7 @@
 package com.android.settings.wifi.dpp;
 
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
 import android.text.TextUtils;
 
 import androidx.annotation.Keep;
@@ -135,7 +136,7 @@ public class WifiQrCode {
         password = removeBackSlash(password);
 
         mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid, password,
-                hiddenSsid);
+                hiddenSsid, WifiConfiguration.INVALID_NETWORK_ID);
 
         if (mWifiNetworkConfig == null) {
             throw new IllegalArgumentException("Invalid format");
