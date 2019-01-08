@@ -100,7 +100,8 @@ public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;
     private static final int RSSI = -55;
-    private static final int LINK_SPEED = 123;
+    private static final int TX_LINK_SPEED = 123;
+    private static final int RX_LINK_SPEED = 54;
     private static final String MAC_ADDRESS = WifiInfo.DEFAULT_MAC_ADDRESS;
     private static final String SECURITY = "None";
 
@@ -142,7 +143,9 @@ public class WifiDetailPreferenceControllerTest {
     @Mock
     private Preference mockSignalStrengthPref;
     @Mock
-    private Preference mockLinkSpeedPref;
+    private Preference mockTxLinkSpeedPref;
+    @Mock
+    private Preference mockRxLinkSpeedPref;
     @Mock
     private Preference mockFrequencyPref;
     @Mock
@@ -247,7 +250,8 @@ public class WifiDetailPreferenceControllerTest {
         when(mockButtonsPref.setButton1OnClickListener(mForgetClickListener.capture()))
                 .thenReturn(mockButtonsPref);
 
-        when(mockWifiInfo.getLinkSpeed()).thenReturn(LINK_SPEED);
+        when(mockWifiInfo.getTxLinkSpeedMbps()).thenReturn(TX_LINK_SPEED);
+        when(mockWifiInfo.getRxLinkSpeedMbps()).thenReturn(RX_LINK_SPEED);
         when(mockWifiInfo.getRssi()).thenReturn(RSSI);
         when(mockWifiInfo.getMacAddress()).thenReturn(MAC_ADDRESS);
         when(mockWifiManager.getConnectionInfo()).thenReturn(mockWifiInfo);
@@ -294,8 +298,10 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockButtonsPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SIGNAL_STRENGTH_PREF))
                 .thenReturn(mockSignalStrengthPref);
-        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_LINK_SPEED))
-                .thenReturn(mockLinkSpeedPref);
+        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_TX_LINK_SPEED))
+                .thenReturn(mockTxLinkSpeedPref);
+        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_RX_LINK_SPEED))
+                .thenReturn(mockRxLinkSpeedPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_FREQUENCY_PREF))
                 .thenReturn(mockFrequencyPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SECURITY_PREF))
@@ -414,20 +420,38 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void linkSpeedPref_shouldHaveDetailTextSet() {
-        String expectedLinkSpeed = mContext.getString(R.string.link_speed, LINK_SPEED);
+        String expectedLinkSpeed = mContext.getString(R.string.tx_link_speed, TX_LINK_SPEED);
 
         displayAndResume();
 
-        verify(mockLinkSpeedPref).setSummary(expectedLinkSpeed);
+        verify(mockTxLinkSpeedPref).setSummary(expectedLinkSpeed);
     }
 
     @Test
     public void linkSpeedPref_shouldNotShowIfNotSet() {
-        when(mockWifiInfo.getLinkSpeed()).thenReturn(-1);
+        when(mockWifiInfo.getTxLinkSpeedMbps()).thenReturn(-1);
 
         displayAndResume();
 
-        verify(mockLinkSpeedPref).setVisible(false);
+        verify(mockTxLinkSpeedPref).setVisible(false);
+    }
+
+    @Test
+    public void rxLinkSpeedPref_shouldHaveDetailTextSet() {
+        String expectedLinkSpeed = mContext.getString(R.string.rx_link_speed, RX_LINK_SPEED);
+
+        displayAndResume();
+
+        verify(mockRxLinkSpeedPref).setSummary(expectedLinkSpeed);
+    }
+
+    @Test
+    public void rxLinkSpeedPref_shouldNotShowIfNotSet() {
+        when(mockWifiInfo.getRxLinkSpeedMbps()).thenReturn(-1);
+
+        displayAndResume();
+
+        verify(mockRxLinkSpeedPref).setVisible(false);
     }
 
     @Test

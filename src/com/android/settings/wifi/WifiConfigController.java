@@ -363,9 +363,14 @@ public class WifiConfigController implements TextWatcher,
                     }
 
                     WifiInfo info = mAccessPoint.getInfo();
-                    if (info != null && info.getLinkSpeed() != -1) {
-                        addRow(group, R.string.wifi_speed, String.format(
-                                res.getString(R.string.link_speed), info.getLinkSpeed()));
+                    if (info != null && info.getTxLinkSpeedMbps() != -1) {
+                        addRow(group, R.string.tx_wifi_speed, String.format(
+                                res.getString(R.string.tx_link_speed), info.getTxLinkSpeedMbps()));
+                    }
+
+                    if (info != null && info.getRxLinkSpeedMbps() != -1) {
+                        addRow(group, R.string.rx_wifi_speed, String.format(
+                                res.getString(R.string.rx_link_speed), info.getRxLinkSpeedMbps()));
                     }
 
                     if (info != null && info.getFrequency() != -1) {
