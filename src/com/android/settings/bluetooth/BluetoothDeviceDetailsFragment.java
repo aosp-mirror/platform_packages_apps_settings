@@ -24,6 +24,9 @@ import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -42,6 +45,9 @@ import java.util.List;
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     private static final String TAG = "BTDeviceDetailsFrg";
+
+    @VisibleForTesting
+    static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
 
     /**
      * An interface to let tests override the normal mechanism for looking up the
@@ -124,6 +130,24 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.bluetooth_device_details_fragment;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0, R.string.bluetooth_rename_button);
+        item.setIcon(R.drawable.ic_mode_edit);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == EDIT_DEVICE_NAME_ITEM_ID) {
+            RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
+                    getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
+            return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 
     @Override
