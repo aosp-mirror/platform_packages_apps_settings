@@ -174,6 +174,20 @@
             android:layout_height="1dip"
             android:background="?android:attr/listDivider" />
 
+        <!-- Enable/Disable CBRS data -->
+        <Switch android:id="@+id/cbrs_data_switch"
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cbrs_data_switch_string" />
+
+        <!-- Horizontal Rule -->
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="?android:attr/listDivider" />
+
         <!-- Ping stats -->
         <Button android:id="@+id/ping_test"
                 android:textSize="14sp"
