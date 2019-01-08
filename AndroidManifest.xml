@@ -2007,9 +2007,8 @@
             </intent-filter>
         </activity>
 
-        <!-- TODO: Is this needed? -->
         <activity android:name="BandMode"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert"
+                  android:label="@string/band_mode_title"
                   android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
