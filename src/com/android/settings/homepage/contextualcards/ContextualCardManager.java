@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CARD_CONTENT_LOADER_ID;
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -172,7 +173,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
         //replace with the new data
         mContextualCards.clear();
-        mContextualCards.addAll(sortCards(allCards));
+        final List<ContextualCard> sortedCards = sortCards(allCards);
+        mContextualCards.addAll(assignCardWidth(sortedCards));
 
         loadCardControllers();
 
@@ -222,6 +224,24 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     void setListener(ContextualCardUpdateListener listener) {
         mListener = listener;
+    }
+
+    @VisibleForTesting
+    List<ContextualCard> assignCardWidth(List<ContextualCard> cards) {
+        final List<ContextualCard> result = new ArrayList<>(cards);
+        // Shows as half cards if 2 suggestion type of cards are next to each other.
+        // Shows as full card if 1 suggestion type of card lives alone.
+        for (int index = 1; index < result.size(); index++) {
+            final ContextualCard previous = result.get(index - 1);
+            final ContextualCard current = result.get(index);
+            if (current.getCategory() == SUGGESTION_VALUE
+                    && previous.getCategory() == SUGGESTION_VALUE) {
+                result.set(index - 1, previous.mutate().setIsHalfWidth(true).build());
+                result.set(index, current.mutate().setIsHalfWidth(true).build());
+                index++;
+            }
+        }
+        return result;
     }
 
     private List<ContextualCard> getCardsToKeep(List<ContextualCard> cards) {

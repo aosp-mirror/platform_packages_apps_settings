@@ -112,7 +112,8 @@ public class ConditionContextualCardControllerTest {
     }
 
     @Test
-    public void getConditionalCards_hasOneConditionCard_shouldGetOneFullWidthCard() {
+    public void getConditionalCards_hasOneConditionCardAndExpanded_shouldGetOneFullWidthCard() {
+        mController.setIsExpanded(true);
         final Map<Integer, List<ContextualCard>> conditionalCards =
                 mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(1));
 
@@ -120,11 +121,24 @@ public class ConditionContextualCardControllerTest {
         assertThat(conditionalCards.get(CardType.CONDITIONAL)).hasSize(1);
         assertThat(conditionalCards.get(CardType.CONDITIONAL).get(0).isHalfWidth()).isFalse();
         assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isNotEmpty();
+    }
+
+    @Test
+    public void getConditionalCards_hasOneConditionCardAndCollapsed_shouldGetConditionalHeader() {
+        mController.setIsExpanded(false);
+        final Map<Integer, List<ContextualCard>> conditionalCards =
+                mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(1));
+
+        assertThat(conditionalCards).hasSize(3);
+        assertThat(conditionalCards.get(CardType.CONDITIONAL)).isEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isNotEmpty();
         assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isEmpty();
     }
 
     @Test
-    public void getConditionalCards_hasTwoConditionCards_shouldGetTwoHalfWidthCards() {
+    public void getConditionalCards_hasTwoConditionCardsAndExpanded_shouldGetTwoHalfWidthCards() {
+        mController.setIsExpanded(true);
         final Map<Integer, List<ContextualCard>> conditionalCards =
                 mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(2));
 
@@ -134,6 +148,18 @@ public class ConditionContextualCardControllerTest {
             assertThat(card.isHalfWidth()).isTrue();
         }
         assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isNotEmpty();
+    }
+
+    @Test
+    public void getConditionalCards_hasTwoConditionCardsAndCollapsed_shouldGetConditionalHeader() {
+        mController.setIsExpanded(false);
+        final Map<Integer, List<ContextualCard>> conditionalCards =
+                mController.buildConditionalCardsWithFooterOrHeader(generateConditionCards(2));
+
+        assertThat(conditionalCards).hasSize(3);
+        assertThat(conditionalCards.get(CardType.CONDITIONAL)).isEmpty();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isNotEmpty();
         assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isEmpty();
     }
 

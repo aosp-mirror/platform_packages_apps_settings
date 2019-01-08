@@ -116,8 +116,6 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
     }
 
     private int getPreferredNetworkModeSummaryResId(int NetworkMode) {
-        //TODO(b/114749736): refactor it to "Preferred network mode: <Mode>", instead of building
-        // string for each type...
         switch (NetworkMode) {
             case TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA:
                 return R.string.preferred_network_mode_tdscdma_gsm_wcdma_summary;
