@@ -37,6 +37,7 @@ public class FeatureFlagPersistent {
     static {
         PERSISTENT_FLAGS = new HashSet<>();
         PERSISTENT_FLAGS.add(FeatureFlags.HEARING_AID_SETTINGS);
+        PERSISTENT_FLAGS.add(FeatureFlags.NETWORK_INTERNET_V2);
     }
 
     public static boolean isEnabled(Context context, String feature) {
