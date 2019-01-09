@@ -44,12 +44,7 @@ public class LegacySuggestionContextualCardRenderer implements ContextualCardRen
     }
 
     @Override
-    public int getViewType(boolean isHalfWidth) {
-        return VIEW_TYPE;
-    }
-
-    @Override
-    public RecyclerView.ViewHolder createViewHolder(View view) {
+    public RecyclerView.ViewHolder createViewHolder(View view, @LayoutRes int viewType) {
         return new LegacySuggestionViewHolder(view);
     }
 

@@ -33,6 +33,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
+import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -236,8 +237,10 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
             final ContextualCard current = result.get(index);
             if (current.getCategory() == SUGGESTION_VALUE
                     && previous.getCategory() == SUGGESTION_VALUE) {
-                result.set(index - 1, previous.mutate().setIsHalfWidth(true).build());
-                result.set(index, current.mutate().setIsHalfWidth(true).build());
+                result.set(index - 1, previous.mutate().setViewType(
+                        SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH).build());
+                result.set(index, current.mutate().setViewType(
+                        SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH).build());
                 index++;
             }
         }

@@ -60,7 +60,7 @@ public class RingerVibrateConditionController extends AbnormalRingerConditionCon
                 .setSummaryText(
                         mAppContext.getText(R.string.condition_device_vibrate_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_volume_ringer_vibrate))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 }

@@ -58,7 +58,7 @@ public class RingerMutedConditionController extends AbnormalRingerConditionContr
                 .setSummaryText(
                         mAppContext.getText(R.string.condition_device_muted_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_notifications_off_24dp))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 }

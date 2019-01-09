@@ -21,10 +21,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,24 +66,22 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public int getItemViewType(int position) {
         final ContextualCard card = mContextualCards.get(position);
-        final ContextualCardRenderer renderer = mControllerRendererPool.getRendererByCardType(
-                mContext, mLifecycleOwner, card.getCardType());
-        return renderer.getViewType(card.isHalfWidth());
+        return card.getViewType();
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, @LayoutRes int viewType) {
         final ContextualCardRenderer renderer = mControllerRendererPool.getRendererByViewType(
                 mContext, mLifecycleOwner, viewType);
         final View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
-        return renderer.createViewHolder(view);
+        return renderer.createViewHolder(view, viewType);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final ContextualCard card = mContextualCards.get(position);
-        final ContextualCardRenderer renderer = mControllerRendererPool.getRendererByCardType(
-                mContext, mLifecycleOwner, card.getCardType());
+        final ContextualCardRenderer renderer = mControllerRendererPool.getRendererByViewType(
+                mContext, mLifecycleOwner, card.getViewType());
         renderer.bindView(holder, card);
     }
 
@@ -98,11 +100,14 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    final ContextualCard card = mContextualCards.get(position);
-                    if (card.isHalfWidth()) {
-                        return HALF_WIDTH;
+                    final int viewType = mContextualCards.get(position).getViewType();
+                    switch (viewType) {
+                        case ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH:
+                        case SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH:
+                            return HALF_WIDTH;
+                        default:
+                            return FULL_WIDTH;
                     }
-                    return FULL_WIDTH;
                 }
             });
         }

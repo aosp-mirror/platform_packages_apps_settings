@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -47,12 +48,7 @@ public class ConditionHeaderContextualCardRenderer implements ContextualCardRend
     }
 
     @Override
-    public int getViewType(boolean isHalfWidth) {
-        return VIEW_TYPE;
-    }
-
-    @Override
-    public RecyclerView.ViewHolder createViewHolder(View view) {
+    public RecyclerView.ViewHolder createViewHolder(View view, @LayoutRes int viewType) {
         return new ConditionHeaderCardHolder(view);
     }
 

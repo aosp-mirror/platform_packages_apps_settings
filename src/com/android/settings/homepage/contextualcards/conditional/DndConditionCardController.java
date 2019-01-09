@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.provider.Settings;
-import android.service.notification.ZenModeConfig;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -100,7 +99,7 @@ public class DndConditionCardController implements ConditionalCardController {
                 .setTitleText(mAppContext.getText(R.string.condition_zen_title).toString())
                 .setSummaryText(mAppContext.getText(R.string.condition_zen_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 

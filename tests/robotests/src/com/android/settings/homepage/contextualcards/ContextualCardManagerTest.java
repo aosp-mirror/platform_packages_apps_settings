@@ -16,6 +16,9 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
+import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyMap;
@@ -222,7 +225,7 @@ public class ContextualCardManagerTest {
 
         assertThat(result).hasSize(5);
         for (ContextualCard card : result) {
-            assertThat(card.isHalfWidth()).isFalse();
+            assertThat(card.getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
         }
     }
 
@@ -242,7 +245,7 @@ public class ContextualCardManagerTest {
 
         assertThat(result).hasSize(5);
         for (ContextualCard card : result) {
-            assertThat(card.isHalfWidth()).isFalse();
+            assertThat(card.getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
         }
     }
 
@@ -257,14 +260,16 @@ public class ContextualCardManagerTest {
         );
         final List<ContextualCard> twoConsecutiveSuggestionCards = buildCategoriedCards(
                 getContextualCardList(), categories);
-        final List<Boolean> expectedValues = Arrays.asList(false, false, true, true, false);
+        final List<Integer> expectedValues = Arrays.asList(VIEW_TYPE_FULL_WIDTH,
+                VIEW_TYPE_FULL_WIDTH, VIEW_TYPE_HALF_WIDTH, VIEW_TYPE_HALF_WIDTH,
+                VIEW_TYPE_FULL_WIDTH);
 
         final List<ContextualCard> result = mManager.assignCardWidth(
                 twoConsecutiveSuggestionCards);
 
         assertThat(result).hasSize(5);
         for (int i = 0; i < result.size(); i++) {
-            assertThat(result.get(i).isHalfWidth()).isEqualTo(expectedValues.get(i));
+            assertThat(result.get(i).getViewType()).isEqualTo(expectedValues.get(i));
         }
     }
 
@@ -285,7 +290,7 @@ public class ContextualCardManagerTest {
 
         assertThat(result).hasSize(5);
         for (ContextualCard card : result) {
-            assertThat(card.isHalfWidth()).isFalse();
+            assertThat(card.getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
         }
     }
 
@@ -300,14 +305,16 @@ public class ContextualCardManagerTest {
         );
         final List<ContextualCard> threeConsecutiveSuggestionCards = buildCategoriedCards(
                 getContextualCardList(), categories);
-        final List<Boolean> expectedValues = Arrays.asList(false, true, true, false, false);
+        final List<Integer> expectedValues = Arrays.asList(VIEW_TYPE_FULL_WIDTH,
+                VIEW_TYPE_HALF_WIDTH, VIEW_TYPE_HALF_WIDTH, VIEW_TYPE_FULL_WIDTH,
+                VIEW_TYPE_FULL_WIDTH);
 
         final List<ContextualCard> result = mManager.assignCardWidth(
                 threeConsecutiveSuggestionCards);
 
         assertThat(result).hasSize(5);
         for (int i = 0; i < result.size(); i++) {
-            assertThat(result.get(i).isHalfWidth()).isEqualTo(expectedValues.get(i));
+            assertThat(result.get(i).getViewType()).isEqualTo(expectedValues.get(i));
         }
     }
 
@@ -322,14 +329,16 @@ public class ContextualCardManagerTest {
         );
         final List<ContextualCard> fourConsecutiveSuggestionCards = buildCategoriedCards(
                 getContextualCardList(), categories);
-        final List<Boolean> expectedValues = Arrays.asList(false, true, true, true, true);
+        final List<Integer> expectedValues = Arrays.asList(VIEW_TYPE_FULL_WIDTH,
+                VIEW_TYPE_HALF_WIDTH, VIEW_TYPE_HALF_WIDTH, VIEW_TYPE_HALF_WIDTH,
+                VIEW_TYPE_HALF_WIDTH);
 
         final List<ContextualCard> result = mManager.assignCardWidth(
                 fourConsecutiveSuggestionCards);
 
         assertThat(result).hasSize(5);
         for (int i = 0; i < result.size(); i++) {
-            assertThat(result.get(i).isHalfWidth()).isEqualTo(expectedValues.get(i));
+            assertThat(result.get(i).getViewType()).isEqualTo(expectedValues.get(i));
         }
     }
 
@@ -338,6 +347,7 @@ public class ContextualCardManagerTest {
                 .setName(TEST_SLICE_NAME)
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(sliceUri))
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build();
     }
 
@@ -356,28 +366,33 @@ public class ContextualCardManagerTest {
                 .setName("test_wifi")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI)
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_flashlight")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(
                         Uri.parse("content://com.android.settings.test.slices/action/flashlight"))
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_connected")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI)
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_gesture")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(
                         "content://com.android.settings.test.slices/action/gesture_pick_up"))
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_battery")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(CustomSliceRegistry.BATTERY_INFO_SLICE_URI)
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         return cards;
     }

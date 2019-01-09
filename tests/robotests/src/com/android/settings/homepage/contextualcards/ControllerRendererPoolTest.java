@@ -105,33 +105,4 @@ public class ControllerRendererPoolTest {
         assertThat(renderer).isNull();
         assertThat(mPool.getRenderers()).isEmpty();
     }
-
-    @Test
-    public void getRenderer_hasSupportedCardTypeAndWidth_shouldReturnCorrespondingRenderer() {
-        ContextualCardLookupTable.LOOKUP_TABLE.stream().forEach(mapping -> assertThat(
-                mPool.getRendererByCardType(mContext, mLifecycleOwner,
-                        mapping.mCardType).getClass()).isEqualTo(mapping.mRendererClass));
-    }
-
-    @Test
-    public void getRenderer_hasSupportedCardTypeAndWidth_shouldHaveDistinctRenderersInPool() {
-        final long count = ContextualCardLookupTable.LOOKUP_TABLE.stream().map(
-                mapping -> mapping.mRendererClass).distinct().count();
-
-        ContextualCardLookupTable.LOOKUP_TABLE.stream().forEach(
-                mapping -> mPool.getRendererByCardType(mContext, mLifecycleOwner,
-                        mapping.mCardType));
-
-        assertThat(mPool.getRenderers()).hasSize((int) count);
-    }
-
-    @Test
-    public void getRenderer_hasUnsupportedCardType_shouldReturnNullAndPoolIsEmpty() {
-        final ContextualCardRenderer renderer = mPool.getRendererByCardType(mContext,
-                mLifecycleOwner,
-                UNSUPPORTED_CARD_TYPE);
-
-        assertThat(renderer).isNull();
-        assertThat(mPool.getRenderers()).isEmpty();
-    }
 }

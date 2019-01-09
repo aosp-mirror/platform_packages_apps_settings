@@ -127,7 +127,7 @@ public class SliceFullCardRendererHelperTest {
                 .setCategory(ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE)
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(TEST_SLICE_URI)
-                .setIsHalfWidth(false /* isHalfWidth */)
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build();
     }
 

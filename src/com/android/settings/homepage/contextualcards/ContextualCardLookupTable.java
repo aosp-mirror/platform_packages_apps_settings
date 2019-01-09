@@ -24,14 +24,10 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.homepage.contextualcards.ContextualCard.CardType;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
-import com.android.settings.homepage.contextualcards.conditional
-        .ConditionHeaderContextualCardRenderer;
-import com.android.settings.homepage.contextualcards.legacysuggestion
-        .LegacySuggestionContextualCardController;
-import com.android.settings.homepage.contextualcards.legacysuggestion
-        .LegacySuggestionContextualCardRenderer;
-import com.android.settings.homepage.contextualcards.conditional
-        .ConditionFooterContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.conditional.ConditionFooterContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.conditional.ConditionHeaderContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.legacysuggestion.LegacySuggestionContextualCardController;
+import com.android.settings.homepage.contextualcards.legacysuggestion.LegacySuggestionContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardController;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
@@ -72,11 +68,11 @@ public class ContextualCardLookupTable {
     static final Set<ControllerRendererMapping> LOOKUP_TABLE =
             new TreeSet<ControllerRendererMapping>() {{
                 add(new ControllerRendererMapping(CardType.CONDITIONAL,
-                        ConditionContextualCardRenderer.HALF_WIDTH_VIEW_TYPE,
+                        ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH,
                         ConditionContextualCardController.class,
                         ConditionContextualCardRenderer.class));
                 add(new ControllerRendererMapping(CardType.CONDITIONAL,
-                        ConditionContextualCardRenderer.FULL_WIDTH_VIEW_TYPE,
+                        ConditionContextualCardRenderer.VIEW_TYPE_FULL_WIDTH,
                         ConditionContextualCardController.class,
                         ConditionContextualCardRenderer.class));
                 add(new ControllerRendererMapping(CardType.LEGACY_SUGGESTION,
@@ -109,15 +105,6 @@ public class ContextualCardLookupTable {
             }
         }
         return null;
-    }
-
-    public static Class<? extends ContextualCardRenderer> getCardRendererClassByCardType(
-            @CardType int cardType) {
-        return LOOKUP_TABLE.stream()
-                .filter(m -> m.mCardType == cardType)
-                .findFirst()
-                .map(mapping -> mapping.mRendererClass)
-                .orElse(null);
     }
 
     public static Class<? extends ContextualCardRenderer> getCardRendererClassByViewType(

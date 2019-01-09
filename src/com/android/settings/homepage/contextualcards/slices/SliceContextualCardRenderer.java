@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -66,9 +67,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     private final SliceFullCardRendererHelper mFullCardHelper;
     private final SliceHalfCardRendererHelper mHalfCardHelper;
 
-    //TODO(b/121303357): Remove isHalfWidth field from SliceContextualCardRenderer class.
-    private boolean mIsHalfWidth;
-
     public SliceContextualCardRenderer(Context context, LifecycleOwner lifecycleOwner,
             ControllerRendererPool controllerRendererPool) {
         mContext = context;
@@ -83,17 +81,13 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     }
 
     @Override
-    public int getViewType(boolean isHalfWidth) {
-        mIsHalfWidth = isHalfWidth;
-        return isHalfWidth? VIEW_TYPE_HALF_WIDTH : VIEW_TYPE_FULL_WIDTH;
-    }
-
-    @Override
-    public RecyclerView.ViewHolder createViewHolder(View view) {
-        if (mIsHalfWidth) {
-            return mHalfCardHelper.createViewHolder(view);
+    public RecyclerView.ViewHolder createViewHolder(View view, @LayoutRes int viewType) {
+        switch (viewType) {
+            case VIEW_TYPE_HALF_WIDTH:
+                return mHalfCardHelper.createViewHolder(view);
+            default:
+                return mFullCardHelper.createViewHolder(view);
         }
-        return mFullCardHelper.createViewHolder(view);
     }
 
     @Override

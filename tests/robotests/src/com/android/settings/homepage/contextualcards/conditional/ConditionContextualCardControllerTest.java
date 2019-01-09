@@ -119,7 +119,8 @@ public class ConditionContextualCardControllerTest {
 
         assertThat(conditionalCards).hasSize(3);
         assertThat(conditionalCards.get(CardType.CONDITIONAL)).hasSize(1);
-        assertThat(conditionalCards.get(CardType.CONDITIONAL).get(0).isHalfWidth()).isFalse();
+        assertThat(conditionalCards.get(CardType.CONDITIONAL).get(0).getViewType()).isEqualTo(
+                ConditionContextualCardRenderer.VIEW_TYPE_FULL_WIDTH);
         assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isEmpty();
         assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isNotEmpty();
     }
@@ -145,7 +146,8 @@ public class ConditionContextualCardControllerTest {
         assertThat(conditionalCards).hasSize(3);
         assertThat(conditionalCards.get(CardType.CONDITIONAL)).hasSize(2);
         for (ContextualCard card : conditionalCards.get(CardType.CONDITIONAL)) {
-            assertThat(card.isHalfWidth()).isTrue();
+            assertThat(card.getViewType()).isEqualTo(
+                    ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH);
         }
         assertThat(conditionalCards.get(CardType.CONDITIONAL_HEADER)).isEmpty();
         assertThat(conditionalCards.get(CardType.CONDITIONAL_FOOTER)).isNotEmpty();
@@ -197,7 +199,7 @@ public class ConditionContextualCardControllerTest {
                     .setName("test_name" + i)
                     .setTitleText("test_title" + i)
                     .setSummaryText("test_summary" + i)
-                    .setIsHalfWidth(true)
+                    .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                     .build());
         }
         return conditionCards;

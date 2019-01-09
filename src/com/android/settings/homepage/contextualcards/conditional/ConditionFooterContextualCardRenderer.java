@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.View;
 
+import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -44,12 +45,7 @@ public class ConditionFooterContextualCardRenderer implements ContextualCardRend
     }
 
     @Override
-    public int getViewType(boolean isHalfWidth) {
-        return VIEW_TYPE;
-    }
-
-    @Override
-    public RecyclerView.ViewHolder createViewHolder(View view) {
+    public RecyclerView.ViewHolder createViewHolder(View view, @LayoutRes int viewType) {
         return new ConditionFooterCardHolder(view);
     }
 
