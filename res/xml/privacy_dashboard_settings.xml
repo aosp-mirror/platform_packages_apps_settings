@@ -19,7 +19,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="privacy_dashboard_page"
-    android:title="@string/privacy_dashboard_title">
+    android:title="@string/privacy_dashboard_title"
+    settings:initialExpandedChildrenCount="3">
 
     <!-- App permissions -->
     <Preference
@@ -30,19 +31,19 @@
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
-    <!-- On lock screen notifications -->
-    <com.android.settings.RestrictedListPreference
-        android:key="privacy_lock_screen_notifications"
-        android:title="@string/lock_screen_notifications_title"
-        android:summary="@string/summary_placeholder"
-        settings:searchable="false"/>
-
     <!-- Show passwords -->
     <SwitchPreference
         android:key="show_password"
         android:title="@string/show_password"
         android:summary="@string/show_password_summary"
         settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
+
+    <!-- On lock screen notifications -->
+    <com.android.settings.RestrictedListPreference
+        android:key="privacy_lock_screen_notifications"
+        android:title="@string/lock_screen_notifications_title"
+        android:summary="@string/summary_placeholder"
+        settings:searchable="false"/>
 
     <!-- Privacy Service -->
     <PreferenceCategory
