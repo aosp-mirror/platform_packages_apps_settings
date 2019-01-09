@@ -40,10 +40,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class BatterySliceTest {
+public class BatteryInfoSliceTest {
 
     private Context mContext;
-    private BatterySlice mBatterySlice;
+    private BatteryInfoSlice mBatteryInfoSlice;
 
     @Before
     public void setUp() {
@@ -52,16 +52,16 @@ public class BatterySliceTest {
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
-        mBatterySlice = spy(new BatterySlice(mContext));
+        mBatteryInfoSlice = spy(new BatteryInfoSlice(mContext));
     }
 
     @Test
     public void getSlice_shouldBeCorrectSliceContent() {
-        doNothing().when(mBatterySlice).loadBatteryInfo();
-        doReturn("10%").when(mBatterySlice).getBatteryPercentString();
-        doReturn("test").when(mBatterySlice).getSummary();
+        doNothing().when(mBatteryInfoSlice).loadBatteryInfo();
+        doReturn("10%").when(mBatteryInfoSlice).getBatteryPercentString();
+        doReturn("test").when(mBatteryInfoSlice).getSummary();
 
-        final Slice slice = mBatterySlice.getSlice();
+        final Slice slice = mBatteryInfoSlice.getSlice();
 
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         assertThat(metadata.getTitle()).isEqualTo(
