@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -62,6 +63,14 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     public static final String ACTION_PROCESS_WIFI_DPP_QR_CODE =
             "android.settings.PROCESS_WIFI_DPP_QR_CODE";
 
+    // Key for Bundle usage
+    private static final String KEY_QR_CODE = "key_qr_code";
+    private static final String KEY_WIFI_SECURITY = "key_wifi_security";
+    private static final String KEY_WIFI_SSID = "key_wifi_ssid";
+    private static final String KEY_WIFI_PRESHARED_KEY = "key_wifi_preshared_key";
+    private static final String KEY_WIFI_HIDDEN_SSID = "key_wifi_hidden_ssid";
+    private static final String KEY_WIFI_NETWORK_ID = "key_wifi_network_id";
+
     private FragmentManager mFragmentManager;
 
     /** The Wi-Fi network which will be configured */
@@ -78,6 +87,21 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            String qrCode = savedInstanceState.getString(KEY_QR_CODE);
+
+            mWifiDppQrCode = getValidWifiDppQrCodeOrNull(qrCode);
+
+            String security = savedInstanceState.getString(KEY_WIFI_SECURITY);
+            String ssid = savedInstanceState.getString(KEY_WIFI_SSID);
+            String preSharedKey = savedInstanceState.getString(KEY_WIFI_PRESHARED_KEY);
+            boolean hiddenSsid = savedInstanceState.getBoolean(KEY_WIFI_HIDDEN_SSID);
+            int networkId = savedInstanceState.getInt(KEY_WIFI_NETWORK_ID);
+
+            mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid,
+                    preSharedKey, hiddenSsid, networkId);
+        }
 
         setContentView(R.layout.wifi_dpp_activity);
         mFragmentManager = getSupportFragmentManager();
@@ -227,14 +251,28 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         return mWifiDppQrCode;
     }
 
-    @Override
-    public boolean setWifiNetworkConfig(WifiNetworkConfig config) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    protected boolean setWifiNetworkConfig(WifiNetworkConfig config) {
         if(!WifiNetworkConfig.isValidConfig(config)) {
             return false;
         } else {
             mWifiNetworkConfig = new WifiNetworkConfig(config);
             return true;
         }
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    protected boolean setWifiDppQrCode(WifiQrCode wifiQrCode) {
+        if (wifiQrCode == null) {
+            return false;
+        }
+
+        if (!WifiQrCode.SCHEME_DPP.equals(wifiQrCode.getScheme())) {
+            return false;
+        }
+
+        mWifiDppQrCode = new WifiQrCode(wifiQrCode.getQrCode());
+        return true;
     }
 
     @Override
@@ -273,5 +311,22 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         mWifiNetworkConfig = null;
 
         showChooseSavedWifiNetworkFragment(/* addToBackStack */ true);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (mWifiDppQrCode != null) {
+            outState.putString(KEY_QR_CODE, mWifiDppQrCode.getQrCode());
+        }
+
+        if (mWifiNetworkConfig != null) {
+            outState.putString(KEY_WIFI_SECURITY, mWifiNetworkConfig.getSecurity());
+            outState.putString(KEY_WIFI_SSID, mWifiNetworkConfig.getSsid());
+            outState.putString(KEY_WIFI_PRESHARED_KEY, mWifiNetworkConfig.getPreSharedKey());
+            outState.putBoolean(KEY_WIFI_HIDDEN_SSID, mWifiNetworkConfig.getHiddenSsid());
+            outState.putInt(KEY_WIFI_NETWORK_ID, mWifiNetworkConfig.getNetworkId());
+        }
+
+        super.onSaveInstanceState(outState);
     }
 }
