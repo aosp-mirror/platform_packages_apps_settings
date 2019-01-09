@@ -101,4 +101,12 @@ public class WifiDppConfiguratorActivityTest {
         assertThat(activity instanceof WifiDppQrCodeScannerFragment
                 .OnScanZxingWifiFormatSuccessListener).isEqualTo(true);
     }
+
+    @Test
+    public void testActivity_shouldImplementsOnClickChooseDifferentNetworkCallback() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
+
+        assertThat(activity instanceof WifiDppAddDeviceFragment
+                .OnClickChooseDifferentNetworkListener).isEqualTo(true);
+    }
 }

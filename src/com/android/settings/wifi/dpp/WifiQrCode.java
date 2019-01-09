@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.text.TextUtils;
 
-import androidx.annotation.Keep;
 import androidx.annotation.VisibleForTesting;
 
 import java.util.Arrays;
@@ -49,7 +48,6 @@ import java.util.regex.Pattern;
  * H         true       Optional. True if the network SSID is hidden.
  *
  */
-@Keep
 public class WifiQrCode {
     public static final String SCHEME_DPP = "DPP";
     public static final String SCHEME_ZXING_WIFI_NETWORK_CONFIG = "WIFI";
@@ -86,7 +84,6 @@ public class WifiQrCode {
     // Data from parsed ZXing reader library's Wi-Fi Network config format
     private WifiNetworkConfig mWifiNetworkConfig;
 
-    @Keep
     public WifiQrCode(String qrCode) throws IllegalArgumentException {
         if (TextUtils.isEmpty(qrCode)) {
             throw new IllegalArgumentException("Empty QR code");
@@ -172,7 +169,6 @@ public class WifiQrCode {
         return null;
     }
 
-    @Keep
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     protected String removeBackSlash(String input) {
         if (input == null) {
@@ -199,7 +195,6 @@ public class WifiQrCode {
         return sb.toString();
     }
 
-    @Keep
     public String getQrCode() {
         return mQrCode;
     }
@@ -210,25 +205,22 @@ public class WifiQrCode {
      * SCHEME_DPP for standard Wi-Fi device provision protocol; SCHEME_ZXING_WIFI_NETWORK_CONFIG
      * for ZXing reader library' Wi-Fi Network config format
      */
-    @Keep
     public String getScheme() {
         return mScheme;
     }
 
     /** Available when {@code getScheme()} returns SCHEME_DPP */
-    @Keep
-    public String getPublicKey() {
+     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    protected String getPublicKey() {
         return mPublicKey;
     }
 
     /** May be available when {@code getScheme()} returns SCHEME_DPP */
-    @Keep
     public String getInformation() {
         return mInformation;
     }
 
     /** Available when {@code getScheme()} returns SCHEME_ZXING_WIFI_NETWORK_CONFIG */
-    @Keep
     public WifiNetworkConfig getWifiNetworkConfig() {
         if (mWifiNetworkConfig == null) {
             return null;

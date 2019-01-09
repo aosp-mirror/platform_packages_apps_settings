@@ -51,7 +51,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiNetworkConfig.Retriever,
         WifiDppQrCodeGeneratorFragment.OnQrCodeGeneratorFragmentAddButtonClickedListener,
         WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener,
-        WifiDppQrCodeScannerFragment.OnScanZxingWifiFormatSuccessListener {
+        WifiDppQrCodeScannerFragment.OnScanZxingWifiFormatSuccessListener,
+        WifiDppAddDeviceFragment.OnClickChooseDifferentNetworkListener {
     private static final String TAG = "WifiDppConfiguratorActivity";
 
     public static final String ACTION_CONFIGURATOR_QR_CODE_SCANNER =
@@ -65,9 +66,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
     /** The Wi-Fi network which will be configured */
     private WifiNetworkConfig mWifiNetworkConfig;
-
-    /** The uri from Wi-Fi DPP QR code */
-    private String mDppUri;
 
     /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_DPP_QR_CODE */
     private WifiQrCode mWifiDppQrCode;
@@ -117,7 +115,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                 break;
             case ACTION_PROCESS_WIFI_DPP_QR_CODE:
                 String qrCode = intent.getStringExtra(WifiDppUtils.EXTRA_QR_CODE);
-                mWifiDppQrCode = getValidWiFiDppQrCodeOrNull(qrCode);
+                mWifiDppQrCode = getValidWifiDppQrCodeOrNull(qrCode);
                 if (mWifiDppQrCode == null) {
                     cancelActivity = true;
                 } else {
@@ -205,7 +203,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         fragmentTransaction.commit();
     }
 
-    private WifiQrCode getValidWiFiDppQrCodeOrNull(String qrCode) {
+    private WifiQrCode getValidWifiDppQrCodeOrNull(String qrCode) {
         WifiQrCode wifiQrCode;
         try {
             wifiQrCode = new WifiQrCode(qrCode);
@@ -223,10 +221,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     @Override
     public WifiNetworkConfig getWifiNetworkConfig() {
         return mWifiNetworkConfig;
-    }
-
-    public String getDppUri() {
-        return mDppUri;
     }
 
     public WifiQrCode getWifiDppQrCode() {
@@ -263,17 +257,21 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     }
 
     @Override
-    public void onScanWifiDppSuccess(String uri) {
-        mDppUri = uri;
+    public void onScanWifiDppSuccess(WifiQrCode wifiQrCode) {
+        mWifiDppQrCode = wifiQrCode;
 
         showAddDeviceFragment(/* addToBackStack */ true);
     }
 
     @Override
     public void onScanZxingWifiFormatSuccess(WifiNetworkConfig wifiNetworkConfig) {
-        mDppUri = null;
-        mWifiNetworkConfig = new WifiNetworkConfig(wifiNetworkConfig);
+        // Do nothing, it's impossible to be a configurator without a Wi-Fi DPP QR code
+    }
 
-        showAddDeviceFragment(/* addToBackStack */ true);
+    @Override
+    public void onClickChooseDifferentNetwork() {
+        mWifiNetworkConfig = null;
+
+        showChooseSavedWifiNetworkFragment(/* addToBackStack */ true);
     }
 }
