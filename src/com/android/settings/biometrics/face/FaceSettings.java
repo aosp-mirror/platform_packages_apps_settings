@@ -51,11 +51,10 @@ import java.util.List;
 public class FaceSettings extends DashboardFragment {
 
     private static final String TAG = "FaceSettings";
-    private static final String KEY_LAUNCHED_CONFIRM = "key_launched_confirm";
+    private static final String KEY_TOKEN = "key_token";
 
     private FaceManager mFaceManager;
     private int mUserId;
-    private boolean mLaunchedConfirm;
     private byte[] mToken;
     private FaceSettingsAttentionPreferenceController mAttentionController;
 
@@ -86,7 +85,7 @@ public class FaceSettings extends DashboardFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(KEY_LAUNCHED_CONFIRM, mLaunchedConfirm);
+        outState.putByteArray(KEY_TOKEN, mToken);
     }
 
     @Override
@@ -98,10 +97,10 @@ public class FaceSettings extends DashboardFragment {
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
 
         if (savedInstanceState != null) {
-            mLaunchedConfirm = savedInstanceState.getBoolean(KEY_LAUNCHED_CONFIRM, false);
+            mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
 
-        if (!mLaunchedConfirm) {
+        if (mToken == null) {
             final long challenge = mFaceManager.generateChallenge();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
@@ -110,6 +109,14 @@ public class FaceSettings extends DashboardFragment {
                 Log.e(TAG, "Password not set");
                 finish();
             }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mToken != null) {
+            mAttentionController.setToken(mToken);
         }
     }
 
