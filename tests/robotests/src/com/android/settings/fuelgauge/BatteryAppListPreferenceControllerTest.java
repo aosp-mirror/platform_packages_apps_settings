@@ -18,11 +18,15 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.ModuleInfo;
+import android.content.pm.PackageManager;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
@@ -34,6 +38,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +47,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryAppListPreferenceControllerTest {
@@ -60,6 +69,10 @@ public class BatteryAppListPreferenceControllerTest {
     private InstrumentedPreferenceFragment mFragment;
     @Mock
     private BatteryUtils mBatteryUtils;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private UserManager mUserManager;
 
     private Context mContext;
     private PowerGaugePreference mPreference;
@@ -70,6 +83,11 @@ public class BatteryAppListPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getApplicationContext()).thenReturn(mContext);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
+
         FakeFeatureFactory.setupForTest();
 
         mPreference = new PowerGaugePreference(mContext);
@@ -181,6 +199,21 @@ public class BatteryAppListPreferenceControllerTest {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testShouldHideSipper_hiddenSystemModule_returnTrue() {
+        ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", null);
+        final String packageName = "test.hidden.module";
+        final ModuleInfo moduleInfo = new ModuleInfo();
+        moduleInfo.setPackageName(packageName);
+        moduleInfo.setHidden(true);
+        final List<ModuleInfo> modules = new ArrayList<>();
+        modules.add(moduleInfo);
+        when(mBatteryUtils.getPackageName(anyInt() /* uid */)).thenReturn(packageName);
+        when(mPackageManager.getInstalledModules(anyInt() /* flags */)).thenReturn(modules);
+
+        assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
