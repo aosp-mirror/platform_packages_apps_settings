@@ -50,7 +50,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-
 @Config(shadows = ShadowEntityHeaderController.class)
 public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsControllerTestBase {
 
