@@ -28,21 +28,17 @@ import android.telephony.SubscriptionManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.core.BasePreferenceController;
-
 /**
  * Preference controller for "Carrier Settings"
  */
-public class CarrierPreferenceController extends BasePreferenceController {
+public class CarrierPreferenceController extends TelephonyBasePreferenceController {
 
     @VisibleForTesting
     CarrierConfigManager mCarrierConfigManager;
-    private int mSubId;
 
     public CarrierPreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = new CarrierConfigManager(context);
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     public void init(int subId) {
@@ -50,14 +46,14 @@ public class CarrierPreferenceController extends BasePreferenceController {
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+    public int getAvailabilityStatus(int subId) {
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
 
         // Return available if it is in CDMA or GSM mode, and the flag is on
         return carrierConfig != null
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL)
-                && (MobileNetworkUtils.isCdmaOptions(mContext, mSubId)
-                || MobileNetworkUtils.isGsmOptions(mContext, mSubId))
+                && (MobileNetworkUtils.isCdmaOptions(mContext, subId)
+                || MobileNetworkUtils.isGsmOptions(mContext, subId))
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }

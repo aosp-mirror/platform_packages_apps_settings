@@ -77,7 +77,8 @@
 
     <PreferenceCategory
         android:key="calling_category"
-        android:title="@string/call_category">
+        android:title="@string/call_category"
+        settings:searchable="false">
 
         <PreferenceScreen
             android:key="wifi_calling_key"

@@ -31,7 +31,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -42,8 +41,8 @@ import java.util.List;
 /**
  * Preference controller for "Enhanced 4G LTE"
  */
-public class Enhanced4gLtePreferenceController extends TogglePreferenceController implements
-        LifecycleObserver, OnStart, OnStop {
+public class Enhanced4gLtePreferenceController extends TelephonyTogglePreferenceController
+        implements LifecycleObserver, OnStart, OnStop {
 
     private Preference mPreference;
     private TelephonyManager mTelephonyManager;
@@ -53,24 +52,23 @@ public class Enhanced4gLtePreferenceController extends TogglePreferenceControlle
     ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
     private final List<On4gLteUpdateListener> m4gLteListeners;
-    private int mSubId;
 
     public Enhanced4gLtePreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         m4gLteListeners = new ArrayList<>();
         mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        final boolean isVisible = mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
-                && mImsManager != null && mCarrierConfig != null
+    public int getAvailabilityStatus(int subId) {
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final boolean isVisible = subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                && mImsManager != null && carrierConfig != null
                 && mImsManager.isVolteEnabledByPlatform()
                 && mImsManager.isVolteProvisionedOnDevice()
                 && MobileNetworkUtils.isImsServiceStateReady(mImsManager)
-                && !mCarrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL);
+                && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL);
         return isVisible
                 ? (is4gLtePrefEnabled() ? AVAILABLE : AVAILABLE_UNSEARCHABLE)
                 : CONDITIONALLY_UNAVAILABLE;
