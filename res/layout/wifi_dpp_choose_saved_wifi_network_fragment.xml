@@ -34,7 +34,7 @@
 
             <include layout="@layout/wifi_dpp_fragment_header"/>
 
-            <ListView android:id="@+id/saved_wifi_network_list"
+            <LinearLayout android:id="@+id/wifi_network_list_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/header"/>
