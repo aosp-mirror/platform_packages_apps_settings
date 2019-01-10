@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi.dpp;
 
+import android.content.Context;
+import android.net.wifi.WifiConfiguration;
 import android.provider.Settings;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -31,6 +33,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.R;
+
+import java.util.List;
 
 /**
  * To provision "this" device with specified Wi-Fi network.
@@ -48,6 +52,39 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
             "android.settings.WIFI_DPP_ENROLLEE_QR_CODE_SCANNER";
 
     private FragmentManager mFragmentManager;
+
+    private class DppStatusCallback extends android.net.wifi.DppStatusCallback {
+        @Override
+        public void onEnrolleeSuccess(int newNetworkId) {
+            // Connect to the new network.
+            final WifiManager wifiManager = getSystemService(WifiManager.class);
+            final List<WifiConfiguration> wifiConfigs = wifiManager.getPrivilegedConfiguredNetworks();
+            for (WifiConfiguration wifiConfig : wifiConfigs) {
+                if (wifiConfig.networkId == newNetworkId) {
+                    wifiManager.connect(wifiConfig, WifiDppEnrolleeActivity.this);
+                    return;
+                }
+            }
+            Log.e(TAG, "Invalid networkId " + newNetworkId);
+            WifiDppEnrolleeActivity.this.onFailure(WifiManager.ERROR_AUTHENTICATING);
+        }
+
+        @Override
+        public void onConfiguratorSuccess(int code) {
+            // Do nothing
+        }
+
+        @Override
+        public void onFailure(int code) {
+            //TODO(b/122429170): Show DPP enrollee error state UI
+            Log.d(TAG, "DppStatusCallback.onFailure " + code);
+        }
+
+        @Override
+        public void onProgress(int code) {
+            // Do nothing
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -108,8 +145,9 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
     }
 
     @Override
-    public void onScanWifiDppSuccess(String publicKey, String information) {
-        // TODO(b/1023597): starts DPP enrollee handshake here
+    public void onScanWifiDppSuccess(String uri) {
+        final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        wifiManager.startDppAsEnrolleeInitiator(uri, /* handler */ null, new DppStatusCallback());
     }
 
     @Override

@@ -111,14 +111,17 @@ public class NetworkRequestDialogFragmentTest {
         ShadowLooper.getShadowMainLooper().runToEndOfTasks();
 
         assertThat(fakeFragment.bCalledStopAndPop).isTrue();
+        assertThat(fakeFragment.errorType).isEqualTo(ERROR_DIALOG_TYPE.TIME_OUT);
     }
 
     class FakeNetworkRequestDialogFragment extends NetworkRequestDialogFragment {
         boolean bCalledStopAndPop = false;
+        ERROR_DIALOG_TYPE errorType = null;
 
         @Override
-        public void stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE type) {
+        public void stopScanningAndMaybePopErrorDialog(ERROR_DIALOG_TYPE type) {
             bCalledStopAndPop = true;
+            errorType = type;
         }
     }
 
@@ -150,22 +153,28 @@ public class NetworkRequestDialogFragmentTest {
 
     @Test
     public void updateAccessPointList_onUserSelectionConnectSuccess_shouldCloseTheDialog() {
-        List<AccessPoint> accessPointList = createAccessPointList();
-        when(networkRequestDialogFragment.getAccessPointList()).thenReturn(accessPointList);
-        networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), null);
-        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(alertDialog.isShowing()).isTrue();
+        // Assert
+        FakeNetworkRequestDialogFragment fakeFragment = new FakeNetworkRequestDialogFragment();
+        FakeNetworkRequestDialogFragment spyFakeFragment = spy(fakeFragment);
 
-        // Test if config would update list.
+        List<AccessPoint> accessPointList = createAccessPointList();
+        when(spyFakeFragment.getAccessPointList()).thenReturn(accessPointList);
+
+        spyFakeFragment.show(mActivity.getSupportFragmentManager(), null);
+
+        // Action
         WifiConfiguration config = new WifiConfiguration();
         config.SSID = "Test AP 3";
-        networkRequestDialogFragment.onUserSelectionConnectSuccess(config);
+        spyFakeFragment.onUserSelectionConnectSuccess(config);
 
-        assertThat(alertDialog.isShowing()).isFalse();
+        // Check
+        ShadowLooper.getShadowMainLooper().runToEndOfTasks();
+        assertThat(fakeFragment.bCalledStopAndPop).isTrue();
+        assertThat(fakeFragment.errorType).isNull();
     }
 
     @Test
-    public void updateAccessPointList_onUserSelectionConnectFailure_shouldCallTimeoutDialog() {
+    public void updateAccessPointList_onUserSelectionConnectFailure_shouldCallAbortDialog() {
         FakeNetworkRequestDialogFragment fakeFragment = new FakeNetworkRequestDialogFragment();
         FakeNetworkRequestDialogFragment spyFakeFragment = spy(fakeFragment);
         List<AccessPoint> accessPointList = createAccessPointList();
@@ -181,6 +190,7 @@ public class NetworkRequestDialogFragmentTest {
         fakeFragment.onUserSelectionConnectFailure(config);
 
         assertThat(fakeFragment.bCalledStopAndPop).isTrue();
+        assertThat(fakeFragment.errorType).isEqualTo(ERROR_DIALOG_TYPE.ABORT);
     }
 
     @Test

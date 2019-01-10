@@ -46,13 +46,15 @@ public class WifiNetworkConfig {
     private String mSsid;
     private String mPreSharedKey;
     private boolean mHiddenSsid;
+    private int mNetworkId;
 
-    private WifiNetworkConfig(String security, String ssid, String preSharedKey,
-            boolean hiddenSsid) {
+    private WifiNetworkConfig(String security, String ssid, String preSharedKey, boolean hiddenSsid,
+            int networkId) {
         mSecurity = security;
         mSsid = ssid;
         mPreSharedKey = preSharedKey;
         mHiddenSsid = hiddenSsid;
+        mNetworkId = networkId;
     }
 
     public WifiNetworkConfig(WifiNetworkConfig config) {
@@ -60,6 +62,7 @@ public class WifiNetworkConfig {
         mSsid = config.mSsid;
         mPreSharedKey = config.mPreSharedKey;
         mHiddenSsid = config.mHiddenSsid;
+        mNetworkId = config.mNetworkId;
     }
 
     /**
@@ -82,17 +85,19 @@ public class WifiNetworkConfig {
         String ssid = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID);
         String preSharedKey = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY);
         boolean hiddenSsid = intent.getBooleanExtra(WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID, false);
+        int networkId = intent.getIntExtra(WifiDppUtils.EXTRA_WIFI_NETWORK_ID,
+                WifiConfiguration.INVALID_NETWORK_ID);
 
-        return getValidConfigOrNull(security, ssid, preSharedKey, hiddenSsid);
+        return getValidConfigOrNull(security, ssid, preSharedKey, hiddenSsid, networkId);
     }
 
     public static WifiNetworkConfig getValidConfigOrNull(String security, String ssid,
-            String preSharedKey, boolean hiddenSsid) {
+            String preSharedKey, boolean hiddenSsid, int networkId) {
         if (!isValidConfig(security, ssid, preSharedKey, hiddenSsid)) {
             return null;
         }
 
-        return new WifiNetworkConfig(security, ssid, preSharedKey, hiddenSsid);
+        return new WifiNetworkConfig(security, ssid, preSharedKey, hiddenSsid, networkId);
     }
 
     public static boolean isValidConfig(WifiNetworkConfig config) {
@@ -184,6 +189,11 @@ public class WifiNetworkConfig {
         return mHiddenSsid;
     }
 
+    @Keep
+    public int getNetworkId() {
+        return mNetworkId;
+    }
+
     public void connect(Context context, WifiManager.ActionListener listener) {
         WifiConfiguration wifiConfiguration = getWifiConfigurationOrNull();
         if (wifiConfiguration == null) {
@@ -208,6 +218,7 @@ public class WifiNetworkConfig {
         final WifiConfiguration wifiConfiguration = new WifiConfiguration();
         wifiConfiguration.SSID = addQuotationIfNeeded(mSsid);
         wifiConfiguration.hiddenSSID = mHiddenSsid;
+        wifiConfiguration.networkId = mNetworkId;
 
         if (TextUtils.isEmpty(mSecurity) || SECURITY_NO_PASSWORD.equals(mSecurity)) {
             wifiConfiguration.allowedKeyManagement.set(KeyMgmt.NONE);

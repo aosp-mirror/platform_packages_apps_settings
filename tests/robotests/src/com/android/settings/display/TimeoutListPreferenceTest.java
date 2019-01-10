@@ -17,11 +17,11 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.util.AttributeSet;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -68,5 +68,24 @@ public class TimeoutListPreferenceTest {
 
         // should set to largest allowed value, which is 5 minute
         assertThat(mPreference.getValue()).isEqualTo("300000");
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void newInstance_hasLowTimeoutConfig_shouldRemoveLongTimeouts() {
+        final AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        final TimeoutListPreference pref = new TimeoutListPreference(application, attributeSet);
+        final long maxTimeout = application.getResources().getInteger(
+                R.integer.max_lock_after_timeout_ms);
+        pref.setEntries(R.array.screen_timeout_entries);
+        pref.setEntryValues(R.array.screen_timeout_values);
+
+        pref.updateInitialValues();
+
+        final CharSequence[] values = pref.getEntryValues();
+        for (CharSequence value : values) {
+            long timeout = Long.parseLong(value.toString());
+            assertThat(timeout).isAtMost(maxTimeout);
+        }
     }
 }

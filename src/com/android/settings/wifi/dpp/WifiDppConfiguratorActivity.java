@@ -66,11 +66,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     /** The Wi-Fi network which will be configured */
     private WifiNetworkConfig mWifiNetworkConfig;
 
-    /** The public key from Wi-Fi DPP QR code */
-    private String mPublicKey;
-
-    /** The information from Wi-Fi DPP QR code */
-    private String mInformation;
+    /** The uri from Wi-Fi DPP QR code */
+    private String mDppUri;
 
     /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_DPP_QR_CODE */
     private WifiQrCode mWifiDppQrCode;
@@ -228,12 +225,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         return mWifiNetworkConfig;
     }
 
-    public String getPublicKey() {
-        return mPublicKey;
-    }
-
-    public String getInformation() {
-        return mInformation;
+    public String getDppUri() {
+        return mDppUri;
     }
 
     public WifiQrCode getWifiDppQrCode() {
@@ -270,17 +263,15 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     }
 
     @Override
-    public void onScanWifiDppSuccess(String publicKey, String information) {
-        mPublicKey = publicKey;
-        mInformation = information;
+    public void onScanWifiDppSuccess(String uri) {
+        mDppUri = uri;
 
         showAddDeviceFragment(/* addToBackStack */ true);
     }
 
     @Override
     public void onScanZxingWifiFormatSuccess(WifiNetworkConfig wifiNetworkConfig) {
-        mPublicKey = null;
-        mInformation = null;
+        mDppUri = null;
         mWifiNetworkConfig = new WifiNetworkConfig(wifiNetworkConfig);
 
         showAddDeviceFragment(/* addToBackStack */ true);
