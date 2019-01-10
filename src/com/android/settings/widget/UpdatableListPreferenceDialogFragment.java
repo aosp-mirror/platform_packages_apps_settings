@@ -84,8 +84,8 @@ public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragm
 
     @Override
     public void onDialogClosed(boolean positiveResult) {
-        final ListPreference preference = getListPreference();
         if (positiveResult && mClickedDialogEntryIndex >= 0) {
+            final ListPreference preference = getListPreference();
             final String value = mEntryValues[mClickedDialogEntryIndex].toString();
             if (preference.callChangeListener(value)) {
                 preference.setValue(value);
@@ -144,7 +144,8 @@ public class UpdatableListPreferenceDialogFragment extends PreferenceDialogFragm
         return mMetricsCategory;
     }
 
-    private ListPreference getListPreference() {
+    @VisibleForTesting
+    ListPreference getListPreference() {
         return (ListPreference) getPreference();
     }
 
