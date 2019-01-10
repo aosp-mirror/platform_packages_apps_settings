@@ -217,7 +217,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 updatePasswordQuality();
                 mToken = data.getByteArrayExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-                overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
+                overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 return;
             } else {
                 setResult(result, data);
@@ -226,13 +226,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         } else if (requestCode == CONFIRM_REQUEST) {
             if (resultCode == RESULT_OK && data != null) {
                 mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-                overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
+                overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
             } else {
                 setResult(result, data);
                 finish();
             }
         } else if (requestCode == LEARN_MORE_REQUEST) {
-            overridePendingTransition(R.anim.suw_slide_back_in, R.anim.suw_slide_back_out);
+            overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

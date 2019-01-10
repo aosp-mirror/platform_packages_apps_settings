@@ -476,7 +476,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     R.layout.choose_lock_pattern, container, false);
             layout.setHeaderText(getActivity().getTitle());
             if (getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
-                View iconView = layout.findViewById(R.id.suw_layout_icon);
+                View iconView = layout.findViewById(R.id.suc_layout_icon);
                 if (iconView != null) {
                     iconView.setVisibility(View.GONE);
                 }
@@ -494,7 +494,7 @@ public class ChooseLockPattern extends SettingsActivity {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            mTitleText = view.findViewById(R.id.suw_layout_title);
+            mTitleText = view.findViewById(R.id.suc_layout_title);
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
             mDefaultHeaderColorList = mHeaderText.getTextColors();
             mMessageText = view.findViewById(R.id.message);

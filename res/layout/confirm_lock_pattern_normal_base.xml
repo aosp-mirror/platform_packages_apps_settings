@@ -33,31 +33,31 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/suw_layout_icon"
-                style="@style/SuwGlifIcon"
+                android:id="@+id/suc_layout_icon"
+                style="@style/SudGlifIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="?attr/suwGlifHeaderGravity"
+                android:layout_gravity="?attr/sudGlifHeaderGravity"
                 android:src="@drawable/ic_lock" />
 
             <TextView
                 android:id="@+id/headerText"
-                style="@style/SuwGlifHeaderTitle"
+                style="@style/SudGlifHeaderTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                style="@style/SuwDescription.Glif"
+                style="@style/SudDescription.Glif"
                 android:id="@+id/detailsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/suwMarginSides"
-                android:layout_marginEnd="?attr/suwMarginSides" />
+                android:layout_marginStart="?attr/sudMarginSides"
+                android:layout_marginEnd="?attr/sudMarginSides" />
 
         </LinearLayout>
 
         <LinearLayout
-            style="@style/SuwContentFrame"
+            style="@style/SudContentFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -86,17 +86,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="?attr/suwMarginSides"
+                android:layout_marginHorizontal="?attr/sudMarginSides"
                 android:layout_marginTop="12dp"
                 android:gravity="center_vertical"/>
 
             <Button
                 android:id="@+id/cancelButton"
-                style="@style/SuwGlifButton.Secondary"
+                style="@style/SudGlifButton.Secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/suwMarginSides"
-                android:layout_marginEnd="?attr/suwMarginSides"
+                android:layout_marginStart="?attr/sudMarginSides"
+                android:layout_marginEnd="?attr/sudMarginSides"
                 android:layout_marginBottom="80dp"
                 android:text="@string/cancel" />
 

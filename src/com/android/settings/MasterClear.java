@@ -423,7 +423,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
                         .setText(R.string.master_clear_button_text)
                         .setListener(mInitiateListener)
                         .setButtonType(ButtonType.OTHER)
-                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
         mInitiateButton = buttonFooterMixin.getPrimaryButton();

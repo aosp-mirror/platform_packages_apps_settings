@@ -19,20 +19,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:theme="@style/SuwThemeGlifV3.DayNight"
+    android:theme="@style/SudThemeGlifV3.DayNight"
     android:id="@+id/setup_wizard_layout"
     android:icon="@drawable/ic_delete_accent"
-    app:suwHeaderText="@string/master_clear_confirm_title">
+    app:sucHeaderText="@string/master_clear_confirm_title">
 
     <LinearLayout
-        style="@style/SuwContentFrame"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/master_clear_confirm"
-            style="@style/SuwItemTitle.GlifDescription"
+            style="@style/SudItemTitle.GlifDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/master_clear_final_desc"/>

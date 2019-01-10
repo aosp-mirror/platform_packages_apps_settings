@@ -22,10 +22,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:icon="@drawable/ic_suggested_notifications"
-    settings:suwHeaderText="@string/lock_screen_notifications_interstitial_title">
+    settings:sucHeaderText="@string/lock_screen_notifications_interstitial_title">
 
     <LinearLayout
-        style="@style/SuwContentFrame"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/message"
-            style="@style/SuwDescription.Glif"
+            style="@style/SudDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lock_screen_notifications_interstitial_message" />
@@ -48,7 +48,7 @@
 
             <com.android.settings.RestrictedRadioButton
                 android:id="@+id/show_all"
-                style="@style/SuwRadioButton"
+                style="@style/SudRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
@@ -57,7 +57,7 @@
 
             <com.android.settings.RestrictedRadioButton
                 android:id="@+id/redact_sensitive"
-                style="@style/SuwRadioButton"
+                style="@style/SudRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
@@ -66,7 +66,7 @@
 
             <RadioButton
                 android:id="@+id/hide_all"
-                style="@style/SuwRadioButton"
+                style="@style/SudRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"

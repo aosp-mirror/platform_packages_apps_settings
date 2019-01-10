@@ -18,13 +18,13 @@
 <!-- TODO: Use aapt:attr when it is fixed (b/36809755) -->
 <com.google.android.setupdesign.view.ButtonBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/SuwGlifButtonBar.Stackable"
+    style="@style/SudGlifButtonBar.Stackable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <!-- left : skip -->
     <Button android:id="@+id/skip_button"
-        style="@style/SuwGlifButton.Secondary"
+        style="@style/SudGlifButton.Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/skip_label"
@@ -32,7 +32,7 @@
 
     <!-- left : retry -->
     <Button android:id="@+id/footerLeftButton"
-        style="@style/SuwGlifButton.Secondary"
+        style="@style/SudGlifButton.Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lockpattern_tutorial_cancel_label" />
@@ -44,7 +44,7 @@
 
     <!-- right : confirm or ok -->
     <Button android:id="@+id/footerRightButton"
-        style="@style/SuwGlifButton.Primary"
+        style="@style/SudGlifButton.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lockpattern_tutorial_continue_label" />

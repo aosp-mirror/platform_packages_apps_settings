@@ -34,8 +34,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_marginStart="?attr/suwMarginSides"
-            android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+            android:layout_marginStart="?attr/sudMarginSides"
+            android:layout_marginBottom="@dimen/sud_content_frame_padding_bottom"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical">
@@ -55,25 +55,25 @@
                     android:clipToPadding="false">
 
                     <ImageView
-                        android:id="@+id/suw_layout_icon"
-                        style="@style/SuwGlifIcon"
+                        android:id="@+id/suc_layout_icon"
+                        style="@style/SudGlifIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="?attr/suwGlifHeaderGravity"
+                        android:layout_gravity="?attr/sudGlifHeaderGravity"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
                         android:src="@drawable/ic_fingerprint_header" />
 
                     <TextView
-                        android:id="@+id/suw_layout_title"
-                        style="@style/SuwGlifHeaderTitle"
+                        android:id="@+id/suc_layout_title"
+                        style="@style/SudGlifHeaderTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp" />
 
                     <TextView
-                        style="@style/SuwDescription.Glif"
+                        style="@style/SudDescription.Glif"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>

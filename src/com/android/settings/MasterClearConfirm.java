@@ -160,7 +160,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
                         .setText(R.string.master_clear_button_text)
                         .setListener(mFinalClickListener)
                         .setButtonType(ButtonType.OTHER)
-                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
     }
