@@ -61,6 +61,10 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
          * WifiDppChooseSavedWifiNetworkFragment. */
         final FragmentManager fragmentManager = getChildFragmentManager();
         final WifiNetworkListFragment fragment = new WifiNetworkListFragment();
+        final Bundle args = getArguments();
+        if (args != null) {
+            fragment.setArguments(args);
+        }
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.wifi_network_list_container, fragment,
                 TAG_FRAGMENT_WIFI_NETWORK_LIST);
