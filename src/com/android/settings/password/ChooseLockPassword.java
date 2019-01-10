@@ -408,9 +408,9 @@ public class ChooseLockPassword extends SettingsActivity {
             ViewGroup container = view.findViewById(R.id.password_container);
             container.setOpticalInsets(Insets.NONE);
 
-            mSkipButton = (Button) view.findViewById(R.id.skip_button);
+            mSkipButton = view.findViewById(R.id.skip_button);
             mSkipButton.setOnClickListener(this);
-            mNextButton = (Button) view.findViewById(R.id.next_button);
+            mNextButton = view.findViewById(R.id.next_button);
             mNextButton.setOnClickListener(this);
             mClearButton = view.findViewById(R.id.clear_button);
             mClearButton.setOnClickListener(this);
@@ -894,12 +894,13 @@ public class ChooseLockPassword extends SettingsActivity {
                 mPasswordRequirementAdapter.setRequirements(messages);
                 // Enable/Disable the next button accordingly.
                 setNextEnabled(errorCode == NO_ERROR);
+                mClearButton.setVisibility(View.GONE);
             } else {
                 // Hide password requirement view when we are just asking user to confirm the pw.
                 mPasswordRestrictionView.setVisibility(View.GONE);
                 setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, getStageType())));
                 setNextEnabled(canInput && length >= mPasswordMinLength);
-                mClearButton.setEnabled(canInput && length > 0);
+                mClearButton.setVisibility(toVisibility(canInput && length > 0));
             }
             int message = mUiStage.getMessage(mIsAlphaMode, getStageType());
             if (message != 0) {
@@ -909,13 +910,11 @@ public class ChooseLockPassword extends SettingsActivity {
                 mMessage.setVisibility(View.INVISIBLE);
             }
 
-            mClearButton.setVisibility(toVisibility(mUiStage != Stage.Introduction));
-
             setNextText(mUiStage.buttonText);
             mPasswordEntryInputDisabler.setInputEnabled(canInput);
         }
 
-        private int toVisibility(boolean visibleOrGone) {
+        protected int toVisibility(boolean visibleOrGone) {
             return visibleOrGone ? View.VISIBLE : View.GONE;
         }
 
