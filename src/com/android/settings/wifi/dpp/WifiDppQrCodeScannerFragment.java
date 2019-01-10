@@ -64,6 +64,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     // Key for Bundle usage
     private static final String KEY_PUBLIC_URI = "key_public_uri";
+    private static final String KEY_IS_CONFIGURATOR_MODE = "key_is_configurator_mode";
 
     private QrCamera mCamera;
     private TextureView mTextureView;
@@ -71,13 +72,22 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     private TextView mErrorMessage;
 
     /** true if the fragment working for configurator, false enrollee*/
-    private final boolean mIsConfiguratorMode;
+    private boolean mIsConfiguratorMode;
 
     /** The SSID of the Wi-Fi network which the user specify to enroll */
     private String mSsid;
 
     /** QR code data scanned by camera */
     private WifiQrCode mWifiQrCode;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            mIsConfiguratorMode = savedInstanceState.getBoolean(KEY_IS_CONFIGURATOR_MODE);
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -368,4 +378,11 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
         }
     };
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+       outState.putBoolean(KEY_IS_CONFIGURATOR_MODE, mIsConfiguratorMode);
+
+       super.onSaveInstanceState(outState);
+    }
 }

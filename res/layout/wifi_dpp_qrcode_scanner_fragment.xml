@@ -19,35 +19,45 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/wifi_dpp_fragment_header"/>
-
-    <com.android.settings.wifi.qrcode.QrPreviewLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextureView
-            android:id="@+id/preview_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-        <com.android.settings.wifi.qrcode.QrDecorateView
-            android:id="@+id/decorate_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-    </com.android.settings.wifi.qrcode.QrPreviewLayout>
 
-    <TextView
-        android:id="@+id/error_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:text="@string/wifi_dpp_could_not_detect_valid_qr_code"
-        android:visibility="invisible"
-        android:textColor="?android:attr/colorError"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <include layout="@layout/wifi_dpp_fragment_header"/>
+
+            <com.android.settings.wifi.qrcode.QrPreviewLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextureView
+                    android:id="@+id/preview_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <com.android.settings.wifi.qrcode.QrDecorateView
+                    android:id="@+id/decorate_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.android.settings.wifi.qrcode.QrPreviewLayout>
+
+            <TextView
+                android:id="@+id/error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/wifi_dpp_could_not_detect_valid_qr_code"
+                android:visibility="invisible"
+                android:textColor="?android:attr/colorError"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
 
