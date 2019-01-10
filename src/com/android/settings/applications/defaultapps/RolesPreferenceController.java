@@ -16,31 +16,44 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.ListFormatter;
 import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.applications.AppUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * STOPSHIP(b/110557011): Remove once the new UI is ready.
  */
 public class RolesPreferenceController extends BasePreferenceController {
 
-    private Intent mIntent;
+    private final PackageManager mPackageManager;
+    private final RoleManager mRoleManager;
+
+    private final Intent mIntent;
 
     public RolesPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
 
-        PackageManager packageManager = context.getPackageManager();
-        String packageName = packageManager.getPermissionControllerPackageName();
+        mPackageManager = context.getPackageManager();
+        mRoleManager = context.getSystemService(RoleManager.class);
+
+        final String packageName = mPackageManager.getPermissionControllerPackageName();
         if (packageName != null) {
             mIntent = new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
                     .setPackage(packageName);
+        } else {
+            mIntent = null;
         }
     }
 
@@ -58,5 +71,35 @@ public class RolesPreferenceController extends BasePreferenceController {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        final List<CharSequence> defaultAppLabels = new ArrayList<>();
+        final CharSequence defaultBrowserLabel = getDefaultAppLabel(RoleManager.ROLE_BROWSER);
+        if(!TextUtils.isEmpty(defaultBrowserLabel)) {
+            defaultAppLabels.add(defaultBrowserLabel);
+        }
+        final CharSequence defaultPhoneLabel = getDefaultAppLabel(RoleManager.ROLE_DIALER);
+        if(!TextUtils.isEmpty(defaultPhoneLabel)) {
+            defaultAppLabels.add(defaultPhoneLabel);
+        }
+        final CharSequence defaultSmsLabel = getDefaultAppLabel(RoleManager.ROLE_SMS);
+        if(!TextUtils.isEmpty(defaultSmsLabel)) {
+            defaultAppLabels.add(defaultSmsLabel);
+        }
+        if (defaultAppLabels.isEmpty()) {
+            return null;
+        }
+        return ListFormatter.getInstance().format(defaultAppLabels);
+    }
+
+    private CharSequence getDefaultAppLabel(String roleName) {
+        final List<String> packageNames = mRoleManager.getRoleHolders(roleName);
+        if (packageNames.isEmpty()) {
+            return null;
+        }
+        final String packageName = packageNames.get(0);
+        return AppUtils.getApplicationLabel(mPackageManager, packageName);
     }
 }
