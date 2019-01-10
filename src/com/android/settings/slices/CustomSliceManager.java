@@ -18,7 +18,6 @@ package com.android.settings.slices;
 
 import android.content.Context;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
@@ -35,6 +34,7 @@ import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
 import com.android.settings.location.LocationSlice;
 import com.android.settings.media.MediaOutputSlice;
+import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 import com.android.settings.wifi.slice.WifiSlice;
 
@@ -123,6 +123,7 @@ public class CustomSliceManager {
         mUriMap.put(CustomSliceRegistry.FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
         mUriMap.put(CustomSliceRegistry.LOCATION_SLICE_URI, LocationSlice.class);
         mUriMap.put(CustomSliceRegistry.LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
+        mUriMap.put(CustomSliceRegistry.MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
         mUriMap.put(CustomSliceRegistry.NOTIFICATION_CHANNEL_SLICE_URI,
                 NotificationChannelSlice.class);
         mUriMap.put(CustomSliceRegistry.STORAGE_SLICE_URI, StorageSlice.class);

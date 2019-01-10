@@ -464,8 +464,9 @@ public class SettingsSliceProvider extends SliceProvider {
 
     private List<Uri> getSpecialCaseOemUris() {
         return Arrays.asList(
-                CustomSliceRegistry.ZEN_MODE_SLICE_URI,
-                CustomSliceRegistry.FLASHLIGHT_SLICE_URI
+                CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                CustomSliceRegistry.ZEN_MODE_SLICE_URI
         );
     }
 

@@ -55,6 +55,7 @@ public class InternetConnectivityPanel implements PanelContent {
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
         uris.add(CustomSliceRegistry.WIFI_SLICE_URI);
+        uris.add(CustomSliceRegistry.MOBILE_DATA_SLICE_URI);
         uris.add(CustomSliceRegistry.AIRPLANE_URI);
         return uris;
     }
