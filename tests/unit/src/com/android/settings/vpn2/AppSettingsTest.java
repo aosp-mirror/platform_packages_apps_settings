@@ -57,23 +57,24 @@ public class AppSettingsTest extends AndroidTestCase {
         };
 
         // List with one package op
-        when(mAppOps.getOpsForPackage(eq(mockApp.uid), eq(mockApp.packageName), any()))
-                .thenReturn(Arrays.asList(new AppOpsManager.PackageOps[] {blankOps[0]}));
+        when(mAppOps.getOpsForPackage(eq(mockApp.uid), eq(mockApp.packageName),
+                any(int[].class))).thenReturn(Arrays.asList(
+                        new AppOpsManager.PackageOps[] {blankOps[0]}));
         assertTrue(appHasVpnPermission(mContext, mockApp));
 
         // List with more than one package op
-        when(mAppOps.getOpsForPackage(eq(mockApp.uid), eq(mockApp.packageName), any()))
-                .thenReturn(Arrays.asList(blankOps));
+        when(mAppOps.getOpsForPackage(eq(mockApp.uid), eq(mockApp.packageName),
+                any(int[].class))).thenReturn(Arrays.asList(blankOps));
         assertTrue(appHasVpnPermission(mContext, mockApp));
 
         // Empty list
-        when(mAppOps.getOpsForPackage(eq(mockApp.uid), eq(mockApp.packageName), any()))
-                .thenReturn(Collections.emptyList());
+        when(mAppOps.getOpsForPackage(eq(mockApp.uid), eq(mockApp.packageName),
+                any(int[].class))).thenReturn(Collections.emptyList());
         assertFalse(appHasVpnPermission(mContext, mockApp));
 
         // Null list (may be returned in place of an empty list)
-        when(mAppOps.getOpsForPackage(eq(mockApp.uid), eq(mockApp.packageName), any()))
-                .thenReturn(null);
+        when(mAppOps.getOpsForPackage(eq(mockApp.uid), eq(mockApp.packageName),
+                any(int[].class))).thenReturn(null);
         assertFalse(appHasVpnPermission(mContext, mockApp));
     }
 
