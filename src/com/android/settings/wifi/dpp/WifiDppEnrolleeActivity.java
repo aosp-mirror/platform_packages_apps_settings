@@ -145,9 +145,10 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
     }
 
     @Override
-    public void onScanWifiDppSuccess(String uri) {
+    public void onScanWifiDppSuccess(WifiQrCode wifiQrCode) {
         final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        wifiManager.startDppAsEnrolleeInitiator(uri, /* handler */ null, new DppStatusCallback());
+        wifiManager.startDppAsEnrolleeInitiator(wifiQrCode.getQrCode(), /* handler */ null,
+                new DppStatusCallback());
     }
 
     @Override

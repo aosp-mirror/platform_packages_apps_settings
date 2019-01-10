@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Keep;
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Wraps the parameters of ZXing reader library's Wi-Fi Network config format.
@@ -48,8 +49,9 @@ public class WifiNetworkConfig {
     private boolean mHiddenSsid;
     private int mNetworkId;
 
-    private WifiNetworkConfig(String security, String ssid, String preSharedKey, boolean hiddenSsid,
-            int networkId) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    protected WifiNetworkConfig(String security, String ssid, String preSharedKey,
+            boolean hiddenSsid, int networkId) {
         mSecurity = security;
         mSsid = ssid;
         mPreSharedKey = preSharedKey;
@@ -71,7 +73,6 @@ public class WifiNetworkConfig {
      */
     public interface Retriever {
         public WifiNetworkConfig getWifiNetworkConfig();
-        public boolean setWifiNetworkConfig(WifiNetworkConfig config);
     }
 
     /**

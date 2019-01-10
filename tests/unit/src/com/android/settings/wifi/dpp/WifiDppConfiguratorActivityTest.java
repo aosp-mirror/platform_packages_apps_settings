@@ -19,6 +19,7 @@ package com.android.settings.wifi.dpp;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -29,6 +30,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class WifiDppConfiguratorActivityTest {
+    // Valid Wi-Fi DPP QR code & it's parameters
+    private static final String VALID_WIFI_DPP_QR_CODE = "DPP:I:SN=4774LH2b4044;M:010203040506;K:"
+            + "MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgADURzxmttZoIRIPWGoQMV00XHWCAQIhXruVWOz0NjlkIA=;;";
+
     @Rule
     public final ActivityTestRule<WifiDppConfiguratorActivity> mActivityRule =
             new ActivityTestRule<>(WifiDppConfiguratorActivity.class);
@@ -62,9 +67,7 @@ public class WifiDppConfiguratorActivityTest {
     public void launchActivity_chooseSavedWifiNetwork_shouldNotAutoFinish() {
         Intent intent = new Intent(
                 WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
-        String qrCode = "DPP:I:SN=4774LH2b4044;M:010203040506;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcD"
-               + "IgADURzxmttZoIRIPWGoQMV00XHWCAQIhXruVWOz0NjlkIA=;;";
-        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, qrCode);
+        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
 
         mActivityRule.launchActivity(intent);
 
@@ -100,5 +103,60 @@ public class WifiDppConfiguratorActivityTest {
 
         assertThat(activity instanceof WifiDppQrCodeScannerFragment
                 .OnScanZxingWifiFormatSuccessListener).isEqualTo(true);
+    }
+
+    @Test
+    public void testActivity_shouldImplementsOnClickChooseDifferentNetworkCallback() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
+
+        assertThat(activity instanceof WifiDppAddDeviceFragment
+                .OnClickChooseDifferentNetworkListener).isEqualTo(true);
+    }
+
+    @Test
+    public void rotateScreen_shouldGetCorrectWifiDppQrCode() {
+        WifiQrCode wifiQrCode = new WifiQrCode(VALID_WIFI_DPP_QR_CODE);
+        Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
+
+        // setWifiDppQrCode and check if getWifiDppQrCode correctly after rotation
+        mActivityRule.launchActivity(intent);
+        mActivityRule.getActivity().setWifiDppQrCode(wifiQrCode);
+        mActivityRule.getActivity().setRequestedOrientation(
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        mActivityRule.getActivity().setRequestedOrientation(
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        WifiQrCode restoredWifiDppQrCode = mActivityRule.getActivity().getWifiDppQrCode();
+
+        assertThat(restoredWifiDppQrCode).isNotNull();
+        assertThat(restoredWifiDppQrCode.getQrCode()).isEqualTo(VALID_WIFI_DPP_QR_CODE);
+    }
+
+    @Test
+    public void rotateScreen_shouldGetCorrectWifiNetworkConfig() {
+        WifiNetworkConfig wifiNetworkConfig = new WifiNetworkConfig("WPA", "WifiSsid", "password",
+                /* hiddenSsid */ false, /* networkId */ 0);
+        Intent intent = new Intent(
+                WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
+        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
+
+        // setWifiNetworkConfig and check if getWifiNetworkConfig correctly after rotation
+        mActivityRule.launchActivity(intent);
+        mActivityRule.getActivity().setWifiNetworkConfig(wifiNetworkConfig);
+        mActivityRule.getActivity().setRequestedOrientation(
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        mActivityRule.getActivity().setRequestedOrientation(
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        WifiNetworkConfig restoredWifiNetworkConfig =
+                mActivityRule.getActivity().getWifiNetworkConfig();
+
+        assertThat(restoredWifiNetworkConfig).isNotNull();
+        assertThat(restoredWifiNetworkConfig.getSecurity()).isEqualTo("WPA");
+        assertThat(restoredWifiNetworkConfig.getSsid()).isEqualTo("WifiSsid");
+        assertThat(restoredWifiNetworkConfig.getPreSharedKey()).isEqualTo("password");
+        assertThat(restoredWifiNetworkConfig.getHiddenSsid()).isFalse();
+        assertThat(restoredWifiNetworkConfig.getNetworkId()).isEqualTo(0);
     }
 }
