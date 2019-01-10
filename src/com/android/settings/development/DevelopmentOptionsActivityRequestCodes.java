@@ -31,6 +31,4 @@ public interface DevelopmentOptionsActivityRequestCodes {
     int REQUEST_CODE_ANGLE_DRIVER_PKGS = 4;
 
     int REQUEST_CODE_ANGLE_DRIVER_VALUES = 5;
-
-    int REQUEST_CODE_GUP_DEV_OPT_IN_APPS = 6;
 }

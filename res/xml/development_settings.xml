@@ -195,7 +195,8 @@
             android:key="gup_dashboard"
             android:title="@string/gup_dashboard_title"
             android:summary="@string/gup_dashboard_summary"
-            android:fragment="com.android.settings.development.gup.GupDashboard" />
+            android:fragment="com.android.settings.development.gup.GupDashboard"
+            settings:searchable="false" />
 
     </PreferenceCategory>
 
@@ -429,11 +430,6 @@
             android:key="simulate_color_space"
             android:summary="%s"
             android:title="@string/simulate_color_space" />
-
-        <Preference
-            android:title="@string/gup_dev_opt_in_app"
-            android:key="gup_dev_opt_in_app"
-            android:summary="@string/gup_dev_opt_in_app_summary" />
 
     </PreferenceCategory>
 
