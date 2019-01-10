@@ -23,7 +23,7 @@ import android.util.ArrayMap;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.flashlight.FlashlightSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.BatteryInfoSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
@@ -106,7 +106,7 @@ public class CustomSliceManager {
 
     private void addSlices() {
         mUriMap.put(CustomSliceRegistry.BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
-        mUriMap.put(CustomSliceRegistry.BATTERY_INFO_SLICE_URI, BatterySlice.class);
+        mUriMap.put(CustomSliceRegistry.BATTERY_INFO_SLICE_URI, BatteryInfoSlice.class);
         mUriMap.put(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
         mUriMap.put(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
         mUriMap.put(CustomSliceRegistry.DATA_USAGE_SLICE_URI, DataUsageSlice.class);
