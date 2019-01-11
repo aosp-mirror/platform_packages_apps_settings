@@ -18,6 +18,8 @@ package com.android.settings.nfc;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -52,8 +54,10 @@ public class AndroidBeam extends InstrumentedFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
-        if (mNfcAdapter == null)
+        final Context context = getActivity();
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(context);
+        final PackageManager pm = context.getPackageManager();
+        if (mNfcAdapter == null || !pm.hasSystemFeature(PackageManager.FEATURE_NFC_BEAM))
             getActivity().finish();
         setHasOptionsMenu(true);
     }
