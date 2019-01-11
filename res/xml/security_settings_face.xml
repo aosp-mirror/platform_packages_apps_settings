@@ -47,13 +47,16 @@
         <SwitchPreference
             android:key="security_settings_face_require_attention"
             android:title="@string/security_settings_face_settings_require_attention"
+            android:summary="@string/security_settings_face_settings_require_attention_details"
             app:keywords="@string/keywords_face_unlock"
             app:controller="com.android.settings.biometrics.face.FaceSettingsAttentionPreferenceController"/>
 
-        <Preference
-            android:key="security_settings_face_improve"
-            android:title="@string/security_settings_face_settings_improve_face">
-        </Preference>
+        <SwitchPreference
+            android:key="security_settings_face_require_confirmation"
+            android:title="@string/security_settings_face_settings_require_confirmation"
+            android:summary="@string/security_settings_face_settings_require_confirmation_details"
+            app:keywords="@string/keywords_face_unlock"
+            app:controller="com.android.settings.biometrics.face.FaceSettingsConfirmPreferenceController"/>
 
         <com.android.settingslib.widget.LayoutPreference
             android:key="security_settings_face_delete_faces_container"
