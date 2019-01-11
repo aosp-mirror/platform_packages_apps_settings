@@ -74,6 +74,7 @@ import android.provider.Settings;
 import androidx.annotation.StringRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -964,6 +965,15 @@ public final class Utils extends com.android.settingslib.Utils {
             return iconDrawableFactory.getBadgedIcon(appInfo, userId);
         } catch (PackageManager.NameNotFoundException e) {
             return packageManager.getDefaultActivityIcon();
+        }
+    }
+
+    /** Get {@link Resources} by subscription id if subscription id is valid. */
+    public static Resources getResourcesForSubId(Context context, int subId) {
+        if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return SubscriptionManager.getResourcesForSubId(context, subId);
+        } else {
+            return context.getResources();
         }
     }
 }
