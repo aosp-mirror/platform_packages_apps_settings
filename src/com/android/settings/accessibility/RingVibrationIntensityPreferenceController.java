@@ -21,14 +21,15 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 
-public class NotificationVibrationIntensityPreferenceController
+public class RingVibrationIntensityPreferenceController
         extends VibrationIntensityPreferenceController {
 
     @VisibleForTesting
-    static final String PREF_KEY = "notification_vibration_preference_screen";
+    static final String PREF_KEY = "ring_vibration_preference_screen";
 
-    public NotificationVibrationIntensityPreferenceController(Context context) {
-        super(context, PREF_KEY, Settings.System.NOTIFICATION_VIBRATION_INTENSITY, "");
+    public RingVibrationIntensityPreferenceController(Context context) {
+        super(context, PREF_KEY, Settings.System.RING_VIBRATION_INTENSITY,
+                Settings.System.VIBRATE_WHEN_RINGING);
     }
 
     @Override
@@ -38,6 +39,6 @@ public class NotificationVibrationIntensityPreferenceController
 
     @Override
     protected int getDefaultIntensity() {
-        return mVibrator.getDefaultNotificationVibrationIntensity();
+        return mVibrator.getDefaultRingVibrationIntensity();
     }
 }

@@ -810,15 +810,30 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         final Context context = getContext();
         final Vibrator vibrator = context.getSystemService(Vibrator.class);
 
-        final int ringIntensity = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                vibrator.getDefaultNotificationVibrationIntensity());
+        int ringIntensity = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.RING_VIBRATION_INTENSITY,
+                vibrator.getDefaultRingVibrationIntensity());
+        if (Settings.System.getInt(context.getContentResolver(),
+                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0) {
+            ringIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
+        }
         CharSequence ringIntensityString =
                 VibrationIntensityPreferenceController.getIntensityString(context, ringIntensity);
 
-        final int touchIntensity = Settings.System.getInt(context.getContentResolver(),
+        int notificationIntensity = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                vibrator.getDefaultNotificationVibrationIntensity());
+        CharSequence notificationIntensityString =
+                VibrationIntensityPreferenceController.getIntensityString(context,
+                        notificationIntensity);
+
+        int touchIntensity = Settings.System.getInt(context.getContentResolver(),
                 Settings.System.HAPTIC_FEEDBACK_INTENSITY,
                 vibrator.getDefaultHapticFeedbackIntensity());
+        if (Settings.System.getInt(context.getContentResolver(),
+                Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) == 0) {
+            touchIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
+        }
         CharSequence touchIntensityString =
                 VibrationIntensityPreferenceController.getIntensityString(context, touchIntensity);
 
@@ -826,12 +841,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mVibrationPreferenceScreen = findPreference(VIBRATION_PREFERENCE_SCREEN);
         }
 
-        if (ringIntensity == touchIntensity) {
+        if (ringIntensity == touchIntensity && ringIntensity == notificationIntensity) {
             mVibrationPreferenceScreen.setSummary(ringIntensityString);
         } else {
             mVibrationPreferenceScreen.setSummary(
                     getString(R.string.accessibility_vibration_summary,
-                            ringIntensityString, touchIntensityString));
+                            ringIntensityString,
+                            notificationIntensityString,
+                            touchIntensityString));
         }
     }
 
