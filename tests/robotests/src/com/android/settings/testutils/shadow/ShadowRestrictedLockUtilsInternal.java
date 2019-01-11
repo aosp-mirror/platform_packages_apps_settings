@@ -37,6 +37,7 @@ public class ShadowRestrictedLockUtilsInternal {
     private static DevicePolicyManager sDevicePolicyManager;
     private static String[] sDisabledTypes;
     private static int sKeyguardDisabledFeatures;
+    private static boolean sIsSuspended;
 
     @Resetter
     public static void reset() {
@@ -45,6 +46,7 @@ public class ShadowRestrictedLockUtilsInternal {
         sKeyguardDisabledFeatures = 0;
         sDisabledTypes = new String[0];
         sMaximumTimeToLockIsSet = false;
+        sIsSuspended = false;
     }
 
     @Implementation
@@ -101,6 +103,12 @@ public class ShadowRestrictedLockUtilsInternal {
         return sMaximumTimeToLockIsSet ? new EnforcedAdmin() : null;
     }
 
+    @Implementation
+    protected static EnforcedAdmin checkIfApplicationIsSuspended(Context context,
+            String packageName, int userId) {
+        return sIsSuspended ? new EnforcedAdmin() : null;
+    }
+
     public static void setRestricted(boolean restricted) {
         sIsRestricted = restricted;
     }
@@ -131,5 +139,9 @@ public class ShadowRestrictedLockUtilsInternal {
 
     public static void setMaximumTimeToLockIsSet(boolean isSet) {
         sMaximumTimeToLockIsSet = isSet;
+    }
+
+    public static void setSuspended(boolean suspended) {
+        sIsRestricted = suspended;
     }
 }
