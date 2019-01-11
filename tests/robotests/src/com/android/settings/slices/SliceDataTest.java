@@ -39,6 +39,7 @@ public class SliceDataTest {
     private final int SLICE_TYPE = SliceData.SliceType.SWITCH;
     private final boolean IS_PLATFORM_DEFINED = true;
     private final boolean IS_DYNAMIC_SUMMARY_ALLOWED = true;
+    private final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
 
     @Test
     public void testBuilder_buildsMatchingObject() {
@@ -54,7 +55,8 @@ public class SliceDataTest {
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .setSliceType(SLICE_TYPE)
                 .setPlatformDefined(IS_PLATFORM_DEFINED)
-                .setDynamicSummaryAllowed(IS_DYNAMIC_SUMMARY_ALLOWED);
+                .setDynamicSummaryAllowed(IS_DYNAMIC_SUMMARY_ALLOWED)
+                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
 
         SliceData data = builder.build();
 
@@ -70,6 +72,7 @@ public class SliceDataTest {
         assertThat(data.getSliceType()).isEqualTo(SLICE_TYPE);
         assertThat(data.isPlatformDefined()).isEqualTo(IS_PLATFORM_DEFINED);
         assertThat(data.isDynamicSummaryAllowed()).isEqualTo(IS_DYNAMIC_SUMMARY_ALLOWED);
+        assertThat(data.getUnavailableSliceSubtitle()).isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
     }
 
     @Test(expected = SliceData.InvalidSliceDataException.class)

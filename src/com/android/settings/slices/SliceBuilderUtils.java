@@ -425,7 +425,10 @@ public class SliceBuilderUtils {
         final String title = data.getTitle();
         final Set<String> keywords = buildSliceKeywords(data);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
-        final CharSequence summary = context.getText(R.string.disabled_dependent_setting_summary);
+
+        final String customSubtitle = data.getUnavailableSliceSubtitle();
+        final CharSequence subtitle = !TextUtils.isEmpty(customSubtitle) ? customSubtitle
+                : context.getText(R.string.disabled_dependent_setting_summary);
         final IconCompat icon = getSafeIcon(context, data);
         final SliceAction primaryAction = SliceAction.createDeeplink(
                 getContentPendingIntent(context, data),
@@ -436,7 +439,7 @@ public class SliceBuilderUtils {
                 .addRow(new RowBuilder()
                         .setTitle(title)
                         .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                        .setSubtitle(summary)
+                        .setSubtitle(subtitle)
                         .setPrimaryAction(primaryAction))
                 .setKeywords(keywords)
                 .build();

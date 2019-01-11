@@ -113,6 +113,8 @@ class SlicesIndexer implements Runnable {
             values.put(IndexColumns.SLICE_TYPE, dataRow.getSliceType());
             values.put(IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
                     dataRow.isDynamicSummaryAllowed());
+            values.put(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
+                    dataRow.getUnavailableSliceSubtitle());
 
             database.replaceOrThrow(Tables.TABLE_SLICES_INDEX, null /* nullColumnHack */,
                     values);
