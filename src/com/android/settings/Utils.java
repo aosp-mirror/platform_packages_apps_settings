@@ -71,6 +71,7 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -979,5 +980,14 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.e(TAG, "Error while retrieving application info for package " + packageName, e);
         }
         return false;
+    }
+
+    /** Get {@link Resources} by subscription id if subscription id is valid. */
+    public static Resources getResourcesForSubId(Context context, int subId) {
+        if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return SubscriptionManager.getResourcesForSubId(context, subId);
+        } else {
+            return context.getResources();
+        }
     }
 }
