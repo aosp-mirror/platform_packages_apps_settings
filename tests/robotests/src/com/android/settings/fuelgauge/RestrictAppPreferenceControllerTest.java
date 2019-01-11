@@ -111,7 +111,7 @@ public class RestrictAppPreferenceControllerTest {
     @Test
     public void testUpdateState_oneApp_showCorrectSummary() {
         mPackageOpsList.add(mRestrictedPackageOps);
-        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any());
+        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any(int[].class));
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
@@ -124,7 +124,7 @@ public class RestrictAppPreferenceControllerTest {
         mPackageOpsList.add(mRestrictedPackageOps);
         mPackageOpsList.add(mAllowedPackageOps);
         mPackageOpsList.add(mOtherUserPackageOps);
-        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any());
+        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any(int[].class));
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
@@ -137,7 +137,7 @@ public class RestrictAppPreferenceControllerTest {
         // Two packageOps share same package name but different uid.
         mPackageOpsList.add(mRestrictedPackageOps);
         mPackageOpsList.add(mOtherUserPackageOps);
-        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any());
+        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any(int[].class));
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
@@ -152,7 +152,7 @@ public class RestrictAppPreferenceControllerTest {
     @Test
     public void testUpdateState_zeroRestrictApp_inVisible() {
         mPackageOpsList.add(mAllowedPackageOps);
-        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any());
+        doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any(int[].class));
 
         mRestrictAppPreferenceController.updateState(mPreference);
 
