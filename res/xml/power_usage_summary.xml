@@ -28,10 +28,9 @@
         android:layout="@layout/battery_header"
         settings:controller="com.android.settings.fuelgauge.BatteryHeaderPreferenceController" />
 
-    <PreferenceCategory
+    <com.android.settings.widget.CardPreference
         android:key="battery_tip"
         android:title="@string/summary_placeholder"
-        android:layout="@layout/preference_category_no_label"
         settings:controller="com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController" />
 
     <Preference
@@ -39,8 +38,7 @@
         android:key="battery_saver_summary"
         android:title="@string/battery_saver"
         settings:controller="com.android.settings.fuelgauge.BatterySaverController"
-        settings:platform_slice="true"
-        settings:allowDividerAbove="true" />
+        settings:platform_slice="true" />
 
     <Preference
         android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"

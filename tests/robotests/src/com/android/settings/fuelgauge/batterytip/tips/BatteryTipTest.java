@@ -56,7 +56,8 @@ public class BatteryTipTest {
 
     @Test
     public void buildPreference() {
-        final Preference preference = mBatteryTip.buildPreference(mContext);
+        final Preference preference = new Preference(mContext);
+        mBatteryTip.updatePreference(preference);
 
         assertThat(preference.getTitle()).isEqualTo(TITLE);
         assertThat(preference.getSummary()).isEqualTo(SUMMARY);
