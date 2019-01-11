@@ -26,6 +26,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -49,9 +51,10 @@ public class BluetoothDeviceDetailsFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private CachedBluetoothDevice mCachedDevice;
-
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocalBluetoothManager mLocalManager;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     @Before
     public void setUp() {
@@ -62,6 +65,7 @@ public class BluetoothDeviceDetailsFragmentTest {
         mFragment = spy(BluetoothDeviceDetailsFragment.newInstance(TEST_ADDRESS));
         doReturn(mLocalManager).when(mFragment).getLocalBluetoothManager(any());
         doReturn(mCachedDevice).when(mFragment).getCachedDevice(any());
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
 
         when(mCachedDevice.getAddress()).thenReturn(TEST_ADDRESS);
         Bundle args = new Bundle();

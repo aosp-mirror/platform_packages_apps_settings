@@ -56,7 +56,8 @@ import java.util.Set;
  */
 public abstract class DashboardFragment extends SettingsPreferenceFragment
         implements SettingsBaseActivity.CategoryListener, Indexable,
-        SummaryLoader.SummaryConsumer, PreferenceGroup.OnExpandButtonClickListener {
+        SummaryLoader.SummaryConsumer, PreferenceGroup.OnExpandButtonClickListener,
+        BasePreferenceController.UiBlockListener {
     private static final String TAG = "DashboardFragment";
 
     private final Map<Class, List<AbstractPreferenceController>> mPreferenceControllers =
@@ -67,6 +68,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private SummaryLoader mSummaryLoader;
+    private UiBlockerController mBlockerController;
 
     @Override
     public void onAttach(Context context) {
@@ -105,6 +107,22 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         for (AbstractPreferenceController controller : controllers) {
             addPreferenceController(controller);
         }
+
+        checkUiBlocker(controllers);
+    }
+
+    private void checkUiBlocker(List<AbstractPreferenceController> controllers) {
+        final List<String> keys = new ArrayList<>();
+        controllers
+                .stream()
+                .filter(controller -> controller instanceof BasePreferenceController.UiBlocker)
+                .forEach(controller -> {
+                    ((BasePreferenceController) controller).setUiBlockListener(this);
+                    keys.add(controller.getPreferenceKey());
+                });
+
+        mBlockerController = new UiBlockerController(keys);
+        mBlockerController.start(()->updatePreferenceVisibility());
     }
 
     @Override
@@ -319,10 +337,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      * DashboardCategory.
      */
     private void refreshAllPreferences(final String TAG) {
+        final PreferenceScreen screen = getPreferenceScreen();
         // First remove old preferences.
-        if (getPreferenceScreen() != null) {
+        if (screen != null) {
             // Intentionally do not cache PreferenceScreen because it will be recreated later.
-            getPreferenceScreen().removeAll();
+            screen.removeAll();
         }
 
         // Add resource based tiles.
@@ -334,6 +353,27 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (activity != null) {
             Log.d(TAG, "All preferences added, reporting fully drawn");
             activity.reportFullyDrawn();
+        }
+
+        updatePreferenceVisibility();
+    }
+
+    private void updatePreferenceVisibility() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+
+        final boolean visible = mBlockerController.isBlockerFinished();
+        for (List<AbstractPreferenceController> controllerList :
+                mPreferenceControllers.values()) {
+            for (AbstractPreferenceController controller : controllerList) {
+                final String key = controller.getPreferenceKey();
+                final Preference preference = screen.findPreference(key);
+                if (preference != null) {
+                    preference.setVisible(visible && controller.isAvailable());
+                }
+            }
         }
     }
 
@@ -412,5 +452,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
         }
         mSummaryLoader.setListening(true);
+    }
+
+    @Override
+    public void onBlockerWorkFinished(BasePreferenceController controller) {
+        mBlockerController.countDown(controller.getPreferenceKey());
     }
 }

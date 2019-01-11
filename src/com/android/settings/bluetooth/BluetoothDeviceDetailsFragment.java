@@ -30,7 +30,7 @@ import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.slices.SlicePreferenceController;
+import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -106,7 +106,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SLICE_INJECTION)) {
             final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(context)
                     .getBluetoothFeatureProvider(context);
-            use(SlicePreferenceController.class).setSliceUri(
+            use(BlockingSlicePrefController.class).setSliceUri(
                     featureProvider.getBluetoothDeviceSettingsUri(mDeviceAddress));
         }
     }

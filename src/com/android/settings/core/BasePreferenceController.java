@@ -106,6 +106,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
 
 
     protected final String mPreferenceKey;
+    protected UiBlockListener mUiBlockListener;
 
     /**
      * Instantiate a controller as specified controller type and user-defined key.
@@ -289,4 +290,36 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      */
     public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
     }
+
+    /**
+     * Set {@link UiBlockListener}
+     * @param uiBlockListener listener to set
+     */
+    public void setUiBlockListener(UiBlockListener uiBlockListener) {
+        mUiBlockListener = uiBlockListener;
+    }
+
+    /**
+     * Listener to invoke when background job is finished
+     */
+    public interface UiBlockListener {
+        /**
+         * To notify client that UI related background work is finished.
+         * (i.e. Slice is fully loaded.)
+         * @param controller Controller that contains background work
+         */
+        void onBlockerWorkFinished(BasePreferenceController controller);
+    }
+
+    /**
+     * Used for {@link BasePreferenceController} to decide whether it is ui blocker.
+     * If it is, entire UI will be invisible for a certain period until controller
+     * invokes {@link UiBlockListener}
+     *
+     * This won't block UI thread however has similar side effect. Please use it if you
+     * want to avoid janky animation(i.e. new preference is added in the middle of page).
+     *
+     * This music be used in {@link BasePreferenceController}
+     */
+    public interface UiBlocker {}
 }
