@@ -22,14 +22,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/wifi_dpp_fragment_header"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/qrcode_view"
-        android:layout_width="@dimen/qrcode_size"
-        android:layout_height="@dimen/qrcode_size"
-        android:src="@android:color/transparent"
-        android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <include layout="@layout/wifi_dpp_fragment_header"/>
+
+            <ImageView
+                android:id="@+id/qrcode_view"
+                android:layout_width="@dimen/qrcode_size"
+                android:layout_height="@dimen/qrcode_size"
+                android:src="@android:color/transparent"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
 

@@ -29,10 +29,13 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.Stage;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 import com.android.settings.password.SetupChooseLockPassword.SetupChooseLockPasswordFragment;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.widget.ScrollToParentEditText;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,7 +54,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowResources.class, ShadowUtils.class})
+@Config(shadows = {SettingsShadowResources.class, ShadowUtils.class, ShadowAlertDialogCompat.class})
 public class SetupChooseLockPasswordTest {
 
     @Before
@@ -128,6 +131,42 @@ public class SetupChooseLockPasswordTest {
                 ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false)).isTrue();
         assertThat(nextStartedActivity.getStringExtra("foo")).named("Foo extra")
                 .isEqualTo("bar");
+    }
+
+    @Test
+    public void createActivity_skipButtonInIntroductionStage_shouldBeVisible() {
+        SetupChooseLockPassword activity = createSetupChooseLockPassword();
+
+        Button skipButton = activity.findViewById(R.id.skip_button);
+        assertThat(skipButton).isNotNull();
+        assertThat(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
+
+        skipButton.performClick();
+        AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(chooserDialog).isNotNull();
+    }
+
+    @Test
+    public void createActivity_inputPasswordInConfirmStage_clearButtonShouldBeVisible() {
+        SetupChooseLockPassword activity = createSetupChooseLockPassword();
+
+        SetupChooseLockPasswordFragment fragment =
+            (SetupChooseLockPasswordFragment) activity.getSupportFragmentManager()
+                .findFragmentById(R.id.main_content);
+
+        ScrollToParentEditText passwordEntry = activity.findViewById(R.id.password_entry);
+        passwordEntry.setText("");
+        fragment.updateStage(Stage.NeedToConfirm);
+
+        Button skipButton = activity.findViewById(R.id.skip_button);
+        Button clearButton = activity.findViewById(R.id.clear_button);
+        assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
+        assertThat(clearButton.getVisibility()).isEqualTo(View.GONE);
+
+        passwordEntry.setText("1234");
+        fragment.updateUi();
+        assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
+        assertThat(clearButton.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     private SetupChooseLockPassword createSetupChooseLockPassword() {

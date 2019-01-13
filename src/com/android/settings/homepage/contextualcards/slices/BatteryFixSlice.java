@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
@@ -49,6 +48,7 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BatteryFixSlice implements CustomSliceable {
@@ -57,6 +57,11 @@ public class BatteryFixSlice implements CustomSliceable {
     static final String PREFS = "battery_fix_prefs";
     @VisibleForTesting
     static final String KEY_CURRENT_TIPS_TYPE = "current_tip_type";
+
+    private static final List<Integer> UNIMPORTANT_BATTERY_TIPS = Arrays.asList(
+            BatteryTip.TipType.SUMMARY,
+            BatteryTip.TipType.BATTERY_SAVER
+    );
 
     private static final String TAG = "BatteryFixSlice";
 
@@ -78,7 +83,7 @@ public class BatteryFixSlice implements CustomSliceable {
                         .setAccentColor(-1);
 
         // TipType.SUMMARY is battery good
-        if (readBatteryTipAvailabilityCache(mContext) == BatteryTip.TipType.SUMMARY) {
+        if (UNIMPORTANT_BATTERY_TIPS.contains(readBatteryTipAvailabilityCache(mContext))) {
             return buildBatteryGoodSlice(sliceBuilder, true);
         }
 
@@ -91,19 +96,21 @@ public class BatteryFixSlice implements CustomSliceable {
         }
 
         for (BatteryTip batteryTip : batteryTips) {
-            if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
-                final IconCompat icon = IconCompat.createWithResource(mContext, batteryTip.getIconId());
-                final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
-                        icon,
-                        ListBuilder.ICON_IMAGE,
-                        batteryTip.getTitle(mContext));
-                sliceBuilder.addRow(new RowBuilder()
-                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                        .setTitle(batteryTip.getTitle(mContext))
-                        .setSubtitle(batteryTip.getSummary(mContext))
-                        .setPrimaryAction(primaryAction));
-                break;
+            if (batteryTip.getState() == BatteryTip.StateType.INVISIBLE) {
+                continue;
             }
+            final IconCompat icon = IconCompat.createWithResource(mContext,
+                    batteryTip.getIconId());
+            final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
+                    icon,
+                    ListBuilder.ICON_IMAGE,
+                    batteryTip.getTitle(mContext));
+            sliceBuilder.addRow(new RowBuilder()
+                    .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                    .setTitle(batteryTip.getTitle(mContext))
+                    .setSubtitle(batteryTip.getSummary(mContext))
+                    .setPrimaryAction(primaryAction));
+            break;
         }
         return sliceBuilder.build();
     }

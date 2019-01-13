@@ -30,6 +30,7 @@ import android.accounts.Account;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ProviderInfo;
@@ -167,12 +168,22 @@ public class AvatarViewMixinTest {
         assertThat(bundle.getString("account_name")).isEqualTo(DUMMY_ACCOUNT);
     }
 
+    @Test
+    public void onClickAvatar_withEmptyUri_startActivityShouldNotBeExecuted() {
+        final SettingsHomepageActivity activity = spy((SettingsHomepageActivity) mController.get());
+        final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(activity, mImageView);
+
+        mImageView.performClick();
+
+        verify(activity, never()).startActivity(any(Intent.class));
+    }
+
     @Implements(value = AccountFeatureProviderImpl.class)
     public static class ShadowAccountFeatureProviderImpl {
 
         @Implementation
         protected Account[] getAccounts(Context context) {
-            return new Account[] {new Account(DUMMY_ACCOUNT, DUMMY_DOMAIN)};
+            return new Account[]{new Account(DUMMY_ACCOUNT, DUMMY_DOMAIN)};
         }
     }
 }

@@ -50,6 +50,7 @@ public class SlicesDatabaseAccessor {
             IndexColumns.PLATFORM_SLICE,
             IndexColumns.SLICE_TYPE,
             IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
+            IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
     };
 
     // Cursor value for boolean true
@@ -167,6 +168,8 @@ public class SlicesDatabaseAccessor {
                 cursor.getColumnIndex(IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE)) == TRUE;
         int sliceType = cursor.getInt(
                 cursor.getColumnIndex(IndexColumns.SLICE_TYPE));
+        final String unavailableSliceSubtitle = cursor.getString(
+                cursor.getColumnIndex(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE));
 
         if (isIntentOnly) {
             sliceType = SliceData.SliceType.INTENT;
@@ -185,6 +188,7 @@ public class SlicesDatabaseAccessor {
                 .setPlatformDefined(isPlatformDefined)
                 .setSliceType(sliceType)
                 .setDynamicSummaryAllowed(isDynamicSummaryAllowed)
+                .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                 .build();
     }
 

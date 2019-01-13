@@ -102,8 +102,7 @@
         settings:keywords="@string/keywords_model_and_hardware"
         android:summary="@string/summary_placeholder"
         settings:allowDynamicSummaryInSlice="true"
-        settings:controller=
-            "com.android.settings.deviceinfo.DeviceModelPreferenceController"/>
+        settings:controller="com.android.settings.deviceinfo.DeviceModelPreferenceController"/>
 
     <!-- IMEI -->
     <Preference
@@ -111,7 +110,8 @@
         android:order="22"
         android:title="@string/status_imei"
         settings:keywords="@string/keywords_imei_info"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController"/>
 
     <!-- Android version -->
     <Preference

@@ -28,7 +28,7 @@ public class NotificationVibrationIntensityPreferenceController
     static final String PREF_KEY = "notification_vibration_preference_screen";
 
     public NotificationVibrationIntensityPreferenceController(Context context) {
-        super(context, PREF_KEY, Settings.System.NOTIFICATION_VIBRATION_INTENSITY);
+        super(context, PREF_KEY, Settings.System.NOTIFICATION_VIBRATION_INTENSITY, "");
     }
 
     @Override

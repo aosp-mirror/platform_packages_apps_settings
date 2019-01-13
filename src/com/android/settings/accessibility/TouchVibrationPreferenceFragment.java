@@ -45,6 +45,11 @@ public class TouchVibrationPreferenceFragment extends VibrationPreferenceFragmen
     }
 
     @Override
+    protected String getVibrationEnabledSetting() {
+        return Settings.System.HAPTIC_FEEDBACK_ENABLED;
+    }
+
+    @Override
     protected int getDefaultVibrationIntensity() {
         Vibrator vibrator = getContext().getSystemService(Vibrator.class);
         return vibrator.getDefaultHapticFeedbackIntensity();
@@ -53,14 +58,5 @@ public class TouchVibrationPreferenceFragment extends VibrationPreferenceFragmen
     @Override
     protected int getPreviewVibrationAudioAttributesUsage() {
         return AudioAttributes.USAGE_ASSISTANCE_SONIFICATION;
-    }
-
-    @Override
-    public void onVibrationIntensitySelected(int intensity) {
-        // We want to keep HAPTIC_FEEDBACK_ENABLED consistent with this setting since some
-        // applications check it directly before triggering their own haptic feedback.
-        final boolean hapticFeedbackEnabled = !(intensity == Vibrator.VIBRATION_INTENSITY_OFF);
-        Settings.System.putInt(getContext().getContentResolver(),
-                Settings.System.HAPTIC_FEEDBACK_ENABLED, hapticFeedbackEnabled ? 1 : 0);
     }
 }

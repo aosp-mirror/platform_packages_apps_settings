@@ -25,6 +25,7 @@ LOCAL_RESOURCE_DIR += \
 	$(SETTINGS_AOSP_PATH)/res
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
+    androidx-constraintlayout_constraintlayout \
     androidx.slice_slice-builders \
     androidx.slice_slice-core \
     androidx.slice_slice-view \
@@ -42,6 +43,7 @@ LOCAL_JAVA_LIBRARIES := \
     ims-common
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
+    androidx-constraintlayout_constraintlayout-solver \
     androidx.lifecycle_lifecycle-runtime \
     androidx.lifecycle_lifecycle-extensions \
     guava \

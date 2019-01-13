@@ -42,15 +42,15 @@ import com.android.settings.slices.SliceBuilderUtils;
 /**
  * Utility class to build a Battery Slice, and handle all associated actions.
  */
-public class BatterySlice implements CustomSliceable {
-    private static final String TAG = "BatterySlice";
+public class BatteryInfoSlice implements CustomSliceable {
+    private static final String TAG = "BatteryInfoSlice";
 
     private final Context mContext;
 
     private BatteryInfo mBatteryInfo;
     private boolean mIsBatteryInfoLoading;
 
-    public BatterySlice(Context context) {
+    public BatteryInfoSlice(Context context) {
         mContext = context;
     }
 

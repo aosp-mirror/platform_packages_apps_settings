@@ -100,7 +100,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
                         .setText(R.string.wizard_back)
                         .setListener(this::onNavigateBack)
                         .setButtonType(FooterButton.ButtonType.OTHER)
-                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
         );
         mButtonFooterMixin.setPrimaryButton(
@@ -108,7 +108,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
                         .setText(R.string.wizard_next)
                         .setListener(this::onNavigateNext)
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
         mBack = mButtonFooterMixin.getSecondaryButton();

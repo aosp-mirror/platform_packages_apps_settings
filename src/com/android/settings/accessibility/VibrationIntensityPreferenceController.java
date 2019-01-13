@@ -39,14 +39,16 @@ public abstract class VibrationIntensityPreferenceController extends BasePrefere
     protected final Vibrator mVibrator;
     private final SettingObserver mSettingsContentObserver;
     private final String mSettingKey;
+    private final String mEnabledKey;
 
     private Preference mPreference;
 
     public VibrationIntensityPreferenceController(Context context, String prefkey,
-            String settingKey) {
+            String settingKey, String enabledKey) {
         super(context, prefkey);
         mVibrator = mContext.getSystemService(Vibrator.class);
         mSettingKey = settingKey;
+        mEnabledKey = enabledKey;
         mSettingsContentObserver = new SettingObserver(settingKey) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
@@ -78,7 +80,9 @@ public abstract class VibrationIntensityPreferenceController extends BasePrefere
     public CharSequence getSummary() {
         final int intensity = Settings.System.getInt(mContext.getContentResolver(),
                 mSettingKey, getDefaultIntensity());
-        return getIntensityString(mContext, intensity);
+        final boolean enabled = Settings.System.getInt(mContext.getContentResolver(),
+                mEnabledKey, 1) == 1;
+        return getIntensityString(mContext, enabled ? intensity : Vibrator.VIBRATION_INTENSITY_OFF);
    }
 
     public static CharSequence getIntensityString(Context context, int intensity) {

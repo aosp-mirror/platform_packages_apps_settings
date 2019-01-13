@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -99,6 +99,11 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * preference controller.
          */
         String ALLOW_DYNAMIC_SUMMARY_IN_SLICE = "allow_dynamic_summary_in_slice";
+
+        /**
+         * Customized subtitle if it's a unavailable slice
+         */
+        String UNAVAILABLE_SLICE_SUBTITLE = "unavailable_slice_subtitle";
     }
 
     private static final String CREATE_SLICES_TABLE =
@@ -125,6 +130,8 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.SLICE_TYPE +
                     ", " +
                     IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE +
+                    ", " +
+                    IndexColumns.UNAVAILABLE_SLICE_SUBTITLE +
                     ");";
 
     private final Context mContext;
@@ -151,7 +158,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < DATABASE_VERSION) {
-            Log.d(TAG, "Reconstructing DB from " + oldVersion + "to " + newVersion);
+            Log.d(TAG, "Reconstructing DB from " + oldVersion + " to " + newVersion);
             reconstruct(db);
         }
     }

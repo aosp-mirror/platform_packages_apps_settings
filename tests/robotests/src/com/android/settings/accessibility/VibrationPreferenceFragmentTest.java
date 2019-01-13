@@ -161,6 +161,11 @@ public class VibrationPreferenceFragmentTest {
         }
 
         @Override
+        protected String getVibrationEnabledSetting() {
+            return "";
+        }
+
+        @Override
         protected int getDefaultVibrationIntensity() {
             return Vibrator.VIBRATION_INTENSITY_MEDIUM;
         }

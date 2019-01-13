@@ -18,16 +18,15 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    style="@style/SudGlifButtonBar">
 
     <Button
         android:id="@+id/button_left"
+        style="@style/SudGlifButton.Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:text="left"
-        style="?android:attr/borderlessButtonStyle"/>
+        android:layout_gravity="start"/>
 
     <Space
         android:layout_width="0dp"
@@ -36,9 +35,9 @@
 
     <Button
         android:id="@+id/button_right"
+        style="@style/SudGlifButton.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:text="right"/>
+        android:layout_gravity="end"/>
 
 </LinearLayout>

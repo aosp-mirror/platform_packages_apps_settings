@@ -16,12 +16,12 @@
 
 package com.android.settings.core;
 
-import static com.android.settings.core.PreferenceXmlParserUtils
-        .METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_APPEND;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SEARCHABLE;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAILABLE_SLICE_SUBTITLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -35,7 +35,6 @@ import android.util.Xml;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 
-import java.util.Objects;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,6 +46,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * These tests use a series of preferences that have specific attributes which are sometimes
@@ -320,7 +320,7 @@ public class PreferenceXmlParserUtilsTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void extractMetadata_requestAppendProperty_shouldDefaultToFalse()
-        throws Exception {
+            throws Exception {
         final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
                 R.xml.display_settings,
                 MetadataFlag.FLAG_INCLUDE_PREF_SCREEN | MetadataFlag.FLAG_NEED_PREF_APPEND);
@@ -333,7 +333,7 @@ public class PreferenceXmlParserUtilsTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void extractMetadata_requestAppendProperty_shouldReturnCorrectValue()
-        throws Exception {
+            throws Exception {
         final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
                 R.xml.battery_saver_schedule_settings,
                 MetadataFlag.FLAG_INCLUDE_PREF_SCREEN | MetadataFlag.FLAG_NEED_PREF_APPEND);
@@ -341,6 +341,46 @@ public class PreferenceXmlParserUtilsTest {
         for (Bundle bundle : metadata) {
             assertThat(bundle.getBoolean(METADATA_APPEND)).isTrue();
         }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestUnavailableSliceSubtitle_shouldDefaultNull()
+            throws Exception {
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.night_display_settings,
+                MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE);
+
+        boolean bundleWithKey1Found = false;
+        for (Bundle bundle : metadata) {
+            if (bundle.getString(METADATA_KEY).equals("key1")) {
+                assertThat(bundle.getString(METADATA_UNAVAILABLE_SLICE_SUBTITLE)).isNull();
+                bundleWithKey1Found = true;
+                break;
+            }
+        }
+        assertThat(bundleWithKey1Found).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestUnavailableSliceSubtitle_shouldReturnAttributeValue()
+            throws Exception {
+        final String expectedSubtitle = "subtitleOfUnavailable";
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.night_display_settings,
+                MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE);
+
+        boolean bundleWithKey2Found = false;
+        for (Bundle bundle : metadata) {
+            if (bundle.getString(METADATA_KEY).equals("key2")) {
+                assertThat(bundle.getString(METADATA_UNAVAILABLE_SLICE_SUBTITLE)).isEqualTo(
+                        expectedSubtitle);
+                bundleWithKey2Found = true;
+                break;
+            }
+        }
+        assertThat(bundleWithKey2Found).isTrue();
     }
 
     /**

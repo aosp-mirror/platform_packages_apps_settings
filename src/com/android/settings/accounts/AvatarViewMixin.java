@@ -40,6 +40,7 @@ import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -57,7 +58,6 @@ public class AvatarViewMixin implements LifecycleObserver {
     private static final String KEY_AVATAR_BITMAP = "account_avatar";
     private static final String KEY_ACCOUNT_NAME = "account_name";
     private static final String EXTRA_ACCOUNT_NAME = "extra.accountName";
-    private static final int REQUEST_CODE = 1013;
 
     private final Context mContext;
     private final ImageView mAvatarView;
@@ -69,23 +69,32 @@ public class AvatarViewMixin implements LifecycleObserver {
         mContext = activity.getApplicationContext();
         mAvatarView = avatarView;
         mAvatarView.setOnClickListener(v -> {
-            final Intent intent = FeatureFactory.getFactory(mContext)
-                    .getAccountFeatureProvider()
-                    .getAccountSettingsDeeplinkIntent();
-
-            if (intent == null) {
+            Intent intent;
+            try {
+                final String uri = mContext.getResources().getString(
+                        R.string.config_account_intent_uri);
+                intent = Intent.parseUri(uri, Intent.URI_INTENT_SCHEME);
+            } catch (URISyntaxException e) {
+                Log.w(TAG, "Error parsing avatar mixin intent, skipping", e);
                 return;
             }
 
             if (!TextUtils.isEmpty(mAccountName)) {
-                //TODO(b/117509285) launch the new page of the MeCard
                 intent.putExtra(EXTRA_ACCOUNT_NAME, mAccountName);
+            }
+
+            final List<ResolveInfo> matchedIntents =
+                    mContext.getPackageManager().queryIntentActivities(intent,
+                            PackageManager.MATCH_SYSTEM_ONLY);
+            if (matchedIntents.isEmpty()) {
+                Log.w(TAG, "Cannot find any matching action VIEW_ACCOUNT intent.");
+                return;
             }
 
             // Here may have two different UI while start the activity.
             // It will display adding account UI when device has no any account.
             // It will display account information page when intent added the specified account.
-            activity.startActivityForResult(intent, REQUEST_CODE);
+            activity.startActivity(intent);
         });
 
         mAvatarImage = new MutableLiveData<>();

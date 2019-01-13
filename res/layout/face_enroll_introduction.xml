@@ -25,7 +25,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        style="@style/SuwContentFrame"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipChildren="false"
@@ -34,14 +34,14 @@
 
         <com.google.android.setupdesign.view.RichTextView
             android:id="@+id/description_text"
-            style="@style/SuwDescription.Glif"
+            style="@style/SudDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/security_settings_face_enroll_introduction_message" />
 
         <com.google.android.setupdesign.view.RichTextView
             android:id="@+id/error_text"
-            style="@style/SuwDescription.Glif"
+            style="@style/SudDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -51,7 +51,7 @@
             android:layout_weight="1">
 
             <ImageView
-                style="@style/SuwContentIllustration"
+                style="@style/SudContentIllustration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@null"
@@ -65,7 +65,7 @@
             android:layout_gravity="center">
             <Button
                 android:id="@+id/accessibility_button"
-                style="@style/SuwGlifButton.Secondary"
+                style="@style/SudGlifButton.Secondary"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

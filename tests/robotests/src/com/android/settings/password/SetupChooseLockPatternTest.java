@@ -164,6 +164,20 @@ public class SetupChooseLockPatternTest {
         assertThat(findFragment(mActivity).mChosenPattern).isNull();
     }
 
+    @Test
+    public void createActivity_enterPattern_clearButtonShouldBeVisible() {
+        ChooseLockPatternFragment fragment = findFragment(mActivity);
+
+        Button skipButton = mActivity.findViewById(R.id.skip_button);
+        Button clearButton = mActivity.findViewById(R.id.footerLeftButton);
+        assertThat(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(clearButton.getVisibility()).isEqualTo(View.GONE);
+
+        enterPattern();
+        assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
+        assertThat(clearButton.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
     private ChooseLockPatternFragment findFragment(FragmentActivity activity) {
         return (ChooseLockPatternFragment)
                 activity.getSupportFragmentManager().findFragmentById(R.id.main_content);

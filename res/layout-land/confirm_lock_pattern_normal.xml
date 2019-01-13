@@ -40,34 +40,34 @@
                 android:paddingBottom="24dp">
 
                 <ImageView
-                    android:id="@+id/suw_layout_icon"
-                    style="@style/SuwGlifIcon"
+                    android:id="@+id/suc_layout_icon"
+                    style="@style/SudGlifIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="?attr/suwGlifHeaderGravity"
+                    android:layout_gravity="?attr/sudGlifHeaderGravity"
                     android:src="@drawable/ic_lock" />
 
                 <TextView
                     android:id="@+id/headerText"
-                    style="@style/SuwGlifHeaderTitle"
+                    style="@style/SudGlifHeaderTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    style="@style/SuwDescription.Glif"
+                    style="@style/SudDescription.Glif"
                     android:id="@+id/detailsText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/suwMarginSides"
-                    android:layout_marginEnd="?attr/suwMarginSides" />
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides" />
 
                 <Button
                     android:id="@+id/cancelButton"
                     style="@style/SetupWizardButton.Negative"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/suwMarginSides"
-                    android:layout_marginEnd="?attr/suwMarginSides"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
                     android:text="@string/cancel" />
 
                 <Space
@@ -81,8 +81,8 @@
                     android:id="@+id/errorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/suwMarginSides"
-                    android:layout_marginEnd="?attr/suwMarginSides"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
                     android:layout_marginBottom="24dp"
                     android:gravity="center_vertical"/>
             </LinearLayout>

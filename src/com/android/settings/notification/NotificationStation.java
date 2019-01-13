@@ -372,7 +372,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             sb.append("\n")
                     .append(bold(getString(R.string.notification_log_details_sound)))
                     .append(delim);
-            if (channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
+            if (channel == null || channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
 
                 if (0 != (n.defaults & Notification.DEFAULT_SOUND)) {
                     sb.append(getString(R.string.notification_log_details_default));
@@ -387,7 +387,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             sb.append("\n")
                     .append(bold(getString(R.string.notification_log_details_vibrate)))
                     .append(delim);
-            if (channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
+            if (channel == null || channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
                 if (0 != (n.defaults & Notification.DEFAULT_VIBRATE)) {
                     sb.append(getString(R.string.notification_log_details_default));
                 } else if (n.vibrate != null) {

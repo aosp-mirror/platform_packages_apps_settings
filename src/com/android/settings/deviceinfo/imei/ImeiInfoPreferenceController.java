@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.imei;
 import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 
 import android.content.Context;
+import android.os.UserManager;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -27,8 +28,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.slices.Copyable;
+import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,39 +38,30 @@ import java.util.List;
 /**
  * Controller that manages preference for single and multi sim devices.
  */
-public class ImeiInfoPreferenceController extends
-        AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
-
-    private static final String KEY_IMEI_INFO = "imei_info";
+public class ImeiInfoPreferenceController extends BasePreferenceController implements Copyable {
 
     private final boolean mIsMultiSim;
     private final TelephonyManager mTelephonyManager;
     private final List<Preference> mPreferenceList = new ArrayList<>();
-    private final Fragment mFragment;
+    private Fragment mFragment;
 
-    public ImeiInfoPreferenceController(Context context, Fragment fragment) {
-        super(context);
-
-        mFragment = fragment;
+    public ImeiInfoPreferenceController(Context context, String key) {
+        super(context, key);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mIsMultiSim = mTelephonyManager.getPhoneCount() > 1;
     }
 
-    @Override
-    public String getPreferenceKey() {
-        return KEY_IMEI_INFO;
+    public void setHost(Fragment fragment) {
+        mFragment = fragment;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
-        if (!isAvailable() || preference == null || !preference.isVisible()) {
-            return;
-        }
 
         mPreferenceList.add(preference);
-        updatePreference(preference, 0 /* sim slot */);
+        updatePreference(preference, 0 /* simSlot */);
 
         final int imeiPreferenceOrder = preference.getOrder();
         // Add additional preferences for each sim in the device
@@ -76,11 +69,18 @@ public class ImeiInfoPreferenceController extends
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
             multiSimPreference.setOrder(imeiPreferenceOrder + simSlotNumber);
-            multiSimPreference.setKey(KEY_IMEI_INFO + simSlotNumber);
+            multiSimPreference.setKey(getPreferenceKey() + simSlotNumber);
             screen.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
             updatePreference(multiSimPreference, simSlotNumber);
         }
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        final int phoneType = mTelephonyManager.getPhoneType();
+        return phoneType == PHONE_TYPE_CDMA ? mTelephonyManager.getMeid()
+                : mTelephonyManager.getImei();
     }
 
     @Override
@@ -92,6 +92,22 @@ public class ImeiInfoPreferenceController extends
 
         ImeiInfoDialogFragment.show(mFragment, simSlot, preference.getTitle().toString());
         return true;
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return mContext.getSystemService(UserManager.class).isAdminUser()
+                && !Utils.isWifiOnly(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public void copy() {
+        Copyable.setCopyContent(mContext, getSummary(), mContext.getText(R.string.status_imei));
     }
 
     private void updatePreference(Preference preference, int simSlot) {

@@ -135,9 +135,13 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         protected void updateUi() {
             super.updateUi();
-
             // Show the skip button during SUW but not during Settings > Biometric Enrollment
-            mSkipButton.setVisibility(View.VISIBLE);
+            if (mUiStage == Stage.Introduction) {
+                mSkipButton.setVisibility(View.VISIBLE);
+            } else {
+                mSkipButton.setVisibility(View.GONE);
+            }
+
             if (mOptionsButton != null) {
                 mOptionsButton.setVisibility(
                         mUiStage == Stage.Introduction ? View.VISIBLE : View.GONE);

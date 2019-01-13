@@ -927,10 +927,12 @@
     <string name="security_settings_face_settings_require_attention">Eyes open to unlock</string>
     <!-- Text shown on the details of a toggle which disables/enables face authentication, depending if the user's eyes are open. [CHAR LIMIT=70] -->
     <string name="security_settings_face_settings_require_attention_details">When using face authentication, your eyes must be open</string>
+    <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_settings_require_confirmation">Always require confirmation</string>
+    <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_confirmation_details">When authenticating in apps, always require confirmation</string>
     <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_remove_face_data">Remove face data</string>
-    <!-- Text shown in face settings allowing the user to update/improve the enrolled face. This brings the user back to the enrollment flow. [CHAR LIMIT=30] -->
-    <string name="security_settings_face_settings_improve_face">Improve your face data</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer">Your face can be used to unlock your device and access apps.
         <annotation id="url">Learn more</annotation></string>
@@ -2104,6 +2106,12 @@
     <string name="wifi_dpp_add_another_device">Add another device</string>
     <!-- Button label to choose different Wi-Fi network [CHAR LIMIT=80]  -->
     <string name="wifi_dpp_choose_different_network">Choose different network</string>
+    <!-- Hint for QR code detection [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_could_not_add_device">Couldn\u2019t add device</string>
+    <!-- Title for the fragment to show that device found but naming known [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_device_found">Device found</string>
+     <!-- Label for the try again button [CHAR LIMIT=20]-->
+    <string name="retry">Retry</string>
     <!-- Label for the check box to share a network with other users on the same device -->
     <string name="wifi_shared">Share with other device users</string>
     <!-- Hint for unchanged fields -->
@@ -4220,13 +4228,9 @@
     <!-- Manage applications. application installation location summary -->
     <string name="app_install_location_summary">Change the preferred installation location for new apps</string>
     <!-- [CHAR LIMIT=30] Manage applications, label for option to disable app -->
-    <string name="app_disable_dlg_positive">Disable app</string>
+    <string name="app_disable_dlg_positive">Uninstall app</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling apps -->
-    <string name="app_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended.</string>
-    <!-- [CHAR LIMIT=NONE] Manage applications, title for dialog when disabling updated apps -->
-    <string name="app_special_disable_dlg_title">Delete data and disable app?</string>
-    <!-- [CHAR LIMIT=NONE] Manage applications, text for dialog when disabling update apps -->
-    <string name="app_special_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended.  Your data will also be deleted.</string>
+    <string name="app_disable_dlg_text">If you uninstall this app, Android and other apps may no longer function as intended.</string>
     <!-- [CHAR LIMIT=30] Manage applications, title for dialog when disabling notifications for an app -->
     <string name="app_disable_notifications_dlg_title">Turn off notifications?</string>
     <!-- Manage applications, individual application info screen, section heading for information about the app installer [CHAR_LIMIT=25] -->
@@ -4687,7 +4691,9 @@
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
-    <string name="accessibility_notification_vibration_title">Ring &amp; notification vibration</string>
+    <string name="accessibility_notification_vibration_title">Notification vibration</string>
+    <!-- Title for accessibility preference for configuring ring vibrations. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_ring_vibration_title">Ring vibration</string>
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch vibration</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
@@ -4757,8 +4763,8 @@
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
     </plurals>
 
-    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=32] -->
-    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%2$s</xliff:g></string>
+    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=50] -->
+    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, notification <xliff:g id="summary_notification" example="Low">%2$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%3$s</xliff:g></string>
 
     <!-- Summary for vibration settings preference when ring & notification are set to off-->
     <string name="accessibility_vibration_summary_off">Ring &amp; notification set to off</string>
@@ -7052,8 +7058,10 @@
     <!-- List of synonyms for touch vibration setting (where you get a haptic response for touching things on the screen), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_touch_vibration">haptics, vibrate, screen, sensitivity</string>
 
-    <!-- List of synonyms for ring and notification vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity</string>
+    <!-- List of synonyms for ring vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity, ring</string>
+    <!-- List of synonyms for notification vibration setting (changes whether your phone vibrates when it shows a notification), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
@@ -9091,6 +9099,12 @@
     <!-- Summary of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_summary">Impacts what you hear and see</string>
 
+    <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
+    <string name="condition_battery_title">Battery Saver is on</string>
+
+    <!-- Summary of condition that battery saver is on [CHAR LIMIT=NONE] -->
+    <string name="condition_battery_summary">Features restricted</string>
+
     <!-- Title of condition that cellular data is off [CHAR LIMIT=50] -->
     <string name="condition_cellular_title">Mobile data is off</string>
 
@@ -10055,17 +10069,24 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- UI debug setting: select an app to use Game Update Package [CHAR LIMIT=100] -->
-    <string name="gup_dev_opt_in_app">Use Game Update Package</string>
-    <!-- UI debug setting: no app selected to use Game Update Package [CHAR LIMIT=100] -->
-    <string name="gup_dev_opt_in_app_not_set">No selected app</string>
-    <!-- UI debug setting: app selected to use Game Update Package [CHAR LIMIT=NONE] -->
-    <string name="gup_dev_opt_in_app_set"><xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
-
-    <!-- Title for Game Update Packages dashboard where developers can configure apps to use GUP or not [CHAR LIMIT=50] -->
-    <string name="gup_dashboard_title">Game Update Packages Preferences</string>
-    <!-- Summary for Game Update Packages dashboard [CHAR LIMIT=50] -->
-    <string name="gup_dashboard_summary">Modify Game Update Packages settings</string>
+    <!-- Title for Game Update Package dashboard where developers can configure apps to use GUP or not [CHAR LIMIT=50] -->
+    <string name="gup_dashboard_title">Game Update Package Preferences</string>
+    <!-- Summary for Game Update Package dashboard [CHAR LIMIT=50] -->
+    <string name="gup_dashboard_summary">Modify Game Update Package settings</string>
+    <!-- Title for Game Update Package preference [CHAR LIMIT=50] -->
+    <string name="gup_app_preference_title">Select Graphics Driver</string>
+    <!-- The default value for Game Update Package preference [CHAR LIMIT=50] -->
+    <string name="gup_app_preference_default">Default</string>
+    <!-- The gup value for Game Update Package preference [CHAR LIMIT=50] -->
+    <string name="gup_app_preference_gup">Game Update Package</string>
+    <!-- The system value for Game Update Package preference [CHAR LIMIT=50] -->
+    <string name="gup_app_preference_system">System Graphics Driver</string>
+    <!-- All the values for Game Update Package preference [CHAR LIMIT=50] -->
+    <string-array name="gup_app_preference_values">
+        <item>@string/gup_app_preference_default</item>
+        <item>@string/gup_app_preference_gup</item>
+        <item>@string/gup_app_preference_system</item>
+    </string-array>
 
     <!-- Slices Strings -->
 
@@ -10182,12 +10203,6 @@
 
     <!-- Homepage bottom menu. Title for display personalized Settings [CHAR LIMIT=30] -->
     <string name="homepage_personal_settings">Suggestions</string>
-
-    <!-- Setting Checkbox title whether to enable CBRS data. [CHAR LIMIT=40] -->
-    <string name="cbrs_data_switch">CBRS Data</string>
-
-    <!-- Title of implications of enabling CBRS Data -->
-    <string name="cbrs_data_switch_summary">CBRS Data</string>
 
     <!-- Available networks screen, name of button when user wants to select network manually [CHAR LIMIT=60] -->
     <string name="choose_network_title">Choose network</string>
@@ -10402,7 +10417,7 @@
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>
     <!-- Summary for the top level Privacy Settings [CHAR LIMIT=NONE]-->
-    <string name="privacy_dashboard_summary">Permission, permission usage</string>
+    <string name="privacy_dashboard_summary">Permissions, activity controls, data shown on screen</string>
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
     <string name="contextual_card_dismiss_remove">Remove</string>

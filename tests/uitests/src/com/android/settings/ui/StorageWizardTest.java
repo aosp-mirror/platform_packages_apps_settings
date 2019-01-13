@@ -86,7 +86,7 @@ public class StorageWizardTest {
         InstrumentationRegistry.getContext().startActivity(buildInitIntent());
 
         // Activity: pick option to use as internal
-        waitFor(By.res(PACKAGE, "suw_layout_title").text(containsIgnoringCase("How will you use")));
+        waitFor(By.res(PACKAGE, "suc_layout_title").text(containsIgnoringCase("How will you use")));
         waitFor(By.res(PACKAGE, "storage_wizard_init_internal")).click();
 
         // Dialog: acknowledge that we're formatting the card
@@ -94,15 +94,15 @@ public class StorageWizardTest {
         waitFor(By.clickable(true).text(containsIgnoringCase("Format"))).click();
 
         // Activity: ack storage device is slow
-        waitForLong(By.res(PACKAGE, "suw_layout_title").textContains("Slow"));
+        waitForLong(By.res(PACKAGE, "suc_layout_title").textContains("Slow"));
         waitFor(By.res(PACKAGE, "storage_next_button")).click();
 
         // Activity: choose to move content
-        waitForLong(By.res(PACKAGE, "suw_layout_title").textContains("Move content"));
+        waitForLong(By.res(PACKAGE, "suc_layout_title").textContains("Move content"));
         waitFor(By.res(PACKAGE, "storage_next_button")).click();
 
         // Activity: yay, we're done!
-        waitForLong(By.res(PACKAGE, "suw_layout_title").textContains("ready to use"));
+        waitForLong(By.res(PACKAGE, "suc_layout_title").textContains("ready to use"));
         waitFor(By.res(PACKAGE, "storage_next_button")).click();
     }
 
@@ -114,11 +114,11 @@ public class StorageWizardTest {
         InstrumentationRegistry.getContext().startActivity(buildInitIntent());
 
         // Activity: pick option to use as external
-        waitFor(By.res(PACKAGE, "suw_layout_title").textContains("How will you use"));
+        waitFor(By.res(PACKAGE, "suc_layout_title").textContains("How will you use"));
         waitFor(By.res(PACKAGE, "storage_wizard_init_external")).click();
 
         // Activity: yay, we're done!
-        waitFor(By.res(PACKAGE, "suw_layout_title").textContains("ready to use"));
+        waitFor(By.res(PACKAGE, "suc_layout_title").textContains("ready to use"));
         waitFor(By.res(PACKAGE, "storage_next_button")).click();
     }
 

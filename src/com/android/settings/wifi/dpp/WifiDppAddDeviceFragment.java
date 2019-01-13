@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -41,7 +41,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG = "WifiDppAddDeviceFragment";
 
     private ImageView mWifiApPictureView;
-    private TextView mChooseDifferentNetwork;
+    private Button mChooseDifferentNetwork;
     private Button mButtonLeft;
     private Button mButtonRight;
 
@@ -56,6 +56,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             // Update success UI.
             mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
             mSummary.setVisibility(View.INVISIBLE);
+            mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
             mButtonLeft.setText(R.string.wifi_dpp_add_another_device);
             mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
             mButtonRight.setText(R.string.done);
@@ -64,8 +65,13 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         @Override
         public void onFailure(int code) {
-            //TODO(b/122429170): Show DPP configuration error state UI
             Log.d(TAG, "DppStatusCallback.onFailure " + code);
+
+            // Update fail UI.
+            mTitle.setText(R.string.wifi_dpp_could_not_add_device);
+            mSummary.setVisibility(View.INVISIBLE);
+            mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
+            mButtonRight.setText(R.string.retry);
         }
 
         @Override
@@ -100,6 +106,15 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final WifiQrCode wifiQrCode = ((WifiDppConfiguratorActivity) getActivity())
+                .getWifiDppQrCode();
+        final String information = wifiQrCode.getInformation();
+        if (TextUtils.isEmpty(information)) {
+            mTitle.setText(R.string.wifi_dpp_device_found);
+        } else {
+            mTitle.setText(information);
+        }
+
         final WifiNetworkConfig wifiNetworkConfig = ((WifiDppConfiguratorActivity) getActivity())
                 .getWifiNetworkConfig();
         if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
@@ -109,10 +124,17 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 wifiNetworkConfig.getSsid()));
 
         mWifiApPictureView = view.findViewById(R.id.wifi_ap_picture_view);
+
         mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
+        mChooseDifferentNetwork.setOnClickListener(v ->
+                mClickChooseDifferentNetworkListener.onClickChooseDifferentNetwork());
+
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonLeft.setText(R.string.cancel);
-        mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
+        mButtonLeft.setOnClickListener(v -> {
+            getActivity().setResult(Activity.RESULT_CANCELED);
+            getActivity().finish();
+        });
 
         mButtonRight = view.findViewById(R.id.button_right);
         mButtonRight.setText(R.string.wifi_dpp_share_wifi);
@@ -120,11 +142,34 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     }
 
     private void startWifiDppInitiator() {
-        final String enrolleeUri = ((WifiDppConfiguratorActivity) getActivity()).getDppUri();
+        final WifiQrCode wifiQrCode = ((WifiDppConfiguratorActivity) getActivity())
+                .getWifiDppQrCode();
+        final String qrCode = wifiQrCode.getQrCode();
         final int networkId =
                 ((WifiDppConfiguratorActivity) getActivity()).getWifiNetworkConfig().getNetworkId();
         final WifiManager wifiManager = getContext().getSystemService(WifiManager.class);
-        wifiManager.startDppAsConfiguratorInitiator(enrolleeUri, networkId,
+
+        wifiManager.startDppAsConfiguratorInitiator(qrCode, networkId,
                 WifiManager.DPP_NETWORK_ROLE_STA, /* handler */ null, new DppStatusCallback());
+    }
+
+    // Container Activity must implement this interface
+    public interface OnClickChooseDifferentNetworkListener {
+        public void onClickChooseDifferentNetwork();
+    }
+    OnClickChooseDifferentNetworkListener mClickChooseDifferentNetworkListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mClickChooseDifferentNetworkListener = (OnClickChooseDifferentNetworkListener) context;
+    }
+
+    @Override
+    public void onDetach() {
+        mClickChooseDifferentNetworkListener = null;
+
+        super.onDetach();
     }
 }

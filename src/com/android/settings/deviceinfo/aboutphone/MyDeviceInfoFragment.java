@@ -79,8 +79,9 @@ public class MyDeviceInfoFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(FirmwareVersionPreferenceController.class).setHost(this /*parent*/);
+        use(FirmwareVersionPreferenceController.class).setHost(this /* parent */);
         use(DeviceModelPreferenceController.class).setHost(this /* parent */);
+        use(ImeiInfoPreferenceController.class).setHost(this /* parent */);
         mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
         mBuildNumberPreferenceController.setHost(this /* parent */);
     }
@@ -121,7 +122,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
         }
         controllers.add(deviceNamePreferenceController);
         controllers.add(new SimStatusPreferenceController(context, fragment));
-        controllers.add(new ImeiInfoPreferenceController(context, fragment));
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
         controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
@@ -197,7 +197,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null /*activity */,
+                    return buildPreferenceControllers(context, null /* activity */,
                             null /* fragment */, null /* lifecycle */);
                 }
             };

@@ -64,6 +64,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     // Key for Bundle usage
     private static final String KEY_PUBLIC_URI = "key_public_uri";
+    private static final String KEY_IS_CONFIGURATOR_MODE = "key_is_configurator_mode";
 
     private QrCamera mCamera;
     private TextureView mTextureView;
@@ -71,13 +72,22 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     private TextView mErrorMessage;
 
     /** true if the fragment working for configurator, false enrollee*/
-    private final boolean mIsConfiguratorMode;
+    private boolean mIsConfiguratorMode;
 
     /** The SSID of the Wi-Fi network which the user specify to enroll */
     private String mSsid;
 
     /** QR code data scanned by camera */
     private WifiQrCode mWifiQrCode;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            mIsConfiguratorMode = savedInstanceState.getBoolean(KEY_IS_CONFIGURATOR_MODE);
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -90,7 +100,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     // Container Activity must implement this interface
     public interface OnScanWifiDppSuccessListener {
-        public void onScanWifiDppSuccess(String uri);
+        public void onScanWifiDppSuccess(WifiQrCode wifiQrCode);
     }
     OnScanWifiDppSuccessListener mScanWifiDppSuccessListener;
 
@@ -98,7 +108,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public interface OnScanZxingWifiFormatSuccessListener {
         public void onScanZxingWifiFormatSuccess(WifiNetworkConfig wifiNetworkConfig);
     }
-    OnScanZxingWifiFormatSuccessListener mScanScanZxingWifiFormatSuccessListener;
+    OnScanZxingWifiFormatSuccessListener mScanZxingWifiFormatSuccessListener;
 
     /**
      * Configurator container activity of the fragment should create instance with this constructor.
@@ -136,13 +146,13 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         super.onAttach(context);
 
         mScanWifiDppSuccessListener = (OnScanWifiDppSuccessListener) context;
-        mScanScanZxingWifiFormatSuccessListener = (OnScanZxingWifiFormatSuccessListener) context;
+        mScanZxingWifiFormatSuccessListener = (OnScanZxingWifiFormatSuccessListener) context;
     }
 
     @Override
     public void onDetach() {
         mScanWifiDppSuccessListener = null;
-        mScanScanZxingWifiFormatSuccessListener = null;
+        mScanZxingWifiFormatSuccessListener = null;
 
         super.onDetach();
     }
@@ -262,17 +272,17 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     /**
-     * This method is only called when QrCamera.ScannerCallback.isValid returns true; 
+     * This method is only called when QrCamera.ScannerCallback.isValid returns true;
      */
     @Override
     public void handleSuccessfulResult(String qrCode) {
         switch (mWifiQrCode.getScheme()) {
             case WifiQrCode.SCHEME_DPP:
-                handleWifiDpp(qrCode);
+                handleWifiDpp();
                 break;
 
             case WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG:
-                handleZxingWifiFormat(mWifiQrCode.getWifiNetworkConfig());
+                handleZxingWifiFormat();
                 break;
 
             default:
@@ -280,25 +290,22 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
     }
 
-    private void handleWifiDpp(String uri) {
+    private void handleWifiDpp() {
         destroyCamera();
         mDecorateView.setFocused(true);
 
-        final Bundle bundle = new Bundle();
-        bundle.putString(KEY_PUBLIC_URI, uri);
-
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_WIFI_DPP_SUCCESS);
-        message.setData(bundle);
+        message.obj = new WifiQrCode(mWifiQrCode.getQrCode());
 
         mHandler.sendMessageDelayed(message, SHOW_SUCCESS_SQUARE_INTERVAL);
     }
 
-    private void handleZxingWifiFormat(WifiNetworkConfig wifiNetworkConfig) {
+    private void handleZxingWifiFormat() {
         destroyCamera();
         mDecorateView.setFocused(true);
 
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS);
-        message.obj = wifiNetworkConfig;
+        message.obj = new WifiQrCode(mWifiQrCode.getQrCode()).getWifiNetworkConfig();
 
         mHandler.sendMessageDelayed(message, SHOW_SUCCESS_SQUARE_INTERVAL);
     }
@@ -349,17 +356,14 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     if (mScanWifiDppSuccessListener == null) {
                         return;
                     }
-                    final Bundle bundle = msg.getData();
-                    final String uri = bundle.getString(KEY_PUBLIC_URI);
-
-                    mScanWifiDppSuccessListener.onScanWifiDppSuccess(uri);
+                    mScanWifiDppSuccessListener.onScanWifiDppSuccess((WifiQrCode)msg.obj);
                     break;
 
                 case MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS:
-                    if (mScanScanZxingWifiFormatSuccessListener == null) {
+                    if (mScanZxingWifiFormatSuccessListener == null) {
                         return;
                     }
-                    mScanScanZxingWifiFormatSuccessListener.onScanZxingWifiFormatSuccess(
+                    mScanZxingWifiFormatSuccessListener.onScanZxingWifiFormatSuccess(
                             (WifiNetworkConfig)msg.obj);
                     break;
 
@@ -368,4 +372,11 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
         }
     };
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(KEY_IS_CONFIGURATOR_MODE, mIsConfiguratorMode);
+
+        super.onSaveInstanceState(outState);
+    }
 }

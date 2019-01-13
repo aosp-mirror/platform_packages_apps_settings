@@ -15,31 +15,49 @@
      limitations under the License.
 -->
 
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/wifi_dpp_fragment_header"/>
-
-    <ImageView
-        android:id="@+id/wifi_ap_picture_view"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/choose_different_network"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <include layout="@layout/wifi_dpp_fragment_header"/>
+
+            <ImageView
+                android:id="@+id/wifi_ap_picture_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/header"/>
+
+            <Button
+                android:id="@+id/choose_different_network"
+                style="@style/SudGlifButton.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/wifi_ap_picture_view"
+                android:layout_marginTop="8dp"
+                android:text="@string/wifi_dpp_choose_different_network"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include
+        layout="@layout/wifi_dpp_fragment_footer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:text="@string/wifi_dpp_choose_different_network"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <include layout="@layout/wifi_dpp_fragment_footer"
-        android:gravity="center|bottom"/>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

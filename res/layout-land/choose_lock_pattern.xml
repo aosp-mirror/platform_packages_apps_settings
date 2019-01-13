@@ -22,7 +22,7 @@
     android:layout_height="match_parent"
     android:icon="@drawable/ic_lock"
     android:layout="@layout/sud_glif_blank_template"
-    settings:suwHeaderText="@string/lock_settings_picker_title">
+    settings:sucHeaderText="@string/lock_settings_picker_title">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
@@ -37,18 +37,18 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:layout_marginStart="?attr/suwMarginSides"
-            android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+            android:layout_marginStart="?attr/sudMarginSides"
+            android:layout_marginBottom="@dimen/sud_content_frame_padding_bottom"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/suw_layout_icon"
-                style="@style/SuwGlifIcon"
+                android:id="@+id/suc_layout_icon"
+                style="@style/SudGlifIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="?attr/suwGlifHeaderGravity"
+                android:layout_gravity="?attr/sudGlifHeaderGravity"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"
                 android:src="@drawable/ic_lock"/>
@@ -65,8 +65,8 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/suw_layout_title"
-                        style="@style/SuwGlifHeaderTitle"
+                        android:id="@+id/suc_layout_title"
+                        style="@style/SudGlifHeaderTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
@@ -74,7 +74,7 @@
 
                     <TextView
                         android:id="@+id/message"
-                        style="@style/SuwDescription.Glif"
+                        style="@style/SudDescription.Glif"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minLines="2" />
@@ -85,16 +85,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:gravity="?attr/suwGlifHeaderGravity"
+                        android:gravity="?attr/sudGlifHeaderGravity"
                         android:textSize="18sp"/>
 
                     <Button
                         android:id="@+id/screen_lock_options"
-                        style="@style/SuwGlifButton.Tertiary"
+                        style="@style/SudGlifButton.Tertiary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:gravity="?attr/suwGlifHeaderGravity"
+                        android:gravity="?attr/sudGlifHeaderGravity"
                         android:text="@string/setup_lock_settings_options_button_label"
                         android:visibility="gone" />
 
@@ -122,7 +122,7 @@
 
                     <!-- left : skip -->
                     <Button android:id="@+id/skip_button"
-                        style="@style/SuwGlifButton.Secondary"
+                        style="@style/SudGlifButton.Secondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/skip_label"
