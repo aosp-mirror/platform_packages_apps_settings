@@ -27,6 +27,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.location.RecentLocationAccesses;
 import com.android.settingslib.widget.AppEntitiesHeaderController;
+import com.android.settingslib.widget.AppEntityInfo;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.List;
@@ -90,7 +91,12 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
             int i = 0;
             for (; i < Math.min(recentLocationAccesses.size(), MAXIMUM_APP_COUNT); i++) {
                 final RecentLocationAccesses.Access access = recentLocationAccesses.get(i);
-                mController.setAppEntity(i, access.icon, access.label, access.contentDescription);
+                final AppEntityInfo appEntityInfo = new AppEntityInfo.Builder()
+                        .setIcon(access.icon)
+                        .setTitle(access.label)
+                        .setSummary(access.contentDescription)
+                        .build();
+                mController.setAppEntity(i, appEntityInfo);
             }
             for (; i < MAXIMUM_APP_COUNT; i++) {
                 mController.removeAppEntity(i);
