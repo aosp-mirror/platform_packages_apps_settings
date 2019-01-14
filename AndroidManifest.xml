@@ -2595,7 +2595,7 @@
             android:exported="true"
             android:permission="android.permission.NETWORK_SETTINGS">
             <intent-filter>
-                <action android:name="com.android.settings.wifi.NETWORK_REQUEST" />
+                <action android:name="com.android.settings.wifi.action.NETWORK_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
