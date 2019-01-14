@@ -68,7 +68,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private SummaryLoader mSummaryLoader;
-    private UiBlockerController mBlockerController;
+    @VisibleForTesting
+    UiBlockerController mBlockerController;
 
     @Override
     public void onAttach(Context context) {
@@ -111,7 +112,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         checkUiBlocker(controllers);
     }
 
-    private void checkUiBlocker(List<AbstractPreferenceController> controllers) {
+    @VisibleForTesting
+    void checkUiBlocker(List<AbstractPreferenceController> controllers) {
         final List<String> keys = new ArrayList<>();
         controllers
                 .stream()
@@ -121,8 +123,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                     keys.add(controller.getPreferenceKey());
                 });
 
-        mBlockerController = new UiBlockerController(keys);
-        mBlockerController.start(()->updatePreferenceVisibility());
+        if (!keys.isEmpty()) {
+            mBlockerController = new UiBlockerController(keys);
+            mBlockerController.start(()->updatePreferenceVisibility(mPreferenceControllers));
+        }
     }
 
     @Override
@@ -355,21 +359,23 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             activity.reportFullyDrawn();
         }
 
-        updatePreferenceVisibility();
+        updatePreferenceVisibility(mPreferenceControllers);
     }
 
-    private void updatePreferenceVisibility() {
+    @VisibleForTesting
+    void updatePreferenceVisibility(
+            Map<Class, List<AbstractPreferenceController>> preferenceControllers) {
         final PreferenceScreen screen = getPreferenceScreen();
-        if (screen == null) {
+        if (screen == null || preferenceControllers == null || mBlockerController == null) {
             return;
         }
 
         final boolean visible = mBlockerController.isBlockerFinished();
         for (List<AbstractPreferenceController> controllerList :
-                mPreferenceControllers.values()) {
+                preferenceControllers.values()) {
             for (AbstractPreferenceController controller : controllerList) {
                 final String key = controller.getPreferenceKey();
-                final Preference preference = screen.findPreference(key);
+                final Preference preference = findPreference(key);
                 if (preference != null) {
                     preference.setVisible(visible && controller.isAvailable());
                 }
