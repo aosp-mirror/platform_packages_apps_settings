@@ -27,6 +27,7 @@ import android.content.pm.PackageManager;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -77,6 +78,7 @@ public class DefaultSmsShortcutPreferenceControllerTest {
     }
 
     @Test
+    @Ignore("b/122824614")
     public void isDefaultApp_notDefaultSms_shouldReturnFalse() {
         assertThat(mController.isDefaultApp()).isFalse();
     }
