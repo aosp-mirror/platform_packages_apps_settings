@@ -67,7 +67,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         @Override
         public void onSubscriptionsChanged() {
             if (!Objects.equals(mSubscriptionInfos,
-                    mSubscriptionManager.getActiveSubscriptionInfoList())) {
+                    mSubscriptionManager.getActiveSubscriptionInfoList(true))) {
                 updateSubscriptions(null);
             }
         }
@@ -81,7 +81,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         setActionBar(findViewById(R.id.mobile_action_bar));
         mPhoneChangeReceiver = new PhoneChangeReceiver();
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
-        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
+        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
         mCurSubscriptionId = savedInstanceState != null
                 ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : SUB_ID_NULL;
@@ -130,7 +130,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
 
     @VisibleForTesting
     void updateSubscriptions(Bundle savedInstanceState) {
-        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
+        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
 
         updateBottomNavigationView();
 

@@ -113,7 +113,7 @@ public class DeviceInfoSlice implements CustomSliceable {
     @VisibleForTesting
     SubscriptionInfo getFirstSubscriptionInfo() {
         final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
+                mSubscriptionManager.getActiveSubscriptionInfoList(true);
         if (subscriptionInfoList == null || subscriptionInfoList.isEmpty()) {
             return null;
         }

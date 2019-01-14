@@ -147,7 +147,7 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
     }
 
     private void updateSubList() {
-        mSil = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList();
+        mSil = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList(true);
 
         // Only config Wfc if it's enabled by platform.
         if (mSil == null) {
