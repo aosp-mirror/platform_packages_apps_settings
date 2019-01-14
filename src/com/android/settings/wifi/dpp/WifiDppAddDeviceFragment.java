@@ -45,7 +45,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private Button mButtonLeft;
     private Button mButtonRight;
 
-    private class DppStatusCallback extends android.net.wifi.DppStatusCallback {
+    private class EasyConnectStatusCallback extends android.net.wifi.EasyConnectStatusCallback {
         @Override
         public void onEnrolleeSuccess(int newNetworkId) {
             // Do nothing
@@ -65,7 +65,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         @Override
         public void onFailure(int code) {
-            Log.d(TAG, "DppStatusCallback.onFailure " + code);
+            Log.d(TAG, "EasyConnectStatusCallback.onFailure " + code);
 
             // Update fail UI.
             mTitle.setText(R.string.wifi_dpp_could_not_add_device);
@@ -149,8 +149,9 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 ((WifiDppConfiguratorActivity) getActivity()).getWifiNetworkConfig().getNetworkId();
         final WifiManager wifiManager = getContext().getSystemService(WifiManager.class);
 
-        wifiManager.startDppAsConfiguratorInitiator(qrCode, networkId,
-                WifiManager.DPP_NETWORK_ROLE_STA, /* handler */ null, new DppStatusCallback());
+        wifiManager.startEasyConnectAsConfiguratorInitiator(qrCode, networkId,
+                WifiManager.EASY_CONNECT_NETWORK_ROLE_STA, /* handler */ null,
+                new EasyConnectStatusCallback());
     }
 
     // Container Activity must implement this interface
