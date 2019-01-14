@@ -196,7 +196,7 @@ public class WifiUtils {
                     config.requirePMF = true;
                     config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP_256);
                     config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
-                    config.allowedGroupMgmtCiphers.set(WifiConfiguration.GroupMgmtCipher
+                    config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
                             .BIP_GMAC_256);
                     config.allowedSuiteBCiphers.set(WifiConfiguration.SuiteBCipher.ECDHE_RSA);
                 }
