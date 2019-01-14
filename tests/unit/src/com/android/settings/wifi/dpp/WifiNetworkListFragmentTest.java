@@ -98,6 +98,7 @@ public class WifiNetworkListFragmentTest {
     private void callOnWifiStateChanged(int state) {
         mActivityRule.getActivity().getMainThreadHandler()
                 .post(() -> mWifiNetworkListFragment.onWifiStateChanged(state));
+        mWifiNetworkListFragment.mUseConnectedAccessPointDirectly = false;
     }
 
     /** Launch the activity via an Intent with a String extra. */
