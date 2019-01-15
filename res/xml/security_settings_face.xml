@@ -23,9 +23,8 @@
     <com.android.settings.widget.VideoPreference
         android:key="security_settings_face_video"
         android:title="@string/summary_placeholder"
-        app:animation="@raw/gesture_fingerprint_swipe"
-        app:preview="@drawable/face_enroll_introduction"
-        app:controller="com.android.settings.widget.VideoPreferenceController"/>
+        app:animation="@raw/face_settings"
+        app:controller="com.android.settings.biometrics.face.FaceSettingsVideoPreferenceController"/>
 
     <PreferenceCategory
         android:key="security_settings_face_unlock_category"
