@@ -13,6 +13,7 @@
  */
 package com.android.settings.nfc;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
@@ -23,6 +24,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -35,9 +38,11 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
 
     private DropDownPreference mPreference;
     private PaymentBackend mPaymentBackend;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     public NfcForegroundPreferenceController(Context context, String key) {
         super(context, key);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     public void setPaymentBackend(PaymentBackend backend) {
@@ -115,7 +120,11 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
         final DropDownPreference pref = (DropDownPreference) preference;
         final String newValueString = (String) newValue;
         pref.setSummary(pref.getEntries()[pref.findIndexOfValue(newValueString)]);
-        mPaymentBackend.setForegroundMode(Integer.parseInt(newValueString) != 0);
+        final boolean foregroundMode = Integer.parseInt(newValueString) != 0;
+        mPaymentBackend.setForegroundMode(foregroundMode);
+        mMetricsFeatureProvider.action(mContext,
+                foregroundMode ? SettingsEnums.ACTION_NFC_PAYMENT_FOREGROUND_SETTING
+                               : SettingsEnums.ACTION_NFC_PAYMENT_ALWAYS_SETTING);
         return true;
     }
 
