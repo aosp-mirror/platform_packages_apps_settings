@@ -273,8 +273,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
     protected Preference populateSingleChannelPrefs(PreferenceGroup parent,
             final NotificationChannel channel, final boolean groupBlocked) {
-        MasterCheckBoxPreference channelPref = new MasterCheckBoxPreference(
-                getPrefContext());
+        ChannelSummaryPreference channelPref = new ChannelSummaryPreference(getPrefContext());
         channelPref.setCheckBoxEnabled(mSuspendedAppsAdmin == null
                 && isChannelBlockable(channel)
                 && isChannelConfigurable(channel)

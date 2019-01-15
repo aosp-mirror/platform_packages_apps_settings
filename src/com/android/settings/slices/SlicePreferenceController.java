@@ -50,7 +50,6 @@ public class SlicePreferenceController extends BasePreferenceController implemen
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-
         mSlicePreference = screen.findPreference(getPreferenceKey());
     }
 

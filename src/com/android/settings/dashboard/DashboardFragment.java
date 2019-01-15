@@ -369,11 +369,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 mPreferenceControllers.values()) {
             for (AbstractPreferenceController controller : controllerList) {
                 final String key = controller.getPreferenceKey();
-                if(TextUtils.isEmpty(key)) {
-                    Log.d(TAG, String.format("Preference key is %s in Controller %s",
-                            key, controller.getClass().getSimpleName()));
-                    continue;
-                }
                 final Preference preference = screen.findPreference(key);
                 if (preference != null) {
                     preference.setVisible(visible && controller.isAvailable());
