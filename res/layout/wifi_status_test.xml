@@ -90,10 +90,16 @@
             <TextView android:id="@+id/networkid" style="@style/info_value" />
         </LinearLayout>
 
-        <!--Link Speed Value-->
+        <!--Transmit Link Speed Value-->
         <LinearLayout style="@style/entry_layout">
-            <TextView android:text="@string/link_speed_label" style="@style/info_label" />
-            <TextView android:id="@+id/link_speed" style="@style/info_value" />
+            <TextView android:text="@string/tx_link_speed_label" style="@style/info_label" />
+            <TextView android:id="@+id/tx_link_speed" style="@style/info_value" />
+        </LinearLayout>
+
+        <!--Receive Link Speed Value-->
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/rx_link_speed_label" style="@style/info_label" />
+            <TextView android:id="@+id/rx_link_speed" style="@style/info_value" />
         </LinearLayout>
 
         <LinearLayout style="@style/entry_layout">
