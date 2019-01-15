@@ -492,6 +492,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
+        controllers.add(new OverlayCategoryPreferenceController(context,
+                "android.theme.customization.accent_color"));
+        controllers.add(new OverlayCategoryPreferenceController(context,
+                "android.theme.customization.font"));
+        controllers.add(new OverlayCategoryPreferenceController(context,
+                "android.theme.customization.adaptive_icon_shape"));
         return controllers;
     }
 
