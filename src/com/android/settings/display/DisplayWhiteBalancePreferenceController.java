@@ -17,9 +17,11 @@ import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.os.UserHandle;
 import android.provider.Settings.Secure;
+import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.TogglePreferenceController;
 
 public class DisplayWhiteBalancePreferenceController extends TogglePreferenceController {
+    private ColorDisplayController mColorDisplayController;
 
     public DisplayWhiteBalancePreferenceController(Context context, String key) {
         super(context, key);
@@ -27,7 +29,11 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayManager.isDisplayWhiteBalanceAvailable(mContext) ?
+        // Display white balance is only valid in linear light space. COLOR_MODE_SATURATED implies
+        // unmanaged color mode, and hence unknown color processing conditions.
+        return ColorDisplayManager.isDisplayWhiteBalanceAvailable(mContext) &&
+                getColorDisplayController().getColorMode() !=
+                    ColorDisplayController.COLOR_MODE_SATURATED ?
                 AVAILABLE : DISABLED_FOR_USER;
     }
 
@@ -42,5 +48,12 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
         Secure.putIntForUser(mContext.getContentResolver(), Secure.DISPLAY_WHITE_BALANCE_ENABLED,
                 isChecked ? 1 : 0, UserHandle.USER_CURRENT);
         return true;
+    }
+
+    ColorDisplayController getColorDisplayController() {
+        if (mColorDisplayController == null) {
+            mColorDisplayController = new ColorDisplayController(mContext);
+        }
+        return mColorDisplayController;
     }
 }
