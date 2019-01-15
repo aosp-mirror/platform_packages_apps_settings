@@ -27,8 +27,8 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

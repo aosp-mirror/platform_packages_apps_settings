@@ -31,7 +31,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

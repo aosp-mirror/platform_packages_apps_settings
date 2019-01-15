@@ -23,7 +23,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.service.voice.VoiceInteractionService;
 import android.service.voice.VoiceInteractionServiceInfo;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.AssistUtils;
 import com.android.settings.R;

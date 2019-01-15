@@ -19,7 +19,7 @@ package com.android.settings.network;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.RestrictedLockUtils;
 

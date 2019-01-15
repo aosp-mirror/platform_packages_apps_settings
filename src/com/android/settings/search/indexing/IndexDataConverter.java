@@ -23,7 +23,7 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;

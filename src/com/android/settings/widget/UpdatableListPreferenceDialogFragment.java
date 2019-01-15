@@ -18,9 +18,9 @@ package com.android.settings.widget;
 import android.app.AlertDialog;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.PreferenceDialogFragment;
-import android.support.v7.preference.ListPreference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceDialogFragment;
+import androidx.preference.ListPreference;
 import android.widget.ArrayAdapter;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 

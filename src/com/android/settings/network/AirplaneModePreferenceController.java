@@ -23,9 +23,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.SystemProperties;
 import android.provider.SettingsSlicesContract;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.internal.telephony.TelephonyIntents;

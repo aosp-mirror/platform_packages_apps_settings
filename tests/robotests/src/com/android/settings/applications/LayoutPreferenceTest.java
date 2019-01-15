@@ -21,8 +21,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 
 import com.android.settings.R;

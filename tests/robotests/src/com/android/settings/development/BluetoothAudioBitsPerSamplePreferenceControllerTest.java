@@ -21,11 +21,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.bluetooth.BluetoothCodecConfig;
 import android.content.Context;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;

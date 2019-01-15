@@ -24,8 +24,8 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings.Global;
-import android.support.v7.preference.DropDownPreference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.DropDownPreference;
+import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

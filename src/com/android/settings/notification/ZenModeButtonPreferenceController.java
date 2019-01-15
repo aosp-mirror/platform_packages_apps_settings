@@ -19,7 +19,7 @@ package com.android.settings.notification;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.view.View;
 import android.widget.Button;
 

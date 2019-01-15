@@ -17,7 +17,7 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.os.UserHandle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;

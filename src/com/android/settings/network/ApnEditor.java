@@ -28,13 +28,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.provider.Telephony;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.MultiSelectListPreference;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.SwitchPreference;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
@@ -166,7 +166,7 @@ public class ApnEditor extends SettingsPreferenceFragment
             Telephony.Carriers.ROAMING_PROTOCOL, // 20
             Telephony.Carriers.MVNO_TYPE,   // 21
             Telephony.Carriers.MVNO_MATCH_DATA,  // 22
-            Telephony.Carriers.EDITED,   // 23
+            Telephony.Carriers.EDITED_STATUS,   // 23
             Telephony.Carriers.USER_EDITABLE    //24
     };
 
@@ -240,7 +240,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
         if (configManager != null) {
-            PersistableBundle b = configManager.getConfig();
+            PersistableBundle b = configManager.getConfigForSubId(mSubId);
             if (b != null) {
                 mReadOnlyApnTypes = b.getStringArray(
                         CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
@@ -1030,7 +1030,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 callUpdate,
                 CARRIER_ENABLED_INDEX);
 
-        values.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
+        values.put(Telephony.Carriers.EDITED_STATUS, Telephony.Carriers.USER_EDITED);
 
         if (callUpdate) {
             final Uri uri = mApnData.getUri() == null ? mCarrierUri : mApnData.getUri();

@@ -36,10 +36,10 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.provider.DocumentsContract;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -415,7 +415,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 .getPrimaryStorageCurrentVolume();
         migrate.setVisible((privateVol != null)
                 && (privateVol.getType() == VolumeInfo.TYPE_PRIVATE)
-                && !Objects.equals(mVolume, privateVol));
+                && !Objects.equals(mVolume, privateVol)
+                && privateVol.isMountedWritable());
     }
 
     @Override

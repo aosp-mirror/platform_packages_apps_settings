@@ -26,9 +26,9 @@ import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;

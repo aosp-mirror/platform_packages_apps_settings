@@ -20,7 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;

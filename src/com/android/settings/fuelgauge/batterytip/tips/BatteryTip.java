@@ -19,10 +19,10 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.IdRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.IdRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import android.util.SparseIntArray;
 
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;

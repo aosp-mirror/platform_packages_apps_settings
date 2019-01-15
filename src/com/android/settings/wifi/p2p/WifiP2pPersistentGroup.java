@@ -18,8 +18,8 @@ package com.android.settings.wifi.p2p;
 
 import android.content.Context;
 import android.net.wifi.p2p.WifiP2pGroup;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class WifiP2pPersistentGroup extends Preference {
 

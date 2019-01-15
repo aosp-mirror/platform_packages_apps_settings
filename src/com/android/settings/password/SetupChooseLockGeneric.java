@@ -22,9 +22,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.Preference;
-import android.support.v7.widget.RecyclerView;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,6 +127,11 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                 Bundle savedInstanceState) {
             GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
             return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        }
+
+        @Override
+        protected boolean canRunBeforeDeviceProvisioned() {
+            return true;
         }
 
         /***

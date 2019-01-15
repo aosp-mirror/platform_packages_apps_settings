@@ -19,7 +19,7 @@ package com.android.settings.datetime.timezone;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.spy;
 
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.datetime.timezone.TimeZoneInfo.Formatter;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

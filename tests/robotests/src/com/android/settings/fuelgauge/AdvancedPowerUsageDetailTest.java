@@ -41,8 +41,8 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v7.preference.Preference;
-import android.support.v7.widget.RecyclerView;
+import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;

@@ -17,7 +17,7 @@ package com.android.settings.connecteddevice;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.nfc.NfcPreferenceController;

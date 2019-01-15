@@ -26,13 +26,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.support.annotation.XmlRes;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.XmlRes;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -538,10 +538,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
         private DialogInterface.OnCancelListener mOnCancelListener;
         private DialogInterface.OnDismissListener mOnDismissListener;
-
-        public SettingsDialogFragment() {
-            /* do nothing */
-        }
 
         public SettingsDialogFragment(DialogCreatable fragment, int dialogId) {
             super(fragment, dialogId);

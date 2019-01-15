@@ -21,7 +21,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
-import android.support.v7.preference.DropDownPreference;
+import androidx.preference.DropDownPreference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

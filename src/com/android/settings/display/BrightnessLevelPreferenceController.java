@@ -28,9 +28,9 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.service.vr.IVrManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;

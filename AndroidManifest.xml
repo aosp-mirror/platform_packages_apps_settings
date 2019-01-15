@@ -106,7 +106,7 @@
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
-            android:appComponentFactory="android.support.v4.app.CoreComponentFactory">
+            android:appComponentFactory="androidx.core.app.CoreComponentFactory">
 
         <uses-library android:name="org.apache.http.legacy" />
         <!-- Settings -->
@@ -462,6 +462,20 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.TetherSettings" />
         </activity>
+
+        <activity
+            android:name="Settings$WifiTetherSettingsActivity"
+            android:label="@string/wifi_hotspot_checkbox_text"
+            android:icon="@drawable/ic_wifi_tethering"
+            android:parentActivityName="Settings">
+            <intent-filter>
+                <action android:name="com.android.settings.WIFI_TETHER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.tether.WifiTetherSettings" />
+        </activity>
+
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".TetherSettings"
@@ -2158,9 +2172,8 @@
             </intent-filter>
         </activity>
 
-        <!-- TODO: Is this needed? -->
         <activity android:name="BandMode"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert"
+                  android:label="@string/band_mode_title"
                   android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -2807,7 +2820,7 @@
         </receiver>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.android.settings.files"
             android:grantUriPermissions="true"
             android:exported="false">
@@ -2883,8 +2896,7 @@
         <activity
             android:name="Settings$WifiCallingSettingsActivity"
             android:label="@string/wifi_calling_settings_title"
-            android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings">
+            android:taskAffinity="com.android.settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_CALLING_SETTINGS" />
@@ -3300,10 +3312,15 @@
         </provider>
 
         <receiver
-            android:name=".slices.SliceBroadcastReceiver" >
-            <intent-filter>
-                <action android:name="com.android.settings.slice.action.WIFI_CHANGED"/>
-            </intent-filter>
+            android:name=".slices.SliceBroadcastReceiver"
+            android:exported="false">
+        </receiver>
+
+        <receiver
+            android:name=".slices.SliceRelayReceiver"
+            android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
+            android:exported="true">
+
         </receiver>
 
         <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send

@@ -18,7 +18,7 @@ package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.Pair;
 import android.util.SparseIntArray;
 

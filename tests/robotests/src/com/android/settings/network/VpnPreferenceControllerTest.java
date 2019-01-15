@@ -17,8 +17,8 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
-import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
-import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.IConnectivityManager;
@@ -34,8 +34,8 @@ import android.net.NetworkRequest;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.provider.SettingsSlicesContract;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.net.VpnConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

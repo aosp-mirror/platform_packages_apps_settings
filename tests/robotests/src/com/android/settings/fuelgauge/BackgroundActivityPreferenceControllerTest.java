@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doNothing;
@@ -32,7 +33,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -89,6 +90,7 @@ public class BackgroundActivityPreferenceControllerTest {
 
         mShadowContext = RuntimeEnvironment.application;
         FakeFeatureFactory.setupForTest();
+        when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getSystemService(Context.APP_OPS_SERVICE)).thenReturn(mAppOpsManager);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
@@ -118,7 +120,7 @@ public class BackgroundActivityPreferenceControllerTest {
     @Test
     public void testHandlePreferenceTreeClick_restrictApp_showDialog() {
         doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager)
-            .checkOpNoThrow(anyInt(), anyInt(), anyString());
+                .checkOpNoThrow(anyInt(), anyInt(), anyString());
 
         mController.handlePreferenceTreeClick(mPreference);
 
@@ -128,7 +130,7 @@ public class BackgroundActivityPreferenceControllerTest {
     @Test
     public void testHandlePreferenceTreeClick_unRestrictApp_showDialog() {
         doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager)
-            .checkOpNoThrow(anyInt(), anyInt(), anyString());
+                .checkOpNoThrow(anyInt(), anyInt(), anyString());
 
         mController.handlePreferenceTreeClick(mPreference);
 

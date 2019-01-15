@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.PersistableBundle;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;

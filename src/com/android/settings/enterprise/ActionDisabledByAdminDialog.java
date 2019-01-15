@@ -51,7 +51,7 @@ public class ActionDisabledByAdminDialog extends Activity
         mDialogHelper.updateDialog(restriction, admin);
     }
 
-    @android.support.annotation.VisibleForTesting
+    @androidx.annotation.VisibleForTesting
     EnforcedAdmin getAdminDetailsFromIntent(Intent intent) {
         final EnforcedAdmin admin = new EnforcedAdmin(null, UserHandle.myUserId());
         if (intent == null) {
@@ -62,7 +62,7 @@ public class ActionDisabledByAdminDialog extends Activity
         return admin;
     }
 
-    @android.support.annotation.VisibleForTesting
+    @androidx.annotation.VisibleForTesting
     String getRestrictionFromIntent(Intent intent) {
         if (intent == null) return null;
         return intent.getStringExtra(DevicePolicyManager.EXTRA_RESTRICTION);

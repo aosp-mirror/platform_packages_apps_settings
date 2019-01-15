@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.storage.VolumeInfo;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;

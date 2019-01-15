@@ -28,7 +28,7 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.SparseArray;
 import android.view.View;
 

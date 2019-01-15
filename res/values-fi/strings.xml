@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Automaattinen"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz:n taajuus"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 GHz:n taajuus"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5,0 GHz:n taajuus ensisijainen"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Valitse vähintään yksi kaista Wi‑Fi-hotspotille:"</string>
@@ -964,7 +965,7 @@
     <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"Ei käytettävissä, koska lentokonetila on päällä"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi-puhelut"</string>
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Laajenna puhelumahdollisuuksia Wi‑Fillä"</string>
-    <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Paranna kattavuutta ottamalla Wi-Fi-puhelut käyttöön"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Paranna tavoittavuutta ottamalla Wi-Fi-puhelut käyttöön"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Puheluasetus"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-puhelutila"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Roaming-asetus"</string>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Luonnollinen"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Tehostettu"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Kylläinen"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automaattinen"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Mukautuva"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Käytä vain todenmukaisia värejä"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Vaihtele kirkkaiden ja todenmukaisten värien välillä"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Vaihda suuntaa automaattisesti, kun tablet-laitetta kierretään"</string>
@@ -1114,10 +1115,10 @@
     <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Sammuu automaattisesti, kun aurinko nousee"</string>
     <string name="night_display_activation_on_manual" msgid="277343561277625826">"Ota käyttöön nyt"</string>
     <string name="night_display_activation_off_manual" msgid="4074557720918572883">"Poista käytöstä nyt"</string>
-    <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"Käytössä auringonnousuun saakka"</string>
+    <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"Käytössä auringonnousuun asti"</string>
     <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Pois käytöstä auringonlaskuun asti"</string>
-    <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Poista käytöstä <xliff:g id="ID_1">%1$s</xliff:g> asti"</string>
-    <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Poista käytöstä <xliff:g id="ID_1">%1$s</xliff:g> asti"</string>
+    <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Käytössä <xliff:g id="ID_1">%1$s</xliff:g> asti"</string>
+    <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Pois käytöstä <xliff:g id="ID_1">%1$s</xliff:g> asti"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Siirtyminen virransäästöön"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Näyttö sammuu"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Laitteen oltua käyttämättä: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Mykistä, salli <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> ja <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Mykistä, salli <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> ja <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Viestit, tapahtumat ja muistutukset"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Älä häiritse ‑tilassa viestit, muistutukset ja tapahtumat mykistetään yllä määritettyjä poikkeuksia lukuun ottamatta. Voit määrittää viestiasetukset niin, että ystävät, perheenjäsenet tai muut yhteyshenkilöt saavat sinuun yhteyden."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Älä häiritse ‑tilassa viestit, muistutukset ja tapahtumat mykistetään yllä määritettyjä poikkeuksia lukuun ottamatta. Voit määrittää viestiasetukset niin, että ystävät, perheenjäsenet tai muut yhteyshenkilöt saavat sinuun yhteyden."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Valmis"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Asetukset"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Ei ilmoitusgrafiikoita tai ‑ääntä"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Kun annat PIN-koodisi käynnistääksesi tämän laitteen, käytettävyyspalvelut, kuten <xliff:g id="SERVICE">%1$s</xliff:g>, eivät ole vielä käytettävissä."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Kun annat mallin käynnistääksesi tämän laitteen, käytettävyyspalvelut, kuten <xliff:g id="SERVICE">%1$s</xliff:g>, eivät ole vielä käytettävissä."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Kun annat salasanasi käynnistääksesi tämän laitteen, käytettävyyspalvelut, kuten <xliff:g id="SERVICE">%1$s</xliff:g>, eivät ole vielä käytettävissä."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Huom. Jotta voit käynnistää tämän sovelluksen uudelleenkäynnistyksen jälkeen, sinun täytyy avata puhelimen lukitus."</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Huom. Jos käynnistät puhelimen uudelleen ja näytön lukitus on käytössä, sovellus voi käynnistyä vasta avattuasi lukituksen."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-koodin tiedot"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-koodiin liittyvät tiedot"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Paikka <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -4149,4 +4150,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Verkon tiedot"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Puhelimen sovellukset näkevät laitteesi nimen. Muut voivat myös nähdä nimen, kun muodostat Bluetooth-yhteyden laitteisiin tai aktivoit Wi-Fi-hotspotin."</string>
     <string name="devices_title" msgid="7701726109334110391">"Laitteet"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Oletus"</string>
 </resources>

@@ -20,7 +20,7 @@ import static com.google.common.truth.Truth.assertAbout;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.common.truth.ComparableSubject;
 import com.google.common.truth.FailureStrategy;

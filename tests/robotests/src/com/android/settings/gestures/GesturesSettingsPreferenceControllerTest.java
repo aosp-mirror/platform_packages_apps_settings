@@ -25,7 +25,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;

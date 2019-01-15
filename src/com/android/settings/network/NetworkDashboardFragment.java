@@ -24,7 +24,7 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.BidiFormatter;
 import android.util.Log;
 

@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -34,9 +35,9 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.media.AudioManager;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -179,6 +180,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         mController.setActiveBluetoothDevice(mLeftBluetoothHapDevice);
 
         verify(mHearingAidProfile).setActiveDevice(mLeftBluetoothHapDevice);
+        verify(mHeadsetProfile, never()).setActiveDevice(mLeftBluetoothHapDevice);
     }
 
     /**
@@ -192,6 +194,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         mController.setActiveBluetoothDevice(mBluetoothDevice);
 
         verify(mHeadsetProfile).setActiveDevice(mBluetoothDevice);
+        verify(mHearingAidProfile, never()).setActiveDevice(mBluetoothDevice);
     }
 
     /**

@@ -23,7 +23,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.PowerManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 import android.widget.Button;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

@@ -20,7 +20,7 @@ import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 

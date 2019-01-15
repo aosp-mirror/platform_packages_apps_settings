@@ -68,7 +68,8 @@ public class PrivateVolumeOptionMenuController implements LifecycleObserver, OnC
         if (migrate != null) {
             migrate.setVisible((privateVol != null)
                     && (privateVol.getType() == VolumeInfo.TYPE_PRIVATE)
-                    && !Objects.equals(mVolumeInfo, privateVol));
+                    && !Objects.equals(mVolumeInfo, privateVol)
+                    && privateVol.isMountedWritable());
         }
     }
 

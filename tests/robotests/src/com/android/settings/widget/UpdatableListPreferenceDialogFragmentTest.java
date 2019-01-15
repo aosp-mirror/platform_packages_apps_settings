@@ -19,7 +19,7 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.support.v7.preference.ListPreference;
+import androidx.preference.ListPreference;
 import android.widget.ArrayAdapter;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

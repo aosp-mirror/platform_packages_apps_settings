@@ -22,7 +22,7 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

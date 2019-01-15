@@ -23,7 +23,7 @@ import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
 
 import com.android.internal.os.BatteryStatsHelper;

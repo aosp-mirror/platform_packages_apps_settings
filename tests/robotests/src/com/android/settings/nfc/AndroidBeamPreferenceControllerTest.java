@@ -22,12 +22,13 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
@@ -56,6 +57,8 @@ public class AndroidBeamPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private PackageManager mPackageManager;
 
     private RestrictedPreference mAndroidBeamPreference;
     private AndroidBeamPreferenceController mAndroidBeamController;
@@ -77,6 +80,8 @@ public class AndroidBeamPreferenceControllerTest {
         mAndroidBeamPreference = new RestrictedPreference(RuntimeEnvironment.application);
         when(mScreen.findPreference(mAndroidBeamController.getPreferenceKey())).thenReturn(
                 mAndroidBeamPreference);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC_BEAM)).thenReturn(true);
 
         Settings.Global.putString(mContext.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS,
@@ -91,6 +96,13 @@ public class AndroidBeamPreferenceControllerTest {
     public void isAvailable_hasNfc_shouldReturnTrue() {
         when(mNfcAdapter.isEnabled()).thenReturn(true);
         assertThat(mAndroidBeamController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_noNfcFeature_shouldReturnFalse() {
+        when(mNfcAdapter.isEnabled()).thenReturn(true);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC_BEAM)).thenReturn(false);
+        assertThat(mAndroidBeamController.isAvailable()).isFalse();
     }
 
     @Test

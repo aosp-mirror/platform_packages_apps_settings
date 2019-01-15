@@ -18,8 +18,8 @@ package com.android.settings.security.trustagent;
 
 import android.content.Context;
 import android.os.UserHandle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;

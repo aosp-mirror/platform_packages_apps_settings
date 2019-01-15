@@ -31,7 +31,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

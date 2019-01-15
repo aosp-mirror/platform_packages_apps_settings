@@ -39,9 +39,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.security.KeyStore;
-import android.support.annotation.StringRes;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.StringRes;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
@@ -164,6 +164,11 @@ public class ChooseLockGeneric extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            final Activity activity = getActivity();
+            if (!Utils.isDeviceProvisioned(activity) && !canRunBeforeDeviceProvisioned()) {
+                activity.finish();
+                return;
+            }
 
             String chooseLockAction = getActivity().getIntent().getAction();
             mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
@@ -247,6 +252,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             }
             addHeaderView();
+        }
+
+        protected boolean canRunBeforeDeviceProvisioned() {
+            return false;
         }
 
         protected void addHeaderView() {

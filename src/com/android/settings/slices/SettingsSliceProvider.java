@@ -26,7 +26,7 @@ import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.KeyValueListParser;
@@ -382,7 +382,7 @@ public class SettingsSliceProvider extends SliceProvider {
     void registerIntentToUri(IntentFilter intentFilter, Uri sliceUri) {
         Log.d(TAG, "Registering Uri for broadcast relay: " + sliceUri);
         mRegisteredUris.add(sliceUri);
-        SliceBroadcastRelay.registerReceiver(getContext(), sliceUri, SliceBroadcastReceiver.class,
+        SliceBroadcastRelay.registerReceiver(getContext(), sliceUri, SliceRelayReceiver.class,
                 intentFilter);
     }
 

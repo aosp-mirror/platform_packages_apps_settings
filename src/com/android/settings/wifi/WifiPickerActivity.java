@@ -16,7 +16,7 @@
 package com.android.settings.wifi;
 
 import android.content.Intent;
-import android.support.v14.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragment;
 
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.R;

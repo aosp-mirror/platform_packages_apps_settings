@@ -18,8 +18,8 @@ package com.android.settings.testutils.shadow;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.v4.content.PermissionChecker;
+import androidx.annotation.NonNull;
+import androidx.core.content.PermissionChecker;
 import android.text.TextUtils;
 
 import org.robolectric.annotation.Implementation;

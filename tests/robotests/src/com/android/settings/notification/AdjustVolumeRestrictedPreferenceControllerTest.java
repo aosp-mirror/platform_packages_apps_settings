@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.accounts.AccountRestrictionHelper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

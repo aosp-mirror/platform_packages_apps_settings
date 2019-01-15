@@ -16,8 +16,8 @@
 package com.android.settings.nfc;
 
 import android.content.Context;
-import android.support.v7.preference.DropDownPreference;
-import android.support.v7.preference.Preference;
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 

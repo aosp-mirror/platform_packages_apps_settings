@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;

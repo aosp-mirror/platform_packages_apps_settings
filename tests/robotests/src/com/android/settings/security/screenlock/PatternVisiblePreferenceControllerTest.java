@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

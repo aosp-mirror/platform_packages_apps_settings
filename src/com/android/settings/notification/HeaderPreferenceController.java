@@ -19,11 +19,11 @@ package com.android.settings.notification;
 import static com.android.settings.widget.EntityHeaderController.PREF_KEY_APP_HEADER;
 
 import android.app.Activity;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.Preference;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.Preference;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;

@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;

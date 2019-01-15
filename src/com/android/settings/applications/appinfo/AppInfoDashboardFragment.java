@@ -39,7 +39,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -203,14 +203,20 @@ public class AppInfoDashboardFragment extends DashboardFragment
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();
-
         if (!ensurePackageInfoAvailable(activity)) {
             return;
         }
-
         startListeningToPackageRemove();
 
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        if (!ensurePackageInfoAvailable(getActivity())) {
+            return;
+        }
+        super.onCreatePreferences(savedInstanceState, rootKey);
     }
 
     @Override

@@ -17,7 +17,7 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;

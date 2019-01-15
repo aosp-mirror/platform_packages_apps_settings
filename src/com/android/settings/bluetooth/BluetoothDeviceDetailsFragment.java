@@ -21,7 +21,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;

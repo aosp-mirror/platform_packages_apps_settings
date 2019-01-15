@@ -29,7 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.provider.Settings;
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;

@@ -26,7 +26,6 @@ import static org.robolectric.Shadows.shadowOf;
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.SystemProperties;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -67,8 +66,6 @@ public class SettingsLicenseActivityTest {
 
     @Test
     public void testOnCreateWithValidHtmlFile() {
-        SystemProperties.set("ro.config.license_path", "/system/etc/NOTICE.html.gz");
-
         doReturn(true).when(mActivity).isFileValid(any());
         mActivity.onCreate(null);
 

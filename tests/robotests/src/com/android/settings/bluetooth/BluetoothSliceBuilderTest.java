@@ -35,7 +35,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import android.content.Context;
-import android.support.v7.preference.PreferenceCategory;
+import androidx.preference.PreferenceCategory;
 import android.util.AttributeSet;
 
 public abstract class ProgressCategoryBase extends PreferenceCategory {

@@ -27,14 +27,14 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.Build;
 import android.os.Process;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 
 import com.android.internal.logging.nano.MetricsProto;

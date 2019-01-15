@@ -28,7 +28,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.EnterpriseDefaultApps;

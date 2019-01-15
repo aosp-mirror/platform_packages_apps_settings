@@ -55,7 +55,7 @@ import android.database.sqlite.SQLiteException;
 import android.os.Build;
 import android.provider.SearchIndexablesContract;
 import android.provider.SearchIndexablesContract.SiteMapColumns;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
