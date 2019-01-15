@@ -167,7 +167,7 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
-    public void launchFragment_hasNoPackageInfo_shouldFinish() {
+    public void ensurePackageInfoAvailable_hasNoPackageInfo_shouldFinish() {
         ReflectionHelpers.setField(mFragment, "mPackageInfo", null);
 
         assertThat(mFragment.ensurePackageInfoAvailable(mActivity)).isFalse();
@@ -175,12 +175,22 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
-    public void launchFragment_hasPackageInfo_shouldReturnTrue() {
+    public void ensurePackageInfoAvailable_hasPackageInfo_shouldReturnTrue() {
         final PackageInfo packageInfo = mock(PackageInfo.class);
         ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
         assertThat(mFragment.ensurePackageInfoAvailable(mActivity)).isTrue();
         verify(mActivity, never()).finishAndRemoveTask();
+    }
+
+    @Test
+    public void createPreference_hasNoPackageInfo_shouldSkip() {
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", null);
+
+        mFragment.onCreatePreferences(new Bundle(), "root_key");
+
+        verify(mActivity).finishAndRemoveTask();
+        verify(mFragment, never()).getPreferenceScreen();
     }
 
     @Test

@@ -29,7 +29,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionManager;
 import android.view.LayoutInflater;
 import android.view.View;

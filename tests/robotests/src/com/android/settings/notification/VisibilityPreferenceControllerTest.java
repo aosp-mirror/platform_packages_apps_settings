@@ -209,6 +209,31 @@ public class VisibilityPreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateState_noLockScreenNotificationsGloballyInProfile() {
+        final int primaryUserId = 2;
+        final UserInfo primaryUserInfo = new UserInfo(primaryUserId, "user 2", 0);
+        when(mUm.getProfileParent(anyInt())).thenReturn(primaryUserInfo);
+
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, primaryUserId);
+
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = mock(NotificationChannel.class);
+        mController.onResume(appRow, channel, null, null);
+
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
+        mController.updateState(pref);
+
+        ArgumentCaptor<CharSequence[]> argumentCaptor =
+                ArgumentCaptor.forClass(CharSequence[].class);
+        verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
+        assertFalse(toStringList(argumentCaptor.getValue())
+                .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
+        assertFalse(toStringList(argumentCaptor.getValue())
+                .contains(String.valueOf(VISIBILITY_PRIVATE)));
+    }
+
+    @Test
     public void testUpdateState_noPrivateLockScreenNotificationsGlobally() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 1);

@@ -26,7 +26,7 @@ import com.android.settingslib.Utils;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.media.AudioManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.A2dpProfile;
@@ -112,12 +112,9 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         if (hapProfile != null && a2dpProfile != null && device == null) {
             hapProfile.setActiveDevice(null);
             a2dpProfile.setActiveDevice(null);
-            return;
-        }
-        if (hapProfile != null && hapProfile.getHiSyncId(device) != HI_SYNC_ID_INVALID) {
+        } else if (hapProfile != null && hapProfile.getHiSyncId(device) != HI_SYNC_ID_INVALID) {
             hapProfile.setActiveDevice(device);
-        }
-        if (a2dpProfile != null) {
+        } else if (a2dpProfile != null) {
             a2dpProfile.setActiveDevice(device);
         }
     }

@@ -21,7 +21,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;

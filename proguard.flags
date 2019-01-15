@@ -41,9 +41,9 @@
 }
 
 # Keep annotated classes or class members.
--keep @android.support.annotation.Keep class *
+-keep @androidx.annotation.Keep class *
 -keepclassmembers class * {
-    @android.support.annotation.Keep *;
+    @androidx.annotation.Keep *;
 }
 
 # Keep specific fields used via reflection.
@@ -51,4 +51,4 @@
     public static ** SEARCH_INDEX_DATA_PROVIDER;
     public static ** SUMMARY_PROVIDER_FACTORY;
 }
--keep class android.support.v4.app.CoreComponentFactory
+-keep class androidx.core.app.CoreComponentFactory

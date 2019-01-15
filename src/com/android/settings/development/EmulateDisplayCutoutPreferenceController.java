@@ -20,10 +20,10 @@ import static android.os.UserHandle.USER_SYSTEM;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.DisplayCutout;
 
@@ -33,6 +33,7 @@ import com.android.settings.wrapper.OverlayManagerWrapper;
 import com.android.settings.wrapper.OverlayManagerWrapper.OverlayInfo;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class EmulateDisplayCutoutPreferenceController extends
@@ -40,6 +41,8 @@ public class EmulateDisplayCutoutPreferenceController extends
         PreferenceControllerMixin {
 
     private static final String KEY = "display_cutout_emulation";
+    private static final Comparator<OverlayInfo> OVERLAY_INFO_COMPARATOR =
+            Comparator.comparingInt(a -> a.priority);
 
     private final OverlayManagerWrapper mOverlayManager;
     private final boolean mAvailable;
@@ -120,7 +123,7 @@ public class EmulateDisplayCutoutPreferenceController extends
 
         int current = 0;
         pkgs[0] = "";
-        labels[0] = mContext.getString(R.string.display_cutout_emulation_none);
+        labels[0] = mContext.getString(R.string.display_cutout_emulation_device_default);
 
         for (int i = 0; i < overlays.length; i++) {
             OverlayInfo o = overlays[i];
@@ -153,6 +156,7 @@ public class EmulateDisplayCutoutPreferenceController extends
                 overlayInfos.remove(i);
             }
         }
+        overlayInfos.sort(OVERLAY_INFO_COMPARATOR);
         return overlayInfos.toArray(new OverlayInfo[overlayInfos.size()]);
     }
 

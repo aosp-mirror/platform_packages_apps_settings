@@ -71,10 +71,18 @@
         <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
     </Preference>
 
+    <!-- Safety & regulatory manual -->
+    <Preference
+        android:key="safety_info"
+        android:order="7"
+        android:title="@string/safety_and_regulatory_info">
+        <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO"/>
+    </Preference>
+
     <!-- SIM status -->
     <Preference
         android:key="sim_status"
-        android:order="7"
+        android:order="8"
         android:title="@string/sim_status_title"
         settings:keywords="@string/keywords_sim_status"
         android:summary="@string/summary_placeholder"
@@ -128,14 +136,6 @@
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"
         android:selectable="false"/>
-
-    <!-- Safety & regulatory manual -->
-    <Preference
-        android:key="safety_info"
-        android:order="39"
-        android:title="@string/safety_and_regulatory_info">
-        <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO"/>
-    </Preference>
 
     <!-- Manual -->
     <Preference

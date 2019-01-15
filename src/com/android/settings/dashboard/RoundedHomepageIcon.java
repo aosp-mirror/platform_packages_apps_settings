@@ -16,13 +16,13 @@
 
 package com.android.settings.dashboard;
 
-import static android.support.annotation.VisibleForTesting.NONE;
+import static androidx.annotation.VisibleForTesting.NONE;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 

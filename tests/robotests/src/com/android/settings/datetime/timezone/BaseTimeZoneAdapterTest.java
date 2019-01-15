@@ -16,7 +16,7 @@
 
 package com.android.settings.datetime.timezone;
 
-import android.support.v7.widget.RecyclerView.AdapterDataObserver;
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

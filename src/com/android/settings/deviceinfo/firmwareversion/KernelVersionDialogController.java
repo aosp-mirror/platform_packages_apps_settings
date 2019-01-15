@@ -16,7 +16,7 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;

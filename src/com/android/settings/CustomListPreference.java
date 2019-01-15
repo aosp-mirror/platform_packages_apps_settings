@@ -25,8 +25,8 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v14.preference.ListPreferenceDialogFragment;
-import android.support.v7.preference.ListPreference;
+import androidx.preference.ListPreferenceDialogFragment;
+import androidx.preference.ListPreference;
 import android.util.AttributeSet;
 
 import com.android.internal.logging.nano.MetricsProto;

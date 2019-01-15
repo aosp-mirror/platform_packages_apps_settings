@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings.Secure;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 
 import android.view.View;
 import com.android.settings.R;

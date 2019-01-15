@@ -24,7 +24,7 @@ import com.android.settingslib.Utils;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.HeadsetProfile;
@@ -100,12 +100,9 @@ public class HandsFreeProfileOutputPreferenceController extends
         if (hapProfile != null && hfpProfile != null && device == null) {
             hfpProfile.setActiveDevice(null);
             hapProfile.setActiveDevice(null);
-            return;
-        }
-        if (hapProfile != null && hapProfile.getHiSyncId(device) != HI_SYNC_ID_INVALID) {
+        } else if (hapProfile != null && hapProfile.getHiSyncId(device) != HI_SYNC_ID_INVALID) {
             hapProfile.setActiveDevice(device);
-        }
-        if (hfpProfile != null) {
+        } else if (hfpProfile != null) {
             hfpProfile.setActiveDevice(device);
         }
     }

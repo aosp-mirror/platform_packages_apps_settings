@@ -37,9 +37,9 @@ import android.media.MediaRouter;
 import android.media.MediaRouter.Callback;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -170,12 +170,20 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
 
     @Override
     public void onStart() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "Bluetooth is not supported on this device");
+            return;
+        }
         mLocalBluetoothManager.setForegroundActivity(mContext);
         register();
     }
 
     @Override
     public void onStop() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "Bluetooth is not supported on this device");
+            return;
+        }
         mLocalBluetoothManager.setForegroundActivity(null);
         unregister();
     }

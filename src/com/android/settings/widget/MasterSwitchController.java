@@ -16,7 +16,7 @@
 
 package com.android.settings.widget;
 
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.widget.Switch;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 

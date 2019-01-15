@@ -17,9 +17,9 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.support.v7.preference.DropDownPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;

@@ -18,7 +18,7 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.KeyValueListParser;
 import android.util.Log;
 

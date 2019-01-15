@@ -17,15 +17,15 @@
 package com.android.settings.datetime.timezone;
 
 import android.content.Context;
-import android.icu.impl.OlsonTimeZone;
 import android.icu.text.DateFormat;
 import android.icu.text.DisplayContext;
 import android.icu.text.SimpleDateFormat;
+import android.icu.util.BasicTimeZone;
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
 import android.icu.util.TimeZoneTransition;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settingslib.widget.FooterPreference;
@@ -114,17 +114,17 @@ public class TimeZoneInfoPreferenceController extends BaseTimeZonePreferenceCont
     }
 
     private TimeZoneTransition findNextDstTransition(TimeZone timeZone) {
-        if (!(timeZone instanceof OlsonTimeZone)) {
+        if (!(timeZone instanceof BasicTimeZone)) {
             return null;
         }
-        final OlsonTimeZone olsonTimeZone = (OlsonTimeZone) timeZone;
-        TimeZoneTransition transition = olsonTimeZone.getNextTransition(
+        final BasicTimeZone basicTimeZone = (BasicTimeZone) timeZone;
+        TimeZoneTransition transition = basicTimeZone.getNextTransition(
                 mDate.getTime(), /* inclusive */ false);
         do {
             if (transition.getTo().getDSTSavings() != transition.getFrom().getDSTSavings()) {
                 break;
             }
-            transition = olsonTimeZone.getNextTransition(
+            transition = basicTimeZone.getNextTransition(
                     transition.getTime(), /*inclusive */ false);
         } while (transition != null);
         return transition;

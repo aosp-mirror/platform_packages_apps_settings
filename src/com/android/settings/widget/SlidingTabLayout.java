@@ -17,7 +17,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;

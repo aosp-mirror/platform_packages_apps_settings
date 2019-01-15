@@ -29,7 +29,7 @@
       <item quantity="other">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étapes pour devenir un développeur.</item>
     </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Vous êtes désormais un développeur!"</string>
-    <string name="show_dev_already" msgid="2151632240145446227">"Inuti, vous êtes déjà un développeur."</string>
+    <string name="show_dev_already" msgid="2151632240145446227">"Inutile, vous êtes déjà un concepteur."</string>
     <string name="dev_settings_disabled_warning" msgid="4909448907673974370">"Veuillez d\'abord activer les options pour les concepteurs"</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Sans fil et réseaux"</string>
     <string name="header_category_connections" msgid="6471513040815680662">"Connexions"</string>
@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Auto"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Bande de 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"Bande de 5 GHz"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Préférer la bande de 5,0 GHz"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Choisissez au moins une bande pour le point d\'accès Wi-Fi :"</string>
@@ -972,7 +973,7 @@
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Préférences d\'itinérance"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Réseau Wi-Fi de préférence"</item>
+    <item msgid="2124257075906188844">"Connexion Wi-Fi de préférence"</item>
     <item msgid="1335127656328817518">"Connexion cellulaire de préférence"</item>
     <item msgid="3132912693346866895">"Wi-Fi seulement"</item>
   </string-array>
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturelles"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Intenses"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturées"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Automatique"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Adaptatif"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Utiliser uniquement les couleurs précises"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Ajuster entre les couleurs vives et précises"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Changer automatiquement d\'orientation lors de la rotation de la tablette"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Désactivés, mais autoriser : <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> et <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Désactivés, mais autoriser : <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> et <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Messages, événements et rappels"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Lorsque le mode Ne pas déranger est activé, le son des messages, des rappels et des événements est coupé, sauf pour les éléments autorisés ci-dessus. Vous pouvez régler les paramètres des messages pour que vos proches ou d\'autres contacts puissent quand même vous joindre."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Lorsque le mode Ne pas déranger est activé, le son des messages, des rappels et des événements est coupé, sauf pour les éléments autorisés ci-dessus. Vous pouvez régler les paramètres des messages pour que vos proches ou d\'autres contacts puissent quand même vous joindre."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"OK"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Paramètres"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Aucun élément visuel ni son provenant des notifications"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Lorsque vous entrez votre NIP pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Lorsque vous entrez votre schéma pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Lorsque vous entrez votre mot de passe pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Remarque : Après un redémarrage, vous ne pouvez pas lancer cette application tant que vous n\'avez pas déverrouillé votre téléphone."</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Remarque : Si vous redémarrez votre téléphone et que vous avez défini un verrouillage de l\'écran, cette application ne peut pas démarrer tant que vous n\'avez pas déverrouillé votre téléphone"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Information concernant le code IIEM"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Information concernant le code IIEM"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Fente <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3979,7 +3980,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Applications instantanées"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Ouvrir les liens dans les applications, même si elles ne sont pas installées"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Applications instantanées"</string>
-    <string name="instant_apps_settings" msgid="8827777916518348213">"Préférences des applications instantanées"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Préf. applis instantanées"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Applications installées"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Votre espace de stockage est maintenant géré par le gestionnaire de stockage"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Comptes pour <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4149,4 +4150,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Détails du réseau"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Le nom de votre appareil est visible pour les applications de votre téléphone. Il est aussi possible que d\'autres personnes le voient lorsque vous vous connectez à des appareils Bluetooth ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Appareils"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Par défaut"</string>
 </resources>

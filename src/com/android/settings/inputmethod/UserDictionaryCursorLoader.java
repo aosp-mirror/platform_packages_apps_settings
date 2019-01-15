@@ -21,7 +21,7 @@ import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.UserDictionary;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.ArraySet;
 
 import java.util.Locale;

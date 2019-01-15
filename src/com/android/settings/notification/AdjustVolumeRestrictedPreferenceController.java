@@ -21,7 +21,7 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.accounts.AccountRestrictionHelper;

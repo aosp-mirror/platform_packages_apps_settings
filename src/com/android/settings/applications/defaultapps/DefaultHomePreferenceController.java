@@ -106,7 +106,9 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         Intent intent = new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
                 .setPackage(packageName)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        return mPackageManager.queryIntentActivities(intent, 0).size() == 1 ? intent : null;
+        return intent.resolveActivity(mPackageManager.getPackageManager()) != null
+               ? intent
+               : null;
     }
 
     public static boolean hasHomePreference(String pkg, Context context) {

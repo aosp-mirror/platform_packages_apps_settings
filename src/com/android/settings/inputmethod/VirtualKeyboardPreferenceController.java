@@ -19,7 +19,7 @@ package com.android.settings.inputmethod;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 import android.text.BidiFormatter;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;

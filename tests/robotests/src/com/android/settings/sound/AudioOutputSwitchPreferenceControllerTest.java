@@ -46,9 +46,9 @@ import android.content.pm.PackageManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
@@ -186,6 +186,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
         AudioSwitchPreferenceController controller = new AudioSwitchPreferenceControllerTestable(
                 mContext, TEST_KEY);
+        controller.onStart();
+        controller.onStop();
 
         assertThat(mLocalBluetoothManager).isNull();
     }

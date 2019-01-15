@@ -24,7 +24,7 @@ import android.hardware.usb.UsbPortStatus;
 import android.net.ConnectivityManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Provides access to underlying system USB functionality.

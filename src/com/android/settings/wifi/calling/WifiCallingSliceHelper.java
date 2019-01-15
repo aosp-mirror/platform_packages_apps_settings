@@ -26,7 +26,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.PersistableBundle;
 import android.provider.Settings;
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;

@@ -24,8 +24,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings.System;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -44,7 +44,7 @@ import android.util.AttributeSet;
  * @attr ref android.R.styleable#RingtonePreference_showSilent
  *
  * Based of frameworks/base/core/java/android/preference/RingtonePreference.java
- * but extends android.support.v7.preference.Preference instead.
+ * but extends androidx.preference.Preference instead.
  */
 public class RingtonePreference extends Preference {
 

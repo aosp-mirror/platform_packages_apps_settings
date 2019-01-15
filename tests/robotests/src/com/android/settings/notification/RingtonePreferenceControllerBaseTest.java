@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.media.RingtoneManager;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

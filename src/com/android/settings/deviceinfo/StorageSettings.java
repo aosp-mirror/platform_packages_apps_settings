@@ -35,10 +35,10 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -144,6 +144,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         switch (vol.getType()) {
             case VolumeInfo.TYPE_PRIVATE:
             case VolumeInfo.TYPE_PUBLIC:
+            case VolumeInfo.TYPE_STUB:
                 return true;
             default:
                 return false;
@@ -176,7 +177,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 final int color = COLOR_PRIVATE[privateCount++ % COLOR_PRIVATE.length];
                 mInternalCategory.addPreference(
                         new StorageVolumePreference(context, vol, color, volumeTotalBytes));
-            } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
+            } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC
+                    || vol.getType() == VolumeInfo.TYPE_STUB) {
                 mExternalCategory.addPreference(
                         new StorageVolumePreference(context, vol, COLOR_PUBLIC, 0));
             }
@@ -304,6 +306,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
                 return handlePublicVolumeClick(getContext(), vol);
+            } else if (vol.getType() == VolumeInfo.TYPE_STUB) {
+                return handleStubVolumeClick(getContext(), vol);
             }
 
         } else if (key.startsWith("disk:")) {
@@ -324,6 +328,16 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             return true;
         }
 
+        return false;
+    }
+
+    @VisibleForTesting
+    static boolean handleStubVolumeClick(Context context, VolumeInfo vol) {
+        final Intent intent = vol.buildBrowseIntent();
+        if (vol.isMountedReadable() && intent != null) {
+            context.startActivity(intent);
+            return true;
+        }
         return false;
     }
 

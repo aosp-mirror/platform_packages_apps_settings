@@ -17,7 +17,7 @@ package com.android.settings.wifi;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.PreferenceViewHolder;
 import android.widget.ImageView;
 import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;

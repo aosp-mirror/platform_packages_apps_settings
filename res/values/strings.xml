@@ -774,16 +774,8 @@
     <string name="date_time_search_region">Search region</string>
     <!-- Setting option title to select region in time zone setting screen [CHAR LIMIT=30] -->
     <string name="date_time_select_region">Region</string>
-    <!-- Setting option title to select time zone in time zone setting screen [CHAR LIMIT=30]-->
-    <string name="date_time_select_zone">Time Zone</string>
-    <!-- Setting option title to select time zone in a region -->
-    <string name="date_time_set_timezone_in_region">Time zones in <xliff:g id="region" example="United States">%1$s</xliff:g></string>
     <!-- Setting option title in time zone setting screen [CHAR LIMIT=30] -->
     <string name="date_time_select_fixed_offset_time_zones">Select UTC offset</string>
-    <!-- Menu item on Select time zone screen -->
-    <string name="zone_list_menu_sort_alphabetically">Sort alphabetically</string>
-    <!-- Menu item on Select time zone screen -->
-    <string name="zone_list_menu_sort_by_timezone">Sort by time zone</string>
     <!-- Label describing when a given time zone changes to DST or standard time -->
     <string name="zone_change_to_from_dst"><xliff:g id="time_type" example="Pacific Summer Time">%1$s</xliff:g> starts on <xliff:g id="transition_date" example="Mar 11 2018">%2$s</xliff:g>.</string>
     <!-- Label describing a exemplar location and time zone offset[CHAR LIMIT=NONE] -->
@@ -1986,8 +1978,10 @@
     <string name="wifi_ap_choose_auto">Auto</string>
     <!-- Label for the radio button to choose wifi ap 2.4 GHz band -->
     <string name="wifi_ap_choose_2G">2.4 GHz Band</string>
-    <!-- Label for the radio button to choose wifi ap 5GHz band -->
+    <!-- Label for the radio button to only choose wifi ap 5GHz band -->
     <string name="wifi_ap_choose_5G">5.0 GHz Band</string>
+    <!-- Label for the radio button to prefer 5GHz wifi ap band  [CHAR LIMIT=80]-->
+    <string name="wifi_ap_prefer_5G">5.0 GHz Band preferred</string>
     <!-- Label for adding to the list of selected bands when 2.4 GHz is selected -->
     <string name="wifi_ap_2G">2.4 GHz</string>
     <!-- Label for adding to the list of selected bands when 5.0 GHz is selected -->
@@ -2491,11 +2485,11 @@
     <string name="color_mode_option_boosted">Boosted</string>
     <!-- Display settings screen, Color mode option for "Saturated color"  [CHAR LIMIT=45] -->
     <string name="color_mode_option_saturated">Saturated</string>
-    <!-- Display settings screen, Color mode option for "Automatic color"  [CHAR LIMIT=45] -->
-    <string name="color_mode_option_automatic">Automatic</string>
+    <!-- Display settings screen, Color mode option for "Adaptive color"  [CHAR LIMIT=45] -->
+    <string name="color_mode_option_automatic">Adaptive</string>
     <!-- Display settings screen, "natural(sRGB) color" setting option summary [CHAR LIMIT=NONE] -->
     <string name="color_mode_summary_natural">Use accurate colors only</string>
-    <!-- Display settings screen, "Automatic color" setting option summary [CHAR LIMIT=NONE] -->
+    <!-- Display settings screen, "Adaptive color" setting option summary [CHAR LIMIT=NONE] -->
     <string name="color_mode_summary_automatic">Adjust between vivid and accurate colors</string>
 
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
@@ -2718,6 +2712,10 @@
     <string name="sim_change_succeeded">SIM PIN changed successfully</string>
     <!-- SIM card lock settings screen, toast after not entering correct SIM PIN [CHAR LIMIT=40] -->
     <string name="sim_lock_failed">Can\u2019t change SIM card lock state.\nPossibly incorrect PIN.</string>
+    <!-- SIM card lock settings screen, toast after disabling PIN failed from modem -->
+    <string name="sim_pin_disable_failed">Can\'t disable PIN.</string>
+    <!-- SIM card lock settings screen, toast after enabling PIN failed from modem -->
+    <string name="sim_pin_enable_failed">Can\'t enable PIN.</string>
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
     <string name="sim_enter_ok">OK</string>
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
@@ -7417,7 +7415,7 @@
     <!-- Do not disturb settings, messages, events and reminders title [CHAR LIMIT=100]-->
     <string name="zen_msg_event_reminder_title">Messages, events &amp; reminders</string>
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
-    <string name="zen_msg_event_reminder_footer">When Do Not Disturb is on, messages, reminders, and events will muted, except for the items you allow above. You can adjust messages settings to allow your friends, family, or other contacts to reach you.</string>
+    <string name="zen_msg_event_reminder_footer">When Do Not Disturb is on, messages, reminders, and events will be muted, except for the items you allow above. You can adjust messages settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- Do not disturb onboarding dialog, accept new settings [CHAR LIMIT=30]-->
     <string name="zen_onboarding_ok">Done</string>
@@ -8206,7 +8204,7 @@
     <string name="encrypt_talkback_dialog_message_password">When you enter your password to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
 
     <!-- [CHAR LIMIT=NONE] Dialog body explaining that the app just selected by the user will not work after a reboot until until after the user enters their credentials, such as a PIN or password. -->
-    <string name="direct_boot_unaware_dialog_message">Note: After a reboot, this app can\'t start until you unlock your phone</string>
+    <string name="direct_boot_unaware_dialog_message">Note: If you restart your phone and have a screen lock set, this app can\'t start until you unlock your phone</string>
 
     <!-- Title and summary for SIM Status -->
     <string name="imei_information_title">IMEI information</string>
@@ -9411,13 +9409,13 @@
     <string name="notification_log_details_ranking_none">Ranking object doesn\'t contain this key.</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which turns on emulation of a display cutout. -->
-    <string name="display_cutout_emulation">Simulate a display with a cutout</string>
+    <string name="display_cutout_emulation">Display cutout</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Search keywords for the setting which turns on emulation of a display cutout. -->
     <string name="display_cutout_emulation_keywords">display cutout, notch</string>
 
-    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation. -->
-    <string name="display_cutout_emulation_none">None</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation, (i.e. on devices whose screen actually has a cutout, selecting this option will show that cutout).-->
+    <string name="display_cutout_emulation_device_default">Device default</string>
 
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
     <string name="special_access">Special app access</string>
@@ -9922,6 +9920,9 @@
     <!-- Help URI, smart battery page [DO NOT TRANSLATE] -->
     <string name="help_uri_smart_battery_settings" translatable="false"></string>
 
+    <!-- Help URI, prevent ringing gesture [DO NOT TRANSLATE] -->
+    <string name="help_uri_prevent_ringing_gesture" translatable="false"></string>
+
     <!-- Title label for dnd suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="zen_suggestion_title">Update Do Not Disturb</string>
 
@@ -10039,6 +10040,9 @@
 
     <!-- Title for HFP(hands free profile) output switch button in settings. -->
     <string name="take_call_on_title">Take call on</string>
+
+    <!-- Toast that appears when users tap an APN for which parameters cannot be viewed. [CHAR LIMIT=NONE] -->
+    <string name="cannot_change_apn_toast">This APN cannot be changed.</string>
 
     <!--  Title for battery Suggestion. (tablet) [CHAR LIMIT=46] -->
     <string name="battery_suggestion_title" product="tablet" >Improve tablet\'s battery life</string>

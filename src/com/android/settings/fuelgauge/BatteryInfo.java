@@ -24,7 +24,7 @@ import android.os.BatteryStats;
 import android.os.BatteryStats.HistoryItem;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 import android.text.format.Formatter;
 import android.util.SparseIntArray;
 

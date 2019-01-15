@@ -17,7 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
-import android.arch.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.OnLifecycleEvent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;

@@ -23,7 +23,7 @@ import static org.robolectric.shadow.api.Shadow.extract;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;

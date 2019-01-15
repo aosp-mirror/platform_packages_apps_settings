@@ -18,7 +18,7 @@ package com.android.settings.connecteddevice;
 import android.app.Activity;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;

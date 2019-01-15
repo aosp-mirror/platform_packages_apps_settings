@@ -26,7 +26,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.R;

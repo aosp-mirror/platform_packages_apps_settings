@@ -16,7 +16,7 @@
 
 package com.android.settings.connecteddevice;
 
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 /**
  * Callback to add or remove {@link Preference} in device group.

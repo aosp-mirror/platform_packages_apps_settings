@@ -18,7 +18,7 @@ package com.android.settings.datetime.timezone;
 
 import android.app.Activity;
 import android.icu.util.TimeZone;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 

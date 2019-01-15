@@ -18,7 +18,7 @@ package com.android.settings.inputmethod;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

@@ -21,21 +21,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Telephony;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.settings.R;
 
-public class ApnPreference extends Preference implements
-        CompoundButton.OnCheckedChangeListener, OnClickListener {
+public class ApnPreference extends Preference implements CompoundButton.OnCheckedChangeListener {
     final static String TAG = "ApnPreference";
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -56,6 +54,7 @@ public class ApnPreference extends Preference implements
     private static CompoundButton mCurrentChecked = null;
     private boolean mProtectFromCheckedChange = false;
     private boolean mSelectable = true;
+    private boolean mHideDetails = false;
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
@@ -80,11 +79,6 @@ public class ApnPreference extends Preference implements
             } else {
                 rb.setVisibility(View.GONE);
             }
-        }
-
-        View textLayout = view.findViewById(R.id.text_layout);
-        if ((textLayout != null) && textLayout instanceof RelativeLayout) {
-            textLayout.setOnClickListener(this);
         }
     }
 
@@ -115,16 +109,21 @@ public class ApnPreference extends Preference implements
         }
     }
 
-    public void onClick(android.view.View v) {
-        if ((v != null) && (R.id.text_layout == v.getId())) {
-            Context context = getContext();
-            if (context != null) {
-                int pos = Integer.parseInt(getKey());
-                Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
-                Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
-                editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
-                context.startActivity(editIntent);
+    @Override
+    protected void onClick() {
+        super.onClick();
+        Context context = getContext();
+        if (context != null) {
+            if (mHideDetails) {
+                Toast.makeText(context, context.getString(
+                        R.string.cannot_change_apn_toast), Toast.LENGTH_LONG).show();
+                return;
             }
+            int pos = Integer.parseInt(getKey());
+            Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
+            Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
+            editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
+            context.startActivity(editIntent);
         }
     }
 
@@ -138,5 +137,9 @@ public class ApnPreference extends Preference implements
 
     public void setSubId(int subId) {
         mSubId = subId;
+    }
+
+    public void setHideDetails() {
+        mHideDetails = true;
     }
 }

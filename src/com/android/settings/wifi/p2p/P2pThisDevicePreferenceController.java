@@ -18,8 +18,8 @@ package com.android.settings.wifi.p2p;
 
 import android.content.Context;
 import android.net.wifi.p2p.WifiP2pDevice;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;

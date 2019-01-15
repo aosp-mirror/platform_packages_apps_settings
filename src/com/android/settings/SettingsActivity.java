@@ -39,11 +39,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceManager;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.FeatureFlagUtils;
@@ -291,8 +291,10 @@ public class SettingsActivity extends SettingsDrawerActivity
             launchSettingFragment(initialFragmentName, isSubSettings, intent);
         }
 
+        final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
         if (mIsShowingDashboard) {
-            findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
+            findViewById(R.id.search_bar).setVisibility(
+                    deviceProvisioned ? View.VISIBLE : View.INVISIBLE);
             findViewById(R.id.action_bar).setVisibility(View.GONE);
             final Toolbar toolbar = findViewById(R.id.search_action_bar);
             FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -311,7 +313,6 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
             actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
             actionBar.setHomeButtonEnabled(deviceProvisioned);
             actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);

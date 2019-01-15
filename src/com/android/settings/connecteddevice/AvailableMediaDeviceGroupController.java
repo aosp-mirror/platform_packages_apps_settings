@@ -19,10 +19,10 @@ import static com.android.settingslib.Utils.isAudioModeOngoingCall;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.Utils;
@@ -37,7 +37,7 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
- * Controller to maintain the {@link android.support.v7.preference.PreferenceGroup} for all
+ * Controller to maintain the {@link androidx.preference.PreferenceGroup} for all
  * available media devices. It uses {@link DevicePreferenceCallback}
  * to add/remove {@link Preference}
  */

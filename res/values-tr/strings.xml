@@ -854,6 +854,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"Otomatik"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz Bandı"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"5,0 GHz Bandı"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"5,0 GHz Bandı tercih edilir"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Kablosuz hotspot için en az bir grup seçin:"</string>
@@ -972,7 +973,7 @@
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Dolaşım tercihi"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Kablosuz bağlantı tercih edildi"</item>
+    <item msgid="2124257075906188844">"Kablosuz bağlantı tercihli"</item>
     <item msgid="1335127656328817518">"Mobil tercihli"</item>
     <item msgid="3132912693346866895">"Yalnızca kablosuz"</item>
   </string-array>
@@ -987,7 +988,7 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Kablosuz bağlantı tercih edildi"</item>
+    <item msgid="5782108782860004851">"Kablosuz bağlantı tercihli"</item>
     <item msgid="5074515506087318555">"Mobil tercihli"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
@@ -1065,7 +1066,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Doğal"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Zenginleştirilmiş"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Doygunluğu Artırılmış"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"Otomatik"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Uyarlanan"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Yalnızca doğru renkleri kullan"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Canlı ve doğru renkler arasında ayarlama yapın"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Tableti döndürürken yönü otomatik değiştir"</string>
@@ -3095,7 +3096,7 @@
     <string name="zen_mode_restrict_notifications_mute" msgid="3690261619682396872">"Bildirimlerden sesli uyarı yok"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="5810076116489877312">"Bildirimleri ekranınızda göreceksiniz"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Bildirim geldiğinde telefonunuz ses çıkartmaz veya titreşmez."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"Bildirimlerden görsel veya ses yok"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"Bildirimlerden görsel veya sesli uyarı yok"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"Bildirimleri görmeyecek ve duymayacaksınız"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"Telefonunuz yeni veya mevcut bildirimleri göstermez, ses çıkartmaz ve titreşmez. Parmağınızı ekranınızın üst kısmından aşağı doğru kaydırdığınızda bildirimler görünmez.\n\nTelefon işlemleri ve durumu ile ilgili önemli bildirimlerin gösterilmeye devam edeceğini unutmayın."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Özel"</string>
@@ -3110,7 +3111,7 @@
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Ses ve titreşimi kapat"</string>
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"Ekranı açma"</string>
     <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Işığı yakıp söndürme"</string>
-    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Ekranda bildirimler gösterme"</string>
+    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Ekranda bildirim gösterme"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Durum çubuğu simgelerini gizle"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Bildirim noktalarını gizle"</string>
     <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Bildirimler için uyanma"</string>
@@ -3161,7 +3162,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"Ses kapatıldı, ancak <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> ve <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> seslerine izin ver"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Ses kapatıldı, ancak <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> ve <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> seslerine izin ver"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mesajlar, etkinlikler ve hatırlatıcılar"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"Rahatsız Etmeyin ayarı açık olduğunda mesajların, hatırlatıcıların ve etkinliklerin sesi kapatılır (yukarıda izin verdiğiniz öğeler hariç). Mesaj ayarlarını arkadaşlarınızın, ailenizin veya diğer kişilerin size ulaşmasına izin verecek şekilde düzenleyebilirsiniz."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Rahatsız Etmeyin ayarı açık olduğunda mesajların, hatırlatıcıların ve etkinliklerin sesi kapatılır (yukarıda izin verdiğiniz öğeler hariç). Mesaj ayarlarını arkadaşlarınızın, ailenizin veya diğer kişilerin size ulaşmasına izin verecek şekilde düzenleyebilirsiniz."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"Bitti"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"Ayarlar"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"Bildirimlerden görsel veya sesli uyarı yok"</string>
@@ -3427,7 +3428,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Bu cihazı başlatmak için PIN\'inizi girdiğinizde <xliff:g id="SERVICE">%1$s</xliff:g> gibi erişilebilirlik hizmetleri henüz kullanılabilir olmayacaktır."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Bu cihazı başlatmak için deseninizi girdiğinizde <xliff:g id="SERVICE">%1$s</xliff:g> gibi erişilebilirlik hizmetleri henüz kullanılabilir olmayacaktır."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Bu cihazı başlatmak için şifrenizi girdiğinizde <xliff:g id="SERVICE">%1$s</xliff:g> gibi erişilebilirlik hizmetleri henüz kullanılabilir olmayacaktır."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Not: Yeniden başlatma sonrasında, telefonunuzun kilidi açılıncaya kadar bu uygulama başlatılamaz"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Not: Telefonunuzu yeniden başlatırsanız ve ekran kilidi ayarlanmışsa siz telefonunuzun kilidini açana kadar bu uygulama başlayamaz."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI bilgileri"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI göreli bilgileri"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Yuva<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3486,7 +3487,7 @@
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"Kategoriler: Önem düzeyi düşük"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"Kategoriler: Kapalı"</string>
     <string name="filter_notif_dnd_channels" msgid="1817930848881696728">"Kategoriler: Rahatsız Etmeyin\'i geçersiz kılar"</string>
-    <string name="advanced_apps" msgid="4812975097124803873">"İleri düzey"</string>
+    <string name="advanced_apps" msgid="4812975097124803873">"Gelişmiş"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Uygulamaları yapılandır"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Bilinmeyen uygulama"</string>
     <string name="app_permissions" msgid="4148222031991883874">"Uygulama izinleri"</string>
@@ -4149,4 +4150,5 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Ağ ayrıntıları"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Telefonunuzdaki uygulamalar cihazınızın adını görür. Bluetooth cihazlarına bağlandığınızda veya bir kablosuz hotspot ayarladığınızda başka kişiler de bu adı görebilir."</string>
     <string name="devices_title" msgid="7701726109334110391">"Cihazlar"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Varsayılan"</string>
 </resources>
