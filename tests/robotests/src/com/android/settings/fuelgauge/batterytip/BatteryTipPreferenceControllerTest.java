@@ -44,6 +44,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.widget.CardPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -72,17 +73,14 @@ public class BatteryTipPreferenceControllerTest {
     private BatteryTip mBatteryTip;
     @Mock
     private SettingsActivity mSettingsActivity;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private PreferenceManager mPreferenceManager;
     @Mock
     private InstrumentedPreferenceFragment mFragment;
 
     private Context mContext;
-    private PreferenceGroup mPreferenceGroup;
+    private CardPreference mCardPreference;
     private BatteryTipPreferenceController mBatteryTipPreferenceController;
     private List<BatteryTip> mOldBatteryTips;
     private List<BatteryTip> mNewBatteryTips;
-    private Preference mPreference;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -90,12 +88,9 @@ public class BatteryTipPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
 
-        mPreferenceGroup = spy(new PreferenceCategory(mContext));
+        mCardPreference = spy(new CardPreference(mContext));
         when(mPreferenceScreen.getContext()).thenReturn(mContext);
-        when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
-        doReturn(mPreferenceGroup).when(mPreferenceScreen).findPreference(KEY_PREF);
-        mPreference = new Preference(mContext);
-        mPreference.setKey(KEY_TIP);
+        doReturn(mCardPreference).when(mPreferenceScreen).findPreference(KEY_PREF);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mOldBatteryTips = new ArrayList<>();
@@ -104,7 +99,7 @@ public class BatteryTipPreferenceControllerTest {
         mNewBatteryTips.add(new SummaryTip(BatteryTip.StateType.INVISIBLE, AVERAGE_TIME_MS));
 
         mBatteryTipPreferenceController = buildBatteryTipPreferenceController();
-        mBatteryTipPreferenceController.mPreferenceGroup = mPreferenceGroup;
+        mBatteryTipPreferenceController.mCardPreference = mCardPreference;
         mBatteryTipPreferenceController.mPrefContext = mContext;
     }
 
@@ -112,18 +107,7 @@ public class BatteryTipPreferenceControllerTest {
     public void testDisplayPreference_addSummaryTip() {
         mBatteryTipPreferenceController.displayPreference(mPreferenceScreen);
 
-        assertOnlyContainsSummaryTip(mPreferenceGroup);
-    }
-
-    @Test
-    public void testUpdateBatteryTips_updateTwice_firstShowSummaryTipThenRemoveIt() {
-        // Display summary tip because its state is new
-        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
-        assertOnlyContainsSummaryTip(mPreferenceGroup);
-
-        // Remove summary tip because its new state is invisible
-        mBatteryTipPreferenceController.updateBatteryTips(mNewBatteryTips);
-        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
+        assertOnlyContainsSummaryTip(mCardPreference);
     }
 
     @Test
@@ -142,11 +126,11 @@ public class BatteryTipPreferenceControllerTest {
         mBatteryTipPreferenceController.saveInstanceState(bundle);
 
         final BatteryTipPreferenceController controller = buildBatteryTipPreferenceController();
-        controller.mPreferenceGroup = mPreferenceGroup;
+        controller.mCardPreference = mCardPreference;
         controller.mPrefContext = mContext;
         controller.restoreInstanceState(bundle);
 
-        assertOnlyContainsSummaryTip(mPreferenceGroup);
+        assertOnlyContainsSummaryTip(mCardPreference);
     }
 
     @Test
@@ -166,12 +150,11 @@ public class BatteryTipPreferenceControllerTest {
         when(mBatteryTip.getType()).thenReturn(SMART_BATTERY_MANAGER);
         List<BatteryTip> batteryTips = new ArrayList<>();
         batteryTips.add(mBatteryTip);
-        doReturn(mPreference).when(mBatteryTip).buildPreference(any());
         doReturn(false).when(mBatteryTip).shouldShowDialog();
         doReturn(KEY_TIP).when(mBatteryTip).getKey();
         mBatteryTipPreferenceController.updateBatteryTips(batteryTips);
 
-        mBatteryTipPreferenceController.handlePreferenceTreeClick(mPreference);
+        mBatteryTipPreferenceController.handlePreferenceTreeClick(mCardPreference);
 
         verify(mBatteryTipListener).onBatteryTipHandled(mBatteryTip);
     }
@@ -182,10 +165,7 @@ public class BatteryTipPreferenceControllerTest {
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
-    private void assertOnlyContainsSummaryTip(final PreferenceGroup preferenceGroup) {
-        assertThat(preferenceGroup.getPreferenceCount()).isEqualTo(1);
-
-        final Preference preference = preferenceGroup.getPreference(0);
+    private void assertOnlyContainsSummaryTip(CardPreference preference) {
         assertThat(preference.getTitle()).isEqualTo(
                 mContext.getString(R.string.battery_tip_summary_title));
         assertThat(preference.getSummary()).isEqualTo(

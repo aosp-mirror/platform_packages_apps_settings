@@ -21,6 +21,7 @@
 
     <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.SettingsBase">
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
+        <item name="cardPreferenceStyle">@style/CardPreference</item>
         <item name="slicePreferenceStyle">@style/SlicePreference</item>
         <item name="seekBarPreferenceStyle">@style/SettingsSeekBarPreference</item>
         <item name="twoStateButtonPreferenceStyle">@style/TwoStateButtonPreference</item>
@@ -33,6 +34,10 @@
 
     <style name="ApnPreference" parent="@style/Preference.Material">
         <item name="android:layout">@layout/apn_preference_layout</item>
+    </style>
+
+    <style name="CardPreference" parent="@style/Preference.Material">
+        <item name="android:layout">@layout/card_preference_layout</item>
     </style>
 
     <style name="SlicePreference" parent="@style/Preference.Material">
