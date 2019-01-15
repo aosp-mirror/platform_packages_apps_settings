@@ -19,6 +19,7 @@ package com.android.settings.wifi.dpp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
@@ -59,6 +61,9 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     private WifiTracker mWifiTracker;
 
     private WifiManager.ActionListener mSaveListener;
+
+    @VisibleForTesting
+    boolean mUseConnectedAccessPointDirectly;
 
     // Container Activity must implement this interface
     public interface OnChooseNetworkListener {
@@ -92,7 +97,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         super.onActivityCreated(savedInstanceState);
 
         mWifiTracker = WifiTrackerFactory.create(getActivity(), this,
-                getSettingsLifecycle(), /* includeSaved */true, /* includeSaved */ true);
+                getSettingsLifecycle(), /* includeSaved */true, /* includeScans */ true);
         mWifiManager = mWifiTracker.getManager();
 
         mSaveListener = new WifiManager.ActionListener() {
@@ -111,6 +116,8 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                 }
             }
         };
+
+        mUseConnectedAccessPointDirectly = true;
     }
 
     @Override
@@ -281,6 +288,17 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             // Check if this access point is valid for DPP.
             if (isValidForDppConfiguration(accessPoint)) {
                 final String key = accessPoint.getKey();
+
+                // Check if this access point is already connected.
+                if (mUseConnectedAccessPointDirectly
+                        && accessPoint.getDetailedState() == DetailedState.CONNECTED) {
+                    // Uses connected access point to start DPP in Configurator-Initiator role
+                    // directly.
+                    onPreferenceTreeClick(createAccessPointPreference(accessPoint));
+                    removeCachedPrefs(mAccessPointsPreferenceCategory);
+                    return;
+                }
+
                 hasAvailableAccessPoints = true;
                 final AccessPointPreference pref = (AccessPointPreference) getCachedPreference(key);
                 if (pref != null) {
