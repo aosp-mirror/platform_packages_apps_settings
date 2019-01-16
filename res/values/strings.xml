@@ -10344,6 +10344,34 @@
     <!-- Mobile network settings screen, title of Mobile data switch preference [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_summary">Access data using mobile network</string>
 
+    <!-- Summary of the 'Mobile network' item on the Network & internet page when there is no mobile
+         service setup yet (eg no SIM card inserted and no eSIM configured). Tapping it leads to a
+         UI where the user can setup service. [CHAR LIMIT=50] -->
+    <string name="mobile_network_summary_add_a_network">Add a network</string>
+    <!-- Summary of the 'Mobile network' item on the Network & internet page when there is more than
+         one mobile service configured (aka "dual SIM") - it shows a count of SIM/eSIM and tapping
+         it leads to a page showing a list of the mobile service subscriptions. [CHAR LIMIT=40] -->
+    <plurals name="mobile_network_summary_count">
+        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> SIM</item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> SIMs</item>
+    </plurals>
+
+    <!-- Title of item shown at the bottom of the page listing multiple mobile service
+         subscriptions; tapping it leads to a UI to add more [CHAR LIMIT=40] -->
+    <string name="mobile_network_list_add_more">Add more</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is active and is tied to a physical SIM card [CHAR LIMIT=40] -->
+    <string name="mobile_network_active_sim">Active SIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is inactive and is tied to a physical SIM card [CHAR LIMIT=40] -->
+    <string name="mobile_network_inactive_sim">Inactive SIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is active and is tied to an eSIM profile [CHAR LIMIT=40] -->
+    <string name="mobile_network_active_esim">Active eSIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is inactive and is tied to an eSIM profile [CHAR LIMIT=40] -->
+    <string name="mobile_network_inactive_esim">Inactive eSIM</string>
+
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>
     <!-- Summary for preferred network type [CHAR LIMIT=NONE] -->

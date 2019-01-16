@@ -96,8 +96,11 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final WifiMasterSwitchPreferenceController wifiPreferenceController =
                 new WifiMasterSwitchPreferenceController(context, metricsFeatureProvider);
-        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
-                new MobileNetworkPreferenceController(context);
+        MobileNetworkPreferenceController mobileNetworkPreferenceController = null;
+        if (!FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            mobileNetworkPreferenceController = new MobileNetworkPreferenceController(context);
+        }
+
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
         final PrivateDnsPreferenceController privateDnsPreferenceController =
@@ -106,13 +109,21 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
             lifecycle.addObserver(wifiPreferenceController);
-            lifecycle.addObserver(mobileNetworkPreferenceController);
+            if (mobileNetworkPreferenceController != null) {
+                lifecycle.addObserver(mobileNetworkPreferenceController);
+            }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(mobileNetworkPreferenceController);
+
+        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            controllers.add(new MobileNetworkSummaryController(context, lifecycle));
+        }
+        if (mobileNetworkPreferenceController != null) {
+            controllers.add(mobileNetworkPreferenceController);
+        }
         controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
