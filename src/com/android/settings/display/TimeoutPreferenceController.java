@@ -13,6 +13,8 @@
  */
 package com.android.settings.display;
 
+import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
@@ -58,7 +60,7 @@ public class TimeoutPreferenceController extends AbstractPreferenceController im
     public void updateState(Preference preference) {
         final TimeoutListPreference timeoutListPreference = (TimeoutListPreference) preference;
         final long currentTimeout = Settings.System.getLong(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
+                SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
         timeoutListPreference.setValue(String.valueOf(currentTimeout));
         final DevicePolicyManager dpm =
                 (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -84,8 +86,7 @@ public class TimeoutPreferenceController extends AbstractPreferenceController im
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         try {
             int value = Integer.parseInt((String) newValue);
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.SCREEN_OFF_TIMEOUT, value);
+            Settings.System.putInt(mContext.getContentResolver(), SCREEN_OFF_TIMEOUT, value);
             updateTimeoutPreferenceDescription((TimeoutListPreference) preference, value);
         } catch (NumberFormatException e) {
             Log.e(TAG, "could not persist screen timeout setting", e);
@@ -93,7 +94,7 @@ public class TimeoutPreferenceController extends AbstractPreferenceController im
         return true;
     }
 
-    private static CharSequence getTimeoutDescription(
+    public static CharSequence getTimeoutDescription(
             long currentTimeout, CharSequence[] entries, CharSequence[] values) {
         if (currentTimeout < 0 || entries == null || values == null
                 || values.length != entries.length) {

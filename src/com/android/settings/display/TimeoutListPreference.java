@@ -26,7 +26,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog.Builder;
 
 import com.android.settings.R;
@@ -34,18 +33,18 @@ import com.android.settings.RestrictedListPreference;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TimeoutListPreference extends RestrictedListPreference {
     private static final String TAG = "TimeoutListPreference";
     private EnforcedAdmin mAdmin;
-    private CharSequence[] mInitialEntries;
-    private CharSequence[] mInitialValues;
+    private final CharSequence[] mInitialEntries;
+    private final CharSequence[] mInitialValues;
 
     public TimeoutListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        updateInitialValues();
+        mInitialEntries = getEntries();
+        mInitialValues = getEntryValues();
     }
 
     @Override
@@ -66,8 +65,13 @@ public class TimeoutListPreference extends RestrictedListPreference {
         if (mAdmin != null) {
             View footerView = dialog.findViewById(R.id.admin_disabled_other_options);
             footerView.findViewById(R.id.admin_more_details_link).setOnClickListener(
-                    view -> RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                            getContext(), mAdmin));
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                                    getContext(), mAdmin);
+                        }
+                    });
         }
     }
 
@@ -85,8 +89,8 @@ public class TimeoutListPreference extends RestrictedListPreference {
             maxTimeout = Long.MAX_VALUE;
         }
 
-        final ArrayList<CharSequence> revisedEntries = new ArrayList<>();
-        final ArrayList<CharSequence> revisedValues = new ArrayList<>();
+        ArrayList<CharSequence> revisedEntries = new ArrayList<CharSequence>();
+        ArrayList<CharSequence> revisedValues = new ArrayList<CharSequence>();
         for (int i = 0; i < mInitialValues.length; ++i) {
             long timeout = Long.parseLong(mInitialValues[i].toString());
             if (timeout <= maxTimeout) {
@@ -97,7 +101,7 @@ public class TimeoutListPreference extends RestrictedListPreference {
 
         // If there are no possible options for the user, then set this preference as disabled
         // by admin, otherwise remove the padlock in case it was set earlier.
-        if (revisedValues.isEmpty()) {
+        if (revisedValues.size() == 0) {
             setDisabledByAdmin(admin);
             return;
         } else {
@@ -113,7 +117,7 @@ public class TimeoutListPreference extends RestrictedListPreference {
                 setValue(String.valueOf(userPreference));
             } else if (revisedValues.size() > 0
                     && Long.parseLong(revisedValues.get(revisedValues.size() - 1).toString())
-                    == maxTimeout) {
+                            == maxTimeout) {
                 // If the last one happens to be the same as the max timeout, select that
                 setValue(String.valueOf(maxTimeout));
             } else {
@@ -123,37 +127,5 @@ public class TimeoutListPreference extends RestrictedListPreference {
                 setValue(revisedValues.get(revisedValues.size() - 1).toString());
             }
         }
-    }
-
-    @VisibleForTesting
-    void updateInitialValues() {
-        // Read default list of candidate values.
-        final CharSequence[] entries = getEntries();
-        final CharSequence[] values = getEntryValues();
-        // Filter out values based on config
-        final List<CharSequence> revisedEntries = new ArrayList<>();
-        final List<CharSequence> revisedValues = new ArrayList<>();
-        final long maxTimeout = getContext().getResources().getInteger(
-                R.integer.max_lock_after_timeout_ms);
-        if (entries == null || values == null) {
-            return;
-        }
-        Log.d(TAG, "max timeout: " + maxTimeout);
-        for (int i = 0; i < values.length; ++i) {
-            long timeout = Long.parseLong(values[i].toString());
-            if (timeout <= maxTimeout) {
-                Log.d(TAG, "keeping timeout: " + values[i]);
-                revisedEntries.add(entries[i]);
-                revisedValues.add(values[i]);
-            } else {
-                Log.d(TAG, "Dropping timeout: " + values[i]);
-            }
-        }
-
-        // Store final candidates in initial value lists.
-        mInitialEntries = revisedEntries.toArray(new CharSequence[0]);
-        setEntries(mInitialEntries);
-        mInitialValues = revisedValues.toArray(new CharSequence[0]);
-        setEntryValues(mInitialValues);
     }
 }
