@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +33,6 @@ import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -209,10 +209,10 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         }
 
         if (isChecked) {
-            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_WIFI_ON);
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_WIFI_ON);
         } else {
             // Log if user was connected at the time of switching off.
-            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_WIFI_OFF,
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_WIFI_OFF,
                     mConnected.get());
         }
         if (!mWifiManager.setWifiEnabled(isChecked)) {

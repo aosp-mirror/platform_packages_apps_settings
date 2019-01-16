@@ -19,8 +19,8 @@ package com.android.settings.applications;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS_ASK;
 import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
-import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_UNDEFINED;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
@@ -40,7 +40,6 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -224,6 +223,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_APP_LAUNCH;
+        return SettingsEnums.APPLICATIONS_APP_LAUNCH;
     }
 }

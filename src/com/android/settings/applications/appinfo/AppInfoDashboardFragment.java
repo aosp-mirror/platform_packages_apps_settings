@@ -20,6 +20,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,13 +42,11 @@ import android.view.MenuItem;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.applications.specialaccess.pictureinpicture
-        .PictureInPictureDetailPreferenceController;
+import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetailPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -209,7 +208,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_INSTALLED_APP_DETAILS;
+        return SettingsEnums.APPLICATIONS_INSTALLED_APP_DETAILS;
     }
 
     @Override
@@ -459,7 +458,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
         mMetricsFeatureProvider.action(
-                getContext(), MetricsEvent.ACTION_SETTINGS_UNINSTALL_APP);
+                getContext(), SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP);
         startActivityForResult(uninstallIntent, REQUEST_UNINSTALL);
     }
 

@@ -16,10 +16,10 @@
 
 package com.android.settings.applications.specialaccess.deviceadmin;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -34,7 +34,7 @@ public class DeviceAdminSettings extends DashboardFragment {
     static final String TAG = "DeviceAdminSettings";
 
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEVICE_ADMIN_SETTINGS;
+        return SettingsEnums.DEVICE_ADMIN_SETTINGS;
     }
 
     @Override

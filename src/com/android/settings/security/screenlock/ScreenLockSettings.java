@@ -16,13 +16,13 @@
 
 package com.android.settings.security.screenlock;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -47,7 +47,7 @@ public class ScreenLockSettings extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SCREEN_LOCK_SETTINGS;
+        return SettingsEnums.SCREEN_LOCK_SETTINGS;
     }
 
     @Override

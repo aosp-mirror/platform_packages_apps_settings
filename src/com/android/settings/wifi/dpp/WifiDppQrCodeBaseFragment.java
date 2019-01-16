@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.R;
 
 /**
  * There are below 4 fragments for Wi-Fi DPP UI flow, to reduce redundant code of UI components,

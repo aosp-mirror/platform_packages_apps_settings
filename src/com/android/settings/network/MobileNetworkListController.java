@@ -26,18 +26,18 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.ArrayMap;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 import java.util.Map;
-
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * This populates the entries on a page which lists all available mobile subscriptions. Each entry

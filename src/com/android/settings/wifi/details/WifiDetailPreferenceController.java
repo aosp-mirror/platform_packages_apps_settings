@@ -21,6 +21,7 @@ import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -53,17 +54,15 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settings.wifi.dpp.WifiDppConfiguratorActivity;
-import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -551,7 +550,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             }
         }
         mMetricsFeatureProvider.action(
-                mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
+                mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
         mFragment.getActivity().finish();
     }
 
@@ -593,7 +592,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      */
     private void signIntoNetwork() {
         mMetricsFeatureProvider.action(
-                mFragment.getActivity(), MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
+                mFragment.getActivity(), SettingsEnums.ACTION_WIFI_SIGNIN);
         mConnectivityManager.startCaptivePortalApp(mNetwork);
     }
 

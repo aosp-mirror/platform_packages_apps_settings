@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -23,7 +24,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -65,7 +65,7 @@ public class BluetoothDeviceRenamePreferenceController extends
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(getPreferenceKey(), preference.getKey()) && mFragment != null) {
             mMetricsFeatureProvider.action(mContext,
-                    MetricsProto.MetricsEvent.ACTION_BLUETOOTH_RENAME);
+                    SettingsEnums.ACTION_BLUETOOTH_RENAME);
             LocalDeviceNameDialogFragment.newInstance()
                     .show(mFragment.getFragmentManager(), LocalDeviceNameDialogFragment.TAG);
             return true;

@@ -19,6 +19,7 @@ package com.android.settings;
 import android.annotation.LayoutRes;
 import android.annotation.Nullable;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -48,7 +49,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
@@ -68,7 +68,7 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.USER_CREDENTIALS;
+        return SettingsEnums.USER_CREDENTIALS;
     }
 
     @Override
@@ -165,7 +165,7 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_USER_CREDENTIAL;
+            return SettingsEnums.DIALOG_USER_CREDENTIAL;
         }
 
         /**

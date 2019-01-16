@@ -16,6 +16,7 @@
 package com.android.settings.applications.appinfo;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -74,7 +74,7 @@ public class ButtonActionDialogFragment extends InstrumentedDialogFragment imple
     public int getMetricsCategory() {
         //TODO(35810915): update the metrics label because for now this fragment will be shown
         // in two screens
-        return MetricsProto.MetricsEvent.DIALOG_APP_INFO_ACTION;
+        return SettingsEnums.DIALOG_APP_INFO_ACTION;
     }
 
     @Override

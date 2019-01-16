@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,7 +41,6 @@ import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -66,7 +66,7 @@ public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_KEYBOARD_LAYOUT;
+        return SettingsEnums.DIALOG_KEYBOARD_LAYOUT;
     }
 
     @Override

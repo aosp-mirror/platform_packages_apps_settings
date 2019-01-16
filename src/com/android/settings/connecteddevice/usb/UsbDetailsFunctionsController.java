@@ -21,7 +21,6 @@ import static android.net.ConnectivityManager.TETHERING_USB;
 
 import android.content.Context;
 import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbPort;
 import android.net.ConnectivityManager;
 
 import androidx.annotation.VisibleForTesting;

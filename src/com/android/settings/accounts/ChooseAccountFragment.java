@@ -16,12 +16,12 @@
 
 package com.android.settings.accounts;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -43,7 +43,7 @@ public class ChooseAccountFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCOUNTS_CHOOSE_ACCOUNT_ACTIVITY;
+        return SettingsEnums.ACCOUNTS_CHOOSE_ACCOUNT_ACTIVITY;
     }
 
     @Override

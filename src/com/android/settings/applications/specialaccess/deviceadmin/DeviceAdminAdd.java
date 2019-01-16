@@ -60,7 +60,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.EventLogTags;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -488,8 +487,8 @@ public class DeviceAdminAdd extends Activity {
     }
 
     void logSpecialPermissionChange(boolean allow, String packageName) {
-        int logCategory = allow ? MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_ALLOW :
-                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_DENY;
+        int logCategory = allow ? SettingsEnums.APP_SPECIAL_PERMISSION_ADMIN_ALLOW :
+                SettingsEnums.APP_SPECIAL_PERMISSION_ADMIN_DENY;
         FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(
                 SettingsEnums.PAGE_UNKNOWN,
                 logCategory,

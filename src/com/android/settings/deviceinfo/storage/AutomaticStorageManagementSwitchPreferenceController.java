@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo.storage;
 
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -25,7 +26,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -86,7 +86,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
         mMetricsFeatureProvider.action(mContext,
-                MetricsEvent.ACTION_TOGGLE_STORAGE_MANAGER, isChecked);
+                SettingsEnums.ACTION_TOGGLE_STORAGE_MANAGER, isChecked);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
                 isChecked ? 1 : 0);

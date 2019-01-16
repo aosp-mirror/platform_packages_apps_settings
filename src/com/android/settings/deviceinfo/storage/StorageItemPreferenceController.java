@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +34,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.applications.manageapplications.ManageApplications;
@@ -155,7 +155,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             case FILES_KEY:
                 intent = getFilesIntent();
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(
-                        mContext, MetricsEvent.STORAGE_FILES);
+                        mContext, SettingsEnums.STORAGE_FILES);
                 break;
             case SYSTEM_KEY:
                 final SystemInfoFragment dialog = new SystemInfoFragment();

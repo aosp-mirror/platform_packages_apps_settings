@@ -17,13 +17,13 @@
 package com.android.settings.wifi;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -75,7 +75,7 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.WIFI_SCANNING_NEEDED_DIALOG;
+        return SettingsEnums.WIFI_SCANNING_NEEDED_DIALOG;
     }
 
     protected void startScanningDialog() {

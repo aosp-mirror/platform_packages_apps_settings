@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -29,7 +30,6 @@ import android.widget.Button;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.DonutView;
@@ -81,7 +81,7 @@ public class StorageSummaryDonutPreference extends Preference implements View.On
         if (v != null && R.id.deletion_helper_button == v.getId()) {
             Context context = getContext();
             FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(
-                    context, MetricsEvent.STORAGE_FREE_UP_SPACE_NOW);
+                    context, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
             Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
             getContext().startActivity(intent);
         }

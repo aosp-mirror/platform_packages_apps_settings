@@ -22,6 +22,7 @@ import android.annotation.UiThread;
 import android.annotation.WorkerThread;
 import android.app.Activity;
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -54,7 +55,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
 import com.android.internal.annotations.GuardedBy;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
@@ -114,7 +114,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.VPN;
+        return SettingsEnums.VPN;
     }
 
     @Override

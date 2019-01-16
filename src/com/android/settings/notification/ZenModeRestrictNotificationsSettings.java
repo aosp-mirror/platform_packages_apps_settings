@@ -16,11 +16,11 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -71,7 +71,7 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_ZEN_NOTIFICATIONS;
+        return SettingsEnums.SETTINGS_ZEN_NOTIFICATIONS;
     }
 
     /**

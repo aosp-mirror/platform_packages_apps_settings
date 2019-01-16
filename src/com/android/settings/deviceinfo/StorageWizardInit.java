@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -25,7 +26,6 @@ import android.os.storage.VolumeInfo;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -72,7 +72,7 @@ public class StorageWizardInit extends StorageWizardBase {
         if (view != null) {
             // User made an explicit choice for external
             FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                    MetricsEvent.ACTION_STORAGE_INIT_EXTERNAL);
+                    SettingsEnums.ACTION_STORAGE_INIT_EXTERNAL);
         }
 
         if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
@@ -95,7 +95,7 @@ public class StorageWizardInit extends StorageWizardBase {
         if (view != null) {
             // User made an explicit choice for internal
             FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
-                    MetricsEvent.ACTION_STORAGE_INIT_INTERNAL);
+                    SettingsEnums.ACTION_STORAGE_INIT_INTERNAL);
         }
 
         StorageWizardFormatConfirm.showPrivate(this, mDisk.getId());

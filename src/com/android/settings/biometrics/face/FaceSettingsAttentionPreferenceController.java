@@ -19,11 +19,11 @@ package com.android.settings.biometrics.face;
 import android.content.Context;
 import android.hardware.face.FaceManager;
 
-import com.android.settings.Utils;
-import com.android.settings.core.TogglePreferenceController;
-
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.Utils;
+import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller that manages the ability to use face authentication with/without

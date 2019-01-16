@@ -18,6 +18,7 @@ package com.android.settings.applications.specialaccess.pictureinpicture;
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
 import android.annotation.Nullable;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -37,7 +38,6 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -192,7 +192,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_MANAGE_PICTURE_IN_PICTURE;
+        return SettingsEnums.SETTINGS_MANAGE_PICTURE_IN_PICTURE;
     }
 
     /**

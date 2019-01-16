@@ -16,17 +16,16 @@
 
 package com.android.settings.accessibility;
 
-import android.provider.SearchIndexableResource;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
+import android.provider.SearchIndexableResource;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -71,7 +70,7 @@ public final class AccessibilityContentTimeoutPreferenceFragment extends Dashboa
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY;
+        return SettingsEnums.ACCESSIBILITY;
     }
 
     @Override

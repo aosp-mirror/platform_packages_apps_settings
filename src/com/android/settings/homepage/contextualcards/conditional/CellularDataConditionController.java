@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +24,6 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -82,7 +82,7 @@ public class CellularDataConditionController implements ConditionalCardControlle
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_CELLULAR_DATA)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_CELLULAR_DATA)
                 .setActionText(mAppContext.getText(R.string.condition_turn_on))
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_cellular_title))

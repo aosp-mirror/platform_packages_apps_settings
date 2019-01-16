@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
@@ -30,7 +31,6 @@ import android.view.MenuInflater;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -75,7 +75,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BLUETOOTH_DEVICE_PICKER;
+        return SettingsEnums.BLUETOOTH_DEVICE_PICKER;
     }
 
     @Override

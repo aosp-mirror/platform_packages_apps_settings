@@ -16,11 +16,11 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.applications.DefaultAppInfo;
 
@@ -39,7 +39,7 @@ public class DefaultBrowserPicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_BROWSER_PICKER;
+        return SettingsEnums.DEFAULT_BROWSER_PICKER;
     }
 
     @Override

@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,6 @@ import android.content.pm.UserInfo;
 import android.os.Build;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.applications.DefaultAppInfo;
 
@@ -52,7 +52,7 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_HOME_PICKER;
+        return SettingsEnums.DEFAULT_HOME_PICKER;
     }
 
     @Override

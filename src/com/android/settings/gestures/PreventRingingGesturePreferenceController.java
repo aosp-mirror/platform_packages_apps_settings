@@ -24,6 +24,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -36,10 +40,6 @@ import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 public class PreventRingingGesturePreferenceController extends AbstractPreferenceController
         implements RadioButtonPreference.OnClickListener, LifecycleObserver, OnSaveInstanceState,

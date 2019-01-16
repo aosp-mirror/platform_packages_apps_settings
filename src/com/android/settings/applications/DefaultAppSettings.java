@@ -16,12 +16,12 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.assist.DefaultAssistPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
@@ -69,7 +69,7 @@ public class DefaultAppSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_ADVANCED;
+        return SettingsEnums.APPLICATIONS_ADVANCED;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {

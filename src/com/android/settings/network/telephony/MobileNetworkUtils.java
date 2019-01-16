@@ -27,7 +27,6 @@ import android.database.Cursor;
 import android.os.PersistableBundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import android.service.carrier.CarrierMessagingService;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
@@ -45,7 +44,6 @@ import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
-import com.android.settings.R;
 
 import java.util.Arrays;
 import java.util.List;

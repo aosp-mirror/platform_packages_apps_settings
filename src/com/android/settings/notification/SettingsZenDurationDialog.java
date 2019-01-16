@@ -17,9 +17,9 @@
 package com.android.settings.notification;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class SettingsZenDurationDialog extends InstrumentedDialogFragment {
@@ -32,6 +32,6 @@ public class SettingsZenDurationDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.NOTIFICATION_ZEN_MODE_DURATION_DIALOG;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_DURATION_DIALOG;
     }
 }

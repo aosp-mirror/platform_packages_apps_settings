@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;

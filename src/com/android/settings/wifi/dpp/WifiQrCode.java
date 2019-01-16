@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.text.TextUtils;
 

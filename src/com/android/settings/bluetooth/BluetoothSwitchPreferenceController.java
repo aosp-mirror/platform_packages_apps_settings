@@ -15,13 +15,12 @@
  */
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.location.ScanningSettings;
@@ -67,7 +66,7 @@ public class BluetoothSwitchPreferenceController
         mBluetoothEnabler = new BluetoothEnabler(context,
                 switchController,
                 FeatureFactory.getFactory(context).getMetricsFeatureProvider(),
-                MetricsEvent.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
+                SettingsEnums.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
                 mRestrictionUtils);
         mBluetoothEnabler.setToggleCallback(this);
     }
@@ -96,7 +95,7 @@ public class BluetoothSwitchPreferenceController
         // send users to scanning settings if they click on the link in the summary text
         new SubSettingLauncher(mContext)
                 .setDestination(ScanningSettings.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.BLUETOOTH_FRAGMENT)
+                .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_FRAGMENT)
                 .launch();
     }
 

@@ -17,13 +17,13 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.annotation.Nullable;
+import android.app.settings.SettingsEnums;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 
 import java.util.LinkedList;
@@ -130,7 +130,7 @@ public class FingerprintRemoveSidecar extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FINGERPRINT_REMOVE_SIDECAR;
+        return SettingsEnums.FINGERPRINT_REMOVE_SIDECAR;
     }
 
 }

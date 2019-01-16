@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -25,7 +26,6 @@ import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -38,7 +38,7 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_EMERGENCY_APP_PICKER;
+        return SettingsEnums.DEFAULT_EMERGENCY_APP_PICKER;
     }
 
     @Override

@@ -20,6 +20,7 @@ package com.android.settings.biometrics.fingerprint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,8 +34,6 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
@@ -45,7 +44,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
@@ -266,7 +264,7 @@ public class FingerprintSettings extends SubSettings {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.FINGERPRINT;
+            return SettingsEnums.FINGERPRINT;
         }
 
         @Override
@@ -672,7 +670,7 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public int getMetricsCategory() {
-                return MetricsEvent.DIALOG_FINGERPINT_EDIT;
+                return SettingsEnums.DIALOG_FINGERPINT_EDIT;
             }
 
             @Override
@@ -697,7 +695,7 @@ public class FingerprintSettings extends SubSettings {
                     final int fingerprintId = mFp.getBiometricId();
                     Log.v(TAG, "Removing fpId=" + fingerprintId);
                     mMetricsFeatureProvider.action(getContext(),
-                            MetricsEvent.ACTION_FINGERPRINT_DELETE,
+                            SettingsEnums.ACTION_FINGERPRINT_DELETE,
                             fingerprintId);
                     FingerprintSettingsFragment parent
                             = (FingerprintSettingsFragment) getTargetFragment();
@@ -744,7 +742,7 @@ public class FingerprintSettings extends SubSettings {
                                         if (!TextUtils.equals(newName, name)) {
                                             Log.d(TAG, "rename " + name + " to " + newName);
                                             mMetricsFeatureProvider.action(getContext(),
-                                                    MetricsEvent.ACTION_FINGERPRINT_RENAME,
+                                                    SettingsEnums.ACTION_FINGERPRINT_RENAME,
                                                     mFp.getBiometricId());
                                             FingerprintSettingsFragment parent
                                                     = (FingerprintSettingsFragment)
@@ -796,7 +794,7 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public int getMetricsCategory() {
-                return MetricsEvent.DIALOG_FINGERPINT_EDIT;
+                return SettingsEnums.DIALOG_FINGERPINT_EDIT;
             }
         }
 
@@ -806,7 +804,7 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public int getMetricsCategory() {
-                return MetricsEvent.DIALOG_FINGERPINT_DELETE_LAST;
+                return SettingsEnums.DIALOG_FINGERPINT_DELETE_LAST;
             }
 
             @Override

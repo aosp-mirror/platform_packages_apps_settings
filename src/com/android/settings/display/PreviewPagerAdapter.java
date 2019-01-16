@@ -19,11 +19,9 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
-import android.view.ViewStub.OnInflateListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -31,8 +29,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.PagerAdapter;
-
-import com.android.settings.support.actionbar.HelpResourceProvider;
 
 /**
  * A PagerAdapter used by PreviewSeekBarPreferenceFragment that for showing multiple preview screen

@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Animatable2;
@@ -40,7 +41,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
@@ -112,7 +112,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_FINGERPINT_ERROR;
+            return SettingsEnums.DIALOG_FINGERPINT_ERROR;
         }
 
         @Override
@@ -419,7 +419,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FINGERPRINT_ENROLLING;
+        return SettingsEnums.FINGERPRINT_ENROLLING;
     }
 
     public static class IconTouchDialog extends InstrumentedDialogFragment {
@@ -441,7 +441,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_FINGERPRINT_ICON_TOUCH;
+            return SettingsEnums.DIALOG_FINGERPRINT_ICON_TOUCH;
         }
     }
 }

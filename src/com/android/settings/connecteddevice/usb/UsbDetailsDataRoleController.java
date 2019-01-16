@@ -21,7 +21,6 @@ import static android.hardware.usb.UsbPortStatus.DATA_ROLE_HOST;
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_NONE;
 
 import android.content.Context;
-import android.hardware.usb.UsbPort;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;

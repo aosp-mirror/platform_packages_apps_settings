@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
@@ -24,7 +25,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
@@ -156,7 +156,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FINGERPRINT_ENROLL_INTRO;
+        return SettingsEnums.FINGERPRINT_ENROLL_INTRO;
     }
 
     @Override

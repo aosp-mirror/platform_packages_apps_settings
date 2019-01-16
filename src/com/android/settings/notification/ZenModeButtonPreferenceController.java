@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
 import android.view.View;
@@ -24,7 +25,6 @@ import android.widget.Button;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -70,7 +70,7 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
                     .findViewById(R.id.zen_mode_settings_turn_off_button);
             mZenButtonOff.setOnClickListener(v -> {
                 mMetricsFeatureProvider.action(mContext,
-                        MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                        SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                 mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF);
             });
         }
@@ -100,21 +100,21 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             case Settings.Secure.ZEN_DURATION_PROMPT:
                 mZenButtonOn.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
-                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                     new SettingsEnableZenModeDialog().show(mFragment, TAG);
                 });
                 break;
             case Settings.Secure.ZEN_DURATION_FOREVER:
                 mZenButtonOn.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
-                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                     mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
                 });
                 break;
             default:
                 mZenButtonOn.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
-                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                            SettingsEnums.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
                     mBackend.setZenModeForDuration(zenDuration);
                 });
         }

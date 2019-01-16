@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.ContentObserver;
@@ -37,7 +38,6 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
@@ -136,7 +136,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat implements 
     protected void performClick(View view) {
         final Context context = getContext();
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .action(context, MetricsEvent.ACTION_CELL_DATA_TOGGLE, !mChecked);
+                .action(context, SettingsEnums.ACTION_CELL_DATA_TOGGLE, !mChecked);
         final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(
                 mSubId);
         final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();

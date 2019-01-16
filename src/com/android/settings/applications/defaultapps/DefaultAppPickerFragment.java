@@ -29,7 +29,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -71,7 +70,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
     protected void onRadioButtonConfirmed(String selectedKey) {
         mMetricsFeatureProvider.action(
                 mMetricsFeatureProvider.getAttribution(getActivity()),
-                MetricsEvent.ACTION_SETTINGS_UPDATE_DEFAULT_APP,
+                SettingsEnums.ACTION_SETTINGS_UPDATE_DEFAULT_APP,
                 getMetricsCategory(),
                 selectedKey,
                  0 /* value */);
@@ -113,7 +112,7 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DEFAULT_APP_PICKER_CONFIRMATION_DIALOG;
+            return SettingsEnums.DEFAULT_APP_PICKER_CONFIRMATION_DIALOG;
         }
 
         /**

@@ -16,14 +16,13 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController
-        .PREF_KEY_ENCRYPTION_DETAIL_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_DETAIL_PAGE;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -46,7 +45,7 @@ public class EncryptionAndCredential extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ENCRYPTION_AND_CREDENTIAL;
+        return SettingsEnums.ENCRYPTION_AND_CREDENTIAL;
     }
 
     @Override

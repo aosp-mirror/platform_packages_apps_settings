@@ -18,10 +18,10 @@ package com.android.settings.accessibility;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.core.SubSettingLauncher;
@@ -53,13 +53,13 @@ public class HearingAidDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_ACCESSIBILITY_HEARINGAID;
+        return SettingsEnums.DIALOG_ACCESSIBILITY_HEARINGAID;
     }
 
     private void launchBluetoothAddDeviceSetting() {
         new SubSettingLauncher(getActivity())
                 .setDestination(BluetoothPairingDetail.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.ACCESSIBILITY)
+                .setSourceMetricsCategory(SettingsEnums.ACCESSIBILITY)
                 .launch();
     }
 }

@@ -18,11 +18,17 @@ package com.android.settings.notification;
 
 import android.app.Application;
 import android.app.NotificationChannel;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.text.BidiFormatter;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -33,13 +39,6 @@ import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.core.text.BidiFormatter;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Adds a preference to the PreferenceScreen for each notification channel that can bypass DND.
@@ -139,7 +138,7 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
                                 .setTitleRes(R.string.notification_channel_title)
                                 .setResultListener(mHostFragment, 0)
                                 .setSourceMetricsCategory(
-                                        MetricsEvent.NOTIFICATION_ZEN_MODE_OVERRIDING_APP)
+                                        SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP)
                                 .launch();
                         return true;
                     }

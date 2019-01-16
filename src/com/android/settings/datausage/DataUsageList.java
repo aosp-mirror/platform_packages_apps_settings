@@ -22,6 +22,7 @@ import static android.net.TrafficStats.UID_TETHERING;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStats.Bucket;
 import android.content.Context;
@@ -31,16 +32,13 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -55,14 +53,13 @@ import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.net.NetworkCycleChartDataLoader;
 import com.android.settingslib.net.NetworkCycleChartData;
+import com.android.settingslib.net.NetworkCycleChartDataLoader;
 import com.android.settingslib.net.NetworkStatsSummaryLoader;
 import com.android.settingslib.net.UidDetailProvider;
 
@@ -122,7 +119,7 @@ public class DataUsageList extends DataUsageBaseFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DATA_USAGE_LIST;
+        return SettingsEnums.DATA_USAGE_LIST;
     }
 
     @Override

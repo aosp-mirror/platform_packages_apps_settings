@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.UserInfo;
@@ -27,8 +28,6 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -70,7 +69,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.USER_DETAILS;
+        return SettingsEnums.USER_DETAILS;
     }
 
     @Override
@@ -198,11 +197,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE:
-                return MetricsProto.MetricsEvent.DIALOG_USER_REMOVE;
+                return SettingsEnums.DIALOG_USER_REMOVE;
             case DIALOG_CONFIRM_ENABLE_CALLING:
-                return MetricsProto.MetricsEvent.DIALOG_USER_ENABLE_CALLING;
+                return SettingsEnums.DIALOG_USER_ENABLE_CALLING;
             case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
-                return MetricsProto.MetricsEvent.DIALOG_USER_ENABLE_CALLING_AND_SMS;
+                return SettingsEnums.DIALOG_USER_ENABLE_CALLING_AND_SMS;
             default:
                 return 0;
         }

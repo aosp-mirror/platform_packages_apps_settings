@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -29,7 +30,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -79,7 +79,7 @@ public class StorageSlice implements CustomSliceable {
         final String screenTitle = mContext.getText(R.string.storage_label).toString();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 StorageDashboardFragment.class.getName(), "" /* key */, screenTitle,
-                MetricsProto.MetricsEvent.SLICE)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(CustomSliceRegistry.STORAGE_SLICE_URI);
     }

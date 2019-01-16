@@ -18,6 +18,7 @@ package com.android.settings.wifi.p2p;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,7 +51,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -165,7 +165,7 @@ public class WifiP2pSettings extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WIFI_P2P;
+        return SettingsEnums.WIFI_P2P;
     }
 
     @Override
@@ -507,13 +507,13 @@ public class WifiP2pSettings extends DashboardFragment
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DIALOG_DISCONNECT:
-                return MetricsEvent.DIALOG_WIFI_P2P_DISCONNECT;
+                return SettingsEnums.DIALOG_WIFI_P2P_DISCONNECT;
             case DIALOG_CANCEL_CONNECT:
-                return MetricsEvent.DIALOG_WIFI_P2P_CANCEL_CONNECT;
+                return SettingsEnums.DIALOG_WIFI_P2P_CANCEL_CONNECT;
             case DIALOG_RENAME:
-                return MetricsEvent.DIALOG_WIFI_P2P_RENAME;
+                return SettingsEnums.DIALOG_WIFI_P2P_RENAME;
             case DIALOG_DELETE_GROUP:
-                return MetricsEvent.DIALOG_WIFI_P2P_DELETE_GROUP;
+                return SettingsEnums.DIALOG_WIFI_P2P_DELETE_GROUP;
         }
         return 0;
     }

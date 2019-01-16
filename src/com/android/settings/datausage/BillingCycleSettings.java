@@ -18,6 +18,7 @@ import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -39,7 +40,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -193,7 +193,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BILLING_CYCLE;
+        return SettingsEnums.BILLING_CYCLE;
     }
 
     @Override
@@ -340,7 +340,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_BILLING_BYTE_LIMIT;
+            return SettingsEnums.DIALOG_BILLING_BYTE_LIMIT;
         }
     }
 
@@ -366,7 +366,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_BILLING_CYCLE;
+            return SettingsEnums.DIALOG_BILLING_CYCLE;
         }
 
         @Override
@@ -446,7 +446,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_BILLING_CONFIRM_LIMIT;
+            return SettingsEnums.DIALOG_BILLING_CONFIRM_LIMIT;
         }
 
         @Override

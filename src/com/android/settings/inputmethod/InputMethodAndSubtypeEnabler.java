@@ -16,12 +16,12 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
@@ -31,7 +31,7 @@ public class InputMethodAndSubtypeEnabler extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.INPUTMETHOD_SUBTYPE_ENABLER;
+        return SettingsEnums.INPUTMETHOD_SUBTYPE_ENABLER;
     }
 
     @Override

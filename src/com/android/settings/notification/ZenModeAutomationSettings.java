@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ import android.view.MenuItem;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -86,7 +86,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
     }
 
     protected static ManagedServiceSettings.Config getConditionProviderConfig() {

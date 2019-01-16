@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi.calling;
 
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -29,7 +30,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.android.ims.ImsManager;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.search.actionbar.SearchMenuController;
@@ -55,7 +55,7 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WIFI_CALLING;
+        return SettingsEnums.WIFI_CALLING;
     }
 
     @Override

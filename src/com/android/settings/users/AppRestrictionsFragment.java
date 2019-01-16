@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -53,7 +54,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -244,7 +244,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.USERS_APP_RESTRICTIONS;
+        return SettingsEnums.USERS_APP_RESTRICTIONS;
     }
 
     @Override

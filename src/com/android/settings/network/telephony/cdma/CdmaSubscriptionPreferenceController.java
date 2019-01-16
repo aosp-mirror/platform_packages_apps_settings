@@ -19,13 +19,11 @@ package com.android.settings.network.telephony.cdma;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
 
 import com.android.internal.telephony.Phone;
 import com.android.settings.network.telephony.MobileNetworkUtils;

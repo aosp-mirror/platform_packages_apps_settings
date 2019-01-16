@@ -16,11 +16,11 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -55,7 +55,7 @@ public class LowBatteryTip extends EarlyWarningTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_LOW_BATTERY_TIP,
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_LOW_BATTERY_TIP,
                 mState);
     }
 

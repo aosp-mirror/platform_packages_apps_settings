@@ -19,7 +19,6 @@ package com.android.settings.development;
 import android.content.Context;
 import android.sysprop.DisplayProperties;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 

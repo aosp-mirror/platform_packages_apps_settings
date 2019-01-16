@@ -16,10 +16,10 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -36,7 +36,7 @@ public class AutofillPicker extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_AUTOFILL_PICKER;
+        return SettingsEnums.DEFAULT_AUTOFILL_PICKER;
     }
 
     @Override

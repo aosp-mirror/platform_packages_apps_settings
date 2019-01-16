@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.widget.MasterCheckBoxPreference;
@@ -56,7 +56,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_APP_NOTIFICATION;
+        return SettingsEnums.NOTIFICATION_APP_NOTIFICATION;
     }
 
     @Override

@@ -16,12 +16,12 @@
 
 package com.android.settings.display;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
@@ -40,7 +40,7 @@ public class VrDisplayPreferencePicker extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.VR_DISPLAY_PREFERENCE;
+        return SettingsEnums.VR_DISPLAY_PREFERENCE;
     }
 
     @Override

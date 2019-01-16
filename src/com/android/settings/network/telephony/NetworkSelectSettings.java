@@ -37,7 +37,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -162,7 +161,7 @@ public class NetworkSelectSettings extends DashboardFragment {
             mSelectedPreference.setSummary(R.string.network_connecting);
 
             mMetricsFeatureProvider.action(getContext(),
-                    MetricsEvent.ACTION_MOBILE_NETWORK_MANUAL_SELECT_NETWORK);
+                    SettingsEnums.ACTION_MOBILE_NETWORK_MANUAL_SELECT_NETWORK);
 
             // Set summary as "Disconnected" to the previously connected network
             if (mConnectedPreferenceCategory.getPreferenceCount() > 0) {

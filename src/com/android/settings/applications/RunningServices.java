@@ -15,6 +15,7 @@
  */
 package com.android.settings.applications;
 
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.LoadingViewController;
@@ -110,7 +110,7 @@ public class RunningServices extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.RUNNING_SERVICES;
+        return SettingsEnums.RUNNING_SERVICES;
     }
 
     private final Runnable mRunningProcessesAvail = new Runnable() {

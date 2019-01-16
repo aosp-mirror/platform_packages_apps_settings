@@ -16,6 +16,7 @@
 
 package com.android.settings.deletionhelper;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
@@ -28,7 +29,6 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -138,7 +138,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.STORAGE_MANAGER_SETTINGS;
+        return SettingsEnums.STORAGE_MANAGER_SETTINGS;
     }
 
     @Override

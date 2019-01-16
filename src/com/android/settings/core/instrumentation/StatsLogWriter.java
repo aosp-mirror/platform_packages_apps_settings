@@ -18,8 +18,8 @@ package com.android.settings.core.instrumentation;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.util.StatsLog;
 import android.util.Pair;
+import android.util.StatsLog;
 
 import com.android.settingslib.core.instrumentation.LogWriter;
 

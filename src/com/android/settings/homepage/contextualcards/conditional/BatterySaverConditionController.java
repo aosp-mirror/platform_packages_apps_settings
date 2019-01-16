@@ -16,10 +16,10 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.PowerManager;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
@@ -60,7 +60,7 @@ public class BatterySaverConditionController implements ConditionalCardControlle
     public void onPrimaryClick(Context context) {
         new SubSettingLauncher(context)
                 .setDestination(BatterySaverSettings.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
+                .setSourceMetricsCategory(SettingsEnums.DASHBOARD_SUMMARY)
                 .setTitleRes(R.string.battery_saver)
                 .launch();
     }
@@ -75,7 +75,7 @@ public class BatterySaverConditionController implements ConditionalCardControlle
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_BATTERY_SAVER)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_BATTERY_SAVER)
                 .setActionText(mAppContext.getText(R.string.condition_turn_off))
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_battery_title))

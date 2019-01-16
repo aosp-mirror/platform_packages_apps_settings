@@ -24,7 +24,6 @@ import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
-import android.hardware.Camera.PreviewCallback;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -33,6 +32,9 @@ import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.WindowManager;
+
+import androidx.annotation.VisibleForTesting;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -40,6 +42,7 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -47,8 +50,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Manage the camera for the QR scanner and help the decoder to get the image inside the scanning

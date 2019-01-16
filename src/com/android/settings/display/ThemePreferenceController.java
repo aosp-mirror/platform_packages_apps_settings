@@ -13,8 +13,8 @@
  */
 package com.android.settings.display;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_THEME;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
@@ -70,7 +70,7 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_THEME.equals(preference.getKey())) {
-            mMetricsFeatureProvider.action(mContext, ACTION_THEME);
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_THEME);
         }
         return false;
     }

@@ -22,7 +22,6 @@ import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
@@ -65,14 +64,14 @@ public class RestrictAppAction extends BatteryTipAction {
             if (CollectionUtils.isEmpty(appInfo.anomalyTypes)) {
                 // Only log context if there is no anomaly type
                 mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
-                        MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP,
+                        SettingsEnums.ACTION_TIP_RESTRICT_APP,
                         metricsKey,
                         packageName,
                         0);
             } else {
                 for (int type : appInfo.anomalyTypes) {
                     mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
-                            MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP,
+                            SettingsEnums.ACTION_TIP_RESTRICT_APP,
                             metricsKey,
                             packageName,
                             type);

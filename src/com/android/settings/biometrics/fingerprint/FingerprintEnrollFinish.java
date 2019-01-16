@@ -16,12 +16,12 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
@@ -105,6 +105,6 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FINGERPRINT_ENROLL_FINISH;
+        return SettingsEnums.FINGERPRINT_ENROLL_FINISH;
     }
 }

@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.AutomaticZenRule;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
@@ -33,7 +34,6 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -180,7 +180,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_EVENT_RULE;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_EVENT_RULE;
     }
 
     private List<CalendarInfo> getCalendars(Context context) {

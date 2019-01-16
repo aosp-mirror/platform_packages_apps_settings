@@ -50,7 +50,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.MasterCheckBoxPreference;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;

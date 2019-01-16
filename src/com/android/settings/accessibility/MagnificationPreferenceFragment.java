@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -30,7 +31,6 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -62,7 +62,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_SCREEN_MAGNIFICATION_SETTINGS;
+        return SettingsEnums.ACCESSIBILITY_SCREEN_MAGNIFICATION_SETTINGS;
     }
 
     @Override

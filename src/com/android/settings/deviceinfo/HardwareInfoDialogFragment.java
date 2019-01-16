@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -28,7 +29,6 @@ import android.widget.TextView;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -38,7 +38,7 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_SETTINGS_HARDWARE_INFO;
+        return SettingsEnums.DIALOG_SETTINGS_HARDWARE_INFO;
     }
 
     public static HardwareInfoDialogFragment newInstance() {

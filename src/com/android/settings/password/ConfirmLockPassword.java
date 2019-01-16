@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -41,7 +42,6 @@ import android.widget.TextView.OnEditorActionListener;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.TextViewInputDisabler;
@@ -274,7 +274,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.CONFIRM_LOCK_PASSWORD;
+            return SettingsEnums.CONFIRM_LOCK_PASSWORD;
         }
 
         @Override

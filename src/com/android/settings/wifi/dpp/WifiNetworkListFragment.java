@@ -17,6 +17,7 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkInfo.DetailedState;
@@ -27,10 +28,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 import com.android.settings.R;
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
@@ -38,10 +42,6 @@ import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 public class WifiNetworkListFragment extends SettingsPreferenceFragment implements
         WifiTracker.WifiListener, AccessPoint.AccessPointListener {
@@ -74,7 +74,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
+        return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
     @Override

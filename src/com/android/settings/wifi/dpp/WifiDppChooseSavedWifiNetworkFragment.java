@@ -18,6 +18,7 @@ package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,6 @@ import android.widget.ListView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
 /**
@@ -44,7 +44,7 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
+        return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
     @Override

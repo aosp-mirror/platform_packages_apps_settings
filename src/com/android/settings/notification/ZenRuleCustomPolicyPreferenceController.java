@@ -16,14 +16,13 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
-import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -75,7 +74,7 @@ public class ZenRuleCustomPolicyPreferenceController extends
         new SubSettingLauncher(mContext)
                 .setDestination(ZenCustomRuleConfigSettings.class.getName())
                 .setArguments(createBundle())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.ZEN_CUSTOM_RULE_SOUND_SETTINGS)
+                .setSourceMetricsCategory(SettingsEnums.ZEN_CUSTOM_RULE_SOUND_SETTINGS)
                 .launch();
     }
 }

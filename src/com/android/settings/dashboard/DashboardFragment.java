@@ -32,7 +32,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
@@ -235,7 +234,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onExpandButtonClick() {
         mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
-                MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND,
+                SettingsEnums.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND,
                 getMetricsCategory(), null, 0);
     }
 

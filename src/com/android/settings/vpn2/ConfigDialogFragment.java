@@ -17,6 +17,7 @@
 package com.android.settings.vpn2;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
@@ -33,7 +34,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
@@ -61,7 +61,7 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_LEGACY_VPN_CONFIG;
+        return SettingsEnums.DIALOG_LEGACY_VPN_CONFIG;
     }
 
     public static void show(VpnSettings parent, VpnProfile profile, boolean edit, boolean exists) {

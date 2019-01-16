@@ -15,8 +15,8 @@
  */
 package com.android.settings.applications.specialaccess.financialapps;
 
-import static android.Manifest.permission.SMS_FINANCIAL_TRANSACTIONS;
 import static android.Manifest.permission.READ_SMS;
+import static android.Manifest.permission.SMS_FINANCIAL_TRANSACTIONS;
 
 import android.app.AppOpsManager;
 import android.content.Context;
@@ -24,19 +24,17 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
 
 import java.util.ArrayList;
 import java.util.List;

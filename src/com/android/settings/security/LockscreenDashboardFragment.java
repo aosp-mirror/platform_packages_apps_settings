@@ -16,20 +16,19 @@
 
 package com.android.settings.security;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
 import com.android.settings.display.AmbientDisplayNotificationsPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
-import com.android.settings.gestures.WakeScreenGesturePreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.screenlock.LockScreenPreferenceController;
@@ -70,7 +69,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_LOCK_SCREEN_PREFERENCES;
+        return SettingsEnums.SETTINGS_LOCK_SCREEN_PREFERENCES;
     }
 
     @Override

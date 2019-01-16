@@ -21,6 +21,7 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -34,7 +35,6 @@ import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -90,7 +90,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ENABLE_VIRTUAL_KEYBOARDS;
+        return SettingsEnums.ENABLE_VIRTUAL_KEYBOARDS;
     }
 
     @Nullable

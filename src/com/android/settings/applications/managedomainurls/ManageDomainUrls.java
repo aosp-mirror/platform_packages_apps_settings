@@ -18,10 +18,10 @@ package com.android.settings.applications.managedomainurls;
 
 import static com.android.settingslib.search.SearchIndexable.MOBILE;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -58,7 +58,7 @@ public class ManageDomainUrls extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.MANAGE_DOMAIN_URLS;
+        return SettingsEnums.MANAGE_DOMAIN_URLS;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

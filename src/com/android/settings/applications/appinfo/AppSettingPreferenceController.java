@@ -16,8 +16,6 @@
 
 package com.android.settings.applications.appinfo;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_OPEN_APP_SETTING;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -63,7 +61,7 @@ public class AppSettingPreferenceController extends AppInfoPreferenceControllerB
         }
         FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
                 .action(SettingsEnums.PAGE_UNKNOWN,
-                        ACTION_OPEN_APP_SETTING,
+                        SettingsEnums.ACTION_OPEN_APP_SETTING,
                         mParent.getMetricsCategory(),
                         null, 0);
         mContext.startActivity(intent);

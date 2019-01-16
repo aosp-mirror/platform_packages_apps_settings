@@ -16,13 +16,13 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -81,12 +81,12 @@ public class HighUsageTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP,
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_HIGH_USAGE_TIP,
                 mState);
         for (int i = 0, size = mHighUsageAppList.size(); i < size; i++) {
             final AppInfo appInfo = mHighUsageAppList.get(i);
             metricsFeatureProvider.action(context,
-                    MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP_LIST,
+                    SettingsEnums.ACTION_HIGH_USAGE_TIP_LIST,
                     appInfo.packageName);
         }
     }

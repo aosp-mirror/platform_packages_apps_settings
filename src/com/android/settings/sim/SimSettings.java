@@ -16,6 +16,7 @@
 
 package com.android.settings.sim;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -36,7 +37,6 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
@@ -84,7 +84,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SIM;
+        return SettingsEnums.SIM;
     }
 
     @Override

@@ -40,7 +40,6 @@ import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
@@ -208,7 +207,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
     private void logSliceValueChange(Context context, String sliceKey, int newValue) {
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                 .action(SettingsEnums.PAGE_UNKNOWN,
-                        MetricsEvent.ACTION_SETTINGS_SLICE_CHANGED,
+                        SettingsEnums.ACTION_SETTINGS_SLICE_CHANGED,
                         SettingsEnums.PAGE_UNKNOWN,
                         sliceKey, newValue);
     }

@@ -18,6 +18,7 @@ package com.android.settings.display;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ import android.provider.SearchIndexableResource;
 import androidx.preference.Preference;
 
 import com.android.internal.app.ColorDisplayController;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -116,9 +116,9 @@ public class NightDisplaySettings extends DashboardFragment
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DIALOG_START_TIME:
-                return MetricsEvent.DIALOG_NIGHT_DISPLAY_SET_START_TIME;
+                return SettingsEnums.DIALOG_NIGHT_DISPLAY_SET_START_TIME;
             case DIALOG_END_TIME:
-                return MetricsEvent.DIALOG_NIGHT_DISPLAY_SET_END_TIME;
+                return SettingsEnums.DIALOG_NIGHT_DISPLAY_SET_END_TIME;
             default:
                 return 0;
         }
@@ -161,7 +161,7 @@ public class NightDisplaySettings extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NIGHT_DISPLAY_SETTINGS;
+        return SettingsEnums.NIGHT_DISPLAY_SETTINGS;
     }
 
     @Override

@@ -16,13 +16,13 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -58,7 +58,7 @@ public class RemoteDeviceNameDialogFragment extends BluetoothNameDialogFragment 
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_PAIRED_DEVICE_RENAME;
+        return SettingsEnums.DIALOG_BLUETOOTH_PAIRED_DEVICE_RENAME;
     }
 
     @Override

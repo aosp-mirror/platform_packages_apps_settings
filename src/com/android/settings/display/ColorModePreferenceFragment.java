@@ -13,6 +13,7 @@
  */
 package com.android.settings.display;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.SearchIndexableResource;
@@ -21,7 +22,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -149,7 +149,7 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.COLOR_MODE_SETTINGS;
+        return SettingsEnums.COLOR_MODE_SETTINGS;
     }
 
     @VisibleForTesting

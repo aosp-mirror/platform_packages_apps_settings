@@ -18,6 +18,7 @@ package com.android.settings.applications.specialaccess.premiumsms;
 
 import android.annotation.Nullable;
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -30,7 +31,6 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
@@ -99,7 +99,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.PREMIUM_SMS_ACCESS;
+        return SettingsEnums.PREMIUM_SMS_ACCESS;
     }
 
     @Override
@@ -116,13 +116,13 @@ public class PremiumSmsAccess extends EmptyTextSettings
         int category = SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN;
         switch (smsState) {
             case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER:
-                category = MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ASK;
+                category = SettingsEnums.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ASK;
                 break;
             case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW:
-                category = MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_DENY;
+                category = SettingsEnums.APP_SPECIAL_PERMISSION_PREMIUM_SMS_DENY;
                 break;
             case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW:
-                category = MetricsProto.MetricsEvent.
+                category = SettingsEnums.
                         APP_SPECIAL_PERMISSION_PREMIUM_SMS_ALWAYS_ALLOW;
                 break;
         }

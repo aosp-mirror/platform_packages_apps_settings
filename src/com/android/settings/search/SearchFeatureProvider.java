@@ -20,6 +20,7 @@ import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 
 import android.annotation.NonNull;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
@@ -99,7 +99,7 @@ public interface SearchFeatureProvider {
             FeatureFactory.getFactory(context).getSlicesFeatureProvider()
                     .indexSliceDataAsync(activity.getApplicationContext());
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                    .action(context, MetricsProto.MetricsEvent.ACTION_SEARCH_RESULTS);
+                    .action(context, SettingsEnums.ACTION_SEARCH_RESULTS);
             activity.startActivityForResult(intent, REQUEST_CODE);
         });
     }

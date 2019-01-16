@@ -19,6 +19,7 @@ package com.android.settings.password;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -34,7 +35,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -139,7 +139,7 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_CHOOSE_LOCK_DIALOG;
+        return SettingsEnums.SETTINGS_CHOOSE_LOCK_DIALOG;
     }
 
     private static class ScreenLockAdapter extends ArrayAdapter<ScreenLockType> {

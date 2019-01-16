@@ -17,6 +17,7 @@
 package com.android.settings.vpn2;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
@@ -31,7 +32,6 @@ import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -57,7 +57,7 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_VPN_APP_CONFIG;
+        return SettingsEnums.DIALOG_VPN_APP_CONFIG;
     }
 
     public interface Listener {

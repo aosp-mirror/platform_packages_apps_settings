@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -29,7 +30,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -75,7 +75,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.VIRTUAL_KEYBOARDS;
+        return SettingsEnums.VIRTUAL_KEYBOARDS;
     }
 
     private void updateInputMethodPreferenceViews() {

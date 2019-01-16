@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,7 +24,6 @@ import android.content.pm.PackageManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
@@ -69,7 +69,7 @@ public class BluetoothFilesPreferenceController extends BasePreferenceController
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_RECEIVED_FILES.equals(preference.getKey())) {
             mMetricsFeatureProvider.action(mContext,
-                    MetricsProto.MetricsEvent.ACTION_BLUETOOTH_FILES);
+                    SettingsEnums.ACTION_BLUETOOTH_FILES);
             Intent intent = new Intent(ACTION_OPEN_FILES);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra(EXTRA_DIRECTION, 1 /* DIRECTION_INBOUND */);
