@@ -404,7 +404,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     private SubscriptionInfo getPhoneSubscriptionInfo(int slotId) {
         final List<SubscriptionInfo> subscriptionInfoList = SubscriptionManager.from(
-                mContext).getActiveSubscriptionInfoList();
+                mContext).getActiveSubscriptionInfoList(true);
         if (subscriptionInfoList != null && subscriptionInfoList.size() > slotId) {
             return subscriptionInfoList.get(slotId);
         } else {

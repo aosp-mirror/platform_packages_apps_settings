@@ -106,7 +106,7 @@ public final class DataUsageUtils {
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
         }
         final List<SubscriptionInfo> subInfoList =
-            SubscriptionManager.from(context).getActiveSubscriptionInfoList();
+            SubscriptionManager.from(context).getActiveSubscriptionInfoList(true);
         // No activated Subscriptions
         if (subInfoList == null) {
             if (LOGD) {

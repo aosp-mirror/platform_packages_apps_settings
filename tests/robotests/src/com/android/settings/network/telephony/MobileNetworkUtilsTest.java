@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -104,7 +105,7 @@ public class MobileNetworkUtilsTest {
         when(mSubscriptionInfo1.getSubscriptionId()).thenReturn(SUB_ID_1);
         when(mSubscriptionInfo2.getSubscriptionId()).thenReturn(SUB_ID_2);
 
-        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
     }
 

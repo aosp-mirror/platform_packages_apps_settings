@@ -153,7 +153,7 @@ public class SimDialogActivity extends Activity {
         final ArrayList<String> list = new ArrayList<String>();
         final SubscriptionManager subscriptionManager = SubscriptionManager.from(context);
         final List<SubscriptionInfo> subInfoList =
-            subscriptionManager.getActiveSubscriptionInfoList();
+            subscriptionManager.getActiveSubscriptionInfoList(true);
         final int selectableSubInfoLength = subInfoList == null ? 0 : subInfoList.size();
 
         final DialogInterface.OnClickListener selectionListener =

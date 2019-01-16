@@ -227,7 +227,7 @@ public class MobileNetworkUtils {
 
         if (disableOtherSubscriptions) {
             List<SubscriptionInfo> subInfoList =
-                    subscriptionManager.getActiveSubscriptionInfoList();
+                    subscriptionManager.getActiveSubscriptionInfoList(true);
             if (subInfoList != null) {
                 for (SubscriptionInfo subInfo : subInfoList) {
                     // We never disable mobile data for opportunistic subscriptions.

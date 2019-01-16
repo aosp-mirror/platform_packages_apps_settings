@@ -161,7 +161,8 @@ public class ResetNetwork extends InstrumentedFragment {
         mEsimContainer = mContentView.findViewById(R.id.erase_esim_container);
         mEsimCheckbox = mContentView.findViewById(R.id.erase_esim);
 
-        mSubscriptions = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList();
+        mSubscriptions = SubscriptionManager.from(getActivity())
+                .getActiveSubscriptionInfoList(true);
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             // Get the default subscription in the order of data, voice, sms, first up.
             int defaultSubscription = SubscriptionManager.getDefaultDataSubscriptionId();
