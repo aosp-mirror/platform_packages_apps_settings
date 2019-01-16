@@ -64,6 +64,12 @@
         settings:controller="com.android.settings.gestures.SwipeUpPreferenceController" />
 
     <Preference
+        android:key="gesture_tap_screen_input_summary"
+        android:title="@string/ambient_display_tap_screen_title"
+        android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
+        settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
+
+    <Preference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
