@@ -44,7 +44,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.robolectric.RobolectricTestRunner;
@@ -104,10 +103,6 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         verify(mHeaderController).setIconContentDescription(any(String.class));
         verify(mHeaderController).setSummary(any(String.class));
         verify(mHeaderController).setSecondSummary(any(String.class));
-        verify(mHeaderController).setEditListener(any(View.OnClickListener.class));
-        verify(mHeaderController).setButtonActions(
-                EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
-                EntityHeaderController.ActionType.ACTION_NONE);
         verify(mHeaderController).done(mActivity, true);
     }
 
@@ -129,21 +124,5 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         mController.onDeviceAttributesChanged();
         inOrder.verify(mHeaderController)
             .setSummary(mContext.getString(R.string.bluetooth_connecting));
-    }
-
-    @Test
-    public void invokeShowEditDeviceNameDialog_showDialog() {
-        showScreen(mController);
-
-        FragmentManager fragmentManager = mock(FragmentManager.class);
-        when(mFragment.getFragmentManager()).thenReturn(fragmentManager);
-        FragmentTransaction ft = mock(FragmentTransaction.class);
-        when(fragmentManager.beginTransaction()).thenReturn(ft);
-
-        ArgumentCaptor<Fragment> captor = ArgumentCaptor.forClass(Fragment.class);
-        mController.showEditDeviceNameDialog();
-        verify(ft).add(captor.capture(), eq(RemoteDeviceNameDialogFragment.TAG));
-        RemoteDeviceNameDialogFragment dialog = (RemoteDeviceNameDialogFragment) captor.getValue();
-        assertThat(dialog).isNotNull();
     }
 }

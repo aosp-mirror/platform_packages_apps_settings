@@ -1834,8 +1834,10 @@
     <string name="wifi_sign_in_button_text">Sign in</string>
     <!-- Wifi Sign in CTA for wifi settings when captive portal auth is required [CHAR LIMIT = 50] -->
     <string name="wifi_tap_to_sign_in">Tap here to sign in to network</string>
-    <!-- Link speed on Wifi Status screen -->
-    <string name="link_speed">%1$d Mbps</string>
+    <!-- Transmit Link speed on Wifi Status screen [CHAR LIMIT=32] -->
+    <string name="tx_link_speed"><xliff:g id="Transmit link speed" example="150 Mbps">%1$d</xliff:g> Mbps</string>
+    <!-- Receive Link speed on Wifi Status screen [CHAR LIMIT=32] -->
+    <string name="rx_link_speed"><xliff:g id="Receive link speed" example="54 Mbps">%1$d</xliff:g> Mbps</string>
 
     <!-- This string asks the user whether or not to allow an app to enable WiFi. [CHAR LIMIT=NONE] -->
     <string name="wifi_ask_enable"><xliff:g id="requester" example="FancyApp">%s</xliff:g> wants to turn on Wi-Fi</string>
@@ -2030,8 +2032,10 @@
     <string name="wifi_signal">Signal strength</string>
     <!-- Label for the status of the connection -->
     <string name="wifi_status">Status</string>
-    <!-- Label for the link speed of the connection -->
-    <string name="wifi_speed">Link speed</string>
+    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=32] -->
+    <string name="tx_wifi_speed">Transmit link speed</string>
+    <!-- Label for the receive link speed of the connection. [CHAR LIMIT=32] -->
+    <string name="rx_wifi_speed">Receive link speed</string>
     <!-- Label for the frequency band of the connection -->
     <string name="wifi_frequency">Frequency</string>
     <!-- Label for the IP address of the connection -->
@@ -2389,7 +2393,10 @@
     <string name="networkid_label" translatable="false">Network ID:</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Status screen-->
-    <string name="link_speed_label" translatable="false">Link speed:</string>
+    <string name="tx_link_speed_label" translatable="false">Transmit link speed:</string>
+    <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
+         Label on Wifi Status screen-->
+    <string name="rx_link_speed_label" translatable="false">Receive link speed:</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Status screen-->
     <string name="scan_list_label" translatable="false">Scan results:</string>
@@ -9507,14 +9514,25 @@
     <!-- Notification log debug tool: the word 'none' -->
     <string name="notification_log_details_ranking_none">Ranking object doesn\'t contain this key.</string>
 
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the settings category for theme overlays. -->
+    <string name="theme_customization_category">Theming</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which enables overlays to customize accent color. -->
+    <string name="theme_customization_accent_color_title">Accent color</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which enables overlays to customize headline and body fonts. -->
+    <string name="theme_customization_font_title">Headline / Body font</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which enables overlays to customize the adaptive icon shape (e.g. launcher and quick settings icons). -->
+    <string name="theme_customization_icon_shape_title">Icon shape</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off customizations for a given category.-->
+    <string name="theme_customization_device_default">Device default</string>
+
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which turns on emulation of a display cutout. -->
     <string name="display_cutout_emulation">Display cutout</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Search keywords for the setting which turns on emulation of a display cutout. -->
     <string name="display_cutout_emulation_keywords">display cutout, notch</string>
 
-    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation, (i.e. on devices whose screen actually has a cutout, selecting this option will show that cutout).-->
-    <string name="display_cutout_emulation_device_default">Device default</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off all overlays in a given category. -->
+    <string name="overlay_option_device_default">Device default</string>
 
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
     <string name="special_access">Special app access</string>

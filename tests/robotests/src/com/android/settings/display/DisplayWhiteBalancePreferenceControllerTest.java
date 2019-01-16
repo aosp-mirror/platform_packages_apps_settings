@@ -1,15 +1,21 @@
 package com.android.settings.display;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
+import com.android.internal.app.ColorDisplayController;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -23,6 +29,9 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   private Context mContext;
   private DisplayWhiteBalancePreferenceController mController;
 
+  @Mock
+  private ColorDisplayController mColorDisplayController;
+
   @After
   public void tearDown() {
     SettingsShadowResources.reset();
@@ -30,14 +39,19 @@ public class DisplayWhiteBalancePreferenceControllerTest {
 
   @Before
   public void setUp() {
+    MockitoAnnotations.initMocks(this);
     mContext = RuntimeEnvironment.application;
-    mController = new DisplayWhiteBalancePreferenceController(mContext, "display_white_balance");
+    mController = spy(new DisplayWhiteBalancePreferenceController(mContext,
+        "display_white_balance"));
+    doReturn(mColorDisplayController).when(mController).getColorDisplayController();
   }
 
   @Test
   public void isAvailable_configuredAvailable() {
     SettingsShadowResources.overrideResource(
         com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
+    when(mColorDisplayController.getColorMode())
+        .thenReturn(ColorDisplayController.COLOR_MODE_NATURAL);
     assertThat(mController.isAvailable()).isTrue();
   }
 
@@ -45,6 +59,20 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   public void isAvailable_configuredUnavailable() {
     SettingsShadowResources.overrideResource(
         com.android.internal.R.bool.config_displayWhiteBalanceAvailable, false);
+    when(mColorDisplayController.getColorMode())
+        .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);
+    assertThat(mController.isAvailable()).isFalse();
+
+    SettingsShadowResources.overrideResource(
+        com.android.internal.R.bool.config_displayWhiteBalanceAvailable, false);
+    when(mColorDisplayController.getColorMode())
+        .thenReturn(ColorDisplayController.COLOR_MODE_NATURAL);
+    assertThat(mController.isAvailable()).isFalse();
+
+    SettingsShadowResources.overrideResource(
+        com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
+    when(mColorDisplayController.getColorMode())
+        .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);
     assertThat(mController.isAvailable()).isFalse();
   }
 

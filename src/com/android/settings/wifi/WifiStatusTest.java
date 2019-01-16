@@ -64,7 +64,8 @@ public class WifiStatusTest extends Activity {
     private TextView mIPAddr;
     private TextView mMACAddr;
     private TextView mNetworkId;
-    private TextView mLinkSpeed;
+    private TextView mTxLinkSpeed;
+    private TextView mRxLinkSpeed;
     private TextView mScanList;
 
 
@@ -142,7 +143,8 @@ public class WifiStatusTest extends Activity {
         mIPAddr = (TextView) findViewById(R.id.ipaddr);
         mMACAddr = (TextView) findViewById(R.id.macaddr);
         mNetworkId = (TextView) findViewById(R.id.networkid);
-        mLinkSpeed = (TextView) findViewById(R.id.link_speed);
+        mTxLinkSpeed = (TextView) findViewById(R.id.tx_link_speed);
+        mRxLinkSpeed = (TextView) findViewById(R.id.rx_link_speed);
         mScanList = (TextView) findViewById(R.id.scan_list);
 
 
@@ -186,7 +188,8 @@ public class WifiStatusTest extends Activity {
                 append((ipAddr >>>= 8) & 0xff);
 
             mIPAddr.setText(ipBuf);
-            mLinkSpeed.setText(String.valueOf(wifiInfo.getLinkSpeed())+" Mbps");
+            mTxLinkSpeed.setText(String.valueOf(wifiInfo.getTxLinkSpeedMbps())+" Mbps");
+            mRxLinkSpeed.setText(String.valueOf(wifiInfo.getRxLinkSpeedMbps())+" Mbps");
             mMACAddr.setText(wifiInfo.getMacAddress());
             mNetworkId.setText(String.valueOf(wifiInfo.getNetworkId()));
             mRSSI.setText(String.valueOf(wifiInfo.getRssi()));

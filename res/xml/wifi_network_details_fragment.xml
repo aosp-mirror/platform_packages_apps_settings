@@ -96,8 +96,13 @@
                 android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference
-                android:key="link_speed"
-                android:title="@string/wifi_speed"
+                android:key="tx_link_speed"
+                android:title="@string/tx_wifi_speed"
+                android:selectable="false"
+                settings:enableCopying="true"/>
+        <Preference
+                android:key="rx_link_speed"
+                android:title="@string/rx_wifi_speed"
                 android:selectable="false"
                 settings:enableCopying="true"/>
     </PreferenceCategory>

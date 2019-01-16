@@ -26,6 +26,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.lang.annotation.Retention;
@@ -146,14 +147,11 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
      */
     public abstract void log(Context context, MetricsFeatureProvider metricsFeatureProvider);
 
-    public Preference buildPreference(Context context) {
-        Preference preference = new Preference(context);
-
-        preference.setKey(getKey());
+    public void updatePreference(Preference preference) {
+        final Context context = preference.getContext();
         preference.setTitle(getTitle(context));
         preference.setSummary(getSummary(context));
         preference.setIcon(getIconId());
-        return preference;
     }
 
     public boolean shouldShowDialog() {

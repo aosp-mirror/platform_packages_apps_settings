@@ -53,7 +53,9 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiDppQrCodeGeneratorFragment.OnQrCodeGeneratorFragmentAddButtonClickedListener,
         WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener,
         WifiDppQrCodeScannerFragment.OnScanZxingWifiFormatSuccessListener,
-        WifiDppAddDeviceFragment.OnClickChooseDifferentNetworkListener {
+        WifiDppAddDeviceFragment.OnClickChooseDifferentNetworkListener,
+        WifiNetworkListFragment.OnChooseNetworkListener {
+
     private static final String TAG = "WifiDppConfiguratorActivity";
 
     public static final String ACTION_CONFIGURATOR_QR_CODE_SCANNER =
@@ -328,5 +330,12 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         }
 
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onChooseNetwork(WifiNetworkConfig wifiNetworkConfig) {
+        mWifiNetworkConfig = new WifiNetworkConfig(wifiNetworkConfig);
+
+        showAddDeviceFragment(/* addToBackStack */ true);
     }
 }

@@ -14,9 +14,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import android.app.role.RoleManager;
 import android.content.Context;
-
-import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 
 public class DefaultSmsShortcutPreferenceController
         extends DefaultAppShortcutPreferenceControllerBase {
@@ -24,17 +23,6 @@ public class DefaultSmsShortcutPreferenceController
     private static final String KEY = "default_sms_app";
 
     public DefaultSmsShortcutPreferenceController(Context context, String packageName) {
-        super(context, KEY, packageName);
+        super(context, KEY, RoleManager.ROLE_SMS, packageName);
     }
-
-    @Override
-    protected boolean hasAppCapability() {
-        return DefaultSmsPreferenceController.hasSmsPreference(mPackageName, mContext);
-    }
-
-    @Override
-    protected boolean isDefaultApp() {
-        return DefaultSmsPreferenceController.isSmsDefault(mPackageName, mContext);
-    }
-
 }

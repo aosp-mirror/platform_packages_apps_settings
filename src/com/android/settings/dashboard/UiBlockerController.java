@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
  * Control ui blocker data and check whether it is finished
  *
  * @see BasePreferenceController.UiBlocker
- * @see BasePreferenceController.OnUiBlockListener
+ * @see BasePreferenceController.UiBlockListener
  */
 public class UiBlockerController {
     private static final String TAG = "UiBlockerController";
