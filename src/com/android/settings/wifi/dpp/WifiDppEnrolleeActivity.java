@@ -35,6 +35,7 @@ import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.R;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 /**
  * To provision "this" device with specified Wi-Fi network.
@@ -148,7 +149,7 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
     @Override
     public void onScanWifiDppSuccess(WifiQrCode wifiQrCode) {
         final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        wifiManager.startEasyConnectAsEnrolleeInitiator(wifiQrCode.getQrCode(), /* handler */ null,
+        wifiManager.startEasyConnectAsEnrolleeInitiator(wifiQrCode.getQrCode(), getMainExecutor(),
                 new EasyConnectStatusCallback());
     }
 

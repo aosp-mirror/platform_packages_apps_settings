@@ -33,6 +33,8 @@ import android.widget.ProgressBar;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
+import java.util.concurrent.Executor;
+
 /**
  * After getting Wi-Fi network information and(or) QR code, this fragment config a device to connect
  * to the Wi-Fi network.
@@ -148,9 +150,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         final int networkId =
                 ((WifiDppConfiguratorActivity) getActivity()).getWifiNetworkConfig().getNetworkId();
         final WifiManager wifiManager = getContext().getSystemService(WifiManager.class);
-
         wifiManager.startEasyConnectAsConfiguratorInitiator(qrCode, networkId,
-                WifiManager.EASY_CONNECT_NETWORK_ROLE_STA, /* handler */ null,
+                WifiManager.EASY_CONNECT_NETWORK_ROLE_STA, getContext().getMainExecutor(),
                 new EasyConnectStatusCallback());
     }
 
