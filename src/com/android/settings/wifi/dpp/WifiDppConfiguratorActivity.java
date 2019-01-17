@@ -142,7 +142,11 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
             case ACTION_PROCESS_WIFI_DPP_QR_CODE:
                 String qrCode = intent.getStringExtra(WifiDppUtils.EXTRA_QR_CODE);
                 mWifiDppQrCode = getValidWifiDppQrCodeOrNull(qrCode);
-                if (mWifiDppQrCode == null) {
+                final boolean isDppSupported = WifiDppUtils.isWifiDppEnabled(this);
+                if (!isDppSupported) {
+                    Log.d(TAG, "Device doesn't support Wifi DPP");
+                }
+                if (mWifiDppQrCode == null || !isDppSupported) {
                     cancelActivity = true;
                 } else {
                     showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
