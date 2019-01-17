@@ -15,6 +15,8 @@
  */
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.CONTAMINANT_DETECTION_NOT_SUPPORTED;
+import static android.hardware.usb.UsbPortStatus.CONTAMINANT_PROTECTION_NONE;
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_NONE;
 import static android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE;
@@ -101,7 +103,8 @@ public class UsbConnectionBroadcastReceiverTest {
         final Intent intent = new Intent();
         intent.setAction(UsbManager.ACTION_USB_PORT_CHANGED);
         final UsbPortStatus status = new UsbPortStatus(0, POWER_ROLE_SINK,
-                DATA_ROLE_DEVICE, 0);
+                DATA_ROLE_DEVICE, 0, CONTAMINANT_PROTECTION_NONE,
+                CONTAMINANT_DETECTION_NOT_SUPPORTED);
         intent.putExtra(UsbManager.EXTRA_PORT_STATUS, status);
 
         mReceiver.onReceive(mContext, intent);
