@@ -34,7 +34,10 @@ import androidx.preference.Preference;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.datausage.DataUsageSummaryPreferenceController;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
@@ -42,6 +45,7 @@ import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenc
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.PreferenceCategoryController;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -105,11 +109,22 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
+            mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return Arrays.asList(
+                    new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
+                            this, mSubId));
+        }
+        return Arrays.asList();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
@@ -163,7 +178,11 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.mobile_network_settings;
+        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
+            return R.xml.mobile_network_settings_v2;
+        } else {
+            return R.xml.mobile_network_settings;
+        }
     }
 
     @Override
