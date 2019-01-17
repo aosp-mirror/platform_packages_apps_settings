@@ -19,11 +19,11 @@
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:icon="@drawable/ic_lock"
     android:layout="@layout/sud_glif_blank_template"
-    settings:sucFooter="@layout/choose_lock_pattern_common_footer"
     settings:sucHeaderText="@string/lockpassword_choose_your_screen_lock_header">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
