@@ -144,7 +144,8 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
                             .setPendingIntent(suggestion.getPendingIntent())
                             .setName(suggestion.getId())
                             .setTitleText(suggestion.getTitle().toString())
-                            .setSummaryText(suggestion.getSummary().toString());
+                            .setSummaryText(suggestion.getSummary().toString())
+                            .setViewType(LegacySuggestionContextualCardRenderer.VIEW_TYPE);
 
                     cards.add(cardBuilder.build());
                 }

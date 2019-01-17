@@ -59,15 +59,17 @@ public class ConditionFooterContextualCardRendererTest {
 
     @Test
     public void bindView_shouldSetClickListener() {
-        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
+        final ContextualCard card = generateConditionFooterContextualCard();
+        final View view = LayoutInflater.from(mContext).inflate(card.getViewType(), recyclerView,
+                false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view,
+                card.getViewType());
         when(mControllerRendererPool.getController(mContext,
                 ContextualCard.CardType.CONDITIONAL_FOOTER)).thenReturn(mController);
 
-        mRenderer.bindView(viewHolder, generateConditionFooterContextualCard());
+        mRenderer.bindView(viewHolder, card);
 
         assertThat(viewHolder.itemView).isNotNull();
         assertThat(viewHolder.itemView.hasOnClickListeners()).isTrue();
@@ -75,15 +77,17 @@ public class ConditionFooterContextualCardRendererTest {
 
     @Test
     public void bindView_clickView_shouldSetTrueToIsConditionExpanded() {
-        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        final View view = LayoutInflater.from(mContext).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
+        final ContextualCard card = generateConditionFooterContextualCard();
+        final View view = LayoutInflater.from(mContext).inflate(card.getViewType(), recyclerView,
+                false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view,
+                card.getViewType());
         when(mControllerRendererPool.getController(mContext,
                 ContextualCard.CardType.CONDITIONAL_FOOTER)).thenReturn(mController);
 
-        mRenderer.bindView(viewHolder, generateConditionFooterContextualCard());
+        mRenderer.bindView(viewHolder, card);
 
         assertThat(viewHolder.itemView).isNotNull();
         viewHolder.itemView.performClick();
@@ -96,6 +100,7 @@ public class ConditionFooterContextualCardRendererTest {
         return new ConditionFooterContextualCard.Builder()
                 .setName("test_condition_footer")
                 .setRankingScore(-9999.0)
+                .setViewType(ConditionFooterContextualCardRenderer.VIEW_TYPE)
                 .build();
     }
 }

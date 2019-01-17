@@ -95,7 +95,7 @@ public class SliceHalfCardRendererHelperTest {
                 .setCategory(ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE)
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(TEST_SLICE_URI)
-                .setIsHalfWidth(false /* isHalfWidth */)
+                .setViewType(VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 

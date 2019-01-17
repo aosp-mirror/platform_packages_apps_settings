@@ -69,6 +69,9 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         if (mWifiConfiguration != null) {
             mWifiConfiguration.macRandomizationSetting = Integer.parseInt((String) newValue);
             mWifiManager.updateNetwork(mWifiConfiguration);
+            // To activate changing, we need reconnect network. WiFi will auto connect to current
+            // network after disconnect().
+            mWifiManager.disconnect();
         }
         updateSummary((DropDownPreference) preference, Integer.parseInt((String) newValue));
         return true;

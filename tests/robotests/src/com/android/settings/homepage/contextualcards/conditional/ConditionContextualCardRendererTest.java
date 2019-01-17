@@ -65,36 +65,40 @@ public class ConditionContextualCardRendererTest {
 
     @Test
     public void bindView_shouldSetListener() {
-        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
-        final View card = view.findViewById(R.id.content);
+        final ContextualCard card = buildConditionContextualCard();
+        final View view = LayoutInflater.from(mActivity).inflate(card.getViewType(), recyclerView,
+                false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view,
+                card.getViewType());
+        final View cardView = view.findViewById(R.id.content);
         when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.CONDITIONAL)).thenReturn(mController);
 
-        mRenderer.bindView(viewHolder, buildConditionContextualCard());
+        mRenderer.bindView(viewHolder, card);
 
-        assertThat(card).isNotNull();
-        assertThat(card.hasOnClickListeners()).isTrue();
+        assertThat(cardView).isNotNull();
+        assertThat(cardView.hasOnClickListeners()).isTrue();
     }
 
     @Test
     public void viewClick_shouldInvokeControllerPrimaryClick() {
-        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
-        final View card = view.findViewById(R.id.content);
+        final ContextualCard card = buildConditionContextualCard();
+        final View view = LayoutInflater.from(mActivity).inflate(card.getViewType(), recyclerView,
+                false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view,
+                card.getViewType());
+        final View cardView = view.findViewById(R.id.content);
         when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.CONDITIONAL)).thenReturn(mController);
 
-        mRenderer.bindView(viewHolder, buildConditionContextualCard());
+        mRenderer.bindView(viewHolder, card);
 
-        assertThat(card).isNotNull();
-        card.performClick();
+        assertThat(cardView).isNotNull();
+        cardView.performClick();
 
         verify(mController).onPrimaryClick(any(ContextualCard.class));
     }
@@ -108,7 +112,7 @@ public class ConditionContextualCardRendererTest {
                 .setTitleText("test_title")
                 .setSummaryText("test_summary")
                 .setIconDrawable(mActivity.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_FULL_WIDTH)
                 .build();
     }
 }

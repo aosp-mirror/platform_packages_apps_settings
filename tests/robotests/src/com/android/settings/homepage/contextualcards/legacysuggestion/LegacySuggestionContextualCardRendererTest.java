@@ -66,35 +66,38 @@ public class LegacySuggestionContextualCardRendererTest {
 
     @Test
     public void bindView_shouldSetListener() {
-        final int viewType = mRenderer.getViewType(true /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        final View card = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(card);
-
+        final ContextualCard card = buildContextualCard();
+        final View cardView = LayoutInflater.from(mActivity).inflate(card.getViewType(),
+                recyclerView, false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(cardView,
+                card.getViewType());
         when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.LEGACY_SUGGESTION)).thenReturn(mController);
 
         mRenderer.bindView(viewHolder, buildContextualCard());
 
-        assertThat(card).isNotNull();
-        assertThat(card.hasOnClickListeners()).isTrue();
+        assertThat(cardView).isNotNull();
+        assertThat(cardView.hasOnClickListeners()).isTrue();
     }
 
     @Test
     public void viewClick_shouldInvokeControllerPrimaryClick() {
-        final int viewType = mRenderer.getViewType(true /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        final View card = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(card);
+        final ContextualCard card = buildContextualCard();
+        final View cardView = LayoutInflater.from(mActivity).inflate(card.getViewType(),
+                recyclerView, false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(cardView,
+                card.getViewType());
         when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.LEGACY_SUGGESTION)).thenReturn(mController);
 
         mRenderer.bindView(viewHolder, buildContextualCard());
 
-        assertThat(card).isNotNull();
-        card.performClick();
+        assertThat(cardView).isNotNull();
+        cardView.performClick();
 
         verify(mController).onPrimaryClick(any(ContextualCard.class));
     }
@@ -105,6 +108,7 @@ public class LegacySuggestionContextualCardRendererTest {
                 .setTitleText("test_title")
                 .setSummaryText("test_summary")
                 .setIconDrawable(mActivity.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
+                .setViewType(LegacySuggestionContextualCardRenderer.VIEW_TYPE)
                 .build();
     }
 }

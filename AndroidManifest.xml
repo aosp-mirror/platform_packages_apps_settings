@@ -609,8 +609,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
         </activity>
 
         <activity
@@ -679,8 +677,6 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
         </activity>
 
         <activity
@@ -698,8 +694,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.UserDictionaryList" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
         </activity>
 
         <activity android:name=".inputmethod.UserDictionaryAddWordActivity"
@@ -713,8 +707,6 @@
                 <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
         </activity>
 
         <activity

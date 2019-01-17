@@ -26,31 +26,32 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/homepage_card_padding_start"
-        android:layout_marginTop="@dimen/homepage_card_padding_start"
+        android:layout_marginStart="@dimen/homepage_card_dismissal_side_margin"
+        android:layout_marginTop="@dimen/homepage_card_dismissal_margin_top"
         android:text="@string/contextual_card_dismiss_confirm_message"
         android:textAppearance="@style/TextAppearance.ContextualCardDismissalText"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/homepage_card_dismissal_margin_bottom"
         android:gravity="bottom|end">
-
-        <Button
-            android:id="@+id/keep"
-            style="@style/ContextualCardDismissalButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/homepage_card_dismissal_margin_bottom"
-            android:text="@string/contextual_card_dismiss_keep"/>
 
         <Button
             android:id="@+id/remove"
             style="@style/ContextualCardDismissalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/homepage_card_dismissal_margin_bottom"
             android:text="@string/contextual_card_dismiss_remove"/>
+
+        <Button
+            android:id="@+id/keep"
+            style="@style/ContextualCardDismissalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/homepage_card_dismissal_button_side_margin"
+            android:layout_marginEnd="@dimen/homepage_card_dismissal_button_side_margin"
+            android:text="@string/contextual_card_dismiss_keep"/>
 
     </LinearLayout>
 </LinearLayout>

@@ -89,7 +89,7 @@ public class CellularDataConditionController implements ConditionalCardControlle
                 .setTitleText(mAppContext.getText(R.string.condition_cellular_title).toString())
                 .setSummaryText(mAppContext.getText(R.string.condition_cellular_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_cellular_off))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 

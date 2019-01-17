@@ -77,7 +77,7 @@ public class SimLockPreferenceController extends BasePreferenceController {
      */
     private boolean isSimReady() {
         final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
+                mSubscriptionManager.getActiveSubscriptionInfoList(true);
         if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {
                 final int simState = mTelephonyManager.getSimState(subInfo.getSimSlotIndex());
@@ -95,7 +95,7 @@ public class SimLockPreferenceController extends BasePreferenceController {
      */
     private boolean isSimIccReady() {
         final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
+                mSubscriptionManager.getActiveSubscriptionInfoList(true);
 
         if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {

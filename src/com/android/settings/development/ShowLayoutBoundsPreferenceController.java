@@ -17,7 +17,7 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.os.SystemProperties;
+import android.sysprop.DisplayProperties;
 import android.view.View;
 
 import androidx.preference.Preference;
@@ -44,23 +44,21 @@ public class ShowLayoutBoundsPreferenceController extends DeveloperOptionsPrefer
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        SystemProperties.set(View.DEBUG_LAYOUT_PROPERTY,
-                isEnabled ? Boolean.toString(true) : Boolean.toString(false));
+        DisplayProperties.debug_layout(isEnabled);
         SystemPropPoker.getInstance().poke();
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final boolean isEnabled = SystemProperties.getBoolean(View.DEBUG_LAYOUT_PROPERTY,
-                false /* default */);
+        final boolean isEnabled = DisplayProperties.debug_layout().orElse(false);
         ((SwitchPreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        SystemProperties.set(View.DEBUG_LAYOUT_PROPERTY, Boolean.toString(false));
+        DisplayProperties.debug_layout(false);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }

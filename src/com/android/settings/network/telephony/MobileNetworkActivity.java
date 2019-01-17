@@ -37,7 +37,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -67,7 +69,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         @Override
         public void onSubscriptionsChanged() {
             if (!Objects.equals(mSubscriptionInfos,
-                    mSubscriptionManager.getActiveSubscriptionInfoList())) {
+                    mSubscriptionManager.getActiveSubscriptionInfoList(true))) {
                 updateSubscriptions(null);
             }
         }
@@ -77,11 +79,15 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.mobile_network_settings_container);
+        if (FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
+            setContentView(R.layout.mobile_network_settings_container_v2);
+        } else {
+            setContentView(R.layout.mobile_network_settings_container);
+        }
         setActionBar(findViewById(R.id.mobile_action_bar));
         mPhoneChangeReceiver = new PhoneChangeReceiver();
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
-        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
+        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
         mCurSubscriptionId = savedInstanceState != null
                 ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : SUB_ID_NULL;
@@ -130,9 +136,11 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
 
     @VisibleForTesting
     void updateSubscriptions(Bundle savedInstanceState) {
-        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
+        mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
 
-        updateBottomNavigationView();
+        if (!FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
+            updateBottomNavigationView();
+        }
 
         if (savedInstanceState == null) {
             switchFragment(new MobileNetworkSettings(), getSubscriptionId());

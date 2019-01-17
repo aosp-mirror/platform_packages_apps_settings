@@ -80,7 +80,7 @@ public class SimSelectNotification extends BroadcastReceiver {
             }
         }
 
-        List<SubscriptionInfo> sil = subscriptionManager.getActiveSubscriptionInfoList();
+        List<SubscriptionInfo> sil = subscriptionManager.getActiveSubscriptionInfoList(true);
         if (sil == null || sil.size() < 1) {
             Log.d(TAG, "Subscription list is empty");
             return;

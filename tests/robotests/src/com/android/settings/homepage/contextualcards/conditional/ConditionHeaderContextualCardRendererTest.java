@@ -67,11 +67,13 @@ public class ConditionHeaderContextualCardRendererTest {
 
     @Test
     public void bindView_shouldSetClickListener() {
-        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
+        final ContextualCard card = generateConditionHeaderContextualCard();
+        final View view = LayoutInflater.from(mActivity).inflate(card.getViewType(), recyclerView,
+                false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view,
+                card.getViewType());
         when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.CONDITIONAL_HEADER)).thenReturn(mController);
 
@@ -83,11 +85,13 @@ public class ConditionHeaderContextualCardRendererTest {
 
     @Test
     public void bindView_clickView_shouldSetTrueToIsConditionExpanded() {
-        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
-        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view);
+        final ContextualCard card = generateConditionHeaderContextualCard();
+        final View view = LayoutInflater.from(mActivity).inflate(card.getViewType(), recyclerView,
+                false);
+        final RecyclerView.ViewHolder viewHolder = mRenderer.createViewHolder(view,
+                card.getViewType());
         when(mControllerRendererPool.getController(mActivity,
                 ContextualCard.CardType.CONDITIONAL_HEADER)).thenReturn(mController);
 
@@ -105,6 +109,7 @@ public class ConditionHeaderContextualCardRendererTest {
                 .setConditionalCards(generateConditionCards(3))
                 .setName("test_condition_header")
                 .setRankingScore(-9999.0)
+                .setViewType(ConditionHeaderContextualCardRenderer.VIEW_TYPE)
                 .build();
     }
 
@@ -118,7 +123,7 @@ public class ConditionHeaderContextualCardRendererTest {
                     .setName("test_name" + i)
                     .setTitleText("test_title" + i)
                     .setSummaryText("test_summary" + i)
-                    .setIsHalfWidth(true)
+                    .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                     .build());
         }
         return conditionCards;

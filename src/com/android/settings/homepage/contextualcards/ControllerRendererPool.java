@@ -26,14 +26,10 @@ import androidx.lifecycle.LifecycleOwner;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
-import com.android.settings.homepage.contextualcards.conditional
-        .ConditionHeaderContextualCardRenderer;
-import com.android.settings.homepage.contextualcards.legacysuggestion
-        .LegacySuggestionContextualCardController;
-import com.android.settings.homepage.contextualcards.legacysuggestion
-        .LegacySuggestionContextualCardRenderer;
-import com.android.settings.homepage.contextualcards.conditional
-        .ConditionFooterContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.conditional.ConditionFooterContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.conditional.ConditionHeaderContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.legacysuggestion.LegacySuggestionContextualCardController;
+import com.android.settings.homepage.contextualcards.legacysuggestion.LegacySuggestionContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardController;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
@@ -87,13 +83,6 @@ public class ControllerRendererPool {
             LifecycleOwner lifecycleOwner, int viewType) {
         final Class<? extends ContextualCardRenderer> clz =
                 ContextualCardLookupTable.getCardRendererClassByViewType(viewType);
-        return getRenderer(context, lifecycleOwner, clz);
-    }
-
-    public ContextualCardRenderer getRendererByCardType(Context context,
-            LifecycleOwner lifecycleOwner, @ContextualCard.CardType int cardType) {
-        final Class<? extends ContextualCardRenderer> clz =
-                ContextualCardLookupTable.getCardRendererClassByCardType(cardType);
         return getRenderer(context, lifecycleOwner, clz);
     }
 

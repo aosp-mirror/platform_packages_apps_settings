@@ -563,7 +563,10 @@ public class WifiSettings extends RestrictedSettingsFragment
              * networks, or Passpoint provided networks.
              */
             WifiConfiguration config = mSelectedAccessPoint.getConfig();
-            if ((mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
+            if (mSelectedAccessPoint.isOsuProvider()) {
+                mSelectedAccessPoint.startOsuProvisioning();
+                mClickedConnect = true;
+            } else if ((mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
                     (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
                 connect(mSelectedAccessPoint.getConfig(), mSelectedAccessPoint.isSaved());

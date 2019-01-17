@@ -78,7 +78,7 @@ public class NightDisplayConditionController implements ConditionalCardControlle
                 .setSummaryText(
                         mAppContext.getText(R.string.condition_night_display_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_settings_night_display))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 

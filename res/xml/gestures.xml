@@ -28,6 +28,18 @@
         settings:controller="com.android.settings.gestures.AssistGestureSettingsPreferenceController" />
 
     <Preference
+        android:key="gesture_skip_summary"
+        android:title="@string/gesture_skip_title"
+        android:fragment="com.android.settings.gestures.SkipGestureSettings"
+        settings:controller="com.android.settings.gestures.SkipGesturePreferenceController" />
+
+    <Preference
+        android:key="gesture_silence_summary"
+        android:title="@string/gesture_silence_title"
+        android:fragment="com.android.settings.gestures.SilenceGestureSettings"
+        settings:controller="com.android.settings.gestures.SilenceGesturePreferenceController" />
+
+    <Preference
         android:key="gesture_wake_screen_input_summary"
         android:title="@string/ambient_display_wake_screen_title"
         android:fragment="com.android.settings.gestures.WakeScreenGestureSettings"
@@ -62,6 +74,12 @@
         android:title="@string/swipe_up_to_switch_apps_title"
         android:fragment="com.android.settings.gestures.SwipeUpGestureSettings"
         settings:controller="com.android.settings.gestures.SwipeUpPreferenceController" />
+
+    <Preference
+        android:key="gesture_tap_screen_input_summary"
+        android:title="@string/ambient_display_tap_screen_title"
+        android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
+        settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
     <Preference
         android:key="gesture_double_tap_screen_input_summary"

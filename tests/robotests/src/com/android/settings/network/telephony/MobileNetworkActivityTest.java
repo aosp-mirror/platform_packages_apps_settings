@@ -20,6 +20,7 @@ import static com.android.settings.network.telephony.MobileNetworkActivity.MOBIL
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -108,7 +109,8 @@ public class MobileNetworkActivityTest {
     @Test
     public void updateBottomNavigationView_oneSubscription_shouldBeGone() {
         mSubscriptionInfos.add(mSubscriptionInfo);
-        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getActiveSubscriptionInfoList();
+        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getActiveSubscriptionInfoList(
+                eq(true));
 
         mMobileNetworkActivity.updateBottomNavigationView();
 
@@ -120,7 +122,8 @@ public class MobileNetworkActivityTest {
         final Menu menu = new ContextMenuBuilder(mContext);
         mSubscriptionInfos.add(mSubscriptionInfo);
         mSubscriptionInfos.add(mSubscriptionInfo);
-        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getActiveSubscriptionInfoList();
+        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getActiveSubscriptionInfoList(
+                eq(true));
         doReturn(menu).when(mBottomNavigationView).getMenu();
 
         mMobileNetworkActivity.updateBottomNavigationView();

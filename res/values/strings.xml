@@ -5841,6 +5841,9 @@
          Used in SetupWizard for XLarge screen [CHAR LIMIT=20] -->
     <string name="wifi_setup_detail">Network details</string>
 
+    <!-- Do not translate. This is a stub which will be removed soon. -->
+    <string name="time_zone_auto_stub" translatable="false">Select Time Zone</string>
+
     <!-- Content description of the enabled sync icon for accessibility. [CHAR LIMIT=NONE] -->
     <string name="accessibility_sync_enabled">Sync enabled</string>
     <!-- Content description of the disabled sync icon for accessibility. [CHAR LIMIT=NONE] -->
@@ -9730,6 +9733,16 @@
     <!-- Summary text for ambient display [CHAR LIMIT=NONE]-->
     <string name="ambient_display_wake_lock_screen_summary" product="default"></string>
 
+    <!-- Preference and settings suggestion title text for ambient display tap (phone) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="default">Tap to check phone</string>
+    <!-- Preference and settings suggestion title text for ambient display tap (tablet) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="tablet">Tap to check tablet</string>
+    <!-- Preference and settings suggestion title text for ambient display tap (device) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="device">Tap to check device</string>
+
+    <!-- Summary text for ambient display tap [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_tap_screen_summary">To check time, notifications, and other info, tap your screen.</string>
+
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
     <!-- Title text for fingerprint gesture preference screen [CHAR LIMIT=25] -->
@@ -10097,6 +10110,8 @@
     <string name="gup_dashboard_title">Game Update Package Preferences</string>
     <!-- Summary for Game Update Package dashboard [CHAR LIMIT=50] -->
     <string name="gup_dashboard_summary">Modify Game Update Package settings</string>
+    <!-- Title for Game Update Package all apps preference [CHAR LIMIT=50] -->
+    <string name="gup_all_apps_switch_title">Enable for all apps</string>
     <!-- Title for Game Update Package preference [CHAR LIMIT=50] -->
     <string name="gup_app_preference_title">Select Graphics Driver</string>
     <!-- The default value for Game Update Package preference [CHAR LIMIT=50] -->
@@ -10344,6 +10359,34 @@
     <!-- Mobile network settings screen, title of Mobile data switch preference [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_summary">Access data using mobile network</string>
 
+    <!-- Summary of the 'Mobile network' item on the Network & internet page when there is no mobile
+         service setup yet (eg no SIM card inserted and no eSIM configured). Tapping it leads to a
+         UI where the user can setup service. [CHAR LIMIT=50] -->
+    <string name="mobile_network_summary_add_a_network">Add a network</string>
+    <!-- Summary of the 'Mobile network' item on the Network & internet page when there is more than
+         one mobile service configured (aka "dual SIM") - it shows a count of SIM/eSIM and tapping
+         it leads to a page showing a list of the mobile service subscriptions. [CHAR LIMIT=40] -->
+    <plurals name="mobile_network_summary_count">
+        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> SIM</item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> SIMs</item>
+    </plurals>
+
+    <!-- Title of item shown at the bottom of the page listing multiple mobile service
+         subscriptions; tapping it leads to a UI to add more [CHAR LIMIT=40] -->
+    <string name="mobile_network_list_add_more">Add more</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is active and is tied to a physical SIM card [CHAR LIMIT=40] -->
+    <string name="mobile_network_active_sim">Active SIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is inactive and is tied to a physical SIM card [CHAR LIMIT=40] -->
+    <string name="mobile_network_inactive_sim">Inactive SIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is active and is tied to an eSIM profile [CHAR LIMIT=40] -->
+    <string name="mobile_network_active_esim">Active eSIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is inactive and is tied to an eSIM profile [CHAR LIMIT=40] -->
+    <string name="mobile_network_inactive_esim">Inactive eSIM</string>
+
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>
     <!-- Summary for preferred network type [CHAR LIMIT=NONE] -->
@@ -10464,4 +10507,9 @@
     <!-- String for talkback on the account avatar of the search bar.  [CHAR LIMIT=NONE] -->
     <string name="search_bar_account_avatar_content_description"></string>
 
+    <!-- Preference title text for skip media gesture [CHAR LIMIT=60]-->
+    <string name="gesture_skip_title">Skip gesture</string>
+
+    <!-- Preference title text for silence gesture [CHAR LIMIT=60]-->
+    <string name="gesture_silence_title">Silence alerts gesture</string>
 </resources>

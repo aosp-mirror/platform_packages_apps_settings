@@ -73,7 +73,7 @@ public class BackgroundDataConditionController implements ConditionalCardControl
                 .setTitleText(mAppContext.getText(R.string.condition_bg_data_title).toString())
                 .setSummaryText(mAppContext.getText(R.string.condition_bg_data_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_data_saver))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 

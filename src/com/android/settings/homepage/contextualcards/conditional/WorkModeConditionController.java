@@ -93,7 +93,7 @@ public class WorkModeConditionController implements ConditionalCardController {
                 .setTitleText(mAppContext.getText(R.string.condition_work_title).toString())
                 .setSummaryText(mAppContext.getText(R.string.condition_work_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_signal_workmode_enable))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 

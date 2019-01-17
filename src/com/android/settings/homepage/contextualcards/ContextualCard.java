@@ -22,6 +22,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import androidx.annotation.LayoutRes;
+
+import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -63,9 +67,10 @@ public class ContextualCard {
     private final int mIconResId;
     private final int mCardAction;
     private final long mExpireTimeMS;
-    private final boolean mIsHalfWidth;
     private final boolean mIsLargeCard;
     private final Drawable mIconDrawable;
+    @LayoutRes
+    private final int mViewType;
 
     public String getName() {
         return mName;
@@ -139,16 +144,16 @@ public class ContextualCard {
         return mIconDrawable;
     }
 
-    public boolean isHalfWidth() {
-        return mIsHalfWidth;
-    }
-
     public boolean isLargeCard() {
         return mIsLargeCard;
     }
 
     boolean isCustomCard() {
         return TextUtils.isEmpty(mSliceUri);
+    }
+
+    public int getViewType() {
+        return mViewType;
     }
 
     public Builder mutate() {
@@ -174,8 +179,8 @@ public class ContextualCard {
         mCardAction = builder.mCardAction;
         mExpireTimeMS = builder.mExpireTimeMS;
         mIconDrawable = builder.mIconDrawable;
-        mIsHalfWidth = builder.mIsHalfWidth;
         mIsLargeCard = builder.mIsLargeCard;
+        mViewType = builder.mViewType;
     }
 
     ContextualCard(Cursor c) {
@@ -215,13 +220,12 @@ public class ContextualCard {
         mBuilder.setCardAction(mCardAction);
         mExpireTimeMS = c.getLong(c.getColumnIndex(CardDatabaseHelper.CardColumns.EXPIRE_TIME_MS));
         mBuilder.setExpireTimeMS(mExpireTimeMS);
-        mIsHalfWidth = (c.getInt(
-                c.getColumnIndex(CardDatabaseHelper.CardColumns.SUPPORT_HALF_WIDTH)) == 1);
-        mBuilder.setIsHalfWidth(mIsHalfWidth);
         mIsLargeCard = false;
         mBuilder.setIsLargeCard(mIsLargeCard);
         mIconDrawable = null;
         mBuilder.setIconDrawable(mIconDrawable);
+        mViewType = getViewTypeByCardType(mCardType);
+        mBuilder.setViewType(mViewType);
     }
 
     @Override
@@ -245,6 +249,13 @@ public class ContextualCard {
         return TextUtils.equals(mName, that.mName);
     }
 
+    private int getViewTypeByCardType(int cardType) {
+        if (cardType == CardType.SLICE) {
+            return SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
+        }
+        return 0;
+    }
+
     public static class Builder {
         private String mName;
         private int mCardType;
@@ -263,8 +274,9 @@ public class ContextualCard {
         private int mCardAction;
         private long mExpireTimeMS;
         private Drawable mIconDrawable;
-        private boolean mIsHalfWidth;
         private boolean mIsLargeCard;
+        @LayoutRes
+        private int mViewType;
 
         public Builder setName(String name) {
             mName = name;
@@ -351,13 +363,13 @@ public class ContextualCard {
             return this;
         }
 
-        public Builder setIsHalfWidth(boolean isHalfWidth) {
-            mIsHalfWidth = isHalfWidth;
+        public Builder setIsLargeCard(boolean isLargeCard) {
+            mIsLargeCard = isLargeCard;
             return this;
         }
 
-        public Builder setIsLargeCard(boolean isLargeCard) {
-            mIsLargeCard = isLargeCard;
+        public Builder setViewType(@LayoutRes int viewType) {
+            mViewType = viewType;
             return this;
         }
 
