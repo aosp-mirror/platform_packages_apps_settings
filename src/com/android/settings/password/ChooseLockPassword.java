@@ -47,7 +47,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -69,6 +68,8 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.widget.ImeAwareEditText;
 
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 import com.google.android.setupdesign.GlifLayout;
 
 import java.util.ArrayList;
@@ -168,8 +169,7 @@ public class ChooseLockPassword extends SettingsActivity {
     }
 
     public static class ChooseLockPasswordFragment extends InstrumentedFragment
-            implements OnClickListener, OnEditorActionListener, TextWatcher,
-            SaveAndFinishWorker.Listener {
+            implements OnEditorActionListener, TextWatcher, SaveAndFinishWorker.Listener {
         private static final String KEY_FIRST_PIN = "first_pin";
         private static final String KEY_UI_STAGE = "ui_stage";
         private static final String KEY_CURRENT_PASSWORD = "current_password";
@@ -210,9 +210,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
-        protected Button mSkipButton;
-        private Button mClearButton;
-        private Button mNextButton;
+        protected FooterButton mSkipOrClearButton;
+        private FooterButton mNextButton;
         private TextView mMessage;
 
         private TextChangedHandler mTextChangedHandler;
@@ -408,13 +407,25 @@ public class ChooseLockPassword extends SettingsActivity {
             ViewGroup container = view.findViewById(R.id.password_container);
             container.setOpticalInsets(Insets.NONE);
 
-            mSkipButton = view.findViewById(R.id.skip_button);
-            mSkipButton.setOnClickListener(this);
-            mNextButton = view.findViewById(R.id.next_button);
-            mNextButton.setOnClickListener(this);
-            mClearButton = view.findViewById(R.id.clear_button);
-            mClearButton.setOnClickListener(this);
-
+            final ButtonFooterMixin mixin = mLayout.getMixin(ButtonFooterMixin.class);
+            mixin.setSecondaryButton(
+                    new FooterButton.Builder(getActivity())
+                            .setText(R.string.lockpassword_clear_label)
+                            .setListener(this::onSkipOrClearButtonClick)
+                            .setButtonType(FooterButton.ButtonType.SKIP)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+            mixin.setPrimaryButton(
+                    new FooterButton.Builder(getActivity())
+                            .setText(R.string.next_label)
+                            .setListener(this::onNextButtonClick)
+                            .setButtonType(FooterButton.ButtonType.NEXT)
+                            .setTheme(R.style.SudGlifButton_Primary)
+                            .build()
+            );
+            mSkipOrClearButton = mixin.getSecondaryButton();
+            mNextButton = mixin.getPrimaryButton();
 
             mMessage = view.findViewById(R.id.message);
             if (mForFingerprint) {
@@ -777,19 +788,15 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         protected void setNextText(int text) {
-            mNextButton.setText(text);
+            mNextButton.setText(getActivity(), text);
         }
 
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.next_button:
-                    handleNext();
-                    break;
+        protected void onSkipOrClearButtonClick(View view) {
+            mPasswordEntry.setText("");
+        }
 
-                case R.id.clear_button:
-                    mPasswordEntry.setText("");
-                    break;
-            }
+        protected void onNextButtonClick(View view) {
+            handleNext();
         }
 
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -894,13 +901,12 @@ public class ChooseLockPassword extends SettingsActivity {
                 mPasswordRequirementAdapter.setRequirements(messages);
                 // Enable/Disable the next button accordingly.
                 setNextEnabled(errorCode == NO_ERROR);
-                mClearButton.setVisibility(View.GONE);
             } else {
                 // Hide password requirement view when we are just asking user to confirm the pw.
                 mPasswordRestrictionView.setVisibility(View.GONE);
                 setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, getStageType())));
                 setNextEnabled(canInput && length >= mPasswordMinLength);
-                mClearButton.setVisibility(toVisibility(canInput && length > 0));
+                mSkipOrClearButton.setVisibility(toVisibility(canInput && length > 0));
             }
             int message = mUiStage.getMessage(mIsAlphaMode, getStageType());
             if (message != 0) {
