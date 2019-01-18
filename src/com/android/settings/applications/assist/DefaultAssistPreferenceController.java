@@ -16,15 +16,19 @@
 
 package com.android.settings.applications.assist;
 
+import android.app.role.RoleManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.provider.Settings;
 import android.service.voice.VoiceInteractionService;
 import android.service.voice.VoiceInteractionServiceInfo;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.internal.app.AssistUtils;
 import com.android.settings.R;
@@ -38,6 +42,7 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
     private final AssistUtils mAssistUtils;
     private final boolean mShowSetting;
     private final String mPrefKey;
+    private final Intent mIntent;
 
     public DefaultAssistPreferenceController(Context context, String prefKey,
             boolean showSetting) {
@@ -45,6 +50,15 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
         mPrefKey = prefKey;
         mShowSetting = showSetting;
         mAssistUtils = new AssistUtils(context);
+
+        final String packageName = mPackageManager.getPermissionControllerPackageName();
+        if (packageName != null) {
+            mIntent = new Intent(Intent.ACTION_MANAGE_DEFAULT_APP)
+                    .setPackage(packageName)
+                    .putExtra(Intent.EXTRA_ROLE_NAME, RoleManager.ROLE_ASSISTANT);
+        } else {
+            mIntent = null;
+        }
     }
 
     @Override
@@ -70,6 +84,17 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
         }
         return new Intent(Intent.ACTION_MAIN)
                 .setComponent(new ComponentName(cn.getPackageName(), activity));
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (TextUtils.equals(preference.getKey(), "default_assist")) {
+            if (mIntent != null) {
+                mContext.startActivity(mIntent);
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
