@@ -52,6 +52,7 @@ import java.util.Set;
 public class SliceContextualCardRenderer implements ContextualCardRenderer, LifecycleObserver {
     public static final int VIEW_TYPE_FULL_WIDTH = R.layout.homepage_slice_tile;
     public static final int VIEW_TYPE_HALF_WIDTH = R.layout.homepage_slice_half_tile;
+    public static final int VIEW_TYPE_DEFERRED_SETUP = R.layout.homepage_slice_deferred_setup_tile;
 
     private static final String TAG = "SliceCardRenderer";
 
@@ -64,6 +65,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     private final LifecycleOwner mLifecycleOwner;
     private final ControllerRendererPool mControllerRendererPool;
     private final Set<ContextualCard> mCardSet;
+    private final SliceDeferredSetupCardRendererHelper mDeferredSetupCardHelper;
     private final SliceFullCardRendererHelper mFullCardHelper;
     private final SliceHalfCardRendererHelper mHalfCardHelper;
 
@@ -78,11 +80,14 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         mLifecycleOwner.getLifecycle().addObserver(this);
         mFullCardHelper = new SliceFullCardRendererHelper(context);
         mHalfCardHelper = new SliceHalfCardRendererHelper(context);
+        mDeferredSetupCardHelper = new SliceDeferredSetupCardRendererHelper(context);
     }
 
     @Override
     public RecyclerView.ViewHolder createViewHolder(View view, @LayoutRes int viewType) {
         switch (viewType) {
+            case VIEW_TYPE_DEFERRED_SETUP:
+                return mDeferredSetupCardHelper.createViewHolder(view);
             case VIEW_TYPE_HALF_WIDTH:
                 return mHalfCardHelper.createViewHolder(view);
             default:
@@ -119,17 +124,25 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                 //TODO(b/120629936): Take this out once blank card issue is fixed.
                 Log.d(TAG, "Slice callback - uri = " + slice.getUri());
             }
-            if (holder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
-                mHalfCardHelper.bindView(holder, card, slice);
-            } else {
-                mFullCardHelper.bindView(holder, card, slice, mCardSet);
+            switch (holder.getItemViewType()) {
+                case VIEW_TYPE_DEFERRED_SETUP:
+                    mDeferredSetupCardHelper.bindView(holder, card, slice);
+                    break;
+                case VIEW_TYPE_HALF_WIDTH:
+                    mHalfCardHelper.bindView(holder, card, slice);
+                    break;
+                default:
+                    mFullCardHelper.bindView(holder, card, slice, mCardSet);
             }
         });
 
-        if (holder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
-            initDismissalActions(holder, card, R.id.content);
-        } else {
-            initDismissalActions(holder, card, R.id.slice_view);
+        switch (holder.getItemViewType()) {
+            case VIEW_TYPE_DEFERRED_SETUP:
+            case VIEW_TYPE_HALF_WIDTH:
+                initDismissalActions(holder, card, R.id.content);
+                break;
+            default:
+                initDismissalActions(holder, card, R.id.slice_view);
         }
     }
 

@@ -469,4 +469,24 @@
         <item name="titleSize">@*android:dimen/text_size_subhead_material</item>
     </style>
 
+    <style name="TextAppearance.DeferredSetupCardTitle">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.DeferredSetupCardSummary"
+           parent="@*android:style/TextAppearance.DeviceDefault.Body1">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="DeferredSetupCardButton" parent="android:Widget.DeviceDefault.Button.Colored">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
+        <item name="android:paddingBottom">@dimen/homepage_deferred_setup_card_button_padding_bottom</item>
+        <item name="android:paddingEnd">@dimen/homepage_deferred_setup_card_button_padding_end</item>
+        <item name="android:paddingStart">@dimen/homepage_deferred_setup_card_button_padding_start</item>
+        <item name="android:paddingTop">@dimen/homepage_deferred_setup_card_button_padding_top</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>
