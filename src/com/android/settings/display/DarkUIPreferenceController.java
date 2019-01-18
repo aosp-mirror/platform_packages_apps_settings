@@ -51,7 +51,7 @@ public class DarkUIPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         int value = mUiModeManager.getNightMode();
-        ListPreference preference = (ListPreference) screen.findPreference(getPreferenceKey());
+        ListPreference preference = screen.findPreference(getPreferenceKey());
         preference.setValue(modeToString(value));
     }
 
@@ -70,24 +70,22 @@ public class DarkUIPreferenceController extends BasePreferenceController
     private String modeToDescription(int mode) {
         String[] values = mContext.getResources().getStringArray(R.array.dark_ui_mode_entries);
         switch (mode) {
-            case UiModeManager.MODE_NIGHT_AUTO:
-                return values[0];
             case UiModeManager.MODE_NIGHT_YES:
-                return values[1];
+                return values[0];
             case UiModeManager.MODE_NIGHT_NO:
+            case UiModeManager.MODE_NIGHT_AUTO:
             default:
-                return values[2];
+                return values[1];
 
         }
     }
 
     private String modeToString(int mode) {
         switch (mode) {
-            case UiModeManager.MODE_NIGHT_AUTO:
-                return "auto";
             case UiModeManager.MODE_NIGHT_YES:
                 return "yes";
             case UiModeManager.MODE_NIGHT_NO:
+            case UiModeManager.MODE_NIGHT_AUTO:
             default:
                 return "no";
 
@@ -96,11 +94,10 @@ public class DarkUIPreferenceController extends BasePreferenceController
 
     private int modeToInt(String mode) {
         switch (mode) {
-            case "auto":
-                return UiModeManager.MODE_NIGHT_AUTO;
             case "yes":
                 return UiModeManager.MODE_NIGHT_YES;
             case "no":
+            case "auto":
             default:
                 return UiModeManager.MODE_NIGHT_NO;
         }
