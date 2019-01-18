@@ -70,8 +70,9 @@ public class WifiPrivacyPreferenceControllerTest {
 
         mPreferenceController.updateState(mDropDownPreference);
 
-
-        assertThat(mDropDownPreference.getEntry()).isEqualTo(perferenceString[PRIVACY_TRUSTED]);
+        int prefValue = mPreferenceController.translateMacRandomizedValueToPrefValue(
+                PRIVACY_TRUSTED);
+        assertThat(mDropDownPreference.getEntry()).isEqualTo(perferenceString[prefValue]);
     }
 
     @Test
@@ -80,7 +81,9 @@ public class WifiPrivacyPreferenceControllerTest {
 
         mPreferenceController.updateState(mDropDownPreference);
 
-        assertThat(mDropDownPreference.getEntry()).isEqualTo(perferenceString[PRIVACY_RANDOMIZED]);
+        int prefValue = mPreferenceController.translateMacRandomizedValueToPrefValue(
+                PRIVACY_RANDOMIZED);
+        assertThat(mDropDownPreference.getEntry()).isEqualTo(perferenceString[prefValue]);
     }
 
     @Test
