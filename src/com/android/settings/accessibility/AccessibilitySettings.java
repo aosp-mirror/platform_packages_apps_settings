@@ -27,6 +27,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -662,7 +663,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     protected void updateSystemPreferences() {
         // Move color inversion and color correction preferences to Display category if device
         // supports HWC hardware-accelerated color transform.
-        if (isColorTransformAccelerated(getContext())) {
+        if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
             PreferenceCategory experimentalCategory =
                     mCategoryToPrefCategoryMap.get(CATEGORY_EXPERIMENTAL);
             PreferenceCategory displayCategory =

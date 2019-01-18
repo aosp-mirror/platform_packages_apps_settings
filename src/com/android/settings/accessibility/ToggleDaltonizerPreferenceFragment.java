@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -61,7 +62,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
         mType = (ListPreference) findPreference("type");
 
-        if (!AccessibilitySettings.isColorTransformAccelerated(getActivity())) {
+        if (!ColorDisplayManager.isColorTransformAccelerated(getActivity())) {
             mFooterPreferenceMixin.createFooterPreference().setTitle(
                     R.string.accessibility_display_daltonizer_preference_subtitle);
         }
