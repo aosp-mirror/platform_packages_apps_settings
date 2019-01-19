@@ -141,7 +141,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController =
-                new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this);
+                new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this,
+                        DataUsageUtils.getDefaultSubscriptionId(activity));
         controllers.add(mSummaryController);
         getSettingsLifecycle().addObserver(mSummaryController);
         return controllers;
