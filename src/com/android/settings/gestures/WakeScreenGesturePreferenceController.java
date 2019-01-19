@@ -26,6 +26,8 @@ import android.text.TextUtils;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.settings.aware.AwareFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 public class WakeScreenGesturePreferenceController extends GesturePreferenceController {
 
@@ -34,6 +36,7 @@ public class WakeScreenGesturePreferenceController extends GesturePreferenceCont
 
     private static final String PREF_KEY_VIDEO = "gesture_wake_screen_video";
 
+    private final AwareFeatureProvider mFeatureProvider;
     private AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
     private final int mUserId;
@@ -41,16 +44,16 @@ public class WakeScreenGesturePreferenceController extends GesturePreferenceCont
     public WakeScreenGesturePreferenceController(Context context, String key) {
         super(context, key);
         mUserId = UserHandle.myUserId();
+        mFeatureProvider = FeatureFactory.getFactory(context).getAwareFeatureProvider();
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // No hardware support for Wake Screen Gesture
-        if (!getAmbientConfig().wakeScreenGestureAvailable()) {
+        if (!getAmbientConfig().wakeScreenGestureAvailable()
+                || !mFeatureProvider.isSupported(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-
-        return AVAILABLE;
+        return mFeatureProvider.isEnabled(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
