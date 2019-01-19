@@ -62,7 +62,7 @@ public class AllowBackgroundActivityStartsPreferenceController
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        writeSetting(false);
-        ((SwitchPreference) mPreference).setChecked(false);
+        writeSetting(true);
+        ((SwitchPreference) mPreference).setChecked(true);
     }
 }
