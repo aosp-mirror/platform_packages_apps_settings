@@ -420,10 +420,8 @@
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Inicio de sesión y pagos"</string>
     <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"Ojos abiertos para desbloquear"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"Cuando uses la autenticación facial, abre los ojos"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation (2559602923985027572) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (2002651109571928756) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Pedir confirmación siempre"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="2002651109571928756">"Pedir confirmación siempre al autenticarse en aplicaciones"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Eliminar datos faciales"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Puedes desbloquear el dispositivo y acceder a tus aplicaciones mediante el reconocimiento facial. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Huella digital"</string>
@@ -794,7 +792,10 @@
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"Iniciar sesión"</string>
     <string name="wifi_tap_to_sign_in" msgid="6990161842394669054">"Toca para iniciar sesión en la red"</string>
-    <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
+    <!-- no translation found for tx_link_speed (6139577455916971837) -->
+    <skip />
+    <!-- no translation found for rx_link_speed (5729003360923133988) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> quiere activar la conexión Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> quiere desactivar la conexión Wi-Fi"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
@@ -884,7 +885,10 @@
     <string name="wifi_hidden_network_warning" msgid="6674068093531603452">"Si tu router no emite ningún identificador de red, pero quieres conectarte más adelante, puedes configurar la red como oculta.\n\nEsto puede suponer un riesgo para la seguridad, ya que el teléfono emitirá la señal de forma regular para buscar la red.\n\nConfigurar la red como oculta no cambiará la configuración del router."</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Intensidad de la señal"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Estado"</string>
-    <string name="wifi_speed" msgid="3526198708812322037">"Velocidad de enlace"</string>
+    <!-- no translation found for tx_wifi_speed (2994278184097786511) -->
+    <skip />
+    <!-- no translation found for rx_wifi_speed (7206089638282839236) -->
+    <skip />
     <string name="wifi_frequency" msgid="7791090119577812214">"Frecuencia"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"Dirección IP"</string>
     <string name="passpoint_label" msgid="6381371313076009926">"Guardada a través de"</string>
@@ -1531,10 +1535,8 @@
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"No se ha podido recuperar el estado de las tarjetas eSIM debido a un error."</string>
     <string name="master_clear_title" msgid="3531267871084279512">"Borrar todos los datos"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Borrar todos los datos"</string>
-    <!-- no translation found for master_clear_desc (2314458161059569301) -->
-    <skip />
-    <!-- no translation found for master_clear_desc (7647628092266675099) -->
-    <skip />
+    <string name="master_clear_desc" product="tablet" msgid="2314458161059569301">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del tablet, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
+    <string name="master_clear_desc" product="default" msgid="7647628092266675099">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del teléfono, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Has iniciado sesión en las cuentas que se indican a continuación:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Hay otros usuarios presentes en este dispositivo.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Otros datos de usuario"</li></string>
@@ -1549,16 +1551,12 @@
     <string name="erase_esim_storage" msgid="5684858600215441932">"Borrar eSIM"</string>
     <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"Borra todas las tarjetas eSIM del teléfono. Esta acción no cancelará tu plan de servicios móviles."</string>
     <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"Borra todas las tarjetas eSIM del tablet. Esta acción no cancelará tu plan de servicios móviles."</string>
-    <!-- no translation found for master_clear_button_text (1893179883931194922) -->
-    <skip />
-    <!-- no translation found for master_clear_button_text (1893179883931194922) -->
-    <skip />
-    <!-- no translation found for master_clear_final_desc (7166193761421238701) -->
-    <skip />
+    <string name="master_clear_button_text" product="tablet" msgid="1893179883931194922">"Borrar todos los datos"</string>
+    <string name="master_clear_button_text" product="default" msgid="1893179883931194922">"Borrar todos los datos"</string>
+    <string name="master_clear_final_desc" msgid="7166193761421238701">"Se borrarán las aplicaciones que hayas descargado y tu información personal. Esta acción no se puede deshacer."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Borrar todo"</string>
     <string name="master_clear_failed" msgid="2503230016394586353">"No se ha reiniciado el sistema porque el servicio Borrado del sistema no está disponible."</string>
-    <!-- no translation found for master_clear_confirm_title (1134724452049918413) -->
-    <skip />
+    <string name="master_clear_confirm_title" msgid="1134724452049918413">"¿Borrar todos los datos?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Este usuario no puede restablecer el estado de fábrica"</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Borrando"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Espera..."</string>
@@ -2038,10 +2036,8 @@
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Si utilizas un ratón, puedes definir que el cursor realice acciones automáticamente cuando deja de moverse durante cierto tiempo."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Retraso antes del clic"</string>
     <string name="accessibility_vibration_settings_title" msgid="3453277326300320803">"Vibración"</string>
-    <!-- no translation found for accessibility_notification_vibration_title (3009997451790678444) -->
-    <skip />
-    <!-- no translation found for accessibility_ring_vibration_title (5369395955680650778) -->
-    <skip />
+    <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibración de las notificaciones"</string>
+    <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibración del tono"</string>
     <string name="accessibility_touch_vibration_title" msgid="7931823772673770492">"Vibración al tocar la pantalla"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utilizar el servicio"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Utilizar la corrección de color"</string>
@@ -2083,8 +2079,7 @@
       <item quantity="other">Retraso muy largo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="one">Retraso muy largo (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
-    <!-- no translation found for accessibility_vibration_summary (4272038147476749536) -->
-    <skip />
+    <string name="accessibility_vibration_summary" msgid="4272038147476749536">"Tono (<xliff:g id="SUMMARY_RING">%1$s</xliff:g>), notificación (<xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>) y respuesta táctil (<xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>)"</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"Desactivada para notificaciones y llamadas"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"Baja para notificaciones y llamadas"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"Media para notificaciones y llamadas"</string>
@@ -3060,10 +3055,8 @@
     <string name="keywords_ambient_display" msgid="3103487805748659132">"notificación entrante"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"conexión compartida por usb, conexión compartida por bluetooth, punto de acceso wi‑fi"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"háptica, vibrar, pantalla, sensibilidad"</string>
-    <!-- no translation found for keywords_ring_vibration (4652101158979064884) -->
-    <skip />
-    <!-- no translation found for keywords_notification_vibration (31924624421190547) -->
-    <skip />
+    <string name="keywords_ring_vibration" msgid="4652101158979064884">"háptica, vibrar, teléfono, llamada, sensibilidad, tono"</string>
+    <string name="keywords_notification_vibration" msgid="31924624421190547">"háptica, vibrar, sensibilidad"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Editar"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toca una etiqueta para editarla..."</string>
@@ -3118,10 +3111,8 @@
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Sin sonido excepto <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Sin sonido, excepto alarmas y sonidos multimedia"</string>
     <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"Programaciones"</string>
-    <!-- no translation found for zen_mode_delete_automatic_rules (5975522152123354381) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_delete (5717258786128155695) -->
-    <skip />
+    <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"Eliminar programaciones"</string>
+    <string name="zen_mode_schedule_delete" msgid="5717258786128155695">"Eliminar"</string>
     <string name="zen_mode_rule_name_edit" msgid="812185626159430507">"Editar"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"Programaciones"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="4773111805919088437">"Programación"</string>
@@ -3174,12 +3165,15 @@
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"Activar"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"Activar ahora"</string>
     <string name="zen_mode_button_turn_off" msgid="6181953727880503094">"Desactivar ahora"</string>
+    <!-- no translation found for live_captions_title (7450564721572472212) -->
+    <skip />
+    <!-- no translation found for live_captions_summary (3247164905504570813) -->
+    <skip />
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"El modo No molestar está activado hasta esta hora: <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"El modo No molestar permanecerá habilitado hasta que lo desactives"</string>
     <string name="zen_mode_settings_dnd_automatic_rule" msgid="6195725842906270996">"Una programación (<xliff:g id="RULE_NAME">%s</xliff:g>) ha activado automáticamente el modo No molestar"</string>
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"Una aplicación (<xliff:g id="APP_NAME">%s</xliff:g>) ha activado automáticamente el modo No molestar"</string>
-    <!-- no translation found for zen_mode_settings_dnd_custom_settings_footer (1965922539531521052) -->
-    <skip />
+    <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="1965922539531521052">"El modo No molestar está activado para <xliff:g id="RULE_NAMES">%s</xliff:g> con opciones de configuración personalizadas."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="7555742240858292255"><annotation id="link">" Ver ajustes personalizados"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"Solo prioritarias"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
@@ -3387,12 +3381,9 @@
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Todos los días"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"La alarma puede anular la hora de finalización"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="1673667979187593693">"La programación se desactiva cuando suena una alarma"</string>
-    <!-- no translation found for zen_mode_custom_behavior_title (1148856394866360783) -->
-    <skip />
-    <!-- no translation found for zen_mode_custom_behavior_summary_default (7750128187766412708) -->
-    <skip />
-    <!-- no translation found for zen_mode_custom_behavior_summary (7458258833216726120) -->
-    <skip />
+    <string name="zen_mode_custom_behavior_title" msgid="1148856394866360783">"Comportamiento del modo No molestar"</string>
+    <string name="zen_mode_custom_behavior_summary_default" msgid="7750128187766412708">"Usar configuración predeterminada"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="7458258833216726120">"Crear opciones de configuración personalizadas para esta programación"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="4070854282812755247">"En la programación \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g>-<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3806,41 +3797,32 @@
     <string name="condition_turn_on" msgid="9089876276117874591">"Activar"</string>
     <string name="condition_expand_show" msgid="608202020023489939">"Mostrar"</string>
     <string name="condition_expand_hide" msgid="948507739223760667">"Ocultar"</string>
-    <!-- no translation found for condition_hotspot_title (16457539111965844) -->
-    <skip />
-    <!-- no translation found for condition_hotspot_summary (4254900143903616196) -->
-    <skip />
+    <string name="condition_hotspot_title" msgid="16457539111965844">"Punto de acceso"</string>
+    <string name="condition_hotspot_summary" msgid="4254900143903616196">"<xliff:g id="ID_1">%1$s</xliff:g> conectado"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Modo avión activado"</string>
-    <!-- no translation found for condition_airplane_summary (2500054042183138980) -->
-    <skip />
+    <string name="condition_airplane_summary" msgid="2500054042183138980">"Redes no disponibles"</string>
     <string name="condition_zen_title" msgid="2897779738211625">"Modo No molestar activado"</string>
-    <!-- no translation found for condition_zen_summary (1883081861671139612) -->
-    <skip />
+    <string name="condition_zen_summary" msgid="1883081861671139612">"Afecta a lo que oyes y ves"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Ahorro de batería activado"</string>
-    <!-- no translation found for condition_battery_summary (5847532902924566572) -->
-    <skip />
+    <string name="condition_battery_summary" msgid="5847532902924566572">"Funciones restringidas"</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Datos móviles desactivados"</string>
     <string name="condition_cellular_summary" msgid="816822977403022625">"Solo se puede acceder a Internet a través de Wi‑Fi"</string>
-    <!-- no translation found for condition_bg_data_title (5475793236997935138) -->
-    <skip />
-    <!-- no translation found for condition_bg_data_summary (1852811387315557164) -->
-    <skip />
+    <string name="condition_bg_data_title" msgid="5475793236997935138">"Ahorro de datos"</string>
+    <string name="condition_bg_data_summary" msgid="1852811387315557164">"Funciones restringidas"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Perfil de trabajo desactivado"</string>
     <string name="condition_work_summary" msgid="9167580982244020746">"Para aplicaciones y notificaciones"</string>
     <string name="condition_device_muted_action_turn_on_sound" msgid="4930240942726349213">"Activar sonido"</string>
     <string name="condition_device_muted_title" product="tablet" msgid="3095044864508335783">"El dispositivo está silenciado"</string>
     <string name="condition_device_muted_title" product="default" msgid="5728503711902454888">"Teléfono silenciado"</string>
-    <!-- no translation found for condition_device_muted_summary (6313274406443663781) -->
-    <skip />
-    <!-- no translation found for condition_device_vibrate_title (8070177546359590131) -->
-    <skip />
-    <!-- no translation found for condition_device_vibrate_summary (5743200564646910423) -->
-    <skip />
+    <string name="condition_device_muted_summary" msgid="6313274406443663781">"Para llamadas y notificaciones"</string>
+    <string name="condition_device_vibrate_title" product="tablet" msgid="1983420639621523345">"El dispositivo está en modo vibración"</string>
+    <string name="condition_device_vibrate_title" product="default" msgid="8070177546359590131">"Solo vibración"</string>
+    <string name="condition_device_vibrate_summary" product="tablet" msgid="433514444618164607">"Las llamadas y las notificaciones harán vibrar el dispositivo"</string>
+    <string name="condition_device_vibrate_summary" product="default" msgid="5743200564646910423">"Para llamadas y notificaciones"</string>
     <string name="night_display_suggestion_title" msgid="6602129097059325291">"Definir horario de luz nocturna"</string>
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"Cambiar automáticamente el color de la pantalla por la noche"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Luz nocturna activada"</string>
-    <!-- no translation found for condition_night_display_summary (7150932917610919907) -->
-    <skip />
+    <string name="condition_night_display_summary" msgid="7150932917610919907">"La pantalla adopta un tono ámbar"</string>
     <string name="homepage_condition_footer_content_description" msgid="2335918927419018030">"Ocultar"</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"Sugerencias personalizadas"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Sugerencias"</string>
@@ -3972,9 +3954,20 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ninguno"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Falta un objeto de la clasificación."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"El objeto de la clasificación no incluye esta tecla."</string>
+    <!-- no translation found for theme_customization_category (1049181544004163283) -->
+    <skip />
+    <!-- no translation found for theme_customization_accent_color_title (2946868019715911717) -->
+    <skip />
+    <!-- no translation found for theme_customization_font_title (1634160034866477544) -->
+    <skip />
+    <!-- no translation found for theme_customization_icon_shape_title (9168569756271940841) -->
+    <skip />
+    <!-- no translation found for theme_customization_device_default (5058147707906551368) -->
+    <skip />
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Recorte de la pantalla"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"recorte de la pantalla, corte"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Opción predeterminada del dispositivo"</string>
+    <!-- no translation found for overlay_option_device_default (294510212512203638) -->
+    <skip />
     <string name="special_access" msgid="3458780842491881155">"Acceso especial de aplicaciones"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicaciones pueden utilizar datos sin restricción</item>
@@ -4053,6 +4046,10 @@
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Coge el dispositivo para consultar la hora, las notificaciones y otra información."</string>
     <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Gesto para mostrar pantalla de bloqueo"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Toca para comprobar el teléfono"</string>
+    <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Toca para comprobar el tablet"</string>
+    <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Toca para comprobar el dispositivo"</string>
+    <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Para ver la hora, las notificaciones y otra información, toca la pantalla."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Deslizar por el sensor de huellas para abrir notificaciones"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Deslizar huella digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales situado en la parte trasera del teléfono."</string>
@@ -4195,25 +4192,20 @@
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Esta función no está disponible en este dispositivo"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Forzar mediciones de GNSS completas"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Registrar todas las frecuencias y constelaciones de GNSS sin ciclo de servicio"</string>
-    <!-- no translation found for allow_background_activity_starts (4121456477541603005) -->
-    <skip />
-    <!-- no translation found for allow_background_activity_starts_summary (6837591829176921245) -->
-    <skip />
+    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Permitir inicio de actividades en segundo plano"</string>
+    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Permite que se inicien todas las actividades en segundo plano"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Mostrar siempre el cuadro de diálogo de bloqueos"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Mostrar el cuadro de diálogo cuando una aplicación falle"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Seleccionar una aplicación para usar ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="864740024581634768">"No se ha seleccionado ninguna aplicación para usar ANGLE"</string>
     <string name="angle_enabled_app_set" msgid="226015765615525056">"Aplicación para usar ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for gup_dashboard_title (6365053025908111197) -->
-    <skip />
-    <!-- no translation found for gup_dashboard_summary (7454221684538769577) -->
-    <skip />
+    <string name="gup_dashboard_title" msgid="6365053025908111197">"Preferencias paquetes de actualización de juegos"</string>
+    <string name="gup_dashboard_summary" msgid="7454221684538769577">"Editar ajustes paquetes de actualización de juegos"</string>
+    <string name="gup_all_apps_switch_title" msgid="8071650410524064369">"Activar para todas las aplicaciones"</string>
     <string name="gup_app_preference_title" msgid="7176388161899486800">"Seleccionar controlador de gráficos"</string>
     <string name="gup_app_preference_default" msgid="7995039180348956109">"Predeterminado"</string>
-    <!-- no translation found for gup_app_preference_gup (5605778469372613985) -->
-    <skip />
-    <!-- no translation found for gup_app_preference_system (5701853677984004799) -->
-    <skip />
+    <string name="gup_app_preference_gup" msgid="5605778469372613985">"Paquete de actualización de juegos"</string>
+    <string name="gup_app_preference_system" msgid="5701853677984004799">"Controlador de gráficos del sistema"</string>
     <!-- no translation found for gup_app_preference_values:0 (8465947040872291983) -->
     <!-- no translation found for gup_app_preference_values:1 (2528348813076808406) -->
     <!-- no translation found for gup_app_preference_values:2 (1224045073126150618) -->
@@ -4305,6 +4297,19 @@
     <string name="cdma_lte_data_service" msgid="8507044148856536098">"Configurar servicio de datos"</string>
     <string name="mobile_data_settings_title" msgid="7674604042461065482">"Datos móviles"</string>
     <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Acceder a los datos con la red móvil"</string>
+    <!-- no translation found for mobile_network_summary_add_a_network (9148476748420654283) -->
+    <skip />
+    <!-- no translation found for mobile_network_summary_count (4505694491027023039) -->
+    <!-- no translation found for mobile_network_list_add_more (4000806369124701679) -->
+    <skip />
+    <!-- no translation found for mobile_network_active_sim (8034468461940321166) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_sim (5611153524222529180) -->
+    <skip />
+    <!-- no translation found for mobile_network_active_esim (4253830619317882982) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (5605993700944852351) -->
+    <skip />
     <string name="preferred_network_mode_title" msgid="6505630109389684100">"Preferencia de tipo de red"</string>
     <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Cambiar el modo operativo de la red"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Preferencia de tipo de red"</string>
@@ -4340,8 +4345,7 @@
     <string name="no_bluetooth_devices" msgid="861861879657732058">"No hay dispositivos Bluetooth"</string>
     <string name="settings_panel_title" msgid="4688575606213055744">"Panel de ajustes"</string>
     <string name="internet_connectivity_panel_title" msgid="721392242301676444">"Conexión a Internet"</string>
-    <!-- no translation found for volume_connectivity_panel_title (9192664643867101356) -->
-    <skip />
+    <string name="volume_connectivity_panel_title" msgid="9192664643867101356">"Volumen"</string>
     <string name="force_desktop_mode" msgid="4303240595324847998">"Forzar modo de escritorio"</string>
     <string name="force_desktop_mode_summary" msgid="6259798246015387202">"Fuerza el modo de escritorio experimental en pantallas secundarias"</string>
     <string name="hwui_force_dark_title" msgid="2466919877609396257">"Anular forzar el modo oscuro"</string>
@@ -4352,10 +4356,10 @@
     <string name="contextual_card_dismiss_keep" msgid="2230740610451447340">"Conservar"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="5507487987591500742">"¿Eliminar esta sugerencia?"</string>
     <string name="low_storage_summary" msgid="2077564126033530">"Queda poco espacio de almacenamiento. <xliff:g id="PERCENTAGE">%1$s</xliff:g> usado (disponible: <xliff:g id="FREE_SPACE">%2$s</xliff:g>)"</string>
-    <!-- no translation found for contextual_card_feedback_send (2996691837358030021) -->
-    <skip />
-    <!-- no translation found for contextual_card_feedback_confirm_message (8115454795160804779) -->
-    <skip />
+    <string name="contextual_card_feedback_send" msgid="2996691837358030021">"Enviar comentarios"</string>
+    <string name="contextual_card_feedback_confirm_message" msgid="8115454795160804779">"¿Te gustaría darnos tu opinión sobre esta sugerencia?"</string>
     <string name="copyable_slice_toast" msgid="2924110841440836023">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> se ha copiado en el portapapeles."</string>
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
+    <string name="gesture_skip_title" msgid="2092825906479683162">"Saltar gesto"</string>
+    <string name="gesture_silence_title" msgid="8991427657123202574">"Silenciar gestos de alertas"</string>
 </resources>
