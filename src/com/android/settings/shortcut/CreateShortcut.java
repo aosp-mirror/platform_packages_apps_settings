@@ -16,13 +16,12 @@
 
 package com.android.settings.shortcut;
 
-import static com.android.settings.search.actionbar.SearchMenuController
-        .NEED_SEARCH_ICON_IN_ACTION_BAR;
+import static com.android.settings.search.actionbar.SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
@@ -62,7 +61,7 @@ public class CreateShortcut extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_CREATE_SHORTCUT;
+        return SettingsEnums.SETTINGS_CREATE_SHORTCUT;
     }
 
     @Override

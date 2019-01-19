@@ -23,6 +23,7 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -57,7 +58,6 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
@@ -565,6 +565,6 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.MASTER_CLEAR;
+        return SettingsEnums.MASTER_CLEAR;
     }
 }

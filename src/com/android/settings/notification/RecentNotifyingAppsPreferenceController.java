@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,7 +36,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -47,7 +47,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -213,7 +212,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
                     .setTitleRes(R.string.notifications_title)
                     .setArguments(args)
                     .setSourceMetricsCategory(
-                            MetricsProto.MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS)
+                            SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS)
                     .toIntent());
             pref.setEnabled(mNotificationBackend.isBlockable(mContext, appEntry.info));
             pref.setOnPreferenceChangeListener((preference, newValue) -> {

@@ -18,16 +18,15 @@ package com.android.settings.connecteddevice.usb;
 
 import static android.net.ConnectivityManager.TETHERING_USB;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.RadioButtonPickerFragment;
@@ -70,7 +69,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.USB_DEFAULT;
+        return SettingsEnums.USB_DEFAULT;
     }
 
     @Override

@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo;
 import static android.content.Context.CLIPBOARD_SERVICE;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
@@ -130,14 +131,14 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
         // Don't enable developer options for secondary non-demo users.
         if (!(mUm.isAdminUser() || mUm.isDemoUser())) {
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
+                    mContext, SettingsEnums.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 
         // Don't enable developer options until device has been provisioned
         if (!Utils.isDeviceProvisioned(mContext)) {
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
+                    mContext, SettingsEnums.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 
@@ -163,7 +164,7 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
                         mDebuggingFeaturesDisallowedAdmin);
             }
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
+                    mContext, SettingsEnums.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 

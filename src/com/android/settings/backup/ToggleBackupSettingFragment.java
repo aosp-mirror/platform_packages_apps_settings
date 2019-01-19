@@ -2,6 +2,7 @@ package com.android.settings.backup;
 
 import android.app.Dialog;
 import android.app.backup.IBackupManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,7 +18,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -194,7 +194,7 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.PRIVACY;
+        return SettingsEnums.PRIVACY;
     }
 
     /**

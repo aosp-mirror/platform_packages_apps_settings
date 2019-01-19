@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +26,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.homepage.contextualcards.ContextualCard;
@@ -86,7 +86,7 @@ public class WorkModeConditionController implements ConditionalCardController {
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_WORK_MODE)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_WORK_MODE)
                 .setActionText(mAppContext.getText(R.string.condition_turn_on))
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_work_title))

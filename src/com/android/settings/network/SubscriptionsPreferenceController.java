@@ -25,12 +25,6 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
-import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkActivity;
-import com.android.settingslib.core.AbstractPreferenceController;
-
-import java.util.Map;
-
 import androidx.collection.ArrayMap;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -38,6 +32,12 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settingslib.core.AbstractPreferenceController;
+
+import java.util.Map;
 
 /**
  * This manages a set of Preferences it places into a PreferenceGroup owned by some parent

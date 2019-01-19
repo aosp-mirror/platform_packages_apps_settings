@@ -17,10 +17,10 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 
@@ -68,6 +68,6 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FINGERPRINT_ENROLL_SIDECAR;
+        return SettingsEnums.FINGERPRINT_ENROLL_SIDECAR;
     }
 }

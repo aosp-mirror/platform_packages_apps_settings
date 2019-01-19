@@ -18,8 +18,8 @@ package com.android.settings.connecteddevice;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
 public class TopLevelConnectedDevicesPreferenceController extends BasePreferenceController {
 

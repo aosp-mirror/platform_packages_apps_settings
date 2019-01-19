@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCodecStatus;
@@ -37,7 +38,6 @@ import android.widget.Switch;
 import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -207,7 +207,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEVELOPMENT;
+        return SettingsEnums.DEVELOPMENT;
     }
 
     @Override

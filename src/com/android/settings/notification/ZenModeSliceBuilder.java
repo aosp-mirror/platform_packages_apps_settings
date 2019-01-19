@@ -23,6 +23,7 @@ import static com.android.settings.notification.ZenModePreferenceController.ZEN_
 import android.annotation.ColorInt;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -35,7 +36,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -114,7 +114,7 @@ public class ZenModeSliceBuilder {
         final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
         return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 ZenModeSettings.class.getName(), ZEN_MODE_KEY, screenTitle,
-                MetricsEvent.NOTIFICATION_ZEN_MODE)
+                SettingsEnums.NOTIFICATION_ZEN_MODE)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }

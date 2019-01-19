@@ -16,21 +16,21 @@
 
 package com.android.settings.display;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import android.app.settings.SettingsEnums;
 
 public class FontSizePreferenceFragmentForSetupWizard
         extends ToggleFontSizePreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SUW_ACCESSIBILITY_FONT_SIZE;
+        return SettingsEnums.SUW_ACCESSIBILITY_FONT_SIZE;
     }
 
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
         if (mCurrentIndex != mInitialIndex) {
-            mMetricsFeatureProvider.action(getContext(), MetricsEvent.SUW_ACCESSIBILITY_FONT_SIZE,
+            mMetricsFeatureProvider.action(getContext(), SettingsEnums.SUW_ACCESSIBILITY_FONT_SIZE,
                     mCurrentIndex);
         }
 

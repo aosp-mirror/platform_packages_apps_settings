@@ -28,7 +28,6 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 

@@ -16,10 +16,10 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -64,7 +64,7 @@ public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implement
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_PRIORITY;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_PRIORITY;
     }
 
     /**

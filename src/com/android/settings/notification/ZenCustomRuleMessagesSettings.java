@@ -16,13 +16,13 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
@@ -42,7 +42,7 @@ public class ZenCustomRuleMessagesSettings extends ZenCustomRuleSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.ZEN_CUSTOM_RULE_MESSAGES;
+        return SettingsEnums.ZEN_CUSTOM_RULE_MESSAGES;
     }
 
     @Override

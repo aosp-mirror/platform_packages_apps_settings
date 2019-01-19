@@ -16,11 +16,11 @@
 
 package com.android.settings.dream;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.dream.DreamBackend;
@@ -50,7 +50,7 @@ public final class CurrentDreamPicker extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DREAM;
+        return SettingsEnums.DREAM;
     }
 
     @Override

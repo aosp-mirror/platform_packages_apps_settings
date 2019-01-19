@@ -18,6 +18,7 @@ package com.android.settings.wallpaper;
 
 import android.app.Activity;
 import android.app.WallpaperManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,7 +26,6 @@ import android.os.Bundle;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 
@@ -54,7 +54,7 @@ public class WallpaperSuggestionActivity extends Activity {
         new SubSettingLauncher(this)
                 .setDestination(WallpaperTypeSettings.class.getName())
                 .setTitleRes(R.string.wallpaper_suggestion_title)
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
+                .setSourceMetricsCategory(SettingsEnums.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                 .launch();
     }

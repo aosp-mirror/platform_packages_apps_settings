@@ -17,6 +17,7 @@ package com.android.settings.wifi;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -31,7 +32,6 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.HelpUtils;
@@ -60,7 +60,7 @@ public class WifiScanningRequiredFragment extends InstrumentedDialogFragment imp
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.WIFI_SCANNING_NEEDED_DIALOG;
+        return SettingsEnums.WIFI_SCANNING_NEEDED_DIALOG;
     }
 
     @Override

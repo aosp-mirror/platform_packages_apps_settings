@@ -19,6 +19,7 @@ package com.android.settings.webview;
 import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -30,7 +31,6 @@ import android.webkit.UserPackage;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -114,7 +114,7 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WEBVIEW_IMPLEMENTATION;
+        return SettingsEnums.WEBVIEW_IMPLEMENTATION;
     }
 
     private static class WebViewAppInfo extends DefaultAppInfo {

@@ -19,6 +19,7 @@ import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -30,8 +31,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase;
@@ -67,7 +66,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.WIFI_NETWORK_DETAILS;
+        return SettingsEnums.WIFI_NETWORK_DETAILS;
     }
 
     @Override
@@ -83,7 +82,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         if (dialogId == WIFI_DIALOG_ID) {
-            return MetricsEvent.DIALOG_WIFI_AP_EDIT;
+            return SettingsEnums.DIALOG_WIFI_AP_EDIT;
         }
         return 0;
     }

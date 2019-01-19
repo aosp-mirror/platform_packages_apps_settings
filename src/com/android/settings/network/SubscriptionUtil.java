@@ -20,11 +20,11 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
 
 public class SubscriptionUtil {
     private static List<SubscriptionInfo> sResultsForTesting;

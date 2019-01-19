@@ -17,13 +17,13 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.service.notification.ZenPolicy;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -60,7 +60,7 @@ public class ZenCustomRuleConfigSettings extends ZenCustomRuleSettingsBase {
                         new SubSettingLauncher(mContext)
                                 .setDestination(ZenCustomRuleCallsSettings.class.getName())
                                 .setArguments(createZenRuleBundle())
-                                .setSourceMetricsCategory(MetricsEvent.ZEN_CUSTOM_RULE_CALLS)
+                                .setSourceMetricsCategory(SettingsEnums.ZEN_CUSTOM_RULE_CALLS)
                                 .launch();
                         return true;
                     }
@@ -74,7 +74,7 @@ public class ZenCustomRuleConfigSettings extends ZenCustomRuleSettingsBase {
                         new SubSettingLauncher(mContext)
                                 .setDestination(ZenCustomRuleMessagesSettings.class.getName())
                                 .setArguments(createZenRuleBundle())
-                                .setSourceMetricsCategory(MetricsEvent.ZEN_CUSTOM_RULE_MESSAGES)
+                                .setSourceMetricsCategory(SettingsEnums.ZEN_CUSTOM_RULE_MESSAGES)
                                 .launch();
                         return true;
                     }
@@ -89,7 +89,7 @@ public class ZenCustomRuleConfigSettings extends ZenCustomRuleSettingsBase {
                                 .setDestination(ZenCustomRuleNotificationsSettings.class.getName())
                                 .setArguments(createZenRuleBundle())
                                 .setSourceMetricsCategory
-                                        (MetricsEvent.ZEN_CUSTOM_RULE_NOTIFICATION_RESTRICTIONS)
+                                        (SettingsEnums.ZEN_CUSTOM_RULE_NOTIFICATION_RESTRICTIONS)
                                 .launch();
                         return true;
                     }
@@ -123,7 +123,7 @@ public class ZenCustomRuleConfigSettings extends ZenCustomRuleSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ZEN_CUSTOM_RULE_SOUND_SETTINGS;
+        return SettingsEnums.ZEN_CUSTOM_RULE_SOUND_SETTINGS;
     }
 
     @Override
@@ -131,19 +131,19 @@ public class ZenCustomRuleConfigSettings extends ZenCustomRuleSettingsBase {
         mControllers = new ArrayList<>();
         mControllers.add(new ZenRuleCustomSwitchPreferenceController(context,
                 getSettingsLifecycle(), ALARMS_KEY, ZenPolicy.PRIORITY_CATEGORY_ALARMS,
-                MetricsEvent.ACTION_ZEN_ALLOW_ALARMS));
+                SettingsEnums.ACTION_ZEN_ALLOW_ALARMS));
         mControllers.add(new ZenRuleCustomSwitchPreferenceController(context,
                 getSettingsLifecycle(), MEDIA_KEY, ZenPolicy.PRIORITY_CATEGORY_MEDIA,
-                MetricsEvent.ACTION_ZEN_ALLOW_MEDIA));
+                SettingsEnums.ACTION_ZEN_ALLOW_MEDIA));
         mControllers.add(new ZenRuleCustomSwitchPreferenceController(context,
                 getSettingsLifecycle(), SYSTEM_KEY, ZenPolicy.PRIORITY_CATEGORY_SYSTEM,
-                MetricsEvent.ACTION_ZEN_ALLOW_SYSTEM));
+                SettingsEnums.ACTION_ZEN_ALLOW_SYSTEM));
         mControllers.add(new ZenRuleCustomSwitchPreferenceController(context,
                 getSettingsLifecycle(), REMINDERS_KEY, ZenPolicy.PRIORITY_CATEGORY_REMINDERS,
-                MetricsEvent.ACTION_ZEN_ALLOW_REMINDERS));
+                SettingsEnums.ACTION_ZEN_ALLOW_REMINDERS));
         mControllers.add(new ZenRuleCustomSwitchPreferenceController(context,
                 getSettingsLifecycle(), EVENTS_KEY, ZenPolicy.PRIORITY_CATEGORY_EVENTS,
-                MetricsEvent.ACTION_ZEN_ALLOW_EVENTS));
+                SettingsEnums.ACTION_ZEN_ALLOW_EVENTS));
         return mControllers;
     }
 

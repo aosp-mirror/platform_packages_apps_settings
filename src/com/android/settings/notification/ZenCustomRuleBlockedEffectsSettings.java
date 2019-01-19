@@ -16,11 +16,11 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.service.notification.ZenPolicy;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -46,26 +46,26 @@ public class ZenCustomRuleBlockedEffectsSettings extends ZenCustomRuleSettingsBa
         mControllers = new ArrayList<>();
         mControllers.add(new ZenRuleVisEffectPreferenceController(context, getSettingsLifecycle(),
                 "zen_effect_intent", ZenPolicy.VISUAL_EFFECT_FULL_SCREEN_INTENT,
-                MetricsEvent.ACTION_ZEN_BLOCK_FULL_SCREEN_INTENTS, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_FULL_SCREEN_INTENTS, null));
         mControllers.add(new ZenRuleVisEffectPreferenceController(context, getSettingsLifecycle(),
                 "zen_effect_light", ZenPolicy.VISUAL_EFFECT_LIGHTS,
-                MetricsEvent.ACTION_ZEN_BLOCK_LIGHT, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_LIGHT, null));
         mControllers.add(new ZenRuleVisEffectPreferenceController(context, getSettingsLifecycle(),
                 "zen_effect_peek", ZenPolicy.VISUAL_EFFECT_PEEK,
-                MetricsEvent.ACTION_ZEN_BLOCK_PEEK, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_PEEK, null));
         mControllers.add(new ZenRuleVisEffectPreferenceController(context, getSettingsLifecycle(),
                 "zen_effect_status", ZenPolicy.VISUAL_EFFECT_STATUS_BAR,
-                MetricsEvent.ACTION_ZEN_BLOCK_STATUS,
+                SettingsEnums.ACTION_ZEN_BLOCK_STATUS,
                 new int[] {ZenPolicy.VISUAL_EFFECT_NOTIFICATION_LIST}));
         mControllers.add(new ZenRuleVisEffectPreferenceController(context, getSettingsLifecycle(),
                 "zen_effect_badge", ZenPolicy.VISUAL_EFFECT_BADGE,
-                MetricsEvent.ACTION_ZEN_BLOCK_BADGE, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_BADGE, null));
         mControllers.add(new ZenRuleVisEffectPreferenceController(context, getSettingsLifecycle(),
                 "zen_effect_ambient", ZenPolicy.VISUAL_EFFECT_AMBIENT,
-                MetricsEvent.ACTION_ZEN_BLOCK_AMBIENT, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_AMBIENT, null));
         mControllers.add(new ZenRuleVisEffectPreferenceController(context, getSettingsLifecycle(),
                 "zen_effect_list", ZenPolicy.VISUAL_EFFECT_NOTIFICATION_LIST,
-                MetricsEvent.ACTION_ZEN_BLOCK_NOTIFICATION_LIST, null));
+                SettingsEnums.ACTION_ZEN_BLOCK_NOTIFICATION_LIST, null));
         return mControllers;
     }
 
@@ -76,6 +76,6 @@ public class ZenCustomRuleBlockedEffectsSettings extends ZenCustomRuleSettingsBa
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ZEN_CUSTOM_RULE_VIS_EFFECTS;
+        return SettingsEnums.ZEN_CUSTOM_RULE_VIS_EFFECTS;
     }
 }

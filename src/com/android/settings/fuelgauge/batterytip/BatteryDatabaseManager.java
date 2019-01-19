@@ -19,14 +19,10 @@ package com.android.settings.fuelgauge.batterytip;
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
 
-import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
-        .ANOMALY_STATE;
-import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
-        .ANOMALY_TYPE;
-import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
-        .PACKAGE_NAME;
-import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
-        .TIME_STAMP_MS;
+import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns.ANOMALY_STATE;
+import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns.ANOMALY_TYPE;
+import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns.PACKAGE_NAME;
+import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns.TIME_STAMP_MS;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns.UID;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.Tables.TABLE_ACTION;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.Tables.TABLE_ANOMALY;

@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
@@ -26,7 +27,6 @@ import android.util.SparseArray;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -84,7 +84,7 @@ public class UserProfileController extends AbstractPreferenceController implemen
                     .setDestination(StorageProfileFragment.class.getName())
                     .setArguments(args)
                     .setTitleText(mUser.name)
-                    .setSourceMetricsCategory(MetricsProto.MetricsEvent.DEVICEINFO_STORAGE)
+                    .setSourceMetricsCategory(SettingsEnums.DEVICEINFO_STORAGE)
                     .launch();
             return true;
         }

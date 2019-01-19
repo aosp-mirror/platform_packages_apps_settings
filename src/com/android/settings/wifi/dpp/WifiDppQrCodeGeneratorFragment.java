@@ -17,6 +17,7 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -29,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.wifi.qrcode.QrCodeGenerator;
 
@@ -47,7 +47,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
+        return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
     // Container Activity must implement this interface

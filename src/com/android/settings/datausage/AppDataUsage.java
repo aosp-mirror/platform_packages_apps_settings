@@ -17,6 +17,7 @@ package com.android.settings.datausage;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -38,7 +39,6 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.widget.EntityHeaderController;
@@ -348,7 +348,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APP_DATA_USAGE;
+        return SettingsEnums.APP_DATA_USAGE;
     }
 
     private AdapterView.OnItemSelectedListener mCycleListener =

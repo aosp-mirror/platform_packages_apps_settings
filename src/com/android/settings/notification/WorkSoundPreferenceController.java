@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.annotation.UserIdInt;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,7 +41,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -331,7 +331,7 @@ public class WorkSoundPreferenceController extends AbstractPreferenceController
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_UNIFY_SOUND_SETTINGS;
+            return SettingsEnums.DIALOG_UNIFY_SOUND_SETTINGS;
         }
 
         @Override

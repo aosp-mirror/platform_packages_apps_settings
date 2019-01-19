@@ -17,6 +17,7 @@ import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.os.UserHandle;
 import android.provider.Settings.Secure;
+
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.TogglePreferenceController;
 

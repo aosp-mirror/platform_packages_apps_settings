@@ -16,13 +16,14 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -53,8 +54,8 @@ public class ZenRuleDefaultPolicyPreferenceController extends
         if (mId == null || mRule == null) {
             return;
         }
-        mMetricsFeatureProvider.action(mContext, MetricsEvent.ZEN_CUSTOM_RULE_DEFAULT_SETTINGS,
-                Pair.create(MetricsEvent.FIELD_ZEN_RULE_ID, mId));
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ZEN_CUSTOM_RULE_DEFAULT_SETTINGS,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_RULE_ID, mId));
         mPreference.setChecked(mRule.getZenPolicy() == null);
     }
 }

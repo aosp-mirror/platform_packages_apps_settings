@@ -17,6 +17,7 @@
 package com.android.settings.applications.appops;
 
 import android.annotation.Nullable;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.preference.PreferenceFrameLayout;
 import android.view.LayoutInflater;
@@ -25,7 +26,6 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 
@@ -35,7 +35,7 @@ public class BackgroundCheckSummary extends InstrumentedPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BACKGROUND_CHECK_SUMMARY;
+        return SettingsEnums.BACKGROUND_CHECK_SUMMARY;
     }
 
     @Override

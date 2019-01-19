@@ -16,11 +16,11 @@
 
 package com.android.settings.display;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -53,7 +53,7 @@ public class AutoBrightnessSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_AUTO_BRIGHTNESS;
+        return SettingsEnums.SETTINGS_AUTO_BRIGHTNESS;
     }
 
     @Override

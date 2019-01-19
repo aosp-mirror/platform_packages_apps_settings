@@ -16,12 +16,12 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -38,7 +38,7 @@ public class UserDictionaryList extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.INPUTMETHOD_USER_DICTIONARY;
+        return SettingsEnums.INPUTMETHOD_USER_DICTIONARY;
     }
 
     @Override

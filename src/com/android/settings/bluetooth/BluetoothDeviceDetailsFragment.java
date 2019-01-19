@@ -18,17 +18,17 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
-
-import androidx.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -119,7 +119,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.BLUETOOTH_DEVICE_DETAILS;
+        return SettingsEnums.BLUETOOTH_DEVICE_DETAILS;
     }
 
     @Override

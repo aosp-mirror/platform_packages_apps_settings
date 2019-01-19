@@ -19,6 +19,7 @@ package com.android.settings.network;
 import static android.content.Context.TELEPHONY_SERVICE;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -49,7 +50,6 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
@@ -483,7 +483,7 @@ public class ApnEditor extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APN_EDITOR;
+        return SettingsEnums.APN_EDITOR;
     }
 
     @VisibleForTesting
@@ -1202,7 +1202,7 @@ public class ApnEditor extends SettingsPreferenceFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_APN_EDITOR_ERROR;
+            return SettingsEnums.DIALOG_APN_EDITOR_ERROR;
         }
     }
 

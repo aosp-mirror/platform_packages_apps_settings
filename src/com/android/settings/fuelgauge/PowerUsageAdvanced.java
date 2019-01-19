@@ -15,6 +15,7 @@ package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,7 +28,6 @@ import android.view.MenuItem;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
@@ -81,7 +81,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FUELGAUGE_BATTERY_HISTORY_DETAIL;
+        return SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL;
     }
 
     @Override
@@ -108,7 +108,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 mShowAllApps = !mShowAllApps;
                 item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
                 mMetricsFeatureProvider.action(getContext(),
-                        MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE,
+                        SettingsEnums.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE,
                         mShowAllApps);
                 restartBatteryStatsLoader(BatteryUpdateType.MANUAL);
                 return true;

@@ -18,6 +18,7 @@ package com.android.settings.security;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +37,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.CryptKeeperConfirm;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -123,7 +123,7 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CRYPT_KEEPER;
+        return SettingsEnums.CRYPT_KEEPER;
     }
 
     @Override

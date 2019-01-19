@@ -19,8 +19,6 @@ package com.android.settings;
 import android.content.Intent;
 import android.sysprop.SetupWizardProperties;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 

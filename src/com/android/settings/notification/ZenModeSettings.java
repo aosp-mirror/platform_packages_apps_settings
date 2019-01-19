@@ -28,8 +28,8 @@ import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_SYSTEM;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.icu.text.ListFormatter;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
@@ -37,7 +37,6 @@ import android.service.notification.ZenModeConfig;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -66,7 +65,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE;
     }
 
     @Override

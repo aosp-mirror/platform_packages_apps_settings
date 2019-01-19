@@ -27,12 +27,10 @@ import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.android.settings.core.InstrumentedFragment;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.android.settings.core.InstrumentedFragment;
 
 import java.util.concurrent.Executor;
 

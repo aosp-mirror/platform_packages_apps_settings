@@ -18,7 +18,6 @@ package com.android.settings.wifi.tether;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;

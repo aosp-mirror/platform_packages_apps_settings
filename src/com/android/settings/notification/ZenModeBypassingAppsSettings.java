@@ -18,10 +18,12 @@ package com.android.settings.notification;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -30,8 +32,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
 
 @SearchIndexable
 public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
@@ -69,7 +69,7 @@ public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS;
     }
 
     /**

@@ -17,7 +17,6 @@
 package com.android.settings.security.trustagent;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;

@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -29,7 +30,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -109,7 +109,7 @@ public class LowStorageSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 StorageSettings.class.getName(), "" /* key */,
                 screenTitle,
-                MetricsProto.MetricsEvent.SLICE)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(CustomSliceRegistry.LOW_STORAGE_SLICE_URI);
     }

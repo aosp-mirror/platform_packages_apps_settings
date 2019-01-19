@@ -18,10 +18,10 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import androidx.preference.Preference;
 
 public class ZenModeCallsPreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {

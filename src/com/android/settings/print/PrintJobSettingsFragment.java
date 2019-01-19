@@ -16,6 +16,7 @@
 
 package com.android.settings.print;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.print.PrintJob;
@@ -24,7 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
@@ -56,7 +56,7 @@ public class PrintJobSettingsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.PRINT_JOB_SETTINGS;
+        return SettingsEnums.PRINT_JOB_SETTINGS;
     }
 
     @Override

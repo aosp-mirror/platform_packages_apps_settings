@@ -18,12 +18,12 @@ package com.android.settings.applications;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.EmergencyBroadcastPreferenceController;
@@ -42,7 +42,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY;
+        return SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY;
     }
 
     @Override

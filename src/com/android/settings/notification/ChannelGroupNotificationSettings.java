@@ -17,12 +17,12 @@
 package com.android.settings.notification;
 
 import android.app.NotificationChannel;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -35,7 +35,7 @@ public class ChannelGroupNotificationSettings extends NotificationSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_CHANNEL_GROUP;
+        return SettingsEnums.NOTIFICATION_CHANNEL_GROUP;
     }
 
     @Override

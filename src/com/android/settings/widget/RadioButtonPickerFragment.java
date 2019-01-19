@@ -27,7 +27,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Toast;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -40,10 +39,11 @@ import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.widget.CandidateInfo;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import org.xmlpull.v1.XmlPullParserException;
 
 public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFragment implements
         RadioButtonPreference.OnClickListener {

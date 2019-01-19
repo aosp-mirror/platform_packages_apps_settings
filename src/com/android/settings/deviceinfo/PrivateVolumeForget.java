@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -34,7 +35,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -48,7 +48,7 @@ public class PrivateVolumeForget extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DEVICEINFO_STORAGE;
+        return SettingsEnums.DEVICEINFO_STORAGE;
     }
 
     @Override
@@ -97,7 +97,7 @@ public class PrivateVolumeForget extends InstrumentedFragment {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_VOLUME_FORGET;
+            return SettingsEnums.DIALOG_VOLUME_FORGET;
         }
 
         public static void show(Fragment parent, String fsUuid) {

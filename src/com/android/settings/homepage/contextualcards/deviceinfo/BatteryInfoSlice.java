@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -29,7 +30,6 @@ import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -94,7 +94,7 @@ public class BatteryInfoSlice implements CustomSliceable {
         final String screenTitle = mContext.getText(R.string.power_usage_summary_title).toString();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 PowerUsageSummary.class.getName(), "" /* key */, screenTitle,
-                MetricsProto.MetricsEvent.SLICE)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(CustomSliceRegistry.BATTERY_INFO_SLICE_URI);
     }

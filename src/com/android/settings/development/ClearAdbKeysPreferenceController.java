@@ -20,7 +20,6 @@ import android.content.Context;
 import android.debug.IAdbManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemProperties;
 import android.os.UserManager;
 import android.sysprop.AdbProperties;
 import android.text.TextUtils;

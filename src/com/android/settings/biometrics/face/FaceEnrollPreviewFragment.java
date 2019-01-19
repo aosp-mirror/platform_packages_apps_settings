@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.face;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -36,7 +37,6 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -180,7 +180,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FACE_ENROLL_PREVIEW;
+        return SettingsEnums.FACE_ENROLL_PREVIEW;
     }
 
     @Override

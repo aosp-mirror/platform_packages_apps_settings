@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -34,7 +35,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
@@ -303,7 +303,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.CHOOSE_LOCK_PATTERN;
+            return SettingsEnums.CHOOSE_LOCK_PATTERN;
         }
 
 

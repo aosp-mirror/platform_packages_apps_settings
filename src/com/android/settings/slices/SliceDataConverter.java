@@ -21,9 +21,9 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTRO
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_PLATFORM_SLICE_FLAG;
-import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAILABLE_SLICE_SUBTITLE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAILABLE_SLICE_SUBTITLE;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;

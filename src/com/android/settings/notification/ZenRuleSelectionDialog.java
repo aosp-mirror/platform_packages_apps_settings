@@ -16,16 +16,14 @@
 
 package com.android.settings.notification;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-
 import android.app.Dialog;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,6 +35,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.utils.ZenServiceListing;
@@ -46,9 +47,6 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
     private static final String TAG = "ZenRuleSelectionDialog";
@@ -72,7 +70,7 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_RULE_SELECTION_DIALOG;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_RULE_SELECTION_DIALOG;
     }
 
     public static void show(Context context, Fragment parent, PositiveClickListener

@@ -23,6 +23,7 @@ import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,7 +38,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -147,7 +147,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_ACCOUNT_SYNC_REMOVE;
+            return SettingsEnums.DIALOG_ACCOUNT_SYNC_REMOVE;
         }
 
         @Override
@@ -210,7 +210,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_ACCOUNT_SYNC_FAILED_REMOVAL;
+            return SettingsEnums.DIALOG_ACCOUNT_SYNC_FAILED_REMOVAL;
         }
 
     }

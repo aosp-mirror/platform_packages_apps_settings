@@ -24,17 +24,17 @@ import android.content.Intent;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
-import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkActivity;
-import com.android.settingslib.core.AbstractPreferenceController;
-
-import java.util.List;
-
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settingslib.core.AbstractPreferenceController;
+
+import java.util.List;
 
 public class MobileNetworkSummaryController extends AbstractPreferenceController implements
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver {

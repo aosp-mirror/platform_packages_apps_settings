@@ -19,11 +19,11 @@ package com.android.settings.development;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class AllowBackgroundActivityStartsPreferenceController
         extends DeveloperOptionsPreferenceController
@@ -62,7 +62,7 @@ public class AllowBackgroundActivityStartsPreferenceController
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        writeSetting(false);
-        ((SwitchPreference) mPreference).setChecked(false);
+        writeSetting(true);
+        ((SwitchPreference) mPreference).setChecked(true);
     }
 }

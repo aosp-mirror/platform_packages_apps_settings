@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards.conditional;
 
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +26,6 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.homepage.contextualcards.ContextualCard;
@@ -78,7 +78,7 @@ public class DndConditionCardController implements ConditionalCardController {
     public void onPrimaryClick(Context context) {
         new SubSettingLauncher(context)
                 .setDestination(ZenModeSettings.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_HOMEPAGE)
+                .setSourceMetricsCategory(SettingsEnums.SETTINGS_HOMEPAGE)
                 .setTitleRes(R.string.zen_mode_settings_title)
                 .launch();
     }
@@ -92,7 +92,7 @@ public class DndConditionCardController implements ConditionalCardController {
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_DND)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_DND)
                 .setActionText(mAppContext.getText(R.string.condition_turn_off))
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_zen_title))

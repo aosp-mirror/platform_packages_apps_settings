@@ -16,8 +16,6 @@
 
 package com.android.settings.widget;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_OPEN_APP_NOTIFICATION_SETTING;
-
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
 import android.app.ActionBar;
@@ -359,7 +357,7 @@ public class EntityHeaderController {
                     button.setOnClickListener(v -> {
                         FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
                                 .action(SettingsEnums.PAGE_UNKNOWN,
-                                        ACTION_OPEN_APP_NOTIFICATION_SETTING,
+                                        SettingsEnums.ACTION_OPEN_APP_NOTIFICATION_SETTING,
                                         mMetricsCategory,
                                         null, 0);
                         mFragment.startActivity(mAppNotifPrefIntent);

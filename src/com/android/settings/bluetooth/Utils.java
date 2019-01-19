@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -27,7 +28,6 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -90,15 +90,10 @@ public final class Utils {
         return dialog;
     }
 
-    // TODO: wire this up to show connection errors...
-    static void showConnectingError(Context context, String name) {
-        showConnectingError(context, name, getLocalBtManager(context));
-    }
-
     @VisibleForTesting
     static void showConnectingError(Context context, String name, LocalBluetoothManager manager) {
         FeatureFactory.getFactory(context).getMetricsFeatureProvider().visible(context,
-            MetricsEvent.VIEW_UNKNOWN, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR);
+            SettingsEnums.PAGE_UNKNOWN, SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR);
         showError(context, name, R.string.bluetooth_connecting_error_message, manager);
     }
 

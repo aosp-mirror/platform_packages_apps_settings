@@ -15,6 +15,7 @@
  */
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
 import android.util.Log;
@@ -24,7 +25,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenRuleRepeatCallersPreferenceController extends
@@ -73,9 +74,9 @@ public class ZenRuleRepeatCallersPreferenceController extends
             Log.d(TAG, KEY + " onPrefChange mRule=" + mRule + " mCategory="
                     + ZenPolicy.PRIORITY_CATEGORY_REPEAT_CALLERS + " allow=" + allow);
         }
-        mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_REPEAT_CALLS,
-                Pair.create(MetricsEvent.FIELD_ZEN_TOGGLE_EXCEPTION, allow ? 1 : 0),
-                Pair.create(MetricsEvent.FIELD_ZEN_RULE_ID, mId));
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_ALLOW_REPEAT_CALLS,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_TOGGLE_EXCEPTION, allow ? 1 : 0),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_RULE_ID, mId));
         mRule.setZenPolicy(new ZenPolicy.Builder(mRule.getZenPolicy())
                 .allowRepeatCallers(allow)
                 .build());

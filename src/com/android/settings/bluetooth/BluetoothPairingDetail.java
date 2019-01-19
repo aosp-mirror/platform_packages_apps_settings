@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -27,7 +28,6 @@ import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
@@ -114,7 +114,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BLUETOOTH_PAIRING;
+        return SettingsEnums.BLUETOOTH_PAIRING;
     }
 
     @Override

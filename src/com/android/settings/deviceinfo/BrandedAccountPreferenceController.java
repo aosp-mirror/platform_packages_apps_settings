@@ -17,13 +17,13 @@
 package com.android.settings.deviceinfo;
 
 import android.accounts.Account;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.accounts.AccountFeatureProvider;
@@ -75,7 +75,7 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
                     .setDestination(AccountDetailDashboardFragment.class.getName())
                     .setTitleRes(R.string.account_sync_title)
                     .setArguments(args)
-                    .setSourceMetricsCategory(MetricsEvent.DEVICEINFO)
+                    .setSourceMetricsCategory(SettingsEnums.DEVICEINFO)
                     .launch();
             return true;
         });

@@ -22,6 +22,7 @@ import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import android.app.ActivityManager;
 import android.app.AppGlobals;
 import android.app.GrantedUriPermission;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -49,7 +50,6 @@ import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
@@ -198,7 +198,7 @@ public class AppStorageSettings extends AppInfoWithHeader
             mClearCacheObserver = new ClearCacheObserver();
         }
         mMetricsFeatureProvider.action(getContext(),
-                MetricsEvent.ACTION_SETTINGS_CLEAR_APP_CACHE);
+                SettingsEnums.ACTION_SETTINGS_CLEAR_APP_CACHE);
         mPm.deleteApplicationCacheFiles(mPackageName, mClearCacheObserver);
     }
 
@@ -361,7 +361,7 @@ public class AppStorageSettings extends AppInfoWithHeader
      * button for a system package
      */
     private void initiateClearUserData() {
-        mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_SETTINGS_CLEAR_APP_DATA);
+        mMetricsFeatureProvider.action(getContext(), SettingsEnums.ACTION_SETTINGS_CLEAR_APP_DATA);
         mButtonsPref.setButton1Enabled(false);
         // Invoke uninstall or clear user data based on sysPackage
         String packageName = mAppEntry.info.packageName;
@@ -602,7 +602,7 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_APP_STORAGE;
+        return SettingsEnums.APPLICATIONS_APP_STORAGE;
     }
 
     class ClearCacheObserver extends IPackageDataObserver.Stub {

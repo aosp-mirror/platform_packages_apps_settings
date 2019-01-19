@@ -16,16 +16,16 @@
 
 package com.android.settings.network;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.wifi.WifiConnectionPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.wifi.WifiConnectionPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 // This controls a header at the top of the Network & internet page that only appears when there
 // are two or more active mobile subscriptions. It shows an overview of available network
@@ -52,7 +52,7 @@ public class MultiNetworkHeaderController extends BasePreferenceController imple
     WifiConnectionPreferenceController createWifiController(Lifecycle lifecycle) {
         final int prefOrder = 0;
         return new WifiConnectionPreferenceController(mContext, lifecycle, this, mPreferenceKey,
-                prefOrder, MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY);
+                prefOrder, SettingsEnums.SETTINGS_NETWORK_CATEGORY);
     }
 
     @VisibleForTesting

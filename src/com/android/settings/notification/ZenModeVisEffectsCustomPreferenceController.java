@@ -17,12 +17,12 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -81,7 +81,7 @@ public class ZenModeVisEffectsCustomPreferenceController
 
     protected void select() {
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_ZEN_CUSTOM, true);
+                SettingsEnums.ACTION_ZEN_CUSTOM, true);
     }
 
     private void launchCustomSettings() {
@@ -89,7 +89,7 @@ public class ZenModeVisEffectsCustomPreferenceController
         new SubSettingLauncher(mContext)
                 .setDestination(ZenModeBlockedEffectsSettings.class.getName())
                 .setTitleRes(R.string.zen_mode_what_to_block_title)
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_ZEN_NOTIFICATIONS)
+                .setSourceMetricsCategory(SettingsEnums.SETTINGS_ZEN_NOTIFICATIONS)
                 .launch();
     }
 }

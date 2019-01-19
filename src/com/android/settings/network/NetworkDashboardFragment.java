@@ -15,10 +15,10 @@
  */
 package com.android.settings.network;
 
-import static com.android.settings.network.MobilePlanPreferenceController
-        .MANAGE_MOBILE_PLAN_DIALOG_ID;
+import static com.android.settings.network.MobilePlanPreferenceController.MANAGE_MOBILE_PLAN_DIALOG_ID;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
@@ -26,7 +26,6 @@ import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
@@ -51,7 +50,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY;
+        return SettingsEnums.SETTINGS_NETWORK_CATEGORY;
     }
 
     @Override
@@ -158,7 +157,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         if (MANAGE_MOBILE_PLAN_DIALOG_ID == dialogId) {
-            return MetricsProto.MetricsEvent.DIALOG_MANAGE_MOBILE_PLAN;
+            return SettingsEnums.DIALOG_MANAGE_MOBILE_PLAN;
         }
         return 0;
     }

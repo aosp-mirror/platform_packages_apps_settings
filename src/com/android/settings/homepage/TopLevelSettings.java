@@ -16,10 +16,10 @@
 
 package com.android.settings.homepage;
 
-import static com.android.settings.search.actionbar.SearchMenuController
-        .NEED_SEARCH_ICON_IN_ACTION_BAR;
+import static com.android.settings.search.actionbar.SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR;
 import static com.android.settingslib.search.SearchIndexable.MOBILE;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -28,7 +28,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -65,7 +64,7 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DASHBOARD_SUMMARY;
+        return SettingsEnums.DASHBOARD_SUMMARY;
     }
 
     @Override

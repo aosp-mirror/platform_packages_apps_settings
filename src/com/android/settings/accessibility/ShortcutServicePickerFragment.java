@@ -17,13 +17,12 @@ package com.android.settings.accessibility;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
-import static com.android.internal.accessibility.AccessibilityShortcutController
-        .COLOR_INVERSION_COMPONENT_NAME;
-import static com.android.internal.accessibility.AccessibilityShortcutController
-        .DALTONIZER_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,9 +42,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
-import com.android.internal.accessibility.AccessibilityShortcutController
-        .ToggleableFrameworkFeatureInfo;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.accessibility.AccessibilityShortcutController.ToggleableFrameworkFeatureInfo;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.widget.RadioButtonPickerFragment;
@@ -64,7 +61,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
+        return SettingsEnums.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
     }
 
     @Override
@@ -169,7 +166,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
+            return SettingsEnums.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
         }
 
         @Override

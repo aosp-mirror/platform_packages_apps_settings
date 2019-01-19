@@ -17,10 +17,10 @@ package com.android.settings.accounts;
 
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
@@ -43,7 +43,7 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCOUNT;
+        return SettingsEnums.ACCOUNT;
     }
 
     @Override

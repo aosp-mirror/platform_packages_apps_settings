@@ -15,6 +15,7 @@
 package com.android.settings.applications.appinfo;
 
 import android.app.role.RoleManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -90,7 +90,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
                     .setDestination(DefaultAppSettings.class.getName())
                     .setArguments(bundle)
                     .setTitleRes(R.string.configure_apps)
-                    .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
+                    .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
                     .launch();
         }
         return true;

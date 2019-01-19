@@ -22,6 +22,7 @@ import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_FOR
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_PRIVATE;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +33,6 @@ import android.text.TextUtils;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -65,7 +65,7 @@ public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_VOLUME_FORMAT;
+        return SettingsEnums.DIALOG_VOLUME_FORMAT;
     }
 
     @Override

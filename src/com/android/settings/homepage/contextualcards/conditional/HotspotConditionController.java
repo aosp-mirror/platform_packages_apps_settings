@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +27,6 @@ import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.SubSettingLauncher;
@@ -69,7 +69,7 @@ public class HotspotConditionController implements ConditionalCardController {
     public void onPrimaryClick(Context context) {
         new SubSettingLauncher(context)
                 .setDestination(TetherSettings.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
+                .setSourceMetricsCategory(SettingsEnums.DASHBOARD_SUMMARY)
                 .setTitleRes(R.string.tether_settings_title_all)
                 .launch();
     }
@@ -92,7 +92,7 @@ public class HotspotConditionController implements ConditionalCardController {
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_HOTSPOT)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_HOTSPOT)
                 .setActionText(mAppContext.getText(R.string.condition_turn_off))
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_hotspot_title))

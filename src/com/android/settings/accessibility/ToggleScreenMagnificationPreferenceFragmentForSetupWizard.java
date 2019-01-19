@@ -16,16 +16,15 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
-
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         extends ToggleScreenMagnificationPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SUW_ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
+        return SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
     }
 
     @Override
@@ -36,7 +35,7 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
             if (mToggleSwitch.isChecked() != args.getBoolean(AccessibilitySettings.EXTRA_CHECKED)) {
                 // TODO: Distinguish between magnification modes
                 mMetricsFeatureProvider.action(getContext(),
-                        MetricsEvent.SUW_ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION,
+                        SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION,
                         mToggleSwitch.isChecked());
             }
         }

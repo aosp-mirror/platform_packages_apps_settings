@@ -18,6 +18,7 @@ package com.android.settings.datetime.timezone;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,7 +32,6 @@ import android.view.MenuItem;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -75,7 +75,7 @@ public class TimeZoneSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.ZONE_PICKER;
+        return SettingsEnums.ZONE_PICKER;
     }
 
     @Override

@@ -18,8 +18,7 @@ package com.android.settings.search;
 
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SEARCHABLE;
-import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag
-        .FLAG_INCLUDE_PREF_SCREEN;
+import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_INCLUDE_PREF_SCREEN;
 import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_SEARCHABLE;
 

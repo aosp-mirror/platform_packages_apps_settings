@@ -16,10 +16,10 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
@@ -36,7 +36,7 @@ public class KeyboardLayoutPickerFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.INPUTMETHOD_KEYBOARD;
+        return SettingsEnums.INPUTMETHOD_KEYBOARD;
     }
 
     @Override

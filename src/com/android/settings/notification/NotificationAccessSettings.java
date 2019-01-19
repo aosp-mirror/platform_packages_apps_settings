@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.app.Dialog;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -32,7 +33,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -77,7 +77,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ACCESS;
+        return SettingsEnums.NOTIFICATION_ACCESS;
     }
 
     @Override
@@ -132,8 +132,8 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
 
     @VisibleForTesting
     void logSpecialPermissionChange(boolean enable, String packageName) {
-        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
+        int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
+                : SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
         FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
                 logCategory, packageName);
     }
@@ -164,7 +164,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_DISABLE_NOTIFICATION_ACCESS;
+            return SettingsEnums.DIALOG_DISABLE_NOTIFICATION_ACCESS;
         }
 
         @Override

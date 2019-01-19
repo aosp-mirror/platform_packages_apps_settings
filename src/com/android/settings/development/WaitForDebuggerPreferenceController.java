@@ -16,8 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_CODE_DEBUG_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_DEBUG_APP;
 
 import android.app.Activity;
 import android.app.ActivityManager;

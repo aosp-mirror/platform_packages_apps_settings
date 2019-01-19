@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -40,7 +41,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 import com.android.settings.core.InstrumentedFragment;
 
@@ -106,7 +106,7 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
 
     @Override
     public int getDialogMetricsCategory(int dialogId) {
-        return MetricsEvent.DIALOG_PROXY_SELECTOR_ERROR;
+        return SettingsEnums.DIALOG_PROXY_SELECTOR_ERROR;
     }
 
     private void showDialog(int dialogId) {
@@ -277,6 +277,6 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.PROXY_SELECTOR;
+        return SettingsEnums.PROXY_SELECTOR;
     }
 }

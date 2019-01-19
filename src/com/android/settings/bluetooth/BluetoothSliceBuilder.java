@@ -19,6 +19,7 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +33,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.connecteddevice.BluetoothDashboardFragment;
@@ -98,7 +98,7 @@ public class BluetoothSliceBuilder {
                 SettingsSlicesContract.KEY_BLUETOOTH).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 BluetoothDashboardFragment.class.getName(), null /* key */, screenTitle,
-                MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY)
+                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }

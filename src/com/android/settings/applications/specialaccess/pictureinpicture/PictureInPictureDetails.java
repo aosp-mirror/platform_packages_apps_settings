@@ -20,6 +20,7 @@ import static android.app.AppOpsManager.MODE_ERRORED;
 import static android.app.AppOpsManager.OP_PICTURE_IN_PICTURE;
 
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -29,7 +30,6 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.overlay.FeatureFactory;
@@ -84,7 +84,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_MANAGE_PICTURE_IN_PICTURE;
+        return SettingsEnums.SETTINGS_MANAGE_PICTURE_IN_PICTURE;
     }
 
     /**
@@ -121,8 +121,8 @@ public class PictureInPictureDetails extends AppInfoWithHeader
     @VisibleForTesting
     void logSpecialPermissionChange(boolean newState, String packageName) {
         int logCategory = newState
-                ? MetricsEvent.APP_PICTURE_IN_PICTURE_ALLOW
-                : MetricsEvent.APP_PICTURE_IN_PICTURE_DENY;
+                ? SettingsEnums.APP_PICTURE_IN_PICTURE_ALLOW
+                : SettingsEnums.APP_PICTURE_IN_PICTURE_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
                 FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
         metricsFeatureProvider.action(

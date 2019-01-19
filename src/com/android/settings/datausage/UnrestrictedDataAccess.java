@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -22,7 +23,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -109,7 +109,7 @@ public class UnrestrictedDataAccess extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DATA_USAGE_UNRESTRICTED_ACCESS;
+        return SettingsEnums.DATA_USAGE_UNRESTRICTED_ACCESS;
     }
 
     @Override

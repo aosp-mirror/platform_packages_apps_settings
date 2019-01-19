@@ -25,6 +25,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
@@ -51,7 +52,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.EncryptionInterstitial;
 import com.android.settings.EventLogTags;
@@ -157,7 +157,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.CHOOSE_LOCK_GENERIC;
+            return SettingsEnums.CHOOSE_LOCK_GENERIC;
         }
 
         @Override
@@ -1022,7 +1022,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             @Override
             public int getMetricsCategory() {
-                return MetricsEvent.DIALOG_FRP;
+                return SettingsEnums.DIALOG_FRP;
             }
         }
     }

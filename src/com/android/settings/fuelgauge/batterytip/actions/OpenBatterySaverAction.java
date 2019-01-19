@@ -16,9 +16,9 @@
 
 package com.android.settings.fuelgauge.batterytip.actions;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 
@@ -38,7 +38,7 @@ public class OpenBatterySaverAction extends BatteryTipAction {
     @Override
     public void handlePositiveAction(int metricsKey) {
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_TIP_OPEN_BATTERY_SAVER_PAGE, metricsKey);
+                SettingsEnums.ACTION_TIP_OPEN_BATTERY_SAVER_PAGE, metricsKey);
         new SubSettingLauncher(mContext)
                 .setDestination(BatterySaverSettings.class.getName())
                 .setSourceMetricsCategory(metricsKey)

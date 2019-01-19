@@ -22,7 +22,6 @@ import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
@@ -52,7 +51,7 @@ public class UnrestrictAppAction extends BatteryTipAction {
                 AppOpsManager.MODE_ALLOWED);
         mMetricsFeatureProvider.action(
                 SettingsEnums.PAGE_UNKNOWN,
-                MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP,
+                SettingsEnums.ACTION_TIP_UNRESTRICT_APP,
                 metricsKey,
                 appInfo.packageName,
                 0);

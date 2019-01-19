@@ -31,7 +31,6 @@ import android.sysprop.DisplayProperties;
 import android.util.Log;
 import android.view.IWindowManager;
 import android.view.ThreadedRenderer;
-import android.view.View;
 import android.view.WindowManagerGlobal;
 import android.widget.Toast;
 

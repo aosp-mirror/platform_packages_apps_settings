@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,8 +32,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.core.OnActivityResultListener;
@@ -83,7 +82,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SOUND;
+        return SettingsEnums.SOUND;
     }
 
     @Override
@@ -132,9 +131,9 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     public void onDisplayPreferenceDialog(Preference preference) {
         final int metricsCategory;
         if (mHfpOutputControllerKey.equals(preference.getKey())) {
-            metricsCategory = MetricsProto.MetricsEvent.DIALOG_SWITCH_HFP_DEVICES;
+            metricsCategory = SettingsEnums.DIALOG_SWITCH_HFP_DEVICES;
         } else if (mMediaOutputControllerKey.equals(preference.getKey())) {
-            metricsCategory = MetricsProto.MetricsEvent.DIALOG_SWITCH_A2DP_DEVICES;
+            metricsCategory = SettingsEnums.DIALOG_SWITCH_A2DP_DEVICES;
         } else {
             metricsCategory = Instrumentable.METRICS_CATEGORY_UNKNOWN;
         }

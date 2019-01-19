@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.core.OnActivityResultListener;
@@ -67,7 +67,7 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CONFIGURE_NOTIFICATION;
+        return SettingsEnums.CONFIGURE_NOTIFICATION;
     }
 
     @Override

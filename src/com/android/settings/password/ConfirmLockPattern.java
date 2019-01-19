@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,7 +32,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
@@ -200,7 +200,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.CONFIRM_LOCK_PATTERN;
+            return SettingsEnums.CONFIRM_LOCK_PATTERN;
         }
 
         @Override

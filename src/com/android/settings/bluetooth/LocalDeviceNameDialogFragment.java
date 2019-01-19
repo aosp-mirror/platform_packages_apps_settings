@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,7 +24,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
 /** Provides a dialog for changing the advertised name of the local bluetooth adapter. */
@@ -71,7 +71,7 @@ public class LocalDeviceNameDialogFragment extends BluetoothNameDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_RENAME;
+        return SettingsEnums.DIALOG_BLUETOOTH_RENAME;
     }
 
     @Override

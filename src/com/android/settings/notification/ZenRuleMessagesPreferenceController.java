@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
 import android.text.TextUtils;
@@ -50,7 +51,7 @@ public class ZenRuleMessagesPreferenceController extends AbstractZenCustomRulePr
         int allowMessages = ZenModeBackend.getZenPolicySettingFromPrefKey(
                 selectedContactsFrom.toString());
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_MESSAGES,
+                SettingsEnums.ACTION_ZEN_ALLOW_MESSAGES,
                 Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_TOGGLE_EXCEPTION, allowMessages),
                 Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_RULE_ID, mId));
         mRule.setZenPolicy(new ZenPolicy.Builder(mRule.getZenPolicy())

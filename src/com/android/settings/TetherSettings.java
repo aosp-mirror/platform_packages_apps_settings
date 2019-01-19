@@ -20,6 +20,7 @@ import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
 import static android.net.ConnectivityManager.TETHERING_USB;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
@@ -40,7 +41,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -101,7 +101,7 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TETHER;
+        return SettingsEnums.TETHER;
     }
 
     public TetherSettings() {

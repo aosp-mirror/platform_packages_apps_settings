@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
 import android.text.TextUtils;
@@ -49,7 +50,7 @@ public class ZenRuleCallsPreferenceController extends AbstractZenCustomRulePrefe
     public boolean onPreferenceChange(Preference preference, Object selectedContactsFrom) {
         int allowCalls = ZenModeBackend.getZenPolicySettingFromPrefKey(
                 selectedContactsFrom.toString());
-        mMetricsFeatureProvider.action(mContext, MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_CALLS,
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_ALLOW_CALLS,
                 Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_TOGGLE_EXCEPTION, allowCalls),
                 Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_RULE_ID, mId));
         mRule.setZenPolicy(new ZenPolicy.Builder(mRule.getZenPolicy())

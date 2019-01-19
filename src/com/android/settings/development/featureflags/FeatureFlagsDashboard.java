@@ -16,10 +16,10 @@
 
 package com.android.settings.development.featureflags;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -39,7 +39,7 @@ public class FeatureFlagsDashboard extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_FEATURE_FLAGS_DASHBOARD;
+        return SettingsEnums.SETTINGS_FEATURE_FLAGS_DASHBOARD;
     }
 
     @Override

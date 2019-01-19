@@ -16,15 +16,15 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
-import android.util.Log;
 import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -44,8 +44,8 @@ public class ZenRuleVisEffectsAllPreferenceController extends
         mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(getPreferenceKey());
 
         mPreference.setOnRadioButtonClickListener(p -> {
-            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_SOUND_ONLY,
-                    Pair.create(MetricsEvent.FIELD_ZEN_RULE_ID, mId));
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_SOUND_ONLY,
+                    Pair.create(MetricsProto.MetricsEvent.FIELD_ZEN_RULE_ID, mId));
             mRule.setZenPolicy(new ZenPolicy.Builder(mRule.getZenPolicy())
                     .showAllVisualEffects()
                     .build());

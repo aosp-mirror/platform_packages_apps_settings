@@ -24,12 +24,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.android.settings.R;
-
-import androidx.annotation.VisibleForTesting;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 
 /**
  * This preference provides one button layout with Settings style.

@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,7 +33,6 @@ import android.view.View;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
@@ -258,7 +258,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FUELGAUGE_POWER_USAGE_DETAIL;
+        return SettingsEnums.FUELGAUGE_POWER_USAGE_DETAIL;
     }
 
     @Override

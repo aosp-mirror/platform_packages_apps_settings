@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +24,6 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settingslib.WirelessUtils;
@@ -72,7 +72,7 @@ public class AirplaneModeConditionController implements ConditionalCardControlle
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_AIRPLANE_MODE)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_AIRPLANE_MODE)
                 .setActionText(mAppContext.getText(R.string.condition_turn_off))
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_airplane_title))

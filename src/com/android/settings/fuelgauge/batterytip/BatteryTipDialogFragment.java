@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -145,7 +145,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FUELGAUGE_BATTERY_TIP_DIALOG;
+        return SettingsEnums.FUELGAUGE_BATTERY_TIP_DIALOG;
     }
 
     @Override

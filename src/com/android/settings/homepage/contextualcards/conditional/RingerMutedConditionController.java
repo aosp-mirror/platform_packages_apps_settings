@@ -16,10 +16,10 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.media.AudioManager;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 
@@ -49,7 +49,7 @@ public class RingerMutedConditionController extends AbnormalRingerConditionContr
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_DEVICE_MUTED)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_DEVICE_MUTED)
                 .setActionText(
                         mAppContext.getText(R.string.condition_device_muted_action_turn_on_sound))
                 .setName(mAppContext.getPackageName() + "/"

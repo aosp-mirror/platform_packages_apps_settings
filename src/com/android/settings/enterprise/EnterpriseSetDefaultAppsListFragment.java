@@ -16,9 +16,9 @@
 
 package com.android.settings.enterprise;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -34,7 +34,7 @@ public class EnterpriseSetDefaultAppsListFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ENTERPRISE_PRIVACY_DEFAULT_APPS;
+        return SettingsEnums.ENTERPRISE_PRIVACY_DEFAULT_APPS;
     }
 
     @Override

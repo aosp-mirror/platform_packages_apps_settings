@@ -18,6 +18,7 @@ package com.android.settings.nfc;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
@@ -33,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedFragment;
@@ -142,6 +142,6 @@ public class AndroidBeam extends InstrumentedFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NFC_BEAM;
+        return SettingsEnums.NFC_BEAM;
     }
 }

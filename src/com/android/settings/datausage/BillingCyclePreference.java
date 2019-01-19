@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
@@ -23,7 +24,6 @@ import android.util.AttributeSet;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CellDataPreference.DataStateListener;
@@ -79,7 +79,7 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
                 .setDestination(BillingCycleSettings.class.getName())
                 .setArguments(args)
                 .setTitleRes(R.string.billing_cycle)
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
+                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
                 .toIntent();
     }
 

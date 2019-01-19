@@ -16,9 +16,9 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
@@ -58,6 +58,6 @@ public class ZenCustomRuleNotificationsSettings extends ZenCustomRuleSettingsBas
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.ZEN_CUSTOM_RULE_NOTIFICATION_RESTRICTIONS;
+        return SettingsEnums.ZEN_CUSTOM_RULE_NOTIFICATION_RESTRICTIONS;
     }
 }

@@ -16,10 +16,10 @@
 
 package com.android.settings.privacy;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
@@ -42,7 +42,7 @@ public class PrivacyDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TOP_LEVEL_PRIVACY;
+        return SettingsEnums.TOP_LEVEL_PRIVACY;
     }
 
     @Override

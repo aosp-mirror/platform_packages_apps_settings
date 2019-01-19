@@ -20,10 +20,8 @@ import android.app.AutomaticZenRule;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.service.notification.ZenModeConfig;
 import android.view.View;
 import android.widget.CheckBox;
@@ -32,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
@@ -40,7 +37,6 @@ import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class ZenRulePreference extends TwoTargetPreference {
     private static final ManagedServiceSettings.Config CONFIG =

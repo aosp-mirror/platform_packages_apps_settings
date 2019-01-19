@@ -23,6 +23,7 @@ import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -37,7 +38,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.SettingsActivity;
@@ -102,7 +102,7 @@ public class RedactionInterstitial extends SettingsActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.NOTIFICATION_REDACTION;
+            return SettingsEnums.NOTIFICATION_REDACTION;
         }
 
         @Override

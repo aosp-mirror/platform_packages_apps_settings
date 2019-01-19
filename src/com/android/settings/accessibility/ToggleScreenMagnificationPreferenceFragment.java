@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
@@ -37,7 +38,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SwitchBar;
 
@@ -164,7 +164,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     public int getMetricsCategory() {
         // TODO: Distinguish between magnification modes
-        return MetricsEvent.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
+        return SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
     }
 
     @Override
