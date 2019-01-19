@@ -155,6 +155,15 @@ public class CustomSliceRegistry {
             .appendPath("low_storage")
             .build();
     /**
+     * Backing Uri for Notification channel Slice.
+     */
+    public static final Uri NOTIFICATION_CHANNEL_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("notification_channel")
+            .build();
+    /**
      * Backing Uri for the storage slice.
      */
     public static final Uri STORAGE_SLICE_URI = new Uri.Builder()
