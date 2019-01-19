@@ -17,11 +17,13 @@
 package com.android.settings.development.gup;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_ALL_APPS;
 import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_DEFAULT;
+import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_OFF;
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -46,6 +48,8 @@ public class GupEnableForAllAppsPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private SwitchPreference mPreference;
+    @Mock
+    private GameDriverContentObserver mGameDriverContentObserver;
 
     private Context mContext;
     private ContentResolver mResolver;
@@ -58,34 +62,86 @@ public class GupEnableForAllAppsPreferenceControllerTest {
         mResolver = mContext.getContentResolver();
         mController = new GupEnableForAllAppsPreferenceController(mContext, "testKey");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        mController.displayPreference(mScreen);
+
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
     }
 
     @Test
-    public void getAvailability_developmentSettingsEnabled_available() {
-        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+    public void getAvailability_developmentSettingsEnabledAndGupSettingsOn_available() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailability_developmentSettingsDisabled_disabledDependentSetting() {
+    public void getAvailability_developmentSettingsDisabled_conditionallyUnavailable() {
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailability_gupSettingsOff_conditionallyUnavailable() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void displayPreference_shouldAddSwitchPreference() {
         Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
-        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
 
+        verify(mPreference).setChecked(false);
+    }
+
+    @Test
+    public void onStart_shouldRegister() {
+        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.onStart();
+
+        verify(mGameDriverContentObserver).register(mResolver);
+    }
+
+    @Test
+    public void onStop_shouldUnregister() {
+        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.onStop();
+
+        verify(mGameDriverContentObserver).unregister(mResolver);
+    }
+
+    @Test
+    public void updateState_availableAndGupDefault_visibleAndUncheck() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
+        mController.updateState(mPreference);
+
+        verify(mPreference, atLeastOnce()).setVisible(true);
+        verify(mPreference).setChecked(false);
+    }
+
+    @Test
+    public void updateState_availableAndGupAllApps_visibleAndCheck() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_ALL_APPS);
+        mController.updateState(mPreference);
+
+        verify(mPreference, atLeastOnce()).setVisible(true);
+        verify(mPreference).setChecked(true);
+    }
+
+    @Test
+    public void updateState_gupSettingsOff_notVisibleAndUncheck() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+        mController.updateState(mPreference);
+
+        verify(mPreference).setVisible(false);
         verify(mPreference).setChecked(false);
     }
 
     @Test
     public void onPreferenceChange_check_shouldUpdateSettingsGlobal() {
         Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
-        mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, true);
 
         assertThat(Settings.Global.getInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT))
@@ -95,7 +151,6 @@ public class GupEnableForAllAppsPreferenceControllerTest {
     @Test
     public void onPreferenceChange_uncheck_shouldUpdateSettingsGlobal() {
         Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_ALL_APPS);
-        mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, false);
 
         assertThat(Settings.Global.getInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT))

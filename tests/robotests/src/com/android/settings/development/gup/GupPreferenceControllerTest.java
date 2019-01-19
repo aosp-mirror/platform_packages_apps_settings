@@ -17,11 +17,14 @@
 package com.android.settings.development.gup;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_DEFAULT;
+import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_OFF;
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -65,6 +68,8 @@ public class GupPreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private GameDriverContentObserver mGameDriverContentObserver;
 
     private Context mContext;
     private PreferenceGroup mGroup;
@@ -84,19 +89,28 @@ public class GupPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_developmentSettingsEnabled_available() {
+    public void getAvailability_developmentSettingsEnabledAndGupSettingsOn_available() {
         loadDefaultConfig();
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailability_developmentSettingsDisabled_disabledDependentSetting() {
+    public void getAvailability_developmentSettingsDisabled_conditionallyUnavailable() {
         loadDefaultConfig();
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailability_gupSettingsOff_conditionallyUnavailable() {
+        loadDefaultConfig();
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -111,10 +125,45 @@ public class GupPreferenceControllerTest {
     }
 
     @Test
+    public void onStart_shouldRegister() {
+        loadDefaultConfig();
+        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.onStart();
+
+        verify(mGameDriverContentObserver).register(mResolver);
+    }
+
+    @Test
+    public void onStop_shouldUnregister() {
+        loadDefaultConfig();
+        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.onStop();
+
+        verify(mGameDriverContentObserver).unregister(mResolver);
+    }
+
+    @Test
+    public void updateState_available_visible() {
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
+        loadDefaultConfig();
+
+        assertThat(mGroup.isVisible()).isTrue();
+    }
+
+    @Test
+    public void updateState_gupSettingsOff_notVisible() {
+        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+        loadDefaultConfig();
+
+        assertThat(mGroup.isVisible()).isFalse();
+    }
+
+    @Test
     public void createPreference_configDefault_shouldSetDefaultAttributes() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
@@ -130,7 +179,7 @@ public class GupPreferenceControllerTest {
     public void createPreference_configGup_shouldSetGupAttributes() {
         loadConfig(TEST_PKG_NAME, "");
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
@@ -146,7 +195,7 @@ public class GupPreferenceControllerTest {
     public void createPreference_configSystem_shouldSetSystemAttributes() {
         loadConfig("", TEST_PKG_NAME);
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
@@ -162,7 +211,7 @@ public class GupPreferenceControllerTest {
     public void onPreferenceChange_selectDefault_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[DEFAULT]);
 
         assertThat(preference.getEntry()).isEqualTo(mValueList[DEFAULT]);
@@ -178,7 +227,7 @@ public class GupPreferenceControllerTest {
     public void onPreferenceChange_selectGup_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[GUP]);
 
         assertThat(preference.getEntry()).isEqualTo(mValueList[GUP]);
@@ -194,7 +243,7 @@ public class GupPreferenceControllerTest {
     public void onPreferenceChange_selectSystem_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[SYSTEM]);
 
         assertThat(preference.getEntry()).isEqualTo(mValueList[SYSTEM]);
@@ -230,6 +279,7 @@ public class GupPreferenceControllerTest {
         mController = new GupPreferenceController(mContext, "testKey");
         mGroup = spy(new PreferenceCategory(mContext));
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        when(mGroup.getContext()).thenReturn(mContext);
         when(mGroup.getPreferenceManager()).thenReturn(preferenceManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mGroup);
         mController.displayPreference(mScreen);
