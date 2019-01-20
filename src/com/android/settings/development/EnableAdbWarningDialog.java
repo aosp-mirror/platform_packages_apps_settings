@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -24,7 +25,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -44,7 +44,7 @@ public class EnableAdbWarningDialog extends InstrumentedDialogFragment implement
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_ENABLE_ADB;
+        return SettingsEnums.DIALOG_ENABLE_ADB;
     }
 
     @Override

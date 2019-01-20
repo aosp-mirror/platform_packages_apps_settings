@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.app.AppOpsManager;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -32,7 +33,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -62,7 +62,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_HIGH_POWER_DETAILS;
+        return SettingsEnums.DIALOG_HIGH_POWER_DETAILS;
     }
 
     @Override
@@ -153,8 +153,8 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
 
     @VisibleForTesting
     static void logSpecialPermissionChange(boolean whitelist, String packageName, Context context) {
-        int logCategory = whitelist ? MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY
-                : MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
+        int logCategory = whitelist ? SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_DENY
+                : SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
         FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context, logCategory,
                 packageName);
     }

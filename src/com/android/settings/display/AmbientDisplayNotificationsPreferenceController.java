@@ -15,8 +15,7 @@ package com.android.settings.display;
 
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
-
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -62,7 +61,7 @@ public class AmbientDisplayNotificationsPreferenceController extends
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_AMBIENT_DISPLAY_NOTIFICATIONS.equals(preference.getKey())) {
-            mMetricsFeatureProvider.action(mContext, ACTION_AMBIENT_DISPLAY);
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AMBIENT_DISPLAY);
         }
         return false;
     }

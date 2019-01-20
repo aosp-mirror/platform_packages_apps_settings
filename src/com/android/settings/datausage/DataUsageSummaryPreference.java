@@ -17,6 +17,7 @@
 package com.android.settings.datausage;
 
 import android.annotation.AttrRes;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -37,7 +38,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.Utils;
@@ -213,7 +213,7 @@ public class DataUsageSummaryPreference extends Preference {
         final SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setArguments(args)
                 .setDestination(DataUsageList.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN);
         launcher.setTitleRes(R.string.wifi_data_usage);
         launcher.launch();
     }

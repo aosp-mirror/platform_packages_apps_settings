@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -26,7 +27,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.net.DataUsageController;
@@ -83,7 +83,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         launcher = new SubSettingLauncher(getContext())
             .setArguments(args)
             .setDestination(DataUsageList.class.getName())
-            .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+            .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN);
         if (mTemplate.isMatchRuleMobile()) {
             launcher.setTitleRes(R.string.app_cellular_data_usage);
         } else {

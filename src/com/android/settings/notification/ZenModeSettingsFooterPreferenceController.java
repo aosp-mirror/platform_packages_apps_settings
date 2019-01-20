@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.app.Dialog;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.icu.text.ListFormatter;
@@ -34,7 +35,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -225,7 +225,7 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
                                             .setDestination(
                                                     ZenModeAutomationSettings.class.getName())
                                             .setSourceMetricsCategory(
-                                                    MetricsEvent.NOTIFICATION_ZEN_MODE_AUTOMATION)
+                                                    SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION)
                                             .launch();
                                 }
                             })
@@ -270,7 +270,7 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.ZEN_CUSTOM_SETTINGS_DIALOG;
+            return SettingsEnums.ZEN_CUSTOM_SETTINGS_DIALOG;
         }
 
         private int getAllowRes(boolean allow) {

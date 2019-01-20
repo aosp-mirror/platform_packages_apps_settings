@@ -15,12 +15,12 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
@@ -54,7 +54,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.BLUETOOTH_FRAGMENT;
+        return SettingsEnums.BLUETOOTH_FRAGMENT;
     }
 
     @Override

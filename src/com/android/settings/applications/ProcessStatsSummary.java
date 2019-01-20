@@ -16,6 +16,7 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.format.Formatter;
@@ -24,7 +25,6 @@ import android.text.format.Formatter.BytesResult;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
@@ -102,7 +102,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.PROCESS_STATS_SUMMARY;
+        return SettingsEnums.PROCESS_STATS_SUMMARY;
     }
 
     @Override

@@ -29,7 +29,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;

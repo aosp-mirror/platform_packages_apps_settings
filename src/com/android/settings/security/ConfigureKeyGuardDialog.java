@@ -19,6 +19,7 @@ package com.android.settings.security;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ import android.os.Bundle;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.CredentialStorage;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -44,7 +44,7 @@ public class ConfigureKeyGuardDialog extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.CONFIGURE_KEYGUARD_DIALOG;
+        return SettingsEnums.CONFIGURE_KEYGUARD_DIALOG;
     }
 
     @Override

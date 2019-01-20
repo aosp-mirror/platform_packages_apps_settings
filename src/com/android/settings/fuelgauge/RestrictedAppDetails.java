@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -30,7 +31,6 @@ import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -132,7 +132,7 @@ public class RestrictedAppDetails extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FUELGAUGE_RESTRICTED_APP_DETAILS;
+        return SettingsEnums.FUELGAUGE_RESTRICTED_APP_DETAILS;
     }
 
     @Override

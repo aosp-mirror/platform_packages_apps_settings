@@ -16,10 +16,10 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.internal.app.ColorDisplayController;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.display.NightDisplaySettings;
@@ -55,7 +55,7 @@ public class NightDisplayConditionController implements ConditionalCardControlle
     public void onPrimaryClick(Context context) {
         new SubSettingLauncher(context)
                 .setDestination(NightDisplaySettings.class.getName())
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_HOMEPAGE)
+                .setSourceMetricsCategory(SettingsEnums.SETTINGS_HOMEPAGE)
                 .setTitleRes(R.string.night_display_title)
                 .launch();
     }
@@ -69,7 +69,7 @@ public class NightDisplayConditionController implements ConditionalCardControlle
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_NIGHT_DISPLAY)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_NIGHT_DISPLAY)
                 .setActionText(mAppContext.getText(R.string.condition_turn_off))
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_night_display_title))

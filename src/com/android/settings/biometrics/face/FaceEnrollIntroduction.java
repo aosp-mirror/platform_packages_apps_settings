@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.face;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
@@ -27,7 +28,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
@@ -179,7 +179,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FACE_ENROLL_INTRO;
+        return SettingsEnums.FACE_ENROLL_INTRO;
     }
 
     @Override

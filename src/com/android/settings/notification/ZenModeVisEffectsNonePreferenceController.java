@@ -17,12 +17,12 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager.Policy;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeVisEffectsNonePreferenceController
@@ -69,7 +69,7 @@ public class ZenModeVisEffectsNonePreferenceController
     @Override
     public void onRadioButtonClick(ZenCustomRadioButtonPreference preference) {
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_ZEN_SOUND_ONLY, true);
+                SettingsEnums.ACTION_ZEN_SOUND_ONLY, true);
         mBackend.saveVisualEffectsPolicy(EFFECTS, false);
     }
 }

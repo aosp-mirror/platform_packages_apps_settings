@@ -17,6 +17,7 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.Nullable;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,7 +33,6 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -60,7 +60,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
+        return SettingsEnums.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
     }
 
     @Override

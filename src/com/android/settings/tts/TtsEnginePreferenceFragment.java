@@ -2,6 +2,7 @@ package com.android.settings.tts;
 
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -13,7 +14,6 @@ import android.widget.Checkable;
 
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -68,7 +68,7 @@ public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TTS_ENGINE_SETTINGS;
+        return SettingsEnums.TTS_ENGINE_SETTINGS;
     }
 
     @Override

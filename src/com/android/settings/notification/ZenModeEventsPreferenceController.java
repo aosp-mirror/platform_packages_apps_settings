@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.NotificationManager.Policy;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
 import android.util.Log;
@@ -24,7 +25,6 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeEventsPreferenceController extends AbstractZenModePreferenceController
@@ -70,7 +70,7 @@ public class ZenModeEventsPreferenceController extends AbstractZenModePreference
         if (ZenModeSettingsBase.DEBUG) {
             Log.d(TAG, "onPrefChange allowEvents=" + allowEvents);
         }
-        mMetricsFeatureProvider.action(mContext, MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_EVENTS,
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_ALLOW_EVENTS,
                 allowEvents);
         mBackend.saveSoundPolicy(Policy.PRIORITY_CATEGORY_EVENTS, allowEvents);
         return true;

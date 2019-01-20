@@ -16,6 +16,7 @@
 
 package com.android.settings.deletionhelper;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -24,7 +25,6 @@ import android.widget.Switch;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.Utils;
@@ -64,7 +64,7 @@ public class AutomaticStorageManagerSwitchBarController
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        mMetrics.action(mContext, MetricsEvent.ACTION_TOGGLE_STORAGE_MANAGER, isChecked);
+        mMetrics.action(mContext, SettingsEnums.ACTION_TOGGLE_STORAGE_MANAGER, isChecked);
         mDaysToRetainPreference.setEnabled(isChecked);
         Settings.Secure.putInt(
                 mContext.getContentResolver(),

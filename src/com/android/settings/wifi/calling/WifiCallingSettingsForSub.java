@@ -17,6 +17,7 @@
 package com.android.settings.wifi.calling;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -44,7 +45,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -212,7 +212,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WIFI_CALLING_FOR_SUB;
+        return SettingsEnums.WIFI_CALLING_FOR_SUB;
     }
 
     @Override

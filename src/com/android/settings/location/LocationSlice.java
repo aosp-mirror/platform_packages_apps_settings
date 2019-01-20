@@ -23,6 +23,7 @@ import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,7 +34,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -88,7 +88,7 @@ public class LocationSlice implements CustomSliceable {
         final Uri contentUri = new Uri.Builder().appendPath(KEY_LOCATION).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 LocationSettings.class.getName(), KEY_LOCATION, screenTitle,
-                MetricsEvent.LOCATION)
+                SettingsEnums.LOCATION)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }

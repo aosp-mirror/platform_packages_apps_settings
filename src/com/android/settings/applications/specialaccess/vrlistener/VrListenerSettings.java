@@ -15,6 +15,7 @@
  */
 package com.android.settings.applications.specialaccess.vrlistener;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
@@ -23,7 +24,6 @@ import android.service.vr.VrListenerService;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -56,7 +56,7 @@ public class VrListenerSettings extends ManagedServiceSettings {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.VR_MANAGE_LISTENERS;
+        return SettingsEnums.VR_MANAGE_LISTENERS;
     }
 
     @Override
@@ -72,8 +72,8 @@ public class VrListenerSettings extends ManagedServiceSettings {
 
     @VisibleForTesting
     void logSpecialPermissionChange(boolean enable, String packageName) {
-        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_DENY;
+        int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_VRHELPER_ALLOW
+                : SettingsEnums.APP_SPECIAL_PERMISSION_VRHELPER_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
                 FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
         metricsFeatureProvider.action(

@@ -21,10 +21,10 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settingslib.TwoTargetPreference;
-
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * A custom preference that provides inline checkbox and tappable target.

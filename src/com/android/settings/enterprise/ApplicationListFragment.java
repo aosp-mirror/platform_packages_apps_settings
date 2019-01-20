@@ -17,9 +17,9 @@
 package com.android.settings.enterprise;
 
 import android.Manifest;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.dashboard.DashboardFragment;
@@ -73,7 +73,7 @@ public abstract class ApplicationListFragment extends DashboardFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.ENTERPRISE_PRIVACY_PERMISSIONS;
+            return SettingsEnums.ENTERPRISE_PRIVACY_PERMISSIONS;
         }
     }
 
@@ -102,7 +102,7 @@ public abstract class ApplicationListFragment extends DashboardFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.ENTERPRISE_PRIVACY_INSTALLED_APPS;
+            return SettingsEnums.ENTERPRISE_PRIVACY_INSTALLED_APPS;
         }
 
         @Override

@@ -40,7 +40,6 @@ import android.util.Log;
 import androidx.annotation.GuardedBy;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -154,7 +153,7 @@ public class AnomalyDetectionJobService extends JobService {
             final String versionedPackage = packageName + "/" + versionCode;
             if (batteryUtils.shouldHideAnomaly(powerWhitelistBackend, uid, anomalyInfo)) {
                 metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
-                        MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
+                        SettingsEnums.ACTION_ANOMALY_IGNORED,
                         SettingsEnums.PAGE_UNKNOWN,
                         versionedPackage,
                         anomalyInfo.anomalyType);
@@ -172,7 +171,7 @@ public class AnomalyDetectionJobService extends JobService {
                             timeMs);
                 }
                 metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
-                        MetricsProto.MetricsEvent.ACTION_ANOMALY_TRIGGERED,
+                        SettingsEnums.ACTION_ANOMALY_TRIGGERED,
                         SettingsEnums.PAGE_UNKNOWN,
                         versionedPackage,
                         anomalyInfo.anomalyType);

@@ -16,6 +16,7 @@
 package com.android.settings.applications.appinfo;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -24,7 +25,6 @@ import android.os.UserHandle;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -49,7 +49,7 @@ public class InstantAppButtonDialogFragment extends InstrumentedDialogFragment i
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DIALOG_APP_INFO_ACTION;
+        return SettingsEnums.DIALOG_APP_INFO_ACTION;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class InstantAppButtonDialogFragment extends InstrumentedDialogFragment i
         final Context context = getContext();
         final PackageManager packageManager = context.getPackageManager();
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-            .action(context, MetricsEvent.ACTION_SETTINGS_CLEAR_INSTANT_APP, mPackageName);
+            .action(context, SettingsEnums.ACTION_SETTINGS_CLEAR_INSTANT_APP, mPackageName);
         packageManager.deletePackageAsUser(mPackageName, null, 0, UserHandle.myUserId());
     }
 

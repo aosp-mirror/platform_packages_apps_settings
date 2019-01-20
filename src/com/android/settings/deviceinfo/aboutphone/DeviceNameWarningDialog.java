@@ -17,13 +17,13 @@
 package com.android.settings.deviceinfo.aboutphone;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -48,7 +48,7 @@ public class DeviceNameWarningDialog extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_ENABLE_DEVELOPMENT_OPTIONS;
+        return SettingsEnums.DIALOG_ENABLE_DEVELOPMENT_OPTIONS;
     }
 
     @Override

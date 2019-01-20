@@ -19,6 +19,7 @@ package com.android.settings.applications.appinfo;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -44,7 +45,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -218,7 +218,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 uninstallDaIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
                         packageName);
                 mMetricsFeatureProvider.action(mActivity,
-                        MetricsProto.MetricsEvent.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN);
+                        SettingsEnums.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN);
                 mFragment.startActivityForResult(uninstallDaIntent, mRequestRemoveDeviceAdmin);
                 return;
             }
@@ -244,8 +244,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                     mMetricsFeatureProvider.action(
                             mActivity,
                             mAppEntry.info.enabled
-                                    ? MetricsProto.MetricsEvent.ACTION_SETTINGS_DISABLE_APP
-                                    : MetricsProto.MetricsEvent.ACTION_SETTINGS_ENABLE_APP);
+                                    ? SettingsEnums.ACTION_SETTINGS_DISABLE_APP
+                                    : SettingsEnums.ACTION_SETTINGS_ENABLE_APP);
                     AsyncTask.execute(new DisableChangerRunnable(mPm, mAppEntry.info.packageName,
                             PackageManager.COMPONENT_ENABLED_STATE_DEFAULT));
                 }
@@ -288,13 +288,13 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         switch (id) {
             case ButtonActionDialogFragment.DialogType.DISABLE:
                 mMetricsFeatureProvider.action(mActivity,
-                        MetricsProto.MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
+                        SettingsEnums.ACTION_SETTINGS_DISABLE_APP);
                 AsyncTask.execute(new DisableChangerRunnable(mPm, mAppEntry.info.packageName,
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER));
                 break;
             case ButtonActionDialogFragment.DialogType.SPECIAL_DISABLE:
                 mMetricsFeatureProvider.action(mActivity,
-                        MetricsProto.MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
+                        SettingsEnums.ACTION_SETTINGS_DISABLE_APP);
                 uninstallPkg(mAppEntry.info.packageName, false, true);
                 break;
             case ButtonActionDialogFragment.DialogType.FORCE_STOP:
@@ -524,7 +524,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
 
         mMetricsFeatureProvider.action(
-                mActivity, MetricsProto.MetricsEvent.ACTION_SETTINGS_UNINSTALL_APP);
+                mActivity, SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP);
         mFragment.startActivityForResult(uninstallIntent, mRequestUninstall);
         mDisableAfterUninstall = andDisable;
     }
@@ -533,7 +533,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     void forceStopPackage(String pkgName) {
         mMetricsFeatureProvider.action(
                 mMetricsFeatureProvider.getAttribution(mActivity),
-                MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP,
+                SettingsEnums.ACTION_APP_FORCE_STOP,
                 mFragment.getMetricsCategory(),
                 pkgName,
                 0);

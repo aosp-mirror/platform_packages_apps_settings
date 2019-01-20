@@ -19,6 +19,9 @@ package com.android.settings.wifi;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
@@ -28,9 +31,6 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
-
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 /**
  * This places a preference into a PreferenceGroup owned by some parent

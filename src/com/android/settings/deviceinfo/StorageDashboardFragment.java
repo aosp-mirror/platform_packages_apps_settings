@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -33,7 +34,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -169,7 +169,7 @@ public class StorageDashboardFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_STORAGE_CATEGORY;
+        return SettingsEnums.SETTINGS_STORAGE_CATEGORY;
     }
 
     @Override

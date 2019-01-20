@@ -2724,6 +2724,8 @@
     <string name="night_display_activation_on_custom">Turn on until <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, deactivation button action for custom schedule [CHAR LIMIT=40] -->
     <string name="night_display_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
+    <!-- Night display slice screen, subtitle of intensity setting when night light is off. [CHAR LIMIT=30] -->
+    <string name="night_display_not_currently_on">Night Light not currently on</string>
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Sleep</string>
@@ -10512,4 +10514,24 @@
 
     <!-- Preference title text for silence gesture [CHAR LIMIT=60]-->
     <string name="gesture_silence_title">Silence alerts gesture</string>
+
+    <!-- Text to display when no app used permission.  [CHAR LIMIT=NONE] -->
+    <string name="permission_bar_chart_empty_text">0 apps used permissions</string>
+
+    <!-- Text for permission bar chart title in Privacy page.  [CHAR LIMIT=NONE] -->
+    <string name="permission_bar_chart_title">Most-used permissions in last 24 hours</string>
+
+    <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
+    <string name="permission_bar_chart_details">See all usage</string>
+
+    <!-- Title for notification channel slice. [CHAR LIMIT=NONE] -->
+    <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> Notifications</string>
+    <!-- Title for no suggested app in notification channel slice. [CHAR LIMIT=NONE] -->
+    <string name="no_suggested_app">No suggested application</string>
+    <!-- Summary for notification channel slice. [CHAR LIMIT=NONE] -->
+    <plurals name="notification_channel_count_summary">
+        <item quantity="one"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channel. Tap to manage all.</item>
+        <item quantity="other"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channels. Tap to manage all.</item>
+    </plurals>
+
 </resources>

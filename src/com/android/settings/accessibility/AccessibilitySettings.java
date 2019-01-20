@@ -20,6 +20,7 @@ import static android.os.Vibrator.VibrationIntensity;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -27,6 +28,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,7 +52,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
 import com.android.settings.R;
@@ -272,7 +273,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY;
+        return SettingsEnums.ACCESSIBILITY;
     }
 
     @Override
@@ -662,7 +663,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     protected void updateSystemPreferences() {
         // Move color inversion and color correction preferences to Display category if device
         // supports HWC hardware-accelerated color transform.
-        if (isColorTransformAccelerated(getContext())) {
+        if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
             PreferenceCategory experimentalCategory =
                     mCategoryToPrefCategoryMap.get(CATEGORY_EXPERIMENTAL);
             PreferenceCategory displayCategory =

@@ -24,6 +24,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,9 +34,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 @RunWith(RobolectricTestRunner.class)
 public class AllowBackgroundActivityStartsPreferenceControllerTest {
@@ -52,7 +52,7 @@ public class AllowBackgroundActivityStartsPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new AllowBackgroundActivityStartsPreferenceController(mContext);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -98,11 +98,7 @@ public class AllowBackgroundActivityStartsPreferenceControllerTest {
     public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.BACKGROUND_ACTIVITY_STARTS_ENABLED, 1 /* default */);
-
-        assertThat(mode).isEqualTo(0);
-        verify(mPreference).setChecked(false);
+        verify(mPreference).setChecked(true);
         verify(mPreference).setEnabled(false);
     }
 }

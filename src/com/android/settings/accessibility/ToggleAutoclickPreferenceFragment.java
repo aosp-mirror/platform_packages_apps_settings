@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ import android.widget.Switch;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -109,7 +109,7 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_TOGGLE_AUTOCLICK;
+        return SettingsEnums.ACCESSIBILITY_TOGGLE_AUTOCLICK;
     }
 
     @Override

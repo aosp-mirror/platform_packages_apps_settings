@@ -19,6 +19,7 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -28,7 +29,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -143,6 +143,6 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.MANAGE_EXTERNAL_SOURCES;
+        return SettingsEnums.MANAGE_EXTERNAL_SOURCES;
     }
 }

@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,7 +57,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -205,7 +205,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.USER;
+        return SettingsEnums.USER;
     }
 
     @Override
@@ -702,23 +702,23 @@ public class UserSettings extends SettingsPreferenceFragment
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE:
-                return MetricsEvent.DIALOG_USER_REMOVE;
+                return SettingsEnums.DIALOG_USER_REMOVE;
             case DIALOG_USER_CANNOT_MANAGE:
-                return MetricsEvent.DIALOG_USER_CANNOT_MANAGE;
+                return SettingsEnums.DIALOG_USER_CANNOT_MANAGE;
             case DIALOG_ADD_USER:
-                return MetricsEvent.DIALOG_USER_ADD;
+                return SettingsEnums.DIALOG_USER_ADD;
             case DIALOG_SETUP_USER:
-                return MetricsEvent.DIALOG_USER_SETUP;
+                return SettingsEnums.DIALOG_USER_SETUP;
             case DIALOG_SETUP_PROFILE:
-                return MetricsEvent.DIALOG_USER_SETUP_PROFILE;
+                return SettingsEnums.DIALOG_USER_SETUP_PROFILE;
             case DIALOG_CHOOSE_USER_TYPE:
-                return MetricsEvent.DIALOG_USER_CHOOSE_TYPE;
+                return SettingsEnums.DIALOG_USER_CHOOSE_TYPE;
             case DIALOG_NEED_LOCKSCREEN:
-                return MetricsEvent.DIALOG_USER_NEED_LOCKSCREEN;
+                return SettingsEnums.DIALOG_USER_NEED_LOCKSCREEN;
             case DIALOG_CONFIRM_EXIT_GUEST:
-                return MetricsEvent.DIALOG_USER_CONFIRM_EXIT_GUEST;
+                return SettingsEnums.DIALOG_USER_CONFIRM_EXIT_GUEST;
             case DIALOG_USER_PROFILE_EDITOR:
-                return MetricsEvent.DIALOG_USER_EDIT_PROFILE;
+                return SettingsEnums.DIALOG_USER_EDIT_PROFILE;
             default:
                 return 0;
         }

@@ -50,7 +50,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.MasterCheckBoxPreference;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ import java.util.List;
 abstract public class NotificationSettingsBase extends DashboardFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    protected static final String ARG_FROM_SETTINGS = "fromSettings";
+    public static final String ARG_FROM_SETTINGS = "fromSettings";
 
     protected PackageManager mPm;
     protected NotificationBackend mBackend = new NotificationBackend();

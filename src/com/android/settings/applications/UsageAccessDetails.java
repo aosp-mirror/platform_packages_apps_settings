@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +33,6 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.overlay.FeatureFactory;
@@ -112,8 +112,8 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
 
     @VisibleForTesting
     void logSpecialPermissionChange(boolean newState, String packageName) {
-        int logCategory = newState ? MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY;
+        int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW
+                : SettingsEnums.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
                 FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
         metricsFeatureProvider.action(
@@ -163,7 +163,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_USAGE_ACCESS_DETAIL;
+        return SettingsEnums.APPLICATIONS_USAGE_ACCESS_DETAIL;
     }
 
 }

@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,7 +47,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -74,7 +74,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
     private static final String TAG_VOLUME_UNMOUNTED = "volume_unmounted";
     private static final String TAG_DISK_INIT = "disk_init";
-    private static final int METRICS_CATEGORY = MetricsEvent.DEVICEINFO_STORAGE;
+    private static final int METRICS_CATEGORY = SettingsEnums.DEVICEINFO_STORAGE;
 
     static final int COLOR_PUBLIC = Color.parseColor("#ff9e9e9e");
 
@@ -447,7 +447,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_VOLUME_UNMOUNT;
+            return SettingsEnums.DIALOG_VOLUME_UNMOUNT;
         }
 
         @Override
@@ -513,7 +513,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     public static class DiskInitFragment extends InstrumentedDialogFragment {
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_VOLUME_INIT;
+            return SettingsEnums.DIALOG_VOLUME_INIT;
         }
 
         public static void show(Fragment parent, int resId, String diskId) {

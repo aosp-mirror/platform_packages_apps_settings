@@ -18,14 +18,13 @@ package com.android.settings.wifi.savedaccesspoints;
 
 import android.annotation.Nullable;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase;
@@ -51,7 +50,7 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.WIFI_SAVED_ACCESS_POINTS;
+        return SettingsEnums.WIFI_SAVED_ACCESS_POINTS;
     }
 
     @Override
@@ -123,7 +122,7 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case WifiSettings.WIFI_DIALOG_ID:
-                return MetricsProto.MetricsEvent.DIALOG_WIFI_SAVED_AP_EDIT;
+                return SettingsEnums.DIALOG_WIFI_SAVED_AP_EDIT;
             default:
                 return 0;
         }

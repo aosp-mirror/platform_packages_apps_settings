@@ -16,6 +16,7 @@
 package com.android.settings.applications.appinfo;
 
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,7 +30,6 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
@@ -101,8 +101,8 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     void logSpecialPermissionChange(boolean newState, String packageName) {
-        int logCategory = newState ? MetricsEvent.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY;
+        int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
+                : SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY;
         FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
                 logCategory, packageName);
     }
@@ -139,7 +139,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
+        return SettingsEnums.SYSTEM_ALERT_WINDOW_APPS;
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {

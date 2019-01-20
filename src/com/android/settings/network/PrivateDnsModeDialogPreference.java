@@ -19,11 +19,10 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_DEFAULT_MODE_FALLBACK;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
-import static android.system.OsConstants.AF_INET;
-import static android.system.OsConstants.AF_INET6;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -33,7 +32,6 @@ import android.net.NetworkUtils;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
@@ -49,7 +47,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
@@ -203,7 +200,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
             }
 
             FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
-                    MetricsProto.MetricsEvent.ACTION_PRIVATE_DNS_MODE, mMode);
+                    SettingsEnums.ACTION_PRIVATE_DNS_MODE, mMode);
             Settings.Global.putString(context.getContentResolver(), MODE_KEY, mMode);
         }
     }

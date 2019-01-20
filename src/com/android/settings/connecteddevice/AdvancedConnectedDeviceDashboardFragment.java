@@ -15,11 +15,11 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -46,7 +46,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.CONNECTION_DEVICE_ADVANCED;
+        return SettingsEnums.CONNECTION_DEVICE_ADVANCED;
     }
 
     @Override

@@ -21,12 +21,12 @@ import static com.android.settingslib.dream.DreamBackend.NEVER;
 import static com.android.settingslib.dream.DreamBackend.WHILE_CHARGING;
 import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -93,7 +93,7 @@ public class DreamSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DREAM;
+        return SettingsEnums.DREAM;
     }
 
     @Override

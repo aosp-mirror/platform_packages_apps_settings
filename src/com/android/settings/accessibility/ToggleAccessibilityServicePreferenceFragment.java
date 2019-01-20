@@ -20,6 +20,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,7 +38,6 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
@@ -71,7 +71,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_SERVICE;
+        return SettingsEnums.ACCESSIBILITY_SERVICE;
     }
 
     @Override
@@ -163,9 +163,9 @@ public class ToggleAccessibilityServicePreferenceFragment
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         if (dialogId == DIALOG_ID_ENABLE_WARNING) {
-            return MetricsEvent.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
+            return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
         } else {
-            return MetricsEvent.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
+            return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
         }
     }
 

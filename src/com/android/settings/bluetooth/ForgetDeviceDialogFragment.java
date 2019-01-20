@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,7 +27,6 @@ import android.os.Bundle;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -58,7 +58,7 @@ public class ForgetDeviceDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_PAIRED_DEVICE_FORGET;
+        return SettingsEnums.DIALOG_BLUETOOTH_PAIRED_DEVICE_FORGET;
     }
 
     @Override

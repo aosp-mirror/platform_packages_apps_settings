@@ -17,6 +17,7 @@
 package com.android.settings.language;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -30,7 +31,6 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
@@ -58,7 +58,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY;
+        return SettingsEnums.SETTINGS_LANGUAGE_CATEGORY;
     }
 
     @Override

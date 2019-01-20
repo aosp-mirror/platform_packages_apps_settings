@@ -21,6 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.android.settings.slices.CustomSliceRegistry.BATTERY_FIX_SLICE_URI;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,7 +35,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
@@ -125,7 +125,7 @@ public class BatteryFixSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 PowerUsageSummary.class.getName(), BatteryTipPreferenceController.PREF_NAME,
                 screenTitle,
-                MetricsProto.MetricsEvent.SLICE)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }

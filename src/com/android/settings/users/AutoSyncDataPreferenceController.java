@@ -17,6 +17,7 @@ package com.android.settings.users;
 
 import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,7 +32,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -147,7 +147,7 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_CONFIRM_AUTO_SYNC_CHANGE;
+            return SettingsEnums.DIALOG_CONFIRM_AUTO_SYNC_CHANGE;
         }
 
         @Override

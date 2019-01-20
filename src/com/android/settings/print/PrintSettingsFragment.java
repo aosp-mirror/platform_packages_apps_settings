@@ -18,6 +18,7 @@ package com.android.settings.print;
 
 import static com.android.settings.print.PrintSettingPreferenceController.shouldShowToUser;
 
+import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,7 +52,6 @@ import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -96,7 +96,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.PRINT_SETTINGS;
+        return SettingsEnums.PRINT_SETTINGS;
     }
 
     @Override

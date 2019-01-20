@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.assist;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +25,6 @@ import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.internal.app.AssistUtils;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -40,7 +40,7 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_VOICE_INPUT_PICKER;
+        return SettingsEnums.DEFAULT_VOICE_INPUT_PICKER;
     }
 
     @Override

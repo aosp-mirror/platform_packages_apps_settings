@@ -16,10 +16,10 @@
 
 package com.android.settings.development.qstile;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -46,7 +46,7 @@ public class DevelopmentTileConfigFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEVELOPMENT_QS_TILE_CONFIG;
+        return SettingsEnums.DEVELOPMENT_QS_TILE_CONFIG;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

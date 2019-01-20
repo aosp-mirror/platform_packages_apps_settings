@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +32,6 @@ import android.service.notification.ConditionProviderService;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -141,7 +141,7 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         @Override
         public void onOk(String ruleName, Fragment parent) {
             mMetricsFeatureProvider.action(mContext,
-                    MetricsProto.MetricsEvent.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
+                    SettingsEnums.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
             AutomaticZenRule rule = new AutomaticZenRule(ruleName, mRuleInfo.serviceComponent,
                     mRuleInfo.configurationActivity, mRuleInfo.defaultConditionId, null,
                     NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);

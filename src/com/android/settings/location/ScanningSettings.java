@@ -16,10 +16,10 @@
 
 package com.android.settings.location;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -40,7 +40,7 @@ public class ScanningSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.LOCATION_SCANNING;
+        return SettingsEnums.LOCATION_SCANNING;
     }
 
     @Override

@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,7 +48,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.CancellablePreference;
 import com.android.settings.CancellablePreference.OnCancelListener;
 import com.android.settings.R;
@@ -146,7 +146,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_PROCESS_STATS_DETAIL;
+        return SettingsEnums.APPLICATIONS_PROCESS_STATS_DETAIL;
     }
 
     @Override

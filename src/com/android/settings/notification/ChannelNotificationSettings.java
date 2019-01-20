@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import android.util.Log;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -38,7 +38,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_TOPIC_NOTIFICATION;
+        return SettingsEnums.NOTIFICATION_TOPIC_NOTIFICATION;
     }
 
     @Override

@@ -16,6 +16,7 @@
 
 package com.android.settings.network;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
@@ -44,9 +45,7 @@ public class MobileNetworkListFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO(asargent) - return SettingsEnums.MOBILE_NETWORK_LIST once the CL defining it has
-        // landed.
-        return 0;
+        return SettingsEnums.MOBILE_NETWORK_LIST;
     }
 
     @Override

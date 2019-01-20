@@ -16,10 +16,8 @@
 
 package com.android.settings.applications;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .SETTINGS_APP_NOTIF_CATEGORY;
-
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
@@ -251,7 +249,7 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
                         R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
-                        1001 /*RequestCode*/, SETTINGS_APP_NOTIF_CATEGORY);
+                        1001 /*RequestCode*/, SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY);
                 return true;
             });
             if (!rebindPref) {

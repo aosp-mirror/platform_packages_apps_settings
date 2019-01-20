@@ -17,6 +17,7 @@
 package com.android.settings.applications.assist;
 
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +33,6 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.AssistUtils;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -57,7 +57,7 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_ASSIST_PICKER;
+        return SettingsEnums.DEFAULT_ASSIST_PICKER;
     }
 
     @Override

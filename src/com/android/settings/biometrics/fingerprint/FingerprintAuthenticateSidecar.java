@@ -16,11 +16,11 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import android.app.settings.SettingsEnums;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
 import android.os.CancellationSignal;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 
 /**
@@ -55,7 +55,7 @@ public class FingerprintAuthenticateSidecar extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FINGERPRINT_AUTHENTICATE_SIDECAR;
+        return SettingsEnums.FINGERPRINT_AUTHENTICATE_SIDECAR;
     }
 
     private FingerprintManager.AuthenticationCallback mAuthenticationCallback =

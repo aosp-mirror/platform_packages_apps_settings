@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,7 +35,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
@@ -203,18 +203,18 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
         if (mCachedDevice.isConnected()) {
             metricsFeatureProvider.action(context,
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
+                    SettingsEnums.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
             askDisconnect();
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
             metricsFeatureProvider.action(context,
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
+                    SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT);
             mCachedDevice.connect(true);
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             metricsFeatureProvider.action(context,
-                    MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
+                    SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR);
             if (!mCachedDevice.hasHumanReadableName()) {
                 metricsFeatureProvider.action(context,
-                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
+                        SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
             }
             pair();
         }

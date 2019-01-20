@@ -20,9 +20,11 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;

@@ -16,11 +16,11 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -48,7 +48,7 @@ public class SmartBatterySettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FUELGAUGE_SMART_BATTERY;
+        return SettingsEnums.FUELGAUGE_SMART_BATTERY;
     }
 
     @Override

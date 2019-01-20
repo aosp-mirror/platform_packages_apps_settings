@@ -36,7 +36,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /**

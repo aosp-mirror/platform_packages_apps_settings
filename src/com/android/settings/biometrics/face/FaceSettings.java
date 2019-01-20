@@ -21,6 +21,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
@@ -29,7 +30,6 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -68,7 +68,7 @@ public class FaceSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FACE;
+        return SettingsEnums.FACE;
     }
 
     @Override

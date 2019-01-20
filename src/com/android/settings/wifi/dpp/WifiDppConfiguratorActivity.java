@@ -18,6 +18,7 @@ package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,9 +28,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedActivity;
 
 /**
  * To provision "other" device with specified Wi-Fi network.
@@ -83,7 +83,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
+        return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
     @Override

@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 
 import com.android.settingslib.core.lifecycle.LifecycleObserver;

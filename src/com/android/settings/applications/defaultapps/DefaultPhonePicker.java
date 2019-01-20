@@ -16,13 +16,13 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.telecom.DefaultDialerManager;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.applications.DefaultAppInfo;
 
@@ -35,7 +35,7 @@ public class DefaultPhonePicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_PHONE_PICKER;
+        return SettingsEnums.DEFAULT_PHONE_PICKER;
     }
 
     @Override

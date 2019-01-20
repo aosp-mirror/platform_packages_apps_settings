@@ -20,6 +20,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -44,7 +45,6 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.EntityHeaderController;
@@ -80,14 +80,14 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCOUNTS_ACCOUNT_SYNC;
+        return SettingsEnums.ACCOUNTS_ACCOUNT_SYNC;
     }
 
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case CANT_DO_ONETIME_SYNC_DIALOG:
-                return MetricsEvent.DIALOG_ACCOUNT_SYNC_CANNOT_ONETIME_SYNC;
+                return SettingsEnums.DIALOG_ACCOUNT_SYNC_CANNOT_ONETIME_SYNC;
             default:
                 return 0;
         }

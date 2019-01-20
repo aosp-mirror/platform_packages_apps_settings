@@ -420,10 +420,8 @@
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Sovelluskirjautuminen, maksut"</string>
     <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"Tunnistus silmät auki"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"Silmien on oltava auki kasvojentunnistusta varten"</string>
-    <!-- no translation found for security_settings_face_settings_require_confirmation (2559602923985027572) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_require_confirmation_details (2002651109571928756) -->
-    <skip />
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Pyydä aina vahvistusta"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="2002651109571928756">"Pyydä aina vahvistusta sovellusten todennuksen yhteydessä"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Poista kasvodata"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Voit avata laitteesi ja käyttää sovelluksia kasvojesi avulla. "<annotation id="url">"Lisätietoja"</annotation></string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Sormenjälki"</string>
@@ -794,7 +792,10 @@
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"Kirjaudu sisään"</string>
     <string name="wifi_tap_to_sign_in" msgid="6990161842394669054">"Napauta tästä kirjautuaksesi verkkoon"</string>
-    <string name="link_speed" msgid="8896664974117585555">"%1$d Mt/s"</string>
+    <!-- no translation found for tx_link_speed (6139577455916971837) -->
+    <skip />
+    <!-- no translation found for rx_link_speed (5729003360923133988) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa ottaa Wi-Fin käyttöön."</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa poistaa Wi-Fin käytöstä."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
@@ -884,7 +885,10 @@
     <string name="wifi_hidden_network_warning" msgid="6674068093531603452">"Jos reitittimesi ei lähetä verkkotunnusta, mutta haluat muodostaa siihen yhteyden myöhemmin, voit piilottaa verkon.\n\nTästä voi aiheutua turvallisuusriski, koska puhelimesi lähettää signaaliaan säännöllisesti löytääkseen verkon.\n\nVerkon piilottaminen ei muuta reititinasetuksiasi."</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signaalin vahvuus"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Tila"</string>
-    <string name="wifi_speed" msgid="3526198708812322037">"Yhteyden nopeus"</string>
+    <!-- no translation found for tx_wifi_speed (2994278184097786511) -->
+    <skip />
+    <!-- no translation found for rx_wifi_speed (7206089638282839236) -->
+    <skip />
     <string name="wifi_frequency" msgid="7791090119577812214">"Taajuus"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP-osoite"</string>
     <string name="passpoint_label" msgid="6381371313076009926">"Tallennettu seuraavan kautta:"</string>
@@ -922,12 +926,9 @@
     <string name="wifi_dpp_wifi_shared_with_device" msgid="7669684043486750097">"Wi‑Fi jaettu laitteen kanssa"</string>
     <string name="wifi_dpp_add_another_device" msgid="8415243205104666929">"Lisää toinen laite"</string>
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Valitse eri verkko"</string>
-    <!-- no translation found for wifi_dpp_could_not_add_device (1598945041477461501) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_device_found (8618134150169810107) -->
-    <skip />
-    <!-- no translation found for retry (6472609612090877557) -->
-    <skip />
+    <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Laitteen lisääminen epäonnistui"</string>
+    <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Laite löydetty"</string>
+    <string name="retry" msgid="6472609612090877557">"Yritä uudelleen"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Jaa muiden laitteen käyttäjien kanssa"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ei muutettu)"</string>
     <string name="wifi_unspecified" msgid="4917316464723064807">"Valitse"</string>
@@ -1534,10 +1535,8 @@
     <string name="reset_esim_error_msg" msgid="8434956817922668388">"eSIMien nollaus epäonnistui virheen vuoksi."</string>
     <string name="master_clear_title" msgid="3531267871084279512">"Poista kaikki tiedot (palauta tehdasasetukset)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Poista data (tehdasasetuksiin)"</string>
-    <!-- no translation found for master_clear_desc (2314458161059569301) -->
-    <skip />
-    <!-- no translation found for master_clear_desc (7647628092266675099) -->
-    <skip />
+    <string name="master_clear_desc" product="tablet" msgid="2314458161059569301">"Tämä poistaa kaiken datan tabletin "<b>"sisäisestä tallennustilasta"</b>", esimerkiksi\n\n"<li>"Google-tilisi"</li>\n<li>"järjestelmän ja sovellusten datan ja asetukset"</li>\n<li>"ladatut sovellukset."</li></string>
+    <string name="master_clear_desc" product="default" msgid="7647628092266675099">"Tämä poistaa kaiken datan puhelimen "<b>"sisäisestä tallennustilasta"</b>", esimerkiksi\n\n"<li>"Google-tilisi"</li>\n<li>"järjestelmän ja sovellusten datan ja asetukset"</li>\n<li>"ladatut sovellukset."</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Olet kirjautunut sisään seuraaviin tileihin:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Tällä laitteella on muita paikalla olevia käyttäjiä.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musiikki"</li>\n<li>"Valokuvat"</li>\n<li>"Muut käyttäjän tiedot"</li></string>
@@ -1552,16 +1551,12 @@
     <string name="erase_esim_storage" msgid="5684858600215441932">"Tyhjennä eSIM"</string>
     <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"Tyhjennä kaikki puhelimen eSIMit. Tämä ei peruuta mobiilipalvelupakettiasi."</string>
     <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"Tyhjennä kaikki tabletin eSIMit. Tämä ei peruuta mobiilipalvelupakettiasi."</string>
-    <!-- no translation found for master_clear_button_text (1893179883931194922) -->
-    <skip />
-    <!-- no translation found for master_clear_button_text (1893179883931194922) -->
-    <skip />
-    <!-- no translation found for master_clear_final_desc (7166193761421238701) -->
-    <skip />
+    <string name="master_clear_button_text" product="tablet" msgid="1893179883931194922">"Pyyhi kaikki tiedot"</string>
+    <string name="master_clear_button_text" product="default" msgid="1893179883931194922">"Pyyhi kaikki tiedot"</string>
+    <string name="master_clear_final_desc" msgid="7166193761421238701">"Kaikki henkilökohtaiset tietosi ja ladatut sovellukset poistetaan. Tätä toimintoa ei voi kumota."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Poista kaikki"</string>
     <string name="master_clear_failed" msgid="2503230016394586353">"Palauttamista ei suoritettu, koska System Clear -palvelu ei ole käytettävissä."</string>
-    <!-- no translation found for master_clear_confirm_title (1134724452049918413) -->
-    <skip />
+    <string name="master_clear_confirm_title" msgid="1134724452049918413">"Poistetaanko kaikki data?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Tämä käyttäjä ei voi palauttaa tehdasasetuksia"</string>
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Tyhjennetään"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Odota…"</string>
@@ -1842,10 +1837,8 @@
     <string name="force_stop_dlg_text" msgid="7208364204467835578">"Jos pakotat sovelluksen pysähtymään, se saattaa alkaa toimia virheellisesti."</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Ensisijainen asennussijainti"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Vaihda uusien sovelluksien ensisijaista asennussijaintia."</string>
-    <!-- no translation found for app_disable_dlg_positive (7319687593243386336) -->
-    <skip />
-    <!-- no translation found for app_disable_dlg_text (779389180388352129) -->
-    <skip />
+    <string name="app_disable_dlg_positive" msgid="7319687593243386336">"Poista sovellus"</string>
+    <string name="app_disable_dlg_text" msgid="779389180388352129">"Jos poistat tämän sovelluksen, Android ja muut sovellukset eivät välttämättä toimi enää oikein."</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"Poista ilmoitukset käytöstä?"</string>
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Kauppa"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Sovelluksen tiedot"</string>
@@ -2043,10 +2036,8 @@
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Jos käytät hiirtä, voit asettaa osoittimen klikkaamaan automaattisesti, kun se on ollut paikoillaan tietyn aikaa."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Viive ennen klikkausta"</string>
     <string name="accessibility_vibration_settings_title" msgid="3453277326300320803">"Värähtely"</string>
-    <!-- no translation found for accessibility_notification_vibration_title (3009997451790678444) -->
-    <skip />
-    <!-- no translation found for accessibility_ring_vibration_title (5369395955680650778) -->
-    <skip />
+    <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Ilmoitusvärinä"</string>
+    <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Soittoäänen värinä"</string>
     <string name="accessibility_touch_vibration_title" msgid="7931823772673770492">"Kosketusvärinä"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Käytä palvelua"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Käytä värinkorjausta"</string>
@@ -2088,8 +2079,7 @@
       <item quantity="other">Erittäin pitkä viive (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
       <item quantity="one">Erittäin pitkä viive (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> ms)</item>
     </plurals>
-    <!-- no translation found for accessibility_vibration_summary (4272038147476749536) -->
-    <skip />
+    <string name="accessibility_vibration_summary" msgid="4272038147476749536">"Soittoääni <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, ilmoitus <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, kosketus <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"Puhelu- ja ilmoitusvärinä on pois käytöstä"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"Puhelu- ja ilmoitusvärinä on heikko"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"Puhelu- ja ilmoitusvärinä on keskitasoinen"</string>
@@ -3065,10 +3055,8 @@
     <string name="keywords_ambient_display" msgid="3103487805748659132">"saapuva ilmoitus"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"yhteyden jakaminen usb:llä, yhteyden jakaminen bluetoothilla, wifi-hotspot"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"haptinen, värinä, näyttö, herkkyys"</string>
-    <!-- no translation found for keywords_ring_vibration (4652101158979064884) -->
-    <skip />
-    <!-- no translation found for keywords_notification_vibration (31924624421190547) -->
-    <skip />
+    <string name="keywords_ring_vibration" msgid="4652101158979064884">"haptinen teknologia, värinä, puhelin, puhelu, herkkyys, soittoääni"</string>
+    <string name="keywords_notification_vibration" msgid="31924624421190547">"haptinen teknologia, värinä, herkkyys"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Määritä Wi-Fi ja NFC-tagi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Kirjoita"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Kirjoita napauttamalla tagia…"</string>
@@ -3096,8 +3084,7 @@
     <string name="other_sound_settings" msgid="3151004537006844718">"Muut äänet"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Näppäimistön näppäinäänet"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Näytön lukitusäänet"</string>
-    <!-- no translation found for charging_sounds_title (3379885700913955599) -->
-    <skip />
+    <string name="charging_sounds_title" msgid="3379885700913955599">"Latausäänet ja ‑värinä"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"Telakointiäänet"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"Kosketusäänet"</string>
     <string name="vibrate_on_touch_title" msgid="1510405818894719079">"Kosketusvärinä"</string>
@@ -3124,10 +3111,8 @@
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Ei ääntä, paitsi <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Ei ääntä, paitsi hälytykset ja media"</string>
     <string name="zen_mode_automation_settings_title" msgid="6155298704165984370">"Aikataulut"</string>
-    <!-- no translation found for zen_mode_delete_automatic_rules (5975522152123354381) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_delete (5717258786128155695) -->
-    <skip />
+    <string name="zen_mode_delete_automatic_rules" msgid="5975522152123354381">"Poista aikataulut"</string>
+    <string name="zen_mode_schedule_delete" msgid="5717258786128155695">"Poista"</string>
     <string name="zen_mode_rule_name_edit" msgid="812185626159430507">"Muokkaa"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="8995524726286378583">"Aikataulut"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="4773111805919088437">"Aikataulu"</string>
@@ -3180,12 +3165,15 @@
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"Ota käyttöön"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"Ota käyttöön nyt"</string>
     <string name="zen_mode_button_turn_off" msgid="6181953727880503094">"Poista käytöstä nyt"</string>
+    <!-- no translation found for live_captions_title (7450564721572472212) -->
+    <skip />
+    <!-- no translation found for live_captions_summary (3247164905504570813) -->
+    <skip />
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"Älä häiritse ‑tila on käytössä <xliff:g id="FORMATTED_TIME">%s</xliff:g> asti."</string>
     <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"Älä häiritse ‑tila on käytössä, kunnes poistat sen käytöstä."</string>
     <string name="zen_mode_settings_dnd_automatic_rule" msgid="6195725842906270996">"Aikataulu (<xliff:g id="RULE_NAME">%s</xliff:g>) otti Älä häiritse ‑tilan automaattisesti käyttöön."</string>
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"Sovellus <xliff:g id="APP_NAME">%s</xliff:g> otti automaattisesti käyttöön Älä häiritse ‑tilan."</string>
-    <!-- no translation found for zen_mode_settings_dnd_custom_settings_footer (1965922539531521052) -->
-    <skip />
+    <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="1965922539531521052">"Älä häiritse ‑tila on käytössä, <xliff:g id="RULE_NAMES">%s</xliff:g>, omat asetukset"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="7555742240858292255"><annotation id="link">" Näytä omat asetukset"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"Vain tärkeät"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
@@ -3393,12 +3381,9 @@
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Joka päivä"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Herätys voi ohittaa päättymisajan"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="1673667979187593693">"Aikataulu poistuu käytöstä, kun hälytys soi"</string>
-    <!-- no translation found for zen_mode_custom_behavior_title (1148856394866360783) -->
-    <skip />
-    <!-- no translation found for zen_mode_custom_behavior_summary_default (7750128187766412708) -->
-    <skip />
-    <!-- no translation found for zen_mode_custom_behavior_summary (7458258833216726120) -->
-    <skip />
+    <string name="zen_mode_custom_behavior_title" msgid="1148856394866360783">"Älä häiritse ‑tilan toiminta"</string>
+    <string name="zen_mode_custom_behavior_summary_default" msgid="7750128187766412708">"Käytä oletusasetuksia"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="7458258833216726120">"Luo tälle aikataululle omia asetuksia"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="4070854282812755247">"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3812,41 +3797,32 @@
     <string name="condition_turn_on" msgid="9089876276117874591">"Ota käyttöön"</string>
     <string name="condition_expand_show" msgid="608202020023489939">"Näytä"</string>
     <string name="condition_expand_hide" msgid="948507739223760667">"Piilota"</string>
-    <!-- no translation found for condition_hotspot_title (16457539111965844) -->
-    <skip />
-    <!-- no translation found for condition_hotspot_summary (4254900143903616196) -->
-    <skip />
+    <string name="condition_hotspot_title" msgid="16457539111965844">"Hotspot"</string>
+    <string name="condition_hotspot_summary" msgid="4254900143903616196">"<xliff:g id="ID_1">%1$s</xliff:g> päällä"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Lentokonetila on käytössä"</string>
-    <!-- no translation found for condition_airplane_summary (2500054042183138980) -->
-    <skip />
+    <string name="condition_airplane_summary" msgid="2500054042183138980">"Ei verkkoja saatavilla"</string>
     <string name="condition_zen_title" msgid="2897779738211625">"Älä häiritse ‑tila on käytössä"</string>
-    <!-- no translation found for condition_zen_summary (1883081861671139612) -->
-    <skip />
+    <string name="condition_zen_summary" msgid="1883081861671139612">"Vaikuttaa ääniin ja kuvasisältöön"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Virransäästö on päällä"</string>
-    <!-- no translation found for condition_battery_summary (5847532902924566572) -->
-    <skip />
+    <string name="condition_battery_summary" msgid="5847532902924566572">"Ominaisuuksia rajoitetaan"</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Mobiilidata on poissa käytöstä"</string>
     <string name="condition_cellular_summary" msgid="816822977403022625">"Vain Wi-Fi-yhteys internetiin saatavilla"</string>
-    <!-- no translation found for condition_bg_data_title (5475793236997935138) -->
-    <skip />
-    <!-- no translation found for condition_bg_data_summary (1852811387315557164) -->
-    <skip />
+    <string name="condition_bg_data_title" msgid="5475793236997935138">"Data Saver"</string>
+    <string name="condition_bg_data_summary" msgid="1852811387315557164">"Ominaisuuksia rajoitetaan"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Työprofiili on pois päältä."</string>
     <string name="condition_work_summary" msgid="9167580982244020746">"Sovellukset ja ilmoitukset"</string>
     <string name="condition_device_muted_action_turn_on_sound" msgid="4930240942726349213">"Ota äänet käyttöön"</string>
     <string name="condition_device_muted_title" product="tablet" msgid="3095044864508335783">"Laite on mykistetty"</string>
     <string name="condition_device_muted_title" product="default" msgid="5728503711902454888">"Puhelin mykistetty"</string>
-    <!-- no translation found for condition_device_muted_summary (6313274406443663781) -->
-    <skip />
-    <!-- no translation found for condition_device_vibrate_title (8070177546359590131) -->
-    <skip />
-    <!-- no translation found for condition_device_vibrate_summary (5743200564646910423) -->
-    <skip />
+    <string name="condition_device_muted_summary" msgid="6313274406443663781">"Puhelut ja ilmoitukset"</string>
+    <string name="condition_device_vibrate_title" product="tablet" msgid="1983420639621523345">"Laite käyttää värinää"</string>
+    <string name="condition_device_vibrate_title" product="default" msgid="8070177546359590131">"Vain värinä"</string>
+    <string name="condition_device_vibrate_summary" product="tablet" msgid="433514444618164607">"Laite värisee, kun puhelu tai ilmoitus saapuu"</string>
+    <string name="condition_device_vibrate_summary" product="default" msgid="5743200564646910423">"Puhelut ja ilmoitukset"</string>
     <string name="night_display_suggestion_title" msgid="6602129097059325291">"Määritä Yövalon aikataulu"</string>
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"Muuta näytön väriä automaattisesti iltaisin"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Yövalo otettiin käyttöön."</string>
-    <!-- no translation found for condition_night_display_summary (7150932917610919907) -->
-    <skip />
+    <string name="condition_night_display_summary" msgid="7150932917610919907">"Näyttö väritetty kullankeltaiseksi"</string>
     <string name="homepage_condition_footer_content_description" msgid="2335918927419018030">"Tiivistä"</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"Sinulle ehdotetut"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Ehdotukset"</string>
@@ -3978,9 +3954,20 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ei mitään"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Sijoitustiedot puuttuvat."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Tätä avainta ei ole sijoitustiedoissa."</string>
+    <!-- no translation found for theme_customization_category (1049181544004163283) -->
+    <skip />
+    <!-- no translation found for theme_customization_accent_color_title (2946868019715911717) -->
+    <skip />
+    <!-- no translation found for theme_customization_font_title (1634160034866477544) -->
+    <skip />
+    <!-- no translation found for theme_customization_icon_shape_title (9168569756271940841) -->
+    <skip />
+    <!-- no translation found for theme_customization_device_default (5058147707906551368) -->
+    <skip />
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Näyttölovi"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"näyttölovi, näytön lovi"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Laitteen oletusasetus"</string>
+    <!-- no translation found for overlay_option_device_default (294510212512203638) -->
+    <skip />
     <string name="special_access" msgid="3458780842491881155">"Sovellusten erikoiskäyttö"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sovelluksen datankäyttöä ei rajoiteta.</item>
@@ -4059,6 +4046,14 @@
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Ota laite käteesi, niin näet ajan, ilmoitukset ja muita tietoja."</string>
     <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Lukitusnäytön aktivointiele"</string>
     <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
+    <!-- no translation found for ambient_display_tap_screen_title (5458679563086979424) -->
+    <skip />
+    <!-- no translation found for ambient_display_tap_screen_title (9108878716863882877) -->
+    <skip />
+    <!-- no translation found for ambient_display_tap_screen_title (7071150656699666085) -->
+    <skip />
+    <!-- no translation found for ambient_display_tap_screen_summary (8862155601920379979) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Pyyhkäise ilmoitukset esiin"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Sormenjäljen pyyhkäisy"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Voit katsoa ilmoitukset pyyhkäisemällä puhelimen takaosassa olevasta sormenjälkitunnistimesta alaspäin."</string>
@@ -4201,27 +4196,21 @@
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ominaisuus ei ole käytettävissä tällä laitteella."</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Pakota täydet GNSS-mitat"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Seuraa kaikkia GNSS-kuvioita ja ‑taajuuksia, joissa ei ole pulssisuhdetta."</string>
-    <!-- no translation found for allow_background_activity_starts (4121456477541603005) -->
-    <skip />
-    <!-- no translation found for allow_background_activity_starts_summary (6837591829176921245) -->
-    <skip />
+    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Taustatoiminnan salliminen alkaa"</string>
+    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Kaiken taustatoiminnan salliminen alkaa"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Näytä aina kaatumisikkuna"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Näytä valintaikkuna aina, kun sovellus kaatuu."</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Valitse ANGLE-yhteensopiva sovellus"</string>
     <string name="angle_enabled_app_not_set" msgid="864740024581634768">"Ei määritettyä ANGLE-yhteensopivaa sovellusta"</string>
     <string name="angle_enabled_app_set" msgid="226015765615525056">"ANGLE-yhteensopiva sovellus: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for gup_dashboard_title (6365053025908111197) -->
+    <string name="gup_dashboard_title" msgid="6365053025908111197">"Pelipäivityspaketin asetukset"</string>
+    <string name="gup_dashboard_summary" msgid="7454221684538769577">"Muokkaa pelipäivityspaketin asetuksia"</string>
+    <!-- no translation found for gup_all_apps_switch_title (8071650410524064369) -->
     <skip />
-    <!-- no translation found for gup_dashboard_summary (7454221684538769577) -->
-    <skip />
-    <!-- no translation found for gup_app_preference_title (7176388161899486800) -->
-    <skip />
-    <!-- no translation found for gup_app_preference_default (7995039180348956109) -->
-    <skip />
-    <!-- no translation found for gup_app_preference_gup (5605778469372613985) -->
-    <skip />
-    <!-- no translation found for gup_app_preference_system (5701853677984004799) -->
-    <skip />
+    <string name="gup_app_preference_title" msgid="7176388161899486800">"Valitse grafiikkaohjain"</string>
+    <string name="gup_app_preference_default" msgid="7995039180348956109">"Oletus"</string>
+    <string name="gup_app_preference_gup" msgid="5605778469372613985">"Pelipäivityspaketti"</string>
+    <string name="gup_app_preference_system" msgid="5701853677984004799">"Järjestelmän grafiikkaohjain"</string>
     <!-- no translation found for gup_app_preference_values:0 (8465947040872291983) -->
     <!-- no translation found for gup_app_preference_values:1 (2528348813076808406) -->
     <!-- no translation found for gup_app_preference_values:2 (1224045073126150618) -->
@@ -4313,6 +4302,19 @@
     <string name="cdma_lte_data_service" msgid="8507044148856536098">"Määritä datapalvelu"</string>
     <string name="mobile_data_settings_title" msgid="7674604042461065482">"Mobiilidata"</string>
     <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Käytä mobiiliverkon dataa"</string>
+    <!-- no translation found for mobile_network_summary_add_a_network (9148476748420654283) -->
+    <skip />
+    <!-- no translation found for mobile_network_summary_count (4505694491027023039) -->
+    <!-- no translation found for mobile_network_list_add_more (4000806369124701679) -->
+    <skip />
+    <!-- no translation found for mobile_network_active_sim (8034468461940321166) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_sim (5611153524222529180) -->
+    <skip />
+    <!-- no translation found for mobile_network_active_esim (4253830619317882982) -->
+    <skip />
+    <!-- no translation found for mobile_network_inactive_esim (5605993700944852351) -->
+    <skip />
     <string name="preferred_network_mode_title" msgid="6505630109389684100">"Ensisijainen verkko"</string>
     <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Vaihda verkon käyttötilaa"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Ensisijainen verkko"</string>
@@ -4348,23 +4350,23 @@
     <string name="no_bluetooth_devices" msgid="861861879657732058">"Ei Bluetooth-laitteita"</string>
     <string name="settings_panel_title" msgid="4688575606213055744">"Asetuspaneeli"</string>
     <string name="internet_connectivity_panel_title" msgid="721392242301676444">"Internet-yhteydet"</string>
-    <!-- no translation found for volume_connectivity_panel_title (9192664643867101356) -->
-    <skip />
+    <string name="volume_connectivity_panel_title" msgid="9192664643867101356">"Äänenvoimakkuus"</string>
     <string name="force_desktop_mode" msgid="4303240595324847998">"Pakota työpöytätila"</string>
     <string name="force_desktop_mode_summary" msgid="6259798246015387202">"Pakota kokeellinen työpöytätila toissijaisille näytöille"</string>
     <string name="hwui_force_dark_title" msgid="2466919877609396257">"Ohita SmartDarkin pakottaminen päälle"</string>
     <string name="hwui_force_dark_summary" msgid="8705328793382981780">"Ohittaa toiminnon, joka pakottaa SmartDark-ominaisuuden aina päälle"</string>
     <string name="privacy_dashboard_title" msgid="2458407399263943923">"Tietosuoja"</string>
-    <!-- no translation found for privacy_dashboard_summary (7784809147411674104) -->
-    <skip />
+    <string name="privacy_dashboard_summary" msgid="7784809147411674104">"Käyttöoikeudet, toimintojen hallinta, näytöllä näkyvä data"</string>
     <string name="contextual_card_dismiss_remove" msgid="2813670241047194713">"Poista"</string>
     <string name="contextual_card_dismiss_keep" msgid="2230740610451447340">"Säilytä"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="5507487987591500742">"Poistetaanko tämä ehdotus?"</string>
     <string name="low_storage_summary" msgid="2077564126033530">"Tallennustila on vähissä. <xliff:g id="PERCENTAGE">%1$s</xliff:g> käytössä – <xliff:g id="FREE_SPACE">%2$s</xliff:g> vapaana"</string>
-    <!-- no translation found for contextual_card_feedback_send (2996691837358030021) -->
-    <skip />
-    <!-- no translation found for contextual_card_feedback_confirm_message (8115454795160804779) -->
-    <skip />
+    <string name="contextual_card_feedback_send" msgid="2996691837358030021">"Lähetä palautetta"</string>
+    <string name="contextual_card_feedback_confirm_message" msgid="8115454795160804779">"Haluatko antaa palautetta tästä ehdotuksesta?"</string>
     <string name="copyable_slice_toast" msgid="2924110841440836023">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> kopioitiin leikepöydälle"</string>
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
+    <!-- no translation found for gesture_skip_title (2092825906479683162) -->
+    <skip />
+    <!-- no translation found for gesture_silence_title (8991427657123202574) -->
+    <skip />
 </resources>

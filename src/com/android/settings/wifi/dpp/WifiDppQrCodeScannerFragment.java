@@ -17,9 +17,8 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
-import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
@@ -37,7 +36,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
@@ -92,9 +90,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     public int getMetricsCategory() {
         if (mIsConfiguratorMode) {
-            return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
+            return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
         } else {
-            return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_ENROLLEE;
+            return SettingsEnums.SETTINGS_WIFI_DPP_ENROLLEE;
         }
     }
 

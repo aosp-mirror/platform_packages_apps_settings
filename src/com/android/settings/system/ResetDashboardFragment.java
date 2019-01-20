@@ -16,10 +16,10 @@
 
 package com.android.settings.system;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.manageapplications.ResetAppPrefPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -40,7 +40,7 @@ public class ResetDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.RESET_DASHBOARD;
+        return SettingsEnums.RESET_DASHBOARD;
     }
 
     @Override

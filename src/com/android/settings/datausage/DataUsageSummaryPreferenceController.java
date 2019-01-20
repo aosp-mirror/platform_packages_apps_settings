@@ -31,6 +31,7 @@ import android.util.RecurrenceRule;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.util.CollectionUtils;
@@ -47,9 +48,9 @@ import com.android.settingslib.net.DataUsageController;
 import java.util.List;
 
 /**
- * This is the controller for the top of the data usage screen that retrieves carrier data from the
- * new subscriptions framework API if available. The controller reads subscription information from
- * the framework and falls back to legacy usage data if none are available.
+ * This is the controller for a data usage header that retrieves carrier data from the new
+ * subscriptions framework API if available. The controller reads subscription information from the
+ * framework and falls back to legacy usage data if none are available.
  */
 public class DataUsageSummaryPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart {
@@ -63,7 +64,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     private final Activity mActivity;
     private final EntityHeaderController mEntityHeaderController;
     private final Lifecycle mLifecycle;
-    private final DataUsageSummary mDataUsageSummary;
+    private final PreferenceFragmentCompat mFragment;
     private final DataUsageController mDataUsageController;
     private final DataUsageInfoController mDataInfoController;
     private final NetworkTemplate mDefaultTemplate;
@@ -94,28 +95,31 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     private long mCycleStart;
     /** The ending time of the billing cycle in ms since the epoch */
     private long mCycleEnd;
+    /** The subscription that we should show usage for. */
+    private int mSubscriptionId;
 
     private Intent mManageSubscriptionIntent;
 
     public DataUsageSummaryPreferenceController(Activity activity,
-            Lifecycle lifecycle, DataUsageSummary dataUsageSummary) {
+            Lifecycle lifecycle, PreferenceFragmentCompat fragment, int subscriptionId) {
         super(activity, KEY);
 
         mActivity = activity;
         mEntityHeaderController = EntityHeaderController.newInstance(activity,
-                dataUsageSummary, null);
+                fragment, null);
         mLifecycle = lifecycle;
-        mDataUsageSummary = dataUsageSummary;
+        mFragment = fragment;
+        mSubscriptionId = subscriptionId;
 
-        final int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(activity);
-        mDefaultTemplate = DataUsageUtils.getDefaultTemplate(activity, defaultSubId);
-        NetworkPolicyManager policyManager = NetworkPolicyManager.from(activity);
+        mDefaultTemplate = DataUsageUtils.getDefaultTemplate(activity, mSubscriptionId);
+        NetworkPolicyManager policyManager = activity.getSystemService(NetworkPolicyManager.class);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
         mHasMobileData = DataUsageUtils.hasMobileData(activity)
-                && defaultSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+                && mSubscriptionId != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
         mDataUsageController = new DataUsageController(activity);
+        mDataUsageController.setSubscriptionId(mSubscriptionId);
         mDataInfoController = new DataUsageInfoController();
 
         if (mHasMobileData) {
@@ -142,7 +146,8 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             Activity activity,
             Lifecycle lifecycle,
             EntityHeaderController entityHeaderController,
-            DataUsageSummary dataUsageSummary) {
+            PreferenceFragmentCompat fragment,
+            int subscriptionId) {
         super(activity, KEY);
         mDataUsageController = dataUsageController;
         mDataInfoController = dataInfoController;
@@ -154,12 +159,13 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         mActivity = activity;
         mLifecycle = lifecycle;
         mEntityHeaderController = entityHeaderController;
-        mDataUsageSummary = dataUsageSummary;
+        mFragment = fragment;
+        mSubscriptionId = subscriptionId;
     }
 
     @Override
     public void onStart() {
-        RecyclerView view = mDataUsageSummary.getListView();
+        RecyclerView view = mFragment.getListView();
         mEntityHeaderController.setRecyclerView(view, mLifecycle);
         mEntityHeaderController.styleActionBar(mActivity);
     }
@@ -260,12 +266,18 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         mCycleEnd = info.cycleEnd;
         mSnapshotTime = -1L;
 
-        final int defaultSubId = SubscriptionManager.getDefaultSubscriptionId();
-        final SubscriptionInfo subInfo = mSubscriptionManager.getDefaultDataSubscriptionInfo();
+        SubscriptionInfo subInfo = mSubscriptionManager.getActiveSubscriptionInfo(mSubscriptionId);
+        if (subInfo == null) {
+            subInfo = mSubscriptionManager.getAllSubscriptionInfoList().stream().filter(
+                    i -> i.getSubscriptionId() == mSubscriptionId).findFirst().orElse(null);
+        }
         if (subInfo != null && mHasMobileData) {
             mCarrierName = subInfo.getCarrierName();
-            List<SubscriptionPlan> plans = mSubscriptionManager.getSubscriptionPlans(defaultSubId);
-            final SubscriptionPlan primaryPlan = getPrimaryPlan(mSubscriptionManager, defaultSubId);
+            List<SubscriptionPlan> plans = mSubscriptionManager.getSubscriptionPlans(
+                    mSubscriptionId);
+            final SubscriptionPlan primaryPlan = getPrimaryPlan(mSubscriptionManager,
+                    mSubscriptionId);
+
             if (primaryPlan != null) {
                 mDataplanCount = plans.size();
                 mDataplanSize = primaryPlan.getDataLimitBytes();
@@ -284,8 +296,8 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             }
         }
         mManageSubscriptionIntent =
-                mSubscriptionManager.createManageSubscriptionIntent(defaultSubId);
-        Log.i(TAG, "Have " + mDataplanCount + " plans, dflt sub-id " + defaultSubId
+                mSubscriptionManager.createManageSubscriptionIntent(mSubscriptionId);
+        Log.i(TAG, "Have " + mDataplanCount + " plans, dflt sub-id " + mSubscriptionId
                 + ", intent " + mManageSubscriptionIntent);
     }
 

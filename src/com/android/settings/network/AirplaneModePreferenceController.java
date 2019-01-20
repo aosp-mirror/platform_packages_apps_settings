@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.SystemProperties;
-import android.text.TextUtils;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;

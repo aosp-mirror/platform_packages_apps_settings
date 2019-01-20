@@ -21,7 +21,6 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
-import android.app.NotificationManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.content.Context;
@@ -39,6 +38,8 @@ import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
@@ -47,8 +48,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.VisibleForTesting;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";

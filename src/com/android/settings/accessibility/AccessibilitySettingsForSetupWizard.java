@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
@@ -26,7 +27,6 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -60,7 +60,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SUW_ACCESSIBILITY;
+        return SettingsEnums.SUW_ACCESSIBILITY;
     }
 
     @Override

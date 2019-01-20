@@ -15,6 +15,7 @@
 package com.android.settings.datausage;
 
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -23,7 +24,6 @@ import android.widget.Switch;
 
 import androidx.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -113,7 +113,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DATA_SAVER_SUMMARY;
+        return SettingsEnums.DATA_SAVER_SUMMARY;
     }
 
     @Override

@@ -24,7 +24,6 @@ import android.os.Parcel;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
@@ -120,14 +119,14 @@ public class RestrictAppTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP,
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_APP_RESTRICTION_TIP,
                 mState);
         if (mState == StateType.NEW) {
             for (int i = 0, size = mRestrictAppList.size(); i < size; i++) {
                 final AppInfo appInfo = mRestrictAppList.get(i);
                 for (Integer anomalyType : appInfo.anomalyTypes) {
                     metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
-                            MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
+                            SettingsEnums.ACTION_APP_RESTRICTION_TIP_LIST,
                             SettingsEnums.PAGE_UNKNOWN,
                             appInfo.packageName,
                             anomalyType);

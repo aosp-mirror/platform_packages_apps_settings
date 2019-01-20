@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,7 +28,6 @@ import android.widget.ImageButton;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
@@ -52,7 +52,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SETTINGS_WIFI_ADD_NETWORK;
+        return SettingsEnums.SETTINGS_WIFI_ADD_NETWORK;
     }
 
     @Override

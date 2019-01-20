@@ -17,6 +17,7 @@ package com.android.settings.wifi;
 
 import static android.content.Context.WIFI_SERVICE;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -24,7 +25,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -50,7 +50,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CONFIGURE_WIFI;
+        return SettingsEnums.CONFIGURE_WIFI;
     }
 
     @Override

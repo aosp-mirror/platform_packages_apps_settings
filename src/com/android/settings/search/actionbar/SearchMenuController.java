@@ -17,6 +17,7 @@
 package com.android.settings.search.actionbar;
 
 import android.annotation.NonNull;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,7 +28,6 @@ import android.view.MenuItem;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
@@ -88,7 +88,7 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
             }
 
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                    .action(context, MetricsProto.MetricsEvent.ACTION_SEARCH_RESULTS);
+                    .action(context, SettingsEnums.ACTION_SEARCH_RESULTS);
             mHost.startActivityForResult(intent, 0 /* requestCode */);
             return true;
         });

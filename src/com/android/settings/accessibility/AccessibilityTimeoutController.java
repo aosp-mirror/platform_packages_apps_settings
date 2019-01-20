@@ -33,8 +33,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.common.primitives.Ints;
 
-import java.lang.Integer;
-
 import java.util.HashMap;
 import java.util.Map;
 

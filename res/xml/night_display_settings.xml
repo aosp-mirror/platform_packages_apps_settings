@@ -41,7 +41,8 @@
         android:key="night_display_temperature"
         android:title="@string/night_display_temperature_title"
         settings:keywords="@string/keywords_display_night_display"
-        settings:controller="com.android.settings.display.NightDisplayIntensityPreferenceController" />
+        settings:controller="com.android.settings.display.NightDisplayIntensityPreferenceController"
+        settings:unavailableSliceSubtitle="@string/night_display_not_currently_on" />
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="night_display_activated"

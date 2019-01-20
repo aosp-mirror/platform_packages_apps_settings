@@ -21,6 +21,7 @@ import android.app.ActivityManager;
 import android.app.AppGlobals;
 import android.app.Dialog;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
@@ -49,7 +50,6 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -74,7 +74,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_ZEN_MODE_ACCESS;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_ACCESS;
     }
 
     @Override
@@ -211,8 +211,8 @@ public class ZenAccessSettings extends EmptyTextSettings {
 
     @VisibleForTesting
     static void logSpecialPermissionChange(boolean enable, String packageName, Context context) {
-        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_DND_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_DND_DENY;
+        int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_DND_ALLOW
+                : SettingsEnums.APP_SPECIAL_PERMISSION_DND_DENY;
         FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
                 logCategory, packageName);
     }
@@ -248,7 +248,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_ZEN_ACCESS_GRANT;
+            return SettingsEnums.DIALOG_ZEN_ACCESS_GRANT;
         }
 
         public ScaryWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
@@ -300,7 +300,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_ZEN_ACCESS_REVOKE;
+            return SettingsEnums.DIALOG_ZEN_ACCESS_REVOKE;
         }
 
         public FriendlyWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {

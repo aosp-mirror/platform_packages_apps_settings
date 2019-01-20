@@ -15,6 +15,7 @@
 package com.android.settings.datausage;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -33,7 +34,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
@@ -141,7 +141,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController =
-                new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this);
+                new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this,
+                        DataUsageUtils.getDefaultSubscriptionId(activity));
         controllers.add(mSummaryController);
         getSettingsLifecycle().addObserver(mSummaryController);
         return controllers;
@@ -242,7 +243,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.DATA_USAGE_SUMMARY;
+        return SettingsEnums.DATA_USAGE_SUMMARY;
     }
 
     @Override

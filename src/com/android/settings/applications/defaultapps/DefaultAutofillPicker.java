@@ -18,6 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,7 +39,6 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.utils.ThreadUtils;
@@ -114,7 +114,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DEFAULT_AUTOFILL_PICKER;
+        return SettingsEnums.DEFAULT_AUTOFILL_PICKER;
     }
 
     @Override

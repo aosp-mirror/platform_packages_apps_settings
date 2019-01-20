@@ -15,6 +15,7 @@
  */
 package com.android.settings.system;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -23,7 +24,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -53,7 +53,7 @@ public class SystemDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_SYSTEM_CATEGORY;
+        return SettingsEnums.SETTINGS_SYSTEM_CATEGORY;
     }
 
     @Override

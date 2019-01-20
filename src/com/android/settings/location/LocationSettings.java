@@ -16,6 +16,7 @@
 
 package com.android.settings.location;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ import android.provider.SearchIndexableResource;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
@@ -69,7 +69,7 @@ public class LocationSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.LOCATION;
+        return SettingsEnums.LOCATION;
     }
 
     @Override

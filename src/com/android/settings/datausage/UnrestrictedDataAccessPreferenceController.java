@@ -16,6 +16,7 @@ package com.android.settings.datausage;
 import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataRestricted;
 
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 
@@ -23,7 +24,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.core.BasePreferenceController;
@@ -225,8 +225,8 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
 
     @VisibleForTesting
     void logSpecialPermissionChange(boolean whitelisted, String packageName) {
-        final int logCategory = whitelisted ? MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_DENY;
+        final int logCategory = whitelisted ? SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW
+                : SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_DENY;
         FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(mContext,
                 logCategory, packageName);
     }

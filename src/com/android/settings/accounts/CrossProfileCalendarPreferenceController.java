@@ -19,14 +19,12 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 
-import com.android.settings.core.BasePreferenceController;
+import androidx.preference.Preference;
+
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.slices.SliceData;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
-
-import androidx.preference.Preference;
 
 public class CrossProfileCalendarPreferenceController extends TogglePreferenceController {
 

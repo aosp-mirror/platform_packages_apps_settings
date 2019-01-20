@@ -16,9 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
-
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 public class ToggleScreenReaderPreferenceFragmentForSetupWizard
         extends ToggleAccessibilityServicePreferenceFragment {
@@ -33,7 +32,7 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER;
+        return SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
         // Log the final choice in value if it's different from the previous value.
         if (mToggleSwitch.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
-                    MetricsEvent.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER, mToggleSwitch.isChecked());
+                    SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER, mToggleSwitch.isChecked());
         }
 
         super.onStop();

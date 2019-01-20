@@ -17,12 +17,9 @@
 
 package com.android.settings.notification;
 
-import static com.android.internal.notification.NotificationAccessConfirmationActivityContract
-        .EXTRA_COMPONENT_NAME;
-import static com.android.internal.notification.NotificationAccessConfirmationActivityContract
-        .EXTRA_PACKAGE_TITLE;
-import static com.android.internal.notification.NotificationAccessConfirmationActivityContract
-        .EXTRA_USER_ID;
+import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_COMPONENT_NAME;
+import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_PACKAGE_TITLE;
+import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_USER_ID;
 
 import android.Manifest;
 import android.annotation.Nullable;

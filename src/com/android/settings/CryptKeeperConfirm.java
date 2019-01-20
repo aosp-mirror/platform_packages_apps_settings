@@ -19,6 +19,7 @@ package com.android.settings;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.StatusBarManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,7 +35,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.InstrumentedFragment;
 
@@ -46,7 +46,7 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CRYPT_KEEPER_CONFIRM;
+        return SettingsEnums.CRYPT_KEEPER_CONFIRM;
     }
 
     public static class Blank extends Activity {

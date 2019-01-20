@@ -17,10 +17,9 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 
 import androidx.preference.Preference;
-
-import android.hardware.display.ColorDisplayManager;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.BasePreferenceController;

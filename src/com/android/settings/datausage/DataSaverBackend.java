@@ -18,13 +18,13 @@ import static android.net.NetworkPolicyManager.POLICY_ALLOW_METERED_BACKGROUND;
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.INetworkPolicyListener;
 import android.net.NetworkPolicyManager;
 import android.os.RemoteException;
 import android.util.SparseIntArray;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -73,7 +73,7 @@ public class DataSaverBackend {
     public void setDataSaverEnabled(boolean enabled) {
         mPolicyManager.setRestrictBackground(enabled);
         mMetricsFeatureProvider.action(
-                mContext, MetricsEvent.ACTION_DATA_SAVER_MODE, enabled ? 1 : 0);
+                mContext, SettingsEnums.ACTION_DATA_SAVER_MODE, enabled ? 1 : 0);
     }
 
     public void refreshWhitelist() {
@@ -86,7 +86,7 @@ public class DataSaverBackend {
         mUidPolicies.put(uid, policy);
         if (whitelisted) {
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
+                    mContext, SettingsEnums.ACTION_DATA_SAVER_WHITELIST, packageName);
         }
     }
 
@@ -116,7 +116,7 @@ public class DataSaverBackend {
         mUidPolicies.put(uid, policy);
         if (blacklisted) {
             mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_DATA_SAVER_BLACKLIST, packageName);
+                    mContext, SettingsEnums.ACTION_DATA_SAVER_BLACKLIST, packageName);
         }
     }
 

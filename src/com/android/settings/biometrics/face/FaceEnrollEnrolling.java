@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.face;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
@@ -26,17 +27,16 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 
-import java.util.ArrayList;
-
 import com.google.android.setupcompat.item.FooterButton;
 import com.google.android.setupcompat.template.ButtonFooterMixin;
+
+import java.util.ArrayList;
 
 public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
@@ -68,7 +68,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_FACE_ERROR;
+            return SettingsEnums.DIALOG_FACE_ERROR;
         }
 
         @Override
@@ -146,7 +146,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FACE_ENROLL_ENROLLING;
+        return SettingsEnums.FACE_ENROLL_ENROLLING;
     }
 
     @Override

@@ -36,7 +36,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -158,7 +157,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 ConnectedDeviceDashboardFragment.class.getName(), "" /* key */,
                 screenTitle,
-                MetricsProto.MetricsEvent.SLICE)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(getUri());
     }

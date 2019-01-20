@@ -23,15 +23,19 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
-import com.android.settings.widget.RadioButtonPickerFragment;
+
 import com.android.settings.R;
+import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.CandidateInfo;
+
 import com.google.common.collect.Lists;
+
 import java.util.List;
 
 /**

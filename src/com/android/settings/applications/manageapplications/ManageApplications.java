@@ -18,32 +18,22 @@ package com.android.settings.applications.manageapplications;
 
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_ALL;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_BLOCKED;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_DISABLED;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_ENABLED;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_FREQUENT;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_INSTANT;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_PERSONAL;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_POWER_WHITELIST;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_POWER_WHITELIST_ALL;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_RECENT;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_WORK;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BLOCKED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_DISABLED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ENABLED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_FREQUENT;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_INSTANT;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_PERSONAL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_WHITELIST;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_WHITELIST_ALL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_RECENT;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WORK;
 
 import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -78,7 +68,6 @@ import androidx.annotation.WorkerThread;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Settings.GamesStorageActivity;
@@ -453,34 +442,34 @@ public class ManageApplications extends InstrumentedFragment
     public int getMetricsCategory() {
         switch (mListType) {
             case LIST_TYPE_MAIN:
-                return MetricsEvent.MANAGE_APPLICATIONS;
+                return SettingsEnums.MANAGE_APPLICATIONS;
             case LIST_TYPE_NOTIFICATION:
-                return MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS;
+                return SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_STORAGE:
                 if (mStorageType == STORAGE_TYPE_MUSIC) {
-                    return MetricsEvent.APPLICATIONS_STORAGE_MUSIC;
+                    return SettingsEnums.APPLICATIONS_STORAGE_MUSIC;
                 }
-                return MetricsEvent.APPLICATIONS_STORAGE_APPS;
+                return SettingsEnums.APPLICATIONS_STORAGE_APPS;
             case LIST_TYPE_GAMES:
-                return MetricsEvent.APPLICATIONS_STORAGE_GAMES;
+                return SettingsEnums.APPLICATIONS_STORAGE_GAMES;
             case LIST_TYPE_MOVIES:
-                return MetricsEvent.APPLICATIONS_STORAGE_MOVIES;
+                return SettingsEnums.APPLICATIONS_STORAGE_MOVIES;
             case LIST_TYPE_PHOTOGRAPHY:
-                return MetricsEvent.APPLICATIONS_STORAGE_PHOTOS;
+                return SettingsEnums.APPLICATIONS_STORAGE_PHOTOS;
             case LIST_TYPE_USAGE_ACCESS:
-                return MetricsEvent.USAGE_ACCESS;
+                return SettingsEnums.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
-                return MetricsEvent.APPLICATIONS_HIGH_POWER_APPS;
+                return SettingsEnums.APPLICATIONS_HIGH_POWER_APPS;
             case LIST_TYPE_OVERLAY:
-                return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
+                return SettingsEnums.SYSTEM_ALERT_WINDOW_APPS;
             case LIST_TYPE_WRITE_SETTINGS:
-                return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
+                return SettingsEnums.SYSTEM_ALERT_WINDOW_APPS;
             case LIST_TYPE_MANAGE_SOURCES:
-                return MetricsEvent.MANAGE_EXTERNAL_SOURCES;
+                return SettingsEnums.MANAGE_EXTERNAL_SOURCES;
             case LIST_TYPE_WIFI_ACCESS:
-                return MetricsEvent.CONFIGURE_WIFI;
+                return SettingsEnums.CONFIGURE_WIFI;
             default:
-                return MetricsEvent.VIEW_UNKNOWN;
+                return SettingsEnums.PAGE_UNKNOWN;
         }
     }
 

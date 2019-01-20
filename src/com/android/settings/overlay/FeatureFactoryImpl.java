@@ -28,6 +28,8 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.aware.AwareFeatureProvider;
+import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
@@ -81,6 +83,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private PanelFeatureProvider mPanelFeatureProvider;
     private ContextualCardFeatureProvider mContextualCardFeatureProvider;
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
+    private AwareFeatureProvider mAwareFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -243,5 +246,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
                     context.getApplicationContext());
         }
         return mBluetoothFeatureProvider;
+    }
+
+    @Override
+    public AwareFeatureProvider getAwareFeatureProvider() {
+        if (mAwareFeatureProvider == null) {
+            mAwareFeatureProvider = new AwareFeatureProviderImpl();
+        }
+        return mAwareFeatureProvider;
     }
 }

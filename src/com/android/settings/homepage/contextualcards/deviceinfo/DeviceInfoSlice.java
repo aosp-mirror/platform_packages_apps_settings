@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -32,7 +33,6 @@ import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -84,7 +84,7 @@ public class DeviceInfoSlice implements CustomSliceable {
         final String screenTitle = mContext.getText(R.string.device_info_label).toString();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 MyDeviceInfoFragment.class.getName(), "" /* key */, screenTitle,
-                MetricsProto.MetricsEvent.SLICE)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(CustomSliceRegistry.DEVICE_INFO_SLICE_URI);
     }

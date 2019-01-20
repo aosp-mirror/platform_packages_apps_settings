@@ -17,14 +17,13 @@
 package com.android.settings.biometrics.face;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.hardware.face.FaceManager;
 import android.os.UserHandle;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -78,6 +77,6 @@ public class FaceEnrollSidecar extends BiometricEnrollSidecar {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FACE_ENROLL_SIDECAR;
+        return SettingsEnums.FACE_ENROLL_SIDECAR;
     }
 }

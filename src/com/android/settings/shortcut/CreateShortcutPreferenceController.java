@@ -17,6 +17,7 @@
 package com.android.settings.shortcut;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -42,7 +43,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Settings.TetherSettingsActivity;
 import com.android.settings.core.BasePreferenceController;
@@ -213,7 +213,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
             return;
         }
         mMetricsFeatureProvider.action(
-                mContext, MetricsProto.MetricsEvent.ACTION_SETTINGS_CREATE_SHORTCUT,
+                mContext, SettingsEnums.ACTION_SETTINGS_CREATE_SHORTCUT,
                 info.activityInfo.name);
     }
 

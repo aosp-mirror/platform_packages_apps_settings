@@ -23,6 +23,7 @@ import android.content.Context;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -66,6 +67,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final AccountFeatureProvider mAccountFeatureProvider;
     public final ContextualCardFeatureProvider mContextualCardFeatureProvider;
     public final BluetoothFeatureProvider mBluetoothFeatureProvider;
+    public final AwareFeatureProvider mAwareFeatureProvider;
 
     public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
@@ -111,6 +113,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mContextualCardFeatureProvider = mock(ContextualCardFeatureProvider.class);
         panelFeatureProvider = mock(PanelFeatureProvider.class);
         mBluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
+        mAwareFeatureProvider = mock(AwareFeatureProvider.class);
     }
 
     @Override
@@ -206,5 +209,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
         return mBluetoothFeatureProvider;
+    }
+
+    @Override
+    public AwareFeatureProvider getAwareFeatureProvider() {
+        return mAwareFeatureProvider;
     }
 }

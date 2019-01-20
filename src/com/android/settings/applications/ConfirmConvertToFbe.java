@@ -15,6 +15,7 @@
  */
 package com.android.settings.applications;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -50,6 +50,6 @@ public class ConfirmConvertToFbe extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CONVERT_FBE_CONFIRM;
+        return SettingsEnums.CONVERT_FBE_CONFIRM;
     }
 }

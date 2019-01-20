@@ -16,9 +16,9 @@
 
 package com.android.settings.notification;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -37,7 +37,7 @@ public class ZenCustomRuleSettings extends ZenCustomRuleSettingsBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.ZEN_CUSTOM_RULE_SETTINGS;
+        return SettingsEnums.ZEN_CUSTOM_RULE_SETTINGS;
     }
 
     @Override

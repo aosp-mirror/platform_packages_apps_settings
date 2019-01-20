@@ -21,8 +21,6 @@ import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
 import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE;
 
 import android.content.Context;
-import android.hardware.usb.UsbPort;
-import android.hardware.usb.UsbPortStatus;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;

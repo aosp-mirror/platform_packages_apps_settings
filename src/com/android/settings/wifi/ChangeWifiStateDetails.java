@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -25,7 +26,6 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
@@ -69,7 +69,7 @@ public class ChangeWifiStateDetails extends AppInfoWithHeader
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.CONFIGURE_WIFI;
+        return SettingsEnums.CONFIGURE_WIFI;
     }
 
     @Override
@@ -93,8 +93,8 @@ public class ChangeWifiStateDetails extends AppInfoWithHeader
     }
 
     protected void logSpecialPermissionChange(boolean newState, String packageName) {
-        int logCategory = newState ? MetricsEvent.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
-                : MetricsEvent.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY;
+        int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
+                : SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY;
         FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
                 logCategory, packageName);
     }

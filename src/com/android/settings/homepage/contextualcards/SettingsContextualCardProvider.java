@@ -56,11 +56,18 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .setCardName(CustomSliceRegistry.BATTERY_FIX_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
+        final ContextualCard notificationChannelCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(CustomSliceRegistry.NOTIFICATION_CHANNEL_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.NOTIFICATION_CHANNEL_SLICE_URI.toString())
+                        .setCardCategory(ContextualCard.Category.POSSIBLE)
+                        .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)
                 .addCard(connectedDeviceCard)
                 .addCard(lowStorageCard)
                 .addCard(batteryFixCard)
+                .addCard(notificationChannelCard)
                 .build();
 
         return cards;

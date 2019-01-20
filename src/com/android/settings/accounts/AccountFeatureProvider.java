@@ -18,7 +18,6 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.content.Context;
-import android.content.Intent;
 
 public interface AccountFeatureProvider {
     String getAccountType();
