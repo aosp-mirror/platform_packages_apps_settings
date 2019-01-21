@@ -61,7 +61,7 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         final DropDownPreference dropDownPreference = (DropDownPreference) preference;
         final int randomizationLevel = getRandomizationValue();
         dropDownPreference.setValue(Integer.toString(randomizationLevel));
-        updateSummary((DropDownPreference) preference, randomizationLevel);
+        updateSummary(dropDownPreference, randomizationLevel);
     }
 
     @Override
@@ -85,7 +85,20 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         return WifiConfiguration.RANDOMIZATION_PERSISTENT;
     }
 
+    private final int PREF_RANDOMIZATION_PERSISTENT = 0;
+    private final int PREF_RANDOMIZATION_NONE = 1;
+    @VisibleForTesting
+    protected int translateMacRandomizedValueToPrefValue(int macRandomized) {
+        if (macRandomized == WifiConfiguration.RANDOMIZATION_PERSISTENT) {
+            return PREF_RANDOMIZATION_PERSISTENT;
+        } else {
+            return PREF_RANDOMIZATION_NONE;
+        }
+    }
+
     private void updateSummary(DropDownPreference preference, int macRandomized) {
-        preference.setSummary(preference.getEntries()[macRandomized]);
+        // Translates value here to set RANDOMIZATION_PERSISTENT as first item in UI for better UX.
+        final int prefMacRandomized = translateMacRandomizedValueToPrefValue(macRandomized);
+        preference.setSummary(preference.getEntries()[prefMacRandomized]);
     }
 }
