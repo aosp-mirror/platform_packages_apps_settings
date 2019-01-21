@@ -79,6 +79,14 @@ public class WifiDppUtils {
     }
 
     /**
+     * Returns whether the device support WiFi DPP.
+     */
+    public static boolean isWifiDppEnabled(Context context) {
+        final WifiManager manager = context.getSystemService(WifiManager.class);
+        return manager.isEasyConnectSupported();
+    }
+
+    /**
      * Returns an intent to launch QR code scanner for Wi-Fi DPP enrollee.
      *
      * @param ssid The data corresponding to {@code WifiConfiguration} SSID
