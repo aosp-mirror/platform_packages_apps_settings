@@ -59,7 +59,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
 
         @Nullable
         private Button mOptionsButton;
-        private Button mSkipButton;
+        private boolean mLeftButtonIsSkip;
 
         @Override
         public View onCreateView(
@@ -72,14 +72,20 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                                 .show(getChildFragmentManager(), null));
             }
             // Show the skip button during SUW but not during Settings > Biometric Enrollment
-            mSkipButton = view.findViewById(R.id.skip_button);
-            mSkipButton.setOnClickListener(v -> {
+            mSkipOrClearButton.setOnClickListener(this::onSkipOrClearButtonClick);
+            return view;
+        }
+
+        @Override
+        protected void onSkipOrClearButtonClick(View view) {
+            if (mLeftButtonIsSkip) {
                 SetupSkipDialog dialog = SetupSkipDialog.newInstance(
                         getActivity().getIntent()
                                 .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
                 dialog.show(getFragmentManager());
-                });
-            return view;
+                return;
+            }
+            super.onSkipOrClearButtonClick(view);
         }
 
         @Override
@@ -102,9 +108,11 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             }
 
             if (stage.leftMode == LeftButtonMode.Gone && stage == Stage.Introduction) {
-                mSkipButton.setVisibility(View.VISIBLE);
+                mSkipOrClearButton.setVisibility(View.VISIBLE);
+                mSkipOrClearButton.setText(getActivity(), R.string.skip_label);
+                mLeftButtonIsSkip = true;
             } else {
-                mSkipButton.setVisibility(View.GONE);
+                mLeftButtonIsSkip = false;
             }
         }
 
