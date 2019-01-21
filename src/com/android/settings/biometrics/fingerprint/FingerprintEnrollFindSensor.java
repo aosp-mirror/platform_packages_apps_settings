@@ -30,8 +30,8 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar.Listener;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.
@@ -48,8 +48,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
-        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
-        mButtonFooterMixin.setSecondaryButton(
+        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.skip_label)
                         .setListener(this::onSkipButtonClick)

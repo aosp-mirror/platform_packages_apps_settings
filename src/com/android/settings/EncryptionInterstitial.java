@@ -40,8 +40,8 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 import java.util.List;
@@ -150,8 +150,8 @@ public class EncryptionInterstitial extends SettingsActivity {
             GlifLayout layout = (GlifLayout) view;
             layout.setHeaderText(getActivity().getTitle());
 
-            final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
-            buttonFooterMixin.setSecondaryButton(
+            final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+            mixin.setSecondaryButton(
                     new FooterButton.Builder(getContext())
                             .setText(R.string.encryption_interstitial_no)
                             .setListener(this::onNoButtonClicked)
@@ -160,7 +160,7 @@ public class EncryptionInterstitial extends SettingsActivity {
                             .build()
             );
 
-            buttonFooterMixin.setPrimaryButton(
+            mixin.setPrimaryButton(
                     new FooterButton.Builder(getContext())
                             .setText(R.string.encryption_interstitial_yes)
                             .setListener(this::onYesButtonClicked)

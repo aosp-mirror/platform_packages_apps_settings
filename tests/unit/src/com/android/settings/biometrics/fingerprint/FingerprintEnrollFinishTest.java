@@ -37,7 +37,7 @@ import androidx.test.runner.AndroidJUnit4;
 import com.android.settings.R;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -62,7 +62,7 @@ public class FingerprintEnrollFinishTest {
 
         PartnerCustomizationLayout layout =
                 mActivityRule.getActivity().findViewById(R.id.setup_wizard_layout);
-        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
+        layout.getMixin(FooterBarMixin.class).getPrimaryButtonView().performClick();
 
         intended(hasComponent(enrollingComponent));
         assertFalse(mActivityRule.getActivity().isFinishing());
@@ -79,7 +79,7 @@ public class FingerprintEnrollFinishTest {
 
         PartnerCustomizationLayout layout =
                 mActivityRule.getActivity().findViewById(R.id.setup_wizard_layout);
-        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
+        layout.getMixin(FooterBarMixin.class).getPrimaryButtonView().performClick();
 
         intended(hasComponent(enrollingComponent));
         assertTrue(mActivityRule.getActivity().isFinishing());

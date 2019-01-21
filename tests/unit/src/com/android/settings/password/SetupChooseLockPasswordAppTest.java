@@ -45,7 +45,7 @@ import androidx.test.runner.AndroidJUnit4;
 import com.android.settings.R;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -75,7 +75,7 @@ public class SetupChooseLockPasswordAppTest {
         SetupChooseLockPassword activity = mActivityTestRule.launchActivity(null);
         PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
 
         assertThat(skipOrClearButton.getText()).isEqualTo(mContext.getString(R.string.skip_label));
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
@@ -87,7 +87,7 @@ public class SetupChooseLockPasswordAppTest {
     public void clearIsNotShown_when_activityLaunchedInitially() {
         SetupChooseLockPassword activity = mActivityTestRule.launchActivity(null);
         PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
-        assertThat(layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().getText())
+        assertThat(layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().getText())
                 .isEqualTo(mContext.getString(R.string.lockpassword_clear_label));
     }
 
@@ -98,7 +98,7 @@ public class SetupChooseLockPasswordAppTest {
         onView(withId(R.id.password_entry)).perform(ViewActions.typeText("1234"))
                 .perform(pressKey(KeyEvent.KEYCODE_ENTER));
         assertThat(
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().getVisibility())
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().getVisibility())
                         .isEqualTo(View.GONE);
     }
 
@@ -114,7 +114,7 @@ public class SetupChooseLockPasswordAppTest {
                 .perform(ViewActions.typeText("1"));
         // clear should be present if text field contains content
         assertThat(
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().getVisibility())
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().getVisibility())
                         .isEqualTo(View.VISIBLE);
     }
 }

@@ -33,8 +33,8 @@ import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 
 import java.util.ArrayList;
 
@@ -91,8 +91,8 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
         mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.linear_out_slow_in);
 
-        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
-        mButtonFooterMixin.setSecondaryButton(
+        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.security_settings_face_enroll_enrolling_skip)
                         .setListener(this::onSkipButtonClick)

@@ -28,7 +28,7 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
-import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.span.LinkSpan;
 
 /**

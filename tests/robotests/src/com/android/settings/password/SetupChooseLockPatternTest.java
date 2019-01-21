@@ -41,7 +41,7 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -148,7 +148,7 @@ public class SetupChooseLockPatternTest {
     public void skipButton_shouldBeVisible_duringNonFingerprintFlow() {
         PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
         assertThat(skipOrClearButton).isNotNull();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
 
@@ -163,7 +163,7 @@ public class SetupChooseLockPatternTest {
 
         PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(skipOrClearButton.isEnabled()).isTrue();
 
@@ -177,7 +177,7 @@ public class SetupChooseLockPatternTest {
 
         PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
         assertThat(skipOrClearButton.isEnabled()).isTrue();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(skipOrClearButton.getText())

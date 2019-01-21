@@ -33,7 +33,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -84,7 +84,7 @@ public class FingerprintEnrollIntroductionTest
         assertNotNull(errorTextView.getText().toString());
 
         PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
-        final Button nextButton = layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView();
+        final Button nextButton = layout.getMixin(FooterBarMixin.class).getPrimaryButtonView();
         assertEquals(View.GONE, nextButton.getVisibility());
     }
 

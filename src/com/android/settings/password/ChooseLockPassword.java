@@ -68,8 +68,8 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.widget.ImeAwareEditText;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 import java.util.ArrayList;
@@ -407,7 +407,7 @@ public class ChooseLockPassword extends SettingsActivity {
             ViewGroup container = view.findViewById(R.id.password_container);
             container.setOpticalInsets(Insets.NONE);
 
-            final ButtonFooterMixin mixin = mLayout.getMixin(ButtonFooterMixin.class);
+            final FooterBarMixin mixin = mLayout.getMixin(FooterBarMixin.class);
             mixin.setSecondaryButton(
                     new FooterButton.Builder(getActivity())
                             .setText(R.string.lockpassword_clear_label)
