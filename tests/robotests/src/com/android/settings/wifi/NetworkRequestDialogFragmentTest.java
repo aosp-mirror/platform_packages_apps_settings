@@ -27,16 +27,19 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
 import com.android.settingslib.wifi.AccessPoint;
@@ -63,6 +66,7 @@ public class NetworkRequestDialogFragmentTest {
 
     private static final String KEY_SSID = "key_ssid";
     private static final String KEY_SECURITY = "key_security";
+    private static final String TEST_APP_NAME = "TestAppName";
 
     private FragmentActivity mActivity;
     private NetworkRequestDialogFragment networkRequestDialogFragment;
@@ -71,7 +75,9 @@ public class NetworkRequestDialogFragmentTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = Robolectric.buildActivity(FragmentActivity.class,
+                new Intent().putExtra(NetworkRequestDialogFragment.EXTRA_APP_NAME,
+                        TEST_APP_NAME)).setup().get();
         networkRequestDialogFragment = spy(NetworkRequestDialogFragment.newInstance());
         mContext = spy(RuntimeEnvironment.application);
 
@@ -85,6 +91,17 @@ public class NetworkRequestDialogFragmentTest {
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();
         assertThat(alertDialog.isShowing()).isTrue();
+    }
+
+    @Test
+    public void display_shouldShowTitleWithAppName() {
+        networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+
+        final String targetTitle = mContext.getString(
+                R.string.network_connection_request_dialog_title, TEST_APP_NAME);
+        final TextView view = alertDialog.findViewById(R.id.network_request_title_text);
+        assertThat(view.getText()).isEqualTo(targetTitle);
     }
 
     @Test
