@@ -59,8 +59,9 @@ public class DarkUIPreferenceControllerTest {
 
     @Test
     public void onPreferenceChanged_setAuto() {
+        // Auto was deprecated, it should default to NO.
         mController.onPreferenceChange(mPreference, "auto");
-        verify(mUiModeManager).setNightMode(eq(UiModeManager.MODE_NIGHT_AUTO));
+        verify(mUiModeManager).setNightMode(eq(UiModeManager.MODE_NIGHT_NO));
     }
 
     @Test
