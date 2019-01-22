@@ -85,7 +85,13 @@ public class MobileNetworkSettingsTest {
     }
 
     @Test
-    public void onAttach_noCrash() {
+    public void onAttach_noV2Flag_noCrash() {
+        mFragment.onAttach(mContext);
+    }
+
+    @Test
+    public void onAttach_v2Flag_noCrash() {
+        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
         mFragment.onAttach(mContext);
     }
 
