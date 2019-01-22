@@ -43,7 +43,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceIntro";
 
     private FaceManager mFaceManager;
-    private FaceEnrollAccessibilityToggle mSwitchVision;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
 
     @Override
@@ -57,7 +56,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             accessibilityLayout.setVisibility(View.VISIBLE);
         });
 
-        mSwitchVision = findViewById(R.id.toggle_vision);
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
 
         mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
@@ -167,7 +165,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         } else {
             intent.setClass(this, FaceEnrollEnrolling.class);
         }
-        intent.putExtra(EXTRA_KEY_REQUIRE_VISION, mSwitchVision.isChecked());
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, mSwitchDiversity.isChecked());
         return intent;
     }
