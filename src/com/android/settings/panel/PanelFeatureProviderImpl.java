@@ -28,6 +28,8 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                 return InternetConnectivityPanel.create(context);
             case Settings.Panel.ACTION_VOLUME:
                 return VolumePanel.create(context);
+            case Settings.Panel.ACTION_NFC:
+                return NfcPanel.create(context);
         }
 
         throw new IllegalStateException("No matching panel for: "  + panelType);
