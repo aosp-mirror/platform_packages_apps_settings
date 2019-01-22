@@ -40,6 +40,9 @@ import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -143,11 +146,13 @@ public class SetupChooseLockPatternTest {
 
     @Test
     public void skipButton_shouldBeVisible_duringNonFingerprintFlow() {
-        Button skipButton = mActivity.findViewById(R.id.skip_button);
-        assertThat(skipButton).isNotNull();
-        assertThat(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+        assertThat(skipOrClearButton).isNotNull();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        skipButton.performClick();
+        skipOrClearButton.performClick();
         AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
     }
@@ -156,26 +161,33 @@ public class SetupChooseLockPatternTest {
     public void clearButton_shouldBeVisible_duringRetryStage() {
         enterPattern();
 
-        Button clearButton = mActivity.findViewById(R.id.footerLeftButton);
-        assertThat(clearButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(clearButton.isEnabled()).isTrue();
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.isEnabled()).isTrue();
 
-        clearButton.performClick();
+        skipOrClearButton.performClick();
         assertThat(findFragment(mActivity).mChosenPattern).isNull();
     }
 
     @Test
-    public void createActivity_enterPattern_clearButtonShouldBeVisible() {
+    public void createActivity_enterPattern_clearButtonShouldBeShown() {
         ChooseLockPatternFragment fragment = findFragment(mActivity);
 
-        Button skipButton = mActivity.findViewById(R.id.skip_button);
-        Button clearButton = mActivity.findViewById(R.id.footerLeftButton);
-        assertThat(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(clearButton.getVisibility()).isEqualTo(View.GONE);
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+        assertThat(skipOrClearButton.isEnabled()).isTrue();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.getText())
+                .isEqualTo(application.getString(R.string.skip_label));
 
         enterPattern();
-        assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
-        assertThat(clearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.isEnabled()).isTrue();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.getText())
+                .isEqualTo(application.getString(R.string.lockpattern_retry_button_text));
     }
 
     private ChooseLockPatternFragment findFragment(FragmentActivity activity) {

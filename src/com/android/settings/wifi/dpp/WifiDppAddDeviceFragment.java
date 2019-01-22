@@ -57,6 +57,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             // Update success UI.
             mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
             mSummary.setVisibility(View.INVISIBLE);
+            mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_success);
             mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
             mButtonLeft.setText(R.string.wifi_dpp_add_another_device);
             mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
@@ -71,6 +72,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             // Update fail UI.
             mTitle.setText(R.string.wifi_dpp_could_not_add_device);
             mSummary.setVisibility(View.INVISIBLE);
+            mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_error);
             mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
             mButtonRight.setText(R.string.retry);
         }

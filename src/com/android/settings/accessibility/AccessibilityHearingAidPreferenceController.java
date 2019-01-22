@@ -152,7 +152,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         if (!mHearingAidProfileSupported) {
             return null;
         }
-        if (!mBluetoothAdapter.isEnabled()) {
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             return null;
         }
         final List<BluetoothDevice> deviceList = mLocalBluetoothManager.getProfileManager()
@@ -166,6 +166,9 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     }
 
     private boolean isHearingAidProfileSupported() {
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+            return false;
+        }
         final List<Integer> supportedList = mBluetoothAdapter.getSupportedProfiles();
         if (supportedList.contains(BluetoothProfile.HEARING_AID)) {
             return true;

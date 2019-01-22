@@ -442,9 +442,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private void updateIpLayerInfo() {
         mButtonsPref.setButton2Visible(canSignIntoNetwork());
-        mButtonsPref.setButton3Visible(isSharingNetworkEnabled());
+        mButtonsPref.setButton3Visible(canShareNetwork());
         mButtonsPref.setVisible(
-                canSignIntoNetwork() || canForgetNetwork() || isSharingNetworkEnabled());
+                canSignIntoNetwork() || canForgetNetwork() || canShareNetwork());
 
         if (mNetwork == null || mLinkProperties == null) {
             mIpAddressPref.setVisible(false);
@@ -532,8 +532,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     /**
      * Returns whether the user can share the network represented by this preference with QR code.
      */
-    private boolean isSharingNetworkEnabled() {
-        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.WIFI_SHARING);
+    private boolean canShareNetwork() {
+        return mAccessPoint.getConfig() != null && FeatureFlagUtils.isEnabled(mContext,
+                FeatureFlags.WIFI_SHARING);
     }
 
     /**

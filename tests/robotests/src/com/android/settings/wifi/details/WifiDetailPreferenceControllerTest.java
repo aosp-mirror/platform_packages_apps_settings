@@ -686,6 +686,15 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    public void canShareNetwork_noNetwork() {
+        when(mockAccessPoint.getConfig()).thenReturn(null);
+
+        displayAndResume();
+
+        verify(mockButtonsPref).setButton3Visible(false);
+    }
+
+    @Test
     public void canModifyNetwork_saved() {
         assertThat(mController.canModifyNetwork()).isTrue();
     }
