@@ -72,26 +72,29 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS;
     @VisibleForTesting
     static final String KEY_GLOBAL_CARD_LOADER_TIMEOUT = "global_card_loader_timeout_key";
+    @VisibleForTesting
+    static final String KEY_CONTEXTUAL_CARDS = "key_contextual_cards";
 
-    private static final String KEY_CONTEXTUAL_CARDS = "key_contextual_cards";
     private static final String TAG = "ContextualCardManager";
 
     //The list for Settings Custom Card
     private static final int[] SETTINGS_CARDS =
             {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
 
-    @VisibleForTesting
-    final List<ContextualCard> mContextualCards;
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
     private final Lifecycle mLifecycle;
     private final List<LifecycleObserver> mLifecycleObservers;
+    private ContextualCardUpdateListener mListener;
+
+    @VisibleForTesting
+    final List<ContextualCard> mContextualCards;
     @VisibleForTesting
     long mStartTime;
+    @VisibleForTesting
     boolean mIsFirstLaunch;
     @VisibleForTesting
     List<String> mSavedCards;
-    private ContextualCardUpdateListener mListener;
 
     public ContextualCardManager(Context context, Lifecycle lifecycle, Bundle savedInstanceState) {
         mContext = context;
@@ -128,7 +131,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
     }
 
-    private void setupController(@ContextualCard.CardType int cardType) {
+    @VisibleForTesting
+    void setupController(@ContextualCard.CardType int cardType) {
         final ContextualCardController controller = mControllerRendererPool.getController(mContext,
                 cardType);
         if (controller == null) {
@@ -211,7 +215,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
         final MetricsFeatureProvider metricsFeatureProvider =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
-        final long timeoutLimit = getCardLoaderTimeout(mContext);
+        final long timeoutLimit = getCardLoaderTimeout();
         if (loadTime <= timeoutLimit) {
             onContextualCardUpdated(cards.stream()
                     .collect(groupingBy(ContextualCard::getCardType)));
@@ -275,7 +279,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     }
 
     @VisibleForTesting
-    long getCardLoaderTimeout(Context context) {
+    long getCardLoaderTimeout() {
         // Return the timeout limit if Settings.Global has the KEY_GLOBAL_CARD_LOADER_TIMEOUT key,
         // else return default timeout.
         return Settings.Global.getLong(mContext.getContentResolver(),
@@ -317,7 +321,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         return result;
     }
 
-    private List<ContextualCard> getCardsToKeep(List<ContextualCard> cards) {
+    @VisibleForTesting
+    List<ContextualCard> getCardsToKeep(List<ContextualCard> cards) {
         if (mSavedCards != null) {
             //screen rotate
             final List<ContextualCard> cardsToKeep = cards.stream()
