@@ -29,6 +29,7 @@ import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -287,7 +288,13 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
             final TextView summary = view.findViewById(android.R.id.summary);
             if (summary != null) {
-                summary.setText(accessPoint.getSettingsSummary());
+                final String summaryString = accessPoint.getSettingsSummary();
+                if (TextUtils.isEmpty(summaryString)) {
+                    summary.setVisibility(View.GONE);
+                } else {
+                    summary.setVisibility(View.VISIBLE);
+                    summary.setText(summaryString);
+                }
             }
 
             final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
