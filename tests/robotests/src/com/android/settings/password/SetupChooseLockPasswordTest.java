@@ -37,6 +37,9 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.ScrollToParentEditText;
 
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -137,17 +140,19 @@ public class SetupChooseLockPasswordTest {
     public void createActivity_skipButtonInIntroductionStage_shouldBeVisible() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
 
-        Button skipButton = activity.findViewById(R.id.skip_button);
-        assertThat(skipButton).isNotNull();
-        assertThat(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
+        final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+        assertThat(skipOrClearButton).isNotNull();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        skipButton.performClick();
-        AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        skipOrClearButton.performClick();
+        final AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
     }
 
     @Test
-    public void createActivity_inputPasswordInConfirmStage_clearButtonShouldBeVisible() {
+    public void createActivity_inputPasswordInConfirmStage_clearButtonShouldBeShown() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
 
         SetupChooseLockPasswordFragment fragment =
@@ -158,15 +163,17 @@ public class SetupChooseLockPasswordTest {
         passwordEntry.setText("");
         fragment.updateStage(Stage.NeedToConfirm);
 
-        Button skipButton = activity.findViewById(R.id.skip_button);
-        Button clearButton = activity.findViewById(R.id.clear_button);
-        assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
-        assertThat(clearButton.getVisibility()).isEqualTo(View.GONE);
+        final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+        assertThat(skipOrClearButton.isEnabled()).isTrue();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.GONE);
 
         passwordEntry.setText("1234");
         fragment.updateUi();
-        assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
-        assertThat(clearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(skipOrClearButton.getText())
+                .isEqualTo(application.getString(R.string.lockpassword_clear_label));
     }
 
     private SetupChooseLockPassword createSetupChooseLockPassword() {

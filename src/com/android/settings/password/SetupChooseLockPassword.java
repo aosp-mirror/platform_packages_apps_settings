@@ -72,8 +72,11 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
     public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment
             implements OnLockTypeSelectedListener {
 
+        private static final String TAG_SKIP_SCREEN_LOCK_DIALOG = "skip_screen_lock_dialog";
+
         @Nullable
         private Button mOptionsButton;
+        private boolean mLeftButtonIsSkip;
 
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -92,26 +95,22 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             if (showOptionsButton && anyOptionsShown) {
                 mOptionsButton = view.findViewById(R.id.screen_lock_options);
                 mOptionsButton.setVisibility(View.VISIBLE);
-                mOptionsButton.setOnClickListener(this);
+                mOptionsButton.setOnClickListener((btn) ->
+                        ChooseLockTypeDialogFragment.newInstance(mUserId)
+                                .show(getChildFragmentManager(), TAG_SKIP_SCREEN_LOCK_DIALOG));
             }
         }
 
         @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.screen_lock_options:
-                    ChooseLockTypeDialogFragment.newInstance(mUserId)
-                            .show(getChildFragmentManager(), null);
-                    break;
-                case R.id.skip_button:
-                    SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                            getActivity().getIntent()
-                                    .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
-                    dialog.show(getFragmentManager());
-                    break;
-                default:
-                    super.onClick(v);
+        protected void onSkipOrClearButtonClick(View view) {
+            if (mLeftButtonIsSkip) {
+                SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        getActivity().getIntent()
+                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+                dialog.show(getFragmentManager());
+                return;
             }
+            super.onSkipOrClearButtonClick(view);
         }
 
         @Override
@@ -137,9 +136,11 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             super.updateUi();
             // Show the skip button during SUW but not during Settings > Biometric Enrollment
             if (mUiStage == Stage.Introduction) {
-                mSkipButton.setVisibility(View.VISIBLE);
+                mSkipOrClearButton.setText(getActivity(), R.string.skip_label);
+                mLeftButtonIsSkip = true;
             } else {
-                mSkipButton.setVisibility(View.GONE);
+                mSkipOrClearButton.setText(getActivity(), R.string.lockpassword_clear_label);
+                mLeftButtonIsSkip = false;
             }
 
             if (mOptionsButton != null) {
