@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import androidx.preference.PreferenceFragmentCompat;
@@ -41,6 +42,13 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
             CachedBluetoothDevice device, Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
         mIsConnected = device.isConnected();
+    }
+
+    @Override
+    public boolean isAvailable() {
+        final boolean unthetheredHeadset = Utils.getBooleanMetaData(mCachedDevice.getDevice(),
+                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET);
+        return !unthetheredHeadset;
     }
 
     private void onForgetButtonPressed() {

@@ -16,17 +16,20 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -37,7 +40,8 @@ import com.android.settingslib.widget.LayoutPreference;
  */
 public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceController {
 
-    private LayoutPreference mLayoutPreference;
+    @VisibleForTesting
+    LayoutPreference mLayoutPreference;
     private CachedBluetoothDevice mCachedDevice;
 
     public AdvancedBluetoothDetailsHeaderController(Context context, String prefKey) {
@@ -46,8 +50,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        //TODO(b/122460277): decide whether it is available by {@code bluetoothDevice}
-        return CONDITIONALLY_UNAVAILABLE;
+        final boolean unthetheredHeadset = Utils.getBooleanMetaData(mCachedDevice.getDevice(),
+                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET);
+        return unthetheredHeadset ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -62,12 +67,28 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         mCachedDevice = cachedBluetoothDevice;
     }
 
-    private void refresh() {
+    @VisibleForTesting
+    void refresh() {
         if (mLayoutPreference != null && mCachedDevice != null) {
             final TextView title = mLayoutPreference.findViewById(R.id.entity_header_title);
             title.setText(mCachedDevice.getName());
             final TextView summary = mLayoutPreference.findViewById(R.id.entity_header_summary);
             summary.setText(mCachedDevice.getConnectionSummary());
+
+            updateSubLayout(mLayoutPreference.findViewById(R.id.layout_left),
+                    BluetoothDevice.METADATA_UNTHETHERED_LEFT_ICON,
+                    BluetoothDevice.METADATA_UNTHETHERED_LEFT_BATTERY,
+                    R.string.bluetooth_left_name);
+
+            updateSubLayout(mLayoutPreference.findViewById(R.id.layout_middle),
+                    BluetoothDevice.METADATA_UNTHETHERED_CASE_ICON,
+                    BluetoothDevice.METADATA_UNTHETHERED_CASE_BATTERY,
+                    R.string.bluetooth_middle_name);
+
+            updateSubLayout(mLayoutPreference.findViewById(R.id.layout_right),
+                    BluetoothDevice.METADATA_UNTHETHERED_RIGHT_ICON,
+                    BluetoothDevice.METADATA_UNTHETHERED_RIGHT_BATTERY,
+                    R.string.bluetooth_right_name);
         }
     }
 
@@ -79,10 +100,35 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         drawable.setBatteryLevel(level);
         drawable.setShowPercent(false);
         drawable.setBatteryColorFilter(new PorterDuffColorFilter(
-                Utils.getColorAttrDefaultColor(context, android.R.attr.colorControlNormal),
+                com.android.settings.Utils.getColorAttrDefaultColor(context,
+                        android.R.attr.colorControlNormal),
                 PorterDuff.Mode.SRC_IN));
 
         return drawable;
     }
 
+    private void updateSubLayout(LinearLayout linearLayout, int iconMetaKey, int batteryMetaKey,
+            int titleResId) {
+        if (linearLayout == null) {
+            return;
+        }
+        final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
+        final String iconUri = Utils.getStringMetaData(bluetoothDevice, iconMetaKey);
+        if (iconUri != null) {
+            final ImageView imageView = linearLayout.findViewById(R.id.header_icon);
+            final IconCompat iconCompat = IconCompat.createWithContentUri(iconUri);
+            imageView.setImageBitmap(iconCompat.getBitmap());
+        }
+
+        final int batteryLevel = Utils.getIntMetaData(bluetoothDevice, batteryMetaKey);
+        if (batteryLevel != Utils.META_INT_ERROR) {
+            final ImageView imageView = linearLayout.findViewById(R.id.bt_battery_icon);
+            imageView.setImageDrawable(createBtBatteryIcon(mContext, batteryLevel));
+            final TextView textView = linearLayout.findViewById(R.id.bt_battery_summary);
+            textView.setText(com.android.settings.Utils.formatPercentage(batteryLevel));
+        }
+
+        final TextView textView = linearLayout.findViewById(R.id.header_title);
+        textView.setText(titleResId);
+    }
 }
