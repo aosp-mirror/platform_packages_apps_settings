@@ -119,7 +119,7 @@ public class NetworkRequestDialogFragmentTest {
         ERROR_DIALOG_TYPE errorType = null;
 
         @Override
-        public void stopScanningAndMaybePopErrorDialog(ERROR_DIALOG_TYPE type) {
+        public void stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE type) {
             bCalledStopAndPop = true;
             errorType = type;
         }
@@ -152,25 +152,19 @@ public class NetworkRequestDialogFragmentTest {
     }
 
     @Test
-    public void updateAccessPointList_onUserSelectionConnectSuccess_shouldCloseTheDialog() {
+    public void updateAccessPointList_onUserSelectionConnectSuccess_shouldFinishActivity() {
         // Assert
-        FakeNetworkRequestDialogFragment fakeFragment = new FakeNetworkRequestDialogFragment();
-        FakeNetworkRequestDialogFragment spyFakeFragment = spy(fakeFragment);
-
-        List<AccessPoint> accessPointList = createAccessPointList();
-        when(spyFakeFragment.getAccessPointList()).thenReturn(accessPointList);
-
-        spyFakeFragment.show(mActivity.getSupportFragmentManager(), null);
+        final FragmentActivity spyActivity = spy(mActivity);
+        when(networkRequestDialogFragment.getActivity()).thenReturn(spyActivity);
+        networkRequestDialogFragment.show(spyActivity.getSupportFragmentManager(), "onUserSelectionConnectSuccess");
 
         // Action
-        WifiConfiguration config = new WifiConfiguration();
+        final WifiConfiguration config = new WifiConfiguration();
         config.SSID = "Test AP 3";
-        spyFakeFragment.onUserSelectionConnectSuccess(config);
+        networkRequestDialogFragment.onUserSelectionConnectSuccess(config);
 
         // Check
-        ShadowLooper.getShadowMainLooper().runToEndOfTasks();
-        assertThat(fakeFragment.bCalledStopAndPop).isTrue();
-        assertThat(fakeFragment.errorType).isNull();
+        verify(spyActivity).finish();
     }
 
     @Test
