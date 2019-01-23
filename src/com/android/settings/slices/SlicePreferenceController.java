@@ -82,6 +82,8 @@ public class SlicePreferenceController extends BasePreferenceController implemen
 
     @Override
     public void onChanged(Slice slice) {
-        mSlicePreference.onSliceUpdated(slice);
+        if (slice != null) {
+            mSlicePreference.onSliceUpdated(slice);
+        }
     }
 }
