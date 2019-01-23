@@ -33,4 +33,11 @@
         settings:controller="com.android.settings.development.gup.GupPreferenceController">
     </PreferenceCategory>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="footer_preference"
+        android:title="@string/game_driver_footer_text"
+        android:selectable="false"
+        settings:controller="com.android.settings.development.gup.GameDriverFooterPreferenceController">
+    </com.android.settingslib.widget.FooterPreference>
+
 </PreferenceScreen>
