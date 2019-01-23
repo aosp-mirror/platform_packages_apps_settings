@@ -19,6 +19,7 @@ package com.android.settings.wifi.dpp;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,9 +84,20 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonLeft.setText(R.string.cancel);
         mButtonLeft.setOnClickListener(v -> {
-            Activity activity = getActivity();
-            activity.setResult(Activity.RESULT_CANCELED);
-            activity.finish();
+            String action = null;
+            final Intent intent = getActivity().getIntent();
+            if (intent != null) {
+                action = intent.getAction();
+            }
+            if (WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER.equals(action) ||
+                    WifiDppConfiguratorActivity
+                    .ACTION_CONFIGURATOR_QR_CODE_GENERATOR.equals(action)) {
+                getFragmentManager().popBackStack();
+            } else {
+                final Activity activity = getActivity();
+                activity.setResult(Activity.RESULT_CANCELED);
+                activity.finish();
+            }
         });
 
         mButtonRight = view.findViewById(R.id.button_right);

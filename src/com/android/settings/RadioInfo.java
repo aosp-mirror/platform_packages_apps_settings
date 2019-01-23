@@ -213,6 +213,7 @@ public class RadioInfo extends Activity {
     private Switch imsVtProvisionedSwitch;
     private Switch imsWfcProvisionedSwitch;
     private Switch eabProvisionedSwitch;
+    private Switch cbrsDataSwitch;
     private Spinner preferredNetworkType;
     private Spinner cellInfoRefreshRateSpinner;
 
@@ -450,6 +451,9 @@ public class RadioInfo extends Activity {
         imsWfcProvisionedSwitch = (Switch) findViewById(R.id.wfc_provisioned_switch);
         eabProvisionedSwitch = (Switch) findViewById(R.id.eab_provisioned_switch);
 
+        cbrsDataSwitch = (Switch) findViewById(R.id.cbrs_data_switch);
+        cbrsDataSwitch.setVisibility(isCbrsSupported() ? View.VISIBLE : View.GONE);
+
         radioPowerOnSwitch = (Switch) findViewById(R.id.radio_power);
 
         mDownlinkKbps = (TextView) findViewById(R.id.dl_kbps);
@@ -525,6 +529,11 @@ public class RadioInfo extends Activity {
         imsVtProvisionedSwitch.setOnCheckedChangeListener(mImsVtCheckedChangeListener);
         imsWfcProvisionedSwitch.setOnCheckedChangeListener(mImsWfcCheckedChangeListener);
         eabProvisionedSwitch.setOnCheckedChangeListener(mEabCheckedChangeListener);
+
+        if (isCbrsSupported()) {
+            cbrsDataSwitch.setChecked(getCbrsDataState());
+            cbrsDataSwitch.setOnCheckedChangeListener(mCbrsDataSwitchChangeListener);
+        }
 
         mTelephonyManager.listen(mPhoneStateListener,
                   PhoneStateListener.LISTEN_CALL_STATE
@@ -1482,5 +1491,39 @@ public class RadioInfo extends Activity {
         public void onNothingSelected(AdapterView parent) {
         }
     };
+
+    boolean isCbrsSupported() {
+        return getResources().getBoolean(
+              com.android.internal.R.bool.config_cbrs_supported);
+    }
+
+    void updateCbrsDataState(boolean state) {
+        Log.d(TAG, "setCbrsDataSwitchState() state:" + ((state)? "on":"off"));
+        if (mTelephonyManager != null) {
+            QueuedWork.queue(new Runnable() {
+                public void run() {
+                  mTelephonyManager.setOpportunisticNetworkState(state);
+                  cbrsDataSwitch.setChecked(getCbrsDataState());
+                }
+            }, false);
+        }
+    }
+
+    boolean getCbrsDataState() {
+        boolean state = false;
+        if (mTelephonyManager != null) {
+            state = mTelephonyManager.isOpportunisticNetworkEnabled();
+        }
+        Log.d(TAG, "getCbrsDataState() state:" +((state)? "on":"off"));
+        return state;
+    }
+
+    OnCheckedChangeListener mCbrsDataSwitchChangeListener = new OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            updateCbrsDataState(isChecked);
+        }
+    };
+
 
 }

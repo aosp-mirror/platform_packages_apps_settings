@@ -314,8 +314,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
     @Override
     public void onClickChooseDifferentNetwork() {
-        mWifiNetworkConfig = null;
-
         showChooseSavedWifiNetworkFragment(/* addToBackStack */ true);
     }
 

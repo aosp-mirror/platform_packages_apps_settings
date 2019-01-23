@@ -55,6 +55,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         @Override
         public void onConfiguratorSuccess(int code) {
             // Update success UI.
+            mHeaderIcon.setImageResource(R.drawable.ic_check_circle_green);
             mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
             mSummary.setVisibility(View.INVISIBLE);
             mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_success);
@@ -108,6 +109,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mHeaderIcon.setImageResource(R.drawable.ic_devices_other_opaque_black);
 
         final WifiQrCode wifiQrCode = ((WifiDppConfiguratorActivity) getActivity())
                 .getWifiDppQrCode();
