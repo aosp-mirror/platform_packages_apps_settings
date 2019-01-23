@@ -106,6 +106,31 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
         }
     }
 
+    private boolean hasVibrationEnabledSetting() {
+        return !TextUtils.isEmpty(getVibrationEnabledSetting());
+    }
+
+    private void updateSettings(VibrationIntensityCandidateInfo candidate) {
+        boolean vibrationEnabled = candidate.getIntensity() != Vibrator.VIBRATION_INTENSITY_OFF;
+        if (hasVibrationEnabledSetting()) {
+            // Update vibration enabled setting
+            boolean wasEnabled = Settings.System.getInt(getContext().getContentResolver(),
+                    getVibrationEnabledSetting(), 1) == 1;
+            if (vibrationEnabled != wasEnabled) {
+                Settings.System.putInt(getContext().getContentResolver(),
+                    getVibrationEnabledSetting(), vibrationEnabled ? 1 : 0);
+            }
+        }
+        // There are two conditions that need to change the intensity.
+        // First: Vibration is enabled and we are changing its strength.
+        // Second: There is no setting to enable this vibration, change the intensity directly.
+        if (vibrationEnabled || !hasVibrationEnabledSetting()) {
+            // Update vibration intensity setting
+            Settings.System.putInt(getContext().getContentResolver(),
+                    getVibrationIntensitySetting(), candidate.getIntensity());
+        }
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -185,11 +210,7 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
             Log.e(TAG, "Tried to set unknown intensity (key=" + key + ")!");
             return false;
         }
-        if (candidate.getIntensity() != Vibrator.VIBRATION_INTENSITY_OFF ||
-                TextUtils.isEmpty(getVibrationEnabledSetting())) {
-            Settings.System.putInt(getContext().getContentResolver(),
-                    getVibrationIntensitySetting(), candidate.getIntensity());
-        }
+        updateSettings(candidate);
         onVibrationIntensitySelected(candidate.getIntensity());
         return true;
     }
