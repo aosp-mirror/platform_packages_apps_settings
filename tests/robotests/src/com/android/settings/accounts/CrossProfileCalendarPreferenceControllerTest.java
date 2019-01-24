@@ -32,6 +32,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.util.ArraySet;
 
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -44,6 +45,9 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowDevicePolicyManager;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class CrossProfileCalendarPreferenceControllerTest {
@@ -123,7 +127,17 @@ public class CrossProfileCalendarPreferenceControllerTest {
     @Test
     public void updateState_somePackagesAllowed_preferenceShouldNotBeDisabled() throws Exception {
         dpm.setProfileOwner(TEST_COMPONENT_NAME);
-        dpm.addCrossProfileCalendarPackage(TEST_COMPONENT_NAME, TEST_PACKAGE_NAME);
+        dpm.setCrossProfileCalendarPackages(TEST_COMPONENT_NAME,
+                Collections.singleton(TEST_PACKAGE_NAME));
+
+        mController.updateState(mPreference);
+        verify(mPreference).setDisabledByAdmin(null);
+    }
+
+    @Test
+    public void updateState_allPackagesAllowed_preferenceShouldNotBeDisabled() throws Exception {
+        dpm.setProfileOwner(TEST_COMPONENT_NAME);
+        dpm.setCrossProfileCalendarPackages(TEST_COMPONENT_NAME, null);
 
         mController.updateState(mPreference);
         verify(mPreference).setDisabledByAdmin(null);
