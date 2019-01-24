@@ -112,6 +112,9 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
             return null;
         }
 
+        // STOPSHIP: Ignore the STORAGE group since it's going away.
+        usageInfos.removeIf(usage -> usage.getName().equals("android.permission-group.STORAGE"));
+
         final BarViewInfo[] barViewInfos = new BarViewInfo[
                 Math.min(BarChartPreference.MAXIMUM_BAR_VIEWS, usageInfos.size())];
 
