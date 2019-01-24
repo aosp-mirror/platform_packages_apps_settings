@@ -45,6 +45,7 @@ public class BiometricFragment extends InstrumentedFragment {
     private static final String KEY_SUBTITLE = "subtitle";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_NEGATIVE_TEXT = "negative_text";
+    private static final String KEY_REQUIRE_CONFIRMATION = "require_confirmation";
 
     // Re-set by the application. Should be done upon orientation changes, etc
     private Executor mClientExecutor;
@@ -129,6 +130,7 @@ public class BiometricFragment extends InstrumentedFragment {
             .setDescription(mPromptInfo.getDescription())
             .setNegativeButton(mPromptInfo.getNegativeButtonText(), mClientExecutor,
                     mNegativeButtonListener)
+            .setRequireConfirmation(mPromptInfo.getRequireConfirmation())
             .build();
         mCancellationSignal = new CancellationSignal();
 
@@ -173,6 +175,10 @@ public class BiometricFragment extends InstrumentedFragment {
             return mBundle.getCharSequence(KEY_NEGATIVE_TEXT);
         }
 
+        public boolean getRequireConfirmation() {
+            return mBundle.getBoolean(KEY_REQUIRE_CONFIRMATION);
+        }
+
         public static class Builder {
             private final Bundle mBundle = new Bundle();
 
@@ -193,6 +199,11 @@ public class BiometricFragment extends InstrumentedFragment {
 
             public Builder setNegativeButtonText(@NonNull CharSequence text) {
                 mBundle.putCharSequence(KEY_NEGATIVE_TEXT, text);
+                return this;
+            }
+
+            public Builder setRequireConfirmation(boolean requireConfirmation) {
+                mBundle.putBoolean(KEY_REQUIRE_CONFIRMATION, requireConfirmation);
                 return this;
             }
 
