@@ -171,7 +171,8 @@ public class BluetoothDevicePreferenceTest {
                 .thenReturn(new BluetoothClass(BluetoothClass.Device.Major.IMAGING));
 
         mPreference.onDeviceAttributesChanged();
-        DrawableTestHelper.assertDrawableResId(mPreference.getIcon(), R.drawable.ic_settings_print);
+        DrawableTestHelper.assertDrawableResId(mPreference.getIcon(),
+            com.android.internal.R.drawable.ic_settings_print);
     }
 
     @Test

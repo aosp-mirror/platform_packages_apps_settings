@@ -157,7 +157,7 @@ public class BatteryEntry {
                 break;
             case BLUETOOTH:
                 name = context.getResources().getString(R.string.power_bluetooth);
-                iconId = R.drawable.ic_settings_bluetooth;
+                iconId = com.android.internal.R.drawable.ic_settings_bluetooth;
                 break;
             case SCREEN:
                 name = context.getResources().getString(R.string.power_screen);

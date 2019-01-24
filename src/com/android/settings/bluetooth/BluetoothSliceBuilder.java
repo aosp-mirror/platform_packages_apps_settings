@@ -73,7 +73,7 @@ public class BluetoothSliceBuilder {
         final boolean isBluetoothEnabled = isBluetoothEnabled();
         final CharSequence title = context.getText(R.string.bluetooth_settings);
         final IconCompat icon = IconCompat.createWithResource(context,
-                R.drawable.ic_settings_bluetooth);
+                com.android.internal.R.drawable.ic_settings_bluetooth);
         @ColorInt final int color = com.android.settings.Utils.getColorAccent(
                 context).getDefaultColor();
         final PendingIntent toggleAction = getBroadcastIntent(context);
