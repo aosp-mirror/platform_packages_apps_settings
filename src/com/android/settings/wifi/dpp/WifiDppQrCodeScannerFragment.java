@@ -171,7 +171,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
         mDecorateView = (QrDecorateView) view.findViewById(R.id.decorate_view);
 
-        mHeaderIcon.setImageResource(R.drawable.ic_scan_24dp);
+        setHeaderIconImageResource(R.drawable.ic_scan_24dp);
         if (mIsConfiguratorMode) {
             mTitle.setText(R.string.wifi_dpp_add_device_to_network);
 

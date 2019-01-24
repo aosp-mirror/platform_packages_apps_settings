@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 
 /**
@@ -33,7 +34,8 @@ import com.android.settings.core.InstrumentedFragment;
  * {@code WifiDppAddDeviceFragment}
  */
 public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
-    protected ImageView mHeaderIcon;
+    private ImageView mHeaderIcon;
+    private ImageView mDevicesCheckCircleGreenHeaderIcon;
     protected TextView mTitle;
     protected TextView mSummary;
 
@@ -42,7 +44,22 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mHeaderIcon = view.findViewById(android.R.id.icon);
+        mDevicesCheckCircleGreenHeaderIcon =
+                view.findViewById(R.id.devices_check_circle_green_icon);
         mTitle = view.findViewById(android.R.id.title);
         mSummary = view.findViewById(android.R.id.summary);
+    }
+
+    protected void setHeaderIconImageResource(int resId) {
+        // ic_devices_check_circle_green is a LayerDrawable,
+        // it has different size from other VectorDrawable icons
+        if (resId == R.drawable.ic_devices_check_circle_green) {
+            mHeaderIcon.setVisibility(View.GONE);
+            mDevicesCheckCircleGreenHeaderIcon.setVisibility(View.VISIBLE);
+        } else {
+            mDevicesCheckCircleGreenHeaderIcon.setVisibility(View.GONE);
+            mHeaderIcon.setImageResource(resId);
+            mHeaderIcon.setVisibility(View.VISIBLE);
+        }
     }
 }
