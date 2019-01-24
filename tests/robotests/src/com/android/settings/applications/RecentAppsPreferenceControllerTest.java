@@ -38,6 +38,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ModuleInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.PowerManager;
@@ -102,10 +103,13 @@ public class RecentAppsPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getApplicationContext()).thenReturn(mContext);
+        ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", mAppState);
         doReturn(mUsageStatsManager).when(mContext).getSystemService(Context.USAGE_STATS_SERVICE);
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
 
         mController = new RecentAppsPreferenceController(mContext, mAppState, null);
         when(mScreen.findPreference(anyString())).thenReturn(mCategory);
@@ -348,6 +352,57 @@ public class RecentAppsPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         verify(mCategory).addPreference(argThat(summaryMatches("0 minutes ago")));
+    }
+
+    @Test
+    public void displayPreference_shouldNotShowHiddenSystemModule() {
+        final List<UsageStats> stats = new ArrayList<>();
+        // Regular app.
+        final UsageStats stat1 = new UsageStats();
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "com.foo.bar";
+        stats.add(stat1);
+
+        // Hidden system module.
+        final UsageStats stat2 = new UsageStats();
+        stat2.mLastTimeUsed = System.currentTimeMillis() + 200;
+        stat2.mPackageName = "com.foo.hidden";
+        stats.add(stat2);
+
+        ApplicationsState.AppEntry stat1Entry = mock(ApplicationsState.AppEntry.class);
+        ApplicationsState.AppEntry stat2Entry = mock(ApplicationsState.AppEntry.class);
+        stat1Entry.info = mApplicationInfo;
+        stat2Entry.info = mApplicationInfo;
+
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId())).thenReturn(stat1Entry);
+        when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId())).thenReturn(stat2Entry);
+
+        final ModuleInfo moduleInfo1 = new ModuleInfo();
+        moduleInfo1.setPackageName(stat1.mPackageName);
+        moduleInfo1.setHidden(false);
+
+        final ModuleInfo moduleInfo2 = new ModuleInfo();
+        moduleInfo2.setPackageName(stat2.mPackageName);
+        moduleInfo2.setHidden(true);
+
+        ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", null);
+        final List<ModuleInfo> modules = new ArrayList<>();
+        modules.add(moduleInfo2);
+        when(mPackageManager.getInstalledModules(anyInt() /* flags */))
+            .thenReturn(modules);
+
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+            .thenReturn(new ResolveInfo());
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+            .thenReturn(stats);
+
+        mController.displayPreference(mScreen);
+
+        // Only add stat1. stat2 is skipped because it is hidden module.
+        final ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
+        verify(mCategory).addPreference(prefCaptor.capture());
+        final Preference pref = prefCaptor.getValue();
+        assertThat(pref.getKey()).isEqualTo(stat1.mPackageName);
     }
 
     private static ArgumentMatcher<Preference> summaryMatches(String expected) {

@@ -314,6 +314,9 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
             Log.d(TAG, "System package, skipping " + pkgName);
             return false;
         }
+        if (AppUtils.isHiddenSystemModule(mContext, pkgName)) {
+            return false;
+        }
         final Intent launchIntent = new Intent().addCategory(Intent.CATEGORY_LAUNCHER)
                 .setPackage(pkgName);
 
