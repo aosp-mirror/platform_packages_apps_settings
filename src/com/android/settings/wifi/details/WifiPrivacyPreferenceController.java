@@ -85,15 +85,29 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         return WifiConfiguration.RANDOMIZATION_PERSISTENT;
     }
 
-    private final int PREF_RANDOMIZATION_PERSISTENT = 0;
-    private final int PREF_RANDOMIZATION_NONE = 1;
-    @VisibleForTesting
-    protected int translateMacRandomizedValueToPrefValue(int macRandomized) {
-        if (macRandomized == WifiConfiguration.RANDOMIZATION_PERSISTENT) {
-            return PREF_RANDOMIZATION_PERSISTENT;
-        } else {
-            return PREF_RANDOMIZATION_NONE;
-        }
+    private static final int PREF_RANDOMIZATION_PERSISTENT = 0;
+    private static final int PREF_RANDOMIZATION_NONE = 1;
+
+    /**
+     * Returns preference index value.
+     *
+     * @param macRandomized is mac randomized value
+     * @return index value of preference
+     */
+    public static int translateMacRandomizedValueToPrefValue(int macRandomized) {
+        return (macRandomized == WifiConfiguration.RANDOMIZATION_PERSISTENT)
+            ? PREF_RANDOMIZATION_PERSISTENT : PREF_RANDOMIZATION_NONE;
+    }
+
+    /**
+     * Returns mac randomized value.
+     *
+     * @param prefMacRandomized is preference index value
+     * @return mac randomized value
+     */
+    public static int translatePrefValueToMacRandomizedValue(int prefMacRandomized) {
+        return (prefMacRandomized == PREF_RANDOMIZATION_PERSISTENT)
+            ? WifiConfiguration.RANDOMIZATION_PERSISTENT : WifiConfiguration.RANDOMIZATION_NONE;
     }
 
     private void updateSummary(DropDownPreference preference, int macRandomized) {

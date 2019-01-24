@@ -27,6 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.ServiceSpecificException;
 import android.security.KeyStore;
@@ -39,6 +40,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
@@ -385,5 +387,62 @@ public class WifiConfigControllerTest {
 
         @Override
         KeyStore getKeyStore() { return mKeyStore; }
+    }
+
+    @Test
+    public void loadMacRandomizedValue_shouldPersistentAsDefault() {
+        final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
+        final int prefPersist =
+                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                        WifiConfiguration.RANDOMIZATION_PERSISTENT);
+
+        assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(prefPersist);
+    }
+
+    @Test
+    public void loadSavedMacRandomizedPersistentValue_shouldCorrectMacValue() {
+        checkSavedMacRandomizedValue(WifiConfiguration.RANDOMIZATION_PERSISTENT);
+    }
+
+    @Test
+    public void loadSavedMacRandomizedNoneValue_shouldCorrectMacValue() {
+        checkSavedMacRandomizedValue(WifiConfiguration.RANDOMIZATION_NONE);
+    }
+
+    private void checkSavedMacRandomizedValue(int macRandomizedValue) {
+        when(mAccessPoint.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        when(mAccessPoint.getConfig()).thenReturn(mockWifiConfig);
+        mockWifiConfig.macRandomizationSetting = macRandomizedValue;
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT);
+
+        final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
+        final int expectedPrefValue =
+                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                        macRandomizedValue);
+
+        assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(expectedPrefValue);
+    }
+
+    @Test
+    public void saveMacRandomizedValue_noChanged_shouldPersistentAsDefault() {
+        WifiConfiguration config = mController.getConfig();
+        assertThat(config.macRandomizationSetting).isEqualTo(
+                WifiConfiguration.RANDOMIZATION_PERSISTENT);
+    }
+
+    @Test
+    public void saveMacRandomizedValue_ChangedToNone_shouldGetNone() {
+        final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
+        final int prefMacNone =
+                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                        WifiConfiguration.RANDOMIZATION_NONE);
+        privacySetting.setSelection(prefMacNone);
+
+        WifiConfiguration config = mController.getConfig();
+        assertThat(config.macRandomizationSetting).isEqualTo(WifiConfiguration.RANDOMIZATION_NONE);
     }
 }
