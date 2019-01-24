@@ -16,7 +16,11 @@
 
 package com.android.settings.password;
 
+import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
+
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyManager.PasswordComplexity;
+import android.app.admin.PasswordMetrics;
 import android.content.Context;
 import android.os.UserHandle;
 
@@ -36,6 +40,7 @@ public class ChooseLockGenericController {
 
     private final Context mContext;
     private final int mUserId;
+    @PasswordComplexity private final int mRequestedMinComplexity;
     private ManagedLockPasswordProvider mManagedPasswordProvider;
     private DevicePolicyManager mDpm;
 
@@ -43,6 +48,19 @@ public class ChooseLockGenericController {
         this(
                 context,
                 userId,
+                PASSWORD_COMPLEXITY_NONE);
+    }
+
+    /**
+     * @param requestedMinComplexity specifies the min password complexity to be taken into account
+     *                               when determining the available screen lock types
+     */
+    public ChooseLockGenericController(Context context, int userId,
+            @PasswordComplexity int requestedMinComplexity) {
+        this(
+                context,
+                userId,
+                requestedMinComplexity,
                 context.getSystemService(DevicePolicyManager.class),
                 ManagedLockPasswordProvider.get(context, userId));
     }
@@ -51,21 +69,26 @@ public class ChooseLockGenericController {
     ChooseLockGenericController(
             Context context,
             int userId,
+            @PasswordComplexity int requestedMinComplexity,
             DevicePolicyManager dpm,
             ManagedLockPasswordProvider managedLockPasswordProvider) {
         mContext = context;
         mUserId = userId;
+        mRequestedMinComplexity = requestedMinComplexity;
         mManagedPasswordProvider = managedLockPasswordProvider;
         mDpm = dpm;
     }
 
     /**
-     * @return The higher quality of either the specified {@code quality} or the quality required
-     *         by {@link DevicePolicyManager#getPasswordQuality}.
+     * Returns the highest quality among the specified {@code quality}, the quality required by
+     * {@link DevicePolicyManager#getPasswordQuality}, and the quality required by min password
+     * complexity.
      */
     public int upgradeQuality(int quality) {
-        // Compare min allowed password quality
-        return Math.max(quality, mDpm.getPasswordQuality(null, mUserId));
+        // Compare specified quality and dpm quality
+        int dpmUpgradedQuality = Math.max(quality, mDpm.getPasswordQuality(null, mUserId));
+        return Math.max(dpmUpgradedQuality,
+                PasswordMetrics.complexityLevelToMinQuality(mRequestedMinComplexity));
     }
 
     /**

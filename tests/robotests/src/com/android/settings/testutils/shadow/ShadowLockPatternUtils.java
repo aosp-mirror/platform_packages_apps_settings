@@ -59,4 +59,14 @@ public class ShadowLockPatternUtils {
     public static void setDeviceEncryptionEnabled(boolean deviceEncryptionEnabled) {
         sDeviceEncryptionEnabled = deviceEncryptionEnabled;
     }
+
+    @Implementation
+    protected byte[] getPasswordHistoryHashFactor(String currentPassword, int userId) {
+        return null;
+    }
+
+    @Implementation
+    protected boolean checkPasswordHistory(String passwordToCheck, byte[] hashFactor, int userId) {
+        return false;
+    }
 }

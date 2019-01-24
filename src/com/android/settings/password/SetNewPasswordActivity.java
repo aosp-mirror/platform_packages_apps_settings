@@ -16,13 +16,22 @@
 
 package com.android.settings.password;
 
+import static android.Manifest.permission.GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
+import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
+import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
+
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyManager.PasswordComplexity;
+import android.app.admin.PasswordMetrics;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 
 import com.android.settings.Utils;
@@ -37,6 +46,21 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
     private String mNewPasswordAction;
     private SetNewPasswordController mSetNewPasswordController;
 
+    /**
+     * From intent extra {@link DevicePolicyManager#EXTRA_PASSWORD_COMPLEXITY}.
+     *
+     * <p>This is used only if caller has the required permission and activity is launched by
+     * {@link DevicePolicyManager#ACTION_SET_NEW_PASSWORD}.
+     */
+    private @PasswordComplexity int mRequestedMinComplexity = PASSWORD_COMPLEXITY_NONE;
+
+    /**
+     * Label of the app which launches this activity.
+     *
+     * <p>Value would be {@code null} if launched from settings app.
+     */
+    private String mCallerAppName = null;
+
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
@@ -48,6 +72,25 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
             finish();
             return;
         }
+
+        IBinder activityToken = getActivityToken();
+        mCallerAppName = (String) PasswordUtils.getCallingAppLabel(this, activityToken);
+        if (ACTION_SET_NEW_PASSWORD.equals(mNewPasswordAction)
+                && getIntent().hasExtra(EXTRA_PASSWORD_COMPLEXITY)) {
+            boolean hasPermission = PasswordUtils.isCallingAppPermitted(
+                    this, activityToken, GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
+            if (hasPermission) {
+                mRequestedMinComplexity = PasswordMetrics.sanitizeComplexityLevel(getIntent()
+                        .getIntExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_NONE));
+            } else {
+                PasswordUtils.crashCallingApplication(activityToken,
+                        "Must have permission " + GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY
+                                + " to use extra " + EXTRA_PASSWORD_COMPLEXITY);
+                finish();
+                return;
+            }
+        }
+
         mSetNewPasswordController = SetNewPasswordController.create(
                 this, this, getIntent(), getActivityToken());
         mSetNewPasswordController.dispatchSetNewPasswordIntent();
@@ -60,6 +103,12 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
                 : new Intent(this, ChooseLockGeneric.class);
         intent.setAction(mNewPasswordAction);
         intent.putExtras(chooseLockFingerprintExtras);
+        if (mCallerAppName != null) {
+            intent.putExtra(EXTRA_KEY_CALLER_APP_NAME, mCallerAppName);
+        }
+        if (mRequestedMinComplexity != PASSWORD_COMPLEXITY_NONE) {
+            intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, mRequestedMinComplexity);
+        }
         startActivity(intent);
         finish();
     }

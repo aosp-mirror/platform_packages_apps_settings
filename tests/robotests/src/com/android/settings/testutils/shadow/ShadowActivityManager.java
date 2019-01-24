@@ -17,6 +17,7 @@
 package com.android.settings.testutils.shadow;
 
 import android.app.ActivityManager;
+import android.app.IActivityManager;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -24,6 +25,7 @@ import org.robolectric.annotation.Implements;
 @Implements(ActivityManager.class)
 public class ShadowActivityManager {
     private static int sCurrentUserId = 0;
+    private static IActivityManager sService = null;
 
     @Implementation
     protected static int getCurrentUser() {
@@ -32,5 +34,14 @@ public class ShadowActivityManager {
 
     public static void setCurrentUser(int userId) {
         sCurrentUserId = userId;
+    }
+
+    @Implementation
+    public static IActivityManager getService() {
+        return sService;
+    }
+
+    public static void setService(IActivityManager service) {
+        sService = service;
     }
 }
