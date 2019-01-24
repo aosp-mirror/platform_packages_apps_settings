@@ -1249,12 +1249,11 @@
                   android:label="@string/local_backup_password_title"
                   android:exported="false" />
 
-        <activity android:name="CredentialStorage"
+        <activity android:name=".security.CredentialStorage"
                 android:theme="@style/Transparent"
                 android:launchMode="singleTop"
                 android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
-                <action android:name="com.android.credentials.UNLOCK" />
                 <action android:name="com.android.credentials.INSTALL" />
                 <action android:name="com.android.credentials.RESET" />
                 <category android:name="android.intent.category.DEFAULT" />
