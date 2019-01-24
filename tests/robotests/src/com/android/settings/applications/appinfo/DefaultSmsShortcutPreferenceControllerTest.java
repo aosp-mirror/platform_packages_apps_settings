@@ -18,11 +18,17 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.Context;
+import android.permission.PermissionControllerManager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultSmsShortcutPreferenceControllerTest {
@@ -30,10 +36,16 @@ public class DefaultSmsShortcutPreferenceControllerTest {
     private static final String TEST_PACKAGE_NAME = "TestPackage";
     private static final String PREFERENCE_KEY = "default_sms_app";
 
+    @Mock
+    private PermissionControllerManager mPermissionControllerManager;
+
     private DefaultSmsShortcutPreferenceController mController;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        ShadowApplication.getInstance().setSystemService(Context.PERMISSION_CONTROLLER_SERVICE,
+                mPermissionControllerManager);
         mController = new DefaultSmsShortcutPreferenceController(RuntimeEnvironment.application,
                 TEST_PACKAGE_NAME);
     }
