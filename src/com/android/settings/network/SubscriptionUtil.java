@@ -30,7 +30,7 @@ public class SubscriptionUtil {
     private static List<SubscriptionInfo> sResultsForTesting;
 
     @VisibleForTesting
-    static void setAvailableSubscriptionsForTesting(List<SubscriptionInfo> results) {
+    public static void setAvailableSubscriptionsForTesting(List<SubscriptionInfo> results) {
         sResultsForTesting = results;
     }
 

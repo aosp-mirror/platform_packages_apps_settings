@@ -126,6 +126,10 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
+          use(CallsDefaultSubscriptionController.class).init(getLifecycle());
+          use(SmsDefaultSubscriptionController.class).init(getLifecycle());
+        }
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
         use(ApnPreferenceController.class).init(mSubId);

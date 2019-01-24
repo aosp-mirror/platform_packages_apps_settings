@@ -17,24 +17,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="mobile_network_pref_screen"
-    settings:initialExpandedChildrenCount="5">
+    settings:initialExpandedChildrenCount="7">
 
     <com.android.settings.datausage.DataUsageSummaryPreference
         android:key="status_header"
         android:visibility="gone"
         android:selectable="false" />
 
+    <ListPreference
+        android:key="calls_preference"
+        android:title="@string/calls_preference"
+        settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
+        settings:allowDividerAbove="true" />
+
+    <ListPreference
+        android:key="sms_preference"
+        android:title="@string/sms_preference"
+        settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController" />
+
     <Preference
         android:key="cdma_lte_data_service_key"
         android:title="@string/cdma_lte_data_service"
-        settings:controller="com.android.settings.network.telephony.DataServiceSetupPreferenceController">
-    </Preference>
+        settings:controller="com.android.settings.network.telephony.DataServiceSetupPreferenceController"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false" />
 
     <SwitchPreference
         android:key="mobile_data_enable"
         android:title="@string/mobile_data_settings_title"
         android:summary="@string/mobile_data_settings_summary"
-        settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"/>
+        settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"
+        settings:allowDividerAbove="true"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="button_roaming_key"
