@@ -41,7 +41,6 @@ public class CarrierPreferenceController extends BasePreferenceController {
 
     public CarrierPreferenceController(Context context, String key) {
         super(context, key);
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mCarrierConfigManager = new CarrierConfigManager(context);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
@@ -88,6 +87,7 @@ public class CarrierPreferenceController extends BasePreferenceController {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setComponent(cn);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
 
         final PackageManager pm = mContext.getPackageManager();
         final ResolveInfo resolveInfo = pm.resolveActivity(intent, 0 /* flags */);
