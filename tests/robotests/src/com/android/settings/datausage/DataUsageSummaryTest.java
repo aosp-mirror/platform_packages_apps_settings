@@ -31,6 +31,7 @@ import static org.mockito.Mockito.verify;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
+import android.telephony.SubscriptionManager;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -50,6 +51,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowSubscriptionManager;
 
 @Config(shadows = {
         ShadowUtils.class,
@@ -114,10 +116,11 @@ public class DataUsageSummaryTest {
     }
 
     @Test
+    @Config(shadows = ShadowSubscriptionManager.class)
     public void configuration_withSim_shouldShowMobileAndWifi() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
-        ShadowDataUsageUtils.DEFAULT_SUBSCRIPTION_ID = 1;
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(1);
         ShadowDataUsageUtils.HAS_SIM = true;
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
@@ -157,6 +160,28 @@ public class DataUsageSummaryTest {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = false;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
         ShadowDataUsageUtils.HAS_SIM = false;
+
+        final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
+        doReturn(mContext).when(dataUsageSummary).getContext();
+
+        doReturn(true).when(dataUsageSummary).removePreference(anyString());
+        doNothing().when(dataUsageSummary).addWifiSection();
+        doNothing().when(dataUsageSummary).addMobileSection(1);
+
+        dataUsageSummary.onCreate(null);
+
+        verify(dataUsageSummary).addWifiSection();
+        verify(dataUsageSummary, never()).addMobileSection(anyInt());
+    }
+
+    @Test
+    @Config(shadows = ShadowSubscriptionManager.class)
+    public void configuration_invalidDataSusbscription_shouldShowWifiSectionOnly() {
+        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        ShadowDataUsageUtils.HAS_SIM = false;
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(
+            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doReturn(mContext).when(dataUsageSummary).getContext();

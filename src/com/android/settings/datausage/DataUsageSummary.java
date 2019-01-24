@@ -87,7 +87,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
 
-        int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(context);
+        final int defaultSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             hasMobileData = false;
         }
