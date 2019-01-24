@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.permission.PermissionControllerManager;
 import android.permission.RuntimePermissionUsageInfo;
+import android.provider.DeviceConfig;
 import android.util.Log;
 import android.view.View;
 
@@ -62,7 +63,10 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return Boolean.parseBoolean(
+                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
+                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED)) ?
+                AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
