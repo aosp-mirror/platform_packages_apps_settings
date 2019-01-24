@@ -13,6 +13,8 @@
  */
 package com.android.settings.location;
 
+import static java.util.concurrent.TimeUnit.DAYS;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -74,6 +76,7 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
                     final Intent intent = new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE);
                     intent.putExtra(Intent.EXTRA_PERMISSION_NAME,
                             Manifest.permission.ACCESS_FINE_LOCATION);
+                    intent.putExtra(Intent.EXTRA_DURATION_MILLIS, DAYS.toMillis(1));
                     mContext.startActivity(intent);
                 });
     }
