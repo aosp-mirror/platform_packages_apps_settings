@@ -136,6 +136,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         Intent intent = getIntent();
         mTitle = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
         mDetails = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
+
+        final boolean requireConfirmation =
+                !intent.getBooleanExtra(KeyguardManager.EXTRA_USE_IMPLICIT, true);
+
         String alternateButton = intent.getStringExtra(
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
         boolean frp = KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
@@ -170,7 +174,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 && !lockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
             mCredentialMode = CREDENTIAL_MANAGED;
             if (isBiometricAllowed(effectiveUserId)) {
-                showBiometricPrompt();
+                showBiometricPrompt(requireConfirmation);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -181,7 +185,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             if (isBiometricAllowed(effectiveUserId)) {
                 // Don't need to check if biometrics / pin/pattern/pass are enrolled. It will go to
                 // onAuthenticationError and do the right thing automatically.
-                showBiometricPrompt();
+                showBiometricPrompt(requireConfirmation);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -242,7 +246,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 && !isBiometricDisabledByAdmin(effectiveUserId);
     }
 
-    private void showBiometricPrompt() {
+    private void showBiometricPrompt(boolean requireConfirmation) {
         mBiometricManager.setActiveUser(mUserId);
 
         mBiometricFragment = (BiometricFragment) getSupportFragmentManager()
@@ -255,6 +259,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setSubtitle(mDetails)
                     .setNegativeButtonText(getResources()
                             .getString(R.string.confirm_device_credential_use_alternate_method))
+                    .setRequireConfirmation(requireConfirmation)
                     .build();
             mBiometricFragment = BiometricFragment.newInstance(info);
             newFragment = true;
