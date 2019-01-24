@@ -21,12 +21,12 @@ import android.app.TimePickerDialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.hardware.display.NightDisplayListener;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import androidx.preference.Preference;
 
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -43,7 +43,7 @@ import java.util.List;
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class NightDisplaySettings extends DashboardFragment
-        implements ColorDisplayController.Callback {
+        implements NightDisplayListener.Callback {
 
     private static final String TAG = "NightDisplaySettings";
 
@@ -51,7 +51,7 @@ public class NightDisplaySettings extends DashboardFragment
     private static final int DIALOG_END_TIME = 1;
 
     private ColorDisplayManager mColorDisplayManager;
-    private ColorDisplayController mController;
+    private NightDisplayListener mNightDisplayListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class NightDisplaySettings extends DashboardFragment
 
         final Context context = getContext();
         mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
-        mController = new ColorDisplayController(context);
+        mNightDisplayListener = new NightDisplayListener(context);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class NightDisplaySettings extends DashboardFragment
         super.onStart();
 
         // Listen for changes only while visible.
-        mController.setListener(this);
+        mNightDisplayListener.setCallback(this);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class NightDisplaySettings extends DashboardFragment
         super.onStop();
 
         // Stop listening for state changes.
-        mController.setListener(null);
+        mNightDisplayListener.setCallback(null);
     }
 
     @Override
