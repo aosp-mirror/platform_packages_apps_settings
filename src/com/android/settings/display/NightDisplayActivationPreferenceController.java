@@ -67,8 +67,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        final LayoutPreference preference = (LayoutPreference) screen.findPreference(
-                getPreferenceKey());
+        final LayoutPreference preference = screen.findPreference(getPreferenceKey());
         mTurnOnButton = preference.findViewById(R.id.night_display_turn_on_button);
         mTurnOnButton.setOnClickListener(mListener);
         mTurnOffButton = preference.findViewById(R.id.night_display_turn_off_button);
@@ -106,14 +105,14 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
         final int autoMode = mController.getAutoMode();
 
         String buttonText;
-        if (autoMode == ColorDisplayController.AUTO_MODE_CUSTOM) {
+        if (autoMode == ColorDisplayManager.AUTO_MODE_CUSTOM_TIME) {
             buttonText = mContext.getString(isActivated
                             ? R.string.night_display_activation_off_custom
                             : R.string.night_display_activation_on_custom,
                     mTimeFormatter.getFormattedTimeString(isActivated
                             ? mController.getCustomStartTime()
                             : mController.getCustomEndTime()));
-        } else if (autoMode == ColorDisplayController.AUTO_MODE_TWILIGHT) {
+        } else if (autoMode == ColorDisplayManager.AUTO_MODE_TWILIGHT) {
             buttonText = mContext.getString(isActivated
                     ? R.string.night_display_activation_off_twilight
                     : R.string.night_display_activation_on_twilight);

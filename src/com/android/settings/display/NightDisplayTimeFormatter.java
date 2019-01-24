@@ -18,6 +18,7 @@ package com.android.settings.display;
 
 import android.content.Context;
 
+import android.hardware.display.ColorDisplayManager;
 import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 
@@ -54,7 +55,7 @@ public class NightDisplayTimeFormatter {
     private String getAutoModeSummary(Context context, ColorDisplayController controller) {
         final boolean isActivated = controller.isActivated();
         final int autoMode = controller.getAutoMode();
-        if (autoMode == ColorDisplayController.AUTO_MODE_CUSTOM) {
+        if (autoMode == ColorDisplayManager.AUTO_MODE_CUSTOM_TIME) {
             if (isActivated) {
                 return context.getString(R.string.night_display_summary_on_auto_mode_custom,
                         getFormattedTimeString(controller.getCustomEndTime()));
@@ -62,7 +63,7 @@ public class NightDisplayTimeFormatter {
                 return context.getString(R.string.night_display_summary_off_auto_mode_custom,
                         getFormattedTimeString(controller.getCustomStartTime()));
             }
-        } else if (autoMode == ColorDisplayController.AUTO_MODE_TWILIGHT) {
+        } else if (autoMode == ColorDisplayManager.AUTO_MODE_TWILIGHT) {
             return context.getString(isActivated
                     ? R.string.night_display_summary_on_auto_mode_twilight
                     : R.string.night_display_summary_off_auto_mode_twilight);

@@ -17,9 +17,9 @@ package com.android.settings.display;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings.Secure;
 
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.After;
@@ -66,8 +66,8 @@ public class NightDisplayAutoModePreferenceControllerTest {
     @Test
     public void onPreferenceChange_changesAutoMode() {
         mController.onPreferenceChange(null,
-                String.valueOf(ColorDisplayController.AUTO_MODE_TWILIGHT));
-        assertThat(Secure.getInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, -1))
-                .isEqualTo(ColorDisplayController.AUTO_MODE_TWILIGHT);
+                String.valueOf(ColorDisplayManager.AUTO_MODE_TWILIGHT));
+        assertThat(mContext.getSystemService(ColorDisplayManager.class).getNightDisplayAutoMode())
+                .isEqualTo(ColorDisplayManager.AUTO_MODE_TWILIGHT);
     }
 }

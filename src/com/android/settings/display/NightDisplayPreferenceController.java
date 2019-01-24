@@ -38,7 +38,7 @@ public class NightDisplayPreferenceController extends AbstractPreferenceControll
             return true;
         }
         final ColorDisplayController controller = new ColorDisplayController(context);
-        return controller.getAutoMode() != ColorDisplayController.AUTO_MODE_DISABLED;
+        return controller.getAutoMode() != ColorDisplayManager.AUTO_MODE_DISABLED;
     }
 
     @Override
