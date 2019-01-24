@@ -64,7 +64,6 @@ public class SettingsBaseActivity extends FragmentActivity {
 
         final TypedArray theme = getTheme().obtainStyledAttributes(android.R.styleable.Theme);
         if (!theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
-            getWindow().addFlags(LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
         super.setContentView(R.layout.settings_base_layout);
