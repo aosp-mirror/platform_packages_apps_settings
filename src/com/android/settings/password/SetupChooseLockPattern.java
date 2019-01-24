@@ -57,6 +57,8 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
     public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment
             implements ChooseLockTypeDialogFragment.OnLockTypeSelectedListener {
 
+        private static final String TAG_SKIP_SCREEN_LOCK_DIALOG = "skip_screen_lock_dialog";
+
         @Nullable
         private Button mOptionsButton;
         private boolean mLeftButtonIsSkip;
@@ -69,7 +71,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                 mOptionsButton = view.findViewById(R.id.screen_lock_options);
                 mOptionsButton.setOnClickListener((btn) ->
                         ChooseLockTypeDialogFragment.newInstance(mUserId)
-                                .show(getChildFragmentManager(), null));
+                                .show(getChildFragmentManager(), TAG_SKIP_SCREEN_LOCK_DIALOG));
             }
             // Show the skip button during SUW but not during Settings > Biometric Enrollment
             mSkipOrClearButton.setOnClickListener(this::onSkipOrClearButtonClick);
