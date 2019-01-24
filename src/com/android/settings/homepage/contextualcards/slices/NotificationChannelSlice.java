@@ -142,20 +142,6 @@ public class NotificationChannelSlice implements CustomSliceable {
         mNotificationBackend = new NotificationBackend();
     }
 
-    private static Bitmap drawableToBitmap(Drawable drawable) {
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
-        }
-
-        final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-
-        return bitmap;
-    }
-
     @Override
     public Slice getSlice() {
         final ListBuilder listBuilder =
@@ -257,7 +243,7 @@ public class NotificationChannelSlice implements CustomSliceable {
             return null;
         }
 
-        return IconCompat.createWithBitmap(drawableToBitmap(drawable));
+        return IconCompat.createWithBitmap(Utils.drawableToBitmap(drawable));
     }
 
     @VisibleForTesting
