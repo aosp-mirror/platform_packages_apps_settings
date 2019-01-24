@@ -15,6 +15,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.util.AttributeSet;
 
 import androidx.preference.SwitchPreference;
@@ -26,12 +27,14 @@ import java.time.LocalTime;
 public class NightDisplayPreference extends SwitchPreference
         implements ColorDisplayController.Callback {
 
+    private ColorDisplayManager mColorDisplayManager;
     private ColorDisplayController mController;
     private NightDisplayTimeFormatter mTimeFormatter;
 
     public NightDisplayPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
         mController = new ColorDisplayController(context);
         mTimeFormatter = new NightDisplayTimeFormatter(context);
     }
@@ -76,6 +79,6 @@ public class NightDisplayPreference extends SwitchPreference
     }
 
     private void updateSummary() {
-        setSummary(mTimeFormatter.getAutoModeTimeSummary(getContext(), mController));
+        setSummary(mTimeFormatter.getAutoModeTimeSummary(getContext(), mColorDisplayManager));
     }
 }

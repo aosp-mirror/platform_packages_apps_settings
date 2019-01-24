@@ -50,6 +50,7 @@ public class NightDisplaySettings extends DashboardFragment
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
 
+    private ColorDisplayManager mColorDisplayManager;
     private ColorDisplayController mController;
 
     @Override
@@ -57,6 +58,7 @@ public class NightDisplaySettings extends DashboardFragment
         super.onCreate(savedInstanceState);
 
         final Context context = getContext();
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
         mController = new ColorDisplayController(context);
     }
 
@@ -93,9 +95,9 @@ public class NightDisplaySettings extends DashboardFragment
         if (dialogId == DIALOG_START_TIME || dialogId == DIALOG_END_TIME) {
             final LocalTime initialTime;
             if (dialogId == DIALOG_START_TIME) {
-                initialTime = mController.getCustomStartTime();
+                initialTime = mColorDisplayManager.getNightDisplayCustomStartTime();
             } else {
-                initialTime = mController.getCustomEndTime();
+                initialTime = mColorDisplayManager.getNightDisplayCustomEndTime();
             }
 
             final Context context = getContext();
@@ -103,9 +105,9 @@ public class NightDisplaySettings extends DashboardFragment
             return new TimePickerDialog(context, (view, hourOfDay, minute) -> {
                 final LocalTime time = LocalTime.of(hourOfDay, minute);
                 if (dialogId == DIALOG_START_TIME) {
-                    mController.setCustomStartTime(time);
+                    mColorDisplayManager.setNightDisplayCustomStartTime(time);
                 } else {
-                    mController.setCustomEndTime(time);
+                    mColorDisplayManager.setNightDisplayCustomEndTime(time);
                 }
             }, initialTime.getHour(), initialTime.getMinute(), use24HourFormat);
         }

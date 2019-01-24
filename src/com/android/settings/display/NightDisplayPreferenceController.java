@@ -16,7 +16,6 @@ package com.android.settings.display;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -37,8 +36,8 @@ public class NightDisplayPreferenceController extends AbstractPreferenceControll
         if (!isEnabled) {
             return true;
         }
-        final ColorDisplayController controller = new ColorDisplayController(context);
-        return controller.getAutoMode() != ColorDisplayManager.AUTO_MODE_DISABLED;
+        final ColorDisplayManager manager = context.getSystemService(ColorDisplayManager.class);
+        return manager.getNightDisplayAutoMode() != ColorDisplayManager.AUTO_MODE_DISABLED;
     }
 
     @Override
