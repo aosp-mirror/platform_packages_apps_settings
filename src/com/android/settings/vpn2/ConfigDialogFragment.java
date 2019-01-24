@@ -200,7 +200,7 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
 
             final ConnectivityManager conn = ConnectivityManager.from(mContext);
             conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null,
-                    /* lockdownEnabled */ false, /* lockdownWhitelist */ null);
+                    /* lockdownEnabled */ false);
             VpnUtils.setLockdownVpn(mContext, profile.key);
         } else {
             // update only if lockdown vpn has been changed
