@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
 import android.content.ContentResolver;
 import android.database.ContentObserver;
@@ -27,6 +27,7 @@ import androidx.annotation.VisibleForTesting;
  * Helper class to observe Game Driver settings global change.
  */
 public class GameDriverContentObserver extends ContentObserver {
+
     interface OnGameDriverContentChangedListener {
         void onGameDriverContentChanged();
     }
@@ -47,7 +48,7 @@ public class GameDriverContentObserver extends ContentObserver {
 
     public void register(ContentResolver contentResolver) {
         contentResolver.registerContentObserver(
-                Settings.Global.getUriFor(Settings.Global.GUP_DEV_ALL_APPS), false, this);
+                Settings.Global.getUriFor(Settings.Global.GAME_DRIVER_ALL_APPS), false, this);
     }
 
     public void unregister(ContentResolver contentResolver) {
