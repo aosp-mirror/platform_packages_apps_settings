@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.ContentResolver;
 import android.provider.Settings;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +32,7 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class GameDriverContentObserverTest {
+
     @Mock
     private ContentResolver mResolver;
     @Mock
@@ -57,7 +59,7 @@ public class GameDriverContentObserverTest {
         mGameDriverContentObserver.register(mResolver);
 
         verify(mResolver).registerContentObserver(
-                Settings.Global.getUriFor(Settings.Global.GUP_DEV_ALL_APPS), false,
+                Settings.Global.getUriFor(Settings.Global.GAME_DRIVER_ALL_APPS), false,
                 mGameDriverContentObserver);
     }
 

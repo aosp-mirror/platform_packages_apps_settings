@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_DEFAULT;
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_OFF;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -41,6 +41,7 @@ import com.android.settingslib.widget.FooterPreference;
 public class GameDriverFooterPreferenceController extends BasePreferenceController
         implements GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
                    OnStart, OnStop {
+
     private final ContentResolver mContentResolver;
     @VisibleForTesting
     GameDriverContentObserver mGameDriverContentObserver;
@@ -57,8 +58,8 @@ public class GameDriverFooterPreferenceController extends BasePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         return Settings.Global.getInt(
-                       mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
-                        == GUP_OFF
+                       mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
+                        == GAME_DRIVER_OFF
                 ? AVAILABLE_UNSEARCHABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }

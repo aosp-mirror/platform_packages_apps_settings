@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_ALL_APPS;
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_DEFAULT;
-import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_OFF;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -45,6 +45,7 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class GameDriverFooterPreferenceControllerTest {
+
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -67,21 +68,23 @@ public class GameDriverFooterPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gameDriverOff_availableUnsearchable() {
-        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
     public void getAvailabilityStatus_gameDriverDefault_conditionallyUnavailable() {
-        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_gameDriverAllApps_conditionallyUnavailable() {
-        Settings.Global.putInt(mResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_ALL_APPS);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_ALL_APPS);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }

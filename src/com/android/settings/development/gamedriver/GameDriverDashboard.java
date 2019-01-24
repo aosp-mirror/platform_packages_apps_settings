@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -38,12 +38,13 @@ import java.util.List;
  * Dashboard for Game Driver preferences.
  */
 @SearchIndexable
-public class GupDashboard extends DashboardFragment {
-    private static final String TAG = "GupDashboard";
+public class GameDriverDashboard extends DashboardFragment {
+
+    private static final String TAG = "GameDriverDashboard";
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_GUP_DASHBOARD;
+        return SettingsEnums.SETTINGS_GAME_DRIVER_DASHBOARD;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class GupDashboard extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.gup_settings;
+        return R.xml.game_driver_settings;
     }
 
     @Override
@@ -67,8 +68,9 @@ public class GupDashboard extends DashboardFragment {
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SwitchBar switchBar = activity.getSwitchBar();
-        final GupGlobalSwitchBarController switchBarController =
-                new GupGlobalSwitchBarController(activity, new SwitchBarController(switchBar));
+        final GameDriverGlobalSwitchBarController switchBarController =
+                new GameDriverGlobalSwitchBarController(
+                        activity, new SwitchBarController(switchBar));
         getSettingsLifecycle().addObserver(switchBarController);
         switchBar.show();
     }
@@ -80,7 +82,7 @@ public class GupDashboard extends DashboardFragment {
                         Context context, boolean enabled) {
                     final List<SearchIndexableResource> result = new ArrayList<>();
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.gup_settings;
+                    sir.xmlResId = R.xml.game_driver_settings;
                     result.add(sir);
                     return result;
                 }
