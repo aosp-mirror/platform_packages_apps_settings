@@ -17,12 +17,13 @@ import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.os.UserHandle;
 import android.provider.Settings.Secure;
+import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.TogglePreferenceController;
 
 public class DisplayWhiteBalancePreferenceController extends TogglePreferenceController {
-    private ColorDisplayController mColorDisplayController;
+
+    private ColorDisplayManager mColorDisplayManager;
 
     public DisplayWhiteBalancePreferenceController(Context context, String key) {
         super(context, key);
@@ -33,8 +34,8 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
         // Display white balance is only valid in linear light space. COLOR_MODE_SATURATED implies
         // unmanaged color mode, and hence unknown color processing conditions.
         return ColorDisplayManager.isDisplayWhiteBalanceAvailable(mContext) &&
-                getColorDisplayController().getColorMode() !=
-                    ColorDisplayController.COLOR_MODE_SATURATED ?
+                getColorDisplayManager().getColorMode() !=
+                        ColorDisplayManager.COLOR_MODE_SATURATED ?
                 AVAILABLE : DISABLED_FOR_USER;
     }
 
@@ -51,10 +52,11 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
         return true;
     }
 
-    ColorDisplayController getColorDisplayController() {
-        if (mColorDisplayController == null) {
-            mColorDisplayController = new ColorDisplayController(mContext);
+    @VisibleForTesting
+    ColorDisplayManager getColorDisplayManager() {
+        if (mColorDisplayManager == null) {
+            mColorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
         }
-        return mColorDisplayController;
+        return mColorDisplayManager;
     }
 }

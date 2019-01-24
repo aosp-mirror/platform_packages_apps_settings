@@ -14,14 +14,20 @@
 package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
+import android.hardware.display.ColorDisplayManager;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.SearchIndexableResource;
 
+import android.provider.Settings.Secure;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -36,8 +42,7 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 @SearchIndexable
-public class ColorModePreferenceFragment extends RadioButtonPickerFragment
-        implements ColorDisplayController.Callback {
+public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
 
     @VisibleForTesting
     static final String KEY_COLOR_MODE_NATURAL = "color_mode_natural";
@@ -48,21 +53,41 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
     @VisibleForTesting
     static final String KEY_COLOR_MODE_AUTOMATIC = "color_mode_automatic";
 
-    private ColorDisplayController mController;
+    private ContentObserver mContentObserver;
+    private ColorDisplayManager mColorDisplayManager;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mController = new ColorDisplayController(context);
-        mController.setListener(this);
+
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
+
+        final ContentResolver cr = context.getContentResolver();
+        mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                super.onChange(selfChange, uri);
+                if (ColorDisplayManager.areAccessibilityTransformsEnabled(getContext())) {
+                    // Color modes are not configurable when Accessibility transforms are enabled.
+                    // Close this fragment in that case.
+                    getActivity().finish();
+                }
+            }
+        };
+        cr.registerContentObserver(
+                Secure.getUriFor(Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED),
+                false /* notifyForDescendants */, mContentObserver, mUserId);
+        cr.registerContentObserver(
+                Secure.getUriFor(Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED),
+                false /* notifyForDescendants */, mContentObserver, mUserId);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        if (mController != null) {
-            mController.setListener(null);
-            mController = null;
+        if (mContentObserver != null) {
+            getContext().getContentResolver().unregisterContentObserver(mContentObserver);
+            mContentObserver = null;
         }
     }
 
@@ -90,22 +115,22 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
         final int[] availableColorModes = c.getResources().getIntArray(
                 com.android.internal.R.array.config_availableColorModes);
 
-        List<ColorModeCandidateInfo> candidates = new ArrayList<ColorModeCandidateInfo>();
+        List<ColorModeCandidateInfo> candidates = new ArrayList<>();
         if (availableColorModes != null) {
             for (int colorMode : availableColorModes) {
-                if (colorMode == ColorDisplayController.COLOR_MODE_NATURAL) {
+                if (colorMode == ColorDisplayManager.COLOR_MODE_NATURAL) {
                     candidates.add(new ColorModeCandidateInfo(
                                 c.getText(R.string.color_mode_option_natural),
                                 KEY_COLOR_MODE_NATURAL, true /* enabled */));
-                } else if (colorMode == ColorDisplayController.COLOR_MODE_BOOSTED) {
+                } else if (colorMode == ColorDisplayManager.COLOR_MODE_BOOSTED) {
                     candidates.add(new ColorModeCandidateInfo(
                                 c.getText(R.string.color_mode_option_boosted),
                                 KEY_COLOR_MODE_BOOSTED, true /* enabled */));
-                } else if (colorMode == ColorDisplayController.COLOR_MODE_SATURATED) {
+                } else if (colorMode == ColorDisplayManager.COLOR_MODE_SATURATED) {
                     candidates.add(new ColorModeCandidateInfo(
                                 c.getText(R.string.color_mode_option_saturated),
                                 KEY_COLOR_MODE_SATURATED, true /* enabled */));
-                } else if (colorMode == ColorDisplayController.COLOR_MODE_AUTOMATIC) {
+                } else if (colorMode == ColorDisplayManager.COLOR_MODE_AUTOMATIC) {
                     candidates.add(new ColorModeCandidateInfo(
                                 c.getText(R.string.color_mode_option_automatic),
                                 KEY_COLOR_MODE_AUTOMATIC, true /* enabled */));
@@ -117,12 +142,12 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
 
     @Override
     protected String getDefaultKey() {
-        final int colorMode = mController.getColorMode();
-        if (colorMode == ColorDisplayController.COLOR_MODE_AUTOMATIC) {
+        final int colorMode = mColorDisplayManager.getColorMode();
+        if (colorMode == ColorDisplayManager.COLOR_MODE_AUTOMATIC) {
             return KEY_COLOR_MODE_AUTOMATIC;
-        } else if (colorMode == ColorDisplayController.COLOR_MODE_SATURATED) {
+        } else if (colorMode == ColorDisplayManager.COLOR_MODE_SATURATED) {
             return KEY_COLOR_MODE_SATURATED;
-        } else if (colorMode == ColorDisplayController.COLOR_MODE_BOOSTED) {
+        } else if (colorMode == ColorDisplayManager.COLOR_MODE_BOOSTED) {
             return KEY_COLOR_MODE_BOOSTED;
         }
         return KEY_COLOR_MODE_NATURAL;
@@ -132,16 +157,16 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
     protected boolean setDefaultKey(String key) {
         switch (key) {
             case KEY_COLOR_MODE_NATURAL:
-                mController.setColorMode(ColorDisplayController.COLOR_MODE_NATURAL);
+                mColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_NATURAL);
                 break;
             case KEY_COLOR_MODE_BOOSTED:
-                mController.setColorMode(ColorDisplayController.COLOR_MODE_BOOSTED);
+                mColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_BOOSTED);
                 break;
             case KEY_COLOR_MODE_SATURATED:
-                mController.setColorMode(ColorDisplayController.COLOR_MODE_SATURATED);
+                mColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_SATURATED);
                 break;
             case KEY_COLOR_MODE_AUTOMATIC:
-                mController.setColorMode(ColorDisplayController.COLOR_MODE_AUTOMATIC);
+                mColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_AUTOMATIC);
                 break;
         }
         return true;
@@ -176,15 +201,6 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment
         @Override
         public String getKey() {
             return mKey;
-        }
-    }
-
-    @Override
-    public void onAccessibilityTransformChanged(boolean state) {
-        // Color modes are no not configurable when Accessibility transforms are enabled. Close
-        // this fragment in that case.
-        if (state) {
-            getActivity().onBackPressed();
         }
     }
 
