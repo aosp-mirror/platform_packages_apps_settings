@@ -163,8 +163,7 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
         final int userId = getUserId();
         try {
             if (mPackageInfo.packageName.equals(VpnUtils.getConnectedPackage(mService, userId))) {
-                mService.setAlwaysOnVpnPackage(userId, null, /* lockdownEnabled */ false,
-                        /* lockdownWhitelist */ null);
+                mService.setAlwaysOnVpnPackage(userId, null, /* lockdownEnabled */ false);
                 mService.prepareVpn(mPackageInfo.packageName, VpnConfig.LEGACY_VPN, userId);
             }
         } catch (RemoteException e) {
