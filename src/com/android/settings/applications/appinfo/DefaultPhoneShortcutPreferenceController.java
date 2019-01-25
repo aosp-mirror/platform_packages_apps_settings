@@ -14,9 +14,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import android.app.role.RoleManager;
 import android.content.Context;
-
-import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 
 public class DefaultPhoneShortcutPreferenceController
         extends DefaultAppShortcutPreferenceControllerBase {
@@ -24,17 +23,6 @@ public class DefaultPhoneShortcutPreferenceController
     private static final String KEY = "default_phone_app";
 
     public DefaultPhoneShortcutPreferenceController(Context context, String packageName) {
-        super(context, KEY, packageName);
+        super(context, KEY, RoleManager.ROLE_DIALER, packageName);
     }
-
-    @Override
-    protected boolean hasAppCapability() {
-        return DefaultPhonePreferenceController.hasPhonePreference(mPackageName, mContext);
-    }
-
-    @Override
-    protected boolean isDefaultApp() {
-        return DefaultPhonePreferenceController.isPhoneDefault(mPackageName, mContext);
-    }
-
 }
