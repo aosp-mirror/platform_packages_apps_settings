@@ -17,6 +17,8 @@
 package com.android.settings.password;
 
 import android.app.KeyguardManager;
+import android.hardware.biometrics.BiometricConstants;
+import android.hardware.biometrics.BiometricManager;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.view.MenuItem;
@@ -45,6 +47,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     private boolean mFirstTimeVisible = true;
     private boolean mIsKeyguardLocked = false;
     private ConfirmCredentialTheme mConfirmCredentialTheme;
+    private BiometricManager mBiometricManager;
 
     private boolean isInternalActivity() {
         return (this instanceof ConfirmLockPassword.InternalActivity)
@@ -67,6 +70,8 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             mConfirmCredentialTheme = ConfirmCredentialTheme.NORMAL;
         }
         super.onCreate(savedState);
+
+        mBiometricManager = getSystemService(BiometricManager.class);
 
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
             // Prevent the content parent from consuming the window insets because GlifLayout uses
@@ -137,6 +142,17 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         if (mEnterAnimationPending) {
             startEnterAnimation();
             mEnterAnimationPending = false;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        // TODO(b/123378871): Remove when moved.
+        if (!isChangingConfigurations()) {
+            mBiometricManager.onConfirmDeviceCredentialError(
+                    BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED,
+                    getString(com.android.internal.R.string.biometric_error_user_canceled));
         }
     }
 
