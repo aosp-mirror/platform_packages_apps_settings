@@ -67,6 +67,7 @@ public class WifiQrCode {
     public static final String SECURITY_NO_PASSWORD = "nopass";
     public static final String SECURITY_WEP = "WEP";
     public static final String SECURITY_WPA = "WPA";
+    public static final String SECURITY_SAE = "WPA3";
 
     private String mQrCode;
 

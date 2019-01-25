@@ -84,9 +84,18 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.next_label);
-        item.setIcon(R.drawable.ic_scan_24dp);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
+        MenuItem menuItem;
+        if (wifiNetworkConfig.isSupportConfiguratorQrCodeScanner(getActivity())) {
+            menuItem = menu.add(0, Menu.FIRST, 0, R.string.next_label);
+            menuItem.setIcon(R.drawable.ic_scan_24dp);
+            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        } else {
+            menuItem = menu.findItem(Menu.FIRST);
+            if (menuItem != null) {
+                menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            }
+        }
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -116,11 +125,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         mQrCodeView = view.findViewById(R.id.qrcode_view);
 
         mHeaderIcon.setImageResource(R.drawable.ic_qrcode_24dp);
-        WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
-                .getWifiNetworkConfig();
-        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
-            throw new IllegalStateException("Invalid Wi-Fi network for configuring");
-        }
+        final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
         mTitle.setText(R.string.wifi_dpp_share_wifi);
         mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
                 wifiNetworkConfig.getSsid()));
@@ -138,5 +143,15 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         } catch (WriterException e) {
             Log.e(TAG, "Error generatting QR code bitmap " + e);
         }
+    }
+
+    WifiNetworkConfig getWifiNetworkConfigFromHostActivity() {
+        final WifiNetworkConfig wifiNetworkConfig = ((WifiNetworkConfig.Retriever) getActivity())
+                .getWifiNetworkConfig();
+        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
+            throw new IllegalStateException("Invalid Wi-Fi network for configuring");
+        }
+
+        return wifiNetworkConfig;
     }
 }

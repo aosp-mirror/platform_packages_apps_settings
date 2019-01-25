@@ -17,6 +17,7 @@
 package com.android.settings.wifi.dpp;
 
 import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_NO_PASSWORD;
+import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_SAE;
 import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WEP;
 import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WPA;
 
@@ -206,6 +207,19 @@ public class WifiNetworkConfig {
 
         WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         wifiManager.connect(wifiConfiguration, listener);
+    }
+
+    public boolean isSupportConfiguratorQrCodeScanner(Context context) {
+        if (!WifiDppUtils.isWifiDppEnabled(context)) {
+            return false;
+        }
+
+        // DPP 1.0 only supports SAE and PSK.
+        if (SECURITY_SAE.equals(mSecurity) || SECURITY_WPA.equals(mSecurity)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
