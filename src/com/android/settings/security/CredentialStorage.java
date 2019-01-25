@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -44,8 +44,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.security.ConfigureKeyGuardDialog;
 import com.android.settings.vpn2.VpnUtils;
 
 import java.io.ByteArrayInputStream;
@@ -61,7 +61,6 @@ public final class CredentialStorage extends FragmentActivity {
 
     private static final String TAG = "CredentialStorage";
 
-    public static final String ACTION_UNLOCK = "com.android.credentials.UNLOCK";
     public static final String ACTION_INSTALL = "com.android.credentials.INSTALL";
     public static final String ACTION_RESET = "com.android.credentials.RESET";
 

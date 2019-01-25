@@ -56,8 +56,6 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     private Context mContext;
 
-    private boolean mUnlocking = false;
-
 
     @Override
     public int getMetricsCategory() {
@@ -82,27 +80,6 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
     public void onAttach(final Context context) {
         super.onAttach(context);
         mContext = context;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // Check KeyStore here, so others do not need to deal with it.
-        if (!KeyStore.getInstance().isUnlocked()) {
-            if (!mUnlocking) {
-                // Let us unlock KeyStore. See you later!
-                Credentials.getInstance().unlock(mContext);
-            } else {
-                // We already tried, but it is still not working!
-                dismiss();
-            }
-            mUnlocking = !mUnlocking;
-            return;
-        }
-
-        // Now KeyStore is always unlocked. Reset the flag.
-        mUnlocking = false;
     }
 
     @Override
