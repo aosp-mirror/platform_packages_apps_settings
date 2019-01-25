@@ -20,9 +20,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.permission.PermissionControllerManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
@@ -43,6 +45,10 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
 
     private final RoleManager mRoleManager;
 
+    private boolean mAppQualified;
+
+    private PreferenceScreen mPreferenceScreen;
+
     public DefaultAppShortcutPreferenceControllerBase(Context context, String preferenceKey,
             String roleName, String packageName) {
         super(context, preferenceKey);
@@ -51,12 +57,40 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
         mPackageName = packageName;
 
         mRoleManager = context.getSystemService(RoleManager.class);
+
+        // TODO: STOPSHIP(b/110557011): Remove this check once we have all default apps migrated.
+        if (mRoleName != null) {
+            final PermissionControllerManager permissionControllerManager =
+                    mContext.getSystemService(PermissionControllerManager.class);
+            permissionControllerManager.isApplicationQualifiedForRole(mRoleName, mPackageName,
+                    mContext.getMainExecutor(), qualified -> {
+                        mAppQualified = qualified;
+                        refreshAvailability();
+                    });
+        }
     }
 
     // TODO: STOPSHIP(b/110557011): Remove this once we have all default apps migrated.
     public DefaultAppShortcutPreferenceControllerBase(Context context, String preferenceKey,
             String packageName) {
         this(context, preferenceKey, null /* roleName */, packageName);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        mPreferenceScreen = screen;
+    }
+
+    private void refreshAvailability() {
+        if (mPreferenceScreen != null) {
+            final Preference preference = mPreferenceScreen.findPreference(getPreferenceKey());
+            if (preference != null) {
+                preference.setVisible(isAvailable());
+                updateState(preference);
+            }
+        }
     }
 
     @Override
@@ -104,7 +138,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
     protected boolean hasAppCapability() {
         // TODO: STOPSHIP(b/110557011): Remove this check once we have all default apps migrated.
         if (mRoleName != null) {
-            return mRoleManager.isRoleAvailable(mRoleName);
+            return mAppQualified;
         }
         return false;
     }
