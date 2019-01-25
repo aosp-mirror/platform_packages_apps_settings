@@ -238,8 +238,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     UserManager.get(getActivity()),
                     getArguments(),
                     getActivity().getIntent().getExtras()).getIdentifier();
-            mController =
-                    new ChooseLockGenericController(getContext(), mUserId, mRequestedMinComplexity);
+            mController = new ChooseLockGenericController(
+                    getContext(), mUserId, mRequestedMinComplexity, mLockPatternUtils);
             if (ACTION_SET_NEW_PASSWORD.equals(chooseLockAction)
                     && UserManager.get(getActivity()).isManagedProfile(mUserId)
                     && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
