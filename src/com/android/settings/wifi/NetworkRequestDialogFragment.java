@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -74,6 +75,9 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     /** Delayed time to stop scanning wifi. */
     private static final int DELAY_TIME_STOP_SCAN_MS = 30 * 1000;
 
+    @VisibleForTesting
+    final static String EXTRA_APP_NAME = "com.android.settings.wifi.extra.APP_NAME";
+
     private List<AccessPoint> mAccessPointList;
     private FilterWifiTracker mFilterWifiTracker;
     private AccessPointAdapter mDialogAdapter;
@@ -93,7 +97,8 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         final View customTitle = inflater.inflate(R.layout.network_request_dialog_title, null);
 
         final TextView title = customTitle.findViewById(R.id.network_request_title_text);
-        title.setText(R.string.network_connection_request_dialog_title);
+        title.setText(getTitle());
+
         final ProgressBar progressBar = customTitle.findViewById(
                 R.id.network_request_title_progress);
         progressBar.setVisibility(View.VISIBLE);
@@ -113,6 +118,16 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                 .setOnItemClickListener(
                         (parent, view, position, id) -> this.onClick(dialog, position));
         return dialog;
+    }
+
+    private String getTitle() {
+        final Intent intent = getActivity().getIntent();
+        String appName = "";
+        if (intent != null) {
+            appName = intent.getStringExtra(EXTRA_APP_NAME);
+        }
+
+        return getString(R.string.network_connection_request_dialog_title, appName);
     }
 
     @NonNull
