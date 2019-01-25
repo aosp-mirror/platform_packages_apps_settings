@@ -139,7 +139,7 @@ public class WifiDppUtils {
             case AccessPoint.SECURITY_WEP:
                 return WifiQrCode.SECURITY_WEP;
             case AccessPoint.SECURITY_PSK:
-                return WifiQrCode.SECURITY_WPA;
+                return WifiQrCode.SECURITY_WPA_PSK;
             case AccessPoint.SECURITY_SAE:
                 return WifiQrCode.SECURITY_SAE;
             default:

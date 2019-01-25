@@ -63,7 +63,11 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mButtonLeft.setText(R.string.wifi_dpp_add_another_device);
             mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
             mButtonRight.setText(R.string.done);
-            mButtonRight.setOnClickListener(v -> getActivity().finish());
+            mButtonRight.setOnClickListener(v -> {
+                final Activity activity = getActivity();
+                activity.setResult(Activity.RESULT_OK);
+                activity.finish();
+            });
         }
 
         @Override
@@ -138,10 +142,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonLeft.setText(R.string.cancel);
-        mButtonLeft.setOnClickListener(v -> {
-            getActivity().setResult(Activity.RESULT_CANCELED);
-            getActivity().finish();
-        });
+        mButtonLeft.setOnClickListener(v -> getActivity().finish());
 
         mButtonRight = view.findViewById(R.id.button_right);
         mButtonRight.setText(R.string.wifi_dpp_share_wifi);
