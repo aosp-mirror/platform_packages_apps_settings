@@ -53,7 +53,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                .initSearchToolbar(this, toolbar);
+                .initSearchToolbar(this /* activity */, toolbar);
 
         final ImageView avatarView = findViewById(R.id.account_avatar);
         final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(this, avatarView);

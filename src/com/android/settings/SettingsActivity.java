@@ -32,7 +32,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
-import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,8 +101,6 @@ public class SettingsActivity extends SettingsBaseActivity
      * Fragment "key" argument passed thru {@link #EXTRA_SHOW_FRAGMENT_ARGUMENTS}
      */
     public static final String EXTRA_FRAGMENT_ARG_KEY = ":settings:fragment_args_key";
-
-    public static final String BACK_STACK_PREFS = ":settings:prefs";
 
     // extras that allow any preference activity to be launched as part of a wizard
 
@@ -374,14 +371,13 @@ public class SettingsActivity extends SettingsBaseActivity
             setTitleFromIntent(intent);
 
             Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-            switchToFragment(initialFragmentName, initialArguments, true, false,
-                    mInitialTitleResId, mInitialTitle, false);
+            switchToFragment(initialFragmentName, initialArguments, true,
+                    mInitialTitleResId, mInitialTitle);
         } else {
             // Show search icon as up affordance if we are displaying the main Dashboard
             mInitialTitleResId = R.string.dashboard_title;
-            switchToFragment(TopLevelSettings.class.getName(), null /* args */, false, false,
-                    mInitialTitleResId, mInitialTitle, false);
-
+            switchToFragment(TopLevelSettings.class.getName(), null /* args */, false,
+                    mInitialTitleResId, mInitialTitle);
         }
     }
 
@@ -567,7 +563,7 @@ public class SettingsActivity extends SettingsBaseActivity
      * Switch to a specific Fragment with taking care of validation, Title and BackStack
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
-            boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
+            int titleResId, CharSequence title) {
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
@@ -576,12 +572,6 @@ public class SettingsActivity extends SettingsBaseActivity
         Fragment f = Fragment.instantiate(this, fragmentName, args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
-        if (withTransition) {
-            TransitionManager.beginDelayedTransition(mContent);
-        }
-        if (addToBackStack) {
-            transaction.addToBackStack(SettingsActivity.BACK_STACK_PREFS);
-        }
         if (titleResId > 0) {
             transaction.setBreadCrumbTitle(titleResId);
         } else if (title != null) {
