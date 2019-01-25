@@ -38,7 +38,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.ScrollToParentEditText;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
@@ -142,7 +142,7 @@ public class SetupChooseLockPasswordTest {
 
         final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
         assertThat(skipOrClearButton).isNotNull();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
 
@@ -165,7 +165,7 @@ public class SetupChooseLockPasswordTest {
 
         final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
         assertThat(skipOrClearButton.isEnabled()).isTrue();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.GONE);
 

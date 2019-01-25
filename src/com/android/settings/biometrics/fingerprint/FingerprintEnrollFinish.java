@@ -26,8 +26,8 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 
 /**
  * Activity which concludes fingerprint enrollment.
@@ -42,8 +42,8 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         setContentView(R.layout.fingerprint_enroll_finish);
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
 
-        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
-        mButtonFooterMixin.setSecondaryButton(
+        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.fingerprint_enroll_button_add)
                         .setButtonType(FooterButton.ButtonType.SKIP)
@@ -51,7 +51,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                         .build()
         );
 
-        mButtonFooterMixin.setPrimaryButton(
+        mFooterBarMixin.setPrimaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.security_settings_fingerprint_enroll_done)
                         .setListener(this::onNextButtonClick)
@@ -65,7 +65,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     protected void onResume() {
         super.onResume();
 
-        FooterButton addButton = mButtonFooterMixin.getSecondaryButton();
+        FooterButton addButton = mFooterBarMixin.getSecondaryButton();
 
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
         boolean hideAddAnother = false;

@@ -66,9 +66,9 @@ import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.TemplateLayout;
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.item.FooterButton.ButtonType;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.template.FooterButton.ButtonType;
 
 import java.util.List;
 
@@ -417,8 +417,8 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         }
 
         final TemplateLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
-        final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
-        buttonFooterMixin.setPrimaryButton(
+        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+        mixin.setPrimaryButton(
                 new FooterButton.Builder(getActivity())
                         .setText(R.string.master_clear_button_text)
                         .setListener(mInitiateListener)
@@ -426,7 +426,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
-        mInitiateButton = buttonFooterMixin.getPrimaryButton();
+        mInitiateButton = mixin.getPrimaryButton();
     }
 
     private void getContentDescription(View v, StringBuffer description) {

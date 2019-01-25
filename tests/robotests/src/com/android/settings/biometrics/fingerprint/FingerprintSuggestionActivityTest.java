@@ -32,7 +32,7 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,7 +68,7 @@ public class FingerprintSuggestionActivityTest {
         PartnerCustomizationLayout layout =
                 mController.get().findViewById(R.id.setup_wizard_layout);
         final Button cancelButton =
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
         assertThat(cancelButton.getText().toString()).isEqualTo("Cancel");
         assertThat(cancelButton.getVisibility()).named("Cancel visible").isEqualTo(View.VISIBLE);
         cancelButton.performClick();

@@ -23,8 +23,8 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 
 /**
  * Activity which concludes face enrollment.
@@ -37,8 +37,8 @@ public class FaceEnrollFinish extends BiometricEnrollBase {
         setContentView(R.layout.face_enroll_finish);
         setHeaderText(R.string.security_settings_face_enroll_finish_title);
 
-        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
-        mButtonFooterMixin.setPrimaryButton(
+        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setPrimaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.security_settings_face_enroll_done)
                         .setListener(this::onNextButtonClick)

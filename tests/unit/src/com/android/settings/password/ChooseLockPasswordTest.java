@@ -43,7 +43,7 @@ import androidx.test.runner.AndroidJUnit4;
 import com.android.settings.R;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +67,7 @@ public class ChooseLockPasswordTest {
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
         assertThat(
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().getVisibility())
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().getVisibility())
                         .isEqualTo(View.GONE);
     }
 
@@ -79,7 +79,7 @@ public class ChooseLockPasswordTest {
         onView(withId(R.id.password_entry)).perform(ViewActions.typeText("1234"))
                 .perform(pressKey(KeyEvent.KEYCODE_ENTER));
         assertThat(
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().getVisibility())
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().getVisibility())
                         .isEqualTo(View.GONE);
     }
 
@@ -92,10 +92,10 @@ public class ChooseLockPasswordTest {
                 .perform(pressKey(KeyEvent.KEYCODE_ENTER))
                 .perform(ViewActions.typeText("1"));
         // clear should be present if text field contains content
-        assertThat(layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().getText())
+        assertThat(layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().getText())
                 .isEqualTo(mContext.getString(R.string.lockpassword_clear_label));
         assertThat(
-                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().getVisibility())
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().getVisibility())
                         .isEqualTo(View.VISIBLE);
     }
 }
