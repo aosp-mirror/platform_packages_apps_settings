@@ -48,7 +48,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     private static final String TAG = "WifiNetworkListFragment";
 
     private static final String WIFI_CONFIG_KEY = "wifi_config_key";
-    private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
 
     static final int ADD_NETWORK_REQUEST = 1;
@@ -277,7 +276,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
 
-        boolean hasAvailableAccessPoints = false;
         mAccessPointsPreferenceCategory.setVisible(true);
 
         cacheRemoveAllPrefs(mAccessPointsPreferenceCategory);
@@ -299,7 +297,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                     return;
                 }
 
-                hasAvailableAccessPoints = true;
                 final AccessPointPreference pref = (AccessPointPreference) getCachedPreference(key);
                 if (pref != null) {
                     pref.setOrder(index);
@@ -317,15 +314,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         removeCachedPrefs(mAccessPointsPreferenceCategory);
         mAddPreference.setOrder(index);
         mAccessPointsPreferenceCategory.addPreference(mAddPreference);
-
-        if (!hasAvailableAccessPoints) {
-            final Preference pref = new Preference(getPrefContext());
-            pref.setSelectable(false);
-            pref.setSummary(R.string.wifi_empty_list_wifi_on);
-            pref.setOrder(index++);
-            pref.setKey(PREF_KEY_EMPTY_WIFI_LIST);
-            mAccessPointsPreferenceCategory.addPreference(pref);
-        }
     }
 
     private AccessPointPreference createAccessPointPreference(AccessPoint accessPoint) {
