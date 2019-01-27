@@ -47,8 +47,8 @@ import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -137,8 +137,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
         mVibrator = getSystemService(Vibrator.class);
 
-        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
-        mButtonFooterMixin.setSecondaryButton(
+        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
                         .setListener(this::onSkipButtonClick)

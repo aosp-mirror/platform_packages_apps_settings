@@ -33,7 +33,7 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
@@ -75,7 +75,7 @@ public class SetupFingerprintEnrollFindSensorTest {
                         intent).setup().get();
 
         PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
-        layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().performClick();
+        layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
 
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();

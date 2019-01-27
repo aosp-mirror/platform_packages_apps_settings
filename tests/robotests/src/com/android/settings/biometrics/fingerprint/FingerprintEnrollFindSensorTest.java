@@ -38,7 +38,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
@@ -137,7 +137,7 @@ public class FingerprintEnrollFindSensorTest {
     @Test
     public void clickSkip_shouldReturnResultSkip() {
         PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
-        layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().performClick();
+        layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         assertThat(shadowActivity.getResultCode()).named("result code")

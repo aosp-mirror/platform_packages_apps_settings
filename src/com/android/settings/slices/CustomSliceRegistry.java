@@ -155,6 +155,15 @@ public class CustomSliceRegistry {
             .appendPath("low_storage")
             .build();
     /**
+     * Backing Uri for NFC Slice
+     */
+    public static final Uri NFC_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("toggle_nfc")
+            .build();
+    /**
      * Backing Uri for Notification channel Slice.
      */
     public static final Uri NOTIFICATION_CHANNEL_SLICE_URI = new Uri.Builder()

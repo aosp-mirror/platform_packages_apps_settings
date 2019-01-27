@@ -34,7 +34,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/homepage_card_dismissal_margin_bottom"
         android:gravity="bottom|end">
 
         <Button
@@ -49,8 +48,8 @@
             style="@style/ContextualCardDismissalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/homepage_card_dismissal_button_side_margin"
-            android:layout_marginEnd="@dimen/homepage_card_dismissal_button_side_margin"
+            android:layout_marginStart="@dimen/homepage_card_dismissal_button_margin_start"
+            android:layout_marginEnd="@dimen/homepage_card_dismissal_button_margin_end"
             android:text="@string/contextual_card_dismiss_keep"/>
 
     </LinearLayout>

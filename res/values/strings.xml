@@ -1430,6 +1430,16 @@
     <!-- Title shown on security settings to allow the user to change their lockscreen password [CHAR LIMIT=22]-->
     <string name="unlock_change_lock_password_title">Change unlock password</string>
 
+    <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock and that it requests for a strong PIN or password  [CHAR LIMIT=NONE] -->
+    <string name="unlock_footer_high_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> requests a strong PIN or password.</string>
+    <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock and that it requests for a medium strength PIN or password [CHAR LIMIT=NONE] -->
+    <string name="unlock_footer_medium_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> requests a new PIN or password.</string>
+    <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock and it requests for any screen lock [CHAR LIMIT=NONE] -->
+    <string name="unlock_footer_low_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> requests a new pattern, PIN or password.</string>
+    <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock [CHAR LIMIT=NONE] -->
+    <string name="unlock_footer_none_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> requests a new screen lock.</string>
+
+
     <!-- Message shown on the lock screen when the user incorrectly enters their lock and it counts towards the max attempts before their data on the device is wiped. [CHAR LIMIT=NONE] -->
     <string name="lock_failed_attempts_before_wipe">Try again. Attempt <xliff:g id="current_attempts">%1$d</xliff:g> of <xliff:g id="total_attempts">%2$d</xliff:g>.</string>
 
@@ -2902,6 +2912,8 @@
     <string name="kernel_version">Kernel version</string>
     <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="build_number">Build number</string>
+    <!-- About phone screen,  mainline module versions  [CHAR LIMIT=40] -->
+    <string name="module_version">Mainline module versions</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
     <string name="device_info_not_available">Not available</string>
@@ -4444,6 +4456,10 @@
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts helper</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
     <string name="keyboard_shortcuts_helper_summary">Display available shortcuts</string>
+    <!-- Title for the 'Work profile' preference category inside Languages and inputs'. [CHAR LIMIT=45] -->
+    <string name="language_and_input_for_work_category_title">Work profile</string>
+    <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
+    <string name="virtual_keyboards_for_work_title">Virtual keyboard for work</string>
 
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
@@ -4475,6 +4491,8 @@
     <!-- User dictionary settings --><skip />
     <!-- User dictionary settings. The title of the list item to go into the Personal dictionary settings screen. [CHAR LIMIT=35] -->
     <string name="user_dict_settings_title">Personal dictionary</string>
+    <!-- Title for the 'Spell checker for work' preference. [CHAR LIMIT=45] -->
+    <string name="user_dict_settings_for_work_title">Personal dictionary for work</string>
     <!-- User dictionary settings.  The summary of the list item to go into the Personal dictionary settings screen. -->
     <string name="user_dict_settings_summary">""</string>
     <!-- User dictionary settings. The title of the menu item to add a new word to the user dictionary. -->
@@ -5731,10 +5749,6 @@
     <string name="credentials_erased">Credential storage is erased.</string>
     <!-- Toast message [CHAR LIMIT=30] when credential storage containing private keys and certificates could not be erased (opposite of string credentials_erased) -->
     <string name="credentials_not_erased">Credential storage couldn\u2019t be erased.</string>
-    <!-- This string is in a dialog, and the dialog shows up on a device that's managed by a user's company. It lets the user know that they need to have a secure lock screen (PIN, password, or pattern) before they can use credential storage [CHAR LIMIT=NONE] -->
-    <string name="credentials_configure_lock_screen_hint">Before you can use credential storage, your device need to have a secure lock screen</string>
-    <!-- This string is for the content of the button that leads user to lock screen settings  [CHAR LIMIT=20] -->
-    <string name="credentials_configure_lock_screen_button">SET LOCK</string>
     <!-- Title of Usage Access preference item [CHAR LIMIT=30] -->
     <string name="usage_access_title">Apps with usage access</string>
 
@@ -6368,6 +6382,8 @@
 
     <!--  Title for spell checker settings -->
     <string name="spellcheckers_settings_title">Spell checker</string>
+    <!--  Title for spell checker settings for work [CHAR LIMIT=45]-->
+    <string name="spellcheckers_settings_for_work_title">Spell checker for work</string>
 
     <!-- Prompt for the user to enter their current full-backup password -->
     <string name="current_backup_pw_prompt">Type your current full backup password here</string>
@@ -10363,6 +10379,17 @@
     <string name="mobile_data_settings_title">Mobile data</string>
     <!-- Mobile network settings screen, title of Mobile data switch preference [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_summary">Access data using mobile network</string>
+    <!-- Mobile network settings screen, title of item showing the name of the default subscription
+     that will be used for calls. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
+    <string name="calls_preference">Calls preference</string>
+    <!-- Mobile network settings screen, title of item showing the name of the default subscription
+     that will be used for SMS messages. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
+    <string name="sms_preference">SMS preference</string>
+    <!-- Mobile network settings screen, a label in a chooser dialog that appears when choosing the
+    default subscription to use for either calls or SMS when in multi-SIM mode. This label means
+    that the user will be asked which mobile network subscription to use every time they place a
+    call or send an SMS, instead of defaulting to one particular subscription. [CHAR LIMIT=40]-->
+    <string name="calls_and_sms_ask_every_time">Ask every time</string>
 
     <!-- Summary of the 'Mobile network' item on the Network & internet page when there is no mobile
          service setup yet (eg no SIM card inserted and no eSIM configured). Tapping it leads to a
@@ -10450,8 +10477,8 @@
     <!-- See less items in contextual homepage [CHAR LIMIT=30]-->
     <string name="see_less">See less</string>
 
-    <!-- Title for Network connection request Dialog [CHAR LIMIT=30] -->
-    <string name="network_connection_request_dialog_title">Choose a device</string>
+    <!-- Title for Network connection request Dialog [CHAR LIMIT=60] -->
+    <string name="network_connection_request_dialog_title">Device to use with <xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g></string>
     <!-- Message for Network connection timeout Dialog [CHAR LIMIT=NONE] -->
     <string name="network_connection_timeout_dialog_message">No devices found. Make sure devices are turned on and available to connect.</string>
     <!-- OK button for Network connection timeout Dialog [CHAR LIMIT=30] -->

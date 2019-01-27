@@ -18,6 +18,7 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,6 +29,7 @@ import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
+import android.permission.PermissionControllerManager;
 
 import androidx.preference.Preference;
 
@@ -38,6 +40,7 @@ import com.android.settings.applications.DefaultAppSettings;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -48,6 +51,8 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowUserManager;
 
 import java.util.Collections;
+import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
@@ -60,6 +65,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     @Mock
     private RoleManager mRoleManager;
     @Mock
+    private PermissionControllerManager mPermissionControllerManager;
+    @Mock
     private Preference mPreference;
 
     private Activity mActivity;
@@ -71,12 +78,21 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication.getInstance().setSystemService(Context.ROLE_SERVICE, mRoleManager);
+        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.setSystemService(Context.ROLE_SERVICE, mRoleManager);
+        shadowApplication.setSystemService(Context.PERMISSION_CONTROLLER_SERVICE,
+                mPermissionControllerManager);
         mActivity = Robolectric.setupActivity(Activity.class);
         mShadowUserManager = shadowOf(mActivity.getSystemService(UserManager.class));
         mController = new TestRolePreferenceController(mActivity);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
         mLegacyController = new TestLegacyPreferenceController(mActivity);
+    }
+
+    @Test
+    public void constructor_callsIsApplicationQualifiedForRole() {
+        verify(mPermissionControllerManager).isApplicationQualifiedForRole(eq(TEST_ROLE_NAME), eq(
+                TEST_PACKAGE_NAME), any(Executor.class), any(Consumer.class));
     }
 
     @Test
@@ -88,21 +104,36 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
     }
 
     @Test
-    public void getAvailabilityStatus_roleIsAvailable_shouldReturnAvailable() {
-        mShadowUserManager.setManagedProfile(false);
-        when(mRoleManager.isRoleAvailable(eq(TEST_ROLE_NAME))).thenReturn(true);
-
+    public void
+    getAvailabilityStatus_noCallbackForIsApplicationNotQualifiedForRole_shouldReturnUnsupported() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                DefaultAppShortcutPreferenceControllerBase.AVAILABLE);
+                DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void getAvailabilityStatus_roleNotAvailable_shouldReturnDisabled() {
-        mShadowUserManager.setManagedProfile(false);
-        when(mRoleManager.isRoleAvailable(eq(TEST_ROLE_NAME))).thenReturn(false);
+    public void getAvailabilityStatus_applicationIsNotQualifiedForRole_shouldReturnUnsupported() {
+        final ArgumentCaptor<Consumer<Boolean>> callbackCaptor = ArgumentCaptor.forClass(
+                Consumer.class);
+        verify(mPermissionControllerManager).isApplicationQualifiedForRole(eq(TEST_ROLE_NAME), eq(
+                TEST_PACKAGE_NAME), any(Executor.class), callbackCaptor.capture());
+        final Consumer<Boolean> callback = callbackCaptor.getValue();
+        callback.accept(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_applicationIsQualifiedForRole_shouldReturnAvailable() {
+        final ArgumentCaptor<Consumer<Boolean>> callbackCaptor = ArgumentCaptor.forClass(
+                Consumer.class);
+        verify(mPermissionControllerManager).isApplicationQualifiedForRole(eq(TEST_ROLE_NAME), eq(
+                TEST_PACKAGE_NAME), any(Executor.class), callbackCaptor.capture());
+        final Consumer<Boolean> callback = callbackCaptor.getValue();
+        callback.accept(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                DefaultAppShortcutPreferenceControllerBase.AVAILABLE);
     }
 
     @Test

@@ -36,6 +36,7 @@ import com.android.settingslib.location.RecentLocationAccesses;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -77,6 +78,7 @@ public class RecentLocationAccessPreferenceControllerTest {
 
     /** Verifies the title text, details text are correct, and the click listener is set. */
     @Test
+    @Ignore
     public void updateState_whenAppListIsEmpty_shouldDisplayTitleTextAndDetailsText() {
         doReturn(new ArrayList<>()).when(mRecentLocationApps).getAppListSorted();
         mController.displayPreference(mScreen);

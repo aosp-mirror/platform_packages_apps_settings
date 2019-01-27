@@ -76,6 +76,7 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
                 .setEmptyText(R.string.permission_bar_chart_empty_text)
                 .setDetailsOnClickListener((View v) -> {
                     final Intent intent = new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE);
+                    intent.putExtra(Intent.EXTRA_DURATION_MILLIS, DAYS.toMillis(1));
                     mContext.startActivity(intent);
                 })
                 .build();
@@ -102,7 +103,7 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
     private void retrievePermissionUsageData() {
         mContext.getSystemService(PermissionControllerManager.class).getPermissionUsages(
-                false /* countSystem */, (int) DAYS.toSeconds(1),
+                false /* countSystem */, (int) DAYS.toMillis(1),
                 mContext.getMainExecutor() /* executor */, this /* callback */);
     }
 
@@ -110,6 +111,9 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         if (usageInfos.isEmpty()) {
             return null;
         }
+
+        // STOPSHIP: Ignore the STORAGE group since it's going away.
+        usageInfos.removeIf(usage -> usage.getName().equals("android.permission-group.STORAGE"));
 
         final BarViewInfo[] barViewInfos = new BarViewInfo[
                 Math.min(BarChartPreference.MAXIMUM_BAR_VIEWS, usageInfos.size())];

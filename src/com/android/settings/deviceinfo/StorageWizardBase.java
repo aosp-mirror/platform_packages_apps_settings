@@ -44,8 +44,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 import java.text.NumberFormat;
@@ -63,7 +63,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
     protected VolumeInfo mVolume;
     protected DiskInfo mDisk;
 
-    private ButtonFooterMixin mButtonFooterMixin;
+    private FooterBarMixin mFooterBarMixin;
     private FooterButton mBack;
     private FooterButton mNext;
 
@@ -94,8 +94,8 @@ public abstract class StorageWizardBase extends FragmentActivity {
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
 
-        mButtonFooterMixin = getGlifLayout().getMixin(ButtonFooterMixin.class);
-        mButtonFooterMixin.setSecondaryButton(
+        mFooterBarMixin = getGlifLayout().getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.wizard_back)
                         .setListener(this::onNavigateBack)
@@ -103,7 +103,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
                         .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
         );
-        mButtonFooterMixin.setPrimaryButton(
+        mFooterBarMixin.setPrimaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.wizard_next)
                         .setListener(this::onNavigateNext)
@@ -111,8 +111,8 @@ public abstract class StorageWizardBase extends FragmentActivity {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
-        mBack = mButtonFooterMixin.getSecondaryButton();
-        mNext = mButtonFooterMixin.getPrimaryButton();
+        mBack = mFooterBarMixin.getSecondaryButton();
+        mNext = mFooterBarMixin.getPrimaryButton();
 
         setIcon(com.android.internal.R.drawable.ic_sd_card_48dp);
     }

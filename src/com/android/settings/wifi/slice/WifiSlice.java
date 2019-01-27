@@ -292,11 +292,12 @@ public class WifiSlice implements CustomSliceable {
 
         @Override
         public void onWifiStateChanged(int state) {
-            mContext.getContentResolver().notifyChange(getUri(), null);
+            notifySliceChange();
         }
 
         @Override
         public void onConnectedChanged() {
+            notifySliceChange();
         }
 
         @Override

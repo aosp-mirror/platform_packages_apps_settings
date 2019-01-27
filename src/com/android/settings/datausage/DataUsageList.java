@@ -135,8 +135,8 @@ public class DataUsageList extends DataUsageBaseFragment {
         mUidDetailProvider = new UidDetailProvider(activity);
         mTelephonyManager = activity.getSystemService(TelephonyManager.class);
         mUsageAmount = findPreference(KEY_USAGE_AMOUNT);
-        mChart = (ChartDataUsagePreference) findPreference(KEY_CHART_DATA);
-        mApps = (PreferenceGroup) findPreference(KEY_APPS_GROUP);
+        mChart = findPreference(KEY_CHART_DATA);
+        mApps = findPreference(KEY_APPS_GROUP);
         processArgument();
     }
 
@@ -306,7 +306,7 @@ public class DataUsageList extends DataUsageBaseFragment {
         getLoaderManager().restartLoader(LOADER_SUMMARY, null /* args */,
                 mNetworkStatsDetailCallbacks);
 
-        final long totalBytes = mCycleData != null
+        final long totalBytes = mCycleData != null && !mCycleData.isEmpty()
             ? mCycleData.get(mCycleSpinner.getSelectedItemPosition()).getTotalUsage() : 0;
         final CharSequence totalPhrase = DataUsageUtils.formatDataUsage(getActivity(), totalBytes);
         mUsageAmount.setTitle(getString(R.string.data_used_template, totalPhrase));

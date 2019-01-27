@@ -29,6 +29,7 @@ import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.biometrics.BiometricManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserManager;
@@ -84,6 +85,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     protected final Handler mHandler = new Handler();
     protected boolean mFrp;
     private CharSequence mFrpAlternateButtonText;
+    protected BiometricManager mBiometricManager;
 
     private boolean isInternalActivity() {
         return (getActivity() instanceof ConfirmLockPassword.InternalActivity)
@@ -107,6 +109,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mLockPatternUtils = new LockPatternUtils(getActivity());
         mDevicePolicyManager = (DevicePolicyManager) getActivity().getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
+        mBiometricManager = getActivity().getSystemService(BiometricManager.class);
     }
 
     @Override

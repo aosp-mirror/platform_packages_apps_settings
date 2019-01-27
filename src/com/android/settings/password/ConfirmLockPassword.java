@@ -437,6 +437,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     ConfirmDeviceCredentialUtils.reportSuccessfulAttempt(mLockPatternUtils,
                             mUserManager, mEffectiveUserId);
                 }
+                mBiometricManager.onConfirmDeviceCredentialSuccess();
                 startDisappearAnimation(intent);
                 ConfirmDeviceCredentialUtils.checkForPendingIntent(getActivity());
             } else {

@@ -30,6 +30,7 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 
 import java.util.concurrent.Executor;
@@ -38,11 +39,6 @@ import java.util.concurrent.Executor;
  * A fragment that wraps the BiometricPrompt and manages its lifecycle.
  */
 public class BiometricFragment extends InstrumentedFragment {
-
-    private static final String KEY_TITLE = "title";
-    private static final String KEY_SUBTITLE = "subtitle";
-    private static final String KEY_DESCRIPTION = "description";
-    private static final String KEY_NEGATIVE_TEXT = "negative_text";
 
     // Re-set by the application. Should be done upon orientation changes, etc
     private Executor mClientExecutor;
@@ -53,7 +49,7 @@ public class BiometricFragment extends InstrumentedFragment {
 
     // Created/Initialized once and retained
     private final Handler mHandler = new Handler(Looper.getMainLooper());
-    private PromptInfo mPromptInfo;
+    private Bundle mBundle;
     private BiometricPrompt mBiometricPrompt;
     private CancellationSignal mCancellationSignal;
 
@@ -82,13 +78,17 @@ public class BiometricFragment extends InstrumentedFragment {
         public void onClick(DialogInterface dialog, int which) {
             mAuthenticationCallback.onAuthenticationError(
                     BiometricConstants.BIOMETRIC_ERROR_NEGATIVE_BUTTON,
-                    mPromptInfo.getNegativeButtonText());
+                    mBundle.getString(BiometricPrompt.KEY_NEGATIVE_TEXT));
         }
     };
 
-    public static BiometricFragment newInstance(PromptInfo info) {
+    /**
+     * @param bundle Bundle passed from {@link BiometricPrompt.Builder#buildIntent()}
+     * @return
+     */
+    public static BiometricFragment newInstance(Bundle bundle) {
         BiometricFragment biometricFragment = new BiometricFragment();
-        biometricFragment.setArguments(info.getBundle());
+        biometricFragment.setArguments(bundle);
         return biometricFragment;
     }
 
@@ -119,14 +119,16 @@ public class BiometricFragment extends InstrumentedFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        mPromptInfo = new PromptInfo(getArguments());
+        mBundle = getArguments();
         mBiometricPrompt = new BiometricPrompt.Builder(getContext())
-            .setTitle(mPromptInfo.getTitle())
+            .setTitle(mBundle.getString(BiometricPrompt.KEY_TITLE))
             .setUseDefaultTitle() // use default title if title is null/empty
-            .setSubtitle(mPromptInfo.getSubtitle())
-            .setDescription(mPromptInfo.getDescription())
-            .setNegativeButton(mPromptInfo.getNegativeButtonText(), mClientExecutor,
-                    mNegativeButtonListener)
+            .setSubtitle(mBundle.getString(BiometricPrompt.KEY_SUBTITLE))
+            .setDescription(mBundle.getString(BiometricPrompt.KEY_DESCRIPTION))
+            .setRequireConfirmation(mBundle.getBoolean(BiometricPrompt.KEY_REQUIRE_CONFIRMATION))
+            .setNegativeButton(getResources().getString(
+                    R.string.confirm_device_credential_use_alternate_method),
+                    mClientExecutor, mNegativeButtonListener)
             .build();
         mCancellationSignal = new CancellationSignal();
 
@@ -138,66 +140,6 @@ public class BiometricFragment extends InstrumentedFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.BIOMETRIC_FRAGMENT;
-    }
-
-    /**
-     * A simple wrapper for BiometricPrompt.PromptInfo. Since we want to manage the lifecycle
-     * of BiometricPrompt correctly, the information needs to be stored in here.
-     */
-    static class PromptInfo {
-        private final Bundle mBundle;
-
-        private PromptInfo(Bundle bundle) {
-            mBundle = bundle;
-        }
-
-        Bundle getBundle() {
-            return mBundle;
-        }
-
-        public CharSequence getTitle() {
-            return mBundle.getCharSequence(KEY_TITLE);
-        }
-
-        public CharSequence getSubtitle() {
-            return mBundle.getCharSequence(KEY_SUBTITLE);
-        }
-
-        public CharSequence getDescription() {
-            return mBundle.getCharSequence(KEY_DESCRIPTION);
-        }
-
-        public CharSequence getNegativeButtonText() {
-            return mBundle.getCharSequence(KEY_NEGATIVE_TEXT);
-        }
-
-        public static class Builder {
-            private final Bundle mBundle = new Bundle();
-
-            public Builder setTitle(@NonNull CharSequence title) {
-                mBundle.putCharSequence(KEY_TITLE, title);
-                return this;
-            }
-
-            public Builder setSubtitle(@Nullable CharSequence subtitle) {
-                mBundle.putCharSequence(KEY_SUBTITLE, subtitle);
-                return this;
-            }
-
-            public Builder setDescription(@Nullable CharSequence description) {
-                mBundle.putCharSequence(KEY_DESCRIPTION, description);
-                return this;
-            }
-
-            public Builder setNegativeButtonText(@NonNull CharSequence text) {
-                mBundle.putCharSequence(KEY_NEGATIVE_TEXT, text);
-                return this;
-            }
-
-            public PromptInfo build() {
-                return new PromptInfo(mBundle);
-            }
-        }
     }
 }
 

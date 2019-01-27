@@ -32,8 +32,8 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 /**
@@ -78,7 +78,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
     protected int mUserId;
-    protected ButtonFooterMixin mButtonFooterMixin;
+    protected FooterBarMixin mFooterBarMixin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,8 +137,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     }
 
     protected FooterButton getNextButton() {
-        if (mButtonFooterMixin != null) {
-            return mButtonFooterMixin.getPrimaryButton();
+        if (mFooterBarMixin != null) {
+            return mFooterBarMixin.getPrimaryButton();
         }
         return null;
     }

@@ -23,6 +23,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
@@ -87,6 +88,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private TrustManager mTrustManager;
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private Handler mHandler = new Handler(Looper.getMainLooper());
+    private boolean mIsFallback; // BiometricPrompt fallback
+    private boolean mCCLaunched;
 
     private String mTitle;
     private String mDetails;
@@ -102,6 +105,13 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
             if (!mGoingToBackground) {
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED) {
+                    if (mIsFallback) {
+                        mBiometricManager.onConfirmDeviceCredentialError(
+                                BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED,
+                                getString(
+                                        com.android.internal.R.string
+                                                .biometric_error_user_canceled));
+                    }
                     finish();
                 } else {
                     // All other errors go to some version of CC
@@ -117,6 +127,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     mUserId);
             ConfirmDeviceCredentialUtils.checkForPendingIntent(
                     ConfirmDeviceCredentialActivity.this);
+
+            if (mIsFallback) {
+                mBiometricManager.onConfirmDeviceCredentialSuccess();
+            }
 
             setResult(Activity.RESULT_OK);
             finish();
@@ -158,6 +172,19 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
+        Bundle bpBundle =
+                intent.getBundleExtra(KeyguardManager.EXTRA_BIOMETRIC_PROMPT_BUNDLE);
+        if (bpBundle != null) {
+            mIsFallback = true;
+            // TODO: CDC maybe should show description as well.
+            mTitle = bpBundle.getString(BiometricPrompt.KEY_TITLE);
+            mDetails = bpBundle.getString(BiometricPrompt.KEY_SUBTITLE);
+        } else {
+            bpBundle = new Bundle();
+            bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
+            bpBundle.putString(BiometricPrompt.KEY_SUBTITLE, mDetails);
+        }
+
         boolean launchedBiometric = false;
         boolean launchedCDC = false;
         // If the target is a managed user and user key not unlocked yet, we will force unlock
@@ -170,7 +197,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 && !lockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
             mCredentialMode = CREDENTIAL_MANAGED;
             if (isBiometricAllowed(effectiveUserId)) {
-                showBiometricPrompt();
+                showBiometricPrompt(bpBundle);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -181,7 +208,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             if (isBiometricAllowed(effectiveUserId)) {
                 // Don't need to check if biometrics / pin/pattern/pass are enrolled. It will go to
                 // onAuthenticationError and do the right thing automatically.
-                showBiometricPrompt();
+                showBiometricPrompt(bpBundle);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -216,6 +243,13 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             if (mBiometricFragment != null) {
                 mBiometricFragment.cancel();
             }
+
+            if (mIsFallback && !mCCLaunched) {
+                mBiometricManager.onConfirmDeviceCredentialError(
+                        BiometricConstants.BIOMETRIC_ERROR_CANCELED,
+                        getString(com.android.internal.R.string.biometric_error_user_canceled));
+            }
+
             finish();
         } else {
             mGoingToBackground = false;
@@ -242,7 +276,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 && !isBiometricDisabledByAdmin(effectiveUserId);
     }
 
-    private void showBiometricPrompt() {
+    private void showBiometricPrompt(Bundle bundle) {
         mBiometricManager.setActiveUser(mUserId);
 
         mBiometricFragment = (BiometricFragment) getSupportFragmentManager()
@@ -250,13 +284,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         boolean newFragment = false;
 
         if (mBiometricFragment == null) {
-            final BiometricFragment.PromptInfo info = new BiometricFragment.PromptInfo.Builder()
-                    .setTitle(mTitle)
-                    .setSubtitle(mDetails)
-                    .setNegativeButtonText(getResources()
-                            .getString(R.string.confirm_device_credential_use_alternate_method))
-                    .build();
-            mBiometricFragment = BiometricFragment.newInstance(info);
+            mBiometricFragment = BiometricFragment.newInstance(bundle);
             newFragment = true;
         }
         mBiometricFragment.setCallbacks(mExecutor, mAuthenticationCallback);
@@ -272,6 +300,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
      * Shows ConfirmDeviceCredentials for normal apps.
      */
     private void showConfirmCredentials() {
+        mCCLaunched = true;
         boolean launched = false;
         if (mCredentialMode == CREDENTIAL_MANAGED) {
             // We set the challenge as 0L, so it will force to unlock managed profile when it

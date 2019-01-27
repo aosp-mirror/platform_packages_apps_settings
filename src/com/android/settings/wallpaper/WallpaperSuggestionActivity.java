@@ -29,6 +29,8 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 public class WallpaperSuggestionActivity extends Activity {
 
     @Override
@@ -39,6 +41,10 @@ public class WallpaperSuggestionActivity extends Activity {
                 .setClassName(getString(R.string.config_wallpaper_picker_package),
                         getString(R.string.config_wallpaper_picker_class))
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
+        // passing the necessary extra to next page
+        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+
         if (pm.resolveActivity(intent, 0) != null) {
             startActivity(intent);
         } else {

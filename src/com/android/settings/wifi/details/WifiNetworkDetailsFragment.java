@@ -152,7 +152,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
         if (requestCode == REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS
                 && resultCode == Activity.RESULT_OK) {
-            mWifiDetailPreferenceController.launchQRCodeGenerator();
+            mWifiDetailPreferenceController.launchWifiDppConfiguratorActivity();
         }
     }
 }

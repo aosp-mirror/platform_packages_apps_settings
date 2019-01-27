@@ -6,9 +6,9 @@ import static org.mockito.Mockito.when;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import org.junit.After;
 import org.junit.Before;
@@ -30,7 +30,7 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   private DisplayWhiteBalancePreferenceController mController;
 
   @Mock
-  private ColorDisplayController mColorDisplayController;
+  private ColorDisplayManager mColorDisplayManager;
 
   @After
   public void tearDown() {
@@ -43,15 +43,15 @@ public class DisplayWhiteBalancePreferenceControllerTest {
     mContext = RuntimeEnvironment.application;
     mController = spy(new DisplayWhiteBalancePreferenceController(mContext,
         "display_white_balance"));
-    doReturn(mColorDisplayController).when(mController).getColorDisplayController();
+    doReturn(mColorDisplayManager).when(mController).getColorDisplayManager();
   }
 
   @Test
   public void isAvailable_configuredAvailable() {
     SettingsShadowResources.overrideResource(
         com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
-    when(mColorDisplayController.getColorMode())
-        .thenReturn(ColorDisplayController.COLOR_MODE_NATURAL);
+    when(mColorDisplayManager.getColorMode())
+        .thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
     assertThat(mController.isAvailable()).isTrue();
   }
 
@@ -59,20 +59,20 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   public void isAvailable_configuredUnavailable() {
     SettingsShadowResources.overrideResource(
         com.android.internal.R.bool.config_displayWhiteBalanceAvailable, false);
-    when(mColorDisplayController.getColorMode())
-        .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);
+    when(mColorDisplayManager.getColorMode())
+        .thenReturn(ColorDisplayManager.COLOR_MODE_SATURATED);
     assertThat(mController.isAvailable()).isFalse();
 
     SettingsShadowResources.overrideResource(
         com.android.internal.R.bool.config_displayWhiteBalanceAvailable, false);
-    when(mColorDisplayController.getColorMode())
-        .thenReturn(ColorDisplayController.COLOR_MODE_NATURAL);
+    when(mColorDisplayManager.getColorMode())
+        .thenReturn(ColorDisplayManager.COLOR_MODE_NATURAL);
     assertThat(mController.isAvailable()).isFalse();
 
     SettingsShadowResources.overrideResource(
         com.android.internal.R.bool.config_displayWhiteBalanceAvailable, true);
-    when(mColorDisplayController.getColorMode())
-        .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);
+    when(mColorDisplayManager.getColorMode())
+        .thenReturn(ColorDisplayManager.COLOR_MODE_SATURATED);
     assertThat(mController.isAvailable()).isFalse();
   }
 

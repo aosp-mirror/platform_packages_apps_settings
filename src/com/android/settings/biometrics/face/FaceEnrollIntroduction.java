@@ -34,8 +34,8 @@ import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.span.LinkSpan;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
@@ -43,7 +43,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceIntro";
 
     private FaceManager mFaceManager;
-    private FaceEnrollAccessibilityToggle mSwitchVision;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
 
     @Override
@@ -57,11 +56,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             accessibilityLayout.setVisibility(View.VISIBLE);
         });
 
-        mSwitchVision = findViewById(R.id.toggle_vision);
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
 
-        mButtonFooterMixin = getLayout().getMixin(ButtonFooterMixin.class);
-        mButtonFooterMixin.setSecondaryButton(
+        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.security_settings_face_enroll_introduction_cancel)
                         .setListener(this::onCancelButtonClick)
@@ -70,7 +68,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                         .build()
         );
 
-        mButtonFooterMixin.setPrimaryButton(
+        mFooterBarMixin.setPrimaryButton(
                 new FooterButton.Builder(this)
                         .setText(R.string.wizard_next)
                         .setListener(this::onNextButtonClick)
@@ -108,16 +106,16 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected FooterButton getCancelButton() {
-        if (mButtonFooterMixin != null) {
-            return mButtonFooterMixin.getSecondaryButton();
+        if (mFooterBarMixin != null) {
+            return mFooterBarMixin.getSecondaryButton();
         }
         return null;
     }
 
     @Override
     protected FooterButton getNextButton() {
-        if (mButtonFooterMixin != null) {
-            return mButtonFooterMixin.getPrimaryButton();
+        if (mFooterBarMixin != null) {
+            return mFooterBarMixin.getPrimaryButton();
         }
         return null;
     }
@@ -167,7 +165,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         } else {
             intent.setClass(this, FaceEnrollEnrolling.class);
         }
-        intent.putExtra(EXTRA_KEY_REQUIRE_VISION, mSwitchVision.isChecked());
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, mSwitchDiversity.isChecked());
         return intent;
     }

@@ -23,7 +23,6 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
@@ -31,11 +30,11 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
         implements Preference.OnPreferenceChangeListener {
 
     private DropDownPreference mPreference;
-    private ColorDisplayController mController;
+    private ColorDisplayManager mManager;
 
     public NightDisplayAutoModePreferenceController(Context context, String key) {
         super(context, key);
-        mController = new ColorDisplayController(context);
+        mManager = context.getSystemService(ColorDisplayManager.class);
     }
 
     @Override
@@ -48,7 +47,7 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (DropDownPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
 
         mPreference.setEntries(new CharSequence[]{
                 mContext.getString(R.string.night_display_auto_mode_never),
@@ -56,19 +55,19 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
                 mContext.getString(R.string.night_display_auto_mode_twilight)
         });
         mPreference.setEntryValues(new CharSequence[]{
-                String.valueOf(ColorDisplayController.AUTO_MODE_DISABLED),
-                String.valueOf(ColorDisplayController.AUTO_MODE_CUSTOM),
-                String.valueOf(ColorDisplayController.AUTO_MODE_TWILIGHT)
+                String.valueOf(ColorDisplayManager.AUTO_MODE_DISABLED),
+                String.valueOf(ColorDisplayManager.AUTO_MODE_CUSTOM_TIME),
+                String.valueOf(ColorDisplayManager.AUTO_MODE_TWILIGHT)
         });
     }
 
     @Override
     public final void updateState(Preference preference) {
-        mPreference.setValue(String.valueOf(mController.getAutoMode()));
+        mPreference.setValue(String.valueOf(mManager.getNightDisplayAutoMode()));
     }
 
     @Override
     public final boolean onPreferenceChange(Preference preference, Object newValue) {
-        return mController.setAutoMode(Integer.parseInt((String) newValue));
+        return mManager.setNightDisplayAutoMode(Integer.parseInt((String) newValue));
     }
 }

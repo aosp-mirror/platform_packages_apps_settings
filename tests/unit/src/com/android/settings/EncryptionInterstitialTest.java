@@ -36,7 +36,7 @@ import androidx.test.filters.MediumTest;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
@@ -70,7 +70,7 @@ public class EncryptionInterstitialTest {
                 new Intent(mContext, EncryptionInterstitial.class)
                         .putExtra("extra_unlock_method_intent", new Intent("test.unlock.intent")));
         final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
-        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
+        layout.getMixin(FooterBarMixin.class).getPrimaryButtonView().performClick();
 
         mActivityMonitor.waitForActivityWithTimeout(1000);
         assertEquals(1, mActivityMonitor.getHits());
@@ -85,7 +85,7 @@ public class EncryptionInterstitialTest {
                 new Intent(mContext, EncryptionInterstitial.class)
                         .putExtra("extra_unlock_method_intent", new Intent("test.unlock.intent")));
         final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
-        layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView().performClick();
+        layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
 
         mActivityMonitor.waitForActivityWithTimeout(1000);
         assertEquals(1, mActivityMonitor.getHits());

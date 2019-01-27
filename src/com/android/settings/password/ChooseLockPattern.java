@@ -50,8 +50,8 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
 
 import com.google.android.collect.Lists;
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 import java.util.ArrayList;
@@ -489,7 +489,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 }
             }
 
-            final ButtonFooterMixin mixin = layout.getMixin(ButtonFooterMixin.class);
+            final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
             mixin.setSecondaryButton(
                     new FooterButton.Builder(getActivity())
                             .setText(R.string.lockpattern_tutorial_cancel_label)
@@ -511,7 +511,6 @@ public class ChooseLockPattern extends SettingsActivity {
 
             return layout;
         }
-
 
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {

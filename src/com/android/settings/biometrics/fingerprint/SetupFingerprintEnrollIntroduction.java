@@ -34,7 +34,7 @@ import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settings.password.SetupSkipDialog;
 
-import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.template.FooterButton;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
     private static final String KEY_LOCK_SCREEN_PRESENT = "wasLockScreenPresent";

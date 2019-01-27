@@ -1249,12 +1249,11 @@
                   android:label="@string/local_backup_password_title"
                   android:exported="false" />
 
-        <activity android:name="CredentialStorage"
+        <activity android:name=".security.CredentialStorage"
                 android:theme="@style/Transparent"
                 android:launchMode="singleTop"
                 android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
-                <action android:name="com.android.credentials.UNLOCK" />
                 <action android:name="com.android.credentials.INSTALL" />
                 <action android:name="com.android.credentials.RESET" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2976,6 +2975,10 @@
                  </intent-filter>
                 <intent-filter>
                     <action android:name="android.settings.panel.action.VOLUME" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.settings.panel.action.NFC" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
         </activity>

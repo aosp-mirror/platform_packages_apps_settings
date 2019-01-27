@@ -139,4 +139,11 @@ public class WifiSliceTest {
 
         verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
     }
+
+    @Test
+    public void onConnectedChanged_shouldNotifyChange() {
+        mWifiScanWorker.onConnectedChanged();
+
+        verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
+    }
 }

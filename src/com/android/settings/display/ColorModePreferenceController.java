@@ -18,14 +18,12 @@ import android.hardware.display.ColorDisplayManager;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class ColorModePreferenceController extends BasePreferenceController {
-    private static final String TAG = "ColorModePreference";
 
-    private ColorDisplayController mColorDisplayController;
+    private ColorDisplayManager mColorDisplayManager;
 
     public ColorModePreferenceController(Context context, String key) {
         super(context, key);
@@ -35,30 +33,30 @@ public class ColorModePreferenceController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return mContext.getSystemService(ColorDisplayManager.class)
                 .isDeviceColorManaged()
-                && !getColorDisplayController().getAccessibilityTransformActivated() ?
+                && !ColorDisplayManager.areAccessibilityTransformsEnabled(mContext) ?
                 AVAILABLE_UNSEARCHABLE : DISABLED_FOR_USER;
     }
 
     @Override
     public CharSequence getSummary() {
-        final int colorMode = getColorDisplayController().getColorMode();
-        if (colorMode == ColorDisplayController.COLOR_MODE_AUTOMATIC) {
+        final int colorMode = getColorDisplayManager().getColorMode();
+        if (colorMode == ColorDisplayManager.COLOR_MODE_AUTOMATIC) {
             return mContext.getText(R.string.color_mode_option_automatic);
         }
-        if (colorMode == ColorDisplayController.COLOR_MODE_SATURATED) {
+        if (colorMode == ColorDisplayManager.COLOR_MODE_SATURATED) {
             return mContext.getText(R.string.color_mode_option_saturated);
         }
-        if (colorMode == ColorDisplayController.COLOR_MODE_BOOSTED) {
+        if (colorMode == ColorDisplayManager.COLOR_MODE_BOOSTED) {
             return mContext.getText(R.string.color_mode_option_boosted);
         }
         return mContext.getText(R.string.color_mode_option_natural);
     }
 
     @VisibleForTesting
-    ColorDisplayController getColorDisplayController() {
-        if (mColorDisplayController == null) {
-            mColorDisplayController = new ColorDisplayController(mContext);
+    ColorDisplayManager getColorDisplayManager() {
+        if (mColorDisplayManager == null) {
+            mColorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
         }
-        return mColorDisplayController;
+        return mColorDisplayManager;
     }
 }

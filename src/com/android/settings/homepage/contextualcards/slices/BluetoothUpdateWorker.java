@@ -30,16 +30,11 @@ public class BluetoothUpdateWorker extends SliceBackgroundWorker implements Blue
 
     private static final String TAG = "BluetoothUpdateWorker";
 
-    private final Context mContext;
-    private final Uri mUri;
     private final LocalBluetoothManager mLocalBluetoothManager;
 
     public BluetoothUpdateWorker(Context context, Uri uri) {
         super(context, uri);
-
-        mContext = context;
-        mUri = uri;
-        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
+        mLocalBluetoothManager = Utils.getLocalBtManager(context);
     }
 
     @Override
@@ -88,9 +83,5 @@ public class BluetoothUpdateWorker extends SliceBackgroundWorker implements Blue
     public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
             int bluetoothProfile) {
         notifySliceChange();
-    }
-
-    private void notifySliceChange() {
-        mContext.getContentResolver().notifyChange(mUri, null);
     }
 }

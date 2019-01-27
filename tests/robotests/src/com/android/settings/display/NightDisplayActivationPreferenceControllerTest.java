@@ -15,12 +15,11 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.provider.Settings.Secure;
+import android.hardware.display.ColorDisplayManager;
 import android.view.View;
 
 import androidx.preference.PreferenceScreen;
@@ -47,17 +46,19 @@ public class NightDisplayActivationPreferenceControllerTest {
     private PreferenceScreen mScreen;
     private LayoutPreference mPreference;
     private Context mContext;
-    private NightDisplayActivationPreferenceController mController;
+    private ColorDisplayManager mColorDisplayManager;
+    private NightDisplayActivationPreferenceController mPreferenceController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mColorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
         mPreference = new LayoutPreference(mContext, R.layout.night_display_activation_button);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        mController = new NightDisplayActivationPreferenceController(mContext,
+        mPreferenceController = new NightDisplayActivationPreferenceController(mContext,
             "night_display_activation");
-        mController.displayPreference(mScreen);
+        mPreferenceController.displayPreference(mScreen);
     }
 
     @After
@@ -69,14 +70,14 @@ public class NightDisplayActivationPreferenceControllerTest {
     public void isAvailable_configuredAvailable() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_nightDisplayAvailable, true);
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mPreferenceController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_configuredUnavailable() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_nightDisplayAvailable, false);
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
     @Test
@@ -95,25 +96,23 @@ public class NightDisplayActivationPreferenceControllerTest {
 
     @Test
     public void onClick_activates() {
-        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_ACTIVATED, 0);
+        mColorDisplayManager.setNightDisplayActivated(false);
 
         final View view = mPreference.findViewById(R.id.night_display_turn_on_button);
         assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
         view.performClick();
 
-        assertThat(Secure.getInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_ACTIVATED, -1))
-                .isEqualTo(1);
+        assertThat(mColorDisplayManager.isNightDisplayActivated()).isEqualTo(true);
     }
 
     @Test
     public void onClick_deactivates() {
-        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_ACTIVATED, 1);
+        mColorDisplayManager.setNightDisplayActivated(true);
 
-        final View view = mPreference.findViewById(R.id.night_display_turn_on_button);
+        final View view = mPreference.findViewById(R.id.night_display_turn_off_button);
         assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
         view.performClick();
 
-        assertThat(Secure.getInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_ACTIVATED, -1))
-                .isEqualTo(0);
+        assertThat(mColorDisplayManager.isNightDisplayActivated()).isEqualTo(false);
     }
 }

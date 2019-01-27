@@ -47,8 +47,8 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 public class RedactionInterstitial extends SettingsActivity {
@@ -133,8 +133,8 @@ public class RedactionInterstitial extends SettingsActivity {
             }
 
             final GlifLayout layout = view.findViewById(R.id.setup_wizard_layout);
-            final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
-            buttonFooterMixin.setPrimaryButton(
+            final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+            mixin.setPrimaryButton(
                     new FooterButton.Builder(getContext())
                             .setText(R.string.app_notifications_dialog_done)
                             .setListener(this::onDoneButtonClicked)

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -44,8 +44,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.security.ConfigureKeyGuardDialog;
 import com.android.settings.vpn2.VpnUtils;
 
 import java.io.ByteArrayInputStream;
@@ -55,46 +55,12 @@ import sun.security.util.ObjectIdentifier;
 import sun.security.x509.AlgorithmId;
 
 /**
- * CredentialStorage handles KeyStore reset, unlock, and install.
- *
- * CredentialStorage has a pretty convoluted state machine to migrate
- * from the old style separate keystore password to a new key guard
- * based password, as well as to deal with setting up the key guard if
- * necessary.
- *
- * KeyStore: UNINITALIZED
- * KeyGuard: OFF
- * Action:   set up key guard
- * Notes:    factory state
- *
- * KeyStore: UNINITALIZED
- * KeyGuard: ON
- * Action:   confirm key guard
- * Notes:    user had key guard but no keystore and upgraded from pre-ICS
- * OR user had key guard and pre-ICS keystore password which was then reset
- *
- * KeyStore: LOCKED
- * KeyGuard: OFF/ON
- * Action:   confirm key guard
- * Notes:    request normal unlock to unlock the keystore.
- * if unlock, ensure key guard before install.
- * if reset, treat as UNINITALIZED/OFF
- *
- * KeyStore: UNLOCKED
- * KeyGuard: OFF
- * Action:   set up key guard
- * Notes:    ensure key guard, then proceed
- *
- * KeyStore: UNLOCKED
- * keyguard: ON
- * Action:   normal unlock/install
- * Notes:    this is the common case
+ * CredentialStorage handles resetting and installing keys into KeyStore.
  */
 public final class CredentialStorage extends FragmentActivity {
 
     private static final String TAG = "CredentialStorage";
 
-    public static final String ACTION_UNLOCK = "com.android.credentials.UNLOCK";
     public static final String ACTION_INSTALL = "com.android.credentials.INSTALL";
     public static final String ACTION_RESET = "com.android.credentials.RESET";
 
@@ -102,8 +68,7 @@ public final class CredentialStorage extends FragmentActivity {
     // lower than this, keystore should not be activated.
     public static final int MIN_PASSWORD_QUALITY = DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 
-    private static final int CONFIRM_KEY_GUARD_REQUEST = 1;
-    private static final int CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST = 2;
+    private static final int CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST = 1;
 
     private final KeyStore mKeyStore = KeyStore.getInstance();
     private LockPatternUtils mUtils;
@@ -133,73 +98,24 @@ public final class CredentialStorage extends FragmentActivity {
                 if (ACTION_INSTALL.equals(action) && checkCallerIsCertInstallerOrSelfInProfile()) {
                     mInstallBundle = intent.getExtras();
                 }
-                // ACTION_UNLOCK also handled here in addition to ACTION_INSTALL
-                handleUnlockOrInstall();
+                handleInstall();
             }
         } else {
-            // Users can set a screen lock if there is none even if they can't modify the
-            // credentials store.
-            if (ACTION_UNLOCK.equals(action) && mKeyStore.state() == KeyStore.State.UNINITIALIZED) {
-                ensureKeyGuard();
-            } else {
-                finish();
-            }
+            finish();
         }
     }
 
     /**
-     * Based on the current state of the KeyStore and key guard, try to
-     * make progress on unlocking or installing to the keystore.
+     * Install credentials from mInstallBundle into Keystore.
      */
-    private void handleUnlockOrInstall() {
+    private void handleInstall() {
         // something already decided we are done, do not proceed
         if (isFinishing()) {
             return;
         }
-        switch (mKeyStore.state()) {
-            case UNINITIALIZED: {
-                ensureKeyGuard();
-                return;
-            }
-            case LOCKED: {
-                // Force key guard confirmation
-                confirmKeyGuard(CONFIRM_KEY_GUARD_REQUEST);
-                return;
-            }
-            case UNLOCKED: {
-                if (!mUtils.isSecure(UserHandle.myUserId())) {
-                    final ConfigureKeyGuardDialog dialog = new ConfigureKeyGuardDialog();
-                    dialog.show(getSupportFragmentManager(), ConfigureKeyGuardDialog.TAG);
-                    return;
-                }
-                if (installIfAvailable()) {
-                    finish();
-                }
-                return;
-            }
+        if (installIfAvailable()) {
+            finish();
         }
-    }
-
-    /**
-     * Make sure the user enters the key guard to set or change the
-     * keystore password. This can be used in UNINITIALIZED to set the
-     * keystore password or UNLOCKED to change the password (as is the
-     * case after unlocking with an old-style password).
-     */
-    private void ensureKeyGuard() {
-        if (!mUtils.isSecure(UserHandle.myUserId())) {
-            // key guard not setup, doing so will initialize keystore
-            final ConfigureKeyGuardDialog dialog = new ConfigureKeyGuardDialog();
-            dialog.show(getSupportFragmentManager(), ConfigureKeyGuardDialog.TAG);
-            // will return to onResume after Activity
-            return;
-        }
-        // force key guard confirmation
-        if (confirmKeyGuard(CONFIRM_KEY_GUARD_REQUEST)) {
-            // will return password value via onActivityResult
-            return;
-        }
-        finish();
     }
 
     private boolean isHardwareBackedKey(byte[] keyData) {
@@ -254,15 +170,7 @@ public final class CredentialStorage extends FragmentActivity {
             final String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
             final byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
 
-            int flags = KeyStore.FLAG_ENCRYPTED;
-            if (uid == Process.WIFI_UID && isHardwareBackedKey(value)) {
-                // Hardware backed keystore is secure enough to allow for WIFI stack
-                // to enable access to secure networks without user intervention
-                Log.d(TAG, "Saving private key with FLAG_NONE for WIFI_UID");
-                flags = KeyStore.FLAG_NONE;
-            }
-
-            if (!mKeyStore.importKey(key, value, uid, flags)) {
+            if (!mKeyStore.importKey(key, value, uid, KeyStore.FLAG_NONE)) {
                 Log.e(TAG, "Failed to install " + key + " as uid " + uid);
                 return true;
             }
@@ -475,20 +383,7 @@ public final class CredentialStorage extends FragmentActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Receive key guard password initiated by confirmKeyGuard.
-        if (requestCode == CONFIRM_KEY_GUARD_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
-                final String password = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-                if (!TextUtils.isEmpty(password)) {
-                    // success
-                    mKeyStore.unlock(password);
-                    // return to onResume
-                    return;
-                }
-            }
-            // failed confirmation, bail
-            finish();
-        } else if (requestCode == CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST) {
+        if (requestCode == CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 new ResetKeyStoreAndKeyChain().execute();
                 return;

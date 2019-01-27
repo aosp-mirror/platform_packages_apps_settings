@@ -92,4 +92,27 @@
         android:summary="@string/vibrate_input_devices_summary"
         settings:controller="com.android.settings.inputmethod.GameControllerPreferenceController" />
 
+    <com.android.settings.widget.WorkOnlyCategory
+        android:key="language_and_input_for_work_category"
+        android:title="@string/language_and_input_for_work_category_title">
+
+        <Preference
+            android:key="virtual_keyboards_for_work_pref"
+            android:title="@string/virtual_keyboards_for_work_title"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:controller="com.android.settings.inputmethod.VirtualKeyboardForWorkPreferenceController" />
+
+        <Preference
+            android:key="spellcheckers_settings_for_work_pref"
+            android:title="@string/spellcheckers_settings_for_work_title"
+            android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
+            settings:controller="com.android.settings.language.UserDictionaryForWorkPreferenceController" />
+
+        <Preference
+            android:key="user_dictionary_settings_for_work_pref"
+            android:title="@string/user_dict_settings_for_work_title"
+            android:fragment="com.android.settings.inputmethod.UserDictionaryList"
+            settings:controller="com.android.settings.inputmethod.SpellCheckerForWorkPreferenceController" />
+    </com.android.settings.widget.WorkOnlyCategory>
+
 </PreferenceScreen>
