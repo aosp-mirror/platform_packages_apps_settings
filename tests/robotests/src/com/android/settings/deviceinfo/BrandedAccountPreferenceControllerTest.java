@@ -29,36 +29,52 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class BrandedAccountPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    private BrandedAccountPreferenceController mController;
     private FakeFeatureFactory fakeFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         fakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mController = new BrandedAccountPreferenceController(mContext);
+
     }
 
     @Test
-    public void isAvailable_defaultOff() {
-        assertThat(mController.isAvailable()).isFalse();
+    public void isAvailable_configOn_noAccount_off() {
+        final BrandedAccountPreferenceController controller =
+                new BrandedAccountPreferenceController(mContext, "test_key");
+        assertThat(controller.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_onWhenAccountIsAvailable() {
+    public void isAvailable_accountIsAvailable_on() {
         when(fakeFeatureFactory.mAccountFeatureProvider.getAccounts(any(Context.class)))
-            .thenReturn(new Account[] {new Account("fake@account.foo", "fake.reallyfake")});
-        mController = new BrandedAccountPreferenceController(mContext);
-        assertThat(mController.isAvailable()).isTrue();
+                .thenReturn(new Account[]{new Account("fake@account.foo", "fake.reallyfake")});
+
+        final BrandedAccountPreferenceController controller =
+                new BrandedAccountPreferenceController(mContext, "test_key");
+
+        assertThat(controller.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_configOff_hasAccount_off() {
+        when(fakeFeatureFactory.mAccountFeatureProvider.getAccounts(any(Context.class)))
+                .thenReturn(new Account[]{new Account("fake@account.foo", "fake.reallyfake")});
+
+        final BrandedAccountPreferenceController controller =
+                new BrandedAccountPreferenceController(mContext, "test_key");
+
+        assertThat(controller.isAvailable()).isFalse();
     }
 }
