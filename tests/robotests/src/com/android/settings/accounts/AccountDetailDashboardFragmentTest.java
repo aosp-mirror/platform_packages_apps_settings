@@ -15,6 +15,8 @@
  */
 package com.android.settings.accounts;
 
+import static android.content.Intent.EXTRA_USER;
+
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
 
@@ -158,6 +160,20 @@ public class AccountDetailDashboardFragmentTest {
         final Intent intent = Shadows.shadowOf(activity).getNextStartedActivityForResult().intent;
 
         assertThat(intent.getStringExtra("extra.accountName")).isEqualTo("name1@abc.com");
+    }
+
+    @Test
+    public void displayTile_shouldAddUserHandleToTileIntent() {
+        mFragment.mUserHandle = new UserHandle(1);
+
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
+        mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
+
+        mFragment.displayTile(tile);
+
+        final UserHandle userHandle = tile.getIntent().getParcelableExtra(EXTRA_USER);
+        assertThat(userHandle.getIdentifier()).isEqualTo(1);
     }
 
     @Test
