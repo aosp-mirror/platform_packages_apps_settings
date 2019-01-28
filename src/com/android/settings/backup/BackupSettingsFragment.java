@@ -68,7 +68,7 @@ public class BackupSettingsFragment extends DashboardFragment {
         return controllers;
     }
 
-    // The intention is to index {@link BackupSettingsActivity} instead of the fragments,
+    // The intention is to index {@link UserBackupSettingsActivity} instead of the fragments,
     // therefore leaving this index provider empty.
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {

@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -34,7 +35,7 @@ import com.android.settings.Settings.PrivacySettingsActivity;
 import java.net.URISyntaxException;
 
 /**
- * Helper class for {@link BackupSettingsActivity} that interacts with {@link IBackupManager}.
+ * Helper class for {@link UserBackupSettingsActivity} that interacts with {@link IBackupManager}.
  */
 public class BackupSettingsHelper {
     private static final String TAG = "BackupSettingsHelper";
@@ -46,6 +47,24 @@ public class BackupSettingsHelper {
 
     public BackupSettingsHelper(Context context) {
         mContext = context;
+    }
+
+    /**
+     * If there is only one profile, show whether the backup is on or off.
+     * Otherwise, show nothing.
+     */
+    String getSummary() {
+        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        if (userManager.getUserProfiles().size() == 1) {
+            try {
+                int resId = mBackupManager.isBackupEnabled() ? R.string.backup_summary_state_on
+                    : R.string.backup_summary_state_off;
+                return mContext.getText(resId).toString();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Error getting isBackupEnabled", e);
+            }
+        }
+        return null;
     }
 
     /**
