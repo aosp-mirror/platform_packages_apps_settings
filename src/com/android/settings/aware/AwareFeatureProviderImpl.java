@@ -23,4 +23,9 @@ public class AwareFeatureProviderImpl implements AwareFeatureProvider {
     public boolean isSupported(Context context) {
         return false;
     }
+
+    @Override
+    public boolean isEnabled(Context context) {
+        return false;
+    }
 }

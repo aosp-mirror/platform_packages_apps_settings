@@ -21,4 +21,7 @@ import android.content.Context;
 public interface AwareFeatureProvider {
     /** Returns true if the aware sensor is supported. */
     boolean isSupported(Context context);
+
+    /** Returns true if the aware feature is enabled. */
+    boolean isEnabled(Context context);
 }
