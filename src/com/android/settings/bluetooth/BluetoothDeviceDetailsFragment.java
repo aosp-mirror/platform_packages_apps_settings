@@ -137,7 +137,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0, R.string.bluetooth_rename_button);
-        item.setIcon(R.drawable.ic_mode_edit);
+        item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         super.onCreateOptionsMenu(menu, inflater);
     }

@@ -47,7 +47,7 @@ public class LocationSliceTest {
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_signal_location);
+                com.android.internal.R.drawable.ic_signal_location);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
     }
 }

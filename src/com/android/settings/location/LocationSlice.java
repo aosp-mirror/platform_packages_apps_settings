@@ -55,7 +55,7 @@ public class LocationSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_signal_location);
+                com.android.internal.R.drawable.ic_signal_location);
         final CharSequence title = mContext.getText(R.string.location_settings_title);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         final PendingIntent primaryAction = getPrimaryAction();
