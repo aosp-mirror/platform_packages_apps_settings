@@ -133,7 +133,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
         mChooseDifferentNetwork.setOnClickListener(v ->
-                mClickChooseDifferentNetworkListener.onClickChooseDifferentNetwork());
+            mClickChooseDifferentNetworkListener.onClickChooseDifferentNetwork()
+        );
 
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonLeft.setText(R.string.cancel);
