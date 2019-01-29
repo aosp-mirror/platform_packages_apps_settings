@@ -16,6 +16,10 @@
 
 package com.android.settings.development.gup;
 
+import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_ALL_APPS;
+import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_DEFAULT;
+import static com.android.settings.development.gup.GupEnableForAllAppsPreferenceController.GUP_OFF;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Handler;
@@ -23,87 +27,72 @@ import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 /**
- * Controller of global switch to enable Game Driver for all Apps.
+ * Controller of global switch bar used to fully turn off Game Driver.
  */
-public class GupEnableForAllAppsPreferenceController extends BasePreferenceController
-        implements Preference.OnPreferenceChangeListener,
+public class GupGlobalSwitchBarController
+        implements SwitchWidgetController.OnSwitchChangeListener,
                    GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
                    OnStart, OnStop {
-    public static final int GUP_DEFAULT = 0;
-    public static final int GUP_ALL_APPS = 1;
-    public static final int GUP_OFF = 2;
-
     private final Context mContext;
     private final ContentResolver mContentResolver;
     @VisibleForTesting
+    SwitchWidgetController mSwitchWidgetController;
+    @VisibleForTesting
     GameDriverContentObserver mGameDriverContentObserver;
 
-    private SwitchPreference mPreference;
-
-    public GupEnableForAllAppsPreferenceController(Context context, String key) {
-        super(context, key);
+    GupGlobalSwitchBarController(Context context, SwitchWidgetController switchWidgetController) {
         mContext = context;
         mContentResolver = context.getContentResolver();
         mGameDriverContentObserver =
                 new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
-                        && (Settings.Global.getInt(
-                                    mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
-                                != GUP_OFF)
-                ? AVAILABLE
-                : CONDITIONALLY_UNAVAILABLE;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
+        mSwitchWidgetController = switchWidgetController;
+        mSwitchWidgetController.setEnabled(
+                DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context));
+        mSwitchWidgetController.setChecked(Settings.Global.getInt(mContentResolver,
+                                                   Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
+                != GUP_OFF);
+        mSwitchWidgetController.setListener(this);
     }
 
     @Override
     public void onStart() {
+        mSwitchWidgetController.startListening();
         mGameDriverContentObserver.register(mContentResolver);
     }
 
     @Override
     public void onStop() {
+        mSwitchWidgetController.stopListening();
         mGameDriverContentObserver.unregister(mContentResolver);
     }
 
     @Override
-    public void updateState(Preference preference) {
-        final SwitchPreference switchPreference = (SwitchPreference) preference;
-        switchPreference.setVisible(isAvailable());
-        switchPreference.setChecked(Settings.Global.getInt(mContentResolver,
-                                            Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
-                == GUP_ALL_APPS);
-    }
+    public boolean onSwitchToggled(boolean isChecked) {
+        if (!isChecked) {
+            Settings.Global.putInt(mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_OFF);
+            return true;
+        }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Settings.Global.putInt(mContentResolver, Settings.Global.GUP_DEV_ALL_APPS,
-                (boolean) newValue ? GUP_ALL_APPS : GUP_DEFAULT);
+        if (Settings.Global.getInt(mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
+                != GUP_ALL_APPS) {
+            Settings.Global.putInt(mContentResolver, Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT);
+        }
 
         return true;
     }
 
     @Override
     public void onGameDriverContentChanged() {
-        updateState(mPreference);
+        mSwitchWidgetController.setChecked(Settings.Global.getInt(mContentResolver,
+                                                   Settings.Global.GUP_DEV_ALL_APPS, GUP_DEFAULT)
+                != GUP_OFF);
     }
 }

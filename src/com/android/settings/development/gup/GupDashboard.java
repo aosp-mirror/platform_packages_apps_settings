@@ -18,18 +18,25 @@ package com.android.settings.development.gup;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Dashboard for Game Driver preferences.
+ */
 @SearchIndexable
 public class GupDashboard extends DashboardFragment {
     private static final String TAG = "GupDashboard";
@@ -52,6 +59,18 @@ public class GupDashboard extends DashboardFragment {
     @Override
     public int getHelpResource() {
         return 0;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        final SwitchBar switchBar = activity.getSwitchBar();
+        final GupGlobalSwitchBarController switchBarController =
+                new GupGlobalSwitchBarController(activity, new SwitchBarController(switchBar));
+        getSettingsLifecycle().addObserver(switchBarController);
+        switchBar.show();
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
