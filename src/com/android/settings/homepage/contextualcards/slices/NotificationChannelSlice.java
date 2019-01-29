@@ -57,6 +57,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.NotificationBackend.NotificationsSentState;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBroadcastReceiver;
@@ -66,7 +67,6 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.applications.ApplicationsState;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -103,21 +103,32 @@ public class NotificationChannelSlice implements CustomSliceable {
     private static final String CHANNEL_ID = "channel_id";
 
     /**
-     * TODO(b/119831690): Change to notification count sorting.
-     * This is the default sorting from NotificationSettingsBase, will be replaced with notification
-     * count sorting mechanism.
+     * Sort notification channel with weekly average sent count by descending.
+     *
+     * Note:
+     * When the sent count of notification channels is the same, follow the sorting mechanism from
+     * {@link com.android.settings.notification.NotificationSettingsBase#mChannelComparator}.
+     * Since slice view only shows displayable notification channels, so those deleted ones are
+     * excluded from the comparison here.
      */
-    private static final Comparator<NotificationChannel> mChannelComparator =
+    private static final Comparator<NotificationChannelState> CHANNEL_STATE_COMPARATOR =
             (left, right) -> {
-                if (TextUtils.equals(left.getId(), NotificationChannel.DEFAULT_CHANNEL_ID)) {
-                    // Uncategorized/miscellaneous legacy channel goes last
+                final NotificationsSentState leftState = left.getNotificationsSentState();
+                final NotificationsSentState rightState = right.getNotificationsSentState();
+                if (rightState.avgSentWeekly != leftState.avgSentWeekly) {
+                    return rightState.avgSentWeekly - leftState.avgSentWeekly;
+                }
+
+                final NotificationChannel leftChannel = left.getNotificationChannel();
+                final NotificationChannel rightChannel = right.getNotificationChannel();
+                if (TextUtils.equals(leftChannel.getId(), NotificationChannel.DEFAULT_CHANNEL_ID)) {
                     return 1;
-                } else if (TextUtils.equals(right.getId(),
+                } else if (TextUtils.equals(rightChannel.getId(),
                         NotificationChannel.DEFAULT_CHANNEL_ID)) {
                     return -1;
                 }
 
-                return left.getId().compareTo(right.getId());
+                return leftChannel.getId().compareTo(rightChannel.getId());
             };
 
     private final Context mContext;
@@ -380,9 +391,19 @@ public class NotificationChannelSlice implements CustomSliceable {
                         channel -> isChannelEnabled(group, channel, appRow)))
                 .collect(Collectors.toList());
 
-        // TODO(b/119831690): Sort the channels by notification count.
-        Collections.sort(channels, mChannelComparator);
-        return channels;
+        // Pack the notification channel with notification sent state for sorting.
+        final List<NotificationChannelState> channelStates = new ArrayList<>();
+        for (NotificationChannel channel : channels) {
+            NotificationsSentState sentState = appRow.sentByChannel.get(channel.getId());
+            if (sentState == null) {
+                sentState = new NotificationsSentState();
+            }
+            channelStates.add(new NotificationChannelState(sentState, channel));
+        }
+
+        // Sort the notification channels with notification sent count by descending.
+        return channelStates.stream().sorted(CHANNEL_STATE_COMPARATOR).map(
+                state -> state.getNotificationChannel()).collect(Collectors.toList());
     }
 
     private PackageInfo getMaxSentNotificationsPackage(List<PackageInfo> packageInfoList) {
@@ -470,5 +491,32 @@ public class NotificationChannelSlice implements CustomSliceable {
         }
 
         return false;
+    }
+
+    /**
+     * This class is used to sort notification channels according to notification sent count and
+     * notification id in {@link NotificationChannelSlice#CHANNEL_STATE_COMPARATOR}.
+     *
+     * Include {@link NotificationsSentState#avgSentWeekly} and {@link NotificationChannel#getId()}
+     * to get the number of notifications being sent and notification id.
+     */
+    private static class NotificationChannelState {
+
+        final private NotificationsSentState mNotificationsSentState;
+        final private NotificationChannel mNotificationChannel;
+
+        public NotificationChannelState(NotificationsSentState notificationsSentState,
+                NotificationChannel notificationChannel) {
+            mNotificationsSentState = notificationsSentState;
+            mNotificationChannel = notificationChannel;
+        }
+
+        public NotificationChannel getNotificationChannel() {
+            return mNotificationChannel;
+        }
+
+        public NotificationsSentState getNotificationsSentState() {
+            return mNotificationsSentState;
+        }
     }
 }
