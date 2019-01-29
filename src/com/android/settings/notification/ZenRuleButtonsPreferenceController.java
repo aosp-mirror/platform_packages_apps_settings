@@ -62,7 +62,7 @@ public class ZenRuleButtonsPreferenceController extends AbstractZenModePreferenc
         if (isAvailable()) {
             mButtonsPref = ((ActionButtonsPreference) screen.findPreference(KEY))
                     .setButton1Text(R.string.zen_mode_rule_name_edit)
-                    .setButton1Icon(R.drawable.ic_mode_edit)
+                    .setButton1Icon(com.android.internal.R.drawable.ic_mode_edit)
                     .setButton1OnClickListener(new EditRuleNameClickListener())
                     .setButton2Text(R.string.zen_mode_delete_rule_button)
                     .setButton2Icon(R.drawable.ic_settings_delete)

@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 
+import android.provider.Settings;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -65,9 +66,8 @@ public class WifiDppConfiguratorActivityTest {
 
     @Test
     public void launchActivity_chooseSavedWifiNetwork_shouldNotAutoFinish() {
-        Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
-        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
+        Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE);
+        intent.putExtra(Settings.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
 
         mActivityRule.launchActivity(intent);
 
@@ -138,9 +138,8 @@ public class WifiDppConfiguratorActivityTest {
     public void rotateScreen_shouldGetCorrectWifiNetworkConfig() {
         WifiNetworkConfig wifiNetworkConfig = new WifiNetworkConfig("WPA", "WifiSsid", "password",
                 /* hiddenSsid */ false, /* networkId */ 0);
-        Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
-        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
+        Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE);
+        intent.putExtra(Settings.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
 
         // setWifiNetworkConfig and check if getWifiNetworkConfig correctly after rotation
         mActivityRule.launchActivity(intent);

@@ -103,7 +103,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings_bluetooth);
+                com.android.internal.R.drawable.ic_settings_bluetooth);
         final CharSequence title = mContext.getText(R.string.bluetooth_devices);
         final CharSequence titleNoBluetoothDevices = mContext.getText(
                 R.string.no_bluetooth_devices);
@@ -236,7 +236,8 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         if (pair.first != null) {
             return IconCompat.createWithBitmap(getBitmapFromVectorDrawable(pair.first));
         } else {
-            return IconCompat.createWithResource(mContext, R.drawable.ic_settings_bluetooth);
+            return IconCompat.createWithResource(mContext,
+                com.android.internal.R.drawable.ic_settings_bluetooth);
         }
     }
 

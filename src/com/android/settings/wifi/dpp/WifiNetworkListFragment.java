@@ -55,11 +55,14 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     private PreferenceCategory mAccessPointsPreferenceCategory;
     private AccessPointPreference.UserBadgeCache mUserBadgeCache;
     private Preference mAddPreference;
+    // Only shows up if mIsTest == true
+    private Preference mFakeNetworkPreference;
 
     private WifiManager mWifiManager;
     private WifiTracker mWifiTracker;
 
     private WifiManager.ActionListener mSaveListener;
+    private boolean mIsTest;
 
     @VisibleForTesting
     boolean mUseConnectedAccessPointDirectly;
@@ -99,6 +102,11 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                 getSettingsLifecycle(), /* includeSaved */true, /* includeScans */ true);
         mWifiManager = mWifiTracker.getManager();
 
+        final Bundle args = getArguments();
+        if (args != null) {
+            mIsTest = args.getBoolean(WifiDppUtils.EXTRA_TEST, false);
+        }
+
         mSaveListener = new WifiManager.ActionListener() {
             @Override
             public void onSuccess() {
@@ -137,6 +145,11 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
 
         mAccessPointsPreferenceCategory = (PreferenceCategory) findPreference(
                 PREF_KEY_ACCESS_POINTS);
+
+        mFakeNetworkPreference = new Preference(getPrefContext());
+        mFakeNetworkPreference.setIcon(R.drawable.ic_wifi_signal_0);
+        mFakeNetworkPreference.setKey("fake_key");
+        mFakeNetworkPreference.setTitle("fake network");
 
         mAddPreference = new Preference(getPrefContext());
         mAddPreference.setIcon(R.drawable.ic_menu_add);
@@ -218,6 +231,16 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             }
         } else if (preference == mAddPreference) {
             launchAddNetworkFragment();
+        } else if (preference == mFakeNetworkPreference) {
+            if (mOnChooseNetworkListener != null) {
+                mOnChooseNetworkListener.onChooseNetwork(
+                        new WifiNetworkConfig(
+                                WifiQrCode.SECURITY_WPA,
+                                /* ssid */ WifiNetworkConfig.FAKE_SSID,
+                                /* preSharedKey */ WifiNetworkConfig.FAKE_PASSWORD,
+                                /* hiddenSsid */ true,
+                                /* networkId */ WifiConfiguration.INVALID_NETWORK_ID));
+            }
         } else {
             return super.onPreferenceTreeClick(preference);
         }
@@ -314,6 +337,11 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         removeCachedPrefs(mAccessPointsPreferenceCategory);
         mAddPreference.setOrder(index);
         mAccessPointsPreferenceCategory.addPreference(mAddPreference);
+
+        if (mIsTest) {
+            mFakeNetworkPreference.setOrder(index + 1);
+            mAccessPointsPreferenceCategory.addPreference(mFakeNetworkPreference);
+        }
     }
 
     private AccessPointPreference createAccessPointPreference(AccessPoint accessPoint) {

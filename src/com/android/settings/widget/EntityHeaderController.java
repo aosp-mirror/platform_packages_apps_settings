@@ -344,7 +344,7 @@ public class EntityHeaderController {
                 if (mEditOnClickListener == null) {
                     button.setVisibility(View.GONE);
                 } else {
-                    button.setImageResource(R.drawable.ic_mode_edit);
+                    button.setImageResource(com.android.internal.R.drawable.ic_mode_edit);
                     button.setVisibility(View.VISIBLE);
                     button.setOnClickListener(mEditOnClickListener);
                 }

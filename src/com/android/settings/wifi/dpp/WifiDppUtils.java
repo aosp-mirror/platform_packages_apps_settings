@@ -29,6 +29,8 @@ import java.util.List;
 
 /**
  * Here are the items shared by both WifiDppConfiguratorActivity & WifiDppEnrolleeActivity
+ *
+ * @see WifiQrCode
  */
 public class WifiDppUtils {
     /**
@@ -67,8 +69,9 @@ public class WifiDppUtils {
     /** The data corresponding to {@code WifiConfiguration} networkId */
     public static final String EXTRA_WIFI_NETWORK_ID = "networkId";
 
-    /** @see WifiQrCode */
-    public static final String EXTRA_QR_CODE = "qrCode";
+    /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE} to
+     * indicate test mode UI should be shown. Test UI does not make API calls. Value is a boolean.*/
+    public static final String EXTRA_TEST = "test";
 
     /**
      * Returns whether the user can share the network represented by this preference with QR code.

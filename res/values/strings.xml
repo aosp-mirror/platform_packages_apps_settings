@@ -2688,6 +2688,15 @@
 
     <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
     <string name="display_white_balance_title">Display white balance</string>
+    <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
+    <string name="adaptive_sleep_title">Adaptive sleep</string>
+    <!-- Setting option summary when adaptive sleep is on [CHAR LIMIT=NONE] -->
+    <string name="adaptive_sleep_summary_on">On</string>
+    <!-- Setting option summary when adaptive sleep is off [CHAR LIMIT=NONE] -->
+    <string name="adaptive_sleep_summary_off">Off</string>
+    <!-- Description about the feature adaptive sleep [CHAR LIMIT=NONE]-->
+    <string name="adaptive_sleep_description">Your screen would not dim and go to sleep if the device detects your present attention.</string>
+
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
@@ -6707,6 +6716,8 @@
     <string name="help_url_display_size" translatable="false"></string>
     <!-- Help URL, Auto brightness [DO NOT TRANSLATE] -->
     <string name="help_url_auto_brightness" translatable="false" />
+    <!-- Help URL, Adaptive sleep [DO NOT TRANSLATE] -->
+    <string name="help_url_adaptive_sleep" translatable="false" />
     <!-- Help URL, Previously connected bluetooth devices [DO NOT TRANSLATE] -->
     <string name="help_url_previously_connected_devices" translatable="false"></string>
     <!-- Help URL, Top level privacy settings [DO NOT TRANSLATE] -->
@@ -7047,6 +7058,9 @@
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness</string>
 
+    <!-- Search keywords for adaptive sleep setting [CHAR LIMIT=NONE]-->
+    <string name="keywords_display_adaptive_sleep">dim screen, sleep, battery, timeout, attention</string>
+
     <!-- List of synonyms for the auto rotate (rotate the virtual display when the device rotates) setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_auto_rotate">rotate, flip, rotation, portrait, landscape, orientation, vertical, horizontal</string>
 
@@ -7317,7 +7331,7 @@
     <!-- Do not disturb: Hide notifications summary [CHAR LIMIT=NONE] -->
     <string name="zen_mode_restrict_notifications_hide_summary">You won\u2019t see or hear notifications</string>
     <!-- Do not disturb: Hide notifications footer [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_hide_footer">Your phone won\u2019t show new or existing notifications, and won\u2019t make a sound or vibrate. Notifications won\u2019t appear when you swipe down from the top of your screen.\n\nKeep in mind, critical notifications for phone activity and status will still appear.</string>
+    <string name="zen_mode_restrict_notifications_hide_footer">Your phone won\u2019t show, vibrate or make sound for new or existing notifications. Keep in mind, critical notifications for phone activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen.</string>
     <!-- Do not disturb: Custom settings option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_custom">Custom</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
@@ -8044,7 +8058,7 @@
     <string name="zen_mode_calls_title">Calls</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Calls screen footer -->
-    <string name="zen_mode_calls_footer">When Do Not Disturb is on, incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+    <string name="zen_mode_calls_footer">To be sure allowed calls make sound, check whether your device is set to ring, vibrate, or silent.</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Calls screen footer -->
     <string name="zen_mode_custom_calls_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
@@ -8062,13 +8076,13 @@
     <string name="zen_mode_messages">Allow text messages</string>
 
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_messages_footer">When Do Not Disturb is on, incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+    <string name="zen_mode_messages_footer">To be sure allowed messages make sound, check whether your device is set to ring, vibrate, or silent.</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
     <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
-    <string name="zen_mode_messages_title">Text messages</string>
+    <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">From anyone</string>
@@ -8104,7 +8118,7 @@
     <string name="zen_mode_alarms_list">alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
-    <string name="zen_mode_media">Allow media sounds</string>
+    <string name="zen_mode_media">Play media sounds</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>

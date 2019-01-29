@@ -42,6 +42,9 @@ import androidx.annotation.VisibleForTesting;
  * EXTRA_QR_CODE
  */
 public class WifiNetworkConfig {
+
+    static final String FAKE_SSID = "fake network";
+    static final String FAKE_PASSWORD = "password";
     private static final String TAG = "WifiNetworkConfig";
 
     private String mSecurity;

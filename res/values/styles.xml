@@ -284,14 +284,8 @@
         <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
-    <style name="TextAppearance.SuggestionHeader"
-           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?android:attr/colorAccent</item>
-    </style>
-
     <style name="TextAppearance.ConditionCardTitle"
-           parent="@*android:style/TextAppearance.DeviceDefault.Body2">
+           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -304,7 +298,7 @@
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?android:attr/colorAccent</item>
-        <item name="android:background">@drawable/btn_borderless_rect</item>
+        <item name="android:background">@*android:drawable/btn_borderless_rect</item>
         <item name="android:gravity">center</item>
         <item name="android:focusable">true</item>
         <item name="android:padding">8dp</item>

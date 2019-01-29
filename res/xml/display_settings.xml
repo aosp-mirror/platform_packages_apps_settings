@@ -66,6 +66,13 @@
         android:entryValues="@array/screen_timeout_values"
         settings:keywords="@string/keywords_screen_timeout" />
 
+    <Preference
+        android:key="adaptive_sleep_entry"
+        android:title="@string/adaptive_sleep_title"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.display.AdaptiveSleepSettings"
+        settings:controller="com.android.settings.display.AdaptiveSleepPreferenceController" />
+
     <SwitchPreference
         android:key="auto_rotate"
         android:title="@string/accelerometer_title"

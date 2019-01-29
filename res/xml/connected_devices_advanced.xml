@@ -24,7 +24,7 @@
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
         android:key="bluetooth_settings"
         android:title="@string/bluetooth_settings_title"
-        android:icon="@drawable/ic_settings_bluetooth"
+        android:icon="@*android:drawable/ic_settings_bluetooth"
         android:order="-9"
         settings:searchable="false"/>
 
@@ -48,7 +48,7 @@
         android:key="connected_device_printing"
         android:title="@string/print_settings"
         android:summary="@string/summary_placeholder"
-        android:icon="@drawable/ic_settings_print"
+        android:icon="@*android:drawable/ic_settings_print"
         android:fragment="com.android.settings.print.PrintSettingsFragment"
         android:order="-3"
         settings:searchable="false"/>

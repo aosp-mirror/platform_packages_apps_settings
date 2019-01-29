@@ -103,8 +103,7 @@ public class WifiNetworkListFragmentTest {
 
     /** Launch the activity via an Intent with a String extra. */
     private void launchActivity(String extraName, String extraValue) {
-        final Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
+        final Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE);
         if (extraName != null && extraValue != null) {
             intent.putExtra(extraName, extraValue);
         }
@@ -168,7 +167,7 @@ public class WifiNetworkListFragmentTest {
         setupConnectedAccessPoint();
         when(mWifiTracker.isConnected()).thenReturn(true);
 
-        launchActivity(WifiDppUtils.EXTRA_QR_CODE, TEST_DPP_URL);
+        launchActivity(Settings.EXTRA_QR_CODE, TEST_DPP_URL);
         callOnWifiStateChanged(WifiManager.WIFI_STATE_ENABLED);
 
         onView(withText(resourceString(WIFI_DISPLAY_STATUS_CONNECTED))).check(

@@ -68,7 +68,7 @@ public class BluetoothSliceBuilderTest {
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings_bluetooth);
+                com.android.internal.R.drawable.ic_settings_bluetooth);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
     }
 
