@@ -17,6 +17,8 @@
 
 package com.android.settings.panel;
 
+import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -32,6 +34,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class PanelFeatureProviderImplTest {
 
+    private static final String TEST_PACKAGENAME = "com.test.packagename";
+
     private Context mContext;
     private PanelFeatureProviderImpl mProvider;
 
@@ -44,7 +48,7 @@ public class PanelFeatureProviderImplTest {
     @Test
     public void getPanel_internetConnectivityKey_returnsCorrectPanel() {
         final PanelContent panel = mProvider.getPanel(mContext,
-                Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+                Settings.Panel.ACTION_INTERNET_CONNECTIVITY, TEST_PACKAGENAME);
 
         assertThat(panel).isInstanceOf(InternetConnectivityPanel.class);
     }
@@ -52,8 +56,16 @@ public class PanelFeatureProviderImplTest {
     @Test
     public void getPanel_volume_returnsCorrectPanel() {
         final PanelContent panel = mProvider.getPanel(mContext,
-                Settings.Panel.ACTION_VOLUME);
+                Settings.Panel.ACTION_VOLUME, TEST_PACKAGENAME);
 
         assertThat(panel).isInstanceOf(VolumePanel.class);
+    }
+
+    @Test
+    public void getPanel_mediaOutputKey_returnsCorrectPanel() {
+        final PanelContent panel = mProvider.getPanel(mContext,
+                ACTION_MEDIA_OUTPUT, TEST_PACKAGENAME);
+
+        assertThat(panel).isInstanceOf(MediaOutputPanel.class);
     }
 }

@@ -70,10 +70,12 @@ public class PanelFragment extends Fragment {
 
         final Bundle arguments = getArguments();
         final String panelType = arguments.getString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT);
+        final String packageName =
+                arguments.getString(SettingsPanelActivity.KEY_PANEL_PACKAGE_NAME);
 
         final PanelContent panel = FeatureFactory.getFactory(activity)
                 .getPanelFeatureProvider()
-                .getPanel(activity, panelType);
+                .getPanel(activity, panelType, packageName);
 
         mAdapter = new PanelSlicesAdapter(this, panel.getSlices());
 
@@ -85,6 +87,11 @@ public class PanelFragment extends Fragment {
 
         mSeeMoreButton.setOnClickListener(getSeeMoreListener(panel.getSeeMoreIntent()));
         mDoneButton.setOnClickListener(mDoneButtonListener);
+
+        //If getSeeMoreIntent() is null, hide the mSeeMoreButton.
+        if (panel.getSeeMoreIntent() == null) {
+            mSeeMoreButton.setVisibility(View.GONE);
+        }
 
         return view;
     }

@@ -27,6 +27,7 @@ import android.provider.SettingsSlicesContract;
 
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
+import com.android.settingslib.media.MediaOutputSliceConstants;
 
 /**
  * A registry of custom slice Uris.
@@ -254,5 +255,15 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(ZEN_MODE_KEY)
+            .build();
+
+    /**
+     * Backing Uri for the Media output Slice.
+     */
+    public static Uri MEDIA_OUTPUT_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT)
             .build();
 }
