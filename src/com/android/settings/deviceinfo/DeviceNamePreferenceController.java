@@ -43,8 +43,6 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         LifecycleObserver,
         OnSaveInstanceState,
         OnCreate {
-    private static final String PREF_KEY = "device_name";
-    public static final int DEVICE_NAME_SET_WARNING_ID = 1;
     private static final String KEY_PENDING_DEVICE_NAME = "key_pending_device_name";
     private String mDeviceName;
     protected WifiManager mWifiManager;
@@ -54,8 +52,8 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     private DeviceNamePreferenceHost mHost;
     private String mPendingDeviceName;
 
-    public DeviceNamePreferenceController(Context context) {
-        super(context, PREF_KEY);
+    public DeviceNamePreferenceController(Context context, String key) {
+        super(context, key);
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
@@ -67,7 +65,7 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (ValidatedEditTextPreference) screen.findPreference(PREF_KEY);
+        mPreference = screen.findPreference(getPreferenceKey());
         final CharSequence deviceName = getSummary();
         mPreference.setSummary(deviceName);
         mPreference.setText(deviceName.toString());
@@ -92,11 +90,6 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         return mContext.getResources().getBoolean(R.bool.config_show_device_name)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return PREF_KEY;
     }
 
     @Override
