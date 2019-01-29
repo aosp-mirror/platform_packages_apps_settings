@@ -25,7 +25,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
@@ -40,7 +39,6 @@ import com.android.settingslib.search.SearchIndexableResources;
  */
 public interface SearchFeatureProvider {
 
-    Intent SEARCH_UI_INTENT = new Intent(Settings.ACTION_APP_SEARCH_SETTINGS);
     int REQUEST_CODE = 0;
 
     /**
@@ -64,7 +62,7 @@ public interface SearchFeatureProvider {
     /**
      * Initializes the search toolbar.
      */
-    default void initSearchToolbar(Activity activity, Toolbar toolbar) {
+    default void initSearchToolbar(Activity activity, Toolbar toolbar, int pageId) {
         if (activity == null || toolbar == null) {
             return;
         }
@@ -87,9 +85,8 @@ public interface SearchFeatureProvider {
         navView.setBackground(null);
 
         toolbar.setOnClickListener(tb -> {
-            final Intent intent = SEARCH_UI_INTENT;
-            intent.setPackage(getSettingsIntelligencePkgName(activity));
             final Context context = activity.getApplicationContext();
+            final Intent intent = buildSearchIntent(context, pageId);
 
             if (activity.getPackageManager().queryIntentActivities(intent,
                     PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
@@ -97,10 +94,12 @@ public interface SearchFeatureProvider {
             }
 
             FeatureFactory.getFactory(context).getSlicesFeatureProvider()
-                    .indexSliceDataAsync(activity.getApplicationContext());
+                    .indexSliceDataAsync(context);
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .action(context, SettingsEnums.ACTION_SEARCH_RESULTS);
             activity.startActivityForResult(intent, REQUEST_CODE);
         });
     }
+
+    Intent buildSearchIntent(Context context, int pageId);
 }

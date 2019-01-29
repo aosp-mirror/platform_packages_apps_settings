@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -287,7 +288,7 @@ public class SettingsActivity extends SettingsBaseActivity
             final Toolbar toolbar = findViewById(R.id.search_action_bar);
             setActionBar(toolbar);
             FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                    .initSearchToolbar(this, toolbar);
+                    .initSearchToolbar(this, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
         }
 
         ActionBar actionBar = getActionBar();

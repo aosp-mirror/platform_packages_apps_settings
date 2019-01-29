@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
@@ -53,7 +54,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                .initSearchToolbar(this /* activity */, toolbar);
+                .initSearchToolbar(this /* activity */, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
 
         final ImageView avatarView = findViewById(R.id.account_avatar);
         final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(this, avatarView);

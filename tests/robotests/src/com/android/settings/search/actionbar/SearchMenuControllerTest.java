@@ -17,11 +17,11 @@
 package com.android.settings.search.actionbar;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings.Global;
@@ -29,9 +29,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settingslib.core.lifecycle.ObservableFragment;
-import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,15 +49,24 @@ public class SearchMenuControllerTest {
     @Mock
     private Menu mMenu;
     private TestPreferenceFragment mPreferenceHost;
-    private ObservableFragment mHost;
+    private InstrumentedFragment mHost;
     private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mHost = spy(new ObservableFragment());
-        when(mHost.getContext()).thenReturn(mContext);
+        mHost = new InstrumentedFragment() {
+            @Override
+            public Context getContext() {
+                return mContext;
+            }
+
+            @Override
+            public int getMetricsCategory() {
+                return SettingsEnums.TESTING;
+            }
+        };
         mPreferenceHost = new TestPreferenceFragment();
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
 
@@ -101,7 +110,7 @@ public class SearchMenuControllerTest {
         verifyZeroInteractions(mMenu);
     }
 
-    private static class TestPreferenceFragment extends ObservablePreferenceFragment {
+    private static class TestPreferenceFragment extends InstrumentedPreferenceFragment {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         }
@@ -109,6 +118,11 @@ public class SearchMenuControllerTest {
         @Override
         public Context getContext() {
             return RuntimeEnvironment.application;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return SettingsEnums.TESTING;
         }
     }
 }
