@@ -28,17 +28,26 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_R
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowPasswordUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -50,11 +59,19 @@ import org.robolectric.shadows.ShadowActivity;
 public class SetNewPasswordActivityTest {
 
     private static final String APP_LABEL = "label";
+    private static final String PKG_NAME = "packageName";
 
+    @Mock
+    private MetricsFeatureProvider mockMetricsProvider;
     private int mProvisioned;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mockMetricsProvider = fakeFeatureFactory.getMetricsFeatureProvider();
+        when(mockMetricsProvider.getAttribution(any())).thenReturn(SettingsEnums.PAGE_UNKNOWN);
+
         mProvisioned = Settings.Global.getInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0);
     }
@@ -98,6 +115,7 @@ public class SetNewPasswordActivityTest {
     @Config(shadows = {ShadowPasswordUtils.class})
     public void testLaunchChooseLock_setNewPasswordExtraWithoutPermission() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
 
@@ -108,12 +126,19 @@ public class SetNewPasswordActivityTest {
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         assertThat(shadowActivity.getNextStartedActivityForResult()).isNull();
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                PASSWORD_COMPLEXITY_HIGH);
     }
 
     @Test
     @Config(shadows = {ShadowPasswordUtils.class})
     public void testLaunchChooseLock_setNewPasswordExtraWithPermission() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
         ShadowPasswordUtils.addGrantedPermission(GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
@@ -131,12 +156,19 @@ public class SetNewPasswordActivityTest {
                 .isEqualTo(PASSWORD_COMPLEXITY_HIGH);
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
         assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME)).isEqualTo(APP_LABEL);
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                PASSWORD_COMPLEXITY_HIGH);
     }
 
     @Test
     @Config(shadows = {ShadowPasswordUtils.class})
     public void testLaunchChooseLock_setNewPasswordExtraInvalidValue() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
         ShadowPasswordUtils.addGrantedPermission(GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
@@ -152,12 +184,19 @@ public class SetNewPasswordActivityTest {
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
         assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME)).isEqualTo(APP_LABEL);
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                -1);
     }
 
     @Test
     @Config(shadows = {ShadowPasswordUtils.class})
     public void testLaunchChooseLock_setNewPasswordExtraNoneComplexity() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
         ShadowPasswordUtils.addGrantedPermission(GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
@@ -173,12 +212,46 @@ public class SetNewPasswordActivityTest {
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
         assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME)).isEqualTo(APP_LABEL);
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                PASSWORD_COMPLEXITY_NONE);
+    }
+
+    @Test
+    @Config(shadows = {ShadowPasswordUtils.class})
+    public void testLaunchChooseLock_setNewPasswordWithoutExtra() {
+        ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
+        ShadowPasswordUtils.addGrantedPermission(GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
+        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+
+        Intent intent = new Intent(ACTION_SET_NEW_PASSWORD);
+        SetNewPasswordActivity activity =
+                Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent actualIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PASSWORD);
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
+        assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME)).isEqualTo(APP_LABEL);
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                Integer.MIN_VALUE);
     }
 
     @Test
     @Config(shadows = {ShadowPasswordUtils.class})
     public void testLaunchChooseLock_setNewParentProfilePasswordExtraWithPermission() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
         ShadowPasswordUtils.addGrantedPermission(GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
@@ -194,5 +267,38 @@ public class SetNewPasswordActivityTest {
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
         assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME)).isEqualTo(APP_LABEL);
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                PASSWORD_COMPLEXITY_HIGH);
+    }
+
+    @Test
+    @Config(shadows = {ShadowPasswordUtils.class})
+    public void testLaunchChooseLock_setNewParentProfilePasswordWithoutExtra() {
+        ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
+        ShadowPasswordUtils.addGrantedPermission(GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
+        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+
+        Intent intent = new Intent(ACTION_SET_NEW_PARENT_PROFILE_PASSWORD);
+        SetNewPasswordActivity activity =
+                Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent actualIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PARENT_PROFILE_PASSWORD);
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
+        assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME)).isEqualTo(APP_LABEL);
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                Integer.MIN_VALUE);
     }
 }
