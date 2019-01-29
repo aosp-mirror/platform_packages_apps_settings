@@ -25,6 +25,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -39,6 +40,7 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
     private static final String KEY_WIFI_PRIVACY = "privacy";
     private WifiConfiguration mWifiConfiguration;
     private WifiManager mWifiManager;
+    private boolean mIsEphemeral = false;
 
     public WifiPrivacyPreferenceController(Context context) {
         super(context, KEY_WIFI_PRIVACY);
@@ -48,6 +50,10 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
 
     public void setWifiConfiguration(WifiConfiguration wifiConfiguration) {
         mWifiConfiguration = wifiConfiguration;
+    }
+
+    public void setIsEphemeral(boolean isEphemeral) {
+        mIsEphemeral = isEphemeral;
     }
 
     @Override
@@ -62,6 +68,12 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         final int randomizationLevel = getRandomizationValue();
         dropDownPreference.setValue(Integer.toString(randomizationLevel));
         updateSummary(dropDownPreference, randomizationLevel);
+
+        // Makes preference not selectable, when this is a ephemeral network.
+        if (mIsEphemeral) {
+            preference.setSelectable(false);
+            dropDownPreference.setSummary(R.string.wifi_privacy_settings_ephemeral_summary);
+        }
     }
 
     @Override

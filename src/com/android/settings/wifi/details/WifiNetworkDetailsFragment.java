@@ -141,6 +141,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
         WifiPrivacyPreferenceController preferenceController = new WifiPrivacyPreferenceController(
                 context);
         preferenceController.setWifiConfiguration(mAccessPoint.getConfig());
+        preferenceController.setIsEphemeral(mAccessPoint.isEphemeral());
         controllers.add(preferenceController);
 
         return controllers;
