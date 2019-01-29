@@ -18,26 +18,26 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="gup_settings"
-    android:title="@string/gup_dashboard_title">
+    android:key="game_driver_settings"
+    android:title="@string/game_driver_dashboard_title">
 
     <SwitchPreference
-        android:key="gup_all_apps_preference"
-        android:title="@string/gup_all_apps_switch_title"
-        settings:controller="com.android.settings.development.gup.GupEnableForAllAppsPreferenceController">
+        android:key="game_driver_all_apps_preference"
+        android:title="@string/game_driver_all_apps_preference_title"
+        settings:controller="com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController">
     </SwitchPreference>
 
     <PreferenceCategory
-        android:key="gup_category"
-        android:title="@string/gup_app_preference_title"
-        settings:controller="com.android.settings.development.gup.GupPreferenceController">
+        android:key="game_driver_category"
+        android:title="@string/game_driver_app_preference_title"
+        settings:controller="com.android.settings.development.gamedriver.GameDriverAppPreferenceController">
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="footer_preference"
         android:title="@string/game_driver_footer_text"
         android:selectable="false"
-        settings:controller="com.android.settings.development.gup.GameDriverFooterPreferenceController">
+        settings:controller="com.android.settings.development.gamedriver.GameDriverFooterPreferenceController">
     </com.android.settingslib.widget.FooterPreference>
 
 </PreferenceScreen>

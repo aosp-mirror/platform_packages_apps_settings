@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.internal.logging.nano.MetricsProto;
+import android.app.settings.SettingsEnums;
+
 import com.android.settings.R;
 
 import org.junit.Before;
@@ -27,12 +28,13 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-public class GupDashboardTest {
-    private GupDashboard mDashboard;
+public class GameDriverDashboardTest {
+
+    private GameDriverDashboard mDashboard;
 
     @Before
     public void setUp() {
-        mDashboard = new GupDashboard();
+        mDashboard = new GameDriverDashboard();
     }
 
     @Test
@@ -41,14 +43,13 @@ public class GupDashboardTest {
     }
 
     @Test
-    public void getMetricesCategory_shouldReturnGupDashboard() {
+    public void getMetricesCategory_shouldReturnGameDriverDashboard() {
         assertThat(mDashboard.getMetricsCategory())
-                .isEqualTo(MetricsProto.MetricsEvent.SETTINGS_GUP_DASHBOARD);
+                .isEqualTo(SettingsEnums.SETTINGS_GAME_DRIVER_DASHBOARD);
     }
 
     @Test
-    public void getPreferenceScreen_shouldReturnGupSettings() {
-        assertThat(mDashboard.getPreferenceScreenResId())
-                .isEqualTo(R.xml.gup_settings);
+    public void getPreferenceScreen_shouldReturnGameDriverSettings() {
+        assertThat(mDashboard.getPreferenceScreenResId()).isEqualTo(R.xml.game_driver_settings);
     }
 }
