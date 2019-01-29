@@ -300,6 +300,23 @@ public class NotificationBackend {
         }
     }
 
+    public boolean shouldHideSilentStatusBarIcons(Context context) {
+        try {
+            return sINM.shouldHideSilentStatusIcons(context.getPackageName());
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public void setHideSilentStatusIcons(boolean hide) {
+        try {
+            sINM.setHideSilentStatusIcons(hide);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
     protected void recordAggregatedUsageEvents(Context context, AppRow appRow) {
         long now = System.currentTimeMillis();
         long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);

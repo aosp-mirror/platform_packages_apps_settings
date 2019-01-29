@@ -26,6 +26,12 @@
         android:summary="@string/summary_placeholder"
         settings:searchable="false"/>
 
+    <SwitchPreference
+        android:key="hide_silent_icons"
+        android:title="@string/hide_silent_icons_title"
+        android:summary="@string/hide_silent_icons_summary"
+        settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController" />
+
     <!-- Notification badging -->
     <SwitchPreference
         android:key="notification_badging"
