@@ -12,6 +12,7 @@ import static org.robolectric.Robolectric.buildActivity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.RadioButton;
@@ -20,7 +21,6 @@ import com.android.settings.R;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.notification.RedactionInterstitial.RedactionInterstitialFragment;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
@@ -30,12 +30,13 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowUtils.class,
         ShadowRestrictedLockUtilsInternal.class,
-        ShadowUserManager.class,
 })
 public class RedactionInterstitialTest {
     private RedactionInterstitial mActivity;
@@ -103,7 +104,9 @@ public class RedactionInterstitialTest {
     @Test
     public void managedProfileNoRestrictionsTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
-        ShadowUserManager.getShadow().addManagedProfile(UserHandle.myUserId());
+        final ShadowUserManager sum =
+                Shadow.extract(RuntimeEnvironment.application.getSystemService(UserManager.class));
+        sum.setManagedProfile(true);
         setupActivity();
 
         assertHideAllVisible(false);
@@ -114,7 +117,9 @@ public class RedactionInterstitialTest {
     @Test
     public void managedProfileUnredactedRestrictionTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
-        ShadowUserManager.getShadow().addManagedProfile(UserHandle.myUserId());
+        final ShadowUserManager sum =
+                Shadow.extract(RuntimeEnvironment.application.getSystemService(UserManager.class));
+        sum.setManagedProfile(true);
         ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
         setupActivity();
