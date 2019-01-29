@@ -22,9 +22,12 @@ import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
@@ -38,6 +41,7 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Preference controller to allow users to choose an overlay from a list for a given category.
@@ -46,6 +50,7 @@ import java.util.List;
  */
 public class OverlayCategoryPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+    private static final String TAG = "OverlayCategoryPC";
     @VisibleForTesting
     static final String PACKAGE_DEVICE_DEFAULT = "package_device_default";
     private static final String OVERLAY_TARGET_PACKAGE = "android";
@@ -100,12 +105,11 @@ public class OverlayCategoryPreferenceController extends DeveloperOptionsPrefere
     }
 
     private boolean setOverlay(String packageName) {
-        String currentPackageName = null;
-        for (OverlayInfo o : getOverlayInfos()) {
-            if (o.isEnabled()) {
-                currentPackageName = o.packageName;
-            }
-        }
+        final String currentPackageName = getOverlayInfos().stream()
+                .filter(info -> info.isEnabled())
+                .map(info -> info.packageName)
+                .findFirst()
+                .orElse(null);
 
         if (PACKAGE_DEVICE_DEFAULT.equals(packageName) && TextUtils.isEmpty(currentPackageName)
                 || TextUtils.equals(packageName, currentPackageName)) {
@@ -113,18 +117,33 @@ public class OverlayCategoryPreferenceController extends DeveloperOptionsPrefere
             return true;
         }
 
-        final boolean result;
-        try {
-            if (PACKAGE_DEVICE_DEFAULT.equals(packageName)) {
-                result = mOverlayManager.setEnabled(currentPackageName, false, USER_SYSTEM);
-            } else {
-                result = mOverlayManager.setEnabledExclusiveInCategory(packageName, USER_SYSTEM);
+        new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                try {
+                    if (PACKAGE_DEVICE_DEFAULT.equals(packageName)) {
+                        return mOverlayManager.setEnabled(currentPackageName, false, USER_SYSTEM);
+                    } else {
+                        return mOverlayManager.setEnabledExclusiveInCategory(packageName, USER_SYSTEM);
+                    }
+                } catch (RemoteException re) {
+                    Log.w(TAG, "Error enabling overlay.", re);
+                    return false;
+                }
             }
-        } catch (RemoteException re) {
-            throw re.rethrowFromSystemServer();
-        }
-        updateState(mPreference);
-        return result;
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                updateState(mPreference);
+                if (!success) {
+                    Toast.makeText(
+                            mContext, R.string.overlay_toast_failed_to_apply, Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+        }.execute();
+
+        return true; // Assume success; toast on failure.
     }
 
     @Override
