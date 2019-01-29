@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -50,6 +51,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
 
         updateWindowProperties();
         setContentView(R.layout.settings_homepage_container);
+        setHomepageContainerPaddingTop();
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -85,5 +87,20 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
         );
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.homepage_status_bar_color));
+    }
+
+    @VisibleForTesting
+    void setHomepageContainerPaddingTop() {
+        final View view = this.findViewById(R.id.homepage_container);
+
+        final int statusBarHeight = getResources().getDimensionPixelSize(
+                com.android.internal.R.dimen.status_bar_height);
+        final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
+        final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
+
+        // The top padding is the height of status bar + height of action bar(48dp) + top/bottom
+        // margins(16dp)
+        final int paddingTop = statusBarHeight + searchBarHeight + searchBarMargin * 2;
+        view.setPadding(0 /* left */, paddingTop, 0 /* right */, 0 /* bottom */);
     }
 }
