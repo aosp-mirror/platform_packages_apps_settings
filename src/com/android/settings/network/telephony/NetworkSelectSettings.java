@@ -122,7 +122,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
         final Activity activity = getActivity();
         if (activity != null) {
-            mProgressHeader = setPinnedHeaderView(R.layout.wifi_progress_header)
+            mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
                     .findViewById(R.id.progress_bar_animation);
             setProgressBarVisible(false);
         }
