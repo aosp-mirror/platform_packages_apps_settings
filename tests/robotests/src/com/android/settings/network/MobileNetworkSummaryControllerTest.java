@@ -16,10 +16,16 @@
 
 package com.android.settings.network;
 
+import static android.telephony.TelephonyManager.MultiSimVariants.DSDS;
+import static android.telephony.TelephonyManager.MultiSimVariants.UNKNOWN;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,8 +34,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.SubscriptionInfo;
+import android.telephony.TelephonyManager;
+import android.telephony.euicc.EuiccManager;
 
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.widget.AddPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,7 +53,6 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.Arrays;
 
 import androidx.lifecycle.Lifecycle;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
@@ -52,10 +60,12 @@ public class MobileNetworkSummaryControllerTest {
     @Mock
     private Lifecycle mLifecycle;
     @Mock
-    PreferenceScreen mPreferenceScreen;
+    private TelephonyManager mTelephonyManager;
 
-    Preference mPreference;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
+    private AddPreference mPreference;
     private Context mContext;
     private MobileNetworkSummaryController mController;
 
@@ -63,8 +73,11 @@ public class MobileNetworkSummaryControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(Robolectric.setupActivity(Activity.class));
+        when(mContext.getSystemService(eq(TelephonyManager.class))).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(UNKNOWN);
+
         mController = new MobileNetworkSummaryController(mContext, mLifecycle);
-        mPreference = new Preference(mContext);
+        mPreference = spy(new AddPreference(mContext, null));
         mPreference.setKey(mController.getPreferenceKey());
         when(mPreferenceScreen.findPreference(eq(mController.getPreferenceKey()))).thenReturn(
                 mPreference);
@@ -76,15 +89,21 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
-    public void getSummary_noSubscriptions_correctSummary() {
+    public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("Add a network");
+
+        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getAction()).isEqualTo(
+                EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
     }
 
     @Test
     public void getSummary_oneSubscription_correctSummaryAndClickHandler() {
-        SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub1.getDisplayName()).thenReturn("sub1");
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
@@ -93,7 +112,7 @@ public class MobileNetworkSummaryControllerTest {
         assertThat(mController.getSummary()).isEqualTo("sub1");
         assertThat(mPreference.getFragment()).isNull();
         mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
-        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).startActivity(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
                 MobileNetworkActivity.class.getName());
@@ -101,8 +120,8 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void getSummary_twoSubscriptions_correctSummaryAndFragment() {
-        SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub2.getSubscriptionId()).thenReturn(2);
 
@@ -115,8 +134,8 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void getSummaryAfterUpdate_twoSubscriptionsBecomesOne_correctSummaryAndFragment() {
-        SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub2.getSubscriptionId()).thenReturn(2);
         when(sub1.getDisplayName()).thenReturn("sub1");
@@ -135,7 +154,7 @@ public class MobileNetworkSummaryControllerTest {
         assertThat(mController.getSummary()).isEqualTo("sub1");
         assertThat(mPreference.getFragment()).isNull();
         mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
-        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).startActivity(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
                 MobileNetworkActivity.class.getName());
@@ -143,8 +162,8 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void getSummaryAfterUpdate_oneSubscriptionBecomesTwo_correctSummaryAndFragment() {
-        SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub2.getSubscriptionId()).thenReturn(2);
         when(sub1.getDisplayName()).thenReturn("sub1");
@@ -156,7 +175,7 @@ public class MobileNetworkSummaryControllerTest {
         assertThat(mController.getSummary()).isEqualTo("sub1");
         assertThat(mPreference.getFragment()).isNull();
         mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
-        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).startActivity(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
                 MobileNetworkActivity.class.getName());
@@ -167,5 +186,54 @@ public class MobileNetworkSummaryControllerTest {
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("2 SIMs");
         assertThat(mPreference.getFragment()).isEqualTo(MobileNetworkListFragment.class.getName());
+    }
+
+    @Test
+    public void addButton_noSubscriptionsSingleSimMode_noAddClickListener() {
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        verify(mPreference, never()).setOnAddClickListener(notNull());
+    }
+
+    @Test
+    public void addButton_oneSubscriptionSingleSimMode_noAddClickListener() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        verify(mPreference, never()).setOnAddClickListener(notNull());
+    }
+
+    @Test
+    public void addButton_noSubscriptionsMultiSimMode_hasAddClickListenerAndPrefDisabled() {
+        when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(DSDS);
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        assertThat(mPreference.isEnabled()).isFalse();
+        verify(mPreference, never()).setOnAddClickListener(isNull());
+        verify(mPreference).setOnAddClickListener(notNull());
+    }
+
+    @Test
+    public void addButton_oneSubscriptionMultiSimMode_hasAddClickListener() {
+        when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(DSDS);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        verify(mPreference, never()).setOnAddClickListener(isNull());
+        verify(mPreference).setOnAddClickListener(notNull());
+    }
+
+    @Test
+    public void addButton_twoSubscriptionsMultiSimMode_hasAddClickListener() {
+        when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(DSDS);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        verify(mPreference, never()).setOnAddClickListener(isNull());
+        verify(mPreference).setOnAddClickListener(notNull());
     }
 }

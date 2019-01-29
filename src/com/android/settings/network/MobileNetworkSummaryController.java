@@ -16,6 +16,8 @@
 
 package com.android.settings.network;
 
+import static android.telephony.TelephonyManager.MultiSimVariants.UNKNOWN;
+
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
@@ -23,18 +25,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
+import android.telephony.euicc.EuiccManager;
+
+import com.android.settings.R;
+import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.widget.AddPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
+
+import java.util.List;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkActivity;
-import com.android.settingslib.core.AbstractPreferenceController;
-
-import java.util.List;
 
 public class MobileNetworkSummaryController extends AbstractPreferenceController implements
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver {
@@ -44,7 +49,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     private SubscriptionManager mSubscriptionManager;
     private SubscriptionsChangeListener mChangeListener;
-    private PreferenceScreen mScreen;
+    private TelephonyManager mTelephonyMgr;
+    private AddPreference mPreference;
 
     /**
      * This controls the summary text and click behavior of the "Mobile network" item on the
@@ -64,6 +70,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     public MobileNetworkSummaryController(Context context, Lifecycle lifecycle) {
         super(context);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mTelephonyMgr = mContext.getSystemService(TelephonyManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
         lifecycle.addObserver(this);
     }
@@ -82,7 +89,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mScreen = screen;
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -100,29 +107,51 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         }
     }
 
-    private void update() {
-        if (mScreen != null) {
-            final Preference preference = mScreen.findPreference(getPreferenceKey());
-            refreshSummary(preference);
-            final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
-                    mSubscriptionManager);
+    private void startAddSimFlow() {
+        final Intent intent = new Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
+        mContext.startActivity(intent);
+    }
 
-            preference.setOnPreferenceClickListener(null);
-            preference.setFragment(null);
-            if (subs.size() == 0) {
-                preference.setOnPreferenceClickListener((Preference pref) -> {
-                    // TODO(asargent) - need to get correct intent to fire here
-                    return true;
-                });
-            } else if (subs.size() == 1) {
-                preference.setOnPreferenceClickListener((Preference pref) -> {
-                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                    mContext.startActivity(intent);
-                    return true;
-                });
+    private boolean shouldEnableAddButton() {
+        // The add button should only show up if the device is in multi-sim mode.
+        return mTelephonyMgr.getMultiSimConfiguration() != UNKNOWN;
+    }
+
+    private void update() {
+        if (mPreference == null) {
+            return;
+        }
+        final boolean enableAddButton = shouldEnableAddButton();
+        refreshSummary(mPreference);
+        if (!enableAddButton) {
+            mPreference.setOnAddClickListener(null);
+        } else {
+            mPreference.setOnAddClickListener(p -> {
+                startAddSimFlow();
+            });
+        }
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
+                mSubscriptionManager);
+        mPreference.setOnPreferenceClickListener(null);
+        mPreference.setFragment(null);
+        mPreference.setEnabled(true);
+        if (subs.isEmpty()) {
+            if (enableAddButton) {
+                mPreference.setEnabled(false);
             } else {
-                preference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
+                mPreference.setOnPreferenceClickListener((Preference pref) -> {
+                    startAddSimFlow();
+                    return true;
+                });
             }
+        } else if (subs.size() == 1) {
+            mPreference.setOnPreferenceClickListener((Preference pref) -> {
+                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                mContext.startActivity(intent);
+                return true;
+            });
+        } else {
+            mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
         }
     }
 
@@ -142,6 +171,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onSubscriptionsChanged() {
+        refreshSummary(mPreference);
         update();
     }
 }
