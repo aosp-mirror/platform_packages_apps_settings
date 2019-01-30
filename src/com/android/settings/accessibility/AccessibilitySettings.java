@@ -91,7 +91,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_EXPERIMENTAL = "experimental_category";
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
 
-    private static final String[] CATEGORIES = new String[]{
+    private static final String[] CATEGORIES = new String[] {
             CATEGORY_SCREEN_READER, CATEGORY_AUDIO_AND_CAPTIONS, CATEGORY_DISPLAY,
             CATEGORY_INTERACTION_CONTROL, CATEGORY_EXPERIMENTAL, CATEGORY_DOWNLOADED_SERVICES
     };
@@ -132,8 +132,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "accessibility_content_timeout_preference_fragment";
     private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
             "accessibility_control_timeout_preference_fragment";
-    private static final String LIVE_CAPTION_PREFERENCE_KEY =
-            "live_caption";
+
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -233,11 +232,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
     private Preference mVibrationPreferenceScreen;
-    private Preference mLiveCaptionPreference;
     private SwitchPreference mToggleInversionPreference;
     private ColorInversionPreferenceController mInversionPreferenceController;
     private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
-    private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -296,9 +293,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 (context, HEARING_AID_PREFERENCE);
         mHearingAidPreferenceController.setFragmentManager(getFragmentManager());
         getLifecycle().addObserver(mHearingAidPreferenceController);
-
-        mLiveCaptionPreferenceController = new LiveCaptionPreferenceController(context,
-                LIVE_CAPTION_PREFERENCE_KEY);
     }
 
     @Override
@@ -486,10 +480,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         // Captioning.
         mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
-
-        // Live caption
-        mLiveCaptionPreference = findPreference(LIVE_CAPTION_PREFERENCE_KEY);
-        mLiveCaptionPreferenceController.displayPreference(getPreferenceScreen());
 
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
@@ -726,8 +716,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         mHearingAidPreferenceController.updateState(mHearingAidPreference);
 
-        mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
-
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
                 mCaptioningPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
@@ -748,6 +736,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     void updateAccessibilityTimeoutSummary(ContentResolver resolver, Preference pref) {
+
         String[] timeoutSummarys = getResources().getStringArray(
                 R.array.accessibility_timeout_summaries);
         int[] timeoutValues = getResources().getIntArray(
@@ -816,7 +805,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         pref.setSummary(entries[index]);
     }
 
-    @VisibleForTesting
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     void updateVibrationSummary(Preference pref) {
         final Context context = getContext();
         final Vibrator vibrator = context.getSystemService(Vibrator.class);
