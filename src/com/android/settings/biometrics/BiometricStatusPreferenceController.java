@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -114,7 +116,7 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
                 return false;
             }
             Intent intent = new Intent();
-            intent.setClassName("com.android.settings", clazz);
+            intent.setClassName(SETTINGS_PACKAGE_NAME, clazz);
             intent.putExtra(Intent.EXTRA_USER_ID, userId);
             context.startActivity(intent);
             return true;

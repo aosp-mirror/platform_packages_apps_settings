@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.batterytip.detectors;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
@@ -87,7 +89,7 @@ public class RestrictAppDetector implements BatteryTipDetector {
     private BatteryTip getFakeData() {
         final List<AppInfo> highUsageApps = new ArrayList<>();
         highUsageApps.add(new AppInfo.Builder()
-                .setPackageName("com.android.settings")
+                .setPackageName(SETTINGS_PACKAGE_NAME)
                 .build());
         return new RestrictAppTip(BatteryTip.StateType.NEW, highUsageApps);
     }

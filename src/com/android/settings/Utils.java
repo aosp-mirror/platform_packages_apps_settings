@@ -111,16 +111,7 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static final int UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY = 1;
 
-    /**
-     * Color spectrum to use to indicate badness.  0 is completely transparent (no data),
-     * 1 is most bad (red), the last value is least bad (green).
-     */
-    public static final int[] BADNESS_COLORS = new int[] {
-            0x00000000, 0xffc43828, 0xffe54918, 0xfff47b00,
-            0xfffabf2c, 0xff679e37, 0xff0a7f42
-    };
-
-    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
+    public static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     public static final String OS_PKG = "os";
 

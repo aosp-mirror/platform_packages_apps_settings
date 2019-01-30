@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.app.usage.UsageStats;
@@ -91,7 +93,7 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
         SKIP_SYSTEM_PACKAGES.addAll(Arrays.asList(
                 "android",
                 "com.android.phone",
-                "com.android.settings",
+                SETTINGS_PACKAGE_NAME,
                 "com.android.systemui",
                 "com.android.providers.calendar",
                 "com.android.providers.media"
