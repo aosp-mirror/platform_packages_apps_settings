@@ -17,7 +17,6 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
@@ -160,7 +159,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         }
 
         if (cancelActivity) {
-            setResult(Activity.RESULT_CANCELED);
             finish();
         }
     }
@@ -279,8 +277,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         return mWifiDppQrCode;
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    protected boolean setWifiNetworkConfig(WifiNetworkConfig config) {
+    @VisibleForTesting
+    boolean setWifiNetworkConfig(WifiNetworkConfig config) {
         if(!WifiNetworkConfig.isValidConfig(config)) {
             return false;
         } else {
@@ -289,8 +287,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         }
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    protected boolean setWifiDppQrCode(WifiQrCode wifiQrCode) {
+    @VisibleForTesting
+    boolean setWifiDppQrCode(WifiQrCode wifiQrCode) {
         if (wifiQrCode == null) {
             return false;
         }
@@ -307,7 +305,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     public boolean onNavigateUp() {
         Fragment fragment = mFragmentManager.findFragmentById(R.id.fragment_container);
         if (fragment instanceof WifiDppQrCodeGeneratorFragment) {
-            setResult(Activity.RESULT_CANCELED);
             finish();
             return true;
         } else if (fragment instanceof WifiDppQrCodeScannerFragment) {

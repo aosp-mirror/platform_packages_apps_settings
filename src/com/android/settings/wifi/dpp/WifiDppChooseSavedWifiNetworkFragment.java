@@ -17,7 +17,6 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
@@ -100,9 +99,7 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
                     .ACTION_CONFIGURATOR_QR_CODE_GENERATOR.equals(action)) {
                 getFragmentManager().popBackStack();
             } else {
-                final Activity activity = getActivity();
-                activity.setResult(Activity.RESULT_CANCELED);
-                activity.finish();
+                getActivity().finish();
             }
         });
 

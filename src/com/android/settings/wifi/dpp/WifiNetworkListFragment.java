@@ -235,7 +235,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             if (mOnChooseNetworkListener != null) {
                 mOnChooseNetworkListener.onChooseNetwork(
                         new WifiNetworkConfig(
-                                WifiQrCode.SECURITY_WPA,
+                                WifiQrCode.SECURITY_WPA_PSK,
                                 /* ssid */ WifiNetworkConfig.FAKE_SSID,
                                 /* preSharedKey */ WifiNetworkConfig.FAKE_PASSWORD,
                                 /* hiddenSsid */ true,

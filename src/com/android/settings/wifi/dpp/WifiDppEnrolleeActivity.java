@@ -117,7 +117,6 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
                 break;
             default:
                 Log.e(TAG, "Launch with an invalid action");
-                setResult(Activity.RESULT_CANCELED);
                 finish();
         }
     }
@@ -141,7 +140,6 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
 
     @Override
     public boolean onNavigateUp(){
-        setResult(Activity.RESULT_CANCELED);
         finish();
         return true;
     }

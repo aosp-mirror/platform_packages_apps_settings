@@ -19,7 +19,7 @@ package com.android.settings.wifi.dpp;
 import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_NO_PASSWORD;
 import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_SAE;
 import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WEP;
-import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WPA;
+import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WPA_PSK;
 
 import android.content.Context;
 import android.content.Intent;
@@ -53,8 +53,8 @@ public class WifiNetworkConfig {
     private boolean mHiddenSsid;
     private int mNetworkId;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    protected WifiNetworkConfig(String security, String ssid, String preSharedKey,
+    @VisibleForTesting
+    WifiNetworkConfig(String security, String ssid, String preSharedKey,
             boolean hiddenSsid, int networkId) {
         mSecurity = security;
         mSsid = ssid;
@@ -218,7 +218,7 @@ public class WifiNetworkConfig {
         }
 
         // DPP 1.0 only supports SAE and PSK.
-        if (SECURITY_SAE.equals(mSecurity) || SECURITY_WPA.equals(mSecurity)) {
+        if (SECURITY_SAE.equals(mSecurity) || SECURITY_WPA_PSK.equals(mSecurity)) {
             return true;
         }
 
@@ -256,7 +256,7 @@ public class WifiNetworkConfig {
             } else {
                 wifiConfiguration.wepKeys[0] = addQuotationIfNeeded(mPreSharedKey);
             }
-        } else if (mSecurity.startsWith(SECURITY_WPA)) {
+        } else if (mSecurity.startsWith(SECURITY_WPA_PSK)) {
             wifiConfiguration.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
 
             if (mPreSharedKey.matches("[0-9A-Fa-f]{64}")) {
