@@ -94,10 +94,12 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private SpinnerPreference mCycle;
     private RestrictedSwitchPreference mUnrestrictedData;
     private DataSaverBackend mDataSaverBackend;
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mContext = getContext();
         mPackageManager = getPackageManager();
         final Bundle args = getArguments();
 
@@ -105,9 +107,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         mTemplate = (args != null) ? (NetworkTemplate) args.getParcelable(ARG_NETWORK_TEMPLATE)
                 : null;
         if (mTemplate == null) {
-            Context context = getContext();
-            mTemplate = DataUsageUtils.getDefaultTemplate(context,
-                    DataUsageUtils.getDefaultSubscriptionId(context));
+            mTemplate = DataUsageUtils.getDefaultTemplate(mContext,
+                    DataUsageUtils.getDefaultSubscriptionId(mContext));
         }
         if (mAppItem == null) {
             int uid = (args != null) ? args.getInt(AppInfoBase.ARG_PACKAGE_UID, -1)
@@ -131,7 +132,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
 
         mCycle = (SpinnerPreference) findPreference(KEY_CYCLE);
-        mCycleAdapter = new CycleAdapter(getContext(), mCycle, mCycleListener);
+        mCycleAdapter = new CycleAdapter(mContext, mCycle, mCycleListener);
 
         if (mAppItem.key > 0) {
             if (mPackages.size() != 0) {
@@ -155,7 +156,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                         KEY_UNRESTRICTED_DATA);
                 mUnrestrictedData.setOnPreferenceChangeListener(this);
             }
-            mDataSaverBackend = new DataSaverBackend(getContext());
+            mDataSaverBackend = new DataSaverBackend(mContext);
             mAppSettings = findPreference(KEY_APP_SETTINGS);
 
             mAppSettingsIntent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
@@ -256,7 +257,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     private void updatePrefs(boolean restrictBackground, boolean unrestrictData) {
         final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMeteredDataRestricted(
-                getContext(), mPackageName, UserHandle.getUserId(mAppItem.key));
+                mContext, mPackageName, UserHandle.getUserId(mAppItem.key));
         if (mRestrictBackground != null) {
             mRestrictBackground.setChecked(!restrictBackground);
             mRestrictBackground.setDisabledByAdmin(admin);
@@ -294,11 +295,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             foregroundBytes = data.getForegroudUsage();
         }
         final long totalBytes = backgroundBytes + foregroundBytes;
-        final Context context = getContext();
 
-        mTotalUsage.setSummary(DataUsageUtils.formatDataUsage(context, totalBytes));
-        mForegroundUsage.setSummary(DataUsageUtils.formatDataUsage(context, foregroundBytes));
-        mBackgroundUsage.setSummary(DataUsageUtils.formatDataUsage(context, backgroundBytes));
+        mTotalUsage.setSummary(DataUsageUtils.formatDataUsage(mContext, totalBytes));
+        mForegroundUsage.setSummary(DataUsageUtils.formatDataUsage(mContext, foregroundBytes));
+        mBackgroundUsage.setSummary(DataUsageUtils.formatDataUsage(mContext, backgroundBytes));
     }
 
     private boolean getAppRestrictBackground() {
@@ -364,16 +364,24 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         }
     };
 
-    private final LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>> mUidDataCallbacks =
+    @VisibleForTesting
+    final LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>> mUidDataCallbacks =
         new LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>>() {
             @Override
             public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
-                return NetworkCycleDataForUidLoader.builder(getContext())
-                    .setUid(mAppItem.key)
-                    .setRetrieveDetail(true)
+                final NetworkCycleDataForUidLoader.Builder builder
+                    = NetworkCycleDataForUidLoader.builder(mContext);
+                builder.setRetrieveDetail(true)
                     .setNetworkTemplate(mTemplate)
-                    .setSubscriberId(mTemplate.getSubscriberId())
-                    .build();
+                    .setSubscriberId(mTemplate.getSubscriberId());
+                if (mAppItem.category == AppItem.CATEGORY_USER) {
+                    for (int i = 0; i < mAppItem.uids.size(); i++) {
+                        builder.addUid(mAppItem.uids.keyAt(i));
+                    }
+                } else {
+                    builder.addUid(mAppItem.key);
+                }
+                return builder.build();
             }
 
             @Override
