@@ -53,7 +53,7 @@ public class AndroidBeamEnabler extends BaseNfcEnabler {
         switch (newState) {
             case NfcAdapter.STATE_OFF:
                 mPreference.setEnabled(false);
-                mPreference.setSummary(R.string.android_beam_disabled_summary);
+                mPreference.setSummary(R.string.nfc_disabled_summary);
                 break;
             case NfcAdapter.STATE_ON:
                 if (mBeamDisallowedBySystem) {

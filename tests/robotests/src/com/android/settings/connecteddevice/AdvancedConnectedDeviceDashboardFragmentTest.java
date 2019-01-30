@@ -16,7 +16,11 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.nfc.NfcAdapter;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
@@ -26,6 +30,7 @@ import com.android.settingslib.drawer.CategoryKey;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -39,6 +44,9 @@ import java.util.List;
 public class AdvancedConnectedDeviceDashboardFragmentTest {
 
     private AdvancedConnectedDeviceDashboardFragment mFragment;
+
+    @Mock
+    private NfcAdapter mNfcAdapter;
 
     @Before
     public void setUp() {
@@ -69,9 +77,13 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
 
     @Test
     public void testSearchIndexProvider_correctNonIndexables() {
+        Context context = spy(RuntimeEnvironment.application);
+        when(context.getApplicationContext()).thenReturn(context);
+        when(NfcAdapter.getDefaultAdapter(context)).thenReturn(mNfcAdapter);
+        when(mNfcAdapter.deviceSupportsNfcSecure()).thenReturn(true);
         final List<String> niks =
                 AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getNonIndexableKeys(RuntimeEnvironment.application);
+                        .getNonIndexableKeys(context);
 
         assertThat(niks).contains(AdvancedConnectedDeviceDashboardFragment.KEY_BLUETOOTH);
     }
