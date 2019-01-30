@@ -16,23 +16,23 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Application;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
@@ -44,27 +44,29 @@ import android.content.pm.ResolveInfo;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.widget.AppEntitiesHeaderController;
+import com.android.settingslib.widget.AppEntityInfo;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -75,12 +77,6 @@ public class RecentAppsPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
-    @Mock
-    private PreferenceCategory mCategory;
-    @Mock
-    private Preference mSeeAllPref;
-    @Mock
-    private PreferenceCategory mDivider;
     @Mock
     private UsageStatsManager mUsageStatsManager;
     @Mock
@@ -95,73 +91,130 @@ public class RecentAppsPreferenceControllerTest {
     private ApplicationInfo mApplicationInfo;
     @Mock
     private PowerManager mPowerManager;
+    @Mock
+    private Fragment mFragment;
 
-    private Context mContext;
+    private LayoutPreference mRecentAppsPreference;
     private RecentAppsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getApplicationContext()).thenReturn(mContext);
+        final Context context = spy(RuntimeEnvironment.application);
+        when(context.getApplicationContext()).thenReturn(context);
         ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", mAppState);
-        doReturn(mUsageStatsManager).when(mContext).getSystemService(Context.USAGE_STATS_SERVICE);
-        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
-        doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
-        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
+        doReturn(mUsageStatsManager).when(context).getSystemService(Context.USAGE_STATS_SERVICE);
+        doReturn(mUserManager).when(context).getSystemService(Context.USER_SERVICE);
+        doReturn(mPackageManager).when(context).getPackageManager();
+        doReturn(mPowerManager).when(context).getSystemService(PowerManager.class);
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
 
-        mController = new RecentAppsPreferenceController(mContext, mAppState, null);
-        when(mScreen.findPreference(anyString())).thenReturn(mCategory);
+        final View appEntitiesHeaderView = LayoutInflater.from(context).inflate(
+                R.layout.app_entities_header, null /* root */);
+        final Preference seeAllPreference = new Preference(context);
+        final Preference dividerPreference = new Preference(context);
+        mRecentAppsPreference = spy(new LayoutPreference(context, appEntitiesHeaderView));
 
-        when(mScreen.findPreference(RecentAppsPreferenceController.KEY_SEE_ALL))
-                .thenReturn(mSeeAllPref);
+        mController = spy(new RecentAppsPreferenceController(context, "test_key"));
+        mController.setFragment(mFragment);
+        mController.mAppEntitiesController = mock(AppEntitiesHeaderController.class);
+        mController.mRecentAppsPreference = mRecentAppsPreference;
+        mController.mAllAppPref = seeAllPreference;
+        mController.mDivider = dividerPreference;
+
+        when(mScreen.findPreference(RecentAppsPreferenceController.KEY_ALL_APP_INFO))
+                .thenReturn(seeAllPreference);
         when(mScreen.findPreference(RecentAppsPreferenceController.KEY_DIVIDER))
-                .thenReturn(mDivider);
-        when(mCategory.getContext()).thenReturn(mContext);
+                .thenReturn(dividerPreference);
+        when(mScreen.findPreference("test_key")).thenReturn(mRecentAppsPreference);
+        when(mRecentAppsPreference.findViewById(R.id.app_entities_header)).thenReturn(
+                appEntitiesHeaderView);
     }
 
     @Test
-    public void isAlwaysAvailable() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void getAvailabilityStatus_hasRecentApps_shouldReturnAvailable() {
+        final List<UsageStats> stats = new ArrayList<>();
+        final UsageStats stat1 = new UsageStats();
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "pkg.class";
+        stats.add(stat1);
+        // stat1 is valid app.
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mAppEntry);
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+                .thenReturn(new ResolveInfo());
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(stats);
+        mAppEntry.info = mApplicationInfo;
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void doNotIndexCategory() {
-        final List<String> nonIndexable = new ArrayList<>();
-
-        mController.updateNonIndexableKeys(nonIndexable);
-
-        assertThat(nonIndexable).containsAllOf(mController.getPreferenceKey(),
-                RecentAppsPreferenceController.KEY_DIVIDER);
+    public void getAvailabilityStatus_noRecentApps_shouldReturnAvailableUnsearchable() {
+        // No data
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void onDisplayAndUpdateState_shouldRefreshUi() {
-        mController = spy(new RecentAppsPreferenceController(mContext, (Application) null, null));
-
-        doNothing().when(mController).refreshUi(mContext);
+    public void displayPreferenceAndUpdateState_shouldRefreshUi() {
+        doNothing().when(mController).refreshUi();
 
         mController.displayPreference(mScreen);
-        mController.updateState(mCategory);
+        mController.updateState(mScreen);
 
-        verify(mController, times(2)).refreshUi(mContext);
+        verify(mController, times(2)).refreshUi();
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
-    public void display_shouldNotShowRecents_showAppInfoPreference() {
+    public void displayPreference_shouldSetupAppEntitiesHeaderController() {
         mController.displayPreference(mScreen);
 
-        verify(mCategory, never()).addPreference(any(Preference.class));
-        verify(mCategory).setTitle(null);
-        verify(mSeeAllPref).setTitle(R.string.applications_settings);
-        verify(mSeeAllPref).setIcon(null);
-        verify(mDivider).setVisible(false);
+        assertThat(mController.mAppEntitiesController).isNotNull();
     }
 
     @Test
-    public void display_showRecents() {
+    public void updateState_threeValidRecentOpenAppsSet_setAppEntityThreeTime() {
+        final List<UsageStats> stats = new ArrayList<>();
+        final UsageStats stat1 = new UsageStats();
+        final UsageStats stat2 = new UsageStats();
+        final UsageStats stat3 = new UsageStats();
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "pkg.class";
+        stats.add(stat1);
+
+        stat2.mLastTimeUsed = System.currentTimeMillis();
+        stat2.mPackageName = "pkg.class2";
+        stats.add(stat2);
+
+        stat3.mLastTimeUsed = System.currentTimeMillis();
+        stat3.mPackageName = "pkg.class3";
+        stats.add(stat3);
+
+        // stat1, stat2 are valid apps. stat3 is invalid.
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mAppEntry);
+        when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mAppEntry);
+        when(mAppState.getEntry(stat3.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mAppEntry);
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+                .thenReturn(new ResolveInfo());
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(stats);
+        mAppEntry.info = mApplicationInfo;
+
+        mController.updateState(mRecentAppsPreference);
+
+        verify(mController.mAppEntitiesController, times(3))
+                .setAppEntity(anyInt(), any(AppEntityInfo.class));
+        assertThat(mController.mRecentAppsPreference.isVisible()).isTrue();
+        assertThat(mController.mDivider.isVisible()).isTrue();
+        assertThat(mController.mAllAppPref.isVisible()).isFalse();
+    }
+
+    @Test
+    public void updateState_oneValidRecentOpenAppSet_setAppEntityOneTime() {
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
         final UsageStats stat2 = new UsageStats();
@@ -175,7 +228,7 @@ public class RecentAppsPreferenceControllerTest {
         stats.add(stat2);
 
         stat3.mLastTimeUsed = System.currentTimeMillis();
-        stat3.mPackageName = "pkg.class2";
+        stat3.mPackageName = "pkg.class3";
         stats.add(stat3);
 
         // stat1, stat2 are valid apps. stat3 is invalid.
@@ -191,20 +244,19 @@ public class RecentAppsPreferenceControllerTest {
                 .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mRecentAppsPreference);
 
-        verify(mCategory).setTitle(R.string.recent_app_category_title);
         // Only add stat1. stat2 is skipped because of the package name, stat3 skipped because
         // it's invalid app.
-        verify(mCategory, times(1)).addPreference(any(Preference.class));
-
-        verify(mSeeAllPref).setSummary(null);
-        verify(mSeeAllPref).setIcon(R.drawable.ic_chevron_right_24dp);
-        verify(mDivider).setVisible(true);
+        verify(mController.mAppEntitiesController, times(1))
+                .setAppEntity(anyInt(), any(AppEntityInfo.class));
+        assertThat(mController.mRecentAppsPreference.isVisible()).isTrue();
+        assertThat(mController.mDivider.isVisible()).isTrue();
+        assertThat(mController.mAllAppPref.isVisible()).isFalse();
     }
 
     @Test
-    public void display_powerSaverMode_showNoRecents() {
+    public void updateState_powerSaverModeOn_headerIsNotVisible() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
         final List<UsageStats> stats = new ArrayList<>();
@@ -223,17 +275,15 @@ public class RecentAppsPreferenceControllerTest {
                 .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mRecentAppsPreference);
 
-        verify(mCategory, never()).addPreference(any(Preference.class));
-        verify(mCategory).setTitle(null);
-        verify(mSeeAllPref).setTitle(R.string.applications_settings);
-        verify(mSeeAllPref).setIcon(null);
-        verify(mDivider).setVisible(false);
+        assertThat(mController.mRecentAppsPreference.isVisible()).isFalse();
+        assertThat(mController.mDivider.isVisible()).isFalse();
+        assertThat(mController.mAllAppPref.isVisible()).isTrue();
     }
 
     @Test
-    public void display_showRecentsWithInstantApp() {
+    public void updateState_instantAppSet_shouldSetAppEntityForInstantApp() {
         // Regular app.
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
@@ -258,7 +308,6 @@ public class RecentAppsPreferenceControllerTest {
         // Only the regular app stat1 should have its intent resolve.
         when(mPackageManager.resolveActivity(argThat(intentMatcher(stat1.mPackageName)), anyInt()))
                 .thenReturn(new ResolveInfo());
-
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
 
@@ -266,17 +315,14 @@ public class RecentAppsPreferenceControllerTest {
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (ApplicationInfo info) -> info == stat2Entry.info);
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mRecentAppsPreference);
 
-        ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(mCategory, times(2)).addPreference(prefCaptor.capture());
-        List<Preference> prefs = prefCaptor.getAllValues();
-        assertThat(prefs.get(1).getKey()).isEqualTo(stat1.mPackageName);
-        assertThat(prefs.get(0).getKey()).isEqualTo(stat2.mPackageName);
+        verify(mController.mAppEntitiesController, times(2))
+                .setAppEntity(anyInt(), any(AppEntityInfo.class));
     }
 
     @Test
-    public void display_showRecentsWithNullAppEntryOrInfo() {
+    public void updateState_withNullAppEntryOrInfo_shouldNotCrash() {
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
         final UsageStats stat2 = new UsageStats();
@@ -299,63 +345,11 @@ public class RecentAppsPreferenceControllerTest {
                 .thenReturn(stats);
 
         // We should not crash here.
-        mController.displayPreference(mScreen);
+        mController.updateState(mRecentAppsPreference);
     }
 
     @Test
-    public void display_hasRecentButNoneDisplayable_showAppInfo() {
-        final List<UsageStats> stats = new ArrayList<>();
-        final UsageStats stat1 = new UsageStats();
-        final UsageStats stat2 = new UsageStats();
-        stat1.mLastTimeUsed = System.currentTimeMillis();
-        stat1.mPackageName = "com.android.phone";
-        stats.add(stat1);
-
-        stat2.mLastTimeUsed = System.currentTimeMillis();
-        stat2.mPackageName = "com.android.settings";
-        stats.add(stat2);
-
-        // stat1, stat2 are not displayable
-        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mock(ApplicationsState.AppEntry.class));
-        when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mock(ApplicationsState.AppEntry.class));
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(new ResolveInfo());
-        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-                .thenReturn(stats);
-
-        mController.displayPreference(mScreen);
-
-        verify(mCategory, never()).addPreference(any(Preference.class));
-        verify(mCategory).setTitle(null);
-        verify(mSeeAllPref).setTitle(R.string.applications_settings);
-        verify(mSeeAllPref).setIcon(null);
-    }
-
-    @Test
-    public void display_showRecents_formatSummary() {
-        final UsageStats stat1 = new UsageStats();
-        stat1.mLastTimeUsed = System.currentTimeMillis();
-        stat1.mPackageName = "pkg.class";
-        final List<UsageStats> stats = new ArrayList<>();
-        stats.add(stat1);
-
-        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mAppEntry);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(new ResolveInfo());
-        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-                .thenReturn(stats);
-        mAppEntry.info = mApplicationInfo;
-
-        mController.displayPreference(mScreen);
-
-        verify(mCategory).addPreference(argThat(summaryMatches("0 minutes ago")));
-    }
-
-    @Test
-    public void displayPreference_shouldNotShowHiddenSystemModule() {
+    public void updateState_hiddenSystemModuleSet_shouldNotShowHiddenSystemModule() {
         final List<UsageStats> stats = new ArrayList<>();
         // Regular app.
         final UsageStats stat1 = new UsageStats();
@@ -389,24 +383,17 @@ public class RecentAppsPreferenceControllerTest {
         final List<ModuleInfo> modules = new ArrayList<>();
         modules.add(moduleInfo2);
         when(mPackageManager.getInstalledModules(anyInt() /* flags */))
-            .thenReturn(modules);
+                .thenReturn(modules);
 
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
-            .thenReturn(new ResolveInfo());
+                .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-            .thenReturn(stats);
+                .thenReturn(stats);
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mRecentAppsPreference);
 
         // Only add stat1. stat2 is skipped because it is hidden module.
-        final ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(mCategory).addPreference(prefCaptor.capture());
-        final Preference pref = prefCaptor.getValue();
-        assertThat(pref.getKey()).isEqualTo(stat1.mPackageName);
-    }
-
-    private static ArgumentMatcher<Preference> summaryMatches(String expected) {
-        return preference -> TextUtils.equals(expected, preference.getSummary());
+        verify(mController.mAppEntitiesController).setAppEntity(anyInt(), any(AppEntityInfo.class));
     }
 
     // Used for matching an intent with a specific package name.

@@ -16,13 +16,9 @@
 
 package com.android.settings.applications;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-
-import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -63,27 +59,20 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
         use(SpecialAppAccessPreferenceController.class).setSession(getSettingsLifecycle());
+        use(RecentAppsPreferenceController.class).setFragment(this /* fragment */);
     }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final Activity activity = getActivity();
-        final Application app;
-        if (activity != null) {
-            app = activity.getApplication();
-        } else {
-            app = null;
-        }
-        return buildPreferenceControllers(context, app, this);
+        return buildPreferenceControllers(context);
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Application app, Fragment host) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyBroadcastPreferenceController(context,
                 "app_and_notif_cell_broadcast_settings"));
-        controllers.add(new RecentAppsPreferenceController(context, app, host));
         return controllers;
     }
 
@@ -100,7 +89,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null /* host */);
+                    return buildPreferenceControllers(context);
                 }
             };
 }
