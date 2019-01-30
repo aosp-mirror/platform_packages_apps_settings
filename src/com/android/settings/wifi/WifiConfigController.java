@@ -359,8 +359,16 @@ public class WifiConfigController implements TextWatcher,
                         if (config != null && config.isPasspoint()) {
                             providerFriendlyName = config.providerFriendlyName;
                         }
+                        String suggestionOrSpecifierPackageName = null;
+                        if (config != null
+                                && (config.fromWifiNetworkSpecifier
+                                || config.fromWifiNetworkSuggestion)) {
+                            suggestionOrSpecifierPackageName = config.creatorName;
+                        }
                         String summary = AccessPoint.getSummary(
-                                mConfigUi.getContext(), state, isEphemeral, providerFriendlyName);
+                                mConfigUi.getContext(), state, isEphemeral,
+                                suggestionOrSpecifierPackageName,
+                                providerFriendlyName);
                         addRow(group, R.string.wifi_status, summary);
                     }
 
