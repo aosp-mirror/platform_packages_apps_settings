@@ -185,7 +185,6 @@ public class ManageApplications extends InstrumentedFragment
     private ApplicationsAdapter mApplications;
 
     private View mLoadingContainer;
-
     private View mListContainer;
     private RecyclerView mRecyclerView;
     private SearchView mSearchView;
@@ -216,10 +215,15 @@ public class ManageApplications extends InstrumentedFragment
             LIST_TYPE_MAIN,
             LIST_TYPE_STORAGE));
 
+    @VisibleForTesting
+    View mSpinnerHeader;
+    @VisibleForTesting
+    FilterSpinnerAdapter mFilterAdapter;
+    @VisibleForTesting
+    View mContentContainer;
+
     private View mRootView;
-    private View mSpinnerHeader;
     private Spinner mFilterSpinner;
-    private FilterSpinnerAdapter mFilterAdapter;
     private IUsageStatsManager mUsageStatsManager;
     private UserManager mUserManager;
     private NotificationBackend mNotificationBackend;
@@ -326,6 +330,7 @@ public class ManageApplications extends InstrumentedFragment
             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
+        mContentContainer = mRootView.findViewById(R.id.content_container);
         mListContainer = mRootView.findViewById(R.id.list_container);
         if (mListContainer != null) {
             // Create adapter and list view here
@@ -794,8 +799,7 @@ public class ManageApplications extends InstrumentedFragment
             }
             mFilterOptions.add(filter);
             Collections.sort(mFilterOptions);
-            mManageApplications.mSpinnerHeader.setVisibility(
-                    mFilterOptions.size() > 1 ? View.VISIBLE : View.GONE);
+            updateFilterView(mFilterOptions.size() > 1);
             notifyDataSetChanged();
             if (mFilterOptions.size() == 1) {
                 if (DEBUG) {
@@ -826,14 +830,13 @@ public class ManageApplications extends InstrumentedFragment
                         filter.getTitle()));
             }
             Collections.sort(mFilterOptions);
-            mManageApplications.mSpinnerHeader.setVisibility(
-                    mFilterOptions.size() > 1 ? View.VISIBLE : View.GONE);
+            updateFilterView(mFilterOptions.size() > 1);
             notifyDataSetChanged();
             if (mManageApplications.mFilter == filter) {
                 if (mFilterOptions.size() > 0) {
                     if (DEBUG) {
                         Log.d(TAG, "Auto selecting filter " + mFilterOptions.get(0)
-                            + mContext.getText(mFilterOptions.get(0).getTitle()));
+                                + mContext.getText(mFilterOptions.get(0).getTitle()));
                     }
                     mManageApplications.mFilterSpinner.setSelection(0);
                     mManageApplications.onItemSelected(null, null, 0, 0);
@@ -849,6 +852,26 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public CharSequence getItem(int position) {
             return mContext.getText(mFilterOptions.get(position).getTitle());
+        }
+
+        @VisibleForTesting
+        void updateFilterView(boolean hasFilter) {
+            // If we need to add a floating filter in this screen, we should have an extra top
+            // padding for putting floating filter view. Otherwise, the content of list will be
+            // overlapped by floating filter.
+            if (hasFilter) {
+                mManageApplications.mSpinnerHeader.setVisibility(View.VISIBLE);
+                mManageApplications.mContentContainer.setPadding(0 /* left */,
+                        mContext.getResources().getDimensionPixelSize(
+                                R.dimen.app_bar_height) /* top */,
+                        0 /* right */,
+                        0 /* bottom */);
+            } else {
+                mManageApplications.mSpinnerHeader.setVisibility(View.GONE);
+                mManageApplications.mContentContainer.setPadding(0 /* left */, 0 /* top */,
+                        0 /* right */,
+                        0 /* bottom */);
+            }
         }
     }
 

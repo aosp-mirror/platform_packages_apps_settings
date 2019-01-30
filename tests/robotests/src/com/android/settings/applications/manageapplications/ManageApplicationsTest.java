@@ -91,6 +91,8 @@ public class ManageApplicationsTest {
     private UserManager mUserManager;
     @Mock
     private PackageManager mPackageManager;
+
+    private Context mContext;
     private MenuItem mAppReset;
     private MenuItem mSortRecent;
     private MenuItem mSortFrequent;
@@ -99,6 +101,7 @@ public class ManageApplicationsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mAppReset = new RoboMenuItem(R.id.reset_app_preferences);
         mSortRecent = new RoboMenuItem(R.id.sort_order_recent_notification);
         mSortFrequent = new RoboMenuItem(R.id.sort_order_frequent_notification);
@@ -107,6 +110,7 @@ public class ManageApplicationsTest {
         when(mState.getBackgroundLooper()).thenReturn(Looper.myLooper());
 
         mFragment = spy(new ManageApplications());
+        when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mActivity.getResources()).thenReturn(mResources);
         when(mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
@@ -458,6 +462,31 @@ public class ManageApplicationsTest {
 
         adapter.rebuild(mSortFrequent.getItemId());
         assertThat(mFragment.mSortOrder).isEqualTo(mSortFrequent.getItemId());
+    }
+
+    @Test
+    public void updateFilterView_hasFilterSet_shouldShowFilterAndHavePaddingTop() {
+        mFragment.mContentContainer = new View(mContext);
+        mFragment.mSpinnerHeader = new View(mContext);
+        mFragment.mFilterAdapter = new ManageApplications.FilterSpinnerAdapter(mFragment);
+
+        mFragment.mFilterAdapter.updateFilterView(true);
+
+        assertThat(mFragment.mSpinnerHeader.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mFragment.mContentContainer.getPaddingTop()).isEqualTo(
+                mContext.getResources().getDimensionPixelSize(R.dimen.app_bar_height));
+    }
+
+    @Test
+    public void updateFilterView_noFilterSet_shouldHideFilterAndNoPaddingTop() {
+        mFragment.mContentContainer = new View(mContext);
+        mFragment.mSpinnerHeader = new View(mContext);
+        mFragment.mFilterAdapter = new ManageApplications.FilterSpinnerAdapter(mFragment);
+
+        mFragment.mFilterAdapter.updateFilterView(false);
+
+        assertThat(mFragment.mSpinnerHeader.getVisibility()).isEqualTo(View.GONE);
+        assertThat(mFragment.mContentContainer.getPaddingTop()).isEqualTo(0);
     }
 
     private void setUpOptionMenus() {
