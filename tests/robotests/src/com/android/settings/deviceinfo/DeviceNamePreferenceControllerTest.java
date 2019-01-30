@@ -75,7 +75,7 @@ public class DeviceNamePreferenceControllerTest {
         configuration.SSID = "test-ap";
         when(mWifiManager.getWifiApConfiguration()).thenReturn(configuration);
 
-        mController = new DeviceNamePreferenceController(mContext);
+        mController = new DeviceNamePreferenceController(mContext, "test_key");
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
@@ -99,17 +99,17 @@ public class DeviceNamePreferenceControllerTest {
     public void constructor_deviceNameLoadedIfSet() {
         Settings.Global.putString(
                 mContext.getContentResolver(), Settings.Global.DEVICE_NAME, "Test");
-        mController = new DeviceNamePreferenceController(mContext);
+        mController = new DeviceNamePreferenceController(mContext, "test_key");
         assertThat(mController.getSummary()).isEqualTo("Test");
     }
 
     @Test
-    public void isTextValid_nameUnder33CharactersIsValid() {
+    public void isTextValid_nameUnder33Characters_isValid() {
         assertThat(mController.isTextValid("12345678901234567890123456789012")).isTrue();
     }
 
     @Test
-    public void isTextValid_nameTooLongIsInvalid() {
+    public void isTextValid_nameTooLong_isInvalid() {
         assertThat(mController.isTextValid("123456789012345678901234567890123")).isFalse();
     }
 

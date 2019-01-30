@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -49,9 +52,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GupPreferenceControllerTest {
+public class GameDriverAppPreferenceControllerTest {
+
     private static final int DEFAULT = 0;
-    private static final int GUP = 1;
+    private static final int GAME_DRIVER = 1;
     private static final int SYSTEM = 2;
     private static final String TEST_APP_NAME = "testApp";
     private static final String TEST_PKG_NAME = "testPkg";
@@ -65,12 +69,14 @@ public class GupPreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private GameDriverContentObserver mGameDriverContentObserver;
 
     private Context mContext;
     private PreferenceGroup mGroup;
     private PreferenceManager mPreferenceManager;
     private ContentResolver mResolver;
-    private GupPreferenceController mController;
+    private GameDriverAppPreferenceController mController;
     private CharSequence[] mValueList;
     private String mDialogTitle;
 
@@ -79,24 +85,35 @@ public class GupPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mResolver = mContext.getContentResolver();
-        mValueList = mContext.getResources().getStringArray(R.array.gup_app_preference_values);
-        mDialogTitle = mContext.getResources().getString(R.string.gup_app_preference_title);
+        mValueList =
+                mContext.getResources().getStringArray(R.array.game_driver_app_preference_values);
+        mDialogTitle = mContext.getResources().getString(R.string.game_driver_app_preference_title);
     }
 
     @Test
-    public void getAvailability_developmentSettingsEnabled_available() {
+    public void getAvailability_developmentSettingsEnabledAndGameDriverOn_available() {
         loadDefaultConfig();
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailability_developmentSettingsDisabled_disabledDependentSetting() {
+    public void getAvailability_developmentSettingsDisabled_conditionallyUnavailable() {
         loadDefaultConfig();
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailability_gameDriverOff_conditionallyUnavailable() {
+        loadDefaultConfig();
+        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -111,10 +128,46 @@ public class GupPreferenceControllerTest {
     }
 
     @Test
+    public void onStart_shouldRegister() {
+        loadDefaultConfig();
+        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.onStart();
+
+        verify(mGameDriverContentObserver).register(mResolver);
+    }
+
+    @Test
+    public void onStop_shouldUnregister() {
+        loadDefaultConfig();
+        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.onStop();
+
+        verify(mGameDriverContentObserver).unregister(mResolver);
+    }
+
+    @Test
+    public void updateState_available_visible() {
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+        loadDefaultConfig();
+
+        assertThat(mGroup.isVisible()).isTrue();
+    }
+
+    @Test
+    public void updateState_gameDriverOff_notVisible() {
+        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+        loadDefaultConfig();
+
+        assertThat(mGroup.isVisible()).isFalse();
+    }
+
+    @Test
     public void createPreference_configDefault_shouldSetDefaultAttributes() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
@@ -127,26 +180,26 @@ public class GupPreferenceControllerTest {
     }
 
     @Test
-    public void createPreference_configGup_shouldSetGupAttributes() {
+    public void createPreference_configGAME_DRIVER_shouldSetGameDriverAttributes() {
         loadConfig(TEST_PKG_NAME, "");
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
         assertThat(preference.getDialogTitle()).isEqualTo(mDialogTitle);
         assertThat(preference.getEntries()).isEqualTo(mValueList);
         assertThat(preference.getEntryValues()).isEqualTo(mValueList);
-        assertThat(preference.getEntry()).isEqualTo(mValueList[GUP]);
-        assertThat(preference.getValue()).isEqualTo(mValueList[GUP]);
-        assertThat(preference.getSummary()).isEqualTo(mValueList[GUP]);
+        assertThat(preference.getEntry()).isEqualTo(mValueList[GAME_DRIVER]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[GAME_DRIVER]);
+        assertThat(preference.getSummary()).isEqualTo(mValueList[GAME_DRIVER]);
     }
 
     @Test
     public void createPreference_configSystem_shouldSetSystemAttributes() {
         loadConfig("", TEST_PKG_NAME);
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
 
         assertThat(preference.getKey()).isEqualTo(TEST_PKG_NAME);
         assertThat(preference.getTitle()).isEqualTo(TEST_APP_NAME);
@@ -162,31 +215,31 @@ public class GupPreferenceControllerTest {
     public void onPreferenceChange_selectDefault_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[DEFAULT]);
 
         assertThat(preference.getEntry()).isEqualTo(mValueList[DEFAULT]);
         assertThat(preference.getValue()).isEqualTo(mValueList[DEFAULT]);
         assertThat(preference.getSummary()).isEqualTo(mValueList[DEFAULT]);
-        assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_IN_APPS))
+        assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS))
                 .isEqualTo("");
-        assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_OUT_APPS))
+        assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS))
                 .isEqualTo("");
     }
 
     @Test
-    public void onPreferenceChange_selectGup_shouldUpdateAttributesAndSettingsGlobal() {
+    public void onPreferenceChange_selectGAME_DRIVER_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
-        mController.onPreferenceChange(preference, mValueList[GUP]);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
+        mController.onPreferenceChange(preference, mValueList[GAME_DRIVER]);
 
-        assertThat(preference.getEntry()).isEqualTo(mValueList[GUP]);
-        assertThat(preference.getValue()).isEqualTo(mValueList[GUP]);
-        assertThat(preference.getSummary()).isEqualTo(mValueList[GUP]);
-        assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_IN_APPS))
+        assertThat(preference.getEntry()).isEqualTo(mValueList[GAME_DRIVER]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[GAME_DRIVER]);
+        assertThat(preference.getSummary()).isEqualTo(mValueList[GAME_DRIVER]);
+        assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS))
                 .isEqualTo(TEST_PKG_NAME);
-        assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_OUT_APPS))
+        assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS))
                 .isEqualTo("");
     }
 
@@ -194,15 +247,15 @@ public class GupPreferenceControllerTest {
     public void onPreferenceChange_selectSystem_shouldUpdateAttributesAndSettingsGlobal() {
         loadDefaultConfig();
         final ListPreference preference =
-                mController.createListPreference(TEST_PKG_NAME, TEST_APP_NAME);
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
         mController.onPreferenceChange(preference, mValueList[SYSTEM]);
 
         assertThat(preference.getEntry()).isEqualTo(mValueList[SYSTEM]);
         assertThat(preference.getValue()).isEqualTo(mValueList[SYSTEM]);
         assertThat(preference.getSummary()).isEqualTo(mValueList[SYSTEM]);
-        assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_IN_APPS))
+        assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS))
                 .isEqualTo("");
-        assertThat(Settings.Global.getString(mResolver, Settings.Global.GUP_DEV_OPT_OUT_APPS))
+        assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS))
                 .isEqualTo(TEST_PKG_NAME);
     }
 
@@ -224,12 +277,13 @@ public class GupPreferenceControllerTest {
     private void loadDefaultConfig() { loadConfig("", ""); }
 
     private void loadConfig(String optIn, String optOut) {
-        Settings.Global.putString(mResolver, Settings.Global.GUP_DEV_OPT_IN_APPS, optIn);
-        Settings.Global.putString(mResolver, Settings.Global.GUP_DEV_OPT_OUT_APPS, optOut);
+        Settings.Global.putString(mResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS, optIn);
+        Settings.Global.putString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS, optOut);
 
-        mController = new GupPreferenceController(mContext, "testKey");
+        mController = new GameDriverAppPreferenceController(mContext, "testKey");
         mGroup = spy(new PreferenceCategory(mContext));
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        when(mGroup.getContext()).thenReturn(mContext);
         when(mGroup.getPreferenceManager()).thenReturn(preferenceManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mGroup);
         mController.displayPreference(mScreen);

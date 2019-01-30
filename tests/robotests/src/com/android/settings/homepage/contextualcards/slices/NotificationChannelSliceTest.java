@@ -39,6 +39,7 @@ import android.util.ArrayMap;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
+import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceQuery;
@@ -122,6 +123,34 @@ public class NotificationChannelSliceTest {
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         assertThat(metadata.getTitle()).isEqualTo(
                 mContext.getString(R.string.manage_app_notification, APP_LABEL));
+    }
+
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void getSlice_hasSuggestedApp_shouldSortByNotificationSentCount() {
+        addMockPackageToPackageManager(true /* isRecentlyInstalled */,
+                ApplicationInfo.FLAG_INSTALLED);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */);
+
+        final Slice slice = mNotificationChannelSlice.getSlice();
+
+        // Get all RowBuilders from Slice.
+        final List<SliceItem> rowItems = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null /* nonHints */);
+
+        // Ensure the total size of rows is equal to the notification channel count with header.
+        assertThat(rowItems).isNotNull();
+        assertThat(rowItems.size()).isEqualTo(CHANNEL_COUNT + 1);
+
+        // Remove the header of slice.
+        rowItems.remove(0);
+
+        // Test the rows of slice are sorted with notification sent count by descending.
+        for (int i = 0; i < rowItems.size(); i++) {
+            // Assert the summary text is the same as expectation.
+            assertThat(getSummaryFromSliceItem(rowItems.get(i))).isEqualTo(
+                    mContext.getString(R.string.notifications_sent_weekly, CHANNEL_COUNT - i));
+        }
     }
 
     @Test
@@ -269,10 +298,31 @@ public class NotificationChannelSliceTest {
         final Map<String, NotificationBackend.NotificationsSentState> states = new ArrayMap<>();
         for (int i = 0; i < channelCount; i++) {
             final NotificationsSentState state = new NotificationsSentState();
+            // Set the avgSentWeekly for each channel: channel0 is 1, channel1: 2, channel2: 3.
+            state.avgSentWeekly = i + 1;
             state.sentCount = sentCount;
             states.put(CHANNEL_NAME_PREFIX + i, state);
         }
 
         return states;
+    }
+
+    private CharSequence getSummaryFromSliceItem(SliceItem rowItem) {
+        if (rowItem == null) {
+            return null;
+        }
+
+        final Slice rowSlice = rowItem.getSlice();
+        if (rowSlice == null) {
+            return null;
+        }
+
+        final List<SliceItem> rowSliceItems = rowSlice.getItems();
+        if (rowSliceItems == null || rowSliceItems.size() < 2) {
+            return null;
+        }
+
+        // Index 0: title; Index 1: summary.
+        return rowSliceItems.get(1).getText();
     }
 }

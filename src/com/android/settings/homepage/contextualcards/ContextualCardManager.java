@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CARD_CONTENT_LOADER_ID;
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE;
 import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -71,17 +72,15 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     @VisibleForTesting
     final List<ContextualCard> mContextualCards;
+    private final Context mContext;
+    private final ControllerRendererPool mControllerRendererPool;
+    private final Lifecycle mLifecycle;
+    private final List<LifecycleObserver> mLifecycleObservers;
     @VisibleForTesting
     long mStartTime;
     boolean mIsFirstLaunch;
     @VisibleForTesting
     List<String> mSavedCards;
-
-    private final Context mContext;
-    private final ControllerRendererPool mControllerRendererPool;
-    private final Lifecycle mLifecycle;
-    private final List<LifecycleObserver> mLifecycleObservers;
-
     private ContextualCardUpdateListener mListener;
 
     public ContextualCardManager(Context context, Lifecycle lifecycle, Bundle savedInstanceState) {
@@ -175,7 +174,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         //replace with the new data
         mContextualCards.clear();
         final List<ContextualCard> sortedCards = sortCards(allCards);
-        mContextualCards.addAll(assignCardWidth(sortedCards));
+        mContextualCards.addAll(getCardsWithViewType(sortedCards));
 
         loadCardControllers();
 
@@ -228,10 +227,19 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     }
 
     @VisibleForTesting
-    List<ContextualCard> assignCardWidth(List<ContextualCard> cards) {
-        final List<ContextualCard> result = new ArrayList<>(cards);
+    List<ContextualCard> getCardsWithViewType(List<ContextualCard> cards) {
+        if (cards.isEmpty()) {
+            return cards;
+        }
+
+        final List<ContextualCard> result = getCardsWithDeferredSetupViewType(cards);
+        return getCardsWithSuggestionViewType(result);
+    }
+
+    private List<ContextualCard> getCardsWithSuggestionViewType(List<ContextualCard> cards) {
         // Shows as half cards if 2 suggestion type of cards are next to each other.
         // Shows as full card if 1 suggestion type of card lives alone.
+        final List<ContextualCard> result = new ArrayList<>(cards);
         for (int index = 1; index < result.size(); index++) {
             final ContextualCard previous = result.get(index - 1);
             final ContextualCard current = result.get(index);
@@ -242,6 +250,22 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
                 result.set(index, current.mutate().setViewType(
                         SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH).build());
                 index++;
+            }
+        }
+        return result;
+    }
+
+    private List<ContextualCard> getCardsWithDeferredSetupViewType(List<ContextualCard> cards) {
+        // Find the deferred setup card and assign it with proper view type.
+        // Reason: The returned card list will mix deferred setup card and other suggestion cards
+        // after device running 1 days.
+        final List<ContextualCard> result = new ArrayList<>(cards);
+        for (int index = 0; index < result.size(); index++) {
+            final ContextualCard card = cards.get(index);
+            if (card.getCategory() == DEFERRED_SETUP_VALUE) {
+                result.set(index, card.mutate().setViewType(
+                        SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP).build());
+                return result;
             }
         }
         return result;

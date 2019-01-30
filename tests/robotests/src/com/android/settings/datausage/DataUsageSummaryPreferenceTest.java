@@ -26,6 +26,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.telephony.SubscriptionManager;
@@ -529,6 +530,18 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
 
         assertThat(mLaunchButton.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void launchWifiDataUsage_shouldSetWifiNetworkTypeInIntentExtra() {
+        mSummaryPreference.launchWifiDataUsage(mActivity);
+
+        final Intent launchIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
+        final Bundle args =
+            launchIntent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+
+        assertThat(args.getInt(DataUsageList.EXTRA_NETWORK_TYPE))
+            .isEqualTo(ConnectivityManager.TYPE_WIFI);
     }
 
     private void bindViewHolder() {

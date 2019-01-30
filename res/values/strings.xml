@@ -658,6 +658,8 @@
     <string name="apply">Apply</string>
     <!-- Button label for generic share action [CHAR LIMIT=20] -->
     <string name="share">Share</string>
+    <!-- Button label for generic add action [CHAR LIMIT=20] -->
+    <string name="add">Add</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -9571,6 +9573,8 @@
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off all overlays in a given category. -->
     <string name="overlay_option_device_default">Device default</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Toast displayed to the user when an overlay fails to apply. -->
+    <string name="overlay_toast_failed_to_apply">Failed to apply overlay</string>
 
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
     <string name="special_access">Special app access</string>
@@ -9580,6 +9584,9 @@
         <item quantity="one">1 app can use unrestricted data</item>
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps can use unrestricted data</item>
     </plurals>
+
+    <!-- Title for the More preference item in Special app access settings [CHAR LIMIT=30] -->
+    <string name="special_access_more">More</string>
 
     <!-- Developer option to convert to file encryption - final warning -->
     <string name="confirm_convert_to_fbe_warning">Really wipe user data and convert to file encryption?</string>
@@ -10141,25 +10148,27 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- Title for Game Update Package dashboard where developers can configure apps to use GUP or not [CHAR LIMIT=50] -->
-    <string name="gup_dashboard_title">Game Update Package Preferences</string>
-    <!-- Summary for Game Update Package dashboard [CHAR LIMIT=50] -->
-    <string name="gup_dashboard_summary">Modify Game Update Package settings</string>
-    <!-- Title for Game Update Package all apps preference [CHAR LIMIT=50] -->
-    <string name="gup_all_apps_switch_title">Enable for all apps</string>
-    <!-- Title for Game Update Package preference [CHAR LIMIT=50] -->
-    <string name="gup_app_preference_title">Select Graphics Driver</string>
-    <!-- The default value for Game Update Package preference [CHAR LIMIT=50] -->
-    <string name="gup_app_preference_default">Default</string>
-    <!-- The gup value for Game Update Package preference [CHAR LIMIT=50] -->
-    <string name="gup_app_preference_gup">Game Update Package</string>
-    <!-- The system value for Game Update Package preference [CHAR LIMIT=50] -->
-    <string name="gup_app_preference_system">System Graphics Driver</string>
-    <!-- All the values for Game Update Package preference [CHAR LIMIT=50] -->
-    <string-array name="gup_app_preference_values">
-        <item>@string/gup_app_preference_default</item>
-        <item>@string/gup_app_preference_gup</item>
-        <item>@string/gup_app_preference_system</item>
+    <!-- Title for Game Driver dashboard where developers can configure apps to use game driver or not [CHAR LIMIT=50] -->
+    <string name="game_driver_dashboard_title">Game Driver Preferences</string>
+    <!-- Summary for Game Driver dashboard [CHAR LIMIT=50] -->
+    <string name="game_driver_dashboard_summary">Modify Game Driver settings</string>
+    <!-- Footer text for Game Driver dashboard [CHAR LIMIT=NONE] -->
+    <string name="game_driver_footer_text">When Game Driver is turned on, you can pick to use the updated graphics driver for Apps installed on the device.</string>
+    <!-- Title for Game Driver all apps preference [CHAR LIMIT=50] -->
+    <string name="game_driver_all_apps_preference_title">Enable for all apps</string>
+    <!-- Title for Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_title">Select Graphics Driver</string>
+    <!-- The default value for Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_default">Default</string>
+    <!-- The game driver value for Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_game_driver">Game Driver</string>
+    <!-- The system value for Game Driver app preference [CHAR LIMIT=50] -->
+    <string name="game_driver_app_preference_system">System Graphics Driver</string>
+    <!-- All the values for Game Driver app preference [CHAR LIMIT=50] -->
+    <string-array name="game_driver_app_preference_values">
+        <item>@string/game_driver_app_preference_default</item>
+        <item>@string/game_driver_app_preference_game_driver</item>
+        <item>@string/game_driver_app_preference_system</item>
     </string-array>
 
     <!-- Slices Strings -->
@@ -10510,6 +10519,13 @@
     <!-- Title for no bluetooth devices in Bluetooth devices slice. [CHAR LIMIT=NONE] -->
     <string name="no_bluetooth_devices">No Bluetooth devices</string>
 
+    <!-- Title for left bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_left_name">Left</string>
+    <!-- Title for right bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_right_name">Right</string>
+    <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_middle_name">Case</string>
+
     <!-- Default title for the settings panel [CHAR LIMIT=NONE] -->
     <string name="settings_panel_title">Settings Panel</string>
 
@@ -10555,12 +10571,6 @@
     <!-- String for talkback on the account avatar of the search bar.  [CHAR LIMIT=NONE] -->
     <string name="search_bar_account_avatar_content_description"></string>
 
-    <!-- Preference title text for skip media gesture [CHAR LIMIT=60]-->
-    <string name="gesture_skip_title">Skip gesture</string>
-
-    <!-- Preference title text for silence gesture [CHAR LIMIT=60]-->
-    <string name="gesture_silence_title">Silence alerts gesture</string>
-
     <!-- Text to display when no app used permission.  [CHAR LIMIT=NONE] -->
     <string name="permission_bar_chart_empty_text">0 apps used permissions</string>
 
@@ -10580,4 +10590,8 @@
         <item quantity="other"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channels. Tap to manage all.</item>
     </plurals>
 
+    <!-- Title for the Switch output dialog (settings panel) with media related devices [CHAR LIMIT=50] -->
+    <string name="media_output_panel_title">Switch output</string>
+    <!-- Summary for represent which device is playing media [CHAR LIMIT=NONE] -->
+    <string name="media_output_panel_summary_of_playing_device">Currently playing on <xliff:g id="device_name" example="Bose headphone">%1$s</xliff:g></string>
 </resources>

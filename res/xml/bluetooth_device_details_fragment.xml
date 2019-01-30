@@ -23,7 +23,16 @@
         android:key="bluetooth_device_header"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        settings:allowDividerBelow="true"/>
+        settings:allowDividerBelow="true"
+        settings:searchable="false"/>
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="advanced_bluetooth_device_header"
+        android:layout="@layout/advanced_bt_entity_header"
+        android:selectable="false"
+        settings:allowDividerBelow="true"
+        settings:searchable="false"
+        settings:controller="com.android.settings.bluetooth.AdvancedBluetoothDetailsHeaderController"/>
 
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"

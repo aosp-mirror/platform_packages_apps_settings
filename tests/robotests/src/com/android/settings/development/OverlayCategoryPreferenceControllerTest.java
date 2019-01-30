@@ -31,6 +31,8 @@ import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +40,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,9 +109,23 @@ public class OverlayCategoryPreferenceControllerTest {
         mockCurrentOverlays(ONE_DISABLED, TWO_DISABLED);
 
         mController.onPreferenceChange(null, TWO_DISABLED.packageName);
+        ShadowApplication.runBackgroundTasks();
 
         verify(mOverlayManager)
             .setEnabledExclusiveInCategory(eq(TWO_DISABLED.packageName), anyInt());
+    }
+
+    @Test
+    public void onPreferenceChange_enable_fails() throws Exception {
+        mockCurrentOverlays(ONE_DISABLED, TWO_DISABLED);
+        when(mOverlayManager.setEnabledExclusiveInCategory(eq(TWO_DISABLED.packageName), anyInt()))
+                .thenReturn(false);
+
+        mController.onPreferenceChange(null, TWO_DISABLED.packageName);
+        ShadowApplication.runBackgroundTasks();
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                RuntimeEnvironment.application.getString(R.string.overlay_toast_failed_to_apply));
     }
 
     @Test
@@ -116,8 +134,37 @@ public class OverlayCategoryPreferenceControllerTest {
 
         mController.onPreferenceChange(
                 null, OverlayCategoryPreferenceController.PACKAGE_DEVICE_DEFAULT);
+        ShadowApplication.runBackgroundTasks();
 
         verify(mOverlayManager).setEnabled(eq(TWO_ENABLED.packageName), eq(false), anyInt());
+    }
+
+    @Test
+    public void onPreferenceChange_disable_fails() throws Exception {
+        mockCurrentOverlays(ONE_DISABLED, TWO_ENABLED);
+        when(mOverlayManager.setEnabled(eq(TWO_ENABLED.packageName), eq(false), anyInt()))
+                .thenReturn(false);
+
+        mController.onPreferenceChange(
+                null, OverlayCategoryPreferenceController.PACKAGE_DEVICE_DEFAULT);
+        ShadowApplication.runBackgroundTasks();
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                RuntimeEnvironment.application.getString(R.string.overlay_toast_failed_to_apply));
+    }
+
+    @Test
+    public void onPreferenceChange_disable_throws() throws Exception {
+        mockCurrentOverlays(ONE_DISABLED, TWO_ENABLED);
+        when(mOverlayManager.setEnabled(eq(TWO_ENABLED.packageName), eq(false), anyInt()))
+                .thenThrow(new RemoteException());
+
+        mController.onPreferenceChange(
+                null, OverlayCategoryPreferenceController.PACKAGE_DEVICE_DEFAULT);
+        ShadowApplication.runBackgroundTasks();
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                RuntimeEnvironment.application.getString(R.string.overlay_toast_failed_to_apply));
     }
 
     @Test

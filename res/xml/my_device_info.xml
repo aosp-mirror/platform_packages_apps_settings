@@ -25,7 +25,8 @@
         android:key="my_device_info_header"
         android:order="0"
         android:layout="@layout/settings_entity_header"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:isPreferenceVisible="false"/>
 
     <!-- Device name -->
     <com.android.settings.widget.ValidatedEditTextPreference
@@ -33,6 +34,7 @@
         android:order="1"
         android:title="@string/my_device_info_device_name_preference_title"
         android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
         settings:enableCopying="true"/>
 
     <!-- Account name -->
@@ -40,7 +42,8 @@
         android:key="branded_account"
         android:order="2"
         android:title="@string/my_device_info_account_preference_title"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
 
     <!-- Phone number -->
     <Preference
@@ -50,15 +53,15 @@
         android:summary="@string/summary_placeholder"
         android:selectable="false"
         settings:allowDynamicSummaryInSlice="true"
-        settings:controller=
-            "com.android.settings.deviceinfo.PhoneNumberPreferenceController"
+        settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
         settings:enableCopying="true"/>
 
     <Preference
         android:key="emergency_info"
         android:order="4"
         android:title="@string/emergency_info_title"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.accounts.EmergencyInfoPreferenceController"/>
 
     <!-- Legal information -->
     <Preference

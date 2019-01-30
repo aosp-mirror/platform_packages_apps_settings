@@ -19,7 +19,9 @@ package com.android.settings.homepage;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.util.FeatureFlagUtils;
+import android.view.View;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 
@@ -43,5 +45,24 @@ public class SettingsHomepageActivityTest {
                 Robolectric.setupActivity(SettingsHomepageActivity.class));
         assertThat(shadowActivity.getNextStartedActivity().getComponent().getClassName())
                 .isEqualTo(SettingsActivity.class.getName());
+    }
+
+    @Test
+    public void setHomepageContainerPaddingTop_shouldBeSetPaddingTop() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final int statusBarHeight = activity.getResources().getDimensionPixelSize(
+                com.android.internal.R.dimen.status_bar_height);
+        final int searchBarHeight = activity.getResources().getDimensionPixelSize(
+                R.dimen.search_bar_height);
+        final int searchBarMargin = activity.getResources().getDimensionPixelSize(
+                R.dimen.search_bar_margin);
+        final View view = activity.findViewById(R.id.homepage_container);
+
+        activity.setHomepageContainerPaddingTop();
+
+        final int actualPaddingTop = view.getPaddingTop();
+        assertThat(actualPaddingTop).isEqualTo(
+                statusBarHeight + searchBarHeight + searchBarMargin * 2);
     }
 }

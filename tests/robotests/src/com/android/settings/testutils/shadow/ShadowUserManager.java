@@ -99,15 +99,6 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    protected boolean isManagedProfile(@UserIdInt int userId) {
-        return mManagedProfiles.contains(userId);
-    }
-
-    public void addManagedProfile(int userId) {
-        mManagedProfiles.add(userId);
-    }
-
-    @Implementation
     protected boolean isQuietModeEnabled(UserHandle userHandle) {
         return mIsQuietModeEnabled;
     }

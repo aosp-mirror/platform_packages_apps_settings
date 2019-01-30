@@ -23,6 +23,8 @@
         android:key="add_more"
         android:title="@string/mobile_network_list_add_more"
         android:icon="@drawable/ic_menu_add"
-        android:order="100" />
+        android:order="100" >
+        <intent android:action="android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION" />
+    </Preference>
 
 </PreferenceScreen>

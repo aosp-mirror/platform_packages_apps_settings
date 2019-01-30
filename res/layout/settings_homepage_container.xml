@@ -28,12 +28,11 @@
         app:layout_behavior="com.android.settings.widget.FloatingAppBarScrollingViewBehavior">
 
         <LinearLayout
+            android:id="@+id/homepage_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:descendantFocusability="blocksDescendants"
-            android:paddingTop="104dp">
-            <!-- height of status bar(24dp) + height of action bar(48dp) + top/bottom margins(16dp) -->
+            android:descendantFocusability="blocksDescendants">
 
             <FrameLayout
                 android:id="@+id/contextual_cards_content"

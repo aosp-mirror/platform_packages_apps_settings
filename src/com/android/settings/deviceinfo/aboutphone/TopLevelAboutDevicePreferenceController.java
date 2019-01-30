@@ -35,7 +35,7 @@ public class TopLevelAboutDevicePreferenceController extends BasePreferenceContr
     @Override
     public CharSequence getSummary() {
         final DeviceNamePreferenceController deviceNamePreferenceController =
-            new DeviceNamePreferenceController(mContext);
+                new DeviceNamePreferenceController(mContext, "dummy_key");
         return deviceNamePreferenceController.getSummary();
     }
 }

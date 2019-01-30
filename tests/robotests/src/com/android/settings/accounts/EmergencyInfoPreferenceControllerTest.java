@@ -70,10 +70,12 @@ public class EmergencyInfoPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new EmergencyInfoPreferenceController(mContext);
+        mController = new EmergencyInfoPreferenceController(mContext, "test_key");
         mPreference = new Preference(Robolectric.setupActivity(Activity.class));
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
+        when(mContext.getResources().getBoolean(R.bool.config_show_emergency_info_in_device_info))
+                .thenReturn(true);
     }
 
     @After
@@ -104,6 +106,7 @@ public class EmergencyInfoPreferenceControllerTest {
 
         mController.updateRawDataToIndex(data);
 
+        assertThat(mController.isAvailable()).isTrue();
         assertThat(data).isNotEmpty();
     }
 
@@ -152,7 +155,7 @@ public class EmergencyInfoPreferenceControllerTest {
         final Activity activity = Robolectric.setupActivity(Activity.class);
         final Preference preference = new Preference(activity);
         preference.setKey("emergency_info");
-        mController = new EmergencyInfoPreferenceController(activity);
+        mController = new EmergencyInfoPreferenceController(activity, preference.getKey());
 
         mController.handlePreferenceTreeClick(preference);
 

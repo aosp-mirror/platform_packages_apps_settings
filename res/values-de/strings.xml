@@ -37,6 +37,8 @@
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Videoanrufe eingerichtet"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"WLAN-Anrufe eingerichtet"</string>
     <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Präsenz bereitgestellt"</string>
+    <!-- no translation found for cbrs_data_switch_string (2811485394350106691) -->
+    <skip />
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Mobilfunkstärke"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM-Adressbuch anzeigen"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Zugelassene Rufnummern anzeigen"</string>
@@ -616,6 +618,14 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Entsperrungsmuster ändern"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Entsperrungs-PIN ändern"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Entsperrungspasswort ändern"</string>
+    <!-- no translation found for unlock_footer_high_complexity_requested (6435556047450511655) -->
+    <skip />
+    <!-- no translation found for unlock_footer_medium_complexity_requested (8935831315232104673) -->
+    <skip />
+    <!-- no translation found for unlock_footer_low_complexity_requested (4667689621054775709) -->
+    <skip />
+    <!-- no translation found for unlock_footer_none_complexity_requested (1914478695927700768) -->
+    <skip />
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Bitte versuche es noch einmal. Versuch <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> von <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Deine Daten werden gelöscht"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"Wenn du beim nächsten Versuch ein falsches Muster eingibst, werden die Daten auf diesem Gerät gelöscht"</string>
@@ -792,10 +802,8 @@
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"Anmelden"</string>
     <string name="wifi_tap_to_sign_in" msgid="6990161842394669054">"Tippe hier, um dich im Netzwerk anzumelden"</string>
-    <!-- no translation found for tx_link_speed (6139577455916971837) -->
-    <skip />
-    <!-- no translation found for rx_link_speed (5729003360923133988) -->
-    <skip />
+    <string name="tx_link_speed" msgid="6139577455916971837">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbit/s"</string>
+    <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbit/s"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> fordert die Berechtigung, das WLAN für dieses Gerät zu aktivieren"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> fordert die Berechtigung, das WLAN für dieses Gerät zu deaktivieren"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
@@ -885,10 +893,8 @@
     <string name="wifi_hidden_network_warning" msgid="6674068093531603452">"Wenn dein Router keine Netzwerk-ID sendet, du aber in Zukunft eine Verbindung herstellen möchtest, dann lege ein verborgenes Netzwerk fest.\n\nDies stellt unter Umständen ein Sicherheitsrisiko dar, weil dein Smartphone regelmäßig ein Signal sendet, um das Netzwerk zu finden.\n\nDeine Routereinstellungen ändern sich durch das verborgene Netzwerk nicht."</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signalstärke"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Status"</string>
-    <!-- no translation found for tx_wifi_speed (2994278184097786511) -->
-    <skip />
-    <!-- no translation found for rx_wifi_speed (7206089638282839236) -->
-    <skip />
+    <string name="tx_wifi_speed" msgid="2994278184097786511">"Übertragungsgeschwindigkeit"</string>
+    <string name="rx_wifi_speed" msgid="7206089638282839236">"Geschwindigkeit abrufen"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"Frequenz"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP-Adresse"</string>
     <string name="passpoint_label" msgid="6381371313076009926">"Gespeichert über"</string>
@@ -1072,7 +1078,7 @@
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Notfalladresse"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Wird als dein Standort verwendet, wenn du einen Notruf über WLAN tätigst"</string>
-    <string name="private_dns_help_message" msgid="3299567069152568958">"Weitere Informationen zu "<annotation id="url">"privaten DNS-Funktionen"</annotation></string>
+    <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Weitere Informationen"</annotation>" zu privaten DNS-Funktionen"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Einstellung wird vom Mobilfunkanbieter verwaltet"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"WLAN-Telefonie aktivieren"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"WLAN-Telefonie verwenden"</string>
@@ -1165,6 +1171,14 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"\"Helligkeit an Lichtverhältnisse anpassen\": Ist diese Funktion aktiviert, kannst du die Helligkeit dennoch vorübergehend ändern."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Die Displayhelligkeit passt sich automatisch an deine Umgebung und deine Aktivitäten an. Du kannst den Schieberegler manuell bewegen, um deine Präferenzen für die adaptive Helligkeit anzugeben."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Weißabgleich des Bildschirms"</string>
+    <!-- no translation found for adaptive_sleep_title (5572797061439014277) -->
+    <skip />
+    <!-- no translation found for adaptive_sleep_summary_on (6644788139185360318) -->
+    <skip />
+    <!-- no translation found for adaptive_sleep_summary_off (3099674463517017514) -->
+    <skip />
+    <!-- no translation found for adaptive_sleep_description (7978305653723288923) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"Nachtlicht"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Beim Nachtlicht wird das Display gelb getönt. Dadurch lässt es sich bei schwachem Licht besser lesen und stört nicht beim Einschlafen."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Zeitplan"</string>
@@ -1189,6 +1203,8 @@
     <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Bis Sonnenuntergang deaktivieren"</string>
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Bis <xliff:g id="ID_1">%1$s</xliff:g> aktivieren"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Bis <xliff:g id="ID_1">%1$s</xliff:g> deaktivieren"</string>
+    <!-- no translation found for night_display_not_currently_on (6273540991113206401) -->
+    <skip />
     <string name="screen_timeout" msgid="4351334843529712571">"Ruhezustand"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Display wird ausgeschaltet."</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Nach <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
@@ -1272,6 +1288,8 @@
     <string name="baseband_version" msgid="1848990160763524801">"Baseband-Version"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernel-Version"</string>
     <string name="build_number" msgid="3075795840572241758">"Build-Nummer"</string>
+    <!-- no translation found for module_version (4826567303427436423) -->
+    <skip />
     <string name="device_info_not_available" msgid="8062521887156825182">"Nicht verfügbar"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
@@ -1519,7 +1537,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Standard-APN-Einstellungen werden wiederhergestellt"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Auf Standard zurücksetzen"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Zurücksetzen auf Standard-APN-Einstellungen abgeschlossen"</string>
-    <string name="reset_dashboard_title" msgid="6254873816990678620">"Optionen zurücksetzen"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"Optionen zum Zurücksetzen"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Netzwerk, Apps oder Gerät können zurückgesetzt werden"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"WLAN, mobile Daten &amp; Bluetooth zurücksetzen"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Dadurch werden sämtliche Netzwerkeinstellungen zurückgesetzt, einschließlich:\n\n"<li>"WLAN"</li>\n<li>"Mobile Daten"</li>\n<li>"Bluetooth"</li></string>
@@ -1923,6 +1941,10 @@
     <string name="show_ime_summary" msgid="8164993045923240698">"Auf dem Display einblenden, wenn die physische Tastatur aktiv ist"</string>
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Hilfe zu Tastenkombinationen"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Verfügbare Tastenkombinationen einblenden"</string>
+    <!-- no translation found for language_and_input_for_work_category_title (3310407823805453964) -->
+    <skip />
+    <!-- no translation found for virtual_keyboards_for_work_title (2646946676585390499) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="4172606673510531271">"Standard"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Zeigergeschwindigkeit"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Gamecontroller"</string>
@@ -1934,6 +1956,8 @@
     <string name="keyboard_layout_default_label" msgid="2952672513543482165">"Standard"</string>
     <string name="keyboard_layout_picker_title" msgid="556081931972771610">"Tastaturlayouts"</string>
     <string name="user_dict_settings_title" msgid="3427169369758733521">"Mein Wörterbuch"</string>
+    <!-- no translation found for user_dict_settings_for_work_title (7634659414713254169) -->
+    <skip />
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Hinzufügen"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Ins Wörterbuch"</string>
@@ -2482,8 +2506,6 @@
     <string name="credentials_reset_hint" msgid="6297256880896133631">"Alle Inhalte entfernen?"</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Speicher wurde gelöscht."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Anmeldedaten nicht gelöscht"</string>
-    <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Damit du den Anmeldedatenspeicher verwenden kannst, muss auf deinem Gerät ein sicherer Sperrbildschirm eingerichtet sein"</string>
-    <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"SPERRE EINRICHTEN"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apps mit Nutzungsdatenzugriff"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Notrufsignal"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Verhalten bei einem Notruf festlegen"</string>
@@ -2762,6 +2784,8 @@
     <string name="user_credential_removed" msgid="6514189495799401838">"Anmeldedaten entfernt: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="3729607560420971841">"Keine Nutzeranmeldedaten installiert"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Rechtschreibprüfung"</string>
+    <!-- no translation found for spellcheckers_settings_for_work_title (4114555511355171248) -->
+    <skip />
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Aktuelles Passwort für vollständige Sicherungen eingeben"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Neues Passwort für vollständige Sicherungen eingeben"</string>
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Neues Passwort für vollständige Sicherungen erneut eingeben"</string>
@@ -3041,6 +3065,8 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"Gesicht"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"Fingerabdruck"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"display dimmen, touchscreen, akku, intelligente helligkeit, dynamische helligkeit"</string>
+    <!-- no translation found for keywords_display_adaptive_sleep (4128303149140600783) -->
+    <skip />
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"drehen, spiegeln, drehung, hochformat, querformat, ausrichtung, vertikal, horizontal"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"upgrade, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, zeitplan, benachrichtigungen, blockieren, lautlos, vibrieren, schlaf, arbeit, fokus, ton, stumm, tag, wochentag, wochenende, wochenende, ereignis"</string>
@@ -3134,7 +3160,8 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="3465600930732602159">"Wenn auf deinem Smartphone neue Benachrichtigungen eingehen, ist weder ein akustisches Signal zu hören noch eine Vibration zu spüren."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"Kein optisches oder akustisches Signal bei Benachrichtigungen"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"Du siehst und hörst keine Benachrichtigungen"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="6559283246372102465">"Auf deinem Smartphone werden keine neuen oder vorhandenen Benachrichtigungen angezeigt. Es ist weder ein akustisches Signal zu hören noch eine Vibration zu spüren. Es erscheinen auch keine Benachrichtigungen, wenn du vom oberen Bildschirmrand nach unten wischst.\n\nBenachrichtigungen für grundlegende Smartphone-Aktivitäten und den Smartphone-Status werden weiterhin angezeigt."</string>
+    <!-- no translation found for zen_mode_restrict_notifications_hide_footer (1069960859746788356) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Benutzerdefiniert"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Benutzerdefinierte Einstellung aktivieren"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Benutzerdefinierte Einstellung entfernen"</string>
@@ -3165,10 +3192,8 @@
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"Aktivieren"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"Jetzt aktivieren"</string>
     <string name="zen_mode_button_turn_off" msgid="6181953727880503094">"Jetzt deaktivieren"</string>
-    <!-- no translation found for live_captions_title (7450564721572472212) -->
-    <skip />
-    <!-- no translation found for live_captions_summary (3247164905504570813) -->
-    <skip />
+    <string name="live_captions_title" msgid="7450564721572472212">"Live Caption"</string>
+    <string name="live_captions_summary" msgid="3247164905504570813">"Audio auf dem Gerät automatisch in Untertitel konvertieren"</string>
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"\"Bitte nicht stören\" ist aktiviert bis <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"\"Bitte nicht stören\" bleibt aktiviert, bis du es deaktivierst"</string>
     <string name="zen_mode_settings_dnd_automatic_rule" msgid="6195725842906270996">"\"Bitte nicht stören\" wurde automatisch durch einen Zeitplan (<xliff:g id="RULE_NAME">%s</xliff:g>) aktiviert"</string>
@@ -3390,7 +3415,8 @@
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> bis <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="4769117032399813012">"Anrufe zulassen"</string>
     <string name="zen_mode_calls_title" msgid="2905770092665685857">"Anrufe"</string>
-    <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Wenn \"Bitte nicht stören\" aktiviert ist, werden eingehende Anrufe blockiert. Die Einstellungen lassen sich anpassen, sodass Freunde, Familie oder andere Kontakte dich erreichen können."</string>
+    <!-- no translation found for zen_mode_calls_footer (2002070641802102110) -->
+    <skip />
     <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"Für \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" werden eingehende Anrufe blockiert. Du kannst die Einstellungen anpassen, sodass dich Freunde, Familie oder andere Kontakte erreichen können."</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Markierte Kontakte"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
@@ -3398,9 +3424,11 @@
       <item quantity="one">1 weitere Person</item>
     </plurals>
     <string name="zen_mode_messages" msgid="3463040297974005265">"SMS zulassen"</string>
-    <string name="zen_mode_messages_footer" msgid="4487026388475642635">"Wenn \"Bitte nicht stören\" aktiviert ist, werden eingehende SMS blockiert. Du kannst die Einstellungen anpassen, sodass dich Freunde, Familie oder andere Kontakte erreichen können."</string>
+    <!-- no translation found for zen_mode_messages_footer (2616568463646674149) -->
+    <skip />
     <string name="zen_mode_custom_messages_footer" msgid="356699532253965350">"Für \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" werden eingehende SMS blockiert. Du kannst die Einstellungen anpassen, sodass dich Freunde, Familie oder andere Kontakte erreichen können."</string>
-    <string name="zen_mode_messages_title" msgid="3629143239036105431">"SMS"</string>
+    <!-- no translation found for zen_mode_messages_title (7325983674655986445) -->
+    <skip />
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"Von allen"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"Nur von Kontakten"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Nur von markierten Kontakten"</string>
@@ -3412,7 +3440,8 @@
     <string name="zen_mode_from_none_messages" msgid="3300937656725582608">"Keine Nachrichten zulassen"</string>
     <string name="zen_mode_alarms" msgid="6510378757005935647">"Wecker zulassen"</string>
     <string name="zen_mode_alarms_list" msgid="1090332840207025714">"Wecker"</string>
-    <string name="zen_mode_media" msgid="3432878160640214315">"Medientöne zulassen"</string>
+    <!-- no translation found for zen_mode_media (4529187475698084320) -->
+    <skip />
     <string name="zen_mode_media_list" msgid="5483540766397328038">"Medien"</string>
     <string name="zen_mode_system" msgid="236278770843463810">"Töne bei Berührung zulassen"</string>
     <string name="zen_mode_system_list" msgid="6996104733185177115">"Töne bei Berührung"</string>
@@ -3481,10 +3510,10 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Du kannst dieses Gerät zusätzlich schützen, indem du festlegst, dass dein Passwort vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden. \n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Neben dem Fingerabdruck zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Neben dem Fingerabdruck zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Neben der Verwendung deines Fingerabdrucks zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten, Benachrichtigungen oder Alarme empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Neben der Verwendung deines Fingerabdrucks zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen (wie Wecker) empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Neben der Gesichtserkennung zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Neben der Gesichtserkennung zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Neben der Verwendung der Gesichtserkennung zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten, Benachrichtigungen oder Alarme empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Neben der Verwendung der Gesichtserkennung zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen (wie Wecker) empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"\"Ja\""</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nein"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Eingeschränkt"</string>
@@ -3954,25 +3983,21 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"Keine"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Das Rangobjekt fehlt."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Dieser Schlüssel ist in dem Rangobjekt nicht enthalten."</string>
-    <!-- no translation found for theme_customization_category (1049181544004163283) -->
-    <skip />
-    <!-- no translation found for theme_customization_accent_color_title (2946868019715911717) -->
-    <skip />
-    <!-- no translation found for theme_customization_font_title (1634160034866477544) -->
-    <skip />
-    <!-- no translation found for theme_customization_icon_shape_title (9168569756271940841) -->
-    <skip />
-    <!-- no translation found for theme_customization_device_default (5058147707906551368) -->
-    <skip />
+    <string name="theme_customization_category" msgid="1049181544004163283">"Designs"</string>
+    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Akzentfarbe"</string>
+    <string name="theme_customization_font_title" msgid="1634160034866477544">"Schriftart für Überschrift und Haupttext"</string>
+    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Form des Symbols"</string>
+    <string name="theme_customization_device_default" msgid="5058147707906551368">"Gerätestandard"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Display-Aussparung"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"display aussparung, notch"</string>
-    <!-- no translation found for overlay_option_device_default (294510212512203638) -->
-    <skip />
+    <string name="overlay_option_device_default" msgid="294510212512203638">"Gerätestandard"</string>
     <string name="special_access" msgid="3458780842491881155">"Spezieller App-Zugriff"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Apps dürfen uneingeschränkt Daten nutzen</item>
       <item quantity="one">1 App darf uneingeschränkt Daten nutzen</item>
     </plurals>
+    <!-- no translation found for special_access_more (653865374034284971) -->
+    <skip />
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Nutzerdaten wirklich löschen und zur Dateiverschlüsselung wechseln?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Löschen und wechseln"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Zugriffsbegrenzung im ShortcutManager zurücksetzen"</string>
@@ -3989,8 +4014,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Mit <xliff:g id="ID_1">%1$s</xliff:g> verbunden"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Mit mehreren Geräten verbunden"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demomodus der System-UI"</string>
-    <string name="dark_ui_mode" msgid="4176511670311366886">"Dunkler Modus"</string>
-    <string name="dark_ui_mode_title" msgid="3471395820322819817">"Dunkler Modus"</string>
+    <!-- no translation found for dark_ui_mode (6446533895402494144) -->
+    <skip />
+    <!-- no translation found for dark_ui_mode_title (7069207541367960261) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Kacheln für Schnelleinstellungen für Entwickler"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope Trace"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Einstellungen für Arbeitsprofil"</string>
@@ -4297,19 +4324,22 @@
     <string name="cdma_lte_data_service" msgid="8507044148856536098">"Datendienst einrichten"</string>
     <string name="mobile_data_settings_title" msgid="7674604042461065482">"Mobile Daten"</string>
     <string name="mobile_data_settings_summary" msgid="2708261377199805404">"Datenzugriff über Mobilfunknetz"</string>
-    <!-- no translation found for mobile_network_summary_add_a_network (9148476748420654283) -->
+    <!-- no translation found for calls_preference (4628557570999372758) -->
     <skip />
-    <!-- no translation found for mobile_network_summary_count (4505694491027023039) -->
-    <!-- no translation found for mobile_network_list_add_more (4000806369124701679) -->
+    <!-- no translation found for sms_preference (3479810211828513772) -->
     <skip />
-    <!-- no translation found for mobile_network_active_sim (8034468461940321166) -->
+    <!-- no translation found for calls_and_sms_ask_every_time (2127802836576375306) -->
     <skip />
-    <!-- no translation found for mobile_network_inactive_sim (5611153524222529180) -->
-    <skip />
-    <!-- no translation found for mobile_network_active_esim (4253830619317882982) -->
-    <skip />
-    <!-- no translation found for mobile_network_inactive_esim (5605993700944852351) -->
-    <skip />
+    <string name="mobile_network_summary_add_a_network" msgid="9148476748420654283">"Netzwerk hinzufügen"</string>
+    <plurals name="mobile_network_summary_count" formatted="false" msgid="4505694491027023039">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> SIM-Karten</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> SIM-Karte</item>
+    </plurals>
+    <string name="mobile_network_list_add_more" msgid="4000806369124701679">"Weitere hinzufügen"</string>
+    <string name="mobile_network_active_sim" msgid="8034468461940321166">"Aktive SIM"</string>
+    <string name="mobile_network_inactive_sim" msgid="5611153524222529180">"Inaktive SIM"</string>
+    <string name="mobile_network_active_esim" msgid="4253830619317882982">"Aktive eSIM"</string>
+    <string name="mobile_network_inactive_esim" msgid="5605993700944852351">"Inaktive eSIM"</string>
     <string name="preferred_network_mode_title" msgid="6505630109389684100">"Bevorzugter Netzwerktyp"</string>
     <string name="preferred_network_mode_summary" msgid="1216219115667163264">"Netzwerkmodus ändern"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="849254040214447984">"Bevorzugter Netzwerktyp"</string>
@@ -4334,15 +4364,24 @@
     <string name="emergency_info_contextual_card_summary" msgid="7993926837251874514">"Medizinische Informationen und Notfallkontakte"</string>
     <string name="see_more" msgid="5953815986207345223">"Mehr anzeigen"</string>
     <string name="see_less" msgid="1250265310929558370">"Weniger anzeigen"</string>
-    <string name="network_connection_request_dialog_title" msgid="970961351415084638">"Gerät auswählen"</string>
+    <!-- no translation found for network_connection_request_dialog_title (3502355504717957803) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="3711556077945728716">"Keine Geräte gefunden. Achte darauf, dass die Geräte eingeschaltet und zur Verbindung bereit sind."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Noch einmal versuchen"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Ein Fehler ist aufgetreten. Die Anwendung hat die Anfrage zur Auswahl eines Geräts abgebrochen."</string>
+    <!-- no translation found for network_connection_connect_successful (5935510954474494928) -->
+    <skip />
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> Geräte verbunden</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> Gerät verbunden</item>
     </plurals>
     <string name="no_bluetooth_devices" msgid="861861879657732058">"Keine Bluetooth-Geräte"</string>
+    <!-- no translation found for bluetooth_left_name (2133431890020995442) -->
+    <skip />
+    <!-- no translation found for bluetooth_right_name (525578831502355410) -->
+    <skip />
+    <!-- no translation found for bluetooth_middle_name (3272836932362043957) -->
+    <skip />
     <string name="settings_panel_title" msgid="4688575606213055744">"Einstellungen"</string>
     <string name="internet_connectivity_panel_title" msgid="721392242301676444">"Internetverbindung"</string>
     <string name="volume_connectivity_panel_title" msgid="9192664643867101356">"Lautstärke"</string>
@@ -4360,6 +4399,19 @@
     <string name="contextual_card_feedback_confirm_message" msgid="8115454795160804779">"Möchtest du uns zu diesem Vorschlag Feedback geben?"</string>
     <string name="copyable_slice_toast" msgid="2924110841440836023">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> in die Zwischenablage kopiert."</string>
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
-    <string name="gesture_skip_title" msgid="2092825906479683162">"Bewegung zum Überspringen"</string>
-    <string name="gesture_silence_title" msgid="8991427657123202574">"Bewegung zum Stummschalten von Benachrichtigungen"</string>
+    <!-- no translation found for permission_bar_chart_empty_text (4380731551728553852) -->
+    <skip />
+    <!-- no translation found for permission_bar_chart_title (7748942699610196566) -->
+    <skip />
+    <!-- no translation found for permission_bar_chart_details (7627032893125479183) -->
+    <skip />
+    <!-- no translation found for manage_app_notification (877012013856561440) -->
+    <skip />
+    <!-- no translation found for no_suggested_app (5722034393216359231) -->
+    <skip />
+    <!-- no translation found for notification_channel_count_summary (881808454175451279) -->
+    <!-- no translation found for media_output_panel_title (6197092814295528184) -->
+    <skip />
+    <!-- no translation found for media_output_panel_summary_of_playing_device (629529380940058789) -->
+    <skip />
 </resources>

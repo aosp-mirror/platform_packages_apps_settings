@@ -108,6 +108,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
         super.onAttach(context);
+        use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider(context);

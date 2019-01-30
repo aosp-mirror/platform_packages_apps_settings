@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gup;
+package com.android.settings.development.gamedriver;
+
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
@@ -31,6 +36,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import java.text.Collator;
@@ -42,59 +50,91 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GupPreferenceController
-        extends BasePreferenceController implements Preference.OnPreferenceChangeListener {
+/**
+ * Controller of all the per App based list preferences.
+ */
+public class GameDriverAppPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener,
+                   GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
+                   OnStart, OnStop {
+
+    private final Context mContext;
+    private final ContentResolver mContentResolver;
     private final CharSequence[] mEntryList;
     private final String mPreferenceTitle;
     private final String mPreferenceDefault;
-    private final String mPreferenceGup;
+    private final String mPreferenceGameDriver;
     private final String mPreferenceSystem;
+    @VisibleForTesting
+    GameDriverContentObserver mGameDriverContentObserver;
 
     private final List<AppInfo> mAppInfos;
     private final Set<String> mDevOptInApps;
     private final Set<String> mDevOptOutApps;
 
-    public GupPreferenceController(Context context, String key) {
+    private PreferenceGroup mPreferenceGroup;
+
+    public GameDriverAppPreferenceController(Context context, String key) {
         super(context, key);
 
+        mContext = context;
+        mContentResolver = context.getContentResolver();
+        mGameDriverContentObserver =
+                new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
+
         final Resources resources = context.getResources();
-        mEntryList = resources.getStringArray(R.array.gup_app_preference_values);
-        mPreferenceTitle = resources.getString(R.string.gup_app_preference_title);
-        mPreferenceDefault = resources.getString(R.string.gup_app_preference_default);
-        mPreferenceGup = resources.getString(R.string.gup_app_preference_gup);
-        mPreferenceSystem = resources.getString(R.string.gup_app_preference_system);
+        mEntryList = resources.getStringArray(R.array.game_driver_app_preference_values);
+        mPreferenceTitle = resources.getString(R.string.game_driver_app_preference_title);
+        mPreferenceDefault = resources.getString(R.string.game_driver_app_preference_default);
+        mPreferenceGameDriver =
+                resources.getString(R.string.game_driver_app_preference_game_driver);
+        mPreferenceSystem = resources.getString(R.string.game_driver_app_preference_system);
 
         // TODO: Move this task to background if there's potential ANR/Jank.
         // Update the UI when all the app infos are ready.
         mAppInfos = getAppInfos(context);
 
-        final ContentResolver contentResolver = context.getContentResolver();
         mDevOptInApps =
-                getGlobalSettingsString(contentResolver, Settings.Global.GUP_DEV_OPT_IN_APPS);
+                getGlobalSettingsString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS);
         mDevOptOutApps =
-                getGlobalSettingsString(contentResolver, Settings.Global.GUP_DEV_OPT_OUT_APPS);
+                getGlobalSettingsString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
+                        && (Settings.Global.getInt(mContentResolver,
+                                    Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
+                                != GAME_DRIVER_OFF)
                 ? AVAILABLE
-                : DISABLED_DEPENDENT_SETTING;
+                : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final PreferenceGroup preferenceGroup =
-                (PreferenceGroup) screen.findPreference(getPreferenceKey());
-        if (preferenceGroup == null) {
-            return;
-        }
+        mPreferenceGroup = (PreferenceGroup) screen.findPreference(getPreferenceKey());
 
+        final Context context = mPreferenceGroup.getContext();
         for (AppInfo appInfo : mAppInfos) {
-            preferenceGroup.addPreference(
-                    createListPreference(appInfo.info.packageName, appInfo.label));
+            mPreferenceGroup.addPreference(
+                    createListPreference(context, appInfo.info.packageName, appInfo.label));
         }
+    }
+
+    @Override
+    public void onStart() {
+        mGameDriverContentObserver.register(mContentResolver);
+    }
+
+    @Override
+    public void onStop() {
+        mGameDriverContentObserver.unregister(mContentResolver);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        preference.setVisible(isAvailable());
     }
 
     @Override
@@ -108,7 +148,7 @@ public class GupPreferenceController
         if (value.equals(mPreferenceSystem)) {
             mDevOptInApps.remove(packageName);
             mDevOptOutApps.add(packageName);
-        } else if (value.equals(mPreferenceGup)) {
+        } else if (value.equals(mPreferenceGameDriver)) {
             mDevOptInApps.add(packageName);
             mDevOptOutApps.remove(packageName);
         } else {
@@ -119,13 +159,18 @@ public class GupPreferenceController
         listPref.setSummary(value);
 
         // Push the updated Sets for opt-in and opt-out apps to
-        // corresponding Settings.Global.GUP_DEV_OPT_(IN|OUT)_APPS
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.GUP_DEV_OPT_IN_APPS, String.join(",", mDevOptInApps));
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.GUP_DEV_OPT_OUT_APPS, String.join(",", mDevOptOutApps));
+        // corresponding Settings.Global.GAME_DRIVER_OPT_(IN|OUT)_APPS
+        Settings.Global.putString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS,
+                String.join(",", mDevOptInApps));
+        Settings.Global.putString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS,
+                String.join(",", mDevOptOutApps));
 
         return true;
+    }
+
+    @Override
+    public void onGameDriverContentChanged() {
+        updateState(mPreferenceGroup);
     }
 
     // AppInfo class to achieve loading the application label only once
@@ -176,8 +221,9 @@ public class GupPreferenceController
     };
 
     @VisibleForTesting
-    protected ListPreference createListPreference(String packageName, String appName) {
-        final ListPreference listPreference = new ListPreference(mContext);
+    protected ListPreference createListPreference(
+            Context context, String packageName, String appName) {
+        final ListPreference listPreference = new ListPreference(context);
 
         listPreference.setKey(packageName);
         listPreference.setTitle(appName);
@@ -186,13 +232,13 @@ public class GupPreferenceController
         listPreference.setEntryValues(mEntryList);
 
         // Initialize preference default and summary with the opt in/out choices
-        // from Settings.Global.GUP_DEV_OPT_(IN|OUT)_APPS
+        // from Settings.Global.GAME_DRIVER_OPT_(IN|OUT)_APPS
         if (mDevOptOutApps.contains(packageName)) {
             listPreference.setValue(mPreferenceSystem);
             listPreference.setSummary(mPreferenceSystem);
         } else if (mDevOptInApps.contains(packageName)) {
-            listPreference.setValue(mPreferenceGup);
-            listPreference.setSummary(mPreferenceGup);
+            listPreference.setValue(mPreferenceGameDriver);
+            listPreference.setSummary(mPreferenceGameDriver);
         } else {
             listPreference.setValue(mPreferenceDefault);
             listPreference.setSummary(mPreferenceDefault);
