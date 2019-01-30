@@ -17,6 +17,8 @@
 
 package com.android.settings.password;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
@@ -62,7 +64,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
 
     public static Intent createIntent(CharSequence title, CharSequence details) {
         Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
+        intent.setClassName(SETTINGS_PACKAGE_NAME,
                 ConfirmDeviceCredentialActivity.class.getName());
         intent.putExtra(KeyguardManager.EXTRA_TITLE, title);
         intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION, details);
@@ -71,7 +73,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
 
     public static Intent createIntent(CharSequence title, CharSequence details, long challenge) {
         Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
+        intent.setClassName(SETTINGS_PACKAGE_NAME,
                 ConfirmDeviceCredentialActivity.class.getName());
         intent.putExtra(KeyguardManager.EXTRA_TITLE, title);
         intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION, details);

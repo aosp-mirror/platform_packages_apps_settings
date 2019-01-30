@@ -16,6 +16,8 @@
 
 package com.android.settings.password;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.IActivityManager;
@@ -31,8 +33,6 @@ import com.android.settings.Utils;
 public final class PasswordUtils extends com.android.settingslib.Utils {
 
     private static final String TAG = "Settings";
-
-    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     /**
      * Returns whether the uid which the activity with {@code activityToken} is launched from has

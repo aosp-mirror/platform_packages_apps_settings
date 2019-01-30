@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.batterytip.detectors;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.Context;
 import android.os.BatteryStats;
 import android.text.format.DateUtils;
@@ -91,7 +93,7 @@ public class HighUsageDetector implements BatteryTipDetector {
                 // When in test mode, add an app if necessary
                 if (mPolicy.testHighUsageTip && mHighUsageAppList.isEmpty()) {
                     mHighUsageAppList.add(new AppInfo.Builder()
-                            .setPackageName("com.android.settings")
+                            .setPackageName(SETTINGS_PACKAGE_NAME)
                             .setScreenOnTimeMs(TimeUnit.HOURS.toMillis(3))
                             .build());
                 }

@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -60,7 +59,8 @@ public class BatteryTipUtilsTest {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest();
-        doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
+        when(mSettingsActivity.getApplicationContext()).thenReturn(RuntimeEnvironment.application);
+        when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
         mRestrictAppTip = spy(new RestrictAppTip(BatteryTip.StateType.NEW, new ArrayList<>()));
         mEarlyWarningTip = spy(
                 new EarlyWarningTip(BatteryTip.StateType.NEW, true /* powerSaveModeOn */));

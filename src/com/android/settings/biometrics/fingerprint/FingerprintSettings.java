@@ -17,6 +17,8 @@
 package com.android.settings.biometrics.fingerprint;
 
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -460,7 +462,7 @@ public class FingerprintSettings extends SubSettings {
             final String key = pref.getKey();
             if (KEY_FINGERPRINT_ADD.equals(key)) {
                 Intent intent = new Intent();
-                intent.setClassName("com.android.settings",
+                intent.setClassName(SETTINGS_PACKAGE_NAME,
                         FingerprintEnrollEnrolling.class.getName());
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
@@ -613,7 +615,7 @@ public class FingerprintSettings extends SubSettings {
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
                     getString(R.string.security_settings_fingerprint_preference_title),
                     null, null, challenge, mUserId)) {
-                intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
+                intent.setClassName(SETTINGS_PACKAGE_NAME, ChooseLockGeneric.class.getName());
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS,

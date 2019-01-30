@@ -16,6 +16,8 @@
 
 package com.android.settings.password;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -408,7 +410,7 @@ public final class ChooseLockSettingsHelper {
         if (extras != null) {
             intent.putExtras(extras);
         }
-        intent.setClassName(ConfirmDeviceCredentialBaseFragment.PACKAGE, activityClass.getName());
+        intent.setClassName(SETTINGS_PACKAGE_NAME, activityClass.getName());
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             if (mFragment != null) {
