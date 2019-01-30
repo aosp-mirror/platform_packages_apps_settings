@@ -49,6 +49,7 @@ import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSe
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
+import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.backup.PrivacySettings;
 import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.biometrics.face.FaceSettings;
@@ -298,5 +299,6 @@ public class SettingsGateway {
             Settings.DateTimeSettingsActivity.class.getName(),
             Settings.EnterprisePrivacySettingsActivity.class.getName(),
             Settings.MyDeviceInfoActivity.class.getName(),
+            UserBackupSettingsActivity.class.getName(),
     };
 }
