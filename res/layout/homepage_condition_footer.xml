@@ -15,26 +15,20 @@
   limitations under the License.
   -->
 
-<androidx.cardview.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/ContextualCardStyle">
+    android:layout_height="@dimen/homepage_condition_footer_height"
+    android:contentDescription="@string/homepage_condition_footer_content_description"
+    android:gravity="end"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/homepage_condition_footer_padding_top"
+    android:paddingEnd="@dimen/homepage_condition_footer_padding_end">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/homepage_condition_footer_height"
-        android:contentDescription="@string/homepage_condition_footer_content_description"
-        android:gravity="end"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/homepage_condition_footer_padding_top"
-        android:paddingEnd="@dimen/homepage_condition_footer_padding_end">
+    <ImageView
+        android:id="@+id/collapse_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_expand_less"/>
 
-        <ImageView
-            android:id="@+id/collapse_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_expand_less" />
-
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+</LinearLayout>
