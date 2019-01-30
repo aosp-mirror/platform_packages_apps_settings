@@ -20,10 +20,12 @@ package com.android.settings.search;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.provider.Settings;
 import android.widget.Toolbar;
 
@@ -60,19 +62,19 @@ public class SearchFeatureProviderImplTest {
     @Test
     @Config(shadows = ShadowUtils.class)
     public void initSearchToolbar_hasResolvedInfo_shouldStartCorrectIntent() {
-        final Intent searchIntent = new Intent(SearchFeatureProvider.SEARCH_UI_INTENT)
+        final Intent searchIntent = new Intent(Settings.ACTION_APP_SEARCH_SETTINGS)
                 .setPackage(mActivity.getString(R.string.config_settingsintelligence_package_name));
         final ResolveInfo info = new ResolveInfo();
         info.activityInfo = new ActivityInfo();
         mPackageManager.addResolveInfoForIntent(searchIntent, info);
 
         // Should not crash.
-        mProvider.initSearchToolbar(mActivity, null);
+        mProvider.initSearchToolbar(mActivity, null, SettingsEnums.TESTING);
 
         final Toolbar toolbar = new Toolbar(mActivity);
         // This ensures navigationView is created.
         toolbar.setNavigationContentDescription("test");
-        mProvider.initSearchToolbar(mActivity, toolbar);
+        mProvider.initSearchToolbar(mActivity, toolbar, SettingsEnums.TESTING);
 
         toolbar.performClick();
 
@@ -87,7 +89,7 @@ public class SearchFeatureProviderImplTest {
         final Toolbar toolbar = new Toolbar(mActivity);
         // This ensures navigationView is created.
         toolbar.setNavigationContentDescription("test");
-        mProvider.initSearchToolbar(mActivity, toolbar);
+        mProvider.initSearchToolbar(mActivity, toolbar, SettingsEnums.TESTING);
 
         toolbar.performClick();
 
@@ -106,6 +108,15 @@ public class SearchFeatureProviderImplTest {
         toolbar.performClick();
 
         assertThat(Shadows.shadowOf(mActivity).getNextStartedActivity()).isNull();
+    }
+
+    @Test
+    public void buildSearchIntent_shouldIncludeReferrer() {
+        final Intent searchIntent = mProvider.buildSearchIntent(mActivity, SettingsEnums.TESTING);
+        final Uri referrer = searchIntent.getParcelableExtra(Intent.EXTRA_REFERRER);
+
+        assertThat(referrer.toSafeString()).isEqualTo(
+                "android-app://" + mActivity.getPackageName() + "/" + SettingsEnums.TESTING);
     }
 
     @Test(expected = IllegalArgumentException.class)
