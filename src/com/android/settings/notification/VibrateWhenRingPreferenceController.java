@@ -23,6 +23,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 
@@ -62,7 +63,11 @@ public class VibrateWhenRingPreferenceController extends TogglePreferenceControl
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return Utils.isVoiceCapable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        // If ramping ringer is enabled then this setting will be injected
+        // with additional options.
+        return Utils.isVoiceCapable(mContext) && !isRampingRingerEnabled()
+            ? AVAILABLE
+            : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -123,4 +128,19 @@ public class VibrateWhenRingPreferenceController extends TogglePreferenceControl
             }
         }
     }
+
+    private boolean isRampingRingerEnabled() {
+        String enableRampingRinger = DeviceConfig.getProperty(
+            DeviceConfig.Telephony.NAMESPACE,
+            DeviceConfig.Telephony.RAMPING_RINGER_ENABLED);
+        if (enableRampingRinger == null) {
+            return false;
+        }
+        try {
+            return Boolean.valueOf(enableRampingRinger);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
