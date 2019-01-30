@@ -48,7 +48,6 @@ public class SilentStatusBarPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
 
-    private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private SilentStatusBarPreferenceController mController;
     private Preference mPreference;
@@ -57,8 +56,8 @@ public class SilentStatusBarPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new SilentStatusBarPreferenceController(mContext);
+        mController.setBackend(mBackend);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -83,7 +82,7 @@ public class SilentStatusBarPreferenceControllerTest {
         when(mBackend.shouldHideSilentStatusBarIcons(any())).thenReturn(false);
         assertThat(mController.isChecked()).isFalse();
     }
-/**
+
     @Test
     public void isChecked_settingIsOn_true() {
         when(mBackend.shouldHideSilentStatusBarIcons(any())).thenReturn(true);
@@ -93,18 +92,13 @@ public class SilentStatusBarPreferenceControllerTest {
     @Test
     public void onPreferenceChange_on() {
         mController.onPreferenceChange(mPreference, true);
-
-        assertThat(mController.isChecked()).isTrue();
         verify(mBackend).setHideSilentStatusIcons(true);
     }
 
     @Test
     public void onPreferenceChange_off() {
         mController.onPreferenceChange(mPreference, false);
-
-        assertThat(mController.isChecked()).isFalse();
         verify(mBackend).setHideSilentStatusIcons(false);
     }
-    **/
 }
 

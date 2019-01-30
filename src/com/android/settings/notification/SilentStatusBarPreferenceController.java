@@ -24,15 +24,22 @@ import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class SilentStatusBarPreferenceController extends TogglePreferenceController {
 
     private static final String KEY = "hide_silent_icons";
     private static final int MY_USER_ID = UserHandle.myUserId();
-    private final NotificationBackend mBackend;
+    private NotificationBackend mBackend;
 
     public SilentStatusBarPreferenceController(Context context) {
         super(context, KEY);
         mBackend = new NotificationBackend();
+    }
+
+    @VisibleForTesting
+    void setBackend(NotificationBackend backend) {
+        mBackend = backend;
     }
 
     @Override
