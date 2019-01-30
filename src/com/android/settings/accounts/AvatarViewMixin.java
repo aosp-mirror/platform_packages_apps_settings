@@ -17,6 +17,7 @@
 package com.android.settings.accounts;
 
 import android.accounts.Account;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import com.android.settings.R;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.net.URISyntaxException;
@@ -90,6 +92,12 @@ public class AvatarViewMixin implements LifecycleObserver {
                 Log.w(TAG, "Cannot find any matching action VIEW_ACCOUNT intent.");
                 return;
             }
+
+            final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory.getFactory(
+                    mContext).getMetricsFeatureProvider();
+            metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.CLICK_ACCOUNT_AVATAR, SettingsEnums.SETTINGS_HOMEPAGE,
+                    null /* key */, Integer.MIN_VALUE /* value */);
 
             // Here may have two different UI while start the activity.
             // It will display adding account UI when device has no any account.
