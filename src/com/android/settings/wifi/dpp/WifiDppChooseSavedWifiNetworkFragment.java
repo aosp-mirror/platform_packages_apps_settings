@@ -82,6 +82,8 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setHeaderIconImageResource(R.drawable.ic_wifi_signal_4);
+
         mTitle.setText(R.string.wifi_dpp_choose_network);
         mSummary.setText(R.string.wifi_dpp_choose_network_to_connect_device);
 
