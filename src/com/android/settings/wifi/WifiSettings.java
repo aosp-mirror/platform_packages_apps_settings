@@ -562,24 +562,24 @@ public class WifiSettings extends RestrictedSettingsFragment
              * Bypass dialog and connect to unsecured networks, or previously connected saved
              * networks, or Passpoint provided networks.
              */
-            WifiConfiguration config = mSelectedAccessPoint.getConfig();
-            if (mSelectedAccessPoint.isOsuProvider()) {
-                mSelectedAccessPoint.startOsuProvisioning();
-                mClickedConnect = true;
-            } else if ((mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
-                    (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
-                mSelectedAccessPoint.generateOpenNetworkConfig();
-                connect(mSelectedAccessPoint.getConfig(), mSelectedAccessPoint.isSaved());
-            } else if (mSelectedAccessPoint.isSaved() && config != null
-                    && config.getNetworkSelectionStatus() != null
-                    && config.getNetworkSelectionStatus().getHasEverConnected()) {
-                connect(config, true /* isSavedNetwork */);
-            } else if (mSelectedAccessPoint.isPasspoint()) {
-                // Access point provided by an installed Passpoint provider, connect using
-                // the associated config.
-                connect(config, true /* isSavedNetwork */);
-            } else {
-                showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
+            switch (WifiUtils.getConnectingType(mSelectedAccessPoint)) {
+                case WifiUtils.CONNECT_TYPE_OSU_PROVISION:
+                    mSelectedAccessPoint.startOsuProvisioning();
+                    mClickedConnect = true;
+                    break;
+
+                case WifiUtils.CONNECT_TYPE_OPEN_NETWORK:
+                    mSelectedAccessPoint.generateOpenNetworkConfig();
+                    connect(mSelectedAccessPoint.getConfig(), mSelectedAccessPoint.isSaved());
+                    break;
+
+                case WifiUtils.CONNECT_TYPE_SAVED_NETWORK:
+                    connect(mSelectedAccessPoint.getConfig(), true /* isSavedNetwork */);
+                    break;
+
+                default:
+                    showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
+                    break;
             }
         } else if (preference == mAddPreference) {
             onAddNetworkPressed();

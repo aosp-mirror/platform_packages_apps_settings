@@ -2591,6 +2591,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".wifi.slice.ConnectToWifiHandler"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+
         <activity android:name=".sim.SimDialogActivity"
                 android:theme="@style/Theme.AlertDialog"
                 android:label="@string/sim_settings_title"

@@ -253,4 +253,33 @@ public class WifiUtils {
 
         return AccessPoint.SECURITY_NONE;
     }
+
+
+    public static final int CONNECT_TYPE_OTHERS = 0;
+    public static final int CONNECT_TYPE_OPEN_NETWORK = 1;
+    public static final int CONNECT_TYPE_SAVED_NETWORK = 2;
+    public static final int CONNECT_TYPE_OSU_PROVISION = 3;
+
+    /**
+     * Gets the connecting type of {@link AccessPoint}.
+     */
+    public static int getConnectingType(AccessPoint accessPoint) {
+        final WifiConfiguration config = accessPoint.getConfig();
+        if (accessPoint.isOsuProvider()) {
+            return CONNECT_TYPE_OSU_PROVISION;
+        } else if ((accessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
+                (accessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
+            return CONNECT_TYPE_OPEN_NETWORK;
+        } else if (accessPoint.isSaved() && config != null
+                && config.getNetworkSelectionStatus() != null
+                && config.getNetworkSelectionStatus().getHasEverConnected()) {
+            return CONNECT_TYPE_SAVED_NETWORK;
+        } else if (accessPoint.isPasspoint()) {
+            // Access point provided by an installed Passpoint provider, connect using
+            // the associated config.
+            return CONNECT_TYPE_SAVED_NETWORK;
+        } else {
+            return CONNECT_TYPE_OTHERS;
+        }
+    }
 }
