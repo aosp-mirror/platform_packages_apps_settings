@@ -182,6 +182,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/cbrs_data_switch_string" />
 
+        <!-- Switch between SSSS(single sim single standby) and DSDS(dual sim dual standby). -->
+        <Switch android:id="@+id/dsds_switch"
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dsds_switch_string" />
+
         <!-- Horizontal Rule -->
         <View
             android:layout_width="fill_parent"

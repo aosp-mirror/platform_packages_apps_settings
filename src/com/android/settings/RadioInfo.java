@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.QueuedWork;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -40,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentityCdma;
 import android.telephony.CellIdentityGsm;
@@ -81,11 +83,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneConfigurationManager;
 import com.android.internal.telephony.PhoneFactory;
 
 import java.io.IOException;
@@ -93,6 +97,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+// TODO(b/123598192) consider to move this activity to telephony package.
 public class RadioInfo extends Activity {
     private static final String TAG = "RadioInfo";
 
@@ -214,6 +219,7 @@ public class RadioInfo extends Activity {
     private Switch imsWfcProvisionedSwitch;
     private Switch eabProvisionedSwitch;
     private Switch cbrsDataSwitch;
+    private Switch dsdsSwitch;
     private Spinner preferredNetworkType;
     private Spinner cellInfoRefreshRateSpinner;
 
@@ -453,6 +459,23 @@ public class RadioInfo extends Activity {
 
         cbrsDataSwitch = (Switch) findViewById(R.id.cbrs_data_switch);
         cbrsDataSwitch.setVisibility(isCbrsSupported() ? View.VISIBLE : View.GONE);
+
+        dsdsSwitch = findViewById(R.id.dsds_switch);
+        if (isDsdsSupported()) {
+            dsdsSwitch.setVisibility(View.VISIBLE);
+            dsdsSwitch.setOnClickListener(v -> {
+                if (mTelephonyManager.isRebootRequiredForModemConfigChange()) {
+                    // Undo the click action until user clicks the confirm dialog.
+                    dsdsSwitch.toggle();
+                    showDsdsChangeDialog();
+                } else {
+                    performDsdsSwitch();
+                }
+            });
+            dsdsSwitch.setChecked(isDsdsEnabled());
+        } else {
+            dsdsSwitch.setVisibility(View.GONE);
+        }
 
         radioPowerOnSwitch = (Switch) findViewById(R.id.radio_power);
 
@@ -1525,5 +1548,38 @@ public class RadioInfo extends Activity {
         }
     };
 
+    private void showDsdsChangeDialog() {
+        final AlertDialog confirmDialog = new Builder(RadioInfo.this)
+                .setTitle(R.string.dsds_dialog_title)
+                .setMessage(R.string.dsds_dialog_message)
+                .setPositiveButton(R.string.dsds_dialog_confirm, mOnDsdsDialogConfirmedListener)
+                .setNegativeButton(R.string.dsds_dialog_cancel, mOnDsdsDialogConfirmedListener)
+                .create();
+        confirmDialog.show();
+    }
 
+    private static boolean isDsdsSupported() {
+        return PhoneConfigurationManager.getInstance().getStaticPhoneCapability()
+                .logicalModemList.size() >= 2
+                && !TelephonyManager.getDefault().isMultisimCarrierRestricted();
+    }
+
+    private static boolean isDsdsEnabled() {
+        return TelephonyManager.getDefault().getPhoneCount() > 1;
+    }
+
+    private void performDsdsSwitch() {
+        mTelephonyManager.switchMultiSimConfig(dsdsSwitch.isChecked() ? 2 : 1);
+    }
+
+    DialogInterface.OnClickListener mOnDsdsDialogConfirmedListener =
+            new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                dsdsSwitch.toggle();
+                performDsdsSwitch();
+            }
+        }
+    };
 }
