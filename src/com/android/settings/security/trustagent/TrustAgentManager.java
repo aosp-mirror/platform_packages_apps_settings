@@ -53,7 +53,7 @@ import java.util.List;
 public class TrustAgentManager {
 
     // Only allow one trust agent on the platform.
-    private static final boolean ONLY_ONE_TRUST_AGENT = true;
+    private static final boolean ONLY_ONE_TRUST_AGENT = false;
 
     public static class TrustAgentComponentInfo {
         public ComponentName componentName;
