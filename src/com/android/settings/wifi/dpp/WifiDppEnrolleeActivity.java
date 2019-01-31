@@ -100,7 +100,9 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
         setContentView(R.layout.wifi_dpp_activity);
         mFragmentManager = getSupportFragmentManager();
 
-        handleIntent(getIntent());
+        if (savedInstanceState == null) {
+            handleIntent(getIntent());
+        }
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -122,13 +124,23 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
     }
 
     private void showQrCodeScannerFragment(boolean addToBackStack, String ssid) {
-        // Avoid to replace the same fragment during configuration change
-        if (mFragmentManager.findFragmentByTag(WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER) != null) {
+        WifiDppQrCodeScannerFragment fragment =
+                (WifiDppQrCodeScannerFragment) mFragmentManager.findFragmentByTag(
+                        WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
+
+        if (fragment == null) {
+            fragment = new WifiDppQrCodeScannerFragment(ssid);
+        } else {
+            if (fragment.isVisible()) {
+                return;
+            }
+
+            // When the fragment in back stack but not on top of the stack, we can simply pop
+            // stack because current fragment transactions are arranged in an order
+            mFragmentManager.popBackStackImmediate();
             return;
         }
-
-        WifiDppQrCodeScannerFragment fragment = new WifiDppQrCodeScannerFragment(ssid);
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        final FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.fragment_container, fragment,
                 WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);

@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -28,7 +27,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
@@ -63,9 +61,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
 
     private WifiManager.ActionListener mSaveListener;
     private boolean mIsTest;
-
-    @VisibleForTesting
-    boolean mUseConnectedAccessPointDirectly;
 
     // Container Activity must implement this interface
     public interface OnChooseNetworkListener {
@@ -123,8 +118,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                 }
             }
         };
-
-        mUseConnectedAccessPointDirectly = true;
     }
 
     @Override
@@ -309,16 +302,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             // Check if this access point is valid for DPP.
             if (isValidForDppConfiguration(accessPoint)) {
                 final String key = accessPoint.getKey();
-
-                // Check if this access point is already connected.
-                if (mUseConnectedAccessPointDirectly
-                        && accessPoint.getDetailedState() == DetailedState.CONNECTED) {
-                    // Uses connected access point to start DPP in Configurator-Initiator role
-                    // directly.
-                    onPreferenceTreeClick(createAccessPointPreference(accessPoint));
-                    removeCachedPrefs(mAccessPointsPreferenceCategory);
-                    return;
-                }
 
                 final AccessPointPreference pref = (AccessPointPreference) getCachedPreference(key);
                 if (pref != null) {
