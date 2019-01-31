@@ -95,7 +95,7 @@ public class LocationSettingsTests extends InstrumentationTestCase {
     public void testLocationDeviceOnlyMode() throws Exception {
         // Changing the value from default before testing the toggle to Device only mode
         Settings.Secure.putInt(getInstrumentation().getContext().getContentResolver(),
-                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
+                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_ON);
         dismissAlertDialogs();
         Thread.sleep(TIMEOUT);
         verifyLocationSettingsMode(Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
@@ -114,7 +114,7 @@ public class LocationSettingsTests extends InstrumentationTestCase {
         Settings.Secure.putInt(getInstrumentation().getContext().getContentResolver(),
                 Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
         Thread.sleep(TIMEOUT);
-        verifyLocationSettingsMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
+        verifyLocationSettingsMode(Settings.Secure.LOCATION_MODE_ON);
     }
 
     @MediumTest
@@ -145,7 +145,7 @@ public class LocationSettingsTests extends InstrumentationTestCase {
     private void verifyLocationSettingsMode(int mode) throws Exception {
         int modeIntValue = 1;
         String textMode = "Device only";
-        if (mode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY) {
+        if (mode == Settings.Secure.LOCATION_MODE_ON) {
             modeIntValue = 3;
             textMode = "High accuracy";
         }
@@ -169,7 +169,7 @@ public class LocationSettingsTests extends InstrumentationTestCase {
         dismissAlertDialogs();
         mDevice.wait(Until.findObject(By.desc("Navigate up")), TIMEOUT).click();
         Thread.sleep(TIMEOUT);
-        if (mode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY ||
+        if (mode == Settings.Secure.LOCATION_MODE_ON ||
                 mode == Settings.Secure.LOCATION_MODE_BATTERY_SAVING) {
             dismissAlertDialogs();
         }
@@ -190,7 +190,7 @@ public class LocationSettingsTests extends InstrumentationTestCase {
         }
         else {
             Settings.Secure.putInt(getInstrumentation().getContext().getContentResolver(),
-                    Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
+                    Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_ON);
         }
         dismissAlertDialogs();
         // Load location settings

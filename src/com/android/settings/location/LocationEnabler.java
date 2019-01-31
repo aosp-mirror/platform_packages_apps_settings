@@ -15,9 +15,7 @@ package com.android.settings.location;
 
 import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfRestrictionEnforced;
 import static com.android.settingslib.Utils.updateLocationEnabled;
-import static com.android.settingslib.Utils.updateLocationMode;
 
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -121,26 +119,6 @@ public class LocationEnabler implements LifecycleObserver, OnStart, OnStop {
             return;
         }
         updateLocationEnabled(mContext, enabled, UserHandle.myUserId(),
-                Settings.Secure.LOCATION_CHANGER_SYSTEM_SETTINGS);
-        refreshLocationMode();
-    }
-
-    void setLocationMode(int mode) {
-        final int currentMode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
-        if (isRestricted()) {
-            // Location toggling disabled by user restriction. Read the current location mode to
-            // update the location master switch.
-            if (Log.isLoggable(TAG, Log.INFO)) {
-                Log.i(TAG, "Restricted user, not setting location mode");
-            }
-            if (mListener != null) {
-                mListener.onLocationModeChanged(currentMode, true);
-            }
-            return;
-        }
-
-        updateLocationMode(mContext, currentMode, mode, ActivityManager.getCurrentUser(),
                 Settings.Secure.LOCATION_CHANGER_SYSTEM_SETTINGS);
         refreshLocationMode();
     }
