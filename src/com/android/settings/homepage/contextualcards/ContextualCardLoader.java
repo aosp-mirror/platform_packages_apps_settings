@@ -51,7 +51,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     @VisibleForTesting
     static final int DEFAULT_CARD_COUNT = 4;
     static final int CARD_CONTENT_LOADER_ID = 1;
-    static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS;
+    static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS * 3;
 
     private static final String TAG = "ContextualCardLoader";
 
@@ -170,6 +170,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     boolean isCardEligibleToDisplay(ContextualCard card) {
+        final long startTime = System.currentTimeMillis();
         if (card.isCustomCard()) {
             return true;
         }
@@ -190,6 +191,10 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         provider.release();
 
         final Slice slice = Slice.bindSlice(mContext, uri, SUPPORTED_SPECS);
+        //TODO(b/123668403): remove the log here once we do the change with FutureTask
+        final long bindTime = System.currentTimeMillis() - startTime;
+        Log.d(TAG, "Binding time for " + uri + " = " + bindTime);
+
         if (slice == null || slice.hasHint(HINT_ERROR)) {
             Log.w(TAG, "Failed to bind slice, not eligible for display " + uri);
             return false;
