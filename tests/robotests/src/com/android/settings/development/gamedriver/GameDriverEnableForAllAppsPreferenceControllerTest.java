@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.atLeastOnce;
@@ -35,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -136,6 +138,7 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
     }
 
     @Test
+    @Ignore("b/123707483")
     public void updateState_gameDriverOff_notVisibleAndUncheck() {
         Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
         mController.updateState(mPreference);
@@ -151,7 +154,7 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, true);
 
         assertThat(Settings.Global.getInt(
-                           mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
                 .isEqualTo(GAME_DRIVER_ALL_APPS);
     }
 
@@ -162,7 +165,7 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, false);
 
         assertThat(Settings.Global.getInt(
-                           mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
                 .isEqualTo(GAME_DRIVER_DEFAULT);
     }
 }
