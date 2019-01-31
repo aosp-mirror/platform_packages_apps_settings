@@ -21,12 +21,15 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.settings.aware.AwareFeatureProvider;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,12 +48,15 @@ public class WakeScreenGesturePreferenceControllerTest {
     private Context mContext;
     @Mock
     private AmbientDisplayConfiguration mAmbientDisplayConfiguration;
-
     private WakeScreenGesturePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        AwareFeatureProvider featureProvider =
+                FakeFeatureFactory.setupForTest().getAwareFeatureProvider();
+        when(featureProvider.isSupported(any())).thenReturn(true);
+        when(featureProvider.isEnabled(any())).thenReturn(true);
         mController = new WakeScreenGesturePreferenceController(mContext, KEY_WAKE_SCREEN);
         mController.setConfig(mAmbientDisplayConfiguration);
     }

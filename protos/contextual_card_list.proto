@@ -18,7 +18,7 @@ message ContextualCard {
     SUGGESTION = 1;
     POSSIBLE = 2;
     IMPORTANT = 3;
-    EXCLUSIVE = 4;
+    EXCLUSIVE = 4 [deprecated = true];
     DEFERRED_SETUP = 5;
   }
 

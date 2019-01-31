@@ -25,6 +25,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.FeatureFlagUtils;
+
+import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +55,17 @@ public class ModuleVersionDialogControllerTest {
         when(mDialog.getContext()).thenReturn(mContext);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mController = new ModuleVersionDialogController(mDialog);
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MAINLINE_MODULE, true);
+    }
+
+    @Test
+    public void initialize_featureDisabled_shouldRemoveSettingFromDialog() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MAINLINE_MODULE, false);
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(mController.MODULE_VERSION_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(mController.MODULE_VERSION_VALUE_ID);
     }
 
     @Test

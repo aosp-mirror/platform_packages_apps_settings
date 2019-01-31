@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
@@ -36,17 +37,21 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows={ShadowDeviceConfig.class})
 public class VibrateWhenRingPreferenceControllerTest {
 
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
@@ -74,20 +79,42 @@ public class VibrateWhenRingPreferenceControllerTest {
     }
 
     @Test
-    public void display_voiceCapable_shouldDisplay() {
+    public void display_shouldDisplay() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-
+        DeviceConfig.setProperty("namespace", "key", "false", false);
         mController.displayPreference(mScreen);
-
         assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
-    public void display_notVoiceCapable_shouldNotDisplay() {
+    public void display_shouldNotDisplay_notVoiceCapable() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-
+        DeviceConfig.setProperty("namespace", "key", "false", false);
         mController.displayPreference(mScreen);
+        assertThat(mPreference.isVisible()).isFalse();
+    }
 
+    @Test
+    public void display_shouldNotDisplay_RampingRingerEnabled() {
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
+        DeviceConfig.setProperty("namespace", "key", "true", false);
+        mController.displayPreference(mScreen);
+        assertThat(mPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void display_shouldNotDisplay_VoiceEnabled_RampingRingerEnabled() {
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
+        DeviceConfig.setProperty("namespace", "key", "true", false);
+        mController.displayPreference(mScreen);
+        assertThat(mPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void display_shouldNotDisplay_VoiceDisabled_RampingRingerEnabled() {
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
+        DeviceConfig.setProperty("namespace", "key", "true", false);
+        mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isFalse();
     }
 
@@ -112,14 +139,14 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void voiceCapable_availabled() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-
+        DeviceConfig.setProperty("namespace", "key", "false", false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void voiceCapable_notAvailabled() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-
+        DeviceConfig.setProperty("namespace", "key", "false", false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
@@ -197,4 +224,5 @@ public class VibrateWhenRingPreferenceControllerTest {
                 new VibrateWhenRingPreferenceController(mContext, "bad_key");
         assertThat(controller.isSliceable()).isFalse();
     }
+
 }

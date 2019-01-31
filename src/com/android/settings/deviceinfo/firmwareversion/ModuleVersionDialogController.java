@@ -19,9 +19,11 @@ package com.android.settings.deviceinfo.firmwareversion;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -48,6 +50,11 @@ public class ModuleVersionDialogController {
      * Updates the mainline module version field of the dialog.
      */
     public void initialize() {
+        if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MAINLINE_MODULE)) {
+            mDialog.removeSettingFromScreen(MODULE_VERSION_LABEL_ID);
+            mDialog.removeSettingFromScreen(MODULE_VERSION_VALUE_ID);
+            return;
+        }
         final String moduleProvider = mContext.getString(
             com.android.internal.R.string.config_defaultModuleMetadataProvider);
         if (!TextUtils.isEmpty(moduleProvider)) {
