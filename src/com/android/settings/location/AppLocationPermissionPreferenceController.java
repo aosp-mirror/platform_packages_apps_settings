@@ -76,7 +76,7 @@ public class AppLocationPermissionPreferenceController extends
         PermissionControllerManager permController =
                 mContext.getSystemService(PermissionControllerManager.class);
         permController.countPermissionApps(
-                Arrays.asList(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION), false, false,
+                Arrays.asList(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION), 0,
                 (numApps) -> {
                     mNumTotal = numApps;
                     if (loadingInProgress.decrementAndGet() == 0) {
@@ -85,7 +85,8 @@ public class AppLocationPermissionPreferenceController extends
                 }, null);
 
         permController.countPermissionApps(
-                Collections.singletonList(ACCESS_BACKGROUND_LOCATION), true, false,
+                Collections.singletonList(ACCESS_BACKGROUND_LOCATION),
+                PermissionControllerManager.COUNT_ONLY_WHEN_GRANTED,
                 (numApps) -> {
                     mNumBackground = numApps;
                     if (loadingInProgress.decrementAndGet() == 0) {
