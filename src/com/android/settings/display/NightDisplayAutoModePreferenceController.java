@@ -30,11 +30,11 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
         implements Preference.OnPreferenceChangeListener {
 
     private DropDownPreference mPreference;
-    private ColorDisplayManager mManager;
+    private ColorDisplayManager mColorDisplayManager;
 
     public NightDisplayAutoModePreferenceController(Context context, String key) {
         super(context, key);
-        mManager = context.getSystemService(ColorDisplayManager.class);
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
     }
 
     @Override
@@ -63,11 +63,11 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
 
     @Override
     public final void updateState(Preference preference) {
-        mPreference.setValue(String.valueOf(mManager.getNightDisplayAutoMode()));
+        mPreference.setValue(String.valueOf(mColorDisplayManager.getNightDisplayAutoMode()));
     }
 
     @Override
     public final boolean onPreferenceChange(Preference preference, Object newValue) {
-        return mManager.setNightDisplayAutoMode(Integer.parseInt((String) newValue));
+        return mColorDisplayManager.setNightDisplayAutoMode(Integer.parseInt((String) newValue));
     }
 }
