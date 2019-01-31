@@ -125,7 +125,8 @@ public class BiometricFragment extends InstrumentedFragment {
             .setUseDefaultTitle() // use default title if title is null/empty
             .setSubtitle(mBundle.getString(BiometricPrompt.KEY_SUBTITLE))
             .setDescription(mBundle.getString(BiometricPrompt.KEY_DESCRIPTION))
-            .setRequireConfirmation(mBundle.getBoolean(BiometricPrompt.KEY_REQUIRE_CONFIRMATION))
+            .setRequireConfirmation(
+                    mBundle.getBoolean(BiometricPrompt.KEY_REQUIRE_CONFIRMATION, true))
             .setNegativeButton(getResources().getString(
                     R.string.confirm_device_credential_use_alternate_method),
                     mClientExecutor, mNegativeButtonListener)

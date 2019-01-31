@@ -18,13 +18,8 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
-import android.content.pm.PackageManager;
-
-import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
+import android.permission.PermissionControllerManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,64 +28,30 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultPhoneShortcutPreferenceControllerTest {
 
-    @Mock
-    private PackageManager mPackageManager;
+    private static final String TEST_PACKAGE_NAME = "TestPackage";
+    private static final String PREFERENCE_KEY = "default_phone_app";
 
-    private Context mContext;
+    @Mock
+    private PermissionControllerManager mPermissionControllerManager;
+
     private DefaultPhoneShortcutPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mController = new DefaultPhoneShortcutPreferenceController(mContext, "Package1");
+        ShadowApplication.getInstance().setSystemService(Context.PERMISSION_CONTROLLER_SERVICE,
+                mPermissionControllerManager);
+        mController = new DefaultPhoneShortcutPreferenceController(RuntimeEnvironment.application,
+                TEST_PACKAGE_NAME);
     }
 
     @Test
     public void getPreferenceKey_shouldReturnDefaultPhone() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("default_phone_app");
-    }
-
-    @Test
-    @Config(shadows = ShadowDefaultPhonePreferenceController.class)
-    public void hasAppCapability_hasPhoneCapability_shouldReturnTrue() {
-        assertThat(mController.hasAppCapability()).isTrue();
-    }
-
-    @Test
-    public void hasAppCapability_noPhoneCapability_shouldReturnFalse() {
-        assertThat(mController.hasAppCapability()).isFalse();
-    }
-
-    @Test
-    @Config(shadows = ShadowDefaultPhonePreferenceController.class)
-    public void isDefaultApp_isDefaultPhone_shouldReturnTrue() {
-        assertThat(mController.isDefaultApp()).isTrue();
-    }
-
-    @Test
-    public void isDefaultApp_notDefaultPhone_shouldReturnFalse() {
-        assertThat(mController.isDefaultApp()).isFalse();
-    }
-
-    @Implements(DefaultPhonePreferenceController.class)
-    public static class ShadowDefaultPhonePreferenceController {
-        @Implementation
-        protected static boolean hasPhonePreference(String pkg, Context context) {
-            return true;
-        }
-
-        @Implementation
-        protected static boolean isPhoneDefault(String pkg, Context context) {
-            return true;
-        }
+        assertThat(mController.getPreferenceKey()).isEqualTo(PREFERENCE_KEY);
     }
 }

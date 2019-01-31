@@ -19,6 +19,9 @@ package com.android.settings.search;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.settingslib.search.SearchIndexableResources;
@@ -59,7 +62,22 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         return mSearchIndexableResources;
     }
 
+    @Override
+    public Intent buildSearchIntent(Context context, int pageId) {
+        return new Intent(Settings.ACTION_APP_SEARCH_SETTINGS)
+                .setPackage(getSettingsIntelligencePkgName(context))
+                .putExtra(Intent.EXTRA_REFERRER, buildReferrer(context, pageId));
+    }
+
     protected boolean isSignatureWhitelisted(Context context, String callerPackage) {
         return false;
+    }
+
+    private static Uri buildReferrer(Context context, int pageId) {
+        return new Uri.Builder()
+                .scheme("android-app")
+                .authority(context.getPackageName())
+                .path(String.valueOf(pageId))
+                .build();
     }
 }

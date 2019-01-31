@@ -28,9 +28,9 @@
         settings:layout_behavior="com.android.settings.widget.FloatingAppBarScrollingViewBehavior">
 
         <FrameLayout
+            android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/app_bar_height">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/list_container"

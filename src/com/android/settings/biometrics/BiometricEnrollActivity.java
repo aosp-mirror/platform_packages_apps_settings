@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -33,8 +35,6 @@ import com.android.settings.core.InstrumentedActivity;
  */
 public class BiometricEnrollActivity extends InstrumentedActivity {
 
-    private static final String SETTINGS_PACKAGE = "com.android.settings";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +44,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         // This logic may have to be modified on devices with multiple biometrics.
         if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            intent.setClassName(SETTINGS_PACKAGE, FingerprintEnrollIntroduction.class.getName());
+            intent.setClassName(SETTINGS_PACKAGE_NAME,
+                    FingerprintEnrollIntroduction.class.getName());
         } else if (pm.hasSystemFeature(PackageManager.FEATURE_FACE)) {
-            intent.setClassName(SETTINGS_PACKAGE, FaceEnrollIntroduction.class.getName());
+            intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnrollIntroduction.class.getName());
         }
 
         startActivity(intent);

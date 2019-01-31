@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
@@ -65,6 +66,8 @@ public class WifiInfoPreferenceControllerTest {
     private Preference mMacPreference;
     @Mock
     private WifiInfo mWifiInfo;
+    @Mock
+    private Resources mResources;
 
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
@@ -82,6 +85,7 @@ public class WifiInfoPreferenceControllerTest {
                 .thenReturn(mIpPreference);
         when(mWifiManager.getConnectionInfo()).thenReturn(mWifiInfo);
         when(mWifiManager.getCurrentNetwork()).thenReturn(null);
+        when(mContext.getResources()).thenReturn(mResources);
         mController = new WifiInfoPreferenceController(mContext, mLifecycle, mWifiManager);
     }
 
@@ -117,8 +121,9 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void updateWifiInfo_nullWifiInfoWithMacRandomizationOff_setMacUnavailable() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported))
+                .thenReturn(false);
         mController.displayPreference(mScreen);
         when(mWifiManager.getConnectionInfo()).thenReturn(null);
 
@@ -129,8 +134,9 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void updateWifiInfo_nullMacWithMacRandomizationOff_setMacUnavailable() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported))
+                .thenReturn(false);
         mController.displayPreference(mScreen);
         when(mWifiInfo.getMacAddress()).thenReturn(null);
 
@@ -141,8 +147,9 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void updateWifiInfo_defaultMacWithMacRandomizationOff_setMacUnavailable() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported))
+                .thenReturn(false);
         mController.displayPreference(mScreen);
         when(mWifiInfo.getMacAddress()).thenReturn(WifiInfo.DEFAULT_MAC_ADDRESS);
 
@@ -153,8 +160,9 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void updateWifiInfo_validMacWithMacRandomizationOff_setValidMac() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported))
+                .thenReturn(false);
         mController.displayPreference(mScreen);
         when(mWifiInfo.getMacAddress()).thenReturn(TEST_MAC_ADDRESS);
 
@@ -165,8 +173,9 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void updateWifiInfo_nullWifiInfoWithMacRandomizationOn_setMacUnavailable() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 1);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported))
+                .thenReturn(true);
         mController.displayPreference(mScreen);
         when(mWifiManager.getConnectionInfo()).thenReturn(null);
 
@@ -177,8 +186,9 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void updateWifiInfo_nullMacWithMacRandomizationOn_setMacUnavailable() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 1);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported))
+                .thenReturn(true);
         mController.displayPreference(mScreen);
         when(mWifiInfo.getMacAddress()).thenReturn(null);
 
@@ -189,8 +199,9 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void updateWifiInfo_defaultMacWithMacRandomizationOn_setMacRandomized() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 1);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported))
+                .thenReturn(true);
         mController.displayPreference(mScreen);
         when(mWifiInfo.getMacAddress()).thenReturn(WifiInfo.DEFAULT_MAC_ADDRESS);
 
@@ -201,8 +212,9 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void updateWifiInfo_validMacWithMacRandomizationOn_setValidMac() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 1);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported))
+                .thenReturn(true);
         mController.displayPreference(mScreen);
         when(mWifiInfo.getMacAddress()).thenReturn(TEST_MAC_ADDRESS);
 

@@ -1871,6 +1871,11 @@
     <!-- Dialog content for NFC disclaimer: telling user NFC can exchange data when device is nearby other devices (for example: payment terminals, badge reader etc). [CHAR_LIMIT=NONE]-->
     <string name="nfc_disclaimer_content">NFC exchanges data between this device and other nearby devices or targets, such as payment terminals, access readers, and interactive ads or tags.</string>
 
+    <!-- Used in the settings screen to secure NFC [CHAR LIMIT=NONE] -->
+    <string name="nfc_secure_settings_title">Secure NFC</string>
+    <!-- Description of Secure NFC in the 1st level settings screen. [CHAR LIMIT=NONE] -->
+    <string name="nfc_secure_toggle_summary" product="default">Allow NFC Payment and Transit use only when screen is unlocked</string>
+
     <!-- Used to enter the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
     <string name="android_beam_settings_title">Android Beam</string>
     <!-- Used to describe the on state of the Android Beam feature [CHAR LIMIT=NONE] -->
@@ -1878,7 +1883,7 @@
     <!-- Used to describe the off state of the Android Beam feature [CHAR LIMIT=NONE] -->
     <string name="android_beam_off_summary">Off</string>
     <!-- Used to describe the enabled state of the Android Beam feature when NFC, which it relies on, is turned off [CHAR LIMIT=NONE] -->
-    <string name="android_beam_disabled_summary">Unavailable because NFC is turned off</string>
+    <string name="nfc_disabled_summary">Unavailable because NFC is turned off</string>
     <!-- Used in the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
     <string name="android_beam_label">Android Beam</string>
     <!-- Explanation of the Android Beam feature in the Android Beam settings panel. The use of "beam" here is as a verb and not considered trademarked. [CHAR LIMIT=NONE] -->
@@ -7402,12 +7407,6 @@
     <!--  Do not disturb: Label for button that will turn off zen mode. [CHAR LIMIT=30] -->
     <string name="zen_mode_button_turn_off">Turn off now</string>
 
-    <!-- Setting title for controlling how caption text display in real time [CHAR LIMIT=40]-->
-    <string name="live_captions_title">Live Caption</string>
-
-    <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
-    <string name="live_captions_summary">Auto-convert on-device audio to captions</string>
-
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing end time of DND -->
     <string name="zen_mode_settings_dnd_manual_end_time">Do Not Disturb is on until <xliff:g id="formatted_time" example="7:00 AM">%s</xliff:g></string>
 
@@ -7591,6 +7590,12 @@
 
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
+
+    <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
+    <string name="hide_silent_icons_title">Hide silent notification status icons</string>
+
+    <!-- Configure Notifications: setting summary [CHAR LIMIT=NONE] -->
+    <string name="hide_silent_icons_summary">Hide icons for silent notifications in the status bar</string>
 
     <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
     <string name="notification_badging_title">Allow notification dots</string>

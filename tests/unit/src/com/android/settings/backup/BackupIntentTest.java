@@ -37,12 +37,9 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class BackupIntentTest {
-
     private static final String INTENT_PRIVACY_SETTINGS = "android.settings.PRIVACY_SETTINGS";
-    private static final String INTENT_BACKUP_SETTINGS =
-            "android.settings.BACKUP_AND_RESET_SETTINGS";
     private static final String BACKUP_SETTINGS_ACTIVITY =
-            "com.android.settings.backup.BackupSettingsActivity";
+            "com.android.settings.backup.UserBackupSettingsActivity";
 
     private Context mContext;
 
@@ -50,17 +47,6 @@ public class BackupIntentTest {
     public void setUp() throws Exception {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         mContext = instrumentation.getTargetContext();
-    }
-
-    @Test
-    public void testBackupSettingsIntentResolvesToOnlyOneActivity(){
-        PackageManager pm = mContext.getPackageManager();
-        Intent intent = new Intent(INTENT_BACKUP_SETTINGS);
-        List<ResolveInfo> activities = pm.queryIntentActivities(intent, 0);
-        assertThat(activities).isNotNull();
-        assertThat(activities.size()).isEqualTo(1);
-        assertThat(activities.get(0).activityInfo.getComponentName().getClassName()).
-                isEqualTo(BACKUP_SETTINGS_ACTIVITY);
     }
 
     @Test
@@ -73,5 +59,4 @@ public class BackupIntentTest {
         assertThat(activities.get(0).activityInfo.getComponentName().getClassName()).
                 isEqualTo(BACKUP_SETTINGS_ACTIVITY);
     }
-
 }

@@ -44,6 +44,14 @@
         android:icon="@drawable/ic_android"
         android:order="-6"/>
 
+    <SwitchPreference
+        android:key="nfc_secure_settings"
+        android:title="@string/nfc_secure_settings_title"
+        settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"
+        android:icon="@drawable/ic_nfc"
+        android:summary="@string/nfc_secure_toggle_summary"
+        android:order="-7"/>
+
     <com.android.settingslib.RestrictedPreference
         android:key="connected_device_printing"
         android:title="@string/print_settings"

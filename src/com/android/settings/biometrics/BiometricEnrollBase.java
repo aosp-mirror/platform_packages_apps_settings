@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.annotation.Nullable;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -148,7 +150,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
 
     protected Intent getFingerprintEnrollingIntent() {
         Intent intent = new Intent();
-        intent.setClassName("com.android.settings", FingerprintEnrollEnrolling.class.getName());
+        intent.setClassName(SETTINGS_PACKAGE_NAME, FingerprintEnrollEnrolling.class.getName());
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);

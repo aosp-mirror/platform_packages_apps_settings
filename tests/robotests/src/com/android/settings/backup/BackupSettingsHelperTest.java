@@ -31,12 +31,16 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.RemoteException;
 
+import android.os.UserHandle;
+import android.os.UserManager;
 import com.android.settings.R;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,11 +51,12 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = BackupSettingsHelperTest.ShadowBackupManagerStub.class)
 public class BackupSettingsHelperTest {
-
     private static final String DEFAULT_SETTINGS_CLASSNAME =
             "com.android.settings.Settings$PrivacySettingsActivity";
 
@@ -72,12 +77,46 @@ public class BackupSettingsHelperTest {
     @Mock
     private static IBackupManager mBackupManager;
 
+    private ShadowUserManager mUserManager;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         when(mBackupManager.getCurrentTransport()).thenReturn("test_transport");
         mBackupSettingsHelper = new BackupSettingsHelper(mContext);
+        mUserManager = Shadow.extract(mContext.getSystemService(Context.USER_SERVICE));
+    }
+
+    @Test
+    public void testGetSummary_backupEnabledOnlyOneProfile_showsOn() throws Exception {
+        mUserManager.addUserProfile(new UserHandle(0));
+        when(mBackupManager.isBackupEnabled()).thenReturn(true);
+
+        String backupSummary = mBackupSettingsHelper.getSummary();
+
+        assertThat(backupSummary).isEqualTo(mContext.getString(R.string.backup_summary_state_on));
+    }
+
+    @Test
+    public void testGetSummary_backupDisabledOnlyOneProfile_showsOff() throws Exception {
+        mUserManager.addUserProfile(new UserHandle(0));
+        when(mBackupManager.isBackupEnabled()).thenReturn(false);
+
+        String backupSummary = mBackupSettingsHelper.getSummary();
+
+        assertThat(backupSummary).isEqualTo(mContext.getString(R.string.backup_summary_state_off));
+    }
+
+    @Test
+    public void testGetSummary_TwoProfiles_returnsNull() throws Exception {
+        mUserManager.addUserProfile(new UserHandle(0));
+        mUserManager.addUserProfile(new UserHandle(10));
+        when(mBackupManager.isBackupEnabled()).thenReturn(true);
+
+        String backupSummary = mBackupSettingsHelper.getSummary();
+
+        assertThat(backupSummary).isNull();
     }
 
     @Test

@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,7 +52,6 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -287,7 +287,7 @@ public class SettingsActivity extends SettingsBaseActivity
             final Toolbar toolbar = findViewById(R.id.search_action_bar);
             setActionBar(toolbar);
             FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                    .initSearchToolbar(this, toolbar);
+                    .initSearchToolbar(this, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
         }
 
         ActionBar actionBar = getActionBar();
@@ -649,11 +649,6 @@ public class SettingsActivity extends SettingsBaseActivity
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
                 showDev, isAdmin)
-                || somethingChanged;
-
-        // Enable/disable backup settings depending on whether the user is admin.
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                BackupSettingsActivity.class.getName()), true, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

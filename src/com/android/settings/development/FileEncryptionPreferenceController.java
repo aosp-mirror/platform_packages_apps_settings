@@ -19,10 +19,9 @@ package com.android.settings.development;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemProperties;
 import android.os.storage.IStorageManager;
 import android.text.TextUtils;
-
+import android.sysprop.CryptoProperties;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -35,9 +34,6 @@ public class FileEncryptionPreferenceController extends DeveloperOptionsPreferen
 
     private static final String KEY_CONVERT_FBE = "convert_to_file_encryption";
     private static final String KEY_STORAGE_MANAGER = "mount";
-
-    @VisibleForTesting
-    static final String FILE_ENCRYPTION_PROPERTY_KEY = "ro.crypto.type";
 
     private final IStorageManager mStorageManager;
 
@@ -67,8 +63,7 @@ public class FileEncryptionPreferenceController extends DeveloperOptionsPreferen
 
     @Override
     public void updateState(Preference preference) {
-        if (!TextUtils.equals("file",
-                SystemProperties.get(FILE_ENCRYPTION_PROPERTY_KEY, "none" /* default */))) {
+        if (!TextUtils.equals("file", CryptoProperties.type().orElse("none"))) {
             return;
         }
 

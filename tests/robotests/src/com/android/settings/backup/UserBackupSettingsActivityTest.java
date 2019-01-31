@@ -35,8 +35,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.settings.search.SearchIndexableRaw;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,14 +52,12 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowPackageManager;
 
-import java.util.List;
-
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {BackupSettingsActivityTest.ShadowBackupSettingsHelper.class,
-                BackupSettingsActivityTest.ShadowUserHandle.class})
-public class BackupSettingsActivityTest {
-    private ActivityController<BackupSettingsActivity> mActivityController;
-    private BackupSettingsActivity mActivity;
+@Config(shadows = {UserBackupSettingsActivityTest.ShadowBackupSettingsHelper.class,
+                UserBackupSettingsActivityTest.ShadowUserHandle.class})
+public class UserBackupSettingsActivityTest {
+    private ActivityController<UserBackupSettingsActivity> mActivityController;
+    private UserBackupSettingsActivity mActivity;
     private Application mApplication;
     private ShadowPackageManager mPackageManager;
     private static boolean mIsBackupProvidedByOEM;
@@ -81,7 +77,7 @@ public class BackupSettingsActivityTest {
         MockitoAnnotations.initMocks(this);
 
         mApplication = RuntimeEnvironment.application;
-        mActivityController = Robolectric.buildActivity(BackupSettingsActivity.class);
+        mActivityController = Robolectric.buildActivity(UserBackupSettingsActivity.class);
         mActivity = mActivityController.get();
         mPackageManager = Shadows.shadowOf(mApplication.getPackageManager());
         when(mIntent.getComponent()).thenReturn(mComponent);
@@ -130,9 +126,9 @@ public class BackupSettingsActivityTest {
 
     @Test
     public void getNonIndexableKeys_SystemUser() {
-        assertThat(BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
+        assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
                 mApplication, true)).isNotEmpty();
-        assertThat(BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+        assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
                 mApplication)).isEmpty();
     }
 
@@ -140,16 +136,10 @@ public class BackupSettingsActivityTest {
     public void getNonIndexableKeys_NonSystemUser() {
         ShadowUserHandle.setUid(1); // Non-SYSTEM user.
 
-        final List<SearchIndexableRaw> indexableRaws =
-                BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
-                        mApplication, true);
-        final List<String> nonIndexableKeys =
-                BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                        mApplication);
-
-        assertThat(indexableRaws).isNotNull();
-        assertThat(indexableRaws).isNotEmpty();
-        assertThat(nonIndexableKeys).isNotEmpty();
+        assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
+            mApplication, true)).isNotEmpty();
+        assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+            mApplication)).isEmpty();
     }
 
     @Implements(BackupSettingsHelper.class)

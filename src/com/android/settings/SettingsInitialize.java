@@ -21,6 +21,8 @@ import static android.content.pm.PackageManager.GET_META_DATA;
 import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
 import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,14 +53,13 @@ public class SettingsInitialize extends BroadcastReceiver {
     private static final String TAG = "Settings";
     private static final String PRIMARY_PROFILE_SETTING =
             "com.android.settings.PRIMARY_PROFILE_CONTROLLED";
-    private static final String SETTINGS_PACKAGE = "com.android.settings";
     private static final String WEBVIEW_IMPLEMENTATION_ACTIVITY = ".WebViewImplementation";
 
     @Override
     public void onReceive(Context context, Intent broadcast) {
         final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
         UserInfo userInfo = um.getUserInfo(UserHandle.myUserId());
-        final PackageManager pm  = context.getPackageManager();
+        final PackageManager pm = context.getPackageManager();
         managedProfileSetup(context, pm, broadcast, userInfo);
         webviewSettingSetup(context, pm, userInfo);
         refreshExistingShortcuts(context);
@@ -91,7 +92,7 @@ public class SettingsInitialize extends BroadcastReceiver {
                         PRIMARY_PROFILE_SETTING);
                 if (shouldForward) {
                     pm.addCrossProfileIntentFilter(info.filter, userInfo.id,
-                        userInfo.profileGroupId, PackageManager.SKIP_CURRENT_PROFILE);
+                            userInfo.profileGroupId, PackageManager.SKIP_CURRENT_PROFILE);
                 }
             }
         }
@@ -113,7 +114,8 @@ public class SettingsInitialize extends BroadcastReceiver {
             return;
         }
         ComponentName settingsComponentName =
-            new ComponentName(SETTINGS_PACKAGE, SETTINGS_PACKAGE + WEBVIEW_IMPLEMENTATION_ACTIVITY);
+                new ComponentName(SETTINGS_PACKAGE_NAME,
+                        SETTINGS_PACKAGE_NAME + WEBVIEW_IMPLEMENTATION_ACTIVITY);
         pm.setComponentEnabledSetting(settingsComponentName,
                 userInfo.isAdmin() ?
                         PackageManager.COMPONENT_ENABLED_STATE_ENABLED :

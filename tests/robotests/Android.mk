@@ -3,11 +3,11 @@ LOCAL_PATH := $(call my-dir)
 SETTINGS_AOSP_PATH := packages/apps/Settings
 
 #############################################################
-# Build SettingsTest.apk which includes test-only resources.#
+# Build SettingsRoboTestStub.apk which includes test-only resources.#
 #############################################################
 include $(CLEAR_VARS)
 
-LOCAL_PACKAGE_NAME := SettingsTest
+LOCAL_PACKAGE_NAME := SettingsRoboTestStub
 LOCAL_PRIVATE_PLATFORM_APIS := true
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVILEGED_MODULE := true
@@ -77,7 +77,7 @@ LOCAL_JAVA_LIBRARIES := \
     mockito-robolectric-prebuilt \
     truth-prebuilt
 
-LOCAL_INSTRUMENTATION_FOR := SettingsTest
+LOCAL_INSTRUMENTATION_FOR := SettingsRoboTestStub
 
 LOCAL_MODULE_TAGS := optional
 
@@ -100,7 +100,7 @@ LOCAL_JAVA_LIBRARIES := \
     mockito-robolectric-prebuilt \
     truth-prebuilt
 
-LOCAL_TEST_PACKAGE := SettingsTest
+LOCAL_TEST_PACKAGE := SettingsRoboTestStub
 
 LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src \
     frameworks/base/packages/SettingsLib/search/src \

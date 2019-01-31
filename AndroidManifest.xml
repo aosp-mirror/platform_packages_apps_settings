@@ -2776,13 +2776,17 @@
                 android:value="com.android.settings.webview.WebViewAppPicker" />
         </activity-alias>
 
-        <activity android:name=".backup.BackupSettingsActivity"
+        <provider
+            android:name=".backup.BackupSettingsContentProvider"
+            android:authorities="com.android.settings.backup.BackupSettingsContentProvider"
+	    android:exported="true">
+        </provider>
+
+        <activity android:name=".backup.UserBackupSettingsActivity"
                   android:label="@string/privacy_settings_title"
-                  android:icon="@drawable/ic_settings_backup"
-                  android:parentActivityName="Settings">
+                  android:icon="@drawable/ic_settings_backup">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.PRIVACY_SETTINGS" />
-                <action android:name="android.settings.BACKUP_AND_RESET_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -2790,10 +2794,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
+            <!-- Mark the activity as a dynamic setting -->
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <!-- Tell Settings app which category it belongs to -->
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.summary_uri"
+		       android:value="content://com.android.settings.backup.BackupSettingsContentProvider/summary" />
+            <meta-data android:name="com.android.settings.order" android:value="-60"/>
         </activity>
 
         <activity

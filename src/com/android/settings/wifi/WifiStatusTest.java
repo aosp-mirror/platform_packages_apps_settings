@@ -299,7 +299,7 @@ public class WifiStatusTest extends Activity {
             WifiInfo info = mWifiManager.getConnectionInfo();
             String summary = AccessPoint.getSummary(this, info.getSSID(),
                     networkInfo.getDetailedState(),
-                    info.getNetworkId() == WifiConfiguration.INVALID_NETWORK_ID, null);
+                    info.getNetworkId() == WifiConfiguration.INVALID_NETWORK_ID, null, null);
             mNetworkState.setText(summary);
         }
     }
