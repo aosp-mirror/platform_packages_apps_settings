@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,32 +16,31 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
+import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
-
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-public class BadgePreferenceController extends NotificationPreferenceController
+import androidx.preference.Preference;
+
+public class BubblePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "BadgePrefContr";
-    private static final String KEY_BADGE = "badge";
+    private static final String TAG = "BubblePrefContr";
+    private static final String KEY = "bubble";
     private static final int SYSTEM_WIDE_ON = 1;
     private static final int SYSTEM_WIDE_OFF = 0;
 
-    public BadgePreferenceController(Context context,
-            NotificationBackend backend) {
+    public BubblePreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_BADGE;
+        return KEY;
     }
 
     @Override
@@ -53,14 +52,14 @@ public class BadgePreferenceController extends NotificationPreferenceController
             return false;
         }
         if (Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BADGING, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
             return false;
         }
         if (mChannel != null) {
             if (isDefaultChannel()) {
                 return true;
             } else {
-                return mAppRow == null ? false : mAppRow.showBadge;
+                return mAppRow == null ? false : mAppRow.allowBubbles;
             }
         }
         return true;
@@ -71,23 +70,23 @@ public class BadgePreferenceController extends NotificationPreferenceController
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
             if (mChannel != null) {
-                pref.setChecked(mChannel.canShowBadge());
+                pref.setChecked(mChannel.canBubble());
                 pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
             } else {
-                pref.setChecked(mAppRow.showBadge);
+                pref.setChecked(mAppRow.allowBubbles);
             }
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean showBadge = (Boolean) newValue;
+        final boolean value = (Boolean) newValue;
         if (mChannel != null) {
-            mChannel.setShowBadge(showBadge);
+            mChannel.setAllowBubbles(value);
             saveChannel();
         } else if (mAppRow != null){
-            mAppRow.showBadge = showBadge;
-            mBackend.setShowBadge(mAppRow.pkg, mAppRow.uid, showBadge);
+            mAppRow.allowBubbles = value;
+            mBackend.setAllowBubbles(mAppRow.pkg, mAppRow.uid, value);
         }
         return true;
     }
