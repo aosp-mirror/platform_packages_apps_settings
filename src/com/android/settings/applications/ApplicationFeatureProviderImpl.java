@@ -145,7 +145,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
                 mContext.getString(R.string.config_settingsintelligence_package_name));
         final LocationManager locationManager =
                 (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        final String locationHistoryPackage = locationManager.getLocationControllerExtraPackage();
+        final String locationHistoryPackage = locationManager.getExtraLocationControllerPackage();
         if (locationHistoryPackage != null) {
             keepEnabledPackages.add(locationHistoryPackage);
         }
