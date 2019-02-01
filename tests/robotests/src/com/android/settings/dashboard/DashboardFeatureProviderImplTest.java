@@ -16,6 +16,8 @@
 
 package com.android.settings.dashboard;
 
+import static android.content.Intent.EXTRA_USER;
+
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_ORDER;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_PROFILE;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
@@ -67,6 +69,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -411,5 +414,45 @@ public class DashboardFeatureProviderImplTest {
         verify(mActivity)
                 .startActivityForResult(any(Intent.class), eq(0));
         verify(mActivity, never()).getSupportFragmentManager();
+    }
+
+    @Test
+    public void openTileIntent_profileSelectionDialog_validUserHandleShouldNotShow() {
+        final int userId = 10;
+        ShadowUserManager.getShadow().addUser(userId, "Someone", 0);
+
+        final UserHandle userHandle = new UserHandle(userId);
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        tile.getIntent().putExtra(EXTRA_USER, userHandle);
+        final ArrayList<UserHandle> handles = new ArrayList<>();
+        handles.add(new UserHandle(0));
+        handles.add(userHandle);
+        tile.userHandle = handles;
+
+        mImpl.openTileIntent(mActivity, tile);
+
+        final ArgumentCaptor<UserHandle> argument = ArgumentCaptor.forClass(UserHandle.class);
+        verify(mActivity)
+            .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
+        assertThat(argument.getValue().getIdentifier()).isEqualTo(userId);
+        verify(mActivity, never()).getSupportFragmentManager();
+    }
+
+    @Test
+    public void openTileIntent_profileSelectionDialog_invalidUserHandleShouldShow() {
+        ShadowUserManager.getShadow().addUser(10, "Someone", 0);
+
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        tile.getIntent().putExtra(EXTRA_USER, new UserHandle(30));
+        final ArrayList<UserHandle> handles = new ArrayList<>();
+        handles.add(new UserHandle(0));
+        handles.add(new UserHandle(10));
+        tile.userHandle = handles;
+
+        mImpl.openTileIntent(mActivity, tile);
+
+        verify(mActivity, never())
+            .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
+        verify(mActivity).getSupportFragmentManager();
     }
 }

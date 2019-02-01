@@ -16,6 +16,8 @@
 
 package com.android.settings.dashboard;
 
+import static android.content.Intent.EXTRA_USER;
+
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON_URI;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY_URI;
@@ -29,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -239,7 +242,14 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
-            ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile);
+            final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
+            if (userHandle != null && tile.userHandle.contains(userHandle)) {
+                mMetricsFeatureProvider.logDashboardStartIntent(
+                    mContext, intent, sourceMetricCategory);
+                activity.startActivityForResultAsUser(intent, 0, userHandle);
+            } else {
+                ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile);
+            }
         }
     }
 
