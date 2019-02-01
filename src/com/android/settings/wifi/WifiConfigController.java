@@ -366,9 +366,8 @@ public class WifiConfigController implements TextWatcher,
                             suggestionOrSpecifierPackageName = config.creatorName;
                         }
                         String summary = AccessPoint.getSummary(
-                                mConfigUi.getContext(), state, isEphemeral,
-                                suggestionOrSpecifierPackageName,
-                                providerFriendlyName);
+                                mConfigUi.getContext(), /* ssid */ null, state, isEphemeral,
+                                suggestionOrSpecifierPackageName);
                         addRow(group, R.string.wifi_status, summary);
                     }
 
