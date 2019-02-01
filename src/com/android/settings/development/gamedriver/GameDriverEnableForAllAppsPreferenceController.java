@@ -74,6 +74,7 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -98,8 +99,20 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final boolean isChecked = (boolean) newValue;
+        final int gameDriver = Settings.Global.getInt(
+                mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+
+        if (isChecked && gameDriver == GAME_DRIVER_ALL_APPS) {
+            return true;
+        }
+
+        if (!isChecked && (gameDriver == GAME_DRIVER_DEFAULT || gameDriver == GAME_DRIVER_OFF)) {
+            return true;
+        }
+
         Settings.Global.putInt(mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS,
-                (boolean) newValue ? GAME_DRIVER_ALL_APPS : GAME_DRIVER_DEFAULT);
+                isChecked ? GAME_DRIVER_ALL_APPS : GAME_DRIVER_DEFAULT);
 
         return true;
     }
