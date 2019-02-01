@@ -71,7 +71,7 @@ public class TopLevelLocationPreferenceController extends BasePreferenceControll
             return;
         }
         mContext.getSystemService(PermissionControllerManager.class).countPermissionApps(
-                Arrays.asList(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION), false, false,
+                Arrays.asList(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION), 0,
                 (numApps) -> {
                     setLocationAppCount(numApps);
                 }, null);
