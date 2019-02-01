@@ -33,6 +33,7 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
 import android.content.Context;
@@ -49,18 +50,22 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Filter;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -79,6 +84,7 @@ import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.Settings.UsageAccessSettingsActivity;
 import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
@@ -327,12 +333,19 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (mListType == LIST_TYPE_OVERLAY && !Utils.isSystemAlertWindowEnabled(getContext())) {
+            mRootView = inflater.inflate(R.layout.manage_applications_apps_unsupported, null);
+            setHasOptionsMenu(false);
+            return mRootView;
+        }
+
         mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
         mListContainer = mRootView.findViewById(R.id.list_container);
         if (mListContainer != null) {
             // Create adapter and list view here
             mEmptyView = mListContainer.findViewById(android.R.id.empty);
+
             mApplications = new ApplicationsAdapter(mApplicationsState, this, mFilter,
                     savedInstanceState);
             if (savedInstanceState != null) {
