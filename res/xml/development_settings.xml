@@ -114,6 +114,17 @@
             android:key="quick_settings_tiles"
             android:title="@string/quick_settings_developer_tiles"
             android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment" />
+
+    <!-- Configure trust agent behavior -->
+    <SwitchPreference
+        android:key="security_setting_trust_agents_extend_unlock"
+        android:title="@string/trust_agents_extend_unlock_title"
+        android:summary="@string/trust_agents_extend_unlock_summary" />
+
+    <SwitchPreference
+        android:key="security_setting_trust_lost_locks_screen"
+        android:title="@string/trust_lost_locks_screen_title"
+        android:summary="@string/trust_lost_locks_screen_summary" />
     </PreferenceCategory>
 
     <PreferenceCategory

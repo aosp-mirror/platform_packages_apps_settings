@@ -40,17 +40,4 @@
         android:key="power_button_instantly_locks"
         android:title="@string/lockpattern_settings_enable_power_button_instantly_locks" />
 
-    <!-- Temporarily available to evaluate extend unlock mode for SmartLock -->
-    <SwitchPreference
-        android:key="security_setting_trust_agents_extend_unlock"
-        android:title="@string/trust_agents_extend_unlock_title"
-        android:summary="@string/trust_agents_extend_unlock_summary"
-        settings:controller="com.android.settings.security.trustagent.TrustAgentsExtendUnlockPreferenceController" />
-
-    <SwitchPreference
-        android:key="security_setting_trust_lost_locks_screen"
-        android:title="@string/trust_lost_locks_screen_title"
-        android:summary="@string/trust_lost_locks_screen_summary"
-        settings:controller="com.android.settings.security.trustagent.TrustLostLocksScreenPreferenceController" />
-
 </PreferenceScreen>
