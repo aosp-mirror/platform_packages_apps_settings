@@ -7056,7 +7056,9 @@
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
-    <!--Search keywords for financial apps sms access settings -->
+    <!-- Search keywords for dark mode settings [CHAR LIMIT=NONE] -->
+    <string name="keywords_dark_ui_mode">theme, light, dark, mode</string>
+    <!-- Search keywords for financial apps sms access settings [CHAR LIMIT=NONE] -->
     <string name="keywords_financial_apps_sms_access">financial app, sms, permission</string>
 
     <!-- Search keyword for Device Theme Settings [CHAR LIMIT=NONE] -->
@@ -10456,6 +10458,14 @@
     <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
          that service is inactive and is tied to an eSIM profile [CHAR LIMIT=40] -->
     <string name="mobile_network_inactive_esim">Inactive eSIM</string>
+    <!-- Title of a dialog that lets a user modify the display name used for a mobile network
+         subscription in various places in the Settings app. The default name is typically just the
+          carrier name, but especially in multi-SIM configurations users may want to use a different
+           name. [CHAR LIMIT=40] -->
+    <string name="mobile_network_sim_name">SIM name</string>
+    <!-- Label on the confirmation button of a dialog that lets a user set the display name of a
+         mobile network subscription [CHAR LIMIT=20] -->
+    <string name="mobile_network_sim_name_rename">Rename</string>
 
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>

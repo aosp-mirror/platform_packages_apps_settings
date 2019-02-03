@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.atLeastOnce;
@@ -61,11 +62,14 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mResolver = mContext.getContentResolver();
+
+        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+        Settings.Global.putInt(
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+
         mController = new GameDriverEnableForAllAppsPreferenceController(mContext, "testKey");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
-
-        Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
     }
 
     @Test
@@ -151,7 +155,7 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, true);
 
         assertThat(Settings.Global.getInt(
-                           mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
                 .isEqualTo(GAME_DRIVER_ALL_APPS);
     }
 
@@ -162,7 +166,7 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, false);
 
         assertThat(Settings.Global.getInt(
-                           mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
+                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
                 .isEqualTo(GAME_DRIVER_DEFAULT);
     }
 }

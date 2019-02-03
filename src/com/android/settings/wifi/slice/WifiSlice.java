@@ -48,6 +48,7 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.wifi.WifiDialogActivity;
 import com.android.settings.wifi.WifiSettings;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
@@ -176,6 +177,9 @@ public class WifiSlice implements CustomSliceable {
                     .setArguments(extras)
                     .setSourceMetricsCategory(SettingsEnums.WIFI)
                     .toIntent();
+        } else if (WifiUtils.getConnectingType(accessPoint) != WifiUtils.CONNECT_TYPE_OTHERS) {
+            intent = new Intent(mContext, ConnectToWifiHandler.class);
+            intent.putExtra(WifiDialogActivity.KEY_ACCESS_POINT_STATE, extras);
         } else {
             intent = new Intent(mContext, WifiDialogActivity.class);
             intent.putExtra(WifiDialogActivity.KEY_ACCESS_POINT_STATE, extras);

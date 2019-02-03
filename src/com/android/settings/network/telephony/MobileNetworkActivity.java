@@ -97,13 +97,6 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // Set the title to the name of the subscription. If we don't have subscription info, the
-        // title will just default to the label for this activity that's already specified in
-        // AndroidManifest.xml.
-        final SubscriptionInfo subscription = getSubscription();
-        if (subscription != null) {
-            setTitle(subscription.getDisplayName());
-        }
         updateSubscriptions(savedInstanceState);
     }
 
@@ -136,6 +129,14 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
 
     @VisibleForTesting
     void updateSubscriptions(Bundle savedInstanceState) {
+        // Set the title to the name of the subscription. If we don't have subscription info, the
+        // title will just default to the label for this activity that's already specified in
+        // AndroidManifest.xml.
+        final SubscriptionInfo subscription = getSubscription();
+        if (subscription != null) {
+            setTitle(subscription.getDisplayName());
+        }
+
         mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
 
         if (!FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {

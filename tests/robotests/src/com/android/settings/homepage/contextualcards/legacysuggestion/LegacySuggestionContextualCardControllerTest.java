@@ -19,6 +19,7 @@ package com.android.settings.homepage.contextualcards.legacysuggestion;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
@@ -84,8 +85,10 @@ public class LegacySuggestionContextualCardControllerTest {
 
     @Test
     public void onServiceConnected_shouldLoadSuggestion() {
+        when(mSuggestionController.getSuggestions()).thenReturn(null);
         mController.mSuggestionController = mSuggestionController;
         mController.setCardUpdateListener(mCardUpdateListener);
+
         mController.onServiceConnected();
 
         verify(mSuggestionController).getSuggestions();

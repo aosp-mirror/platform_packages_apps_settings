@@ -142,57 +142,6 @@ public class LocationEnablerTest {
     }
 
     @Test
-    public void setLocationMode_restricted_shouldSetCurrentMode() {
-        when(mUserManager.hasUserRestriction(anyString())).thenReturn(true);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
-
-        mEnabler.setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
-
-        verify(mListener).onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, true);
-    }
-
-    @Test
-    public void setLocationMode_notRestricted_shouldUpdateSecureSettings() {
-        when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
-
-        mEnabler.setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
-
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_BATTERY_SAVING))
-                .isEqualTo(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
-    }
-
-    @Test
-    public void setLocationMode_notRestricted_shouldRefreshLocation() {
-        when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
-
-        mEnabler.setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
-
-        verify(mEnabler).refreshLocationMode();
-    }
-
-    @Test
-    public void setLocationMode_notRestricted_shouldBroadcastUpdateAndSetChanger() {
-        when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
-        mEnabler.setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
-
-        verify(mContext).sendBroadcastAsUser(
-                argThat(actionMatches(LocationManager.MODE_CHANGING_ACTION)),
-                eq(UserHandle.of(ActivityManager.getCurrentUser())),
-                eq(WRITE_SECURE_SETTINGS));
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_CHANGER, Settings.Secure.LOCATION_CHANGER_UNKNOWN))
-                .isEqualTo(Settings.Secure.LOCATION_CHANGER_SYSTEM_SETTINGS);
-    }
-
-    @Test
     public void setLocationEnabled_notRestricted_shouldRefreshLocation() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         Settings.Secure.putInt(mContext.getContentResolver(),

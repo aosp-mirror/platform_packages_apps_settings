@@ -28,9 +28,9 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
@@ -51,6 +51,9 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends RestrictedDashboardFragment {
@@ -217,6 +220,31 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
+                mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            final MenuItem item = menu.add(Menu.NONE, R.id.edit_sim_name, Menu.NONE,
+                    R.string.mobile_network_sim_name);
+            item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
+                mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            if (menuItem.getItemId() == R.id.edit_sim_name) {
+                RenameMobileNetworkDialogFragment.newInstance(mSubId).show(
+                        getFragmentManager(), RenameMobileNetworkDialogFragment.TAG);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

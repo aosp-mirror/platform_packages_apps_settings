@@ -128,8 +128,10 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
                 return;
             }
             final List<Suggestion> suggestions = mSuggestionController.getSuggestions();
-            Log.d(TAG, "Loaded suggests: "
-                    + suggestions == null ? "null" : String.valueOf(suggestions.size()));
+            final String suggestionCount = suggestions == null
+                    ? "null"
+                    : String.valueOf(suggestions.size());
+            Log.d(TAG, "Loaded suggests: " + suggestionCount);
 
             final List<ContextualCard> cards = new ArrayList<>();
             if (suggestions != null) {
