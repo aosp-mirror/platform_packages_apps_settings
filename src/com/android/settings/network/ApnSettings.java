@@ -351,7 +351,7 @@ public class ApnSettings extends RestrictedSettingsFragment
             if (mAllowAddingApns) {
                 menu.add(0, MENU_NEW, 0,
                         getResources().getString(R.string.menu_new))
-                        .setIcon(R.drawable.ic_menu_add_white)
+                        .setIcon(R.drawable.ic_menu_add)
                         .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             }
             menu.add(0, MENU_RESTORE, 0,
