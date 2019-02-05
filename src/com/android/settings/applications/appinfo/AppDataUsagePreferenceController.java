@@ -89,7 +89,7 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
     public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
         final NetworkTemplate template = getTemplate(mContext);
         return NetworkCycleDataForUidLoader.builder(mContext)
-            .setUid(mParent.getAppEntry().info.uid)
+            .addUid(mParent.getAppEntry().info.uid)
             .setRetrieveDetail(false)
             .setNetworkTemplate(template)
             .setSubscriberId(template.getSubscriberId())
