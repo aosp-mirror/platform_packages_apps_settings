@@ -37,9 +37,9 @@ import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 
 import com.android.settings.R;
+import com.android.settings.homepage.AdaptiveIconShapeDrawable;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +48,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class RoundedHomepageIconTest {
+public class AdaptiveHomepageIconTest {
 
     private Context mContext;
     private ActivityInfo mActivityInfo;
@@ -64,18 +64,17 @@ public class RoundedHomepageIconTest {
 
     @Test
     public void createIcon_shouldSetBackgroundAndInset() {
-        final RoundedHomepageIcon icon =
-                new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+        final AdaptiveHomepageIcon icon =
+                new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
 
         assertThat(icon.getNumberOfLayers()).isEqualTo(2);
-        DrawableTestHelper.assertDrawableResId(icon.getDrawable(0),
-                R.drawable.ic_homepage_generic_background);
+        assertThat(icon.getDrawable(0)).isInstanceOf(AdaptiveIconShapeDrawable.class);
     }
 
     @Test
     public void setBackgroundColor_shouldUpdateColorFilter() {
-        final RoundedHomepageIcon icon =
-                spy(new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK)));
+        final AdaptiveHomepageIcon icon =
+                spy(new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK)));
         final ShapeDrawable background = mock(ShapeDrawable.class);
         when(icon.getDrawable(0)).thenReturn(background);
 
@@ -90,8 +89,8 @@ public class RoundedHomepageIconTest {
         mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB, 0xff0000);
         doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
                 .when(tile).getIcon(mContext);
-        final RoundedHomepageIcon icon =
-                new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+        final AdaptiveHomepageIcon icon =
+                new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
 
         icon.setBackgroundColor(mContext, tile);
         assertThat(icon.mBackgroundColor).isEqualTo(0xff0000);
@@ -105,8 +104,8 @@ public class RoundedHomepageIconTest {
         doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
                 .when(tile).getIcon(mContext);
 
-        final RoundedHomepageIcon icon =
-                new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+        final AdaptiveHomepageIcon icon =
+                new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
         icon.setBackgroundColor(mContext, tile);
 
         assertThat(icon.mBackgroundColor)

@@ -32,18 +32,19 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.homepage.AdaptiveIconShapeDrawable;
 import com.android.settingslib.drawer.Tile;
 
-public class RoundedHomepageIcon extends LayerDrawable {
+public class AdaptiveHomepageIcon extends LayerDrawable {
 
-    private static final String TAG = "RoundedHomepageIcon";
+    private static final String TAG = "AdaptiveHomepageIcon";
 
     @VisibleForTesting(otherwise = NONE)
     int mBackgroundColor = -1;
 
-    public RoundedHomepageIcon(Context context, Drawable foreground) {
+    public AdaptiveHomepageIcon(Context context, Drawable foreground) {
         super(new Drawable[]{
-                context.getDrawable(R.drawable.ic_homepage_generic_background),
+                new AdaptiveIconShapeDrawable(context.getResources()),
                 foreground
         });
         final int insetPx = context.getResources()
