@@ -39,6 +39,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.BarChartInfo;
 import com.android.settingslib.widget.BarChartPreference;
 import com.android.settingslib.widget.BarViewInfo;
+import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -147,6 +148,7 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         try {
             icon = mPackageManager.getPermissionGroupInfo(permissionGroup.toString(), 0)
                     .loadIcon(mPackageManager);
+            icon.setTintList(Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Cannot find group icon for " + permissionGroup, e);
         }
