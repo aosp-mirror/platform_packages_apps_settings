@@ -17,6 +17,7 @@
 package com.android.settings.privacy;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -28,13 +29,16 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.permission.RuntimePermissionUsageInfo;
+import android.provider.DeviceConfig;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settingslib.widget.BarChartInfo;
 import com.android.settingslib.widget.BarChartPreference;
 import com.android.settingslib.widget.BarViewInfo;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,11 +46,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDeviceConfig.class})
 public class PermissionBarChartPreferenceControllerTest {
 
     @Mock
@@ -65,8 +71,22 @@ public class PermissionBarChartPreferenceControllerTest {
                 .thenReturn((BarChartPreference) mPreference);
     }
 
+    @After
+    public void tearDown() {
+        ShadowDeviceConfig.reset();
+    }
+
     @Test
-    public void getAvailabilityStatus_shouldReturnAvailableUnsearchable() {
+    public void getAvailabilityStatus_permissionHubNotSet_shouldReturnUnsupported() {
+        // We have not yet set the property to show the Permissions Hub.
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_permissionHubEnabled_shouldReturnAvailableUnsearchable() {
+        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
+                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 

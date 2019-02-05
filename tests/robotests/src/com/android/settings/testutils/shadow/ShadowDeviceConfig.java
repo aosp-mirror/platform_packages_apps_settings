@@ -19,21 +19,32 @@ package com.android.settings.testutils.shadow;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Implements(android.provider.DeviceConfig.class)
 public class ShadowDeviceConfig {
 
-    private static String configValue;
+    private static Map<String, String> sPropertyMaps = new HashMap<>();
+
+    @Resetter
+    public static void reset() {
+        sPropertyMaps.clear();
+    }
 
     @Implementation
-    protected static boolean setProperty(
-        String namespace, String name, String value, boolean makeDefault) {
-        configValue = value;
+    public static boolean setProperty(
+            String namespace, String name, String value, boolean makeDefault) {
+        sPropertyMaps.put(name, value);
         return true;
     }
 
     @Implementation
-    protected static String getProperty(String ns, String key) { return configValue; }
+    public static String getProperty(String namespace, String name) {
+        return sPropertyMaps.get(name);
+    }
 }
 
 
