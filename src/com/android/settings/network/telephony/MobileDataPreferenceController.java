@@ -118,7 +118,8 @@ public class MobileDataPreferenceController extends TogglePreferenceController
 
     @Override
     public boolean isChecked() {
-        return mTelephonyManager.isDataEnabled();
+        return mTelephonyManager.isDataEnabled()
+                && mSubId == SubscriptionManager.getDefaultDataSubscriptionId();
     }
 
     public void init(FragmentManager fragmentManager, int subId) {
@@ -129,7 +130,7 @@ public class MobileDataPreferenceController extends TogglePreferenceController
 
     @VisibleForTesting
     boolean isDialogNeeded() {
-        final boolean enableData = !mTelephonyManager.isDataEnabled();
+        final boolean enableData = !isChecked();
         final boolean isMultiSim = (mTelephonyManager.getSimCount() > 1);
         final int defaultSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
         final boolean needToDisableOthers = mSubscriptionManager
