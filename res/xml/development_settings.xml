@@ -540,6 +540,11 @@
             android:key="sms_access_restriction_enabled"
             android:title="@string/sms_access_restriction_enabled"
             android:summary="@string/sms_access_restriction_enabled_summary" />
+
+        <SwitchPreference
+            android:key="device_identifier_access_restrictions"
+            android:title="@string/device_identifier_access_restrictions_title"
+            android:summary="@string/device_identifier_access_restrictions_summary" />
     </PreferenceCategory>
 
     <com.android.settings.development.autofill.AutofillPreferenceCategory
