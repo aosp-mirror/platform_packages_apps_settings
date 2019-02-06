@@ -31,16 +31,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.RemoteException;
-
 import android.os.UserHandle;
-import android.os.UserManager;
+
 import com.android.settings.R;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,8 +54,6 @@ import org.robolectric.shadows.ShadowUserManager;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = BackupSettingsHelperTest.ShadowBackupManagerStub.class)
 public class BackupSettingsHelperTest {
-    private static final String DEFAULT_SETTINGS_CLASSNAME =
-            "com.android.settings.Settings$PrivacySettingsActivity";
 
     private static final int DEFAULT_SUMMARY_RESOURCE =
             R.string.backup_configure_account_default_summary;
@@ -292,16 +287,6 @@ public class BackupSettingsHelperTest {
         Intent backupIntent = mBackupSettingsHelper.getIntentForBackupSettings();
 
         assertThat(backupIntent).isEqualTo(intent);
-    }
-
-    @Test
-    public void testGetIntentForBackupSettings_WithoutIntentFromTransport() throws Exception {
-        when(mBackupManager.getDataManagementIntent(anyString())).thenReturn(null);
-
-        Intent backupIntent = mBackupSettingsHelper.getIntentForBackupSettings();
-
-        assertThat(backupIntent.getComponent().getClassName())
-            .isEqualTo(DEFAULT_SETTINGS_CLASSNAME);
     }
 
     @Test

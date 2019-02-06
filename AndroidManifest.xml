@@ -1236,10 +1236,6 @@
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings">
             <intent-filter>
-                <action android:name="android.settings.PRIVACY_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
@@ -1248,6 +1244,17 @@
                 android:value="com.android.settings.backup.PrivacySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$PrivacyDashboardActivity"
+                  android:label="@string/privacy_dashboard_title"
+                  android:icon="@drawable/ic_settings_privacy">
+            <intent-filter>
+                <action android:name="android.settings.PRIVACY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
         </activity>
 
         <activity android:name="SetFullBackupPassword"
