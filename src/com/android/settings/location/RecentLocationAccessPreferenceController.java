@@ -18,6 +18,7 @@ import static java.util.concurrent.TimeUnit.DAYS;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.DeviceConfig;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -60,7 +61,9 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return Boolean.parseBoolean(
+                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
+                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED));
     }
 
     @Override

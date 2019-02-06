@@ -46,7 +46,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.RoundedHomepageIcon;
+import com.android.settings.widget.AdaptiveHomepageIcon;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -197,8 +197,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             Drawable iconDrawable = tileIcon.loadDrawable(preference.getContext());
             if (forceRoundedIcon
                     && !TextUtils.equals(mContext.getPackageName(), tile.getPackageName())) {
-                iconDrawable = new RoundedHomepageIcon(mContext, iconDrawable);
-                ((RoundedHomepageIcon) iconDrawable).setBackgroundColor(mContext, tile);
+                iconDrawable = new AdaptiveHomepageIcon(mContext, iconDrawable);
+                ((AdaptiveHomepageIcon) iconDrawable).setBackgroundColor(mContext, tile);
             }
             preference.setIcon(iconDrawable);
         } else if (tile.getMetaData() != null

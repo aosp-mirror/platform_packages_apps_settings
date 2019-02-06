@@ -478,6 +478,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new FreeformWindowsPreferenceController(context));
         controllers.add(new DesktopModePreferenceController(context));
         controllers.add(new SmsAccessRestrictionPreferenceController(context));
+        controllers.add(new DeviceIdentifierAccessRestrictionsPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
         controllers.add(new DefaultLaunchPreferenceController(context, "running_apps"));
@@ -497,6 +498,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 "android.theme.customization.font"));
         controllers.add(new OverlayCategoryPreferenceController(context,
                 "android.theme.customization.adaptive_icon_shape"));
+        controllers.add(new TrustAgentsExtendUnlockPreferenceController(context));
+        controllers.add(new TrustLostLocksScreenPreferenceController(context));
         return controllers;
     }
 

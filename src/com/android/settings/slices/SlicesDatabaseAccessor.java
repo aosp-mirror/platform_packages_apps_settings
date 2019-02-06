@@ -75,8 +75,9 @@ public class SlicesDatabaseAccessor {
         if (pathData == null) {
             throw new IllegalStateException("Invalid Slices uri: " + uri);
         }
-        Cursor cursor = getIndexedSliceData(pathData.second /* key */);
-        return buildSliceData(cursor, uri, pathData.first /* isIntentOnly */);
+        try (Cursor cursor = getIndexedSliceData(pathData.second /* key */)) {
+            return buildSliceData(cursor, uri, pathData.first /* isIntentOnly */);
+        }
     }
 
     /**
@@ -85,8 +86,9 @@ public class SlicesDatabaseAccessor {
      * Used when handling the action of the {@link Slice}.
      */
     public SliceData getSliceDataFromKey(String key) {
-        Cursor cursor = getIndexedSliceData(key);
-        return buildSliceData(cursor, null /* uri */, false /* isIntentOnly */);
+        try (Cursor cursor = getIndexedSliceData(key)) {
+            return buildSliceData(cursor, null /* uri */, false /* isIntentOnly */);
+        }
     }
 
     /**

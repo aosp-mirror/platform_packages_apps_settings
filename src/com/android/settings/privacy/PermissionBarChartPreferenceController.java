@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.permission.PermissionControllerManager;
 import android.permission.RuntimePermissionUsageInfo;
+import android.provider.DeviceConfig;
 import android.util.Log;
 import android.view.View;
 
@@ -38,6 +39,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.BarChartInfo;
 import com.android.settingslib.widget.BarChartPreference;
 import com.android.settingslib.widget.BarViewInfo;
+import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -62,7 +64,10 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return Boolean.parseBoolean(
+                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
+                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED)) ?
+                AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -143,6 +148,7 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         try {
             icon = mPackageManager.getPermissionGroupInfo(permissionGroup.toString(), 0)
                     .loadIcon(mPackageManager);
+            icon.setTintList(Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Cannot find group icon for " + permissionGroup, e);
         }

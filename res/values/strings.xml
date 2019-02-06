@@ -820,9 +820,9 @@
     <string name="lockdown_settings_summary">Display power button option that turns off Smart Lock, fingerprint unlocking, and notifications on the lock screen</string>
 
     <!-- Text shown for the title of the extend unlock mode option for trust agents [CHAR LIMIT=40] -->
-    <string name="trust_agents_extend_unlock_title">SmartLock only extends unlock</string>
+    <string name="trust_agents_extend_unlock_title">Trust agents only extend unlock</string>
     <!-- Text shown for the description of the extend unlock mode option [CHAR LIMIT=NONE] -->
-    <string name="trust_agents_extend_unlock_summary">If enabled, SmartLock will keep your device unlocked for longer, but can no longer unlock a locked device.</string>
+    <string name="trust_agents_extend_unlock_summary">If enabled, trust agents will keep your device unlocked for longer, but can no longer unlock a locked device.</string>
 
     <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
     <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
@@ -4771,13 +4771,13 @@
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_adding_summary">Add hearing aid</string>
+    <string name="accessibility_hearingaid_adding_summary">Add hearing aids</string>
     <!-- Message to ask the user that if they want to pair the hearing aid, then they should find and tap the hearing aid device from the list on the next screen. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearingaid_pair_instructions_first_message">To pair your hearing aids, find and tap your device on the next screen.</string>
     <!-- Message to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearingaid_pair_instructions_second_message">Make sure your hearing aids are in pairing mode.</string>
     <!-- Summary for the accessibility preference for hearing aid when there is an active device. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name">%1$s</xliff:g> currently active</string>
+    <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name">%1$s</xliff:g> active</string>
     <!-- Summary for the accessibility preference for hearing aid when there are saved devices. [CHAR LIMIT=50] -->
     <plurals name="show_number_hearingaid_count">
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aid</item>
@@ -5850,6 +5850,10 @@
     <string name="sms_access_restriction_enabled">Restrict SMS &amp; call log access</string>
     <!-- Summary for whether to enable SMS access restriction [CHAR LIMIT=NONE]-->
     <string name="sms_access_restriction_enabled_summary">Only default phone and messaging apps have SMS &amp; call log permissions</string>
+    <!-- Title for the new device identifier access restrictions [CHAR LIMIT=50]-->
+    <string name="device_identifier_access_restrictions_title">Enable device identifier restrictions</string>
+    <!-- Summary for the new device identifier access restrictions [CHAR LIMIT=NONE]-->
+    <string name="device_identifier_access_restrictions_summary">Enable the new access restrictions for device identifiers.</string>
 
 
     <!-- Message when there are no available trust agents to display -->
@@ -10270,11 +10274,11 @@
     <!--  Summary for battery Suggestion. [CHAR LIMIT=55] -->
     <string name="battery_suggestion_summary"></string>
 
-    <!-- Title for prevent ringing gesture screen -->
+    <!-- Title for prevent ringing gesture screen [CHAR LIMIT=60]-->
     <string name="gesture_prevent_ringing_screen_title">Prevent ringing</string>
-    <!-- Title for prevent ringing setting -->
+    <!-- Title for prevent ringing setting [CHAR LIMIT=60]-->
     <string name="gesture_prevent_ringing_title">Press Power &amp; Volume Up together to</string>
-    <!-- Title for prevent ringing setting -->
+    <!-- Title for prevent ringing setting [CHAR LIMIT=60]-->
     <string name="gesture_prevent_ringing_sound_title">Shortcut to prevent ringing</string>
     <!-- Option for prevent ringing setting -->
     <string name="prevent_ringing_option_vibrate">Vibrate</string>

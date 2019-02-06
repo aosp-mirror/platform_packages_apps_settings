@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.provider.DeviceConfig;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,9 +33,11 @@ import android.widget.TextView;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settingslib.location.RecentLocationAccesses;
 import com.android.settingslib.widget.LayoutPreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -43,11 +46,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDeviceConfig.class})
 public class RecentLocationAccessPreferenceControllerTest {
     @Mock
     private LayoutPreference mLayoutPreference;
@@ -74,6 +79,25 @@ public class RecentLocationAccessPreferenceControllerTest {
         when(mLayoutPreference.getContext()).thenReturn(mContext);
         when(mLayoutPreference.findViewById(R.id.app_entities_header)).thenReturn(
                 mAppEntitiesHeaderView);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowDeviceConfig.reset();
+    }
+
+    @Test
+    public void isAvailable_permissionHubNotSet_shouldReturnFalse() {
+        // We have not yet set the property to show the Permissions Hub.
+        assertThat(mController.isAvailable()).isEqualTo(false);
+    }
+
+    @Test
+    public void isAvailable_permissionHubEnabled_shouldReturnTrue() {
+        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
+                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+
+        assertThat(mController.isAvailable()).isEqualTo(true);
     }
 
     /** Verifies the title text, details text are correct, and the click listener is set. */
