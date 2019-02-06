@@ -157,7 +157,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         boolean frp = KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
 
         mUserId = UserHandle.myUserId();
-        final int effectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
         if (isInternalActivity()) {
             try {
                 mUserId = Utils.getUserIdFromBundle(this, intent.getExtras());
@@ -165,6 +164,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 Log.e(TAG, "Invalid intent extra", se);
             }
         }
+        final int effectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
         final boolean isManagedProfile = UserManager.get(this).isManagedProfile(mUserId);
         // if the client app did not hand in a title and we are about to show the work challenge,
         // check whether there is a policy setting the organization name and use that as title
