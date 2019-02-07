@@ -118,7 +118,10 @@ public class SimDialogActivity extends Activity {
 
     private static void setDefaultDataSubId(final Context context, final int subId) {
         final SubscriptionManager subscriptionManager = SubscriptionManager.from(context);
+        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+                .createForSubscriptionId(subId);
         subscriptionManager.setDefaultDataSubId(subId);
+        telephonyManager.setDataEnabled(true);
         Toast.makeText(context, R.string.data_switch_started, Toast.LENGTH_LONG).show();
     }
 
