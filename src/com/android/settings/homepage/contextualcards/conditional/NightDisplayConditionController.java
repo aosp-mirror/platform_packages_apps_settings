@@ -19,7 +19,8 @@ package com.android.settings.homepage.contextualcards.conditional;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import com.android.internal.app.ColorDisplayController;
+import android.hardware.display.ColorDisplayManager;
+import android.hardware.display.NightDisplayListener;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.display.NightDisplaySettings;
@@ -28,17 +29,20 @@ import com.android.settings.homepage.contextualcards.ContextualCard;
 import java.util.Objects;
 
 public class NightDisplayConditionController implements ConditionalCardController,
-        ColorDisplayController.Callback {
+        NightDisplayListener.Callback {
+
     static final int ID = Objects.hash("NightDisplayConditionController");
 
     private final Context mAppContext;
     private final ConditionManager mConditionManager;
-    private final ColorDisplayController mController;
+    private final ColorDisplayManager mColorDisplayManager;
+    private final NightDisplayListener mNightDisplayListener;
 
     public NightDisplayConditionController(Context appContext, ConditionManager manager) {
-        mController = new ColorDisplayController(appContext);
         mAppContext = appContext;
         mConditionManager = manager;
+        mColorDisplayManager = appContext.getSystemService(ColorDisplayManager.class);
+        mNightDisplayListener = new NightDisplayListener(appContext);
     }
 
     @Override
@@ -48,7 +52,7 @@ public class NightDisplayConditionController implements ConditionalCardControlle
 
     @Override
     public boolean isDisplayable() {
-        return mController.isActivated();
+        return mColorDisplayManager.isNightDisplayActivated();
     }
 
     @Override
@@ -62,7 +66,7 @@ public class NightDisplayConditionController implements ConditionalCardControlle
 
     @Override
     public void onActionClick() {
-        mController.setActivated(false);
+        mColorDisplayManager.setNightDisplayActivated(false);
     }
 
     @Override
@@ -84,12 +88,12 @@ public class NightDisplayConditionController implements ConditionalCardControlle
 
     @Override
     public void startMonitoringStateChange() {
-        mController.setListener(this);
+        mNightDisplayListener.setCallback(this);
     }
 
     @Override
     public void stopMonitoringStateChange() {
-        mController.setListener(null);
+        mNightDisplayListener.setCallback(null);
     }
 
     @Override
