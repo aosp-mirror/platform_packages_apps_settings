@@ -50,12 +50,12 @@ public class DeviceIdentifierAccessRestrictionsPreferenceController
     private void writeSetting(boolean isEnabled) {
         DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
                 DeviceConfig.Privacy.PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED,
-                String.valueOf(!isEnabled), false);
+                String.valueOf(isEnabled), false);
     }
 
     @Override
     public void updateState(Preference preference) {
-        boolean isEnabled = !Boolean.parseBoolean(
+        boolean isEnabled = Boolean.parseBoolean(
                 DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
                         DeviceConfig.Privacy.PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED));
         ((SwitchPreference) mPreference).setChecked(isEnabled);
@@ -64,7 +64,7 @@ public class DeviceIdentifierAccessRestrictionsPreferenceController
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        writeSetting(true);
+        writeSetting(false);
         ((SwitchPreference) mPreference).setChecked(true);
     }
 }
