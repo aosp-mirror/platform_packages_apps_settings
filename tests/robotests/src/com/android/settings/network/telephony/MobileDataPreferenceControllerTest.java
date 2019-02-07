@@ -20,7 +20,6 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -31,10 +30,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.SwitchPreference;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,10 +37,18 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowSubscriptionManager;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.SwitchPreference;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowSubscriptionManager.class)
 public class MobileDataPreferenceControllerTest {
     private static final int SUB_ID = 2;
+    private static final int SUB_ID_OTHER = 3;
 
     @Mock
     private FragmentManager mFragmentManager;
@@ -78,6 +81,7 @@ public class MobileDataPreferenceControllerTest {
 
         mPreference = new SwitchPreference(mContext);
         mController = new MobileDataPreferenceController(mContext, "mobile_data");
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID);
         mController.init(mFragmentManager, SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
     }
@@ -104,7 +108,8 @@ public class MobileDataPreferenceControllerTest {
     public void isDialogNeeded_enableNonDefaultSimInMultiSimMode_returnTrue() {
         doReturn(false).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(anyInt());
+        doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(SUB_ID_OTHER);
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_OTHER);
         doReturn(2).when(mTelephonyManager).getSimCount();
 
         assertThat(mController.isDialogNeeded()).isTrue();
