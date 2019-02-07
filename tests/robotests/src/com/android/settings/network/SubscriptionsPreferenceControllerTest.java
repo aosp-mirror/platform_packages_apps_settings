@@ -20,6 +20,7 @@ import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -34,7 +35,9 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
@@ -46,6 +49,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowSubscriptionManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,6 +62,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowSubscriptionManager.class)
 public class SubscriptionsPreferenceControllerTest {
     private static final String KEY = "preference_group";
 
@@ -66,6 +72,8 @@ public class SubscriptionsPreferenceControllerTest {
     private PreferenceCategory mPreferenceCategory;
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private TelephonyManager mTelephonyManager;
 
     private Context mContext;
     private LifecycleOwner mLifecycleOwner;
@@ -81,6 +89,8 @@ public class SubscriptionsPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mScreen.findPreference(eq(KEY))).thenReturn(mPreferenceCategory);
         when(mPreferenceCategory.getContext()).thenReturn(mContext);
         mOnChildUpdatedCount = 0;
@@ -279,5 +289,70 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     public void threePreferences_thirdPreferenceClicked_correctIntentFires() {
         runPreferenceClickTest(3, 2);
+    }
+
+    @Test
+    public void getSummary_twoSubsOneDefaultForEverythingDataActive() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        when(sub1.getSubscriptionId()).thenReturn(11);
+        when(sub2.getSubscriptionId()).thenReturn(22);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
+        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
+        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
+        when(mTelephonyManager.getDataState()).thenReturn(TelephonyManager.DATA_CONNECTED);
+
+        assertThat(mController.getSummary(11)).isEqualTo(
+                mContext.getString(R.string.default_for_calls_and_sms) + System.lineSeparator()
+                        + mContext.getString(R.string.mobile_data_active));
+
+        assertThat(mController.getSummary(22)).isEqualTo(
+                mContext.getString(R.string.subscription_available));
+    }
+
+    @Test
+    public void getSummary_twoSubsOneDefaultForEverythingDataDisabled() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        when(sub1.getSubscriptionId()).thenReturn(11);
+        when(sub2.getSubscriptionId()).thenReturn(22);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+
+        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
+        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
+        when(mTelephonyManager.getDataState()).thenReturn(TelephonyManager.DATA_DISCONNECTED);
+        when(mTelephonyManager.isDataEnabled()).thenReturn(false);
+
+        assertThat(mController.getSummary(11)).isEqualTo(
+                mContext.getString(R.string.default_for_calls_and_sms) + System.lineSeparator()
+                        + mContext.getString(R.string.mobile_data_off));
+
+        assertThat(mController.getSummary(22)).isEqualTo(
+                mContext.getString(R.string.subscription_available));
+    }
+
+    @Test
+    public void getSummary_twoSubsOneForCallsAndDataOneForSms() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        when(sub1.getSubscriptionId()).thenReturn(11);
+        when(sub2.getSubscriptionId()).thenReturn(22);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
+        ShadowSubscriptionManager.setDefaultSmsSubscriptionId(22);
+        ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
+        when(mTelephonyManager.getDataState()).thenReturn(TelephonyManager.DATA_DISCONNECTED);
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
+
+        assertThat(mController.getSummary(11)).isEqualTo(
+                mContext.getString(R.string.default_for_calls) + System.lineSeparator()
+                        + mContext.getString(R.string.default_for_mobile_data));
+
+        assertThat(mController.getSummary(22)).isEqualTo(
+                mContext.getString(R.string.default_for_sms));
     }
 }
