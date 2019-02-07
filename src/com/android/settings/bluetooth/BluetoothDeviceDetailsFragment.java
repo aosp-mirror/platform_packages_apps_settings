@@ -107,6 +107,11 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
+        if (mCachedDevice == null) {
+            // Close this page if device is null with invalid device mac address
+            finish();
+            return;
+        }
         super.onAttach(context);
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
 
