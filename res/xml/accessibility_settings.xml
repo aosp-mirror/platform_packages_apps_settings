@@ -130,6 +130,10 @@
                 android:summary="@string/accessibility_toggle_master_mono_summary"
                 android:persistent="false"/>
 
+        <com.android.settings.accessibility.BalanceSeekBarPreference
+                android:key="seekbar_master_balance"
+                android:title="@string/accessibility_toggle_master_balance_title" />
+
         <Preference
             android:key="hearing_aid_preference"
             android:summary="@string/accessibility_hearingaid_not_connected_summary"

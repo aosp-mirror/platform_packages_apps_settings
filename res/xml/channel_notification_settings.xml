@@ -86,17 +86,23 @@
             settings:useAdditionalSummary="true"
             settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
 
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="bubble"
+            android:title="@string/notification_bubbles_title"
+            android:order="16"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+
         <!-- Bypass DND -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="bypass_dnd"
-            android:order="16"
+            android:order="17"
             android:title="@string/app_notification_override_dnd_title"
             android:summary="@string/app_notification_override_dnd_summary"
             settings:useAdditionalSummary="true"/>
 
         <Preference
             android:key="app_link"
-            android:order="17"
+            android:order="18"
             android:title="@string/app_settings_link"
             settings:allowDividerAbove="true"/>
     </PreferenceCategory>

@@ -1246,6 +1246,17 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name="Settings$PrivacyDashboardActivity"
+                  android:label="@string/privacy_dashboard_title"
+                  android:icon="@drawable/ic_settings_privacy">
+            <intent-filter>
+                <action android:name="android.settings.PRIVACY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
+        </activity>
+
         <activity android:name="SetFullBackupPassword"
                   android:label="@string/local_backup_password_title"
                   android:exported="false" />
@@ -2792,10 +2803,6 @@
         <activity android:name=".backup.UserBackupSettingsActivity"
                   android:label="@string/privacy_settings_title"
                   android:icon="@drawable/ic_settings_backup">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.PRIVACY_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />

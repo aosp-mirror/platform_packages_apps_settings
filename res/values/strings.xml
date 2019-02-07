@@ -4487,8 +4487,8 @@
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts helper</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
     <string name="keyboard_shortcuts_helper_summary">Display available shortcuts</string>
-    <!-- Title for the 'Work profile' preference category inside Languages and inputs'. [CHAR LIMIT=45] -->
-    <string name="language_and_input_for_work_category_title">Work profile</string>
+    <!-- Title for the 'Work profile input & assistance' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
+    <string name="language_and_input_for_work_category_title">Work profile input &amp; assistance</string>
     <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
     <string name="virtual_keyboards_for_work_title">Virtual keyboard for work</string>
 
@@ -4717,6 +4717,12 @@
     <string name="accessibility_toggle_master_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for master mono. [CHAR LIMIT=50] -->
     <string name="accessibility_toggle_master_mono_summary">Combine channels when playing audio</string>
+    <!-- Title for the accessibility preference for master balance. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_master_balance_title">Audio balance</string>
+    <!-- 'Left' balance text for the accessibility preference for master balance. [CHAR LIMIT=20] -->
+    <string name="accessibility_toggle_master_balance_left_label">Left</string>
+    <!-- 'Right' balance text for the accessibility preference for master balance. [CHAR LIMIT=20] -->
+    <string name="accessibility_toggle_master_balance_right_label">Right</string>
 
     <!-- Option heading to leave the timeout requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_default">Default</string>
@@ -5851,9 +5857,9 @@
     <!-- Summary for whether to enable SMS access restriction [CHAR LIMIT=NONE]-->
     <string name="sms_access_restriction_enabled_summary">Only default phone and messaging apps have SMS &amp; call log permissions</string>
     <!-- Title for the new device identifier access restrictions [CHAR LIMIT=50]-->
-    <string name="device_identifier_access_restrictions_title">Enable device identifier restrictions</string>
+    <string name="device_identifier_access_restrictions_title">Disable device identifier restrictions</string>
     <!-- Summary for the new device identifier access restrictions [CHAR LIMIT=NONE]-->
-    <string name="device_identifier_access_restrictions_summary">Enable the new access restrictions for device identifiers.</string>
+    <string name="device_identifier_access_restrictions_summary">Disable the new access restrictions for device identifiers</string>
 
 
     <!-- Message when there are no available trust agents to display -->
@@ -7620,6 +7626,9 @@
 
     <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
     <string name="notification_badging_title">Allow notification dots</string>
+
+    <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
+    <string name="notification_bubbles_title">Allow notification bubbles</string>
 
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
@@ -10470,6 +10479,12 @@
     <!-- Label on the confirmation button of a dialog that lets a user set the display name of a
          mobile network subscription [CHAR LIMIT=20] -->
     <string name="mobile_network_sim_name_rename">Rename</string>
+    <!-- Label for the on position of a switch on the mobile network details page which allows
+         disabling/enabling a SIM. The SIM is enabled in this state. [CHAR LIMIT=40] -->
+    <string name="mobile_network_use_sim_on">Use SIM</string>
+    <!-- Label for the off position of a switch on the mobile network details page which allows
+         disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
+    <string name="mobile_network_use_sim_off">Off</string>
 
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>

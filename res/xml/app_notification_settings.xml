@@ -60,9 +60,14 @@
             settings:useAdditionalSummary="true"
             android:order="1001"
             settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="bubble"
+            android:title="@string/notification_bubbles_title"
+            android:order="1002"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
         <Preference
             android:key="app_link"
-            android:order="1002"
+            android:order="1003"
             android:title="@string/app_settings_link" />
 
     </PreferenceCategory>
