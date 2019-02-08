@@ -35,15 +35,19 @@ import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.telephony.SubscriptionManager;
 import android.text.format.DateUtils;
 import android.util.ArraySet;
 import android.view.View;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.widget.EntityHeaderController;
@@ -60,9 +64,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowSubscriptionManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -82,7 +88,6 @@ public class AppDataUsageTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest();
     }
 
     @After
@@ -276,5 +281,27 @@ public class AppDataUsageTest {
         assertThat(uids.get(0)).isEqualTo(123);
         assertThat(uids.get(1)).isEqualTo(456);
         assertThat(uids.get(2)).isEqualTo(789);
+    }
+
+    @Config(shadows = {ShadowDataUsageUtils.class, ShadowSubscriptionManager.class})
+    public void onCreate_noNetworkTemplateAndInvalidDataSubscription_shouldUseWifiTemplate() {
+        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+        ShadowDataUsageUtils.HAS_SIM = false;
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(
+            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mFragment = spy(new AppDataUsage());
+        doReturn(Robolectric.setupActivity(FragmentActivity.class)).when(mFragment).getActivity();
+        doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
+        ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
+            FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
+        final Bundle args = new Bundle();
+        args.putInt(AppInfoBase.ARG_PACKAGE_UID, 123123);
+        mFragment.setArguments(args);
+
+        mFragment.onCreate(Bundle.EMPTY);
+
+        assertThat(mFragment.mTemplate.getMatchRule())
+            .isEqualTo(NetworkTemplate.MATCH_WIFI_WILDCARD);
     }
 }
