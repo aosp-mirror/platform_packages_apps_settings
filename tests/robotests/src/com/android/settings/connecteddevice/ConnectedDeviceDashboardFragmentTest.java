@@ -15,10 +15,8 @@
  */
 package com.android.settings.connecteddevice;
 
-import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment
-        .KEY_AVAILABLE_DEVICES;
-import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment
-        .KEY_CONNECTED_DEVICES;
+import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment.KEY_AVAILABLE_DEVICES;
+import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment.KEY_CONNECTED_DEVICES;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -30,6 +28,9 @@ import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerListHelper;
+import com.android.settings.slices.SlicePreferenceController;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -49,6 +50,7 @@ import java.util.List;
 @Config(shadows = {ShadowUserManager.class,
         ShadowConnectivityManager.class, ShadowBluetoothAdapter.class})
 public class ConnectedDeviceDashboardFragmentTest {
+    private static final String KEY_NEARBY_DEVICES = "bt_nearby_slice";
 
     @Mock
     private PackageManager mPackageManager;
@@ -64,7 +66,7 @@ public class ConnectedDeviceDashboardFragmentTest {
     }
 
     @Test
-    public void testSearchIndexProvider_shouldIndexResource() {
+    public void searchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
                 ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                         .getXmlResourcesToIndex(mContext, true /* enabled */);
@@ -74,10 +76,24 @@ public class ConnectedDeviceDashboardFragmentTest {
     }
 
     @Test
-    public void testNonIndexableKeys_existInXmlLayout() {
+    public void nonIndexableKeys_existInXmlLayout() {
         final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
 
-        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES);
+        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES,
+                KEY_NEARBY_DEVICES);
+    }
+
+    @Test
+    public void getPreferenceControllers_containSlicePrefController() {
+        final List<BasePreferenceController> controllers =
+                PreferenceControllerListHelper.getPreferenceControllersFromXml(mContext,
+                        R.xml.connected_devices);
+
+        assertThat(controllers
+                .stream()
+                .filter(controller -> controller instanceof SlicePreferenceController)
+                .count())
+                .isEqualTo(1);
     }
 }
