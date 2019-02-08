@@ -46,7 +46,6 @@ import androidx.preference.TwoStatePreference;
 @RunWith(RobolectricTestRunner.class)
 public class BubbleNotificationPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
@@ -59,6 +58,7 @@ public class BubbleNotificationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mController = new BubbleNotificationPreferenceController(mContext,
                 KEY_NOTIFICATION_BUBBLES);
         mPreference = new Preference(RuntimeEnvironment.application);
@@ -74,8 +74,7 @@ public class BubbleNotificationPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetCheckedWhenSettingIsOn() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        final Context context = RuntimeEnvironment.application;
-        Settings.Secure.putInt(context.getContentResolver(), NOTIFICATION_BUBBLES, ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
         mController.updateState(preference);
 
@@ -85,8 +84,9 @@ public class BubbleNotificationPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetUncheckedWhenSettingIsOff() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        final Context context = RuntimeEnvironment.application;
-        Settings.Secure.putInt(context.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, ON)).isEqualTo(OFF);
 
         mController.updateState(preference);
 
