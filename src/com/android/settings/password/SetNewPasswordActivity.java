@@ -29,12 +29,15 @@ import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Trampolines {@link DevicePolicyManager#ACTION_SET_NEW_PASSWORD} and
@@ -73,19 +76,23 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
             return;
         }
 
-        IBinder activityToken = getActivityToken();
+        logSetNewPasswordIntent();
+
+        final IBinder activityToken = getActivityToken();
         mCallerAppName = (String) PasswordUtils.getCallingAppLabel(this, activityToken);
         if (ACTION_SET_NEW_PASSWORD.equals(mNewPasswordAction)
                 && getIntent().hasExtra(EXTRA_PASSWORD_COMPLEXITY)) {
-            boolean hasPermission = PasswordUtils.isCallingAppPermitted(
+            final boolean hasPermission = PasswordUtils.isCallingAppPermitted(
                     this, activityToken, GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
             if (hasPermission) {
-                mRequestedMinComplexity = PasswordMetrics.sanitizeComplexityLevel(getIntent()
-                        .getIntExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_NONE));
+                mRequestedMinComplexity =
+                        PasswordMetrics.sanitizeComplexityLevel(getIntent()
+                                .getIntExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_NONE));
             } else {
                 PasswordUtils.crashCallingApplication(activityToken,
-                        "Must have permission " + GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY
-                                + " to use extra " + EXTRA_PASSWORD_COMPLEXITY);
+                        "Must have permission "
+                                + GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY + " to use extra "
+                                + EXTRA_PASSWORD_COMPLEXITY);
                 finish();
                 return;
             }
@@ -111,5 +118,30 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
         }
         startActivity(intent);
         finish();
+    }
+
+    private void logSetNewPasswordIntent() {
+        final String callingAppPackageName =
+                PasswordUtils.getCallingAppPackageName(getActivityToken());
+
+        // use int min value to denote absence of EXTRA_PASSWORD_COMPLEXITY
+        final int extraPasswordComplexity = getIntent().hasExtra(EXTRA_PASSWORD_COMPLEXITY)
+                ? getIntent().getIntExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_NONE)
+                : Integer.MIN_VALUE;
+
+        // this activity is launched by either ACTION_SET_NEW_PASSWORD or
+        // ACTION_SET_NEW_PARENT_PROFILE_PASSWORD
+        final int action = ACTION_SET_NEW_PASSWORD.equals(mNewPasswordAction)
+                ? SettingsEnums.ACTION_SET_NEW_PASSWORD
+                : SettingsEnums.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
+
+        final MetricsFeatureProvider metricsProvider =
+                FeatureFactory.getFactory(this).getMetricsFeatureProvider();
+        metricsProvider.action(
+                metricsProvider.getAttribution(this),
+                action,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                callingAppPackageName,
+                extraPasswordComplexity);
     }
 }

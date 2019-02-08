@@ -68,7 +68,7 @@ public final class PasswordUtils extends com.android.settingslib.Utils {
      * Returns the package name which the activity with {@code activityToken} is launched from.
      */
     @Nullable
-    private static String getCallingAppPackageName(IBinder activityToken) {
+    public static String getCallingAppPackageName(IBinder activityToken) {
         String pkg = null;
         try {
             pkg = ActivityManager.getService().getLaunchedFromPackage(activityToken);
