@@ -81,7 +81,7 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void display_shouldDisplay() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-        DeviceConfig.setProperty("namespace", "key", "false", false);
+        DeviceConfig.setProperty("telephony", "ramping_ringer_enabled", "false", false);
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isTrue();
     }
@@ -89,7 +89,7 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void display_shouldNotDisplay_notVoiceCapable() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-        DeviceConfig.setProperty("namespace", "key", "false", false);
+        DeviceConfig.setProperty("telephony", "ramping_ringer_enabled", "false", false);
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isFalse();
     }
@@ -97,7 +97,7 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void display_shouldNotDisplay_RampingRingerEnabled() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-        DeviceConfig.setProperty("namespace", "key", "true", false);
+        DeviceConfig.setProperty("telephony", "ramping_ringer_enabled", "true", false);
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isFalse();
     }
@@ -105,7 +105,7 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void display_shouldNotDisplay_VoiceEnabled_RampingRingerEnabled() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-        DeviceConfig.setProperty("namespace", "key", "true", false);
+        DeviceConfig.setProperty("telephony", "ramping_ringer_enabled", "true", false);
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isFalse();
     }
@@ -113,7 +113,7 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void display_shouldNotDisplay_VoiceDisabled_RampingRingerEnabled() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-        DeviceConfig.setProperty("namespace", "key", "true", false);
+        DeviceConfig.setProperty("telephony", "ramping_ringer_enabled", "true", false);
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isFalse();
     }
@@ -139,14 +139,14 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void voiceCapable_availabled() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-        DeviceConfig.setProperty("namespace", "key", "false", false);
+        DeviceConfig.setProperty("telephony", "ramping_ringer_enabled", "false", false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void voiceCapable_notAvailabled() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-        DeviceConfig.setProperty("namespace", "key", "false", false);
+        DeviceConfig.setProperty("telephony", "ramping_ringer_enabled", "false", false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
