@@ -19,6 +19,7 @@ package com.android.settings.panel;
 import static com.android.settings.media.MediaOutputSlice.MEDIA_PACKAGE_NAME;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -70,5 +71,10 @@ public class MediaOutputPanel implements PanelContent {
     @Override
     public Intent getSeeMoreIntent() {
         return null;
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PANEL_MEDIA_OUTPUT;
     }
 }

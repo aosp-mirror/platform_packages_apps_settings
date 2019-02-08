@@ -22,10 +22,13 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.android.settings.R;
@@ -71,13 +74,14 @@ public class PanelFragmentTest {
                                 .get()
                                 .getSupportFragmentManager()
                                 .findFragmentById(R.id.main_content));
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT, FAKE_EXTRA);
+        doReturn(bundle).when(mPanelFragment).getArguments();
     }
 
     @Test
     public void onCreateView_adapterGetsDataset() {
-        final Bundle bundle = new Bundle();
-        bundle.putString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT, FAKE_EXTRA);
-        doReturn(bundle).when(mPanelFragment).getArguments();
         mPanelFragment.onCreateView(LayoutInflater.from(mContext),
                 new LinearLayout(mContext), null);
         PanelSlicesAdapter adapter = mPanelFragment.mAdapter;
@@ -85,4 +89,43 @@ public class PanelFragmentTest {
         assertThat(adapter.getData()).containsAllIn(mFakePanelContent.getSlices());
     }
 
+    @Test
+    public void onCreate_logsOpenEvent() {
+        verify(mFakeFeatureFactory.metricsFeatureProvider).action(
+                0,
+                SettingsEnums.PAGE_VISIBLE,
+                mFakePanelContent.getMetricsCategory(),
+                null,
+                0);
+    }
+
+    @Test
+    public void panelSeeMoreClick_logsCloseEvent() {
+        final View.OnClickListener listener = mPanelFragment.getSeeMoreListener();
+
+        listener.onClick(null);
+
+        verify(mFakeFeatureFactory.metricsFeatureProvider).action(
+                0,
+                SettingsEnums.PAGE_HIDE,
+                mFakePanelContent.getMetricsCategory(),
+                PanelLoggingContract.PanelClosedKeys.KEY_SEE_MORE,
+                0
+        );
+    }
+
+    @Test
+    public void panelDoneClick_logsCloseEvent() {
+        final View.OnClickListener listener = mPanelFragment.getCloseListener();
+
+        listener.onClick(null);
+
+        verify(mFakeFeatureFactory.metricsFeatureProvider).action(
+                0,
+                SettingsEnums.PAGE_HIDE,
+                mFakePanelContent.getMetricsCategory(),
+                PanelLoggingContract.PanelClosedKeys.KEY_DONE,
+                0
+        );
+    }
 }

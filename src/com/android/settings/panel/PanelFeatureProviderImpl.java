@@ -24,7 +24,7 @@ import android.provider.Settings;
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
-    public PanelContent getPanel(Context context, String panelType, String packageName) {
+    public PanelContent getPanel(Context context, String panelType, String mediaPackageName) {
         switch (panelType) {
             case Settings.Panel.ACTION_INTERNET_CONNECTIVITY:
                 return InternetConnectivityPanel.create(context);
@@ -33,7 +33,7 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
             case Settings.Panel.ACTION_NFC:
                 return NfcPanel.create(context);
             case ACTION_MEDIA_OUTPUT:
-                return MediaOutputPanel.create(context, packageName);
+                return MediaOutputPanel.create(context, mediaPackageName);
         }
 
         throw new IllegalStateException("No matching panel for: "  + panelType);

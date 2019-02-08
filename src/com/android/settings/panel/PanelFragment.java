@@ -16,9 +16,9 @@
 
 package com.android.settings.panel;
 
-import android.content.Intent;
+import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +35,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.panel.PanelLoggingContract.PanelClosedKeys;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class PanelFragment extends Fragment {
 
@@ -45,15 +47,15 @@ public class PanelFragment extends Fragment {
     private Button mDoneButton;
     private RecyclerView mPanelSlices;
 
+    private PanelContent mPanel;
+    private final MetricsFeatureProvider mMetricsProvider;
+
     @VisibleForTesting
     PanelSlicesAdapter mAdapter;
 
-    private View.OnClickListener mDoneButtonListener = (v) -> {
-        Log.d(TAG, "Closing dialog");
-        getActivity().finish();
-    };
-
     public PanelFragment() {
+        final Context context = getActivity();
+        mMetricsProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Nullable
@@ -69,38 +71,70 @@ public class PanelFragment extends Fragment {
         mTitleView = view.findViewById(R.id.panel_title);
 
         final Bundle arguments = getArguments();
-        final String panelType = arguments.getString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT);
-        final String packageName =
-                arguments.getString(SettingsPanelActivity.KEY_PANEL_PACKAGE_NAME);
+        final String panelType =
+                arguments.getString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT);
+        final String callingPackageName =
+                arguments.getString(SettingsPanelActivity.KEY_CALLING_PACKAGE_NAME);
+        final String mediaPackageName =
+                arguments.getString(SettingsPanelActivity.KEY_MEDIA_PACKAGE_NAME);
 
-        final PanelContent panel = FeatureFactory.getFactory(activity)
+        // TODO (b/124399577) transform interface to take a context and bundle.
+        mPanel = FeatureFactory.getFactory(activity)
                 .getPanelFeatureProvider()
-                .getPanel(activity, panelType, packageName);
+                .getPanel(activity, panelType, mediaPackageName);
 
-        mAdapter = new PanelSlicesAdapter(this, panel.getSlices());
+        // Log panel opened.
+        mMetricsProvider.action(
+                0 /* attribution */,
+                SettingsEnums.PAGE_VISIBLE /* opened panel - Action */,
+                mPanel.getMetricsCategory(),
+                callingPackageName,
+                0 /* value */);
+
+        mAdapter = new PanelSlicesAdapter(this, mPanel);
 
         mPanelSlices.setHasFixedSize(true);
         mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));
         mPanelSlices.setAdapter(mAdapter);
 
-        mTitleView.setText(panel.getTitle());
+        mTitleView.setText(mPanel.getTitle());
 
-        mSeeMoreButton.setOnClickListener(getSeeMoreListener(panel.getSeeMoreIntent()));
-        mDoneButton.setOnClickListener(mDoneButtonListener);
+        mSeeMoreButton.setOnClickListener(getSeeMoreListener());
+        mDoneButton.setOnClickListener(getCloseListener());
 
         //If getSeeMoreIntent() is null, hide the mSeeMoreButton.
-        if (panel.getSeeMoreIntent() == null) {
+        if (mPanel.getSeeMoreIntent() == null) {
             mSeeMoreButton.setVisibility(View.GONE);
         }
 
         return view;
     }
 
-    private View.OnClickListener getSeeMoreListener(final Intent intent) {
+    @VisibleForTesting
+    View.OnClickListener getSeeMoreListener() {
         return (v) -> {
+            mMetricsProvider.action(
+                    0 /* attribution */,
+                    SettingsEnums.PAGE_HIDE ,
+                    mPanel.getMetricsCategory(),
+                    PanelClosedKeys.KEY_SEE_MORE,
+                    0 /* value */);
             final FragmentActivity activity = getActivity();
-            activity.startActivity(intent);
+            activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
             activity.finish();
+        };
+    }
+
+    @VisibleForTesting
+    View.OnClickListener getCloseListener() {
+        return (v) -> {
+            mMetricsProvider.action(
+                    0 /* attribution */,
+                    SettingsEnums.PAGE_HIDE,
+                    mPanel.getMetricsCategory(),
+                    PanelClosedKeys.KEY_DONE,
+                    0 /* value */);
+            getActivity().finish();
         };
     }
 }

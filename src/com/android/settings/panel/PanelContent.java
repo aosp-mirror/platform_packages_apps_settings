@@ -19,12 +19,14 @@ package com.android.settings.panel;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.android.settingslib.core.instrumentation.Instrumentable;
+
 import java.util.List;
 
 /**
  * Represents the data class needed to create a Settings Panel. See {@link PanelFragment}.
  */
-public interface PanelContent {
+public interface PanelContent extends Instrumentable {
 
     /**
      * @return a string for the title of the Panel.
