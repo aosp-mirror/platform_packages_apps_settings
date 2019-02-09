@@ -31,6 +31,7 @@ import android.telephony.euicc.EuiccManager;
 import com.android.settings.R;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.widget.AddPreference;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     private SubscriptionManager mSubscriptionManager;
     private SubscriptionsChangeListener mChangeListener;
     private TelephonyManager mTelephonyMgr;
+    private EuiccManager mEuiccManager;
     private AddPreference mPreference;
 
     /**
@@ -71,6 +73,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         super(context);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mTelephonyMgr = mContext.getSystemService(TelephonyManager.class);
+        mEuiccManager = mContext.getSystemService(EuiccManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
         lifecycle.addObserver(this);
     }
@@ -97,7 +100,11 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
                 mSubscriptionManager);
         if (subs.isEmpty()) {
-            return mContext.getResources().getString(R.string.mobile_network_summary_add_a_network);
+            if (mEuiccManager.isEnabled()) {
+                return mContext.getResources().getString(
+                        R.string.mobile_network_summary_add_a_network);
+            }
+            return null;
         } else if (subs.size() == 1) {
             return subs.get(0).getDisplayName();
         } else {
@@ -112,20 +119,22 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         mContext.startActivity(intent);
     }
 
-    private boolean shouldEnableAddButton() {
-        // The add button should only show up if the device is in multi-sim mode.
-        return mTelephonyMgr.getMultiSimConfiguration() != UNKNOWN;
+    private boolean shouldShowAddButton() {
+        // The add button should only show up if the device is in multi-sim mode and the eSIM
+        // manager is enabled.
+        return mTelephonyMgr.getMultiSimConfiguration() != UNKNOWN && mEuiccManager.isEnabled();
     }
 
     private void update() {
         if (mPreference == null) {
             return;
         }
-        final boolean enableAddButton = shouldEnableAddButton();
+        final boolean showAddButton = shouldShowAddButton();
         refreshSummary(mPreference);
-        if (!enableAddButton) {
+        if (!showAddButton) {
             mPreference.setOnAddClickListener(null);
         } else {
+            mPreference.setAddWidgetEnabled(!mChangeListener.isAirplaneModeOn());
             mPreference.setOnAddClickListener(p -> {
                 startAddSimFlow();
             });
@@ -134,11 +143,11 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                 mSubscriptionManager);
         mPreference.setOnPreferenceClickListener(null);
         mPreference.setFragment(null);
-        mPreference.setEnabled(true);
+        mPreference.setEnabled(!mChangeListener.isAirplaneModeOn());
         if (subs.isEmpty()) {
-            if (enableAddButton) {
+            if (showAddButton) {
                 mPreference.setEnabled(false);
-            } else {
+            } else if (mEuiccManager.isEnabled()) {
                 mPreference.setOnPreferenceClickListener((Preference pref) -> {
                     startAddSimFlow();
                     return true;
@@ -157,7 +166,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return !Utils.isWifiOnly(mContext);
     }
 
     @Override
@@ -167,6 +176,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
+        update();
     }
 
     @Override
