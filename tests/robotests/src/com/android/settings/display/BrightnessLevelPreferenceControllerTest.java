@@ -82,6 +82,12 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
+    public void isInVrMode_noVrManager_shouldAlwaysReturnFalse() {
+        doReturn(null).when(mController).safeGetVrManager();
+        assertThat(mController.isInVrMode()).isFalse();
+    }
+
+    @Test
     public void onStart_shouldRegisterObserver() {
         BrightnessLevelPreferenceController controller =
                 new BrightnessLevelPreferenceController(mContext, null);

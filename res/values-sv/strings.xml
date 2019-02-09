@@ -976,7 +976,7 @@
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Inställning för roaming"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi i första hand"</item>
-    <item msgid="1335127656328817518">"Mobilanpassad"</item>
+    <item msgid="1335127656328817518">"Mobilnät i första hand"</item>
     <item msgid="3132912693346866895">"Endast Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
@@ -991,7 +991,7 @@
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"Wi-Fi i första hand"</item>
-    <item msgid="5074515506087318555">"Mobilanpassad"</item>
+    <item msgid="5074515506087318555">"Mobilnät i första hand"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1639,7 +1639,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Gör grafiskt lösenord synligt"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Gör det grafiska lösenordet för profilen synligt"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Vibrera vid tryck"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Avstängningsknappen låser direkt"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Strömbrytaren låser direkt"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Ange grafiskt lösenord"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Byt grafiskt lösenord"</string>
@@ -1957,7 +1957,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Text med hög kontrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Uppdatera skärmförstoring automatiskt"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Uppdatera skärmförstoring på appövergångar"</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Använd knapp för att avsluta samtal"</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Använd av/på-knapp för att avsluta samtal"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Stor muspekarikon"</string>
     <string name="accessibility_disable_animations" msgid="5876035711526394795">"Ta bort animationer"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Monoljud"</string>
@@ -3037,7 +3037,7 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Du kan inte skriva i NFC-etiketten. Använd en annan etikett."</string>
     <string name="default_sound" msgid="8821684447333687810">"Standardsignal"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Ringvolym på <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volym, vibrera, Stör ej"</string>
+    <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volym, vibrera, stör ej"</string>
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Enheten är inställd på att vibrera som ringsignal"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Ringsignalen är avstängd"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Ringvolym på 80 %"</string>
@@ -3889,9 +3889,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ingen"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Det finns inget rankningsobjekt."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Rankningsobjektet innehåller inte den här nyckeln."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Efterlikna det som visas med ett urklipp"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Skärmutskärning"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"urklipp av skärm, flärp"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Inga"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Enhetens standardinställning"</string>
     <string name="special_access" msgid="3458780842491881155">"Särskild åtkomst för app"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> appar får använda obegränsad data</item>
@@ -3904,7 +3904,7 @@
     <string name="notification_suggestion_title" msgid="387052719462473500">"Kontrolluppgifter på låsskärm"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Visa eller dölja innehåll i aviseringar"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alla"</string>
-    <string name="page_tab_title_support" msgid="4407600495101788249">"Support och tips"</string>
+    <string name="page_tab_title_support" msgid="4407600495101788249">"Tips och support"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Minsta bredd"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Inga installerade appar har begärt åtkomst till premium-sms"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Det kan hända att premium-sms kostar pengar och läggs till på dina fakturor från operatören. Om du ger en app åtkomst kan du skicka premium-sms med den appen."</string>
@@ -3965,8 +3965,8 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Visa tid, aviseringsikoner och annan information genom att plocka upp mobilen."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Visa tid, aviseringsikoner och annan information genom att plocka upp surfplattan."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Visa tid, aviseringsikoner och annan information genom att plocka upp enheten."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Svep med fingret för aviseringar"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Svep med fingret"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Svep över fingeravtryckssensorn för aviseringar"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Svep över fingeravtryckssensorn"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av mobilen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av surfplattan."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av enheten."</string>
@@ -4152,5 +4152,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Nätverksinformation"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Enhetens namn är synligt för appar i mobilen. Det kan också vara synligt för andra personer när du ansluter till Bluetooth-enheter eller om du skapar en Wi-Fi-surfzon."</string>
     <string name="devices_title" msgid="7701726109334110391">"Enheter"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Standard"</string>
 </resources>
