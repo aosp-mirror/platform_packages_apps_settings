@@ -27,20 +27,18 @@
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="auto_time"
             android:title="@string/date_time_auto"
-            android:summaryOn="@string/date_time_auto_summaryOn"
-            android:summaryOff="@string/date_time_auto_summaryOff"
             settings:useAdditionalSummary="true"
             settings:userRestriction="no_config_date_time" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="date"
-            android:title="@string/date_time_set_date"
+            android:title="@string/date_time_set_date_title"
             android:summary="@string/summary_placeholder"
             settings:userRestriction="no_config_date_time" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="time"
-            android:title="@string/date_time_set_time"
+            android:title="@string/date_time_set_time_title"
             android:summary="@string/summary_placeholder"
             settings:userRestriction="no_config_date_time" />
     </PreferenceCategory>
@@ -50,27 +48,23 @@
         android:layout="@layout/preference_category_no_label">
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="auto_zone"
-            android:title="@string/zone_auto"
-            android:summaryOn="@string/zone_auto_summaryOn"
-            android:summaryOff="@string/zone_auto_summaryOff"
+            android:title="@string/zone_auto_title"
             settings:userRestriction="no_config_date_time" />
 
         <com.android.settingslib.RestrictedPreference
-            android:fragment="com.android.settings.datetime.timezone.TimeZoneSettings"
             android:key="timezone"
-            android:title="@string/date_time_set_timezone"
+            android:title="@string/date_time_set_timezone_title"
             android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.datetime.timezone.TimeZoneSettings"
             settings:userRestriction="no_config_date_time" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="time_format_preference_category"
-        android:layout="@layout/preference_category_no_label">
+        android:title="@string/time_format_category_title">
         <SwitchPreference
             android:key="auto_24hour"
-            android:title="@string/date_time_24hour_auto"
-            android:summaryOn="@string/date_time_24hour_auto_summary"
-            android:summaryOff="@string/date_time_24hour_auto_summary" />
+            android:title="@string/date_time_24hour_auto"/>
 
         <SwitchPreference
             android:key="24 hour"

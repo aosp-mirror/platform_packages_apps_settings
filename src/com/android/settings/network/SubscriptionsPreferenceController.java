@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import androidx.collection.ArrayMap;
 import androidx.lifecycle.Lifecycle;
@@ -136,10 +137,9 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 mPreferenceGroup.addPreference(pref);
             }
             pref.setTitle(info.getDisplayName());
+            pref.setSummary(getSummary(subId));
             pref.setIcon(R.drawable.ic_network_cell);
             pref.setOrder(order++);
-
-            // TODO(asargent) - set summary here to indicate default for calls/sms and data
 
             pref.setOnPreferenceClickListener(clickedPref -> {
                 final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
@@ -156,6 +156,56 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             mPreferenceGroup.removePreference(pref);
         }
         mUpdateListener.onChildrenUpdated();
+    }
+
+    /**
+     * The summary can have either 1 or 2 lines depending on which services (calls, SMS, data) this
+     * subscription is the default for.
+     *
+     * If this subscription is the default for calls and/or SMS, we add a line to show that.
+     *
+     * If this subscription is the default for data, we add a line with detail about
+     * whether the data connection is active.
+     *
+     * If a subscription isn't the default for anything, we just say it is available.
+     */
+    protected String getSummary(int subId) {
+        final int callsDefaultSubId = SubscriptionManager.getDefaultVoiceSubscriptionId();
+        final int smsDefaultSubId = SubscriptionManager.getDefaultSmsSubscriptionId();
+        final int dataDefaultSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+
+        String line1 = null;
+        if (subId == callsDefaultSubId && subId == smsDefaultSubId) {
+            line1 = mContext.getString(R.string.default_for_calls_and_sms);
+        } else if (subId == callsDefaultSubId) {
+            line1 = mContext.getString(R.string.default_for_calls);
+        } else if (subId == smsDefaultSubId) {
+            line1 = mContext.getString(R.string.default_for_sms);
+        }
+
+        String line2 = null;
+        if (subId == dataDefaultSubId) {
+            final TelephonyManager telMgrForSub = mContext.getSystemService(
+                    TelephonyManager.class).createForSubscriptionId(subId);
+            final int dataState = telMgrForSub.getDataState();
+            if (dataState == TelephonyManager.DATA_CONNECTED) {
+                line2 = mContext.getString(R.string.mobile_data_active);
+            } else if (!telMgrForSub.isDataEnabled()) {
+                line2 = mContext.getString(R.string.mobile_data_off);
+            } else {
+                line2 = mContext.getString(R.string.default_for_mobile_data);
+            }
+        }
+
+        if (line1 != null && line2 != null) {
+            return String.join(System.lineSeparator(), line1, line2);
+        } else if (line1 != null) {
+            return line1;
+        } else if (line2 != null) {
+            return line2;
+        } else {
+            return mContext.getString(R.string.subscription_available);
+        }
     }
 
     /**

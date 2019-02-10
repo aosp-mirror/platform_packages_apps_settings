@@ -16,26 +16,25 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.hardware.display.NightDisplayListener;
 import android.util.AttributeSet;
 
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.app.ColorDisplayController;
-
 import java.time.LocalTime;
 
 public class NightDisplayPreference extends SwitchPreference
-        implements ColorDisplayController.Callback {
+        implements NightDisplayListener.Callback {
 
     private ColorDisplayManager mColorDisplayManager;
-    private ColorDisplayController mController;
+    private NightDisplayListener mNightDisplayListener;
     private NightDisplayTimeFormatter mTimeFormatter;
 
     public NightDisplayPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
-        mController = new ColorDisplayController(context);
+        mNightDisplayListener = new NightDisplayListener(context);
         mTimeFormatter = new NightDisplayTimeFormatter(context);
     }
 
@@ -44,7 +43,7 @@ public class NightDisplayPreference extends SwitchPreference
         super.onAttached();
 
         // Listen for changes only while attached.
-        mController.setListener(this);
+        mNightDisplayListener.setCallback(this);
 
         // Update the summary since the state may have changed while not attached.
         updateSummary();
@@ -55,7 +54,7 @@ public class NightDisplayPreference extends SwitchPreference
         super.onDetached();
 
         // Stop listening for state changes.
-        mController.setListener(null);
+        mNightDisplayListener.setCallback(null);
     }
 
     @Override

@@ -729,41 +729,26 @@
     <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
     <string name="date_and_time_settings_summary">Set date, time, time zone, &amp; formats</string>
     <!-- Date & time setting screen setting check box title if the date and time should be determined automatically [CHAR LIMIT=30] -->
-    <string name="date_time_auto">Automatic date &amp; time</string>
-    <!-- Date & time setting screen setting option summary text when Automatic check box is selected
-        (that is, when date and time should be determined automatically) [CHAR LIMIT=100] -->
-    <string name="date_time_auto_summaryOn">Use network-provided time</string>
-    <!-- Date & time setting screen setting option summary text when Automatic check box is clear
-        [CHAR LIMIT=100] -->
-    <string name="date_time_auto_summaryOff">Use network-provided time</string>
-    <!-- Date & time setting screen setting check box title if the time zone should be determined automatically [CHAR LIMIT=30] -->
-    <string name="zone_auto">Automatic time zone</string>
-    <!-- Date & time setting screen setting option summary text when Automatic time zone check box is selected (that is, when date and time should be determined automatically)
+    <string name="date_time_auto">Use network-provided time</string>
+    <!-- Date & time setting screen setting option text when Automatic time zone check box is selected (that is, when date and time should be determined automatically)
         [CHAR LIMIT=100]  -->
-    <string name="zone_auto_summaryOn">Use network-provided time zone</string>
-    <!-- Date & time setting screen setting option summary text when Automatic time zone check box is clear
-        [CHAR LIMIT=100] -->
-    <string name="zone_auto_summaryOff">Use network-provided time zone</string>
-    <!-- Date & time setting screen setting check box title if the 24 hour setting should be determined automatically [CHAR LIMIT=30] -->
-    <string name="date_time_24hour_auto">Automatic 24\u2011hour format</string>
+    <string name="zone_auto_title">Use network-provided time zone</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
-    <string name="date_time_24hour_auto_summary">Use locale default</string>
+    <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title [CHAR LIMIT=30] -->
     <string name="date_time_24hour_title">24\u2011hour format</string>
     <!-- Date & time setting screen setting check box title -->
     <string name="date_time_24hour">Use 24-hour format</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_time_title">Time</string>
-    <!-- Date & time setting screen setting option title -->
-    <string name="date_time_set_time">Set time</string>
+    <!-- Date & time setting screen title for setting time format (allowing user to set device display in 12-hour format or 24-hour format) [CHAR LIMIT=30] -->
+    <string name="time_format_category_title">Time format</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_timezone_title">Time zone</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_timezone">Select time zone</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_date_title">Date</string>
-    <!-- Date & time setting screen setting option title -->
-    <string name="date_time_set_date">Set date</string>
     <!-- Text hint to search region in time zone setting screen -->
     <string name="date_time_search_region">Search region</string>
     <!-- Setting option title to select region in time zone setting screen [CHAR LIMIT=30] -->
@@ -4431,7 +4416,7 @@
     <!-- Title of Languages & input settings screen -->
     <string name="language_keyboard_settings_title">Languages&#160;&amp; input</string>
     <!-- Title of preference category that lists all settings about helping user text input such as spell checker [CHAR LIMIT=60]-->
-    <string name="input_assistance">Input assistance</string>
+    <string name="input_assistance">Tools</string>
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
     <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
@@ -4468,7 +4453,7 @@
     <!-- Image button description for spell checker language. -->
     <string name="spellchecker_language">Language</string>
     <!-- Title for the 'keyboard and input methods' preference category. [CHAR LIMIT=45] -->
-    <string name="keyboard_and_input_methods_category">Keyboard &amp; inputs</string>
+    <string name="keyboard_and_input_methods_category">Keyboards</string>
     <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="virtual_keyboard_category">Virtual keyboard</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
@@ -10455,6 +10440,30 @@
         <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> SIM</item>
         <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> SIMs</item>
     </plurals>
+
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for calls when
+         multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="default_for_calls">Default for calls</string>
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for SMS messages
+         when multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="default_for_sms">Default for SMS</string>
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for calls and SMS
+         messages when multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="default_for_calls_and_sms">Default for calls &amp; SMS</string>
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for mobile data
+         when multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="default_for_mobile_data">Default for mobile data</string>
+    <!-- Network & internet page. Summary indicating that a SIM has an active mobile data connection
+         when multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="mobile_data_active">Mobile data active</string>
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for mobile data
+         when multiple SIMs are present, but mobile data is currently turned off.
+         [CHAR LIMIT=40] -->
+    <string name="mobile_data_off">Mobile data off</string>
+    <!-- Network & internet page. Summary indicating that a SIM is available to be used for services
+         such as calls, SMS, or data when multiple SIMs are present, but is not currently the
+          default SIM for any of those services. [CHAR LIMIT=40] -->
+    <string name="subscription_available">Available</string>
 
     <!-- Title of item shown at the bottom of the page listing multiple mobile service
          subscriptions; tapping it leads to a UI to add more [CHAR LIMIT=40] -->

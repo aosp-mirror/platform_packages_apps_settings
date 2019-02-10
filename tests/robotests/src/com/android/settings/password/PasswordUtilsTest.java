@@ -20,6 +20,7 @@ import static android.content.pm.PackageManager.PERMISSION_DENIED;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 import static com.android.settings.password.PasswordUtils.getCallingAppLabel;
+import static com.android.settings.password.PasswordUtils.getCallingAppPackageName;
 import static com.android.settings.password.PasswordUtils.isCallingAppPermitted;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -77,7 +78,7 @@ public class PasswordUtilsTest {
     }
 
     @Test
-    public void getCallingAppLabel_activityServiceThrowsRemoteException_returnsNull()
+    public void getCallingAppLabel_getCallingAppPackageNameReturnsNull_returnsNull()
             throws Exception {
         when(mActivityService.getLaunchedFromPackage(mActivityToken))
                 .thenThrow(new RemoteException());
@@ -86,7 +87,7 @@ public class PasswordUtilsTest {
     }
 
     @Test
-    public void getCallingAppLabel_activityServiceReturnsSettingsApp_returnsNull()
+    public void getCallingAppLabel_getCallingAppPackageNameReturnsSettingsApp_returnsNull()
             throws Exception {
         when(mActivityService.getLaunchedFromPackage(mActivityToken))
                 .thenReturn("com.android.settings");
@@ -113,6 +114,23 @@ public class PasswordUtilsTest {
         when(mApplicationInfo.loadLabel(mPackageManager)).thenReturn("label");
 
         assertThat(getCallingAppLabel(mContext, mActivityToken)).isEqualTo("label");
+    }
+
+    @Test
+    public void getCallingAppPackageName_activityServiceThrowsRemoteException_returnsNull()
+            throws Exception {
+        when(mActivityService.getLaunchedFromPackage(mActivityToken))
+                .thenThrow(new RemoteException());
+
+        assertThat(getCallingAppPackageName(mActivityToken)).isNull();
+    }
+
+    @Test
+    public void getCallingAppPackageName_returnsPackageName() throws Exception {
+        when(mActivityService.getLaunchedFromPackage(mActivityToken))
+                .thenReturn(PACKAGE_NAME);
+
+        assertThat(getCallingAppPackageName(mActivityToken)).isEqualTo(PACKAGE_NAME);
     }
 
     @Test

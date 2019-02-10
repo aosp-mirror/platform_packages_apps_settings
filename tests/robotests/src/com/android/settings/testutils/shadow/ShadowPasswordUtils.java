@@ -32,11 +32,13 @@ import java.util.Set;
 public class ShadowPasswordUtils {
 
     private static String sCallingAppLabel;
+    private static String sCallingAppPackageName;
     private static Set<String> sGrantedPermissions;
 
     public static void reset() {
         sCallingAppLabel = null;
         sGrantedPermissions = null;
+        sCallingAppPackageName = null;
     }
 
     @Implementation
@@ -62,5 +64,14 @@ public class ShadowPasswordUtils {
 
     public static void setCallingAppLabel(String label) {
         sCallingAppLabel = label;
+    }
+
+    @Implementation
+    protected static String getCallingAppPackageName(IBinder activityToken) {
+        return sCallingAppPackageName;
+    }
+
+    public static void setCallingAppPackageName(String packageName) {
+        sCallingAppPackageName = packageName;
     }
 }

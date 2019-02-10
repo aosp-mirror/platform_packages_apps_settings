@@ -9,7 +9,7 @@
 -keep public class com.android.settings.** extends androidx.fragment.app.Fragment
 
 # Keep all preference controllers needed by slice and DashboardFragment.
--keep class !com.google.android.settings.aware.*, * extends com.android.settings.core.BasePreferenceController {
+-keep class * extends com.android.settings.core.BasePreferenceController {
     *;
 }
 

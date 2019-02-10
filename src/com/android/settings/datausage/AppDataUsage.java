@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.telephony.SubscriptionManager;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -88,7 +89,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private CycleAdapter mCycleAdapter;
 
     private List<NetworkCycleDataForUid> mUsageData;
-    private NetworkTemplate mTemplate;
+    @VisibleForTesting
+    NetworkTemplate mTemplate;
     private AppItem mAppItem;
     private Intent mAppSettingsIntent;
     private SpinnerPreference mCycle;
@@ -108,7 +110,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 : null;
         if (mTemplate == null) {
             mTemplate = DataUsageUtils.getDefaultTemplate(mContext,
-                    DataUsageUtils.getDefaultSubscriptionId(mContext));
+                    SubscriptionManager.getDefaultDataSubscriptionId());
         }
         if (mAppItem == null) {
             int uid = (args != null) ? args.getInt(AppInfoBase.ARG_PACKAGE_UID, -1)
