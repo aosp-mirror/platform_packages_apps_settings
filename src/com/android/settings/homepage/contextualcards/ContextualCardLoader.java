@@ -39,6 +39,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
@@ -94,6 +95,10 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     @Override
     public List<ContextualCard> loadInBackground() {
         final List<ContextualCard> result = new ArrayList<>();
+        if (mContext.getResources().getBoolean(R.bool.config_use_legacy_suggestion)) {
+            Log.d(TAG, "Skipping - in legacy suggestion mode");
+            return result;
+        }
         try (Cursor cursor = getContextualCardsFromProvider()) {
             if (cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
