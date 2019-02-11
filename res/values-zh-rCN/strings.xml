@@ -1099,7 +1099,7 @@
     <string name="auto_brightness_description" msgid="7310335517128283729">"您的屏幕亮度将根据您的环境和活动自动调节。您可以手动移动滑块，以帮助“自动调节亮度”功能了解您偏好的亮度。"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜间模式"</string>
     <string name="night_display_text" msgid="1837277457033025056">"夜间模式会将您的屏幕色调调为琥珀色，可让您在光线昏暗的环境下更舒适地查看屏幕或阅读文字，并有助您入睡。"</string>
-    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"排定时间"</string>
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"设定时间"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"无"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"在设定的时间开启"</string>
     <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"在日落到日出期间开启"</string>
@@ -2116,7 +2116,7 @@
     <string name="background_activity_warning_dialog_title" msgid="2216249969149568871">"要限制后台活动吗？"</string>
     <string name="background_activity_warning_dialog_text" msgid="7049624449246121981">"如果您限制某个应用的后台活动，可能会导致该应用出现异常"</string>
     <string name="background_activity_disabled_dialog_text" msgid="6133420589651880824">"由于此应用未设置为优化电池用量，因此您无法对其加以限制。\n\n要限制该应用，请先开启电池优化功能。"</string>
-    <string name="device_screen_usage" msgid="3386088035570409683">"上次充满电后的屏幕用电量"</string>
+    <string name="device_screen_usage" msgid="3386088035570409683">"上次充满电后的屏幕使用时间"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"屏幕耗电量"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"移动网络扫描"</string>
     <string name="power_usage_list_summary" msgid="5584049564906462506">"充满电后的电池用量"</string>
@@ -2308,7 +2308,7 @@
     <string name="battery_overall_usage" msgid="2093409063297375436">"整体用电量的 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"自上次充满电后的用电明细"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"上次充满电"</string>
-    <string name="battery_full_charge_last" msgid="8892335687734288031">"电池在充满电后的预估使用时间"</string>
+    <string name="battery_full_charge_last" msgid="8892335687734288031">"电池充满电后的大致使用时长"</string>
     <string name="battery_footer_summary" msgid="67169726550144016">"电池消耗量为大致值，可能会因使用情形而变化"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"在前台运行时"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"在后台运行时"</string>
@@ -3154,7 +3154,7 @@
     </plurals>
     <string name="zen_category_behavior" msgid="2989256030084350296">"行为"</string>
     <string name="zen_category_exceptions" msgid="7601136604273265629">"例外情况"</string>
-    <string name="zen_category_schedule" msgid="9000447592251450453">"日程"</string>
+    <string name="zen_category_schedule" msgid="9000447592251450453">"设定时间"</string>
     <string name="zen_sound_title" msgid="424490228488531372">"提示音和振动"</string>
     <string name="zen_sound_footer" msgid="7621745273287208979">"开启勿扰模式后，系统既不会发出提示音也不会振动（您在上方允许的项目除外）。"</string>
     <string name="zen_sound_category_title" msgid="4336596939661729188">"全部静音，除了"</string>
@@ -3340,7 +3340,7 @@
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g>到<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"来电"</string>
-    <string name="zen_mode_calls_title" msgid="623395033931747661">"允许进行通话"</string>
+    <string name="zen_mode_calls_title" msgid="623395033931747661">"允许通话"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"开启勿扰模式后，系统会屏蔽来电。您可以调整相应设置，以便允许您的好友、家人或其他联系人与您联系。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"已加星标的联系人"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
@@ -3889,9 +3889,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"无"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"缺少排名对象。"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"排名对象不包含此键。"</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"模拟“刘海屏”"</string>
-    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"显示屏凹口, 凹口"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"无"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"刘海屏"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"刘海屏, 缺口"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"设备默认设置"</string>
     <string name="special_access" msgid="3458780842491881155">"特殊应用权限"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个应用可以无限量使用流量</item>
@@ -4152,5 +4152,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"网络详情"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"您的设备名称会显示在手机上的应用中。此外，当您连接到蓝牙设备或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
     <string name="devices_title" msgid="7701726109334110391">"设备"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"默认"</string>
 </resources>

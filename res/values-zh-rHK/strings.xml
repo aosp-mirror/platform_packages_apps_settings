@@ -3483,7 +3483,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"沒有要求權限"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"所有應用程式"</string>
     <string name="filter_enabled_apps" msgid="5395727306799456250">"已安裝的應用程式"</string>
-    <string name="filter_instant_apps" msgid="574277769963965565">"即時應用程式"</string>
+    <string name="filter_instant_apps" msgid="574277769963965565">"免安裝應用程式"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"個人"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"工作"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"應用程式：全部"</string>
@@ -3637,7 +3637,7 @@
     <string name="running_frequency" msgid="6622624669948277693">"頻率"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"最高用量"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"並未使用數據"</string>
-    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"允許「<xliff:g id="APP">%1$s</xliff:g>」存取「請勿騷擾」？"</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"允許「<xliff:g id="APP">%1$s</xliff:g>」存取「請勿騷擾」嗎？"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"應用程式能開啟或關閉「請勿騷擾」，並變更有關設定。"</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"請啟用功能，通知存取權已開放"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"要撤銷「<xliff:g id="APP">%1$s</xliff:g>」存取「請勿騷擾」的權限嗎？"</string>
@@ -3892,9 +3892,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"無"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"沒有評級物件。"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"評級物件不包含此密鑰。"</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"模擬具有凹口的顯示屏"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"顯示屏凹口"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"顯示屏凹口 (缺口)"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"無"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"裝置預設設定"</string>
     <string name="special_access" msgid="3458780842491881155">"特別應用程式權限"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 個應用程式可使用無限數據</item>
@@ -3982,10 +3982,10 @@
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"無法在已遭流動網絡供應商鎖定的裝置上啟用"</string>
     <string name="oem_lock_info_message" msgid="9218313722236417510">"請重新啟動裝置以啟用裝置保護功能。"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已釋放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次執行時間：<xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="web_action_enable_title" msgid="4051513950976670853">"即時應用程式"</string>
+    <string name="web_action_enable_title" msgid="4051513950976670853">"免安裝應用程式"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"即使您沒有安裝應用程式，亦可在應用程式內開啟連結"</string>
-    <string name="web_action_section_title" msgid="7364647086538399136">"即時應用程式"</string>
-    <string name="instant_apps_settings" msgid="8827777916518348213">"即時應用程式偏好設定"</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"免安裝應用程式"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"免安裝應用程式偏好設定"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"已安裝的應用程式"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"您的儲存空間即將由儲存空間管理員管理"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g>的帳戶"</string>
@@ -4078,7 +4078,7 @@
     <string name="storage_volume_total" msgid="3499221850532701342">"已使用 (共 <xliff:g id="TOTAL">%1$s</xliff:g>)"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"已使用"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"清除應用程式"</string>
-    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"您要移除此即時應用程式嗎？"</string>
+    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"您要移除此免安裝應用程式嗎？"</string>
     <string name="launch_instant_app" msgid="391581144859010499">"開啟"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"遊戲"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"音訊檔案"</string>
@@ -4099,7 +4099,7 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"儲存空間管理員：<xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"關閉"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"開啟"</string>
-    <string name="install_type_instant" msgid="3174425974536078647">"即時應用程式"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"免安裝應用程式"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"要停用儲存空間管理員嗎？"</string>
     <string name="storage_movies_tv" msgid="5498394447562086890">"電影和電視應用程式"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"流動網絡供應商佈建資料"</string>
@@ -4155,5 +4155,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"網絡詳細資料"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"您的裝置名稱會在手機的應用程式上顯示。當您連接藍牙裝置或設定 Wi-Fi 熱點時，其他人亦可能會看到您的裝置名稱。"</string>
     <string name="devices_title" msgid="7701726109334110391">"裝置"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"預設"</string>
 </resources>
