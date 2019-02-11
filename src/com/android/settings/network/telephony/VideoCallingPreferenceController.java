@@ -42,7 +42,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * Preference controller for "Video Calling"
  */
-public class VideoCallingPreferenceController extends TogglePreferenceController implements
+public class VideoCallingPreferenceController extends TelephonyTogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop,
         Enhanced4gLtePreferenceController.On4gLteUpdateListener {
 
@@ -54,21 +54,19 @@ public class VideoCallingPreferenceController extends TogglePreferenceController
     ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
     private DataContentObserver mDataContentObserver;
-    private int mSubId;
 
     public VideoCallingPreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
         mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+    public int getAvailabilityStatus(int subId) {
+        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && MobileNetworkUtils.isWifiCallingEnabled(mContext,
-                SubscriptionManager.getPhoneId(mSubId))
+                SubscriptionManager.getPhoneId(subId))
                 && isVideoCallEnabled()
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;

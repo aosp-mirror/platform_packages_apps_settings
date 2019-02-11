@@ -44,6 +44,8 @@ import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.internal.util.ArrayUtils;
+import com.android.settings.core.BasePreferenceController;
 
 import java.util.Arrays;
 import java.util.List;
@@ -402,5 +404,53 @@ public class MobileNetworkUtils {
             }
         }
         return false;
+    }
+
+
+    /**
+     * Return subId that supported by search. If there are more than one, return first one,
+     * otherwise return {@link SubscriptionManager#INVALID_SUBSCRIPTION_ID}
+     */
+    public static int getSearchableSubscriptionId(Context context) {
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        final int subIds[] = subscriptionManager.getActiveSubscriptionIdList();
+
+        return subIds.length >= 1 ? subIds[0] : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    }
+
+    /**
+     * Return availability for a default subscription id. If subId already been set, use it to
+     * check, otherwise traverse all active subIds on device to check.
+     * @param context context
+     * @param defSubId Default subId get from telephony preference controller
+     * @param callback Callback to check availability for a specific subId
+     * @return Availability
+     *
+     * @see BasePreferenceController#getAvailabilityStatus()
+     */
+    public static int getAvailability(Context context, int defSubId,
+            TelephonyAvailabilityCallback callback) {
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        if (defSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            // If subId has been set, return the corresponding status
+            return callback.getAvailabilityStatus(defSubId);
+        } else {
+            // Otherwise, search whether there is one subId in device that support this preference
+            final int[] subIds = subscriptionManager.getActiveSubscriptionIdList();
+            if (ArrayUtils.isEmpty(subIds)) {
+                return callback.getAvailabilityStatus(
+                        SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            } else {
+                for (final int subId : subIds) {
+                    final int status = callback.getAvailabilityStatus(subId);
+                    if (status == BasePreferenceController.AVAILABLE) {
+                        return status;
+                    }
+                }
+                return callback.getAvailabilityStatus(subIds[0]);
+            }
+        }
     }
 }

@@ -41,7 +41,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.PhoneConstants;
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -183,5 +182,20 @@ public class MobileNetworkUtilsTest {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL, true);
 
         assertThat(MobileNetworkUtils.isCdmaOptions(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void getSearchableSubscriptionId_oneActive_returnValid() {
+        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[]{SUB_ID_1});
+
+        assertThat(MobileNetworkUtils.getSearchableSubscriptionId(mContext)).isEqualTo(SUB_ID_1);
+    }
+
+    @Test
+    public void getSearchableSubscriptionId_nonActive_returnInvalid() {
+        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[0]);
+
+        assertThat(MobileNetworkUtils.getSearchableSubscriptionId(mContext))
+                .isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
 }

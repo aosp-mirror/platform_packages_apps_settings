@@ -33,7 +33,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -43,7 +42,7 @@ import java.util.List;
 /**
  * Preference controller for "Wifi Calling"
  */
-public class WifiCallingPreferenceController extends BasePreferenceController implements
+public class WifiCallingPreferenceController extends TelephonyBasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
     @VisibleForTesting
@@ -56,19 +55,17 @@ public class WifiCallingPreferenceController extends BasePreferenceController im
     PhoneAccountHandle mSimCallManager;
     private PhoneCallStateListener mPhoneStateListener;
     private Preference mPreference;
-    private int mSubId;
 
     public WifiCallingPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSimCallManager = context.getSystemService(TelecomManager.class).getSimCallManager();
         mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+    public int getAvailabilityStatus(int subId) {
+        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && MobileNetworkUtils.isWifiCallingEnabled(mContext,
                 SubscriptionManager.getPhoneId(mSubId))
                 ? AVAILABLE

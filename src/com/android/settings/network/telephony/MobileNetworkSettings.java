@@ -114,7 +114,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                MobileNetworkUtils.getSearchableSubscriptionId(context));
 
         if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
             mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -250,11 +250,6 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return false;
-                }
-
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
