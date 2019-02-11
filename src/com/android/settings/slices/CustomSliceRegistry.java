@@ -164,6 +164,16 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("toggle_nfc")
             .build();
+
+    /**
+     * Backing Uri for Mobile Data Slice.
+     */
+    public static final Uri MOBILE_DATA_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("mobile_data")
+            .build();
     /**
      * Backing Uri for Notification channel Slice.
      */

@@ -71,7 +71,7 @@ public interface CustomSliceable {
      *
      * @param intent which has the action taken on a {@link Slice}.
      */
-    void onNotifyChange(Intent intent);
+    default void onNotifyChange(Intent intent) {}
 
     /**
      * @return an {@link Intent} to the source of the Slice data.
@@ -90,11 +90,12 @@ public interface CustomSliceable {
     }
 
     /**
-     * Settings Slices which can represent component lists that are updatable by the
-     * {@link SliceBackgroundWorker} class returned here.
+     * Settings Slices which require background work, such as updating lists should implement a
+     * {@link SliceBackgroundWorker} and return it here. An example of background work is updating
+     * a list of Wifi networks available in the area.
      *
-     * @return a {@link SliceBackgroundWorker} class for fetching the list of results in the
-     * background.
+     * @return a {@link Class<? extends SliceBackgroundWorker>} to perform background work for the
+     * slice.
      */
     default Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
         return null;

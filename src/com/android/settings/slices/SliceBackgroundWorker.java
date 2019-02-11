@@ -59,6 +59,14 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
         mUri = uri;
     }
 
+    protected Uri getUri() {
+        return mUri;
+    }
+
+    protected Context getContext() {
+        return mContext;
+    }
+
     /**
      * Returns the singleton instance of the {@link SliceBackgroundWorker} for specified {@link Uri}
      * if exists
@@ -151,7 +159,7 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
     /**
      * Notify that data was updated and attempt to sync changes to the Slice.
      */
-    protected void notifySliceChange() {
+    protected final void notifySliceChange() {
         mContext.getContentResolver().notifyChange(mUri, null);
     }
 }

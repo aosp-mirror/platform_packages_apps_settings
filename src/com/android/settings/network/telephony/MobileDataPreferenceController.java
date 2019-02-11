@@ -119,6 +119,14 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
                 && mSubId == SubscriptionManager.getDefaultDataSubscriptionId();
     }
 
+    public static Uri getObservableUri(int subId) {
+        Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA);
+        if (TelephonyManager.getDefault().getSimCount() != 1) {
+            uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + subId);
+        }
+        return uri;
+    }
+
     public void init(FragmentManager fragmentManager, int subId) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
@@ -169,10 +177,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         }
 
         public void register(Context context, int subId) {
-            Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA);
-            if (TelephonyManager.getDefault().getSimCount() != 1) {
-                uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + subId);
-            }
+            final Uri uri = getObservableUri(subId);
             context.getContentResolver().registerContentObserver(uri, false, this);
 
         }

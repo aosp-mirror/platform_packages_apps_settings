@@ -142,7 +142,7 @@ public class WifiSlice implements CustomSliceable {
                 .setTitle(title)
                 .setSubtitle(!TextUtils.isEmpty(apSummary)
                         ? apSummary
-                        : mContext.getText(R.string.summary_placeholder))
+                        : null)
                 .setPrimaryAction(SliceAction.create(
                         getAccessPointAction(accessPoint), levelIcon, ListBuilder.ICON_IMAGE,
                         title));
@@ -247,7 +247,7 @@ public class WifiSlice implements CustomSliceable {
                 return mContext.getText(R.string.switch_off_text);
             case WifiManager.WIFI_STATE_UNKNOWN:
             default:
-                return "";
+                return null;
         }
     }
 

@@ -2991,7 +2991,7 @@
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.BottomDialog"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />

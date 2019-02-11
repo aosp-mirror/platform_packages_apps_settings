@@ -46,8 +46,10 @@ public class InternetConnectivityPanelTest {
     public void getSlices_containsNecessarySlices() {
         final List<Uri> uris = mPanel.getSlices();
 
-        assertThat(uris).containsExactly(CustomSliceRegistry.WIFI_SLICE_URI,
-                CustomSliceRegistry.AIRPLANE_URI);
+        assertThat(uris).containsExactly(
+                CustomSliceRegistry.AIRPLANE_URI,
+                CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                CustomSliceRegistry.WIFI_SLICE_URI);
     }
 
     @Test
