@@ -374,7 +374,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Įgalinti valdiklius"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Išjungė administratorius"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Rodyti užrakinimo parinktį"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Rodyti maitinimo mygtuko parinktį, kuri išjungia „Smart Lock“, atrakinimą naudojant kontrolinį kodą ir užrakinimo ekrano pranešimus"</string>
+    <string name="lockdown_settings_summary" msgid="429230431748285997">"Rodyti maitinimo mygtuko parinktį, kuri išjungia „Smart Lock“, atrakinimą naudojant piršto antspaudą ir užrakinimo ekrano pranešimus"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Nėra"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"Pvz., Tomo „Android“."</string>
@@ -397,12 +397,12 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"Privatumas"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Išjungė administratorius"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Saugos būsena"</string>
-    <string name="security_dashboard_summary" msgid="6757421634477554939">"Ekrano užraktas, kontrolinis kodas"</string>
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"Ekrano užraktas, piršto antspaudas"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Ekrano užraktas"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Kontr. kodo jutiklis"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Kontrolin. kodų tvark."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Kontrolinių kodų naud."</string>
-    <string name="fingerprint_add_title" msgid="1926752654454033904">"Pridėti kontrolinį kodą"</string>
+    <string name="fingerprint_add_title" msgid="1926752654454033904">"Pridėti piršto antspaudą"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"ekrano užraktas"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
       <item quantity="one">Nustatytas <xliff:g id="COUNT_1">%1$d</xliff:g> piršto atspaudas</item>
@@ -412,16 +412,16 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Atrakinimas piršto atspaudu"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Kontrolinio kodo naudojimas"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Tiesiog palieskite kontrolinio kodo jutiklį, kad galėtumėte atrakinti telefoną, įgalioti pirkimo operacijas arba prisijungti prie programų. Naudojant visus pridėtus kontrolinius kodus bus galima atlikti šiuos veiksmus, todėl atidžiai rinkitės, kieno kontrolinius kodus pridedate.\n\nPastaba: kontrolinis kodas gali būti ne toks saugus kaip sudėtingas atrakinimo piešinys ar PIN kodas."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Piršto antspaudo naudojimas"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Tiesiog palieskite piršto antspaudo jutiklį, kad galėtumėte atrakinti telefoną, įgalioti pirkimo operacijas arba prisijungti prie programų. Naudojant visus pridėtus kontrolinius kodus bus galima atlikti šiuos veiksmus, todėl atidžiai rinkitės, kieno kontrolinius kodus pridedate.\n\nPastaba: piršto antspaudas gali būti ne toks saugus kaip sudėtingas atrakinimo piešinys ar PIN kodas."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"Atrakinkite telefoną ir patvirtinkite pirkimo operacijas piršto atspaudu.\n\nPastaba: negalite atrakinti šio įrenginio piršto atspaudu. Norėdami gauti daugiau informacijos, susisiekite su organizacijos administratoriumi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"Atrakinkite telefoną ir patvirtinkite pirkimo operacijas piršto atspaudu.\n\nPastaba: piršto atspaudas gali būti ne toks saugus kaip patikimas atrakinimo piešinys ar PIN kodas."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Atšaukti"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Tęsti"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Praleisti"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Kitas"</string>
-    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Praleisti kontrolinį kodą?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Kontrolinio kodo sąranka užtrunka tik minutę ar dvi. Jei praleisite šį veiksmą, vėliau kontrolinį kodą galėsite pridėti nustatymuose."</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"Praleisti piršto antspaudą?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"Piršto antspaudo sąranka užtrunka tik minutę ar dvi. Jei praleisite šį veiksmą, vėliau piršto antspaudą galėsite pridėti nustatymuose."</string>
     <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"Praleisti ekrano užraktą?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Įrenginio apsaugos funkcijos nebus įjungtos. Negalėsite užtikrinti, kad kiti asmenys negalėtų pasinaudoti planšetiniu kompiuteriu, jei jis bus pavogtas ar nustatytas iš naujo arba jį pamesite."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Įrenginio apsaugos funkcijos nebus įjungtos. Negalėsite užtikrinti, kad kiti asmenys negalėtų pasinaudoti įrenginiu, jei jis bus pavogtas ar nustatytas iš naujo arba jį pamesite."</string>
@@ -433,7 +433,7 @@
     <string name="go_back_button_label" msgid="4745265266186209467">"Grįžti"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Palieskite jutiklį"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Jis yra telefono užpakalinėje dalyje. Naudokite smilių."</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Įrenginio ir kontrolinio kodo jutiklio vietos iliustracija"</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Įrenginio ir piršto antspaudo jutiklio vietos iliustracija"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Pavadinimas"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"Gerai"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Ištrinti"</string>
@@ -442,7 +442,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Patraukite ir vėl prilieskite"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Vis patraukite pirštą, kad pridėtumėte skirtingas piršto atspaudo dalis"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Piršto atspaudas pridėtas"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="8970048776120548976">"Kai rodoma ši piktograma, tapatybei nustatyti ar pirkimo operacijai patvirtinti naudokite kontrolinį kodą"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="8970048776120548976">"Kai rodoma ši piktograma, tapatybei nustatyti ar pirkimo operacijai patvirtinti naudokite piršto antspaudą"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Atlikti vėliau"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Praleisti pirštų atspaudų nustatymą?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Pasirinkote naudoti piršto atspaudą kaip vieną iš telefono atrakinimo būdų. Jei praleisite dabar, turėsite nustatyti funkciją vėliau. Nustatymas apytiksliai užtruks tik minutę."</string>
@@ -451,23 +451,23 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Oi, tai ne jutiklis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"Smiliumi palieskite jutiklį tel. užp. dalyje."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Registracija neužbaigta"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Pasiektas kontrolinio kodo registracijos laiko apribojimas. Bandykite dar kartą."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Nepavyko užregistruoti kontrolinio kodo. Bandykite dar kartą arba atlikite tai kitu pirštu."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Pasiektas piršto antspaudo registracijos laiko apribojimas. Bandykite dar kartą."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Nepavyko užregistruoti piršto antspaudo. Bandykite dar kartą arba atlikite tai kitu pirštu."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Pridėti kitą"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Kitas"</string>
-    <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Naudodami kontrolinį kodą galite atrakinti telefoną, be to, galite įgalioti pirkimo veiksmus ir programų prieigą. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7846871823167357942">" Ekrano užrakto parinktis išjungta. Jei norite sužinoti daugiau, susisiekite su savo organizacijos administratoriumi. "<annotation id="admin_details">"Daugiau išsamios informacijos"</annotation>\n\n"Vis tiek galite naudoti savo kontrolinį kodą ir įgalioti pirkinius bei prieigą prie programų. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Naudodami piršto antspaudą galite atrakinti telefoną, be to, galite įgalioti pirkimo veiksmus ir programų prieigą. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7846871823167357942">" Ekrano užrakto parinktis išjungta. Jei norite sužinoti daugiau, susisiekite su savo organizacijos administratoriumi. "<annotation id="admin_details">"Daugiau išsamios informacijos"</annotation>\n\n"Vis tiek galite naudoti savo piršto antspaudą ir įgalioti pirkinius bei prieigą prie programų. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Patraukite pirštą, tada vėl palieskite jutiklį"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Galite pridėti iki <xliff:g id="COUNT">%d</xliff:g> kontrol. kod."</string>
     <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"Pridėjote maksimalų skaičių kontrolinių kodų"</string>
     <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"Negalima pridėti daugiau kontrolinių kodų"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Pašalinti visus kontrolinius kodus?"</string>
     <string name="fingerprint_delete_title" msgid="1368196182612202898">"Pašalinti „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“"</string>
-    <string name="fingerprint_delete_message" msgid="8597787803567398131">"Ar norite ištrinti šį kontrolinį kodą?"</string>
+    <string name="fingerprint_delete_message" msgid="8597787803567398131">"Ar norite ištrinti šį piršto antspaudą?"</string>
     <string name="fingerprint_last_delete_message" msgid="7852321001254275878">"Negalėsite naudoti kontrolinių kodų norėdami atrakinti telefoną, įgalioti pirkimo procesus ar prisijungti prie programų"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="6521520787746771912">"Negalėsite naudoti kontrolinių kodų norėdami atrakinti darbo profilį, įgalioti pirkimo operacijas ar prisijungti prie darbo programų"</string>
     <string name="fingerprint_last_delete_confirm" msgid="2634726361059274289">"Taip, pašalinti"</string>
-    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Naudokite kontrolinį kodą, kad galėtumėte tęsti."</string>
+    <string name="confirm_fingerprint_icon_content_description" msgid="5255544532157079096">"Naudokite piršto antspaudą, kad galėtumėte tęsti."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Šifruotė"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Šifruoti planšetinį kompiuterį"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Šifruoti telefoną"</string>
@@ -538,18 +538,18 @@
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Aukštas saugos lygis"</string>
     <string name="unlock_set_do_later_title" msgid="4894767558414979243">"Ne dabar"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"Esamas ekrano užraktas"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Kontrolinis kodas + atrakinimo piešinys"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Kontrolinis kodas + PIN kodas"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Kontrolinis kodas + slaptažodis"</string>
-    <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Tęsti be kontrolinio kodo"</string>
-    <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Telefoną galite atrakinti kontroliniu kodu. Saugos sumetimais, įgalinus šią parinktį, reikia naudoti atsarginį ekrano užraktą."</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Piršto antspaudas + atrakinimo piešinys"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Piršto antspaudas + PIN kodas"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Piršto antspaudas + slaptažodis"</string>
+    <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Tęsti be piršto antspaudo"</string>
+    <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Telefoną galite atrakinti piršto antspaudu. Saugos sumetimais, įgalinus šią parinktį, reikia naudoti atsarginį ekrano užraktą."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Neleido: admin., šifr. polit. ar pr. duom. atmin."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nėra"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Perbraukti"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Piešinys"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN kodas"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Slaptažodis"</string>
-    <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Kai nustatysite ekrano užraktą, taip pat galėsite nustatyti kontrolinį kodą skiltyje „Nustatymai &gt; Sauga“."</string>
+    <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"Kai nustatysite ekrano užraktą, taip pat galėsite nustatyti piršto antspaudą skiltyje „Nustatymai &gt; Sauga“."</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Išjungti ekrano užraktą"</string>
     <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"Pašalinti įrenginio apsaugą?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="5507136301904313583">"Pašalinti profilio apsaugą?"</string>
@@ -1122,7 +1122,7 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimizuokite šviesumo lygį pagal esamą šviesą. Kai ši funkcija įjungta, vis tiek galite laikinai koreguoti šviesumą."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ekrano šviesumas automatiškai prisitaikys prie jūsų aplinkos ir veiklos. Galite šliaužiklį perkelti patys, kad prisitaikantis šviesumas įsimintų jūsų nuostatas."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nakties šviesa"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"Nustačius „Nakties šviesą“, naktį rodomas gintaro spalvos atspalvio ekranas. Taip bus patogiau žiūrėti į ekraną prietemoje ir galbūt lengviau užmigsite."</string>
+    <string name="night_display_text" msgid="1837277457033025056">"Nustačius Nakties šviesą, naktį rodomas gintaro spalvos atspalvio ekranas. Taip bus patogiau žiūrėti į ekraną prietemoje ir galbūt lengviau užmigsite."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Tvarkaraštis"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Nėra"</string>
     <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Įjungiama pasirinktu laiku"</string>
@@ -3080,7 +3080,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serijos numeris, aparatinės įrangos versija"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"„Android“ saugos pataisos lygis, nemoduliuotų signalų įrangos versija, branduolio versija"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Aplinkos ekranas, užrakinimo ekranas"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"kontrolinis kodas"</string>
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"piršto antspaudas"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"pasukti, apversti, pasukimas, stačia, gulsčia, orientacija, vertikali, horizontali"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"atnaujinti, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"dnd, tvarkaraštis, pranešimai, blokuoti, tyla, vibruoti, miego būsena, darbas, fokusavimas, garsas, nutildyti, diena, savaitės diena, savaitgalis, savaitės naktis, renginys"</string>
@@ -3505,9 +3505,9 @@
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Galite dar labiau apsaugoti šį įrenginį nustatę, kad prieš jį paleidžiant būtų prašoma įvesti PIN kodą. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus. \n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti PIN kodo norint paleisti jūsų įrenginį?"</string>
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Galite dar labiau apsaugoti šį įrenginį nustatę, kad prieš jį paleidžiant būtų prašoma nubrėžti atrakinimo piešinį. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus. \n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti atrakinimo piešinio norint paleisti jūsų įrenginį?"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Galite dar labiau apsaugoti šį įrenginį nustatę, kad prieš jį paleidžiat būtų prašoma įvesti slaptažodį. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus. \n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti įvesti slaptažodį norint paleisti jūsų įrenginį?"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Be to, kad atrakinant įrenginį prašoma kontrolinio kodo, galite dar labiau apsaugoti šį įrenginį nustatę, kad jį paleidžiant būtų prašoma įvesti PIN kodą. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus.\n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti PIN kodo norint paleisti jūsų įrenginį?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Be to, kad atrakinant įrenginį prašoma kontrolinio kodo, galite dar labiau apsaugoti šį įrenginį nustatę, kad jį paleidžiant būtų prašoma nubrėžti atrakinimo piešinį. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus.\n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti atrakinimo piešinio norint paleisti jūsų įrenginį?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Be kontrolinio kodo, kurį naudodami atrakinate įrenginį, galite dar geriau apsaugoti šį įrenginį reikalaudami įvesti slaptažodį prieš jį paleidžiant. Kol įrenginys nepaleidžiamas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTai padeda apsaugoti duomenis prarastuose arba pavogtuose įrenginiuose. Reikalauti slaptažodžio paleidžiant įrenginį?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Be to, kad atrakinant įrenginį prašoma piršto antspaudo, galite dar labiau apsaugoti šį įrenginį nustatę, kad jį paleidžiant būtų prašoma įvesti PIN kodą. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus.\n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti PIN kodo norint paleisti jūsų įrenginį?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Be to, kad atrakinant įrenginį prašoma piršto antspaudo, galite dar labiau apsaugoti šį įrenginį nustatę, kad jį paleidžiant būtų prašoma nubrėžti atrakinimo piešinį. Nepaleidus įrenginio juo nebus gaunami skambučiai ir pranešimai, įskaitant signalus.\n\nTaip bus apsaugoti pamestų ar pavogtų įrenginių duomenys. Reikalauti atrakinimo piešinio norint paleisti jūsų įrenginį?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Be piršto antspaudo, kurį naudodami atrakinate įrenginį, galite dar geriau apsaugoti šį įrenginį reikalaudami įvesti slaptažodį prieš jį paleidžiant. Kol įrenginys nepaleidžiamas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTai padeda apsaugoti duomenis prarastuose arba pavogtuose įrenginiuose. Reikalauti slaptažodžio paleidžiant įrenginį?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Taip"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Ne"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Apribota"</string>
@@ -3963,7 +3963,7 @@
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Reikalauti atrakinimo piešinio norint paleisti įrenginį. Kai įrenginys išjungtas, juo nepriimami skambučiai, pranešimai, informaciniai pranešimai ar įspėjimai."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Reikalauti PIN kodo norint paleisti įrenginį. Kai įrenginys išjungtas, juo nepriimami skambučiai, pranešimai, informaciniai pranešimai ar įspėjimai."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Reikalauti slaptažodžio norint paleisti įrenginį. Kai įrenginys išjungtas, juo nepriimami skambučiai, pranešimai, informaciniai pranešimai ar įspėjimai."</string>
-    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Pridėkite kitą kontrolinį kodą"</string>
+    <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Pridėkite kitą piršto antspaudą"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Atrakinkite naudodami kitą pirštą"</string>
     <string name="battery_saver_on_summary" msgid="7722791295871319534">"Įjungta"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="3953785517002197881">"Bus įjungta pasiekus <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
@@ -4005,9 +4005,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"nėra"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Trūksta reitingavimo objekto."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Reitingavimo objekte nėra šio rakto."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Imituoti ekraną su išpjova"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Ekrano išpjova"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ekrano išpjova, įranta"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Nėra"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Numatytasis įrenginio nustatymas"</string>
     <string name="special_access" msgid="3458780842491881155">"Spec. prieiga prie prog."</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> programa gali naudoti neribotus duomenis</item>
@@ -4089,11 +4089,11 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Paimkite telefoną, jei norite sužinoti laiką ir peržiūrėti pranešimus, piktogramas bei kitą informaciją."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Paimkite planšetinį kompiuterį, jei norite sužinoti laiką ir peržiūrėti pranešimus, piktogramas bei kitą informaciją."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Paimkite įrenginį, jei norite sužinoti laiką ir peržiūrėti pranešimus, piktogramas bei kitą informaciją."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Perbraukimas kontrolinio kodo jutikliu norint peržiūrėti pranešimus"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Perbraukimas piršto antspaudo jutikliu norint peržiūrėti pranešimus"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Perbr. kontr. k. jutikliu"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Jei norite patikrinti pranešimus, perbraukite žemyn kontrolinio kodo jutikliu telefono užpakalinėje dalyje."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Jei norite greitai patikrinti pranešimus, perbraukite žemyn kontrolinio kodo jutikliu planšetinio kompiuterio užpakalinėje dalyje."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Jei norite patikrinti pranešimus, perbraukite žemyn kontrolinio kodo jutikliu įrenginio užpakalinėje dalyje."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Jei norite patikrinti pranešimus, perbraukite žemyn piršto antspaudo jutikliu telefono užpakalinėje dalyje."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Jei norite greitai patikrinti pranešimus, perbraukite žemyn piršto antspaudo jutikliu planšetinio kompiuterio užpakalinėje dalyje."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Jei norite patikrinti pranešimus, perbraukite žemyn piršto antspaudo jutikliu įrenginio užpakalinėje dalyje."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Greitai peržiūrėkite pranešimus"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Įjungta"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Išjungta"</string>
@@ -4290,5 +4290,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Išsami tinklo informacija"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Įrenginio pavadinimas matomas jūsų telefone esančioms programoms. Kai prisijungiate prie „Bluetooth“ įrenginių arba nustatote „Wi-Fi“ viešosios interneto prieigos tašką, jį taip pat gali matyti kiti žmonės."</string>
     <string name="devices_title" msgid="7701726109334110391">"Įrenginiai"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Numatytoji"</string>
 </resources>
