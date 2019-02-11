@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.Log;
 import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -36,6 +37,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  */
 public class BluetoothDetailsHeaderController extends BluetoothDetailsController {
     private static final String KEY_DEVICE_HEADER = "bluetooth_device_header";
+    private static final String TAG = "BluetoothDetailsHeaderController";
 
     private EntityHeaderController mHeaderController;
     private LocalBluetoothManager mLocalManager;
@@ -63,12 +65,16 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
                 .getBtClassDrawableWithDescription(mContext, mCachedDevice,
                 mContext.getResources().getFraction(R.fraction.bt_battery_scale_fraction, 1, 1));
         String summaryText = mCachedDevice.getConnectionSummary();
-        // If both the hearing aids are connected, two battery status should be shown.
-        final String pairDeviceSummary = mDeviceManager
-            .getHearingAidPairDeviceSummary(mCachedDevice);
-        if (pairDeviceSummary != null) {
+
+        if (mCachedDevice.isHearingAidDevice()) {
+            // For Hearing Aid device, display the other battery status.
+            final String pairDeviceSummary = mDeviceManager
+                .getHearingAidPairDeviceSummary(mCachedDevice);
+            Log.d(TAG, "setHeaderProperties: HearingAid: summaryText=" + summaryText
+                  + ", pairDeviceSummary=" + pairDeviceSummary);
             mHeaderController.setSecondSummary(pairDeviceSummary);
         }
+
         mHeaderController.setLabel(mCachedDevice.getName());
         mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);

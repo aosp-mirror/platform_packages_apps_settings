@@ -44,8 +44,8 @@
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Chamadas por Wi-Fi aprovisionadas"</string>
     <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"EAB/Presença aprovisionados"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Potência do rádio móvel"</string>
-    <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Ver o catálogo de endereços do SIM"</string>
-    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Visualizar números de chamada fixa"</string>
+    <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Ver o catálogo de endereços do chip"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Visualizar números de discagem fixa"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Visualizar números de chamada de serviço"</string>
     <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"Status de serviço IMS"</string>
     <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"Status IMS"</string>
@@ -164,8 +164,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Não perguntar novamente"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Solicitação de acesso a mensagens"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s deseja acessar suas mensagens. Conceder acesso a %2$s?"</string>
-    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Solicitação de acesso ao cartão SIM"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"O <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> deseja acessar seu cartão SIM. A concessão de acesso ao cartão SIM desativará a conectividade de dados no seu dispositivo durante a conexão. Conceda acesso ao <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <string name="bluetooth_sap_request" msgid="2669762224045354417">"Solicitação de acesso ao chip"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"O <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> deseja acessar seu chip. A concessão de acesso ao chip desativará a conectividade de dados no seu dispositivo durante a conexão. Conceda acesso ao <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Visível como \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" para outros dispositivos"</string>
     <string name="bluetooth_off_footer" msgid="8406865700572772936">"Ative o Bluetooth para se conectar a outros dispositivos."</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Seus dispositivos"</string>
@@ -301,7 +301,7 @@
     <string name="done" msgid="6942539184162713160">"Concluído"</string>
     <string name="apply" msgid="1577045208487259229">"Aplicar"</string>
     <string name="settings_label" msgid="1626402585530130914">"Configurações"</string>
-    <string name="settings_label_launcher" msgid="8344735489639482340">"Configurar"</string>
+    <string name="settings_label_launcher" msgid="8344735489639482340">"Configurações"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Atalho para as configurações"</string>
     <string name="activity_list_empty" msgid="6428823323471264836">"Nenhuma atividade correspondente foi encontrada."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Modo avião"</string>
@@ -388,7 +388,7 @@
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Dispositivo criptografado"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Dispositivo não criptografado"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Preferências da tela de bloqueio"</string>
-    <string name="security_settings_summary" msgid="967393342537986570">"Definir Meu local, desbloqueio de tela, bloqueio do SIM e do armazenamento de credenciais"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"Definir Meu local, desbloqueio de tela, bloqueio do chip e do armazenamento de credenciais"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Definir o Meu local, o desbloqueio de tela, o bloqueio do armazenamento de credenciais"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"Privacidade"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Desativada pelo administrador"</string>
@@ -1094,7 +1094,7 @@
     <string name="auto_brightness_very_high_title" msgid="8867164854439331022">"Muito alto"</string>
     <string name="auto_brightness_subtitle" msgid="6454652530864093466">"Seu nível de brilho preferencial"</string>
     <string name="auto_brightness_off_summary" msgid="7629228736838155268">"Não ajustar para luz disponível"</string>
-    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"Aumento do uso da bateria"</string>
+    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"Maior uso da bateria"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Otimizar brilho conforme luz disponível. Quando o recurso está ativado, é possível ajustar o brilho temporariamente."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"O brilho da tela será ajustado automaticamente ao seu ambiente e às suas atividades. Mova o controle deslizante para ajudar o brilho adaptável a memorizar suas preferências."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Modo noturno"</string>
@@ -1117,8 +1117,8 @@
     <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Será desativado automaticamente ao amanhecer"</string>
     <string name="night_display_activation_on_manual" msgid="277343561277625826">"Ativar agora"</string>
     <string name="night_display_activation_off_manual" msgid="4074557720918572883">"Desativar agora"</string>
-    <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"Ativar até o nascer do sol"</string>
-    <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Desativar até o pôr do sol"</string>
+    <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"Ativar até o amanhecer"</string>
+    <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Desativar até anoitecer"</string>
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Ativar até <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Desativar até <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Suspensão"</string>
@@ -1144,7 +1144,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Configurações"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brilho automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar para ativar"</string>
-    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Exibição de ambiente"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Visualização na tela"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Sempre ativado / Aumento do uso da bateria"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Novas notificações"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Quando mostrar"</string>
@@ -1154,43 +1154,43 @@
     <string name="doze_always_on_summary" msgid="6978257596231155345">"Mostrar horário, ícones de notificação e outras informações. Aumento do uso da bateria."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamanho da fonte"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Tornar o texto maior ou menor"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"Bloqueio do SIM"</string>
-    <string name="sim_lock_settings_category" msgid="6242052161214271091">"Bloqueio do cartão SIM"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"Bloqueio do chip"</string>
+    <string name="sim_lock_settings_category" msgid="6242052161214271091">"Bloqueio do chip"</string>
     <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"Desativado"</string>
     <string name="sim_lock_settings_summary_on" msgid="39103355956342985">"Bloqueado"</string>
-    <string name="sim_lock_settings_title" msgid="9018585580955414596">"Bloqueio do cartão SIM"</string>
-    <string name="sim_pin_toggle" msgid="1742123478029451888">"Bloquear cartão SIM"</string>
+    <string name="sim_lock_settings_title" msgid="9018585580955414596">"Bloqueio do chip"</string>
+    <string name="sim_pin_toggle" msgid="1742123478029451888">"Bloquear chip"</string>
     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Exigir PIN para usar o tablet"</string>
     <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Exigir PIN para usar o telefone"</string>
     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Exigir PIN para usar o tablet"</string>
     <string name="sim_lock_off" product="default" msgid="258981978215428916">"Exigir PIN para usar o telefone"</string>
-    <string name="sim_pin_change" msgid="6311414184279932368">"Alterar PIN do SIM"</string>
-    <string name="sim_enter_pin" msgid="6608715137008508432">"PIN do SIM"</string>
-    <string name="sim_enable_sim_lock" msgid="4517742794997166918">"Bloquear cartão SIM"</string>
-    <string name="sim_disable_sim_lock" msgid="7664729528754784824">"Desbloquear o cartão SIM"</string>
-    <string name="sim_enter_old" msgid="6074196344494634348">"PIN do SIM antigo"</string>
-    <string name="sim_enter_new" msgid="8742727032729243562">"Novo PIN do SIM"</string>
+    <string name="sim_pin_change" msgid="6311414184279932368">"Alterar PIN do chip"</string>
+    <string name="sim_enter_pin" msgid="6608715137008508432">"PIN do chip"</string>
+    <string name="sim_enable_sim_lock" msgid="4517742794997166918">"Bloquear chip"</string>
+    <string name="sim_disable_sim_lock" msgid="7664729528754784824">"Desbloquear o chip"</string>
+    <string name="sim_enter_old" msgid="6074196344494634348">"PIN do chip antigo"</string>
+    <string name="sim_enter_new" msgid="8742727032729243562">"Novo PIN do chip"</string>
     <string name="sim_reenter_new" msgid="6523819386793546888">"Digitar novo PIN novamente"</string>
-    <string name="sim_change_pin" msgid="7328607264898359112">"PIN do SIM"</string>
+    <string name="sim_change_pin" msgid="7328607264898359112">"PIN do chip"</string>
     <string name="sim_bad_pin" msgid="2345230873496357977">"PIN incorreto"</string>
     <string name="sim_pins_dont_match" msgid="1695021563878890574">"Os PINs não correspondem"</string>
     <string name="sim_change_failed" msgid="3602072380172511475">"Não é possível alterar o PIN.\nPIN possivelmente incorreto."</string>
-    <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN do SIM alterado"</string>
-    <string name="sim_lock_failed" msgid="2489611099235575984">"Não é possível alterar o estado de bloqueio do cartão SIM.\nPIN possivelmente incorreto."</string>
+    <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN do chip alterado"</string>
+    <string name="sim_lock_failed" msgid="2489611099235575984">"Não é possível alterar o estado de bloqueio do chip.\nPIN possivelmente incorreto."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Cancelar"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Vários SIMs encontrados"</string>
-    <string name="sim_multi_sims_summary" msgid="2698176447067691396">"Escolha o SIM preferencial para dados móveis."</string>
-    <string name="sim_change_data_title" msgid="294357201685244532">"Alterar SIM de dados?"</string>
+    <string name="sim_multi_sims_summary" msgid="2698176447067691396">"Escolha o chip preferencial para dados móveis."</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"Alterar Chip de dados?"</string>
     <string name="sim_change_data_message" msgid="5854582807996717811">"Usar <xliff:g id="NEW_SIM">%1$s</xliff:g> em vez de <xliff:g id="OLD_SIM">%2$s</xliff:g> para dados móveis?"</string>
-    <string name="sim_preferred_title" msgid="5567909634636045268">"Atualiz. cartão SIM preferido?"</string>
-    <string name="sim_preferred_message" msgid="8466930554330635780">"O <xliff:g id="NEW_SIM">%1$s</xliff:g> é o único SIM no seu dispositivo. Quer usá-lo para dados móveis, chamadas e mensagens SMS?"</string>
-    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Código PIN do SIM incorreto. Entre em contato com a operadora para desbloquear o dispositivo."</string>
+    <string name="sim_preferred_title" msgid="5567909634636045268">"Atualiz. chip preferido?"</string>
+    <string name="sim_preferred_message" msgid="8466930554330635780">"O <xliff:g id="NEW_SIM">%1$s</xliff:g> é o único chip no seu dispositivo. Quer usá-lo para dados móveis, chamadas e mensagens SMS?"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Código PIN do chip incorreto. Entre em contato com a operadora para desbloquear o dispositivo."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
-      <item quantity="one">Código PIN do SIM incorreto. Tentativas restantes: <xliff:g id="NUMBER_1">%d</xliff:g>.</item>
-      <item quantity="other">Código PIN do SIM incorreto. Tentativas restantes: <xliff:g id="NUMBER_1">%d</xliff:g>.</item>
+      <item quantity="one">Código PIN do chip incorreto. Tentativas restantes: <xliff:g id="NUMBER_1">%d</xliff:g>.</item>
+      <item quantity="other">Código PIN do chip incorreto. Tentativas restantes: <xliff:g id="NUMBER_1">%d</xliff:g>.</item>
     </plurals>
-    <string name="pin_failed" msgid="1848423634948587645">"Falha na operação de PIN do SIM."</string>
+    <string name="pin_failed" msgid="1848423634948587645">"Falha na operação de PIN do chip."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Status do tablet"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Status do telefone"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Atualizações do sistema"</string>
@@ -1221,8 +1221,8 @@
     <string name="status_number" product="default" msgid="5948892105546651296">"Número de telefone"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (slot para SIM %1$d)"</string>
     <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"Número de tel. (slot SIM %1$d)"</string>
-    <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"MDN no SIM"</string>
-    <string name="status_number_sim_status" product="default" msgid="9123351360569466330">"Número de telefone no SIM"</string>
+    <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"MDN no chip"</string>
+    <string name="status_number_sim_status" product="default" msgid="9123351360569466330">"Número de telefone no chip"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="1007470446618081441">"Versão do PRL"</string>
@@ -1524,9 +1524,9 @@
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Alterar o Assistente de Wi-Fi?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Usar <xliff:g id="NEW_APP">%1$s</xliff:g> em vez de <xliff:g id="CURRENT_APP">%2$s</xliff:g> para gerenciar suas conexões de rede?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Usar <xliff:g id="NEW_APP">%s</xliff:g> para gerenciar suas conexões de rede?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operadora do SIM desconhecida"</string>
+    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operadora do chip desconhecida"</string>
     <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"<xliff:g id="OPERATOR">%1$s</xliff:g> não tem um website de aprovisionamento conhecido"</string>
-    <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insira o cartão SIM e reinicie"</string>
+    <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insira o chip e reinicie"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Conecte-se à Internet"</string>
     <string name="location_title" msgid="1029961368397484576">"Meu Local"</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Local do perfil de trabalho"</string>
@@ -1957,7 +1957,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Texto em alto contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Atual. autom. da ampliação da tela"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Atualiz. ampliação da tela em transições de aplic."</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Botão de ligar encerra a chamada"</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Botão liga/desliga encerra chamadas"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Ponteiro do mouse grande"</string>
     <string name="accessibility_disable_animations" msgid="5876035711526394795">"Remover animações"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Áudio mono"</string>
@@ -2199,9 +2199,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"Esse app poderá usar a bateria em segundo plano. É possível que sua bateria acabe antes do esperado."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Remover"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"Cancelar"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Seus apps estão consumindo uma quantidade normal de bateria. Se eles consumirem muita bateria, serão sugeridas ações no smartphone.\n\nSe a bateria estiver acabando, você poderá ativar a Economia de bateria."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Seus apps estão consumindo uma quantidade normal de bateria. Se eles consumirem muita bateria, serão sugeridas ações no tablet.\n\nSe a bateria estiver acabando, você poderá ativar a Economia de bateria."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Seus apps estão consumindo uma quantidade normal de bateria. Se eles consumirem muita bateria, serão sugeridas ações no dispositivo.\n\nSe a bateria estiver acabando, você poderá ativar a Economia de bateria."</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Seus apps estão consumindo volume normal de bateria. Se o consumo for excessivo, algumas ações serão sugeridas no smartphone.\n\nSe a bateria estiver acabando, você poderá ativar o recurso Economia de bateria."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Seus apps estão consumindo volume normal de bateria. Se o consumo for excessivo, algumas ações serão sugeridas no tablet.\n\nSe a bateria estiver acabando, você poderá ativar o recurso Economia de bateria."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Seus apps estão consumindo volume normal de bateria. Se o consumo for excessivo, algumas ações serão sugeridas no dispositivo.\n\nSe a bateria estiver acabando, você poderá ativar o recurso Economia de bateria."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Gerenciador de bateria"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Gerenciar apps automaticamente"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"Limitar bateria para os apps que você não usa com frequência"</string>
@@ -2377,7 +2377,7 @@
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Serviços de entrada de texto por voz"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Hotword completa e interação"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Conversão simples de fala em texto"</string>
-    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Este serviço de entrada por voz poderá executar monitoramento por voz sempre ativado e apps com o recurso de controle por voz em seu nome. Ele está incluído no app <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Quer ativar o uso deste serviço?"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Este serviço de entrada por voz poderá executar monitoramento por voz sempre ativado e apps com o recurso de comando de voz em seu nome. Ele está incluído no app <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Quer ativar o uso deste serviço?"</string>
     <string name="tts_engine_preference_title" msgid="1578826947311494239">"Mecanismo preferencial"</string>
     <string name="tts_engine_settings_title" msgid="6886964122861384818">"Configurações do mecanismo"</string>
     <string name="tts_sliders_title" msgid="992059150784095263">"Taxa e tom da fala"</string>
@@ -2587,7 +2587,7 @@
     <string name="data_usage_menu_hide_ethernet" msgid="3326702187179943681">"Ocultar uso da ethernet"</string>
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"Restrições de rede"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Sincronizar dados automaticamente"</string>
-    <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Cartões SIM"</string>
+    <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Chips"</string>
     <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"Redes móveis"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"Pausa no limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincron. dados automaticamente"</string>
@@ -2875,7 +2875,7 @@
     <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"Use dados em LTE para melhorar recursos de voz e comunicações (recomendado)"</string>
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Tipo de rede preferencial"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (recomendado)"</string>
-    <string name="work_sim_title" msgid="4843322164662606891">"SIM de trabalho"</string>
+    <string name="work_sim_title" msgid="4843322164662606891">"Chip de trabalho"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Acesso a apps e conteúdo"</string>
     <string name="user_rename" msgid="8523499513614655279">"RENOMEAR"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Definir restrições do app"</string>
@@ -2899,46 +2899,46 @@
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Escolher foto da Galeria"</string>
     <string name="user_image_photo_selector" msgid="5492565707299454873">"Selecionar foto"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
-    <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Cartões SIM"</string>
-    <string name="sim_settings_title" msgid="6822745211458959756">"Cartões SIM"</string>
+    <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Chips"</string>
+    <string name="sim_settings_title" msgid="6822745211458959756">"Chips"</string>
     <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
-    <string name="sim_cards_changed_message" msgid="7900721153345139783">"Os cartões SIM foram alterados"</string>
+    <string name="sim_cards_changed_message" msgid="7900721153345139783">"Os chips foram alterados"</string>
     <string name="sim_cards_changed_message_summary" msgid="8258058274989383204">"Toque para configurar atividades"</string>
     <string name="sim_cellular_data_unavailable" msgid="9109302537004566098">"Os dados móveis estão indisponíveis"</string>
-    <string name="sim_cellular_data_unavailable_summary" msgid="5416535001368135327">"Toque para selecionar um SIM de dados"</string>
+    <string name="sim_cellular_data_unavailable_summary" msgid="5416535001368135327">"Toque para selecionar um chip de dados"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Sempre usar esta opção para chamadas"</string>
-    <string name="select_sim_for_data" msgid="2366081042162853044">"Selecionar um SIM de dados"</string>
-    <string name="data_switch_started" msgid="2040761479817166311">"Trocando SIM de dados. Isso pode demorar um pouco..."</string>
+    <string name="select_sim_for_data" msgid="2366081042162853044">"Selecionar um chip de dados"</string>
+    <string name="data_switch_started" msgid="2040761479817166311">"Trocando chip de dados. Isso pode demorar um pouco..."</string>
     <string name="select_sim_for_calls" msgid="3503094771801109334">"Ligar com"</string>
-    <string name="sim_select_card" msgid="211285163525563293">"Selecionar um cartão SIM"</string>
-    <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <string name="sim_slot_empty" msgid="8964505511911854688">"SIM vazio"</string>
-    <string name="sim_editor_name" msgid="1722945976676142029">"Nome do SIM"</string>
-    <string name="sim_name_hint" msgid="7038643345238968930">"Inserir nome do SIM"</string>
-    <string name="sim_editor_title" msgid="4034301817366627870">"Slot para SIM %1$d"</string>
+    <string name="sim_select_card" msgid="211285163525563293">"Selecionar um chip"</string>
+    <string name="sim_card_number_title" msgid="7845379943474336488">"Chip <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
+    <string name="sim_slot_empty" msgid="8964505511911854688">"Chip vazio"</string>
+    <string name="sim_editor_name" msgid="1722945976676142029">"Nome do chip"</string>
+    <string name="sim_name_hint" msgid="7038643345238968930">"Inserir nome do chip"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"Slot para chip %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operadora"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Número"</string>
-    <string name="sim_editor_color" msgid="2542605938562414355">"Cor do SIM"</string>
-    <string name="sim_card_select_title" msgid="6668492557519243456">"Selecionar cartão SIM"</string>
+    <string name="sim_editor_color" msgid="2542605938562414355">"Cor do chip"</string>
+    <string name="sim_card_select_title" msgid="6668492557519243456">"Selecionar chip"</string>
     <string name="color_orange" msgid="4417567658855022517">"Laranja"</string>
     <string name="color_purple" msgid="3888532466427762504">"Roxo"</string>
-    <string name="sim_no_inserted_msg" msgid="210316755353227087">"Nenhum cartão SIM inserido"</string>
-    <string name="sim_status_title" msgid="6744870675182447160">"Status do SIM"</string>
-    <string name="sim_status_title_sim_slot" msgid="5725659316463979194">"Status do SIM (slot para SIM %1$d)"</string>
-    <string name="sim_call_back_title" msgid="5181549885999280334">"Retornar chamada com o SIM padrão"</string>
-    <string name="sim_outgoing_call_title" msgid="1019763076116874255">"SIM para chamadas de saída"</string>
+    <string name="sim_no_inserted_msg" msgid="210316755353227087">"Nenhum chip inserido"</string>
+    <string name="sim_status_title" msgid="6744870675182447160">"Status do chip"</string>
+    <string name="sim_status_title_sim_slot" msgid="5725659316463979194">"Status do chip (slot para SIM %1$d)"</string>
+    <string name="sim_call_back_title" msgid="5181549885999280334">"Retornar chamada com o chip padrão"</string>
+    <string name="sim_outgoing_call_title" msgid="1019763076116874255">"Chip para fazer chamadas"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Outras configurações de chamada"</string>
     <string name="preferred_network_offload_title" msgid="1605829724169550275">"Rede pref. p/ descarreg."</string>
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Des. transm. nome de rede"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"A opção \"Des. transm. nome de rede\" protege contra o acesso de terceiros a suas informações de rede."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"A desativação da transmissão de nome de rede impedirá uma conexão automática a redes ocultas."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="6272913297433198340">"Alteração em cartões SIM."</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"Alteração em chips."</string>
     <string name="sim_notification_summary" msgid="8858043655706669772">"Toque para configurar"</string>
-    <string name="sim_pref_divider" msgid="6778907671867621874">"SIM preferido para"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"Chip preferido para"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Perguntar sempre"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Seleção necessária"</string>
-    <string name="sim_selection_channel_title" msgid="2760909074892782589">"Seleção de SIM"</string>
+    <string name="sim_selection_channel_title" msgid="2760909074892782589">"Seleção de chip"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Configurações"</string>
     <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
       <item quantity="one">Mostrar %d item oculto</item>
@@ -3053,7 +3053,7 @@
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Som de alarme padrão"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Também vibrar para chamadas"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Outros sons"</string>
-    <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tons do teclado"</string>
+    <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tons de discagem"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sons de bloqueio de tela"</string>
     <string name="charging_sounds_title" msgid="1132272552057504251">"Sons de carga"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"Sons da dock"</string>
@@ -3161,7 +3161,7 @@
     <string name="zen_sound_all_muted" msgid="4850363350480968114">"Som desativado"</string>
     <string name="zen_sound_none_muted" msgid="3938508512103612527">"Não silenciado"</string>
     <string name="zen_sound_one_allowed" msgid="8447313454438932276">"Som desativado, mas permitido para <xliff:g id="SOUND_TYPE">%1$s</xliff:g>"</string>
-    <string name="zen_sound_two_allowed" msgid="980491120444358550">"Som desativado, mas permitido para <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> e <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
+    <string name="zen_sound_two_allowed" msgid="980491120444358550">"Som desativado, mas liberado para <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> e <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"Som desativado, mas permitido para <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> e <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"Mensagens, eventos e lembretes"</string>
     <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"Quando o \"Não perturbe\" estiver ativado, mensagens, lembretes e eventos serão silenciados, com exceção dos itens permitidos por você acima. É possível ajustar as configurações de mensagens para permitir que seus amigos, familiares ou outros contatos falem com você."</string>
@@ -3188,7 +3188,7 @@
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Outros sons e vibrações"</string>
     <string name="configure_notification_settings" msgid="7616737397127242615">"Notificações"</string>
     <string name="recent_notifications" msgid="5660639387705060156">"Enviadas recentemente"</string>
-    <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Ver todas enviadas nos últimos sete dias"</string>
+    <string name="recent_notifications_see_all_title" msgid="8572160812124540326">"Ver todas enviadas nos últimos 7 dias"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avançado"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notificações de trabalho"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Permitir pontos de notificação"</string>
@@ -3634,8 +3634,8 @@
     <string name="running_frequency" msgid="6622624669948277693">"Frequência"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Uso máximo"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"Nenhum dado usado"</string>
-    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Permitir acesso a \"Não perturbe\" para <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"O app poderá ativar/desativar \"Não perturbe\" e fazer alterações nas configurações relacionadas."</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Permitir que <xliff:g id="APP">%1$s</xliff:g> acesse o recurso \"Não perturbe\"?"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"O app poderá ativar/desativar o recurso \"Não perturbe\" e fazer alterações nas configurações relacionadas."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"Deve permanecer ativado, pois o acesso a notificações está ativado"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"Revogar acesso a \"Não perturbe\" para <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"Todas as regras \"Não perturbe\" criadas por esse app serão removidas."</string>
@@ -3755,7 +3755,7 @@
     <string name="condition_device_vibrate_title" product="default" msgid="1087633233379991925">"O smartphone está configurado para vibrar"</string>
     <string name="condition_device_vibrate_summary" product="tablet" msgid="433514444618164607">"Chamadas e notificações farão o dispositivo vibrar"</string>
     <string name="condition_device_vibrate_summary" product="default" msgid="5877034997839162763">"Chamadas e notificações farão o smartphone vibrar"</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Definir programação do Modo noturno"</string>
+    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Definir horário do Modo noturno"</string>
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"Tinge a tela automaticamente todas as noites"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"O modo noturno está ativado"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"A cor da tela muda para âmbar. Isso pode ajudar você a adormecer."</string>
@@ -3889,9 +3889,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"nenhum"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"O objeto de classificação está ausente."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"O objeto de classificação não contém essa chave."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simular uma tela com corte"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Corte da tela"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"corte de tela, entalhe"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Nenhuma"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Padrão do dispositivo"</string>
     <string name="special_access" msgid="3458780842491881155">"Acesso especial a apps"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> app pode usar dados irrestritos</item>
@@ -4053,7 +4053,7 @@
       <item quantity="one">App de câmera</item>
       <item quantity="other">Apps de câmera</item>
     </plurals>
-    <string name="default_calendar_app_title" msgid="3545972964391065220">"App Agenda"</string>
+    <string name="default_calendar_app_title" msgid="3545972964391065220">"App Calendário"</string>
     <string name="default_contacts_app_title" msgid="3497370557378660098">"App Contatos"</string>
     <plurals name="default_email_app_title" formatted="false" msgid="42826975161049245">
       <item quantity="one">App de cliente de e-mail</item>
@@ -4152,5 +4152,4 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalhes da rede"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"O nome do seu dispositivo está visível para os apps no seu smartphone. Ele também pode ser visto por outras pessoas quando você se conecta a dispositivos Bluetooth ou configura um ponto de acesso Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispositivos"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Padrão"</string>
 </resources>
