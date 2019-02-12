@@ -27,6 +27,7 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 import android.net.Uri;
 
+import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
 
 import org.junit.Before;
@@ -130,6 +131,14 @@ public class ContextualCardLoaderTest {
                 threeCards);
 
         assertThat(result).hasSize(2);
+    }
+
+    @Test
+    public void loadInBackground_legacyMode_shouldReturnNothing() {
+        assertThat(mContext.getResources().getBoolean(R.bool.config_use_legacy_suggestion))
+                .isTrue();
+
+        assertThat(mContextualCardLoader.loadInBackground()).isEmpty();
     }
 
     private ContextualCard getContextualCard(String sliceUri) {
