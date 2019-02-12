@@ -63,7 +63,7 @@ public class SliceBuilderUtilsTest {
     private final String SCREEN_TITLE = "screen title";
     private final String KEYWORDS = "a, b, c";
     private final String FRAGMENT_NAME = "fragment name";
-    private final int ICON = R.drawable.ic_settings;
+    private final int ICON = R.drawable.ic_settings_accent;
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final Class TOGGLE_CONTROLLER = FakeToggleController.class;
     private final Class SLIDER_CONTROLLER = FakeSliderController.class;
@@ -431,7 +431,7 @@ public class SliceBuilderUtilsTest {
     @Test
     public void buildIntentSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings).toIcon().getResId();
+                R.drawable.ic_settings_accent).toIcon().getResId();
         final SliceData sliceData = getDummyData(CONTEXT_CONTROLLER, SliceData.SliceType.INTENT,
                 0x0);
 
@@ -446,7 +446,7 @@ public class SliceBuilderUtilsTest {
     @Test
     public void buildDisabledDependentSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings).toIcon().getResId();
+                R.drawable.ic_settings_accent).toIcon().getResId();
         final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
                 SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE, 0 /* icon */,
                 IS_DYNAMIC_SUMMARY_ALLOWED, null /* unavailableSliceSubtitle */);
@@ -465,7 +465,7 @@ public class SliceBuilderUtilsTest {
     @Test
     public void buildToggleSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings).toIcon().getResId();
+                R.drawable.ic_settings_accent).toIcon().getResId();
         final SliceData dummyData = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
                 0x0);
 
@@ -480,7 +480,7 @@ public class SliceBuilderUtilsTest {
     @Test
     public void buildSliderSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings).toIcon().getResId();
+                R.drawable.ic_settings_accent).toIcon().getResId();
         final SliceData data = getDummyData(SLIDER_CONTROLLER, SliceData.SliceType.SLIDER, 0x0);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
@@ -493,7 +493,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getSafeIcon_replacesEmptyIconWithSettingsIcon() {
-        final int settingsIcon = R.drawable.ic_settings;
+        final int settingsIcon = R.drawable.ic_settings_accent;
         final int zeroIcon = 0x0;
         final SliceData data = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
                 zeroIcon);
@@ -507,7 +507,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getSafeIcon_invalidResource_shouldFallbackToSettingsIcon() {
-        final int settingsIcon = R.drawable.ic_settings;
+        final int settingsIcon = R.drawable.ic_settings_accent;
         final int badIcon = 0x12345678;
         final SliceData data = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
                 badIcon);

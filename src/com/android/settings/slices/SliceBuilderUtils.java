@@ -449,14 +449,14 @@ public class SliceBuilderUtils {
         int iconResource = data.getIconResource();
 
         if (iconResource == 0) {
-            iconResource = R.drawable.ic_settings;
+            iconResource = R.drawable.ic_settings_accent;
         }
         try {
             return IconCompat.createWithResource(context, iconResource);
         } catch (Exception e) {
             Log.w(TAG, "Falling back to settings icon because there is an error getting slice icon "
                     + data.getUri(), e);
-            return IconCompat.createWithResource(context, R.drawable.ic_settings);
+            return IconCompat.createWithResource(context, R.drawable.ic_settings_accent);
         }
     }
 }
