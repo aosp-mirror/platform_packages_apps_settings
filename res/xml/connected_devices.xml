@@ -20,6 +20,12 @@
     android:key="connected_devices_screen"
     android:title="@string/connected_devices_dashboard_title">
 
+    <com.android.settings.slices.SlicePreference
+        android:key="bt_nearby_slice"
+        android:title="@string/summary_placeholder"
+        settings:controller="com.android.settings.slices.SlicePreferenceController"
+        settings:allowDividerBelow="true"/>
+
     <PreferenceCategory
         android:key="available_device_list"
         android:title="@string/connected_device_available_media_title"
