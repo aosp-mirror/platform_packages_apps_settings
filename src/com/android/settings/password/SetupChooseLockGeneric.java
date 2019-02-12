@@ -16,7 +16,7 @@
 
 package com.android.settings.password;
 
-import static android.Manifest.permission.GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY;
+import static android.Manifest.permission.REQUEST_SCREEN_LOCK_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
@@ -82,10 +82,10 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         if(getIntent().hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)) {
             IBinder activityToken = getActivityToken();
             boolean hasPermission = PasswordUtils.isCallingAppPermitted(
-                    this, activityToken, GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY);
+                    this, activityToken, REQUEST_SCREEN_LOCK_COMPLEXITY);
             if (!hasPermission) {
                 PasswordUtils.crashCallingApplication(activityToken,
-                        "Must have permission " + GET_AND_REQUEST_SCREEN_LOCK_COMPLEXITY
+                        "Must have permission " + REQUEST_SCREEN_LOCK_COMPLEXITY
                                 + " to use extra " + EXTRA_PASSWORD_COMPLEXITY);
                 finish();
                 return;
