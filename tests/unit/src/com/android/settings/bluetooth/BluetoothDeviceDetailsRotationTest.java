@@ -70,16 +70,16 @@ public class BluetoothDeviceDetailsRotationTest {
 
         BluetoothDeviceDetailsFragment.sTestDataFactory =
                 new BluetoothDeviceDetailsFragment.TestDataFactory() {
-            @Override
-            public CachedBluetoothDevice getDevice(String deviceAddress) {
-                return mCachedDevice;
-            }
+                    @Override
+                    public CachedBluetoothDevice getDevice(String deviceAddress) {
+                        return mCachedDevice;
+                    }
 
-            @Override
-            public LocalBluetoothManager getManager(Context context) {
-                return mBluetoothManager;
-            }
-        };
+                    @Override
+                    public LocalBluetoothManager getManager(Context context) {
+                        return mBluetoothManager;
+                    }
+                };
     }
 
     @Test

@@ -45,7 +45,8 @@ import java.util.List;
  * supports, such as "Phone audio", "Media audio", "Contact sharing", etc.
  */
 public class BluetoothDetailsProfilesController extends BluetoothDetailsController
-        implements Preference.OnPreferenceClickListener {
+        implements Preference.OnPreferenceClickListener,
+        LocalBluetoothProfileManager.ServiceListener {
     private static final String KEY_PROFILES_GROUP = "bluetooth_profiles";
 
     @VisibleForTesting
@@ -87,6 +88,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         pref.setKey(profile.toString());
         pref.setTitle(profile.getNameResource(mCachedDevice.getDevice()));
         pref.setOnPreferenceClickListener(this);
+        pref.setOrder(profile.getOrdinal());
         return pref;
     }
 
@@ -221,7 +223,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         }
         BluetoothDevice device = mCachedDevice.getDevice();
         A2dpProfile a2dp = (A2dpProfile) profile;
-        if (a2dp.supportsHighQualityAudio(device)) {
+        if (a2dp.isProfileReady() && a2dp.supportsHighQualityAudio(device)) {
             SwitchPreference highQualityAudioPref = new SwitchPreference(
                     mProfilesContainer.getContext());
             highQualityAudioPref.setKey(HIGH_QUALITY_AUDIO_PREF_TAG);
@@ -235,6 +237,28 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mProfileManager.removeServiceListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mProfileManager.addServiceListener(this);
+    }
+
+    @Override
+    public void onServiceConnected() {
+        refresh();
+    }
+
+    @Override
+    public void onServiceDisconnected() {
+        refresh();
+    }
+
     /**
      * Refreshes the state of the switches for all profiles, possibly adding or removing switches as
      * needed.
@@ -242,7 +266,10 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     @Override
     protected void refresh() {
         for (LocalBluetoothProfile profile : getProfiles()) {
-            SwitchPreference pref = (SwitchPreference) mProfilesContainer.findPreference(
+            if (!profile.isProfileReady()) {
+                continue;
+            }
+            SwitchPreference pref = mProfilesContainer.findPreference(
                     profile.toString());
             if (pref == null) {
                 pref = createProfilePreference(mProfilesContainer.getContext(), profile);
@@ -252,7 +279,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             refreshProfilePreference(pref, profile);
         }
         for (LocalBluetoothProfile removedProfile : mCachedDevice.getRemovedProfiles()) {
-            SwitchPreference pref = (SwitchPreference) mProfilesContainer.findPreference(
+            final SwitchPreference pref = mProfilesContainer.findPreference(
                     removedProfile.toString());
             if (pref != null) {
                 mProfilesContainer.removePreference(pref);
