@@ -33,11 +33,13 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkSelectSettings;
+import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 
 /**
  * Preference controller for "Open network select"
  */
-public class OpenNetworkSelectPagePreferenceController extends BasePreferenceController implements
+public class OpenNetworkSelectPagePreferenceController extends
+        TelephonyBasePreferenceController implements
         AutoSelectPreferenceController.OnNetworkSelectModeListener {
 
     private int mSubId;
@@ -51,8 +53,8 @@ public class OpenNetworkSelectPagePreferenceController extends BasePreferenceCon
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, mSubId)
+    public int getAvailabilityStatus(int subId) {
+        return MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, subId)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }

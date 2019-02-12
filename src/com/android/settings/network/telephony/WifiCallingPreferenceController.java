@@ -67,7 +67,7 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     public int getAvailabilityStatus(int subId) {
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && MobileNetworkUtils.isWifiCallingEnabled(mContext,
-                SubscriptionManager.getPhoneId(mSubId))
+                SubscriptionManager.getPhoneId(subId))
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

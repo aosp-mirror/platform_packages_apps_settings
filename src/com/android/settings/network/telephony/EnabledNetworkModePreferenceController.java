@@ -54,6 +54,8 @@ public class EnabledNetworkModePreferenceController extends
     public int getAvailabilityStatus(int subId) {
         boolean visible;
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final TelephonyManager telephonyManager = TelephonyManager
+                .from(mContext).createForSubscriptionId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
         } else if (carrierConfig == null) {
@@ -63,8 +65,8 @@ public class EnabledNetworkModePreferenceController extends
             visible = false;
         } else if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)
-                && !mTelephonyManager.getServiceState().getRoaming()
-                && mTelephonyManager.getServiceState().getDataRegState()
+                && !telephonyManager.getServiceState().getRoaming()
+                && telephonyManager.getServiceState().getDataRegState()
                 == ServiceState.STATE_IN_SERVICE) {
             visible = false;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {

@@ -30,7 +30,6 @@ import androidx.preference.Preference;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 
 /**
  * Preference controller for "Preferred network mode"
@@ -51,6 +50,8 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     @Override
     public int getAvailabilityStatus(int subId) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final TelephonyManager telephonyManager = TelephonyManager
+                .from(mContext).createForSubscriptionId(subId);
         boolean visible;
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
@@ -61,8 +62,8 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
             visible = false;
         } else if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)
-                && !mTelephonyManager.getServiceState().getRoaming()
-                && mTelephonyManager.getServiceState().getDataRegState()
+                && !telephonyManager.getServiceState().getRoaming()
+                && telephonyManager.getServiceState().getDataRegState()
                 == ServiceState.STATE_IN_SERVICE) {
             visible = false;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {

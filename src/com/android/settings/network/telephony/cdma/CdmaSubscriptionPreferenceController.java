@@ -44,8 +44,8 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return MobileNetworkUtils.isCdmaOptions(mContext, mSubId) && deviceSupportsNvAndRuim()
+    public int getAvailabilityStatus(int subId) {
+        return MobileNetworkUtils.isCdmaOptions(mContext, subId) && deviceSupportsNvAndRuim()
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }

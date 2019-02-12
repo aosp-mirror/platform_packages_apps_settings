@@ -29,9 +29,9 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkSelectSettings;
+import com.android.settings.network.telephony.TelephonyTogglePreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * Preference controller for "Auto Select Network"
  */
-public class AutoSelectPreferenceController extends TogglePreferenceController {
+public class AutoSelectPreferenceController extends TelephonyTogglePreferenceController {
 
     private int mSubId;
     private TelephonyManager mTelephonyManager;
@@ -54,8 +54,8 @@ public class AutoSelectPreferenceController extends TogglePreferenceController {
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext,mSubId)
+    public int getAvailabilityStatus(int subId) {
+        return MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, subId)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
