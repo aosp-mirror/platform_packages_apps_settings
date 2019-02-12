@@ -2991,7 +2991,7 @@
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.BottomDialog"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />
@@ -3021,16 +3021,7 @@
         <provider android:name=".slices.SettingsSliceProvider"
                   android:authorities="com.android.settings.slices;android.settings.slices"
                   android:exported="true"
-                  android:grantUriPermissions="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.app.slice.category.SLICE" />
-                <data android:scheme="settings"
-                      android:host="com.android.settings.slices" />
-            </intent-filter>
-        </provider>
+                  android:grantUriPermissions="true" />
 
         <receiver
             android:name=".slices.SliceBroadcastReceiver"

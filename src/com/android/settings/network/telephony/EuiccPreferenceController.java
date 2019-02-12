@@ -18,31 +18,26 @@ package com.android.settings.network.telephony;
 
 import android.content.Context;
 import android.content.Intent;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
-import com.android.settings.core.BasePreferenceController;
-
 /**
  * Preference controller for "Euicc preference"
  */
-public class EuiccPreferenceController extends BasePreferenceController {
+public class EuiccPreferenceController extends TelephonyBasePreferenceController {
 
     private TelephonyManager mTelephonyManager;
-    private int mSubId;
 
     public EuiccPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
-    public int getAvailabilityStatus() {
+    public int getAvailabilityStatus(int subId) {
         return MobileNetworkUtils.showEuiccSettings(mContext)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;

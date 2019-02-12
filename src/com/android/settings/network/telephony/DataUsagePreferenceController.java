@@ -28,27 +28,24 @@ import android.text.format.Formatter;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.net.DataUsageController;
 
 /**
  * Preference controller for "Data usage"
  */
-public class DataUsagePreferenceController extends BasePreferenceController {
+public class DataUsagePreferenceController extends TelephonyBasePreferenceController {
 
     private NetworkTemplate mTemplate;
     private DataUsageController.DataUsageInfo mDataUsageInfo;
     private Intent mIntent;
-    private int mSubId;
 
     public DataUsagePreferenceController(Context context, String key) {
         super(context, key);
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+    public int getAvailabilityStatus(int subId) {
+        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
     }

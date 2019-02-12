@@ -35,38 +35,37 @@ import com.android.settings.core.BasePreferenceController;
 /**
  * Preference controller for "Preferred network mode"
  */
-public class PreferredNetworkModePreferenceController extends BasePreferenceController implements
-        ListPreference.OnPreferenceChangeListener {
+public class PreferredNetworkModePreferenceController extends TelephonyBasePreferenceController
+        implements ListPreference.OnPreferenceChangeListener {
 
     private CarrierConfigManager mCarrierConfigManager;
     private TelephonyManager mTelephonyManager;
     private PersistableBundle mPersistableBundle;
-    private int mSubId;
     private boolean mIsGlobalCdma;
 
     public PreferredNetworkModePreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
-    public int getAvailabilityStatus() {
+    public int getAvailabilityStatus(int subId) {
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         boolean visible;
-        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
-        } else if (mPersistableBundle == null) {
+        } else if (carrierConfig == null) {
             visible = false;
-        } else if (mPersistableBundle.getBoolean(
+        } else if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)) {
             visible = false;
-        } else if (mPersistableBundle.getBoolean(
+        } else if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)
                 && !mTelephonyManager.getServiceState().getRoaming()
                 && mTelephonyManager.getServiceState().getDataRegState()
                 == ServiceState.STATE_IN_SERVICE) {
             visible = false;
-        } else if (mPersistableBundle.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
+        } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             visible = true;
         } else {
             visible = false;
@@ -100,13 +99,13 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
 
     public void init(int subId) {
         mSubId = subId;
-        mPersistableBundle = mCarrierConfigManager.getConfigForSubId(mSubId);
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
 
         final boolean isLteOnCdma =
                 mTelephonyManager.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
         mIsGlobalCdma = isLteOnCdma
-                && mPersistableBundle.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
+                && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
     }
 
     private int getPreferredNetworkMode() {

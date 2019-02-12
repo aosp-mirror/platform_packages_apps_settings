@@ -42,7 +42,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * Preference controller for "Roaming"
  */
-public class RoamingPreferenceController extends TogglePreferenceController implements
+public class RoamingPreferenceController extends TelephonyTogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
     private static final String DIALOG_TAG = "MobileDataDialog";
@@ -50,7 +50,6 @@ public class RoamingPreferenceController extends TogglePreferenceController impl
     private RestrictedSwitchPreference mSwitchPreference;
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
-    private int mSubId;
     private DataContentObserver mDataContentObserver;
     @VisibleForTesting
     boolean mNeedDialog;
@@ -59,10 +58,8 @@ public class RoamingPreferenceController extends TogglePreferenceController impl
 
     public RoamingPreferenceController(Context context, String key) {
         super(context, key);
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
-        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
@@ -78,12 +75,12 @@ public class RoamingPreferenceController extends TogglePreferenceController impl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSwitchPreference = (RestrictedSwitchPreference) screen.findPreference(getPreferenceKey());
+        mSwitchPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+    public int getAvailabilityStatus(int subId) {
+        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
     }

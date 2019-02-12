@@ -32,7 +32,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.ApnSettings;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -43,12 +42,11 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * Preference controller for "Apn settings"
  */
-public class ApnPreferenceController extends BasePreferenceController implements
+public class ApnPreferenceController extends TelephonyBasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
     @VisibleForTesting
     CarrierConfigManager mCarrierConfigManager;
-    private int mSubId;
     private Preference mPreference;
     private DpcApnEnforcedObserver mDpcApnEnforcedObserver;
 
@@ -59,12 +57,12 @@ public class ApnPreferenceController extends BasePreferenceController implements
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-        final boolean isCdmaApn = MobileNetworkUtils.isCdmaOptions(mContext, mSubId)
+    public int getAvailabilityStatus(int subId) {
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final boolean isCdmaApn = MobileNetworkUtils.isCdmaOptions(mContext, subId)
                 && carrierConfig != null
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_APN_SETTING_CDMA_BOOL);
-        final boolean isGsmApn = MobileNetworkUtils.isGsmOptions(mContext, mSubId)
+        final boolean isGsmApn = MobileNetworkUtils.isGsmOptions(mContext, subId)
                 && carrierConfig != null
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_APN_EXPAND_BOOL);
 

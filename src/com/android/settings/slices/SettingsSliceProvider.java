@@ -21,7 +21,6 @@ import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.StrictMode;
@@ -46,7 +45,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -147,18 +145,6 @@ public class SettingsSliceProvider extends SliceProvider {
         mCustomSliceManager = FeatureFactory.getFactory(
                 getContext()).getSlicesFeatureProvider().getCustomSliceManager(getContext());
         return true;
-    }
-
-    @Override
-    public Uri onMapIntentToUri(Intent intent) {
-        try {
-            return getContext().getSystemService(SliceManager.class).mapIntentToUri(
-                    SliceDeepLinkSpringBoard.parse(
-                            intent.getData(), getContext().getPackageName()));
-        } catch (URISyntaxException e) {
-            Log.e(TAG, "Uri syntax error, can't map intent to uri.", e);
-            return null;
-        }
     }
 
     @Override
@@ -464,8 +450,9 @@ public class SettingsSliceProvider extends SliceProvider {
 
     private List<Uri> getSpecialCaseOemUris() {
         return Arrays.asList(
-                CustomSliceRegistry.ZEN_MODE_SLICE_URI,
-                CustomSliceRegistry.FLASHLIGHT_SLICE_URI
+                CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                CustomSliceRegistry.ZEN_MODE_SLICE_URI
         );
     }
 
