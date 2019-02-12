@@ -31,28 +31,29 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.Utils;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.widget.BarChartInfo;
 import com.android.settingslib.widget.BarChartPreference;
 import com.android.settingslib.widget.BarViewInfo;
-import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 
 public class PermissionBarChartPreferenceController extends BasePreferenceController implements
-        PermissionControllerManager.OnPermissionUsageResultCallback {
+        PermissionControllerManager.OnPermissionUsageResultCallback, LifecycleObserver, OnStart {
 
     private static final String TAG = "BarChartPreferenceCtl";
 
     private PackageManager mPackageManager;
+    private PrivacyDashboardFragment mParent;
     private BarChartPreference mBarChartPreference;
     private List<RuntimePermissionUsageInfo> mOldUsageInfos;
 
@@ -60,6 +61,10 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         super(context, preferenceKey);
         mOldUsageInfos = new ArrayList<>();
         mPackageManager = context.getPackageManager();
+    }
+
+    public void setFragment(PrivacyDashboardFragment fragment) {
+        mParent = fragment;
     }
 
     @Override
@@ -90,7 +95,13 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
     }
 
     @Override
-    public void updateState(Preference preference) {
+    public void onStart() {
+        if (!isAvailable()) {
+            return;
+        }
+
+        mBarChartPreference.updateLoadingState(true /* isLoading */);
+        mParent.setLoadingEnabled(true /* enabled */);
         retrievePermissionUsageData();
     }
 
@@ -104,6 +115,9 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
             mBarChartPreference.setBarViewInfos(createBarViews(usageInfos));
             mOldUsageInfos = usageInfos;
         }
+
+        mBarChartPreference.updateLoadingState(false /* isLoading */);
+        mParent.setLoadingEnabled(false /* enabled */);
     }
 
     private void retrievePermissionUsageData() {
