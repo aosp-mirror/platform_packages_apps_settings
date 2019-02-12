@@ -21,9 +21,6 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -82,17 +79,6 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
     public BluetoothDevicesSlice(Context context) {
         mContext = context;
-    }
-
-    private static Bitmap getBitmapFromVectorDrawable(Drawable VectorDrawable) {
-        final Bitmap bitmap = Bitmap.createBitmap(VectorDrawable.getIntrinsicWidth(),
-                VectorDrawable.getIntrinsicHeight(), Config.ARGB_8888);
-        final Canvas canvas = new Canvas(bitmap);
-
-        VectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        VectorDrawable.draw(canvas);
-
-        return bitmap;
     }
 
     @Override
@@ -234,7 +220,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 .getBtClassDrawableWithDescription(mContext, device);
 
         if (pair.first != null) {
-            return IconCompat.createWithBitmap(getBitmapFromVectorDrawable(pair.first));
+            return IconCompat.createWithBitmap(Utils.drawableToBitmap(pair.first));
         } else {
             return IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);

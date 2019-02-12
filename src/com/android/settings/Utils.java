@@ -959,6 +959,22 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Converts the {@link Drawable} to a {@link Bitmap}.
+     */
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable)drawable).getBitmap();
+        }
+
+        final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    /**
      * Get the {@link Drawable} that represents the app icon
      */
     public static Drawable getBadgedIcon(IconDrawableFactory iconDrawableFactory,
