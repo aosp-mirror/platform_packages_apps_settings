@@ -17,8 +17,8 @@
 package com.android.settings.testutils.shadow;
 
 import android.icu.util.ULocale;
-import android.os.SystemProperties;
 import android.provider.Settings;
+import android.sysprop.DisplayProperties;
 import android.text.TextUtils;
 import android.view.View;
 import java.util.Locale;
@@ -38,7 +38,7 @@ public class ShadowTextUtils {
         return ((locale != null && !locale.equals(Locale.ROOT)
                 && ULocale.forLocale(locale).isRightToLeft())
                 // If forcing into RTL layout mode, return RTL as default
-                || SystemProperties.getBoolean(Settings.Global.DEVELOPMENT_FORCE_RTL, false))
+                || DisplayProperties.debug_force_rtl().orElse(false))
                 ? View.LAYOUT_DIRECTION_RTL
                 : View.LAYOUT_DIRECTION_LTR;
     }
