@@ -19,6 +19,9 @@ package com.android.settings.wifi.dpp;
 import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -30,6 +33,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedActivity;
+
+import java.util.List;
 
 /**
  * To provision "other" device with specified Wi-Fi network.
@@ -78,6 +83,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
     /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE */
     private WifiQrCode mWifiDppQrCode;
+
     /** Secret extra that allows fake networks to show in UI for testing purposes */
     private boolean mIsTest;
 
@@ -89,6 +95,9 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.wifi_dpp_activity);
+        mFragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState != null) {
             String qrCode = savedInstanceState.getString(KEY_QR_CODE);
@@ -103,12 +112,9 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
             mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid,
                     preSharedKey, hiddenSsid, networkId);
+        } else {
+            handleIntent(getIntent());
         }
-
-        setContentView(R.layout.wifi_dpp_activity);
-        mFragmentManager = getSupportFragmentManager();
-
-        handleIntent(getIntent());
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -150,7 +156,13 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                 if (mWifiDppQrCode == null || !isDppSupported) {
                     cancelActivity = true;
                 } else {
-                    showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
+                    final WifiNetworkConfig connectedConfig = getConnectedWifiNetworkConfigOrNull();
+                    if (connectedConfig == null) {
+                        showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
+                    } else {
+                        mWifiNetworkConfig = connectedConfig;
+                        showAddDeviceFragment(/* addToBackStack */ false);
+                    }
                 }
                 break;
             default:
@@ -167,13 +179,18 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiDppQrCodeScannerFragment fragment =
                 (WifiDppQrCodeScannerFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
-        // Avoid to replace the same fragment during configuration change
-        if (fragment != null && fragment.isVisible()) {
-            return;
-        }
 
         if (fragment == null) {
             fragment = new WifiDppQrCodeScannerFragment();
+        } else {
+            if (fragment.isVisible()) {
+                return;
+            }
+
+            // When the fragment in back stack but not on top of the stack, we can simply pop
+            // stack because current fragment transactions are arranged in an order
+            mFragmentManager.popBackStackImmediate();
+            return;
         }
         final FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
@@ -189,12 +206,19 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiDppQrCodeGeneratorFragment fragment =
                 (WifiDppQrCodeGeneratorFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_QR_CODE_GENERATOR);
-        // Avoid to replace the same fragment during configuration change
-        if (fragment != null && fragment.isVisible()) {
+
+        if (fragment == null) {
+            fragment = new WifiDppQrCodeGeneratorFragment();
+        } else {
+            if (fragment.isVisible()) {
+                return;
+            }
+
+            // When the fragment in back stack but not on top of the stack, we can simply pop
+            // stack because current fragment transactions are arranged in an order
+            mFragmentManager.popBackStackImmediate();
             return;
         }
-
-        fragment = new WifiDppQrCodeGeneratorFragment();
         final FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.fragment_container, fragment,
@@ -206,10 +230,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiDppChooseSavedWifiNetworkFragment fragment =
                 (WifiDppChooseSavedWifiNetworkFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_CHOOSE_SAVED_WIFI_NETWORK);
-        // Avoid to replace the same fragment during configuration change
-        if (fragment != null && fragment.isVisible()) {
-            return;
-        }
 
         if (fragment == null) {
             fragment = new WifiDppChooseSavedWifiNetworkFragment();
@@ -218,6 +238,15 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                 bundle.putBoolean(WifiDppUtils.EXTRA_TEST, true);
                 fragment.setArguments(bundle);
             }
+        } else {
+            if (fragment.isVisible()) {
+                return;
+            }
+
+            // When the fragment in back stack but not on top of the stack, we can simply pop
+            // stack because current fragment transactions are arranged in an order
+            mFragmentManager.popBackStackImmediate();
+            return;
         }
         final FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
@@ -234,14 +263,17 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                 (WifiDppAddDeviceFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_ADD_DEVICE);
 
-        // Avoid to replace the same fragment during configuration change
-        if (mFragmentManager.findFragmentByTag(
-                WifiDppUtils.TAG_FRAGMENT_ADD_DEVICE) != null) {
-            return;
-        }
-
         if (fragment == null) {
             fragment = new WifiDppAddDeviceFragment();
+        } else {
+            if (fragment.isVisible()) {
+                return;
+            }
+
+            // When the fragment in back stack but not on top of the stack, we can simply pop
+            // stack because current fragment transactions are arranged in an order
+            mFragmentManager.popBackStackImmediate();
+            return;
         }
         final FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
@@ -358,5 +390,32 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         mWifiNetworkConfig = new WifiNetworkConfig(wifiNetworkConfig);
 
         showAddDeviceFragment(/* addToBackStack */ true);
+    }
+
+    private WifiNetworkConfig getConnectedWifiNetworkConfigOrNull() {
+        final WifiManager wifiManager = getSystemService(WifiManager.class);
+        if (!wifiManager.isWifiEnabled()) {
+            return null;
+        }
+
+        final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
+        if (connectionInfo == null) {
+            return null;
+        }
+
+        final int connectionNetworkId = connectionInfo.getNetworkId();
+        final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
+        for (WifiConfiguration wifiConfiguration : configs) {
+            if (wifiConfiguration.networkId == connectionNetworkId) {
+                return WifiNetworkConfig.getValidConfigOrNull(
+                    WifiDppUtils.getSecurityString(wifiConfiguration),
+                    wifiConfiguration.getPrintableSsid(),
+                    wifiConfiguration.preSharedKey,
+                    /* hiddenSsid */ false,
+                    wifiConfiguration.networkId);
+            }
+        }
+
+        return null;
     }
 }
