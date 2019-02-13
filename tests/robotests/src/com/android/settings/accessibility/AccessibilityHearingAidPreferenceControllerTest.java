@@ -181,6 +181,15 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         verify(mContext, never()).unregisterReceiver(any());
     }
 
+    @Test
+    public void getConnectedHearingAidDevice_doNotReturnSubDevice() {
+        when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+        when(mLocalBluetoothManager.getCachedDeviceManager().isSubDevice(mBluetoothDevice))
+                .thenReturn(true);
+
+        assertThat(mPreferenceController.getConnectedHearingAidDevice()).isNull();
+    }
+
     private void setupBluetoothEnvironment() {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
