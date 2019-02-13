@@ -188,6 +188,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     @Override
     public void onFinishCardLoading(List<ContextualCard> cards) {
         final long loadTime = System.currentTimeMillis() - mStartTime;
+        //TODO(b/123668403): remove the log here once we do the change with FutureTask
+        Log.d(TAG, "Total loading time = " + loadTime);
         final List<ContextualCard> cardsToKeep = getCardsToKeep(cards);
 
         //navigate back to the homepage or after card dismissal

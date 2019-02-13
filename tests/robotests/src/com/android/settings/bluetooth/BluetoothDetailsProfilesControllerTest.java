@@ -294,6 +294,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         PbapServerProfile psp = mock(PbapServerProfile.class);
         when(psp.getNameResource(mDevice)).thenReturn(R.string.bluetooth_profile_pbap);
         when(psp.toString()).thenReturn(PbapServerProfile.NAME);
+        when(psp.isProfileReady()).thenReturn(true);
         when(mProfileManager.getPbapProfile()).thenReturn(psp);
 
         showScreen(mController);
@@ -316,6 +317,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         PbapServerProfile psp = mock(PbapServerProfile.class);
         when(psp.getNameResource(mDevice)).thenReturn(R.string.bluetooth_profile_pbap);
         when(psp.toString()).thenReturn(PbapServerProfile.NAME);
+        when(psp.isProfileReady()).thenReturn(true);
         when(mProfileManager.getPbapProfile()).thenReturn(psp);
 
         showScreen(mController);
@@ -336,6 +338,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         setupDevice(makeDefaultDeviceConfig());
         MapProfile mapProfile = mock(MapProfile.class);
         when(mapProfile.getNameResource(mDevice)).thenReturn(R.string.bluetooth_profile_map);
+        when(mapProfile.isProfileReady()).thenReturn(true);
         when(mProfileManager.getMapProfile()).thenReturn(mapProfile);
         when(mProfileManager.getProfileByName(eq(mapProfile.toString()))).thenReturn(mapProfile);
         mDevice.setMessageAccessPermission(BluetoothDevice.ACCESS_REJECTED);
@@ -361,6 +364,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         when(profile.supportsHighQualityAudio(mDevice)).thenReturn(supportsHighQualityAudio);
         when(profile.isHighQualityAudioEnabled(mDevice)).thenReturn(highQualityAudioEnabled);
         when(profile.isPreferred(mDevice)).thenReturn(preferred);
+        when(profile.isProfileReady()).thenReturn(true);
         mConnectableProfiles.add(profile);
         return profile;
     }
@@ -442,12 +446,25 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         setupDevice(makeDefaultDeviceConfig());
         A2dpProfile audioProfile = addMockA2dpProfile(false, true, true);
         showScreen(mController);
-        SwitchPreference audioPref =
-            (SwitchPreference) mScreen.findPreference(audioProfile.toString());
+        SwitchPreference audioPref = mScreen.findPreference(audioProfile.toString());
         SwitchPreference highQualityAudioPref = getHighQualityAudioPref();
         assertThat(audioPref).isNotNull();
         assertThat(audioPref.isChecked()).isFalse();
         assertThat(highQualityAudioPref).isNotNull();
         assertThat(highQualityAudioPref.isVisible()).isFalse();
+    }
+
+    @Test
+    public void onResume_addServiceListener() {
+        mController.onResume();
+
+        verify(mProfileManager).addServiceListener(mController);
+    }
+
+    @Test
+    public void onPause_removeServiceListener() {
+        mController.onPause();
+
+        verify(mProfileManager).removeServiceListener(mController);
     }
 }

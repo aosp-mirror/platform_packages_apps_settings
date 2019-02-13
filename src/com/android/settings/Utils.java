@@ -71,6 +71,7 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -958,6 +959,22 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Converts the {@link Drawable} to a {@link Bitmap}.
+     */
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable)drawable).getBitmap();
+        }
+
+        final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    /**
      * Get the {@link Drawable} that represents the app icon
      */
     public static Drawable getBadgedIcon(IconDrawableFactory iconDrawableFactory,
@@ -979,5 +996,14 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.e(TAG, "Error while retrieving application info for package " + packageName, e);
         }
         return false;
+    }
+
+    /** Get {@link Resources} by subscription id if subscription id is valid. */
+    public static Resources getResourcesForSubId(Context context, int subId) {
+        if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return SubscriptionManager.getResourcesForSubId(context, subId);
+        } else {
+            return context.getResources();
+        }
     }
 }

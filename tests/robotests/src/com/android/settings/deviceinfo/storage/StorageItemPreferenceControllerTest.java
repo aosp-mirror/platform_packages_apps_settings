@@ -341,7 +341,7 @@ public class StorageItemPreferenceControllerTest {
         final StorageItemPreference apps = spy(new StorageItemPreference(mContext));
         apps.setIcon(R.drawable.ic_storage_apps);
         final StorageItemPreference system = spy(new StorageItemPreference(mContext));
-        system.setIcon(R.drawable.ic_system_update_vd_theme_24);
+        system.setIcon(R.drawable.ic_system_update);
         final StorageItemPreference files = spy(new StorageItemPreference(mContext));
         files.setIcon(R.drawable.ic_folder_vd_theme_24);
         final PreferenceScreen screen = mock(PreferenceScreen.class);

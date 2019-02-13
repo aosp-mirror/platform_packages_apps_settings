@@ -17,6 +17,7 @@ package com.android.settings.connecteddevice;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.net.Uri;
 import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
@@ -24,6 +25,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -88,6 +90,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
         use(DiscoverableFooterPreferenceController.class).init(this);
+        use(SlicePreferenceController.class).setSliceUri(
+                Uri.parse(getString(R.string.config_nearby_devices_slice_uri)));
     }
 
     /**
