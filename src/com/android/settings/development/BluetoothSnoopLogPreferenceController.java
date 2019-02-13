@@ -55,8 +55,7 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
         mListEntries = context.getResources().getStringArray(R.array.bt_hci_snoop_log_entries);
     }
 
-    // Default mode is FILTERED on userdebug/eng build, DISABLED on user build,
-    // or can be changed by modifying the global setting.
+    // Default mode is DISABLED. It can also be changed by modifying the global setting.
     public int getDefaultModeIndex() {
         if (!Build.IS_DEBUGGABLE) {
             return BTSNOOP_LOG_MODE_DISABLED_INDEX;
@@ -71,7 +70,7 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
             }
         }
 
-        return BTSNOOP_LOG_MODE_FILTERED_INDEX;
+        return BTSNOOP_LOG_MODE_DISABLED_INDEX;
     }
 
     @Override
