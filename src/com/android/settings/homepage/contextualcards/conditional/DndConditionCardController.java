@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.provider.Settings;
+import android.service.notification.ZenModeConfig;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -97,7 +98,7 @@ public class DndConditionCardController implements ConditionalCardController {
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_zen_title))
                 .setTitleText(mAppContext.getText(R.string.condition_zen_title).toString())
-                .setSummaryText(mAppContext.getText(R.string.condition_zen_summary).toString())
+                .setSummaryText(getSummary())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_do_not_disturb_on_24dp))
                 .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
@@ -111,5 +112,12 @@ public class DndConditionCardController implements ConditionalCardController {
                 mConditionManager.onConditionChanged();
             }
         }
+    }
+
+    private String getSummary() {
+        if (ZenModeConfig.areAllZenBehaviorSoundsMuted(mNotificationManager.getZenModeConfig())) {
+            return mAppContext.getText(R.string.condition_zen_summary_phone_muted).toString();
+        }
+        return mAppContext.getText(R.string.condition_zen_summary_with_exceptions).toString();
     }
 }
