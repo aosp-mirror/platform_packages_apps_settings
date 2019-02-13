@@ -75,14 +75,6 @@ public class WifiDppUtils {
     public static final String EXTRA_TEST = "test";
 
     /**
-     * Returns whether the user can share the network represented by this preference with QR code.
-     */
-    public static boolean isSharingNetworkEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context,
-                com.android.settings.core.FeatureFlags.WIFI_SHARING);
-    }
-
-    /**
      * Returns whether the device support WiFi DPP.
      */
     public static boolean isWifiDppEnabled(Context context) {

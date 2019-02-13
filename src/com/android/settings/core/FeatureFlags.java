@@ -26,7 +26,6 @@ public class FeatureFlags {
     public static final String MOBILE_NETWORK_V2 = "settings_mobile_network_v2";
     public static final String WIFI_MAC_RANDOMIZATION = "settings_wifi_mac_randomization";
     public static final String NETWORK_INTERNET_V2 = "settings_network_and_internet_v2";
-    public static final String WIFI_SHARING = "settings_wifi_sharing";
     public static final String SLICE_INJECTION = "settings_slice_injection";
     public static final String MAINLINE_MODULE = "settings_mainline_module";
 }
