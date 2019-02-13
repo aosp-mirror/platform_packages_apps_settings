@@ -16,7 +16,6 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.ClearAdbKeysPreferenceController.RO_ADB_SECURE_PROPERTY_KEY;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -28,7 +27,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.hardware.usb.IUsbManager;
 import android.os.RemoteException;
-import android.os.SystemProperties;
+import android.sysprop.AdbProperties;
 import androidx.preference.SwitchPreference;
 import androidx.preference.PreferenceScreen;
 
@@ -79,21 +78,21 @@ public class ClearAdbKeysPreferenceControllerTest {
 
     @Test
     public void isAvailable_roAdbSecureEnabled_shouldBeTrue() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
+        AdbProperties.secure(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_roAdbSecureDisabled_shouldBeFalse() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(false));
+        AdbProperties.secure(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void displayPreference_isNotAdminUser_preferenceShouldBeDisabled() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
+        AdbProperties.secure(true);
         doReturn(false).when(mController).isAdminUser();
 
         mController.displayPreference(mScreen);
@@ -104,7 +103,7 @@ public class ClearAdbKeysPreferenceControllerTest {
     @Test
     @Config(shadows = ShadowClearAdbKeysWarningDialog.class)
     public void handlePreferenceTreeClick_clearAdbKeysPreference_shouldShowWarningDialog() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
+        AdbProperties.secure(true);
         doReturn(true).when(mController).isAdminUser();
         mController.displayPreference(mScreen);
         final String preferenceKey = mController.getPreferenceKey();
@@ -117,7 +116,7 @@ public class ClearAdbKeysPreferenceControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_notClearAdbKeysPreference_shouldReturnFalse() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
+        AdbProperties.secure(true);
         doReturn(true).when(mController).isAdminUser();
         mController.displayPreference(mScreen);
         when(mPreference.getKey()).thenReturn("Some random key!!!");
@@ -128,7 +127,7 @@ public class ClearAdbKeysPreferenceControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_monkeyUser_shouldReturnFalse() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
+        AdbProperties.secure(true);
         doReturn(true).when(mController).isAdminUser();
         ShadowUtils.setIsUserAMonkey(true);
         mController.displayPreference(mScreen);
@@ -142,7 +141,7 @@ public class ClearAdbKeysPreferenceControllerTest {
 
     @Test
     public void onDeveloperOptionsSwitchEnabled_isAdminUser_shouldEnablePreference() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
+        AdbProperties.secure(true);
         doReturn(true).when(mController).isAdminUser();
         mController.displayPreference(mScreen);
         mController.onDeveloperOptionsSwitchEnabled();
@@ -152,7 +151,7 @@ public class ClearAdbKeysPreferenceControllerTest {
 
     @Test
     public void onDeveloperOptionsSwitchEnabled_isNotAdminUser_shouldNotEnablePreference() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
+        AdbProperties.secure(true);
         doReturn(false).when(mController).isAdminUser();
         mController.displayPreference(mScreen);
         mController.onDeveloperOptionsSwitchEnabled();
