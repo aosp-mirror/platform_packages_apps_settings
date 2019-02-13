@@ -37,6 +37,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,8 +70,12 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     /** Message sent to us to stop scanning wifi and pop up timeout dialog. */
     private static final int MESSAGE_STOP_SCAN_WIFI_LIST = 0;
 
-    /** Spec defines there should be 5 wifi ap on the list at most. */
+    /**
+     * Spec defines there should be 5 wifi ap on the list at most or just show all if {@code
+     * mShowLimitedItem} is false.
+     */
     private static final int MAX_NUMBER_LIST_ITEM = 5;
+    private boolean mShowLimitedItem = true;
 
     /** Delayed time to stop scanning wifi. */
     private static final int DELAY_TIME_STOP_SCAN_MS = 30 * 1000;
@@ -110,13 +115,29 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setCustomTitle(customTitle)
                 .setAdapter(mDialogAdapter, this)
-                .setPositiveButton(R.string.cancel, (dialog, which) -> getActivity().finish());
+                .setPositiveButton(R.string.cancel, (dialog, which) -> getActivity().finish())
+                // Do nothings, will replace the onClickListener to avoid auto closing dialog.
+                .setNeutralButton(R.string.network_connection_request_dialog_showall,
+                        null /* OnClickListener */);
 
         // Clicking list item is to connect wifi ap.
         final AlertDialog dialog = builder.create();
         dialog.getListView()
                 .setOnItemClickListener(
                         (parent, view, position, id) -> this.onClick(dialog, position));
+
+        dialog.setOnShowListener((dialogInterface) -> {
+            // Replace NeutralButton onClickListener to avoid closing dialog
+            final Button neutralBtn = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+            neutralBtn.setVisibility(View.GONE);
+            neutralBtn.setOnClickListener(v -> {
+                mShowLimitedItem = false;
+                renewAccessPointList(null /* List<ScanResult> */);
+                notifyAdapterRefresh();
+                neutralBtn.setVisibility(View.GONE);
+            });
+        });
+
         return dialog;
     }
 
@@ -199,6 +220,18 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         if (mFilterWifiTracker != null) {
             mFilterWifiTracker.onDestroy();
             mFilterWifiTracker = null;
+        }
+    }
+
+    private void showNeutralButton() {
+        final AlertDialog alertDialog = (AlertDialog) getDialog();
+        if (alertDialog == null) {
+            return;
+        }
+
+        final Button neutralBtn = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        if (neutralBtn != null) {
+            neutralBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -394,6 +427,10 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                     mAccessPointKeys.add(key);
                 }
             }
+
+            if (mShowLimitedItem && (mAccessPointKeys.size() > MAX_NUMBER_LIST_ITEM)) {
+                showNeutralButton();
+            }
         }
 
         /**
@@ -414,7 +451,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
                     count++;
                     // Limits how many count of items could show.
-                    if (count >= MAX_NUMBER_LIST_ITEM) {
+                    if (mShowLimitedItem && count >= MAX_NUMBER_LIST_ITEM) {
                         break;
                     }
                 }

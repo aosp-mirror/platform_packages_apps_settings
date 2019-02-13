@@ -33,6 +33,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -264,20 +265,77 @@ public class NetworkRequestDialogFragmentTest {
     private List<AccessPoint> createAccessPointList() {
         List<AccessPoint> accessPointList = spy(new ArrayList<>());
         Bundle bundle = new Bundle();
+
         bundle.putString(KEY_SSID, "Test AP 1");
         bundle.putInt(KEY_SECURITY, 1);
         accessPointList.add(new AccessPoint(mContext, bundle));
+
         bundle.putString(KEY_SSID, "Test AP 2");
         bundle.putInt(KEY_SECURITY, 1);
         accessPointList.add(new AccessPoint(mContext, bundle));
+
         bundle.putString(KEY_SSID, "Test AP 3");
         bundle.putInt(KEY_SECURITY, 2);
-        AccessPoint clickedAccessPoint = new AccessPoint(mContext, bundle);
-        accessPointList.add(clickedAccessPoint);
+        accessPointList.add(new AccessPoint(mContext, bundle));
+
         bundle.putString(KEY_SSID, "Test AP 4");
         bundle.putInt(KEY_SECURITY, 0);
         accessPointList.add(new AccessPoint(mContext, bundle));
 
         return accessPointList;
+    }
+
+    @Test
+    public void display_shouldNotShowNeutralButton() {
+        networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+
+        final Button button = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        assertThat(button).isNotNull();
+        assertThat(button.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void onMatchManyResult_showNeutralButton() {
+        networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+
+        final String SSID_AP = "Test AP ";
+        final List<ScanResult> scanResults = new ArrayList<>();
+        for (int i = 0; i < 6 ; i ++) {
+            ScanResult scanResult = new ScanResult();
+            scanResult.SSID = SSID_AP + i;
+            scanResult.capabilities = "WEP";
+            scanResults.add(scanResult);
+        }
+        networkRequestDialogFragment.onMatch(scanResults);
+
+        final Button button = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        assertThat(button).isNotNull();
+        assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void clickNeutralButton_hideNeutralButton() {
+        // Assert
+        networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+
+        final String SSID_AP = "Test AP ";
+        final List<ScanResult> scanResults = new ArrayList<>();
+        for (int i = 0; i < 6 ; i ++) {
+            ScanResult scanResult = new ScanResult();
+            scanResult.SSID = SSID_AP + i;
+            scanResult.capabilities = "WEP";
+            scanResults.add(scanResult);
+        }
+        networkRequestDialogFragment.onMatch(scanResults);
+
+        // Action
+        final Button button = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        button.performClick();
+
+        // Check
+        assertThat(button.getVisibility()).isEqualTo(View.GONE);
     }
 }
