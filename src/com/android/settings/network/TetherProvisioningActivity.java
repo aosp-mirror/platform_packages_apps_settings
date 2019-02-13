@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.network;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.os.UserHandle;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
+
+import com.android.settings.Utils;
 
 /**
  * Activity which acts as a proxy to the tether provisioning app for sanity checks and permission
@@ -47,7 +51,9 @@ public class TetherProvisioningActivity extends Activity {
 
         int tetherType = getIntent().getIntExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE,
                 ConnectivityManager.TETHERING_INVALID);
-        String[] provisionApp = getResources().getStringArray(
+        final int subId = SubscriptionManager.getDefaultDataSubscriptionId();
+        final Resources res = Utils.getResourcesForSubId(this, subId);
+        final String[] provisionApp = res.getStringArray(
                 com.android.internal.R.array.config_mobile_hotspot_provision_app);
 
         Intent intent = new Intent(Intent.ACTION_MAIN);
