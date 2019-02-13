@@ -345,6 +345,70 @@ public class AppDataUsageTest {
         assertThat(uids.get(2)).isEqualTo(789);
     }
 
+    @Test
+    public void onCreateLoader_hasCyclesSpecified_shouldQueryDataUsageForSpecifiedCycles() {
+        final long startTime = 1521583200000L;
+        final long endTime = 1521676800000L;
+        ArrayList<Long> testCycles = new ArrayList<>();
+        testCycles.add(endTime);
+        testCycles.add(startTime);
+        final int uid = 123;
+        final AppItem appItem = new AppItem(uid);
+        appItem.category = AppItem.CATEGORY_APP;
+        appItem.addUid(uid);
+
+        mFragment = new AppDataUsage();
+        ReflectionHelpers.setField(mFragment, "mContext", RuntimeEnvironment.application);
+        ReflectionHelpers.setField(mFragment, "mCycles", testCycles);
+        ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
+        ReflectionHelpers.setField(mFragment, "mTemplate",
+            NetworkTemplate.buildTemplateWifiWildcard());
+
+        final NetworkCycleDataForUidLoader loader = (NetworkCycleDataForUidLoader)
+            mFragment.mUidDataCallbacks.onCreateLoader(0 /* id */, Bundle.EMPTY /* args */);
+
+        final ArrayList<Long> cycles = loader.getCycles();
+        assertThat(cycles).hasSize(2);
+        assertThat(cycles.get(0)).isEqualTo(endTime);
+        assertThat(cycles.get(1)).isEqualTo(startTime);
+    }
+
+    @Test
+    public void onLoadFinished_hasSelectedCycleSpecified_shouldSelectSpecifiedCycle() {
+        final long now = System.currentTimeMillis();
+        final long tenDaysAgo = now - (DateUtils.DAY_IN_MILLIS * 10);
+        final long twentyDaysAgo = now - (DateUtils.DAY_IN_MILLIS * 20);
+        final long thirtyDaysAgo = now - (DateUtils.DAY_IN_MILLIS * 30);
+        final List<NetworkCycleDataForUid> data = new ArrayList<>();
+        NetworkCycleDataForUid.Builder builder = new NetworkCycleDataForUid.Builder();
+        builder.setStartTime(thirtyDaysAgo).setEndTime(twentyDaysAgo).setTotalUsage(9876L);
+        data.add(builder.build());
+        builder = new NetworkCycleDataForUid.Builder();
+        builder.setStartTime(twentyDaysAgo).setEndTime(tenDaysAgo).setTotalUsage(5678L);
+        data.add(builder.build());
+        builder = new NetworkCycleDataForUid.Builder();
+        builder.setStartTime(tenDaysAgo).setEndTime(now).setTotalUsage(1234L);
+        data.add(builder.build());
+
+        mFragment = new AppDataUsage();
+        ReflectionHelpers.setField(mFragment, "mContext", RuntimeEnvironment.application);
+        ReflectionHelpers.setField(mFragment, "mCycleAdapter", mock(CycleAdapter.class));
+        ReflectionHelpers.setField(mFragment, "mSelectedCycle", tenDaysAgo);
+        final Preference backgroundPref = mock(Preference.class);
+        ReflectionHelpers.setField(mFragment, "mBackgroundUsage", backgroundPref);
+        final Preference foregroundPref = mock(Preference.class);
+        ReflectionHelpers.setField(mFragment, "mForegroundUsage", foregroundPref);
+        final Preference totalPref = mock(Preference.class);
+        ReflectionHelpers.setField(mFragment, "mTotalUsage", totalPref);
+        final SpinnerPreference cycle = mock(SpinnerPreference.class);
+        ReflectionHelpers.setField(mFragment, "mCycle", cycle);
+
+        mFragment.mUidDataCallbacks.onLoadFinished(null /* loader */, data);
+
+        verify(cycle).setSelection(1);
+    }
+
+    @Test
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowSubscriptionManager.class})
     public void onCreate_noNetworkTemplateAndInvalidDataSubscription_shouldUseWifiTemplate() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
@@ -355,6 +419,10 @@ public class AppDataUsageTest {
         mFragment = spy(new AppDataUsage());
         doReturn(Robolectric.setupActivity(FragmentActivity.class)).when(mFragment).getActivity();
         doReturn(RuntimeEnvironment.application).when(mFragment).getContext();
+        final UidDetailProvider uidDetailProvider = mock(UidDetailProvider.class);
+        doReturn(uidDetailProvider).when(mFragment).getUidDetailProvider();
+        doReturn(new UidDetail()).when(uidDetailProvider).getUidDetail(anyInt(), anyBoolean());
+
         ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
             FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
         final Bundle args = new Bundle();
