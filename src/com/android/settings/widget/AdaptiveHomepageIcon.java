@@ -72,11 +72,13 @@ public class AdaptiveHomepageIcon extends LayerDrawable {
                 // If found anything, use it.
                 if (bgColor != 0) {
                     setBackgroundColor(bgColor);
+                    return;
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Failed to set background color for " + tile.getPackageName());
         }
+        setBackgroundColor(context.getColor(R.color.homepage_generic_icon_background));
     }
 
     public void setBackgroundColor(int color) {

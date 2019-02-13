@@ -97,6 +97,20 @@ public class AdaptiveHomepageIconTest {
     }
 
     @Test
+    public void setBackgroundColor_tileWithoutBackgroundColor_shouldSetDefaultBackgroundColor() {
+        final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
+        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
+            .when(tile).getIcon(mContext);
+        final AdaptiveHomepageIcon icon =
+            new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+
+        icon.setBackgroundColor(mContext, tile);
+
+        assertThat(icon.mBackgroundColor).isEqualTo(
+            mContext.getColor(R.color.homepage_generic_icon_background));
+    }
+
+    @Test
     public void onBindTile_externalTileWithBackgroundColorHint_shouldUpdateIcon() {
         final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
