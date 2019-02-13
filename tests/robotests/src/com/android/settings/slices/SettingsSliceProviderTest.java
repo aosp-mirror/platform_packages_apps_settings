@@ -99,7 +99,7 @@ public class SettingsSliceProviderTest {
     private static final String SUMMARY = "summary";
     private static final String SCREEN_TITLE = "screen title";
     private static final String FRAGMENT_NAME = "fragment name";
-    private static final int ICON = R.drawable.ic_settings;
+    private static final int ICON = R.drawable.ic_settings_accent;
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private static final String PREF_CONTROLLER = FakeToggleController.class.getName();
 
@@ -578,7 +578,7 @@ public class SettingsSliceProviderTest {
         values.put(SlicesDatabaseHelper.IndexColumns.TITLE, TITLE);
         values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, "s");
         values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, "s");
-        values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, R.drawable.ic_settings);
+        values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, R.drawable.ic_settings_accent);
         values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, "test");
         values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, PREF_CONTROLLER);
         values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);

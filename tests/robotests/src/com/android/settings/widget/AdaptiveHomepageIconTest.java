@@ -87,7 +87,7 @@ public class AdaptiveHomepageIconTest {
     public void setBackgroundColor_externalTileWithBackgroundColorRawValue_shouldUpdateIcon() {
         final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB, 0xff0000);
-        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
+        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings_accent))
                 .when(tile).getIcon(mContext);
         final AdaptiveHomepageIcon icon =
                 new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
@@ -101,7 +101,7 @@ public class AdaptiveHomepageIconTest {
         final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
                 R.color.material_blue_500);
-        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
+        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings_accent))
                 .when(tile).getIcon(mContext);
 
         final AdaptiveHomepageIcon icon =
