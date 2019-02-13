@@ -160,7 +160,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
             final int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
             if (subId != SUB_ID_NULL) {
                 for (SubscriptionInfo subscription :
-                        mSubscriptionManager.getAvailableSubscriptionInfoList()) {
+                        mSubscriptionManager.getSelectableSubscriptionInfoList()) {
                     if (subscription.getSubscriptionId() == subId) {
                         return subscription;
                     }

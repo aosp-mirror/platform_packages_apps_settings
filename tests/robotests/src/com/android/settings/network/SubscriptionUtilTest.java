@@ -47,7 +47,7 @@ public class SubscriptionUtilTest {
 
     @Test
     public void getAvailableSubscriptions_nullInfoFromSubscriptionManager_nonNullResult() {
-        when(mManager.getAvailableSubscriptionInfoList()).thenReturn(null);
+        when(mManager.getSelectableSubscriptionInfoList()).thenReturn(null);
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mManager);
         assertThat(subs).isNotNull();
         assertThat(subs).isEmpty();
@@ -57,7 +57,7 @@ public class SubscriptionUtilTest {
     public void getAvailableSubscriptions_oneSubscription_oneResult() {
         final SubscriptionInfo info = mock(SubscriptionInfo.class);
         when(info.getMncString()).thenReturn("fake1234");
-        when(mManager.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+        when(mManager.getSelectableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mManager);
         assertThat(subs).isNotNull();
         assertThat(subs).hasSize(1);
@@ -69,7 +69,7 @@ public class SubscriptionUtilTest {
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(info1.getMncString()).thenReturn("fake1234");
         when(info2.getMncString()).thenReturn("fake5678");
-        when(mManager.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
+        when(mManager.getSelectableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mManager);
         assertThat(subs).isNotNull();
         assertThat(subs).hasSize(2);
@@ -82,7 +82,7 @@ public class SubscriptionUtilTest {
         final SubscriptionInfo info3 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(1);
         when(info1.getMncString()).thenReturn("fake1234");
-        when(mManager.getAvailableSubscriptionInfoList()).thenReturn(
+        when(mManager.getSelectableSubscriptionInfoList()).thenReturn(
                 new ArrayList<>(Arrays.asList(info1, info2, info3)));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mManager);
         assertThat(subs).isNotNull();
@@ -100,7 +100,7 @@ public class SubscriptionUtilTest {
         when(info1.getMncString()).thenReturn("fake1234");
         when(info4.getSubscriptionId()).thenReturn(4);
         when(info4.getMncString()).thenReturn("fake5678");
-        when(mManager.getAvailableSubscriptionInfoList()).thenReturn(new ArrayList<>(
+        when(mManager.getSelectableSubscriptionInfoList()).thenReturn(new ArrayList<>(
                 Arrays.asList(info1, info2, info3, info4)));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mManager);
         assertThat(subs).isNotNull();

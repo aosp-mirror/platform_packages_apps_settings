@@ -38,7 +38,7 @@ public class SubscriptionUtil {
         if (sResultsForTesting != null) {
             return sResultsForTesting;
         }
-        List<SubscriptionInfo> subscriptions = manager.getAvailableSubscriptionInfoList();
+        List<SubscriptionInfo> subscriptions = manager.getSelectableSubscriptionInfoList();
         if (subscriptions == null) {
             subscriptions = new ArrayList<>();
         }
