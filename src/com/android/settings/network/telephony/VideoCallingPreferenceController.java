@@ -34,7 +34,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
-import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -49,7 +48,6 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     private Preference mPreference;
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
-    private PersistableBundle mCarrierConfig;
     @VisibleForTesting
     ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
@@ -67,7 +65,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && MobileNetworkUtils.isWifiCallingEnabled(mContext,
                 SubscriptionManager.getPhoneId(subId))
-                && isVideoCallEnabled()
+                && isVideoCallEnabled(subId)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
@@ -94,7 +92,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     public void updateState(Preference preference) {
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
-        final boolean videoCallEnabled = isVideoCallEnabled();
+        final boolean videoCallEnabled = isVideoCallEnabled(mSubId, mImsManager);
         switchPreference.setVisible(videoCallEnabled);
         if (videoCallEnabled) {
             final boolean is4gLteEnabled = mImsManager.isEnhanced4gLteModeSettingEnabledByUser()
@@ -119,7 +117,6 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     public VideoCallingPreferenceController init(int subId) {
         mSubId = subId;
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
-        mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
         }
@@ -127,15 +124,25 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         return this;
     }
 
+    private boolean isVideoCallEnabled(int subId) {
+        final ImsManager imsManager = subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                ? ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(subId))
+                : null;
+        return isVideoCallEnabled(subId, imsManager);
+    }
+
     @VisibleForTesting
-    boolean isVideoCallEnabled() {
-        return mCarrierConfig != null && mImsManager != null
-                && mImsManager.isVtEnabledByPlatform()
-                && mImsManager.isVtProvisionedOnDevice()
-                && MobileNetworkUtils.isImsServiceStateReady(mImsManager)
-                && (mCarrierConfig.getBoolean(
+    boolean isVideoCallEnabled(int subId, ImsManager imsManager) {
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final TelephonyManager telephonyManager = TelephonyManager
+                .from(mContext).createForSubscriptionId(subId);
+        return carrierConfig != null && imsManager != null
+                && imsManager.isVtEnabledByPlatform()
+                && imsManager.isVtProvisionedOnDevice()
+                && MobileNetworkUtils.isImsServiceStateReady(imsManager)
+                && (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS)
-                || mTelephonyManager.isDataEnabled());
+                || telephonyManager.isDataEnabled());
     }
 
     @Override

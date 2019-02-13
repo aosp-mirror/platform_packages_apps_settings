@@ -29,8 +29,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -38,7 +38,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * Preference controller related to CDMA category
  */
-public abstract class CdmaBasePreferenceController extends BasePreferenceController
+public abstract class CdmaBasePreferenceController extends TelephonyBasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
     protected Preference mPreference;
@@ -64,8 +64,8 @@ public abstract class CdmaBasePreferenceController extends BasePreferenceControl
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return MobileNetworkUtils.isCdmaOptions(mContext, mSubId)
+    public int getAvailabilityStatus(int subId) {
+        return MobileNetworkUtils.isCdmaOptions(mContext, subId)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
