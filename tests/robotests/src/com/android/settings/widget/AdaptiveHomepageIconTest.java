@@ -99,7 +99,7 @@ public class AdaptiveHomepageIconTest {
     @Test
     public void setBackgroundColor_tileWithoutBackgroundColor_shouldSetDefaultBackgroundColor() {
         final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
-        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
+        doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings_accent))
             .when(tile).getIcon(mContext);
         final AdaptiveHomepageIcon icon =
             new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
