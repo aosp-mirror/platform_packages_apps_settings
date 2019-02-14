@@ -24,6 +24,7 @@ import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TetherSettings;
 import com.android.settings.TrustedCredentialsSettings;
+import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
@@ -178,6 +179,7 @@ public class SettingsGateway {
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
+            AccessibilityDetailsSettingsFragment.class.getName(),
             AccessibilitySettings.class.getName(),
             AccessibilitySettingsForSetupWizard.class.getName(),
             CaptionPropertiesFragment.class.getName(),
