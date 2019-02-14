@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
@@ -60,6 +61,8 @@ public class OemUnlockPreferenceControllerTest {
     @Mock
     private RestrictedSwitchPreference mPreference;
     @Mock
+    private PackageManager mPackageManager;
+    @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private OemLockManager mOemLockManager;
@@ -74,6 +77,9 @@ public class OemUnlockPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager
+                    .FEATURE_TELEPHONY_CARRIERLOCK)).thenReturn(true);
         when(mContext.getSystemService(Context.OEM_LOCK_SERVICE)).thenReturn(mOemLockManager);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
@@ -84,6 +90,16 @@ public class OemUnlockPreferenceControllerTest {
         when(mFragment.getChildFragmentManager())
             .thenReturn(mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
         mController.displayPreference(mPreferenceScreen);
+    }
+
+    @Test
+    public void OemUnlockPreferenceController_shouldNotCrashWhenMissingFEATURE_TELEPHONY_CARRIERLOCK() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager
+                    .FEATURE_TELEPHONY_CARRIERLOCK)).thenReturn(false);
+        when(mContext.getSystemService(Context.OEM_LOCK_SERVICE)).thenThrow
+            (new RuntimeException());
+
+        new OemUnlockPreferenceController(mContext, mActivity, mFragment);
     }
 
     @Test
