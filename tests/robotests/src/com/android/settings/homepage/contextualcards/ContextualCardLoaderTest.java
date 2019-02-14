@@ -74,15 +74,6 @@ public class ContextualCardLoaderTest {
     }
 
     @Test
-    public void isCardEligibleToDisplay_noProvider_returnFalse() {
-        final String sliceUri = "content://com.android.settings.test.slices/action/flashlight";
-
-        assertThat(
-                mContextualCardLoader.isCardEligibleToDisplay(
-                        getContextualCard(sliceUri))).isFalse();
-    }
-
-    @Test
     public void getDisplayableCards_twoEligibleCards_shouldShowAll() {
         final List<ContextualCard> cards = getContextualCardList().stream().limit(2)
                 .collect(Collectors.toList());

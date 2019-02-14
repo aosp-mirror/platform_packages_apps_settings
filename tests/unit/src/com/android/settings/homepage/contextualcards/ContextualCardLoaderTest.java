@@ -21,8 +21,11 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.net.Uri;
 
+import androidx.slice.Slice;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
+
+import com.android.settings.slices.CustomSliceRegistry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +47,7 @@ public class ContextualCardLoaderTest {
     }
 
     @Test
-    public void filter_twoInvalidCards_shouldReturnOneCard() {
+    public void filterEligibleCards_twoInvalidCards_shouldReturnOneCard() {
         final String sliceUri1 = "content://com.android.settings.slices/action/flashlight"; //valid
         final String sliceUri2 = "content://com.android.settings.test.slices/action/flashlight";
         final String sliceUri3 = "cotent://com.android.settings.slices/action/flashlight";
@@ -57,6 +60,23 @@ public class ContextualCardLoaderTest {
         final List<ContextualCard> result = mContextualCardLoader.filterEligibleCards(cards);
 
         assertThat(result).hasSize(1);
+    }
+
+    @Test
+    public void bindSlice_flashlightUri_shouldReturnFlashlightSlice() {
+        final Slice loadedSlice =
+                mContextualCardLoader.bindSlice(CustomSliceRegistry.FLASHLIGHT_SLICE_URI);
+
+        assertThat(loadedSlice.getUri()).isEqualTo(CustomSliceRegistry.FLASHLIGHT_SLICE_URI);
+    }
+
+    @Test
+    public void bindSlice_noProvider_shouldReturnNull() {
+        final String sliceUri = "content://com.android.settings.test.slices/action/flashlight";
+
+        final Slice loadedSlice = mContextualCardLoader.bindSlice(Uri.parse(sliceUri));
+
+        assertThat(loadedSlice).isNull();
     }
 
     private ContextualCard getContextualCard(String sliceUri) {

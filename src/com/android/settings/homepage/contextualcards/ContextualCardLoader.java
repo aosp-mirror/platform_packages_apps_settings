@@ -18,13 +18,10 @@ package com.android.settings.homepage.contextualcards;
 
 import static android.app.slice.Slice.HINT_ERROR;
 
-import static androidx.slice.widget.SliceLiveData.SUPPORTED_SPECS;
-
 import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.NOTIFICATION_CHANNEL_SLICE_URI;
 
-import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -38,6 +35,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
+import androidx.slice.SliceViewManager;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -45,6 +43,8 @@ import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
@@ -55,6 +55,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS * 3;
 
     private static final String TAG = "ContextualCardLoader";
+    private static final long LATCH_TIMEOUT_MS = 200;
 
     private final ContentObserver mObserver = new ContentObserver(
             new Handler(Looper.getMainLooper())) {
@@ -186,16 +187,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             return false;
         }
 
-        //check if the uri has a provider associated with.
-        final ContentProviderClient provider =
-                mContext.getContentResolver().acquireContentProviderClient(uri);
-        if (provider == null) {
-            return false;
-        }
-        //release contentProviderClient to prevent from memory leak.
-        provider.release();
-
-        final Slice slice = Slice.bindSlice(mContext, uri, SUPPORTED_SPECS);
+        final Slice slice = bindSlice(uri);
         //TODO(b/123668403): remove the log here once we do the change with FutureTask
         final long bindTime = System.currentTimeMillis() - startTime;
         Log.d(TAG, "Binding time for " + uri + " = " + bindTime);
@@ -206,6 +198,40 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         }
 
         return true;
+    }
+
+    @VisibleForTesting
+    Slice bindSlice(Uri uri) {
+        final SliceViewManager manager = SliceViewManager.getInstance(mContext);
+        final Slice[] returnSlice = new Slice[1];
+        final CountDownLatch latch = new CountDownLatch(1);
+        final SliceViewManager.SliceCallback callback =
+                new SliceViewManager.SliceCallback() {
+                    @Override
+                    public void onSliceUpdated(Slice slice) {
+                        try {
+                            // We are just making sure the existence of the slice, so ignore
+                            // slice loading state here.
+                            returnSlice[0] = slice;
+                            latch.countDown();
+                        } catch (Exception e) {
+                            Log.w(TAG, uri + " cannot be indexed", e);
+                        } finally {
+                            manager.unregisterSliceCallback(uri, this);
+                        }
+                    }
+                };
+        // Register a callback until we get a loaded slice.
+        manager.registerSliceCallback(uri, callback);
+        // Trigger the binding.
+        callback.onSliceUpdated(manager.bindSlice(uri));
+        try {
+            latch.await(LATCH_TIMEOUT_MS, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            Log.w(TAG, "Error waiting for slice binding for uri" + uri, e);
+            manager.unregisterSliceCallback(uri, callback);
+        }
+        return returnSlice[0];
     }
 
     private int getNumberOfLargeCard(List<ContextualCard> cards) {
