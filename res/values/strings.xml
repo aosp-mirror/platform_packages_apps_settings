@@ -10636,6 +10636,15 @@
     <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="permission_bar_chart_details">See all usage</string>
 
+    <!-- Title for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
+    <string name="accessibility_usage_title">Accessibility usage</string>
+
+    <!-- Summary for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
+    <plurals name="accessibility_usage_summary">
+        <item quantity="one">1 service has full access to your device</item>
+        <item quantity="other"><xliff:g id="service_count">%1$d</xliff:g> services have full access to your device</item>
+    </plurals>
+
     <!-- Title for notification channel slice. [CHAR LIMIT=NONE] -->
     <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> Notifications</string>
     <!-- Title for no suggested app in notification channel slice. [CHAR LIMIT=NONE] -->
