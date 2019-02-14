@@ -66,8 +66,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference removeAccountPreference =
-                (LayoutPreference) screen.findPreference(KEY_REMOVE_ACCOUNT);
+        final LayoutPreference removeAccountPreference = screen.findPreference(KEY_REMOVE_ACCOUNT);
         Button removeAccountButton = (Button) removeAccountPreference.findViewById(R.id.button);
         removeAccountButton.setOnClickListener(this);
     }

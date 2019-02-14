@@ -49,8 +49,10 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     private static final int USER_PROFILE_INSERTION_LOCATION = 6;
     private static final int SIZE_NOT_SET = -1;
 
-    private @NonNull UserInfo mUser;
-    private @Nullable StorageItemPreference mStoragePreference;
+    private @NonNull
+    UserInfo mUser;
+    private @Nullable
+    StorageItemPreference mStoragePreference;
     private Drawable mUserIcon;
     private long mSize;
     private long mTotalSizeBytes;
@@ -58,7 +60,8 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     /**
      * Adds the appropriate controllers to a controller list for handling all secondary users on
      * a device.
-     * @param context Context for initializing the preference controllers.
+     *
+     * @param context     Context for initializing the preference controllers.
      * @param userManager UserManagerWrapper for figuring out which controllers to add.
      */
     public static List<AbstractPreferenceController> getSecondaryUserControllers(
@@ -91,8 +94,9 @@ public class SecondaryUserController extends AbstractPreferenceController implem
 
     /**
      * Constructor for a given secondary user.
+     *
      * @param context Context to initialize the underlying {@link AbstractPreferenceController}.
-     * @param info {@link UserInfo} for the secondary user which this controllers covers.
+     * @param info    {@link UserInfo} for the secondary user which this controllers covers.
      */
     @VisibleForTesting
     SecondaryUserController(Context context, @NonNull UserInfo info) {
@@ -107,7 +111,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
             mStoragePreference = new StorageItemPreference(screen.getContext());
 
             PreferenceGroup group =
-                    (PreferenceGroup) screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
+                    screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
             mStoragePreference.setTitle(mUser.name);
             mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
             if (mSize != SIZE_NOT_SET) {
@@ -140,6 +144,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
 
     /**
      * Sets the size for the preference.
+     *
      * @param size Size in bytes.
      */
     public void setSize(long size) {
@@ -151,6 +156,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
 
     /**
      * Sets the total size for the preference for the progress bar.
+     *
      * @param totalSizeBytes Total size in bytes.
      */
     public void setTotalSize(long totalSizeBytes) {
@@ -185,8 +191,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
 
         @Override
         public void displayPreference(PreferenceScreen screen) {
-            PreferenceGroup group =
-                    (PreferenceGroup) screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
+            final PreferenceGroup group = screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
             if (group == null) {
                 return;
             }

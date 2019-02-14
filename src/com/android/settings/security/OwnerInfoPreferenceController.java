@@ -61,7 +61,7 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mOwnerInfoPref  = (RestrictedPreference) screen.findPreference(KEY_OWNER_INFO);
+        mOwnerInfoPref  = screen.findPreference(KEY_OWNER_INFO);
     }
 
     @Override

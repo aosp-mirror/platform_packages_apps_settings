@@ -17,7 +17,6 @@ package com.android.settings.nfc;
 
 import android.content.Context;
 import android.nfc.NfcAdapter;
-import android.os.SystemProperties;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -30,7 +29,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 public class SecureNfcPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
-    public static final String KEY_TOGGLE_NFC = "nfc_secure_setting";
     private final NfcAdapter mNfcAdapter;
     private SecureNfcEnabler mSecureNfcEnabler;
 
@@ -47,8 +45,7 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
             return;
         }
 
-        final SwitchPreference switchPreference =
-                (SwitchPreference) screen.findPreference(getPreferenceKey());
+        final SwitchPreference switchPreference = screen.findPreference(getPreferenceKey());
 
         mSecureNfcEnabler = new SecureNfcEnabler(mContext, switchPreference);
     }
@@ -69,8 +66,9 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
         if (mNfcAdapter == null) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return mNfcAdapter.deviceSupportsNfcSecure() ? AVAILABLE
-            : UNSUPPORTED_ON_DEVICE;
+        return mNfcAdapter.deviceSupportsNfcSecure()
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

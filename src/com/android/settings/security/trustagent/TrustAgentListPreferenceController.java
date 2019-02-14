@@ -91,7 +91,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSecurityCategory = (PreferenceCategory) screen.findPreference(PREF_KEY_SECURITY_CATEGORY);
+        mSecurityCategory = screen.findPreference(PREF_KEY_SECURITY_CATEGORY);
         updateTrustAgents();
     }
 

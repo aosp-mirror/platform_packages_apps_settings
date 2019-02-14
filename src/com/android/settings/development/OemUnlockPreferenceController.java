@@ -77,7 +77,7 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (RestrictedSwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

@@ -84,7 +84,7 @@ public class AccountHeaderPreferenceController extends AbstractPreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mHeaderPreference = (LayoutPreference) screen.findPreference(KEY_ACCOUNT_HEADER);
+        mHeaderPreference = screen.findPreference(KEY_ACCOUNT_HEADER);
     }
 
     @Override

@@ -81,16 +81,16 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (DropDownPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
         if (mPreference == null) {
             return;
         }
 
-        mPreference.setEntries(new CharSequence[] {
+        mPreference.setEntries(new CharSequence[]{
                 mContext.getText(R.string.nfc_payment_favor_open),
                 mContext.getText(R.string.nfc_payment_favor_default)
         });
-        mPreference.setEntryValues(new CharSequence[] {"1", "0"});
+        mPreference.setEntryValues(new CharSequence[]{"1", "0"});
     }
 
     @Override
@@ -124,7 +124,7 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
         mPaymentBackend.setForegroundMode(foregroundMode);
         mMetricsFeatureProvider.action(mContext,
                 foregroundMode ? SettingsEnums.ACTION_NFC_PAYMENT_FOREGROUND_SETTING
-                               : SettingsEnums.ACTION_NFC_PAYMENT_ALWAYS_SETTING);
+                        : SettingsEnums.ACTION_NFC_PAYMENT_ALWAYS_SETTING);
         return true;
     }
 

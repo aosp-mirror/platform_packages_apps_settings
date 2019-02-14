@@ -41,7 +41,6 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Preference controller to allow users to choose an overlay from a list for a given category.
@@ -91,7 +90,7 @@ public class OverlayCategoryPreferenceController extends DeveloperOptionsPrefere
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        setPreference((ListPreference) screen.findPreference(getPreferenceKey()));
+        setPreference(screen.findPreference(getPreferenceKey()));
     }
 
     @VisibleForTesting
@@ -124,7 +123,8 @@ public class OverlayCategoryPreferenceController extends DeveloperOptionsPrefere
                     if (PACKAGE_DEVICE_DEFAULT.equals(packageName)) {
                         return mOverlayManager.setEnabled(currentPackageName, false, USER_SYSTEM);
                     } else {
-                        return mOverlayManager.setEnabledExclusiveInCategory(packageName, USER_SYSTEM);
+                        return mOverlayManager.setEnabledExclusiveInCategory(packageName,
+                                USER_SYSTEM);
                     }
                 } catch (RemoteException re) {
                     Log.w(TAG, "Error enabling overlay.", re);

@@ -45,9 +45,11 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
         implements RadioButtonPreference.OnClickListener, LifecycleObserver, OnSaveInstanceState,
         OnResume, OnPause, OnCreate, PreferenceControllerMixin {
 
-    @VisibleForTesting static final String KEY_VIBRATE = "prevent_ringing_option_vibrate";
+    @VisibleForTesting
+    static final String KEY_VIBRATE = "prevent_ringing_option_vibrate";
 
-    @VisibleForTesting static final String KEY_MUTE = "prevent_ringing_option_mute";
+    @VisibleForTesting
+    static final String KEY_MUTE = "prevent_ringing_option_mute";
 
     private final String KEY_VIDEO_PAUSED = "key_video_paused";
     private final String PREF_KEY_VIDEO = "gesture_prevent_ringing_video";
@@ -57,9 +59,12 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     private VideoPreference mVideoPreference;
     private boolean mVideoPaused;
 
-    @VisibleForTesting PreferenceCategory mPreferenceCategory;
-    @VisibleForTesting RadioButtonPreference mVibratePref;
-    @VisibleForTesting RadioButtonPreference mMutePref;
+    @VisibleForTesting
+    PreferenceCategory mPreferenceCategory;
+    @VisibleForTesting
+    RadioButtonPreference mVibratePref;
+    @VisibleForTesting
+    RadioButtonPreference mMutePref;
 
     private SettingObserver mSettingObserver;
 
@@ -75,17 +80,18 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreferenceCategory = (PreferenceCategory) screen.findPreference(getPreferenceKey());
-            mVibratePref = makeRadioPreference(KEY_VIBRATE, R.string.prevent_ringing_option_vibrate);
-            mMutePref = makeRadioPreference(KEY_MUTE, R.string.prevent_ringing_option_mute);
-
-            if (mPreferenceCategory != null) {
-                mSettingObserver = new SettingObserver(mPreferenceCategory);
-            }
-
-            mVideoPreference = (VideoPreference) screen.findPreference(getVideoPrefKey());
+        if (!isAvailable()) {
+            return;
         }
+        mPreferenceCategory = screen.findPreference(getPreferenceKey());
+        mVibratePref = makeRadioPreference(KEY_VIBRATE, R.string.prevent_ringing_option_vibrate);
+        mMutePref = makeRadioPreference(KEY_MUTE, R.string.prevent_ringing_option_mute);
+
+        if (mPreferenceCategory != null) {
+            mSettingObserver = new SettingObserver(mPreferenceCategory);
+        }
+
+        mVideoPreference = screen.findPreference(getVideoPrefKey());
     }
 
     @Override

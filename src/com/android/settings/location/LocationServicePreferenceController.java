@@ -84,8 +84,7 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mCategoryLocationServices =
-                (PreferenceCategory) screen.findPreference(KEY_LOCATION_SERVICES);
+        mCategoryLocationServices = screen.findPreference(KEY_LOCATION_SERVICES);
     }
 
     @Override

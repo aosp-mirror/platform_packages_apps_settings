@@ -67,7 +67,7 @@ public class SoundPreferenceController extends NotificationPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (NotificationSoundPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     public void updateState(Preference preference) {

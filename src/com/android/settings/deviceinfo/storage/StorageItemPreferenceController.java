@@ -77,7 +77,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     static final String FILES_KEY = "pref_files";
 
     private final Fragment mFragment;
-    private final  MetricsFeatureProvider mMetricsFeatureProvider;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final StorageVolumeProvider mSvp;
     private VolumeInfo mVolume;
     private int mUserId;
@@ -225,7 +225,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private static Drawable applyTint(Context context, Drawable icon) {
         TypedArray array =
-                context.obtainStyledAttributes(new int[] {android.R.attr.colorControlNormal});
+                context.obtainStyledAttributes(new int[]{android.R.attr.colorControlNormal});
         icon = icon.mutate();
         icon.setTint(array.getColor(0, 0));
         array.recycle();
@@ -235,13 +235,13 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mScreen = screen;
-        mPhotoPreference = (StorageItemPreference) screen.findPreference(PHOTO_KEY);
-        mAudioPreference = (StorageItemPreference) screen.findPreference(AUDIO_KEY);
-        mGamePreference = (StorageItemPreference) screen.findPreference(GAME_KEY);
-        mMoviesPreference = (StorageItemPreference) screen.findPreference(MOVIES_KEY);
-        mAppPreference = (StorageItemPreference) screen.findPreference(OTHER_APPS_KEY);
-        mSystemPreference = (StorageItemPreference) screen.findPreference(SYSTEM_KEY);
-        mFilePreference = (StorageItemPreference) screen.findPreference(FILES_KEY);
+        mPhotoPreference = screen.findPreference(PHOTO_KEY);
+        mAudioPreference = screen.findPreference(AUDIO_KEY);
+        mGamePreference = screen.findPreference(GAME_KEY);
+        mMoviesPreference = screen.findPreference(MOVIES_KEY);
+        mAppPreference = screen.findPreference(OTHER_APPS_KEY);
+        mSystemPreference = screen.findPreference(SYSTEM_KEY);
+        mFilePreference = screen.findPreference(FILES_KEY);
 
         setFilesPreferenceVisibility();
     }

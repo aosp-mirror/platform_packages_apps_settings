@@ -46,7 +46,6 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
     /**
      * Converts a used storage amount to a formatted text.
      *
-     * @param context Context
      * @param usedBytes used bytes of storage
      * @return a formatted text.
      */
@@ -59,7 +58,7 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mSummary = (StorageSummaryDonutPreference) screen.findPreference("pref_summary");
+        mSummary = screen.findPreference("pref_summary");
         mSummary.setEnabled(true);
     }
 
@@ -94,7 +93,7 @@ public class StorageSummaryDonutPreferenceController extends AbstractPreferenceC
     /**
      * Updates the state of the donut preference for the next update.
      *
-     * @param used Total number of used bytes on the summarized volume.
+     * @param used  Total number of used bytes on the summarized volume.
      * @param total Total number of bytes on the summarized volume.
      */
     public void updateBytes(long used, long total) {

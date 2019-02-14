@@ -43,7 +43,7 @@ public class BootSoundPreferenceController extends AbstractPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            SwitchPreference preference = (SwitchPreference) screen.findPreference(KEY_BOOT_SOUNDS);
+            SwitchPreference preference = screen.findPreference(KEY_BOOT_SOUNDS);
             preference.setChecked(SystemProperties.getBoolean(PROPERTY_BOOT_SOUNDS, true));
         }
     }

@@ -56,7 +56,7 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        LayoutPreference pref = (LayoutPreference) screen.findPreference(KEY);
+        LayoutPreference pref = screen.findPreference(KEY);
         mSwitchBar = pref.findViewById(R.id.switch_bar);
 
         if (mSwitchBar != null) {

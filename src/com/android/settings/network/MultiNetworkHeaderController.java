@@ -65,7 +65,7 @@ public class MultiNetworkHeaderController extends BasePreferenceController imple
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreferenceCategory = (PreferenceCategory) screen.findPreference(mPreferenceKey);
+        mPreferenceCategory = screen.findPreference(mPreferenceKey);
         mPreferenceCategory.setVisible(isAvailable());
         mWifiController.displayPreference(screen);
         mSubscriptionsController.displayPreference(screen);

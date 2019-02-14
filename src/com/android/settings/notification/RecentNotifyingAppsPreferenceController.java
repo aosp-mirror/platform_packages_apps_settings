@@ -118,7 +118,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mCategory = (PreferenceCategory) screen.findPreference(getPreferenceKey());
+        mCategory = screen.findPreference(getPreferenceKey());
         mSeeAllPref = screen.findPreference(KEY_SEE_ALL);
         mDivider = screen.findPreference(KEY_DIVIDER);
         super.displayPreference(screen);
