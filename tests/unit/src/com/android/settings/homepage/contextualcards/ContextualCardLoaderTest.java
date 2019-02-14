@@ -37,13 +37,17 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class ContextualCardLoaderTest {
 
+    private static final Uri TEST_URI = Uri.parse("content://test/test");
+
     private Context mContext;
     private ContextualCardLoader mContextualCardLoader;
+    private EligibleCardChecker mEligibleCardChecker;
 
     @Before
     public void setUp() {
         mContext = InstrumentationRegistry.getTargetContext();
         mContextualCardLoader = new ContextualCardLoader(mContext);
+        mEligibleCardChecker = new EligibleCardChecker(mContext, getContextualCard(TEST_URI));
     }
 
     @Test
@@ -53,9 +57,9 @@ public class ContextualCardLoaderTest {
         final String sliceUri3 = "cotent://com.android.settings.slices/action/flashlight";
 
         final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(getContextualCard(sliceUri1));
-        cards.add(getContextualCard(sliceUri2));
-        cards.add(getContextualCard(sliceUri3));
+        cards.add(getContextualCard(Uri.parse(sliceUri1)));
+        cards.add(getContextualCard(Uri.parse(sliceUri2)));
+        cards.add(getContextualCard(Uri.parse(sliceUri3)));
 
         final List<ContextualCard> result = mContextualCardLoader.filterEligibleCards(cards);
 
@@ -65,7 +69,7 @@ public class ContextualCardLoaderTest {
     @Test
     public void bindSlice_flashlightUri_shouldReturnFlashlightSlice() {
         final Slice loadedSlice =
-                mContextualCardLoader.bindSlice(CustomSliceRegistry.FLASHLIGHT_SLICE_URI);
+                mEligibleCardChecker.bindSlice(CustomSliceRegistry.FLASHLIGHT_SLICE_URI);
 
         assertThat(loadedSlice.getUri()).isEqualTo(CustomSliceRegistry.FLASHLIGHT_SLICE_URI);
     }
@@ -74,16 +78,16 @@ public class ContextualCardLoaderTest {
     public void bindSlice_noProvider_shouldReturnNull() {
         final String sliceUri = "content://com.android.settings.test.slices/action/flashlight";
 
-        final Slice loadedSlice = mContextualCardLoader.bindSlice(Uri.parse(sliceUri));
+        final Slice loadedSlice = mEligibleCardChecker.bindSlice(Uri.parse(sliceUri));
 
         assertThat(loadedSlice).isNull();
     }
 
-    private ContextualCard getContextualCard(String sliceUri) {
+    private ContextualCard getContextualCard(Uri sliceUri) {
         return new ContextualCard.Builder()
                 .setName("test_card")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(Uri.parse(sliceUri))
+                .setSliceUri(sliceUri)
                 .build();
     }
 }

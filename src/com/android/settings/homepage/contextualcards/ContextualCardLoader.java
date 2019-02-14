@@ -16,17 +16,13 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import static android.app.slice.Slice.HINT_ERROR;
-
 import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.NOTIFICATION_CHANNEL_SLICE_URI;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.format.DateUtils;
@@ -34,8 +30,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.slice.Slice;
-import androidx.slice.SliceViewManager;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -43,9 +37,12 @@ import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+import java.util.concurrent.TimeoutException;
 
 public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
@@ -55,8 +52,9 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS * 3;
 
     private static final String TAG = "ContextualCardLoader";
-    private static final long LATCH_TIMEOUT_MS = 200;
+    private static final long ELIGIBILITY_CHECKER_TIMEOUT_MS = 250;
 
+    private final ExecutorService mExecutorService;
     private final ContentObserver mObserver = new ContentObserver(
             new Handler(Looper.getMainLooper())) {
         @Override
@@ -72,6 +70,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     ContextualCardLoader(Context context) {
         super(context);
         mContext = context.getApplicationContext();
+        mExecutorService = Executors.newCachedThreadPool();
     }
 
     @Override
@@ -170,68 +169,27 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     List<ContextualCard> filterEligibleCards(List<ContextualCard> candidates) {
-        return candidates.stream().filter(card -> isCardEligibleToDisplay(card))
-                .collect(Collectors.toList());
-    }
+        final List<ContextualCard> cards = new ArrayList<>();
+        final List<Future<ContextualCard>> eligibleCards = new ArrayList<>();
 
-    @VisibleForTesting
-    boolean isCardEligibleToDisplay(ContextualCard card) {
-        final long startTime = System.currentTimeMillis();
-        if (card.isCustomCard()) {
-            return true;
+        for (ContextualCard card : candidates) {
+            final EligibleCardChecker future = new EligibleCardChecker(mContext, card);
+            eligibleCards.add(mExecutorService.submit(future));
         }
-
-        final Uri uri = card.getSliceUri();
-
-        if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
-            return false;
+        // Collect future and eligible cards
+        for (Future<ContextualCard> cardFuture : eligibleCards) {
+            try {
+                //TODO(b/124492762): Log latency and timeout occurrence.
+                final ContextualCard card = cardFuture.get(ELIGIBILITY_CHECKER_TIMEOUT_MS,
+                        TimeUnit.MILLISECONDS);
+                if (card != null) {
+                    cards.add(card);
+                }
+            } catch (ExecutionException | InterruptedException | TimeoutException e) {
+                Log.w(TAG, "Failed to get eligible state for card, likely timeout. Skipping", e);
+            }
         }
-
-        final Slice slice = bindSlice(uri);
-        //TODO(b/123668403): remove the log here once we do the change with FutureTask
-        final long bindTime = System.currentTimeMillis() - startTime;
-        Log.d(TAG, "Binding time for " + uri + " = " + bindTime);
-
-        if (slice == null || slice.hasHint(HINT_ERROR)) {
-            Log.w(TAG, "Failed to bind slice, not eligible for display " + uri);
-            return false;
-        }
-
-        return true;
-    }
-
-    @VisibleForTesting
-    Slice bindSlice(Uri uri) {
-        final SliceViewManager manager = SliceViewManager.getInstance(mContext);
-        final Slice[] returnSlice = new Slice[1];
-        final CountDownLatch latch = new CountDownLatch(1);
-        final SliceViewManager.SliceCallback callback =
-                new SliceViewManager.SliceCallback() {
-                    @Override
-                    public void onSliceUpdated(Slice slice) {
-                        try {
-                            // We are just making sure the existence of the slice, so ignore
-                            // slice loading state here.
-                            returnSlice[0] = slice;
-                            latch.countDown();
-                        } catch (Exception e) {
-                            Log.w(TAG, uri + " cannot be indexed", e);
-                        } finally {
-                            manager.unregisterSliceCallback(uri, this);
-                        }
-                    }
-                };
-        // Register a callback until we get a loaded slice.
-        manager.registerSliceCallback(uri, callback);
-        // Trigger the binding.
-        callback.onSliceUpdated(manager.bindSlice(uri));
-        try {
-            latch.await(LATCH_TIMEOUT_MS, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            Log.w(TAG, "Error waiting for slice binding for uri" + uri, e);
-            manager.unregisterSliceCallback(uri, callback);
-        }
-        return returnSlice[0];
+        return cards;
     }
 
     private int getNumberOfLargeCard(List<ContextualCard> cards) {
