@@ -22,11 +22,11 @@ import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.core.FeatureFlags;
 
 import java.util.HashSet;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Helper class to get feature persistent flag information.
