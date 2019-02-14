@@ -30,18 +30,26 @@ import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.Spinner;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.AppItem;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.net.NetworkCycleChartData;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
@@ -123,5 +131,33 @@ public class DataUsageListTest {
 
         assertThat(mDataUsageList.mTemplate).isNotNull();
         assertThat(mDataUsageList.mSubId).isEqualTo(3);
+    }
+
+    @Test
+    public void startAppDataUsage_shouldAddCyclesInfoToLaunchArguments() {
+        final long startTime = 1521583200000L;
+        final long endTime = 1521676800000L;
+        final List<NetworkCycleChartData> data = new ArrayList<>();
+        final NetworkCycleChartData.Builder builder = new NetworkCycleChartData.Builder();
+        builder.setStartTime(startTime)
+            .setEndTime(endTime);
+        data.add(builder.build());
+        ReflectionHelpers.setField(mDataUsageList, "mCycleData", data);
+        final Spinner spinner = mock(Spinner.class);
+        when(spinner.getSelectedItemPosition()).thenReturn(0);
+        ReflectionHelpers.setField(mDataUsageList, "mCycleSpinner", spinner);
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
+
+        mDataUsageList.startAppDataUsage(new AppItem());
+
+        verify(mContext).startActivity(intent.capture());
+        final Bundle arguments =
+            intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat(arguments.getLong(AppDataUsage.ARG_SELECTED_CYCLE)).isEqualTo(endTime);
+        final ArrayList<Long> cycles =
+            (ArrayList) arguments.getSerializable(AppDataUsage.ARG_NETWORK_CYCLES);
+        assertThat(cycles).hasSize(2);
+        assertThat(cycles.get(0)).isEqualTo(endTime);
+        assertThat(cycles.get(1)).isEqualTo(startTime);
     }
 }

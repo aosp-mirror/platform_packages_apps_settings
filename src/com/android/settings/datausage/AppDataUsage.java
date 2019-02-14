@@ -52,6 +52,7 @@ import com.android.settingslib.net.NetworkCycleDataForUidLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceChangeListener,
@@ -59,8 +60,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     private static final String TAG = "AppDataUsage";
 
-    public static final String ARG_APP_ITEM = "app_item";
-    public static final String ARG_NETWORK_TEMPLATE = "network_template";
+    static final String ARG_APP_ITEM = "app_item";
+    static final String ARG_NETWORK_TEMPLATE = "network_template";
+    static final String ARG_NETWORK_CYCLES = "network_cycles";
+    static final String ARG_SELECTED_CYCLE = "selected_cycle";
 
     private static final String KEY_TOTAL_USAGE = "total_usage";
     private static final String KEY_FOREGROUND_USAGE = "foreground_usage";
@@ -99,6 +102,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private RestrictedSwitchPreference mUnrestrictedData;
     private DataSaverBackend mDataSaverBackend;
     private Context mContext;
+    private ArrayList<Long> mCycles;
+    private long mSelectedCycle;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -110,6 +115,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         mAppItem = (args != null) ? (AppItem) args.getParcelable(ARG_APP_ITEM) : null;
         mTemplate = (args != null) ? (NetworkTemplate) args.getParcelable(ARG_NETWORK_TEMPLATE)
                 : null;
+        mCycles = (args != null) ? (ArrayList) args.getSerializable(ARG_NETWORK_CYCLES)
+            : null;
+        mSelectedCycle = (args != null) ? args.getLong(ARG_SELECTED_CYCLE) : 0L;
+
         if (mTemplate == null) {
             mTemplate = DataUsageUtils.getDefaultTemplate(mContext,
                     SubscriptionManager.getDefaultDataSubscriptionId());
@@ -393,6 +402,9 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 } else {
                     builder.addUid(mAppItem.key);
                 }
+                if (mCycles != null) {
+                    builder.setCycles(mCycles);
+                }
                 return builder.build();
             }
 
@@ -401,7 +413,23 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                     List<NetworkCycleDataForUid> data) {
                 mUsageData = data;
                 mCycleAdapter.updateCycleList(data);
-                bindData(0 /* position */);
+                if (mSelectedCycle > 0L) {
+                    final int numCycles = data.size();
+                    int position = 0;
+                    for (int i = 0; i < numCycles; i++) {
+                        final NetworkCycleDataForUid cycleData = data.get(i);
+                        if (cycleData.getEndTime() == mSelectedCycle) {
+                            position = i;
+                            break;
+                        }
+                    }
+                    if (position > 0) {
+                        mCycle.setSelection(position);
+                    }
+                    bindData(position);
+                } else {
+                    bindData(0 /* position */);
+                }
             }
 
             @Override

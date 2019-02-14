@@ -159,7 +159,7 @@ public class WifiSlice implements CustomSliceable {
 
     private IconCompat getEndIcon(AccessPoint accessPoint) {
         if (accessPoint.isActive()) {
-            return IconCompat.createWithResource(mContext, R.drawable.ic_settings);
+            return IconCompat.createWithResource(mContext, R.drawable.ic_settings_accent);
         } else if (accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
             return IconCompat.createWithResource(mContext, R.drawable.ic_friction_lock_closed);
         } else if (accessPoint.isMetered()) {

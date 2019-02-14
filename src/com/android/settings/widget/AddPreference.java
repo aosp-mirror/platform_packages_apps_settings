@@ -34,6 +34,7 @@ public class AddPreference extends RestrictedPreference implements View.OnClickL
 
     private OnAddClickListener mListener;
     private View mWidgetFrame;
+    private View mAddWidget;
 
     public AddPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -53,6 +54,12 @@ public class AddPreference extends RestrictedPreference implements View.OnClickL
        }
     }
 
+    public void setAddWidgetEnabled(boolean enabled) {
+        if (mAddWidget != null) {
+            mAddWidget.setEnabled(enabled);
+        }
+    }
+
     @Override
     protected int getSecondTargetResId() {
         return R.layout.preference_widget_add;
@@ -67,9 +74,9 @@ public class AddPreference extends RestrictedPreference implements View.OnClickL
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         mWidgetFrame = holder.findViewById(android.R.id.widget_frame);
-        final View addWidget = holder.findViewById(getAddWidgetResId());
-        addWidget.setEnabled(true);
-        addWidget.setOnClickListener(this);
+        mAddWidget = holder.findViewById(getAddWidgetResId());
+        mAddWidget.setEnabled(true);
+        mAddWidget.setOnClickListener(this);
     }
 
     @Override

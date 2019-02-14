@@ -43,6 +43,6 @@ public class ShadowTileUtils {
     @Implementation
     protected static Pair<String, Integer> getIconFromUri(Context context, String packageName,
             String uriString, Map<String, IContentProvider> providerMap) {
-        return Pair.create(RuntimeEnvironment.application.getPackageName(), R.drawable.ic_settings);
+        return Pair.create(RuntimeEnvironment.application.getPackageName(), R.drawable.ic_settings_accent);
     }
 }

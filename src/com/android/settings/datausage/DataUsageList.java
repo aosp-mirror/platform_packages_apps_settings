@@ -109,6 +109,7 @@ public class DataUsageList extends DataUsageBaseFragment {
     @VisibleForTesting
     int mNetworkType;
     private List<NetworkCycleChartData> mCycleData;
+    private ArrayList<Long> mCycles;
 
     private LoadingViewController mLoadingViewController;
     private UidDetailProvider mUidDetailProvider;
@@ -411,10 +412,23 @@ public class DataUsageList extends DataUsageBaseFragment {
         }
     }
 
-    private void startAppDataUsage(AppItem item) {
+    @VisibleForTesting
+    void startAppDataUsage(AppItem item) {
         final Bundle args = new Bundle();
         args.putParcelable(AppDataUsage.ARG_APP_ITEM, item);
         args.putParcelable(AppDataUsage.ARG_NETWORK_TEMPLATE, mTemplate);
+        if (mCycles == null) {
+            mCycles = new ArrayList<>();
+            for (NetworkCycleChartData data : mCycleData) {
+                if (mCycles.isEmpty()) {
+                    mCycles.add(data.getEndTime());
+                }
+                mCycles.add(data.getStartTime());
+            }
+        }
+        args.putSerializable(AppDataUsage.ARG_NETWORK_CYCLES, mCycles);
+        args.putLong(AppDataUsage.ARG_SELECTED_CYCLE,
+            mCycleData.get(mCycleSpinner.getSelectedItemPosition()).getEndTime());
 
         new SubSettingLauncher(getContext())
                 .setDestination(AppDataUsage.class.getName())

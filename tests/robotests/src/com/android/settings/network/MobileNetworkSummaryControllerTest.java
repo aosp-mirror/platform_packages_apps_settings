@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.ArgumentMatchers.notNull;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -33,9 +34,12 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
+import android.text.TextUtils;
 
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.widget.AddPreference;
@@ -61,7 +65,8 @@ public class MobileNetworkSummaryControllerTest {
     private Lifecycle mLifecycle;
     @Mock
     private TelephonyManager mTelephonyManager;
-
+    @Mock
+    private EuiccManager mEuiccManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
@@ -74,7 +79,9 @@ public class MobileNetworkSummaryControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(Robolectric.setupActivity(Activity.class));
         when(mContext.getSystemService(eq(TelephonyManager.class))).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
         when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(UNKNOWN);
+        when(mEuiccManager.isEnabled()).thenReturn(true);
 
         mController = new MobileNetworkSummaryController(mContext, mLifecycle);
         mPreference = spy(new AddPreference(mContext, null));
@@ -89,6 +96,14 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    public void isAvailable_wifiOnlyMode_notAvailable() {
+        ConnectivityManager cm = mock(ConnectivityManager.class);
+        when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
     public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
@@ -99,6 +114,14 @@ public class MobileNetworkSummaryControllerTest {
         verify(mContext).startActivity(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getAction()).isEqualTo(
                 EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
+    }
+
+    @Test
+    public void getSummary_noSubscriptionsNoEuiccMgr_correctSummaryAndClickHandler() {
+        when(mEuiccManager.isEnabled()).thenReturn(false);
+        assertThat(TextUtils.isEmpty(mController.getSummary())).isTrue();
+        assertThat(mPreference.getOnPreferenceClickListener()).isNull();
+        assertThat(mPreference.getFragment()).isNull();
     }
 
     @Test
@@ -205,6 +228,15 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    public void addButton_noSubscriptionsMultiSimModeNoEuiccMgr_noAddClickListener() {
+        when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(DSDS);
+        when(mEuiccManager.isEnabled()).thenReturn(false);
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        verify(mPreference, never()).setOnAddClickListener(notNull());
+    }
+
+    @Test
     public void addButton_noSubscriptionsMultiSimMode_hasAddClickListenerAndPrefDisabled() {
         when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(DSDS);
         mController.displayPreference(mPreferenceScreen);
@@ -235,5 +267,74 @@ public class MobileNetworkSummaryControllerTest {
         mController.onResume();
         verify(mPreference, never()).setOnAddClickListener(isNull());
         verify(mPreference).setOnAddClickListener(notNull());
+    }
+
+    @Test
+    public void addButton_oneSubscriptionAirplaneModeTurnedOn_addButtonGetsDisabled() {
+        when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(DSDS);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
+        mController.onAirplaneModeChanged(true);
+
+        ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mPreference, atLeastOnce()).setAddWidgetEnabled(captor.capture());
+        assertThat(captor.getValue()).isFalse();
+    }
+
+    @Test
+    public void onResume_oneSubscriptionAirplaneMode_isDisabled() {
+        when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(DSDS);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
+        assertThat(mPreference.isEnabled()).isFalse();
+
+        ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mPreference, atLeastOnce()).setAddWidgetEnabled(captor.capture());
+        assertThat(captor.getValue()).isFalse();
+    }
+
+    @Test
+    public void onAirplaneModeChanged_oneSubscriptionAirplaneModeGetsTurnedOn_isDisabled() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
+        assertThat(mPreference.isEnabled()).isTrue();
+
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
+        mController.onAirplaneModeChanged(true);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void onAirplaneModeChanged_oneSubscriptionAirplaneModeGetsTurnedOff_isEnabled() {
+        when(mTelephonyManager.getMultiSimConfiguration()).thenReturn(DSDS);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
+        assertThat(mPreference.isEnabled()).isFalse();
+
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+        mController.onAirplaneModeChanged(false);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+
+        ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mPreference, atLeastOnce()).setAddWidgetEnabled(eq(false));
+        verify(mPreference, atLeastOnce()).setAddWidgetEnabled(captor.capture());
+        assertThat(captor.getValue()).isTrue();
     }
 }
