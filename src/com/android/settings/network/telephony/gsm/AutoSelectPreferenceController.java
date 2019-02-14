@@ -112,8 +112,10 @@ public class AutoSelectPreferenceController extends TogglePreferenceController {
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
         final PersistableBundle carrierConfig = mContext.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(mSubId);
-        mOnlyAutoSelectInHome = carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL);
+        mOnlyAutoSelectInHome = carrierConfig != null
+                ? carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)
+                : false;
 
         return this;
     }

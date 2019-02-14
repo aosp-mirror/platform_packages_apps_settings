@@ -347,6 +347,7 @@ public class MobileNetworkUtils {
         final PersistableBundle carrierConfig = context.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                || carrierConfig == null
                 || !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_OPERATOR_SELECTION_EXPAND_BOOL)
                 || (carrierConfig.getBoolean(CarrierConfigManager.KEY_CSP_ENABLED_BOOL)

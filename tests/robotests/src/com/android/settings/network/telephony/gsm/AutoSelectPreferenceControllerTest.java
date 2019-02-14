@@ -111,4 +111,12 @@ public class AutoSelectPreferenceControllerTest {
                 mContext.getString(R.string.manual_mode_disallowed_summary,
                         mTelephonyManager.getSimOperatorName()));
     }
+
+    @Test
+    public void init_carrierConfigNull_shouldNotCrash() {
+        when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(null);
+
+        // Should not crash
+        mController.init(SUB_ID);
+    }
 }
