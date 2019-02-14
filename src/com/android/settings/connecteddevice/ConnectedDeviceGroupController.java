@@ -74,7 +74,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
+            mPreferenceGroup = screen.findPreference(KEY);
             mPreferenceGroup.setVisible(false);
 
             final Context context = screen.getContext();

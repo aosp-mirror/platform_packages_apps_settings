@@ -61,7 +61,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSwitch = (MasterSwitchPreference) screen.findPreference(getPreferenceKey());
+        mSwitch = screen.findPreference(getPreferenceKey());
     }
 
     @Override

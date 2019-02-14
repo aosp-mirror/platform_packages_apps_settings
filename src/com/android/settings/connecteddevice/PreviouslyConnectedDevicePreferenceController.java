@@ -47,7 +47,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         super(context, preferenceKey);
 
         mSavedDockUpdater = FeatureFactory.getFactory(
-            context).getDockUpdaterFeatureProvider().getSavedDockUpdater(context, this);
+                context).getDockUpdaterFeatureProvider().getSavedDockUpdater(context, this);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreferenceGroup = (PreferenceGroup) screen.findPreference(getPreferenceKey());
+        mPreferenceGroup = screen.findPreference(getPreferenceKey());
         mPreferenceGroup.setVisible(false);
 
         if (isAvailable()) {

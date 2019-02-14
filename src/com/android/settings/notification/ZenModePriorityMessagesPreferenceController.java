@@ -56,7 +56,7 @@ public class ZenModePriorityMessagesPreferenceController extends AbstractZenMode
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (ListPreference) screen.findPreference(KEY);
+        mPreference = screen.findPreference(KEY);
     }
 
     @Override

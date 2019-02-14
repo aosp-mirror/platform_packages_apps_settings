@@ -44,7 +44,7 @@ public class FaceSettingsVideoPreferenceController extends VideoPreferenceContro
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mVideoPreference = (VideoPreference) screen.findPreference(KEY_VIDEO);
+        mVideoPreference = screen.findPreference(KEY_VIDEO);
         mVideoPreference.onViewVisible(false /* paused */);
     }
 }

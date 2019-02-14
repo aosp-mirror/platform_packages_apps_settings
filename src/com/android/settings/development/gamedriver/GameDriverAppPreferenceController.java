@@ -55,8 +55,8 @@ import java.util.Set;
  */
 public class GameDriverAppPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener,
-                   GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
-                   OnStart, OnStop {
+        GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
+        OnStart, OnStop {
 
     private final Context mContext;
     private final ContentResolver mContentResolver;
@@ -103,9 +103,9 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
     @Override
     public int getAvailabilityStatus() {
         return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
-                        && (Settings.Global.getInt(mContentResolver,
-                                    Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
-                                != GAME_DRIVER_OFF)
+                && (Settings.Global.getInt(mContentResolver,
+                Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
+                != GAME_DRIVER_OFF)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
@@ -113,7 +113,7 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreferenceGroup = (PreferenceGroup) screen.findPreference(getPreferenceKey());
+        mPreferenceGroup = screen.findPreference(getPreferenceKey());
 
         final Context context = mPreferenceGroup.getContext();
         for (AppInfo appInfo : mAppInfos) {
@@ -179,6 +179,7 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
             info = applicationInfo;
             label = packageManager.getApplicationLabel(applicationInfo).toString();
         }
+
         final ApplicationInfo info;
         final String label;
     }

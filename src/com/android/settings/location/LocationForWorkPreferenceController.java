@@ -57,8 +57,7 @@ public class LocationForWorkPreferenceController extends LocationBasePreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference =
-                (RestrictedSwitchPreference) screen.findPreference(KEY_MANAGED_PROFILE_SWITCH);
+        mPreference = screen.findPreference(KEY_MANAGED_PROFILE_SWITCH);
     }
 
     @Override

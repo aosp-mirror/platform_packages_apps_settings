@@ -47,8 +47,7 @@ public class AndroidBeamPreferenceController extends BasePreferenceController
             return;
         }
 
-        final RestrictedPreference restrictedPreference =
-                (RestrictedPreference) screen.findPreference(getPreferenceKey());
+        final RestrictedPreference restrictedPreference = screen.findPreference(getPreferenceKey());
         mAndroidBeamEnabler = new AndroidBeamEnabler(mContext, restrictedPreference);
     }
 
@@ -57,7 +56,7 @@ public class AndroidBeamPreferenceController extends BasePreferenceController
     public int getAvailabilityStatus() {
         PackageManager pm = mContext.getPackageManager();
         if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC_BEAM)) {
-                return UNSUPPORTED_ON_DEVICE;
+            return UNSUPPORTED_ON_DEVICE;
         }
         return mNfcAdapter != null
                 ? AVAILABLE

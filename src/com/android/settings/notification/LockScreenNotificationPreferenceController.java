@@ -92,13 +92,13 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mLockscreen = (RestrictedListPreference) screen.findPreference(mSettingKey);
+        mLockscreen = screen.findPreference(mSettingKey);
         if (mLockscreen == null) {
             Log.i(TAG, "Preference not found: " + mSettingKey);
             return;
         }
         if (mProfileUserId != UserHandle.USER_NULL) {
-            mLockscreenProfile = (RestrictedListPreference) screen.findPreference(mWorkSettingKey);
+            mLockscreenProfile = screen.findPreference(mWorkSettingKey);
             mLockscreenProfile.setRequiresActiveUnlockedProfile(true);
             mLockscreenProfile.setProfileUserId(mProfileUserId);
         } else {

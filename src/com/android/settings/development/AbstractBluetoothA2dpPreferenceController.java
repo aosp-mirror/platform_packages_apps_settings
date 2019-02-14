@@ -65,7 +65,7 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
 
         // Set a default value because BluetoothCodecConfig is null initially.
         mPreference.setValue(mListValues[getDefaultIndex()]);
@@ -177,7 +177,7 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
 
     @VisibleForTesting
     void setCodecConfigPreference(BluetoothDevice device,
-                                  BluetoothCodecConfig config) {
+            BluetoothCodecConfig config) {
         mBluetoothA2dp.setCodecConfigPreference(device, config);
     }
 

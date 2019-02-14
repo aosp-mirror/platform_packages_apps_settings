@@ -40,8 +40,7 @@ public class UsbDetailsHeaderController extends UsbDetailsController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference headerPreference =
-                (LayoutPreference) screen.findPreference(KEY_DEVICE_HEADER);
+        final LayoutPreference headerPreference = screen.findPreference(KEY_DEVICE_HEADER);
         mHeaderController = EntityHeaderController.newInstance(mFragment.getActivity(), mFragment,
                 headerPreference.findViewById(R.id.entity_header));
     }

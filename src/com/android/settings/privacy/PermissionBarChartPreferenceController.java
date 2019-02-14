@@ -73,7 +73,7 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBarChartPreference = (BarChartPreference) screen.findPreference(getPreferenceKey());
+        mBarChartPreference = screen.findPreference(getPreferenceKey());
 
         final BarChartInfo info = new BarChartInfo.Builder()
                 .setTitle(R.string.permission_bar_chart_title)

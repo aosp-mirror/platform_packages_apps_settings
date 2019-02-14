@@ -54,7 +54,7 @@ public abstract class VolumeSeekBarPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mPreference = (VolumeSeekBarPreference) screen.findPreference(getPreferenceKey());
+            mPreference = screen.findPreference(getPreferenceKey());
             mPreference.setCallback(mVolumePreferenceCallback);
             mPreference.setStream(getAudioStream());
             mPreference.setMuteIcon(getMuteIcon());

@@ -116,7 +116,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreferenceGroup = (PreferenceGroup) screen.findPreference(getPreferenceKey());
+        mPreferenceGroup = screen.findPreference(getPreferenceKey());
     }
 
     @Override

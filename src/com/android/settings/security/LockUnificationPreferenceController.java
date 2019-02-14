@@ -77,7 +77,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mUnifyProfile = (RestrictedSwitchPreference) screen.findPreference(KEY_UNIFICATION);
+        mUnifyProfile = screen.findPreference(KEY_UNIFICATION);
     }
 
     public LockUnificationPreferenceController(Context context, SecuritySettings host) {

@@ -62,7 +62,7 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (SwitchPreference) screen.findPreference(KEY_ENABLE_WIFI_WAKEUP);
+        mPreference = screen.findPreference(KEY_ENABLE_WIFI_WAKEUP);
         updateState(mPreference);
     }
 

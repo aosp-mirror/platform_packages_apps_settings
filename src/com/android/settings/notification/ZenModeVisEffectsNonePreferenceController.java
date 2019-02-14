@@ -49,7 +49,7 @@ public class ZenModeVisEffectsNonePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
         mPreference.setOnRadioButtonClickListener(this);
     }
 

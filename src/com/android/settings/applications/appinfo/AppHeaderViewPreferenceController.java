@@ -63,7 +63,7 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mHeader = (LayoutPreference) screen.findPreference(KEY_HEADER);
+        mHeader = screen.findPreference(KEY_HEADER);
         final Activity activity = mParent.getActivity();
         mEntityHeaderController = EntityHeaderController
                 .newInstance(activity, mParent, mHeader.findViewById(R.id.entity_header))

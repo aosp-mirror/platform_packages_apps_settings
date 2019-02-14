@@ -53,7 +53,7 @@ public class WifiMasterSwitchPreferenceController extends AbstractPreferenceCont
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mWifiPreference = (MasterSwitchPreference) screen.findPreference(KEY_TOGGLE_WIFI);
+        mWifiPreference = screen.findPreference(KEY_TOGGLE_WIFI);
     }
 
     @Override

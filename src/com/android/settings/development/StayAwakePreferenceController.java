@@ -40,7 +40,7 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 
 public class StayAwakePreferenceController extends DeveloperOptionsPreferenceController
-        implements Preference.OnPreferenceChangeListener, LifecycleObserver,  OnResume, OnPause,
+        implements Preference.OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause,
         PreferenceControllerMixin {
 
     private static final String TAG = "StayAwakeCtrl";
@@ -72,7 +72,7 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (RestrictedSwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

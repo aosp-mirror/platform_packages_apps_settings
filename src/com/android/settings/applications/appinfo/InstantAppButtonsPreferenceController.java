@@ -77,7 +77,7 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (LayoutPreference) screen.findPreference(KEY_INSTANT_APP_BUTTONS);
+        mPreference = screen.findPreference(KEY_INSTANT_APP_BUTTONS);
         initButtons(mPreference.findViewById(R.id.instant_app_button_container));
     }
 
@@ -85,7 +85,7 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (!TextUtils.isEmpty(mLaunchUri)) {
             menu.add(0, AppInfoDashboardFragment.INSTALL_INSTANT_APP_MENU, 2, R.string.install_text)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
     }
 
@@ -137,7 +137,7 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
 
     private void showDialog() {
         final DialogFragment newFragment =
-            InstantAppButtonDialogFragment.newInstance(mPackageName);
+                InstantAppButtonDialogFragment.newInstance(mPackageName);
         newFragment.setTargetFragment(mParent, 0);
         newFragment.show(mParent.getFragmentManager(), KEY_INSTANT_APP_BUTTONS);
     }
@@ -148,7 +148,7 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.setPackage(mPackageName);
         final List<ResolveInfo> infos = manager.queryIntentActivities(
-            intent, PackageManager.GET_META_DATA | PackageManager.MATCH_INSTANT);
+                intent, PackageManager.GET_META_DATA | PackageManager.MATCH_INSTANT);
         for (ResolveInfo info : infos) {
             final Bundle metaData = info.activityInfo.metaData;
             if (metaData != null) {
