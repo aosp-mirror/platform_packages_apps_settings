@@ -65,10 +65,10 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
+import com.google.android.setupcompat.TemplateLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.template.FooterButton.ButtonType;
-import com.google.android.setupdesign.GlifLayout;
 
 import java.util.List;
 
@@ -416,7 +416,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
             return;
         }
 
-        final GlifLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
+        final TemplateLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getActivity())
