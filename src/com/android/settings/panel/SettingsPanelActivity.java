@@ -19,11 +19,13 @@ package com.android.settings.panel;
 import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
 import static com.android.settingslib.media.MediaOutputSliceConstants.EXTRA_PACKAGE_NAME;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -34,6 +36,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.panel.PanelLoggingContract.PanelClosedKeys;
 
 /**
  * Dialog Activity to host Settings Slices.
@@ -49,7 +53,16 @@ public class SettingsPanelActivity extends FragmentActivity {
      * Key specifying which Panel the app is requesting.
      */
     public static final String KEY_PANEL_TYPE_ARGUMENT = "PANEL_TYPE_ARGUMENT";
-    public static final String KEY_PANEL_PACKAGE_NAME = "PANEL_PACKAGE_NAME";
+
+    /**
+     * Key specifying the package which requested the Panel.
+     */
+    public static final String KEY_CALLING_PACKAGE_NAME = "PANEL_CALLING_PACKAGE_NAME";
+
+    /**
+     * Key specifying the package name for which the
+     */
+    public static final String KEY_MEDIA_PACKAGE_NAME = "PANEL_MEDIA_PACKAGE_NAME";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,12 +75,12 @@ public class SettingsPanelActivity extends FragmentActivity {
             return;
         }
 
-        final String packageName =
+        final String mediaPackageName =
                 callingIntent.getStringExtra(EXTRA_PACKAGE_NAME);
 
         if (TextUtils.equals(ACTION_MEDIA_OUTPUT, callingIntent.getAction())
-                && TextUtils.isEmpty(packageName)) {
-            Log.e(TAG, "Null package name, closing Panel Activity");
+                && TextUtils.isEmpty(mediaPackageName)) {
+            Log.e(TAG, "Missing EXTRA_PACKAGE_NAME, closing Panel Activity");
             finish();
             return;
         }
@@ -81,7 +94,8 @@ public class SettingsPanelActivity extends FragmentActivity {
                 WindowManager.LayoutParams.WRAP_CONTENT);
 
         mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, callingIntent.getAction());
-        mBundle.putString(KEY_PANEL_PACKAGE_NAME, packageName);
+        mBundle.putString(KEY_CALLING_PACKAGE_NAME, getCallingPackage());
+        mBundle.putString(KEY_MEDIA_PACKAGE_NAME, mediaPackageName);
 
         final PanelFragment panelFragment = new PanelFragment();
         panelFragment.setArguments(mBundle);
@@ -91,5 +105,22 @@ public class SettingsPanelActivity extends FragmentActivity {
         if (fragment == null) {
             fragmentManager.beginTransaction().add(R.id.main_content, panelFragment).commit();
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+            final PanelContent panelContent = FeatureFactory.getFactory(this)
+                    .getPanelFeatureProvider()
+                    .getPanel(this, getIntent().getAction(), null /* Media Package Name */);
+            FeatureFactory.getFactory(this)
+                    .getMetricsFeatureProvider()
+                    .action(0 /* attribution */,
+                            SettingsEnums.PAGE_HIDE,
+                            panelContent.getMetricsCategory(),
+                            PanelClosedKeys.KEY_CLICKED_OUT,
+                            0 /* value */);
+        }
+        return super.onTouchEvent(event);
     }
 }

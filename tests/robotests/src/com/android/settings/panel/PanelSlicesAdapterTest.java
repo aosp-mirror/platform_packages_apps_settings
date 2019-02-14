@@ -71,7 +71,7 @@ public class PanelSlicesAdapterTest {
                                 .getSupportFragmentManager()
                                 .findFragmentById(R.id.main_content));
 
-        mAdapter = new PanelSlicesAdapter(mPanelFragment, mFakePanelContent.getSlices());
+        mAdapter = new PanelSlicesAdapter(mPanelFragment, mFakePanelContent);
     }
 
     @Test

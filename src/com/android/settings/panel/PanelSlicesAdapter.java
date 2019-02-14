@@ -16,6 +16,7 @@
 
 package com.android.settings.panel;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -31,8 +32,8 @@ import androidx.slice.widget.SliceLiveData;
 import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,10 +44,12 @@ public class PanelSlicesAdapter
 
     private final List<Uri> mSliceUris;
     private final PanelFragment mPanelFragment;
+    private final PanelContent mPanelContent;
 
-    public PanelSlicesAdapter(PanelFragment fragment, List<Uri> sliceUris) {
+    public PanelSlicesAdapter(PanelFragment fragment, PanelContent panel) {
         mPanelFragment = fragment;
-        mSliceUris = new ArrayList<>(sliceUris);
+        mSliceUris = panel.getSlices();
+        mPanelContent = panel;
     }
 
     @NonNull
@@ -56,7 +59,7 @@ public class PanelSlicesAdapter
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view = inflater.inflate(R.layout.panel_slice_row, viewGroup, false);
 
-        return new SliceRowViewHolder(view);
+        return new SliceRowViewHolder(view, mPanelContent);
     }
 
     @Override
@@ -79,22 +82,38 @@ public class PanelSlicesAdapter
      */
     public static class SliceRowViewHolder extends RecyclerView.ViewHolder {
 
+        private final PanelContent mPanelContent;
+
         @VisibleForTesting
         LiveData<Slice> sliceLiveData;
 
         @VisibleForTesting
         final SliceView sliceView;
 
-        public SliceRowViewHolder(View view) {
+        public SliceRowViewHolder(View view, PanelContent panelContent) {
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
             sliceView.setMode(SliceView.MODE_LARGE);
+            mPanelContent = panelContent;
         }
 
         public void onBind(PanelFragment fragment, Uri sliceUri) {
             final Context context = sliceView.getContext();
             sliceLiveData = SliceLiveData.fromUri(context, sliceUri);
             sliceLiveData.observe(fragment.getViewLifecycleOwner(), sliceView);
+
+            // Log Panel interaction
+            sliceView.setOnSliceActionListener(
+                    ((eventInfo, sliceItem) -> {
+                        FeatureFactory.getFactory(context)
+                                .getMetricsFeatureProvider()
+                                .action(0 /* attribution */,
+                                        SettingsEnums.ACTION_PANEL_INTERACTION,
+                                        mPanelContent.getMetricsCategory(),
+                                        sliceUri.toString() /* log key */,
+                                        eventInfo.actionType /* value */);
+                    })
+            );
         }
     }
 }
