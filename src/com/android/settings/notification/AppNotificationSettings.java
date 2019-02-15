@@ -252,7 +252,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 int childCount = groupGroup.getPreferenceCount();
                 for (int i = 0; i < childCount; i++) {
                     Preference pref = groupGroup.getPreference(i);
-                    if (pref instanceof MasterCheckBoxPreference) {
+                    if (pref instanceof ChannelSummaryPreference) {
                         toRemove.add(pref);
                     }
                 }
