@@ -454,6 +454,7 @@
 
     <style name="Widget.SliceView.Settings">
         <item name="titleSize">@*android:dimen/text_size_subhead_material</item>
+        <item name="rowStyle">@style/SliceRowStyle.Settings</item>
     </style>
 
     <style name="TextAppearance.DeferredSetupCardTitle">
@@ -476,7 +477,7 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="slice_view_style">
+    <style name="SliceViewStyle">
         <!-- 4dp start padding for the start icon -->
         <item name="android:paddingStart">4dp</item>
 
@@ -484,10 +485,10 @@
              android:paddingEnd = 24 - 16(contentEndPadding) -->
         <item name="android:paddingEnd">8dp</item>
 
-        <item name="rowStyle">@style/slice_row_style</item>
+        <item name="rowStyle">@style/SliceRowStyle</item>
     </style>
 
-    <style name="slice_row_style">
+    <style name="SliceRowStyle">
         <item name="titleItemEndPadding">0dp</item>
 
         <!-- Padding between content and the start icon is 12dp. -->
@@ -507,5 +508,10 @@
         <item name="bottomDividerEndPadding">4dp</item>
 
         <item name="actionDividerHeight">32dp</item>
+    </style>
+
+    <style name="SliceRowStyle.Settings">
+        <!-- Padding between content and the start icon is 8dp. -->
+        <item name="contentStartPadding">8dp</item>
     </style>
 </resources>
