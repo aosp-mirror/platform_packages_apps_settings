@@ -129,8 +129,6 @@ public class SettingsSliceProvider extends SliceProvider {
     @VisibleForTesting
     Map<Uri, SliceData> mSliceDataCache;
 
-    final Set<Uri> mRegisteredUris = new ArraySet<>();
-
     final Map<Uri, SliceBackgroundWorker> mPinnedWorkers = new ArrayMap<>();
 
     public SettingsSliceProvider() {
@@ -173,14 +171,8 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
-        if (mRegisteredUris.contains(sliceUri)) {
-            Log.d(TAG, "Unregistering uri broadcast relay: " + sliceUri);
-            SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
-            mRegisteredUris.remove(sliceUri);
-        }
-        ThreadUtils.postOnMainThread(() -> {
-            stopBackgroundWorker(sliceUri);
-        });
+        SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
+        ThreadUtils.postOnMainThread(() -> stopBackgroundWorker(sliceUri));
         mSliceDataCache.remove(sliceUri);
     }
 
@@ -462,8 +454,6 @@ public class SettingsSliceProvider extends SliceProvider {
      * {@param intentFilter} happen.
      */
     void registerIntentToUri(IntentFilter intentFilter, Uri sliceUri) {
-        Log.d(TAG, "Registering Uri for broadcast relay: " + sliceUri);
-        mRegisteredUris.add(sliceUri);
         SliceBroadcastRelay.registerReceiver(getContext(), sliceUri, SliceRelayReceiver.class,
                 intentFilter);
     }
