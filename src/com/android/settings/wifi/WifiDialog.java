@@ -82,7 +82,6 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, /* root */ null);
         final ImageButton scannerButton = mView.findViewById(R.id.password_scanner_button);
         if (scannerButton != null) {
-            scannerButton.setVisibility(View.VISIBLE);
             scannerButton.setOnClickListener((View v) -> {
                 String ssid = null;
                 if (mAccessPoint != null) {
