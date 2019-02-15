@@ -18,6 +18,7 @@ package com.android.settings.testutils.shadow;
 
 import android.app.NotificationManager;
 import android.net.Uri;
+import android.service.notification.ZenModeConfig;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -26,6 +27,7 @@ import org.robolectric.annotation.Implements;
 public class ShadowNotificationManager {
 
     private int mZenMode;
+    private ZenModeConfig mZenModeConfig;
 
     @Implementation
     protected void setZenMode(int mode, Uri conditionId, String reason) {
@@ -35,5 +37,14 @@ public class ShadowNotificationManager {
     @Implementation
     protected int getZenMode() {
         return mZenMode;
+    }
+
+    @Implementation
+    public ZenModeConfig getZenModeConfig() {
+        return mZenModeConfig;
+    }
+
+    public void setZenModeConfig(ZenModeConfig config) {
+        mZenModeConfig = config;
     }
 }

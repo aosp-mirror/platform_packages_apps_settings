@@ -9169,8 +9169,11 @@
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
 
-    <!-- Summary of condition that do not disturb is on [CHAR LIMIT=36] -->
-    <string name="condition_zen_summary">Impacts what you hear and see</string>
+    <!-- Summary of condition that do not disturb is on and all exceptions set to off [CHAR LIMIT=36] -->
+    <string name="condition_zen_summary_phone_muted">Phone muted</string>
+
+    <!-- Summary of condition that do not disturb is on and some exceptions are allowed [CHAR LIMIT=36] -->
+    <string name="condition_zen_summary_with_exceptions">With exceptions</string>
 
     <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
     <string name="condition_battery_title">Battery Saver is on</string>
@@ -9200,25 +9203,16 @@
     <string name="condition_device_muted_action_turn_on_sound">Turn on sound</string>
 
     <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_muted_title" product="tablet">Device is muted</string>
-
-    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_muted_title" product="default">Phone muted</string>
+    <string name="condition_device_muted_title">Ringer muted</string>
 
     <!-- Summary of condition that indicates device is muted -->
     <string name="condition_device_muted_summary">For calls &amp; notifications</string>
 
     <!-- Title of condition that indicates device is set to vibrate [CHAR LIMIT=50] -->
-    <string name="condition_device_vibrate_title" product="tablet">Device is set to vibrate</string>
-
-    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_vibrate_title" product="default">Vibration only</string>
+    <string name="condition_device_vibrate_title">Vibration only</string>
 
     <!-- Summary of condition that indicates device is set to vibrate -->
-    <string name="condition_device_vibrate_summary" product="tablet">Calls and notifications will vibrate device</string>
-
-    <!-- Summary of condition that indicates device is set to vibrate -->
-    <string name="condition_device_vibrate_summary" product="default">For calls &amp; notifications</string>
+    <string name="condition_device_vibrate_summary">For calls &amp; notifications</string>
 
     <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=46] -->
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
