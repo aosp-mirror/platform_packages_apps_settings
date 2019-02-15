@@ -73,14 +73,14 @@ public class BatteryMeterViewTest {
     public void testSetBatteryInfo_levelLow_setErrorColor() {
         mBatteryMeterView.setBatteryLevel(BATTERY_LOW_LEVEL);
 
-        verify(mDrawable).setBatteryColorFilter(mErrorColorFilter);
+        verify(mDrawable).setColorFilter(mErrorColorFilter);
     }
 
     @Test
     public void testSetBatteryInfo_levelNormal_setNormalColor() {
         mBatteryMeterView.setBatteryLevel(BATTERY_LEVEL);
 
-        verify(mDrawable).setBatteryColorFilter(mAccentColorFilter);
+        verify(mDrawable).setColorFilter(mAccentColorFilter);
     }
 
     @Test
