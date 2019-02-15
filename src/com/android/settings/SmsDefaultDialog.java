@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,6 +32,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,6 +64,21 @@ public final class SmsDefaultDialog extends AlertActivity implements
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        final Window window = getWindow();
+        final WindowManager.LayoutParams attrs = window.getAttributes();
+        attrs.privateFlags &= ~SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+        window.setAttributes(attrs);
+    }
+
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case BUTTON_POSITIVE:
@@ -84,7 +103,7 @@ public final class SmsDefaultDialog extends AlertActivity implements
     }
 
     private boolean buildDialog(String packageName) {
-        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         if (!tm.isSmsCapable()) {
             // No phone, no SMS
             return false;
@@ -198,7 +217,7 @@ public final class SmsDefaultDialog extends AlertActivity implements
             } else {
                 view.findViewById(R.id.default_label).setVisibility(View.GONE);
             }
-            ImageView imageView = (ImageView)view.findViewById(android.R.id.icon);
+            ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
             imageView.setImageDrawable(item.icon);
             return view;
         }
