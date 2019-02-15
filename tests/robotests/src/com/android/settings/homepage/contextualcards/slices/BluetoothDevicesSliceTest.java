@@ -30,7 +30,6 @@ import static org.mockito.Mockito.when;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -123,18 +122,6 @@ public class BluetoothDevicesSliceTest {
     }
 
     @Test
-    public void getSlice_hasBluetoothDevices_shouldHavePairNewDevice() {
-        mockBluetoothDeviceList(1);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
-
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
-
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertAnySliceItemContainsTitle(sliceItems,
-                mContext.getString(R.string.bluetooth_pairing_pref_title));
-    }
-
-    @Test
     public void getSlice_noBluetoothDevices_shouldHaveNoBluetoothDevicesTitle() {
         doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
 
@@ -143,17 +130,6 @@ public class BluetoothDevicesSliceTest {
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         assertThat(metadata.getTitle()).isEqualTo(
                 mContext.getString(R.string.no_bluetooth_devices));
-    }
-
-    @Test
-    public void getSlice_noBluetoothDevices_shouldNotHavePairNewDevice() {
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
-
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertThat(hasTitle(metadata,
-                mContext.getString(R.string.bluetooth_pairing_pref_title))).isFalse();
     }
 
     @Test
@@ -203,10 +179,5 @@ public class BluetoothDevicesSliceTest {
         for (int i = 0; i < deviceCount; i++) {
             mBluetoothDeviceList.add(mCachedBluetoothDevice);
         }
-    }
-
-    private boolean hasTitle(SliceMetadata metadata, String title) {
-        final CharSequence sliceTitle = metadata.getTitle();
-        return TextUtils.equals(sliceTitle, title);
     }
 }
