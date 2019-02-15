@@ -22,7 +22,10 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
+import android.provider.DeviceConfig;
 import android.view.accessibility.AccessibilityManager;
+
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,6 +34,7 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
 
@@ -38,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowDeviceConfig.class})
 public class AccessibilityUsagePreferenceControllerTest {
 
     private Context mContext;
@@ -54,10 +59,23 @@ public class AccessibilityUsagePreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowAccessibilityManager.reset();
+        ShadowDeviceConfig.reset();
+    }
+
+    @Test
+    public void isAvailable_permissionHubNotSet_shouldReturnUnsupported() {
+        mAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
+        AccessibilityUsagePreferenceController controller =
+                new AccessibilityUsagePreferenceController(mContext, "test_key");
+
+        // We have not yet set the property to show the Permissions Hub.
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void getAvailabilityStatus_noEnabledServices_shouldReturnUnsupported() {
+        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
+                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
         mAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
         AccessibilityUsagePreferenceController controller =
                 new AccessibilityUsagePreferenceController(mContext, "test_key");
@@ -67,6 +85,8 @@ public class AccessibilityUsagePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_enabledServices_shouldReturnAvailableUnsearchable() {
+        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
+                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
         mAccessibilityManager.setEnabledAccessibilityServiceList(
                 new ArrayList<>(Arrays.asList(new AccessibilityServiceInfo())));
         AccessibilityUsagePreferenceController controller =

@@ -18,6 +18,7 @@ package com.android.settings.privacy;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
+import android.provider.DeviceConfig;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,10 @@ public class AccessibilityUsagePreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return mEnabledServiceInfos.isEmpty() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+        return (mEnabledServiceInfos.isEmpty() || !Boolean.parseBoolean(
+                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
+                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED)))
+                ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 
     @Override
