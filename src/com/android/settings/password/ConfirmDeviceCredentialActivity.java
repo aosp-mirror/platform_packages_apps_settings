@@ -184,7 +184,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         } else {
             bpBundle = new Bundle();
             bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
-            bpBundle.putString(BiometricPrompt.KEY_SUBTITLE, mDetails);
+            bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
         }
 
         boolean launchedBiometric = false;
