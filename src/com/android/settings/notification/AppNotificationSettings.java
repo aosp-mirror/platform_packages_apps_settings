@@ -51,6 +51,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static String KEY_ADVANCED_CATEGORY = "app_advanced";
     private static String KEY_BADGE = "badge";
     private static String KEY_APP_LINK = "app_link";
+    private static String KEY_BUBBLE = "bubble";
+    private static String[] LEGACY_NON_ADVANCED_KEYS = {KEY_BADGE, KEY_APP_LINK, KEY_BUBBLE};
 
     private List<NotificationChannelGroup> mChannelGroupList;
 
@@ -65,21 +67,16 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         final PreferenceScreen screen = getPreferenceScreen();
         if (mShowLegacyChannelConfig && screen != null) {
             // if showing legacy settings, pull advanced settings out of the advanced category
-            Preference badge = findPreference(KEY_BADGE);
-            Preference appLink = findPreference(KEY_APP_LINK);
             PreferenceGroup advanced = (PreferenceGroup) findPreference(KEY_ADVANCED_CATEGORY);
             removePreference(KEY_ADVANCED_CATEGORY);
-            if (badge != null) {
-                if (advanced != null) {
-                    advanced.removePreference(badge);
+            if (advanced != null) {
+                for (String key : LEGACY_NON_ADVANCED_KEYS) {
+                    Preference pref = advanced.findPreference(key);
+                    advanced.removePreference(pref);
+                    if (pref != null) {
+                        screen.addPreference(pref);
+                    }
                 }
-                screen.addPreference(badge);
-            }
-            if (appLink != null) {
-                if (advanced != null) {
-                    advanced.removePreference(appLink);
-                }
-                screen.addPreference(appLink);
             }
         }
     }
