@@ -322,7 +322,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     private void handleWifiDpp() {
-        destroyCamera();
+        if (mCamera != null) {
+            mCamera.stop();
+        }
         mDecorateView.setFocused(true);
 
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_WIFI_DPP_SUCCESS);
@@ -332,7 +334,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     private void handleZxingWifiFormat() {
-        destroyCamera();
+        if (mCamera != null) {
+            mCamera.stop();
+        }
         mDecorateView.setFocused(true);
 
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS);
@@ -443,6 +447,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             Log.e(TAG, "Invalid networkId " + newNetworkId);
             mLatestStatusCode = EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_GENERIC;
             showErrorMessage(getString(R.string.wifi_dpp_check_connection_try_again));
+            restartCamera();
         }
 
         @Override
@@ -507,6 +512,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
 
             mLatestStatusCode = code;
+            restartCamera();
         }
 
         @Override
@@ -535,6 +541,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         Log.d(TAG, "Wi-Fi connect onFailure reason - " + reason);
 
         showErrorMessage(getString(R.string.wifi_dpp_check_connection_try_again));
+        restartCamera();
     }
 
     // Check is Easy Connect handshaking or not
@@ -543,5 +550,22 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                 ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
 
         return model.isGoingInitiator();
+    }
+
+    /**
+     * To resume camera decoding task after handshake fail or Wi-Fi connection fail.
+     */
+    private void restartCamera() {
+        if (mCamera == null) {
+            Log.d(TAG, "mCamera is not available for restarting camera");
+            return;
+        }
+
+        final SurfaceTexture surfaceTexture = mTextureView.getSurfaceTexture();
+        if (surfaceTexture == null) {
+            throw new IllegalStateException("SurfaceTexture is not ready for restarting camera");
+        }
+
+        mCamera.start(surfaceTexture);
     }
 }
