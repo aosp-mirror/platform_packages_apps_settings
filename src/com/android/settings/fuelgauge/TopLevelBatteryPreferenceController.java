@@ -80,7 +80,9 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         }
         CharSequence label;
         final BidiFormatter formatter = BidiFormatter.getInstance();
-        if (info.remainingLabel == null) {
+        if (!info.discharging && info.chargeLabel != null) {
+            label = info.chargeLabel;
+        } else if (info.remainingLabel == null) {
             label = info.batteryPercentString;
         } else {
             label = context.getString(R.string.power_remaining_settings_home_page,
