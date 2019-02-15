@@ -44,10 +44,10 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
-import com.google.android.setupcompat.TemplateLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.template.FooterButton.ButtonType;
+import com.google.android.setupdesign.GlifLayout;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -152,7 +152,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
      * Configure the UI for the final confirmation interaction
      */
     private void establishFinalConfirmationState() {
-        final TemplateLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
+        final GlifLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
 
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
