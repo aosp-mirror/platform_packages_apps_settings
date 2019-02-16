@@ -1559,9 +1559,7 @@ public class RadioInfo extends Activity {
     }
 
     private static boolean isDsdsSupported() {
-        return PhoneConfigurationManager.getInstance().getStaticPhoneCapability()
-                .logicalModemList.size() >= 2
-                && !TelephonyManager.getDefault().isMultisimCarrierRestricted();
+        return TelephonyManager.getDefault().isMultisimSupported();
     }
 
     private static boolean isDsdsEnabled() {
