@@ -411,9 +411,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     void loadSliceInBackground(Uri uri) {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            loadSlice(uri);
-        });
+        ThreadUtils.postOnBackgroundThread(() -> loadSlice(uri));
     }
 
     /**
