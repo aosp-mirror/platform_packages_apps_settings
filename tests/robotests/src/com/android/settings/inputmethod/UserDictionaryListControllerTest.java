@@ -142,9 +142,9 @@ public class UserDictionaryListControllerTest {
                 String sortOrder) {
             if (hasDictionary) {
                 final MatrixCursor cursor = new MatrixCursor(
-                        new String[] {UserDictionary.Words.LOCALE});
-                cursor.addRow(new Object[] {"en"});
-                cursor.addRow(new Object[] {"es"});
+                        new String[]{UserDictionary.Words.LOCALE});
+                cursor.addRow(new Object[]{"en"});
+                cursor.addRow(new Object[]{"es"});
                 return cursor;
             } else {
                 return null;
