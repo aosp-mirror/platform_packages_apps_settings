@@ -118,7 +118,8 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         sliceLiveData.observe(mLifecycleOwner, slice -> {
             if (slice == null) {
                 Log.w(TAG, "Slice is null");
-                mContext.getContentResolver().notifyChange(CardContentProvider.URI, null);
+                mContext.getContentResolver().notifyChange(CardContentProvider.REFRESH_CARD_URI,
+                        null);
                 return;
             } else {
                 //TODO(b/120629936): Take this out once blank card issue is fixed.

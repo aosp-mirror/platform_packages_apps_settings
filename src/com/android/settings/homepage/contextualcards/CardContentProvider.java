@@ -39,11 +39,17 @@ public class CardContentProvider extends ContentProvider {
 
     public static final String CARD_AUTHORITY = "com.android.settings.homepage.CardContentProvider";
 
-    public static final Uri URI = new Uri.Builder()
+    public static final Uri REFRESH_CARD_URI = new Uri.Builder()
                     .scheme(ContentResolver.SCHEME_CONTENT)
                     .authority(CardContentProvider.CARD_AUTHORITY)
                     .appendPath(CardDatabaseHelper.CARD_TABLE)
                     .build();
+
+    public static final Uri DELETE_CARD_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(CardContentProvider.CARD_AUTHORITY)
+            .appendPath(CardDatabaseHelper.CardColumns.CARD_DISMISSED)
+            .build();
 
     private static final String TAG = "CardContentProvider";
     /** URI matcher for ContentProvider queries. */

@@ -75,7 +75,7 @@ public class SliceContextualCardControllerTest {
 
     @Test
     public void onDismissed_cardShouldBeMarkedAsDismissed() {
-        final Uri providerUri = CardContentProvider.URI;
+        final Uri providerUri = CardContentProvider.REFRESH_CARD_URI;
         mResolver.insert(providerUri, generateOneRow());
         doNothing().when(mController).showFeedbackDialog(any(ContextualCard.class));
 
@@ -96,7 +96,7 @@ public class SliceContextualCardControllerTest {
 
     @Test
     public void onDismissed_noFeedbackEmail_shouldNotShowFeedbackDialog() {
-        mResolver.insert(CardContentProvider.URI, generateOneRow());
+        mResolver.insert(CardContentProvider.REFRESH_CARD_URI, generateOneRow());
         final ContextualCardsFragment fragment =
                 FragmentController.of(new ContextualCardsFragment()).create().get();
         final ShadowActivity shadowActivity = Shadows.shadowOf(fragment.getActivity());
@@ -109,7 +109,7 @@ public class SliceContextualCardControllerTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void onDismissed_hasFeedbackEmail_shouldShowFeedbackDialog() {
-        mResolver.insert(CardContentProvider.URI, generateOneRow());
+        mResolver.insert(CardContentProvider.REFRESH_CARD_URI, generateOneRow());
         final ContextualCardsFragment fragment =
                 FragmentController.of(new ContextualCardsFragment()).create().get();
         final ShadowActivity shadowActivity = Shadows.shadowOf(fragment.getActivity());

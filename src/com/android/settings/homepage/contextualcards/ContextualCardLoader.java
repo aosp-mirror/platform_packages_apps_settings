@@ -59,13 +59,16 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     private final ContentObserver mObserver = new ContentObserver(
             new Handler(Looper.getMainLooper())) {
         @Override
-        public void onChange(boolean selfChange) {
+        public void onChange(boolean selfChange, Uri uri) {
             if (isStarted()) {
+                mNotifyUri = uri;
                 forceLoad();
             }
         }
     };
 
+    @VisibleForTesting
+    Uri mNotifyUri;
     private Context mContext;
 
     ContextualCardLoader(Context context) {
@@ -77,7 +80,10 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        mContext.getContentResolver().registerContentObserver(CardContentProvider.URI,
+        mNotifyUri = null;
+        mContext.getContentResolver().registerContentObserver(CardContentProvider.REFRESH_CARD_URI,
+                false /*notifyForDescendants*/, mObserver);
+        mContext.getContentResolver().registerContentObserver(CardContentProvider.DELETE_CARD_URI,
                 false /*notifyForDescendants*/, mObserver);
     }
 
@@ -156,10 +162,12 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             // Two large cards
             return visibleCards;
         } finally {
-            //TODO(b/121196921): Should not call this if user click dismiss
-            final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                    FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
-            contextualCardFeatureProvider.logContextualCardDisplay(visibleCards, hiddenCards);
+            if (!CardContentProvider.DELETE_CARD_URI.equals(mNotifyUri)) {
+                final ContextualCardFeatureProvider contextualCardFeatureProvider =
+                        FeatureFactory.getFactory(mContext)
+                                .getContextualCardFeatureProvider(mContext);
+                contextualCardFeatureProvider.logContextualCardDisplay(visibleCards, hiddenCards);
+            }
         }
     }
 
