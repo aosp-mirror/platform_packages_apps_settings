@@ -54,6 +54,8 @@ public class EnabledNetworkModePreferenceController extends
     public int getAvailabilityStatus(int subId) {
         boolean visible;
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final TelephonyManager telephonyManager = TelephonyManager
+                .from(mContext).createForSubscriptionId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
         } else if (carrierConfig == null) {
@@ -63,8 +65,8 @@ public class EnabledNetworkModePreferenceController extends
             visible = false;
         } else if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)
-                && !mTelephonyManager.getServiceState().getRoaming()
-                && mTelephonyManager.getServiceState().getDataRegState()
+                && !telephonyManager.getServiceState().getRoaming()
+                && telephonyManager.getServiceState().getDataRegState()
                 == ServiceState.STATE_IN_SERVICE) {
             visible = false;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
@@ -175,18 +177,21 @@ public class EnabledNetworkModePreferenceController extends
                         R.array.enabled_networks_tdscdma_choices);
                 preference.setEntryValues(
                         R.array.enabled_networks_tdscdma_values);
-            } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)
+            } else if (carrierConfig != null
+                    && !carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)
                     && !carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL)) {
                 preference.setEntries(R.array.enabled_networks_except_gsm_lte_choices);
                 preference.setEntryValues(R.array.enabled_networks_except_gsm_lte_values);
-            } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)) {
+            } else if (carrierConfig != null
+                    && !carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)) {
                 int select = mShow4GForLTE
                         ? R.array.enabled_networks_except_gsm_4g_choices
                         : R.array.enabled_networks_except_gsm_choices;
                 preference.setEntries(select);
                 preference.setEntryValues(
                         R.array.enabled_networks_except_gsm_values);
-            } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL)) {
+            } else if (carrierConfig != null
+                    && !carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL)) {
                 preference.setEntries(
                         R.array.enabled_networks_except_lte_choices);
                 preference.setEntryValues(

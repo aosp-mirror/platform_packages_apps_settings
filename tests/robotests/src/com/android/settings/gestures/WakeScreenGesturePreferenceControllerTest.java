@@ -17,12 +17,14 @@
 package com.android.settings.gestures;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -77,6 +79,7 @@ public class WakeScreenGesturePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gestureNotSupported_UNSUPPORTED_ON_DEVICE() {
+        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(true);
         when(mAmbientDisplayConfiguration.wakeScreenGestureAvailable()).thenReturn(false);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
@@ -85,10 +88,30 @@ public class WakeScreenGesturePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gestureSupported_AVAILABLE() {
+        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(true);
         when(mAmbientDisplayConfiguration.wakeScreenGestureAvailable()).thenReturn(true);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
         assertThat(availabilityStatus).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_gestureSupported_DISABLED_DEPENDENT_SETTING() {
+        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(false);
+        when(mAmbientDisplayConfiguration.wakeScreenGestureAvailable()).thenReturn(true);
+        final int availabilityStatus = mController.getAvailabilityStatus();
+
+        assertThat(availabilityStatus).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void canHandleClicks_onlyWhenAlwaysOn() {
+        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(false);
+        assertThat(mController.canHandleClicks()).isEqualTo(false);
+
+        reset(mAmbientDisplayConfiguration);
+        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(true);
+        assertThat(mController.canHandleClicks()).isEqualTo(true);
     }
 
     @Test

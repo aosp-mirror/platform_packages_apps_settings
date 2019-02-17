@@ -18,6 +18,7 @@ package com.android.settings.panel;
 
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -52,5 +53,10 @@ public class FakePanelContent implements PanelContent {
     @Override
     public Intent getSeeMoreIntent() {
         return INTENT;
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.TESTING;
     }
 }

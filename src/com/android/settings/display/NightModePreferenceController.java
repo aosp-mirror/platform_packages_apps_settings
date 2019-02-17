@@ -52,8 +52,7 @@ public class NightModePreferenceController extends AbstractPreferenceController 
             setVisible(screen, KEY_NIGHT_MODE, false /* visible */);
             return;
         }
-        ListPreference mNightModePreference = (ListPreference) screen.findPreference(
-                KEY_NIGHT_MODE);
+        final ListPreference mNightModePreference = screen.findPreference(KEY_NIGHT_MODE);
         if (mNightModePreference != null) {
             final UiModeManager uiManager =
                     (UiModeManager) mContext.getSystemService(UI_MODE_SERVICE);

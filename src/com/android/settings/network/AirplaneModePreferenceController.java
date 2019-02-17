@@ -81,7 +81,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mAirplaneModePreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
+            mAirplaneModePreference = screen.findPreference(getPreferenceKey());
         }
     }
 

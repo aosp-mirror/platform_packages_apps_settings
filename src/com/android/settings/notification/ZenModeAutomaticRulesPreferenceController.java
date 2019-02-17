@@ -56,7 +56,7 @@ public class ZenModeAutomaticRulesPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreferenceCategory = (PreferenceCategory) screen.findPreference(getPreferenceKey());
+        mPreferenceCategory = screen.findPreference(getPreferenceKey());
         mPreferenceCategory.setPersistent(false);
     }
 

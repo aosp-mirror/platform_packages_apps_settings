@@ -58,7 +58,9 @@ public class FaceSettings extends DashboardFragment {
     private FaceSettingsAttentionPreferenceController mAttentionController;
 
     private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
-        getActivity().finish();
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     };
 
     public static boolean isAvailable(Context context) {

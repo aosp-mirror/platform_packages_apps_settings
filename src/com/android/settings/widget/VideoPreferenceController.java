@@ -43,7 +43,7 @@ public class VideoPreferenceController extends BasePreferenceController implemen
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mVideoPreference = (VideoPreference) screen.findPreference(getPreferenceKey());
+        mVideoPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

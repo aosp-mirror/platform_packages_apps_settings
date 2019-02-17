@@ -58,7 +58,7 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreferenceCategory = (PreferenceCategory) screen.findPreference(getPreferenceKey());
+        mPreferenceCategory = screen.findPreference(getPreferenceKey());
         mSwitchPreference = new SwitchPreference(mPreferenceCategory.getContext());
         mSwitchPreference.setTitle(R.string.usb_use_power_only);
         mSwitchPreference.setOnPreferenceClickListener(this);
@@ -70,7 +70,7 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
         // Hide this option if this is not a PD compatible connection
         if (connected && !mUsbBackend.areAllRolesSupported()) {
             mFragment.getPreferenceScreen().removePreference(mPreferenceCategory);
-        } else if (connected && mUsbBackend.areAllRolesSupported()){
+        } else if (connected && mUsbBackend.areAllRolesSupported()) {
             mFragment.getPreferenceScreen().addPreference(mPreferenceCategory);
         }
         if (powerRole == POWER_ROLE_SOURCE) {
@@ -79,7 +79,7 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
         } else if (powerRole == POWER_ROLE_SINK) {
             mSwitchPreference.setChecked(false);
             mPreferenceCategory.setEnabled(true);
-        } else if (!connected || powerRole == POWER_ROLE_NONE){
+        } else if (!connected || powerRole == POWER_ROLE_NONE) {
             mPreferenceCategory.setEnabled(false);
             if (mNextPowerRole == POWER_ROLE_NONE) {
                 mSwitchPreference.setSummary("");

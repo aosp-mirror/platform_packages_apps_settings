@@ -68,14 +68,14 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mProfilesContainer = (PreferenceCategory) screen.findPreference(getPreferenceKey());
+        mProfilesContainer = screen.findPreference(getPreferenceKey());
     }
 
     /**
      * Gets a switch preference for the particular option, creating it if needed.
      */
     private RadioButtonPreference getProfilePreference(String key, int titleId) {
-        RadioButtonPreference pref = (RadioButtonPreference) mProfilesContainer.findPreference(key);
+        RadioButtonPreference pref = mProfilesContainer.findPreference(key);
         if (pref == null) {
             pref = new RadioButtonPreference(mProfilesContainer.getContext());
             pref.setKey(key);

@@ -99,7 +99,7 @@ public class WifiConnectionPreferenceController extends AbstractPreferenceContro
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreferenceGroup = (PreferenceGroup) screen.findPreference(mPreferenceGroupKey);
+        mPreferenceGroup = screen.findPreference(mPreferenceGroupKey);
         mPrefContext = screen.getContext();
         update();
     }

@@ -63,7 +63,7 @@ public class DomainAppPreferenceController extends BasePreferenceController impl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mDomainAppList = (PreferenceGroup) screen.findPreference(getPreferenceKey());
+        mDomainAppList = screen.findPreference(getPreferenceKey());
     }
 
     @Override

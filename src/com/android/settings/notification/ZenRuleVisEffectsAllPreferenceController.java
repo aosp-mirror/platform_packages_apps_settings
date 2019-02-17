@@ -41,7 +41,7 @@ public class ZenRuleVisEffectsAllPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
 
         mPreference.setOnRadioButtonClickListener(p -> {
             mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ZEN_SOUND_ONLY,

@@ -148,7 +148,8 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         mFragmentManager = fragmentManager;
     }
 
-    private CachedBluetoothDevice getConnectedHearingAidDevice() {
+    @VisibleForTesting
+    CachedBluetoothDevice getConnectedHearingAidDevice() {
         if (!mHearingAidProfileSupported) {
             return null;
         }
@@ -158,9 +159,11 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         final List<BluetoothDevice> deviceList = mLocalBluetoothManager.getProfileManager()
                 .getHearingAidProfile().getConnectedDevices();
         final Iterator it = deviceList.iterator();
-        if (it.hasNext()) {
+        while (it.hasNext()) {
             BluetoothDevice obj = (BluetoothDevice)it.next();
-            return mLocalBluetoothManager.getCachedDeviceManager().findDevice(obj);
+            if (!mLocalBluetoothManager.getCachedDeviceManager().isSubDevice(obj)) {
+                return mLocalBluetoothManager.getCachedDeviceManager().findDevice(obj);
+            }
         }
         return null;
     }

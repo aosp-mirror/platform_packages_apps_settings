@@ -74,7 +74,7 @@ public class SavedDeviceGroupController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         if (isAvailable()) {
-            mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
+            mPreferenceGroup = screen.findPreference(KEY);
             mPreferenceGroup.setVisible(false);
 
             final Context context = screen.getContext();

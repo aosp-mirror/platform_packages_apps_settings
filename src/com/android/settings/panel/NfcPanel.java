@@ -50,4 +50,9 @@ public class NfcPanel implements PanelContent {
         intent.setClassName(mContext.getPackageName(), SubSettings.class.getName());
         return intent;
     }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PANEL_NFC;
+    }
 }

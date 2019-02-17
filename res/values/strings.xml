@@ -1433,13 +1433,13 @@
     <string name="unlock_change_lock_password_title">Change unlock password</string>
 
     <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock and that it requests for a strong PIN or password  [CHAR LIMIT=NONE] -->
-    <string name="unlock_footer_high_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> requests a strong PIN or password.</string>
+    <string name="unlock_footer_high_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> recommends a strong PIN or password and may not work as expected without one</string>
     <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock and that it requests for a medium strength PIN or password [CHAR LIMIT=NONE] -->
-    <string name="unlock_footer_medium_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> requests a new PIN or password.</string>
+    <string name="unlock_footer_medium_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> recommends a new PIN or password and may not work as expected without one</string>
     <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock and it requests for any screen lock [CHAR LIMIT=NONE] -->
-    <string name="unlock_footer_low_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> requests a new pattern, PIN or password.</string>
+    <string name="unlock_footer_low_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> recommends a new pattern, PIN, or password and may not work as expected without one</string>
     <!-- Footer preference text in the screen lock type picker to indicate which app is requesting a new screen lock [CHAR LIMIT=NONE] -->
-    <string name="unlock_footer_none_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> requests a new screen lock.</string>
+    <string name="unlock_footer_none_complexity_requested"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> recommends a new screen lock</string>
 
 
     <!-- Message shown on the lock screen when the user incorrectly enters their lock and it counts towards the max attempts before their data on the device is wiped. [CHAR LIMIT=NONE] -->
@@ -6857,10 +6857,10 @@
     <!-- Wizard finish button label [CHAR LIMIT=25] -->
     <string name="wizard_finish">Finish</string>
 
-    <!-- An option in a photo selection dialog, if there is no photo yet [CHAR LIMIT=50] -->
-    <string name="user_image_take_photo" msgid="7496128293167402354">Take photo</string>
-    <!-- An option in a photo selection dialog, if there is no photo yet [CHAR LIMIT=50] -->
-    <string name="user_image_choose_photo" msgid="3746334626214970837">Choose photo from Gallery</string>
+    <!-- An option in a photo selection dialog to take a new photo [CHAR LIMIT=50] -->
+    <string name="user_image_take_photo" msgid="7496128293167402354">Take a photo</string>
+    <!-- An option in a photo selection dialog to choose a pre-existing image [CHAR LIMIT=50] -->
+    <string name="user_image_choose_photo" msgid="3746334626214970837">Choose an image</string>
     <!-- Accessibility message for the photo selector which is a button/popup with the current photo [CHAR LIMIT=50] -->
     <string name="user_image_photo_selector">Select photo</string>
 
@@ -9169,8 +9169,11 @@
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
 
-    <!-- Summary of condition that do not disturb is on [CHAR LIMIT=36] -->
-    <string name="condition_zen_summary">Impacts what you hear and see</string>
+    <!-- Summary of condition that do not disturb is on and all exceptions set to off [CHAR LIMIT=36] -->
+    <string name="condition_zen_summary_phone_muted">Phone muted</string>
+
+    <!-- Summary of condition that do not disturb is on and some exceptions are allowed [CHAR LIMIT=36] -->
+    <string name="condition_zen_summary_with_exceptions">With exceptions</string>
 
     <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
     <string name="condition_battery_title">Battery Saver is on</string>
@@ -9200,25 +9203,16 @@
     <string name="condition_device_muted_action_turn_on_sound">Turn on sound</string>
 
     <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_muted_title" product="tablet">Device is muted</string>
-
-    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_muted_title" product="default">Phone muted</string>
+    <string name="condition_device_muted_title">Ringer muted</string>
 
     <!-- Summary of condition that indicates device is muted -->
     <string name="condition_device_muted_summary">For calls &amp; notifications</string>
 
     <!-- Title of condition that indicates device is set to vibrate [CHAR LIMIT=50] -->
-    <string name="condition_device_vibrate_title" product="tablet">Device is set to vibrate</string>
-
-    <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_vibrate_title" product="default">Vibration only</string>
+    <string name="condition_device_vibrate_title">Vibration only</string>
 
     <!-- Summary of condition that indicates device is set to vibrate -->
-    <string name="condition_device_vibrate_summary" product="tablet">Calls and notifications will vibrate device</string>
-
-    <!-- Summary of condition that indicates device is set to vibrate -->
-    <string name="condition_device_vibrate_summary" product="default">For calls &amp; notifications</string>
+    <string name="condition_device_vibrate_summary">For calls &amp; notifications</string>
 
     <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=46] -->
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
@@ -10442,27 +10436,27 @@
     </plurals>
 
     <!-- Network & internet page. Summary indicating that a SIM is used by default for calls when
-         multiple SIMs are present. [CHAR LIMIT=40] -->
+         multiple SIMs are present. [CHAR LIMIT=50] -->
     <string name="default_for_calls">Default for calls</string>
     <!-- Network & internet page. Summary indicating that a SIM is used by default for SMS messages
-         when multiple SIMs are present. [CHAR LIMIT=40] -->
+         when multiple SIMs are present. [CHAR LIMIT=50] -->
     <string name="default_for_sms">Default for SMS</string>
     <!-- Network & internet page. Summary indicating that a SIM is used by default for calls and SMS
-         messages when multiple SIMs are present. [CHAR LIMIT=40] -->
+         messages when multiple SIMs are present. [CHAR LIMIT=50] -->
     <string name="default_for_calls_and_sms">Default for calls &amp; SMS</string>
     <!-- Network & internet page. Summary indicating that a SIM is used by default for mobile data
-         when multiple SIMs are present. [CHAR LIMIT=40] -->
+         when multiple SIMs are present. [CHAR LIMIT=50] -->
     <string name="default_for_mobile_data">Default for mobile data</string>
     <!-- Network & internet page. Summary indicating that a SIM has an active mobile data connection
-         when multiple SIMs are present. [CHAR LIMIT=40] -->
+         when multiple SIMs are present. [CHAR LIMIT=50] -->
     <string name="mobile_data_active">Mobile data active</string>
     <!-- Network & internet page. Summary indicating that a SIM is used by default for mobile data
          when multiple SIMs are present, but mobile data is currently turned off.
-         [CHAR LIMIT=40] -->
+         [CHAR LIMIT=50] -->
     <string name="mobile_data_off">Mobile data off</string>
     <!-- Network & internet page. Summary indicating that a SIM is available to be used for services
          such as calls, SMS, or data when multiple SIMs are present, but is not currently the
-          default SIM for any of those services. [CHAR LIMIT=40] -->
+          default SIM for any of those services. [CHAR LIMIT=50] -->
     <string name="subscription_available">Available</string>
 
     <!-- Title of item shown at the bottom of the page listing multiple mobile service
@@ -10635,6 +10629,15 @@
 
     <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="permission_bar_chart_details">See all usage</string>
+
+    <!-- Title for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
+    <string name="accessibility_usage_title">Accessibility usage</string>
+
+    <!-- Summary for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
+    <plurals name="accessibility_usage_summary">
+        <item quantity="one">1 service has full access to your device</item>
+        <item quantity="other"><xliff:g id="service_count">%1$d</xliff:g> services have full access to your device</item>
+    </plurals>
 
     <!-- Title for notification channel slice. [CHAR LIMIT=NONE] -->
     <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> Notifications</string>

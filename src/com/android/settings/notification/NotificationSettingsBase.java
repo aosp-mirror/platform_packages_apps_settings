@@ -309,7 +309,9 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                         return true;
                     }
                 });
-        parent.addPreference(channelPref);
+        if (parent.findPreference(channelPref.getKey()) == null) {
+            parent.addPreference(channelPref);
+        }
         return channelPref;
     }
 

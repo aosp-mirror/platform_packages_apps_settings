@@ -41,7 +41,7 @@
     <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
     <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
@@ -443,7 +443,7 @@
             android:exported="true"
             android:permission="android.permission.TETHER_PRIVILEGED" />
 
-        <activity android:name="network.TetherProvisioningActivity"
+        <activity android:name=".network.TetherProvisioningActivity"
             android:exported="true"
             android:permission="android.permission.TETHER_PRIVILEGED"
             android:excludeFromRecents="true"

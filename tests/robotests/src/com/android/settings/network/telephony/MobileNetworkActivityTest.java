@@ -148,7 +148,7 @@ public class MobileNetworkActivityTest {
         doReturn(intent).when(mMobileNetworkActivity).getIntent();
         mSubscriptionInfos.add(mSubscriptionInfo);
         mSubscriptionInfos.add(mSubscriptionInfo2);
-        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
+        doReturn(mSubscriptionInfos).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
         doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(CURRENT_SUB_ID);
 
         assertThat(mMobileNetworkActivity.getSubscriptionId()).isEqualTo(CURRENT_SUB_ID);

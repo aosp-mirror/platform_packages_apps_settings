@@ -21,6 +21,7 @@ import static com.android.settings.slices.CustomSliceRegistry.VOLUME_CALL_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -61,5 +62,10 @@ public class VolumePanel implements PanelContent {
     @Override
     public Intent getSeeMoreIntent() {
         return new Intent(Settings.ACTION_SOUND_SETTINGS);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PANEL_VOLUME;
     }
 }

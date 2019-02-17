@@ -68,7 +68,7 @@ public class AddDevicePreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mPreference = (Preference) screen.findPreference(getPreferenceKey());
+            mPreference = screen.findPreference(getPreferenceKey());
         }
     }
 

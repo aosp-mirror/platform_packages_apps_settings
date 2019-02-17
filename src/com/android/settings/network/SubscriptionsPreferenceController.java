@@ -107,7 +107,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mPreferenceGroup = (PreferenceGroup) screen.findPreference(mPreferenceGroupKey);
+        mPreferenceGroup = screen.findPreference(mPreferenceGroupKey);
         update();
     }
 
@@ -129,7 +129,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSubscriptionPreferences = new ArrayMap<>();
 
         int order = mStartOrder;
-        for (SubscriptionInfo info :  SubscriptionUtil.getAvailableSubscriptions(mManager)) {
+        for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mManager)) {
             final int subId = info.getSubscriptionId();
             Preference pref = existingPrefs.remove(subId);
             if (pref == null) {
@@ -209,7 +209,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     }
 
     /**
-     *
      * @return true if there are at least 2 available subscriptions.
      */
     @Override

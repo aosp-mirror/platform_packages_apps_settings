@@ -42,7 +42,7 @@ public abstract class P2pCategoryPreferenceController extends AbstractPreference
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mCategory = (PreferenceGroup) screen.findPreference(getPreferenceKey());
+        mCategory = screen.findPreference(getPreferenceKey());
     }
 
     public void removeAllChildren() {

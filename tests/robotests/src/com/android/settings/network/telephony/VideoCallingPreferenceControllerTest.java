@@ -84,14 +84,14 @@ public class VideoCallingPreferenceControllerTest {
 
     @Test
     public void isVideoCallEnabled_allFlagsOn_returnTrue() {
-        assertThat(mController.isVideoCallEnabled()).isTrue();
+        assertThat(mController.isVideoCallEnabled(SUB_ID, mImsManager)).isTrue();
     }
 
     @Test
     public void isVideoCallEnabled_disabledByPlatform_returnFalse() {
         doReturn(false).when(mImsManager).isVtEnabledByPlatform();
 
-        assertThat(mController.isVideoCallEnabled()).isFalse();
+        assertThat(mController.isVideoCallEnabled(SUB_ID, mImsManager)).isFalse();
     }
 
     @Test
@@ -100,7 +100,7 @@ public class VideoCallingPreferenceControllerTest {
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS, false);
         doReturn(false).when(mTelephonyManager).isDataEnabled();
 
-        assertThat(mController.isVideoCallEnabled()).isFalse();
+        assertThat(mController.isVideoCallEnabled(SUB_ID, mImsManager)).isFalse();
     }
 
     @Test

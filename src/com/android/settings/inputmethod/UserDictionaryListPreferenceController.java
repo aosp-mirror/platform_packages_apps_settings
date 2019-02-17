@@ -79,7 +79,7 @@ public class UserDictionaryListPreferenceController extends BasePreferenceContro
     @NonNull
     public static TreeSet<String> getUserDictionaryLocalesSet(Context context) {
         final Cursor cursor = context.getContentResolver().query(
-                UserDictionary.Words.CONTENT_URI, new String[] {UserDictionary.Words.LOCALE},
+                UserDictionary.Words.CONTENT_URI, new String[]{UserDictionary.Words.LOCALE},
                 null, null, null);
         final TreeSet<String> localeSet = new TreeSet<>();
         if (cursor == null) {
@@ -124,14 +124,14 @@ public class UserDictionaryListPreferenceController extends BasePreferenceContro
         // enabled subtypes. If we already have the locale-without-country version of the system
         // locale, we don't add the system locale to avoid confusion even though it's technically
         // correct to add it.
-        if (!localeSet.contains(Locale.getDefault().getLanguage().toString())) {
+        if (!localeSet.contains(Locale.getDefault().getLanguage())) {
             localeSet.add(Locale.getDefault().toString());
         }
 
         return localeSet;
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     TreeSet<String> getUserDictLocalesSet(Context context) {
         return getUserDictionaryLocalesSet(context);
     }
@@ -140,7 +140,6 @@ public class UserDictionaryListPreferenceController extends BasePreferenceContro
      * Creates the entries that allow the user to go into the user dictionary for each locale.
      */
     private void createUserDictSettings() {
-
         final TreeSet<String> localeSet = getUserDictLocalesSet(mContext);
         final int prefCount = mScreen.getPreferenceCount();
         String prefKey;
@@ -160,8 +159,8 @@ public class UserDictionaryListPreferenceController extends BasePreferenceContro
         if (prefCount > 0) {
             for (int i = prefCount - 1; i >= 0; i--) {
                 prefKey = mScreen.getPreference(i).getKey();
-                if (KEY_ALL_LANGUAGE.equals(prefKey)) {
-                    prefKey = "";
+                if (TextUtils.isEmpty(prefKey) || TextUtils.equals(KEY_ALL_LANGUAGE, prefKey)) {
+                    continue;
                 }
                 if (!localeSet.isEmpty() && localeSet.contains(prefKey)) {
                     localeSet.remove(prefKey);

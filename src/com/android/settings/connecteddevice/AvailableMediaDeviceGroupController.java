@@ -84,7 +84,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
+            mPreferenceGroup = screen.findPreference(KEY);
             mPreferenceGroup.setVisible(false);
             updateTitle();
             mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
@@ -127,7 +127,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
 
     @VisibleForTesting
     public void setBluetoothDeviceUpdater(BluetoothDeviceUpdater bluetoothDeviceUpdater) {
-        mBluetoothDeviceUpdater  = bluetoothDeviceUpdater;
+        mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
     }
 
     @Override

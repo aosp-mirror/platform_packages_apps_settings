@@ -45,7 +45,7 @@ public class FeatureFlagsPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mGroup = (PreferenceGroup) screen.findPreference(getPreferenceKey());
+        mGroup = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -60,6 +60,6 @@ public class FeatureFlagsPreferenceController extends BasePreferenceController
         mGroup.removeAll();
         final Context prefContext = mGroup.getContext();
         featureMap.keySet().stream().sorted().forEach(feature ->
-            mGroup.addPreference(new FeatureFlagPreference(prefContext, feature)));
+                mGroup.addPreference(new FeatureFlagPreference(prefContext, feature)));
     }
 }

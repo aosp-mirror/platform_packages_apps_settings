@@ -15,7 +15,6 @@ package com.android.settings.core;
 
 import android.annotation.IntDef;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -24,6 +23,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.slices.SliceData;
+import com.android.settings.slices.Sliceable;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.lang.annotation.Retention;
@@ -37,7 +37,8 @@ import java.util.List;
  * for Slices. The abstract classes that inherit from this class will act as the direct interfaces
  * for each type when plugging into Slices.
  */
-public abstract class BasePreferenceController extends AbstractPreferenceController {
+public abstract class BasePreferenceController extends AbstractPreferenceController implements
+        Sliceable {
 
     private static final String TAG = "SettingsPrefController";
 
@@ -119,7 +120,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
             final Class<?> clazz = Class.forName(controllerName);
             final Constructor<?> preferenceConstructor =
                     clazz.getConstructor(Context.class, String.class);
-            final Object[] params = new Object[] {context, key};
+            final Object[] params = new Object[]{context, key};
             return (BasePreferenceController) preferenceConstructor.newInstance(params);
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException |
                 IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
@@ -137,7 +138,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
         try {
             final Class<?> clazz = Class.forName(controllerName);
             final Constructor<?> preferenceConstructor = clazz.getConstructor(Context.class);
-            final Object[] params = new Object[] {context};
+            final Object[] params = new Object[]{context};
             return (BasePreferenceController) preferenceConstructor.newInstance(params);
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException |
                 IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
@@ -227,41 +228,6 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     }
 
     /**
-     * @return an {@link IntentFilter} that includes all broadcasts which can affect the state of
-     * this Setting.
-     */
-    public IntentFilter getIntentFilter() {
-        return null;
-    }
-
-    /**
-     * Determines if the controller should be used as a Slice.
-     * <p>
-     *     Important criteria for a Slice are:
-     *     - Must be secure
-     *     - Must not be a privacy leak
-     *     - Must be understandable as a stand-alone Setting.
-     * <p>
-     *     This does not guarantee the setting is available. {@link #isAvailable()} should sill be
-     *     called.
-     *
-     * @return {@code true} if the controller should be used externally as a Slice.
-     */
-    public boolean isSliceable() {
-        return false;
-    }
-
-    /**
-     * @return {@code true} if the setting update asynchronously.
-     * <p>
-     * For example, a Wifi controller would return true, because it needs to update the radio
-     * and wait for it to turn on.
-     */
-    public boolean hasAsyncUpdate() {
-        return false;
-    }
-
-    /**
      * Updates non-indexable keys for search provider.
      *
      * Called by SearchIndexProvider#getNonIndexableKeys
@@ -293,6 +259,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
 
     /**
      * Set {@link UiBlockListener}
+     *
      * @param uiBlockListener listener to set
      */
     public void setUiBlockListener(UiBlockListener uiBlockListener) {
@@ -306,6 +273,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
         /**
          * To notify client that UI related background work is finished.
          * (i.e. Slice is fully loaded.)
+         *
          * @param controller Controller that contains background work
          */
         void onBlockerWorkFinished(BasePreferenceController controller);
@@ -321,5 +289,6 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      *
      * This music be used in {@link BasePreferenceController}
      */
-    public interface UiBlocker {}
+    public interface UiBlocker {
+    }
 }

@@ -51,7 +51,7 @@ public abstract class GesturePreferenceController extends TogglePreferenceContro
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            mVideoPreference = (VideoPreference) screen.findPreference(getVideoPrefKey());
+            mVideoPreference = screen.findPreference(getVideoPrefKey());
         }
     }
 

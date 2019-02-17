@@ -56,7 +56,7 @@ public class FaceSettingsAttentionPreferenceController extends TogglePreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (SwitchPreference) screen.findPreference(KEY);
+        mPreference = screen.findPreference(KEY);
     }
 
     @Override

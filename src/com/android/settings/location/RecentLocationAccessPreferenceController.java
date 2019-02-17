@@ -69,8 +69,7 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference preference = (LayoutPreference) screen.findPreference(
-                KEY_APPS_DASHBOARD);
+        final LayoutPreference preference = screen.findPreference(KEY_APPS_DASHBOARD);
         final View view = preference.findViewById(R.id.app_entities_header);
         mController = AppEntitiesHeaderController.newInstance(mContext, view)
                 .setHeaderTitleRes(R.string.location_category_recent_location_access)

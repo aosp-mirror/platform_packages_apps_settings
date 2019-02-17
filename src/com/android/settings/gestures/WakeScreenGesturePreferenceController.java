@@ -53,7 +53,18 @@ public class WakeScreenGesturePreferenceController extends GesturePreferenceCont
                 || !mFeatureProvider.isSupported(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return mFeatureProvider.isEnabled(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+
+        if (!mFeatureProvider.isEnabled(mContext)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        return getAmbientConfig().alwaysOnEnabled(mUserId)
+                ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+    }
+
+    @Override
+    protected boolean canHandleClicks() {
+        return getAmbientConfig().alwaysOnEnabled(mUserId);
     }
 
     @Override

@@ -98,7 +98,7 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (NfcPaymentPreference) screen.findPreference(getPreferenceKey());
+        mPreference = screen.findPreference(getPreferenceKey());
         if (mPreference != null) {
             mPreference.initialize(this);
         }

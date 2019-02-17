@@ -143,7 +143,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPrefContext = screen.getContext();
-        mAppListGroup = (PreferenceGroup) screen.findPreference(mPreferenceKey);
+        mAppListGroup = screen.findPreference(mPreferenceKey);
     }
 
     @Override

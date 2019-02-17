@@ -61,5 +61,9 @@ public class TopLevelBatteryPreferenceControllerTest {
 
         info.remainingLabel = "Phone will shut down soon";
         assertThat(getDashboardLabel(mContext, info)).isEqualTo("3% - Phone will shut down soon");
+
+        info.discharging = false;
+        info.chargeLabel = "5% - charging";
+        assertThat(getDashboardLabel(mContext, info)).isEqualTo("5% - charging");
     }
 }

@@ -54,8 +54,8 @@ public class StartNowPreferenceController extends AbstractPreferenceController i
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        LayoutPreference pref = (LayoutPreference) screen.findPreference(getPreferenceKey());
-        Button startButton = (Button)pref.findViewById(R.id.dream_start_now_button);
+        LayoutPreference pref = screen.findPreference(getPreferenceKey());
+        Button startButton = pref.findViewById(R.id.dream_start_now_button);
         startButton.setOnClickListener(v -> mBackend.startDreaming());
     }
 
@@ -63,7 +63,7 @@ public class StartNowPreferenceController extends AbstractPreferenceController i
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        Button startButton = (Button)((LayoutPreference)preference)
+        Button startButton = ((LayoutPreference) preference)
                 .findViewById(R.id.dream_start_now_button);
         startButton.setEnabled(mBackend.getWhenToDreamSetting() != DreamBackend.NEVER);
     }

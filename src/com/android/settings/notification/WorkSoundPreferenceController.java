@@ -100,7 +100,7 @@ public class WorkSoundPreferenceController extends AbstractPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mWorkPreferenceCategory = (PreferenceGroup) screen.findPreference(KEY_WORK_CATEGORY);
+        mWorkPreferenceCategory = screen.findPreference(KEY_WORK_CATEGORY);
     }
 
     @Override
