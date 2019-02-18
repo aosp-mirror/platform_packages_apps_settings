@@ -16,53 +16,89 @@
 
 package com.android.settings.privacy;
 
-import static org.mockito.Mockito.mock;
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.ActionBar;
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.UserManager;
+import android.permission.PermissionControllerManager;
 import android.view.View;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowPermissionControllerManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
+
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowPermissionControllerManager.class})
 public class PrivacyDashboardFragmentTest {
+
+    @Mock
+    private LockPatternUtils mLockPatternUtils;
+    @Mock
+    private PermissionControllerManager mPCM;
 
     private Context mContext;
     private PrivacyDashboardFragment mFragment;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mFragment = spy(new PrivacyDashboardFragment());
+        final UserManager userManager = mContext.getSystemService(UserManager.class);
+        final ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+        shadowUserManager.addProfile(new UserInfo(123, null, 0));
+        when(FakeFeatureFactory.setupForTest().securityFeatureProvider.getLockPatternUtils(
+                any(Context.class))).thenReturn(mLockPatternUtils);
+        mFragment = spy(FragmentController.of(new PrivacyDashboardFragment())
+                .create().start().get());
     }
 
     @Test
     public void onViewCreated_shouldCallStyleActionBar() {
-        final FragmentActivity activity = spy(
-                Robolectric.buildActivity(FragmentActivity.class).get());
-        final ActionBar actionBar = mock(ActionBar.class);
-
-        when(mFragment.getActivity()).thenReturn(activity);
-        when(mFragment.getSettingsLifecycle()).thenReturn(mock(Lifecycle.class));
-        when(mFragment.getListView()).thenReturn(mock(RecyclerView.class));
-        when(activity.getActionBar()).thenReturn(actionBar);
-
         mFragment.onViewCreated(new View(mContext), new Bundle());
 
         verify(mFragment).styleActionBar();
+    }
+
+    @Test
+    public void onViewCreated_shouldInitLinearProgressBar() {
+        mFragment.onViewCreated(new View(mContext), new Bundle());
+
+        verify(mFragment).initLoadingBar();
+    }
+
+    @Test
+    public void updateLinearProgressbar_isVisible_shouldShowProgressBar() {
+        mFragment.setLoadingEnabled(true /* enabled */);
+
+        assertThat(mFragment.mProgressHeader.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mFragment.mProgressAnimation.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void updateLinearProgressbar_isInVisible_shouldHideProgressBar() {
+        mFragment.setLoadingEnabled(false /* enabled */);
+
+        assertThat(mFragment.mProgressHeader.getVisibility()).isEqualTo(View.INVISIBLE);
+        assertThat(mFragment.mProgressAnimation.getVisibility()).isEqualTo(View.INVISIBLE);
     }
 }

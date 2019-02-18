@@ -22,18 +22,25 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.UserInfo;
+import android.os.UserManager;
 import android.permission.RuntimePermissionUsageInfo;
 import android.provider.DeviceConfig;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
+import com.android.settings.testutils.shadow.ShadowPermissionControllerManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.widget.BarChartInfo;
 import com.android.settingslib.widget.BarChartPreference;
 import com.android.settingslib.widget.BarViewInfo;
@@ -47,26 +54,41 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowDeviceConfig.class})
+@Config(shadows = {ShadowDeviceConfig.class, ShadowUserManager.class,
+        ShadowPermissionControllerManager.class})
 public class PermissionBarChartPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private LockPatternUtils mLockPatternUtils;
 
     private PermissionBarChartPreferenceController mController;
     private BarChartPreference mPreference;
+    private PrivacyDashboardFragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        Context Context = RuntimeEnvironment.application;
-        mController = new PermissionBarChartPreferenceController(Context, "test_key");
-        mPreference = spy(new BarChartPreference(Context));
+        final Context context = RuntimeEnvironment.application;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        final ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+        shadowUserManager.addProfile(new UserInfo(123, null, 0));
+        when(FakeFeatureFactory.setupForTest().securityFeatureProvider.getLockPatternUtils(
+                any(Context.class))).thenReturn(mLockPatternUtils);
+
+        mController = spy(new PermissionBarChartPreferenceController(context, "test_key"));
+        mFragment = spy(FragmentController.of(new PrivacyDashboardFragment())
+                .create().start().get());
+        mController.setFragment(mFragment);
+        mPreference = spy(new BarChartPreference(context));
         when(mScreen.findPreference(mController.getPreferenceKey()))
                 .thenReturn((BarChartPreference) mPreference);
     }
@@ -129,5 +151,42 @@ public class PermissionBarChartPreferenceControllerTest {
         mController.onPermissionUsageResult(mInfos);
 
         verify(mPreference, times(1)).setBarViewInfos(any(BarViewInfo[].class));
+    }
+
+    @Test
+    public void onStart_permissionHubEnabled_shouldShowProgressBar() {
+        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
+                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        mController.displayPreference(mScreen);
+
+        mController.onStart();
+
+        verify(mFragment).setLoadingEnabled(true /* enabled */);
+        verify(mPreference).updateLoadingState(true /* isLoading */);
+    }
+
+    @Test
+    public void onStart_permissionHubDisabled_shouldNotShowProgressBar() {
+        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
+                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "false", false);
+
+        mController.onStart();
+
+        verify(mFragment, never()).setLoadingEnabled(true /* enabled */);
+        verify(mPreference, never()).updateLoadingState(true /* isLoading */);
+    }
+
+    @Test
+    public void onPermissionUsageResult_shouldHideProgressBar() {
+        final List<RuntimePermissionUsageInfo> infos1 = new ArrayList<>();
+        final RuntimePermissionUsageInfo info1 =
+                new RuntimePermissionUsageInfo("permission 1", 10);
+        infos1.add(info1);
+        mController.displayPreference(mScreen);
+
+        mController.onPermissionUsageResult(infos1);
+
+        verify(mFragment).setLoadingEnabled(false /* enabled */);
+        verify(mPreference).updateLoadingState(false /* isLoading */);
     }
 }
