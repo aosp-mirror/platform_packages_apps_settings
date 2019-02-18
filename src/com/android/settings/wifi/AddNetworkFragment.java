@@ -66,16 +66,14 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
         mCancelBtn.setOnClickListener(this);
         mUIController = new WifiConfigController(this, rootView, null, getMode());
 
-        if (WifiDppUtils.isSharingNetworkEnabled(getContext())) {
-            final ImageButton scannerButton = rootView.findViewById(R.id.ssid_scanner_button);
-            if (scannerButton != null) {
-                scannerButton.setVisibility(View.VISIBLE);
-                scannerButton.setOnClickListener((View v) -> {
-                    // Launch QR code scanner to join a network.
-                    getContext().startActivity(
-                            WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
-                });
-            }
+        final ImageButton scannerButton = rootView.findViewById(R.id.ssid_scanner_button);
+        if (scannerButton != null) {
+            scannerButton.setVisibility(View.VISIBLE);
+            scannerButton.setOnClickListener((View v) -> {
+                // Launch QR code scanner to join a network.
+                getContext().startActivity(
+                        WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
+            });
         }
 
         return rootView;
