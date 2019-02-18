@@ -21,57 +21,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         settings:layout_behavior="com.android.settings.widget.FloatingAppBarScrollingViewBehavior">
 
-        <FrameLayout
-            android:id="@+id/content_container"
+        <LinearLayout
+            android:id="@+id/list_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-            <LinearLayout
-                android:id="@+id/list_container"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_height="match_parent">
 
-                <FrameLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/apps_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    settings:fastScrollEnabled="true"
+                    settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+                    settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
+                    settings:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+                    settings:fastScrollVerticalTrackDrawable="@drawable/line_drawable"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/apps_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        settings:fastScrollEnabled="true"
-                        settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
-                        settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
-                        settings:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
-                        settings:fastScrollVerticalTrackDrawable="@drawable/line_drawable"/>
+                <TextView
+                    android:id="@android:id/empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/no_applications"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:visibility="invisible"/>
 
-                    <TextView
-                        android:id="@android:id/empty"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:text="@string/no_applications"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:visibility="invisible"/>
+            </FrameLayout>
 
-                </FrameLayout>
+        </LinearLayout>
 
-            </LinearLayout>
+        <include layout="@layout/loading_container"/>
 
-            <include layout="@layout/loading_container"/>
-
-        </FrameLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

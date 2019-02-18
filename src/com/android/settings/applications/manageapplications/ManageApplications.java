@@ -186,7 +186,6 @@ public class ManageApplications extends InstrumentedFragment
 
     private View mLoadingContainer;
     private View mListContainer;
-    private RecyclerView mRecyclerView;
     private SearchView mSearchView;
 
     // Size resource used for packages whose size computation failed for some reason
@@ -220,7 +219,7 @@ public class ManageApplications extends InstrumentedFragment
     @VisibleForTesting
     FilterSpinnerAdapter mFilterAdapter;
     @VisibleForTesting
-    View mContentContainer;
+    RecyclerView mRecyclerView;
 
     private View mRootView;
     private Spinner mFilterSpinner;
@@ -330,7 +329,6 @@ public class ManageApplications extends InstrumentedFragment
             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
-        mContentContainer = mRootView.findViewById(R.id.content_container);
         mListContainer = mRootView.findViewById(R.id.list_container);
         if (mListContainer != null) {
             // Create adapter and list view here
@@ -861,14 +859,14 @@ public class ManageApplications extends InstrumentedFragment
             // overlapped by floating filter.
             if (hasFilter) {
                 mManageApplications.mSpinnerHeader.setVisibility(View.VISIBLE);
-                mManageApplications.mContentContainer.setPadding(0 /* left */,
+                mManageApplications.mRecyclerView.setPadding(0 /* left */,
                         mContext.getResources().getDimensionPixelSize(
                                 R.dimen.app_bar_height) /* top */,
                         0 /* right */,
                         0 /* bottom */);
             } else {
                 mManageApplications.mSpinnerHeader.setVisibility(View.GONE);
-                mManageApplications.mContentContainer.setPadding(0 /* left */, 0 /* top */,
+                mManageApplications.mRecyclerView.setPadding(0 /* left */, 0 /* top */,
                         0 /* right */,
                         0 /* bottom */);
             }
