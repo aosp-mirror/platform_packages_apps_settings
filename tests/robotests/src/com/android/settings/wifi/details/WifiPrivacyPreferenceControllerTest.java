@@ -93,4 +93,20 @@ public class WifiPrivacyPreferenceControllerTest {
         mPreferenceController.getRandomizationValue();
         mPreferenceController.onPreferenceChange(mDropDownPreference, "1");
     }
+
+    @Test
+    public void testUpdateState_isNotEphemeralNetwork_shouldBeSelectable() {
+        mPreferenceController.setIsEphemeral(false);
+        mPreferenceController.updateState(mDropDownPreference);
+
+        assertThat(mDropDownPreference.isSelectable()).isTrue();
+    }
+
+    @Test
+    public void testUpdateState_isEphemeralNetwork_shouldNotSelectable() {
+        mPreferenceController.setIsEphemeral(true);
+        mPreferenceController.updateState(mDropDownPreference);
+
+        assertThat(mDropDownPreference.isSelectable()).isFalse();
+    }
 }

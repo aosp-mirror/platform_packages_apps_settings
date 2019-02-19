@@ -534,8 +534,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the user can share the network represented by this preference with QR code.
      */
     private boolean canShareNetwork() {
-        return mAccessPoint.getConfig() != null && FeatureFlagUtils.isEnabled(mContext,
-                FeatureFlags.WIFI_SHARING);
+        return mAccessPoint.getConfig() != null;
     }
 
     /**

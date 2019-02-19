@@ -56,6 +56,7 @@
                     <EditText android:id="@+id/ssid"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
                             style="@style/wifi_item_edit_content"
                             android:hint="@string/wifi_ssid_hint"
                             android:singleLine="true"
@@ -64,12 +65,11 @@
                         android:id="@+id/ssid_scanner_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="5dp"
                         android:background="@null"
                         android:src="@drawable/ic_scan_24dp"
-                        android:visibility="gone"
                         android:contentDescription="@string/wifi_add_network" />
                 </RelativeLayout>
 
@@ -291,6 +291,7 @@
                     <EditText android:id="@+id/password"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
+                              android:layout_alignParentStart="true"
                               style="@style/wifi_item_edit_content"
                               android:singleLine="true"
                               android:password="true" />
@@ -299,12 +300,11 @@
                         android:id="@+id/password_scanner_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="5dp"
                         android:background="@null"
                         android:src="@drawable/ic_scan_24dp"
-                        android:visibility="gone"
                         android:contentDescription="@string/wifi_add_network" />
                 </RelativeLayout>
             </LinearLayout>

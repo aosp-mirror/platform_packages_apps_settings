@@ -48,6 +48,11 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     private static final String KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS =
             "privacy_lock_screen_work_profile_notifications";
 
+    @VisibleForTesting
+    View mProgressHeader;
+    @VisibleForTesting
+    View mProgressAnimation;
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.TOP_LEVEL_PRIVACY;
@@ -74,9 +79,16 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(PermissionBarChartPreferenceController.class).setFragment(this /* fragment */);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         styleActionBar();
+        initLoadingBar();
     }
 
     @VisibleForTesting
@@ -94,6 +106,21 @@ public class PrivacyDashboardFragment extends DashboardFragment {
         actionBar.setElevation(0);
         if (lifecycle != null && scrollView != null) {
             ActionBarShadowController.attachToView(activity, lifecycle, scrollView);
+        }
+    }
+
+    @VisibleForTesting
+    void initLoadingBar() {
+        mProgressHeader = setPinnedHeaderView(R.layout.progress_header);
+        mProgressAnimation = mProgressHeader.findViewById(R.id.progress_bar_animation);
+        setLoadingEnabled(false);
+    }
+
+    @VisibleForTesting
+    void setLoadingEnabled(boolean enabled) {
+        if (mProgressHeader != null && mProgressAnimation != null) {
+            mProgressHeader.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+            mProgressAnimation.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
         }
     }
 

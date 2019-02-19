@@ -40,6 +40,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
     final static int SUBMIT_BUTTON_ID = android.R.id.button1;
     @VisibleForTesting
     final static int CANCEL_BUTTON_ID = android.R.id.button2;
+    final static int SCANNER_BUTTON_ID = R.id.ssid_scanner_button;
 
     private WifiConfigController mUIController;
     private Button mSubmitBtn;
@@ -62,21 +63,11 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
         mSubmitBtn = rootView.findViewById(SUBMIT_BUTTON_ID);
         mCancelBtn = rootView.findViewById(CANCEL_BUTTON_ID);
+        final ImageButton scannerButton = rootView.findViewById(SCANNER_BUTTON_ID);
         mSubmitBtn.setOnClickListener(this);
         mCancelBtn.setOnClickListener(this);
+        scannerButton.setOnClickListener(this);
         mUIController = new WifiConfigController(this, rootView, null, getMode());
-
-        if (WifiDppUtils.isSharingNetworkEnabled(getContext())) {
-            final ImageButton scannerButton = rootView.findViewById(R.id.ssid_scanner_button);
-            if (scannerButton != null) {
-                scannerButton.setVisibility(View.VISIBLE);
-                scannerButton.setOnClickListener((View v) -> {
-                    // Launch QR code scanner to join a network.
-                    getContext().startActivity(
-                            WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
-                });
-            }
-        }
 
         return rootView;
     }
@@ -95,6 +86,11 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
                 break;
             case CANCEL_BUTTON_ID:
                 handleCancelAction();
+                break;
+            case SCANNER_BUTTON_ID:
+                // Launch QR code scanner to join a network.
+                getContext().startActivity(
+                        WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
                 break;
         }
     }

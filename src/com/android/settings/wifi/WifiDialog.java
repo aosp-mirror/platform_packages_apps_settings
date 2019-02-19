@@ -80,20 +80,17 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, /* root */ null);
-        if (WifiDppUtils.isSharingNetworkEnabled(getContext())) {
-            final ImageButton scannerButton = mView.findViewById(R.id.password_scanner_button);
-            if (scannerButton != null) {
-                scannerButton.setVisibility(View.VISIBLE);
-                scannerButton.setOnClickListener((View v) -> {
-                    String ssid = null;
-                    if (mAccessPoint != null) {
-                        ssid = mAccessPoint.getSsidStr();
-                    }
-                    // Launch QR code scanner to join a network.
-                    getContext().startActivity(
-                            WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid));
-                });
-            }
+        final ImageButton scannerButton = mView.findViewById(R.id.password_scanner_button);
+        if (scannerButton != null) {
+            scannerButton.setOnClickListener((View v) -> {
+                String ssid = null;
+                if (mAccessPoint != null) {
+                    ssid = mAccessPoint.getSsidStr();
+                }
+                // Launch QR code scanner to join a network.
+                getContext().startActivity(
+                        WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid));
+            });
         }
         setView(mView);
         mController = new WifiConfigController(this, mView, mAccessPoint, mMode);
