@@ -466,27 +466,27 @@ public class ManageApplicationsTest {
 
     @Test
     public void updateFilterView_hasFilterSet_shouldShowFilterAndHavePaddingTop() {
-        mFragment.mContentContainer = new View(mContext);
+        mFragment.mRecyclerView = new RecyclerView(mContext);
         mFragment.mSpinnerHeader = new View(mContext);
         mFragment.mFilterAdapter = new ManageApplications.FilterSpinnerAdapter(mFragment);
 
         mFragment.mFilterAdapter.updateFilterView(true);
 
         assertThat(mFragment.mSpinnerHeader.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(mFragment.mContentContainer.getPaddingTop()).isEqualTo(
+        assertThat(mFragment.mRecyclerView.getPaddingTop()).isEqualTo(
                 mContext.getResources().getDimensionPixelSize(R.dimen.app_bar_height));
     }
 
     @Test
     public void updateFilterView_noFilterSet_shouldHideFilterAndNoPaddingTop() {
-        mFragment.mContentContainer = new View(mContext);
+        mFragment.mRecyclerView = new RecyclerView(mContext);
         mFragment.mSpinnerHeader = new View(mContext);
         mFragment.mFilterAdapter = new ManageApplications.FilterSpinnerAdapter(mFragment);
 
         mFragment.mFilterAdapter.updateFilterView(false);
 
         assertThat(mFragment.mSpinnerHeader.getVisibility()).isEqualTo(View.GONE);
-        assertThat(mFragment.mContentContainer.getPaddingTop()).isEqualTo(0);
+        assertThat(mFragment.mRecyclerView.getPaddingTop()).isEqualTo(0);
     }
 
     private void setUpOptionMenus() {
