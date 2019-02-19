@@ -26,12 +26,21 @@ import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -79,13 +88,15 @@ public class WifiSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
+        // Reload theme for switching dark mode on/off
+        mContext.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
+
         final boolean isWifiEnabled = isWifiEnabled();
 
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         final String title = mContext.getString(R.string.wifi_settings);
         final CharSequence summary = getSummary();
-        @ColorInt final int color = getSliceAccentColor();
         final PendingIntent toggleAction = getBroadcastIntent(mContext);
         final PendingIntent primaryAction = getPrimaryAction();
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
@@ -94,7 +105,7 @@ public class WifiSlice implements CustomSliceable {
                 null /* actionTitle */, isWifiEnabled);
 
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
-                .setAccentColor(color)
+                .setAccentColor(COLOR_NOT_TINTED)
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(title)
                         .setSubtitle(summary)
@@ -118,8 +129,7 @@ public class WifiSlice implements CustomSliceable {
             if (i < apCount) {
                 listBuilder.addRow(getAccessPointRow(results.get(i)));
             } else if (needLoadingRow) {
-                listBuilder.addRow(new ListBuilder.RowBuilder()
-                        .setTitle(mContext.getText(R.string.wifi_empty_list_wifi_on)));
+                listBuilder.addRow(getLoadingRow());
                 needLoadingRow = false;
             } else {
                 listBuilder.addRow(new ListBuilder.RowBuilder()
@@ -130,11 +140,11 @@ public class WifiSlice implements CustomSliceable {
     }
 
     private ListBuilder.RowBuilder getAccessPointRow(AccessPoint accessPoint) {
-        final CharSequence title = accessPoint.getConfigName();
+        final CharSequence title = getAccessPointName(accessPoint);
         final IconCompat levelIcon = getAccessPointLevelIcon(accessPoint);
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
-                .setTitle(title)
+                .setSubtitle(title)
                 .setPrimaryAction(SliceAction.create(
                         getAccessPointAction(accessPoint), levelIcon, ListBuilder.ICON_IMAGE,
                         title));
@@ -146,14 +156,35 @@ public class WifiSlice implements CustomSliceable {
         return rowBuilder;
     }
 
-    protected IconCompat getAccessPointLevelIcon(AccessPoint accessPoint) {
-        return IconCompat.createWithResource(mContext,
-                com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
+    private CharSequence getAccessPointName(AccessPoint accessPoint) {
+        final CharSequence name = accessPoint.getConfigName();
+        final Spannable span = new SpannableString(name);
+        @ColorInt final int color = Utils.getColorAttrDefaultColor(mContext,
+                android.R.attr.textColorPrimary);
+        span.setSpan(new ForegroundColorSpan(color), 0, name.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return span;
     }
 
-    @ColorInt
-    protected int getSliceAccentColor() {
-        return Utils.getColorAccentDefaultColor(mContext);
+    private IconCompat getAccessPointLevelIcon(AccessPoint accessPoint) {
+        final Drawable d = mContext.getDrawable(
+                com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
+
+        @ColorInt int color;
+        if (accessPoint.isActive()) {
+            final NetworkInfo.State state = accessPoint.getNetworkInfo().getState();
+            if (state == NetworkInfo.State.CONNECTED) {
+                color = Utils.getColorAccentDefaultColor(mContext);
+            } else { // connecting
+                color = Utils.getDisabled(mContext, Utils.getColorAttrDefaultColor(mContext,
+                        android.R.attr.colorControlNormal));
+            }
+        } else {
+            color = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal);
+        }
+
+        d.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+        return Utils.createIconWithDrawable(d);
     }
 
     private IconCompat getEndIcon(AccessPoint accessPoint) {
@@ -188,6 +219,18 @@ public class WifiSlice implements CustomSliceable {
         }
         return PendingIntent.getActivity(mContext, accessPoint.hashCode() /* requestCode */,
                 intent, 0 /* flags */);
+    }
+
+    private ListBuilder.RowBuilder getLoadingRow() {
+        final CharSequence title = mContext.getText(R.string.wifi_empty_list_wifi_on);
+
+        // for aligning to the Wi-Fi AP's name
+        final IconCompat emptyIcon = Utils.createIconWithDrawable(
+                new ColorDrawable(Color.TRANSPARENT));
+
+        return new ListBuilder.RowBuilder()
+                .setTitleItem(emptyIcon, ListBuilder.ICON_IMAGE)
+                .setSubtitle(title);
     }
 
     /**

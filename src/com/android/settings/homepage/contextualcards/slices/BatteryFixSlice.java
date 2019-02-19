@@ -80,7 +80,7 @@ public class BatteryFixSlice implements CustomSliceable {
     public Slice getSlice() {
         final ListBuilder sliceBuilder =
                 new ListBuilder(mContext, BATTERY_FIX_SLICE_URI, ListBuilder.INFINITY)
-                        .setAccentColor(-1);
+                        .setAccentColor(COLOR_NOT_TINTED);
 
         // TipType.SUMMARY is battery good
         if (UNIMPORTANT_BATTERY_TIPS.contains(readBatteryTipAvailabilityCache(mContext))) {

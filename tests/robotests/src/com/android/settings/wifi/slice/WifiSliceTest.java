@@ -118,7 +118,7 @@ public class WifiSliceTest {
         // All AP rows + title row
         assertThat(rows).isEqualTo(DEFAULT_EXPANDED_ROW_COUNT + 1);
         // Has scanning text
-        SliceTester.assertAnySliceItemContainsTitle(sliceItems,
+        SliceTester.assertAnySliceItemContainsSubtitle(sliceItems,
                 mContext.getString(R.string.wifi_empty_list_wifi_on));
     }
 
