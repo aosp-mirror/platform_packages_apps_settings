@@ -162,6 +162,7 @@ public class ConditionManager {
         mCardControllers.add(new RingerVibrateConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new RingerMutedConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new WorkModeConditionController(mAppContext, this /* manager */));
+        mCardControllers.add(new GrayscaleConditionController(mAppContext, this /* manager */));
     }
 
     /**
