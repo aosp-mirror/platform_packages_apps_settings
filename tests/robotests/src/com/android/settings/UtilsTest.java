@@ -34,6 +34,11 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
@@ -47,6 +52,8 @@ import android.os.storage.VolumeInfo;
 import android.util.IconDrawableFactory;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.core.graphics.drawable.IconCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -96,7 +103,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testGetWifiIpAddresses_succeeds() throws Exception {
+    public void getWifiIpAddresses_succeeds() throws Exception {
         when(wifiManager.getCurrentNetwork()).thenReturn(network);
         LinkAddress address = new LinkAddress(InetAddress.getByName("127.0.0.1"), 0);
         LinkProperties lp = new LinkProperties();
@@ -107,7 +114,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testGetWifiIpAddresses_nullLinkProperties() {
+    public void getWifiIpAddresses_nullLinkProperties() {
         when(wifiManager.getCurrentNetwork()).thenReturn(network);
         // Explicitly set the return value to null for readability sake.
         when(connectivityManager.getLinkProperties(network)).thenReturn(null);
@@ -116,7 +123,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testGetWifiIpAddresses_nullNetwork() {
+    public void getWifiIpAddresses_nullNetwork() {
         // Explicitly set the return value to null for readability sake.
         when(wifiManager.getCurrentNetwork()).thenReturn(null);
 
@@ -124,7 +131,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testInitializeVolumeDoesntBreakOnNullVolume() {
+    public void initializeVolumeDoesntBreakOnNullVolume() {
         VolumeInfo info = new VolumeInfo("id", 0, new DiskInfo("id", 0), "");
         StorageManager storageManager = mock(StorageManager.class, RETURNS_DEEP_STUBS);
         when(storageManager.findVolumeById(anyString())).thenReturn(info);
@@ -133,13 +140,13 @@ public class UtilsTest {
     }
 
     @Test
-    public void testGetInstallationStatus_notInstalled_shouldReturnUninstalled() {
+    public void getInstallationStatus_notInstalled_shouldReturnUninstalled() {
         assertThat(Utils.getInstallationStatus(new ApplicationInfo()))
                 .isEqualTo(R.string.not_installed);
     }
 
     @Test
-    public void testGetInstallationStatus_enabled_shouldReturnInstalled() {
+    public void getInstallationStatus_enabled_shouldReturnInstalled() {
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = true;
@@ -148,7 +155,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testGetInstallationStatus_disabled_shouldReturnDisabled() {
+    public void getInstallationStatus_disabled_shouldReturnDisabled() {
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = false;
@@ -157,7 +164,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testIsProfileOrDeviceOwner_deviceOwnerApp_returnTrue() {
+    public void isProfileOrDeviceOwner_deviceOwnerApp_returnTrue() {
         when(mDevicePolicyManager.isDeviceOwnerAppOnAnyUser(PACKAGE_NAME)).thenReturn(true);
 
         assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager, PACKAGE_NAME))
@@ -165,7 +172,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testIsProfileOrDeviceOwner_profileOwnerApp_returnTrue() {
+    public void isProfileOrDeviceOwner_profileOwnerApp_returnTrue() {
         final List<UserInfo> userInfos = new ArrayList<>();
         userInfos.add(new UserInfo());
 
@@ -178,7 +185,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testSetEditTextCursorPosition_shouldGetExpectedEditTextLenght() {
+    public void setEditTextCursorPosition_shouldGetExpectedEditTextLenght() {
         final EditText editText = new EditText(mContext);
         final CharSequence text = "test";
         editText.setText(text, TextView.BufferType.EDITABLE);
@@ -189,7 +196,36 @@ public class UtilsTest {
     }
 
     @Test
-    public void testGetBadgedIcon_usePackageNameAndUserId()
+    public void createIconWithDrawable_BitmapDrawable() {
+        final Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        final BitmapDrawable drawable = new BitmapDrawable(mContext.getResources(), bitmap);
+
+        final IconCompat icon = Utils.createIconWithDrawable(drawable);
+
+        assertThat(icon.getBitmap()).isNotNull();
+    }
+
+    @Test
+    public void createIconWithDrawable_ColorDrawable() {
+        final ColorDrawable drawable = new ColorDrawable(Color.BLACK);
+
+        final IconCompat icon = Utils.createIconWithDrawable(drawable);
+
+        assertThat(icon.getBitmap()).isNotNull();
+    }
+
+    @Test
+    public void createIconWithDrawable_VectorDrawable() {
+        final VectorDrawable drawable = VectorDrawable.create(mContext.getResources(),
+                R.drawable.ic_settings_accent);
+
+        final IconCompat icon = Utils.createIconWithDrawable(drawable);
+
+        assertThat(icon.getBitmap()).isNotNull();
+    }
+
+    @Test
+    public void getBadgedIcon_usePackageNameAndUserId()
         throws PackageManager.NameNotFoundException {
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfoAsUser(
                 PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);

@@ -90,7 +90,7 @@ public class ContextualWifiSlice extends WifiSlice {
         }
 
         d.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-        return IconCompat.createWithBitmap(Utils.drawableToBitmap(d));
+        return Utils.createIconWithDrawable(d);
     }
 
     @Override

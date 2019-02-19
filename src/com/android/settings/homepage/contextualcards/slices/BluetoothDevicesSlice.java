@@ -214,7 +214,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 .getBtClassDrawableWithDescription(mContext, device);
 
         if (pair.first != null) {
-            return IconCompat.createWithBitmap(Utils.drawableToBitmap(pair.first));
+            return Utils.createIconWithDrawable(pair.first);
         } else {
             return IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
