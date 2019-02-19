@@ -66,12 +66,12 @@ public class ShadowLockPatternUtils {
     }
 
     @Implementation
-    protected byte[] getPasswordHistoryHashFactor(String currentPassword, int userId) {
+    protected byte[] getPasswordHistoryHashFactor(byte[] currentPassword, int userId) {
         return null;
     }
 
     @Implementation
-    protected boolean checkPasswordHistory(String passwordToCheck, byte[] hashFactor, int userId) {
+    protected boolean checkPasswordHistory(byte[] passwordToCheck, byte[] hashFactor, int userId) {
         return false;
     }
 }
