@@ -736,7 +736,7 @@
         <activity
             android:name=".notification.ZenSuggestionActivity"
             android:label="@string/zen_mode_settings_title"
-            android:icon="@drawable/ic_do_not_disturb_on_24dp"
+            android:icon="@drawable/ic_suggestion_dnd"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -796,7 +796,7 @@
 
         <activity android:name=".wallpaper.WallpaperSuggestionActivity"
                   android:label="@string/wallpaper_settings_title"
-                  android:icon="@drawable/ic_wallpaper"
+                  android:icon="@drawable/ic_suggestion_wallpaper"
                   android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -889,7 +889,7 @@
         <activity
             android:name="Settings$NightDisplaySuggestionActivity"
             android:enabled="@*android:bool/config_nightDisplayAvailable"
-            android:icon="@drawable/ic_settings_night_display">
+            android:icon="@drawable/ic_suggestion_night_display">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
@@ -1628,7 +1628,7 @@
         </activity>
 
         <activity android:name=".password.ScreenLockSuggestionActivity"
-            android:icon="@drawable/ic_settings_security">
+            android:icon="@drawable/ic_suggestion_security">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.DEFAULT" />
@@ -2635,7 +2635,7 @@
 
         <activity android:name=".wifi.calling.WifiCallingSuggestionActivity"
                   android:label="@string/wifi_calling_settings_title"
-                  android:icon="@drawable/ic_settings_wireless">
+                  android:icon="@drawable/ic_suggestion_wireless">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
