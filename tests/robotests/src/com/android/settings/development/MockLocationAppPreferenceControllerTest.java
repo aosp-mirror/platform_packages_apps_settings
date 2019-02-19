@@ -15,6 +15,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.AppOpsManager;
+import android.app.AppOpsManager.OpEntry;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -144,7 +145,7 @@ public class MockLocationAppPreferenceControllerTest {
     }
 
     private AppOpsManager.OpEntry createOpEntry(int opMode) {
-        return new AppOpsManager.OpEntry(0, opMode, 0l /* time */, 0 /* rejectTime */,
-                0 /* duration */, 0 /* proxyUid */, null /* proxyPackage */);
+        return new OpEntry(0, false, opMode, null /*accessTimes*/, null /*rejectTimes*/,
+            null /*durations*/, null /* proxyUids */, null /* proxyPackages */);
     }
 }
