@@ -181,11 +181,11 @@ public class DefaultBrowserPreferenceControllerTest {
     }
 
     @Test
-    public void getCandidates_shouldQueryActivityWithFlagsEquals0() {
+    public void getCandidates_shouldQueryActivityWithMatchAll() {
         DefaultBrowserPreferenceController.getCandidates(mPackageManager, 0 /* userId */);
 
         verify(mPackageManager).queryIntentActivitiesAsUser(
-            any(Intent.class), eq(0) /* flags */, eq(0) /* userId */);
+            any(Intent.class), eq(PackageManager.MATCH_ALL), eq(0) /* userId */);
     }
 
     @Test
@@ -221,6 +221,7 @@ public class DefaultBrowserPreferenceControllerTest {
         info.handleAllWebDataURI = true;
         info.activityInfo = new ActivityInfo();
         info.activityInfo.packageName = packageName;
+        info.activityInfo.applicationInfo = createApplicationInfo(packageName);
         return info;
     }
 

@@ -45,7 +45,8 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
     static final Intent BROWSE_PROBE = new Intent()
             .setAction(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
-            .setData(Uri.parse("http:"));
+            .setData(Uri.parse("http:"))
+            .addFlags(Intent.FLAG_IGNORE_EPHEMERAL);
 
     public DefaultBrowserPreferenceController(Context context) {
         super(context);
@@ -112,11 +113,13 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         final List<ResolveInfo> candidates = new ArrayList<>();
         // Resolve that intent and check that the handleAllWebDataURI boolean is set
         final List<ResolveInfo> list = packageManager.queryIntentActivitiesAsUser(
-            BROWSE_PROBE, 0 /* flags */, userId);
+            BROWSE_PROBE, PackageManager.MATCH_ALL, userId);
         if (list != null) {
             final Set<String> addedPackages = new ArraySet<>();
             for (ResolveInfo info : list) {
-                if (info.activityInfo == null || !info.handleAllWebDataURI) {
+                if (!info.handleAllWebDataURI || info.activityInfo == null
+                        || !info.activityInfo.enabled
+                        || !info.activityInfo.applicationInfo.enabled) {
                     continue;
                 }
                 final String packageName = info.activityInfo.packageName;
