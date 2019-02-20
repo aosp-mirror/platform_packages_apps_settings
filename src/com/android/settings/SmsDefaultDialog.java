@@ -67,6 +67,7 @@ public final class SmsDefaultDialog extends AlertActivity implements
     protected void onStart() {
         super.onStart();
         getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        android.util.EventLog.writeEvent(0x534e4554, "120484087", -1, "");
     }
 
     @Override
