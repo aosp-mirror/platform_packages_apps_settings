@@ -19,58 +19,71 @@
                   android:title="@string/configure_notification_settings"
                   android:key="configure_notification_settings">
 
-    <!-- When device is locked -->
-    <com.android.settings.RestrictedListPreference
-        android:key="lock_screen_notifications"
-        android:title="@string/lock_screen_notifications_title"
-        android:summary="@string/summary_placeholder"
-        settings:searchable="false"/>
-
     <SwitchPreference
         android:key="hide_silent_icons"
         android:title="@string/hide_silent_icons_title"
         android:summary="@string/hide_silent_icons_summary"
         settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController" />
 
-    <!-- Notification badging -->
-    <SwitchPreference
-        android:key="notification_badging"
-        android:title="@string/notification_badging_title"
-        settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
+    <PreferenceCategory
+        android:key="configure_notifications_advanced"
+        android:order="15"
+        settings:initialExpandedChildrenCount="0">
 
-    <!-- Notification bubbles -->
-    <SwitchPreference
-        android:key="notification_bubbles"
-        android:title="@string/notification_bubbles_title"
-        settings:controller="com.android.settings.notification.BubbleNotificationPreferenceController"/>
+        <com.android.settings.RestrictedListPreference
+            android:key="swipe"
+            android:title="@string/swipe_direction_title"
+            android:entries="@array/swipe_direction_titles"
+            android:entryValues="@array/swipe_direction_values"
+            settings:controller="com.android.settings.notification.SwipeDirectionPreferenceController"/>
 
-    <!-- Pulse notification light -->
-    <SwitchPreference
-        android:key="notification_pulse"
-        android:title="@string/notification_pulse_title"
-        settings:controller="com.android.settings.notification.PulseNotificationPreferenceController"/>
+        <!-- When device is locked -->
+        <com.android.settings.RestrictedListPreference
+            android:key="lock_screen_notifications"
+            android:title="@string/lock_screen_notifications_title"
+            android:summary="@string/summary_placeholder"
+            settings:searchable="false"/>
 
-    <!-- Default notification ringtone -->
-    <com.android.settings.DefaultRingtonePreference
-        android:key="notification_default_ringtone"
-        android:title="@string/notification_ringtone_title"
-        android:dialogTitle="@string/notification_ringtone_title"
-        android:summary="@string/summary_placeholder"
-        android:ringtoneType="notification"/>
+        <!-- Notification badging -->
+        <SwitchPreference
+            android:key="notification_badging"
+            android:title="@string/notification_badging_title"
+            settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
 
-    <Preference
-        android:key="gesture_swipe_down_fingerprint_notifications"
-        android:title="@string/fingerprint_swipe_for_notifications_title"
-        android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"
-        settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController"/>
+        <!-- Notification bubbles -->
+        <SwitchPreference
+            android:key="notification_bubbles"
+            android:title="@string/notification_bubbles_title"
+            settings:controller="com.android.settings.notification.BubbleNotificationPreferenceController"/>
 
-    <com.android.settingslib.RestrictedPreference
-        android:key="zen_mode_notifications"
-        android:title="@string/zen_mode_settings_title"
-        settings:useAdminDisabledSummary="true"
-        android:fragment="com.android.settings.notification.ZenModeSettings"
-        settings:controller="com.android.settings.notification.ZenModePreferenceController"
-        settings:allowDividerAbove="false"/>
+        <!-- Pulse notification light -->
+        <SwitchPreference
+            android:key="notification_pulse"
+            android:title="@string/notification_pulse_title"
+            settings:controller="com.android.settings.notification.PulseNotificationPreferenceController"/>
+
+        <!-- Default notification ringtone -->
+        <com.android.settings.DefaultRingtonePreference
+            android:key="notification_default_ringtone"
+            android:title="@string/notification_ringtone_title"
+            android:dialogTitle="@string/notification_ringtone_title"
+            android:summary="@string/summary_placeholder"
+            android:ringtoneType="notification"/>
+
+        <Preference
+            android:key="gesture_swipe_down_fingerprint_notifications"
+            android:title="@string/fingerprint_swipe_for_notifications_title"
+            android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"
+            settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController"/>
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="zen_mode_notifications"
+            android:title="@string/zen_mode_settings_title"
+            settings:useAdminDisabledSummary="true"
+            android:fragment="com.android.settings.notification.ZenModeSettings"
+            settings:controller="com.android.settings.notification.ZenModePreferenceController"
+            settings:allowDividerAbove="false"/>
+    </PreferenceCategory>
 
     <!-- Empty category to draw divider -->
     <PreferenceCategory
