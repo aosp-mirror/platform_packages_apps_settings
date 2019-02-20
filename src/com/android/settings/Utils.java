@@ -89,6 +89,7 @@ import android.widget.ListView;
 import android.widget.TabWidget;
 
 import androidx.annotation.StringRes;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -950,24 +951,30 @@ public final class Utils extends com.android.settingslib.Utils {
             bitmap = Bitmap.createScaledBitmap(((BitmapDrawable) original).getBitmap(), width,
                     height, false);
         } else {
-            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            final Canvas canvas = new Canvas(bitmap);
-            original.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            original.draw(canvas);
+            bitmap = createBitmap(original, width, height);
         }
         return new BitmapDrawable(null, bitmap);
     }
 
     /**
-     * Converts the {@link Drawable} to a {@link Bitmap}.
+     * Create an Icon pointing to a drawable.
      */
-    public static Bitmap drawableToBitmap(Drawable drawable) {
+    public static IconCompat createIconWithDrawable(Drawable drawable) {
+        Bitmap bitmap;
         if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable)drawable).getBitmap();
+            bitmap = ((BitmapDrawable)drawable).getBitmap();
+        } else {
+            final int width = drawable.getIntrinsicWidth();
+            final int height = drawable.getIntrinsicHeight();
+            bitmap = createBitmap(drawable,
+                    width > 0 ? width : 1,
+                    height > 0 ? height : 1);
         }
+        return IconCompat.createWithBitmap(bitmap);
+    }
 
-        final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+    private static Bitmap createBitmap(Drawable drawable, int width, int height) {
+        final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);

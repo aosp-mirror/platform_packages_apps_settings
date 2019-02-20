@@ -22,20 +22,20 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
-
-import com.android.settings.core.TogglePreferenceController;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Preference controller for "Mobile data"
@@ -115,8 +115,18 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        return mTelephonyManager.isDataEnabled()
-                && mSubId == SubscriptionManager.getDefaultDataSubscriptionId();
+        return mTelephonyManager.isDataEnabled();
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setEnabled(!isOpportunistic());
+    }
+
+    private boolean isOpportunistic() {
+        SubscriptionInfo info = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
+        return info != null && info.isOpportunistic();
     }
 
     public static Uri getObservableUri(int subId) {

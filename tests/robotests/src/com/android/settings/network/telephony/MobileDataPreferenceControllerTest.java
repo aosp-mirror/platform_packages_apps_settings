@@ -149,4 +149,23 @@ public class MobileDataPreferenceControllerTest {
 
         verify(mTelephonyManager).setDataEnabled(true);
     }
+
+    @Test
+    public void isChecked_returnUserDataEnabled() {
+        mController.init(mFragmentManager, SUB_ID);
+        assertThat(mController.isChecked()).isFalse();
+
+        doReturn(true).when(mTelephonyManager).isDataEnabled();
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void updateState_opportunistic_disabled() {
+        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
+        mController.init(mFragmentManager, SUB_ID);
+        doReturn(true).when(mSubscriptionInfo).isOpportunistic();
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
 }

@@ -23,8 +23,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.UserHandle;
@@ -87,7 +85,7 @@ public class MediaOutputSlice implements CustomSliceable {
 
         final Drawable drawable =
                 Utils.getBadgedIcon(mIconDrawableFactory, pm, mPackageName, UserHandle.myUserId());
-        final IconCompat icon = IconCompat.createWithBitmap(getBitmapFromDrawable(drawable));
+        final IconCompat icon = Utils.createIconWithDrawable(drawable);
 
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
@@ -132,17 +130,6 @@ public class MediaOutputSlice implements CustomSliceable {
         final Intent launchIntent = pm.getLaunchIntentForPackage(mPackageName);
         final Intent intent = launchIntent;
         return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
-    }
-
-    private Bitmap getBitmapFromDrawable(Drawable drawable) {
-        final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(bitmap);
-
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-
-        return bitmap;
     }
 
     private ListBuilder.RowBuilder getMediaDeviceRow(MediaDevice device) {

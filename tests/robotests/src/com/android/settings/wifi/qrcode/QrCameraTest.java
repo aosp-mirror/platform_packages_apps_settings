@@ -22,13 +22,10 @@ import static org.mockito.Mockito.mock;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.util.Size;
-
-import com.android.settings.R;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
