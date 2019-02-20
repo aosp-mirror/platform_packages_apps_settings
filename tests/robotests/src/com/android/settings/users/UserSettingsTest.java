@@ -57,7 +57,6 @@ import com.android.settingslib.RestrictedPreference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.AdditionalMatchers;
@@ -101,15 +100,23 @@ public class UserSettingsTest {
         MockitoAnnotations.initMocks(this);
         mActivity = spy(ActivityController.of(new FragmentActivity()).get());
         mContext = spy(RuntimeEnvironment.application);
+        mUserCapabilities = UserCapabilities.create(mContext);
+
         mFragment = spy(new UserSettings());
         ReflectionHelpers.setField(mFragment, "mAddUserWhenLockedPreferenceController",
                 mock(AddUserWhenLockedPreferenceController.class));
         ReflectionHelpers.setField(mFragment, "mMultiUserFooterPreferenceController",
                 mock(MultiUserFooterPreferenceController.class));
-        mUserCapabilities = UserCapabilities.create(mContext);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
+        ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
+        ReflectionHelpers.setField(mFragment, "mAddingUser", false);
+        mFragment.mMePreference = mMePreference;
+
         when((Object) mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mContext).when(mFragment).getContext();
+        doReturn(mMockPreferenceManager).when(mFragment).getPreferenceManager();
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         mProvisioned = Settings.Global.getInt(mContext.getContentResolver(),
             Settings.Global.DEVICE_PROVISIONED, 0);
@@ -157,10 +164,6 @@ public class UserSettingsTest {
         mUserCapabilities.mDisallowSwitchUser = false;
         mUserCapabilities.mUserSwitcherEnabled = true;
 
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
-        ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
-        mFragment.mMePreference = mMePreference;
         mFragment.mUserListCategory = userListCategory;
         mFragment.mAddUser = addUser;
 
@@ -186,11 +189,6 @@ public class UserSettingsTest {
         mUserCapabilities.mDisallowAddUser = false;
         mUserCapabilities.mUserSwitcherEnabled = true;
 
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
-        ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
-        ReflectionHelpers.setField(mFragment, "mAddingUser", false);
-        mFragment.mMePreference = mMePreference;
         mFragment.mUserListCategory = userListCategory;
         mFragment.mAddUser = addUser;
 
@@ -206,7 +204,6 @@ public class UserSettingsTest {
     }
 
     @Test
-    @Ignore
     public void updateUserList_cannotAddUserButCanSwitchUser_shouldNotShowAddUser() {
         Settings.Global.putInt(mContext.getContentResolver(),
             Settings.Global.DEVICE_PROVISIONED, 1);
@@ -216,11 +213,6 @@ public class UserSettingsTest {
         mUserCapabilities.mDisallowAddUser = true;
         mUserCapabilities.mUserSwitcherEnabled = true;
 
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
-        ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
-        ReflectionHelpers.setField(mFragment, "mAddingUser", false);
-        mFragment.mMePreference = mMePreference;
         mFragment.mUserListCategory = mock(PreferenceCategory.class);
         mFragment.mAddUser = addUser;
 
@@ -251,9 +243,6 @@ public class UserSettingsTest {
         doReturn(true).when(mUserManager).canSwitchUsers();
         mUserCapabilities.mIsAdmin = false;
 
-        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-
         Menu menu = mock(Menu.class);
         MenuItem menuItem = mock(MenuItem.class);
         final String title = "title";
@@ -279,9 +268,6 @@ public class UserSettingsTest {
         doReturn(true).when(mUserManager).canSwitchUsers();
         mUserCapabilities.mIsAdmin = false;
 
-        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mock(UserManager.class));
-
         Menu menu = mock(Menu.class);
         MenuItem menuItem = mock(MenuItem.class);
         final String title = "title";
@@ -301,7 +287,6 @@ public class UserSettingsTest {
     }
 
     @Test
-    @Ignore
     public void updateUserList_canAddUserAndSwitchUser_shouldShowAddUser() {
         Settings.Global.putInt(mContext.getContentResolver(),
             Settings.Global.DEVICE_PROVISIONED, 1);
@@ -311,13 +296,8 @@ public class UserSettingsTest {
         mUserCapabilities.mDisallowAddUser = false;
         mUserCapabilities.mUserSwitcherEnabled = true;
 
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
-        ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
-        ReflectionHelpers.setField(mFragment, "mAddingUser", false);
-        mFragment.mMePreference = mMePreference;
-        mFragment.mUserListCategory = mock(PreferenceCategory.class);
         mFragment.mAddUser = addUser;
+        mFragment.mUserListCategory = mock(PreferenceCategory.class);
 
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
         doReturn("Test summary").when(mFragment).getString(anyInt(), anyInt());
@@ -325,5 +305,27 @@ public class UserSettingsTest {
         mFragment.updateUserList();
 
         verify(addUser).setVisible(true);
+    }
+
+    @Test
+    public void updateUserList_addUserDisallowedByAdmin_shouldShowAddUserDisabled() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+        final RestrictedPreference addUser = mock(RestrictedPreference.class);
+
+        mUserCapabilities.mCanAddUser = false;
+        mUserCapabilities.mDisallowAddUser = true;
+        mUserCapabilities.mDisallowAddUserSetByAdmin = true;
+        mUserCapabilities.mUserSwitcherEnabled = true;
+
+        mFragment.mUserListCategory = mock(PreferenceCategory.class);
+        mFragment.mAddUser = addUser;
+
+        doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
+
+        mFragment.updateUserList();
+
+        verify(addUser).setVisible(true);
+        assertThat(addUser.isEnabled()).isFalse();
     }
 }

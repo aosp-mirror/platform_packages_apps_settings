@@ -118,6 +118,8 @@ public class UserCapabilities {
                 ", mDisallowAddUser=" + mDisallowAddUser +
                 ", mEnforcedAdmin=" + mEnforcedAdmin +
                 ", mDisallowSwitchUser=" + mDisallowSwitchUser +
+                ", mDisallowAddUserSetByAdmin=" + mDisallowAddUserSetByAdmin +
+                ", mUserSwitcherEnabled=" + mUserSwitcherEnabled +
                 '}';
     }
 }
