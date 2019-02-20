@@ -97,6 +97,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.account_sync_settings);
+        getPreferenceScreen().setOrderingAsAdded(false);
         setAccessibilityTitle();
     }
 
@@ -127,6 +128,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 .setLabel(mAccount.name)
                 .setSummary(getLabelForType(mAccount.type))
                 .done(activity, getPrefContext());
+        pref.setOrder(0);
         getPreferenceScreen().addPreference(pref);
     }
 
