@@ -17,15 +17,23 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
+import android.net.wifi.EasyConnectStatusCallback;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,13 +44,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProviders;
+
 import com.android.settings.R;
 import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
 
+import java.util.List;
+
 public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment implements
         SurfaceTextureListener,
-        QrCamera.ScannerCallback {
+        QrCamera.ScannerCallback,
+        WifiManager.ActionListener {
     private static final String TAG = "WifiDppQrCodeScannerFragment";
 
     /** Message sent to hide error message */
@@ -57,12 +70,12 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     /** Message sent to manipulate ZXing Wi-Fi QR code */
     private static final int MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS = 4;
 
-    private static final long SHOW_ERROR_MESSAGE_INTERVAL = 2000;
+    private static final long SHOW_ERROR_MESSAGE_INTERVAL = 10000;
     private static final long SHOW_SUCCESS_SQUARE_INTERVAL = 1000;
 
     // Key for Bundle usage
-    private static final String KEY_PUBLIC_URI = "key_public_uri";
     private static final String KEY_IS_CONFIGURATOR_MODE = "key_is_configurator_mode";
+    private static final String KEY_LATEST_ERROR_CODE = "key_latest_error_code";
 
     private QrCamera mCamera;
     private TextureView mTextureView;
@@ -78,13 +91,41 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     /** QR code data scanned by camera */
     private WifiQrCode mWifiQrCode;
 
+    private int mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
             mIsConfiguratorMode = savedInstanceState.getBoolean(KEY_IS_CONFIGURATOR_MODE);
+            mLatestStatusCode = savedInstanceState.getInt(KEY_LATEST_ERROR_CODE);
         }
+
+        final WifiDppInitiatorViewModel model =
+                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+
+        model.getEnrolleeSuccessNetworkId().observe(this, networkId -> {
+            // After configuration change, observe callback will be triggered,
+            // do nothing for this case if a handshake does not end
+            if (model.isGoingInitiator()) {
+                return;
+            }
+
+            new EasyConnectEnrolleeStatusCallback().onEnrolleeSuccess(networkId.intValue());
+        });
+
+        model.getStatusCode().observe(this, statusCode -> {
+            // After configuration change, observe callback will be triggered,
+            // do nothing for this case if a handshake does not end
+            if (model.isGoingInitiator()) {
+                return;
+            }
+
+            int code = statusCode.intValue();
+            Log.d(TAG, "Easy connect enrollee callback onFailure " + code);
+            new EasyConnectEnrolleeStatusCallback().onFailure(code);
+        });
     }
 
     @Override
@@ -101,12 +142,6 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         public void onScanWifiDppSuccess(WifiQrCode wifiQrCode);
     }
     OnScanWifiDppSuccessListener mScanWifiDppSuccessListener;
-
-    // Container Activity must implement this interface
-    public interface OnScanZxingWifiFormatSuccessListener {
-        public void onScanZxingWifiFormatSuccess(WifiNetworkConfig wifiNetworkConfig);
-    }
-    OnScanZxingWifiFormatSuccessListener mScanZxingWifiFormatSuccessListener;
 
     /**
      * Configurator container activity of the fragment should create instance with this constructor.
@@ -144,13 +179,11 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         super.onAttach(context);
 
         mScanWifiDppSuccessListener = (OnScanWifiDppSuccessListener) context;
-        mScanZxingWifiFormatSuccessListener = (OnScanZxingWifiFormatSuccessListener) context;
     }
 
     @Override
     public void onDetach() {
         mScanWifiDppSuccessListener = null;
-        mScanZxingWifiFormatSuccessListener = null;
 
         super.onDetach();
     }
@@ -289,7 +322,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     private void handleWifiDpp() {
-        destroyCamera();
+        if (mCamera != null) {
+            mCamera.stop();
+        }
         mDecorateView.setFocused(true);
 
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_WIFI_DPP_SUCCESS);
@@ -299,7 +334,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     private void handleZxingWifiFormat() {
-        destroyCamera();
+        if (mCamera != null) {
+            mCamera.stop();
+        }
         mDecorateView.setFocused(true);
 
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS);
@@ -317,7 +354,14 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         // Check if the camera has already created.
         if (mCamera == null) {
             mCamera = new QrCamera(getContext(), this);
-            mCamera.start(surface);
+
+            if (isGoingInitiator()) {
+                if (mDecorateView != null) {
+                    mDecorateView.setFocused(true);
+                }
+            } else {
+                mCamera.start(surface);
+            }
         }
     }
 
@@ -328,14 +372,13 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
     }
 
-    public void showErrorMessage(boolean show) {
-        mErrorMessage.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+    public void showErrorMessage(String message) {
+        mErrorMessage.setVisibility(View.VISIBLE);
+        mErrorMessage.setText(message);
 
-        if (show) {
-            mHandler.removeMessages(MESSAGE_HIDE_ERROR_MESSAGE);
-            mHandler.sendEmptyMessageDelayed(MESSAGE_HIDE_ERROR_MESSAGE,
-                    SHOW_ERROR_MESSAGE_INTERVAL);
-        }
+        mHandler.removeMessages(MESSAGE_HIDE_ERROR_MESSAGE);
+        mHandler.sendEmptyMessageDelayed(MESSAGE_HIDE_ERROR_MESSAGE,
+                SHOW_ERROR_MESSAGE_INTERVAL);
     }
 
     private final Handler mHandler = new Handler() {
@@ -343,26 +386,32 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MESSAGE_HIDE_ERROR_MESSAGE:
-                    showErrorMessage(false);
+                    mErrorMessage.setVisibility(View.INVISIBLE);
                     break;
 
                 case MESSAGE_SHOW_ERROR_MESSAGE:
-                    showErrorMessage(true);
+                    showErrorMessage(getString(R.string.wifi_dpp_could_not_detect_valid_qr_code));
                     break;
 
                 case MESSAGE_SCAN_WIFI_DPP_SUCCESS:
+                    mErrorMessage.setVisibility(View.INVISIBLE);
+
                     if (mScanWifiDppSuccessListener == null) {
                         return;
                     }
                     mScanWifiDppSuccessListener.onScanWifiDppSuccess((WifiQrCode)msg.obj);
+
+                    if (!mIsConfiguratorMode) {
+                        startWifiDppEnrolleeInitiator((WifiQrCode)msg.obj);
+                    }
                     break;
 
                 case MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS:
-                    if (mScanZxingWifiFormatSuccessListener == null) {
-                        return;
-                    }
-                    mScanZxingWifiFormatSuccessListener.onScanZxingWifiFormatSuccess(
-                            (WifiNetworkConfig)msg.obj);
+                    mErrorMessage.setVisibility(View.INVISIBLE);
+
+                    final WifiNetworkConfig wifiNetworkConfig = (WifiNetworkConfig)msg.obj;
+                    wifiNetworkConfig.connect(getContext(),
+                            /* listener */ WifiDppQrCodeScannerFragment.this);
                     break;
 
                 default:
@@ -374,7 +423,149 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(KEY_IS_CONFIGURATOR_MODE, mIsConfiguratorMode);
+        outState.putInt(KEY_LATEST_ERROR_CODE, mLatestStatusCode);
 
         super.onSaveInstanceState(outState);
+    }
+
+    private class EasyConnectEnrolleeStatusCallback extends EasyConnectStatusCallback {
+        @Override
+        public void onEnrolleeSuccess(int newNetworkId) {
+
+            // Connect to the new network.
+            final WifiManager wifiManager = getContext().getSystemService(WifiManager.class);
+            final List<WifiConfiguration> wifiConfigs =
+                    wifiManager.getPrivilegedConfiguredNetworks();
+            for (WifiConfiguration wifiConfig : wifiConfigs) {
+                if (wifiConfig.networkId == newNetworkId) {
+                    mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
+                    wifiManager.connect(wifiConfig, WifiDppQrCodeScannerFragment.this);
+                    return;
+                }
+            }
+
+            Log.e(TAG, "Invalid networkId " + newNetworkId);
+            mLatestStatusCode = EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_GENERIC;
+            showErrorMessage(getString(R.string.wifi_dpp_check_connection_try_again));
+            restartCamera();
+        }
+
+        @Override
+        public void onConfiguratorSuccess(int code) {
+            // Do nothing
+        }
+
+        @Override
+        public void onFailure(int code) {
+            Log.d(TAG, "EasyConnectEnrolleeStatusCallback.onFailure " + code);
+
+            switch (code) {
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_URI:
+                    showErrorMessage(getString(R.string.wifi_dpp_could_not_detect_valid_qr_code));
+                    break;
+
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_AUTHENTICATION:
+                    showErrorMessage(
+                            getString(R.string.wifi_dpp_failure_authentication_or_configuration));
+                    break;
+
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_NOT_COMPATIBLE:
+                    showErrorMessage(getString(R.string.wifi_dpp_failure_not_compatible));
+                    break;
+
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_CONFIGURATION:
+                    showErrorMessage(
+                            getString(R.string.wifi_dpp_failure_authentication_or_configuration));
+                    break;
+
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_BUSY:
+                    if (code == mLatestStatusCode) {
+                        throw(new IllegalStateException("stopEasyConnectSession and try again for"
+                                + "EASY_CONNECT_EVENT_FAILURE_BUSY but still failed"));
+                    }
+
+                    mLatestStatusCode = code;
+                    final WifiManager wifiManager =
+                        getContext().getSystemService(WifiManager.class);
+                    wifiManager.stopEasyConnectSession();
+                    startWifiDppEnrolleeInitiator(mWifiQrCode);
+                    return;
+
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_TIMEOUT:
+                    showErrorMessage(getString(R.string.wifi_dpp_failure_timeout));
+                    break;
+
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_GENERIC:
+                    showErrorMessage(getString(R.string.wifi_dpp_failure_generic));
+                    break;
+
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_NOT_SUPPORTED:
+                    throw(new IllegalStateException("EASY_CONNECT_EVENT_FAILURE_NOT_SUPPORTED" +
+                            " should be a configurator only error"));
+
+                case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_NETWORK:
+                    throw(new IllegalStateException("EASY_CONNECT_EVENT_FAILURE_INVALID_NETWORK" +
+                            " should be a configurator only error"));
+
+                default:
+                    throw(new IllegalStateException("Unexpected Wi-Fi DPP error"));
+            }
+
+            mLatestStatusCode = code;
+            restartCamera();
+        }
+
+        @Override
+        public void onProgress(int code) {
+            // Do nothing
+        }
+    }
+
+    private void startWifiDppEnrolleeInitiator(WifiQrCode wifiQrCode) {
+        final WifiDppInitiatorViewModel model =
+                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+
+        model.startEasyConnectAsEnrolleeInitiator(wifiQrCode.getQrCode());
+    }
+
+    @Override
+    public void onSuccess() {
+        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+        final Activity hostActivity = getActivity();
+        hostActivity.setResult(Activity.RESULT_OK);
+        hostActivity.finish();
+    }
+
+    @Override
+    public void onFailure(int reason) {
+        Log.d(TAG, "Wi-Fi connect onFailure reason - " + reason);
+
+        showErrorMessage(getString(R.string.wifi_dpp_check_connection_try_again));
+        restartCamera();
+    }
+
+    // Check is Easy Connect handshaking or not
+    private boolean isGoingInitiator() {
+        final WifiDppInitiatorViewModel model =
+                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+
+        return model.isGoingInitiator();
+    }
+
+    /**
+     * To resume camera decoding task after handshake fail or Wi-Fi connection fail.
+     */
+    private void restartCamera() {
+        if (mCamera == null) {
+            Log.d(TAG, "mCamera is not available for restarting camera");
+            return;
+        }
+
+        final SurfaceTexture surfaceTexture = mTextureView.getSurfaceTexture();
+        if (surfaceTexture == null) {
+            throw new IllegalStateException("SurfaceTexture is not ready for restarting camera");
+        }
+
+        mCamera.start(surfaceTexture);
     }
 }

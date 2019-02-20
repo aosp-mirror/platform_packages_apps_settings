@@ -20,6 +20,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.net.wifi.EasyConnectStatusCallback;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,6 +31,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
 
@@ -46,7 +50,12 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private Button mButtonLeft;
     private Button mButtonRight;
 
-    private class EasyConnectStatusCallback extends android.net.wifi.EasyConnectStatusCallback {
+    private int mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE;
+
+    // Key for Bundle usage
+    private static final String KEY_LATEST_ERROR_CODE = "key_latest_error_code";
+
+    private class EasyConnectConfiguratorStatusCallback extends EasyConnectStatusCallback {
         @Override
         public void onEnrolleeSuccess(int newNetworkId) {
             // Do nothing
@@ -54,32 +63,14 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         @Override
         public void onConfiguratorSuccess(int code) {
-            // Update success UI.
-            setHeaderIconImageResource(R.drawable.ic_devices_check_circle_green);
-            mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
-            mSummary.setVisibility(View.INVISIBLE);
-            mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_success);
-            mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
-            mButtonLeft.setText(R.string.wifi_dpp_add_another_device);
-            mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
-            mButtonRight.setText(R.string.done);
-            mButtonRight.setOnClickListener(v -> {
-                final Activity activity = getActivity();
-                activity.setResult(Activity.RESULT_OK);
-                activity.finish();
-            });
+            showSuccessUi(/* isConfigurationChange */ false);
         }
 
         @Override
         public void onFailure(int code) {
-            Log.d(TAG, "EasyConnectStatusCallback.onFailure " + code);
+            Log.d(TAG, "EasyConnectConfiguratorStatusCallback.onFailure " + code);
 
-            // Update fail UI.
-            mTitle.setText(R.string.wifi_dpp_could_not_add_device);
-            mSummary.setVisibility(View.INVISIBLE);
-            mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_error);
-            mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
-            mButtonRight.setText(R.string.retry);
+            showErrorUi(code, /* isConfigurationChange */ false);
         }
 
         @Override
@@ -88,9 +79,142 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         }
     }
 
+    private void showSuccessUi(boolean isConfigurationChange) {
+        setHeaderIconImageResource(R.drawable.ic_devices_check_circle_green);
+        mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
+        mSummary.setVisibility(View.INVISIBLE);
+        mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_success);
+        mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
+        mButtonLeft.setText(R.string.wifi_dpp_add_another_device);
+        mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
+        mButtonRight.setText(R.string.done);
+        mButtonRight.setOnClickListener(v -> {
+            final Activity activity = getActivity();
+            activity.setResult(Activity.RESULT_OK);
+            activity.finish();
+        });
+
+        if (!isConfigurationChange) {
+            mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
+        }
+    }
+
+    private void showErrorUi(int code, boolean isConfigurationChange) {
+        switch (code) {
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_URI:
+                mSummary.setText(R.string.wifi_dpp_could_not_detect_valid_qr_code);
+                break;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_AUTHENTICATION:
+                mSummary.setText(R.string.wifi_dpp_failure_authentication_or_configuration);
+                break;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_NOT_COMPATIBLE:
+                mSummary.setText(R.string.wifi_dpp_failure_not_compatible);
+                break;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_CONFIGURATION:
+                mSummary.setText(R.string.wifi_dpp_failure_authentication_or_configuration);
+                break;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_BUSY:
+                if (isConfigurationChange) {
+                    return;
+                }
+
+                if (code == mLatestStatusCode) {
+                    throw(new IllegalStateException("Tried restarting EasyConnectSession but still"
+                            + "receiving EASY_CONNECT_EVENT_FAILURE_BUSY"));
+                }
+
+                mLatestStatusCode = code;
+                final WifiManager wifiManager =
+                        getContext().getSystemService(WifiManager.class);
+                wifiManager.stopEasyConnectSession();
+                startWifiDppConfiguratorInitiator();
+                return;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_TIMEOUT:
+                mSummary.setText(R.string.wifi_dpp_failure_timeout);
+                break;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_GENERIC:
+                mSummary.setText(R.string.wifi_dpp_failure_generic);
+                break;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_NOT_SUPPORTED:
+                mSummary.setText(getString(R.string.wifi_dpp_failure_not_supported, getSsid()));
+                break;
+
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_NETWORK:
+                throw(new IllegalStateException("Wi-Fi DPP configurator used a non-PSK/non-SAE"
+                        + "network to handshake"));
+
+            default:
+                throw(new IllegalStateException("Unexpected Wi-Fi DPP error"));
+        }
+
+        mTitle.setText(R.string.wifi_dpp_could_not_add_device);
+        mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_error);
+        mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
+        if (hasRetryButton(code)) {
+            mButtonRight.setText(R.string.retry);
+        } else {
+            mButtonRight.setText(R.string.done);
+            mButtonRight.setOnClickListener(v -> getActivity().finish());
+            mButtonLeft.setVisibility(View.INVISIBLE);
+        }
+
+        if (!isConfigurationChange) {
+            mLatestStatusCode = code;
+        }
+
+        mButtonRight.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    private boolean hasRetryButton(int code) {
+        switch (code) {
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_URI:
+            case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_NOT_COMPATIBLE:
+                return false;
+
+            default:
+                break;
+        }
+
+        return true;
+    }
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            mLatestStatusCode = savedInstanceState.getInt(KEY_LATEST_ERROR_CODE);
+        }
+
+        final WifiDppInitiatorViewModel model =
+                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+
+        model.getStatusCode().observe(this, statusCode -> {
+            // After configuration change, observe callback will be triggered,
+            // do nothing for this case if a handshake does not end
+            if (model.isGoingInitiator()) {
+                return;
+            }
+
+            int code = statusCode.intValue();
+            if (code == WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS) {
+                new EasyConnectConfiguratorStatusCallback().onConfiguratorSuccess(code);
+            } else {
+                new EasyConnectConfiguratorStatusCallback().onFailure(code);
+            }
+        });
     }
 
     @Override
@@ -125,14 +249,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mTitle.setText(information);
         }
 
-        final WifiNetworkConfig wifiNetworkConfig = ((WifiDppConfiguratorActivity) getActivity())
-                .getWifiNetworkConfig();
-        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
-            throw new IllegalStateException("Invalid Wi-Fi network for configuring");
-        }
-        mSummary.setText(getString(R.string.wifi_dpp_add_device_to_wifi,
-                wifiNetworkConfig.getSsid()));
-
+        mSummary.setText(getString(R.string.wifi_dpp_add_device_to_wifi, getSsid()));
         mWifiApPictureView = view.findViewById(R.id.wifi_ap_picture_view);
 
         mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
@@ -146,19 +263,48 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         mButtonRight = view.findViewById(R.id.button_right);
         mButtonRight.setText(R.string.wifi_dpp_share_wifi);
-        mButtonRight.setOnClickListener(v -> startWifiDppInitiator());
+        mButtonRight.setOnClickListener(v -> {
+            mButtonRight.setVisibility(View.INVISIBLE);
+            startWifiDppConfiguratorInitiator();
+        });
+
+        if (savedInstanceState != null) {
+            if (mLatestStatusCode == WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS) {
+                showSuccessUi(/* isConfigurationChange */ true);
+            } else if (mLatestStatusCode == WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE) {
+                mButtonRight.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
+            } else {
+                showErrorUi(mLatestStatusCode, /* isConfigurationChange */ true);
+            }
+        }
     }
 
-    private void startWifiDppInitiator() {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(KEY_LATEST_ERROR_CODE, mLatestStatusCode);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    private String getSsid() {
+        final WifiNetworkConfig wifiNetworkConfig = ((WifiDppConfiguratorActivity) getActivity())
+                .getWifiNetworkConfig();
+        if (!WifiNetworkConfig.isValidConfig(wifiNetworkConfig)) {
+            throw new IllegalStateException("Invalid Wi-Fi network for configuring");
+        }
+        return wifiNetworkConfig.getSsid();
+    }
+
+    private void startWifiDppConfiguratorInitiator() {
         final WifiQrCode wifiQrCode = ((WifiDppConfiguratorActivity) getActivity())
                 .getWifiDppQrCode();
         final String qrCode = wifiQrCode.getQrCode();
         final int networkId =
                 ((WifiDppConfiguratorActivity) getActivity()).getWifiNetworkConfig().getNetworkId();
-        final WifiManager wifiManager = getContext().getSystemService(WifiManager.class);
-        wifiManager.startEasyConnectAsConfiguratorInitiator(qrCode, networkId,
-                WifiManager.EASY_CONNECT_NETWORK_ROLE_STA, getContext().getMainExecutor(),
-                new EasyConnectStatusCallback());
+        final WifiDppInitiatorViewModel model =
+                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+
+        model.startEasyConnectAsConfiguratorInitiator(qrCode, networkId);
     }
 
     // Container Activity must implement this interface
@@ -179,5 +325,13 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         mClickChooseDifferentNetworkListener = null;
 
         super.onDetach();
+    }
+
+    // Check is Easy Connect handshaking or not
+    private boolean isGoingInitiator() {
+        final WifiDppInitiatorViewModel model =
+                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+
+        return model.isGoingInitiator();
     }
 }

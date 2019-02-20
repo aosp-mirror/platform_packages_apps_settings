@@ -75,6 +75,16 @@ public class WifiDppUtils {
     public static final String EXTRA_TEST = "test";
 
     /**
+     * Default status code for Easy Connect
+     */
+    public static final int EASY_CONNECT_EVENT_FAILURE_NONE = 0;
+
+    /**
+     * Success status code for Easy Connect.
+     */
+    public static final int EASY_CONNECT_EVENT_SUCCESS = 1;
+
+    /**
      * Returns whether the device support WiFi DPP.
      */
     public static boolean isWifiDppEnabled(Context context) {

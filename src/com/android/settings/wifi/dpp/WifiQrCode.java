@@ -228,4 +228,19 @@ public class WifiQrCode {
 
         return new WifiNetworkConfig(mWifiNetworkConfig);
     }
+
+    public static WifiQrCode getValidWifiDppQrCodeOrNull(String qrCode) {
+        WifiQrCode wifiQrCode;
+        try {
+            wifiQrCode = new WifiQrCode(qrCode);
+        } catch(IllegalArgumentException e) {
+            return null;
+        }
+
+        if (SCHEME_DPP.equals(wifiQrCode.getScheme())) {
+            return wifiQrCode;
+        }
+
+        return null;
+    }
 }

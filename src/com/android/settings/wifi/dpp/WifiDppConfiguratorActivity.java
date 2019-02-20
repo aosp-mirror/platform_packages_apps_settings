@@ -57,7 +57,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiNetworkConfig.Retriever,
         WifiDppQrCodeGeneratorFragment.OnQrCodeGeneratorFragmentAddButtonClickedListener,
         WifiDppQrCodeScannerFragment.OnScanWifiDppSuccessListener,
-        WifiDppQrCodeScannerFragment.OnScanZxingWifiFormatSuccessListener,
         WifiDppAddDeviceFragment.OnClickChooseDifferentNetworkListener,
         WifiNetworkListFragment.OnChooseNetworkListener {
 
@@ -102,7 +101,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         if (savedInstanceState != null) {
             String qrCode = savedInstanceState.getString(KEY_QR_CODE);
 
-            mWifiDppQrCode = getValidWifiDppQrCodeOrNull(qrCode);
+            mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(qrCode);
 
             String security = savedInstanceState.getString(KEY_WIFI_SECURITY);
             String ssid = savedInstanceState.getString(KEY_WIFI_SSID);
@@ -148,7 +147,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
             case Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE:
                 String qrCode = intent.getStringExtra(Settings.EXTRA_QR_CODE);
                 mIsTest = intent.getBooleanExtra(WifiDppUtils.EXTRA_TEST, false);
-                mWifiDppQrCode = getValidWifiDppQrCodeOrNull(qrCode);
+                mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(qrCode);
                 final boolean isDppSupported = WifiDppUtils.isWifiDppEnabled(this);
                 if (!isDppSupported) {
                     Log.d(TAG, "Device doesn't support Wifi DPP");
@@ -285,21 +284,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         fragmentTransaction.commit();
     }
 
-    private WifiQrCode getValidWifiDppQrCodeOrNull(String qrCode) {
-        WifiQrCode wifiQrCode;
-        try {
-            wifiQrCode = new WifiQrCode(qrCode);
-        } catch(IllegalArgumentException e) {
-            return null;
-        }
-
-        if (WifiQrCode.SCHEME_DPP.equals(wifiQrCode.getScheme())) {
-            return wifiQrCode;
-        }
-
-        return null;
-    }
-
     @Override
     public WifiNetworkConfig getWifiNetworkConfig() {
         return mWifiNetworkConfig;
@@ -356,11 +340,6 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         mWifiDppQrCode = wifiQrCode;
 
         showAddDeviceFragment(/* addToBackStack */ true);
-    }
-
-    @Override
-    public void onScanZxingWifiFormatSuccess(WifiNetworkConfig wifiNetworkConfig) {
-        // Do nothing, it's impossible to be a configurator without a Wi-Fi DPP QR code
     }
 
     @Override
