@@ -108,7 +108,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
-        LoaderManager.getInstance(fragment).restartLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+        // Use the cached data when navigating back to the first page and upon screen rotation.
+        LoaderManager.getInstance(fragment).initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
                 cardContentLoaderCallbacks);
     }
 
@@ -192,7 +193,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         Log.d(TAG, "Total loading time = " + loadTime);
         final List<ContextualCard> cardsToKeep = getCardsToKeep(cards);
 
-        //navigate back to the homepage or after card dismissal
+        //navigate back to the homepage, screen rotate or after card dismissal
         if (!mIsFirstLaunch) {
             onContextualCardUpdated(cardsToKeep.stream()
                     .collect(groupingBy(ContextualCard::getCardType)));
