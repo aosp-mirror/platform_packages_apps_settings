@@ -7796,8 +7796,27 @@
         <item quantity="other">%d apps can read notifications</item>
     </plurals>
 
+    <!-- Title for Notification Assistant Picker screen [CHAR LIMIT=30]-->
+    <string name="notification_assistant_title">Notification Assistant</string>
+
+    <!-- Label for no NotificationAssistantService [CHAR_LIMIT=NONE] -->
+    <string name="no_notification_assistant">No assistant</string>
+
     <!-- String to show in the list of notification listeners, when none is installed -->
     <string name="no_notification_listeners">No installed apps have requested notification access.</string>
+
+    <!-- Title for a warning message about security implications of enabling a notification
+      assistant, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="notification_assistant_security_warning_title">Allow notification access for
+         <xliff:g id="service" example="NotificationAssistant">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling a notification
+          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="notification_assistant_security_warning_summary">
+        <xliff:g id="notification_assistant_name" example="Notification Assistant">%1$s</xliff:g> will be able to read all notifications,
+        including personal information such as contact names and the text of messages you receive.
+        It will also be able to modify or dismiss notifications or trigger action buttons they contain.
+        \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
+    </string>
 
     <!-- Title for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
