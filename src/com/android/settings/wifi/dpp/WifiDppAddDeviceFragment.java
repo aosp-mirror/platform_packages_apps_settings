@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -45,6 +46,7 @@ import java.util.concurrent.Executor;
 public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG = "WifiDppAddDeviceFragment";
 
+    private ProgressBar mProgressBar;
     private ImageView mWifiApPictureView;
     private Button mChooseDifferentNetwork;
     private Button mButtonLeft;
@@ -82,6 +84,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     private void showSuccessUi(boolean isConfigurationChange) {
         setHeaderIconImageResource(R.drawable.ic_devices_check_circle_green);
         mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
+        mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
         mSummary.setVisibility(View.INVISIBLE);
         mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_success);
         mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
@@ -169,6 +172,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mLatestStatusCode = code;
         }
 
+        mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
         mButtonRight.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
     }
 
@@ -240,6 +244,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         setHeaderIconImageResource(R.drawable.ic_devices_other_opaque_black);
 
+        mProgressBar = view.findViewById(R.id.indeterminate_bar);
+
         final WifiQrCode wifiQrCode = ((WifiDppConfiguratorActivity) getActivity())
                 .getWifiDppQrCode();
         final String information = wifiQrCode.getInformation();
@@ -264,6 +270,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         mButtonRight = view.findViewById(R.id.button_right);
         mButtonRight.setText(R.string.wifi_dpp_share_wifi);
         mButtonRight.setOnClickListener(v -> {
+            mProgressBar.setVisibility(View.VISIBLE);
             mButtonRight.setVisibility(View.INVISIBLE);
             startWifiDppConfiguratorInitiator();
         });
@@ -272,6 +279,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             if (mLatestStatusCode == WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS) {
                 showSuccessUi(/* isConfigurationChange */ true);
             } else if (mLatestStatusCode == WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE) {
+                mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
                 mButtonRight.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
             } else {
                 showErrorUi(mLatestStatusCode, /* isConfigurationChange */ true);
