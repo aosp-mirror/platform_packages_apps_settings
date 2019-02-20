@@ -21,6 +21,7 @@ import android.util.Log;
 
 import androidx.preference.SwitchPreference;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 public class FeatureFlagPreference extends SwitchPreference {
 
