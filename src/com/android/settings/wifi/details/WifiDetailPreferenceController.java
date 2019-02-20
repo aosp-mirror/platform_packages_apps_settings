@@ -173,7 +173,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                     // fall through
                 case WifiManager.NETWORK_STATE_CHANGED_ACTION:
                 case WifiManager.RSSI_CHANGED_ACTION:
-                    updateInfo();
+                    updateLiveNetworkInfo();
                     break;
             }
         }
@@ -336,7 +336,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mNetwork = mWifiManager.getCurrentNetwork();
         mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
         mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
-        updateInfo();
+        updateLiveNetworkInfo();
         mContext.registerReceiver(mReceiver, mFilter);
         mConnectivityManager.registerNetworkCallback(mNetworkRequest, mNetworkCallback,
                 mHandler);
@@ -353,7 +353,30 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
     }
 
-    private void updateInfo() {
+    // TODO(b/124707751): Refactoring the code later, keeping it currently for stability.
+    protected void updateSavedNetworkInfo() {
+        mSignalStrengthPref.setVisible(false);
+        mFrequencyPref.setVisible(false);
+        mTxLinkSpeedPref.setVisible(false);
+        mRxLinkSpeedPref.setVisible(false);
+
+        // MAC Address Pref
+        mMacAddressPref.setSummary(mWifiConfig.getRandomizedMacAddress().toString());
+
+        // TODO(b/124700353): Change header to data usage chart
+        mEntityHeaderController.setSummary(mAccessPoint.getSettingsSummary())
+                .done(mFragment.getActivity(), true /* rebind */);
+
+        updateIpLayerInfo();
+
+        // Update whether the forget button should be displayed.
+        mButtonsPref.setButton1Visible(canForgetNetwork());
+
+        // TODO(b/124700405): Check if showing share button is fine to added for saved network
+        mButtonsPref.setButton3Visible(false);
+    }
+
+    private void updateLiveNetworkInfo() {
         // No need to fetch LinkProperties and NetworkCapabilities, they are updated by the
         // callbacks. mNetwork doesn't change except in onResume.
         mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
