@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.util.FeatureFlagUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -64,5 +65,14 @@ public class SettingsHomepageActivityTest {
         final int actualPaddingTop = view.getPaddingTop();
         assertThat(actualPaddingTop).isEqualTo(
                 statusBarHeight + searchBarHeight + searchBarMargin * 2);
+    }
+
+    @Test
+    public void launch_shouldHaveAnimationForIaFragment() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final FrameLayout frameLayout = activity.findViewById(R.id.main_content);
+
+        assertThat(frameLayout.getLayoutTransition()).isNotNull();
     }
 }
