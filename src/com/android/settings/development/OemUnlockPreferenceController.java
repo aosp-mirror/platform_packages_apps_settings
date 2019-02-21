@@ -21,11 +21,13 @@ import static com.android.settings.development.DevelopmentOptionsActivityRequest
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -41,6 +43,7 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
         Preference.OnPreferenceChangeListener, PreferenceControllerMixin, OnActivityResultListener {
 
     private static final String PREFERENCE_KEY = "oem_unlock_enable";
+    private static final String TAG = "OemUnlockPreferenceController";
 
     private final OemLockManager mOemLockManager;
     private final UserManager mUserManager;
@@ -52,7 +55,16 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     public OemUnlockPreferenceController(Context context, Activity activity,
             DevelopmentSettingsDashboardFragment fragment) {
         super(context);
-        mOemLockManager = (OemLockManager) context.getSystemService(Context.OEM_LOCK_SERVICE);
+
+        if (context.getPackageManager().hasSystemFeature(PackageManager
+                    .FEATURE_TELEPHONY_CARRIERLOCK)) {
+            mOemLockManager = (OemLockManager) context.getSystemService(Context.OEM_LOCK_SERVICE);
+        } else {
+            mOemLockManager = null;
+            Log.i(TAG, "Missing FEATURE_TELEPHONY_CARRIERLOCK, OemUnlock Preference" +
+                    " Controller disabled.");
+        }
+
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mFragment = fragment;
