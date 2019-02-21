@@ -27,11 +27,14 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Implements(value = WifiManager.class)
 public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager {
+
+    private List<PasspointConfiguration> mPasspointConfiguration;
 
     public WifiConfiguration savedWifiConfig;
 
@@ -49,7 +52,15 @@ public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager
 
     @Implementation
     protected List<PasspointConfiguration> getPasspointConfigurations() {
-        return Collections.emptyList();
+        return mPasspointConfiguration == null ? Collections.emptyList() : mPasspointConfiguration;
+    }
+
+    @Implementation
+    protected void addOrUpdatePasspointConfiguration(PasspointConfiguration config) {
+        if (mPasspointConfiguration == null) {
+            mPasspointConfiguration = new ArrayList<>();
+        }
+        mPasspointConfiguration.add(config);
     }
 
     @Implementation

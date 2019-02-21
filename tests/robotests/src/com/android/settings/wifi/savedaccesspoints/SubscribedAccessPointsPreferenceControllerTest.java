@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +26,16 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
+import android.content.pm.FeatureInfo;
+import android.content.pm.PackageManager;
 import android.net.wifi.WifiConfiguration;
 
+import android.net.wifi.hotspot2.PasspointConfiguration;
+import android.net.wifi.hotspot2.pps.HomeSp;
+import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiManager;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -53,7 +59,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowThreadUtils.class, ShadowWifiManager.class})
-public class SavedAccessPointsPreferenceControllerTest {
+public class SubscribedAccessPointsPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -63,7 +69,7 @@ public class SavedAccessPointsPreferenceControllerTest {
     private Context mContext;
     private WifiManager mWifiManager;
     private SavedAccessPointsWifiSettings mSettings;
-    private SavedAccessPointsPreferenceController mController;
+    private SubscribedAccessPointsPreferenceController mController;
 
     @Before
     public void setUp() {
@@ -71,12 +77,14 @@ public class SavedAccessPointsPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mWifiManager = mContext.getSystemService(WifiManager.class);
         mSettings = spy(new SavedAccessPointsWifiSettings());
-        mController = spy(new SavedAccessPointsPreferenceController(mContext, "test_key"));
+        mController = spy(new SubscribedAccessPointsPreferenceController(mContext, "test_key"));
         mController.setHost(mSettings);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
                 .thenReturn(mPreferenceCategory);
         when(mPreferenceCategory.getContext()).thenReturn(mContext);
+
+        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
     }
 
     @Test
@@ -86,71 +94,77 @@ public class SavedAccessPointsPreferenceControllerTest {
 
     @Test
     public void onStart_shouldRefreshApList() {
-        doNothing().when(mController).refreshSavedAccessPoints();
+        doNothing().when(mController).refreshSubscribedAccessPoints();
 
         mController.onStart();
 
-        verify(mController).refreshSavedAccessPoints();
+        verify(mController).refreshSubscribedAccessPoints();
     }
 
     @Test
     public void postRefresh_shouldRefreshApList() {
-        doNothing().when(mController).refreshSavedAccessPoints();
+        doNothing().when(mController).refreshSubscribedAccessPoints();
 
-        mController.postRefreshSavedAccessPoints();
+        mController.postRefreshSubscribedAccessPoints();
 
-        verify(mController).refreshSavedAccessPoints();
+        verify(mController).refreshSubscribedAccessPoints();
     }
 
     @Test
     public void forget_onSuccess_shouldRefreshApList() {
-        doNothing().when(mController).refreshSavedAccessPoints();
+        doNothing().when(mController).refreshSubscribedAccessPoints();
 
         mController.onSuccess();
 
-        verify(mController).refreshSavedAccessPoints();
+        verify(mController).refreshSubscribedAccessPoints();
     }
 
     @Test
     public void forget_onFailure_shouldRefreshApList() {
-        doNothing().when(mController).refreshSavedAccessPoints();
+        doNothing().when(mController).refreshSubscribedAccessPoints();
 
         mController.onFailure(0 /* reason */);
 
-        verify(mController).refreshSavedAccessPoints();
+        verify(mController).refreshSubscribedAccessPoints();
     }
 
     @Test
     @Config(shadows = ShadowAccessPoint.class)
-    public void refreshSavedAccessPoints_shouldListNonSubscribedAPs() {
+    public void refreshSubscribedAccessPoints_shouldNotListNonSubscribedAPs() {
         final WifiConfiguration config = new WifiConfiguration();
         config.SSID = "SSID";
         config.BSSID = "BSSID";
         config.networkId = 2;
         mWifiManager.addNetwork(config);
 
-        final ArgumentCaptor<AccessPointPreference> captor =
-                ArgumentCaptor.forClass(AccessPointPreference.class);
         mController.displayPreference(mPreferenceScreen);
-        mController.refreshSavedAccessPoints();
+        mController.refreshSubscribedAccessPoints();
 
-        verify(mPreferenceCategory).addPreference(captor.capture());
-
-        final AccessPointPreference pref = captor.getValue();
-        assertThat(pref.getTitle()).isEqualTo(config.SSID);
+        verify(mPreferenceCategory, never()).addPreference(any(AccessPointPreference.class));
     }
 
     @Test
     @Config(shadows = ShadowAccessPoint.class)
-    public void refreshSavedAccessPoints_shouldNotListSubscribedAPs() {
-        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
-
-        mWifiManager.addOrUpdatePasspointConfiguration(
-                SubscribedAccessPointsPreferenceControllerTest.createMockPasspointConfiguration());
+    public void refreshSubscribedAccessPoints_shouldListSubscribedAPs() {
+        mWifiManager.addOrUpdatePasspointConfiguration(createMockPasspointConfiguration());
 
         mController.displayPreference(mPreferenceScreen);
-        mController.refreshSavedAccessPoints();
+        mController.refreshSubscribedAccessPoints();
 
-        verify(mPreferenceCategory, never()).addPreference(any(AccessPointPreference.class));
+        final ArgumentCaptor<AccessPointPreference> captor =
+                ArgumentCaptor.forClass(AccessPointPreference.class);
+        verify(mPreferenceCategory).addPreference(captor.capture());
+
+        final AccessPointPreference pref = captor.getValue();
+        assertThat(pref.getTitle()).isEqualTo("TESTPASSPOINT");
+    }
+
+    public static PasspointConfiguration createMockPasspointConfiguration() {
+        final PasspointConfiguration config = new PasspointConfiguration();
+        final HomeSp homeSp = new HomeSp();
+        homeSp.setFqdn("FQDN");
+        homeSp.setFriendlyName("TESTPASSPOINT");
+        config.setHomeSp(homeSp);
+        return config;
     }
 }
