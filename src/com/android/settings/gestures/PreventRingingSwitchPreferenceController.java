@@ -61,6 +61,17 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
             LayoutPreference pref = screen.findPreference(getPreferenceKey());
             if (pref != null) {
                 mSettingObserver = new SettingObserver(pref);
+                pref.setOnPreferenceClickListener(preference -> {
+                    int preventRinging = Settings.Secure.getInt(mContext.getContentResolver(),
+                            Settings.Secure.VOLUME_HUSH_GESTURE,
+                            Settings.Secure.VOLUME_HUSH_VIBRATE);
+                    boolean isChecked = preventRinging != Settings.Secure.VOLUME_HUSH_OFF;
+                    Settings.Secure.putInt(mContext.getContentResolver(),
+                            Settings.Secure.VOLUME_HUSH_GESTURE, isChecked
+                                    ? Settings.Secure.VOLUME_HUSH_OFF
+                                    : Settings.Secure.VOLUME_HUSH_VIBRATE);
+                    return true;
+                });
                 mSwitch = pref.findViewById(R.id.switch_bar);
                 if (mSwitch != null) {
                     mSwitch.addOnSwitchChangeListener(this);

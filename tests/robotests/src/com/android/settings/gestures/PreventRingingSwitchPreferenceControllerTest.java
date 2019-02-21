@@ -18,6 +18,7 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -29,8 +30,10 @@ import android.content.res.Resources;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -94,5 +97,17 @@ public class PreventRingingSwitchPreferenceControllerTest {
                 Settings.Secure.VOLUME_HUSH_MUTE);
         mController.updateState(mPreference);
         verify(mController.mSwitch, times(1)).setChecked(true);
+    }
+
+    @Test
+    public void testPreferenceClickListenerAttached() {
+        PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
+        LayoutPreference mLayoutPreference = mock(LayoutPreference.class);
+        when(preferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
+                mLayoutPreference);
+        mController.displayPreference(preferenceScreen);
+
+        verify(mLayoutPreference, times(1))
+                .setOnPreferenceClickListener(any());
     }
 }
