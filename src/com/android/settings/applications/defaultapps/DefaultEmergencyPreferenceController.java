@@ -16,12 +16,14 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
+import com.android.internal.util.CollectionUtils;
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.List;
@@ -69,8 +71,9 @@ public class DefaultEmergencyPreferenceController extends DefaultAppPreferenceCo
     }
 
     public static boolean isEmergencyDefault(String pkg, Context context) {
-        String defaultPackage = Settings.Secure.getString(context.getContentResolver(),
-                Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION);
+      String defaultPackage = CollectionUtils.firstOrNull(
+              context.getSystemService(RoleManager.class)
+                        .getRoleHolders(RoleManager.ROLE_EMERGENCY));
         return defaultPackage != null && defaultPackage.equals(pkg);
     }
 }

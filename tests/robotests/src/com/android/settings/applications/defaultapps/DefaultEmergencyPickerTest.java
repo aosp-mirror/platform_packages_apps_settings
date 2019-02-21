@@ -18,15 +18,24 @@ package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.app.role.RoleManager;
+import android.app.role.RoleManagerCallback;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
+import android.os.Process;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.Log;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,11 +45,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.Arrays;
+import java.util.concurrent.Executor;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultEmergencyPickerTest {
-
+    private static final String TAG = DefaultEmergencyPickerTest.class.getSimpleName();
     private static final String TEST_APP_KEY = "test_app";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -49,34 +62,41 @@ public class DefaultEmergencyPickerTest {
     private UserManager mUserManager;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private RoleManager mRoleManager;
 
     private DefaultEmergencyPicker mPicker;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.setSystemService(Context.ROLE_SERVICE, mRoleManager);
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         mPicker = spy(new DefaultEmergencyPicker());
         mPicker.onAttach(mActivity);
 
         ReflectionHelpers.setField(mPicker, "mPm", mPackageManager);
-
-        doReturn(RuntimeEnvironment.application).when(mPicker).getContext();
+        when(mPicker.getContext()).thenReturn(RuntimeEnvironment.application);
     }
 
     @Test
     public void setDefaultAppKey_shouldUpdateDefault() {
-        assertThat(mPicker.setDefaultKey(TEST_APP_KEY)).isTrue();
-        assertThat(mPicker.getDefaultKey()).isEqualTo(TEST_APP_KEY);
+        mPicker.setDefaultKey(TEST_APP_KEY);
+        verify(mRoleManager).addRoleHolderAsUser(
+            eq(RoleManager.ROLE_EMERGENCY),
+            eq(TEST_APP_KEY),
+            eq(0),
+            any(UserHandle.class),
+            any(Executor.class),
+            any(RoleManagerCallback.class));
     }
 
     @Test
     public void getDefaultAppKey_shouldReturnDefault() {
-        Settings.Secure.putString(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION,
-                TEST_APP_KEY);
-
-        assertThat(mPicker.getDefaultKey()).isEqualTo(TEST_APP_KEY);
+      when(mRoleManager.getRoleHolders(RoleManager.ROLE_EMERGENCY))
+              .thenReturn(Arrays.asList(TEST_APP_KEY));
+      assertThat(mPicker.getDefaultKey()).isEqualTo(TEST_APP_KEY);
     }
 }
