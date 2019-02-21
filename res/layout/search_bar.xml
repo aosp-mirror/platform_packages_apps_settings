@@ -39,10 +39,11 @@
     </Toolbar>
     <ImageView
         android:id="@+id/account_avatar"
-        android:layout_marginStart="@dimen/search_bar_avatar_start_margin"
-        android:layout_marginEnd="@dimen/search_bar_avatar_end_margin"
-        android:layout_width="@dimen/search_bar_avatar_size"
-        android:layout_height="@dimen/search_bar_avatar_size"
-        android:layout_gravity="end|center_vertical"
+        android:paddingEnd="@dimen/search_bar_avatar_end_padding"
+        android:paddingTop="@dimen/search_bar_avatar_top_bottom_padding"
+        android:paddingBottom="@dimen/search_bar_avatar_top_bottom_padding"
+        android:layout_width="@dimen/search_bar_avatar_width"
+        android:layout_height="@dimen/search_bar_height"
+        android:layout_gravity="end"
         android:contentDescription="@string/search_bar_account_avatar_content_description"/>
 </com.google.android.material.card.MaterialCardView>
