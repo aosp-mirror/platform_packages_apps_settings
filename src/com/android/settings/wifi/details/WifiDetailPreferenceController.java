@@ -27,6 +27,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
+import android.hardware.biometrics.BiometricPrompt;
+import android.os.CancellationSignal;
+import android.os.Looper;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.LinkAddress;
@@ -578,20 +581,42 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         if (keyguardManager.isKeyguardSecure()) {
             // Show authentication screen to confirm credentials (pin, pattern or password) for
             // the current user of the device.
+            final String title = mContext.getString(
+                    R.string.lockpassword_confirm_your_pattern_header);
             final String description = String.format(
                     mContext.getString(R.string.wifi_sharing_message),
                     mAccessPoint.getSsidStr());
-            final Intent intent = keyguardManager.createConfirmDeviceCredentialIntent(
-                    mContext.getString(R.string.lockpassword_confirm_your_pattern_header),
-                    description);
-            if (intent != null) {
-                mFragment.startActivityForResult(intent,
-                        WifiNetworkDetailsFragment.REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS);
+
+            final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(mContext)
+                    .setTitle(title)
+                    .setDescription(description);
+
+            if (keyguardManager.isDeviceSecure()) {
+                builder.setAllowDeviceCredential(true);
             }
+
+            final BiometricPrompt bp = builder.build();
+            final Handler handler = new Handler(Looper.getMainLooper());
+            bp.authenticate(new CancellationSignal(),
+                    runnable -> handler.post(runnable),
+                    mAuthenticationCallback);
         } else {
             launchWifiDppConfiguratorActivity();
         }
     }
+
+    private BiometricPrompt.AuthenticationCallback mAuthenticationCallback =
+            new BiometricPrompt.AuthenticationCallback() {
+        @Override
+        public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+            launchWifiDppConfiguratorActivity();
+        }
+
+        @Override
+        public void onAuthenticationError(int errorCode, CharSequence errString) {
+            //Do nothing
+        }
+    };
 
     /**
      * Sign in to the captive portal found on this wifi network associated with this preference.
