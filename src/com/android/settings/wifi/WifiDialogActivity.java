@@ -29,6 +29,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -49,9 +50,12 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
     @VisibleForTesting
     static final String KEY_CONNECT_FOR_CALLER = "connect_for_caller";
 
-    private static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
+    public static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
+
     private static final int RESULT_CONNECTED = RESULT_FIRST_USER;
     private static final int RESULT_FORGET = RESULT_FIRST_USER + 1;
+
+    private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
     private WifiDialog mDialog;
 
@@ -161,5 +165,26 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
     public void onDismiss(DialogInterface dialogInterface) {
         mDialog = null;
         finish();
+    }
+
+    @Override
+    public void onScan(WifiDialog dialog, String ssid) {
+        // Launch QR code scanner to join a network.
+        startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
+                REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER) {
+            if (resultCode != RESULT_OK) {
+                return;
+            }
+
+            setResult(RESULT_CONNECTED, data);
+            finish();
+        }
     }
 }

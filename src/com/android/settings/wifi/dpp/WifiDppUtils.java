@@ -95,6 +95,11 @@ public class WifiDppUtils {
     /**
      * Returns an intent to launch QR code scanner for Wi-Fi DPP enrollee.
      *
+     * After enrollee success, the callee activity will return connecting WifiConfiguration by
+     * putExtra {@code WifiDialogActivity.KEY_WIFI_CONFIGURATION} for
+     * {@code Activity#setResult(int resultCode, Intent data)}. The calling object should check
+     * if it's available before using it.
+     *
      * @param ssid The data corresponding to {@code WifiConfiguration} SSID
      * @return Intent for launching QR code scanner
      */

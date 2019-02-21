@@ -31,7 +31,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Size;
@@ -47,6 +46,7 @@ import android.widget.TextView;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
+import com.android.settings.wifi.WifiDialogActivity;
 import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
 
@@ -76,6 +76,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     // Key for Bundle usage
     private static final String KEY_IS_CONFIGURATOR_MODE = "key_is_configurator_mode";
     private static final String KEY_LATEST_ERROR_CODE = "key_latest_error_code";
+    private static final String KEY_WIFI_CONFIGURATION = "key_wifi_configuration";
 
     private QrCamera mCamera;
     private TextureView mTextureView;
@@ -91,6 +92,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     /** QR code data scanned by camera */
     private WifiQrCode mWifiQrCode;
 
+    /** The WifiConfiguration connecting for enrollee usage */
+    private WifiConfiguration mWifiConfiguration;
+
     private int mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE;
 
     @Override
@@ -100,6 +104,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         if (savedInstanceState != null) {
             mIsConfiguratorMode = savedInstanceState.getBoolean(KEY_IS_CONFIGURATOR_MODE);
             mLatestStatusCode = savedInstanceState.getInt(KEY_LATEST_ERROR_CODE);
+            mWifiConfiguration = savedInstanceState.getParcelable(KEY_WIFI_CONFIGURATION);
         }
 
         final WifiDppInitiatorViewModel model =
@@ -410,6 +415,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     mErrorMessage.setVisibility(View.INVISIBLE);
 
                     final WifiNetworkConfig wifiNetworkConfig = (WifiNetworkConfig)msg.obj;
+                    mWifiConfiguration = wifiNetworkConfig.getWifiConfigurationOrNull();
                     wifiNetworkConfig.connect(getContext(),
                             /* listener */ WifiDppQrCodeScannerFragment.this);
                     break;
@@ -424,6 +430,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(KEY_IS_CONFIGURATOR_MODE, mIsConfiguratorMode);
         outState.putInt(KEY_LATEST_ERROR_CODE, mLatestStatusCode);
+        outState.putParcelable(KEY_WIFI_CONFIGURATION, mWifiConfiguration);
 
         super.onSaveInstanceState(outState);
     }
@@ -439,6 +446,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             for (WifiConfiguration wifiConfig : wifiConfigs) {
                 if (wifiConfig.networkId == newNetworkId) {
                     mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
+                    mWifiConfiguration = wifiConfig;
                     wifiManager.connect(wifiConfig, WifiDppQrCodeScannerFragment.this);
                     return;
                 }
@@ -530,9 +538,11 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     @Override
     public void onSuccess() {
-        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+        final Intent resultIntent = new Intent();
+        resultIntent.putExtra(WifiDialogActivity.KEY_WIFI_CONFIGURATION, mWifiConfiguration);
+
         final Activity hostActivity = getActivity();
-        hostActivity.setResult(Activity.RESULT_OK);
+        hostActivity.setResult(Activity.RESULT_OK, resultIntent);
         hostActivity.finish();
     }
 

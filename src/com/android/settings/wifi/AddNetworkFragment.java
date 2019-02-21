@@ -19,12 +19,14 @@ package com.android.settings.wifi;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -40,7 +42,10 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
     final static int SUBMIT_BUTTON_ID = android.R.id.button1;
     @VisibleForTesting
     final static int CANCEL_BUTTON_ID = android.R.id.button2;
-    final static int SCANNER_BUTTON_ID = R.id.ssid_scanner_button;
+    final static int SSID_SCANNER_BUTTON_ID = R.id.ssid_scanner_button;
+    final static int PASSWORD_SCANNER_BUTTON_ID = R.id.password_scanner_button;
+
+    private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
     private WifiConfigController mUIController;
     private Button mSubmitBtn;
@@ -63,10 +68,12 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
         mSubmitBtn = rootView.findViewById(SUBMIT_BUTTON_ID);
         mCancelBtn = rootView.findViewById(CANCEL_BUTTON_ID);
-        final ImageButton scannerButton = rootView.findViewById(SCANNER_BUTTON_ID);
+        final ImageButton ssidScannerButton = rootView.findViewById(SSID_SCANNER_BUTTON_ID);
+        final ImageButton passwordScannerButton = rootView.findViewById(PASSWORD_SCANNER_BUTTON_ID);
         mSubmitBtn.setOnClickListener(this);
         mCancelBtn.setOnClickListener(this);
-        scannerButton.setOnClickListener(this);
+        ssidScannerButton.setOnClickListener(this);
+        passwordScannerButton.setOnClickListener(this);
         mUIController = new WifiConfigController(this, rootView, null, getMode());
 
         return rootView;
@@ -80,6 +87,8 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
     @Override
     public void onClick(View view) {
+        String ssid = null;
+
         switch (view.getId()) {
             case SUBMIT_BUTTON_ID:
                 handleSubmitAction();
@@ -87,11 +96,30 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
             case CANCEL_BUTTON_ID:
                 handleCancelAction();
                 break;
-            case SCANNER_BUTTON_ID:
+            case SSID_SCANNER_BUTTON_ID:
+                final TextView ssidEditText = getView().findViewById(R.id.ssid);
+                ssid = ssidEditText.getText().toString();
+                // No break and flows to case PASSWORD_SCANNER_BUTTON_ID
+            case PASSWORD_SCANNER_BUTTON_ID:
                 // Launch QR code scanner to join a network.
-                getContext().startActivity(
-                        WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
+                startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
+                        REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER) {
+            if (resultCode != Activity.RESULT_OK) {
+                return;
+            }
+
+            final WifiConfiguration config = data.getParcelableExtra(
+                    WifiDialogActivity.KEY_WIFI_CONFIGURATION);
+            successfullyFinish(config);
         }
     }
 
@@ -153,9 +181,13 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
     @VisibleForTesting
     void handleSubmitAction() {
+        successfullyFinish(mUIController.getConfig());
+    }
+
+    private void successfullyFinish(WifiConfiguration config) {
         final Intent intent = new Intent();
         final Activity activity = getActivity();
-        intent.putExtra(WIFI_CONFIG_KEY, mUIController.getConfig());
+        intent.putExtra(WIFI_CONFIG_KEY, config);
         activity.setResult(Activity.RESULT_OK, intent);
         activity.finish();
     }
