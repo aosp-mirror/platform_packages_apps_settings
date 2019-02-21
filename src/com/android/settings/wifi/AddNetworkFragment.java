@@ -61,6 +61,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
             Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.wifi_add_network_view, container, false);
 
+        rootView.findViewById(android.R.id.button3).setVisibility(View.GONE);
         mSubmitBtn = rootView.findViewById(SUBMIT_BUTTON_ID);
         mCancelBtn = rootView.findViewById(CANCEL_BUTTON_ID);
         final ImageButton scannerButton = rootView.findViewById(SCANNER_BUTTON_ID);
