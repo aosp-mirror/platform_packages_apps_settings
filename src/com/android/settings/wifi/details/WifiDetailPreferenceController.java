@@ -20,6 +20,7 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -42,7 +43,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -58,6 +58,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
@@ -545,6 +546,12 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             mWifiManager.disableEphemeralNetwork(mWifiInfo.getSSID());
         } else if (mWifiConfig != null) {
             if (mWifiConfig.isPasspoint()) {
+                // Post a dialog to confirm if user really want to forget the passpoint network.
+                if (FeatureFlagPersistent.isEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2)) {
+                    showConfirmForgetDialog();
+                    return;
+                }
+
                 mWifiManager.removePasspointConfiguration(mWifiConfig.FQDN);
             } else {
                 mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
@@ -553,6 +560,22 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mMetricsFeatureProvider.action(
                 mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
         mFragment.getActivity().finish();
+    }
+
+    @VisibleForTesting
+    protected void showConfirmForgetDialog() {
+        final AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setPositiveButton(R.string.forget, ((dialog1, which) -> {
+                    mWifiManager.removePasspointConfiguration(mWifiConfig.FQDN);
+                    mMetricsFeatureProvider.action(
+                            mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
+                    mFragment.getActivity().finish();
+                }))
+                .setNegativeButton(R.string.cancel, null /* listener */)
+                .setTitle(R.string.wifi_forget_dialog_title)
+                .setMessage(R.string.forget_passpoint_dialog_message)
+                .create();
+        dialog.show();
     }
 
     /**

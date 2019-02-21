@@ -65,6 +65,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -753,6 +755,36 @@ public class WifiDetailPreferenceControllerTest {
         verify(mockWifiManager).forget(mockWifiConfig.networkId, null);
         verify(mockMetricsFeatureProvider)
                 .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
+    }
+
+    @Test
+    public void forgetNetwork_Passpoint() {
+        mockWifiConfig.networkId = 5;
+        when(mockWifiConfig.isPasspoint()).thenReturn(true);
+
+        mController.displayPreference(mockScreen);
+        mForgetClickListener.getValue().onClick(null);
+
+        verify(mockWifiManager).removePasspointConfiguration(mockWifiConfig.FQDN);
+        verify(mockMetricsFeatureProvider)
+                .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
+    }
+
+    @Test
+    public void forgetNetwork_PasspointV2_shouldShowDialog() {
+        final WifiDetailPreferenceController spyController = spy(mController);
+
+        mockWifiConfig.networkId = 5;
+        when(mockWifiConfig.isPasspoint()).thenReturn(true);
+        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
+
+        spyController.displayPreference(mockScreen);
+        mForgetClickListener.getValue().onClick(null);
+
+        verify(mockWifiManager, times(0)).removePasspointConfiguration(mockWifiConfig.FQDN);
+        verify(mockMetricsFeatureProvider, times(0))
+                .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
+        verify(spyController).showConfirmForgetDialog();
     }
 
     @Test
