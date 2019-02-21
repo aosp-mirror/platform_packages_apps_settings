@@ -38,12 +38,4 @@ public class WifiDppEnrolleeActivityTest {
         assertThat(activity instanceof WifiDppQrCodeScannerFragment
                 .OnScanWifiDppSuccessListener).isEqualTo(true);
     }
-
-    @Test
-    public void testActivity_shouldImplementsOnScanZxingWifiFormatSuccessCallback() {
-        WifiDppEnrolleeActivity activity = mActivityRule.getActivity();
-
-        assertThat(activity instanceof WifiDppQrCodeScannerFragment
-                .OnScanZxingWifiFormatSuccessListener).isEqualTo(true);
-    }
 }

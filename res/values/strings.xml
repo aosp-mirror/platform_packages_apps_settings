@@ -728,7 +728,7 @@
     <string name="date_and_time_settings_title_setup_wizard">Set date and time</string>
     <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
     <string name="date_and_time_settings_summary">Set date, time, time zone, &amp; formats</string>
-    <!-- Date & time setting screen setting check box title if the date and time should be determined automatically [CHAR LIMIT=30] -->
+    <!-- Date & time setting screen setting check box title if the date and time should be determined automatically [CHAR LIMIT=100] -->
     <string name="date_time_auto">Use network-provided time</string>
     <!-- Date & time setting screen setting option text when Automatic time zone check box is selected (that is, when date and time should be determined automatically)
         [CHAR LIMIT=100]  -->
@@ -1859,6 +1859,11 @@
     <!-- This string asks the user whether or not to allow an app to disable WiFi. [CHAR LIMIT=NONE] -->
     <string name="wifi_ask_disable"><xliff:g id="requester" example="FancyApp">%s</xliff:g> wants to turn off Wi-Fi</string>
 
+    <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=40] -->
+    <string name="art_verifier_for_debuggable_title">Verify bytecode of debuggable apps</string>
+    <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=NONE] -->
+    <string name="art_verifier_for_debuggable_summary">Allow ART to verify bytecode for debuggable apps</string>
+
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
     <string name="nfc_quick_toggle_title">NFC</string>
@@ -2119,7 +2124,19 @@
     <!-- Hint for the user to use another device to scan QR code on screen to join Wi-Fi [CHAR LIMIT=NONE] -->
     <string name="wifi_dpp_scan_qr_code_with_another_device">Scan this QR code with another device to join \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Hint for QR code detection [CHAR LIMIT=NONE]  -->
-    <string name="wifi_dpp_could_not_detect_valid_qr_code">Couldn\u2019t read QR code</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code">Couldn\u2019t read QR code. Re-center code and try again</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_authentication_or_configuration">Try again. If the issue continues, contact the device manufacturer</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_not_compatible">Something went wrong</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_timeout">Make sure the device has been plugged in, charged, and turned on</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_generic">Make sure the device has been plugged in, charged, and turned on. If the issue continues, contact the device manufacturer</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_not_supported">Adding \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d isn\u2019t supported by this device</string>
+    <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_check_connection_try_again">Check connection and try again</string>
     <!-- Title for the fragment choose network [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_choose_network">Choose network</string>
     <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
@@ -7617,6 +7634,15 @@
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
     <string name="notification_bubbles_title">Allow notification bubbles</string>
 
+    <!-- Configure notifications: title for swipe direction [CHAR LIMIT=60] -->
+    <string name="swipe_direction_title">Swipe actions</string>
+
+    <!-- Configure notifications: value for swipe direction [CHAR LIMIT=100] -->
+    <string name="swipe_direction_ltr">Swipe right to dismiss, left to show menu</string>
+
+    <!-- Configure notifications: value for swipe direction [CHAR LIMIT=100] -->
+    <string name="swipe_direction_rtl">Swipe left to dismiss, right to show menu</string>
+
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
 
@@ -9171,7 +9197,7 @@
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
 
-    <!-- Summary of condition that do not disturb is on and all exceptions set to off [CHAR LIMIT=36] -->
+    <!-- Summary of condition that do not disturb is on and all exceptions set to off [CHAR LIMIT=38] -->
     <string name="condition_zen_summary_phone_muted">Phone muted</string>
 
     <!-- Summary of condition that do not disturb is on and some exceptions are allowed [CHAR LIMIT=36] -->
