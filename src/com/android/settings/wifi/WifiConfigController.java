@@ -265,11 +265,7 @@ public class WifiConfigController implements TextWatcher,
             configureSecuritySpinner();
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
         } else {
-            if (!mAccessPoint.isPasspointConfig()) {
-                mConfigUi.setTitle(mAccessPoint.getSsid());
-            } else {
-                mConfigUi.setTitle(mAccessPoint.getConfigName());
-            }
+            mConfigUi.setTitle(mAccessPoint.getTitle());
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
 

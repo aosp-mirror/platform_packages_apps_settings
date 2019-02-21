@@ -483,7 +483,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (preference instanceof LongPressAccessPointPreference) {
             mSelectedAccessPoint =
                     ((LongPressAccessPointPreference) preference).getAccessPoint();
-            menu.setHeaderTitle(mSelectedAccessPoint.getSsid());
+            menu.setHeaderTitle(mSelectedAccessPoint.getTitle());
             if (mSelectedAccessPoint.isConnectable()) {
                 menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
             }
