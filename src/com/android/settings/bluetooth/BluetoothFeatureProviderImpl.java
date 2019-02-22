@@ -16,10 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.net.Uri;
-
-import com.android.settings.R;
 
 /**
  * Impl of {@link BluetoothFeatureProvider}
@@ -33,9 +32,9 @@ public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
     }
 
     @Override
-    public Uri getBluetoothDeviceSettingsUri(String macAddress) {
-        final String uriString = mContext.getString(R.string.config_bluetooth_device_settings_uri,
-                macAddress);
-        return Uri.parse(uriString);
+    public Uri getBluetoothDeviceSettingsUri(BluetoothDevice bluetoothDevice) {
+        final String uriString = bluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_ENHANCED_SETTINGS_UI_URI);
+        return uriString != null ? Uri.parse(uriString) : null;
     }
 }
