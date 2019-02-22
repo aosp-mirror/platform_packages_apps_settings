@@ -18,13 +18,16 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,11 +53,16 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     private static final int BATTERY_LEVEL_MAIN = 30;
     private static final int BATTERY_LEVEL_LEFT = 25;
     private static final int BATTERY_LEVEL_RIGHT = 45;
+    private static final String ICON_URI = "content://test.provider/icon.png";
 
     private Context mContext;
 
     @Mock
     private BluetoothDevice mBluetoothDevice;
+    @Mock
+    private Bitmap mBitmap;
+    @Mock
+    private ImageView mImageView;
     @Mock
     private CachedBluetoothDevice mCachedDevice;
     private AdvancedBluetoothDetailsHeaderController mController;
@@ -140,6 +148,15 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void updateIcon_existInCache_setImageBitmap() {
+        mController.mIconCache.put(ICON_URI, mBitmap);
+
+        mController.updateIcon(mImageView, ICON_URI);
+
+        verify(mImageView).setImageBitmap(mBitmap);
     }
 
     private void assertBatteryLevel(LinearLayout linearLayout, int batteryLevel) {
