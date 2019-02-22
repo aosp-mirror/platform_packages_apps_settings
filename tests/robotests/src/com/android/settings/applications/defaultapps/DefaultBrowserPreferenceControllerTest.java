@@ -84,11 +84,9 @@ public class DefaultBrowserPreferenceControllerTest {
 
     @Test
     public void isAvailable_hasBrowser_shouldReturnTrue() {
-        final ResolveInfo info = new ResolveInfo();
-        info.activityInfo = new ActivityInfo();
-        info.handleAllWebDataURI = true;
         when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
-            .thenReturn(Collections.singletonList(info));
+            .thenReturn(Collections.singletonList(createResolveInfo("com.test.pkg")));
+
         assertThat(mController.isAvailable()).isTrue();
     }
 

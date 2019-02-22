@@ -177,7 +177,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
-        final Resources res = SubscriptionManager.getResourcesForSubId(getActivity(), mSubId);
+        final Resources res = SubscriptionManager.getResourcesForSubId(getContext(), mSubId);
         String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
                 res.getString(R.string.wifi_calling_off_explanation_2));
         mEmptyView.setText(emptyViewText);
