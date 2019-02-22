@@ -270,27 +270,21 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean movePadding = list.getScrollBarStyle() == View.SCROLLBARS_OUTSIDE_OVERLAY;
         if (movePadding) {
             final Resources res = list.getResources();
-            final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
             final int paddingBottom = res.getDimensionPixelSize(
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
             if (parent instanceof PreferenceFrameLayout) {
                 ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
-
-                final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingSide;
-                list.setPaddingRelative(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
-            } else {
-                list.setPaddingRelative(paddingSide, 0, paddingSide, paddingBottom);
             }
+            list.setPaddingRelative(0 /* start */, 0 /* top */, 0 /* end */, paddingBottom);
         }
     }
 
     public static void forceCustomPadding(View view, boolean additive) {
         final Resources res = view.getResources();
-        final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
 
-        final int paddingStart = paddingSide + (additive ? view.getPaddingStart() : 0);
-        final int paddingEnd = paddingSide + (additive ? view.getPaddingEnd() : 0);
+        final int paddingStart = additive ? view.getPaddingStart() : 0;
+        final int paddingEnd = additive ? view.getPaddingEnd() : 0;
         final int paddingBottom = res.getDimensionPixelSize(
                 com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
