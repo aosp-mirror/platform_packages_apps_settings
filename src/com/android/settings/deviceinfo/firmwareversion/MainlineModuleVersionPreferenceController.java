@@ -22,51 +22,51 @@ import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
-import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
 
-import androidx.annotation.VisibleForTesting;
-
-public class ModuleVersionDialogController {
+public class MainlineModuleVersionPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "MainlineModuleControl";
 
-    @VisibleForTesting
-    static final int MODULE_VERSION_LABEL_ID = R.id.module_version_label;
-    @VisibleForTesting
-    static final int MODULE_VERSION_VALUE_ID = R.id.module_version_value;
-
-    private final FirmwareVersionDialogFragment mDialog;
-    private final Context mContext;
     private final PackageManager mPackageManager;
 
-    public ModuleVersionDialogController(FirmwareVersionDialogFragment dialog) {
-        mDialog = dialog;
-        mContext = mDialog.getContext();
+    private String mModuleVersion;
+
+    public MainlineModuleVersionPreferenceController(Context context, String key) {
+        super(context, key);
         mPackageManager = mContext.getPackageManager();
+        initModules();
     }
 
-    /**
-     * Updates the mainline module version field of the dialog.
-     */
-    public void initialize() {
+    @Override
+    public int getAvailabilityStatus() {
         if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MAINLINE_MODULE)) {
-            mDialog.removeSettingFromScreen(MODULE_VERSION_LABEL_ID);
-            mDialog.removeSettingFromScreen(MODULE_VERSION_VALUE_ID);
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        return !TextUtils.isEmpty(mModuleVersion) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    private void initModules() {
+        if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MAINLINE_MODULE)) {
             return;
         }
         final String moduleProvider = mContext.getString(
-            com.android.internal.R.string.config_defaultModuleMetadataProvider);
+                com.android.internal.R.string.config_defaultModuleMetadataProvider);
         if (!TextUtils.isEmpty(moduleProvider)) {
             try {
-                mDialog.setText(MODULE_VERSION_VALUE_ID,
-                    mPackageManager.getPackageInfo(moduleProvider, 0 /* flags */).versionName);
+                mModuleVersion =
+                        mPackageManager.getPackageInfo(moduleProvider, 0 /* flags */).versionName;
                 return;
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "Failed to get mainline version.", e);
+                mModuleVersion = null;
             }
         }
-        mDialog.removeSettingFromScreen(MODULE_VERSION_LABEL_ID);
-        mDialog.removeSettingFromScreen(MODULE_VERSION_VALUE_ID);
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mModuleVersion;
     }
 }

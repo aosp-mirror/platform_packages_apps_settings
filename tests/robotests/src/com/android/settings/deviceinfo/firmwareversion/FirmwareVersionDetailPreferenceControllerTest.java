@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,9 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDialogController
-        .FIRMWARE_VERSION_LABEL_ID;
-import static com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDialogController
-        .FIRMWARE_VERSION_VALUE_ID;
+import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -32,7 +28,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Build;
 import android.os.UserManager;
-import android.view.View;
+
+import androidx.preference.Preference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,36 +41,30 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-public class FirmwareVersionDialogControllerTest {
+public class FirmwareVersionDetailPreferenceControllerTest {
 
     @Mock
     private UserManager mUserManager;
-    @Mock
-    private FirmwareVersionDialogFragment mDialog;
-    @Mock
-    private View mView;
 
+    private Preference mPreference;
     private Context mContext;
-    private FirmwareVersionDialogController mController;
+    private FirmwareVersionDetailPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mDialog.getContext()).thenReturn(mContext);
-        mController = spy(new FirmwareVersionDialogController(mDialog));
+        mController = spy(new TestController(mContext, "key"));
+
         ReflectionHelpers.setField(mController, "mUserManager", mUserManager);
-        doNothing().when(mController).arrayCopy();
-        doNothing().when(mController).initializeAdminPermissions();
+
+        mPreference = new Preference(mContext);
+        mPreference.setKey(mController.getPreferenceKey());
     }
 
     @Test
-    public void initialize_shouldRegisterListenersAndSetBuildVersion() {
-        mController.initialize();
-
-        verify(mDialog).registerClickListener(eq(FIRMWARE_VERSION_VALUE_ID), any());
-        verify(mDialog).registerClickListener(eq(FIRMWARE_VERSION_LABEL_ID), any());
-        verify(mDialog).setText(FIRMWARE_VERSION_VALUE_ID, Build.VERSION.RELEASE);
+    public void getSummary_shouldGetBuildVersion() {
+        assertThat(mController.getSummary()).isEqualTo(Build.VERSION.RELEASE);
     }
 
     @Test
@@ -82,7 +73,7 @@ public class FirmwareVersionDialogControllerTest {
         hits[0] = Long.MAX_VALUE;
         when(mUserManager.hasUserRestriction(UserManager.DISALLOW_FUN)).thenReturn(true);
 
-        mController.onClick(mView);
+        mController.handlePreferenceTreeClick(mPreference);
 
         verify(mContext, never()).startActivity(any());
     }
@@ -93,8 +84,19 @@ public class FirmwareVersionDialogControllerTest {
         hits[0] = Long.MAX_VALUE;
         when(mUserManager.hasUserRestriction(UserManager.DISALLOW_FUN)).thenReturn(false);
 
-        mController.onClick(mView);
+        mController.handlePreferenceTreeClick(mPreference);
 
         verify(mContext).startActivity(any());
+    }
+
+    private static class TestController extends FirmwareVersionDetailPreferenceController {
+
+        public TestController(Context context, String key) {
+            super(context, key);
+        }
+
+        @Override
+        void initializeAdminPermissions() {
+        }
     }
 }

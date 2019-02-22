@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,12 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController
-        .BASEBAND_PROPERTY;
-import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController
-        .BASEBAND_VERSION_LABEL_ID;
-import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController
-        .BASEBAND_VERSION_VALUE_ID;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static com.android.settings.deviceinfo.firmwareversion.BasebandVersionPreferenceController.BASEBAND_PROPERTY;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.shadow.api.Shadow.extract;
 
 import android.content.Context;
@@ -36,7 +33,6 @@ import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -44,44 +40,35 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
-public class BasebandVersionDialogControllerTest {
-
-    @Mock
-    private FirmwareVersionDialogFragment mDialog;
+public class BasebandVersionPreferenceControllerTest {
 
     private Context mContext;
-    private BasebandVersionDialogController mController;
+    private BasebandVersionPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        when(mDialog.getContext()).thenReturn(mContext);
-        mController = new BasebandVersionDialogController(mDialog);
+        mController = new BasebandVersionPreferenceController(mContext, "key");
     }
 
     @Test
-    public void initialize_wifiOnly_shouldRemoveSettingFromDialog() {
-        ShadowConnectivityManager connectivityManager =
+    public void getAvailability_wifiOnly_unavailable() {
+        final ShadowConnectivityManager connectivityManager =
                 extract(mContext.getSystemService(ConnectivityManager.class));
         connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
 
-        mController.initialize();
-
-        verify(mDialog).removeSettingFromScreen(BASEBAND_VERSION_LABEL_ID);
-        verify(mDialog).removeSettingFromScreen(BASEBAND_VERSION_VALUE_ID);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void initialize_hasMobile_shouldSetDialogTextToBasebandVersion() {
+    public void getAvailability_hasMobile_available() {
         final String text = "test";
         SystemProperties.set(BASEBAND_PROPERTY, text);
         ShadowConnectivityManager connectivityManager =
                 extract(mContext.getSystemService(ConnectivityManager.class));
         connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);
 
-        mController.initialize();
-
-        verify(mDialog).setText(BASEBAND_VERSION_VALUE_ID, text);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 }

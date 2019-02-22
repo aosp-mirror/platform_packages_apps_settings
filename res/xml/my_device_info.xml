@@ -121,11 +121,10 @@
         android:key="firmware_version"
         android:order="32"
         android:title="@string/firmware_version"
-        settings:keywords="@string/keywords_android_version"
         android:summary="@string/summary_placeholder"
         settings:allowDynamicSummaryInSlice="true"
-        settings:controller=
-            "com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController"/>
+        android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
+        settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController"/>
 
     <!--IP address -->
     <Preference
