@@ -42,6 +42,7 @@ import android.view.TextureView;
 import android.view.TextureView.SurfaceTextureListener;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -77,6 +78,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     private static final String KEY_IS_CONFIGURATOR_MODE = "key_is_configurator_mode";
     private static final String KEY_LATEST_ERROR_CODE = "key_latest_error_code";
 
+    private ProgressBar mProgressBar;
     private QrCamera mCamera;
     private TextureView mTextureView;
     private QrDecorateView mDecorateView;
@@ -205,6 +207,10 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         mDecorateView = (QrDecorateView) view.findViewById(R.id.decorate_view);
 
         setHeaderIconImageResource(R.drawable.ic_scan_24dp);
+
+        mProgressBar = view.findViewById(R.id.indeterminate_bar);
+        mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
+
         if (mIsConfiguratorMode) {
             mTitle.setText(R.string.wifi_dpp_add_device_to_network);
 
@@ -402,6 +408,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     mScanWifiDppSuccessListener.onScanWifiDppSuccess((WifiQrCode)msg.obj);
 
                     if (!mIsConfiguratorMode) {
+                        mProgressBar.setVisibility(View.VISIBLE);
                         startWifiDppEnrolleeInitiator((WifiQrCode)msg.obj);
                     }
                     break;
@@ -446,6 +453,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
             Log.e(TAG, "Invalid networkId " + newNetworkId);
             mLatestStatusCode = EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_GENERIC;
+            mProgressBar.setVisibility(View.INVISIBLE);
             showErrorMessage(getString(R.string.wifi_dpp_check_connection_try_again));
             restartCamera();
         }
@@ -512,6 +520,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
 
             mLatestStatusCode = code;
+            mProgressBar.setVisibility(View.INVISIBLE);
             restartCamera();
         }
 
@@ -540,6 +549,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void onFailure(int reason) {
         Log.d(TAG, "Wi-Fi connect onFailure reason - " + reason);
 
+        mProgressBar.setVisibility(View.INVISIBLE);
         showErrorMessage(getString(R.string.wifi_dpp_check_connection_try_again));
         restartCamera();
     }
