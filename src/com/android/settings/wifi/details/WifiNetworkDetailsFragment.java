@@ -51,6 +51,9 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
     private static final String TAG = "WifiNetworkDetailsFrg";
 
+    // Extra for if current fragment shows saved network status or not.
+    public static final String EXTRA_IS_SAVED_NETWORK = "SavedNetwork";
+
     private AccessPoint mAccessPoint;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
 
@@ -122,15 +125,31 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
-        mWifiDetailPreferenceController = WifiDetailPreferenceController.newInstance(
-                mAccessPoint,
-                cm,
-                context,
-                this,
-                new Handler(Looper.getMainLooper()),  // UI thread.
-                getSettingsLifecycle(),
-                context.getSystemService(WifiManager.class),
-                mMetricsFeatureProvider);
+
+        final boolean isDisplaySavedNetworkDetails =
+                getArguments().getBoolean(EXTRA_IS_SAVED_NETWORK, false /* defaultValue */);
+        if (isDisplaySavedNetworkDetails) {
+            mWifiDetailPreferenceController =
+                    WifiDetailSavedNetworkPreferenceController.newInstance(
+                            mAccessPoint,
+                            cm,
+                            context,
+                            this,
+                            new Handler(Looper.getMainLooper()),  // UI thread.
+                            getSettingsLifecycle(),
+                            context.getSystemService(WifiManager.class),
+                            mMetricsFeatureProvider);
+        } else {
+            mWifiDetailPreferenceController = WifiDetailPreferenceController.newInstance(
+                    mAccessPoint,
+                    cm,
+                    context,
+                    this,
+                    new Handler(Looper.getMainLooper()),  // UI thread.
+                    getSettingsLifecycle(),
+                    context.getSystemService(WifiManager.class),
+                    mMetricsFeatureProvider);
+        }
 
         controllers.add(mWifiDetailPreferenceController);
         controllers.add(new WifiMeteredPreferenceController(context, mAccessPoint.getConfig()));
