@@ -63,7 +63,8 @@ public class FileEncryptionPreferenceController extends DeveloperOptionsPreferen
 
     @Override
     public void updateState(Preference preference) {
-        if (!TextUtils.equals("file", CryptoProperties.type().orElse("none"))) {
+        if (CryptoProperties.type().orElse(CryptoProperties.type_values.NONE) !=
+            CryptoProperties.type_values.FILE) {
             return;
         }
 
