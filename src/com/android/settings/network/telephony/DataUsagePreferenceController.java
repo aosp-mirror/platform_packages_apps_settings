@@ -63,7 +63,16 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final boolean enabled = mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            preference.setEnabled(false);
+            return;
+        }
+        long usageLevel = mDataUsageInfo.usageLevel;
+        if (usageLevel <= 0L) {
+            final DataUsageController controller = new DataUsageController(mContext);
+            usageLevel = controller.getHistoricalUsageLevel(mTemplate);
+        }
+        final boolean enabled = usageLevel > 0L;
         preference.setEnabled(enabled);
 
         if (enabled) {
