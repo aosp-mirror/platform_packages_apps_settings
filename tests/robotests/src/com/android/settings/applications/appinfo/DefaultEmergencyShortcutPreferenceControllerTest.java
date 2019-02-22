@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -38,11 +39,14 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultEmergencyShortcutPreferenceControllerTest {
 
+    @Mock
+    private RoleManager mRoleManager;
     @Mock
     private PackageManager mPackageManager;
 
@@ -54,6 +58,7 @@ public class DefaultEmergencyShortcutPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getSystemService(RoleManager.class)).thenReturn(mRoleManager);
         mController = new DefaultEmergencyShortcutPreferenceController(mContext, "Package1");
     }
 
@@ -80,8 +85,8 @@ public class DefaultEmergencyShortcutPreferenceControllerTest {
 
     @Test
     public void isDefaultApp_isDefaultEmergency_shouldReturnTrue() {
-        Settings.Secure.putString(mContext.getContentResolver(),
-                Settings.Secure.EMERGENCY_ASSISTANCE_APPLICATION, "Package1");
+        when(mRoleManager.getRoleHolders(RoleManager.ROLE_EMERGENCY))
+                .thenReturn(Collections.singletonList("Package1"));
 
         assertThat(mController.isDefaultApp()).isTrue();
     }
