@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
-import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -37,7 +36,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -165,12 +163,6 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private Button mNextButton;
 
-    /**
-     * TODO(b/118444000): Remove this and all related code.
-     */
-    @Deprecated
-    private boolean mIsShowingDashboard;
-
     private ViewGroup mContent;
 
     // Categories
@@ -253,11 +245,7 @@ public class SettingsActivity extends SettingsBaseActivity
             setTheme(R.style.Theme_SubSettings);
         }
 
-        mIsShowingDashboard = TextUtils.equals(
-                SettingsActivity.class.getName(), intent.getComponent().getClassName());
-
-        setContentView(mIsShowingDashboard ?
-                R.layout.settings_main_dashboard : R.layout.settings_main_prefs);
+        setContentView(R.layout.settings_main_prefs);
 
         mContent = findViewById(R.id.main_content);
 
@@ -280,21 +268,12 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
-        if (mIsShowingDashboard) {
-            findViewById(R.id.search_bar).setVisibility(
-                    deviceProvisioned ? View.VISIBLE : View.INVISIBLE);
-            findViewById(R.id.action_bar).setVisibility(View.GONE);
-            final Toolbar toolbar = findViewById(R.id.search_action_bar);
-            setActionBar(toolbar);
-            FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                    .initSearchToolbar(this, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
-        }
 
-        ActionBar actionBar = getActionBar();
+        final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
             actionBar.setHomeButtonEnabled(deviceProvisioned);
-            actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
+            actionBar.setDisplayShowTitleEnabled(true);
         }
         mSwitchBar = findViewById(R.id.switch_bar);
         if (mSwitchBar != null) {
