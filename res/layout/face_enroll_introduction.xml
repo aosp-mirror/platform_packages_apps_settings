@@ -50,12 +50,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <ImageView
+            <com.google.android.setupdesign.view.IllustrationVideoView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/face_enroll_introduction_animation"
                 style="@style/SudContentIllustration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@null"
-                android:src="@drawable/face_enroll_introduction" />
+                app:sudVideo="@raw/face_enroll_introduction_animation" />
 
         </com.google.android.setupdesign.view.FillContentLayout>
 
