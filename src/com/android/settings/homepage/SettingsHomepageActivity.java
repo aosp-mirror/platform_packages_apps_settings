@@ -16,11 +16,13 @@
 
 package com.android.settings.homepage;
 
+import android.animation.LayoutTransition;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
@@ -64,6 +66,8 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
 
         showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
         showFragment(new TopLevelSettings(), R.id.main_content);
+        ((FrameLayout) findViewById(R.id.main_content))
+                .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
     }
 
     private void showFragment(Fragment fragment, int id) {
