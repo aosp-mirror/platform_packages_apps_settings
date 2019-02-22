@@ -1874,7 +1874,8 @@
         <activity android:name=".bluetooth.BluetoothPairingDialog"
                   android:excludeFromRecents="true"
                   android:windowSoftInputMode="stateVisible|adjustResize"
-                  android:theme="@style/Theme.AlertDialog">
+                  android:theme="@style/Theme.AlertDialog"
+                  android:taskAffinity=".bluetooth.BluetoothPairingDialog">
             <intent-filter android:priority="1">
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
