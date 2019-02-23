@@ -18,9 +18,7 @@ package com.android.settings.homepage;
 
 import android.animation.LayoutTransition;
 import android.app.settings.SettingsEnums;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.FeatureFlagUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -32,9 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.accounts.AvatarViewMixin;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -44,13 +40,6 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (!FeatureFlagUtils.isEnabled(this, FeatureFlags.DYNAMIC_HOMEPAGE)) {
-            final Intent settings = new Intent(this, SettingsActivity.class);
-            startActivity(settings);
-            finish();
-            return;
-        }
 
         updateWindowProperties();
         setContentView(R.layout.settings_homepage_container);
