@@ -46,7 +46,6 @@ public class PaymentBackend {
     public static class PaymentAppInfo {
         public CharSequence label;
         CharSequence description;
-        Drawable banner;
         boolean isDefault;
         public ComponentName componentName;
         public ComponentName settingsComponent;
@@ -111,7 +110,6 @@ public class PaymentBackend {
                 appInfo.settingsComponent = null;
             }
             appInfo.description = service.getDescription();
-            appInfo.banner = service.loadBanner(pm);
             appInfos.add(appInfo);
         }
         mAppInfos = appInfos;
@@ -138,19 +136,6 @@ public class PaymentBackend {
     void makeCallbacks() {
         for (Callback callback : mCallbacks) {
             callback.onPaymentAppsChanged();
-        }
-    }
-
-    Drawable loadDrawableForPackage(String pkgName, int drawableResId) {
-        PackageManager pm = mContext.getPackageManager();
-        try {
-            Resources res = pm.getResourcesForApplication(pkgName);
-            Drawable banner = res.getDrawable(drawableResId);
-            return banner;
-        } catch (Resources.NotFoundException e) {
-            return null;
-        } catch (PackageManager.NameNotFoundException e) {
-            return null;
         }
     }
 
