@@ -2328,6 +2328,18 @@
         </activity>
 
         <activity
+            android:name="Settings$NotificationAssistantSettingsActivity"
+            android:label="@string/notification_assistant_title"
+            android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NOTIFICATION_ASSISTANT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.NotificationAssistantPicker" />
+        </activity>
+
+        <activity
             android:name="Settings$VrListenersSettingsActivity"
             android:label="@string/vr_listeners_title"
             android:parentActivityName="Settings">

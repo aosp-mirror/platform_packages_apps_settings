@@ -101,6 +101,7 @@ import com.android.settings.notification.ChannelGroupNotificationSettings;
 import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
+import com.android.settings.notification.NotificationAssistantPicker;
 import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
@@ -218,6 +219,7 @@ public class SettingsGateway {
             AppInfoDashboardFragment.class.getName(),
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
+            NotificationAssistantPicker.class.getName(),
             ChannelNotificationSettings.class.getName(),
             ChannelGroupNotificationSettings.class.getName(),
             ApnSettings.class.getName(),
