@@ -28,6 +28,8 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 
 /**
@@ -37,14 +39,13 @@ import com.android.settings.R;
  * Updates Settings.System for balance on progress changed.
  */
 public class BalanceSeekBar extends SeekBar {
-    private static final String TAG = "BalanceSeekBar";
     private final Context mContext;
     private final Object mListenerLock = new Object();
     private OnSeekBarChangeListener mOnSeekBarChangeListener;
     private final OnSeekBarChangeListener mProxySeekBarListener = new OnSeekBarChangeListener() {
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            synchronized(mListenerLock) {
+            synchronized (mListenerLock) {
                 if (mOnSeekBarChangeListener != null) {
                     mOnSeekBarChangeListener.onStopTrackingTouch(seekBar);
                 }
@@ -53,7 +54,7 @@ public class BalanceSeekBar extends SeekBar {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-            synchronized(mListenerLock) {
+            synchronized (mListenerLock) {
                 if (mOnSeekBarChangeListener != null) {
                     mOnSeekBarChangeListener.onStartTrackingTouch(seekBar);
                 }
@@ -79,7 +80,7 @@ public class BalanceSeekBar extends SeekBar {
 
             // after adjusting the seekbar, notify downstream listener.
             // note that progress may have been adjusted in the code above to mCenter.
-            synchronized(mListenerLock) {
+            synchronized (mListenerLock) {
                 if (mOnSeekBarChangeListener != null) {
                     mOnSeekBarChangeListener.onProgressChanged(seekBar, progress, fromUser);
                 }
@@ -88,7 +89,8 @@ public class BalanceSeekBar extends SeekBar {
     };
 
     // Percentage of max to be used as a snap to threshold
-    private static final float SNAP_TO_PERCENTAGE = 0.03f;
+    @VisibleForTesting
+    static final float SNAP_TO_PERCENTAGE = 0.03f;
     private final Paint mCenterMarkerPaint;
     private final Rect mCenterMarkerRect;
     // changed in setMax()
@@ -122,7 +124,7 @@ public class BalanceSeekBar extends SeekBar {
 
     @Override
     public void setOnSeekBarChangeListener(OnSeekBarChangeListener listener) {
-        synchronized(mListenerLock) {
+        synchronized (mListenerLock) {
             mOnSeekBarChangeListener = listener;
         }
     }
@@ -147,6 +149,11 @@ public class BalanceSeekBar extends SeekBar {
         canvas.drawRect(mCenterMarkerRect, mCenterMarkerPaint);
         canvas.restore();
         super.onDraw(canvas);
+    }
+
+    @VisibleForTesting
+    OnSeekBarChangeListener getProxySeekBarListener() {
+        return mProxySeekBarListener;
     }
 }
 
