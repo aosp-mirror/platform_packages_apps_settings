@@ -23,24 +23,25 @@
     settings:initialExpandedChildrenCount="8">
     <!-- the initial count should include the dynamic tiles -->
 
-    <PreferenceCategory
-        android:key="recent_apps_category"
-        android:title="@string/recent_app_category_title"
-        android:order="-200">
-        <!-- Placeholder for a list of recent apps -->
+    <Preference
+        android:key="all_app_info"
+        android:title="@string/applications_settings"
+        android:order="-999"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"/>
 
-        <!-- See all apps button -->
-        <Preference
-            android:title="@string/applications_settings"
-            android:key="all_app_info"
-            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            android:order="20"/>
-    </PreferenceCategory>
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="recent_open_apps"
+        android:title="@string/recent_app_category_title"
+        android:layout="@layout/app_entities_header"
+        android:selectable="false"
+        android:order="-998"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.applications.RecentAppsPreferenceController"/>
 
     <!-- Empty category to draw divider -->
     <PreferenceCategory
-        android:key="all_app_info_divider"
-        android:order="-190"/>
+        android:key="recent_apps_divider"
+        android:order="-997"/>
 
     <!-- Notifications (appears before manage_perms), default apps (appears after) -->
     <PreferenceCategory

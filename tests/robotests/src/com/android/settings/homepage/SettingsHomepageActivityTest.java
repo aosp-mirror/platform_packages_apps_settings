@@ -18,34 +18,18 @@ package com.android.settings.homepage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.util.FeatureFlagUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.core.FeatureFlags;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(RobolectricTestRunner.class)
 public class SettingsHomepageActivityTest {
-
-    @Test
-    public void launch_featureFlagOff_shouldRedirectToSettingsActivity() {
-        FeatureFlagUtils.setEnabled(RuntimeEnvironment.application, FeatureFlags.DYNAMIC_HOMEPAGE,
-                false);
-
-        final ShadowActivity shadowActivity = Shadows.shadowOf(
-                Robolectric.setupActivity(SettingsHomepageActivity.class));
-        assertThat(shadowActivity.getNextStartedActivity().getComponent().getClassName())
-                .isEqualTo(SettingsActivity.class.getName());
-    }
 
     @Test
     public void setHomepageContainerPaddingTop_shouldBeSetPaddingTop() {
@@ -64,5 +48,14 @@ public class SettingsHomepageActivityTest {
         final int actualPaddingTop = view.getPaddingTop();
         assertThat(actualPaddingTop).isEqualTo(
                 statusBarHeight + searchBarHeight + searchBarMargin * 2);
+    }
+
+    @Test
+    public void launch_shouldHaveAnimationForIaFragment() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final FrameLayout frameLayout = activity.findViewById(R.id.main_content);
+
+        assertThat(frameLayout.getLayoutTransition()).isNotNull();
     }
 }

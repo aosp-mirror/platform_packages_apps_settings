@@ -229,6 +229,50 @@ public class NotificationChannelSliceTest {
         assertThat(rows).isEqualTo(NotificationChannelSlice.DEFAULT_EXPANDED_ROW_COUNT + 1);
     }
 
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void getSlice_channelCountIsLessThanDefaultRows_subTitleShouldNotHaveTapToManagerAll() {
+        addMockPackageToPackageManager(true /* isRecentlyInstalled */,
+                ApplicationInfo.FLAG_INSTALLED);
+        mockNotificationBackend(CHANNEL_COUNT - 1, NOTIFICATION_COUNT, false /* banned */);
+
+        final Slice slice = mNotificationChannelSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getSubtitle()).isEqualTo(mContext.getResources().getQuantityString(
+                R.plurals.notification_few_channel_count_summary, CHANNEL_COUNT - 1,
+                CHANNEL_COUNT - 1));
+    }
+
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void getSlice_channelCountIsEqualToDefaultRows_subTitleShouldNotHaveTapToManagerAll() {
+        addMockPackageToPackageManager(true /* isRecentlyInstalled */,
+                ApplicationInfo.FLAG_INSTALLED);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */);
+
+        final Slice slice = mNotificationChannelSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getSubtitle()).isEqualTo(mContext.getResources().getQuantityString(
+                R.plurals.notification_few_channel_count_summary, CHANNEL_COUNT, CHANNEL_COUNT));
+    }
+
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void getSlice_channelCountIsMoreThanDefaultRows_subTitleShouldHaveTapToManagerAll() {
+        addMockPackageToPackageManager(true /* isRecentlyInstalled */,
+                ApplicationInfo.FLAG_INSTALLED);
+        mockNotificationBackend(CHANNEL_COUNT + 1, NOTIFICATION_COUNT, false /* banned */);
+
+        final Slice slice = mNotificationChannelSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getSubtitle()).isEqualTo(
+                mContext.getString(R.string.notification_many_channel_count_summary,
+                        CHANNEL_COUNT + 1));
+    }
+
     private void addMockPackageToPackageManager(boolean isRecentlyInstalled, int flags) {
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         applicationInfo.name = APP_LABEL;

@@ -2503,7 +2503,7 @@
         <item>"1"</item>
     </string-array>
     <!-- Wi-Fi Calling settings. Text displayed when Wi-Fi Calling is off -->
-    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.</string>
+    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.<xliff:g id="additional_text" example="Learn More">%1$s</xliff:g></string>
     <!-- Wi-Fi Calling settings. Additional text displayed when Wi-Fi Calling is off. Default empty. [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_off_explanation_2"></string>
     <!-- Title of a preference for updating emergency address [CHAR LIMIT=40] -->
@@ -7796,8 +7796,27 @@
         <item quantity="other">%d apps can read notifications</item>
     </plurals>
 
+    <!-- Title for Notification Assistant Picker screen [CHAR LIMIT=30]-->
+    <string name="notification_assistant_title">Notification Assistant</string>
+
+    <!-- Label for no NotificationAssistantService [CHAR_LIMIT=NONE] -->
+    <string name="no_notification_assistant">No assistant</string>
+
     <!-- String to show in the list of notification listeners, when none is installed -->
     <string name="no_notification_listeners">No installed apps have requested notification access.</string>
+
+    <!-- Title for a warning message about security implications of enabling a notification
+      assistant, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="notification_assistant_security_warning_title">Allow notification access for
+         <xliff:g id="service" example="NotificationAssistant">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling a notification
+          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="notification_assistant_security_warning_summary">
+        <xliff:g id="notification_assistant_name" example="Notification Assistant">%1$s</xliff:g> will be able to read all notifications,
+        including personal information such as contact names and the text of messages you receive.
+        It will also be able to modify or dismiss notifications or trigger action buttons they contain.
+        \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
+    </string>
 
     <!-- Title for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
@@ -8519,7 +8538,7 @@
     <string name="unknown_app">Unknown app</string>
 
     <!-- Label for list that shows all permissions -->
-    <string name="app_permissions">App permissions</string>
+    <string name="app_permissions">Permission manager</string>
     <!-- Summary of permissions currently granted to apps [CHAR LIMIT=60] -->
     <string name="app_permissions_summary">Apps using <xliff:g id="apps" example="location">%1$s</xliff:g></string>
 
@@ -10658,7 +10677,7 @@
     <string name="permission_bar_chart_title">Most-used permissions in last 24 hours</string>
 
     <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details">See all usage</string>
+    <string name="permission_bar_chart_details">View Permissions Dashboard</string>
 
     <!-- Title for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="accessibility_usage_title">Accessibility usage</string>
@@ -10673,11 +10692,13 @@
     <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> Notifications</string>
     <!-- Title for no suggested app in notification channel slice. [CHAR LIMIT=NONE] -->
     <string name="no_suggested_app">No suggested application</string>
-    <!-- Summary for notification channel slice. [CHAR LIMIT=NONE] -->
-    <plurals name="notification_channel_count_summary">
-        <item quantity="one"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channel. Tap to manage all.</item>
-        <item quantity="other"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channels. Tap to manage all.</item>
+    <!-- Summary for the channels count is equal or less than 3 in notification channel slice. [CHAR LIMIT=NONE] -->
+    <plurals name="notification_few_channel_count_summary">
+        <item quantity="one"><xliff:g id="notification_channel_count" example="1">%1$d</xliff:g> notification channel.</item>
+        <item quantity="other"><xliff:g id="notification_channel_count" example="3">%1$d</xliff:g> notification channels.</item>
     </plurals>
+    <!-- Summary for the channels count is more than 3 in notification channel slice. [CHAR LIMIT=NONE] -->
+    <string name="notification_many_channel_count_summary"><xliff:g id="notification_channel_count" example="4">%1$d</xliff:g> notification channels. Tap to manage all.</string>
 
     <!-- Title for the Switch output dialog (settings panel) with media related devices [CHAR LIMIT=50] -->
     <string name="media_output_panel_title">Switch output</string>

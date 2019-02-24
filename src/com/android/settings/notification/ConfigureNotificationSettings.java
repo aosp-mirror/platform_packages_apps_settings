@@ -58,6 +58,8 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     static final String KEY_LOCKSCREEN_WORK_PROFILE = "lock_screen_notifications_profile";
     @VisibleForTesting
     static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
+    @VisibleForTesting
+    static final String KEY_NOTIFICATION_ASSISTANT = "notification_assistant";
 
     private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
 

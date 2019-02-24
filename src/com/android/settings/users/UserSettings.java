@@ -271,18 +271,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mMePreference.setSummary(R.string.user_admin);
         }
         mAddUser = (RestrictedPreference) findPreference(KEY_ADD_USER);
-        mAddUser.useAdminDisabledSummary(false);
-        // Determine if add user/profile button should be visible
-        if (mUserCaps.mCanAddUser && Utils.isDeviceProvisioned(activity)) {
-            mAddUser.setVisible(true);
-            mAddUser.setOnPreferenceClickListener(this);
-            // change label to only mention user, if restricted profiles are not supported
-            if (!mUserCaps.mCanAddRestrictedProfile) {
-                mAddUser.setTitle(R.string.user_add_user_menu);
-            }
-        } else {
-            mAddUser.setVisible(false);
-        }
+        mAddUser.setOnPreferenceClickListener(this);
 
         activity.registerReceiverAsUser(
                 mUserChangeReceiver, UserHandle.ALL, USER_REMOVED_INTENT_FILTER, null, mHandler);
@@ -968,9 +957,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
         mMultiUserFooterPreferenceController.updateState(null /* preference */);
-        mAddUser.setVisible(mUserCaps.mCanAddUser && Utils.isDeviceProvisioned(context)
-                && mUserCaps.mUserSwitcherEnabled);
         mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
+
+        updateAddUser(context);
+
         if (!mUserCaps.mUserSwitcherEnabled) {
             return;
         }
@@ -980,10 +970,13 @@ public class UserSettings extends SettingsPreferenceFragment
             mUserListCategory.addPreference(userPreference);
         }
 
-        // Append Add user to the end of the list
-        if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin) &&
-                Utils.isDeviceProvisioned(context)) {
-            boolean moreUsers = mUserManager.canAddMoreUsers();
+    }
+
+    private void updateAddUser(Context context) {
+        if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin)
+                && Utils.isDeviceProvisioned(context) && mUserCaps.mUserSwitcherEnabled) {
+            mAddUser.setVisible(true);
+            final boolean moreUsers = mUserManager.canAddMoreUsers();
             mAddUser.setEnabled(moreUsers && !mAddingUser && mUserManager.canSwitchUsers());
             if (!moreUsers) {
                 mAddUser.setSummary(getString(R.string.user_add_max_count, getMaxRealUsers()));
@@ -994,6 +987,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUser.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
+        } else {
+            mAddUser.setVisible(false);
         }
     }
 

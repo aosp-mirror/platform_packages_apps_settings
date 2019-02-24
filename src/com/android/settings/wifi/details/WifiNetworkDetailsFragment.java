@@ -17,11 +17,9 @@ package com.android.settings.wifi.details;
 
 import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -53,7 +51,8 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
     private static final String TAG = "WifiNetworkDetailsFrg";
 
-    public static final int REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS = 1;
+    // Extra for if current fragment shows saved network status or not.
+    public static final String EXTRA_IS_SAVED_NETWORK = "SavedNetwork";
 
     private AccessPoint mAccessPoint;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
@@ -126,15 +125,31 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
-        mWifiDetailPreferenceController = WifiDetailPreferenceController.newInstance(
-                mAccessPoint,
-                cm,
-                context,
-                this,
-                new Handler(Looper.getMainLooper()),  // UI thread.
-                getSettingsLifecycle(),
-                context.getSystemService(WifiManager.class),
-                mMetricsFeatureProvider);
+
+        final boolean isDisplaySavedNetworkDetails =
+                getArguments().getBoolean(EXTRA_IS_SAVED_NETWORK, false /* defaultValue */);
+        if (isDisplaySavedNetworkDetails) {
+            mWifiDetailPreferenceController =
+                    WifiDetailSavedNetworkPreferenceController.newInstance(
+                            mAccessPoint,
+                            cm,
+                            context,
+                            this,
+                            new Handler(Looper.getMainLooper()),  // UI thread.
+                            getSettingsLifecycle(),
+                            context.getSystemService(WifiManager.class),
+                            mMetricsFeatureProvider);
+        } else {
+            mWifiDetailPreferenceController = WifiDetailPreferenceController.newInstance(
+                    mAccessPoint,
+                    cm,
+                    context,
+                    this,
+                    new Handler(Looper.getMainLooper()),  // UI thread.
+                    getSettingsLifecycle(),
+                    context.getSystemService(WifiManager.class),
+                    mMetricsFeatureProvider);
+        }
 
         controllers.add(mWifiDetailPreferenceController);
         controllers.add(new WifiMeteredPreferenceController(context, mAccessPoint.getConfig()));
@@ -145,15 +160,5 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
         controllers.add(preferenceController);
 
         return controllers;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS
-                && resultCode == Activity.RESULT_OK) {
-            mWifiDetailPreferenceController.launchWifiDppConfiguratorActivity();
-        }
     }
 }

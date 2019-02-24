@@ -183,7 +183,7 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
         }
 
         public void updateApps(PaymentAppInfo[] appInfos) {
-            // Clone app infos, only add those with a banner
+            // Clone app infos, only add an application label
             this.appInfos = appInfos;
             notifyDataSetChanged();
         }
@@ -211,16 +211,11 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
                 convertView = mLayoutInflater.inflate(
                         R.layout.nfc_payment_option, parent, false);
                 holder = new ViewHolder();
-                holder.imageView = convertView.findViewById(R.id.banner);
                 holder.radioButton = convertView.findViewById(R.id.button);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.imageView.setImageDrawable(appInfo.banner);
-            holder.imageView.setTag(appInfo);
-            holder.imageView.setContentDescription(appInfo.label);
-            holder.imageView.setOnClickListener(this);
 
             // Prevent checked callback getting called on recycled views
             holder.radioButton.setOnCheckedChangeListener(null);
@@ -228,11 +223,11 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
             holder.radioButton.setContentDescription(appInfo.label);
             holder.radioButton.setOnCheckedChangeListener(this);
             holder.radioButton.setTag(appInfo);
+            holder.radioButton.setText(appInfo.label);
             return convertView;
         }
 
         private class ViewHolder {
-            public ImageView imageView;
             public RadioButton radioButton;
         }
 

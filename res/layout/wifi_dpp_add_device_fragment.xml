@@ -34,6 +34,17 @@
 
             <include layout="@layout/wifi_dpp_fragment_header"/>
 
+            <ProgressBar
+                android:id="@+id/indeterminate_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="8dp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:visibility="invisible"/>
+
             <ImageView
                 android:id="@+id/wifi_ap_picture_view"
                 android:layout_width="wrap_content"

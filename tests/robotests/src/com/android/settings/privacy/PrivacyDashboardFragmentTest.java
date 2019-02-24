@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.permission.PermissionControllerManager;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -44,7 +45,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowAccessibilityManager;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
+
+import java.util.ArrayList;
 
 
 @RunWith(RobolectricTestRunner.class)
@@ -65,6 +69,9 @@ public class PrivacyDashboardFragmentTest {
         mContext = RuntimeEnvironment.application;
         final UserManager userManager = mContext.getSystemService(UserManager.class);
         final ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+        final ShadowAccessibilityManager accessibilityManager = Shadow.extract(
+                AccessibilityManager.getInstance(mContext));
+        accessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
         shadowUserManager.addProfile(new UserInfo(123, null, 0));
         when(FakeFeatureFactory.setupForTest().securityFeatureProvider.getLockPatternUtils(
                 any(Context.class))).thenReturn(mLockPatternUtils);

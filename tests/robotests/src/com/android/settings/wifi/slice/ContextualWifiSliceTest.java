@@ -35,6 +35,7 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
+import com.android.settings.slices.CustomSliceRegistry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -96,5 +97,14 @@ public class ContextualWifiSliceTest {
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
+    }
+
+    @Test
+    public void getWifiSlice_contextualWifiSlice_shouldReturnContextualWifiSliceUri() {
+        mWifiSlice.mPreviouslyDisplayed = true;
+
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        assertThat(wifiSlice.getUri()).isEqualTo(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI);
     }
 }

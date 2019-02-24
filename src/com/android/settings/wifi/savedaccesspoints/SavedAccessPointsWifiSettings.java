@@ -23,13 +23,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.wifi.WifiConfigUiBase;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiSettings;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 
@@ -95,7 +100,23 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
             mAccessPointSavedState = null;
         }
 
-        showDialog(WifiSettings.WIFI_DIALOG_ID);
+        if (usingDetailsFragment(getContext())) {
+            if (mSelectedAccessPoint == null) {
+                mSelectedAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
+            }
+            final Bundle savedState = new Bundle();
+            mSelectedAccessPoint.saveWifiState(savedState);
+            savedState.putBoolean(WifiNetworkDetailsFragment.EXTRA_IS_SAVED_NETWORK, true);
+
+            new SubSettingLauncher(getContext())
+                    .setTitleText(mSelectedAccessPoint.getTitle())
+                    .setDestination(WifiNetworkDetailsFragment.class.getName())
+                    .setArguments(savedState)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
+        } else {
+            showDialog(WifiSettings.WIFI_DIALOG_ID);
+        }
     }
 
     @Override
@@ -165,5 +186,16 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
     @Override
     public void onCancel(DialogInterface dialog) {
         mSelectedAccessPoint = null;
+    }
+
+    /**
+     * Checks if showing WifiNetworkDetailsFragment when clicking saved network item.
+     */
+    public static boolean usingDetailsFragment(Context context) {
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.MOBILE_NETWORK_V2)
+                && FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            return false;    // TODO(b/124695272): mark true when UI is ready.
+        }
+        return false;
     }
 }

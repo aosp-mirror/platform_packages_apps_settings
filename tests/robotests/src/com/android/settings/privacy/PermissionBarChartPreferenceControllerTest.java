@@ -33,6 +33,7 @@ import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.permission.RuntimePermissionUsageInfo;
 import android.provider.DeviceConfig;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.preference.PreferenceScreen;
 
@@ -55,6 +56,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowAccessibilityManager;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
@@ -80,6 +82,9 @@ public class PermissionBarChartPreferenceControllerTest {
         final Context context = RuntimeEnvironment.application;
         final UserManager userManager = context.getSystemService(UserManager.class);
         final ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+        final ShadowAccessibilityManager accessibilityManager = Shadow.extract(
+                AccessibilityManager.getInstance(context));
+        accessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
         shadowUserManager.addProfile(new UserInfo(123, null, 0));
         when(FakeFeatureFactory.setupForTest().securityFeatureProvider.getLockPatternUtils(
                 any(Context.class))).thenReturn(mLockPatternUtils);

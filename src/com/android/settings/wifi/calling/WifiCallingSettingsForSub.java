@@ -23,6 +23,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
@@ -176,8 +177,9 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
-        String emptyViewText = activity.getString(R.string.wifi_calling_off_explanation)
-                + activity.getString(R.string.wifi_calling_off_explanation_2);
+        final Resources res = SubscriptionManager.getResourcesForSubId(getContext(), mSubId);
+        String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
+                res.getString(R.string.wifi_calling_off_explanation_2));
         mEmptyView.setText(emptyViewText);
 
         mSwitchBar = getView().findViewById(R.id.switch_bar);

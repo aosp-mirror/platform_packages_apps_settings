@@ -59,7 +59,6 @@
     <dimen name="color_mode_preview_height">320dp</dimen>
 
     <dimen name="ring_progress_bar_thickness">4dp</dimen>
-    <dimen name="settings_side_margin">0dip</dimen>
 
     <!-- Weight of the left pane in a multi-pane preference layout. -->
     <integer name="preferences_left_pane_weight">4</integer>
@@ -105,9 +104,11 @@
     <dimen name="search_bar_text_size">16dp</dimen>
     <dimen name="search_bar_card_elevation">2dp</dimen>
     <dimen name="search_bar_content_inset">64dp</dimen>
-    <dimen name="search_bar_avatar_size">32dp</dimen>
-    <dimen name="search_bar_avatar_start_margin">4dp</dimen>
-    <dimen name="search_bar_avatar_end_margin">16dp</dimen>
+    <dimen name="search_bar_avatar_end_padding">16dp</dimen>
+    <!-- 32dp (avatar size) + 16 dp (search_bar_avatar_end_padding) -->
+    <dimen name="search_bar_avatar_width">48dp</dimen>
+    <!-- (search_bar_height 48dp - avatar size 32dp) / 2  -->
+    <dimen name="search_bar_avatar_top_bottom_padding">8dp</dimen>
 
     <!-- Dimensions for Wifi Assistant Card -->
     <dimen name="wifi_assistant_padding_top_bottom">16dp</dimen>

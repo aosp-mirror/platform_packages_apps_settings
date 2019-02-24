@@ -18,11 +18,17 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +39,7 @@ import android.telephony.TelephonyManager;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.net.DataUsageController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +49,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class DataUsagePreferenceControllerTest {
@@ -99,6 +107,20 @@ public class DataUsagePreferenceControllerTest {
     @Test
     public void updateState_invalidSubId_disabled() {
         mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateState_noUsageData_shouldDisablePreference() throws Exception {
+        final NetworkStatsManager networkStatsManager = mock(NetworkStatsManager.class);
+        when(networkStatsManager.querySummaryForDevice(anyInt() /* networkType */,
+            anyString() /* subscriberId */, anyLong() /* startTime */, anyLong() /* endTime */))
+            .thenReturn(mock(NetworkStats.Bucket.class));
+        ReflectionHelpers.setField(
+            mController, "mDataUsageInfo", new DataUsageController.DataUsageInfo());
 
         mController.updateState(mPreference);
 

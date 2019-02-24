@@ -93,8 +93,7 @@ public class WifiSlice implements CustomSliceable {
         final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
                 null /* actionTitle */, isWifiEnabled);
 
-        final ListBuilder listBuilder = new ListBuilder(mContext, WIFI_SLICE_URI,
-                ListBuilder.INFINITY)
+        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(title)
