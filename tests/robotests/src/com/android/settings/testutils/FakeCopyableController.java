@@ -19,9 +19,8 @@ package com.android.settings.testutils;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.slices.Copyable;
 
-public class FakeCopyableController extends BasePreferenceController implements Copyable {
+public class FakeCopyableController extends BasePreferenceController {
 
     public FakeCopyableController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -38,6 +37,7 @@ public class FakeCopyableController extends BasePreferenceController implements 
     }
 
     @Override
-    public void copy() {
+    public boolean isCopyableSlice() {
+        return true;
     }
 }

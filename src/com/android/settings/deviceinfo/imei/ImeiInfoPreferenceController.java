@@ -29,7 +29,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.slices.Copyable;
+import com.android.settings.slices.Sliceable;
 import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Controller that manages preference for single and multi sim devices.
  */
-public class ImeiInfoPreferenceController extends BasePreferenceController implements Copyable {
+public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private final boolean mIsMultiSim;
     private final TelephonyManager mTelephonyManager;
@@ -106,8 +106,13 @@ public class ImeiInfoPreferenceController extends BasePreferenceController imple
     }
 
     @Override
+    public boolean isCopyableSlice() {
+        return true;
+    }
+
+    @Override
     public void copy() {
-        Copyable.setCopyContent(mContext, getSummary(), mContext.getText(R.string.status_imei));
+        Sliceable.setCopyContent(mContext, getSummary(), mContext.getText(R.string.status_imei));
     }
 
     private void updatePreference(Preference preference, int simSlot) {
