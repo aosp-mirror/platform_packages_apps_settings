@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,7 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.KernelVersionDialogController
-        .KERNEL_VERSION_VALUE_ID;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
@@ -29,33 +25,27 @@ import com.android.settingslib.DeviceInfoUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class KernelVersionDialogControllerTest {
+public class KernelVersionPreferenceControllerTest {
 
-    @Mock
-    private FirmwareVersionDialogFragment mDialog;
 
     private Context mContext;
-    private KernelVersionDialogController mController;
+    private KernelVersionPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        when(mDialog.getContext()).thenReturn(mContext);
-        mController = new KernelVersionDialogController(mDialog);
+        mController = new KernelVersionPreferenceController(mContext, "key");
     }
 
     @Test
-    public void initialize_shouldUpdateKernelVersionToDialog() {
-        mController.initialize();
-
-        verify(mDialog)
-            .setText(KERNEL_VERSION_VALUE_ID, DeviceInfoUtils.getFormattedKernelVersion(mContext));
+    public void getSummary_shouldGetKernalVersion() {
+        assertThat(mController.getSummary()).isEqualTo(
+                DeviceInfoUtils.getFormattedKernelVersion(mContext));
     }
 }
