@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,6 +24,8 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -59,9 +62,25 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     final Map<String, Bitmap> mIconCache;
     private CachedBluetoothDevice mCachedDevice;
+    @VisibleForTesting
+    BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting
+    Handler mHandler = new Handler(Looper.getMainLooper());
+    @VisibleForTesting
+    final BluetoothAdapter.MetadataListener mMetadataListener =
+            new BluetoothAdapter.MetadataListener() {
+                @Override
+                public void onMetadataChanged(BluetoothDevice device, int key, String value) {
+                    super.onMetadataChanged(device, key, value);
+                    Log.i(TAG, String.format("Metadata updated in Device %s: %d = %s.", device, key,
+                            value));
+                    refresh();
+                }
+            };
 
     public AdvancedBluetoothDetailsHeaderController(Context context, String prefKey) {
         super(context, prefKey);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mIconCache = new HashMap<>();
     }
 
@@ -84,11 +103,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @Override
     public void onStart() {
         mCachedDevice.registerCallback(this::onDeviceAttributesChanged);
+        mBluetoothAdapter.registerMetadataListener(mCachedDevice.getDevice(), mMetadataListener,
+                mHandler);
     }
 
     @Override
     public void onStop() {
         mCachedDevice.unregisterCallback(this::onDeviceAttributesChanged);
+        mBluetoothAdapter.unregisterMetadataListener(mCachedDevice.getDevice());
 
         // Destroy icon bitmap associated with this header
         for (Bitmap bitmap : mIconCache.values()) {
