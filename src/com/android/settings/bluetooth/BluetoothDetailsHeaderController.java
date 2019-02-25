@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
@@ -48,6 +49,12 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
         super(context, fragment, device, lifecycle);
         mLocalManager = bluetoothManager;
         mDeviceManager = mLocalManager.getCachedDeviceManager();
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return !Utils.getBooleanMetaData(mCachedDevice.getDevice(),
+                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET);
     }
 
     @Override
