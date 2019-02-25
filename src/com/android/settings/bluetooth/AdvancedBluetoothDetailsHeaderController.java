@@ -18,16 +18,19 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -37,20 +40,29 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.LayoutPreference;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class adds a header with device name and status (connected/disconnected, etc.).
  */
 public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, CachedBluetoothDevice.Callback {
+    private static final String TAG = "AdvancedBtHeaderCtrl";
 
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
+    @VisibleForTesting
+    final Map<String, Bitmap> mIconCache;
     private CachedBluetoothDevice mCachedDevice;
 
     public AdvancedBluetoothDetailsHeaderController(Context context, String prefKey) {
         super(context, prefKey);
+        mIconCache = new HashMap<>();
     }
 
     @Override
@@ -65,6 +77,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         super.displayPreference(screen);
         mLayoutPreference = screen.findPreference(getPreferenceKey());
         mLayoutPreference.setVisible(isAvailable());
+
         refresh();
     }
 
@@ -76,6 +89,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @Override
     public void onStop() {
         mCachedDevice.unregisterCallback(this::onDeviceAttributesChanged);
+
+        // Destroy icon bitmap associated with this header
+        for (Bitmap bitmap : mIconCache.values()) {
+            if (bitmap != null) {
+                bitmap.recycle();
+            }
+        }
+        mIconCache.clear();
     }
 
     public void init(CachedBluetoothDevice cachedBluetoothDevice) {
@@ -140,8 +161,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         final String iconUri = Utils.getStringMetaData(bluetoothDevice, iconMetaKey);
         if (iconUri != null) {
             final ImageView imageView = linearLayout.findViewById(R.id.header_icon);
-            final IconCompat iconCompat = IconCompat.createWithContentUri(iconUri);
-            imageView.setImageBitmap(iconCompat.getBitmap());
+            updateIcon(imageView, iconUri);
         }
 
         final int batteryLevel = Utils.getIntMetaData(bluetoothDevice, batteryMetaKey);
@@ -181,9 +201,33 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 BluetoothDevice.METADATA_MAIN_ICON);
         if (iconUri != null) {
             final ImageView imageView = linearLayout.findViewById(R.id.header_icon);
-            final IconCompat iconCompat = IconCompat.createWithContentUri(iconUri);
-            imageView.setImageBitmap(iconCompat.getBitmap());
+            updateIcon(imageView, iconUri);
         }
+    }
+
+    /**
+     * Update icon by {@code iconUri}. If icon exists in cache, use it; otherwise extract it
+     * from uri in background thread and update it in main thread.
+     */
+    @VisibleForTesting
+    void updateIcon(ImageView imageView, String iconUri) {
+        if (mIconCache.containsKey(iconUri)) {
+            imageView.setImageBitmap(mIconCache.get(iconUri));
+            return;
+        }
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            try {
+                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(
+                        mContext.getContentResolver(), Uri.parse(iconUri));
+                ThreadUtils.postOnMainThread(() -> {
+                    mIconCache.put(iconUri, bitmap);
+                    imageView.setImageBitmap(bitmap);
+                });
+            } catch (IOException e) {
+                Log.e(TAG, "Failed to get bitmap for: " + iconUri);
+            }
+        });
     }
 
     @Override
