@@ -17,30 +17,40 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.when;
+
+import android.bluetooth.BluetoothDevice;
 import android.net.Uri;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothFeatureProviderImplTest {
-    private static final String PARAMETER_KEY = "addr";
-    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+    private static final String SETTINGS_URI = "content://test.provider/settings_uri";
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
+
+    @Mock
+    private BluetoothDevice mBluetoothDevice;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
         mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(
                 RuntimeEnvironment.application);
     }
 
     @Test
     public void getBluetoothDeviceSettingsUri_containCorrectMacAddress() {
-        final Uri uri = mBluetoothFeatureProvider.getBluetoothDeviceSettingsUri(MAC_ADDRESS);
-        assertThat(uri.getQueryParameterNames()).containsExactly(PARAMETER_KEY);
-        assertThat(uri.getQueryParameter(PARAMETER_KEY)).isEqualTo(MAC_ADDRESS);
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_ENHANCED_SETTINGS_UI_URI)).thenReturn(SETTINGS_URI);
+        final Uri uri = mBluetoothFeatureProvider.getBluetoothDeviceSettingsUri(mBluetoothDevice);
+        assertThat(uri.toString()).isEqualTo(SETTINGS_URI);
     }
 }
