@@ -224,13 +224,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         } else {
             mTitle.setText(R.string.wifi_dpp_scan_qr_code);
 
-            String description;
-            if (TextUtils.isEmpty(mSsid)) {
-                description = getString(R.string.wifi_dpp_scan_qr_code_join_unknown_network, mSsid);
-            } else {
-                description = getString(R.string.wifi_dpp_scan_qr_code_join_network, mSsid);
-            }
-            mSummary.setText(description);
+            updateEnrolleeSummary();
         }
 
         mErrorMessage = view.findViewById(R.id.error_message);
@@ -410,6 +404,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     if (!mIsConfiguratorMode) {
                         mProgressBar.setVisibility(View.VISIBLE);
                         startWifiDppEnrolleeInitiator((WifiQrCode)msg.obj);
+                        updateEnrolleeSummary();
                     }
                     break;
 
@@ -453,6 +448,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
             Log.e(TAG, "Invalid networkId " + newNetworkId);
             mLatestStatusCode = EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_GENERIC;
+            updateEnrolleeSummary();
             mProgressBar.setVisibility(View.INVISIBLE);
             showErrorMessage(getString(R.string.wifi_dpp_check_connection_try_again));
             restartCamera();
@@ -520,6 +516,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
 
             mLatestStatusCode = code;
+            updateEnrolleeSummary();
             mProgressBar.setVisibility(View.INVISIBLE);
             restartCamera();
         }
@@ -577,5 +574,19 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
 
         mCamera.start(surfaceTexture);
+    }
+
+    private void updateEnrolleeSummary() {
+        if (isGoingInitiator()) {
+            mSummary.setText(R.string.wifi_dpp_connecting);
+        } else {
+            String description;
+            if (TextUtils.isEmpty(mSsid)) {
+                description = getString(R.string.wifi_dpp_scan_qr_code_join_unknown_network, mSsid);
+            } else {
+                description = getString(R.string.wifi_dpp_scan_qr_code_join_network, mSsid);
+            }
+            mSummary.setText(description);
+        }
     }
 }
