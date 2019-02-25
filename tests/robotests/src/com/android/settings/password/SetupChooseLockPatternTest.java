@@ -38,6 +38,7 @@ import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
@@ -57,7 +58,7 @@ import org.robolectric.util.ReflectionHelpers.ClassParameter;
 import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class})
+@Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class, ShadowLockPatternUtils.class})
 public class SetupChooseLockPatternTest {
 
     private SetupChooseLockPattern mActivity;
