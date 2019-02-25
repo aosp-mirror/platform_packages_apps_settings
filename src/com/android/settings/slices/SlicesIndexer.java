@@ -71,7 +71,7 @@ class SlicesIndexer implements Runnable {
         long startTime = System.currentTimeMillis();
         database.beginTransaction();
         try {
-            mHelper.reconstruct(mHelper.getWritableDatabase());
+            mHelper.reconstruct(database);
             List<SliceData> indexData = getSliceData();
             insertSliceData(database, indexData);
 
