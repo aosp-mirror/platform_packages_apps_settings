@@ -371,9 +371,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         // Update whether the forget button should be displayed.
         mButtonsPref.setButton1Visible(canForgetNetwork());
-
-        // TODO(b/124700405): Check if showing share button is fine to added for saved network
-        mButtonsPref.setButton3Visible(false);
     }
 
     private void updateLiveNetworkInfo() {
