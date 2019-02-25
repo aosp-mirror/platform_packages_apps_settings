@@ -36,7 +36,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.deviceinfo.DeviceModelPreferenceController;
+import com.android.settings.deviceinfo.HardwareInfoPreferenceController;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
@@ -107,7 +107,7 @@ public class DeviceInfoSlice implements CustomSliceable {
     }
 
     private CharSequence getDeviceModel() {
-        return DeviceModelPreferenceController.getDeviceModel();
+        return HardwareInfoPreferenceController.getDeviceModel();
     }
 
     @VisibleForTesting
