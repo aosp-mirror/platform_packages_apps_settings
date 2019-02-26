@@ -121,7 +121,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                 FeatureFlags.SLICE_INJECTION);
 
         use(BlockingSlicePrefController.class).setSliceUri(injectionEnabled
-                ? featureProvider.getBluetoothDeviceSettingsUri(mDeviceAddress)
+                ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
     }
 

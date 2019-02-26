@@ -238,22 +238,38 @@ public class SliceTester {
      * @param title Title for asserting.
      */
     public static void assertAnySliceItemContainsTitle(List<SliceItem> sliceItems, String title) {
-        boolean hasTitle = false;
+        assertThat(hasText(sliceItems, title, HINT_TITLE)).isTrue();
+    }
+
+    /**
+     * Assert any slice item contains subtitle.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param subtitle Subtitle for asserting.
+     */
+    public static void assertAnySliceItemContainsSubtitle(List<SliceItem> sliceItems,
+            String subtitle) {
+        // Subtitle has no hints
+        assertThat(hasText(sliceItems, subtitle, null /* hints */)).isTrue();
+    }
+
+    private static boolean hasText(List<SliceItem> sliceItems, String text, String hints) {
+        boolean hasText = false;
         for (SliceItem item : sliceItems) {
-            List<SliceItem> titleItems = SliceQuery.findAll(item, FORMAT_TEXT, HINT_TITLE,
+            List<SliceItem> textItems = SliceQuery.findAll(item, FORMAT_TEXT, hints,
                     null /* non-hints */);
-            if (titleItems == null) {
+            if (textItems == null) {
                 continue;
             }
 
-            for (SliceItem subTitleItem : titleItems) {
-                if (TextUtils.equals(subTitleItem.getText(), title)) {
-                    hasTitle = true;
+            for (SliceItem textItem : textItems) {
+                if (TextUtils.equals(textItem.getText(), text)) {
+                    hasText = true;
                     break;
                 }
             }
         }
-        assertThat(hasTitle).isTrue();
+        return hasText;
     }
 
     private static void assertKeywords(SliceMetadata metadata, SliceData data) {

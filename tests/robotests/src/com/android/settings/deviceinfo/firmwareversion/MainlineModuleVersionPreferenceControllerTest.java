@@ -16,10 +16,14 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -38,78 +42,75 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class ModuleVersionDialogControllerTest {
+public class MainlineModuleVersionPreferenceControllerTest {
 
-    @Mock
-    private FirmwareVersionDialogFragment mDialog;
     @Mock
     private PackageManager mPackageManager;
 
     private Context mContext;
-    private ModuleVersionDialogController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mDialog.getContext()).thenReturn(mContext);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mController = new ModuleVersionDialogController(mDialog);
+
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MAINLINE_MODULE, true);
     }
 
     @Test
-    public void initialize_featureDisabled_shouldRemoveSettingFromDialog() {
+    public void getAvailabilityStatus_featureDisabled_unavailable() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MAINLINE_MODULE, false);
 
-        mController.initialize();
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
 
-        verify(mDialog).removeSettingFromScreen(mController.MODULE_VERSION_LABEL_ID);
-        verify(mDialog).removeSettingFromScreen(mController.MODULE_VERSION_VALUE_ID);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void initialize_noMainlineModuleProvider_shouldRemoveSettingFromDialog() {
+    public void getAvailabilityStatus_noMainlineModuleProvider_unavailable() {
         when(mContext.getString(
-            com.android.internal.R.string.config_defaultModuleMetadataProvider)).thenReturn(null);
+                com.android.internal.R.string.config_defaultModuleMetadataProvider)).thenReturn(
+                null);
 
-        mController.initialize();
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
 
-        verify(mDialog).removeSettingFromScreen(mController.MODULE_VERSION_LABEL_ID);
-        verify(mDialog).removeSettingFromScreen(mController.MODULE_VERSION_VALUE_ID);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void initialize_noMainlineModulePackageInfo_shouldRemoveSettingFromDialog()
-            throws PackageManager.NameNotFoundException {
+    public void getAvailabilityStatus_noMainlineModulePackageInfo_unavailable() throws Exception {
+
         final String provider = "test.provider";
         when(mContext.getString(
-            com.android.internal.R.string.config_defaultModuleMetadataProvider))
-            .thenReturn(provider);
+                com.android.internal.R.string.config_defaultModuleMetadataProvider))
+                .thenReturn(provider);
         when(mPackageManager.getPackageInfo(eq(provider), anyInt()))
-            .thenThrow(new PackageManager.NameNotFoundException());
+                .thenThrow(new PackageManager.NameNotFoundException());
 
-        mController.initialize();
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
 
-        verify(mDialog).removeSettingFromScreen(mController.MODULE_VERSION_LABEL_ID);
-        verify(mDialog).removeSettingFromScreen(mController.MODULE_VERSION_VALUE_ID);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void initialize_hasMainlineModulePackageInfo_shouldshouldSetDialogTextToMainlineVersion()
-            throws PackageManager.NameNotFoundException {
+    public void getAvailabilityStatus_hasMainlineModulePackageInfo_available() throws Exception {
         final String provider = "test.provider";
         final String version = "test version 123";
         final PackageInfo info = new PackageInfo();
         info.versionName = version;
         when(mContext.getString(
-            com.android.internal.R.string.config_defaultModuleMetadataProvider))
-            .thenReturn(provider);
+                com.android.internal.R.string.config_defaultModuleMetadataProvider))
+                .thenReturn(provider);
         when(mPackageManager.getPackageInfo(eq(provider), anyInt())).thenReturn(info);
 
-        mController.initialize();
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
 
-        verify(mDialog).setText(mController.MODULE_VERSION_VALUE_ID, version);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
 }

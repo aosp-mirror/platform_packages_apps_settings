@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
 import android.net.Uri;
 
 /**
@@ -25,8 +26,8 @@ public interface BluetoothFeatureProvider {
 
     /**
      * Get the {@link Uri} that represents extra settings for a specific bluetooth device
-     * @param macAddress Bluetooth mac address
+     * @param bluetoothDevice bluetooth device
      * @return {@link Uri} for extra settings
      */
-    Uri getBluetoothDeviceSettingsUri(String macAddress);
+    Uri getBluetoothDeviceSettingsUri(BluetoothDevice bluetoothDevice);
 }

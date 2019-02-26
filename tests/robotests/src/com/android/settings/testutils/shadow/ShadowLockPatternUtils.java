@@ -32,6 +32,11 @@ public class ShadowLockPatternUtils {
     private static boolean sDeviceEncryptionEnabled;
 
     @Implementation
+    protected boolean hasSecureLockScreen() {
+        return true;
+    }
+
+    @Implementation
     protected boolean isSecure(int id) {
         return true;
     }

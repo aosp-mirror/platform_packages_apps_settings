@@ -34,6 +34,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.content.ComponentName;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -61,10 +62,14 @@ public class ChooseLockGenericControllerTest {
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
 
+    @Mock
+    private LockPatternUtils mLockPatternUtils;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        when(mLockPatternUtils.hasSecureLockScreen()).thenReturn(true);
         mController = createController(PASSWORD_COMPLEXITY_NONE);
         SettingsShadowResources.overrideResource(R.bool.config_hide_none_security_option, false);
         SettingsShadowResources.overrideResource(R.bool.config_hide_swipe_security_option, false);
@@ -266,6 +271,7 @@ public class ChooseLockGenericControllerTest {
                 0 /* userId */,
                 minPasswordComplexity,
                 mDevicePolicyManager,
-                mManagedLockPasswordProvider);
+                mManagedLockPasswordProvider,
+                mLockPatternUtils);
     }
 }

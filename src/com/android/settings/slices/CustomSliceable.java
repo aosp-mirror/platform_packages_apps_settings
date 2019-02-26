@@ -55,6 +55,11 @@ import java.lang.reflect.InvocationTargetException;
 public interface CustomSliceable extends Sliceable {
 
     /**
+     * The color representing not to be tinted for the slice.
+     */
+    int COLOR_NOT_TINTED = -1;
+
+    /**
      * @return an complete instance of the {@link Slice}.
      */
     Slice getSlice();

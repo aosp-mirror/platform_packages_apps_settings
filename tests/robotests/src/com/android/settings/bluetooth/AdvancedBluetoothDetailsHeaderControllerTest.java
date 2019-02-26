@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -65,6 +66,8 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     private ImageView mImageView;
     @Mock
     private CachedBluetoothDevice mCachedDevice;
+    @Mock
+    private BluetoothAdapter mBluetoothAdapter;
     private AdvancedBluetoothDetailsHeaderController mController;
     private LayoutPreference mLayoutPreference;
 
@@ -78,6 +81,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
         mLayoutPreference = new LayoutPreference(mContext,
                 LayoutInflater.from(mContext).inflate(R.layout.advanced_bt_entity_header, null));
         mController.mLayoutPreference = mLayoutPreference;
+        mController.mBluetoothAdapter = mBluetoothAdapter;
         when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
     }
 
@@ -157,6 +161,21 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
         mController.updateIcon(mImageView, ICON_URI);
 
         verify(mImageView).setImageBitmap(mBitmap);
+    }
+
+    @Test
+    public void onStart_registerCallback() {
+        mController.onStart();
+
+        verify(mBluetoothAdapter).registerMetadataListener(mBluetoothDevice,
+                mController.mMetadataListener, mController.mHandler);
+    }
+
+    @Test
+    public void onStop_unregisterCallback() {
+        mController.onStop();
+
+        verify(mBluetoothAdapter).unregisterMetadataListener(mBluetoothDevice);
     }
 
     private void assertBatteryLevel(LinearLayout linearLayout, int batteryLevel) {

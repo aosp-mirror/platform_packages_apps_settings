@@ -77,7 +77,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(FirmwareVersionPreferenceController.class).setHost(this /* parent */);
         use(DeviceModelPreferenceController.class).setHost(this /* parent */);
         use(ImeiInfoPreferenceController.class).setHost(this /* parent */);
         use(DeviceNamePreferenceController.class).setHost(this /* parent */);

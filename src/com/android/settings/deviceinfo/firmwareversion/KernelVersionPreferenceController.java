@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,24 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import androidx.annotation.VisibleForTesting;
+import android.content.Context;
 
-import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
 
-public class KernelVersionDialogController {
+public class KernelVersionPreferenceController extends BasePreferenceController {
 
-    @VisibleForTesting
-    static int KERNEL_VERSION_VALUE_ID = R.id.kernel_version_value;
-
-    private final FirmwareVersionDialogFragment mDialog;
-
-    public KernelVersionDialogController(FirmwareVersionDialogFragment dialog) {
-        mDialog = dialog;
+    public KernelVersionPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
-    /**
-     * Updates kernel version to the dialog.
-     */
-    public void initialize() {
-        mDialog.setText(KERNEL_VERSION_VALUE_ID,
-                DeviceInfoUtils.getFormattedKernelVersion(mDialog.getContext()));
+    @Override
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return DeviceInfoUtils.getFormattedKernelVersion(mContext);
     }
 }
