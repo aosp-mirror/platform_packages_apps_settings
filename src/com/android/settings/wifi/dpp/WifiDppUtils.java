@@ -70,7 +70,7 @@ public class WifiDppUtils {
     /** The data corresponding to {@code WifiConfiguration} networkId */
     public static final String EXTRA_WIFI_NETWORK_ID = "networkId";
 
-    /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE} to
+    /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI} to
      * indicate test mode UI should be shown. Test UI does not make API calls. Value is a boolean.*/
     public static final String EXTRA_TEST = "test";
 

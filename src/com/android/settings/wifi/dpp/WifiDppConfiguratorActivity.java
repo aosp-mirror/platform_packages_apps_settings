@@ -19,6 +19,7 @@ package com.android.settings.wifi.dpp;
 import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -50,8 +51,8 @@ import java.util.List;
  * {@code WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY}
  * {@code WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID}
  *
- * For intent action {@link Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE}, specify Wi-Fi (DPP)
- * QR code in {@code WifiDppUtils.EXTRA_QR_CODE}
+ * For intent action {@link Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI}, specify Wi-Fi
+ * Easy Connect bootstrapping information string in Intent's data URI.
  */
 public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiNetworkConfig.Retriever,
@@ -80,7 +81,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     /** The Wi-Fi network which will be configured */
     private WifiNetworkConfig mWifiNetworkConfig;
 
-    /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE */
+    /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_EASY_CONNECT_URI */
     private WifiQrCode mWifiDppQrCode;
 
     /** Secret extra that allows fake networks to show in UI for testing purposes */
@@ -144,10 +145,11 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     showQrCodeGeneratorFragment();
                 }
                 break;
-            case Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE:
-                String qrCode = intent.getStringExtra(Settings.EXTRA_QR_CODE);
+            case Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_URI:
+                final Uri uri = intent.getData();
+                final String uriString = (uri == null) ? null : uri.toString();
                 mIsTest = intent.getBooleanExtra(WifiDppUtils.EXTRA_TEST, false);
-                mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(qrCode);
+                mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(uriString);
                 final boolean isDppSupported = WifiDppUtils.isWifiDppEnabled(this);
                 if (!isDppSupported) {
                     Log.d(TAG, "Device doesn't support Wifi DPP");

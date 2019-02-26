@@ -28,6 +28,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import android.provider.Settings;
 import androidx.fragment.app.FragmentManager;
@@ -89,8 +90,8 @@ public class WifiDppChooseSavedWifiNetworkFragmentTest {
 
     @Test
     public void clickCancelButton_processWifiDppQrCodeIntent_shouldFinish() {
-        final Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE);
-        intent.putExtra(Settings.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
+        final Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_URI);
+        intent.setData(Uri.parse(VALID_WIFI_DPP_QR_CODE));
         final WifiDppConfiguratorActivity hostActivity = mActivityRule.launchActivity(intent);
 
         onView(withText(resourceString(CANCEL))).perform(click());

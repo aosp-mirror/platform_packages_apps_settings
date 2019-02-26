@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -100,12 +101,10 @@ public class WifiNetworkListFragmentTest {
                 .post(() -> mWifiNetworkListFragment.onWifiStateChanged(state));
     }
 
-    /** Launch the activity via an Intent with a String extra. */
-    private void launchActivity(String extraName, String extraValue) {
-        final Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE);
-        if (extraName != null && extraValue != null) {
-            intent.putExtra(extraName, extraValue);
-        }
+    /** Launch the activity via an Intent with data Uri */
+    private void launchActivity(String uriString) {
+        final Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_URI);
+        intent.setData(Uri.parse(uriString));
         mActivityRule.launchActivity(intent);
 
         verify(mWifiTracker).getManager();
@@ -166,7 +165,7 @@ public class WifiNetworkListFragmentTest {
         setupConnectedAccessPoint();
         when(mWifiTracker.isConnected()).thenReturn(true);
 
-        launchActivity(Settings.EXTRA_QR_CODE, TEST_DPP_URL);
+        launchActivity(TEST_DPP_URL);
         callOnWifiStateChanged(WifiManager.WIFI_STATE_ENABLED);
 
         onView(withText(resourceString(WIFI_DISPLAY_STATUS_CONNECTED))).check(
