@@ -31,12 +31,11 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.slices.Copyable;
+import com.android.settings.slices.Sliceable;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
-public class FirmwareVersionDetailPreferenceController extends BasePreferenceController implements
-        Copyable {
+public class FirmwareVersionDetailPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "firmwareDialogCtrl";
     private static final int DELAY_TIMER_MILLIS = 500;
@@ -119,7 +118,7 @@ public class FirmwareVersionDetailPreferenceController extends BasePreferenceCon
 
     @Override
     public void copy() {
-        Copyable.setCopyContent(mContext, getSummary(),
+        Sliceable.setCopyContent(mContext, getSummary(),
                 mContext.getText(R.string.firmware_version));
     }
 }

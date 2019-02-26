@@ -93,7 +93,7 @@ public class SliceBuilderUtils {
             return buildUnavailableSlice(context, sliceData);
         }
 
-        if (controller instanceof Copyable) {
+        if (controller.isCopyableSlice()) {
             return buildCopyableSlice(context, sliceData, controller);
         }
 

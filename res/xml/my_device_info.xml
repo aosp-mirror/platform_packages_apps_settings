@@ -105,7 +105,8 @@
         settings:keywords="@string/keywords_model_and_hardware"
         android:summary="@string/summary_placeholder"
         settings:allowDynamicSummaryInSlice="true"
-        settings:controller="com.android.settings.deviceinfo.DeviceModelPreferenceController"/>
+        android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
+        settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
 
     <!-- IMEI -->
     <Preference

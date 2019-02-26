@@ -35,14 +35,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.slices.Copyable;
 import com.android.settingslib.DeviceInfoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhoneNumberPreferenceController extends BasePreferenceController implements
-        Copyable {
+public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     private final static String KEY_PHONE_NUMBER = "phone_number";
 
@@ -95,6 +93,11 @@ public class PhoneNumberPreferenceController extends BasePreferenceController im
 
     @Override
     public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isCopyableSlice() {
         return true;
     }
 

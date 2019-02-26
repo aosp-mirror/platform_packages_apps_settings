@@ -17,11 +17,8 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -31,19 +28,12 @@ import com.android.settingslib.DeviceInfoUtils;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-public class DeviceModelPreferenceController extends BasePreferenceController {
-
+public class HardwareInfoPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "DeviceModelPrefCtrl";
 
-    private Fragment mHost;
-
-    public DeviceModelPreferenceController(Context context, String key) {
+    public HardwareInfoPreferenceController(Context context, String key) {
         super(context, key);
-    }
-
-    public void setHost(Fragment fragment) {
-        mHost = fragment;
     }
 
     @Override
@@ -54,27 +44,12 @@ public class DeviceModelPreferenceController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_device_model)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+                ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public CharSequence getSummary() {
         return mContext.getResources().getString(R.string.model_summary, getDeviceModel());
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            return false;
-        }
-        final HardwareInfoDialogFragment fragment = HardwareInfoDialogFragment.newInstance();
-        fragment.show(mHost.getFragmentManager(), HardwareInfoDialogFragment.TAG);
-        return true;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return true;
     }
 
     public static String getDeviceModel() {

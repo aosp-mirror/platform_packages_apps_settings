@@ -16,7 +16,15 @@
 
 package com.android.settings.slices;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.IntentFilter;
+import android.widget.Toast;
+
+import com.android.settings.R;
 
 /**
  * A collection of API making a PreferenceController "sliceable"
@@ -54,5 +62,33 @@ public interface Sliceable {
      */
     default boolean hasAsyncUpdate() {
         return false;
+    }
+
+    /**
+     * Copy the key slice information to the clipboard.
+     * It is highly recommended to show the toast to notify users when implemented this function.
+     */
+    default void copy() {
+    }
+
+    /**
+     * Whether or not it's a copyable slice.
+     */
+    default boolean isCopyableSlice() {
+        return false;
+    }
+
+    /**
+     * Set the copy content to the clipboard and show the toast.
+     */
+    static void setCopyContent(Context context, CharSequence copyContent,
+            CharSequence messageTitle) {
+        final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(
+                CLIPBOARD_SERVICE);
+        final ClipData clip = ClipData.newPlainText("text", copyContent);
+        clipboard.setPrimaryClip(clip);
+
+        final String toast = context.getString(R.string.copyable_slice_toast, messageTitle);
+        Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
     }
 }

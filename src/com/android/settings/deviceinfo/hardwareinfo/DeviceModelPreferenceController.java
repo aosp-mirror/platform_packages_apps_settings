@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,29 @@
  * limitations under the License.
  */
 
-package com.android.settings.testutils;
+package com.android.settings.deviceinfo.hardwareinfo;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.deviceinfo.HardwareInfoPreferenceController;
 
-public class FakeCopyableController extends BasePreferenceController {
+public class DeviceModelPreferenceController extends HardwareInfoPreferenceController {
 
-    public FakeCopyableController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
+    public DeviceModelPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        final int availability = super.getAvailabilityStatus();
+        if (availability == AVAILABLE_UNSEARCHABLE) {
+            return AVAILABLE;
+        }
+        return availability;
     }
 
     @Override
     public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public boolean isCopyableSlice() {
         return true;
     }
 }
