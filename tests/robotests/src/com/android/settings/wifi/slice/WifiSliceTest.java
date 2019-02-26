@@ -21,6 +21,7 @@ import static android.app.slice.SliceItem.FORMAT_SLICE;
 
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
+import static com.android.settings.wifi.slice.WifiSlice.WifiScanWorker;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -32,6 +33,8 @@ import static org.mockito.Mockito.verify;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -44,24 +47,33 @@ import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
+import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.testutils.SliceTester;
+import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiSliceTest {
 
+    private static final String AP1_NAME = "ap1";
+    private static final String AP2_NAME = "ap2";
+
     private Context mContext;
     private ContentResolver mResolver;
     private WifiManager mWifiManager;
     private WifiSlice mWifiSlice;
-    private WifiSlice.WifiScanWorker mWifiScanWorker;
+    private WifiScanWorker mWifiScanWorker;
 
     @Before
     public void setUp() {
@@ -75,7 +87,7 @@ public class WifiSliceTest {
         mWifiManager.setWifiEnabled(true);
 
         mWifiSlice = new WifiSlice(mContext);
-        mWifiScanWorker = new WifiSlice.WifiScanWorker(mContext, WIFI_SLICE_URI);
+        mWifiScanWorker = new WifiScanWorker(mContext, WIFI_SLICE_URI);
     }
 
     @Test
@@ -122,6 +134,107 @@ public class WifiSliceTest {
                 mContext.getString(R.string.wifi_empty_list_wifi_on));
     }
 
+    private AccessPoint createAccessPoint(String name, boolean active, boolean reachable) {
+        final AccessPoint accessPoint = mock(AccessPoint.class);
+        doReturn(name).when(accessPoint).getConfigName();
+        doReturn(active).when(accessPoint).isActive();
+        doReturn(reachable).when(accessPoint).isReachable();
+        if (active) {
+            final NetworkInfo networkInfo = mock(NetworkInfo.class);
+            doReturn(networkInfo).when(accessPoint).getNetworkInfo();
+            doReturn(NetworkInfo.State.CONNECTED).when(networkInfo).getState();
+        }
+        return accessPoint;
+    }
+
+    private void setWorkerResults(AccessPoint... accessPoints) {
+        final ArrayList<AccessPoint> results = new ArrayList<>();
+        for (AccessPoint ap : accessPoints) {
+            results.add(ap);
+        }
+        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(mWifiSlice.getUri());
+        doReturn(results).when(worker).getResults();
+    }
+
+    @Test
+    @Config(shadows = ShadowSliceBackgroundWorker.class)
+    public void getWifiSlice_noReachableAp_shouldReturnLoadingRow() {
+        setWorkerResults(
+                createAccessPoint(AP1_NAME, false, false),
+                createAccessPoint(AP2_NAME, false, false));
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        final List<SliceItem> sliceItems = wifiSlice.getItems();
+
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP2_NAME);
+        // Has scanning text
+        SliceTester.assertAnySliceItemContainsSubtitle(sliceItems,
+                mContext.getString(R.string.wifi_empty_list_wifi_on));
+    }
+
+    @Test
+    @Config(shadows = ShadowSliceBackgroundWorker.class)
+    public void getWifiSlice_oneActiveAp_shouldReturnLoadingRow() {
+        setWorkerResults(createAccessPoint(AP1_NAME, true, true));
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        final List<SliceItem> sliceItems = wifiSlice.getItems();
+
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
+        // Has scanning text
+        SliceTester.assertAnySliceItemContainsSubtitle(sliceItems,
+                mContext.getString(R.string.wifi_empty_list_wifi_on));
+    }
+
+    @Test
+    @Config(shadows = ShadowSliceBackgroundWorker.class)
+    public void getWifiSlice_oneActiveApAndOneUnreachableAp_shouldReturnLoadingRow() {
+        setWorkerResults(
+                createAccessPoint(AP1_NAME, true, true),
+                createAccessPoint(AP2_NAME, false, false));
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        final List<SliceItem> sliceItems = wifiSlice.getItems();
+
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP2_NAME);
+        // Has scanning text
+        SliceTester.assertAnySliceItemContainsSubtitle(sliceItems,
+                mContext.getString(R.string.wifi_empty_list_wifi_on));
+    }
+
+    @Test
+    @Config(shadows = ShadowSliceBackgroundWorker.class)
+    public void getWifiSlice_oneReachableAp_shouldNotReturnLoadingRow() {
+        setWorkerResults(createAccessPoint(AP1_NAME, false, true));
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        final List<SliceItem> sliceItems = wifiSlice.getItems();
+
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
+        // No scanning text
+        SliceTester.assertNoSliceItemContainsSubtitle(sliceItems,
+                mContext.getString(R.string.wifi_empty_list_wifi_on));
+    }
+
+    @Test
+    @Config(shadows = ShadowSliceBackgroundWorker.class)
+    public void getWifiSlice_allReachableAps_shouldNotReturnLoadingRow() {
+        setWorkerResults(
+                createAccessPoint(AP1_NAME, false, true),
+                createAccessPoint(AP2_NAME, false, true));
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        final List<SliceItem> sliceItems = wifiSlice.getItems();
+
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP2_NAME);
+        // No scanning text
+        SliceTester.assertNoSliceItemContainsSubtitle(sliceItems,
+                mContext.getString(R.string.wifi_empty_list_wifi_on));
+    }
+
     @Test
     public void handleUriChange_updatesWifi() {
         final Intent intent = mWifiSlice.getIntent();
@@ -145,5 +258,15 @@ public class WifiSliceTest {
         mWifiScanWorker.onConnectedChanged();
 
         verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
+    }
+
+    @Implements(SliceBackgroundWorker.class)
+    public static class ShadowSliceBackgroundWorker {
+        private static WifiScanWorker mWifiScanWorker = mock(WifiScanWorker.class);
+
+        @Implementation
+        public static SliceBackgroundWorker getInstance(Uri uri) {
+            return mWifiScanWorker;
+        }
     }
 }
