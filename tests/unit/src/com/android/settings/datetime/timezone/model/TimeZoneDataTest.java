@@ -56,9 +56,6 @@ public class TimeZoneDataTest {
         */
         assertThat(mTimeZoneData.lookupCountryCodesForZoneId("Europe/Simferopol").isEmpty())
                 .isTrue();
-        // Metlakatla has the same time as Anchorage after 2015
-        assertThat(mTimeZoneData.lookupCountryCodesForZoneId("America/Metlakatla").isEmpty())
-                .isTrue();
         assertThat(mTimeZoneData.lookupCountryCodesForZoneId("Europe/London").isEmpty())
                 .isFalse();
         assertThat(mTimeZoneData.lookupCountryCodesForZoneId("America/Los_Angeles").isEmpty())
