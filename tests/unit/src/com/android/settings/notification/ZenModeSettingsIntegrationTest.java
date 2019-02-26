@@ -37,27 +37,29 @@ public class ZenModeSettingsIntegrationTest {
     @Test
     public void testZenModeSettingsPreferences() {
         launchZenSettings();
-        onView(withText("Behavior")).check(matches(isDisplayed()));
-        onView(withText("Turn on automatically")).check(matches(isDisplayed()));
+        onView(withText("Calls")).check(matches(isDisplayed()));
+        onView(withText("SMS, MMS, and messaging apps")).check(matches(isDisplayed()));
+        onView(withText("Restrict notifications")).check(matches(isDisplayed()));
+        onView(withText("Duration")).check(matches(isDisplayed()));
+        onView(withText("Schedules")).check(matches(isDisplayed()));
     }
 
     @Test
     public void testZenModeBehaviorPreferences() {
         launchZenBehaviorSettings();
-        onView(withText("Alarms")).check(matches(isDisplayed()));
-        onView(withText("Media and system feedback")).check(matches(isDisplayed()));
-        onView(withText("Reminders")).check(matches(isDisplayed()));
-        onView(withText("Events")).check(matches(isDisplayed()));
-        onView(withText("Messages")).check(matches(isDisplayed()));
         onView(withText("Calls")).check(matches(isDisplayed()));
-        onView(withText("Repeat callers")).check(matches(isDisplayed()));
+        onView(withText("SMS, MMS, and messaging apps")).check(matches(isDisplayed()));
+        onView(withText("Restrict notifications")).check(matches(isDisplayed()));
+        onView(withText("Duration")).check(matches(isDisplayed()));
+        onView(withText("Schedules")).check(matches(isDisplayed()));
     }
 
     @Test
     public void testZenModeAutomationPreferences() {
         launchZenAutomationSettings();
-        onView(withText("Weekend")).check(matches(isDisplayed()));
-        onView(withText("Add rule")).check(matches(isDisplayed()));
+        onView(withText("Sleeping")).check(matches(isDisplayed()));
+        onView(withText("Event")).check(matches(isDisplayed()));
+        onView(withText("Add more")).check(matches(isDisplayed()));
     }
 
     private void launchZenSettings() {
