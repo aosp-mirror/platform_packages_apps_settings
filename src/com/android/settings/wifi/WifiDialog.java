@@ -18,15 +18,16 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
-import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.wifi.AccessPoint;
@@ -39,6 +40,9 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
         }
 
         default void onSubmit(WifiDialog dialog) {
+        }
+
+        default void onScan(WifiDialog dialog, String ssid) {
         }
     }
 
@@ -80,18 +84,6 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, /* root */ null);
-        final ImageButton scannerButton = mView.findViewById(R.id.password_scanner_button);
-        if (scannerButton != null) {
-            scannerButton.setOnClickListener((View v) -> {
-                String ssid = null;
-                if (mAccessPoint != null) {
-                    ssid = mAccessPoint.getSsidStr();
-                }
-                // Launch QR code scanner to join a network.
-                getContext().startActivity(
-                        WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid));
-            });
-        }
         setView(mView);
         mController = new WifiConfigController(this, mView, mAccessPoint, mMode);
         super.onCreate(savedInstanceState);
@@ -106,6 +98,35 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
 
         if (mAccessPoint == null) {
             mController.hideForgetButton();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        View.OnClickListener onClickScannerButtonListener = v -> {
+            if (mListener == null) {
+                return;
+            }
+
+            String ssid = null;
+            if (mAccessPoint == null) {
+                final TextView ssidEditText = findViewById(R.id.ssid);
+                ssid = ssidEditText.getText().toString();
+            } else {
+                ssid = mAccessPoint.getSsidStr();
+            }
+            mListener.onScan(/* WifiDialog */ this, ssid);
+        };
+
+        final ImageButton ssidScannerButton = findViewById(R.id.ssid_scanner_button);
+        ssidScannerButton.setOnClickListener(onClickScannerButtonListener);
+
+        final ImageButton passwordScannerButton = findViewById(R.id.password_scanner_button);
+        passwordScannerButton.setOnClickListener(onClickScannerButtonListener);
+
+        if (mHideSubmitButton) {
+            ssidScannerButton.setVisibility(View.GONE);
+            passwordScannerButton.setVisibility(View.GONE);
         }
     }
 

@@ -228,7 +228,7 @@ public class WifiNetworkConfig {
     /**
      * This is a simplified method from {@code WifiConfigController.getConfig()}
      */
-    private WifiConfiguration getWifiConfigurationOrNull() {
+    WifiConfiguration getWifiConfigurationOrNull() {
         if (!isValidConfig(this)) {
             return null;
         }
