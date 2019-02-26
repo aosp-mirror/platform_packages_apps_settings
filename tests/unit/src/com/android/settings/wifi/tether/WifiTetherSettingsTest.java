@@ -56,7 +56,8 @@ public class WifiTetherSettingsTest {
         mTetherActivityIntent = new Intent()
                 .setClassName(mInstrumentation.getTargetContext().getPackageName(),
                         Settings.TetherSettingsActivity.class.getName())
-                .setPackage(mInstrumentation.getTargetContext().getPackageName());
+                .setPackage(mInstrumentation.getTargetContext().getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @After
@@ -69,7 +70,6 @@ public class WifiTetherSettingsTest {
         launchWifiTetherActivity();
         onView(withText("Hotspot name")).check(matches(isDisplayed()));
         onView(withText("Hotspot password")).check(matches(isDisplayed()));
-        onView(withText("AP Band")).check(matches(isDisplayed()));
     }
 
     private void launchWifiTetherActivity() {
