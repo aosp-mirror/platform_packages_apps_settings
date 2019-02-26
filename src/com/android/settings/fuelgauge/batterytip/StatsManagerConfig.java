@@ -65,6 +65,11 @@ public class StatsManagerConfig {
             AnomalyType.EXCESSIVE_CRASH_RATE,
             AnomalyType.EXCESSIVE_CRASH_LOOPING,
             AnomalyType.NUMBER_OF_OPEN_FILES,
+            AnomalyType.EXCESSIVE_CAMERA_USAGE_IN_BACKGROUND,
+            AnomalyType.EXCESSIVE_CONTACT_ACCESS,
+            AnomalyType.EXCESSIVE_AUDIO_IN_BACKGROUND,
+            AnomalyType.EXCESSIVE_CRASH_ANR_IN_BACKGROUND,
+            AnomalyType.BATTERY_DRAIN_FROM_UNUSED_APP,
     })
     public @interface AnomalyType {
         /**
@@ -218,6 +223,42 @@ public class StatsManagerConfig {
          * The application crashed because no more file descriptors were available.
          */
         int NUMBER_OF_OPEN_FILES = 26;
+
+        /**
+         * The application used an excessive amount of CPU while in a
+         * background process state.
+         */
+        int EXCESSIVE_CPU_USAGE_IN_BACKGROUND = 27;
+
+        /**
+         * The application kept the camera open for an excessive amount
+         * of time while in a bckground process state.
+         */
+        int EXCESSIVE_CAMERA_USAGE_IN_BACKGROUND = 28;
+
+        /**
+         * The application has accessed the contacts content provider an
+         * excessive amount.
+         */
+        int EXCESSIVE_CONTACT_ACCESS = 29;
+
+        /**
+         * The application has played too much audio while in a background
+         * process state.
+         */
+        int EXCESSIVE_AUDIO_IN_BACKGROUND = 30;
+
+        /**
+         * The application has crashed or ANRed too many times while in a
+         * background process state.
+         */
+        int EXCESSIVE_CRASH_ANR_IN_BACKGROUND = 31;
+
+        /**
+         * An application which has not been used by the user recently
+         * was detected to cause an excessive amount of battery drain.
+         */
+        int BATTERY_DRAIN_FROM_UNUSED_APP = 32;
     }
 
 }
