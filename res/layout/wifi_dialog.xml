@@ -65,9 +65,10 @@
                         android:id="@+id/ssid_scanner_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:minWidth="@dimen/min_tap_target_size"
+                        android:minHeight="@dimen/min_tap_target_size"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="5dp"
                         android:background="@null"
                         android:src="@drawable/ic_scan_24dp"
                         android:contentDescription="@string/wifi_add_network" />
@@ -300,9 +301,10 @@
                         android:id="@+id/password_scanner_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:minWidth="@dimen/min_tap_target_size"
+                        android:minHeight="@dimen/min_tap_target_size"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="5dp"
                         android:background="@null"
                         android:src="@drawable/ic_scan_24dp"
                         android:contentDescription="@string/wifi_add_network" />
