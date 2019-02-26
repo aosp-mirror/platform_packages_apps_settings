@@ -30,6 +30,7 @@ class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
 
     private static final String TAG = "DeviceAdminListItem";
 
+    private final UserHandle mUserHandle;
     private final String mKey;
     private final DeviceAdminInfo mInfo;
     private final CharSequence mName;
@@ -39,7 +40,8 @@ class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
 
     public DeviceAdminListItem(Context context, DeviceAdminInfo info) {
         mInfo = info;
-        mKey = mInfo.getComponent().flattenToString();
+        mUserHandle = new UserHandle(getUserIdFromDeviceAdminInfo(mInfo));
+        mKey = mUserHandle.getIdentifier() + "@" + mInfo.getComponent().flattenToString();
         mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         final PackageManager pm = context.getPackageManager();
         mName = mInfo.loadLabel(pm);
@@ -48,8 +50,7 @@ class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
         } catch (Resources.NotFoundException exception) {
             Log.w(TAG, "Setting description to null because can't find resource: " + mKey);
         }
-        mIcon = pm.getUserBadgedIcon(mInfo.loadIcon(pm),
-                new UserHandle(DeviceAdminUtils.getUserIdFromDeviceAdminInfo(mInfo)));
+        mIcon = pm.getUserBadgedIcon(mInfo.loadIcon(pm), mUserHandle);
     }
 
     @Override
@@ -70,8 +71,7 @@ class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
     }
 
     public boolean isActive() {
-        return mDPM.isAdminActiveAsUser(mInfo.getComponent(),
-                DeviceAdminUtils.getUserIdFromDeviceAdminInfo(mInfo));
+        return mDPM.isAdminActiveAsUser(mInfo.getComponent(), getUserIdFromDeviceAdminInfo(mInfo));
     }
 
     public Drawable getIcon() {
@@ -79,16 +79,25 @@ class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
     }
 
     public boolean isEnabled() {
-        return !mDPM.isRemovingAdmin(mInfo.getComponent(),
-                DeviceAdminUtils.getUserIdFromDeviceAdminInfo(mInfo));
+        return !mDPM.isRemovingAdmin(mInfo.getComponent(), getUserIdFromDeviceAdminInfo(mInfo));
     }
 
     public UserHandle getUser() {
-        return new UserHandle(DeviceAdminUtils.getUserIdFromDeviceAdminInfo(mInfo));
+        return new UserHandle(getUserIdFromDeviceAdminInfo(mInfo));
     }
 
     public Intent getLaunchIntent(Context context) {
         return new Intent(context, DeviceAdminAdd.class)
                 .putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mInfo.getComponent());
+    }
+
+    /**
+     * Extracts the user id from a device admin info object.
+     *
+     * @param adminInfo the device administrator info.
+     * @return identifier of the user associated with the device admin.
+     */
+    private static int getUserIdFromDeviceAdminInfo(DeviceAdminInfo adminInfo) {
+        return UserHandle.getUserId(adminInfo.getActivityInfo().applicationInfo.uid);
     }
 }
