@@ -19,10 +19,14 @@ package com.android.settings.testutils;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.slices.SliceBackgroundWorker;
+
+import java.io.IOException;
 
 public class FakeToggleController extends TogglePreferenceController {
 
@@ -71,11 +75,35 @@ public class FakeToggleController extends TogglePreferenceController {
     }
 
     @Override
+    public Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
+        return TestWorker.class;
+    }
+
+    @Override
     public boolean hasAsyncUpdate() {
         return mIsAsyncUpdate;
     }
 
     public void setAsyncUpdate(boolean isAsyncUpdate) {
         mIsAsyncUpdate = isAsyncUpdate;
+    }
+
+    public static class TestWorker extends SliceBackgroundWorker<Void> {
+
+        public TestWorker(Context context, Uri uri) {
+            super(context, uri);
+        }
+
+        @Override
+        protected void onSlicePinned() {
+        }
+
+        @Override
+        protected void onSliceUnpinned() {
+        }
+
+        @Override
+        public void close() throws IOException {
+        }
     }
 }

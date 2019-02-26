@@ -91,4 +91,16 @@ public interface Sliceable {
         final String toast = context.getString(R.string.copyable_slice_toast, messageTitle);
         Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * Settings Slices which require background work, such as updating lists should implement a
+     * {@link SliceBackgroundWorker} and return it here. An example of background work is updating
+     * a list of Wifi networks available in the area.
+     *
+     * @return a {@link Class<? extends SliceBackgroundWorker>} to perform background work for the
+     * slice.
+     */
+    default Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
+        return null;
+    }
 }

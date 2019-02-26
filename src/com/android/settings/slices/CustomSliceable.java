@@ -84,18 +84,6 @@ public interface CustomSliceable extends Sliceable {
     Intent getIntent();
 
     /**
-     * Settings Slices which require background work, such as updating lists should implement a
-     * {@link SliceBackgroundWorker} and return it here. An example of background work is updating
-     * a list of Wifi networks available in the area.
-     *
-     * @return a {@link Class<? extends SliceBackgroundWorker>} to perform background work for the
-     * slice.
-     */
-    default Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
-        return null;
-    }
-
-    /**
      * Standardize the intents returned to indicate actions by the Slice.
      * <p>
      *     The {@link PendingIntent} is linked to {@link SliceBroadcastReceiver} where the Intent

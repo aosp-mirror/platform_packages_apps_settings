@@ -80,13 +80,12 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
      * Returns the singleton instance of the {@link SliceBackgroundWorker} for specified {@link
      * CustomSliceable}
      */
-    static SliceBackgroundWorker getInstance(Context context, CustomSliceable sliceable) {
-        final Uri uri = sliceable.getUri();
+    static SliceBackgroundWorker getInstance(Context context, Sliceable sliceable, Uri uri) {
         SliceBackgroundWorker worker = getInstance(uri);
         if (worker == null) {
             final Class<? extends SliceBackgroundWorker> workerClass =
                     sliceable.getBackgroundWorkerClass();
-            worker = createInstance(context, uri, workerClass);
+            worker = createInstance(context.getApplicationContext(), uri, workerClass);
             LIVE_WORKERS.put(uri, worker);
         }
         return worker;
