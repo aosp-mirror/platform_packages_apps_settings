@@ -172,6 +172,9 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mLatestStatusCode = code;
         }
 
+        if (isGoingInitiator()) {
+            mSummary.setText(R.string.wifi_dpp_sharing_wifi_with_this_device);
+        }
         mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
         mButtonRight.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
     }
@@ -255,7 +258,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mTitle.setText(information);
         }
 
-        mSummary.setText(getString(R.string.wifi_dpp_add_device_to_wifi, getSsid()));
+        updateSummary();
         mWifiApPictureView = view.findViewById(R.id.wifi_ap_picture_view);
 
         mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
@@ -273,6 +276,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mProgressBar.setVisibility(View.VISIBLE);
             mButtonRight.setVisibility(View.INVISIBLE);
             startWifiDppConfiguratorInitiator();
+            updateSummary();
         });
 
         if (savedInstanceState != null) {
@@ -341,5 +345,13 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
 
         return model.isGoingInitiator();
+    }
+
+    private void updateSummary() {
+        if (isGoingInitiator()) {
+            mSummary.setText(R.string.wifi_dpp_sharing_wifi_with_this_device);
+        } else {
+            mSummary.setText(getString(R.string.wifi_dpp_add_device_to_wifi, getSsid()));
+        }
     }
 }
