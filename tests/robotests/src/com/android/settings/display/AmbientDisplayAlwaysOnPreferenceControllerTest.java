@@ -23,9 +23,9 @@ import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.provider.Settings;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;

@@ -16,11 +16,11 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.core.TogglePreferenceController;
 
 public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreferenceController {

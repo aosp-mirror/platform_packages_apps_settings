@@ -25,8 +25,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-
-import com.android.internal.hardware.AmbientDisplayConfiguration;
+import android.hardware.display.AmbientDisplayConfiguration;
 
 import org.junit.Before;
 import org.junit.Test;

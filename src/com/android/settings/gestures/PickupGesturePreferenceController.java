@@ -21,11 +21,10 @@ import static android.provider.Settings.Secure.DOZE_PICK_UP_GESTURE;
 import android.annotation.UserIdInt;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
-
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 

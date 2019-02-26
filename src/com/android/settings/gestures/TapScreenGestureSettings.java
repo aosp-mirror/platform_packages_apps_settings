@@ -18,9 +18,9 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;

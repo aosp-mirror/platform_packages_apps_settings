@@ -17,6 +17,7 @@ import static android.provider.Settings.Secure.DOZE_ENABLED;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -24,7 +25,6 @@ import android.text.TextUtils;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
