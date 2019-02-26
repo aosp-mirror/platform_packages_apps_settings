@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -83,7 +84,7 @@ public class BluetoothDevicesSliceTest {
 
         // Mock the icon and detail intent of Bluetooth.
         mIcon = IconCompat.createWithResource(mContext,
-            com.android.internal.R.drawable.ic_settings_bluetooth);
+                com.android.internal.R.drawable.ic_settings_bluetooth);
         mDetailIntent = PendingIntent.getActivity(mContext, 0, new Intent("test action"), 0);
         doReturn(mIcon).when(mBluetoothDevicesSlice).getBluetoothDeviceIcon(any());
         doReturn(mDetailIntent).when(mBluetoothDevicesSlice).getBluetoothDetailIntent(any());
@@ -119,6 +120,27 @@ public class BluetoothDevicesSliceTest {
 
         final List<SliceItem> sliceItems = slice.getItems();
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, BLUETOOTH_MOCK_TITLE);
+    }
+
+    @Test
+    public void getSlice_hasMediaBluetoothDevice_shouldBuildMediaBluetoothAction() {
+        mockBluetoothDeviceList(1 /* deviceCount */);
+        doReturn(true).when(mBluetoothDeviceList.get(0)).isConnectedA2dpDevice();
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+
+        mBluetoothDevicesSlice.getSlice();
+
+        verify(mBluetoothDevicesSlice).buildMediaBluetoothAction(any());
+    }
+
+    @Test
+    public void getSlice_noMediaBluetoothDevice_shouldNotBuildMediaBluetoothAction() {
+        mockBluetoothDeviceList(1 /* deviceCount */);
+        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
+
+        mBluetoothDevicesSlice.getSlice();
+
+        verify(mBluetoothDevicesSlice, never()).buildMediaBluetoothAction(any());
     }
 
     @Test
@@ -175,7 +197,6 @@ public class BluetoothDevicesSliceTest {
         doReturn(BLUETOOTH_MOCK_TITLE).when(mCachedBluetoothDevice).getName();
         doReturn(BLUETOOTH_MOCK_SUMMARY).when(mCachedBluetoothDevice).getConnectionSummary();
         doReturn(BLUETOOTH_MOCK_ADDRESS).when(mCachedBluetoothDevice).getAddress();
-        doReturn(true).when(mCachedBluetoothDevice).isConnectedA2dpDevice();
         for (int i = 0; i < deviceCount; i++) {
             mBluetoothDeviceList.add(mCachedBluetoothDevice);
         }

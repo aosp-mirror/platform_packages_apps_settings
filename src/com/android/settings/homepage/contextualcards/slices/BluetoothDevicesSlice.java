@@ -179,14 +179,9 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         final Collection<CachedBluetoothDevice> cachedDevices =
                 bluetoothManager.getCachedDeviceManager().getCachedDevicesCopy();
 
-        /**
-         * TODO(b/114807655): Contextual Home Page - Connected Device
-         * It's under discussion for including available media devices and currently connected
-         * devices from Bluetooth. Will update the devices list or remove TODO later.
-         */
-        // Get available media device list and sort them.
+        // Get all connected devices and sort them.
         return cachedDevices.stream()
-                .filter(device -> device.isConnected() && device.isConnectedA2dpDevice())
+                .filter(device -> device.getDevice().isConnected())
                 .sorted(COMPARATOR).collect(Collectors.toList());
     }
 
@@ -217,7 +212,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
             return Utils.createIconWithDrawable(pair.first);
         } else {
             return IconCompat.createWithResource(mContext,
-                com.android.internal.R.drawable.ic_settings_bluetooth);
+                    com.android.internal.R.drawable.ic_settings_bluetooth);
         }
     }
 
@@ -226,18 +221,29 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         final List<ListBuilder.RowBuilder> bluetoothRows = new ArrayList<>();
         final List<CachedBluetoothDevice> bluetoothDevices = getConnectedBluetoothDevices();
         for (CachedBluetoothDevice bluetoothDevice : bluetoothDevices) {
-            bluetoothRows.add(new ListBuilder.RowBuilder()
+            final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                     .setTitleItem(getBluetoothDeviceIcon(bluetoothDevice), ListBuilder.ICON_IMAGE)
                     .setTitle(bluetoothDevice.getName())
-                    .setSubtitle(bluetoothDevice.getConnectionSummary())
-                    .setPrimaryAction(buildBluetoothDeviceAction(bluetoothDevice))
-                    .addEndItem(buildBluetoothDetailDeepLinkAction(bluetoothDevice)));
+                    .setSubtitle(bluetoothDevice.getConnectionSummary());
+
+            if (bluetoothDevice.isConnectedA2dpDevice()) {
+                // For available media devices, the primary action is to active audio stream and
+                // add setting icon to the end to link detail page.
+                rowBuilder.setPrimaryAction(buildMediaBluetoothAction(bluetoothDevice));
+                rowBuilder.addEndItem(buildBluetoothDetailDeepLinkAction(bluetoothDevice));
+            } else {
+                // For other devices, the primary action is to link detail page.
+                rowBuilder.setPrimaryAction(buildBluetoothDetailDeepLinkAction(bluetoothDevice));
+            }
+
+            bluetoothRows.add(rowBuilder);
         }
 
         return bluetoothRows;
     }
 
-    private SliceAction buildBluetoothDeviceAction(CachedBluetoothDevice bluetoothDevice) {
+    @VisibleForTesting
+    SliceAction buildMediaBluetoothAction(CachedBluetoothDevice bluetoothDevice) {
         // Send broadcast to activate available media device.
         final Intent intent = new Intent(getUri().toString())
                 .setClass(mContext, SliceBroadcastReceiver.class)
@@ -250,7 +256,8 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 bluetoothDevice.getName());
     }
 
-    private SliceAction buildBluetoothDetailDeepLinkAction(CachedBluetoothDevice bluetoothDevice) {
+    @VisibleForTesting
+    SliceAction buildBluetoothDetailDeepLinkAction(CachedBluetoothDevice bluetoothDevice) {
         return SliceAction.createDeeplink(
                 getBluetoothDetailIntent(bluetoothDevice),
                 IconCompat.createWithResource(mContext, R.drawable.ic_settings_24dp),
