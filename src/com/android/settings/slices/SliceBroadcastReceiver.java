@@ -197,7 +197,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             return;
         }
 
-        ((Sliceable) controller).copy();
+        controller.copy();
     }
 
     /**
