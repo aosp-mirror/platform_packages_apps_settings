@@ -64,6 +64,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -181,6 +182,20 @@ public class SettingsSliceProviderTest {
         mProvider.loadSlice(uri);
 
         verify(mProvider).registerIntentToUri(eq(FakeToggleController.INTENT_FILTER), eq(uri));
+    }
+
+    @Test
+    public void loadSlice_registersBackgroundListener() {
+        insertSpecialCase(KEY);
+        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
+
+        mProvider.loadSlice(uri);
+
+        Robolectric.flushForegroundThreadScheduler();
+        Robolectric.flushBackgroundThreadScheduler();
+
+        assertThat(mProvider.mPinnedWorkers.get(uri).getClass())
+                .isEqualTo(FakeToggleController.TestWorker.class);
     }
 
     @Test

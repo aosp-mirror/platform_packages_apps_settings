@@ -42,7 +42,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.slices.Copyable;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -50,7 +49,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
-public class BuildNumberPreferenceController extends BasePreferenceController implements Copyable,
+public class BuildNumberPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart {
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
@@ -105,6 +104,11 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
 
     @Override
     public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isCopyableSlice() {
         return true;
     }
 

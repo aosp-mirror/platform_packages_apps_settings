@@ -153,7 +153,7 @@ public class SettingsSliceProvider extends SliceProvider {
             if (filter != null) {
                 registerIntentToUri(filter, sliceUri);
             }
-            ThreadUtils.postOnMainThread(() -> startBackgroundWorker(sliceable));
+            ThreadUtils.postOnMainThread(() -> startBackgroundWorker(sliceable, sliceUri));
             return;
         }
 
@@ -326,20 +326,19 @@ public class SettingsSliceProvider extends SliceProvider {
         }
     }
 
-    private void startBackgroundWorker(CustomSliceable sliceable) {
+    private void startBackgroundWorker(Sliceable sliceable, Uri uri) {
         final Class workerClass = sliceable.getBackgroundWorkerClass();
         if (workerClass == null) {
             return;
         }
 
-        final Uri uri = sliceable.getUri();
         if (mPinnedWorkers.containsKey(uri)) {
             return;
         }
 
         Log.d(TAG, "Starting background worker for: " + uri);
         final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(
-                getContext(), sliceable);
+                getContext(), sliceable, uri);
         mPinnedWorkers.put(uri, worker);
         worker.onSlicePinned();
     }
@@ -396,6 +395,8 @@ public class SettingsSliceProvider extends SliceProvider {
         if (filter != null) {
             registerIntentToUri(filter, uri);
         }
+
+        ThreadUtils.postOnMainThread(() -> startBackgroundWorker(controller, uri));
 
         final List<Uri> pinnedSlices = getContext().getSystemService(
                 SliceManager.class).getPinnedSlices();

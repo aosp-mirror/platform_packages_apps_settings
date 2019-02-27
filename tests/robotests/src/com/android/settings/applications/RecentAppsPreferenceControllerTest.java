@@ -25,9 +25,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -146,6 +146,7 @@ public class RecentAppsPreferenceControllerTest {
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
+        mController.reloadData();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -157,13 +158,17 @@ public class RecentAppsPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreferenceAndUpdateState_shouldRefreshUi() {
-        doNothing().when(mController).refreshUi();
-
+    public void displayPreference_shouldNotReloadData() {
         mController.displayPreference(mScreen);
-        mController.updateState(mScreen);
 
-        verify(mController, times(2)).refreshUi();
+        verify(mController, never()).reloadData();
+    }
+
+    @Test
+    public void displayPreference_shouldRefreshUi() {
+        mController.displayPreference(mScreen);
+
+        verify(mController).refreshUi();
     }
 
     @Test
@@ -171,6 +176,25 @@ public class RecentAppsPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mController.mAppEntitiesController).isNotNull();
+    }
+
+    @Test
+    public void updateState_firstLaunch_shouldNotReloadData() {
+        mController.mIsFirstLaunch = true;
+
+        mController.updateState(mRecentAppsPreference);
+
+        verify(mController, never()).reloadData();
+    }
+
+    @Test
+    public void updateState_afterFirstLaunch_shouldReloadDataAndRefreshUi() {
+        mController.mIsFirstLaunch = false;
+
+        mController.updateState(mRecentAppsPreference);
+
+        verify(mController).reloadData();
+        verify(mController).refreshUi();
     }
 
     @Test
@@ -203,6 +227,7 @@ public class RecentAppsPreferenceControllerTest {
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
+        mController.mIsFirstLaunch = false;
 
         mController.updateState(mRecentAppsPreference);
 
@@ -243,6 +268,7 @@ public class RecentAppsPreferenceControllerTest {
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
+        mController.mIsFirstLaunch = false;
 
         mController.updateState(mRecentAppsPreference);
 
@@ -274,6 +300,7 @@ public class RecentAppsPreferenceControllerTest {
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
+        mController.mIsFirstLaunch = false;
 
         mController.updateState(mRecentAppsPreference);
 
@@ -314,6 +341,7 @@ public class RecentAppsPreferenceControllerTest {
         // Make sure stat2 is considered an instant app.
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (ApplicationInfo info) -> info == stat2Entry.info);
+        mController.mIsFirstLaunch = false;
 
         mController.updateState(mRecentAppsPreference);
 
@@ -389,6 +417,7 @@ public class RecentAppsPreferenceControllerTest {
                 .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
+        mController.mIsFirstLaunch = false;
 
         mController.updateState(mRecentAppsPreference);
 

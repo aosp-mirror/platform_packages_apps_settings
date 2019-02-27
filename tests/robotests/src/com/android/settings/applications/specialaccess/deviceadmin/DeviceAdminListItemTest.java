@@ -67,7 +67,7 @@ public class DeviceAdminListItemTest {
 
         DeviceAdminListItem item = new DeviceAdminListItem(mContext, mDeviceAdminInfo);
 
-        assertThat(item.getKey()).isEqualTo(cn.flattenToShortString());
+        assertThat(item.getKey()).isEqualTo("0@" + cn.flattenToShortString());
         assertThat(item.getName()).isEqualTo(label);
         assertThat(item.getDescription()).isEqualTo(description);
     }

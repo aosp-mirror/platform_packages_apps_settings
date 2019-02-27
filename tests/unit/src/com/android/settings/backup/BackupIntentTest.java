@@ -39,7 +39,7 @@ import java.util.List;
 public class BackupIntentTest {
     private static final String INTENT_PRIVACY_SETTINGS = "android.settings.PRIVACY_SETTINGS";
     private static final String BACKUP_SETTINGS_ACTIVITY =
-            "com.android.settings.backup.UserBackupSettingsActivity";
+            "com.android.settings.Settings$PrivacyDashboardActivity";
 
     private Context mContext;
 

@@ -53,6 +53,9 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -249,8 +252,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
                 Log.w(TAG, "Unable to load component: " + activeAdmin);
                 continue;
             }
-            final DeviceAdminInfo deviceAdminInfo = DeviceAdminUtils.createDeviceAdminInfo(
-                    mContext, ai);
+            final DeviceAdminInfo deviceAdminInfo = createDeviceAdminInfo(mContext, ai);
             if (deviceAdminInfo == null) {
                 continue;
             }
@@ -286,7 +288,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
                     && alreadyAddedComponents.contains(riComponentName)) {
                 continue;
             }
-            DeviceAdminInfo deviceAdminInfo = DeviceAdminUtils.createDeviceAdminInfo(
+            DeviceAdminInfo deviceAdminInfo = createDeviceAdminInfo(
                     mContext, resolveInfo.activityInfo);
             // add only visible ones (note: active admins are added regardless of visibility)
             if (deviceAdminInfo != null && deviceAdminInfo.isVisible()) {
@@ -296,5 +298,21 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
                 mAdmins.add(new DeviceAdminListItem(mContext, deviceAdminInfo));
             }
         }
+    }
+
+    /**
+     * Creates a device admin info object for the resolved intent that points to the component of
+     * the device admin.
+     *
+     * @param ai ActivityInfo for the admin component.
+     * @return new {@link DeviceAdminInfo} object or null if there was an error.
+     */
+    private static DeviceAdminInfo createDeviceAdminInfo(Context context, ActivityInfo ai) {
+        try {
+            return new DeviceAdminInfo(context, ai);
+        } catch (XmlPullParserException | IOException e) {
+            Log.w(TAG, "Skipping " + ai, e);
+        }
+        return null;
     }
 }

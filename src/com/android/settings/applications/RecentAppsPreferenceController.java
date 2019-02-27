@@ -82,6 +82,8 @@ public class RecentAppsPreferenceController extends BasePreferenceController
     Preference mAllAppPref;
     @VisibleForTesting
     Preference mDivider;
+    @VisibleForTesting
+    boolean mIsFirstLaunch;
 
     private final PackageManager mPm;
     private final UsageStatsManager mUsageStatsManager;
@@ -93,6 +95,7 @@ public class RecentAppsPreferenceController extends BasePreferenceController
     private Fragment mHost;
     private Calendar mCal;
     private List<UsageStats> mStats;
+    private List<UsageStats> mRecentApps;
     private boolean mHasRecentApps;
 
     static {
@@ -115,6 +118,9 @@ public class RecentAppsPreferenceController extends BasePreferenceController
         mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         mPowerManager = mContext.getSystemService(PowerManager.class);
         mUsageStatsManager = mContext.getSystemService(UsageStatsManager.class);
+        mRecentApps = new ArrayList<>();
+        mIsFirstLaunch = true;
+        reloadData();
     }
 
     public void setFragment(Fragment fragment) {
@@ -123,8 +129,7 @@ public class RecentAppsPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        reloadData();
-        return getDisplayableRecentAppList().isEmpty() ? AVAILABLE_UNSEARCHABLE : AVAILABLE;
+        return mRecentApps.isEmpty() ? AVAILABLE_UNSEARCHABLE : AVAILABLE;
     }
 
     @Override
@@ -152,7 +157,11 @@ public class RecentAppsPreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        refreshUi();
+        // In order to improve launch time, we don't load data again at first launch.
+        if (!mIsFirstLaunch) {
+            reloadData();
+            refreshUi();
+        }
         // Show total number of installed apps as See all's summary.
         new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
                 mContext.getPackageManager()) {
@@ -167,6 +176,7 @@ public class RecentAppsPreferenceController extends BasePreferenceController
                 }
             }
         }.execute();
+        mIsFirstLaunch = false;
     }
 
     @Override
@@ -177,11 +187,9 @@ public class RecentAppsPreferenceController extends BasePreferenceController
 
     @VisibleForTesting
     void refreshUi() {
-        reloadData();
-        final List<UsageStats> recentApps = getDisplayableRecentAppList();
-        if (recentApps != null && !recentApps.isEmpty()) {
+        if (mRecentApps != null && !mRecentApps.isEmpty()) {
             mHasRecentApps = true;
-            displayRecentApps(recentApps);
+            displayRecentApps();
         } else {
             mHasRecentApps = false;
             displayOnlyAppInfo();
@@ -197,6 +205,8 @@ public class RecentAppsPreferenceController extends BasePreferenceController
                 : mUsageStatsManager.queryUsageStats(
                         UsageStatsManager.INTERVAL_BEST, mCal.getTimeInMillis(),
                         System.currentTimeMillis());
+
+        updateDisplayableRecentAppList();
     }
 
     private void displayOnlyAppInfo() {
@@ -206,10 +216,10 @@ public class RecentAppsPreferenceController extends BasePreferenceController
         mRecentAppsPreference.setVisible(false);
     }
 
-    private void displayRecentApps(List<UsageStats> recentApps) {
+    private void displayRecentApps() {
         int showAppsCount = 0;
 
-        for (UsageStats stat : recentApps) {
+        for (UsageStats stat : mRecentApps) {
             final AppEntityInfo appEntityInfoInfo = createAppEntity(stat);
             if (appEntityInfoInfo != null) {
                 mAppEntitiesController.setAppEntity(showAppsCount++, appEntityInfoInfo);
@@ -246,8 +256,8 @@ public class RecentAppsPreferenceController extends BasePreferenceController
                 .build();
     }
 
-    private List<UsageStats> getDisplayableRecentAppList() {
-        final List<UsageStats> recentApps = new ArrayList<>();
+    private void updateDisplayableRecentAppList() {
+        mRecentApps.clear();
         final Map<String, UsageStats> map = new ArrayMap<>();
         final int statCount = mStats.size();
         for (int i = 0; i < statCount; i++) {
@@ -273,13 +283,12 @@ public class RecentAppsPreferenceController extends BasePreferenceController
             if (appEntry == null) {
                 continue;
             }
-            recentApps.add(stat);
+            mRecentApps.add(stat);
             count++;
             if (count >= AppEntitiesHeaderController.MAXIMUM_APPS) {
                 break;
             }
         }
-        return recentApps;
     }
 
 

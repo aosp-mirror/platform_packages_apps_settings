@@ -23,6 +23,7 @@ import static com.android.settings.slices.CustomSliceRegistry.NOTIFICATION_CHANN
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.format.DateUtils;

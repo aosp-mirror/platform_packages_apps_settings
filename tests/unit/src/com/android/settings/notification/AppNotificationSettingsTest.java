@@ -41,6 +41,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
+import android.support.test.uiautomator.UiDevice;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.intent.Intents;
@@ -55,7 +56,9 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class AppNotificationSettingsTest {
+    private static final String WM_DISMISS_KEYGUARD_COMMAND = "wm dismiss-keyguard";
 
+    private UiDevice mUiDevice;
     private Context mTargetContext;
     private Instrumentation mInstrumentation;
 
@@ -68,9 +71,14 @@ public class AppNotificationSettingsTest {
     private NotificationChannel mUngroupedChannel;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         mInstrumentation = InstrumentationRegistry.getInstrumentation();
         mTargetContext = mInstrumentation.getTargetContext();
+
+        mUiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        mUiDevice.wakeUp();
+        mUiDevice.executeShellCommand(WM_DISMISS_KEYGUARD_COMMAND);
+
         mNm  = (NotificationManager) mTargetContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
         mGroup1 = new NotificationChannelGroup(this.getClass().getName() + "1", "group1");
@@ -87,7 +95,8 @@ public class AppNotificationSettingsTest {
     @Test
     public void launchNotificationSetting_shouldNotHaveAppInfoLink() {
         final Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                .putExtra(Settings.EXTRA_APP_PACKAGE, mTargetContext.getPackageName());
+                .putExtra(Settings.EXTRA_APP_PACKAGE, mTargetContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         mInstrumentation.startActivitySync(intent);
 
@@ -99,60 +108,38 @@ public class AppNotificationSettingsTest {
     @Test
     public void launchNotificationSetting_showGroupsWithMultipleChannels() {
         final Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                .putExtra(Settings.EXTRA_APP_PACKAGE, mTargetContext.getPackageName());
+                .putExtra(Settings.EXTRA_APP_PACKAGE, mTargetContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mInstrumentation.startActivitySync(intent);
         onView(allOf(withText(mGroup1.getName().toString()))).check(
                 matches(isDisplayed()));
-        try {
-            onView(allOf(withText(mGroup1Channel1.getName().toString())))
-                    .check(matches(isDisplayed()));
-            fail("Channel erroneously appearing");
-        } catch (Exception e) {
-            // expected
-        }
-        // links to group page
-        Intents.init();
-        onView(allOf(withText(mGroup1.getName().toString()))).perform(click());
-        intended(allOf(hasExtra(EXTRA_SHOW_FRAGMENT,
-                ChannelGroupNotificationSettings.class.getName())));
-        Intents.release();
+        onView(allOf(withText(mGroup1Channel1.getName().toString()))).check(
+                matches(isDisplayed()));
+        onView(allOf(withText(mGroup1Channel2.getName().toString()))).check(
+                matches(isDisplayed()));
     }
 
     @Test
     public void launchNotificationSetting_showUngroupedChannels() {
         final Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                .putExtra(Settings.EXTRA_APP_PACKAGE, mTargetContext.getPackageName());
+                .putExtra(Settings.EXTRA_APP_PACKAGE, mTargetContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mInstrumentation.startActivitySync(intent);
         onView(allOf(withText(mUngroupedChannel.getName().toString())))
                 .check(matches(isDisplayed()));
-        // links directly to channel page
-        Intents.init();
-        onView(allOf(withText(mUngroupedChannel.getName().toString()))).perform(click());
-        intended(allOf(hasExtra(EXTRA_SHOW_FRAGMENT, ChannelNotificationSettings.class.getName())));
-        Intents.release();
     }
 
     @Test
     public void launchNotificationSetting_showGroupsWithOneChannel() {
         final Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                .putExtra(Settings.EXTRA_APP_PACKAGE, mTargetContext.getPackageName());
+                .putExtra(Settings.EXTRA_APP_PACKAGE, mTargetContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mInstrumentation.startActivitySync(intent);
 
+        onView(allOf(withText(mGroup2.getName().toString())))
+                .check(matches(isDisplayed()));
         onView(allOf(withText(mGroup2Channel1.getName().toString())))
                 .check(matches(isDisplayed()));
-        try {
-            onView(allOf(withText(mGroup2.getName().toString()))).check(
-                    matches(isDisplayed()));
-            fail("Group erroneously appearing");
-        } catch (Exception e) {
-            // expected
-        }
-
-        // links directly to channel page
-        Intents.init();
-        onView(allOf(withText(mGroup2Channel1.getName().toString()))).perform(click());
-        intended(allOf(hasExtra(EXTRA_SHOW_FRAGMENT, ChannelNotificationSettings.class.getName())));
-        Intents.release();
     }
 
     private NotificationChannel createChannel(NotificationChannelGroup group,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,25 @@
  * limitations under the License.
  */
 
-package com.android.settings.testutils;
+package com.android.settings.deviceinfo.hardwareinfo;
 
 import android.content.Context;
+import android.os.Build;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.slices.Sliceable;
 
-public class FakeCopyableController extends BasePreferenceController {
+public class SerialNumberPreferenceController extends BasePreferenceController {
 
-    public FakeCopyableController(Context context, String preferenceKey) {
+    public SerialNumberPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_device_model)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -39,5 +43,16 @@ public class FakeCopyableController extends BasePreferenceController {
     @Override
     public boolean isCopyableSlice() {
         return true;
+    }
+
+    @Override
+    public void copy() {
+        Sliceable.setCopyContent(mContext, getSummary(),
+                mContext.getText(R.string.status_serial_number));
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return Build.getSerial();
     }
 }

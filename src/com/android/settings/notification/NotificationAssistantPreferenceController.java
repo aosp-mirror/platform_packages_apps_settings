@@ -16,18 +16,46 @@
 
 package com.android.settings.notification;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.UserHandle;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.widget.CandidateInfo;
+
+import com.google.common.annotations.VisibleForTesting;
 
 public class NotificationAssistantPreferenceController extends BasePreferenceController {
 
+    @VisibleForTesting
+    protected NotificationBackend mNotificationBackend;
+    private PackageManager mPackageManager;
+
     public NotificationAssistantPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mNotificationBackend = new NotificationBackend();
+        mPackageManager = mContext.getPackageManager();
     }
 
     @Override
     public int getAvailabilityStatus() {
         return BasePreferenceController.AVAILABLE;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        CandidateInfo appSelected = new NotificationAssistantPicker.CandidateNone(mContext);
+        ComponentName assistant = mNotificationBackend.getAllowedNotificationAssistant();
+        if (assistant != null) {
+            appSelected = createCandidateInfo(assistant);
+        }
+        return appSelected.loadLabel();
+    }
+
+    @VisibleForTesting
+    protected CandidateInfo createCandidateInfo(ComponentName cn) {
+        return new DefaultAppInfo(mContext, mPackageManager, UserHandle.myUserId(), cn);
     }
 }

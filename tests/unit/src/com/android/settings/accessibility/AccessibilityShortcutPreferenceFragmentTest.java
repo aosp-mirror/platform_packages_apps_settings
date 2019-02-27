@@ -30,6 +30,7 @@ import static org.hamcrest.Matchers.allOf;
 
 import android.app.Instrumentation;
 import android.os.Bundle;
+
 import android.provider.Settings;
 import android.widget.CompoundButton;
 
@@ -64,14 +65,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     }
 
     @Test
-    public void lockScreenPreference_defaultBeforeDialogShown_isOff() {
-        setDialogShown(false);
-        setOnLockscreen(null);
-        startFragment();
-        assertLockscreenSwitchIsCheckedIs(false);
-    }
-
-    @Test
     public void lockScreenPreference_setOnBeforeDialogShown_isOn() {
         setDialogShown(false);
         setOnLockscreen(true);
@@ -85,14 +78,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         setOnLockscreen(null);
         startFragment();
         assertLockscreenSwitchIsCheckedIs(true);
-    }
-
-    @Test
-    public void lockScreenPreference_setOffAfterDialogShown_isOn() {
-        setDialogShown(true);
-        setOnLockscreen(false);
-        startFragment();
-        assertLockscreenSwitchIsCheckedIs(false);
     }
 
     private void startFragment() {
