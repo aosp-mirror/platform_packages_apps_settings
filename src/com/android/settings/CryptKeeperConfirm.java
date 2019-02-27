@@ -38,6 +38,7 @@ import android.widget.Button;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.InstrumentedFragment;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 public class CryptKeeperConfirm extends InstrumentedFragment {
@@ -87,7 +88,12 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
                     IStorageManager storageManager = IStorageManager.Stub.asInterface(service);
                     try {
                         Bundle args = getIntent().getExtras();
-                        storageManager.encryptStorage(args.getInt("type", -1), args.getString("password"));
+                        // TODO(b/120484642): Update vold to accept a password as a byte array
+                        byte[] passwordBytes = args.getByteArray("password");
+                        String password = passwordBytes != null ? new String(passwordBytes) : null;
+                        Arrays.fill(passwordBytes, (byte) 0);
+                        storageManager.encryptStorage(args.getInt("type", -1),
+                                password);
                     } catch (Exception e) {
                         Log.e("CryptKeeper", "Error while encrypting...", e);
                     }
