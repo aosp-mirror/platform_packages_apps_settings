@@ -20,31 +20,31 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.media.RingtoneManager;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class RingtonePreferenceControllerBaseTest {
 
-    @Mock
     private Context mContext;
 
     private RingtonePreferenceControllerBase mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mController = new RingtonePreferenceControllerBaseTestable(mContext);
     }
 
@@ -56,14 +56,26 @@ public class RingtonePreferenceControllerBaseTest {
     @Test
     public void updateState_shouldSetSummary() {
         Preference preference = mock(Preference.class);
+        Settings.System.putString(mContext.getContentResolver(), Settings.System.RINGTONE,
+                "content://test/ringtone");
 
         mController.updateState(preference);
 
         verify(preference).setSummary(anyString());
     }
 
+    @Test
+    public void updateState_nullRingtone_shouldNotGetTitle() {
+        Preference preference = mock(Preference.class);
+        Settings.System.putString(mContext.getContentResolver(), Settings.System.RINGTONE, null);
+
+        mController.updateState(preference);
+
+        verify(preference, never()).setSummary(anyString());
+    }
+
     private class RingtonePreferenceControllerBaseTestable
-        extends RingtonePreferenceControllerBase {
+            extends RingtonePreferenceControllerBase {
         RingtonePreferenceControllerBaseTestable(Context context) {
             super(context);
         }

@@ -50,13 +50,18 @@ public abstract class RingtonePreferenceControllerBase extends AbstractPreferenc
     }
 
     private void updateSummary(Preference preference) {
-        Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(mContext, getRingtoneType());
-        final CharSequence summary = Ringtone.getTitle(
-            mContext, ringtoneUri, false /* followSettingsUri */, true /* allowRemote */);
+        final Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(
+                mContext, getRingtoneType());
+
+        final CharSequence summary;
+        if (ringtoneUri == null) {
+            summary = null;
+        } else {
+            summary = Ringtone.getTitle(
+                    mContext, ringtoneUri, false /* followSettingsUri */, true /* allowRemote */);
+        }
         if (summary != null) {
-            ThreadUtils.postOnMainThread(() -> {
-                preference.setSummary(summary);
-            });
+            ThreadUtils.postOnMainThread(() -> preference.setSummary(summary));
         }
     }
 
