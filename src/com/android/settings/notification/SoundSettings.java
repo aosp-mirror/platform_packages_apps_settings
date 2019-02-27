@@ -184,6 +184,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         volumeControllers.add(use(RingVolumePreferenceController.class));
         volumeControllers.add(use(NotificationVolumePreferenceController.class));
         volumeControllers.add(use(CallVolumePreferenceController.class));
+        volumeControllers.add(use(RemoteVolumePreferenceController.class));
 
         use(MediaOutputPreferenceController.class).setCallback(listPreference ->
                 onPreferenceDataChanged(listPreference));
