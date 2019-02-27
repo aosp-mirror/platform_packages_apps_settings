@@ -429,7 +429,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void linkSpeedPref_shouldNotShowIfNotSet() {
-        when(mockWifiInfo.getTxLinkSpeedMbps()).thenReturn(-1);
+        when(mockWifiInfo.getTxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
 
         displayAndResume();
 
@@ -447,7 +447,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void rxLinkSpeedPref_shouldNotShowIfNotSet() {
-        when(mockWifiInfo.getRxLinkSpeedMbps()).thenReturn(-1);
+        when(mockWifiInfo.getRxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
 
         displayAndResume();
 
