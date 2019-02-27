@@ -34,6 +34,18 @@ import java.util.List;
 public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager {
 
     public WifiConfiguration savedWifiConfig;
+    private WifiConfiguration mSavedApConfig;
+
+    @Implementation
+    protected WifiConfiguration getWifiApConfiguration() {
+        return mSavedApConfig;
+    }
+
+    @Implementation
+    protected boolean setWifiApConfiguration(WifiConfiguration wifiConfig) {
+        mSavedApConfig = wifiConfig;
+        return true;
+    }
 
     @HiddenApi // @SystemApi
     @Implementation
