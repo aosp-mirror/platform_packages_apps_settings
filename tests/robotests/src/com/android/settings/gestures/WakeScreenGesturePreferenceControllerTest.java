@@ -28,8 +28,8 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 

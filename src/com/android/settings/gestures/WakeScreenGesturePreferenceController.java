@@ -20,12 +20,12 @@ import static android.provider.Settings.Secure.DOZE_WAKE_SCREEN_GESTURE;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 

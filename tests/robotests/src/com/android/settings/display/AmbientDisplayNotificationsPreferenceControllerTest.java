@@ -29,12 +29,12 @@ import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
