@@ -1116,7 +1116,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return;
             }
         } else if (mSelectedAccessPoint.getConfig().isPasspoint()) {
-            mWifiManager.removePasspointConfiguration(mSelectedAccessPoint.getConfig().FQDN);
+            try {
+                mWifiManager.removePasspointConfiguration(mSelectedAccessPoint.getConfig().FQDN);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "Failed to remove Passpoint configuration with error: " + e);
+                return;
+            }
         } else {
             mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId, mForgetListener);
         }
