@@ -24,7 +24,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.net.Uri;
@@ -33,6 +35,7 @@ import androidx.slice.Slice;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +55,7 @@ public class ContextualCardLoaderTest {
     private Context mContext;
     private ContextualCardLoader mContextualCardLoader;
     private EligibleCardChecker mEligibleCardChecker;
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
@@ -59,6 +63,7 @@ public class ContextualCardLoaderTest {
         mContextualCardLoader = spy(new ContextualCardLoader(mContext));
         mEligibleCardChecker =
                 spy(new EligibleCardChecker(mContext, getContextualCard(TEST_SLICE_URI)));
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
@@ -156,6 +161,26 @@ public class ContextualCardLoaderTest {
                 .isTrue();
 
         assertThat(mContextualCardLoader.loadInBackground()).isEmpty();
+    }
+
+    @Test
+    public void getDisplayableCards_refreshCardUri_shouldLogContextualCardDisplay() {
+        mContextualCardLoader.mNotifyUri = CardContentProvider.REFRESH_CARD_URI;
+
+        mContextualCardLoader.getDisplayableCards(new ArrayList<ContextualCard>());
+
+        verify(mFakeFeatureFactory.mContextualCardFeatureProvider).logContextualCardDisplay(
+                any(List.class), any(List.class));
+    }
+
+    @Test
+    public void getDisplayableCards_deleteCardUri_shouldNotLogContextualCardDisplay() {
+        mContextualCardLoader.mNotifyUri = CardContentProvider.DELETE_CARD_URI;
+
+        mContextualCardLoader.getDisplayableCards(new ArrayList<ContextualCard>());
+
+        verify(mFakeFeatureFactory.mContextualCardFeatureProvider, never())
+                .logContextualCardDisplay(any(List.class), any(List.class));
     }
 
     private ContextualCard getContextualCard(String sliceUri) {
