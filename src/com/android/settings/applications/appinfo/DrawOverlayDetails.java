@@ -17,6 +17,7 @@ package com.android.settings.applications.appinfo;
 
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
+import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -25,6 +26,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -36,6 +40,7 @@ import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateOverlayBridge;
@@ -70,6 +75,11 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         mOverlayBridge = new AppStateOverlayBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
 
+        if (!Utils.isSystemAlertWindowEnabled(context)) {
+            mPackageInfo = null;
+            return;
+        }
+
         // find preferences
         addPreferencesFromResource(R.xml.draw_overlay_permissions_details);
         mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
@@ -79,6 +89,18 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
 
         mSettingsIntent = new Intent(Intent.ACTION_MAIN)
                 .setAction(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+    }
+
+    // Override here so we don't have an empty screen
+    @Override
+    public View onCreateView (LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState) {
+        // if we don't have a package info, show a page saying this is unsupported
+        if (mPackageInfo == null) {
+            return inflater.inflate(R.layout.manage_applications_apps_unsupported, null);
+        }
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -142,6 +164,8 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
 
     @Override
     protected boolean refreshUi() {
+        if (mPackageInfo == null) return true;
+
         mOverlayState = mOverlayBridge.getOverlayInfo(mPackageName,
                 mPackageInfo.applicationInfo.uid);
 

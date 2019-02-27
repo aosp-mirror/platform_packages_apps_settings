@@ -55,6 +55,7 @@ import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
@@ -1006,5 +1007,15 @@ public final class Utils extends com.android.settingslib.Utils {
         } else {
             return context.getResources();
         }
+    }
+
+    /**
+     * Returns true if SYSTEM_ALERT_WINDOW permission is available.
+     * Starting from Q, SYSTEM_ALERT_WINDOW is disabled on low ram phones.
+     */
+    public static boolean isSystemAlertWindowEnabled(Context context) {
+        // SYSTEM_ALERT_WINDOW is disabled on on low ram devices starting from Q
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        return !(am.isLowRamDevice() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q));
     }
 }

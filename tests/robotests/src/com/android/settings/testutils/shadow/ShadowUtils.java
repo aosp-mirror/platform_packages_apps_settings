@@ -38,6 +38,7 @@ public class ShadowUtils {
     private static boolean sIsDemoUser;
     private static ComponentName sDeviceOwnerComponentName;
     private static Map<String, String> sAppNameMap;
+    private static boolean sIsSystemAlertWindowEnabled;
 
     @Implementation
     protected static int enforceSameOwner(Context context, int userId) {
@@ -112,5 +113,14 @@ public class ShadowUtils {
             sAppNameMap = new HashMap<>();
         }
         sAppNameMap.put(packageName, appLabel);
+    }
+
+    @Implementation
+    protected static boolean isSystemAlertWindowEnabled(Context context) {
+        return sIsSystemAlertWindowEnabled;
+    }
+
+    public static void setIsSystemAlertWindowEnabled(boolean enabled) {
+        sIsSystemAlertWindowEnabled = enabled;
     }
 }
