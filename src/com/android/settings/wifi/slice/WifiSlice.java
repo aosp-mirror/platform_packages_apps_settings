@@ -118,10 +118,19 @@ public class WifiSlice implements CustomSliceable {
 
         final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(getUri());
         final List<AccessPoint> results = worker != null ? worker.getResults() : null;
+        final int apCount = results == null ? 0 : results.size();
 
-        // Need a loading text when results are not ready.
-        boolean needLoadingRow = results == null;
-        final int apCount = needLoadingRow ? 0 : results.size();
+        // Need a loading text when results are not ready or out of date.
+        boolean needLoadingRow = true;
+        int index = apCount > 0 && results.get(0).isActive() ? 1 : 0;
+        // This loop checks the existence of reachable APs to determine the validity of the current
+        // AP list.
+        for (; index < apCount; index++) {
+            if (results.get(index).isReachable()) {
+                needLoadingRow = false;
+                break;
+            }
+        }
 
         // Add AP rows
         final CharSequence placeholder = mContext.getText(R.string.summary_placeholder);
