@@ -139,6 +139,8 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_DEFERRED_SETUP:
+                // Deferred setup is never dismissible.
+                break;
             case VIEW_TYPE_HALF_WIDTH:
                 initDismissalActions(holder, card, R.id.content);
                 break;
