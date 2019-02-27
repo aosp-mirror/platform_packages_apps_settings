@@ -52,10 +52,10 @@
         settings:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 
     <Preference
-        android:key="gesture_swipe_up_input_summary"
-        android:title="@string/swipe_up_to_switch_apps_title"
-        android:fragment="com.android.settings.gestures.SwipeUpGestureSettings"
-        settings:controller="com.android.settings.gestures.SwipeUpPreferenceController" />
+        android:key="gesture_system_navigation_input_summary"
+        android:title="@string/system_navigation_title"
+        android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+        settings:controller="com.android.settings.gestures.SystemNavigationLegacyPreferenceController" />
 
     <Preference
         android:key="gesture_tap_screen_input_summary"
