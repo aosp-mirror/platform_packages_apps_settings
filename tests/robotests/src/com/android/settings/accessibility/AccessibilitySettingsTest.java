@@ -21,14 +21,17 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
+import android.app.UiModeManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Vibrator;
 import android.provider.Settings;
 
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
@@ -47,10 +50,13 @@ public class AccessibilitySettingsTest {
             "accessibility_content_timeout_preference_fragment";
     private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
             "accessibility_control_timeout_preference_fragment";
+    private static final String DARK_UI_MODE_PREFERENCE =
+            "dark_ui_mode_accessibility";
 
     private Context mContext;
     private ContentResolver mContentResolver;
     private AccessibilitySettings mSettings;
+    private UiModeManager mUiModeManager;
 
     @Before
     public void setup() {
@@ -59,6 +65,7 @@ public class AccessibilitySettingsTest {
         mContentResolver = mContext.getContentResolver();
         mSettings = spy(new AccessibilitySettings());
         doReturn(mContext).when(mSettings).getContext();
+        mUiModeManager = mContext.getSystemService(UiModeManager.class);
     }
 
     @Test
@@ -145,5 +152,30 @@ public class AccessibilitySettingsTest {
         mSettings.updateAccessibilityTimeoutSummary(mContentResolver, preference);
 
         assertThat(preference.getSummary()).isEqualTo(mContext.getResources().getString(resId));
+    }
+
+    @Test
+    public void testDarkUIModePreferenceSummary_shouldUpdateSummary() {
+        final ListPreference darkUIModePreference = new ListPreference(mContext);
+        final DarkUIPreferenceController mController;
+        doReturn(darkUIModePreference).when(mSettings).findPreference(
+            DARK_UI_MODE_PREFERENCE);
+        mController = new DarkUIPreferenceController(mContext, DARK_UI_MODE_PREFERENCE);
+        final String darkUIModeDescription = modeToDescription(mUiModeManager.getNightMode());
+        darkUIModePreference.setSummary(mController.getSummary());
+
+        assertThat(darkUIModePreference.getSummary()).isEqualTo(darkUIModeDescription);
+    }
+
+    private String modeToDescription(int mode) {
+        String[] values = mContext.getResources().getStringArray(R.array.dark_ui_mode_entries);
+        switch (mode) {
+            case UiModeManager.MODE_NIGHT_YES:
+                return values[0];
+            case UiModeManager.MODE_NIGHT_NO:
+            case UiModeManager.MODE_NIGHT_AUTO:
+            default:
+                return values[1];
+        }
     }
 }
