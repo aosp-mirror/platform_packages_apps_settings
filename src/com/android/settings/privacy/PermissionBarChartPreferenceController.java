@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.permission.PermissionControllerManager;
 import android.permission.RuntimePermissionUsageInfo;
 import android.provider.DeviceConfig;
@@ -31,12 +32,15 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.widget.BarChartInfo;
 import com.android.settingslib.widget.BarChartPreference;
@@ -48,14 +52,17 @@ import java.util.List;
 
 
 public class PermissionBarChartPreferenceController extends BasePreferenceController implements
-        PermissionControllerManager.OnPermissionUsageResultCallback, LifecycleObserver, OnStart {
+        PermissionControllerManager.OnPermissionUsageResultCallback, LifecycleObserver, OnCreate,
+        OnStart, OnSaveInstanceState {
 
     private static final String TAG = "BarChartPreferenceCtl";
+    private static final String KEY_PERMISSION_USAGE = "usage_infos";
 
+    @VisibleForTesting
+    List<RuntimePermissionUsageInfo> mOldUsageInfos;
     private PackageManager mPackageManager;
     private PrivacyDashboardFragment mParent;
     private BarChartPreference mBarChartPreference;
-    private List<RuntimePermissionUsageInfo> mOldUsageInfos;
 
     public PermissionBarChartPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -65,6 +72,18 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
     public void setFragment(PrivacyDashboardFragment fragment) {
         mParent = fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mOldUsageInfos = savedInstanceState.getParcelableArrayList(KEY_PERMISSION_USAGE);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableList(KEY_PERMISSION_USAGE, mOldUsageInfos);
     }
 
     @Override
@@ -92,6 +111,9 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
                 .build();
 
         mBarChartPreference.initializeBarChart(info);
+        if (!mOldUsageInfos.isEmpty()) {
+            mBarChartPreference.setBarViewInfos(createBarViews(mOldUsageInfos));
+        }
     }
 
     @Override
@@ -100,7 +122,9 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
             return;
         }
 
-        mBarChartPreference.updateLoadingState(true /* isLoading */);
+        // We don't hide chart when we have existing data.
+        mBarChartPreference.updateLoadingState(mOldUsageInfos.isEmpty() /* isLoading */);
+        // But we still need to hint user with progress bar that we are updating new usage data.
         mParent.setLoadingEnabled(true /* enabled */);
         retrievePermissionUsageData();
     }
