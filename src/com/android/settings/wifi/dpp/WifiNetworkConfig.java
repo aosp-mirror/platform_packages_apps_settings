@@ -212,7 +212,7 @@ public class WifiNetworkConfig {
         wifiManager.connect(wifiConfiguration, listener);
     }
 
-    public boolean isSupportConfiguratorQrCodeScanner(Context context) {
+    public boolean isSupportWifiDpp(Context context) {
         if (!WifiDppUtils.isWifiDppEnabled(context)) {
             return false;
         }
