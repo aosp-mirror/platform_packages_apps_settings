@@ -17,26 +17,33 @@
 package com.android.settings.users;
 
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class MultiUserSwitchBarController implements SwitchWidgetController.OnSwitchChangeListener,
         LifecycleObserver, OnStart, OnStop {
+    private static final String TAG = "MultiUserSwitchBarCtrl";
 
     interface OnMultiUserSwitchChangedListener {
         void onMultiUserSwitchChanged(boolean newState);
     }
+    @VisibleForTesting
+    final SwitchWidgetController mSwitchBar;
 
-    private static final String TAG = "MultiUserSwitchBarCtrl";
     private final Context mContext;
-    private final SwitchWidgetController mSwitchBar;
     private final UserCapabilities mUserCapabilities;
     private final OnMultiUserSwitchChangedListener mListener;
+
 
     MultiUserSwitchBarController(Context context, SwitchWidgetController switchBar,
             OnMultiUserSwitchChangedListener listener) {
@@ -45,8 +52,15 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
         mListener = listener;
         mUserCapabilities = UserCapabilities.create(context);
         mSwitchBar.setChecked(mUserCapabilities.mUserSwitcherEnabled);
-        mSwitchBar.setEnabled(!mUserCapabilities.mDisallowSwitchUser
-                && !mUserCapabilities.mIsGuest && mUserCapabilities.isAdmin());
+
+        if (mUserCapabilities.mDisallowSwitchUser) {
+            mSwitchBar.setDisabledByAdmin(RestrictedLockUtilsInternal
+                    .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_USER_SWITCH,
+                            UserHandle.myUserId()));
+        } else {
+            mSwitchBar.setEnabled(!mUserCapabilities.mDisallowSwitchUser
+                    && !mUserCapabilities.mIsGuest && mUserCapabilities.isAdmin());
+        }
         mSwitchBar.setListener(this);
     }
 

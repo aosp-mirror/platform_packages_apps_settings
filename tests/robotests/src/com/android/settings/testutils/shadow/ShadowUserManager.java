@@ -26,6 +26,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.annotation.Resetter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +39,8 @@ import java.util.Set;
 @Implements(value = UserManager.class)
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
+    private static boolean sIsSupportsMultipleUsers;
+
     private final List<String> mRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
@@ -48,6 +51,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void addProfile(UserInfo userInfo) {
         mUserProfileInfos.add(userInfo);
+    }
+
+    @Resetter
+    public static void reset() {
+        sIsSupportsMultipleUsers = false;
     }
 
     @Implementation
@@ -123,5 +131,14 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void setUserSwitcherEnabled(boolean userSwitchEnabled) {
         mUserSwitchEnabled = userSwitchEnabled;
+    }
+
+    @Implementation
+    protected static boolean supportsMultipleUsers() {
+        return sIsSupportsMultipleUsers;
+    }
+
+    public void setSupportsMultipleUsers(boolean supports) {
+        sIsSupportsMultipleUsers = supports;
     }
 }
