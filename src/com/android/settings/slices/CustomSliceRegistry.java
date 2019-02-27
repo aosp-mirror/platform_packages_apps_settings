@@ -219,6 +219,17 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("media_volume")
             .build();
+
+    /**
+     * Full {@link Uri} for the Remote Media Volume Slice.
+     */
+    public static final Uri VOLUME_REMOTE_MEDIA_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("remote_volume")
+            .build();
+
     /**
      * Full {@link Uri} for the Ringer volume Slice.
      */

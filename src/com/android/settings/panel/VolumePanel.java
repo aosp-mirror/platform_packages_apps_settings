@@ -19,6 +19,7 @@ package com.android.settings.panel;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_ALARM_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_CALL_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_REMOTE_MEDIA_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
 
 import android.app.settings.SettingsEnums;
@@ -52,6 +53,7 @@ public class VolumePanel implements PanelContent {
     @Override
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
+        uris.add(VOLUME_REMOTE_MEDIA_URI);
         uris.add(VOLUME_MEDIA_URI);
         uris.add(VOLUME_CALL_URI);
         uris.add(VOLUME_RINGER_URI);

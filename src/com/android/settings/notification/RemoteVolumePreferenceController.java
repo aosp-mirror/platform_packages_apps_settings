@@ -20,16 +20,20 @@ import android.content.Context;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
+import android.net.Uri;
 import android.os.Looper;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.volume.MediaSessions;
 
+import java.io.IOException;
 import java.util.List;
 
 public class RemoteVolumePreferenceController extends
@@ -41,32 +45,41 @@ public class RemoteVolumePreferenceController extends
 
     private MediaSessionManager mMediaSessionManager;
     private MediaSessions mMediaSessions;
-    private MediaSession.Token mActiveToken;
+    @VisibleForTesting
+    MediaSession.Token mActiveToken;
+    @VisibleForTesting
+    MediaController mMediaController;
 
-    private MediaSessions.Callbacks mCallbacks = new MediaSessions.Callbacks() {
+    @VisibleForTesting
+    MediaSessions.Callbacks mCallbacks = new MediaSessions.Callbacks() {
         @Override
         public void onRemoteUpdate(MediaSession.Token token, String name,
                 MediaController.PlaybackInfo pi) {
-            mActiveToken = token;
-            mPreference.setMax(pi.getMaxVolume());
-            mPreference.setVisible(true);
-            setSliderPosition(pi.getCurrentVolume());
+            if (mActiveToken == null) {
+                updateToken(token);
+            }
+            if (mActiveToken == token) {
+                updatePreference(mPreference, mActiveToken, pi);
+            }
         }
 
         @Override
         public void onRemoteRemoved(MediaSession.Token t) {
             if (mActiveToken == t) {
-                mActiveToken = null;
-                mPreference.setVisible(false);
+                updateToken(null);
+                if (mPreference != null) {
+                    mPreference.setVisible(false);
+                }
             }
         }
 
         @Override
         public void onRemoteVolumeChanged(MediaSession.Token token, int flags) {
             if (mActiveToken == token) {
-                final MediaController mediaController = new MediaController(mContext, token);
-                final MediaController.PlaybackInfo pi = mediaController.getPlaybackInfo();
-                setSliderPosition(pi.getCurrentVolume());
+                final MediaController.PlaybackInfo pi = mMediaController.getPlaybackInfo();
+                if (pi != null) {
+                    setSliderPosition(pi.getCurrentVolume());
+                }
             }
         }
     };
@@ -83,7 +96,7 @@ public class RemoteVolumePreferenceController extends
         for (MediaController mediaController : controllers) {
             final MediaController.PlaybackInfo pi = mediaController.getPlaybackInfo();
             if (isRemote(pi)) {
-                mActiveToken = mediaController.getSessionToken();
+                updateToken(mediaController.getSessionToken());
                 return AVAILABLE;
             }
         }
@@ -92,16 +105,24 @@ public class RemoteVolumePreferenceController extends
         return CONDITIONALLY_UNAVAILABLE;
     }
 
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        if (mMediaController != null) {
+            updatePreference(mPreference, mActiveToken, mMediaController.getPlaybackInfo());
+        }
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         super.onResume();
-        mMediaSessions.init();
+        //TODO(b/126199571): register callback once b/126890783 is fixed
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onPause() {
         super.onPause();
-        mMediaSessions.destroy();
+        //TODO(b/126199571): unregister callback once b/126890783 is fixed
     }
 
     @Override
@@ -109,8 +130,11 @@ public class RemoteVolumePreferenceController extends
         if (mPreference != null) {
             return mPreference.getProgress();
         }
-        //TODO(b/126199571): get it from media controller
-        return 0;
+        if (mMediaController == null) {
+            return 0;
+        }
+        final MediaController.PlaybackInfo playbackInfo = mMediaController.getPlaybackInfo();
+        return playbackInfo != null ? playbackInfo.getCurrentVolume() : 0;
     }
 
     @Override
@@ -118,8 +142,11 @@ public class RemoteVolumePreferenceController extends
         if (mPreference != null) {
             mPreference.setProgress(position);
         }
-        //TODO(b/126199571): set it through media controller
-        return false;
+        if (mMediaController == null) {
+            return false;
+        }
+        mMediaController.setVolumeTo(position, 0);
+        return true;
     }
 
     @Override
@@ -127,8 +154,11 @@ public class RemoteVolumePreferenceController extends
         if (mPreference != null) {
             return mPreference.getMax();
         }
-        //TODO(b/126199571): get it from media controller
-        return 0;
+        if (mMediaController == null) {
+            return 0;
+        }
+        final MediaController.PlaybackInfo playbackInfo = mMediaController.getPlaybackInfo();
+        return playbackInfo != null ? playbackInfo.getMaxVolume() : 0;
     }
 
     @Override
@@ -155,5 +185,77 @@ public class RemoteVolumePreferenceController extends
     public static boolean isRemote(MediaController.PlaybackInfo pi) {
         return pi != null
                 && pi.getPlaybackType() == MediaController.PlaybackInfo.PLAYBACK_TYPE_REMOTE;
+    }
+
+    @Override
+    public Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
+        //TODO(b/126199571): return RemoteVolumeSliceWorker once b/126890783 is fixed
+        return null;
+    }
+
+    private void updatePreference(VolumeSeekBarPreference seekBarPreference,
+            MediaSession.Token token, MediaController.PlaybackInfo playbackInfo) {
+        if (seekBarPreference == null || token == null || playbackInfo == null) {
+            return;
+        }
+
+        seekBarPreference.setMax(playbackInfo.getMaxVolume());
+        seekBarPreference.setVisible(true);
+        setSliderPosition(playbackInfo.getCurrentVolume());
+    }
+
+    private void updateToken(MediaSession.Token token) {
+        mActiveToken = token;
+        if (token != null) {
+            mMediaController = new MediaController(mContext, mActiveToken);
+        } else {
+            mMediaController = null;
+        }
+    }
+
+    /**
+     * Listener for background change to remote volume, which listens callback
+     * from {@code MediaSessions}
+     */
+    public static class RemoteVolumeSliceWorker extends SliceBackgroundWorker<Void> implements
+            MediaSessions.Callbacks {
+
+        private MediaSessions mMediaSessions;
+
+        public RemoteVolumeSliceWorker(Context context, Uri uri) {
+            super(context, uri);
+            mMediaSessions = new MediaSessions(context, Looper.getMainLooper(), this);
+        }
+
+        @Override
+        protected void onSlicePinned() {
+            mMediaSessions.init();
+        }
+
+        @Override
+        protected void onSliceUnpinned() {
+            mMediaSessions.destroy();
+        }
+
+        @Override
+        public void close() throws IOException {
+            mMediaSessions = null;
+        }
+
+        @Override
+        public void onRemoteUpdate(MediaSession.Token token, String name,
+                MediaController.PlaybackInfo pi) {
+            notifySliceChange();
+        }
+
+        @Override
+        public void onRemoteRemoved(MediaSession.Token t) {
+            notifySliceChange();
+        }
+
+        @Override
+        public void onRemoteVolumeChanged(MediaSession.Token token, int flags) {
+            notifySliceChange();
+        }
     }
 }
