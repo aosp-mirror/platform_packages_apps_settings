@@ -125,6 +125,18 @@ public class PermissionBarChartPreferenceControllerTest {
     }
 
     @Test
+    public void displayPreference_usageInfosSet_shouldSetBarViewInfos() {
+        final RuntimePermissionUsageInfo info1 =
+                new RuntimePermissionUsageInfo("permission 1", 10);
+        mController.mOldUsageInfos.add(info1);
+
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setBarViewInfos(any(BarViewInfo[].class));
+        verify(mPreference).initializeBarChart(any(BarChartInfo.class));
+    }
+
+    @Test
     public void onPermissionUsageResult_differentPermissionResultSet_shouldSetBarViewInfos() {
         final List<RuntimePermissionUsageInfo> infos1 = new ArrayList<>();
         final RuntimePermissionUsageInfo info1 =
@@ -159,7 +171,7 @@ public class PermissionBarChartPreferenceControllerTest {
     }
 
     @Test
-    public void onStart_permissionHubEnabled_shouldShowProgressBar() {
+    public void onStart_usageInfosNotSetAndPermissionHubEnabled_shouldShowProgressBar() {
         DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
                 DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
         mController.displayPreference(mScreen);
@@ -168,6 +180,21 @@ public class PermissionBarChartPreferenceControllerTest {
 
         verify(mFragment).setLoadingEnabled(true /* enabled */);
         verify(mPreference).updateLoadingState(true /* isLoading */);
+    }
+
+    @Test
+    public void onStart_usageInfosSetAndPermissionHubEnabled_shouldNotUpdatePrefLoadingState() {
+        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
+                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        final RuntimePermissionUsageInfo info1 =
+                new RuntimePermissionUsageInfo("permission 1", 10);
+        mController.mOldUsageInfos.add(info1);
+        mController.displayPreference(mScreen);
+
+        mController.onStart();
+
+        verify(mFragment).setLoadingEnabled(true /* enabled */);
+        verify(mPreference).updateLoadingState(false /* isLoading */);
     }
 
     @Test

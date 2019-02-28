@@ -27,7 +27,8 @@
         android:key="all_app_info"
         android:title="@string/applications_settings"
         android:order="-999"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"/>
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:controller="com.android.settings.applications.AllAppsInfoPreferenceController"/>
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="recent_open_apps"

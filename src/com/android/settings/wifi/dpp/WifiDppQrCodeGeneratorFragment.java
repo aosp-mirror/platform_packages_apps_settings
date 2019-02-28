@@ -86,7 +86,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
         MenuItem menuItem;
-        if (wifiNetworkConfig.isSupportConfiguratorQrCodeScanner(getActivity())) {
+        if (wifiNetworkConfig.isSupportWifiDpp(getActivity())) {
             menuItem = menu.add(0, Menu.FIRST, 0, R.string.next_label);
             menuItem.setIcon(R.drawable.ic_scan_24dp);
             menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);

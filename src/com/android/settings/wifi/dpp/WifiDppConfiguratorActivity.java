@@ -156,7 +156,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     cancelActivity = true;
                 } else {
                     final WifiNetworkConfig connectedConfig = getConnectedWifiNetworkConfigOrNull();
-                    if (connectedConfig == null) {
+                    if (connectedConfig == null || !connectedConfig.isSupportWifiDpp(this)) {
                         showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
                     } else {
                         mWifiNetworkConfig = connectedConfig;

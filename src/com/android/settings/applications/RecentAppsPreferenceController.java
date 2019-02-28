@@ -67,8 +67,6 @@ public class RecentAppsPreferenceController extends BasePreferenceController
         implements Comparator<UsageStats> {
 
     @VisibleForTesting
-    static final String KEY_ALL_APP_INFO = "all_app_info";
-    @VisibleForTesting
     static final String KEY_DIVIDER = "recent_apps_divider";
 
     private static final String TAG = "RecentAppsCtrl";
@@ -79,11 +77,7 @@ public class RecentAppsPreferenceController extends BasePreferenceController
     @VisibleForTesting
     LayoutPreference mRecentAppsPreference;
     @VisibleForTesting
-    Preference mAllAppPref;
-    @VisibleForTesting
     Preference mDivider;
-    @VisibleForTesting
-    boolean mIsFirstLaunch;
 
     private final PackageManager mPm;
     private final UsageStatsManager mUsageStatsManager;
@@ -119,7 +113,6 @@ public class RecentAppsPreferenceController extends BasePreferenceController
         mPowerManager = mContext.getSystemService(PowerManager.class);
         mUsageStatsManager = mContext.getSystemService(UsageStatsManager.class);
         mRecentApps = new ArrayList<>();
-        mIsFirstLaunch = true;
         reloadData();
     }
 
@@ -129,14 +122,13 @@ public class RecentAppsPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return mRecentApps.isEmpty() ? AVAILABLE_UNSEARCHABLE : AVAILABLE;
+        return mRecentApps.isEmpty() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mAllAppPref = screen.findPreference(KEY_ALL_APP_INFO);
         mDivider = screen.findPreference(KEY_DIVIDER);
         mRecentAppsPreference = (LayoutPreference) screen.findPreference(getPreferenceKey());
         final View view = mRecentAppsPreference.findViewById(R.id.app_entities_header);
@@ -157,26 +149,18 @@ public class RecentAppsPreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        // In order to improve launch time, we don't load data again at first launch.
-        if (!mIsFirstLaunch) {
-            reloadData();
-            refreshUi();
-        }
+
+        refreshUi();
         // Show total number of installed apps as See all's summary.
         new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
                 mContext.getPackageManager()) {
             @Override
             protected void onCountComplete(int num) {
-                if (mHasRecentApps) {
-                    mAppEntitiesController.setHeaderDetails(
-                            mContext.getString(R.string.see_all_apps_title, num));
-                    mAppEntitiesController.apply();
-                } else {
-                    mAllAppPref.setSummary(mContext.getString(R.string.apps_summary, num));
-                }
+                mAppEntitiesController.setHeaderDetails(
+                        mContext.getString(R.string.see_all_apps_title, num));
+                mAppEntitiesController.apply();
             }
         }.execute();
-        mIsFirstLaunch = false;
     }
 
     @Override
@@ -185,14 +169,16 @@ public class RecentAppsPreferenceController extends BasePreferenceController
         return Long.compare(b.getLastTimeUsed(), a.getLastTimeUsed());
     }
 
+    List<UsageStats> getRecentApps() {
+        return mRecentApps;
+    }
+
     @VisibleForTesting
     void refreshUi() {
         if (mRecentApps != null && !mRecentApps.isEmpty()) {
-            mHasRecentApps = true;
             displayRecentApps();
         } else {
-            mHasRecentApps = false;
-            displayOnlyAppInfo();
+            mDivider.setVisible(false);
         }
     }
 
@@ -209,13 +195,6 @@ public class RecentAppsPreferenceController extends BasePreferenceController
         updateDisplayableRecentAppList();
     }
 
-    private void displayOnlyAppInfo() {
-        mDivider.setVisible(false);
-        mAllAppPref.setTitle(R.string.applications_settings);
-        mAllAppPref.setVisible(true);
-        mRecentAppsPreference.setVisible(false);
-    }
-
     private void displayRecentApps() {
         int showAppsCount = 0;
 
@@ -230,8 +209,6 @@ public class RecentAppsPreferenceController extends BasePreferenceController
             }
         }
         mAppEntitiesController.apply();
-        mRecentAppsPreference.setVisible(true);
-        mAllAppPref.setVisible(false);
         mDivider.setVisible(true);
     }
 

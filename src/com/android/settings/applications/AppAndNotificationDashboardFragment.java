@@ -36,6 +36,10 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AppAndNotifDashboard";
 
+    private boolean mIsFirstLaunch;
+    private RecentAppsPreferenceController mRecentAppsPreferenceController;
+    private AllAppsInfoPreferenceController mAllAppsInfoPreferenceController;
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY;
@@ -61,7 +65,26 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
         super.onAttach(context);
 
         use(SpecialAppAccessPreferenceController.class).setSession(getSettingsLifecycle());
-        use(RecentAppsPreferenceController.class).setFragment(this /* fragment */);
+        mRecentAppsPreferenceController = use(RecentAppsPreferenceController.class);
+        mRecentAppsPreferenceController.setFragment(this /* fragment */);
+
+        mAllAppsInfoPreferenceController = use(AllAppsInfoPreferenceController.class);
+        mAllAppsInfoPreferenceController.setRecentApps(
+                mRecentAppsPreferenceController.getRecentApps());
+
+        mIsFirstLaunch = true;
+    }
+
+    @Override
+    public void onResume() {
+        if (!mIsFirstLaunch) {
+            mRecentAppsPreferenceController.reloadData();
+            mAllAppsInfoPreferenceController.setRecentApps(
+                    mRecentAppsPreferenceController.getRecentApps());
+        }
+
+        super.onResume();
+        mIsFirstLaunch = false;
     }
 
     @Override

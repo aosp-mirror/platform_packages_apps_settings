@@ -52,7 +52,9 @@ public class HomepageDisplayTests {
             "Display",
             "Sound",
             "Storage",
-            "Security & location",
+            "Security",
+            "Location",
+            "Privacy",
             "Accounts",
             "Accessibility",
             "System"

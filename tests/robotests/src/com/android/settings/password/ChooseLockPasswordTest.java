@@ -87,7 +87,7 @@ public class ChooseLockPasswordTest {
     @Test
     public void intentBuilder_setPassword_shouldAddExtras() {
         Intent intent = new IntentBuilder(application)
-                .setPassword("password")
+                .setPassword("password".getBytes())
                 .setPasswordQuality(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC)
                 .setUserId(123)
                 .build();
@@ -95,9 +95,9 @@ public class ChooseLockPasswordTest {
         assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true))
                 .named("EXTRA_KEY_HAS_CHALLENGE")
                 .isFalse();
-        assertThat(intent.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
+        assertThat(intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
                 .named("EXTRA_KEY_PASSWORD")
-                .isEqualTo("password");
+                .isEqualTo("password".getBytes());
         assertThat(intent.getIntExtra(PASSWORD_TYPE_KEY, 0))
                 .named("PASSWORD_TYPE_KEY")
                 .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
@@ -366,7 +366,9 @@ public class ChooseLockPasswordTest {
         intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, minComplexity);
         ChooseLockPassword activity = buildChooseLockPasswordActivity(intent);
         ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(activity);
-        int validateResult = fragment.validatePassword(userEnteredPassword);
+        byte[] userEnteredPasswordBytes = userEnteredPassword != null
+                ? userEnteredPassword.getBytes() : null;
+        int validateResult = fragment.validatePassword(userEnteredPasswordBytes);
         String[] messages = fragment.convertErrorCodeToMessages(validateResult);
 
         assertThat(messages).asList().containsExactly((Object[]) expectedValidationResult);

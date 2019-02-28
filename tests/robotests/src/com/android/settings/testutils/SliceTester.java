@@ -253,6 +253,18 @@ public class SliceTester {
         assertThat(hasText(sliceItems, subtitle, null /* hints */)).isTrue();
     }
 
+    /**
+     * Assert no slice item contains subtitle.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param subtitle Subtitle for asserting.
+     */
+    public static void assertNoSliceItemContainsSubtitle(List<SliceItem> sliceItems,
+            String subtitle) {
+        // Subtitle has no hints
+        assertThat(hasText(sliceItems, subtitle, null /* hints */)).isFalse();
+    }
+
     private static boolean hasText(List<SliceItem> sliceItems, String text, String hints) {
         boolean hasText = false;
         for (SliceItem item : sliceItems) {

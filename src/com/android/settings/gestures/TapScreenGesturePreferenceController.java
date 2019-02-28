@@ -20,11 +20,10 @@ import static android.provider.Settings.Secure.DOZE_TAP_SCREEN_GESTURE;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
-
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 
 public class TapScreenGesturePreferenceController extends GesturePreferenceController {
 

@@ -26,8 +26,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.hardware.display.AmbientDisplayConfiguration;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 
 import org.junit.Before;

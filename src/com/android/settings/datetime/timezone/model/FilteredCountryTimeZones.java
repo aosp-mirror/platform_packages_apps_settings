@@ -27,9 +27,19 @@ import java.util.stream.Collectors;
  */
 public class FilteredCountryTimeZones {
 
-    // New timezone list and the meta data of time zone, notUsedAfter, is introduced in Android P
-    // in 2018. Only show time zone used in or after 2018.
-    private static final long MIN_USE_DATE_OF_TIMEZONE = 1514764800000L; // 1/1/2018 00:00 UTC
+    /**
+     * The timestamp used to determine which time zones to show to users by using the notUsedAfter
+     * metadata Android holds for each time zone.
+     *
+     * notUsedAfter exists because some time zones effectively "merge" with other time zones after
+     * a given point in time (i.e. they have identical transitions, offsets, etc.). After that
+     * point we only need to show one of the functionally identical ones.
+     *
+     * Rather than using System.currentTimeMillis(), UX folks asked for consistent behavior and so
+     * a timestamp known to be in the recent past is used. This should be updated occasionally but
+     * it doesn't have to be very often.
+     */
+    private static final long MIN_USE_DATE_OF_TIMEZONE = 1546300800000L; // 1/1/2019 00:00 UTC
 
     private final CountryTimeZones mCountryTimeZones;
     private final List<String> mTimeZoneIds;

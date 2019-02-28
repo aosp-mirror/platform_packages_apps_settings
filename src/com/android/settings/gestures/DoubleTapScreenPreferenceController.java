@@ -21,13 +21,12 @@ import static android.provider.Settings.Secure.DOZE_DOUBLE_TAP_GESTURE;
 import android.annotation.UserIdInt;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
-
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 
 public class DoubleTapScreenPreferenceController extends GesturePreferenceController {
 

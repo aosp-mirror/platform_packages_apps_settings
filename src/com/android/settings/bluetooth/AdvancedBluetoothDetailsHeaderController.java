@@ -164,8 +164,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                 new BatteryMeterView.BatteryMeterDrawable(context,
                         context.getColor(R.color.meter_background_color));
         drawable.setBatteryLevel(level);
-        drawable.setShowPercent(false);
-        drawable.setBatteryColorFilter(new PorterDuffColorFilter(
+        drawable.setColorFilter(new PorterDuffColorFilter(
                 com.android.settings.Utils.getColorAttrDefaultColor(context,
                         android.R.attr.colorControlNormal),
                 PorterDuff.Mode.SRC_IN));

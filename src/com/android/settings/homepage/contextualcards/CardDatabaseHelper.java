@@ -208,7 +208,7 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
      * Mark a specific ContextualCard with dismissal flag in the database to indicate that the
      * card has been dismissed.
      *
-     * @param context Context
+     * @param context  Context
      * @param cardName The card name of the ContextualCard which is dismissed by user.
      * @return The number of rows updated
      */
@@ -220,7 +220,7 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
         final String[] selectionArgs = {cardName};
         final int rowsUpdated = database.update(CARD_TABLE, values, selection, selectionArgs);
         database.close();
-        context.getContentResolver().notifyChange(CardContentProvider.URI, null);
+        context.getContentResolver().notifyChange(CardContentProvider.DELETE_CARD_URI, null);
         return rowsUpdated;
     }
 }

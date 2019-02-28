@@ -18,11 +18,11 @@ package com.android.settings.gestures;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;

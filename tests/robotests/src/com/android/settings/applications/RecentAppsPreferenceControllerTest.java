@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -111,7 +112,6 @@ public class RecentAppsPreferenceControllerTest {
 
         final View appEntitiesHeaderView = LayoutInflater.from(context).inflate(
                 R.layout.app_entities_header, null /* root */);
-        final Preference seeAllPreference = new Preference(context);
         final Preference dividerPreference = new Preference(context);
         mRecentAppsPreference = spy(new LayoutPreference(context, appEntitiesHeaderView));
 
@@ -119,11 +119,8 @@ public class RecentAppsPreferenceControllerTest {
         mController.setFragment(mFragment);
         mController.mAppEntitiesController = mock(AppEntitiesHeaderController.class);
         mController.mRecentAppsPreference = mRecentAppsPreference;
-        mController.mAllAppPref = seeAllPreference;
         mController.mDivider = dividerPreference;
 
-        when(mScreen.findPreference(RecentAppsPreferenceController.KEY_ALL_APP_INFO))
-                .thenReturn(seeAllPreference);
         when(mScreen.findPreference(RecentAppsPreferenceController.KEY_DIVIDER))
                 .thenReturn(dividerPreference);
         when(mScreen.findPreference("test_key")).thenReturn(mRecentAppsPreference);
@@ -152,9 +149,33 @@ public class RecentAppsPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noRecentApps_shouldReturnAvailableUnsearchable() {
+    public void getAvailabilityStatus_noRecentApps_shouldReturnConditionallyUnavailable() {
         // No data
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_powerSaverModeOn_shouldReturnConditionallyUnavailable() {
+        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
+
+        final List<UsageStats> stats = new ArrayList<>();
+        final UsageStats stat1 = new UsageStats();
+
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "pkg.class";
+        stats.add(stat1);
+
+        // stat1, stat2 are valid apps. stat3 is invalid.
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mAppEntry);
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+                .thenReturn(new ResolveInfo());
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(stats);
+        mAppEntry.info = mApplicationInfo;
+        mController.reloadData();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -176,25 +197,6 @@ public class RecentAppsPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mController.mAppEntitiesController).isNotNull();
-    }
-
-    @Test
-    public void updateState_firstLaunch_shouldNotReloadData() {
-        mController.mIsFirstLaunch = true;
-
-        mController.updateState(mRecentAppsPreference);
-
-        verify(mController, never()).reloadData();
-    }
-
-    @Test
-    public void updateState_afterFirstLaunch_shouldReloadDataAndRefreshUi() {
-        mController.mIsFirstLaunch = false;
-
-        mController.updateState(mRecentAppsPreference);
-
-        verify(mController).reloadData();
-        verify(mController).refreshUi();
     }
 
     @Test
@@ -227,7 +229,7 @@ public class RecentAppsPreferenceControllerTest {
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
-        mController.mIsFirstLaunch = false;
+        mController.reloadData();
 
         mController.updateState(mRecentAppsPreference);
 
@@ -235,7 +237,6 @@ public class RecentAppsPreferenceControllerTest {
                 .setAppEntity(anyInt(), any(AppEntityInfo.class));
         assertThat(mController.mRecentAppsPreference.isVisible()).isTrue();
         assertThat(mController.mDivider.isVisible()).isTrue();
-        assertThat(mController.mAllAppPref.isVisible()).isFalse();
     }
 
     @Test
@@ -268,7 +269,7 @@ public class RecentAppsPreferenceControllerTest {
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
-        mController.mIsFirstLaunch = false;
+        mController.reloadData();
 
         mController.updateState(mRecentAppsPreference);
 
@@ -278,35 +279,6 @@ public class RecentAppsPreferenceControllerTest {
                 .setAppEntity(anyInt(), any(AppEntityInfo.class));
         assertThat(mController.mRecentAppsPreference.isVisible()).isTrue();
         assertThat(mController.mDivider.isVisible()).isTrue();
-        assertThat(mController.mAllAppPref.isVisible()).isFalse();
-    }
-
-    @Test
-    public void updateState_powerSaverModeOn_headerIsNotVisible() {
-        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
-
-        final List<UsageStats> stats = new ArrayList<>();
-        final UsageStats stat1 = new UsageStats();
-
-        stat1.mLastTimeUsed = System.currentTimeMillis();
-        stat1.mPackageName = "pkg.class";
-        stats.add(stat1);
-
-        // stat1, stat2 are valid apps. stat3 is invalid.
-        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mAppEntry);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(new ResolveInfo());
-        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-                .thenReturn(stats);
-        mAppEntry.info = mApplicationInfo;
-        mController.mIsFirstLaunch = false;
-
-        mController.updateState(mRecentAppsPreference);
-
-        assertThat(mController.mRecentAppsPreference.isVisible()).isFalse();
-        assertThat(mController.mDivider.isVisible()).isFalse();
-        assertThat(mController.mAllAppPref.isVisible()).isTrue();
     }
 
     @Test
@@ -341,7 +313,7 @@ public class RecentAppsPreferenceControllerTest {
         // Make sure stat2 is considered an instant app.
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (ApplicationInfo info) -> info == stat2Entry.info);
-        mController.mIsFirstLaunch = false;
+        mController.reloadData();
 
         mController.updateState(mRecentAppsPreference);
 
@@ -417,7 +389,7 @@ public class RecentAppsPreferenceControllerTest {
                 .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
-        mController.mIsFirstLaunch = false;
+        mController.reloadData();
 
         mController.updateState(mRecentAppsPreference);
 

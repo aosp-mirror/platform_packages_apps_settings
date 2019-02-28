@@ -70,8 +70,8 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     private RestrictedSwitchPreference mUnifyProfile;
 
 
-    private String mCurrentDevicePassword;
-    private String mCurrentProfilePassword;
+    private byte[] mCurrentDevicePassword;
+    private byte[] mCurrentProfilePassword;
     private boolean mKeepDeviceLock;
 
     @Override
@@ -151,13 +151,13 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         } else if (requestCode == UNIFY_LOCK_CONFIRM_DEVICE_REQUEST
                 && resultCode == Activity.RESULT_OK) {
             mCurrentDevicePassword =
-                    data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                    data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             launchConfirmProfileLock();
             return true;
         } else if (requestCode == UNIFY_LOCK_CONFIRM_PROFILE_REQUEST
                 && resultCode == Activity.RESULT_OK) {
             mCurrentProfilePassword =
-                    data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                    data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             unifyLocks();
             return true;
         }
@@ -226,7 +226,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         // PASSWORD_QUALITY_SOMETHING means pattern, everything above means PIN/password.
         if (profileQuality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
             mLockPatternUtils.saveLockPattern(
-                    LockPatternUtils.stringToPattern(mCurrentProfilePassword),
+                    LockPatternUtils.byteArrayToPattern(mCurrentProfilePassword),
                     mCurrentDevicePassword, MY_USER_ID);
         } else {
             mLockPatternUtils.saveLockPassword(
