@@ -18,15 +18,8 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
-
-import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
+import android.permission.PermissionControllerManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,62 +28,27 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultHomeShortcutPreferenceControllerTest {
 
     @Mock
-    private PackageManager mPackageManager;
+    private PermissionControllerManager mPermissionControllerManager;
 
-    private Context mContext;
     private DefaultHomeShortcutPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mController = new DefaultHomeShortcutPreferenceController(mContext, "Package1");
+        ShadowApplication.getInstance().setSystemService(Context.PERMISSION_CONTROLLER_SERVICE,
+                mPermissionControllerManager);
+        mController = new DefaultHomeShortcutPreferenceController(RuntimeEnvironment.application,
+                "Package1");
     }
 
     @Test
     public void getPreferenceKey_shouldReturnDefaultHome() {
         assertThat(mController.getPreferenceKey()).isEqualTo("default_home");
-    }
-
-    @Test
-    @Config(shadows = ShadowDefaultHomePreferenceController.class)
-    public void hasAppCapability_hasHomeCapability_shouldReturnTrue() {
-        assertThat(mController.hasAppCapability()).isTrue();
-    }
-
-    @Test
-    public void hasAppCapability_noHomeCapability_shouldReturnFalse() {
-        assertThat(mController.hasAppCapability()).isFalse();
-    }
-
-    @Test
-    public void isDefaultApp_isDefaultHome_shouldReturnTrue() {
-        when(mPackageManager.getHomeActivities(anyList()))
-                .thenReturn(new ComponentName("Package1", "cls1"));
-        assertThat(mController.isDefaultApp()).isTrue();
-    }
-
-    @Test
-    public void isDefaultApp_notDefaultHome_shouldReturnFalse() {
-        when(mPackageManager.getHomeActivities(anyList()))
-                .thenReturn(new ComponentName("pkg2", "cls1"));
-        assertThat(mController.isDefaultApp()).isFalse();
-    }
-
-    @Implements(DefaultHomePreferenceController.class)
-    public static class ShadowDefaultHomePreferenceController {
-        @Implementation
-        protected static boolean hasHomePreference(String pkg, Context context) {
-            return true;
-        }
     }
 }
