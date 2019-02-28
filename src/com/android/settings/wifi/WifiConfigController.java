@@ -1509,7 +1509,7 @@ public class WifiConfigController implements TextWatcher,
         // Populate the Wi-Fi security spinner with the various supported key management types
         spinnerAdapter.add(mContext.getString(R.string.wifi_security_none));
         mSecurityInPosition[idx++] = AccessPoint.SECURITY_NONE;
-        if (mWifiManager.isOweSupported()) {
+        if (mWifiManager.isEnhancedOpenSupported()) {
             spinnerAdapter.add(mContext.getString(R.string.wifi_security_owe));
             mSecurityInPosition[idx++] = AccessPoint.SECURITY_OWE;
         }
