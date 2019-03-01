@@ -18,15 +18,8 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
+import android.permission.PermissionControllerManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,57 +28,27 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultBrowserShortcutPreferenceControllerTest {
 
     @Mock
-    private PackageManager mPackageManager;
+    private PermissionControllerManager mPermissionControllerManager;
 
-    private Context mContext;
     private DefaultBrowserShortcutPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        mController = new DefaultBrowserShortcutPreferenceController(mContext, "Package1");
+        ShadowApplication.getInstance().setSystemService(Context.PERMISSION_CONTROLLER_SERVICE,
+                mPermissionControllerManager);
+        mController = new DefaultBrowserShortcutPreferenceController(RuntimeEnvironment.application,
+                "Package1");
     }
 
     @Test
     public void getPreferenceKey_shouldReturnDefaultBrowser() {
         assertThat(mController.getPreferenceKey()).isEqualTo("default_browser");
-    }
-
-    @Test
-    public void hasAppCapability_hasBrowserCapability_shouldReturnTrue() {
-        List<ResolveInfo> resolveInfos = new ArrayList<>();
-        resolveInfos.add(new ResolveInfo());
-        when(mPackageManager.queryIntentActivitiesAsUser(argThat(intent-> intent != null
-                && intent.getCategories().contains(Intent.CATEGORY_BROWSABLE)), anyInt(), anyInt()))
-                .thenReturn(resolveInfos);
-
-        assertThat(mController.hasAppCapability()).isTrue();
-    }
-
-    @Test
-    public void hasAppCapability_noBrowserCapability_shouldReturnFalse() {
-        assertThat(mController.hasAppCapability()).isFalse();
-    }
-
-    @Test
-    public void isDefaultApp_isDefaultBrowser_shouldReturnTrue() {
-        when(mPackageManager.getDefaultBrowserPackageNameAsUser(anyInt())).thenReturn("Package1");
-
-        assertThat(mController.isDefaultApp()).isTrue();
-    }
-
-    @Test
-    public void isDefaultApp_notDefaultBrowser_shouldReturnFalse() {
-        assertThat(mController.isDefaultApp()).isFalse();
     }
 }

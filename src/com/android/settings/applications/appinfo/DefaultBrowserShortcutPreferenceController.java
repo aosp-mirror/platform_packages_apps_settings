@@ -14,10 +14,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import android.app.role.RoleManager;
 import android.content.Context;
-import android.os.UserHandle;
-
-import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 
 public class DefaultBrowserShortcutPreferenceController
         extends DefaultAppShortcutPreferenceControllerBase {
@@ -25,19 +23,6 @@ public class DefaultBrowserShortcutPreferenceController
     private static final String KEY = "default_browser";
 
     public DefaultBrowserShortcutPreferenceController(Context context, String packageName) {
-        super(context, KEY, packageName);
+        super(context, KEY, RoleManager.ROLE_BROWSER, packageName);
     }
-
-    @Override
-    protected boolean hasAppCapability() {
-        return DefaultBrowserPreferenceController
-                .hasBrowserPreference(mPackageName, mContext, UserHandle.myUserId());
-    }
-
-    @Override
-    protected boolean isDefaultApp() {
-        return new DefaultBrowserPreferenceController(mContext)
-                .isBrowserDefault(mPackageName, UserHandle.myUserId());
-    }
-
 }
