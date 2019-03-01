@@ -29,6 +29,8 @@ import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+import java.util.concurrent.Executor;
+
 /*
  * Abstract base controller for the default app shortcut preferences that launches the default app
  * settings with the corresponding default app highlighted.
@@ -40,6 +42,8 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
     protected final String mPackageName;
 
     private final RoleManager mRoleManager;
+
+    private boolean mRoleVisible;
 
     private boolean mAppQualified;
 
@@ -56,8 +60,13 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
 
         final PermissionControllerManager permissionControllerManager =
                 mContext.getSystemService(PermissionControllerManager.class);
-        permissionControllerManager.isApplicationQualifiedForRole(mRoleName, mPackageName,
-                mContext.getMainExecutor(), qualified -> {
+        final Executor executor = mContext.getMainExecutor();
+        permissionControllerManager.isRoleVisible(mRoleName, executor, visible -> {
+            mRoleVisible = visible;
+            refreshAvailability();
+        });
+        permissionControllerManager.isApplicationQualifiedForRole(mRoleName, mPackageName, executor,
+                qualified -> {
                     mAppQualified = qualified;
                     refreshAvailability();
                 });
@@ -85,7 +94,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
         if (mContext.getSystemService(UserManager.class).isManagedProfile()) {
             return DISABLED_FOR_USER;
         }
-        return mAppQualified ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mRoleVisible && mAppQualified ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
