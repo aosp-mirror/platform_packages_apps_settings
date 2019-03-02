@@ -619,8 +619,8 @@
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Canvia el PIN de desbloqueig"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Canvia la contrasenya de desbloqueig"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="7529087063617325912">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomana que el PIN o la contrasenya siguin segurs; si no ho són, és possible que no funcioni correctament"</string>
-    <string name="unlock_footer_medium_complexity_requested" msgid="4195620619469851350">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomana que canviïs el PIN o la contrasenya; si no ho fas, és possible que no funcioni correctament"</string>
-    <string name="unlock_footer_low_complexity_requested" msgid="428655972363263817">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomana que canviïs el patró, el PIN o la contrasenya; si no ho fas, és possible que no funcioni correctament"</string>
+    <string name="unlock_footer_medium_complexity_requested" msgid="4195620619469851350">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomana que estableixis un PIN o contrasenya nous; si no ho fas, és possible que no funcioni correctament"</string>
+    <string name="unlock_footer_low_complexity_requested" msgid="428655972363263817">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomana que estableixis un patró, PIN o contrasenya nous; si no ho fas, és possible que no funcioni correctament"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="6275441987228550440">"<xliff:g id="APP_NAME">%1$s</xliff:g> recomana que estableixis un bloqueig de pantalla nou"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Torna-ho a provar. Intent <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> de <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Se suprimiran les teves dades"</string>
@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> vol activar la Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> vol desactivar la Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Verifica el bytecode d\'apps depurables"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Permet que ART verifiqui el bytecode de les aplicacions depurables"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permet l\'intercanvi de dades quan la tauleta toqui un altre dispositiu"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permet l\'intercanvi de dades quan el telèfon toqui un altre dispositiu"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Tria almenys una banda per al punt d\'accés Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Configuració IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Privadesa"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Adreça MAC aleatòria"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Afegeix un dispositiu"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Centra el codi QR a sota per afegir el dispositiu a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Escaneja un codi QR"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Escaneja un codi QR per unir-te a la xarxa Wi‑Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Comparteix la Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Escaneja aquest codi QR amb un altre dispositiu per unir-te a <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"No s\'ha pogut llegir el codi QR"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"No s\'ha pogut llegir el codi QR. Torna\'l a centrar i prova-ho una altra vegada."</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Torna-ho a provar. Si el problema continua, contacta amb el fabricant del dispositiu"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"S\'ha produït un error"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Comprova que el dispositiu tingui bateria i estigui connectat i encès"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Comprova que el dispositiu tingui bateria i estigui connectat i encès. Si el problema continua, contacta amb el fabricant del dispositiu"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"En aquest dispositiu no es pot afegir \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Comprova la connexió i torna-ho a provar"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Tria una xarxa"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Per connectar el dispositiu, tria una xarxa"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Vols afegir aquest dispositiu a \"<xliff:g id="SSID">%1$s</xliff:g>\"?"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Tria una xarxa diferent"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"No s\'ha pogut afegir el dispositiu"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Dispositiu detectat"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Torna-ho a provar"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Comparteix amb altres usuaris del dispositiu"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(sense canvis)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Quan les trucades per Wi-Fi estan activades, el telèfon pot dirigir trucades per les xarxes Wi-Fi o per la xarxa de l\'operador de telefonia mòbil segons la teva preferència i la intensitat del senyal. Abans d\'activar aquesta funció, comprova amb l\'operador si hi ha cap càrrec i altres detalls."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Quan la funció Trucades per Wi‑Fi està activada, el telèfon pot encaminar trucades a través de xarxes Wi‑Fi o de la xarxa de l\'operador de telefonia mòbil, segons la teva preferència i la intensitat del senyal. Abans d\'activar aquesta funció, contacta amb l\'operador per saber si hi ha cap càrrec i obtenir més informació.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Adreça d\'emergència"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"S\'utilitza com la teva ubicació si fas una trucada d\'emergència per Wi-Fi"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualitzacions del sistema"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versió d\'Android"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Nivell de pedaç de seguretat d\'Android"</string>
     <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="model_summary" msgid="8306235877567782987">"Model: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minuts"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Temps de lectura"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Temps per dur a terme l\'acció"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Selecciona el temps que vols tenir per llegir els missatges i dur a terme accions abans que desapareguin automàticament.\n\nAquesta opció no és compatible amb totes les aplicacions."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Selecciona el temps que vols tenir per llegir els missatges que es mostren temporalment i et demanen que duguis a terme una acció.\n\nAquesta opció no és compatible amb totes les aplicacions."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Retard en mantenir premut"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversió dels colors"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Amaga les icones de les notificacions silencioses a la barra d\'estat"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Permet els punts de notificació"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Permet els quadres d\'ajuda de notificació"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Accions en lliscar"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Llisca cap a la dreta per ignorar o cap a l\'esquerra per mostrar el menú"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Llisca cap a l\'esquerra per ignorar o cap a la dreta per mostrar el menú"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Llum intermitent"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"A la pantalla de bloqueig"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Si perfil professional bloquejat"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="other">%d aplicacions poden llegir notificacions</item>
       <item quantity="one">%d aplicació pot llegir notificacions</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Assistent de notificacions"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"No hi ha cap assistent"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Cap aplicació instal·lada no ha sol·licitat accés a les notificacions."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Vols que <xliff:g id="SERVICE">%1$s</xliff:g> tingui accés a les notificacions?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms dels contactes i el text dels missatges que rebis. També podrà modificar o ignorar les notificacions o activar els botons d\'acció que continguin. \n\nL\'aplicació també podrà activar i desactivar el mode No molestis i canviar la configuració que hi estigui relacionada."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Vols que <xliff:g id="SERVICE">%1$s</xliff:g> tingui accés a les notificacions?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms dels contactes i el text dels missatges que rebis. També podrà ignorar les notificacions o activar els botons d\'acció que continguin. \n\nL\'aplicació també podrà activar i desactivar el mode No molestis i canviar la configuració que hi estigui relacionada."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Si desactives l\'accés a les notificacions per a <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, és possible que també es desactivi l\'accés al mode No molestis."</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Configuració avançada"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configura aplicacions"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplicació desconeguda"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Permisos d\'aplicacions"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Gestor de permisos"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Aplicacions que utilitzen <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Toca per activar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Toca dos cops un punt de la pantalla per activar el dispositiu"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Actualitza el mode No molestis"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Posa en pausa les notificacions per centrar l\'atenció"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Aquesta funció no està disponible en aquest dispositiu"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Força els mesuraments de GNSS complets"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Fes un seguiment de totes les freqüències i constel·lacions de GNSS sense cicle de treball"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Permet l\'inici d\'activitats en segon pla"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Torna-ho a provar"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"S\'ha produït un error. L\'aplicació ha cancel·lat la sol·licitud per seleccionar un dispositiu."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"S\'ha connectat correctament"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Mostra-ho tot"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dispositius connectats</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> dispositiu connectat</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"Cap aplicació no ha fet servir permisos"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Permisos més utilitzats en les últimes 24 hores"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Mostra tots els usos"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Consulta el tauler de permisos"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Ús de les funcions d\'accessibilitat"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> serveis tenen accés complet al dispositiu</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Gestiona les notificacions de l\'aplicació <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"No hi ha aplicacions suggerides"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canals de notificacions. Toca per gestionar-los tots.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> canal de notificacions. Toca per gestionar-lo.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canals de notificacions.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> canal de notificacions.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> canals de notificacions. Toca per gestionar-los tots."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Canvia la sortida"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"S\'està reproduint al dispositiu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

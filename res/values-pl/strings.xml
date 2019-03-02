@@ -833,6 +833,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> chce włączyć Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> chce wyłączyć Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Sprawdź kod bajtowy aplikacji do debugowania"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Zezwalaj ART na sprawdzanie kodu bajtowego aplikacji do debugowania"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"Komunikacja NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Zezwalaj na wymianę danych, gdy tablet dotyka innego urządzenia"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Zezwalaj na wymianę danych, gdy telefon dotyka innego urządzenia"</string>
@@ -947,6 +949,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wybierz co najmniej jedno pasmo dla hotspotu Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Ustawienia IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Prywatność"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Randomizowany adres MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Dodawanie urządzenia"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Wyśrodkuj kod QR poniżej, by podłączyć urządzenie do sieci „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Zeskanuj kod QR"</string>
@@ -954,7 +957,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Zeskanuj kod QR i połącz się z siecią Wi-Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Udostępnij Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Zeskanuj ten kod QR przy użyciu innego urządzenia, by połączyć się z siecią „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Nie udało się odczytać kodu QR"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Nie udało się odczytać kodu QR. Ustaw kod pośrodku pola i spróbuj ponownie"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Spróbuj ponownie. Jeśli problem się powtórzy, skontaktuj się z producentem urządzenia"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Coś poszło nie tak"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Upewnij się, że urządzenie jest podłączone do zasilania, naładowane i włączone"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Upewnij się, że urządzenie jest podłączone do zasilania, naładowane i włączone. Jeśli problem się powtórzy, skontaktuj się z producentem urządzenia"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Na tym urządzeniu nie można dodać sieci „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Sprawdź połączenie i spróbuj ponownie"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Wybierz sieć"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Aby podłączyć urządzenie, wybierz sieć"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Dodać to urządzenie do sieci „<xliff:g id="SSID">%1$s</xliff:g>”?"</string>
@@ -963,6 +972,8 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Wybierz inną sieć"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Nie udało się dodać urządzenia"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Znaleziono urządzenie"</string>
+    <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="5579154298588011712">"Udostępniam Wi‑temu urządzeniu…"</string>
+    <string name="wifi_dpp_connecting" msgid="7111851118215580428">"Łączę…"</string>
     <string name="retry" msgid="6472609612090877557">"Ponów"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Udostępnij innym użytkownikom urządzenia"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(nie zmieniono)"</string>
@@ -1105,7 +1116,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Gdy połączenia przez Wi-Fi są włączone, telefon może przekazywać połączenia przez sieci Wi-Fi lub sieć operatora (w zależności od ustawień i tego, który sygnał jest w danej chwili silniejszy). Przed włączeniem tej funkcji sprawdź koszt jej obsługi przez operatora."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Po włączeniu opcji Połączenia przez Wi-Fi telefon może kierować połączenia przez sieci Wi-lub sieć operatora w zależności od ustawień i siły sygnału. Zanim włączysz tę funkcję, sprawdź, jakie opłaty pobiera operator, i zapoznaj się z innymi warunkami usługi.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Adres alarmowy"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Traktowany jako Twoja lokalizacja, gdy dzwonisz pod numer alarmowy przez Wi‑Fi"</string>
@@ -1306,7 +1317,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Aktualizacje systemu"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Wersja Androida"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Stan aktualizacji zabezpieczeń"</string>
     <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="model_summary" msgid="8306235877567782987">"Model: %1$s"</string>
@@ -2082,7 +2092,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minuty"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Czas na czytanie"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Czas na wykonanie czynności"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Określ, ile czasu chcesz poświęcać na czytanie wiadomości wyświetlanych automatycznie i wykonywanie związanych z nimi czynności.\n\nObsługa tego ustawienia zależy od aplikacji."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Określ, jak długo mają być wyświetlane wiadomości wymagające wykonania jakiejś czynności, które są widoczne tylko tymczasowo.\n\nNie wszystkie aplikacje obsługują to ustawienie."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Czas dotknięcia i przytrzymania"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Odwrócenie kolorów"</string>
@@ -3340,6 +3351,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Ukryj ikony cichych powiadomień na pasku stanu"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Zezwól na plakietki z powiadomieniami"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Zezwól na dymki z powiadomieniami"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Działania przesuwania"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Przesuń w prawo, by zamknąć, i w lewo, by wyświetlić menu."</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Przesuń w lewo, by zamknąć, i w prawo, by wyświetlić menu"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Migająca dioda"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Na ekranie blokady"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Gdy profil do pracy jest zablokowany"</string>
@@ -3388,7 +3402,11 @@
       <item quantity="other">%d aplikacji może odczytywać powiadomienia</item>
       <item quantity="one">%d aplikacja może odczytywać powiadomienia</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Asystent powiadomień"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Brak asystenta"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Żadna z zainstalowanych aplikacji nie prosiła o dostęp do powiadomień."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Zezwolić usłudze <xliff:g id="SERVICE">%1$s</xliff:g> na dostęp do powiadomień?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"Aplikacja <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> będzie mogła czytać wszystkie powiadomienia, w tym dane osobowe takie jak nazwy kontaktów oraz treść otrzymywanych wiadomości. Będzie też mogła modyfikować lub odrzucać powiadomienia oraz używać zawartych w nich przycisków działań. \n\nDodatkowo aplikacja będzie mogła włączać lub wyłączać tryb Nie przeszkadzać i zmieniać powiązane ustawienia."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Zezwolić usłudze <xliff:g id="SERVICE">%1$s</xliff:g> na dostęp do powiadomień?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"Aplikacja <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> będzie mogła czytać wszystkie powiadomienia, w tym informacje osobiste, takie jak nazwy kontaktów i treść otrzymywanych wiadomości. Będzie też mogła odrzucać powiadomienia lub używać zawartych w nich przycisków czynności. \n\nDodatkowo aplikacja będzie mogła włączać lub wyłączać opcję Nie przeszkadzać i zmieniać powiązane ustawienia."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Jeśli wyłączysz dostęp do powiadomień dla aplikacji <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, możesz również wyłączyć opcję Nie przeszkadzać."</string>
@@ -3683,7 +3701,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Zaawansowane"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Skonfiguruj aplikacje"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Nieznana aplikacja"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Uprawnienia aplikacji"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Menedżer uprawnień"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Aplikacje używające: <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Kliknij, by wybudzić"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Kliknij dwukrotnie w dowolnym miejscu na ekranie, by wybudzić urządzenie"</string>
@@ -4351,6 +4369,8 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Zmień ustawienia trybu Nie przeszkadzać"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Wstrzymaj powiadomienia, by Cię nie rozpraszały"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ta funkcja jest niedostępna na tym urządzeniu."</string>
+    <string name="disabled_feature" msgid="2102058661071271076">"Ta funkcja jest niedostępna"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Spowoduje spowolnienie telefonu"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Wymuś pełną procedurę pomiarów GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Śledź wszystkie konstelacje GNSS i częstotliwości bez uwzględniania współczynnika impulsu"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Zezwól na uruchomienie aktywności w tle"</string>
@@ -4515,6 +4535,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Spróbuj ponownie"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Coś się stało. Aplikacja anulowała prośbę o wybór urządzenia."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Mamy połączenie"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Pokaż wszystko"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="few">Podłączono <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> urządzenia</item>
       <item quantity="many">Podłączono <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> urządzeń</item>
@@ -4544,7 +4565,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 aplikacji korzystało z uprawnień"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Uprawnienia używane najczęściej w ciągu ostatnich 24 godzin"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Zobacz wszystkie informacje o użyciu"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Wyświetl panel uprawnień"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Użycie ułatwień dostępu"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="few"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> usługi mają pełny dostęp do urządzenia</item>
@@ -4554,12 +4575,15 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Zarządzaj powiadomieniami z aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Brak proponowanych aplikacji"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> kanały powiadomień. Kliknij, by zarządzać wszystkimi.</item>
-      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> kanałów powiadomień. Kliknij, by zarządzać wszystkimi.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> kanału powiadomień. Kliknij, by zarządzać wszystkimi.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> kanał powiadomień. Kliknij, by zarządzać wszystkimi.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> kanały powiadomień.</item>
+      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> kanałów powiadomień.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> kanału powiadomień.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> kanał powiadomień.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"Liczba kanałów powiadomień: <xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g>. Kliknij, by zarządzać wszystkimi."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Przełącz urządzenie wyjściowe"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Aktualnie odtwarzane na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

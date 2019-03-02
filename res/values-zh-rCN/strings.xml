@@ -446,7 +446,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"下一步"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"要跳过指纹设置？"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"指纹设置只需片刻时间。如果您跳过此设置，之后可以在设置中添加您的指纹。"</string>
-    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"要跳过屏幕锁定吗？"</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"要跳过屏幕锁定设置步骤吗？"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗或被重置，您将无法防止他人使用此平板电脑。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"系统将不会启用设备保护功能。如果您的设备丢失、被盗或被重置，您将无法防止他人使用此设备。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"系统将不会启用设备保护功能。如果您的手机丢失、被盗或被重置，您将无法防止他人使用此手机。"</string>
@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g>请求开启 WLAN"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g>请求关闭 WLAN"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"验证可调试应用的字节码"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"允许 ART 验证可调试应用的字节码"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"允许平板电脑在接触其他设备时交换数据"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"允许手机在接触其他设备时交换数据"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"请为 WLAN 热点至少选择一个频段："</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP 设置"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"隐私"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"随机选择的 MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"添加设备"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"将二维码置于下方中间位置即可将设备添加到“<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"扫描二维码"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"扫描二维码即可加入 WLAN"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"分享 WLAN"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"使用其他设备扫描此二维码即可加入“<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"无法读取二维码"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"无法读取二维码。请重新将二维码置中，然后重试"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"请重试。如果问题依然存在，请与设备制造商联系"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"出了点问题"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"请确保设备已连接到电源，正在充电且处于开启状态"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"请确保设备已连接到电源，正在充电且处于开启状态。如果问题依然存在，请与设备制造商联系"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"此设备不支持添加“<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"请检查连接状况，然后重试"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"选择网络"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"要连接设备，请选择一个网络"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"要将此设备添加到“<xliff:g id="SSID">%1$s</xliff:g>”吗？"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"选择其他网络"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"无法添加设备"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"找到设备"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"重试"</string>
     <string name="wifi_shared" msgid="844142443226926070">"与其他设备用户共享"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"（未更改）"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"开启“WLAN 通话”功能后，您的手机可根据您的偏好设置，通过 WLAN 网络或您的运营商网络通话（具体取决于哪个网络信号较强）。开启此功能之前，请先向您的运营商咨询收费情况及其他详情。"</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"开启“WLAN 通话”功能后，您的手机可根据偏好设置并视信号强弱来选择通过 WLAN 网络或运营商网络来进行通话。开启此功能之前，请先向您的运营商咨询收费情况及其他详情。<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"紧急联系地址"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"当您通过 WLAN 网络拨打紧急呼救电话时，系统会判定您位于这个位置"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"系统更新"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android 版本"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android 安全补丁程序级别"</string>
     <string name="model_info" msgid="1952009518045740889">"型号"</string>
     <string name="model_summary" msgid="8306235877567782987">"型号：%1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 分钟"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"阅读时间"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"执行操作时间"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"请选择您想要多长时间来阅读自动消失的消息并对这类消息执行操作。\n\n部分应用可能不支持这项设置。"</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"请选择提示您执行操作的消息的显示时间（只会暂时显示）。\n\n部分应用可能不支持这项设置。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"触摸和按住延迟"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"颜色反转"</string>
@@ -2881,7 +2894,7 @@
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"但其他付款应用开启时除外"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"通过触碰付款终端进行付款时使用以下应用："</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"通过支付终端付款"</string>
-    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"设置付款应用，然后只需将手机背面靠近任何带有非接触标志的终端即可。"</string>
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"设置付款应用，然后只需将手机背面靠近任何带有感应式标志的终端即可。"</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"知道了"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"更多…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"要设为您的偏好设置吗？"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"隐藏状态栏中无声通知的图标"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"允许使用通知圆点"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"允许显示通知气泡"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"滑动操作"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"向右滑动即可关闭，向左滑动即可显示菜单"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"向左滑动即可关闭，向右滑动即可显示菜单"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"闪烁指示灯"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"在锁定屏幕上"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"当工作资料遭到锁定时"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="other">%d 个应用可以读取通知</item>
       <item quantity="one">%d 个应用可以读取通知</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"通知助手"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"不使用助手"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"没有任何已安装的应用请求通知访问权限。"</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"要允许<xliff:g id="SERVICE">%1$s</xliff:g>访问通知吗？"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>将可读取所有通知（包括联系人姓名和您收到的消息文字等个人信息），而且还能修改/关闭通知或触发通知中的操作按钮。\n\n此外，该应用将因此能够开启或关闭勿扰模式，以及更改相关设置。"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"要允许<xliff:g id="SERVICE">%1$s</xliff:g>获取通知访问权限吗？"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>将可读取所有通知（包括联系人姓名和您收到的消息正文等个人信息），而且还能关闭通知或触发通知中的操作按钮。\n\n另外，此应用还将能开启或关闭勿扰模式，以及更改相关设置。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知访问权限，勿扰模式的访问权限可能也会遭到停用。"</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"高级"</string>
     <string name="configure_apps" msgid="6685680790825882528">"配置应用"</string>
     <string name="unknown_app" msgid="5275921288718717656">"未知应用"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"应用权限"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"权限管理器"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"目前使用<xliff:g id="APPS">%1$s</xliff:g>的应用"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"点按唤醒"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"在屏幕上的任意位置点按两次即可唤醒设备"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"更新勿扰模式"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"暂停通知即可保持专注"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"该设备不支持此功能"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"强制启用 GNSS 测量结果全面跟踪"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"在停用工作周期的情况下跟踪所有 GNSS 星座和频率"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"允许系统执行后台活动"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"重试"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"出了点问题。该应用已取消选择设备的请求。"</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"连接成功"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"全部显示"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other">已连接 <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> 个设备</item>
       <item quantity="one">已连接 <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> 个设备</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 个已使用权限的应用"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"过去 24 小时内最常使用的权限"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"查看所有使用情况"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"查看权限信息中心"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"使用无障碍功能"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other">有 <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> 项服务对您的设备拥有完整访问权限</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"管理<xliff:g id="APP_NAME">%1$s</xliff:g>通知"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"没有建议的应用"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> 个通知渠道。点按即可管理全部。</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> 个通知渠道。点按即可管理全部。</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> 个通知渠道。</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> 个通知渠道。</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> 个通知渠道。点按即可管理全部。"</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"切换输出"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"目前正在<xliff:g id="DEVICE_NAME">%1$s</xliff:g>上播放"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

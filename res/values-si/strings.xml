@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> හට Wi-Fi ක්‍රියාත්මක කිරීමට අවශ්‍යය"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> හට Wi-Fi ක්‍රියාවිරහිත කිරීමට අවශ්‍යය"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"දෝෂ නිරාකරණ කළ හැකි යෙදුම්වල බයිට්කේතය සත්‍යාපන කරන්න"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"දෝෂ නිරාකරණ කළ හැකි යෙදුම් සඳහා බයිට්කේතය සත්‍යාපන කිරීමට ART හට ඉඩ දෙන්න"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"ටැබ්ලටය වෙනත් උපාංගයක් ස්පර්ශ කළ විට දත්ත හුවමාරුවට අවසර දෙන්න"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"දුරකථනය වෙනත් උපාංගයක් ස්පර්ශ කරන විට දත්ත හුවමාරුවට අවසර දෙන්න"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi-Fi හොට්ස්පොට් සඳහා අවම වශයෙන් එක් කලාපයක් තෝරන්න:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP සැකසීම්"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"රහස්‍යතාව"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"අහඹු කළ MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"උපාංගයක් එක් කරන්න"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"උපාංගය “<xliff:g id="SSID">%1$s</xliff:g>” වෙත එක් කිරීමට පහත QR කේතය කේන්‍ද්‍රගත කරන්න"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR කේතය ස්කෑන් කරන්න"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"QR කේතයක් ස්කෑන් කිරීමෙන් Wi‑Fi වෙත එකතු වන්න"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Wi‑Fi බෙදා ගන්න"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"මෙම QR කේතය “<xliff:g id="SSID">%1$s</xliff:g>” සමග එක් වීමට වෙනත් උපාංගයක් සමඟ ස්කෑන් කරන්න"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR කේතය කියවීමට නොහැකි විය"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR කේතය කියවීමට නොහැකි විය. කේතය යළි ඇතුළත් කර නැවත උත්සාහ කරන්න"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"නැවත උත්සාහ කරන්න. ගැටලුව පවතින්නේ නම්, උපාංග නිෂ්පාදකය සම්බන්ධ කර ගන්න"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"යමක් වැරදිණි"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"උපාංගය පේනුගත කර, ආරෝපණ කර, සක්‍රීය කර තිබෙන බවට වග බලා ගන්න"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"උපාංගය පේනුගත කර, ආරෝපණ කර, සක්‍රීය කර තිබෙන බවට වග බලා ගන්න. ගැටලුව පවතින්නේ නම්, උපාංග නිෂ්පාදකය සම්බන්ධ කර ගන්න"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"“<xliff:g id="SSID">%1$s</xliff:g>” එක් කිරීමට මෙම උපාංගයෙන් සහය නොදැක්වේ"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"සම්බන්ධතාව පරීක්‍ෂා කර නැවත උත්සාහ කරන්න"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"ජාලය තෝරන්න"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"ඔබේ උපාංගය සම්බන්ධ කිරීමට, ජාලයක් තෝරන්න"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"මෙම උපාංගය “<xliff:g id="SSID">%1$s</xliff:g>”ට එක් කරන්නේද?"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"වෙනත් ජාලයක් තෝරන්න"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"උපාංගය එක් කළ නොහැකි විය"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"උපාංගය හමු විය"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"යළි උත්සාහ කරන්න"</string>
     <string name="wifi_shared" msgid="844142443226926070">"අනෙකුත් උපාංග පරිශීලකයන් සමග බෙදා ගන්න"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(වෙනස් නොකළ)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi ඇමතීම ක්‍රියාත්මකයි, ඔබේ දුරකථනයට ඔබේ මනාපය සහ සංඥා ප්‍රබලතාව අනුව, Wi-Fi ජාල හරහා හෝ ඔබේ වාහකයේ ජාලය හරහා ඇමතුම් ගමන් කරවිය හැකිය. මෙම විශේෂාංගය ක්‍රියාත්මක කිරීමට පෙර, ගාස්තු සහ අනෙකුත් විස්තර පිළිබඳව ඔබේ වාහකය සමගින් පරීක්ෂා කර බලන්න."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi ඇමතීම සක්‍රීය වූ විට, ඔබේ දුරකථනයට ඔබේ මනාපයට සහ සංඥා ප්‍රබලතාවට අනුව, Wi-Fi ජාල හරහා හෝ ඔබේ වාහකයේ ජාලය හරහා ඇමතුම් ප්‍රතියොමු කළ හැක. මෙම විශේෂාංගය සක්‍රීය කිරීමට පෙර, ගාස්තු සහ අනෙකුත් විස්තර පිළිබඳව ඔබේ වාහකය සමඟ පරීක්‍ෂා කර ගන්න.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"හදිසි අවස්ථා ලිපිනය"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"ඔබ Wi-Fi හරහා හදිසි ඇමතුමක් ලබා ගන්නා විට ඔබගේ ස්ථානය ලෙස භාවිතා වේ"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"පද්ධති යාවත්කාලීන"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android අනුවාදය"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android ආරක්ෂණ පැච් මට්ටම"</string>
     <string name="model_info" msgid="1952009518045740889">"මාදිලිය"</string>
     <string name="model_summary" msgid="8306235877567782987">"මාදිලිය: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"මිනිත්තු 2"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"කියවීමට කාලය"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"ක්‍රියා කිරීමට කාලය"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"ඔබ කියවීමට සහ ස්වයංක්‍රියව ඉවතට යන පණිවුඩ ගැන ක්‍රියා කිරීමට අවශ්‍ය කාලය තෝරන්න.\n\nමෙම සැකසුම සඳහා සහාය එක් එක් යෙදුම මත වේ."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"ක්‍රියා කිරීමට ඔබගෙන් ඉල්ලා සිටින, නමුත් තාවකාලිකව පමණක් දිස් වන, පණිවිඩ කොතරම් කාලයක් දිස් වන්නේද යන්න තෝරන්න.\n\nසියලු යෙදුම් මෙම සැකසීමට සහාය නොදක්වයි."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"ස්පර්ශ කර ප්‍රමාදය රඳවන්න"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"වර්ණ අපවර්තනය"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"තත්ත්ව තීරුව තුළ නිහඬ දැනුම්දීම් සඳහා නිරූපක සඟවන්න"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"දැනුම්දීම් තිත් සඳහා ඉඩ දෙන්න"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"දැනුම්දීම් බුබුළුවලට ඉඩ දෙන්න"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"ස්වයිප් ක්‍රියා"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"අස් කිරීමට දකුණට, සහ මෙනුව පෙන්වීමට වමට ස්වයිප් කරන්න"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"අස් කිරීමට වමට, සහ මෙනුව පෙන්වීමට දකුණට ස්වයිප් කරන්න"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"නිවී නිවී දැල්වෙන එළිය"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"අගුලු තිරය මත"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"කාර්යාල පැතිකඩ අගුලු දමා ඇති විට"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="one">යෙදුම් %d කට දැනුම්දීම් කියවිය හැක</item>
       <item quantity="other">යෙදුම් %d කට දැනුම්දීම් කියවිය හැක</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"දැනුම්දීම් සහායක"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"සහායක නැත"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"ස්ථාපිත යෙදුම් කිසිවක් දැනුම්දීම් ප්‍රවේශය ඉල්ලා නැත."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g>සඳහා දැනුම්දීම් ප්‍රවේශයට ඉඩ දෙන්න ද?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> හට සම්බන්ධතා නම් සහ ඔබට ලැබෙන පණිවිඩවල පෙළ වැනි පුද්ගලික තොරතුරු ඇතුළුව, සියලු දැනුම්දීම් කියවීමට හැකි වනු ඇත. එයට දැනුම්දීම විකරණයට හෝ අස් කිරීමට හෝ ඒවායේ අඩංගු ක්‍රියා බොත්තම් ප්‍රේරණය කිරීමටත් හැකි වනු ඇත. \n\nමෙය යෙදුමට බාධා නොකරන්න ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට සහ අදාළ සැකසීම් වෙනස් කිරීමටත් හැකියාව ලබා දෙනු ඇත."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> සඳහා දැනුම්දීම් ප්‍රවේශය ඉඩ දෙන්නද?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> හට සම්බන්ධතා නම් සහ ඔබට ලැබෙන පණිවිඩවල පෙළ වැනි පුද්ගලික තොරතුරු ඇතුළුව, සියලු දැනුම්දීම් කියවීමට හැකි වනු ඇත. එයට දැනුම්දීම ඉවත දැමීමට හෝ ඒවා අඩංගු ක්‍රියා බොත්තම් ප්‍රේරණය කිරීමටද හැකි වනු ඇත. \n\nමෙය යෙදුමට බාධා නොකරන්න ක්‍රියාත්මක කිරීමට හෝ ක්‍රියාවිරහිත කිරීමට සහ සම්බන්ධිත සැකසීම් වෙනස් කිරීමටද ඉඩ දෙනු ඇත."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"ඔබ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> සඳහා දැනුම්දීම් ප්‍රවේශය ක්‍රියාවිරහිත කළහොත්, බාධා නොකරන්න ප්‍රවේශයද ක්‍රියාවිරහිත කරනු ඇත."</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"උසස්"</string>
     <string name="configure_apps" msgid="6685680790825882528">"යෙදුම් වින්‍යාස කරන්න"</string>
     <string name="unknown_app" msgid="5275921288718717656">"නොදන්නා යෙදුම"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"යෙදුම් අවසර"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"අවසර කළමනාකරු"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"<xliff:g id="APPS">%1$s</xliff:g> භාවිතා කරන යෙදුම්"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"අවදි කිරීමට තට්ටු කරන්න"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"උපාංගය අවදි කිරීමට තිරයේ ඕනෑම තැනක මත දෙපාරක් තට්ටු කරන්න"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"බාධා නොකරන්න යාවත්කාලීන කරන්න"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"අවධානය යොමු කිරීම සඳහා දැනුම්දීම් විරාම කරන්න"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"මෙම අංගය මෙම උපාංගයේ ලබා ගත නොහැක"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"සම්පූර්ණ GNSS මිනුම් බලාත්මක කරන්න"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"කාර්ය චක්‍රය රහිත සියලු GNSS සබැඳි තාරකා ගෝල සහ සංඛ්‍යාත"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"පසුබිම් ක්‍රියාකාරකම් පටන් ගැනීමට ඉඩ දෙන්න"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"නැවත උත්සාහ කරන්න"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"යම් දෙයක් ඇත. යෙදුම උපාංගයක් තේරීමට කළ ඉල්ලීම අවලංගු කර ඇත."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"සම්බන්ධතාව සාර්ථකයි"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"සියල්ල පෙන්වන්න"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one">උපාංග <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>ක් සම්බන්ධිතය</item>
       <item quantity="other">උපාංග <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>ක් සම්බන්ධිතය</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"යෙදුම් 0ක් අවසර භාවිත කළා"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"පසුගිය පැය 24 තුළ ඉතාම භාවිත කළ අවසර"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"සියලු භාවිත බලන්න"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"අවසර උපකරණ පුවරුව බලන්න"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"ප්‍රවේශ්‍යතා භාවිතය"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="one">සේවා <xliff:g id="SERVICE_COUNT">%1$d</xliff:g>කට ඔබේ උපාංගය වෙත පූර්ණ ප්‍රවේශය තිබේ</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g> දැනුම්දීම් කළමනා කරන්න"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"යෝජිත යෙදුම් නැත"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="one">දැනුම්දීම් නාලිකා <xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>ක්. සියල්ල කළමනා කිරීමට තට්ටු කරන්න.</item>
-      <item quantity="other">දැනුම්දීම් නාලිකා <xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>ක්. සියල්ල කළමනා කිරීමට තට්ටු කරන්න.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="one">දැනුම්දීම් නාලිකා <xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>ක්.</item>
+      <item quantity="other">දැනුම්දීම් නාලිකා <xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>ක්.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"දැනුම්දීම් නාලිකා <xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g>ක්. සියල්ල කළමනා කිරීමට තට්ටු කරන්න."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"ප්‍රතිදාන මාරු කරන්න"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"දැනට <xliff:g id="DEVICE_NAME">%1$s</xliff:g> මත වාදන කෙරෙන"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

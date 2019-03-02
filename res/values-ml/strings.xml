@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"വൈഫൈ ഓഫാക്കാൻ <xliff:g id="REQUESTER">%s</xliff:g> താൽപ്പര്യപ്പെടുന്നു"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"വൈഫൈ ഓഫാക്കാൻ <xliff:g id="REQUESTER">%s</xliff:g> താൽപ്പര്യപ്പെടുന്നു"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"ഡീബഗ്ഗബിൾ ആപ്പ് ബൈറ്റ്‌കോഡ് പരിശോധിക്കൂ"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"ഡീബഗ്ഗ് ചെയ്യാവുന്ന അപ്ലിക്കേഷനുകൾക്കായി ബൈറ്റ്‌കോഡ് പരിശോധിക്കാൻ ART നെ അനുവദിക്കുക"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"ടാബ്‌ലെറ്റ് മറ്റൊരു ഉപകരണത്തിൽ സ്‌പർശിക്കുമ്പോൾ ഡാറ്റ കൈമാറ്റം അനുവദിക്കുക"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"ഫോൺ മറ്റൊരു ഉപകരണത്തെ സ്‌പർശിക്കുമ്പോൾ ഡാറ്റ കൈമാറ്റം അനുവദിക്കുക"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"വൈഫൈ ഹോട്ട്‌സ്‌പോട്ടിനായി കുറഞ്ഞത് ഒരു ബാൻഡ് എങ്കിലും തിരഞ്ഞെടുക്കുക:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP ക്രമീകരണം"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"സ്വകാര്യത"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"ക്രമരഹിതമായ MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"ഒരു ഉപകരണം ചേർക്കുക"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"“<xliff:g id="SSID">%1$s</xliff:g>” എന്നതിലേക്ക് ഉപകരണം ചേർക്കാൻ,  ചുവടെയുള്ള QR കോഡിലേക്ക് കേന്ദ്രീകരിക്കുക"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR കോഡ് സ്‌കാൻ ചെയ്യുക"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"QR കോഡ് പരിശോധിച്ച് വൈഫൈയിൽ ചേരുക"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"വൈഫൈ പങ്കിടുക"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"“<xliff:g id="SSID">%1$s</xliff:g>”-ൽ ചേരാൻ, ഈ QR കോഡ് മറ്റൊരു ഉപകരണം ഉപയോഗിച്ച് സ്‌കാൻ ചെയ്യുക"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR കോഡ് റീഡ് ചെയ്യാനായില്ല"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR കോഡ് റീഡ് ചെയ്യാനായില്ല. കോഡ് വീണ്ടും മധ്യത്തിലാക്കി വീണ്ടും ശ്രമിക്കുക"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"വീണ്ടും ശ്രമിക്കുക. പ്രശ്‌നം തുടരുകയാണെങ്കിൽ, ഉപകരണ നിർമ്മാതാവിനെ ബന്ധപ്പെടുക"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"എന്തോ കുഴപ്പമുണ്ടായി"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"ഉപകരണം പ്ലഗിൻ ചെയ്‌തെന്നും, ചാർജ്ജ് ചെയ്‌തെന്നും, ഓണാണെന്നും ഉറപ്പാക്കുക"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"ഉപകരണം പ്ലഗിൻ ചെയ്‌തെന്നും, ചാർജ്ജ് ചെയ്‌തെന്നും, ഓണാണെന്നും ഉറപ്പാക്കുക. പ്രശ്‌നം തുടരുകയാണെങ്കിൽ, ഉപകരണ നിർമ്മാതാവിനെ ബന്ധപ്പെടുക"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"ഈ ഉപകരണം \"<xliff:g id="SSID">%1$s</xliff:g>\" ചേർക്കുന്നതിനെ പിന്തുണയ്ക്കുന്നില്ല"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"നെറ്റ്‌വർക്ക് തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"ഉപകരണം കണക്റ്റ് ചെയ്യാൻ, ഒരു നെറ്റ്‌വർക്ക് തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"ഈ ഉപകരണം “<xliff:g id="SSID">%1$s</xliff:g>” എന്നതിലേക്ക് ചേർക്കണോ?"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"മറ്റൊരു നെറ്റ്‌വർക്ക് തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"ഉപകരണം ചേർക്കാനായില്ല"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"ഉപകരണം കണ്ടെത്തി"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"വീണ്ടും ശ്രമിക്കുക"</string>
     <string name="wifi_shared" msgid="844142443226926070">"മറ്റ് ഉപകരണ ഉപയോക്താക്കളുമായി പങ്കിടുക"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(മാറ്റം വരുത്തിയിട്ടില്ല)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"വൈഫൈ കോളിംഗ് ഓണായിരിക്കുമ്പോൾ, നിങ്ങളുടെ മുൻഗണനയും ഏത് സിഗ്നലാണ് ശക്തമെന്നതും അടിസ്ഥാനമാക്കി ഫോണിന് വൈഫൈ നെറ്റ്‌വർക്കോ കാരിയർ നെറ്റ്‌വർക്കോ വഴി കോളുകൾ റൂട്ട് ചെയ്യാനാകും. ഈ ഫീച്ചർ ഓണാക്കുന്നതിനുമുമ്പ്, നിരക്കുകളും മറ്റ് വിശദാംശങ്ങളും അറിയുന്നതിന് നിങ്ങളുടെ കാരിയറെ ബന്ധപ്പെടുക."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi കോളിംഗ് ഓണായിരിക്കുമ്പോൾ, നിങ്ങളുടെ മുൻഗണനയും ഏത് സിഗ്നലാണ് ശക്തമെന്നതും അടിസ്ഥാനമാക്കി ഫോണിന് Wi-Fi നെറ്റ്‌വർക്കോ കാരിയർ നെറ്റ്‌വർക്കോ വഴി കോളുകൾ റൂട്ട് ചെയ്യാനാകും. ഈ ഫീച്ചർ ഓണാക്കുന്നതിനുമുമ്പ്, നിരക്കുകളും മറ്റ് വിശദാംശങ്ങളും അറിയുന്നതിന് നിങ്ങളുടെ കാരിയറെ ബന്ധപ്പെടുക.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"അടിയന്തര വിലാസം"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"വൈഫൈ ഉപയോഗിച്ച് നിങ്ങളൊരു അടിയന്തര കോൾ ചെയ്യുമ്പോൾ, നിങ്ങളുടെ ലൊക്കേഷനായി ഉപയോഗിക്കപ്പെടും"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"സി‌സ്‌റ്റം അപ്‌ഡേറ്റുകൾ"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android പതിപ്പ്"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android സുരക്ഷാ പാച്ച് നില"</string>
     <string name="model_info" msgid="1952009518045740889">"മോഡല്‍"</string>
     <string name="model_summary" msgid="8306235877567782987">"മോഡൽ: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 മിനിറ്റ്"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"വായിക്കാനുള്ള സമയം"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"നടപടി സ്വീകരിക്കാനുള്ള സമയം"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"സ്വമേധയാ മാറുന്ന സന്ദേശങ്ങൾ വായിച്ച് നടപടി സ്വീകരിക്കാൻ എത്രസമയം ആവശ്യമാണെന്ന് തിരഞ്ഞെടുക്കുക.\n\nഈ ക്രമീകരണത്തിനുള്ള പിന്തുണ ഓരോ ആപ്പിലും ലഭ്യമാണ്."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"നടപടി സ്വീകരിക്കാൻ ആവശ്യപ്പെടുന്ന സന്ദേശങ്ങൾ എത്ര സമയം കാണിക്കണമെന്നത് തിരഞ്ഞെടുക്കുക, എന്നാൽ താൽക്കാലികമായി മാത്രമേ ദൃശ്യമാകൂ.\n\nഎല്ലാ ആപ്പുകളും ഈ ക്രമീകരണം പിന്തുണയ്ക്കുന്നില്ല."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"സ്‌പർശിച്ച്, അമർത്തിപ്പിടിക്കുക"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"വർണ്ണവൈപരീത്യം"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"സ്‌റ്റാറ്റസ് ബാറിൽ നിശബ്‌ദ അറിയിപ്പുകൾക്കുള്ള ചിഹ്‌നങ്ങൾ മറയ്ക്കുക"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"അറിയിപ്പ് ഡോട്ടുകൾ അനുവദിക്കുക"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"അറിയിപ്പ് ബബ്ളുകൾ അനുവദിക്കുക"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"സ്വൈപ്പ് പ്രവർത്തനങ്ങൾ"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"നിരസിക്കാൻ വലത്തോട്ടോ, മെനു കാണിക്കാൻ ഇടത്തോട്ടോ സ്വൈപ്പ് ചെയ്യുക"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"നിരസിക്കാൻ ഇടത്തോട്ടോ, മെനു കാണിക്കാൻ വലത്തോട്ടോ സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"ലൈറ്റ് മിന്നുക"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"ലോക്ക് സ്‌ക്രീനിൽ"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"ഔദ്യോഗിക പ്രൊഫൈൽ ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="other">%d അപ്ലിക്കേഷനുകൾക്ക് അറിയിപ്പുകൾ വായിക്കാനാകും</item>
       <item quantity="one">%d അപ്ലിക്കേഷന് അറിയിപ്പുകൾ വായിക്കാനാകും</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"അറിയിപ്പ് അസിസ്‌റ്റന്റ്"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"അസിസ്‌റ്റന്റ് ഇല്ല"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"ഇൻസ്റ്റാളുചെയ്തിട്ടുള്ള ആപ്സൊന്നും അറിയിപ്പ് ആക്‌സസ് അഭ്യർത്ഥിച്ചിട്ടില്ല."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g>-ന് അറിയിപ്പ് ആക്‌സസ് അനുവദിക്കണോ?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"കോൺടാക്റ്റ് പേരുകൾ, നിങ്ങൾ സ്വീകരിക്കുന്ന സന്ദേശങ്ങളുടെ വാചകം എന്നിവ പോലുള്ള വ്യക്തിഗത വിവരങ്ങൾ ഉൾപ്പെടെ എല്ലാ അറിയിപ്പുകളും <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>-ന് വായിക്കാൻ കഴിയും. അറിയിപ്പുകൾ പരിഷ്‌ക്കരിക്കനോ ഡിസ്‌മിസ് ചെയ്യാനോ അവയിലടങ്ങിയിരിക്കുന്ന പ്രവർത്തന ബട്ടണുകൾ ട്രിഗർ ചെയ്യാനോ ഇതിന് കഴിയും. \n\nആപ്പിന് \'ശല്യപ്പെടുത്തരുത്\' ഓണോ ഓഫോ ആക്കാനും ബന്ധപ്പെട്ട ക്രമീകരണം മാറ്റാനുമുള്ള ശേഷിയും ഇത് നൽകും."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>-ന് അറിയിപ്പ് ആക്സസ് അനുവദിക്കണോ?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"കോൺടാക്റ്റ് പേരുകളും നിങ്ങൾ സ്വീകരിക്കുന്ന സന്ദേശങ്ങളുടെ ടെക്സ്റ്റും പോലുള്ള വ്യക്തിഗത വിവരങ്ങൾ ഉൾപ്പെടെ, എല്ലാ അറിയിപ്പുകളും വായിക്കുന്നതിന് <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> എന്നതിനാകും. അറിയിപ്പുകൾ നിരാകരിക്കാനോ അറിയിപ്പുകളിൽ അടങ്ങിയിരിക്കുന്ന പ്രവർത്തന ബട്ടണുകൾ സജീവമാക്കാനോ ഇതിനാകും. \n\nആപ്പിന് \'ശല്യപ്പെടുത്തരുത്\' ഓണോ ഓഫോ ആക്കാനും ബന്ധപ്പെട്ട ക്രമീകരണം മാറ്റാനുമുള്ള ശേഷിയും ഇത് നൽകും."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> എന്നതിനായുള്ള അറിയിപ്പ് ആക്സസ്സ് നിങ്ങൾ ഓഫാക്കുന്നുവെങ്കിൽ, \'ശല്യപ്പെടുത്തരുത്\' ആക്സസ്സും ഓഫാക്കപ്പെട്ടേക്കാം."</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"വിപുലമായത്"</string>
     <string name="configure_apps" msgid="6685680790825882528">"ആപ് കോണ്‍ഫിഗര്‍ചെയ്യൂ"</string>
     <string name="unknown_app" msgid="5275921288718717656">"അജ്ഞാത അപ്ലിക്കേഷൻ"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"ആപ്പ് അനുമതികൾ"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"അനുമതി മാനേജർ"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"<xliff:g id="APPS">%1$s</xliff:g> ഉപയോഗിക്കുന്ന ആപ്‌സ്"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"സജീവമാക്കാൻ ടാപ്പുചെയ്യുക"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"ഉപകരണം സജീവമാക്കാൻ സ്‌ക്രീനിലെവിടെയെങ്കിലും രണ്ടുതവണ ടാപ്പുചെയ്യുക"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"\'ശല്യപ്പെടുത്തരുത്\' അപ്‌ഡേറ്റ് ചെയ്യുക"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"ഫോക്കസ് ചെയ്‌ത നിലയിൽ തുടരാൻ, അറിയിപ്പുകൾ താൽക്കാലികമായി നിർത്തുക"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ഈ ഫീച്ചർ ഈ ഉപകരണത്തിൽ ലഭ്യമല്ല"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"പൂർണ്ണ GNSS അളവുകൾ നടപ്പിലാക്കുക"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"നോ ഡ്യൂട്ടി സൈക്ലിംഗ് ഉപയോഗിച്ച് മുഴുവൻ GNSS കോൺസ്‌റ്റലേഷനുകളും ആവൃത്തികളും ട്രാക്ക് ചെയ്യൂ"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"പ്രവർത്തനം ആരംഭിക്കുന്നതിനുള്ള പശ്ചാത്തല ആക്റ്റിവിറ്റി"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"വീണ്ടും ശ്രമിക്കുക"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"എന്തോ സംഭവിച്ചു. ഒരു ഉപകരണം തിരഞ്ഞെടുക്കാനുള്ള അഭ്യർത്ഥന ആപ്പ് റദ്ദാക്കിയിരിക്കുന്നു."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"കണക്ഷൻ വിജയകരം"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"എല്ലാം കാണിക്കുക"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ഉപകരണങ്ങൾ കണക്‌റ്റ് ചെയ്‌തിരിക്കുന്നു</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> ഉപകരണം കണക്‌റ്റ് ചെയ്‌തിരിക്കുന്നു</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"ആപ്പുകളൊന്നും അനുമതികൾ ഉപയോഗിച്ചിട്ടില്ല"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"കഴിഞ്ഞ 24 മണിക്കൂറിൽ ഏറ്റവുമധികം ഉപയോഗിച്ച അനുമതികൾ"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"എല്ലാ ഉപയോഗവും കാണുക"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"അനുമതി ഡാഷ്‌ബോർഡ് കാണുക"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"ഉപയോഗസഹായിയുടെ ഉപയോഗം"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other">നിങ്ങളുടെ ഉപകരണത്തിലേക്ക് <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> സേവനങ്ങൾക്ക് പൂർണ്ണ ആക്‌സസുണ്ട്</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g> അറിയിപ്പുകൾ മാനേജ് ചെയ്യുക"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"നിർദ്ദേശിക്കപ്പെടുന്ന ആപ്പുകളൊന്നുമില്ല"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> അറിയിപ്പ് ചാനലുകൾ. എല്ലാം മാനേജ് ചെയ്യാൻ ടാപ്പ് ചെയ്യുക.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> അറിയിപ്പ് ചാനൽ. എല്ലാം മാനേജ് ചെയ്യാൻ ടാപ്പ് ചെയ്യുക.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> അറിയിപ്പ് ചാനലുകൾ.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> അറിയിപ്പ് ചാനൽ.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> അറിയിപ്പ് ചാനലുകൾ. എല്ലാം മാനേജ് ചെയ്യാൻ ടാപ്പ് ചെയ്യുക."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"ഔട്ട്പുട്ട് മാറുക"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"നിലവിൽ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്ന ഉപകരണത്തിൽ പ്ലേ ചെയ്യുന്നു"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

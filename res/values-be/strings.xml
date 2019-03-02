@@ -833,6 +833,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> мбіт/с"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> хоча ўключыць Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> хоча адключыць Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Спраўдзіць байт-код праграм з адладкай"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Дазволіць ART спраўдзіць байт-код праграм з магчымасцю адладкі"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Дазволіць абмен данымі пры спалучэнні планшэта з іншымі прыладамі"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Дазволіць абмен данымі пры спалучэнні тэлефона з іншымі прыладамі"</string>
@@ -947,6 +949,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Выберыце як мінімум адзін дыяпазон для хот-спота Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Налады IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Прыватнасць"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Выпадковы MAC-адрас"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Дадаць прыладу"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Каб дадаць прыладу ў сетку \"<xliff:g id="SSID">%1$s</xliff:g>\", навядзіце камеру на QR-код, паказаны. ніжэй"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Сканіраваць QR-код"</string>
@@ -954,7 +957,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Далучыцеся да сеткі Wi‑Fi, прасканіраваўшы QR-код"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Абагуліць Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Прасканіруйце QR-код з дапамогай іншай прылады, каб далучыцца да сеткі \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Не ўдалося прачытаць QR-код"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Не ўдалося прачытаць QR-код. Паўторна ўвядзіце код і паўтарыце спробу"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Паўтарыце спробу. Калі памылка застанецца, звярніцеся да вытворцы прылады"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Нешта пайшло не так"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Пераканайцеся, што прылада падключана, зараджана і ўключана"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Пераканайцеся, што прылада падключана, зараджана і ўключана. Калі памылка застанецца, звярніцеся да вытворцы прылады"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Дадаванне \"<xliff:g id="SSID">%1$s</xliff:g>\" не падтрымліваецца гэтай прыладай"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Праверце падключэнне і паўтарыце спробу"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Выбраць сетку"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Каб падключыць прыладу, выберыце сетку"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Дадаць гэту прыладу да сеткі \"<xliff:g id="SSID">%1$s</xliff:g>\"?"</string>
@@ -963,6 +972,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Выбраць іншую сетку"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Не ўдалося дадаць прыладу"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Прылада знойдзена"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Паўтарыць"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Падзяліцца з іншымі карыстальнікамі прылады"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(не зменена)"</string>
@@ -1105,7 +1118,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Калі ўключана Wi-Fi-тэлефанія, ваш тэлефон можа накіроўваць выклікі праз сеткі Wi-Fi або сетку вашага аператара, у залежнасці ад вашых пераваг і таго, які сігнал мацней. Перад уключэннем гэтай функцыі пракансультуйцеся з вашым аператарам наконт аплаты і іншай падрабязнай інфармацыі."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Калі ўключана Wi-Fi-тэлефанія, ваш тэлефон можа накіроўваць выклікі праз сеткі Wi-Fi або сетку вашага аператара, у залежнасці ад вашых налад і таго, які сігнал мацнейшы. Перад уключэннем гэтай функцыі спытайце ў вашага аператара наконт аплаты і запытайце іншую падрабязную інфармацыю.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Экстранны адрас"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Выкарыстоўваецца як ваша месцазнаходжанне, калі вы робіце экстранны выклік праз Wi‑Fi"</string>
@@ -1307,7 +1320,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Абнаўленні сiстэмы"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Версія Android"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Узровень патчу бяспекі Android"</string>
     <string name="model_info" msgid="1952009518045740889">"Мадэль"</string>
     <string name="model_summary" msgid="8306235877567782987">"Мадэль: %1$s"</string>
@@ -2083,7 +2095,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 хвіліны"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Час на чытанне"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Час на выкананне дзеяння"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Выберыце, колькі часу вам патрэбна, каб прачытаць часова бачныя паведамленні і адрэагаваць на іх.\n\nПадтрымка такой налады залежыць ад праграмы."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Выберыце, колькі часу паказваць часова бачныя паведамленні з заклікамі да дзеянняў.\n\nНе ўсе праграмы падтрымліваюць такую наладу."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Затрымка пры націсканні і ўтрыманні"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Інверсія колеру"</string>
@@ -3341,6 +3354,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Хаваць значкі для апавяшчэнняў без гуку на панэлі стану"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Паказваць значкі апавяшчэнняў"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Дазволіць дыялогі з апавяшчэннямі"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Дзеянні пры правядзенні пальцам"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Правядзіце пальцам управа, каб закрыць, улева – каб паказаць меню"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Правядзіце пальцам улева, каб закрыць, управа – каб паказаць меню"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Мігценне святла"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"На экране блакіроўкі"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Працоўны профіль заблакіраваны"</string>
@@ -3389,7 +3405,11 @@
       <item quantity="many">%d дадаткаў могуць чытаць апавяшчэнні</item>
       <item quantity="other">%d дадатку могуць чытаць апавяшчэнні</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Памочнік па апавяшчэннях"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Без памочніка"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Няма праграм з доступам да платных SMS."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Адкрыць для праграмы \"<xliff:g id="SERVICE">%1$s</xliff:g>\" доступ да апавяшчэнняў?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"Праграма \"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>\" атрымае доступ да ўсіх апавяшчэнняў, уключаючы асабістую інфармацыю, такую як кантакты і тэксты атрыманых паведамленняў. Яна зможа змяняць і адхіляць апавяшчэнні, а таксама актываваць у іх кнопкі дзеянняў. \n\nАкрамя таго, праграма атрымае магчымасць уключаць і выключаць рэжым \"Не турбаваць\", а таксама змяняць звязаныя з ім налады."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Адкрыць доступ да апавяшчэнняў для <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"Праграма <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> атрымае доступ да ўсіх апавяшчэнняў, у тым ліку асабістай інфармацыі, такой як кантакты і тэкст паведамленняў, якія вы атрымліваеце. Яна таксама зможа адхіляць апавяшчэнні і актываваць у іх кнопкі дзеянняў. \n\nГэта таксама дасwm праграме магчымасць уключаць і выключаць рэжым \"Не турбаваць\", а таксама змяняць звязаныя з ім налады."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Калі вы адключыце доступ да апавяшчэнняў для <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, доступ да рэжыму \"Не турбаваць\" можа быць таксама адключаны."</string>
@@ -3685,7 +3705,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Пашыраныя"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Канфігурацыя дадаткаў"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Невядомая праграма"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Дазволы праграм"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Менеджар дазволаў"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Праграмы, якія выкарыстоўваюць <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Краніце, каб абудзіць"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Дакраніцеся двойчы ў любым месцы экрана, каб абудзіць прыладу"</string>
@@ -4353,6 +4373,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Абнавіце рэжым \"Не турбаваць\""</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Прыпыніце апавяшчэнні, каб яны не адцягвалі ўвагу"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Гэта функцыя недаступная на гэтай прыладзе"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Прымусова правесці поўныя вымярэнні GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Адсочваць усе групы і частоты GNSS з выключаным працоўным цыклам"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Дазволіць фонавую актыўнасць"</string>
@@ -4517,6 +4541,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Паўтарыць спробу"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Нешта здарылася. Праграма скасавала запыт на выбар прылады."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Падключэнне выканана"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Паказаць усе"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one">Падключана <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> прылада</item>
       <item quantity="few">Падключаны <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> прылады</item>
@@ -4546,7 +4571,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"Дазволы не былі выкарыстаны праграмамі"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Дазволы, якія часцей за ўсё выкарыстоўваліся ў апошнія 24 гадзіны"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Паказаць усе выкарыстаныя дазволы"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Паказаць панэль кіравання дазволамі"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Выкарыстанне спецыяльных магчымасцей"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> сэрвіс мае поўны доступ да даных вашай прылады</item>
@@ -4556,12 +4581,15 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Кіраванне апавяшчэннямі праграмы <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Няма прапанаваных праграм"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> канал апавяшчэння. Каб кіраваць імі, націсніце тут.</item>
-      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> каналы апавяшчэння. Каб кіраваць імі, націсніце тут.</item>
-      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> каналаў апавяшчэння. Каб кіраваць імі, націсніце тут.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> канала апавяшчэння. Каб кіраваць імі, націсніце тут.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> канал апавяшчэння.</item>
+      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> каналы апавяшчэння.</item>
+      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> каналаў апавяшчэння.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> канала апавяшчэння.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"Каналаў апавяшчэння: <xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g>. Каб кіраваць усімі, націсніце тут."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Пераключыць вывад"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Зараз прайграецца на прыладзе <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

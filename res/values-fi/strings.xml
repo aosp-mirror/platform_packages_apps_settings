@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa ottaa Wi-Fin käyttöön."</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa poistaa Wi-Fin käytöstä."</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Vahvista korjattavien sovell. tavukoodi"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Salli ART vahvistaaksesi korjattavien sovellusten tavukoodi"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Salli tiedonsiirto, kun tabletti koskettaa toista laitetta"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta."</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Valitse vähintään yksi kaista Wi‑Fi-hotspotille:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-asetukset"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Tietosuoja"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Satunnaistettu MAC-osoite"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Lisää laite"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Lisää laite verkkoon <xliff:g id="SSID">%1$s</xliff:g> keskittämällä alla olevaan QR-koodiin"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Lue QR-koodi"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Yhdistä Wi-Fi-verkkoon lukemalla QR-koodi"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Jaa Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Yhdistä <xliff:g id="SSID">%1$s</xliff:g> lukemalla tämä QR-koodi toisella laitteella"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR-koodin luku epäonnistui"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR-koodin luku epäonnistui. Keskitä koodi ja yritä uudelleen."</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Yritä uudelleen. Jos ongelma ei ratkea, ota yhteyttä laitteen valmistajaan"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Jokin meni pieleen"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Varmista, että laite on liitetty virtalähteeseen, ladattu ja päällä"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Varmista, että laite on liitetty virtalähteeseen, ladattu ja päällä. Jos ongelma ei ratkea, ota yhteyttä laitteen valmistajaan"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Tämä laite ei tue <xliff:g id="SSID">%1$s</xliff:g>:n lisäämistä"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Tarkista yhteys ja yritä uudelleen"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Valitse verkko"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Yhdistä laitteesi valitsemalla verkko"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Lisätäänkö laite verkkoon <xliff:g id="SSID">%1$s</xliff:g>?"</string>
@@ -931,6 +940,8 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Valitse eri verkko"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Laitteen lisääminen epäonnistui"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Laite löydetty"</string>
+    <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="5579154298588011712">"Jaetaan Wi-Fi-yhteys tämän laitteen kanssa…"</string>
+    <string name="wifi_dpp_connecting" msgid="7111851118215580428">"Yhdistetään…"</string>
     <string name="retry" msgid="6472609612090877557">"Yritä uudelleen"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Jaa muiden laitteen käyttäjien kanssa"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ei muutettu)"</string>
@@ -1071,7 +1082,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kun Wi-Fi-puhelut on käytössä, puhelimesi voi ohjata puhelut Wi-Fi-verkkojen tai operaattorisi verkon kautta, riippuen asetuksistasi ja siitä, kummassa on voimakkaampi signaali. Ennen kuin otat tämän ominaisuuden käyttöön, tarkista maksut ja muut tiedot operaattoriltasi."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Kun Wi-Fi-puhelut on käytössä, puhelimesi voi ohjata puhelut Wi-Fi-verkkojen tai operaattorisi verkon kautta, riippuen asetuksistasi ja siitä, kummassa on voimakkaampi signaali. Ennen kuin otat tämän ominaisuuden käyttöön, tarkista maksut ja muut tiedot operaattoriltasi.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Hätäosoite"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Sijaintisi, kun soitat hätäpuhelun Wi-Fillä"</string>
@@ -1270,7 +1281,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Järjestelmäpäivitykset"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-versio"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android-tietoturvakorjauksen taso"</string>
     <string name="model_info" msgid="1952009518045740889">"Malli"</string>
     <string name="model_summary" msgid="8306235877567782987">"Malli: %1$s"</string>
@@ -2042,7 +2052,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minuuttia"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Lukuaika"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Reagointiaika"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Valitse, miten paljon aikaa haluat käyttää automaattisesti poistuvien viestien lukemiseen ja niihin reagoimiseen.\n\nTämän asetuksen tuki riippuu sovelluksesta."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Valitse, miten pitkään haluat nähdä viestit, jotka pyytävät reagoimaan mutta näkyvät vain väliaikaisesti.\n\nKaikki sovellukset eivät tue tätä asetusta."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Pitkäkestoisen kosketuksen viive"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Käänteiset värit"</string>
@@ -3254,6 +3265,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Piilota hiljaisten ilmoitusten kuvakkeet tilarivillä"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Salli pistemerkit"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Salli ilmoituskuplat"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Pyyhkäisytoiminnot"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Ohita pyyhkäisemällä oikealle ja näytä valikko pyyhkäisemällä vasemmalle"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Ohita pyyhkäisemällä vasemmalle ja näytä valikko pyyhkäisemällä oikealle"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Vilkuta valoa"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Lukitusnäytöllä"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kun työprofiili on lukittu"</string>
@@ -3300,7 +3314,11 @@
       <item quantity="other">%d sovellusta voi lukea ilmoituksia</item>
       <item quantity="one">%d sovellus voi lukea ilmoituksia</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Ilmoitusapuri"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Ei apuria"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Yksikään asennettu sovellus ei ole pyytänyt ilmoituksien käyttöoikeutta."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Saako <xliff:g id="SERVICE">%1$s</xliff:g> ilmoitusten käyttöoikeuden?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> voi lukea kaikki ilmoitukset ja niiden sisältämät henkilökohtaiset tiedot, kuten yhteystietojen nimet ja saamiesi viestien sisällön. Se voi myös ohittaa ilmoitukset, muokata niitä tai käyttää niiden toimintopainikkeita. \n\nTämä antaa sovellukselle myös oikeuden ottaa Älä häiritse ‑tilan käyttöön, poistaa sen käytöstä ja muokata siihen liittyviä asetuksia."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Saako <xliff:g id="SERVICE">%1$s</xliff:g> ilmoituksien käyttöoikeuden?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> voi lukea kaikki ilmoitukset ja niiden sisältämät henkilökohtaiset tiedot, kuten yhteystietojen nimet ja viestien sisällön. Se voi myös hylätä ilmoituksia ja käyttää niiden toimintopainikkeita. \n\nTämä myöntää sovellukselle lisäksi oikeuden ottaa Älä häiritse ‑tilan käyttöön tai poistaa sen käytöstä ja muokata siihen liittyviä asetuksia."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Jos <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ei saa käyttää ilmoituksia, myös Älä häiritse ‑tilan käyttö voidaan estää."</string>
@@ -3573,7 +3591,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Lisäasetukset"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Sovellusten konfigurointi"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Tuntematon sovellus"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Sovellusten käyttöoikeudet"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Käyttöoikeuksien ylläpitäjä"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Sovellukset, joilla on lupa käyttää seuraavia: <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Herätä napauttamalla"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Herätä laite napauttamalla näyttöä kahdesti."</string>
@@ -4199,6 +4217,8 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Päivitä Älä häiritse ‑tila"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Keskeytä ilmoitukset, jotta voit keskittyä"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ominaisuus ei ole käytettävissä tällä laitteella."</string>
+    <string name="disabled_feature" msgid="2102058661071271076">"Ominaisuus ei ole käytettävissä"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"Se hidastaa puhelinta"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Pakota täydet GNSS-mitat"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Seuraa kaikkia GNSS-kuvioita ja ‑taajuuksia, joissa ei ole pulssisuhdetta."</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Taustatoiminnan salliminen alkaa"</string>
@@ -4361,6 +4381,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Yritä uudelleen"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Jokin meni vikaan. Sovellus peruutti laitteenvalintapyynnön."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Yhteyden muodostus onnistui"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Näytä kaikki"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> laitetta yhdistetty</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> laite yhdistetty</item>
@@ -4388,7 +4409,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 sovellusta käytti käyttöoikeuksia"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Yleisimmät käyttöoikeudet viimeisten 24 tunnin ajalta"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Näytä koko käyttö"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Näytä käyttöoikeuksien hallintapaneeli"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Esteetön käyttö"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> palvelulla on laitteesi täydet käyttöoikeudet</item>
@@ -4396,10 +4417,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Ilmoitusten määritys: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Ei sovellusehdotuksia"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ilmoituskanavaa. Napauta määrittääksesi kaikki.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> ilmoituskanava. Napauta määrittääksesi kaikki.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ilmoituskanavaa.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> ilmoituskanava.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> ilmoituskanavaa. Napauta määrittääksesi kaikki."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Vaihda syötettä"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Toistetaan nyt: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

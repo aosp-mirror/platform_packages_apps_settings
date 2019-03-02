@@ -618,14 +618,10 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"अनलॉक आकार बदलें"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"अनलॉक पिन बदलें"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"अनलॉक पासवर्ड बदलें"</string>
-    <!-- no translation found for unlock_footer_high_complexity_requested (7529087063617325912) -->
-    <skip />
-    <!-- no translation found for unlock_footer_medium_complexity_requested (4195620619469851350) -->
-    <skip />
-    <!-- no translation found for unlock_footer_low_complexity_requested (428655972363263817) -->
-    <skip />
-    <!-- no translation found for unlock_footer_none_complexity_requested (6275441987228550440) -->
-    <skip />
+    <string name="unlock_footer_high_complexity_requested" msgid="7529087063617325912">"<xliff:g id="APP_NAME">%1$s</xliff:g> आपको डिवाइस पर मुश्किल पिन या पासवर्ड सेट करने का सुझाव देता है. इसके बगैर शायद यह आपकी उम्मीद के मुताबिक काम न करे"</string>
+    <string name="unlock_footer_medium_complexity_requested" msgid="4195620619469851350">"<xliff:g id="APP_NAME">%1$s</xliff:g> आपको डिवाइस पर नया पिन या पासवर्ड सेट करने का सुझाव देता है. इसके बगैर शायद यह आपकी उम्मीद के मुताबिक काम न करे"</string>
+    <string name="unlock_footer_low_complexity_requested" msgid="428655972363263817">"<xliff:g id="APP_NAME">%1$s</xliff:g> आपको डिवाइस पर नया पैटर्न, पिन या पासवर्ड सेट करने का सुझाव देता है. इसके बगैर शायद यह आपकी उम्मीद के मुताबिक काम न करे"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="6275441987228550440">"<xliff:g id="APP_NAME">%1$s</xliff:g> आपको डिवाइस पर नया स्क्रीन लाॅक सेट करने का सुझाव देता है"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"फिर से कोशिश करें. <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> में से <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> कोशिश."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"आपका डेटा हटा दिया जाएगा"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"अगर आप अगली कोशिश में गलत पैटर्न डालते हैं, तो इस डिवाइस का डेटा हटा दिया जाएगा"</string>
@@ -805,6 +801,10 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> एमबीपीएस"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> वाई-फ़ाई को चालू करना चाहता है"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> वाई-फ़ाई को बंद करना चाहता है"</string>
+    <!-- no translation found for art_verifier_for_debuggable_title (6029838014407791341) -->
+    <skip />
+    <!-- no translation found for art_verifier_for_debuggable_summary (2250352478065428399) -->
+    <skip />
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"आस-पास के डिवाइस से संपर्क (एनएफसी)"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"जब टैबलेट अन्य डिवाइस को स्पर्श करे तो डेटा ट्रांसफर करने दें"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"जब फ़ोन दूसरे डिवाइस को टच करे तो डेटा ट्रांसफर करने दें"</string>
@@ -919,6 +919,8 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"वाई-फ़ाई हॉटस्पॉट से डिवाइस काे जाेड़ने के लिए कम से कम एक बैंड चुनें:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP सेटिंग"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"निजता"</string>
+    <!-- no translation found for wifi_privacy_settings_ephemeral_summary (1539659414108891004) -->
+    <skip />
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"कोई डिवाइस जोड़ें"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"डिवाइस को “<xliff:g id="SSID">%1$s</xliff:g>” से जोड़ने के लिए QR कोड को कैमरा विंडो के बीच में लाएं"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR कोड स्कैन करें"</string>
@@ -926,7 +928,20 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"QR कोड स्कैन करके वाई-फ़ाई से जुड़ें"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"वाई-फ़ाई शेयर करें"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"इस QR कोड को किसी दूसरे डिवाइस से स्कैन करके “<xliff:g id="SSID">%1$s</xliff:g>” में शामिल हों"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR कोड नहीं पहचाना जा सका"</string>
+    <!-- no translation found for wifi_dpp_could_not_detect_valid_qr_code (641893675646330576) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_authentication_or_configuration (3372757783382381044) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_not_compatible (2829930473520603740) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_timeout (5228320772245820458) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_generic (8030831192606098356) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_failure_not_supported (2643768115109632725) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_check_connection_try_again (2632966336733361805) -->
+    <skip />
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"नेटवर्क चुनें"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"अपना डिवाइस जोड़ने के लिए कोई नेटवर्क चुनें"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"इस डिवाइस को “<xliff:g id="SSID">%1$s</xliff:g>” से जोड़ें?"</string>
@@ -935,6 +950,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"दूसरा नेटवर्क चुनें"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"डिवाइस जोड़ा नहीं जा सका"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"डिवाइस मिला"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"फिर से कोशिश करें"</string>
     <string name="wifi_shared" msgid="844142443226926070">"अन्‍य डिवाइस उपयोगकर्ताओं से शेयर करें"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(अपरिवर्तित)"</string>
@@ -1075,7 +1094,8 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"वाई-फ़ाई कॉलिंग चालू होने पर, आपका फ़ोन वाई-फ़ाई या मोबाइल और इंटरनेट सेवा देने वाली कंपनी के नेटवर्क के ज़रिए कॉल कर सकता है. यह इस बात पर निर्भर करेगा कि आप क्या चाहते हैं और इनमें से कौन सा सिग्नल बेहतर काम कर रहा है. इस सुविधा को चालू करने से पहले, शुल्‍क और अन्‍य जानकारी के बारे में अपनी मोबाइल और इंटरनेट सेवा देने वाली कंपनी से बात करें."</string>
+    <!-- no translation found for wifi_calling_off_explanation (564780186974911501) -->
+    <skip />
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"आपातकालीन पता"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"जब आप वाई-फ़ाई पर आपातकालीन कॉल करते हैं, तब आपकी मौजूदा जगह को आपके पते के तौर पर इस्तेमाल किया जाता है"</string>
@@ -1274,7 +1294,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"सिस्‍टम के बारे में नई जानकारी"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android वर्शन"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android सुरक्षा पैच का स्‍तर"</string>
     <string name="model_info" msgid="1952009518045740889">"मॉडल"</string>
     <string name="model_summary" msgid="8306235877567782987">"मॉडल: %1$s"</string>
@@ -2046,7 +2065,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"दो मिनट"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"पढ़ने के लिए समय"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"कार्रवाई करने के लिए समय"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"चुनें कि अपने आप हटाए जाने वाले मैसेज पढ़ने और उन पर कार्रवाई करने के लिए आपको कितना समय चाहिए.\n\nयह सेटिंग हर ऐप्लिकेशन पर काम करती है."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"चुनें कि आपको कार्रवाई करने के लिए कहने वाले मैसेज कितनी देर तक दिखाने हैं, लेकिन वे सिर्फ़ कुछ समय के लिए ही दिखाई देते हैं.\n\nयह सेटिंग सभी ऐप्लिकेशन पर काम नहीं करती है."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"दबाकर रखने की अवधि"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"रंग को पलटें"</string>
@@ -2938,12 +2958,8 @@
     <string name="wizard_back" msgid="5567007959434765743">"वापस जाएं"</string>
     <string name="wizard_next" msgid="3606212602795100640">"आगे बढ़ें"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"समाप्त करें"</string>
-    <!-- no translation found for user_image_take_photo (4038201220173969126) -->
-    <!-- no translation found for user_image_take_photo (7496128293167402354) -->
-    <skip />
-    <!-- no translation found for user_image_choose_photo (7643300431215339631) -->
-    <!-- no translation found for user_image_choose_photo (3746334626214970837) -->
-    <skip />
+    <string name="user_image_take_photo" msgid="4038201220173969126">"फ़ोटो खींचें"</string>
+    <string name="user_image_choose_photo" msgid="7643300431215339631">"इमेज चुनें"</string>
     <string name="user_image_photo_selector" msgid="5492565707299454873">"फ़ोटो चुनें"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"सिम कार्ड"</string>
@@ -3066,8 +3082,7 @@
     <string name="keywords_face_settings" msgid="7505388678116799329">"चेहरा"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"फ़िंगरप्रिंट"</string>
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"हल्की रोशनी वाली स्क्रीन, टचस्क्रीन, बैटरी, स्मार्ट ब्राइटनेस, डाइनैमिक ब्राइटनेस"</string>
-    <!-- no translation found for keywords_display_adaptive_sleep (6865504720946121402) -->
-    <skip />
+    <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"हल्की रोशनी वाली स्क्रीन, सुलाएं (कम बैटरी मोड), बैटरी, टाइम आउट, ध्यान दें, डिसप्ले, स्क्रीन, गतिविधि न होना"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"घुमाएं, फ़्लिप करें, घुमाव, पोर्ट्रेट, लैंडस्केप, स्क्रीन की दिशा, वर्टिकल, हॉरिज़ॉन्टल"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"अपग्रेड, android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"परेशान न करें, शेड्यूल, सूचनाएं, रोक लगाएं, आवाज़ बंद करें, वाइब्रेट करें, कम बैटरी वाला मोड, काम, ध्यान दें, म्यूट, दिन, सोमवार से शुक्रवार के बीच कोई दिन, हफ़्ते के आखिरी दिन, सोमवार से शुक्रवार के बीच की कोई रात, इवेंट"</string>
@@ -3263,6 +3278,12 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"स्थिति बार में बिना आवाज़ की सूचनाओं के आइकॉन छिपाएं"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"सूचना बिंदुओं की अनुमति दें"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"सूचना बबल दिखाने की मंज़ूरी दें"</string>
+    <!-- no translation found for swipe_direction_title (6877543492435053137) -->
+    <skip />
+    <!-- no translation found for swipe_direction_ltr (3623394320915041215) -->
+    <skip />
+    <!-- no translation found for swipe_direction_rtl (4972099509548044938) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1905382958860387030">"ब्लिंक लाइट"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"लॉक स्क्रीन पर दिखाई दे"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"कार्य प्रोफ़ाइल लॉक होने पर"</string>
@@ -3309,7 +3330,11 @@
       <item quantity="one">%d ऐप सूचनाएं पढ़ सकते हैं</item>
       <item quantity="other">%d ऐप सूचनाएं पढ़ सकते हैं</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"सूचना सहायक"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"किसी सहायक की सुविधा नहीं है"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"इंस्टॉल किए गए किसी भी ऐप ने सूचना के एक्सेस का अनुरोध नहीं किया है."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g> के लिए सूचना एक्सेस करने की अनुमति दें?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> आपकी हर सूचना पढ़ पाएगा. इसमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम और आपको आने वाले मैसेज में लिखी चीज़ें शामिल हैं. यह सूचनाओं में बदलाव करने, उन्हें खारिज करने या उनमें मौजूद कार्रवाई बटनों को ट्रिगर करने जैसे काम भी कर पाएगा. \n\nइससे यह ऐप्लिकेशन \'परेशान न करें\' सुविधा चालू या बंद कर पाएगा या इससे जुड़ी सेटिंग बदल पाएगा."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> के लिए सूचना को एक्सेस करने की अनुमति दें?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> संपर्क नामों और आपको मिलने वाले मैसेज जैसी निजी जानकारी सहित, सभी सूचनाएं पढ़ सकता है. वह सूचना खारिज कर सकेगा और उनमें शामिल कार्रवाई बटनों को ट्रिगर भी कर सकेगा. \n\nइससे ऐप \'परेशान न करें\' सुविधा को चालू या बंद कर सकता है और उससे जुड़ी सेटिंग को भी बदल सकता है"</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"अगर आप <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> के लिए सूचना का एक्सेस बंद करते हैं, तो \'परेशान न करें\' सेवा का एक्सेस भी बंद हो सकता है."</string>
@@ -3582,7 +3607,8 @@
     <string name="advanced_apps" msgid="4812975097124803873">"बेहतर सेटिंग"</string>
     <string name="configure_apps" msgid="6685680790825882528">"ऐप्स कॉन्‍फ़िगर करें"</string>
     <string name="unknown_app" msgid="5275921288718717656">"अज्ञात ऐप"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"ऐप अनुमतियां"</string>
+    <!-- no translation found for app_permissions (5584182129908141622) -->
+    <skip />
     <string name="app_permissions_summary" msgid="5163974162150406324">"<xliff:g id="APPS">%1$s</xliff:g> का उपयोग करने वाले ऐप्लिकेशन"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"वेक करने के लिए टैप करें"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"डिवाइस की स्क्रीन को चालू करने के लिए, स्क्रीन पर कहीं भी दो बार छूएं"</string>
@@ -3828,10 +3854,8 @@
     <string name="condition_airplane_title" msgid="287356299107070503">"हवाई जहाज़ मोड चालू है"</string>
     <string name="condition_airplane_summary" msgid="2500054042183138980">"नेटवर्क मौजूद नहीं है"</string>
     <string name="condition_zen_title" msgid="2897779738211625">"परेशान न करें की सुविधा चालू है"</string>
-    <!-- no translation found for condition_zen_summary_phone_muted (3644614024467141806) -->
-    <skip />
-    <!-- no translation found for condition_zen_summary_with_exceptions (4047564276599301064) -->
-    <skip />
+    <string name="condition_zen_summary_phone_muted" msgid="3644614024467141806">"फ़ोन म्यूट कर दिया गया"</string>
+    <string name="condition_zen_summary_with_exceptions" msgid="4047564276599301064">"कुछ चीज़ों पर रोक नहीं लगाई गई है"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"बैटरी सेवर चालू है"</string>
     <string name="condition_battery_summary" msgid="5847532902924566572">"सुविधाओं पर पाबंदी लगाई गई है"</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"मोबाइल डेटा बंद है"</string>
@@ -3841,8 +3865,7 @@
     <string name="condition_work_title" msgid="7293722361184366648">"कार्य प्रोफ़ाइल बंद है"</string>
     <string name="condition_work_summary" msgid="9167580982244020746">"ऐप्लिकेशन और सूचनाओं के लिए"</string>
     <string name="condition_device_muted_action_turn_on_sound" msgid="4930240942726349213">"आवाज़ चालू करें"</string>
-    <!-- no translation found for condition_device_muted_title (3476439379918599716) -->
-    <skip />
+    <string name="condition_device_muted_title" msgid="3476439379918599716">"रिंगर म्यूट कर दिया गया"</string>
     <string name="condition_device_muted_summary" msgid="6313274406443663781">"कॉल और सूचनाओं के लिए"</string>
     <string name="condition_device_vibrate_title" msgid="8070177546359590131">"सिर्फ़ वाइब्रेशन"</string>
     <string name="condition_device_vibrate_summary" msgid="5743200564646910423">"कॉल और सूचनाओं के लिए"</string>
@@ -4211,6 +4234,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"\'परेशान न करें सुविधा\' अपडेट करें"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"ध्यान भटकने से रोकने के लिए डिवाइस की सूचनाओं को कुछ समय के लिए रोकें"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"यह सुविधा इस डिवाइस पर उपलब्ध नहीं है"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"जीएनएसएस माप को हर हाल में लागू करें"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"बिना ड्यूटी-साइक्लिंग के जीएनएसएस के सभी तारामंडल (कॉन्स्टलेशन) और फ़्रीक्वेंसी ट्रैक करें"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"बैकग्राउंड में गतिविधि शुरू होने की मंज़ूरी दें"</string>
@@ -4373,6 +4400,8 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"फिर से कोशिश करें"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"कुछ गड़बड़ी हुई है ऐप्लिकेशन ने डिवाइस चुनने का अनुरोध रद्द कर दिया है."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"कनेक्शन कामयाब रहा"</string>
+    <!-- no translation found for network_connection_request_dialog_showall (6938922880244567521) -->
+    <skip />
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस कनेक्ट हैं</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस कनेक्ट हैं</item>
@@ -4400,16 +4429,20 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"किसी भी ऐप्लिकेशन ने अनुमतियों का इस्तेमाल नहीं किया"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"पिछले 24 घंटों में सबसे ज़्यादा इस्तेमाल की गई अनुमतियां"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"इस्तेमाल की पूरी जानकारी देखें"</string>
-    <!-- no translation found for accessibility_usage_title (5136753034714150614) -->
+    <!-- no translation found for permission_bar_chart_details (5648719432839246667) -->
     <skip />
-    <!-- no translation found for accessibility_usage_summary (4364945481915750314) -->
+    <string name="accessibility_usage_title" msgid="5136753034714150614">"सुलभता सुविधाओं का इस्तेमाल"</string>
+    <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
+      <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> सुविधाओं को आपके डिवाइस पर पूरा एक्सेस है</item>
+      <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> सुविधाओं को आपके डिवाइस पर पूरा एक्सेस है</item>
+    </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g> की सूचनाएं प्रबंधित करें"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"कोई भी सुझाया गया ऐप्लिकेशन नहीं है"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> सूचना के चैनल. सभी को प्रबंधित करने के लिए टैप करें.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> सूचना के चैनल. सभी को प्रबंधित करने के लिए टैप करें.</item>
-    </plurals>
+    <!-- no translation found for notification_few_channel_count_summary (1090888820158822106) -->
+    <!-- no translation found for notification_many_channel_count_summary (8647409434789898073) -->
+    <skip />
     <string name="media_output_panel_title" msgid="6197092814295528184">"स्विच आउटपुट"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"इस समय <xliff:g id="DEVICE_NAME">%1$s</xliff:g> पर खेल रहा है"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

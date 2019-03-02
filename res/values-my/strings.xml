@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> က Wi-Fi ဖွင့်လိုသည်"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> က Wi-Fi ပိတ်လိုသည်"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"အမှားပြင်နိုင်သော အက်ပ်ဘိုက်ကုဒ် စိစစ်ပါ"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"အမှားရှာပြင်နိုင်သော အက်ပ်များအတွက် ဘိုက်ကုဒ် စိစစ်ရန် ART ကိုခွင့်ပြုသည်"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"တက်ဘလက်နှင့် အခြားစက်ပစ္စည်း ထိလိုက်လျှင် အချက်အလက် ဖလှယ်ရန် ခွင့်ပြုသည်"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"ဖုန်းနှင့် အခြားစက်ပစ္စည်း ထိလိုက်လျှင် အချက်အလက် ဖလှယ်ရန် ခွင့်ပြုသည်"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi ဟော့စပေါ့အတွက် အနည်းဆုံး လိုင်းတစ်လိုင်းရွေးပါ−"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP ဆက်တင်များ"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"ပုဂ္ဂိုလ်ရေး"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"ကျပန်း MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"စက်ပစ္စည်း ထည့်ပါ"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"“<xliff:g id="SSID">%1$s</xliff:g>” သို့ စက်ပစ္စည်းထည့်ရန် အောက်ရှိ QR ကုဒ်ကို အလယ်တည့်တည့် ထားပါ"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR ကုဒ်ကို စကင်ဖတ်ပါ"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"QR ကုဒ်ကို စကင်ဖတ်၍ Wi‑Fi ကို ချိတ်ဆက်ပါ"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Wi‑Fi မျှဝေပါ"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"“<xliff:g id="SSID">%1$s</xliff:g>” သို့ ဝင်ရန် အခြားကိရိယာတစ်ခုဖြင့် ဤ QR ကုဒ်ကို စကင်ဖတ်ပါ"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR ကုဒ်ကို ဖတ်၍မရပါ"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR ကုဒ်ကို ဖတ်၍မရပါ။ ကုဒ်ပြန်ထည့်ပြီး ထပ်စမ်းကြည့်ပါ"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"ထပ်စမ်းကြည့်ပါ။ ပြဿနာဆက်ရှိနေလျှင် စက်ပစ္စည်းထုတ်လုပ်သူကို ဆက်သွယ်ပါ"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"တစ်ခုခု မှားသွားသည်"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"စက်ပစ္စည်းကို ပလပ်တပ်ထားခြင်း၊ အားသွင်းထားပြီး ဖွင့်ထားခြင်း ရှိမရှိ စစ်ဆေးပါ"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"စက်ပစ္စည်းကို ပလပ်တပ်ထားခြင်း၊ အားသွင်းထားပြီး ဖွင့်ထားခြင်း ရှိမရှိ စစ်ဆေးပါ။ ပြဿနာဆက်ရှိနေလျှင် စက်ပစ္စည်းထုတ်လုပ်သူကို ဆက်သွယ်ပါ"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"“<xliff:g id="SSID">%1$s</xliff:g>” ထည့်ခြင်းကို ဤစက်ပစ္စည်းက ပံ့ပိုးမထားပါ"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"ချိတ်ဆက်မှု စစ်ဆေးပြီး ထပ်စမ်းကြည့်ပါ"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"ကွန်ရက် ရွေးပါ"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"သင့်စက်ကို ချိတ်ဆက်ရန် ကွန်ရက်တစ်ခု ရွေးပါ"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"ဤစက်ကို “<xliff:g id="SSID">%1$s</xliff:g>” သို့ ထည့်လိုသလား။"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"အခြားကွန်ရက် ရွေးရန်"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"စက်ပစ္စည်းကို ထည့်၍မရပါ"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"စက်ပစ္စည်းကို တွေ့ရှိပါသည်"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"ထပ်စမ်းကြည့်ရန်"</string>
     <string name="wifi_shared" msgid="844142443226926070">"အခြားစက်ပစ္စည်းအသုံးပြုသူများဖြင့် မျှဝေ"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ပြောင်းလဲခြင်းမရှိ)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"၂"</item>
     <item msgid="6200207341126893791">"၁"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"သင့်ရွေးချယ်မှု သိုမ့ဟုတ်  စစ်ဂနယ် အားရှိမှုပေါ် မူတည်လျှက်၊ ဝိုင်ဖိုင်ခေါ်ဆိုမှု ဖွင့်ထားပါက၊ သင့်ဖုန်းသည် ဝိုင်ဖိုင်ကွန်ယက်များ သို့မဟုတ် သင့် မိုဘိုင်းဝန်ဆောင်မှုဌာန၏ ကွန်ယက်မှတဆင့် ခေါ်ဆိုမှုများအား ပေးပို့နိုင်သည်။ ဤလုပ်ဆောင်နိုင်ချက်အား မဖွင့်မီ၊ ကျသင့်ငွေနှင့် အခြားအသေးစိတ်များအတွက် သင့် မိုဘိုင်းဝန်ဆောင်မှုဌာနအား မေးမြန်းပါ။"</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi ခေါ်ဆိုမှု ဖွင့်ထားသည့်အခါ သင်၏ရွေးချယ်မှုနှင့် လိုင်းပိုမိမှုအပေါ် မူတည်၍ သင့်ဖုန်းသည် Wi-Fi ကွန်ရက်များ သို့မဟုတ် သင့် ဝန်ဆောင်မှုပေးသူ၏ ကွန်ရက်မှတစ်ဆင့် ခေါ်ဆိုမှုများ ထပ်ဆင့်ပို့နိုင်ပါသည်။ ဤဝန်ဆောင်မှုမဖွင့်မီ ကျသင့်ငွေနှင့် အခြားအသေးစိတ် အချက်များအတွက် သင့်ဝန်ဆောင်မှုပေးသူကို မေးမြန်းကြည့်ပါ။<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"အရေးပေါ်လိပ်စာ"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Wi‑Fi သုံး၍ အရေးပေါ်ဖုန်းခေါ်သောအခါ အသုံးပြုသည့် သင့်တည်နေရာ"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"စနစ်အားတိုးမြင့်ခြင်း"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android ဗားရှင်း"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android လုံခြုံမှု ပက်ခ်ျ အဆင့်"</string>
     <string name="model_info" msgid="1952009518045740889">"မော်ဒယ်"</string>
     <string name="model_summary" msgid="8306235877567782987">"မော်ဒယ်- %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"၂ မိနစ်"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"ဖတ်ရန် အချိန်"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"တစ်ခုခုလုပ်ဆောင်ရန် အချိန်"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"အလိုအလျောက် ပျောက်သွားသည့် မက်ဆေ့ဂျ်များ ဖတ်ရန်၊ တစ်ခုခုလုပ်ဆောင်ရန် အချိန်မည်မျှလိုသည်ကို ရွေးပါ။\n\nအက်ပ်တိုင်းတွင် ဤဆက်တင် အသုံးပြုနိုင်သည်။"</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"တစ်ခုခုလုပ်ဆောင်ရန် မေးသည့် မက်ဆေ့ဂျ်များ ပြရမည့်ကြာချိန် ရွေးပါ၊ သို့သော်လည်း ယာယီသာ မြင်ရပါမည်။\n\nအက်ပ်အားလုံးတွင် ဤဆက်တင် အသုံးမပြုနိုင်ပါ။"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"ထိထားရန် လိုအပ်ချိန်"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"အရောင်​ပြောင်းပြန်"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"အခြေအနေပြဘားရှိ အသံတိတ် အကြောင်းကြားချက်များအတွက် သင်္ကေတများကို ဖျောက်သည်"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"အကြောင်းကြားချက်အမှတ်အသားများကို ခွင့်ပြုရန်"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"ပူဖောင်းကွက် အကြောင်းကြားချက်ကို ခွင့်ပြုရန်"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"ပွတ်ဆွဲ လုပ်ဆောင်ချက်များ"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"ပယ်ရန် ညာသို့၊ မီနူးပြရန် ဘယ်သို့ ပွတ်ဆွဲပါ"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"ပယ်ရန် ဘယ်သို့၊ မီနူးပြရန် ညာသို့ ပွတ်ဆွဲပါ"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"မီး မှိတ်တုတ်မှိတ်တုတ်လုပ်ရန်"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"လော့ခ်ချချိန် မျက်နှာပြင်တွင်"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"အလုပ်ပရိုဖိုင်လော့ခ်ချထားချိန်"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="other">app %d ခုသည် သတိပေးချက်များကို ဖတ်နိုင်သည်</item>
       <item quantity="one">app %d ခုသည် သတိပေးချက်များကို ဖတ်နိုင်သည်</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"အကြောင်းကြားချက် အကူအညီ"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Assistant မရှိပါ"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"ထည့်သွင်းထားသည့်အက်ပ်များသည် အကြောင်းကြားချက်ရယူရန် တောင်းဆိုထားခြင်းမရှိပါ။"</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g> အတွက် အကြောင်းကြားချက်ကို အသုံးပြုခွင့်ပေးလိုပါသလား။"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> သည် အဆက်အသွယ်အမည်များနှင့် သင်လက်ခံရရှိသော စာတိုမက်ဆေ့ဂျ်များကဲ့သို့သော ကိုယ်ရေးကိုယ်တာ အချက်အလက်များအပါအဝင် အကြောင်းကြားချက်များအားလုံးကို ဖတ်နိုင်ပါမည်။ ၎င်းသည် အကြောင်းကြားချက်များကို မွမ်းမံခြင်း သို့မဟုတ် ပယ်ခြင်း သို့မဟုတ် ပါဝင်သော လုပ်ဆောင်ချက် ခလုတ်များကို နှိပ်နိုင်သည်။ \n\n၎င်းသည် အက်ပ်ကို \'မနှောင့်ယှက်ရ\' အား ပိတ်ခွင့်ပေးသည့်အပြင် ဆက်စပ်နေသော ဆက်တင်များကိုလည်း ပြောင်းခွင့်ပေးသည်။"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>အတွက် အသိပေးချက်ကို အသုံးပြုခွင့်ပေးမလား?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> သည် အဆက်အသွယ် အမည်များနှင့် သင်လက်ခံရရှိသည့် မက်ဆေ့ဂျ်များကဲ့သို့ ကိုယ်ရေးကိုယ်တာ အချက်အလက်များ အပါအဝင် အကြောင်းကြားချက်များ အားလုံးကို ဖတ်နိုင်ပါလိမ့်မည်။ ၎င်းသည် အကြောင်းကြားချက်များကို ပယ်နိုင်ပြီး ယင်းအကြောင်းကြားချက်တွင် ပါဝင်သည့် လုပ်ဆောင်ချက်ခလုတ်များကိုလည်း နှိပ်နိုင်ပါသည်။ \n\n၎င်းသည် အက်ပ်ကို Do Not Disturb အား ဖွင့်နိုင်ပိတ်နိုင် ပြုလုပ်စေနိုင်ပြီး အခြားဆက်စပ်ဆက်တင်များကိုလည်း ပြောင်းလဲနိုင်စွမ်းရှိစေပါသည်။"</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> အတွက်အကြောင်းကြားချက် အသုံးပြုခွင့်ကို ပိတ်လိုက်လျှင်၊ Do Not Disturb ကိုအသုံးပြုခွင့်လည်း ပိတ်လိုက်ပါမည်။"</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"အဆင့်မြင့်"</string>
     <string name="configure_apps" msgid="6685680790825882528">"အက်ပ်များ များ ပုံစံပြင်သတ်မှတ်ပါ"</string>
     <string name="unknown_app" msgid="5275921288718717656">"အမည်မသိ အက်ပ်"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"အက်ပ်ခွင့်ပြုချက်များ"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"ခွင့်ပြုချက် မန်နေဂျာ"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"<xliff:g id="APPS">%1$s</xliff:g> ကို သုံးထားသော အက်ပ်များ"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"နိုးထရန် တို့ပါ"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"စက်ကိရိယာ နိုးကြားရန် ဖန်မျက်နှာပြင်ပေါ်ရှိ မည်သည့်နေရာမဆိုအား နှစ်ကြိမ်-တို့ပါ"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"\'မနှောင့်ယှက်ရ\' ကို အပ်ဒိတ်လုပ်ခြင်း"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"အာရုံစူးစိုက်နိုင်ရန် အကြောင်းကြားချက်များကို ခေတ္တရပ်ထားပါ"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ဤဝန်ဆောင်မှုကို ဤစက်ပစ္စည်းတွင် မရရှိနိုင်ပါ"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"GNSS အတိုင်းအတာအပြည့် သက်ရောက်ရန်"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"လည်ပတ်ချိန်မပါဘဲ GNSS စက်ဝိုင်းပုံမြင်ကွင်းကျယ်ပုံများနှင့် ကြိမ်နှုန်းအားလုံးကို ခြေရာခံပါ"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"နောက်ခံ လုပ်ဆောင်ချက် စတင်မှုများ ခွင့်ပြုပါ"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"ထပ်စမ်းကြည့်ရန်"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"တစ်ခုခု ဖြစ်သွားသည်။ အပလီကေးရှင်းက ကိရိယာရွေးရန် တောင်းဆိုချက်ကို ပယ်ဖျက်လိုက်သည်။"</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"ချိတ်ဆက်ပြီးပါပြီ"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"အားလုံးပြရန်"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other">စက်ပစ္စည်း <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ခု ချိတ်ဆက်ထားသည်</item>
       <item quantity="one">စက်ပစ္စည်း <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> ခု ချိတ်ဆက်ထားသည်</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"ခွင့်ပြုချက်များ အသုံးပြုသော အက်ပ်မရှိပါ"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"ပြီးခဲ့သော ၂၄ နာရီရှိ အသုံးအများဆုံး ခွင့်ပြုချက်များ"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"အသုံးပြုမှုအားလုံး ကြည့်ရန်"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"ခွင့်ပြုချက်များ ဒက်ရှ်ဘုတ်ကို ကြည့်သည်"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"အများသုံးစွဲနိုင်မှုကို အသုံးပြုမှု"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other">ဝန်ဆောင်မှု <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> ခုသည် သင့်ကိရိယာအား အပြည့်အဝ အသုံးပြုခွင့်ရှိသည်</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g> အကြောင်းကြားချက်များ စီမံရန်"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"အကြံပြုထားသော အပလီကေးရှင်းများ မရှိပါ"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other">အကြောင်းကြားချက် ချန်နယ် <xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ခု။ အားလုံးကို စီမံရန် တို့ပါ။</item>
-      <item quantity="one">အကြောင်းကြားချက် ချန်နယ် <xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> ခု။ အားလုံးကို စီမံရန် တို့ပါ။</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other">အကြောင်းကြားချက် ချန်နယ် <xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ခု။</item>
+      <item quantity="one">အကြောင်းကြားချက် ချန်နယ် <xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> ခု။</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"အကြောင်းကြားချက် ချန်နယ် <xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> ခု။ အားလုံးကို စီမံရန် တို့ပါ။"</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"မီဒီယာအထွက် ပြောင်းပါ"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ပေါ်တွင် လက်ရှိ ဖွင့်နေသည်"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

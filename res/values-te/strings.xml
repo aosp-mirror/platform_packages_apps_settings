@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> Wi-Fiని ఆన్ చేయాలనుకుంటోంది"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> Wi-Fiని ఆఫ్ చేయాలనుకుంటోంది"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"డీబగ్ చేయగల యాప్‌ల బైట్‌కోడ్‌ను తనిఖీ చేయండి"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"డీబగ్ చేయదగిన యాప్‌ల బైట్‌కోడ్ తనిఖీ చేయడం కోసం ARTని అనుమతించండి"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"టాబ్లెట్ మరో పరికరాన్ని తాకినప్పుడు డేటా మార్పిడిని అనుమతించు"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"ఫోన్ మరో పరికరాన్ని తాకినప్పుడు డేటా పరస్పర మార్పిడికి అనుమతించండి"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi-Fi హాట్‌స్పాట్ కోసం కనీసం ఒక బ్యాండ్‌ను ఎంచుకోండి:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP సెట్టింగ్‌లు"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"గోప్యత"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"యాదృచ్ఛీకరించబడిన MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"పరికరాన్ని జోడించండి"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"“<xliff:g id="SSID">%1$s</xliff:g>”కి పరికరాన్ని జోడించడానికి కింద QR కోడ్‌ని నమోదు చేయండి"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR కోడ్‌ని స్కాన్ చేయండి"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"QR కోడ్‌ని స్కాన్ చేయడం ద్వారా Wi‑Fiలో చేరండి"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Wi‑Fi షేర్ చేయి"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"వేరే పరికరంతో ఈ QR కోడ్‌ని స్కాన్‌ చేసి “<xliff:g id="SSID">%1$s</xliff:g>”కి కనెక్ట్ అవ్వవచ్చు"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR కోడ్‌ని చదవలేకపోయాం"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR కోడ్‌ను చదవడం సాధ్యం కాలేదు కోడ్‌ను మధ్యలో పెట్టి మళ్లీ ప్రయత్నించండి"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"మళ్లీ ప్రయత్నించండి. సమస్య ఇంకా కొనసాగితే, పరికరం తయారీదారుని సంప్రదించండి"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"ఏదో తప్పు జరిగింది"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"పరికరం ప్లగ్-ఇన్ చేయబడి, ఛార్జ్ చేయబడి మరియు ఆన్ చేయబడి ఉండేలా చూడండి"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"పరికరం ప్లగ్-ఇన్ చేయబడి, ఛార్జ్ చేయబడి మరియు ఆన్ చేయబడి ఉండేలా చూడండి. సమస్య ఇంకా కొనసాగితే, పరికరం తయారీదారుని సంప్రదించండి"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"“<xliff:g id="SSID">%1$s</xliff:g>”ను జోడించడానికి ఈ పరికరం మద్దతు ఇవ్వదు"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"కనెక్షన్‌ను పరిశీలించి, మళ్లీ ప్రయత్నించండి"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"నెట్‌వర్క్‌ను ఎంచుకోండి"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"మీ పరికరాన్ని కనెక్ట్ చేయడానికి ఒక నెట్‌వర్క్‌ని ఎంచుకోండి"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"“<xliff:g id="SSID">%1$s</xliff:g>”కి ఈ పరికరాన్ని జోడించాలా?"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"వేరే నెట్‌వర్క్‌ను ఎంచుకోండి"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"పరికరాన్ని జోడించడం సాధ్యపడలేదు"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"పరికరం కనుగొనబడింది"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"మళ్లీ ప్రయత్నించు"</string>
     <string name="wifi_shared" msgid="844142443226926070">"ఇతర పరికర వినియోగదారులతో భాగస్వామ్యం చేయి"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(మారలేదు)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi కాలింగ్ ఆన్‌లో ఉన్నప్పుడు, మీ ఫోన్ మీ ప్రాధాన్యత మరియు ఏ సిగ్నల్ సామర్థ్యం ఎక్కువగా ఉంది వంటి అంశాల ఆధారంగా Wi-Fi నెట్‌వర్క్‌లు లేదా మీ క్యారియర్ నెట్‌వర్క్ ద్వారా కాల్‌లు వెళ్లేలా చేస్తుంది. ఈ లక్షణాన్ని ఆన్ చేయడానికి ముందు, రుసుములు మరియు ఇతర వివరాల గురించి తెలుసుకోవడానికి మీ క్యారియర్‌ను సంప్రదించండి."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi కాలింగ్ ఆన్‌లో ఉన్నప్పుడు, మీ ఫోన్ మీ ప్రాధాన్యత మరియు ఏ సిగ్నల్ సామర్థ్యం ఎక్కువగా ఉంది వంటి అంశాల ఆధారంగా Wi-Fi నెట్‌వర్క్‌లు లేదా మీ క్యారియర్ నెట్‌వర్క్ ద్వారా కాల్‌లు వెళ్లేలా చేస్తుంది. ఈ ఫీచర్‌ను ఆన్ చేయడానికి ముందు, రుసుములు మరియు ఇతర వివరాల గురించి తెలుసుకోవడానికి మీ క్యారియర్‌ను సంప్రదించండి.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"అత్యవసర చిరునామా"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Wi-Fi ద్వారా అత్యవసర కాల్ చేసినప్పుడు మీ స్థానాన్ని ఉపయోగించబడుతుంది"</string>
@@ -1133,7 +1146,7 @@
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"వ్యక్తిగత ఖాతా - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"వెతుకు"</string>
     <string name="display_settings" msgid="7965901687241669598">"ప్రదర్శన"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"స్క్రీన్‌ను ఆటోమేటిక్‌గా తిప్పుతుంది"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"స్క్రీన్ ఆటో-రొటేట్‌"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"రంగులు"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"సహజం"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"అభివృద్ధిపరచబడింది"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"సిస్టమ్ అప్‌డేట్‌లు"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android వెర్షన్"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android భద్రతా అతికింపు స్థాయి"</string>
     <string name="model_info" msgid="1952009518045740889">"మోడల్"</string>
     <string name="model_summary" msgid="8306235877567782987">"మోడల్: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 నిమిషాలు"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"చదవడానికి పట్టే సమయం"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"చర్య తీసుకోవడానికి పట్టే సమయం"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"ఆటోమేటిక్‌గా స్క్రీన్‌పై కనిపించి పోయే సందేశాలను చదివేందుకు ఎంత సమయం కావాలో ఎంచుకోవచ్చు.\n\nఈ సెట్టింగ్‌కు అన్ని యాప్‌లలో మద్దతు ఉంటుందా, లేదా అనేది వాటిపై ఆధారపడి ఉంటుంది."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"మిమ్మల్ని ఏదో ఒక చర్యని తీసుకోమంటూ, తాత్కాలికంగా స్క్రీన్‌పై కనిపించే సందేశాలు ఎంతసేపు అలాగే ఉండాలనేది ఎంచుకోవచ్చు.\n\nఈ సెట్టింగ్‌కు అన్ని యాప్‌లలో మద్దతు ఉండదు."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"తాకి ఉంచాల్సిన సమయం"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"వర్ణ విలోమం"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"స్థితి బార్‌లో నిశ్శబ్ధ నోటిఫికేషన్‌ల చిహ్నాలను దాచి పెట్టు"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"నోటిఫికేషన్ డాట్‌లను అనుమతించండి"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"నోటిఫికేషన్ బబుల్స్‌ను అనుమతించండి"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"స్వైప్ చర్యలు"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"తీసివేయడానికి కుడికి, మెనూను చూపడానికి ఎడమకు స్వైప్ చేయండి"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"తీసివేయడానికి ఎడమకు, మెనూను చూపడానికి కుడికి స్వైప్ చేయండి"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"కాంతి మిణుకుమిణుకు అనేలా ఉంచు"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"లాక్ స్క్రీన్‌లో"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"కార్యాలయ ప్రొఫైల్ లాక్ అయినప్పుడు"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="other">%d యాప్‌లు నోటిఫికేషన్‌లను చదవగలవు</item>
       <item quantity="one"> %d యాప్ నోటిఫికేషన్‌లను చదవగలదు</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"నోటిఫికేషన్ అసిస్టెంట్"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"అసిస్టెంట్ లేదు"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"ఇన్‌స్టాల్ చేసిన అనువర్తనాలేవీ నోటిఫికేషన్ ప్రాప్యతను అభ్యర్థించలేదు."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్ అనుమతించాలా?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> అన్ని నోటిఫికేషన్‌లను చదవగలదు, సంప్రదింపు పేర్లు మరియు మీరు స్వీకరించిన సందేశాల వంటి వ్యక్తిగత సమాచారంతో సహా. ఇది నోటిఫికేషన్‌లను సవరించగలదు లేదా తీసివేయగలదు లేదా అవి కలిగి ఉండే చర్య బటన్‌లను సక్రియం చేయగలదు. \n\nఇది యాప్‌కు అంతరాయం కలిగించవద్దు ఎంపికను ఆన్ చేయగల లేదా ఆఫ్ చేయగల సామర్థ్యాన్ని కూడా ఇస్తుంది మరియు సంబంధిత సెట్టింగ్‌లను కూడా మారుస్తుంది."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం నోటిఫికేషన్ ప్రాప్యతను అనుమతించాలా?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> పరిచయ పేర్లు మరియు మీరు స్వీకరించే సందేశాల వచనం వంటి వ్యక్తిగత సమాచారంతో సహా అన్ని నోటిఫికేషన్‌లను చదవగలదు. అలాగే, ఇది నోటిఫికేషన్‌లను తీసివేయడం లేదా అవి కలిగి ఉండే చర్య బటన్‌లను సక్రియం చేయడం కూడా చేయగలదు. \n\nఇది అనువర్తనానికి అంతరాయం కలిగించవద్దు ఎంపికను ఆన్ చేయగల లేదా ఆఫ్ చేయగల సామర్థ్యాన్ని కూడా ఇస్తుంది మరియు సంబంధిత సెట్టింగ్‌లను కూడా మారుస్తుంది."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"మీరు <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్‌ను ఆఫ్ చేస్తే, అంతరాయం కలిగించవద్దు ఎంపిక యాక్సెస్ కూడా ఆఫ్ చేయబడవచ్చు."</string>
@@ -3575,7 +3595,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"అధునాతనం"</string>
     <string name="configure_apps" msgid="6685680790825882528">"అనువర్తనాలను కాన్ఫిగర్ చేయండి"</string>
     <string name="unknown_app" msgid="5275921288718717656">"తెలియని యాప్"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"యాప్ అనుమతులు"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"అనుమతి మేనేజర్"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"యాప్‌లు <xliff:g id="APPS">%1$s</xliff:g>ని ఉపయోగిస్తున్నాయి"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"సక్రియం చేయడానికి నొక్కండి"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"పరికరాన్ని సక్రియం చేయడానికి స్క్రీన్‌పై ఎక్కడైనా రెండుసార్లు నొక్కండి"</string>
@@ -4201,6 +4221,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"అంతరాయం కలిగించవద్దును అప్‌డేట్ చేయి"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"ఇతర వ్యాపకాలపై దృష్టి మరలకుండా ఉండడానికి నోటిఫికేషన్‌లను పాజ్ చేయండి"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ఈ లక్షణం ఈ పరికరంలో అందుబాటులో లేదు"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"శక్తివంతమైన GNSS కొలతలు"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"డ్యూటీ సైక్లింగ్ లేకుండా అన్ని GNSS నక్షత్రరాశులను మరియు ఫ్రీక్వెన్సీలను ట్రాక్ చేయండి"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"నేపథ్య కార్యకలాపం మొదలవ్వడానికి అనుమతి ఇవ్వు"</string>
@@ -4363,6 +4387,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"మళ్లీ ప్రయత్నించు"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"ఏదో తప్పు జరిగింది. ఈ అప్లికేషన్ పరికరాన్ని ఎంచుకునే అభ్యర్థనని రద్దు చేసింది."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"విజయవంతంగా కనెక్ట్ చేయబడింది"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"అన్నింటినీ చూపు"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> పరికరాలు కనెక్ట్ అయ్యాయి</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> పరికరం కనెక్ట్ అయ్యింది</item>
@@ -4390,7 +4415,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"అనుమతులను ఏ ఒక్క యాప్‌ ఉపయోగించుకోవడం లేదు"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"గత 24 గంటల్లో ఎక్కువగా ఉపయోగించిన అనుమతులు"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"మొత్తం వాడాకాన్ని చుడండి"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"అనుమతుల డాష్‌బోర్డ్‌ను చూడండి"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"యాక్సెసిబిలిటీ వినియోగం"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> సేవలు మీ పరికరానికి పూర్తి యాక్సెస్ కలిగి ఉన్నాయి</item>
@@ -4398,10 +4423,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g> నోటిఫికేషన్‌లను నిర్వహించండి"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"సూచించబడిన అప్లికేషన్‌లు ఏవీ లేవు"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> నోటిఫికేషన్ ఛానెల్‌లు. అన్నింటినీ నిర్వహించుకోవడానికి నొక్కండి.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> నోటిఫికేషన్ ఛానెల్. అన్నింటినీ నిర్వహించుకోవడానికి నొక్కండి.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> నోటిఫికేషన్ ఛానెల్‌లు.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> నోటిఫికేషన్ ఛానెల్.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> నోటిఫికేషన్ ఛానెల్‌లు. అన్నింటినీ నిర్వహించుకోవడానికి నొక్కండి."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"అవుట్‌పుట్ మార్చండి"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>లో ప్లే అవుతోంది"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>
