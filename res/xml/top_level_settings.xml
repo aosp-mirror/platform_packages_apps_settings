@@ -123,7 +123,8 @@
         android:summary="@string/accessibility_settings_summary"
         android:icon="@drawable/ic_homepage_accessibility"
         android:order="-20"
-        android:fragment="com.android.settings.accessibility.AccessibilitySettings"/>
+        android:fragment="com.android.settings.accessibility.AccessibilitySettings"
+        settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
 
     <Preference
         android:key="top_level_system"
