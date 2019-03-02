@@ -124,6 +124,7 @@ public class SimStatusDialogControllerTest {
         doReturn("").when(mController).getPhoneNumber();
         doReturn(mSignalStrength).when(mController).getSignalStrength();
 
+        when(mEuiccManager.isEnabled()).thenReturn(true);
         when(mEuiccManager.getEid()).thenReturn("");
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         ReflectionHelpers.setField(mController, "mCarrierConfigManager", mCarrierConfigManager);
@@ -352,6 +353,17 @@ public class SimStatusDialogControllerTest {
         mController.initialize();
 
         verify(mDialog).setText(EID_INFO_VALUE_ID, eid);
+        verify(mDialog, never()).removeSettingFromScreen(eq(EID_INFO_VALUE_ID));
+    }
+
+    @Test
+    public void initialize_showEid_euiccManagerIsNotEnabled() {
+        when(mEuiccManager.isEnabled()).thenReturn(false);
+
+        mController.initialize();
+
+        verify(mDialog, never()).setText(eq(EID_INFO_VALUE_ID), any());
+        verify(mDialog).removeSettingFromScreen(eq(EID_INFO_VALUE_ID));
     }
 
     @Test
