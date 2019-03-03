@@ -18,17 +18,8 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
-import android.app.role.RoleManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
+import android.permission.PermissionControllerManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,62 +28,27 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultEmergencyShortcutPreferenceControllerTest {
 
     @Mock
-    private RoleManager mRoleManager;
-    @Mock
-    private PackageManager mPackageManager;
+    private PermissionControllerManager mPermissionControllerManager;
 
-    private Context mContext;
     private DefaultEmergencyShortcutPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        when(mContext.getSystemService(RoleManager.class)).thenReturn(mRoleManager);
-        mController = new DefaultEmergencyShortcutPreferenceController(mContext, "Package1");
+        ShadowApplication.getInstance().setSystemService(Context.PERMISSION_CONTROLLER_SERVICE,
+                mPermissionControllerManager);
+        mController = new DefaultEmergencyShortcutPreferenceController(
+                RuntimeEnvironment.application, "Package1");
     }
 
     @Test
     public void getPreferenceKey_shouldReturnDefaultEmergency() {
         assertThat(mController.getPreferenceKey()).isEqualTo("default_emergency_app");
-    }
-
-    @Test
-    public void hasAppCapability_hasEmergencyCapability_shouldReturnTrue() {
-        List<ResolveInfo> resolveInfos = new ArrayList<>();
-        resolveInfos.add(new ResolveInfo());
-        when(mPackageManager.queryIntentActivities(argThat(intent-> intent != null
-                && intent.getAction().equals(TelephonyManager.ACTION_EMERGENCY_ASSISTANCE)),
-                anyInt())).thenReturn(resolveInfos);
-
-        assertThat(mController.hasAppCapability()).isTrue();
-    }
-
-    @Test
-    public void hasAppCapability_noEmergencyCapability_shouldReturnFalse() {
-        assertThat(mController.hasAppCapability()).isFalse();
-    }
-
-    @Test
-    public void isDefaultApp_isDefaultEmergency_shouldReturnTrue() {
-        when(mRoleManager.getRoleHolders(RoleManager.ROLE_EMERGENCY))
-                .thenReturn(Collections.singletonList("Package1"));
-
-        assertThat(mController.isDefaultApp()).isTrue();
-    }
-
-    @Test
-    public void isDefaultApp_notDefaultEmergency_shouldReturnFalse() {
-        assertThat(mController.isDefaultApp()).isFalse();
     }
 }

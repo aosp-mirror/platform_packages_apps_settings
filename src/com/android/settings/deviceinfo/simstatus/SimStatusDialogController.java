@@ -381,7 +381,11 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateEid() {
-        mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
+        if (mEuiccManager.isEnabled()) {
+            mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
+        } else {
+            mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
+        }
     }
 
     private void updateImsRegistrationState() {

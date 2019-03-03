@@ -324,7 +324,7 @@ public class WifiConfigControllerTest {
         WifiManager wifiManager = mock(WifiManager.class);
         when(wifiManager.isWpa3SaeSupported()).thenReturn(saeVisible);
         when(wifiManager.isWpa3SuiteBSupported()).thenReturn(suitebVisible);
-        when(wifiManager.isOweSupported()).thenReturn(oweVisible);
+        when(wifiManager.isEnhancedOpenSupported()).thenReturn(oweVisible);
 
         mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
                 WifiConfigUiBase.MODE_MODIFY, wifiManager);

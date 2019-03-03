@@ -14,9 +14,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import android.app.role.RoleManager;
 import android.content.Context;
-
-import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
 
 public class DefaultHomeShortcutPreferenceController
         extends DefaultAppShortcutPreferenceControllerBase {
@@ -24,18 +23,6 @@ public class DefaultHomeShortcutPreferenceController
     private static final String KEY = "default_home";
 
     public DefaultHomeShortcutPreferenceController(Context context, String packageName) {
-        super(context, KEY, packageName);
+        super(context, KEY, RoleManager.ROLE_HOME, packageName);
     }
-
-    @Override
-    protected boolean hasAppCapability() {
-        return DefaultHomePreferenceController.hasHomePreference(mPackageName, mContext);
-    }
-
-    @Override
-    protected boolean isDefaultApp() {
-        return DefaultHomePreferenceController.isHomeDefault(mPackageName,
-                mContext.getPackageManager());
-    }
-
 }
