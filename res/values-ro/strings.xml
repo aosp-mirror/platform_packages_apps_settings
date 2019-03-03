@@ -817,6 +817,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> încearcă să activeze Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> încearcă să dezactiveze Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Verificați bytecode-ul aplicațiilor care pot fi depanate"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Permiteți ART să verifice bytecode-ul pentru aplicațiile care pot fi depanate"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permiteți schimbul de date atunci când tableta atinge alt dispozitiv"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permiteți schimbul de date atunci când telefonul atinge alt dispozitiv"</string>
@@ -931,6 +933,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Alegeți cel puțin o bandă pentru hotspot Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Setări IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Confidențialitate"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Adresă MAC aleatorie"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Adăugați un dispozitiv"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Centrați codul QR de mai jos pentru a adăuga dispozitivul la „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Scanați codul QR"</string>
@@ -938,7 +941,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Conectați-vă la Wi‑Fi scanând un cod QR"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Distribuiți Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Scanați acest cod QR cu alt dispozitiv pentru a vă conecta la „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Nu s-a putut citi codul QR"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Nu s-a putut citi codul QR. Reintroduceți codul și încercați din nou"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Încercați din nou. Dacă problema persistă, contactați producătorul dispozitivului"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"A apărut o eroare"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Asigurați-vă că dispozitivul este conectat la priză, încărcat și pornit"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Asigurați-vă că dispozitivul este conectat la priză, încărcat și pornit. Dacă problema persistă, contactați producătorul dispozitivului"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Adăugarea „<xliff:g id="SSID">%1$s</xliff:g>” nu este acceptată de acest dispozitiv"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Verificați conexiunea și încercați din nou"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Alegeți rețeaua"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Pentru a vă conecta dispozitivul, alegeți o rețea"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Adăugați acest dispozitiv la „<xliff:g id="SSID">%1$s</xliff:g>”?"</string>
@@ -947,6 +956,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Alegeți o altă rețea"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Nu s-a putut adăuga dispozitivul"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"S-a găsit un dispozitiv"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Încercați din nou"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Permiteți accesul și altor utilizatori ai dispozitivului"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(neschimbate)"</string>
@@ -1088,7 +1101,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Când Apelarea prin Wi-Fi este activată, puteți să direcționați apelurile prin rețele Wi-Fi sau prin rețeaua operatorului, în funcție de preferință și de intensitatea mai mare a semnalului. Înainte de a activa această funcție, consultați-vă operatorul în privința taxelor și a altor detalii."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Când este activată Apelarea prin Wi-Fi, telefonul poate să redirecționeze apelurile prin rețelele Wi-Fi sau prin rețeaua operatorului, în funcție de preferință și de semnalul cu cea mai mare intensitate. Înainte să activați această funcție, consultați-vă operatorul în privința taxelor și altor detalii.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Adresă de urgență"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Folosită ca locație când efectuați un apel de urgență prin Wi-Fi"</string>
@@ -1288,7 +1301,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualizări de sistem"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versiune Android"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Nivelul corecției de securitate Android"</string>
     <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="model_summary" msgid="8306235877567782987">"Model: %1$s"</string>
@@ -2062,7 +2074,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minute"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Timp pentru citit"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Timp pentru a acționa"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Alegeți cât timp doriți să citiți mesajele care dispar în mod automat și să acționați pe baza lor.\n\nAsistența pentru această setare depinde de fiecare aplicație."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Alegeți durata de afișare a mesajelor care vă cer să acționați, dar care sunt vizibile numai temporar.\n\nNu toate aplicațiile permit această setare."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Întârziere la atingere lungă"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversarea culorilor"</string>
@@ -3297,6 +3310,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Ascundeți pictogramele pentru notificările silențioase în bara de stare"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Permiteți puncte de notificare"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Permiteți baloanele de notificare"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Acțiuni de glisare"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Glisați la dreapta pentru a respinge și la stânga pentru a afișa meniul"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Glisați la stânga pentru a respinge și la dreapta pentru a afișa meniul"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Lumină intermitentă"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Pe ecranul de blocare"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Când este blocat profilul de serviciu"</string>
@@ -3344,7 +3360,11 @@
       <item quantity="other">%d de aplicații pot citi notificările</item>
       <item quantity="one">%d aplicație poate citi notificările</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Asistent pentru notificări"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Niciun asistent"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nicio aplicație instalată nu a solicitat accesul la notificări."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Permiteți accesul la notificări pentru <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> va putea să citească toate notificările, inclusiv informațiile cu caracter personal, cum ar fi numele persoanelor de contact și textul mesajelor primite. De asemenea, va putea să modifice sau să închidă notificări sau să declanșeze butoane pentru acțiuni din acestea. \n\nAstfel, aplicația va putea să activeze sau să dezactiveze starea Nu deranja și să modifice setările aferente."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Permiteți accesul la notificări pentru <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> va putea să citească toate notificările, inclusiv informațiile cu caracter personal, cum ar fi numele persoanelor de contact și textul mesajelor primite. De asemenea, va putea să închidă notificări sau să declanșeze butoane pentru acțiuni din acestea. \n\nAstfel, aplicația va putea să activeze sau să dezactiveze starea Nu deranja și să modifice setările aferente."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Dacă dezactivați accesul notificărilor pentru <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, este posibil să se dezactiveze și accesul când starea este Nu deranja."</string>
@@ -3628,7 +3648,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Avansate"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configurați aplicațiile"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplicație necunoscută"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Permisiuni aplicație"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Manager de permisiuni"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Aplicații care folosesc <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Atingeți pentru a activa"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Atingeți de două ori oriunde pe ecran pentru a activa dispozitivul"</string>
@@ -4275,6 +4295,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Actualizați funcția Nu deranja"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Întrerupeți notificările pentru a vă păstra concentrarea"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Această caracteristică nu este disponibilă pe acest dispozitiv"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Forțați măsurători GNSS complete"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Urmăriți toate constelațiile și frecvențele GNSS fără ciclu de funcționare"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Permiteți ca activitățile să pornească în fundal"</string>
@@ -4438,6 +4462,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Reîncercați"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"A intervenit ceva. Această aplicație a anulat solicitarea de a alege un dispozitiv."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Conectare reușită"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Afișați-le pe toate"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="few"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dispozitive conectate</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> de dispozitive conectate</item>
@@ -4466,7 +4491,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"Nicio aplicație nu a folosit permisiunile"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Cele mai folosite permisiuni în ultimele 24 de ore"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Vedeți toate utilizările"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Vizualizați tabloul de bord pentru permisiuni"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Utilizarea accesibilității"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="few"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> servicii au acces deplin la dispozitivul dvs.</item>
@@ -4475,11 +4500,14 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Gestionați notificările aplicației <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Nu există nicio aplicație sugerată"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canale de notificare. Atingeți pentru a le gestiona pe toate.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> de canale de notificare. Atingeți pentru a le gestiona pe toate.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> canal de notificare. Atingeți pentru a-l gestiona.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canale de notificare.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> de canale de notificare.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> canal de notificare.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> canale de notificare. Atingeți ca să le gestionați pe toate."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Schimbați rezultatul"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Se redă acum pe <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

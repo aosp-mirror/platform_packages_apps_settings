@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"「<xliff:g id="REQUESTER">%s</xliff:g>」が Wi-Fi を ON にしようとしています"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"「<xliff:g id="REQUESTER">%s</xliff:g>」が Wi-Fi を OFF にしようとしています"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"デバッグ可能なアプリのバイトコードを確認"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"ART にデバッグ可能なアプリのバイトコードの確認を許可する"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"タブレットが他のデバイスと接触したときのデータ交換を許可する"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"端末が他のデバイスと接触したときのデータ交換を許可する"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Wi‑Fi アクセス ポイントの帯域幅を少なくとも 1 つ選択してください。"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP設定"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"プライバシー"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"ランダム化 MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"デバイスの追加"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"「<xliff:g id="SSID">%1$s</xliff:g>」にデバイスを追加するには、下記の中心に QR コードを合わせてください"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR コードのスキャン"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Wi‑Fi に接続するには、QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Wi‑Fi の共有"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"「<xliff:g id="SSID">%1$s</xliff:g>」に参加するには、別のデバイスでこの QR コードをスキャンしてください"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR コードを読み取れませんでした"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR コードを読み取れませんでした。コードを再度中央に捉えて、もう一度お試しください"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"もう一度お試しください。問題が解決しない場合は、デバイスのメーカーにお問い合わせください"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"エラーが発生しました"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"デバイスが電源に接続され、充電され、ON になっていることをご確認ください"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"デバイスが電源に接続され、充電され、ON になっていることをご確認ください。問題が解決しない場合は、デバイスのメーカーにお問い合わせください"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"このデバイスでは「<xliff:g id="SSID">%1$s</xliff:g>」の追加はサポートされていません"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"接続を確認し、もう一度お試しください"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"ネットワークの選択"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"デバイスを接続するには、ネットワークを選択してください"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"「<xliff:g id="SSID">%1$s</xliff:g>」にこのデバイスを追加しますか？"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"別のネットワークを選択"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"デバイスを追加できませんでした"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"デバイスが見つかりました"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"再試行"</string>
     <string name="wifi_shared" msgid="844142443226926070">"他の端末ユーザーと共有する"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"（変更なし）"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi発信をONにすると、ユーザーの設定と信号の強度に応じて、スマートフォンからWi-Fiネットワークか携帯通信会社ネットワークのいずれかを経由して通話をルーティングできるようになります。この機能をONにする場合は、事前に料金などの条件について携帯通信会社にご確認ください。"</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi 通話を ON にすると、ユーザーの設定と信号の強度に応じて、スマートフォンから Wi-Fi ネットワークか携帯通信会社ネットワークのいずれかを経由して通話をルーティングできるようになります。この機能を ON にする場合は、事前に料金などの条件について携帯通信会社にご確認ください。<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"緊急対応の住所"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Wi‑Fi を使用して緊急通報を行った場合に、現在地として使用されます"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"システムアップデート"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Androidバージョン"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Androidセキュリティパッチレベル"</string>
     <string name="model_info" msgid="1952009518045740889">"モデル"</string>
     <string name="model_summary" msgid="8306235877567782987">"モデル: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2分"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"表示しておく時間"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"操作を行う時間"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"操作を行えるようメッセージを表示しておく時間を指定してください。この時間を過ぎると、メッセージは自動的に閉じます。\n\nこの設定に対応していないアプリもあります。"</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"操作が求められるが表示可能な時間が限られているメッセージの表示時間を指定してください。\n\nこの設定に対応していないアプリもあります。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"長押しする時間"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"色反転"</string>
@@ -2056,7 +2069,7 @@
     <string name="accessibility_touch_vibration_title" msgid="7931823772673770492">"タップ操作時のバイブ"</string>
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"サービスの使用"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"色補正の使用"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"字幕の使用"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"字幕を使用する"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"続行"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"補聴器"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"接続されている補聴器なし"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"ステータスバーで通知消音アイコンを非表示にする"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"通知ドットの許可"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"通知のふきだしを許可"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"スワイプの動作"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"右にスワイプでメニューを閉じ、左にスワイプでメニューを表示"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"左にスワイプでメニューを閉じ、右にスワイプでメニューを表示"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"点滅"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"ロック画面上"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"仕事用プロファイルのロック時"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="other">%d個のアプリが通知を読み取れます</item>
       <item quantity="one">%d個のアプリが通知を読み取れます</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"通知アシスタント"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"アシスタントなし"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"通知へのアクセスをリクエストしたインストール済みアプリはありません。"</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"通知へのアクセスを<xliff:g id="SERVICE">%1$s</xliff:g>に許可しますか？"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を変更または非表示にしたり、通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>での通知へのアクセスを許可しますか？"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、サイレント モードのアクセスも OFF になります。"</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"詳細設定"</string>
     <string name="configure_apps" msgid="6685680790825882528">"アプリの設定"</string>
     <string name="unknown_app" msgid="5275921288718717656">"不明なアプリ"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"アプリの権限"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"権限マネージャ"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"<xliff:g id="APPS">%1$s</xliff:g>を使用するアプリ"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"タップして復帰"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"画面をダブルタップすると端末が復帰します"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"サイレント モードの更新"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"集中するために通知を一時停止する"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"この機能は、お使いの端末ではご利用いただけません"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"GNSS 計測の完全な実行"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"デューティ サイクリングを無効にした状態で、すべての GNSS コンステレーションと頻度をトラッキングします"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"バックグラウンド アクティビティの開始を許可する"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"再試行"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"エラーが発生しました。アプリはデバイス選択リクエストをキャンセルしました。"</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"接続しました"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"すべて表示"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> 台のデバイスを接続済み</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> 台のデバイスを接続済み</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"権限を使用したアプリはありません"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"過去 24 時間以内によく使用した権限"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"すべての使用を表示"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"権限ダッシュボードを表示"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"ユーザー補助の使用"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> 件のサービスにデバイスへのフルアクセスを許可しています</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g> の通知の管理"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"おすすめのアプリはありません"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> 件の通知チャンネルがあります。すべて管理するにはタップしてください。</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> 件の通知チャンネルがあります。すべて管理するにはタップしてください。</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> 件の通知チャンネルがあります</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> 件の通知チャンネルがあります。</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> 件の通知チャンネルがあります。すべて管理するにはタップしてください。"</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"出力の切り替え"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"現在 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> で再生しています"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

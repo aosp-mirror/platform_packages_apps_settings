@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> wil wifi inschakelen"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> wil wifi uitschakelen"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Bytecode verifiëren van apps met foutopsporing"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"ART toestaan de bytecode te verifiëren voor apps waarop foutopsporing kan worden toegepast"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Gegevensuitwisseling toestaan wanneer de tablet een ander apparaat fysiek raakt"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Gegevensuitwisseling toestaan wanneer de telefoon een ander apparaat fysiek raakt"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Kies ten minste één band voor je wifi-hotspot:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-instellingen"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Privacy"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Willekeurig MAC-adres"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Een apparaat toevoegen"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Centreer de onderstaande QR-code om het apparaat toe te voegen aan \'<xliff:g id="SSID">%1$s</xliff:g>\'"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR-code scannen"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Maak verbinding met wifi door een QR-code te scannen"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Wifi delen"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Scan deze QR-code met een ander apparaat om deel te nemen aan \'<xliff:g id="SSID">%1$s</xliff:g>\'"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Kan QR-code niet lezen"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Kan QR-code niet lezen. Centreer de code en probeer het opnieuw."</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Probeer het nog eens. Als het probleem zich blijft voordoen, neem je contact op met de fabrikant van het apparaat."</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Er is iets misgegaan"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Controleer of het apparaat is aangesloten, opgeladen en ingeschakeld"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Controleer of het apparaat is aangesloten, opgeladen en ingeschakeld. Als het probleem zich blijft voordoen, neem je contact op met de fabrikant van het apparaat."</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"\'<xliff:g id="SSID">%1$s</xliff:g>\' toevoegen is niet mogelijk op dit apparaat"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Controleer de verbinding en probeer het opnieuw"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Netwerk kiezen"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Kies een netwerk om je apparaat te verbinden"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Dit apparaat toevoegen aan \'<xliff:g id="SSID">%1$s</xliff:g>\'?"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Ander netwerk kiezen"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Kan apparaat niet toevoegen"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Apparaat gevonden"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Opnieuw proberen"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Delen met andere apparaatgebruikers"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ongewijzigd)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wanneer bellen via wifi is ingeschakeld, kan je telefoon gesprekken doorschakelen via wifi-netwerken of het netwerk van je provider, afhankelijk van je voorkeur en welk signaal sterker is. Voordat je deze functie inschakelt, neem je contact met je provider op over de kosten en andere details."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wanneer bellen via wifi is ingeschakeld, kan je telefoon gesprekken doorschakelen via wifi-netwerken of het netwerk van je provider, afhankelijk van je voorkeur en welk signaal sterker is. Voordat je deze functie inschakelt, neem je contact met je provider op over de kosten en andere details.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Adres bij noodgevallen"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Dit adres wordt gebruikt als je locatie wanneer je het noodnummer belt via wifi"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systeemupdates"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-versie"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Niveau van Android-beveiligingspatch"</string>
     <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="model_summary" msgid="8306235877567782987">"Model: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minuten"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Tijd om te lezen"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Tijd om actie te ondernemen"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Kies hoelang je berichten die automatisch verdwijnen, wilt lezen en behandelen.\n\nNiet alle apps ondersteunen deze instelling."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Kies hoelang je berichten wilt weergeven die je vragen om actie te ondernemen, maar die slechts tijdelijk zichtbaar zijn.\n\nDeze instelling wordt niet door alle apps ondersteund."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Vertraging voor blijven aanraken"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Kleurinversie"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Pictogrammen voor stille meldingen in de statusbalk verbergen"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Meldingsstipjes toestaan"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Meldingsballonnen toestaan"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Veegacties"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Veeg naar rechts om te sluiten of veeg naar links om het menu weer te geven"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Veeg naar links om te sluiten of veeg naar rechts om het menu weer te geven"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Knipperlicht"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Op vergrendelingsscherm"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Als werkprofiel is vergrendeld"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="other">%d apps kunnen meldingen lezen</item>
       <item quantity="one">%d app kan meldingen lezen</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Meldingsassistent"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Geen assistent"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Er zijn geen geïnstalleerde apps die toegang tot meldingen hebben aangevraagd."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Toegang tot meldingen toestaan voor <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> kan alle meldingen lezen, waaronder persoonlijke informatie zoals contactnamen en de tekst van berichten die je ontvangt. De functie kan deze meldingen ook aanpassen of sluiten of actieknoppen die ermee samenhangen activeren. \n\nHierdoor kan de app ook \'Niet storen\' in- of uitschakelen en gerelateerde instellingen wijzigen."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Toegang tot meldingen toestaan voor <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan alle meldingen lezen, waaronder persoonsgegevens zoals contactnamen en de tekst van berichten die je ontvangt. De app kan deze meldingen ook sluiten of actieknoppen die ermee samenhangen activeren. \n\nHierdoor kan de app ook \'Niet storen\' in- of uitschakelen en gerelateerde instellingen wijzigen."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Als je toegang tot meldingen uitschakelt voor <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kan toegang tot \'Niet storen\' ook worden uitgeschakeld."</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Geavanceerd"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Apps configureren"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Onbekende app"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"App-machtigingen"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Machtigingsbeheer"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Apps die <xliff:g id="APPS">%1$s</xliff:g> gebruiken"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tikken om te activeren"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Dubbeltikken op het scherm om het apparaat te activeren"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"\'Niet storen\' updaten"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Meldingen onderbreken om gefocust te blijven"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Deze functie is niet beschikbaar op dit apparaat"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Volledige GNSS-metingen afdwingen"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Alle GNSS-constellaties en -frequenties bijhouden zonder duty cycling"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Starts van activiteit op de achtergrond toestaan"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Opnieuw proberen"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Er is een probleem opgetreden. De app heeft het verzoek om een apparaat te kiezen geannuleerd."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Verbinding gemaakt"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Alles tonen"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> verbonden apparaten</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> verbonden apparaat</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 apps hebben rechten gebruikt"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Meest gebruikte rechten in afgelopen 24 uur"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Alle gebruik bekijken"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Machtigingsdashboard weergeven"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Toegankelijkheidsgebruik"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> services hebben volledige toegang tot je apparaat</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Meldingen van <xliff:g id="APP_NAME">%1$s</xliff:g> beheren"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Geen voorgestelde app"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> meldingskanalen. Tik om alle te beheren.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> meldingskanaal. Tik om alle te beheren.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> meldingskanalen.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> meldingskanaal.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> meldingskanalen. Tik om alle kanalen te beheren."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Uitvoer wijzigen"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Wordt momenteel afgespeeld op <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

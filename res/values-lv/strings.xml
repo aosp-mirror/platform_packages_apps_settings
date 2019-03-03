@@ -817,6 +817,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"Lietotnē <xliff:g id="REQUESTER">%s</xliff:g> tiek mēģināts ieslēgt Wi-Fi savienojumu."</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"Lietotnē <xliff:g id="REQUESTER">%s</xliff:g> tiek mēģināts izslēgt Wi-Fi savienojumu."</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Verificēt atkļūdojamu lietotņu bitu kodu"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Atļaut ART verificēt atkļūdojamu lietotņu bitu kodu"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Atļaut datu apmaiņu, kad planšetdators saskaras ar citu ierīci"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Atļaut datu apmaiņu, kad tālrunis saskaras ar citu ierīci"</string>
@@ -931,6 +933,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Izvēlieties vismaz vienu joslu Wi‑Fi tīklājam:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP iestatījumi"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Konfidencialitāte"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Nejauši atlasīta MAC adr."</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Ierīces pievienošana"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Lai izveidotu ierīces savienojumu ar <xliff:g id="SSID">%1$s</xliff:g>, centrējiet tālāk norādīto QR kodu."</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR koda skenēšana"</string>
@@ -938,7 +941,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Lai pievienotos Wi-Fi tīklam, skenējiet ātrās atbildes kodu."</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Wi‑Fi tīkla koplietošana"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Lai pievienotos tīklam “<xliff:g id="SSID">%1$s</xliff:g>”, skenējiet šo QR kodu, izmantojot citu ierīci."</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Nevarēja nolasīt QR kodu."</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Nevarēja nolasīt QR kodu. Atkārtoti centrējiet kodu un mēģiniet vēlreiz."</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Mēģiniet vēlreiz. Ja problēma joprojām pastāv, sazinieties ar ierīces ražotāju."</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Radās problēma"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Ierīcei ir jābūt pievienotai, uzlādētai un ieslēgtai"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Ierīcei ir jābūt pievienotai, uzlādētai un ieslēgtai. Ja problēma joprojām pastāv, sazinieties ar ierīces ražotāju."</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"“<xliff:g id="SSID">%1$s</xliff:g>” pievienošana šajā ierīcē netiek atbalstīta"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Pārbaudiet savienojumu un mēģiniet vēlreiz"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Tīkla izvēle"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Lai pievienotu ierīci, izvēlieties tīklu."</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Vai pievienot šo ierīci tīklam <xliff:g id="SSID">%1$s</xliff:g>?"</string>
@@ -947,6 +956,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Izvēlēties citu tīklu"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Nevarēja pievienot ierīci."</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Atrasta ierīce"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Mēģināt vēlreiz"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Koplietot ar citiem ierīces lietotājiem"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(bez izmaiņām)"</string>
@@ -1088,7 +1101,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Ja ir ieslēgti Wi-Fi zvani, varat veikt tālruņa zvanus Wi-Fi tīklos vai savā mobilo sakaru operatora tīkla atkarībā no savām preferencēm un no tā, kurš signāls ir spēcīgāks. Pirms ieslēdzat šo funkciju, sazinieties ar savu mobilo sakaru operatoru, lai noskaidrotu tarifus un citu informāciju."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Kad ir ieslēgti Wi-Fi zvani, tālrunis var novirzīt zvanus, izmantojot Wi-Fi tīklus vai mobilo sakaru operatora tīklu (atkarībā no jūsu iestatījumiem un tā, kurš signāls ir stiprāks). Pirms šīs funkcijas ieslēgšanas noskaidrojiet pie mobilo sakaru operatora par tarifiem un citu informāciju.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Ārkārtas adrese"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Tiks izmantota kā jūsu atrašanās vieta, ja zvanīsiet uz ārkārtas numuru, lietojot Wi‑Fi."</string>
@@ -1288,7 +1301,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Sistēmas atjauninājumi"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android versija"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android drošības ielāpa līmenis"</string>
     <string name="model_info" msgid="1952009518045740889">"Modelis"</string>
     <string name="model_summary" msgid="8306235877567782987">"Modelis: %1$s"</string>
@@ -2062,7 +2074,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minūtes"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Laiks lasīt"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Laiks veikt darbību"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Izvēlieties to ziņojumu lasīšanas ilgumu, kuri tiek automātiski noņemti.\n\nNe visās lietotnēs šis iestatījums tiek atbalstīts."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Izvēlieties to ziņojumu rādīšanas ilgumu, kuros ir iekļauts aicinājums uz darbību, bet kuri tiek rādīti tikai noteiktu laiku.\n\nNe visās lietotnēs šis iestatījums tiek atbalstīts."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Aizkave, pieskaroties un turot"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Krāsu inversija"</string>
@@ -3297,6 +3310,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Paslēpt kluso paziņojumu ikonas statusa joslā"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Atļaut paziņojumu punktus"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Atļaut paziņojumu burbuļus"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Vilkšanas darbības"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Vilkt pa labi, lai paslēptu izvēlni, vilkt pa kreisi, lai rādītu izvēlni"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Velciet pa kreisi, lai paslēptu izvēlni, velciet pa labi, lai to parādītu"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Mirgojošs gaismas signāls"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Bloķēšanas ekrānā"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kad darba profils ir bloķēts"</string>
@@ -3344,7 +3360,11 @@
       <item quantity="one">%d lietotnē var lasīt paziņojumus</item>
       <item quantity="other">%d lietotnē var lasīt paziņojumus</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Paziņojumu palīgs"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Nav palīga"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nevienā instalētajā lietotnē nav pieprasīta piekļuve paziņojumiem."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> piekļūt paziņojumiem?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> varēs lasīt visus paziņojumus, tostarp personīgo informāciju, piemēram, kontaktpersonu vārdu un saņemtās īsziņas. Lietotne varēs arī pārveidot vai noraidīt paziņojumus vai aktivizēt tajos esošās darbību pogas. \n\nLietotne varēs arī ieslēgt vai izslēgt režīmu “Netraucēt” un mainīt saistītos iestatījumus."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> piekļūt paziņojumiem?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> varēs lasīt visus paziņojumus, tostarp personas informāciju, piemēram, kontaktpersonu vārdu un saņemtās īsziņas. Lietotne varēs arī noraidīt paziņojumus vai aktivizēt tajos esošās darbību pogas. \n\nLietotne varēs arī ieslēgt vai izslēgt režīmu “Netraucēt” un mainīt saistītos iestatījumus."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Izslēdzot paziņojumu piekļuvi lietotnei <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, iespējams, tiks izslēgta arī piekļuve režīmam “Netraucēt”."</string>
@@ -3628,7 +3648,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Papildu"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Lietotņu konfigurēšana"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Nezināma lietotne"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Lietotnes atļaujas"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Atļauju pārvaldnieks"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Lietotnes, kuras izmanto: <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Pieskarieties, lai aktivizētu"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Lai aktivizētu ierīci, veiciet dubultskārienu jebkurā ekrāna vietā."</string>
@@ -4275,6 +4295,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Atjaunināt iestatījumu “Netraucēt”"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Pārtraukt paziņojumus, lai ilglaicīgi koncentrētos"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Šī funkcija šajā ierīcē nav pieejama."</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Veikt pilnus GNSS mērījumus"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Izsekot visas GNSS konstelācijas un frekvences bez darba cikliem"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Atļaut darbību sākšanu fonā"</string>
@@ -4438,6 +4462,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Mēģināt vēlreiz"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Radās kļūda. Lietojumprogramma atsauca ierīces atlases pieprasījumu."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Savienojums izveidots"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Rādīt visu"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="zero">Pievienotas <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ierīces</item>
       <item quantity="one">Pievienota <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ierīce</item>
@@ -4466,7 +4491,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 lietotņu izmantoja atļaujas"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Visbiežāk izmantotās atļaujas pēdējo 24 stundu laikā"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Skatīt visus lietojuma datus"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Skatīt atļauju informācijas paneli"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Pieejamības lietojums"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="zero"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> pakalpojumiem ir pilna piekļuve jūsu ierīcei</item>
@@ -4475,11 +4500,14 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g> paziņojumu pārvaldība"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Nav ieteiktu lietojumprogrammu"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="zero"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> paziņojumu kanāli. Pieskarieties, lai pārvaldītu visus.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> paziņojumu kanāls. Pieskarieties, lai pārvaldītu visus.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> paziņojumu kanāli. Pieskarieties, lai pārvaldītu visus.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="zero"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> paziņojumu kanāli.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> paziņojumu kanāls.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> paziņojumu kanāli.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> paziņojumu kanāli. Pieskarieties, lai pārvaldītu visu."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Slēdža izeja"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Šobrīd saturs tiek atskaņots ierīcē <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

@@ -805,6 +805,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"ವೈ-ಫೈ ಆನ್ ಮಾಡಲು <xliff:g id="REQUESTER">%s</xliff:g> ಬಯಸುತ್ತದೆ"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"ವೈ-ಫೈ ಆಫ್ ಮಾಡಲು <xliff:g id="REQUESTER">%s</xliff:g> ಬಯಸುತ್ತದೆ"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"ಡೀಬಗರ್‌ ಆ್ಯಪ್‌ಗಳ bytecode ಪರಿಶೀಲಿಸಿ"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"ಡೀಬಗ್ ಮಾಡಬಹುದಾದ ಆ್ಯಪ್‌ಗಳಿಗಾಗಿ ಬೈಟ್‌ಕೋಡ್ ಪರಿಶೀಲಿಸಲು ART ಅನುಮತಿಸಿ"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"ಟ್ಯಾಬ್ಲೆಟ್ ಇನ್ನೊಂದು ಸಾಧನವನ್ನು ಸ್ಪರ್ಶಿಸಿದಾಗ ಡೇಟಾ ವಿನಿಮಯವನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"ಮತ್ತೊಂದು ಸಾಧನವನ್ನು ಫೋನ್ ಸ್ಪರ್ಶಿಸಿದಾಗ ಡೇಟಾ ವಿನಿಮಯಕ್ಕೆ ಅನುಮತಿಸಿ"</string>
@@ -919,6 +921,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"ವೈ-ಫೈ ಹಾಟ್‌ಸ್ಪಾಟ್‌ಗಾಗಿ ಕನಿಷ್ಠ ಒಂದು ಬ್ಯಾಂಡ್ ಆಯ್ಕೆಮಾಡಿ:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"ಗೌಪ್ಯತೆ"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"ಯಾದೃಚ್ಛಿಕ.MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"ಸಾಧನವನ್ನು ಸೇರಿಸಿ"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"“<xliff:g id="SSID">%1$s</xliff:g>” ಗೆ ಸಾಧನವನ್ನು ಸೇರಿಸಲು QR ಕೋಡ್‌ ಅನ್ನು ಕೆಳಗೆ ಕೇಂದ್ರೀಕರಿಸಿ"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ"</string>
@@ -926,7 +929,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡುವ ಮೂಲಕ ವೈ-ಫೈ ಗೆ ಸೇರಿ"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"ವೈ-ಫೈ ಹಂಚಿಕೊಳ್ಳಿ"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"“<xliff:g id="SSID">%1$s</xliff:g>” ಅನ್ನು ಸೇರಲು ಇನ್ನೊಂದು ಸಾಧನದೊಂದಿಗೆ ಈ QR ಕೋಡ್ ಅನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR ಕೋಡ್ ಅನ್ನು ಓದಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR ಕೋಡ್ ಅನ್ನು ಓದಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ. ಕೋಡ್ ಮರುನಮೂದಿಸಿ ಅಥವಾ ಪುನಃ ಪ್ರಯತ್ನಿಸಿ"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"ಪುನಃ ಪ್ರಯತ್ನಿಸಿ. ಸಮಸ್ಯೆ ಮುಂದುವರಿದರೆ, ಸಾಧನ ತಯಾರಕರನ್ನು ಸಂಪರ್ಕಿಸಿ"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"ಏನೋ ದೋಷ ಸಂಭವಿಸಿದೆ"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"ಸಾಧನವನ್ನು ಪ್ಲಗಿನ್ ಮಾಡಲಾಗಿದೆ ಮತ್ತು ಆನ್ ಮಾಡಲಾಗಿದೆ ಎಂಬುದನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"ಸಾಧನವನ್ನು ಪ್ಲಗಿನ್ ಮಾಡಲಾಗಿದೆ ಮತ್ತು ಆನ್ ಮಾಡಲಾಗಿದೆ ಎಂಬುದನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ. ಸಮಸ್ಯೆ ಮುಂದುವರಿದರೆ, ಸಾಧನ ತಯಾರಕರನ್ನು ಸಂಪರ್ಕಿಸಿ"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"ಈ ಸಾಧನದ ಮೂಲಕ “<xliff:g id="SSID">%1$s</xliff:g>”ಅನ್ನು ಸೇರಿಸುವುದು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಪುನಃ ಪ್ರಯತ್ನಿಸಿ"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"ನೆಟ್‌ವರ್ಕ್ ಆರಿಸಿ"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"ನಿಮ್ಮ ಸಾಧನವನ್ನು ಸಂಪರ್ಕಿಸಲು, ನೆಟ್‌ವರ್ಕ್ ಆರಿಸಿ"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"“<xliff:g id="SSID">%1$s</xliff:g>” ಗೆ ಈ ಸಾಧನವನ್ನು ಸೇರಿಸುವುದೇ?"</string>
@@ -935,6 +944,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"ಬೇರೆ ನೆಟ್‌ವರ್ಕ್ ಅನ್ನು ಆರಿಸಿ"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"ಸಾಧನವನ್ನು ಸೇರಿಸಲಾಗಲಿಲ್ಲ"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"ಸಾಧನ ಕಂಡುಬಂದಿದೆ"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"ಮರುಪ್ರಯತ್ನಿಸು"</string>
     <string name="wifi_shared" msgid="844142443226926070">"ಇತರ ಸಾಧನ ಬಳಕೆದಾರರ ಜೊತೆಗೆ ಹಂಚಿಕೊಳ್ಳಿ"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ಬದಲಾವಣೆಯಾಗದ)"</string>
@@ -1075,7 +1088,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"ವೈ-ಫೈ ಕರೆ ಮಾಡುವಿಕೆ ಆನ್‌ ಆದಾಗ, ನಿಮ್ಮ ಫೋನ್‌ ನಿಮ್ಮ ಆದ್ಯತೆ ಮತ್ತು ಯಾವ ಸಿಗ್ನಲ್ ಬಲವಾಗಿದೆ ಎಂಬುದರ ಅನುಗುಣವಾಗಿ, ಕರೆಗಳನ್ನು ವೈ-ಫೈ ನೆಟ್‌ವರ್ಕ್‌ಗಳು ಅಥವಾ ನಿಮ್ಮ ವಾಹಕದ ನೆಟ್‌ವರ್ಕ್ ಮೂಲಕ ರವಾನಿಸುತ್ತದೆ. ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಆನ್‌ ಮಾಡವ ಮೊದಲು, ಶುಲ್ಕಗಳು  ಮತ್ತು ಇತರ ವಿವರಗಳಿಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ನಿಮ್ಮ ವಾಹಕವನ್ನು ಸಂಪರ್ಕಿಸಿ."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"ವೈ-ಫೈ ಕರೆ ಮಾಡುವಿಕೆ ಆನ್‌ ಆದಾಗ, ನಿಮ್ಮ ಫೋನ್‌ ನಿಮ್ಮ ಆದ್ಯತೆ ಮತ್ತು ಯಾವ ಸಿಗ್ನಲ್ ಬಲವಾಗಿದೆ ಎಂಬುದರ ಅನುಗುಣವಾಗಿ, ಕರೆಗಳನ್ನು ವೈ-ಫೈ ನೆಟ್‌ವರ್ಕ್‌ಗಳು ಅಥವಾ ನಿಮ್ಮ ವಾಹಕದ ನೆಟ್‌ವರ್ಕ್ ಮೂಲಕ ರವಾನಿಸುತ್ತದೆ. ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಆನ್‌ ಮಾಡುವ ಮೊದಲು, ಶುಲ್ಕಗಳು ಮತ್ತು ಇತರ ವಿವರಗಳಿಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ನಿಮ್ಮ ವಾಹಕವನ್ನು ಸಂಪರ್ಕಿಸಿ.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"ತುರ್ತು ವಿಳಾಸ"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"ವೈ-ಫೈ ಮೂಲಕ ತುರ್ತು ಕರೆಯನ್ನು ನೀವು ಮಾಡಿದಾಗ ನಿಮ್ಮ ಸ್ಥಳದಂತೆ ಬಳಸಲಾಗುತ್ತದೆ"</string>
@@ -1274,7 +1287,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"ಸಿಸ್ಟಂ ಅಪ್‌ಡೇಟ್‌ಗಳು"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android ಆವೃತ್ತಿ"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android ಭದ್ರತೆ ಪ್ಯಾಚ್ ಮಟ್ಟ"</string>
     <string name="model_info" msgid="1952009518045740889">"ಮಾಡೆಲ್"</string>
     <string name="model_summary" msgid="8306235877567782987">"ಮಾದರಿ: %1$s"</string>
@@ -2046,7 +2058,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 ನಿಮಿಷಗಳು"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"ಓದುವ ಸಮಯ"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"ಕ್ರಮವನ್ನು ತೆಗೆದುಕೊಳ್ಳುವ ಸಮಯ"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಿ ಹೋಗುವ ಸಂದೇಶಗಳನ್ನು ಓದಲು ಮತ್ತು ಅವುಗಳ ಬಗ್ಗೆ ಕ್ರಮವನ್ನು ತೆಗೆದುಕೊಳ್ಳಲು ಎಷ್ಟು ಸಮಯ ಬೇಕು ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ.\n\nಈ ಸೆಟ್ಟಿಂಗ್‌ಗೆ ಬೆಂಬಲವು ಪ್ರತಿ ಆ್ಯಪ್‌ಗೆ ಬಿಟ್ಟಿದ್ದು."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"ನೀವು ಕ್ರಮ ತೆಗೆದುಕೊಳ್ಳಲು ಕೇಳುವ ಸಂದೇಶಗಳನ್ನು ಎಷ್ಟು ಸಮಯದ ಕಾಲ ತೋರಿಸಬೇಕು ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ.\n\nಎಲ್ಲಾ ಆ್ಯಪ್‌ಗಳು ಈ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"ಸ್ಪರ್ಶ &amp; ಹೋಲ್ಡ್‌ ವಿಳಂಬ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"ಬಣ್ಣ ವಿಲೋಮ"</string>
@@ -3263,6 +3276,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"ನಿಶ್ಯಬ್ಧ ಅಧಿಸೂಚನೆಗಳಿಗಾಗಿ ಸ್ಥಿತಿ ಬಾರ್‌ನಲ್ಲಿ ಐಕಾನ್‌ಗಳನ್ನು ಮರೆಮಾಡಿ"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"ಅಧಿಸೂಚನೆ ಡಾಟ್‌ಗಳಿಗೆ ಅನುಮತಿಸಿ"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"ಅಧಿಸೂಚನೆ ಬಬ್ಬಲ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"ಕ್ರಿಯೆಗಳನ್ನು ಸ್ವೈಪ್ ಮಾಡಿ"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"ವಜಾಗೊಳಿಸಲು ಬಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ ಮೆನು ತೋರಿಸಲು ಎಡಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"ವಜಾಗೊಳಿಸಲು ಎಡಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ ಮೆನು ತೋರಿಸಲು ಬಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"ಮಿನುಗುವ ಲೈಟ್‌"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"ಲಾಕ್ ಸ್ಕ್ರೀನ್‍ನಲ್ಲಿ ಕಾಣಿಸಲಿ"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"ಕೆಲಸದ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಲಾಕ್ ಮಾಡಿದಾಗ"</string>
@@ -3309,7 +3325,11 @@
       <item quantity="one">%d ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಬಹುದು</item>
       <item quantity="other">%d ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಬಹುದು</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"ಅಧಿಸೂಚನೆ ಅಸಿಸ್ಟೆಂಟ್"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"ಅಸಿಸ್ಟೆಂಟ್ ಇಲ್ಲ"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"ಯಾವುದೇ ಸ್ಥಾಪಿಸಿದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಅಧಿಸೂಚನೆ ಪ್ರವೇಶವನ್ನು ವಿನಂತಿಸಿಲ್ಲ."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g> ಗಾಗಿ ಅಧಿಸೂಚನೆ ಪ್ರವೇಶವನ್ನು ಅನುಮತಿಸಬೇಕೆ?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"ಸಂಪರ್ಕ ಹೆಸರುಗಳು ಮತ್ತು ನೀವು ಸ್ವೀಕರಿಸುವ ಸಂದೇಶಗಳ ಪಠ್ಯದಂತಹ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ ಸೇರಿದಂತೆ <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> ಗೆ ಎಲ್ಲ ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ. ಇದಕ್ಕೆ ಅಧಿಸೂಚನೆಗಳನ್ನು ಮಾರ್ಪಡಿಸಲು ಅಥವಾ ವಜಾ ಮಾಡಲು ಅಥವಾ ಅವುಗಳು ಹೊಂದಿರುವಂತಹ ಕ್ರಿಯೆ ಬಟನ್‌ಗಳನ್ನು ಟ್ರಿಗ್ಗರ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ. \n\nಈ ಅಪ್ಲಿಕೇಶನ್ ಸಂಬಂಧಿಸಿದ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಲು ಮತ್ತು ಅಡಚಣೆ ಮಾಡಬೇಡ ಆನ್ ಅಥವಾ ಆಫ್ ಮಾಡುವ ಸಾಮರ್ಥ್ಯವನ್ನು ಈ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ನೀಡುತ್ತದೆ."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> ಗೆ ಅಧಿಸೂಚನೆ ಪ್ರವೇಶವನ್ನು ಅನುಮತಿಸುವುದೇ?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"ಸಂಪರ್ಕ ಹೆಸರುಗಳು ಮತ್ತು ನೀವು ಸ್ವೀಕರಿಸುವ ಸಂದೇಶಗಳ ಪಠ್ಯದಂತಹ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ ಸೇರಿದಂತೆ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ಗೆ ಎಲ್ಲ ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ. ಇದಕ್ಕೆ ಅಧಿಸೂಚನೆಗಳನ್ನು ವಜಾ ಮಾಡಲು ಅಥವಾ ಅವುಗಳು ಹೊಂದಿರುವಂತಹ ಕ್ರಿಯೆ ಬಟನ್‌ಗಳನ್ನು ಟ್ರಿಗ್ಗರ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ. \n\nಈ ಅಪ್ಲಿಕೇಶನ್ ಸಂಬಂಧಿಸಿದ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಲು ಮತ್ತು ಅಡಚಣೆ ಮಾಡಬೇಡ ಆನ್ ಅಥವಾ ಆಫ್ ಮಾಡುವ ಸಾಮರ್ಥ್ಯವನ್ನು ಈ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ನೀಡುತ್ತದೆ."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ಗೆ ನೀವು ಅಧಿಸೂಚನೆ ಪ್ರವೇಶಿಸುವಿಕೆಯನ್ನು ಆಫ್ ಮಾಡಿದರೆ, ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಪ್ರವೇಶಿಸುವಿಕೆ ಸಹ ಆಫ್ ಆಗಬಹುದು."</string>
@@ -3582,7 +3602,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"ಸುಧಾರಿತ"</string>
     <string name="configure_apps" msgid="6685680790825882528">"ಅಪ್ಲಿಕೇಶನ್‌ ಕಾನ್ಫಿಗರ್‌"</string>
     <string name="unknown_app" msgid="5275921288718717656">"ಅಪರಿಚಿತ ಅಪ್ಲಿಕೇಶನ್"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿ"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"ಅನುಮತಿ ನಿರ್ವಾಹಕರು"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"<xliff:g id="APPS">%1$s</xliff:g> ಬಳಸುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"ಎಚ್ಚರಗೊಳಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"ಸಾಧನವನ್ನು ಎಚ್ಚರಗೊಳಿಸಲು ಪರದೆಯ ಯಾವುದೇ ಭಾಗದಲ್ಲಿ ಎರಡು ಬಾರಿ ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
@@ -4211,6 +4231,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"ಫೋಕಸ್‌ ಆಗಿ ಇರಲು ಅಧಿಸೂಚನೆಗಳನ್ನು ವಿರಾಮಗೊಳಿಸಿ"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ಈ ಸಾಧನದಲ್ಲಿ ಈ ವೀಡಿಯೊ ಲಭ್ಯವಿಲ್ಲ"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"ಫೋರ್ಸ್‌ ಫುಲ್ GNSS ಅಳತೆಗಳು"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"ಯಾವುದೇ ಡ್ಯೂಟಿ ಸೈಕ್ಲಿಂಗ್ ಇಲ್ಲದೆ ಎಲ್ಲಾ GNSS ಕಾನ್ಸ್ಟಲೇಶನ್‌ಗಳು ಮತ್ತು ಆವರ್ತನೆಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"ಹಿನ್ನೆಲೆ ಚಟುವಟಿಕೆ ಪ್ರಾರಂಭಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
@@ -4373,6 +4397,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"ಪುನಃ ಪ್ರಯತ್ನಿಸಿ"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"ಏನೋ ಬಂದಿದೆ. ಸಾಧನವನ್ನು ಆರಿಸಲು ಆ್ಯಪ್‌ ವಿನಂತಿಯನ್ನು ರದ್ದುಗೊಳಿಸಿದೆ."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"ಸಂಪರ್ಕ ಯಶಸ್ವಿಯಾಗಿದೆ"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"ಎಲ್ಲವನ್ನೂ ತೋರಿಸಿ"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ಸಾಧನಗಳನ್ನು ಸಂಪರ್ಕಿಸಲಾಗಿದೆ</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ಸಾಧನಗಳನ್ನು ಸಂಪರ್ಕಿಸಲಾಗಿದೆ</item>
@@ -4400,16 +4425,19 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 ಆ್ಯಪ್‌ಗಳು ಅನುಮತಿಗಳನ್ನು ಬಳಸಿದವು"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"ಕಳೆದ 24 ಗಂಟೆಗಳಲ್ಲಿ ಹೆಚ್ಚು ಬಳಸಿದ ಅನುಮತಿಗಳು"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"ಎಲ್ಲಾ ಬಳಕೆಯನ್ನು ನೋಡಿ"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"ಅನುಮತಿಗಳ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ವೀಕ್ಷಿಸಿ"</string>
     <!-- no translation found for accessibility_usage_title (5136753034714150614) -->
     <skip />
     <!-- no translation found for accessibility_usage_summary (4364945481915750314) -->
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g>ಅಧಿಸೂಚನೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"ಸಲಹೆ ಮಾಡಲಾದ ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್ ಇಲ್ಲ"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ಅಧಿಸೂಚನೆ ಚಾನಲ್‌ಗಳು. ಎಲ್ಲವನ್ನು ನಿರ್ವಹಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ಅಧಿಸೂಚನೆ ಚಾನಲ್‌ಗಳು. ಎಲ್ಲವನ್ನು ನಿರ್ವಹಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ಅಧಿಸೂಚನೆ ಚಾನಲ್‌ಗಳು.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ಅಧಿಸೂಚನೆ ಚಾನಲ್‌ಗಳು.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> ಅಧಿಸೂಚನೆ ಚಾನಲ್‌ಗಳು. ಎಲ್ಲವನ್ನೂ ನಿರ್ವಹಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"ಔಟ್‌ಫುಟ್ ಬದಲಿಸಿ"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"ಪ್ರಸ್ತುತ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ನಲ್ಲಿ ಪ್ಲೇ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>
