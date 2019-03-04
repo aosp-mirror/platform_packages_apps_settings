@@ -446,13 +446,13 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Siguiente"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"¿Omitir huella digital?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"La configuración de la huella digital solo toma unos minutos. Si omites este paso, puedes agregarla más tarde en la configuración."</string>
-    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"¿Omitir bloqueo de pantalla?"</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"¿Omitir bloqueo de la pantalla?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas usen esta tablet si la pierdes, te la roban o se restablece."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas lo usen si lo pierdes, te lo roban o se restablece."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas usen este teléfono si lo pierdes, te lo roban o se restablece."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"No se activarán las funciones de protección del dispositivo. No podrás impedir que otras personas usen este teléfono si lo pierdes, te lo roban o se restablece."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="5219287483885558525">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas usen esta tablet si la pierdes o te la roban."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="1466238255429527112">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas usen este dispositivo si lo pierdes o te lo roban."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas usen este teléfono si lo pierdes o te lo roban."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"No se activarán las funciones de protección del dispositivo. No podrás impedir que otras personas usen este teléfono si lo pierdes o te lo roban."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Omitir"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Atrás"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Toca el sensor"</string>
@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> quiere activar la conexión Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> quiere desactivar la conexión Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Verificar bytecode de apps depurables"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Permitir que ART verifique el bytecode de apps depurables"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permitir el intercambio de datos cuando la tablet entre en contacto con otro dispositivo"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permitir el intercambio de datos cuando el dispositivo toque otro dispositivo"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Elige al menos una banda para el hotspot de Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Configuración de IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Privacidad"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Dirección MAC aleatoria"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Agregar un dispositivo"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Centra el código QR debajo para agregar el dispositivo a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Escanear código QR"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Escanea un código QR para unirte a la red Wi-Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Compartir Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Escanea este código QR con otro dispositivo para unirte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"No se pudo leer el código QR"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"No se pudo leer el código QR. Centra el código de nuevo y vuelve a intentarlo"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Vuelve a intentarlo. Si el problema persiste, comunícate con el fabricante del dispositivo"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Se produjo un error"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Asegúrate de que el dispositivo se haya enchufado, cargado y encendido"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Asegúrate de que el dispositivo se haya enchufado, cargado y encendido. Si el problema persiste, comunícate con el fabricante"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"No se puede agregar \"<xliff:g id="SSID">%1$s</xliff:g>\" a este dispositivo"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Comprueba la conexión y vuelve a intentarlo"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Elegir una red"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Selecciona una red para conectar tu dispositivo"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"¿Agregar este dispositivo a \"<xliff:g id="SSID">%1$s</xliff:g>\"?"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Seleccionar otra red"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"No se pudo agregar el dispositivo"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Se encontró el dispositivo"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Reintentar"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Compartir con otros usuarios del dispositivo"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(sin cambios)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Cuando están activadas las llamadas por Wi-Fi, el teléfono puede enviar las llamadas por redes Wi-Fi o por la red del proveedor, según tu preferencia y la señal que sea más intensa. Antes de activar esta función, verifica el costo y otros detalles con el proveedor de red."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Si está activada la función Llamada por Wi-Fi, el teléfono podrá hacer llamadas mediante redes Wi-Fi o la red de tu proveedor, según la preferencia que hayas elegido y la señal que tenga más intensidad. Antes de activar esta función, verifica el costo y otros detalles con el proveedor.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Dirección de emergencia"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Se usa como tu ubicación cuando haces una llamada de emergencia mediante Wi-Fi"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualiz. del sistema"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versión de Android"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Nivel de parche de seguridad de Android"</string>
     <string name="model_info" msgid="1952009518045740889">"Modelo"</string>
     <string name="model_summary" msgid="8306235877567782987">"Modelo: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minutos"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Tiempo de lectura"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Tiempo de acción"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Selecciona el tiempo de lectura y de acción para mensajes que desaparecen automáticamente.\n\nLa compatibilidad con esta opción varía según la app."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Selecciona el tiempo de visualización de mensajes que requieren acciones, pero que solo se muestran temporalmente.\n\nNo todas las apps admiten esta opción."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Tiempo de respuesta táctil"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversión de color"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Ocultar íconos para notificaciones silenciosas en la barra de estado"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Activar puntos de notificación"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Permitir cuadros de notificación"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Acciones al deslizar el dedo"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Desliza el dedo hacia la derecha para cerrar la notificación o hacia la izquierda para mostrar menú"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Desliza el dedo hacia la izquierda para cerrar la notificación y hacia la derecha para mostrar menú"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Luz intermitente"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"En la pantalla bloqueada"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Si perfil de trabajo bloqueado"</string>
@@ -3298,7 +3314,11 @@
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Las aplicaciones no pueden leer las notificaciones."</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for manage_notification_access_summary_nonzero (7930130030691218387) -->
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Asistente de notificaciones"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Sin asistente"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ninguna aplicación instalada solicitó acceso a las notificaciones."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"¿Quieres permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga acceso a las notificaciones?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que contengan información personal, como nombres de contactos o el texto de los mensajes que recibas. También podrá modificar y descartar notificaciones, así como utilizar los botones de acción que aparezcan. \n\nLa app podrá activar y desactivar el modo No interrumpir, además de cambiar la configuración relacionada."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"¿Deseas permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga acceso a las notificaciones?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluso las que contienen información personal, como nombres de contactos y el texto de los mensajes que recibas. También podrá descartar las notificaciones o utilizar los botones de acción que aparezcan. \n\nLa app podrá activar y desactivar el modo No interrumpir, y cambiar la configuración relacionada."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Si desactivas el acceso a las notificaciones de <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, es posible que también se desactive el modo No interrumpir."</string>
@@ -3571,7 +3591,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Avanzada"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configurar apps"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplicación desconocida"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Permisos de la app"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Administrador de permisos"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Apps que usan <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Presionar para activar"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Presiona dos veces en cualquier lugar de la pantalla para activar el dispositivo."</string>
@@ -4197,6 +4217,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Actualizar el modo No interrumpir"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Pausa las notificaciones para concentrarte"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"La función no está disponible en este dispositivo"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Forzar dimensiones GNSS completas"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Seguir todas las frecuencias y constelaciones de GNSS sin ciclo de funciones"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Permitir inicio de actividades en segundo plano"</string>
@@ -4359,6 +4383,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Volver a intentarlo"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Se produjo un error. La aplicación canceló la solicitud para elegir un dispositivo."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Conexión exitosa"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Mostrar todo"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dispositivos conectados</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> dispositivo conectado</item>
@@ -4386,7 +4411,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"Ninguna aplicación usó permisos"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Permisos más usados en las últimas 24 horas"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Ver todos los usos"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Ver panel de permisos"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Uso de accesibilidad"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> servicios tienen acceso completo a tu dispositivo</item>
@@ -4394,10 +4419,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Administrar las notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"No hay una aplicación sugerida"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canales de notificación. Presiona para administrarlos todos.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> canal de notificación. Presiona para administrarlos todos.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canales de notificación.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> canal de notificación.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> canales de notificación. Presiona para administrarlos todos."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Cambiar de salida"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Reproduciendo en <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

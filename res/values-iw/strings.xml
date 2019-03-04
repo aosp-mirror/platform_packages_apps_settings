@@ -833,6 +833,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"‏<xliff:g id="REQUESTER">%s</xliff:g> רוצה להפעיל את ה-Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"‏<xliff:g id="REQUESTER">%s</xliff:g> רוצה לכבות את ה-Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"אימות קוד בייט לאפל\' שניתנות לניפוי באגים"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"‏ART יוכל לאמת קוד בייט לאפליקציות שניתנות לניפוי באגים"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"אפשר חילופי מידע כאשר הטאבלט נוגע במכשיר אחר"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"החלפת נתונים כאשר הטלפון נוגע במכשיר אחר"</string>
@@ -947,6 +949,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"‏יש לבחור תדר אחד לכל הפחות לנקודת Wi‑Fi לשיתוף אינטרנט:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"‏הגדרות IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"פרטיות"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"‏MAC אקראי"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"הוספת מכשיר"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"‏יש להציב במרכז את קוד ה-QR שבהמשך כדי להוסיף את המכשיר אל “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"‏סריקת קוד QR"</string>
@@ -954,7 +957,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"‏ניתן להצטרף לרשת Wi‑Fi על ידי סריקה של קוד QR"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"‏שיתוף Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"‏יש לסרוק קוד QR זה בעזרת מכשיר אחר כדי להצטרף אל “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"‏לא ניתן היה לקרוא את קוד ה-QR"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"‏לא ניתן היה לקרוא את קוד ה-QR. יש להציב שוב את הקוד במרכז ולנסות שוב"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"יש לנסות שוב. אם הבעיה ממשיכה להופיע, יש לפנות ליצרן המכשיר"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"משהו השתבש"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"יש לוודא שהמכשיר חובר, הוטען והופעל"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"יש לוודא שהמכשיר חובר, הוטען והופעל. אם הבעיה ממשיכה להופיע, יש לפנות ליצרן המכשיר"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"מכשיר זה לא תומך בהוספת “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"יש לבדוק את החיבור ולנסות שוב"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"בחירת רשת"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"יש לבחור רשת כדי לחבר את המכשיר"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"להוסיף את המכשיר הזה אל “<xliff:g id="SSID">%1$s</xliff:g>”?"</string>
@@ -963,6 +972,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"בחירה ברשת אחרת"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"לא ניתן היה להוסיף את המכשיר"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"המכשיר נמצא"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"ניסיון נוסף"</string>
     <string name="wifi_shared" msgid="844142443226926070">"שתף עם משתמשים אחרים במכשיר"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ללא שינוי)"</string>
@@ -1105,7 +1118,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"‏כשתכונת שיחות Wi-Fi פועלת, הטלפון יכול לנתב שיחות ברשתות Wi-Fi או ברשת של הספק, בהתאם להעדפה שלך ולאות שחזק יותר. לפני הפעלת תכונה זו, בדוק עם הספק פרטים הקשורים לעמלות ופרטים אחרים."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"‏כשתכונת שיחות Wi-Fi פועלת, הטלפון יכול לנתב שיחות ברשתות Wi-Fi או ברשת של הספק, בהתאם להעדפה שלך ולאות שחזק יותר. לפני הפעלת תכונה זו, יש לבדוק עם הספק פרטים הקשורים לעמלות ופרטים אחרים.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"כתובת למקרה חירום"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"‏משמש כמיקומך בעת ביצוע שיחת חירום באמצעות רשת Wi-Fi"</string>
@@ -1306,7 +1319,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"עדכוני מערכת"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"‏גרסת Android"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"‏רמת תיקון האבטחה ב-Android"</string>
     <string name="model_info" msgid="1952009518045740889">"דגם"</string>
     <string name="model_summary" msgid="8306235877567782987">"‏מודל: %1$s"</string>
@@ -2082,7 +2094,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 דקות"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"משך הזמן לקריאה"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"משך הזמן לנקיטת פעולה"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"ניתן לבחור כמה זמן ברצונך להשקיע בקריאת הודעות שנעלמות באופן אוטומטי ונקיטת פעולה לפיהן.\n\nהתמיכה בהגדרה זו שונה בכל אפליקציה."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"ניתן לבחור את משך הזמן להצגת הודעות שדורשות נקיטת פעולה כלשהי, אך גלויות באופן זמני בלבד.\n\nלא כל האפליקציות תומכות בהגדרה זו."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"עיכוב של נגיעה והחזקה"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"היפוך צבעים"</string>
@@ -3342,6 +3355,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"הסתרת סמלים של התראות מושתקות בשורת הסטטוס"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"הצגה של סימני התראות"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"הפעלה בועות להצגת התראות"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"פעולות החלקה"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"יש להחליק שמאלה כדי לסגור, וימינה כדי להציג תפריט"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"יש להחליק ימינה כדי לסגור, ושמאלה כדי להציג תפריט"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"אור מהבהב"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"במסך הנעילה"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"כשפרופיל העבודה נעול"</string>
@@ -3390,7 +3406,11 @@
       <item quantity="other">‏%d אפליקציות יכולות לקרוא התראות</item>
       <item quantity="one">‏אפליקציה %d יכולה לקרוא התראות</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"אסיסטנט ההתראות"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"אין שירות אסיסטנט"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"אין אפליקציות מותקנות שביקשו גישה להתראות."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"האם להתיר ל-<xliff:g id="SERVICE">%1$s</xliff:g> לגשת אל התראות?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> תוכל לקרוא את כל ההתראות, כולל מידע אישי כמו שמות של אנשי קשר והודעות טקסט שמתקבלות. האפליקציה תוכל גם לשנות או לבטל התראות, או להפעיל לחצני פעולה שהן כוללות. \n\nכמו כן, האפליקציה תוכל להפעיל או לכבות את התכונה \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"האם להתיר ל-<xliff:g id="SERVICE">%1$s</xliff:g> לגשת אל התראות?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> יוכל לקרוא את כל ההתראות, כולל מידע אישי כמו שמות של אנשי קשר והודעות טקסט. הוא יוכל גם לבטל התראות או להפעיל לחצני פעולה שהן כוללות. \n\nכמו כן, תהיה לו אפשרות להפעיל או לכבות את התכונה \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"אם תכבה ל-<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> את הגישה להתראות, ניתן יהיה לכבות גם את הגישה לתכונה \'נא לא להפריע\'."</string>
@@ -3685,7 +3705,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"אפשרויות מתקדמות"</string>
     <string name="configure_apps" msgid="6685680790825882528">"הגדרת אפליקציות"</string>
     <string name="unknown_app" msgid="5275921288718717656">"אפליקציה לא מוכרת"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"הרשאות לאפליקציות"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"מנהל הרשאות"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"אפליקציות המשתמשות ב<xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"הקש כדי להעיר"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"הקש פעמיים בנקודה כלשהי במסך כדי להעיר את המכשיר"</string>
@@ -4353,6 +4373,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"עדכון המצב \'נא לא להפריע\'"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"אפשר להשהות את ההתראות כדי שלא יפריעו לך"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"התכונה לא זמינה במכשיר הזה"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"‏אילוץ של הרצה מלאה של מדידות Gnss"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"‏מעקב אחר כל מערכות הניווט והתדרים של GNSS ללא מחזור פעילות"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"הפעלת התחלות של פעילות ברקע"</string>
@@ -4517,6 +4541,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"לניסיון חוזר"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"משהו קרה. האפליקציה ביטלה את הבקשה לבחירת מכשיר."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"החיבור הצליח"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"הצגת הכול"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="two"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> מכשירים מחוברים</item>
       <item quantity="many"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> מכשירים מחוברים</item>
@@ -4546,7 +4571,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"אפס אפליקציות השתמשו בהרשאות"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"ההרשאות שהיו בשימוש הגבוה ביותר במהלך 24 השעות האחרונות"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"הצגת כל נתוני השימוש בהרשאות"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"למרכז השליטה של ההרשאות"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"שימוש בנגישות"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="two">ל-<xliff:g id="SERVICE_COUNT">%1$d</xliff:g> שירותים יש גישה מלאה למכשיר שלך</item>
@@ -4556,12 +4581,15 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"ניהול התראות של <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"אין הצעה לאפליקציה"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="two"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ערוצי התראות. יש להקיש כדי לנהל הכול.</item>
-      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ערוצי התראות. יש להקיש כדי לנהל הכול.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ערוצי התראות. יש להקיש כדי לנהל הכול.</item>
-      <item quantity="one">ערוץ התראות אחד (<xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g>). יש להקיש כדי לנהל הכול.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="two"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ערוצי התראות.</item>
+      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ערוצי התראות.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ערוצי התראות.</item>
+      <item quantity="one">ערוץ התראות אחד (<xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g>).</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> ערוצי התראות. יש להקיש כדי לנהל הכול."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"החלפת פלט"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"בהפעלה כרגע ב-<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

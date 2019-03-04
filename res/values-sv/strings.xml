@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbit/s"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> vill aktivera Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> vill inaktivera Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Verifiera felsökningsbara appars bytekod"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Verifiera bytekod för felsökningsbara appar genom att tillåta ART"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Tillåt datautbyte när surfplattan vidrör en annan enhet"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Tillåt datautbyte när mobilen vidrör en annan enhet"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Välj minst ett band för Wi‑Fi-surfzon:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-inställningar"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Sekretess"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Slumpgenererad MAC-adress"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Lägg till en enhet"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Lägg till enheten i <xliff:g id="SSID">%1$s</xliff:g> genom att centrera QR-koden i fönstret nedan"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Skanna QR-kod"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Anslut till Wi-Fi genom att skanna QR-koden"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Dela Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> genom att skanna QR-koden med en annan enhet"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Det gick inte att läsa QR-koden"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Det gick inte att läsa QR-koden. Centrera om koden och försök igen"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Försök igen. Om problemet kvarstår kontaktar du enhetens tillverkare"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Något gick fel"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Kontrollera att enheten är inkopplad, laddad och påslagen"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Kontrollera att enheten är inkopplad, laddad och påslagen. Om problemet kvarstår kontaktar du enhetens tillverkare"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Det finns inte stöd för att lägga till <xliff:g id="SSID">%1$s</xliff:g> på enheten"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Kontrollera anslutningen och försök igen"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Välj nätverk"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Välj ett nätverk om du vill ansluta enheten"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Vill du lägga till enheten på <xliff:g id="SSID">%1$s</xliff:g>?"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Välj ett annat nätverk"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Det gick inte att lägga till enheten"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"En enhet hittades"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Försök igen"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Dela med andra som använder enheten"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(oförändrat)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"När Wi-Fi-samtal har aktiverats kan mobilen dirigera samtal via Wi-Fi-nätverk eller operatörens nätverk, beroende på dina inställningar och vilken signal som är starkast. Innan du aktiverar funktionen frågar du operatören om eventuella avgifter och annan information."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"När Wi-Fi-samtal har aktiverats kan mobilen dirigera samtal via Wi-Fi-nätverk eller operatörens nätverk, beroende på dina inställningar och vilken signal som är starkast. Innan du aktiverar funktionen frågar du operatören om eventuella avgifter och annan information.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Adress för nödfall"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Används som din plats om du ringer nödsamtal via Wi‑Fi"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systemuppdateringar"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-version"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Nivå av säkerhetskorrigering för Android"</string>
     <string name="model_info" msgid="1952009518045740889">"Modell"</string>
     <string name="model_summary" msgid="8306235877567782987">"Modell: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minuter"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Tidsperiod för läsning"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Tidsperiod för att vidta åtgärder"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Ställ in hur lång tid som meddelanden som försvinner automatiskt ska visas, så att du hinner läsa och vidta åtgärder.\n\nOm det finns stöd för inställningen beror på den enskilda appen."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Ställ in hur lång tid som tillfälliga meddelanden som ber dig att vidta åtgärder ska visas.\n\nDet är inte alla appar som har stöd för inställningen."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Fördröjning för tryck och håll ned"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inverterade färger"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Dölj ikoner för ljudlösa aviseringar i statusfältet"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Tillåt aviseringsprickar"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Tillåt aviseringsbubblor"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Svepningsåtgärder"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Svep åt höger för att ignorera och åt vänster för att visa menyn"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Svep åt vänster för att ignorera och åt höger för att visa menyn"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blinkande ljus"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"På låsskärmen"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"När jobbprofilen är låst"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="other">%d appar kan läsa meddelanden</item>
       <item quantity="one">%d app kan läsa meddelanden</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Aviseringsassistent"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Ingen assistent"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Inga installerade appar har begärt åtkomst till aviseringar"</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> kan läsa alla aviseringar, inklusive personliga uppgifter som namn på kontaktpersoner och texten i mottagna meddelanden. Den kan också ändra eller stänga aviseringar eller aktivera åtgärdsknappar i dem. \n\nAppen kan också aktivera eller inaktivera Stör ej och ändra relaterade inställningar."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan läsa alla aviseringar, inklusive personliga uppgifter som namn på kontaktpersoner och texten i mottagna meddelanden. Den kan också stänga aviseringar eller aktivera åtgärdsknappar i dem. \n\nAppen kan också aktivera eller inaktivera Stör ej och ändra relaterade inställningar."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Om du inaktiverar aviseringsåtkomst för <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan åtkomsten till Stör ej också inaktiveras."</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Avancerat"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Konfigurera appar"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Okänd app"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Appens behörigheter"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Behörighetshantering"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Appar som använder <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Väck genom att trycka"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Väck enheten genom att trycka två gånger var som helst på skärmen"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Uppdatera Stör ej"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Pausa aviseringar så du kan behålla ditt fokus"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Den här funktionen är inte tillgänglig på den här enheten."</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Framtvinga fullständiga GNSS-mätningar"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Spåra alla konstellationer och frekvenser för GNSS utan arbetscykel"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Tillåt att aktiviteter startas i bakgrunden"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Försök igen"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Något inträffade. Appen har avbrutit förfrågan om att välja enhet."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Anslutningen har upprättats"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Visa alla"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> anslutna enheter</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> ansluten enhet</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"Inga appar använde behörigheter"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"De mest använda behörigheterna under de senaste 24 timmarna"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Visa all användning"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Visa behörighetsöversikt"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Tillgänglighetsanvändning"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> tjänster har fullständig åtkomst till din enhet</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Hantera aviseringar från <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Inga föreslagna appar"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> aviseringskanaler. Tryck för att hantera alla.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> aviseringskanal. Tryck för att hantera alla.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> aviseringskanaler.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> aviseringskanal.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> aviseringskanaler. Tryck för att hantera alla."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Utdata som styrs med reglaget"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Spelas upp nu på <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

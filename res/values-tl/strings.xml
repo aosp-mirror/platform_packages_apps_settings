@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"Gustong i-on ng <xliff:g id="REQUESTER">%s</xliff:g> ang Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"Gustong i-off ng <xliff:g id="REQUESTER">%s</xliff:g> ang Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"I-verify ang bytecode ng mga nade-debug na app"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Payagan ang ART na i-verify ang bytecode para sa mga nade-debug na app"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Payagan ang palitan ng data kapag dumikit ang tablet sa isa pang device"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Payagan ang pagpapalitan ng data kapag nadikit ang telepono sa isa pang device"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Pumili ng kahit isang band para sa Wi‑Fi hotspot:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Mga setting ng IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Privacy"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Na-randomize na MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Magdagdag ng device"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Igitna ang QR code sa ibaba para maidagdag ang device sa “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"I-scan ang QR code"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Sumali sa Wi‑Fi sa pamamagitan ng pag-scan ng QR code"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Ibahagi ang Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"I-scan ang QR code na ito gamit ang isa pang device para makasali sa “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Hindi mabasa ang QR code"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Hindi mabasa ang QR code. Igitna ulit ang code at subukang muli"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Subukang muli. Kung magpatuloy ang isyu, makipag-ugnayan sa manufacturer ng device"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Nagkaproblema"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Tiyaking nakasaksak ang device, may charge, at naka-on"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Tiyaking nakasaksak ang device, may charge, at naka-on. Kung magpapatuloy ang isyu, makipag-ugnayan sa manufacturer ng device"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Hindi sinusuportahan ng device na ito ang pagdaragdag ng “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Suriin ang koneksyon at subukang muli"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Pumili ng network"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Para maikonekta ang iyong device, pumili ng network"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Idagdag ang device na ito sa “<xliff:g id="SSID">%1$s</xliff:g>”?"</string>
@@ -931,6 +940,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Pumili ng ibang network"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Hindi maidagdag ang device"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Nakita ang device"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Subukang Muli"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Ibahagi sa iba pang mga user ng device"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(di-nabago)"</string>
@@ -1071,7 +1084,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kapag naka-on ang pagtawag sa Wi-Fi, maaaring magruta ng mga tawag ang iyong telepono sa pamamagitan ng mga Wi-Fi network o network ng iyong carrier, depende sa iyong kagustuhan at kung aling signal ang mas malakas. Bago i-on ang feature na ito, sumangguni sa iyong carrier hinggil sa mga bayarin at iba pang mga detalye."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Kapag naka-on ang pagtawag gamit ang Wi-Fi, maaaring magruta ng mga tawag ang iyong telepono sa pamamagitan ng mga Wi-Fi network o network ng iyong carrier, depende sa iyong kagustuhan at kung aling signal ang mas malakas. Bago i-on ang feature na ito, sumangguni sa iyong carrier hinggil sa mga bayarin at iba pang detalye.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Pang-emergency na Address"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Ginagamit bilang iyong lokasyon kapag nagsagawa ka ng pang-emergency na tawag sa pamamagitan ng Wi‑Fi"</string>
@@ -1270,7 +1283,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Mga pag-update ng system"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Bersyon ng Android"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Antas ng patch ng seguridad ng Android"</string>
     <string name="model_info" msgid="1952009518045740889">"Modelo"</string>
     <string name="model_summary" msgid="8306235877567782987">"Modelo: %1$s"</string>
@@ -2042,7 +2054,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minuto"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Tagal ng pagbabasa"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Tagal ng pag-aksyon"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Piliin kung gaano katagal mo gustong basahin at aksyunan ang mga mensaheng awtomatikong nawawala.\n\nNakadepende sa bawat app ang suporta para sa setting na ito."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Piliin kung gaano katagal ipapakita ang mga mensaheng humihiling sa iyong umaksyon, ngunit pansamantala lang makikita.\n\nHindi lahat ng app ay sumusuporta sa setting na ito."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Pindutin nang matagal ang delay"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Pag-invert ng kulay"</string>
@@ -3254,6 +3267,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Itago ang mga icon para sa mga naka-silent na notification sa status bar"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Payagan ang notification dots"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Payagan ang mga bubble ng notification"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Mga pag-swipe"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Mag-swipe pakanan para i-dismiss, pakaliwa para ipakita ang menu"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Mag-swipe pakaliwa para i-dismiss, pakanan para ipakita ang menu"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Patay-sinding ilaw"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Sa lock screen"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kapag naka-lock ang work profile"</string>
@@ -3300,7 +3316,11 @@
       <item quantity="one">%d app ang makakapagbasa ng mga notification</item>
       <item quantity="other">%d na app ang makakapagbasa ng mga notification</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Assistant para sa Notification"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Walang assistant"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Walang mga naka-install na app ang humiling ng access sa notification."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Payagan ang pag-access sa notification para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"Mababasa ng <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> ang lahat ng notification, kasama ang personal na impormasyon gaya ng mga pangalan ng contact at text ng mga mensaheng iyong matatanggap. Magagawa rin nitong magbago o mag-dismiss ng mga notification o mag-trigger ng mga action button sa mga ito. \n\nDahil dito, mabibigyan din ng kakayahan ang app na i-on o i-off ang Huwag Istorbohin at baguhin ang mga nauugnay na setting."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Payagan ang pag-access sa notification para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"Mababasa ni <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ang lahat ng notification, kasama ang personal na impormasyon gaya ng mga pangalan ng contact at text ng mga mensaheng iyong matatanggap. Magagawa rin niyang mag-dismiss ng mga notification o i-trigger ang mga action button sa mga ito. \n\nDahil dito, mabibigyan din ng kakayahan ang app na i-on o i-off ang Huwag Istorbohin at baguhin ang mga nauugnay na setting."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Kung io-off mo ang access sa notification para kay <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, mao-off din ang access sa Huwag Istorbohin."</string>
@@ -3573,7 +3593,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Advanced"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Mag-configure ng mga app"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Hindi kilalang app"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Mga pahintulot sa app"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Manager ng pahintulot"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Mga app na gumagamit ng <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"I-tap upang paganahin"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Mag-double tap kahit saan sa screen upang paganahin ang device"</string>
@@ -4199,6 +4219,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"I-update ang Huwag Istorbohin"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"I-pause ang mga notification para manatiling nakatuon ang pansin"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Hindi available ang feature na ito sa device na ito"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Ipatupad ang kumpletong sukat ng GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Sinusubaybayan ang lahat ng constellation at dalas ng GNSS nang walang duty cycling"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Payagang magsimula ng aktibidad sa background"</string>
@@ -4361,6 +4385,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Subukang muli"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Nagkaproblema. Kinansela ng application ang kahilingang pumili ng device."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Naikonekta"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Ipakita lahat"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> (na) device ang nakakonekta</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> (na) device ang nakakonekta</item>
@@ -4388,7 +4413,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 app ang gumamit ng mga pahintulot"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Pinakanagamit na mga pahintulot sa loob ng nakaraang 24 na oras"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Tingnan ang lahat ng paggamit"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Tingnan ang Dashboard ng Mga Pahintulot"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Paggamit sa pagiging naa-access"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> serbisyo ang may kumpletong access sa iyong device</item>
@@ -4396,10 +4421,13 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Pamahalaan ang Mga Notification ng <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Walang iminumungkahing application"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> notification channel. I-tap para pamahalaan ang lahat.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> na notification channel. I-tap para pamahalaan ang lahat.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> notification channel.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> na notification channel.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> (na) notification channel. I-tap para pamahalaan ang lahat."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Output ng Switch"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Kasalukuyang nagpe-play sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

@@ -805,6 +805,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> এমবিপিএস"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> ওয়াই-ফাই চালু করতে চাইছে"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> ওয়াই-ফাই বন্ধ করতে চাইছে"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"ডিবাগযোগ্য অ্যাপের বাইটকোড যাচাই করুন"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"ডিবাগযোগ্য অ্যাপের বাইটকোট যাচাই করতে ART-কে অনুমতি দিন"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"যখন ট্যাবলেট অন্য ডিভাইসে স্পর্শ করে তখন ডেটা বিনিময়ের অনুমতি দিন"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"যখন ফোন অন্য ডিভাইসে স্পর্শ করে তখন ডেটা বিনিময়ের অনুমতি দিন"</string>
@@ -919,6 +921,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"ওয়াই-ফাই হটস্পটের জন্য অন্তত একটি ব্যান্ড বেছে নিন:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP সেটিংস"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"গোপনীয়তা"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"র‍্যান্ডামাইজ করা MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"একটি ডিভাইস যোগ করুন"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"“<xliff:g id="SSID">%1$s</xliff:g>”-এর সাথে ডিভাইস যোগ করতে নিচে ডিভাইসের QR কোড মাঝখানে রাখুন"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR কোড স্ক্যান করুন"</string>
@@ -926,7 +929,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"QR কোড স্ক্যান করে ওয়াই-ফাইতে যোগ দিন"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"ওয়াই-ফাই শেয়ার করুন"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"“<xliff:g id="SSID">%1$s</xliff:g>”-এ যোগ করতে অন্য ডিভাইসে এই QR কোড স্ক্যান করুন"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"QR কোড পড়া যায়নি"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR কোড পড়া যায়নি। কোড আবার লিখুন এবং আবার চেষ্টা করুন"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"আবার চেষ্টা করুন৷ সমস্যা যদি তাও থেকে যায় তাহলে ডিভাইসের প্রস্তুতকারকের সাথে যোগাযোগ করুন"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"কোনও সমস্যা হয়েছে"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"ডিভাইসটি প্লাগ-ইন করা আছে কিনা, চার্জ দেওয়া আছে কিনা এবং চালু আছে কিনা তা দেখে নিন"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"ডিভাইসটি প্লাগ-ইন করা আছে কিনা, চার্জ দেওয়া আছে কিনা এবং চালু আছে কিনা তা দেওয়া সমস্যা যদি তাও থেকে যায় তাহলে ডিভাইসের প্রস্তুতকারকের সাথে যোগাযোগ করুন"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"“<xliff:g id="SSID">%1$s</xliff:g>” যোগ করা এই ডিভাইসে কাজ করে না"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"কানেকশন দেখে নিয়ে আবার চেষ্টা করুন"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"নেটওয়ার্ক বেছে নিন"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"আপনার ডিভাইস কানেক্ট করতে নেটওয়ার্ক বেছে নিন"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"এই ডিভাইস “<xliff:g id="SSID">%1$s</xliff:g>”-এ যোগ করতে চান?"</string>
@@ -935,6 +944,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"অন্য নেটওয়ার্ক বেছে নিন"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"ডিভাইস যোগ করা যায়নি"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"ডিভাইস পাওয়া গেছে"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"আবার করুন"</string>
     <string name="wifi_shared" msgid="844142443226926070">"অন্য ডিভাইস ব্যবহারকারীদের সাথে শেয়ার করুন"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(অপরিবর্তিত)"</string>
@@ -1075,7 +1088,7 @@
     <item msgid="2339246858001475047">"২"</item>
     <item msgid="6200207341126893791">"১"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"ওয়াই-ফাই কলিং চালু থাকার সময়ে, আপনার পছন্দ এবং কোন সিগন্যাল বেশি শক্তিশালী তার উপর নির্ভর করে আপনার ফোন ওয়াই-ফাই নেটওয়ার্ক বা আপনার পরিষেবা প্রদানকারীর নেটওয়ার্কের মাধ্যমে আপনার কলের রুট তৈরি করে। এই বৈশিষ্ট্যটি চালু করার আগে, আপনার পরিষেবা প্রদানকারীর কাছে ফি-গুলি এবং অন্যান্য বিশদ বিবরণ সম্বন্ধে পরীক্ষা করুন।"</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi কলিং চালু থাকার সময়ে, আপনার পছন্দ এবং কোন সিগন্যাল বেশি শক্তিশালী তার উপর নির্ভর করে আপনার ফোন ওয়াই-ফাই নেটওয়ার্ক বা আপনার পরিষেবা প্রদানকারীর নেটওয়ার্কের মাধ্যমে আপনার কলের রুট তৈরি করে। এই বৈশিষ্ট্যটি চালু করার আগে, আপনার পরিষেবা প্রদানকারীর থেকে ফি এবং অন্যান্য বিষয় সম্বন্ধে জেনে নিন।<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"জরুরি ঠিকানা"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"ওয়াই-ফাই নেটওয়ার্ক ব্যবহার করে জরুরি কল করার সময় আপনার লোকেশন হিসেবে ব্যবহার করা হয়"</string>
@@ -1274,7 +1287,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"সিস্টেম আপডেটগুলি"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android ভার্সন"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android সুরক্ষার প্যাচ লেবেল"</string>
     <string name="model_info" msgid="1952009518045740889">"মডেল"</string>
     <string name="model_summary" msgid="8306235877567782987">"মডেল: %1$s"</string>
@@ -2046,7 +2058,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"২ মিনিট"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"পড়ার সময়"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"অ্যাকশন নেওয়ার সময় হয়েছে"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"নিজে থেকে মুছে যাওয়া মেসেজগুলি পড়তে এবং তাতে অ্যাকশন নিতে কত সময় আপনি নেবেন তা বেছে নিন।\n\nএই সেটিংসের সহায়তা প্রত্যেকটি অ্যাপের জন্য কাজ করবে।"</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"যে মেসেজ আপনাকে অ্যাকশন নিতে বলবে সেই মেসেজ কতক্ষণ দেখা যাবে তা আপনি ঠিক করতে পারেন, তবে তা শুধুমাত্র সাময়িকভাবে সেগুলি দেখা যায়।\n\nসব অ্যাপ এই সেটিংসে কাজ করে না।"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"স্পর্শ করে ধরে রাখায় বিলম্ব"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"রঙ বিলোমক্রিয়া"</string>
@@ -3263,6 +3276,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"নীরব বিজ্ঞপ্তির আইকন স্ট্যাটাস বারে লুকিয়ে রাখুন"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"একাধিক বিজ্ঞপ্তি ডট দেখাতে দিন"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"বিজ্ঞপ্তির বুদবুদ দেখানোর অনুমতি দিন"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"অ্যাকশন সোয়াইপ করুন"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"খারিজ করতে বাঁ দিকে সোয়াইপ করুন, মেনু দেখতে ডান দিকে সোয়াইপ করুন"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"খারিজ করার জন্য বাঁ দিকে সোয়াইপ করুন, মেনু দেখতে ডান দিকে সোয়াইল করুন"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"মিটমিট করা আলো"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"লক স্ক্রিনে"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"কাজের প্রোফাইল লক করা থাকলে"</string>
@@ -3309,7 +3325,11 @@
       <item quantity="one">%dটি অ্যাপ্লিকেশান বিজ্ঞপ্তিগুলি পড়তে পারে</item>
       <item quantity="other">%dটি অ্যাপ্লিকেশান বিজ্ঞপ্তিগুলি পড়তে পারে</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"বিজ্ঞপ্তি অ্যাসিস্ট্যান্ট"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"অ্যাসিস্ট্যান্টের পরিষেবা পাওয়া যাবে না"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"ইনস্টল করা কোনো অ্যাপের অনুরোধকৃত বিজ্ঞপ্তির অ্যাক্সেস নেই৷"</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g>-কে বিজ্ঞপ্তিতে অ্যাক্সেস দিতে চান?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> পরিচিতির নাম এবং আপনি পেয়েছেন এমন টেক্সট মেসেজ সহ ব্যক্তিগত তথ্যের সব বিজ্ঞপ্তি পড়তে পারবে। এর মধ্যে থাকা বিজ্ঞপ্তি পরিবর্তন করতে বা অ্যাকশন বোতাম ট্রিগার করতে বা খারিজ করতে পারবে। \n\nএই অ্যাপ \'বিরক্ত করবেন না\' বিকল্পটিকে চালু বা বন্ধ করার এবং সম্পর্কিত সেটিংস পরিবর্তন করতে পারবে।"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেসে অনুমতি দেবেন?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, পরিচিতির নাম ও আপনার গৃহীত পাঠ্য বার্তাগুলির মত ব্যক্তিগত তথ্য সহ সমস্ত বিজ্ঞপ্তি পড়তে সক্ষম হবে৷ এটি আবার এর মধ্যে থাকা বিজ্ঞপ্তিগুলি বা নির্দিষ্ট কাজের বোতামগুলি খারিজ করতে পারবে। \n\nএছাড়াও এটি এই অ্যাপ্লিকেশানকে, \'বিরক্ত করবেন না\' বিকল্পটিকে চালু বা বন্ধ করার এবং সংশ্লিষ্ট সেটিংস পরিবর্তন করার ক্ষমতা প্রদান করবে৷"</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"যদি আপনি <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেস বন্ধ করেন, তাহলে \'বিরক্ত করবেন না\' এর অ্যাক্সেসও বন্ধ হয়ে যেতে পারে৷"</string>
@@ -3582,7 +3602,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"উন্নত"</string>
     <string name="configure_apps" msgid="6685680790825882528">"অ্যাপ্লিকেশান কনফিগার করুন"</string>
     <string name="unknown_app" msgid="5275921288718717656">"অজানা অ্যাপ্লিকেশান"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"অ্যাপ্লিকেশনের অনুমতি"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"অনুমতি ম্যানেজার"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"যে অ্যাপগুলি <xliff:g id="APPS">%1$s</xliff:g> ব্যবহার করছে"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"জাগাতে আলতো চাপুন"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"ডিভাইসকে জাগাতে স্ক্রিনের যেকোনও জায়গায় ডাবল-ট্যাপ করুন"</string>
@@ -4211,6 +4231,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"\'বিরক্ত করবেন না\' মোডটি আপডেট করুন"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"যাতে বিরক্ত হতে না হয় তার জন্য বিজ্ঞপ্তি পজ করুন"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"এই বৈশিষ্ট্যটি এই ডিভাইসে উপলব্ধ নেই"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"GnssMeasurement সম্পূর্ণভাবে ট্র্যাক করুন"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"ডিউটি-সাইক্লিং বাদে সমস্ত কন্সটেলেশন এবং ফ্রিকোয়েন্সি ট্র্যাক করুন"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"ব্যাকগ্রাউন্ড অ্যাক্টিভিটি চালু করার অনুমতি দিন"</string>
@@ -4373,6 +4397,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"আবার চেষ্টা করুন"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"কোনও সমস্যা হয়েছে। ডিভাইস বেছে নেওয়ার আবেদনটি এই অ্যাপ্লিকেশনের মাধ্যমে বাতিল করা হয়েছে।"</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"কানেক্ট করা হয়েছে"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"সব দেখুন"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>টি ডিভাইস কানেক্ট করা হয়েছে</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>টি ডিভাইস কানেক্ট করা হয়েছে</item>
@@ -4400,16 +4425,19 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"কোনও অ্যাপ অনুমতি ব্যবহার করেনি"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"গত ২৪ ঘণ্টায় সবচেয়ে বেশি অনুমতির ব্যবহার"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"সব ব্যবহার দেখুন"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"অনুমতির ড্যাশবোর্ড দেখুন"</string>
     <!-- no translation found for accessibility_usage_title (5136753034714150614) -->
     <skip />
     <!-- no translation found for accessibility_usage_summary (4364945481915750314) -->
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g>-এর বিজ্ঞপ্তি ম্যানেজ করুন"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"কোনও সাজেস্ট করা অ্যাপ্লিকেশন নেই"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>টি বিজ্ঞপ্তির চ্যানেল। সবগুলি ম্যানেজ করতে ট্যাপ করুন।</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>টি বিজ্ঞপ্তির চ্যানেল। সবগুলি ম্যানেজ করতে ট্যাপ করুন।</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>টি বিজ্ঞপ্তির চ্যানেল।</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>টি বিজ্ঞপ্তির চ্যানেল।</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g>টি বিজ্ঞপ্তির চ্যানেল। সবগুলি ম্যানেজ করতে ট্যাপ করুন।"</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"আউটপুট পরিবর্তন করুন"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-এ চালানো হচ্ছে"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

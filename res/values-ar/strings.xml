@@ -865,6 +865,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> ميغابت في الثانية"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"‏يريد <xliff:g id="REQUESTER">%s</xliff:g> تشغيل Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"‏يريد <xliff:g id="REQUESTER">%s</xliff:g> إيقاف Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"تحقُّق من رمز بايت لتطبيقات يمكن تصحيحها"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"‏تمكين ART من التحقُّق من رمز البايت للتطبيقات القابلة للتصحيح"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"‏الاتصالات قصيرة المدى (NFC)"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"السماح بتبادل البيانات عندما يلمس الجهاز اللوحي جهازًا آخر"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"السماح بتبادل البيانات عندما يلمس الهاتف جهازًا آخر"</string>
@@ -979,6 +981,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"‏اختر نطاقًا واحدًا على الأقل لنقطة اتصال Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"‏إعدادات IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"الخصوصية"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"‏عنوان MAC العشوائي"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"إضافة جهاز"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"توسيط رمز الاستجابة السريعة أدناه لإضافة الجهاز إلى \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"مسح رمز الاستجابة السريعة ضوئيًا"</string>
@@ -986,7 +989,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"‏يمكنك الانضمام إلى شبكة Wi‑Fi عن طريق مسح رمز مسح الاستجابة السريعة ضوئيًا."</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"‏مشاركة اتصال Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"يمكنك مسح رمز الاستجابة السريعة هذا ضوئيًا باستخدام جهاز آخر للانضمام إلى \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"تعذَّرت قراءة رمز الاستجابة السريعة."</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"تعذَّرت قراءة رمز الاستجابة السريعة. يُرجى إعادة توسيط الرمز والمحاولة مرة أخرى."</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"يُرجى إعادة المحاولة. وإذا استمرّت المشكلة، عليك الاتصال بالشركة المصنِّعة للجهاز."</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"حدث خطأ."</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"تأكَّد من أنه تمّ توصيل الجهاز وشحنه وتشغيله."</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"تأكَّد من أنه تمّ توصيل الجهاز وشحنه وتشغيله. وإذا استمرّت المشكلة، عليك الاتصال بالشركة المصنِّعة للجهاز."</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"لا يتيح هذا الجهاز إضافة \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"يُرجى التحقّق من الاتصال والمحاولة مرة أخرى."</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"اختيار شبكة"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"للاتصال بجهازك، اختَر شبكة."</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"هل تريد إضافة هذا الجهاز إلى \"<xliff:g id="SSID">%1$s</xliff:g>\"؟"</string>
@@ -995,6 +1004,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"اختيار شبكة مختلفة"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"تعذّرت إضافة جهاز."</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"تم العثور على جهاز."</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"إعادة المحاولة"</string>
     <string name="wifi_shared" msgid="844142443226926070">"المشاركة مع مستخدمي الجهاز الآخرين"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(لم يتم التغيير)"</string>
@@ -1139,7 +1152,7 @@
     <item msgid="2339246858001475047">"٢"</item>
     <item msgid="6200207341126893791">"١"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"‏عند تشغيل الاتصال عبر Wi-Fi، يمكن للهاتف توجيه المكالمات عبر شبكات Wi-Fi أو عبر شبكة مشغّل شبكة الجوّال، حسب تفضيلك وحسب الإشارة الأقوى. وقبل تشغيل هذه الميزة، راجع رسوم مشغل شبكة الجوّال والتفاصيل الأخرى حول شبكة الجوّال."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"‏عند تشغيل الاتصال عبر Wi-Fi، يمكن للهاتف توجيه المكالمات عبر شبكة Wi-Fi أو عبر مشغّل شبكة الجوّال، حسب تفضيلك وحسب الإشارة الأقوى. وقبل تفعيل هذه الميزة، يُرجى مراجعة الرسوم  والتفاصيل الأخرى مع مشغّل شبكة الجوّال.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"عنوان الطوارئ"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"‏يتم اعتباره موقعك الجغرافي عند إجراء مكالمة طوارئ عبر Wi‑Fi"</string>
@@ -1342,7 +1355,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"تحديثات النظام"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"‏إصدار Android"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"‏مستوى رمز تصحيح أمان Android"</string>
     <string name="model_info" msgid="1952009518045740889">"الطراز"</string>
     <string name="model_summary" msgid="8306235877567782987">"‏الطراز: %1$s"</string>
@@ -2122,7 +2134,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"دقيقتان"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"وقت القراءة"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"وقت اتخاذ الإجراء"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"اختَر مقدار الوقت الذي تستلزمه لقراءة الرسائل التي تختفي تلقائيًا ولاتخاذ إجراء بشأنها.\n\nلا توفّر جميع التطبيقات هذا الإعداد."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"اختَر مدة عرض الرسائل التي تطلب منك اتخاذ إجراء، ولكن يقتصر عرضها على فترة مؤقتة.\n\nلا تتوافق بعض التطبيقات مع هذا الإعداد."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"مهلة اللمس مع الاستمرار"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"عكس اللون"</string>
@@ -3426,6 +3439,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"إخفاء رموز الإشعارات الصامتة في شريط مدى التقدم"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"السماح بنقاط الإشعار"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"السماح بالفقاعات التفسيرية للإشعارات"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"إجراءات التمرير السريع"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"مرِّر سريعًا لليسار للتجاهل، ولليمين لعرض القائمة."</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"مرِّر سريعًا لليمين للتجاهل، ولليسار لعرض القائمة."</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"وميض الضوء"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"على شاشة القفل"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"عند قفل الملف الشخصي للعمل"</string>
@@ -3476,7 +3492,11 @@
       <item quantity="other">‏يمكن قراءة الإشعارات بواسطة %d من التطبيقات</item>
       <item quantity="one">‏يمكن قراءة الإشعارات بواسطة تطبيق واحد (%d)</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"مساعِد الإشعار"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"بدون مساعِد"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"لم تطلب أي تطبيقات مثبّتة حق الوصول إلى الإشعارات."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"هل تسمح بوصول خدمة <xliff:g id="SERVICE">%1$s</xliff:g> إلى الإشعارات؟"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"سيكون بإمكان <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> قراءة جميع الإشعارات، بما في ذلك المعلومات الشخصية مثل أسماء جهات الاتصال ونصوص الرسائل التي تتلقاها. وسيتمكن كذلك من تعديل الإشعارات أو تجاهلها أو تشغيل أزرار الإجراءات التي تحتوي عليها. \n\nوسيمنح هذا التطبيق كذلك إمكانية تفعيل وضع \"عدم الإزعاج\" أو إيقافه وتغيير الإعدادات ذات الصلة."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"هل تسمح بوصول خدمة <xliff:g id="SERVICE">%1$s</xliff:g> إلى الإشعارات؟"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"سيكون بإمكان <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> قراءة جميع الإشعارات، بما في ذلك المعلومات الشخصية مثل أسماء جهات الاتصال ونصوص الرسائل التي تتلقاها. سيتمكن كذلك من تجاهل الإشعارات أو تشغيل أزرار الإجراءات التي تحتوي عليها. \n\nوسيمنح هذا التطبيق كذلك إمكانية تشغيل خيار \"عدم الإزعاج\" أو إيقافه وتغيير الإعدادات ذات الصلة."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"عند إيقاف الوصول إلى الإشعار لـ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>، قد يتم إيقاف الوصول إلى \"عدم الإزعاج\" أيضًا."</string>
@@ -3793,7 +3813,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"إعدادات متقدّمة"</string>
     <string name="configure_apps" msgid="6685680790825882528">"تهيئة التطبيقات"</string>
     <string name="unknown_app" msgid="5275921288718717656">"تطبيق غير معروف"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"أذونات التطبيق"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"مدير الأذونات"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"التطبيقات التي تستخدم <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"انقر للتنبيه من وضع السكون"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"انقر مرّتين على أي مكان بالشاشة لتنبيه الجهاز من وضع السكون"</string>
@@ -4503,6 +4523,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"تحديث إعداد \"الرجاء عدم الإزعاج\""</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"إيقاف الإشعارات مؤقتًا للحفاظ على التركيز"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"لا تتوفر هذه الميزة على هذا الجهاز"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"‏فرض كامل لقياسات GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"‏تتبّع جميع مجموعات وفترات تكرار GNSS التي لا تحتوي على دورات عمل"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"السماح ببدء الأنشطة في الخلفية"</string>
@@ -4669,6 +4693,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"إعادة المحاولة"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"حدث خطأ. ألغى التطبيق طلب اختيار أحد الأجهزة."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"تمّ الاتصال."</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"عرض الكل"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="zero">تم توصيل <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> جهاز.</item>
       <item quantity="two">تم توصيل جهازين (<xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>).</item>
@@ -4700,7 +4725,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"لم تستخدِم أيّ تطبيقات الأذونات."</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"الأذونات الأكثر استخدامًا في آخر 24 ساعة"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"عرض استخدام جميع الأذونات"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"عرض لوحة التحكم في الأذونات"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"استخدام أدوات تمكين الوصول"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="zero">تحظى <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> خدمة بوصول كامل إلى جهازك.</item>
@@ -4712,14 +4737,17 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"إدارة إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"لا يوجد اقتراح بأيّ جهاز."</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="zero"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> قناة للإشعارات. انقُر لإدارتها.</item>
-      <item quantity="two">قناتان (<xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>) للإشعارات. انقُر لإدارتهما.</item>
-      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> قنوات للإشعارات. انقُر لإدارتها.</item>
-      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> قناة للإشعارات. انقُر لإدارتها.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> قناة للإشعارات. انقُر لإدارتها.</item>
-      <item quantity="one">قناة واحدة (<xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g>) للإشعارات. انقُر لإدارتها.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="zero"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> قناة للإشعارات.</item>
+      <item quantity="two">قناتان (<xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g>) للإشعارات.</item>
+      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> قنوات للإشعارات.</item>
+      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> قناة للإشعارات.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> قناة للإشعارات.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> قناة للإشعارات.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> قناة للإشعارات. انقُر لإدارتها."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"تبديل جهاز إخراج الصوت"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"يتمّ تشعيل الوسائط الآن على <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>

@@ -801,6 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> wants to turn on Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> wants to turn off Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Verify bytecode of debuggable apps"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Allow ART to verify bytecode for debuggable apps"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Allow data exchange when the tablet touches another device"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Allow data exchange when the phone touches another device"</string>
@@ -915,6 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Choose at least one band for Wi‑Fi hotspot:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP settings"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Privacy"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Randomised MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Add a device"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Centre the QR code below to add the device to \'<xliff:g id="SSID">%1$s</xliff:g>\'"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Scan QR code"</string>
@@ -922,7 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Join Wi‑Fi by scanning a QR code"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Share Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Scan this QR code with another device to join \'<xliff:g id="SSID">%1$s</xliff:g>\'"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Couldn’t read QR code"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Couldn’t read QR code. Re-centre code and try again"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Try again. If the issue continues, contact the device manufacturer"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Something went wrong"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Make sure that the device has been plugged in, charged and turned on"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Make sure that the device has been plugged in, charged and turned on. If the issue continues, contact the device manufacturer"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Adding \'<xliff:g id="SSID">%1$s</xliff:g>\' isn’t supported by this device"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Check connection and try again"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Choose network"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"To connect your device, choose a network"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Add this device to \'<xliff:g id="SSID">%1$s</xliff:g>\'?"</string>
@@ -931,6 +940,8 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Choose different network"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Couldn’t add device"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Device found"</string>
+    <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="5579154298588011712">"Sharing Wi‑Fi with this device…"</string>
+    <string name="wifi_dpp_connecting" msgid="7111851118215580428">"Connecting…"</string>
     <string name="retry" msgid="6472609612090877557">"Retry"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Share with other device users"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(unchanged)"</string>
@@ -1071,7 +1082,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your operator\'s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your operator regarding fees and other details."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your mobile’s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your operator regarding fees and other details.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Emergency Address"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Used as your location when you make an emergency call over Wi‑Fi"</string>
@@ -1270,7 +1281,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"System updates"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android version"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android security patch level"</string>
     <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="model_summary" msgid="8306235877567782987">"Model: %1$s"</string>
@@ -2042,7 +2052,7 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minutes"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Time to read"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Time to take action"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Choose how much time you want to read and take action on messages that automatically go away.\n\nSupport for this setting is up to each app."</string>
+    <string name="accessibility_content_timeout_preference_summary" msgid="2637322628166175371">"Choose how long to show messages that you need to read, but are visible only temporarily.\n\nNot all apps support this setting."</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Touch &amp; hold delay"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Colour inversion"</string>
@@ -3254,6 +3264,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Hide icons for silent notifications in the status bar"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Allow notification dots"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Allow notification bubbles"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Swipe actions"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Swipe right to dismiss, left to show menu"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Swipe left to dismiss, right to show menu"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blink light"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"On lock screen"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"When work profile is locked"</string>
@@ -3300,7 +3313,11 @@
       <item quantity="other">%d apps can read notifications</item>
       <item quantity="one">%d app can read notifications</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Notification assistant"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"No assistant"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"No installed apps have requested notification access."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Allow notification access for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> will be able to read all notifications, including personal information such as contact names, and the text of messages that you receive. It will also be able to modify or dismiss notifications or trigger action buttons that they contain. \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Allow notification access for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> will be able to read all notifications, including personal information such as contact names and the text of messages that you receive. It will also be able to dismiss notifications or trigger action buttons that they contain. \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"If you turn off notification access for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, Do Not Disturb access may also be turned off."</string>
@@ -3573,7 +3590,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Advanced"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configure apps"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Unknown app"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"App permissions"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Permission manager"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Apps using <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tap to wake"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Double-tap anywhere on the screen to wake device"</string>
@@ -4199,6 +4216,8 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Update Do Not Disturb"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Pause notifications to stay focused"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"This feature is not available on this device"</string>
+    <string name="disabled_feature" msgid="2102058661071271076">"This feature is not available"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"It will slow down this phone"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Force full GNSS measurements"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Track all GNSS constellations and frequencies with no duty cycling"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Allow background activity starts"</string>
@@ -4361,6 +4380,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Try again"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Something came up. The application has cancelled the request to choose a device."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Connection successful"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Show all"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> devices connected</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> device connected</item>
@@ -4388,7 +4408,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 apps used permissions"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Most used permissions in last 24 hours"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"See all usage"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"View permissions dashboard"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"Accessibility usage"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> services have full access to your device</item>
@@ -4396,10 +4416,12 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"Manage <xliff:g id="APP_NAME">%1$s</xliff:g> Notifications"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"No suggested application"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> notification channels. Tap to manage all.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> notification channel. Tap to manage all.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> notification channels.</item>
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> notification channel.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> notification channels. Tap to manage all."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Switch output"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Currently playing on <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="forget_passpoint_dialog_message" msgid="1996970308065448295">"Your subscription with this provider may be cancelled. Recurring subscriptions will not be cancelled. For more information, check with your provider."</string>
 </resources>

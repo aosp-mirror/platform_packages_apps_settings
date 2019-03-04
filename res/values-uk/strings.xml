@@ -837,6 +837,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Мбіт/с"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"Додаток <xliff:g id="REQUESTER">%s</xliff:g> хоче ввімкнути Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"Додаток <xliff:g id="REQUESTER">%s</xliff:g> хоче вимкнути Wi-Fi"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"Підтвердьте байт-код налагоджуваних додатків"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"Дозволити ART підтверджувати байт-код налагоджуваних додатків"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Дозволити обмін даними, коли планшетний ПК торкнеться іншого пристрою"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Дозволити обмін даними, коли телефон торкнеться іншого пристрою"</string>
@@ -951,6 +953,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Виберіть принаймні один діапазон для точки доступу Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Налаштування IP"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Конфіденційність"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Довільна MAC-адреса"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"Додати пристрій"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"Щоб додати пристрій у мережу \"<xliff:g id="SSID">%1$s</xliff:g>\", наведіть камеру на QR-код нижче"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"Сканувати QR-код"</string>
@@ -958,7 +961,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"Щоб під’єднатися до мережі Wi‑Fi, відскануйте QR-код"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Поділитися мережею Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"Відскануйте QR-код за допомогою іншого пристрою, щоб під’єднатися до мережі \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="1290199725613751885">"Не вдалося розпізнати QR-код"</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Не вдалося розпізнати QR-код. Ще раз розмістіть код у центрі рамки й повторіть спробу"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Повторіть спробу. Якщо проблема не зникне, зверніться до виробника пристрою"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Сталася помилка"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Переконайтеся, що пристрій підключено, заряджено й увімкнено"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"Переконайтеся, що пристрій підключено, заряджено й увімкнено. Якщо проблема не зникне, зверніться до виробника пристрою"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"Цей пристрій не підтримує \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"Перевірте підключення й повторіть спробу"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"Вибрати мережу"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"Виберіть мережу, до якої потрібно підключити пристрій"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"Додати цей пристрій до мережі \"<xliff:g id="SSID">%1$s</xliff:g>\"?"</string>
@@ -967,6 +976,10 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"Вибрати іншу мережу"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"Не вдалося додати пристрій"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Знайдено пристрій"</string>
+    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
+    <skip />
     <string name="retry" msgid="6472609612090877557">"Повторити"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Надати доступ іншим користувачам пристрою"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(без змін)"</string>
@@ -1109,7 +1122,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Якщо ввімкнути Wi-Fi, ваш телефон зможе спрямовувати дзвінки через мережі Wi-Fi або мережу вашого оператора, залежно від вибраних налаштувань і потужності сигналу мережі. Перш ніж увімкнути цю функцію, уточніть в оператора, скільки коштує ця послуга, та інші деталі."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Якщо ввімкнути Дзвінки через Wi-Fi, ваш телефон зможе спрямовувати дзвінки через мережі Wi-Fi або мережу оператора, залежно від налаштувань і потужності сигналу. Перш ніж увімкнути цю функцію, уточніть в оператора вартість послуги й інші деталі.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Екстрена адреса"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Використовується як адреса, коли ви телефонуєте в екстрені служби через Wi-Fi"</string>
@@ -1310,7 +1323,6 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Оновлення сист."</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Версія Android"</string>
-    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Останнє виправлення системи безпеки Android"</string>
     <string name="model_info" msgid="1952009518045740889">"Модель"</string>
     <string name="model_summary" msgid="8306235877567782987">"Модель: %1$s"</string>
@@ -2086,7 +2098,8 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 хвилини"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Час на читання"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Час на виконання дії"</string>
-    <string name="accessibility_content_timeout_preference_summary" msgid="2243907757049147937">"Виберіть, скільки часу вам потрібно, щоб прочитати тимчасово видимі повідомлення й відреагувати на них.\n\nПідтримка цього налаштування залежить від додатка."</string>
+    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Виберіть, як довго показувати тимчасово видимі повідомлення із закликом до дії.\n\nНе всі додатки підтримують це налаштування."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Затримка натискання й утримування"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Інверсія кольорів"</string>
@@ -3349,6 +3362,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Сховати значки беззвучних сповіщень у рядку стану"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Дозволити значки сповіщень"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"Дозволити спливаючі сповіщення"</string>
+    <string name="swipe_direction_title" msgid="6877543492435053137">"Дії гортанням"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"Проведіть пальцем управо, щоб відхилити, уліво – щоб показати меню"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"Проведіть пальцем уліво, щоб відхилити, управо – щоб показати меню"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Блимання"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"На заблокованому екрані"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Коли робочий профіль заблоковано"</string>
@@ -3397,7 +3413,11 @@
       <item quantity="many">%d додатків можуть читати сповіщення</item>
       <item quantity="other">%d додатка можуть читати сповіщення</item>
     </plurals>
+    <string name="notification_assistant_title" msgid="4788805096903794353">"Диспетчер сповіщень"</string>
+    <string name="no_notification_assistant" msgid="3230229194702623108">"Без диспетчера"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Установлені додатки не запитували доступу до сповіщень."</string>
+    <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ до сповіщень?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема з особистою інформацією, як-от іменами контактів і текстами отриманих повідомлень. Він також зможе змінювати й відхиляти сповіщення та активувати в них командні кнопки. \n\nДодаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ для сповіщень?"</string>
     <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"Додаток <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема особисту інформацію, як-от імена контактів і тексти отриманих повідомлень. Він також зможе закривати сповіщення й активувати в них командні кнопки. \n\nДодаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Якщо ви вимкнете доступ додатка <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до сповіщень, доступ до режиму \"Не турбувати\" також буде вимкнено."</string>
@@ -3692,7 +3712,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"Розширені налаштування"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Налаштування додатків"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Невідомий додаток"</string>
-    <string name="app_permissions" msgid="4148222031991883874">"Дозволи додатків"</string>
+    <string name="app_permissions" msgid="5584182129908141622">"Диспетчер дозволів"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"Додатки, які мають доступ (<xliff:g id="APPS">%1$s</xliff:g>)"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Торкніться, щоб активувати"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Двічі торкніться екрана, щоб активувати пристрій"</string>
@@ -4363,6 +4383,10 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"Оновити режим \"Не турбувати\""</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"Призупинити сповіщення, щоб не відволікатися"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ця функція недоступна на цьому пристрої"</string>
+    <!-- no translation found for disabled_feature (2102058661071271076) -->
+    <skip />
+    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
+    <skip />
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Увімкнути повне вимірювання GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Відстежувати всі фотосхеми й частоти GNSS без застосування циклічного режиму"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"Починати дії у фоновому режимі"</string>
@@ -4527,6 +4551,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Повторити спробу"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Щось трапилося. Додаток скасував запит на вибір пристрою."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Підключено"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Показати всі"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one">Підключено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> пристрій</item>
       <item quantity="few">Підключено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> пристрої</item>
@@ -4556,18 +4581,21 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"0 додатків використовували дозволи"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"Найбільш уживані дозволи за останні 24 години"</string>
-    <string name="permission_bar_chart_details" msgid="7627032893125479183">"Використання всіх дозволів"</string>
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"Переглянути панель дозволів"</string>
     <!-- no translation found for accessibility_usage_title (5136753034714150614) -->
     <skip />
     <!-- no translation found for accessibility_usage_summary (4364945481915750314) -->
     <string name="manage_app_notification" msgid="877012013856561440">"Керуйте сповіщеннями додатка <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"Немає пропонованого додатка"</string>
-    <plurals name="notification_channel_count_summary" formatted="false" msgid="881808454175451279">
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> канал сповіщень. Торкніться, щоб керувати всіма.</item>
-      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> канали сповіщень. Торкніться, щоб керувати всіма.</item>
-      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> каналів сповіщень. Торкніться, щоб керувати всіма.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> каналу сповіщень. Торкніться, щоб керувати всіма.</item>
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> канал сповіщень.</item>
+      <item quantity="few"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> канали сповіщень.</item>
+      <item quantity="many"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> каналів сповіщень.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> каналу сповіщень.</item>
     </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"Кількість каналів сповіщень: <xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g>. Торкніться, щоб керувати всіма."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Виберіть вихід"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Зараз відтворюється на пристрої <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
+    <skip />
 </resources>
