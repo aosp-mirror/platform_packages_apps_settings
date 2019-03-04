@@ -23,17 +23,20 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 
+import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.network.SubscriptionsChangeListener.SubscriptionsChangeListenerClient;
 
 import org.junit.Before;
@@ -92,6 +95,19 @@ public class SubscriptionsChangeListenerTest {
         verify(mSubscriptionManager).addOnSubscriptionsChangedListener(captor.capture());
         captor.getValue().onSubscriptionsChanged();
         verify(mClient).onSubscriptionsChanged();
+    }
+
+    @Test
+    public void
+    onSubscriptionsChangedEvent_ignoresStickyBroadcastFromBeforeRegistering() {
+        final Intent intent = new Intent(TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
+        mContext.sendStickyBroadcast(intent);
+
+        initListener(true);
+        verify(mClient, never()).onSubscriptionsChanged();
+
+        mContext.sendStickyBroadcast(intent);
+        verify(mClient, times(1)).onSubscriptionsChanged();
     }
 
     @Test
