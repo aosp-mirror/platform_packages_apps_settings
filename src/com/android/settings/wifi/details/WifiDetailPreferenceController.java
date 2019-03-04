@@ -635,7 +635,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                     .setDescription(description);
 
             if (keyguardManager.isDeviceSecure()) {
-                builder.setAllowDeviceCredential(true);
+                builder.setDeviceCredentialAllowed(true);
             }
 
             final BiometricPrompt bp = builder.build();
