@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 
 import androidx.preference.PreferenceScreen;
@@ -56,12 +57,12 @@ public class WifiTetherSSIDPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private WifiTetherSSIDPreferenceController mController;
-    private ValidatedEditTextPreference mPreference;
+    private WifiTetherSsidPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPreference = new ValidatedEditTextPreference(RuntimeEnvironment.application);
+        mPreference = new WifiTetherSsidPreference(RuntimeEnvironment.application);
 
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
@@ -120,5 +121,29 @@ public class WifiTetherSSIDPreferenceControllerTest {
         mController.updateDisplay();
         assertThat(mController.getSSID()).isEqualTo(config.SSID);
         assertThat(mPreference.getSummary()).isEqualTo(config.SSID);
+    }
+
+    @Test
+    public void displayPreference_wifiApDisabled_shouldHideQrCodeIcon() {
+        when(mWifiManager.isWifiApEnabled()).thenReturn(false);
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "test_1234";
+        config.allowedKeyManagement.set(KeyMgmt.WPA2_PSK);
+        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+
+        mController.displayPreference(mScreen);
+        assertThat(mController.isQrCodeButtonAvailable()).isEqualTo(false);
+    }
+
+    @Test
+    public void displayPreference_wifiApEnabled_shouldShowQrCodeIcon() {
+        when(mWifiManager.isWifiApEnabled()).thenReturn(true);
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "test_1234";
+        config.allowedKeyManagement.set(KeyMgmt.WPA2_PSK);
+        when(mWifiManager.getWifiApConfiguration()).thenReturn(config);
+
+        mController.displayPreference(mScreen);
+        assertThat(mController.isQrCodeButtonAvailable()).isEqualTo(true);
     }
 }

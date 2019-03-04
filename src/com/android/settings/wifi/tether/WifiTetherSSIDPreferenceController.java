@@ -17,13 +17,18 @@
 package com.android.settings.wifi.tether;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
+import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.widget.ValidatedEditTextPreference;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {
@@ -56,6 +61,23 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
             mSSID = DEFAULT_SSID;
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
+
+        if (mWifiManager.isWifiApEnabled() && config != null) {
+            final Intent intent = WifiDppUtils.getHotspotConfiguratorIntentOrNull(mContext,
+                    mWifiManager, config);
+
+            if (intent == null) {
+                Log.e(TAG, "Invalid security to share hotspot");
+                ((WifiTetherSsidPreference) mPreference).setButtonVisible(false);
+            } else {
+                ((WifiTetherSsidPreference) mPreference).setButtonOnClickListener(
+                        view -> shareHotspotNetwork(intent));
+                ((WifiTetherSsidPreference) mPreference).setButtonVisible(true);
+            }
+        } else {
+            ((WifiTetherSsidPreference) mPreference).setButtonVisible(false);
+        }
+
         updateSsidDisplay((EditTextPreference) mPreference);
     }
 
@@ -79,5 +101,20 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     private void updateSsidDisplay(EditTextPreference preference) {
         preference.setText(mSSID);
         preference.setSummary(mSSID);
+    }
+
+    private void shareHotspotNetwork(Intent intent) {
+        final String title = mContext.getString(
+                R.string.lockpassword_confirm_your_pattern_header);
+        final String description = String.format(
+                mContext.getString(R.string.wifi_sharing_message), mSSID);
+
+        WifiDppUtils.showLockScreen(mContext, title, description,
+                () -> mContext.startActivity(intent));
+    }
+
+    @VisibleForTesting
+    boolean isQrCodeButtonAvailable() {
+        return ((WifiTetherSsidPreference) mPreference).isQrCodeButtonAvailable();
     }
 }

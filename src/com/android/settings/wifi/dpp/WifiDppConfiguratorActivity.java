@@ -75,6 +75,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     private static final String KEY_WIFI_PRESHARED_KEY = "key_wifi_preshared_key";
     private static final String KEY_WIFI_HIDDEN_SSID = "key_wifi_hidden_ssid";
     private static final String KEY_WIFI_NETWORK_ID = "key_wifi_network_id";
+    private static final String KEY_IS_HOTSPOT = "key_is_hotspot";
 
     private FragmentManager mFragmentManager;
 
@@ -104,14 +105,15 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
             mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(qrCode);
 
-            String security = savedInstanceState.getString(KEY_WIFI_SECURITY);
-            String ssid = savedInstanceState.getString(KEY_WIFI_SSID);
-            String preSharedKey = savedInstanceState.getString(KEY_WIFI_PRESHARED_KEY);
-            boolean hiddenSsid = savedInstanceState.getBoolean(KEY_WIFI_HIDDEN_SSID);
-            int networkId = savedInstanceState.getInt(KEY_WIFI_NETWORK_ID);
+            final String security = savedInstanceState.getString(KEY_WIFI_SECURITY);
+            final String ssid = savedInstanceState.getString(KEY_WIFI_SSID);
+            final String preSharedKey = savedInstanceState.getString(KEY_WIFI_PRESHARED_KEY);
+            final boolean hiddenSsid = savedInstanceState.getBoolean(KEY_WIFI_HIDDEN_SSID);
+            final int networkId = savedInstanceState.getInt(KEY_WIFI_NETWORK_ID);
+            final boolean isHotspot = savedInstanceState.getBoolean(KEY_IS_HOTSPOT);
 
             mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid,
-                    preSharedKey, hiddenSsid, networkId);
+                    preSharedKey, hiddenSsid, networkId, isHotspot);
         } else {
             handleIntent(getIntent());
         }
@@ -361,6 +363,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
             outState.putString(KEY_WIFI_PRESHARED_KEY, mWifiNetworkConfig.getPreSharedKey());
             outState.putBoolean(KEY_WIFI_HIDDEN_SSID, mWifiNetworkConfig.getHiddenSsid());
             outState.putInt(KEY_WIFI_NETWORK_ID, mWifiNetworkConfig.getNetworkId());
+            outState.putBoolean(KEY_IS_HOTSPOT, mWifiNetworkConfig.isHotspot());
         }
 
         super.onSaveInstanceState(outState);
@@ -393,7 +396,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     wifiConfiguration.getPrintableSsid(),
                     wifiConfiguration.preSharedKey,
                     /* hiddenSsid */ false,
-                    wifiConfiguration.networkId);
+                    wifiConfiguration.networkId,
+                    /* isHotspot */ false);
             }
         }
 

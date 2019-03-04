@@ -86,7 +86,8 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
         MenuItem menuItem;
-        if (wifiNetworkConfig.isSupportWifiDpp(getActivity())) {
+        if (!wifiNetworkConfig.isHotspot() &&
+                wifiNetworkConfig.isSupportWifiDpp(getActivity())) {
             menuItem = menu.add(0, Menu.FIRST, 0, R.string.next_label);
             menuItem.setIcon(R.drawable.ic_scan_24dp);
             menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -127,9 +128,15 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         setHeaderIconImageResource(R.drawable.ic_qrcode_24dp);
 
         final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
-        mTitle.setText(R.string.wifi_dpp_share_wifi);
-        mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
-                wifiNetworkConfig.getSsid()));
+        if (wifiNetworkConfig.isHotspot()) {
+            mTitle.setText(R.string.wifi_dpp_share_hotspot);
+            mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_to_share_hotspot,
+                    wifiNetworkConfig.getSsid()));
+        } else {
+            mTitle.setText(R.string.wifi_dpp_share_wifi);
+            mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
+                    wifiNetworkConfig.getSsid()));
+        }
 
         mQrCode = wifiNetworkConfig.getQrCode();
         setQrCode();

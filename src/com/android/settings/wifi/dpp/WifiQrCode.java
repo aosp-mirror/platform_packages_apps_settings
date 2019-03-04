@@ -133,7 +133,7 @@ public class WifiQrCode {
         password = removeBackSlash(password);
 
         mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid, password,
-                hiddenSsid, WifiConfiguration.INVALID_NETWORK_ID);
+                hiddenSsid, WifiConfiguration.INVALID_NETWORK_ID, /* isHotspot */ false);
 
         if (mWifiNetworkConfig == null) {
             throw new IllegalArgumentException("Invalid format");

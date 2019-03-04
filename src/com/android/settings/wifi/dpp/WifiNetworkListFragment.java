@@ -218,7 +218,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             final WifiNetworkConfig networkConfig = WifiNetworkConfig.getValidConfigOrNull(
                     selectedAccessPoint.getSecurityString(/* concise */ true),
                     wifiConfig.getPrintableSsid(), wifiConfig.preSharedKey, /* hiddenSsid */ false,
-                    wifiConfig.networkId);
+                    wifiConfig.networkId, /* isHotspot */ false);
             if (mOnChooseNetworkListener != null) {
                 mOnChooseNetworkListener.onChooseNetwork(networkConfig);
             }
@@ -232,7 +232,8 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                                 /* ssid */ WifiNetworkConfig.FAKE_SSID,
                                 /* preSharedKey */ WifiNetworkConfig.FAKE_PASSWORD,
                                 /* hiddenSsid */ true,
-                                /* networkId */ WifiConfiguration.INVALID_NETWORK_ID));
+                                /* networkId */ WifiConfiguration.INVALID_NETWORK_ID,
+                                /* isHotspot*/ false));
             }
         } else {
             return super.onPreferenceTreeClick(preference);
