@@ -20,12 +20,15 @@ import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageItemInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
+import android.os.RemoteException;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.NotificationAssistantService;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -114,8 +117,12 @@ public class NotificationAssistantPicker extends DefaultAppPickerFragment implem
         List<CandidateInfo> list = new ArrayList<>();
         services.sort(new PackageItemInfo.DisplayNameComparator(mPm));
         for (ServiceInfo service : services) {
-            final ComponentName cn = new ComponentName(service.packageName, service.name);
-            list.add(new DefaultAppInfo(mContext, mPm, mUserId, cn));
+            if (mContext.getPackageManager().checkPermission(
+                    android.Manifest.permission.REQUEST_NOTIFICATION_ASSISTANT_SERVICE,
+                    service.packageName) == PackageManager.PERMISSION_GRANTED) {
+                final ComponentName cn = new ComponentName(service.packageName, service.name);
+                list.add(new DefaultAppInfo(mContext, mPm, mUserId, cn));
+            }
         }
         list.add(new CandidateNone(mContext));
         mCandidateInfos = list;
