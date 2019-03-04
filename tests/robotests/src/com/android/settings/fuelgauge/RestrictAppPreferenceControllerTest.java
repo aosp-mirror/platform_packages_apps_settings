@@ -77,13 +77,16 @@ public class RestrictAppPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
         final AppOpsManager.OpEntry allowOpEntry = new AppOpsManager.OpEntry(
-                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_ALLOWED, 0, 0, 0, 0, "");
+            AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, false, AppOpsManager.MODE_ALLOWED,
+            null /*accessTimes*/, null /*rejectTimes*/,  null /*durations*/,
+            null /* proxyUids */, null /* proxyPackages */);
         final List<AppOpsManager.OpEntry> allowOps = new ArrayList<>();
         allowOps.add(allowOpEntry);
         final AppOpsManager.OpEntry restrictedOpEntry = new AppOpsManager.OpEntry(
-                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_IGNORED, 0, 0, 0, 0, "");
+            AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, false, AppOpsManager.MODE_IGNORED,
+            null /*accessTimes*/, null /*rejectTimes*/,  null /*durations*/,
+            null /* proxyUids */, null /* proxyPackages */);
         final List<AppOpsManager.OpEntry> restrictedOps = new ArrayList<>();
         restrictedOps.add(restrictedOpEntry);
         mAllowedPackageOps = new AppOpsManager.PackageOps(
