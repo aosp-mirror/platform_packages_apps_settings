@@ -932,8 +932,7 @@
 
         <activity
             android:name="Settings$ManageApplicationsActivity"
-            android:label="@string/applications_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/applications_settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
                 <action android:name="android.settings.MANAGE_APPLICATIONS_SETTINGS" />
@@ -1306,8 +1305,7 @@
 
         <activity
             android:name="Settings$UsageAccessSettingsActivity"
-            android:label="@string/usage_access_title"
-            android:parentActivityName="Settings">
+            android:label="@string/usage_access_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.USAGE_ACCESS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
