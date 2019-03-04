@@ -238,63 +238,6 @@ public class AudioOutputSwitchPreferenceControllerTest {
         verify(mLocalBluetoothManager).setForegroundActivity(null);
     }
 
-    @Test
-    public void onPreferenceChange_toThisDevice_shouldSetDefaultSummary() {
-        mController.mConnectedDevices.clear();
-        mController.mConnectedDevices.add(mBluetoothDevice);
-
-        mController.onPreferenceChange(mPreference,
-                mContext.getText(R.string.media_output_default_summary));
-
-        assertThat(mPreference.getSummary()).isEqualTo(
-                mContext.getText(R.string.media_output_default_summary));
-    }
-
-    /**
-     * One Bluetooth devices are available, and select the device.
-     * Preference summary should be device name.
-     */
-    @Test
-    public void onPreferenceChange_toBtDevice_shouldSetBtDeviceName() {
-        mController.mConnectedDevices.clear();
-        mController.mConnectedDevices.add(mBluetoothDevice);
-
-        mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_1);
-
-        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_1);
-    }
-
-    /**
-     * More than one Bluetooth devices are available, and select second device.
-     * Preference summary should be second device name.
-     */
-    @Test
-    public void onPreferenceChange_toBtDevices_shouldSetSecondBtDeviceName() {
-        ShadowBluetoothDevice shadowBluetoothDevice;
-        BluetoothDevice secondBluetoothDevice;
-        secondBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2);
-        shadowBluetoothDevice = Shadows.shadowOf(secondBluetoothDevice);
-        shadowBluetoothDevice.setName(TEST_DEVICE_NAME_2);
-        mController.mConnectedDevices.clear();
-        mController.mConnectedDevices.add(mBluetoothDevice);
-        mController.mConnectedDevices.add(secondBluetoothDevice);
-
-        mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_2);
-
-        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_2);
-    }
-
-    /**
-     * mConnectedDevices is empty.
-     * onPreferenceChange should return false.
-     */
-    @Test
-    public void onPreferenceChange_connectedDeviceIsNull_shouldReturnFalse() {
-        mController.mConnectedDevices.clear();
-
-        assertThat(mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_1)).isFalse();
-    }
-
     /**
      * Audio stream output to bluetooth sco headset which is the subset of all sco device.
      * isStreamFromOutputDevice should return true.
@@ -416,39 +359,6 @@ public class AudioOutputSwitchPreferenceControllerTest {
     }
 
     /**
-     * One A2dp device is connected.
-     * getConnectedA2dpDevices should add this device to list.
-     */
-    @Test
-    public void getConnectedA2dpDevices_oneConnectedA2dpDevice_shouldAddDeviceToList() {
-        mEmptyDevices.clear();
-        mProfileConnectedDevices.clear();
-        mProfileConnectedDevices.add(mBluetoothDevice);
-        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
-
-        mEmptyDevices.addAll(mController.getConnectedA2dpDevices());
-
-        assertThat(mEmptyDevices).containsExactly(mBluetoothDevice);
-    }
-
-    /**
-     * More than one A2dp devices are connected.
-     * getConnectedA2dpDevices should add all devices to list.
-     */
-    @Test
-    public void getConnectedA2dpDevices_moreThanOneConnectedA2dpDevice_shouldAddDeviceToList() {
-        mEmptyDevices.clear();
-        mProfileConnectedDevices.clear();
-        mProfileConnectedDevices.add(mBluetoothDevice);
-        mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
-        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
-
-        mEmptyDevices.addAll(mController.getConnectedA2dpDevices());
-
-        assertThat(mEmptyDevices).containsExactly(mBluetoothDevice, mLeftBluetoothHapDevice);
-    }
-
-    /**
      * One hands free profile device is connected.
      * getConnectedA2dpDevices should add this device to list.
      */
@@ -485,10 +395,6 @@ public class AudioOutputSwitchPreferenceControllerTest {
             AudioSwitchPreferenceController {
         AudioSwitchPreferenceControllerTestable(Context context, String key) {
             super(context, key);
-        }
-
-        @Override
-        public void setActiveBluetoothDevice(BluetoothDevice device) {
         }
 
         @Override

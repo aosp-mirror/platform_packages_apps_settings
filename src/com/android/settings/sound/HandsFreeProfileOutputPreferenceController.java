@@ -20,7 +20,9 @@ import static android.bluetooth.IBluetoothHearingAid.HI_SYNC_ID_INVALID;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.text.TextUtils;
 
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -32,11 +34,53 @@ import com.android.settingslib.bluetooth.HearingAidProfile;
  * This class allows switching between HFP-connected & HAP-connected BT devices
  * while in on-call state.
  */
-public class HandsFreeProfileOutputPreferenceController extends
-        AudioSwitchPreferenceController {
+public class HandsFreeProfileOutputPreferenceController extends AudioSwitchPreferenceController
+        implements Preference.OnPreferenceChangeListener {
+
+    private static final int INVALID_INDEX = -1;
 
     public HandsFreeProfileOutputPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final String address = (String) newValue;
+        if (!(preference instanceof ListPreference)) {
+            return false;
+        }
+
+        final CharSequence defaultSummary = mContext.getText(R.string.media_output_default_summary);
+        final ListPreference listPreference = (ListPreference) preference;
+        if (TextUtils.equals(address, defaultSummary)) {
+            // Switch to default device which address is device name
+            mSelectedIndex = getDefaultDeviceIndex();
+            setActiveBluetoothDevice(null);
+            listPreference.setSummary(defaultSummary);
+        } else {
+            // Switch to BT device which address is hardware address
+            final int connectedDeviceIndex = getConnectedDeviceIndex(address);
+            if (connectedDeviceIndex == INVALID_INDEX) {
+                return false;
+            }
+            final BluetoothDevice btDevice = mConnectedDevices.get(connectedDeviceIndex);
+            mSelectedIndex = connectedDeviceIndex;
+            setActiveBluetoothDevice(btDevice);
+            listPreference.setSummary(btDevice.getAliasName());
+        }
+        return true;
+    }
+
+    private int getConnectedDeviceIndex(String hardwareAddress) {
+        if (mConnectedDevices != null) {
+            for (int i = 0, size = mConnectedDevices.size(); i < size; i++) {
+                final BluetoothDevice btDevice = mConnectedDevices.get(i);
+                if (TextUtils.equals(btDevice.getAddress(), hardwareAddress)) {
+                    return i;
+                }
+            }
+        }
+        return INVALID_INDEX;
     }
 
     @Override
@@ -83,7 +127,41 @@ public class HandsFreeProfileOutputPreferenceController extends
         setPreference(mediaOutputs, mediaValues, preference);
     }
 
-    @Override
+    int getDefaultDeviceIndex() {
+        // Default device is after all connected devices.
+        return mConnectedDevices.size();
+    }
+
+    void setupPreferenceEntries(CharSequence[] mediaOutputs, CharSequence[] mediaValues,
+            BluetoothDevice activeDevice) {
+        // default to current device
+        mSelectedIndex = getDefaultDeviceIndex();
+        // default device is after all connected devices.
+        final CharSequence defaultSummary = mContext.getText(R.string.media_output_default_summary);
+        mediaOutputs[mSelectedIndex] = defaultSummary;
+        // use default device name as address
+        mediaValues[mSelectedIndex] = defaultSummary;
+        for (int i = 0, size = mConnectedDevices.size(); i < size; i++) {
+            final BluetoothDevice btDevice = mConnectedDevices.get(i);
+            mediaOutputs[i] = btDevice.getAliasName();
+            mediaValues[i] = btDevice.getAddress();
+            if (btDevice.equals(activeDevice)) {
+                // select the active connected device.
+                mSelectedIndex = i;
+            }
+        }
+    }
+
+    void setPreference(CharSequence[] mediaOutputs, CharSequence[] mediaValues,
+            Preference preference) {
+        final ListPreference listPreference = (ListPreference) preference;
+        listPreference.setEntries(mediaOutputs);
+        listPreference.setEntryValues(mediaValues);
+        listPreference.setValueIndex(mSelectedIndex);
+        listPreference.setSummary(mediaOutputs[mSelectedIndex]);
+        mAudioSwitchPreferenceCallback.onPreferenceDataChanged(listPreference);
+    }
+
     public void setActiveBluetoothDevice(BluetoothDevice device) {
         if (!Utils.isAudioModeOngoingCall(mContext)) {
             return;

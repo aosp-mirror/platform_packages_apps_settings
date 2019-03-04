@@ -57,6 +57,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowBluetoothDevice;
 
@@ -107,7 +108,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
     private BluetoothDevice mLeftBluetoothHapDevice;
     private BluetoothDevice mRightBluetoothHapDevice;
     private LocalBluetoothManager mLocalBluetoothManager;
-    private AudioSwitchPreferenceController mController;
+    private HandsFreeProfileOutputPreferenceController mController;
     private List<BluetoothDevice> mProfileConnectedDevices;
     private List<BluetoothDevice> mHearingAidActiveDevices;
 
@@ -477,5 +478,62 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         when(mHeadsetProfile.getActiveDevice()).thenReturn(null);
 
         assertThat(mController.findActiveDevice()).isNull();
+    }
+
+    /**
+     * One Bluetooth devices are available, and select the device.
+     * Preference summary should be device name.
+     */
+    @Test
+    public void onPreferenceChange_toBtDevice_shouldSetBtDeviceName() {
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
+
+        mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_1);
+
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_1);
+    }
+
+    /**
+     * More than one Bluetooth devices are available, and select second device.
+     * Preference summary should be second device name.
+     */
+    @Test
+    public void onPreferenceChange_toBtDevices_shouldSetSecondBtDeviceName() {
+        ShadowBluetoothDevice shadowBluetoothDevice;
+        BluetoothDevice secondBluetoothDevice;
+        secondBluetoothDevice = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2);
+        shadowBluetoothDevice = Shadows.shadowOf(secondBluetoothDevice);
+        shadowBluetoothDevice.setName(TEST_DEVICE_NAME_2);
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
+        mController.mConnectedDevices.add(secondBluetoothDevice);
+
+        mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_2);
+
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_2);
+    }
+
+    /**
+     * mConnectedDevices is empty.
+     * onPreferenceChange should return false.
+     */
+    @Test
+    public void onPreferenceChange_connectedDeviceIsNull_shouldReturnFalse() {
+        mController.mConnectedDevices.clear();
+
+        assertThat(mController.onPreferenceChange(mPreference, TEST_DEVICE_ADDRESS_1)).isFalse();
+    }
+
+    @Test
+    public void onPreferenceChange_toThisDevice_shouldSetDefaultSummary() {
+        mController.mConnectedDevices.clear();
+        mController.mConnectedDevices.add(mBluetoothDevice);
+
+        mController.onPreferenceChange(mPreference,
+                mContext.getText(R.string.media_output_default_summary));
+
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getText(R.string.media_output_default_summary));
     }
 }
