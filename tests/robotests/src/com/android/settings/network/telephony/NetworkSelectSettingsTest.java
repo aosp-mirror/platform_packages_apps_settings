@@ -102,4 +102,12 @@ public class NetworkSelectSettingsTest {
                 (NetworkOperatorPreference) mPreferenceCategory.getPreference(0);
         assertThat(preference.getCellInfo()).isEqualTo(mCellInfo2);
     }
+
+    @Test
+    public void updateForbiddenPlmns_forbiddenPlmnsNull_shouldNotCrash() {
+        when(mTelephonyManager.getForbiddenPlmns()).thenReturn(null);
+
+        // Should not Crash
+        mNetworkSelectSettings.updateForbiddenPlmns();
+    }
 }
