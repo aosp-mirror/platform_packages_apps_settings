@@ -101,35 +101,72 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
 
     @Test
     public void
-    getAvailabilityStatus_noCallbackForIsApplicationNotQualifiedForRole_shouldReturnUnsupported() {
+    getAvailabilityStatus_noCallback_shouldReturnUnsupported() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void
+    getAvailabilityStatus_noCallbackForIsRoleNotVisible_shouldReturnUnsupported() {
+        setApplicationIsQualifiedForRole(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_RoleIsNotVisible_shouldReturnUnsupported() {
+        setRoleIsVisible(false);
+        setApplicationIsQualifiedForRole(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void
+    getAvailabilityStatus_noCallbackForIsApplicationQualifiedForRole_shouldReturnUnsupported() {
+        setRoleIsVisible(true);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void getAvailabilityStatus_applicationIsNotQualifiedForRole_shouldReturnUnsupported() {
-        final ArgumentCaptor<Consumer<Boolean>> callbackCaptor = ArgumentCaptor.forClass(
-                Consumer.class);
-        verify(mPermissionControllerManager).isApplicationQualifiedForRole(eq(TEST_ROLE_NAME), eq(
-                TEST_PACKAGE_NAME), any(Executor.class), callbackCaptor.capture());
-        final Consumer<Boolean> callback = callbackCaptor.getValue();
-        callback.accept(false);
+        setRoleIsVisible(true);
+        setApplicationIsQualifiedForRole(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 DefaultAppShortcutPreferenceControllerBase.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void getAvailabilityStatus_applicationIsQualifiedForRole_shouldReturnAvailable() {
+    public void getAvailabilityStatus_RoleVisibleAndApplicationQualified_shouldReturnAvailable() {
+        setRoleIsVisible(true);
+        setApplicationIsQualifiedForRole(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                DefaultAppShortcutPreferenceControllerBase.AVAILABLE);
+    }
+
+    private void setRoleIsVisible(boolean visible) {
+        final ArgumentCaptor<Consumer<Boolean>> callbackCaptor = ArgumentCaptor.forClass(
+                Consumer.class);
+        verify(mPermissionControllerManager).isRoleVisible(eq(TEST_ROLE_NAME), any(Executor.class),
+                callbackCaptor.capture());
+        final Consumer<Boolean> callback = callbackCaptor.getValue();
+        callback.accept(visible);
+    }
+
+    private void setApplicationIsQualifiedForRole(boolean qualified) {
         final ArgumentCaptor<Consumer<Boolean>> callbackCaptor = ArgumentCaptor.forClass(
                 Consumer.class);
         verify(mPermissionControllerManager).isApplicationQualifiedForRole(eq(TEST_ROLE_NAME), eq(
                 TEST_PACKAGE_NAME), any(Executor.class), callbackCaptor.capture());
         final Consumer<Boolean> callback = callbackCaptor.getValue();
-        callback.accept(true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                DefaultAppShortcutPreferenceControllerBase.AVAILABLE);
+        callback.accept(qualified);
     }
 
     @Test
