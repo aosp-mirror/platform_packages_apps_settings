@@ -26,6 +26,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,10 +36,7 @@ import android.telephony.SubscriptionManager;
 import android.view.Menu;
 import android.view.View;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
+import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.settings.R;
 
@@ -55,6 +53,10 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 @RunWith(RobolectricTestRunner.class)
 public class MobileNetworkActivityTest {
@@ -140,6 +142,25 @@ public class MobileNetworkActivityTest {
         verify(mFragmentTransaction).replace(R.id.main_content, mShowFragment,
                 MOBILE_SETTINGS_TAG + CURRENT_SUB_ID);
     }
+
+    @Test
+    public void phoneChangeReceiver_ignoresStickyBroadcastFromBeforeRegistering() {
+        Activity activity = Robolectric.setupActivity(Activity.class);
+        final int[] onChangeCallbackCount = {0};
+        MobileNetworkActivity.PhoneChangeReceiver receiver =
+                new MobileNetworkActivity.PhoneChangeReceiver(activity, () -> {
+                    onChangeCallbackCount[0]++;
+                });
+        Intent intent = new Intent(TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
+        activity.sendStickyBroadcast(intent);
+
+        receiver.register();
+        assertThat(onChangeCallbackCount[0]).isEqualTo(0);
+
+        activity.sendStickyBroadcast(intent);
+        assertThat(onChangeCallbackCount[0]).isEqualTo(1);
+    }
+
 
     @Test
     public void getSubscriptionId_hasIntent_getIdFromIntent() {
