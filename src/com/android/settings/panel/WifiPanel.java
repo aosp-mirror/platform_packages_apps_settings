@@ -23,52 +23,55 @@ import android.net.Uri;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
-import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
+import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBuilderUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NfcPanel implements PanelContent {
+/**
+ * Panel data class for Wifi settings.
+ */
+public class WifiPanel implements PanelContent {
 
     private final Context mContext;
 
-    public static NfcPanel create(Context context) {
-        return new NfcPanel(context);
+    public static WifiPanel create(Context context) {
+        return new WifiPanel(context);
     }
 
-    private NfcPanel(Context context) {
+    private WifiPanel(Context context) {
         mContext = context.getApplicationContext();
     }
 
     @Override
     public CharSequence getTitle() {
-        return mContext.getText(R.string.nfc_quick_toggle_title);
+        return mContext.getText(R.string.wifi_settings);
     }
 
     @Override
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
-        uris.add(CustomSliceRegistry.NFC_SLICE_URI);
+        uris.add(CustomSliceRegistry.WIFI_SLICE_URI);
         return uris;
     }
 
     @Override
     public Intent getSeeMoreIntent() {
         final String screenTitle =
-                mContext.getText(R.string.connected_device_connections_title).toString();
-        Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                AdvancedConnectedDeviceDashboardFragment.class.getName(),
+                mContext.getText(R.string.network_dashboard_title).toString();
+        final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
+                NetworkDashboardFragment.class.getName(),
                 null /* key */,
                 screenTitle,
-                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
+                SettingsEnums.SETTINGS_NETWORK_CATEGORY);
         intent.setClassName(mContext.getPackageName(), SubSettings.class.getName());
         return intent;
     }
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.PANEL_NFC;
+        return SettingsEnums.PANEL_WIFI;
     }
 }
