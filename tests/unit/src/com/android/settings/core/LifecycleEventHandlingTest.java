@@ -50,8 +50,10 @@ public class LifecycleEventHandlingTest {
     private UiDevice mDevice;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        mDevice.wakeUp();
+        mDevice.executeShellCommand("wm dismiss-keyguard");
         mContext = InstrumentationRegistry.getTargetContext();
         mTargetPackage = mContext.getPackageName();
     }
