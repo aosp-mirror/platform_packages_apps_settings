@@ -132,13 +132,25 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Override
     public void onStart() {
         super.onStart();
-        mForbiddenPlmns = Arrays.asList(mTelephonyManager.getForbiddenPlmns());
+
+        updateForbiddenPlmns();
         setProgressBarVisible(true);
 
         mNetworkScanHelper.startNetworkScan(
                 mUseNewApi
                         ? NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS
                         : NetworkScanHelper.NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS);
+    }
+
+    /**
+     * Update forbidden PLMNs from the USIM App
+     */
+    @VisibleForTesting
+    void updateForbiddenPlmns() {
+        final String[] forbiddenPlmns = mTelephonyManager.getForbiddenPlmns();
+        mForbiddenPlmns = forbiddenPlmns != null
+                ? Arrays.asList(forbiddenPlmns)
+                : new ArrayList<>();
     }
 
     @Override
