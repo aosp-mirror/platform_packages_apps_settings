@@ -104,14 +104,14 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     @Test
     public void refresh_connected_updateCorrectInfo() {
         when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_UNTHETHERED_LEFT_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_LEFT));
+                BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
         when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_UNTHETHERED_RIGHT_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_RIGHT));
+                BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_RIGHT).getBytes());
         when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_UNTHETHERED_CASE_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_MAIN));
+                BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
         when(mCachedDevice.isConnected()).thenReturn(true);
         mController.refresh();
 
@@ -141,18 +141,18 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     }
 
     @Test
-    public void getAvailabilityStatus_unthetheredHeadset_returnAvailable() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("true");
+    public void getAvailabilityStatus_untetheredHeadset_returnAvailable() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_notUnthetheredHeadset_returnUnavailable() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("false");
+    public void getAvailabilityStatus_notUntetheredHeadset_returnUnavailable() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("false".getBytes());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
@@ -169,50 +169,52 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
 
     @Test
     public void onStart_isAvailable_registerCallback() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("true");
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
 
         mController.onStart();
 
-        verify(mBluetoothAdapter).registerMetadataListener(mBluetoothDevice,
-                mController.mMetadataListener, mController.mHandler);
+        verify(mBluetoothAdapter).addOnMetadataChangedListener(mBluetoothDevice,
+                mContext.getMainExecutor() ,mController.mMetadataListener);
     }
 
     @Test
     public void onStop_isAvailable_unregisterCallback() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("true");
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
 
         mController.onStop();
 
-        verify(mBluetoothAdapter).unregisterMetadataListener(mBluetoothDevice);
+        verify(mBluetoothAdapter).removeOnMetadataChangedListener(mBluetoothDevice,
+                mController.mMetadataListener);
     }
 
     @Test
     public void onStart_notAvailable_registerCallback() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("false");
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("false".getBytes());
 
         mController.onStart();
 
-        verify(mBluetoothAdapter, never()).registerMetadataListener(mBluetoothDevice,
-                mController.mMetadataListener, mController.mHandler);
+        verify(mBluetoothAdapter, never()).addOnMetadataChangedListener(mBluetoothDevice,
+                mContext.getMainExecutor() ,mController.mMetadataListener);
     }
 
     @Test
     public void onStop_notAvailable_unregisterCallback() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("false");
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("false".getBytes());
 
         mController.onStop();
 
-        verify(mBluetoothAdapter, never()).unregisterMetadataListener(mBluetoothDevice);
+        verify(mBluetoothAdapter, never()).removeOnMetadataChangedListener(mBluetoothDevice,
+                mController.mMetadataListener);
     }
 
     @Test
     public void onDestroy_isAvailable_recycleBitmap() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("true");
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
         mController.mIconCache.put(ICON_URI, mBitmap);
 
         mController.onDestroy();

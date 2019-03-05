@@ -53,8 +53,8 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
 
     @Override
     public boolean isAvailable() {
-        return !Utils.getBooleanMetaData(mCachedDevice.getDevice(),
-                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET);
+        return !BluetoothUtils.getBooleanMetaData(mCachedDevice.getDevice(),
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
     }
 
     @Override
