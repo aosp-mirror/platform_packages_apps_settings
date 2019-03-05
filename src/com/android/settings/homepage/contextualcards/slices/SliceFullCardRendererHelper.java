@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.view.View;
 
@@ -94,6 +95,7 @@ class SliceFullCardRendererHelper implements SliceView.OnSliceActionListener {
         public SliceViewHolder(View view) {
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
+            sliceView.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
         }
     }
 }
