@@ -37,20 +37,20 @@
         android:gravity="bottom|end">
 
         <Button
-            android:id="@+id/remove"
+            android:id="@+id/keep"
             style="@style/ContextualCardDismissalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/contextual_card_dismiss_remove"/>
+            android:text="@string/contextual_card_dismiss_keep"/>
 
         <Button
-            android:id="@+id/keep"
+            android:id="@+id/remove"
             style="@style/ContextualCardDismissalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/homepage_card_dismissal_button_margin_start"
             android:layout_marginEnd="@dimen/homepage_card_dismissal_button_margin_end"
-            android:text="@string/contextual_card_dismiss_keep"/>
+            android:text="@string/contextual_card_dismiss_remove"/>
 
     </LinearLayout>
 </LinearLayout>

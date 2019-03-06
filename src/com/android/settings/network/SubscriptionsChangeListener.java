@@ -59,7 +59,9 @@ public class SubscriptionsChangeListener extends ContentObserver {
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                subscriptionsChangedCallback();
+                if (!isInitialStickyBroadcast()) {
+                    subscriptionsChangedCallback();
+                }
             }
         };
     }

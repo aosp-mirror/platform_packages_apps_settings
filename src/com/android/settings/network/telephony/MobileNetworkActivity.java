@@ -85,7 +85,14 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
             setContentView(R.layout.mobile_network_settings_container);
         }
         setActionBar(findViewById(R.id.mobile_action_bar));
-        mPhoneChangeReceiver = new PhoneChangeReceiver();
+        mPhoneChangeReceiver = new PhoneChangeReceiver(this, () -> {
+            if (mCurSubscriptionId != SUB_ID_NULL) {
+                // When the radio changes (ex: CDMA->GSM), refresh the fragment.
+                // This is very rare.
+                switchFragment(new MobileNetworkSettings(), mCurSubscriptionId,
+                        true /* forceUpdate */);
+            }
+        });
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
         mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
         mCurSubscriptionId = savedInstanceState != null
@@ -103,16 +110,14 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        final IntentFilter intentFilter = new IntentFilter(
-                TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
-        registerReceiver(mPhoneChangeReceiver, intentFilter);
+        mPhoneChangeReceiver.register();
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(mPhoneChangeReceiver);
+        mPhoneChangeReceiver.unregister();
         mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
     }
 
@@ -235,14 +240,35 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         return MOBILE_SETTINGS_TAG + subscriptionId;
     }
 
-    private class PhoneChangeReceiver extends BroadcastReceiver {
+    @VisibleForTesting
+    static class PhoneChangeReceiver extends BroadcastReceiver {
+        private static final IntentFilter RADIO_TECHNOLOGY_CHANGED_FILTER = new IntentFilter(
+                TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
+
+        private Context mContext;
+        private Client mClient;
+
+        interface Client {
+            void onPhoneChange();
+        }
+
+        public PhoneChangeReceiver(Context context, Client client) {
+            mContext = context;
+            mClient = client;
+        }
+
+        public void register() {
+            mContext.registerReceiver(this, RADIO_TECHNOLOGY_CHANGED_FILTER);
+        }
+
+        public void unregister() {
+            mContext.unregisterReceiver(this);
+        }
+
         @Override
         public void onReceive(Context context, Intent intent) {
-            // When the radio changes (ex: CDMA->GSM), refresh the fragment.
-            // This is very rare to happen.
-            if (mCurSubscriptionId != SUB_ID_NULL) {
-                switchFragment(new MobileNetworkSettings(), mCurSubscriptionId,
-                        true /* forceUpdate */);
+            if (!isInitialStickyBroadcast()) {
+                mClient.onPhoneChange();
             }
         }
     }
