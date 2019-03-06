@@ -128,8 +128,11 @@
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Widget.ActionBar</item>
 
-        <!-- copied from Theme.DeviceDefault.Light.Dialog.Alert -->
+        <!-- copied from Theme.DeviceDefault.Dialog.Alert -->
         <item name="dialogCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
+        <item name="android:windowTitleStyle">@*android:style/DialogWindowTitle.DeviceDefault</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearance.DialogMessage</item>
+        <item name="buttonBarButtonStyle">@*android:style/Widget.DeviceDefault.Button.ButtonBar.AlertDialog</item>
     </style>
 
     <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">
