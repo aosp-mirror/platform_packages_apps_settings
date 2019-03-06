@@ -187,7 +187,6 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         // Collect future and eligible cards
         for (Future<ContextualCard> cardFuture : eligibleCards) {
             try {
-                //TODO(b/124492762): Log latency and timeout occurrence.
                 final ContextualCard card = cardFuture.get(ELIGIBILITY_CHECKER_TIMEOUT_MS,
                         TimeUnit.MILLISECONDS);
                 if (card != null) {
