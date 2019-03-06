@@ -247,6 +247,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             getContext().startActivity(
                     WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
         });
+        mAddPreference.setButtonContentDescription(getString(R.string.wifi_dpp_scan_qr_code));
         mStatusMessagePreference = (LinkablePreference) findPreference(PREF_KEY_STATUS_MESSAGE);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());

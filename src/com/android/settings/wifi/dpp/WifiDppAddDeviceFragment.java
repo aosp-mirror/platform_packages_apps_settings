@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -99,6 +100,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         if (!isConfigurationChange) {
             mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
+            changeFocusAndAnnounceChange(mButtonRight, mTitle);
         }
     }
 
@@ -168,15 +170,17 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mButtonLeft.setVisibility(View.INVISIBLE);
         }
 
-        if (!isConfigurationChange) {
-            mLatestStatusCode = code;
-        }
-
         if (isGoingInitiator()) {
             mSummary.setText(R.string.wifi_dpp_sharing_wifi_with_this_device);
         }
+
         mProgressBar.setVisibility(isGoingInitiator() ? View.VISIBLE : View.INVISIBLE);
         mButtonRight.setVisibility(isGoingInitiator() ? View.INVISIBLE : View.VISIBLE);
+
+        if (!isConfigurationChange) {
+            mLatestStatusCode = code;
+            changeFocusAndAnnounceChange(mButtonRight, mSummary);
+        }
     }
 
     private boolean hasRetryButton(int code) {
@@ -277,6 +281,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mButtonRight.setVisibility(View.INVISIBLE);
             startWifiDppConfiguratorInitiator();
             updateSummary();
+            mTitleSummaryContainer.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
         });
 
         if (savedInstanceState != null) {
@@ -288,6 +293,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             } else {
                 showErrorUi(mLatestStatusCode, /* isConfigurationChange */ true);
             }
+        } else {
+            changeFocusAndAnnounceChange(mButtonRight, mTitleSummaryContainer);
         }
     }
 
@@ -353,5 +360,18 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         } else {
             mSummary.setText(getString(R.string.wifi_dpp_add_device_to_wifi, getSsid()));
         }
+    }
+
+    /**
+     * This fragment will change UI display and text messages for events. To improve Talkback user
+     * experienience, using this method to focus on a right component and announce a changed text
+     * after an UI changing event.
+     *
+     * @param focusView The UI component which will be focused
+     * @param announceView The UI component's text will be talked
+     */
+    private void changeFocusAndAnnounceChange(View focusView, View announceView) {
+        focusView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+        announceView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
     }
 }

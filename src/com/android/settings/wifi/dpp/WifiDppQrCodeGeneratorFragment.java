@@ -60,6 +60,14 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // setTitle for Talkback
+        final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
+        if (wifiNetworkConfig.isHotspot()) {
+            getActivity().setTitle(R.string.wifi_dpp_share_hotspot);
+        } else {
+            getActivity().setTitle(R.string.wifi_dpp_share_wifi);
+        }
+
         setHasOptionsMenu(true);
         final ActionBar actionBar = getActivity().getActionBar();
         if (actionBar != null) {
