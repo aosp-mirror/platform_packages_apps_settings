@@ -22,6 +22,15 @@
     settings:keywords="@string/keywords_sounds"
     settings:initialExpandedChildrenCount="9">
 
+    <!-- Remote volume -->
+    <com.android.settings.notification.RemoteVolumeSeekBarPreference
+        android:key="remote_volume"
+        android:icon="@drawable/ic_volume_remote"
+        android:title="@string/remote_media_volume_option_title"
+        android:order="-185"
+        settings:allowDynamicSummaryInSlice="true"
+        settings:controller="com.android.settings.notification.RemoteVolumePreferenceController"/>
+
     <!-- Media volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="media_volume"
