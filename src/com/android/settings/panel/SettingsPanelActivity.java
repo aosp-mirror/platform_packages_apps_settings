@@ -16,13 +16,11 @@
 
 package com.android.settings.panel;
 
-import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
 import static com.android.settingslib.media.MediaOutputSliceConstants.EXTRA_PACKAGE_NAME;
 
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -75,15 +73,8 @@ public class SettingsPanelActivity extends FragmentActivity {
             return;
         }
 
-        final String mediaPackageName =
-                callingIntent.getStringExtra(EXTRA_PACKAGE_NAME);
-
-        if (TextUtils.equals(ACTION_MEDIA_OUTPUT, callingIntent.getAction())
-                && TextUtils.isEmpty(mediaPackageName)) {
-            Log.e(TAG, "Missing EXTRA_PACKAGE_NAME, closing Panel Activity");
-            finish();
-            return;
-        }
+        // We will use it once media output switch panel support remote device.
+        final String mediaPackageName = callingIntent.getStringExtra(EXTRA_PACKAGE_NAME);
 
         setContentView(R.layout.settings_panel);
 

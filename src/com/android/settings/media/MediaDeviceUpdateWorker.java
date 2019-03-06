@@ -70,7 +70,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     @Override
     public void close() {
-
+        mLocalMediaManager = null;
     }
 
     @Override
