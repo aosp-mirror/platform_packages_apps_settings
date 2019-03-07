@@ -801,10 +801,8 @@
     <string name="rx_link_speed" msgid="5729003360923133988">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> एमबीपीएस"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> वाई-फ़ाई को चालू करना चाहता है"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> वाई-फ़ाई को बंद करना चाहता है"</string>
-    <!-- no translation found for art_verifier_for_debuggable_title (6029838014407791341) -->
-    <skip />
-    <!-- no translation found for art_verifier_for_debuggable_summary (2250352478065428399) -->
-    <skip />
+    <string name="art_verifier_for_debuggable_title" msgid="6029838014407791341">"डीबग वाले ऐप के बाइटकोड की पुष्टि करें"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="2250352478065428399">"डीबग किए जा सकने वाले ऐप्लिकेशन के लिए, ART को बाइटकोड की पुष्टि करने की मंज़ूरी दें"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"आस-पास के डिवाइस से संपर्क (एनएफसी)"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"जब टैबलेट अन्य डिवाइस को स्पर्श करे तो डेटा ट्रांसफर करने दें"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"जब फ़ोन दूसरे डिवाइस को टच करे तो डेटा ट्रांसफर करने दें"</string>
@@ -919,8 +917,7 @@
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"वाई-फ़ाई हॉटस्पॉट से डिवाइस काे जाेड़ने के लिए कम से कम एक बैंड चुनें:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP सेटिंग"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"निजता"</string>
-    <!-- no translation found for wifi_privacy_settings_ephemeral_summary (1539659414108891004) -->
-    <skip />
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"अपने आप चुना गया एमएसी"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="8674936581557695411">"कोई डिवाइस जोड़ें"</string>
     <string name="wifi_dpp_center_qr_code" msgid="6244508369721032655">"डिवाइस को “<xliff:g id="SSID">%1$s</xliff:g>” से जोड़ने के लिए QR कोड को कैमरा विंडो के बीच में लाएं"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="4794621158747044107">"QR कोड स्कैन करें"</string>
@@ -928,20 +925,13 @@
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="8096370383700478819">"QR कोड स्कैन करके वाई-फ़ाई से जुड़ें"</string>
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"वाई-फ़ाई शेयर करें"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="8416440732377359392">"इस QR कोड को किसी दूसरे डिवाइस से स्कैन करके “<xliff:g id="SSID">%1$s</xliff:g>” में शामिल हों"</string>
-    <!-- no translation found for wifi_dpp_could_not_detect_valid_qr_code (641893675646330576) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_authentication_or_configuration (3372757783382381044) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_not_compatible (2829930473520603740) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_timeout (5228320772245820458) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_generic (8030831192606098356) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_not_supported (2643768115109632725) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_check_connection_try_again (2632966336733361805) -->
-    <skip />
+    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"QR कोड नहीं पहचाना जा सका. कोड को बीच में रखें और दोबारा कोशिश करें"</string>
+    <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"फिर से कोशिश करें. अगर समस्या ठीक नहीं होती है, तो डिवाइस बनाने वाली कंपनी से संपर्क करें"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"काेई गड़बड़ी हुई"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"देख लें कि डिवाइस प्लग इन किया हुआ है, चार्ज हो चुका है, और चालू है"</string>
+    <string name="wifi_dpp_failure_generic" msgid="8030831192606098356">"देख लें कि डिवाइस प्लग इन किया हुआ है, चार्ज हो चुका है, और चालू है. अगर समस्या ठीक नहीं होती है, तो डिवाइस बनाने वाली कंपनी से संपर्क करें"</string>
+    <string name="wifi_dpp_failure_not_supported" msgid="2643768115109632725">"इस डिवाइस पर “<xliff:g id="SSID">%1$s</xliff:g>” जोड़ने की सुविधा काम नहीं करती"</string>
+    <string name="wifi_dpp_check_connection_try_again" msgid="2632966336733361805">"कनेक्शन जाँचें और फिर से कोशिश करें"</string>
     <string name="wifi_dpp_choose_network" msgid="7139308800110200281">"नेटवर्क चुनें"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4025269026652486605">"अपना डिवाइस जोड़ने के लिए कोई नेटवर्क चुनें"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5459084866460319042">"इस डिवाइस को “<xliff:g id="SSID">%1$s</xliff:g>” से जोड़ें?"</string>
@@ -1077,11 +1067,6 @@
     <item msgid="7715869266611010880">"मोबाइल"</item>
     <item msgid="2838022395783120596">"केवल वाई-फ़ाई"</item>
   </string-array>
-  <string-array name="wifi_calling_mode_values">
-    <item msgid="4799585830102342375">"2"</item>
-    <item msgid="1171822231056612021">"1"</item>
-    <item msgid="3194458950573886239">"0"</item>
-  </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"वाई-फ़ाई को प्राथमिकता"</item>
     <item msgid="5074515506087318555">"मोबाइल को प्राथमिकता"</item>
@@ -1090,12 +1075,7 @@
     <item msgid="6132150507201243768">"वाई-फ़ाई"</item>
     <item msgid="1118703915148755405">"मोबाइल"</item>
   </string-array>
-  <string-array name="wifi_calling_mode_values_without_wifi_only">
-    <item msgid="2339246858001475047">"2"</item>
-    <item msgid="6200207341126893791">"1"</item>
-  </string-array>
-    <!-- no translation found for wifi_calling_off_explanation (564780186974911501) -->
-    <skip />
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"वाई-फ़ाई कॉलिंग चालू होने पर, आपका फ़ोन वाई-फ़ाई या मोबाइल और इंटरनेट सेवा देने वाली कंपनी के नेटवर्क से कॉल कर सकता है. यह आपकी सेटिंग और इस बात पर निर्भर करेगा कि इनमें से किस सिग्नल का प्रदर्शन बेहतर है. इस सुविधा को चालू करने से पहले, शुल्क और दूसरी जानकारी पाने के लिए मोबाइल और इंटरनेट सेवा देने वाली कंपनी से बात करें. <xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"आपातकालीन पता"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"जब आप वाई-फ़ाई पर आपातकालीन कॉल करते हैं, तब आपकी मौजूदा जगह को आपके पते के तौर पर इस्तेमाल किया जाता है"</string>
@@ -2065,8 +2045,7 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"दो मिनट"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"पढ़ने के लिए समय"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"कार्रवाई करने के लिए समय"</string>
-    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
-    <skip />
+    <string name="accessibility_content_timeout_preference_summary" msgid="2637322628166175371">"चुनें कि कुछ समय तक दिखाई देने वाले ऐसे मैसेज जो आपको पढ़ने हैं वे कितनी देर तक दिखाई दें.\n\nयह सेटिंग सभी ऐप्लिकेशन में काम नहीं करती."</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"चुनें कि आपको कार्रवाई करने के लिए कहने वाले मैसेज कितनी देर तक दिखाने हैं, लेकिन वे सिर्फ़ कुछ समय के लिए ही दिखाई देते हैं.\n\nयह सेटिंग सभी ऐप्लिकेशन पर काम नहीं करती है."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"दबाकर रखने की अवधि"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"रंग को पलटें"</string>
@@ -3017,7 +2996,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"ब्लूटूथ, एनएफ़सी"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"ब्लूटूथ"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ऐप्लिकेशन और सूचनाएं"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"अनुमतियां, डिफ़ॉल्ट ऐप"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (6513508041918469381) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"कार्य प्रोफ़ाइल चालू होने पर ऐप्लिकेशन से जुड़ी सूचना नहीं देखी जा सकती है."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"खाते"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"कोई खाता नहीं जोड़ा गया"</string>
@@ -3080,7 +3060,8 @@
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"हमेशा चालू स्क्रीन, लॉक स्क्रीन डिसप्ले"</string>
     <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"लॉक स्क्रीन सूचना"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"चेहरा"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"फ़िंगरप्रिंट"</string>
+    <!-- no translation found for keywords_fingerprint_settings (4425098764810291897) -->
+    <skip />
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"हल्की रोशनी वाली स्क्रीन, टचस्क्रीन, बैटरी, स्मार्ट ब्राइटनेस, डाइनैमिक ब्राइटनेस"</string>
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"हल्की रोशनी वाली स्क्रीन, सुलाएं (कम बैटरी मोड), बैटरी, टाइम आउट, ध्यान दें, डिसप्ले, स्क्रीन, गतिविधि न होना"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"घुमाएं, फ़्लिप करें, घुमाव, पोर्ट्रेट, लैंडस्केप, स्क्रीन की दिशा, वर्टिकल, हॉरिज़ॉन्टल"</string>
@@ -3113,6 +3094,8 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"रिंगर मौन पर सेट है"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"रिंग की आवाज़ 80% है"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"मीडिया की आवाज़"</string>
+    <!-- no translation found for remote_media_volume_option_title (7602586327091007461) -->
+    <skip />
     <string name="call_volume_option_title" msgid="1265865226974255384">"कॉल की आवाज़"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"अलार्म की आवाज़"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"रिंग की आवाज़"</string>
@@ -3278,12 +3261,9 @@
     <string name="hide_silent_icons_summary" msgid="7479863645940885952">"स्थिति बार में बिना आवाज़ की सूचनाओं के आइकॉन छिपाएं"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"सूचना बिंदुओं की अनुमति दें"</string>
     <string name="notification_bubbles_title" msgid="4750896810493858296">"सूचना बबल दिखाने की मंज़ूरी दें"</string>
-    <!-- no translation found for swipe_direction_title (6877543492435053137) -->
-    <skip />
-    <!-- no translation found for swipe_direction_ltr (3623394320915041215) -->
-    <skip />
-    <!-- no translation found for swipe_direction_rtl (4972099509548044938) -->
-    <skip />
+    <string name="swipe_direction_title" msgid="6877543492435053137">"स्वाइप करने पर होने वाली कार्रवाइयां"</string>
+    <string name="swipe_direction_ltr" msgid="3623394320915041215">"खारिज करने के लिए दाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए बाईं ओर"</string>
+    <string name="swipe_direction_rtl" msgid="4972099509548044938">"खारिज करने के लिए बाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए दाईं ओर"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"ब्लिंक लाइट"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"लॉक स्क्रीन पर दिखाई दे"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"कार्य प्रोफ़ाइल लॉक होने पर"</string>
@@ -3607,8 +3587,7 @@
     <string name="advanced_apps" msgid="4812975097124803873">"बेहतर सेटिंग"</string>
     <string name="configure_apps" msgid="6685680790825882528">"ऐप्स कॉन्‍फ़िगर करें"</string>
     <string name="unknown_app" msgid="5275921288718717656">"अज्ञात ऐप"</string>
-    <!-- no translation found for app_permissions (5584182129908141622) -->
-    <skip />
+    <string name="app_permissions" msgid="5584182129908141622">"अनुमतियों का प्रबंधन"</string>
     <string name="app_permissions_summary" msgid="5163974162150406324">"<xliff:g id="APPS">%1$s</xliff:g> का उपयोग करने वाले ऐप्लिकेशन"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"वेक करने के लिए टैप करें"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"डिवाइस की स्क्रीन को चालू करने के लिए, स्क्रीन पर कहीं भी दो बार छूएं"</string>
@@ -4400,8 +4379,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"फिर से कोशिश करें"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"कुछ गड़बड़ी हुई है ऐप्लिकेशन ने डिवाइस चुनने का अनुरोध रद्द कर दिया है."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"कनेक्शन कामयाब रहा"</string>
-    <!-- no translation found for network_connection_request_dialog_showall (6938922880244567521) -->
-    <skip />
+    <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"सभी दिखाएं"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस कनेक्ट हैं</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस कनेक्ट हैं</item>
@@ -4429,8 +4407,7 @@
     <string name="search_bar_account_avatar_content_description" msgid="4718261366290530792"></string>
     <string name="permission_bar_chart_empty_text" msgid="4380731551728553852">"किसी भी ऐप्लिकेशन ने अनुमतियों का इस्तेमाल नहीं किया"</string>
     <string name="permission_bar_chart_title" msgid="7748942699610196566">"पिछले 24 घंटों में सबसे ज़्यादा इस्तेमाल की गई अनुमतियां"</string>
-    <!-- no translation found for permission_bar_chart_details (5648719432839246667) -->
-    <skip />
+    <string name="permission_bar_chart_details" msgid="5648719432839246667">"अनुमतियों का डैशबोर्ड देखें"</string>
     <string name="accessibility_usage_title" msgid="5136753034714150614">"सुलभता सुविधाओं का इस्तेमाल"</string>
     <plurals name="accessibility_usage_summary" formatted="false" msgid="4364945481915750314">
       <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> सुविधाओं को आपके डिवाइस पर पूरा एक्सेस है</item>
@@ -4438,11 +4415,12 @@
     </plurals>
     <string name="manage_app_notification" msgid="877012013856561440">"<xliff:g id="APP_NAME">%1$s</xliff:g> की सूचनाएं प्रबंधित करें"</string>
     <string name="no_suggested_app" msgid="5722034393216359231">"कोई भी सुझाया गया ऐप्लिकेशन नहीं है"</string>
-    <!-- no translation found for notification_few_channel_count_summary (1090888820158822106) -->
-    <!-- no translation found for notification_many_channel_count_summary (8647409434789898073) -->
-    <skip />
+    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="1090888820158822106">
+      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> सूचना के चैनल.</item>
+      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> सूचना के चैनल.</item>
+    </plurals>
+    <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> सूचना के चैनल. सभी को प्रबंधित करने के लिए टैप करें."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"स्विच आउटपुट"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"इस समय <xliff:g id="DEVICE_NAME">%1$s</xliff:g> पर खेल रहा है"</string>
-    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
-    <skip />
+    <string name="forget_passpoint_dialog_message" msgid="1996970308065448295">"शायद सेवा देने वाली इस कंपनी की आपकी सदस्यता रद्द हो गई है बार-बार रिन्यू होने वाली सदस्यताएं रद्द नहीं होंगी. ज़्यादा जानकारी के लिए सेवा देने वाली कंपनी से संपर्क करें."</string>
 </resources>
