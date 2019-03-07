@@ -157,8 +157,8 @@ public class RestrictedListPreference extends CustomListPreference {
         return null;
     }
 
-    protected ListAdapter createListAdapter() {
-        return new RestrictedArrayAdapter(getContext(), getEntries(),
+    protected ListAdapter createListAdapter(Context context) {
+        return new RestrictedArrayAdapter(context, getEntries(),
                 getSelectedValuePos());
     }
 
@@ -172,9 +172,8 @@ public class RestrictedListPreference extends CustomListPreference {
     @Override
     protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
-        builder.setAdapter(createListAdapter(), listener);
+        builder.setAdapter(createListAdapter(builder.getContext()), listener);
     }
-
 
     public class RestrictedArrayAdapter extends ArrayAdapter<CharSequence> {
         private final int mSelectedIndex;

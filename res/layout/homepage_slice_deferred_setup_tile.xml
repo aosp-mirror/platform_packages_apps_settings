@@ -21,59 +21,49 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ViewFlipper
-        android:id="@+id/view_flipper"
+    <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/homepage_card_padding_start"
+        android:paddingEnd="@dimen/homepage_card_padding_end"
+        android:paddingTop="@dimen/homepage_deferred_setup_card_padding_top"
+        android:paddingBottom="@dimen/homepage_deferred_setup_card_padding_bottom">
 
-        <LinearLayout
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="left"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/homepage_card_padding_start"
-            android:paddingEnd="@dimen/homepage_card_padding_end"
-            android:paddingTop="@dimen/homepage_deferred_setup_card_padding_top"
-            android:paddingBottom="@dimen/homepage_deferred_setup_card_padding_bottom">
+        <ImageView
+            android:id="@android:id/icon"
+            android:layout_width="@dimen/homepage_card_icon_size"
+            android:layout_height="@dimen/homepage_card_icon_size"/>
 
-            <ImageView
-                android:id="@android:id/icon"
-                android:layout_width="@dimen/homepage_card_icon_size"
-                android:layout_height="@dimen/homepage_card_icon_size"/>
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/homepage_deferred_setup_card_title_margin_top"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="1"
+            android:textAppearance="@style/TextAppearance.DeferredSetupCardTitle"/>
 
-            <TextView
-                android:id="@android:id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/homepage_deferred_setup_card_title_margin_top"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:minLines="1"
-                android:textAppearance="@style/TextAppearance.DeferredSetupCardTitle"/>
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/homepage_deferred_setup_card_summary_margin_top"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:minLines="1"
+            android:textAppearance="@style/TextAppearance.DeferredSetupCardSummary"/>
 
-            <TextView
-                android:id="@android:id/summary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/homepage_deferred_setup_card_summary_margin_top"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:minLines="1"
-                android:textAppearance="@style/TextAppearance.DeferredSetupCardSummary"/>
+        <Button
+            android:id="@+id/finish_setup"
+            style="@style/DeferredSetupCardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/homepage_deferred_setup_card_button_margin_top"
+            android:text="@string/suggestion_button_text"/>
 
-            <Button
-                android:id="@+id/finish_setup"
-                style="@style/DeferredSetupCardButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/homepage_deferred_setup_card_button_margin_top"
-                android:text="@string/suggestion_button_text"/>
-
-        </LinearLayout>
-
-        <!--dismissal view-->
-        <include layout="@layout/homepage_dismissal_view"/>
-
-    </ViewFlipper>
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -2489,7 +2489,7 @@
         <item>Mobile</item>
         <item>Wi-Fi only</item>
     </string-array>
-    <string-array name="wifi_calling_mode_values">
+    <string-array name="wifi_calling_mode_values" translatable="false">
         <item>"2"</item>
         <item>"1"</item>
         <item>"0"</item>
@@ -2502,7 +2502,7 @@
         <item>Wi-Fi</item>
         <item>Mobile</item>
     </string-array>
-    <string-array name="wifi_calling_mode_values_without_wifi_only">
+    <string-array name="wifi_calling_mode_values_without_wifi_only" translatable="false">
         <item>"2"</item>
         <item>"1"</item>
     </string-array>
@@ -7001,7 +7001,7 @@
     <!-- Title for setting tile leading to Apps & Notification settings [CHAR LIMIT=40]-->
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
     <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="app_and_notification_dashboard_summary">Permissions, default apps</string>
+    <string name="app_and_notification_dashboard_summary">Assistant, recent apps, default apps</string>
     <!-- Toast shown when an app in the work profile attempts to open notification settings. The apps in the work profile cannot access notification settings. [CHAR LIMIT=NONE] -->
     <string name="notification_settings_work_profile">Notification access is not available for apps in the work profile.</string>
     <!-- Title for setting tile leading to account settings [CHAR LIMIT=40]-->
@@ -7192,6 +7192,9 @@
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
+
+    <!-- Sound: Title for the option managing remote media volume. [CHAR LIMIT=30] -->
+    <string name="remote_media_volume_option_title">Cast volume</string>
 
     <!-- Sound: Title for the option managing call volume. [CHAR LIMIT=30] -->
     <string name="call_volume_option_title">Call volume</string>

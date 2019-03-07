@@ -40,8 +40,8 @@ import java.util.Objects;
 public class VolumeSeekBarPreference extends SeekBarPreference {
     private static final String TAG = "VolumeSeekBarPreference";
 
+    protected SeekBar mSeekBar;
     private int mStream;
-    private SeekBar mSeekBar;
     private SeekBarVolumizer mVolumizer;
     private Callback mCallback;
     private ImageView mIconView;
@@ -121,7 +121,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         init();
     }
 
-    private void init() {
+    protected void init() {
         if (mSeekBar == null) return;
         final SeekBarVolumizer.Callback sbvc = new SeekBarVolumizer.Callback() {
             @Override
@@ -158,7 +158,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         }
     }
 
-    private void updateIconView() {
+    protected void updateIconView() {
         if (mIconView == null) return;
         if (mIconResId != 0) {
             mIconView.setImageResource(mIconResId);
@@ -195,7 +195,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         updateSuppressionText();
     }
 
-    private void updateSuppressionText() {
+    protected void updateSuppressionText() {
         if (mSuppressionTextView != null && mSeekBar != null) {
             mSuppressionTextView.setText(mSuppressionText);
             final boolean showSuppression = !TextUtils.isEmpty(mSuppressionText);
