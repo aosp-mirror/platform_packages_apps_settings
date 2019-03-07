@@ -940,10 +940,8 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"เลือกเครือข่ายอื่น"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"เพิ่มอุปกรณ์ไม่ได้"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"พบอุปกรณ์แล้ว"</string>
-    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
-    <skip />
+    <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="5579154298588011712">"กำลังแชร์ Wi‑Fi กับอุปกรณ์เครื่องนี้…"</string>
+    <string name="wifi_dpp_connecting" msgid="7111851118215580428">"กำลังเชื่อมต่อ…"</string>
     <string name="retry" msgid="6472609612090877557">"ลองอีกครั้ง"</string>
     <string name="wifi_shared" msgid="844142443226926070">"แชร์กับผู้ใช้อุปกรณ์คนอื่นๆ"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ไม่เปลี่ยน)"</string>
@@ -1067,11 +1065,6 @@
     <item msgid="7715869266611010880">"อินเทอร์เน็ตมือถือ"</item>
     <item msgid="2838022395783120596">"Wi-Fi เท่านั้น"</item>
   </string-array>
-  <string-array name="wifi_calling_mode_values">
-    <item msgid="4799585830102342375">"2"</item>
-    <item msgid="1171822231056612021">"1"</item>
-    <item msgid="3194458950573886239">"0"</item>
-  </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"ต้องการใช้ Wi-Fi"</item>
     <item msgid="5074515506087318555">"ต้องการใช้อินเทอร์เน็ตมือถือ"</item>
@@ -1079,10 +1072,6 @@
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
     <item msgid="1118703915148755405">"อินเทอร์เน็ตมือถือ"</item>
-  </string-array>
-  <string-array name="wifi_calling_mode_values_without_wifi_only">
-    <item msgid="2339246858001475047">"2"</item>
-    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="564780186974911501">"เมื่อเปิดการโทรผ่าน Wi-Fi โทรศัพท์จะกำหนดเส้นทางการโทรผ่านเครือข่าย Wi-Fi หรือเครือข่ายของผู้ให้บริการได้ ทั้งนี้ขึ้นอยู่กับค่ากำหนดของคุณและสัญญาณฝั่งที่แรงกว่า โปรดสอบถามค่าธรรมเนียมและรายละเอียดอื่นๆ กับผู้ให้บริการก่อนที่จะเปิดฟีเจอร์นี้<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
@@ -2054,8 +2043,7 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 นาที"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"เวลาในการอ่าน"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"เวลาในการดำเนินการ"</string>
-    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
-    <skip />
+    <string name="accessibility_content_timeout_preference_summary" msgid="2637322628166175371">"เลือกระยะเวลาแสดงข้อความที่คุณต้องการอ่านแต่ปรากฏเพียงชั่วคราวเท่านั้น\n\nแอปบางแอปไม่รองรับการตั้งค่านี้"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"เลือกระยะเวลาแสดงข้อความที่ขอให้คุณดำเนินการแต่ปรากฏเพียงชั่วคราวเท่านั้น\n\nแอปบางแอปไม่รองรับการตั้งค่านี้"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"การหน่วงเวลาด้วยการแตะค้างไว้"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"การกลับสี"</string>
@@ -3006,7 +2994,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"บลูทูธ, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"บลูทูธ"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"แอปและการแจ้งเตือน"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"สิทธิ์ แอปเริ่มต้น"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (6513508041918469381) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"การเข้าถึงการแจ้งเตือนไม่พร้อมใช้งานสำหรบแอปในโปรไฟล์งาน"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"บัญชี"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"ไม่ได้เพิ่มบัญชี"</string>
@@ -3069,7 +3058,8 @@
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"หน้าจอแอมเบียนท์ หน้าจอล็อก"</string>
     <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"การแจ้งเตือนในหน้าจอล็อก"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"ใบหน้า"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"ลายนิ้วมือ"</string>
+    <!-- no translation found for keywords_fingerprint_settings (4425098764810291897) -->
+    <skip />
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"หน้าจอสลัว หน้าจอสัมผัส แบตเตอรี่ ความสว่างอัจฉริยะ ความสว่างแบบไดนามิก"</string>
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"หรี่แสงหน้าจอ สลีป แบตเตอรี่ ระยะหมดเวลา ความสนใจ จอแสดงผล หน้าจอ ไม่มีการใช้งาน"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"หมุน, พลิก, การหมุน, แนวตั้ง, แนวนอน, การวางแนว, ตั้ง, นอน"</string>
@@ -3102,6 +3092,8 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"ตั้งโปรแกรมสร้างเสียงเรียกเข้าเป็นโหมดเงียบแล้ว"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"ระดับเสียงเรียกเข้าที่ 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"ระดับเสียงของสื่อ"</string>
+    <!-- no translation found for remote_media_volume_option_title (7602586327091007461) -->
+    <skip />
     <string name="call_volume_option_title" msgid="1265865226974255384">"ระดับเสียงการโทร"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"ระดับเสียงปลุก"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"ระดับเสียงเรียกเข้า"</string>
@@ -4219,10 +4211,8 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"อัปเดตโหมดห้ามรบกวน"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"หยุดการแจ้งเตือนชั่วคราวเพื่อไม่ให้มีสิ่งรบกวน"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ฟีเจอร์นี้ไม่สามารถใช้ได้บนอุปกรณ์นี้"</string>
-    <!-- no translation found for disabled_feature (2102058661071271076) -->
-    <skip />
-    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
-    <skip />
+    <string name="disabled_feature" msgid="2102058661071271076">"ฟีเจอร์นี้ไม่พร้อมใช้งาน"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"ฟีเจอร์ดังกล่าวจะทำให้โทรศัพท์เครื่องนี้ทำงานช้าลง"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"บังคับใช้การวัด GNSS เต็มรูปแบบ"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"ติดตามระบบดาวเทียมและความถี่สัญญาณ GNSS ทั้งหมดโดยไม่มีการปิดพักเพื่อประหยัดพลังงาน"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"อนุญาตให้เริ่มกิจกรรมในเบื้องหลัง"</string>
@@ -4428,6 +4418,5 @@
     <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"ช่องทางการแจ้งเตือน <xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> ช่องทาง แตะเพื่อจัดการทั้งหมด"</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"เปลี่ยนเอาต์พุต"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"กำลังเล่นใน <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
-    <skip />
+    <string name="forget_passpoint_dialog_message" msgid="1996970308065448295">"ระบบอาจยกเลิกการสมัครใช้บริการกับผู้ให้บริการรายนี้ แต่จะไม่ยกเลิกการสมัครใช้บริการที่เกิดซ้ำ โปรดตรวจสอบข้อมูลเพิ่มเติมกับผู้ให้บริการของคุณ"</string>
 </resources>
