@@ -80,7 +80,7 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
         Context context = spy(RuntimeEnvironment.application);
         when(context.getApplicationContext()).thenReturn(context);
         when(NfcAdapter.getDefaultAdapter(context)).thenReturn(mNfcAdapter);
-        when(mNfcAdapter.deviceSupportsNfcSecure()).thenReturn(true);
+        when(mNfcAdapter.isSecureNfcSupported()).thenReturn(true);
         final List<String> niks =
                 AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                         .getNonIndexableKeys(context);
