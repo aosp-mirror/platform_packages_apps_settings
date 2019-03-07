@@ -778,9 +778,9 @@ public class WifiDetailPreferenceControllerTest {
 
         mockWifiConfig.networkId = 5;
         when(mockWifiConfig.isPasspoint()).thenReturn(true);
+        spyController.displayPreference(mockScreen);
         FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
 
-        spyController.displayPreference(mockScreen);
         mForgetClickListener.getValue().onClick(null);
 
         verify(mockWifiManager, times(0)).removePasspointConfiguration(mockWifiConfig.FQDN);

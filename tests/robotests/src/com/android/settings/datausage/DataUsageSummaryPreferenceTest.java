@@ -488,7 +488,7 @@ public class DataUsageSummaryPreferenceTest {
                 new Intent());
         mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
         final String cycleText = "The quick fox";
-        mSummaryPreference.setWifiMode(true, cycleText);
+        mSummaryPreference.setWifiMode(true /* isWifiMode */, cycleText, false /* isSingleWifi */);
         doReturn(200L).when(mSummaryPreference).getHistoricalUsageLevel();
 
         bindViewHolder();
@@ -524,7 +524,8 @@ public class DataUsageSummaryPreferenceTest {
     @Test
     public void testSetWifiMode_noUsageInfo_shouldDisableLaunchButton() {
         mSummaryPreference = spy(mSummaryPreference);
-        mSummaryPreference.setWifiMode(true, "Test cycle text");
+        mSummaryPreference.setWifiMode(true /* isWifiMode */, "Test cycle text",
+                false /* isSingleWifi */);
         doReturn(0L).when(mSummaryPreference).getHistoricalUsageLevel();
 
         bindViewHolder();

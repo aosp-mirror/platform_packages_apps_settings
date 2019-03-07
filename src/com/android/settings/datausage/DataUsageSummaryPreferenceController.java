@@ -65,10 +65,10 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     private final EntityHeaderController mEntityHeaderController;
     private final Lifecycle mLifecycle;
     private final PreferenceFragmentCompat mFragment;
-    private final DataUsageController mDataUsageController;
-    private final DataUsageInfoController mDataInfoController;
+    protected final DataUsageController mDataUsageController;
+    protected final DataUsageInfoController mDataInfoController;
     private final NetworkTemplate mDefaultTemplate;
-    private final NetworkPolicyEditor mPolicyEditor;
+    protected final NetworkPolicyEditor mPolicyEditor;
     private final int mDataUsageTemplate;
     private final boolean mHasMobileData;
     private final SubscriptionManager mSubscriptionManager;
@@ -200,11 +200,13 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         if (DataUsageUtils.hasSim(mActivity)) {
             info = mDataUsageController.getDataUsageInfo(mDefaultTemplate);
             mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
-            summaryPreference.setWifiMode(/* isWifiMode */ false, /* usagePeriod */ null);
+            summaryPreference.setWifiMode(/* isWifiMode */ false,
+                    /* usagePeriod */ null, /* isSingleWifi */ false);
         } else {
             info = mDataUsageController.getDataUsageInfo(
                     NetworkTemplate.buildTemplateWifiWildcard());
-            summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */ info.period);
+            summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */
+                    info.period, /* isSingleWifi */ false);
             summaryPreference.setLimitInfo(null);
             summaryPreference.setUsageNumbers(info.usageLevel,
                     /* dataPlanSize */ -1L,

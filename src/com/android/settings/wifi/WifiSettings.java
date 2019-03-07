@@ -67,6 +67,7 @@ import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.SearchIndexable;
@@ -968,8 +969,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
+        final AccessPoint accessPoint = pref.getAccessPoint();
+        final Context context = getContext();
+        final CharSequence title = SavedAccessPointsWifiSettings.usingDetailsFragment(context) ?
+                accessPoint.getTitle() : context.getText(R.string.pref_title_network_details);
+
         new SubSettingLauncher(getContext())
-                .setTitleRes(R.string.pref_title_network_details)
+                .setTitleText(title)
                 .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(pref.getExtras())
                 .setSourceMetricsCategory(getMetricsCategory())

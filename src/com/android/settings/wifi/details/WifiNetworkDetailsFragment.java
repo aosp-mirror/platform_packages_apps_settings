@@ -153,11 +153,11 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
         controllers.add(mWifiDetailPreferenceController);
         controllers.add(new WifiMeteredPreferenceController(context, mAccessPoint.getConfig()));
-        WifiPrivacyPreferenceController preferenceController = new WifiPrivacyPreferenceController(
+        WifiPrivacyPreferenceController privacyController = new WifiPrivacyPreferenceController(
                 context);
-        preferenceController.setWifiConfiguration(mAccessPoint.getConfig());
-        preferenceController.setIsEphemeral(mAccessPoint.isEphemeral());
-        controllers.add(preferenceController);
+        privacyController.setWifiConfiguration(mAccessPoint.getConfig());
+        privacyController.setIsEphemeral(mAccessPoint.isEphemeral());
+        controllers.add(privacyController);
 
         return controllers;
     }
