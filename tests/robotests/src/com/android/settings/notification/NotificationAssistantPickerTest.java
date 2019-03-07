@@ -16,11 +16,11 @@
 
 package com.android.settings.notification;
 
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.RETURNS_SMART_NULLS;
@@ -40,16 +40,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mockito.invocation.InvocationOnMock;
-import org.robolectric.RobolectricTestRunner;
-
 @RunWith(RobolectricTestRunner.class)
 public class NotificationAssistantPickerTest {
 
+    private static final String TEST_PKG = "test.package";
+    private static final String TEST_SRV = "test.component";
+    private static final String TEST_CMP = TEST_PKG + "/" + TEST_SRV;
+    private static final String TEST_NAME = "Test name";
+    private static final ComponentName TEST_COMPONENT = ComponentName.unflattenFromString(TEST_CMP);
     private NotificationAssistantPicker mFragment;
     @Mock
     private Context mContext;
@@ -57,15 +61,11 @@ public class NotificationAssistantPickerTest {
     private PackageManager mPackageManager;
     @Mock
     private NotificationBackend mNotificationBackend;
-    private static final String TEST_PKG = "test.package";
-    private static final String TEST_SRV = "test.component";
-    private static final String TEST_CMP = TEST_PKG + "/" + TEST_SRV;
-    private static final String TEST_NAME = "Test name";
-    private static final ComponentName TEST_COMPONENT = ComponentName.unflattenFromString(TEST_CMP);
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mFragment = new TestNotificationAssistantPicker(mContext, mPackageManager,
                 mNotificationBackend);
     }
@@ -132,7 +132,7 @@ public class NotificationAssistantPickerTest {
     public void noDialogOnNoAssistantSelected() {
         when(mContext.getString(anyInt(), anyString())).thenAnswer(
                 (InvocationOnMock invocation) -> {
-                        return invocation.getArgument(1);
+                    return invocation.getArgument(1);
                 });
         assertNull(mFragment.getConfirmationMessage(
                 new NotificationAssistantPicker.CandidateNone(mContext)));
