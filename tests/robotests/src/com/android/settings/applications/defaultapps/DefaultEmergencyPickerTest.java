@@ -19,7 +19,6 @@ package com.android.settings.applications.defaultapps;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,15 +26,10 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.role.RoleManager;
-import android.app.role.RoleManagerCallback;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
-import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.Settings;
-import android.util.Log;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,6 +44,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 
 @RunWith(RobolectricTestRunner.class)
 public class DefaultEmergencyPickerTest {
@@ -90,7 +85,7 @@ public class DefaultEmergencyPickerTest {
             eq(0),
             any(UserHandle.class),
             any(Executor.class),
-            any(RoleManagerCallback.class));
+            any(Consumer.class));
     }
 
     @Test
