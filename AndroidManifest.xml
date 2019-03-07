@@ -1245,6 +1245,10 @@
                 <action android:name="android.settings.PRIVACY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_ENABLE_CONTENT_CAPTURE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
         </activity>
