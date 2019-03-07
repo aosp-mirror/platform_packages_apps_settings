@@ -31,7 +31,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/homepage_card_padding_start"
             android:paddingEnd="@dimen/homepage_card_padding_end"
             android:orientation="vertical">
 
@@ -39,6 +38,7 @@
                 android:id="@android:id/icon"
                 android:layout_width="@dimen/homepage_card_icon_size"
                 android:layout_height="@dimen/homepage_card_icon_size"
+                android:layout_marginStart="@dimen/homepage_card_icon_padding_start"
                 android:tint="?android:attr/colorAccent"/>
 
             <TextView
@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:layout_marginStart="@dimen/homepage_card_text_padding_start"
                 android:layout_marginTop="@dimen/homepage_condition_half_card_title_margin_top"
                 android:layout_marginBottom="@dimen/homepage_condition_card_title_margin_bottom"
                 android:textAppearance="@style/TextAppearance.ConditionCardTitle"/>
@@ -57,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:lines="2"
                 android:ellipsize="end"
+                android:layout_marginStart="@dimen/homepage_card_text_padding_start"
                 android:layout_marginBottom="@dimen/homepage_condition_half_card_summary_margin_bottom"
                 android:textAppearance="@style/TextAppearance.ConditionCardSummary"/>
 
