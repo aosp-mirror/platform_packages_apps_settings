@@ -27,8 +27,10 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupChooseLockGeneric;
 
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
 /**
@@ -199,7 +201,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     protected Intent getChooseLockIntent() {
-        return new Intent(this, ChooseLockGeneric.class);
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            Intent intent = new Intent(this, SetupChooseLockGeneric.class);
+            WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+            return intent;
+        } else {
+            return new Intent(this, ChooseLockGeneric.class);
+        }
     }
 
     @Override

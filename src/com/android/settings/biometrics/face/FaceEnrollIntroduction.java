@@ -36,6 +36,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
@@ -166,6 +167,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             intent.setClass(this, FaceEnrollEnrolling.class);
         }
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, mSwitchDiversity.isChecked());
+        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
         return intent;
     }
 

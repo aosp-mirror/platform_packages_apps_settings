@@ -16,8 +16,6 @@
 
 package com.android.settings.biometrics;
 
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,7 +23,10 @@ import android.os.Bundle;
 
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
 import com.android.settings.core.InstrumentedActivity;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Trampoline activity launched by the {@code android.settings.BIOMETRIC_ENROLL} action which
@@ -40,18 +41,36 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         super.onCreate(savedInstanceState);
 
         final PackageManager pm = getApplicationContext().getPackageManager();
-        final Intent intent = new Intent();
+        Intent intent;
 
         // This logic may have to be modified on devices with multiple biometrics.
         if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            intent.setClassName(SETTINGS_PACKAGE_NAME,
-                    FingerprintEnrollIntroduction.class.getName());
+            intent = getFingerprintEnrollIntent();
         } else if (pm.hasSystemFeature(PackageManager.FEATURE_FACE)) {
-            intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnrollIntroduction.class.getName());
+            intent = getFaceEnrollIntent();
+        } else {
+            intent = new Intent();
         }
 
+        intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         startActivity(intent);
         finish();
+    }
+
+    private Intent getFingerprintEnrollIntent() {
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            Intent intent = new Intent(this, SetupFingerprintEnrollIntroduction.class);
+            WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+            return intent;
+        } else {
+            return new Intent(this, FingerprintEnrollIntroduction.class);
+        }
+    }
+
+    private Intent getFaceEnrollIntent() {
+        Intent intent = new Intent(this, FaceEnrollIntroduction.class);
+        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+        return intent;
     }
 
     @Override
