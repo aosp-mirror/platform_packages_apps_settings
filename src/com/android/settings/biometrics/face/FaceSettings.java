@@ -156,6 +156,9 @@ public class FaceSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        if (!isAvailable(context)) {
+            return null;
+        }
         final List<AbstractPreferenceController> controllers =
                 buildPreferenceControllers(context, getSettingsLifecycle());
         // There's no great way of doing this right now :/
@@ -197,7 +200,11 @@ public class FaceSettings extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
+                    if (isAvailable(context)) {
+                        return buildPreferenceControllers(context, null /* lifecycle */);
+                    } else {
+                        return null;
+                    }
                 }
 
                 @Override
