@@ -111,6 +111,26 @@ public class BlockPreferenceControllerTest {
     }
 
     @Test
+    public void testIsAvailable_notIfChannelNonDefault() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = true;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
+        mController.onResume(appRow, channel, null, null);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_ifChannelDefault() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
+        when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
+        mController.onResume(appRow, channel, null, null);
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
     public void testIsAvailable_notIfGroupNotBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
