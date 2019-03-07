@@ -97,7 +97,7 @@ public class HotspotConditionController implements ConditionalCardController {
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_hotspot_title))
                 .setTitleText(mAppContext.getText(R.string.condition_hotspot_title).toString())
-                .setSummaryText(getSummary().toString())
+                .setSummaryText(getSsid().toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_hotspot))
                 .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
@@ -111,10 +111,6 @@ public class HotspotConditionController implements ConditionalCardController {
     @Override
     public void stopMonitoringStateChange() {
         mAppContext.unregisterReceiver(mReceiver);
-    }
-
-    public CharSequence getSummary() {
-        return mAppContext.getString(R.string.condition_hotspot_summary, getSsid());
     }
 
     private CharSequence getSsid() {
