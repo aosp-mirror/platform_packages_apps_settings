@@ -40,6 +40,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
@@ -64,7 +65,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
  */
 public class ResetNetworkConfirm extends InstrumentedFragment {
 
-    private View mContentView;
+    @VisibleForTesting View mContentView;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     @VisibleForTesting boolean mEraseEsim;
     @VisibleForTesting EraseEsimAsyncTask mEraseEsimTask;
@@ -207,6 +208,14 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 .setOnClickListener(mFinalClickListener);
     }
 
+    @VisibleForTesting
+    void setSubtitle() {
+        if (mEraseEsim) {
+            ((TextView) mContentView.findViewById(R.id.reset_network_confirm))
+                    .setText(R.string.reset_network_final_desc_esim);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -224,6 +233,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         }
         mContentView = inflater.inflate(R.layout.reset_network_confirm, null);
         establishFinalConfirmationState();
+        setSubtitle();
         return mContentView;
     }
 

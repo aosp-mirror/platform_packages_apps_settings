@@ -42,6 +42,8 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -74,8 +76,8 @@ public class ResetNetwork extends InstrumentedFragment {
     private View mContentView;
     private Spinner mSubscriptionSpinner;
     private Button mInitiateButton;
-    private View mEsimContainer;
-    private CheckBox mEsimCheckbox;
+    @VisibleForTesting View mEsimContainer;
+    @VisibleForTesting CheckBox mEsimCheckbox;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,14 +114,16 @@ public class ResetNetwork extends InstrumentedFragment {
         }
     }
 
-    private void showFinalConfirmation() {
+    @VisibleForTesting
+    void showFinalConfirmation() {
         Bundle args = new Bundle();
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             int selectedIndex = mSubscriptionSpinner.getSelectedItemPosition();
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
             args.putInt(PhoneConstants.SUBSCRIPTION_KEY, subscription.getSubscriptionId());
         }
-        args.putBoolean(MasterClear.ERASE_ESIMS_EXTRA, mEsimCheckbox.isChecked());
+        args.putBoolean(MasterClear.ERASE_ESIMS_EXTRA,
+            mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked());
         new SubSettingLauncher(getContext())
                 .setDestination(ResetNetworkConfirm.class.getName())
                 .setArguments(args)

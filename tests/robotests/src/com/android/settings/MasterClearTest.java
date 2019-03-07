@@ -108,12 +108,14 @@ public class MasterClearTest {
     }
 
     @Test
-    public void testShowFinalConfirmation_eraseEsimChecked() {
+    public void testShowFinalConfirmation_eraseEsimVisible_eraseEsimChecked() {
         final Context context = mock(Context.class);
         when(mMasterClear.getContext()).thenReturn(context);
 
         mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
         mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMasterClear.mEsimStorageContainer.setVisibility(View.VISIBLE);
         mMasterClear.mEsimStorage.setChecked(true);
         mMasterClear.showFinalConfirmation();
 
@@ -126,12 +128,14 @@ public class MasterClearTest {
     }
 
     @Test
-    public void testShowFinalConfirmation_eraseEsimUnchecked() {
+    public void testShowFinalConfirmation_eraseEsimVisible_eraseEsimUnchecked() {
         final Context context = mock(Context.class);
         when(mMasterClear.getContext()).thenReturn(context);
 
         mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
         mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMasterClear.mEsimStorageContainer.setVisibility(View.VISIBLE);
         mMasterClear.mEsimStorage.setChecked(false);
         mMasterClear.showFinalConfirmation();
         final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
@@ -140,6 +144,45 @@ public class MasterClearTest {
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
                 .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
                 .isFalse();
+    }
+
+    @Test
+    public void testShowFinalConfirmation_eraseEsimGone_eraseEsimChecked() {
+        final Context context = mock(Context.class);
+        when(mMasterClear.getContext()).thenReturn(context);
+
+        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMasterClear.mEsimStorageContainer.setVisibility(View.GONE);
+        mMasterClear.mEsimStorage.setChecked(true);
+        mMasterClear.showFinalConfirmation();
+
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
+
+        verify(context).startActivity(intent.capture());
+        assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+            .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+            .isFalse();
+    }
+
+    @Test
+    public void testShowFinalConfirmation_eraseEsimGone_eraseEsimUnchecked() {
+        final Context context = mock(Context.class);
+        when(mMasterClear.getContext()).thenReturn(context);
+
+        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMasterClear.mEsimStorageContainer.setVisibility(View.GONE);
+        mMasterClear.mEsimStorage.setChecked(false);
+        mMasterClear.showFinalConfirmation();
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
+
+        verify(context).startActivity(intent.capture());
+        assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+            .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+            .isFalse();
     }
 
     @Test
