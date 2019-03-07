@@ -45,6 +45,7 @@ public class VolumePanelTest {
         final List<Uri> uris = mPanel.getSlices();
 
         assertThat(uris).containsExactly(
+                CustomSliceRegistry.VOLUME_REMOTE_MEDIA_URI,
                 CustomSliceRegistry.VOLUME_CALL_URI,
                 CustomSliceRegistry.VOLUME_MEDIA_URI,
                 CustomSliceRegistry.VOLUME_RINGER_URI,
