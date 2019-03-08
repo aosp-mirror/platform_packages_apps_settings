@@ -62,6 +62,13 @@
         android:summary="@string/summary_placeholder"
         settings:searchable="false"/>
 
+    <!-- Content Capture -->
+    <SwitchPreference
+        android:key="content_capture"
+        android:title="@string/content_capture"
+        android:summary="@string/content_capture_summary"
+        settings:controller="com.android.settings.privacy.EnableContentCapturePreferenceController"/>
+
     <!-- Privacy Service -->
     <PreferenceCategory
         android:key="privacy_services"/>
