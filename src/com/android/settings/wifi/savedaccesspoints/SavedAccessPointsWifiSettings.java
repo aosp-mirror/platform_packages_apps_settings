@@ -75,6 +75,8 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
                 .getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         use(SavedAccessPointsPreferenceController.class)
                 .setHost(this);
+        use(SubscribedAccessPointsPreferenceController.class)
+                .setHost(this);
     }
 
     @Override
@@ -172,10 +174,15 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
                     Log.e(TAG, "Failed to remove Passpoint configuration for "
                             + mSelectedAccessPoint.getConfigName());
                 }
-                use(SavedAccessPointsPreferenceController.class)
-                        .postRefreshSavedAccessPoints();
+                if (isSubscriptionsFeatureEnabled()) {
+                    use(SubscribedAccessPointsPreferenceController.class)
+                            .postRefreshSubscribedAccessPoints();
+                } else {
+                    use(SavedAccessPointsPreferenceController.class)
+                            .postRefreshSavedAccessPoints();
+                }
             } else {
-                // mForgetListener will call initPreferences upon completion
+                // both onSuccess/onFailure will call postRefreshSavedAccessPoints
                 mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId,
                         use(SavedAccessPointsPreferenceController.class));
             }
@@ -197,5 +204,10 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
             return false;    // TODO(b/124695272): mark true when UI is ready.
         }
         return false;
+    }
+
+    boolean isSubscriptionsFeatureEnabled() {
+        return FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.MOBILE_NETWORK_V2)
+                && FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2);
     }
 }

@@ -28,6 +28,8 @@ import android.net.wifi.WifiManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.wifi.WifiConfigController;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -39,6 +41,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
@@ -55,6 +58,8 @@ public class SavedAccessPointsWifiSettingsTest {
     @Mock
     private AccessPoint mAccessPoint;
     @Mock
+    private SubscribedAccessPointsPreferenceController mSubscribedApController;
+    @Mock
     private SavedAccessPointsPreferenceController mSavedApController;
 
     private TestFragment mSettings;
@@ -64,6 +69,8 @@ public class SavedAccessPointsWifiSettingsTest {
         MockitoAnnotations.initMocks(this);
         mSettings = spy(new TestFragment());
 
+        doReturn(mSubscribedApController).when(mSettings)
+                .use(SubscribedAccessPointsPreferenceController.class);
         doReturn(mSavedApController).when(mSettings)
                 .use(SavedAccessPointsPreferenceController.class);
 
@@ -81,6 +88,18 @@ public class SavedAccessPointsWifiSettingsTest {
         mSettings.onForget(null);
 
         verify(mSavedApController).postRefreshSavedAccessPoints();
+    }
+
+    @Test
+    public void onForget_isPasspointConfig_shouldRefreshSubscribedAPList() {
+        FeatureFlagPersistent.setEnabled(RuntimeEnvironment.application,
+                FeatureFlags.NETWORK_INTERNET_V2, true);
+        when(mAccessPoint.isPasspointConfig()).thenReturn(true);
+        ReflectionHelpers.setField(mSettings, "mSelectedAccessPoint", mAccessPoint);
+
+        mSettings.onForget(null);
+
+        verify(mSubscribedApController).postRefreshSubscribedAccessPoints();
     }
 
     @Test

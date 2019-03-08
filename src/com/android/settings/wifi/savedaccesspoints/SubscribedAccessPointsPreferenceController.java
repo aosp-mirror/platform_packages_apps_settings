@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.utils.PreferenceGroupChildrenCache;
-import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.utils.ThreadUtils;
@@ -41,22 +40,22 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Controller that manages a PreferenceGroup, which contains a list of saved access points.
+ * Controller that manages a PreferenceGroup, which contains a list of subscribed access points.
  */
-public class SavedAccessPointsPreferenceController extends BasePreferenceController implements
+// TODO(b/127206629): Code refactor to avoid duplicated coding after removed feature flag.
+public class SubscribedAccessPointsPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, Preference.OnPreferenceClickListener,
         WifiManager.ActionListener {
 
-    private static final String TAG = "SavedAPPrefCtrl";
+    private static final String TAG = "SubscribedAPPrefCtrl";
 
     private final WifiManager mWifiManager;
     private final PreferenceGroupChildrenCache mChildrenCache;
-
     private final UserBadgeCache mUserBadgeCache;
     private PreferenceGroup mPreferenceGroup;
     private SavedAccessPointsWifiSettings mHost;
 
-    public SavedAccessPointsPreferenceController(Context context,
+    public SubscribedAccessPointsPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(context.getPackageManager());
@@ -64,7 +63,7 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
         mChildrenCache = new PreferenceGroupChildrenCache();
     }
 
-    public SavedAccessPointsPreferenceController setHost(SavedAccessPointsWifiSettings host) {
+    public SubscribedAccessPointsPreferenceController setHost(SavedAccessPointsWifiSettings host) {
         mHost = host;
         return this;
     }
@@ -82,11 +81,11 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
 
     @Override
     public void onStart() {
-        refreshSavedAccessPoints();
+        refreshSubscribedAccessPoints();
     }
 
-    public void postRefreshSavedAccessPoints() {
-        ThreadUtils.postOnMainThread(() -> refreshSavedAccessPoints());
+    public void postRefreshSubscribedAccessPoints() {
+        ThreadUtils.postOnMainThread(() -> refreshSubscribedAccessPoints());
     }
 
     @Override
@@ -99,20 +98,26 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
 
     @Override
     public void onSuccess() {
-        postRefreshSavedAccessPoints();
+        postRefreshSubscribedAccessPoints();
     }
 
     @Override
     public void onFailure(int reason) {
-        postRefreshSavedAccessPoints();
+        postRefreshSubscribedAccessPoints();
     }
 
     @VisibleForTesting
-    void refreshSavedAccessPoints() {
+    void refreshSubscribedAccessPoints() {
         if (mPreferenceGroup == null) {
             Log.w(TAG, "PreferenceGroup is null, skipping.");
             return;
         }
+
+        if (mHost != null && !mHost.isSubscriptionsFeatureEnabled()) {
+            mPreferenceGroup.setVisible(false);
+            return;
+        }
+
         final Context prefContext = mPreferenceGroup.getContext();
 
         final List<AccessPoint> accessPoints =
@@ -123,13 +128,11 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i) {
             AccessPoint ap = accessPoints.get(i);
-
-            if (mHost != null && mHost.isSubscriptionsFeatureEnabled()
-                    && ap.isPasspointConfig()) {
+            if (!ap.isPasspointConfig()) {
                 continue;
             }
 
-            String key = ap.getKey();
+            final String key = ap.getKey();
             AccessPointPreference preference =
                     (AccessPointPreference) mChildrenCache.getCachedPreference(key);
             if (preference == null) {
@@ -145,16 +148,11 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
         mChildrenCache.removeCachedPrefs(mPreferenceGroup);
 
         if (mPreferenceGroup.getPreferenceCount() < 1) {
-            Log.w(TAG, "Saved networks activity loaded, but there are no saved networks!");
+            Log.w(TAG, "Subscribed networks activity loaded,"
+                    + " but there are no subscribed networks!");
             mPreferenceGroup.setVisible(false);
         } else {
             mPreferenceGroup.setVisible(true);
-        }
-
-        if (mHost != null && !mHost.isSubscriptionsFeatureEnabled()) {
-            mPreferenceGroup.setVisible(true);
-            mPreferenceGroup.setTitle(null);
-            mPreferenceGroup.setLayoutResource(R.layout.preference_category_no_label);
         }
     }
 }
