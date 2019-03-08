@@ -24,6 +24,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -161,5 +162,28 @@ public class MobileDataSliceTest {
         final boolean isMobileDataEnabled = mMobileDataSlice.isMobileDataEnabled();
 
         assertThat(isMobileDataEnabled).isEqualTo(seed);
+    }
+
+    @Test
+    public void airplaneModeEnabled_slicePrimaryActionIsEmpty() {
+        doReturn(true).when(mMobileDataSlice).isAirplaneModeEnabled();
+        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
+        final Slice mobileData = mMobileDataSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mobileData);
+        assertThat(metadata.getTitle())
+                .isEqualTo(mContext.getString(R.string.mobile_data_settings_title));
+
+        assertThat(metadata.getSubtitle())
+                .isEqualTo(mContext.getString(R.string.mobile_data_ap_mode_disabled));
+
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(0);
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final PendingIntent pendingIntent = primaryAction.getAction();
+        final Intent actionIntent = pendingIntent.getIntent();
+
+        assertThat(actionIntent.getAction()).isNull();
     }
 }
