@@ -28,17 +28,16 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class NfcPanelTest {
+public class WifiPanelTest {
 
-    private NfcPanel mPanel;
+    private WifiPanel mPanel;
 
     @Before
     public void setUp() {
-        mPanel = NfcPanel.create(RuntimeEnvironment.application);
+        mPanel = WifiPanel.create(RuntimeEnvironment.application);
     }
 
     @Test
@@ -46,7 +45,7 @@ public class NfcPanelTest {
         final List<Uri> uris = mPanel.getSlices();
 
         assertThat(uris).containsExactly(
-                CustomSliceRegistry.NFC_SLICE_URI);
+                CustomSliceRegistry.WIFI_SLICE_URI);
     }
 
     @Test

@@ -28,12 +28,14 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
         switch (panelType) {
             case Settings.Panel.ACTION_INTERNET_CONNECTIVITY:
                 return InternetConnectivityPanel.create(context);
-            case Settings.Panel.ACTION_VOLUME:
-                return VolumePanel.create(context);
-            case Settings.Panel.ACTION_NFC:
-                return NfcPanel.create(context);
             case ACTION_MEDIA_OUTPUT:
                 return MediaOutputPanel.create(context, mediaPackageName);
+            case Settings.Panel.ACTION_NFC:
+                return NfcPanel.create(context);
+            case Settings.Panel.ACTION_WIFI:
+                return WifiPanel.create(context);
+            case Settings.Panel.ACTION_VOLUME:
+                return VolumePanel.create(context);
         }
 
         throw new IllegalStateException("No matching panel for: "  + panelType);

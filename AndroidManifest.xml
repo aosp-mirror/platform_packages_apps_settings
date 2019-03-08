@@ -3029,11 +3029,15 @@
                      <category android:name="android.intent.category.DEFAULT" />
                  </intent-filter>
                 <intent-filter>
-                    <action android:name="android.settings.panel.action.VOLUME" />
+                    <action android:name="android.settings.panel.action.NFC" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
                 <intent-filter>
-                    <action android:name="android.settings.panel.action.NFC" />
+                    <action android:name="android.settings.panel.action.WIFI" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.settings.panel.action.VOLUME" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
         </activity>
