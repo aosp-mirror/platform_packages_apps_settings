@@ -29,6 +29,7 @@ import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.Utils;
@@ -43,7 +44,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 public class MobileNetworkSummaryController extends AbstractPreferenceController implements
-        SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver {
+        SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver,
+        PreferenceControllerMixin {
     private static final String TAG = "MobileNetSummaryCtlr";
 
     private static final String KEY = "mobile_network_list";
@@ -74,8 +76,10 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mTelephonyMgr = mContext.getSystemService(TelephonyManager.class);
         mEuiccManager = mContext.getSystemService(EuiccManager.class);
-        mChangeListener = new SubscriptionsChangeListener(context, this);
-        lifecycle.addObserver(this);
+        if (lifecycle != null) {
+          mChangeListener = new SubscriptionsChangeListener(context, this);
+          lifecycle.addObserver(this);
+        }
     }
 
     @OnLifecycleEvent(ON_RESUME)
