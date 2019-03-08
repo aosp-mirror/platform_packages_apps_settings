@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -28,15 +30,14 @@ import android.os.UserHandle;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.util.ArrayMap;
 import android.util.Log;
-
+import android.view.Window;
+import android.view.WindowManager;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.RestrictedSwitchPreference;
-
-
 import java.util.List;
 
 /** These settings are per app, so should not be returned in global search results. */
@@ -83,7 +84,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
             NotificationManager.Policy policy =
                     NotificationManager.from(mContext).getNotificationPolicy();
-            mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
+            mDndVisualEffectsSuppressed =
+                    policy == null ? false : policy.suppressedVisualEffects != 0;
 
             // load settings intent
             ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
@@ -99,11 +101,26 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getWindow().addPrivateFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        android.util.EventLog.writeEvent(0x534e4554, "119115683", -1, "");
+    }
+
+    public void onPause() {
+        super.onPause();
+        final Window window = getActivity().getWindow();
+        final WindowManager.LayoutParams attrs = window.getAttributes();
+        attrs.privateFlags &= ~PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+        window.setAttributes(attrs);
+    }
+
+    @Override
     protected void updateDependents(int importance) {
         LockPatternUtils utils = new LockPatternUtils(getActivity());
         boolean lockscreenSecure = utils.isSecure(UserHandle.myUserId());
         UserInfo parentUser = mUm.getProfileParent(UserHandle.myUserId());
-        if (parentUser != null){
+        if (parentUser != null) {
             lockscreenSecure |= utils.isSecure(parentUser.id);
         }
 
