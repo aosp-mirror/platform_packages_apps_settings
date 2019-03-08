@@ -65,7 +65,9 @@ public class BatteryInfoTest {
     private static final String STATUS_NOT_CHARGING = "Not charging";
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
+    // Strings are defined in frameworks/base/packages/SettingsLib/res/values/strings.xml
     private static final String ENHANCED_STRING_SUFFIX = "based on your usage";
+    private static final String EXTEND_PREFIX = "Extend battery life past";
     private static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
     private static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
             "1 min left until fully charged";
@@ -148,8 +150,10 @@ public class BatteryInfoTest {
 
         // We only add special mention for the long string
         assertThat(info.remainingLabel.toString()).contains(ENHANCED_STRING_SUFFIX);
+        assertThat(info.suggestionLabel).contains(EXTEND_PREFIX);
         // shortened string should not have extra text
         assertThat(info2.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
+        assertThat(info2.suggestionLabel).contains(EXTEND_PREFIX);
     }
 
     @Test
@@ -169,6 +173,19 @@ public class BatteryInfoTest {
                 mContext.getString(R.string.power_remaining_duration_only_shutdown_imminent));
         assertThat(info2.remainingLabel.toString()).isEqualTo(
                 mContext.getString(R.string.power_remaining_duration_only_shutdown_imminent));
+        assertThat(info2.suggestionLabel).contains(EXTEND_PREFIX);
+    }
+
+    @Test
+    public void getBatteryInfo_MoreThanOneDay_suggestionLabelIsCorrectString() {
+        Estimate estimate = new Estimate(Duration.ofDays(3).toMillis(),
+                true /* isBasedOnUsage */,
+                1000 /* averageDischargeTime */);
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
+                mBatteryStats, estimate, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(info.suggestionLabel).doesNotContain(EXTEND_PREFIX);
     }
 
     @Test
