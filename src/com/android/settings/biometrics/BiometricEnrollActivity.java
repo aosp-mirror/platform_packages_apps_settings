@@ -41,19 +41,19 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         super.onCreate(savedInstanceState);
 
         final PackageManager pm = getApplicationContext().getPackageManager();
-        Intent intent;
+        Intent intent = null;
 
         // This logic may have to be modified on devices with multiple biometrics.
         if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
             intent = getFingerprintEnrollIntent();
         } else if (pm.hasSystemFeature(PackageManager.FEATURE_FACE)) {
             intent = getFaceEnrollIntent();
-        } else {
-            intent = new Intent();
         }
 
-        intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        startActivity(intent);
+        if (intent != null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            startActivity(intent);
+        }
         finish();
     }
 
