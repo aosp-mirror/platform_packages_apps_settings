@@ -19,18 +19,23 @@ package com.android.settings.wifi.calling;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.telephony.CarrierConfigManager;
 import android.telephony.ims.ProvisioningManager;
 import android.view.View;
 import android.widget.TextView;
@@ -54,17 +59,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
 public class WifiCallingSettingsForSubTest {
+    private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
+    private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
+
     private TestFragment mFragment;
     private Context mContext;
     private TextView mEmptyView;
+    private final PersistableBundle mBundle = new PersistableBundle();
 
+    @Mock private static CarrierConfigManager sCarrierConfigManager;
     @Mock private ImsManager mImsManager;
     @Mock private PreferenceScreen mPreferenceScreen;
     @Mock private SettingsActivity mActivity;
@@ -72,6 +83,8 @@ public class WifiCallingSettingsForSubTest {
     @Mock private ToggleSwitch mToggleSwitch;
     @Mock private View mView;
     @Mock private ImsConfig mImsConfig;
+    @Mock private ListPreference mButtonWfcMode;
+    @Mock private ListPreference mButtonWfcRoamingMode;
 
     @Before
     public void setUp() throws NoSuchFieldException, ImsException {
@@ -90,6 +103,8 @@ public class WifiCallingSettingsForSubTest {
         when(mFragment.getArguments()).thenReturn(bundle);
         doNothing().when(mFragment).addPreferencesFromResource(anyInt());
         doReturn(mock(ListPreference.class)).when(mFragment).findPreference(any());
+        doReturn(mButtonWfcMode).when(mFragment).findPreference(BUTTON_WFC_MODE);
+        doReturn(mButtonWfcRoamingMode).when(mFragment).findPreference(BUTTON_WFC_ROAMING_MODE);
         doNothing().when(mFragment).finish();
         doReturn(mView).when(mFragment).getView();
 
@@ -102,10 +117,24 @@ public class WifiCallingSettingsForSubTest {
         doReturn(mImsManager).when(mFragment).getImsManager();
         doReturn(mImsConfig).when(mImsManager).getConfigInterface();
         doReturn(true).when(mImsManager).isWfcProvisionedOnDevice();
+        doReturn(true).when(mImsManager).isWfcEnabledByUser();
+        doReturn(true).when(mImsManager).isNonTtyOrTtyOnVolteEnabled();
+        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED)
+                .when(mImsManager).getWfcMode(anyBoolean());
+
+        doReturn(mBundle).when(sCarrierConfigManager).getConfigForSubId(anyInt());
+        setDefaultCarrierConfigValues();
 
         mFragment.onAttach(mContext);
         mFragment.onCreate(null);
         mFragment.onActivityCreated(null);
+    }
+
+    private void setDefaultCarrierConfigValues() {
+        mBundle.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, false);
+        mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, true);
+        mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, true);
     }
 
     @Test
@@ -143,10 +172,106 @@ public class WifiCallingSettingsForSubTest {
         verify(mImsConfig).removeConfigCallback(any());
     }
 
+    @Test
+    public void onResume_useWfcHomeModeConfigFalseAndEditable_shouldShowWfcRoaming() {
+        // Call onResume to update the WFC roaming preference.
+        mFragment.onResume();
+
+        // Check that WFC roaming preference is shown.
+        verify(mPreferenceScreen, times(1)).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen, never()).removePreference(mButtonWfcRoamingMode);
+    }
+
+    @Test
+    public void onResume_useWfcHomeModeConfigTrueAndEditable_shouldHideWfcRoaming() {
+        mBundle.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, true);
+        mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, true);
+
+        // Call onResume to update the WFC roaming preference.
+        mFragment.onResume();
+
+        // Check that WFC roaming preference is hidden.
+        verify(mPreferenceScreen, never()).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen, times(1)).removePreference(mButtonWfcRoamingMode);
+    }
+
+    @Test
+    public void onResume_useWfcHomeModeConfigFalseAndNotEditable_shouldHideWfcRoaming() {
+        mBundle.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, false);
+        mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, false);
+
+        // Call onResume to update the WFC roaming preference.
+        mFragment.onResume();
+
+        // Check that WFC roaming preference is hidden.
+        verify(mPreferenceScreen, never()).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen, times(1)).removePreference(mButtonWfcRoamingMode);
+    }
+
+    @Test
+    public void onResume_useWfcHomeModeConfigTrueAndNotEditable_shouldHideWfcRoaming() {
+        mBundle.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, true);
+        mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, false);
+
+        // Call onResume to update the WFC roaming preference.
+        mFragment.onResume();
+
+        // Check that WFC roaming preference is hidden.
+        verify(mPreferenceScreen, never()).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen, times(1)).removePreference(mButtonWfcRoamingMode);
+    }
+
+    @Test
+    public void onPreferenceChange_useWfcHomeModeConfigFalse_shouldNotSetWfcRoaming() {
+        // Call onResume to update carrier config values.
+        mFragment.onResume();
+
+        // Set the WFC home mode.
+        mFragment.onPreferenceChange(mButtonWfcMode,
+                String.valueOf(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED));
+
+        // Check that only WFC home mode is set.
+        verify(mImsManager, times(1)).setWfcMode(
+                eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
+                eq(false));
+        verify(mImsManager, never()).setWfcMode(
+                eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
+                eq(true));
+    }
+
+    @Test
+    public void onPreferenceChange_useWfcHomeModeConfigTrue_shouldSetWfcRoaming() {
+        mBundle.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, true);
+
+        // Call onResume to update carrier config values.
+        mFragment.onResume();
+
+        // Set the WFC home mode.
+        mFragment.onPreferenceChange(mButtonWfcMode,
+                String.valueOf(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED));
+
+        // Check that both WFC home mode and roaming mode are set.
+        verify(mImsManager, times(1)).setWfcMode(
+                eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
+                eq(false));
+        verify(mImsManager, times(1)).setWfcMode(
+                eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
+                eq(true));
+    }
+
     protected static class TestFragment extends WifiCallingSettingsForSub {
         @Override
         protected Object getSystemService(final String name) {
-            return null;
+            switch (name) {
+                case Context.CARRIER_CONFIG_SERVICE:
+                    return sCarrierConfigManager;
+                default:
+                    return null;
+            }
         }
     }
 }
