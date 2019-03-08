@@ -21,6 +21,8 @@ import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.Activity;
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
@@ -36,6 +38,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Switch;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
@@ -76,6 +80,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onResume() {
         super.onResume();
+
+        getActivity().getWindow().addPrivateFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        android.util.EventLog.writeEvent(0x534e4554, "119115683", -1, "");
 
         if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
             Log.w(TAG, "Missing package or uid or packageinfo");
@@ -124,6 +131,15 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         }
 
         updateDependents(mAppRow.banned);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        final Window window = getActivity().getWindow();
+        final WindowManager.LayoutParams attrs = window.getAttributes();
+        attrs.privateFlags &= ~PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+        window.setAttributes(attrs);
     }
 
     private void addHeaderPref() {
