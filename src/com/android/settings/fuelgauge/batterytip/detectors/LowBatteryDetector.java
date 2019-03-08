@@ -62,6 +62,6 @@ public class LowBatteryDetector implements BatteryTipDetector {
         }
 
         return new LowBatteryTip(
-                state, powerSaveModeOn, mBatteryInfo.suggestionLabel);
+                state, powerSaveModeOn, mBatteryInfo.remainingLabel);
     }
 }
