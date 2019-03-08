@@ -18,8 +18,8 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.role.RoleControllerManager;
 import android.content.Context;
-import android.permission.PermissionControllerManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,15 +34,15 @@ import org.robolectric.shadows.ShadowApplication;
 public class DefaultHomeShortcutPreferenceControllerTest {
 
     @Mock
-    private PermissionControllerManager mPermissionControllerManager;
+    private RoleControllerManager mRoleControllerManager;
 
     private DefaultHomeShortcutPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication.getInstance().setSystemService(Context.PERMISSION_CONTROLLER_SERVICE,
-                mPermissionControllerManager);
+        ShadowApplication.getInstance().setSystemService(Context.ROLE_CONTROLLER_SERVICE,
+                mRoleControllerManager);
         mController = new DefaultHomeShortcutPreferenceController(RuntimeEnvironment.application,
                 "Package1");
     }
