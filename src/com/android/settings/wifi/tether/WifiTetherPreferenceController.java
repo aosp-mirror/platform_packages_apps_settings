@@ -43,9 +43,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
     private static final String WIFI_TETHER_SETTINGS = "wifi_tether";
-    private static final IntentFilter AIRPLANE_INTENT_FILTER = new IntentFilter(
-            Intent.ACTION_AIRPLANE_MODE_CHANGED);
-    private static final int ID_NULL = -1;
 
     private final ConnectivityManager mConnectivityManager;
     private final String[] mWifiRegexs;
@@ -103,8 +100,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     @Override
     public void onStart() {
         if (mPreference != null) {
-            mContext.registerReceiver(mReceiver, AIRPLANE_INTENT_FILTER);
-            clearSummaryForAirplaneMode();
             if (mWifiTetherSoftApManager != null) {
                 mWifiTetherSoftApManager.registerSoftApCallback();
             }
@@ -114,7 +109,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     @Override
     public void onStop() {
         if (mPreference != null) {
-            mContext.unregisterReceiver(mReceiver);
             if (mWifiTetherSoftApManager != null) {
                 mWifiTetherSoftApManager.unRegisterSoftApCallback();
             }
@@ -146,19 +140,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                 });
     }
 
-    //
-    // Everything below is copied from WifiApEnabler
-    //
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (Intent.ACTION_AIRPLANE_MODE_CHANGED.equals(action)) {
-                clearSummaryForAirplaneMode(R.string.wifi_hotspot_off_subtext);
-            }
-        }
-    };
-
     @VisibleForTesting
     void handleWifiApStateChanged(int state, int reason) {
         switch (state) {
@@ -174,7 +155,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLED:
                 mPreference.setSummary(R.string.wifi_hotspot_off_subtext);
-                clearSummaryForAirplaneMode();
                 break;
             default:
                 if (reason == WifiManager.SAP_START_FAILURE_NO_CHANNEL) {
@@ -182,7 +162,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                 } else {
                     mPreference.setSummary(R.string.wifi_error);
                 }
-                clearSummaryForAirplaneMode();
         }
     }
 
@@ -194,21 +173,4 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                 BidiFormatter.getInstance().unicodeWrap(
                         (wifiConfig == null) ? s : wifiConfig.SSID)));
     }
-
-    private void clearSummaryForAirplaneMode() {
-        clearSummaryForAirplaneMode(ID_NULL);
-    }
-
-    private void clearSummaryForAirplaneMode(int defaultId) {
-        boolean isAirplaneMode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
-        if (isAirplaneMode) {
-            mPreference.setSummary(R.string.wifi_tether_disabled_by_airplane);
-        } else if (defaultId != ID_NULL){
-            mPreference.setSummary(defaultId);
-        }
-    }
-    //
-    // Everything above is copied from WifiApEnabler
-    //
 }
