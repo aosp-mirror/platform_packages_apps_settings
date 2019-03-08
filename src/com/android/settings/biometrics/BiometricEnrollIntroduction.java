@@ -257,6 +257,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         finish();
     }
 
+    protected void onSkipButtonClick(View view) {
+        setResult(RESULT_SKIP);
+        finish();
+    }
+
     @Override
     protected void initViews() {
         super.initViews();
