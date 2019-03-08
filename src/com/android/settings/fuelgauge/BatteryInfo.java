@@ -47,6 +47,7 @@ public class BatteryInfo {
     public long averageTimeToDischarge = Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
     public String batteryPercentString;
     public String statusLabel;
+    public String suggestionLabel;
     private boolean mCharging;
     private BatteryStats mStats;
     private static final String LOG_TAG = "BatteryInfo";
@@ -247,6 +248,7 @@ public class BatteryInfo {
         final int status = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
         info.discharging = false;
+        info.suggestionLabel = null;
         if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
             info.remainingTimeUs = chargeTime;
             CharSequence timeString = StringUtil.formatElapsedTime(context,
@@ -282,8 +284,11 @@ public class BatteryInfo {
                     info.batteryPercentString,
                     estimate.isBasedOnUsage && !shortString
             );
+            info.suggestionLabel = PowerUtil.getBatterySuggestionStringFormatted(
+                    context, PowerUtil.convertUsToMs(drainTimeUs));
         } else {
             info.remainingLabel = null;
+            info.suggestionLabel = null;
             info.chargeLabel = info.batteryPercentString;
         }
     }
