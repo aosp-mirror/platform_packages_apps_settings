@@ -89,6 +89,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private boolean mValidListener = false;
     private boolean mEditableWfcMode = true;
     private boolean mEditableWfcRoamingMode = true;
+    private boolean mUseWfcHomeModeForRoaming = false;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ImsManager mImsManager;
@@ -312,6 +313,9 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                         CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
                 mEditableWfcRoamingMode = b.getBoolean(
                         CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
+                mUseWfcHomeModeForRoaming = b.getBoolean(
+                        CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL,
+                        false);
                 isWifiOnlySupported = b.getBoolean(
                         CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
             }
@@ -496,7 +500,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                 // Don't show WFC (home) preference if it's not editable.
                 preferenceScreen.removePreference(mButtonWfcMode);
             }
-            if (mEditableWfcRoamingMode) {
+            if (mEditableWfcRoamingMode && !mUseWfcHomeModeForRoaming) {
                 preferenceScreen.addPreference(mButtonWfcRoamingMode);
             } else {
                 // Don't show WFC roaming preference if it's not editable.
@@ -525,10 +529,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                 mImsManager.setWfcMode(buttonMode, false);
                 mButtonWfcMode.setSummary(getWfcModeSummary(buttonMode));
                 mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
-            }
-            if (!mEditableWfcRoamingMode) {
-                int currentWfcRoamingMode = mImsManager.getWfcMode(true);
-                if (buttonMode != currentWfcRoamingMode) {
+
+                if (mUseWfcHomeModeForRoaming) {
                     mImsManager.setWfcMode(buttonMode, true);
                     // mButtonWfcRoamingMode.setSummary is not needed; summary is selected value
                 }
