@@ -248,8 +248,8 @@ public class WifiConfigController implements TextWatcher,
         mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         mPrivacySettingsSpinner = mView.findViewById(R.id.privacy_settings);
-        if (FeatureFlagUtils.isEnabled(mContext,
-                com.android.settings.core.FeatureFlags.WIFI_MAC_RANDOMIZATION)) {
+        if (mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_wifi_p2p_mac_randomization_supported)) {
             View privacySettingsLayout = mView.findViewById(R.id.privacy_settings_fields);
             privacySettingsLayout.setVisibility(View.VISIBLE);
         }
