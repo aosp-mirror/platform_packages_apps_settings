@@ -31,6 +31,7 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.net.Uri;
+import android.provider.Settings;
 import android.util.ArrayMap;
 
 import com.android.settings.homepage.contextualcards.conditional.ConditionFooterContextualCard;
@@ -123,6 +124,24 @@ public class ContextualCardManagerTest {
         assertThat(mManager.mContextualCards).hasSize(1);
         assertThat(mManager.mContextualCards.get(0).getCardType())
                 .isEqualTo(ContextualCard.CardType.CONDITIONAL_FOOTER);
+    }
+
+    @Test
+    public void getCardLoaderTimeout_noConfiguredTimeout_shouldReturnDefaultTimeout() {
+        final long timeout = mManager.getCardLoaderTimeout(mContext);
+
+        assertThat(timeout).isEqualTo(ContextualCardManager.CARD_CONTENT_LOADER_TIMEOUT_MS);
+    }
+
+    @Test
+    public void getCardLoaderTimeout_hasConfiguredTimeout_shouldReturnConfiguredTimeout() {
+        final long configuredTimeout = 5000L;
+        Settings.Global.putLong(mContext.getContentResolver(),
+                ContextualCardManager.KEY_GLOBAL_CARD_LOADER_TIMEOUT, configuredTimeout);
+
+        final long timeout = mManager.getCardLoaderTimeout(mContext);
+
+        assertThat(timeout).isEqualTo(configuredTimeout);
     }
 
     @Test

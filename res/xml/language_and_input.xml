@@ -94,7 +94,8 @@
 
     <com.android.settings.widget.WorkOnlyCategory
         android:key="language_and_input_for_work_category"
-        android:title="@string/language_and_input_for_work_category_title">
+        android:title="@string/language_and_input_for_work_category_title"
+        settings:searchable="false">
 
         <Preference
             android:key="virtual_keyboards_for_work_pref"

@@ -143,6 +143,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onStart() {
         super.onStart();
+        initComponents();
+        updateUiForArguments();
         updateEmptyView();
         updateUiForServiceState();
     }
@@ -158,20 +160,9 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onStop() {
         super.onStop();
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initComponents();
-        updateUiForArguments();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
         mSwitchBar.removeOnSwitchChangeListener(this);
         mSwitchBar.hide();
+        mPrintersAdapter.unregisterAdapterDataObserver(mDataObserver);
     }
 
     private void onPreferenceToggled(String preferenceKey, boolean enabled) {

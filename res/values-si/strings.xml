@@ -940,10 +940,8 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"වෙනත් ජාලයක් තෝරන්න"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"උපාංගය එක් කළ නොහැකි විය"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"උපාංගය හමු විය"</string>
-    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
-    <skip />
+    <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="5579154298588011712">"මෙම උපාංගය සමඟ Wi‑Fi බෙදා ගනිමින්…"</string>
+    <string name="wifi_dpp_connecting" msgid="7111851118215580428">"සබැඳෙමින්…"</string>
     <string name="retry" msgid="6472609612090877557">"යළි උත්සාහ කරන්න"</string>
     <string name="wifi_shared" msgid="844142443226926070">"අනෙකුත් උපාංග පරිශීලකයන් සමග බෙදා ගන්න"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(වෙනස් නොකළ)"</string>
@@ -1067,11 +1065,6 @@
     <item msgid="7715869266611010880">"ජංගම"</item>
     <item msgid="2838022395783120596">"Wi-Fi පමණයි"</item>
   </string-array>
-  <string-array name="wifi_calling_mode_values">
-    <item msgid="4799585830102342375">"2"</item>
-    <item msgid="1171822231056612021">"1"</item>
-    <item msgid="3194458950573886239">"0"</item>
-  </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"Wi-Fi වඩා කැමතියි"</item>
     <item msgid="5074515506087318555">"ජංගම කැමතියි"</item>
@@ -1079,10 +1072,6 @@
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
     <item msgid="1118703915148755405">"ජංගම"</item>
-  </string-array>
-  <string-array name="wifi_calling_mode_values_without_wifi_only">
-    <item msgid="2339246858001475047">"2"</item>
-    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi ඇමතීම සක්‍රීය වූ විට, ඔබේ දුරකථනයට ඔබේ මනාපයට සහ සංඥා ප්‍රබලතාවට අනුව, Wi-Fi ජාල හරහා හෝ ඔබේ වාහකයේ ජාලය හරහා ඇමතුම් ප්‍රතියොමු කළ හැක. මෙම විශේෂාංගය සක්‍රීය කිරීමට පෙර, ගාස්තු සහ අනෙකුත් විස්තර පිළිබඳව ඔබේ වාහකය සමඟ පරීක්‍ෂා කර ගන්න.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
@@ -2054,8 +2043,7 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"මිනිත්තු 2"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"කියවීමට කාලය"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"ක්‍රියා කිරීමට කාලය"</string>
-    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
-    <skip />
+    <string name="accessibility_content_timeout_preference_summary" msgid="2637322628166175371">"ඔබට කියවීමට අවශ්‍ය නමුත්, තාවකාලිකව පමණක් දිස් වන, පණිවිඩ කොතරම් කාලයක් දිස් වන්නේද යන්න තෝරා ගන්න.\n\nසියලු යෙදුම් මෙම සැකසීමට සහාය නොදක්වයි."</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"ක්‍රියා කිරීමට ඔබගෙන් ඉල්ලා සිටින, නමුත් තාවකාලිකව පමණක් දිස් වන, පණිවිඩ කොතරම් කාලයක් දිස් වන්නේද යන්න තෝරන්න.\n\nසියලු යෙදුම් මෙම සැකසීමට සහාය නොදක්වයි."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"ස්පර්ශ කර ප්‍රමාදය රඳවන්න"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"වර්ණ අපවර්තනය"</string>
@@ -3006,7 +2994,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"බ්ලූටූත්, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"බ්ලූටූත්"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"යෙදුම් සහ දැනුම්දීම්"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"අවසර, පෙරනිමි යෙදුම්"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (6513508041918469381) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"කාර්යාල පැතිකඩ තුළ යෙදුම් සඳහා දැනුම්දීම් ප්‍රවේශය ලබා ගත නොහැකිය"</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"ගිණුම්"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"ගිණුම් එක් නොකරන ලදී"</string>
@@ -3069,7 +3058,8 @@
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"පරිසර දර්ශකය, අගුලු තිර දර්ශකය"</string>
     <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"අගුළු තිර දැනුම්දීම"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"මුහුණ"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"ඇඟිලි සලකුණ"</string>
+    <!-- no translation found for keywords_fingerprint_settings (4425098764810291897) -->
+    <skip />
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"අඳුරු තිරය, ස්පර්ශ තිරය, බැටරිය, ස්මාර්ට් දීප්තිය, ගතික දීප්තිය"</string>
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"අඳුරු තිරය, නිද්‍රාව, බැටරිය, යල් පැනීම, අවධානය, සංදර්ශකය, තිරය, නිෂ්ක්‍රියාව"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"කරකවන්න, ෆ්ලිප් කරන්න, කරකැවීම, ආලේඛ්‍ය, භූ දර්ශනය, දිශානතිය, සිරස්, තිරස්"</string>
@@ -3102,6 +3092,8 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"හඬ නඟනය නිහඬ වන ලෙස සකසා ඇත"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"80% දී නාදක හඬ පරිමාව"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"මාධ්‍ය ශබ්දය"</string>
+    <!-- no translation found for remote_media_volume_option_title (7602586327091007461) -->
+    <skip />
     <string name="call_volume_option_title" msgid="1265865226974255384">"ඇමතුම් ශබ්දය ත්‍රීවතාවය"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"සීනුවේ ශබ්දය"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"නාද ශබ්දය"</string>
@@ -4219,10 +4211,8 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"බාධා නොකරන්න යාවත්කාලීන කරන්න"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"අවධානය යොමු කිරීම සඳහා දැනුම්දීම් විරාම කරන්න"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"මෙම අංගය මෙම උපාංගයේ ලබා ගත නොහැක"</string>
-    <!-- no translation found for disabled_feature (2102058661071271076) -->
-    <skip />
-    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
-    <skip />
+    <string name="disabled_feature" msgid="2102058661071271076">"මෙම විශේෂාංගය නොමැත"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"එය මෙම දුරකථනය මන්දගාමී කරනු ඇත"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"සම්පූර්ණ GNSS මිනුම් බලාත්මක කරන්න"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"කාර්ය චක්‍රය රහිත සියලු GNSS සබැඳි තාරකා ගෝල සහ සංඛ්‍යාත"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"පසුබිම් ක්‍රියාකාරකම් පටන් ගැනීමට ඉඩ දෙන්න"</string>
@@ -4428,6 +4418,5 @@
     <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"දැනුම්දීම් නාලිකා <xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g>ක්. සියල්ල කළමනා කිරීමට තට්ටු කරන්න."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"ප්‍රතිදාන මාරු කරන්න"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"දැනට <xliff:g id="DEVICE_NAME">%1$s</xliff:g> මත වාදන කෙරෙන"</string>
-    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
-    <skip />
+    <string name="forget_passpoint_dialog_message" msgid="1996970308065448295">"මෙම සැපයුම්කරු සමඟ ඔබ දායකත්වය අවලංගු විය හැක. ප්‍රත්‍යාවර්තී දායකත්වයන් අවලංගු කරනු නොලැබේ. වැඩිදුර තොරතුරු සඳහා, ඔබේ සැපයුම්කරු සමඟ පරීක්ෂා කරන්න."</string>
 </resources>

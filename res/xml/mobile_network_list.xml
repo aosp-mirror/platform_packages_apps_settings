@@ -24,7 +24,10 @@
         android:title="@string/mobile_network_list_add_more"
         android:icon="@drawable/ic_menu_add"
         android:order="100" >
-        <intent android:action="android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION" />
+        <intent android:action="android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION">
+            <extra android:name="android.telephony.euicc.extra.FORCE_PROVISION"
+                   android:value="true"/>
+        </intent>
     </Preference>
 
 </PreferenceScreen>

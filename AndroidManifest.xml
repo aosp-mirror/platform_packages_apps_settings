@@ -1245,6 +1245,10 @@
                 <action android:name="android.settings.PRIVACY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_ENABLE_CONTENT_CAPTURE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
         </activity>
@@ -1575,19 +1579,12 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.FINGERPRINT_ENROLL" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss"
-                android:value="5,9,30" />
             <meta-data android:name="com.android.settings.require_feature"
                 android:value="android.hardware.fingerprint" />
             <meta-data android:name="com.android.settings.title"
                 android:resource="@string/suggestion_additional_fingerprints" />
             <meta-data android:name="com.android.settings.summary"
                 android:resource="@string/suggestion_additional_fingerprints_summary" />
-            <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
@@ -1651,8 +1648,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="2,6,30" />
+            <meta-data android:name="com.android.settings.dismiss" android:value="2," />
             <meta-data android:name="com.android.settings.require_feature"
                 android:value="android.hardware.fingerprint" />
             <meta-data android:name="com.android.settings.title"
@@ -3029,11 +3025,15 @@
                      <category android:name="android.intent.category.DEFAULT" />
                  </intent-filter>
                 <intent-filter>
-                    <action android:name="android.settings.panel.action.VOLUME" />
+                    <action android:name="android.settings.panel.action.NFC" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
                 <intent-filter>
-                    <action android:name="android.settings.panel.action.NFC" />
+                    <action android:name="android.settings.panel.action.WIFI" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.settings.panel.action.VOLUME" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
         </activity>

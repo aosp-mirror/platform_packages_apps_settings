@@ -38,9 +38,13 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
         mUserCaps.updateAddUserCapabilities(mContext);
         final RestrictedSwitchPreference restrictedSwitchPreference =
                 (RestrictedSwitchPreference) preference;
-        restrictedSwitchPreference.setDisabledByAdmin(
-                mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
-        restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled);
+        if (!isAvailable()) {
+            restrictedSwitchPreference.setVisible(false);
+        } else {
+            restrictedSwitchPreference.setDisabledByAdmin(
+                    mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
+            restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled);
+        }
     }
 
     @Override

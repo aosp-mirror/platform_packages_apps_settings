@@ -27,7 +27,6 @@
         android:layout_height="match_parent"
         android:gravity="left"
         android:orientation="vertical"
-        android:paddingStart="@dimen/homepage_card_padding_start"
         android:paddingEnd="@dimen/homepage_card_padding_end"
         android:paddingTop="@dimen/homepage_deferred_setup_card_padding_top"
         android:paddingBottom="@dimen/homepage_deferred_setup_card_padding_bottom">
@@ -35,12 +34,14 @@
         <ImageView
             android:id="@android:id/icon"
             android:layout_width="@dimen/homepage_card_icon_size"
-            android:layout_height="@dimen/homepage_card_icon_size"/>
+            android:layout_height="@dimen/homepage_card_icon_size"
+            android:layout_marginStart="@dimen/homepage_card_icon_padding_start"/>
 
         <TextView
             android:id="@android:id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/homepage_card_text_padding_start"
             android:layout_marginTop="@dimen/homepage_deferred_setup_card_title_margin_top"
             android:ellipsize="end"
             android:maxLines="2"
@@ -51,6 +52,7 @@
             android:id="@android:id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/homepage_card_text_padding_start"
             android:layout_marginTop="@dimen/homepage_deferred_setup_card_summary_margin_top"
             android:ellipsize="end"
             android:maxLines="2"
@@ -62,6 +64,7 @@
             style="@style/DeferredSetupCardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/homepage_card_text_padding_start"
             android:layout_marginTop="@dimen/homepage_deferred_setup_card_button_margin_top"
             android:text="@string/suggestion_button_text"/>
 

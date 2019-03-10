@@ -26,7 +26,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.format.DateUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -50,7 +49,6 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     @VisibleForTesting
     static final int DEFAULT_CARD_COUNT = 4;
     static final int CARD_CONTENT_LOADER_ID = 1;
-    static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS;
 
     private static final String TAG = "ContextualCardLoader";
     private static final long ELIGIBILITY_CHECKER_TIMEOUT_MS = 250;

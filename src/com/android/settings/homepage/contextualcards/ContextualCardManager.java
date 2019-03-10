@@ -24,6 +24,8 @@ import static java.util.stream.Collectors.groupingBy;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.BaseAdapter;
@@ -62,8 +64,12 @@ import java.util.stream.Collectors;
 public class ContextualCardManager implements ContextualCardLoader.CardContentLoaderListener,
         ContextualCardUpdateListener, LifecycleObserver, OnSaveInstanceState {
 
-    private static final String KEY_CONTEXTUAL_CARDS = "key_contextual_cards";
+    @VisibleForTesting
+    static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS;
+    @VisibleForTesting
+    static final String KEY_GLOBAL_CARD_LOADER_TIMEOUT = "global_card_loader_timeout_key";
 
+    private static final String KEY_CONTEXTUAL_CARDS = "key_contextual_cards";
     private static final String TAG = "ContextualCardManager";
 
     //The list for Settings Custom Card
@@ -201,7 +207,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
 
         //only log homepage display upon a fresh launch
-        if (loadTime <= ContextualCardLoader.CARD_CONTENT_LOADER_TIMEOUT_MS) {
+        final long timeoutLimit = getCardLoaderTimeout(mContext);
+        if (loadTime <= timeoutLimit) {
             onContextualCardUpdated(cards.stream()
                     .collect(groupingBy(ContextualCard::getCardType)));
         }
@@ -237,6 +244,14 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
         final List<ContextualCard> result = getCardsWithDeferredSetupViewType(cards);
         return getCardsWithSuggestionViewType(result);
+    }
+
+    @VisibleForTesting
+    long getCardLoaderTimeout(Context context) {
+        // Return the timeout limit if Settings.Global has the KEY_GLOBAL_CARD_LOADER_TIMEOUT key,
+        // else return default timeout.
+        return Settings.Global.getLong(mContext.getContentResolver(),
+                KEY_GLOBAL_CARD_LOADER_TIMEOUT, CARD_CONTENT_LOADER_TIMEOUT_MS);
     }
 
     private List<ContextualCard> getCardsWithSuggestionViewType(List<ContextualCard> cards) {

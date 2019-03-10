@@ -165,6 +165,7 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
                 com.android.settings.intelligence.ContextualCardProto.ContextualCard.newBuilder()
                         .setSliceUri(card.getSliceUri().toString())
                         .setCardName(card.getName())
+                        .setCardScore(card.getRankingScore())
                         .build()));
         return builder.build().toByteArray();
     }

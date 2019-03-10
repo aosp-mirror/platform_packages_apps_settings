@@ -940,10 +940,8 @@
     <string name="wifi_dpp_choose_different_network" msgid="4081965219206680361">"వేరే నెట్‌వర్క్‌ను ఎంచుకోండి"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="1598945041477461501">"పరికరాన్ని జోడించడం సాధ్యపడలేదు"</string>
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"పరికరం కనుగొనబడింది"</string>
-    <!-- no translation found for wifi_dpp_sharing_wifi_with_this_device (5579154298588011712) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_connecting (7111851118215580428) -->
-    <skip />
+    <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="5579154298588011712">"ఈ పరికరంతో Wi‑Fiని షేర్ చేస్తోంది…"</string>
+    <string name="wifi_dpp_connecting" msgid="7111851118215580428">"కనెక్ట్ అవుతోంది…"</string>
     <string name="retry" msgid="6472609612090877557">"మళ్లీ ప్రయత్నించు"</string>
     <string name="wifi_shared" msgid="844142443226926070">"ఇతర పరికర వినియోగదారులతో భాగస్వామ్యం చేయి"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(మారలేదు)"</string>
@@ -1067,11 +1065,6 @@
     <item msgid="7715869266611010880">"మొబైల్"</item>
     <item msgid="2838022395783120596">"Wi-Fi మాత్రమే"</item>
   </string-array>
-  <string-array name="wifi_calling_mode_values">
-    <item msgid="4799585830102342375">"2"</item>
-    <item msgid="1171822231056612021">"1"</item>
-    <item msgid="3194458950573886239">"0"</item>
-  </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"Wi-Fiకి ప్రాధాన్యత"</item>
     <item msgid="5074515506087318555">"మొబైల్‌కి ప్రాధాన్యత ఇవ్వబడింది"</item>
@@ -1079,10 +1072,6 @@
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
     <item msgid="1118703915148755405">"మొబైల్"</item>
-  </string-array>
-  <string-array name="wifi_calling_mode_values_without_wifi_only">
-    <item msgid="2339246858001475047">"2"</item>
-    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi కాలింగ్ ఆన్‌లో ఉన్నప్పుడు, మీ ఫోన్ మీ ప్రాధాన్యత మరియు ఏ సిగ్నల్ సామర్థ్యం ఎక్కువగా ఉంది వంటి అంశాల ఆధారంగా Wi-Fi నెట్‌వర్క్‌లు లేదా మీ క్యారియర్ నెట్‌వర్క్ ద్వారా కాల్‌లు వెళ్లేలా చేస్తుంది. ఈ ఫీచర్‌ను ఆన్ చేయడానికి ముందు, రుసుములు మరియు ఇతర వివరాల గురించి తెలుసుకోవడానికి మీ క్యారియర్‌ను సంప్రదించండి.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
@@ -2054,8 +2043,7 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 నిమిషాలు"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"చదవడానికి పట్టే సమయం"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"చర్య తీసుకోవడానికి పట్టే సమయం"</string>
-    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
-    <skip />
+    <string name="accessibility_content_timeout_preference_summary" msgid="2637322628166175371">"మీరు చదవాల్సిన సందేశాలను స్క్రీన్‌పై తాత్కాలికంగా ఎంతసేపు చూపాలనేది ఎంచుకోవచ్చు.\n\nఈ సెట్టింగ్‌కు అన్ని యాప్‌లలో మద్దతు ఉండదు."</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"మిమ్మల్ని ఏదో ఒక చర్యని తీసుకోమంటూ, తాత్కాలికంగా స్క్రీన్‌పై కనిపించే సందేశాలు ఎంతసేపు అలాగే ఉండాలనేది ఎంచుకోవచ్చు.\n\nఈ సెట్టింగ్‌కు అన్ని యాప్‌లలో మద్దతు ఉండదు."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"తాకి ఉంచాల్సిన సమయం"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"వర్ణ విలోమం"</string>
@@ -3006,7 +2994,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"బ్లూటూత్, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"బ్లూటూత్"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"యాప్‌లు &amp; నోటిఫికేషన్‌లు"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"అనుమతులు, డిఫాల్ట్ యాప్‌లు"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (6513508041918469381) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"కార్యాలయ ప్రొఫైల్‌లో ఉన్న యాప్‌లకు సంబంధించి నోటిఫికేషన్ యాక్సెస్ అందుబాటులో లేదు."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"ఖాతాలు"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"ఖాతాలు జోడించబడలేదు"</string>
@@ -3069,7 +3058,8 @@
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"విస్తార ప్రదర్శన, లాక్ స్క్రీన్ ప్రదర్శన"</string>
     <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"లాక్ స్క్రీన్ నోటిఫికేషన్"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"ముఖం"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"వేలిముద్ర"</string>
+    <!-- no translation found for keywords_fingerprint_settings (4425098764810291897) -->
+    <skip />
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"కాంతిహీన స్క్రీన్, టచ్‌స్క్రీన్, బ్యాటరీ, స్మార్ట్ ప్రకాశం, గతిశీల ప్రకాశం"</string>
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"స్క్రీన్‌ కాంతిహీనం, స్లీప్, బ్యాటరీ, గడువు ముగింపు, దృష్టి, ప్రదర్శన, స్క్రీన్, ఇనాక్టివ్‌"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"తిప్పండి, తిప్పు, పరిభ్రమణం, పోర్ట్రెయిట్, ల్యాండ్‌స్కేప్, ఓరియంటేషన్, నిలువు, అడ్డం"</string>
@@ -3102,6 +3092,8 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"రింగర్ నిశ్శబ్దానికి సెట్ చేయబడింది"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"రింగ్ వాల్యూమ్ 80% ఉంది"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"మీడియా వాల్యూమ్"</string>
+    <!-- no translation found for remote_media_volume_option_title (7602586327091007461) -->
+    <skip />
     <string name="call_volume_option_title" msgid="1265865226974255384">"కాల్ వాల్యూమ్"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"అలారం వాల్యూమ్"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"రింగ్ వాల్యూమ్"</string>
@@ -3352,7 +3344,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> వర్గం</item>
     </plurals>
     <string name="no_channels" msgid="3077375508177744586">"ఈ యాప్ ఏ నోటిఫికేషన్‌లను పోస్ట్ చేయలేదు"</string>
-    <string name="app_settings_link" msgid="8894946007543660906">"అనువర్తనంలో అదనపు సెట్టింగ్‌లు"</string>
+    <string name="app_settings_link" msgid="8894946007543660906">"యాప్‌లో అదనపు సెట్టింగ్‌లు"</string>
     <string name="app_notification_listing_summary_zero" msgid="8046168435207424440">"అన్ని యాప్‌లలో ఆన్ చేయబడ్డాయి"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="6709582776823665660">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> యాప్‌లలో ఆఫ్ చేయబడింది</item>
@@ -4221,10 +4213,8 @@
     <string name="zen_suggestion_title" msgid="798067603460192693">"అంతరాయం కలిగించవద్దును అప్‌డేట్ చేయి"</string>
     <string name="zen_suggestion_summary" msgid="5928686804697233014">"ఇతర వ్యాపకాలపై దృష్టి మరలకుండా ఉండడానికి నోటిఫికేషన్‌లను పాజ్ చేయండి"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ఈ లక్షణం ఈ పరికరంలో అందుబాటులో లేదు"</string>
-    <!-- no translation found for disabled_feature (2102058661071271076) -->
-    <skip />
-    <!-- no translation found for disabled_feature_reason_slow_down_phone (6377125503096655882) -->
-    <skip />
+    <string name="disabled_feature" msgid="2102058661071271076">"ఈ ఫీచర్ అందుబాటులో లేదు"</string>
+    <string name="disabled_feature_reason_slow_down_phone" msgid="6377125503096655882">"దీని వలన ఈ ఫోన్ పనితీరు నెమ్మదిస్తుంది"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"శక్తివంతమైన GNSS కొలతలు"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"డ్యూటీ సైక్లింగ్ లేకుండా అన్ని GNSS నక్షత్రరాశులను మరియు ఫ్రీక్వెన్సీలను ట్రాక్ చేయండి"</string>
     <string name="allow_background_activity_starts" msgid="4121456477541603005">"నేపథ్య కార్యకలాపం మొదలవ్వడానికి అనుమతి ఇవ్వు"</string>
@@ -4430,6 +4420,5 @@
     <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> నోటిఫికేషన్ ఛానెల్‌లు. అన్నింటినీ నిర్వహించుకోవడానికి నొక్కండి."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"అవుట్‌పుట్ మార్చండి"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>లో ప్లే అవుతోంది"</string>
-    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
-    <skip />
+    <string name="forget_passpoint_dialog_message" msgid="1996970308065448295">"ఈ ప్రదాత మీ సభ్యత్వాన్ని రద్దు చేసి ఉండవచ్చు. పునరావృతమయ్యే సభ్యత్వాలు రద్దు చేయబడవు. మరింత సమాచారం కోసం, మీ ప్రదాతను సంప్రదించండి."</string>
 </resources>

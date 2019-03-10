@@ -2266,6 +2266,10 @@
 
     <!-- Wifi saved access points.  Used as a label under the shortcut icon that goes to Wifi saved access points. [CHAR LIMIT=20] -->
     <string name="wifi_saved_access_points_label">Saved networks</string>
+    <!-- Tab title for showing subscribed WiFi access points. [CHAR LIMIT=20] -->
+    <string name="wifi_subscribed_access_points_tab">Subscriptions</string>
+    <!-- Tab title for showing saved WiFi access points. -->
+    <string name="wifi_saved_access_points_tab">@string/wifi_access_points</string>
     <!-- Wifi Advanced settings.  Used as a label under the shortcut icon that goes to Wifi advanced settings. [CHAR LIMIT=20] -->
     <string name="wifi_advanced_settings_label">IP settings</string>
     <!-- Error message for users that aren't allowed to see or modify WiFi advanced settings [CHAR LIMIT=NONE] -->
@@ -5583,6 +5587,12 @@
     <!-- Battery saver: Title for battery saver schedule screen [CHAR_LIMIT=40] -->
     <string name="battery_saver_schedule_settings_title">Set a schedule</string>
 
+    <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
+    <string name="battery_saver_sticky_title">Keep battery saver on</string>
+
+    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
+    <string name="battery_saver_sticky_description">Battery saver will stay on even after device is fully charged</string>
+
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title"><xliff:g id="percent">%1$s</xliff:g></string>
 
@@ -7147,6 +7157,9 @@
     <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity, ring</string>
     <!-- List of synonyms for notification vibration setting (changes whether your phone vibrates when it shows a notification), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
+    <!-- Battery Saver: Search terms for sticky battery saver preference [CHAR_LIMIT=NONE] -->
+    <string name="keywords_battery_saver_sticky">battery saver, sticky, persist, power saver, battery</string>
+
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
@@ -9207,10 +9220,7 @@
     <string name="condition_expand_hide">Hide</string>
 
     <!-- Title of condition that hotspot is on [CHAR LIMIT=30] -->
-    <string name="condition_hotspot_title">Hotspot</string>
-
-    <!-- Summary of condition that hotspot is on [CHAR LIMIT=NONE] -->
-    <string name="condition_hotspot_summary"><xliff:g name="ap_name" example="AndroidAP">%1$s</xliff:g> on</string>
+    <string name="condition_hotspot_title">Hotspot is active</string>
 
     <!-- Title of condition that airplane mode is on [CHAR LIMIT=30] -->
     <string name="condition_airplane_title">Airplane mode is on</string>
@@ -9798,14 +9808,27 @@
     <!-- Title for settings suggestion for double twist for camera [CHAR LIMIT=60] -->
     <string name="double_twist_for_camera_suggestion_title">Take selfies faster</string>
 
-    <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] -->
-    <string name="swipe_up_to_switch_apps_title">Swipe up on Home button</string>
+    <!-- Title text for system navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
+    <string name="system_navigation_title" translatable="false">System navigation</string>
+
+    <!-- Title text for swipe up to switch apps [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
+    <string name="swipe_up_to_switch_apps_title" translatable="false">2-button navigation</string>
     <!-- Summary text for swipe up to switch apps  [CHAR LIMIT=250] -->
     <string name="swipe_up_to_switch_apps_summary">To switch apps, swipe up on the Home button. Swipe up again to see all apps. Works from any screen. You’ll no longer have an Overview button on the bottom right of your screen.</string>
     <!-- Title for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_suggestion_title">Try the new Home button</string>
     <!-- Summary for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_suggestion_summary">Turn on the new gesture to switch apps</string>
+
+    <!-- Title text for edge to edge navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
+    <string name="edge_to_edge_navigation_title" translatable="false">Fully gestural navigation</string>
+    <!-- Summary text for edge to edge navigation  [CHAR LIMIT=None] [DO NOT TRANSLATE] -->
+    <string name="edge_to_edge_navigation_summary" translatable="false">To go Home, swipe up from the bottom of the screen. To go Back, swipe from either the left or right edge of the screen. To switch apps, start swiping up from the bottom of the screen and hold before releasing.</string>
+
+    <!-- Title text for 3-button navigation [CHAR LIMIT=60] [DO NOT TRANSLATE] -->
+    <string name="legacy_navigation_title" translatable="false">3-button navigation</string>
+    <!-- Summary text for 3-button navigation  [CHAR LIMIT=250] [DO NOT TRANSLATE] -->
+    <string name="legacy_navigation_summary" translatable="false">Classic Android navigation mode where going Home, switching apps, and going Back are accessible via buttons.</string>
 
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
@@ -10643,6 +10666,9 @@
     <!-- Title for the Volume dialog (settings panel) with all volume streams[CHAR LIMIT=50] -->
     <string name="volume_connectivity_panel_title">Volume</string>
 
+    <!-- Subtitle explaining that mobile data cannot be used while airplane mode is on [CHAR LIMIT=50] -->
+    <string name="mobile_data_ap_mode_disabled">Unavailable during airplane mode</string>
+
     <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
     <string name="force_desktop_mode">Force desktop mode</string>
     <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
@@ -10716,4 +10742,12 @@
 
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">Your subscription with this provider may be cancelled. Recurring subscriptions will not be cancelled. For more information, check with your provider.</string>
+
+    <!-- Keywords for Content Capture feature [CHAR_LIMIT=32] -->
+    <string name="keywords_content_capture">content capture</string>
+    <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
+    <string name="content_capture">Content Capture</string>
+    <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
+    <string name="content_capture_summary">Allow Android to save information seen on your screen or heard in video or audio content. Android makes helpful suggestions based on your device activity.</string>
+
 </resources>

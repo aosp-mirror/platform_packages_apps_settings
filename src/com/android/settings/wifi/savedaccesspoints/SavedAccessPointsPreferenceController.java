@@ -28,6 +28,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.utils.PreferenceGroupChildrenCache;
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.utils.ThreadUtils;
@@ -122,6 +123,12 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i) {
             AccessPoint ap = accessPoints.get(i);
+
+            if (mHost != null && mHost.isSubscriptionsFeatureEnabled()
+                    && ap.isPasspointConfig()) {
+                continue;
+            }
+
             String key = ap.getKey();
             AccessPointPreference preference =
                     (AccessPointPreference) mChildrenCache.getCachedPreference(key);
@@ -139,6 +146,15 @@ public class SavedAccessPointsPreferenceController extends BasePreferenceControl
 
         if (mPreferenceGroup.getPreferenceCount() < 1) {
             Log.w(TAG, "Saved networks activity loaded, but there are no saved networks!");
+            mPreferenceGroup.setVisible(false);
+        } else {
+            mPreferenceGroup.setVisible(true);
+        }
+
+        if (mHost != null && !mHost.isSubscriptionsFeatureEnabled()) {
+            mPreferenceGroup.setVisible(true);
+            mPreferenceGroup.setTitle(null);
+            mPreferenceGroup.setLayoutResource(R.layout.preference_category_no_label);
         }
     }
 }

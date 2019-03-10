@@ -289,10 +289,8 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         final PreferenceScreen screen = getPreferenceScreen();
 
-        if (mAddUserWhenLockedPreferenceController.isAvailable()) {
-            mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
-                    mAddUserWhenLockedPreferenceController.getPreferenceKey()));
-        }
+        mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
+                mAddUserWhenLockedPreferenceController.getPreferenceKey()));
 
         if (mShouldUpdateUserList) {
             updateUI();

@@ -30,6 +30,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,6 +58,12 @@ public class AddUserWhenLockedPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mUserManager = ShadowUserManager.getShadow();
         mController = new AddUserWhenLockedPreferenceController(mContext, "fake_key");
+        mUserManager.setSupportsMultipleUsers(true);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowUserManager.reset();
     }
 
     @Test
@@ -69,6 +76,30 @@ public class AddUserWhenLockedPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         verify(preference).setVisible(false);
+    }
+
+    @Test
+    public void updateState_NotAdmin_shouldNotDisplayPreference() {
+        mUserManager.setIsAdminUser(false);
+        final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
+
+        mController.updateState(preference);
+
+        verify(preference).setVisible(false);
+    }
+
+    @Test
+    public void updateState_Admin_shouldDisplayPreference() {
+        mUserManager.setIsAdminUser(true);
+        mUserManager.setUserSwitcherEnabled(true);
+        mUserManager.setSupportsMultipleUsers(true);
+        final AddUserWhenLockedPreferenceController controller =
+                new AddUserWhenLockedPreferenceController(mContext, "fake_key");
+        final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
+
+        controller.updateState(preference);
+
+        verify(preference).setVisible(true);
     }
 
     @Test

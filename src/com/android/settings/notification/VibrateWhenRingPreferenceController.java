@@ -130,17 +130,8 @@ public class VibrateWhenRingPreferenceController extends TogglePreferenceControl
     }
 
     private boolean isRampingRingerEnabled() {
-        String enableRampingRinger = DeviceConfig.getProperty(
-            DeviceConfig.Telephony.NAMESPACE,
-            DeviceConfig.Telephony.RAMPING_RINGER_ENABLED);
-        if (enableRampingRinger == null) {
-            return false;
-        }
-        try {
-            return Boolean.valueOf(enableRampingRinger);
-        } catch (Exception e) {
-            return false;
-        }
+        return DeviceConfig.getBoolean(DeviceConfig.Telephony.NAMESPACE,
+                DeviceConfig.Telephony.RAMPING_RINGER_ENABLED, false);
     }
 
 }

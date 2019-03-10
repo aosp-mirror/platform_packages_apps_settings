@@ -1065,11 +1065,6 @@
     <item msgid="7715869266611010880">"Mobiel"</item>
     <item msgid="2838022395783120596">"Net Wi-Fi"</item>
   </string-array>
-  <string-array name="wifi_calling_mode_values">
-    <item msgid="4799585830102342375">"2"</item>
-    <item msgid="1171822231056612021">"1"</item>
-    <item msgid="3194458950573886239">"0"</item>
-  </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
     <item msgid="5782108782860004851">"Verkies Wi-Fi"</item>
     <item msgid="5074515506087318555">"Verkies mobiel"</item>
@@ -1077,10 +1072,6 @@
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
     <item msgid="1118703915148755405">"Mobiel"</item>
-  </string-array>
-  <string-array name="wifi_calling_mode_values_without_wifi_only">
-    <item msgid="2339246858001475047">"2"</item>
-    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="564780186974911501">"As Wi-Fi-oproepe aan is, kan jou foon oproepe deur Wi-Fi-netwerke of jou diensverskaffer se netwerk roeteer, afhangend van jou voorkeur en watter sein die sterkste is. Vind by jou diensverskaffer oor tariewe en ander besonderhede uit voordat jy hierdie kenmerk aanskakel.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
@@ -2052,8 +2043,7 @@
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minute"</string>
     <string name="accessibility_content_timeout_preference_title" msgid="5647118549024271497">"Tyd om te lees"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Tyd om iets te doen"</string>
-    <!-- no translation found for accessibility_content_timeout_preference_summary (2637322628166175371) -->
-    <skip />
+    <string name="accessibility_content_timeout_preference_summary" msgid="2637322628166175371">"Kies hoe lank om boodskappe te wys wat jy moet lees, maar wat net tydelik sigbaar is.\n\nNie alle programme ondersteun hierdie instelling nie."</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Kies hoe lank om boodskappe te wys wat jou vra om iets te doen, maar wat net tydelik sigbaar is.\n\nNie alle programme ondersteun hierdie instelling nie."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Raak-en-hou-vertraging"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Kleur-omkering"</string>
@@ -3004,7 +2994,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apps en kennisgewings"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Toestemmings, verstekprogramme"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (6513508041918469381) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Kennisgewingtoegang is nie vir programme in die werkprofiel beskikbaar nie."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Rekeninge"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Geen rekeninge is bygevoeg nie"</string>
@@ -3067,7 +3058,8 @@
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Stemmingvertoning, sluitskermvertoning"</string>
     <string name="keywords_lock_screen_notif" msgid="6610464036497568711">"sluitskermkennisgewing"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"gesig"</string>
-    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"vingerafdruk"</string>
+    <!-- no translation found for keywords_fingerprint_settings (4425098764810291897) -->
+    <skip />
     <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"verdof skerm, raakskerm, battery, slimhelderheid, dinamiese helderheid"</string>
     <string name="keywords_display_adaptive_sleep" msgid="6865504720946121402">"verdonker skerm, slaap, battery, uitteltyd, aandag, skerm, onaktiwiteit"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"draai, keer om, rotasie, portret, landskap, oriëntasie, vertikaal, horisontaal"</string>
@@ -3100,6 +3092,8 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Luitoestel is op stil gestel"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Luivolume op 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Mediavolume"</string>
+    <!-- no translation found for remote_media_volume_option_title (7602586327091007461) -->
+    <skip />
     <string name="call_volume_option_title" msgid="1265865226974255384">"Oproepvolume"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Wekkervolume"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Luivolume"</string>
@@ -4424,6 +4418,5 @@
     <string name="notification_many_channel_count_summary" msgid="8647409434789898073">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> kennisgewingkanale. Tik om almal te bestuur."</string>
     <string name="media_output_panel_title" msgid="6197092814295528184">"Wissel uitvoer"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="629529380940058789">"Speel tans op <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for forget_passpoint_dialog_message (1996970308065448295) -->
-    <skip />
+    <string name="forget_passpoint_dialog_message" msgid="1996970308065448295">"Jou intekening by hierdie verskaffer kan geskanselleer word. Herhalende intekeninge sal nie gekanselleer word nie. Kry meer inligting by jou verskaffer."</string>
 </resources>

@@ -21,8 +21,13 @@
     android:title="@string/wifi_saved_access_points_label">
 
     <PreferenceCategory
+        android:key="subscribed_access_points_category"
+        android:title="@string/wifi_subscribed_access_points_tab"
+        settings:controller="com.android.settings.wifi.savedaccesspoints.SubscribedAccessPointsPreferenceController"/>
+
+    <PreferenceCategory
         android:key="saved_access_points_category"
-        android:layout="@layout/preference_category_no_label"
+        android:title="@string/wifi_saved_access_points_tab"
         settings:controller="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsPreferenceController"/>
 
 </PreferenceScreen>

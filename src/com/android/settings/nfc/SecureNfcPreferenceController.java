@@ -52,12 +52,12 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
 
     @Override
     public boolean isChecked() {
-        return mNfcAdapter.isNfcSecureEnabled();
+        return mNfcAdapter.isSecureNfcEnabled();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return mNfcAdapter.setNfcSecure(isChecked);
+        return mNfcAdapter.enableSecureNfc(isChecked);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
         if (mNfcAdapter == null) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return mNfcAdapter.deviceSupportsNfcSecure()
+        return mNfcAdapter.isSecureNfcSupported()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

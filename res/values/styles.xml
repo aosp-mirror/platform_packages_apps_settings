@@ -448,7 +448,7 @@
     <style name="ConditionFullCardBorderlessButton"
            parent="@style/ConditionCardBorderlessButton">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:paddingStart">50dp</item>
+        <item name="android:paddingStart">62dp</item>
         <item name="android:paddingEnd">50dp</item>
     </style>
 
@@ -484,8 +484,8 @@
     </style>
 
     <style name="SliceViewStyle">
-        <!-- 4dp start padding for the start icon -->
-        <item name="android:paddingStart">4dp</item>
+        <!-- 2dp start padding for the start icon -->
+        <item name="android:paddingStart">2dp</item>
 
         <!-- End margin of content without end items is 24dp.
              android:paddingEnd = 24 - 16(contentEndPadding) -->
@@ -497,8 +497,8 @@
     <style name="SliceRowStyle">
         <item name="titleItemEndPadding">0dp</item>
 
-        <!-- Padding between content and the start icon is 12dp. -->
-        <item name="contentStartPadding">12dp</item>
+        <!-- Padding between content and the start icon is 14dp. -->
+        <item name="contentStartPadding">14dp</item>
         <!-- Padding between content and end items is 16dp. -->
         <item name="contentEndPadding">16dp</item>
 
@@ -508,9 +508,9 @@
         <item name="endItemEndPadding">8dp</item>
 
         <!-- Both side margins of bottom divider are 12dp.
-             bottomDividerStartPadding = 12 - 4(android:paddingStart)
+             bottomDividerStartPadding = 12 - 2(android:paddingStart)
              bottomDividerEndPadding = 12 - 8(android:paddingEnd) -->
-        <item name="bottomDividerStartPadding">8dp</item>
+        <item name="bottomDividerStartPadding">10dp</item>
         <item name="bottomDividerEndPadding">4dp</item>
 
         <item name="actionDividerHeight">32dp</item>

@@ -32,12 +32,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
-public class SwipeUpGestureSettings extends DashboardFragment {
+public class SystemNavigationGestureSettings extends DashboardFragment {
 
-    private static final String TAG = "SwipeUpGesture";
+    private static final String TAG = "SystemNavigationGesture";
 
     public static final String PREF_KEY_SUGGESTION_COMPLETE =
-            "pref_swipe_up_suggestion_complete";
+            "pref_system_navigation_suggestion_complete";
 
     @Override
     public void onAttach(Context context) {
@@ -60,7 +60,7 @@ public class SwipeUpGestureSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.swipe_up_gesture_settings;
+        return R.xml.system_navigation_gesture_settings;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -69,13 +69,13 @@ public class SwipeUpGestureSettings extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.swipe_up_gesture_settings;
+                    sir.xmlResId = R.xml.system_navigation_gesture_settings;
                     return Arrays.asList(sir);
                 }
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SwipeUpPreferenceController.isGestureAvailable(context);
+                    return SystemNavigationPreferenceController.isGestureAvailable(context);
                 }
             };
 }

@@ -21,14 +21,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric;
+import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupChooseLockGeneric;
 
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
 /**
@@ -199,28 +204,39 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     protected Intent getChooseLockIntent() {
-        return new Intent(this, ChooseLockGeneric.class);
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            // Default to PIN lock in setup wizard
+            Intent intent = new Intent(this, SetupChooseLockGeneric.class);
+            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+                intent.putExtra(
+                        LockPatternUtils.PASSWORD_TYPE_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+                intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, true);
+            }
+            WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+            return intent;
+        } else {
+            return new Intent(this, ChooseLockGeneric.class);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final boolean isResultFinished = resultCode == RESULT_FINISHED;
-        final int result = isResultFinished ? RESULT_OK : RESULT_SKIP;
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
-            if (isResultFinished || resultCode == RESULT_SKIP) {
-                setResult(result, data);
+            if (resultCode == RESULT_FINISHED || resultCode == RESULT_SKIP) {
+                setResult(resultCode, data);
                 finish();
                 return;
             }
         } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
-            if (isResultFinished) {
+            if (resultCode == RESULT_FINISHED) {
                 updatePasswordQuality();
                 mToken = data.getByteArrayExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 return;
             } else {
-                setResult(result, data);
+                setResult(resultCode, data);
                 finish();
             }
         } else if (requestCode == CONFIRM_REQUEST) {
@@ -228,7 +244,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
             } else {
-                setResult(result, data);
+                setResult(resultCode, data);
                 finish();
             }
         } else if (requestCode == LEARN_MORE_REQUEST) {
@@ -238,6 +254,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     protected void onCancelButtonClick(View view) {
+        finish();
+    }
+
+    protected void onSkipButtonClick(View view) {
+        setResult(RESULT_SKIP);
         finish();
     }
 

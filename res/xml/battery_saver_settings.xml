@@ -26,6 +26,13 @@
         android:title="@string/battery_saver_schedule_settings_title"
         settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverSchedulePreferenceController"/>
 
+    <SwitchPreference
+        android:key="battery_saver_sticky"
+        android:title="@string/battery_saver_sticky_title"
+        android:summary="@string/battery_saver_sticky_description"
+        settings:keywords="@string/keywords_battery_saver_sticky"
+        settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverStickyPreferenceController"/>
+
     <com.android.settings.widget.TwoStateButtonPreference
         android:key="battery_saver"
         android:title="@string/battery_saver"
