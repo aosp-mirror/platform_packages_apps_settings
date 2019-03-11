@@ -86,6 +86,7 @@ public class ContextualCardLoaderTest {
     private ContextualCard getContextualCard(Uri sliceUri) {
         return new ContextualCard.Builder()
                 .setName("test_card")
+                .setRankingScore(0.5f)
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(sliceUri)
                 .build();
