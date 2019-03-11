@@ -327,7 +327,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 mContext.getDrawable(R.drawable.ic_settings_widget_background));
         iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-        mEntityHeaderController.setLabel(mAccessPoint.getSsidStr());
+        mEntityHeaderController.setLabel(mAccessPoint.getTitle());
     }
 
     @Override

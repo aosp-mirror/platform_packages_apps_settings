@@ -384,9 +384,9 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void entityHeader_shouldHaveLabelSetToSsid() {
-        String label = "ssid";
-        when(mockAccessPoint.getSsidStr()).thenReturn(label);
+    public void entityHeader_shouldHaveLabelSetToTitle() {
+        String label = "title";
+        when(mockAccessPoint.getTitle()).thenReturn(label);
 
         displayAndResume();
 
