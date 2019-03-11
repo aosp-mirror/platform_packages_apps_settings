@@ -74,27 +74,8 @@ public class MobileDataSlice implements CustomSliceable {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_network_cell);
         final String title = mContext.getText(R.string.mobile_data_settings_title).toString();
-        @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
-
-        // Return a Slice without the mobile data toggle when airplane mode is on.
-        if (isAirplaneModeEnabled()) {
-            final CharSequence summary = mContext.getText(R.string.mobile_data_ap_mode_disabled);
-            // Intent does nothing, but we have to pass an intent to the Row.
-            final PendingIntent intent = PendingIntent.getActivity(mContext, 0 /* requestCode */,
-                    new Intent(), 0 /* flags */);
-            final SliceAction deadAction =
-                    SliceAction.create(intent, icon, ListBuilder.ICON_IMAGE, title);
-            final ListBuilder listBuilder = new ListBuilder(mContext, getUri(),
-                    ListBuilder.INFINITY)
-                    .setAccentColor(color)
-                    .addRow(new ListBuilder.RowBuilder()
-                            .setTitle(title)
-                            .setSubtitle(summary)
-                            .setPrimaryAction(deadAction));
-            return listBuilder.build();
-        }
-
         final CharSequence summary = getSummary();
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         final PendingIntent toggleAction = getBroadcastIntent(mContext);
         final PendingIntent primaryAction = getPrimaryAction();
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
@@ -120,6 +101,11 @@ public class MobileDataSlice implements CustomSliceable {
 
     @Override
     public void onNotifyChange(Intent intent) {
+        // Don't make a change if we are in Airplane Mode.
+        if (isAirplaneModeEnabled()) {
+            return;
+        }
+
         final boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
                     isMobileDataEnabled());
 
