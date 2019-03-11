@@ -94,13 +94,13 @@ public class BatterySaverButtonPreferenceControllerTest {
     public void setChecked_on_setPowerSaveMode() {
         mController.setChecked(true);
 
-        verify(mPowerManager).setPowerSaveMode(true);
+        verify(mPowerManager).setPowerSaveModeEnabled(true);
     }
 
     @Test
     public void setChecked_off_unsetPowerSaveMode() {
         mController.setChecked(false);
 
-        verify(mPowerManager).setPowerSaveMode(false);
+        verify(mPowerManager).setPowerSaveModeEnabled(false);
     }
 }
