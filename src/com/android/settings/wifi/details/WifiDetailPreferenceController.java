@@ -66,6 +66,7 @@ import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -75,6 +76,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.net.Inet4Address;
 import java.net.Inet6Address;
@@ -136,7 +139,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private WifiConfiguration mWifiConfig;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
+    private final WifiTracker mWifiTracker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private boolean mIsOutOfRange;
 
     // UI elements - in order of appearance
     private ActionButtonsPreference mButtonsPref;
@@ -176,7 +181,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                     // fall through
                 case WifiManager.NETWORK_STATE_CHANGED_ACTION:
                 case WifiManager.RSSI_CHANGED_ACTION:
-                    updateLiveNetworkInfo();
+                    updateNetworkInfo();
                     break;
             }
         }
@@ -206,14 +211,16 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         @Override
         public void onCapabilitiesChanged(Network network, NetworkCapabilities nc) {
             // If the network just validated or lost Internet access, refresh network state.
-            // Don't do this on every NetworkCapabilities change because refreshNetworkState
-            // sends IPCs to the system server from the UI thread, which can cause jank.
+            // Don't do this on every NetworkCapabilities change because update accesspoint notify
+            // changed for accesspoint changed on the main thread, which can cause jank.
             if (network.equals(mNetwork) && !nc.equals(mNetworkCapabilities)) {
                 if (hasCapabilityChanged(nc, NET_CAPABILITY_VALIDATED) ||
                         hasCapabilityChanged(nc, NET_CAPABILITY_CAPTIVE_PORTAL)) {
-                    refreshNetworkState();
+                    mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
+                    refreshEntityHeader();
                 }
                 mNetworkCapabilities = nc;
+                refreshButtons();
                 updateIpLayerInfo();
             }
         }
@@ -223,6 +230,29 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             if (network.equals(mNetwork)) {
                 exitActivity();
             }
+        }
+    };
+
+    private final WifiTracker.WifiListener mWifiListener = new WifiTracker.WifiListener() {
+        /** Called when the state of Wifi has changed. */
+        public void onWifiStateChanged(int state) {
+            Log.d(TAG, "onWifiStateChanged(" + state + ")");
+            // Do nothing.
+        }
+
+        /** Called when the connection state of wifi has changed. */
+        public void onConnectedChanged() {
+            Log.d(TAG, "onConnectedChanged");
+            // Do nothing.
+        }
+
+        /**
+         * Called to indicate the list of AccessPoints has been updated and
+         * {@link WifiTracker#getAccessPoints()} should be called to get the updated list.
+         */
+        public void onAccessPointsChanged() {
+            Log.d(TAG, "onAccessPointsChanged");
+            updateNetworkInfo();
         }
     };
 
@@ -270,6 +300,17 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         mLifecycle = lifecycle;
         lifecycle.addObserver(this);
+
+        if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext)) {
+            mWifiTracker = WifiTrackerFactory.create(
+                    mFragment.getActivity(),
+                    mWifiListener,
+                    mLifecycle,
+                    true /*includeSaved*/,
+                    true /*includeScans*/);
+        } else {
+            mWifiTracker = null;
+        }
     }
 
     @Override
@@ -360,7 +401,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mNetwork = mWifiManager.getCurrentNetwork();
         mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
         mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
-        updateLiveNetworkInfo();
+        updateNetworkInfo();
         mContext.registerReceiver(mReceiver, mFilter);
         mConnectivityManager.registerNetworkCallback(mNetworkRequest, mNetworkCallback,
                 mHandler);
@@ -377,72 +418,73 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
     }
 
-    // TODO(b/124707751): Refactoring the code later, keeping it currently for stability.
-    protected void updateSavedNetworkInfo() {
-        mSignalStrengthPref.setVisible(false);
-        mFrequencyPref.setVisible(false);
-        mTxLinkSpeedPref.setVisible(false);
-        mRxLinkSpeedPref.setVisible(false);
-
-        // MAC Address Pref
-        mMacAddressPref.setSummary(mWifiConfig.getRandomizedMacAddress().toString());
-
-        refreshEntityHeader();
-
-        updateIpLayerInfo();
-
-        // Update whether the forget button should be displayed.
-        mButtonsPref.setButton1Visible(canForgetNetwork());
-    }
-
-    private void updateLiveNetworkInfo() {
-        // No need to fetch LinkProperties and NetworkCapabilities, they are updated by the
-        // callbacks. mNetwork doesn't change except in onResume.
-        mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
-        mWifiInfo = mWifiManager.getConnectionInfo();
-        if (mNetwork == null || mNetworkInfo == null || mWifiInfo == null) {
-            exitActivity();
+    private void updateNetworkInfo() {
+        if(!updateAccessPoint()) {
             return;
         }
 
-        // Update whether the forget button should be displayed.
-        mButtonsPref.setButton1Visible(canForgetNetwork());
+        // refresh header
+        refreshEntityHeader();
 
-        refreshNetworkState();
+        // refresh Buttons
+        refreshButtons();
 
         // Update Connection Header icon and Signal Strength Preference
         refreshRssiViews();
-
-        // MAC Address Pref
-        mMacAddressPref.setSummary(mWifiInfo.getMacAddress());
-
-        // Transmit Link Speed Pref
-        int txLinkSpeedMbps = mWifiInfo.getTxLinkSpeedMbps();
-        mTxLinkSpeedPref.setVisible(txLinkSpeedMbps >= 0);
-        mTxLinkSpeedPref.setSummary(mContext.getString(
-                R.string.tx_link_speed, mWifiInfo.getTxLinkSpeedMbps()));
-
-        // Receive Link Speed Pref
-        int rxLinkSpeedMbps = mWifiInfo.getRxLinkSpeedMbps();
-        mRxLinkSpeedPref.setVisible(rxLinkSpeedMbps >= 0);
-        mRxLinkSpeedPref.setSummary(mContext.getString(
-                R.string.rx_link_speed, mWifiInfo.getRxLinkSpeedMbps()));
-
         // Frequency Pref
-        final int frequency = mWifiInfo.getFrequency();
-        String band = null;
-        if (frequency >= AccessPoint.LOWER_FREQ_24GHZ
-                && frequency < AccessPoint.HIGHER_FREQ_24GHZ) {
-            band = mContext.getResources().getString(R.string.wifi_band_24ghz);
-        } else if (frequency >= AccessPoint.LOWER_FREQ_5GHZ
-                && frequency < AccessPoint.HIGHER_FREQ_5GHZ) {
-            band = mContext.getResources().getString(R.string.wifi_band_5ghz);
-        } else {
-            Log.e(TAG, "Unexpected frequency " + frequency);
-        }
-        mFrequencyPref.setSummary(band);
-
+        refreshFrequency();
+        // Transmit Link Speed Pref
+        refreshTxSpeed();
+        // Receive Link Speed Pref
+        refreshRxSpeed();
+        // IP related information
         updateIpLayerInfo();
+        // MAC Address Pref
+        refreshMacAddress();
+
+    }
+
+    private boolean updateAccessPoint() {
+        boolean changed = false;
+        if (mWifiTracker != null) {
+            updateAccessPointFromScannedList();
+            // refresh UI if signal level changed for disconnect network.
+            changed = mRssiSignalLevel != mAccessPoint.getLevel();
+        }
+
+        if (mAccessPoint.isActive()) {
+            // No need to fetch LinkProperties and NetworkCapabilities, they are updated by the
+            // callbacks. mNetwork doesn't change except in onResume.
+            mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
+            mWifiInfo = mWifiManager.getConnectionInfo();
+            if (mNetwork == null || mNetworkInfo == null || mWifiInfo == null) {
+                exitActivity();
+                return false;
+            }
+
+            changed |= mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
+            // If feature for saved network not enabled, always return true.
+            return mWifiTracker == null || changed;
+        }
+
+        return changed;
+    }
+
+    private void updateAccessPointFromScannedList() {
+        mIsOutOfRange = true;
+
+        if (mAccessPoint.getConfig() == null) {
+            return;
+        }
+
+        for (AccessPoint ap : mWifiTracker.getAccessPoints()) {
+            if (ap.getConfig() != null
+                    && mAccessPoint.matches(ap.getConfig())) {
+                mAccessPoint = ap;
+                mIsOutOfRange = false;
+                return;
+            }
+        }
     }
 
     private void exitActivity() {
@@ -452,13 +494,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mFragment.getActivity().finish();
     }
 
-    private void refreshNetworkState() {
-        mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
-        refreshEntityHeader();
-    }
-
     private void refreshRssiViews() {
         int signalLevel = mAccessPoint.getLevel();
+
+        // Disappears signal view if not in range. e.g. for saved networks.
+        if (mIsOutOfRange) {
+            mSignalStrengthPref.setVisible(false);
+            mRssiSignalLevel = -1;
+            return;
+        }
 
         if (mRssiSignalLevel == signalLevel) {
             return;
@@ -477,6 +521,84 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mSignalStrengthPref.setIcon(wifiIconDark);
 
         mSignalStrengthPref.setSummary(mSignalStr[mRssiSignalLevel]);
+        mSignalStrengthPref.setVisible(true);
+    }
+
+    private void refreshFrequency() {
+        if (mWifiInfo == null) {
+            mFrequencyPref.setVisible(false);
+            return;
+        }
+
+        final int frequency = mWifiInfo.getFrequency();
+        String band = null;
+        if (frequency >= AccessPoint.LOWER_FREQ_24GHZ
+                && frequency < AccessPoint.HIGHER_FREQ_24GHZ) {
+            band = mContext.getResources().getString(R.string.wifi_band_24ghz);
+        } else if (frequency >= AccessPoint.LOWER_FREQ_5GHZ
+                && frequency < AccessPoint.HIGHER_FREQ_5GHZ) {
+            band = mContext.getResources().getString(R.string.wifi_band_5ghz);
+        } else {
+            Log.e(TAG, "Unexpected frequency " + frequency);
+        }
+        mFrequencyPref.setSummary(band);
+        mFrequencyPref.setVisible(true);
+    }
+
+    private void refreshTxSpeed() {
+        if (mWifiInfo == null) {
+            mTxLinkSpeedPref.setVisible(false);
+            return;
+        }
+
+        int txLinkSpeedMbps = mWifiInfo.getTxLinkSpeedMbps();
+        mTxLinkSpeedPref.setVisible(txLinkSpeedMbps >= 0);
+        mTxLinkSpeedPref.setSummary(mContext.getString(
+                R.string.tx_link_speed, mWifiInfo.getTxLinkSpeedMbps()));
+    }
+
+    private void refreshRxSpeed() {
+        if (mWifiInfo == null) {
+            mRxLinkSpeedPref.setVisible(false);
+            return;
+        }
+
+        int rxLinkSpeedMbps = mWifiInfo.getRxLinkSpeedMbps();
+        mRxLinkSpeedPref.setVisible(rxLinkSpeedMbps >= 0);
+        mRxLinkSpeedPref.setSummary(mContext.getString(
+                R.string.rx_link_speed, mWifiInfo.getRxLinkSpeedMbps()));
+    }
+
+    private void refreshMacAddress() {
+        String macAddress = getMacAddress();
+        if (macAddress == null) {
+            mMacAddressPref.setVisible(false);
+            return;
+        }
+
+        mMacAddressPref.setVisible(true);
+        mMacAddressPref.setSummary(macAddress);
+    }
+
+    private String getMacAddress() {
+        if (mWifiInfo != null) {
+            // get MAC address from connected network information
+            return mWifiInfo.getMacAddress();
+        }
+
+        // return randomized MAC address
+        if (mWifiConfig.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_PERSISTENT) {
+            return mWifiConfig.getRandomizedMacAddress().toString();
+        }
+
+        // return device MAC address
+        final String[] macAddresses = mWifiManager.getFactoryMacAddresses();
+        if (macAddresses != null && macAddresses.length > 0) {
+            return macAddresses[0];
+        }
+
+        Log.e(TAG, "Can't get device MAC address!");
+        return null;
     }
 
     private void updatePreference(Preference pref, String detailText) {
@@ -488,13 +610,17 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         }
     }
 
-    private void updateIpLayerInfo() {
+    private void refreshButtons() {
+        mButtonsPref.setButton1Visible(canForgetNetwork());
         mButtonsPref.setButton2Visible(canSignIntoNetwork());
         mButtonsPref.setButton3Visible(canShareNetwork());
         mButtonsPref.setVisible(
                 canSignIntoNetwork() || canForgetNetwork() || canShareNetwork());
+    }
 
-        if (mNetwork == null || mLinkProperties == null) {
+    private void updateIpLayerInfo() {
+        // Hide IP layer info if not a connected network.
+        if (!mAccessPoint.isActive() || mNetwork == null || mLinkProperties == null) {
             mIpAddressPref.setVisible(false);
             mSubnetPref.setVisible(false);
             mGatewayPref.setVisible(false);
