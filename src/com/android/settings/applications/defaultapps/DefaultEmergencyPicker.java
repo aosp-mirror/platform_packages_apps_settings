@@ -17,9 +17,7 @@
 package com.android.settings.applications.defaultapps;
 
 import android.app.role.RoleManager;
-import android.app.role.RoleManagerCallback;
 import android.app.settings.SettingsEnums;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -27,7 +25,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 import android.os.Process;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -100,18 +97,13 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
         final String previousValue = getDefaultKey();
 
         if (!TextUtils.isEmpty(key) && !TextUtils.equals(key, previousValue)) {
-            getContext().getSystemService(RoleManager.class)
-                      .addRoleHolderAsUser(
-                              RoleManager.ROLE_EMERGENCY, key, 0, Process.myUserHandle(),
-                              AsyncTask.THREAD_POOL_EXECUTOR, new RoleManagerCallback() {
-                                  @Override
-                                  public void onSuccess() {}
-
-                                  @Override
-                                  public void onFailure() {
-                                      Log.e(TAG, "Failed to set emergency default app.");
-                                  }
-                              });
+            getContext().getSystemService(RoleManager.class).addRoleHolderAsUser(
+                    RoleManager.ROLE_EMERGENCY, key, 0, Process.myUserHandle(),
+                    AsyncTask.THREAD_POOL_EXECUTOR, successful -> {
+                        if (!successful) {
+                            Log.e(TAG, "Failed to set emergency default app.");
+                        }
+                    });
             return true;
         }
         return false;
