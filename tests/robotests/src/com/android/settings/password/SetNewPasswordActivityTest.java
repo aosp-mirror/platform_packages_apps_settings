@@ -16,7 +16,7 @@
 
 package com.android.settings.password;
 
-import static android.Manifest.permission.REQUEST_SCREEN_LOCK_COMPLEXITY;
+import static android.Manifest.permission.REQUEST_PASSWORD_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
@@ -139,7 +139,7 @@ public class SetNewPasswordActivityTest {
     public void testLaunchChooseLock_setNewPasswordExtraWithPermission() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
         ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
-        ShadowPasswordUtils.addGrantedPermission(REQUEST_SCREEN_LOCK_COMPLEXITY);
+        ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
 
@@ -169,7 +169,7 @@ public class SetNewPasswordActivityTest {
     public void testLaunchChooseLock_setNewPasswordExtraInvalidValue() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
         ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
-        ShadowPasswordUtils.addGrantedPermission(REQUEST_SCREEN_LOCK_COMPLEXITY);
+        ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
 
@@ -197,7 +197,7 @@ public class SetNewPasswordActivityTest {
     public void testLaunchChooseLock_setNewPasswordExtraNoneComplexity() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
         ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
-        ShadowPasswordUtils.addGrantedPermission(REQUEST_SCREEN_LOCK_COMPLEXITY);
+        ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
 
@@ -225,7 +225,7 @@ public class SetNewPasswordActivityTest {
     public void testLaunchChooseLock_setNewPasswordWithoutExtra() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
         ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
-        ShadowPasswordUtils.addGrantedPermission(REQUEST_SCREEN_LOCK_COMPLEXITY);
+        ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
 
@@ -252,7 +252,7 @@ public class SetNewPasswordActivityTest {
     public void testLaunchChooseLock_setNewParentProfilePasswordExtraWithPermission() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
         ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
-        ShadowPasswordUtils.addGrantedPermission(REQUEST_SCREEN_LOCK_COMPLEXITY);
+        ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
 
@@ -280,7 +280,7 @@ public class SetNewPasswordActivityTest {
     public void testLaunchChooseLock_setNewParentProfilePasswordWithoutExtra() {
         ShadowPasswordUtils.setCallingAppLabel(APP_LABEL);
         ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
-        ShadowPasswordUtils.addGrantedPermission(REQUEST_SCREEN_LOCK_COMPLEXITY);
+        ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
 
