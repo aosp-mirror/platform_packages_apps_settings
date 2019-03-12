@@ -209,7 +209,7 @@ public class BackupSettingsHelper {
     }
 
     /** Checks if backup service is enabled for this user. */
-    private boolean isBackupServiceActive() {
+    public boolean isBackupServiceActive() {
         boolean backupOkay;
         try {
             backupOkay = mBackupManager.isBackupServiceActive(UserHandle.myUserId());
