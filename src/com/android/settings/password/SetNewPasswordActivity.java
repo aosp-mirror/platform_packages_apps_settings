@@ -16,7 +16,7 @@
 
 package com.android.settings.password;
 
-import static android.Manifest.permission.REQUEST_SCREEN_LOCK_COMPLEXITY;
+import static android.Manifest.permission.REQUEST_PASSWORD_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
@@ -83,7 +83,7 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
         if (ACTION_SET_NEW_PASSWORD.equals(mNewPasswordAction)
                 && getIntent().hasExtra(EXTRA_PASSWORD_COMPLEXITY)) {
             final boolean hasPermission = PasswordUtils.isCallingAppPermitted(
-                    this, activityToken, REQUEST_SCREEN_LOCK_COMPLEXITY);
+                    this, activityToken, REQUEST_PASSWORD_COMPLEXITY);
             if (hasPermission) {
                 mRequestedMinComplexity =
                         PasswordMetrics.sanitizeComplexityLevel(getIntent()
@@ -91,7 +91,7 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
             } else {
                 PasswordUtils.crashCallingApplication(activityToken,
                         "Must have permission "
-                                + REQUEST_SCREEN_LOCK_COMPLEXITY + " to use extra "
+                                + REQUEST_PASSWORD_COMPLEXITY + " to use extra "
                                 + EXTRA_PASSWORD_COMPLEXITY);
                 finish();
                 return;
