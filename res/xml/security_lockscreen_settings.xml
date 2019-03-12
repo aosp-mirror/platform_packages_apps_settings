@@ -60,12 +60,6 @@
             settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController" />
 
         <Preference
-            android:key="ambient_display_wake_screen"
-            android:title="@string/ambient_display_wake_screen_title"
-            android:fragment="com.android.settings.gestures.WakeScreenGestureSettings"
-            settings:controller="com.android.settings.gestures.WakeScreenGesturePreferenceController" />
-
-        <Preference
             android:key="ambient_display_tap"
             android:title="@string/ambient_display_tap_screen_title"
             android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
