@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -105,5 +106,11 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
 
         mButtonRight = view.findViewById(R.id.button_right);
         mButtonRight.setVisibility(View.GONE);
+
+        if (savedInstanceState == null) {
+            // For Talkback to describe this fragment
+            mTitleSummaryContainer.sendAccessibilityEvent(
+                    AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+        }
     }
 }

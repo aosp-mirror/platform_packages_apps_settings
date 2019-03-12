@@ -41,6 +41,7 @@ import android.view.TextureView;
 import android.view.TextureView.SurfaceTextureListener;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -173,6 +174,13 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // setTitle for Talkback
+        if (mIsConfiguratorMode) {
+            getActivity().setTitle(R.string.wifi_dpp_add_device_to_network);
+        } else {
+            getActivity().setTitle(R.string.wifi_dpp_scan_qr_code);
+        }
 
         final ActionBar actionBar = getActivity().getActionBar();
         if (actionBar != null) {
@@ -380,6 +388,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void showErrorMessage(String message) {
         mErrorMessage.setVisibility(View.VISIBLE);
         mErrorMessage.setText(message);
+        mErrorMessage.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
 
         mHandler.removeMessages(MESSAGE_HIDE_ERROR_MESSAGE);
         mHandler.sendEmptyMessageDelayed(MESSAGE_HIDE_ERROR_MESSAGE,
@@ -410,6 +419,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                         mProgressBar.setVisibility(View.VISIBLE);
                         startWifiDppEnrolleeInitiator((WifiQrCode)msg.obj);
                         updateEnrolleeSummary();
+                        mSummary.sendAccessibilityEvent(
+                                AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
                     }
                     break;
 

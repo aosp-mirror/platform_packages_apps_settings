@@ -147,7 +147,7 @@ public class WifiDppConfiguratorActivityTest {
     @Test
     public void rotateScreen_shouldGetCorrectWifiNetworkConfig() {
         final WifiNetworkConfig wifiNetworkConfig = new WifiNetworkConfig("WPA", "WifiSsid",
-                "password", /* hiddenSsid */ false, /* networkId */ 0);
+                "password", /* hiddenSsid */ false, /* networkId */ 0, /* isHotspot */ true);
         final Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_URI);
         intent.setData(Uri.parse(VALID_WIFI_DPP_QR_CODE));
 
@@ -173,5 +173,6 @@ public class WifiDppConfiguratorActivityTest {
         assertThat(restoredWifiNetworkConfig.getPreSharedKey()).isEqualTo("password");
         assertThat(restoredWifiNetworkConfig.getHiddenSsid()).isFalse();
         assertThat(restoredWifiNetworkConfig.getNetworkId()).isEqualTo(0);
+        assertThat(restoredWifiNetworkConfig.isHotspot()).isTrue();
     }
 }
