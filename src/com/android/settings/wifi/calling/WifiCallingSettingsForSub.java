@@ -82,8 +82,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     //UI objects
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
-    private ListPreference mButtonWfcMode;
-    private ListPreference mButtonWfcRoamingMode;
+    private ListWithEntrySummaryPreference mButtonWfcMode;
+    private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
     private Preference mUpdateAddress;
     private TextView mEmptyView;
 
@@ -265,10 +265,11 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mTelephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
                 .createForSubscriptionId(mSubId);
 
-        mButtonWfcMode = (ListPreference) findPreference(BUTTON_WFC_MODE);
+        mButtonWfcMode = (ListWithEntrySummaryPreference) findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
-        mButtonWfcRoamingMode = (ListPreference) findPreference(BUTTON_WFC_ROAMING_MODE);
+        mButtonWfcRoamingMode = (ListWithEntrySummaryPreference) findPreference(
+                BUTTON_WFC_ROAMING_MODE);
         mButtonWfcRoamingMode.setOnPreferenceChangeListener(this);
 
         mUpdateAddress = (Preference) findPreference(PREFERENCE_EMERGENCY_ADDRESS);
@@ -329,10 +330,14 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (!isWifiOnlySupported) {
             mButtonWfcMode.setEntries(R.array.wifi_calling_mode_choices_without_wifi_only);
             mButtonWfcMode.setEntryValues(R.array.wifi_calling_mode_values_without_wifi_only);
+            mButtonWfcMode.setEntrySummaries(R.array.wifi_calling_mode_summaries_without_wifi_only);
+
             mButtonWfcRoamingMode.setEntries(
                     R.array.wifi_calling_mode_choices_v2_without_wifi_only);
             mButtonWfcRoamingMode.setEntryValues(
                     R.array.wifi_calling_mode_values_without_wifi_only);
+            mButtonWfcRoamingMode.setEntrySummaries(
+                    R.array.wifi_calling_mode_summaries_without_wifi_only);
         }
 
 
