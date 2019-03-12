@@ -34,7 +34,9 @@ import com.android.settings.widget.SeekBarPreference;
 
 /** A slider preference that directly controls audio balance **/
 public class BalanceSeekBarPreference extends SeekBarPreference {
-    private static final String TAG = "BalanceSeekBarPreference";
+    private static final int BALANCE_CENTER_VALUE = 100;
+    private static final int BALANCE_MAX_VALUE = 200;
+
     private final Context mContext;
     private BalanceSeekBar mSeekBar;
     private ImageView mIconView;
@@ -62,9 +64,9 @@ public class BalanceSeekBarPreference extends SeekBarPreference {
         final float balance = Settings.System.getFloatForUser(
                 mContext.getContentResolver(), Settings.System.MASTER_BALANCE,
                 0.f /* default */, UserHandle.USER_CURRENT);
-        // Rescale balance to range 0-200 centered at 100.
-        mSeekBar.setMax(200);
-        mSeekBar.setProgress((int)(balance * 100.f) + 100);
+        // Rescale balance to range 0-BALANCE_MAX_VALUE centered at BALANCE_MAX_VALUE / 2.
+        mSeekBar.setMax(BALANCE_MAX_VALUE);
+        mSeekBar.setProgress((int) (balance * 100.f) + BALANCE_CENTER_VALUE);
         mSeekBar.setEnabled(isEnabled());
     }
 }

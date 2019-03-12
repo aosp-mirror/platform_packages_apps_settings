@@ -30,7 +30,6 @@ import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.Keep;
 import androidx.annotation.VisibleForTesting;
 
 /**
@@ -52,15 +51,17 @@ public class WifiNetworkConfig {
     private String mPreSharedKey;
     private boolean mHiddenSsid;
     private int mNetworkId;
+    private boolean mIsHotspot;
 
     @VisibleForTesting
     WifiNetworkConfig(String security, String ssid, String preSharedKey,
-            boolean hiddenSsid, int networkId) {
+            boolean hiddenSsid, int networkId, boolean isHotspot) {
         mSecurity = security;
         mSsid = ssid;
         mPreSharedKey = preSharedKey;
         mHiddenSsid = hiddenSsid;
         mNetworkId = networkId;
+        mIsHotspot = isHotspot;
     }
 
     public WifiNetworkConfig(WifiNetworkConfig config) {
@@ -69,6 +70,7 @@ public class WifiNetworkConfig {
         mPreSharedKey = config.mPreSharedKey;
         mHiddenSsid = config.mHiddenSsid;
         mNetworkId = config.mNetworkId;
+        mIsHotspot = config.mIsHotspot;
     }
 
     /**
@@ -86,23 +88,26 @@ public class WifiNetworkConfig {
      * android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER
      */
     public static WifiNetworkConfig getValidConfigOrNull(Intent intent) {
-        String security = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SECURITY);
-        String ssid = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID);
-        String preSharedKey = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY);
-        boolean hiddenSsid = intent.getBooleanExtra(WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID, false);
-        int networkId = intent.getIntExtra(WifiDppUtils.EXTRA_WIFI_NETWORK_ID,
+        final String security = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SECURITY);
+        final String ssid = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID);
+        final String preSharedKey = intent.getStringExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY);
+        final boolean hiddenSsid = intent.getBooleanExtra(WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID,
+                false);
+        final int networkId = intent.getIntExtra(WifiDppUtils.EXTRA_WIFI_NETWORK_ID,
                 WifiConfiguration.INVALID_NETWORK_ID);
+        final boolean isHotspot = intent.getBooleanExtra(WifiDppUtils.EXTRA_IS_HOTSPOT, false);
 
-        return getValidConfigOrNull(security, ssid, preSharedKey, hiddenSsid, networkId);
+        return getValidConfigOrNull(security, ssid, preSharedKey, hiddenSsid, networkId, isHotspot);
     }
 
     public static WifiNetworkConfig getValidConfigOrNull(String security, String ssid,
-            String preSharedKey, boolean hiddenSsid, int networkId) {
+            String preSharedKey, boolean hiddenSsid, int networkId, boolean isHotspot) {
         if (!isValidConfig(security, ssid, preSharedKey, hiddenSsid)) {
             return null;
         }
 
-        return new WifiNetworkConfig(security, ssid, preSharedKey, hiddenSsid, networkId);
+        return new WifiNetworkConfig(security, ssid, preSharedKey, hiddenSsid, networkId,
+                isHotspot);
     }
 
     public static boolean isValidConfig(WifiNetworkConfig config) {
@@ -174,29 +179,28 @@ public class WifiNetworkConfig {
         return barcode;
     }
 
-    @Keep
     public String getSecurity() {
         return mSecurity;
     }
 
-    @Keep
     public String getSsid() {
         return mSsid;
     }
 
-    @Keep
     public String getPreSharedKey() {
         return mPreSharedKey;
     }
 
-    @Keep
     public boolean getHiddenSsid() {
         return mHiddenSsid;
     }
 
-    @Keep
     public int getNetworkId() {
         return mNetworkId;
+    }
+
+    public boolean isHotspot() {
+        return mIsHotspot;
     }
 
     public void connect(Context context, WifiManager.ActionListener listener) {

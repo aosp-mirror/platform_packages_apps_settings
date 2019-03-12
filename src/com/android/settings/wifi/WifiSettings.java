@@ -247,6 +247,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             getContext().startActivity(
                     WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
         });
+        mAddPreference.setButtonContentDescription(getString(R.string.wifi_dpp_scan_qr_code));
         mStatusMessagePreference = (LinkablePreference) findPreference(PREF_KEY_STATUS_MESSAGE);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
@@ -483,7 +484,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (preference instanceof LongPressAccessPointPreference) {
             mSelectedAccessPoint =
                     ((LongPressAccessPointPreference) preference).getAccessPoint();
-            menu.setHeaderTitle(mSelectedAccessPoint.getSsid());
+            menu.setHeaderTitle(mSelectedAccessPoint.getTitle());
             if (mSelectedAccessPoint.isConnectable()) {
                 menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
             }

@@ -49,6 +49,7 @@ public class ButtonPreference extends Preference {
     private ImageButton mImageButton;
     private Drawable mButtonIcon;
     private View.OnClickListener mClickListener;
+    private String mContentDescription;
 
     // Used for dummy pref.
     public ButtonPreference(Context context, AttributeSet attrs) {
@@ -57,6 +58,7 @@ public class ButtonPreference extends Preference {
         mImageButton = null;
         mButtonIcon = null;
         mClickListener = null;
+        mContentDescription = null;
     }
 
     public ButtonPreference(Context context) {
@@ -83,6 +85,7 @@ public class ButtonPreference extends Preference {
         if (mImageButton != null) {
             mImageButton.setImageDrawable(mButtonIcon);
             mImageButton.setOnClickListener(mClickListener);
+            mImageButton.setContentDescription(mContentDescription);
         }
         setButtonVisibility();
     }
@@ -96,9 +99,9 @@ public class ButtonPreference extends Preference {
     /**
      * Sets the drawable to be displayed in button.
      */
-    public ButtonPreference setButtonIcon(@DrawableRes int iconResId) {
+    public void setButtonIcon(@DrawableRes int iconResId) {
         if (iconResId == 0) {
-            return this;
+            return;
         }
 
         try {
@@ -107,17 +110,26 @@ public class ButtonPreference extends Preference {
         } catch (Resources.NotFoundException exception) {
             Log.e(TAG, "Resource does not exist: " + iconResId);
         }
-        return this;
     }
 
     /**
      * Register a callback to be invoked when button is clicked.
      */
-    public ButtonPreference setButtonOnClickListener(View.OnClickListener listener) {
+    public void setButtonOnClickListener(View.OnClickListener listener) {
         if (listener != mClickListener) {
             mClickListener = listener;
             notifyChanged();
         }
-        return this;
+    }
+
+    /**
+     * A content description briefly describes the button and is primarily used for accessibility
+     * support to determine how a button should be presented to the user.
+     */
+    public void setButtonContentDescription(String contentDescription) {
+        if (contentDescription != mContentDescription) {
+            mContentDescription = contentDescription;
+            notifyChanged();
+        }
     }
 }

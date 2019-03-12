@@ -38,6 +38,7 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
     private ImageView mDevicesCheckCircleGreenHeaderIcon;
     protected TextView mTitle;
     protected TextView mSummary;
+    protected View mTitleSummaryContainer;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -48,6 +49,10 @@ public abstract class WifiDppQrCodeBaseFragment extends InstrumentedFragment {
                 view.findViewById(R.id.devices_check_circle_green_icon);
         mTitle = view.findViewById(android.R.id.title);
         mSummary = view.findViewById(android.R.id.summary);
+
+        // This is the LinearLayout which groups mTitle and mSummary for Talkback to announce the
+        // content in a way that reflects its natural groupings.
+        mTitleSummaryContainer =  view.findViewById(R.id.title_summary_container);
     }
 
     protected void setHeaderIconImageResource(int resId) {
