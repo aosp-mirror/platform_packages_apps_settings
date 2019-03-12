@@ -16,6 +16,8 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
@@ -24,8 +26,10 @@ import android.content.Context;
 import android.os.UserManager;
 
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +43,7 @@ import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+@Config(shadows = {ShadowRestrictedLockUtilsInternal.class, ShadowUtils.class})
 public class TopLevelNetworkEntryPreferenceControllerTest {
 
     @Mock
@@ -68,6 +72,17 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
                 mMobileNetworkPreferenceController);
         ReflectionHelpers.setField(mController, "mTetherPreferenceController",
                 mTetherPreferenceController);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowUtils.reset();
+    }
+
+    @Test
+    public void getAvailabilityStatus_demoUser_unsupported() {
+        ShadowUtils.setIsDemoUser(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

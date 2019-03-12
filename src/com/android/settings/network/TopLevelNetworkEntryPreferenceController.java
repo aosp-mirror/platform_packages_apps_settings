@@ -22,6 +22,7 @@ import android.text.BidiFormatter;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 
@@ -45,7 +46,7 @@ public class TopLevelNetworkEntryPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return Utils.isDemoUser(mContext) ? UNSUPPORTED_ON_DEVICE : AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
