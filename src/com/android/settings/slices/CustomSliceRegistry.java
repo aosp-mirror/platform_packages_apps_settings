@@ -39,6 +39,7 @@ import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlic
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
 import com.android.settings.location.LocationSlice;
+import com.android.settings.media.MediaOutputIndicatorSlice;
 import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
@@ -299,6 +300,16 @@ public class CustomSliceRegistry {
             .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT)
             .build();
 
+    /**
+     * Backing Uri for the Media output indicator Slice.
+     */
+    public static Uri MEDIA_OUTPUT_INDICATOR_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
+            .appendPath("media_output_indicator")
+            .build();
+
     @VisibleForTesting
     static final Map<Uri, Class<? extends CustomSliceable>> sUriToSlice;
 
@@ -319,6 +330,7 @@ public class CustomSliceRegistry {
         sUriToSlice.put(STORAGE_SLICE_URI, StorageSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
+        sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {
@@ -344,5 +356,4 @@ public class CustomSliceRegistry {
     public static boolean isValidAction(String action) {
         return isValidUri(Uri.parse(action));
     }
-
 }
