@@ -455,6 +455,13 @@ public class RadioInfo extends Activity {
         imsWfcProvisionedSwitch = (Switch) findViewById(R.id.wfc_provisioned_switch);
         eabProvisionedSwitch = (Switch) findViewById(R.id.eab_provisioned_switch);
 
+        if (!ImsManager.isImsSupportedOnDevice(phone.getContext())) {
+            imsVolteProvisionedSwitch.setVisibility(View.GONE);
+            imsVtProvisionedSwitch.setVisibility(View.GONE);
+            imsWfcProvisionedSwitch.setVisibility(View.GONE);
+            eabProvisionedSwitch.setVisibility(View.GONE);
+        }
+
         radioPowerOnSwitch = (Switch) findViewById(R.id.radio_power);
 
         mDownlinkKbps = (TextView) findViewById(R.id.dl_kbps);
@@ -604,8 +611,10 @@ public class RadioInfo extends Activity {
                 R.string.radioInfo_menu_viewFDN).setOnMenuItemClickListener(mViewFDNCallback);
         menu.add(1, MENU_ITEM_VIEW_SDN, 0,
                 R.string.radioInfo_menu_viewSDN).setOnMenuItemClickListener(mViewSDNCallback);
-        menu.add(1, MENU_ITEM_GET_IMS_STATUS,
-                0, R.string.radioInfo_menu_getIMS).setOnMenuItemClickListener(mGetImsStatus);
+        if (ImsManager.isImsSupportedOnDevice(phone.getContext())) {
+            menu.add(1, MENU_ITEM_GET_IMS_STATUS,
+                    0, R.string.radioInfo_menu_getIMS).setOnMenuItemClickListener(mGetImsStatus);
+        }
         menu.add(1, MENU_ITEM_TOGGLE_DATA,
                 0, R.string.radio_info_data_connection_disable).setOnMenuItemClickListener(mToggleData);
         return true;
@@ -1357,6 +1366,9 @@ public class RadioInfo extends Activity {
     }
 
     private void updateImsProvisionedState() {
+        if (!ImsManager.isImsSupportedOnDevice(phone.getContext())) {
+            return;
+        }
         log("updateImsProvisionedState isImsVolteProvisioned()=" + isImsVolteProvisioned());
         //delightful hack to prevent on-checked-changed calls from
         //actually forcing the ims provisioning to its transient/current value.
