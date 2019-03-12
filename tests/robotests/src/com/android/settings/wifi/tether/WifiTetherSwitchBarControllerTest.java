@@ -73,17 +73,7 @@ public class WifiTetherSwitchBarControllerTest {
         mController = new WifiTetherSwitchBarController(mContext,
                 new SwitchBarController(mSwitchBar));
     }
-
-    @Test
-    public void constructor_airplaneModeOn_switchBarDisabled() {
-        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 1);
-
-        new WifiTetherSwitchBarController(mContext, new SwitchBarController(mSwitchBar));
-
-        assertThat(mSwitchBar.isEnabled()).isFalse();
-    }
-
+    
     @Test
     public void startTether_fail_resetSwitchBar() {
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);

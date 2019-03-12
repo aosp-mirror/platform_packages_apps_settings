@@ -61,7 +61,6 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
 
     static {
         WIFI_INTENT_FILTER = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
-        WIFI_INTENT_FILTER.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
     }
 
     WifiTetherSwitchBarController(Context context, SwitchWidgetController switchBar) {
@@ -119,8 +118,6 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
                 final int state = intent.getIntExtra(
                         WifiManager.EXTRA_WIFI_AP_STATE, WifiManager.WIFI_AP_STATE_FAILED);
                 handleWifiApStateChanged(state);
-            } else if (Intent.ACTION_AIRPLANE_MODE_CHANGED.equals(action)) {
-                updateWifiSwitch();
             }
         }
     };
@@ -154,13 +151,7 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
     }
 
     private void updateWifiSwitch() {
-        boolean isAirplaneMode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
-        if (!isAirplaneMode) {
-            mSwitchBar.setEnabled(!mDataSaverBackend.isDataSaverEnabled());
-        } else {
-            mSwitchBar.setEnabled(false);
-        }
+        mSwitchBar.setEnabled(!mDataSaverBackend.isDataSaverEnabled());
     }
 
     @Override
