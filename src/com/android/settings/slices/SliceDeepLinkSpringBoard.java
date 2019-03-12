@@ -47,7 +47,7 @@ public class SliceDeepLinkSpringBoard extends Activity {
             // TODO (b/80263568) Avoid duplicating this list of Slice Uris.
             final CustomSliceManager customSliceManager = FeatureFactory.getFactory(this)
                     .getSlicesFeatureProvider().getCustomSliceManager(this);
-            if (customSliceManager.isValidUri(sliceUri)) {
+            if (CustomSliceRegistry.isValidUri(sliceUri)) {
                 final CustomSliceable sliceable =
                         customSliceManager.getSliceableFromUri(sliceUri);
                 launchIntent = sliceable.getIntent();

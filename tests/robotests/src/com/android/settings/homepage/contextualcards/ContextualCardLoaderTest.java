@@ -229,11 +229,6 @@ public class ContextualCardLoaderTest {
                 .setSliceUri(Uri.parse(
                         "content://com.android.settings.test.slices/action/gesture_pick_up"))
                 .build());
-        cards.add(new ContextualCard.Builder()
-                .setName("test_battery")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.BATTERY_INFO_SLICE_URI)
-                .build());
         return cards;
     }
 
@@ -261,11 +256,6 @@ public class ContextualCardLoaderTest {
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(
                         "content://com.android.settings.test.slices/action/gesture_pick_up"))
-                .build());
-        cards.add(new ContextualCard.Builder()
-                .setName("test_battery")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.BATTERY_INFO_SLICE_URI)
                 .build());
         return cards;
     }

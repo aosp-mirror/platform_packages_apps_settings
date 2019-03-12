@@ -460,7 +460,7 @@ public class ContextualCardManagerTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_battery")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.BATTERY_INFO_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.BATTERY_FIX_SLICE_URI)
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         return cards;
