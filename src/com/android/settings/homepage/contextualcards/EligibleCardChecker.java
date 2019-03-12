@@ -51,6 +51,9 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
 
     @VisibleForTesting
     boolean isCardEligibleToDisplay(ContextualCard card) {
+        if (card.getRankingScore() < 0) {
+            return false;
+        }
         if (card.isCustomCard()) {
             return true;
         }
