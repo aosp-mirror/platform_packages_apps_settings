@@ -758,7 +758,9 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void forgetNetwork_Passpoint() {
+    public void forgetNetwork_v1_Passpoint() {
+        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
+
         mockWifiConfig.networkId = 5;
         when(mockWifiConfig.isPasspoint()).thenReturn(true);
 
