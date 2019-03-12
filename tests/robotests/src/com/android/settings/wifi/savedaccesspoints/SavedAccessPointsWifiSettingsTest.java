@@ -82,6 +82,8 @@ public class SavedAccessPointsWifiSettingsTest {
 
     @Test
     public void onForget_isPasspointConfig_shouldRefreshAPList() {
+        FeatureFlagPersistent.setEnabled(RuntimeEnvironment.application,
+                FeatureFlags.NETWORK_INTERNET_V2, false);
         when(mAccessPoint.isPasspointConfig()).thenReturn(true);
         ReflectionHelpers.setField(mSettings, "mSelectedAccessPoint", mAccessPoint);
 

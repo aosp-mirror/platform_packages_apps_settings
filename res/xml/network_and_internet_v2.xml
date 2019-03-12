@@ -22,6 +22,7 @@
 
     <PreferenceCategory
         android:key="multi_network_header"
+        android:title="@string/summary_placeholder"
         settings:allowDividerBelow="true"
         android:order="-40"
         settings:controller="com.android.settings.network.MultiNetworkHeaderController"/>
@@ -79,7 +80,7 @@
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settings.datausage.DataSaverPreference
-        android:key="restrict_backgroundz"
+        android:key="restrict_background_parent_entry"
         android:title="@string/data_saver_title"
         android:icon="@drawable/ic_settings_data_usage"
         android:order="10"
