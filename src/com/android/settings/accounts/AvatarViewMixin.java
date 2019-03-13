@@ -17,6 +17,7 @@
 package com.android.settings.accounts;
 
 import android.accounts.Account;
+import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -64,11 +65,13 @@ public class AvatarViewMixin implements LifecycleObserver {
     private final Context mContext;
     private final ImageView mAvatarView;
     private final MutableLiveData<Bitmap> mAvatarImage;
+    private final ActivityManager mActivityManager;
 
     private String mAccountName;
 
     public AvatarViewMixin(SettingsHomepageActivity activity, ImageView avatarView) {
         mContext = activity.getApplicationContext();
+        mActivityManager = mContext.getSystemService(ActivityManager.class);
         mAvatarView = avatarView;
         mAvatarView.setOnClickListener(v -> {
             Intent intent;
@@ -114,7 +117,11 @@ public class AvatarViewMixin implements LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
         if (!mContext.getResources().getBoolean(R.bool.config_show_avatar_in_homepage)) {
-            Log.d(TAG, "Feature disabled. Skipping");
+            Log.d(TAG, "Feature disabled by config. Skipping");
+            return;
+        }
+        if (mActivityManager.isLowRamDevice()) {
+            Log.d(TAG, "Feature disabled on low ram device. Skipping");
             return;
         }
         if (hasAccount()) {
