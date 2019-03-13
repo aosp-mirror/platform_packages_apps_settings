@@ -18,9 +18,10 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 
-import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
@@ -28,23 +29,38 @@ import com.android.settings.R;
  * A preference with single target and a gear icon on the side.
  */
 public class SingleTargetGearPreference extends Preference {
-
-    public SingleTargetGearPreference(Context context, AttributeSet attrs,
-            int defStyleAttr, int defStyleRes) {
+    public SingleTargetGearPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setWidgetLayoutResource(R.layout.preference_widget_gear_no_bg);
+        init();
     }
 
     public SingleTargetGearPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0 /* defStyleRes */);
+        super(context, attrs, defStyleAttr);
+        init();
     }
 
     public SingleTargetGearPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, TypedArrayUtils.getAttr(context, R.attr.preferenceStyle,
-                android.R.attr.preferenceStyle));
+        super(context, attrs);
+        init();
     }
 
     public SingleTargetGearPreference(Context context) {
-        this(context, null /* attrs */);
+        super(context);
+        init();
+    }
+
+    private void init() {
+        setLayoutResource(R.layout.preference_single_target);
+        setWidgetLayoutResource(R.layout.preference_widget_gear_optional_background);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        final View divider = holder.findViewById(com.android.settingslib.R.id.two_target_divider);
+        if (divider != null) {
+            divider.setVisibility(View.INVISIBLE);
+        }
     }
 }
