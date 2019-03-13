@@ -48,7 +48,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class AdaptiveHomepageIconTest {
+public class AdaptiveIconTest {
 
     private Context mContext;
     private ActivityInfo mActivityInfo;
@@ -64,8 +64,8 @@ public class AdaptiveHomepageIconTest {
 
     @Test
     public void createIcon_shouldSetBackgroundAndInset() {
-        final AdaptiveHomepageIcon icon =
-                new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+        final AdaptiveIcon icon =
+                new AdaptiveIcon(mContext, new ColorDrawable(Color.BLACK));
 
         assertThat(icon.getNumberOfLayers()).isEqualTo(2);
         assertThat(icon.getDrawable(0)).isInstanceOf(AdaptiveIconShapeDrawable.class);
@@ -73,8 +73,8 @@ public class AdaptiveHomepageIconTest {
 
     @Test
     public void setBackgroundColor_shouldUpdateColorFilter() {
-        final AdaptiveHomepageIcon icon =
-                spy(new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK)));
+        final AdaptiveIcon icon =
+                spy(new AdaptiveIcon(mContext, new ColorDrawable(Color.BLACK)));
         final ShapeDrawable background = mock(ShapeDrawable.class);
         when(icon.getDrawable(0)).thenReturn(background);
 
@@ -89,8 +89,8 @@ public class AdaptiveHomepageIconTest {
         mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_ARGB, 0xff0000);
         doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings_accent))
                 .when(tile).getIcon(mContext);
-        final AdaptiveHomepageIcon icon =
-                new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+        final AdaptiveIcon icon =
+                new AdaptiveIcon(mContext, new ColorDrawable(Color.BLACK));
 
         icon.setBackgroundColor(mContext, tile);
         assertThat(icon.mBackgroundColor).isEqualTo(0xff0000);
@@ -101,8 +101,8 @@ public class AdaptiveHomepageIconTest {
         final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings_accent))
             .when(tile).getIcon(mContext);
-        final AdaptiveHomepageIcon icon =
-            new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+        final AdaptiveIcon icon =
+            new AdaptiveIcon(mContext, new ColorDrawable(Color.BLACK));
 
         icon.setBackgroundColor(mContext, tile);
 
@@ -118,11 +118,24 @@ public class AdaptiveHomepageIconTest {
         doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings_accent))
                 .when(tile).getIcon(mContext);
 
-        final AdaptiveHomepageIcon icon =
-                new AdaptiveHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
+        final AdaptiveIcon icon =
+                new AdaptiveIcon(mContext, new ColorDrawable(Color.BLACK));
         icon.setBackgroundColor(mContext, tile);
 
         assertThat(icon.mBackgroundColor)
                 .isEqualTo(mContext.getColor(R.color.material_blue_500));
+    }
+
+    @Test
+    public void getConstantState_returnCorrectState() {
+        final AdaptiveIcon icon =
+                new AdaptiveIcon(mContext, new ColorDrawable(Color.BLACK));
+        icon.setBackgroundColor(Color.YELLOW);
+
+        final AdaptiveIcon.AdaptiveConstantState state =
+                (AdaptiveIcon.AdaptiveConstantState) icon.getConstantState();
+
+        assertThat(state.color).isEqualTo(Color.YELLOW);
+        assertThat(state.context).isEqualTo(mContext);
     }
 }
