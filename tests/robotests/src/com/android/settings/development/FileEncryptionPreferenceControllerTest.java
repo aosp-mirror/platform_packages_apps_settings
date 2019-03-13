@@ -91,7 +91,7 @@ public class FileEncryptionPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mStorageManager", mStorageManager);
         when(mStorageManager.isConvertibleToFBE()).thenReturn(true);
         mController.displayPreference(mPreferenceScreen);
-        CryptoProperties.type("foobar");
+        CryptoProperties.type(CryptoProperties.type_values.NONE);
 
         mController.updateState(mPreference);
 
@@ -105,7 +105,7 @@ public class FileEncryptionPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mStorageManager", mStorageManager);
         when(mStorageManager.isConvertibleToFBE()).thenReturn(true);
         mController.displayPreference(mPreferenceScreen);
-        CryptoProperties.type("file");
+        CryptoProperties.type(CryptoProperties.type_values.FILE);
 
         mController.updateState(mPreference);
 
