@@ -33,8 +33,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.io.IOException;
-
 @RunWith(RobolectricTestRunner.class)
 public class ListWithEntrySummaryPreferenceTest {
 
@@ -54,6 +52,7 @@ public class ListWithEntrySummaryPreferenceTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mContext.setTheme(R.style.Theme_Settings_Home);
         mPreference = new ListWithEntrySummaryPreference(mContext, null);
         mPreference.setEntries(mDefaultEntries);
         mPreference.setEntryValues(mDefaultEntryValues);
