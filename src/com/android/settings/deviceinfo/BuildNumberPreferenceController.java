@@ -16,12 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
-
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -79,11 +75,7 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
 
     @Override
     public CharSequence getSummary() {
-        try {
-            return BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY);
-        } catch (Exception e) {
-            return mContext.getText(R.string.device_info_default);
-        }
+        return BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY);
     }
 
     @Override
@@ -99,29 +91,7 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public boolean isCopyableSlice() {
-        return true;
-    }
-
-    @Override
-    public void copy() {
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        final ClipData clip = ClipData.newPlainText("text", getSummary());
-        clipboard.setPrimaryClip(clip);
-
-        final String toast = mContext.getString(R.string.copyable_slice_toast,
-                mContext.getText(R.string.build_number));
-        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
