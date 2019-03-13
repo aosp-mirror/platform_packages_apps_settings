@@ -115,6 +115,7 @@
         android:title="@string/status_imei"
         settings:keywords="@string/keywords_imei_info"
         android:summary="@string/summary_placeholder"
+        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController"/>
 
     <!-- Android version -->
