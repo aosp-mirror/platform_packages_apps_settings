@@ -20,7 +20,7 @@
     android:key="display_settings_screen"
     android:title="@string/display_settings"
     settings:keywords="@string/keywords_display"
-    settings:initialExpandedChildrenCount="4">
+    settings:initialExpandedChildrenCount="5">
 
     <com.android.settingslib.RestrictedPreference
         android:key="brightness"
@@ -56,6 +56,15 @@
             android:targetPackage="@string/config_wallpaper_picker_package"
             android:targetClass="@string/config_wallpaper_picker_class" />
     </com.android.settingslib.RestrictedPreference>
+
+    <ListPreference
+        android:key="dark_ui_mode"
+        android:title="@string/dark_ui_mode"
+        android:dialogTitle="@string/dark_ui_mode_title"
+        android:entries="@array/dark_ui_mode_entries"
+        android:entryValues="@array/dark_ui_mode_values"
+        settings:keywords="@string/keywords_dark_ui_mode"
+        settings:controller="com.android.settings.display.DarkUIPreferenceController" />
 
     <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
     <com.android.settings.display.TimeoutListPreference
@@ -134,15 +143,6 @@
         android:key="tap_to_wake"
         android:title="@string/tap_to_wake"
         android:summary="@string/tap_to_wake_summary" />
-
-    <ListPreference
-        android:key="dark_ui_mode"
-        android:title="@string/dark_ui_mode"
-        android:dialogTitle="@string/dark_ui_mode_title"
-        android:entries="@array/dark_ui_mode_entries"
-        android:entryValues="@array/dark_ui_mode_values"
-        settings:keywords="@string/keywords_dark_ui_mode"
-        settings:controller="com.android.settings.display.DarkUIPreferenceController" />
 
     <ListPreference
         android:key="theme"
