@@ -32,14 +32,6 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     private CustomSliceManager mCustomSliceManager;
 
     @Override
-    public SlicesIndexer getSliceIndexer(Context context) {
-        if (mSlicesIndexer == null) {
-            mSlicesIndexer = new SlicesIndexer(context.getApplicationContext());
-        }
-        return mSlicesIndexer;
-    }
-
-    @Override
     public SliceDataConverter getSliceDataConverter(Context context) {
         if (mSliceDataConverter == null) {
             mSliceDataConverter = new SliceDataConverter(context.getApplicationContext());
@@ -75,5 +67,12 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     @Override
     public Enhanced4gLteSliceHelper getNewEnhanced4gLteSliceHelper(Context context) {
         return new Enhanced4gLteSliceHelper(context);
+    }
+
+    private SlicesIndexer getSliceIndexer(Context context) {
+        if (mSlicesIndexer == null) {
+            mSlicesIndexer = new SlicesIndexer(context.getApplicationContext());
+        }
+        return mSlicesIndexer;
     }
 }

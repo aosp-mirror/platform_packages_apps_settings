@@ -12,8 +12,6 @@ public interface SlicesFeatureProvider {
 
     boolean DEBUG = false;
 
-    SlicesIndexer getSliceIndexer(Context context);
-
     SliceDataConverter getSliceDataConverter(Context context);
 
     /**
