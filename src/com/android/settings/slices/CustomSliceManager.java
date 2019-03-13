@@ -18,25 +18,6 @@ package com.android.settings.slices;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.ArrayMap;
-
-import androidx.annotation.VisibleForTesting;
-
-import com.android.settings.flashlight.FlashlightSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.BatteryInfoSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
-import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
-import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
-import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
-import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
-import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
-import com.android.settings.location.LocationSlice;
-import com.android.settings.media.MediaOutputSlice;
-import com.android.settings.network.telephony.MobileDataSlice;
-import com.android.settings.wifi.slice.ContextualWifiSlice;
-import com.android.settings.wifi.slice.WifiSlice;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -47,17 +28,12 @@ import java.util.WeakHashMap;
  */
 public class CustomSliceManager {
 
-    @VisibleForTesting
-    final Map<Uri, Class<? extends CustomSliceable>> mUriMap;
-
     private final Context mContext;
     private final Map<Uri, CustomSliceable> mSliceableCache;
 
     public CustomSliceManager(Context context) {
         mContext = context.getApplicationContext();
-        mUriMap = new ArrayMap<>();
         mSliceableCache = new WeakHashMap<>();
-        addSlices();
     }
 
     /**
@@ -67,12 +43,12 @@ public class CustomSliceManager {
      * the only thing that should be needed to create the object.
      */
     public CustomSliceable getSliceableFromUri(Uri uri) {
-        final Uri newUri = removeParameterFromUri(uri);
+        final Uri newUri = CustomSliceRegistry.removeParameterFromUri(uri);
         if (mSliceableCache.containsKey(newUri)) {
             return mSliceableCache.get(newUri);
         }
 
-        final Class clazz = mUriMap.get(newUri);
+        final Class clazz = CustomSliceRegistry.getSliceClassByUri(newUri);
         if (clazz == null) {
             throw new IllegalArgumentException("No Slice found for uri: " + uri);
         }
@@ -82,9 +58,6 @@ public class CustomSliceManager {
         return sliceable;
     }
 
-    private Uri removeParameterFromUri(Uri uri) {
-        return uri != null ? uri.buildUpon().clearQuery().build() : null;
-    }
 
     /**
      * Return a {@link CustomSliceable} associated to the Action.
@@ -94,40 +67,5 @@ public class CustomSliceManager {
      */
     public CustomSliceable getSliceableFromIntentAction(String action) {
         return getSliceableFromUri(Uri.parse(action));
-    }
-
-    /**
-     * Returns {@code true} if {@param uri} is a valid Slice Uri handled by
-     * {@link CustomSliceManager}.
-     */
-    public boolean isValidUri(Uri uri) {
-        return mUriMap.containsKey(removeParameterFromUri(uri));
-    }
-
-    /**
-     * Returns {@code true} if {@param action} is a valid intent action handled by
-     * {@link CustomSliceManager}.
-     */
-    public boolean isValidAction(String action) {
-        return isValidUri(Uri.parse(action));
-    }
-
-    private void addSlices() {
-        mUriMap.put(CustomSliceRegistry.BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
-        mUriMap.put(CustomSliceRegistry.BATTERY_INFO_SLICE_URI, BatteryInfoSlice.class);
-        mUriMap.put(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
-        mUriMap.put(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
-        mUriMap.put(CustomSliceRegistry.DATA_USAGE_SLICE_URI, DataUsageSlice.class);
-        mUriMap.put(CustomSliceRegistry.DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
-        mUriMap.put(CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI, EmergencyInfoSlice.class);
-        mUriMap.put(CustomSliceRegistry.FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
-        mUriMap.put(CustomSliceRegistry.LOCATION_SLICE_URI, LocationSlice.class);
-        mUriMap.put(CustomSliceRegistry.LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
-        mUriMap.put(CustomSliceRegistry.MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
-        mUriMap.put(CustomSliceRegistry.NOTIFICATION_CHANNEL_SLICE_URI,
-                NotificationChannelSlice.class);
-        mUriMap.put(CustomSliceRegistry.STORAGE_SLICE_URI, StorageSlice.class);
-        mUriMap.put(CustomSliceRegistry.WIFI_SLICE_URI, WifiSlice.class);
-        mUriMap.put(CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
     }
 }

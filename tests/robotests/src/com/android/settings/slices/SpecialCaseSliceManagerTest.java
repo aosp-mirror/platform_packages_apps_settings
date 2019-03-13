@@ -47,8 +47,8 @@ public class SpecialCaseSliceManagerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mCustomSliceManager = spy(new CustomSliceManager(mContext));
-        mCustomSliceManager.mUriMap.clear();
-        mCustomSliceManager.mUriMap.put(FakeSliceable.URI, FakeSliceable.class);
+        CustomSliceRegistry.sUriToSlice.clear();
+        CustomSliceRegistry.sUriToSlice.put(FakeSliceable.URI, FakeSliceable.class);
     }
 
     @Test
@@ -69,14 +69,14 @@ public class SpecialCaseSliceManagerTest {
 
     @Test
     public void isValidUri_validUri_returnsTrue() {
-        final boolean isValidUri = mCustomSliceManager.isValidUri(FakeSliceable.URI);
+        final boolean isValidUri = CustomSliceRegistry.isValidUri(FakeSliceable.URI);
 
         assertThat(isValidUri).isTrue();
     }
 
     @Test
     public void isValidUri_invalidUri_returnsFalse() {
-        final boolean isValidUri = mCustomSliceManager.isValidUri(null);
+        final boolean isValidUri = CustomSliceRegistry.isValidUri(null);
 
         assertThat(isValidUri).isFalse();
     }
@@ -84,14 +84,14 @@ public class SpecialCaseSliceManagerTest {
     @Test
     public void isValidAction_validActions_returnsTrue() {
         final boolean isValidAction =
-                mCustomSliceManager.isValidAction(FakeSliceable.URI.toString());
+                CustomSliceRegistry.isValidAction(FakeSliceable.URI.toString());
 
         assertThat(isValidAction).isTrue();
     }
 
     @Test
     public void isValidAction_invalidAction_returnsFalse() {
-        final boolean isValidAction = mCustomSliceManager.isValidAction("action");
+        final boolean isValidAction = CustomSliceRegistry.isValidAction("action");
 
         assertThat(isValidAction).isFalse();
     }
