@@ -16,7 +16,7 @@
 
 package com.android.settings.password;
 
-import static android.Manifest.permission.REQUEST_SCREEN_LOCK_COMPLEXITY;
+import static android.Manifest.permission.REQUEST_PASSWORD_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_HIGH;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
@@ -68,7 +68,7 @@ public class SetupChooseLockGenericTest {
     @Test
     @Config(shadows = {ShadowPasswordUtils.class})
     public void setupChooseLockGenericPasswordComplexityExtraWithPermission() {
-        ShadowPasswordUtils.addGrantedPermission(REQUEST_SCREEN_LOCK_COMPLEXITY);
+        ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
 
         Intent intent = new Intent("com.android.settings.SETUP_LOCK_SCREEN");
         intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);

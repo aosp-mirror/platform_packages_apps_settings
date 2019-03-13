@@ -38,7 +38,6 @@ import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.sound.HandsFreeProfileOutputPreferenceController;
-import com.android.settings.sound.MediaOutputPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settings.widget.UpdatableListPreferenceDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -77,7 +76,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
 
     private RingtonePreference mRequestPreference;
     private UpdatableListPreferenceDialogFragment mDialogFragment;
-    private String mMediaOutputControllerKey;
     private String mHfpOutputControllerKey;
 
     @Override
@@ -132,8 +130,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         final int metricsCategory;
         if (mHfpOutputControllerKey.equals(preference.getKey())) {
             metricsCategory = SettingsEnums.DIALOG_SWITCH_HFP_DEVICES;
-        } else if (mMediaOutputControllerKey.equals(preference.getKey())) {
-            metricsCategory = SettingsEnums.DIALOG_SWITCH_A2DP_DEVICES;
         } else {
             metricsCategory = Instrumentable.METRICS_CATEGORY_UNKNOWN;
         }
@@ -186,9 +182,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         volumeControllers.add(use(CallVolumePreferenceController.class));
         volumeControllers.add(use(RemoteVolumePreferenceController.class));
 
-        use(MediaOutputPreferenceController.class).setCallback(listPreference ->
-                onPreferenceDataChanged(listPreference));
-        mMediaOutputControllerKey = use(MediaOutputPreferenceController.class).getPreferenceKey();
         use(HandsFreeProfileOutputPreferenceController.class).setCallback(listPreference ->
                 onPreferenceDataChanged(listPreference));
         mHfpOutputControllerKey =

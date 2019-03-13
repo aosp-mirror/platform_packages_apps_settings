@@ -168,7 +168,12 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.network_and_internet;
+                    if (FeatureFlagPersistent.isEnabled(context,
+                            FeatureFlags.NETWORK_INTERNET_V2)) {
+                        sir.xmlResId = R.xml.network_and_internet_v2;
+                    } else {
+                        sir.xmlResId = R.xml.network_and_internet;
+                    }
                     return Arrays.asList(sir);
                 }
 

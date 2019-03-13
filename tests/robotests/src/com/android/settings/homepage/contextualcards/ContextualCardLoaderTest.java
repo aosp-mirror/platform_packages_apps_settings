@@ -22,7 +22,7 @@ import static com.android.settings.homepage.contextualcards.ContextualCardLoader
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -87,6 +87,19 @@ public class ContextualCardLoaderTest {
     }
 
     @Test
+    public void isCardEligibleToDisplay_invalidRankingScore_returnFalse() {
+        final ContextualCard card = new ContextualCard.Builder()
+                .setName("test_card")
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(CustomSliceRegistry.FLASHLIGHT_SLICE_URI)
+                .setRankingScore(-1)
+                .build();
+
+        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(card))
+                .isFalse();
+    }
+
+    @Test
     public void isCardEligibleToDisplay_nullSlice_returnFalse() {
         doReturn(null).when(mEligibleCardChecker).bindSlice(Uri.parse(TEST_SLICE_URI));
 
@@ -108,7 +121,7 @@ public class ContextualCardLoaderTest {
     public void getDisplayableCards_twoEligibleCards_shouldShowAll() {
         final List<ContextualCard> cards = getContextualCardList().stream().limit(2)
                 .collect(Collectors.toList());
-        doReturn(cards).when(mContextualCardLoader).filterEligibleCards(any(List.class));
+        doReturn(cards).when(mContextualCardLoader).filterEligibleCards(anyList());
 
         final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(cards);
 
@@ -118,7 +131,7 @@ public class ContextualCardLoaderTest {
     @Test
     public void getDisplayableCards_fiveEligibleCardsNoLarge_shouldShowDefaultCardCount() {
         final List<ContextualCard> fiveCards = getContextualCardListWithNoLargeCard();
-        doReturn(fiveCards).when(mContextualCardLoader).filterEligibleCards(any(List.class));
+        doReturn(fiveCards).when(mContextualCardLoader).filterEligibleCards(anyList());
 
         final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(
                 fiveCards);
@@ -136,7 +149,7 @@ public class ContextualCardLoaderTest {
                 .setSliceUri(Uri.parse(
                         "content://com.android.settings.test.slices/action/gesture_pick_up"))
                 .build());
-        doReturn(cards).when(mContextualCardLoader).filterEligibleCards(any(List.class));
+        doReturn(cards).when(mContextualCardLoader).filterEligibleCards(anyList());
 
         final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(cards);
 
@@ -147,7 +160,7 @@ public class ContextualCardLoaderTest {
     public void getDisplayableCards_threeEligibleCardsTwoLarge_shouldShowTwoCards() {
         final List<ContextualCard> threeCards = getContextualCardList().stream().limit(3)
                 .collect(Collectors.toList());
-        doReturn(threeCards).when(mContextualCardLoader).filterEligibleCards(any(List.class));
+        doReturn(threeCards).when(mContextualCardLoader).filterEligibleCards(anyList());
 
         final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(
                 threeCards);
@@ -167,25 +180,26 @@ public class ContextualCardLoaderTest {
     public void getDisplayableCards_refreshCardUri_shouldLogContextualCardDisplay() {
         mContextualCardLoader.mNotifyUri = CardContentProvider.REFRESH_CARD_URI;
 
-        mContextualCardLoader.getDisplayableCards(new ArrayList<ContextualCard>());
+        mContextualCardLoader.getDisplayableCards(new ArrayList<>());
 
         verify(mFakeFeatureFactory.mContextualCardFeatureProvider).logContextualCardDisplay(
-                any(List.class), any(List.class));
+                anyList(), anyList());
     }
 
     @Test
     public void getDisplayableCards_deleteCardUri_shouldNotLogContextualCardDisplay() {
         mContextualCardLoader.mNotifyUri = CardContentProvider.DELETE_CARD_URI;
 
-        mContextualCardLoader.getDisplayableCards(new ArrayList<ContextualCard>());
+        mContextualCardLoader.getDisplayableCards(new ArrayList<>());
 
         verify(mFakeFeatureFactory.mContextualCardFeatureProvider, never())
-                .logContextualCardDisplay(any(List.class), any(List.class));
+                .logContextualCardDisplay(anyList(), anyList());
     }
 
     private ContextualCard getContextualCard(String sliceUri) {
         return new ContextualCard.Builder()
                 .setName("test_card")
+                .setRankingScore(0.5)
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(sliceUri))
                 .build();

@@ -76,15 +76,16 @@ public class SettingsPanelActivityTest {
     }
 
     @Test
-    public void startMediaOutputSlice_withoutPackageName_bundleShouldNotHaveValue() {
+    public void startMediaOutputSlice_withoutPackageName_bundleShouldHaveValue() {
         final Intent intent = new Intent()
                 .setAction("com.android.settings.panel.action.MEDIA_OUTPUT");
 
         final SettingsPanelActivity activity =
                 Robolectric.buildActivity(SettingsPanelActivity.class, intent).create().get();
 
-        assertThat(activity.mBundle.containsKey(KEY_MEDIA_PACKAGE_NAME)).isFalse();
-        assertThat(activity.mBundle.containsKey(KEY_PANEL_TYPE_ARGUMENT)).isFalse();
+        assertThat(activity.mBundle.containsKey(KEY_MEDIA_PACKAGE_NAME)).isTrue();
+        assertThat(activity.mBundle.getString(KEY_PANEL_TYPE_ARGUMENT))
+                .isEqualTo("com.android.settings.panel.action.MEDIA_OUTPUT");
     }
 
     @Test

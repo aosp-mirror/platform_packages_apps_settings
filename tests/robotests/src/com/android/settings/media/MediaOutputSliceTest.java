@@ -21,21 +21,15 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.os.UserHandle;
-import android.util.IconDrawableFactory;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -43,6 +37,7 @@ import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 
@@ -53,70 +48,64 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowBluetoothAdapter.class})
 public class MediaOutputSliceTest {
 
     private static final String TEST_PACKAGE_NAME = "com.fake.android.music";
-    private static final String TEST_LABEL = "Test app";
     private static final String TEST_DEVICE_1_ID = "test_device_1_id";
+    private static final String TEST_DEVICE_1_NAME = "test_device_1_name";
+    private static final int TEST_DEVICE_1_ICON =
+            com.android.internal.R.drawable.ic_bt_headphones_a2dp;
 
     @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private ApplicationInfo mApplicationInfo;
-    @Mock
-    private ApplicationInfo mApplicationInfo2;
-    @Mock
     private LocalMediaManager mLocalMediaManager;
-    @Mock
-    private IconDrawableFactory mIconDrawableFactory;
-    @Mock
-    private Drawable mTestDrawable;
 
     private final List<MediaDevice> mDevices = new ArrayList<>();
 
     private Context mContext;
     private MediaOutputSlice mMediaOutputSlice;
     private MediaDeviceUpdateWorker mMediaDeviceUpdateWorker;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        when(mPackageManager.getApplicationInfo(eq(TEST_PACKAGE_NAME), anyInt()))
-                .thenReturn(mApplicationInfo);
-        when(mPackageManager.getApplicationInfoAsUser(eq(TEST_PACKAGE_NAME), anyInt(), anyInt()))
-                .thenReturn(mApplicationInfo2);
-        when(mApplicationInfo.loadLabel(mPackageManager)).thenReturn(TEST_LABEL);
-        when(mIconDrawableFactory.getBadgedIcon(mApplicationInfo2, UserHandle.myUserId()))
-                .thenReturn(mTestDrawable);
-        when(mTestDrawable.getIntrinsicWidth()).thenReturn(100);
-        when(mTestDrawable.getIntrinsicHeight()).thenReturn(100);
-
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
+        // Setup BluetoothAdapter
+        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        mShadowBluetoothAdapter.setEnabled(true);
 
         mMediaOutputSlice = new MediaOutputSlice(mContext);
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, MEDIA_OUTPUT_SLICE_URI);
         mMediaDeviceUpdateWorker.setPackageName(TEST_PACKAGE_NAME);
         mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
         mMediaDeviceUpdateWorker.mLocalMediaManager = mLocalMediaManager;
-        mMediaOutputSlice.init(TEST_PACKAGE_NAME, mMediaDeviceUpdateWorker, mIconDrawableFactory);
+        mMediaOutputSlice.init(TEST_PACKAGE_NAME, mMediaDeviceUpdateWorker);
     }
 
     @Test
-    public void getSlice_shouldHaveAppTitle() {
+    public void getSlice_shouldHaveActiveDeviceName() {
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
+        when(device.getIcon()).thenReturn(TEST_DEVICE_1_ICON);
+        when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
+
         final Slice mediaSlice = mMediaOutputSlice.getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
-        assertThat(primaryAction.getTitle().toString()).isEqualTo(TEST_LABEL);
+        assertThat(primaryAction.getTitle().toString()).isEqualTo(TEST_DEVICE_1_NAME);
     }
 
     @Test

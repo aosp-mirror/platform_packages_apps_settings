@@ -30,6 +30,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
@@ -47,8 +49,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
-
-import androidx.fragment.app.FragmentActivity;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)
@@ -86,6 +86,7 @@ public class MobileNetworkSettingsTest {
 
     @Test
     public void onAttach_noV2Flag_noCrash() {
+        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
         mFragment.onAttach(mContext);
     }
 
@@ -97,6 +98,7 @@ public class MobileNetworkSettingsTest {
 
     @Test
     public void createPreferenceControllers_noV2Flag_noDataUsageSummaryController() {
+        FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
         final List<AbstractPreferenceController> controllers =
                 mFragment.createPreferenceControllers(mContext);
         assertThat(controllers.stream().filter(
