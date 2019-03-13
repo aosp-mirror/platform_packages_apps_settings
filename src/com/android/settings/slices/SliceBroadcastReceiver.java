@@ -61,11 +61,10 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final boolean isPlatformSlice = intent.getBooleanExtra(EXTRA_SLICE_PLATFORM_DEFINED,
                 false /* default */);
 
-        final CustomSliceManager mCustomSliceManager = FeatureFactory.getFactory(
-                context).getSlicesFeatureProvider().getCustomSliceManager(context);
         if (CustomSliceRegistry.isValidAction(action)) {
             final CustomSliceable sliceable =
-                    mCustomSliceManager.getSliceableFromIntentAction(action);
+                    CustomSliceable.createInstance(context,
+                            CustomSliceRegistry.getSliceClassByUri(Uri.parse(action)));
             sliceable.onNotifyChange(intent);
             return;
         }

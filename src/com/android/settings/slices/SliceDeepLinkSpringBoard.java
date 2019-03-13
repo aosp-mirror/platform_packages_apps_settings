@@ -23,7 +23,6 @@ import android.util.Log;
 
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
-import com.android.settings.overlay.FeatureFactory;
 
 public class SliceDeepLinkSpringBoard extends Activity {
 
@@ -45,11 +44,10 @@ public class SliceDeepLinkSpringBoard extends Activity {
             Intent launchIntent;
 
             // TODO (b/80263568) Avoid duplicating this list of Slice Uris.
-            final CustomSliceManager customSliceManager = FeatureFactory.getFactory(this)
-                    .getSlicesFeatureProvider().getCustomSliceManager(this);
             if (CustomSliceRegistry.isValidUri(sliceUri)) {
                 final CustomSliceable sliceable =
-                        customSliceManager.getSliceableFromUri(sliceUri);
+                        CustomSliceable.createInstance(getApplicationContext(),
+                                CustomSliceRegistry.getSliceClassByUri(sliceUri));
                 launchIntent = sliceable.getIntent();
             } else if (CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
                 launchIntent = ZenModeSliceBuilder.getIntent(this /* context */);

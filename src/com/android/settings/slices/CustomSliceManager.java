@@ -57,15 +57,4 @@ public class CustomSliceManager {
         mSliceableCache.put(newUri, sliceable);
         return sliceable;
     }
-
-
-    /**
-     * Return a {@link CustomSliceable} associated to the Action.
-     * <p>
-     * Do not change this method signature to accommodate for a special-case sliceable - a context
-     * is the only thing that should be needed to create the object.
-     */
-    public CustomSliceable getSliceableFromIntentAction(String action) {
-        return getSliceableFromUri(Uri.parse(action));
-    }
 }

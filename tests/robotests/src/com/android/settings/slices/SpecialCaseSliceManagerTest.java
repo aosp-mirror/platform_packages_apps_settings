@@ -19,8 +19,6 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,28 +39,17 @@ public class SpecialCaseSliceManagerTest {
 
     private Context mContext;
 
-    private CustomSliceManager mCustomSliceManager;
-
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mCustomSliceManager = spy(new CustomSliceManager(mContext));
         CustomSliceRegistry.sUriToSlice.clear();
         CustomSliceRegistry.sUriToSlice.put(FakeSliceable.URI, FakeSliceable.class);
     }
 
     @Test
     public void getSliceableFromUri_returnsCorrectObject() {
-        final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(
-                FakeSliceable.URI);
-
-        assertThat(sliceable).isInstanceOf(FakeSliceable.class);
-    }
-
-    @Test
-    public void getSliceableFromIntentAction_returnsCorrectObject() {
-        final CustomSliceable sliceable =
-                mCustomSliceManager.getSliceableFromIntentAction(FakeSliceable.URI.toString());
+        final CustomSliceable sliceable = CustomSliceable.createInstance(
+                mContext, CustomSliceRegistry.getSliceClassByUri(FakeSliceable.URI));
 
         assertThat(sliceable).isInstanceOf(FakeSliceable.class);
     }
