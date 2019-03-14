@@ -76,6 +76,11 @@ public class MediaOutputSlice implements CustomSliceable {
             return null;
         }
 
+        if (getWorker() == null) {
+            Log.d(TAG, "getSlice() Can not get worker through uri!");
+            return null;
+        }
+
         final List<MediaDevice> devices = getMediaDevices();
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
 
@@ -115,13 +120,15 @@ public class MediaOutputSlice implements CustomSliceable {
     private MediaDeviceUpdateWorker getWorker() {
         if (mWorker == null) {
             mWorker = (MediaDeviceUpdateWorker) SliceBackgroundWorker.getInstance(getUri());
-            mWorker.setPackageName(mPackageName);
+            if (mWorker != null) {
+                mWorker.setPackageName(mPackageName);
+            }
         }
         return mWorker;
     }
 
     private List<MediaDevice> getMediaDevices() {
-        List<MediaDevice> devices = getWorker().getMediaDevices();
+        final List<MediaDevice> devices = getWorker().getMediaDevices();
         return devices;
     }
 
