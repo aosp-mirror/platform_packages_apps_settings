@@ -110,7 +110,7 @@ public interface CustomSliceable extends Sliceable {
         try {
             final Constructor<? extends CustomSliceable> constructor =
                     sliceable.getConstructor(Context.class);
-            final Object[] params = new Object[]{context};
+            final Object[] params = new Object[]{context.getApplicationContext()};
             return constructor.newInstance(params);
         } catch (NoSuchMethodException | InstantiationException |
                 IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {

@@ -55,6 +55,7 @@ public class SlicesDatabaseHelperTest {
     @After
     public void cleanUp() {
         DatabaseTestUtils.clearDb(mContext);
+        mDatabase.close();
     }
 
     @Test

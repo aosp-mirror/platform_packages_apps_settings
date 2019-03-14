@@ -118,9 +118,6 @@ public class SettingsSliceProvider extends SliceProvider {
     private static final KeyValueListParser KEY_VALUE_LIST_PARSER = new KeyValueListParser(',');
 
     @VisibleForTesting
-    CustomSliceManager mCustomSliceManager;
-
-    @VisibleForTesting
     SlicesDatabaseAccessor mSlicesDatabaseAccessor;
 
     @VisibleForTesting
@@ -140,15 +137,15 @@ public class SettingsSliceProvider extends SliceProvider {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
         mSliceDataCache = new ConcurrentHashMap<>();
         mSliceWeakDataCache = new WeakHashMap<>();
-        mCustomSliceManager = FeatureFactory.getFactory(
-                getContext()).getSlicesFeatureProvider().getCustomSliceManager(getContext());
         return true;
     }
 
     @Override
     public void onSlicePinned(Uri sliceUri) {
         if (CustomSliceRegistry.isValidUri(sliceUri)) {
-            final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(sliceUri);
+            final Context context = getContext();
+            final CustomSliceable sliceable = FeatureFactory.getFactory(context)
+                    .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri);
             final IntentFilter filter = sliceable.getIntentFilter();
             if (filter != null) {
                 registerIntentToUri(filter, sliceUri);
@@ -195,9 +192,10 @@ public class SettingsSliceProvider extends SliceProvider {
             // Before adding a slice to {@link CustomSliceManager}, please get approval
             // from the Settings team.
             if (CustomSliceRegistry.isValidUri(sliceUri)) {
-                final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(
-                        sliceUri);
-                return sliceable.getSlice();
+                final Context context = getContext();
+                return FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri)
+                        .getSlice();
             }
 
             if (CustomSliceRegistry.WIFI_CALLING_URI.equals(sliceUri)) {

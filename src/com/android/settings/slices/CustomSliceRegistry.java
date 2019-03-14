@@ -331,7 +331,7 @@ public class CustomSliceRegistry {
 
     /**
      * Returns {@code true} if {@param uri} is a valid Slice Uri handled by
-     * {@link CustomSliceManager}.
+     * {@link CustomSliceRegistry}.
      */
     public static boolean isValidUri(Uri uri) {
         return sUriToSlice.containsKey(removeParameterFromUri(uri));
@@ -339,7 +339,7 @@ public class CustomSliceRegistry {
 
     /**
      * Returns {@code true} if {@param action} is a valid intent action handled by
-     * {@link CustomSliceManager}.
+     * {@link CustomSliceRegistry}.
      */
     public static boolean isValidAction(String action) {
         return isValidUri(Uri.parse(action));

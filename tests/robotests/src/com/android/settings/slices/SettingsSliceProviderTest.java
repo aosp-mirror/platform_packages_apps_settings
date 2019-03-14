@@ -135,7 +135,6 @@ public class SettingsSliceProviderTest {
         mProvider.mSliceWeakDataCache = new HashMap<>();
         mProvider.mSliceDataCache = new HashMap<>();
         mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
-        mProvider.mCustomSliceManager = new CustomSliceManager(mContext);
         when(mProvider.getContext()).thenReturn(mContext);
 
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
