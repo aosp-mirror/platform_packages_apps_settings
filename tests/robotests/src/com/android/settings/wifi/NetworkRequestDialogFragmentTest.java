@@ -106,12 +106,12 @@ public class NetworkRequestDialogFragmentTest {
     }
 
     @Test
-    public void clickPositiveButton_shouldCloseTheDialog() {
+    public void clickNegativeButton_shouldCloseTheDialog() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), null);
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog.isShowing()).isTrue();
 
-        Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         assertThat(positiveButton).isNotNull();
 
         positiveButton.performClick();
@@ -186,26 +186,6 @@ public class NetworkRequestDialogFragmentTest {
     }
 
     @Test
-    public void updateAccessPointList_onUserSelectionConnectFailure_shouldCallAbortDialog() {
-        FakeNetworkRequestDialogFragment fakeFragment = new FakeNetworkRequestDialogFragment();
-        FakeNetworkRequestDialogFragment spyFakeFragment = spy(fakeFragment);
-        List<AccessPoint> accessPointList = createAccessPointList();
-        when(spyFakeFragment.getAccessPointList()).thenReturn(accessPointList);
-        spyFakeFragment.show(mActivity.getSupportFragmentManager(), null);
-
-        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(alertDialog.isShowing()).isTrue();
-
-        // Test if config would update list.
-        WifiConfiguration config = new WifiConfiguration();
-        config.SSID = "Test AP 3";
-        fakeFragment.onUserSelectionConnectFailure(config);
-
-        assertThat(fakeFragment.bCalledStopAndPop).isTrue();
-        assertThat(fakeFragment.errorType).isEqualTo(ERROR_DIALOG_TYPE.ABORT);
-    }
-
-    @Test
     public void onUserSelectionCallbackRegistration_onClick_shouldCallSelect() {
         // Assert.
         final int indexClickItem = 3;
@@ -267,19 +247,27 @@ public class NetworkRequestDialogFragmentTest {
         Bundle bundle = new Bundle();
 
         bundle.putString(KEY_SSID, "Test AP 1");
-        bundle.putInt(KEY_SECURITY, 1);
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
         accessPointList.add(new AccessPoint(mContext, bundle));
 
         bundle.putString(KEY_SSID, "Test AP 2");
-        bundle.putInt(KEY_SECURITY, 1);
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
         accessPointList.add(new AccessPoint(mContext, bundle));
 
         bundle.putString(KEY_SSID, "Test AP 3");
-        bundle.putInt(KEY_SECURITY, 2);
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
         accessPointList.add(new AccessPoint(mContext, bundle));
 
         bundle.putString(KEY_SSID, "Test AP 4");
-        bundle.putInt(KEY_SECURITY, 0);
+        bundle.putInt(KEY_SECURITY, 0 /* NONE */);
+        accessPointList.add(new AccessPoint(mContext, bundle));
+
+        bundle.putString(KEY_SSID, "Test AP 5");
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
+        accessPointList.add(new AccessPoint(mContext, bundle));
+
+        bundle.putString(KEY_SSID, "Test AP 6");
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
         accessPointList.add(new AccessPoint(mContext, bundle));
 
         return accessPointList;
@@ -300,9 +288,13 @@ public class NetworkRequestDialogFragmentTest {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
 
+
+        List<AccessPoint> accessPointList = createAccessPointList();
+        when(mWifiTracker.getAccessPoints()).thenReturn(accessPointList);
+
         final String SSID_AP = "Test AP ";
         final List<ScanResult> scanResults = new ArrayList<>();
-        for (int i = 0; i < 6 ; i ++) {
+        for (int i = 0; i < 7 ; i ++) {
             ScanResult scanResult = new ScanResult();
             scanResult.SSID = SSID_AP + i;
             scanResult.capabilities = "WEP";

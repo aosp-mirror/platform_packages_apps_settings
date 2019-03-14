@@ -82,11 +82,15 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
     @VisibleForTesting
     final static String EXTRA_APP_NAME = "com.android.settings.wifi.extra.APP_NAME";
+    final static String EXTRA_IS_SPECIFIED_SSID =
+            "com.android.settings.wifi.extra.REQUEST_IS_FOR_SINGLE_NETWORK";
 
     private List<AccessPoint> mAccessPointList;
     private FilterWifiTracker mFilterWifiTracker;
     private AccessPointAdapter mDialogAdapter;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
+    private boolean mIsSpecifiedSsid;
+    private boolean mWaitingConnectCallback;
 
     public static NetworkRequestDialogFragment newInstance() {
         NetworkRequestDialogFragment dialogFragment = new NetworkRequestDialogFragment();
@@ -104,6 +108,11 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         final TextView title = customTitle.findViewById(R.id.network_request_title_text);
         title.setText(getTitle());
 
+        final Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            mIsSpecifiedSsid = intent.getBooleanExtra(EXTRA_IS_SPECIFIED_SSID, false);
+        }
+
         final ProgressBar progressBar = customTitle.findViewById(
                 R.id.network_request_title_progress);
         progressBar.setVisibility(View.VISIBLE);
@@ -115,10 +124,13 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setCustomTitle(customTitle)
                 .setAdapter(mDialogAdapter, this)
-                .setPositiveButton(R.string.cancel, (dialog, which) -> getActivity().finish())
+                .setNegativeButton(R.string.cancel, (dialog, which) -> getActivity().finish())
                 // Do nothings, will replace the onClickListener to avoid auto closing dialog.
                 .setNeutralButton(R.string.network_connection_request_dialog_showall,
                         null /* OnClickListener */);
+        if (mIsSpecifiedSsid) {
+            builder.setPositiveButton(R.string.wifi_connect, null /* OnClickListener */);
+        }
 
         // Clicking list item is to connect wifi ap.
         final AlertDialog dialog = builder.create();
@@ -136,8 +148,19 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                 notifyAdapterRefresh();
                 neutralBtn.setVisibility(View.GONE);
             });
-        });
 
+            // Replace Positive onClickListener to avoid closing dialog
+            if (mIsSpecifiedSsid) {
+                final Button positiveBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveBtn.setOnClickListener(v -> {
+                    // When clicking connect button, should connect to the first and the only one
+                    // list item.
+                    this.onClick(dialog, 0 /* position */);
+                });
+                // Disable button in first, and enable it after there are some accesspoints in list.
+                positiveBtn.setEnabled(false);
+            }
+        });
         return dialog;
     }
 
@@ -184,6 +207,9 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
             if (wifiConfig != null) {
                 mUserSelectionCallback.select(wifiConfig);
+
+                mWaitingConnectCallback = true;
+                updateConnectButton(false);
             }
         }
     }
@@ -223,7 +249,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         }
     }
 
-    private void showNeutralButton() {
+    private void showAllButton() {
         final AlertDialog alertDialog = (AlertDialog) getDialog();
         if (alertDialog == null) {
             return;
@@ -232,6 +258,35 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         final Button neutralBtn = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
         if (neutralBtn != null) {
             neutralBtn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void updateConnectButton(boolean enabled) {
+        // The button is only showed in single SSID mode.
+        if (!mIsSpecifiedSsid) {
+            return;
+        }
+
+        final AlertDialog alertDialog = (AlertDialog) getDialog();
+        if (alertDialog == null) {
+            return;
+        }
+
+        final Button positiveBtn = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        if (positiveBtn != null) {
+            positiveBtn.setEnabled(enabled);
+        }
+    }
+
+    private void hideProgressIcon() {
+        final AlertDialog alertDialog = (AlertDialog) getDialog();
+        if (alertDialog == null) {
+            return;
+        }
+
+        final View progress = alertDialog.findViewById(R.id.network_request_title_progress);
+        if (progress != null) {
+            progress.setVisibility(View.GONE);
         }
     }
 
@@ -403,7 +458,9 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void onUserSelectionConnectFailure(WifiConfiguration wificonfiguration) {
-        stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE.ABORT);
+        // Do nothing when selection is failed, let user could try again easily.
+        mWaitingConnectCallback = false;
+        updateConnectButton(true);
     }
 
     private final class FilterWifiTracker {
@@ -426,10 +483,6 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                 if (!mAccessPointKeys.contains(key)) {
                     mAccessPointKeys.add(key);
                 }
-            }
-
-            if (mShowLimitedItem && (mAccessPointKeys.size() > MAX_NUMBER_LIST_ITEM)) {
-                showNeutralButton();
             }
         }
 
@@ -455,6 +508,21 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                         break;
                     }
                 }
+            }
+
+            // Update related UI buttons
+            if (mShowLimitedItem && (count >= MAX_NUMBER_LIST_ITEM)) {
+                showAllButton();
+            }
+            if (count > 0) {
+                hideProgressIcon();
+            }
+            // Enable connect button if there is Accesspoint item, except for the situation that
+            // user click but connected status doesn't come back yet.
+            if (count < 0) {
+                updateConnectButton(false);
+            } else if (!mWaitingConnectCallback) {
+                updateConnectButton(true);
             }
 
             return result;
