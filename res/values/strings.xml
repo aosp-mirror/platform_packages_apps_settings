@@ -3756,13 +3756,25 @@
     <string name="location_app_level_permissions">App permission</string>
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
-    <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
+    <!--
+    Summary for Location settings when location is on, explaining how many apps have unlimited
+    location permission.
+
+    "Unlimited access" means the app can access the device location even when it's not being used
+    (on background), while "limited" means the app can only access the device location when the user
+    is using it (foreground only).
+
+    Please note that the distinction between singular and plural of this sentence only depends on
+    the quantity of "background_location_app_count" ("has" vs "have"). The quantity of
+    "total_location_app_count" is almost always greater than 1, so "apps" is always in plural form.
+
+    [CHAR LIMIT=NONE]-->
     <plurals name="location_app_permission_summary_location_on">
         <item quantity="one">
             <xliff:g id="background_location_app_count">%1$d</xliff:g>
             of
             <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            app has unlimited access</item>
+            apps has unlimited access</item>
         <item quantity="other">
             <xliff:g id="background_location_app_count">%1$d</xliff:g>
             of
