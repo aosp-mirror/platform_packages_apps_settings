@@ -100,6 +100,14 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
                         .setIcon(access.icon)
                         .setTitle(access.label)
                         .setSummary(access.contentDescription)
+                        .setOnClickListener((v) -> {
+                            final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
+                            intent.putExtra(Intent.EXTRA_PERMISSION_NAME,
+                                    Manifest.permission_group.LOCATION);
+                            intent.putExtra(Intent.EXTRA_PACKAGE_NAME, access.packageName);
+                            intent.putExtra(Intent.EXTRA_USER, access.userHandle);
+                            mContext.startActivity(intent);
+                        })
                         .build();
                 mController.setAppEntity(i, appEntityInfo);
             }
