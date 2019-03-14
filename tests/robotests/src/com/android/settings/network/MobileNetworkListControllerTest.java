@@ -21,6 +21,7 @@ import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -31,6 +32,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.SubscriptionInfo;
+import android.telephony.euicc.EuiccManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,6 +53,9 @@ import androidx.preference.PreferenceScreen;
 @RunWith(RobolectricTestRunner.class)
 public class MobileNetworkListControllerTest {
     @Mock
+    EuiccManager mEuiccManager;
+
+    @Mock
     private Lifecycle mLifecycle;
 
     @Mock
@@ -58,12 +63,17 @@ public class MobileNetworkListControllerTest {
 
     private Context mContext;
     private MobileNetworkListController mController;
+    private Preference mAddMorePreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(Robolectric.setupActivity(Activity.class));
+        when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
         when(mPreferenceScreen.getContext()).thenReturn(mContext);
+        mAddMorePreference = new Preference(mContext);
+        when(mPreferenceScreen.findPreference(MobileNetworkListController.KEY_ADD_MORE)).thenReturn(
+                mAddMorePreference);
         mController = new MobileNetworkListController(mContext, mLifecycle);
     }
 
@@ -76,6 +86,22 @@ public class MobileNetworkListControllerTest {
     public void displayPreference_noSubscriptions_noCrash() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
+    }
+
+    @Test
+    public void displayPreference_eSimNotSupported_addMoreLinkNotVisible() {
+        when(mEuiccManager.isEnabled()).thenReturn(false);
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        assertThat(mAddMorePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_eSimSupported_addMoreLinkIsVisible() {
+        when(mEuiccManager.isEnabled()).thenReturn(true);
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        assertThat(mAddMorePreference.isVisible()).isTrue();
     }
 
     @Test
