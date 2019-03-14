@@ -32,7 +32,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager.LayoutParams;
 import android.widget.Toolbar;
 
 import androidx.fragment.app.FragmentActivity;
@@ -59,8 +58,8 @@ public class SettingsBaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         final long startTime = System.currentTimeMillis();
+        getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
 
         final TypedArray theme = getTheme().obtainStyledAttributes(android.R.styleable.Theme);
         if (!theme.getBoolean(android.R.styleable.Theme_windowNoTitle, false)) {
