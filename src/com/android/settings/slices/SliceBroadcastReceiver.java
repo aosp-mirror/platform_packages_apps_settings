@@ -63,7 +63,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         final CustomSliceManager mCustomSliceManager = FeatureFactory.getFactory(
                 context).getSlicesFeatureProvider().getCustomSliceManager(context);
-        if (mCustomSliceManager.isValidAction(action)) {
+        if (CustomSliceRegistry.isValidAction(action)) {
             final CustomSliceable sliceable =
                     mCustomSliceManager.getSliceableFromIntentAction(action);
             sliceable.onNotifyChange(intent);

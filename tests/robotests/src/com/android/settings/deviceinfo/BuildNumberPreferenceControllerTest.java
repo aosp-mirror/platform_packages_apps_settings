@@ -16,18 +16,14 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
-
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Process;
 import android.os.UserManager;
@@ -35,7 +31,6 @@ import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -62,13 +57,8 @@ import org.robolectric.shadows.ShadowUserManager;
 public class BuildNumberPreferenceControllerTest {
 
     private static final String KEY_BUILD_NUMBER = "build_number";
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private InstrumentedPreferenceFragment mFragment;
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private PreferenceScreen mScreen;
 
     private ShadowUserManager mShadowUserManager;
 
@@ -199,15 +189,5 @@ public class BuildNumberPreferenceControllerTest {
 
         assertThat(activityResultHandled).isTrue();
         assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isTrue();
-    }
-
-    @Test
-    public void copy_shouldCopyBuildNumberToClipboard() {
-        mController.copy();
-
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
-        assertThat(data.toString()).isEqualTo(mController.getSummary());
     }
 }

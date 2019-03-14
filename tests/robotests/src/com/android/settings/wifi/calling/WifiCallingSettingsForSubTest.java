@@ -41,11 +41,9 @@ import android.telephony.ims.ProvisioningManager;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
-import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -80,11 +78,11 @@ public class WifiCallingSettingsForSubTest {
     @Mock private ToggleSwitch mToggleSwitch;
     @Mock private View mView;
     @Mock private ImsConfig mImsConfig;
-    @Mock private ListPreference mButtonWfcMode;
-    @Mock private ListPreference mButtonWfcRoamingMode;
+    @Mock private ListWithEntrySummaryPreference mButtonWfcMode;
+    @Mock private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
 
     @Before
-    public void setUp() throws NoSuchFieldException, ImsException {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
@@ -100,7 +98,7 @@ public class WifiCallingSettingsForSubTest {
         final Bundle bundle = new Bundle();
         when(mFragment.getArguments()).thenReturn(bundle);
         doNothing().when(mFragment).addPreferencesFromResource(anyInt());
-        doReturn(mock(ListPreference.class)).when(mFragment).findPreference(any());
+        doReturn(mock(ListWithEntrySummaryPreference.class)).when(mFragment).findPreference(any());
         doReturn(mButtonWfcMode).when(mFragment).findPreference(BUTTON_WFC_MODE);
         doReturn(mButtonWfcRoamingMode).when(mFragment).findPreference(BUTTON_WFC_ROAMING_MODE);
         doNothing().when(mFragment).finish();
@@ -141,7 +139,7 @@ public class WifiCallingSettingsForSubTest {
     }
 
     @Test
-    public void onResume_provisioningAllowed_shouldNotFinish() throws ImsException {
+    public void onResume_provisioningAllowed_shouldNotFinish() {
         // Call onResume while provisioning is allowed.
         mFragment.onResume();
 
@@ -160,7 +158,7 @@ public class WifiCallingSettingsForSubTest {
     }
 
     @Test
-    public void onResumeOnPause_provisioningCallbackRegistration() throws ImsException {
+    public void onResumeOnPause_provisioningCallbackRegistration() throws Exception {
         // Verify that provisioning callback is registered after call to onResume().
         mFragment.onResume();
         verify(mImsConfig).addConfigCallback(any(ProvisioningManager.Callback.class));

@@ -40,7 +40,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
@@ -141,20 +140,17 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         }
     };
 
+    /*
+     * Launch carrier emergency address managemnent activity
+     */
     private final OnPreferenceClickListener mUpdateAddressListener =
-            new OnPreferenceClickListener() {
-                /*
-                 * Launch carrier emergency address managemnent activity
-                 */
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent carrierAppIntent = getCarrierActivityIntent();
-                    if (carrierAppIntent != null) {
-                        carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
-                        startActivity(carrierAppIntent);
-                    }
-                    return true;
+            preference -> {
+                Intent carrierAppIntent = getCarrierActivityIntent();
+                if (carrierAppIntent != null) {
+                    carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
+                    startActivity(carrierAppIntent);
                 }
+                return true;
             };
 
     private final ProvisioningManager.Callback mProvisioningCallback =
@@ -173,8 +169,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
@@ -265,14 +259,13 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mTelephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
                 .createForSubscriptionId(mSubId);
 
-        mButtonWfcMode = (ListWithEntrySummaryPreference) findPreference(BUTTON_WFC_MODE);
+        mButtonWfcMode = findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
-        mButtonWfcRoamingMode = (ListWithEntrySummaryPreference) findPreference(
-                BUTTON_WFC_ROAMING_MODE);
+        mButtonWfcRoamingMode =  findPreference(BUTTON_WFC_ROAMING_MODE);
         mButtonWfcRoamingMode.setOnPreferenceChangeListener(this);
 
-        mUpdateAddress = (Preference) findPreference(PREFERENCE_EMERGENCY_ADDRESS);
+        mUpdateAddress = findPreference(PREFERENCE_EMERGENCY_ADDRESS);
         mUpdateAddress.setOnPreferenceClickListener(mUpdateAddressListener);
 
         mIntentFilter = new IntentFilter();

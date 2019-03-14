@@ -147,7 +147,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSlicePinned(Uri sliceUri) {
-        if (mCustomSliceManager.isValidUri(sliceUri)) {
+        if (CustomSliceRegistry.isValidUri(sliceUri)) {
             final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(sliceUri);
             final IntentFilter filter = sliceable.getIntentFilter();
             if (filter != null) {
@@ -194,7 +194,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
             // Before adding a slice to {@link CustomSliceManager}, please get approval
             // from the Settings team.
-            if (mCustomSliceManager.isValidUri(sliceUri)) {
+            if (CustomSliceRegistry.isValidUri(sliceUri)) {
                 final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(
                         sliceUri);
                 return sliceable.getSlice();

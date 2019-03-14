@@ -2390,8 +2390,6 @@
     <string name="wifi_hotspot_configure_ap_text_summary">AndroidAP WPA2 PSK hotspot</string>
     <!-- Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default">AndroidHotspot</string>
-    <!-- Summary text when hotspot is disabled because airplane mode is on [CHAR LIMIT=80]-->
-    <string name="wifi_tether_disabled_by_airplane">Unavailable because airplane mode is turned on</string>
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Wi-Fi Testing on the diagnostic screen-->
@@ -5242,8 +5240,8 @@
     <string name="battery_tip_high_usage_title" product="tablet">Tablet used more than usual</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_title" product="device">Device used more than usual</string>
-    <!-- Summary for the battery high usage tip, which presents battery may run out soon [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_summary">Battery may run out soon</string>
+    <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -10686,6 +10684,9 @@
     <!-- Title for the Volume dialog (settings panel) with all volume streams[CHAR LIMIT=50] -->
     <string name="volume_connectivity_panel_title">Volume</string>
 
+    <!-- Subtitle explaining that mobile data cannot be used while airplane mode is on [CHAR LIMIT=50] -->
+    <string name="mobile_data_ap_mode_disabled">Unavailable during airplane mode</string>
+
     <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
     <string name="force_desktop_mode">Force desktop mode</string>
     <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
@@ -10736,8 +10737,8 @@
 
     <!-- Summary for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
     <plurals name="accessibility_usage_summary">
-        <item quantity="one">1 service has full access to your device</item>
-        <item quantity="other"><xliff:g id="service_count">%1$d</xliff:g> services have full access to your device</item>
+        <item quantity="one">1 app has full access to your device</item>
+        <item quantity="other"><xliff:g id="service_count">%1$d</xliff:g> apps have full access to your device</item>
     </plurals>
 
     <!-- Title for notification channel slice. [CHAR LIMIT=NONE] -->
