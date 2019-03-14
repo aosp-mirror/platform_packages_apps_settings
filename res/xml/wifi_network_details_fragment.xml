@@ -26,6 +26,11 @@
         android:order="-10000"
         settings:allowDividerBelow="true"/>
 
+    <com.android.settings.datausage.DataUsageSummaryPreference
+        android:key="status_header"
+        android:selectable="false"
+        settings:isPreferenceVisible="false"/>
+
     <!-- Buttons -->
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="buttons"
