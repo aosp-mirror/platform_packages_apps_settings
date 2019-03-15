@@ -53,6 +53,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final LinearLayout accessibilityLayout = findViewById(R.id.accessibility_layout);
         final Button accessibilityButton = findViewById(R.id.accessibility_button);
         accessibilityButton.setOnClickListener(view -> {
+            mSwitchDiversity.setChecked(true);
             accessibilityButton.setVisibility(View.INVISIBLE);
             accessibilityLayout.setVisibility(View.VISIBLE);
         });
@@ -177,7 +178,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         } else {
             intent.setClass(this, FaceEnrollEnrolling.class);
         }
-        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, mSwitchDiversity.isChecked());
+        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
         WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
         return intent;
     }
