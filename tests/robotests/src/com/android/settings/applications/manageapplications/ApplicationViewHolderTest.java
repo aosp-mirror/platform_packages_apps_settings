@@ -46,7 +46,7 @@ public class ApplicationViewHolderTest {
     public void seUp() {
         mContext = RuntimeEnvironment.application;
         mView = ApplicationViewHolder.newView(new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
+        mHolder = new ApplicationViewHolder(mView);
     }
 
     @Test
@@ -67,10 +67,6 @@ public class ApplicationViewHolderTest {
 
         mHolder.setSummary(R.string.disabled);
         assertThat(mHolder.mSummary.getText()).isEqualTo(mContext.getText(R.string.disabled));
-        assertThat(mHolder.mSummaryContainer.getVisibility()).isEqualTo(View.VISIBLE);
-
-        mHolder.setSummary(null);
-        assertThat(mHolder.mSummaryContainer.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -104,7 +100,7 @@ public class ApplicationViewHolderTest {
     @Test
     public void twoTouchTarget() {
         mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
-        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
+        mHolder = new ApplicationViewHolder(mView);
         assertThat(mHolder.mSwitch).isNotNull();
         assertThat(mHolder.mWidgetContainer.getChildCount()).isEqualTo(1);
     }
@@ -112,8 +108,9 @@ public class ApplicationViewHolderTest {
     @Test
     public void updateSwitch() {
         mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
-        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
-        mHolder.updateSwitch(v -> {}, true, true);
+        mHolder = new ApplicationViewHolder(mView);
+        mHolder.updateSwitch(v -> {
+        } /* listener */, true, true);
 
         assertThat(mHolder.mSwitch.isChecked()).isTrue();
         assertThat(mHolder.mSwitch.isEnabled()).isTrue();

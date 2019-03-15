@@ -113,7 +113,8 @@
         <Preference
             android:key="quick_settings_tiles"
             android:title="@string/quick_settings_developer_tiles"
-            android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment" />
+            android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment"
+            settings:searchable="false" />
 
     <!-- Configure trust agent behavior -->
     <SwitchPreference
