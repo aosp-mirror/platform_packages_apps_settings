@@ -318,7 +318,8 @@ public class NetworkSelectSettings extends DashboardFragment {
             // Try to get the network registration states
             ServiceState ss = mTelephonyManager.getServiceState();
             List<NetworkRegistrationState> networkList =
-                    ss.getNetworkRegistrationStates(AccessNetworkConstants.TransportType.WWAN);
+                    ss.getNetworkRegistrationStatesForTransportType(
+                            AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
             if (networkList == null || networkList.size() == 0) {
                 // Remove the connected network operators category
                 mConnectedPreferenceCategory.setVisible(false);
