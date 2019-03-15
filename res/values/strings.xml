@@ -3022,14 +3022,14 @@
     <string name="status_prl_version">PRL version</string>
     <!-- About phone screen, title for MEID for multi-sim devices -->
     <string name="meid_multi_sim">MEID (sim slot %1$d)</string>
-    <!-- The status text when both Wi-Fi scanning and Bluetooth scanning are on. [CHAR LIMIT=120] -->
-    <string name="scanning_status_text_wifi_on_ble_on">Both Wi\u2011Fi and Bluetooth are allowed to determine location</string>
-    <!-- The status text when Wi-Fi scanning is on and Bluetooth scanning are off. [CHAR LIMIT=120] -->
-    <string name="scanning_status_text_wifi_on_ble_off">Only Wi\u2011Fi is allowed to determine location</string>
-    <!-- The status text when Wi-Fi scanning is off and Bluetooth scanning are on. [CHAR LIMIT=120] -->
-    <string name="scanning_status_text_wifi_off_ble_on">Only Bluetooth is allowed to determine location</string>
-    <!-- The status text when both Wi-Fi scanning and Bluetooth scanning are off. [CHAR LIMIT=120] -->
-    <string name="scanning_status_text_wifi_off_ble_off">Neither Wi\u2011Fi nor Bluetooth is allowed to determine location</string>
+    <!-- The status text when both Wi-Fi scanning and Bluetooth scanning are on. [CHAR LIMIT=100] -->
+    <string name="scanning_status_text_wifi_on_ble_on">Both Wi\u2011Fi and Bluetooth scanning are on</string>
+    <!-- The status text when Wi-Fi scanning is on and Bluetooth scanning are off. [CHAR LIMIT=100] -->
+    <string name="scanning_status_text_wifi_on_ble_off">Wi\u2011Fi scanning is on, Bluetooth scanning is off</string>
+    <!-- The status text when Wi-Fi scanning is off and Bluetooth scanning are on. [CHAR LIMIT=100] -->
+    <string name="scanning_status_text_wifi_off_ble_on">Bluetooth scanning is on, Wi\u2011Fi scanning is off</string>
+    <!-- The status text when both Wi-Fi scanning and Bluetooth scanning are off. [CHAR LIMIT=100] -->
+    <string name="scanning_status_text_wifi_off_ble_off">Both Wi\u2011Fi and Bluetooth scanning are off</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
@@ -3754,13 +3754,25 @@
     <string name="location_app_level_permissions">App permission</string>
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
-    <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
+    <!--
+    Summary for Location settings when location is on, explaining how many apps have unlimited
+    location permission.
+
+    "Unlimited access" means the app can access the device location even when it's not being used
+    (on background), while "limited" means the app can only access the device location when the user
+    is using it (foreground only).
+
+    Please note that the distinction between singular and plural of this sentence only depends on
+    the quantity of "background_location_app_count" ("has" vs "have"). The quantity of
+    "total_location_app_count" is almost always greater than 1, so "apps" is always in plural form.
+
+    [CHAR LIMIT=NONE]-->
     <plurals name="location_app_permission_summary_location_on">
         <item quantity="one">
             <xliff:g id="background_location_app_count">%1$d</xliff:g>
             of
             <xliff:g id="total_location_app_count">%2$d</xliff:g>
-            app has unlimited access</item>
+            apps has unlimited access</item>
         <item quantity="other">
             <xliff:g id="background_location_app_count">%1$d</xliff:g>
             of
@@ -3771,8 +3783,12 @@
     <string name="location_category_recent_location_access">Recent location access</string>
     <!-- [CHAR LIMIT=30] Location settings screen, button to bring the user to view the details of recent location access -->
     <string name="location_recent_location_access_view_details">View details</string>
-    <!-- Location settings screen, displayed when there's no recent app accessing location -->
+    <!-- Location settings screen, displayed when there's no recent app accessing location
+      (for TV) [CHAR LIMIT=100] -->
     <string name="location_no_recent_apps">No apps have requested location recently</string>
+    <!-- Location settings screen, displayed when there's no recent app accessing location
+      (for phones and tablets) [CHAR LIMIT=100] -->
+    <string name="location_no_recent_accesses">No apps recently accessed location</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests high battery use-->
     <string name="location_high_battery_use">High battery use</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests low battery use-->
