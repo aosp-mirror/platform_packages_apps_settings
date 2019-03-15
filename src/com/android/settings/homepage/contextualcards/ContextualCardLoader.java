@@ -67,7 +67,8 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     Uri mNotifyUri;
-    private Context mContext;
+
+    private final Context mContext;
 
     ContextualCardLoader(Context context) {
         super(context);

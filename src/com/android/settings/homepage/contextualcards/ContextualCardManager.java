@@ -109,13 +109,13 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
     }
 
-    void loadContextualCards(ContextualCardsFragment fragment) {
+    void loadContextualCards(LoaderManager loaderManager) {
         mStartTime = System.currentTimeMillis();
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
         // Use the cached data when navigating back to the first page and upon screen rotation.
-        LoaderManager.getInstance(fragment).initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+        loaderManager.initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
                 cardContentLoaderCallbacks);
     }
 
