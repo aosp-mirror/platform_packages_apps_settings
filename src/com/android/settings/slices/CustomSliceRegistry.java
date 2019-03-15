@@ -322,7 +322,7 @@ public class CustomSliceRegistry {
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {
-        return sUriToSlice.get(uri);
+        return sUriToSlice.get(removeParameterFromUri(uri));
     }
 
     public static Uri removeParameterFromUri(Uri uri) {
