@@ -219,6 +219,20 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
+    public void testIsConfigurable_appLevel() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.lockedChannelId = "something";
+        appRow.lockedImportance = true;
+
+        mController.onResume(appRow, mock(NotificationChannel.class), null, null);
+        assertFalse(mController.isChannelConfigurable());
+
+        appRow.lockedImportance = false;
+        mController.onResume(appRow, mock(NotificationChannel.class), null, null);
+        assertTrue(mController.isChannelConfigurable());
+    }
+
+    @Test
     public void testIsChannelBlockable_nonSystemAppsBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = false;
