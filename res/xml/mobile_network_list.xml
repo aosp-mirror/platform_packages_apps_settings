@@ -16,11 +16,13 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="mobile_network_list_screen"
     android:title="@string/network_settings_title">
 
     <Preference
         android:key="add_more"
+        settings:isPreferenceVisible="false"
         android:title="@string/mobile_network_list_add_more"
         android:icon="@drawable/ic_menu_add"
         android:order="100" >
