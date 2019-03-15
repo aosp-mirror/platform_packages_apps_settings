@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.media.session.ControllerLink;
+import android.media.session.ISessionController;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
@@ -51,9 +51,9 @@ public class RemoteVolumePreferenceControllerTest {
     @Mock
     private MediaController mMediaController;
     @Mock
-    private ControllerLink.ControllerStub mStub;
+    private ISessionController mStub;
     @Mock
-    private ControllerLink.ControllerStub mStub2;
+    private ISessionController mStub2;
     private MediaSession.Token mToken;
     private MediaSession.Token mToken2;
     private RemoteVolumePreferenceController mController;
@@ -71,8 +71,8 @@ public class RemoteVolumePreferenceControllerTest {
         mActiveSessions.add(mMediaController);
         when(mMediaSessionManager.getActiveSessions(null)).thenReturn(
                 mActiveSessions);
-        mToken = new MediaSession.Token(new ControllerLink(mStub));
-        mToken2 = new MediaSession.Token(new ControllerLink(mStub2));
+        mToken = new MediaSession.Token(mStub);
+        mToken2 = new MediaSession.Token(mStub2);
 
         mController = new RemoteVolumePreferenceController(mContext);
         mPlaybackInfo = new MediaController.PlaybackInfo(
