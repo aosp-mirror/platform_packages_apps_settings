@@ -18,56 +18,40 @@ package com.android.settings.notification;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.AppGlobals;
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ParceledListSlice;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.RemoteException;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings.Secure;
-import android.text.TextUtils;
 import android.util.ArraySet;
-import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.specialaccess.zenaccess.ZenAccessController;
+import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails;
+import com.android.settings.applications.specialaccess.zenaccess.ZenAccessSettingObserverMixin;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.widget.AppSwitchPreference;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @SearchIndexable
-public class ZenAccessSettings extends EmptyTextSettings {
+public class ZenAccessSettings extends EmptyTextSettings implements
+        ZenAccessSettingObserverMixin.Listener {
     private final String TAG = "ZenAccessSettings";
 
-    private final SettingObserver mObserver = new SettingObserver();
     private Context mContext;
     private PackageManager mPkgMan;
     private NotificationManager mNoMan;
@@ -84,6 +68,8 @@ public class ZenAccessSettings extends EmptyTextSettings {
         mContext = getActivity();
         mPkgMan = mContext.getPackageManager();
         mNoMan = mContext.getSystemService(NotificationManager.class);
+        getSettingsLifecycle().addObserver(
+                new ZenAccessSettingObserverMixin(getContext(), this /* listener */));
     }
 
     @Override
@@ -102,30 +88,22 @@ public class ZenAccessSettings extends EmptyTextSettings {
         super.onResume();
         if (!ActivityManager.isLowRamDeviceStatic()) {
             reloadList();
-            getContentResolver().registerContentObserver(
-                    Secure.getUriFor(Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES), false,
-                    mObserver);
-            getContentResolver().registerContentObserver(
-                    Secure.getUriFor(Secure.ENABLED_NOTIFICATION_LISTENERS), false,
-                    mObserver);
         } else {
             setEmptyText(R.string.disabled_low_ram_device);
         }
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        if (!ActivityManager.isLowRamDeviceStatic()) {
-            getContentResolver().unregisterContentObserver(mObserver);
-        }
+    public void onZenAccessPolicyChanged() {
+        reloadList();
     }
 
     private void reloadList() {
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
         final ArrayList<ApplicationInfo> apps = new ArrayList<>();
-        final ArraySet<String> requesting = getPackagesRequestingNotificationPolicyAccess();
+        final Set<String> requesting =
+                ZenAccessController.getPackagesRequestingNotificationPolicyAccess();
         if (!requesting.isEmpty()) {
             final List<ApplicationInfo> installed = mPkgMan.getInstalledApplications(0);
             if (installed != null) {
@@ -143,204 +121,42 @@ public class ZenAccessSettings extends EmptyTextSettings {
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
             final CharSequence label = app.loadLabel(mPkgMan);
-            final SwitchPreference pref = new AppSwitchPreference(getPrefContext());
+            final AppPreference pref = new AppPreference(getPrefContext());
             pref.setKey(pkg);
-            pref.setPersistent(false);
             pref.setIcon(app.loadIcon(mPkgMan));
             pref.setTitle(label);
-            pref.setChecked(hasAccess(pkg));
             if (autoApproved.contains(pkg)) {
+                //Auto approved, user cannot do anything. Hard code summary and disable preference.
                 pref.setEnabled(false);
                 pref.setSummary(getString(R.string.zen_access_disabled_package_warning));
+            } else {
+                // Not auto approved, update summary according to notification backend.
+                pref.setSummary(getPreferenceSummary(pkg));
             }
-            pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    final boolean access = (Boolean) newValue;
-                    if (access) {
-                        new ScaryWarningDialogFragment()
-                                .setPkgInfo(pkg, label)
-                                .show(getFragmentManager(), "dialog");
-                    } else {
-                        new FriendlyWarningDialogFragment()
-                                .setPkgInfo(pkg, label)
-                                .show(getFragmentManager(), "dialog");
-                    }
-                    return false;
-                }
+            pref.setOnPreferenceClickListener(preference -> {
+                AppInfoBase.startAppInfoFragment(
+                        ZenAccessDetails.class  /* fragment */,
+                        R.string.manage_zen_access_title /* titleRes */,
+                        pkg,
+                        app.uid,
+                        this /* source */,
+                        -1 /* requestCode */,
+                        getMetricsCategory() /* sourceMetricsCategory */);
+                return true;
             });
+
             screen.addPreference(pref);
         }
     }
 
-    private ArraySet<String> getPackagesRequestingNotificationPolicyAccess() {
-        ArraySet<String> requestingPackages = new ArraySet<>();
-        try {
-            final String[] PERM = {
-                    android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
-            };
-            final ParceledListSlice list = AppGlobals.getPackageManager()
-                    .getPackagesHoldingPermissions(PERM, 0 /*flags*/,
-                            ActivityManager.getCurrentUser());
-            final List<PackageInfo> pkgs = list.getList();
-            if (pkgs != null) {
-                for (PackageInfo info : pkgs) {
-                    requestingPackages.add(info.packageName);
-                }
-            }
-        } catch(RemoteException e) {
-            Log.e(TAG, "Cannot reach packagemanager", e);
-        }
-        return requestingPackages;
-    }
-
-    private boolean hasAccess(String pkg) {
-        return mNoMan.isNotificationPolicyAccessGrantedForPackage(pkg);
-    }
-
-    private static void setAccess(final Context context, final String pkg, final boolean access) {
-        logSpecialPermissionChange(access, pkg, context);
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-                mgr.setNotificationPolicyAccessGranted(pkg, access);
-            }
-        });
-    }
-
-    @VisibleForTesting
-    static void logSpecialPermissionChange(boolean enable, String packageName, Context context) {
-        int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_DND_ALLOW
-                : SettingsEnums.APP_SPECIAL_PERMISSION_DND_DENY;
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
-                logCategory, packageName);
-    }
-
-
-    private static void deleteRules(final Context context, final String pkg) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-                mgr.removeAutomaticZenRules(pkg);
-            }
-        });
-    }
-
-    private final class SettingObserver extends ContentObserver {
-        public SettingObserver() {
-            super(new Handler(Looper.getMainLooper()));
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            reloadList();
-        }
-    }
-
     /**
-     * Warning dialog when allowing zen access warning about the privileges being granted.
+     * @return the summary for the current state of whether the app associated with the given
+     * {@param packageName} is allowed to enter picture-in-picture.
      */
-    public static class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
-        static final String KEY_PKG = "p";
-        static final String KEY_LABEL = "l";
-
-        @Override
-        public int getMetricsCategory() {
-            return SettingsEnums.DIALOG_ZEN_ACCESS_GRANT;
-        }
-
-        public ScaryWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
-            Bundle args = new Bundle();
-            args.putString(KEY_PKG, pkg);
-            args.putString(KEY_LABEL, TextUtils.isEmpty(label) ? pkg : label.toString());
-            setArguments(args);
-            return this;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            final Bundle args = getArguments();
-            final String pkg = args.getString(KEY_PKG);
-            final String label = args.getString(KEY_LABEL);
-
-            final String title = getResources().getString(R.string.zen_access_warning_dialog_title,
-                    label);
-            final String summary = getResources()
-                    .getString(R.string.zen_access_warning_dialog_summary);
-            return new AlertDialog.Builder(getContext())
-                    .setMessage(summary)
-                    .setTitle(title)
-                    .setCancelable(true)
-                    .setPositiveButton(R.string.allow,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    setAccess(getContext(), pkg, true);
-                                }
-                            })
-                    .setNegativeButton(R.string.deny,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    // pass
-                                }
-                            })
-                    .create();
-        }
-    }
-
-    /**
-     * Warning dialog when revoking zen access warning that zen rule instances will be deleted.
-     */
-    public static class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
-        static final String KEY_PKG = "p";
-        static final String KEY_LABEL = "l";
-
-
-        @Override
-        public int getMetricsCategory() {
-            return SettingsEnums.DIALOG_ZEN_ACCESS_REVOKE;
-        }
-
-        public FriendlyWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
-            Bundle args = new Bundle();
-            args.putString(KEY_PKG, pkg);
-            args.putString(KEY_LABEL, TextUtils.isEmpty(label) ? pkg : label.toString());
-            setArguments(args);
-            return this;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            final Bundle args = getArguments();
-            final String pkg = args.getString(KEY_PKG);
-            final String label = args.getString(KEY_LABEL);
-
-            final String title = getResources().getString(
-                    R.string.zen_access_revoke_warning_dialog_title, label);
-            final String summary = getResources()
-                    .getString(R.string.zen_access_revoke_warning_dialog_summary);
-            return new AlertDialog.Builder(getContext())
-                    .setMessage(summary)
-                    .setTitle(title)
-                    .setCancelable(true)
-                    .setPositiveButton(R.string.okay,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    deleteRules(getContext(), pkg);
-                                    setAccess(getContext(), pkg, false);
-                                }
-                            })
-                    .setNegativeButton(R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    // pass
-                                }
-                            })
-                    .create();
-        }
+    private int getPreferenceSummary(String packageName) {
+        final boolean enabled = ZenAccessController.hasAccess(getContext(), packageName);
+        return enabled ? R.string.app_permission_summary_allowed
+                : R.string.app_permission_summary_not_allowed;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
