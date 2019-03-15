@@ -111,6 +111,9 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected boolean isChannelConfigurable() {
+        if (mAppRow != null && mAppRow.lockedImportance) {
+            return false;
+        }
         if (mChannel != null && mAppRow != null) {
             return !Objects.equals(mChannel.getId(), mAppRow.lockedChannelId);
         }
