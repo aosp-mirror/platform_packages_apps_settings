@@ -97,7 +97,8 @@ public class PrivacySettingsUtils {
             data.setConfigSummary(backupManager.getDestinationString(transport));
             data.setManageIntent(validatedActivityIntent(context,
                     backupManager.getDataManagementIntent(transport), "management"));
-            data.setManageLabel(backupManager.getDataManagementLabel(transport));
+            data.setManageLabel(
+                    backupManager.getDataManagementLabelForUser(UserHandle.myUserId(), transport));
             data.setBackupGray(false);
         } catch (RemoteException e) {
             // leave it 'false' and disable the UI; there's no backup manager
