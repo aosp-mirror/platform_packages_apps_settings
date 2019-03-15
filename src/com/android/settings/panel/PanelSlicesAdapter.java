@@ -94,6 +94,7 @@ public class PanelSlicesAdapter
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
             sliceView.setMode(SliceView.MODE_LARGE);
+            sliceView.showTitleItems(true);
             mPanelContent = panelContent;
         }
 
