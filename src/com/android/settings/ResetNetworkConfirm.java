@@ -154,19 +154,8 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                      SubscriptionManager.getPhoneId(mSubId)).factoryReset();
             restoreDefaultApn(context);
             esimFactoryReset(context, context.getPackageName());
-            // There has been issues when Sms raw table somehow stores orphan
-            // fragments. They lead to garbled message when new fragments come
-            // in and combied with those stale ones. In case this happens again,
-            // user can reset all network settings which will clean up this table.
-            cleanUpSmsRawTable(context);
         }
     };
-
-    private void cleanUpSmsRawTable(Context context) {
-        ContentResolver resolver = context.getContentResolver();
-        Uri uri = Uri.withAppendedPath(Telephony.Sms.CONTENT_URI, "raw/permanentDelete");
-        resolver.delete(uri, null, null);
-    }
 
     @VisibleForTesting
     void esimFactoryReset(Context context, String packageName) {
