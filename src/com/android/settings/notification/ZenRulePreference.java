@@ -171,6 +171,9 @@ public class ZenRulePreference extends TwoTargetPreference {
                 getSettingsActivity(rule, si);
         mIntent = AbstractZenModeAutomaticRulePreferenceController.getRuleIntent(action,
                 settingsActivity, mId);
+        if (mIntent.resolveActivity(mPm) == null) {
+            mIntent = null;
+        }
         setKey(mId);
     }
 
