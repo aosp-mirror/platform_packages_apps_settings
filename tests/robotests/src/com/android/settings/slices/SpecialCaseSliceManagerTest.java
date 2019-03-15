@@ -37,6 +37,9 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class SpecialCaseSliceManagerTest {
 
+    private final String FAKE_PARAMETER_KEY = "fake_parameter_key";
+    private final String FAKE_PARAMETER_VALUE = "fake_value";
+
     private Context mContext;
 
     @Before
@@ -50,6 +53,20 @@ public class SpecialCaseSliceManagerTest {
     public void getSliceableFromUri_returnsCorrectObject() {
         final CustomSliceable sliceable = CustomSliceable.createInstance(
                 mContext, CustomSliceRegistry.getSliceClassByUri(FakeSliceable.URI));
+
+        assertThat(sliceable).isInstanceOf(FakeSliceable.class);
+    }
+
+    @Test
+    public void getSliceableFromUriWithParameter_returnsCorrectObject() {
+        final Uri parameterUri = FakeSliceable.URI
+                .buildUpon()
+                .clearQuery()
+                .appendQueryParameter(FAKE_PARAMETER_KEY, FAKE_PARAMETER_VALUE)
+                .build();
+
+        final CustomSliceable sliceable = CustomSliceable.createInstance(
+                mContext, CustomSliceRegistry.getSliceClassByUri(parameterUri));
 
         assertThat(sliceable).isInstanceOf(FakeSliceable.class);
     }
