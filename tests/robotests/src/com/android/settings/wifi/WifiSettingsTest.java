@@ -69,6 +69,7 @@ public class WifiSettingsTest {
         mWifiSettings = spy(new WifiSettings());
         doReturn(mContext).when(mWifiSettings).getContext();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
+        mWifiSettings.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mWifiSettings.mSavedNetworksPreference = new Preference(mContext);
         mWifiSettings.mConfigureWifiSettingsPreference = new Preference(mContext);
         mWifiSettings.mWifiTracker = mWifiTracker;
@@ -150,5 +151,12 @@ public class WifiSettingsTest {
 
         assertThat(mWifiSettings.mConfigureWifiSettingsPreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.wifi_configure_settings_preference_summary_wakeup_off));
+    }
+
+    @Test
+    public void checkAddWifiNetworkPrefernce_preferenceVisible() {
+        assertThat(mWifiSettings.mAddWifiNetworkPreference.isVisible()).isTrue();
+        assertThat(mWifiSettings.mAddWifiNetworkPreference.getTitle()).isEqualTo(
+                mContext.getString(R.string.wifi_add_network));
     }
 }
