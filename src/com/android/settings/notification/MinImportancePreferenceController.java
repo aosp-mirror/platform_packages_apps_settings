@@ -16,24 +16,24 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationChannel.USER_LOCKED_SOUND;
-import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
+import static android.app.NotificationManager.IMPORTANCE_LOW;
+import static android.app.NotificationManager.IMPORTANCE_MIN;
 
 import android.app.NotificationChannel;
 import android.content.Context;
-import android.media.RingtoneManager;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import androidx.preference.Preference;
 
-public class ImportancePreferenceController extends NotificationPreferenceController
+public class MinImportancePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
 
-    private static final String KEY_IMPORTANCE = "importance";
+    private static final String KEY_IMPORTANCE = "min_importance";
     private NotificationSettingsBase.ImportanceListener mImportanceListener;
 
-    public ImportancePreferenceController(Context context,
+    public MinImportancePreferenceController(Context context,
             NotificationSettingsBase.ImportanceListener importanceListener,
             NotificationBackend backend) {
         super(context, backend);
@@ -47,7 +47,7 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        if (mAppRow == null) {
+        if (!super.isAvailable()) {
             return false;
         }
         if (mChannel == null) {
@@ -56,38 +56,25 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
         if (isDefaultChannel()) {
             return false;
         }
-        return true;
+        return mChannel.getImportance() <= IMPORTANCE_LOW;
     }
 
     @Override
     public void updateState(Preference preference) {
         if (mAppRow!= null && mChannel != null) {
             preference.setEnabled(mAdmin == null && isChannelConfigurable());
-            ImportancePreference pref = (ImportancePreference) preference;
-            pref.setBlockable(isChannelBlockable());
-            pref.setConfigurable(isChannelConfigurable());
-            pref.setImportance(mChannel.getImportance());
+
+            RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
+            pref.setChecked(mChannel.getImportance() == IMPORTANCE_MIN);
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (mChannel != null) {
-            final int importance = (Integer) newValue;
+            final boolean checked = (boolean) newValue;
 
-            // If you are moving from an importance level without sound to one with sound,
-            // but the sound you had selected was "Silence",
-            // then set sound for this channel to your default sound,
-            // because you probably intended to cause this channel to actually start making sound.
-            if (mChannel.getImportance() < IMPORTANCE_DEFAULT
-                    && !SoundPreferenceController.hasValidSound(mChannel)
-                    && importance >= IMPORTANCE_DEFAULT) {
-                mChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION),
-                        mChannel.getAudioAttributes());
-                mChannel.lockFields(USER_LOCKED_SOUND);
-            }
-
-            mChannel.setImportance(importance);
+            mChannel.setImportance(checked ? IMPORTANCE_MIN : IMPORTANCE_LOW);
             mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
             saveChannel();
             mImportanceListener.onImportanceChanged();

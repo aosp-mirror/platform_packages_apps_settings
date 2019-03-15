@@ -152,6 +152,10 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 context, mImportanceListener, mBackend));
         mControllers.add(new ImportancePreferenceController(
                 context, mImportanceListener, mBackend));
+        mControllers.add(new MinImportancePreferenceController(
+                context, mImportanceListener, mBackend));
+        mControllers.add(new HighImportancePreferenceController(
+                context, mImportanceListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,
                 mImportanceListener, mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));
