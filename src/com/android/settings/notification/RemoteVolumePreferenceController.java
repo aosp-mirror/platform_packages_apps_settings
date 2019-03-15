@@ -35,6 +35,7 @@ import com.android.settingslib.volume.MediaSessions;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class RemoteVolumePreferenceController extends
     VolumeSeekBarPreferenceController {
@@ -58,14 +59,14 @@ public class RemoteVolumePreferenceController extends
             if (mActiveToken == null) {
                 updateToken(token);
             }
-            if (mActiveToken == token) {
+            if (Objects.equals(mActiveToken, token)) {
                 updatePreference(mPreference, mActiveToken, pi);
             }
         }
 
         @Override
         public void onRemoteRemoved(MediaSession.Token t) {
-            if (mActiveToken == t) {
+            if (Objects.equals(mActiveToken, t)) {
                 updateToken(null);
                 if (mPreference != null) {
                     mPreference.setVisible(false);
@@ -75,7 +76,7 @@ public class RemoteVolumePreferenceController extends
 
         @Override
         public void onRemoteVolumeChanged(MediaSession.Token token, int flags) {
-            if (mActiveToken == token) {
+            if (Objects.equals(mActiveToken, token)) {
                 final MediaController.PlaybackInfo pi = mMediaController.getPlaybackInfo();
                 if (pi != null) {
                     setSliderPosition(pi.getCurrentVolume());
@@ -116,13 +117,13 @@ public class RemoteVolumePreferenceController extends
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         super.onResume();
-        //TODO(b/126199571): register callback once b/126890783 is fixed
+        mMediaSessions.init();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onPause() {
         super.onPause();
-        //TODO(b/126199571): unregister callback once b/126890783 is fixed
+        mMediaSessions.destroy();
     }
 
     @Override
@@ -189,8 +190,7 @@ public class RemoteVolumePreferenceController extends
 
     @Override
     public Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
-        //TODO(b/126199571): return RemoteVolumeSliceWorker once b/126890783 is fixed
-        return null;
+        return RemoteVolumeSliceWorker.class;
     }
 
     private void updatePreference(VolumeSeekBarPreference seekBarPreference,
