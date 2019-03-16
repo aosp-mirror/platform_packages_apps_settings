@@ -156,6 +156,7 @@ public class Settings extends SettingsActivity {
     }
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
+    public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}
