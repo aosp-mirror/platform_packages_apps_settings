@@ -74,6 +74,7 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
         mController = AppEntitiesHeaderController.newInstance(mContext, view)
                 .setHeaderTitleRes(R.string.location_category_recent_location_access)
                 .setHeaderDetailsRes(R.string.location_recent_location_access_view_details)
+                .setHeaderEmptyRes(R.string.location_no_recent_accesses)
                 .setHeaderDetailsClickListener((View v) -> {
                     final Intent intent = new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE);
                     intent.putExtra(Intent.EXTRA_PERMISSION_NAME,
@@ -100,14 +101,20 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
                         .setIcon(access.icon)
                         .setTitle(access.label)
                         .setSummary(access.contentDescription)
+                        .setOnClickListener((v) -> {
+                            final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
+                            intent.putExtra(Intent.EXTRA_PERMISSION_NAME,
+                                    Manifest.permission_group.LOCATION);
+                            intent.putExtra(Intent.EXTRA_PACKAGE_NAME, access.packageName);
+                            intent.putExtra(Intent.EXTRA_USER, access.userHandle);
+                            mContext.startActivity(intent);
+                        })
                         .build();
                 mController.setAppEntity(i, appEntityInfo);
             }
             for (; i < MAXIMUM_APP_COUNT; i++) {
                 mController.removeAppEntity(i);
             }
-        } else {
-            // If there's no item to display, add a "No recent apps" item.
         }
         mController.apply();
     }

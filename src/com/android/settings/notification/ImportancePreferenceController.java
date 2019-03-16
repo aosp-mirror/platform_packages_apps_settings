@@ -18,20 +18,14 @@ package com.android.settings.notification;
 
 import static android.app.NotificationChannel.USER_LOCKED_SOUND;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
-import static android.app.NotificationManager.IMPORTANCE_HIGH;
-import static android.app.NotificationManager.IMPORTANCE_MIN;
-import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.media.RingtoneManager;
 
-import androidx.preference.Preference;
-
-import com.android.settings.R;
-import com.android.settings.RestrictedListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
+
+import androidx.preference.Preference;
 
 public class ImportancePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
@@ -53,44 +47,33 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        if (!super.isAvailable()) {
+        if (mAppRow == null) {
             return false;
         }
         if (mChannel == null) {
             return false;
         }
-        return !isDefaultChannel();
+        if (isDefaultChannel()) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void updateState(Preference preference) {
         if (mAppRow!= null && mChannel != null) {
             preference.setEnabled(mAdmin == null && isChannelConfigurable());
-            preference.setSummary(getImportanceSummary(mChannel));
-
-            int importances = IMPORTANCE_HIGH - IMPORTANCE_MIN + 1;
-            CharSequence[] entries = new CharSequence[importances];
-            CharSequence[] values = new CharSequence[importances];
-
-            int index = 0;
-            for (int i = IMPORTANCE_HIGH; i >= IMPORTANCE_MIN; i--) {
-                NotificationChannel channel = new NotificationChannel("", "", i);
-                entries[index] = getImportanceSummary(channel);
-                values[index] = String.valueOf(i);
-                index++;
-            }
-
-            RestrictedListPreference pref = (RestrictedListPreference) preference;
-            pref.setEntries(entries);
-            pref.setEntryValues(values);
-            pref.setValue(String.valueOf(mChannel.getImportance()));
+            ImportancePreference pref = (ImportancePreference) preference;
+            pref.setBlockable(isChannelBlockable());
+            pref.setConfigurable(isChannelConfigurable());
+            pref.setImportance(mChannel.getImportance());
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (mChannel != null) {
-            final int importance = Integer.parseInt((String) newValue);
+            final int importance = (Integer) newValue;
 
             // If you are moving from an importance level without sound to one with sound,
             // but the sound you had selected was "Silence",
@@ -110,40 +93,5 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
             mImportanceListener.onImportanceChanged();
         }
         return true;
-    }
-
-    protected String getImportanceSummary(NotificationChannel channel) {
-        String summary = "";
-        int importance = channel.getImportance();
-        switch (importance) {
-            case IMPORTANCE_UNSPECIFIED:
-                summary = mContext.getString(R.string.notification_importance_unspecified);
-                break;
-            case NotificationManager.IMPORTANCE_MIN:
-                summary = mContext.getString(R.string.notification_importance_min);
-                break;
-            case NotificationManager.IMPORTANCE_LOW:
-                summary = mContext.getString(R.string.notification_importance_low);
-                break;
-            case NotificationManager.IMPORTANCE_DEFAULT:
-                if (SoundPreferenceController.hasValidSound(channel)) {
-                    summary = mContext.getString(R.string.notification_importance_default);
-                } else {
-                    summary = mContext.getString(R.string.notification_importance_low);
-                }
-                break;
-            case NotificationManager.IMPORTANCE_HIGH:
-            case NotificationManager.IMPORTANCE_MAX:
-                if (SoundPreferenceController.hasValidSound(channel)) {
-                    summary = mContext.getString(R.string.notification_importance_high);
-                } else {
-                    summary = mContext.getString(R.string.notification_importance_high_silent);
-                }
-                break;
-            default:
-                return "";
-        }
-
-        return summary;
     }
 }

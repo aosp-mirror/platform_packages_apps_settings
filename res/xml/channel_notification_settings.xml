@@ -25,11 +25,6 @@
         android:order="1"
         android:layout="@layout/settings_entity_header" />
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="block"
-        android:order="2"
-        android:layout="@layout/styled_switch_bar" />
-
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="allow_sound"
@@ -38,10 +33,23 @@
         android:summary="@string/allow_interruption_summary" />
 
     <!-- Importance -->
-    <com.android.settings.RestrictedListPreference
+    <com.android.settings.notification.ImportancePreference
         android:key="importance"
-        android:order="10"
-        android:title="@string/notification_importance_title" />
+        android:order="4"
+        android:title="@string/notification_importance_title"
+        settings:allowDividerBelow="true"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="min_importance"
+        android:order="5"
+        settings:allowDividerAbove="true"
+        android:title="@string/notification_importance_min_title"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="high_importance"
+        android:order="6"
+        settings:allowDividerAbove="true"
+        android:title="@string/notification_importance_high_title"/>
 
     <PreferenceCategory
         android:key="channel_advanced"
@@ -87,7 +95,7 @@
             settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
 
         <com.android.settingslib.RestrictedSwitchPreference
-            android:key="bubble"
+            android:key="bubble_pref"
             android:title="@string/notification_bubbles_title"
             android:order="16"
             settings:restrictedSwitchSummary="@string/enabled_by_admin" />
@@ -113,6 +121,7 @@
 
     <com.android.settings.notification.NotificationFooterPreference
         android:key="block_desc"
-        android:order="110"/>
+        android:order="110"
+        settings:allowDividerAbove="false"/>
 
 </PreferenceScreen>

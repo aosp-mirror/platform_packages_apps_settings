@@ -19,8 +19,6 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -39,30 +37,36 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class SpecialCaseSliceManagerTest {
 
-    private Context mContext;
+    private final String FAKE_PARAMETER_KEY = "fake_parameter_key";
+    private final String FAKE_PARAMETER_VALUE = "fake_value";
 
-    private CustomSliceManager mCustomSliceManager;
+    private Context mContext;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mCustomSliceManager = spy(new CustomSliceManager(mContext));
         CustomSliceRegistry.sUriToSlice.clear();
         CustomSliceRegistry.sUriToSlice.put(FakeSliceable.URI, FakeSliceable.class);
     }
 
     @Test
     public void getSliceableFromUri_returnsCorrectObject() {
-        final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(
-                FakeSliceable.URI);
+        final CustomSliceable sliceable = CustomSliceable.createInstance(
+                mContext, CustomSliceRegistry.getSliceClassByUri(FakeSliceable.URI));
 
         assertThat(sliceable).isInstanceOf(FakeSliceable.class);
     }
 
     @Test
-    public void getSliceableFromIntentAction_returnsCorrectObject() {
-        final CustomSliceable sliceable =
-                mCustomSliceManager.getSliceableFromIntentAction(FakeSliceable.URI.toString());
+    public void getSliceableFromUriWithParameter_returnsCorrectObject() {
+        final Uri parameterUri = FakeSliceable.URI
+                .buildUpon()
+                .clearQuery()
+                .appendQueryParameter(FAKE_PARAMETER_KEY, FAKE_PARAMETER_VALUE)
+                .build();
+
+        final CustomSliceable sliceable = CustomSliceable.createInstance(
+                mContext, CustomSliceRegistry.getSliceClassByUri(parameterUri));
 
         assertThat(sliceable).isInstanceOf(FakeSliceable.class);
     }

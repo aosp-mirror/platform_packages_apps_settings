@@ -69,6 +69,8 @@ public class DataUsageSummaryPreference extends Preference {
     private boolean mDefaultTextColorSet;
     private int mDefaultTextColor;
     private int mNumPlans;
+    /** The specified un-initialized value for cycle time */
+    private final long CYCLE_TIME_UNINITIAL_VALUE = 0;
     /** The ending time of the billing cycle in milliseconds since epoch. */
     private long mCycleEndTimeMs;
     /** The time of the last update in standard milliseconds since the epoch */
@@ -94,6 +96,7 @@ public class DataUsageSummaryPreference extends Preference {
     /** WiFi only mode */
     private boolean mWifiMode;
     private String mUsagePeriod;
+    private boolean mSingleWifi;    // Shows only one specified WiFi network usage
 
     public DataUsageSummaryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -142,9 +145,10 @@ public class DataUsageSummaryPreference extends Preference {
         notifyChanged();
     }
 
-    void setWifiMode(boolean isWifiMode, String usagePeriod) {
+    void setWifiMode(boolean isWifiMode, String usagePeriod, boolean isSingleWifi) {
         mWifiMode = isWifiMode;
         mUsagePeriod = usagePeriod;
+        mSingleWifi = isSingleWifi;
         notifyChanged();
     }
 
@@ -171,7 +175,16 @@ public class DataUsageSummaryPreference extends Preference {
         Button launchButton = (Button) holder.findViewById(R.id.launch_mdp_app_button);
         TextView limitInfo = (TextView) holder.findViewById(R.id.data_limits);
 
-        if (mWifiMode) {
+        if (mWifiMode && mSingleWifi) {
+            updateCycleTimeText(holder);
+
+            usageTitle.setVisibility(View.GONE);
+            launchButton.setVisibility(View.GONE);
+            carrierInfo.setVisibility(View.GONE);
+
+            limitInfo.setVisibility(TextUtils.isEmpty(mLimitInfoText) ? View.GONE : View.VISIBLE);
+            limitInfo.setText(mLimitInfoText);
+        } else if (mWifiMode) {
             usageTitle.setText(R.string.data_usage_wifi_title);
             usageTitle.setVisibility(View.VISIBLE);
             TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
@@ -265,6 +278,13 @@ public class DataUsageSummaryPreference extends Preference {
     private void updateCycleTimeText(PreferenceViewHolder holder) {
         TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
 
+        // Takes zero as a special case which value is never set.
+        if (mCycleEndTimeMs == CYCLE_TIME_UNINITIAL_VALUE) {
+            cycleTime.setVisibility(View.GONE);
+            return;
+        }
+
+        cycleTime.setVisibility(View.VISIBLE);
         long millisLeft = mCycleEndTimeMs - System.currentTimeMillis();
         if (millisLeft <= 0) {
             cycleTime.setText(getContext().getString(R.string.billing_cycle_none_left));

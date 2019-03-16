@@ -164,7 +164,8 @@ public class DataUsageSummaryPreferenceControllerTest {
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 1 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -188,7 +189,8 @@ public class DataUsageSummaryPreferenceControllerTest {
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 0 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -214,7 +216,8 @@ public class DataUsageSummaryPreferenceControllerTest {
                 0 /* numPlans */,
                 null /* launchIntent */);
         verify(mSummaryPreference).setChartEnabled(true);
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -240,7 +243,8 @@ public class DataUsageSummaryPreferenceControllerTest {
                 0 /* numPlans */,
                 null /* launchIntent */);
         verify(mSummaryPreference).setChartEnabled(false);
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -321,7 +325,8 @@ public class DataUsageSummaryPreferenceControllerTest {
         verify(mSummaryPreference).setLimitInfo(captor.capture());
         CharSequence value = captor.getValue();
         assertThat(value.toString()).isEqualTo("1.00 MB data warning / 1.00 MB data limit");
-        verify(mSummaryPreference).setWifiMode(false, null);
+        verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
+                false /* isSingleWifi */);
     }
 
     @Test
@@ -340,7 +345,8 @@ public class DataUsageSummaryPreferenceControllerTest {
         when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setWifiMode(true, info.period);
+        verify(mSummaryPreference).setWifiMode(true /* isWifiMode */, info.period /* usagePeriod */,
+                false /* isSingleWifi */);
         verify(mSummaryPreference).setLimitInfo(null);
         verify(mSummaryPreference).setUsageNumbers(info.usageLevel, -1L, true);
         verify(mSummaryPreference).setChartEnabled(false);

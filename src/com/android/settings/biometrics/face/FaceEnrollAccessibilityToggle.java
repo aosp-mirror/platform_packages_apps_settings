@@ -58,9 +58,14 @@ public class FaceEnrollAccessibilityToggle extends LinearLayout {
             a.recycle();
         }
         mSwitch = findViewById(R.id.toggle);
+        mSwitch.setChecked(false);
     }
 
     public boolean isChecked() {
         return mSwitch.isChecked();
+    }
+
+    public void setChecked(boolean checked) {
+        mSwitch.setChecked(checked);
     }
 }

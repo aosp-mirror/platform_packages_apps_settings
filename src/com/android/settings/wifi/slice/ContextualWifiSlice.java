@@ -25,6 +25,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 
@@ -35,7 +36,9 @@ public class ContextualWifiSlice extends WifiSlice {
 
     private static final String TAG = "ContextualWifiSlice";
     @VisibleForTesting
-    boolean mPreviouslyDisplayed;
+    static long sActiveUiSession = -1000;
+    @VisibleForTesting
+    static boolean sPreviouslyDisplayed;
 
     public ContextualWifiSlice(Context context) {
         super(context);
@@ -48,13 +51,19 @@ public class ContextualWifiSlice extends WifiSlice {
 
     @Override
     public Slice getSlice() {
-        if (!mPreviouslyDisplayed && !TextUtils.equals(getActiveSSID(), WifiSsid.NONE)) {
+        final long currentUiSession = FeatureFactory.getFactory(mContext)
+                .getSlicesFeatureProvider().getUiSessionToken();
+        if (currentUiSession != sActiveUiSession) {
+            sActiveUiSession = currentUiSession;
+            sPreviouslyDisplayed = false;
+        }
+        if (!sPreviouslyDisplayed && !TextUtils.equals(getActiveSSID(), WifiSsid.NONE)) {
             Log.d(TAG, "Wifi is connected, no point showing any suggestion.");
             return null;
         }
-        // Set mPreviouslyDisplayed to true - we will show *something* on the screen. So we should
+        // Set sPreviouslyDisplayed to true - we will show *something* on the screen. So we should
         // keep showing this card to keep UI stable, even if wifi connects to a network later.
-        mPreviouslyDisplayed = true;
+        sPreviouslyDisplayed = true;
 
         return super.getSlice();
     }

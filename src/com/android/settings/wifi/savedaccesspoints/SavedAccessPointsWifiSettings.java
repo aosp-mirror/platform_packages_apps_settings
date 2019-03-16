@@ -199,11 +199,7 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
      * Checks if showing WifiNetworkDetailsFragment when clicking saved network item.
      */
     public static boolean usingDetailsFragment(Context context) {
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.MOBILE_NETWORK_V2)
-                && FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
-            return false;    // TODO(b/124695272): mark true when UI is ready.
-        }
-        return false;
+        return FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN);
     }
 
     boolean isSubscriptionsFeatureEnabled() {

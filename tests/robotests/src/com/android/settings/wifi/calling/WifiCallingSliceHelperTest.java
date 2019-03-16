@@ -22,7 +22,6 @@ import static android.app.slice.SliceItem.FORMAT_TEXT;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -48,7 +47,6 @@ import androidx.slice.widget.SliceLiveData;
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
-import com.android.settings.slices.CustomSliceManager;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBroadcastReceiver;
@@ -99,9 +97,6 @@ public class WifiCallingSliceHelperTest {
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSlicesFeatureProvider = mFeatureFactory.getSlicesFeatureProvider();
-        CustomSliceManager manager = new CustomSliceManager(mContext);
-        when(mSlicesFeatureProvider.getCustomSliceManager(any(Context.class)))
-                .thenReturn(manager);
 
         mWfcSliceHelper = new FakeWifiCallingSliceHelper(mContext);
 

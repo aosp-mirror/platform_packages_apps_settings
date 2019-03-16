@@ -42,6 +42,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -51,12 +52,14 @@ import androidx.core.text.BidiFormatter;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.datausage.WifiDataUsageSummaryPreferenceController;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog;
@@ -150,6 +153,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private Preference mDnsPref;
     private PreferenceCategory mIpv6Category;
     private Preference mIpv6AddressPref;
+    private Lifecycle mLifecycle;
+    Preference mDataUsageSummaryPref;
+    WifiDataUsageSummaryPreferenceController mSummaryHeaderController;
 
     private final IconInjector mIconInjector;
     private final IntentFilter mFilter;
@@ -262,6 +268,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
         mFilter.addAction(WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION);
 
+        mLifecycle = lifecycle;
         lifecycle.addObserver(this);
     }
 
@@ -313,6 +320,17 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private void setupEntityHeader(PreferenceScreen screen) {
         LayoutPreference headerPref = screen.findPreference(KEY_HEADER);
+
+        if (usingDataUsageHeader(mContext)) {
+            headerPref.setVisible(false);
+            mDataUsageSummaryPref = screen.findPreference("status_header");
+            mDataUsageSummaryPref.setVisible(true);
+            mSummaryHeaderController =
+                new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
+                        mLifecycle, (PreferenceFragmentCompat) mFragment, mAccessPoint.getSsid());
+            return;
+        }
+
         mEntityHeaderController =
                 EntityHeaderController.newInstance(
                         mFragment.getActivity(), mFragment,
@@ -324,6 +342,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
         mEntityHeaderController.setLabel(mAccessPoint.getTitle());
+    }
+
+    private void refreshEntityHeader() {
+        if (usingDataUsageHeader(mContext)) {
+            mSummaryHeaderController.updateState(mDataUsageSummaryPref);
+        } else {
+            mEntityHeaderController.setSummary(mAccessPoint.getSettingsSummary())
+                    .done(mFragment.getActivity(), true /* rebind */);
+        }
     }
 
     @Override
@@ -360,9 +387,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         // MAC Address Pref
         mMacAddressPref.setSummary(mWifiConfig.getRandomizedMacAddress().toString());
 
-        // TODO(b/124700353): Change header to data usage chart
-        mEntityHeaderController.setSummary(mAccessPoint.getSettingsSummary())
-                .done(mFragment.getActivity(), true /* rebind */);
+        refreshEntityHeader();
 
         updateIpLayerInfo();
 
@@ -429,8 +454,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private void refreshNetworkState() {
         mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
-        mEntityHeaderController.setSummary(mAccessPoint.getSettingsSummary())
-                .done(mFragment.getActivity(), true /* rebind */);
+        refreshEntityHeader();
     }
 
     private void refreshRssiViews() {
@@ -443,7 +467,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
 
         wifiIcon.setTintList(Utils.getColorAccent(mContext));
-        mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(), true /* rebind */);
+        if (mEntityHeaderController != null) {
+            mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(),
+                    true /* rebind */);
+        }
 
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
         wifiIconDark.setTintList(Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
@@ -669,5 +696,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         public Drawable getIcon(int level) {
             return mContext.getDrawable(Utils.getWifiIconResource(level)).mutate();
         }
+    }
+
+    private boolean usingDataUsageHeader(Context context) {
+        return FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_DATAUSAGE_HEADER);
     }
 }

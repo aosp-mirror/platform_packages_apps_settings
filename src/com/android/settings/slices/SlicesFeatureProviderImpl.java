@@ -17,27 +17,23 @@
 package com.android.settings.slices;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.SystemClock;
 
 import com.android.settings.network.telephony.Enhanced4gLteSliceHelper;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.utils.ThreadUtils;
+
+import java.util.Random;
 
 /**
  * Manages Slices in Settings.
  */
 public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
 
+    private long mUiSessionToken;
     private SlicesIndexer mSlicesIndexer;
     private SliceDataConverter mSliceDataConverter;
-    private CustomSliceManager mCustomSliceManager;
-
-    @Override
-    public SlicesIndexer getSliceIndexer(Context context) {
-        if (mSlicesIndexer == null) {
-            mSlicesIndexer = new SlicesIndexer(context.getApplicationContext());
-        }
-        return mSlicesIndexer;
-    }
 
     @Override
     public SliceDataConverter getSliceDataConverter(Context context) {
@@ -48,11 +44,13 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     }
 
     @Override
-    public CustomSliceManager getCustomSliceManager(Context context) {
-        if (mCustomSliceManager == null) {
-            mCustomSliceManager = new CustomSliceManager(context.getApplicationContext());
-        }
-        return mCustomSliceManager;
+    public void newUiSession() {
+        mUiSessionToken = SystemClock.elapsedRealtime();
+    }
+
+    @Override
+    public long getUiSessionToken() {
+        return mUiSessionToken;
     }
 
     @Override
@@ -75,5 +73,24 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     @Override
     public Enhanced4gLteSliceHelper getNewEnhanced4gLteSliceHelper(Context context) {
         return new Enhanced4gLteSliceHelper(context);
+    }
+
+    @Override
+    public CustomSliceable getSliceableFromUri(Context context, Uri uri) {
+        final Uri newUri = CustomSliceRegistry.removeParameterFromUri(uri);
+        final Class clazz = CustomSliceRegistry.getSliceClassByUri(newUri);
+        if (clazz == null) {
+            throw new IllegalArgumentException("No Slice found for uri: " + uri);
+        }
+
+        final CustomSliceable sliceable = CustomSliceable.createInstance(context, clazz);
+        return sliceable;
+    }
+
+    private SlicesIndexer getSliceIndexer(Context context) {
+        if (mSlicesIndexer == null) {
+            mSlicesIndexer = new SlicesIndexer(context.getApplicationContext());
+        }
+        return mSlicesIndexer;
     }
 }
