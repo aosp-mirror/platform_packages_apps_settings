@@ -53,6 +53,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -69,9 +70,13 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
     private static final String PREFERENCE_EMERGENCY_ADDRESS = "emergency_address_key";
 
-    private static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
+    @VisibleForTesting
+    static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
+    @VisibleForTesting
+    static final int REQUEST_CHECK_WFC_DISCLAIMER = 2;
 
     public static final String EXTRA_LAUNCH_CARRIER_APP = "EXTRA_LAUNCH_CARRIER_APP";
+    public static final String EXTRA_SUB_ID = "EXTRA_SUB_ID";
 
     protected static final String FRAGMENT_BUNDLE_SUBID = "subId";
 
@@ -176,7 +181,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
-        final Resources res = SubscriptionManager.getResourcesForSubId(getActivity(), mSubId);
+        final Resources res = getResourcesForSubId();
         String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
                 res.getString(R.string.wifi_calling_off_explanation_2));
         mEmptyView.setText(emptyViewText);
@@ -420,14 +425,17 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             return;
         }
 
-        // Call address management activity before turning on WFC
-        Intent carrierAppIntent = getCarrierActivityIntent();
-        if (carrierAppIntent != null) {
-            carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_ACTIVATE);
-            startActivityForResult(carrierAppIntent, REQUEST_CHECK_WFC_EMERGENCY_ADDRESS);
-        } else {
-            updateWfcMode(true);
-        }
+        // Launch disclaimer fragment before turning on WFC
+        final Context context = getActivity();
+        final Bundle args = new Bundle();
+        args.putInt(EXTRA_SUB_ID, mSubId);
+        new SubSettingLauncher(context)
+                .setDestination(WifiCallingDisclaimerFragment.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.wifi_calling_settings_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .setResultListener(this, REQUEST_CHECK_WFC_DISCLAIMER)
+                .launch();
     }
 
     /*
@@ -480,12 +488,30 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         final Context context = getActivity();
 
-        if (requestCode == REQUEST_CHECK_WFC_EMERGENCY_ADDRESS) {
-            Log.d(TAG, "WFC emergency address activity result = " + resultCode);
+        Log.d(TAG, "WFC activity request = " + requestCode + " result = " + resultCode);
 
-            if (resultCode == Activity.RESULT_OK) {
-                updateWfcMode(true);
-            }
+        switch (requestCode) {
+            case REQUEST_CHECK_WFC_EMERGENCY_ADDRESS:
+                if (resultCode == Activity.RESULT_OK) {
+                    updateWfcMode(true);
+                }
+                break;
+            case REQUEST_CHECK_WFC_DISCLAIMER:
+                if (resultCode == Activity.RESULT_OK) {
+                    // Call address management activity before turning on WFC
+                    Intent carrierAppIntent = getCarrierActivityIntent();
+                    if (carrierAppIntent != null) {
+                        carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_ACTIVATE);
+                        startActivityForResult(carrierAppIntent,
+                                REQUEST_CHECK_WFC_EMERGENCY_ADDRESS);
+                    } else {
+                        updateWfcMode(true);
+                    }
+                }
+                break;
+            default:
+                Log.e(TAG, "Unexpected request: " + requestCode);
+                break;
         }
     }
 
@@ -571,5 +597,10 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             }
         }
         return resId;
+    }
+
+    @VisibleForTesting
+    Resources getResourcesForSubId() {
+        return SubscriptionManager.getResourcesForSubId(getActivity(), mSubId, false);
     }
 }
