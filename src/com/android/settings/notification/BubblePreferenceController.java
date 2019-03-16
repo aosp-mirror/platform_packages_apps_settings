@@ -30,7 +30,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "BubblePrefContr";
-    private static final String KEY = "bubble";
+    private static final String KEY = "bubble_pref";
     private static final int SYSTEM_WIDE_ON = 1;
     private static final int SYSTEM_WIDE_OFF = 0;
 
