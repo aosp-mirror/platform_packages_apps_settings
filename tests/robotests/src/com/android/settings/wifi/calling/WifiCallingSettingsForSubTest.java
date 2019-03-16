@@ -16,11 +16,14 @@
 
 package com.android.settings.wifi.calling;
 
+import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 import static com.google.common.truth.Truth.assertThat;
 
+import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
@@ -31,6 +34,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +46,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
@@ -49,7 +55,6 @@ import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
@@ -57,6 +62,7 @@ import com.android.settings.widget.ToggleSwitch;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -69,6 +75,8 @@ import org.robolectric.util.ReflectionHelpers;
 public class WifiCallingSettingsForSubTest {
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
+    private static final String TEST_EMERGENCY_ADDRESS_CARRIER_APP =
+            "com.android.settings/.wifi.calling.TestEmergencyAddressCarrierApp";
 
     private TestFragment mFragment;
     private Context mContext;
@@ -76,6 +84,7 @@ public class WifiCallingSettingsForSubTest {
     private final PersistableBundle mBundle = new PersistableBundle();
 
     @Mock private static CarrierConfigManager sCarrierConfigManager;
+    @Mock private CarrierConfigManager mMockConfigManager;
     @Mock private ImsManager mImsManager;
     @Mock private PreferenceScreen mPreferenceScreen;
     @Mock private SettingsActivity mActivity;
@@ -85,6 +94,7 @@ public class WifiCallingSettingsForSubTest {
     @Mock private ImsConfig mImsConfig;
     @Mock private ListPreference mButtonWfcMode;
     @Mock private ListPreference mButtonWfcRoamingMode;
+    @Mock private Preference mUpdateAddress;
 
     @Before
     public void setUp() throws NoSuchFieldException, ImsException {
@@ -125,6 +135,11 @@ public class WifiCallingSettingsForSubTest {
         doReturn(mBundle).when(sCarrierConfigManager).getConfigForSubId(anyInt());
         setDefaultCarrierConfigValues();
 
+        doReturn(sCarrierConfigManager).when(mActivity).getSystemService(
+                CarrierConfigManager.class);
+        doReturn(mContext.getResources()).when(mFragment).getResourcesForSubId();
+        doNothing().when(mFragment).startActivityForResult(any(Intent.class), anyInt());
+
         mFragment.onAttach(mContext);
         mFragment.onCreate(null);
         mFragment.onActivityCreated(null);
@@ -135,6 +150,9 @@ public class WifiCallingSettingsForSubTest {
                 CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, false);
         mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL, true);
         mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, true);
+        mBundle.putString(
+                CarrierConfigManager.KEY_WFC_EMERGENCY_ADDRESS_CARRIER_APP_STRING,
+                TEST_EMERGENCY_ADDRESS_CARRIER_APP);
     }
 
     @Test
@@ -261,6 +279,61 @@ public class WifiCallingSettingsForSubTest {
         verify(mImsManager, times(1)).setWfcMode(
                 eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
                 eq(true));
+    }
+
+    @Test
+    public void onSwitchChanged_enableSetting_shouldLaunchWfcDisclaimerFragment() {
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+
+        mFragment.onSwitchChanged(null, true);
+
+        // Check the WFC disclaimer fragment is launched.
+        verify(mFragment).startActivityForResult(intentCaptor.capture(),
+                eq(WifiCallingSettingsForSub.REQUEST_CHECK_WFC_DISCLAIMER));
+        Intent intent = intentCaptor.getValue();
+        assertThat(intent.getStringExtra(EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(WifiCallingDisclaimerFragment.class.getName());
+    }
+
+    @Test
+    public void onActivityResult_finishWfcDisclaimerFragment_shouldLaunchCarrierActivity() {
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+
+        // Emulate the WfcDisclaimerActivity finish.
+        mFragment.onActivityResult(WifiCallingSettingsForSub.REQUEST_CHECK_WFC_DISCLAIMER,
+                Activity.RESULT_OK, null);
+
+        // Check the WFC emergency address activity is launched.
+        verify(mFragment).startActivityForResult(intentCaptor.capture(),
+                eq(WifiCallingSettingsForSub.REQUEST_CHECK_WFC_EMERGENCY_ADDRESS));
+        Intent intent = intentCaptor.getValue();
+        assertEquals(intent.getComponent(), ComponentName.unflattenFromString(
+                TEST_EMERGENCY_ADDRESS_CARRIER_APP));
+    }
+
+    @Test
+    public void onActivityResult_finishCarrierActivity_shouldShowWfcPreference() {
+        ReflectionHelpers.setField(mFragment, "mButtonWfcMode", mButtonWfcMode);
+        ReflectionHelpers.setField(mFragment, "mButtonWfcRoamingMode", mButtonWfcRoamingMode);
+        ReflectionHelpers.setField(mFragment, "mUpdateAddress", mUpdateAddress);
+
+        mFragment.onActivityResult(WifiCallingSettingsForSub.REQUEST_CHECK_WFC_EMERGENCY_ADDRESS,
+                Activity.RESULT_OK, null);
+
+        // Check the WFC preferences is added.
+        verify(mPreferenceScreen).addPreference(mButtonWfcMode);
+        verify(mPreferenceScreen).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen).addPreference(mUpdateAddress);
+        // Check the WFC enable request.
+        verify(mImsManager).setWfcSetting(true);
+    }
+
+    @Test
+    public void onSwitchChanged_disableSetting_shouldNotLaunchWfcDisclaimerFragment() {
+        mFragment.onSwitchChanged(null, false);
+
+        // Check the WFC disclaimer fragment is not launched.
+        verify(mFragment, never()).startActivityForResult(any(Intent.class), anyInt());
     }
 
     protected static class TestFragment extends WifiCallingSettingsForSub {
