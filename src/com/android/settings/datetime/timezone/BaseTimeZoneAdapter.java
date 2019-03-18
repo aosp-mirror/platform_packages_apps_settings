@@ -77,9 +77,10 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        switch(viewType) {
+        switch (viewType) {
             case TYPE_HEADER: {
-                final View view = inflater.inflate(R.layout.preference_category_material,
+                final View view = inflater.inflate(
+                        R.layout.time_zone_search_header,
                         parent, false);
                 return new HeaderViewHolder(view);
             }
@@ -136,7 +137,8 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         return mShowHeader && position == 0;
     }
 
-    public @NonNull ArrayFilter getFilter() {
+    @NonNull
+    public ArrayFilter getFilter() {
         if (mFilter == null) {
             mFilter = new ArrayFilter();
         }
@@ -153,14 +155,18 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
 
     public interface AdapterItem {
         CharSequence getTitle();
+
         CharSequence getSummary();
+
         String getIconText();
+
         String getCurrentTime();
 
         /**
          * @return unique non-negative number
          */
         long getItemId();
+
         String[] getSearchKeys();
     }
 
