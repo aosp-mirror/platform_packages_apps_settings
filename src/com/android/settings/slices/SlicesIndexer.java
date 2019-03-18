@@ -84,7 +84,6 @@ class SlicesIndexer implements Runnable {
         } finally {
             database.endTransaction();
         }
-        database.close();
     }
 
     @VisibleForTesting
