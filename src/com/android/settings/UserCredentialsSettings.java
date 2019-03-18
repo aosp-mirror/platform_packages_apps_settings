@@ -154,11 +154,15 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                         dialog.dismiss();
                     }
                 };
-                if (item.isSystem()) {
-                    // TODO: a safe means of clearing wifi certificates. Configs refer to aliases
-                    //       directly so deleting certs will break dependent access points.
-                    builder.setNegativeButton(R.string.trusted_credentials_remove_label, listener);
-                }
+                // TODO: b/127865361
+                //       a safe means of clearing wifi certificates. Configs refer to aliases
+                //       directly so deleting certs will break dependent access points.
+                //       However, Wi-Fi used to remove this certificate from storage if the network
+                //       was removed, regardless if it is used in more than one network.
+                //       It has been decided to allow removing certificates from this menu, as we
+                //       assume that the user who manually adds certificates must have a way to
+                //       manually remove them.
+                builder.setNegativeButton(R.string.trusted_credentials_remove_label, listener);
             }
             return builder.create();
         }
@@ -172,7 +176,8 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
          * Deletes all certificates and keys under a given alias.
          *
          * If the {@link Credential} is for a system alias, all active grants to the alias will be
-         * removed using {@link KeyChain}.
+         * removed using {@link KeyChain}. If the {@link Credential} is for Wi-Fi alias, all
+         * credentials and keys will be removed using {@link KeyStore}.
          */
         private class RemoveCredentialsTask extends AsyncTask<Credential, Void, Credential[]> {
             private Context context;
@@ -188,12 +193,30 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
                 for (final Credential credential : credentials) {
                     if (credential.isSystem()) {
                         removeGrantsAndDelete(credential);
-                        continue;
+                    } else {
+                        deleteWifiCredential(credential);
                     }
-                    throw new UnsupportedOperationException(
-                            "Not implemented for wifi certificates. This should not be reachable.");
                 }
                 return credentials;
+            }
+
+            private void deleteWifiCredential(final Credential credential) {
+                final KeyStore keyStore = KeyStore.getInstance();
+                final EnumSet<Credential.Type> storedTypes = credential.getStoredTypes();
+
+                // Remove all Wi-Fi credentials
+                if (storedTypes.contains(Credential.Type.USER_KEY)) {
+                    keyStore.delete(Credentials.USER_PRIVATE_KEY + credential.getAlias(),
+                            Process.WIFI_UID);
+                }
+                if (storedTypes.contains(Credential.Type.USER_CERTIFICATE)) {
+                    keyStore.delete(Credentials.USER_CERTIFICATE + credential.getAlias(),
+                            Process.WIFI_UID);
+                }
+                if (storedTypes.contains(Credential.Type.CA_CERTIFICATE)) {
+                    keyStore.delete(Credentials.CA_CERTIFICATE + credential.getAlias(),
+                            Process.WIFI_UID);
+                }
             }
 
             private void removeGrantsAndDelete(final Credential credential) {
@@ -487,6 +510,12 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
 
         public boolean isSystem() {
             return UserHandle.getAppId(uid) == Process.SYSTEM_UID;
+        }
+
+        public String getAlias() { return alias; }
+
+        public EnumSet<Type> getStoredTypes() {
+            return storedTypes;
         }
     }
 }
