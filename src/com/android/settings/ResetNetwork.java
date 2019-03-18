@@ -213,8 +213,6 @@ public class ResetNetwork extends InstrumentedFragment {
         mInitiateButton.setOnClickListener(mInitiateListener);
         if (showEuiccSettings(getContext())) {
             mEsimContainer.setVisibility(View.VISIBLE);
-            TextView title = mContentView.findViewById(R.id.erase_esim_title);
-            title.setText(R.string.reset_esim_title);
             mEsimContainer.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -127,12 +127,9 @@
                         android:text="@string/erase_external_storage_description"/>
                 </LinearLayout>
             </LinearLayout>
-            <include
-                layout="@layout/reset_esim_checkbox"
-                android:layout_marginTop="40dp"
-                android:id="@+id/erase_esim_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+
+            <include layout="@layout/reset_esim_checkbox"/>
+
         </LinearLayout>
     </ScrollView>
 </com.google.android.setupdesign.GlifLayout>
