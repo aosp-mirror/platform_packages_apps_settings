@@ -139,7 +139,7 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
         final String action = mContext.getString(R.string.config_settingsintelligence_log_action);
         if (!TextUtils.isEmpty(action)) {
             intent.setAction(action);
-            mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
+            mContext.sendBroadcastAsUser(intent, UserHandle.CURRENT);
         }
     }
 
