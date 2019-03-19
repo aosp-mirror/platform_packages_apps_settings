@@ -108,7 +108,6 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
             }
             final Bundle savedState = new Bundle();
             mSelectedAccessPoint.saveWifiState(savedState);
-            savedState.putBoolean(WifiNetworkDetailsFragment.EXTRA_IS_SAVED_NETWORK, true);
 
             new SubSettingLauncher(getContext())
                     .setTitleText(mSelectedAccessPoint.getTitle())
