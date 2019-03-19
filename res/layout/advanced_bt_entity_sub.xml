@@ -26,9 +26,11 @@
         android:id="@+id/header_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:scaleType="fitCenter"
         android:layout_gravity="center_horizontal"
-        android:antialias="true"/>
+        android:antialias="true"
+        android:background="@drawable/circle_outline"
+        android:padding="8dp"
+        android:scaleType="fitCenter"/>
 
     <TextView
         android:id="@+id/header_title"
