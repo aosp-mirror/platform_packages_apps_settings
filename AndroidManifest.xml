@@ -2390,6 +2390,19 @@
         </activity>
 
         <activity
+            android:name="Settings$ZenAccessDetailSettingsActivity"
+            android:label="@string/manage_zen_access_title"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.settings.NOTIFICATION_POLICY_ACCESS_DETAIL_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails" />
+        </activity>
+
+        <activity
             android:name="Settings$ZenAccessSettingsActivity"
             android:label="@string/manage_zen_access_title"
             android:parentActivityName="Settings">
