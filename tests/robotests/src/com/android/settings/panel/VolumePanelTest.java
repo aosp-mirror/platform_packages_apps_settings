@@ -48,6 +48,7 @@ public class VolumePanelTest {
                 CustomSliceRegistry.VOLUME_REMOTE_MEDIA_URI,
                 CustomSliceRegistry.VOLUME_CALL_URI,
                 CustomSliceRegistry.VOLUME_MEDIA_URI,
+                CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI,
                 CustomSliceRegistry.VOLUME_RINGER_URI,
                 CustomSliceRegistry.VOLUME_ALARM_URI);
     }
