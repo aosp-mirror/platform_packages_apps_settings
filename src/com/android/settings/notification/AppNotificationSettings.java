@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
-
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.settings.SettingsEnums;
@@ -26,8 +24,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -88,8 +84,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     public void onResume() {
         super.onResume();
 
-        getActivity().getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
-
         if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
             Log.w(TAG, "Missing package or uid or packageinfo");
             finish();
@@ -121,15 +115,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        final Window window = getActivity().getWindow();
-        final WindowManager.LayoutParams attrs = window.getAttributes();
-        attrs.privateFlags &= ~SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
-        window.setAttributes(attrs);
     }
 
     @Override

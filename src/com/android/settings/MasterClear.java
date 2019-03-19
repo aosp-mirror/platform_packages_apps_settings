@@ -326,8 +326,6 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
 
         if (showWipeEuicc()) {
             if (showWipeEuiccCheckbox()) {
-                TextView title = mContentView.findViewById(R.id.erase_esim_title);
-                title.setText(R.string.erase_esim_storage);
                 mEsimStorageContainer.setVisibility(View.VISIBLE);
                 mEsimStorageContainer.setOnClickListener(new View.OnClickListener() {
                     @Override

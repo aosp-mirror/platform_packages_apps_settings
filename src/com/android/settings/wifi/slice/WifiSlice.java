@@ -32,6 +32,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -355,7 +356,6 @@ public class WifiSlice implements CustomSliceable {
 
         @Override
         public void onConnectedChanged() {
-            notifySliceChange();
         }
 
         @Override
@@ -370,10 +370,43 @@ public class WifiSlice implements CustomSliceable {
             final List<AccessPoint> resultList = new ArrayList<>();
             for (AccessPoint ap : accessPoints) {
                 if (ap.isReachable()) {
-                    resultList.add(ap);
+                    resultList.add(clone(ap));
+                    if (resultList.size() >= DEFAULT_EXPANDED_ROW_COUNT) {
+                        break;
+                    }
                 }
             }
             updateResults(resultList);
+        }
+
+        private AccessPoint clone(AccessPoint accessPoint) {
+            final Bundle savedState = new Bundle();
+            accessPoint.saveWifiState(savedState);
+            return new AccessPoint(mContext, savedState);
+        }
+
+        @Override
+        protected boolean areListsTheSame(List<AccessPoint> a, List<AccessPoint> b) {
+            if (!a.equals(b)) {
+                return false;
+            }
+
+            // compare access point states one by one
+            final int listSize = a.size();
+            for (int i = 0; i < listSize; i++) {
+                if (getState(a.get(i)) != getState(b.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private State getState(AccessPoint accessPoint) {
+            final NetworkInfo networkInfo = accessPoint.getNetworkInfo();
+            if (networkInfo != null) {
+                return networkInfo.getState();
+            }
+            return null;
         }
     }
 }

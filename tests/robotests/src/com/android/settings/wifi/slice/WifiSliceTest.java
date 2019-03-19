@@ -34,8 +34,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -61,6 +63,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -253,11 +256,42 @@ public class WifiSliceTest {
         verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
     }
 
-    @Test
-    public void onConnectedChanged_shouldNotifyChange() {
-        mWifiScanWorker.onConnectedChanged();
+    private AccessPoint createAccessPoint(String name, State state) {
+        final NetworkInfo info = mock(NetworkInfo.class);
+        doReturn(state).when(info).getState();
 
-        verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
+        final Bundle savedState = new Bundle();
+        savedState.putString("key_ssid", name);
+        savedState.putParcelable("key_networkinfo", info);
+        return new AccessPoint(mContext, savedState);
+    }
+
+    @Test
+    public void SliceAccessPoint_sameState_shouldBeTheSame() {
+        final AccessPoint ap1 = createAccessPoint(AP1_NAME, State.CONNECTED);
+        final AccessPoint ap2 = createAccessPoint(AP1_NAME, State.CONNECTED);
+
+        assertThat(mWifiScanWorker.areListsTheSame(Arrays.asList(ap1), Arrays.asList(ap2)))
+                .isTrue();
+    }
+
+    @Test
+    public void SliceAccessPoint_differentState_shouldBeDifferent() {
+        final AccessPoint ap1 = createAccessPoint(AP1_NAME, State.CONNECTING);
+        final AccessPoint ap2 = createAccessPoint(AP1_NAME, State.CONNECTED);
+
+        assertThat(mWifiScanWorker.areListsTheSame(Arrays.asList(ap1), Arrays.asList(ap2)))
+                .isFalse();
+    }
+    @Test
+    public void SliceAccessPoint_differentLength_shouldBeDifferent() {
+        final AccessPoint ap1 = createAccessPoint(AP1_NAME, State.CONNECTED);
+        final AccessPoint ap2 = createAccessPoint(AP1_NAME, State.CONNECTED);
+        final List<AccessPoint> list = new ArrayList<>();
+        list.add(ap1);
+        list.add(ap2);
+
+        assertThat(mWifiScanWorker.areListsTheSame(list, Arrays.asList(ap1))).isFalse();
     }
 
     @Implements(SliceBackgroundWorker.class)

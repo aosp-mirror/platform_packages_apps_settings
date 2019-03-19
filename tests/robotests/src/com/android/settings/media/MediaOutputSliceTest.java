@@ -94,6 +94,13 @@ public class MediaOutputSliceTest {
     }
 
     @Test
+    public void getSlice_workerIsNull_shouldNotCrash() {
+        mMediaOutputSlice.init(TEST_PACKAGE_NAME, null);
+
+        mMediaOutputSlice.getSlice();
+    }
+
+    @Test
     public void getSlice_shouldHaveActiveDeviceName() {
         mDevices.clear();
         final MediaDevice device = mock(MediaDevice.class);

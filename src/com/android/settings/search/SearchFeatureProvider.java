@@ -39,7 +39,7 @@ import com.android.settingslib.search.SearchIndexableResources;
  */
 public interface SearchFeatureProvider {
 
-    int REQUEST_CODE = 0;
+    int REQUEST_CODE = 501;
 
     /**
      * Ensures the caller has necessary privilege to launch search result page.

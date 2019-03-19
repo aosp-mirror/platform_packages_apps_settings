@@ -198,7 +198,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         } else if (isManagedProfile && isInternalActivity()
                 && !lockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
             mCredentialMode = CREDENTIAL_MANAGED;
-            if (isBiometricAllowed(effectiveUserId)) {
+            if (isBiometricAllowed(effectiveUserId, mUserId)) {
                 showBiometricPrompt(bpBundle);
                 launchedBiometric = true;
             } else {
@@ -207,7 +207,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             }
         } else {
             mCredentialMode = CREDENTIAL_NORMAL;
-            if (isBiometricAllowed(effectiveUserId)) {
+            if (isBiometricAllowed(effectiveUserId, mUserId)) {
                 // Don't need to check if biometrics / pin/pattern/pass are enrolled. It will go to
                 // onAuthenticationError and do the right thing automatically.
                 showBiometricPrompt(bpBundle);
@@ -273,9 +273,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         return (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_BIOMETRICS) != 0;
     }
 
-    private boolean isBiometricAllowed(int effectiveUserId) {
+    private boolean isBiometricAllowed(int effectiveUserId, int realUserId) {
         return !isStrongAuthRequired(effectiveUserId)
-                && !isBiometricDisabledByAdmin(effectiveUserId);
+                && !isBiometricDisabledByAdmin(effectiveUserId)
+                && !mLockPatternUtils.hasPendingEscrowToken(realUserId);
     }
 
     private void showBiometricPrompt(Bundle bundle) {
@@ -304,9 +305,18 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private void showConfirmCredentials() {
         mCCLaunched = true;
         boolean launched = false;
+        // The only difference between CREDENTIAL_MANAGED and CREDENTIAL_NORMAL is that for
+        // CREDENTIAL_MANAGED, we launch the real confirm credential activity with an explicit
+        // but dummy challenge value (0L). This will result in ConfirmLockPassword calling
+        // verifyTiedProfileChallenge() (if it's a profile with unified challenge), due to the
+        // difference between ConfirmLockPassword.startVerifyPassword() and
+        // ConfirmLockPassword.startCheckPassword(). Calling verifyTiedProfileChallenge() here is
+        // necessary when this is part of the turning on work profile flow, because it forces
+        // unlocking the work profile even before the profile is running.
+        // TODO: Remove the duplication of checkPassword and verifyPassword in ConfirmLockPassword,
+        // LockPatternChecker and LockPatternUtils. verifyPassword should be the only API to use,
+        // which optionally accepts a challenge.
         if (mCredentialMode == CREDENTIAL_MANAGED) {
-            // We set the challenge as 0L, so it will force to unlock managed profile when it
-            // unlocks primary profile screen lock, by calling verifyTiedProfileChallenge()
             launched = mChooseLockSettingsHelper
                     .launchConfirmationActivityWithExternalAndChallenge(
                             0 /* request code */, null /* title */, mTitle, mDetails,

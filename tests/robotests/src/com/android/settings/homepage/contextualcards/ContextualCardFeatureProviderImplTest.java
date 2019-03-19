@@ -57,7 +57,7 @@ public class ContextualCardFeatureProviderImplTest {
         final Intent intent = new Intent();
         mImpl.sendBroadcast(intent);
 
-        verify(mContext, never()).sendBroadcastAsUser(intent, UserHandle.ALL);
+        verify(mContext, never()).sendBroadcastAsUser(intent, UserHandle.CURRENT);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ContextualCardFeatureProviderImplTest {
         final Intent intent = new Intent();
         mImpl.sendBroadcast(intent);
 
-        verify(mContext).sendBroadcastAsUser(intent, UserHandle.ALL);
+        verify(mContext).sendBroadcastAsUser(intent, UserHandle.CURRENT);
     }
 
     @Test

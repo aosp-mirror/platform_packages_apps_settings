@@ -33,6 +33,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 
@@ -93,7 +94,7 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
 
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .action(context, SettingsEnums.ACTION_SEARCH_RESULTS);
-            mHost.startActivityForResult(intent, 0 /* requestCode */);
+            mHost.startActivityForResult(intent, SearchFeatureProvider.REQUEST_CODE);
             return true;
         });
     }

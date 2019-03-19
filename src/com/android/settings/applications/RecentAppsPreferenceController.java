@@ -25,6 +25,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.util.ArrayMap;
@@ -224,7 +225,8 @@ public class RecentAppsPreferenceController extends BasePreferenceController
                 .setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info))
                 .setTitle(appEntry.label)
                 .setSummary(StringUtil.formatRelativeTime(mContext,
-                        System.currentTimeMillis() - stat.getLastTimeUsed(), false))
+                        System.currentTimeMillis() - stat.getLastTimeUsed(), false,
+                        RelativeDateTimeFormatter.Style.SHORT))
                 .setOnClickListener(v ->
                         AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
                                 R.string.application_info_label, pkgName, appEntry.info.uid,

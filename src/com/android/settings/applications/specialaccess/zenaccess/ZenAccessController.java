@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.specialaccess;
+package com.android.settings.applications.specialaccess.zenaccess;
 
 import android.app.ActivityManager;
 import android.content.Context;

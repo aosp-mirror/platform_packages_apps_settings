@@ -146,13 +146,17 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
                 needNotify = true;
             }
         } else {
-            needNotify = !results.equals(mCachedResults);
+            needNotify = !areListsTheSame(results, mCachedResults);
         }
 
         if (needNotify) {
             mCachedResults = results;
             notifySliceChange();
         }
+    }
+
+    protected boolean areListsTheSame(List<E> a, List<E> b) {
+        return a.equals(b);
     }
 
     /**
