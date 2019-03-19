@@ -51,13 +51,15 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
     private static final String ENABLE_ASSISTANT_GESTURE = "ENABLE_ASSISTANT_GESTURE";
     private static final String PROTOTYPE_ENABLED = "prototype_enabled";
 
-    private static final int EDGE_SENSITIVITY_WIDTH = 32;
+    private static final int EDGE_SENSITIVITY_WIDTH = 48;
     private static final String EDGE_SENSITIVITY_KEY = "quickstepcontroller_edge_width_sensitivity";
 
     private static final String GESTURES_MATCH_MAP_OFF = "000000";
     private static final String GESTURES_MATCH_MAP_ON = "071133";
     private static final String GESTURES_MATCH_MAP_KEY = "quickstepcontroller_gesture_match_map";
 
+    private static final String OVERLAY_NAVBAR_KEY =
+            "com.android.internal.experiment.navbar.default";
     private static final String OVERLAY_NAVBAR_TYPE_INSET =
             "com.android.internal.experiment.navbar.type.inset";
     private static final String OVERLAY_NAVBAR_TYPE_FLOATING =
@@ -174,6 +176,7 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
                 .asInterface(ServiceManager.getService(Context.OVERLAY_SERVICE));
         if (overlayManager != null) {
             try {
+                overlayManager.setEnabled(OVERLAY_NAVBAR_KEY, true, USER_SYSTEM);
                 overlayManager.setEnabled(OVERLAY_NAVBAR_TYPE_FLOATING, false, USER_SYSTEM);
                 overlayManager.setEnabled(OVERLAY_NAVBAR_TYPE_INSET, enable, USER_SYSTEM);
             } catch (RemoteException e) {
