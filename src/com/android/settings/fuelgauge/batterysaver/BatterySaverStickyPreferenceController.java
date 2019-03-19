@@ -19,7 +19,7 @@ public class BatterySaverStickyPreferenceController extends BasePreferenceContro
 
     @Override
     public void updateState(Preference preference) {
-        int setting = Settings.System.getInt(mContext.getContentResolver(),
+        int setting = Settings.Global.getInt(mContext.getContentResolver(),
                 LOW_POWER_STICKY_AUTO_DISABLE_ENABLED, 1);
 
         ((SwitchPreference) preference).setChecked(setting == 0);
@@ -28,7 +28,7 @@ public class BatterySaverStickyPreferenceController extends BasePreferenceContro
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean keepActive = (Boolean) newValue;
-        Settings.System.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 LOW_POWER_STICKY_AUTO_DISABLE_ENABLED,
                 keepActive ? 0 : 1);
         return true;

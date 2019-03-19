@@ -42,7 +42,7 @@ public class BatterySaverStickyPreferenceControllerTest {
     }
 
     private int getAutoDisableSetting() {
-        return Settings.System.getInt(mContext.getContentResolver(),
+        return Settings.Global.getInt(mContext.getContentResolver(),
                 LOW_POWER_STICKY_AUTO_DISABLE_ENABLED,
                 1);
     }
