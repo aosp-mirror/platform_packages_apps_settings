@@ -36,6 +36,7 @@ import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSli
 import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
+import com.android.settings.homepage.contextualcards.slices.ContextualNotificationChannelSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
 import com.android.settings.location.LocationSlice;
@@ -92,6 +93,16 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("bluetooth_devices")
+            .build();
+
+    /**
+     * Backing Uri for Contextual Notification channel Slice.
+     */
+    public static final Uri CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("contextual_notification_channel")
             .build();
 
     /**
@@ -318,6 +329,8 @@ public class CustomSliceRegistry {
 
         sUriToSlice.put(BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
         sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
+        sUriToSlice.put(CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI,
+                ContextualNotificationChannelSlice.class);
         sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
         sUriToSlice.put(DATA_USAGE_SLICE_URI, DataUsageSlice.class);
         sUriToSlice.put(DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
