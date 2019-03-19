@@ -28,12 +28,6 @@
         settings:controller="com.android.settings.gestures.AssistGestureSettingsPreferenceController" />
 
     <Preference
-        android:key="gesture_wake_screen_input_summary"
-        android:title="@string/ambient_display_wake_screen_title"
-        android:fragment="com.android.settings.gestures.WakeScreenGestureSettings"
-        settings:controller="com.android.settings.gestures.WakeScreenGesturePreferenceController" />
-
-    <Preference
         android:key="gesture_swipe_down_fingerprint_input_summary"
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"
