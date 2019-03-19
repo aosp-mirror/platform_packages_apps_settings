@@ -48,15 +48,10 @@ public class PanelFragment extends Fragment {
     private RecyclerView mPanelSlices;
 
     private PanelContent mPanel;
-    private final MetricsFeatureProvider mMetricsProvider;
+    private MetricsFeatureProvider mMetricsProvider;
 
     @VisibleForTesting
     PanelSlicesAdapter mAdapter;
-
-    public PanelFragment() {
-        final Context context = getActivity();
-        mMetricsProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
 
     @Nullable
     @Override
@@ -83,6 +78,7 @@ public class PanelFragment extends Fragment {
                 .getPanelFeatureProvider()
                 .getPanel(activity, panelType, mediaPackageName);
 
+        mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
         // Log panel opened.
         mMetricsProvider.action(
                 0 /* attribution */,
