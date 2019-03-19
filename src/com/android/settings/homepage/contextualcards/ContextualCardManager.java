@@ -22,6 +22,7 @@ import static com.android.settings.intelligence.ContextualCardProto.ContextualCa
 
 import static java.util.stream.Collectors.groupingBy;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -38,6 +39,7 @@ import androidx.loader.content.Loader;
 
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
@@ -195,8 +197,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     @Override
     public void onFinishCardLoading(List<ContextualCard> cards) {
         final long loadTime = System.currentTimeMillis() - mStartTime;
-        //TODO(b/123668403): remove the log here once we do the change with FutureTask
         Log.d(TAG, "Total loading time = " + loadTime);
+
         final List<ContextualCard> cardsToKeep = getCardsToKeep(cards);
 
         //navigate back to the homepage, screen rotate or after card dismissal
@@ -206,15 +208,25 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
             return;
         }
 
-        //only log homepage display upon a fresh launch
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
         final long timeoutLimit = getCardLoaderTimeout(mContext);
         if (loadTime <= timeoutLimit) {
             onContextualCardUpdated(cards.stream()
                     .collect(groupingBy(ContextualCard::getCardType)));
+        } else {
+            // log timeout occurrence
+            metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_LOAD_TIMEOUT,
+                    SettingsEnums.SETTINGS_HOMEPAGE,
+                    null /* key */, (int) loadTime /* value */);
         }
+        //only log homepage display upon a fresh launch
         final long totalTime = System.currentTimeMillis() - mStartTime;
         FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext)
                 .logHomepageDisplay(totalTime);
+        metricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_CONTEXTUAL_HOME_SHOW, (int) totalTime);
 
         mIsFirstLaunch = false;
     }
