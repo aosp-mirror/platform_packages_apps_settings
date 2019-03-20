@@ -20,6 +20,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.android.settings.R;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
@@ -50,6 +52,7 @@ public abstract class FeatureFactory {
     private static final boolean DEBUG = false;
 
     protected static FeatureFactory sFactory;
+    protected static Context sAppContext;
 
     /**
      * Returns a factory for creating feature controllers. Creates the factory if it does not
@@ -59,6 +62,9 @@ public abstract class FeatureFactory {
     public static FeatureFactory getFactory(Context context) {
         if (sFactory != null) {
             return sFactory;
+        }
+        if (sAppContext == null) {
+            sAppContext = context.getApplicationContext();
         }
 
         if (DEBUG) Log.d(LOG_TAG, "getFactory");
@@ -74,6 +80,16 @@ public abstract class FeatureFactory {
 
         if (DEBUG) Log.d(LOG_TAG, "started " + sFactory.getClass().getSimpleName());
         return sFactory;
+    }
+
+    /**
+     * Returns an application {@link Context} used to create this {@link FeatureFactory}. If the
+     * factory has not been properly created yet (aka {@link #getFactory} has not been called), this
+     * will return null.
+     */
+    @Nullable
+    public static Context getAppContext() {
+        return sAppContext;
     }
 
     public abstract AssistGestureFeatureProvider getAssistGestureFeatureProvider();
