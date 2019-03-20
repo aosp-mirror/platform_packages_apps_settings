@@ -179,7 +179,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private PreferenceCategory mConnectedAccessPointPreferenceCategory;
     private PreferenceCategory mAccessPointsPreferenceCategory;
-    private ButtonPreference mAddPreference;
+    @VisibleForTesting
+    AddWifiNetworkPreference mAddWifiNetworkPreference;
     @VisibleForTesting
     Preference mConfigureWifiSettingsPreference;
     @VisibleForTesting
@@ -237,20 +238,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 (PreferenceCategory) findPreference(PREF_KEY_ACCESS_POINTS);
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
-
-        Context prefContext = getPrefContext();
-        mAddPreference = new ButtonPreference(prefContext);
-        mAddPreference.setIcon(R.drawable.ic_menu_add);
-        mAddPreference.setTitle(R.string.wifi_add_network);
-        mAddPreference.setButtonIcon(R.drawable.ic_scan_24dp);
-        mAddPreference.setButtonOnClickListener((View v) -> {
-            // Launch QR code scanner to join a network.
-            getContext().startActivity(
-                    WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
-        });
-        mAddPreference.setButtonContentDescription(getString(R.string.wifi_dpp_scan_qr_code));
+        mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
         mStatusMessagePreference = (LinkablePreference) findPreference(PREF_KEY_STATUS_MESSAGE);
-
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
     }
 
@@ -590,7 +579,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
                     break;
             }
-        } else if (preference == mAddPreference) {
+        } else if (preference == mAddWifiNetworkPreference) {
             onAddNetworkPressed();
         } else {
             return super.onPreferenceTreeClick(preference);
@@ -809,8 +798,8 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         }
         removeCachedPrefs(mAccessPointsPreferenceCategory);
-        mAddPreference.setOrder(index);
-        mAccessPointsPreferenceCategory.addPreference(mAddPreference);
+        mAddWifiNetworkPreference.setOrder(index);
+        mAccessPointsPreferenceCategory.addPreference(mAddWifiNetworkPreference);
         setAdditionalSettingsSummaries();
 
         if (!hasAvailableAccessPoints) {
