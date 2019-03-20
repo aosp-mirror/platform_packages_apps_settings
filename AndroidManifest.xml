@@ -2958,6 +2958,17 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".development.qstile.DevelopmentTiles$SensorsOff"
+            android:label="@string/sensors_off_quick_settings_title"
+            android:icon="@drawable/tile_icon_sensors_off"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".HelpTrampoline"
             android:exported="true"
