@@ -124,7 +124,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setCustomTitle(customTitle)
                 .setAdapter(mDialogAdapter, this)
-                .setNegativeButton(R.string.cancel, (dialog, which) -> getActivity().finish())
+                .setNegativeButton(R.string.cancel, (dialog, which) -> onCancel(dialog))
                 // Do nothings, will replace the onClickListener to avoid auto closing dialog.
                 .setNeutralButton(R.string.network_connection_request_dialog_showall,
                         null /* OnClickListener */);
@@ -220,6 +220,9 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         // Finishes the activity when user clicks back key or outside of the dialog.
         if (getActivity() != null) {
             getActivity().finish();
+        }
+        if (mUserSelectionCallback != null) {
+            mUserSelectionCallback.reject();
         }
     }
 
