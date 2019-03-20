@@ -18,6 +18,7 @@ package com.android.settings.homepage.contextualcards;
 
 import static android.app.slice.Slice.HINT_ERROR;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
@@ -26,6 +27,9 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 import androidx.slice.SliceViewManager;
+
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
@@ -46,7 +50,32 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
 
     @Override
     public ContextualCard call() throws Exception {
-        return isCardEligibleToDisplay(mCard) ? mCard : null;
+        final long startTime = System.currentTimeMillis();
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        ContextualCard result;
+
+        if (isCardEligibleToDisplay(mCard)) {
+            metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_ELIGIBILITY,
+                    SettingsEnums.SETTINGS_HOMEPAGE,
+                    mCard.getTextSliceUri() /* key */, 1 /* true */);
+            result = mCard;
+        } else {
+            metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_ELIGIBILITY,
+                    SettingsEnums.SETTINGS_HOMEPAGE,
+                    mCard.getTextSliceUri() /* key */, 0 /* false */);
+            result = null;
+        }
+        // Log individual card loading time
+        metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_CONTEXTUAL_CARD_LOAD,
+                SettingsEnums.SETTINGS_HOMEPAGE,
+                mCard.getTextSliceUri() /* key */,
+                (int) (System.currentTimeMillis() - startTime) /* value */);
+
+        return result;
     }
 
     @VisibleForTesting

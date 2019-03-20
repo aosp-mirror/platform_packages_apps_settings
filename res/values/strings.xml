@@ -4525,8 +4525,8 @@
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts helper</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
     <string name="keyboard_shortcuts_helper_summary">Display available shortcuts</string>
-    <!-- Title for the 'Work profile input & assistance' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
-    <string name="language_and_input_for_work_category_title">Work profile input &amp; assistance</string>
+    <!-- Title for the 'Work profile keyboards & tools' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
+    <string name="language_and_input_for_work_category_title">Work profile keyboards &amp; tools</string>
     <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
     <string name="virtual_keyboards_for_work_title">Virtual keyboard for work</string>
 
@@ -7939,6 +7939,9 @@
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
 
+    <!-- Button title that grants 'Do Not Disturb' permission to an app [CHAR_LIMIT=60]-->
+    <string name="zen_access_detail_switch">Allow Do Not Disturb</string>
+
     <!-- Sound & notification > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
     <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
 
@@ -9324,6 +9327,12 @@
 
     <!-- Summary of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
     <string name="condition_night_display_summary">Screen tinted amber</string>
+
+    <!-- Title of condition that gray scale is on [CHAR LIMIT=NONE] -->
+    <string name="condition_grayscale_title">Greyscale</string>
+
+    <!-- Summary of condition that gray scale is on [CHAR LIMIT=NONE] -->
+    <string name="condition_grayscale_summary">Display only in grey color</string>
 
     <!-- Summary for the condition section on the dashboard, representing number of conditions. [CHAR LIMIT=10] -->
     <string name="condition_summary" translatable="false"><xliff:g name="count" example="3">%1$d</xliff:g></string>
@@ -10759,7 +10768,7 @@
     </plurals>
 
     <!-- Title for notification channel slice. [CHAR LIMIT=NONE] -->
-    <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> Notifications</string>
+    <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> notifications</string>
     <!-- Title for no suggested app in notification channel slice. [CHAR LIMIT=NONE] -->
     <string name="no_suggested_app">No suggested application</string>
     <!-- Summary for the channels count is equal or less than 3 in notification channel slice. [CHAR LIMIT=NONE] -->
@@ -10769,6 +10778,8 @@
     </plurals>
     <!-- Summary for the channels count is more than 3 in notification channel slice. [CHAR LIMIT=NONE] -->
     <string name="notification_many_channel_count_summary"><xliff:g id="notification_channel_count" example="4">%1$d</xliff:g> notification channels. Tap to manage all.</string>
+    <!-- Summary for recently installed app in contextual notification channel slice. [CHAR LIMIT=NONE] -->
+    <string name="recently_installed_app">You recently installed this app.</string>
 
     <!-- Title for the Switch output dialog (settings panel) with media related devices [CHAR LIMIT=50] -->
     <string name="media_output_panel_title">Switch output</string>

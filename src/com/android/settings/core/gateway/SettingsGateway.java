@@ -50,6 +50,7 @@ import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSe
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
+import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails;
 import com.android.settings.backup.PrivacySettings;
 import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.backup.UserBackupSettingsActivity;
@@ -209,6 +210,7 @@ public class SettingsGateway {
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
             ZenAccessSettings.class.getName(),
+            ZenAccessDetails.class.getName(),
             ZenModeAutomationSettings.class.getName(),
             PrintSettingsFragment.class.getName(),
             PrintJobSettingsFragment.class.getName(),
