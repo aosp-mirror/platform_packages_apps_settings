@@ -51,7 +51,7 @@ public class EnableContentCapturePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new EnableContentCapturePreferenceController(mContext);
+        mController = new EnableContentCapturePreferenceController(mContext, "THE_KEY_TO_SUCCESS");
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
     }

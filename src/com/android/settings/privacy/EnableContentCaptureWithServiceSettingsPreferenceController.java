@@ -17,15 +17,24 @@
 package com.android.settings.privacy;
 
 import android.annotation.NonNull;
+import android.content.ComponentName;
 import android.content.Context;
-import android.provider.Settings;
+import android.content.Intent;
+import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.utils.ContentCaptureUtils;
+import com.android.settings.widget.MasterSwitchPreference;
 
-public final class EnableContentCapturePreferenceController extends TogglePreferenceController {
+public final class EnableContentCaptureWithServiceSettingsPreferenceController
+        extends TogglePreferenceController {
 
-    public EnableContentCapturePreferenceController(@NonNull Context context, @NonNull String key) {
+    private static final String TAG = "ContentCaptureController";
+
+    public EnableContentCaptureWithServiceSettingsPreferenceController(@NonNull Context context,
+            @NonNull String key) {
         super(context, key);
     }
 
@@ -41,9 +50,23 @@ public final class EnableContentCapturePreferenceController extends TogglePrefer
     }
 
     @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        ComponentName componentName = ContentCaptureUtils.getServiceSettingsComponentName();
+        if (componentName != null) {
+            preference.setIntent(new Intent(Intent.ACTION_MAIN).setComponent(componentName));
+        } else {
+            // Should not happen - preference should be disabled by controller
+            Log.w(TAG, "No component name for custom service settings");
+            preference.setSelectable(false);
+        }
+    }
+
+    @Override
     public int getAvailabilityStatus() {
         boolean available = ContentCaptureUtils.isFeatureAvailable()
-                && ContentCaptureUtils.getServiceSettingsComponentName() == null;
+                && ContentCaptureUtils.getServiceSettingsComponentName() != null;
         return available ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
