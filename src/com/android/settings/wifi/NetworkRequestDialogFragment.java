@@ -138,6 +138,10 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                 .setOnItemClickListener(
                         (parent, view, position, id) -> this.onClick(dialog, position));
 
+        // Don't dismiss dialog when touching outside. User report it is easy to touch outside.
+        // This causes dialog to close. Which is concerned as a bad UX (b/128877712).
+        dialog.setCanceledOnTouchOutside(false);
+
         dialog.setOnShowListener((dialogInterface) -> {
             // Replace NeutralButton onClickListener to avoid closing dialog
             final Button neutralBtn = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
