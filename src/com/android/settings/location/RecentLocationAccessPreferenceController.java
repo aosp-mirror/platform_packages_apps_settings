@@ -104,7 +104,7 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
                         .setOnClickListener((v) -> {
                             final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
                             intent.putExtra(Intent.EXTRA_PERMISSION_NAME,
-                                    Manifest.permission_group.LOCATION);
+                                    Manifest.permission.ACCESS_FINE_LOCATION);
                             intent.putExtra(Intent.EXTRA_PACKAGE_NAME, access.packageName);
                             intent.putExtra(Intent.EXTRA_USER, access.userHandle);
                             mContext.startActivity(intent);
