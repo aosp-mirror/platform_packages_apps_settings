@@ -3136,6 +3136,17 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.calling.WifiCallingDisclaimerFragment" />
         </activity>
+
+        <activity android:name="Settings$BatterySaverScheduleSettingsActivity"
+            android:label="@string/battery_saver_schedule_settings_title"
+            android:parentActivityName="Settings">
+            <intent-filter>
+                <action android:name="com.android.settings.BATTERY_SAVER_SCHEDULE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings" />
+        </activity>
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
