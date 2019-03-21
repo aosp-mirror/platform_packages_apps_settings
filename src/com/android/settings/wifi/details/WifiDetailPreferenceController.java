@@ -342,7 +342,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton3Text(R.string.share)
                 .setButton3Icon(R.drawable.ic_qrcode_24dp)
                 .setButton3OnClickListener(view -> shareNetwork())
-                .setButton3Visible(WifiDppUtils.isSuportConfigurator(mContext, mAccessPoint));
+                .setButton3Visible(WifiDppUtils.isSupportConfiguratorQrCodeGenerator(mAccessPoint));
 
         mSignalStrengthPref = screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
         mTxLinkSpeedPref = screen.findPreference(KEY_TX_LINK_SPEED);
@@ -757,11 +757,11 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Show QR code to share the network represented by this preference.
      */
     public void launchWifiDppConfiguratorActivity() {
-        final Intent intent = WifiDppUtils.getConfiguratorIntentOrNull(mContext, mWifiManager,
-                mAccessPoint);
+        final Intent intent = WifiDppUtils.getConfiguratorQrCodeGeneratorIntentOrNull(mContext,
+                mWifiManager, mAccessPoint);
 
         if (intent == null) {
-            Log.e(TAG, "Launch Wi-Fi DPP configurator with a wrong Wi-Fi network!");
+            Log.e(TAG, "Launch Wi-Fi DPP QR code generator with a wrong Wi-Fi network!");
         } else {
             mContext.startActivity(intent);
         }

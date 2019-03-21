@@ -165,9 +165,8 @@ public class WifiDppUtils {
     }
 
     /**
-     * Returns an intent to launch QR code generator or scanner according to the Wi-Fi network
-     * security. It may return null if the security is not supported by QR code generator nor
-     * scanner.
+     * Returns an intent to launch QR code generator. It may return null if the security is not
+     * supported by QR code generator.
      *
      * Do not use this method for Wi-Fi hotspot network, use
      * {@code getHotspotConfiguratorIntentOrNull} instead.
@@ -177,12 +176,34 @@ public class WifiDppUtils {
      * @param accessPoint An instance of {@link AccessPoint}
      * @return Intent for launching QR code generator
      */
-    public static Intent getConfiguratorIntentOrNull(Context context,
+    public static Intent getConfiguratorQrCodeGeneratorIntentOrNull(Context context,
             WifiManager wifiManager, AccessPoint accessPoint) {
         final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
         if (isSupportConfiguratorQrCodeGenerator(accessPoint)) {
             intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
-        } else if (isSupportConfiguratorQrCodeScanner(context, accessPoint)) {
+        } else {
+            return null;
+        }
+
+        final WifiConfiguration wifiConfiguration = accessPoint.getConfig();
+        setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
+
+        return intent;
+    }
+
+    /**
+     * Returns an intent to launch QR code scanner. It may return null if the security is not
+     * supported by QR code scanner.
+     *
+     * @param context     The context to use for the content resolver
+     * @param wifiManager An instance of {@link WifiManager}
+     * @param accessPoint An instance of {@link AccessPoint}
+     * @return Intent for launching QR code scanner
+     */
+    public static Intent getConfiguratorQrCodeScannerIntentOrNull(Context context,
+            WifiManager wifiManager, AccessPoint accessPoint) {
+        final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
+        if (isSupportConfiguratorQrCodeScanner(context, accessPoint)) {
             intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
         } else {
             return null;
@@ -259,18 +280,6 @@ public class WifiDppUtils {
     }
 
     /**
-     * Android Q supports Wi-Fi configurator by:
-     *
-     * 1. QR code generator of ZXing's Wi-Fi network config format.
-     * and
-     * 2. QR code scanner of Wi-Fi DPP QR code format.
-     */
-    public static boolean isSuportConfigurator(Context context, AccessPoint accessPoint) {
-        return isSupportConfiguratorQrCodeScanner(context, accessPoint) ||
-                isSupportConfiguratorQrCodeGenerator(accessPoint);
-    }
-
-    /**
      * Shows authentication screen to confirm credentials (pin, pattern or password) for the current
      * user of the device.
      *
@@ -314,7 +323,7 @@ public class WifiDppUtils {
         }
     }
 
-    private static boolean isSupportConfiguratorQrCodeScanner(Context context,
+    public static boolean isSupportConfiguratorQrCodeScanner(Context context,
             AccessPoint accessPoint) {
         if (!isWifiDppEnabled(context)) {
             return false;
@@ -329,7 +338,7 @@ public class WifiDppUtils {
         return false;
     }
 
-    private static boolean isSupportConfiguratorQrCodeGenerator(AccessPoint accessPoint) {
+    public static boolean isSupportConfiguratorQrCodeGenerator(AccessPoint accessPoint) {
         // QR code generator produces QR code with ZXing's Wi-Fi network config format,
         // it supports PSK and WEP and non security
         final int security = accessPoint.getSecurity();
