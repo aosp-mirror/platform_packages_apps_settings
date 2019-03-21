@@ -48,7 +48,7 @@ public class DataManagementPreferenceController extends BasePreferenceController
             return;
         }
         preference.setIntent(mPSCD.getManageIntent());
-        final String manageLabel = mPSCD.getManageLabel();
+        final CharSequence manageLabel = mPSCD.getManageLabel();
         if (manageLabel != null) {
             preference.setTitle(manageLabel);
         }

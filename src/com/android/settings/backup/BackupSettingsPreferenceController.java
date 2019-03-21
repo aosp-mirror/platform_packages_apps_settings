@@ -31,7 +31,7 @@ public class BackupSettingsPreferenceController extends AbstractPreferenceContro
     private static final String BACKUP_SETTINGS = "backup_settings";
     private static final  String MANUFACTURER_SETTINGS = "manufacturer_backup";
     private Intent mBackupSettingsIntent;
-    private String mBackupSettingsTitle;
+    private CharSequence mBackupSettingsTitle;
     private String mBackupSettingsSummary;
     private Intent mManufacturerIntent;
     private String mManufacturerLabel;
