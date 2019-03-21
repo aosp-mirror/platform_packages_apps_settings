@@ -1571,7 +1571,8 @@ public class RadioInfo extends Activity {
     }
 
     private static boolean isDsdsSupported() {
-        return TelephonyManager.getDefault().isMultisimSupported();
+        return (TelephonyManager.getDefault().isMultiSimSupported()
+            == TelephonyManager.MULTISIM_ALLOWED);
     }
 
     private static boolean isDsdsEnabled() {
