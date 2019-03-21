@@ -330,4 +330,21 @@ public class NetworkRequestDialogFragmentTest {
         // Check
         assertThat(button.getVisibility()).isEqualTo(View.GONE);
     }
+
+    @Test
+    public void cancelDialog_callsReject() {
+        // Assert
+        networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
+        final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        final NetworkRequestUserSelectionCallback selectionCallback = mock(
+                NetworkRequestUserSelectionCallback.class);
+        networkRequestDialogFragment.onUserSelectionCallbackRegistration(selectionCallback);
+
+        // Action
+        final Button button = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        button.performClick();
+
+        // Check
+        verify(selectionCallback, times(1)).reject();
+    }
 }
