@@ -649,6 +649,19 @@ public class WifiDetailPreferenceControllerTest {
         nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
         updateNetworkCapabilities(nc);
         inOrder.verify(mockHeaderController).setSummary(summary);
+
+        // UI will be refreshed when device connects to a partial connectivity network.
+        summary = "Limited connection";
+        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockHeaderController).setSummary(summary);
+
+        // Although UI will be refreshed when network become validated. The Settings should
+        // continue to display "Limited connection" if network still provides partial connectivity.
+        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        updateNetworkCapabilities(nc);
+        inOrder.verify(mockHeaderController).setSummary(summary);
     }
 
     @Test
