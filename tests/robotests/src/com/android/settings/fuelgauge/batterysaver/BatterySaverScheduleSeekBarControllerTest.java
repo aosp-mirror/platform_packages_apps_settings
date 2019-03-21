@@ -39,16 +39,16 @@ public class BatterySaverScheduleSeekBarControllerTest {
 
     @Test
     public void updateSeekBar_routineMode_hasCorrectProperties() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                PowerManager.POWER_SAVER_MODE_DYNAMIC);
+        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
         mController.updateSeekBar();
         assertThat(mController.mSeekBarPreference.isVisible()).isFalse();
     }
 
     @Test
     public void updateSeekBar_percentageMode_hasCorrectProperties() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         Settings.Global.putInt(mResolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 5);
         mController.updateSeekBar();
         assertThat(mController.mSeekBarPreference.isVisible()).isTrue();
@@ -56,8 +56,8 @@ public class BatterySaverScheduleSeekBarControllerTest {
 
     @Test
     public void updateSeekBar_noneMode_hasCorrectProperties() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         Settings.Global.putInt(mResolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
         mController.updateSeekBar();
         assertThat(mController.mSeekBarPreference.isVisible()).isFalse();

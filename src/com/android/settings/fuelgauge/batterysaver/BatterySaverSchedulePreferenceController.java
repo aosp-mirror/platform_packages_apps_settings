@@ -61,9 +61,9 @@ public class BatterySaverSchedulePreferenceController extends BasePreferenceCont
     @Override
     public CharSequence getSummary() {
         final ContentResolver resolver = mContext.getContentResolver();
-        final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                PowerManager.POWER_SAVER_MODE_PERCENTAGE);
-        if (mode == PowerManager.POWER_SAVER_MODE_PERCENTAGE) {
+        final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
+        if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
             final int threshold =
                     Settings.Global.getInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
             if (threshold <= 0) {
