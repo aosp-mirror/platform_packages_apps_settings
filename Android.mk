@@ -49,7 +49,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     settings-contextual-card-protos-lite \
     contextualcards \
     settings-logtags \
-    statsdprotolite \
     zxing-core-1.7
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
