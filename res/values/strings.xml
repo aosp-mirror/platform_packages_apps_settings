@@ -898,8 +898,10 @@
     <string name="security_settings_face_enroll_introduction_message">Use your face to unlock your phone, authorize purchases, or sign in to apps.</string>
     <!-- Introduction detail message shown in face enrollment dialog, when face unlock is disabled by device admin [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled">Use your face to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your face to unlock this device. For more information, contact your organization\u2019s admin.</string>
-    <!-- Introduction detail message shwon in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <!-- Introduction detail message shown in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_message_setup">Use your face to unlock your phone, authorize purchases, or sign in to apps</string>
+    <!-- Introduction detail message shown in face enrollment that provides extra detais. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_footer_message"></string>
     <!-- Title shown in face enrollment dialog [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_repeat_title">Center your face in the circle</string>
     <!-- Button text to skip enrollment of face [CHAR LIMIT=40] -->
@@ -941,6 +943,11 @@
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer">Your face can be used to unlock your device and access apps.
         <annotation id="url">Learn more</annotation></string>
+    <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
+    <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
+    <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_remove_dialog_details">Data recorded by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
+
 
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
@@ -2235,6 +2242,8 @@
     <string name="wifi_disconnect">@string/bluetooth_device_context_disconnect</string>
     <!-- Failured notification for connect -->
     <string name="wifi_failed_connect_message">Failed to connect to network</string>
+    <!-- Not in range notification for connect [CHAR LIMIT=40] -->
+    <string name="wifi_not_in_range_message">Network not in range</string>
     <!-- Button label to delete a Wi-Fi network -->
     <string name="wifi_forget">Forget</string>
     <!-- Button label to modify a Wi-Fi network -->
@@ -7050,7 +7059,7 @@
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
     <!-- Summary text for system preference tile, showing important setting items under system setting [CHAR LIMIT=NONE]-->
-    <string name="system_dashboard_summary">Languages, time, backup, updates</string>
+    <string name="system_dashboard_summary">Languages, gestures, time, backup</string>
 
     <!-- Search strings -->
     <!-- Text to describe the search results fragment title [CHAR LIMIT=16] -->

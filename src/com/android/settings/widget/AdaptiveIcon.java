@@ -35,14 +35,15 @@ import com.android.settings.R;
 import com.android.settings.homepage.AdaptiveIconShapeDrawable;
 import com.android.settingslib.drawer.Tile;
 
-public class AdaptiveHomepageIcon extends LayerDrawable {
+public class AdaptiveIcon extends LayerDrawable {
 
     private static final String TAG = "AdaptiveHomepageIcon";
 
     @VisibleForTesting(otherwise = NONE)
     int mBackgroundColor = -1;
+    private AdaptiveConstantState mAdaptiveConstantState;
 
-    public AdaptiveHomepageIcon(Context context, Drawable foreground) {
+    public AdaptiveIcon(Context context, Drawable foreground) {
         super(new Drawable[]{
                 new AdaptiveIconShapeDrawable(context.getResources()),
                 foreground
@@ -50,6 +51,7 @@ public class AdaptiveHomepageIcon extends LayerDrawable {
         final int insetPx = context.getResources()
                 .getDimensionPixelSize(R.dimen.dashboard_tile_foreground_image_inset);
         setLayerInset(1 /* index */, insetPx, insetPx, insetPx, insetPx);
+        mAdaptiveConstantState = new AdaptiveConstantState(context, foreground);
     }
 
     public void setBackgroundColor(Context context, Tile tile) {
@@ -85,5 +87,36 @@ public class AdaptiveHomepageIcon extends LayerDrawable {
         mBackgroundColor = color;
         getDrawable(0).setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
         Log.d(TAG, "Setting background color " + mBackgroundColor);
+        mAdaptiveConstantState.color = color;
+    }
+
+    @Override
+    public ConstantState getConstantState() {
+        return mAdaptiveConstantState;
+    }
+
+    @VisibleForTesting
+    static class AdaptiveConstantState extends ConstantState {
+        Context context;
+        Drawable drawable;
+        int color;
+
+        public AdaptiveConstantState(Context context, Drawable drawable) {
+            this.context = context;
+            this.drawable = drawable;
+        }
+
+        @Override
+        public Drawable newDrawable() {
+            final AdaptiveIcon icon = new AdaptiveIcon(context, drawable);
+            icon.setBackgroundColor(color);
+
+            return icon;
+        }
+
+        @Override
+        public int getChangingConfigurations() {
+            return 0;
+        }
     }
 }

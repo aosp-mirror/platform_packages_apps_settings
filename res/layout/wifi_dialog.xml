@@ -50,29 +50,31 @@
                         android:text="@string/wifi_ssid"
                         android:textDirection="locale" />
 
-                <RelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content">
                     <EditText android:id="@+id/ssid"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/ssid_scanner_button"
                             style="@style/wifi_item_edit_content"
                             android:hint="@string/wifi_ssid_hint"
                             android:singleLine="true"
-                            android:inputType="textNoSuggestions" />
+                            android:inputType="textNoSuggestions"/>
+
                     <ImageButton
                         android:id="@+id/ssid_scanner_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="@dimen/min_tap_target_size"
                         android:minHeight="@dimen/min_tap_target_size"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="?android:attr/selectableItemBackground"
                         android:src="@drawable/ic_scan_24dp"
                         android:contentDescription="@string/wifi_dpp_scan_qr_code"/>
-                </RelativeLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout android:id="@+id/ssid_too_long_warning"
                               android:layout_width="match_parent"
@@ -286,16 +288,18 @@
                         style="@style/wifi_item_label"
                         android:text="@string/wifi_password" />
 
-                <RelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
                     <EditText android:id="@+id/password"
-                              android:layout_width="match_parent"
+                              android:layout_width="0dp"
                               android:layout_height="wrap_content"
-                              android:layout_alignParentStart="true"
+                              app:layout_constraintStart_toStartOf="parent"
+                              app:layout_constraintEnd_toStartOf="@+id/password_scanner_button"
                               style="@style/wifi_item_edit_content"
                               android:singleLine="true"
-                              android:password="true" />
+                              android:password="true"/>
 
                     <ImageButton
                         android:id="@+id/password_scanner_button"
@@ -303,12 +307,11 @@
                         android:layout_height="wrap_content"
                         android:minWidth="@dimen/min_tap_target_size"
                         android:minHeight="@dimen/min_tap_target_size"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="?android:attr/selectableItemBackground"
                         android:src="@drawable/ic_scan_24dp"
                         android:contentDescription="@string/wifi_dpp_scan_qr_code"/>
-                </RelativeLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout android:id="@+id/show_password_layout"

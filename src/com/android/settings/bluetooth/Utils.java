@@ -21,8 +21,12 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
@@ -30,8 +34,10 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.AdaptiveIcon;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
 
@@ -179,4 +185,25 @@ public final class Utils {
             return META_INT_ERROR;
         }
     }
+
+    /**
+     * Get colorful bluetooth icon with description
+     */
+    public static Pair<Drawable, String> getBtRainbowDrawableWithDescription(Context context,
+            CachedBluetoothDevice cachedDevice) {
+        final Pair<Drawable, String> pair = BluetoothUtils.getBtClassDrawableWithDescription(
+                context, cachedDevice);
+        final Resources resources = context.getResources();
+        final int[] iconFgColors = resources.getIntArray(R.array.bt_icon_fg_colors);
+        final int[] iconBgColors = resources.getIntArray(R.array.bt_icon_bg_colors);
+
+        // get color index based on mac address
+        final int index =  Math.abs(cachedDevice.getAddress().hashCode()) % iconBgColors.length;
+        pair.first.setColorFilter(iconFgColors[index], PorterDuff.Mode.SRC_ATOP);
+        final Drawable adaptiveIcon = new AdaptiveIcon(context, pair.first);
+        ((AdaptiveIcon) adaptiveIcon).setBackgroundColor(iconBgColors[index]);
+
+        return new Pair<>(adaptiveIcon, pair.second);
+    }
+
 }
