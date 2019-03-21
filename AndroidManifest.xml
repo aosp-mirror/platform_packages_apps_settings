@@ -2622,6 +2622,8 @@
             android:name=".wifi.NetworkRequestDialogActivity"
             android:theme="@style/Transparent"
             android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=".wifi.NetworkRequestDialogActivity"
             android:exported="true"
             android:permission="android.permission.NETWORK_SETTINGS">
             <intent-filter>
