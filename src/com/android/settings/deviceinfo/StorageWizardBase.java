@@ -24,6 +24,7 @@ import static com.android.settings.deviceinfo.StorageSettings.TAG;
 import android.annotation.LayoutRes;
 import android.annotation.NonNull;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -121,6 +122,12 @@ public abstract class StorageWizardBase extends FragmentActivity {
     protected void onDestroy() {
         mStorage.unregisterListener(mStorageListener);
         super.onDestroy();
+    }
+
+    @Override
+    protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     protected FooterButton getBackButton() {

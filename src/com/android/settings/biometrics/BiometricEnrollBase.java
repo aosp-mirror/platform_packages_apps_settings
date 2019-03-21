@@ -21,6 +21,7 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import android.annotation.Nullable;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -97,6 +98,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
         resid = SetupWizardUtils.getTheme(getIntent());
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
         super.onApplyThemeResource(theme, resid, first);
     }
 
