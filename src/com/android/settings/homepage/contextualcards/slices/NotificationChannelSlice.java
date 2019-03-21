@@ -128,7 +128,7 @@ public class NotificationChannelSlice implements CustomSliceable {
                 return leftChannel.getId().compareTo(rightChannel.getId());
             };
 
-    private final Context mContext;
+    protected final Context mContext;
     @VisibleForTesting
     NotificationBackend mNotificationBackend;
     private String mPackageName;
@@ -413,7 +413,7 @@ public class NotificationChannelSlice implements CustomSliceable {
         return maxSentCountPackage;
     }
 
-    private CharSequence getSubTitle(String packageName, int uid) {
+    protected CharSequence getSubTitle(String packageName, int uid) {
         final int channelCount = mNotificationBackend.getChannelCount(packageName, uid);
 
         if (channelCount > DEFAULT_EXPANDED_ROW_COUNT) {
