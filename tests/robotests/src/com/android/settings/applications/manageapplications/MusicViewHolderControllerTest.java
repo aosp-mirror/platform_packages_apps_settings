@@ -64,7 +64,7 @@ public class MusicViewHolderControllerTest {
         mController = new MusicViewHolderController(mContext, mSource, fsUuid, new UserHandle(0));
 
         View view = ApplicationViewHolder.newView(new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(view, false /* useStableHeight */);
+        mHolder = new ApplicationViewHolder(view);
     }
 
     @Test

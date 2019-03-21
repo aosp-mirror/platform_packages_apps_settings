@@ -47,12 +47,6 @@ public class DomainAppPreference extends AppPreference {
         setState();
     }
 
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-        holder.itemView.findViewById(R.id.appendix).setVisibility(View.GONE);
-    }
-
     public void reuse() {
         setState();
         notifyChanged();

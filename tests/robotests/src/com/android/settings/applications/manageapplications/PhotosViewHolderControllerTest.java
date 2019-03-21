@@ -63,7 +63,7 @@ public class PhotosViewHolderControllerTest {
         mController = new PhotosViewHolderController(mContext, mSource, fsUuid, new UserHandle(0));
 
         final View view = ApplicationViewHolder.newView(new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(view, false /* useStableHeight */);
+        mHolder = new ApplicationViewHolder(view);
     }
 
     @Test
@@ -71,19 +71,19 @@ public class PhotosViewHolderControllerTest {
         mController.setupView(mHolder);
 
         assertThat(mHolder.mSummary.getText().toString())
-            .isEqualTo(Formatter.formatFileSize(mContext, 0));
+                .isEqualTo(Formatter.formatFileSize(mContext, 0));
     }
 
     @Test
     public void storageShouldRepresentStorageStatsQuery() throws Exception {
         when(mSource.getExternalStorageStats(nullable(String.class), nullable(UserHandle.class)))
-            .thenReturn(new StorageStatsSource.ExternalStorageStats(1, 0, 1, 10, 0));
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(1, 0, 1, 10, 0));
 
         mController.queryStats();
         mController.setupView(mHolder);
 
         assertThat(mHolder.mSummary.getText().toString())
-            .isEqualTo(Formatter.formatFileSize(mContext, 11));
+                .isEqualTo(Formatter.formatFileSize(mContext, 11));
     }
 
     @Test
