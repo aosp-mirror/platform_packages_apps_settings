@@ -1633,8 +1633,9 @@
             android:icon="@drawable/ic_suggestion_security">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.DEFAULT" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.dismiss" android:value="14" />
             <meta-data android:name="com.android.settings.title"
                        android:resource="@string/suggested_lock_settings_title" />
             <meta-data android:name="com.android.settings.summary"
