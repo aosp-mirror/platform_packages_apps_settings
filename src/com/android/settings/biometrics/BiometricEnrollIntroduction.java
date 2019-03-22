@@ -140,7 +140,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (!mHasPassword) {
             // No password registered, launch into enrollment wizard.
             launchChooseLock();
-        } else {
+        } else if (!mLaunchedConfirmLock || mToken == null) {
             launchConfirmLock(getConfirmLockTitleResId(), getChallenge());
         }
     }
