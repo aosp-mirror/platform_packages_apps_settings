@@ -84,7 +84,7 @@ public class ThemePreferenceControllerTest {
         when(mPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
                 new PackageInfo());
         when(mOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
-                .thenReturn(Arrays.asList(new OverlayInfo("", "", "", "", 0, 0, 0, false)));
+                .thenReturn(Arrays.asList(new OverlayInfo("", "", "", "", "", 0, 0, 0, false)));
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -94,8 +94,9 @@ public class ThemePreferenceControllerTest {
                 new PackageInfo());
         when(mOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
                 .thenReturn(Arrays.asList(
-                        new OverlayInfo("", "", OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true),
-                        new OverlayInfo("", "", OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true)));
+                        new OverlayInfo("", "", "", OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true),
+                        new OverlayInfo("", "", "", OverlayInfo.CATEGORY_THEME, "", 0, 0, 0,
+                                true)));
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -140,9 +141,9 @@ public class ThemePreferenceControllerTest {
 
     @Test
     public void getCurrentTheme_withEnabledState() throws Exception {
-        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
+        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android", "",
                 OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_ENABLED, 0, 0, true);
-        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
+        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android", "",
                 OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true);
         when(mOverlayManager.getOverlayInfosForTarget(any(), anyInt())).thenReturn(
                 Arrays.asList(info1, info2));
@@ -154,9 +155,9 @@ public class ThemePreferenceControllerTest {
 
     @Test
     public void testGetCurrentTheme_withoutEnabledState() throws Exception {
-        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
+        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android", "",
                 OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_DISABLED, 0, 0, true);
-        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
+        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android", "",
                 OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true);
         when(mOverlayManager.getOverlayInfosForTarget(any(), anyInt())).thenReturn(
                 Arrays.asList(info1, info2));

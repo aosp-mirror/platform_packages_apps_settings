@@ -69,9 +69,9 @@ public class ThemePreferenceControllerTest {
 
     @Test
     public void testUpdateState() throws Exception {
-        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
+        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android", "",
                 OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_ENABLED, 0, 0, true);
-        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
+        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android", "",
                 OverlayInfo.CATEGORY_THEME, "", 0, 0, 0, true);
         when(mMockPackageManager.getApplicationInfo(any(), anyInt())).thenAnswer(inv -> {
             ApplicationInfo info = mock(ApplicationInfo.class);
@@ -105,9 +105,9 @@ public class ThemePreferenceControllerTest {
 
     @Test
     public void testUpdateState_withStaticOverlay() throws Exception {
-        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
+        OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android", "",
                 OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_ENABLED, 0, 0, true);
-        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
+        OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android", "",
                 OverlayInfo.CATEGORY_THEME, "", OverlayInfo.STATE_ENABLED, 0, 0, true);
         when(mMockPackageManager.getApplicationInfo(any(), anyInt())).thenAnswer(inv -> {
             ApplicationInfo info = mock(ApplicationInfo.class);
