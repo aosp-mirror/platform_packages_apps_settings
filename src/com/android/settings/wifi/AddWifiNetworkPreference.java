@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.annotation.DrawableRes;
@@ -62,6 +63,10 @@ public class AddWifiNetworkPreference extends Preference {
                 getContext().startActivity(
                     WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
             });
+
+            final View divider = (View) holder.findViewById(
+                    com.android.settingslib.R.id.two_target_divider);
+            divider.setVisibility(View.INVISIBLE);
         }
     }
 

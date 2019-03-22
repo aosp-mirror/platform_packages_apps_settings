@@ -39,7 +39,6 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
 
     private ImageButton mImageButton;
     private Drawable mButtonIcon;
-    private View mDivider;
     private View.OnClickListener mClickListener;
     private boolean mVisible;
 
@@ -69,8 +68,6 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
     }
 
     private void initialize() {
-        // TODO(b/129019971): use methods of divider line in parent object
-        setLayoutResource(R.layout.preference);
         setWidgetLayoutResource(R.layout.wifi_button_preference_widget);
     }
 
@@ -85,17 +82,13 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
                     getContext().getString(R.string.wifi_dpp_share_hotspot));
             setButtonIcon(R.drawable.ic_qrcode_24dp);
             mImageButton.setImageDrawable(mButtonIcon);
-
-            mDivider = holder.findViewById(R.id.two_target_divider);
         }
 
         if (mVisible) {
             mImageButton.setOnClickListener(mClickListener);
             mImageButton.setVisibility(View.VISIBLE);
-            mDivider.setVisibility(View.VISIBLE);
         } else {
             mImageButton.setVisibility(View.GONE);
-            mDivider.setVisibility(View.GONE);
         }
     }
 
