@@ -90,10 +90,10 @@ public class BatterySaverController extends BasePreferenceController
         final int percent = Settings.Global.getInt(resolver,
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
         final int mode = Settings.Global.getInt(resolver,
-                Global.AUTOMATIC_POWER_SAVER_MODE, PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         if (isPowerSaveOn) {
             return mContext.getString(R.string.battery_saver_on_summary);
-        } else if (mode == PowerManager.POWER_SAVER_MODE_PERCENTAGE) {
+        } else if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
             if (percent != 0) {
                 return mContext.getString(R.string.battery_saver_off_scheduled_summary,
                         Utils.formatPercentage(percent));

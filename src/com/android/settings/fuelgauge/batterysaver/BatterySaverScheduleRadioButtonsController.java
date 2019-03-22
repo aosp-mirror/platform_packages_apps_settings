@@ -29,7 +29,7 @@ import android.provider.Settings.Global;
  *
  * Will call the appropriate power manager APIs and modify the correct settings to enable
  * users to control their automatic battery saver toggling preferences.
- * See {@link Settings.Global#AUTOMATIC_POWER_SAVER_MODE} for more details.
+ * See {@link Settings.Global#AUTOMATIC_POWER_SAVE_MODE} for more details.
  */
 public class BatterySaverScheduleRadioButtonsController {
 
@@ -48,12 +48,12 @@ public class BatterySaverScheduleRadioButtonsController {
 
     public String getDefaultKey() {
         final ContentResolver resolver = mContext.getContentResolver();
-        // Note: this can also be obtained via PowerManager.getPowerSaveMode()
-        final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+        // Note: this can also be obtained via PowerManager.getPowerSaveModeTrigger()
+        final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         // if mode is "dynamic" we are in routine mode, percentage with non-zero threshold is
         // percentage mode, otherwise it is no schedule mode
-        if (mode == PowerManager.POWER_SAVER_MODE_PERCENTAGE) {
+        if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
             final int threshold =
                     Settings.Global.getInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
             if (threshold <= 0) {
@@ -68,18 +68,18 @@ public class BatterySaverScheduleRadioButtonsController {
         final ContentResolver resolver = mContext.getContentResolver();
         switch(key) {
             case KEY_NO_SCHEDULE:
-                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                        PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                        PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
                 Settings.Global.putInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
                 break;
             case KEY_PERCENTAGE:
-                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                        PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                        PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
                 Settings.Global.putInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 5);
                 break;
             case KEY_ROUTINE:
-                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                        PowerManager.POWER_SAVER_MODE_DYNAMIC);
+                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                        PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
                 break;
             default:
                 throw new IllegalStateException(
