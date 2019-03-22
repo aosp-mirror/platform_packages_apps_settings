@@ -771,14 +771,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Share the wifi network with QR code.
      */
     private void shareNetwork() {
-        final String title = mContext.getString(
-                R.string.lockpassword_confirm_your_pattern_header);
-        final String description = String.format(
-                mContext.getString(R.string.wifi_sharing_message),
-                mAccessPoint.getSsidStr());
-
-        WifiDppUtils.showLockScreen(mContext, title, description,
-                () -> launchWifiDppConfiguratorActivity());
+        WifiDppUtils.showLockScreen(mContext, () -> launchWifiDppConfiguratorActivity());
     }
 
     /**
