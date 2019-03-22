@@ -27,17 +27,17 @@ import android.view.ViewGroup;
 
 import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.overlay.FeatureFactory;
 
-public class ContextualCardsFragment extends InstrumentedFragment {
+public class ContextualCardsFragment extends InstrumentedFragment implements
+        FocusRecyclerView.FocusListener {
 
     private static final String TAG = "ContextualCardsFragment";
 
-    private RecyclerView mCardsContainer;
+    private FocusRecyclerView mCardsContainer;
     private GridLayoutManager mLayoutManager;
     private ContextualCardsAdapter mContextualCardsAdapter;
     private ContextualCardManager mContextualCardManager;
@@ -72,8 +72,14 @@ public class ContextualCardsFragment extends InstrumentedFragment {
                 this /* lifecycleOwner */, mContextualCardManager);
         mCardsContainer.setAdapter(mContextualCardsAdapter);
         mContextualCardManager.setListener(mContextualCardsAdapter);
+        mCardsContainer.setListener(this);
 
         return rootView;
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        mContextualCardManager.onWindowFocusChanged(hasWindowFocus);
     }
 
     @Override
