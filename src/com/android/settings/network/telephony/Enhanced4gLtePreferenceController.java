@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
@@ -52,12 +53,18 @@ public class Enhanced4gLtePreferenceController extends TelephonyTogglePreference
     ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
     private final List<On4gLteUpdateListener> m4gLteListeners;
+    private final CharSequence[] mVariantTitles;
+    private final CharSequence[] mVariantSumaries;
 
     public Enhanced4gLtePreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         m4gLteListeners = new ArrayList<>();
         mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
+        mVariantTitles = context.getResources()
+                .getTextArray(R.array.enhanced_4g_lte_mode_title_variant);
+        mVariantSumaries = context.getResources()
+                .getTextArray(R.array.enhanced_4g_lte_mode_sumary_variant);
     }
 
     @Override
@@ -94,12 +101,20 @@ public class Enhanced4gLtePreferenceController extends TelephonyTogglePreference
     public void updateState(Preference preference) {
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
-        final boolean useVariant4glteTitle = mCarrierConfig.getInt(
-                CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT) != 0;
-        int enhanced4glteModeTitleId = useVariant4glteTitle ?
-                R.string.enhanced_4g_lte_mode_title_variant :
-                R.string.enhanced_4g_lte_mode_title;
-        switchPreference.setTitle(enhanced4glteModeTitleId);
+        final int variant4glteTitleIndex = mCarrierConfig.getInt(
+                CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT);
+
+        // Default index 0 indicates the default title/sumary string
+        CharSequence enhanced4glteModeTitle = mVariantTitles[0];
+        CharSequence enhanced4glteModeSummary = mVariantSumaries[0];
+        if (variant4glteTitleIndex >= 0 && variant4glteTitleIndex < mVariantTitles.length) {
+            enhanced4glteModeTitle = mVariantTitles[variant4glteTitleIndex];
+        }
+        if (variant4glteTitleIndex >= 0 && variant4glteTitleIndex < mVariantSumaries.length) {
+            enhanced4glteModeSummary = mVariantSumaries[variant4glteTitleIndex];
+        }
+        switchPreference.setTitle(enhanced4glteModeTitle);
+        switchPreference.setSummary(enhanced4glteModeSummary);
         switchPreference.setEnabled(is4gLtePrefEnabled());
         switchPreference.setChecked(mImsManager.isEnhanced4gLteModeSettingEnabledByUser()
                 && mImsManager.isNonTtyOrTtyOnVolteEnabled());
