@@ -93,14 +93,18 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                         R.string.sim_selection_required_pref)
                         : nextSubInfo.getDisplayName().toString();
 
+                final String newName = (currentSubInfo == null)
+                        ? getContext().getResources().getString(
+                        R.string.sim_selection_required_pref)
+                        : currentSubInfo.getDisplayName().toString();
+
                 return new AlertDialog.Builder(context)
-                        .setTitle(R.string.sim_change_data_title)
+                        .setTitle(context.getString(R.string.sim_change_data_title, newName))
                         .setMessage(context.getString(R.string.sim_change_data_message,
-                                currentSubInfo != null
-                                        ? currentSubInfo.getDisplayName()
-                                        : "",
-                                previousName))
-                        .setPositiveButton(android.R.string.ok, this)
+                                newName, previousName))
+                        .setPositiveButton(
+                                context.getString(R.string.sim_change_data_ok, newName),
+                                this)
                         .setNegativeButton(R.string.cancel, null)
                         .create();
             default:

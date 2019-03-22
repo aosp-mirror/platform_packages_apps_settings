@@ -2951,9 +2951,21 @@
     <!-- Multiple SIMs found summary.  [CHAR LIMIT=100] -->
     <string name="sim_multi_sims_summary">Choose the SIM you prefer for mobile data.</string>
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=30] -->
-    <string name="sim_change_data_title">Change data SIM?</string>
+    <string name="sim_change_data_title">
+        Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> for mobile data?
+    </string>
     <!-- Message confirming the user wishes to change the default data SIM from one to another.  [CHAR LIMIT=NONE] -->
-    <string name="sim_change_data_message">Use <xliff:g id="new_sim">%1$s</xliff:g> instead of <xliff:g id="old_sim">%2$s</xliff:g> for mobile data?</string>
+    <string name="sim_change_data_message">
+        You\u0027re using <xliff:g id="carrier2" example="T-mobile">%2$s</xliff:g> for mobile data.
+        If you switch to <xliff:g id="carrier1" example="Verizon">%1$s</xliff:g>,
+        <xliff:g id="carrier2" example="T-mobile">%2$s</xliff:g> will no longer be used for mobile
+        data.
+    </string>
+    <!-- Ok button label confirming the user wishes to change the default data SIM from one to
+         another. [CHAR LIMIT=25] -->
+    <string name="sim_change_data_ok">
+        Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g>
+    </string>
     <!-- Title for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=30] -->
     <string name="sim_preferred_title">Update preferred SIM card?</string>
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
@@ -10672,6 +10684,27 @@
     <!-- Label for the off position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_off">Off</string>
+
+    <!-- Title for a confirmation dialog when the user is enabling an eSIM subscription and there
+         is already another active eSIM subscription which will need to be disabled if they proceed.
+         [CHAR LIMIT=60] -->
+    <string name="mobile_network_esim_swap_confirm_title">
+        Switch to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>?
+    </string>
+    <!-- Body of a confirmation dialog when the user is enabling an eSIM subscription and there
+         is already another active eSIM subscription which will need to be disabled if they proceed.
+         [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_esim_swap_confirm_body">
+        Only one downloaded SIM can be active at a time.\n\nSwitching to
+        <xliff:g id="carrier1" example="T-mobile">%1$s</xliff:g> won\u0027t cancel your
+        <xliff:g id="carrier2" example="Verizon">%2$s</xliff:g> service.
+    </string>
+    <!-- Ok button label on confirmation dialog when the user is enabling an eSIM subscription and
+         there is already another active eSIM subscription which will need to be disabled if they
+         proceed. [CHAR LIMIT=25] -->
+    <string name="mobile_network_esim_swap_confirm_ok">
+        Switch to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>
+    </string>
 
     <!-- Mobile network details page. Label for an option that lets the user delete an eSIM from
          the device. [CHAR LIMIT=60] -->
