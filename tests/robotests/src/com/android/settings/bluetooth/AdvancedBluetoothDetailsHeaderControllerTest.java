@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -78,6 +79,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
 
         mContext = RuntimeEnvironment.application;
         mController = new AdvancedBluetoothDetailsHeaderController(mContext, "pref_Key");
+        when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
         mController.init(mCachedDevice);
         mLayoutPreference = new LayoutPreference(mContext,
                 LayoutInflater.from(mContext).inflate(R.layout.advanced_bt_entity_header, null));
@@ -166,7 +168,10 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     }
 
     @Test
-    public void onStart_registerCallback() {
+    public void onStart_isAvailable_registerCallback() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
+                .thenReturn("true");
+
         mController.onStart();
 
         verify(mBluetoothAdapter).registerMetadataListener(mBluetoothDevice,
@@ -174,10 +179,34 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     }
 
     @Test
-    public void onStop_unregisterCallback() {
+    public void onStop_isAvailable_unregisterCallback() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
+                .thenReturn("true");
+
         mController.onStop();
 
         verify(mBluetoothAdapter).unregisterMetadataListener(mBluetoothDevice);
+    }
+
+    @Test
+    public void onStart_notAvailable_registerCallback() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
+                .thenReturn("false");
+
+        mController.onStart();
+
+        verify(mBluetoothAdapter, never()).registerMetadataListener(mBluetoothDevice,
+                mController.mMetadataListener, mController.mHandler);
+    }
+
+    @Test
+    public void onStop_notAvailable_unregisterCallback() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
+                .thenReturn("false");
+
+        mController.onStop();
+
+        verify(mBluetoothAdapter, never()).unregisterMetadataListener(mBluetoothDevice);
     }
 
     private void assertBatteryLevel(LinearLayout linearLayout, int batteryLevel) {
