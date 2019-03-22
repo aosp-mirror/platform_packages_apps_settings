@@ -22,8 +22,11 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.Pair;
@@ -33,13 +36,17 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.homepage.AdaptiveIconShapeDrawable;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.AdaptiveIcon;
+import com.android.settings.widget.AdaptiveOutlineDrawable;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
+
+import java.io.IOException;
 
 /**
  * Utils is a helper class that contains constants for various
@@ -165,6 +172,7 @@ public final class Utils {
         if (bluetoothDevice == null) {
             return false;
         }
+
         return Boolean.parseBoolean(bluetoothDevice.getMetadata(key));
     }
 
@@ -193,7 +201,36 @@ public final class Utils {
             CachedBluetoothDevice cachedDevice) {
         final Pair<Drawable, String> pair = BluetoothUtils.getBtClassDrawableWithDescription(
                 context, cachedDevice);
+        final boolean untetheredHeadset = Utils.getBooleanMetaData(cachedDevice.getDevice(),
+                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET);
+        final int iconSize = context.getResources().getDimensionPixelSize(
+                R.dimen.bt_nearby_icon_size);
         final Resources resources = context.getResources();
+
+        // Deal with untethered headset
+        if (untetheredHeadset) {
+            final String uriString = Utils.getStringMetaData(cachedDevice.getDevice(),
+                    BluetoothDevice.METADATA_MAIN_ICON);
+            final Uri iconUri = uriString != null ? Uri.parse(uriString) : null;
+            if (iconUri != null) {
+                try {
+                    final Bitmap bitmap = MediaStore.Images.Media.getBitmap(
+                            context.getContentResolver(), iconUri);
+                    if (bitmap != null) {
+                        final Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, iconSize,
+                                iconSize, false);
+                        bitmap.recycle();
+                        final AdaptiveOutlineDrawable drawable = new AdaptiveOutlineDrawable(
+                                resources, resizedBitmap);
+                        return new Pair<>(drawable, pair.second);
+                    }
+                } catch (IOException e) {
+                    Log.e(TAG, "Failed to get drawable for: " + iconUri, e);
+                }
+            }
+        }
+
+        // Deal with normal headset
         final int[] iconFgColors = resources.getIntArray(R.array.bt_icon_fg_colors);
         final int[] iconBgColors = resources.getIntArray(R.array.bt_icon_bg_colors);
 

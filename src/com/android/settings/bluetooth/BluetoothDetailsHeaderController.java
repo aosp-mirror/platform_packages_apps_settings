@@ -80,8 +80,10 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
 
     @Override
     protected void refresh() {
-        setHeaderProperties();
-        mHeaderController.done(mFragment.getActivity(), true /* rebindActions */);
+        if (isAvailable()) {
+            setHeaderProperties();
+            mHeaderController.done(mFragment.getActivity(), true /* rebindActions */);
+        }
     }
 
     @Override
