@@ -16,25 +16,22 @@
 
 package com.android.settings.privacy;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.ActionBarShadowController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,26 +84,8 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        styleActionBar();
+        Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), getListView());
         initLoadingBar();
-    }
-
-    @VisibleForTesting
-    void styleActionBar() {
-        final Activity activity = getActivity();
-        final ActionBar actionBar = activity.getActionBar();
-        final Lifecycle lifecycle = getSettingsLifecycle();
-        final View scrollView = getListView();
-
-        if (actionBar == null) {
-            Log.w(TAG, "No actionbar, cannot style actionbar.");
-            return;
-        }
-
-        actionBar.setElevation(0);
-        if (lifecycle != null && scrollView != null) {
-            ActionBarShadowController.attachToView(activity, lifecycle, scrollView);
-        }
     }
 
     @VisibleForTesting
