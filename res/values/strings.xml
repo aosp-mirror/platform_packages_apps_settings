@@ -10660,8 +10660,8 @@
     <string name="mobile_network_inactive_esim">Inactive / Downloaded SIM</string>
     <!-- Title of a dialog that lets a user modify the display name used for a mobile network
          subscription in various places in the Settings app. The default name is typically just the
-          carrier name, but especially in multi-SIM configurations users may want to use a different
-           name. [CHAR LIMIT=40] -->
+         carrier name, but especially in multi-SIM configurations users may want to use a different
+         name. [CHAR LIMIT=40] -->
     <string name="mobile_network_sim_name">SIM name</string>
     <!-- Label on the confirmation button of a dialog that lets a user set the display name of a
          mobile network subscription [CHAR LIMIT=20] -->
@@ -10672,6 +10672,35 @@
     <!-- Label for the off position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_off">Off</string>
+
+    <!-- Mobile network details page. Label for an option that lets the user delete an eSIM from
+         the device. [CHAR LIMIT=60] -->
+    <string name="mobile_network_erase_sim">Erase SIM</string>
+    <!-- Title of a confirmation dialog for deleting an eSIM from the device.
+         [CHAR LIMIT=60] -->
+    <string name="mobile_network_erase_sim_dialog_title">Erase this downloaded SIM?</string>
+    <!-- Body text of of a confirmation dialog for deleting an eSIM from the device.
+         [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_erase_sim_dialog_body">
+        Erasing this SIM removes <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> service
+        from this device.\n\nService for <xliff:g id="carrier" example="Verizon">%2$s</xliff:g>
+        won\u2019t be canceled.
+    </string>
+    <!-- OK button on a confirmation dialog for deleting an eSIM from the device.
+         [CHAR LIMIT=30] -->
+    <string name="mobile_network_erase_sim_dialog_ok">Erase</string>
+    <!-- Body text of the progress dialog we show while deleting an eSIM from the device.
+         [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_erase_sim_dialog_progress">Erasing SIM\u2026</string>
+
+    <!-- Title of a dialog indicating that an error ocurred when deleting an eSIM from the device
+         [CHAR LIMIT=60] -->
+    <string name="mobile_network_erase_sim_error_dialog_title">Can\u2019t erase SIM</string>
+    <!-- Body of a dialog indicating that an error ocurred when deleting an eSIM from the device
+         [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_erase_sim_error_dialog_body">
+        This SIM can\u2019t be erased due to an error.\n\nRestart your device and try again.
+    </string>
 
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>
