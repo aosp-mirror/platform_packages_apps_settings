@@ -10831,4 +10831,15 @@
     <string name="content_capture">Content Capture</string>
     <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
     <string name="content_capture_summary">Allow Android to save information seen on your screen or heard in video or audio content. Android makes helpful suggestions based on your device activity.</string>
+
+    <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
+    <string name="capture_system_heap_dump_title">Capture system heap dump</string>
+    <!-- Toast that is shown when the user initiates capturing a heap dump for the system server. [CHAR LIMIT=NONE] -->
+    <string name="capturing_system_heap_dump_message">Capturing system heap dump</string>
+    <!-- Toast that is shown if there's an error capturing the user initiated heap dump. [CHAR LIMIT=NONE] -->
+    <string name="error_capturing_system_heap_dump_message">Couldn\u2019t capture system heap dump</string>
+    <!-- Title of toggle for whether to enable automatic heap dumps for the system server or not. [CHAR LIMIT=NONE] -->
+    <string name="automatic_system_heap_dump_title">Automatically capture system heap dumps</string>
+    <!-- Summary of toggle for whether to enable automatic heap dumps for the system server or not. [CHAR LIMIT=NONE] -->
+    <string name="automatic_system_heap_dump_summary">Automatically capture a heap dump for Android System when it uses too much memory</string>
 </resources>
