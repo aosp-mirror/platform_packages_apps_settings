@@ -65,7 +65,10 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * {@link CustomSliceable} for Wi-Fi, used by generic clients.
@@ -150,6 +153,7 @@ public class WifiSlice implements CustomSliceable {
 
         return new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED)
+                .setKeywords(getKeywords())
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(title)
                         .setSubtitle(summary)
@@ -344,6 +348,14 @@ public class WifiSlice implements CustomSliceable {
         final Intent intent = getIntent();
         return PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 intent, 0 /* flags */);
+    }
+
+    private Set<String> getKeywords() {
+        final String keywords = mContext.getString(R.string.keywords_wifi);
+        return Arrays.asList(TextUtils.split(keywords, ","))
+                .stream()
+                .map(String::trim)
+                .collect(Collectors.toSet());
     }
 
     @Override
