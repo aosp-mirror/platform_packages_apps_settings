@@ -220,7 +220,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             Log.d(TAG, "Register for call state change");
             for (int i = 0; i < mPhoneCount; i++) {
                 int subId = mSelectableSubInfos.get(i).getSubscriptionId();
-                tm.listen(getPhoneStateListener(i, subId),
+                tm.createForSubscriptionId(subId).listen(getPhoneStateListener(i),
                         PhoneStateListener.LISTEN_CALL_STATE);
             }
         }
@@ -239,13 +239,13 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         }
     }
 
-    private PhoneStateListener getPhoneStateListener(int phoneId, int subId) {
+    private PhoneStateListener getPhoneStateListener(int phoneId) {
         // Disable Sim selection for Data when voice call is going on as changing the default data
         // sim causes a modem reset currently and call gets disconnected
         // ToDo : Add subtext on disabled preference to let user know that default data sim cannot
         // be changed while call is going on
         final int i = phoneId;
-        mPhoneStateListener[phoneId]  = new PhoneStateListener(subId) {
+        mPhoneStateListener[phoneId]  = new PhoneStateListener() {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
                 if (DBG) log("PhoneStateListener.onCallStateChanged: state=" + state);

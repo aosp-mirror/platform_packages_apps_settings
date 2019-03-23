@@ -26,41 +26,34 @@
         android:layout_height="match_parent"
         settings:layout_behavior="com.android.settings.widget.FloatingAppBarScrollingViewBehavior">
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/list_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:visibility="gone">
 
-            <FrameLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/apps_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                settings:fastScrollEnabled="true"
+                settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+                settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
+                settings:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+                settings:fastScrollVerticalTrackDrawable="@drawable/line_drawable"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/apps_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    settings:fastScrollEnabled="true"
-                    settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
-                    settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
-                    settings:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
-                    settings:fastScrollVerticalTrackDrawable="@drawable/line_drawable"/>
+            <TextView
+                android:id="@android:id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="@string/no_applications"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:visibility="invisible"/>
 
-                <TextView
-                    android:id="@android:id/empty"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:text="@string/no_applications"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:visibility="invisible"/>
-
-            </FrameLayout>
-
-        </LinearLayout>
+        </FrameLayout>
 
         <include layout="@layout/loading_container"/>
 

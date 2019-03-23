@@ -339,6 +339,27 @@ public class NotificationBackend {
         }
     }
 
+    public void allowAssistantCapability(String capability, boolean allowed) {
+        try {
+            if (allowed) {
+                sINM.allowAssistantCapability(capability);
+            } else {
+                sINM.disallowAssistantCapability(capability);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public List<String> getAssistantCapabilities(String pkg) {
+        try {
+            return sINM.getAllowedAssistantCapabilities(pkg);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return new ArrayList<>();
+    }
+
     protected void recordAggregatedUsageEvents(Context context, AppRow appRow) {
         long now = System.currentTimeMillis();
         long startTime = now - (DateUtils.DAY_IN_MILLIS * DAYS_TO_CHECK);

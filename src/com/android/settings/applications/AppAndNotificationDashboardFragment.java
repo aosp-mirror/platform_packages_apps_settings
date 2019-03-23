@@ -21,6 +21,7 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -85,6 +86,10 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
         super.onResume();
         mIsFirstLaunch = false;
+
+        if (mRecentAppsPreferenceController.isAvailable()) {
+            Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), getListView());
+        }
     }
 
     @Override

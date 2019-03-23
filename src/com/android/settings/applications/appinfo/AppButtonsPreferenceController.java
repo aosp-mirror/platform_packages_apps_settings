@@ -559,15 +559,15 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
-            mButtonsPref.setButton2Text(R.string.uninstall_text)
+            mButtonsPref.setButton2Text(R.string.disable_text)
                     .setButton2Icon(R.drawable.ic_settings_delete);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-            mButtonsPref.setButton2Text(R.string.uninstall_text)
+            mButtonsPref.setButton2Text(R.string.disable_text)
                     .setButton2Icon(R.drawable.ic_settings_delete);
             disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
                     .contains(mAppEntry.info.packageName);
         } else {
-            mButtonsPref.setButton2Text(R.string.install_text)
+            mButtonsPref.setButton2Text(R.string.enable_text)
                     .setButton2Icon(R.drawable.ic_settings_install);
             disableable = true;
         }

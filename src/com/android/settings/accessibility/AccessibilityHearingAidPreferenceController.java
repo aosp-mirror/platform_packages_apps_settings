@@ -31,6 +31,9 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle.Event;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -40,9 +43,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.Iterator;
 import java.util.List;
@@ -53,7 +53,7 @@ import java.util.concurrent.FutureTask;
  * Controller that shows and updates the bluetooth device name
  */
 public class AccessibilityHearingAidPreferenceController extends BasePreferenceController
-        implements LifecycleObserver, OnResume, OnPause {
+        implements LifecycleObserver {
     private static final String TAG = "AccessibilityHearingAidPreferenceController";
     private Preference mHearingAidPreference;
 
@@ -104,7 +104,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         return mHearingAidProfileSupported ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
-    @Override
+    @OnLifecycleEvent(Event.ON_RESUME)
     public void onResume() {
         if (mHearingAidProfileSupported) {
             IntentFilter filter = new IntentFilter();
@@ -114,7 +114,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         }
     }
 
-    @Override
+    @OnLifecycleEvent(Event.ON_PAUSE)
     public void onPause() {
         if (mHearingAidProfileSupported) {
             mContext.unregisterReceiver(mHearingAidChangedReceiver);

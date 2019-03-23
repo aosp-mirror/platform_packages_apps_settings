@@ -340,7 +340,7 @@
                   android:clearTaskOnLaunch="true"
                   android:excludeFromRecents="true"
                   android:exported="true"
-                  android:permission="android.permission.CONNECTIVITY_INTERNAL"
+                  android:permission="android.permission.NETWORK_STACK"
                   android:theme="@*android:style/Theme.DeviceDefault.Light.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.net.conn.PROMPT_UNVALIDATED" />
@@ -901,8 +901,7 @@
 
         <activity android:name=".Settings$MyDeviceInfoActivity"
                   android:label="@string/about_settings"
-                  android:icon="@drawable/ic_homepage_about"
-                  android:parentActivityName="Settings">
+                  android:icon="@drawable/ic_homepage_about">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DEVICE_INFO_SETTINGS" />
                 <action android:name="android.settings.DEVICE_NAME" />
@@ -1633,8 +1632,9 @@
             android:icon="@drawable/ic_suggestion_security">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.DEFAULT" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.dismiss" android:value="14" />
             <meta-data android:name="com.android.settings.title"
                        android:resource="@string/suggested_lock_settings_title" />
             <meta-data android:name="com.android.settings.summary"
@@ -1648,7 +1648,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss" android:value="2," />
+            <meta-data android:name="com.android.settings.dismiss" android:value="14" />
             <meta-data android:name="com.android.settings.require_feature"
                 android:value="android.hardware.fingerprint" />
             <meta-data android:name="com.android.settings.title"
@@ -2553,7 +2553,7 @@
 
         <receiver android:name=".sim.SimSelectNotification">
             <intent-filter>
-                <action android:name="android.intent.action.SIM_STATE_CHANGED"/>
+                <action android:name="android.intent.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
             </intent-filter>
         </receiver>
 
@@ -2622,6 +2622,8 @@
             android:name=".wifi.NetworkRequestDialogActivity"
             android:theme="@style/Transparent"
             android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=".wifi.NetworkRequestDialogActivity"
             android:exported="true"
             android:permission="android.permission.NETWORK_SETTINGS">
             <intent-filter>
@@ -2971,6 +2973,17 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".development.qstile.DevelopmentTiles$SensorsOff"
+            android:label="@string/sensors_off_quick_settings_title"
+            android:icon="@drawable/tile_icon_sensors_off"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".HelpTrampoline"
             android:exported="true"
@@ -3148,6 +3161,17 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.calling.WifiCallingDisclaimerFragment" />
+        </activity>
+
+        <activity android:name="Settings$BatterySaverScheduleSettingsActivity"
+            android:label="@string/battery_saver_schedule_settings_title"
+            android:parentActivityName="Settings">
+            <intent-filter>
+                <action android:name="com.android.settings.BATTERY_SAVER_SCHEDULE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings" />
         </activity>
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

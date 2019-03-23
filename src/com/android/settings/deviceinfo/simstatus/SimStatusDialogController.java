@@ -174,7 +174,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
-        mTelephonyManager.listen(mPhoneStateListener,
+        mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
+                .listen(mPhoneStateListener,
                 PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
                         | PhoneStateListener.LISTEN_SERVICE_STATE);
@@ -197,8 +198,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
-        mTelephonyManager.listen(mPhoneStateListener,
-                PhoneStateListener.LISTEN_NONE);
+        mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
+                .listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
         if (mShowLatestAreaInfo) {
             mContext.unregisterReceiver(mAreaInfoReceiver);
@@ -432,8 +433,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     @VisibleForTesting
     PhoneStateListener getPhoneStateListener() {
-        return new PhoneStateListener(
-                mSubscriptionInfo.getSubscriptionId()) {
+        return new PhoneStateListener() {
             @Override
             public void onDataConnectionStateChanged(int state) {
                 updateDataState(state);

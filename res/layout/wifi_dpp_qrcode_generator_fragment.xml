@@ -40,6 +40,14 @@
                 android:layout_height="@dimen/qrcode_size"
                 android:src="@android:color/transparent"/>
 
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"/>
         </LinearLayout>
 
     </ScrollView>

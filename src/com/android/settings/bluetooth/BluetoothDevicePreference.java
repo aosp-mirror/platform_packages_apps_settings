@@ -164,6 +164,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         final ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
         if (imageView != null) {
             imageView.setContentDescription(contentDescription);
+            imageView.setElevation(
+                    getContext().getResources().getDimension(R.dimen.bt_icon_elevation));
         }
         super.onBindViewHolder(view);
     }
