@@ -21,6 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
 import android.app.Activity;
+import android.view.LayoutInflater;
+import android.widget.TextView;
 
 import com.android.settings.testutils.shadow.ShadowRecoverySystem;
 import com.android.settings.testutils.shadow.ShadowWifiP2pManager;
@@ -85,5 +87,31 @@ public class ResetNetworkConfirmTest {
         mResetNetworkConfirm.p2pFactoryReset(mActivity);
 
         assertThat(ShadowWifiP2pManager.getFactoryResetCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void setSubtitle_eraseEsim() {
+        mResetNetworkConfirm.mEraseEsim = true;
+        mResetNetworkConfirm.mContentView =
+            LayoutInflater.from(mActivity).inflate(R.layout.reset_network_confirm, null);
+
+        mResetNetworkConfirm.setSubtitle();
+
+        assertThat(((TextView) mResetNetworkConfirm.mContentView
+            .findViewById(R.id.reset_network_confirm)).getText())
+            .isEqualTo(mActivity.getString(R.string.reset_network_final_desc_esim));
+    }
+
+    @Test
+    public void setSubtitle_notEraseEsim() {
+        mResetNetworkConfirm.mEraseEsim = false;
+        mResetNetworkConfirm.mContentView =
+            LayoutInflater.from(mActivity).inflate(R.layout.reset_network_confirm, null);
+
+        mResetNetworkConfirm.setSubtitle();
+
+        assertThat(((TextView) mResetNetworkConfirm.mContentView
+            .findViewById(R.id.reset_network_confirm)).getText())
+            .isEqualTo(mActivity.getString(R.string.reset_network_final_desc));
     }
 }
