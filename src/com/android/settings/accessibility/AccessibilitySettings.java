@@ -18,6 +18,8 @@ package com.android.settings.accessibility;
 
 import static android.os.Vibrator.VibrationIntensity;
 
+import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -583,6 +585,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             preference.setKey(componentName.flattenToString());
 
             preference.setTitle(title);
+            preference.setIconSize(ICON_SIZE_MEDIUM);
             Utils.setSafeIcon(preference, icon);
             final boolean serviceEnabled = enabledServices.contains(componentName);
             String description = info.loadDescription(getPackageManager());
