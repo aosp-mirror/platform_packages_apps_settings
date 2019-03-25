@@ -45,6 +45,7 @@ import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputSliceConstants;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -59,6 +60,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothAdapter.class})
+@Ignore("b/129292771")
 public class MediaOutputIndicatorSliceTest {
 
     private static final String TEST_DEVICE_NAME = "test_device_name";

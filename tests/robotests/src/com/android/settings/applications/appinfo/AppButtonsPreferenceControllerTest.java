@@ -324,7 +324,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton2Text(R.string.uninstall_text);
+        verify(mButtonPrefs).setButton2Text(R.string.disable_text);
         assertThat(controllable).isFalse();
     }
 
@@ -336,7 +336,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton2Text(R.string.uninstall_text);
+        verify(mButtonPrefs).setButton2Text(R.string.disable_text);
         assertThat(controllable).isTrue();
     }
 
@@ -348,7 +348,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton2Text(R.string.install_text);
+        verify(mButtonPrefs).setButton2Text(R.string.enable_text);
         assertThat(controllable).isTrue();
     }
 
