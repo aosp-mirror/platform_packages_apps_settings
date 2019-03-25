@@ -86,12 +86,10 @@ public class LocationFooterPreferenceController extends LocationBasePreferenceCo
                                 .getResourcesForApplication(data.applicationInfo)
                                 .getString(data.footerStringRes);
             } catch (NameNotFoundException exception) {
-                if (Log.isLoggable(TAG, Log.WARN)) {
-                    Log.w(
-                            TAG,
-                            "Resources not found for application "
-                                    + data.applicationInfo.packageName);
-                }
+                Log.w(
+                        TAG,
+                        "Resources not found for application "
+                                + data.applicationInfo.packageName);
                 continue;
             }
             footerPreference.setTitle(footerString);
@@ -152,11 +150,11 @@ public class LocationFooterPreferenceController extends LocationBasePreferenceCo
                 mPackageManager.queryBroadcastReceivers(
                         INJECT_INTENT, PackageManager.GET_META_DATA);
         if (resolveInfos == null) {
-            if (Log.isLoggable(TAG, Log.ERROR)) {
-                Log.e(TAG, "Unable to resolve intent " + INJECT_INTENT);
-                return Collections.emptyList();
-            }
-        } else if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.e(TAG, "Unable to resolve intent " + INJECT_INTENT);
+            return Collections.emptyList();
+        }
+
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
             Log.d(TAG, "Found broadcast receivers: " + resolveInfos);
         }
 
@@ -167,30 +165,26 @@ public class LocationFooterPreferenceController extends LocationBasePreferenceCo
 
             // If a non-system app tries to inject footer, ignore it
             if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-                if (Log.isLoggable(TAG, Log.WARN)) {
-                    Log.w(TAG, "Ignoring attempt to inject footer from app not in system image: "
-                            + resolveInfo);
-                    continue;
-                }
+                Log.w(TAG, "Ignoring attempt to inject footer from app not in system image: "
+                        + resolveInfo);
+                continue;
             }
 
             // Get the footer text resource id from broadcast receiver's metadata
             if (activityInfo.metaData == null) {
                 if (Log.isLoggable(TAG, Log.DEBUG)) {
                     Log.d(TAG, "No METADATA in broadcast receiver " + activityInfo.name);
-                    continue;
                 }
+                continue;
             }
 
             final int footerTextRes =
                     activityInfo.metaData.getInt(LocationManager.METADATA_SETTINGS_FOOTER_STRING);
             if (footerTextRes == 0) {
-                if (Log.isLoggable(TAG, Log.WARN)) {
-                    Log.w(
-                            TAG,
-                            "No mapping of integer exists for "
-                                    + LocationManager.METADATA_SETTINGS_FOOTER_STRING);
-                }
+                Log.w(
+                        TAG,
+                        "No mapping of integer exists for "
+                                + LocationManager.METADATA_SETTINGS_FOOTER_STRING);
                 continue;
             }
             footerDataList.add(
