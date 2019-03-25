@@ -55,6 +55,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     private static final int BATTERY_LEVEL_LEFT = 25;
     private static final int BATTERY_LEVEL_RIGHT = 45;
     private static final String ICON_URI = "content://test.provider/icon.png";
+    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
     private Context mContext;
 
@@ -83,6 +84,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
         mController.mLayoutPreference = mLayoutPreference;
         mController.mBluetoothAdapter = mBluetoothAdapter;
         when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mCachedDevice.getAddress()).thenReturn(MAC_ADDRESS);
     }
 
     @Test

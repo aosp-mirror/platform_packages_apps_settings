@@ -52,6 +52,8 @@ import java.util.Collection;
 @Config(shadows = {ShadowAudioManager.class, ShadowBluetoothAdapter.class,
         ShadowCachedBluetoothDeviceManager.class})
 public class AvailableMediaBluetoothDeviceUpdaterTest {
+    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+
     @Mock
     private DashboardFragment mDashboardFragment;
     @Mock
@@ -84,6 +86,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
 
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
 
         mBluetoothDeviceUpdater = spy(new AvailableMediaBluetoothDeviceUpdater(mContext,
                 mDashboardFragment, mDevicePreferenceCallback));
