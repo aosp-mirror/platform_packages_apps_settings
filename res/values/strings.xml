@@ -10627,8 +10627,14 @@
     <string name="cdma_lte_data_service">Set up data service</string>
     <!-- Mobile network settings screen, title of Mobile Data switch preference [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_title">Mobile data</string>
-    <!-- Mobile network settings screen, title of Mobile data switch preference [CHAR LIMIT=NONE] -->
+    <!-- Mobile network settings screen, summary of Mobile data switch preference [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_summary">Access data using mobile network</string>
+    <!-- Mobile network settings screen, summary of Mobile data switch preference when the network
+         is opportunistic and will always be used when it is in range. [CHAR LIMIT=NONE] -->
+    <string name="mobile_data_settings_summary_auto_switch">
+        Phone will automatically switch to this carrier when in range
+    </string>
+
     <!-- Mobile network settings screen, title of item showing the name of the default subscription
      that will be used for calls. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
     <string name="calls_preference">Calls preference</string>
@@ -10676,6 +10682,14 @@
          such as calls, SMS, or data when multiple SIMs are present, but is not currently the
           default SIM for any of those services. [CHAR LIMIT=50] -->
     <string name="subscription_available">Available</string>
+    <!-- Network & internet page. Summary indicating that a SIM is configured and may be used for
+         some services, and that network is currently in range but not being used. For instance, it
+         may be able to provide a mobile data connection that we aren't using because we're already
+         connected to wifi. [CHAR LIMIT=50] -->
+    <string name="mobile_network_in_range">In range</string>
+    <!-- Network & internet page. Summary indicating that a SIM is configured and may be used for
+         some services, but the network not currently in range. [CHAR LIMIT=50] -->
+    <string name="mobile_network_not_in_range">Not in range</string>
 
     <!-- Title of item shown at the bottom of the page listing multiple mobile service
          subscriptions; tapping it leads to a UI to add more [CHAR LIMIT=40] -->
