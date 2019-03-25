@@ -37,6 +37,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -52,6 +53,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothUtils.class,
         ShadowBluetoothDevice.class})
+@Ignore("b/129292771")
 public class MediaOutputIndicatorWorkerTest {
 
     private static final String TEST_A2DP_DEVICE_NAME = "Test_A2DP_BT_Device_NAME";

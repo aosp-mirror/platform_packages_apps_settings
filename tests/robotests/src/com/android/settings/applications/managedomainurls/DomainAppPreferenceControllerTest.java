@@ -18,17 +18,9 @@ package com.android.settings.applications.managedomainurls;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.util.IconDrawableFactory;
-import android.view.View;
-import android.widget.ProgressBar;
-
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
@@ -62,21 +54,6 @@ public class DomainAppPreferenceControllerTest {
                 mContext, mIconDrawableFactory, mAppEntry);
 
         assertThat(pref.getLayoutResource()).isEqualTo(R.layout.preference_app);
-    }
-
-    @Test
-    public void onBindViewHolder_shouldSetAppendixViewToGone() {
-        final DomainAppPreference pref = new DomainAppPreference(
-                mContext, mIconDrawableFactory, mAppEntry);
-        final View holderView = mock(View.class);
-        final View appendixView = mock(View.class);
-        when(holderView.findViewById(R.id.summary_container)).thenReturn(mock(View.class));
-        when(holderView.findViewById(android.R.id.progress)).thenReturn(mock(ProgressBar.class));
-        when(holderView.findViewById(R.id.appendix)).thenReturn(appendixView);
-
-        pref.onBindViewHolder(PreferenceViewHolder.createInstanceForTests(holderView));
-
-        verify(appendixView).setVisibility(View.GONE);
     }
 
     private ApplicationInfo createApplicationInfo(String packageName) {
