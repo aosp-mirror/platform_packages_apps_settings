@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_INTENT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -29,7 +30,10 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.util.FeatureFlagUtils;
+
+import androidx.preference.Preference;
 
 import com.android.settings.core.FeatureFlags;
 
@@ -48,11 +52,13 @@ public class MainlineModuleVersionPreferenceControllerTest {
     private PackageManager mPackageManager;
 
     private Context mContext;
+    private Preference mPreference;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mPreference = new Preference(mContext);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MAINLINE_MODULE, true);
@@ -82,7 +88,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_noMainlineModulePackageInfo_unavailable() throws Exception {
-
         final String provider = "test.provider";
         when(mContext.getString(
                 com.android.internal.R.string.config_defaultModuleMetadataProvider))
@@ -98,6 +103,43 @@ public class MainlineModuleVersionPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_hasMainlineModulePackageInfo_available() throws Exception {
+        setupModulePackage();
+
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void updateStates_canHandleIntent_setIntentToPreference() throws Exception {
+        setupModulePackage();
+        when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))
+                .thenReturn(new ResolveInfo());
+
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.getIntent()).isEqualTo(MODULE_UPDATE_INTENT);
+    }
+
+    @Test
+    public void updateStates_cannotHandleIntent_setNullToPreference() throws Exception {
+        setupModulePackage();
+        when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))
+                .thenReturn(null);
+
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.getIntent()).isNull();
+    }
+
+    private void setupModulePackage() throws Exception {
         final String provider = "test.provider";
         final String version = "test version 123";
         final PackageInfo info = new PackageInfo();
@@ -106,11 +148,5 @@ public class MainlineModuleVersionPreferenceControllerTest {
                 com.android.internal.R.string.config_defaultModuleMetadataProvider))
                 .thenReturn(provider);
         when(mPackageManager.getPackageInfo(eq(provider), anyInt())).thenReturn(info);
-
-        final MainlineModuleVersionPreferenceController controller =
-                new MainlineModuleVersionPreferenceController(mContext, "key");
-
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
-
 }
