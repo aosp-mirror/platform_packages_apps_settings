@@ -17,6 +17,7 @@
 package com.android.settings.development.featureflags;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -26,6 +27,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Build;
+import android.os.SystemProperties;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -37,6 +40,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class FeatureFlagPreferenceControllerTest {
@@ -59,8 +63,16 @@ public class FeatureFlagPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_available() {
+    public void getAvailability_debug_available() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+
+    @Test
+    public void getAvailability_user_unavailable() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

@@ -20,6 +20,7 @@ import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTE
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
 
@@ -33,8 +34,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class HideNonSystemOverlayMixinTest {
@@ -65,6 +66,20 @@ public class HideNonSystemOverlayMixinTest {
         final WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
         assertThat(attrs.privateFlags & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS)
                 .isEqualTo(0);
+    }
+
+    @Test
+    public void isEnabled_debug_false() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
+
+        assertThat(new HideNonSystemOverlayMixin(null).isEnabled()).isFalse();
+    }
+
+    @Test
+    public void isEnabled_user_true() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
+
+        assertThat(new HideNonSystemOverlayMixin(null).isEnabled()).isTrue();
     }
 
     public static class TestActivity extends AppCompatActivity {
