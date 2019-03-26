@@ -71,6 +71,15 @@
             android:entryValues="@array/wifi_privacy_values"/>
     </PreferenceCategory>
 
+    <!-- Add device Category -->
+    <PreferenceCategory
+            android:key="add_device_category" >
+        <Preference
+                android:key="add_device_to_network"
+                android:title="@string/wifi_dpp_add_device"
+                android:summary="@string/wifi_dpp_connect_network_using_qr_code"/>
+    </PreferenceCategory>
+
     <!-- Network Details -->
     <PreferenceCategory
             android:key="ip_details_category"
