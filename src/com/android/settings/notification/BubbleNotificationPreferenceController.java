@@ -56,7 +56,7 @@ public class BubbleNotificationPreferenceController extends TogglePreferenceCont
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        Preference preference = screen.findPreference(NOTIFICATION_BUBBLES);
+        Preference preference = screen.findPreference(getPreferenceKey());
         if (preference != null) {
             mSettingObserver = new SettingObserver(preference);
         }
