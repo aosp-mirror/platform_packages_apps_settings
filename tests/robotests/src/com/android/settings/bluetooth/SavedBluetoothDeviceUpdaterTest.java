@@ -44,6 +44,8 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {ShadowBluetoothAdapter.class})
 public class SavedBluetoothDeviceUpdaterTest {
 
+    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+
     @Mock
     private DashboardFragment mDashboardFragment;
     @Mock
@@ -64,6 +66,7 @@ public class SavedBluetoothDeviceUpdaterTest {
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
 
         mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mContext, mDashboardFragment,

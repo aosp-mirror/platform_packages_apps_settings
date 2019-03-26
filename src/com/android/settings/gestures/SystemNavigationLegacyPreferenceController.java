@@ -16,8 +16,14 @@
 
 package com.android.settings.gestures;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
+
 import android.content.Context;
+import android.content.om.IOverlayManager;
+import android.os.ServiceManager;
 import android.text.TextUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.widget.RadioButtonPreference;
 
@@ -26,7 +32,14 @@ public class SystemNavigationLegacyPreferenceController extends
     static final String PREF_KEY_LEGACY = "gesture_legacy";
 
     public SystemNavigationLegacyPreferenceController(Context context, String key) {
-        super(context, key);
+        this(context, IOverlayManager.Stub.asInterface(ServiceManager.getService(
+                Context.OVERLAY_SERVICE)), key);
+    }
+
+    @VisibleForTesting
+    public SystemNavigationLegacyPreferenceController(Context context,
+            IOverlayManager overlayManager, String key) {
+        super(context, overlayManager, key);
     }
 
     @Override
@@ -36,8 +49,7 @@ public class SystemNavigationLegacyPreferenceController extends
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference preference) {
-        setEdgeToEdgeGestureEnabled(mContext, false);
-        setSwipeUpEnabled(mContext, false);
+        setNavBarInteractionMode(mOverlayManager, NAV_BAR_MODE_3BUTTON_OVERLAY);
         selectRadioButtonInGroup(PREF_KEY_LEGACY, mPreferenceScreen);
     }
 
