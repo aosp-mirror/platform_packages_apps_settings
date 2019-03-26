@@ -19,6 +19,7 @@ package com.android.settings.password;
 import android.app.KeyguardManager;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.IBiometricConfirmDeviceCredentialCallback;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
@@ -51,6 +52,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     private ConfirmCredentialTheme mConfirmCredentialTheme;
     private BiometricManager mBiometricManager;
 
+    // TODO(b/123378871): Remove when moved.
+    private final IBiometricConfirmDeviceCredentialCallback mCancelCallback
+            = new IBiometricConfirmDeviceCredentialCallback.Stub() {
+        @Override
+        public void cancel() {
+            finish();
+        }
+    };
+
     private boolean isInternalActivity() {
         return (this instanceof ConfirmLockPassword.InternalActivity)
                 || (this instanceof ConfirmLockPattern.InternalActivity);
@@ -81,6 +91,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         super.onCreate(savedState);
 
         mBiometricManager = getSystemService(BiometricManager.class);
+        mBiometricManager.registerCancellationCallback(mCancelCallback);
 
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
             // Prevent the content parent from consuming the window insets because GlifLayout uses
