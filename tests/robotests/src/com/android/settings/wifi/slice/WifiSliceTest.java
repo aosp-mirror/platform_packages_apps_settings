@@ -54,7 +54,6 @@ import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -140,7 +139,7 @@ public class WifiSliceTest {
 
     private AccessPoint createAccessPoint(String name, boolean active, boolean reachable) {
         final AccessPoint accessPoint = mock(AccessPoint.class);
-        doReturn(name).when(accessPoint).getConfigName();
+        doReturn(name).when(accessPoint).getTitle();
         doReturn(active).when(accessPoint).isActive();
         doReturn(reachable).when(accessPoint).isReachable();
         if (active) {
@@ -162,7 +161,6 @@ public class WifiSliceTest {
 
     @Test
     @Config(shadows = ShadowSliceBackgroundWorker.class)
-    @Ignore("b/129293669")
     public void getWifiSlice_noReachableAp_shouldReturnLoadingRow() {
         setWorkerResults(
                 createAccessPoint(AP1_NAME, false, false),
@@ -180,7 +178,6 @@ public class WifiSliceTest {
 
     @Test
     @Config(shadows = ShadowSliceBackgroundWorker.class)
-    @Ignore("b/129293669")
     public void getWifiSlice_oneActiveAp_shouldReturnLoadingRow() {
         setWorkerResults(createAccessPoint(AP1_NAME, true, true));
         final Slice wifiSlice = mWifiSlice.getSlice();
@@ -195,7 +192,6 @@ public class WifiSliceTest {
 
     @Test
     @Config(shadows = ShadowSliceBackgroundWorker.class)
-    @Ignore("b/129293669")
     public void getWifiSlice_oneActiveApAndOneUnreachableAp_shouldReturnLoadingRow() {
         setWorkerResults(
                 createAccessPoint(AP1_NAME, true, true),
@@ -213,7 +209,6 @@ public class WifiSliceTest {
 
     @Test
     @Config(shadows = ShadowSliceBackgroundWorker.class)
-    @Ignore("b/129293669")
     public void getWifiSlice_oneReachableAp_shouldNotReturnLoadingRow() {
         setWorkerResults(createAccessPoint(AP1_NAME, false, true));
         final Slice wifiSlice = mWifiSlice.getSlice();
@@ -228,7 +223,6 @@ public class WifiSliceTest {
 
     @Test
     @Config(shadows = ShadowSliceBackgroundWorker.class)
-    @Ignore("b/129293669")
     public void getWifiSlice_allReachableAps_shouldNotReturnLoadingRow() {
         setWorkerResults(
                 createAccessPoint(AP1_NAME, false, true),
