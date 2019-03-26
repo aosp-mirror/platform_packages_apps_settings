@@ -17,8 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.ARG_PACKAGE_NAME;
-import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
-        .UNINSTALL_ALL_USERS_MENU;
+import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_ALL_USERS_MENU;
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_UPDATES;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -43,6 +42,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.ArraySet;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -53,6 +53,7 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,10 +64,14 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 public final class AppInfoDashboardFragmentTest {
@@ -99,6 +104,11 @@ public final class AppInfoDashboardFragmentTest {
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (i -> false));
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAppUtils.reset();
     }
 
     @Test
@@ -187,6 +197,24 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void ensureDisplayableModule_hiddenModule_shouldReturnFalse() {
+        ShadowAppUtils.addHiddenModule(PACKAGE_NAME);
+        ReflectionHelpers.setField(mFragment, "mPackageName", PACKAGE_NAME);
+
+
+        assertThat(mFragment.ensureDisplayableModule(mActivity)).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void ensureDisplayableModule_regularApp_shouldReturnTrue() {
+        ReflectionHelpers.setField(mFragment, "mPackageName", PACKAGE_NAME);
+
+        assertThat(mFragment.ensureDisplayableModule(mActivity)).isTrue();
+    }
+
+    @Test
     public void createPreference_hasNoPackageInfo_shouldSkip() {
         ReflectionHelpers.setField(mFragment, "mPackageInfo", null);
 
@@ -240,7 +268,8 @@ public final class AppInfoDashboardFragmentTest {
         doReturn(true).when(mFragment).refreshUi();
 
         mFragment
-            .onActivityResult(AppInfoDashboardFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
+                .onActivityResult(AppInfoDashboardFragment.REQUEST_UNINSTALL, 0,
+                        mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
     }
@@ -346,5 +375,25 @@ public final class AppInfoDashboardFragmentTest {
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
                 .containsKey(ARG_PACKAGE_NAME))
                 .isTrue();
+    }
+
+    @Implements(AppUtils.class)
+    public static class ShadowAppUtils {
+
+        public static Set<String> sHiddenModules = new ArraySet<>();
+
+        @Resetter
+        public static void reset() {
+            sHiddenModules.clear();
+        }
+
+        public static void addHiddenModule(String pkg) {
+            sHiddenModules.add(pkg);
+        }
+
+        @Implementation
+        protected static boolean isHiddenSystemModule(Context context, String packageName) {
+            return sHiddenModules.contains(packageName);
+        }
     }
 }
