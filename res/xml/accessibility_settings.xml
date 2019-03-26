@@ -132,6 +132,12 @@
             android:key="audio_and_captions_category"
             android:title="@string/audio_and_captions_category_title">
 
+        <Preference
+            android:key="live_caption"
+            android:title="@string/live_caption_title"
+            android:summary="@string/live_caption_summary"
+            settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
+
         <SwitchPreference
                 android:key="toggle_master_mono"
                 android:title="@string/accessibility_toggle_master_mono_title"
