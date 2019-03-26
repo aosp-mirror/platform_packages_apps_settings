@@ -795,7 +795,8 @@
 
         <activity android:name="Settings$WallpaperSettingsActivity"
                   android:label="@string/wallpaper_settings_fragment_title"
-                  android:icon="@drawable/ic_wallpaper">
+                  android:icon="@drawable/ic_wallpaper"
+                  android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wallpaper.WallpaperTypeSettings" />
         </activity>
