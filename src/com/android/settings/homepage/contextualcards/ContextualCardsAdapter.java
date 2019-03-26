@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
-import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate.DismissalItemTouchHelperListener;
+import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
-        implements ContextualCardUpdateListener, DismissalItemTouchHelperListener {
+        implements ContextualCardUpdateListener, SwipeDismissalDelegate.Listener {
     static final int SPAN_COUNT = 2;
 
     private static final String TAG = "ContextualCardsAdapter";
@@ -140,6 +140,9 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public void onSwiped(int position) {
-
+        final ContextualCard card = mContextualCards.get(position).mutate()
+                .setIsPendingDismiss(true).build();
+        mContextualCards.set(position, card);
+        notifyItemChanged(position);
     }
 }

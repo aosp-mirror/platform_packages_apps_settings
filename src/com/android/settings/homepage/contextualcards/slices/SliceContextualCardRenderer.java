@@ -135,23 +135,19 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                 // Deferred setup is never dismissible.
                 break;
             case VIEW_TYPE_HALF_WIDTH:
-                initDismissalActions(holder, card, R.id.content);
+                initDismissalActions(holder, card);
                 break;
             default:
-                initDismissalActions(holder, card, R.id.slice_view);
+                initDismissalActions(holder, card);
+        }
+
+        if (card.isPendingDismiss()) {
+            flipCardToDismissalView(holder);
+            mFlippedCardSet.add(holder);
         }
     }
 
-    private void initDismissalActions(RecyclerView.ViewHolder holder, ContextualCard card,
-            int initialViewId) {
-        // initialView is the first view in the ViewFlipper.
-        final View initialView = holder.itemView.findViewById(initialViewId);
-        initialView.setOnLongClickListener(v -> {
-            flipCardToDismissalView(holder);
-            mFlippedCardSet.add(holder);
-            return true;
-        });
-
+    private void initDismissalActions(RecyclerView.ViewHolder holder, ContextualCard card) {
         final Button btnKeep = holder.itemView.findViewById(R.id.keep);
         btnKeep.setOnClickListener(v -> {
             mFlippedCardSet.remove(holder);
