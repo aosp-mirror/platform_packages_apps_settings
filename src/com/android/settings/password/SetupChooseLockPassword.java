@@ -132,6 +132,13 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         }
 
         @Override
+        protected int getStageType() {
+            // Return TYPE_NONE to make generic lock screen launch in Setup wizard flow before
+            // fingerprint and face setup.
+            return Stage.TYPE_NONE;
+        }
+
+        @Override
         protected void updateUi() {
             super.updateUi();
             // Show the skip button during SUW but not during Settings > Biometric Enrollment
