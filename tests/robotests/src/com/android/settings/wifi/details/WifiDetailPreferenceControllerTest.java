@@ -77,6 +77,7 @@ import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -98,6 +99,7 @@ import java.util.stream.Collectors;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDevicePolicyManager.class, ShadowEntityHeaderController.class})
+@Ignore("b/129292549")
 public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;
