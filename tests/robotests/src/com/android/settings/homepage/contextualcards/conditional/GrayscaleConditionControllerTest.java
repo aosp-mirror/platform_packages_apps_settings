@@ -18,11 +18,13 @@ package com.android.settings.homepage.contextualcards.conditional;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.display.ColorDisplayManager;
 
 import org.junit.Before;
@@ -79,5 +81,12 @@ public class GrayscaleConditionControllerTest {
         mController.onActionClick();
 
         verify(mConditionManager).onConditionChanged();
+    }
+
+    @Test
+    public void onActionClick_shouldSendBroadcast() {
+        mController.onActionClick();
+
+        verify(mContext).sendBroadcast(any(Intent.class), any(String.class));
     }
 }

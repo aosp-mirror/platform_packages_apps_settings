@@ -16,9 +16,12 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.Manifest;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.display.ColorDisplayManager;
 import android.util.Log;
 
@@ -32,10 +35,15 @@ public class GrayscaleConditionController implements ConditionalCardController {
     static final int ID = Objects.hash("GrayscaleConditionController");
 
     private static final String TAG = "GrayscaleCondition";
+    private static final String ACTION_GRAYSCALE_CHANGED =
+            "android.settings.action.GRAYSCALE_CHANGED";
+    private static final IntentFilter GRAYSCALE_CHANGED_FILTER = new IntentFilter(
+            ACTION_GRAYSCALE_CHANGED);
 
     private final Context mAppContext;
     private final ConditionManager mConditionManager;
     private final ColorDisplayManager mColorDisplayManager;
+    private final Receiver mReceiver;
 
     private Intent mIntent;
 
@@ -43,6 +51,7 @@ public class GrayscaleConditionController implements ConditionalCardController {
         mAppContext = appContext;
         mConditionManager = conditionManager;
         mColorDisplayManager = mAppContext.getSystemService(ColorDisplayManager.class);
+        mReceiver = new Receiver();
     }
 
     @Override
@@ -72,6 +81,7 @@ public class GrayscaleConditionController implements ConditionalCardController {
     public void onActionClick() {
         // Turn off grayscale
         mColorDisplayManager.setSaturationLevel(100 /* staturationLevel */);
+        sendBroadcast();
         mConditionManager.onConditionChanged();
     }
 
@@ -93,11 +103,27 @@ public class GrayscaleConditionController implements ConditionalCardController {
 
     @Override
     public void startMonitoringStateChange() {
-
+        mAppContext.registerReceiver(mReceiver, GRAYSCALE_CHANGED_FILTER,
+                Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, null /* scheduler */);
     }
 
     @Override
     public void stopMonitoringStateChange() {
+        mAppContext.unregisterReceiver(mReceiver);
+    }
 
+    private void sendBroadcast() {
+        final Intent intent = new Intent();
+        intent.setAction(ACTION_GRAYSCALE_CHANGED);
+        mAppContext.sendBroadcast(intent, Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS);
+    }
+
+    public class Receiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (ACTION_GRAYSCALE_CHANGED.equals(intent.getAction())) {
+                mConditionManager.onConditionChanged();
+            }
+        }
     }
 }
