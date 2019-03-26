@@ -43,7 +43,6 @@ public class HideNonSystemOverlayMixinTest {
 
     @Before
     public void setUp() {
-        RuntimeEnvironment.application.setTheme(R.style.Theme_AppCompat);
         mActivityController = Robolectric.buildActivity(TestActivity.class);
     }
 
@@ -72,6 +71,7 @@ public class HideNonSystemOverlayMixinTest {
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            setTheme(R.style.Theme_AppCompat);
             getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
         }
     }
