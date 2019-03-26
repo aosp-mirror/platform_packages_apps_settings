@@ -98,8 +98,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     @Override
     public void bindView(RecyclerView.ViewHolder holder, ContextualCard card) {
         final Uri uri = card.getSliceUri();
-        //TODO(b/120629936): Take this out once blank card issue is fixed.
-        Log.d(TAG, "bindView - uri = " + uri);
 
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
             Log.w(TAG, "Invalid uri, skipping slice: " + uri);
@@ -121,10 +119,8 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                 mContext.getContentResolver().notifyChange(CardContentProvider.REFRESH_CARD_URI,
                         null);
                 return;
-            } else {
-                //TODO(b/120629936): Take this out once blank card issue is fixed.
-                Log.d(TAG, "Slice callback - uri = " + slice.getUri());
             }
+
             switch (holder.getItemViewType()) {
                 case VIEW_TYPE_DEFERRED_SETUP:
                     mDeferredSetupCardHelper.bindView(holder, card, slice);
