@@ -17,10 +17,15 @@
 package com.android.settings.deviceinfo.firmwareversion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
@@ -29,6 +34,9 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
 
     private static final String TAG = "MainlineModuleControl";
 
+    @VisibleForTesting
+    static final Intent MODULE_UPDATE_INTENT =
+            new Intent("android.settings.MODULE_UPDATE_SETTINGS");
     private final PackageManager mPackageManager;
 
     private String mModuleVersion;
@@ -62,6 +70,20 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
                 Log.e(TAG, "Failed to get mainline version.", e);
                 mModuleVersion = null;
             }
+        }
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        // Confirm MODULE_UPDATE_INTENT is handleable, and set it to Preference.
+        final ResolveInfo resolved =
+                mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0 /* flags */);
+        if (resolved != null) {
+            preference.setIntent(MODULE_UPDATE_INTENT);
+        } else {
+            preference.setIntent(null);
         }
     }
 
