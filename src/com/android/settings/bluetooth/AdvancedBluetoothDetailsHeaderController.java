@@ -62,6 +62,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     final Map<String, Bitmap> mIconCache;
     private CachedBluetoothDevice mCachedDevice;
+    private BluetoothDevice mBluetoothDevice;
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
     @VisibleForTesting
@@ -102,6 +103,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     @Override
     public void onStart() {
+        if (!isAvailable()) {
+            return;
+        }
         mCachedDevice.registerCallback(this::onDeviceAttributesChanged);
         mBluetoothAdapter.registerMetadataListener(mCachedDevice.getDevice(), mMetadataListener,
                 mHandler);
@@ -109,6 +113,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     @Override
     public void onStop() {
+        if (!isAvailable()) {
+            return;
+        }
         mCachedDevice.unregisterCallback(this::onDeviceAttributesChanged);
         mBluetoothAdapter.unregisterMetadataListener(mCachedDevice.getDevice());
 
@@ -123,6 +130,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     public void init(CachedBluetoothDevice cachedBluetoothDevice) {
         mCachedDevice = cachedBluetoothDevice;
+        mBluetoothDevice = mCachedDevice.getDevice();
     }
 
     @VisibleForTesting
