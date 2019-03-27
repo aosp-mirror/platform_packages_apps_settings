@@ -53,6 +53,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -77,7 +78,6 @@ import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -99,7 +99,6 @@ import java.util.stream.Collectors;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDevicePolicyManager.class, ShadowEntityHeaderController.class})
-@Ignore("b/129292549")
 public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;
@@ -274,6 +273,11 @@ public class WifiDetailPreferenceControllerTest {
         when(mockIconInjector.getIcon(anyInt())).thenReturn(new ColorDrawable());
 
         setupMockedPreferenceScreen();
+
+        // Disable saved network detail page feature for this test
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, false);
+        when(mockAccessPoint.isActive()).thenReturn(true);
+
         mController = newWifiDetailPreferenceController();
     }
 
@@ -947,6 +951,12 @@ public class WifiDetailPreferenceControllerTest {
         when(pref.setButton3Enabled(anyBoolean())).thenReturn(pref);
         when(pref.setButton3Visible(anyBoolean())).thenReturn(pref);
         when(pref.setButton3OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        when(pref.setButton4Text(anyInt())).thenReturn(pref);
+        when(pref.setButton4Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton4Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton4Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton4OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         return pref;
     }
