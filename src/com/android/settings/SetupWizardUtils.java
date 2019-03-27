@@ -30,40 +30,56 @@ public class SetupWizardUtils {
         if (theme == null) {
             theme = SetupWizardProperties.theme().orElse("");
         }
+        // TODO(yukl): Move to ThemeResolver and add any additional required attributes in
+        // onApplyThemeResource using Theme overlays
         if (theme != null) {
-            switch (theme) {
-                case ThemeHelper.THEME_GLIF_V3_LIGHT:
-                    return R.style.GlifV3Theme_Light;
-                case ThemeHelper.THEME_GLIF_V3:
-                    return R.style.GlifV3Theme;
-                case ThemeHelper.THEME_GLIF_V2_LIGHT:
-                    return R.style.GlifV2Theme_Light;
-                case ThemeHelper.THEME_GLIF_V2:
-                    return R.style.GlifV2Theme;
-                case ThemeHelper.THEME_GLIF_LIGHT:
-                    return R.style.GlifTheme_Light;
-                case ThemeHelper.THEME_GLIF:
-                    return R.style.GlifTheme;
+            if (WizardManagerHelper.isAnySetupWizard(intent)) {
+                switch (theme) {
+                    case ThemeHelper.THEME_GLIF_V3_LIGHT:
+                        return R.style.GlifV3Theme_Light;
+                    case ThemeHelper.THEME_GLIF_V3:
+                        return R.style.GlifV3Theme;
+                    case ThemeHelper.THEME_GLIF_V2_LIGHT:
+                        return R.style.GlifV2Theme_Light;
+                    case ThemeHelper.THEME_GLIF_V2:
+                        return R.style.GlifV2Theme;
+                    case ThemeHelper.THEME_GLIF_LIGHT:
+                        return R.style.GlifTheme_Light;
+                    case ThemeHelper.THEME_GLIF:
+                        return R.style.GlifTheme;
+                }
+            } else {
+                switch (theme) {
+                    case ThemeHelper.THEME_GLIF_V3_LIGHT:
+                    case ThemeHelper.THEME_GLIF_V3:
+                        return R.style.GlifV3Theme;
+                    case ThemeHelper.THEME_GLIF_V2_LIGHT:
+                    case ThemeHelper.THEME_GLIF_V2:
+                        return R.style.GlifV2Theme;
+                    case ThemeHelper.THEME_GLIF_LIGHT:
+                    case ThemeHelper.THEME_GLIF:
+                        return R.style.GlifTheme;
+                }
             }
         }
-        return R.style.GlifTheme_Light;
+        return R.style.GlifTheme;
     }
 
     public static int getTransparentTheme(Intent intent) {
         final int suwTheme = getTheme(intent);
-        int wifiDialogTheme = R.style.GlifV2Theme_Light_Transparent;
+        int transparentTheme = R.style.GlifV2Theme_Light_Transparent;
         if (suwTheme == R.style.GlifV3Theme) {
-            wifiDialogTheme = R.style.GlifV3Theme_Transparent;
+            transparentTheme = R.style.GlifV3Theme_Transparent;
         } else if (suwTheme == R.style.GlifV3Theme_Light) {
-            wifiDialogTheme = R.style.GlifV3Theme_Light_Transparent;
+            transparentTheme = R.style.GlifV3Theme_Light_Transparent;
         } else if (suwTheme == R.style.GlifV2Theme) {
-            wifiDialogTheme = R.style.GlifV2Theme_Transparent;
+            transparentTheme = R.style.GlifV2Theme_Transparent;
         } else if (suwTheme == R.style.GlifTheme_Light) {
-            wifiDialogTheme = R.style.SetupWizardTheme_Light_Transparent;
+            transparentTheme = R.style.SetupWizardTheme_Light_Transparent;
         } else if (suwTheme == R.style.GlifTheme) {
-            wifiDialogTheme = R.style.SetupWizardTheme_Transparent;
+            transparentTheme = R.style.SetupWizardTheme_Transparent;
         }
-        return wifiDialogTheme;
+        return transparentTheme;
     }
 
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {
