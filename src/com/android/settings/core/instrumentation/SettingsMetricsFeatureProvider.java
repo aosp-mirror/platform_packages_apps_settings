@@ -16,6 +16,8 @@
 
 package com.android.settings.core.instrumentation;
 
+import android.content.Context;
+
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class SettingsMetricsFeatureProvider extends MetricsFeatureProvider {
@@ -23,5 +25,6 @@ public class SettingsMetricsFeatureProvider extends MetricsFeatureProvider {
     protected void installLogWriters() {
         super.installLogWriters();
         mLoggerWriters.add(new StatsLogWriter());
+        mLoggerWriters.add(new SettingsIntelligenceLogWriter());
     }
 }
