@@ -16,6 +16,10 @@
 
 package com.android.settings.privacy;
 
+import static android.Manifest.permission_group.CAMERA;
+import static android.Manifest.permission_group.LOCATION;
+import static android.Manifest.permission_group.MICROPHONE;
+
 import static com.android.settingslib.widget.BarChartPreference.MAXIMUM_BAR_VIEWS;
 
 import static java.util.concurrent.TimeUnit.DAYS;
@@ -131,8 +135,28 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
     @Override
     public void onPermissionUsageResult(@NonNull List<RuntimePermissionUsageInfo> usageInfos) {
-        usageInfos.sort(Comparator.comparingInt(
-                RuntimePermissionUsageInfo::getAppAccessCount).reversed());
+        usageInfos.sort((x, y) -> {
+            int usageDiff = y.getAppAccessCount() - x.getAppAccessCount();
+            if (usageDiff != 0) {
+                return usageDiff;
+            }
+            String xName = x.getName();
+            String yName = y.getName();
+            if (xName.equals(LOCATION)) {
+                return -1;
+            } else if (yName.equals(LOCATION)) {
+                return 1;
+            } else if (xName.equals(MICROPHONE)) {
+                return -1;
+            } else if (yName.equals(MICROPHONE)) {
+                return 1;
+            } else if (xName.equals(CAMERA)) {
+                return -1;
+            } else if (yName.equals(CAMERA)) {
+                return 1;
+            }
+            return x.getName().compareTo(y.getName());
+        });
 
         // If the result is different, we need to update bar views.
         if (!areSamePermissionGroups(usageInfos)) {
