@@ -162,6 +162,7 @@ public class Settings extends SettingsActivity {
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
+    public static class MobileNetworkListActivity extends SettingsActivity {}
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}
