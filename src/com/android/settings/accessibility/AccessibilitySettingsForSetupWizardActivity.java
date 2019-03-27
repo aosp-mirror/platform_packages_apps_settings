@@ -34,14 +34,6 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     private static final String SAVE_KEY_TITLE = "activity_title";
 
     @Override
-    protected void onCreate(Bundle savedState) {
-        super.onCreate(savedState);
-
-        // Finish configuring the content view.
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle savedState) {
         savedState.putCharSequence(SAVE_KEY_TITLE, getTitle());
         super.onSaveInstanceState(savedState);
