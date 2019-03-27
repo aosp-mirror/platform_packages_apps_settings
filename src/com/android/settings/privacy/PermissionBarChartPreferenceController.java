@@ -163,12 +163,13 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
         for (int index = 0; index < barViewInfos.length; index++) {
             final RuntimePermissionUsageInfo permissionGroupInfo = usageInfos.get(index);
+            final int count = permissionGroupInfo.getAppAccessCount();
+            final CharSequence permLabel = getPermissionGroupLabel(permissionGroupInfo.getName());
 
             barViewInfos[index] = new BarViewInfo(
-                    getPermissionGroupIcon(permissionGroupInfo.getName()),
-                    permissionGroupInfo.getAppAccessCount(),
-                    R.string.storage_detail_apps,
-                    getPermissionGroupLabel(permissionGroupInfo.getName()));
+                    getPermissionGroupIcon(permissionGroupInfo.getName()), count, permLabel,
+                    mContext.getResources().getQuantityString(R.plurals.permission_bar_chart_label,
+                            count, count), permLabel);
 
             // Set the click listener for each bar view.
             // The listener will navigate user to permission usage app.
