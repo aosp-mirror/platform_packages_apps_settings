@@ -32,7 +32,6 @@ import com.android.settingslib.testutils.DrawableTestHelper;
 
 import com.google.android.setupdesign.GlifLayout;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -93,7 +92,6 @@ public class ChooseLockPatternTest {
 
     @Config(qualifiers = "sw400dp")
     @Test
-    @Ignore("b/129342100")
     public void fingerprintExtraSet_shouldDisplayFingerprintIcon() {
         ChooseLockPattern activity = createActivity(true);
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
@@ -109,7 +107,7 @@ public class ChooseLockPatternTest {
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
                 activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
 
-        View iconView = fragment.getView().findViewById(R.id.suc_layout_icon);
+        View iconView = fragment.getView().findViewById(R.id.sud_layout_icon);
         assertThat(iconView.getVisibility()).isEqualTo(View.GONE);
     }
 
