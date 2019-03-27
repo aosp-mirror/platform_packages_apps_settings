@@ -140,6 +140,8 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
                 context);
         privacyController.setWifiConfiguration(mAccessPoint.getConfig());
         privacyController.setIsEphemeral(mAccessPoint.isEphemeral());
+        privacyController.setIsPasspoint(
+                mAccessPoint.isPasspoint() || mAccessPoint.isPasspointConfig());
         controllers.add(privacyController);
 
         return controllers;
