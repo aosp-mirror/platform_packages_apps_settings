@@ -3042,9 +3042,8 @@
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.BottomDialog"
+            android:documentLaunchMode="always"
             android:excludeFromRecents="true"
-            android:launchMode="singleTop"
-            android:taskAffinity=".panel.SettingsPanelActivity"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />
