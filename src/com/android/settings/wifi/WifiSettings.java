@@ -41,6 +41,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -57,6 +58,7 @@ import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
@@ -960,8 +962,10 @@ public class WifiSettings extends RestrictedSettingsFragment
     private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
         final AccessPoint accessPoint = pref.getAccessPoint();
         final Context context = getContext();
-        final CharSequence title = SavedAccessPointsWifiSettings.usingDetailsFragment(context) ?
-                accessPoint.getTitle() : context.getText(R.string.pref_title_network_details);
+        final CharSequence title =
+                FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_DATAUSAGE_HEADER)
+                        ? accessPoint.getTitle()
+                        : context.getText(R.string.pref_title_network_details);
 
         new SubSettingLauncher(getContext())
                 .setTitleText(title)
