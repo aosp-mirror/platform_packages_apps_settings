@@ -78,7 +78,7 @@ public class SliceFullCardRendererHelperTest {
     public void bindView_shouldSetScrollableToFalse() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
 
-        mHelper.bindView(viewHolder, buildContextualCard(), buildSlice(), Collections.emptySet());
+        mHelper.bindView(viewHolder, buildContextualCard(), buildSlice());
 
         assertThat(((SliceViewHolder) viewHolder).sliceView.isScrollable()).isFalse();
     }
@@ -88,7 +88,7 @@ public class SliceFullCardRendererHelperTest {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final ContextualCard card = buildContextualCard();
 
-        mHelper.bindView(viewHolder, card, buildSlice(), Collections.emptySet());
+        mHelper.bindView(viewHolder, card, buildSlice());
 
         assertThat(((SliceViewHolder) viewHolder).sliceView.getTag()).isEqualTo(card.getSliceUri());
     }
@@ -97,7 +97,7 @@ public class SliceFullCardRendererHelperTest {
     public void bindView_shouldSetModeToLarge() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
 
-        mHelper.bindView(viewHolder, buildContextualCard(), buildSlice(), Collections.emptySet());
+        mHelper.bindView(viewHolder, buildContextualCard(), buildSlice());
 
         assertThat(((SliceViewHolder) viewHolder).sliceView.getMode()).isEqualTo(
                 SliceView.MODE_LARGE);
@@ -107,7 +107,7 @@ public class SliceFullCardRendererHelperTest {
     public void bindView_shouldSetSlice() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
 
-        mHelper.bindView(viewHolder, buildContextualCard(), buildSlice(), Collections.emptySet());
+        mHelper.bindView(viewHolder, buildContextualCard(), buildSlice());
 
         assertThat(((SliceViewHolder) viewHolder).sliceView.getSlice().getUri()).isEqualTo(
                 TEST_SLICE_URI);

@@ -68,7 +68,7 @@ class SliceDeferredSetupCardRendererHelper {
             final ContextualCardFeatureProvider contextualCardFeatureProvider =
                     FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
             contextualCardFeatureProvider.logContextualCardClick(card, 0 /* row */,
-                    EventInfo.ACTION_TYPE_CONTENT);
+                    EventInfo.ACTION_TYPE_CONTENT, view.getAdapterPosition());
         });
     }
 
