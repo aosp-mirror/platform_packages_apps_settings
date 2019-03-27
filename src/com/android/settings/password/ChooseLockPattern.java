@@ -479,7 +479,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     R.layout.choose_lock_pattern, container, false);
             layout.setHeaderText(getActivity().getTitle());
             if (getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
-                View iconView = layout.findViewById(R.id.suc_layout_icon);
+                View iconView = layout.findViewById(R.id.sud_layout_icon);
                 if (iconView != null) {
                     iconView.setVisibility(View.GONE);
                 }
