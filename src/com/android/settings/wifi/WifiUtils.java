@@ -198,7 +198,7 @@ public class WifiUtils {
                     config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
                     config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
                             .BIP_GMAC_256);
-                    config.allowedSuiteBCiphers.set(WifiConfiguration.SuiteBCipher.ECDHE_RSA);
+                    // allowedSuiteBCiphers will be set according to certificate type
                 }
 
                 if (!TextUtils.isEmpty(password)) {

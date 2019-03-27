@@ -2620,8 +2620,6 @@
     <string name="sound_effects_enable_title">Tap sounds</string>
     <!-- Sound settings screen, setting check box label -->
     <string name="lock_sounds_enable_title">Screen lock sound</string>
-    <!-- Sound settings screen, setting check box label -->
-    <string name="haptic_feedback_enable_title">Vibrate on tap</string>
     <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
     <string name="audio_record_proc_title">Noise cancellation</string>
     <!-- Volume description for media volume -->
@@ -5662,12 +5660,6 @@
     <string name="battery_saver_schedule_settings_title">Set a schedule</string>
 
     <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
-    <string name="battery_saver_sticky_title">Keep battery saver on</string>
-
-    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description">Battery saver will stay on even after device is fully charged</string>
-
-    <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
     <string name="battery_saver_sticky_title_new">Turn off when fully charged</string>
 
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
@@ -6781,6 +6773,24 @@
     <string name="help_uri_notifications" translatable="false"></string>
     <!-- Help URI, Apps [DO NOT TRANSLATE] -->
     <string name="help_uri_apps" translatable="false"></string>
+    <!-- Help URI, manage apps storage [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_storage" translatable="false"></string>
+    <!-- Help URI, manage apps power [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_high_power" translatable="false"></string>
+    <!-- Help URI, manage apps overlay [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_overlay" translatable="false"></string>
+    <!-- Help URI, manage apps write settings [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_write_settings" translatable="false"></string>
+    <!-- Help URI, manage apps manage sources [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_manage_sources" translatable="false"></string>
+    <!-- Help URI, manage apps games [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_games" translatable="false"></string>
+    <!-- Help URI, manage apps movies [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_movies" translatable="false"></string>
+    <!-- Help URI, manage apps photography [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_photography" translatable="false"></string>
+    <!-- Help URI, manage apps wifi access [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_wifi_access" translatable="false"></string>
     <!-- Help URI, Storage [DO NOT TRANSLATE] -->
     <string name="help_uri_storage" translatable="false"></string>
     <!-- Help URI, Accessibility [DO NOT TRANSLATE] -->
@@ -6921,9 +6931,15 @@
     <!-- Access point names title.  [CHAR LIMIT=50] -->
     <string name="access_point_names">Access point names</string>
     <!-- Enhaced 4G LTE Mode title.  [CHAR LIMIT=50] -->
-    <string name="enhanced_4g_lte_mode_title">Enhanced 4G LTE Mode</string>
+    <string name="enhanced_4g_lte_mode_title">VoLTE</string>
+    <!-- Enhaced 4G LTE Mode title for carriers who want to show Advanced Calling.  [CHAR LIMIT=50] -->
+    <string name="enhanced_4g_lte_mode_title_advanced_calling">Advanced Calling</string>
+    <!-- Enhaced 4G LTE Mode title for carriers who want to show 4G Calling.  [CHAR LIMIT=50] -->
+    <string name="enhanced_4g_lte_mode_title_4g_calling">4G Calling</string>
     <!-- Enhaced 4G LTE Mode summary.  [CHAR LIMIT=100] -->
-    <string name="enhanced_4g_lte_mode_summary">Use LTE data to enhance voice and communications (Recommended)</string>
+    <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
+    <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
+    <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
@@ -7118,6 +7134,24 @@
 
     <!--Search Keywords [CHAR LIMIT=NONE]-->
     <string name="keywords_wifi">wifi, wi-fi, network connection, internet, wireless, data, wi fi</string>
+    <!-- Search keyword for "Open Network Notification" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_wifi_notify_open_networks">Wi\u2011Fi notification, wifi notification</string>
+    <!-- Search keyword for "Adaptive brightness" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_auto_brightness">Auto brightness</string>
+    <!-- Search keyword for "Vibrate on touch" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_vibrate_on_touch">Stop vibration, tap, keyboard</string>
+    <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_time_format">Use 24-hour format</string>
+    <!-- Search keyword for "Files" settings under Settings > Storage. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_storage_files">Download</string>
+    <!-- Search keyword for "Default Apps" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_app_default">Open with</string>
+    <!-- Search keyword for "App info" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_applications_settings">Applications</string>
+    <!-- Search keyword for "Time zone" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_time_zone">timezone</string>
+    <!-- Search keyword for "Display over other apps" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_draw_overlay">Chat head</string>
     <string name="keywords_change_wifi_state">wifi, wi-fi, toggle, control</string>
     <string name="keywords_more_default_sms_app">text message, texting, messages, messaging, default</string>
     <string name="keywords_more_mobile_networks">cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte</string>
@@ -7128,7 +7162,8 @@
     <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
-    <string name="keywords_display_cast_screen">project, cast</string>
+    <!-- Search keyword for "Cast" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_display_cast_screen">project, cast, Screen mirroring, Screen sharing, mirroring, share screen, screen casting</string>
     <string name="keywords_storage">space, disk, hard drive, device usage</string>
     <string name="keywords_battery">power usage, charge</string>
     <string name="keywords_spell_checker">spelling, dictionary, spellcheck, auto-correct</string>
@@ -7181,7 +7216,7 @@
     <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
 
     <!-- Search keyword for lock screen notification setting [CHAR_LIMIT=NONE] -->
-    <string name="keywords_lock_screen_notif">lock screen notification</string>
+    <string name="keywords_lock_screen_notif">lock screen notification, notifications</string>
 
     <!-- Search keyword for face settings. -->
     <string name="keywords_face_settings">face</string>
@@ -7368,6 +7403,12 @@
     <!-- Sound: Other sounds: Title for the option enabling boot sounds. [CHAR LIMIT=30] -->
     <string name="boot_sounds_title">Power on sounds</string>
 
+    <!-- Setting title for controlling how caption text display in real time [CHAR LIMIT=40]-->
+    <string name="live_caption_title">Live Caption</string>
+
+    <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
+    <string name="live_caption_summary">Automatically caption media</string>
+
     <!-- Sound: Summary for the Do not Disturb option when there is no automatic rules turned on. [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_summary_off">Never</string>
 
@@ -7387,7 +7428,7 @@
     <string name="zen_mode_behavior_settings_title">Exceptions</string>
 
     <!-- Do not disturb: Title for the dnd duration setting (user can specify how long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=30] -->
-    <string name="zen_mode_duration_settings_title">Duration</string>
+    <string name="zen_mode_duration_settings_title">Default duration</string>
 
     <!-- Do not disturb: Instructions indicating what types of sounds can bypass DND. [CHAR LIMIT=52] -->
     <string name="zen_mode_behavior_allow_title">Allow sounds and vibrations from</string>
@@ -10534,8 +10575,6 @@
     <!-- Message informs the user that has no SIM card in personalized Settings [CHAR LIMIT=30] -->
     <string name="no_sim_card">No SIM card</string>
 
-    <!-- Carrier variant of Enhaced 4G LTE Mode title.  [CHAR LIMIT=50] -->
-    <string name="enhanced_4g_lte_mode_title_variant">Advanced Calling</string>
     <!-- The following strings are summaries for preferred network modes in Mobile network settings,
      and have a character limit of 100 -->
     <!-- WCDMA preferred [CHAR LIMIT=NONE] -->

@@ -35,8 +35,6 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class AppCheckBoxPreferenceTest {
 
-    private static final String SUMMARY = "summary info";
-
     private Context mContext;
     private AppCheckBoxPreference mPreference;
     private AppCheckBoxPreference mAttrPreference;
@@ -55,26 +53,6 @@ public class AppCheckBoxPreferenceTest {
     public void testGetLayoutResource() {
         assertThat(mPreference.getLayoutResource()).isEqualTo(R.layout.preference_app);
         assertThat(mAttrPreference.getLayoutResource()).isEqualTo(R.layout.preference_app);
-    }
-
-    @Test
-    public void onBindViewHolder_noSummary_layoutGone() {
-        mPreference.setSummary("");
-
-        mPreference.onBindViewHolder(mPreferenceViewHolder);
-
-        assertThat(mPreferenceViewHolder.findViewById(R.id.summary_container).getVisibility())
-                .isEqualTo(View.GONE);
-    }
-
-    @Test
-    public void onBindViewHolder_hasSummary_layoutVisible() {
-        mPreference.setSummary(SUMMARY);
-
-        mPreference.onBindViewHolder(mPreferenceViewHolder);
-
-        assertThat(mPreferenceViewHolder.findViewById(R.id.summary_container).getVisibility())
-                .isEqualTo(View.VISIBLE);
     }
 
     @Test

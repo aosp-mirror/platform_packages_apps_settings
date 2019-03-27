@@ -16,11 +16,11 @@
 
 package com.android.settings.fuelgauge.batterysaver;
 
-import static com.android.settings.fuelgauge.batterysaver.BatterySaverStickyPreferenceController.LOW_POWER_STICKY_AUTO_DISABLE_ENABLED;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.provider.Settings.Global;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,21 +43,21 @@ public class BatterySaverStickyPreferenceControllerTest {
 
     private int getAutoDisableSetting() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                LOW_POWER_STICKY_AUTO_DISABLE_ENABLED,
+            Global.LOW_POWER_MODE_STICKY_AUTO_DISABLE_ENABLED,
                 1);
     }
 
     @Test
-    public void testOnPreferenceChange_turnOnKeepActive_autoDisableOff() {
-        mController.onPreferenceChange(null, true);
+    public void testOnPreferenceChange_turnOnAutoOff_autoDisableOn() {
+        mController.setChecked(true);
         final int isOn = getAutoDisableSetting();
-        assertThat(isOn).isEqualTo(0);
+        assertThat(isOn).isEqualTo(1);
     }
 
     @Test
-    public void testOnPreferenceChange_TurnOffKeepActive_autoDisableOff() {
-        mController.onPreferenceChange(null, false);
+    public void testOnPreferenceChange_TurnOffAutoOff_autoDisableOff() {
+        mController.setChecked(false);
         final int isOn = getAutoDisableSetting();
-        assertThat(isOn).isEqualTo(1);
+        assertThat(isOn).isEqualTo(0);
     }
 }

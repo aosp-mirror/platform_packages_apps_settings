@@ -27,8 +27,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
-public class DarkUIPreferenceController extends BasePreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class DarkUIPreferenceController extends BasePreferenceController {
 
     private UiModeManager mUiModeManager;
 
@@ -48,58 +47,8 @@ public class DarkUIPreferenceController extends BasePreferenceController
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        int value = mUiModeManager.getNightMode();
-        ListPreference preference = screen.findPreference(getPreferenceKey());
-        preference.setValue(modeToString(value));
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        mUiModeManager.setNightMode(modeToInt((String) newValue));
-        refreshSummary(preference);
-        return true;
-    }
-
-    @Override
     public CharSequence getSummary() {
-        return modeToDescription(mUiModeManager.getNightMode());
-    }
-
-    private String modeToDescription(int mode) {
-        String[] values = mContext.getResources().getStringArray(R.array.dark_ui_mode_entries);
-        switch (mode) {
-            case UiModeManager.MODE_NIGHT_YES:
-                return values[0];
-            case UiModeManager.MODE_NIGHT_NO:
-            case UiModeManager.MODE_NIGHT_AUTO:
-            default:
-                return values[1];
-
-        }
-    }
-
-    private String modeToString(int mode) {
-        switch (mode) {
-            case UiModeManager.MODE_NIGHT_YES:
-                return "yes";
-            case UiModeManager.MODE_NIGHT_NO:
-            case UiModeManager.MODE_NIGHT_AUTO:
-            default:
-                return "no";
-
-        }
-    }
-
-    private int modeToInt(String mode) {
-        switch (mode) {
-            case "yes":
-                return UiModeManager.MODE_NIGHT_YES;
-            case "no":
-            case "auto":
-            default:
-                return UiModeManager.MODE_NIGHT_NO;
-        }
+        return DarkUISettingsRadioButtonsController.modeToDescription(
+                mContext, mUiModeManager.getNightMode());
     }
 }

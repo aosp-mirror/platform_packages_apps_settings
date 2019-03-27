@@ -17,6 +17,7 @@
 package com.android.settings.development.featureflags;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.FeatureFlagUtils;
 
 import androidx.preference.PreferenceGroup;
@@ -39,7 +40,7 @@ public class FeatureFlagsPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return Build.IS_DEBUGGABLE ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

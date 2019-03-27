@@ -139,7 +139,7 @@ public class WifiSliceTest {
 
     private AccessPoint createAccessPoint(String name, boolean active, boolean reachable) {
         final AccessPoint accessPoint = mock(AccessPoint.class);
-        doReturn(name).when(accessPoint).getConfigName();
+        doReturn(name).when(accessPoint).getTitle();
         doReturn(active).when(accessPoint).isActive();
         doReturn(reachable).when(accessPoint).isReachable();
         if (active) {
