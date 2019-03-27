@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate.DismissalItemTouchHelperListener;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
-        implements ContextualCardUpdateListener {
+        implements ContextualCardUpdateListener, DismissalItemTouchHelperListener {
     static final int SPAN_COUNT = 2;
 
     private static final String TAG = "ContextualCardsAdapter";
@@ -135,5 +136,10 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         //TODO(b/119465242): flickering conditional cards after collapsing/expanding
+    }
+
+    @Override
+    public void onSwiped(int position) {
+
     }
 }
