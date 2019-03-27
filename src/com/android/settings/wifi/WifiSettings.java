@@ -564,7 +564,7 @@ public class WifiSettings extends RestrictedSettingsFragment
              */
             switch (WifiUtils.getConnectingType(mSelectedAccessPoint)) {
                 case WifiUtils.CONNECT_TYPE_OSU_PROVISION:
-                    mSelectedAccessPoint.startOsuProvisioning();
+                    mSelectedAccessPoint.startOsuProvisioning(mConnectListener);
                     mClickedConnect = true;
                     break;
 
