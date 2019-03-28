@@ -115,6 +115,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     @VisibleForTesting
     static final String KEY_SECURITY_PREF = "security";
     @VisibleForTesting
+    static final String KEY_SSID_PREF = "ssid";
+    @VisibleForTesting
     static final String KEY_MAC_ADDRESS_PREF = "mac_address";
     @VisibleForTesting
     static final String KEY_IP_ADDRESS_PREF = "ip_address";
@@ -170,6 +172,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private Preference mRxLinkSpeedPref;
     private Preference mFrequencyPref;
     private Preference mSecurityPref;
+    private Preference mSsidPref;
     private Preference mMacAddressPref;
     private Preference mIpAddressPref;
     private Preference mGatewayPref;
@@ -399,6 +402,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mFrequencyPref = screen.findPreference(KEY_FREQUENCY_PREF);
         mSecurityPref = screen.findPreference(KEY_SECURITY_PREF);
 
+        mSsidPref = screen.findPreference(KEY_SSID_PREF);
         mMacAddressPref = screen.findPreference(KEY_MAC_ADDRESS_PREF);
         mIpAddressPref = screen.findPreference(KEY_IP_ADDRESS_PREF);
         mGatewayPref = screen.findPreference(KEY_GATEWAY_PREF);
@@ -497,6 +501,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         refreshRxSpeed();
         // IP related information
         refreshIpLayerInfo();
+        // SSID Pref
+        refreshSsid();
         // MAC Address Pref
         refreshMacAddress();
     }
@@ -643,6 +649,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mRxLinkSpeedPref.setVisible(rxLinkSpeedMbps >= 0);
         mRxLinkSpeedPref.setSummary(mContext.getString(
                 R.string.rx_link_speed, mWifiInfo.getRxLinkSpeedMbps()));
+    }
+
+    private void refreshSsid() {
+        if (mAccessPoint.isPasspoint() || mAccessPoint.isOsuProvider()) {
+            mSsidPref.setVisible(true);
+            mSsidPref.setSummary(mAccessPoint.getSsidStr());
+        } else {
+            mSsidPref.setVisible(false);
+        }
     }
 
     private void refreshMacAddress() {
