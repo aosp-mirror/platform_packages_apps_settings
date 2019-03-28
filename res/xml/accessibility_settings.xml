@@ -58,12 +58,10 @@
             android:title="@string/screen_zoom_title"
             settings:searchable="false"/>
 
-        <ListPreference
+        <Preference
             android:key="dark_ui_mode_accessibility"
+            android:fragment="com.android.settings.display.DarkUISettings"
             android:title="@string/dark_ui_mode"
-            android:dialogTitle="@string/dark_ui_mode_title"
-            android:entries="@array/dark_ui_mode_entries"
-            android:entryValues="@array/dark_ui_mode_values"
             settings:searchable="false" />
 
         <Preference

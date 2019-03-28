@@ -156,7 +156,7 @@ public class AccessibilitySettingsTest {
 
     @Test
     public void testDarkUIModePreferenceSummary_shouldUpdateSummary() {
-        final ListPreference darkUIModePreference = new ListPreference(mContext);
+        final Preference darkUIModePreference = new Preference(mContext);
         final DarkUIPreferenceController mController;
         doReturn(darkUIModePreference).when(mSettings).findPreference(
             DARK_UI_MODE_PREFERENCE);

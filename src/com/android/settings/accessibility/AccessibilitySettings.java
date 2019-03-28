@@ -239,7 +239,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mToggleInversionPreference;
     private ColorInversionPreferenceController mInversionPreferenceController;
     private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
-    private ListPreference mDarkUIModePreference;
+    private Preference mDarkUIModePreference;
     private DarkUIPreferenceController mDarkUIPreferenceController;
 
     private int mLongPressTimeoutDefault;
