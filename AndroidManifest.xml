@@ -620,8 +620,7 @@
 
         <activity
             android:name="Settings$ManageAssistActivity"
-            android:label="@string/assist_and_voice_input_title"
-            android:parentActivityName="Settings">
+            android:label="@string/assist_and_voice_input_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
