@@ -26,13 +26,11 @@
         android:title="@string/summary_placeholder"
         android:selectable="false"
         android:layout="@layout/battery_header"
-        settings:allowDividerBelow="true"
         settings:controller="com.android.settings.fuelgauge.BatteryHeaderPreferenceController" />
 
     <com.android.settings.widget.CardPreference
         android:key="battery_tip"
         android:title="@string/summary_placeholder"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController" />
 
     <Preference
