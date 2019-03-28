@@ -131,6 +131,7 @@ public class NotificationChannelSlice implements CustomSliceable {
     protected final Context mContext;
     @VisibleForTesting
     NotificationBackend mNotificationBackend;
+    private NotificationBackend.AppRow mAppRow;
     private String mPackageName;
     private int mUid;
 
@@ -200,21 +201,12 @@ public class NotificationChannelSlice implements CustomSliceable {
         final String packageName = intent.getStringExtra(PACKAGE_NAME);
         final int uid = intent.getIntExtra(PACKAGE_UID, -1);
         final String channelId = intent.getStringExtra(CHANNEL_ID);
-        final PackageInfo packageInfo = getPackageInfo(packageName);
-        final NotificationBackend.AppRow appRow = mNotificationBackend.loadAppRow(mContext,
-                mContext.getPackageManager(), packageInfo);
-
-        final List<NotificationChannel> notificationChannels = getEnabledChannels(packageName, uid,
-                appRow);
-        for (NotificationChannel channel : notificationChannels) {
-            if (TextUtils.equals(channel.getId(), channelId)) {
-                final int importance = newState ? IMPORTANCE_LOW : IMPORTANCE_NONE;
-                channel.setImportance(importance);
-                channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                mNotificationBackend.updateChannel(packageName, uid, channel);
-                return;
-            }
-        }
+        final NotificationChannel channel = mNotificationBackend.getChannel(packageName, uid,
+                channelId);
+        final int importance = newState ? IMPORTANCE_LOW : IMPORTANCE_NONE;
+        channel.setImportance(importance);
+        channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
+        mNotificationBackend.updateChannel(packageName, uid, channel);
     }
 
     @Override
@@ -287,16 +279,14 @@ public class NotificationChannelSlice implements CustomSliceable {
     private List<ListBuilder.RowBuilder> getNotificationChannelRows(PackageInfo packageInfo,
             IconCompat icon) {
         final List<ListBuilder.RowBuilder> notificationChannelRows = new ArrayList<>();
-        final NotificationBackend.AppRow appRow = mNotificationBackend.loadAppRow(mContext,
-                mContext.getPackageManager(), packageInfo);
         final List<NotificationChannel> enabledChannels = getEnabledChannels(mPackageName, mUid,
-                appRow);
+                mAppRow);
 
         for (NotificationChannel channel : enabledChannels) {
             notificationChannelRows.add(new ListBuilder.RowBuilder()
                     .setTitle(channel.getName())
                     .setSubtitle(NotificationBackend.getSentSummary(
-                            mContext, appRow.sentByChannel.get(channel.getId()), false))
+                            mContext, mAppRow.sentByChannel.get(channel.getId()), false))
                     .setPrimaryAction(buildRowSliceAction(channel, icon))
                     .addEndItem(SliceAction.createToggle(getToggleIntent(channel.getId()),
                             null /* actionTitle */, channel.getImportance() != IMPORTANCE_NONE)));
@@ -407,6 +397,7 @@ public class NotificationChannelSlice implements CustomSliceable {
                     && sentCount > maxSentCount) {
                 maxSentCount = sentCount;
                 maxSentCountPackage = packageInfo;
+                mAppRow = appRow;
             }
         }
 

@@ -272,7 +272,7 @@ public final class ApplicationFeatureProviderImplTest {
 
         // Spy the real context to mock LocationManager.
         Context spyContext = spy(RuntimeEnvironment.application);
-        when(mLocationManager.getLocationControllerExtraPackage()).thenReturn(testLocationHistory);
+        when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(testLocationHistory);
         when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
 
         ReflectionHelpers.setField(mProvider, "mContext", spyContext);

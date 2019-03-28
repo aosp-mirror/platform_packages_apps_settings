@@ -7016,6 +7016,8 @@
     <string name="sim_calls_always_use">Always use this for calls</string>
     <!-- Message for selecting sim for data in settings.  [CHAR LIMIT=40] -->
     <string name="select_sim_for_data">Select a SIM for data</string>
+    <!-- Message for selecting sim for SMS in settings.  [CHAR LIMIT=40] -->
+    <string name="select_sim_for_sms">Select a SIM for SMS</string>
     <!-- Message for switching data SIM; switching takes a while -->
     <string name="data_switch_started">Switching data SIM, this may take up to a minute...</string>
     <!-- Message for selecting sim for call in settings.  [CHAR LIMIT=40] -->
@@ -10924,7 +10926,7 @@
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>
     <!-- Summary for the top level Privacy Settings [CHAR LIMIT=NONE]-->
-    <string name="privacy_dashboard_summary">Permissions, web activity, personal data</string>
+    <string name="privacy_dashboard_summary">Permissions, account activity, personal data</string>
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
     <string name="contextual_card_dismiss_remove">Remove</string>
@@ -10955,17 +10957,15 @@
     <string name="permission_bar_chart_empty_text">0 apps used permissions</string>
 
     <!-- Text for permission bar chart title in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_title">Most-used permissions in last 24 hours</string>
-    <!-- Text for permission bar chart title in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_title_v2">In last 24 hr, apps on this device accessed</string>
+    <string name="permission_bar_chart_title">Permission usage in last 24 hours</string>
 
     <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details">View Permissions Dashboard</string>
+    <string name="permission_bar_chart_details">See all in Dashboard</string>
 
-    <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details_v2">See all permission usage in Dashboard</string>
-    <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details_v3">+ <xliff:g id="permissionCount" example="3">%1$d</xliff:g> other permissions</string>
+    <plurals name="permission_bar_chart_label">
+        <item quantity="one">1 app</item>
+        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> apps</item>
+    </plurals>
 
     <!-- Title for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="accessibility_usage_title">Accessibility usage</string>

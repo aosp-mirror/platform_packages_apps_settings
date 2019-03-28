@@ -174,7 +174,10 @@ public class UserDictionaryListPreferenceController extends BasePreferenceContro
             mScreen.addPreference(createUserDictionaryPreference(null));
         } else {
             for (String locale : localeSet) {
-                mScreen.addPreference(createUserDictionaryPreference(locale));
+                final Preference pref = createUserDictionaryPreference(locale);
+                if (mScreen.findPreference(pref.getKey()) == null) {
+                    mScreen.addPreference(pref);
+                }
             }
         }
     }

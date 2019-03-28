@@ -187,6 +187,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (!ensurePackageInfoAvailable(activity)) {
             return;
         }
+        if (!ensureDisplayableModule(activity)) {
+            return;
+        }
         startListeningToPackageRemove();
 
         setHasOptionsMenu(true);
@@ -260,8 +263,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 new InstantAppButtonsPreferenceController(context, this, packageName, lifecycle);
         controllers.add(mInstantAppButtonPreferenceController);
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
-            (SettingsActivity) getActivity(), this, lifecycle, packageName, mState,
-            REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+                (SettingsActivity) getActivity(), this, lifecycle, packageName, mState,
+                REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
         controllers.add(new AppBatteryPreferenceController(context, this, packageName, lifecycle));
         controllers.add(new AppMemoryPreferenceController(context, this, lifecycle));
@@ -312,6 +315,23 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (mPackageInfo == null) {
             mFinishing = true;
             Log.w(TAG, "Package info not available. Is this package already uninstalled?");
+            activity.finishAndRemoveTask();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Ensures the package is displayable as directed by {@link AppUtils#isHiddenSystemModule}.
+     * If it's not, the fragment will finish.
+     *
+     * @return true if package is displayable.
+     */
+    @VisibleForTesting
+    boolean ensureDisplayableModule(Activity activity) {
+        if (AppUtils.isHiddenSystemModule(activity.getApplicationContext(), mPackageName)) {
+            mFinishing = true;
+            Log.w(TAG, "Package is hidden module, exiting: " + mPackageName);
             activity.finishAndRemoveTask();
             return false;
         }

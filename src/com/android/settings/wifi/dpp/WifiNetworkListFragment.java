@@ -34,7 +34,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.wifi.AddNetworkFragment;
-import com.android.settings.wifi.savedaccesspoints.SavedNetworkComparator;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
@@ -43,6 +42,7 @@ import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WifiNetworkListFragment extends SettingsPreferenceFragment implements
         WifiTracker.WifiListener, AccessPoint.AccessPointListener {
@@ -282,27 +282,38 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             return;
         }
 
-        // TODO(b/128942314): Lists reachable AccessPoints on top of the list
-        final List<AccessPoint> savedAccessPoints =
+        List<AccessPoint> savedAccessPoints =
                 WifiSavedConfigUtils.getAllConfigs(getContext(), mWifiManager);
-        Collections.sort(savedAccessPoints, SavedNetworkComparator.INSTANCE);
+
+        savedAccessPoints = savedAccessPoints.stream()
+                .filter(accessPoint -> isValidForDppConfiguration(accessPoint))
+                .map(accessPoint -> getScannedAccessPointIfAvailable(accessPoint))
+                .sorted((ap1, ap2) -> {
+                    // orders reachable Wi-Fi networks on top
+                    if (ap1.isReachable() && !ap2.isReachable()) {
+                        return -1;
+                    } else if (!ap1.isReachable() && ap2.isReachable()) {
+                        return 1;
+                    }
+
+                    String ap1Title = nullToEmpty(ap1.getTitle());
+                    String ap2Title = nullToEmpty(ap2.getTitle());
+
+                    return ap1Title.compareToIgnoreCase(ap2Title);
+                }).collect(Collectors.toList());
 
         int index = 0;
         mAccessPointsPreferenceCategory.removeAll();
         for (AccessPoint savedAccessPoint : savedAccessPoints) {
-            if (isValidForDppConfiguration(savedAccessPoint)) {
-                // Replaces with an AccessPoint from scanned result for signal information
-                savedAccessPoint = getScannedAccessPointIfAvailable(savedAccessPoint);
-                final AccessPointPreference preference =
-                        createAccessPointPreference(savedAccessPoint);
+            final AccessPointPreference preference =
+                    createAccessPointPreference(savedAccessPoint);
 
-                preference.setOrder(index++);
-                preference.setEnabled(savedAccessPoint.isReachable());
-                savedAccessPoint.setListener(this);
+            preference.setOrder(index++);
+            preference.setEnabled(savedAccessPoint.isReachable());
+            savedAccessPoint.setListener(this);
 
-                preference.refresh();
-                mAccessPointsPreferenceCategory.addPreference(preference);
-            }
+            preference.refresh();
+            mAccessPointsPreferenceCategory.addPreference(preference);
         }
         mAddPreference.setOrder(index);
         mAccessPointsPreferenceCategory.addPreference(mAddPreference);
@@ -312,6 +323,11 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         }
     }
 
+    private String nullToEmpty(String string) {
+        return (string == null) ? "" : string;
+    }
+
+    // Replaces with an AccessPoint from scanned result for signal information
     private AccessPoint getScannedAccessPointIfAvailable(AccessPoint savedAccessPoint) {
         final List<AccessPoint> scannedAccessPoints = mWifiTracker.getAccessPoints();
         final WifiConfiguration savedWifiConfiguration = savedAccessPoint.getConfig();

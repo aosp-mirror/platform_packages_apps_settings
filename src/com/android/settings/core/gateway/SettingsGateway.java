@@ -97,6 +97,7 @@ import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.ApnEditor;
 import com.android.settings.network.ApnSettings;
+import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
@@ -273,7 +274,8 @@ public class SettingsGateway {
             DataUsageList.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
-            BatterySaverScheduleSettings.class.getName()
+            BatterySaverScheduleSettings.class.getName(),
+            MobileNetworkListFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

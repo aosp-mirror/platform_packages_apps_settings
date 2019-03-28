@@ -196,6 +196,19 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name=".Settings$MobileNetworkListActivity"
+                  android:label="@string/network_settings_title"
+                  android:parentActivityName="Settings$NetworkDashboardActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MOBILE_NETWORK_LIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.network.MobileNetworkListFragment"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <activity
             android:name=".Settings$ConnectedDeviceDashboardActivity"
             android:label="@string/connected_devices_dashboard_title"
@@ -1381,7 +1394,7 @@
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
                 android:icon="@drawable/ic_accessibility_suggestion"
                 android:label="@string/vision_settings_title"
-                android:theme="@style/SetupWizardAccessibilityTheme">
+                android:theme="@style/GlifTheme.Light">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3042,9 +3055,8 @@
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.BottomDialog"
+            android:documentLaunchMode="always"
             android:excludeFromRecents="true"
-            android:launchMode="singleTop"
-            android:taskAffinity=".panel.SettingsPanelActivity"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />

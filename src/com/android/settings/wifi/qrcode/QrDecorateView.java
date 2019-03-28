@@ -46,6 +46,7 @@ public class QrDecorateView extends View {
     final private Paint mBackgroundPaint;
 
     final private float mRadius;
+    final private float mInnerRidus;
 
     private Bitmap mMaskBitmap;
     private Canvas mMaskCanvas;
@@ -73,6 +74,9 @@ public class QrDecorateView extends View {
         mFocused = false;
         mRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, CORNER_RADIUS,
                 getResources().getDisplayMetrics());
+        // Inner radius needs to minus stroke width for keeping the width of border consistent.
+        mInnerRidus = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                CORNER_RADIUS - CORNER_STROKE_WIDTH, getResources().getDisplayMetrics());
 
         mCornerColor = context.getResources().getColor(R.color.qr_corner_line_color);
         mFocusedCornerColor = context.getResources().getColor(R.color.qr_focused_corner_line_color);
@@ -111,7 +115,7 @@ public class QrDecorateView extends View {
         // Draw outer corner.
         mMaskCanvas.drawRoundRect(mOuterFrame, mRadius, mRadius, mStrokePaint);
         // Draw inner transparent corner.
-        mMaskCanvas.drawRoundRect(mInnerFrame, mRadius, mRadius, mTransparentPaint);
+        mMaskCanvas.drawRoundRect(mInnerFrame, mInnerRidus, mInnerRidus, mTransparentPaint);
 
         canvas.drawBitmap(mMaskBitmap, 0, 0, mBackgroundPaint);
         super.onDraw(canvas);
@@ -123,7 +127,7 @@ public class QrDecorateView extends View {
         final float cornerLineLength = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 CORNER_LINE_LENGTH, getResources().getDisplayMetrics()) / 2;
         final float strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                CORNER_STROKE_WIDTH, getResources().getDisplayMetrics()) / 2;
+                CORNER_STROKE_WIDTH, getResources().getDisplayMetrics());
 
         mOuterFrame = new RectF(centralX - cornerLineLength, centralY - cornerLineLength,
                 centralX + cornerLineLength, centralY + cornerLineLength);
@@ -131,7 +135,7 @@ public class QrDecorateView extends View {
                 mOuterFrame.right - strokeWidth, mOuterFrame.bottom - strokeWidth);
     }
 
-    // Draws green lines if focued. Otherwise, draws white lines.
+    // Draws green lines if focused. Otherwise, draws white lines.
     public void setFocused(boolean focused) {
         mFocused = focused;
         invalidate();
