@@ -32,7 +32,6 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.webkit.IWebViewUpdateService;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -48,7 +47,6 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
     private final PackageManager mPm;
     private final IPackageManager mIPm;
     private final INotificationManager mNm;
-    private final IWebViewUpdateService mWvus;
     private final NetworkPolicyManager mNpm;
     private final AppOpsManager mAom;
     private final Context mContext;
@@ -61,7 +59,6 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
         mIPm = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
         mNm = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-        mWvus = IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
         mNpm = NetworkPolicyManager.from(context);
         mAom = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
     }
@@ -122,8 +119,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
                     }
                     if (!app.enabled) {
                         if (mPm.getApplicationEnabledSetting(app.packageName)
-                                == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER
-                                && !isNonEnableableFallback(app.packageName)) {
+                                == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
                             mPm.setApplicationEnabledSetting(app.packageName,
                                     PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
                                     PackageManager.DONT_KILL_APP);
@@ -146,13 +142,5 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
                 }
             }
         });
-    }
-
-    private boolean isNonEnableableFallback(String packageName) {
-        try {
-            return mWvus.isFallbackPackage(packageName);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

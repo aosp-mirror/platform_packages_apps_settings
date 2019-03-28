@@ -33,13 +33,10 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 import android.view.View;
-import android.webkit.IWebViewUpdateService;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -438,10 +435,6 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             enabled = false;
         }
 
-        if (isFallbackPackage(mAppEntry.info.packageName)) {
-            enabled = false;
-        }
-
         mButtonsPref.setButton2Enabled(enabled);
     }
 
@@ -464,22 +457,6 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         } else {
             startListeningToPackageRemove();
         }
-    }
-
-    @VisibleForTesting
-    boolean isFallbackPackage(String packageName) {
-        try {
-            IWebViewUpdateService webviewUpdateService =
-                    IWebViewUpdateService.Stub.asInterface(
-                            ServiceManager.getService("webviewupdate"));
-            if (webviewUpdateService.isFallbackPackage(packageName)) {
-                return true;
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-
-        return false;
     }
 
     @VisibleForTesting
