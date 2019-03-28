@@ -258,21 +258,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             mConnectivityManager = getActivity().getSystemService(ConnectivityManager.class);
         }
 
-        mConnectListener = new WifiManager.ActionListener() {
-            @Override
-            public void onSuccess() {
-            }
-
-            @Override
-            public void onFailure(int reason) {
-                Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(activity,
-                            R.string.wifi_failed_connect_message,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
+        mConnectListener = new WifiConnectListener(getActivity());
 
         mSaveListener = new WifiManager.ActionListener() {
             @Override
