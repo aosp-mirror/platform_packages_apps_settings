@@ -16,8 +16,11 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import java.util.List;
+import androidx.slice.Slice;
 
 /** Feature provider for the contextual card feature. */
 public interface ContextualCardFeatureProvider {
+
+    /** Log package when user clicks contextual notification channel card. */
+    void logNotificationPackage(Slice slice);
 }
