@@ -67,9 +67,6 @@ public class SetupWizardUtils {
     }
 
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {
-        toIntent.putExtra(WizardManagerHelper.EXTRA_THEME,
-                fromIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME));
-        toIntent.putExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE,
-                fromIntent.getBooleanExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, false));
+        WizardManagerHelper.copyWizardManagerExtras(fromIntent, toIntent);
     }
 }

@@ -36,12 +36,12 @@ public class SetupWizardUtilsTest {
         Intent fromIntent = new Intent();
         final String theme = "TEST_THEME";
         fromIntent.putExtra(WizardManagerHelper.EXTRA_THEME, theme);
-        fromIntent.putExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, true);
+        fromIntent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
         Intent toIntent = new Intent();
         SetupWizardUtils.copySetupExtras(fromIntent, toIntent);
 
         assertThat(theme).isEqualTo(toIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME));
-        assertThat(toIntent.getBooleanExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, false))
+        assertThat(toIntent.getBooleanExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, false))
                 .isTrue();
     }
 
