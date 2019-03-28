@@ -30,6 +30,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.Settings.SimSettingsActivity;
@@ -45,6 +46,9 @@ public class SimSelectNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (!TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED.equals(intent.getAction())) {
+            return;
+        }
         // Cancel any previous notifications
         cancelNotification(context);
         // Create a notification to tell the user that some defaults are missing
