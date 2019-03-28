@@ -200,6 +200,7 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
             barViewInfos[index].setClickListener((View v) -> {
                 final Intent intent = new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE);
                 intent.putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, permissionGroupInfo.getName());
+                intent.putExtra(Intent.EXTRA_DURATION_MILLIS, DAYS.toMillis(1));
                 mContext.startActivity(intent);
             });
         }
