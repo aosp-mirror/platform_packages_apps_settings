@@ -64,7 +64,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     private final Context mContext;
     private final LifecycleOwner mLifecycleOwner;
     private final ControllerRendererPool mControllerRendererPool;
-    private final Set<ContextualCard> mCardSet;
     private final SliceDeferredSetupCardRendererHelper mDeferredSetupCardHelper;
     private final SliceFullCardRendererHelper mFullCardHelper;
     private final SliceHalfCardRendererHelper mHalfCardHelper;
@@ -75,7 +74,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         mLifecycleOwner = lifecycleOwner;
         mSliceLiveDataMap = new ArrayMap<>();
         mControllerRendererPool = controllerRendererPool;
-        mCardSet = new ArraySet<>();
         mFlippedCardSet = new ArraySet<>();
         mLifecycleOwner.getLifecycle().addObserver(this);
         mFullCardHelper = new SliceFullCardRendererHelper(context);
@@ -110,7 +108,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             sliceLiveData = SliceLiveData.fromUri(mContext, uri);
             mSliceLiveDataMap.put(uri, sliceLiveData);
         }
-        mCardSet.add(card);
 
         sliceLiveData.removeObservers(mLifecycleOwner);
         sliceLiveData.observe(mLifecycleOwner, slice -> {
@@ -129,7 +126,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                     mHalfCardHelper.bindView(holder, card, slice);
                     break;
                 default:
-                    mFullCardHelper.bindView(holder, card, slice, mCardSet);
+                    mFullCardHelper.bindView(holder, card, slice);
             }
         });
 
