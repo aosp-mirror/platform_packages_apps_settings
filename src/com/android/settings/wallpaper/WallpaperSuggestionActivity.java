@@ -28,10 +28,18 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexable;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
-public class WallpaperSuggestionActivity extends Activity {
+import java.util.ArrayList;
+import java.util.List;
+
+@SearchIndexable
+public class WallpaperSuggestionActivity extends Activity implements Indexable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,4 +87,30 @@ public class WallpaperSuggestionActivity extends Activity {
         return context.getResources().getBoolean(
                 com.android.internal.R.bool.config_enableWallpaperService);
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                private static final String SUPPORT_SEARCH_INDEX_KEY = "wallpaper_type";
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+
+                    final List<SearchIndexableRaw> result = new ArrayList<>();
+
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.wallpaper_settings_fragment_title);
+                    data.screenTitle = context.getString(
+                            R.string.wallpaper_settings_fragment_title);
+                    data.intentTargetPackage = context.getString(
+                            R.string.config_wallpaper_picker_package);
+                    data.intentTargetClass = context.getString(
+                            R.string.config_wallpaper_picker_class);
+                    data.intentAction = Intent.ACTION_MAIN;
+                    data.key = SUPPORT_SEARCH_INDEX_KEY;
+                    result.add(data);
+
+                    return result;
+                }
+            };
 }
