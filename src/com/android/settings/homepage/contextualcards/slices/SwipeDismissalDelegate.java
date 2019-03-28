@@ -18,6 +18,10 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -29,7 +33,7 @@ import com.android.settings.homepage.contextualcards.ContextualCard;
 
 public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
 
-    private static final String TAG = "DismissItemTouchHelper";
+    private static final String TAG = "SwipeDismissalDelegate";
 
     public interface Listener {
         void onSwiped(int position);
@@ -37,10 +41,18 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
 
     private final Context mContext;
     private final SwipeDismissalDelegate.Listener mListener;
+    private final Drawable mIconDelete;
+    private final Paint mBgPaint;
+    private final int mBgCornerRadius;
 
     public SwipeDismissalDelegate(Context context, SwipeDismissalDelegate.Listener listener) {
         mContext = context;
         mListener = listener;
+        mIconDelete = mContext.getDrawable(R.drawable.ic_delete);
+        mBgPaint = new Paint();
+        mBgPaint.setColor(mContext.getColor(R.color.homepage_card_dismissal_background));
+        mBgCornerRadius = mContext.getResources()
+                .getDimensionPixelSize(R.dimen.homepage_card_corner_radius);
     }
 
     /**
@@ -93,6 +105,30 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
             @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState,
             boolean isCurrentlyActive) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+        final View itemView = viewHolder.itemView;
+        final int iconMargin = mContext.getResources()
+                .getDimensionPixelSize(R.dimen.homepage_card_dismissal_side_margin);
+        final int iconTop =
+                itemView.getTop() + (itemView.getHeight() - mIconDelete.getIntrinsicHeight()) / 2;
+        final int iconBottom = iconTop + mIconDelete.getIntrinsicHeight();
+
+        if (dX > 0) { //swipe to the right
+            final int iconLeft = itemView.getLeft() + iconMargin;
+            final int iconRight = iconLeft + mIconDelete.getIntrinsicWidth();
+            final RectF rect = new RectF(itemView.getLeft(), itemView.getTop(),
+                    itemView.getLeft() + ((int) dX) + mBgCornerRadius, itemView.getBottom());
+            mIconDelete.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+            c.drawRoundRect(rect, mBgCornerRadius, mBgCornerRadius, mBgPaint);
+        } else if (dX < 0) {
+            final int iconRight = itemView.getRight() - iconMargin;
+            final int iconLeft = iconRight - mIconDelete.getIntrinsicWidth();
+            final RectF rect = new RectF(itemView.getRight() + ((int) dX), itemView.getTop(),
+                    itemView.getRight(), itemView.getBottom());
+            mIconDelete.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+            c.drawRoundRect(rect, mBgCornerRadius, mBgCornerRadius, mBgPaint);
+        }
+        mIconDelete.draw(c);
     }
 
     private int getInitialViewId(RecyclerView.ViewHolder viewHolder) {
