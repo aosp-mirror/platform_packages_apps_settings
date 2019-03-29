@@ -927,6 +927,7 @@ public class ManageApplications extends InstrumentedFragment
         private boolean mHasReceivedBridgeCallback;
         private FileViewHolderController mExtraViewController;
         private SearchFilter mSearchFilter;
+        private PowerWhitelistBackend mBackend;
 
         // This is to remember and restore the last scroll position when this
         // fragment is paused. We need this special handling because app entries are added gradually
@@ -1361,8 +1362,9 @@ public class ManageApplications extends InstrumentedFragment
                 return true;
             }
             ApplicationsState.AppEntry entry = mEntries.get(position);
-            return !PowerWhitelistBackend.getInstance(mContext)
-                    .isSysWhitelisted(entry.info.packageName);
+
+            return !mBackend.isSysWhitelisted(entry.info.packageName)
+                    && !mBackend.isDefaultActiveApp(entry.info.packageName);
         }
 
         @Override
