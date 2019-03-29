@@ -44,4 +44,9 @@ public class DeviceModelPreferenceController extends HardwareInfoPreferenceContr
     public CharSequence getSummary() {
         return HardwareInfoPreferenceController.getDeviceModel();
     }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
 }

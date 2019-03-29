@@ -207,7 +207,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                 if (System.getProperty(SYSPROP_CRASH_ON_ERROR) != null) {
                     throw new RuntimeException(e);
                 }
-                Log.e(TAG, "Error trying to get non-indexable keys from: " + clazz.getName() , e);
+                Log.e(TAG, "Error trying to get non-indexable keys from: " + clazz.getName(), e);
                 continue;
             }
 

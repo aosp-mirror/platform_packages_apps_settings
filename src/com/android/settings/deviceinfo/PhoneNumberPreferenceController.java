@@ -102,6 +102,11 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
     public void copy() {
         final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
                 CLIPBOARD_SERVICE);

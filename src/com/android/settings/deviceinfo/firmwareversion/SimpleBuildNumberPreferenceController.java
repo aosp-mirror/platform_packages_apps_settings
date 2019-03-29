@@ -56,6 +56,11 @@ public class SimpleBuildNumberPreferenceController extends BasePreferenceControl
     }
 
     @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
     public void copy() {
         final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
                 CLIPBOARD_SERVICE);
