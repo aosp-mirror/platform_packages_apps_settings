@@ -166,7 +166,7 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
-    public void testVisible_showDeviceWithoutNames_visible() {
+    public void isVisible_showDeviceWithoutNames_visible() {
         doReturn(false).when(mCachedBluetoothDevice).hasHumanReadableName();
         BluetoothDevicePreference preference =
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
@@ -176,11 +176,18 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
-    public void testVisible_hideDeviceWithoutNames_invisible() {
+    public void isVisible_hideDeviceWithoutNames_invisible() {
         doReturn(false).when(mCachedBluetoothDevice).hasHumanReadableName();
         BluetoothDevicePreference preference =
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
 
         assertThat(preference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setNeedNotifyHierarchyChanged_updateValue() {
+        mPreference.setNeedNotifyHierarchyChanged(true);
+
+        assertThat(mPreference.mNeedNotifyHierarchyChanged).isTrue();
     }
 }
