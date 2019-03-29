@@ -149,7 +149,7 @@ public class SliceContextualCardRendererTest {
 
         btnKeep.performClick();
 
-        assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
+        assertThat(viewFlipper.getCurrentView().getId()).isEqualTo(R.id.slice_view_wrapper);
     }
 
     @Test
@@ -204,7 +204,7 @@ public class SliceContextualCardRendererTest {
 
         mRenderer.onStop();
 
-        assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
+        assertThat(viewFlipper.getCurrentView().getId()).isEqualTo(R.id.slice_view_wrapper);
     }
 
     private RecyclerView.ViewHolder getSliceViewHolder() {

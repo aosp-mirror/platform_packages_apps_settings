@@ -18,6 +18,7 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
@@ -70,10 +71,12 @@ class SliceFullCardRendererHelper {
 
     static class SliceViewHolder extends RecyclerView.ViewHolder {
         public final SliceView sliceView;
+        public final LinearLayout sliceViewWrapper;
 
         public SliceViewHolder(View view) {
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
+            sliceViewWrapper = view.findViewById(R.id.slice_view_wrapper);
         }
     }
 }
