@@ -18,10 +18,15 @@ package com.android.settings.aware;
 
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
+
 public interface AwareFeatureProvider {
     /** Returns true if the aware sensor is supported. */
     boolean isSupported(Context context);
 
     /** Returns true if the aware feature is enabled. */
     boolean isEnabled(Context context);
+
+    /** Show information dialog. */
+    void showRestrictionDialog(Fragment parent);
 }
