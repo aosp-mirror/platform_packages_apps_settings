@@ -142,12 +142,11 @@ public class SliceContextualCardRendererTest {
     @Test
     public void viewClick_keepCard_shouldFlipBackToSlice() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
-        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
         final Button btnKeep = viewHolder.itemView.findViewById(R.id.keep);
         final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
         mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
+        viewFlipper.setDisplayedChild(1);
 
-        card.performLongClick();
         btnKeep.performClick();
 
         assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
@@ -156,11 +155,10 @@ public class SliceContextualCardRendererTest {
     @Test
     public void viewClick_keepCard_shouldRemoveViewHolderFromSet() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
-        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
         final Button btnKeep = viewHolder.itemView.findViewById(R.id.keep);
         mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
+        mRenderer.mFlippedCardSet.add(viewHolder);
 
-        card.performLongClick();
         btnKeep.performClick();
 
         assertThat(mRenderer.mFlippedCardSet).doesNotContain(viewHolder);
@@ -169,14 +167,13 @@ public class SliceContextualCardRendererTest {
     @Test
     public void viewClick_removeCard_shouldRemoveViewHolderFromSet() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
-        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
         final Button btnRemove = viewHolder.itemView.findViewById(R.id.remove);
         final ContextualCard contextualCard = buildContextualCard(TEST_SLICE_URI);
         mRenderer.bindView(viewHolder, contextualCard);
         doReturn(mController).when(mControllerRendererPool).getController(mActivity,
                 ContextualCard.CardType.SLICE);
+        mRenderer.mFlippedCardSet.add(viewHolder);
 
-        card.performLongClick();
         btnRemove.performClick();
 
         assertThat(mRenderer.mFlippedCardSet).doesNotContain(viewHolder);
@@ -185,7 +182,6 @@ public class SliceContextualCardRendererTest {
     @Test
     public void viewClick_removeCard_sliceLiveDataShouldRemoveObservers() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
-        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
         final Button btnRemove = viewHolder.itemView.findViewById(R.id.remove);
         final ContextualCard contextualCard = buildContextualCard(TEST_SLICE_URI);
         mRenderer.mSliceLiveDataMap.put(TEST_SLICE_URI, mSliceLiveData);
@@ -193,7 +189,6 @@ public class SliceContextualCardRendererTest {
         doReturn(mController).when(mControllerRendererPool).getController(mActivity,
                 ContextualCard.CardType.SLICE);
 
-        card.performLongClick();
         btnRemove.performClick();
 
         assertThat(mRenderer.mSliceLiveDataMap.get(TEST_SLICE_URI).hasObservers()).isFalse();
@@ -202,11 +197,11 @@ public class SliceContextualCardRendererTest {
     @Test
     public void onStop_cardIsFlipped_shouldFlipBack() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
-        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
         final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
         mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
+        viewFlipper.setDisplayedChild(1);
+        mRenderer.mFlippedCardSet.add(viewHolder);
 
-        card.performLongClick();
         mRenderer.onStop();
 
         assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
