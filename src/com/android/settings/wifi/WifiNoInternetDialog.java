@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static android.net.ConnectivityManager.ACTION_PROMPT_LOST_VALIDATION;
+import static android.net.ConnectivityManager.ACTION_PROMPT_PARTIAL_CONNECTIVITY;
 import static android.net.ConnectivityManager.ACTION_PROMPT_UNVALIDATED;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 
@@ -53,8 +54,9 @@ public final class WifiNoInternetDialog extends AlertActivity implements
     private String mAction;
 
     private boolean isKnownAction(Intent intent) {
-        return intent.getAction().equals(ACTION_PROMPT_UNVALIDATED) ||
-                intent.getAction().equals(ACTION_PROMPT_LOST_VALIDATION);
+        return intent.getAction().equals(ACTION_PROMPT_UNVALIDATED)
+                || intent.getAction().equals(ACTION_PROMPT_LOST_VALIDATION)
+                || intent.getAction().equals(ACTION_PROMPT_PARTIAL_CONNECTIVITY);
     }
 
     @Override
@@ -131,6 +133,11 @@ public final class WifiNoInternetDialog extends AlertActivity implements
             ap.mMessage = getString(R.string.no_internet_access_text);
             ap.mPositiveButtonText = getString(R.string.yes);
             ap.mNegativeButtonText = getString(R.string.no);
+        } else if (ACTION_PROMPT_PARTIAL_CONNECTIVITY.equals(mAction)) {
+            ap.mTitle = mNetworkName;
+            ap.mMessage = getString(R.string.partial_connectivity_text);
+            ap.mPositiveButtonText = getString(R.string.yes);
+            ap.mNegativeButtonText = getString(R.string.no);
         } else {
             ap.mTitle = getString(R.string.lost_internet_access_title);
             ap.mMessage = getString(R.string.lost_internet_access_text);
@@ -146,7 +153,8 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         ap.mView = checkbox;
         mAlwaysAllow = (CheckBox) checkbox.findViewById(com.android.internal.R.id.alwaysUse);
 
-        if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
+        if (ACTION_PROMPT_UNVALIDATED.equals(mAction)
+                || ACTION_PROMPT_PARTIAL_CONNECTIVITY.equals(mAction)) {
             mAlwaysAllow.setText(getString(R.string.no_internet_access_remember));
         } else {
             mAlwaysAllow.setText(getString(R.string.lost_internet_access_persist));
@@ -174,6 +182,11 @@ public final class WifiNoInternetDialog extends AlertActivity implements
             final boolean accept = (which == BUTTON_POSITIVE);
             action = (accept ? "Connect" : "Ignore");
             mCM.setAcceptUnvalidated(mNetwork, accept, always);
+        } else if (ACTION_PROMPT_PARTIAL_CONNECTIVITY.equals(mAction)) {
+            what = "PARTIAL_CONNECTIVITY";
+            final boolean accept = (which == BUTTON_POSITIVE);
+            action = (accept ? "Connect" : "Ignore");
+            mCM.setAcceptPartialConnectivity(mNetwork, accept, always);
         } else {
             what = "LOST_INTERNET";
             final boolean avoid = (which == BUTTON_POSITIVE);

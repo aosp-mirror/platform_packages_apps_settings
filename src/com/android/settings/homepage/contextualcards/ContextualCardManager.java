@@ -43,6 +43,8 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +100,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         mLifecycleObservers = new ArrayList<>();
         mControllerRendererPool = new ControllerRendererPool();
         mLifecycle.addObserver(this);
-
         if (savedInstanceState == null) {
             mIsFirstLaunch = true;
             mSavedCards = null;
@@ -238,6 +239,21 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
                 .collect(Collectors.toCollection(ArrayList::new));
 
         outState.putStringArrayList(KEY_CONTEXTUAL_CARDS, cards);
+    }
+
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        // Duplicate a list to avoid java.util.ConcurrentModificationException.
+        final List<ContextualCard> cards = new ArrayList<>(mContextualCards);
+        for (ContextualCard card : cards) {
+            final ContextualCardController controller = mControllerRendererPool
+                    .getController(mContext, card.getCardType());
+            if (hasWindowFocus && controller instanceof OnStart) {
+                ((OnStart) controller).onStart();
+            }
+            if (!hasWindowFocus && controller instanceof OnStop) {
+                ((OnStop) controller).onStop();
+            }
+        }
     }
 
     public ControllerRendererPool getControllerRendererPool() {

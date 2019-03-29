@@ -16,8 +16,14 @@
 
 package com.android.settings.gestures;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
+
 import android.content.Context;
+import android.content.om.IOverlayManager;
+import android.os.ServiceManager;
 import android.text.TextUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.widget.RadioButtonPreference;
 
@@ -26,7 +32,14 @@ public class SystemNavigationEdgeToEdgePreferenceController extends
     static final String PREF_KEY_EDGE_TO_EDGE = "gesture_edge_to_edge";
 
     public SystemNavigationEdgeToEdgePreferenceController(Context context, String key) {
-        super(context, key);
+        this(context, IOverlayManager.Stub.asInterface(ServiceManager.getService(
+                Context.OVERLAY_SERVICE)), key);
+    }
+
+    @VisibleForTesting
+    public SystemNavigationEdgeToEdgePreferenceController(Context context,
+            IOverlayManager overlayManager, String key) {
+        super(context, overlayManager, key);
     }
 
     @Override
@@ -36,8 +49,7 @@ public class SystemNavigationEdgeToEdgePreferenceController extends
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference preference) {
-        setSwipeUpEnabled(mContext, true);
-        setEdgeToEdgeGestureEnabled(mContext, true);
+        setNavBarInteractionMode(mOverlayManager, NAV_BAR_MODE_GESTURAL_OVERLAY);
         selectRadioButtonInGroup(PREF_KEY_EDGE_TO_EDGE, mPreferenceScreen);
     }
 

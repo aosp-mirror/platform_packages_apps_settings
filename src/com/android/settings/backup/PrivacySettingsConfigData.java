@@ -27,7 +27,7 @@ public class PrivacySettingsConfigData {
     private Intent mConfigIntent;
     private String mConfigSummary;
     private Intent mManageIntent;
-    private String mManageLabel;
+    private CharSequence mManageLabel;
 
     private PrivacySettingsConfigData() {
         mBackupEnabled = false;
@@ -85,11 +85,11 @@ public class PrivacySettingsConfigData {
         mManageIntent = manageIntent;
     }
 
-    public String getManageLabel() {
+    public CharSequence getManageLabel() {
         return mManageLabel;
     }
 
-    public void setManageLabel(final String manageLabel) {
+    public void setManageLabel(final CharSequence manageLabel) {
         mManageLabel = manageLabel;
     }
 }

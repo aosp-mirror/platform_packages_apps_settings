@@ -16,7 +16,12 @@
 
 package com.android.settings.gestures;
 
-import static android.os.UserHandle.USER_SYSTEM;
+import static android.os.UserHandle.USER_CURRENT;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVERLAY;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -24,8 +29,6 @@ import android.content.Intent;
 import android.content.om.IOverlayManager;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -38,33 +41,6 @@ import com.android.settings.widget.RadioButtonPreference;
 public abstract class SystemNavigationPreferenceController extends GesturePreferenceController
         implements RadioButtonPreference.OnClickListener {
 
-    private static final int OFF = 0;
-    private static final int ON = 1;
-
-    private static final String HIDE_BACK_BUTTON = "quickstepcontroller_hideback";
-    private static final String HIDE_HOME_BUTTON = "quickstepcontroller_hidehome";
-    private static final String HIDE_NAVBAR_DIVIDER = "hide_navigationbar_divider";
-    private static final String SHOW_HANDLE = "quickstepcontroller_showhandle";
-    private static final String ENABLE_CLICK_THROUGH = "quickstepcontroller_clickthrough";
-    private static final String ENABLE_LAUNCHER_SWIPE_TO_HOME = "SWIPE_HOME";
-    private static final String ENABLE_COLOR_ADAPT_FOR_HANDLE = "navbar_color_adapt_enable";
-    private static final String ENABLE_ASSISTANT_GESTURE = "ENABLE_ASSISTANT_GESTURE";
-    private static final String PROTOTYPE_ENABLED = "prototype_enabled";
-
-    private static final int EDGE_SENSITIVITY_WIDTH = 48;
-    private static final String EDGE_SENSITIVITY_KEY = "quickstepcontroller_edge_width_sensitivity";
-
-    private static final String GESTURES_MATCH_MAP_OFF = "000000";
-    private static final String GESTURES_MATCH_MAP_ON = "071133";
-    private static final String GESTURES_MATCH_MAP_KEY = "quickstepcontroller_gesture_match_map";
-
-    private static final String OVERLAY_NAVBAR_KEY =
-            "com.android.internal.experiment.navbar.default";
-    private static final String OVERLAY_NAVBAR_TYPE_INSET =
-            "com.android.internal.experiment.navbar.type.inset";
-    private static final String OVERLAY_NAVBAR_TYPE_FLOATING =
-            "com.android.internal.experiment.navbar.type.floating";
-
     private static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
     private static final String PREF_KEY_VIDEO = "gesture_swipe_up_video";
 
@@ -74,10 +50,13 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
             SystemNavigationEdgeToEdgePreferenceController.PREF_KEY_EDGE_TO_EDGE,
     };
 
+    protected final IOverlayManager mOverlayManager;
     protected PreferenceScreen mPreferenceScreen;
 
-    public SystemNavigationPreferenceController(Context context, String key) {
+    public SystemNavigationPreferenceController(Context context, IOverlayManager overlayManager,
+            String key) {
         super(context, key);
+        mOverlayManager = overlayManager;
     }
 
     @Override
@@ -156,55 +135,36 @@ public abstract class SystemNavigationPreferenceController extends GesturePrefer
         }
     }
 
-    static void setEdgeToEdgeGestureEnabled(Context context, boolean enable) {
-        // TODO(b/127366543): replace all of this with a single switch
-        setBooleanGlobalSetting(context, HIDE_BACK_BUTTON, enable);
-        setBooleanGlobalSetting(context, HIDE_HOME_BUTTON, enable);
-        setBooleanGlobalSetting(context, HIDE_NAVBAR_DIVIDER, enable);
-        setBooleanGlobalSetting(context, SHOW_HANDLE, enable);
-        setBooleanGlobalSetting(context, ENABLE_CLICK_THROUGH, enable);
-        setBooleanGlobalSetting(context, ENABLE_LAUNCHER_SWIPE_TO_HOME, enable);
-        setBooleanGlobalSetting(context, ENABLE_COLOR_ADAPT_FOR_HANDLE, enable);
-        setBooleanGlobalSetting(context, ENABLE_ASSISTANT_GESTURE, enable);
-        setBooleanGlobalSetting(context, PROTOTYPE_ENABLED, enable);
-        Settings.Global.putInt(context.getContentResolver(), EDGE_SENSITIVITY_KEY,
-                EDGE_SENSITIVITY_WIDTH);
-        Settings.Global.putString(context.getContentResolver(), GESTURES_MATCH_MAP_KEY,
-                enable ? GESTURES_MATCH_MAP_ON : GESTURES_MATCH_MAP_OFF);
-
-        IOverlayManager overlayManager = IOverlayManager.Stub
-                .asInterface(ServiceManager.getService(Context.OVERLAY_SERVICE));
-        if (overlayManager != null) {
-            try {
-                overlayManager.setEnabled(OVERLAY_NAVBAR_KEY, true, USER_SYSTEM);
-                overlayManager.setEnabled(OVERLAY_NAVBAR_TYPE_FLOATING, false, USER_SYSTEM);
-                overlayManager.setEnabled(OVERLAY_NAVBAR_TYPE_INSET, enable, USER_SYSTEM);
-            } catch (RemoteException e) {
-                throw e.rethrowFromSystemServer();
-            }
-        }
-    }
-
-    static void setBooleanGlobalSetting(Context context, String name, boolean flag) {
-        Settings.Global.putInt(context.getContentResolver(), name, flag ? ON : OFF);
-    }
-
-    static void setSwipeUpEnabled(Context context, boolean enabled) {
-        Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.SWIPE_UP_TO_SWITCH_APPS_ENABLED, enabled ? ON : OFF);
+    /**
+     * Enables the specified overlay package.
+     */
+    static void setNavBarInteractionMode(IOverlayManager overlayManager, String overlayPackage) {
+        setOverlayEnabled(overlayManager, NAV_BAR_MODE_3BUTTON_OVERLAY,
+                overlayPackage == NAV_BAR_MODE_3BUTTON_OVERLAY);
+        setOverlayEnabled(overlayManager, NAV_BAR_MODE_2BUTTON_OVERLAY,
+                overlayPackage == NAV_BAR_MODE_2BUTTON_OVERLAY);
+        setOverlayEnabled(overlayManager, NAV_BAR_MODE_GESTURAL_OVERLAY,
+                overlayPackage == NAV_BAR_MODE_GESTURAL_OVERLAY);
     }
 
     static boolean isSwipeUpEnabled(Context context) {
         if (isEdgeToEdgeEnabled(context)) {
             return false;
         }
-        final int defaultSwipeUpValue = context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_swipe_up_gesture_default) ? ON : OFF;
-        return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.SWIPE_UP_TO_SWITCH_APPS_ENABLED, defaultSwipeUpValue) == ON;
+        return NAV_BAR_MODE_2BUTTON == context.getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode);
     }
 
     static boolean isEdgeToEdgeEnabled(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(), PROTOTYPE_ENABLED, OFF) == ON;
+        return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode);
+    }
+
+    static void setOverlayEnabled(IOverlayManager overlayManager, String pkg, boolean enabled) {
+        try {
+            overlayManager.setEnabled(pkg, enabled, USER_CURRENT);
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
     }
 }

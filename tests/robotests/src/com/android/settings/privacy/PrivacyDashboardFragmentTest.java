@@ -80,10 +80,10 @@ public class PrivacyDashboardFragmentTest {
     }
 
     @Test
-    public void onViewCreated_shouldCallStyleActionBar() {
+    public void onViewCreated_shouldSetActionBarShadowAnimation() {
         mFragment.onViewCreated(new View(mContext), new Bundle());
 
-        verify(mFragment).styleActionBar();
+        assertThat(mFragment.getActivity().getActionBar().getElevation()).isEqualTo(0.f);
     }
 
     @Test

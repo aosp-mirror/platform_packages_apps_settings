@@ -25,6 +25,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -91,9 +92,9 @@ public class BackupSettingsHelper {
      *
      * @return Label for the backup settings item.
      */
-    public String getLabelForBackupSettings() {
-        String label = getLabelFromBackupTransport();
-        if (label == null || label.isEmpty()) {
+    public CharSequence getLabelForBackupSettings() {
+        CharSequence label = getLabelFromBackupTransport();
+        if (TextUtils.isEmpty(label)) {
             label = mContext.getString(R.string.privacy_settings_title);
         }
         return label;
@@ -222,10 +223,11 @@ public class BackupSettingsHelper {
     }
 
     @VisibleForTesting
-    String getLabelFromBackupTransport() {
+    CharSequence getLabelFromBackupTransport() {
         try {
-            String label =
-                    mBackupManager.getDataManagementLabel(mBackupManager.getCurrentTransport());
+            CharSequence label =
+                    mBackupManager.getDataManagementLabelForUser(
+                            UserHandle.myUserId(), mBackupManager.getCurrentTransport());
             if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "Received the backup settings label from backup transport: " + label);
             }

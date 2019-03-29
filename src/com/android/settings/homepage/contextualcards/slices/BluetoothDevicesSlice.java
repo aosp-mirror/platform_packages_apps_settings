@@ -221,14 +221,6 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                     com.android.internal.R.drawable.ic_settings_bluetooth);
         }
 
-        // Tint icon: Accent color for connected state; Disable color for busy state.
-        @ColorInt int color = Utils.getColorAccentDefaultColor(mContext);
-        if (device.isBusy()) {
-            color = Utils.getDisabled(mContext,
-                    Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal));
-        }
-        drawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-
         return Utils.createIconWithDrawable(drawable);
     }
 

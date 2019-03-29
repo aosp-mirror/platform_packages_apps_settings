@@ -16,43 +16,34 @@
 
 package com.android.settings.privacy;
 
+import android.annotation.NonNull;
 import android.content.Context;
-import android.os.IBinder;
-import android.os.ServiceManager;
-import android.os.UserHandle;
 import android.provider.Settings;
-import android.view.contentcapture.ContentCaptureManager;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.utils.ContentCaptureUtils;
 
-public class EnableContentCapturePreferenceController extends TogglePreferenceController {
+public final class EnableContentCapturePreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_SHOW_PASSWORD = "content_capture";
-    private static final int MY_USER_ID = UserHandle.myUserId();
-
-    public EnableContentCapturePreferenceController(Context context) {
-        super(context, KEY_SHOW_PASSWORD);
+    public EnableContentCapturePreferenceController(@NonNull Context context, @NonNull String key) {
+        super(context, key);
     }
 
     @Override
     public boolean isChecked() {
-        boolean enabled = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.CONTENT_CAPTURE_ENABLED, 1, MY_USER_ID) == 1;
-        return enabled;
+        return ContentCaptureUtils.isEnabledForUser(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                Settings.Secure.CONTENT_CAPTURE_ENABLED, isChecked ? 1 : 0, MY_USER_ID);
+        ContentCaptureUtils.setEnabledForUser(mContext, isChecked);
         return true;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // We cannot look for ContentCaptureManager, because it's not available if the service
-        // didn't whitelist Settings
-        IBinder service = ServiceManager.checkService(Context.CONTENT_CAPTURE_MANAGER_SERVICE);
-        return service != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        boolean available = ContentCaptureUtils.isFeatureAvailable()
+                && ContentCaptureUtils.getServiceSettingsComponentName() == null;
+        return available ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

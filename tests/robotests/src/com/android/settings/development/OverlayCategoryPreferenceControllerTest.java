@@ -221,6 +221,7 @@ public class OverlayCategoryPreferenceControllerTest {
 
         return new OverlayInfo(pkg /* packageName */,
                 "android" /* targetPackageName */,
+                null /* targetOverlayableName */,
                 TEST_CATEGORY/* category */,
                 pkg + ".baseCodePath" /* baseCodePath */,
                 state /* state */,

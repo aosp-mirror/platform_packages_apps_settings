@@ -21,6 +21,7 @@ import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -35,6 +36,7 @@ import com.android.settings.Utils;
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 
     private static final String STATE_IS_KEYGUARD_LOCKED = "STATE_IS_KEYGUARD_LOCKED";
+    private static final String TAG = "ConfirmDeviceCredentialBaseActivity";
 
     enum ConfirmCredentialTheme {
         NORMAL,
@@ -56,8 +58,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
 
     @Override
     protected void onCreate(Bundle savedState) {
-        int credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
-                Utils.getUserIdFromBundle(this, getIntent().getExtras(), isInternalActivity()));
+        final int credentialOwnerUserId;
+        try {
+            credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
+                    Utils.getUserIdFromBundle(this, getIntent().getExtras(), isInternalActivity()));
+        } catch (SecurityException e) {
+            Log.e(TAG, "Invalid user Id supplied", e);
+            finish();
+            return;
+        }
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
             mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;

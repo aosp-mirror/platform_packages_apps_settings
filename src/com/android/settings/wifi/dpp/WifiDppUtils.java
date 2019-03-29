@@ -29,6 +29,8 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
+import com.android.settings.R;
+
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.util.List;
@@ -273,13 +275,10 @@ public class WifiDppUtils {
      * user of the device.
      *
      * @param context The {@code Context} used to get {@code KeyguardManager} service
-     * @param title The title on lock screen
-     * @param description The description on lock screen
      * @param successRunnable The {@code Runnable} which will be executed if the user does not setup
      *                        device security or if lock screen is unlocked
      */
-    public static void showLockScreen(Context context, String title, String description,
-            Runnable successRunnable) {
+    public static void showLockScreen(Context context, Runnable successRunnable) {
         final KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(
                 Context.KEYGUARD_SERVICE);
 
@@ -299,8 +298,7 @@ public class WifiDppUtils {
             };
 
             final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
-                    .setTitle(title)
-                    .setDescription(description);
+                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title));
 
             if (keyguardManager.isDeviceSecure()) {
                 builder.setDeviceCredentialAllowed(true);
