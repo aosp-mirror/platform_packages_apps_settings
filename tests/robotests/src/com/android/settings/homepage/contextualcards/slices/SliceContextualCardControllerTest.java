@@ -18,13 +18,15 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -96,7 +98,8 @@ public class SliceContextualCardControllerTest {
         cr.close();
 
         assertThat(qryDismissed).isEqualTo(1);
-        verify(mFeatureFactory.mContextualCardFeatureProvider).logContextualCardDismiss(card);
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_DISMISS), any(String.class));
     }
 
     @Test
