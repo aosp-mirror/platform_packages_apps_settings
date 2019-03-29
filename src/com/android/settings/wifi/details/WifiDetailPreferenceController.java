@@ -271,6 +271,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             Log.d(TAG, "onWifiStateChanged(" + state + ")");
             if (mConnectingState == STATE_ENABLE_WIFI && state == WifiManager.WIFI_STATE_ENABLED) {
                 updateConnectingState(STATE_CONNECTING);
+            } else if (mConnectingState != STATE_NONE && state == WifiManager.WIFI_STATE_DISABLED) {
+                // update as disconnected once Wi-Fi disabled since may not received
+                // onConnectedChanged for this case.
+                updateConnectingState(STATE_DISCONNECTED);
             }
         }
 
