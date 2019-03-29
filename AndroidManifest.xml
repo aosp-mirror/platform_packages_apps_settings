@@ -2455,6 +2455,18 @@
         </activity>
 
         <activity
+            android:name="Settings$AppBubbleNotificationSettingsActivity"
+            android:label="@string/bubbles_app_toggle_title"
+            android:parentActivityName="Settings$NotificationAppListActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.APP_NOTIFICATION_BUBBLE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.AppBubbleNotificationSettings" />
+        </activity>
+
+        <activity
             android:name="Settings$SoundSettingsActivity"
             android:label="@string/sound_settings"
             android:icon="@drawable/ic_homepage_sound"
