@@ -64,7 +64,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     private final Context mContext;
     private final LifecycleOwner mLifecycleOwner;
     private final ControllerRendererPool mControllerRendererPool;
-    private final Set<ContextualCard> mCardSet;
     private final SliceDeferredSetupCardRendererHelper mDeferredSetupCardHelper;
     private final SliceFullCardRendererHelper mFullCardHelper;
     private final SliceHalfCardRendererHelper mHalfCardHelper;
@@ -75,7 +74,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         mLifecycleOwner = lifecycleOwner;
         mSliceLiveDataMap = new ArrayMap<>();
         mControllerRendererPool = controllerRendererPool;
-        mCardSet = new ArraySet<>();
         mFlippedCardSet = new ArraySet<>();
         mLifecycleOwner.getLifecycle().addObserver(this);
         mFullCardHelper = new SliceFullCardRendererHelper(context);
@@ -110,7 +108,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             sliceLiveData = SliceLiveData.fromUri(mContext, uri);
             mSliceLiveDataMap.put(uri, sliceLiveData);
         }
-        mCardSet.add(card);
 
         sliceLiveData.removeObservers(mLifecycleOwner);
         sliceLiveData.observe(mLifecycleOwner, slice -> {
@@ -129,7 +126,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                     mHalfCardHelper.bindView(holder, card, slice);
                     break;
                 default:
-                    mFullCardHelper.bindView(holder, card, slice, mCardSet);
+                    mFullCardHelper.bindView(holder, card, slice);
             }
         });
 
@@ -138,23 +135,19 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                 // Deferred setup is never dismissible.
                 break;
             case VIEW_TYPE_HALF_WIDTH:
-                initDismissalActions(holder, card, R.id.content);
+                initDismissalActions(holder, card);
                 break;
             default:
-                initDismissalActions(holder, card, R.id.slice_view);
+                initDismissalActions(holder, card);
+        }
+
+        if (card.isPendingDismiss()) {
+            flipCardToDismissalView(holder);
+            mFlippedCardSet.add(holder);
         }
     }
 
-    private void initDismissalActions(RecyclerView.ViewHolder holder, ContextualCard card,
-            int initialViewId) {
-        // initialView is the first view in the ViewFlipper.
-        final View initialView = holder.itemView.findViewById(initialViewId);
-        initialView.setOnLongClickListener(v -> {
-            flipCardToDismissalView(holder);
-            mFlippedCardSet.add(holder);
-            return true;
-        });
-
+    private void initDismissalActions(RecyclerView.ViewHolder holder, ContextualCard card) {
         final Button btnKeep = holder.itemView.findViewById(R.id.keep);
         btnKeep.setOnClickListener(v -> {
             mFlippedCardSet.remove(holder);

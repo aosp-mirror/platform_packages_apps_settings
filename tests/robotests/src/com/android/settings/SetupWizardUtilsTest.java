@@ -31,24 +31,27 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class SetupWizardUtilsTest {
 
+    private static final String EXTRA_IS_SETUP_FLOW = "isSetupFlow";
+    private static final String EXTRA_IS_FIRST_RUN = "firstRun";
+
     @Test
     public void testCopySetupExtras() {
         Intent fromIntent = new Intent();
         final String theme = "TEST_THEME";
         fromIntent.putExtra(WizardManagerHelper.EXTRA_THEME, theme);
-        fromIntent.putExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, true);
+        fromIntent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
         Intent toIntent = new Intent();
         SetupWizardUtils.copySetupExtras(fromIntent, toIntent);
 
         assertThat(theme).isEqualTo(toIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME));
-        assertThat(toIntent.getBooleanExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, false))
+        assertThat(toIntent.getBooleanExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, false))
                 .isTrue();
     }
 
     @Test
     public void testGetTheme_withIntentExtra_shouldReturnExtraTheme() {
         SetupWizardProperties.theme(ThemeHelper.THEME_GLIF);
-        Intent intent = new Intent();
+        Intent intent = createSetupWizardIntent();
         intent.putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_V2);
 
         assertThat(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV2Theme);
@@ -57,7 +60,7 @@ public class SetupWizardUtilsTest {
     @Test
     public void testGetTheme_withEmptyIntent_shouldReturnSystemProperty() {
         SetupWizardProperties.theme(ThemeHelper.THEME_GLIF_V2_LIGHT);
-        Intent intent = new Intent();
+        Intent intent = createSetupWizardIntent();
 
         assertThat(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV2Theme_Light);
     }
@@ -65,10 +68,26 @@ public class SetupWizardUtilsTest {
     @Test
     public void testGetTheme_glifV3Light_shouldReturnThemeResource() {
         SetupWizardProperties.theme(ThemeHelper.THEME_GLIF_V3_LIGHT);
-        Intent intent = new Intent();
+        Intent intent = createSetupWizardIntent();
 
         assertThat(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV3Theme_Light);
         assertThat(SetupWizardUtils.getTransparentTheme(intent))
                 .isEqualTo(R.style.GlifV3Theme_Light_Transparent);
+    }
+
+    @Test
+    public void testGetTheme_nonSuw_shouldReturnDayNightTheme() {
+        SetupWizardProperties.theme(ThemeHelper.THEME_GLIF_V3_LIGHT);
+        Intent intent = new Intent();
+
+        assertThat(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV3Theme);
+        assertThat(SetupWizardUtils.getTransparentTheme(intent))
+                .isEqualTo(R.style.GlifV3Theme_Transparent);
+    }
+
+    private Intent createSetupWizardIntent() {
+        return new Intent()
+                .putExtra(EXTRA_IS_SETUP_FLOW, true)
+                .putExtra(EXTRA_IS_FIRST_RUN, true);
     }
 }

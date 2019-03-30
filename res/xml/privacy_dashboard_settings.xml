@@ -62,26 +62,6 @@
         android:summary="@string/summary_placeholder"
         settings:searchable="false"/>
 
-    <!-- Content Capture -->
-
-    <!-- NOTE: content capture has a different preference, depending whether or not the
-         ContentCaptureService implementations defines a custom settings activitiy on its manifest.
-         Hence, we show both here, but the controller itself will decide if it's available or not.
-    -->
-
-    <SwitchPreference
-        android:key="content_capture"
-        android:title="@string/content_capture"
-        android:summary="@string/content_capture_summary"
-        settings:controller="com.android.settings.privacy.EnableContentCapturePreferenceController"/>
-
-    <com.android.settings.widget.MasterSwitchPreference
-        android:key="content_capture_custom_settings"
-        android:title="@string/content_capture"
-        android:summary="@string/content_capture_summary"
-        settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController">
-    </com.android.settings.widget.MasterSwitchPreference>
-
     <!-- Privacy Service -->
     <PreferenceCategory
         android:key="privacy_services"/>
@@ -104,5 +84,25 @@
             android:order="999"
             settings:searchable="false"/>
     </PreferenceCategory>
+
+    <!-- Content Capture -->
+
+    <!-- NOTE: content capture has a different preference, depending whether or not the
+         ContentCaptureService implementations defines a custom settings activitiy on its manifest.
+         Hence, we show both here, but the controller itself will decide if it's available or not.
+    -->
+
+    <SwitchPreference
+        android:key="content_capture"
+        android:title="@string/content_capture"
+        android:summary="@string/content_capture_summary"
+        settings:controller="com.android.settings.privacy.EnableContentCapturePreferenceController"/>
+
+    <com.android.settings.widget.MasterSwitchPreference
+        android:key="content_capture_custom_settings"
+        android:title="@string/content_capture"
+        android:summary="@string/content_capture_summary"
+        settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController">
+    </com.android.settings.widget.MasterSwitchPreference>
 
 </PreferenceScreen>

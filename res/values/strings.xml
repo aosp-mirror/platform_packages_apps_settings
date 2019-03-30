@@ -2284,6 +2284,8 @@
     </plurals>
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. [CHAR LIMIT=30] -->
     <string name="wifi_advanced_titlebar">Advanced Wi\u2011Fi</string>
+    <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's SSID. [CHAR LIMIT=20] -->
+    <string name="wifi_advanced_ssid_title">SSID</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's MAC address. -->
     <string name="wifi_advanced_mac_address_title">MAC address</string>
     <!-- Title of the screen to adjust IP settings -->
@@ -7789,9 +7791,9 @@
     <string name="notification_badging_title">Allow notification dots</string>
 
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
-    <string name="notification_bubbles_title">Allow bubbles</string>
+    <string name="notification_bubbles_title">Bubbles</string>
     <!-- Configure Notifications: Summary for the notification bubbles option. [CHAR LIMIT=NONE] -->
-    <string name="notification_bubbles_summary">Allow apps to show some notifications as bubbles</string>
+    <string name="notification_bubbles_summary">Quickly access app content from anywhere using floating shortcuts</string>
     <!-- Feature education for bubbles. [CHAR LIMIT=NONE] -->
     <string name="bubbles_feature_education">Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen.</string>
     <!-- Title for the toggle shown on the app-level bubbles page  [CHAR LIMIT=60] -->
@@ -8832,7 +8834,7 @@
     <string name="app_usage_preference">App usage preferences</string>
 
     <!-- Link title to show stats about how much time user spent in an app [CHAR LIMIT=45] -->
-    <string name="time_spent_in_app_pref_title">Time spent in app</string>
+    <string name="time_spent_in_app_pref_title">Screen time</string>
 
     <!-- Description of the usage access setting [CHAR LIMIT=NONE] -->
     <string name="usage_access_description">Usage access allows an app to track what other apps you\u2019re using and how often, as well as your carrier, language settings, and other details.</string>
@@ -11013,11 +11015,11 @@
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
-    <!-- Keywords for Content Capture feature [CHAR_LIMIT=32] -->
-    <string name="keywords_content_capture">content capture</string>
+    <!-- Keywords for Content Capture / Smart Suggestions feature [CHAR_LIMIT=none] -->
+    <string name="keywords_content_capture">content capture, smart suggestions</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
-    <string name="content_capture">Content Capture</string>
-    <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
+    <string name="content_capture">Smart Suggestions</string>
+    <!-- Description of the 'Content Capture / Smart Suggestions' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
     <string name="content_capture_summary">Allow Android to save information seen on your screen or heard in video or audio content. Android makes helpful suggestions based on your device activity.</string>
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
@@ -11030,4 +11032,7 @@
     <string name="automatic_system_heap_dump_title">Automatically capture system heap dumps</string>
     <!-- Summary of toggle for whether to enable automatic heap dumps for the system server or not. [CHAR LIMIT=NONE] -->
     <string name="automatic_system_heap_dump_summary">Automatically capture a heap dump for Android System when it uses too much memory</string>
+
+    <!-- Button label to disconnect a Wi-Fi network. [CHAR LIMIT=40] -->
+    <string name="wifi_disconnect_button_text">Disconnect</string>
 </resources>

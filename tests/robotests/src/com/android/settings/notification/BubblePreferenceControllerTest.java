@@ -23,6 +23,7 @@ import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -223,6 +224,7 @@ public class BubblePreferenceControllerTest {
     @Test
     public void testUpdateState_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.label = "App!";
         appRow.allowBubbles = true;
         mController.onResume(appRow, null, null, null);
 
@@ -235,6 +237,9 @@ public class BubblePreferenceControllerTest {
 
         mController.updateState(pref);
         assertFalse(pref.isChecked());
+
+        assertNotNull(pref.getSummary());
+        assertTrue(pref.getSummary().toString().contains(appRow.label));
     }
 
     @Test

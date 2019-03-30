@@ -18,6 +18,8 @@ package com.android.settings.aware;
 
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
+
 public class AwareFeatureProviderImpl implements AwareFeatureProvider {
     @Override
     public boolean isSupported(Context context) {
@@ -27,5 +29,9 @@ public class AwareFeatureProviderImpl implements AwareFeatureProvider {
     @Override
     public boolean isEnabled(Context context) {
         return false;
+    }
+
+    @Override
+    public void showRestrictionDialog(Fragment parent) {
     }
 }

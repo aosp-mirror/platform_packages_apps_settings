@@ -22,6 +22,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.UserManager.EnforcingUser;
 
+import com.google.android.collect.Maps;
+
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -48,6 +50,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private boolean mIsQuietModeEnabled = false;
     private int[] profileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
+    private final Map<Integer, Integer> mSameProfileGroupIds = Maps.newHashMap();
 
     public void addProfile(UserInfo userInfo) {
         mUserProfileInfos.add(userInfo);
@@ -136,6 +139,18 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     @Implementation
     protected static boolean supportsMultipleUsers() {
         return sIsSupportsMultipleUsers;
+    }
+
+    @Implementation
+    protected boolean isSameProfileGroup(@UserIdInt int userId, int otherUserId) {
+        return mSameProfileGroupIds.containsKey(userId)
+                && mSameProfileGroupIds.get(userId) == otherUserId
+                || mSameProfileGroupIds.containsKey(otherUserId)
+                && mSameProfileGroupIds.get(otherUserId) == userId;
+    }
+
+    public Map<Integer, Integer> getSameProfileGroupIds() {
+        return mSameProfileGroupIds;
     }
 
     public void setSupportsMultipleUsers(boolean supports) {

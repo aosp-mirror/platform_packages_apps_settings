@@ -115,6 +115,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     @VisibleForTesting
     static final String KEY_SECURITY_PREF = "security";
     @VisibleForTesting
+    static final String KEY_SSID_PREF = "ssid";
+    @VisibleForTesting
     static final String KEY_MAC_ADDRESS_PREF = "mac_address";
     @VisibleForTesting
     static final String KEY_IP_ADDRESS_PREF = "ip_address";
@@ -158,6 +160,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private final WifiTracker mWifiTracker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private boolean mIsOutOfRange;
+    private boolean mIsEphemeral;
     private boolean mConnected;
     private int mConnectingState;
     private WifiManager.ActionListener mConnectListener;
@@ -170,6 +173,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private Preference mRxLinkSpeedPref;
     private Preference mFrequencyPref;
     private Preference mSecurityPref;
+    private Preference mSsidPref;
     private Preference mMacAddressPref;
     private Preference mIpAddressPref;
     private Preference mGatewayPref;
@@ -248,12 +252,14 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         @Override
         public void onLost(Network network) {
-            // If support detail page for saved network, should update as disconnect but not exit.
-            if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext)) {
-                return;
-            }
+            final boolean lostCurrentNetwork = network.equals(mNetwork);
+            if (lostCurrentNetwork) {
+                // If support detail page for saved network, should update as disconnect but not
+                // exit. Except for ephemeral network which should not show on saved network list.
+                if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext) && !mIsEphemeral) {
+                    return;
+                }
 
-            if (network.equals(mNetwork)) {
                 exitActivity();
             }
         }
@@ -347,6 +353,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             mWifiTracker = null;
         }
         mConnected = mAccessPoint.isActive();
+        // When lost the network connection, WifiInfo/NetworkInfo will be clear. So causes we
+        // could not check if the AccessPoint is ephemeral. Need to cache it in first.
+        mIsEphemeral = mAccessPoint.isEphemeral();
         mConnectingState = STATE_NONE;
         mConnectListener = new WifiManager.ActionListener() {
             @Override
@@ -399,6 +408,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mFrequencyPref = screen.findPreference(KEY_FREQUENCY_PREF);
         mSecurityPref = screen.findPreference(KEY_SECURITY_PREF);
 
+        mSsidPref = screen.findPreference(KEY_SSID_PREF);
         mMacAddressPref = screen.findPreference(KEY_MAC_ADDRESS_PREF);
         mIpAddressPref = screen.findPreference(KEY_IP_ADDRESS_PREF);
         mGatewayPref = screen.findPreference(KEY_GATEWAY_PREF);
@@ -497,6 +507,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         refreshRxSpeed();
         // IP related information
         refreshIpLayerInfo();
+        // SSID Pref
+        refreshSsid();
         // MAC Address Pref
         refreshMacAddress();
     }
@@ -645,6 +657,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 R.string.rx_link_speed, mWifiInfo.getRxLinkSpeedMbps()));
     }
 
+    private void refreshSsid() {
+        if (mAccessPoint.isPasspoint() || mAccessPoint.isOsuProvider()) {
+            mSsidPref.setVisible(true);
+            mSsidPref.setSummary(mAccessPoint.getSsidStr());
+        } else {
+            mSsidPref.setVisible(false);
+        }
+    }
+
     private void refreshMacAddress() {
         String macAddress = getMacAddress();
         if (macAddress == null) {
@@ -663,7 +684,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         }
 
         // return randomized MAC address
-        if (mWifiConfig.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_PERSISTENT) {
+        if (mWifiConfig != null &&
+                mWifiConfig.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_PERSISTENT) {
             return mWifiConfig.getRandomizedMacAddress().toString();
         }
 
@@ -687,6 +709,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     private void refreshButtons() {
+        // Ephemeral network won't be removed permanently, but be putted in blacklist.
+        mButtonsPref.setButton1Text(
+                mIsEphemeral ? R.string.wifi_disconnect_button_text : R.string.forget);
+
         mButtonsPref.setButton1Visible(canForgetNetwork());
         mButtonsPref.setButton2Visible(canSignIntoNetwork());
         mButtonsPref.setButton3Visible(canConnectNetwork());

@@ -109,4 +109,20 @@ public class WifiPrivacyPreferenceControllerTest {
 
         assertThat(mDropDownPreference.isSelectable()).isFalse();
     }
+
+    @Test
+    public void testUpdateState_isNotPasspointNetwork_shouldBeSelectable() {
+        mPreferenceController.setIsPasspoint(false);
+        mPreferenceController.updateState(mDropDownPreference);
+
+        assertThat(mDropDownPreference.isSelectable()).isTrue();
+    }
+
+    @Test
+    public void testUpdateState_isPasspointNetwork_shouldNotSelectable() {
+        mPreferenceController.setIsPasspoint(true);
+        mPreferenceController.updateState(mDropDownPreference);
+
+        assertThat(mDropDownPreference.isSelectable()).isFalse();
+    }
 }

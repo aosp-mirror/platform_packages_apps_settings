@@ -105,6 +105,7 @@ public class WifiDetailPreferenceControllerTest {
     private static final int RSSI = -55;
     private static final int TX_LINK_SPEED = 123;
     private static final int RX_LINK_SPEED = 54;
+    private static final String SSID = "ssid";
     private static final String MAC_ADDRESS = WifiInfo.DEFAULT_MAC_ADDRESS;
     private static final String SECURITY = "None";
 
@@ -153,6 +154,8 @@ public class WifiDetailPreferenceControllerTest {
     private Preference mockFrequencyPref;
     @Mock
     private Preference mockSecurityPref;
+    @Mock
+    private Preference mockSsidPref;
     @Mock
     private Preference mockMacAddressPref;
     @Mock
@@ -245,6 +248,7 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
         when(mockAccessPoint.getLevel()).thenReturn(LEVEL);
         when(mockAccessPoint.getSecurityString(false)).thenReturn(SECURITY);
+        when(mockAccessPoint.getSsidStr()).thenReturn(SSID);
         when(mockConnectivityManager.getNetworkInfo(any(Network.class)))
                 .thenReturn(mockNetworkInfo);
         doNothing().when(mockConnectivityManager).registerNetworkCallback(
@@ -314,6 +318,8 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockFrequencyPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SECURITY_PREF))
                 .thenReturn(mockSecurityPref);
+        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SSID_PREF))
+                .thenReturn(mockSsidPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_MAC_ADDRESS_PREF))
                 .thenReturn(mockMacAddressPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_IP_ADDRESS_PREF))
@@ -460,6 +466,50 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockRxLinkSpeedPref).setVisible(false);
+    }
+
+    @Test
+    public void ssidPref_shouldHaveDetailTextSet() {
+        when(mockAccessPoint.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.isOsuProvider()).thenReturn(false);
+
+        displayAndResume();
+
+        verify(mockSsidPref, times(1)).setSummary(SSID);
+
+        when(mockAccessPoint.isPasspoint()).thenReturn(false);
+        when(mockAccessPoint.isOsuProvider()).thenReturn(true);
+
+        displayAndResume();
+
+        verify(mockSsidPref, times(2)).setSummary(SSID);
+    }
+
+    @Test
+    public void ssidPref_shouldShowIfPasspointOrOsu() {
+        when(mockAccessPoint.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.isOsuProvider()).thenReturn(false);
+
+        displayAndResume();
+
+        verify(mockSsidPref, times(1)).setVisible(true);
+
+        when(mockAccessPoint.isPasspoint()).thenReturn(false);
+        when(mockAccessPoint.isOsuProvider()).thenReturn(true);
+
+        displayAndResume();
+
+        verify(mockSsidPref, times(2)).setVisible(true);
+    }
+
+    @Test
+    public void ssidPref_shouldNotShowIfNotPasspoint() {
+        when(mockAccessPoint.isPasspoint()).thenReturn(false);
+        when(mockAccessPoint.isOsuProvider()).thenReturn(false);
+
+        displayAndResume();
+
+        verify(mockSsidPref).setVisible(false);
     }
 
     @Test

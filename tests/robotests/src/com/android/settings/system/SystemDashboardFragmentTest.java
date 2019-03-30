@@ -18,8 +18,17 @@ package com.android.settings.system;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.os.Bundle;
+
+import com.android.settings.aware.AwareFeatureProvider;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -38,11 +47,17 @@ import java.util.List;
 @Config(shadows = {SettingsShadowResources.class, ShadowUserManager.class})
 public class SystemDashboardFragmentTest {
 
+    private Context mContext;
+    private SystemDashboardFragment mFragment;
+
     @Before
     public void setup() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_supportSystemNavigationKeys, true);
         ShadowUserManager.getShadow().setIsAdminUser(true);
+        mContext = RuntimeEnvironment.application;
+        mFragment = spy(new SystemDashboardFragment());
+        when(mFragment.getContext()).thenReturn(mContext);
     }
 
     @After
@@ -52,13 +67,35 @@ public class SystemDashboardFragmentTest {
 
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
-        final Context context = RuntimeEnvironment.application;
         final List<String> niks = SystemDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
+                .getNonIndexableKeys(mContext);
         final int xmlId = (new SystemDashboardFragment()).getPreferenceScreenResId();
 
-        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    public void showRestrictionDialog_hasValidExtra_shouldShowDialog() {
+        final AwareFeatureProvider mProvider =
+                FakeFeatureFactory.setupForTest().mAwareFeatureProvider;
+        final Bundle bundle = new Bundle();
+        bundle.putBoolean(SystemDashboardFragment.EXTRA_SHOW_AWARE_DISABLED, true);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.showRestrictionDialog();
+
+        verify(mProvider).showRestrictionDialog(any());
+    }
+
+    @Test
+    public void showRestrictionDialog_hasInvalidExtra_shouldNotShowDialog() {
+        final AwareFeatureProvider mProvider =
+                FakeFeatureFactory.setupForTest().mAwareFeatureProvider;
+
+        mFragment.showRestrictionDialog();
+
+        verify(mProvider, never()).showRestrictionDialog(any());
     }
 }

@@ -94,7 +94,7 @@
     <style name="ThemeOverlay.SwitchBar.Settings" parent="@android:style/ThemeOverlay.Material.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">@color/switch_bar_background</item>
+        <item name="switchBarBackgroundColor">?android:attr/textColorSecondary</item>
         <item name="switchBarBackgroundActivatedColor">?android:attr/colorAccent</item>
         <item name="switchBarRestrictionIcon">@*android:drawable/ic_info</item>
     </style>
@@ -103,6 +103,7 @@
         <item name="android:trackTint">@color/switchbar_switch_track_tint</item>
         <item name="android:thumbTint">@color/switchbar_switch_thumb_tint</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
+        <item name="android:minWidth">@dimen/min_tap_target_size</item>
     </style>
 
     <style name="Theme.CryptKeeper" parent="@android:style/Theme.Material.NoActionBar">

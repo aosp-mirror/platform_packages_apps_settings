@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -36,12 +37,10 @@ import java.util.Set;
 /**
  * Card renderer helper for {@link ContextualCard} built as slice full card.
  */
-class SliceFullCardRendererHelper implements SliceView.OnSliceActionListener {
+class SliceFullCardRendererHelper {
     private static final String TAG = "SliceFCRendererHelper";
 
     private final Context mContext;
-
-    private Set<ContextualCard> mCardSet;
 
     SliceFullCardRendererHelper(Context context) {
         mContext = context;
@@ -51,40 +50,28 @@ class SliceFullCardRendererHelper implements SliceView.OnSliceActionListener {
         return new SliceViewHolder(view);
     }
 
-    void bindView(RecyclerView.ViewHolder holder, ContextualCard card, Slice slice,
-            Set<ContextualCard> cardSet) {
+    void bindView(RecyclerView.ViewHolder holder, ContextualCard card, Slice slice) {
         final SliceViewHolder cardHolder = (SliceViewHolder) holder;
         cardHolder.sliceView.setScrollable(false);
         cardHolder.sliceView.setTag(card.getSliceUri());
         //TODO(b/114009676): We will soon have a field to decide what slice mode we should set.
         cardHolder.sliceView.setMode(SliceView.MODE_LARGE);
         cardHolder.sliceView.setSlice(slice);
-        mCardSet = cardSet;
         // Set this listener so we can log the interaction users make on the slice
-        cardHolder.sliceView.setOnSliceActionListener(this);
+        cardHolder.sliceView.setOnSliceActionListener(
+                (eventInfo, sliceItem) -> {
+                    final ContextualCardFeatureProvider contextualCardFeatureProvider =
+                            FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(
+                                    mContext);
+                    contextualCardFeatureProvider.logContextualCardClick(card, eventInfo.rowIndex,
+                            eventInfo.actionType, cardHolder.getAdapterPosition());
+                });
 
         // Customize slice view for Settings
         cardHolder.sliceView.showTitleItems(true);
         if (card.isLargeCard()) {
             cardHolder.sliceView.showHeaderDivider(true);
             cardHolder.sliceView.showActionDividers(true);
-        }
-    }
-
-    @Override
-    public void onSliceAction(@NonNull EventInfo eventInfo, @NonNull SliceItem sliceItem) {
-        // sliceItem.getSlice().getUri() is like
-        // content://android.settings.slices/action/wifi/_gen/0/_gen/0
-        // contextualCard.getSliceUri() is prefix of sliceItem.getSlice().getUri()
-        final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
-        for (ContextualCard card : mCardSet) {
-            if (sliceItem.getSlice().getUri().toString().startsWith(
-                    card.getSliceUri().toString())) {
-                contextualCardFeatureProvider.logContextualCardClick(card, eventInfo.rowIndex,
-                        eventInfo.actionType);
-                break;
-            }
         }
     }
 

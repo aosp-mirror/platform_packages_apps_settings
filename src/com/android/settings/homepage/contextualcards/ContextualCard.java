@@ -71,6 +71,7 @@ public class ContextualCard {
     private final Drawable mIconDrawable;
     @LayoutRes
     private final int mViewType;
+    private final boolean mIsPendingDismiss;
 
     public String getName() {
         return mName;
@@ -156,6 +157,10 @@ public class ContextualCard {
         return mViewType;
     }
 
+    public boolean isPendingDismiss() {
+        return mIsPendingDismiss;
+    }
+
     public Builder mutate() {
         return mBuilder;
     }
@@ -181,6 +186,7 @@ public class ContextualCard {
         mIconDrawable = builder.mIconDrawable;
         mIsLargeCard = builder.mIsLargeCard;
         mViewType = builder.mViewType;
+        mIsPendingDismiss = builder.mIsPendingDismiss;
     }
 
     ContextualCard(Cursor c) {
@@ -226,6 +232,8 @@ public class ContextualCard {
         mBuilder.setIconDrawable(mIconDrawable);
         mViewType = getViewTypeByCardType(mCardType);
         mBuilder.setViewType(mViewType);
+        mIsPendingDismiss = false;
+        mBuilder.setIsPendingDismiss(mIsPendingDismiss);
     }
 
     @Override
@@ -277,6 +285,7 @@ public class ContextualCard {
         private boolean mIsLargeCard;
         @LayoutRes
         private int mViewType;
+        private boolean mIsPendingDismiss;
 
         public Builder setName(String name) {
             mName = name;
@@ -370,6 +379,11 @@ public class ContextualCard {
 
         public Builder setViewType(@LayoutRes int viewType) {
             mViewType = viewType;
+            return this;
+        }
+
+        public Builder setIsPendingDismiss(boolean isPendingDismiss) {
+            mIsPendingDismiss = isPendingDismiss;
             return this;
         }
 

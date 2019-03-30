@@ -119,7 +119,6 @@ public class AppButtonsPreferenceControllerTest {
 
         mController = spy(new AppButtonsPreferenceController(mSettingsActivity, mFragment,
                 mLifecycle, PACKAGE_NAME, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN));
-        doReturn(false).when(mController).isFallbackPackage(anyString());
 
         mAppEntry.info = mAppInfo;
         mAppInfo.packageName = PACKAGE_NAME;

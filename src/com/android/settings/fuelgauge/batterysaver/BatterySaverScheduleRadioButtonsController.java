@@ -20,6 +20,8 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.text.TextUtils;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
  * Responds to user actions in the Settings > Battery > Set a Schedule Screen
@@ -66,24 +68,34 @@ public class BatterySaverScheduleRadioButtonsController {
 
     public boolean setDefaultKey(String key) {
         final ContentResolver resolver = mContext.getContentResolver();
-        switch(key) {
-            case KEY_NO_SCHEDULE:
-                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
-                        PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-                Settings.Global.putInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-                break;
-            case KEY_PERCENTAGE:
-                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
-                        PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-                Settings.Global.putInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 5);
-                break;
-            case KEY_ROUTINE:
-                Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
-                        PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
-                break;
-            default:
-                throw new IllegalStateException(
-                        "Not a valid key for " + this.getClass().getSimpleName());
+
+        int mode = PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE;
+        int triggerLevel = 0;
+        if (!TextUtils.equals(key, KEY_NO_SCHEDULE)
+                && BatterySaverUtils.maybeShowBatterySaverConfirmation(
+                        mContext, true /* confirmOnly */)) {
+            return true;
+        } else {
+            switch (key) {
+                case KEY_NO_SCHEDULE:
+                    break;
+                case KEY_PERCENTAGE:
+                    triggerLevel = 5;
+                    break;
+                case KEY_ROUTINE:
+                    mode = PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC;
+                    break;
+                default:
+                    throw new IllegalStateException(
+                            "Not a valid key for " + this.getClass().getSimpleName());
+            }
+        }
+
+        // Trigger level is intentionally left alone when going between dynamic and percentage modes
+        // so that a users percentage based schedule is preserved when they toggle between the two.
+        Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE, mode);
+        if (mode != PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC) {
+            Settings.Global.putInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, triggerLevel);
         }
         mSeekBarController.updateSeekBar();
         return true;

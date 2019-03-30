@@ -18,24 +18,24 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settings.applications.AppInfoBase;
+import com.android.settings.core.SubSettingLauncher;
 
 import androidx.preference.Preference;
 
-public class BubblePreferenceController extends NotificationPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+public class BubbleSummaryPreferenceController extends NotificationPreferenceController {
 
-    private static final String TAG = "BubblePrefContr";
-    private static final String KEY = "bubble_pref";
+    private static final String KEY = "bubble_link_pref";
     private static final int SYSTEM_WIDE_ON = 1;
     private static final int SYSTEM_WIDE_OFF = 0;
 
-    public BubblePreferenceController(Context context, NotificationBackend backend) {
+    public BubbleSummaryPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
     }
 
@@ -66,32 +66,34 @@ public class BubblePreferenceController extends NotificationPreferenceController
         return true;
     }
 
+    @Override
     public void updateState(Preference preference) {
+        super.updateState(preference);
+
         if (mAppRow != null) {
-            RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
-            pref.setDisabledByAdmin(mAdmin);
-            if (mChannel != null) {
-                pref.setChecked(mChannel.canBubble());
-                pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
-            } else {
-                pref.setChecked(mAppRow.allowBubbles);
-                pref.setSummary(mContext.getString(
-                        R.string.bubbles_app_toggle_summary, mAppRow.label));
-            }
+            Bundle args = new Bundle();
+            args.putString(AppInfoBase.ARG_PACKAGE_NAME, mAppRow.pkg);
+            args.putInt(AppInfoBase.ARG_PACKAGE_UID, mAppRow.uid);
+
+            preference.setIntent(new SubSettingLauncher(mContext)
+                    .setDestination(AppBubbleNotificationSettings.class.getName())
+                    .setArguments(args)
+                    .setSourceMetricsCategory(
+                            SettingsEnums.NOTIFICATION_APP_NOTIFICATION)
+                    .toIntent());
         }
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean value = (Boolean) newValue;
-        if (mChannel != null) {
-            mChannel.setAllowBubbles(value);
-            saveChannel();
-        } else if (mAppRow != null){
-            mAppRow.allowBubbles = value;
-            mBackend.setAllowBubbles(mAppRow.pkg, mAppRow.uid, value);
+    public CharSequence getSummary() {
+        boolean canBubble = false;
+        if (mAppRow != null) {
+            if (mChannel != null) {
+                canBubble |= mChannel.canBubble();
+            } else {
+               canBubble |= mAppRow.allowBubbles;
+            }
         }
-        return true;
+        return mContext.getString(canBubble ? R.string.switch_on_text : R.string.switch_off_text);
     }
-
 }

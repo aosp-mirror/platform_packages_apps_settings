@@ -254,7 +254,7 @@ public class SimDialogActivity extends Activity {
                 builder.setTitle(R.string.select_sim_for_calls);
                 break;
             case SMS_PICK:
-                builder.setTitle(R.string.sim_card_select_title);
+                builder.setTitle(R.string.select_sim_for_sms);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid dialog type "
