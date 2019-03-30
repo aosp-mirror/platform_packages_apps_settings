@@ -113,8 +113,8 @@ public class GrayscaleConditionController implements ConditionalCardController {
     }
 
     private void sendBroadcast() {
-        final Intent intent = new Intent();
-        intent.setAction(ACTION_GRAYSCALE_CHANGED);
+        final Intent intent = new Intent(ACTION_GRAYSCALE_CHANGED);
+        intent.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
         mAppContext.sendBroadcast(intent, Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS);
     }
 
