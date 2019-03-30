@@ -25,8 +25,6 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ResolveInfo;
 import android.hardware.display.ColorDisplayManager;
 
 import org.junit.Before;
@@ -36,9 +34,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class GrayscaleConditionControllerTest {
@@ -49,7 +45,6 @@ public class GrayscaleConditionControllerTest {
     private ColorDisplayManager mColorDisplayManager;
     private Context mContext;
     private GrayscaleConditionController mController;
-    private ShadowPackageManager mPackageManager;
 
     @Before
     public void setUp() {
@@ -58,7 +53,6 @@ public class GrayscaleConditionControllerTest {
         mColorDisplayManager = spy(mContext.getSystemService(ColorDisplayManager.class));
         doReturn(mColorDisplayManager).when(mContext).getSystemService(ColorDisplayManager.class);
         mController = new GrayscaleConditionController(mContext, mConditionManager);
-        mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
     }
 
     @Test
@@ -91,13 +85,8 @@ public class GrayscaleConditionControllerTest {
 
     @Test
     public void onActionClick_shouldSendBroadcast() {
-        final Intent intent = new Intent(GrayscaleConditionController.ACTION_GRAYSCALE_CHANGED);
-        final ResolveInfo info = new ResolveInfo();
-        info.activityInfo = new ActivityInfo();
-        mPackageManager.addResolveInfoForIntent(intent, info);
-
         mController.onActionClick();
 
-        verify(mContext).sendBroadcast(any(Intent.class));
+        verify(mContext).sendBroadcast(any(Intent.class), any(String.class));
     }
 }

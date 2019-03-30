@@ -22,27 +22,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.hardware.display.ColorDisplayManager;
 import android.util.Log;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Objects;
 
 public class GrayscaleConditionController implements ConditionalCardController {
     static final int ID = Objects.hash("GrayscaleConditionController");
 
-    @VisibleForTesting
-    static final String ACTION_GRAYSCALE_CHANGED = "android.settings.action.GRAYSCALE_CHANGED";
-
     private static final String TAG = "GrayscaleCondition";
+    private static final String ACTION_GRAYSCALE_CHANGED =
+            "android.settings.action.GRAYSCALE_CHANGED";
     private static final IntentFilter GRAYSCALE_CHANGED_FILTER = new IntentFilter(
             ACTION_GRAYSCALE_CHANGED);
 
@@ -119,13 +113,9 @@ public class GrayscaleConditionController implements ConditionalCardController {
     }
 
     private void sendBroadcast() {
-        final PackageManager pm = mAppContext.getPackageManager();
-        final Intent intent = new Intent(ACTION_GRAYSCALE_CHANGED);
-        final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(intent, 0 /* flags */);
-        for (ResolveInfo receiver : receivers) {
-            intent.setPackage(receiver.activityInfo.packageName);
-            mAppContext.sendBroadcast(intent);
-        }
+        final Intent intent = new Intent();
+        intent.setAction(ACTION_GRAYSCALE_CHANGED);
+        mAppContext.sendBroadcast(intent, Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS);
     }
 
     public class Receiver extends BroadcastReceiver {
