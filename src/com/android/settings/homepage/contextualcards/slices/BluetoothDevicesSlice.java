@@ -46,6 +46,7 @@ import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -211,8 +212,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     @VisibleForTesting
     IconCompat getBluetoothDeviceIcon(CachedBluetoothDevice device) {
         final Pair<Drawable, String> pair =
-                com.android.settings.bluetooth.Utils.getBtRainbowDrawableWithDescription(mContext,
-                        device);
+                BluetoothUtils.getBtRainbowDrawableWithDescription(mContext, device);
         final Drawable drawable = pair.first;
 
         // Use default bluetooth icon if can't get icon.

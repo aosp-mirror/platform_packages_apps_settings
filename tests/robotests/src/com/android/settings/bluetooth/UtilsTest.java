@@ -29,8 +29,6 @@ import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.AdaptiveIcon;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -41,7 +39,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class UtilsTest {
@@ -54,8 +51,6 @@ public class UtilsTest {
     private Context mContext;
     @Mock
     private BluetoothDevice mBluetoothDevice;
-    @Mock
-    private CachedBluetoothDevice mCachedBluetoothDevice;
 
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -111,17 +106,4 @@ public class UtilsTest {
         assertThat(Utils.getBooleanMetaData(mBluetoothDevice,
                 BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET)).isEqualTo(true);
     }
-
-    @Test
-    public void getBtRainbowDrawableWithDescription_normalHeadset_returnAdaptiveIcon() {
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET)).thenReturn("false");
-        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        when(mCachedBluetoothDevice.getAddress()).thenReturn("1f:aa:bb");
-
-        assertThat(Utils.getBtRainbowDrawableWithDescription(RuntimeEnvironment.application,
-                mCachedBluetoothDevice).first).isInstanceOf(
-                AdaptiveIcon.class);
-    }
-
 }
