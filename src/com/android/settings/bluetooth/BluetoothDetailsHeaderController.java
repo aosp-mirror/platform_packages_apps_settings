@@ -26,6 +26,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -65,8 +66,8 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     }
 
     protected void setHeaderProperties() {
-        final Pair<Drawable, String> pair = Utils.getBtRainbowDrawableWithDescription(mContext,
-                mCachedDevice);
+        final Pair<Drawable, String> pair =
+                BluetoothUtils.getBtRainbowDrawableWithDescription(mContext, mCachedDevice);
         String summaryText = mCachedDevice.getConnectionSummary();
         // If both the hearing aids are connected, two device status should be shown.
         // If Second Summary is unavailable, to set it to null.
