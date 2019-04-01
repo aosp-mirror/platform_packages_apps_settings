@@ -19,7 +19,7 @@ package com.android.settings.slices;
 import static android.provider.SettingsSlicesContract.KEY_LOCATION;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
-import static com.android.settings.notification.ZenModePreferenceController.ZEN_MODE_KEY;
+import static com.android.settings.notification.ZenModeSoundSettingsPreferenceController.ZEN_MODE_KEY;
 
 import android.content.ContentResolver;
 import android.net.Uri;
