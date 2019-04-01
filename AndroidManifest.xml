@@ -2812,7 +2812,7 @@
 
         <receiver android:name=".sim.SimSelectNotification">
             <intent-filter>
-                <action android:name="android.intent.action.SIM_STATE_CHANGED"></action>
+                <action android:name="android.intent.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
             </intent-filter>
         </receiver>
 
