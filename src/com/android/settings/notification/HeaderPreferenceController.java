@@ -68,9 +68,13 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                 activity = mFragment.getActivity();
             }
 
+            if (activity == null) {
+                return;
+            }
+
             LayoutPreference pref = (LayoutPreference) preference;
             mHeaderController = EntityHeaderController.newInstance(
-                    mFragment.getActivity(), mFragment, pref.findViewById(R.id.entity_header));
+                    activity, mFragment, pref.findViewById(R.id.entity_header));
             pref = mHeaderController.setIcon(mAppRow.icon)
                     .setLabel(getLabel())
                     .setSummary(getSummary())

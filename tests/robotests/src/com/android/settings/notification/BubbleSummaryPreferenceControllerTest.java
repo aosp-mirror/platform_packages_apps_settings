@@ -110,6 +110,15 @@ public class BubbleSummaryPreferenceControllerTest {
     }
 
     @Test
+    public void testIsAvailable_app_globalOff() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mController.onResume(appRow, null, null, null);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
     public void testIsAvailable_defaultChannel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = true;
@@ -141,6 +150,10 @@ public class BubbleSummaryPreferenceControllerTest {
 
         assertEquals("On", mController.getSummary());
 
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+        assertEquals("Off", mController.getSummary());
+
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 1);
         appRow.allowBubbles = false;
         mController.onResume(appRow, null, null, null);
 
