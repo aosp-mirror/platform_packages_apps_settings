@@ -19,25 +19,20 @@ package com.android.settings.wifi.slice;
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
 
-import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
-import static com.android.settings.wifi.slice.WifiSlice.WifiScanWorker;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkInfo;
-import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.os.Bundle;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -53,6 +48,9 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.wifi.AccessPoint;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,11 +60,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = WifiSliceTest.ShadowSliceBackgroundWorker.class)
 public class WifiSliceTest {
 
     private static final String AP1_NAME = "ap1";
@@ -76,7 +71,6 @@ public class WifiSliceTest {
     private ContentResolver mResolver;
     private WifiManager mWifiManager;
     private WifiSlice mWifiSlice;
-    private WifiScanWorker mWifiScanWorker;
 
     @Before
     public void setUp() {
@@ -90,7 +84,6 @@ public class WifiSliceTest {
         mWifiManager.setWifiEnabled(true);
 
         mWifiSlice = new WifiSlice(mContext);
-        mWifiScanWorker = new WifiScanWorker(mContext, WIFI_SLICE_URI);
     }
 
     @Test
@@ -160,13 +153,12 @@ public class WifiSliceTest {
     }
 
     @Test
-    @Config(shadows = ShadowSliceBackgroundWorker.class)
     public void getWifiSlice_noReachableAp_shouldReturnLoadingRow() {
         setWorkerResults(
                 createAccessPoint(AP1_NAME, false, false),
                 createAccessPoint(AP2_NAME, false, false));
-        final Slice wifiSlice = mWifiSlice.getSlice();
 
+        final Slice wifiSlice = mWifiSlice.getSlice();
         final List<SliceItem> sliceItems = wifiSlice.getItems();
 
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
@@ -177,11 +169,10 @@ public class WifiSliceTest {
     }
 
     @Test
-    @Config(shadows = ShadowSliceBackgroundWorker.class)
     public void getWifiSlice_oneActiveAp_shouldReturnLoadingRow() {
         setWorkerResults(createAccessPoint(AP1_NAME, true, true));
-        final Slice wifiSlice = mWifiSlice.getSlice();
 
+        final Slice wifiSlice = mWifiSlice.getSlice();
         final List<SliceItem> sliceItems = wifiSlice.getItems();
 
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
@@ -191,13 +182,12 @@ public class WifiSliceTest {
     }
 
     @Test
-    @Config(shadows = ShadowSliceBackgroundWorker.class)
     public void getWifiSlice_oneActiveApAndOneUnreachableAp_shouldReturnLoadingRow() {
         setWorkerResults(
                 createAccessPoint(AP1_NAME, true, true),
                 createAccessPoint(AP2_NAME, false, false));
-        final Slice wifiSlice = mWifiSlice.getSlice();
 
+        final Slice wifiSlice = mWifiSlice.getSlice();
         final List<SliceItem> sliceItems = wifiSlice.getItems();
 
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
@@ -208,11 +198,10 @@ public class WifiSliceTest {
     }
 
     @Test
-    @Config(shadows = ShadowSliceBackgroundWorker.class)
     public void getWifiSlice_oneReachableAp_shouldNotReturnLoadingRow() {
         setWorkerResults(createAccessPoint(AP1_NAME, false, true));
-        final Slice wifiSlice = mWifiSlice.getSlice();
 
+        final Slice wifiSlice = mWifiSlice.getSlice();
         final List<SliceItem> sliceItems = wifiSlice.getItems();
 
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
@@ -222,13 +211,12 @@ public class WifiSliceTest {
     }
 
     @Test
-    @Config(shadows = ShadowSliceBackgroundWorker.class)
     public void getWifiSlice_allReachableAps_shouldNotReturnLoadingRow() {
         setWorkerResults(
                 createAccessPoint(AP1_NAME, false, true),
                 createAccessPoint(AP2_NAME, false, true));
-        final Slice wifiSlice = mWifiSlice.getSlice();
 
+        final Slice wifiSlice = mWifiSlice.getSlice();
         final List<SliceItem> sliceItems = wifiSlice.getItems();
 
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
@@ -247,51 +235,6 @@ public class WifiSliceTest {
         mWifiSlice.onNotifyChange(intent);
 
         assertThat(wifiManager.getWifiState()).isEqualTo(WifiManager.WIFI_STATE_ENABLED);
-    }
-
-    @Test
-    public void onWifiStateChanged_shouldNotifyChange() {
-        mWifiScanWorker.onWifiStateChanged(WifiManager.WIFI_STATE_DISABLED);
-
-        verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
-    }
-
-    private AccessPoint createAccessPoint(String name, State state) {
-        final NetworkInfo info = mock(NetworkInfo.class);
-        doReturn(state).when(info).getState();
-
-        final Bundle savedState = new Bundle();
-        savedState.putString("key_ssid", name);
-        savedState.putParcelable("key_networkinfo", info);
-        return new AccessPoint(mContext, savedState);
-    }
-
-    @Test
-    public void SliceAccessPoint_sameState_shouldBeTheSame() {
-        final AccessPoint ap1 = createAccessPoint(AP1_NAME, State.CONNECTED);
-        final AccessPoint ap2 = createAccessPoint(AP1_NAME, State.CONNECTED);
-
-        assertThat(mWifiScanWorker.areListsTheSame(Arrays.asList(ap1), Arrays.asList(ap2)))
-                .isTrue();
-    }
-
-    @Test
-    public void SliceAccessPoint_differentState_shouldBeDifferent() {
-        final AccessPoint ap1 = createAccessPoint(AP1_NAME, State.CONNECTING);
-        final AccessPoint ap2 = createAccessPoint(AP1_NAME, State.CONNECTED);
-
-        assertThat(mWifiScanWorker.areListsTheSame(Arrays.asList(ap1), Arrays.asList(ap2)))
-                .isFalse();
-    }
-    @Test
-    public void SliceAccessPoint_differentLength_shouldBeDifferent() {
-        final AccessPoint ap1 = createAccessPoint(AP1_NAME, State.CONNECTED);
-        final AccessPoint ap2 = createAccessPoint(AP1_NAME, State.CONNECTED);
-        final List<AccessPoint> list = new ArrayList<>();
-        list.add(ap1);
-        list.add(ap2);
-
-        assertThat(mWifiScanWorker.areListsTheSame(list, Arrays.asList(ap1))).isFalse();
     }
 
     @Implements(SliceBackgroundWorker.class)
