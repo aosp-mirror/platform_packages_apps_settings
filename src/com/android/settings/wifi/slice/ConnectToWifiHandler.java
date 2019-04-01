@@ -48,7 +48,7 @@ public class ConnectToWifiHandler extends Activity {
     void connect(AccessPoint accessPoint) {
         switch (WifiUtils.getConnectingType(accessPoint)) {
             case WifiUtils.CONNECT_TYPE_OSU_PROVISION:
-                accessPoint.startOsuProvisioning();
+                accessPoint.startOsuProvisioning(null /* listener */);
                 break;
 
             case WifiUtils.CONNECT_TYPE_OPEN_NETWORK:

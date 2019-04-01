@@ -78,7 +78,7 @@ public class ConnectToWifiHandlerTest {
 
         mHandler.connect(mAccessPoint);
 
-        verify(mAccessPoint).startOsuProvisioning();
+        verify(mAccessPoint).startOsuProvisioning(null /* listener */);
     }
 
 
