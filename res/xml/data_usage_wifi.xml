@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="data_usage_wifi_screen">
 
     <com.android.settings.datausage.TemplatePreferenceCategory
@@ -24,7 +25,8 @@
 
         <com.android.settings.datausage.DataUsagePreference
             android:key="wifi_data_usage"
-            android:title="@string/wifi_data_usage" />
+            android:title="@string/wifi_data_usage"
+            settings:searchable="false"/>
 
     </com.android.settings.datausage.TemplatePreferenceCategory>
 
