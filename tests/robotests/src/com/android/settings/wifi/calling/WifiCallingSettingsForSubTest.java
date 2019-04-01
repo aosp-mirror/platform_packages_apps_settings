@@ -92,8 +92,8 @@ public class WifiCallingSettingsForSubTest {
     @Mock private ToggleSwitch mToggleSwitch;
     @Mock private View mView;
     @Mock private ImsConfig mImsConfig;
-    @Mock private ListPreference mButtonWfcMode;
-    @Mock private ListPreference mButtonWfcRoamingMode;
+    @Mock private ListWithEntrySummaryPreference mButtonWfcMode;
+    @Mock private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
     @Mock private Preference mUpdateAddress;
 
     @Before
