@@ -16,14 +16,27 @@
 
 package com.android.settings.wifi.slice;
 
+import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.ConnectivityManager.NetworkCallback;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
+import android.net.NetworkRequest;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
+import com.android.internal.util.Preconditions;
 import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
@@ -33,16 +46,23 @@ import java.util.List;
 /**
  * {@link SliceBackgroundWorker} for Wi-Fi, used by WifiSlice.
  */
-public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
-        implements WifiTracker.WifiListener {
+public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implements
+        WifiTracker.WifiListener {
+
+    private static final String TAG = "WifiScanWorker";
+
+    @VisibleForTesting
+    CaptivePortalNetworkCallback mCaptivePortalNetworkCallback;
 
     private final Context mContext;
 
     private WifiTracker mWifiTracker;
+    private ConnectivityManager mConnectivityManager;
 
     public WifiScanWorker(Context context, Uri uri) {
         super(context, uri);
         mContext = context;
+        mConnectivityManager = context.getSystemService(ConnectivityManager.class);
     }
 
     @Override
@@ -58,6 +78,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
     @Override
     protected void onSliceUnpinned() {
         mWifiTracker.onStop();
+        unregisterCaptivePortalNetworkCallback();
     }
 
     @Override
@@ -123,5 +144,72 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
             return networkInfo.getState();
         }
         return null;
+    }
+
+    public void registerCaptivePortalNetworkCallback(Network wifiNetwork) {
+        if (wifiNetwork == null) {
+            return;
+        }
+
+        if (mCaptivePortalNetworkCallback != null
+                && mCaptivePortalNetworkCallback.isSameNetwork(wifiNetwork)) {
+            return;
+        }
+
+        unregisterCaptivePortalNetworkCallback();
+
+        mCaptivePortalNetworkCallback = new CaptivePortalNetworkCallback(wifiNetwork);
+        mConnectivityManager.registerNetworkCallback(
+                new NetworkRequest.Builder()
+                        .clearCapabilities()
+                        .addTransportType(TRANSPORT_WIFI)
+                        .build(),
+                mCaptivePortalNetworkCallback,
+                new Handler(Looper.getMainLooper()));
+    }
+
+    public void unregisterCaptivePortalNetworkCallback() {
+        if (mCaptivePortalNetworkCallback != null) {
+            try {
+                mConnectivityManager.unregisterNetworkCallback(mCaptivePortalNetworkCallback);
+            } catch (RuntimeException e) {
+                Log.e(TAG, "Unregistering CaptivePortalNetworkCallback failed.", e);
+            }
+            mCaptivePortalNetworkCallback = null;
+        }
+    }
+
+    class CaptivePortalNetworkCallback extends NetworkCallback {
+
+        private final Network mNetwork;
+        private boolean mIsCaptivePortal;
+
+        CaptivePortalNetworkCallback(Network network) {
+            mNetwork = Preconditions.checkNotNull(network);
+        }
+
+        @Override
+        public void onCapabilitiesChanged(Network network,
+                NetworkCapabilities networkCapabilities) {
+            if (!mNetwork.equals(network)) {
+                return;
+            }
+
+            final boolean isCaptivePortal = WifiUtils.canSignIntoNetwork(networkCapabilities);
+            if (mIsCaptivePortal == isCaptivePortal) {
+                return;
+            }
+
+            mIsCaptivePortal = isCaptivePortal;
+            notifySliceChange();
+        }
+
+        /**
+         * Returns true if the supplied network is not null and is the same as the originally
+         * supplied value.
+         */
+        public boolean isSameNetwork(Network network) {
+            return mNetwork.equals(network);
+        }
     }
 }
