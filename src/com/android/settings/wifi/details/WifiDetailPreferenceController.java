@@ -106,6 +106,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     @VisibleForTesting
     static final String KEY_HEADER = "connection_header";
     @VisibleForTesting
+    static final String KEY_DATA_USAGE_HEADER = "status_header";
+    @VisibleForTesting
     static final String KEY_BUTTONS_PREF = "buttons";
     @VisibleForTesting
     static final String KEY_SIGNAL_STRENGTH_PREF = "signal_strength";
@@ -433,7 +435,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         if (usingDataUsageHeader(mContext)) {
             headerPref.setVisible(false);
-            mDataUsageSummaryPref = screen.findPreference("status_header");
+            mDataUsageSummaryPref = screen.findPreference(KEY_DATA_USAGE_HEADER);
             mDataUsageSummaryPref.setVisible(true);
             mSummaryHeaderController =
                 new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
