@@ -35,7 +35,6 @@ import android.net.NetworkInfo.State;
 import android.net.NetworkRequest;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -100,10 +99,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final int MENU_ID_CONNECT = Menu.FIRST + 6;
     private static final int MENU_ID_FORGET = Menu.FIRST + 7;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
-    private static final int MENU_ID_WRITE_NFC = Menu.FIRST + 9;
 
     public static final int WIFI_DIALOG_ID = 1;
-    private static final int WRITE_NFC_DIALOG_ID = 6;
 
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
@@ -111,7 +108,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     // Instance state keys
     private static final String SAVE_DIALOG_MODE = "dialog_mode";
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
-    private static final String SAVED_WIFI_NFC_DIALOG_STATE = "wifi_nfc_dlg_state";
 
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     private static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
@@ -152,7 +148,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private AccessPoint mSelectedAccessPoint;
 
     private WifiDialog mDialog;
-    private WriteWifiConfigToNfcDialog mWifiToNfcDialog;
 
     private View mProgressHeader;
 
@@ -171,7 +166,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private int mDialogMode;
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
-    private Bundle mWifiNfcDialogSavedState;
 
     @VisibleForTesting
     WifiTracker mWifiTracker;
@@ -297,11 +291,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
                 mAccessPointSavedState =
                         savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
-            }
-
-            if (savedInstanceState.containsKey(SAVED_WIFI_NFC_DIALOG_STATE)) {
-                mWifiNfcDialogSavedState =
-                        savedInstanceState.getBundle(SAVED_WIFI_NFC_DIALOG_STATE);
             }
         }
 
@@ -447,12 +436,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 outState.putBundle(SAVE_DIALOG_ACCESS_POINT_STATE, mAccessPointSavedState);
             }
         }
-
-        if (mWifiToNfcDialog != null) {
-            Bundle savedState = new Bundle();
-            mWifiToNfcDialog.saveState(savedState);
-            outState.putBundle(SAVED_WIFI_NFC_DIALOG_STATE, savedState);
-        }
     }
 
     @Override
@@ -481,13 +464,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
             if (mSelectedAccessPoint.isSaved()) {
                 menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
-                NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
-                if (nfcAdapter != null && nfcAdapter.isEnabled() &&
-                        (!(mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
-                                (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE))) {
-                    // Only allow writing of NFC tags for password-protected networks.
-                    menu.add(Menu.NONE, MENU_ID_WRITE_NFC, 0, R.string.wifi_menu_write_to_nfc);
-                }
             }
         }
     }
@@ -520,10 +496,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_MODIFY);
                 return true;
             }
-            case MENU_ID_WRITE_NFC:
-                showDialog(WRITE_NFC_DIALOG_ID);
-                return true;
-
         }
         return super.onContextItemSelected(item);
     }
@@ -612,16 +584,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                         .createModal(getActivity(), this, mDlgAccessPoint, mDialogMode);
                 mSelectedAccessPoint = mDlgAccessPoint;
                 return mDialog;
-            case WRITE_NFC_DIALOG_ID:
-                if (mSelectedAccessPoint != null) {
-                    mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(
-                            getActivity(),
-                            mSelectedAccessPoint.getSecurity());
-                } else if (mWifiNfcDialogSavedState != null) {
-                    mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(getActivity(),
-                            mWifiNfcDialogSavedState);
-                }
-                return mWifiToNfcDialog;
         }
         return super.onCreateDialog(dialogId);
     }
@@ -636,7 +598,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onDismiss(DialogInterface dialog) {
         // We don't keep any dialog object when dialog was dismissed.
         mDialog = null;
-        mWifiToNfcDialog = null;
     }
 
     @Override
@@ -644,8 +605,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         switch (dialogId) {
             case WIFI_DIALOG_ID:
                 return SettingsEnums.DIALOG_WIFI_AP_EDIT;
-            case WRITE_NFC_DIALOG_ID:
-                return SettingsEnums.DIALOG_WIFI_WRITE_NFC;
             default:
                 return 0;
         }

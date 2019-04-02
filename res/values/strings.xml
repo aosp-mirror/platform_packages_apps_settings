@@ -2023,8 +2023,6 @@
     <string name="wifi_menu_forget">Forget network</string>
     <!-- Menu option to modify a Wi-Fi network configuration -->
     <string name="wifi_menu_modify">Modify network</string>
-    <!-- Menu option to write a Wi-Fi configuration token to an NFC tag [CHAR_LIMIT=30]-->
-    <string name="wifi_menu_write_to_nfc">Write to NFC tag</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is off and network list is empty [CHAR LIMIT=50]-->
     <string name="wifi_empty_list_wifi_off">To see available networks, turn Wi\u2011Fi on.</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is on and network list is empty [CHAR LIMIT=50]-->
@@ -2210,8 +2208,6 @@
     <!-- Substring of wifi status when Wi-Fi Protected Setup (WPS) is available and
          string is listed after a wifi_secured_* string-->
     <string name="wifi_wps_available_second_item">\u0020(WPS available)</string>
-    <!-- Message in WriteWifiConfigToNfcDialog when prompted to enter network password [CHAR_LIMIT=40] -->
-    <string name="wifi_wps_nfc_enter_password">Enter your network password</string>
 
     <!-- Message in dialog when the user tries to connect to a carrier network[CHAR_LIMIT=40] -->
     <string name="wifi_carrier_connect">Carrier Wi\u2011Fi network</string>
@@ -7282,24 +7278,6 @@
     <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
     <!-- Battery Saver: Search terms for sticky battery saver preference [CHAR_LIMIT=NONE] -->
     <string name="keywords_battery_saver_sticky">battery saver, sticky, persist, power saver, battery</string>
-
-
-    <!-- NFC Wi-Fi pairing/setup strings-->
-
-    <!-- Write NFC tag for Wi-Fi pairing/setup title [CHAR_LIMIT=30]-->
-    <string name="setup_wifi_nfc_tag">Set up Wi-Fi NFC Tag</string>
-    <!-- Text for button to confirm writing tag -->
-    <string name="write_tag">Write</string>
-    <!-- Text to inform the user to tap a tag to complete the setup process -->
-    <string name="status_awaiting_tap">Tap a tag to write...</string>
-    <!-- Text to inform the user that the network key entered was incorrect -->
-    <string name="status_invalid_password">Invalid password, try again.</string>
-    <!-- Text displayed when tag successfully writen -->
-    <string name="status_write_success">Success!</string>
-    <!-- Text displayed in error cases (failure to write to tag) -->
-    <string name="status_failed_to_write">Unable to write data to NFC tag. If the problem persists, try a different tag</string>
-    <!-- Text displayed when tag is not writable -->
-    <string name="status_tag_not_writable">NFC tag is not writable. Please use a different tag.</string>
 
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
