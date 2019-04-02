@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,8 +38,10 @@ public class AdaptiveSleepSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mFooterPreferenceMixin.createFooterPreference()
-                .setTitle(R.string.adaptive_sleep_description);
+        final FooterPreference footerPreference =
+                mFooterPreferenceMixin.createFooterPreference();
+        footerPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
+        footerPreference.setTitle(R.string.adaptive_sleep_privacy);
     }
 
     @Override
