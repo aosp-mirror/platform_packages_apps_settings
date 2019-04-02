@@ -112,7 +112,7 @@ public class UserBackupSettingsActivity extends FragmentActivity implements Inde
                     data.screenTitle = context.getString(R.string.settings_label);
                     data.keywords = context.getString(R.string.keywords_backup);
                     data.intentTargetPackage = context.getPackageName();
-                    data.intentTargetClass = com.android.settings.backup.UserBackupSettingsActivity.class.getName();
+                    data.intentTargetClass = UserBackupSettingsActivity.class.getName();
                     data.intentAction = Intent.ACTION_MAIN;
                     data.key = BACKUP_SEARCH_INDEX_KEY;
                     result.add(data);
