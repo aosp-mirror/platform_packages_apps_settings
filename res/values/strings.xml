@@ -2284,6 +2284,8 @@
     </plurals>
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. [CHAR LIMIT=30] -->
     <string name="wifi_advanced_titlebar">Advanced Wi\u2011Fi</string>
+    <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's SSID. [CHAR LIMIT=20] -->
+    <string name="wifi_advanced_ssid_title">SSID</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's MAC address. -->
     <string name="wifi_advanced_mac_address_title">MAC address</string>
     <!-- Title of the screen to adjust IP settings -->
@@ -2620,8 +2622,6 @@
     <string name="sound_effects_enable_title">Tap sounds</string>
     <!-- Sound settings screen, setting check box label -->
     <string name="lock_sounds_enable_title">Screen lock sound</string>
-    <!-- Sound settings screen, setting check box label -->
-    <string name="haptic_feedback_enable_title">Vibrate on tap</string>
     <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
     <string name="audio_record_proc_title">Noise cancellation</string>
     <!-- Volume description for media volume -->
@@ -5662,12 +5662,6 @@
     <string name="battery_saver_schedule_settings_title">Set a schedule</string>
 
     <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
-    <string name="battery_saver_sticky_title">Keep battery saver on</string>
-
-    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description">Battery saver will stay on even after device is fully charged</string>
-
-    <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
     <string name="battery_saver_sticky_title_new">Turn off when fully charged</string>
 
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
@@ -6781,6 +6775,24 @@
     <string name="help_uri_notifications" translatable="false"></string>
     <!-- Help URI, Apps [DO NOT TRANSLATE] -->
     <string name="help_uri_apps" translatable="false"></string>
+    <!-- Help URI, manage apps storage [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_storage" translatable="false"></string>
+    <!-- Help URI, manage apps power [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_high_power" translatable="false"></string>
+    <!-- Help URI, manage apps overlay [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_overlay" translatable="false"></string>
+    <!-- Help URI, manage apps write settings [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_write_settings" translatable="false"></string>
+    <!-- Help URI, manage apps manage sources [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_manage_sources" translatable="false"></string>
+    <!-- Help URI, manage apps games [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_games" translatable="false"></string>
+    <!-- Help URI, manage apps movies [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_movies" translatable="false"></string>
+    <!-- Help URI, manage apps photography [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_photography" translatable="false"></string>
+    <!-- Help URI, manage apps wifi access [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_wifi_access" translatable="false"></string>
     <!-- Help URI, Storage [DO NOT TRANSLATE] -->
     <string name="help_uri_storage" translatable="false"></string>
     <!-- Help URI, Accessibility [DO NOT TRANSLATE] -->
@@ -6921,9 +6933,15 @@
     <!-- Access point names title.  [CHAR LIMIT=50] -->
     <string name="access_point_names">Access point names</string>
     <!-- Enhaced 4G LTE Mode title.  [CHAR LIMIT=50] -->
-    <string name="enhanced_4g_lte_mode_title">Enhanced 4G LTE Mode</string>
+    <string name="enhanced_4g_lte_mode_title">VoLTE</string>
+    <!-- Enhaced 4G LTE Mode title for carriers who want to show Advanced Calling.  [CHAR LIMIT=50] -->
+    <string name="enhanced_4g_lte_mode_title_advanced_calling">Advanced Calling</string>
+    <!-- Enhaced 4G LTE Mode title for carriers who want to show 4G Calling.  [CHAR LIMIT=50] -->
+    <string name="enhanced_4g_lte_mode_title_4g_calling">4G Calling</string>
     <!-- Enhaced 4G LTE Mode summary.  [CHAR LIMIT=100] -->
-    <string name="enhanced_4g_lte_mode_summary">Use LTE data to enhance voice and communications (Recommended)</string>
+    <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
+    <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
+    <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
@@ -7000,6 +7018,8 @@
     <string name="sim_calls_always_use">Always use this for calls</string>
     <!-- Message for selecting sim for data in settings.  [CHAR LIMIT=40] -->
     <string name="select_sim_for_data">Select a SIM for data</string>
+    <!-- Message for selecting sim for SMS in settings.  [CHAR LIMIT=40] -->
+    <string name="select_sim_for_sms">Select a SIM for SMS</string>
     <!-- Message for switching data SIM; switching takes a while -->
     <string name="data_switch_started">Switching data SIM, this may take up to a minute...</string>
     <!-- Message for selecting sim for call in settings.  [CHAR LIMIT=40] -->
@@ -7118,6 +7138,24 @@
 
     <!--Search Keywords [CHAR LIMIT=NONE]-->
     <string name="keywords_wifi">wifi, wi-fi, network connection, internet, wireless, data, wi fi</string>
+    <!-- Search keyword for "Open Network Notification" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_wifi_notify_open_networks">Wi\u2011Fi notification, wifi notification</string>
+    <!-- Search keyword for "Adaptive brightness" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_auto_brightness">Auto brightness</string>
+    <!-- Search keyword for "Vibrate on touch" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_vibrate_on_touch">Stop vibration, tap, keyboard</string>
+    <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_time_format">Use 24-hour format</string>
+    <!-- Search keyword for "Files" settings under Settings > Storage. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_storage_files">Download</string>
+    <!-- Search keyword for "Default Apps" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_app_default">Open with</string>
+    <!-- Search keyword for "App info" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_applications_settings">Applications</string>
+    <!-- Search keyword for "Time zone" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_time_zone">timezone</string>
+    <!-- Search keyword for "Display over other apps" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_draw_overlay">Chat head</string>
     <string name="keywords_change_wifi_state">wifi, wi-fi, toggle, control</string>
     <string name="keywords_more_default_sms_app">text message, texting, messages, messaging, default</string>
     <string name="keywords_more_mobile_networks">cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte</string>
@@ -7128,7 +7166,8 @@
     <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
-    <string name="keywords_display_cast_screen">project, cast</string>
+    <!-- Search keyword for "Cast" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_display_cast_screen">project, cast, Screen mirroring, Screen sharing, mirroring, share screen, screen casting</string>
     <string name="keywords_storage">space, disk, hard drive, device usage</string>
     <string name="keywords_battery">power usage, charge</string>
     <string name="keywords_spell_checker">spelling, dictionary, spellcheck, auto-correct</string>
@@ -7181,7 +7220,7 @@
     <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
 
     <!-- Search keyword for lock screen notification setting [CHAR_LIMIT=NONE] -->
-    <string name="keywords_lock_screen_notif">lock screen notification</string>
+    <string name="keywords_lock_screen_notif">lock screen notification, notifications</string>
 
     <!-- Search keyword for face settings. -->
     <string name="keywords_face_settings">face</string>
@@ -7368,6 +7407,12 @@
     <!-- Sound: Other sounds: Title for the option enabling boot sounds. [CHAR LIMIT=30] -->
     <string name="boot_sounds_title">Power on sounds</string>
 
+    <!-- Setting title for controlling how caption text display in real time [CHAR LIMIT=40]-->
+    <string name="live_caption_title">Live Caption</string>
+
+    <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
+    <string name="live_caption_summary">Automatically caption media</string>
+
     <!-- Sound: Summary for the Do not Disturb option when there is no automatic rules turned on. [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_summary_off">Never</string>
 
@@ -7387,7 +7432,7 @@
     <string name="zen_mode_behavior_settings_title">Exceptions</string>
 
     <!-- Do not disturb: Title for the dnd duration setting (user can specify how long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=30] -->
-    <string name="zen_mode_duration_settings_title">Duration</string>
+    <string name="zen_mode_duration_settings_title">Default duration</string>
 
     <!-- Do not disturb: Instructions indicating what types of sounds can bypass DND. [CHAR LIMIT=52] -->
     <string name="zen_mode_behavior_allow_title">Allow sounds and vibrations from</string>
@@ -7746,9 +7791,9 @@
     <string name="notification_badging_title">Allow notification dots</string>
 
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
-    <string name="notification_bubbles_title">Allow bubbles</string>
+    <string name="notification_bubbles_title">Bubbles</string>
     <!-- Configure Notifications: Summary for the notification bubbles option. [CHAR LIMIT=NONE] -->
-    <string name="notification_bubbles_summary">Allow apps to show some notifications as bubbles</string>
+    <string name="notification_bubbles_summary">Quickly access app content from anywhere using floating shortcuts</string>
     <!-- Feature education for bubbles. [CHAR LIMIT=NONE] -->
     <string name="bubbles_feature_education">Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen.</string>
     <!-- Title for the toggle shown on the app-level bubbles page  [CHAR LIMIT=60] -->
@@ -8789,7 +8834,7 @@
     <string name="app_usage_preference">App usage preferences</string>
 
     <!-- Link title to show stats about how much time user spent in an app [CHAR LIMIT=45] -->
-    <string name="time_spent_in_app_pref_title">Time spent in app</string>
+    <string name="time_spent_in_app_pref_title">Screen time</string>
 
     <!-- Description of the usage access setting [CHAR LIMIT=NONE] -->
     <string name="usage_access_description">Usage access allows an app to track what other apps you\u2019re using and how often, as well as your carrier, language settings, and other details.</string>
@@ -10534,8 +10579,6 @@
     <!-- Message informs the user that has no SIM card in personalized Settings [CHAR LIMIT=30] -->
     <string name="no_sim_card">No SIM card</string>
 
-    <!-- Carrier variant of Enhaced 4G LTE Mode title.  [CHAR LIMIT=50] -->
-    <string name="enhanced_4g_lte_mode_title_variant">Advanced Calling</string>
     <!-- The following strings are summaries for preferred network modes in Mobile network settings,
      and have a character limit of 100 -->
     <!-- WCDMA preferred [CHAR LIMIT=NONE] -->
@@ -10885,7 +10928,7 @@
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>
     <!-- Summary for the top level Privacy Settings [CHAR LIMIT=NONE]-->
-    <string name="privacy_dashboard_summary">Permissions, web activity, personal data</string>
+    <string name="privacy_dashboard_summary">Permissions, account activity, personal data</string>
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
     <string name="contextual_card_dismiss_remove">Remove</string>
@@ -10916,17 +10959,15 @@
     <string name="permission_bar_chart_empty_text">0 apps used permissions</string>
 
     <!-- Text for permission bar chart title in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_title">Most-used permissions in last 24 hours</string>
-    <!-- Text for permission bar chart title in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_title_v2">In last 24 hr, apps on this device accessed</string>
+    <string name="permission_bar_chart_title">Permission usage in last 24 hours</string>
 
     <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details">View Permissions Dashboard</string>
+    <string name="permission_bar_chart_details">See all in Dashboard</string>
 
-    <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details_v2">See all permission usage in Dashboard</string>
-    <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details_v3">+ <xliff:g id="permissionCount" example="3">%1$d</xliff:g> other permissions</string>
+    <plurals name="permission_bar_chart_label">
+        <item quantity="one">1 app</item>
+        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> apps</item>
+    </plurals>
 
     <!-- Title for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="accessibility_usage_title">Accessibility usage</string>
@@ -10974,11 +11015,11 @@
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
-    <!-- Keywords for Content Capture feature [CHAR_LIMIT=32] -->
-    <string name="keywords_content_capture">content capture</string>
+    <!-- Keywords for Content Capture / Smart Suggestions feature [CHAR_LIMIT=none] -->
+    <string name="keywords_content_capture">content capture, smart suggestions</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
-    <string name="content_capture">Content Capture</string>
-    <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
+    <string name="content_capture">Smart Suggestions</string>
+    <!-- Description of the 'Content Capture / Smart Suggestions' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
     <string name="content_capture_summary">Allow Android to save information seen on your screen or heard in video or audio content. Android makes helpful suggestions based on your device activity.</string>
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
@@ -10991,4 +11032,7 @@
     <string name="automatic_system_heap_dump_title">Automatically capture system heap dumps</string>
     <!-- Summary of toggle for whether to enable automatic heap dumps for the system server or not. [CHAR LIMIT=NONE] -->
     <string name="automatic_system_heap_dump_summary">Automatically capture a heap dump for Android System when it uses too much memory</string>
+
+    <!-- Button label to disconnect a Wi-Fi network. [CHAR LIMIT=40] -->
+    <string name="wifi_disconnect_button_text">Disconnect</string>
 </resources>

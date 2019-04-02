@@ -97,10 +97,13 @@ import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.ApnEditor;
 import com.android.settings.network.ApnSettings;
+import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
+import com.android.settings.notification.AppBubbleNotificationSettings;
 import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.BubbleNotificationSettings;
 import com.android.settings.notification.ChannelGroupNotificationSettings;
 import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -210,6 +213,8 @@ public class SettingsGateway {
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
+            BubbleNotificationSettings.class.getName(),
+            AppBubbleNotificationSettings.class.getName(),
             ZenAccessSettings.class.getName(),
             ZenAccessDetails.class.getName(),
             ZenModeAutomationSettings.class.getName(),
@@ -273,7 +278,8 @@ public class SettingsGateway {
             DataUsageList.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
-            BatterySaverScheduleSettings.class.getName()
+            BatterySaverScheduleSettings.class.getName(),
+            MobileNetworkListFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

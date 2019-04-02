@@ -50,16 +50,16 @@ public class StorageVolumePreference extends Preference {
     private final StorageManager mStorageManager;
     private final VolumeInfo mVolume;
 
-    private int mColor;
     private int mUsedPercent = -1;
+    private ColorStateList mColorTintList;
 
     // TODO: ideally, VolumeInfo should have a total physical size.
-    public StorageVolumePreference(Context context, VolumeInfo volume, int color, long totalBytes) {
+    public StorageVolumePreference(Context context, VolumeInfo volume, long totalBytes) {
         super(context);
 
         mStorageManager = context.getSystemService(StorageManager.class);
         mVolume = volume;
-        mColor = color;
+        mColorTintList = Utils.getColorAttr(context, android.R.attr.colorControlNormal);
 
         setLayoutResource(R.layout.storage_volume);
 
@@ -107,8 +107,10 @@ public class StorageVolumePreference extends Preference {
             }
 
             if (freeBytes < mStorageManager.getStorageLowBytes(path)) {
-                mColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorError);
+                mColorTintList = Utils.getColorAttr(context, android.R.attr.colorError);
                 icon = context.getDrawable(R.drawable.ic_warning_24dp);
+                icon.mutate();
+                icon.setTintList(mColorTintList);
             }
 
         } else {
@@ -116,8 +118,6 @@ public class StorageVolumePreference extends Preference {
             mUsedPercent = -1;
         }
 
-        icon.mutate();
-        icon.setTint(mColor);
         setIcon(icon);
 
         if (volume.getType() == VolumeInfo.TYPE_PUBLIC
@@ -138,7 +138,7 @@ public class StorageVolumePreference extends Preference {
         if (mVolume.getType() == VolumeInfo.TYPE_PRIVATE && mUsedPercent != -1) {
             progress.setVisibility(View.VISIBLE);
             progress.setProgress(mUsedPercent);
-            progress.setProgressTintList(ColorStateList.valueOf(mColor));
+            progress.setProgressTintList(mColorTintList);
         } else {
             progress.setVisibility(View.GONE);
         }

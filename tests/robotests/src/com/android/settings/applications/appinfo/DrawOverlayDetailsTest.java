@@ -16,42 +16,25 @@
 
 package com.android.settings.applications.appinfo;
 
-import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
-
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
-import android.view.Window;
 import android.view.WindowManager.LayoutParams;
-
-import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowAppInfoBase;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class DrawOverlayDetailsTest {
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private FragmentActivity mActivity;
-
-    @Mock
-    private Window mWindow;
 
     private LayoutParams layoutParams;
 
@@ -81,24 +64,5 @@ public class DrawOverlayDetailsTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
                 MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_DENY,
                 mFragment.getMetricsCategory(), "app", 0);
-    }
-
-    @Test
-    @Config(shadows = {ShadowAppInfoBase.class})
-    public void hideNonSystemOverlaysWhenResumed() {
-        when(mFragment.getActivity()).thenReturn(mActivity);
-        when(mActivity.getWindow()).thenReturn(mWindow);
-        when(mWindow.getAttributes()).thenReturn(layoutParams);
-
-        mFragment.onResume();
-        verify(mWindow).addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
-
-        mFragment.onPause();
-
-        // There's no Window.clearPrivateFlags() method, so the Window.attributes are updated.
-        ArgumentCaptor<LayoutParams> paramCaptor = ArgumentCaptor.forClass(LayoutParams.class);
-        verify(mWindow).setAttributes(paramCaptor.capture());
-        assertEquals(0,
-                paramCaptor.getValue().privateFlags & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
     }
 }

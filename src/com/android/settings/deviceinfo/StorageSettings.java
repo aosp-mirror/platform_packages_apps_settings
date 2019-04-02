@@ -23,8 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -75,16 +73,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private static final String TAG_VOLUME_UNMOUNTED = "volume_unmounted";
     private static final String TAG_DISK_INIT = "disk_init";
     private static final int METRICS_CATEGORY = SettingsEnums.DEVICEINFO_STORAGE;
-
-    static final int COLOR_PUBLIC = Color.parseColor("#ff9e9e9e");
-
-    static final int[] COLOR_PRIVATE = new int[]{
-            Color.parseColor("#ff26a69a"),
-            Color.parseColor("#ffab47bc"),
-            Color.parseColor("#fff2a600"),
-            Color.parseColor("#ffec407a"),
-            Color.parseColor("#ffc0ca33"),
-    };
 
     private StorageManager mStorageManager;
 
@@ -176,13 +164,12 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
                 final long volumeTotalBytes = PrivateStorageInfo.getTotalSize(vol,
                         sTotalInternalStorage);
-                final int color = COLOR_PRIVATE[privateCount++ % COLOR_PRIVATE.length];
                 mInternalCategory.addPreference(
-                        new StorageVolumePreference(context, vol, color, volumeTotalBytes));
+                        new StorageVolumePreference(context, vol, volumeTotalBytes));
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC
                     || vol.getType() == VolumeInfo.TYPE_STUB) {
                 mExternalCategory.addPreference(
-                        new StorageVolumePreference(context, vol, COLOR_PUBLIC, 0));
+                        new StorageVolumePreference(context, vol, 0));
             }
         }
 
@@ -192,15 +179,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             if (rec.getType() == VolumeInfo.TYPE_PRIVATE
                     && mStorageManager.findVolumeByUuid(rec.getFsUuid()) == null) {
                 // TODO: add actual storage type to record
-                final Drawable icon = context.getDrawable(R.drawable.ic_sim_sd);
-                icon.mutate();
-                icon.setTint(COLOR_PUBLIC);
-
                 final Preference pref = new Preference(context);
                 pref.setKey(rec.getFsUuid());
                 pref.setTitle(rec.getNickname());
                 pref.setSummary(com.android.internal.R.string.ext_media_status_missing);
-                pref.setIcon(icon);
+                pref.setIcon(R.drawable.ic_sim_sd);
                 mInternalCategory.addPreference(pref);
             }
         }

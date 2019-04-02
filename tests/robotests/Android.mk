@@ -49,6 +49,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     guava \
     jsr305 \
     settings-contextual-card-protos-lite \
+    settings-log-bridge-protos-lite \
     contextualcards \
     settings-logtags \
     zxing-core-1.7

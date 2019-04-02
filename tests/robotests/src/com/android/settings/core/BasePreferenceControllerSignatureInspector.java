@@ -58,11 +58,16 @@ public class BasePreferenceControllerSignatureInspector extends CodeInspector {
             if (constructors == null || constructors.length == 0) {
                 badClasses.append(c.getName()).append(",");
             }
+
+            boolean hasValidConstructor = false;
             for (Constructor constructor : constructors) {
-                if (!hasValidConstructorSignature(constructor)) {
-                    badClasses.append(className).append(",");
-                    continue;
+                if (hasValidConstructorSignature(constructor)) {
+                    hasValidConstructor = true;
+                    break;
                 }
+            }
+            if (!hasValidConstructor) {
+                badClasses.append(className).append(",");
             }
         }
 

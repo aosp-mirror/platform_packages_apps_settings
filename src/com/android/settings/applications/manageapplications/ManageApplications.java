@@ -625,12 +625,32 @@ public class ManageApplications extends InstrumentedFragment
 
     @StringRes
     int getHelpResource() {
-        if (mListType == LIST_TYPE_MAIN) {
-            return R.string.help_uri_apps;
-        } else if (mListType == LIST_TYPE_USAGE_ACCESS) {
-            return R.string.help_url_usage_access;
-        } else {
-            return R.string.help_uri_notifications;
+        switch (mListType) {
+            case LIST_TYPE_NOTIFICATION:
+                return R.string.help_uri_notifications;
+            case LIST_TYPE_USAGE_ACCESS:
+                return R.string.help_url_usage_access;
+            case LIST_TYPE_STORAGE:
+                return R.string.help_uri_apps_storage;
+            case LIST_TYPE_HIGH_POWER:
+                return R.string.help_uri_apps_high_power;
+            case LIST_TYPE_OVERLAY:
+                return R.string.help_uri_apps_overlay;
+            case LIST_TYPE_WRITE_SETTINGS:
+                return R.string.help_uri_apps_write_settings;
+            case LIST_TYPE_MANAGE_SOURCES:
+                return R.string.help_uri_apps_manage_sources;
+            case LIST_TYPE_GAMES:
+                return R.string.help_uri_apps_overlay;
+            case LIST_TYPE_MOVIES:
+                return R.string.help_uri_apps_movies;
+            case LIST_TYPE_PHOTOGRAPHY:
+                return R.string.help_uri_apps_photography;
+            case LIST_TYPE_WIFI_ACCESS:
+                return R.string.help_uri_apps_wifi_access;
+            default:
+            case LIST_TYPE_MAIN:
+                return R.string.help_uri_apps;
         }
     }
 

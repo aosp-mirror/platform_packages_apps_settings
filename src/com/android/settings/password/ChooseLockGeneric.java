@@ -183,6 +183,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             super.onCreate(savedInstanceState);
             final Activity activity = getActivity();
             if (!Utils.isDeviceProvisioned(activity) && !canRunBeforeDeviceProvisioned()) {
+                Log.i(TAG, "Refusing to start because device is not provisioned");
                 activity.finish();
                 return;
             }

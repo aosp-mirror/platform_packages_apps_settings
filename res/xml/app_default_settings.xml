@@ -19,7 +19,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="app_default_settings_screen"
-    android:title="@string/app_default_dashboard_title">
+    android:title="@string/app_default_dashboard_title"
+    settings:keywords="@string/keywords_app_default">
 
     <com.android.settingslib.widget.apppreference.AppPreference
         android:key="assist_and_voice_input"

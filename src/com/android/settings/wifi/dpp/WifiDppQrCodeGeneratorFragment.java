@@ -95,32 +95,12 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
-        MenuItem menuItem;
-        if (!wifiNetworkConfig.isHotspot() &&
-                wifiNetworkConfig.isSupportWifiDpp(getActivity())) {
-            menuItem = menu.add(0, Menu.FIRST, 0, R.string.next_label);
-            menuItem.setIcon(R.drawable.ic_scan_24dp);
-            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        } else {
-            menuItem = menu.findItem(Menu.FIRST);
-            if (menuItem != null) {
-                menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-            }
+        final MenuItem menuItem = menu.findItem(Menu.FIRST);
+        if (menuItem != null) {
+            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
 
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case Menu.FIRST:
-                mListener.onQrCodeGeneratorFragmentAddButtonClicked();
-                return true;
-            default:
-                return super.onOptionsItemSelected(menuItem);
-        }
     }
 
     @Override

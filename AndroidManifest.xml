@@ -196,6 +196,19 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name=".Settings$MobileNetworkListActivity"
+                  android:label="@string/network_settings_title"
+                  android:parentActivityName="Settings$NetworkDashboardActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MOBILE_NETWORK_LIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.network.MobileNetworkListFragment"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <activity
             android:name=".Settings$ConnectedDeviceDashboardActivity"
             android:label="@string/connected_devices_dashboard_title"
@@ -607,8 +620,7 @@
 
         <activity
             android:name="Settings$ManageAssistActivity"
-            android:label="@string/assist_and_voice_input_title"
-            android:parentActivityName="Settings">
+            android:label="@string/assist_and_voice_input_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -782,7 +794,8 @@
 
         <activity android:name="Settings$WallpaperSettingsActivity"
                   android:label="@string/wallpaper_settings_fragment_title"
-                  android:icon="@drawable/ic_wallpaper">
+                  android:icon="@drawable/ic_wallpaper"
+                  android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wallpaper.WallpaperTypeSettings" />
         </activity>
@@ -1381,7 +1394,7 @@
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
                 android:icon="@drawable/ic_accessibility_suggestion"
                 android:label="@string/vision_settings_title"
-                android:theme="@style/SetupWizardAccessibilityTheme">
+                android:theme="@style/GlifV3Theme.Light">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2442,6 +2455,18 @@
         </activity>
 
         <activity
+            android:name="Settings$AppBubbleNotificationSettingsActivity"
+            android:label="@string/bubbles_app_toggle_title"
+            android:parentActivityName="Settings$NotificationAppListActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.APP_NOTIFICATION_BUBBLE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.AppBubbleNotificationSettings" />
+        </activity>
+
+        <activity
             android:name="Settings$SoundSettingsActivity"
             android:label="@string/sound_settings"
             android:icon="@drawable/ic_homepage_sound"
@@ -2553,7 +2578,7 @@
 
         <receiver android:name=".sim.SimSelectNotification">
             <intent-filter>
-                <action android:name="android.intent.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
+                <action android:name="android.telephony.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
             </intent-filter>
         </receiver>
 
@@ -3042,9 +3067,8 @@
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.BottomDialog"
+            android:documentLaunchMode="always"
             android:excludeFromRecents="true"
-            android:launchMode="singleTop"
-            android:taskAffinity=".panel.SettingsPanelActivity"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />

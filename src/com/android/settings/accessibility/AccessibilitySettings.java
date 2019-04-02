@@ -18,6 +18,8 @@ package com.android.settings.accessibility;
 
 import static android.os.Vibrator.VibrationIntensity;
 
+import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -136,6 +138,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "accessibility_control_timeout_preference_fragment";
     private static final String DARK_UI_MODE_PREFERENCE =
             "dark_ui_mode_accessibility";
+    private static final String LIVE_CAPTION_PREFERENCE_KEY =
+            "live_caption";
 
 
     // Extras passed to sub-fragments.
@@ -236,11 +240,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
     private Preference mVibrationPreferenceScreen;
+    private Preference mLiveCaptionPreference;
     private SwitchPreference mToggleInversionPreference;
     private ColorInversionPreferenceController mInversionPreferenceController;
     private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
-    private ListPreference mDarkUIModePreference;
+    private Preference mDarkUIModePreference;
     private DarkUIPreferenceController mDarkUIPreferenceController;
+    private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -299,6 +305,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 (context, HEARING_AID_PREFERENCE);
         mHearingAidPreferenceController.setFragmentManager(getFragmentManager());
         getLifecycle().addObserver(mHearingAidPreferenceController);
+
+        mLiveCaptionPreferenceController = new LiveCaptionPreferenceController(context,
+                LIVE_CAPTION_PREFERENCE_KEY);
     }
 
     @Override
@@ -487,6 +496,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Captioning.
         mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
 
+        // Live caption
+        mLiveCaptionPreference = findPreference(LIVE_CAPTION_PREFERENCE_KEY);
+        mLiveCaptionPreferenceController.displayPreference(getPreferenceScreen());
+
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
@@ -583,6 +596,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             preference.setKey(componentName.flattenToString());
 
             preference.setTitle(title);
+            preference.setIconSize(ICON_SIZE_MEDIUM);
             Utils.setSafeIcon(preference, icon);
             final boolean serviceEnabled = enabledServices.contains(componentName);
             String description = info.loadDescription(getPackageManager());
@@ -732,6 +746,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         mHearingAidPreferenceController.updateState(mHearingAidPreference);
 
+        mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
+
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
                 mCaptioningPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
@@ -752,7 +768,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     void updateAccessibilityTimeoutSummary(ContentResolver resolver, Preference pref) {
-
         String[] timeoutSummarys = getResources().getStringArray(
                 R.array.accessibility_timeout_summaries);
         int[] timeoutValues = getResources().getIntArray(
@@ -821,7 +836,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         pref.setSummary(entries[index]);
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void updateVibrationSummary(Preference pref) {
         final Context context = getContext();
         final Vibrator vibrator = context.getSystemService(Vibrator.class);

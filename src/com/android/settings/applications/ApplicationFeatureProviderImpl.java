@@ -140,15 +140,28 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         if (defaultSms != null) {
             keepEnabledPackages.add(defaultSms.getPackageName());
         }
-        // Keep Settings intelligence enabled, otherwise search feature will be disabled.
-        keepEnabledPackages.add(
-                mContext.getString(R.string.config_settingsintelligence_package_name));
+
+        keepEnabledPackages.addAll(getEnabledPackageWhitelist());
+
         final LocationManager locationManager =
                 (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        final String locationHistoryPackage = locationManager.getLocationControllerExtraPackage();
+        final String locationHistoryPackage = locationManager.getExtraLocationControllerPackage();
         if (locationHistoryPackage != null) {
             keepEnabledPackages.add(locationHistoryPackage);
         }
+        return keepEnabledPackages;
+    }
+
+    private Set<String> getEnabledPackageWhitelist() {
+        final Set<String> keepEnabledPackages = new ArraySet<>();
+
+        // Keep Settings intelligence enabled, otherwise search feature will be disabled.
+        keepEnabledPackages.add(
+                mContext.getString(R.string.config_settingsintelligence_package_name));
+
+        // Keep Package Installer enabled.
+        keepEnabledPackages.add(mContext.getString(R.string.config_package_installer_package_name));
+
         return keepEnabledPackages;
     }
 
@@ -219,5 +232,4 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
             mCallback.onListOfAppsResult(list);
         }
     }
-
 }

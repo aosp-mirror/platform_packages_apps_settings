@@ -134,6 +134,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
                     if (msg.arg1 == ARG_RESTART_CAMERA) {
                         mProgressBar.setVisibility(View.INVISIBLE);
+                        mDecorateView.setFocused(false);
                         restartCamera();
                     }
                     break;

@@ -16,11 +16,11 @@
 
 package com.android.settings.sim;
 
-import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_ID;
-import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_FOR_ALL_TYPES;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE;
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE;
+import static android.telephony.TelephonyManager.EXTRA_SUBSCRIPTION_ID;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -30,6 +30,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.Settings.SimSettingsActivity;
@@ -45,6 +46,9 @@ public class SimSelectNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (!TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED.equals(intent.getAction())) {
+            return;
+        }
         // Cancel any previous notifications
         cancelNotification(context);
         // Create a notification to tell the user that some defaults are missing
@@ -52,8 +56,8 @@ public class SimSelectNotification extends BroadcastReceiver {
 
         int dialogType = intent.getIntExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
                 EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE);
-        if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_FOR_ALL_TYPES) {
-            int subId = intent.getIntExtra(EXTRA_DEFAULT_SUBSCRIPTION_ID,
+        if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL) {
+            int subId = intent.getIntExtra(EXTRA_SUBSCRIPTION_ID,
                     SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
             int slotIndex = SubscriptionManager.getSlotIndex(subId);
             // If there is only one subscription, ask if user wants to use if for everything

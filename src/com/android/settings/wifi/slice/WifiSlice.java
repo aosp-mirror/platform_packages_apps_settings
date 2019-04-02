@@ -62,9 +62,7 @@ import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.WifiTracker;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -361,98 +359,5 @@ public class WifiSlice implements CustomSliceable {
     @Override
     public Class getBackgroundWorkerClass() {
         return WifiScanWorker.class;
-    }
-
-    public static class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
-            implements WifiTracker.WifiListener {
-
-        private final Context mContext;
-
-        private WifiTracker mWifiTracker;
-
-        public WifiScanWorker(Context context, Uri uri) {
-            super(context, uri);
-            mContext = context;
-        }
-
-        @Override
-        protected void onSlicePinned() {
-            if (mWifiTracker == null) {
-                mWifiTracker = new WifiTracker(mContext, this /* wifiListener */,
-                        true /* includeSaved */, true /* includeScans */);
-            }
-            mWifiTracker.onStart();
-            onAccessPointsChanged();
-        }
-
-        @Override
-        protected void onSliceUnpinned() {
-            mWifiTracker.onStop();
-        }
-
-        @Override
-        public void close() {
-            mWifiTracker.onDestroy();
-        }
-
-        @Override
-        public void onWifiStateChanged(int state) {
-            notifySliceChange();
-        }
-
-        @Override
-        public void onConnectedChanged() {
-        }
-
-        @Override
-        public void onAccessPointsChanged() {
-            // in case state has changed
-            if (!mWifiTracker.getManager().isWifiEnabled()) {
-                updateResults(null);
-                return;
-            }
-            // AccessPoints are sorted by the WifiTracker
-            final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
-            final List<AccessPoint> resultList = new ArrayList<>();
-            for (AccessPoint ap : accessPoints) {
-                if (ap.isReachable()) {
-                    resultList.add(clone(ap));
-                    if (resultList.size() >= DEFAULT_EXPANDED_ROW_COUNT) {
-                        break;
-                    }
-                }
-            }
-            updateResults(resultList);
-        }
-
-        private AccessPoint clone(AccessPoint accessPoint) {
-            final Bundle savedState = new Bundle();
-            accessPoint.saveWifiState(savedState);
-            return new AccessPoint(mContext, savedState);
-        }
-
-        @Override
-        protected boolean areListsTheSame(List<AccessPoint> a, List<AccessPoint> b) {
-            if (!a.equals(b)) {
-                return false;
-            }
-
-            // compare access point states one by one
-            final int listSize = a.size();
-            for (int i = 0; i < listSize; i++) {
-                if (getState(a.get(i)) != getState(b.get(i))) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private State getState(AccessPoint accessPoint) {
-            final NetworkInfo networkInfo = accessPoint.getNetworkInfo();
-            if (networkInfo != null) {
-                return networkInfo.getState();
-            }
-            return null;
-        }
     }
 }

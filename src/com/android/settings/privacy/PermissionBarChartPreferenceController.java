@@ -16,6 +16,10 @@
 
 package com.android.settings.privacy;
 
+import static android.Manifest.permission_group.CAMERA;
+import static android.Manifest.permission_group.LOCATION;
+import static android.Manifest.permission_group.MICROPHONE;
+
 import static com.android.settingslib.widget.BarChartPreference.MAXIMUM_BAR_VIEWS;
 
 import static java.util.concurrent.TimeUnit.DAYS;
@@ -131,8 +135,28 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
     @Override
     public void onPermissionUsageResult(@NonNull List<RuntimePermissionUsageInfo> usageInfos) {
-        usageInfos.sort(Comparator.comparingInt(
-                RuntimePermissionUsageInfo::getAppAccessCount).reversed());
+        usageInfos.sort((x, y) -> {
+            int usageDiff = y.getAppAccessCount() - x.getAppAccessCount();
+            if (usageDiff != 0) {
+                return usageDiff;
+            }
+            String xName = x.getName();
+            String yName = y.getName();
+            if (xName.equals(LOCATION)) {
+                return -1;
+            } else if (yName.equals(LOCATION)) {
+                return 1;
+            } else if (xName.equals(MICROPHONE)) {
+                return -1;
+            } else if (yName.equals(MICROPHONE)) {
+                return 1;
+            } else if (xName.equals(CAMERA)) {
+                return -1;
+            } else if (yName.equals(CAMERA)) {
+                return 1;
+            }
+            return x.getName().compareTo(y.getName());
+        });
 
         // If the result is different, we need to update bar views.
         if (!areSamePermissionGroups(usageInfos)) {
@@ -163,18 +187,20 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
         for (int index = 0; index < barViewInfos.length; index++) {
             final RuntimePermissionUsageInfo permissionGroupInfo = usageInfos.get(index);
+            final int count = permissionGroupInfo.getAppAccessCount();
+            final CharSequence permLabel = getPermissionGroupLabel(permissionGroupInfo.getName());
 
             barViewInfos[index] = new BarViewInfo(
-                    getPermissionGroupIcon(permissionGroupInfo.getName()),
-                    permissionGroupInfo.getAppAccessCount(),
-                    R.string.storage_detail_apps,
-                    getPermissionGroupLabel(permissionGroupInfo.getName()));
+                    getPermissionGroupIcon(permissionGroupInfo.getName()), count, permLabel,
+                    mContext.getResources().getQuantityString(R.plurals.permission_bar_chart_label,
+                            count, count), permLabel);
 
             // Set the click listener for each bar view.
             // The listener will navigate user to permission usage app.
             barViewInfos[index].setClickListener((View v) -> {
                 final Intent intent = new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE);
                 intent.putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, permissionGroupInfo.getName());
+                intent.putExtra(Intent.EXTRA_DURATION_MILLIS, DAYS.toMillis(1));
                 mContext.startActivity(intent);
             });
         }

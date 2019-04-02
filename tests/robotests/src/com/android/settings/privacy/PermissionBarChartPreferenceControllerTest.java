@@ -16,6 +16,14 @@
 
 package com.android.settings.privacy;
 
+import static android.Manifest.permission_group.CALENDAR;
+import static android.Manifest.permission_group.CAMERA;
+import static android.Manifest.permission_group.CONTACTS;
+import static android.Manifest.permission_group.LOCATION;
+import static android.Manifest.permission_group.MICROPHONE;
+import static android.Manifest.permission_group.PHONE;
+import static android.Manifest.permission_group.SMS;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
@@ -220,5 +228,28 @@ public class PermissionBarChartPreferenceControllerTest {
 
         verify(mFragment).setLoadingEnabled(false /* enabled */);
         verify(mPreference).updateLoadingState(false /* isLoading */);
+    }
+
+    @Test
+    public void onPermissionUsageResult_shouldBeSorted() {
+        final List<RuntimePermissionUsageInfo> infos = new ArrayList<>();
+        infos.add(new RuntimePermissionUsageInfo(PHONE, 10));
+        infos.add(new RuntimePermissionUsageInfo(LOCATION, 10));
+        infos.add(new RuntimePermissionUsageInfo(CAMERA, 10));
+        infos.add(new RuntimePermissionUsageInfo(SMS, 1));
+        infos.add(new RuntimePermissionUsageInfo(MICROPHONE, 10));
+        infos.add(new RuntimePermissionUsageInfo(CONTACTS, 42));
+        infos.add(new RuntimePermissionUsageInfo(CALENDAR, 10));
+        mController.displayPreference(mScreen);
+
+        mController.onPermissionUsageResult(infos);
+
+        assertThat(infos.get(0).getName()).isEqualTo(CONTACTS);
+        assertThat(infos.get(1).getName()).isEqualTo(LOCATION);
+        assertThat(infos.get(2).getName()).isEqualTo(MICROPHONE);
+        assertThat(infos.get(3).getName()).isEqualTo(CAMERA);
+        assertThat(infos.get(4).getName()).isEqualTo(CALENDAR);
+        assertThat(infos.get(5).getName()).isEqualTo(PHONE);
+        assertThat(infos.get(6).getName()).isEqualTo(SMS);
     }
 }

@@ -143,6 +143,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         }
         mMppe.setChecked(mProfile.mppe);
         mL2tpSecret.setText(mProfile.l2tpSecret);
+        mL2tpSecret.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
         mIpsecIdentifier.setText(mProfile.ipsecIdentifier);
         mIpsecSecret.setText(mProfile.ipsecSecret);
         loadCertificates(mIpsecUserCert, Credentials.USER_PRIVATE_KEY, 0, mProfile.ipsecUserCert);
@@ -152,6 +153,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
                 R.string.vpn_no_server_cert, mProfile.ipsecServerCert);
         mSaveLogin.setChecked(mProfile.saveLogin);
         mAlwaysOnVpn.setChecked(mProfile.key.equals(VpnUtils.getLockdownVpn()));
+        mPassword.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
 
         // Hide lockdown VPN on devices that require IMS authentication
         if (SystemProperties.getBoolean("persist.radio.imsregrequired", false)) {

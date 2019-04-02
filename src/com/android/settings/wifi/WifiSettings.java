@@ -41,6 +41,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -57,6 +58,7 @@ import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
@@ -256,21 +258,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             mConnectivityManager = getActivity().getSystemService(ConnectivityManager.class);
         }
 
-        mConnectListener = new WifiManager.ActionListener() {
-            @Override
-            public void onSuccess() {
-            }
-
-            @Override
-            public void onFailure(int reason) {
-                Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(activity,
-                            R.string.wifi_failed_connect_message,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
+        mConnectListener = new WifiConnectListener(getActivity());
 
         mSaveListener = new WifiManager.ActionListener() {
             @Override
@@ -562,7 +550,7 @@ public class WifiSettings extends RestrictedSettingsFragment
              */
             switch (WifiUtils.getConnectingType(mSelectedAccessPoint)) {
                 case WifiUtils.CONNECT_TYPE_OSU_PROVISION:
-                    mSelectedAccessPoint.startOsuProvisioning();
+                    mSelectedAccessPoint.startOsuProvisioning(mConnectListener);
                     mClickedConnect = true;
                     break;
 
@@ -960,8 +948,10 @@ public class WifiSettings extends RestrictedSettingsFragment
     private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
         final AccessPoint accessPoint = pref.getAccessPoint();
         final Context context = getContext();
-        final CharSequence title = SavedAccessPointsWifiSettings.usingDetailsFragment(context) ?
-                accessPoint.getTitle() : context.getText(R.string.pref_title_network_details);
+        final CharSequence title =
+                FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_DATAUSAGE_HEADER)
+                        ? accessPoint.getTitle()
+                        : context.getText(R.string.pref_title_network_details);
 
         new SubSettingLauncher(getContext())
                 .setTitleText(title)
