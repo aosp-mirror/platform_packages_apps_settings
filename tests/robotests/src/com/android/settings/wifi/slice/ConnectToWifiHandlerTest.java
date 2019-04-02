@@ -18,12 +18,14 @@ package com.android.settings.wifi.slice;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.NetworkSelectionStatus;
+import android.net.wifi.WifiManager;
 
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
@@ -78,7 +80,7 @@ public class ConnectToWifiHandlerTest {
 
         mHandler.connect(mAccessPoint);
 
-        verify(mAccessPoint).startOsuProvisioning(null /* listener */);
+        verify(mAccessPoint).startOsuProvisioning(any(WifiManager.ActionListener.class));
     }
 
 
