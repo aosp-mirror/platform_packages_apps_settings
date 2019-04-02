@@ -152,6 +152,12 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     @Override
+    protected void initDevicePreference(BluetoothDevicePreference preference) {
+        super.initDevicePreference(preference);
+        preference.setNeedNotifyHierarchyChanged(true);
+    }
+
+    @Override
     public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
 

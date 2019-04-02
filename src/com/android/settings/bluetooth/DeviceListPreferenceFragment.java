@@ -36,6 +36,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.WeakHashMap;
 
 /**
@@ -69,8 +70,8 @@ public abstract class DeviceListPreferenceFragment extends
     @VisibleForTesting
     PreferenceGroup mDeviceListGroup;
 
-    final WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
-            new WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference>();
+    final HashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
+            new HashMap<>();
 
     boolean mShowDevicesWithoutNames;
 
@@ -195,17 +196,13 @@ public abstract class DeviceListPreferenceFragment extends
             //Set hideSecondTarget is true if it's bonded device.
             preference.hideSecondTarget(true);
             mDeviceListGroup.addPreference(preference);
-        } else {
-            // Tell the preference it is being re-used in case there is new info in the
-            // cached device.
-            preference.rebind();
         }
 
         initDevicePreference(preference);
         mDevicePreferenceMap.put(cachedDevice, preference);
     }
 
-    void initDevicePreference(BluetoothDevicePreference preference) {
+    protected void initDevicePreference(BluetoothDevicePreference preference) {
         // Does nothing by default
     }
 
