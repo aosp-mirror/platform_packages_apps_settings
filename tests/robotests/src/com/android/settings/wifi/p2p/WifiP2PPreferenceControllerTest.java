@@ -22,20 +22,24 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.LocationManager;
 import android.net.wifi.WifiManager;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -57,6 +61,8 @@ public class WifiP2PPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private Preference mWifiDirectPreference;
+    @Mock
+    private LocationManager mLocationManager;
 
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
@@ -69,6 +75,7 @@ public class WifiP2PPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString())).thenReturn(mWifiDirectPreference);
+        when(mContext.getSystemService(eq(Service.LOCATION_SERVICE))).thenReturn(mLocationManager);
         mController = new WifiP2pPreferenceController(mContext, mLifecycle, mWifiManager);
     }
 
@@ -80,19 +87,21 @@ public class WifiP2PPreferenceControllerTest {
     @Test
     public void testOnResume_shouldRegisterListener() {
         mLifecycle.handleLifecycleEvent(ON_RESUME);
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mContext, times(2)).registerReceiver(
+                any(BroadcastReceiver.class), any(IntentFilter.class));
     }
 
     @Test
     public void testOnPause_shouldUnregisterListener() {
         mLifecycle.handleLifecycleEvent(ON_RESUME);
         mLifecycle.handleLifecycleEvent(ON_PAUSE);
-        verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
+        verify(mContext, times(2)).unregisterReceiver(any(BroadcastReceiver.class));
     }
 
     @Test
     public void testWifiStateChange_shouldToggleEnabledState() {
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
 
         //Sets the preferences.
         mController.displayPreference(mScreen);
@@ -110,11 +119,17 @@ public class WifiP2PPreferenceControllerTest {
     @Test
     public void testDisplayPreference_shouldToggleEnabledState() {
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
         mController.displayPreference(mScreen);
         verify(mWifiDirectPreference).setEnabled(true);
 
         when(mWifiManager.isWifiEnabled()).thenReturn(false);
         mController.displayPreference(mScreen);
         verify(mWifiDirectPreference).setEnabled(false);
+
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+        mController.displayPreference(mScreen);
+        verify(mWifiDirectPreference, times(2)).setEnabled(false);
     }
 }
