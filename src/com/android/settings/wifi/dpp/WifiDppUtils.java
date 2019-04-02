@@ -26,6 +26,8 @@ import android.net.wifi.WifiManager;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
@@ -34,6 +36,8 @@ import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.util.List;
+
+import java.time.Duration;
 
 /**
  * Here are the items shared by both WifiDppConfiguratorActivity & WifiDppEnrolleeActivity
@@ -93,6 +97,8 @@ public class WifiDppUtils {
      * Success status code for Easy Connect.
      */
     public static final int EASY_CONNECT_EVENT_SUCCESS = 1;
+
+    private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
 
     /**
      * Returns whether the device support WiFi DPP.
@@ -385,5 +391,15 @@ public class WifiDppUtils {
             return true;
         }
         return false;
+    }
+
+    static void triggerVibrationForQrCodeRecognition(Context context) {
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator == null) {
+          return;
+        }
+        vibrator.vibrate(VibrationEffect.createOneShot(
+                VIBRATE_DURATION_QR_CODE_RECOGNITION.toMillis(),
+                VibrationEffect.DEFAULT_AMPLITUDE));
     }
 }
