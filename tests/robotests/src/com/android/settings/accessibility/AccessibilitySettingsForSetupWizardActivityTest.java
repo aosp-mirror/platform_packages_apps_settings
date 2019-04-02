@@ -39,6 +39,6 @@ public class AccessibilitySettingsForSetupWizardActivityTest {
     AccessibilitySettingsForSetupWizardActivity activity =
         Robolectric.buildActivity(AccessibilitySettingsForSetupWizardActivity.class, intent).get();
 
-    assertThat(activity.getThemeResId()).isEqualTo(R.style.GlifTheme_Light);
+    assertThat(activity.getThemeResId()).isEqualTo(R.style.GlifV3Theme_Light);
   }
 }

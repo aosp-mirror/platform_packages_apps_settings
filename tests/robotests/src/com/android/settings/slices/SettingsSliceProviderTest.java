@@ -55,7 +55,7 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.wifi.slice.WifiSlice;
+import com.android.settings.wifi.slice.WifiScanWorker;
 import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.After;
@@ -474,7 +474,7 @@ public class SettingsSliceProviderTest {
         mProvider.onSlicePinned(uri);
     }
 
-    @Implements(WifiSlice.WifiScanWorker.class)
+    @Implements(WifiScanWorker.class)
     public static class ShadowWifiScanWorker {
         private static WifiTracker mWifiTracker;
 

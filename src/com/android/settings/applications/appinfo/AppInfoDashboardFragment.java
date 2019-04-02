@@ -640,10 +640,18 @@ public class AppInfoDashboardFragment extends DashboardFragment
     final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (mFinishing) {
+                return;
+            }
+
             final String packageName = intent.getData().getSchemeSpecificPart();
-            if (!mFinishing && (mAppEntry == null || mAppEntry.info == null
-                    || TextUtils.equals(mAppEntry.info.packageName, packageName))) {
+            if (mAppEntry == null
+                    || mAppEntry.info == null
+                    || TextUtils.equals(mAppEntry.info.packageName, packageName)) {
                 onPackageRemoved();
+            } else if (mAppEntry.info.isResourceOverlay()
+                       && TextUtils.equals(mPackageInfo.overlayTarget, packageName)) {
+                refreshUi();
             }
         }
     };
