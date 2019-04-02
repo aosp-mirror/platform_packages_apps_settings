@@ -27,7 +27,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.LinkAddress;
@@ -599,8 +602,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         wifiIcon.setTintList(Utils.getColorAccent(mContext));
         if (mEntityHeaderController != null) {
-            mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(),
-                    true /* rebind */);
+            mEntityHeaderController
+                    .setIcon(rescaleIconForHeader(wifiIcon)).done(mFragment.getActivity(),
+                            true /* rebind */);
         }
 
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
@@ -609,6 +613,23 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         mSignalStrengthPref.setSummary(mSignalStr[mRssiSignalLevel]);
         mSignalStrengthPref.setVisible(true);
+    }
+
+    private Drawable rescaleIconForHeader(Drawable original) {
+        final int iconSize = mContext.getResources().getDimensionPixelSize(
+                R.dimen.wifi_detail_page_header_image_size);
+        final int actualWidth = original.getMinimumWidth();
+        final int actualHeight = original.getMinimumHeight();
+
+        if ((actualWidth == iconSize && actualHeight == iconSize)
+                || !VectorDrawable.class.isInstance(original)) {
+            return original;
+        }
+
+        final Bitmap bitmap = Utils.createBitmap(original,
+                iconSize /*width*/,
+                iconSize /*height*/);
+        return new BitmapDrawable(null /*resource*/, bitmap);
     }
 
     private void refreshFrequency() {
