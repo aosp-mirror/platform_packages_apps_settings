@@ -23,6 +23,7 @@ import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COU
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -30,6 +31,8 @@ import static org.mockito.Mockito.spy;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
@@ -70,6 +73,7 @@ public class WifiSliceTest {
     private Context mContext;
     private ContentResolver mResolver;
     private WifiManager mWifiManager;
+    private ConnectivityManager mConnectivityManager;
     private WifiSlice mWifiSlice;
 
     @Before
@@ -82,6 +86,9 @@ public class WifiSliceTest {
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mWifiManager.setWifiEnabled(true);
+
+        mConnectivityManager = spy(mContext.getSystemService(ConnectivityManager.class));
+        doReturn(mConnectivityManager).when(mContext).getSystemService(ConnectivityManager.class);
 
         mWifiSlice = new WifiSlice(mContext);
     }
@@ -224,6 +231,37 @@ public class WifiSliceTest {
         // No scanning text
         SliceTester.assertNoSliceItemContainsSubtitle(sliceItems,
                 mContext.getString(R.string.wifi_empty_list_wifi_on));
+    }
+
+    @Test
+    public void getWifiSlice_isCaptivePortal_shouldHaveCaptivePortalItems() {
+        setWorkerResults(createAccessPoint(AP1_NAME, true, true));
+        doReturn(makeCaptivePortalNetworkCapabilities()).when(mConnectivityManager)
+                .getNetworkCapabilities(any());
+
+        final Slice wifiSlice = mWifiSlice.getSlice();
+        final List<SliceItem> sliceItems = wifiSlice.getItems();
+
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
+        assertCaptivePortalItems(sliceItems);
+    }
+
+    private void assertCaptivePortalItems(List<SliceItem> sliceItems) {
+        final String expectedSummary = mContext.getString(mContext.getResources()
+                .getIdentifier("network_available_sign_in", "string", "android"));
+        SliceTester.assertAnySliceItemContainsSubtitle(sliceItems, expectedSummary);
+
+        final IconCompat expectedIcon = IconCompat.createWithResource(mContext,
+                R.drawable.ic_settings_accent);
+        SliceTester.assertAnySliceItemContainsIcon(sliceItems, expectedIcon);
+    }
+
+    static NetworkCapabilities makeCaptivePortalNetworkCapabilities() {
+        final NetworkCapabilities nc = new NetworkCapabilities();
+        nc.clearAll();
+        nc.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
+        return nc;
     }
 
     @Test

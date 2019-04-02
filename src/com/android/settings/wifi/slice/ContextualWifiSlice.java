@@ -57,7 +57,7 @@ public class ContextualWifiSlice extends WifiSlice {
             sActiveUiSession = currentUiSession;
             sPreviouslyDisplayed = false;
         }
-        if (!sPreviouslyDisplayed && !TextUtils.equals(getActiveSSID(), WifiSsid.NONE)) {
+        if (!sPreviouslyDisplayed && hasWorkingNetwork()) {
             Log.d(TAG, "Wifi is connected, no point showing any suggestion.");
             return null;
         }
@@ -66,5 +66,9 @@ public class ContextualWifiSlice extends WifiSlice {
         sPreviouslyDisplayed = true;
 
         return super.getSlice();
+    }
+
+    private boolean hasWorkingNetwork() {
+        return !TextUtils.equals(getActiveSSID(), WifiSsid.NONE) && !isCaptivePortal();
     }
 }

@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi.slice;
 
+import static org.mockito.ArgumentMatchers.any;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -24,6 +25,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
@@ -53,6 +55,7 @@ public class ContextualWifiSliceTest {
     private Context mContext;
     private ContentResolver mResolver;
     private WifiManager mWifiManager;
+    private ConnectivityManager mConnectivityManager;
     private ContextualWifiSlice mWifiSlice;
     private FakeFeatureFactory mFeatureFactory;
 
@@ -69,6 +72,9 @@ public class ContextualWifiSliceTest {
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mWifiManager.setWifiEnabled(true);
+
+        mConnectivityManager = spy(mContext.getSystemService(ConnectivityManager.class));
+        doReturn(mConnectivityManager).when(mContext).getSystemService(ConnectivityManager.class);
 
         mWifiSlice = new ContextualWifiSlice(mContext);
         mWifiSlice.sPreviouslyDisplayed = false;
@@ -109,6 +115,29 @@ public class ContextualWifiSliceTest {
         final WifiConfiguration config = new WifiConfiguration();
         config.SSID = "123";
         mWifiManager.connect(config, null /* listener */);
+
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.wifi_settings));
+
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(1);
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
+                R.drawable.ic_settings_wireless);
+        assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
+    }
+
+    @Test
+    public void getWifiSlice_isCaptivePortal_shouldHaveTitleAndToggle() {
+        mWifiSlice.sPreviouslyDisplayed = false;
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "123";
+        mWifiManager.connect(config, null /* listener */);
+        doReturn(WifiSliceTest.makeCaptivePortalNetworkCapabilities()).when(mConnectivityManager)
+                .getNetworkCapabilities(any());
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 
