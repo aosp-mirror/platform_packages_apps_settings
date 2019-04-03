@@ -1405,6 +1405,27 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    public void testSignInButton_shouldHideSignInButtonForDisconnectedNetwork() {
+        setUpForDisconnectedNetwork();
+        NetworkCapabilities nc = makeNetworkCapabilities();
+        nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
+        when(mockConnectivityManager.getNetworkCapabilities(mockNetwork))
+                .thenReturn(new NetworkCapabilities(nc));
+
+        // verify onResume
+        displayAndResume();
+
+        verify(mockButtonsPref, never()).setButton2Visible(true);
+        verify(mockButtonsPref).setButton2Visible(false);
+
+        // verify onCapabilitiesChanged
+        updateNetworkCapabilities(nc);
+
+        verify(mockButtonsPref, never()).setButton2Visible(true);
+        verify(mockButtonsPref).setButton2Visible(false);
+    }
+
+    @Test
     public void testRefreshRssiViews_shouldNotUpdateIfLevelIsSame() {
         displayAndResume();
 
@@ -1436,7 +1457,6 @@ public class WifiDetailPreferenceControllerTest {
 
         verify(mockSignalStrengthPref, times(2)).setVisible(false);
     }
-
 
     private ActionButtonsPreference createMock() {
         final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);

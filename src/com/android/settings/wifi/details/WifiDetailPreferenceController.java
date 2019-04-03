@@ -838,7 +838,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the user can sign into the network represented by this preference.
      */
     private boolean canSignIntoNetwork() {
-        return WifiUtils.canSignIntoNetwork(mNetworkCapabilities);
+        return mAccessPoint.isActive() && WifiUtils.canSignIntoNetwork(mNetworkCapabilities);
     }
 
     /**
