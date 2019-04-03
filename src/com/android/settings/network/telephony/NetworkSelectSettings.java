@@ -96,11 +96,10 @@ public class NetworkSelectSettings extends DashboardFragment {
                 com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
 
-        mConnectedPreferenceCategory =
-                (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_NETWORK_OPERATOR);
-        mPreferenceCategory =
-                (PreferenceCategory) findPreference(PREF_KEY_NETWORK_OPERATORS);
+        mConnectedPreferenceCategory = findPreference(PREF_KEY_CONNECTED_NETWORK_OPERATOR);
+        mPreferenceCategory = findPreference(PREF_KEY_NETWORK_OPERATORS);
         mStatusMessagePreference = new Preference(getContext());
+        mStatusMessagePreference.setSelectable(false);
         mSelectedPreference = null;
         mTelephonyManager = TelephonyManager.from(getContext()).createForSubscriptionId(mSubId);
         mNetworkScanHelper = new NetworkScanHelper(
