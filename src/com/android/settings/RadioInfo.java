@@ -41,7 +41,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentityCdma;
 import android.telephony.CellIdentityGsm;
@@ -89,7 +88,6 @@ import com.android.ims.ImsConfig;
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneConfigurationManager;
 import com.android.internal.telephony.PhoneFactory;
 
 import java.io.IOException;
@@ -471,7 +469,7 @@ public class RadioInfo extends Activity {
         if (isDsdsSupported()) {
             dsdsSwitch.setVisibility(View.VISIBLE);
             dsdsSwitch.setOnClickListener(v -> {
-                if (mTelephonyManager.isRebootRequiredForModemConfigChange()) {
+                if (mTelephonyManager.doesSwitchMultiSimConfigTriggerReboot()) {
                     // Undo the click action until user clicks the confirm dialog.
                     dsdsSwitch.toggle();
                     showDsdsChangeDialog();
