@@ -41,8 +41,12 @@ public class WifiQrCodeTest {
             "SN=4774LH2b4044";
 
     // Valid ZXing reader library's Wi-Fi Network config format & it's parameters
-    private static final String VALID_ZXING_WIFI_QR_CODE =
+    private static final String VALID_ZXING_WIFI_QR_CODE_WPA =
             "WIFI:T:WPA;S:mynetwork;P:mypass;H:true;;";
+
+     // Valid ZXing reader library's Wi-Fi Network config format - security type SAE
+    private static final String VALID_ZXING_WIFI_QR_CODE_SAE =
+            "WIFI:T:SAE;S:mynetwork;P:mypass;H:true;;";
 
     // Valid ZXing reader library's Wi-Fi Network config format - security type nopass and no password
     private static final String VALID_ZXING_WIFI_QR_CODE_NOPASS_AND_NO_PASSWORD =
@@ -52,7 +56,8 @@ public class WifiQrCodeTest {
     private static final String VALID_ZXING_WIFI_QR_CODE_NO_SECURITY_AND_NO_PASSWORD =
             "WIFI:T:;S:mynetwork;P:;H:false;;";
 
-    private static final String SECURITY_OF_VALID_ZXING_WIFI_QR_CODE = "WPA";
+    private static final String SECURITY_OF_VALID_ZXING_WIFI_QR_CODE_WPA = "WPA";
+    private static final String SECURITY_OF_VALID_ZXING_WIFI_QR_CODE_SAE = "SAE";
     private static final String SECURITY_OF_VALID_ZXING_WIFI_QR_CODE_NOPASS = "nopass";
     private static final String SSID_OF_VALID_ZXING_WIFI_QR_CODE = "mynetwork";
     private static final String PASSWORD_OF_VALID_ZXING_WIFI_QR_CODE = "mypass";
@@ -94,12 +99,25 @@ public class WifiQrCodeTest {
 
     @Test
     public void parseValidZxingWifiQrCode() {
-        WifiQrCode wifiQrCode = new WifiQrCode(VALID_ZXING_WIFI_QR_CODE);
+        WifiQrCode wifiQrCode = new WifiQrCode(VALID_ZXING_WIFI_QR_CODE_WPA);
         WifiNetworkConfig config = wifiQrCode.getWifiNetworkConfig();
 
         assertEquals(WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG, wifiQrCode.getScheme());
         assertNotNull(config);
-        assertEquals(SECURITY_OF_VALID_ZXING_WIFI_QR_CODE, config.getSecurity());
+        assertEquals(SECURITY_OF_VALID_ZXING_WIFI_QR_CODE_WPA, config.getSecurity());
+        assertEquals(SSID_OF_VALID_ZXING_WIFI_QR_CODE, config.getSsid());
+        assertEquals(PASSWORD_OF_VALID_ZXING_WIFI_QR_CODE, config.getPreSharedKey());
+        assertEquals(true, config.getHiddenSsid());
+    }
+
+    @Test
+    public void parseValidZxingWifiQrCodeSae() {
+        WifiQrCode wifiQrCode = new WifiQrCode(VALID_ZXING_WIFI_QR_CODE_SAE);
+        WifiNetworkConfig config = wifiQrCode.getWifiNetworkConfig();
+
+        assertEquals(WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG, wifiQrCode.getScheme());
+        assertNotNull(config);
+        assertEquals(SECURITY_OF_VALID_ZXING_WIFI_QR_CODE_SAE, config.getSecurity());
         assertEquals(SSID_OF_VALID_ZXING_WIFI_QR_CODE, config.getSsid());
         assertEquals(PASSWORD_OF_VALID_ZXING_WIFI_QR_CODE, config.getPreSharedKey());
         assertEquals(true, config.getHiddenSsid());
@@ -138,7 +156,7 @@ public class WifiQrCodeTest {
 
         assertEquals(WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG, wifiQrCode.getScheme());
         assertNotNull(config);
-        assertEquals(SECURITY_OF_VALID_ZXING_WIFI_QR_CODE, config.getSecurity());
+        assertEquals(SECURITY_OF_VALID_ZXING_WIFI_QR_CODE_WPA, config.getSecurity());
         assertEquals(SSID_OF_VALID_ZXING_WIFI_QR_CODE, config.getSsid());
         assertEquals(PASSWORD_OF_VALID_ZXING_WIFI_QR_CODE_SPECIAL_CHARACTERS,
                 config.getPreSharedKey());
