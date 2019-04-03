@@ -22,14 +22,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
-import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +44,11 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private static final int HALF_WIDTH = 1;
     private static final int FULL_WIDTH = 2;
 
+    @VisibleForTesting
+    final List<ContextualCard> mContextualCards;
+
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
-    private final List<ContextualCard> mContextualCards;
     private final LifecycleOwner mLifecycleOwner;
 
     private RecyclerView mRecyclerView;
