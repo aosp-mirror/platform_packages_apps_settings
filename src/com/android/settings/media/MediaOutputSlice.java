@@ -162,6 +162,7 @@ public class MediaOutputSlice implements CustomSliceable {
         final Intent intent = new Intent(getUri().toString());
         intent.setClass(context, SliceBroadcastReceiver.class);
         intent.putExtra(MEDIA_DEVICE_ID, id);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         return PendingIntent.getBroadcast(context, requestCode /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }

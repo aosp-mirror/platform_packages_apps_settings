@@ -27,7 +27,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.LinkAddress;
@@ -102,6 +105,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     @VisibleForTesting
     static final String KEY_HEADER = "connection_header";
+    @VisibleForTesting
+    static final String KEY_DATA_USAGE_HEADER = "status_header";
     @VisibleForTesting
     static final String KEY_BUTTONS_PREF = "buttons";
     @VisibleForTesting
@@ -271,6 +276,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             Log.d(TAG, "onWifiStateChanged(" + state + ")");
             if (mConnectingState == STATE_ENABLE_WIFI && state == WifiManager.WIFI_STATE_ENABLED) {
                 updateConnectingState(STATE_CONNECTING);
+            } else if (mConnectingState != STATE_NONE && state == WifiManager.WIFI_STATE_DISABLED) {
+                // update as disconnected once Wi-Fi disabled since may not received
+                // onConnectedChanged for this case.
+                updateConnectingState(STATE_DISCONNECTED);
             }
         }
 
@@ -426,7 +435,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         if (usingDataUsageHeader(mContext)) {
             headerPref.setVisible(false);
-            mDataUsageSummaryPref = screen.findPreference("status_header");
+            mDataUsageSummaryPref = screen.findPreference(KEY_DATA_USAGE_HEADER);
             mDataUsageSummaryPref.setVisible(true);
             mSummaryHeaderController =
                 new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
@@ -595,8 +604,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         wifiIcon.setTintList(Utils.getColorAccent(mContext));
         if (mEntityHeaderController != null) {
-            mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(),
-                    true /* rebind */);
+            mEntityHeaderController
+                    .setIcon(rescaleIconForHeader(wifiIcon)).done(mFragment.getActivity(),
+                            true /* rebind */);
         }
 
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
@@ -605,6 +615,23 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         mSignalStrengthPref.setSummary(mSignalStr[mRssiSignalLevel]);
         mSignalStrengthPref.setVisible(true);
+    }
+
+    private Drawable rescaleIconForHeader(Drawable original) {
+        final int iconSize = mContext.getResources().getDimensionPixelSize(
+                R.dimen.wifi_detail_page_header_image_size);
+        final int actualWidth = original.getMinimumWidth();
+        final int actualHeight = original.getMinimumHeight();
+
+        if ((actualWidth == iconSize && actualHeight == iconSize)
+                || !VectorDrawable.class.isInstance(original)) {
+            return original;
+        }
+
+        final Bitmap bitmap = Utils.createBitmap(original,
+                iconSize /*width*/,
+                iconSize /*height*/);
+        return new BitmapDrawable(null /*resource*/, bitmap);
     }
 
     private void refreshFrequency() {

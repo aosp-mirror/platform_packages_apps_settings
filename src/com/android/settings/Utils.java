@@ -977,7 +977,10 @@ public final class Utils extends com.android.settingslib.Utils {
         return IconCompat.createWithBitmap(bitmap);
     }
 
-    private static Bitmap createBitmap(Drawable drawable, int width, int height) {
+    /**
+     * Creates a drawable with specified width and height.
+     */
+    public static Bitmap createBitmap(Drawable drawable, int width, int height) {
         final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());

@@ -1474,6 +1474,7 @@
         <!-- Lock screen settings -->
         <activity android:name=".password.ConfirmDeviceCredentialActivity"
             android:exported="true"
+            android:taskAffinity=".password.ConfirmDeviceCredentialActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL" />
@@ -1491,6 +1492,7 @@
             android:exported="false"
             android:permission="android.permission.MANAGE_USERS"
             android:resizeableActivity="false"
+            android:taskAffinity=".password.ConfirmDeviceCredentialActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER" />
