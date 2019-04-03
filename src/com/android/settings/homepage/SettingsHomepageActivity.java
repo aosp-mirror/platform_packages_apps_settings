@@ -84,7 +84,7 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
 
-        getWindow().setStatusBarColor(getResources().getColor(R.color.homepage_status_bar_color));
+        getWindow().setStatusBarColor(getColor(R.color.homepage_status_bar_color));
     }
 
     @VisibleForTesting
