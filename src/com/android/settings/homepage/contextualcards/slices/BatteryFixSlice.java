@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
@@ -50,6 +51,7 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class BatteryFixSlice implements CustomSliceable {
 
@@ -57,11 +59,18 @@ public class BatteryFixSlice implements CustomSliceable {
     static final String PREFS = "battery_fix_prefs";
     @VisibleForTesting
     static final String KEY_CURRENT_TIPS_TYPE = "current_tip_type";
+    static final String KEY_CURRENT_TIPS_STATE = "current_tip_state";
 
-    private static final List<Integer> UNIMPORTANT_BATTERY_TIPS = Arrays.asList(
-            BatteryTip.TipType.SUMMARY,
-            BatteryTip.TipType.BATTERY_SAVER
-    );
+    // A map tracking which BatteryTip and which state of that tip is not important.
+    private static final Map<Integer, List<Integer>> UNIMPORTANT_BATTERY_TIPS;
+
+    static {
+        UNIMPORTANT_BATTERY_TIPS = new ArrayMap<>();
+        UNIMPORTANT_BATTERY_TIPS.put(BatteryTip.TipType.SUMMARY,
+                Arrays.asList(BatteryTip.StateType.NEW, BatteryTip.StateType.HANDLED));
+        UNIMPORTANT_BATTERY_TIPS.put(BatteryTip.TipType.BATTERY_SAVER,
+                Arrays.asList(BatteryTip.StateType.HANDLED));
+    }
 
     private static final String TAG = "BatteryFixSlice";
 
@@ -82,9 +91,8 @@ public class BatteryFixSlice implements CustomSliceable {
                 new ListBuilder(mContext, BATTERY_FIX_SLICE_URI, ListBuilder.INFINITY)
                         .setAccentColor(COLOR_NOT_TINTED);
 
-        // TipType.SUMMARY is battery good
-        if (UNIMPORTANT_BATTERY_TIPS.contains(readBatteryTipAvailabilityCache(mContext))) {
-            return buildBatteryGoodSlice(sliceBuilder, true);
+        if (!isBatteryTipAvailableFromCache(mContext)) {
+            return buildBatteryGoodSlice(sliceBuilder, true /* isError */);
         }
 
         final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(getUri());
@@ -92,7 +100,7 @@ public class BatteryFixSlice implements CustomSliceable {
 
         if (batteryTips == null) {
             // Because we need wait slice background worker return data
-            return buildBatteryGoodSlice(sliceBuilder, false);
+            return buildBatteryGoodSlice(sliceBuilder, false /* isError */);
         }
 
         for (BatteryTip batteryTip : batteryTips) {
@@ -161,15 +169,23 @@ public class BatteryFixSlice implements CustomSliceable {
     // TODO(b/114807643): we should find a better way to get current battery tip type quickly
     // Now we save battery tip type to shared preference when battery level changes
     public static void updateBatteryTipAvailabilityCache(Context context) {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            refreshBatteryTips(context);
-        });
+        ThreadUtils.postOnBackgroundThread(() -> refreshBatteryTips(context));
     }
 
+
     @VisibleForTesting
-    static int readBatteryTipAvailabilityCache(Context context) {
+    static boolean isBatteryTipAvailableFromCache(Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(PREFS, MODE_PRIVATE);
-        return prefs.getInt(KEY_CURRENT_TIPS_TYPE, BatteryTip.TipType.SUMMARY);
+
+        final int type = prefs.getInt(KEY_CURRENT_TIPS_TYPE, BatteryTip.TipType.SUMMARY);
+        final int state = prefs.getInt(KEY_CURRENT_TIPS_STATE, BatteryTip.StateType.INVISIBLE);
+        if (state == BatteryTip.StateType.INVISIBLE) {
+            // State is INVISIBLE, We should not show anything.
+            return false;
+        }
+        final boolean unimportant = UNIMPORTANT_BATTERY_TIPS.containsKey(type)
+                && UNIMPORTANT_BATTERY_TIPS.get(type).contains(state);
+        return !unimportant;
     }
 
     @WorkerThread
@@ -180,10 +196,11 @@ public class BatteryFixSlice implements CustomSliceable {
         final List<BatteryTip> batteryTips = loader.loadInBackground();
         for (BatteryTip batteryTip : batteryTips) {
             if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
-                SharedPreferences.Editor editor = context.getSharedPreferences(PREFS,
-                        MODE_PRIVATE).edit();
-                editor.putInt(KEY_CURRENT_TIPS_TYPE, batteryTip.getType());
-                editor.apply();
+                context.getSharedPreferences(PREFS, MODE_PRIVATE)
+                        .edit()
+                        .putInt(KEY_CURRENT_TIPS_TYPE, batteryTip.getType())
+                        .putInt(KEY_CURRENT_TIPS_STATE, batteryTip.getState())
+                        .apply();
                 break;
             }
         }
