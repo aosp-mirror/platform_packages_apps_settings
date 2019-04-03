@@ -437,15 +437,6 @@ public class NotificationChannelSlice implements CustomSliceable {
                 .setData(getUri());
     }
 
-    private PackageInfo getPackageInfo(String packageName) {
-        try {
-            return mContext.getPackageManager().getPackageInfo(packageName, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, "No such package to get package info.");
-            return null;
-        }
-    }
-
     private boolean isChannelEnabled(NotificationChannelGroup group, NotificationChannel channel,
             NotificationBackend.AppRow appRow) {
         final RestrictedLockUtils.EnforcedAdmin suspendedAppsAdmin =
