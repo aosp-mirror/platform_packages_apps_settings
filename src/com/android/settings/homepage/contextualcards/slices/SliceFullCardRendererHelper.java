@@ -17,14 +17,10 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
-import androidx.slice.widget.EventInfo;
 import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
@@ -32,13 +28,10 @@ import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
-import java.util.Set;
-
 /**
  * Card renderer helper for {@link ContextualCard} built as slice full card.
  */
 class SliceFullCardRendererHelper {
-    private static final String TAG = "SliceFCRendererHelper";
 
     private final Context mContext;
 
