@@ -96,6 +96,11 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
     }
 
     @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
     public int getAudioStream() {
         return AudioManager.STREAM_RING;
     }

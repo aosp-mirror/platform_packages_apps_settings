@@ -188,8 +188,8 @@ public class SliceBuilderUtils {
      * @return the summary text for a {@link Slice} built for {@param sliceData}.
      */
     public static CharSequence getSubtitleText(Context context,
-            AbstractPreferenceController controller, SliceData sliceData) {
-        final boolean isDynamicSummaryAllowed = sliceData.isDynamicSummaryAllowed();
+            BasePreferenceController controller, SliceData sliceData) {
+        final boolean isDynamicSummaryAllowed = controller.useDynamicSliceSummary();
         CharSequence summaryText = controller.getSummary();
 
         // Priority 1 : User prefers showing the dynamic summary in slice view rather than static

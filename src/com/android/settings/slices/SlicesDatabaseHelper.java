@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -95,12 +95,6 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
         String SLICE_TYPE = "slice_type";
 
         /**
-         * Boolean flag, {@code true} when the slice object prefers using the dynamic summary from
-         * preference controller.
-         */
-        String ALLOW_DYNAMIC_SUMMARY_IN_SLICE = "allow_dynamic_summary_in_slice";
-
-        /**
          * Customized subtitle if it's a unavailable slice
          */
         String UNAVAILABLE_SLICE_SUBTITLE = "unavailable_slice_subtitle";
@@ -128,8 +122,6 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.PLATFORM_SLICE +
                     ", " +
                     IndexColumns.SLICE_TYPE +
-                    ", " +
-                    IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE +
                     ", " +
                     IndexColumns.UNAVAILABLE_SLICE_SUBTITLE +
                     ");";

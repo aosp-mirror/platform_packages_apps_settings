@@ -35,6 +35,11 @@ public class HardwareRevisionPreferenceController extends BasePreferenceControll
     }
 
     @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
     public boolean isSliceable() {
         return true;
     }

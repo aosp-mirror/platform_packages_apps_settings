@@ -74,7 +74,6 @@ public class SlicesDatabaseHelperTest {
                 IndexColumns.CONTROLLER,
                 IndexColumns.PLATFORM_SLICE,
                 IndexColumns.SLICE_TYPE,
-                IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
                 IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
         };
 
