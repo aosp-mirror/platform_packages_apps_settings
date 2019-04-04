@@ -173,10 +173,18 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     }
 
     public static CharSequence getSummary(Context context, String pkg) {
-        PowerWhitelistBackend powerWhitelist = PowerWhitelistBackend.getInstance(context);
-        return context.getString(powerWhitelist.isSysWhitelisted(pkg) ? R.string.high_power_system
-                : powerWhitelist.isWhitelisted(pkg) ? R.string.high_power_on
-                        : R.string.high_power_off);
+        return getSummary(context, PowerWhitelistBackend.getInstance(context), pkg);
+    }
+
+    @VisibleForTesting
+    static CharSequence getSummary(Context context, PowerWhitelistBackend powerWhitelist,
+            String pkg) {
+        return context.getString(
+                powerWhitelist.isSysWhitelisted(pkg) || powerWhitelist.isDefaultActiveApp(pkg)
+                        ? R.string.high_power_system
+                        : powerWhitelist.isWhitelisted(pkg)
+                                ? R.string.high_power_on
+                                : R.string.high_power_off);
     }
 
     public static void show(Fragment caller, int uid, String packageName, int requestCode) {
