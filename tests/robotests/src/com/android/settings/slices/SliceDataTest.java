@@ -38,7 +38,6 @@ public class SliceDataTest {
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
     private final int SLICE_TYPE = SliceData.SliceType.SWITCH;
     private final boolean IS_PLATFORM_DEFINED = true;
-    private final boolean IS_DYNAMIC_SUMMARY_ALLOWED = true;
     private final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
 
     @Test
@@ -55,7 +54,6 @@ public class SliceDataTest {
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .setSliceType(SLICE_TYPE)
                 .setPlatformDefined(IS_PLATFORM_DEFINED)
-                .setDynamicSummaryAllowed(IS_DYNAMIC_SUMMARY_ALLOWED)
                 .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
 
         SliceData data = builder.build();
@@ -71,7 +69,6 @@ public class SliceDataTest {
         assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
         assertThat(data.getSliceType()).isEqualTo(SLICE_TYPE);
         assertThat(data.isPlatformDefined()).isEqualTo(IS_PLATFORM_DEFINED);
-        assertThat(data.isDynamicSummaryAllowed()).isEqualTo(IS_DYNAMIC_SUMMARY_ALLOWED);
         assertThat(data.getUnavailableSliceSubtitle()).isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
     }
 
@@ -221,31 +218,6 @@ public class SliceDataTest {
     }
 
     @Test
-    public void testBuilder_noDynamicSummaryAllowed_buildsMatchingObject() {
-        SliceData.Builder builder = new SliceData.Builder()
-                .setKey(KEY)
-                .setTitle(TITLE)
-                .setSummary(SUMMARY)
-                .setScreenTitle(SCREEN_TITLE)
-                .setIcon(ICON)
-                .setFragmentName(FRAGMENT_NAME)
-                .setUri(URI)
-                .setPreferenceControllerClassName(PREF_CONTROLLER);
-
-        SliceData data = builder.build();
-
-        assertThat(data.getKey()).isEqualTo(KEY);
-        assertThat(data.getTitle()).isEqualTo(TITLE);
-        assertThat(data.getSummary()).isEqualTo(SUMMARY);
-        assertThat(data.getScreenTitle()).isEqualTo(SCREEN_TITLE);
-        assertThat(data.getIconResource()).isEqualTo(ICON);
-        assertThat(data.getFragmentClassName()).isEqualTo(FRAGMENT_NAME);
-        assertThat(data.getUri()).isEqualTo(URI);
-        assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
-        assertThat(data.isDynamicSummaryAllowed()).isFalse();
-    }
-
-    @Test
     public void testEquality_identicalObjects() {
         SliceData.Builder builder = new SliceData.Builder()
                 .setKey(KEY)
@@ -255,8 +227,7 @@ public class SliceDataTest {
                 .setIcon(ICON)
                 .setFragmentName(FRAGMENT_NAME)
                 .setUri(URI)
-                .setPreferenceControllerClassName(PREF_CONTROLLER)
-                .setDynamicSummaryAllowed(IS_DYNAMIC_SUMMARY_ALLOWED);
+                .setPreferenceControllerClassName(PREF_CONTROLLER);
 
         SliceData dataOne = builder.build();
         SliceData dataTwo = builder.build();

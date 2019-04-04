@@ -29,4 +29,9 @@ public class BadPreferenceController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return AVAILABLE;
     }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
 }

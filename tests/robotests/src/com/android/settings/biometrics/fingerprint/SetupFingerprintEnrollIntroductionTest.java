@@ -172,8 +172,7 @@ public class SetupFingerprintEnrollIntroductionTest {
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
         skipButton.performClick();
 
-        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        assertThat(shadowActivity.getResultIntent()).isNull();
+        assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
     }
 
     @Test
@@ -182,7 +181,10 @@ public class SetupFingerprintEnrollIntroductionTest {
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
         activity.onActivityResult(BiometricEnrollIntroduction.BIOMETRIC_FIND_SENSOR_REQUEST,
             BiometricEnrollBase.RESULT_FINISHED, null);
-        assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        assertThat(shadowActivity.getResultIntent()).isNotNull();
+        assertThat(shadowActivity.getResultIntent().hasExtra(
+                SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isFalse();
     }
 
     @Test
@@ -201,7 +203,8 @@ public class SetupFingerprintEnrollIntroductionTest {
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
         activity.onActivityResult(BiometricEnrollIntroduction.BIOMETRIC_FIND_SENSOR_REQUEST,
             BiometricEnrollBase.RESULT_FINISHED, null);
-        assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        assertThat(shadowActivity.getResultIntent()).isNull();
     }
 
     @Test

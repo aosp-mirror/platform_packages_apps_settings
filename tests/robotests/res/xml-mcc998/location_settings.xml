@@ -25,15 +25,13 @@
         android:title="title"
         android:icon="@drawable/ic_android"
         android:summary="summary1"
-        settings:controller="com.android.settings.core.BadPreferenceController"
-        settings:allowDynamicSummaryInSlice="true"/>
+        settings:controller="com.android.settings.core.BadPreferenceController"/>
 
     <Preference
         android:key="key2"
         android:title="title"
         android:icon="@drawable/ic_android"
         android:summary="summary2"
-        settings:controller="com.android.settings.slices.FakePreferenceController"
-        settings:allowDynamicSummaryInSlice="true"/>
+        settings:controller="com.android.settings.slices.FakePreferenceController"/>
 
 </PreferenceScreen>

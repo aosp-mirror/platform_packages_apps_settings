@@ -16,7 +16,6 @@
 
 package com.android.settings.core;
 
-import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_APPEND;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
@@ -291,30 +290,6 @@ public class PreferenceXmlParserUtilsTest {
             }
         }
         assertThat(foundKey).isTrue();
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void extractMetadata_requestIsDynamicSummaryAllowed_shouldDefaultToFalse()
-            throws Exception {
-        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
-                R.xml.display_settings, MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE);
-
-        for (Bundle bundle : metadata) {
-            assertThat(bundle.getBoolean(METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE)).isFalse();
-        }
-    }
-
-    @Test
-    @Config(qualifiers = "mcc998")
-    public void extractMetadata_requestIsDynamicSummaryAllowed_shouldReturnAttributeValue()
-            throws Exception {
-        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
-                R.xml.location_settings, MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE);
-
-        for (Bundle bundle : metadata) {
-            assertThat(bundle.getBoolean(METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE)).isTrue();
-        }
     }
 
     @Test

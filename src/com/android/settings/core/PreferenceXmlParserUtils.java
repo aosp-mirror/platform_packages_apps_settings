@@ -72,7 +72,6 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_PREF_SUMMARY,
             MetadataFlag.FLAG_NEED_PREF_ICON,
             MetadataFlag.FLAG_NEED_SEARCHABLE,
-            MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
             MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MetadataFlag {
@@ -87,9 +86,8 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PLATFORM_SLICE_FLAG = 1 << 7;
         int FLAG_NEED_KEYWORDS = 1 << 8;
         int FLAG_NEED_SEARCHABLE = 1 << 9;
-        int FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE = 1 << 10;
-        int FLAG_NEED_PREF_APPEND = 1 << 11;
-        int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 12;
+        int FLAG_NEED_PREF_APPEND = 1 << 10;
+        int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 11;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -101,8 +99,6 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_PLATFORM_SLICE_FLAG = "platform_slice";
     public static final String METADATA_KEYWORDS = "keywords";
     public static final String METADATA_SEARCHABLE = "searchable";
-    public static final String METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE =
-            "allow_dynamic_summary_in_slice";
     public static final String METADATA_APPEND = "staticPreferenceLocation";
     public static final String METADATA_UNAVAILABLE_SLICE_SUBTITLE =
             "unavailable_slice_subtitle";
@@ -246,10 +242,6 @@ public class PreferenceXmlParserUtils {
                 preferenceMetadata.putBoolean(METADATA_SEARCHABLE,
                         isSearchable(preferenceAttributes));
             }
-            if (hasFlag(flags, MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE)) {
-                preferenceMetadata.putBoolean(METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
-                        isDynamicSummaryAllowed(preferenceAttributes));
-            }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_APPEND) && hasPrefScreenFlag) {
                 preferenceMetadata.putBoolean(METADATA_APPEND,
                         isAppended(preferenceScreenAttributes));
@@ -265,14 +257,6 @@ public class PreferenceXmlParserUtils {
                 && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth));
         parser.close();
         return metadata;
-    }
-
-    /**
-     * Returns the fragment name if this preference launches a child fragment.
-     */
-    public static String getDataChildFragment(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs, R.styleable.Preference,
-                R.styleable.Preference_android_fragment);
     }
 
     /**
@@ -340,11 +324,6 @@ public class PreferenceXmlParserUtils {
 
     private static boolean isSearchable(TypedArray styledAttributes) {
         return styledAttributes.getBoolean(R.styleable.Preference_searchable, true /* default */);
-    }
-
-    private static boolean isDynamicSummaryAllowed(TypedArray styledAttributes) {
-        return styledAttributes.getBoolean(R.styleable.Preference_allowDynamicSummaryInSlice,
-                false /* default */);
     }
 
     private static String getKeywords(TypedArray styledAttributes) {

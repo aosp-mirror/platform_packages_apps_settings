@@ -52,7 +52,6 @@
         android:title="@string/status_number"
         android:summary="@string/summary_placeholder"
         android:selectable="false"
-        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
         settings:enableCopying="true"/>
 
@@ -104,7 +103,6 @@
         android:title="@string/hardware_info"
         settings:keywords="@string/keywords_model_and_hardware"
         android:summary="@string/summary_placeholder"
-        settings:allowDynamicSummaryInSlice="true"
         android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
         settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
 
@@ -115,7 +113,6 @@
         android:title="@string/status_imei"
         settings:keywords="@string/keywords_imei_info"
         android:summary="@string/summary_placeholder"
-        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController"/>
 
     <!-- Android version -->
@@ -124,7 +121,6 @@
         android:order="32"
         android:title="@string/firmware_version"
         android:summary="@string/summary_placeholder"
-        settings:allowDynamicSummaryInSlice="true"
         android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController"/>
 

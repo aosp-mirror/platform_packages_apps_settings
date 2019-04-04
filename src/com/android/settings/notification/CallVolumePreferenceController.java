@@ -44,6 +44,11 @@ public class CallVolumePreferenceController extends VolumeSeekBarPreferenceContr
     }
 
     @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
     public int getAudioStream() {
         if (mAudioManager.isBluetoothScoOn()) {
             return AudioManager.STREAM_BLUETOOTH_SCO;

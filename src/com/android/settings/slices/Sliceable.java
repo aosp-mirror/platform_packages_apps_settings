@@ -79,6 +79,13 @@ public interface Sliceable {
     }
 
     /**
+     * Whether or not summary comes from something dynamic (ie, not hardcoded in xml)
+     */
+    default boolean useDynamicSliceSummary() {
+        return false;
+    }
+
+    /**
      * Set the copy content to the clipboard and show the toast.
      */
     static void setCopyContent(Context context, CharSequence copyContent,

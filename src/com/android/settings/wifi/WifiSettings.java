@@ -33,6 +33,7 @@ import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.NetworkRequest;
+import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -60,6 +61,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -115,6 +118,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
     private static final String PREF_KEY_STATUS_MESSAGE = "wifi_status_message";
+    @VisibleForTesting
+    static final String PREF_KEY_DATA_USAGE = "wifi_data_usage";
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
@@ -181,6 +186,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     Preference mConfigureWifiSettingsPreference;
     @VisibleForTesting
     Preference mSavedNetworksPreference;
+    @VisibleForTesting
+    DataUsagePreference mDataUsagePreference;
     private LinkablePreference mStatusMessagePreference;
 
     // For Search
@@ -237,6 +244,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
         mStatusMessagePreference = (LinkablePreference) findPreference(PREF_KEY_STATUS_MESSAGE);
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
+        mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
+        mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
+        mDataUsagePreference.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(),
+                0 /*subId*/,
+                null /*service*/);
     }
 
     @Override

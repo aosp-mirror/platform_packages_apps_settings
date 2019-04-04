@@ -19,8 +19,10 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,13 +31,19 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.PowerManager;
+import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.Before;
@@ -58,6 +66,8 @@ public class WifiSettingsTest {
     private WifiTracker mWifiTracker;
     @Mock
     private PowerManager mPowerManager;
+    @Mock
+    private DataUsagePreference mDataUsagePreference;
     private Context mContext;
     private WifiSettings mWifiSettings;
 
@@ -158,5 +168,41 @@ public class WifiSettingsTest {
         assertThat(mWifiSettings.mAddWifiNetworkPreference.isVisible()).isTrue();
         assertThat(mWifiSettings.mAddWifiNetworkPreference.getTitle()).isEqualTo(
                 mContext.getString(R.string.wifi_add_network));
+    }
+
+    private void setUpForOnCreate() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(mWifiSettings.getActivity()).thenReturn(activity);
+        final Resources.Theme theme = mContext.getTheme();
+        when(activity.getTheme()).thenReturn(theme);
+        UserManager userManager = mock(UserManager.class);
+        when(activity.getSystemService(Context.USER_SERVICE))
+                .thenReturn(userManager);
+
+        when(mWifiSettings.findPreference(WifiSettings.PREF_KEY_DATA_USAGE))
+                .thenReturn(mDataUsagePreference);
+    }
+
+    @Test
+    @Config(shadows = {ShadowDataUsageUtils.class})
+    public void checkDataUsagePreference_perferenceInvisibleIfWifiNotSupported() {
+        setUpForOnCreate();
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = false;
+
+        mWifiSettings.onCreate(Bundle.EMPTY);
+
+        verify(mDataUsagePreference).setVisible(false);
+    }
+
+    @Test
+    @Config(shadows = {ShadowDataUsageUtils.class})
+    public void checkDataUsagePreference_perferenceVisibleIfWifiSupported() {
+        setUpForOnCreate();
+        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
+
+        mWifiSettings.onCreate(Bundle.EMPTY);
+
+        verify(mDataUsagePreference).setVisible(true);
+        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/, eq(null) /*service*/);
     }
 }

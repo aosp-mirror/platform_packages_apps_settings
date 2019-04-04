@@ -37,8 +37,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class RemoteVolumePreferenceController extends
-    VolumeSeekBarPreferenceController {
+public class RemoteVolumePreferenceController extends VolumeSeekBarPreferenceController {
 
     private static final String KEY_REMOTE_VOLUME = "remote_volume";
     @VisibleForTesting
@@ -165,6 +164,11 @@ public class RemoteVolumePreferenceController extends
     @Override
     public boolean isSliceable() {
         return TextUtils.equals(getPreferenceKey(), KEY_REMOTE_VOLUME);
+    }
+
+    @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
     }
 
     @Override

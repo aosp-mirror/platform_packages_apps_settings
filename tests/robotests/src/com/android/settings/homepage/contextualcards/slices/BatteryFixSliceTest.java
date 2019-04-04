@@ -16,15 +16,9 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import static com.android.settings.homepage.contextualcards.slices.BatteryFixSlice.KEY_CURRENT_TIPS_TYPE;
-import static com.android.settings.homepage.contextualcards.slices.BatteryFixSlice.PREFS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -75,23 +69,11 @@ public class BatteryFixSliceTest {
     }
 
     @Test
-    public void readBatteryTipFromPref_readCorrectValue() {
-        int target = 111;
-        final SharedPreferences.Editor editor = mContext.getSharedPreferences(PREFS,
-                MODE_PRIVATE).edit();
-        editor.putInt(KEY_CURRENT_TIPS_TYPE, target);
-
-        editor.commit();
-
-        assertThat(BatteryFixSlice.readBatteryTipAvailabilityCache(mContext)).isEqualTo(target);
-    }
-
-    @Test
     @Config(shadows = {
             ShadowBatteryStatsHelperLoader.class,
             ShadowBatteryTipLoader.class
     })
-    public void updateBatteryTipAvailabilityCache_writeCorrectValue() {
+    public void updateBatteryTipAvailabilityCache_hasImportantTip_shouldReturnTrue() {
         final List<BatteryTip> tips = new ArrayList<>();
         tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
         tips.add(new EarlyWarningTip(BatteryTip.StateType.NEW, false));
@@ -99,8 +81,7 @@ public class BatteryFixSliceTest {
 
         BatteryFixSlice.updateBatteryTipAvailabilityCache(mContext);
 
-        assertThat(BatteryFixSlice.readBatteryTipAvailabilityCache(mContext)).isEqualTo(
-                BatteryTip.TipType.BATTERY_SAVER);
+        assertThat(BatteryFixSlice.isBatteryTipAvailableFromCache(mContext)).isTrue();
     }
 
     @Test
@@ -111,7 +92,7 @@ public class BatteryFixSliceTest {
     public void getSlice_unimportantSlice_shouldSkip() {
         final List<BatteryTip> tips = new ArrayList<>();
         tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
-        tips.add(new EarlyWarningTip(BatteryTip.StateType.NEW, false));
+        tips.add(new EarlyWarningTip(BatteryTip.StateType.HANDLED, false));
         ShadowBatteryTipLoader.setBatteryTips(tips);
 
         BatteryFixSlice.updateBatteryTipAvailabilityCache(mContext);
