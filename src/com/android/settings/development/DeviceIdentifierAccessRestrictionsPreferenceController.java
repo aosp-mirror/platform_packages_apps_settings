@@ -16,8 +16,10 @@
 
 package com.android.settings.development;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.DeviceConfig;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -32,8 +34,30 @@ public class DeviceIdentifierAccessRestrictionsPreferenceController
     private static final String DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_KEY =
             "device_identifier_access_restrictions";
 
+    // The settings that should be set when the new device identifier access restrictions are
+    // disabled.
+    private static final String[] RELAX_DEVICE_IDENTIFIER_CHECK_SETTINGS = {
+            Settings.Global.PRIVILEGED_DEVICE_IDENTIFIER_3P_CHECK_RELAXED,
+            Settings.Global.PRIVILEGED_DEVICE_IDENTIFIER_NON_PRIV_CHECK_RELAXED,
+            Settings.Global.PRIVILEGED_DEVICE_IDENTIFIER_PRIV_CHECK_RELAXED
+    };
+
+    private ContentResolver mContentResolver;
+
     public DeviceIdentifierAccessRestrictionsPreferenceController(Context context) {
         super(context);
+        mContentResolver = context.getContentResolver();
+    }
+
+    @Override
+    public boolean isAvailable() {
+        // If the new access restrictions have been disabled from the server side then do not
+        // display the option.
+        boolean disabledFromServerSide = Boolean.parseBoolean(
+                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
+                        DeviceConfig.Privacy.
+                                PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED));
+        return !disabledFromServerSide;
     }
 
     @Override
@@ -48,16 +72,20 @@ public class DeviceIdentifierAccessRestrictionsPreferenceController
     }
 
     private void writeSetting(boolean isEnabled) {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED,
-                String.valueOf(isEnabled), false);
+        for (String relaxCheckSetting : RELAX_DEVICE_IDENTIFIER_CHECK_SETTINGS) {
+            Settings.Global.putInt(mContentResolver, relaxCheckSetting, isEnabled ? 1 : 0);
+        }
     }
 
     @Override
     public void updateState(Preference preference) {
-        boolean isEnabled = Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
-                        DeviceConfig.Privacy.PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED));
+        boolean isEnabled = true;
+        for (String relaxCheckSetting : RELAX_DEVICE_IDENTIFIER_CHECK_SETTINGS) {
+            if (Settings.Global.getInt(mContentResolver, relaxCheckSetting, 0) == 0) {
+                isEnabled = false;
+                break;
+            }
+        }
         ((SwitchPreference) mPreference).setChecked(isEnabled);
     }
 
@@ -65,6 +93,6 @@ public class DeviceIdentifierAccessRestrictionsPreferenceController
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         writeSetting(false);
-        ((SwitchPreference) mPreference).setChecked(true);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }
