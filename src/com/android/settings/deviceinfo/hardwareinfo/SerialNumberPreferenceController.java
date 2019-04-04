@@ -46,6 +46,11 @@ public class SerialNumberPreferenceController extends BasePreferenceController {
     }
 
     @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
     public void copy() {
         Sliceable.setCopyContent(mContext, getSummary(),
                 mContext.getText(R.string.status_serial_number));

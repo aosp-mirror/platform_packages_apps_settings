@@ -18,8 +18,6 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -410,10 +408,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final Context context = getContext();
         mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
-        final TypedArray a = context.obtainStyledAttributes(new int[]{
-                android.R.attr.colorControlNormal});
-        final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
-        a.recycle();
         // Install dashboard tiles.
         final boolean forceRoundedIcons = shouldForceRoundedIcon();
         for (Tile tile : tiles) {
@@ -424,12 +418,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             if (!displayTile(tile)) {
                 continue;
-            }
-            if (tile.isIconTintable(context)) {
-                final Icon icon = tile.getIcon(context);
-                if (icon != null) {
-                    icon.setTint(tintColor);
-                }
             }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.

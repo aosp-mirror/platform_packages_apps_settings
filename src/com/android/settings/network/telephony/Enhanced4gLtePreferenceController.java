@@ -52,12 +52,22 @@ public class Enhanced4gLtePreferenceController extends TelephonyTogglePreference
     ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
     private final List<On4gLteUpdateListener> m4gLteListeners;
+    private final CharSequence[] mVariantTitles;
+    private final CharSequence[] mVariantSumaries;
+
+    private final int VARIANT_TITLE_VOLTE = 0;
+    private final int VARIANT_TITLE_ADVANCED_CALL = 1;
+    private final int VARIANT_TITLE_4G_CALLING = 2;
 
     public Enhanced4gLtePreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         m4gLteListeners = new ArrayList<>();
         mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
+        mVariantTitles = context.getResources()
+                .getTextArray(R.array.enhanced_4g_lte_mode_title_variant);
+        mVariantSumaries = context.getResources()
+                .getTextArray(R.array.enhanced_4g_lte_mode_sumary_variant);
     }
 
     @Override
@@ -94,12 +104,17 @@ public class Enhanced4gLtePreferenceController extends TelephonyTogglePreference
     public void updateState(Preference preference) {
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
-        final boolean useVariant4glteTitle = mCarrierConfig.getInt(
-                CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT) != 0;
-        int enhanced4glteModeTitleId = useVariant4glteTitle ?
-                R.string.enhanced_4g_lte_mode_title_variant :
-                R.string.enhanced_4g_lte_mode_title;
-        switchPreference.setTitle(enhanced4glteModeTitleId);
+        final boolean show4GForLTE = mCarrierConfig.getBoolean(
+            CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
+        int variant4glteTitleIndex = mCarrierConfig.getInt(
+            CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT);
+
+        if (variant4glteTitleIndex != VARIANT_TITLE_ADVANCED_CALL) {
+            variant4glteTitleIndex = show4GForLTE ? VARIANT_TITLE_4G_CALLING : VARIANT_TITLE_VOLTE;
+        }
+
+        switchPreference.setTitle(mVariantTitles[variant4glteTitleIndex]);
+        switchPreference.setSummary(mVariantSumaries[variant4glteTitleIndex]);
         switchPreference.setEnabled(is4gLtePrefEnabled());
         switchPreference.setChecked(mImsManager.isEnhanced4gLteModeSettingEnabledByUser()
                 && mImsManager.isNonTtyOrTtyOnVolteEnabled());

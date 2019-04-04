@@ -23,6 +23,7 @@
     <PreferenceCategory
         android:key="multi_network_header"
         android:title="@string/summary_placeholder"
+        android:layout="@layout/preference_category_no_label"
         settings:allowDividerBelow="true"
         android:order="-40"
         settings:controller="com.android.settings.network.MultiNetworkHeaderController"/>

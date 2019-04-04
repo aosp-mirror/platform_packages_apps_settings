@@ -21,7 +21,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.PreferenceViewHolder;
@@ -45,11 +44,6 @@ public class AppCheckBoxPreference extends CheckBoxPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-
-        final TextView appendix = (TextView) holder.findViewById(R.id.appendix);
-        if (appendix != null) {
-            appendix.setVisibility(View.GONE);
-        }
 
         final LinearLayout layout = (LinearLayout) holder.findViewById(R.id.summary_container);
         if (layout != null) {

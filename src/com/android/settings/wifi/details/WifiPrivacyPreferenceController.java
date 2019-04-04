@@ -41,6 +41,7 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
     private WifiConfiguration mWifiConfiguration;
     private WifiManager mWifiManager;
     private boolean mIsEphemeral = false;
+    private boolean mIsPasspoint = false;
 
     public WifiPrivacyPreferenceController(Context context) {
         super(context, KEY_WIFI_PRIVACY);
@@ -54,6 +55,10 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
 
     public void setIsEphemeral(boolean isEphemeral) {
         mIsEphemeral = isEphemeral;
+    }
+
+    public void setIsPasspoint(boolean isPasspoint) {
+        mIsPasspoint = isPasspoint;
     }
 
     @Override
@@ -71,7 +76,7 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         updateSummary(dropDownPreference, randomizationLevel);
 
         // Makes preference not selectable, when this is a ephemeral network.
-        if (mIsEphemeral) {
+        if (mIsEphemeral || mIsPasspoint) {
             preference.setSelectable(false);
             dropDownPreference.setSummary(R.string.wifi_privacy_settings_ephemeral_summary);
         }

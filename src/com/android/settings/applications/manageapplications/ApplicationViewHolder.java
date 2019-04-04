@@ -19,7 +19,6 @@ package com.android.settings.applications.manageapplications;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,10 +40,6 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     private final TextView mAppName;
     private final ImageView mAppIcon;
 
-    private final boolean mKeepStableHeight;
-
-    @VisibleForTesting
-    View mSummaryContainer;
     @VisibleForTesting
     final TextView mSummary;
     @VisibleForTesting
@@ -54,20 +49,18 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     @VisibleForTesting
     final Switch mSwitch;
 
-    ApplicationViewHolder(View itemView, boolean keepStableHeight) {
+    ApplicationViewHolder(View itemView) {
         super(itemView);
         mAppName = itemView.findViewById(android.R.id.title);
         mAppIcon = itemView.findViewById(android.R.id.icon);
-        mSummaryContainer = itemView.findViewById(R.id.summary_container);
         mSummary = itemView.findViewById(android.R.id.summary);
         mDisabled = itemView.findViewById(R.id.appendix);
-        mKeepStableHeight = keepStableHeight;
         mSwitch = itemView.findViewById(R.id.switchWidget);
         mWidgetContainer = itemView.findViewById(android.R.id.widget_frame);
     }
 
     static View newView(ViewGroup parent) {
-        return newView(parent, false);
+        return newView(parent, false /* twoTarget */);
     }
 
     static View newView(ViewGroup parent, boolean twoTarget) {
@@ -76,13 +69,13 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         final ViewGroup widgetFrame = view.findViewById(android.R.id.widget_frame);
         if (twoTarget) {
             if (widgetFrame != null) {
-               LayoutInflater.from(parent.getContext())
-                       .inflate(R.layout.preference_widget_master_switch, widgetFrame, true);
+                LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.preference_widget_master_switch, widgetFrame, true);
 
-               View divider = LayoutInflater.from(parent.getContext()).inflate(
-                       R.layout.preference_two_target_divider, view, false);
-               // second to last, before widget frame
-               view.addView(divider, view.getChildCount() - 1);
+                View divider = LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.preference_two_target_divider, view, false);
+                // second to last, before widget frame
+                view.addView(divider, view.getChildCount() - 1);
             }
         } else if (widgetFrame != null) {
             widgetFrame.setVisibility(View.GONE);
@@ -92,12 +85,10 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
     void setSummary(CharSequence summary) {
         mSummary.setText(summary);
-        updateSummaryContainer();
     }
 
     void setSummary(@StringRes int summary) {
         mSummary.setText(summary);
-        updateSummaryContainer();
     }
 
     void setEnabled(boolean isEnabled) {
@@ -133,17 +124,6 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         } else {
             mDisabled.setVisibility(View.GONE);
         }
-        updateSummaryContainer();
-    }
-
-    void updateSummaryContainer() {
-        if (mKeepStableHeight) {
-            mSummaryContainer.setVisibility(View.VISIBLE);
-            return;
-        }
-        final boolean hasContent =
-                !TextUtils.isEmpty(mDisabled.getText()) || !TextUtils.isEmpty(mSummary.getText());
-        mSummaryContainer.setVisibility(hasContent ? View.VISIBLE : View.GONE);
     }
 
     void updateSizeText(AppEntry entry, CharSequence invalidSizeStr, int whichSize) {

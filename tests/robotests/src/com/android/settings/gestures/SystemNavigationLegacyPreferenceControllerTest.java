@@ -16,6 +16,10 @@
 
 package com.android.settings.gestures;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
+
 import static com.android.settings.gestures.SystemNavigationEdgeToEdgePreferenceController.PREF_KEY_EDGE_TO_EDGE;
 import static com.android.settings.gestures.SystemNavigationLegacyPreferenceController.PREF_KEY_LEGACY;
 import static com.android.settings.gestures.SystemNavigationSwipeUpPreferenceController.PREF_KEY_SWIPE_UP;
@@ -24,17 +28,17 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.om.IOverlayManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.R;
@@ -45,6 +49,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
@@ -58,20 +64,25 @@ public class SystemNavigationLegacyPreferenceControllerTest {
     private Context mContext;
     private ShadowPackageManager mPackageManager;
 
+    @Mock
+    private IOverlayManager mOverlayManager;
+
     private SystemNavigationLegacyPreferenceController mController;
 
     private static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
         SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_setting_available,
                 true);
-        SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_default, false);
 
         mContext = RuntimeEnvironment.application;
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
 
-        mController = new SystemNavigationLegacyPreferenceController(mContext, PREF_KEY_LEGACY);
+        mController = new SystemNavigationLegacyPreferenceController(mContext, mOverlayManager,
+                PREF_KEY_LEGACY);
     }
 
     @After
@@ -120,19 +131,32 @@ public class SystemNavigationLegacyPreferenceControllerTest {
     }
 
     @Test
-    public void testIsChecked_defaultIsTrue_shouldReturnTrue() {
+    public void testIsChecked_defaultIsLegacy_shouldReturnTrue() {
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_3BUTTON);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void testIsChecked_defaultIsFalse_shouldReturnFalse() {
+    public void testIsChecked_defaultIsSwipeUp_shouldReturnFalse() {
         // Turn on the Swipe Up mode (2-buttons)
-        SettingsShadowResources.overrideResource(R.bool.config_swipe_up_gesture_default, true);
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_2BUTTON);
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void testIsChecked_defaultIsEdgeToEdge_shouldReturnFalse() {
+        // Turn on the Edge to Edge
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_GESTURAL);
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void testIsChecked_radioButtonClicked_shouldReturnTrue() {
+        SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
+                NAV_BAR_MODE_3BUTTON);
         // Set the setting to be enabled.
         mController.onRadioButtonClicked(null);
         assertThat(mController.isChecked()).isTrue();

@@ -32,5 +32,5 @@ public interface ContextualCardFeatureProvider {
             List<ContextualCard> hiddenCards);
 
     /** When user clicks toggle/title area of a contextual card. */
-    void logContextualCardClick(ContextualCard card, int row, int tapTarget);
+    void logContextualCardClick(ContextualCard card, int sliceRow, int tapTarget, int uiPosition);
 }

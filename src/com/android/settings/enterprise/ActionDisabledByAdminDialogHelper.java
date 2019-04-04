@@ -55,7 +55,7 @@ import java.util.Objects;
 public class ActionDisabledByAdminDialogHelper {
 
     private static final String TAG = ActionDisabledByAdminDialogHelper.class.getName();
-    private EnforcedAdmin mEnforcedAdmin;
+    @VisibleForTesting EnforcedAdmin mEnforcedAdmin;
     private ViewGroup mDialogView;
     private String mRestriction = null;
     private Activity mActivity;
@@ -80,20 +80,28 @@ public class ActionDisabledByAdminDialogHelper {
             EnforcedAdmin enforcedAdmin) {
         mEnforcedAdmin = enforcedAdmin;
         mRestriction = restriction;
-
         final AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         mDialogView = (ViewGroup) LayoutInflater.from(builder.getContext()).inflate(
                 R.layout.admin_support_details_dialog, null);
         initializeDialogViews(mDialogView, mEnforcedAdmin.component, getEnforcementAdminUserId(),
                 mRestriction);
-        return builder
-            .setPositiveButton(R.string.okay, null)
-            .setNeutralButton(R.string.learn_more,
-                    (dialog, which) -> {
-                        showAdminPolicies(mEnforcedAdmin, mActivity);
-                        mActivity.finish();
-                    })
-            .setView(mDialogView);
+        builder.setPositiveButton(R.string.okay, null).setView(mDialogView);
+        maybeSetLearnMoreButton(builder);
+        return builder;
+    }
+
+    @VisibleForTesting
+    void maybeSetLearnMoreButton(AlertDialog.Builder builder) {
+        // The "Learn more" button appears only if the restriction is enforced by an admin in the
+        // same profile group. Otherwise the admin package and its policies are not accessible to
+        // the current user.
+        final UserManager um = UserManager.get(mActivity.getApplicationContext());
+        if (um.isSameProfileGroup(getEnforcementAdminUserId(mEnforcedAdmin), um.getUserHandle())) {
+            builder.setNeutralButton(R.string.learn_more, (dialog, which) -> {
+                showAdminPolicies(mEnforcedAdmin, mActivity);
+                mActivity.finish();
+            });
+        }
     }
 
     public void updateDialog(String restriction, EnforcedAdmin admin) {

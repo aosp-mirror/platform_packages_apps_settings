@@ -16,6 +16,12 @@
 
 package com.android.settings.sim;
 
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE;
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL;
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA;
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE;
+import static android.telephony.TelephonyManager.EXTRA_SUBSCRIPTION_ID;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -23,19 +29,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
-import androidx.core.app.NotificationCompat;
-
-import com.android.internal.telephony.IccCardConstants;
 import com.android.settings.R;
 import com.android.settings.Settings.SimSettingsActivity;
-import com.android.settings.Utils;
 
-import java.util.List;
+import androidx.core.app.NotificationCompat;
 
 public class SimSelectNotification extends BroadcastReceiver {
     private static final String TAG = "SimSelectNotification";
@@ -46,71 +46,27 @@ public class SimSelectNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        final TelephonyManager telephonyManager = (TelephonyManager)
-                context.getSystemService(Context.TELEPHONY_SERVICE);
-        final SubscriptionManager subscriptionManager = SubscriptionManager.from(context);
-        final int numSlots = telephonyManager.getSimCount();
-
-        // Do not create notifications on single SIM devices or when provisioning i.e. Setup Wizard.
-        if (numSlots < 2 || !Utils.isDeviceProvisioned(context)) {
+        if (!TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED.equals(intent.getAction())) {
             return;
         }
-
         // Cancel any previous notifications
         cancelNotification(context);
-
-        // If sim state is not ABSENT or LOADED then ignore
-        String simStatus = intent.getStringExtra(IccCardConstants.INTENT_KEY_ICC_STATE);
-        if (!(IccCardConstants.INTENT_VALUE_ICC_ABSENT.equals(simStatus) ||
-                IccCardConstants.INTENT_VALUE_ICC_LOADED.equals(simStatus))) {
-            Log.d(TAG, "sim state is not Absent or Loaded");
-            return;
-        } else {
-            Log.d(TAG, "simstatus = " + simStatus);
-        }
-
-        int state;
-        for (int i = 0; i < numSlots; i++) {
-            state = telephonyManager.getSimState(i);
-            if (!(state == TelephonyManager.SIM_STATE_ABSENT
-                    || state == TelephonyManager.SIM_STATE_READY
-                    || state == TelephonyManager.SIM_STATE_UNKNOWN)) {
-                Log.d(TAG, "All sims not in valid state yet");
-                return;
-            }
-        }
-
-        List<SubscriptionInfo> sil = subscriptionManager.getActiveSubscriptionInfoList(true);
-        if (sil == null || sil.size() < 1) {
-            Log.d(TAG, "Subscription list is empty");
-            return;
-        }
-
-        // Clear defaults for any subscriptions which no longer exist
-        subscriptionManager.clearDefaultsForInactiveSubIds();
-
-        boolean dataSelected = SubscriptionManager.isUsableSubIdValue(
-                SubscriptionManager.getDefaultDataSubscriptionId());
-        boolean smsSelected = SubscriptionManager.isUsableSubIdValue(
-                SubscriptionManager.getDefaultSmsSubscriptionId());
-
-        // If data and sms defaults are selected, dont show notification (Calls default is optional)
-        if (dataSelected && smsSelected) {
-            Log.d(TAG, "Data & SMS default sims are selected. No notification");
-            return;
-        }
-
         // Create a notification to tell the user that some defaults are missing
         createNotification(context);
 
-        if (sil.size() == 1) {
+        int dialogType = intent.getIntExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE);
+        if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL) {
+            int subId = intent.getIntExtra(EXTRA_SUBSCRIPTION_ID,
+                    SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
+            int slotIndex = SubscriptionManager.getSlotIndex(subId);
             // If there is only one subscription, ask if user wants to use if for everything
             Intent newIntent = new Intent(context, SimDialogActivity.class);
             newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.PREFERRED_PICK);
-            newIntent.putExtra(SimDialogActivity.PREFERRED_SIM, sil.get(0).getSimSlotIndex());
+            newIntent.putExtra(SimDialogActivity.PREFERRED_SIM, slotIndex);
             context.startActivity(newIntent);
-        } else if (!dataSelected) {
+        } else if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA) {
             // If there are mulitple, ensure they pick default data
             Intent newIntent = new Intent(context, SimDialogActivity.class);
             newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -27,6 +27,18 @@
         settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>
 
     <SwitchPreference
+        android:key="asst_capability_prioritizer"
+        android:title="@string/asst_capability_prioritizer_title"
+        android:summary="@string/asst_capability_prioritizer_summary"
+        settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+
+    <SwitchPreference
+        android:key="asst_capabilities_actions_replies"
+        android:title="@string/asst_capabilities_actions_replies_title"
+        android:summary="@string/asst_capabilities_actions_replies_summary"
+        settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+
+    <SwitchPreference
         android:key="hide_silent_icons"
         android:title="@string/hide_silent_icons_title"
         android:summary="@string/hide_silent_icons_summary"
@@ -58,10 +70,11 @@
             settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
 
         <!-- Notification bubbles -->
-        <SwitchPreference
+        <Preference
             android:key="notification_bubbles"
             android:title="@string/notification_bubbles_title"
-            settings:controller="com.android.settings.notification.BubbleNotificationPreferenceController"/>
+            settings:controller="com.android.settings.notification.BubbleSummaryNotificationPreferenceController"
+            android:fragment="com.android.settings.notification.BubbleNotificationSettings"/>
 
         <!-- Pulse notification light -->
         <SwitchPreference

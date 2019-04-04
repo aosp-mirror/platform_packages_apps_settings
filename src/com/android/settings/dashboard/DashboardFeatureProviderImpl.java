@@ -46,12 +46,12 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.AdaptiveIcon;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.AdaptiveIcon;
 
 import java.util.List;
 import java.util.Map;
@@ -192,7 +192,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @VisibleForTesting
     void bindIcon(Preference preference, Tile tile, boolean forceRoundedIcon) {
-        final Icon tileIcon = tile.getIcon(mContext);
+        // Use preference context instead here when get icon from Tile, as we are using the context
+        // to get the style to tint the icon.  Using mContext here won't get the correct style.
+        final Icon tileIcon = tile.getIcon(preference.getContext());
         if (tileIcon != null) {
             Drawable iconDrawable = tileIcon.loadDrawable(preference.getContext());
             if (forceRoundedIcon

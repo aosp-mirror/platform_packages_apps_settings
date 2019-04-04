@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="apps_and_notification_screen"
     android:title="@string/app_and_notification_dashboard_title"
-    settings:initialExpandedChildrenCount="8">
+    settings:initialExpandedChildrenCount="3">
     <!-- the initial count should include the dynamic tiles -->
 
     <Preference
@@ -28,7 +28,8 @@
         android:title="@string/applications_settings"
         android:order="-999"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:controller="com.android.settings.applications.AllAppsInfoPreferenceController"/>
+        settings:controller="com.android.settings.applications.AllAppsInfoPreferenceController"
+        settings:keywords="@string/keywords_applications_settings"/>
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="recent_open_apps"

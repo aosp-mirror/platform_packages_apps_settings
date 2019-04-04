@@ -36,6 +36,10 @@
             android:dialogTitle="@*android:string/bugreport_title" />
 
         <Preference
+            android:key="system_server_heap_dump"
+            android:title="@string/capture_system_heap_dump_title" />
+
+        <Preference
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
             android:summary="@string/local_backup_password_summary_none"
@@ -113,7 +117,8 @@
         <Preference
             android:key="quick_settings_tiles"
             android:title="@string/quick_settings_developer_tiles"
-            android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment" />
+            android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment"
+            settings:searchable="false" />
 
     <!-- Configure trust agent behavior -->
     <SwitchPreference
@@ -149,6 +154,11 @@
             android:key="bugreport_in_power"
             android:title="@string/bugreport_in_power"
             android:summary="@string/bugreport_in_power_summary" />
+
+        <SwitchPreference
+            android:key="automatic_system_server_heap_dumps"
+            android:title="@string/automatic_system_heap_dump_title"
+            android:summary="@string/automatic_system_heap_dump_summary" />
 
         <Preference android:key="mock_location_app"
                     android:title="@string/mock_location_app" />

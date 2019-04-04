@@ -21,10 +21,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.Pair;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 
 /**
  * An invisible retained worker fragment to track the AsyncWork that saves (and optionally
@@ -84,7 +87,7 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
 
     protected void start() {
         if (mBlocking) {
-            finish(saveAndVerifyInBackground());
+            finish(saveAndVerifyInBackground().second);
         } else {
             new Task().execute();
         }
@@ -92,9 +95,10 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
 
     /**
      * Executes the save and verify work in background.
-     * @return Intent with challenge token or null.
+     * @return pair where the first is a boolean confirming whether the change was successful or not
+     * and second is the Intent which has the challenge token or is null.
      */
-    protected abstract Intent saveAndVerifyInBackground();
+    protected abstract Pair<Boolean, Intent> saveAndVerifyInBackground();
 
     protected void finish(Intent resultData) {
         mFinished = true;
@@ -108,19 +112,24 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         mBlocking = blocking;
     }
 
-    private class Task extends AsyncTask<Void, Void, Intent> {
+    private class Task extends AsyncTask<Void, Void, Pair<Boolean, Intent>> {
+
         @Override
-        protected Intent doInBackground(Void... params){
+        protected Pair<Boolean, Intent> doInBackground(Void... params){
             return saveAndVerifyInBackground();
         }
 
         @Override
-        protected void onPostExecute(Intent resultData) {
-            finish(resultData);
+        protected void onPostExecute(Pair<Boolean, Intent> resultData) {
+            if (!resultData.first) {
+                Toast.makeText(getContext(), R.string.lockpassword_credential_changed,
+                        Toast.LENGTH_LONG).show();
+            }
+            finish(resultData.second);
         }
     }
 
     interface Listener {
-        public void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData);
+        void onChosenLockSaveFinished(boolean wasSecureBefore, Intent resultData);
     }
 }

@@ -17,11 +17,13 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -31,6 +33,11 @@ public class AllowBackgroundActivityStartsPreferenceController
 
     private static final String BACKGROUND_ACTIVITY_STARTS_ENABLED_KEY
             = "allow_background_activity_starts";
+
+    /** Key in DeviceConfig that stores the default for the preference (as a boolean). */
+    @VisibleForTesting
+    static final String KEY_DEFAULT_BACKGROUND_ACTIVITY_STARTS_ENABLED =
+            "default_background_activity_starts_enabled";
 
     public AllowBackgroundActivityStartsPreferenceController(Context context) {
         super(context);
@@ -47,22 +54,38 @@ public class AllowBackgroundActivityStartsPreferenceController
         return true;
     }
 
-    private void writeSetting(boolean isEnabled) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.BACKGROUND_ACTIVITY_STARTS_ENABLED, isEnabled ? 1 : 0);
-    }
-
     @Override
     public void updateState(Preference preference) {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.BACKGROUND_ACTIVITY_STARTS_ENABLED, 1);
-        ((SwitchPreference) mPreference).setChecked(mode != 0);
+                Settings.Global.BACKGROUND_ACTIVITY_STARTS_ENABLED, -1);
+
+        boolean isEnabled = mode < 0 ? isDefaultEnabled() : mode != 0;
+        ((SwitchPreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        writeSetting(true);
-        ((SwitchPreference) mPreference).setChecked(true);
+        clearSetting();
+        updateState(mPreference);
+    }
+
+    private void writeSetting(boolean isEnabled) {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BACKGROUND_ACTIVITY_STARTS_ENABLED, isEnabled ? 1 : 0);
+    }
+
+    private void clearSetting() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.BACKGROUND_ACTIVITY_STARTS_ENABLED, -1);
+    }
+
+    private boolean isDefaultEnabled() {
+        // The default in the absence of user preference is settable via DeviceConfig.
+        // Note that the default default is enabled.
+        return DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_ACTIVITY_MANAGER,
+                KEY_DEFAULT_BACKGROUND_ACTIVITY_STARTS_ENABLED,
+                /*defaultValue*/ true);
     }
 }

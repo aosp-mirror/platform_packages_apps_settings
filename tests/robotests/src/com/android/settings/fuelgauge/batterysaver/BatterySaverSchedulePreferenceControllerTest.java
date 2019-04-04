@@ -62,7 +62,7 @@ public class BatterySaverSchedulePreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
         Settings.Global.putInt(mContext.getContentResolver(),
-                Global.AUTOMATIC_POWER_SAVER_MODE, PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
 
         mController.updateState(mPreference);
 
@@ -74,7 +74,7 @@ public class BatterySaverSchedulePreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, TRIGGER_LEVEL);
         Settings.Global.putInt(mContext.getContentResolver(),
-                Global.AUTOMATIC_POWER_SAVER_MODE, PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
 
         mController.updateState(mPreference);
 
@@ -87,7 +87,7 @@ public class BatterySaverSchedulePreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, TRIGGER_LEVEL);
         Settings.Global.putInt(mContext.getContentResolver(),
-                Global.AUTOMATIC_POWER_SAVER_MODE, PowerManager.POWER_SAVER_MODE_DYNAMIC);
+                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
 
         mController.updateState(mPreference);
 

@@ -1584,6 +1584,9 @@
     <!-- Label for ChoosePassword/PIN Clear button that clears all text entered by the user so far. -->
     <string name="lockpassword_clear_label">Clear</string>
 
+    <!-- Toast for a failed password change attempt when the old credential has been changed. [CHAR LIMIT=120]-->
+    <string name="lockpassword_credential_changed">Screen lock was already changed. Try again with the new screen lock.</string>
+
     <!-- Label for LockPatternTutorial Cancel button -->
     <string name="lockpattern_tutorial_cancel_label">Cancel</string>
 
@@ -2020,8 +2023,6 @@
     <string name="wifi_menu_forget">Forget network</string>
     <!-- Menu option to modify a Wi-Fi network configuration -->
     <string name="wifi_menu_modify">Modify network</string>
-    <!-- Menu option to write a Wi-Fi configuration token to an NFC tag [CHAR_LIMIT=30]-->
-    <string name="wifi_menu_write_to_nfc">Write to NFC tag</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is off and network list is empty [CHAR LIMIT=50]-->
     <string name="wifi_empty_list_wifi_off">To see available networks, turn Wi\u2011Fi on.</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is on and network list is empty [CHAR LIMIT=50]-->
@@ -2129,7 +2130,9 @@
     <!-- Title for the fragment to share Wi-Fi [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_share_wifi">Share Wi\u2011Fi</string>
     <!-- Hint for the user to use another device to scan QR code on screen to join Wi-Fi [CHAR LIMIT=NONE] -->
-    <string name="wifi_dpp_scan_qr_code_with_another_device">Scan this QR code with another device to join \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device">Scan this QR code to connect to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d and share the password</string>
+    <!-- Hint for the user to use another device to scan QR code on screen to join a open Wi-Fi [CHAR LIMIT=NONE] -->
+    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device">Scan this QR code to connect to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Hint for QR code detection [CHAR LIMIT=NONE]  -->
     <string name="wifi_dpp_could_not_detect_valid_qr_code">Couldn\u2019t read QR code. Re-center code and try again</string>
     <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
@@ -2166,8 +2169,16 @@
     <string name="wifi_dpp_connecting">Connecting\u2026</string>
     <!-- Title for the fragment to show that the QR code is for sharing Wi-Fi hotspot network [CHAR LIMIT=50] -->
     <string name="wifi_dpp_share_hotspot">Share hotspot</string>
-    <!-- Hint for the user to share Wi-Fi hotspot network [CHAR LIMIT=NONE] -->
-    <string name="wifi_dpp_scan_qr_code_to_share_hotspot">Scan this QR code with another device to join hotspot \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
+    <!-- Title for Wi-Fi DPP lockscreen title [CHAR LIMIT=50] -->
+    <string name="wifi_dpp_lockscreen_title">Verify it\u0027s you</string>
+    <!-- Hint for Wi-Fi password [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_wifi_password">Wi\u2011Fi password: <xliff:g id="password" example="my password">%1$s</xliff:g></string>
+    <!-- Hint for Wi-Fi hotspot password [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_hotspot_password">Hotspot password: <xliff:g id="password" example="my password">%1$s</xliff:g></string>
+    <!-- Label for "Connect to this network using a QR code" [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_add_device">Add device</string>
+    <!-- Hint for "Add device" [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_connect_network_using_qr_code">Connect to this network using a QR code</string>
      <!-- Label for the try again button [CHAR LIMIT=20]-->
     <string name="retry">Retry</string>
     <!-- Label for the check box to share a network with other users on the same device -->
@@ -2197,8 +2208,6 @@
     <!-- Substring of wifi status when Wi-Fi Protected Setup (WPS) is available and
          string is listed after a wifi_secured_* string-->
     <string name="wifi_wps_available_second_item">\u0020(WPS available)</string>
-    <!-- Message in WriteWifiConfigToNfcDialog when prompted to enter network password [CHAR_LIMIT=40] -->
-    <string name="wifi_wps_nfc_enter_password">Enter your network password</string>
 
     <!-- Message in dialog when the user tries to connect to a carrier network[CHAR_LIMIT=40] -->
     <string name="wifi_carrier_connect">Carrier Wi\u2011Fi network</string>
@@ -2220,6 +2229,8 @@
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
+    <!-- Dialog text to tell the user that the selected network has incomplete Internet access. [CHAR LIMIT=100] -->
+    <string name="partial_connectivity_text">Some apps and services may not work due to limited connectivity. Use anyway?</string>
     <string name="no_internet_access_remember">Don\u2019t ask again for this network</string>
 
     <!-- Dialog text to tell the user that the selected network has lost Internet access, and asking the user whether they want to avoid this network. -->
@@ -2269,6 +2280,8 @@
     </plurals>
     <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. [CHAR LIMIT=30] -->
     <string name="wifi_advanced_titlebar">Advanced Wi\u2011Fi</string>
+    <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's SSID. [CHAR LIMIT=20] -->
+    <string name="wifi_advanced_ssid_title">SSID</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's MAC address. -->
     <string name="wifi_advanced_mac_address_title">MAC address</string>
     <!-- Title of the screen to adjust IP settings -->
@@ -2605,8 +2618,6 @@
     <string name="sound_effects_enable_title">Tap sounds</string>
     <!-- Sound settings screen, setting check box label -->
     <string name="lock_sounds_enable_title">Screen lock sound</string>
-    <!-- Sound settings screen, setting check box label -->
-    <string name="haptic_feedback_enable_title">Vibrate on tap</string>
     <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
     <string name="audio_record_proc_title">Noise cancellation</string>
     <!-- Volume description for media volume -->
@@ -2936,9 +2947,21 @@
     <!-- Multiple SIMs found summary.  [CHAR LIMIT=100] -->
     <string name="sim_multi_sims_summary">Choose the SIM you prefer for mobile data.</string>
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=30] -->
-    <string name="sim_change_data_title">Change data SIM?</string>
+    <string name="sim_change_data_title">
+        Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> for mobile data?
+    </string>
     <!-- Message confirming the user wishes to change the default data SIM from one to another.  [CHAR LIMIT=NONE] -->
-    <string name="sim_change_data_message">Use <xliff:g id="new_sim">%1$s</xliff:g> instead of <xliff:g id="old_sim">%2$s</xliff:g> for mobile data?</string>
+    <string name="sim_change_data_message">
+        You\u0027re using <xliff:g id="carrier2" example="T-mobile">%2$s</xliff:g> for mobile data.
+        If you switch to <xliff:g id="carrier1" example="Verizon">%1$s</xliff:g>,
+        <xliff:g id="carrier2" example="T-mobile">%2$s</xliff:g> will no longer be used for mobile
+        data.
+    </string>
+    <!-- Ok button label confirming the user wishes to change the default data SIM from one to
+         another. [CHAR LIMIT=25] -->
+    <string name="sim_change_data_ok">
+        Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g>
+    </string>
     <!-- Title for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=30] -->
     <string name="sim_preferred_title">Update preferred SIM card?</string>
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
@@ -2995,6 +3018,8 @@
     <string name="device_status_summary" product="default">Phone number, signal, etc.</string>
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
     <string name="storage_settings" >Storage</string>
+    <!-- Settings title that shows user how much storage and cache space an App is taking [CHAR LIMIT=50] -->
+    <string name="storage_settings_for_app" >Storage &amp; cache</string>
     <!-- Main settings screen item's title to go into the storage & USB settings screen [CHAR LIMIT=25] -->
     <string name="storage_usb_settings" >Storage</string>
     <!-- Storage settings screen title -->
@@ -3590,14 +3615,18 @@
     <string name="reset_network_title">Reset Wi-Fi, mobile &amp; Bluetooth</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
     <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
+
     <!-- SD card & phone storage settings screen, title for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=30] -->
-    <string name="reset_esim_title">Erase eSIMs</string>
+    <string name="reset_esim_title">Erase downloaded SIMs</string>
     <!-- SD card & phone storage settings screen, message for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_desc">You\u2019ll have to contact your carrier to download replacement eSIMs. This won\u2019t cancel any mobile service plans.</string>
+    <string name="reset_esim_desc">To download replacement SIMs, contact your carrier. This won\u2019t cancel any mobile service plans.</string>
+
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
     <string name="reset_network_button_text">Reset settings</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset settings button -->
-    <string name="reset_network_final_desc">Reset all network settings? You can\u2019t undo this action!</string>
+    <string name="reset_network_final_desc">Reset all network settings? You can\u2019t undo this action.</string>
+    <!-- SD card & phone storage settings screen, message on screen after user selects Reset settings button [CHAR LIMIT=NONE] -->
+    <string name="reset_network_final_desc_esim">Reset all network settings and erase downloaded SIMs? You can\u2019t undo this action.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset settings button -->
     <string name="reset_network_final_button_text">Reset settings</string>
     <!-- Reset settings confirmation screen title [CHAR LIMIT=30] -->
@@ -3607,9 +3636,9 @@
     <!-- Reset settings complete toast text [CHAR LIMIT=75] -->
     <string name="reset_network_complete_toast">Network settings have been reset</string>
     <!-- Title of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_title">Cant\u2019t reset eSIMs</string>
+    <string name="reset_esim_error_title">Can\u2019t erase SIMs</string>
     <!-- Message of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_msg">The eSIMs can\u2019tt be reset due to an error.</string>
+    <string name="reset_esim_error_msg">Downloaded SIMs can\u2019t be erased due to an error.\n\nRestart your device and try again.</string>
 
     <!-- Master Clear -->
     <!-- Button title to factory data reset the entire device -->
@@ -3647,7 +3676,9 @@
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
     <string name="master_clear_button_text" product="default">Erase all data</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button -->
-    <string name="master_clear_final_desc">All of your personal information and downloaded apps will be deleted. You can\u2019t undo this action!</string>
+    <string name="master_clear_final_desc">All of your personal information and downloaded apps will be deleted. You can\u2019t undo this action.</string>
+    <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button [CHAR LIMIT=NONE] -->
+    <string name="master_clear_final_desc_esim">All of your personal information, including downloaded apps &amp; SIMs, will be deleted. You can\u2019t undo this action.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset phone button -->
     <string name="master_clear_final_button_text">Erase everything</string>
     <!-- Master clear failed message -->
@@ -3941,8 +3972,6 @@
     <string name="lockpassword_choose_your_pattern_header_for_face">To use face authentication, set pattern</string>
     <!-- Header on first screen of choose password/PIN as backup for face authentication flow. If this string cannot be translated in under 40 characters, please translate "Set face authentication backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_face">To use face authentication, set PIN</string>
-    <!-- Message on Wi-Fi Sharing screen [CHAR LIMIT=NONE] -->
-    <string name="wifi_sharing_message">Your Wi\u2011Fi name and password for \"<xliff:g id="SSID" example="GoogleGuest">%1$s</xliff:g>\" will be shared.</string>
 
     <!-- Message to be used to explain the user that he needs to enter his pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
@@ -4192,6 +4221,8 @@
     <string name="uninstall_all_users_text">Uninstall for all users</string>
     <!-- [CHAR LIMIT=NONE] Manage applications, individual application info screen, button label under Storage heading. Button to install an application for the user. -->
     <string name="install_text">Install</string>
+    <!-- [CHAR LIMIT=25] Manage applications, individual application info screen, button label under Storage heading. Button to disable an existing application. -->
+    <string name="disable_text">Disable</string>
     <!-- [CHAR LIMIT=25] Manage applications, individual application info screen, button label under Storage heading. Button to re-enable an existing application. -->
     <string name="enable_text">Enable</string>
     <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for example, remove all cached emails for an Email app) -->
@@ -4330,9 +4361,9 @@
     <!-- Manage applications. application installation location summary -->
     <string name="app_install_location_summary">Change the preferred installation location for new apps</string>
     <!-- [CHAR LIMIT=30] Manage applications, label for option to disable app -->
-    <string name="app_disable_dlg_positive">Uninstall app</string>
-    <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling apps -->
-    <string name="app_disable_dlg_text">If you uninstall this app, Android and other apps may no longer function as intended.</string>
+    <string name="app_disable_dlg_positive">Disable app</string>
+    <!-- [CHAR LIMIT=NONE] Manage applications, text for dialog when disabling apps -->
+    <string name="app_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended. Keep in mind, you can\u2019t delete this app since it came pre-installed on your device. By disabling, you turn this app off and hide it on your device.</string>
     <!-- [CHAR LIMIT=30] Manage applications, title for dialog when disabling notifications for an app -->
     <string name="app_disable_notifications_dlg_title">Turn off notifications?</string>
     <!-- Manage applications, individual application info screen, section heading for information about the app installer [CHAR_LIMIT=25] -->
@@ -5262,11 +5293,13 @@
     <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
+    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nMost used apps since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
+    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nMost used apps since full charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps you used since full charge:</string>
+    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nMost used apps since full charge:</string>
+    <!-- Footer message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dialog_message_footer">Includes high-power background activity</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_title">
         <item quantity="one">Restrict %1$d app</item>
@@ -5625,10 +5658,14 @@
     <string name="battery_saver_schedule_settings_title">Set a schedule</string>
 
     <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
-    <string name="battery_saver_sticky_title">Keep battery saver on</string>
+    <string name="battery_saver_sticky_title_new">Turn off when fully charged</string>
 
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description">Battery saver will stay on even after device is fully charged</string>
+    <string name="battery_saver_sticky_description_new" product="default">Battery Saver turns off when your phone is at <xliff:g id="percent" example="90%">%1$s</xliff:g></string>
+    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
+    <string name="battery_saver_sticky_description_new" product="tablet">Battery Saver turns off when your tablet is at <xliff:g id="percent" example="90%">%1$s</xliff:g></string>
+    <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
+    <string name="battery_saver_sticky_description_new" product="device">Battery Saver turns off when your device is at <xliff:g id="percent" example="90%">%1$s</xliff:g></string>
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title"><xliff:g id="percent">%1$s</xliff:g></string>
@@ -6734,6 +6771,24 @@
     <string name="help_uri_notifications" translatable="false"></string>
     <!-- Help URI, Apps [DO NOT TRANSLATE] -->
     <string name="help_uri_apps" translatable="false"></string>
+    <!-- Help URI, manage apps storage [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_storage" translatable="false"></string>
+    <!-- Help URI, manage apps power [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_high_power" translatable="false"></string>
+    <!-- Help URI, manage apps overlay [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_overlay" translatable="false"></string>
+    <!-- Help URI, manage apps write settings [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_write_settings" translatable="false"></string>
+    <!-- Help URI, manage apps manage sources [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_manage_sources" translatable="false"></string>
+    <!-- Help URI, manage apps games [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_games" translatable="false"></string>
+    <!-- Help URI, manage apps movies [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_movies" translatable="false"></string>
+    <!-- Help URI, manage apps photography [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_photography" translatable="false"></string>
+    <!-- Help URI, manage apps wifi access [DO NOT TRANSLATE] -->
+    <string name="help_uri_apps_wifi_access" translatable="false"></string>
     <!-- Help URI, Storage [DO NOT TRANSLATE] -->
     <string name="help_uri_storage" translatable="false"></string>
     <!-- Help URI, Accessibility [DO NOT TRANSLATE] -->
@@ -6874,9 +6929,15 @@
     <!-- Access point names title.  [CHAR LIMIT=50] -->
     <string name="access_point_names">Access point names</string>
     <!-- Enhaced 4G LTE Mode title.  [CHAR LIMIT=50] -->
-    <string name="enhanced_4g_lte_mode_title">Enhanced 4G LTE Mode</string>
+    <string name="enhanced_4g_lte_mode_title">VoLTE</string>
+    <!-- Enhaced 4G LTE Mode title for carriers who want to show Advanced Calling.  [CHAR LIMIT=50] -->
+    <string name="enhanced_4g_lte_mode_title_advanced_calling">Advanced Calling</string>
+    <!-- Enhaced 4G LTE Mode title for carriers who want to show 4G Calling.  [CHAR LIMIT=50] -->
+    <string name="enhanced_4g_lte_mode_title_4g_calling">4G Calling</string>
     <!-- Enhaced 4G LTE Mode summary.  [CHAR LIMIT=100] -->
-    <string name="enhanced_4g_lte_mode_summary">Use LTE data to enhance voice and communications (Recommended)</string>
+    <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
+    <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
+    <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
@@ -6953,6 +7014,8 @@
     <string name="sim_calls_always_use">Always use this for calls</string>
     <!-- Message for selecting sim for data in settings.  [CHAR LIMIT=40] -->
     <string name="select_sim_for_data">Select a SIM for data</string>
+    <!-- Message for selecting sim for SMS in settings.  [CHAR LIMIT=40] -->
+    <string name="select_sim_for_sms">Select a SIM for SMS</string>
     <!-- Message for switching data SIM; switching takes a while -->
     <string name="data_switch_started">Switching data SIM, this may take up to a minute...</string>
     <!-- Message for selecting sim for call in settings.  [CHAR LIMIT=40] -->
@@ -7071,6 +7134,27 @@
 
     <!--Search Keywords [CHAR LIMIT=NONE]-->
     <string name="keywords_wifi">wifi, wi-fi, network connection, internet, wireless, data, wi fi</string>
+    <!-- Search keyword for "Open Network Notification" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_wifi_notify_open_networks">Wi\u2011Fi notification, wifi notification</string>
+    <!-- Search keyword for "Adaptive brightness" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_auto_brightness">Auto brightness</string>
+    <!-- Search keyword for "Vibrate on touch" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_vibrate_on_touch">Stop vibration, tap, keyboard</string>
+    <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_time_format">Use 24-hour format</string>
+    <!-- Search keyword for "Files" settings under Settings > Storage. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_storage_files">Download</string>
+    <!-- Search keyword for "Default Apps" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_app_default">Open with</string>
+    <!-- Search keyword for "App info" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_applications_settings">Applications</string>
+    <!-- Search keyword for "Time zone" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_time_zone">timezone</string>
+    <!-- Search keyword for "Display over other apps" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_draw_overlay">Chat head</string>
+
+    <!-- Search keyword for "Flashlight" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_flashlight">Flashlight, Light, Torch</string>
     <string name="keywords_change_wifi_state">wifi, wi-fi, toggle, control</string>
     <string name="keywords_more_default_sms_app">text message, texting, messages, messaging, default</string>
     <string name="keywords_more_mobile_networks">cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte</string>
@@ -7081,7 +7165,8 @@
     <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
-    <string name="keywords_display_cast_screen">project, cast</string>
+    <!-- Search keyword for "Cast" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_display_cast_screen">project, cast, Screen mirroring, Screen sharing, mirroring, share screen, screen casting</string>
     <string name="keywords_storage">space, disk, hard drive, device usage</string>
     <string name="keywords_battery">power usage, charge</string>
     <string name="keywords_spell_checker">spelling, dictionary, spellcheck, auto-correct</string>
@@ -7134,7 +7219,7 @@
     <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
 
     <!-- Search keyword for lock screen notification setting [CHAR_LIMIT=NONE] -->
-    <string name="keywords_lock_screen_notif">lock screen notification</string>
+    <string name="keywords_lock_screen_notif">lock screen notification, notifications</string>
 
     <!-- Search keyword for face settings. -->
     <string name="keywords_face_settings">face</string>
@@ -7161,7 +7246,7 @@
     <string name="keywords_screen_timeout">screen, lock time, timeout, lockscreen</string>
 
     <!-- List of synonyms for Storage settings (everything related to storage on the device), used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_storage_settings">memory, data, delete, clear, free, space</string>
+    <string name="keywords_storage_settings">memory, cache, data, delete, clear, free, space</string>
 
     <!-- List of synonyms for the Bluetooth setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_bluetooth_settings">connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media </string>
@@ -7196,24 +7281,6 @@
     <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
     <!-- Battery Saver: Search terms for sticky battery saver preference [CHAR_LIMIT=NONE] -->
     <string name="keywords_battery_saver_sticky">battery saver, sticky, persist, power saver, battery</string>
-
-
-    <!-- NFC Wi-Fi pairing/setup strings-->
-
-    <!-- Write NFC tag for Wi-Fi pairing/setup title [CHAR_LIMIT=30]-->
-    <string name="setup_wifi_nfc_tag">Set up Wi-Fi NFC Tag</string>
-    <!-- Text for button to confirm writing tag -->
-    <string name="write_tag">Write</string>
-    <!-- Text to inform the user to tap a tag to complete the setup process -->
-    <string name="status_awaiting_tap">Tap a tag to write...</string>
-    <!-- Text to inform the user that the network key entered was incorrect -->
-    <string name="status_invalid_password">Invalid password, try again.</string>
-    <!-- Text displayed when tag successfully writen -->
-    <string name="status_write_success">Success!</string>
-    <!-- Text displayed in error cases (failure to write to tag) -->
-    <string name="status_failed_to_write">Unable to write data to NFC tag. If the problem persists, try a different tag</string>
-    <!-- Text displayed when tag is not writable -->
-    <string name="status_tag_not_writable">NFC tag is not writable. Please use a different tag.</string>
 
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
@@ -7321,6 +7388,12 @@
     <!-- Sound: Other sounds: Title for the option enabling boot sounds. [CHAR LIMIT=30] -->
     <string name="boot_sounds_title">Power on sounds</string>
 
+    <!-- Setting title for controlling how caption text display in real time [CHAR LIMIT=40]-->
+    <string name="live_caption_title">Live Caption</string>
+
+    <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
+    <string name="live_caption_summary">Automatically caption media</string>
+
     <!-- Sound: Summary for the Do not Disturb option when there is no automatic rules turned on. [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_summary_off">Never</string>
 
@@ -7340,7 +7413,7 @@
     <string name="zen_mode_behavior_settings_title">Exceptions</string>
 
     <!-- Do not disturb: Title for the dnd duration setting (user can specify how long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=30] -->
-    <string name="zen_mode_duration_settings_title">Duration</string>
+    <string name="zen_mode_duration_settings_title">Default duration</string>
 
     <!-- Do not disturb: Instructions indicating what types of sounds can bypass DND. [CHAR LIMIT=52] -->
     <string name="zen_mode_behavior_allow_title">Allow sounds and vibrations from</string>
@@ -7678,6 +7751,18 @@
     <string name="profile_section_header">Work notifications</string>
 
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
+    <string name="asst_capability_prioritizer_title">Automatic Notification Prioritizer</string>
+
+    <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
+    <string name="asst_capability_prioritizer_summary">Automatically silence and demote less important notifications</string>
+
+    <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
+    <string name="asst_capabilities_actions_replies_title">Smart actions and replies</string>
+
+    <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
+    <string name="asst_capabilities_actions_replies_summary">Automatically add contextual notification actions and quick replies to notifications</string>
+
+    <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
     <string name="hide_silent_icons_title">Hide silent notification status icons</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=NONE] -->
@@ -7687,7 +7772,23 @@
     <string name="notification_badging_title">Allow notification dots</string>
 
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
-    <string name="notification_bubbles_title">Allow notification bubbles</string>
+    <string name="notification_bubbles_title">Bubbles</string>
+    <!-- Configure Notifications: Summary for the notification bubbles option. [CHAR LIMIT=NONE] -->
+    <string name="notification_bubbles_summary">Quickly access app content from anywhere using floating shortcuts</string>
+    <!-- Feature education for bubbles. [CHAR LIMIT=NONE] -->
+    <string name="bubbles_feature_education">Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen.</string>
+    <!-- Title for the toggle shown on the app-level bubbles page  [CHAR LIMIT=60] -->
+    <string name="bubbles_app_toggle_title">Bubbles</string>
+    <!-- Description for the toggle shown on the app-level bubbles page  [CHAR LIMIT=NONE] -->
+    <string name="bubbles_app_toggle_summary">Allow <xliff:g id="app_name" example="YouTube">%1$s</xliff:g> to show some notifications as bubbles</string>
+    <!-- Title of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=NONE] -->
+    <string name="bubbles_feature_disabled_dialog_title">Turn on bubbles</string>
+    <!-- Description of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=NONE] -->
+    <string name="bubbles_feature_disabled_dialog_text">Before you can turn on bubbles for this app, you need to turn on bubbles for your device</string>
+    <!-- Button of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=60]-->
+    <string name="bubbles_feature_disabled_button_go_to_bubbles">Go to Bubbles</string>
+    <!-- Button to cancel out of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=60] -->
+    <string name="bubbles_feature_disabled_button_cancel">Cancel</string>
 
     <!-- Configure notifications: title for swipe direction [CHAR LIMIT=60] -->
     <string name="swipe_direction_title">Swipe actions</string>
@@ -8714,7 +8815,7 @@
     <string name="app_usage_preference">App usage preferences</string>
 
     <!-- Link title to show stats about how much time user spent in an app [CHAR LIMIT=45] -->
-    <string name="time_spent_in_app_pref_title">Time spent in app</string>
+    <string name="time_spent_in_app_pref_title">Screen time</string>
 
     <!-- Description of the usage access setting [CHAR LIMIT=NONE] -->
     <string name="usage_access_description">Usage access allows an app to track what other apps you\u2019re using and how often, as well as your carrier, language settings, and other details.</string>
@@ -9773,7 +9874,13 @@
     <string name="dark_ui_mode">Theme</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option that changes the color of the UI -->
-    <string name="dark_ui_mode_title">Set Theme</string>
+    <string name="dark_ui_mode_title">Choose Theme</string>
+
+    <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when light mode is selected -->
+    <string name="dark_ui_settings_light_summary">This setting also applies to apps</string>
+
+    <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when dark mode is selected -->
+    <string name="dark_ui_settings_dark_summary">Supported apps will also switch to dark theme</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
@@ -9781,16 +9888,21 @@
     <!-- [CHAR LIMIT=25] Title of developer tile to toggle winscope trace -->
     <string name="winscope_trace_quick_settings_title">Winscope Trace</string>
 
+    <!-- [CHAR LIMIT=25] Title of developer tile to toggle sensors -->
+    <string name="sensors_off_quick_settings_title">Sensors Off</string>
+
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
     <!-- [CHAR LIMIT=60] The preference title for enabling cross-profile remote contact search -->
     <string name="managed_profile_contact_search_title">Contact search</string>
     <!-- [CHAR LIMIT=NONE] The preference summary for enabling cross-profile remote contact search -->
     <string name="managed_profile_contact_search_summary">Allow contact searches by your organization to identify callers and contacts</string>
-    <!-- [CHAR LIMIT=60] The preference title for enabling cross profile calendar sync -->
+    <!-- [CHAR LIMIT=NONE] Settings label. This setting lets the user show their work events on their personal calendar. The adjective 'Cross-profile' is referring to the work and personal profiles a user has on their phone. -->
     <string name="cross_profile_calendar_title">Cross-profile calendar</string>
-    <!-- [CHAR LIMIT=NONE] The preference summary for enabling cross profile calendar sync -->
-    <string name="cross_profile_calendar_summary">Show work events on personal calendar</string>
+    <!-- [CHAR LIMIT=NONE] Setting description. If the user turns on this setting, they can see their work events on their personal calendar. -->
+    <string name="cross_profile_calendar_summary">Show work events on your personal calendar</string>
+    <!-- [CHAR LIMIT=NONE] The preference summary when cross-profile calendar is restricted. -->
+    <string name="cross_profile_calendar_restricted_summary">Your organization doesn\u2019t allow personal apps to access your work calendar</string>
 
 
     <!-- Time in hours -->
@@ -10448,8 +10560,6 @@
     <!-- Message informs the user that has no SIM card in personalized Settings [CHAR LIMIT=30] -->
     <string name="no_sim_card">No SIM card</string>
 
-    <!-- Carrier variant of Enhaced 4G LTE Mode title.  [CHAR LIMIT=50] -->
-    <string name="enhanced_4g_lte_mode_title_variant">Advanced Calling</string>
     <!-- The following strings are summaries for preferred network modes in Mobile network settings,
      and have a character limit of 100 -->
     <!-- WCDMA preferred [CHAR LIMIT=NONE] -->
@@ -10541,8 +10651,14 @@
     <string name="cdma_lte_data_service">Set up data service</string>
     <!-- Mobile network settings screen, title of Mobile Data switch preference [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_title">Mobile data</string>
-    <!-- Mobile network settings screen, title of Mobile data switch preference [CHAR LIMIT=NONE] -->
+    <!-- Mobile network settings screen, summary of Mobile data switch preference [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_summary">Access data using mobile network</string>
+    <!-- Mobile network settings screen, summary of Mobile data switch preference when the network
+         is opportunistic and will always be used when it is in range. [CHAR LIMIT=NONE] -->
+    <string name="mobile_data_settings_summary_auto_switch">
+        Phone will automatically switch to this carrier when in range
+    </string>
+
     <!-- Mobile network settings screen, title of item showing the name of the default subscription
      that will be used for calls. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
     <string name="calls_preference">Calls preference</string>
@@ -10590,26 +10706,34 @@
          such as calls, SMS, or data when multiple SIMs are present, but is not currently the
           default SIM for any of those services. [CHAR LIMIT=50] -->
     <string name="subscription_available">Available</string>
+    <!-- Network & internet page. Summary indicating that a SIM is configured and may be used for
+         some services, and that network is currently in range but not being used. For instance, it
+         may be able to provide a mobile data connection that we aren't using because we're already
+         connected to wifi. [CHAR LIMIT=50] -->
+    <string name="mobile_network_in_range">In range</string>
+    <!-- Network & internet page. Summary indicating that a SIM is configured and may be used for
+         some services, but the network not currently in range. [CHAR LIMIT=50] -->
+    <string name="mobile_network_not_in_range">Not in range</string>
 
     <!-- Title of item shown at the bottom of the page listing multiple mobile service
          subscriptions; tapping it leads to a UI to add more [CHAR LIMIT=40] -->
     <string name="mobile_network_list_add_more">Add more</string>
     <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
          that service is active and is tied to a physical SIM card [CHAR LIMIT=40] -->
-    <string name="mobile_network_active_sim">Active SIM</string>
+    <string name="mobile_network_active_sim">Active / SIM</string>
     <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
          that service is inactive and is tied to a physical SIM card [CHAR LIMIT=40] -->
-    <string name="mobile_network_inactive_sim">Inactive SIM</string>
+    <string name="mobile_network_inactive_sim">Inactive / SIM</string>
     <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
          that service is active and is tied to an eSIM profile [CHAR LIMIT=40] -->
-    <string name="mobile_network_active_esim">Active eSIM</string>
+    <string name="mobile_network_active_esim">Active / Downloaded SIM</string>
     <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
          that service is inactive and is tied to an eSIM profile [CHAR LIMIT=40] -->
-    <string name="mobile_network_inactive_esim">Inactive eSIM</string>
+    <string name="mobile_network_inactive_esim">Inactive / Downloaded SIM</string>
     <!-- Title of a dialog that lets a user modify the display name used for a mobile network
          subscription in various places in the Settings app. The default name is typically just the
-          carrier name, but especially in multi-SIM configurations users may want to use a different
-           name. [CHAR LIMIT=40] -->
+         carrier name, but especially in multi-SIM configurations users may want to use a different
+         name. [CHAR LIMIT=40] -->
     <string name="mobile_network_sim_name">SIM name</string>
     <!-- Label on the confirmation button of a dialog that lets a user set the display name of a
          mobile network subscription [CHAR LIMIT=20] -->
@@ -10620,6 +10744,56 @@
     <!-- Label for the off position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_off">Off</string>
+
+    <!-- Title for a confirmation dialog when the user is enabling an eSIM subscription and there
+         is already another active eSIM subscription which will need to be disabled if they proceed.
+         [CHAR LIMIT=60] -->
+    <string name="mobile_network_esim_swap_confirm_title">
+        Switch to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>?
+    </string>
+    <!-- Body of a confirmation dialog when the user is enabling an eSIM subscription and there
+         is already another active eSIM subscription which will need to be disabled if they proceed.
+         [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_esim_swap_confirm_body">
+        Only one downloaded SIM can be active at a time.\n\nSwitching to
+        <xliff:g id="carrier1" example="T-mobile">%1$s</xliff:g> won\u0027t cancel your
+        <xliff:g id="carrier2" example="Verizon">%2$s</xliff:g> service.
+    </string>
+    <!-- Ok button label on confirmation dialog when the user is enabling an eSIM subscription and
+         there is already another active eSIM subscription which will need to be disabled if they
+         proceed. [CHAR LIMIT=25] -->
+    <string name="mobile_network_esim_swap_confirm_ok">
+        Switch to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>
+    </string>
+
+    <!-- Mobile network details page. Label for an option that lets the user delete an eSIM from
+         the device. [CHAR LIMIT=60] -->
+    <string name="mobile_network_erase_sim">Erase SIM</string>
+    <!-- Title of a confirmation dialog for deleting an eSIM from the device.
+         [CHAR LIMIT=60] -->
+    <string name="mobile_network_erase_sim_dialog_title">Erase this downloaded SIM?</string>
+    <!-- Body text of of a confirmation dialog for deleting an eSIM from the device.
+         [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_erase_sim_dialog_body">
+        Erasing this SIM removes <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> service
+        from this device.\n\nService for <xliff:g id="carrier" example="Verizon">%2$s</xliff:g>
+        won\u2019t be canceled.
+    </string>
+    <!-- OK button on a confirmation dialog for deleting an eSIM from the device.
+         [CHAR LIMIT=30] -->
+    <string name="mobile_network_erase_sim_dialog_ok">Erase</string>
+    <!-- Body text of the progress dialog we show while deleting an eSIM from the device.
+         [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_erase_sim_dialog_progress">Erasing SIM\u2026</string>
+
+    <!-- Title of a dialog indicating that an error ocurred when deleting an eSIM from the device
+         [CHAR LIMIT=60] -->
+    <string name="mobile_network_erase_sim_error_dialog_title">Can\u2019t erase SIM</string>
+    <!-- Body of a dialog indicating that an error ocurred when deleting an eSIM from the device
+         [CHAR LIMIT=NONE] -->
+    <string name="mobile_network_erase_sim_error_dialog_body">
+        This SIM can\u2019t be erased due to an error.\n\nRestart your device and try again.
+    </string>
 
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>
@@ -10735,7 +10909,7 @@
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>
     <!-- Summary for the top level Privacy Settings [CHAR LIMIT=NONE]-->
-    <string name="privacy_dashboard_summary">Permissions, web activity, personal data</string>
+    <string name="privacy_dashboard_summary">Permissions, account activity, personal data</string>
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
     <string name="contextual_card_dismiss_remove">Remove</string>
@@ -10743,6 +10917,10 @@
     <string name="contextual_card_dismiss_keep">Keep</string>
     <!-- String for contextual card dismissal [CHAR LIMIT=NONE] -->
     <string name="contextual_card_dismiss_confirm_message">Remove this suggestion?</string>
+    <!-- String for snack bar message when users swipe to dismiss a contextual card [CHAR LIMIT=60]-->
+    <string name="contextual_card_removed_message">Suggestion removed</string>
+    <!-- Label for snack bar action allowing users to undo contextual card dismissal [CHAR LIMIT=30]-->
+    <string name="contextual_card_undo_dismissal_text">Undo</string>
 
     <!-- Summary for low storage slice. [CHAR LIMIT=NONE] -->
     <string name="low_storage_summary">Storage is low. <xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
@@ -10762,10 +10940,15 @@
     <string name="permission_bar_chart_empty_text">0 apps used permissions</string>
 
     <!-- Text for permission bar chart title in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_title">Most-used permissions in last 24 hours</string>
+    <string name="permission_bar_chart_title">Permission usage in last 24 hours</string>
 
     <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details">View Permissions Dashboard</string>
+    <string name="permission_bar_chart_details">See all in Dashboard</string>
+
+    <plurals name="permission_bar_chart_label">
+        <item quantity="one">1 app</item>
+        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> apps</item>
+    </plurals>
 
     <!-- Title for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="accessibility_usage_title">Accessibility usage</string>
@@ -10804,13 +10987,39 @@
     <!-- Label for the disagree button on wfc disclaimer fragment. [CHAR LIMIT=30] -->
     <string name="wfc_disclaimer_disagree_text">NO THANKS</string>
 
+    <!-- Label for the title on wfc disclaimer location. [CHAR LIMIT=30] -->
+    <string name="wfc_disclaimer_location_title_text">Location</string>
+
+    <!-- Warn the user that the phone may share its location with the service provider. [CHAR LIMIT=NONE] -->
+    <string name="wfc_disclaimer_location_desc_text">Your service provider may collect your location in order to provide this service.\n\nPlease review your service provider\u2019s privacy policy.</string>
+
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
-    <!-- Keywords for Content Capture feature [CHAR_LIMIT=32] -->
-    <string name="keywords_content_capture">content capture</string>
+    <!-- Keywords for Content Capture / Smart Suggestions feature [CHAR_LIMIT=none] -->
+    <string name="keywords_content_capture">content capture, smart suggestions</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
-    <string name="content_capture">Content Capture</string>
-    <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
+    <string name="content_capture">Smart Suggestions</string>
+    <!-- Description of the 'Content Capture / Smart Suggestions' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
     <string name="content_capture_summary">Allow Android to save information seen on your screen or heard in video or audio content. Android makes helpful suggestions based on your device activity.</string>
+
+    <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
+    <string name="capture_system_heap_dump_title">Capture system heap dump</string>
+    <!-- Toast that is shown when the user initiates capturing a heap dump for the system server. [CHAR LIMIT=NONE] -->
+    <string name="capturing_system_heap_dump_message">Capturing system heap dump</string>
+    <!-- Toast that is shown if there's an error capturing the user initiated heap dump. [CHAR LIMIT=NONE] -->
+    <string name="error_capturing_system_heap_dump_message">Couldn\u2019t capture system heap dump</string>
+    <!-- Title of toggle for whether to enable automatic heap dumps for the system server or not. [CHAR LIMIT=NONE] -->
+    <string name="automatic_system_heap_dump_title">Automatically capture system heap dumps</string>
+    <!-- Summary of toggle for whether to enable automatic heap dumps for the system server or not. [CHAR LIMIT=NONE] -->
+    <string name="automatic_system_heap_dump_summary">Automatically capture a heap dump for Android System when it uses too much memory</string>
+
+    <!-- Button label to disconnect a Wi-Fi network. [CHAR LIMIT=40] -->
+    <string name="wifi_disconnect_button_text">Disconnect</string>
+
+    <!-- Label for the title on wfc disclaimer location. [CHAR LIMIT=30] -->
+    <string name="wfc_disclaimer_emergency_limitation_title_text">Emergency calls</string>
+
+    <!-- Warn the user that the phone have emergency call limitation. [CHAR LIMIT=NONE] -->
+    <string name="wfc_disclaimer_emergency_limitation_desc_text">Emergency calls over Wi\u2011Fi Calling are not supported by your carrier.\nThe device switches automatically to a cellular network to place an emergency call.\nEmergency calls are only possible in areas with cellular coverage.</string>
 </resources>

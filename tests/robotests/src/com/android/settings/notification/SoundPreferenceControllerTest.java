@@ -39,6 +39,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -54,6 +56,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -228,6 +231,69 @@ public class SoundPreferenceControllerTest {
 
         verify(pref, times(1)).onPrepareRingtonePickerIntent(any());
         verify(mFragment, times(1)).startActivityForResult(any(), anyInt());
+    }
+
+    @Test
+    public void testOnPreferenceTreeClick_alarmSound() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
+        channel.setSound(null, new AudioAttributes.Builder().setUsage(
+                AudioAttributes.USAGE_ALARM).build());
+        mController.onResume(appRow, channel, null, null);
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        NotificationSoundPreference pref =
+                spy(new NotificationSoundPreference(mContext, attributeSet));
+        pref.setKey(mController.getPreferenceKey());
+        mController.handlePreferenceTreeClick(pref);
+
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(pref, times(1)).onPrepareRingtonePickerIntent(intentArgumentCaptor.capture());
+        assertEquals(RingtoneManager.TYPE_ALARM,
+                intentArgumentCaptor.getValue().getIntExtra(
+                        RingtoneManager.EXTRA_RINGTONE_TYPE, 0));
+    }
+
+    @Test
+    public void testOnPreferenceTreeClick_ringtoneSound() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
+        channel.setSound(null, new AudioAttributes.Builder().setUsage(
+                AudioAttributes.USAGE_NOTIFICATION_RINGTONE).build());
+        mController.onResume(appRow, channel, null, null);
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        NotificationSoundPreference pref =
+                spy(new NotificationSoundPreference(mContext, attributeSet));
+        pref.setKey(mController.getPreferenceKey());
+        mController.handlePreferenceTreeClick(pref);
+
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(pref, times(1)).onPrepareRingtonePickerIntent(intentArgumentCaptor.capture());
+        assertEquals(RingtoneManager.TYPE_RINGTONE,
+                intentArgumentCaptor.getValue().getIntExtra(
+                        RingtoneManager.EXTRA_RINGTONE_TYPE, 0));
+    }
+
+    @Test
+    public void testOnPreferenceTreeClick_otherSound() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
+        channel.setSound(null, new AudioAttributes.Builder().setUsage(
+                AudioAttributes.USAGE_UNKNOWN).build());
+        mController.onResume(appRow, channel, null, null);
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        NotificationSoundPreference pref =
+                spy(new NotificationSoundPreference(mContext, attributeSet));
+        pref.setKey(mController.getPreferenceKey());
+        mController.handlePreferenceTreeClick(pref);
+
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(pref, times(1)).onPrepareRingtonePickerIntent(intentArgumentCaptor.capture());
+        assertEquals(RingtoneManager.TYPE_NOTIFICATION,
+                intentArgumentCaptor.getValue().getIntExtra(
+                        RingtoneManager.EXTRA_RINGTONE_TYPE, 0));
     }
 
     @Test

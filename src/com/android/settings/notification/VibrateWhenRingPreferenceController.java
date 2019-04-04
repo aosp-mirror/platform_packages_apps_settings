@@ -39,6 +39,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 public class VibrateWhenRingPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
+    /** Flag for whether or not to apply ramping ringer on incoming phone calls. */
+    private static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
     private final int DEFAULT_VALUE = 0;
     private final int NOTIFICATION_VIBRATE_WHEN_RINGING = 1;
@@ -130,8 +132,8 @@ public class VibrateWhenRingPreferenceController extends TogglePreferenceControl
     }
 
     private boolean isRampingRingerEnabled() {
-        return DeviceConfig.getBoolean(DeviceConfig.Telephony.NAMESPACE,
-                DeviceConfig.Telephony.RAMPING_RINGER_ENABLED, false);
+        return DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
     }
 
 }

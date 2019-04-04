@@ -59,6 +59,11 @@ public class FirmwareVersionDetailPreferenceController extends BasePreferenceCon
     }
 
     @Override
+    public boolean useDynamicSliceSummary() {
+        return true;
+    }
+
+    @Override
     public boolean isSliceable() {
         return true;
     }

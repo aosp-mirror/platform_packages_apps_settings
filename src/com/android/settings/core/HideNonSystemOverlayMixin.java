@@ -22,9 +22,11 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.app.Activity;
+import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
@@ -41,9 +43,14 @@ public class HideNonSystemOverlayMixin implements LifecycleObserver {
         mActivity = activity;
     }
 
+    @VisibleForTesting
+    boolean isEnabled() {
+        return !Build.IS_DEBUGGABLE;
+    }
+
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        if (mActivity == null) {
+        if (mActivity == null || !isEnabled()) {
             return;
         }
         mActivity.getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
@@ -53,7 +60,7 @@ public class HideNonSystemOverlayMixin implements LifecycleObserver {
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        if (mActivity == null) {
+        if (mActivity == null || !isEnabled()) {
             return;
         }
         final Window window = mActivity.getWindow();

@@ -16,41 +16,57 @@
 
 package com.android.settings.network.telephony.gsm;
 
+import android.app.ProgressDialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.TelephonyTogglePreferenceController;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Preference controller for "Auto Select Network"
  */
 public class AutoSelectPreferenceController extends TelephonyTogglePreferenceController {
+    private static final long MINIMUM_DIALOG_TIME_MILLIS = TimeUnit.SECONDS.toMillis(1);
 
+    private final Handler mUiHandler;
     private int mSubId;
     private TelephonyManager mTelephonyManager;
     private boolean mOnlyAutoSelectInHome;
     private List<OnNetworkSelectModeListener> mListeners;
+    @VisibleForTesting
+    ProgressDialog mProgressDialog;
+    @VisibleForTesting
+    SwitchPreference mSwitchPreference;
 
     public AutoSelectPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mListeners = new ArrayList<>();
+        mUiHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -58,6 +74,12 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         return MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, subId)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mSwitchPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -86,14 +108,28 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            mTelephonyManager.setNetworkSelectionModeAutomatic();
+            final long startMillis = SystemClock.elapsedRealtime();
+            showAutoSelectProgressBar();
+            mSwitchPreference.setEnabled(false);
+            ThreadUtils.postOnBackgroundThread(() -> {
+                // set network selection mode in background
+                mTelephonyManager.setNetworkSelectionModeAutomatic();
+                final int mode = mTelephonyManager.getNetworkSelectionMode();
 
-            for (OnNetworkSelectModeListener lsn : mListeners) {
-                lsn.onNetworkSelectModeChanged();
-            }
-            // Manually check whether it is successfully
-            return mTelephonyManager.getNetworkSelectionMode()
-                    == TelephonyManager.NETWORK_SELECTION_MODE_AUTO;
+                //Update UI in UI thread
+                final long durationMillis = SystemClock.elapsedRealtime() - startMillis;
+                mUiHandler.postDelayed(() -> {
+                            mSwitchPreference.setEnabled(true);
+                            mSwitchPreference.setChecked(
+                                    mode == TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
+                            for (OnNetworkSelectModeListener lsn : mListeners) {
+                                lsn.onNetworkSelectModeChanged();
+                            }
+                            dismissProgressBar();
+                        },
+                        Math.max(MINIMUM_DIALOG_TIME_MILLIS - durationMillis, 0));
+            });
+            return false;
         } else {
             final Bundle bundle = new Bundle();
             bundle.putInt(Settings.EXTRA_SUB_ID, mSubId);
@@ -124,6 +160,24 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         mListeners.add(lsn);
 
         return this;
+    }
+
+    private void showAutoSelectProgressBar() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(mContext);
+            mProgressDialog.setMessage(
+                    mContext.getResources().getString(R.string.register_automatically));
+            mProgressDialog.setCanceledOnTouchOutside(false);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setIndeterminate(true);
+        }
+        mProgressDialog.show();
+    }
+
+    private void dismissProgressBar() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
     /**

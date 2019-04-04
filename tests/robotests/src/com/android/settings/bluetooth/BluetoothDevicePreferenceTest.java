@@ -52,6 +52,7 @@ import org.robolectric.util.ReflectionHelpers;
 @Config(shadows = {ShadowAlertDialogCompat.class})
 public class BluetoothDevicePreferenceTest {
     private static final boolean SHOW_DEVICES_WITHOUT_NAMES = true;
+    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
     private Context mContext;
     @Mock
@@ -68,6 +69,7 @@ public class BluetoothDevicePreferenceTest {
         mContext = new ContextThemeWrapper(context, R.style.Theme_Settings);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 SHOW_DEVICES_WITHOUT_NAMES);
     }
@@ -164,19 +166,7 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
-    public void imagingDeviceIcon_isICSettingsPrint() {
-        when(mCachedBluetoothDevice.getBatteryLevel())
-                .thenReturn(BluetoothDevice.BATTERY_LEVEL_UNKNOWN);
-        when(mCachedBluetoothDevice.getBtClass())
-                .thenReturn(new BluetoothClass(BluetoothClass.Device.Major.IMAGING));
-
-        mPreference.onDeviceAttributesChanged();
-        DrawableTestHelper.assertDrawableResId(mPreference.getIcon(),
-            com.android.internal.R.drawable.ic_settings_print);
-    }
-
-    @Test
-    public void testVisible_showDeviceWithoutNames_visible() {
+    public void isVisible_showDeviceWithoutNames_visible() {
         doReturn(false).when(mCachedBluetoothDevice).hasHumanReadableName();
         BluetoothDevicePreference preference =
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
@@ -186,11 +176,18 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
-    public void testVisible_hideDeviceWithoutNames_invisible() {
+    public void isVisible_hideDeviceWithoutNames_invisible() {
         doReturn(false).when(mCachedBluetoothDevice).hasHumanReadableName();
         BluetoothDevicePreference preference =
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
 
         assertThat(preference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setNeedNotifyHierarchyChanged_updateValue() {
+        mPreference.setNeedNotifyHierarchyChanged(true);
+
+        assertThat(mPreference.mNeedNotifyHierarchyChanged).isTrue();
     }
 }

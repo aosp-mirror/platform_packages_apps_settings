@@ -28,9 +28,6 @@ public class BackupInactivePreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        if (!PrivacySettingsUtils.isAdminUser(mContext)) {
-            return DISABLED_FOR_USER;
-        }
         if (PrivacySettingsUtils.isInvisibleKey(mContext, PrivacySettingsUtils.BACKUP_INACTIVE)) {
             return UNSUPPORTED_ON_DEVICE;
         }

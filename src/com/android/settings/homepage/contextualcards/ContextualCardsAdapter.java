@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -29,22 +30,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
+import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
-        implements ContextualCardUpdateListener {
+        implements ContextualCardUpdateListener, SwipeDismissalDelegate.Listener {
     static final int SPAN_COUNT = 2;
 
     private static final String TAG = "ContextualCardsAdapter";
     private static final int HALF_WIDTH = 1;
     private static final int FULL_WIDTH = 2;
 
+    @VisibleForTesting
+    final List<ContextualCard> mContextualCards;
+
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
-    private final List<ContextualCard> mContextualCards;
     private final LifecycleOwner mLifecycleOwner;
 
     private RecyclerView mRecyclerView;
@@ -135,5 +139,13 @@ public class ContextualCardsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         //TODO(b/119465242): flickering conditional cards after collapsing/expanding
+    }
+
+    @Override
+    public void onSwiped(int position) {
+        final ContextualCard card = mContextualCards.get(position).mutate()
+                .setIsPendingDismiss(true).build();
+        mContextualCards.set(position, card);
+        notifyItemChanged(position);
     }
 }

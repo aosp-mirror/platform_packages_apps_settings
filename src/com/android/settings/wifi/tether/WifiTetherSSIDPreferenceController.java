@@ -104,13 +104,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     }
 
     private void shareHotspotNetwork(Intent intent) {
-        final String title = mContext.getString(
-                R.string.lockpassword_confirm_your_pattern_header);
-        final String description = String.format(
-                mContext.getString(R.string.wifi_sharing_message), mSSID);
-
-        WifiDppUtils.showLockScreen(mContext, title, description,
-                () -> mContext.startActivity(intent));
+        WifiDppUtils.showLockScreen(mContext, () -> mContext.startActivity(intent));
     }
 
     @VisibleForTesting

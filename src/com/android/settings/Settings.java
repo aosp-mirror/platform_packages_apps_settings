@@ -77,6 +77,7 @@ public class Settings extends SettingsActivity {
     public static class FactoryResetActivity extends SettingsActivity { /* empty */ }
     public static class RunningServicesActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class BatterySaverScheduleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsInAddAccountActivity extends SettingsActivity { /* empty */ }
     public static class CryptKeeperSettingsActivity extends SettingsActivity { /* empty */ }
@@ -112,6 +113,7 @@ public class Settings extends SettingsActivity {
     public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -161,6 +163,7 @@ public class Settings extends SettingsActivity {
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
+    public static class MobileNetworkListActivity extends SettingsActivity {}
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}

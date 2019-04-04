@@ -106,5 +106,4 @@ public class UtilsTest {
         assertThat(Utils.getBooleanMetaData(mBluetoothDevice,
                 BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET)).isEqualTo(true);
     }
-
 }

@@ -39,9 +39,12 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.om.OverlayManager;
+import android.content.om.OverlayInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.RemoteException;
 import android.os.UserManager;
 import android.view.View;
 
@@ -70,11 +73,15 @@ import org.robolectric.util.ReflectionHelpers;
 public class AppButtonsPreferenceControllerTest {
 
     private static final String PACKAGE_NAME = "com.android.settings";
+    private static final String RRO_PACKAGE_NAME = "com.android.settings.overlay";
     private static final String RESOURCE_STRING = "string";
     private static final boolean ALL_USERS = false;
     private static final boolean DISABLE_AFTER_INSTALL = true;
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
+    private static final OverlayInfo OVERLAY_DISABLED = createFakeOverlay("overlay", false, 1);
+    private static final OverlayInfo OVERLAY_ENABLED = createFakeOverlay("overlay", true, 1);
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mSettingsActivity;
     @Mock
@@ -87,6 +94,8 @@ public class AppButtonsPreferenceControllerTest {
     private ApplicationsState.AppEntry mAppEntry;
     @Mock
     private ApplicationInfo mAppInfo;
+    @Mock
+    private OverlayManager mOverlayManager;
     @Mock
     private PackageManager mPackageManger;
     @Mock
@@ -113,13 +122,14 @@ public class AppButtonsPreferenceControllerTest {
         doReturn(mUserManager).when(mSettingsActivity).getSystemService(Context.USER_SERVICE);
         doReturn(mPackageManger).when(mSettingsActivity).getPackageManager();
         doReturn(mAm).when(mSettingsActivity).getSystemService(Context.ACTIVITY_SERVICE);
+        doReturn(mOverlayManager).when(mSettingsActivity).
+            getSystemService(OverlayManager.class);
         doReturn(mAppEntry).when(mState).getEntry(anyString(), anyInt());
         when(mSettingsActivity.getApplication()).thenReturn(mApplication);
         when(mSettingsActivity.getResources().getString(anyInt())).thenReturn(RESOURCE_STRING);
 
         mController = spy(new AppButtonsPreferenceController(mSettingsActivity, mFragment,
                 mLifecycle, PACKAGE_NAME, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN));
-        doReturn(false).when(mController).isFallbackPackage(anyString());
 
         mAppEntry.info = mAppInfo;
         mAppInfo.packageName = PACKAGE_NAME;
@@ -278,6 +288,41 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
+    public void updateUninstallButton_isSystemRro_setButtonDisable() {
+        mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
+
+        when(mAppInfo.isResourceOverlay()).thenReturn(true);
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(false);
+    }
+
+    @Test
+    public void updateUninstallButton_isNonSystemRro_setButtonDisable()
+                throws RemoteException {
+        when(mAppInfo.isResourceOverlay()).thenReturn(true);
+        when(mOverlayManager.getOverlayInfo(anyString(), any()))
+            .thenReturn(OVERLAY_ENABLED);
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(false);
+    }
+
+    @Test
+    public void updateUninstallButton_isNonSystemRro_setButtonEnable()
+                throws RemoteException {
+        when(mAppInfo.isResourceOverlay()).thenReturn(true);
+        when(mOverlayManager.getOverlayInfo(anyString(), any()))
+            .thenReturn(OVERLAY_DISABLED);
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(true);
+    }
+
+    @Test
     public void updateForceStopButton_HasActiveAdmins_setButtonDisable() {
         doReturn(true).when(mDpm).packageHasActiveAdmins(anyString());
 
@@ -324,7 +369,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton2Text(R.string.uninstall_text);
+        verify(mButtonPrefs).setButton2Text(R.string.disable_text);
         assertThat(controllable).isFalse();
     }
 
@@ -336,7 +381,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton2Text(R.string.uninstall_text);
+        verify(mButtonPrefs).setButton2Text(R.string.disable_text);
         assertThat(controllable).isTrue();
     }
 
@@ -348,7 +393,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton2Text(R.string.install_text);
+        verify(mButtonPrefs).setButton2Text(R.string.enable_text);
         assertThat(controllable).isTrue();
     }
 
@@ -418,5 +463,18 @@ public class AppButtonsPreferenceControllerTest {
         when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         return pref;
+    }
+
+    private static OverlayInfo createFakeOverlay(String pkg, boolean enabled, int priority) {
+        final int state = (enabled) ? OverlayInfo.STATE_ENABLED : OverlayInfo.STATE_DISABLED;
+        return new OverlayInfo(pkg /* packageName */,
+                "target.package" /* targetPackageName */,
+                "theme" /* targetOverlayableName */,
+                "category", /* category */
+                "package", /* baseCodePath */
+                state,
+                0 /* userId */,
+                priority,
+                false /* isStatic */);
     }
 }

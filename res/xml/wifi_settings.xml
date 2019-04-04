@@ -41,4 +41,8 @@
         android:key="saved_networks"
         android:title="@string/wifi_saved_access_points_label"
         android:fragment="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings"/>
+
+    <com.android.settings.datausage.DataUsagePreference
+        android:key="wifi_data_usage"
+        android:title="@string/wifi_data_usage"/>
 </PreferenceScreen>

@@ -27,20 +27,23 @@ import android.view.ViewGroup;
 
 import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 import com.android.settings.overlay.FeatureFactory;
 
-public class ContextualCardsFragment extends InstrumentedFragment {
+public class ContextualCardsFragment extends InstrumentedFragment implements
+        FocusRecyclerView.FocusListener {
 
     private static final String TAG = "ContextualCardsFragment";
 
-    private RecyclerView mCardsContainer;
+    private FocusRecyclerView mCardsContainer;
     private GridLayoutManager mLayoutManager;
     private ContextualCardsAdapter mContextualCardsAdapter;
     private ContextualCardManager mContextualCardManager;
+    private ItemTouchHelper mItemTouchHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,17 +66,27 @@ public class ContextualCardsFragment extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        final Context context = getContext();
         final View rootView = inflater.inflate(R.layout.settings_homepage, container, false);
         mCardsContainer = rootView.findViewById(R.id.card_container);
         mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT,
                 GridLayoutManager.VERTICAL, false /* reverseLayout */);
         mCardsContainer.setLayoutManager(mLayoutManager);
-        mContextualCardsAdapter = new ContextualCardsAdapter(getContext(),
-                this /* lifecycleOwner */, mContextualCardManager);
+        mContextualCardsAdapter = new ContextualCardsAdapter(context, this /* lifecycleOwner */,
+                mContextualCardManager);
         mCardsContainer.setAdapter(mContextualCardsAdapter);
         mContextualCardManager.setListener(mContextualCardsAdapter);
+        mCardsContainer.setListener(this);
+        mItemTouchHelper = new ItemTouchHelper(
+                new SwipeDismissalDelegate(context, mContextualCardsAdapter));
+        mItemTouchHelper.attachToRecyclerView(mCardsContainer);
 
         return rootView;
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        mContextualCardManager.onWindowFocusChanged(hasWindowFocus);
     }
 
     @Override

@@ -63,6 +63,9 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
     // contextual card tap target
     private static final String EXTRA_CONTEXTUALCARD_TAP_TARGET = "target";
 
+    // contextual card ui position
+    private static final String EXTRA_CONTEXTUALCARD_UI_POSTITION = "ui_position";
+
     // contextual homepage display latency
     private static final String EXTRA_LATENCY = "latency";
 
@@ -122,7 +125,7 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
 
     @Override
     public void logContextualCardClick(ContextualCard card, int row,
-            int actionType) {
+            int actionType, int uiPosition) {
         final Intent intent = new Intent();
         intent.putExtra(EXTRA_CONTEXTUALCARD_ACTION_TYPE, CONTEXTUAL_CARD_CLICK);
         intent.putExtra(EXTRA_CONTEXTUALCARD_NAME, card.getName());
@@ -130,6 +133,7 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
         intent.putExtra(EXTRA_CONTEXTUALCARD_SCORE, card.getRankingScore());
         intent.putExtra(EXTRA_CONTEXTUALCARD_ROW, row);
         intent.putExtra(EXTRA_CONTEXTUALCARD_TAP_TARGET, actionTypeToTapTarget(actionType));
+        intent.putExtra(EXTRA_CONTEXTUALCARD_UI_POSTITION, uiPosition);
         sendBroadcast(intent);
     }
 

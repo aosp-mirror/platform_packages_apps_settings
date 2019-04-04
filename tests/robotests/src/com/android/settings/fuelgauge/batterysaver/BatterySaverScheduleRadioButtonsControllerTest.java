@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.provider.Settings.Secure;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,16 +32,16 @@ public class BatterySaverScheduleRadioButtonsControllerTest {
 
     @Test
     public void getDefaultKey_routine_returnsCorrectValue() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                PowerManager.POWER_SAVER_MODE_DYNAMIC);
+        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
         assertThat(mController.getDefaultKey())
                 .isEqualTo(BatterySaverScheduleRadioButtonsController.KEY_ROUTINE);
     }
 
     @Test
     public void getDefaultKey_automatic_returnsCorrectValue() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         Settings.Global.putInt(mResolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 5);
         assertThat(mController.getDefaultKey())
                 .isEqualTo(BatterySaverScheduleRadioButtonsController.KEY_PERCENTAGE);
@@ -48,9 +49,18 @@ public class BatterySaverScheduleRadioButtonsControllerTest {
 
     @Test
     public void getDefaultKey_none_returnsCorrectValue() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVER_MODE,
-                PowerManager.POWER_SAVER_MODE_PERCENTAGE);
+        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         Settings.Global.putInt(mResolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+        assertThat(mController.getDefaultKey())
+                .isEqualTo(BatterySaverScheduleRadioButtonsController.KEY_NO_SCHEDULE);
+    }
+
+    @Test
+    public void setDefaultKey_any_defaultsToNoScheduleIfWarningNotSeen() {
+        Secure.putString(
+            mContext.getContentResolver(), Secure.LOW_POWER_WARNING_ACKNOWLEDGED, "null");
+        mController.setDefaultKey(BatterySaverScheduleRadioButtonsController.KEY_ROUTINE);
         assertThat(mController.getDefaultKey())
                 .isEqualTo(BatterySaverScheduleRadioButtonsController.KEY_NO_SCHEDULE);
     }

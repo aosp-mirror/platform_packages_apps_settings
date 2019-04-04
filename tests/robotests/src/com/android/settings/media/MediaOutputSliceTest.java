@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -66,6 +67,8 @@ public class MediaOutputSliceTest {
 
     @Mock
     private LocalMediaManager mLocalMediaManager;
+    @Mock
+    private Drawable mTestDrawable;
 
     private final List<MediaDevice> mDevices = new ArrayList<>();
 
@@ -105,7 +108,7 @@ public class MediaOutputSliceTest {
         mDevices.clear();
         final MediaDevice device = mock(MediaDevice.class);
         when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
-        when(device.getIcon()).thenReturn(TEST_DEVICE_1_ICON);
+        when(device.getIcon()).thenReturn(mTestDrawable);
         when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
 
         final Slice mediaSlice = mMediaOutputSlice.getSlice();

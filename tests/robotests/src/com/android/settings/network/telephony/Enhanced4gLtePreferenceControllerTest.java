@@ -102,13 +102,60 @@ public class Enhanced4gLtePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_variant4gLte_useVariantTitle() {
+    public void updateState_doNotShow4GForLTE_showVolteTitleAndSummary() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL, false);
+
+        mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 0);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getTitle()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_title));
+        assertThat(mPreference.getSummary()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_summary));
+
+        mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 2);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getTitle()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_title));
+        assertThat(mPreference.getSummary()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_summary));
+    }
+
+    @Test
+    public void updateState_show4GForLTE_show4GTitleAndSummary() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL, true);
+
+        mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 0);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getTitle()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_title_4g_calling));
+        assertThat(mPreference.getSummary()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_summary_4g_calling));
+
+        mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 2);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getTitle()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_title_4g_calling));
+        assertThat(mPreference.getSummary()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_summary_4g_calling));
+    }
+
+    @Test
+    public void updateState_variantAdvancedCalling_showAdvancedCallingTitleAndSummary() {
         mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 1);
 
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL, false);
         mController.updateState(mPreference);
-
         assertThat(mPreference.getTitle()).isEqualTo(
-                mContext.getString(R.string.enhanced_4g_lte_mode_title_variant));
+            mContext.getString(R.string.enhanced_4g_lte_mode_title_advanced_calling));
+        assertThat(mPreference.getSummary()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_summary));
+
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL, true);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getTitle()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_title_advanced_calling));
+        assertThat(mPreference.getSummary()).isEqualTo(
+            mContext.getString(R.string.enhanced_4g_lte_mode_summary));
     }
 
     @Test

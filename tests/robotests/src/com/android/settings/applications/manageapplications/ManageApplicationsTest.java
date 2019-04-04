@@ -235,16 +235,6 @@ public class ManageApplicationsTest {
     }
 
     @Test
-    public void shouldUseStableItemHeight() {
-        assertThat(ManageApplications.ApplicationsAdapter.shouldUseStableItemHeight(
-                LIST_TYPE_MAIN))
-                .isTrue();
-        assertThat(ManageApplications.ApplicationsAdapter.shouldUseStableItemHeight(
-                LIST_TYPE_NOTIFICATION))
-                .isTrue();
-    }
-
-    @Test
     public void onRebuildComplete_shouldHideLoadingView() {
         final Context context = RuntimeEnvironment.application;
         final RecyclerView recyclerView = mock(RecyclerView.class);

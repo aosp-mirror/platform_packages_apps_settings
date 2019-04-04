@@ -102,7 +102,8 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
     private View mExternalStorageContainer;
     @VisibleForTesting
     CheckBox mExternalStorage;
-    private View mEsimStorageContainer;
+    @VisibleForTesting
+    View mEsimStorageContainer;
     @VisibleForTesting
     CheckBox mEsimStorage;
     @VisibleForTesting
@@ -181,7 +182,8 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
     void showFinalConfirmation() {
         final Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
-        args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
+        args.putBoolean(ERASE_ESIMS_EXTRA,
+            mEsimStorageContainer.getVisibility() == View.VISIBLE && mEsimStorage.isChecked());
         new SubSettingLauncher(getContext())
                 .setDestination(MasterClearConfirm.class.getName())
                 .setArguments(args)

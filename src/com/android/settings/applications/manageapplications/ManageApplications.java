@@ -33,7 +33,6 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
 import android.content.Context;
@@ -50,22 +49,18 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Filter;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -630,12 +625,32 @@ public class ManageApplications extends InstrumentedFragment
 
     @StringRes
     int getHelpResource() {
-        if (mListType == LIST_TYPE_MAIN) {
-            return R.string.help_uri_apps;
-        } else if (mListType == LIST_TYPE_USAGE_ACCESS) {
-            return R.string.help_url_usage_access;
-        } else {
-            return R.string.help_uri_notifications;
+        switch (mListType) {
+            case LIST_TYPE_NOTIFICATION:
+                return R.string.help_uri_notifications;
+            case LIST_TYPE_USAGE_ACCESS:
+                return R.string.help_url_usage_access;
+            case LIST_TYPE_STORAGE:
+                return R.string.help_uri_apps_storage;
+            case LIST_TYPE_HIGH_POWER:
+                return R.string.help_uri_apps_high_power;
+            case LIST_TYPE_OVERLAY:
+                return R.string.help_uri_apps_overlay;
+            case LIST_TYPE_WRITE_SETTINGS:
+                return R.string.help_uri_apps_write_settings;
+            case LIST_TYPE_MANAGE_SOURCES:
+                return R.string.help_uri_apps_manage_sources;
+            case LIST_TYPE_GAMES:
+                return R.string.help_uri_apps_overlay;
+            case LIST_TYPE_MOVIES:
+                return R.string.help_uri_apps_movies;
+            case LIST_TYPE_PHOTOGRAPHY:
+                return R.string.help_uri_apps_photography;
+            case LIST_TYPE_WIFI_ACCESS:
+                return R.string.help_uri_apps_wifi_access;
+            default:
+            case LIST_TYPE_MAIN:
+                return R.string.help_uri_apps;
         }
     }
 
@@ -912,6 +927,7 @@ public class ManageApplications extends InstrumentedFragment
         private boolean mHasReceivedBridgeCallback;
         private FileViewHolderController mExtraViewController;
         private SearchFilter mSearchFilter;
+        private PowerWhitelistBackend mBackend;
 
         // This is to remember and restore the last scroll position when this
         // fragment is paused. We need this special handling because app entries are added gradually
@@ -1059,14 +1075,13 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public ApplicationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view;
+            final View view;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 view = ApplicationViewHolder.newView(parent, true /* twoTarget */);
             } else {
                 view = ApplicationViewHolder.newView(parent, false /* twoTarget */);
             }
-            return new ApplicationViewHolder(view,
-                    shouldUseStableItemHeight(mManageApplications.mListType));
+            return new ApplicationViewHolder(view);
         }
 
         @Override
@@ -1151,11 +1166,6 @@ public class ManageApplications extends InstrumentedFragment
                 mSearchFilter = new SearchFilter();
             }
             mSearchFilter.filter(query);
-        }
-
-        @VisibleForTesting
-        static boolean shouldUseStableItemHeight(int listType) {
-            return true;
         }
 
         private static boolean packageNameEquals(PackageItemInfo info1, PackageItemInfo info2) {
@@ -1352,8 +1362,9 @@ public class ManageApplications extends InstrumentedFragment
                 return true;
             }
             ApplicationsState.AppEntry entry = mEntries.get(position);
-            return !PowerWhitelistBackend.getInstance(mContext)
-                    .isSysWhitelisted(entry.info.packageName);
+
+            return !mBackend.isSysWhitelisted(entry.info.packageName)
+                    && !mBackend.isDefaultActiveApp(entry.info.packageName);
         }
 
         @Override

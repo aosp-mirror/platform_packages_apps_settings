@@ -58,6 +58,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
 
     protected UserManager mUserManager;
     protected int mUserId;
+    private int mIllustrationId;
+    private int mIllustrationPreviewId;
+    private VideoPreference mVideoPreference;
 
     @Override
     public void onAttach(Context context) {
@@ -164,6 +167,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         final String systemDefaultKey = getSystemDefaultKey();
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
+        if (mIllustrationId != 0) {
+            addIllustration(screen);
+        }
         if (!mAppendStaticPreferences) {
             addStaticPreferences(screen);
         }
@@ -239,6 +245,23 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
                 ((RadioButtonPreference) onlyPref).setChecked(true);
             }
         }
+    }
+
+    /**
+     * Allows you to set an illustration at the top of this screen. Set the illustration id to 0
+     * if you want to remove the illustration.
+     * @param illustrationId The res id for the raw of the illustration.
+     * @param previewId The res id for the drawable of the illustration
+     */
+    protected void setIllustration(int illustrationId, int previewId) {
+        mIllustrationId = illustrationId;
+        mIllustrationPreviewId = previewId;
+    }
+
+    private void addIllustration(PreferenceScreen screen) {
+        mVideoPreference = new VideoPreference(getContext());
+        mVideoPreference.setVideo(mIllustrationId, mIllustrationPreviewId);
+        screen.addPreference(mVideoPreference);
     }
 
     protected abstract List<? extends CandidateInfo> getCandidates();

@@ -18,11 +18,11 @@ package com.android.settings.media;
 
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
-import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
@@ -82,10 +82,9 @@ public class MediaOutputSlice implements CustomSliceable {
         }
 
         final List<MediaDevice> devices = getMediaDevices();
-        @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
 
         final MediaDevice connectedDevice = getWorker().getCurrentConnectedMediaDevice();
-        final ListBuilder listBuilder = buildActiveDeviceHeader(color, connectedDevice);
+        final ListBuilder listBuilder = buildActiveDeviceHeader(connectedDevice);
 
         for (MediaDevice device : devices) {
             if (!TextUtils.equals(connectedDevice.getId(), device.getId())) {
@@ -96,9 +95,9 @@ public class MediaOutputSlice implements CustomSliceable {
         return listBuilder.build();
     }
 
-    private ListBuilder buildActiveDeviceHeader(@ColorInt int color, MediaDevice device) {
+    private ListBuilder buildActiveDeviceHeader(MediaDevice device) {
         final String title = device.getName();
-        final IconCompat icon = IconCompat.createWithResource(mContext, device.getIcon());
+        final IconCompat icon = getDeviceIconCompat(device);
 
         final PendingIntent broadcastAction =
                 getBroadcastIntent(mContext, device.getId(), device.hashCode());
@@ -107,7 +106,7 @@ public class MediaOutputSlice implements CustomSliceable {
 
         final ListBuilder listBuilder = new ListBuilder(mContext, MEDIA_OUTPUT_SLICE_URI,
                 ListBuilder.INFINITY)
-                .setAccentColor(color)
+                .setAccentColor(COLOR_NOT_TINTED)
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                         .setTitle(title)
@@ -115,6 +114,17 @@ public class MediaOutputSlice implements CustomSliceable {
                         .setPrimaryAction(primarySliceAction));
 
         return listBuilder;
+    }
+
+    private IconCompat getDeviceIconCompat(MediaDevice device) {
+        Drawable drawable = device.getIcon();
+        if (drawable == null) {
+            Log.d(TAG, "getDeviceIconCompat() device : " + device.getName() + ", drawable is null");
+            // Use default Bluetooth device icon to handle getIcon() is null case.
+            drawable = mContext.getDrawable(com.android.internal.R.drawable.ic_bt_headphones_a2dp);
+        }
+
+        return Utils.createIconWithDrawable(drawable);
     }
 
     private MediaDeviceUpdateWorker getWorker() {
@@ -136,7 +146,8 @@ public class MediaOutputSlice implements CustomSliceable {
         final String title = device.getName();
         final PendingIntent broadcastAction =
                 getBroadcastIntent(mContext, device.getId(), device.hashCode());
-        final IconCompat deviceIcon = IconCompat.createWithResource(mContext, device.getIcon());
+        final IconCompat deviceIcon = getDeviceIconCompat(device);
+
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                 .setTitleItem(deviceIcon, ListBuilder.ICON_IMAGE)
                 .setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
@@ -151,6 +162,7 @@ public class MediaOutputSlice implements CustomSliceable {
         final Intent intent = new Intent(getUri().toString());
         intent.setClass(context, SliceBroadcastReceiver.class);
         intent.putExtra(MEDIA_DEVICE_ID, id);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         return PendingIntent.getBroadcast(context, requestCode /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }

@@ -24,6 +24,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources.Theme;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -478,7 +479,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     R.layout.choose_lock_pattern, container, false);
             layout.setHeaderText(getActivity().getTitle());
             if (getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
-                View iconView = layout.findViewById(R.id.suc_layout_icon);
+                View iconView = layout.findViewById(R.id.sud_layout_icon);
                 if (iconView != null) {
                     iconView.setVisibility(View.GONE);
                 }
@@ -854,12 +855,11 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         @Override
-        protected Intent saveAndVerifyInBackground() {
-            Intent result = null;
+        protected Pair<Boolean, Intent> saveAndVerifyInBackground() {
             final int userId = mUserId;
-            mUtils.saveLockPattern(mChosenPattern, mCurrentPattern, userId);
-
-            if (mHasChallenge) {
+            final boolean success = mUtils.saveLockPattern(mChosenPattern, mCurrentPattern, userId);
+            Intent result = null;
+            if (success && mHasChallenge) {
                 byte[] token;
                 try {
                     token = mUtils.verifyPattern(mChosenPattern, mChallenge, userId);
@@ -874,8 +874,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 result = new Intent();
                 result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
             }
-
-            return result;
+            return Pair.create(success, result);
         }
 
         @Override

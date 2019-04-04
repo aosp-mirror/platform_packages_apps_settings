@@ -55,22 +55,41 @@ public class VideoPreference extends Preference {
     private int mPreviewResource;
     private boolean mViewVisible;
     private Surface mSurface;
+    private int mAnimationId;
+
+    public VideoPreference(Context context) {
+        super(context);
+        mContext = context;
+        initialize(context, null);
+    }
 
     public VideoPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        initialize(context, attrs);
+    }
+
+    private void initialize(Context context, AttributeSet attrs) {
         TypedArray attributes = context.getTheme().obtainStyledAttributes(
                 attrs,
-                com.android.settings.R.styleable.VideoPreference,
+                R.styleable.VideoPreference,
                 0, 0);
         try {
-            int animation = attributes.getResourceId(R.styleable.VideoPreference_animation, 0);
+            // if these are already set that means they were set dynamically and don't need
+            // to be loaded from xml
+            mAnimationId = mAnimationId == 0
+                ? attributes.getResourceId(R.styleable.VideoPreference_animation, 0)
+                : mAnimationId;
             mVideoPath = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                     .authority(context.getPackageName())
-                    .appendPath(String.valueOf(animation))
+                    .appendPath(String.valueOf(mAnimationId))
                     .build();
-            mPreviewResource = attributes.getResourceId(
-                    R.styleable.VideoPreference_preview, 0);
+            mPreviewResource = mPreviewResource == 0
+                ? attributes.getResourceId(R.styleable.VideoPreference_preview, 0)
+                : mPreviewResource;
+            if (mPreviewResource == 0 && mAnimationId == 0) {
+                return;
+            }
             initMediaPlayer();
             if (mMediaPlayer != null && mMediaPlayer.getDuration() > 0) {
                 setVisible(true);
@@ -103,20 +122,9 @@ public class VideoPreference extends Preference {
 
         imageView.setImageResource(mPreviewResource);
         layout.setAspectRatio(mAspectRadio);
+        updateViewStates(imageView, playButton);
 
-        video.setOnClickListener(v -> {
-            if (mMediaPlayer != null) {
-                if (mMediaPlayer.isPlaying()) {
-                    mMediaPlayer.pause();
-                    playButton.setVisibility(View.VISIBLE);
-                    mVideoPaused = true;
-                } else {
-                    mMediaPlayer.start();
-                    playButton.setVisibility(View.GONE);
-                    mVideoPaused = false;
-                }
-            }
-        });
+        video.setOnClickListener(v -> updateViewStates(imageView, playButton));
 
         video.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
@@ -161,6 +169,23 @@ public class VideoPreference extends Preference {
         });
     }
 
+    @VisibleForTesting
+    void updateViewStates(ImageView imageView, ImageView playButton) {
+        if (mMediaPlayer != null) {
+            if (mMediaPlayer.isPlaying()) {
+                mMediaPlayer.pause();
+                playButton.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.VISIBLE);
+                mVideoPaused = true;
+            } else {
+                imageView.setVisibility(View.GONE);
+                playButton.setVisibility(View.GONE);
+                mMediaPlayer.start();
+                mVideoPaused = false;
+            }
+        }
+    }
+
     @Override
     public void onDetached() {
         releaseMediaPlayer();
@@ -176,6 +201,20 @@ public class VideoPreference extends Preference {
     public void onViewInvisible() {
         mViewVisible = false;
         releaseMediaPlayer();
+    }
+
+    /**
+     * Sets the video for this preference. If a previous video was set this one will override it
+     * and properly release any resources and re-initialize the preference to play the new video.
+     *
+     * @param videoId The raw res id of the video
+     * @param previewId The drawable res id of the preview image to use if the video fails to load.
+     */
+    public void setVideo(int videoId, int previewId) {
+        mAnimationId = videoId;
+        mPreviewResource = previewId;
+        releaseMediaPlayer();
+        initialize(mContext, null);
     }
 
     private void initMediaPlayer() {

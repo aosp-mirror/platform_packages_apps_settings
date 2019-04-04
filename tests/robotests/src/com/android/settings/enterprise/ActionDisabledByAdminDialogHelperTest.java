@@ -20,6 +20,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -32,6 +37,8 @@ import android.os.UserManager;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -179,5 +186,28 @@ public class ActionDisabledByAdminDialogHelperTest {
         mHelper.setAdminSupportDetails(mActivity, null, admin);
         assertNull(admin.component);
     }
-}
 
+    @Test
+    public void testMaybeSetLearnMoreButton() {
+        final UserManager userManager = RuntimeEnvironment.application.getSystemService(
+                UserManager.class);
+        final ShadowUserManager userManagerShadow = Shadow.extract(userManager);
+        final ComponentName component = new ComponentName("some.package.name",
+                "some.package.name.SomeClass");
+        mHelper.mEnforcedAdmin = new EnforcedAdmin(component, UserHandle.of(123));
+
+        // Set up for shadow call.
+        userManagerShadow.getSameProfileGroupIds().put(123, 0);
+
+        // Test that the button is shown when user IDs are in the same profile group
+        AlertDialog.Builder builder = mock(AlertDialog.Builder.class);
+        mHelper.maybeSetLearnMoreButton(builder);
+        verify(builder).setNeutralButton(anyInt(), any());
+
+        // Test that the button is not shown when user IDs are not in the same profile group
+        userManagerShadow.getSameProfileGroupIds().clear();
+        builder = mock(AlertDialog.Builder.class);
+        mHelper.maybeSetLearnMoreButton(builder);
+        verify(builder, never()).setNeutralButton(anyInt(), any());
+    }
+}

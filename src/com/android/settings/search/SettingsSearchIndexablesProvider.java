@@ -41,21 +41,28 @@ import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
 import static android.provider.SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS;
 import static android.provider.SearchIndexablesContract.SITE_MAP_COLUMNS;
+import static android.provider.SearchIndexablesContract.SLICE_URI_PAIRS_COLUMNS;
 
 import static com.android.settings.dashboard.DashboardFragmentRegistry.CATEGORY_KEY_TO_PARENT_MAP;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.net.Uri;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
 import android.provider.SearchIndexablesProvider;
+import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
 
+import androidx.slice.SliceViewManager;
+
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -184,6 +191,33 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         return cursor;
     }
 
+    @Override
+    public Cursor querySliceUriPairs() {
+        final SliceViewManager manager = SliceViewManager.getInstance(getContext());
+        final MatrixCursor cursor = new MatrixCursor(SLICE_URI_PAIRS_COLUMNS);
+        final Uri baseUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                        .build();
+        final Uri platformBaseUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(SettingsSlicesContract.AUTHORITY)
+                        .build();
+
+        final Collection<Uri> sliceUris = manager.getSliceDescendants(baseUri);
+        sliceUris.addAll(manager.getSliceDescendants(platformBaseUri));
+
+        for (Uri uri : sliceUris) {
+            cursor.newRow()
+                    .add(SearchIndexablesContract.SliceUriPairColumns.KEY, uri.getLastPathSegment())
+                    .add(SearchIndexablesContract.SliceUriPairColumns.SLICE_URI, uri);
+        }
+
+        return cursor;
+    }
+
     private List<String> getNonIndexableKeysFromProvider(Context context) {
         final Collection<Class> values = FeatureFactory.getFactory(context)
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
@@ -207,7 +241,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                 if (System.getProperty(SYSPROP_CRASH_ON_ERROR) != null) {
                     throw new RuntimeException(e);
                 }
-                Log.e(TAG, "Error trying to get non-indexable keys from: " + clazz.getName() , e);
+                Log.e(TAG, "Error trying to get non-indexable keys from: " + clazz.getName(), e);
                 continue;
             }
 

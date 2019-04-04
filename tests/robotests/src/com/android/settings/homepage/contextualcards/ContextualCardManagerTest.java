@@ -16,21 +16,25 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import static com.android.settings.homepage.contextualcards.ContextualCardManager.KEY_CONTEXTUAL_CARDS;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.util.ArrayMap;
 
@@ -39,6 +43,8 @@ import com.android.settings.homepage.contextualcards.conditional.ConditionHeader
 import com.android.settings.homepage.contextualcards.conditional.ConditionalContextualCard;
 import com.android.settings.intelligence.ContextualCardProto;
 import com.android.settings.slices.CustomSliceRegistry;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +68,8 @@ public class ContextualCardManagerTest {
 
     @Mock
     ContextualCardUpdateListener mListener;
+    @Mock
+    Lifecycle mLifecycle;
 
     private Context mContext;
     private ContextualCardManager mManager;
@@ -70,9 +78,71 @@ public class ContextualCardManagerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        final ContextualCardsFragment fragment = new ContextualCardsFragment();
-        mManager = new ContextualCardManager(mContext, fragment.getSettingsLifecycle(),
-                null /* bundle */);
+        mManager = new ContextualCardManager(mContext, mLifecycle, null /* bundle */);
+    }
+
+    @Test
+    public void constructor_noSavedInstanceState_shouldSetFirstLaunch() {
+        assertThat(mManager.mIsFirstLaunch).isTrue();
+    }
+
+    @Test
+    public void constructor_noSavedInstanceState_shouldNotHaveSavedCards() {
+        assertThat(mManager.mSavedCards).isNull();
+    }
+
+    @Test
+    public void constructor_hasSavedInstanceState_shouldContainExpectedSavedCards() {
+        final Bundle outState = new Bundle();
+        final ArrayList<String> cards = getContextualCardList().stream()
+                .map(ContextualCard::getName)
+                .collect(Collectors.toCollection(ArrayList::new));
+        outState.putStringArrayList(KEY_CONTEXTUAL_CARDS, cards);
+
+        mManager = new ContextualCardManager(mContext, mLifecycle, outState);
+
+        final List<String> actualCards = mManager.mSavedCards.stream().collect(Collectors.toList());
+        final List<String> expectedCards = Arrays.asList("test_wifi", "test_flashlight",
+                "test_connected", "test_gesture", "test_battery");
+        assertThat(actualCards).containsExactlyElementsIn(expectedCards);
+    }
+
+    @Test
+    public void constructor_hasSettingsCustomCards_shouldSetUpCustomControllers() {
+        final ControllerRendererPool pool = mManager.getControllerRendererPool();
+
+        final List<Integer> actual = pool.getControllers().stream()
+                .map(ContextualCardController::getCardType)
+                .collect(Collectors.toList());
+        final List<Integer> expected = Arrays.asList(ContextualCard.CardType.CONDITIONAL,
+                ContextualCard.CardType.LEGACY_SUGGESTION);
+        assertThat(actual).containsExactlyElementsIn(expected);
+    }
+
+    @Test
+    public void setupController_notLifecycleObserverInstance_shouldNotAttachToLifecycle() {
+        // 3 invocations in constructor(ContextualCardManager, Conditional and LegacySuggestion)
+        verify(mLifecycle, times(3)).addObserver(any(LifecycleObserver.class));
+
+        mManager.setupController(ContextualCard.CardType.SLICE);
+
+        // After 3 times call in the constructor, addObserver() shouldn't be called again.
+        verify(mLifecycle, times(3)).addObserver(any(LifecycleObserver.class));
+    }
+
+    @Test
+    public void sortCards_shouldBeDescendingOrder() {
+        final List<ContextualCard> cards = new ArrayList<>();
+        final ContextualCard card1 =
+                buildContextualCard(TEST_SLICE_URI).mutate().setRankingScore(99.0).build();
+        final ContextualCard card2 =
+                buildContextualCard("context://test/test2").mutate().setRankingScore(88.0).build();
+        cards.add(card1);
+        cards.add(card2);
+
+        final List<ContextualCard> sortedCards = mManager.sortCards(cards);
+
+        assertThat(sortedCards.get(0).getSliceUri()).isEqualTo(Uri.parse(TEST_SLICE_URI));
     }
 
     @Test
@@ -128,7 +198,7 @@ public class ContextualCardManagerTest {
 
     @Test
     public void getCardLoaderTimeout_noConfiguredTimeout_shouldReturnDefaultTimeout() {
-        final long timeout = mManager.getCardLoaderTimeout(mContext);
+        final long timeout = mManager.getCardLoaderTimeout();
 
         assertThat(timeout).isEqualTo(ContextualCardManager.CARD_CONTENT_LOADER_TIMEOUT_MS);
     }
@@ -139,7 +209,7 @@ public class ContextualCardManagerTest {
         Settings.Global.putLong(mContext.getContentResolver(),
                 ContextualCardManager.KEY_GLOBAL_CARD_LOADER_TIMEOUT, configuredTimeout);
 
-        final long timeout = mManager.getCardLoaderTimeout(mContext);
+        final long timeout = mManager.getCardLoaderTimeout();
 
         assertThat(timeout).isEqualTo(configuredTimeout);
     }
@@ -151,6 +221,7 @@ public class ContextualCardManagerTest {
         doNothing().when(manager).onContextualCardUpdated(anyMap());
 
         manager.onFinishCardLoading(new ArrayList<>());
+
         verify(manager).onContextualCardUpdated(nullable(Map.class));
     }
 
@@ -161,6 +232,7 @@ public class ContextualCardManagerTest {
         doNothing().when(manager).onContextualCardUpdated(anyMap());
 
         manager.onFinishCardLoading(new ArrayList<>());
+
         verify(manager, never()).onContextualCardUpdated(anyMap());
     }
 
@@ -178,7 +250,17 @@ public class ContextualCardManagerTest {
     }
 
     @Test
+    public void onFinishCardLoading_newLaunch_shouldSetIsFirstLaunchBackToFalse() {
+        assertThat(mManager.mIsFirstLaunch).isTrue();
+
+        mManager.onFinishCardLoading(new ArrayList<>());
+
+        assertThat(mManager.mIsFirstLaunch).isFalse();
+    }
+
+    @Test
     public void onFinishCardLoading_hasSavedCard_shouldOnlyShowSavedCard() {
+        // test screen rotation
         mManager.setListener(mListener);
         final List<String> savedCardNames = new ArrayList<>();
         savedCardNames.add(TEST_SLICE_NAME);
@@ -204,7 +286,8 @@ public class ContextualCardManagerTest {
     }
 
     @Test
-    public void onFinishCardLoading_reloadData_shouldOnlyShowOldCard() {
+    public void onFinishCardLoading_reloadData_hasNewCard_shouldOnlyShowOldCard() {
+        // test card dismissal cases
         mManager.setListener(mListener);
         mManager.mIsFirstLaunch = false;
         //old card
@@ -227,7 +310,6 @@ public class ContextualCardManagerTest {
         final List<String> expectedCards = Arrays.asList(TEST_SLICE_NAME);
         assertThat(actualCards).containsExactlyElementsIn(expectedCards);
     }
-
 
     @Test
     public void getCardsWithViewType_noSuggestionCards_shouldNotHaveHalfCards() {
@@ -409,6 +491,17 @@ public class ContextualCardManagerTest {
             assertThat(result.get(i).getViewType()).isNotEqualTo(
                     ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE);
         }
+    }
+
+    @Test
+    public void getCardsToKeep_hasSavedCard_shouldResetSavedCards() {
+        final List<String> savedCardNames = new ArrayList<>();
+        savedCardNames.add(TEST_SLICE_NAME);
+        mManager.mSavedCards = savedCardNames;
+
+        mManager.getCardsToKeep(getContextualCardList());
+
+        assertThat(mManager.mSavedCards).isNull();
     }
 
     private ContextualCard buildContextualCard(String sliceUri) {

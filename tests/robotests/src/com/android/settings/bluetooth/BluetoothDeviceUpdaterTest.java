@@ -56,6 +56,9 @@ import java.util.List;
 @Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothDeviceUpdaterTest {
 
+    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+    private static final String SUB_MAC_ADDRESS = "05:52:C7:0B:D8:3C";
+
     @Mock
     private DashboardFragment mDashboardFragment;
     @Mock
@@ -93,6 +96,8 @@ public class BluetoothDeviceUpdaterTest {
         when(mSubCachedBluetoothDevice.getDevice()).thenReturn(mSubBluetoothDevice);
         when(mLocalManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mSubBluetoothDevice.getAddress()).thenReturn(SUB_MAC_ADDRESS);
 
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice, false);
         mBluetoothDeviceUpdater =

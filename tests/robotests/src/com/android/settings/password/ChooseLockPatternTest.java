@@ -107,7 +107,7 @@ public class ChooseLockPatternTest {
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
                 activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
 
-        View iconView = fragment.getView().findViewById(R.id.suc_layout_icon);
+        View iconView = fragment.getView().findViewById(R.id.sud_layout_icon);
         assertThat(iconView.getVisibility()).isEqualTo(View.GONE);
     }
 

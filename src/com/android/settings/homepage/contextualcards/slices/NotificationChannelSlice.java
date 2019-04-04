@@ -128,9 +128,10 @@ public class NotificationChannelSlice implements CustomSliceable {
                 return leftChannel.getId().compareTo(rightChannel.getId());
             };
 
-    private final Context mContext;
+    protected final Context mContext;
     @VisibleForTesting
     NotificationBackend mNotificationBackend;
+    private NotificationBackend.AppRow mAppRow;
     private String mPackageName;
     private int mUid;
 
@@ -175,15 +176,10 @@ public class NotificationChannelSlice implements CustomSliceable {
                 .setSubtitle(getSubTitle(mPackageName, mUid))
                 .setPrimaryAction(getPrimarySliceAction(icon, title, getIntent())));
 
-        // Get rows by notification channel.
+        // Add notification channel rows.
         final List<ListBuilder.RowBuilder> rows = getNotificationChannelRows(packageInfo, icon);
-
-        // Get displayable notification channel count.
-        final int channelCount = Math.min(rows.size(), DEFAULT_EXPANDED_ROW_COUNT);
-
-        // According to the displayable channel count to add rows.
-        for (int i = 0; i < channelCount; i++) {
-            listBuilder.addRow(rows.get(i));
+        for (ListBuilder.RowBuilder rowBuilder : rows) {
+            listBuilder.addRow(rowBuilder);
         }
 
         return listBuilder.build();
@@ -200,21 +196,12 @@ public class NotificationChannelSlice implements CustomSliceable {
         final String packageName = intent.getStringExtra(PACKAGE_NAME);
         final int uid = intent.getIntExtra(PACKAGE_UID, -1);
         final String channelId = intent.getStringExtra(CHANNEL_ID);
-        final PackageInfo packageInfo = getPackageInfo(packageName);
-        final NotificationBackend.AppRow appRow = mNotificationBackend.loadAppRow(mContext,
-                mContext.getPackageManager(), packageInfo);
-
-        final List<NotificationChannel> notificationChannels = getEnabledChannels(packageName, uid,
-                appRow);
-        for (NotificationChannel channel : notificationChannels) {
-            if (TextUtils.equals(channel.getId(), channelId)) {
-                final int importance = newState ? IMPORTANCE_LOW : IMPORTANCE_NONE;
-                channel.setImportance(importance);
-                channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                mNotificationBackend.updateChannel(packageName, uid, channel);
-                return;
-            }
-        }
+        final NotificationChannel channel = mNotificationBackend.getChannel(packageName, uid,
+                channelId);
+        final int importance = newState ? IMPORTANCE_LOW : IMPORTANCE_NONE;
+        channel.setImportance(importance);
+        channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
+        mNotificationBackend.updateChannel(packageName, uid, channel);
     }
 
     @Override
@@ -287,16 +274,13 @@ public class NotificationChannelSlice implements CustomSliceable {
     private List<ListBuilder.RowBuilder> getNotificationChannelRows(PackageInfo packageInfo,
             IconCompat icon) {
         final List<ListBuilder.RowBuilder> notificationChannelRows = new ArrayList<>();
-        final NotificationBackend.AppRow appRow = mNotificationBackend.loadAppRow(mContext,
-                mContext.getPackageManager(), packageInfo);
-        final List<NotificationChannel> enabledChannels = getEnabledChannels(mPackageName, mUid,
-                appRow);
+        final List<NotificationChannel> displayableChannels = getDisplayableChannels(mAppRow);
 
-        for (NotificationChannel channel : enabledChannels) {
+        for (NotificationChannel channel : displayableChannels) {
             notificationChannelRows.add(new ListBuilder.RowBuilder()
                     .setTitle(channel.getName())
                     .setSubtitle(NotificationBackend.getSentSummary(
-                            mContext, appRow.sentByChannel.get(channel.getId()), false))
+                            mContext, mAppRow.sentByChannel.get(channel.getId()), false))
                     .setPrimaryAction(buildRowSliceAction(channel, icon))
                     .addEndItem(SliceAction.createToggle(getToggleIntent(channel.getId()),
                             null /* actionTitle */, channel.getImportance() != IMPORTANCE_NONE)));
@@ -366,10 +350,9 @@ public class NotificationChannelSlice implements CustomSliceable {
                 title);
     }
 
-    private List<NotificationChannel> getEnabledChannels(String packageName, int uid,
-            NotificationBackend.AppRow appRow) {
+    private List<NotificationChannel> getDisplayableChannels(NotificationBackend.AppRow appRow) {
         final List<NotificationChannelGroup> channelGroupList =
-                mNotificationBackend.getGroups(packageName, uid).getList();
+                mNotificationBackend.getGroups(appRow.pkg, appRow.uid).getList();
         final List<NotificationChannel> channels = channelGroupList.stream()
                 .flatMap(group -> group.getChannels().stream().filter(
                         channel -> isChannelEnabled(group, channel, appRow)))
@@ -386,8 +369,11 @@ public class NotificationChannelSlice implements CustomSliceable {
         }
 
         // Sort the notification channels with notification sent count by descending.
-        return channelStates.stream().sorted(CHANNEL_STATE_COMPARATOR).map(
-                state -> state.getNotificationChannel()).collect(Collectors.toList());
+        return channelStates.stream()
+                .sorted(CHANNEL_STATE_COMPARATOR)
+                .map(state -> state.getNotificationChannel())
+                .limit(DEFAULT_EXPANDED_ROW_COUNT)
+                .collect(Collectors.toList());
     }
 
     private PackageInfo getMaxSentNotificationsPackage(List<PackageInfo> packageInfoList) {
@@ -401,19 +387,33 @@ public class NotificationChannelSlice implements CustomSliceable {
         for (PackageInfo packageInfo : packageInfoList) {
             final NotificationBackend.AppRow appRow = mNotificationBackend.loadAppRow(mContext,
                     mContext.getPackageManager(), packageInfo);
+            // Ignore packages which are banned notifications or block all displayable channels.
+            if (appRow.banned || isAllChannelsBlocked(getDisplayableChannels(appRow))) {
+                continue;
+            }
+
             // Get sent notification count from app.
             final int sentCount = appRow.sentByApp.sentCount;
-            if (!appRow.banned && sentCount >= MIN_NOTIFICATION_SENT_COUNT
-                    && sentCount > maxSentCount) {
+            if (sentCount >= MIN_NOTIFICATION_SENT_COUNT && sentCount > maxSentCount) {
                 maxSentCount = sentCount;
                 maxSentCountPackage = packageInfo;
+                mAppRow = appRow;
             }
         }
 
         return maxSentCountPackage;
     }
 
-    private CharSequence getSubTitle(String packageName, int uid) {
+    private boolean isAllChannelsBlocked(List<NotificationChannel> channels) {
+        for (NotificationChannel channel : channels) {
+            if (channel.getImportance() != IMPORTANCE_NONE) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected CharSequence getSubTitle(String packageName, int uid) {
         final int channelCount = mNotificationBackend.getChannelCount(packageName, uid);
 
         if (channelCount > DEFAULT_EXPANDED_ROW_COUNT) {
@@ -435,15 +435,6 @@ public class NotificationChannelSlice implements CustomSliceable {
                 MetricsProto.MetricsEvent.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(getUri());
-    }
-
-    private PackageInfo getPackageInfo(String packageName) {
-        try {
-            return mContext.getPackageManager().getPackageInfo(packageName, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, "No such package to get package info.");
-            return null;
-        }
     }
 
     private boolean isChannelEnabled(NotificationChannelGroup group, NotificationChannel channel,

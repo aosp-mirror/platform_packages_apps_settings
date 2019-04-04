@@ -51,6 +51,8 @@ public final class DisclaimerItemFactory {
 
     private static List<DisclaimerItem> getDisclaimerItemList(Context context, int subId) {
         List<DisclaimerItem> itemList = new ArrayList<DisclaimerItem>();
+        itemList.add(new LocationPolicyDisclaimer(context, subId));
+        itemList.add(new EmergencyCallLimitationDisclaimer(context, subId));
 
         return itemList;
     }

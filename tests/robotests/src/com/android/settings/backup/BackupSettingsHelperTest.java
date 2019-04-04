@@ -256,20 +256,21 @@ public class BackupSettingsHelperTest {
 
     @Test
     public void testGetLabelBackupTransport() throws Exception {
-        String label = "test_label";
+        CharSequence label = "test_label";
 
-        when(mBackupManager.getDataManagementLabel(anyString())).thenReturn(label);
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString())).thenReturn(label);
 
-        String backupLabel = mBackupSettingsHelper.getLabelFromBackupTransport();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelFromBackupTransport();
 
         assertThat(backupLabel).isEqualTo(label);
     }
 
     @Test
     public void testGetLabelBackupTransport_RemoteException() throws Exception {
-        when(mBackupManager.getDataManagementLabel(anyString())).thenThrow(new RemoteException());
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString()))
+                .thenThrow(new RemoteException());
 
-        String backupLabel = mBackupSettingsHelper.getLabelFromBackupTransport();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelFromBackupTransport();
 
         assertThat(backupLabel).isNull();
     }
@@ -291,31 +292,31 @@ public class BackupSettingsHelperTest {
 
     @Test
     public void testGetLabelForBackupSettings_WithLabelFromTransport() throws Exception {
-        String label = "test_label";
+        CharSequence label = "test_label";
 
-        when(mBackupManager.getDataManagementLabel(anyString())).thenReturn(label);
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString())).thenReturn(label);
 
-        String backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
 
         assertThat(backupLabel).isEqualTo(label);
     }
 
     @Test
     public void testGetLabelForBackupSettings_WithEmptyLabelFromTransport() throws Exception {
-        String label = "";
+        CharSequence label = "";
 
-        when(mBackupManager.getDataManagementLabel(anyString())).thenReturn(label);
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString())).thenReturn(label);
 
-        String backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
 
         assertThat(backupLabel).isEqualTo(mContext.getString(DEFAULT_LABEL_RESOURCE));
     }
 
     @Test
     public void testGetLabelForBackupSettings_WithoutLabelFromTransport() throws Exception {
-        when(mBackupManager.getDataManagementLabel(anyString())).thenReturn(null);
+        when(mBackupManager.getDataManagementLabelForUser(anyInt(), anyString())).thenReturn(null);
 
-        String backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
+        CharSequence backupLabel = mBackupSettingsHelper.getLabelForBackupSettings();
 
         assertThat(backupLabel).isEqualTo(mContext.getString(DEFAULT_LABEL_RESOURCE));
     }

@@ -28,7 +28,6 @@
         android:icon="@drawable/ic_volume_remote"
         android:title="@string/remote_media_volume_option_title"
         android:order="-185"
-        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.RemoteVolumePreferenceController"/>
 
     <!-- Media volume -->
@@ -37,7 +36,6 @@
         android:icon="@drawable/ic_media_stream"
         android:title="@string/media_volume_option_title"
         android:order="-180"
-        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.MediaVolumePreferenceController"/>
 
     <!-- Media output switcher -->
@@ -54,7 +52,6 @@
         android:icon="@drawable/ic_local_phone_24_lib"
         android:title="@string/call_volume_option_title"
         android:order="-170"
-        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.CallVolumePreferenceController"/>
 
     <!-- Hands free profile output switcher -->
@@ -71,7 +68,6 @@
         android:icon="@drawable/ic_notifications"
         android:title="@string/ring_volume_option_title"
         android:order="-160"
-        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.RingVolumePreferenceController"/>
 
 
@@ -81,7 +77,6 @@
         android:icon="@*android:drawable/ic_audio_alarm"
         android:title="@string/alarm_volume_option_title"
         android:order="-150"
-        settings:allowDynamicSummaryInSlice="true"
         settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
     <!-- Notification volume -->
@@ -124,7 +119,8 @@
         android:dialogTitle="@string/ringtone_title"
         android:summary="@string/summary_placeholder"
         android:ringtoneType="ringtone"
-        android:order="-100"/>
+        android:order="-100"
+        settings:keywords="@string/sound_settings"/>
 
     <!-- Default notification ringtone -->
     <com.android.settings.DefaultRingtonePreference
@@ -180,7 +176,8 @@
         <SwitchPreference
           android:key="vibrate_on_touch"
           android:title="@string/vibrate_on_touch_title"
-          android:summary="@string/vibrate_on_touch_summary" />
+          android:summary="@string/vibrate_on_touch_summary"
+          settings:keywords="@string/keywords_vibrate_on_touch"/>
 
         <!-- Dock speaker plays -->
         <DropDownPreference

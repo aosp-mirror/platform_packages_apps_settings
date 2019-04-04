@@ -25,6 +25,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.om.OverlayManager;
+import android.content.om.OverlayInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -33,13 +35,10 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 import android.view.View;
-import android.webkit.IWebViewUpdateService;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -106,6 +105,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private final int mRequestRemoveDeviceAdmin;
     private final DevicePolicyManager mDpm;
     private final UserManager mUserManager;
+    private final OverlayManager mOverlayManager;
     private final PackageManager mPm;
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
@@ -139,6 +139,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();
+        mOverlayManager = activity.getSystemService(OverlayManager.class);
         mPackageName = packageName;
         mActivity = activity;
         mFragment = fragment;
@@ -438,8 +439,26 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             enabled = false;
         }
 
-        if (isFallbackPackage(mAppEntry.info.packageName)) {
-            enabled = false;
+        // Resource overlays can be uninstalled iff they are public
+        // (installed on /data) and disabled. ("Enabled" means they
+        // are in use by resource management.)  If they are
+        // system/vendor, they can never be uninstalled. :-(
+        if (mAppEntry.info.isResourceOverlay()) {
+            if (isBundled) {
+                enabled = false;
+            } else {
+                String pkgName = mAppEntry.info.packageName;
+                UserHandle user = UserHandle.getUserHandleForUid(mAppEntry.info.uid);
+                OverlayInfo overlayInfo = mOverlayManager.getOverlayInfo(pkgName, user);
+                if (overlayInfo != null && overlayInfo.isEnabled()) {
+                    ApplicationsState.AppEntry targetEntry =
+                            mState.getEntry(overlayInfo.targetPackageName,
+                                            UserHandle.getUserId(mAppEntry.info.uid));
+                    if (targetEntry != null) {
+                        enabled = false;
+                    }
+                }
+            }
         }
 
         mButtonsPref.setButton2Enabled(enabled);
@@ -464,22 +483,6 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         } else {
             startListeningToPackageRemove();
         }
-    }
-
-    @VisibleForTesting
-    boolean isFallbackPackage(String packageName) {
-        try {
-            IWebViewUpdateService webviewUpdateService =
-                    IWebViewUpdateService.Stub.asInterface(
-                            ServiceManager.getService("webviewupdate"));
-            if (webviewUpdateService.isFallbackPackage(packageName)) {
-                return true;
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-
-        return false;
     }
 
     @VisibleForTesting
@@ -559,16 +562,16 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
-            mButtonsPref.setButton2Text(R.string.uninstall_text)
-                    .setButton2Icon(R.drawable.ic_settings_delete);
+            mButtonsPref.setButton2Text(R.string.disable_text)
+                    .setButton2Icon(R.drawable.ic_settings_disable);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-            mButtonsPref.setButton2Text(R.string.uninstall_text)
-                    .setButton2Icon(R.drawable.ic_settings_delete);
+            mButtonsPref.setButton2Text(R.string.disable_text)
+                    .setButton2Icon(R.drawable.ic_settings_disable);
             disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
                     .contains(mAppEntry.info.packageName);
         } else {
-            mButtonsPref.setButton2Text(R.string.install_text)
-                    .setButton2Icon(R.drawable.ic_settings_install);
+            mButtonsPref.setButton2Text(R.string.enable_text)
+                    .setButton2Icon(R.drawable.ic_settings_enable);
             disableable = true;
         }
 

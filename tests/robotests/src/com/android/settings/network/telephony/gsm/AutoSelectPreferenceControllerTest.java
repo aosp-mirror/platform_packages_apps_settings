@@ -23,13 +23,14 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 
@@ -39,6 +40,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -53,10 +55,12 @@ public class AutoSelectPreferenceControllerTest {
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
+    @Mock
+    private ProgressDialog mProgressDialog;
 
     private PersistableBundle mCarrierConfig;
     private AutoSelectPreferenceController mController;
-    private Preference mPreference;
+    private SwitchPreference mSwitchPreference;
     private Context mContext;
 
     @Before
@@ -75,18 +79,22 @@ public class AutoSelectPreferenceControllerTest {
                 true);
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
 
-        mPreference = new Preference(mContext);
+        mSwitchPreference = new SwitchPreference(mContext);
         mController = new AutoSelectPreferenceController(mContext, "auto_select");
+        mController.mProgressDialog = mProgressDialog;
+        mController.mSwitchPreference = mSwitchPreference;
         mController.init(SUB_ID);
     }
 
     @Test
-    public void setChecked_isChecked_updateValue() {
+    public void setChecked_isChecked_showProgressDialog() {
         when(mTelephonyManager.getNetworkSelectionMode()).thenReturn(
                 TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
 
-        assertThat(mController.setChecked(true)).isTrue();
+        assertThat(mController.setChecked(true)).isFalse();
+        Robolectric.flushBackgroundThreadScheduler();
 
+        verify(mProgressDialog).show();
         verify(mTelephonyManager).setNetworkSelectionModeAutomatic();
     }
 
@@ -94,9 +102,9 @@ public class AutoSelectPreferenceControllerTest {
     public void updateState_isRoaming_enabled() {
         when(mTelephonyManager.getServiceState().getRoaming()).thenReturn(true);
 
-        mController.updateState(mPreference);
+        mController.updateState(mSwitchPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mSwitchPreference.isEnabled()).isTrue();
     }
 
     @Test
@@ -104,10 +112,10 @@ public class AutoSelectPreferenceControllerTest {
         when(mTelephonyManager.getServiceState().getRoaming()).thenReturn(false);
         doReturn(OPERATOR_NAME).when(mTelephonyManager).getSimOperatorName();
 
-        mController.updateState(mPreference);
+        mController.updateState(mSwitchPreference);
 
-        assertThat(mPreference.isEnabled()).isFalse();
-        assertThat(mPreference.getSummary()).isEqualTo(
+        assertThat(mSwitchPreference.isEnabled()).isFalse();
+        assertThat(mSwitchPreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.manual_mode_disallowed_summary,
                         mTelephonyManager.getSimOperatorName()));
     }

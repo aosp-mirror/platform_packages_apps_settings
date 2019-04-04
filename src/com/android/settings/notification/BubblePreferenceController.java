@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -74,6 +75,8 @@ public class BubblePreferenceController extends NotificationPreferenceController
                 pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
             } else {
                 pref.setChecked(mAppRow.allowBubbles);
+                pref.setSummary(mContext.getString(
+                        R.string.bubbles_app_toggle_summary, mAppRow.label));
             }
         }
     }

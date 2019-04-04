@@ -21,6 +21,7 @@ import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.Utils;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settings.password.SetupSkipDialog;
@@ -37,6 +39,11 @@ import com.android.settings.password.SetupSkipDialog;
 import com.google.android.setupcompat.template.FooterButton;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
+    /**
+     * Returns the number of fingerprint enrolled.
+     */
+    private static final String EXTRA_FINGERPRINT_ENROLLED_COUNT = "fingerprint_enrolled_count";
+
     private static final String KEY_LOCK_SCREEN_PRESENT = "wasLockScreenPresent";
     private boolean mAlreadyHadLockScreenSetup = false;
 
@@ -99,10 +106,17 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // if lock was already present, do not return intent data since it must have been
         // reported in previous attempts
-        if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST && isKeyguardSecure()
-                && !mAlreadyHadLockScreenSetup) {
-            data = getMetricIntent(data);
+        if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST && isKeyguardSecure()) {
+            if(!mAlreadyHadLockScreenSetup) {
+                data = getMetricIntent(data);
+            }
+
+            // Report fingerprint count if user adding a new fingerprint
+            if(resultCode == RESULT_FINISHED) {
+                data = setFingerprintCount(data);
+            }
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -114,6 +128,19 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         data.putExtra(SetupChooseLockGeneric.
                 SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY,
                 lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId()));
+
+        return data;
+    }
+
+    private Intent setFingerprintCount(Intent data) {
+        if (data == null) {
+            data = new Intent();
+        }
+        final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
+        if (fpm != null) {
+            int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
+            data.putExtra(EXTRA_FINGERPRINT_ENROLLED_COUNT, enrolled);
+        }
         return data;
     }
 

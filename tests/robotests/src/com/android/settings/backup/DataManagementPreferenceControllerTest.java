@@ -43,7 +43,7 @@ public class DataManagementPreferenceControllerTest {
     private DataManagementPreferenceController mController;
     private PrivacySettingsConfigData mPSCD;
     private Preference mPreference;
-    private String mTitle;
+    private CharSequence mTitle;
 
     @Mock
     private Intent mIntent;

@@ -21,10 +21,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.android.settings.homepage.contextualcards.FocusRecyclerView
         android:id="@+id/card_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layoutAnimation="@anim/layout_animation_fade_in"/>
+        android:layoutAnimation="@anim/layout_animation_fade_in"
+        android:importantForAccessibility="no"/>
 
 </LinearLayout>

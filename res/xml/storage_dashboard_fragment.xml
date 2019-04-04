@@ -62,7 +62,8 @@
         android:key="pref_files"
         android:title="@string/storage_files"
         android:icon="@drawable/ic_folder_vd_theme_24"
-        android:order="7" />
+        android:order="7"
+        settings:keywords="@string/keywords_storage_files"/>
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_system"
         android:title="@string/storage_detail_system"
