@@ -5,10 +5,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
-import android.provider.Settings;
-import android.provider.Settings.Secure;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +23,6 @@ import org.robolectric.annotation.Config;
 })
 public class DisplayWhiteBalancePreferenceControllerTest {
 
-  private Context mContext;
   private DisplayWhiteBalancePreferenceController mController;
 
   @Mock
@@ -40,8 +36,7 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    mContext = RuntimeEnvironment.application;
-    mController = spy(new DisplayWhiteBalancePreferenceController(mContext,
+    mController = spy(new DisplayWhiteBalancePreferenceController(RuntimeEnvironment.application,
         "display_white_balance"));
     doReturn(mColorDisplayManager).when(mController).getColorDisplayManager();
   }
@@ -77,30 +72,26 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   }
 
   @Test
-  public void setChecked_true() {
-    mController.setChecked(true);
-    assertThat(Settings.Secure
-        .getInt(mContext.getContentResolver(), Secure.DISPLAY_WHITE_BALANCE_ENABLED, 0) == 1)
-        .isTrue();
+  public void setChecked_true_setSuccessfully() {
+    when(mColorDisplayManager.setDisplayWhiteBalanceEnabled(true)).thenReturn(true);
+    assertThat(mController.setChecked(true)).isTrue();
   }
 
   @Test
-  public void setChecked_false() {
-    mController.setChecked(false);
-    assertThat(Settings.Secure
-        .getInt(mContext.getContentResolver(), Secure.DISPLAY_WHITE_BALANCE_ENABLED, 0) == 1)
-        .isFalse();
+  public void setChecked_false_setSuccessfully() {
+    when(mColorDisplayManager.setDisplayWhiteBalanceEnabled(false)).thenReturn(true);
+    assertThat(mController.setChecked(false)).isTrue();
   }
 
   @Test
   public void isChecked_true() {
-    Settings.Secure.putInt(mContext.getContentResolver(), Secure.DISPLAY_WHITE_BALANCE_ENABLED, 1);
+    when(mColorDisplayManager.isDisplayWhiteBalanceEnabled()).thenReturn(true);
     assertThat(mController.isChecked()).isTrue();
   }
 
   @Test
   public void isChecked_false() {
-    Settings.Secure.putInt(mContext.getContentResolver(), Secure.DISPLAY_WHITE_BALANCE_ENABLED, 0);
+    when(mColorDisplayManager.isDisplayWhiteBalanceEnabled()).thenReturn(false);
     assertThat(mController.isChecked()).isFalse();
   }
 }
