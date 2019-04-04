@@ -68,16 +68,17 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
     }
 
     /**
-     * Returns the singleton instance of the {@link SliceBackgroundWorker} for specified {@link Uri}
-     * if exists
+     * Returns the singleton instance of {@link SliceBackgroundWorker} for specified {@link Uri} if
+     * exists
      */
     @Nullable
-    public static SliceBackgroundWorker getInstance(Uri uri) {
-        return LIVE_WORKERS.get(uri);
+    @SuppressWarnings("TypeParameterUnusedInFormals")
+    public static <T extends SliceBackgroundWorker> T getInstance(Uri uri) {
+        return (T) LIVE_WORKERS.get(uri);
     }
 
     /**
-     * Returns the singleton instance of the {@link SliceBackgroundWorker} for specified {@link
+     * Returns the singleton instance of {@link SliceBackgroundWorker} for specified {@link
      * CustomSliceable}
      */
     static SliceBackgroundWorker getInstance(Context context, Sliceable sliceable, Uri uri) {
