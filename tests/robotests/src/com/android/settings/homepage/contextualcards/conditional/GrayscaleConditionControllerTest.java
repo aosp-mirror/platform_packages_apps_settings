@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.ColorDisplayManager;
+import android.os.UserHandle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -87,6 +88,7 @@ public class GrayscaleConditionControllerTest {
     public void onActionClick_shouldSendBroadcast() {
         mController.onActionClick();
 
-        verify(mContext).sendBroadcast(any(Intent.class), any(String.class));
+        verify(mContext).sendBroadcastAsUser(any(Intent.class), any(UserHandle.class),
+                any(String.class));
     }
 }
