@@ -82,12 +82,11 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     }
 
     private Button mButton;
-    private List<Face> mFaces;
     private Listener mListener;
     private SettingsActivity mActivity;
+    private int mUserId;
 
     private final Context mContext;
-    private final int mUserId;
     private final FaceManager mFaceManager;
     private final FaceManager.RemovalCallback mRemovalCallback = new FaceManager.RemovalCallback() {
         @Override
@@ -100,8 +99,8 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         @Override
         public void onRemovalSucceeded(Face face, int remaining) {
             if (remaining == 0) {
-                mFaces = mFaceManager.getEnrolledFaces(mUserId);
-                if (!mFaces.isEmpty()) {
+                final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
+                if (!faces.isEmpty()) {
                     mButton.setEnabled(true);
                 } else {
                     mListener.onRemoved();
@@ -117,16 +116,17 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
-                if (mFaces.isEmpty()) {
+                final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
+                if (faces.isEmpty()) {
                     Log.e(TAG, "No faces");
                     return;
                 }
-                if (mFaces.size() > 1) {
-                    Log.e(TAG, "Multiple enrollments: " + mFaces.size());
+                if (faces.size() > 1) {
+                    Log.e(TAG, "Multiple enrollments: " + faces.size());
                 }
 
                 // Remove the first/only face
-                mFaceManager.remove(mFaces.get(0), mUserId, mRemovalCallback);
+                mFaceManager.remove(faces.get(0), mUserId, mRemovalCallback);
             } else {
                 mButton.setEnabled(true);
             }
@@ -137,15 +137,14 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         super(context, preferenceKey);
         mContext = context;
         mFaceManager = context.getSystemService(FaceManager.class);
-        // TODO: Use the profile-specific userId instead
-        mUserId = UserHandle.myUserId();
-        if (mFaceManager != null) {
-            mFaces = mFaceManager.getEnrolledFaces(mUserId);
-        }
     }
 
     public FaceSettingsRemoveButtonPreferenceController(Context context) {
         this(context, KEY);
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
     }
 
     @Override

@@ -31,7 +31,7 @@ import com.android.settings.core.TogglePreferenceController;
  * Preference controller that manages the ability to use face authentication with/without
  * user attention. See {@link FaceManager#setRequireAttention(boolean, byte[])}.
  */
-public class FaceSettingsAttentionPreferenceController extends TogglePreferenceController {
+public class FaceSettingsAttentionPreferenceController extends FaceSettingsPreferenceController {
 
     public static final String KEY = "security_settings_face_require_attention";
 
