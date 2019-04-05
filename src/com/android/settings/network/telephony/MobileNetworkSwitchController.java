@@ -22,6 +22,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -80,8 +81,9 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
                 R.string.mobile_network_use_sim_off);
 
         mSwitchBar.addOnSwitchChangeListener((switchView, isChecked) -> {
-            if (mSubscriptionManager.isSubscriptionEnabled(mSubId) != isChecked) {
-                mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked);
+            if (mSubscriptionManager.isSubscriptionEnabled(mSubId) != isChecked
+                    && (!mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked))) {
+                mSwitchBar.setChecked(!isChecked);
             }
         });
         update();
