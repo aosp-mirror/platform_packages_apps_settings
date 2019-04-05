@@ -52,11 +52,11 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
         if (mAppRow == null && mChannel == null) {
             return false;
         }
-        if (Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
-            return false;
-        }
         if (mChannel != null) {
+            if (Settings.Secure.getInt(mContext.getContentResolver(),
+                    NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
+                return false;
+            }
             if (isDefaultChannel()) {
                 return true;
             } else {
@@ -91,7 +91,9 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
             if (mChannel != null) {
                 canBubble |= mChannel.canBubble();
             } else {
-               canBubble |= mAppRow.allowBubbles;
+               canBubble |= mAppRow.allowBubbles
+                       && (Settings.Secure.getInt(mContext.getContentResolver(),
+                       NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_ON);
             }
         }
         return mContext.getString(canBubble ? R.string.switch_on_text : R.string.switch_off_text);
