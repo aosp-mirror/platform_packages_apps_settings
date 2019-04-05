@@ -2897,6 +2897,19 @@
                        android:value="com.android.settings.deletionhelper.AutomaticStorageManagerSettings" />
         </activity>
 
+        <!-- Show app-level advanced power usage details (app passed in as extras) -->
+        <activity
+            android:name=".fuelgauge.AdvancedPowerUsageDetailActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.settings.VIEW_ADVANCED_POWER_USAGE_DETAIL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".Settings$AppAndNotificationDashboardActivity"
             android:label="@string/app_and_notification_dashboard_title"
