@@ -31,6 +31,8 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.NetworkInfo.DetailedState;
@@ -78,10 +80,12 @@ public class WifiSlice implements CustomSliceable {
 
     protected final Context mContext;
     protected final WifiManager mWifiManager;
+    protected final ConnectivityManager mConnectivityManager;
 
     public WifiSlice(Context context) {
         mContext = context;
         mWifiManager = mContext.getSystemService(WifiManager.class);
+        mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
     }
 
     @Override
@@ -100,13 +104,16 @@ public class WifiSlice implements CustomSliceable {
             return listBuilder.build();
         }
 
-        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(getUri());
+        final WifiScanWorker worker = SliceBackgroundWorker.getInstance(getUri());
         final List<AccessPoint> results = worker != null ? worker.getResults() : null;
         final int apCount = results == null ? 0 : results.size();
+        final boolean isFirstApActive = apCount > 0 && results.get(0).isActive();
+        handleCaptivePortalCallback(worker, isFirstApActive);
 
         // Need a loading text when results are not ready or out of date.
         boolean needLoadingRow = true;
-        int index = apCount > 0 && results.get(0).isActive() ? 1 : 0;
+        // Skip checking the existence of the first access point if it's active
+        int index = isFirstApActive ? 1 : 0;
         // This loop checks the existence of reachable APs to determine the validity of the current
         // AP list.
         for (; index < apCount; index++) {
@@ -159,19 +166,35 @@ public class WifiSlice implements CustomSliceable {
                         .setPrimaryAction(primarySliceAction));
     }
 
+    private void handleCaptivePortalCallback(WifiScanWorker worker, boolean isFirstApActive) {
+        if (worker == null) {
+            return;
+        }
+        if (isFirstApActive) {
+            worker.registerCaptivePortalNetworkCallback(mWifiManager.getCurrentNetwork());
+        } else {
+            worker.unregisterCaptivePortalNetworkCallback();
+        }
+    }
+
     private ListBuilder.RowBuilder getAccessPointRow(AccessPoint accessPoint) {
         final CharSequence title = getAccessPointName(accessPoint);
         final IconCompat levelIcon = getAccessPointLevelIcon(accessPoint);
+        final boolean isCaptivePortal = accessPoint.isActive() && isCaptivePortal();
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
                 .setSubtitle(title)
-                .setPrimaryAction(SliceAction.create(
-                        getAccessPointAction(accessPoint), levelIcon, ListBuilder.ICON_IMAGE,
-                        title));
+                .setPrimaryAction(SliceAction.createDeeplink(
+                        getAccessPointAction(accessPoint, isCaptivePortal), levelIcon,
+                        ListBuilder.ICON_IMAGE, title));
 
-        final IconCompat endIcon = getEndIcon(accessPoint);
-        if (endIcon != null) {
-            rowBuilder.addEndItem(endIcon, ListBuilder.ICON_IMAGE);
+        if (isCaptivePortal) {
+            rowBuilder.addEndItem(getCaptivePortalEndAction(accessPoint, title));
+        } else {
+            final IconCompat endIcon = getEndIcon(accessPoint);
+            if (endIcon != null) {
+                rowBuilder.addEndItem(endIcon, ListBuilder.ICON_IMAGE);
+            }
         }
         return rowBuilder;
     }
@@ -218,12 +241,22 @@ public class WifiSlice implements CustomSliceable {
         return null;
     }
 
-    private PendingIntent getAccessPointAction(AccessPoint accessPoint) {
+    private SliceAction getCaptivePortalEndAction(AccessPoint accessPoint, CharSequence title) {
+        return SliceAction.createDeeplink(
+                getAccessPointAction(accessPoint, false /* isCaptivePortal */),
+                IconCompat.createWithResource(mContext, R.drawable.ic_settings_accent),
+                ListBuilder.ICON_IMAGE, title);
+    }
+
+    private PendingIntent getAccessPointAction(AccessPoint accessPoint, boolean isCaptivePortal) {
         final Bundle extras = new Bundle();
         accessPoint.saveWifiState(extras);
 
         Intent intent;
-        if (accessPoint.isActive()) {
+        if (isCaptivePortal) {
+            intent = new Intent(mContext, ConnectToWifiHandler.class);
+            intent.putExtra(ConnectivityManager.EXTRA_NETWORK, mWifiManager.getCurrentNetwork());
+        } else if (accessPoint.isActive()) {
             intent = new SubSettingLauncher(mContext)
                     .setTitleRes(R.string.pref_title_network_details)
                     .setDestination(WifiNetworkDetailsFragment.class.getName())
@@ -251,6 +284,12 @@ public class WifiSlice implements CustomSliceable {
         return new ListBuilder.RowBuilder()
                 .setTitleItem(emptyIcon, ListBuilder.ICON_IMAGE)
                 .setSubtitle(title);
+    }
+
+    protected boolean isCaptivePortal() {
+        final NetworkCapabilities nc = mConnectivityManager.getNetworkCapabilities(
+                mWifiManager.getCurrentNetwork());
+        return WifiUtils.canSignIntoNetwork(nc);
     }
 
     /**
@@ -317,6 +356,12 @@ public class WifiSlice implements CustomSliceable {
     }
 
     private CharSequence getSummary(AccessPoint accessPoint) {
+        if (isCaptivePortal()) {
+            final int id = mContext.getResources()
+                    .getIdentifier("network_available_sign_in", "string", "android");
+            return mContext.getText(id);
+        }
+
         if (accessPoint == null) {
             return getSummary();
         }

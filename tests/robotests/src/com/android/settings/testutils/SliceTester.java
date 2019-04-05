@@ -18,6 +18,7 @@ package com.android.settings.testutils;
 
 import static android.app.slice.Slice.HINT_TITLE;
 import static android.app.slice.Slice.SUBTYPE_COLOR;
+import static android.app.slice.SliceItem.FORMAT_IMAGE;
 import static android.app.slice.SliceItem.FORMAT_INT;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
 
@@ -282,6 +283,31 @@ public class SliceTester {
             }
         }
         return hasText;
+    }
+
+    /**
+     * Assert any slice item contains icon.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param icon Icon for asserting.
+     */
+    public static void assertAnySliceItemContainsIcon(List<SliceItem> sliceItems, IconCompat icon) {
+        boolean hasIcon = false;
+        for (SliceItem item : sliceItems) {
+            List<SliceItem> iconItems = SliceQuery.findAll(item, FORMAT_IMAGE,
+                    (String) null /* hints */, null /* non-hints */);
+            if (iconItems == null) {
+                continue;
+            }
+
+            for (SliceItem iconItem : iconItems) {
+                if (icon.toString().equals(iconItem.getIcon().toString())) {
+                    hasIcon = true;
+                    break;
+                }
+            }
+        }
+        assertThat(hasIcon).isTrue();
     }
 
     private static void assertKeywords(SliceMetadata metadata, SliceData data) {

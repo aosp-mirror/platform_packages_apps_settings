@@ -27,6 +27,8 @@ import static org.mockito.Mockito.verify;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
@@ -55,6 +57,7 @@ public class WifiScanWorkerTest {
     private Context mContext;
     private ContentResolver mResolver;
     private WifiManager mWifiManager;
+    private ConnectivityManager mConnectivityManager;
     private WifiScanWorker mWifiScanWorker;
 
     @Before
@@ -68,6 +71,7 @@ public class WifiScanWorkerTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mWifiManager.setWifiEnabled(true);
 
+        mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
         mWifiScanWorker = new WifiScanWorker(mContext, WIFI_SLICE_URI);
     }
 
@@ -89,7 +93,7 @@ public class WifiScanWorkerTest {
     }
 
     @Test
-    public void SliceAccessPoint_sameState_shouldBeTheSame() {
+    public void AccessPointList_sameState_shouldBeTheSame() {
         final AccessPoint ap1 = createAccessPoint(AP_NAME, State.CONNECTED);
         final AccessPoint ap2 = createAccessPoint(AP_NAME, State.CONNECTED);
 
@@ -98,7 +102,7 @@ public class WifiScanWorkerTest {
     }
 
     @Test
-    public void SliceAccessPoint_differentState_shouldBeDifferent() {
+    public void AccessPointList_differentState_shouldBeDifferent() {
         final AccessPoint ap1 = createAccessPoint(AP_NAME, State.CONNECTING);
         final AccessPoint ap2 = createAccessPoint(AP_NAME, State.CONNECTED);
 
@@ -107,7 +111,7 @@ public class WifiScanWorkerTest {
     }
 
     @Test
-    public void SliceAccessPoint_differentLength_shouldBeDifferent() {
+    public void AccessPointList_differentLength_shouldBeDifferent() {
         final AccessPoint ap1 = createAccessPoint(AP_NAME, State.CONNECTED);
         final AccessPoint ap2 = createAccessPoint(AP_NAME, State.CONNECTED);
         final List<AccessPoint> list = new ArrayList<>();
@@ -115,5 +119,16 @@ public class WifiScanWorkerTest {
         list.add(ap2);
 
         assertThat(mWifiScanWorker.areListsTheSame(list, Arrays.asList(ap1))).isFalse();
+    }
+
+    @Test
+    public void NetworkCallback_onCapabilitiesChanged_shouldNotifyChange() {
+        final Network network = mConnectivityManager.getActiveNetwork();
+        mWifiScanWorker.registerCaptivePortalNetworkCallback(network);
+
+        mWifiScanWorker.mCaptivePortalNetworkCallback.onCapabilitiesChanged(network,
+                WifiSliceTest.makeCaptivePortalNetworkCapabilities());
+
+        verify(mResolver).notifyChange(WIFI_SLICE_URI, null);
     }
 }
