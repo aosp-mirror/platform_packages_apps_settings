@@ -18,7 +18,7 @@ package com.android.settings.notification;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
-import static com.android.settings.notification.ZenModePreferenceController.ZEN_MODE_KEY;
+import static com.android.settings.notification.ZenModeSoundSettingsPreferenceController.ZEN_MODE_KEY;
 
 import android.annotation.ColorInt;
 import android.app.NotificationManager;
