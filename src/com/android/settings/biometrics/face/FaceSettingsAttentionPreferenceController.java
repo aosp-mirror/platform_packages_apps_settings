@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceManager.GetFeatureCallback;
 import android.hardware.face.FaceManager.SetFeatureCallback;
+import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -46,6 +47,10 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
                 mPreference.setEnabled(true);
                 if (!success) {
                     mPreference.setChecked(!mPreference.isChecked());
+                } else {
+                    Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                            Settings.Secure.FACE_UNLOCK_ATTENTION_REQUIRED,
+                            mPreference.isChecked() ? 1 : 0, getUserId());
                 }
             }
         }
