@@ -128,6 +128,7 @@ public class FaceSettings extends DashboardFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CONFIRM_REQUEST) {
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
+                mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
                 if (data != null) {
                     mToken = data.getByteArrayExtra(
