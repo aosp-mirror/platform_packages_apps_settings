@@ -16,11 +16,14 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.annotation.Nullable;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseIntArray;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
@@ -151,6 +154,15 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         preference.setTitle(getTitle(context));
         preference.setSummary(getSummary(context));
         preference.setIcon(getIconId());
+        ColorStateList tint = getIconTint();
+        if (tint != null) {
+            preference.getIcon().setTintList(tint);
+        }
+    }
+
+    /** Returns the {@link ColorStateList} for tinting {@link #getIconId()} or null if none. */
+    protected @Nullable ColorStateList getIconTint() {
+        return null;
     }
 
     public boolean shouldShowDialog() {
