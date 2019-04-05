@@ -34,6 +34,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,12 +54,14 @@ public class WifiWakeupPreferenceControllerTest {
     private LocationManager mLocationManager;
     @Mock
     private SwitchPreference mPreference;
+    @Mock
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new WifiWakeupPreferenceController(mContext, mFragment);
+        mController = new WifiWakeupPreferenceController(mContext, mFragment, mLifecycle);
         mController.mLocationManager = mLocationManager;
         mController.mPreference = mPreference;
 
