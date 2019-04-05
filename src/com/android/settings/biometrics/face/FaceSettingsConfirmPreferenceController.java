@@ -26,7 +26,7 @@ import com.android.settings.core.TogglePreferenceController;
 /**
  * Preference controller giving the user an option to always require confirmation.
  */
-public class FaceSettingsConfirmPreferenceController extends TogglePreferenceController {
+public class FaceSettingsConfirmPreferenceController extends FaceSettingsPreferenceController {
 
     private static final String KEY = "security_settings_face_require_confirmation";
 
@@ -45,14 +45,14 @@ public class FaceSettingsConfirmPreferenceController extends TogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, DEFAULT) == ON;
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, DEFAULT, getUserId()) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(),
-                FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, isChecked ? ON : OFF);
+        return Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, isChecked ? ON : OFF, getUserId());
     }
 
     @Override
