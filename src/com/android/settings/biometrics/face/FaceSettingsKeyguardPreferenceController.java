@@ -31,9 +31,9 @@ import com.android.settings.core.TogglePreferenceController;
  * Preference controller for Face settings page controlling the ability to unlock the phone
  * with face.
  */
-public class FaceSettingsKeyguardPreferenceController extends TogglePreferenceController {
+public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPreferenceController {
 
-    private static final String KEY = "security_settings_face_keyguard";
+    static final String KEY = "security_settings_face_keyguard";
 
     private static final int ON = 1;
     private static final int OFF = 0;
@@ -54,14 +54,14 @@ public class FaceSettingsKeyguardPreferenceController extends TogglePreferenceCo
         } else if (adminDisabled()) {
             return false;
         }
-        return Settings.Secure.getInt(
-                mContext.getContentResolver(), FACE_UNLOCK_KEYGUARD_ENABLED, DEFAULT) == ON;
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                FACE_UNLOCK_KEYGUARD_ENABLED, DEFAULT, getUserId()) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(), FACE_UNLOCK_KEYGUARD_ENABLED,
-                isChecked ? ON : OFF);
+        return Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                FACE_UNLOCK_KEYGUARD_ENABLED, isChecked ? ON : OFF, getUserId());
     }
 
     @Override
