@@ -37,6 +37,7 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.panel.PanelLoggingContract.PanelClosedKeys;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.google.android.setupdesign.DividerItemDecoration;
 
 public class PanelFragment extends Fragment {
 
@@ -92,6 +93,10 @@ public class PanelFragment extends Fragment {
         mPanelSlices.setHasFixedSize(true);
         mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));
         mPanelSlices.setAdapter(mAdapter);
+
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
+        itemDecoration.setDividerCondition(DividerItemDecoration.DIVIDER_CONDITION_BOTH);
+        mPanelSlices.addItemDecoration(itemDecoration);
 
         mTitleView.setText(mPanel.getTitle());
 

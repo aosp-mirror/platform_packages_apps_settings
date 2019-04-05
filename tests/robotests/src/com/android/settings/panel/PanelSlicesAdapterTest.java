@@ -16,13 +16,18 @@
 
 package com.android.settings.panel;
 
+import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -39,6 +44,9 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 public class PanelSlicesAdapterTest {
 
@@ -47,8 +55,6 @@ public class PanelSlicesAdapterTest {
     private FakePanelContent mFakePanelContent;
     private FakeFeatureFactory mFakeFeatureFactory;
     private PanelFeatureProvider mPanelFeatureProvider;
-
-    private PanelSlicesAdapter mAdapter;
 
     @Before
     public void setUp() {
@@ -70,28 +76,83 @@ public class PanelSlicesAdapterTest {
                                 .get()
                                 .getSupportFragmentManager()
                                 .findFragmentById(R.id.main_content));
-
-        mAdapter = new PanelSlicesAdapter(mPanelFragment, mFakePanelContent);
     }
 
     @Test
     public void onCreateViewHolder_returnsSliceRowViewHolder() {
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mFakePanelContent);
         final ViewGroup view = new FrameLayout(mContext);
         final PanelSlicesAdapter.SliceRowViewHolder viewHolder =
-                mAdapter.onCreateViewHolder(view, 0);
+                adapter.onCreateViewHolder(view, 0);
 
         assertThat(viewHolder.sliceView).isNotNull();
     }
 
     @Test
     public void onBindViewHolder_bindsSlice() {
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mFakePanelContent);
         final int position = 0;
         final ViewGroup view = new FrameLayout(mContext);
         final PanelSlicesAdapter.SliceRowViewHolder viewHolder =
-                mAdapter.onCreateViewHolder(view, 0 /* view type*/);
+                adapter.onCreateViewHolder(view, 0 /* view type*/);
 
-        mAdapter.onBindViewHolder(viewHolder, position);
+        adapter.onBindViewHolder(viewHolder, position);
 
         assertThat(viewHolder.sliceLiveData).isNotNull();
+    }
+
+    @Test
+    public void nonMediaOutputIndicatorSlice_shouldAllowDividerAboveAndBelow() {
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mFakePanelContent);
+        final int position = 0;
+        final ViewGroup view = new FrameLayout(mContext);
+        final PanelSlicesAdapter.SliceRowViewHolder viewHolder =
+                adapter.onCreateViewHolder(view, 0 /* view type*/);
+
+        adapter.onBindViewHolder(viewHolder, position);
+
+        assertThat(viewHolder.isDividerAllowedAbove()).isTrue();
+        assertThat(viewHolder.isDividerAllowedBelow()).isTrue();
+    }
+
+    @Test
+    public void mediaOutputIndicatorSlice_shouldNotAllowDividerAbove() {
+        PanelContent mediaOutputIndicatorSlicePanelContent = new PanelContent() {
+            @Override
+            public CharSequence getTitle() {
+                return "title";
+            }
+
+            @Override
+            public List<Uri> getSlices() {
+                return Arrays.asList(
+                        MEDIA_OUTPUT_INDICATOR_SLICE_URI
+                );
+            }
+
+            @Override
+            public Intent getSeeMoreIntent() {
+                return new Intent();
+            }
+
+            @Override
+            public int getMetricsCategory() {
+                return SettingsEnums.TESTING;
+            }
+        };
+
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mediaOutputIndicatorSlicePanelContent);
+        final int position = 0;
+        final ViewGroup view = new FrameLayout(mContext);
+        final PanelSlicesAdapter.SliceRowViewHolder viewHolder =
+                adapter.onCreateViewHolder(view, 0 /* view type*/);
+
+        adapter.onBindViewHolder(viewHolder, position);
+
+        assertThat(viewHolder.isDividerAllowedAbove()).isFalse();
     }
 }
