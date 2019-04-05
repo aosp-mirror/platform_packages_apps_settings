@@ -91,8 +91,9 @@ public interface CustomSliceable extends Sliceable {
      * @return a {@link PendingIntent} linked to {@link SliceBroadcastReceiver}.
      */
     default PendingIntent getBroadcastIntent(Context context) {
-        final Intent intent = new Intent(getUri().toString());
-        intent.setClass(context, SliceBroadcastReceiver.class);
+        final Intent intent = new Intent(getUri().toString())
+                .setData(getUri())
+                .setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }
