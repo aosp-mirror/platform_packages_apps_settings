@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -56,6 +57,11 @@ public class SummaryTip extends BatteryTip {
     @Override
     public int getIconId() {
         return R.drawable.ic_battery_status_good_24dp;
+    }
+
+    @Override
+    public ColorStateList getIconTint() {
+        return ColorStateList.valueOf(R.color.battery_good_color_light);
     }
 
     @Override
