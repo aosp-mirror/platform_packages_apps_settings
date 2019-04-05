@@ -19,8 +19,10 @@ package com.android.settings.wifi;
 import static com.android.settings.wifi.ConfigureWifiSettings.WIFI_WAKEUP_REQUEST_CODE;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -36,12 +38,17 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
  * {@link PreferenceControllerMixin} that controls whether the Wi-Fi Wakeup feature should be
  * enabled.
  */
-public class WifiWakeupPreferenceController extends AbstractPreferenceController {
+public class WifiWakeupPreferenceController extends AbstractPreferenceController implements
+        LifecycleObserver, OnPause, OnResume {
 
     private static final String TAG = "WifiWakeupPrefController";
     private static final String KEY_ENABLE_WIFI_WAKEUP = "enable_wifi_wakeup";
@@ -52,11 +59,21 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
     SwitchPreference mPreference;
     @VisibleForTesting
     LocationManager mLocationManager;
+    private final BroadcastReceiver mLocationReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateState(mPreference);
+        }
+    };
+    private final IntentFilter mLocationFilter =
+            new IntentFilter(LocationManager.MODE_CHANGED_ACTION);
 
-    public WifiWakeupPreferenceController(Context context, DashboardFragment fragment) {
+    public WifiWakeupPreferenceController(Context context, DashboardFragment fragment,
+            Lifecycle lifecycle) {
         super(context);
         mFragment = fragment;
         mLocationManager = (LocationManager) context.getSystemService(Service.LOCATION_SERVICE);
+        lifecycle.addObserver(this);
     }
 
     @Override
@@ -154,5 +171,15 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
     private void setWifiWakeupEnabled(boolean enabled) {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED,
                 enabled ? 1 : 0);
+    }
+
+    @Override
+    public void onResume() {
+        mContext.registerReceiver(mLocationReceiver, mLocationFilter);
+    }
+
+    @Override
+    public void onPause() {
+        mContext.unregisterReceiver(mLocationReceiver);
     }
 }
