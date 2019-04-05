@@ -21,10 +21,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:minWidth="@dimen/two_target_min_width"
     android:paddingStart="?android:attr/listPreferredItemPaddingEnd"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:background="?android:attr/selectableItemBackground"
     android:scaleType="center"
     android:src="@drawable/ic_add_24dp"
+    android:tint="?android:attr/colorAccent"
     android:contentDescription="@string/add" />
 
