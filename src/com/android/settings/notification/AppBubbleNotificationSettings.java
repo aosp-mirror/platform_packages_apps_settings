@@ -18,22 +18,23 @@ package com.android.settings.notification;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
-public class AppBubbleNotificationSettings extends NotificationSettingsBase {
+public class AppBubbleNotificationSettings extends NotificationSettingsBase implements
+        GlobalBubblePermissionObserverMixin.Listener {
     private static final String TAG = "AppBubNotiSettings";
+    private GlobalBubblePermissionObserverMixin mObserverMixin;
 
     @Override
     public int getMetricsCategory() {
@@ -65,6 +66,11 @@ public class AppBubbleNotificationSettings extends NotificationSettingsBase {
     }
 
     @Override
+    public void onGlobalBubblePermissionChanged() {
+        updatePreferenceStates();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -79,19 +85,23 @@ public class AppBubbleNotificationSettings extends NotificationSettingsBase {
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
+
+        mObserverMixin = new GlobalBubblePermissionObserverMixin(getContext(), this);
+        mObserverMixin.onStart();
     }
 
-    /**
-     * For Search.
-     */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    @Override
+    public void onPause() {
+        mObserverMixin.onStop();
+        super.onPause();
+    }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
+
                 @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.app_bubble_notification_settings;
-                    return Arrays.asList(sir);
+                protected boolean isPageSearchEnabled(Context context) {
+                    return false;
                 }
 
                 @Override

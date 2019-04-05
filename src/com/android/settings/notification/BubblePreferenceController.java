@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 public class BubblePreferenceController extends NotificationPreferenceController
@@ -35,8 +36,16 @@ public class BubblePreferenceController extends NotificationPreferenceController
     private static final int SYSTEM_WIDE_ON = 1;
     private static final int SYSTEM_WIDE_OFF = 0;
 
+    private FragmentManager mFragmentManager;
+
     public BubblePreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
+    }
+
+    public BubblePreferenceController(Context context, FragmentManager fragmentManager,
+            NotificationBackend backend) {
+        super(context, backend);
+        mFragmentManager = fragmentManager;
     }
 
     @Override
@@ -52,11 +61,11 @@ public class BubblePreferenceController extends NotificationPreferenceController
         if (mAppRow == null && mChannel == null) {
             return false;
         }
-        if (Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
-            return false;
-        }
         if (mChannel != null) {
+            if (Settings.Secure.getInt(mContext.getContentResolver(),
+                    NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF) {
+                return false;
+            }
             if (isDefaultChannel()) {
                 return true;
             } else {
@@ -74,7 +83,9 @@ public class BubblePreferenceController extends NotificationPreferenceController
                 pref.setChecked(mChannel.canBubble());
                 pref.setEnabled(isChannelConfigurable() && !pref.isDisabledByAdmin());
             } else {
-                pref.setChecked(mAppRow.allowBubbles);
+                pref.setChecked(mAppRow.allowBubbles
+                        && Settings.Secure.getInt(mContext.getContentResolver(),
+                        NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_ON);
                 pref.setSummary(mContext.getString(
                         R.string.bubbles_app_toggle_summary, mAppRow.label));
             }
@@ -87,11 +98,44 @@ public class BubblePreferenceController extends NotificationPreferenceController
         if (mChannel != null) {
             mChannel.setAllowBubbles(value);
             saveChannel();
-        } else if (mAppRow != null){
-            mAppRow.allowBubbles = value;
-            mBackend.setAllowBubbles(mAppRow.pkg, mAppRow.uid, value);
+            return true;
+        } else if (mAppRow != null) {
+            RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
+            // if the global setting is off, toggling app level permission requires extra
+            // confirmation
+            if (Settings.Secure.getInt(mContext.getContentResolver(),
+                    NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON) == SYSTEM_WIDE_OFF
+                    && !pref.isChecked()) {
+                new BubbleWarningDialogFragment()
+                        .setPkgInfo(mAppRow.pkg, mAppRow.uid)
+                        .show(mFragmentManager, "dialog");
+                return false;
+            } else {
+                mAppRow.allowBubbles = value;
+                mBackend.setAllowBubbles(mAppRow.pkg, mAppRow.uid, value);
+            }
         }
         return true;
     }
 
+    // Used in app level prompt that confirms the user is ok with turning on bubbles
+    // globally. If they aren't, undo what
+    public static void revertBubblesApproval(Context mContext, String pkg, int uid) {
+        NotificationBackend backend = new NotificationBackend();
+        backend.setAllowBubbles(pkg, uid, false);
+        // changing the global settings will cause the observer on the host page to reload
+        // correct preference state
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
+    }
+
+    // Apply global bubbles approval
+    public static void applyBubblesApproval(Context mContext, String pkg, int uid) {
+        NotificationBackend backend = new NotificationBackend();
+        backend.setAllowBubbles(pkg, uid, true);
+        // changing the global settings will cause the observer on the host page to reload
+        // correct preference state
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+    }
 }
