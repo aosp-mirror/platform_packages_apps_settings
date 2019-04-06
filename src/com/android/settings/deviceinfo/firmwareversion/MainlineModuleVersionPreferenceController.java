@@ -21,14 +21,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 
 public class MainlineModuleVersionPreferenceController extends BasePreferenceController {
 
@@ -49,16 +47,10 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MAINLINE_MODULE)) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         return !TextUtils.isEmpty(mModuleVersion) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     private void initModules() {
-        if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MAINLINE_MODULE)) {
-            return;
-        }
         final String moduleProvider = mContext.getString(
                 com.android.internal.R.string.config_defaultModuleMetadataProvider);
         if (!TextUtils.isEmpty(moduleProvider)) {
