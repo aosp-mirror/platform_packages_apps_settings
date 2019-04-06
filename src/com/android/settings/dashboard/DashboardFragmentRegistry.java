@@ -23,7 +23,6 @@ import com.android.settings.LegalSettings;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
-import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
@@ -79,8 +78,6 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_APPS);
         PARENT_TO_CATEGORY_KEY_MAP.put(PowerUsageSummary.class.getName(),
                 CategoryKey.CATEGORY_BATTERY);
-        PARENT_TO_CATEGORY_KEY_MAP.put(DefaultAppSettings.class.getName(),
-                CategoryKey.CATEGORY_APPS_DEFAULT);
         PARENT_TO_CATEGORY_KEY_MAP.put(DisplaySettings.class.getName(),
                 CategoryKey.CATEGORY_DISPLAY);
         PARENT_TO_CATEGORY_KEY_MAP.put(SoundSettings.class.getName(),

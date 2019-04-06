@@ -136,7 +136,6 @@ public class Settings extends SettingsActivity {
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class AdvancedAppsActivity extends SettingsActivity { /* empty */ }
 
     public static class ManageExternalSourcesActivity extends SettingsActivity {/* empty */ }
     public static class ManageAppExternalSourcesActivity extends SettingsActivity { /* empty */ }
