@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
@@ -125,6 +126,7 @@ public class SecuritySettings extends DashboardFragment {
         profileSecurityControllers.add(new LockUnificationPreferenceController(context, host));
         profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
                 context, lifecycle));
+        profileSecurityControllers.add(new FaceProfileStatusPreferenceController(context));
         profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(context));
         controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY)
                 .setChildren(profileSecurityControllers));

@@ -28,6 +28,7 @@
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="android:listPreferredItemHeight">72dip</item>
+        <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="face_layout_theme">@style/FaceLayoutTheme</item>
@@ -52,11 +53,6 @@
         <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
 
         <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
-
-        <!-- For battery status icons in -->
-        <item name="batteryGoodColor">@color/battery_good_color_light</item>
-        <item name="batteryMaybeColor">@color/battery_maybe_color_light</item>
-        <item name="batteryBadColor">@color/battery_bad_color_light</item>
 
         <!-- For AppBarLayout -->
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
@@ -192,10 +188,6 @@
         <!-- action bar, needed for search bar icon tinting -->
         <item name="android:actionBarTheme">@*android:style/ThemeOverlay.DeviceDefault.ActionBar</item>
 
-        <!-- For battery status icons in -->
-        <item name="batteryGoodColor">@color/battery_good_color_light</item>
-        <item name="batteryMaybeColor">@color/battery_maybe_color_light</item>
-        <item name="batteryBadColor">@color/battery_bad_color_light</item>
         <!-- Define this color for material design -->
         <item name="colorPrimaryVariant">@android:color/white</item>
     </style>

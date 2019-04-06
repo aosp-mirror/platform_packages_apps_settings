@@ -103,14 +103,14 @@
         settings:useAdminDisabledSummary="true"
         settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
         settings:allowDividerAbove="true"
-        settings:controller="com.android.settings.notification.ZenModePreferenceController" />
+        settings:controller="com.android.settings.notification.ZenModeSoundSettingsPreferenceController"/>
 
     <Preference
         android:key="gesture_prevent_ringing_sound"
         android:title="@string/gesture_prevent_ringing_sound_title"
         android:order="-110"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
+        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController"/>
 
     <!-- Phone ringtone -->
     <com.android.settings.DefaultRingtonePreference
@@ -150,27 +150,27 @@
         <!-- Dial pad tones -->
         <SwitchPreference
           android:key="dial_pad_tones"
-          android:title="@string/dial_pad_tones_title" />
+          android:title="@string/dial_pad_tones_title"/>
 
         <!-- Screen locking sounds -->
         <SwitchPreference
           android:key="screen_locking_sounds"
-          android:title="@string/screen_locking_sounds_title" />
+          android:title="@string/screen_locking_sounds_title"/>
 
         <!-- Charging sounds -->
         <SwitchPreference
           android:key="charging_sounds"
-          android:title="@string/charging_sounds_title" />
+          android:title="@string/charging_sounds_title"/>
 
         <!-- Docking sounds -->
         <SwitchPreference
           android:key="docking_sounds"
-          android:title="@string/docking_sounds_title" />
+          android:title="@string/docking_sounds_title"/>
 
         <!-- Touch sounds -->
         <SwitchPreference
           android:key="touch_sounds"
-          android:title="@string/touch_sounds_title" />
+          android:title="@string/touch_sounds_title"/>
 
         <!-- Vibrate on touch -->
         <SwitchPreference
@@ -183,18 +183,18 @@
         <DropDownPreference
           android:key="dock_audio_media"
           android:title="@string/dock_audio_media_title"
-          android:summary="%s" />
+          android:summary="%s"/>
 
         <!-- Boot sounds -->
         <SwitchPreference
           android:key="boot_sounds"
-          android:title="@string/boot_sounds_title" />
+          android:title="@string/boot_sounds_title"/>
 
         <!-- Emergency tone -->
         <DropDownPreference
           android:key="emergency_tone"
           android:title="@string/emergency_tone_title"
-          android:summary="%s" />
+          android:summary="%s"/>
     </PreferenceCategory>
 
     <com.android.settings.widget.WorkOnlyCategory
@@ -207,7 +207,7 @@
                     android:key="work_use_personal_sounds"
                     android:title="@string/work_use_personal_sounds_title"
                     android:summary="@string/work_use_personal_sounds_summary"
-                    android:disableDependentsState="true" />
+                    android:disableDependentsState="true"/>
 
                 <!-- Work phone ringtone -->
                 <com.android.settings.DefaultRingtonePreference
@@ -215,7 +215,7 @@
                     android:title="@string/work_ringtone_title"
                     android:dialogTitle="@string/work_alarm_ringtone_title"
                     android:ringtoneType="ringtone"
-                    android:dependency="work_use_personal_sounds" />
+                    android:dependency="work_use_personal_sounds"/>
 
                 <!-- Default work notification ringtone -->
                 <com.android.settings.DefaultRingtonePreference
@@ -223,7 +223,7 @@
                     android:title="@string/work_notification_ringtone_title"
                     android:dialogTitle="@string/work_alarm_ringtone_title"
                     android:ringtoneType="notification"
-                    android:dependency="work_use_personal_sounds" />
+                    android:dependency="work_use_personal_sounds"/>
 
                 <!-- Default work alarm ringtone -->
                 <com.android.settings.DefaultRingtonePreference
@@ -232,7 +232,7 @@
                     android:dialogTitle="@string/work_alarm_ringtone_title"
                     android:persistent="false"
                     android:ringtoneType="alarm"
-                    android:dependency="work_use_personal_sounds" />
+                    android:dependency="work_use_personal_sounds"/>
 
     </com.android.settings.widget.WorkOnlyCategory>
 </PreferenceScreen>
