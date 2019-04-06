@@ -148,6 +148,34 @@ public class DefaultSubscriptionControllerTest {
     }
 
     @Test
+    public void displayPreference_threeSubsOneIsOpportunistic_correctListPreferenceValues() {
+        final SubscriptionInfo sub1 = createMockSub(111, "sub1");
+        final SubscriptionInfo sub2 = createMockSub(222, "sub2");
+        final SubscriptionInfo sub3 = createMockSub(333, "sub3");
+
+        // Mark sub2 as opportunistic; then it should not appear in the list of entries/entryValues.
+        when(sub2.isOpportunistic()).thenReturn(true);
+
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2, sub3));
+        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+
+        mController.displayPreference(mScreen);
+
+        final CharSequence[] entries = mListPreference.getEntries();
+        assertThat(entries.length).isEqualTo(3);
+        assertThat(entries[0]).isEqualTo("sub1");
+        assertThat(entries[1]).isEqualTo("sub3");
+        assertThat(entries[2]).isEqualTo(mContext.getString(R.string.calls_and_sms_ask_every_time));
+
+        final CharSequence[] entryValues = mListPreference.getEntryValues();
+        assertThat(entryValues.length).isEqualTo(3);
+        assertThat(entryValues[0]).isEqualTo("111");
+        assertThat(entryValues[1]).isEqualTo("333");
+        assertThat(entryValues[2]).isEqualTo(
+                Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
+    }
+
+    @Test
     public void onPreferenceChange_prefChangedToSub2_callbackCalledCorrectly() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
