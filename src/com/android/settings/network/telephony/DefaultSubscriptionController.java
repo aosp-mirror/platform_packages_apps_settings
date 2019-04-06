@@ -28,6 +28,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.Lifecycle;
@@ -124,27 +125,29 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
 
         // We'll have one entry for each available subscription, plus one for a "ask me every
         // time" entry at the end.
-        final CharSequence[] displayNames = new CharSequence[subs.size() + 1];
-        final CharSequence[] subscriptionIds = new CharSequence[subs.size() + 1];
+        final ArrayList<CharSequence> displayNames = new ArrayList<>();
+        final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
 
         final int serviceDefaultSubId = getDefaultSubscriptionId();
         boolean subIsAvailable = false;
 
-        int i = 0;
-        for (; i < subs.size(); i++) {
-            displayNames[i] = subs.get(i).getDisplayName();
-            final int subId = subs.get(i).getSubscriptionId();
-            subscriptionIds[i] = Integer.toString(subId);
+        for (SubscriptionInfo sub : subs) {
+            if (sub.isOpportunistic()) {
+                continue;
+            }
+            displayNames.add(sub.getDisplayName());
+            final int subId = sub.getSubscriptionId();
+            subscriptionIds.add(Integer.toString(subId));
             if (subId == serviceDefaultSubId) {
                 subIsAvailable = true;
             }
         }
         // Add the extra "Ask every time" value at the end.
-        displayNames[i] = mContext.getString(R.string.calls_and_sms_ask_every_time);
-        subscriptionIds[i] = Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        displayNames.add(mContext.getString(R.string.calls_and_sms_ask_every_time));
+        subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
 
-        mPreference.setEntries(displayNames);
-        mPreference.setEntryValues(subscriptionIds);
+        mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
+        mPreference.setEntryValues(subscriptionIds.toArray(new CharSequence[0]));
 
         if (subIsAvailable) {
             mPreference.setValue(Integer.toString(serviceDefaultSubId));
