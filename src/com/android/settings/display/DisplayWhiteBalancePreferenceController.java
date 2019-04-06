@@ -41,15 +41,12 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        return Secure.getIntForUser(mContext.getContentResolver(),
-                Secure.DISPLAY_WHITE_BALANCE_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
+        return getColorDisplayManager().isDisplayWhiteBalanceEnabled();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Secure.putIntForUser(mContext.getContentResolver(), Secure.DISPLAY_WHITE_BALANCE_ENABLED,
-                isChecked ? 1 : 0, UserHandle.USER_CURRENT);
-        return true;
+        return getColorDisplayManager().setDisplayWhiteBalanceEnabled(isChecked);
     }
 
     @VisibleForTesting
