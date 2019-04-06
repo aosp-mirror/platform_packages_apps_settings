@@ -55,13 +55,6 @@
         settings:keywords="@string/keywords_more_default_sms_app" />
 
     <com.android.settingslib.widget.apppreference.AppPreference
-        android:key="default_payment_app"
-        android:title="@string/nfc_payment_settings_title"
-        android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.nfc.PaymentSettings"
-        settings:keywords="@string/keywords_default_payment_app"/>
-
-    <com.android.settingslib.widget.apppreference.AppPreference
         android:key="default_emergency_app"
         android:title="@string/default_emergency_app"
         settings:keywords="@string/keywords_emergency_app" />

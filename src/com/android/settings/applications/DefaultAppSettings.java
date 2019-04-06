@@ -27,7 +27,6 @@ import com.android.settings.applications.assist.DefaultAssistPreferenceControlle
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
-import com.android.settings.applications.defaultapps.DefaultPaymentSettingsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkBrowserPreferenceController;
@@ -87,7 +86,6 @@ public class DefaultAppSettings extends DashboardFragment {
         controllers.add(new DefaultSmsPreferenceController(context));
         controllers.add(new DefaultEmergencyPreferenceController(context));
         controllers.add(new DefaultHomePreferenceController(context));
-        controllers.add(new DefaultPaymentSettingsPreferenceController(context));
         return controllers;
     }
 
