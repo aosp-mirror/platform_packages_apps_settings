@@ -16,6 +16,8 @@
 
 package com.android.settings.panel;
 
+import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
@@ -33,6 +35,7 @@ import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.google.android.setupdesign.DividerItemDecoration;
 
 import java.util.List;
 
@@ -80,9 +83,12 @@ public class PanelSlicesAdapter
     /**
      * ViewHolder for binding Slices to SliceViews.
      */
-    public static class SliceRowViewHolder extends RecyclerView.ViewHolder {
+    public static class SliceRowViewHolder extends RecyclerView.ViewHolder
+            implements DividerItemDecoration.DividedViewHolder {
 
         private final PanelContent mPanelContent;
+
+        private boolean mDividerAllowedAbove = true;
 
         @VisibleForTesting
         LiveData<Slice> sliceLiveData;
@@ -103,6 +109,11 @@ public class PanelSlicesAdapter
             sliceLiveData = SliceLiveData.fromUri(context, sliceUri);
             sliceLiveData.observe(fragment.getViewLifecycleOwner(), sliceView);
 
+            // Do not show the divider above media devices switcher slice per request
+            if (sliceUri.equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
+                mDividerAllowedAbove = false;
+            }
+
             // Log Panel interaction
             sliceView.setOnSliceActionListener(
                     ((eventInfo, sliceItem) -> {
@@ -115,6 +126,16 @@ public class PanelSlicesAdapter
                                         eventInfo.actionType /* value */);
                     })
             );
+        }
+
+        @Override
+        public boolean isDividerAllowedAbove() {
+            return mDividerAllowedAbove;
+        }
+
+        @Override
+        public boolean isDividerAllowedBelow() {
+            return true;
         }
     }
 }
