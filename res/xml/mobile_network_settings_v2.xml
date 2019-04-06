@@ -94,11 +94,6 @@
         settings:controller="com.android.settings.network.telephony.EnabledNetworkModePreferenceController"/>
 
     <Preference
-        android:key="carrier_settings_euicc_key"
-        android:title="@string/carrier_settings_euicc"
-        settings:controller="com.android.settings.network.telephony.EuiccPreferenceController" />
-
-    <Preference
         android:key="carrier_settings_version_key"
         android:title="@string/carrier_settings_version"
         settings:controller="com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController"
