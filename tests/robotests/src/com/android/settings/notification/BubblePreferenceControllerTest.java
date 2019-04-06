@@ -29,6 +29,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -53,6 +54,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -68,6 +71,8 @@ public class BubblePreferenceControllerTest {
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
+    @Mock
+    private FragmentManager mFragmentManager;
 
     private BubblePreferenceController mController;
 
@@ -78,7 +83,8 @@ public class BubblePreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new BubblePreferenceController(mContext, mBackend));
+        when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
+        mController = spy(new BubblePreferenceController(mContext, mFragmentManager, mBackend));
     }
 
     @Test
@@ -117,7 +123,16 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfOffGlobally() {
+    public void testIsAvailable_ifOffGlobally_app() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mController.onResume(appRow, null, null, null);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_notIfOffGlobally_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
@@ -243,6 +258,19 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateState_app_offGlobally() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.label = "App!";
+        appRow.allowBubbles = true;
+        mController.onResume(appRow, null, null, null);
+
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
+        mController.updateState(pref);
+        assertFalse(pref.isChecked());
+    }
+
+    @Test
     public void testOnPreferenceChange_on_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = true;
@@ -312,5 +340,24 @@ public class BubblePreferenceControllerTest {
 
         assertFalse(appRow.allowBubbles);
         verify(mBackend, times(1)).setAllowBubbles(any(), anyInt(), eq(false));
+    }
+
+    @Test
+    public void testOnPreferenceChange_on_app_offGlobally() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.allowBubbles = false;
+        mController.onResume(appRow, null, null, null);
+
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
+        mController.displayPreference(mScreen);
+        mController.updateState(pref);
+
+        mController.onPreferenceChange(pref, true);
+
+        assertFalse(appRow.allowBubbles);
+        verify(mBackend, never()).setAllowBubbles(any(), anyInt(), eq(true));
+        verify(mFragmentManager, times(1)).beginTransaction();
     }
 }

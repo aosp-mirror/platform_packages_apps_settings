@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceManager.GetFeatureCallback;
 import android.hardware.face.FaceManager.SetFeatureCallback;
+import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -31,7 +32,7 @@ import com.android.settings.core.TogglePreferenceController;
  * Preference controller that manages the ability to use face authentication with/without
  * user attention. See {@link FaceManager#setRequireAttention(boolean, byte[])}.
  */
-public class FaceSettingsAttentionPreferenceController extends TogglePreferenceController {
+public class FaceSettingsAttentionPreferenceController extends FaceSettingsPreferenceController {
 
     public static final String KEY = "security_settings_face_require_attention";
 
@@ -46,6 +47,10 @@ public class FaceSettingsAttentionPreferenceController extends TogglePreferenceC
                 mPreference.setEnabled(true);
                 if (!success) {
                     mPreference.setChecked(!mPreference.isChecked());
+                } else {
+                    Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                            Settings.Secure.FACE_UNLOCK_ATTENTION_REQUIRED,
+                            mPreference.isChecked() ? 1 : 0, getUserId());
                 }
             }
         }

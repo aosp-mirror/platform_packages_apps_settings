@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Parcel;
 
 import com.android.settings.R;
@@ -60,6 +61,13 @@ public class EarlyWarningTip extends BatteryTip {
         return mState == StateType.HANDLED
                 ? R.drawable.ic_battery_status_maybe_24dp
                 : R.drawable.ic_battery_status_bad_24dp;
+    }
+
+    @Override
+    public ColorStateList getIconTint() {
+        return ColorStateList.valueOf(mState == StateType.HANDLED
+                ? R.color.battery_maybe_color_light
+                : R.color.battery_bad_color_light);
     }
 
     @Override

@@ -125,6 +125,7 @@ public class RadioInfo extends Activity {
             "Unknown"
     };
 
+    private static String[] mPhoneIndexLabels;
 
     private static final int CELL_INFO_LIST_RATE_DISABLED = Integer.MAX_VALUE;
     private static final int CELL_INFO_LIST_RATE_MAX = 0;
@@ -160,7 +161,7 @@ public class RadioInfo extends Activity {
         60000
     };
 
-    private void log(String s) {
+    private static void log(String s) {
         Log.d(TAG, s);
     }
 
@@ -171,15 +172,17 @@ public class RadioInfo extends Activity {
     private static final int EVENT_QUERY_SMSC_DONE = 1005;
     private static final int EVENT_UPDATE_SMSC_DONE = 1006;
 
-    private static final int MENU_ITEM_SELECT_BAND  = 0;
-    private static final int MENU_ITEM_VIEW_ADN     = 1;
-    private static final int MENU_ITEM_VIEW_FDN     = 2;
-    private static final int MENU_ITEM_VIEW_SDN     = 3;
-    private static final int MENU_ITEM_GET_IMS_STATUS = 4;
-    private static final int MENU_ITEM_TOGGLE_DATA  = 5;
+    private static final int MENU_ITEM_SELECT_BAND         = 0;
+    private static final int MENU_ITEM_VIEW_ADN            = 1;
+    private static final int MENU_ITEM_VIEW_FDN            = 2;
+    private static final int MENU_ITEM_VIEW_SDN            = 3;
+    private static final int MENU_ITEM_GET_IMS_STATUS      = 4;
+    private static final int MENU_ITEM_TOGGLE_DATA         = 5;
 
     private TextView mDeviceId; //DeviceId is the IMEI in GSM and the MEID in CDMA
     private TextView number;
+    private TextView mSubscriptionId;
+    private TextView mDds;
     private TextView mSubscriberId;
     private TextView callState;
     private TextView operatorName;
@@ -219,6 +222,7 @@ public class RadioInfo extends Activity {
     private Switch cbrsDataSwitch;
     private Switch dsdsSwitch;
     private Spinner preferredNetworkType;
+    private Spinner mSelectPhoneIndex;
     private Spinner cellInfoRefreshRateSpinner;
 
     private ConnectivityManager mConnectivityManager;
@@ -237,6 +241,7 @@ public class RadioInfo extends Activity {
 
     private int mPreferredNetworkTypeResult;
     private int mCellInfoRefreshRateIndex;
+    private int mSelectedPhoneIndex;
 
     private final NetworkRequest mDefaultNetworkRequest = new NetworkRequest.Builder()
             .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
@@ -346,6 +351,21 @@ public class RadioInfo extends Activity {
         preferredNetworkType.setSelection(mPreferredNetworkTypeResult, true);
     }
 
+    private void updatePhoneIndex(int phoneIndex, int subId) {
+        // unregister listeners on the old subId
+        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        mTelephonyManager.setCellInfoListRate(CELL_INFO_LIST_RATE_DISABLED);
+
+        // update the subId
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
+        mImsManager = ImsManager.getInstance(getApplicationContext(), phoneIndex);
+
+        // update the phoneId
+        phone = PhoneFactory.getPhone(phoneIndex);
+
+        updateAllFields();
+    }
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -406,13 +426,15 @@ public class RadioInfo extends Activity {
         mConnectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
         phone = PhoneFactory.getDefaultPhone();
 
-        //TODO: Need to update this if the default phoneId changes?
-        //      Better to have an instance per phone?
         mImsManager = ImsManager.getInstance(getApplicationContext(),
                 SubscriptionManager.getDefaultVoicePhoneId());
 
+        mPhoneIndexLabels = getPhoneIndexLabels(mTelephonyManager);
+
         mDeviceId = (TextView) findViewById(R.id.imei);
         number = (TextView) findViewById(R.id.number);
+        mSubscriptionId = (TextView) findViewById(R.id.subid);
+        mDds = (TextView) findViewById(R.id.dds);
         mSubscriberId = (TextView) findViewById(R.id.imsi);
         callState = (TextView) findViewById(R.id.call);
         operatorName = (TextView) findViewById(R.id.operator);
@@ -439,10 +461,17 @@ public class RadioInfo extends Activity {
         mPhyChanConfig = (TextView) findViewById(R.id.phy_chan_config);
 
         preferredNetworkType = (Spinner) findViewById(R.id.preferredNetworkType);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String> (this,
+        ArrayAdapter<String> preferredNetworkTypeAdapter = new ArrayAdapter<String> (this,
                 android.R.layout.simple_spinner_item, mPreferredNetworkLabels);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        preferredNetworkType.setAdapter(adapter);
+        preferredNetworkTypeAdapter
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        preferredNetworkType.setAdapter(preferredNetworkTypeAdapter);
+
+        mSelectPhoneIndex = (Spinner) findViewById(R.id.phoneIndex);
+        ArrayAdapter<String> phoneIndexAdapter = new ArrayAdapter<String> (this,
+                android.R.layout.simple_spinner_item, mPhoneIndexLabels);
+        phoneIndexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSelectPhoneIndex.setAdapter(phoneIndexAdapter);
 
         cellInfoRefreshRateSpinner = (Spinner) findViewById(R.id.cell_info_rate_select);
         ArrayAdapter<String> cellInfoAdapter = new ArrayAdapter<String>(this,
@@ -513,6 +542,7 @@ public class RadioInfo extends Activity {
 
         mCellInfoRefreshRateIndex = 0; //disabled
         mPreferredNetworkTypeResult = mPreferredNetworkLabels.length - 1; //Unknown
+        mSelectedPhoneIndex = 0; //phone 0
 
         //FIXME: Replace with TelephonyManager call
         phone.getPreferredNetworkType(
@@ -527,6 +557,10 @@ public class RadioInfo extends Activity {
 
         log("Started onResume");
 
+        updateAllFields();
+    }
+
+    private void updateAllFields() {
         updateMessageWaiting();
         updateCallRedirect();
         updateDataState();
@@ -539,6 +573,7 @@ public class RadioInfo extends Activity {
 
         updateLocation(mCellLocationResult);
         updateCellInfo(mCellInfoResult);
+        updateSubscriptionIds();
 
         mPingHostnameV4.setText(mPingHostnameResultV4);
         mPingHostnameV6.setText(mPingHostnameResultV6);
@@ -552,6 +587,10 @@ public class RadioInfo extends Activity {
         preferredNetworkType.setSelection(mPreferredNetworkTypeResult, true);
         preferredNetworkType.setOnItemSelectedListener(mPreferredNetworkHandler);
 
+        // set phone index
+        mSelectPhoneIndex.setSelection(mSelectedPhoneIndex, true);
+        mSelectPhoneIndex.setOnItemSelectedListener(mSelectPhoneIndexHandler);
+
         radioPowerOnSwitch.setOnCheckedChangeListener(mRadioPowerOnChangeListener);
         imsVolteProvisionedSwitch.setOnCheckedChangeListener(mImsVolteCheckedChangeListener);
         imsVtProvisionedSwitch.setOnCheckedChangeListener(mImsVtCheckedChangeListener);
@@ -563,19 +602,7 @@ public class RadioInfo extends Activity {
             cbrsDataSwitch.setOnCheckedChangeListener(mCbrsDataSwitchChangeListener);
         }
 
-        mTelephonyManager.listen(mPhoneStateListener,
-                  PhoneStateListener.LISTEN_CALL_STATE
-        //b/27803938 - RadioInfo currently cannot read PRECISE_CALL_STATE
-        //      | PhoneStateListener.LISTEN_PRECISE_CALL_STATE
-                | PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
-                | PhoneStateListener.LISTEN_DATA_ACTIVITY
-                | PhoneStateListener.LISTEN_CELL_LOCATION
-                | PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR
-                | PhoneStateListener.LISTEN_CALL_FORWARDING_INDICATOR
-                | PhoneStateListener.LISTEN_CELL_INFO
-                | PhoneStateListener.LISTEN_SERVICE_STATE
-                | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
-                | PhoneStateListener.LISTEN_PHYSICAL_CHANNEL_CONFIGURATION);
+        registerPhoneStateListener();
 
         mConnectivityManager.registerNetworkCallback(
                 mDefaultNetworkRequest, mNetworkCallback, mHandler);
@@ -611,6 +638,8 @@ public class RadioInfo extends Activity {
         mPreferredNetworkTypeResult = b.getInt("mPreferredNetworkTypeResult",
                                                mPreferredNetworkLabels.length - 1);
 
+        mSelectedPhoneIndex = b.getInt("mSelectedPhoneIndex", 0);
+
         mCellInfoRefreshRateIndex = b.getInt("mCellInfoRefreshRateIndex", 0);
     }
 
@@ -621,6 +650,7 @@ public class RadioInfo extends Activity {
         outState.putString("mHttpClientTestResult", mHttpClientTestResult);
 
         outState.putInt("mPreferredNetworkTypeResult", mPreferredNetworkTypeResult);
+        outState.putInt("mSelectedPhoneIndex", mSelectedPhoneIndex);
         outState.putInt("mCellInfoRefreshRateIndex", mCellInfoRefreshRateIndex);
 
     }
@@ -666,6 +696,34 @@ public class RadioInfo extends Activity {
         }
         item.setVisible(visible);
         return true;
+    }
+
+    // returns array of string labels for each phone index. The array index is equal to the phone
+    // index.
+    private static String[] getPhoneIndexLabels(TelephonyManager tm) {
+        int phones = tm.getPhoneCount();
+        String[] labels = new String[phones];
+        for (int i = 0; i < phones; i++) {
+            labels[i] = "Phone " + i;
+        }
+        return labels;
+    }
+
+    // register mPhoneStateListener for relevant fields using the current TelephonyManager
+    private void registerPhoneStateListener() {
+        mTelephonyManager.listen(mPhoneStateListener,
+                  PhoneStateListener.LISTEN_CALL_STATE
+        //b/27803938 - RadioInfo currently cannot read PRECISE_CALL_STATE
+        //      | PhoneStateListener.LISTEN_PRECISE_CALL_STATE
+                | PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
+                | PhoneStateListener.LISTEN_DATA_ACTIVITY
+                | PhoneStateListener.LISTEN_CELL_LOCATION
+                | PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR
+                | PhoneStateListener.LISTEN_CALL_FORWARDING_INDICATOR
+                | PhoneStateListener.LISTEN_CELL_INFO
+                | PhoneStateListener.LISTEN_SERVICE_STATE
+                | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
+                | PhoneStateListener.LISTEN_PHYSICAL_CHANNEL_CONFIGURATION);
     }
 
     private void updateDnsCheckState() {
@@ -887,6 +945,11 @@ public class RadioInfo extends Activity {
 
     private final void updateCellInfo(List<CellInfo> arrayCi) {
         mCellInfo.setText(buildCellInfoString(arrayCi));
+    }
+
+    private final void updateSubscriptionIds() {
+        mSubscriptionId.setText(Integer.toString(phone.getSubId()));
+        mDds.setText(Integer.toString(SubscriptionManager.getDefaultDataSubscriptionId()));
     }
 
     private final void
@@ -1505,6 +1568,35 @@ public class RadioInfo extends Activity {
                 log("Calling setPreferredNetworkType(" + mPreferredNetworkTypeResult + ")");
                 Message msg = mHandler.obtainMessage(EVENT_SET_PREFERRED_TYPE_DONE);
                 phone.setPreferredNetworkType(mPreferredNetworkTypeResult, msg);
+            }
+        }
+
+        public void onNothingSelected(AdapterView parent) {
+        }
+    };
+
+    AdapterView.OnItemSelectedListener mSelectPhoneIndexHandler =
+            new AdapterView.OnItemSelectedListener() {
+
+        public void onItemSelected(AdapterView parent, View v, int pos, long id) {
+            if (pos >= 0 && pos <= mPhoneIndexLabels.length - 1) {
+                // the array position is equal to the phone index
+                int phoneIndex = pos;
+                Phone[] phones = PhoneFactory.getPhones();
+                if (phones == null || phones.length <= phoneIndex) {
+                    log("phoneIndex " + phoneIndex + " is invalid");
+                    return;
+                }
+                log("switching to phone " + phoneIndex);
+                // getSubId says it takes a slotIndex, but it actually takes a phone index
+                int[] subIds = SubscriptionManager.getSubId(phoneIndex);
+                if (subIds == null || subIds.length < 1) {
+                    log("no subscription found for phoneIndex " + phoneIndex);
+                    return;
+                }
+                mSelectedPhoneIndex = phoneIndex;
+
+                updatePhoneIndex(phoneIndex, subIds[0]);
             }
         }
 

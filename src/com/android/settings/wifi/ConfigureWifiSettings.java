@@ -74,7 +74,8 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context, this);
+        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context, this,
+                getSettingsLifecycle());
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
                 getSettingsLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);

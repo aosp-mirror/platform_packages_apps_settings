@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
 
@@ -53,11 +54,13 @@ public class FaceSettings extends DashboardFragment {
     private static final String TAG = "FaceSettings";
     private static final String KEY_TOKEN = "key_token";
 
+    private UserManager mUserManager;
     private FaceManager mFaceManager;
     private int mUserId;
     private byte[] mToken;
     private FaceSettingsAttentionPreferenceController mAttentionController;
     private FaceSettingsRemoveButtonPreferenceController mRemoveController;
+    private List<AbstractPreferenceController> mControllers;
 
     private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
         if (getActivity() != null) {
@@ -95,9 +98,23 @@ public class FaceSettings extends DashboardFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mUserManager = getPrefContext().getSystemService(UserManager.class);
         mFaceManager = getPrefContext().getSystemService(FaceManager.class);
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
+
+        // There is no better way to do this :/
+        for (AbstractPreferenceController controller : mControllers) {
+            if (controller instanceof  FaceSettingsPreferenceController) {
+                ((FaceSettingsPreferenceController) controller).setUserId(mUserId);
+            }
+        }
+        mRemoveController.setUserId(mUserId);
+
+        // Don't show keyguard controller for work profile settings.
+        if (mUserManager.isManagedProfile(mUserId)) {
+            removePreference(FaceSettingsKeyguardPreferenceController.KEY);
+        }
 
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
@@ -128,6 +145,7 @@ public class FaceSettings extends DashboardFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CONFIRM_REQUEST) {
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
+                mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
                 if (data != null) {
                     mToken = data.getByteArrayExtra(
@@ -161,10 +179,9 @@ public class FaceSettings extends DashboardFragment {
         if (!isAvailable(context)) {
             return null;
         }
-        final List<AbstractPreferenceController> controllers =
-                buildPreferenceControllers(context, getSettingsLifecycle());
+        mControllers = buildPreferenceControllers(context, getSettingsLifecycle());
         // There's no great way of doing this right now :/
-        for (AbstractPreferenceController controller : controllers) {
+        for (AbstractPreferenceController controller : mControllers) {
             if (controller instanceof FaceSettingsAttentionPreferenceController) {
                 mAttentionController = (FaceSettingsAttentionPreferenceController) controller;
             } else if (controller instanceof FaceSettingsRemoveButtonPreferenceController) {
@@ -174,7 +191,7 @@ public class FaceSettings extends DashboardFragment {
             }
         }
 
-        return controllers;
+        return mControllers;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
