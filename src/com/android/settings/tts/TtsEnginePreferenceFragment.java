@@ -15,7 +15,6 @@ import android.widget.Checkable;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -87,12 +86,10 @@ public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment
 
         mEnginePreferenceCategory.removeAll();
 
-        SettingsActivity activity = (SettingsActivity) getActivity();
-
         List<EngineInfo> engines = mEnginesHelper.getEngines();
         for (EngineInfo engine : engines) {
             TtsEnginePreference enginePref =
-                    new TtsEnginePreference(getPrefContext(), engine, this, activity);
+                    new TtsEnginePreference(getPrefContext(), engine, this);
             mEnginePreferenceCategory.addPreference(enginePref);
         }
     }
@@ -161,6 +158,7 @@ public class TtsEnginePreferenceFragment extends SettingsPreferenceFragment
     public void onUpdateEngine(int status) {
         if (status == TextToSpeech.SUCCESS) {
             Log.d(
+
                     TAG,
                     "Updating engine: Successfully bound to the engine: "
                             + mTts.getCurrentEngine());
