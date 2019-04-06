@@ -60,18 +60,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mPreference = new Preference(mContext);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MAINLINE_MODULE, true);
-    }
-
-    @Test
-    public void getAvailabilityStatus_featureDisabled_unavailable() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MAINLINE_MODULE, false);
-
-        final MainlineModuleVersionPreferenceController controller =
-                new MainlineModuleVersionPreferenceController(mContext, "key");
-
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
