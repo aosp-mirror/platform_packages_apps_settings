@@ -46,6 +46,7 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.Utils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowPermissionControllerManager;
@@ -119,8 +120,9 @@ public class PermissionBarChartPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_permissionHubEnabled_shouldReturnAvailableUnsearchable() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED,
+                "true", true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
@@ -180,8 +182,9 @@ public class PermissionBarChartPreferenceControllerTest {
 
     @Test
     public void onStart_usageInfosNotSetAndPermissionHubEnabled_shouldShowProgressBar() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED,
+                "true", true);
         mController.displayPreference(mScreen);
 
         mController.onStart();
@@ -192,8 +195,9 @@ public class PermissionBarChartPreferenceControllerTest {
 
     @Test
     public void onStart_usageInfosSetAndPermissionHubEnabled_shouldNotUpdatePrefLoadingState() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED,
+                "true", true);
         final RuntimePermissionUsageInfo info1 =
                 new RuntimePermissionUsageInfo("permission 1", 10);
         mController.mOldUsageInfos.add(info1);
@@ -207,8 +211,9 @@ public class PermissionBarChartPreferenceControllerTest {
 
     @Test
     public void onStart_permissionHubDisabled_shouldNotShowProgressBar() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "false", false);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED,
+                "false", true);
 
         mController.onStart();
 

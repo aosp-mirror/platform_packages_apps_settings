@@ -33,6 +33,7 @@ import android.widget.TextView;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settingslib.location.RecentLocationAccesses;
 import com.android.settingslib.widget.LayoutPreference;
@@ -94,8 +95,8 @@ public class RecentLocationAccessPreferenceControllerTest {
 
     @Test
     public void isAvailable_permissionHubEnabled_shouldReturnTrue() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
 
         assertThat(mController.isAvailable()).isEqualTo(true);
     }

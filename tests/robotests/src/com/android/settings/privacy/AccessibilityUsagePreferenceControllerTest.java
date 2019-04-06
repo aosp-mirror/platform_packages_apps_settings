@@ -25,6 +25,7 @@ import android.content.Context;
 import android.provider.DeviceConfig;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.After;
@@ -74,8 +75,8 @@ public class AccessibilityUsagePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_noEnabledServices_shouldReturnUnsupported() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
         mAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
         AccessibilityUsagePreferenceController controller =
                 new AccessibilityUsagePreferenceController(mContext, "test_key");
@@ -85,8 +86,8 @@ public class AccessibilityUsagePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_enabledServices_shouldReturnAvailableUnsearchable() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
         mAccessibilityManager.setEnabledAccessibilityServiceList(
                 new ArrayList<>(Arrays.asList(new AccessibilityServiceInfo())));
         AccessibilityUsagePreferenceController controller =
