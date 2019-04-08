@@ -143,7 +143,9 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(EnabledNetworkModePreferenceController.class).init(mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
-        use(EuiccPreferenceController.class).init(mSubId);
+        if (!FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
+            use(EuiccPreferenceController.class).init(mSubId);
+        }
         use(WifiCallingPreferenceController.class).init(mSubId);
 
         final OpenNetworkSelectPagePreferenceController openNetworkSelectPagePreferenceController =
