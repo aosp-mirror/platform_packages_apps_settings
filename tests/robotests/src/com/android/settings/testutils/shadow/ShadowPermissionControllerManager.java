@@ -18,6 +18,7 @@ package com.android.settings.testutils.shadow;
 
 import android.annotation.CallbackExecutor;
 import android.content.Context;
+import android.os.Handler;
 import android.permission.PermissionControllerManager;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,7 @@ import java.util.concurrent.Executor;
 @Implements(PermissionControllerManager.class)
 public class ShadowPermissionControllerManager {
 
-    protected void __constructor__(Context context) {
+    protected void __constructor__(Context contexts, Handler handler) {
         // no nothing, everything is shadowed
     }
 

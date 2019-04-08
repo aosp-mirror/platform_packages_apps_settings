@@ -24,6 +24,7 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -53,10 +54,8 @@ public class DeviceIdentifierAccessRestrictionsPreferenceController
     public boolean isAvailable() {
         // If the new access restrictions have been disabled from the server side then do not
         // display the option.
-        boolean disabledFromServerSide = Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
-                        DeviceConfig.Privacy.
-                                PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED));
+        boolean disabledFromServerSide = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
+                        Utils.PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED, false);
         return !disabledFromServerSide;
     }
 
