@@ -20,8 +20,6 @@ import static android.Manifest.permission_group.CAMERA;
 import static android.Manifest.permission_group.LOCATION;
 import static android.Manifest.permission_group.MICROPHONE;
 
-import static com.android.settingslib.widget.BarChartPreference.MAXIMUM_BAR_VIEWS;
-
 import static java.util.concurrent.TimeUnit.DAYS;
 
 import android.content.Context;
@@ -51,7 +49,6 @@ import com.android.settingslib.widget.BarChartPreference;
 import com.android.settingslib.widget.BarViewInfo;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -93,8 +90,8 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
     @Override
     public int getAvailabilityStatus() {
         return Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
-                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED)) ?
+                DeviceConfig.getProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                        com.android.settings.Utils.PROPERTY_PERMISSIONS_HUB_ENABLED)) ?
                 AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
