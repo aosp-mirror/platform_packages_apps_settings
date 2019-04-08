@@ -116,7 +116,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             return;
         }
 
-        if (mSubscriptionsListener.isAirplaneModeOn()) {
+        if (!isAvailable()) {
             for (Preference pref : mSubscriptionPreferences.values()) {
                 mPreferenceGroup.removePreference(pref);
             }
