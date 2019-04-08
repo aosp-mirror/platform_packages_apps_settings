@@ -20,6 +20,7 @@ import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -186,19 +187,24 @@ public class SubscriptionsPreferenceControllerTest {
     }
 
     @Test
-    public void onSubscriptionsChanged_countBecameOne_eventFired() {
+    public void onSubscriptionsChanged_countBecameOne_eventFiredAndPrefsRemoved() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        when(sub1.getSubscriptionId()).thenReturn(1);
+        when(sub2.getSubscriptionId()).thenReturn(2);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         mController.onResume();
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isTrue();
+        verify(mPreferenceCategory, times(2)).addPreference(any(Preference.class));
 
         final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
         mController.onSubscriptionsChanged();
         assertThat(mController.isAvailable()).isFalse();
         assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
+
+        verify(mPreferenceCategory, times(2)).removePreference(any(Preference.class));
     }
 
 
