@@ -65,6 +65,13 @@
             android:value="com.android.settings.Settings$WriteSettingsActivity" />
     </Preference>
 
+    <com.android.settingslib.widget.apppreference.AppPreference
+        android:key="notification_assistant"
+        android:title="@string/notification_assistant_title"
+        android:summary="@string/summary_placeholder"
+        settings:fragment="com.android.settings.notification.NotificationAssistantPicker"
+        settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>
+
     <Preference
         android:key="notification_access"
         android:title="@string/manage_notification_access_title"
