@@ -78,11 +78,8 @@ class SliceDataConverter {
 
     private Context mContext;
 
-    private List<SliceData> mSliceData;
-
     public SliceDataConverter(Context context) {
         mContext = context;
-        mSliceData = new ArrayList<>();
     }
 
     /**
@@ -96,9 +93,7 @@ class SliceDataConverter {
      * {@link com.android.settings.core.BasePreferenceController}.
      */
     public List<SliceData> getSliceData() {
-        if (!mSliceData.isEmpty()) {
-            return mSliceData;
-        }
+        List<SliceData> sliceData = new ArrayList<>();
 
         final Collection<Class> indexableClasses = FeatureFactory.getFactory(mContext)
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
@@ -117,12 +112,12 @@ class SliceDataConverter {
 
             final List<SliceData> providerSliceData = getSliceDataFromProvider(provider,
                     fragmentName);
-            mSliceData.addAll(providerSliceData);
+            sliceData.addAll(providerSliceData);
         }
 
         final List<SliceData> a11ySliceData = getAccessibilitySliceData();
-        mSliceData.addAll(a11ySliceData);
-        return mSliceData;
+        sliceData.addAll(a11ySliceData);
+        return sliceData;
     }
 
     private List<SliceData> getSliceDataFromProvider(SearchIndexProvider provider,
