@@ -46,7 +46,8 @@ public class SecureNfcEnabler extends BaseNfcEnabler {
                 mPreference.setEnabled(false);
                 break;
             case NfcAdapter.STATE_ON:
-                mPreference.setChecked(mPreference.isEnabled());
+                mPreference.setSummary(R.string.nfc_secure_toggle_summary);
+                mPreference.setChecked(mPreference.isChecked());
                 mPreference.setEnabled(true);
                 break;
             case NfcAdapter.STATE_TURNING_ON:
