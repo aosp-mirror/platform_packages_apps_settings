@@ -77,8 +77,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         mCardsContainer.setAdapter(mContextualCardsAdapter);
         mContextualCardManager.setListener(mContextualCardsAdapter);
         mCardsContainer.setListener(this);
-        mItemTouchHelper = new ItemTouchHelper(
-                new SwipeDismissalDelegate(context, mContextualCardsAdapter));
+        mItemTouchHelper = new ItemTouchHelper(new SwipeDismissalDelegate(mContextualCardsAdapter));
         mItemTouchHelper.attachToRecyclerView(mCardsContainer);
 
         return rootView;
