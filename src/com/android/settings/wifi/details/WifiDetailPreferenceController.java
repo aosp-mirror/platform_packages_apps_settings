@@ -401,6 +401,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton1Icon(R.drawable.ic_settings_delete)
                 .setButton1OnClickListener(view -> forgetNetwork())
                 .setButton2Text(R.string.wifi_sign_in_button_text)
+                .setButton2Icon(R.drawable.ic_settings_sign_in)
                 .setButton2OnClickListener(view -> signIntoNetwork())
                 .setButton3Text(R.string.wifi_connect)
                 .setButton3Icon(R.drawable.ic_settings_wireless)
