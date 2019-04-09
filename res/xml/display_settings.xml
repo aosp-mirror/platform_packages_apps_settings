@@ -53,9 +53,6 @@
         settings:keywords="@string/keywords_display_wallpaper"
         settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.display.WallpaperPreferenceController">
-        <intent
-            android:targetPackage="@string/config_wallpaper_picker_package"
-            android:targetClass="@string/config_wallpaper_picker_class" />
     </com.android.settingslib.RestrictedPreference>
 
 
