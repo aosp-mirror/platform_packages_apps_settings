@@ -31,7 +31,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class ConditionFooterContextualCardRenderer implements ContextualCardRenderer {
-    public static final int VIEW_TYPE = R.layout.homepage_condition_footer;
+    public static final int VIEW_TYPE = R.layout.conditional_card_footer;
     private static final String TAG = "ConditionFooterRenderer";
 
     private final Context mContext;
