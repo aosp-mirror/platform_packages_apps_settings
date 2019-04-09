@@ -21,21 +21,35 @@
     android:layout_height="wrap_content"
     style="@style/ContextualCardStyle">
 
-    <ViewFlipper
-        android:id="@+id/view_flipper"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <androidx.slice.widget.SliceView
-            android:id="@+id/slice_view"
+        <include layout="@layout/dismissal_swipe_background"/>
+
+        <ViewFlipper
+            android:id="@+id/view_flipper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:importantForAccessibility="no"
-            style="@style/SliceViewStyle"/>
+            android:layout_height="wrap_content">
 
-        <!--dismissal view-->
-        <include layout="@layout/homepage_dismissal_view"/>
+            <LinearLayout
+                android:id="@+id/slice_view_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/contextual_card_background">
 
-    </ViewFlipper>
+                <androidx.slice.widget.SliceView
+                    android:id="@+id/slice_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:importantForAccessibility="no"
+                    style="@style/SliceViewStyle"/>
+            </LinearLayout>
+
+            <!--dismissal view-->
+            <include layout="@layout/homepage_dismissal_view"/>
+
+        </ViewFlipper>
+    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>
