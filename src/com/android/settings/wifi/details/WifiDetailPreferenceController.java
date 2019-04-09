@@ -450,8 +450,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                         headerPref.findViewById(R.id.entity_header));
 
         ImageView iconView = headerPref.findViewById(R.id.entity_header_icon);
-        iconView.setBackground(
-                mContext.getDrawable(R.drawable.ic_settings_widget_background));
+
         iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
         mEntityHeaderController.setLabel(mAccessPoint.getTitle());
@@ -603,10 +602,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mRssiSignalLevel = signalLevel;
         Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
 
-        wifiIcon.setTintList(Utils.getColorAccent(mContext));
         if (mEntityHeaderController != null) {
             mEntityHeaderController
-                    .setIcon(rescaleIconForHeader(wifiIcon)).done(mFragment.getActivity(),
+                    .setIcon(redrawIconForHeader(wifiIcon)).done(mFragment.getActivity(),
                             true /* rebind */);
         }
 
@@ -618,7 +616,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mSignalStrengthPref.setVisible(true);
     }
 
-    private Drawable rescaleIconForHeader(Drawable original) {
+    private Drawable redrawIconForHeader(Drawable original) {
         final int iconSize = mContext.getResources().getDimensionPixelSize(
                 R.dimen.wifi_detail_page_header_image_size);
         final int actualWidth = original.getMinimumWidth();
@@ -629,10 +627,19 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             return original;
         }
 
+        // clear tint list to make sure can set 87% black after enlarge
+        original.setTintList(null);
+
+        // enlarge icon size
         final Bitmap bitmap = Utils.createBitmap(original,
                 iconSize /*width*/,
                 iconSize /*height*/);
-        return new BitmapDrawable(null /*resource*/, bitmap);
+        Drawable newIcon = new BitmapDrawable(null /*resource*/, bitmap);
+
+        // config color for 87% black after enlarge
+        newIcon.setTintList(Utils.getColorAttr(mContext, android.R.attr.textColorPrimary));
+
+        return newIcon;
     }
 
     private void refreshFrequency() {
