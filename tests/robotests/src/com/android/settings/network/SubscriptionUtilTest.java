@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -107,5 +108,33 @@ public class SubscriptionUtilTest {
         assertThat(subs).hasSize(2);
         assertThat(subs.get(0).getSubscriptionId()).isEqualTo(1);
         assertThat(subs.get(1).getSubscriptionId()).isEqualTo(4);
+    }
+
+    @Test
+    public void getActiveSubscriptions_nullInfoFromSubscriptionManager_nonNullResult() {
+        when(mManager.getActiveSubscriptionInfoList(anyBoolean())).thenReturn(null);
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
+        assertThat(subs).isNotNull();
+        assertThat(subs).isEmpty();
+    }
+
+    @Test
+    public void getActiveSubscriptions_oneSubscription_oneResult() {
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(mManager.getActiveSubscriptionInfoList(anyBoolean())).thenReturn(Arrays.asList(info));
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
+        assertThat(subs).isNotNull();
+        assertThat(subs).hasSize(1);
+    }
+
+    @Test
+    public void getActiveSubscriptions_twoSubscriptions_twoResults() {
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(mManager.getActiveSubscriptionInfoList(anyBoolean())).thenReturn(
+                Arrays.asList(info1, info2));
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
+        assertThat(subs).isNotNull();
+        assertThat(subs).hasSize(2);
     }
 }
