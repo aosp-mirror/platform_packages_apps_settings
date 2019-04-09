@@ -21,7 +21,6 @@ import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -31,7 +30,9 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
+import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 
 import org.junit.After;
@@ -53,6 +54,8 @@ import androidx.preference.PreferenceScreen;
 @RunWith(RobolectricTestRunner.class)
 public class MobileNetworkListControllerTest {
     @Mock
+    TelephonyManager mTelephonyManager;
+    @Mock
     EuiccManager mEuiccManager;
 
     @Mock
@@ -69,7 +72,9 @@ public class MobileNetworkListControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(Robolectric.setupActivity(Activity.class));
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.EUICC_PROVISIONED, 1);
         when(mPreferenceScreen.getContext()).thenReturn(mContext);
         mAddMorePreference = new Preference(mContext);
         when(mPreferenceScreen.findPreference(MobileNetworkListController.KEY_ADD_MORE)).thenReturn(
@@ -99,6 +104,7 @@ public class MobileNetworkListControllerTest {
     @Test
     public void displayPreference_eSimSupported_addMoreLinkIsVisible() {
         when(mEuiccManager.isEnabled()).thenReturn(true);
+        when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
         assertThat(mAddMorePreference.isVisible()).isTrue();
