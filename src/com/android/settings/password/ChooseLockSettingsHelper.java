@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -452,6 +453,7 @@ public final class ChooseLockSettingsHelper {
     }
 
     private void copyInternalExtras(Intent inIntent, Intent outIntent) {
+        SetupWizardUtils.copySetupExtras(inIntent, outIntent);
         String theme = inIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
         if (theme != null) {
             outIntent.putExtra(WizardManagerHelper.EXTRA_THEME, theme);
