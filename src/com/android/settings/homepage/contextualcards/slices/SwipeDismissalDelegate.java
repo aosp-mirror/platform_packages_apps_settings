@@ -16,10 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.view.View;
-import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -36,11 +34,9 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
         void onSwiped(int position);
     }
 
-    private final Context mContext;
     private final SwipeDismissalDelegate.Listener mListener;
 
-    public SwipeDismissalDelegate(Context context, SwipeDismissalDelegate.Listener listener) {
-        mContext = context;
+    public SwipeDismissalDelegate(SwipeDismissalDelegate.Listener listener) {
         mListener = listener;
     }
 
@@ -59,14 +55,10 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
         switch (viewHolder.getItemViewType()) {
             case SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH:
             case SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH:
-                //TODO(b/129438972): Convert this to a regular view.
-                final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
-
-                // As we are using ViewFlipper to switch between the initial view and
-                // dismissal view, here we are making sure the current displayed view is the
-                // initial view of either slice full card or half card, and only allow swipe on
-                // these two types.
-                if (viewFlipper.getCurrentView().getId() != getInitialViewId(viewHolder)) {
+                // Here we are making sure the current displayed view is the initial view of
+                // either slice full card or half card, and only allow swipe on these two types.
+                if (viewHolder.itemView.findViewById(R.id.dismissal_view).getVisibility()
+                        == View.VISIBLE) {
                     // Disable swiping when we are in the dismissal view
                     return 0;
                 }
@@ -114,13 +106,6 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
         getDefaultUIUtil().onDraw(c, recyclerView, view, dX, dY, actionState, isCurrentlyActive);
     }
 
-    private int getInitialViewId(RecyclerView.ViewHolder viewHolder) {
-        if (viewHolder.getItemViewType() == SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH) {
-            return R.id.content;
-        }
-        return R.id.slice_view_wrapper;
-    }
-
     /**
      * Get the foreground view from the {@link android.widget.FrameLayout} as we only swipe
      * the foreground out in {@link SwipeDismissalDelegate#onChildDraw} and gets the view
@@ -132,6 +117,6 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
         if (viewHolder.getItemViewType() == SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH) {
             return ((SliceHalfCardRendererHelper.HalfCardViewHolder) viewHolder).content;
         }
-        return ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceViewWrapper;
+        return ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceView;
     }
 }
