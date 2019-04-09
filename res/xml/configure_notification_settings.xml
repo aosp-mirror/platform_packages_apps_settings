@@ -19,13 +19,6 @@
                   android:title="@string/configure_notification_settings"
                   android:key="configure_notification_settings">
 
-    <com.android.settingslib.widget.apppreference.AppPreference
-        android:key="notification_assistant"
-        android:title="@string/notification_assistant_title"
-        android:summary="@string/summary_placeholder"
-        settings:fragment="com.android.settings.notification.NotificationAssistantPicker"
-        settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>
-
     <SwitchPreference
         android:key="asst_capability_prioritizer"
         android:title="@string/asst_capability_prioritizer_title"
