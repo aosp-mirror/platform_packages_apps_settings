@@ -47,6 +47,7 @@ import android.widget.TextView;
 
 import androidx.annotation.StringRes;
 import androidx.annotation.UiThread;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
@@ -259,6 +260,24 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             Log.d(TAG, "Easy connect enrollee callback onFailure " + code);
             new EasyConnectEnrolleeStatusCallback().onFailure(code);
         });
+    }
+
+    @Override
+    public void onPause() {
+        if (mCamera != null) {
+            mCamera.stop();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (!isGoingInitiator()) {
+            restartCamera();
+        }
     }
 
     @Override
@@ -701,5 +720,10 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     public void onAccessPointsChanged() {
         // Do nothing.
+    }
+
+    @VisibleForTesting
+    protected boolean isDecodeTaskAlive() {
+        return mCamera != null && mCamera.isDecodeTaskAlive();
     }
 }
