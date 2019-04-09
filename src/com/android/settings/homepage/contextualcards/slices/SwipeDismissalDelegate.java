@@ -18,9 +18,6 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ViewFlipper;
 
@@ -41,18 +38,10 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
 
     private final Context mContext;
     private final SwipeDismissalDelegate.Listener mListener;
-    private final Drawable mIconDelete;
-    private final Paint mBgPaint;
-    private final int mBgCornerRadius;
 
     public SwipeDismissalDelegate(Context context, SwipeDismissalDelegate.Listener listener) {
         mContext = context;
         mListener = listener;
-        mIconDelete = mContext.getDrawable(R.drawable.ic_delete);
-        mBgPaint = new Paint();
-        mBgPaint.setColor(mContext.getColor(R.color.homepage_card_dismissal_background));
-        mBgCornerRadius = mContext.getResources()
-                .getDimensionPixelSize(R.dimen.homepage_card_corner_radius);
     }
 
     /**
@@ -101,40 +90,48 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
     }
 
     @Override
+    public void clearView(@NonNull RecyclerView recyclerView,
+            @NonNull RecyclerView.ViewHolder viewHolder) {
+        final View view = getSwipeableView(viewHolder);
+        getDefaultUIUtil().clearView(view);
+    }
+
+    @Override
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
             @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState,
             boolean isCurrentlyActive) {
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        final View view = getSwipeableView(viewHolder);
+        final View iconStart = viewHolder.itemView.findViewById(R.id.dismissal_icon_start);
+        final View iconEnd = viewHolder.itemView.findViewById(R.id.dismissal_icon_end);
 
-        final View itemView = viewHolder.itemView;
-        final int iconMargin = mContext.getResources()
-                .getDimensionPixelSize(R.dimen.homepage_card_dismissal_side_margin);
-        final int iconTop =
-                itemView.getTop() + (itemView.getHeight() - mIconDelete.getIntrinsicHeight()) / 2;
-        final int iconBottom = iconTop + mIconDelete.getIntrinsicHeight();
-
-        if (dX > 0) { //swipe to the right
-            final int iconLeft = itemView.getLeft() + iconMargin;
-            final int iconRight = iconLeft + mIconDelete.getIntrinsicWidth();
-            final RectF rect = new RectF(itemView.getLeft(), itemView.getTop(),
-                    itemView.getLeft() + ((int) dX) + mBgCornerRadius, itemView.getBottom());
-            mIconDelete.setBounds(iconLeft, iconTop, iconRight, iconBottom);
-            c.drawRoundRect(rect, mBgCornerRadius, mBgCornerRadius, mBgPaint);
+        if (dX > 0) {
+            iconStart.setVisibility(View.VISIBLE);
+            iconEnd.setVisibility(View.GONE);
         } else if (dX < 0) {
-            final int iconRight = itemView.getRight() - iconMargin;
-            final int iconLeft = iconRight - mIconDelete.getIntrinsicWidth();
-            final RectF rect = new RectF(itemView.getRight() + ((int) dX), itemView.getTop(),
-                    itemView.getRight(), itemView.getBottom());
-            mIconDelete.setBounds(iconLeft, iconTop, iconRight, iconBottom);
-            c.drawRoundRect(rect, mBgCornerRadius, mBgCornerRadius, mBgPaint);
+            iconStart.setVisibility(View.GONE);
+            iconEnd.setVisibility(View.VISIBLE);
         }
-        mIconDelete.draw(c);
+        getDefaultUIUtil().onDraw(c, recyclerView, view, dX, dY, actionState, isCurrentlyActive);
     }
 
     private int getInitialViewId(RecyclerView.ViewHolder viewHolder) {
         if (viewHolder.getItemViewType() == SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH) {
             return R.id.content;
         }
-        return R.id.slice_view;
+        return R.id.slice_view_wrapper;
+    }
+
+    /**
+     * Get the foreground view from the {@link android.widget.FrameLayout} as we only swipe
+     * the foreground out in {@link SwipeDismissalDelegate#onChildDraw} and gets the view
+     * beneath revealed.
+     *
+     * @return The foreground view.
+     */
+    private View getSwipeableView(RecyclerView.ViewHolder viewHolder) {
+        if (viewHolder.getItemViewType() == SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH) {
+            return ((SliceHalfCardRendererHelper.HalfCardViewHolder) viewHolder).content;
+        }
+        return ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceViewWrapper;
     }
 }

@@ -99,9 +99,9 @@ public class SwipeDismissalDelegateTest {
         final RecyclerView.ViewHolder holder = getSliceViewHolder();
         final ViewFlipper viewFlipper = holder.itemView.findViewById(R.id.view_flipper);
         viewFlipper.setDisplayedChild(0);
-        final View sliceView = holder.itemView.findViewById(R.id.slice_view);
+        final View sliceViewWrapper = holder.itemView.findViewById(R.id.slice_view_wrapper);
 
-        assertThat(viewFlipper.getCurrentView()).isEqualTo(sliceView);
+        assertThat(viewFlipper.getCurrentView()).isEqualTo(sliceViewWrapper);
         assertThat(mDismissalDelegate.getMovementFlags(mRecyclerView, getSliceViewHolder()))
                 .isNotEqualTo(0);
     }
