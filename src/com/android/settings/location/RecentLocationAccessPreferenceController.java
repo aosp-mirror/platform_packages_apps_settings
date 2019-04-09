@@ -26,6 +26,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.location.RecentLocationAccesses;
@@ -62,8 +63,8 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
     @Override
     public boolean isAvailable() {
         return Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
-                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED));
+                DeviceConfig.getProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                        Utils.PROPERTY_PERMISSIONS_HUB_ENABLED));
     }
 
     @Override

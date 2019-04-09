@@ -70,6 +70,7 @@ public class EarlyWarningTipTest {
         assertThat(tip.getTitle(mContext)).isEqualTo("Turn on Battery Saver");
         assertThat(tip.getSummary(mContext)).isEqualTo("Battery may run out earlier than usual");
         assertThat(tip.getIconId()).isEqualTo(R.drawable.ic_battery_status_bad_24dp);
+        assertThat(tip.getIconTintColorId()).isEqualTo(R.color.battery_bad_color_light);
     }
 
     @Test
@@ -80,6 +81,7 @@ public class EarlyWarningTipTest {
         assertThat(tip.getTitle(mContext)).isEqualTo("Battery Saver is on");
         assertThat(tip.getSummary(mContext)).isEqualTo("Some features may be limited");
         assertThat(tip.getIconId()).isEqualTo(R.drawable.ic_battery_status_maybe_24dp);
+        assertThat(tip.getIconTintColorId()).isEqualTo(R.color.battery_maybe_color_light);
     }
 
     @Test

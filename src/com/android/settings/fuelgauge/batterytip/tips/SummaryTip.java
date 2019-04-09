@@ -60,8 +60,8 @@ public class SummaryTip extends BatteryTip {
     }
 
     @Override
-    public ColorStateList getIconTint() {
-        return ColorStateList.valueOf(R.color.battery_good_color_light);
+    public int getIconTintColorId() {
+        return R.color.battery_good_color_light;
     }
 
     @Override
