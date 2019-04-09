@@ -34,7 +34,6 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountFragment;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
-import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -247,7 +246,6 @@ public class SettingsGateway {
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
             ExternalSourcesDetails.class.getName(),
-            DefaultAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
             PictureInPictureSettings.class.getName(),
@@ -308,7 +306,6 @@ public class SettingsGateway {
             // Home page > Apps & Notifications
             Settings.UserSettingsActivity.class.getName(),
             Settings.ConfigureNotificationSettingsActivity.class.getName(),
-            Settings.AdvancedAppsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
             // Home page > Security & screen lock
