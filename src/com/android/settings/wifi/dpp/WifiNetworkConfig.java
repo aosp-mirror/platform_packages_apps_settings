@@ -32,6 +32,9 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Wraps the parameters of ZXing reader library's Wi-Fi Network config format.
  * Please check {@code WifiQrCode} for detail of the format.
@@ -203,50 +206,63 @@ public class WifiNetworkConfig {
         return mIsHotspot;
     }
 
-    public void connect(Context context, WifiManager.ActionListener listener) {
-        WifiConfiguration wifiConfiguration = getWifiConfigurationOrNull();
-        if (wifiConfiguration == null) {
-            if (listener != null) {
-                listener.onFailure(WifiManager.ERROR);
-            }
-            return;
-        }
-
-        WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-        wifiManager.connect(wifiConfiguration, listener);
-    }
-
     public boolean isSupportWifiDpp(Context context) {
         if (!WifiDppUtils.isWifiDppEnabled(context)) {
             return false;
         }
 
-        // DPP 1.0 only supports SAE and PSK.
-        if (SECURITY_SAE.equals(mSecurity) || SECURITY_WPA_PSK.equals(mSecurity)) {
-            return true;
+        if (TextUtils.isEmpty(mSecurity)) {
+            return false;
         }
 
+        // DPP 1.0 only supports SAE and PSK.
+        final WifiManager wifiManager = context.getSystemService(WifiManager.class);
+        switch (mSecurity) {
+            case SECURITY_SAE:
+                if (wifiManager.isWpa3SaeSupported()) {
+                    return true;
+                }
+                break;
+            case SECURITY_WPA_PSK:
+                return true;
+            default:
+        }
         return false;
     }
 
     /**
      * This is a simplified method from {@code WifiConfigController.getConfig()}
+     *
+     * TODO (b/129021867): WifiConfiguration is a deprecated class, should replace it with
+     *       {@code android.net.wifi.WifiNetworkSuggestion}
+     *
+     * @return When it's a open network, returns 2 WifiConfiguration in the List, the 1st is
+     *         open network and the 2nd is enhanced open network. Returns 1 WifiConfiguration in the
+     *         List for all other supported Wi-Fi securities.
      */
-    WifiConfiguration getWifiConfigurationOrNull() {
-        if (!isValidConfig(this)) {
-            return null;
-        }
+    List<WifiConfiguration> getWifiConfigurations() {
+        final List<WifiConfiguration> wifiConfigurations = new ArrayList<>();
 
-        final WifiConfiguration wifiConfiguration = new WifiConfiguration();
-        wifiConfiguration.SSID = addQuotationIfNeeded(mSsid);
-        wifiConfiguration.hiddenSSID = mHiddenSsid;
-        wifiConfiguration.networkId = mNetworkId;
+        if (!isValidConfig(this)) {
+            return wifiConfigurations;
+        }
 
         if (TextUtils.isEmpty(mSecurity) || SECURITY_NO_PASSWORD.equals(mSecurity)) {
-            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.NONE);
-            return wifiConfiguration;
+            // TODO (b/129835824): we add both open network and enhanced open network to WifiManager
+            //                     for android Q, should improve it in the future.
+            final WifiConfiguration openNetworkWifiConfiguration = getBasicWifiConfiguration();
+            openNetworkWifiConfiguration.allowedKeyManagement.set(KeyMgmt.NONE);
+            wifiConfigurations.add(openNetworkWifiConfiguration);
+
+            final WifiConfiguration enhancedOpenNetworkWifiConfiguration =
+                    getBasicWifiConfiguration();
+            enhancedOpenNetworkWifiConfiguration.allowedKeyManagement.set(KeyMgmt.OWE);
+            enhancedOpenNetworkWifiConfiguration.requirePMF = true;
+            wifiConfigurations.add(enhancedOpenNetworkWifiConfiguration);
+            return wifiConfigurations;
         }
 
+        final WifiConfiguration wifiConfiguration = getBasicWifiConfiguration();
         if (mSecurity.startsWith(SECURITY_WEP)) {
             wifiConfiguration.allowedKeyManagement.set(KeyMgmt.NONE);
             wifiConfiguration.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
@@ -268,11 +284,27 @@ public class WifiNetworkConfig {
             } else {
                 wifiConfiguration.preSharedKey = addQuotationIfNeeded(mPreSharedKey);
             }
+        } else if (mSecurity.startsWith(SECURITY_SAE)) {
+            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.SAE);
+            wifiConfiguration.requirePMF = true;
+            if (mPreSharedKey.length() != 0) {
+                wifiConfiguration.preSharedKey = addQuotationIfNeeded(mPreSharedKey);
+            }
         } else {
             Log.w(TAG, "Unsupported security");
-            return null;
+            return wifiConfigurations;
         }
 
+        wifiConfigurations.add(wifiConfiguration);
+        return wifiConfigurations;
+    }
+
+    private WifiConfiguration getBasicWifiConfiguration() {
+        final WifiConfiguration wifiConfiguration = new WifiConfiguration();
+
+        wifiConfiguration.SSID = addQuotationIfNeeded(mSsid);
+        wifiConfiguration.hiddenSSID = mHiddenSsid;
+        wifiConfiguration.networkId = mNetworkId;
         return wifiConfiguration;
     }
 

@@ -409,7 +409,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton4Text(R.string.share)
                 .setButton4Icon(R.drawable.ic_qrcode_24dp)
                 .setButton4OnClickListener(view -> shareNetwork())
-                .setButton4Visible(WifiDppUtils.isSupportConfiguratorQrCodeGenerator(mAccessPoint));
+                .setButton4Visible(
+                        WifiDppUtils.isSupportConfiguratorQrCodeGenerator(mContext, mAccessPoint));
 
         mSignalStrengthPref = screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
         mTxLinkSpeedPref = screen.findPreference(KEY_TX_LINK_SPEED);
