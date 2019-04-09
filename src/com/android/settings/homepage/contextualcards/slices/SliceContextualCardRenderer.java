@@ -24,7 +24,6 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ViewFlipper;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.VisibleForTesting;
@@ -142,7 +141,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         }
 
         if (card.isPendingDismiss()) {
-            flipCardToDismissalView(holder);
+            showDismissalView(holder);
             mFlippedCardSet.add(holder);
         }
     }
@@ -170,12 +169,19 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     }
 
     private void resetCardView(RecyclerView.ViewHolder holder) {
-        final ViewFlipper viewFlipper = holder.itemView.findViewById(R.id.view_flipper);
-        viewFlipper.setDisplayedChild(0 /* whichChild */);
+        holder.itemView.findViewById(R.id.dismissal_view).setVisibility(View.GONE);
+        getInitialView(holder).setVisibility(View.VISIBLE);
     }
 
-    private void flipCardToDismissalView(RecyclerView.ViewHolder holder) {
-        final ViewFlipper viewFlipper = holder.itemView.findViewById(R.id.view_flipper);
-        viewFlipper.showNext();
+    private void showDismissalView(RecyclerView.ViewHolder holder) {
+        holder.itemView.findViewById(R.id.dismissal_view).setVisibility(View.VISIBLE);
+        getInitialView(holder).setVisibility(View.INVISIBLE);
+    }
+
+    private View getInitialView(RecyclerView.ViewHolder viewHolder) {
+        if (viewHolder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
+            return ((SliceHalfCardRendererHelper.HalfCardViewHolder) viewHolder).content;
+        }
+        return ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceView;
     }
 }
