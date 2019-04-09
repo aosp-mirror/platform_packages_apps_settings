@@ -17,8 +17,13 @@
 package com.android.settings.applications;
 
 import android.app.settings.SettingsEnums;
+import android.app.usage.UsageStats;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -27,17 +32,21 @@ import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.AppEntitiesHeaderController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
-public class AppAndNotificationDashboardFragment extends DashboardFragment {
+public class AppAndNotificationDashboardFragment extends DashboardFragment
+        implements RecentAppStatsMixin.RecentAppStatsListener {
 
     private static final String TAG = "AppAndNotifDashboard";
 
-    private boolean mIsFirstLaunch;
+    private View mProgressHeader;
+    private View mProgressAnimation;
+    private RecentAppStatsMixin mRecentAppStatsMixin;
     private RecentAppsPreferenceController mRecentAppsPreferenceController;
     private AllAppsInfoPreferenceController mAllAppsInfoPreferenceController;
 
@@ -66,35 +75,53 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
         super.onAttach(context);
 
         use(SpecialAppAccessPreferenceController.class).setSession(getSettingsLifecycle());
+
+        mRecentAppStatsMixin = new RecentAppStatsMixin(context,
+                AppEntitiesHeaderController.MAXIMUM_APPS);
+        getSettingsLifecycle().addObserver(mRecentAppStatsMixin);
+        mRecentAppStatsMixin.addListener(this);
+
         mRecentAppsPreferenceController = use(RecentAppsPreferenceController.class);
         mRecentAppsPreferenceController.setFragment(this /* fragment */);
+        mRecentAppStatsMixin.addListener(mRecentAppsPreferenceController);
 
         mAllAppsInfoPreferenceController = use(AllAppsInfoPreferenceController.class);
-        mAllAppsInfoPreferenceController.setRecentApps(
-                mRecentAppsPreferenceController.getRecentApps());
-
-        mIsFirstLaunch = true;
+        mRecentAppStatsMixin.addListener(mAllAppsInfoPreferenceController);
     }
 
     @Override
-    public void onResume() {
-        if (!mIsFirstLaunch) {
-            mRecentAppsPreferenceController.reloadData();
-            mAllAppsInfoPreferenceController.setRecentApps(
-                    mRecentAppsPreferenceController.getRecentApps());
-        }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mProgressHeader = setPinnedHeaderView(R.layout.progress_header);
+        mProgressAnimation = mProgressHeader.findViewById(R.id.progress_bar_animation);
+        setLoadingEnabled(false);
+    }
 
-        super.onResume();
-        mIsFirstLaunch = false;
+    @Override
+    public void onStart() {
+        super.onStart();
+        setLoadingEnabled(true);
+    }
 
-        if (mRecentAppsPreferenceController.isAvailable()) {
-            Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), getListView());
+    @Override
+    public void onReloadDataCompleted(@NonNull List<UsageStats> recentApps) {
+        setLoadingEnabled(false);
+        if (!recentApps.isEmpty()) {
+            Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(),
+                    getListView());
         }
     }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
+    }
+
+    private void setLoadingEnabled(boolean enabled) {
+        if (mProgressHeader != null && mProgressAnimation != null) {
+            mProgressHeader.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+            mProgressAnimation.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {

@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
@@ -46,8 +47,8 @@ public class AccessibilityUsagePreferenceController extends BasePreferenceContro
     @Override
     public int getAvailabilityStatus() {
         return (mEnabledServiceInfos.isEmpty() || !Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
-                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED)))
+                DeviceConfig.getProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                        Utils.PROPERTY_PERMISSIONS_HUB_ENABLED)))
                 ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 

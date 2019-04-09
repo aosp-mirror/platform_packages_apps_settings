@@ -36,6 +36,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -69,6 +70,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
+import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -1456,6 +1458,36 @@ public class WifiDetailPreferenceControllerTest {
         mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
 
         verify(mockSignalStrengthPref, times(2)).setVisible(false);
+    }
+
+    @Test
+    public void testRedrawIconForHeader_shouldEnlarge() {
+        ArgumentCaptor<BitmapDrawable> drawableCaptor =
+                ArgumentCaptor.forClass(BitmapDrawable.class);
+        Drawable original = mContext.getDrawable(Utils.getWifiIconResource(LEVEL)).mutate();
+        when(mockIconInjector.getIcon(anyInt())).thenReturn(original);
+
+        displayAndResume();
+
+        verify(mockHeaderController, times(1)).setIcon(drawableCaptor.capture());
+
+        int expectedSize = mContext.getResources().getDimensionPixelSize(
+                R.dimen.wifi_detail_page_header_image_size);
+        BitmapDrawable icon = drawableCaptor.getValue();
+        assertThat(icon.getMinimumWidth()).isEqualTo(expectedSize);
+        assertThat(icon.getMinimumHeight()).isEqualTo(expectedSize);
+    }
+
+    @Test
+    public void testRedrawIconForHeader_shouldNotEnlargeIfNotVectorDrawable() {
+        ArgumentCaptor<ColorDrawable> drawableCaptor =
+                ArgumentCaptor.forClass(ColorDrawable.class);
+
+        displayAndResume();
+
+        verify(mockHeaderController, times(1)).setIcon(drawableCaptor.capture());
+        ColorDrawable icon = drawableCaptor.getValue();
+        assertThat(icon).isNotNull();
     }
 
     private ActionButtonsPreference createMock() {

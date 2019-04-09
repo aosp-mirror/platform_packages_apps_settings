@@ -64,10 +64,10 @@ public class EarlyWarningTip extends BatteryTip {
     }
 
     @Override
-    public ColorStateList getIconTint() {
-        return ColorStateList.valueOf(mState == StateType.HANDLED
+    public int getIconTintColorId() {
+        return mState == StateType.HANDLED
                 ? R.color.battery_maybe_color_light
-                : R.color.battery_bad_color_light);
+                : R.color.battery_bad_color_light;
     }
 
     @Override

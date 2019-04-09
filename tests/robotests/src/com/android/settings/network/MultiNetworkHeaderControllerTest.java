@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
@@ -50,6 +51,7 @@ import androidx.preference.PreferenceScreen;
 @RunWith(RobolectricTestRunner.class)
 public class MultiNetworkHeaderControllerTest {
     private static final String KEY_HEADER = "multi_network_header";
+    private static final int EXPANDED_CHILDREN_COUNT = 5;
 
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -75,6 +77,9 @@ public class MultiNetworkHeaderControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mPreferenceScreen.findPreference(eq(KEY_HEADER))).thenReturn(mPreferenceCategory);
+        when(mPreferenceCategory.getPreferenceCount()).thenReturn(3);
+        when(mPreferenceScreen.getInitialExpandedChildrenCount()).thenReturn(
+                EXPANDED_CHILDREN_COUNT);
 
         mHeaderController = spy(new MultiNetworkHeaderController(mContext, KEY_HEADER));
         doReturn(mWifiController).when(mHeaderController).createWifiController(mLifecycle);
@@ -133,6 +138,11 @@ public class MultiNetworkHeaderControllerTest {
         verify(mPreferenceCategory, atLeastOnce()).setVisible(captor.capture());
         List<Boolean> values = captor.getAllValues();
         assertThat(values.get(values.size()-1)).isEqualTo(Boolean.TRUE);
+
+        ArgumentCaptor<Integer> expandedCountCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(mPreferenceScreen).setInitialExpandedChildrenCount(expandedCountCaptor.capture());
+        assertThat(expandedCountCaptor.getValue()).isEqualTo(
+                EXPANDED_CHILDREN_COUNT + mPreferenceCategory.getPreferenceCount());
     }
 
     @Test
@@ -148,5 +158,23 @@ public class MultiNetworkHeaderControllerTest {
         verify(mPreferenceCategory, atLeastOnce()).setVisible(captor.capture());
         List<Boolean> values = captor.getAllValues();
         assertThat(values.get(values.size()-1)).isEqualTo(Boolean.FALSE);
+
+        ArgumentCaptor<Integer> expandedCountCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(mPreferenceScreen).setInitialExpandedChildrenCount(expandedCountCaptor.capture());
+        assertThat(expandedCountCaptor.getValue()).isEqualTo(EXPANDED_CHILDREN_COUNT);
+    }
+
+    @Test
+    public void onChildUpdated_noExpandedChildCountAndAvailable_doesNotSetExpandedCount() {
+        when(mPreferenceScreen.getInitialExpandedChildrenCount()).thenReturn(Integer.MAX_VALUE);
+
+        when(mSubscriptionsController.isAvailable()).thenReturn(false);
+        mHeaderController.init(mLifecycle);
+        mHeaderController.displayPreference(mPreferenceScreen);
+
+        when(mSubscriptionsController.isAvailable()).thenReturn(true);
+        mHeaderController.onChildrenUpdated();
+
+        verify(mPreferenceScreen, never()).setInitialExpandedChildrenCount(anyInt());
     }
 }
