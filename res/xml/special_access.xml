@@ -85,6 +85,13 @@
         settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController" />
 
     <Preference
+        android:key="default_payment_app"
+        android:title="@string/nfc_payment_settings_title"
+        android:fragment="com.android.settings.nfc.PaymentSettings"
+        settings:keywords="@string/keywords_default_payment_app"
+        settings:controller="com.android.settings.applications.specialaccess.DefaultPaymentSettingsPreferenceController" />
+
+    <Preference
         android:key="data_saver"
         android:title="@string/unrestricted_data_saver"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
