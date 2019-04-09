@@ -18,6 +18,7 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -82,7 +83,7 @@ public class SliceContextualCardController implements ContextualCardController {
     @VisibleForTesting
     void showFeedbackDialog(ContextualCard card) {
         final String email = mContext.getString(R.string.config_contextual_card_feedback_email);
-        if (TextUtils.isEmpty(email)) {
+        if (!isFeedbackEnabled(email)) {
             return;
         }
         final Intent feedbackIntent = new Intent(mContext, ContextualCardFeedbackDialog.class);
@@ -91,6 +92,11 @@ public class SliceContextualCardController implements ContextualCardController {
         feedbackIntent.putExtra(ContextualCardFeedbackDialog.EXTRA_FEEDBACK_EMAIL, email);
         feedbackIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(feedbackIntent);
+    }
+
+    @VisibleForTesting
+    boolean isFeedbackEnabled(String email) {
+        return !TextUtils.isEmpty(email) && Build.IS_DEBUGGABLE;
     }
 
     private String getSimpleCardName(ContextualCard card) {
