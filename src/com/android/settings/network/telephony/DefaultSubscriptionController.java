@@ -75,7 +75,7 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mManager);
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
         if (subs.size() > 1) {
             return AVAILABLE;
         } else {
@@ -121,7 +121,7 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
         }
         mPreference.setVisible(true);
 
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mManager);
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
 
         // We'll have one entry for each available subscription, plus one for a "ask me every
         // time" entry at the end.

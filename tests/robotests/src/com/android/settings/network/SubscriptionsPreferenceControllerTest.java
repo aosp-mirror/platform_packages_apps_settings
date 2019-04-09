@@ -103,19 +103,19 @@ public class SubscriptionsPreferenceControllerTest {
 
     @After
     public void tearDown() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
+        SubscriptionUtil.setActiveSubscriptionsForTesting(null);
     }
 
     @Test
     public void isAvailable_oneSubscription_availableFalse() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(
+        SubscriptionUtil.setActiveSubscriptionsForTesting(
                 Arrays.asList(mock(SubscriptionInfo.class)));
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_twoSubscriptions_availableTrue() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(
+        SubscriptionUtil.setActiveSubscriptionsForTesting(
                 Arrays.asList(mock(SubscriptionInfo.class), mock(SubscriptionInfo.class)));
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -126,13 +126,13 @@ public class SubscriptionsPreferenceControllerTest {
         for (int i = 0; i < 5; i++) {
             subs.add(mock(SubscriptionInfo.class));
         }
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(subs);
+        SubscriptionUtil.setActiveSubscriptionsForTesting(subs);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_airplaneModeOn_availableFalse() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(
+        SubscriptionUtil.setActiveSubscriptionsForTesting(
                 Arrays.asList(mock(SubscriptionInfo.class), mock(SubscriptionInfo.class)));
         assertThat(mController.isAvailable()).isTrue();
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
@@ -141,7 +141,7 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     public void onAirplaneModeChanged_airplaneModeTurnedOn_eventFired() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(
+        SubscriptionUtil.setActiveSubscriptionsForTesting(
                 Arrays.asList(mock(SubscriptionInfo.class), mock(SubscriptionInfo.class)));
         mController.onResume();
         mController.displayPreference(mScreen);
@@ -157,7 +157,7 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     public void onAirplaneModeChanged_airplaneModeTurnedOff_eventFired() {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(
+        SubscriptionUtil.setActiveSubscriptionsForTesting(
                 Arrays.asList(mock(SubscriptionInfo.class), mock(SubscriptionInfo.class)));
         mController.onResume();
         mController.displayPreference(mScreen);
@@ -174,13 +174,13 @@ public class SubscriptionsPreferenceControllerTest {
     public void onSubscriptionsChanged_countBecameTwo_eventFired() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         mController.onResume();
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isFalse();
 
         final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         mController.onSubscriptionsChanged();
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
@@ -192,14 +192,14 @@ public class SubscriptionsPreferenceControllerTest {
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub2.getSubscriptionId()).thenReturn(2);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         mController.onResume();
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isTrue();
         verify(mPreferenceCategory, times(2)).addPreference(any(Preference.class));
 
         final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         mController.onSubscriptionsChanged();
         assertThat(mController.isAvailable()).isFalse();
         assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
@@ -221,7 +221,7 @@ public class SubscriptionsPreferenceControllerTest {
         when(sub3.getSubscriptionId()).thenReturn(3);
 
         // Start out with only sub1 and sub2.
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         mController.onResume();
         mController.displayPreference(mScreen);
         final ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
@@ -233,7 +233,7 @@ public class SubscriptionsPreferenceControllerTest {
         // Now replace sub2 with sub3, and make sure the old preference was removed and the new
         // preference was added.
         final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub3));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub3));
         mController.onSubscriptionsChanged();
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
@@ -259,7 +259,7 @@ public class SubscriptionsPreferenceControllerTest {
             doReturn(i + 1).when(sub).getSubscriptionId();
             subscriptions.add(sub);
         }
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(subscriptions);
+        SubscriptionUtil.setActiveSubscriptionsForTesting(subscriptions);
         mController.displayPreference(mScreen);
         final ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mPreferenceCategory, times(subscriptionCount)).addPreference(prefCaptor.capture());
@@ -303,7 +303,7 @@ public class SubscriptionsPreferenceControllerTest {
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(11);
         when(sub2.getSubscriptionId()).thenReturn(22);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
 
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
@@ -324,7 +324,7 @@ public class SubscriptionsPreferenceControllerTest {
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(11);
         when(sub2.getSubscriptionId()).thenReturn(22);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
 
         ShadowSubscriptionManager.setDefaultVoiceSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultSmsSubscriptionId(11);
@@ -346,7 +346,7 @@ public class SubscriptionsPreferenceControllerTest {
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(11);
         when(sub2.getSubscriptionId()).thenReturn(22);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
 
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(11);
         ShadowSubscriptionManager.setDefaultSmsSubscriptionId(22);
