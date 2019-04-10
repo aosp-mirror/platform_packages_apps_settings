@@ -117,6 +117,7 @@ public class NotificationPreferenceControllerTest {
     public void isAvailable_notIfChannelGroupBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
 
         mController.onResume(appRow, channel, group, null);
