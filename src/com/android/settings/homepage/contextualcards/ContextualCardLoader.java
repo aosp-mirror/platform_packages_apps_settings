@@ -20,6 +20,7 @@ import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -32,7 +33,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -162,10 +165,16 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             return visibleCards;
         } finally {
             if (!CardContentProvider.DELETE_CARD_URI.equals(mNotifyUri)) {
-                final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                        FeatureFactory.getFactory(mContext)
-                                .getContextualCardFeatureProvider(mContext);
-                contextualCardFeatureProvider.logContextualCardDisplay(visibleCards, hiddenCards);
+                final MetricsFeatureProvider metricsFeatureProvider =
+                        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+
+                metricsFeatureProvider.action(mContext,
+                        SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW,
+                        ContextualCardLogUtils.buildCardListLog(visibleCards));
+
+                metricsFeatureProvider.action(mContext,
+                        SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW,
+                        ContextualCardLogUtils.buildCardListLog(hiddenCards));
             }
         }
     }

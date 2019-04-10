@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
@@ -33,8 +34,9 @@ import androidx.slice.widget.EventInfo;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
-import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Card renderer helper for {@link ContextualCard} built as slice deferred setup card.
@@ -65,10 +67,14 @@ class SliceDeferredSetupCardRendererHelper {
             } catch (PendingIntent.CanceledException e) {
                 Log.w(TAG, "Failed to start intent " + primaryAction.getTitle());
             }
-            final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                    FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
-            contextualCardFeatureProvider.logContextualCardClick(card, 0 /* row */,
+            final String log = ContextualCardLogUtils.buildCardClickLog(card, 0 /* row */,
                     EventInfo.ACTION_TYPE_CONTENT, view.getAdapterPosition());
+
+            final MetricsFeatureProvider metricsFeatureProvider =
+                    FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+
+            metricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_CLICK, log);
         });
     }
 
