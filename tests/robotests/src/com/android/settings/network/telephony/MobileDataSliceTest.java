@@ -49,6 +49,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -76,6 +78,9 @@ public class MobileDataSliceTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(SUB_ID).when(mSubscriptionInfo).getSubscriptionId();
+        doReturn(new ArrayList<>(Arrays.asList(mSubscriptionInfo)))
+                .when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -162,6 +167,24 @@ public class MobileDataSliceTest {
         final boolean isMobileDataEnabled = mMobileDataSlice.isMobileDataEnabled();
 
         assertThat(isMobileDataEnabled).isEqualTo(seed);
+    }
+
+    @Test
+    public void isMobileDataAvailable_noSubscriptions_returnsNull() {
+        doReturn(new ArrayList<>()).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+
+        final Slice slice = mMobileDataSlice.getSlice();
+
+        assertThat(slice).isNull();
+    }
+
+    @Test
+    public void isMobileDataAvailable_nullSubscriptions_returnsNull() {
+        doReturn(null).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+
+        final Slice slice = mMobileDataSlice.getSlice();
+
+        assertThat(slice).isNull();
     }
 
     @Test
