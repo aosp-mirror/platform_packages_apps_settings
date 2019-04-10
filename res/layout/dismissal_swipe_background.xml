@@ -20,7 +20,7 @@
     android:id="@+id/dismissal_swipe_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/homepage_card_dismissal_background">
+    android:background="@color/contextual_card_dismissal_background">
 
     <ImageView
         android:id="@+id/dismissal_icon_start"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_delete"
         android:layout_gravity="start|center_vertical"
-        android:layout_marginStart="@dimen/homepage_card_dismissal_side_margin"/>
+        android:layout_marginStart="@dimen/contextual_card_dismissal_side_margin"/>
 
     <Space
         android:layout_width="0dp"
@@ -41,6 +41,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_delete"
         android:layout_gravity="end|center_vertical"
-        android:layout_marginEnd="@dimen/homepage_card_dismissal_side_margin"/>
+        android:layout_marginEnd="@dimen/contextual_card_dismissal_side_margin"/>
 
 </LinearLayout>

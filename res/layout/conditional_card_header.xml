@@ -25,8 +25,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/homepage_condition_header_padding_top"
-        android:paddingBottom="@dimen/homepage_condition_header_padding_bottom"
+        android:paddingTop="@dimen/contextual_condition_header_padding_top"
+        android:paddingBottom="@dimen/contextual_condition_header_padding_bottom"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginStart="@dimen/homepage_condition_header_icons_margin_start"
+            android:layout_marginStart="@dimen/contextual_condition_header_icons_margin_start"
             android:orientation="horizontal"
             android:gravity="center_vertical"/>
 
@@ -43,9 +43,9 @@
             android:id="@+id/expand_indicator"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/homepage_condition_header_indicator_padding_top"
-            android:paddingStart="@dimen/homepage_condition_header_indicator_padding_start"
-            android:paddingEnd="@dimen/homepage_condition_header_indicator_padding_end"
+            android:paddingTop="@dimen/contextual_condition_header_indicator_padding_top"
+            android:paddingStart="@dimen/contextual_condition_header_indicator_padding_start"
+            android:paddingEnd="@dimen/contextual_condition_header_indicator_padding_end"
             android:src="@drawable/ic_expand_more_inverse"
             android:tint="?android:attr/colorControlNormal"/>
 
