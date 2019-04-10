@@ -51,6 +51,14 @@
         android:order="10"/>
 
     <Preference
+        android:key="default_apps"
+        android:title="@string/app_default_dashboard_title"
+        android:order="11"
+        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
+        <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
+    </Preference>
+
+    <Preference
         android:key="manage_perms"
         android:title="@string/app_permissions"
         android:order="12"

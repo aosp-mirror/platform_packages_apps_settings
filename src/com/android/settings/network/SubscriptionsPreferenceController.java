@@ -129,7 +129,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSubscriptionPreferences = new ArrayMap<>();
 
         int order = mStartOrder;
-        for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mManager)) {
+        for (SubscriptionInfo info : SubscriptionUtil.getActiveSubscriptions(mManager)) {
             final int subId = info.getSubscriptionId();
             Preference pref = existingPrefs.remove(subId);
             if (pref == null) {
@@ -216,7 +216,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (mSubscriptionsListener.isAirplaneModeOn()) {
             return false;
         }
-        return SubscriptionUtil.getAvailableSubscriptions(mManager).size() >= 2;
+        return SubscriptionUtil.getActiveSubscriptions(mManager).size() >= 2;
     }
 
     @Override

@@ -27,16 +27,33 @@ import java.util.Iterator;
 import java.util.List;
 
 public class SubscriptionUtil {
-    private static List<SubscriptionInfo> sResultsForTesting;
+    private static List<SubscriptionInfo> sAvailableResultsForTesting;
+    private static List<SubscriptionInfo> sActiveResultsForTesting;
 
     @VisibleForTesting
     public static void setAvailableSubscriptionsForTesting(List<SubscriptionInfo> results) {
-        sResultsForTesting = results;
+        sAvailableResultsForTesting = results;
+    }
+
+    @VisibleForTesting
+    public static void setActiveSubscriptionsForTesting(List<SubscriptionInfo> results) {
+        sActiveResultsForTesting = results;
+    }
+
+    public static List<SubscriptionInfo> getActiveSubscriptions(SubscriptionManager manager) {
+        if (sActiveResultsForTesting != null) {
+            return sActiveResultsForTesting;
+        }
+        List<SubscriptionInfo> subscriptions = manager.getActiveSubscriptionInfoList(true);
+        if (subscriptions == null) {
+            return new ArrayList<>();
+        }
+        return subscriptions;
     }
 
     public static List<SubscriptionInfo> getAvailableSubscriptions(SubscriptionManager manager) {
-        if (sResultsForTesting != null) {
-            return sResultsForTesting;
+        if (sAvailableResultsForTesting != null) {
+            return sAvailableResultsForTesting;
         }
         List<SubscriptionInfo> subscriptions = manager.getSelectableSubscriptionInfoList();
         if (subscriptions == null) {

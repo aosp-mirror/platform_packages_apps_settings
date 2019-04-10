@@ -28,14 +28,12 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ViewFlipper;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
-import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
@@ -116,16 +114,15 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
-    public void bindView_isPendingDismiss_shouldFlipToDismissalView() {
+    public void bindView_isPendingDismiss_shouldShowDismissalView() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
-        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
         final View dismissalView = viewHolder.itemView.findViewById(R.id.dismissal_view);
         final ContextualCard card = buildContextualCard(
                 TEST_SLICE_URI).mutate().setIsPendingDismiss(true).build();
 
         mRenderer.bindView(viewHolder, card);
 
-        assertThat(viewFlipper.getCurrentView()).isEqualTo(dismissalView);
+        assertThat(dismissalView.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
@@ -140,24 +137,29 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
-    public void viewClick_keepCard_shouldFlipBackToSlice() {
+    public void viewClick_keepCard_shouldShowSlice() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View sliceView = viewHolder.itemView.findViewById(R.id.slice_view);
+        final View dismissalView = viewHolder.itemView.findViewById(R.id.dismissal_view);
         final Button btnKeep = viewHolder.itemView.findViewById(R.id.keep);
-        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
-        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
-        viewFlipper.setDisplayedChild(1);
+        final ContextualCard card = buildContextualCard(
+                TEST_SLICE_URI).mutate().setIsPendingDismiss(true).build();
+        mRenderer.bindView(viewHolder, card);
 
         btnKeep.performClick();
 
-        assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
+        assertThat(dismissalView.getVisibility()).isEqualTo(View.GONE);
+        assertThat(sliceView.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
     public void viewClick_keepCard_shouldRemoveViewHolderFromSet() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final Button btnKeep = viewHolder.itemView.findViewById(R.id.keep);
-        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
-        mRenderer.mFlippedCardSet.add(viewHolder);
+        final ContextualCard card = buildContextualCard(
+                TEST_SLICE_URI).mutate().setIsPendingDismiss(true).build();
+        mRenderer.bindView(viewHolder, card);
+        assertThat(mRenderer.mFlippedCardSet).contains(viewHolder);
 
         btnKeep.performClick();
 
@@ -168,11 +170,12 @@ public class SliceContextualCardRendererTest {
     public void viewClick_removeCard_shouldRemoveViewHolderFromSet() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final Button btnRemove = viewHolder.itemView.findViewById(R.id.remove);
-        final ContextualCard contextualCard = buildContextualCard(TEST_SLICE_URI);
-        mRenderer.bindView(viewHolder, contextualCard);
+        final ContextualCard card = buildContextualCard(
+                TEST_SLICE_URI).mutate().setIsPendingDismiss(true).build();
+        mRenderer.bindView(viewHolder, card);
+        assertThat(mRenderer.mFlippedCardSet).contains(viewHolder);
         doReturn(mController).when(mControllerRendererPool).getController(mActivity,
                 ContextualCard.CardType.SLICE);
-        mRenderer.mFlippedCardSet.add(viewHolder);
 
         btnRemove.performClick();
 
@@ -195,16 +198,19 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
-    public void onStop_cardIsFlipped_shouldFlipBack() {
+    public void onStop_cardIsInDismissalView_shouldResetToSliceView() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
-        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
-        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
-        viewFlipper.setDisplayedChild(1);
-        mRenderer.mFlippedCardSet.add(viewHolder);
+        final View sliceView = viewHolder.itemView.findViewById(R.id.slice_view);
+        final View dismissalView = viewHolder.itemView.findViewById(R.id.dismissal_view);
+        final ContextualCard card = buildContextualCard(
+                TEST_SLICE_URI).mutate().setIsPendingDismiss(true).build();
+        mRenderer.bindView(viewHolder, card);
+        assertThat(mRenderer.mFlippedCardSet).contains(viewHolder);
 
         mRenderer.onStop();
 
-        assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
+        assertThat(sliceView.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(dismissalView.getVisibility()).isEqualTo(View.GONE);
     }
 
     private RecyclerView.ViewHolder getSliceViewHolder() {

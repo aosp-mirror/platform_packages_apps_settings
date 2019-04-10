@@ -37,6 +37,8 @@ import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import android.view.ContextMenu;
+import android.view.View;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
@@ -44,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
+import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.Before;
@@ -204,5 +207,27 @@ public class WifiSettingsTest {
 
         verify(mDataUsagePreference).setVisible(true);
         verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/, eq(null) /*service*/);
+    }
+
+    @Test
+    public void onCreateContextMenu_shouldHaveForgetMenuForConnectedAccessPreference() {
+        final FragmentActivity mockActivity = mock(FragmentActivity.class);
+        when(mockActivity.getApplicationContext()).thenReturn(mContext);
+        when(mWifiSettings.getActivity()).thenReturn(mockActivity);
+
+        final AccessPoint accessPoint = mock(AccessPoint.class);
+        when(accessPoint.isConnectable()).thenReturn(false);
+        when(accessPoint.isSaved()).thenReturn(true);
+        when(accessPoint.isActive()).thenReturn(true);
+
+        final ConnectedAccessPointPreference connectedPreference =
+            mWifiSettings.createConnectedAccessPointPreference(accessPoint, mContext);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedPreference);
+
+        final ContextMenu menu = mock(ContextMenu.class);
+        mWifiSettings.onCreateContextMenu(menu, view, null /* info */);
+
+        verify(menu).add(anyInt(), eq(WifiSettings.MENU_ID_FORGET), anyInt(), anyInt());
     }
 }

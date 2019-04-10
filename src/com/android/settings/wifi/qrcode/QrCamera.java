@@ -401,4 +401,14 @@ public class QrCamera extends Handler {
             mScannerCallback.handleSuccessfulResult(qrCode.getText());
         }
     }
+
+    /**
+     * After {@link #start(SurfaceTexture)}, DecodingTask runs continuously to capture images and
+     * decode QR code. DecodingTask become null After {@link #stop()}.
+     *
+     * Uses this method in test case to prevent power consumption problem.
+     */
+    public boolean isDecodeTaskAlive() {
+        return mDecodeTask != null;
+    }
 }
