@@ -106,13 +106,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private AuthenticationCallback mAuthenticationCallback = new AuthenticationCallback() {
         public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
             if (!mGoingToBackground) {
-                if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED) {
+                if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
+                        || errorCode == BiometricPrompt.BIOMETRIC_ERROR_CANCELED) {
                     if (mIsFallback) {
                         mBiometricManager.onConfirmDeviceCredentialError(
-                                BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED,
-                                getString(
-                                        com.android.internal.R.string
-                                                .biometric_error_user_canceled));
+                                errorCode, getStringForError(errorCode));
                     }
                     finish();
                 } else {
@@ -138,6 +136,17 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             finish();
         }
     };
+
+    private String getStringForError(int errorCode) {
+        switch (errorCode) {
+            case BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED:
+                return getString(com.android.internal.R.string.biometric_error_user_canceled);
+            case BiometricConstants.BIOMETRIC_ERROR_CANCELED:
+                return getString(com.android.internal.R.string.biometric_error_canceled);
+            default:
+                return null;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,7 +187,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 intent.getBundleExtra(KeyguardManager.EXTRA_BIOMETRIC_PROMPT_BUNDLE);
         if (bpBundle != null) {
             mIsFallback = true;
-            // TODO: CDC maybe should show description as well.
             mTitle = bpBundle.getString(BiometricPrompt.KEY_TITLE);
             mDetails = bpBundle.getString(BiometricPrompt.KEY_SUBTITLE);
         } else {
