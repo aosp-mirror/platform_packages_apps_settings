@@ -39,13 +39,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.robolectric.annotation.Config;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelDisplayPreferenceControllerTest {
@@ -86,6 +85,19 @@ public class TopLevelDisplayPreferenceControllerTest {
 
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getText(R.string.display_dashboard_summary));
+    }
+
+    @Test
+    public void getSummary_hasWallpaperWithStyles_shouldReturnWallpaperSummary() {
+        when(mContext.getString(R.string.config_styles_and_wallpaper_picker_class))
+                .thenReturn("any.nonempty.class");
+        final List<ResolveInfo> resolveInfos = new ArrayList<>();
+        resolveInfos.add(mock(ResolveInfo.class));
+        when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt()))
+                .thenReturn(resolveInfos);
+
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getText(R.string.display_dashboard_summary_with_style));
     }
 
     @Test
