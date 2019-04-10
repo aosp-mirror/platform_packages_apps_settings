@@ -55,6 +55,12 @@
 
             <PreferenceCategory
                 android:key="location_services" />
+
+            <!-- This preference gets removed if there is no managed profile -->
+            <PreferenceCategory
+                android:title="@string/managed_profile_location_services"
+                android:key="location_services_managed_profile" />
+
         </PreferenceCategory>
 
         <PreferenceCategory
