@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.service.notification.Adjustment;
 
 import com.android.settings.core.TogglePreferenceController;
@@ -44,7 +43,7 @@ public class AssistantCapabilityPreferenceController extends TogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        List<String> capabilities = mBackend.getAssistantCapabilities(mContext.getPackageName());
+        List<String> capabilities = mBackend.getAssistantAdjustments(mContext.getPackageName());
         if (PRIORITIZER_KEY.equals(getPreferenceKey())) {
            return capabilities.contains(Adjustment.KEY_IMPORTANCE);
         } else if (SMART_KEY.equals(getPreferenceKey())) {
@@ -57,10 +56,10 @@ public class AssistantCapabilityPreferenceController extends TogglePreferenceCon
     @Override
     public boolean setChecked(boolean isChecked) {
         if (PRIORITIZER_KEY.equals(getPreferenceKey())) {
-            mBackend.allowAssistantCapability(Adjustment.KEY_IMPORTANCE, isChecked);
+            mBackend.allowAssistantAdjustment(Adjustment.KEY_IMPORTANCE, isChecked);
         } else if (SMART_KEY.equals(getPreferenceKey())) {
-            mBackend.allowAssistantCapability(Adjustment.KEY_CONTEXTUAL_ACTIONS, isChecked);
-            mBackend.allowAssistantCapability(Adjustment.KEY_TEXT_REPLIES, isChecked);
+            mBackend.allowAssistantAdjustment(Adjustment.KEY_CONTEXTUAL_ACTIONS, isChecked);
+            mBackend.allowAssistantAdjustment(Adjustment.KEY_TEXT_REPLIES, isChecked);
         }
         return true;
     }
