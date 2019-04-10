@@ -242,14 +242,20 @@ public final class CredentialStorage extends FragmentActivity {
 
         @Override
         public void onDismiss(DialogInterface dialog) {
-            if (mResetConfirmed) {
-                mResetConfirmed = false;
-                if (confirmKeyGuard(CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST)) {
-                    // will return password value via onActivityResult
-                    return;
-                }
+            if (!mResetConfirmed) {
+                finish();
+                return;
             }
-            finish();
+
+            mResetConfirmed = false;
+            if (!mUtils.isSecure(UserHandle.myUserId())) {
+                // This task will call finish() in the end.
+                new ResetKeyStoreAndKeyChain().execute();
+            } else if (!confirmKeyGuard(CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST)) {
+                Log.w(TAG, "Failed to launch credential confirmation for a secure user.");
+                finish();
+            }
+            // Confirmation result will be handled in onActivityResult if needed.
         }
     }
 
