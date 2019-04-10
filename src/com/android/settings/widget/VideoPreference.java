@@ -220,11 +220,15 @@ public class VideoPreference extends Preference {
     private void initMediaPlayer() {
         if (mMediaPlayer == null) {
             mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
-            mMediaPlayer.seekTo(0);
-            mMediaPlayer.setOnSeekCompleteListener(mp -> mVideoReady = true);
-            mMediaPlayer.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
-            if (mSurface != null) {
-                mMediaPlayer.setSurface(mSurface);
+            // when the playback res is invalid or others, MediaPlayer create may fail
+            // and return null, so need add the null judgement.
+            if (mMediaPlayer != null) {
+                mMediaPlayer.seekTo(0);
+                mMediaPlayer.setOnSeekCompleteListener(mp -> mVideoReady = true);
+                mMediaPlayer.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
+                if (mSurface != null) {
+                    mMediaPlayer.setSurface(mSurface);
+                }
             }
         }
     }
