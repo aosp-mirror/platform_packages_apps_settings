@@ -197,8 +197,8 @@ public class ContextualCardLoaderTest {
 
         mContextualCardLoader.getDisplayableCards(new ArrayList<>());
 
-        verify(mFakeFeatureFactory.mContextualCardFeatureProvider, never())
-                .logContextualCardDisplay(anyList(), anyList());
+        verify(mFakeFeatureFactory.metricsFeatureProvider, never()).action(any(),
+                eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW), any(String.class));
     }
 
     private ContextualCard getContextualCard(String sliceUri) {
