@@ -73,11 +73,11 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         if (mAppRow.banned) {
             return false;
         }
-        if (mChannel != null) {
-            return mChannel.getImportance() != IMPORTANCE_NONE;
-        }
         if (mChannelGroup != null) {
             return !mChannelGroup.isBlocked();
+        }
+        if (mChannel != null) {
+            return mChannel.getImportance() != IMPORTANCE_NONE;
         }
         return true;
     }
