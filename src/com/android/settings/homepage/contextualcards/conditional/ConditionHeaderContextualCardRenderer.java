@@ -34,7 +34,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class ConditionHeaderContextualCardRenderer implements ContextualCardRenderer {
-    public static final int VIEW_TYPE = R.layout.homepage_condition_header;
+    public static final int VIEW_TYPE = R.layout.conditional_card_header;
     private static final String TAG = "ConditionHeaderRenderer";
 
     private final Context mContext;
@@ -61,7 +61,7 @@ public class ConditionHeaderContextualCardRenderer implements ContextualCardRend
         view.icons.removeAllViews();
         headerCard.getConditionalCards().stream().forEach(card -> {
             final ImageView icon = (ImageView) LayoutInflater.from(mContext).inflate(
-                    R.layout.homepage_condition_header_icon, view.icons, false);
+                    R.layout.conditional_card_header_icon, view.icons, false);
             icon.setImageDrawable(card.getIconDrawable());
             view.icons.addView(icon);
         });
