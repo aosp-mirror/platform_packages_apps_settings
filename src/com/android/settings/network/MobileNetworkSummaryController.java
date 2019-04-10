@@ -28,6 +28,7 @@ import android.telephony.euicc.EuiccManager;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -49,7 +50,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     private SubscriptionManager mSubscriptionManager;
     private SubscriptionsChangeListener mChangeListener;
-    private EuiccManager mEuiccManager;
     private AddPreference mPreference;
 
     /**
@@ -70,7 +70,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     public MobileNetworkSummaryController(Context context, Lifecycle lifecycle) {
         super(context);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mEuiccManager = mContext.getSystemService(EuiccManager.class);
         if (lifecycle != null) {
           mChangeListener = new SubscriptionsChangeListener(context, this);
           lifecycle.addObserver(this);
@@ -99,7 +98,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
                 mSubscriptionManager);
         if (subs.isEmpty()) {
-            if (mEuiccManager.isEnabled()) {
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
                 return mContext.getResources().getString(
                         R.string.mobile_network_summary_add_a_network);
             }
@@ -133,7 +132,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                 mSubscriptionManager);
 
         if (subs.isEmpty()) {
-            if (mEuiccManager.isEnabled()) {
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
                 mPreference.setOnPreferenceClickListener((Preference pref) -> {
                     startAddSimFlow();
                     return true;
@@ -142,7 +141,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         } else {
             // We have one or more existing subscriptions, so we want the plus button if eSIM is
             // supported.
-            if (mEuiccManager.isEnabled()) {
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
                 mPreference.setAddWidgetEnabled(!mChangeListener.isAirplaneModeOn());
                 mPreference.setOnAddClickListener(p -> startAddSimFlow());
             }

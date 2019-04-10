@@ -12,6 +12,7 @@ import androidx.annotation.ArrayRes;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowResources;
 import org.robolectric.util.ReflectionHelpers.ClassParameter;
 
@@ -40,6 +41,7 @@ public class SettingsShadowResources extends ShadowResources {
         overrideResource(resId, value);
     }
 
+    @Resetter
     public static void reset() {
         sResourceOverrides.clear();
     }

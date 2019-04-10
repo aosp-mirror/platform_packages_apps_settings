@@ -46,6 +46,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.StringRes;
+import androidx.annotation.UiThread;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
@@ -57,6 +59,7 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment implements
@@ -104,7 +107,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     private WifiQrCode mWifiQrCode;
 
     /** The WifiConfiguration connecting for enrollee usage */
-    private WifiConfiguration mWifiConfiguration;
+    private WifiConfiguration mEnrolleeWifiConfiguration;
 
     private int mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE;
 
@@ -140,14 +143,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     break;
 
                 case MESSAGE_SCAN_WIFI_DPP_SUCCESS:
-                    if (mCamera != null) {
-                        mCamera.stop();
-                    }
-
-                    mDecorateView.setFocused(true);
-                    mErrorMessage.setVisibility(View.INVISIBLE);
-
                     if (mScanWifiDppSuccessListener == null) {
+                        // mScanWifiDppSuccessListener may be null after onDetach(), do nothing here
                         return;
                     }
                     mScanWifiDppSuccessListener.onScanWifiDppSuccess((WifiQrCode)msg.obj);
@@ -160,23 +157,43 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                                 AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
                     }
 
-                    WifiDppUtils.triggerVibrationForQrCodeRecognition(getContext());
+                    notifyUserForQrCodeRecognition();
                     break;
 
                 case MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS:
-                    if (mCamera != null) {
-                        mCamera.stop();
+                    // We may get 2 WifiConfiguration if the QR code has no password in it,
+                    // one for open network and one for enhanced open network.
+                    final WifiManager wifiManager =
+                            getContext().getSystemService(WifiManager.class);
+                    final WifiNetworkConfig qrCodeWifiNetworkConfig =
+                            (WifiNetworkConfig)msg.obj;
+                    final List<WifiConfiguration> qrCodeWifiConfigurations =
+                            qrCodeWifiNetworkConfig.getWifiConfigurations();
+
+                    // Adds all Wi-Fi networks in QR code to the set of configured networks and
+                    // connects to it if it's reachable.
+                    boolean hasReachableWifiNetwork = false;
+                    for (WifiConfiguration qrCodeWifiConfiguration : qrCodeWifiConfigurations) {
+                        final int id = wifiManager.addNetwork(qrCodeWifiConfiguration);
+                        if (id == -1) {
+                            continue;
+                        }
+                        wifiManager.enableNetwork(id, /* attemptConnect */ false);
+                        if (isReachableWifiNetwork(qrCodeWifiConfiguration)) {
+                            hasReachableWifiNetwork = true;
+                            mEnrolleeWifiConfiguration = qrCodeWifiConfiguration;
+                            wifiManager.connect(id,
+                                    /* listener */ WifiDppQrCodeScannerFragment.this);
+                        }
                     }
 
-                    mDecorateView.setFocused(true);
-                    mErrorMessage.setVisibility(View.INVISIBLE);
+                    if (hasReachableWifiNetwork == false) {
+                        showErrorMessageAndRestartCamera(
+                                R.string.wifi_dpp_check_connection_try_again);
+                        return;
+                    }
 
-                    final WifiNetworkConfig wifiNetworkConfig = (WifiNetworkConfig)msg.obj;
-                    mWifiConfiguration = wifiNetworkConfig.getWifiConfigurationOrNull();
-                    wifiNetworkConfig.connect(getContext(),
-                            /* listener */ WifiDppQrCodeScannerFragment.this);
-
-                    WifiDppUtils.triggerVibrationForQrCodeRecognition(getContext());
+                    notifyUserForQrCodeRecognition();
                     break;
 
                 default:
@@ -185,6 +202,30 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
     };
 
+    @UiThread
+    private void notifyUserForQrCodeRecognition() {
+        if (mCamera != null) {
+            mCamera.stop();
+        }
+
+        mDecorateView.setFocused(true);
+        mErrorMessage.setVisibility(View.INVISIBLE);
+
+        WifiDppUtils.triggerVibrationForQrCodeRecognition(getContext());
+    }
+
+    private boolean isReachableWifiNetwork(WifiConfiguration wifiConfiguration) {
+        final List<AccessPoint> scannedAccessPoints = mWifiTracker.getAccessPoints();
+
+        for (AccessPoint scannedAccessPoint : scannedAccessPoints) {
+            if (scannedAccessPoint.matches(wifiConfiguration) &&
+                    scannedAccessPoint.isReachable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -192,7 +233,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         if (savedInstanceState != null) {
             mIsConfiguratorMode = savedInstanceState.getBoolean(KEY_IS_CONFIGURATOR_MODE);
             mLatestStatusCode = savedInstanceState.getInt(KEY_LATEST_ERROR_CODE);
-            mWifiConfiguration = savedInstanceState.getParcelable(KEY_WIFI_CONFIGURATION);
+            mEnrolleeWifiConfiguration = savedInstanceState.getParcelable(KEY_WIFI_CONFIGURATION);
         }
 
         final WifiDppInitiatorViewModel model =
@@ -219,6 +260,24 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             Log.d(TAG, "Easy connect enrollee callback onFailure " + code);
             new EasyConnectEnrolleeStatusCallback().onFailure(code);
         });
+    }
+
+    @Override
+    public void onPause() {
+        if (mCamera != null) {
+            mCamera.stop();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (!isGoingInitiator()) {
+            restartCamera();
+        }
     }
 
     @Override
@@ -480,7 +539,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(KEY_IS_CONFIGURATOR_MODE, mIsConfiguratorMode);
         outState.putInt(KEY_LATEST_ERROR_CODE, mLatestStatusCode);
-        outState.putParcelable(KEY_WIFI_CONFIGURATION, mWifiConfiguration);
+        outState.putParcelable(KEY_WIFI_CONFIGURATION, mEnrolleeWifiConfiguration);
 
         super.onSaveInstanceState(outState);
     }
@@ -496,7 +555,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             for (WifiConfiguration wifiConfig : wifiConfigs) {
                 if (wifiConfig.networkId == newNetworkId) {
                     mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
-                    mWifiConfiguration = wifiConfig;
+                    mEnrolleeWifiConfiguration = wifiConfig;
                     wifiManager.connect(wifiConfig, WifiDppQrCodeScannerFragment.this);
                     return;
                 }
@@ -588,39 +647,19 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     @Override
     public void onSuccess() {
-        if (isEnrollingWifiNetworkReachable()) {
-            final Intent resultIntent = new Intent();
-            resultIntent.putExtra(WifiDialogActivity.KEY_WIFI_CONFIGURATION, mWifiConfiguration);
+        final Intent resultIntent = new Intent();
+        resultIntent.putExtra(WifiDialogActivity.KEY_WIFI_CONFIGURATION,
+                mEnrolleeWifiConfiguration);
 
-            final Activity hostActivity = getActivity();
-            hostActivity.setResult(Activity.RESULT_OK, resultIntent);
-            hostActivity.finish();
-        } else {
-            Log.d(TAG, "Enroll Wi-Fi network succeeded but it's not reachable");
-            showErrorMessageAndRestartCamera(R.string.wifi_dpp_check_connection_try_again);
-        }
+        final Activity hostActivity = getActivity();
+        hostActivity.setResult(Activity.RESULT_OK, resultIntent);
+        hostActivity.finish();
     }
 
     @Override
     public void onFailure(int reason) {
         Log.d(TAG, "Wi-Fi connect onFailure reason - " + reason);
         showErrorMessageAndRestartCamera(R.string.wifi_dpp_check_connection_try_again);
-    }
-
-    private boolean isEnrollingWifiNetworkReachable() {
-        if (mWifiConfiguration == null) {
-            Log.e(TAG, "Connect succeeded but lost WifiConfiguration");
-            return false;
-        }
-
-        final List<AccessPoint> scannedAccessPoints = mWifiTracker.getAccessPoints();
-        for (AccessPoint accessPoint : scannedAccessPoints) {
-            if (accessPoint.matches(mWifiConfiguration) &&
-                    accessPoint.isReachable()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     // Check is Easy Connect handshaking or not
@@ -681,5 +720,10 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     public void onAccessPointsChanged() {
         // Do nothing.
+    }
+
+    @VisibleForTesting
+    protected boolean isDecodeTaskAlive() {
+        return mCamera != null && mCamera.isDecodeTaskAlive();
     }
 }

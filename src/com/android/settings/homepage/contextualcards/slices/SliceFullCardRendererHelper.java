@@ -16,8 +16,10 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
@@ -25,8 +27,9 @@ import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
-import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Card renderer helper for {@link ContextualCard} built as slice full card.
@@ -53,11 +56,14 @@ class SliceFullCardRendererHelper {
         // Set this listener so we can log the interaction users make on the slice
         cardHolder.sliceView.setOnSliceActionListener(
                 (eventInfo, sliceItem) -> {
-                    final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                            FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(
-                                    mContext);
-                    contextualCardFeatureProvider.logContextualCardClick(card, eventInfo.rowIndex,
+                    final String log = ContextualCardLogUtils.buildCardClickLog(card, eventInfo.rowIndex,
                             eventInfo.actionType, cardHolder.getAdapterPosition());
+
+                    final MetricsFeatureProvider metricsFeatureProvider =
+                            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+
+                    metricsFeatureProvider.action(mContext,
+                            SettingsEnums.ACTION_CONTEXTUAL_CARD_CLICK, log);
                 });
 
         // Customize slice view for Settings

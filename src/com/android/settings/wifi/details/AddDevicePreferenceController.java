@@ -35,14 +35,13 @@ public class AddDevicePreferenceController extends BasePreferenceController {
 
     private static final String TAG = "AddDevicePreferenceController";
 
-    private static final String KEY_ADD_DEVICE_CATEGORY = "add_device_category";
     private static final String KEY_ADD_DEVICE = "add_device_to_network";
 
     private AccessPoint mAccessPoint;
     private WifiManager mWifiManager;
 
     public AddDevicePreferenceController(Context context) {
-        super(context, KEY_ADD_DEVICE_CATEGORY);
+        super(context, KEY_ADD_DEVICE);
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }

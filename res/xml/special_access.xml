@@ -65,6 +65,13 @@
             android:value="com.android.settings.Settings$WriteSettingsActivity" />
     </Preference>
 
+    <com.android.settingslib.widget.apppreference.AppPreference
+        android:key="notification_assistant"
+        android:title="@string/notification_assistant_title"
+        android:summary="@string/summary_placeholder"
+        settings:fragment="com.android.settings.notification.NotificationAssistantPicker"
+        settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>
+
     <Preference
         android:key="notification_access"
         android:title="@string/manage_notification_access_title"
@@ -83,6 +90,13 @@
         android:title="@string/premium_sms_access"
         android:fragment="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess"
         settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController" />
+
+    <Preference
+        android:key="default_payment_app"
+        android:title="@string/nfc_payment_settings_title"
+        android:fragment="com.android.settings.nfc.PaymentSettings"
+        settings:keywords="@string/keywords_default_payment_app"
+        settings:controller="com.android.settings.applications.specialaccess.DefaultPaymentSettingsPreferenceController" />
 
     <Preference
         android:key="data_saver"

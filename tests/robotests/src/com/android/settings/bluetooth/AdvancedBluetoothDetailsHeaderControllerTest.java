@@ -209,6 +209,18 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
         verify(mBluetoothAdapter, never()).unregisterMetadataListener(mBluetoothDevice);
     }
 
+    @Test
+    public void onDestroy_isAvailable_recycleBitmap() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
+                .thenReturn("true");
+        mController.mIconCache.put(ICON_URI, mBitmap);
+
+        mController.onDestroy();
+
+        assertThat(mController.mIconCache).isEmpty();
+        verify(mBitmap).recycle();
+    }
+
     private void assertBatteryLevel(LinearLayout linearLayout, int batteryLevel) {
         final TextView textView = linearLayout.findViewById(R.id.bt_battery_summary);
         assertThat(textView.getText().toString()).isEqualTo(

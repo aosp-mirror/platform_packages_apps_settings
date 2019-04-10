@@ -28,7 +28,6 @@ import static org.mockito.Mockito.verify;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ViewFlipper;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,7 +67,7 @@ public class SwipeDismissalDelegateTest {
         activityController.create();
         mRecyclerView = new RecyclerView(mActivity);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mDismissalDelegate = new SwipeDismissalDelegate(mActivity, mDismissalDelegateListener);
+        mDismissalDelegate = new SwipeDismissalDelegate(mDismissalDelegateListener);
     }
 
     @Test
@@ -86,22 +85,16 @@ public class SwipeDismissalDelegateTest {
     @Test
     public void getMovementFlags_dismissalView_shouldDisableSwipe() {
         final RecyclerView.ViewHolder holder = getSliceViewHolder();
-        final ViewFlipper viewFlipper = holder.itemView.findViewById(R.id.view_flipper);
-        viewFlipper.showNext();
-        final View dismissalView = holder.itemView.findViewById(R.id.dismissal_view);
+        holder.itemView.findViewById(R.id.dismissal_view).setVisibility(View.VISIBLE);
 
-        assertThat(viewFlipper.getCurrentView()).isEqualTo(dismissalView);
         assertThat(mDismissalDelegate.getMovementFlags(mRecyclerView, holder)).isEqualTo(0);
     }
 
     @Test
     public void getMovementFlags_SliceViewHolder_shouldEnableSwipe() {
         final RecyclerView.ViewHolder holder = getSliceViewHolder();
-        final ViewFlipper viewFlipper = holder.itemView.findViewById(R.id.view_flipper);
-        viewFlipper.setDisplayedChild(0);
-        final View sliceView = holder.itemView.findViewById(R.id.slice_view);
+        holder.itemView.findViewById(R.id.dismissal_view).setVisibility(View.GONE);
 
-        assertThat(viewFlipper.getCurrentView()).isEqualTo(sliceView);
         assertThat(mDismissalDelegate.getMovementFlags(mRecyclerView, getSliceViewHolder()))
                 .isNotEqualTo(0);
     }

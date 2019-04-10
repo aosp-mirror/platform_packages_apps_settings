@@ -1007,6 +1007,10 @@
     <string name="skip_anyway_button_label">Skip anyway</string>
     <!-- Button for going to the previous screen or step [CHAR LIMIT=20] -->
     <string name="go_back_button_label">Go back</string>
+    <!-- Button text to skip lock screen setup [CHAR LIMIT=20] -->
+    <string name="skip_lock_screen_dialog_button_label">Skip</string>
+    <!-- Button text to cancel lock screen skip dialog [CHAR LIMIT=20] -->
+    <string name="cancel_lock_screen_dialog_button_label">Cancel</string>
     <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_title">Touch the sensor</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
@@ -1037,6 +1041,24 @@
     <string name="setup_fingerprint_enroll_enrolling_skip_title">Skip fingerprint setup?</string>
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_message">You\u2019ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you\u2019ll need to set this up later. Setup takes only a minute or so.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet">Protect your tablet with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device">Protect your device with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face authentication. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet">Protect your tablet with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face authentication. (device) [CHAR LIMIT=NONE] -->
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device">Protect your device with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face authentication. (default) [CHAR LIMIT=NONE] -->
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
+    <string name="lock_screen_pin_skip_title">Skip PIN Setup?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
+    <string name="lock_screen_password_skip_title">Skip Password Setup?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
+    <string name="lock_screen_pattern_skip_title">Skip Pattern Setup?</string>
 
     <!-- Button text to setup screen lock in onboard dialog [CHAR LIMIT=34] -->
     <string name="security_settings_fingerprint_enroll_setup_screen_lock">Set up screen lock</string>
@@ -7160,10 +7182,8 @@
     <!-- Search keyword for "Flashlight" settings [CHAR_LIMIT=NONE]-->
     <string name="keywords_flashlight">Flashlight, Light, Torch</string>
     <string name="keywords_change_wifi_state">wifi, wi-fi, toggle, control</string>
-    <string name="keywords_more_default_sms_app">text message, texting, messages, messaging, default</string>
     <string name="keywords_more_mobile_networks">cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte</string>
     <string name="keywords_wifi_calling">wifi, wi-fi, call, calling</string>
-    <string name="keywords_home">launcher, default, apps</string>
     <string name="keywords_display">screen, touchscreen</string>
     <string name="keywords_display_brightness_level">dim screen, touchscreen, battery, bright</string>
     <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
@@ -7188,8 +7208,6 @@
     <string name="keywords_users">restriction, restrict, restricted</string>
     <string name="keywords_keyboard_and_ime">text correction, correct, sound, vibrate, auto, language, gesture, suggest, suggestion, theme, offensive, word, type, emoji, international</string>
     <string name="keywords_reset_apps">reset, preferences, default</string>
-    <string name="keywords_emergency_app">emergency, ice, app, default</string>
-    <string name="keywords_default_phone_app">phone, dialer, default</string>
     <string name="keywords_all_apps">apps, download, applications, system</string>
     <string name="keywords_app_permissions">apps, permissions, security</string>
     <string name="keywords_default_apps">apps, default</string>
@@ -7261,14 +7279,8 @@
     <!-- List of synonyms for the Default Assist and Voice input setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_assist_input">default, assistant</string>
 
-    <!-- List of synonyms for the Wallpaper picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_default_browser">default, default browser</string>
-
     <!-- List of synonyms for the default payment app setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_default_payment_app">payment, default</string>
-
-    <!-- List of synonyms for the default links setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_default_links">default</string>
 
     <!-- List of synonyms for Ambient display setting (when the screen is off), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_ambient_display">incoming notification</string>

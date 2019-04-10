@@ -18,17 +18,23 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.any;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 
+import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.CardContentProvider;
 import com.android.settings.homepage.contextualcards.CardDatabaseHelper;
 import com.android.settings.homepage.contextualcards.ContextualCard;
@@ -48,6 +54,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowContentResolver;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class SliceContextualCardControllerTest {
@@ -91,15 +98,17 @@ public class SliceContextualCardControllerTest {
         cr.close();
 
         assertThat(qryDismissed).isEqualTo(1);
-        verify(mFeatureFactory.mContextualCardFeatureProvider).logContextualCardDismiss(card);
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_DISMISS), any(String.class));
     }
 
     @Test
-    public void onDismissed_noFeedbackEmail_shouldNotShowFeedbackDialog() {
+    public void onDismissed_feedbackDisabled_shouldNotShowFeedbackDialog() {
         mResolver.insert(CardContentProvider.REFRESH_CARD_URI, generateOneRow());
         final ContextualCardsFragment fragment =
                 FragmentController.of(new ContextualCardsFragment()).create().get();
         final ShadowActivity shadowActivity = Shadows.shadowOf(fragment.getActivity());
+        doReturn(false).when(mController).isFeedbackEnabled(anyString());
 
         mController.onDismissed(getTestSliceCard());
 
@@ -107,17 +116,51 @@ public class SliceContextualCardControllerTest {
     }
 
     @Test
-    @Config(qualifiers = "mcc999")
-    public void onDismissed_hasFeedbackEmail_shouldShowFeedbackDialog() {
+    public void onDismissed_feedbackEnabled_shouldShowFeedbackDialog() {
         mResolver.insert(CardContentProvider.REFRESH_CARD_URI, generateOneRow());
         final ContextualCardsFragment fragment =
                 FragmentController.of(new ContextualCardsFragment()).create().get();
         final ShadowActivity shadowActivity = Shadows.shadowOf(fragment.getActivity());
+        doReturn(true).when(mController).isFeedbackEnabled(anyString());
 
         mController.onDismissed(getTestSliceCard());
 
         assertThat(shadowActivity.getNextStartedActivity().getComponent().getClassName())
                 .isEqualTo(ContextualCardFeedbackDialog.class.getName());
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isFeedbackEnabled_hasFeedbackEmail_debug_returnTrue() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
+        final String email = mContext.getString(R.string.config_contextual_card_feedback_email);
+
+        assertThat(mController.isFeedbackEnabled(email)).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isFeedbackEnabled_hasFeedbackEmail_user_returnFalse() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
+        final String email = mContext.getString(R.string.config_contextual_card_feedback_email);
+
+        assertThat(mController.isFeedbackEnabled(email)).isFalse();
+    }
+
+    @Test
+    public void isFeedbackEnabled_noFeedbackEmail_debug_returnFalse() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
+        final String email = mContext.getString(R.string.config_contextual_card_feedback_email);
+
+        assertThat(mController.isFeedbackEnabled(email)).isFalse();
+    }
+
+    @Test
+    public void isFeedbackEnabled_noFeedbackEmail_user_returnFalse() {
+        ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
+        final String email = mContext.getString(R.string.config_contextual_card_feedback_email);
+
+        assertThat(mController.isFeedbackEnabled(email)).isFalse();
     }
 
     private ContentValues generateOneRow() {
