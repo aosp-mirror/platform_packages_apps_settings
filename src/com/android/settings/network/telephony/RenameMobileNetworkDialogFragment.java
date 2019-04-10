@@ -99,7 +99,8 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
                             mSubId);
                     String newName = mNameView.getText().toString();
                     if (currentInfo != null && !currentInfo.getDisplayName().equals(newName)) {
-                        mSubscriptionManager.setDisplayName(newName, mSubId);
+                        mSubscriptionManager.setDisplayName(newName, mSubId,
+                                SubscriptionManager.NAME_SOURCE_USER_INPUT);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, null);
