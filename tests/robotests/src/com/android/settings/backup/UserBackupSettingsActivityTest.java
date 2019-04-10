@@ -29,7 +29,6 @@ import android.app.Application;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.UserHandle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -53,8 +52,7 @@ import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {UserBackupSettingsActivityTest.ShadowBackupSettingsHelper.class,
-                UserBackupSettingsActivityTest.ShadowUserHandle.class})
+@Config(shadows = {UserBackupSettingsActivityTest.ShadowBackupSettingsHelper.class})
 public class UserBackupSettingsActivityTest {
     private ActivityController<UserBackupSettingsActivity> mActivityController;
     private UserBackupSettingsActivity mActivity;
@@ -85,7 +83,7 @@ public class UserBackupSettingsActivityTest {
 
     @After
     public void resetShadows() {
-        ShadowUserHandle.reset();
+        ShadowBackupSettingsHelper.reset();
     }
 
     @Test
@@ -125,7 +123,9 @@ public class UserBackupSettingsActivityTest {
     }
 
     @Test
-    public void getNonIndexableKeys_SystemUser() {
+    public void getNonIndexableKeys_whenShowBackupSettings() {
+        ShadowBackupSettingsHelper.showBackupSettingsForUser = true;
+
         assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
                 mApplication, true)).isNotEmpty();
         assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
@@ -133,17 +133,24 @@ public class UserBackupSettingsActivityTest {
     }
 
     @Test
-    public void getNonIndexableKeys_NonSystemUser() {
-        ShadowUserHandle.setUid(1); // Non-SYSTEM user.
+    public void getNonIndexableKeys_whenDontShowBackupSettings() {
+        ShadowBackupSettingsHelper.showBackupSettingsForUser = false;
 
         assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
             mApplication, true)).isNotEmpty();
         assertThat(UserBackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-            mApplication)).isEmpty();
+            mApplication)).contains("Backup");
     }
 
     @Implements(BackupSettingsHelper.class)
     public static class ShadowBackupSettingsHelper {
+        static boolean showBackupSettingsForUser = true;
+
+        @Implementation
+        public boolean showBackupSettingsForUser() {
+            return showBackupSettingsForUser;
+        }
+
         @Implementation
         protected Intent getIntentForBackupSettings() {
             return mIntent;
@@ -153,24 +160,10 @@ public class UserBackupSettingsActivityTest {
         protected boolean isBackupProvidedByManufacturer() {
             return mIsBackupProvidedByOEM;
         }
-    }
-
-    @Implements(UserHandle.class)
-    public static class ShadowUserHandle {
-        private static int sUid = 0; // SYSTEM by default
-
-        public static void setUid(int uid) {
-            sUid = uid;
-        }
-
-        @Implementation
-        protected static int myUserId() {
-            return sUid;
-        }
 
         @Resetter
         public static void reset() {
-            sUid = 0;
+            showBackupSettingsForUser = true;
         }
     }
 }
