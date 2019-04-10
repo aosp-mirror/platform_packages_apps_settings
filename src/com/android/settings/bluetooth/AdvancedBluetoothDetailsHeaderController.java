@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.DeviceConfig;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -64,7 +66,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     final Map<String, Bitmap> mIconCache;
     private CachedBluetoothDevice mCachedDevice;
-    private BluetoothDevice mBluetoothDevice;
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
     @VisibleForTesting
@@ -88,9 +89,11 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
+        final boolean advancedEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, true);
         final boolean untetheredHeadset = BluetoothUtils.getBooleanMetaData(
                 mCachedDevice.getDevice(), BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
-        return untetheredHeadset ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return advancedEnabled && untetheredHeadset ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -138,7 +141,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     public void init(CachedBluetoothDevice cachedBluetoothDevice) {
         mCachedDevice = cachedBluetoothDevice;
-        mBluetoothDevice = mCachedDevice.getDevice();
     }
 
     @VisibleForTesting

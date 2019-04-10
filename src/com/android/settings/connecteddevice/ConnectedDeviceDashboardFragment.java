@@ -18,11 +18,13 @@ package com.android.settings.connecteddevice;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
+import android.provider.DeviceConfig;
 import android.provider.SearchIndexableResource;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
@@ -86,12 +88,15 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        final boolean nearbyEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_NEAR_BY_SUGGESTION_ENABLED, true);
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
         use(DiscoverableFooterPreferenceController.class).init(this);
-        use(SlicePreferenceController.class).setSliceUri(
-                Uri.parse(getString(R.string.config_nearby_devices_slice_uri)));
+        use(SlicePreferenceController.class).setSliceUri(nearbyEnabled
+                ? Uri.parse(getString(R.string.config_nearby_devices_slice_uri))
+                : null);
     }
 
     /**
