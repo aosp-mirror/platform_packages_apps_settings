@@ -177,7 +177,7 @@ public class MobileNetworkUtils {
      */
     public static boolean showEuiccSettings(Context context) {
         EuiccManager euiccManager =
-                (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
+                (EuiccManager) context.getSystemService(EuiccManager.class);
         if (!euiccManager.isEnabled()) {
             return false;
         }
@@ -185,7 +185,7 @@ public class MobileNetworkUtils {
         final ContentResolver cr = context.getContentResolver();
 
         TelephonyManager tm =
-                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
         String currentCountry = tm.getNetworkCountryIso().toLowerCase();
         String supportedCountries =
                 Settings.Global.getString(cr, Settings.Global.EUICC_SUPPORTED_COUNTRIES);
