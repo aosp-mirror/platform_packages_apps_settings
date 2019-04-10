@@ -112,7 +112,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private UserManager mUserManager;
     private PackageManager mPm;
 
-    private boolean mFinishing;
+    @VisibleForTesting
+    boolean mFinishing;
     private boolean mListeningToPackageRemove;
 
 
@@ -544,7 +545,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     @VisibleForTesting
     void retrieveAppEntry() {
         final Activity activity = getActivity();
-        if (activity == null) {
+        if (activity == null || mFinishing) {
             return;
         }
         if (mState == null) {
@@ -650,7 +651,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                     || TextUtils.equals(mAppEntry.info.packageName, packageName)) {
                 onPackageRemoved();
             } else if (mAppEntry.info.isResourceOverlay()
-                       && TextUtils.equals(mPackageInfo.overlayTarget, packageName)) {
+                    && TextUtils.equals(mPackageInfo.overlayTarget, packageName)) {
                 refreshUi();
             }
         }
