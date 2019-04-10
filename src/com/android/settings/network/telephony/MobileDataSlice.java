@@ -46,6 +46,7 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Custom {@link Slice} for Mobile Data.
@@ -71,6 +72,11 @@ public class MobileDataSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
+        // Mobile data not available, thus return no Slice.
+        if (!isMobileDataAvailable()) {
+            return null;
+        }
+
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_network_cell);
         final String title = mContext.getText(R.string.mobile_data_settings_title).toString();
@@ -176,6 +182,16 @@ public class MobileDataSlice implements CustomSliceable {
         final Intent intent = getIntent();
         return PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 intent, 0 /* flags */);
+    }
+
+    /**
+     * @return {@code true} when mobile data is not supported by the current device.
+     */
+    private boolean isMobileDataAvailable() {
+        final List<SubscriptionInfo> subInfoList =
+                mSubscriptionManager.getSelectableSubscriptionInfoList();
+
+        return !(subInfoList == null || subInfoList.isEmpty());
     }
 
     @VisibleForTesting
