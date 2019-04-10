@@ -41,6 +41,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.utils.ThreadUtils;
@@ -54,7 +55,7 @@ import java.util.Map;
  * This class adds a header with device name and status (connected/disconnected, etc.).
  */
 public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceController implements
-        LifecycleObserver, OnStart, OnStop, CachedBluetoothDevice.Callback {
+        LifecycleObserver, OnStart, OnStop, OnDestroy, CachedBluetoothDevice.Callback {
     private static final String TAG = "AdvancedBtHeaderCtrl";
 
     @VisibleForTesting
@@ -118,7 +119,13 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         }
         mCachedDevice.unregisterCallback(this::onDeviceAttributesChanged);
         mBluetoothAdapter.unregisterMetadataListener(mCachedDevice.getDevice());
+    }
 
+    @Override
+    public void onDestroy() {
+        if (!isAvailable()) {
+            return;
+        }
         // Destroy icon bitmap associated with this header
         for (Bitmap bitmap : mIconCache.values()) {
             if (bitmap != null) {
