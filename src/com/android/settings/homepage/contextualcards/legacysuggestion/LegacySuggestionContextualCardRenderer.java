@@ -32,7 +32,7 @@ import com.android.settings.homepage.contextualcards.ControllerRendererPool;
 public class LegacySuggestionContextualCardRenderer implements ContextualCardRenderer {
 
     @LayoutRes
-    public static final int VIEW_TYPE = R.layout.homepage_suggestion_tile;
+    public static final int VIEW_TYPE = R.layout.legacy_suggestion_tile;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
