@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -27,10 +28,11 @@ import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.CardDatabaseHelper;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardController;
-import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeedbackDialog;
+import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.homepage.contextualcards.ContextualCardUpdateListener;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 /**
@@ -70,9 +72,13 @@ public class SliceContextualCardController implements ContextualCardController {
             dbHelper.markContextualCardAsDismissed(mContext, card.getName());
         });
         showFeedbackDialog(card);
-        final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
-        contextualCardFeatureProvider.logContextualCardDismiss(card);
+
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+
+        metricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_CONTEXTUAL_CARD_DISMISS,
+                ContextualCardLogUtils.buildCardDismissLog(card));
     }
 
     @Override
