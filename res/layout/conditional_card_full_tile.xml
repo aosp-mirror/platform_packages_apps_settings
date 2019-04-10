@@ -30,32 +30,32 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/homepage_card_icon_padding_start"
-            android:paddingEnd="@dimen/homepage_full_card_padding_end"
-            android:paddingTop="@dimen/homepage_condition_full_card_padding_top"
-            android:paddingBottom="@dimen/homepage_condition_full_card_padding_bottom"
+            android:paddingStart="@dimen/contextual_card_icon_padding_start"
+            android:paddingEnd="@dimen/contextual_full_card_padding_end"
+            android:paddingTop="@dimen/contextual_condition_full_card_padding_top"
+            android:paddingBottom="@dimen/contextual_condition_full_card_padding_bottom"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <ImageView
                 android:id="@android:id/icon"
-                android:layout_width="@dimen/homepage_card_icon_size"
-                android:layout_height="@dimen/homepage_card_icon_size"
+                android:layout_width="@dimen/contextual_card_icon_size"
+                android:layout_height="@dimen/contextual_card_icon_size"
                 android:tint="?android:attr/colorAccent"/>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingStart="@dimen/homepage_condition_full_card_padding_start"
-                android:paddingEnd="@dimen/homepage_condition_full_card_padding_end"
+                android:paddingStart="@dimen/contextual_condition_full_card_padding_start"
+                android:paddingEnd="@dimen/contextual_condition_full_card_padding_end"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@android:id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/homepage_condition_card_title_margin_bottom"
+                    android:layout_marginBottom="@dimen/contextual_condition_card_title_margin_bottom"
                     android:textAppearance="@style/TextAppearance.ConditionCardTitle"/>
 
                 <TextView
