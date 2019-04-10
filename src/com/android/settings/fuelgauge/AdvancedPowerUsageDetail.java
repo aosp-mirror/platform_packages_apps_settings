@@ -169,7 +169,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         try {
             args.putInt(EXTRA_UID, packageManager.getPackageUid(packageName, 0 /* no flag */));
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Cannot find package: " + packageName, e);
+            Log.w(TAG, "Cannot find package: " + packageName, e);
         }
 
         new SubSettingLauncher(caller)
