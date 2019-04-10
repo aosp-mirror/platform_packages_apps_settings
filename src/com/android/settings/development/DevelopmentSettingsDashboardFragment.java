@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
@@ -136,6 +137,20 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 }
             };
 
+    private final Runnable mSystemPropertiesChanged = new Runnable() {
+        @Override
+        public void run() {
+            synchronized (this) {
+                Activity activity = getActivity();
+                if (activity != null) {
+                    activity.runOnUiThread(() -> {
+                        updatePreferenceStates();
+                    });
+                }
+            }
+        }
+    };
+
     public DevelopmentSettingsDashboardFragment() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
     }
@@ -184,7 +199,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         registerReceivers();
-
+        SystemProperties.addChangeCallback(mSystemPropertiesChanged);
         final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter != null) {
             adapter.getProfileProxy(getActivity(), mBluetoothA2dpServiceListener,
@@ -203,6 +218,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             adapter.closeProfileProxy(BluetoothProfile.A2DP, mBluetoothA2dp);
             mBluetoothA2dp = null;
         }
+        SystemProperties.removeChangeCallback(mSystemPropertiesChanged);
     }
 
     @Override
