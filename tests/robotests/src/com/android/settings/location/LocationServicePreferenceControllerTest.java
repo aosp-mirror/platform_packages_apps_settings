@@ -31,6 +31,7 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.ArrayMap;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -53,15 +54,20 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
 public class LocationServicePreferenceControllerTest {
+    private static final String LOCATION_SERVICES_MANAGED_PROFILE_KEY =
+            "location_services_managed_profile";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocationSettings mFragment;
     @Mock
-    private PreferenceCategory mCategory;
+    private PreferenceCategory mCategoryPrimary;
+    @Mock
+    private PreferenceCategory mCategoryManaged;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -83,24 +89,13 @@ public class LocationServicePreferenceControllerTest {
         mController = spy(new LocationServicePreferenceController(
                 mContext, mFragment, mLifecycle, mSettingsInjector));
         final String key = mController.getPreferenceKey();
-        when(mScreen.findPreference(key)).thenReturn(mCategory);
-        when(mCategory.getKey()).thenReturn(key);
+        when(mScreen.findPreference(key)).thenReturn(mCategoryPrimary);
+        when(mScreen.findPreference(LOCATION_SERVICES_MANAGED_PROFILE_KEY)).thenReturn(
+                mCategoryManaged);
+        when(mCategoryPrimary.getKey()).thenReturn(key);
+        when(mCategoryManaged.getKey()).thenReturn(LOCATION_SERVICES_MANAGED_PROFILE_KEY);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
-    }
-
-    @Test
-    public void isAvailable_noInjectedSettings_shouldReturnFalse() {
-        doReturn(false).when(mSettingsInjector).hasInjectedSettings(anyInt());
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_hasInjectedSettings_shouldReturnFalse() {
-        doReturn(true).when(mSettingsInjector).hasInjectedSettings(anyInt());
-
-        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
@@ -122,24 +117,26 @@ public class LocationServicePreferenceControllerTest {
     @Test
     public void updateState_shouldRemoveAllAndAddInjectedSettings() {
         final List<Preference> preferences = new ArrayList<>();
+        final Map<Integer, List<Preference>> map = new ArrayMap<>();
         final Preference pref1 = new Preference(mContext);
         pref1.setTitle("Title1");
         final Preference pref2 = new Preference(mContext);
         pref2.setTitle("Title2");
         preferences.add(pref1);
         preferences.add(pref2);
-        doReturn(preferences)
-            .when(mSettingsInjector).getInjectedSettings(any(Context.class), anyInt());
+        map.put(UserHandle.myUserId(), preferences);
+        doReturn(map)
+                .when(mSettingsInjector).getInjectedSettings(any(Context.class), anyInt());
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
 
         mController.displayPreference(mScreen);
 
-        mController.updateState(mCategory);
+        mController.updateState(mCategoryPrimary);
 
-        verify(mCategory).removeAll();
-        verify(mCategory).addPreference(pref1);
-        verify(mCategory).addPreference(pref2);
+        verify(mCategoryPrimary).removeAll();
+        verify(mCategoryPrimary).addPreference(pref1);
+        verify(mCategoryPrimary).addPreference(pref2);
     }
 
     @Test
@@ -161,7 +158,7 @@ public class LocationServicePreferenceControllerTest {
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
 
         mController.displayPreference(mScreen);
-        mController.updateState(mCategory);
+        mController.updateState(mCategoryPrimary);
         verify(mSettingsInjector).getInjectedSettings(
                 any(Context.class), eq(UserHandle.myUserId()));
     }
@@ -181,7 +178,7 @@ public class LocationServicePreferenceControllerTest {
                 enforcingUsers);
 
         mController.displayPreference(mScreen);
-        mController.updateState(mCategory);
+        mController.updateState(mCategoryPrimary);
         verify(mSettingsInjector).getInjectedSettings(
                 any(Context.class), eq(UserHandle.USER_CURRENT));
     }
@@ -200,7 +197,9 @@ public class LocationServicePreferenceControllerTest {
                 UserManager.DISALLOW_CONFIG_LOCATION);
         pref.setTitle("Location Accuracy");
         preferences.add(pref);
-        doReturn(preferences).when(mSettingsInjector)
+        final Map<Integer, List<Preference>> map = new ArrayMap<>();
+        map.put(UserHandle.myUserId(), preferences);
+        doReturn(map).when(mSettingsInjector)
                 .getInjectedSettings(any(Context.class), anyInt());
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
 
@@ -217,7 +216,7 @@ public class LocationServicePreferenceControllerTest {
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
 
         mController.displayPreference(mScreen);
-        mController.updateState(mCategory);
+        mController.updateState(mCategoryPrimary);
 
         assertThat(pref.isEnabled()).isFalse();
         assertThat(pref.isDisabledByAdmin()).isTrue();
