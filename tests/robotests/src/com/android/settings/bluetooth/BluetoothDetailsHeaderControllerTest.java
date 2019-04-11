@@ -123,9 +123,9 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
     }
 
     @Test
-    public void isAvailable_unthetheredHeadset_returnFalse() {
+    public void isAvailable_untetheredHeadset_returnFalse() {
         when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET)).thenReturn("true");
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn("true".getBytes());
 
         assertThat(mController.isAvailable()).isFalse();
     }
