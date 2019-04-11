@@ -17,10 +17,14 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -34,7 +38,11 @@ import com.google.android.setupcompat.template.FooterButton;
  */
 public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
-    private static final int REQUEST_ADD_ANOTHER = 1;
+    @VisibleForTesting
+    static final int REQUEST_ADD_ANOTHER = 1;
+    @VisibleForTesting
+    static final String FINGERPRINT_SUGGESTION_ACTIVITY =
+            "com.android.settings.SetupFingerprintSuggestionActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +93,28 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     protected void onNextButtonClick(View view) {
+        setFingerprintSuggestionEnabled();
         setResult(RESULT_FINISHED);
         finish();
+    }
+
+    private void setFingerprintSuggestionEnabled() {
+        final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
+        if (fpm != null) {
+            int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
+
+            // Only show "Add another fingerprint" if the user already enrolled one.
+            // "Add fingerprint" will be shown in the main flow if the user hasn't enrolled any
+            // fingerprints. If the user already added more than one fingerprint, they already know
+            // to add multiple fingerprints so we don't show the suggestion.
+            int flag = (enrolled == 1) ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                    : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+
+            ComponentName componentName = new ComponentName(getApplicationContext(),
+                    FINGERPRINT_SUGGESTION_ACTIVITY);
+            getPackageManager().setComponentEnabledSetting(
+                    componentName, flag, PackageManager.DONT_KILL_APP);
+        }
     }
 
     private void onAddAnotherButtonClick(View view) {
@@ -95,6 +123,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setFingerprintSuggestionEnabled();
         if (requestCode == REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
             setResult(resultCode, data);
             finish();
