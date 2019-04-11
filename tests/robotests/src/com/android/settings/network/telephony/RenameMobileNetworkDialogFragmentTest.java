@@ -102,7 +102,7 @@ public class RenameMobileNetworkDialogFragmentTest {
         final Button negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         negativeButton.performClick();
 
-        verify(mSubscriptionMgr, never()).setDisplayName(anyString(), anyInt());
+        verify(mSubscriptionMgr, never()).setDisplayName(anyString(), anyInt(), anyInt());
     }
 
     @Test
@@ -118,7 +118,8 @@ public class RenameMobileNetworkDialogFragmentTest {
         positiveButton.performClick();
 
         final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(mSubscriptionMgr).setDisplayName(captor.capture(), eq(mSubscriptionId));
+        verify(mSubscriptionMgr).setDisplayName(captor.capture(), eq(mSubscriptionId),
+                eq(SubscriptionManager.NAME_SOURCE_USER_INPUT));
         assertThat(captor.getValue()).isEqualTo("test2");
     }
 
