@@ -282,6 +282,13 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
+    public void getPreferenceControllers_exiting_shouldReturnNull() {
+        mFragment.mFinishing = true;
+
+        assertThat(mFragment.createPreferenceControllers(mShadowContext)).isNull();
+    }
+
+    @Test
     public void getNumberOfUserWithPackageInstalled_twoUsersInstalled_shouldReturnTwo()
             throws PackageManager.NameNotFoundException {
         final String packageName = "Package1";

@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="network_and_internet_screen"
     android:title="@string/network_dashboard_title"
-    settings:initialExpandedChildrenCount="6">
+    settings:initialExpandedChildrenCount="5">
 
     <PreferenceCategory
         android:key="multi_network_header"
@@ -53,7 +53,7 @@
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedSwitchPreference
-        android:key="toggle_airplane"
+        android:key="airplane_mode"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
         android:disableDependentsState="true"

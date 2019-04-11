@@ -24,12 +24,12 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.euicc.EuiccManager;
 import android.util.ArrayMap;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
@@ -81,8 +81,8 @@ public class MobileNetworkListController extends AbstractPreferenceController im
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceScreen = screen;
-        final EuiccManager euiccManager = mContext.getSystemService(EuiccManager.class);
-        mPreferenceScreen.findPreference(KEY_ADD_MORE).setVisible(euiccManager.isEnabled());
+        mPreferenceScreen.findPreference(KEY_ADD_MORE).setVisible(
+                MobileNetworkUtils.showEuiccSettings(mContext));
         update();
     }
 

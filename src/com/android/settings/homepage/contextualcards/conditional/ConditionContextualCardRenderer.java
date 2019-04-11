@@ -39,9 +39,9 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  */
 public class ConditionContextualCardRenderer implements ContextualCardRenderer {
     @LayoutRes
-    public static final int VIEW_TYPE_HALF_WIDTH = R.layout.homepage_condition_half_tile;
+    public static final int VIEW_TYPE_HALF_WIDTH = R.layout.conditional_card_half_tile;
     @LayoutRes
-    public static final int VIEW_TYPE_FULL_WIDTH = R.layout.homepage_condition_full_tile;
+    public static final int VIEW_TYPE_FULL_WIDTH = R.layout.conditional_card_full_tile;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;

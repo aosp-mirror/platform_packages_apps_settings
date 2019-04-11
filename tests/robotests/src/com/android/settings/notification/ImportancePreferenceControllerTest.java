@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
@@ -36,6 +37,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
@@ -100,7 +102,18 @@ public class ImportancePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         mController.onResume(appRow, mock(NotificationChannel.class), null, null);
-        assertTrue(mController.isAvailable());
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_isGroupBlocked() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
+        when(group.isBlocked()).thenReturn(true);
+        mController.onResume(appRow, channel, group, null);
+        assertFalse(mController.isAvailable());
     }
 
     @Test

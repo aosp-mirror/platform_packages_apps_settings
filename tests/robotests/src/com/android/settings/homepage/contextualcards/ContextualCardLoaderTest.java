@@ -22,12 +22,15 @@ import static com.android.settings.homepage.contextualcards.ContextualCardLoader
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
 
@@ -182,8 +185,10 @@ public class ContextualCardLoaderTest {
 
         mContextualCardLoader.getDisplayableCards(new ArrayList<>());
 
-        verify(mFakeFeatureFactory.mContextualCardFeatureProvider).logContextualCardDisplay(
-                anyList(), anyList());
+        verify(mFakeFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW), any(String.class));
+        verify(mFakeFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW), any(String.class));
     }
 
     @Test

@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Looper;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
@@ -96,6 +97,10 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        Intent intent = mPreference.getIntent();
+        if (intent != null) {
+            intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
+        }
         if (!isAvailable()) {
             // Set category as invisible
             final Preference preferenceCateogry = screen.findPreference(KEY_PREFERENCE_CATEGORY);

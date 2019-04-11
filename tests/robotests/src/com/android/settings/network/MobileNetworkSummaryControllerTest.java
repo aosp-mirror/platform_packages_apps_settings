@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
+import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 
@@ -59,6 +60,8 @@ public class MobileNetworkSummaryControllerTest {
     @Mock
     private Lifecycle mLifecycle;
     @Mock
+    private TelephonyManager mTelephonyManager;
+    @Mock
     private EuiccManager mEuiccManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -71,8 +74,11 @@ public class MobileNetworkSummaryControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(Robolectric.setupActivity(Activity.class));
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
+        when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
         when(mEuiccManager.isEnabled()).thenReturn(true);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.EUICC_PROVISIONED, 1);
 
         mController = new MobileNetworkSummaryController(mContext, mLifecycle);
         mPreference = spy(new AddPreference(mContext, null));
