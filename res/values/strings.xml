@@ -7829,7 +7829,7 @@
     <string name="notification_pulse_title">Blink light</string>
 
     <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
-    <string name="lock_screen_notifications_title">On lock screen</string>
+    <string name="lock_screen_notifications_title">Lock screen</string>
 
     <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
     <string name="locked_work_profile_notification_title">When work profile is locked</string>
@@ -7840,19 +7840,19 @@
     <string name="lock_screen_notifications_summary_show">Show all notification content</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications: sensitive information will be
-         hidden or redacted from notifications shown on a secure lock screen
+         hidden or redacted from notifications shown on a secure lock screen, but will be shown if the user is unlocked by either smart lock or via biometric unlock mechanism.
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_hide">Hide sensitive content</string>
+    <string name="lock_screen_notifications_summary_hide">Show sensitive content only when unlocked</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications: notifications will not appear on a secure lock screen
          [CHAR LIMIT=50] -->
     <string name="lock_screen_notifications_summary_disable">Don\u2019t show notifications at all</string>
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_notifications_interstitial_message">When your device is locked, how do you want notifications to show?</string>
+    <string name="lock_screen_notifications_interstitial_message">How do you want the lock screen to display?</string>
 
-    <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how they want their notifications to appear when the device is locked [CHAR LIMIT=30] -->
-    <string name="lock_screen_notifications_interstitial_title">Notifications</string>
+    <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how much notification content they want to see on their lock screen [CHAR LIMIT=30] -->
+    <string name="lock_screen_notifications_interstitial_title">Lock screen</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications:  all information will be
          shown in work notifications shown on a secure lock screen
@@ -8156,7 +8156,7 @@
     <string name="app_notification_override_dnd_summary">Let these notifications continue to interrupt when Do Not Disturb is on</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Visibility override option title -->
-    <string name="app_notification_visibility_override_title">On lock screen</string>
+    <string name="app_notification_visibility_override_title">Lock screen</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when allowed -->
     <string name="app_notification_row_banned">Blocked</string>
