@@ -49,9 +49,9 @@ import java.util.Set;
  * Card renderer for {@link ContextualCard} built as slice full card or slice half card.
  */
 public class SliceContextualCardRenderer implements ContextualCardRenderer, LifecycleObserver {
-    public static final int VIEW_TYPE_FULL_WIDTH = R.layout.homepage_slice_tile;
-    public static final int VIEW_TYPE_HALF_WIDTH = R.layout.homepage_slice_half_tile;
-    public static final int VIEW_TYPE_DEFERRED_SETUP = R.layout.homepage_slice_deferred_setup_tile;
+    public static final int VIEW_TYPE_FULL_WIDTH = R.layout.contextual_slice_full_tile;
+    public static final int VIEW_TYPE_HALF_WIDTH = R.layout.contextual_slice_half_tile;
+    public static final int VIEW_TYPE_DEFERRED_SETUP = R.layout.contextual_slice_deferred_setup;
 
     private static final String TAG = "SliceCardRenderer";
 

@@ -68,6 +68,11 @@
         android:title="@string/mobile_data_usage_title"
         settings:controller="com.android.settings.network.telephony.DataUsagePreferenceController"/>
 
+    <com.android.settings.datausage.BillingCyclePreference
+        android:key="billing_preference"
+        android:title="@string/billing_cycle"
+        settings:controller="com.android.settings.datausage.BillingCyclePreferenceController" />
+
     <SwitchPreference
         android:key="enhanced_4g_lte"
         android:title="@string/enhanced_4g_lte_mode_title"

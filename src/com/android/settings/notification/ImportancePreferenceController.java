@@ -50,10 +50,16 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
         if (mAppRow == null) {
             return false;
         }
+        if (mAppRow.banned) {
+            return false;
+        }
         if (mChannel == null) {
             return false;
         }
         if (isDefaultChannel()) {
+            return false;
+        }
+        if (mChannelGroup != null && mChannelGroup.isBlocked()) {
             return false;
         }
         return true;

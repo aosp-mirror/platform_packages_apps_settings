@@ -20,17 +20,4 @@ import java.util.List;
 
 /** Feature provider for the contextual card feature. */
 public interface ContextualCardFeatureProvider {
-
-    /** Homepage displays. */
-    void logHomepageDisplay(long latency);
-
-    /** When user clicks dismiss in contextual card */
-    void logContextualCardDismiss(ContextualCard card);
-
-    /** After ContextualCardManager decides which cards will be displayed/hidden */
-    void logContextualCardDisplay(List<ContextualCard> showedCards,
-            List<ContextualCard> hiddenCards);
-
-    /** When user clicks toggle/title area of a contextual card. */
-    void logContextualCardClick(ContextualCard card, int sliceRow, int tapTarget, int uiPosition);
 }

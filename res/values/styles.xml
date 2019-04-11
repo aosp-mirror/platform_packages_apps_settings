@@ -414,13 +414,13 @@
     </style>
 
     <style name="ContextualCardStyle">
-        <item name="android:layout_marginBottom">@dimen/homepage_card_vertical_margin</item>
-        <item name="android:layout_marginStart">@dimen/homepage_card_side_margin</item>
-        <item name="android:layout_marginEnd">@dimen/homepage_card_side_margin</item>
+        <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
+        <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
+        <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
         <item name="cardBackgroundColor">@color/contextual_card_background</item>
-        <item name="cardCornerRadius">@dimen/homepage_card_corner_radius</item>
+        <item name="cardCornerRadius">@dimen/contextual_card_corner_radius</item>
         <item name="cardElevation">0dp</item>
-        <item name="strokeColor">@color/homepage_card_stroke_color</item>
+        <item name="strokeColor">@color/contextual_card_stroke_color</item>
         <item name="strokeWidth">1dp</item>
     </style>
 
@@ -475,10 +475,10 @@
 
     <style name="DeferredSetupCardButton" parent="android:Widget.DeviceDefault.Button.Colored">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
-        <item name="android:paddingBottom">@dimen/homepage_deferred_setup_card_button_padding_bottom</item>
-        <item name="android:paddingEnd">@dimen/homepage_deferred_setup_card_button_padding_end</item>
-        <item name="android:paddingStart">@dimen/homepage_deferred_setup_card_button_padding_start</item>
-        <item name="android:paddingTop">@dimen/homepage_deferred_setup_card_button_padding_top</item>
+        <item name="android:paddingBottom">@dimen/contextual_deferred_setup_card_button_padding_bottom</item>
+        <item name="android:paddingEnd">@dimen/contextual_deferred_setup_card_button_padding_end</item>
+        <item name="android:paddingStart">@dimen/contextual_deferred_setup_card_button_padding_start</item>
+        <item name="android:paddingTop">@dimen/contextual_deferred_setup_card_button_padding_top</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">14sp</item>
     </style>
@@ -537,6 +537,8 @@
     <style name="SetupWizardPartnerResource">
         <!-- Disable to use partner overlay theme for outside setupwizard flow. -->
         <item name="sucUsePartnerResource">false</item>
+        <!-- Enable heavy theme style inside setupwizard flow. -->
+        <item name="sudUsePartnerHeavyTheme">true</item>
     </style>
 
 </resources>

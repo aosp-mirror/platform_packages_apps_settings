@@ -101,7 +101,7 @@ public class AssistantCapabilityPreferenceControllerTest {
     public void isChecked_prioritizerSettingIsOff_false() {
         List<String> capabilities = new ArrayList<>();
         capabilities.add(Adjustment.KEY_USER_SENTIMENT);
-        when(mBackend.getAssistantCapabilities(anyString())).thenReturn(capabilities);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
         assertThat(mPrioritizerController.isChecked()).isFalse();
     }
 
@@ -109,7 +109,7 @@ public class AssistantCapabilityPreferenceControllerTest {
     public void isChecked_prioritizerSettingIsOn_true() {
         List<String> capabilities = new ArrayList<>();
         capabilities.add(Adjustment.KEY_IMPORTANCE);
-        when(mBackend.getAssistantCapabilities(anyString())).thenReturn(capabilities);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
         assertThat(mPrioritizerController.isChecked()).isTrue();
     }
 
@@ -117,17 +117,17 @@ public class AssistantCapabilityPreferenceControllerTest {
     public void isChecked_chipSettingIsOff_false() {
         List<String> capabilities = new ArrayList<>();
         capabilities.add(Adjustment.KEY_IMPORTANCE);
-        when(mBackend.getAssistantCapabilities(anyString())).thenReturn(capabilities);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
         assertThat(mChipController.isChecked()).isFalse();
 
         capabilities = new ArrayList<>();
         capabilities.add(Adjustment.KEY_CONTEXTUAL_ACTIONS);
-        when(mBackend.getAssistantCapabilities(anyString())).thenReturn(capabilities);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
         assertThat(mChipController.isChecked()).isFalse();
 
         capabilities = new ArrayList<>();
         capabilities.add(Adjustment.KEY_TEXT_REPLIES);
-        when(mBackend.getAssistantCapabilities(anyString())).thenReturn(capabilities);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
         assertThat(mChipController.isChecked()).isFalse();
     }
 
@@ -136,34 +136,34 @@ public class AssistantCapabilityPreferenceControllerTest {
         List<String> capabilities = new ArrayList<>();
         capabilities.add(Adjustment.KEY_TEXT_REPLIES);
         capabilities.add(Adjustment.KEY_CONTEXTUAL_ACTIONS);
-        when(mBackend.getAssistantCapabilities(anyString())).thenReturn(capabilities);
+        when(mBackend.getAssistantAdjustments(anyString())).thenReturn(capabilities);
         assertThat(mChipController.isChecked()).isTrue();
     }
 
     @Test
     public void onPreferenceChange_prioritizerOn() {
         mPrioritizerController.onPreferenceChange(mPrioritizerPreference, true);
-        verify(mBackend).allowAssistantCapability(Adjustment.KEY_IMPORTANCE, true);
+        verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_IMPORTANCE, true);
     }
 
     @Test
     public void onPreferenceChange_prioritizerOff() {
         mPrioritizerController.onPreferenceChange(mPrioritizerPreference, false);
-        verify(mBackend).allowAssistantCapability(Adjustment.KEY_IMPORTANCE, false);
+        verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_IMPORTANCE, false);
     }
 
     @Test
     public void onPreferenceChange_chipsOn() {
         mChipController.onPreferenceChange(mChipPreference, true);
-        verify(mBackend).allowAssistantCapability(Adjustment.KEY_CONTEXTUAL_ACTIONS, true);
-        verify(mBackend).allowAssistantCapability(Adjustment.KEY_TEXT_REPLIES, true);
+        verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_CONTEXTUAL_ACTIONS, true);
+        verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_TEXT_REPLIES, true);
     }
 
     @Test
     public void onPreferenceChange_chipsOff() {
         mChipController.onPreferenceChange(mChipPreference, false);
-        verify(mBackend).allowAssistantCapability(Adjustment.KEY_CONTEXTUAL_ACTIONS, false);
-        verify(mBackend).allowAssistantCapability(Adjustment.KEY_TEXT_REPLIES, false);
+        verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_CONTEXTUAL_ACTIONS, false);
+        verify(mBackend).allowAssistantAdjustment(Adjustment.KEY_TEXT_REPLIES, false);
     }
 }
 

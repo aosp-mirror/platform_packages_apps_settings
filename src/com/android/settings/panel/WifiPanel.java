@@ -23,9 +23,9 @@ import android.net.Uri;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
-import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBuilderUtils;
+import com.android.settings.wifi.WifiSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,12 +60,12 @@ public class WifiPanel implements PanelContent {
     @Override
     public Intent getSeeMoreIntent() {
         final String screenTitle =
-                mContext.getText(R.string.network_dashboard_title).toString();
+                mContext.getText(R.string.wifi_settings).toString();
         final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                NetworkDashboardFragment.class.getName(),
+                WifiSettings.class.getName(),
                 null /* key */,
                 screenTitle,
-                SettingsEnums.SETTINGS_NETWORK_CATEGORY);
+                SettingsEnums.WIFI);
         intent.setClassName(mContext.getPackageName(), SubSettings.class.getName());
         return intent;
     }

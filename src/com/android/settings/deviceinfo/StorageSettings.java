@@ -150,8 +150,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         mInternalCategory.addPreference(mInternalSummary);
 
-        int privateCount = 0;
-
         final StorageManagerVolumeProvider smvp = new StorageManagerVolumeProvider(mStorageManager);
         final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(smvp);
         final long privateTotalBytes = info.totalBytes;
@@ -162,10 +160,16 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         for (VolumeInfo vol : volumes) {
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
-                final long volumeTotalBytes = PrivateStorageInfo.getTotalSize(vol,
-                        sTotalInternalStorage);
-                mInternalCategory.addPreference(
-                        new StorageVolumePreference(context, vol, volumeTotalBytes));
+
+                if (vol.getState() == VolumeInfo.STATE_UNMOUNTABLE) {
+                    mInternalCategory.addPreference(
+                            new StorageVolumePreference(context, vol, 0));
+                } else {
+                    final long volumeTotalBytes = PrivateStorageInfo.getTotalSize(vol,
+                            sTotalInternalStorage);
+                    mInternalCategory.addPreference(
+                            new StorageVolumePreference(context, vol, volumeTotalBytes));
+                }
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC
                     || vol.getType() == VolumeInfo.TYPE_STUB) {
                 mExternalCategory.addPreference(

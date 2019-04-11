@@ -20,15 +20,15 @@
     android:id="@+id/dismissal_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/homepage_card_dismissal_background"
+    android:background="@color/contextual_card_dismissal_background"
     android:orientation="vertical"
     android:visibility="gone">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/homepage_card_dismissal_side_margin"
-        android:layout_marginTop="@dimen/homepage_card_dismissal_margin_top"
+        android:layout_marginStart="@dimen/contextual_card_dismissal_side_margin"
+        android:layout_marginTop="@dimen/contextual_card_dismissal_margin_top"
         android:text="@string/contextual_card_dismiss_confirm_message"
         android:textAppearance="@style/TextAppearance.ContextualCardDismissalText"/>
 
@@ -49,8 +49,8 @@
             style="@style/ContextualCardDismissalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/homepage_card_dismissal_button_margin_start"
-            android:layout_marginEnd="@dimen/homepage_card_dismissal_button_margin_end"
+            android:layout_marginStart="@dimen/contextual_card_dismissal_button_margin_start"
+            android:layout_marginEnd="@dimen/contextual_card_dismissal_button_margin_end"
             android:text="@string/contextual_card_dismiss_remove"/>
 
     </LinearLayout>

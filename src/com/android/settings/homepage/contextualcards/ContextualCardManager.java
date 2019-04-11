@@ -228,8 +228,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
         //only log homepage display upon a fresh launch
         final long totalTime = System.currentTimeMillis() - mStartTime;
-        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext)
-                .logHomepageDisplay(totalTime);
         metricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_CONTEXTUAL_HOME_SHOW, (int) totalTime);
 
