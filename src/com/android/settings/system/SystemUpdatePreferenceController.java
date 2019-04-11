@@ -139,6 +139,7 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
             }
             Log.d(TAG, "ciActionOnSysUpdate: broadcasting intent " + intentStr +
                     " with extra " + extra + ", " + extraVal);
+            intent.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
             mContext.getApplicationContext().sendBroadcast(intent);
         }
     }
