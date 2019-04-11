@@ -24,7 +24,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -88,6 +90,8 @@ public class WifiCallingPreferenceControllerTest {
         when(mPreferenceScreen.findPreference(
                 WifiCallingPreferenceController.KEY_PREFERENCE_CATEGORY)).thenReturn(
                 mPreferenceCategory);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
+                mPreference);
     }
 
     @Test
@@ -156,6 +160,15 @@ public class WifiCallingPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
 
         assertThat(mPreferenceCategory.isVisible()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_available_setsSubscriptionIdOnIntent() {
+        Intent intent = new Intent();
+        mPreference.setIntent(intent);
+        mController.displayPreference(mPreferenceScreen);
+        assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(SUB_ID);
     }
 
     @Test
