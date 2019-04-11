@@ -47,8 +47,6 @@ public final class Utils {
     static final boolean V = BluetoothUtils.V; // verbose logging
     static final boolean D =  BluetoothUtils.D;  // regular logging
 
-    public static final int META_INT_ERROR = -1;
-
     private Utils() {
     }
 
@@ -153,31 +151,5 @@ public final class Utils {
     public static boolean isBluetoothScanningEnabled(Context context) {
         return Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1;
-    }
-
-    public static boolean getBooleanMetaData(BluetoothDevice bluetoothDevice, int key) {
-        if (bluetoothDevice == null) {
-            return false;
-        }
-
-        return Boolean.parseBoolean(bluetoothDevice.getMetadata(key));
-    }
-
-    public static String getStringMetaData(BluetoothDevice bluetoothDevice, int key) {
-        if (bluetoothDevice == null) {
-            return null;
-        }
-        return bluetoothDevice.getMetadata(key);
-    }
-
-    public static int getIntMetaData(BluetoothDevice bluetoothDevice, int key) {
-        if (bluetoothDevice == null) {
-            return META_INT_ERROR;
-        }
-        try {
-            return Integer.parseInt(bluetoothDevice.getMetadata(key));
-        } catch (NumberFormatException e) {
-            return META_INT_ERROR;
-        }
     }
 }

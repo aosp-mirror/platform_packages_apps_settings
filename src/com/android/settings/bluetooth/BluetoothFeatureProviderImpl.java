@@ -33,8 +33,8 @@ public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
 
     @Override
     public Uri getBluetoothDeviceSettingsUri(BluetoothDevice bluetoothDevice) {
-        final String uriString = bluetoothDevice.getMetadata(
+        final byte[] uriByte = bluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_ENHANCED_SETTINGS_UI_URI);
-        return uriString != null ? Uri.parse(uriString) : null;
+        return uriByte == null ? null : Uri.parse(new String(uriByte));
     }
 }
