@@ -36,6 +36,7 @@ public class Settings extends SettingsActivity {
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class DataSaverSummaryActivity extends SettingsActivity{ /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeForgetActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeSettingsActivity extends SettingsActivity { /* empty */ }

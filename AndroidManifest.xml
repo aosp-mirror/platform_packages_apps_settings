@@ -534,6 +534,18 @@
         </activity>
 
         <activity
+            android:name="Settings$DataSaverSummaryActivity"
+            android:label="@string/data_saver_title"
+            android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DATA_SAVER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.datausage.DataSaverSummary" />
+        </activity>
+
+        <activity
             android:name="Settings$DateTimeSettingsActivity"
             android:label="@string/date_and_time"
             android:icon="@drawable/ic_settings_date_time"
