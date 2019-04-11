@@ -339,21 +339,21 @@ public class NotificationBackend {
         }
     }
 
-    public void allowAssistantCapability(String capability, boolean allowed) {
+    public void allowAssistantAdjustment(String capability, boolean allowed) {
         try {
             if (allowed) {
-                sINM.allowAssistantCapability(capability);
+                sINM.allowAssistantAdjustment(capability);
             } else {
-                sINM.disallowAssistantCapability(capability);
+                sINM.disallowAssistantAdjustment(capability);
             }
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }
     }
 
-    public List<String> getAssistantCapabilities(String pkg) {
+    public List<String> getAssistantAdjustments(String pkg) {
         try {
-            return sINM.getAllowedAssistantCapabilities(pkg);
+            return sINM.getAllowedAssistantAdjustments(pkg);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }
