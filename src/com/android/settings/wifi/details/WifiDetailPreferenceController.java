@@ -71,7 +71,6 @@ import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -259,9 +258,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         public void onLost(Network network) {
             final boolean lostCurrentNetwork = network.equals(mNetwork);
             if (lostCurrentNetwork) {
-                // If support detail page for saved network, should update as disconnect but not
-                // exit. Except for ephemeral network which should not show on saved network list.
-                if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext) && !mIsEphemeral) {
+                // Should update as disconnect but not exit. Except for ephemeral network which
+                // should not show on saved network list.
+                if (!mIsEphemeral) {
                     return;
                 }
 
@@ -351,16 +350,12 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mLifecycle = lifecycle;
         lifecycle.addObserver(this);
 
-        if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext)) {
-            mWifiTracker = WifiTrackerFactory.create(
-                    mFragment.getActivity(),
-                    mWifiListener,
-                    mLifecycle,
-                    true /*includeSaved*/,
-                    true /*includeScans*/);
-        } else {
-            mWifiTracker = null;
-        }
+        mWifiTracker = WifiTrackerFactory.create(
+                mFragment.getActivity(),
+                mWifiListener,
+                mLifecycle,
+                true /*includeSaved*/,
+                true /*includeScans*/);
         mConnected = mAccessPoint.isActive();
         // When lost the network connection, WifiInfo/NetworkInfo will be clear. So causes we
         // could not check if the AccessPoint is ephemeral. Need to cache it in first.
@@ -545,11 +540,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             if (mNetwork == null || mNetworkInfo == null || mWifiInfo == null) {
                 // Once connected, can't get mNetworkInfo immediately, return false and wait for
                 // next time to update UI.
-                if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext)) {
-                    return false;
-                }
-
-                exitActivity();
                 return false;
             }
 
@@ -761,8 +751,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private boolean canConnectNetwork() {
         // Display connect button for disconnected AP even not in the range.
-        return SavedAccessPointsWifiSettings.usingDetailsFragment(mContext)
-                && !mAccessPoint.isActive();
+        return !mAccessPoint.isActive();
     }
 
     private void refreshIpLayerInfo() {
