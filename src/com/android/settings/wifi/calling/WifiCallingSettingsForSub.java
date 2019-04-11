@@ -122,7 +122,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             final CarrierConfigManager configManager = (CarrierConfigManager)
                     activity.getSystemService(Context.CARRIER_CONFIG_SERVICE);
             if (configManager != null) {
-                PersistableBundle b = configManager.getConfigForSubId(mSubId);
+                PersistableBundle b =
+                        configManager.getConfigForSubId(WifiCallingSettingsForSub.this.mSubId);
                 if (b != null) {
                     isWfcModeEditable = b.getBoolean(
                             CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
