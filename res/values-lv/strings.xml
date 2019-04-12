@@ -465,6 +465,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Ierīces aizsardzības funkcijas netiks ieslēgtas. Jūs nevarēsiet nodrošināt, ka šo tālruni neizmantos citas personas, ja tas tiks pazaudēts vai nozagts."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Tomēr izlaist"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Atpakaļ"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Izlaist"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Atcelt"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Pieskarieties sensoram"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Tas atrodas tālruņa aizmugurē. Izmantojiet rādītājpirkstu."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Attēls ar ierīci un pirkstu nospiedumu sensora atrašanās vietu uz tās"</string>
@@ -480,6 +482,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Vēlāk"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Izlaist pirksta nospieduma iestatīšanu?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Jūs izvēlējāties pirksta nospiedumu kā vienu no tālruņa atbloķēšanas iespējām. Ja izlaidīsiet šo darbību, iestatīšana būs jāveic vēlāk. Iestatīšanai nepieciešama aptuveni viena minūte."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Aizsargājiet planšetdatoru, izmantojot ekrāna bloķēšanas iespēju, lai neviens nevarētu lietot planšetdatoru, ja tas tiks nozagts vai pazaudēts. Ekrāna bloķēšanas iespēja ir nepieciešama arī pirksta nospieduma iestatīšanai. Pieskarieties vienumam Atcelt un pēc tam iestatiet PIN vai izvēlēties citu ekrāna bloķēšanas iespēju."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Aizsargājiet ierīci, izmantojot ekrāna bloķēšanas iespēju, lai neviens nevarētu lietot ierīci, ja tā tiks nozagta vai pazaudēta. Ekrāna bloķēšanas iespēja ir nepieciešama arī pirksta nospieduma iestatīšanai. Pieskarieties vienumam Atcelt un pēc tam iestatiet PIN vai izvēlēties citu ekrāna bloķēšanas iespēju."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Aizsargājiet tālruni, izmantojot ekrāna bloķēšanas iespēju, lai neviens nevarētu lietot tālruni, ja tas tiks nozagts vai pazaudēts. Ekrāna bloķēšanas iespēja ir nepieciešama arī pirksta nospieduma iestatīšanai. Pieskarieties vienumam Atcelt un pēc tam iestatiet PIN vai izvēlēties citu ekrāna bloķēšanas iespēju."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Aizsargājiet planšetdatoru, izmantojot ekrāna bloķēšanas iespēju, lai neviens nevarētu lietot planšetdatoru, ja tas tiks nozagts vai pazaudēts. Ekrāna bloķēšanas iespēja ir nepieciešama arī sejas autentifikācijas iestatīšanai. Pieskarieties vienumam Atcelt un pēc tam iestatiet PIN vai izvēlēties citu ekrāna bloķēšanas iespēju."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Aizsargājiet ierīci, izmantojot ekrāna bloķēšanas iespēju, lai neviens nevarētu lietot ierīci, ja tā tiks nozagta vai pazaudēta. Ekrāna bloķēšanas iespēja ir nepieciešama arī sejas autentifikācijas iestatīšanai. Pieskarieties vienumam Atcelt un pēc tam iestatiet PIN vai izvēlēties citu ekrāna bloķēšanas iespēju."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Aizsargājiet tālruni, izmantojot ekrāna bloķēšanas iespēju, lai neviens nevarētu lietot tālruni, ja tas tiks nozagts vai pazaudēts. Ekrāna bloķēšanas iespēja ir nepieciešama arī sejas autentifikācijas iestatīšanai. Pieskarieties vienumam Atcelt un pēc tam iestatiet PIN vai izvēlēties citu ekrāna bloķēšanas iespēju."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Vai izlaist PIN iestatīšanu?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Izlaist paroles iestatīšanu?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Vai neiestatīt kombināciju?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Iestatīt ekrāna bloķēšanu"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Gatavs"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Tas nav sensors!"</string>
@@ -1674,6 +1685,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Ļauj lietotnēm un pakalpojumiem meklēt Wi-Fi tīklus vienmēr, pat ja Wi-Fi ir izslēgts. Šo iestatījumu var izmantot, piemēram, lai uzlabotu atrašanās vietas funkcijas un pakalpojumus."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetooth meklēšana"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Ļauj lietotnēm un pakalpojumiem meklēt tuvumā esošas ierīces vienmēr, pat ja Bluetooth ir izslēgts. Šo iestatījumu var izmantot, piemēram, lai uzlabotu atrašanās vietas funkcijas un pakalpojumus."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"Atrašanās vietu pakalpojumi darbam"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi un mob. tīklu atr. vieta"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Ļaut lietotnēm izmantot Google atrašanās vietas pakalpojumu, lai ātrāk noteiktu jūsu atrašanās vietu. Tiks apkopoti un nosūtīti uz Google serveriem anonīmi atrašanās vietas dati."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fi noteikta atrašanās vieta"</string>
@@ -3091,10 +3103,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Tērzēšanas galva"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Lukturis, lukturītis, apgaismojums"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"Wifi, Wi-Fi, pārslēgt, pārvaldība"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"īsziņa, īsziņas sūtīšana, ziņojumi, ziņojumapmaiņa, noklusējuma"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"mobilais, mobilo sakaru operators, bezvadu, dati, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, zvans, zvanīšana"</string>
-    <string name="keywords_home" msgid="294182527446892659">"palaidējs, noklusējuma, lietotnes"</string>
     <string name="keywords_display" msgid="8910345814565493016">"ekrāns, skārienekrāns"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"aptumšot ekrānu, skārienekrāns, akumulators, spilgts"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"aptumšot ekrānu, nakts, tonis, nakts taustiņš, spilgtums, ekrāna krāsa, krāsa, krāsas"</string>
@@ -3118,8 +3128,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"ierobežojums, ierobežot, ierobežots"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"teksta labojums, labot, skaņa, vibrācija, automātisks, valoda, žests, ieteikt, ieteikums, motīvs, aizvainojošs, vārds, rakstīt, emocijzīmes, starptautisks"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"atiestatīt, preferences, noklusējums"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"ārkārtas gadījumi, ice, lietotne, noklusējums"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"tālrunis, numura sastādītājs, noklusējums"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"lietotnes, lejupielādēt, lietojumprogrammas, sistēma"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"lietotnes, atļaujas, drošība"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"lietotnes, noklusējums"</string>
@@ -3156,9 +3164,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"pievienots, ierīce, austiņas, ieauši, skaļrunis, bezvadu, pārī, ieausis, mūzika, multivide"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"fons, ekrāns, bloķēšanas ekrāns, motīvs"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"noklusējuma, palīgs"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"noklusējuma, noklusējuma pārlūks"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"maksājums, noklusējuma"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"noklusējuma"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"ienākošs paziņojums"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"usb piesaiste, bluetooth piesaiste, wi-fi tīklājs"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"haptisks, vibrēt, ekrāns, jutīgums"</string>

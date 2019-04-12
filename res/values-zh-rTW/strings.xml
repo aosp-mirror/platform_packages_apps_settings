@@ -461,6 +461,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"裝置保護功能將不會開啟。在這種情況下，你無法在這支手機遺失或遭竊時，防止其他人使用手機。"</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"略過"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"返回"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"略過"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"取消"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"輕觸感應器"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"指紋感應器位於手機背面。請用食指輕觸感應器。"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"裝置指紋感應器位置插圖"</string>
@@ -476,6 +478,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"稍後再說"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"要略過指紋設定程序嗎？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"你已選擇使用指紋做為其中一種手機解鎖方式。如果現在略過這項程序，你必須在稍後完成設定。設定程序只需要一分鐘左右。"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"建議你設定螢幕鎖定選項保護你的平板電腦。這樣一來，即使平板電腦遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定指紋。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"建議你設定螢幕鎖定選項保護你的裝置。這樣一來，即使裝置遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定指紋。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"建議你設定螢幕鎖定選項保護你的手機。這樣一來，即使手機遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定指紋。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"建議你設定螢幕鎖定選項保護你的平板電腦。這樣一來，即使平板電腦遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定臉孔驗證。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"建議你設定螢幕鎖定選項保護你的裝置。這樣一來，即使裝置遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定臉孔驗證。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"建議你設定螢幕鎖定選項保護你的手機。這樣一來，即使手機遺失或遭竊，其他人也無法使用。此外，你也必須設定螢幕鎖定選項，才能設定臉孔驗證。請輕觸 [取消]，然後設定 PIN 碼或選擇其他螢幕鎖定選項。"</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"要略過 PIN 碼設定程序嗎？"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"要略過密碼設定程序嗎？"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"要略過解鎖圖案設定程序嗎？"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"設定螢幕鎖定"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"糟糕，這不是感應器"</string>
@@ -1236,7 +1247,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"設定個人化螢幕"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"選擇桌布來源"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"螢幕保護程式"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"充電或插入座架時"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"充電或安置於座架上時"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"以上任一情況"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"安置於座架上時"</string>
@@ -1655,6 +1666,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"允許應用程式和服務隨時掃描 Wi‑Fi 網路 (即使 Wi-Fi 功能處於關閉狀態)。這可以用來改善適地性功能和服務。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"藍牙掃描"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"允許應用程式和服務隨時掃描附近裝置 (即使藍牙功能處於關閉狀態)。這可以用來改善適地性功能和服務。"</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"工作用定位服務"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi 和行動網路位置"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"允許應用程式使用 Google 的定位服務加速判斷你的約略位置。系統會收集匿名的位置資料並傳送給 Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"根據 Wi-Fi 判定位置"</string>
@@ -3051,10 +3063,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"即時通訊頭像"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"手電筒, 燈, 閃光燈"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, 切換, 控制"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"簡訊, 發送簡訊, 訊息, 傳送訊息, 預設"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"行動網路, 行動裝置, 電信業者, 無線, 數據, 4G, 3G, 2G, LTE"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, 通話, 撥號"</string>
-    <string name="keywords_home" msgid="294182527446892659">"啟動器, 預設, 應用程式"</string>
     <string name="keywords_display" msgid="8910345814565493016">"螢幕, 觸控螢幕"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"調暗螢幕, 觸控螢幕, 電池, 明亮"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"調暗螢幕, 夜間, 色調, night shift, 亮度, 螢幕色彩, 顏色, 色彩"</string>
@@ -3078,8 +3088,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"限制, 限制, 受限"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"文字修正, 校正, 音效, 震動, 自動, 語言, 手勢, 建議, 字詞建議, 主題, 令人反感, 字詞, 輸入, 表情符號, 國際"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"重設, 偏好設定, 預設值"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"緊急狀況, 應用程式, 預設"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"電話, 撥號程式, 預設"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"app, 下載, 應用程式, 系統"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"應用程式, 權限, 安全性"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"應用程式, 預設"</string>
@@ -3116,9 +3124,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"已連線, 裝置, 耳罩式耳機, 耳機, 喇叭, 無線, 配對, 耳塞式耳機, 音樂, 媒體"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"背景, 螢幕, 鎖定螢幕, 主題"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"預設,  Google 助理"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"預設, 預設瀏覽器"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"付款, 預設"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"預設"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"收到的通知"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"usb 數據連線, 藍牙數據連線, wifi 無線基地台"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"觸覺回饋, 震動, 螢幕, 敏感度"</string>
@@ -3458,7 +3464,7 @@
     <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"回覆為"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"「是」、「不確定」或「尚未回覆」"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"「是」或「不確定」"</string>
-    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"是"</string>
+    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"「是」"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"找不到規則。"</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"開啟/<xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
@@ -3477,7 +3483,7 @@
     <string name="zen_mode_calls" msgid="4769117032399813012">"允許進行通話"</string>
     <string name="zen_mode_calls_title" msgid="2905770092665685857">"通話"</string>
     <string name="zen_mode_calls_footer" msgid="2002070641802102110">"如要確認允許的來電是否會發出音效，請檢查你的裝置目前設為響鈴、震動還是靜音。"</string>
-    <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」啟用時封鎖來電。你可以調整設定，讓好友、家人或其他聯絡人可以聯絡你。"</string>
+    <string name="zen_mode_custom_calls_footer" msgid="4764756801941329281">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」啟用時封鎖來電。你可以調整設定，讓好友、家人或其他聯絡人能聯絡你。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"已加星號的聯絡人"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
       <item quantity="other">另外 <xliff:g id="NUM_PEOPLE">%d</xliff:g> 人</item>
@@ -3486,7 +3492,7 @@
     <string name="zen_mode_messages" msgid="3463040297974005265">"允許顯示簡訊"</string>
     <string name="zen_mode_messages_footer" msgid="2616568463646674149">"如要確認允許的訊息是否會發出音效，請檢查你的裝置目前設為響鈴、震動還是靜音。"</string>
     <string name="zen_mode_custom_messages_footer" msgid="356699532253965350">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」啟用時封鎖收到的簡訊。你可以調整設定，讓好友、家人或其他聯絡人可以聯絡你。"</string>
-    <string name="zen_mode_messages_title" msgid="7325983674655986445">"簡訊、多媒體訊息和簡訊應用程式"</string>
+    <string name="zen_mode_messages_title" msgid="7325983674655986445">"簡訊、多媒體訊息和通訊應用程式"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"來自任何人"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"僅限來自聯絡人"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"僅限來自已加星號的聯絡人"</string>
