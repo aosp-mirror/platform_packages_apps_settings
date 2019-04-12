@@ -458,6 +458,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Device protection features won’t be turned on. You won’t be able to prevent others from using this phone if it’s lost or stolen."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Skip anyway"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Go back"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Skip"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Touch the sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"It’s on the back of your phone. Use your index finger."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Illustration with device and fingerprint sensor location"</string>
@@ -473,6 +475,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Do it later"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Skip fingerprint setup?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"You’ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you’ll need to set this up later. Setup takes only a minute or so."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Protect your tablet with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Protect your device with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Protect your phone with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN or choose another screen lock option."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Protect your tablet with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Protect your device with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Protect your phone with a screen lock option so that no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Skip PIN Setup?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Skip Password Setup?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Skip Pattern Setup?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Set up screen lock"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Done"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Whoops, that\'s not the sensor"</string>
@@ -1652,6 +1663,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Allow apps and services to scan for Wi‑Fi networks at any time, even when Wi‑Fi is off. This can be used, for example, to improve location-based features and services."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetooth scanning"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"Location services for work"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi‑Fi &amp; mobile network location"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Let apps use Google\'s location service to estimate your location faster. Anonymous location data will be collected and sent to Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Location determined by Wi‑Fi"</string>
@@ -3048,10 +3060,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Chat head"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Flashlight, Light, Torch"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, toggle, control"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"text message, texting, messages, messaging, default"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"mobile, mobile operator, wireless, data, 4g,3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wi-fi, Wi-Fi, call, calling"</string>
-    <string name="keywords_home" msgid="294182527446892659">"launcher, default, apps"</string>
     <string name="keywords_display" msgid="8910345814565493016">"screen, touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"dim screen, touchscreen, battery, bright"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"dim screen, night, tint, night shift, brightness, screen colour, colour, color"</string>
@@ -3075,8 +3085,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"restriction, restrict, restricted"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"text correction, correct, sound, vibrate, auto, language, gesture, suggest, suggestion, theme, offensive, word, type, emoji, international"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"reset, preferences, default"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"emergency, ice, app, default"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"phone, dialer, default"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"apps, download, applications, system"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"apps, permissions, security"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"apps, default"</string>
@@ -3113,9 +3121,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"background, screen, lockscreen, theme"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"default, assistant"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"default, default browser"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"payment, default"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"default"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"incoming notification"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"usb tether, bluetooth tether, wifi hotspot"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"haptics, vibrate, screen, sensitivity"</string>

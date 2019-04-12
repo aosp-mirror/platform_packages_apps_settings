@@ -417,10 +417,8 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"अनुहार दर्ता गर्ने प्रक्रियाले काम गरेन।"</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"सबै कुरा तयार छ। राम्रो देखिँदै छ।"</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"सम्पन्न भयो"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_category (4102604281840004724) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_use_face_unlock_phone (5275635645351823301) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_category" msgid="4102604281840004724">"निम्न प्रयोजनमा आफ्नो अनुहार प्रयोग गर्नु…"</string>
+    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5275635645351823301">"तपाईंको यन्त्र अनलक गर्दै"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"अनुप्रयोगको साइन इन र भुक्तानी"</string>
     <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"अनलक गर्न आँखा खुल्ला छन्"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"अनुहारको प्रमाणीकरण प्रयोग गर्दा तपाईंका आँखा खुल्ला हुनै पर्छ"</string>
@@ -460,6 +458,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"यन्त्रको सुरक्षासम्बन्धी सुविधाहरू सक्रिय गरिने छैनन्। तपाईं यो फोन हराएको वा चोरी भएको अवस्थामा अरूलाई यो चलाउनबाट रोक्न सक्नुहुने छैन।"</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"जसरी पनि छाड्नुहोस्"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"पछाडि फिर्ता जानुहोस्"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"छाड्नुहोस्"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"रद्द गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"सेन्सरमा छुनुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"यो तपाईंको फोनको पछाडिको भागमा छ। आफ्नो चोर औंला प्रयोग गर्नुहोस्‌।"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"यन्त्र साथ चित्रण र फिंगरप्रिन्ट सेन्सर स्थान"</string>
@@ -475,6 +475,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"यसलाई पछि गर्नुहोस्‌"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"फिंगरप्रिन्ट सेटअप छोड्न चाहनुहुन्छ?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"तपाईँले आफ्नो फोन अनलक गर्ने एक तरिका रूपमा फिंगरप्रिन्ट छान्‍नुभएको छ। यदि तपाईँले अहिले छोड्नु भएमा पछि पुन: सेटअप गर्न पर्नेछ। सेटअप गर्न मात्र केहि मिनेट लाग्‍नेछ।"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"तपाईंको ट्याब्लेट हराएका वा चोरी भएका खण्डमा कसैले पनि त्यसको प्रयोग गर्न नसकोस् भन्नाका खातिर स्क्रिन लक प्रयोग गरी त्यसलाई सुरक्षित राख्नुहोस्। फिंगरप्रिन्ट सेट अप गर्न तपाईंलाई स्क्रिन लक गर्ने विकल्प पनि चाहिन्छ। रद्द गर्नुहोस् नामक विकल्पमा ट्याप गर्नुहोस्, त्यसपछि एउटा PIN सेट गर्नुहोस् वा स्क्रिन लक गर्ने अर्को विकल्प छनौट गर्नुहोस्।"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"तपाईंको यन्त्र हराएका वा चोरी भएका खण्डमा कसैले पनि त्यसको प्रयोग गर्न नसकोस् भन्नाका खातिर स्क्रिन लक प्रयोग गरी त्यसलाई सुरक्षित राख्नुहोस्। फिंगरप्रिन्ट सेट अप गर्न तपाईंलाई स्क्रिन लक गर्ने विकल्प पनि चाहिन्छ। रद्द गर्नुहोस् नामक विकल्पमा ट्याप गर्नुहोस्, त्यसपछि एउटा PIN सेट गर्नुहोस् वा स्क्रिन लक गर्ने अर्को विकल्प छनौट गर्नुहोस्।"</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"तपाईंको फोन हराएका वा चोरी भएका खण्डमा कसैले पनि त्यसको प्रयोग गर्न नसकोस् भन्नाका खातिर स्क्रिन लक प्रयोग गरी त्यसलाई सुरक्षित राख्नुहोस्। फिंगरप्रिन्ट सेट अप गर्न तपाईंलाई स्क्रिन लक गर्ने विकल्प पनि चाहिन्छ। रद्द गर्नुहोस् नामक विकल्पमा ट्याप गर्नुहोस्, त्यसपछि एउटा PIN सेट गर्नुहोस् वा स्क्रिन लक गर्ने अर्को विकल्प छनौट गर्नुहोस्।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"तपाईंको ट्याब्लेट हराएका वा चोरी भएका खण्डमा कसैले पनि त्यसको प्रयोग गर्न नसकोस् भन्नाका खातिर स्क्रिन लक प्रयोग गरी त्यसलाई सुरक्षित राख्नुहोस्। अनुहार प्रमाणीकरण गर्ने सुविधा सेट अप गर्न तपाईंलाई स्क्रिन लक गर्ने विकल्प पनि चाहिन्छ। रद्द गर्नुहोस् नामक विकल्पमा ट्याप गर्नुहोस्, त्यसपछि एउटा PIN सेट गर्नुहोस् वा स्क्रिन लक गर्ने अर्को विकल्प छनौट गर्नुहोस्।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"तपाईंको यन्त्र हराएका वा चोरी भएका खण्डमा कसैले पनि त्यसको प्रयोग गर्न नसकोस् भन्नाका खातिर स्क्रिन लक प्रयोग गरी त्यसलाई सुरक्षित राख्नुहोस्। अनुहार प्रमाणीकरण गर्ने सुविधा सेट अप गर्न तपाईंलाई स्क्रिन लक गर्ने विकल्प पनि चाहिन्छ। रद्द गर्नुहोस् नामक विकल्पमा ट्याप गर्नुहोस्, त्यसपछि एउटा PIN सेट गर्नुहोस् वा स्क्रिन लक गर्ने अर्को विकल्प छनौट गर्नुहोस्।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"तपाईंको फोन हराएका वा चोरी भएका खण्डमा कसैले पनि त्यसको प्रयोग गर्न नसकोस् भन्नाका खातिर स्क्रिन लक प्रयोग गरी त्यसलाई सुरक्षित राख्नुहोस्। अनुहार प्रमाणीकरण गर्ने सुविधा सेट अप गर्न तपाईंलाई स्क्रिन लक गर्ने विकल्प पनि चाहिन्छ। रद्द गर्नुहोस् नामक विकल्पमा ट्याप गर्नुहोस्, त्यसपछि एउटा PIN सेट गर्नुहोस् वा स्क्रिन लक गर्ने अर्को विकल्प छनौट गर्नुहोस्।"</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"PIN सेटअप गर्ने कार्य छाड्ने हो?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"पासवर्ड सेटअप गर्ने कार्य छाड्ने हो?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"ढाँच सेटअप गर्ने कार्य छाड्ने हो?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"स्क्रिन लक सेटअप गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"सम्पन्न भयो"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"आच्यौं, त्यो सेन्सर होइन नि त"</string>
@@ -1228,8 +1237,7 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"स्क्रिन बन्द हुन्छ"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> निष्क्रियता पछि"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"वालपेपर"</string>
-    <!-- no translation found for style_and_wallpaper_settings_title (2399486839820145870) -->
-    <skip />
+    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"शैली तथा वालपेपरहरू"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"पूर्वनिर्धारित मान"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"आफू अनुकूल"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"वालपेपरलाई परिवर्तन गर्नुहोस्"</string>
@@ -1655,6 +1663,8 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"अनुप्रयोग र सेवाहरूलाई जुनसुकै बेला (Wi‑Fi निष्क्रिय भएको बेलामा पनि) वरपरका Wi-Fi नेटवर्कहरू स्क्यान गर्न अनुमति दिनुहोस्। यसलाई स्थानमा आधारित सुविधा तथा सेवाहरू सुधार गर्ने जस्ता कार्यहरू गर्नाका लागि प्रयोग गर्न सकिन्छ।"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"ब्लुटुथ स्क्यान हुँदै"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"अनुप्रयोग तथा सेवाहरूलाई जुनसुकै बेला (ब्लुटुथ निष्क्रिय भएको बेलामा पनि) वरपरका यन्त्रहरू स्क्यान गर्न अनुमति दिनुहोस्‌। यसलाई स्थानमा आधारित सुविधा तथा सेवाहरू सुधार गर्ने जस्ता कार्यहरू गर्नाका लागि प्रयोग गर्न सकिन्छ।"</string>
+    <!-- no translation found for managed_profile_location_services (4723268446874715222) -->
+    <skip />
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi; मोबाइल नेटवर्क स्थान"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"तपाईँको स्थानलाई सीघ्र अनुमान गर्न अनुप्रयोगहरूलाई Google स्थान सेवा प्रयोग गर्न अनुमति दिनुहोस्। बेनामी स्थान डेटा भेला गरिने छ र Googleमा पठाइने छ।"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"वाइ-फाइद्वारा निर्धारित स्थान"</string>
@@ -2306,9 +2316,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"यो अनुप्रयोग पृष्ठभूमिमा ब्याट्रीको प्रयोग गर्न सक्षम हुने छ। तपाईंको ब्याट्री अपेक्षा गरेभन्दा चाँडै सकिन सक्छ।"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"हटाउनुहोस्"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"रद्द गर्नुहोस्"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रिको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रिको प्रयोग गरेको खण्डमा तपाईंको फोनले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रिको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रिको प्रयोग गरेको खण्डमा तपाईंको ट्याब्लेटले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रिको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रिको प्रयोग गरेको खण्डमा तपाईंको यन्त्रले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रीको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रीको प्रयोग गरेको खण्डमा तपाईंको फोनले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रीको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रीको प्रयोग गरेको खण्डमा तपाईंको ट्याब्लेटले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रीको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रीको प्रयोग गरेको खण्डमा तपाईंको यन्त्रले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"ब्याट्री प्रबन्धक"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"अनुप्रयोगहरूलाई स्वतः व्यवस्थित गर्नुहोस्"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"तपाईंले प्रायः प्रयोग नगर्ने अनुप्रयोगहरूमा ब्याट्री सीमित गर्नुहोस्"</string>
@@ -3051,10 +3061,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"कुराकानीको हेड"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"फ्ल्यासलाइट, बत्ती, टर्च"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, टगल, नियन्त्रण"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"पाठ सन्देश, पाठ सन्देश पठाउने कार्य, सन्देशहरू, सन्देश प्रवाह, पूर्वनिर्धारित"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"सेलुलर, मोबाइल, सेल वाहक, वायरलेस, डेटा, 4G, 3G, 2G, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, कल गर्नुहोस्, कल गर्दै"</string>
-    <string name="keywords_home" msgid="294182527446892659">"लन्चर, पूर्वनिर्धारित, अनुप्रयोगहरू"</string>
     <string name="keywords_display" msgid="8910345814565493016">"स्क्रिन, टचस्क्रिन"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"मधुरो स्क्रिन, टचस्क्रिन, ब्याट्री, चहकिलो"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"मधुरो स्क्रिन, रात, टिन्ट, रात्रि ड्युटी, उज्यालोपन, स्क्रिनको रङ, रङ"</string>
@@ -3078,8 +3086,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"प्रतिबन्ध, प्रतिबन्ध लगाउनुहोस्, प्रतिबन्धित"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"पाठ सच्याइ, सही, ध्वनि, कम्पन, स्वतः, भाषा, इसारा, सुझाव दिनु, सुझाव, विषयवस्तु, अपमानजनक, शब्द, प्रकार, इमोजी, अन्तर्राष्ट्रिय"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"रिसेट गर्नुहोस्, प्राथमिकताहरू, पूर्वनिर्धारित"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"आपतकालीन, आइस, अनुप्रयोग, पूर्वनिर्धारित"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"फोन, डायलर, पूर्वनिर्धारित"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"अनुप्रयोगहरू, डाउनलोड, अनुप्रयोगहरू, प्रणाली"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"अनुप्रयोगहरू, अनुमतिहरू, सुरक्षा"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"अनुप्रयोगहरू, पूर्वनिर्धारित"</string>
@@ -3116,9 +3122,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"जडान, यन्त्र, हेडफोन, हेडसेट, स्पिकर, वायरलेस, जोडा, इयरबड, सङ्गीत, मिडिया"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"पृष्ठभूमि, स्क्रिन, लकस्क्रिन, विषयवस्तु"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"पूर्वनिर्धारित, सहायक"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"पूर्वनिर्धारित, पूर्वनिर्धारित ब्राउजर"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"भुक्तानी, पूर्वनिर्धारित"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"पूर्वनिर्धारित"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"आगमन सूचना"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"usb टेदर, ब्लुटुथ टेदर, wifi हटस्पट"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"अनुभूतिमूलक, कम्पन, स्क्रिन, संवेदनशीलता"</string>
@@ -3309,10 +3313,8 @@
     <string name="bubbles_app_toggle_title" msgid="9143702245165359360">"बबलहरू"</string>
     <string name="bubbles_app_toggle_summary" msgid="7714358008428342285">"<xliff:g id="APP_NAME">%1$s</xliff:g> लाई केही सूचनाहरू बबलका रूपमा देखाउन दिनुहोस्"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="8013961655723563787">"बबलहरू सक्रिय पार्नुहोस्"</string>
-    <!-- no translation found for bubbles_feature_disabled_dialog_text (3616822820657195387) -->
-    <skip />
-    <!-- no translation found for bubbles_feature_disabled_button_approve (5317196831268846883) -->
-    <skip />
+    <string name="bubbles_feature_disabled_dialog_text" msgid="3616822820657195387">"यस अनुप्रयोगमा बबल सक्रिय गर्न सर्वप्रथम तपाईंले आफ्नो यन्त्रमा तिनीहरूलाई सक्रिय गर्नु पर्ने हुन्छ यस कार्यले तपाईंले यसअघि बबलहरू सक्रिय गर्नुभएका अन्य अनुप्रयोगहरूमा प्रभाव पार्छ।"</string>
+    <string name="bubbles_feature_disabled_button_approve" msgid="5317196831268846883">"यन्त्रमा सक्रिय गर्नुहोस्"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8176870537170586852">"रद्द गर्नुहोस्"</string>
     <string name="swipe_direction_title" msgid="6877543492435053137">"कारबाहीहरू स्वाइप गर्नुहोस्"</string>
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"खारेज गर्न दायाँतिर र मेनु देखाउन बायाँतिर स्वाइप गर्नुहोस्"</string>
@@ -3861,8 +3863,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"आन्तरिक भण्डारण: <xliff:g id="PERCENTAGE">%1$s</xliff:g> प्रयोग गरिएको - <xliff:g id="FREE_SPACE">%2$s</xliff:g> खाली"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> को निष्क्रियता पछिको शयन"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"वालपेपर, शयन अवस्था, फन्टको आकार"</string>
-    <!-- no translation found for display_dashboard_summary_with_style (7707201466027514198) -->
-    <skip />
+    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"शैली र वालपेपर, शयन, फन्टको आकार"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"निद्रा, फन्टको आकार"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"१० मिनेटको निष्क्रियता पछिको शयन"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> मेमोरीमध्ये औसत <xliff:g id="USED_MEMORY">%1$s</xliff:g> प्रयोगमा छ"</string>
@@ -3910,10 +3911,8 @@
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"प्रत्येक रात स्क्रिनको रङ स्वतः परिवर्तन गर्नुहोस्‌"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"रात्रिको प्रकाश सक्रिय छ"</string>
     <string name="condition_night_display_summary" msgid="7150932917610919907">"स्क्रिन रङ मधुरो गरियो"</string>
-    <!-- no translation found for condition_grayscale_title (3426050703427823519) -->
-    <skip />
-    <!-- no translation found for condition_grayscale_summary (7652835784223724625) -->
-    <skip />
+    <string name="condition_grayscale_title" msgid="3426050703427823519">"ग्रेस्केल"</string>
+    <string name="condition_grayscale_summary" msgid="7652835784223724625">"खरानी रङमा मात्र प्रदर्शन गर्नुहोस्"</string>
     <string name="homepage_condition_footer_content_description" msgid="2335918927419018030">"संक्षिप्त गर्नुहोस्"</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"तपाईंका लागि सुझाव गरिएको"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"सुझावहरू"</string>
