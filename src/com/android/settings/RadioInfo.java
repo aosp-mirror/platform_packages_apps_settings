@@ -1608,32 +1608,6 @@ public class RadioInfo extends Activity {
                 int phoneIndex = pos;
                 Phone[] phones = PhoneFactory.getPhones();
                 if (phones == null || phones.length <= phoneIndex) {
-                    return;
-                }
-                // getSubId says it takes a slotIndex, but it actually takes a phone index
-                int[] subIds = SubscriptionManager.getSubId(phoneIndex);
-                if (subIds == null || subIds.length < 1) {
-                    return;
-                }
-                mSelectedPhoneIndex = phoneIndex;
-
-                updatePhoneIndex(phoneIndex, subIds[0]);
-            }
-        }
-
-        public void onNothingSelected(AdapterView parent) {
-        }
-    };
-
-    AdapterView.OnItemSelectedListener mSelectPhoneIndexHandler =
-            new AdapterView.OnItemSelectedListener() {
-
-        public void onItemSelected(AdapterView parent, View v, int pos, long id) {
-            if (pos >= 0 && pos <= mPhoneIndexLabels.length - 1) {
-                // the array position is equal to the phone index
-                int phoneIndex = pos;
-                Phone[] phones = PhoneFactory.getPhones();
-                if (phones == null || phones.length <= phoneIndex) {
                     log("phoneIndex " + phoneIndex + " is invalid");
                     return;
                 }
