@@ -50,6 +50,7 @@ public class NetworkOperatorPreference extends Preference {
     private List<String> mForbiddenPlmns;
     private int mLevel = LEVEL_NONE;
     private boolean mShow4GForLTE;
+    private boolean mUseNewApi;
 
     // The following constants are used to draw signal icon.
     private static final Drawable EMPTY_DRAWABLE = new ColorDrawable(Color.TRANSPARENT);
@@ -61,6 +62,8 @@ public class NetworkOperatorPreference extends Preference {
         mCellInfo = cellinfo;
         mForbiddenPlmns = forbiddenPlmns;
         mShow4GForLTE = show4GForLTE;
+        mUseNewApi = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
         refresh();
     }
 
@@ -114,7 +117,9 @@ public class NetworkOperatorPreference extends Preference {
     }
 
     private void updateIcon(int level) {
-        if (level < 0 || level >= NUMBER_OF_LEVELS) return;
+        if (!mUseNewApi || level < 0 || level >= NUMBER_OF_LEVELS) {
+            return;
+        }
         Context context = getContext();
         SignalDrawable signalDrawable = new SignalDrawable(getContext());
         signalDrawable.setLevel(
