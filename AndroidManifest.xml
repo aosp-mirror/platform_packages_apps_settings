@@ -2666,10 +2666,12 @@
             android:excludeFromRecents="true"
             android:exported="false" />
 
-        <activity android:name=".sim.SimDialogActivity"
-                android:theme="@style/Theme.AlertDialog"
-                android:label="@string/sim_settings_title"
-                android:excludeFromRecents="true">
+        <activity
+            android:name=".sim.SimDialogActivity"
+            android:theme="@style/Theme.AlertDialog"
+            android:label="@string/sim_settings_title"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
