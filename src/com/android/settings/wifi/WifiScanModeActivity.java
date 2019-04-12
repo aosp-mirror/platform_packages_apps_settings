@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -132,7 +133,9 @@ public class WifiScanModeActivity extends FragmentActivity {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                    .setMessage(getString(R.string.wifi_scan_always_turnon_message, mApp))
+                    .setMessage(TextUtils.isEmpty(mApp) ?
+                        getString(R.string.wifi_scan_always_turn_on_message_unknown) :
+                        getString(R.string.wifi_scan_always_turnon_message, mApp))
                     .setPositiveButton(R.string.wifi_scan_always_confirm_allow,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
