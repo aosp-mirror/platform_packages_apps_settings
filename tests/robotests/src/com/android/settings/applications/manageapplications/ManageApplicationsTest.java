@@ -19,17 +19,14 @@ package com.android.settings.applications.manageapplications;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_ALL;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_MAIN;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_NOTIFICATION;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -172,7 +169,7 @@ public class ManageApplicationsTest {
         when(searchMenu.getActionView()).thenReturn(searchView);
         when(mMenu.findItem(R.id.search_app_list_menu)).thenReturn(searchMenu);
         when(mMenu.add(anyInt() /* groupId */, anyInt() /* itemId */, anyInt() /* order */,
-            anyInt() /* titleRes */)).thenReturn(helpMenu);
+                anyInt() /* titleRes */)).thenReturn(helpMenu);
         doReturn("Test").when(mFragment).getText(anyInt() /* resId */);
         doNothing().when(mFragment).updateOptionsMenu();
 
@@ -182,9 +179,27 @@ public class ManageApplicationsTest {
     }
 
     @Test
+    public void onCreateOptionsMenu_hasExpandSearchFlag_shouldExpandSearchView() {
+        final SearchView searchView = mock(SearchView.class);
+        final MenuItem searchMenu = mock(MenuItem.class);
+        final MenuItem helpMenu = mock(MenuItem.class);
+        when(searchMenu.getActionView()).thenReturn(searchView);
+        when(mMenu.findItem(R.id.search_app_list_menu)).thenReturn(searchMenu);
+        when(mMenu.add(anyInt() /* groupId */, anyInt() /* itemId */, anyInt() /* order */,
+                anyInt() /* titleRes */)).thenReturn(helpMenu);
+        doReturn("Test").when(mFragment).getText(anyInt() /* resId */);
+        doNothing().when(mFragment).updateOptionsMenu();
+
+        mFragment.mExpandSearch = true;
+        mFragment.onCreateOptionsMenu(mMenu, mock(MenuInflater.class));
+
+        verify(searchMenu).expandActionView();
+    }
+
+    @Test
     public void onQueryTextChange_shouldFilterSearchInApplicationsAdapter() {
         final ManageApplications.ApplicationsAdapter adapter =
-            mock(ManageApplications.ApplicationsAdapter.class);
+                mock(ManageApplications.ApplicationsAdapter.class);
         final String query = "Test App";
         ReflectionHelpers.setField(mFragment, "mApplications", adapter);
 
@@ -289,13 +304,13 @@ public class ManageApplicationsTest {
         when(listContainer.getVisibility()).thenReturn(View.VISIBLE);
         ReflectionHelpers.setField(mFragment, "mListContainer", listContainer);
         ReflectionHelpers.setField(
-            mFragment, "mFilterAdapter", mock(ManageApplications.FilterSpinnerAdapter.class));
+                mFragment, "mFilterAdapter", mock(ManageApplications.FilterSpinnerAdapter.class));
         final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
         appList.add(mock(ApplicationsState.AppEntry.class));
         final ManageApplications.ApplicationsAdapter adapter =
-            spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
-                AppFilterRegistry.getInstance().get(FILTER_APPS_ALL),
-                null /* savedInstanceState */));
+                spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL),
+                        null /* savedInstanceState */));
 
         adapter.onRebuildComplete(appList);
 
@@ -365,7 +380,7 @@ public class ManageApplicationsTest {
         ReflectionHelpers.setField(holder, "itemView", mock(View.class));
         ManageApplications.ApplicationsAdapter adapter =
                 new ManageApplications.ApplicationsAdapter(mState,
-                    mFragment, mock(AppFilterItem.class),
+                        mFragment, mock(AppFilterItem.class),
                         mock(Bundle.class));
         final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
         final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
@@ -399,8 +414,8 @@ public class ManageApplicationsTest {
     @Test
     public void applicationsAdapter_filterSearch_emptyQuery_shouldShowFullList() {
         final ManageApplications.ApplicationsAdapter adapter =
-            new ManageApplications.ApplicationsAdapter(
-                mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
+                new ManageApplications.ApplicationsAdapter(
+                        mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
         final String[] appNames = {"Apricot", "Banana", "Cantaloupe", "Fig", "Mango"};
         ReflectionHelpers.setField(adapter, "mOriginalEntries", getTestAppList(appNames));
 
@@ -412,8 +427,8 @@ public class ManageApplicationsTest {
     @Test
     public void applicationsAdapter_filterSearch_noMatch_shouldShowEmptyList() {
         final ManageApplications.ApplicationsAdapter adapter =
-            new ManageApplications.ApplicationsAdapter(
-                mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
+                new ManageApplications.ApplicationsAdapter(
+                        mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
         final String[] appNames = {"Apricot", "Banana", "Cantaloupe", "Fig", "Mango"};
         ReflectionHelpers.setField(adapter, "mOriginalEntries", getTestAppList(appNames));
 
@@ -425,8 +440,8 @@ public class ManageApplicationsTest {
     @Test
     public void applicationsAdapter_filterSearch_shouldShowMatchedItemsOnly() {
         final ManageApplications.ApplicationsAdapter adapter =
-            new ManageApplications.ApplicationsAdapter(
-                mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
+                new ManageApplications.ApplicationsAdapter(
+                        mState, mFragment, mock(AppFilterItem.class), Bundle.EMPTY);
         final String[] appNames = {"Apricot", "Banana", "Cantaloupe", "Fig", "Mango"};
         ReflectionHelpers.setField(adapter, "mOriginalEntries", getTestAppList(appNames));
 
