@@ -33,11 +33,12 @@ import com.android.settingslib.widget.LayoutPreference;
 public class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {
 
+    public static final String KEY = "zen_mode_toggle";
+
     private static final String TAG = "EnableZenModeButton";
-    protected static final String KEY = "zen_mode_settings_button_container";
+    private final FragmentManager mFragment;
     private Button mZenButtonOn;
     private Button mZenButtonOff;
-    private FragmentManager mFragment;
 
     public ZenModeButtonPreferenceController(Context context, Lifecycle lifecycle, FragmentManager
             fragment) {
@@ -60,13 +61,13 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
         super.updateState(preference);
 
         if (null == mZenButtonOn) {
-            mZenButtonOn = (Button) ((LayoutPreference) preference)
+            mZenButtonOn = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
             updateZenButtonOnClickListener();
         }
 
         if (null == mZenButtonOff) {
-            mZenButtonOff = (Button) ((LayoutPreference) preference)
+            mZenButtonOff = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_off_button);
             mZenButtonOff.setOnClickListener(v -> {
                 mMetricsFeatureProvider.action(mContext,
