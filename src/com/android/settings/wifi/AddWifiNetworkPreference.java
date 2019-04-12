@@ -36,7 +36,7 @@ public class AddWifiNetworkPreference extends Preference {
 
     private static final String TAG = "AddWifiNetworkPreference";
 
-    private boolean mInitialized;
+    private final Drawable mScanIconDrawable;
 
     public AddWifiNetworkPreference(Context context) {
         super(context);
@@ -45,24 +45,22 @@ public class AddWifiNetworkPreference extends Preference {
         setWidgetLayoutResource(R.layout.wifi_button_preference_widget);
         setIcon(R.drawable.ic_menu_add);
         setTitle(R.string.wifi_add_network);
+
+        mScanIconDrawable = getDrawable(R.drawable.ic_scan_24dp);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        if (!mInitialized) {
-            mInitialized = true;
-
-            final ImageButton imageButton = (ImageButton) holder.findViewById(R.id.button_icon);
-            imageButton.setImageDrawable(getDrawable(R.drawable.ic_scan_24dp));
-            imageButton.setContentDescription(
-                    getContext().getString(R.string.wifi_dpp_scan_qr_code));
-            imageButton.setOnClickListener(view -> {
-                getContext().startActivity(
-                    WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
-            });
-        }
+        final ImageButton scanButton = (ImageButton) holder.findViewById(R.id.button_icon);
+        scanButton.setImageDrawable(mScanIconDrawable);
+        scanButton.setContentDescription(
+                getContext().getString(R.string.wifi_dpp_scan_qr_code));
+        scanButton.setOnClickListener(view -> {
+            getContext().startActivity(
+                WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
+        });
     }
 
     private Drawable getDrawable(@DrawableRes int iconResId) {
