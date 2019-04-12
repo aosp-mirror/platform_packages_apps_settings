@@ -461,6 +461,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Ciri perlindungan peranti tidak akan dihidupkan. Anda tidak akan dapat menghalang orang lain daripada menggunakan telefon ini jika telefon hilang atau dicuri."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Langkau juga"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Kembali"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Langkau"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Batal"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Sentuh penderia"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Penderia terletak di bahagian belakang telefon anda. Gunakan jari telunjuk."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Ilustrasi yang memaparkan peranti dan lokasi penderia cap jari"</string>
@@ -476,6 +478,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Lakukan kemudian"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Langkau persediaan cap jari?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Anda telah memilih untuk menggunakan cap jari sebagai satu cara untuk membuka kunci telefon anda. Jika anda melangkaui sekarang, anda perlu menyediakannya kemudian. Persediaan hanya mengambil sedikit masa."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Lindungi tablet anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan tablet itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan cap jari. Ketik Batal, kemudian tetapkan PIN atau buat pilihan kunci skrin yang lain."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Lindungi peranti anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan peranti itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan cap jari. Ketik Batal, kemudian tetapkan PIN atau buat pilihan kunci skrin yang lain."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Lindungi telefon anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan telefon itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan cap jari. Ketik Batal, kemudian tetapkan PIN atau buat pilihan kunci skrin yang lain."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Lindungi tablet anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan tablet itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan pengesahan wajah. Ketik Batal, kemudian tetapkan PIN atau buat pilihan kunci skrin yang lain."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Lindungi peranti anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan peranti itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan pengesahan wajah. Ketik Batal, kemudian tetapkan PIN atau buat pilihan kunci skrin yang lain."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Lindungi telefon anda dengan pilihan kunci skrin supaya tiada sesiapa yang dapat menggunakan telefon itu jika hilang atau dicuri. Anda juga memerlukan pilihan kunci skrin untuk menyediakan pengesahan wajah. Ketik Batal, kemudian tetapkan PIN atau buat pilihan kunci skrin yang lain."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Langkau Persediaan PIN?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Langkau Persediaan Kta Laluan?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Langkau Persediaan Corak?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Sediakan kunci skrin"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Selesai"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Op, itu bukan penderia"</string>
@@ -1655,6 +1666,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Benarkan apl dan perkhidmatan mengimbas untuk mengesan rangkaian Wi-Fi pada bila-bila masa, meskipun apabila Wi-Fi dimatikan. Ini dapat digunakan, contohnya, untuk meningkatkan ciri berasaskan lokasi dan perkhidmatan."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Pengimbasan Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Benarkan apl dan perkhidmatan mengimbas untuk mengesan peranti berdekatan pada bila-bila masa, meskipun apabila Bluetooth dimatikan. Ini dapat digunakan, contohnya, untuk meningkatkan ciri berasaskan lokasi dan perkhidmatan."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"Perkhidmatan lokasi untuk kerja"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Lokasi Wi-Fi &amp; rangkaian mudah alih"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Biar apl guna perkhidmatan lokasi Google utk anggar lokasi lebih cepat. Data lokasi tanpa nama dikumpul dan dihantar kpd Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Lokasi ditentukan oleh Wi-Fi"</string>
@@ -3051,10 +3063,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Tajuk sembang"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Lampu suluh, Lampu, Lampu picit"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, togol, kawalan"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"mesej teks, penghantaran teks, mesej, pemesejan, lalai"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"selular, mudah alih, pembawa selular, wayarles, data, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, panggil, panggilan"</string>
-    <string name="keywords_home" msgid="294182527446892659">"pelancar, lalai, apl"</string>
     <string name="keywords_display" msgid="8910345814565493016">"skrin, skrin sentuh"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"malapkan skrin, skrin sentuh, bateri, cerah"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"malapkan skrin, malam, seri warna, peralihan malam, kecerahan, warna skrin, warna"</string>
@@ -3078,8 +3088,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"sekatan, sekat, terhad"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"pembetulan teks, betul, bunyi, getaran, auto, bahasa, gerak isyarat, cadang, cadangan, tema, menyinggung, perkataan, taip, emoji, antarabangsa"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"tetapan semula, pilihan, lalai"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"kecemasan, ais, apl, lalai"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"telefon, pendail, lalai"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"apl, muat turun, aplikasi, sistem"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"apl, kebenaran, keselamatan"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"apl, lalai"</string>
@@ -3116,9 +3124,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"disambungkan, peranti, fon kepala, set kepala, pembesar suara, wayarles, gandingan, fon telinga, muzik, media"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"latar belakang, skrin, skrin kunci, tema"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"lalai, assistant"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"lalai, penyemak imbas lalai"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"pembayaran, lalai"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"lalai"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"pemberitahuan masuk"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"penambatan usb, penambatan bluetooth, tempat liputan Wi-Fi"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"haptik, getar, skrin, kepekaan"</string>
