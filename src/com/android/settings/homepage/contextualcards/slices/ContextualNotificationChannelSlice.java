@@ -16,13 +16,22 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.net.Uri;
+import android.util.ArraySet;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
+import com.android.settings.slices.SliceBackgroundWorker;
+
+import java.util.Set;
 
 public class ContextualNotificationChannelSlice extends NotificationChannelSlice {
+
+    public static final String PREFS = "notification_channel_slice_prefs";
+    public static final String PREF_KEY_INTERACTED_PACKAGES = "interacted_packages";
 
     public ContextualNotificationChannelSlice(Context context) {
         super(context);
@@ -36,5 +45,19 @@ public class ContextualNotificationChannelSlice extends NotificationChannelSlice
     @Override
     protected CharSequence getSubTitle(String packageName, int uid) {
         return mContext.getText(R.string.recently_installed_app);
+    }
+
+    @Override
+    protected boolean isUserInteracted(String packageName) {
+        // Check the package has been interacted on current slice or not.
+        final Set<String> interactedPackages =
+                mContext.getSharedPreferences(PREFS, MODE_PRIVATE)
+                        .getStringSet(PREF_KEY_INTERACTED_PACKAGES, new ArraySet<>());
+        return interactedPackages.contains(packageName);
+    }
+
+    @Override
+    public Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
+        return NotificationChannelWorker.class;
     }
 }
