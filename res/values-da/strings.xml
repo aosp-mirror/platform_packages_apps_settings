@@ -273,7 +273,7 @@
       <item quantity="one">Vil du fjerne det valgte sprog?</item>
       <item quantity="other">Vil du fjerne de valgte sprog?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Tekst vises på et andet sprog"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Tekst vises på et andet sprog."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Du kan ikke fjerne alle sprog."</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Behold mindst ét foretrukket sprog"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"Det er muligvis ikke tilgængeligt i alle apps"</string>
@@ -458,6 +458,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Funktionerne til enhedsbeskyttelse aktiveres ikke. Du vil ikke kunne forhindre andre i at bruge denne telefon, hvis du mister den, eller hvis den bliver stjålet."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Spring over alligevel"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Gå tilbage"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Spring over"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Annuller"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Tryk på sensoren"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Den sidder på bagsiden af telefonen. Brug pegefingeren."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Illustration med enhed og placering af sensor til registrering af fingeraftryk"</string>
@@ -473,6 +475,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Gør det senere"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Vil du springe registrering af fingeraftryk over?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Du har valgt at bruge fingeraftryk som en metode til at låse din telefon op. Hvis du springer det over nu, skal du konfigurere dette senere. Konfigurationen tager kun omkring et minut."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Beskyt din tablet med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere fingeraftryk. Tryk på Annuller, og angiv derefter en PIN-kode, eller vælg en anden type skærmlås."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Beskyt din enhed med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere fingeraftryk. Tryk på Annuller, og angiv derefter en PIN-kode, eller vælg en anden type skærmlås."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Beskyt din telefon med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere fingeraftryk. Tryk på Annuller, og angiv derefter en PIN-kode, eller vælg en anden type skærmlås."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Beskyt din tablet med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtsgodkendelse. Tryk på Annuller, og angiv derefter en PIN-kode, eller vælg en anden type skærmlås."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Beskyt din enhed med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtsgodkendelse. Tryk på Annuller, og angiv derefter en PIN-kode, eller vælg en anden type skærmlås."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Beskyt din telefon med en skærmlås, så ingen kan bruge den, hvis du mister den, eller den bliver stjålet. Du skal også bruge en skærmlås for at konfigurere ansigtsgodkendelse. Tryk på Annuller, og angiv derefter en PIN-kode, eller vælg en anden type skærmlås."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Spring SIM-konfiguration over?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Spring adgangskodekonf. over?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Spring mønsterkonf. over?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Konfigurer skærmlås"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Udfør"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Hov! Dette er ikke sensoren"</string>
@@ -1652,6 +1663,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Tillad, at apps og tjenester til enhver tid kan søge efter Wi-Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetooth-scanning"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Tillad, at apps og tjenester til enhver tid kan søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. bruges til at forbedre stedbaserede funktioner og tjenester."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"Placeringstjenester til arbejdet"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Placering af Wi-Fi- og mobilnet."</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Tillad, at apps bruger Googles placeringstjeneste til at beregne din placering hurtigere. Der indsamles anonyme placeringsdata, som sendes til Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Placeringen fastlægges af Wi-Fi"</string>
@@ -3048,10 +3060,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Chathoved"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Lommelygte, lys, lygte"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, skift, styring"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"sms, sende sms-beskeder, beskeder, sende beskeder, standard"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"mobil, mobilselskab, trådløs, data, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, ring op, opkald"</string>
-    <string name="keywords_home" msgid="294182527446892659">"starter, standard, apps"</string>
     <string name="keywords_display" msgid="8910345814565493016">"skærm, touchskærm"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"nedtone skærm, touchskærm, batteri, lys"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"dæmpe skærm, aften, nat, farvetone, night shift, lysstyrke, skærmfarve, farve"</string>
@@ -3075,8 +3085,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"begrænsning, begræns, begrænset"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"rettelser, ret, lyd, vibrer, automatisk, sprog, bevægelse, anbefale, forslag, tema, stødende, ord, type, emoji, international"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"nulstilling, præferencer, standard"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"nødopkald, is, app, standard"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"telefon, opkaldsprogram, standard"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"apps, download, apps, system"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"apps, tilladelser, sikkerhed"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"apps, standard"</string>
@@ -3113,9 +3121,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"forbundet, enhed, høretelefoner, headset, højttaler, trådløs, parre, øretelefoner, musik, medier"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"baggrund, skærm, låseskærm, tema"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"standard, assistent"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"standard, standardbrowser"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"betaling, standard"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"standard"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"ny notifikation"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"usb-netdeling, bluetooth-netdeling, wi-fi-hotspot"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"berøring, vibrere, skærm, følsomhed"</string>
@@ -3196,7 +3202,7 @@
     <string name="zen_mode_restrict_notifications_hide" msgid="5305121630186687339">"Ingen lyd eller visuelle signaler fra notifikationer"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="7555448406901864904">"Notifikationer kan ikke ses eller høres"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="1069960859746788356">"Din telefon viser ikke nye eller eksisterende notifikationer, og den vibrerer og ringer heller ikke i forbindelse med disse. Husk, at vigtige notifikationer om telefonaktivitet og -status stadig vises.\n\nNår du deaktiverer Forstyr ikke, kan du finde ulæste notifikationer ved at stryge nedad fra toppen af skærmen."</string>
-    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Tilpassede indstillinger"</string>
+    <string name="zen_mode_restrict_notifications_custom" msgid="7498689167767941034">"Tilpasset"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4250962169561739747">"Aktivér tilpasset indstilling"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="6676997522330453597">"Fjern tilpasset indstilling"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="5450158135853888485">"Ingen lyd fra notifikationer"</string>
@@ -3325,7 +3331,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Hvordan skal profilunderretninger vises, når din enhed er låst?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profilunderretninger"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Notifikationer"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"Appunderretninger"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Appnotifikationer"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Notifikationskategori"</string>
     <string name="notification_group_title" msgid="7180506440133859601">"Kategorigruppe for notifikationer"</string>
     <string name="notification_importance_title" msgid="4368578960344731828">"Adfærd"</string>

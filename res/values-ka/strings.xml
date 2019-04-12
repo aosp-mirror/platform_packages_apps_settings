@@ -352,7 +352,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"დაუყოვნებლივ ძილის შემდეგ, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>-ის მიერ"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ძილის შემდეგ, გარდა <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>-ის მიერ განბლოკილ მდგომარეობაში დატოვებისას"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"მფლობელის ინფორმაციის დაბლოკვის ეკრანზე ჩვენება"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"ეკრ. დაბლოკ. შეტყობ."</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"ეკრანის ბლოკის შეტყობ."</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ვიჯეტების ჩართვა"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"გათიშულია ადმინისტრატორის მიერ"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"დაბლოკვის ვარიანტის ჩვენება"</string>
@@ -458,6 +458,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"მოწყობილობის დაცვის ფუნქციები არ ჩაირთვება. ამ ტელეფონის დაკარგვის ან მოპარვის შემთხვევაში, თქვენ ვერ შეძლებთ ხელი შეუშალოთ სხვას მის გამოყენებაში."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"მაინც გამოტოვება"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"დაბრუნება"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"გამოტოვება"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"გაუქმება"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"შეეხეთ სენსორს"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"ის თქვენი ტელეფონის უკანა მხარეს მდებარეობს. მისაგნებად, გამოიყენეთ საჩვენებელი თითი."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"ილუსტრაცია მოწყობილობისა და თითის ანაბეჭდის სენსორის ადგილმდებარეობით"</string>
@@ -473,6 +475,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"მოგვიანებით გაკეთება"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"გსურთ თითის ანაბეჭდის დაყენ. გამოტოვება?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"თქვენ აირჩიეთ თქვენი თითის ანაბეჭდის გამოყენება თქვენი ტელეფონის განბლოკვის ერთ-ერთ მეთოდად. თუ ამას ახლა გამოტოვებთ, მისი დაყენება მოგვიანებით მოგიწევთ. დაყენებას მხოლოდ ერთი წუთი სჭირდება."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"დაიცავით თქვენი ტაბლეტი ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ თითის ანაბეჭდის დასაყენებლადაც. შეეხეთ „გაუქმებას“, შემდეგ დააყენეთ PIN-კოდი ან აირჩიეთ ეკრანის დაბლოკვის სხვა ვარიანტი."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"დაიცავით თქვენი მოწყობილობა ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ თითის ანაბეჭდის დასაყენებლადაც. შეეხეთ „გაუქმებას“, შემდეგ დააყენეთ PIN-კოდი ან აირჩიეთ ეკრანის დაბლოკვის სხვა ვარიანტი."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"დაიცავით თქვენი ტელეფონი ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ თითის ანაბეჭდის დასაყენებლადაც. შეეხეთ „გაუქმებას“, შემდეგ დააყენეთ PIN-კოდი ან აირჩიეთ ეკრანის დაბლოკვის სხვა ვარიანტი."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"დაიცავით თქვენი ტაბლეტი ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახის ავთენტიფიკაციის დასაყენებლადაც. შეეხეთ „გაუქმებას“, შემდეგ დააყენეთ PIN-კოდი ან აირჩიეთ ეკრანის დაბლოკვის სხვა ვარიანტი."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"დაიცავით თქვენი მოწყობილობა ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახის ავთენტიფიკაციის დასაყენებლადაც. შეეხეთ „გაუქმებას“, შემდეგ დააყენეთ PIN-კოდი ან აირჩიეთ ეკრანის დაბლოკვის სხვა ვარიანტი."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"დაიცავით თქვენი ტელეფონი ეკრანის დაბლოკვის ვარიანტით, რომ ვერავინ შეძლოს მისი გამოყენება დაკარგვის ან მოპარვის შემთხვევაში. ეკრანის დაბლოკვის ვარიანტი დაგჭირდებათ სახის ავთენტიფიკაციის დასაყენებლადაც. შეეხეთ „გაუქმებას“, შემდეგ დააყენეთ PIN-კოდი ან აირჩიეთ ეკრანის დაბლოკვის სხვა ვარიანტი."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"გამოტოვებთ PIN-ის დაყენებას?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"გამოტოვებთ პაროლის დაყენებას?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"გამოტოვებთ ნიმუშის დაყენებას?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"ეკრანის დაბლოკვის დაყენება"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"შესრულდა"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"ეს სენსორი არ არის"</string>
@@ -1160,7 +1171,7 @@
     <string name="accelerometer_title" msgid="7854608399547349157">"ეკრანის ავტოროტაცია"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"ფერები"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ბუნებრივი"</string>
-    <string name="color_mode_option_boosted" msgid="8588223970257287524">"კონტრასტული"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"გაძლიერებული"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"ინტენსიური"</string>
     <string name="color_mode_option_automatic" msgid="7996505473528529568">"ადაპტაციური"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"მხოლოდ მკვეთრი ფერების გამოყენება"</string>
@@ -1652,6 +1663,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"აპების და სერვისებისთვის Wi‑Fi ქსელების ნებისმიერ დროს სკანირების ნებართვის მინიჭება, მაშინაც კი, როცა Wi‑Fi გამორთულია. მაგალითისთვის, ამის გამოყენება შესაძლებელია მდებარეობაზე დაფუძნებული ფუნქციების და სხვა სერვისების გასაუმჯობესებლად."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetooth სკანირება"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"აპებისა და სერვისებისთვის სკანირების ნებართვის მინიჭება ახლომდებარე მოწყობილობების ნებისმიერ დროს აღმოსაჩენად, მაშინაც კი, როცა Bluetooth გამორთულია. მაგალითისთვის, ამის გამოყენება შესაძლებელია მდებარეობაზე დაფუძნებული ფუნქციების და სხვა სერვისების გასაუმჯობესებლად."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"მდებარეობის სერვისები სამსახურისთვის"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi‑Fi &amp; მობილური ქსელის მდებარეობა"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"თქვენი ადგილმდებარეობის უფრო სწრაფად დასადგენად დართეთ აპებს ნება, გამოიყენონ Google-ის მდებარეობის სერვისი. ანონიმური მდებარეობის მომაცემები შეგროვდება და გაეგზავნება Google-ს."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi‑Fi-ს მიერ დადგენილი ადგილმდებარეობა"</string>
@@ -1983,7 +1995,7 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"სიტყვა:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"მალსახმობი:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"ენა:"</string>
-    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"სიტყვის დაწერა"</string>
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"აკრიფეთ სიტყვა"</string>
     <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"მალსახმობი (არასავალდ.)"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"სიტყვის შესწორება"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"რედაქტირება"</string>
@@ -3048,10 +3060,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"ჩეთის თავი"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"ფარანი, შუქი, ჩირაღდანი"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"WiFi, Wi-Fi, გადართვა, მართვა"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"ტექსტური შეტყობინება, ტექსტურ შეტყობინებათა გაგზავნა, შეტყობინებები, მიმოწერა, ნაგულისხმევი"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"ფიჭური კავშირი, მობილური ინტერნეტი, უსადენო კავშირი, მონაცემები, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, ზარი, დარეკვა"</string>
-    <string name="keywords_home" msgid="294182527446892659">"გამშვები, ნაგულისხმევი, აპები"</string>
     <string name="keywords_display" msgid="8910345814565493016">"ეკრანი, სენსორული ეკრანი"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"ეკრანის გამქრქალება, სენსორული ეკრანი, ბატარეა, ნათელი"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"ეკრანის გამქრქალება, ღამე, ელფერი, ღამის ცვლა, სიკაშკაშე, ეკრანის ფერი, ფერი, ფერი"</string>
@@ -3075,8 +3085,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"შეზღუდვა, შეზღუდვა, შეზღუდული"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"ტექსტის შესწორება, კორექცია, ხმა, ვიბრაცია, ავტომატური, ენა, ჟესტი, შეთავაზება, შემოთავაზება, თემა, შეურაცხმყოფელი, სიტყვა, აკრეფა, emoji, საერთაშორისო"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"გადაყენება, პარამეტრები, ნაგულისხმევი"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"გადაუდებელი, საგანგებო შემთხვევაში, აპი, ნაგულისხმევი"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"ტელეფონი, ამკრეფი, ნაგულისხმევი"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"აპები, ჩამოტვირთვა, აპლიკაციები, სისტემა"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"აპები, ნებართვები, უსაფრთხოება"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"აპები, ნაგულისხმევი"</string>
@@ -3113,9 +3121,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"დაკავშირებული, მოწყობილობა, ყურსასმენები, ყურსაცვამი, დინამიკი, უსადენო, წყვილი, საყურისები, მუსიკა, მედია"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"ფონი, ეკრანი, ჩაკეტილი ეკრანი, თემა"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"ნაგულისხმევი, ასისტენტი"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"ნაგულისხმევი, ნაგულისხმევი ბრაუზერი"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"გადახდა, ნაგულისხმევი"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"ნაგულისხმევი"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"შემომავალი შეტყობინება"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"USB-ტეტერინგი, Bluetooth-ტეტერინგი, WiFi უსადენო ქსელი"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"ჰაპტიკა, ვიბრაცია, ეკრანი, მგრძნობიარობა"</string>
@@ -3211,7 +3217,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"ეკრანზე შეტყობინებათა გამოტანის აკრძალვა"</string>
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"სტატუსის ზოლის ხატულების დამალვა ეკრანის თავში"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"შეტყობინების ნიშნულების დამალვა აპების ხატულებზე"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"არ მოხდეს შეტყობინებების გამო გამოღვიძება"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"შეტყობინებებმა არ გააღვიძოს"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"შეტყობინებათა სიიდან დამალვა"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"არასოდეს"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"გამორთული ეკრანისას"</string>
@@ -3433,7 +3439,7 @@
     <string name="zen_mode_rule_name_hint" msgid="278109122579468433">"შეიყვანეთ განრიგის სახელი"</string>
     <string name="zen_mode_rule_name_warning" msgid="3856485373110366912">"განრიგის სახელი უკვე გამოიყენება"</string>
     <string name="zen_mode_add_rule" msgid="7459154136384467057">"დამატება"</string>
-    <string name="zen_mode_add_event_rule" msgid="4454759739839069898">"მოვლენების განრიგის დამატება"</string>
+    <string name="zen_mode_add_event_rule" msgid="4454759739839069898">"მოვლენის განრიგის დამატება"</string>
     <string name="zen_mode_add_time_rule" msgid="7890557350868257760">"დროის განრიგის დამატება"</string>
     <string name="zen_mode_delete_rule" msgid="8055032645990309096">"განრიგის წაშლა"</string>
     <string name="zen_mode_choose_rule_type" msgid="40993242338494595">"აირჩიეთ განრიგის ტიპი"</string>
@@ -3455,7 +3461,7 @@
     <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"სადაც პასუხი არის"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"დიახ, შესაძლოა, ან პასუხგაუცემელი"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"დიახ ან შეიძლება"</string>
-    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"კი"</string>
+    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"დიახ"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"წესი ვერ მოიძებნა."</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"ჩართული / <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
