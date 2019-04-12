@@ -29,6 +29,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -89,7 +90,7 @@ public class SimSelectNotification extends BroadcastReceiver {
                 .setColor(context.getColor(R.color.sim_noitification))
                 .setContentTitle(resources.getString(R.string.sim_notification_title))
                 .setContentText(resources.getString(R.string.sim_notification_summary));
-        Intent resultIntent = new Intent(context, SimSettingsActivity.class);
+        Intent resultIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
