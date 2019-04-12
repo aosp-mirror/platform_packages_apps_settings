@@ -25,11 +25,16 @@ import com.google.android.setupdesign.util.ThemeHelper;
 
 public class SetupWizardUtils {
 
-    public static int getTheme(Intent intent) {
+    public static String getThemeString(Intent intent) {
         String theme = intent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
         if (theme == null) {
             theme = SetupWizardProperties.theme().orElse("");
         }
+        return theme;
+    }
+
+    public static int getTheme(Intent intent) {
+        String theme = getThemeString(intent);
         // TODO(yukl): Move to ThemeResolver and add any additional required attributes in
         // onApplyThemeResource using Theme overlays
         if (theme != null) {
