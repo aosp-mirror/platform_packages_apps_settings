@@ -34,6 +34,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.graphics.BlendMode;
+import android.graphics.BlendModeColorFilter;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -50,6 +56,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
@@ -272,11 +279,14 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
     protected Preference populateSingleChannelPrefs(PreferenceGroup parent,
             final NotificationChannel channel, final boolean groupBlocked) {
-        ChannelSummaryPreference channelPref = new ChannelSummaryPreference(getPrefContext());
-        channelPref.setCheckBoxEnabled(mSuspendedAppsAdmin == null
+        MasterSwitchPreference channelPref = new MasterSwitchPreference(getPrefContext());
+        channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null
                 && isChannelBlockable(channel)
                 && isChannelConfigurable(channel)
                 && !groupBlocked);
+        channelPref.setIcon(channel.getImportance() > IMPORTANCE_LOW
+                ? R.drawable.ic_notification_alert : R.drawable.ic_notification_silence);
+        channelPref.setIconSize(MasterSwitchPreference.ICON_SIZE_SMALL);
         channelPref.setKey(channel.getId());
         channelPref.setTitle(channel.getName());
         channelPref.setSummary(NotificationBackend.getSentSummary(
@@ -295,24 +305,39 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                 .toIntent());
 
         channelPref.setOnPreferenceChangeListener(
-                new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference,
-                            Object o) {
-                        boolean value = (Boolean) o;
-                        int importance = value ? IMPORTANCE_LOW : IMPORTANCE_NONE;
-                        channel.setImportance(importance);
-                        channel.lockFields(
-                                NotificationChannel.USER_LOCKED_IMPORTANCE);
-                        mBackend.updateChannel(mPkg, mUid, channel);
+                (preference, o) -> {
+                    boolean value = (Boolean) o;
+                    int importance = value ? IMPORTANCE_LOW : IMPORTANCE_NONE;
+                    channel.setImportance(importance);
+                    channel.lockFields(
+                            NotificationChannel.USER_LOCKED_IMPORTANCE);
+                    MasterSwitchPreference channelPref1 = (MasterSwitchPreference) preference;
+                    channelPref1.setIcon(channel.getImportance() > IMPORTANCE_LOW
+                            ? R.drawable.ic_notification_alert
+                            : R.drawable.ic_notification_silence);
+                    toggleBehaviorIconState(channelPref1.getIcon(),
+                            importance != IMPORTANCE_NONE);
+                    mBackend.updateChannel(mPkg, mUid, channel);
 
-                        return true;
-                    }
+                    return true;
                 });
         if (parent.findPreference(channelPref.getKey()) == null) {
             parent.addPreference(channelPref);
         }
         return channelPref;
+    }
+
+    private void toggleBehaviorIconState(Drawable icon, boolean enabled) {
+        LayerDrawable layerDrawable = (LayerDrawable) icon;
+        GradientDrawable background =
+                (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.back);
+        if (enabled) {
+            background.clearColorFilter();
+        } else {
+            background.setColorFilter(new BlendModeColorFilter(
+                    mContext.getColor(R.color.material_grey_300),
+                    BlendMode.SRC_IN));
+        }
     }
 
     protected boolean isChannelConfigurable(NotificationChannel channel) {
