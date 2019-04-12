@@ -28,7 +28,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
@@ -37,6 +36,7 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.fuelgauge.EstimateKt;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -96,7 +96,7 @@ public class BatteryTipDialogFragmentTest {
 
         mUnrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW, mAppInfo);
         mSummaryTip = spy(new SummaryTip(BatteryTip.StateType.NEW,
-                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
+                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
     }
 
     @Test

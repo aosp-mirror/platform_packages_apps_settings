@@ -41,6 +41,7 @@ import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
+import com.android.settingslib.fuelgauge.Estimate;
 
 import org.junit.Before;
 import org.junit.Test;
