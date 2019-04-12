@@ -19,6 +19,7 @@ package com.android.settings.panel;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class PanelFragment extends Fragment {
 
     private PanelContent mPanel;
     private MetricsFeatureProvider mMetricsProvider;
+    private String mPanelClosedKey;
 
     @VisibleForTesting
     PanelSlicesAdapter mAdapter;
@@ -111,15 +113,26 @@ public class PanelFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (TextUtils.isEmpty(mPanelClosedKey)) {
+            mPanelClosedKey = PanelClosedKeys.KEY_OTHERS;
+        }
+
+        mMetricsProvider.action(
+                0 /* attribution */,
+                SettingsEnums.PAGE_HIDE,
+                mPanel.getMetricsCategory(),
+                mPanelClosedKey,
+                0 /* value */);
+    }
+
     @VisibleForTesting
     View.OnClickListener getSeeMoreListener() {
         return (v) -> {
-            mMetricsProvider.action(
-                    0 /* attribution */,
-                    SettingsEnums.PAGE_HIDE ,
-                    mPanel.getMetricsCategory(),
-                    PanelClosedKeys.KEY_SEE_MORE,
-                    0 /* value */);
+            mPanelClosedKey = PanelClosedKeys.KEY_SEE_MORE;
             final FragmentActivity activity = getActivity();
             activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
             activity.finish();
@@ -129,12 +142,7 @@ public class PanelFragment extends Fragment {
     @VisibleForTesting
     View.OnClickListener getCloseListener() {
         return (v) -> {
-            mMetricsProvider.action(
-                    0 /* attribution */,
-                    SettingsEnums.PAGE_HIDE,
-                    mPanel.getMetricsCategory(),
-                    PanelClosedKeys.KEY_DONE,
-                    0 /* value */);
+            mPanelClosedKey = PanelClosedKeys.KEY_DONE;
             getActivity().finish();
         };
     }
