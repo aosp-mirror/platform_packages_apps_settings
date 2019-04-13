@@ -212,10 +212,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Zadaný port není platný."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Proxy server protokolu HTTP může používat prohlížeč, ale nesmí jej používat další aplikace."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"Adresa URL PAC: "</string>
-    <!-- no translation found for radio_info_subid (204582608052503412) -->
-    <skip />
-    <!-- no translation found for radio_info_dds (5471937791273237508) -->
-    <skip />
+    <string name="radio_info_subid" msgid="204582608052503412">"Stávající subId:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"SubId výchozí datové SIM karty:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Rychlost stahování (kB/s):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Rychlost nahrávání (kB/s):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Informace o poloze mobilní sítě (podpora ukončena):"</string>
@@ -238,8 +236,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Zvolit pásmo bezdrátového modulu"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Typ hlasové sítě:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Typ datové sítě:"</string>
-    <!-- no translation found for phone_index_label (1934407597576454430) -->
-    <skip />
+    <string name="phone_index_label" msgid="1934407597576454430">"Vybrat telefonní seznam"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Nastavit upřednostňovaný typ sítě:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping názvu hostitele (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping názvu hostitele (www.google.com) IPv6:"</string>
@@ -429,10 +426,8 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Registrace obličeje nefungovala."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Vše je nastaveno."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Hotovo"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_category (4102604281840004724) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_use_face_unlock_phone (5275635645351823301) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_category" msgid="4102604281840004724">"Používat obličej k"</string>
+    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5275635645351823301">"Odemykání zařízení"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Přihlašování do aplikací a platby"</string>
     <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"Mějte otevřené oči"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"Při ověřování pomocí obličeje musíte mít otevřené oči"</string>
@@ -474,6 +469,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Nebudou zapnuty funkce ochrany zařízení. Pokud telefon ztratíte nebo vám jej někdo ukradne, nebudete lidem moci zabránit v jeho používání."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Přeskočit"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Zpět"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Přeskočit"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Zrušit"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Dotkněte se senzoru"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Je na zadní straně telefonu. Použijte ukazováček."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Ilustrace se zařízením a polohou senzoru otisků prstů"</string>
@@ -489,6 +486,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Později"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Přeskočit nastavení otisku prstu?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Jako jeden ze způsobů odemknutí telefonu jste se rozhodli používat otisk prstu. Pokud nastavení přeskočíte, bude třeba jej dokončit později. Nastavení trvá jen chviličku."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Ochraňte svůj tablet pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit otisk prstu. Klepněte na Zrušit a poté si nastavte PIN nebo zvolte jiný typ zámku obrazovky."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Ochraňte své zařízení pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit otisk prstu. Klepněte na Zrušit a poté si nastavte PIN nebo zvolte jiný typ zámku obrazovky."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Ochraňte svůj telefon pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit otisk prstu. Klepněte na Zrušit a poté si nastavte PIN nebo zvolte jiný typ zámku obrazovky."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Ochraňte svůj tablet pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit ověření obličejem. Klepněte na Zrušit a poté si nastavte PIN nebo zvolte jiný typ zámku obrazovky."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Ochraňte své zařízení pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit ověření obličejem. Klepněte na Zrušit a poté si nastavte PIN nebo zvolte jiný typ zámku obrazovky."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Ochraňte svůj telefon pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit ověření obličejem. Klepněte na Zrušit a poté si nastavte PIN nebo zvolte jiný typ zámku obrazovky."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Přeskočit nastavení PINu?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Přeskočit nastavení hesla?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Přeskočit nastavení gesta?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Nastavit zámek obrazovky"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Hotovo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Jejda, to není senzor."</string>
@@ -1148,7 +1154,7 @@
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Zapněte volání přes Wi-Fi"</string>
     <string name="wifi_calling_not_supported" msgid="7878640438907807754">"Volání přes Wi‑Fi operátor %1$s nepodporuje"</string>
     <string name="carrier" msgid="5264014738689761132">"Operátor"</string>
-    <string name="display_settings_title" msgid="1708697328627382561">"Obrazovka"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"Displej"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Zvuk"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Hlasitost"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Hudební efekty"</string>
@@ -1198,7 +1204,7 @@
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Pracovní účet – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Osobní účet – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Vyhledávání"</string>
-    <string name="display_settings" msgid="7965901687241669598">"Obrazovka"</string>
+    <string name="display_settings" msgid="7965901687241669598">"Displej"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Autom. otočení obrazovky"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"Barvy"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Přirozené"</string>
@@ -1268,8 +1274,7 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"Vypnutí obrazovky"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Doba nečinnosti: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Tapeta"</string>
-    <!-- no translation found for style_and_wallpaper_settings_title (2399486839820145870) -->
-    <skip />
+    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"Styly a tapety"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Výchozí"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Vlastní"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Změňte si tapetu"</string>
@@ -1699,6 +1704,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Povolit aplikacím a službám vyhledávat sítě Wi‑Fi, i když je připojení k sítím Wi‑Fi vypnuté. Tuto funkci lze využít například ke zlepšení funkcí a služeb založených na poloze."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Vyhledávání Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Povolit aplikacím a službám vyhledávat zařízení v okolí kdykoliv, i když je rozhraní Bluetooth vypnuté. Tuto funkci lze využít například ke zlepšení funkcí a služeb založených na poloze."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"Služby určování polohy pro práci"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Poloha Wi-Fi a mobilní sítě"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Povolit aplikacím používat službu určování polohy Google a rychleji odhadovat vaši polohu. Anonymní data budou sbírána a odesílána Googlu."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Poloha určená sítí Wi-Fi"</string>
@@ -3137,10 +3143,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Hlava chatu"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Svítilna, světlo, baterka"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, přepnout, ovládání"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"sms, zprávy, výchozí"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"mobilní síť, mobilní operátor, mobilní data, bezdrátové, data, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, hovor, volání"</string>
-    <string name="keywords_home" msgid="294182527446892659">"spouštěč, výchozí, aplikace"</string>
     <string name="keywords_display" msgid="8910345814565493016">"displej, dotyková obrazovka"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"ztlumení obrazovky, dotyková obrazovka, baterie, jas"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"ztlumení obrazovky, noc, tónování, noční směna, jas, barva obrazovky, barvy"</string>
@@ -3164,8 +3168,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"omezení, omezit, omezeno"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"oprava textu, opravit, zvuk, vibrace, auto, jazyk, gesto, navrhnout, návrh, motiv, nevhodné, slovo, typ, emodži, mezinárodní"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"resetování, předvolby, výchozí"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"tísňové, nouzové, aplikace, výchozí"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"telefon, vytáčení, výchozí"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"aplikace, stahování, systém"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"aplikace, oprávnění, zabezpečení"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"aplikace, výchozí"</string>
@@ -3202,9 +3204,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"připojené, zařízení, sluchátka, náhlavní souprava, reproduktor, bezdrátové, párování, hudba, média"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"pozadí, obrazovka, obrazovka uzamčení, motiv"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"výchozí, asistent"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"výchozí, výchozí prohlížeč"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"placení, výchozí"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"výchozí"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"příchozí oznámení"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"tethering přes usb, tethering přes bluetooth, hotspot wi-fi"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"hmatová odezva, vibrace, obrazovka, citlivost"</string>
@@ -3401,10 +3401,8 @@
     <string name="bubbles_app_toggle_title" msgid="9143702245165359360">"Bubliny"</string>
     <string name="bubbles_app_toggle_summary" msgid="7714358008428342285">"Povolit aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g> zobrazovat některá oznámení jako bubliny"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="8013961655723563787">"Zapnutí bublin"</string>
-    <!-- no translation found for bubbles_feature_disabled_dialog_text (3616822820657195387) -->
-    <skip />
-    <!-- no translation found for bubbles_feature_disabled_button_approve (5317196831268846883) -->
-    <skip />
+    <string name="bubbles_feature_disabled_dialog_text" msgid="3616822820657195387">"Chcete-li u této aplikace zapnout bubliny, musíte je nejdřív zapnout v zařízení. Toto nastavení má vliv na ostatní aplikace, u kterých jste bubliny již dříve zapnuli."</string>
+    <string name="bubbles_feature_disabled_button_approve" msgid="5317196831268846883">"Zapnout v zařízení"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8176870537170586852">"Zrušit"</string>
     <string name="swipe_direction_title" msgid="6877543492435053137">"Akce po přejetí prstem"</string>
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"Přejetím vpravo zavřete, přejetím vlevo zobrazíte nabídku"</string>
@@ -3987,8 +3985,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Interní úložiště: využito <xliff:g id="PERCENTAGE">%1$s</xliff:g> – volné místo: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="6737806235882127328">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nečinnosti přejít do režimu spánku"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Tapeta, režim spánku, velikost písma"</string>
-    <!-- no translation found for display_dashboard_summary_with_style (7707201466027514198) -->
-    <skip />
+    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"Styly a tapety, režim spánku, velikost písma"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Režim spánku, velikost písma"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Po 10 minutách nečinnosti přejít do režimu spánku"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Přibližné využití paměti: <xliff:g id="USED_MEMORY">%1$s</xliff:g> z <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
@@ -4032,14 +4029,12 @@
     <string name="condition_device_muted_summary" msgid="6313274406443663781">"Volání a oznámení"</string>
     <string name="condition_device_vibrate_title" msgid="8070177546359590131">"Pouze vibrace"</string>
     <string name="condition_device_vibrate_summary" msgid="5743200564646910423">"Volání a oznámení"</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Nastavení plánu Nočního režimu"</string>
+    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Nastavení plánu nočního režimu"</string>
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"Každý večer automaticky zbarvit obrazovku do oranžova"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Noční režim je aktivní"</string>
     <string name="condition_night_display_summary" msgid="7150932917610919907">"Tónování obrazovky do jantarové"</string>
-    <!-- no translation found for condition_grayscale_title (3426050703427823519) -->
-    <skip />
-    <!-- no translation found for condition_grayscale_summary (7652835784223724625) -->
-    <skip />
+    <string name="condition_grayscale_title" msgid="3426050703427823519">"Zešednutí obrazovky"</string>
+    <string name="condition_grayscale_summary" msgid="7652835784223724625">"Displej pouze v šedé barvě"</string>
     <string name="homepage_condition_footer_content_description" msgid="2335918927419018030">"Sbalit"</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"Navrženo pro vás"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Návrhy"</string>

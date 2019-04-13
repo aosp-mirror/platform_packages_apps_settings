@@ -128,18 +128,26 @@ public class WifiDppUtils {
         return intent;
     }
 
-    private static String getPresharedKey(WifiManager wifiManager, WifiConfiguration config) {
-        String preSharedKey = config.preSharedKey;
+    private static String getPresharedKey(WifiManager wifiManager,
+            WifiConfiguration wifiConfiguration) {
+        final List<WifiConfiguration> privilegedWifiConfiguratios =
+                wifiManager.getPrivilegedConfiguredNetworks();
 
-        final List<WifiConfiguration> wifiConfigs = wifiManager.getPrivilegedConfiguredNetworks();
-        for (WifiConfiguration wifiConfig : wifiConfigs) {
-            if (wifiConfig.networkId == config.networkId) {
-                preSharedKey = wifiConfig.preSharedKey;
-                break;
+        for (WifiConfiguration privilegedWifiConfiguration : privilegedWifiConfiguratios) {
+            if (privilegedWifiConfiguration.networkId == wifiConfiguration.networkId) {
+                // WEP uses a shared key hence the AuthAlgorithm.SHARED is used
+                // to identify it.
+                if (wifiConfiguration.allowedKeyManagement.get(KeyMgmt.NONE)
+                        && wifiConfiguration.allowedAuthAlgorithms.get(
+                        WifiConfiguration.AuthAlgorithm.SHARED)) {
+                    return privilegedWifiConfiguration
+                            .wepKeys[privilegedWifiConfiguration.wepTxKeyIndex];
+                } else {
+                    return privilegedWifiConfiguration.preSharedKey;
+                }
             }
         }
-
-        return preSharedKey;
+        return wifiConfiguration.preSharedKey;
     }
 
     private static String removeFirstAndLastDoubleQuotes(String str) {
@@ -268,14 +276,11 @@ public class WifiDppUtils {
             WifiConfiguration wifiConfiguration) {
         final String ssid = removeFirstAndLastDoubleQuotes(wifiConfiguration.SSID);
         final String security = getSecurityString(wifiConfiguration);
-        String preSharedKey = wifiConfiguration.preSharedKey;
 
-        if (preSharedKey != null) {
-            // When the value of this key is read, the actual key is not returned, just a "*".
-            // Call privileged system API to obtain actual key.
-            preSharedKey = removeFirstAndLastDoubleQuotes(getPresharedKey(wifiManager,
-                    wifiConfiguration));
-        }
+        // When the value of this key is read, the actual key is not returned, just a "*".
+        // Call privileged system API to obtain actual key.
+        final String preSharedKey = removeFirstAndLastDoubleQuotes(getPresharedKey(wifiManager,
+                wifiConfiguration));
 
         if (!TextUtils.isEmpty(ssid)) {
             intent.putExtra(EXTRA_WIFI_SSID, ssid);

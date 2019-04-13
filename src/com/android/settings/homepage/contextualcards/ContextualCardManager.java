@@ -37,6 +37,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
+import com.android.settings.homepage.contextualcards.conditional.ConditionalCardController;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -82,11 +83,12 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
             {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
 
     private final Context mContext;
-    private final ControllerRendererPool mControllerRendererPool;
     private final Lifecycle mLifecycle;
     private final List<LifecycleObserver> mLifecycleObservers;
     private ContextualCardUpdateListener mListener;
 
+    @VisibleForTesting
+    final ControllerRendererPool mControllerRendererPool;
     @VisibleForTesting
     final List<ContextualCard> mContextualCards;
     @VisibleForTesting
@@ -228,8 +230,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
         //only log homepage display upon a fresh launch
         final long totalTime = System.currentTimeMillis() - mStartTime;
-        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext)
-                .logHomepageDisplay(totalTime);
         metricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_CONTEXTUAL_HOME_SHOW, (int) totalTime);
 
@@ -248,9 +248,25 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         // Duplicate a list to avoid java.util.ConcurrentModificationException.
         final List<ContextualCard> cards = new ArrayList<>(mContextualCards);
+        boolean hasConditionController = false;
         for (ContextualCard card : cards) {
-            final ContextualCardController controller = mControllerRendererPool
+            final ContextualCardController controller = getControllerRendererPool()
                     .getController(mContext, card.getCardType());
+            if (controller instanceof ConditionalCardController) {
+                hasConditionController = true;
+            }
+            if (hasWindowFocus && controller instanceof OnStart) {
+                ((OnStart) controller).onStart();
+            }
+            if (!hasWindowFocus && controller instanceof OnStop) {
+                ((OnStop) controller).onStop();
+            }
+        }
+        // Conditional cards will always be refreshed whether or not there are conditional cards
+        // in the homepage.
+        if (!hasConditionController) {
+            final ContextualCardController controller = getControllerRendererPool()
+                    .getController(mContext, ContextualCard.CardType.CONDITIONAL);
             if (hasWindowFocus && controller instanceof OnStart) {
                 ((OnStart) controller).onStart();
             }

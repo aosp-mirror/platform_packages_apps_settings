@@ -218,6 +218,17 @@ public class NotificationChannelSlice implements CustomSliceable {
                 .toIntent();
     }
 
+    /**
+     * Check the package has been interacted by user or not.
+     * Will use to filter package in {@link #getRecentlyInstalledPackages()}.
+     *
+     * @param packageName The app package name.
+     * @return true if the package was interacted, false otherwise.
+     */
+    protected boolean isUserInteracted(String packageName) {
+        return false;
+    }
+
     @VisibleForTesting
     IconCompat getApplicationIcon(String packageName) {
         final Drawable drawable;
@@ -328,8 +339,9 @@ public class NotificationChannelSlice implements CustomSliceable {
         final List<PackageInfo> installedPackages =
                 mContext.getPackageManager().getInstalledPackages(0);
         for (PackageInfo packageInfo : installedPackages) {
-            // Not include system app.
-            if (packageInfo.applicationInfo.isSystemApp()) {
+            // Not include system app and interacted app.
+            if (packageInfo.applicationInfo.isSystemApp()
+                    || isUserInteracted(packageInfo.packageName)) {
                 continue;
             }
 

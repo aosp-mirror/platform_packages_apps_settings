@@ -16,21 +16,11 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import java.util.List;
+import androidx.slice.Slice;
 
 /** Feature provider for the contextual card feature. */
 public interface ContextualCardFeatureProvider {
 
-    /** Homepage displays. */
-    void logHomepageDisplay(long latency);
-
-    /** When user clicks dismiss in contextual card */
-    void logContextualCardDismiss(ContextualCard card);
-
-    /** After ContextualCardManager decides which cards will be displayed/hidden */
-    void logContextualCardDisplay(List<ContextualCard> showedCards,
-            List<ContextualCard> hiddenCards);
-
-    /** When user clicks toggle/title area of a contextual card. */
-    void logContextualCardClick(ContextualCard card, int sliceRow, int tapTarget, int uiPosition);
+    /** Log package when user clicks contextual notification channel card. */
+    void logNotificationPackage(Slice slice);
 }

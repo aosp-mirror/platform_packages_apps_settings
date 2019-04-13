@@ -461,6 +461,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Öryggiseiginleikar til að vernda tækið verða ekki gerðir virkir. Þú munt ekki geta komið í veg fyrir að aðrir noti símann ef hann týnist eða er stolið."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Sleppa samt"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Til baka"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Sleppa"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Hætta við"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Snertu lesarann"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Hann er aftan á símanum. Notaðu vísifingurinn."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Teikning af tæki og staðsetningu fingrafaraskynjara"</string>
@@ -476,6 +478,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Gera þetta seinna"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Viltu sleppa uppsetningu fingrafars?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Þú hefur valið að nota fingrafar þitt sem leið til að opna símann þinn. Ef þú sleppir þessu núna þarftu að setja þetta upp seinna. Uppsetningin tekur einungis um eina mínútu."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Verndaðu spjaldtölvuna þína með því að velja skjálás svo enginn geti notað hana ef hún týnist eða ef henni er stolið. Þú þarft einnig að velja skjálás til að setja upp fingrafar. Ýttu á „Hætta við“, stilltu síðan PIN-númer eða veldu annars konar skjálás."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Verndaðu tækið þitt með því að velja skjálás svo enginn geti notað það ef það týnist eða ef því er stolið. Þú þarft einnig að velja skjálás til að setja upp fingrafar. Ýttu á „Hætta við“, stilltu síðan PIN-númer eða veldu annars konar skjálás."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Verndaðu símann þinn með því að velja skjálás svo enginn geti notað hann ef hann týnist eða ef honum er stolið. Þú þarft einnig að velja skjálás til að setja upp fingrafar. Ýttu á „Hætta við“, stilltu síðan PIN-númer eða veldu annars konar skjálás."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Verndaðu spjaldtölvuna þína með því að velja skjálás svo enginn geti notað hana ef hún týnist eða ef henni er stolið. Þú þarft einnig að velja skjálás til að setja upp andlitsgreiningu. Ýttu á „Hætta við“, stilltu síðan PIN-númer eða veldu annars konar skjálás."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Verndaðu tækið þitt með því að velja skjálás svo enginn geti notað það ef það týnist eða ef því er stolið. Þú þarft einnig að velja skjálás til að setja upp andlitsgreiningu. Ýttu á „Hætta við“, stilltu síðan PIN-númer eða veldu annars konar skjálás."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Verndaðu símann þinn með því að velja skjálás svo enginn geti notað hann ef hann týnist eða ef honum er stolið. Þú þarft einnig að velja skjálás til að setja upp andlitsgreiningu. Ýttu á „Hætta við“, stilltu síðan PIN-númer eða veldu annars konar skjálás."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Sleppa uppsetningu PIN-númers?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Sleppa uppsetn. aðgangsorðs?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Sleppa uppsetningu mynsturs?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Setja upp skjálás"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Lokið"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Úbbs, þetta er ekki skynjarinn"</string>
@@ -1655,6 +1666,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Leyfa forritum og þjónustu að leita að Wi-Fi netum hvenær sem er, jafnvel þegar slökkt er á Wi-Fi. Sem dæmi er hægt að nota þetta til að bæta eiginleika og þjónustu sem byggja á staðsetningu."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetooth-leit"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Leyfa forritum og þjónustu að leita að nálægum tækjum hvenær sem er, jafnvel þegar slökkt er á Bluetooth. Sem dæmi er hægt að nota þetta til að bæta eiginleika og þjónustu sem byggja á staðsetningu."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"Staðsetningarþjónustur fyrir vinnuna"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Staðsetning frá Wi-Fi og kerfi"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Leyfir forritum að nota þjónustu Google fyrir hraðvirkari staðsetningarákvörðun. Nafnlausar upplýsingar verða sendar til Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fi ákvarðar staðsetningu"</string>
@@ -3051,10 +3063,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Spjallblaðra"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Vasaljós, ljós"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, kveikja, slökkva, stjórna"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"textaskilaboð, senda skilaboð, skilaboð, skilaboð, sjálfgefið"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"farsími, farsímakerfi, þráðlaust, gögn, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi símtal, símtal"</string>
-    <string name="keywords_home" msgid="294182527446892659">"ræsiforrit, sjálfgefið, forrit"</string>
     <string name="keywords_display" msgid="8910345814565493016">"skjár, snertiskjár"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"myrkva skjá, snertiskjár, rafhlaða, bjart"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"myrkva skjá, nótt, litbrigði, næturstilling, birta, skjálitur, litur, litur"</string>
@@ -3078,8 +3088,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"takmörkun, takmarka, takmarkað"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"textaleiðrétting, leiðrétta, hljóð, titringur, sjálfvirkt, tungumál, bending, uppástunga, tillaga, þema, móðgandi, orð, skrifa, emoji, alþjóðlegt"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"endurstilla, stillingar, sjálfgefið"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"neyðartilvik, hálka, forrit, sjálfgefið"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"sími, símaforrit, sjálfgefið"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"forrit, sækja, niðurhal, kerfi"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"forrit, heimildir, öryggi"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"forrit, sjálfgefin"</string>
@@ -3116,9 +3124,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"tengt, tæki, heyrnartól, höfuðtól, hátalari, þráðlaust, para, heyrnartól, tónlist, efni"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"bakgrunnur, skjár, lásskjár, þema"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"sjálfgefið, hjálpari"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"sjálfgefið, sjálfgefinn vafri"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"greiðsla, sjálfgefin"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"sjálfgefið"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"tilkynning berst"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"usb tjóðrun, bluetooth tjóðrun, heitur Wi-Fi reitur"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"snertisvörun, titringur, skjár, næmi"</string>
@@ -4318,7 +4324,7 @@
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Auktu rafhlöðuendingu tækisins"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Auktu rafhlöðuendingu símans"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Koma í veg fyrir hringingar"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Hindra hringingar"</string>
     <string name="gesture_prevent_ringing_title" msgid="5961391929839748111">"Ýttu á aflrofann og takka til að hækka hljóðstyrk samtímis til að"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Flýtileið til að koma í veg fyrir hringingu"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Titringur"</string>

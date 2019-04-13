@@ -461,6 +461,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Cihaz qoruma funksiyası aktiv edilməyəcək. Telefon itərsə və ya oğurlanarsa, başqalarının bu telefondan istifadəsinin qarşısını ala bilməyəcəksiniz."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Hər halda atla"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Geri qayıt"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Ötürün"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Ləğv edin"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Sensora toxunun"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Bu, telefonun arxa hissəsindədir. İkinci barmağınızı istifadə edin."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Cihaz və barmaq izi sensoru ilə illustrasiya"</string>
@@ -476,6 +478,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Daha sonra edin"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Barmaq izi ayarları ötürülsün?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Telefon kilidini açmaq üçün barmaq izindən istifadə etməyi seçmisiniz. Bunu indi ötürsəniz, bu funksiyanı daha sonra ayarlamalı olacaqsınız. Ayarlamaq bir-iki dəqiqə vaxtınızı aparacaq."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Planşetiniz itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Barmaq izini quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə klikləyin, sonra isə PIN ayarlayın, yaxud başqa ekran kilidi seçin."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Cihazınız itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Barmaq izini quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə klikləyin, sonra isə PIN ayarlayın, yaxud başqa ekran kilidi seçin."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Telefonunuz itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Barmaq izini quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə klikləyin, sonra isə PIN ayarlayın, yaxud başqa ekran kilidi seçin."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Planşetiniz itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Üz tanınmasını quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə klikləyin, sonra isə PIN ayarlayın, yaxud başqa ekran kilidi seçin."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Cihazınız itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Üz tanınmasını quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə klikləyin, sonra isə PIN ayarlayın, yaxud başqa ekran kilidi seçin."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Telefonunuz itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Üz tanınmasını quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə klikləyin, sonra isə PIN ayarlayın, yaxud başqa ekran kilidi seçin."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"PIN Quraşdırması ötürülsün?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Parol Quraşdırması ötürülsün?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Nümunə Quraşdırması ötürülsün?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Ekran kilidi quraşdırın"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Hazırdır"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ups, bu sensor deyil"</string>
@@ -1655,6 +1666,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Wi‑Fi deaktiv olsa belə, tətbiq və xidmətlərin Wi‑Fi şəbəkələrini istənilən zaman skan etməsinə icazə verin. Məsələn, bu, məkanla bağlı funksiya və xidmətləri təkmilləşdirmək üçün istifadə edilə bilər."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetooth skan edilir"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Bluetooth deaktiv olsa belə, tətbiq və xidmətlərə yaxınlıqdakı cihazları istənilən zaman skan etməsinə icazə verin. Məsələn, bu, məkanla bağlı funksiya və xidmətləri təkmilləşdirmək üçün istifadə edilə bilər."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"İş üçün məkan xidmətləri"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi və mobil şəbəkə yerləşməsi"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Yerləşmənizi daha tez tapmaq üçün tətbiqlərə Google\'un yerləşmə xidmətindən istifadə etməyə icazə verin."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi‑Fi ilə müəyyən olunmuş yer"</string>
@@ -3051,10 +3063,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Çat başlığı"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Fleş işığı, İşıq, Fənər"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, aktiv, nəzarət"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"mətn mesajı, mətn, mesaj, mesajlaşma, defolt"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"şəbəkə, mobil, şəbəkə operatoru, simsiz, data, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, zəng, çağrı"</string>
-    <string name="keywords_home" msgid="294182527446892659">"işə salan, defolt, tətbiqlər"</string>
     <string name="keywords_display" msgid="8910345814565493016">"ekran, taçskrin"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"qara ekran, toxunuş ekranı, batareya, parlaq"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"qara ekran, gecə, rəng, gecə növbəsi, parlaqlıq, ekran rəngi, rəng, rəng"</string>
@@ -3078,8 +3088,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"məhdudiyyət, məhdudlaşma, məhdudlaşıb"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"mətn düzəlişi, bağlantı, səs, titrəyiş, avtomatik, dil, jest, təklif etmək, təklif, tema, incidici, söz, növ, emosiya işarəsi, beynəlxalq"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"sıfırlama, tərcihlər, defolt"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"təcili, buz, tətbiq, defolt"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"telefon, nömrə yığımı, defolt"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"tətbiq, endirmə, tətbiqlər, sistem"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"tətbiq, icazələr, təhlükəsizlik"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"tətbiq, defolt"</string>
@@ -3116,9 +3124,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"qoşulu, cihaz, qulaqlıq, qulaqlıq, spiker, simsiz, cüt, qulaqlıq, musiqi, media"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"arxa fon, ekran, ekran kilidi, tema"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"defolt, assistent"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"defolt, defolt brauzer"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"ödəniş, defolt"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"defolt"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"gələn bildiriş"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"birləşdirici istifadə edin, bluetooth birləşdiricisi, wifi hotspot"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"haptik, vibrasiya, ekran, həssaslıq"</string>

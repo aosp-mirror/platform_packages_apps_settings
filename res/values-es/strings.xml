@@ -461,6 +461,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otros usuarios utilicen este teléfono si lo pierdes o te lo roban."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Sí, saltar"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Volver"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Saltar"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Toca el sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Está en la parte trasera del teléfono. Utiliza el dedo índice."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Ilustración con la ubicación del sensor de huellas digitales y dispositivo"</string>
@@ -476,6 +478,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Hacerlo más adelante"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"¿Saltar la configuración de huella digital?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Has decidido utilizar tu huella digital para desbloquear el teléfono. Si te saltas este paso ahora, tendrás que configurarlo más tarde (este proceso tarda aproximadamente un minuto)."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Protege tu tablet con una opción de bloqueo de pantalla para que nadie pueda usarlo si lo pierdes o te lo roban. También necesitas tener una opción de bloqueo de pantalla para configurar la huella digital. Toca Cancelar y establece un PIN, o elige otra opción de bloqueo de pantalla."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Protege tu dispositivo con una opción de bloqueo de pantalla para que nadie pueda usarlo si lo pierdes o te lo roban. También necesitas tener una opción de bloqueo de pantalla para configurar la huella digital. Toca Cancelar y establece un PIN, o elige otra opción de bloqueo de pantalla."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Protege tu teléfono con una opción de bloqueo de pantalla para que nadie pueda usarlo si lo pierdes o te lo roban. También necesitas tener una opción de bloqueo de pantalla para configurar la huella digital. Toca Cancelar y establece un PIN, o elige otra opción de bloqueo de pantalla."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Protege tu tablet con una opción de bloqueo de pantalla para que nadie pueda usarlo si lo pierdes o te lo roban. También necesitas tener una opción de bloqueo de pantalla para configurar la autenticación facial. Toca Cancelar y establece un PIN, o elige otra opción de bloqueo de pantalla."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Protege tu dispositivo con una opción de bloqueo de pantalla para que nadie pueda usarlo si lo pierdes o te lo roban. También necesitas tener una opción de bloqueo de pantalla para configurar la autenticación facial. Toca Cancelar y establece un PIN, o elige otra opción de bloqueo de pantalla."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Protege tu teléfono con una opción de bloqueo de pantalla para que nadie pueda usarlo si lo pierdes o te lo roban. También necesitas tener una opción de bloqueo de pantalla para configurar la autenticación facial. Toca Cancelar y establece un PIN, o elige otra opción de bloqueo de pantalla."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"¿No configurar PIN?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"¿No configurar contraseña?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"¿No configurar patrón?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Configurar bloqueo de pantalla"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Listo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"¡Vaya! Ese no es el sensor"</string>
@@ -1655,6 +1666,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Permite que las aplicaciones y los servicios busquen redes Wi‑Fi en cualquier momento aunque la conexión Wi‑Fi esté desactivada. Se utiliza, por ejemplo, para mejorar los servicios y funciones basados en la ubicación."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Búsqueda de dispositivos Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Permite que las aplicaciones y los servicios busquen dispositivos cercanos en cualquier momento aunque la conexión Bluetooth esté desactivada. Se utiliza, por ejemplo, para mejorar los servicios y funciones basados en la ubicación."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"Servicios de ubicación para el trabajo"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Ubicación por red móvil y Wi‑Fi"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Permitir que las aplicaciones usen el servicio de ubicación de Google para calcular tu ubicación más rápido. Se recopilarán datos de ubicación anónimos y se enviarán a Google"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Ubicación determinada por Wi-Fi"</string>
@@ -3051,10 +3063,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Encabezado del chat"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Linterna, luz"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi‑fi, alternar, controlar"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"mensaje de texto, enviar mensajes, mensajes, sms, predeterminado"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"móvil, operador móvil, conexión inalámbrica, datos, 4G, 3G, 2G, LTE"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, llamada, llamadas"</string>
-    <string name="keywords_home" msgid="294182527446892659">"menú de aplicaciones, predeterminado, aplicaciones"</string>
     <string name="keywords_display" msgid="8910345814565493016">"pantalla, pantalla táctil"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"atenuar pantalla, pantalla táctil, batería, nitidez"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"atenuar pantalla, noche, tono, modo nocturno, brillo, color de la pantalla, color"</string>
@@ -3078,8 +3088,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"restricción, restringir, restringido"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"corrección de texto, corregir, sonido, vibración, automático, idioma, gesto, sugerencia, tema, ofensivo, palabra, escribir, emoji, internacional"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"restablecer, preferencias, predeterminadas"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"emergencia, hielo, alicación, predeterminada"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"teléfono, marcador, predeterminado"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"aplicaciones, descargar, aplicaciones, sistema"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"aplicaciones, permisos, seguridad"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"aplicaciones, predeterminadas"</string>
@@ -3116,9 +3124,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"conectado, dispositivo, auriculares, cascos, altavoz, inalámbrico, vincular, auriculares de botón, música, contenido multimedia"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"fondo, pantalla, pantalla de bloqueo, tema"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"predeterminado, asistente"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"predeterminado, navegador predeterminado"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"pago, predeterminado"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"predeterminados"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"notificación entrante"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"conexión compartida por usb, conexión compartida por bluetooth, punto de acceso wi‑fi"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"háptica, vibrar, pantalla, sensibilidad"</string>

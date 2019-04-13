@@ -135,7 +135,7 @@ public class ManageApplications extends InstrumentedFragment
         implements View.OnClickListener, OnItemSelectedListener, SearchView.OnQueryTextListener {
 
     static final String TAG = "ManageApplications";
-    static final boolean DEBUG = true;
+    static final boolean DEBUG = false;
 
     // Intent extras.
     public static final String EXTRA_CLASSNAME = "classname";
@@ -151,6 +151,7 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_HAS_ENTRIES = "hasEntries";
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
     private static final String EXTRA_FILTER_TYPE = "filterType";
+    private static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
 
     // attributes used as keys when passing values to AppInfoDashboardFragment activity
     public static final String APP_CHG = "chg";
@@ -220,6 +221,9 @@ public class ManageApplications extends InstrumentedFragment
     FilterSpinnerAdapter mFilterAdapter;
     @VisibleForTesting
     RecyclerView mRecyclerView;
+    // Whether or not search view is expanded.
+    @VisibleForTesting
+    boolean mExpandSearch;
 
     private View mRootView;
     private Spinner mFilterSpinner;
@@ -307,12 +311,14 @@ public class ManageApplications extends InstrumentedFragment
         mFilter = appFilterRegistry.get(appFilterRegistry.getDefaultFilterType(mListType));
         mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
         mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
+        mExpandSearch = activity.getIntent().getBooleanExtra(EXTRA_EXPAND_SEARCH_VIEW, false);
 
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
             mShowSystem = savedInstanceState.getBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
             mFilterType =
                     savedInstanceState.getInt(EXTRA_FILTER_TYPE, AppFilterRegistry.FILTER_APPS_ALL);
+            mExpandSearch = savedInstanceState.getBoolean(EXTRA_EXPAND_SEARCH_VIEW);
         }
 
         mInvalidSizeStr = activity.getText(R.string.invalid_size_value);
@@ -501,6 +507,7 @@ public class ManageApplications extends InstrumentedFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
+        outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
         outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
         if (mApplications != null) {
             mApplications.onSaveInstanceState(outState);
@@ -607,6 +614,9 @@ public class ManageApplications extends InstrumentedFragment
             mSearchView = (SearchView) searchMenuItem.getActionView();
             mSearchView.setQueryHint(getText(R.string.search_settings));
             mSearchView.setOnQueryTextListener(this);
+            if (mExpandSearch) {
+                searchMenuItem.expandActionView();
+            }
         }
 
         updateOptionsMenu();

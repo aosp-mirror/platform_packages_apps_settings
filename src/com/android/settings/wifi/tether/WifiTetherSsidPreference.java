@@ -37,9 +37,7 @@ import com.android.settings.widget.ValidatedEditTextPreference;
 public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
     private static final String TAG = "WifiTetherSsidPreference";
 
-    private ImageButton mImageButton;
-    private Drawable mButtonIcon;
-    private View mDivider;
+    private Drawable mShareIconDrawable;
     private View.OnClickListener mClickListener;
     private boolean mVisible;
 
@@ -72,30 +70,29 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
         // TODO(b/129019971): use methods of divider line in parent object
         setLayoutResource(com.android.settingslib.R.layout.preference_two_target);
         setWidgetLayoutResource(R.layout.wifi_button_preference_widget);
+
+        mShareIconDrawable = getDrawable(R.drawable.ic_qrcode_24dp);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        if (mImageButton == null) {
-            mImageButton = (ImageButton) holder.findViewById(R.id.button_icon);
-
-            mImageButton.setContentDescription(
-                    getContext().getString(R.string.wifi_dpp_share_hotspot));
-            setButtonIcon(R.drawable.ic_qrcode_24dp);
-            mImageButton.setImageDrawable(mButtonIcon);
-
-            mDivider = holder.findViewById(R.id.two_target_divider);
-        }
+        final ImageButton shareButton = (ImageButton) holder.findViewById(R.id.button_icon);
+        final View dividerView = holder.findViewById(R.id.two_target_divider);
 
         if (mVisible) {
-            mImageButton.setOnClickListener(mClickListener);
-            mImageButton.setVisibility(View.VISIBLE);
-            mDivider.setVisibility(View.VISIBLE);
+            shareButton.setOnClickListener(mClickListener);
+            shareButton.setVisibility(View.VISIBLE);
+            shareButton.setContentDescription(
+                    getContext().getString(R.string.wifi_dpp_share_hotspot));
+            shareButton.setImageDrawable(mShareIconDrawable);
+
+            dividerView.setVisibility(View.VISIBLE);
         } else {
-            mImageButton.setVisibility(View.GONE);
-            mDivider.setVisibility(View.GONE);
+            shareButton.setVisibility(View.GONE);
+
+            dividerView.setVisibility(View.GONE);
         }
     }
 
@@ -107,12 +104,15 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
         mVisible = visible;
     }
 
-    private void setButtonIcon(@DrawableRes int iconResId) {
+    private Drawable getDrawable(@DrawableRes int iconResId) {
+        Drawable buttonIcon = null;
+
         try {
-            mButtonIcon = getContext().getDrawable(iconResId);
+            buttonIcon = getContext().getDrawable(iconResId);
         } catch (Resources.NotFoundException exception) {
             Log.e(TAG, "Resource does not exist: " + iconResId);
         }
+        return buttonIcon;
     }
 
     @VisibleForTesting

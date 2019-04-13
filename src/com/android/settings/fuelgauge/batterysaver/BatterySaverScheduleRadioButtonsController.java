@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -38,6 +39,7 @@ public class BatterySaverScheduleRadioButtonsController {
     public static final String KEY_NO_SCHEDULE = "key_battery_saver_no_schedule";
     public static final String KEY_ROUTINE = "key_battery_saver_routine";
     public static final String KEY_PERCENTAGE = "key_battery_saver_percentage";
+    public static final int TRIGGER_LEVEL_MIN = 5;
 
     private Context mContext;
     private BatterySaverScheduleSeekBarController mSeekBarController;
@@ -67,30 +69,43 @@ public class BatterySaverScheduleRadioButtonsController {
     }
 
     public boolean setDefaultKey(String key) {
+        if (key == null) {
+            return false;
+        }
+        
         final ContentResolver resolver = mContext.getContentResolver();
-
         int mode = PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE;
         int triggerLevel = 0;
-        if (!TextUtils.equals(key, KEY_NO_SCHEDULE)
-                && BatterySaverUtils.maybeShowBatterySaverConfirmation(
-                        mContext, true /* confirmOnly */)) {
-            return true;
-        } else {
-            switch (key) {
-                case KEY_NO_SCHEDULE:
-                    break;
-                case KEY_PERCENTAGE:
-                    triggerLevel = 5;
-                    break;
-                case KEY_ROUTINE:
-                    mode = PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC;
-                    break;
-                default:
-                    throw new IllegalStateException(
-                            "Not a valid key for " + this.getClass().getSimpleName());
-            }
+        final Bundle confirmationExtras = new Bundle(3);
+        switch (key) {
+            case KEY_NO_SCHEDULE:
+                break;
+            case KEY_PERCENTAGE:
+                triggerLevel = TRIGGER_LEVEL_MIN;
+                confirmationExtras.putBoolean(BatterySaverUtils.EXTRA_CONFIRM_TEXT_ONLY, true);
+                confirmationExtras.putInt(BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER,
+                        PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
+                confirmationExtras.putInt(BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER_LEVEL,
+                        triggerLevel);
+                break;
+            case KEY_ROUTINE:
+                mode = PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC;
+                confirmationExtras.putBoolean(BatterySaverUtils.EXTRA_CONFIRM_TEXT_ONLY, true);
+                confirmationExtras.putInt(BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER,
+                        PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
+                break;
+            default:
+                throw new IllegalStateException(
+                        "Not a valid key for " + this.getClass().getSimpleName());
         }
 
+        if (!TextUtils.equals(key, KEY_NO_SCHEDULE)
+                && BatterySaverUtils.maybeShowBatterySaverConfirmation(
+                mContext, confirmationExtras)) {
+            // reset this if we need to show the confirmation message
+            mode = PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE;
+            triggerLevel = 0;
+        }
         // Trigger level is intentionally left alone when going between dynamic and percentage modes
         // so that a users percentage based schedule is preserved when they toggle between the two.
         Settings.Global.putInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE, mode);

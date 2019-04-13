@@ -97,21 +97,4 @@ public class SettingsPanelActivity extends FragmentActivity {
             fragmentManager.beginTransaction().add(R.id.main_content, panelFragment).commit();
         }
     }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-            final PanelContent panelContent = FeatureFactory.getFactory(this)
-                    .getPanelFeatureProvider()
-                    .getPanel(this, getIntent().getAction(), null /* Media Package Name */);
-            FeatureFactory.getFactory(this)
-                    .getMetricsFeatureProvider()
-                    .action(0 /* attribution */,
-                            SettingsEnums.PAGE_HIDE,
-                            panelContent.getMetricsCategory(),
-                            PanelClosedKeys.KEY_CLICKED_OUT,
-                            0 /* value */);
-        }
-        return super.onTouchEvent(event);
-    }
 }

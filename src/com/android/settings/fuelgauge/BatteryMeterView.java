@@ -61,7 +61,6 @@ public class BatteryMeterView extends ImageView {
         mDrawable = new BatteryMeterDrawable(context, frameColor);
         mDrawable.setColorFilter(mAccentColorFilter);
         setImageDrawable(mDrawable);
-        setLayerType(LAYER_TYPE_SOFTWARE, null);
     }
 
     public void setBatteryLevel(int level) {

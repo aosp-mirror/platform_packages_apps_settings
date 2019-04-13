@@ -30,8 +30,6 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS" />
-    <uses-permission android:name="android.permission.ACCESS_WIMAX_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIMAX_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="com.android.certinstaller.INSTALL_AS_USER" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -531,6 +529,18 @@
                 android:value="com.android.settings.vpn2.VpnSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$DataSaverSummaryActivity"
+            android:label="@string/data_saver_title"
+            android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DATA_SAVER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.datausage.DataSaverSummary" />
         </activity>
 
         <activity
@@ -1590,10 +1600,6 @@
             android:permission="android.permission.MANAGE_FINGERPRINT"
             android:icon="@drawable/ic_suggestion_fingerprint"
             android:theme="@style/GlifTheme.Light">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.FINGERPRINT_ENROLL" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.require_feature"
                 android:value="android.hardware.fingerprint" />
             <meta-data android:name="com.android.settings.title"
@@ -1601,6 +1607,22 @@
             <meta-data android:name="com.android.settings.summary"
                 android:resource="@string/suggestion_additional_fingerprints_summary" />
         </activity>
+
+        <activity-alias android:name=".SetupFingerprintSuggestionActivity"
+            android:enabled="false"
+            android:exported="true"
+            android:targetActivity=".biometrics.fingerprint.FingerprintSuggestionActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.FINGERPRINT_ENROLL" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.require_feature"
+                       android:value="android.hardware.fingerprint" />
+            <meta-data android:name="com.android.settings.title"
+                       android:resource="@string/suggestion_additional_fingerprints" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/suggestion_additional_fingerprints_summary" />
+        </activity-alias>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPattern$InternalActivity"
@@ -2869,6 +2891,19 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deletionhelper.AutomaticStorageManagerSettings" />
+        </activity>
+
+        <!-- Show app-level advanced power usage details (app passed in as extras) -->
+        <activity
+            android:name=".fuelgauge.AdvancedPowerUsageDetailActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.settings.VIEW_ADVANCED_POWER_USAGE_DETAIL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
         </activity>
 
         <activity

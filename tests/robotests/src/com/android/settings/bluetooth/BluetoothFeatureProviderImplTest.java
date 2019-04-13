@@ -49,7 +49,8 @@ public class BluetoothFeatureProviderImplTest {
     @Test
     public void getBluetoothDeviceSettingsUri_containCorrectMacAddress() {
         when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_ENHANCED_SETTINGS_UI_URI)).thenReturn(SETTINGS_URI);
+                BluetoothDevice.METADATA_ENHANCED_SETTINGS_UI_URI)).thenReturn(
+                SETTINGS_URI.getBytes());
         final Uri uri = mBluetoothFeatureProvider.getBluetoothDeviceSettingsUri(mBluetoothDevice);
         assertThat(uri.toString()).isEqualTo(SETTINGS_URI);
     }
