@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"A megadott port nem érvényes."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"A HTTP proxyt a böngésző használja, ám más alkalmazások nem használhatják."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Jelenlegi alazonosító:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Alapértelmezett adatok SIM-alazonosítója:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Letöltési sávszélesség (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Feltöltési sávszélesség (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Mobilos helyadatok (megszűnt):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Rádióhullámsáv kiválasztása"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Hanghálózat típusa:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Adathálózat típusa:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Telefonkönyv kiválasztása"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Preferált hálózattípus beállítása:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Pingelt gazdagépnév(www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Pingelt gazdagépnév(www.google.com) IPv6:"</string>
@@ -343,11 +346,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Dátum beállítása"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Régió keresése"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Régió"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Időzóna"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"Időzónák itt: <xliff:g id="REGION">%1$s</xliff:g>"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC-eltolódás kiválasztása"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Rendezés név szerint"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Rendezés időzóna szerint"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"A(z) <xliff:g id="TIME_TYPE">%1$s</xliff:g> kezdete: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -882,6 +881,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g>: online bejelentkezés szükséges a csatlakozás előtt."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"KAPCSOLÓDÁS"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"A hálózaton nincs internetkapcsolat. Fenn szeretné tartani a kapcsolatot?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Egyes alkalmazások és szolgáltatások esetleg nem működnek a korlátozott kapcsolat miatt. Használja?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Ne kérdezzen rá újra ennél a hálózatnál"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"A Wi‑Fi-hálózat nem kapcsolódik az internethez"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Ha gyenge a Wi-Fi-kapcsolat, bármikor átválthat mobilhálózatra. A szolgáltató adatforgalmi díjat számíthat fel."</string>
@@ -967,15 +967,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Hívások kiterjesztése Wi-Fi segítségével"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Kapcsolja be a Wi-Fi-hívást a lefedettség növeléséhez"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Híváspreferencia"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-hívás üzemmód"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Híváspreferencia"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Barangolási beállítás"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Barangolási beállítás"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Wi-Fi előnyben részesítve"</item>
-    <item msgid="1335127656328817518">"Preferált: mobil"</item>
-    <item msgid="3132912693346866895">"Csak Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -988,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Wi-Fi előnyben részesítve"</item>
-    <item msgid="5074515506087318555">"Preferált: mobil"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -999,7 +999,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Ha be van kapcsolva a Wi-Fi-hívás, akkor a telefon az Ön beállításaitól és a jelerősségtől függően vagy a Wi-Fi-hálózaton, vagy a mobilszolgáltató hálózatán át vezeti a hívásokat. A funkció bekapcsolása előtt tájékozódjon mobilszolgáltatójánál a díjakról és egyéb részletekről."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Mobilhálózat használata, ha nem áll rendelkezésre Wi-Fi-hálózat"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Wi‑Fi használata, ha nem áll rendelkezésre mobilhálózat"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Hívás Wi-Fi-n. Ha a Wi-Fi kapcsolat megszűnik, a hívás véget ér."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Ha be van kapcsolva a Wi-Fi-hívás, akkor a telefon az Ön beállításaitól és a jelerősségtől függően vagy a Wi-Fi-hálózaton, vagy a mobilszolgáltató hálózatán át vezeti a hívásokat. A funkció bekapcsolása előtt tájékozódjon mobilszolgáltatójánál a díjakról és egyéb részletekről. <xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Vészhelyzeti cím"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"A Wi-Fi-n keresztül indított segélyhívások esetében megjelenő tartózkodási hely"</string>
@@ -1175,6 +1178,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Nem lehet megváltoztatni a PIN-kódot.\nLehet, hogy hibás a PIN-kód."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"A SIM-kártya PIN-kódja sikeresen módosításra került"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Nem lehet megváltoztatni a SIM-kártya zárolási állapotát.\nLehet, hogy hibás a PIN-kód."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Nem sikerült letiltani a PIN-kódot."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Nem sikerült engedélyezni a PIN-kódot."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Mégse"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Több SIM kártyát találtunk"</string>
@@ -1236,7 +1241,7 @@
     <string name="status_signal_strength" msgid="3732655254188304547">"Jelerősség"</string>
     <string name="status_roaming" msgid="2638800467430913403">"Barangolás"</string>
     <string name="status_operator" msgid="2274875196954742087">"Hálózat"</string>
-    <string name="status_wifi_mac_address" msgid="2202206684020765378">"Wi-Fi eszköz MAC-címe"</string>
+    <string name="status_wifi_mac_address" msgid="2202206684020765378">"Wi-Fi MAC-címe"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth-cím"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"Sorozatszám"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Futásidő"</string>
@@ -1459,8 +1464,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Visszaállítja?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"A hálózati beállítások visszaállítása nem hajtható végre ennél a felhasználónál"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"A hálózati beállítások vissza lettek állítva."</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"Nem lehet visszaállítani az eSIM-eket"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"Hiba történt, így az eSIM-eket nem lehet visszaállítani."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Összes adat törlése (gyári beállítások visszaállítása)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Az összes adat törlése"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Ez minden adatot töröl a táblagép "<b>"belső tárhelyéről"</b>", többek között: \n \n"<li>"Google-fiókját"</li>\n<li>"A rendszer- és alkalmazásadatokat és beállításokat"</li>" \n "<li>"A letöltött alkalmazásokat"</li></string>
@@ -1695,7 +1702,7 @@
     <string name="install_text" msgid="884360662922471113">"Telepítés"</string>
     <string name="disable_text" msgid="6544054052049395202">"Letiltás"</string>
     <string name="enable_text" msgid="9217362512327828987">"Engedélyezés"</string>
-    <string name="clear_user_data_text" msgid="355574089263023363">"Tároló ürítése"</string>
+    <string name="clear_user_data_text" msgid="355574089263023363">"Tárhely ürítése"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Frissítések eltávolítása"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Úgy döntött, hogy ezt az alkalmazást indítja el alapértelmezettként egyes műveletekhez."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"Ön engedélyezte az alkalmazás számára modulok létrehozását, illetve az adataikhoz való hozzáférést."</string>
@@ -1974,10 +1981,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Feliratok használata"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Hallókészülékek"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nincs csatlakoztatva hallókészülék"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Hallókészülék hozzáadása"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Hallókészülékek hozzáadása"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"A hallókészülék párosításához keresse meg eszközét a következő képernyőn, majd koppintson rá."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Győződjön meg arról, hogy hallókészüléke párosítási módban van."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"A(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jelenleg aktív"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>: aktív"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> mentett hallókészülék</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> mentett hallókészülék</item>
@@ -2439,7 +2446,7 @@
     <string name="usage_access_title" msgid="332333405495457839">"Alkalmazások hozzáféréssel"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Segélyhívó jelzés"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Viselkedés beállítása segélyhívás kezdeményezésekor"</string>
-    <string name="privacy_settings_title" msgid="2978878794187459190">"Biztonsági másolat"</string>
+    <string name="privacy_settings_title" msgid="2978878794187459190">"Biztonsági mentés"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Biztonsági mentés és visszaállítás"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Személyes adatok"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Adatok mentése"</string>
@@ -2543,7 +2550,7 @@
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Adatok és szinkronizálás"</string>
     <string name="preference_change_password_title" msgid="8955581790270130056">"Jelszó módosítása"</string>
     <string name="header_account_settings" msgid="5382475087121880626">"Fiókbeállítások"</string>
-    <string name="remove_account_label" msgid="5921986026504804119">"Fiók törlése"</string>
+    <string name="remove_account_label" msgid="5921986026504804119">"Fiók eltávolítása"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Fiók hozzáadása"</string>
     <string name="finish_button_label" msgid="481587707657751116">"Befejezés"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"Eltávolítja a fiókot?"</string>
@@ -2624,7 +2631,7 @@
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"A háttéradatok korlátozása csak akkor lehetséges, ha beállított mobiladatkorlátot."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Bekapcsolja a szinkronizálást?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"A rendszer azonnal átmásolja táblagépére a fiókot érintő valamennyi módosítást, amelyet az interneten hajt végre.\n\nEgyes fiókok a táblagépen végrehajtott módosításokat is automatikusan átmásolhatják az internetre. Ez a Google-fiókok működésének lényege."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"A rendszer azonnal átmásolja telefonjára a fiókot érintő valamennyi módosítást, amelyet az interneten hajt végre.\n\nEgyes fiókok a telefonon végrehajtott módosításokat is automatikusan átmásolhatják az internetre. Ez a Google-fiókok működésének lényege."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Ha valamelyik fiókján módosítást végez az interneten, akkor a módosítás automatikusan át lesz másolva a telefonjára.\n\nEgyes fiókok a telefonon végrehajtott módosításokat is automatikusan átmásolhatják az internetre. A Google-fiókok is ilyenek."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Kikapcsolja a szinkronizálást?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Ez mérsékelni fogja az adat- és akkumulátorhasználatot, de minden egyes fiókot manuálisan kell majd szinkronizálnia a legfrissebb információk begyűjtéséhez. Továbbá nem fog értesítéseket kapni a frissítésekről."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Adatforgalom-számlálás visszaállításának napja"</string>
@@ -4134,6 +4141,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Nem áll rendelkezésre hívások közben"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Nem áll rendelkezésre"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Hívás fogadása be"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Az APN nem módosítható."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Növelje a táblagép akkumulátor-élettartamát"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Növelje az eszköz akkumulátor-élettartamát"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Növelje a telefon akkumulátor-élettartamát"</string>
@@ -4150,4 +4158,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Hálózati információk"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Eszköze neve látható a telefonján lévő alkalmazások számára. Mások is láthatják, ha csatlakoztatja telefonját más Bluetooth-eszközökhöz, vagy ha Wi-Fi-hotspotot állít be."</string>
     <string name="devices_title" msgid="7701726109334110391">"Eszközök"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Fontos információ"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"TOVÁBB"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"KÖSZÖNÖM, NEM"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Hely"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"A szolgáltatás biztosítása érdekében szolgáltatója gyűjtheti a helyadatokat.\n\nTekintse meg szolgáltatója adatvédelmi irányelveit."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Segélyhívások"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"A szolgáltatója nem támogatja a Wi‑Fi-híváson keresztüli segélyhívásokat.\nAz eszköz automatikusan mobilhálózatra vált a segélyhívás indításához.\nSegélyhívások indítása csak mobilhálózati lefedettséggel rendelkező területen lehetséges."</string>
 </resources>

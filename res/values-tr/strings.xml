@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Yazdığınız bağlantı noktası geçerli değil."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP proxy, tarayıcı tarafından kullanılır, ancak diğer uygulamalar tarafından kullanılamayabilir."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL\'si: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Mevcut alt kimlik:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Varsayılan veri SIM\'inin alt kimliği:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"İndirme Bant Genişliği (kb/sn.):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Yükleme Bant Genişliği (kb/sn.):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Hücre Konumu Bilgisi (kullanımdan kaldırıldı):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Radyo Bandını Seç"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Sesli Ağ Türü:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Veri Ağı Türü:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Telefon dizinini seçin"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Tercih Edilen Ağ Türünü Ayarla:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping Ana Makine Adı (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping Ana Makine Adı (www.google.com) IPv6:"</string>
@@ -329,8 +332,8 @@
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Ağ tarafından sağlanan saati kullan"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Ağ tarafından sağlanan saati kullan"</string>
     <string name="zone_auto" msgid="334783869352026648">"Otomatik saat dilimi"</string>
-    <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Ağ tarafından sağlanan saat dilimini kullan"</string>
-    <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Ağ tarafından sağlanan saat dilimini kullan"</string>
+    <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Ağın sağladığı saat dilimini kullan"</string>
+    <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Ağın sağladığı saat dilimini kullan"</string>
     <string name="date_time_24hour_auto" msgid="2117383168985653422">"Otomatik 24 saat biçimi"</string>
     <string name="date_time_24hour_auto_summary" msgid="6351812925651480277">"Yerel ayar varsayılanını kullan"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24 saat biçimi"</string>
@@ -341,13 +344,9 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Saat dilimi seç"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Tarih"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Tarihi ayarla"</string>
-    <string name="date_time_search_region" msgid="2478334699004021972">"Bölgede ara"</string>
+    <string name="date_time_search_region" msgid="2478334699004021972">"Bölge ara"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Bölge"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Saat Dilimi"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"<xliff:g id="REGION">%1$s</xliff:g> bölgesindeki saat dilimleri"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC farkını seçin"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Alfabetik olarak sırala"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Saat dilimine göre sırala"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g>, <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> tarihinde başlıyor"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -364,7 +363,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tarafından kilit açık tutulduğu zaman hariç, uyku moduna geçtikten hemen sonra"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tarafından kilit açık tutulmadığı sürece uyku moduna geçtikten <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Kilitli ekranda sahip bilgilerini göster"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"Kilit ekranı iletisi"</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"Kilit ekranı mesajı"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Widget\'ları etkinleştir"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Yönetici devre dışı bıraktı"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Kilitleme seçeneğini göster"</string>
@@ -882,6 +881,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g>, ağa bağlanmadan önce çevrimiçinde oturum açmanızı gerektiriyor."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"BAĞLAN"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Bu ağda internet erişimi yok. Bağlı kalınsın mı?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Bazı uygulamalar ve hizmetler, sınırlı bağlantı nedeniyle çalışmayabilir. Yine de kullanılsın mı?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Bu ağ için bir daha sorma"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Kablosuz ağ internet\'e bağlı değil"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Kablosuz ağın internet bağlantısı sorunlu olduğunda mobil ağa geçiş yapabilirsiniz. Veri kullanımı ücretleri geçerli olabilir."</string>
@@ -967,15 +967,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Kablosuz ağ ile çağrı kapsamını genişletin"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Kapsama alanını genişletmek için kablosuz çağrıyı açın"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Çağrı tercihi"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Kablosuz çağrı modu"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Çağrı tercihi"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Dolaşım tercihi"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Dolaşım tercihi"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Kablosuz bağlantı tercihli"</item>
-    <item msgid="1335127656328817518">"Mobil tercihli"</item>
-    <item msgid="3132912693346866895">"Yalnızca kablosuz"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Kablosuz"</item>
@@ -988,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Kablosuz bağlantı tercihli"</item>
-    <item msgid="5074515506087318555">"Mobil tercihli"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Kablosuz"</item>
@@ -999,7 +999,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kablosuz çağrı açık olduğunda, telefonunuz tercihinize ve hangi sinyalin daha güçlü olduğuna bağlı olarak çağrıları kablosuz ağlar veya operatörünüzün ağı üzerinden yönlendirebilir. Bu özelliği açmadan önce, ücretleri ve diğer ayrıntıları öğrenmek için operatörünüze danışın."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Kablosuz ağ bağlantısı kullanılamıyorsa mobil ağı kullanın"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Mobil ağ kullanılamıyorsa kablosuz ağı kullan"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Kablosuz ağ üzerinden çağrı. Kablosuz ağ bağlantısı kesilirse çağrı sonlandırılır."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Kablosuz çağrı açık olduğunda, telefonunuz tercihinize ve hangi sinyalin daha güçlü olduğuna bağlı olarak çağrıları kablosuz ağlar veya operatörünüzün ağı üzerinden yönlendirebilir. Bu özelliği açmadan önce, ücretleri ve diğer ayrıntıları öğrenmek için operatörünüze danışın.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Acil Durum Adresi"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Kablosuz bağlantı üzerinden acil durum çağrısı yaptığınızda konumunuz olarak kullanılır"</string>
@@ -1076,7 +1079,7 @@
     <string name="brightness" msgid="8480105032417444275">"Parlaklık düzeyi"</string>
     <string name="brightness_title" msgid="5746272622112982836">"Parlaklık"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ekranın parlaklığını ayarla"</string>
-    <string name="auto_brightness_title" msgid="6341042882350279391">"Uyarlanan parlaklık"</string>
+    <string name="auto_brightness_title" msgid="6341042882350279391">"Otomatik parlaklık"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Parlaklık düzeyini mevcut ışık koşullarına göre ayarla"</string>
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"Kapalı"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"Tercih ettiğiniz parlaklık çok düşük"</string>
@@ -1094,7 +1097,7 @@
     <string name="auto_brightness_off_summary" msgid="7629228736838155268">"Mevcut ışık için ayarlama"</string>
     <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"Daha fazla pil kullanımı"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Parlaklık düzeyini mevcut ışık için optimize edin. Bu özellik açık olduğunda parlaklığı geçici olarak ayarlamaya devam edebilirsiniz."</string>
-    <string name="auto_brightness_description" msgid="7310335517128283729">"Ekranınızın parlaklığı, bulunduğunuz ortama ve aktivitelerinize göre otomatik olarak ayarlanır. Uyarlanan parlaklık özelliğinin tercihlerinizi öğrenmesine yardımcı olmak için kaydırma çubuğunu manuel olarak hareket ettirebilirsiniz."</string>
+    <string name="auto_brightness_description" msgid="7310335517128283729">"Ekranınızın parlaklığı, bulunduğunuz ortama ve aktivitelerinize göre otomatik olarak ayarlanır. Otomatik parlaklık özelliğinin tercihlerinizi öğrenmesine yardımcı olmak için kaydırma çubuğunu manuel olarak hareket ettirebilirsiniz."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Gece Işığı"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Gece Işığı, ekranınızın renk tonunu amber yapar. Bu renk tonlaması, ekranınızı loş ışıkta daha iyi görmenizi sağlar ve daha kolay uyumanıza yardımcı olabilir."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Program"</string>
@@ -1106,11 +1109,11 @@
     <string name="night_display_status_title" msgid="1784041143360286267">"Durum"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"Yoğunluk"</string>
     <string name="night_display_summary_off" msgid="1792750041697946539">"Kapalı / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"Hiçbir zaman otomatik olarak açılmayacak"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"hiçbir zaman otomatik olarak açılmayacak"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"Şu saatte otomatik olarak açılacak: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"Güneş battığında otomatik olarak açılacak"</string>
     <string name="night_display_summary_on" msgid="1355713529996456744">"Açık / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"Hiçbir zaman otomatik olarak kapatılmayacak"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"hiçbir zaman otomatik olarak kapatılmayacak"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"Şu saatte otomatik olarak kapatılacak: <xliff:g id="ID_1">%1$s</xliff:g>."</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Güneş doğduğunda otomatik olarak kapatılacak"</string>
     <string name="night_display_activation_on_manual" msgid="277343561277625826">"Şimdi aç"</string>
@@ -1129,7 +1132,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Ekranınızı kişiselleştirin"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Şuradan duvar kağıdı seçin:"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Ekran koruyucu"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Şarj edilirken veya yuvadayken"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Şarj olurken veya yuvadayken"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Her iki durumda da"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Şarj olurken"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Yuvadayken"</string>
@@ -1145,7 +1148,7 @@
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Ortam ekranı"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Her zaman açık / Pil kullanımı artar"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Yeni bildirimler"</string>
-    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Ne zaman gösterilecek?"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Ne zaman göstermeli?"</string>
     <string name="doze_title" msgid="2375510714460456687">"Yeni bildirimler"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Bildirim geldiğinde ekranı uyandır"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Her zaman açık"</string>
@@ -1175,6 +1178,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN değiştirilemiyor.\nPIN yanlış olabilir."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM PIN kodu başarıyla değiştirildi"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"SIM kartın kilit durumu değiştirilemiyor.\nPIN yanlış olabilir."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN devre dışı bırakılamıyor."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN etkinleştirilemiyor."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Tamam"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"İptal"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Birden çok SIM bulundu"</string>
@@ -1204,7 +1209,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Ana bant sürümü"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Çekirdek sürümü"</string>
     <string name="build_number" msgid="3075795840572241758">"Derleme numarası"</string>
-    <string name="device_info_not_available" msgid="8062521887156825182">"Uygun değil"</string>
+    <string name="device_info_not_available" msgid="8062521887156825182">"Yok"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Durum"</string>
     <string name="device_status" msgid="607405385799807324">"Durum"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Pilin, ağın durumu ve diğer bilgiler"</string>
@@ -1337,7 +1342,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistem"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> birimini keşfet"</string>
     <string name="storage_detail_dialog_other" msgid="8845766044697204852">"Diğerleri arasında, uygulamalar tarafından kaydedilmiş paylaşılan dosyalar, internet\'ten veya Bluetooth üzerinden indirilen dosyalar, Android dosyaları vb. bulunur.\n\n Bu <xliff:g id="NAME">^1</xliff:g> depolama cihazındaki görünebilir içeriğe göz atmak için Keşfet\'e dokunun."</string>
-    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Sistem, Android <xliff:g id="VERSION">%s</xliff:g> sürümünü çalıştırmak için kullanılan dosyalar içeriyor"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"Sistem, Android <xliff:g id="VERSION">%s</xliff:g> sürümünü çalıştırmak için kullanılan dosyaları içerir"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g>, <xliff:g id="SIZE">^2</xliff:g> depolama alanı kullanan fotoğraf, müzik, uygulama veya başka veriler kaydetmiş olabilir. \n\nAyrıntıları görmek için <xliff:g id="USER_1">^1</xliff:g> kullanıcısına geçiş yapın."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"<xliff:g id="NAME">^1</xliff:g> cihazınızı kurun"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Taşınabilir bir depolama birimi kullanın"</string>
@@ -1447,7 +1452,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Varsayılan APN ayarları geri yükleniyor."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Varsayılana sıfırla"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Varsayılan APN ayarlarına sıfırlama tamamlandı."</string>
-    <string name="reset_dashboard_title" msgid="6254873816990678620">"Seçenekleri sıfırla"</string>
+    <string name="reset_dashboard_title" msgid="6254873816990678620">"Sıfırlama seçenekleri"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Ağ, uygulamalar veya cihaz sıfırlanabilir"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Kablosuz, mobil, Bluetooth\'u sıfırla"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Bu sıfırlama işlemi, aşağıdakiler de dahil olmak üzere tüm ağ ayarlarınızı sıfırlayacaktır:\n\n"<li>"Kablosuz ağ"</li>\n<li>"Mobil veri"</li>\n<li>"Bluetooth"</li></string>
@@ -1459,8 +1464,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Sıfırlansın mı?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Bu kullanıcı için ağ ayarlarına sıfırlama işlevi kullanılamıyor"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Ağ ayarları sıfırlandı"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"eSIM\'ler sıfırlanamıyor"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"eSIM\'ler bir hata nedeniyle sıfırlanamıyor."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Tüm verileri sil (fabrika ayarlarına sıfırla)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Tüm verileri sil (sıfırla)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Bu işlem tablet bilgisayarınızın "<b>"dahili depolama alanından"</b>"şu verilerin tümünü siler:\n\n"<li>"Google hesabınız"</li>\n<li>"Sistem ve uygulama verileri ile ayarları"</li>\n<li>"İndirilen uygulamalar"</li></string>
@@ -1567,7 +1574,7 @@
     <string name="copyright_title" msgid="865906688917260647">"Telif Hakkı"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisans"</string>
     <string name="terms_title" msgid="7697580845616764642">"Şartlar ve koşullar"</string>
-    <string name="webview_license_title" msgid="2813507464175738967">"Sistem WebView Lisansı"</string>
+    <string name="webview_license_title" msgid="2813507464175738967">"Sistem Web Görünümü Lisansı"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Duvar kağıtları"</string>
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Uydu görüntüleri sağlayıcıları:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Manuel"</string>
@@ -1974,10 +1981,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Altyazıları kullan"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"İşitme cihazları"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Bağlı işitme cihazı yok"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"İşitme cihazı ekleyin"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"İşitme cihazı ekle"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"İşitme cihazlarınızı eşleştirmek için bir sonraki ekranda cihazınızı bulup dokunun."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"İşitme cihazlarınızın eşleme modunda olduğundan emin olun."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> şu anda etkin"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> etkin"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> işitme cihazı kayıtlı</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> işitme cihazı kayıtlı</item>
@@ -2202,7 +2209,7 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Uygulamalarınız normal miktarda pil kullanıyor. Uygulamalar çok fazla pil kullanırsa cihazınız size bazı önerilerde bulunacaktır.\n\nPiliniz azaldığında her zaman Pil Tasarrufu\'nu açabilirsiniz."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Pil Yöneticisi"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Uygulamaları otomatik olarak yönet"</string>
-    <string name="smart_battery_summary" msgid="1339184602000004058">"Sık kullanmadığınız uygulamalar için pil tüketimini sınırlayın"</string>
+    <string name="smart_battery_summary" msgid="1339184602000004058">"Sık kullanmadığınız uygulamalar için pil tüketimini sınırlar"</string>
     <string name="smart_battery_footer" product="default" msgid="5555604955956219544">"Pil Yöneticisi uygulamaların pili çok harcadığını algıladığında, bu uygulamaları kısıtlama seçeneğiniz olacaktır. Kısıtlanmış uygulamalar düzgün bir şekilde çalışmayabilir ve bildirimlerinde gecikme olabilir."</string>
     <string name="smart_battery_footer" product="tablet" msgid="5555604955956219544">"Pil Yöneticisi uygulamaların pili çok harcadığını algıladığında, bu uygulamaları kısıtlama seçeneğiniz olacaktır. Kısıtlanmış uygulamalar düzgün bir şekilde çalışmayabilir ve bildirimlerinde gecikme olabilir."</string>
     <string name="smart_battery_footer" product="device" msgid="5555604955956219544">"Pil Yöneticisi uygulamaların pili çok harcadığını algıladığında, bu uygulamaları kısıtlama seçeneğiniz olacaktır. Kısıtlanmış uygulamalar düzgün bir şekilde çalışmayabilir ve bildirimlerinde gecikme olabilir."</string>
@@ -2299,7 +2306,7 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Pil kullanımı, güç tüketimini yaklaşık olarak gösterir ve pili harcayan kaynakların hepsini hesaba dahil etmez. Çeşitli kaynaklar adı altında belirtilen değer, hesaplanan yaklaşık güç tüketimi ile pilin gerçek kullanımı arasındaki farktır."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Fazla hesaplanan güç kullanımı"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> süreyle kullanıldı"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> kullanıldı"</string>
     <string name="battery_active_for" msgid="2964359540508103032">"<xliff:g id="TIME">^1</xliff:g> süreyle aktif"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"Ekran kullanım süresi: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> kadarı <xliff:g id="APP">%2$s</xliff:g> tarafından kullanılıyor"</string>
@@ -2358,8 +2365,8 @@
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 saat"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 saat"</string>
     <string name="menu_duration_1d" msgid="3393631127622285458">"1 gün"</string>
-    <string name="menu_show_system" msgid="8864603400415567635">"Sistem işlemlerini göster"</string>
-    <string name="menu_hide_system" msgid="4106826741703745733">"Sistem işlemlerini gizle"</string>
+    <string name="menu_show_system" msgid="8864603400415567635">"Sisteme ait olanları göster"</string>
+    <string name="menu_hide_system" msgid="4106826741703745733">"Sisteme ait olanları gizle"</string>
     <string name="menu_show_percentage" msgid="4717204046118199806">"Yüzdeleri göster"</string>
     <string name="menu_use_uss" msgid="467765290771543089">"USS\'yi kullan"</string>
     <string name="menu_proc_stats_type" msgid="4700209061072120948">"İstatistik türü"</string>
@@ -3227,7 +3234,7 @@
     <string name="notification_switch_label" msgid="6843075654538931025">"Bildirim göster"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Bildirim yardımcısı"</string>
     <string name="notifications_sent_daily" msgid="3584506541352710975">"~<xliff:g id="NUMBER">%1$s</xliff:g> / gün"</string>
-    <string name="notifications_sent_weekly" msgid="1030525736746720584">"~<xliff:g id="NUMBER">%1$s</xliff:g> / hafta"</string>
+    <string name="notifications_sent_weekly" msgid="1030525736746720584">"Haftada yaklaşık <xliff:g id="NUMBER">%1$s</xliff:g> adet"</string>
     <string name="notifications_sent_never" msgid="1001964786456700536">"Hiçbir zaman"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Bildirim erişimi"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"İş profili bildirimlerine erişim engellendi"</string>
@@ -3541,7 +3548,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Pil optimizasyonu"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Kullanım uyarıları"</string>
-    <string name="show_all_apps" msgid="1512506948197818534">"Tam cihaz kullanımını göster"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Ayrıntılı cihaz kullanımını göster"</string>
     <string name="hide_extra_apps" msgid="5016497281322459633">"Uygulama kullanımını göster"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Yüksek kullanım"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
@@ -3775,7 +3782,7 @@
     <string name="color_temperature_toast" msgid="4974218172133854827">"Renk değişikliğini uygulamak için ekranı kapatın"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Kamera Lazer Sensörü"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Otomatik sistem güncellemeleri"</string>
-    <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Cihaz yeniden başladığında güncellemeleri uygula"</string>
+    <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Güncellemeleri cihaz yeniden başladığında uygula"</string>
     <string name="usage" msgid="2977875522080448986">"Kullanım"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobil veri kullanımı"</string>
     <string name="app_cellular_data_usage" msgid="5468472735806533448">"Uygulama veri kullanımı"</string>
@@ -3953,7 +3960,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Uygulamalar arasında geçiş yapmak için Ana Sayfa düğmesini yukarı doğru kaydırın. Tüm uygulamaları görmek için tekrar yukarı doğru kaydırın. Tüm ekranlarda çalışır. Ekranınızın sağ alt kısmındaki Genel Bakış düğmesi kaldırılmıştır."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Yeni Ana Sayfa düğmesini deneyin"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Uygulamalar arasında geçiş yapmak için yeni hareketi açın"</string>
-    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Telefonu kontrol etmek için iki kez dokunun"</string>
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Bakmak için telefona iki kez dokun"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tableti kontrol etmek için iki kez dokunun"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Cihazı kontrol etmek için iki kez dokunun"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Saati, bildirim simgelerini ve diğer bilgileri kontrol etmek için ekranınıza iki kez dokunun."</string>
@@ -3990,7 +3997,7 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"İş verilerini otomatik olarak senkronize et"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Uygulamaların verileri otomatik olarak yenilemesine izin ver"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Hesap senkronizasyonu"</string>
-    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Senkronizasyon <xliff:g id="ID_1">%1$d</xliff:g> / <xliff:g id="ID_2">%2$d</xliff:g> öğe için açık"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Senkronizasyon <xliff:g id="ID_2">%2$d</xliff:g> öğeden <xliff:g id="ID_1">%1$d</xliff:g> tanesi için açık"</string>
     <string name="account_sync_summary_all_on" msgid="570431636622254156">"Senkronizasyon tüm öğeler için açık"</string>
     <string name="account_sync_summary_all_off" msgid="8782409931761182734">"Senkronizasyon tüm öğeler için kapalı"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Yönetilen cihaz bilgisi"</string>
@@ -4071,7 +4078,7 @@
     <string name="storage_files" msgid="8581083146777364063">"Dosyalar"</string>
     <string name="storage_size_large_alternate" msgid="3395208658399637645">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">^2</xliff:g>"</font></small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"Toplam <xliff:g id="TOTAL">%1$s</xliff:g> alanın kullanılan kısmı"</string>
-    <string name="storage_percent_full" msgid="6095012055875077036">"kullanılan"</string>
+    <string name="storage_percent_full" msgid="6095012055875077036">"kullanılıyor"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Uygulamayı temizle"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Bu hazır uygulamayı kaldırmak istiyor musunuz?"</string>
     <string name="launch_instant_app" msgid="391581144859010499">"Aç"</string>
@@ -4134,6 +4141,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Çağrılar sırasında kullanılamaz"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Kullanılamıyor"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Çağrıyı al"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Bu APN değiştirilemez."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Tabletin pil ömrünü uzatın"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Cihazın pil ömrünü uzatın"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Telefonun pil ömrünü uzatın"</string>
@@ -4141,7 +4149,7 @@
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Zilin çalmasını önle"</string>
     <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Güç ve Ses Açma düğmelerine birlikte basın"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Zilin çalmasını engelleme kısayolu"</string>
-    <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Titreşim"</string>
+    <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Titret"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Sesi kapat"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Hiçbir şey yapma"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"Açık (titreşim)"</string>
@@ -4150,4 +4158,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Ağ ayrıntıları"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Telefonunuzdaki uygulamalar cihazınızın adını görür. Bluetooth cihazlarına bağlandığınızda veya bir kablosuz hotspot ayarladığınızda başka kişiler de bu adı görebilir."</string>
     <string name="devices_title" msgid="7701726109334110391">"Cihazlar"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Önemli bilgiler"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"DEVAM"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"HAYIR TEŞEKKÜRLER"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Konum"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Servis sağlayıcınız bu hizmeti sağlamak için konum bilgilerinizi toplayabilir.\n\nLütfen servis sağlayıcınızın gizlilik politikasını inceleyin."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Acil durum aramaları"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Operatörünüz, kablosuz çağrı üzerinden yapılan acil durum aramalarını desteklememektedir.\nAcil durum araması yapmak için cihaz otomatik olarak hücresel ağa geçer.\nAcil durum aramaları sadece hücresel ağ kapsamında olan yerlerde yapılabilir."</string>
 </resources>
