@@ -100,6 +100,16 @@ public class PanelFragmentTest {
     }
 
     @Test
+    public void onDestroy_logCloseEvent() {
+        mPanelFragment.onDestroy();
+        verify(mFakeFeatureFactory.metricsFeatureProvider).action(
+                0,
+                SettingsEnums.PAGE_VISIBLE,
+                mFakePanelContent.getMetricsCategory(),
+                any(String.class),
+                0);    }
+
+    @Test
     public void panelSeeMoreClick_logsCloseEvent() {
         final View.OnClickListener listener = mPanelFragment.getSeeMoreListener();
 

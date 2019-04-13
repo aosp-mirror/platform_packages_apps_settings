@@ -39,8 +39,9 @@ public class PanelLoggingContract {
         String KEY_DONE = "done";
 
         /**
-         * The user clicked outside the dialog, closing the Panel.
+         * The user closed the panel by other ways, for example: clicked outside of dialog, tapping
+         * on back button, etc.
          */
-        String KEY_CLICKED_OUT = "clicked_out";
+        String KEY_OTHERS = "others";
     }
 }
