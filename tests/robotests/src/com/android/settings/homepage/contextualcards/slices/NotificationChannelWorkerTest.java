@@ -23,13 +23,13 @@ import static com.android.settings.homepage.contextualcards.slices.ContextualNot
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.robolectric.Shadows.shadowOf;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.util.ArraySet;
-
-import com.android.settings.R;
-import com.android.settings.slices.CustomSliceRegistry;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,58 +37,63 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
-public class ContextualNotificationChannelSliceTest {
-
-    private static final String PACKAGE_NAME = "package_name";
+public class NotificationChannelWorkerTest {
+    private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
+    private static final String PACKAGE_NAME = "com.test.notification.channel.slice";
 
     private Context mContext;
-    private ContextualNotificationChannelSlice mNotificationChannelSlice;
+    private NotificationChannelWorker mNotificationChannelWorker;
+    private ShadowPackageManager mPackageManager;
     private SharedPreferences mSharedPreferences;
+
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mNotificationChannelSlice = new ContextualNotificationChannelSlice(mContext);
+        mNotificationChannelWorker = new NotificationChannelWorker(mContext, URI);
+
+        // Shadow PackageManager to add mock package.
+        mPackageManager = shadowOf(mContext.getPackageManager());
+
         mSharedPreferences = mContext.getSharedPreferences(PREFS, MODE_PRIVATE);
+        addInteractedPackageToSharedPreference();
     }
 
     @After
     public void tearDown() {
+        mPackageManager.removePackage(PACKAGE_NAME);
         removeInteractedPackageFromSharedPreference();
     }
 
     @Test
-    public void getUri_shouldBeContextualNotificationChannelSliceUri() {
-        final Uri uri = mNotificationChannelSlice.getUri();
+    public void onSliceUnpinned_interactedPackageIsUninstalled_shouldRemovePackage() {
+        mNotificationChannelWorker.onSliceUnpinned();
 
-        assertThat(uri).isEqualTo(CustomSliceRegistry.CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI);
+        final Set<String> interactedPackages = mSharedPreferences.getStringSet(
+                PREF_KEY_INTERACTED_PACKAGES, new ArraySet<>());
+        assertThat(interactedPackages.contains(PACKAGE_NAME)).isFalse();
     }
 
     @Test
-    public void getSubTitle_shouldBeRecentlyInstalledApp() {
-        final CharSequence subTitle = mNotificationChannelSlice.getSubTitle("com.test.package", 0);
+    public void onSliceUnpinned_interactedPackageIsInstalled_shouldKeepPackage() {
+        mockInteractedPackageAsInstalled();
 
-        assertThat(subTitle).isEqualTo(mContext.getText(R.string.recently_installed_app));
+        mNotificationChannelWorker.onSliceUnpinned();
+
+        final Set<String> interactedPackages = mSharedPreferences.getStringSet(
+                PREF_KEY_INTERACTED_PACKAGES, new ArraySet<>());
+        assertThat(interactedPackages.contains(PACKAGE_NAME)).isTrue();
     }
 
-    @Test
-    public void isUserInteracted_hasInteractedPackage_shouldBeTrue() {
-        addInteractedPackageToSharedPreference();
-
-        final boolean isInteracted = mNotificationChannelSlice.isUserInteracted(PACKAGE_NAME);
-
-        assertThat(isInteracted).isTrue();
-    }
-
-    @Test
-    public void isUserInteracted_noInteractedPackage_shouldBeFalse() {
-        final boolean isInteracted = mNotificationChannelSlice.isUserInteracted(PACKAGE_NAME);
-
-        assertThat(isInteracted).isFalse();
+    private void mockInteractedPackageAsInstalled() {
+        final PackageInfo packageInfo = new PackageInfo();
+        packageInfo.packageName = PACKAGE_NAME;
+        mPackageManager.addPackage(packageInfo);
     }
 
     private void addInteractedPackageToSharedPreference() {

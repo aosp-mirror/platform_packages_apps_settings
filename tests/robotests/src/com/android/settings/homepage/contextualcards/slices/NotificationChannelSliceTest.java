@@ -26,7 +26,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.NotificationChannel;
@@ -292,6 +291,21 @@ public class NotificationChannelSliceTest {
                 ApplicationInfo.FLAG_INSTALLED);
         mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
                 true /* isChannelBlocked */);
+
+        final Slice slice = mNotificationChannelSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.no_suggested_app));
+    }
+
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void getSlice_isInteractedPackage_shouldHaveNoSuggestedAppTitle() {
+        addMockPackageToPackageManager(true /* isRecentlyInstalled */,
+                ApplicationInfo.FLAG_INSTALLED);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
+        doReturn(true).when(mNotificationChannelSlice).isUserInteracted(any(String.class));
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
