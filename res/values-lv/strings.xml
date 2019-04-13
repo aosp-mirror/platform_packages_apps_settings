@@ -212,6 +212,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Ierakstītais porta numurs nav derīgs."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP starpniekserveris tiek izmantots pārlūkprogrammā, taču, iespējams, netiek izmantots citās lietotnēs."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Pašreizējais papildu ID:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Noklusējuma datu SIM kartes papildu ID:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL joslas platums (kb/s):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL joslas platums (kb/s):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Mobilā tālruņa atrašanās vietas informācija (novecojusi):"</string>
@@ -234,6 +236,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Atlasīt radio frekvenču joslu"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Balss pakalpojumu tīkla veids:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Datu tīkla veids:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Atlasiet tālruņa kodu"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Iestatiet ieteicamo tīkla veidu:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ehotestēšanas saimniekdatora nosaukuma (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ehotestēšanas saimniekdatora nosaukuma (www.google.com) IPv6:"</string>
@@ -345,11 +348,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Iestatīt datumu"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Meklēšanas reģions"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Reģions"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Laika josla"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"Laika joslas reģionā <xliff:g id="REGION">%1$s</xliff:g>"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC nobīdes atlase"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Kārtot alfabēta secībā"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Kārtot pēc laika joslas"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> sākas: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -893,6 +892,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> pieprasa pierakstīties tiešsaistē pirms savienošanas ar tīklu."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"IZVEIDOT SAVIENOJUMU"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Šim tīklam nav interneta piekļuves. Vai turpināt savienojumu?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Ierobežotas savienojamības dēļ dažas lietotnes un pakalpojumi var nedarboties. Vai tomēr lietot?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Vairs nejautāt par šo tīklu"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi‑Fi nav savienots ar internetu."</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Varat pārslēgties uz mobilo tīklu ikreiz, kad ir slikts Wi-Fi savienojums. Var tikt piemērota maksa par datu lietojumu."</string>
@@ -979,15 +979,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Zvanīšana, izmantojot Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Ieslēdziet Wi‑Fi zvanus, lai paplašinātu pārklājumu"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Zvanu preference"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi zvanu režīms"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Zvanu preference"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Viesabonēšanas preference"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Viesabonēšanas preference"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Vēlams Wi-Fi tīkls"</item>
-    <item msgid="1335127656328817518">"Vēlams mobilo datu savienojums"</item>
-    <item msgid="3132912693346866895">"Tikai Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -1000,8 +1000,8 @@
     <item msgid="3194458950573886239">"0."</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Vēlams Wi-Fi tīkls"</item>
-    <item msgid="5074515506087318555">"Vēlams mobilo datu savienojums"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1011,7 +1011,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Ja ir ieslēgti Wi-Fi zvani, varat veikt tālruņa zvanus Wi-Fi tīklos vai savā mobilo sakaru operatora tīkla atkarībā no savām preferencēm un no tā, kurš signāls ir spēcīgāks. Pirms ieslēdzat šo funkciju, sazinieties ar savu mobilo sakaru operatoru, lai noskaidrotu tarifus un citu informāciju."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Ja Wi-Fi savienojums nav pieejams, izmantot mobilo tīklu"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Ja mobilais tīkls nav pieejams, izmantot Wi‑Fi"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Zvans Wi-Fi tīklā. Ja Wi-Fi savienojums tiks zaudēts, zvans beigsies."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Kad ir ieslēgti Wi-Fi zvani, tālrunis var novirzīt zvanus, izmantojot Wi-Fi tīklus vai mobilo sakaru operatora tīklu (atkarībā no jūsu iestatījumiem un tā, kurš signāls ir stiprāks). Pirms šīs funkcijas ieslēgšanas noskaidrojiet pie mobilo sakaru operatora par tarifiem un citu informāciju.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Ārkārtas adrese"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Tiks izmantota kā jūsu atrašanās vieta, ja zvanīsiet uz ārkārtas numuru, lietojot Wi‑Fi."</string>
@@ -1187,6 +1190,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Nevar mainīt PIN kodu.\nIespējams, ka PIN kods nav pareizs."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM PIN ir veiksmīgi nomainīts"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Nevar mainīt SIM kartes bloķēšanas stāvokli.\nIespējams, ka ievadījāt nepareizu PIN kodu."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Nevar atspējot PIN."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Nevar iespējot PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Labi"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Atcelt"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Atrastas vairākas SIM kartes"</string>
@@ -1472,8 +1477,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Vai atiestatīt?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Šim lietotājam nav pieejama tīkla atiestatīšana."</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Tīklu iestatījumi ir atiestatīti."</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"Nevar atiestatīt eSIM kartes"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"Kļūdas dēļ nevar atiestatīt eSIM kartes."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Notīrīt visus datus (atiestatīt rūpnīcas datus)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Atiestatīt rūpnīcas datus"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Tādējādi tiks izdzēsti visi planšetdatora "<b>"iekšējā atmiņā"</b>" esošie dati, tostarp:\n\n"<li>"Google konta dati;"</li>\n<li>"sistēmas un lietotņu dati un iestatījumi;"</li>\n<li>"lejupielādētās lietotnes."</li></string>
@@ -1988,10 +1995,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Izmantot parakstus"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Dzirdes aparāti"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nav pievienots neviens dzirdes aparāts."</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Pievienot dzirdes aparātu"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Pievienot dzirdes aparātus"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Lai savienotu pārī dzirdes aparātus, nākamajā ekrānā atrodiet savas ierīces nosaukumu un pieskarieties tam."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Dzirdes aparātiem ir jābūt ieslēgtam savienošanas pārī režīmam."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"Pašreiz ir aktīva ierīce <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"Ierīce <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ir aktīva"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="zero">Saglabāti <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dzirdes aparāti</item>
       <item quantity="one">Saglabāts <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> dzirdes aparāts</item>
@@ -4203,6 +4210,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Ierīce nav pieejama zvanu laikā"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Nav pieejams"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Atbildēt uz zvanu, izmantojot:"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"APN nevar mainīt."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Planšetdatora akum. darb. ilguma uzlabošana"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Ierīces akumulatora darbības ilguma uzlabošana"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Tālruņa akumulatora darbības ilguma uzlabošana"</string>
@@ -4219,4 +4227,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Dati par tīklu"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Jūsu ierīces nosaukums ir redzams tālrunī instalētajām lietotnēm. Ja izveidosiet savienojumu ar Bluetooth ierīcēm vai iestatīsiet Wi-Fi tīklāju, tas būs redzams arī citām personām."</string>
     <string name="devices_title" msgid="7701726109334110391">"Ierīces"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Svarīga informācija"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"TURPINĀT"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"NĒ, PALDIES"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Atrašanās vieta"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Pakalpojuma sniedzējs var apkopot jūsu atrašanās informāciju, lai nodrošinātu šo pakalpojumu.\n\nSkatiet pakalpojuma sniedzēja konfidencialitātes politiku."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Ārkārtas zvani"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Jūsu mobilo sakaru operators neatbalsta ārkārtas zvanus kā Wi‑Fi zvanus.\nIerīcē tiek automātiski pārslēgts mobilais tīkls, lai veiktu ārkārtas zvanu.\nĀrkārtas zvanus iespējams veikt tikai apgabalos ar mobilā tīkla pārklājumu."</string>
 </resources>

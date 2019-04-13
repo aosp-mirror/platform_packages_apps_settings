@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Daxil etdiyiniz port etibarlı deyil."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP proksi brauzer tərəfindən istifadə olunur və digər tətbiqlər tərəfindən istifadə edilə bilməz."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Cari alt Id:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Defolt data SIM üçün alt Id:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL Buraxılışı (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL Buraxılışı (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Xananın məkan infosu (tövsiyə olunmur):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Radio Diapazon Seçin"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Səs Şəbəkə Növü:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Data Şəbəkə Növü:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Telefon indeksini seçin"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Tərcih Olunmuş Şəbəkə Növü Seçin:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping Hostname(www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping Hostname(www.google.com) IPv6:"</string>
@@ -343,11 +346,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Tarix ayarlayın"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Bölgə axtarışı"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Region"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Saat Qurşağı"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"<xliff:g id="REGION">%1$s</xliff:g> bölgəsində saat qurşağı"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC ofseti seçin"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Əlifba üzrə sırala"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Vaxt zonasına görə sırala"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> tarixindən başlayır."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -379,7 +378,7 @@
     <string name="location_settings_title" msgid="1369675479310751735">"Yer"</string>
     <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Məkan istifadə edin"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Hesablar"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"Təhlükəsizlik &amp; yeri"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"Güvənlik və məkan"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Şifrələmə və kredensiallar"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon şifrələnib"</string>
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Telefon şifrələnmədi"</string>
@@ -882,6 +881,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"Şəbəkəyə qoşulmadan öncə <xliff:g id="APP_NAME">%1$s</xliff:g> hesaba daxil olmağı tələb edir"</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"QOŞULUN"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Bu şəbəkənin internetə girişi yoxdur. Qoşulu qalsın?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Məhdud bağlantı səbəbindən bəzi tətbiq və xidmətlər işləməyə bilər. İstənilən halda istifadə edilsin?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Bu şəbəkə üçün daha soruşma"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi‑Fi internetə qoşulmayıb"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Wi‑Fi bağlantısı keyfiyyətsiz olan zaman mobil şəbəkəyə keçə bilərsiniz. Xidmət haqqı tutula bilər."</string>
@@ -967,15 +967,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Wi‑Fi ilə zəngləri genişləndirin"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Əhatəni genişləndirmək üçün Wi‑Fi zəngini aktiv edin"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Çağrı tərcihi"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi çağrı rejimi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Zəng tərcihi"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Roaminq seçimi"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Roaminq seçimi"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Wi-Fi tərcih edilir"</item>
-    <item msgid="1335127656328817518">"Mobil cihaz tərcih olunur"</item>
-    <item msgid="3132912693346866895">"Yalnız Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -988,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Wi-Fi tərcih edilir"</item>
-    <item msgid="5074515506087318555">"Mobil cihaz tərcih olunur"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -999,7 +999,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi çağrısı aktiv olan zaman, tərcihinizdən və siqnalın gücündən asılı olaraq telefon Wi-Fi və ya mobil şəbəkə üzərindən çağrı edə bilər. Bu funksiyanı aktivləşdirmədən öncə operatorun tariflərini və digər şeylərini öyrənin."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Wi‑Fi əlçatan olmasa, mobil şəbəkədən istifadə edin"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Mobil şəbəkə əlçatan olmasa, Wi‑Fi istifadə edin"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Wi‑Fi ilə zəng edin. Wi‑Fi itsə, zəng sonlandırılacaq."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi zəngi aktiv olan zaman tərcihinizdən və siqnalın gücündən asılı olaraq telefon zəngləri Wi-Fi və ya mobil şəbəkə ilə yönləndirə bilər. Bu funksiyanı aktiv etməzdən əvvəl operator tarifləri və digər məlumatları öyrənin. <xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Fövqəladə Ünvan"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Wi‑Fi vasitəilə təcili zəng etdiyiniz zaman məkanınız kimi istidafə edilir"</string>
@@ -1175,6 +1178,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN dəyişdirilə bilməz.\nBəlkə də PIN yanlışdır."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM PIN uğurla dəyişdirildi"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"SIm kart kilid statusu dəyişdirilə bilmir.\nBəlkə PIN yanlışdır"</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN-i deaktiv etmək mümkün deyil."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN-i aktiv etmək mümkün deyil."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Ləğv et"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Çoxsaylı SIM-lər tapıldı"</string>
@@ -1459,8 +1464,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Sıfırlansın?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Şəbəkə sıfırlaması bu istifadəçi üçün əlçatan deyil"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Şəbəkə ayarları sıfırlandı"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"eSIM-ləri sıfırlamaq alınmadı"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"eSIM-lər xəta səbəbilə sıfırlana bilmədi."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Bütün datanı silin (fabrika sıfırlaması)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Bütün datanı silin (fabrika sıfırlaması)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Bu, planşetinizdən bunları siləcək: "<b>"daxili yaddaş"</b>", həmçinin:\n\n"<li>"Google hesabınızı"</li>\n<li>"Sistem və tətbiq data və ayarlarını"</li>\n<li>"Endirilmiş tətbiqləri"</li></string>
@@ -1974,10 +1981,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Başlıqlardan istifadə edin"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Qulaqlıq"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Qulaqlıq qoşulmayıb"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Qulaqlıq əlavə edin"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Eşitmə aparatları əlavə edin"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Qulaqlığı birləşdirmək üçün növbəti ekranda cihazı taparaq ona klikləyin."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Əmin olun ki, qulaqlıq birləşmə rejimindədir."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> hazırda aktivdir"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktivdir"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> yadda saxlanmış qulaqlıq</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> yadda saxlanmış qulaqlıq</item>
@@ -2921,7 +2928,7 @@
     <string name="color_orange" msgid="4417567658855022517">"Narıncı"</string>
     <string name="color_purple" msgid="3888532466427762504">"Bənövşəyi"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"Heç bir SIM kart taxılmayıb"</string>
-    <string name="sim_status_title" msgid="6744870675182447160">"SIM status"</string>
+    <string name="sim_status_title" msgid="6744870675182447160">"SIM statusu"</string>
     <string name="sim_status_title_sim_slot" msgid="5725659316463979194">"SIM statusu (sim slot %1$d)"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"Defolt SIM-dən geri zəng edin"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"Gedən zənglər üçün SIM"</string>
@@ -4134,6 +4141,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Zənglər zamanı əlçatan deyil"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Əlçatmaz"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Zəng qəbul edin"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Bu APN-i dəyişmək mümkün deyil."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Planşetin batareya istifadəsini təkmilləşdirin"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Cihazın batareya istifadəsini təkmilləşdirin"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Telefonun batareya istifadəsini təkmilləşdirin"</string>
@@ -4150,4 +4158,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Şəbəkə məlumatları"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Cihazın adı telefondakı tətbiqlərdə görünəcək. Bluetooth cihazlarına qoşulduqda və ya Wi-Fi hotspotu ayarladıqda digərləri də onu görə bilər."</string>
     <string name="devices_title" msgid="7701726109334110391">"Cihazlar"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Vacib məlumat"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"DAVAM EDİN"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"XEYR, TƏŞƏKKÜRLƏR"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Məkan"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Provayder bu xidməti təmin etmək üçün məkan datasını toplaya bilər.\n\nXidmət provayderinin məxfilik siyasətini nəzərdən keçirin."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Təcili zənglər"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Operator Wi‑Fi Zəngi ilə təcili zəngləri dəstəkləmir.\nTəcili zəng etmək üçün cihaz avtomotik olaraq mobil şəbəkəyə keçir.\nTəcili zənglər yalnız mobil əhatə dairələrində əlçatandır."</string>
 </resources>
