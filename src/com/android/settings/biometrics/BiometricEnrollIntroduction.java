@@ -150,7 +150,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (!mHasPassword) {
             // No password registered, launch into enrollment wizard.
             launchChooseLock();
-        } else if (!mLaunchedConfirmLock || mToken == null) {
+        } else if (mToken == null) {
+            // It's possible to have a token but mLaunchedConfirmLock == false, since
+            // ChooseLockGeneric can pass us a token.
             launchConfirmLock(getConfirmLockTitleResId(), getChallenge());
         }
     }
@@ -276,7 +278,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void initViews() {
         super.initViews();
 
-        TextView description = (TextView) findViewById(R.id.description_text);
+        TextView description = (TextView) findViewById(R.id.sud_layout_description);
         if (mBiometricUnlockDisabledByAdmin) {
             description.setText(getDescriptionResDisabledByAdmin());
         }

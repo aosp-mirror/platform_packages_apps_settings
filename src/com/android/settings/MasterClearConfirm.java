@@ -207,7 +207,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
     private void setAccessibilityTitle() {
         CharSequence currentTitle = getActivity().getTitle();
-        TextView confirmationMessage = mContentView.findViewById(R.id.master_clear_confirm);
+        TextView confirmationMessage = mContentView.findViewById(R.id.sud_layout_description);
         if (confirmationMessage != null) {
             String accessibleText = new StringBuilder(currentTitle).append(",").append(
                     confirmationMessage.getText()).toString();
@@ -218,7 +218,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
     @VisibleForTesting
     void setSubtitle() {
         if (mEraseEsims) {
-            ((TextView) mContentView.findViewById(R.id.master_clear_confirm))
+            ((TextView) mContentView.findViewById(R.id.sud_layout_description))
                 .setText(R.string.master_clear_final_desc_esim);
         }
     }

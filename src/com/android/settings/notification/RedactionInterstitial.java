@@ -123,7 +123,7 @@ public class RedactionInterstitial extends SettingsActivity {
             mUserId = Utils.getUserIdFromBundle(
                     getContext(), getActivity().getIntent().getExtras());
             if (UserManager.get(getContext()).isManagedProfile(mUserId)) {
-                ((TextView) view.findViewById(R.id.message))
+                ((TextView) view.findViewById(R.id.sud_layout_description))
                         .setText(R.string.lock_screen_notifications_interstitial_message_profile);
                 mShowAllButton.setText(R.string.lock_screen_notifications_summary_show_profile);
                 mRedactSensitiveButton

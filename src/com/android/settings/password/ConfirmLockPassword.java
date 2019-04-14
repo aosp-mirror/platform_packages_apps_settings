@@ -137,7 +137,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (mHeaderTextView == null) {
                 mHeaderTextView = view.findViewById(R.id.suc_layout_title);
             }
-            mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
+            mDetailsTextView = (TextView) view.findViewById(R.id.sud_layout_description);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             mIsAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality

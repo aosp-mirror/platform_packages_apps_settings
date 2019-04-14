@@ -89,7 +89,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     protected void initViews() {
         super.initViews();
 
-        TextView description = (TextView) findViewById(R.id.description_text);
+        TextView description = (TextView) findViewById(R.id.sud_layout_description);
         description.setText(
                 R.string.security_settings_fingerprint_enroll_introduction_message_setup);
 
