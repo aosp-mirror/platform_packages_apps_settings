@@ -290,16 +290,12 @@ public class WifiDetailPreferenceControllerTest {
 
         setupMockedPreferenceScreen();
 
-        // Disable saved network detail page feature for this test
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, false);
         when(mockAccessPoint.isActive()).thenReturn(true);
 
         mController = newWifiDetailPreferenceController();
     }
 
     private void setUpForConnectedNetwork() {
-        // Enable saved network detail page feature for this test
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, true);
         when(mockAccessPoint.isActive()).thenReturn(true);
         ArrayList list = new ArrayList<>();
         list.add(mockAccessPoint);
@@ -312,8 +308,6 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     private void setUpForDisconnectedNetwork() {
-        // Enable saved network detail page feature for this test
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, true);
         when(mockAccessPoint.isActive()).thenReturn(false);
         ArrayList list = new ArrayList<>();
         list.add(mockAccessPoint);
@@ -326,8 +320,6 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     private void setUpForNotInRangeNetwork() {
-        // Enable saved network detail page feature for this test
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, true);
         when(mockAccessPoint.isActive()).thenReturn(false);
         ArrayList list = new ArrayList<>();
         list.add(mockAccessPoint);
@@ -495,15 +487,6 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void entityHeader_shouldHaveIconSet() {
-        Drawable expectedIcon = mockIconInjector.getIcon(LEVEL);
-
-        displayAndResume();
-
-        verify(mockHeaderController).setIcon(expectedIcon);
-    }
-
-    @Test
     public void entityHeader_shouldHaveIconSetForConnectedNetwork() {
         setUpForConnectedNetwork();
         Drawable expectedIcon = mockIconInjector.getIcon(LEVEL);
@@ -553,13 +536,6 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void signalStrengthPref_shouldHaveIconSet() {
-        displayAndResume();
-
-        verify(mockSignalStrengthPref).setIcon(any(Drawable.class));
-    }
-
-    @Test
     public void signalStrengthPref_shouldHaveIconSetForConnectedNetwork() {
         setUpForConnectedNetwork();
 
@@ -584,16 +560,6 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockSignalStrengthPref, never()).setIcon(any(Drawable.class));
-    }
-
-    @Test
-    public void signalStrengthPref_shouldHaveDetailTextSet() {
-        String expectedStrength =
-                mContext.getResources().getStringArray(R.array.wifi_signal)[LEVEL];
-
-        displayAndResume();
-
-        verify(mockSignalStrengthPref).setSummary(expectedStrength);
     }
 
     @Test
@@ -915,17 +881,6 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockDnsPref).setVisible(false);
-    }
-
-    @Test
-    public void noCurrentNetwork_shouldFinishActivity() {
-        // If WifiManager#getCurrentNetwork() returns null, then the network is neither connected
-        // nor connecting and WifiStateMachine has not reached L2ConnectedState.
-        when(mockWifiManager.getCurrentNetwork()).thenReturn(null);
-
-        displayAndResume();
-
-        verify(mockActivity).finish();
     }
 
     @Test
@@ -1307,16 +1262,6 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void networkDisconnectedState_shouldFinishActivity() {
-        displayAndResume();
-
-        when(mockConnectivityManager.getNetworkInfo(any(Network.class))).thenReturn(null);
-        mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
-
-        verify(mockActivity).finish();
-    }
-
-    @Test
     public void networkDisconnectedState_shouldNotFinishActivityForConnectedNetwork() {
         setUpForConnectedNetwork();
 
@@ -1326,15 +1271,6 @@ public class WifiDetailPreferenceControllerTest {
         mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
 
         verify(mockActivity, never()).finish();
-    }
-
-    @Test
-    public void networkOnLost_shouldFinishActivity() {
-        displayAndResume();
-
-        mCallbackCaptor.getValue().onLost(mockNetwork);
-
-        verify(mockActivity).finish();
     }
 
     @Test
@@ -1428,23 +1364,25 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void testRefreshRssiViews_shouldNotUpdateIfLevelIsSame() {
+    public void testRefreshRssiViews_shouldNotUpdateIfLevelIsSameForConnectedNetwork() {
+        setUpForConnectedNetwork();
         displayAndResume();
 
         mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
 
-        verify(mockAccessPoint, times(2)).getLevel();
+        verify(mockAccessPoint, times(3)).getLevel();
         verify(mockIconInjector, times(1)).getIcon(anyInt());
     }
 
     @Test
-    public void testRefreshRssiViews_shouldUpdateOnLevelChange() {
+    public void testRefreshRssiViews_shouldUpdateOnLevelChangeForConnectedNetwork() {
+        setUpForConnectedNetwork();
         displayAndResume();
 
         when(mockAccessPoint.getLevel()).thenReturn(0);
         mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
 
-        verify(mockAccessPoint, times(2)).getLevel();
+        verify(mockAccessPoint, times(4)).getLevel();
         verify(mockIconInjector, times(2)).getIcon(anyInt());
     }
 
