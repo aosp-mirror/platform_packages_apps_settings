@@ -47,7 +47,7 @@ public class MasterClearConfirmTest {
         masterClearConfirm.setSubtitle();
 
         assertThat(((TextView) masterClearConfirm.mContentView
-                .findViewById(R.id.master_clear_confirm)).getText())
+                .findViewById(R.id.sud_layout_description)).getText())
                 .isEqualTo(mActivity.getString(R.string.master_clear_final_desc_esim));
     }
 
@@ -61,7 +61,7 @@ public class MasterClearConfirmTest {
         masterClearConfirm.setSubtitle();
 
         assertThat(((TextView) masterClearConfirm.mContentView
-                .findViewById(R.id.master_clear_confirm)).getText())
+                .findViewById(R.id.sud_layout_description)).getText())
                 .isEqualTo(mActivity.getString(R.string.master_clear_final_desc));
     }
 }

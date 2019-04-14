@@ -141,7 +141,7 @@ public class EncryptionInterstitial extends SettingsActivity {
                             R.string.encryption_interstitial_message_password;
                     break;
             }
-            TextView message = (TextView) getActivity().findViewById(R.id.encryption_message);
+            TextView message = (TextView) getActivity().findViewById(R.id.sud_layout_description);
             message.setText(msgId);
 
             setRequirePasswordState(getActivity().getIntent().getBooleanExtra(
