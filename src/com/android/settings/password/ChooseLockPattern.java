@@ -520,7 +520,7 @@ public class ChooseLockPattern extends SettingsActivity {
             mTitleText = view.findViewById(R.id.suc_layout_title);
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
             mDefaultHeaderColorList = mHeaderText.getTextColors();
-            mMessageText = view.findViewById(R.id.message);
+            mMessageText = view.findViewById(R.id.sud_layout_description);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
             mLockPatternView.setTactileFeedbackEnabled(
