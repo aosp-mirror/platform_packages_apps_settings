@@ -1562,6 +1562,11 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
 
+        <!-- Must not be exported -->
+        <activity android:name=".biometrics.BiometricEnrollActivity$InternalActivity"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"/>
+
         <activity android:name=".biometrics.BiometricEnrollActivity"
             android:exported="true"
             android:theme="@style/GlifTheme.Light">
