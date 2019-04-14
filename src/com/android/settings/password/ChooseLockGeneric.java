@@ -66,8 +66,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -76,7 +76,6 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ChooseLockGeneric extends SettingsActivity {
@@ -141,7 +140,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         @VisibleForTesting
         static final int CHOOSE_LOCK_REQUEST = 102;
         @VisibleForTesting
-        static final int CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST = 103;
+        static final int CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST = 103;
         @VisibleForTesting
         static final int SKIP_FINGERPRINT_REQUEST = 104;
 
@@ -366,7 +365,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 startActivityForResult(
                         intent,
                         mIsSetNewPassword && mHasChallenge
-                                ? CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
+                                ? CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST
                                 : ENABLE_ENCRYPTION_REQUEST);
             } else {
                 if (mForChangeCredRequiredForBoot) {
@@ -411,9 +410,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                         finish();
                     }
                 }
-            } else if (requestCode == CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
+            } else if (requestCode == CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST
                     && resultCode == BiometricEnrollBase.RESULT_FINISHED) {
-                Intent intent = getFindSensorIntent(getActivity());
+                Intent intent = getBiometricEnrollIntent(getActivity());
                 if (data != null) {
                     intent.putExtras(data.getExtras());
                 }
@@ -438,8 +437,11 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
         }
 
-        protected Intent getFindSensorIntent(Context context) {
-            return new Intent(context, FingerprintEnrollFindSensor.class);
+        protected Intent getBiometricEnrollIntent(Context context) {
+            final Intent intent =
+                    new Intent(context, BiometricEnrollActivity.InternalActivity.class);
+            intent.putExtra(BiometricEnrollActivity.EXTRA_SKIP_INTRO, true);
+            return intent;
         }
 
         @Override
@@ -764,7 +766,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 intent.putExtra(EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS, getIntent().getExtras());
                 startActivityForResult(intent,
                         mIsSetNewPassword && mHasChallenge
-                                ? CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
+                                ? CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST
                                 : CHOOSE_LOCK_REQUEST);
                 return;
             }
