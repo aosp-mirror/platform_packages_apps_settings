@@ -131,7 +131,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_enrolling);
         setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
-        mStartMessage = (TextView) findViewById(R.id.start_message);
+        mStartMessage = (TextView) findViewById(R.id.sud_layout_description);
         mRepeatMessage = (TextView) findViewById(R.id.repeat_message);
         mErrorText = (TextView) findViewById(R.id.error_text);
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);

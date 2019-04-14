@@ -116,7 +116,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     false);
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
-            mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
+            mDetailsTextView = (TextView) view.findViewById(R.id.sud_layout_description);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             mLeftSpacerLandscape = view.findViewById(R.id.leftSpacer);
             mRightSpacerLandscape = view.findViewById(R.id.rightSpacer);
