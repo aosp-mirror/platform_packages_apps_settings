@@ -15,18 +15,20 @@ package com.android.settings.accounts;
 
 import static android.provider.Settings.Secure.CROSS_PROFILE_CALENDAR_ENABLED;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.provider.Settings;
-
-import androidx.preference.Preference;
+import android.util.Log;
 
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.RestrictedSwitchPreference;
+
+import java.util.Set;
 
 public class CrossProfileCalendarPreferenceController extends TogglePreferenceController {
+
+    private static final String TAG = "CrossProfileCalendarPreferenceController";
 
     private UserHandle mManagedUser;
 
@@ -40,19 +42,13 @@ public class CrossProfileCalendarPreferenceController extends TogglePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
-        return (mManagedUser != null) ? AVAILABLE : DISABLED_FOR_USER;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        if (preference instanceof RestrictedSwitchPreference && mManagedUser != null) {
-            final RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
-            final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
-                    RestrictedLockUtilsInternal.getCrossProfileCalendarEnforcingAdmin(
-                            mContext, mManagedUser.getIdentifier());
-            pref.setDisabledByAdmin(enforcedAdmin);
+        if (mManagedUser != null
+                && !isCrossProfileCalendarDisallowedByAdmin(
+                        mContext, mManagedUser.getIdentifier())) {
+            return AVAILABLE;
         }
+
+        return DISABLED_FOR_USER;
     }
 
     @Override
@@ -73,5 +69,26 @@ public class CrossProfileCalendarPreferenceController extends TogglePreferenceCo
         final int value = isChecked ? 1 : 0;
         return Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 CROSS_PROFILE_CALENDAR_ENABLED, value, mManagedUser.getIdentifier());
+    }
+
+    static boolean isCrossProfileCalendarDisallowedByAdmin(Context context, int userId) {
+        final Context managedProfileContext = createPackageContextAsUser(context, userId);
+        final DevicePolicyManager dpm = managedProfileContext.getSystemService(
+                DevicePolicyManager.class);
+        if (dpm == null) {
+            return true;
+        }
+        final Set<String> packages = dpm.getCrossProfileCalendarPackages();
+        return packages != null && packages.isEmpty();
+    }
+
+    private static Context createPackageContextAsUser(Context context, int userId) {
+        try {
+            return context.createPackageContextAsUser(
+                    context.getPackageName(), 0 /* flags */, UserHandle.of(userId));
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Failed to create user context", e);
+        }
+        return null;
     }
 }
