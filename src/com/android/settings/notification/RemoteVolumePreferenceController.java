@@ -150,7 +150,7 @@ public class RemoteVolumePreferenceController extends VolumeSeekBarPreferenceCon
     }
 
     @Override
-    public int getMaxSteps() {
+    public int getMax() {
         if (mPreference != null) {
             return mPreference.getMax();
         }
@@ -159,6 +159,14 @@ public class RemoteVolumePreferenceController extends VolumeSeekBarPreferenceCon
         }
         final MediaController.PlaybackInfo playbackInfo = mMediaController.getPlaybackInfo();
         return playbackInfo != null ? playbackInfo.getMaxVolume() : 0;
+    }
+
+    @Override
+    public int getMin() {
+        if (mPreference != null) {
+            return mPreference.getMin();
+        }
+        return 0;
     }
 
     @Override

@@ -122,17 +122,31 @@ public class RemoteVolumePreferenceControllerTest {
     }
 
     @Test
-    public void getMaxSteps_controllerNull_returnZero() {
+    public void getMinValue_controllerNull_returnZero() {
         mController.mMediaController = null;
 
-        assertThat(mController.getMaxSteps()).isEqualTo(0);
+        assertThat(mController.getMin()).isEqualTo(0);
     }
 
     @Test
-    public void getMaxSteps_controllerExists_returnValue() {
+    public void getMinValue_controllerExists_returnValue() {
         mController.mMediaController = mMediaController;
 
-        assertThat(mController.getMaxSteps()).isEqualTo(MAX_POS);
+        assertThat(mController.getMin()).isEqualTo(0);
+    }
+
+    @Test
+    public void getMaxValue_controllerNull_returnZero() {
+        mController.mMediaController = null;
+
+        assertThat(mController.getMax()).isEqualTo(0);
+    }
+
+    @Test
+    public void getMaxValue_controllerExists_returnValue() {
+        mController.mMediaController = mMediaController;
+
+        assertThat(mController.getMax()).isEqualTo(MAX_POS);
     }
 
     @Test
