@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -123,6 +124,15 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        if (intent.getStringExtra(WizardManagerHelper.EXTRA_THEME) == null) {
+            // Put the theme in the intent so it gets propagated to other activities in the flow
+            intent.putExtra(
+                    WizardManagerHelper.EXTRA_THEME,
+                    SetupWizardUtils.getThemeString(intent));
+        }
+
         mBiometricUnlockDisabledByAdmin = isDisabledByAdmin();
 
         setContentView(getLayoutResource());
@@ -140,7 +150,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (!mHasPassword) {
             // No password registered, launch into enrollment wizard.
             launchChooseLock();
-        } else if (!mLaunchedConfirmLock || mToken == null) {
+        } else if (mToken == null) {
+            // It's possible to have a token but mLaunchedConfirmLock == false, since
+            // ChooseLockGeneric can pass us a token.
             launchConfirmLock(getConfirmLockTitleResId(), getChallenge());
         }
     }
@@ -266,7 +278,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void initViews() {
         super.initViews();
 
-        TextView description = (TextView) findViewById(R.id.description_text);
+        TextView description = (TextView) findViewById(R.id.sud_layout_description);
         if (mBiometricUnlockDisabledByAdmin) {
             description.setText(getDescriptionResDisabledByAdmin());
         }

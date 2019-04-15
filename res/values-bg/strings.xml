@@ -458,6 +458,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Функциите за защита на телефона няма да бъдат включени. Няма да можете да предотвратите използването му от други хора, ако бъде загубен или откраднат."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Пропускане въпреки това"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Назад"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"Пропускане"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"Отказ"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Докоснете сензора"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Намира се на гърба на телефона ви. Използвайте показалеца си."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Илюстрация с устройството и местоположението на сензора за отпечатък"</string>
@@ -473,6 +475,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"По-късно"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Пропуск. на настройването на отпечатък?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Избрахте да използвате отпечатъка си като един от начините за отключване на телефона си. Ако пропуснете сега, ще трябва да настроите по-късно. Настройването отнема около минута."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"Защитете таблета си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубен или откраднат. Такава опция е нужна и за настройване на отпечатък. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"Защитете устройството си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубено или откраднато. Такава опция е нужна и за настройване на отпечатък. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"Защитете телефона си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубен или откраднат. Такава опция е нужна и за настройване на отпечатък. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"Защитете таблета си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубен или откраднат. Такава опция е нужна и за настройване на удостоверяването с лице. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"Защитете устройството си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубено или откраднато. Такава опция е нужна и за настройване на удостоверяването с лице. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"Защитете телефона си с опция за заключване на екрана, така че никой друг да не може да го използва, ако бъде изгубен или откраднат. Такава опция е нужна и за настройване на удостоверяването с лице. Докоснете „Отказ“, след което задайте ПИН код или изберете друга опция за заключване на екрана."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"Пропускане на настр. на ПИН?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"Пропуск. на настр. на парола?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"Пропуск. на настр. на фигура?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Заключване на екрана: Настройване"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ами сега! Това не е сензорът"</string>
@@ -1652,6 +1663,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Разрешете на приложенията и услугите да сканират за Wi‑Fi мрежи по всяко време дори когато функцията за Wi‑Fi e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Сканиране за устройства с Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Разрешете на приложенията и услугите да сканират за устройства в близост по всяко време дори когато функцията за Bluetooth e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"Услуги за местоположение за служебни цели"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Mестоп. от Wi‑Fi и моб. мрежа"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Прилож. да ползват услугата ни за местоп., за да прогнозират по-бързо вашето. Анонимни данни за местоп. ще се събират и изпращат на Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Местоположението се определя чрез Wi‑Fi"</string>
@@ -2215,7 +2227,7 @@
     <string name="printer_info_desc" msgid="5824995108703060003">"Още информация за този принтер"</string>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Батерия"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Какво е използвало батерията"</string>
-    <string name="power_usage_not_available" msgid="3109326074656512387">"Няма данни за употр. на батерията."</string>
+    <string name="power_usage_not_available" msgid="3109326074656512387">"Няма данни за използв. на батерията."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Остава: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> до зареждане"</string>
@@ -2435,7 +2447,7 @@
     <string name="battery_saver" msgid="8172485772238572153">"Режим за запазване на батерията"</string>
     <string name="battery_saver_auto_title" msgid="8368709389419695611">"Автоматично включване"</string>
     <string name="battery_saver_auto_no_schedule" msgid="632243833320671052">"Няма график"</string>
-    <string name="battery_saver_auto_routine" msgid="8076053160450346731">"Въз основа на поредицата ви"</string>
+    <string name="battery_saver_auto_routine" msgid="8076053160450346731">"Въз основа на навиците ви"</string>
     <string name="battery_saver_auto_percentage" msgid="9000542338151528905">"Въз основа на процента"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3030089882678228374">"Режимът за запазване на батерията се включва, ако има вероятност батерията ви да се изтощи преди следващото обичайно за вас зареждане"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="3653601117764171846">"Ще се включи при <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3048,10 +3060,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"Балонче за разговор"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"фенерче, светлина, фенер"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, превключване, контрола"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"SMS, изпращане на SMS, съобщения, изпращане на съобщения, по подразбиране"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"мобилни данни, мобилна мрежа, мобилен оператор, безжична мрежа, данни, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, обаждам се, обаждане"</string>
-    <string name="keywords_home" msgid="294182527446892659">"стартов панел, по подразбиране, приложения"</string>
     <string name="keywords_display" msgid="8910345814565493016">"екран, сензорен екран"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"затъмняване на екрана, сензорен екран, батерия, светло"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"затъмняване на екрана, нощ, нюансиране, нощен режим, яркост, цвят на екрана, цвят, цветно"</string>
@@ -3075,8 +3085,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"ограничение, ограничаване, ограничено"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"коригиране на текст, коригиране, звук, вибриране, автоматично, език, жест, предлагане, предложение, тема, обидно, дума, тип, емотикони, международно"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"нулиране, предпочитания, по подразбиране"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"спешен случай, спешност, приложение, по подразбиране"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"телефон, набиране, по подразбиране"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"приложения, изтегляне, приложения, системни"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"приложения, разрешения, сигурност"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"приложения, по подразбиране"</string>
@@ -3113,9 +3121,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"свързано, устройство, слушалки, слушалки, високоговорител, безжично, сдвояване, слушалки, музика, мултимедия"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"фон, екран, заключване на екрана, тема"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"по подразбиране, Асистент"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"по подразбиране, браузър по подразбиране"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"плащане, по подразбиране"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"по подразбиране"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"входящо известие"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"тетъринг през USB, тетъринг през Bluetooth, точка за достъп до Wi-Fi"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"осезателна обратна връзка, вибриране, екран, поверителност"</string>
@@ -3219,7 +3225,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"Звук и вибриране"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"Звук, вибриране и някои визуални знаци за известия"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"Звук, вибриране и визуални знаци за известия"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="5710896246703497760">"Известията, необходими за основните активност и състояние на телефона, никога няма да бъдат скрити"</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="5710896246703497760">"Известията, необходими за основната активност и основното състояние на телефона, никога няма да бъдат скрити"</string>
     <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"Няма"</string>
     <string name="zen_mode_other_options" msgid="520015080445012355">"други опции"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"Добавяне"</string>
@@ -3631,7 +3637,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Лични"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Служебни"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"Приложения: Всички"</string>
-    <string name="filter_notif_blocked_apps" msgid="3383043508771300704">"Изключено"</string>
+    <string name="filter_notif_blocked_apps" msgid="3383043508771300704">"Изключени"</string>
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"Категории: Неотложна важност"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"Категории: Малка важност"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"Категории: Изключени"</string>

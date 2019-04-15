@@ -224,7 +224,7 @@ public class ChooseLockGenericTest {
         initActivity(null);
 
         mFragment.onActivityResult(
-                ChooseLockGenericFragment.CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST,
+                ChooseLockGenericFragment.CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST,
                 BiometricEnrollBase.RESULT_FINISHED, null /* data */);
 
         assertThat(mActivity.isFinishing()).isTrue();

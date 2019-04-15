@@ -26,7 +26,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -38,6 +40,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.ArrayMap;
 
+import com.android.settings.homepage.contextualcards.conditional.ConditionContextualCardController;
 import com.android.settings.homepage.contextualcards.conditional.ConditionFooterContextualCard;
 import com.android.settings.homepage.contextualcards.conditional.ConditionHeaderContextualCard;
 import com.android.settings.homepage.contextualcards.conditional.ConditionalContextualCard;
@@ -45,6 +48,8 @@ import com.android.settings.intelligence.ContextualCardProto;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -309,6 +314,74 @@ public class ContextualCardManagerTest {
                 .collect(Collectors.toList());
         final List<String> expectedCards = Arrays.asList(TEST_SLICE_NAME);
         assertThat(actualCards).containsExactlyElementsIn(expectedCards);
+    }
+
+    @Test
+    public void onWindowFocusChanged_hasFocusAndNoConditional_startMonitoringConditionCard() {
+        final ContextualCardManager manager = spy(mManager);
+        final ControllerRendererPool pool = spy(mManager.mControllerRendererPool);
+        doReturn(pool).when(manager).getControllerRendererPool();
+        final ConditionContextualCardController conditionController =
+                pool.getController(mContext,
+                        ContextualCard.CardType.CONDITIONAL);
+        final OnStart controller = spy((OnStart)conditionController);
+        doReturn(controller).when(pool).getController(mContext, ContextualCard.CardType.CONDITIONAL);
+
+        manager.onWindowFocusChanged(true /* hasWindowFocus */);
+
+        verify(controller, atLeast(1)).onStart();
+    }
+
+    @Test
+    public void onWindowFocusChanged_hasFocusAndHasConditionals_startMonitoringConditionCard() {
+        mManager.mContextualCards.add(new ConditionalContextualCard.Builder().build());
+        mManager.mContextualCards.add(new ConditionFooterContextualCard.Builder().build());
+        final ContextualCardManager manager = spy(mManager);
+        final ControllerRendererPool pool = spy(mManager.mControllerRendererPool);
+        doReturn(pool).when(manager).getControllerRendererPool();
+        final ConditionContextualCardController conditionController =
+                pool.getController(mContext,
+                        ContextualCard.CardType.CONDITIONAL);
+        final OnStart controller = spy((OnStart)conditionController);
+        doReturn(controller).when(pool).getController(mContext, ContextualCard.CardType.CONDITIONAL);
+
+        manager.onWindowFocusChanged(true /* hasWindowFocus */);
+
+        verify(controller, atLeast(2)).onStart();
+    }
+
+    @Test
+    public void onWindowFocusChanged_loseFocusAndHasConditionals_stopMonitoringConditionCard() {
+        mManager.mContextualCards.add(new ConditionalContextualCard.Builder().build());
+        mManager.mContextualCards.add(new ConditionFooterContextualCard.Builder().build());
+        final ContextualCardManager manager = spy(mManager);
+        final ControllerRendererPool pool = spy(mManager.mControllerRendererPool);
+        doReturn(pool).when(manager).getControllerRendererPool();
+        final ConditionContextualCardController conditionController =
+                pool.getController(mContext,
+                        ContextualCard.CardType.CONDITIONAL);
+        final OnStop controller = spy((OnStop) conditionController);
+        doReturn(controller).when(pool).getController(mContext, ContextualCard.CardType.CONDITIONAL);
+
+        manager.onWindowFocusChanged(false /* hasWindowFocus */);
+
+        verify(controller, atLeast(2)).onStop();
+    }
+
+    @Test
+    public void onWindowFocusChanged_loseFocusAndNoConditional_stopMonitoringConditionCard() {
+        final ContextualCardManager manager = spy(mManager);
+        final ControllerRendererPool pool = spy(mManager.mControllerRendererPool);
+        doReturn(pool).when(manager).getControllerRendererPool();
+        final ConditionContextualCardController conditionController =
+                pool.getController(mContext,
+                        ContextualCard.CardType.CONDITIONAL);
+        final OnStop controller = spy((OnStop) conditionController);
+        doReturn(controller).when(pool).getController(mContext, ContextualCard.CardType.CONDITIONAL);
+
+        manager.onWindowFocusChanged(false /* hasWindowFocus */);
+
+        verify(controller, atLeast(1)).onStop();
     }
 
     @Test

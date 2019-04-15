@@ -17,46 +17,22 @@
 package com.android.settings.wifi.savedaccesspoints;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
-import com.android.settings.wifi.WifiConfigController;
-import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.wifi.AccessPoint;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class SavedAccessPointsWifiSettingsTest {
 
-    @Mock
-    private WifiManager mWifiManager;
-    @Mock
-    private WifiDialog mWifiDialog;
-    @Mock
-    private WifiConfigController mConfigController;
-    @Mock
-    private WifiConfiguration mWifiConfiguration;
-    @Mock
-    private AccessPoint mAccessPoint;
     @Mock
     private SubscribedAccessPointsPreferenceController mSubscribedApController;
     @Mock
@@ -73,45 +49,6 @@ public class SavedAccessPointsWifiSettingsTest {
                 .use(SubscribedAccessPointsPreferenceController.class);
         doReturn(mSavedApController).when(mSettings)
                 .use(SavedAccessPointsPreferenceController.class);
-
-        ReflectionHelpers.setField(mSettings, "mWifiManager", mWifiManager);
-
-        when(mWifiDialog.getController()).thenReturn(mConfigController);
-        when(mConfigController.getConfig()).thenReturn(mWifiConfiguration);
-    }
-
-    @Test
-    public void onForget_isPasspointConfig_shouldRefreshAPList() {
-        FeatureFlagPersistent.setEnabled(RuntimeEnvironment.application,
-                FeatureFlags.NETWORK_INTERNET_V2, false);
-        when(mAccessPoint.isPasspointConfig()).thenReturn(true);
-        ReflectionHelpers.setField(mSettings, "mSelectedAccessPoint", mAccessPoint);
-
-        mSettings.onForget(null);
-
-        verify(mSavedApController).postRefreshSavedAccessPoints();
-    }
-
-    @Test
-    public void onForget_isPasspointConfig_shouldRefreshSubscribedAPList() {
-        FeatureFlagPersistent.setEnabled(RuntimeEnvironment.application,
-                FeatureFlags.NETWORK_INTERNET_V2, true);
-        when(mAccessPoint.isPasspointConfig()).thenReturn(true);
-        ReflectionHelpers.setField(mSettings, "mSelectedAccessPoint", mAccessPoint);
-
-        mSettings.onForget(null);
-
-        verify(mSubscribedApController).postRefreshSubscribedAccessPoints();
-    }
-
-    @Test
-    public void onForget_shouldInvokeForgetApi() {
-        ReflectionHelpers.setField(mSettings, "mSelectedAccessPoint", mAccessPoint);
-        when(mAccessPoint.getConfig()).thenReturn(mWifiConfiguration);
-
-        mSettings.onForget(mWifiDialog);
-
-        verify(mWifiManager).forget(mWifiConfiguration.networkId, mSavedApController);
     }
 
     @Test

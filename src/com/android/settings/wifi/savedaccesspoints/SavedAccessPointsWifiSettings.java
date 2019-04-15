@@ -41,12 +41,10 @@ import com.android.settingslib.wifi.AccessPointPreference;
 /**
  * UI to manage saved networks/access points.
  */
-public class SavedAccessPointsWifiSettings extends DashboardFragment
-        implements WifiDialog.WifiDialogListener, DialogInterface.OnCancelListener {
+public class SavedAccessPointsWifiSettings extends DashboardFragment {
 
     private static final String TAG = "SavedAccessPoints";
 
-    private WifiManager mWifiManager;
     private Bundle mAccessPointSavedState;
     private AccessPoint mSelectedAccessPoint;
 
@@ -71,8 +69,6 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mWifiManager = (WifiManager) getContext()
-                .getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         use(SavedAccessPointsPreferenceController.class)
                 .setHost(this);
         use(SubscribedAccessPointsPreferenceController.class)
@@ -90,7 +86,7 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
         }
     }
 
-    public void showWifiDialog(@Nullable AccessPointPreference accessPoint) {
+    public void showWifiPage(@Nullable AccessPointPreference accessPoint) {
         removeDialog(WifiSettings.WIFI_DIALOG_ID);
 
         if (accessPoint != null) {
@@ -102,52 +98,18 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
             mAccessPointSavedState = null;
         }
 
-        if (usingDetailsFragment(getContext())) {
-            if (mSelectedAccessPoint == null) {
-                mSelectedAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
-            }
-            final Bundle savedState = new Bundle();
-            mSelectedAccessPoint.saveWifiState(savedState);
-
-            new SubSettingLauncher(getContext())
-                    .setTitleText(mSelectedAccessPoint.getTitle())
-                    .setDestination(WifiNetworkDetailsFragment.class.getName())
-                    .setArguments(savedState)
-                    .setSourceMetricsCategory(getMetricsCategory())
-                    .launch();
-        } else {
-            showDialog(WifiSettings.WIFI_DIALOG_ID);
+        if (mSelectedAccessPoint == null) {
+            mSelectedAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
         }
-    }
+        final Bundle savedState = new Bundle();
+        mSelectedAccessPoint.saveWifiState(savedState);
 
-    @Override
-    public Dialog onCreateDialog(int dialogId) {
-        switch (dialogId) {
-            case WifiSettings.WIFI_DIALOG_ID:
-                // Modify network
-                if (mSelectedAccessPoint == null) {
-                    // Restore AP from save state
-                    mSelectedAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
-                    // Reset the saved access point data
-                    mAccessPointSavedState = null;
-                }
-                final WifiDialog dialog = WifiDialog.createModal(
-                        getActivity(), this, mSelectedAccessPoint, WifiConfigUiBase.MODE_VIEW);
-                dialog.setOnCancelListener(this);
-
-                return dialog;
-        }
-        return super.onCreateDialog(dialogId);
-    }
-
-    @Override
-    public int getDialogMetricsCategory(int dialogId) {
-        switch (dialogId) {
-            case WifiSettings.WIFI_DIALOG_ID:
-                return SettingsEnums.DIALOG_WIFI_SAVED_AP_EDIT;
-            default:
-                return 0;
-        }
+        new SubSettingLauncher(getContext())
+                .setTitleText(mSelectedAccessPoint.getTitle())
+                .setDestination(WifiNetworkDetailsFragment.class.getName())
+                .setArguments(savedState)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     @Override
@@ -160,45 +122,6 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
             mSelectedAccessPoint.saveWifiState(mAccessPointSavedState);
             outState.putBundle(SAVE_DIALOG_ACCESS_POINT_STATE, mAccessPointSavedState);
         }
-    }
-
-    @Override
-    public void onForget(WifiDialog dialog) {
-        if (mSelectedAccessPoint != null) {
-            if (mSelectedAccessPoint.isPasspointConfig()) {
-                try {
-                    mWifiManager.removePasspointConfiguration(
-                            mSelectedAccessPoint.getPasspointFqdn());
-                } catch (RuntimeException e) {
-                    Log.e(TAG, "Failed to remove Passpoint configuration for "
-                            + mSelectedAccessPoint.getConfigName());
-                }
-                if (isSubscriptionsFeatureEnabled()) {
-                    use(SubscribedAccessPointsPreferenceController.class)
-                            .postRefreshSubscribedAccessPoints();
-                } else {
-                    use(SavedAccessPointsPreferenceController.class)
-                            .postRefreshSavedAccessPoints();
-                }
-            } else {
-                // both onSuccess/onFailure will call postRefreshSavedAccessPoints
-                mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId,
-                        use(SavedAccessPointsPreferenceController.class));
-            }
-            mSelectedAccessPoint = null;
-        }
-    }
-
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        mSelectedAccessPoint = null;
-    }
-
-    /**
-     * Checks if showing WifiNetworkDetailsFragment when clicking saved network item.
-     */
-    public static boolean usingDetailsFragment(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN);
     }
 
     boolean isSubscriptionsFeatureEnabled() {

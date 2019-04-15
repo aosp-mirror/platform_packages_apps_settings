@@ -91,7 +91,7 @@ public class SubscribedAccessPointsPreferenceController extends BasePreferenceCo
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (mHost != null) {
-            mHost.showWifiDialog((AccessPointPreference) preference);
+            mHost.showWifiPage((AccessPointPreference) preference);
         }
         return false;
     }

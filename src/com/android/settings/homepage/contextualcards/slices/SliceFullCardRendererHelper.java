@@ -27,6 +27,7 @@ import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -64,6 +65,12 @@ class SliceFullCardRendererHelper {
 
                     metricsFeatureProvider.action(mContext,
                             SettingsEnums.ACTION_CONTEXTUAL_CARD_CLICK, log);
+
+                    final ContextualCardFeatureProvider contextualCardFeatureProvider =
+                            FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(
+                                    mContext);
+
+                    contextualCardFeatureProvider.logNotificationPackage(slice);
                 });
 
         // Customize slice view for Settings

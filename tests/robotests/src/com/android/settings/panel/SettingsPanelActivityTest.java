@@ -99,7 +99,7 @@ public class SettingsPanelActivityTest {
                 0,
                 SettingsEnums.PAGE_HIDE,
                 SettingsEnums.TESTING,
-                PanelLoggingContract.PanelClosedKeys.KEY_CLICKED_OUT,
+                PanelLoggingContract.PanelClosedKeys.KEY_OTHERS,
                 0
         );
     }
