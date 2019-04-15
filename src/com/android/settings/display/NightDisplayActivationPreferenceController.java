@@ -93,7 +93,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
 
     @Override
     public CharSequence getSummary() {
-        return mTimeFormatter.getAutoModeTimeSummary(mContext, mColorDisplayManager);
+        return mTimeFormatter.getAutoModeSummary(mContext, mColorDisplayManager);
     }
 
     private void updateStateInternal() {
