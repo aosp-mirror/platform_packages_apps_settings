@@ -58,11 +58,10 @@
             android:title="@string/screen_zoom_title"
             settings:searchable="false"/>
 
-        <Preference
+        <SwitchPreference
             android:key="dark_ui_mode_accessibility"
-            android:fragment="com.android.settings.display.DarkUISettings"
             android:title="@string/dark_ui_mode"
-            settings:searchable="false" />
+            settings:searchable="false"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
