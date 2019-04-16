@@ -93,7 +93,7 @@ public class SeekBarPreference extends RestrictedPreference
 
     @Override
     public boolean isSelectable() {
-        return false;
+        return isDisabledByAdmin();
     }
 
     @Override
