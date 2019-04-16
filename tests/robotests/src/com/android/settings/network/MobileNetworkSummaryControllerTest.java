@@ -283,6 +283,18 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    public void onResume_noSubscriptionEsimDisabled_isDisabled() {
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
+        when(mEuiccManager.isEnabled()).thenReturn(false);
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.onResume();
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
     public void onAirplaneModeChanged_oneSubscriptionAirplaneModeGetsTurnedOn_isDisabled() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
