@@ -28,6 +28,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.wifi.AccessPoint;
@@ -74,8 +75,13 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             accessPoint = new AccessPoint(this, accessPointState);
         }
 
-        mDialog = WifiDialog.createModal(
-                this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            mDialog = WifiDialog.createModal(this, this, accessPoint,
+                    WifiConfigUiBase.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light);
+        } else {
+            mDialog = WifiDialog.createModal(
+                    this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
+        }
         mDialog.show();
         mDialog.setOnDismissListener(this);
     }

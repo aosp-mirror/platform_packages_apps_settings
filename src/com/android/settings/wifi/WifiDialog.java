@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import android.annotation.StyleRes;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -64,11 +65,21 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
     public static WifiDialog createModal(Context context, WifiDialogListener listener,
             AccessPoint accessPoint, int mode) {
         return new WifiDialog(context, listener, accessPoint, mode, 0 /* style */,
-                mode == WifiConfigUiBase.MODE_VIEW /* hideSubmitButton*/);
+                mode == WifiConfigUiBase.MODE_VIEW /* hideSubmitButton */);
+    }
+
+    /**
+     * Creates a WifiDialog with customized style. It displays as a dialog above the current
+     * view.
+     */
+    public static WifiDialog createModal(Context context, WifiDialogListener listener,
+        AccessPoint accessPoint, int mode, @StyleRes int style) {
+        return new WifiDialog(context, listener, accessPoint, mode, style,
+                mode == WifiConfigUiBase.MODE_VIEW /* hideSubmitButton */);
     }
 
     /* package */ WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
-            int mode, int style, boolean hideSubmitButton) {
+            int mode, @StyleRes int style, boolean hideSubmitButton) {
         super(context, style);
         mMode = mode;
         mListener = listener;
