@@ -106,8 +106,10 @@ public class VolumeSeekBarPreferenceControllerTest {
     public void sliderMethods_handleNullPreference() {
         when(mHelper.getStreamVolume(mController.getAudioStream())).thenReturn(4);
         when(mHelper.getMaxVolume(mController.getAudioStream())).thenReturn(10);
+        when(mHelper.getMinVolume(mController.getAudioStream())).thenReturn(1);
 
-        assertThat(mController.getMaxSteps()).isEqualTo(10);
+        assertThat(mController.getMax()).isEqualTo(10);
+        assertThat(mController.getMin()).isEqualTo(1);
         assertThat(mController.getSliderPosition()).isEqualTo(4);
 
         mController.setSliderPosition(9);
@@ -123,11 +125,19 @@ public class VolumeSeekBarPreferenceControllerTest {
     }
 
     @Test
-    public void getMaxSteps_passesAlongValue() {
+    public void getMaxValue_passesAlongValue() {
         when(mPreference.getMax()).thenReturn(6);
         mController.displayPreference(mScreen);
 
-        assertThat(mController.getMaxSteps()).isEqualTo(6);
+        assertThat(mController.getMax()).isEqualTo(6);
+    }
+
+    @Test
+    public void getMinValue_passesAlongValue() {
+        when(mPreference.getMin()).thenReturn(1);
+        mController.displayPreference(mScreen);
+
+        assertThat(mController.getMin()).isEqualTo(1);
     }
 
     @Test

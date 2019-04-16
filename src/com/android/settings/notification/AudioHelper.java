@@ -74,4 +74,8 @@ public class AudioHelper {
     public int getMaxVolume(int stream) {
         return mAudioManager.getStreamMaxVolume(stream);
     }
+
+    public int getMinVolume(int stream) {
+        return mAudioManager.getStreamMinVolume(stream);
+    }
 }
