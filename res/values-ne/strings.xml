@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"तपाईंले टाइप गर्नुभएको पोर्ट मान्य छैन।"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP प्रोक्सी ब्राउजरद्वारा प्रयोग गरिन्छ तर अन्य अनुप्रयोगहरूद्वारा प्रयोग गर्न नसकिने पनि हुन सक्छ।"</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"हालको subId:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"पूर्वनिर्धारित मोबाइल डेटा SIM को SubId:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL ब्यान्डविथ (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL व्यान्डविथ (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"सेलको स्थान बारे जानकारी (प्रचलनमा नरहेको):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"रेडियोको ब्यान्डलाई चयन गर्नुहोस्"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"आवाज सम्बन्धी नेटवर्कको प्रकार:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"डेटा नेटवर्कको प्रकार:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"फोनको सूचक चयन गर्नुहोस्"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"रुचाइएको नेटवर्कको प्रकारलाई सेट गर्नुहोस्:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"पिङ् होस्टनाम (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"पिङ होस्टनाम (www.google.com) IPv6:"</string>
@@ -343,11 +346,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"मिति सेट गर्नुहोस्"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"क्षेत्र खोज्नुहोस्"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"क्षेत्र"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"समय क्षेत्र"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"<xliff:g id="REGION">%1$s</xliff:g> का समय क्षेत्रहरू"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC अफसेट चयन गर्नुहोस्"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"क्रमबद्ध अनुसार मिलाउनुहोस्"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"समय क्षेत्रद्वारा क्रमबद्ध गर्नुहोस्"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TRANSITION_DATE">%2$s</xliff:g> मा <xliff:g id="TIME_TYPE">%1$s</xliff:g> सुरु हुन्छ।"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -871,7 +870,7 @@
     <string name="wifi_no_domain_warning" msgid="5223011964091727376">"डोमेन निर्दिष्ट गर्नुपर्छ"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS उपलब्ध छ"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS उपलब्ध)"</string>
-    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"आफ्नो सञ्जाल पासवर्ड प्रविष्ट गर्नुहोस्"</string>
+    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"आफ्नो सञ्जाल पासवर्ड प्रविष्टि गर्नुहोस्"</string>
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"सेवा प्रदायकको Wi‑Fi नेटवर्क"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1$s</xliff:g> मार्फत जडान गर्नुहोस्"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"स्थान सटिकता सुधार गर्न र अन्य प्रायोजनहरूको लागि, <xliff:g id="APP_NAME">%1$s</xliff:g> नेटवर्क स्क्यानिङ खुला भएको चाहन्छ, Wi-Fi बन्द भएता पनि।\n\nके यसलाई सबै अनुप्रयोगहरूको लागि अनुमति दिन चाहनुहुन्छ जसले स्क्यान गर्न चाहन्छन्?"</string>
@@ -882,6 +881,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> सञ्जाल जड्न पहिले अनलाइनमा हस्ताक्षर गर्न आवश्यक।"</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"CONNECT"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"यो नेटवर्कसँग इन्टरनेटमाथि पहुँच छैन। जडान भइरहने हो?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"इन्टरनेट जडान सीमित हुँदा कतिपय अनुप्रयोग तथा सेवाहरूले काम नगर्न सक्छन्। अघि बढ्नुहोस्"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"यस नेटवर्कको लागि फेरि नसोध्नुहोस्"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi-Fi इन्टरनेटमा जडान भएको छैन"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Wi-Fi को जडान खराब हुँदा तपाईं मोबाइल नेटवर्कमा स्विच गर्न सक्नुहुन्छ। डेटा उपयोग शुल्कहरू लाग्न सक्छन्।"</string>
@@ -967,15 +967,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Wi‑Fi मार्फत कल गर्ने सेवाको क्षेत्र विस्तार गर्नुहोस्"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"पहुँच क्षेत्र विस्तार गर्न Wi-Fi मार्फत कल गर्ने सेवालाई सक्रिय गर्नुहोस्‌"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"कलिङ प्राथमिकता"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi कलिङ मोड"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"कलसम्बन्धी प्राथमिकता"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"रोमिङ सम्बन्धी प्राथमिकता"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"रोमिङ सम्बन्धी प्राथमिकता"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Wi-Fi को सुझाव गरियो"</item>
-    <item msgid="1335127656328817518">"मोबाइल रूचाइएको छ"</item>
-    <item msgid="3132912693346866895">"Wi-Fi मात्र"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -988,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Wi-Fi रुचाइएको"</item>
-    <item msgid="5074515506087318555">"मोबाइल रूचाइएको छ"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -999,7 +999,10 @@
     <item msgid="2339246858001475047">"२"</item>
     <item msgid="6200207341126893791">"१"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi कलिङ सक्रिय हुँदा तपाईँको प्राथमिकता र कुन संकेत बलियो छ भन्ने आधारमा तपाईँको फोनले कलहरूलाई Wi-Fi नेटवर्हकरू वा तपाईँको वाहकको नेटवर्कमार्फत पठाउन सक्छ। यो सुविधा सक्रिय पार्न अघि शुल्क र अन्य विवरणको बारेमा तपाईँको वाहकसँग जाँच गर्नुहोस्।"</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Wi‑Fi उपलब्ध छैन भने मोबाइल नेटवर्क प्रयोग गर्नुहोस्"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"मोबाइल नेटवर्क उपलब्ध नभएमा Wi‑Fi प्रयोग गर्नुहोस्"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Wi‑Fi मार्फत कल गर्नुहोस्। Wi‑Fi नेटवर्कले काम गरेन भने सम्पर्क विच्छेद हुने छ।"</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi कलिङ सक्रिय पारिएका बेला तपाईंको फोनले तपाईंको प्राथमिकता र सङ्केतको बलियोपनाका आधारमा कलहरूलाई Wi-Fi नेटवर्कहरू वा तपाईंको सेवा प्रदायकको नेटवर्कमार्फत पठाउन सक्छ। यो सुविधा सक्रिय गर्नुअघि लाग्ने शुल्क र अन्य विवरणहरूबारे बुझ्न आफ्नो सेवा प्रदायकसँग सम्पर्क गर्नुहोस्।<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"आपतकालीन ठेगाना"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"तपाईंले Wi‑Fi मार्फत आपतकालीन कल गर्दा उक्त ठेगानालाई तपाईंको स्थानको रूपमा प्रयोग गरिन्छ"</string>
@@ -1175,6 +1178,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN बदल्न सक्दैन।\n सम्भवत: गलत PIN।"</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM PIN सफलतापूर्वक परिवर्तन गरियो"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"SIM कार्डको लक स्थितिलाई बदल्न सकिँदैन। \n सम्भवत गलत PIN।"</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN असक्षम पार्न सकिँदैन।"</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN सक्षम पार्न सकिँदैन।"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"ठिक छ"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"रद्द गर्नुहोस्"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"धेरै SIM हरू भेटियो"</string>
@@ -1345,14 +1350,14 @@
     <string name="storage_wizard_init_internal_title" msgid="9100613534261408519">"आन्तरिक भण्डारणको रूपमा प्रयोग गर्नुहोस्"</string>
     <string name="storage_wizard_init_internal_summary" msgid="6240417501036216410">"यस यन्त्रमा मात्र कुनै पनि चिज, अनुप्रयोग र तस्बिरहरू  भण्डारण गर्नाका लागि। यसलाई ढाँचा मिलाउन आवश्यक हुन्छ जसले अर्का यन्त्रहरूसँग काम गर्नबाट रोक्छ।"</string>
     <string name="storage_wizard_format_confirm_title" msgid="2814021794538252546">"आन्तरिक भण्डारणको रुपमा ढाँचा गर्नुहोस्"</string>
-    <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"यो सुरक्षित बनाउन यसलाई <xliff:g id="NAME_0">^1</xliff:g> ढाँचा बनाउन आवश्यकता छ। \n\nढाँचामा मिलाएपछि, यो यन्त्रमा यसले <xliff:g id="NAME_1">^1</xliff:g> मात्र काम गर्नेछ। \n\n"<b>" ढाँचा मिलाउँदा <xliff:g id="NAME_2">^1</xliff:g> मा हालैका भण्डारित सबै डेटा मेटिन्छ।"</b>" डेटा गुमाउनुपर्ने बाट जोगिन, यसको ब्याकअप राख्ने बारे विचार गर्नुहोस्।"</string>
+    <string name="storage_wizard_format_confirm_body" msgid="4401758710076806509">"यो सुरक्षित बनाउन यसलाई <xliff:g id="NAME_0">^1</xliff:g> ढाँचा बनाउन आवश्यकता छ। \n\nढाँचामा मिलाएपछि, यो यन्त्रमा यसले <xliff:g id="NAME_1">^1</xliff:g> मात्र काम गर्ने छ। \n\n"<b>" ढाँचा मिलाउँदा <xliff:g id="NAME_2">^1</xliff:g> मा हालैका भण्डारित सबै डेटा मेटिन्छ।"</b>" डेटा गुमाउनुपर्ने बाट जोगिन, यसको ब्याकअप राख्ने बारे विचार गर्नुहोस्।"</string>
     <string name="storage_wizard_format_confirm_public_title" msgid="4905690038882041566">"पोर्टेबल भण्डारणका रूपमा फरम्याट गर्नुहोस्"</string>
     <string name="storage_wizard_format_confirm_public_body" msgid="1516932692920060272">"यसको लागि <xliff:g id="NAME_0">^1</xliff:g> फरम्याट गर्न आवश्यक छ।\n\n"<b>"फरम्याट गर्दा <xliff:g id="NAME_1">^1</xliff:g> भण्डार गरिएका सबै डेटा नष्ट हुनेछ।"</b>"डेटा जोगाउन ब्याकअप गर्ने बारे बिचार गर्नुहोस्।"</string>
     <string name="storage_wizard_format_confirm_next" msgid="2774557300531702572">"ढाँचा मेटाउनुहोस्"</string>
     <string name="storage_wizard_format_progress_title" msgid="6487352396450582292">"<xliff:g id="NAME">^1</xliff:g> ढाँचा मिलाइदै ..."</string>
     <string name="storage_wizard_format_progress_body" msgid="5255269692453900303">"<xliff:g id="NAME">^1</xliff:g> फर्म्याट गरिरहेका बेला यसलाई नहटाउनुहोस्।"</string>
     <string name="storage_wizard_migrate_title" msgid="1363078147938160407">"नयाँ भण्डारणमा डेटा सार्नुहोस्"</string>
-    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"तपाईँले यो नयाँ <xliff:g id="NAME">^1</xliff:g>मा आफ्नो तस्बिरहरु, फाइलहरू र केही अनुप्रयोगहरू सार्न सक्नुहुन्छ। \n\n स्थानान्तरणले करिब <xliff:g id="TIME">^2</xliff:g> लिन्छ र आन्तरिक भण्डारणमा <xliff:g id="SIZE">^3</xliff:g> खाली गर्नेछ। यस क्रममा केही अनुप्रयोगहरूले काम गर्ने छैनन्।"</string>
+    <string name="storage_wizard_migrate_body" msgid="890751699549542345">"तपाईँले यो नयाँ <xliff:g id="NAME">^1</xliff:g>मा आफ्नो तस्बिरहरु, फाइलहरू र केही अनुप्रयोगहरू सार्न सक्नुहुन्छ। \n\n स्थानान्तरणले करिब <xliff:g id="TIME">^2</xliff:g> लिन्छ र आन्तरिक भण्डारणमा <xliff:g id="SIZE">^3</xliff:g> खाली गर्ने छ। यस क्रममा केही अनुप्रयोगहरूले काम गर्ने छैनन्।"</string>
     <string name="storage_wizard_migrate_now" msgid="4523444323744239143">"अब सार्नुहोस्"</string>
     <string name="storage_wizard_migrate_later" msgid="3173482328116026253">"पछि सार्नुहोस्"</string>
     <string name="storage_wizard_migrate_confirm_title" msgid="8564833529613286965">"अब डेटा सार्नुहोस्"</string>
@@ -1450,7 +1455,7 @@
     <string name="reset_dashboard_title" msgid="6254873816990678620">"रिसेटका विकल्पहरू"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"नेटवर्क, अनुप्रयोगहरू वा यन्त्रलाई रिसेट गर्न सकिन्छ"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi, मोबाइल र ब्लुटुथ रिसेट गर्नुहोस्"</string>
-    <string name="reset_network_desc" msgid="5547979398298881406">"यसले निम्न सेटिङहरू लगायत सम्पूर्ण नेटवर्क सम्बन्धी सेटिहरूलाई रिसेट गर्नेछ:\n\n"<li>"Wi‑Fi"</li>\n<li>"मोबाइल डेटा"</li>\n<li>"ब्लुटुथ"</li></string>
+    <string name="reset_network_desc" msgid="5547979398298881406">"यसले निम्न सेटिङहरू लगायत सम्पूर्ण नेटवर्क सम्बन्धी सेटिहरूलाई रिसेट गर्ने छ:\n\n"<li>"Wi‑Fi"</li>\n<li>"मोबाइल डेटा"</li>\n<li>"ब्लुटुथ"</li></string>
     <string name="reset_esim_title" msgid="2419812515540592802">"eSIM पनि रिसेट गर्नुहोस्"</string>
     <string name="reset_esim_desc" msgid="6412324670559060446">"यस फोनमा भएका सबै eSIM हरूलाई मेटाउनुहोस्। तपाईंले आफ्ना eSIM हरू पुनः डाउनलोड गर्न आफ्नो सेवा प्रदायकलाई सम्पर्क गर्नु पर्ने हुन्छ। यस कार्यले तपाईंको मोबाइल सेवाको योजनालाई रद्द गर्ने छैन।"</string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"सेटिङहरू रिसेट गर्नुहोस्"</string>
@@ -1459,8 +1464,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"रिसेट गर्ने हो?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"नेटवर्क रिसेट यो प्रयोगकर्ताको लागि उपलब्ध छैन"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"सञ्जाल सेटिङहरू रिसेट गरियो"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"eSIM हरू रिसेट गर्न सकिएन"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"कुनै त्रुटिले गर्दा eSIM हरू रिसेट गर्न सकिएन।"</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"सबै डेटा मेटाउनुहोस् (फ्याक्ट्री रिसेट गर्नुहोस्)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"सबै डेटा मेटाउनुहोस् (फ्याक्ट्री रिसेट गर्नुहोस्)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"यस कार्यले तपाईँको सम्पूर्ण डेटा मेटाउँछ ट्याब्लेटको "<b>" आन्तरिक भण्डारणबाट "</b>" : जसमा, \n \n "<li>" तपाईँको Google खाता "</li>" \n "<li>" प्रणाली र अनुप्रयोग डेटा र सेटिङहरू"</li>" \n "<li>" डाउनलोड गरिएका अनुप्रयोगहरू "</li></string>
@@ -1586,9 +1593,9 @@
     <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"सुरक्षाका ला‍गि PIN सेट गर्नुहोस्"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"फिंगरप्रिन्ट प्रयोग गर्न PIN सेट गर्नुहोस्"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"सुरक्षाका लागि ढाँचा सेट गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"आफ्नो पासवर्ड पुन: प्रविष्ट गर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"आफ्नो पासवर्ड पुन: प्रविष्टि गर्नुहोस्"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"तपाईँको ढाँचा निश्चित गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"आफ्नो PIN पुन: प्रविष्ट गर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"आफ्नो PIN पुन: प्रविष्टि गर्नुहोस्"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"पासवर्ड मेल खाँदैन"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN मिल्दैन"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="2872194349688886781">"आफ्नो ढाँचा फेरि कोर्नुहोस्‌"</string>
@@ -1597,20 +1604,20 @@
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN सेट भएको छ।"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"शैली सेट गरिएको छ।"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"जारी राख्नका लागि आफ्नो यन्त्रको ढाँचा प्रयोग गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"जारी राख्नका लागि आफ्नो यन्त्रको PIN प्रविष्ट गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"जारी राख्नका लागि आफ्नो यन्त्रको पासवर्ड प्रविष्ट गर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"जारी राख्नका लागि आफ्नो यन्त्रको PIN प्रविष्टि गर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"जारी राख्नका लागि आफ्नो यन्त्रको पासवर्ड प्रविष्टि गर्नुहोस्"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"जारी राख्नका लागि आफ्नो कार्य प्रोफाइलको ढाँचा प्रयोग गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"जारी राख्नका लागि आफ्नो कार्य प्रोफाइलको PIN प्रविष्ट गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"जारी राख्नका लागि आफ्नो कार्य प्रोफाइलको पासवर्ड प्रविष्ट गर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"जारी राख्नका लागि आफ्नो कार्य प्रोफाइलको PIN प्रविष्टि गर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"जारी राख्नका लागि आफ्नो कार्य प्रोफाइलको पासवर्ड प्रविष्टि गर्नुहोस्"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="530802132223800623">"थप सुरक्षाका लागि आफ्नो यन्त्रको ढाँचा प्रयोग गर्नुहोस्‌"</string>
-    <string name="lockpassword_strong_auth_required_device_pin" msgid="7829294830078036417">"थप सुरक्षाका लागि आफ्नो यन्त्रको PIN प्रविष्ट गर्नुहोस्"</string>
-    <string name="lockpassword_strong_auth_required_device_password" msgid="3552644641574796973">"थप सुरक्षाका लागि आफ्नो यन्त्रको पासवर्ड प्रविष्ट गर्नुहोस्"</string>
+    <string name="lockpassword_strong_auth_required_device_pin" msgid="7829294830078036417">"थप सुरक्षाका लागि आफ्नो यन्त्रको PIN प्रविष्टि गर्नुहोस्"</string>
+    <string name="lockpassword_strong_auth_required_device_password" msgid="3552644641574796973">"थप सुरक्षाका लागि आफ्नो यन्त्रको पासवर्ड प्रविष्टि गर्नुहोस्"</string>
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"थप सुरक्षाका लागि आफ्नो यन्त्रको कार्य प्रोफाइलको ढाँचा प्रयोग गर्नुहोस्"</string>
-    <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"थप सुरक्षाका लागि आफ्नो यन्त्रको कार्य प्रोफाइलको PIN प्रविष्ट गर्नुहोस्"</string>
-    <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"थप सुरक्षाका लागि आफ्नो यन्त्रको कार्य प्रोफाइलको पासवर्ड प्रविष्ट गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो ढाँचा प्रविष्ट गर्नुहोस्।"</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो PIN प्रविष्ट गर्नुहोस्।"</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो पासवर्ड प्रविष्ट गर्नुहोस्।"</string>
+    <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"थप सुरक्षाका लागि आफ्नो यन्त्रको कार्य प्रोफाइलको PIN प्रविष्टि गर्नुहोस्"</string>
+    <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"थप सुरक्षाका लागि आफ्नो यन्त्रको कार्य प्रोफाइलको पासवर्ड प्रविष्टि गर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो ढाँचा प्रविष्टि गर्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो PIN प्रविष्टि गर्नुहोस्।"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"तपाईंको फोन फ्याक्ट्री सेटिङमा रिसेट गरिएको छ। यो फोन प्रयोग गर्न आफ्नो पछिल्लो पासवर्ड प्रविष्टि गर्नुहोस्।"</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"ढाँचा पुष्टि गर्नुहोस्‌"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"PIN पुष्टि गर्नुहोस्‌"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"पासवर्ड पुष्टि गर्नुहोस्"</string>
@@ -1649,7 +1656,7 @@
     <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"एउटै लकको प्रयोग गर्नुहोस्"</string>
     <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"कार्य प्रोफाइल र यन्त्रको स्क्रिनका लागि एउटै लक प्रयोग गर्नुहोस्"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"एउटै लकको प्रयोग गर्ने हो?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="7128305504872026659">"तपाईंको यन्त्रले कार्य प्रोफाइल स्क्रिन लक प्रयोग गर्नेछ। दुवै लकमा कार्य सम्बन्धी नीतिहरू लागू हुनेछन्।"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="7128305504872026659">"तपाईंको यन्त्रले कार्य प्रोफाइल स्क्रिन लक प्रयोग गर्ने छ। दुवै लकमा कार्य सम्बन्धी नीतिहरू लागू हुनेछन्।"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"तपाईंको कार्य प्रोफाइलको लकले तपाईंको संगठनका सुरक्षा सम्बन्धी आवश्यकताहरूलाई पूरा गर्दैन। तपाईं आफ्नो यन्त्रको स्क्रिन र आफ्नो कार्य प्रोफाइल दुवैका लागि एउटै लकको प्रयोग गर्न सक्नुहुन्छ, तर कार्य प्रोफाइलको लक सम्बन्धी जुनसुकै नीतिहरू लागू हुनेछन्।"</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"एउटै लकको प्रयोग गर्नुहोस्"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"एउटै लकको प्रयोग गर्नुहोस्"</string>
@@ -1974,10 +1981,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"क्याप्सनहरू प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"श्रवण यन्त्रहरू"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"कुनै पनि श्रवण यन्त्र जडान गरिएको छैन"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"श्रवण यन्त्र थप्नुहोस्"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"श्रवण यन्त्रहरू थप्नुहोस्"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"आफ्ना श्रवण यन्त्रहरूसँग जोडा बनाउन आगामी स्क्रिनमा आफ्नो यन्त्र फेला पारी तिनमा ट्याप गर्नुहोस्।"</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"आफ्ना श्रवण यन्त्रहरू जोडा बनाउने मोडमा भएको कुरा सुनिश्चित गर्नुहोस्।"</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> हाल सक्रिय छ"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सक्रिय"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="other">सुरक्षित गरिएका <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> श्रवण यन्त्रहरू</item>
       <item quantity="one">सुरक्षित गरिएका <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> श्रवण यन्त्र</item>
@@ -2197,9 +2204,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"यो अनुप्रयोग पृष्ठभूमिमा ब्याट्रीको प्रयोग गर्न सक्षम हुने छ। तपाईंको ब्याट्री अपेक्षा गरेभन्दा चाँडै सकिन सक्छ।"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"हटाउनुहोस्"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"रद्द गर्नुहोस्"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रिको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रिको प्रयोग गरेको खण्डमा तपाईंको फोनले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रिको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रिको प्रयोग गरेको खण्डमा तपाईंको ट्याब्लेटले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रिको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रिको प्रयोग गरेको खण्डमा तपाईंको यन्त्रले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रीको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रीको प्रयोग गरेको खण्डमा तपाईंको फोनले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रीको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रीको प्रयोग गरेको खण्डमा तपाईंको ट्याब्लेटले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"तपाईंका अनुप्रयोगहरूले सामान्य मात्रामा ब्याट्रीको प्रयोग गर्दै छन्‌। अनुप्रयोगहरूले अत्यन्त धेरै ब्याट्रीको प्रयोग गरेको खण्डमा तपाईंको यन्त्रले कारबाहीको सुझाव दिन्छ। \n\nतपाईंको ब्याट्री कम हुँदै गएको छ भने तपाईंले सधैँ ब्याट्री सेभर सक्रिय पार्न सक्नुहुन्छ।"</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"ब्याट्री प्रबन्धक"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"अनुप्रयोगहरूलाई स्वतः व्यवस्थित गर्नुहोस्"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"तपाईंले प्रायः प्रयोग नगर्ने अनुप्रयोगहरूमा ब्याट्री सीमित गर्नुहोस्"</string>
@@ -2470,7 +2477,7 @@
     <string name="device_admin_warning" msgid="7482834776510188134">"यस प्रशासक अनुप्रयोगलाई सक्रिय गर्नुले अनुप्रयोग <xliff:g id="APP_NAME">%1$s</xliff:g> लाई निम्न कार्यहरू गर्न दिनेछ:"</string>
     <string name="device_admin_status" msgid="7234814785374977990">"यो प्रशासक सक्रिय छ र अनुप्रयोग <xliff:g id="APP_NAME">%1$s</xliff:g> लाई  निम्न कार्यहरू गर्न दिन्छ:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"प्रोफाइल प्रबन्धक सक्रिय गर्नुहुन्छ?"</string>
-    <string name="adding_profile_owner_warning" msgid="1354474524852805802">"अगाडि बढेर, तपाईंको प्रयोगकर्तालाई तपाईंको प्रशासकले व्यवस्थित गर्नेछ, जसले तपाईंको व्यक्तिगत डेटाका साथै सम्बन्धित डेटा समेत भण्डारण गर्न सक्छ।\n\nतपाईंको प्रशासकसँग यो प्रयोगकर्तासँग सम्बन्धित सेटिङ, पहुँच, अनुप्रयोग, र डेटाका साथै नेटवर्क गतिविधि र तपाईंको यन्त्रका स्थान सम्बन्धी जानकारीहरूको अनुगमन र व्यवस्थापन गर्ने क्षमता छ।"</string>
+    <string name="adding_profile_owner_warning" msgid="1354474524852805802">"अगाडि बढेर, तपाईंको प्रयोगकर्तालाई तपाईंको प्रशासकले व्यवस्थित गर्ने छ, जसले तपाईंको व्यक्तिगत डेटाका साथै सम्बन्धित डेटा समेत भण्डारण गर्न सक्छ।\n\nतपाईंको प्रशासकसँग यो प्रयोगकर्तासँग सम्बन्धित सेटिङ, पहुँच, अनुप्रयोग, र डेटाका साथै नेटवर्क गतिविधि र तपाईंको यन्त्रका स्थान सम्बन्धी जानकारीहरूको अनुगमन र व्यवस्थापन गर्ने क्षमता छ।"</string>
     <string name="admin_disabled_other_options" msgid="7712694507069054530">"अन्य विकल्पहरूलाई तपाईंको प्रशासकले असक्षम पार्नुभएको छ"</string>
     <string name="admin_more_details" msgid="7901420667346456102">"थप विवरणहरू"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"सामान्य"</string>
@@ -2553,8 +2560,8 @@
     <string name="remove_account_failed" msgid="3901397272647112455">"यसलाई परिवर्तन गर्न तपाईंको प्रशासकले अनुमति दिँदैन"</string>
     <string name="cant_sync_dialog_title" msgid="2777238588398046285">"आफैँ सिंक गर्न सकेन।"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"हालका लागि यस वस्तुको सिंक असक्षम पारिएको छ। यस सेटिङलाई परिवर्तन गर्न अस्थायी रूपमा पृष्ठभूमि डेटा र स्वचालित सिंक सक्रिय पार्नुहोस्।"</string>
-    <string name="enter_password" msgid="8035706727471334122">"Android सुरु गर्न, आफ्नो पासवर्ड प्रविष्ट गर्नुहोस्"</string>
-    <string name="enter_pin" msgid="5305333588093263790">"Android सुरु गर्न, आफ्नो पिन प्रविष्ट गर्नुहोस्"</string>
+    <string name="enter_password" msgid="8035706727471334122">"Android सुरु गर्न, आफ्नो पासवर्ड प्रविष्टि गर्नुहोस्"</string>
+    <string name="enter_pin" msgid="5305333588093263790">"Android सुरु गर्न, आफ्नो पिन प्रविष्टि गर्नुहोस्"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Android सुरु गर्न, आफ्नो ढाँचा कोर्नुहोस्"</string>
     <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"गलत ढाँचा"</string>
     <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"गलत पासवर्ड"</string>
@@ -2912,7 +2919,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"खाली SIM"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM नाम"</string>
-    <string name="sim_name_hint" msgid="7038643345238968930">"SIM नाम प्रविष्ट गर्नुहोस्"</string>
+    <string name="sim_name_hint" msgid="7038643345238968930">"SIM नाम प्रविष्टि गर्नुहोस्"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"SIM स्लट %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"वाहक"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"संख्या"</string>
@@ -3398,7 +3405,7 @@
     <string name="notification_app_settings_button" msgid="6685640230371477485">"सूचना सेटिङहरू"</string>
     <string name="suggestion_button_text" msgid="3275010948381252006">"ठिक छ"</string>
     <string name="device_feedback" msgid="3238056036766293294">"उपकरण बारेमा प्रतिक्रिया पठाउनुहोस्"</string>
-    <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"प्रशासकको PIN प्रविष्ट गर्नुहोस्"</string>
+    <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"प्रशासकको PIN प्रविष्टि गर्नुहोस्"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"सक्रिय"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"निष्क्रिय"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"पर्दा पिन गर्दै"</string>
@@ -3887,9 +3894,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"कुनै पनि होइन"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"वर्गीकरण सम्बन्धी वस्तु उपलब्ध छैन।"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"वर्गीकरण सम्बन्धी वस्तुमा यो साँचो छैन।"</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"कटआउटसहितको सिमुलेट प्रदर्शन गर्नुहोस्"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"प्रदर्शनसम्बन्धी कटआउट"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"प्रदर्शनसम्बन्धी कटआउट, नच"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"कुनै पनि होइन"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"पूर्वनिर्धारित यन्त्र"</string>
     <string name="special_access" msgid="3458780842491881155">"विशेष अनुप्रयोगको पहुँच"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> अनुप्रयोगले असीमित डेटा प्रयोग गर्न सक्छन्</item>
@@ -4134,6 +4141,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"कलहरूको बेला अनुपलब्ध"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"अनुपलब्ध"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"यसमार्फत फोन उठाउनुहोस्"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"यो APN परिवर्तन गर्न सकिँदैन।"</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"ट्याब्लेटको ब्याट्रीको आयुमा सुधार गर्नुहोस्"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"यन्त्रको ब्याट्रीको आयुमा सुधार गर्नुहोस्"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"फोनको ब्याट्रीको आयुमा सुधार गर्नुहोस्"</string>
@@ -4150,5 +4158,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"नेटवर्कसम्बन्धी विवरणहरू"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"तपाईंको फोनमा रहेका अनुप्रयोगहरूले तपाईंको यन्त्रको नाम देख्न सक्छन्। तपाईंले ब्लुटुथ यन्त्रहरूमा जडान गर्दा वा कुनै Wi-Fi हटस्पट सेटअप गर्दा अरू मान्छेहरू पनि यसलाई देख्न सक्छन्।"</string>
     <string name="devices_title" msgid="7701726109334110391">"यन्त्रहरू"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"पूर्वनिर्धारित"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"महत्त्वपूर्ण जानकारी"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"जारी राख्नुहोस्"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"पर्दैन, धन्यवाद"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"स्थान"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"तपाईंका सेवा प्रदायकले यो सेवा प्रदान गर्नका लागि तपाईंको स्थानसम्बन्धी जानकारी सङ्कलन गर्ने छ।\n\nकृपया आफ्ना सेवा प्रदायकको गोपनीयता नीतिको समीक्षा गर्नुहोस्।"</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"आपताकालीन कल"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"तपाईंको सेवा प्रदायकले Wi‑Fi मार्फत आपतकालीन कल गर्ने सुविधा समर्थन गदैन। \nअपतकालीन कल गर्नका लागि उक्त यन्त्रले स्वतः सेलुलर नेटवर्क प्रयोग गर्छ।\n सेलुलर नेटवर्कको कभरेज राम्रो भएका क्षेत्रमा मात्र अपतकालीन कल गर्न सम्भव हुन्छ।"</string>
 </resources>

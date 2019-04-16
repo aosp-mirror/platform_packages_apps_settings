@@ -41,7 +41,7 @@
     <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
     <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
@@ -348,7 +348,7 @@
                   android:clearTaskOnLaunch="true"
                   android:excludeFromRecents="true"
                   android:exported="true"
-                  android:permission="android.permission.CONNECTIVITY_INTERNAL"
+                  android:permission="android.permission.NETWORK_STACK"
                   android:taskAffinity=""
                   android:theme="@*android:style/Theme.DeviceDefault.Light.Dialog.Alert">
             <intent-filter>
@@ -436,7 +436,7 @@
             android:exported="true"
             android:permission="android.permission.TETHER_PRIVILEGED" />
 
-        <activity android:name="TetherProvisioningActivity"
+        <activity android:name=".network.TetherProvisioningActivity"
             android:exported="true"
             android:permission="android.permission.TETHER_PRIVILEGED"
             android:excludeFromRecents="true"
@@ -727,7 +727,6 @@
             android:label="@string/zen_mode_settings_title"
             android:icon="@drawable/ic_notifications"
             android:exported="true"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_SETTINGS" />
@@ -929,7 +928,6 @@
             android:label="@string/night_display_title"
             android:enabled="@*android:bool/config_nightDisplayAvailable"
             android:icon="@drawable/ic_settings_night_display"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -997,7 +995,7 @@
 
         <activity android:name=".Settings$MyDeviceInfoActivity"
                   android:label="@string/about_settings"
-                  android:icon="@drawable/ic_settings_about"
+                  android:icon="@drawable/ic_homepage_about"
                   android:taskAffinity="com.android.settings"
                   android:parentActivityName="Settings">
             <intent-filter android:priority="1">
@@ -1010,11 +1008,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="270">
+            <intent-filter android:priority="-2">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
+                       android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.title"
                        android:resource="@string/about_settings" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2615,7 +2613,6 @@
         <activity
             android:name="Settings$ZenAccessSettingsActivity"
             android:label="@string/manage_zen_access_title"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS" />
@@ -2815,7 +2812,7 @@
 
         <receiver android:name=".sim.SimSelectNotification">
             <intent-filter>
-                <action android:name="android.intent.action.SIM_STATE_CHANGED"></action>
+                <action android:name="android.telephony.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
             </intent-filter>
         </receiver>
 
@@ -3171,7 +3168,7 @@
                   android:icon="@drawable/ic_homepage_support"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Panel"
                   android:enabled="@bool/config_support_enabled">
-            <intent-filter android:priority="-2">
+            <intent-filter android:priority="-3">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <intent-filter>
@@ -3344,6 +3341,17 @@
         <service android:name=".fuelgauge.batterytip.AnomalyDetectionJobService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 
+        <activity
+            android:name="Settings$WifiCallingDisclaimerActivity"
+            android:label="@string/wifi_calling_settings_title"
+            android:taskAffinity="com.android.settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.calling.WifiCallingDisclaimerFragment" />
+        </activity>
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

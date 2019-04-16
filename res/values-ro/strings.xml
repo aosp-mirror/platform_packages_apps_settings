@@ -212,6 +212,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Portul introdus nu este valid."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Proxy-ul HTTP este utilizat de browser, dar nu poate fi utilizat de alte aplicații."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"Adresă URL fișier PAC: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"SubId curent:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"SubId pentru SIM-ul de date prestabilit:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Lățime de bandă de descărcare (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Lățime de bandă de încărcare (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Informații despre localizarea celulei (învechite):"</string>
@@ -234,6 +236,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Selectați banda radio"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Tipul rețelei de voce:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Tipul rețelei de date:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Selectați indexul telefonului"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Setați tipul preferat de rețea:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Dați ping adresei IPv4 a numelui de gazdă (www.google.com):"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Dați ping adresei IPv6 a numelui de gazdă (www.google.com):"</string>
@@ -343,13 +346,9 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Selectați un fus orar"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Dată"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Setați data"</string>
-    <string name="date_time_search_region" msgid="2478334699004021972">"Regiune de căutare"</string>
+    <string name="date_time_search_region" msgid="2478334699004021972">"Căutați regiune"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Regiune"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Fus orar"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"Fusuri orare în <xliff:g id="REGION">%1$s</xliff:g>"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Selectați decalajul față de UTC"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Sortați în ordine alfabetică"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sortați după fusul orar"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> începe pe <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -795,7 +794,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"Nu utilizați o rețea Wi-Fi, cu excepția cazului în care aceasta are o bună conexiune la internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="1644292503152790501">"Utilizați numai rețelele care au conexiune bună la internet"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Conectează-te la rețele deschise"</string>
-    <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Conectați-vă automat la rețele publice de înaltă calitate"</string>
+    <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Se conectează automat la rețele publice de înaltă calitate"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Pentru a folosi funcția, selectați un furnizor de evaluări ale rețelei"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Pentru a folosi funcția, selectați un furnizor de evaluări ale rețelei compatibil"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalați certificate"</string>
@@ -893,6 +892,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> vă solicită conectarea la cont înainte de a vă conecta la rețea."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"CONECTAȚI"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Această rețea nu are acces la internet. Mențineți conexiunea?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Unele aplicații și servicii pot să nu funcționeze din cauza conectivității limitate. Folosiți oricum?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Nu mai întreba pentru această rețea"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Rețeaua Wi-Fi nu este conectată la internet"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Puteți comuta la rețeaua mobilă ori de câte ori conexiunea Wi-Fi este slabă. Este posibil să se aplice taxe pentru utilizarea datelor."</string>
@@ -979,15 +979,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Activați apelarea prin Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Activați apelarea prin Wi-Fi pentru acoperire mai mare"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Preferință pentru apelare"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Modul Apelare prin Wi-Fi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Preferință pentru apelare"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Preferințe privind roamingul"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Preferințe privind roamingul"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Se preferă conexiunea Wi-Fi"</item>
-    <item msgid="1335127656328817518">"Se preferă datele mobile"</item>
-    <item msgid="3132912693346866895">"Numai Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -1000,8 +1000,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Se preferă conexiunea Wi-Fi"</item>
-    <item msgid="5074515506087318555">"Se preferă datele mobile"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1011,7 +1011,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Când Apelarea prin Wi-Fi este activată, puteți să direcționați apelurile prin rețele Wi-Fi sau prin rețeaua operatorului, în funcție de preferință și de intensitatea mai mare a semnalului. Înainte de a activa această funcție, consultați-vă operatorul în privința taxelor și a altor detalii."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Dacă rețeaua Wi‑Fi nu este disponibilă, folosiți rețeaua mobilă"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Dacă rețeaua mobilă nu este disponibilă, folosiți Wi‑Fi"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Apelați prin Wi‑Fi. Dacă pierdeți conexiunea Wi-Fi, apelul se încheie."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Când este activată Apelarea prin Wi-Fi, telefonul poate să redirecționeze apelurile prin rețelele Wi-Fi sau prin rețeaua operatorului, în funcție de preferință și de semnalul cu cea mai mare intensitate. Înainte să activați această funcție, consultați-vă operatorul în privința taxelor și altor detalii.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Adresă de urgență"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Folosită ca locație când efectuați un apel de urgență prin Wi-Fi"</string>
@@ -1187,6 +1190,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Nu se poate schimba codul PIN.\nCodul PIN poate fi incorect."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"Codul PIN pentru SIM a fost modificat"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Nu se poate modifica starea de blocare a cardului SIM.\nCodul PIN poate fi incorect."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Nu se poate dezactiva codul PIN."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Nu se poate activa codul PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Anulați"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Mai multe carduri SIM găsite"</string>
@@ -1462,7 +1467,7 @@
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Resetarea setărilor APN prestabilite a fost finalizată."</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"Opțiuni de resetare"</string>
     <string name="reset_dashboard_summary" msgid="4851012632493522755">"Rețeaua, aplicațiile sau dispozitivul pot fi resetate"</string>
-    <string name="reset_network_title" msgid="6166025966016873843">"Resetați conexiunea Wi-Fi, conexiunea mobilă și prin Bluetooth"</string>
+    <string name="reset_network_title" msgid="6166025966016873843">"Resetați Wi-Fi, date mobile și Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Astfel, toate setările pentru rețea vor fi reinițializate, inclusiv:\n\n"<li>"Wi‑Fi,"</li>\n<li>"date mobile,"</li>\n<li>"Bluetooth."</li></string>
     <string name="reset_esim_title" msgid="2419812515540592802">"Resetați și cardul eSIM"</string>
     <string name="reset_esim_desc" msgid="6412324670559060446">"Ștergeți toate cardurile eSIM de pe telefon. Va trebui să contactați operatorul pentru a descărca din nou cardurile eSIM. Prin această acțiune nu vă veți anula planul de servicii mobile."</string>
@@ -1472,8 +1477,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Resetați?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Resetarea rețelei nu este disponibilă pentru acest utilizator"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Setările pentru rețea au fost reinițializate"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"Cardurile eSIM nu se pot reseta"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"Cardurile eSIM nu pot fi resetate din cauza unei erori."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Ștergeți toate datele (reveniți la setările din fabrică)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Ștergeți toate datele (reveniți la setările din fabrică)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Această acțiune va șterge toate datele din "<b>"stocarea internă"</b>" a tabletei dvs., inclusiv:\n\n"<li>"Contul dvs. Google;"</li>\n<li>"datele și setările sistemului și ale aplicațiilor;"</li>\n<li>"aplicațiile descărcate;"</li></string>
@@ -1988,10 +1995,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utilizați subtitrările"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Aparate auditive"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nu s-a conectat niciun aparat auditiv"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Adăugați un aparat auditiv"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Adăugați aparate auditive"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Pentru a asocia aparatele auditive, găsiți și atingeți dispozitivul pe ecranul următor."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Asigurați-vă că aparatele auditive sunt în modul de asociere."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> activ momentan"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> este activ"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="few"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> aparate auditive salvate</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> de aparate auditive salvate</item>
@@ -2668,7 +2675,7 @@
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Dacă restricționați datele mobile de fundal, unele aplicații și servicii nu vor funcționa decât dacă sunteți conectat(ă) la Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Dacă restricționați datele mobile de fundal, unele aplicații și servicii nu vor funcționa decât dacă sunteți conectat(ă) la Wi-Fi\n\nAceastă setare afectează toți utilizatorii de pe această tabletă."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"Dacă restricționați datele mobile de fundal, unele aplicații și servicii nu vor funcționa decât dacă sunteți conectat(ă) la Wi-Fi.\n\nAceastă setare afectează toți utilizatorii de pe acest telefon."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"avertisment"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"alertă"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limită"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Aplicații eliminate"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Aplicații și utilizatori eliminați"</string>
@@ -2697,7 +2704,7 @@
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"Certificat de utilizator IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"Certificat CA IPSec"</string>
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"Certificat de server IPSec"</string>
-    <string name="vpn_show_options" msgid="7182688955890457003">"Afișați opțiunile avansate"</string>
+    <string name="vpn_show_options" msgid="7182688955890457003">"Afișează opțiunile avansate"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"Domenii de căutare DNS"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"Serverele DNS (de ex., 8.8.8.8)"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"Rute de redirecționare (ex.: 10.0.0.0/8)"</string>
@@ -2707,7 +2714,7 @@
     <string name="vpn_not_used" msgid="9094191054524660891">"(neutilizat)"</string>
     <string name="vpn_no_ca_cert" msgid="8776029412793353361">"(nu verificați serverul)"</string>
     <string name="vpn_no_server_cert" msgid="2167487440231913330">"(primit de la server)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Acest tip de rețea VPN nu poate rămâne conectată permanent"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="7574518311224455825">"Această rețea VPN nu poate fi conectată permanent"</string>
     <string name="vpn_always_on_invalid_reason_server" msgid="477304620899799383">"Rețelele VPN activate permanent acceptă doar adrese de server numerice"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="2226648961940273294">"Trebuie specificat un server DNS pentru rețelele VPN activate permanent"</string>
     <string name="vpn_always_on_invalid_reason_dns" msgid="3551394495620249972">"Adresele serverului DNS trebuie să fie numerice pentru rețelele VPN activate permanent"</string>
@@ -3284,7 +3291,7 @@
     <string name="no_vr_listeners" msgid="2689382881717507390">"Nicio aplicație instalată nu a solicitat să fie rulată ca un serviciu de ajutor pentru RV."</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Permiteți accesul la serviciul RV pentru <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> va putea rula când folosiți aplicațiile în modul de realitate virtuală."</string>
-    <string name="display_vr_pref_title" msgid="8104485269504335481">"Când dispozitivul este în modul RV"</string>
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"Când dispozitivul este în RV"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Reduceți estomparea (recomandat)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Reduceți pâlpâirea"</string>
     <string name="picture_in_picture_title" msgid="5824849294270017113">"Picture-in-picture"</string>
@@ -3544,7 +3551,7 @@
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Atingeți de două ori oriunde pe ecran pentru a activa dispozitivul"</string>
     <string name="domain_urls_title" msgid="3132983644568821250">"Deschiderea linkurilor"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Nu deschide linkurile acceptate"</string>
-    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Deschid „<xliff:g id="DOMAIN">%s</xliff:g>”"</string>
+    <string name="domain_urls_summary_one" msgid="3704934031930978405">"Deschide „<xliff:g id="DOMAIN">%s</xliff:g>”"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"Deschide <xliff:g id="DOMAIN">%s</xliff:g> și alte adrese URL"</string>
     <string name="domain_urls_apps_summary_off" msgid="1833056772600031220">"Nicio aplicație care deschide linkurile acceptate"</string>
     <plurals name="domain_urls_apps_summary_on" formatted="false" msgid="240214361240709399">
@@ -3565,7 +3572,7 @@
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"Sunt de acord"</string>
     <string name="assistant_security_warning_disagree" msgid="877419950830205913">"Nu sunt de acord"</string>
     <string name="choose_voice_input_title" msgid="975471367067718019">"Alegeți intrarea vocală"</string>
-    <string name="default_browser_title" msgid="8101772675085814670">"Browser"</string>
+    <string name="default_browser_title" msgid="8101772675085814670">"Aplicația browser"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Niciun browser prestabilit"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Aplicația Telefon"</string>
     <string name="default_app" msgid="6864503001385843060">"(Prestabilită)"</string>
@@ -3755,7 +3762,7 @@
     <string name="notification_summary_none" msgid="4586376436702610">"Activat pentru toate aplicațiile"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> aplicații instalate"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 de aplicații instalate"</string>
-    <string name="storage_summary" msgid="3801281635351732202">"S-au folosit <xliff:g id="PERCENTAGE">%1$s</xliff:g> - <xliff:g id="FREE_SPACE">%2$s</xliff:g> liber"</string>
+    <string name="storage_summary" msgid="3801281635351732202">"Spațiu folosit: <xliff:g id="PERCENTAGE">%1$s</xliff:g>; spațiu liber: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Memorie internă: <xliff:g id="PERCENTAGE">%1$s</xliff:g> folosită - <xliff:g id="FREE_SPACE">%2$s</xliff:g> liberă"</string>
     <string name="display_summary" msgid="6737806235882127328">"Se dezactivează după <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactivitate"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Imagine de fundal, inactivitate, dimensiunea fontului"</string>
@@ -3833,7 +3840,7 @@
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Aplicați actualizările când repornește dispozitivul"</string>
     <string name="usage" msgid="2977875522080448986">"Utilizare"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Utilizarea datelor mobile"</string>
-    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Date utilizate de aplicație"</string>
+    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Date utilizate de aplicații"</string>
     <string name="wifi_data_usage" msgid="771603760674507659">"Utilizarea datelor Wi-Fi"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Utilizarea datelor ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
@@ -3843,7 +3850,7 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"Date ethernet: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Avertisment pentru date: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Avertisment pentru date: <xliff:g id="ID_1">%1$s</xliff:g>/Limită pentru date: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
-    <string name="billing_cycle" msgid="6614597736285325497">"Avertisment și limită de date"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Alertă și limită de date"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Ciclu de utilizare a datelor aplicației"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"Avertisment pentru date: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="1578367585799358854">"Limită de date: <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -3862,7 +3869,7 @@
     <string name="data_warning_footnote" msgid="776341964125603711">"Avertismentul pentru date și limita de date sunt măsurate de dispozitiv, dar pot fi diferite față de datele operatorului."</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Setați limita de date"</string>
     <string name="data_limit" msgid="1885406964934590552">"Limită de date"</string>
-    <string name="data_usage_template" msgid="2923744765873163859">"S-au folosit <xliff:g id="ID_1">%1$s</xliff:g> pe <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="data_usage_template" msgid="2923744765873163859">"S-au folosit <xliff:g id="ID_1">%1$s</xliff:g> în perioada <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Configurați"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Alte aplicații incluse în utilizare"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3945,9 +3952,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"niciunul"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Obiectul clasificării lipsește."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Obiectul clasificării nu conține această cheie."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simulați un afișaj cu o decupare"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Decupajul ecranului"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"decupare ecran"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Niciuna"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Prestabilit pentru dispozitiv"</string>
     <string name="special_access" msgid="3458780842491881155">"Acces special aplicații"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplicații pot folosi date nerestricționate</item>
@@ -4203,6 +4210,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Indisponibil în timpul apelurilor"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Indisponibil"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Preluați apelul pe"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Acest APN nu poate fi modificat."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Îmbunătățiți autonomia bateriei tabletei"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Îmbunătățiți autonomia bateriei dispozitivului"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Îmbunătățiți autonomia bateriei telefonului"</string>
@@ -4219,5 +4227,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Detalii despre rețea"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Numele dispozitivului este vizibil aplicațiilor de pe telefon. Poate fi văzut și de alte persoane când vă conectați la dispozitivele Bluetooth sau configurați un hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Dispozitive"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Prestabilită"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Informații importante"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"CONTINUAȚI"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"NU, MULȚUMESC"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Locație"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Furnizorul de servicii poate colecta informațiile cu privire la locație pentru a oferi acest serviciu.\n\nConsultați politica de confidențialitate a furnizorului de servicii."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Apeluri de urgență"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Apelurile de urgență prin Apelare prin Wi-Fi nu sunt acceptate de operator.\nDispozitivul comută automat la o rețea mobilă pentru a face un apel de urgență.\nApelurile de urgență sunt posibile numai în zonele cu acoperire a rețelelor de telefonie mobilă."</string>
 </resources>

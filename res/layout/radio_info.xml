@@ -25,6 +25,19 @@
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true">
 
+        <!-- Phone index -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_index_label"
+                style="@style/info_label"
+                />
+
+        <Spinner android:id="@+id/phoneIndex"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                />
+
         <!-- IMEI -->
         <LinearLayout style="@style/entry_layout">
             <TextView android:text="@string/radio_info_imei_label" style="@style/info_label" />
@@ -35,6 +48,18 @@
         <LinearLayout style="@style/entry_layout">
             <TextView android:text="@string/radio_info_phone_number_label" style="@style/info_label" />
             <TextView android:id="@+id/number" style="@style/info_value" />
+        </LinearLayout>
+
+        <!-- Subscription ID -->
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/radio_info_subid" style="@style/info_label" />
+            <TextView android:id="@+id/subid" style="@style/info_value" />
+        </LinearLayout>
+
+        <!-- Default data subscription -->
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/radio_info_dds" style="@style/info_label" />
+            <TextView android:id="@+id/dds" style="@style/info_value" />
         </LinearLayout>
 
         <!-- IMSI -->

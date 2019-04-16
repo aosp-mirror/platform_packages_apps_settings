@@ -939,6 +939,14 @@
         <item>IPSec VPN with certificates and hybrid authentication</item>
     </string-array>
 
+    <!-- VPN proxy settings. -->
+    <string-array name="vpn_proxy_settings">
+        <!-- No HTTP proxy is used for the current VPN [CHAR LIMIT=25] -->
+        <item>None</item>
+        <!-- Manual HTTP proxy settings are used for the current VPN [CHAR LIMIT=25] -->
+        <item>Manual</item>
+    </string-array>
+
     <!-- Match this with the constants in LegacyVpnInfo. --> <skip />
     <!-- Status for a VPN network. [CHAR LIMIT=100] -->
     <string-array name="vpn_states">
@@ -1155,6 +1163,19 @@
         <item>1</item>
         <item>2</item>
         <item>0</item>
+    </string-array>
+
+    <!-- WiFi calling mode array -->
+    <string-array name="wifi_calling_mode_summaries" translatable="false">
+         <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
+         <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
+         <item>@string/wifi_calling_mode_wifi_only_summary</item>
+    </string-array>
+
+    <!-- WiFi calling mode array without wifi only mode -->
+    <string-array name="wifi_calling_mode_summaries_without_wifi_only" translatable="false">
+         <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
+         <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
     </string-array>
 
 </resources>

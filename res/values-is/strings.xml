@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Gáttin sem þú gafst upp er ekki gild."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Proxy-þjónn fyrir HTTP er notaður af vafranum en ekki er víst að önnur forrit noti hann."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC-slóð: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Núverandi undirauðkenni:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Undirauðkenni sjálfgefins SIM-korts fyrir gögn:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Niðurhalsbandvídd (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Upphleðslubandvídd (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Staðsetningarupplýsingar loftneta (úrelt):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Velja útvarpstíðni"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Netkerfi raddþjónustu:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Tegund gagnanets:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Velja atriðaskrá síma"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Veldu kjörsímkerfi:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping Hostname(www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping Hostname(www.google.com) IPv6:"</string>
@@ -343,11 +346,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Stilla dagsetningu"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Leita að svæði"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Svæði"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Tímabelti"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"Tímabelti í/á <xliff:g id="REGION">%1$s</xliff:g>"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Velja tímamun frá UTC"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Raða í stafrófsröð"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Raða eftir tímabelti"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> hefst þann <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -882,6 +881,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> krefst þess að þú skráir þig inn á netinu áður en þú tengist þessu netkerfi."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"TENGJA"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Enginn internetaðgangur er á þessu neti. Viltu halda tengingu?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Sum forrit og þjónusta virkar hugsanlega ekki vegna takmarkaðrar tengingar. Nota samt?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Ekki spyrja aftur fyrir þetta net"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi-Fi er ekki tengt internetinu"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Þú getur skipt yfir í farsímakerfi þegar Wi-Fi-tenging er léleg. Gjöld kunna að verða tekin fyrir gagnanotkun."</string>
@@ -967,15 +967,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Fáðu aukið símasamband með Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Kveiktu á Wi-Fi símtölum til að fá aukið símasamband"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Forgangur símtala"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi símtöl"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Forgangur símtala"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Stillingar fyrir reiki"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Stillingar fyrir reiki"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Wi-Fi í forgangi"</item>
-    <item msgid="1335127656328817518">"Farsímakerfi í forgangi"</item>
-    <item msgid="3132912693346866895">"Wi-Fi eingöngu"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -988,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Wi-Fi í forgangi"</item>
-    <item msgid="5074515506087318555">"Farsímakerfi í forgangi"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -999,7 +999,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Þegar kveikt er á Wi-Fi símtölum getur síminn beint símtölum um Wi-Fi net eða kerfi símafyrirtækisins, eftir því hvað þú velur og hvor tengingin er betri. Kannaðu verðskrá og aðrar upplýsingar hjá símafyrirtækinu þínu áður en þú kveikir á þessu."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Nota farsímakerfi ef ekki er hægt að nota Wi‑Fi"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Ef farsímakerfi er ekki tiltækt skaltu nota Wi-Fi"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Hringja í gegnum Wi-Fi. Ef Wi-Fi tenging slitnar lýkur símtalinu."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Þegar kveikt er á Wi-Fi símtölum getur síminn beint símtölum um Wi-Fi net eða kerfi símafyrirtækisins, eftir því hvað þú velur og hvor tengingin er betri. Kannaðu verðskrá og aðrar upplýsingar hjá símafyrirtækinu þínu áður en þú kveikir á þessu.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Neyðarheimilisfang"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Notað sem staðsetningin þín þegar þú hringir neyðarsímtöl í gegnum Wi-Fi"</string>
@@ -1175,6 +1178,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Ekki er hægt að breyta PIN-númerinu.\nPIN-númerið er hugsanlega rangt."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN-númeri SIM-korts var breytt"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Ekki er hægt að breyta stöðu SIM-kortaláss.\nPIN-númerið er hugsanlega rangt."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Ekki er hægt að óvirkja PIN."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Ekki er hægt að virkja PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Í lagi"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Hætta við"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Mörg SIM-kort fundust"</string>
@@ -1459,8 +1464,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Endurstilla?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Núllstilling nets er ekki í boði fyrir þennan notanda"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Netstillingar voru endurstilltar"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"Ekki er hægt að endurstilla eSIM-kort"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"Villa kom í veg fyrir endurstillingu eSIM-kortanna."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Eyða öllum gögnum (núllstilla)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Eyða öllum gögnum (núllstilla)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Þessi aðgerð eyðir öllum gögnum úr "<b>"innbyggðri geymslu"</b>" spjaldtölvunnar, þar á meðal:\n\n"<li>"Google reikningnum þínum"</li>\n<li>"Gögnum og stillingum forrita og kerfis"</li>\n<li>"Forritum sem hafa verið sótt"</li></string>
@@ -1974,10 +1981,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Nota skjátexta"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Heyrnartæki"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Engin heyrnartæki eru tengd"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Bæta við heyrnartæki"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Bæta við heyrnartækjum"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Til að para heyrnartækin þín skaltu finna tækið og síðan ýta á það á næsta skjá."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Gakktu úr skugga um að heyrnartækin þín séu stillt á pörunarstillingu."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er virkt núna"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> virkt"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> vistað heyrnartæki</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> vistuð heyrnartæki</item>
@@ -3887,9 +3894,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ekkert"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Uppröðunarhlut vantar."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Uppröðunarhlutur inniheldur ekki þennan lykil."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Líkja eftir skjá með skurði"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Skjáskurður"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"úrklippa af skjá, hak"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Slökkt"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Sjálfgefin stilling tækis"</string>
     <string name="special_access" msgid="3458780842491881155">"Sérstakur forritaaðgangur"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> forrit getur notað ótakmörkuð gögn</item>
@@ -4134,11 +4141,12 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Ekki í boði á meðan símtal er í gangi"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Ekki í boði"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Taka við símtali í"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Ekki er hægt að breyta þessum aðgangsstað."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Auktu rafhlöðuendingu spjaldtölvunnar"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Auktu rafhlöðuendingu tækisins"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Auktu rafhlöðuendingu símans"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Koma í veg fyrir hringingar"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Hindra hringingar"</string>
     <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Ýttu á aflrofann og hljóðstyrk upp á sama tíma"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Flýtileið til að koma í veg fyrir hringingu"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Titringur"</string>
@@ -4150,5 +4158,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Upplýsingar um net"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Heiti tækisins þíns er sýnilegt forritum í símanum. Heiti þess er hugsanlega einnig sýnilegt öðru fólki þegar þú tengist Bluetooth-tækjum eða setur upp heitan Wi-Fi reit."</string>
     <string name="devices_title" msgid="7701726109334110391">"Tæki"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Sjálfgefið"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Mikilvægar upplýsingar"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"HALDA ÁFRAM"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"NEI, TAKK"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Staður"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Þjónustuaðili þinn kann að safna staðsetningu þinni til að veita þér þessa þjónustu.\n\nSkoðaðu persónuverndarstefnu þjónustuaðilans."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Neyðarsímtöl"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Símafyrirtækið þitt styður ekki neyðarsímtöl í gegnum Wi-Fi.\nTækið skiptir sjálfkrafa yfir í farsímakerfi til að hringja neyðarsímtal.\nAðeins er hægt að hringja neyðarsímtöl á svæðum sem eru með farsímasamband."</string>
 </resources>

@@ -182,11 +182,11 @@
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="2382443064737856652">"Скасувати"</string>
     <string name="connected_device_available_media_title" msgid="2560067541413280645">"Доступні носії"</string>
     <string name="connected_device_available_call_title" msgid="697154660967595684">"Доступні пристрої для дзвінків"</string>
-    <string name="connected_device_connected_title" msgid="5871712271201945606">"Під’єднані пристрої"</string>
+    <string name="connected_device_connected_title" msgid="5871712271201945606">"Поточні підключення"</string>
     <string name="connected_device_saved_title" msgid="688364359746674536">"Збережені пристрої"</string>
     <string name="connected_device_add_device_title" msgid="7803521577708810621">"Додати пристрій"</string>
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"Bluetooth увімкнеться, щоб створити пару"</string>
-    <string name="connected_device_connections_title" msgid="5988939345181466770">"Параметри підключення"</string>
+    <string name="connected_device_connections_title" msgid="5988939345181466770">"Параметри підключень"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Підключені раніше пристрої"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Дата й час"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Вибрати часовий пояс"</string>
@@ -213,6 +213,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Введений порт не дійсний."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Проксі-сервер HTTP використовується веб-переглядачем і не може використовуватися іншими додатками."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"URL-адреса PAC: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Поточний субідентифікатор:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Субідентифікатор SIM-карти для даних за умовчанням:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Пропускна спроможність DL (Кб/с):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Пропускна спроможність UL (Кб/с):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Геодані телефона (більше не підтримується):"</string>
@@ -235,6 +237,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Виберіть радіодіапазон"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Тип мережі голосових дзвінків:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Тип мережі передавання даних:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Виберіть телефонний код"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Установити потрібний тип мережі:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Надіслати запит ping на ім’я хосту (www.google.com) через IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Надіслати запит на ім’я хосту (www.google.com) через IPv6:"</string>
@@ -347,11 +350,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Дата"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Регіон пошуку"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Регіон"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Часовий пояс"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"<xliff:g id="REGION">%1$s</xliff:g> – часові пояси"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Виберіть зміщення від UTC"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Сортувати за алфавітом"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Сортувати за часовим поясом"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> починається <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -360,7 +359,7 @@
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Літній час"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Стандартний час"</string>
     <string name="zone_menu_by_region" msgid="8370437123807764346">"Вибрати за регіоном"</string>
-    <string name="zone_menu_by_offset" msgid="7161573994228041794">"Вибрати за зміщенням від UTC"</string>
+    <string name="zone_menu_by_offset" msgid="7161573994228041794">"За зміщенням від UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Час"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Автоматичне блокування"</string>
@@ -904,6 +903,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g>: щоб під‘єднатися до мережі, увійдіть у точку доступу онлайн."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ПІД’ЄДНАТИСЯ"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Ця мережа не має доступу до Інтернету. Не від’єднуватись?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Деякі додатки й сервіси можуть не працювати через обмежене з’єднання. Усе одно використати?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Не запитувати знову для цієї мережі"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Мережу Wi-Fi не під’єднано до Інтернету"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Коли у вас погане з’єднання Wi-Fi, ви можете перейти на мобільну мережу. Може стягуватися плата за використання трафіку."</string>
@@ -991,15 +991,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Розширте покриття за допомогою Wi-Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Увімкніть дзвінки через Wi-Fi, щоб розширити покриття"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Режим дзвінків"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Режим дзвінків через Wi-Fi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Режим викликів"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Параметри роумінгу"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Параметри роумінгу"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Пріоритет Wi-Fi"</item>
-    <item msgid="1335127656328817518">"Пріоритет мобільної мережі"</item>
-    <item msgid="3132912693346866895">"Лише Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -1012,8 +1012,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Пріоритет Wi-Fi"</item>
-    <item msgid="5074515506087318555">"Пріоритет мобільної мережі"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1023,7 +1023,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Якщо ввімкнути Wi-Fi, ваш телефон зможе спрямовувати дзвінки через мережі Wi-Fi або мережу вашого оператора, залежно від вибраних налаштувань і потужності сигналу мережі. Перш ніж увімкнути цю функцію, уточніть в оператора, скільки коштує ця послуга, та інші деталі."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Використовувати мобільну мережу, коли немає Wi-Fi"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Використовувати Wi-Fi, якщо немає мобільної мережі"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Телефонувати через Wi-Fi. У разі втрати з’єднання з Wi-Fi виклик буде завершено."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Якщо ввімкнути Дзвінки через Wi-Fi, ваш телефон зможе спрямовувати дзвінки через мережі Wi-Fi або мережу оператора, залежно від налаштувань і потужності сигналу. Перш ніж увімкнути цю функцію, уточніть в оператора вартість послуги й інші деталі.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Екстрена адреса"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Використовується як адреса, коли ви телефонуєте в екстрені служби через Wi-Fi"</string>
@@ -1087,9 +1090,9 @@
     <string name="display_settings" msgid="7965901687241669598">"Екран"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Автообертання екрана"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"Кольори"</string>
-    <string name="color_mode_option_natural" msgid="5013837483986772758">"Природний"</string>
-    <string name="color_mode_option_boosted" msgid="8588223970257287524">"Насичений"</string>
-    <string name="color_mode_option_saturated" msgid="4569683960058798843">"Яскравий"</string>
+    <string name="color_mode_option_natural" msgid="5013837483986772758">"Природні"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"Яскраві"</string>
+    <string name="color_mode_option_saturated" msgid="4569683960058798843">"Насичені"</string>
     <string name="color_mode_option_automatic" msgid="7996505473528529568">"Адаптивний колір"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Використовувати лише точно відтворені кольори"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Налаштуйте яскравість і точність відтворення кольорів"</string>
@@ -1118,7 +1121,7 @@
     <string name="auto_brightness_off_summary" msgid="7629228736838155268">"Не враховувати освітлення"</string>
     <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"Підвищене використання заряду акумулятора"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Оптимізація яскравості з урахуванням освітлення. Якщо цю функцію ввімкнено, ви все одно можете тимчасово змінювати яскравість."</string>
-    <string name="auto_brightness_description" msgid="7310335517128283729">"Яскравість екрана автоматично пристосовується до середовища й ваших дій. Ви можете пересунути повзунок вручну, щоб ваш вибір зберігся в налаштуваннях адаптивної яскравості."</string>
+    <string name="auto_brightness_description" msgid="7310335517128283729">"Яскравість екрана автоматично пристосовується до середовища й ваших дій. Ви можете пересунути повзунок вручну, щоб відкоригувати яскравість за власним бажанням."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Нічний режим"</string>
     <string name="night_display_text" msgid="1837277457033025056">"У нічному режимі екран набуває бурштинового відтінку. Це знімає напруження очей при тьмяному освітленні та допомагає легше заснути."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Розклад"</string>
@@ -1173,7 +1176,7 @@
     <string name="doze_title" msgid="2375510714460456687">"Нові сповіщення"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Активувати екран, коли надходять сповіщення"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Завжди ввімкнено"</string>
-    <string name="doze_always_on_summary" msgid="6978257596231155345">"Показувати час, значки сповіщень тощо. Підвищене використання заряду акумулятора."</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Показувати час, значки сповіщень тощо. Підвищує використання заряду акумулятора."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Розмір шрифту"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Збільшуйте або зменшуйте текст"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Налаштування блокування SIM-карти"</string>
@@ -1199,6 +1202,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Неможливо змінити PIN-код.\nМожливо, неправильний PIN-код."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN SIM-карти успішно змінено"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Неможливо змінити стан блокування SIM-карти.\nМожливо, неправильний PIN-код."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Не вдається вимкнути PIN-код."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Не вдається ввімкнути PIN-код."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Скасувати"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Виявлено декілька SIM-карт"</string>
@@ -1230,7 +1235,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Версія модуля зв’язку"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Версія ядра"</string>
     <string name="build_number" msgid="3075795840572241758">"Номер складання"</string>
-    <string name="device_info_not_available" msgid="8062521887156825182">"Недоступний"</string>
+    <string name="device_info_not_available" msgid="8062521887156825182">"Невідомо"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Стан"</string>
     <string name="device_status" msgid="607405385799807324">"Стан"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Стан акумулятора, мережі та інша інформація"</string>
@@ -1485,8 +1490,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Скинути?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Цей користувач не може скидати налаштування мережі"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Налаштування мереж скинуто"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"Не вдається скинути eSIM-карти"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"Не вдається скинути eSIM-карти через помилку."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Стерти всі дані (відновити заводські налаштування)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Стерти всі дані (скинути налаштування)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Буде видалено всі дані з "<b>"внутрішньої пам’яті"</b>" вашого планшета, зокрема:\n\n"<li>"ваш обліковий запис Google"</li>\n<li>"дані й налаштування системи та додатків"</li>\n<li>"завантажені додатки"</li>"."</string>
@@ -1588,7 +1595,7 @@
     <string name="legal_information" msgid="5769301644270604095">"Правова інформація"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Співавтори"</string>
     <string name="manual" msgid="3025943393642974445">"Посібник"</string>
-    <string name="regulatory_labels" msgid="1293050314122427492">"Регулятивні мітки"</string>
+    <string name="regulatory_labels" msgid="1293050314122427492">"Сертифікації"</string>
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Посібник із безпеки та нормативних вимог"</string>
     <string name="copyright_title" msgid="865906688917260647">"Автор. право"</string>
     <string name="license_title" msgid="1990487604356037871">"Ліцензія"</string>
@@ -1845,7 +1852,7 @@
     <string name="running_processes_header_ram" msgid="996092388884426817">"<xliff:g id="RAM_0">%1$s</xliff:g> оперативної пам’яті"</string>
     <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Запущений додаток"</string>
     <string name="no_services" msgid="7133900764462288263">"Неактивні"</string>
-    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Служби"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Сервіси"</string>
     <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Процеси"</string>
     <string name="service_stop" msgid="6369807553277527248">"Зупин."</string>
     <string name="service_manage" msgid="1876642087421959194">"Налаштування"</string>
@@ -1893,7 +1900,7 @@
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Довідник із комбінацій клавіш"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Показати доступні комбінації клавіш"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"За умовчанням"</string>
-    <string name="pointer_speed" msgid="1221342330217861616">"Швидкість указівника"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"Швидкість курсора"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Ігровий контролер"</string>
     <string name="vibrate_input_devices" msgid="421936611134697943">"Переспрямувати вібросигнал"</string>
     <string name="vibrate_input_devices_summary" msgid="82093256723774584">"Надсилати вібросигнал на ігровий контролер, коли є з’єднання"</string>
@@ -1911,14 +1918,14 @@
     <string name="user_dict_settings_add_dialog_less_options" msgid="2441785268726036101">"Менше опцій"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="6225823625332416144">"OK"</string>
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"Слово:"</string>
-    <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Ярлик:"</string>
+    <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"Скорочення:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"Мова:"</string>
     <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"Введіть слово"</string>
-    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Необов’язковий ярлик"</string>
+    <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"Необов’язкове скорочення"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Редаг. слово"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Редаг."</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Видалити"</string>
-    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"У словнику користувача нічого немає. Щоб додати слово, торкніться кнопки \"Додати\" (+)."</string>
+    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"У словнику користувача нічого немає. Щоб додати слово, торкніться значка \"+\"."</string>
     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"Для всіх мов"</string>
     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"Інші мови..."</string>
     <string name="testing" msgid="6584352735303604146">"Тестування"</string>
@@ -1952,12 +1959,12 @@
     <string name="usage_time_label" msgid="295954901452833058">"Час використ."</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Спеціальні можливості"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Налаштування доступності"</string>
-    <string name="accessibility_settings_summary" msgid="981260486011624939">"Програми зчитування з екрана, екран, елементи керування взаємодією"</string>
+    <string name="accessibility_settings_summary" msgid="981260486011624939">"Читання з екрана, відображення, взаємодія"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Спеціальні можливості"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Ви можете налаштувати цей пристрій для своїх потреб. Ці спеціальні можливості можна пізніше змінити в налаштуваннях."</string>
     <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"Змінити розмір шрифту"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Програми зчитування з екрана"</string>
-    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Аудіо та текст на екрані"</string>
+    <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Аудіо й текст на екрані"</string>
     <string name="display_category_title" msgid="685461049938269166">"Дисплей"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Елементи керування взаємодією"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"Завантажені служби"</string>
@@ -1983,7 +1990,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Висококонтрастний текст"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Автоматично оновлювати збільшення"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Оновлювати збільшення екрана в інших програмах"</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Кнопка живл. закінчує виклик"</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Кнопка живлення закінчує виклик"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Великий курсор"</string>
     <string name="accessibility_disable_animations" msgid="5876035711526394795">"Вимкнути анімацію"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Монофонічне аудіо"</string>
@@ -2002,10 +2009,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Використовувати субтитри"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Слухові апарати"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Слухові апарати не під’єднано"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Додати слуховий апарат"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Додати слухові апарати"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Щоб створити пару між слуховими апаратами, знайдіть і натисніть свій пристрій на наступному екрані."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Переконайтеся, що на слухових апаратах увімкнено режим створення пари."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> активовано"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"Пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g> активовано"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="one">Збережено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слуховий апарат</item>
       <item quantity="few">Збережено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слухові апарати</item>
@@ -2161,7 +2168,7 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Використання екрана після повного заряджання"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Споживання заряду екраном"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Сканування мобільної мережі"</string>
-    <string name="power_usage_list_summary" msgid="5584049564906462506">"Використання акумулятора після повного заряджання"</string>
+    <string name="power_usage_list_summary" msgid="5584049564906462506">"Використання після повного заряджання"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Час з увімкненим екраном після повного заряджання"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Викор. пристроєм після повного заряджання"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Споживання акумулятора з часу відключення"</string>
@@ -2365,12 +2372,12 @@
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Використання після повного заряджання"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Останнє повне заряджання"</string>
     <string name="battery_full_charge_last" msgid="8892335687734288031">"Повністю зарядженого акумулятора вистачає на"</string>
-    <string name="battery_footer_summary" msgid="67169726550144016">"Дані про використання акумулятора приблизні та можуть змінюватися залежно від використання"</string>
-    <string name="battery_detail_foreground" msgid="3350401514602032183">"Поки активно використовується"</string>
+    <string name="battery_footer_summary" msgid="67169726550144016">"Дані про використання акумулятора приблизні та можуть змінюватися залежно від конкретних умов"</string>
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"Активне використання"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"У фоновому режимі"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Використання заряду"</string>
     <string name="battery_detail_info_title" msgid="8227822131405620369">"Після повного заряджання"</string>
-    <string name="battery_detail_manage_title" msgid="9094314252105828014">"Керувати використанням заряду"</string>
+    <string name="battery_detail_manage_title" msgid="9094314252105828014">"Використання заряду"</string>
     <string name="advanced_battery_graph_subtext" msgid="5621073891377915877">"Залишок заряду акумулятора визначається на основі використання пристрою"</string>
     <string name="estimated_time_left" msgid="7514194472683370877">"Залишилося приблизно"</string>
     <string name="estimated_charging_time_left" msgid="5614442409326164691">"До повного заряду"</string>
@@ -2409,7 +2416,7 @@
     <string name="process_stats_bg_ram_use" msgid="5398191511030462404">"Використання оперативної пам’яті (фонове)"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Час виконання"</string>
     <string name="processes_subtitle" msgid="6827502409379462438">"Процеси"</string>
-    <string name="services_subtitle" msgid="4296402367067266425">"Служби"</string>
+    <string name="services_subtitle" msgid="4296402367067266425">"Сервіси"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Тривалість"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"Деталі пам’яті"</string>
     <string name="menu_duration_3h" msgid="4714866438374738385">"3 години"</string>
@@ -2585,7 +2592,7 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Синхронізацію ВВІМКНЕНО"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Синхронізацію ВИМКНЕНО"</string>
     <string name="sync_error" msgid="5060969083117872149">"Помилка синхр-ції"</string>
-    <string name="last_synced" msgid="4242919465367022234">"Востаннє синхронізовано: <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
+    <string name="last_synced" msgid="4242919465367022234">"Остання синхронізація: <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
     <string name="sync_in_progress" msgid="5151314196536070569">"Синхронізація…"</string>
     <string name="settings_backup" msgid="2274732978260797031">"Налаштування резервного копіювання"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Створити резервну копію налаштувань"</string>
@@ -3015,7 +3022,7 @@
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"мобільна мережа"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"використання трафіку"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"точка доступу"</string>
-    <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Під’єднані пристрої"</string>
+    <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Підключені пристрої"</string>
     <string name="connected_devices_dashboard_summary" msgid="2665221896894251402">"Bluetooth, режим автомобіля, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="3840842725283655533">"Bluetooth, режим автомобіля"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
@@ -3108,11 +3115,11 @@
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Звук дзвінка вимкнено"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Гучність дзвінка: 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Гучність медіа"</string>
-    <string name="call_volume_option_title" msgid="1265865226974255384">"Гучність дзвінка"</string>
+    <string name="call_volume_option_title" msgid="1265865226974255384">"Гучність виклику"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Гучність будильника"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Гучність дзвінка"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Гучність сповіщень"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"Мелодія телефона"</string>
+    <string name="ringtone_title" msgid="5379026328015343686">"Сигнал дзвінка"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Стандартний сигнал сповіщень"</string>
     <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Сигнал додатків"</string>
     <string name="notification_sound_default" msgid="565135733949733766">"Сигнал сповіщень за умовчанням"</string>
@@ -3422,7 +3429,7 @@
     <string name="zen_mode_calls" msgid="7051492091133751208">"Дзвінки"</string>
     <string name="zen_mode_calls_title" msgid="623395033931747661">"Дозволити дзвінки"</string>
     <string name="zen_mode_calls_footer" msgid="3618700268458237781">"Коли режим \"Не турбувати\" ввімкнено, вхідні дзвінки блокуються. Можна змінити налаштування, щоб ваші друзі, члени сім’ї та інші контакти могли зв’язатися з вами."</string>
-    <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Контакти із зірочкою"</string>
+    <string name="zen_mode_starred_contacts_title" msgid="1848464279786960190">"Позначені контакти"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="500105380255018671">
       <item quantity="one">Ще <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
       <item quantity="few">Ще <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
@@ -3439,7 +3446,7 @@
     <string name="zen_calls_summary_starred_repeat" msgid="4046151920710059778">"Від контактів із зірочкою та постійних абонентів"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="1528716671301999084">"Від контактів і постійних абонентів"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"Лише від постійних абонентів"</string>
-    <string name="zen_mode_from_none" msgid="8219706639954614136">"Ні від кого"</string>
+    <string name="zen_mode_from_none" msgid="8219706639954614136">"Немає"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Будильник"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"Медіа-вміст"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"Звуки під час дотику"</string>
@@ -3451,7 +3458,7 @@
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"контакти"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"контакти із зірочкою"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Повторні вхідні виклики"</string>
-    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Дозволити постійних абонентів"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"Дозволити повторні дзвінки"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"Оператор: <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"Лише від таких абонентів: <xliff:g id="CALLER_TYPE">%1$s</xliff:g> та <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"Якщо та сама людина телефонує вдруге протягом <xliff:g id="MINUTES">%d</xliff:g> хв"</string>
@@ -3639,8 +3646,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Оптимізація акумулятора"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Сповіщення про використання"</string>
-    <string name="show_all_apps" msgid="1512506948197818534">"Показати повне використання пристрою"</string>
-    <string name="hide_extra_apps" msgid="5016497281322459633">"Показати використання додатка"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"Повне використання пристрою"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"Використання додатків"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Високе споживання заряду"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="one"><xliff:g id="NUMBER">%2$d</xliff:g> додаток працює неправильно</item>
@@ -3782,7 +3789,7 @@
     <string name="screen_zoom_title" msgid="5233515303733473927">"Масштаб"</string>
     <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Збільшуйте або зменшуйте елементи на екрані"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"щільність дисплея, масштаб екрана, масштабувати, масштабування"</string>
-    <string name="screen_zoom_summary" msgid="6445488991799015407">"Збільшуйте або зменшуйте всі елементи на екрані. Деякі додатки можуть переміститися."</string>
+    <string name="screen_zoom_summary" msgid="6445488991799015407">"Збільшуйте або зменшуйте всі елементи на екрані. Деякі додатки можуть зміститися."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Переглянути"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="4622359904253364742">"Зменшити"</string>
     <string name="screen_zoom_make_larger_desc" msgid="2236171043607896594">"Збільшити"</string>
@@ -4003,9 +4010,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"немає"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Об’єкта немає в рейтингу."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Об’єкт у рейтингу не містить цього ключа."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Імітувати відключення дисплея"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Відрізання екрана"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"відключення дисплея, переривання"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Немає"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Налаштування пристрою за умовчанням"</string>
     <string name="special_access" msgid="3458780842491881155">"Спеціальний доступ"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> додаток може без обмежень передавати дані</item>
@@ -4224,7 +4231,7 @@
     <string name="color_theme" msgid="1535685696756738324">"Колірна тема:"</string>
     <string name="default_theme" msgid="7085644992078579076">"За умовчанням"</string>
     <string name="device_theme" msgid="4571803018917608588">"Тема пристрою"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"автоматичний вибір (на основі фонового малюнка)"</string>
+    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"Автоматичний вибір (на основі фонового малюнка)"</string>
     <string name="systemui_theme_light" msgid="7519689709659152866">"світла"</string>
     <string name="systemui_theme_dark" msgid="8708733503912628456">"темна"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"Назва мережі"</string>
@@ -4272,15 +4279,16 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Недоступно під час викликів"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Недоступно"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Прийняти виклик на"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"APN не можна змінювати."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Збільште час роботи акумулятора планшета"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Збільште час роботи акумулятора пристрою"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Збільште час роботи акумулятора телефона"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Не дзвонити"</string>
-    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Одночасно натисніть кнопки живлення та збільшення гучності"</string>
+    <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Одночасно натиснути кнопки живлення та збільшення гучності"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Комбінація клавіш, щоб вимкнути звук дзвінка"</string>
-    <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Вібросигнал"</string>
-    <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Без звуку"</string>
+    <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Віброрежим"</string>
+    <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Беззвучний режим"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Нічого не робити"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="1157524435626890116">"Увімкнено (вібрація)"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="4472465110708640980">"Увімкнено (вимкнено звук)"</string>
@@ -4288,5 +4296,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Дані мережі"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Додатки на телефоні бачать назву пристрою. Її також можуть бачити інші люди, коли ви під’єднуєтеся до пристроїв Bluetooth або налаштовуєте точку доступу Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Пристрої"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"За умовчанням"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Важлива інформація"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"ПРОДОВЖИТИ"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"НІ, ДЯКУЮ"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Місцезнаходження"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Для роботи цього сервісу оператор може збирати дані про ваше місцезнаходження.\n\nОзнайомтеся з політикою конфіденційності оператора."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Екстрені виклики"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Ваш оператор не підтримує екстрені виклики через Wi-Fi.\nПід час таких викликів пристрій автоматично перемикається на мобільну мережу.\nЕкстрені виклики можна здійснювати лише в зонах покриття мобільної мережі."</string>
 </resources>

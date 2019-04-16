@@ -140,6 +140,46 @@
                     android:labelFor="@+id/routes"/>
             <EditText style="@style/vpn_value" android:id="@+id/routes"
                     android:hint="@string/vpn_not_used"/>
+
+            <TextView android:id="@+id/vpn_proxy_settings_title"
+                      style="@style/vpn_label"
+                      android:text="@string/proxy_settings_title"
+                      android:labelFor="@+id/vpn_proxy_settings" />
+
+            <Spinner android:id="@+id/vpn_proxy_settings"
+                     style="@style/vpn_value"
+                     android:prompt="@string/proxy_settings_title"
+                     android:entries="@array/vpn_proxy_settings" />
+
+            <LinearLayout
+                android:id="@+id/vpn_proxy_fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <TextView
+                    style="@style/vpn_label"
+                    android:text="@string/proxy_hostname_label"
+                    android:labelFor="@+id/vpn_proxy_host" />
+
+                <EditText
+                    android:id="@+id/vpn_proxy_host"
+                    style="@style/vpn_value"
+                    android:hint="@string/proxy_hostname_hint"
+                    android:inputType="textNoSuggestions" />
+
+                <TextView
+                    style="@style/vpn_label"
+                    android:text="@string/proxy_port_label"
+                    android:labelFor="@+id/vpn_proxy_port" />
+
+                <EditText
+                    android:id="@+id/vpn_proxy_port"
+                    style="@style/vpn_value"
+                    android:hint="@string/proxy_port_hint"
+                    android:inputType="number" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout android:id="@+id/login"
