@@ -19,8 +19,6 @@ package com.android.settings.slices;
 import static android.provider.SettingsSlicesContract.KEY_LOCATION;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
-import static com.android.settings.notification.ZenModeSoundSettingsPreferenceController.ZEN_MODE_KEY;
-
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
@@ -43,6 +41,7 @@ import com.android.settings.location.LocationSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
 import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
+import com.android.settings.notification.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 import com.android.settings.wifi.slice.WifiSlice;
@@ -298,7 +297,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(ZEN_MODE_KEY)
+            .appendPath(ZenModeButtonPreferenceController.KEY)
             .build();
 
     /**
