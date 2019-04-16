@@ -56,11 +56,10 @@
     </com.android.settingslib.RestrictedPreference>
 
 
-    <Preference
+    <SwitchPreference
         android:key="dark_ui_mode"
-        android:fragment="com.android.settings.display.DarkUISettings"
         android:title="@string/dark_ui_mode"
-        settings:searchable="false"
+        settings:keywords="@string/keywords_dark_ui_mode"
         settings:controller="com.android.settings.display.DarkUIPreferenceController"/>
 
     <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
