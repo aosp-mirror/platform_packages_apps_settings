@@ -318,6 +318,7 @@ public class NotificationChannelSliceTest {
         applicationInfo.name = APP_LABEL;
         applicationInfo.uid = UID;
         applicationInfo.flags = flags;
+        applicationInfo.packageName = PACKAGE_NAME;
 
         final PackageInfo packageInfo = new PackageInfo();
         packageInfo.packageName = PACKAGE_NAME;
