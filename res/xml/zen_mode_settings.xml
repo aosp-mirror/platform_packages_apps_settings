@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_settings"
     android:title="@string/zen_mode_settings_title"
-    settings:keywords="@string/keywords_zen_mode_settings">
+    settings:searchable="false">
 
     <PreferenceCategory
         android:key="zen_mode_settings_category_behavior"
@@ -66,11 +66,13 @@
 
     <!-- Turn on DND button -->
     <com.android.settingslib.widget.LayoutPreference
-        android:key="zen_mode_settings_button_container"
+        android:key="zen_mode_toggle"
+        android:title="@string/zen_mode_settings_title"
         android:selectable="false"
         android:layout="@layout/zen_mode_settings_button"
         settings:allowDividerAbove="true"
-        settings:allowDividerBelow="true"/>
+        settings:allowDividerBelow="true"
+        settings:keywords="@string/keywords_zen_mode_settings"/>
 
     <!-- Footer that shows if user is put into alarms only or total silence mode by an app -->
     <com.android.settingslib.widget.FooterPreference/>

@@ -328,7 +328,6 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
                     keys.add(ZenModeDurationPreferenceController.KEY);
-                    keys.add(ZenModeButtonPreferenceController.KEY);
                     return keys;
                 }
 
