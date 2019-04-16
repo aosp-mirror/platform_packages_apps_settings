@@ -88,8 +88,13 @@ public class SliderPreferenceControllerTest {
         }
 
         @Override
-        public int getMaxSteps() {
+        public int getMax() {
             return MAX_STEPS;
+        }
+
+        @Override
+        public int getMin() {
+            return 0;
         }
 
         @Override

@@ -55,7 +55,8 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
         super.displayPreference(screen);
         final SeekBarPreference preference = screen.findPreference(getPreferenceKey());
         preference.setContinuousUpdates(true);
-        preference.setMax(getMaxSteps());
+        preference.setMax(getMax());
+        preference.setMin(getMin());
     }
 
     @Override
@@ -75,8 +76,13 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
     }
 
     @Override
-    public int getMaxSteps() {
+    public int getMax() {
         return convertTemperature(ColorDisplayManager.getMinimumColorTemperature(mContext));
+    }
+
+    @Override
+    public int getMin() {
+        return ColorDisplayManager.getMinimumColorTemperature(mContext);
     }
 
     /**
