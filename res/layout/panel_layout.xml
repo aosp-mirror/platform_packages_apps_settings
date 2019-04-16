@@ -15,50 +15,60 @@
     limitations under the License
   -->
 
-<!-- Note: There is a landscape version of this layout. -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/panel_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingBottom="24dp"
-        android:paddingTop="18dp"
-        android:textColor="?android:attr/colorPrimary"
-        android:textSize="20sp"/>
-
-    <include layout="@layout/panel_slice_list"/>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panel_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/settings_panel_background" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/see_more"
-            style="@android:style/Widget.DeviceDefault.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginStart="12dp"
-            android:text="@string/see_more"/>
+        <TextView
+            android:id="@+id/panel_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="24dp"
+            android:paddingTop="18dp"
+            android:textColor="?android:attr/colorPrimary"
+            android:textSize="20sp"/>
 
-        <Space
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        <include layout="@layout/horizontal_divider"/>
 
-        <Button
-            android:id="@+id/done"
-            style="@android:style/Widget.DeviceDefault.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginEnd="12dp"
-            android:text="@string/done"/>
+        <!-- Note: There is a landscape version of panel_slice_list which supports scrolling. -->
+        <include layout="@layout/panel_slice_list"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <Button
+                android:id="@+id/see_more"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:text="@string/see_more"/>
+
+            <Space
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/done"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
+                android:text="@string/done"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>
