@@ -137,6 +137,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                     startAddSimFlow();
                     return true;
                 });
+            } else {
+                mPreference.setEnabled(false);
             }
         } else {
             // We have one or more existing subscriptions, so we want the plus button if eSIM is
