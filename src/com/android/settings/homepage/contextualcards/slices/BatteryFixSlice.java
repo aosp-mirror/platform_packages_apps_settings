@@ -25,6 +25,9 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.ArrayMap;
 
@@ -39,6 +42,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
@@ -107,8 +111,12 @@ public class BatteryFixSlice implements CustomSliceable {
             if (batteryTip.getState() == BatteryTip.StateType.INVISIBLE) {
                 continue;
             }
-            final IconCompat icon = IconCompat.createWithResource(mContext,
-                    batteryTip.getIconId());
+            final Drawable drawable = mContext.getDrawable(batteryTip.getIconId());
+            drawable.setColorFilter(new PorterDuffColorFilter(
+                    mContext.getResources().getColor(batteryTip.getIconTintColorId()),
+                    PorterDuff.Mode.SRC_IN));
+
+            final IconCompat icon = Utils.createIconWithDrawable(drawable);
             final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
                     icon,
                     ListBuilder.ICON_IMAGE,

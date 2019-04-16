@@ -160,7 +160,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     }
 
     /** Returns the color resid for tinting {@link #getIconId()} or {@link View#NO_ID} if none. */
-    protected @IdRes int getIconTintColorId() {
+    public @IdRes int getIconTintColorId() {
         return View.NO_ID;
     }
 
