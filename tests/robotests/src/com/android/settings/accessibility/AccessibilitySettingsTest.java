@@ -154,19 +154,6 @@ public class AccessibilitySettingsTest {
         assertThat(preference.getSummary()).isEqualTo(mContext.getResources().getString(resId));
     }
 
-    @Test
-    public void testDarkUIModePreferenceSummary_shouldUpdateSummary() {
-        final Preference darkUIModePreference = new Preference(mContext);
-        final DarkUIPreferenceController mController;
-        doReturn(darkUIModePreference).when(mSettings).findPreference(
-            DARK_UI_MODE_PREFERENCE);
-        mController = new DarkUIPreferenceController(mContext, DARK_UI_MODE_PREFERENCE);
-        final String darkUIModeDescription = modeToDescription(mUiModeManager.getNightMode());
-        darkUIModePreference.setSummary(mController.getSummary());
-
-        assertThat(darkUIModePreference.getSummary()).isEqualTo(darkUIModeDescription);
-    }
-
     private String modeToDescription(int mode) {
         String[] values = mContext.getResources().getStringArray(R.array.dark_ui_mode_entries);
         switch (mode) {
