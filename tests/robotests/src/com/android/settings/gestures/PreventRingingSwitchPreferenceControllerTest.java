@@ -16,6 +16,10 @@
 
 package com.android.settings.gestures;
 
+import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
+import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
+import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -43,6 +47,9 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class PreventRingingSwitchPreferenceControllerTest {
+
+    private static final int UNKNOWN = -1;
+
     private Context mContext;
     private Resources mResources;
     private PreventRingingSwitchPreferenceController mController;
@@ -76,27 +83,79 @@ public class PreventRingingSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void testOn_updateState_hushOff() {
+    public void updateState_hushOff_uncheck() {
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                Settings.Secure.VOLUME_HUSH_OFF);
+                VOLUME_HUSH_OFF);
+
         mController.updateState(mPreference);
+
         verify(mController.mSwitch, times(1)).setChecked(false);
     }
 
     @Test
-    public void testOn_updateState_hushVibrate() {
+    public void updateState_hushVibrate_setChecked() {
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                Settings.Secure.VOLUME_HUSH_VIBRATE);
+                VOLUME_HUSH_VIBRATE);
+
         mController.updateState(mPreference);
+
         verify(mController.mSwitch, times(1)).setChecked(true);
     }
 
     @Test
-    public void testOn_updateState_hushMute() {
+    public void updateState_hushMute_setChecked() {
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                Settings.Secure.VOLUME_HUSH_MUTE);
+                VOLUME_HUSH_MUTE);
+
         mController.updateState(mPreference);
+
         verify(mController.mSwitch, times(1)).setChecked(true);
+    }
+
+    @Test
+    public void onSwitchChanged_wasHushOff_checked_returnHushVibrate() {
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_OFF);
+
+        mController.onSwitchChanged(null, true);
+
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_VIBRATE);
+    }
+
+    @Test
+    public void onSwitchChanged_wasHushMute_unchecked_returnHushOff() {
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_MUTE);
+
+        mController.onSwitchChanged(null, false);
+
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_OFF);
+    }
+
+    @Test
+    public void onSwitchChanged_wasHushMute_checked_returnHushMute() {
+        // this is the case for the page open
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_MUTE);
+
+        mController.onSwitchChanged(null, true);
+
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_MUTE);
+    }
+
+    @Test
+    public void onSwitchChanged_wasHushVibrate_checked_returnHushVibrate() {
+        // this is the case for the page open
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_VIBRATE);
+
+        mController.onSwitchChanged(null, true);
+
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_VIBRATE);
     }
 
     @Test
@@ -105,6 +164,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
         LayoutPreference mLayoutPreference = mock(LayoutPreference.class);
         when(preferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mLayoutPreference);
+
         mController.displayPreference(preferenceScreen);
 
         verify(mLayoutPreference, times(1))
