@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
@@ -49,6 +50,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     private static final String KEY = "mobile_network_list";
 
     private SubscriptionManager mSubscriptionManager;
+    private UserManager mUserManager;
     private SubscriptionsChangeListener mChangeListener;
     private AddPreference mPreference;
 
@@ -70,6 +72,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     public MobileNetworkSummaryController(Context context, Lifecycle lifecycle) {
         super(context);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mUserManager = context.getSystemService(UserManager.class);
         if (lifecycle != null) {
           mChangeListener = new SubscriptionsChangeListener(context, this);
           lifecycle.addObserver(this);
@@ -162,7 +165,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return !Utils.isWifiOnly(mContext);
+        return !Utils.isWifiOnly(mContext) && mUserManager.isAdminUser();
     }
 
     @Override
