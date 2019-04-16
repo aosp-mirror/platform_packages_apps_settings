@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Die poort wat jy ingevoer het, is nie geldig nie."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Die HTTP-instaanbediener word deur die blaaier gebruik, maar kan nie deur die ander programme gebruik word nie."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC-URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Huidige sub-ID:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Sub-ID van verstekdata-SIM:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Aflaaibandwydte (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Oplaaibandwydte (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Selligginginligting (opgeskort):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Kies radioband"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Stemnetwerktipe:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Datanetwerktipe:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Kies foonindeks"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Stel voorkeurnetwerktipe:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Pieng gasheernaam(www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Pieng gasheernaam(www.google.com) IPv6:"</string>
@@ -343,11 +346,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Stel datum"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Soek streek"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Streek"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Tydsone"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"Tydsones in <xliff:g id="REGION">%1$s</xliff:g>"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Kies UTC-afwyking"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Rangskik alfabeties"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Rangskik volgens tydsone"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> begin op <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -728,7 +727,7 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"As luidsprekerfoon"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Vir musiek en media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Onthou instellings"</string>
-    <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Maksimum aantal gekoppelde Bluetooth-oudiotoestelle"</string>
+    <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Maks. gekoppelde Bluetooth-oudiotoestelle"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Kies maksimum aantal gekoppelde Bluetooth-oudiotoestelle"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Saai uit"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktiveer draadlose skermdeling"</string>
@@ -882,6 +881,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> eis dat jy voor netwerkkoppeling aanlyn aanmeld."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"KOPPEL"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Hierdie netwerk het nie internettoegang nie. Bly gekoppel?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Sekere programme en dienste kan weens beperkte konnektiwiteit dalk nie werk nie. Gebruik in elk geval?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Moenie weer vir hierdie netwerk vra nie"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi‑Fi is nie aan die internet gekoppel nie"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Jy kan na die mobiele netwerk oorskakel wanneer Wi-Fi \'n swak verbinding het. Datagebruikheffings kan geld."</string>
@@ -967,15 +967,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Brei oproepe uit met Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Skakel Wi‑Fi-oproepe aan om dekking te vergroot"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Oproepvoorkeur"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-oproepmodus"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Oproepvoorkeur"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Swerfvoorkeur"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Swerfvoorkeur"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Wi-Fi verkies"</item>
-    <item msgid="1335127656328817518">"Verkies mobiel"</item>
-    <item msgid="3132912693346866895">"Net Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -988,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Verkies Wi-Fi"</item>
-    <item msgid="5074515506087318555">"Verkies mobiel"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -999,7 +999,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"As Wi-Fi-oproepe aan is, kan jou foon oproepe deur Wi-Fi-netwerke of jou diensverskaffer se netwerk roeteer, afhangend van jou voorkeur en watter sein die sterkste is. Voordat jy hierdie kenmerk aanskakel, vind by jou diensverskaffer oor tariewe en ander besonderhede uit."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"As Wi-Fi onbeskikbaar is, moet jy mobiele netwerk gebruik"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"As mobiele netwerk onbeskikbaar is, gebruik Wi‑Fi"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Bel oor Wi-Fi. Die oproep sal eindig as jy nie meer Wi-Fi het nie."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"As Wi-Fi-oproepe aan is, kan jou foon oproepe deur Wi-Fi-netwerke of jou diensverskaffer se netwerk roeteer, afhangend van jou voorkeur en watter sein die sterkste is. Vind by jou diensverskaffer oor tariewe en ander besonderhede uit voordat jy hierdie kenmerk aanskakel.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Noodadres"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Word as jou ligging gebruik wanneer jy \'n noodoproep oor Wi-Fi maak"</string>
@@ -1175,6 +1178,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Kan nie PIN verander nie.\nMoontlik verkeerde PIN."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM-PIN is suksesvol verander"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Kan nie SIM-kaart se sluitstatus verander nie.\nMoontlik \'n verkeerde PIN."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"Kan nie PIN deaktiveer nie."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"Kan nie PIN aktiveer nie."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Kanselleer"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Verskeie SIMs gevind"</string>
@@ -1459,8 +1464,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Stel terug?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Netwerkterugstelling is nie vir hierdie gebruiker beskikbaar nie"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Netwerkinstellings is teruggestel"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"Kan nie e-SIM\'e terugstel nie"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"Die e-SIM\'e kan weens \'n fout nie teruggestel word nie."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Vee alle data uit (fabriekterugstelling)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Vee alle data uit (fabriekterugstelling)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Dit sal al die data uit jou tablet se "<b>"interne geheue"</b>" uitvee, insluitend: \n\n"<li>"jou Google-rekening"</li>\n" "<li>"stelsel- en programdata-instellings"</li>\n<li>"afgelaaide programme"</li></string>
@@ -1890,7 +1897,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Redigeer woord"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Redigeer"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Vee uit"</string>
-    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"Jy het geen woorde in die gebruikerwoordeboek nie. Tik op die Voeg by- (+) knoppie om \'n woord by te voeg."</string>
+    <string name="user_dict_settings_empty_text" msgid="1971969756133074922">"Jy het geen woorde in die gebruikerwoordeboek nie. Tik op die Voeg By-knoppie (+) om \'n woord by te voeg."</string>
     <string name="user_dict_settings_all_languages" msgid="6742000040975959247">"Vir alle tale"</string>
     <string name="user_dict_settings_more_languages" msgid="7316375944684977910">"Meer tale..."</string>
     <string name="testing" msgid="6584352735303604146">"Toets"</string>
@@ -1974,10 +1981,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Gebruik onderskrifte"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Gehoortoestelle"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Geen gehoortoestelle is gekoppel nie"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Voeg gehoortoestel by"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Voeg gehoortoestelle by"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Soek en tik op jou toestel op die volgende skerm om jou gehoortoestelle saam te bind."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Maak seker dat jou gehoortoestelle in saambindmodus is."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is tans aktief"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is aktief"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> gestoorde gehoortoestelle</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> gestoorde gehoortoestel</item>
@@ -2148,7 +2155,7 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Maak toestel in agtergrond wakker"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Vra gereeld vir ligging"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> programme wat tans vreemd optree"</string>
-    <string name="battery_tip_summary_title" msgid="368729969313047399">"Programme werk normaalweg"</string>
+    <string name="battery_tip_summary_title" msgid="368729969313047399">"Programme werk normaal"</string>
     <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"Foon het gewone agtergrondbatteryverbruik"</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"Tablet het gewone agtergrondbatteryverbruik"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"Toestel het gewone agtergrondbatteryverbruik"</string>
@@ -2623,7 +2630,7 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Hierdie funksie kan veroorsaak dat \'n program wat afhanklik is van agtergronddata, ophou werk wanneer slegs mobiele netwerke beskikbaar is.\n\nJy kan meer geskikte datagebruik-kontroles vind in die instellings wat in die program self beskikbaar is."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Agtergronddata kan net beperk word as jy \'n mobieldatalimiet gestel het."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Moet die outomatiese sinkronisering van data aangeskakel word?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Enige veranderings wat jy aan jou rekeninge op die web aanbring, sal outomaties na jou tablet gekopieer word.\n\nSommige rekeninge kan ook outomaties enige veranderings wat jy op die tablet maak, na die web kopieer. \'n Google-rekening werk so."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Enige veranderings wat jy aan jou rekeninge op die web aanbring, sal outomaties na jou tablet gekopieer word.\n\nSommige rekeninge kan ook outomaties enige veranderings wat jy op die tablet maak, na die web kopieer. Dis hoe \'n Google-rekening werk."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Enige veranderings wat jy aan jou rekeninge aanbring, sal outomaties na jou foon gekopieer word.\n\nSommige rekeninge kan ook outomaties enige veranderings wat jy op die tablet maak, na die web kopieer. \'n Google-rekening werk so."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Moet die outomatiese sinkronisering van data afgeskakel word?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Dit sal data- en batteryverbruik bespaar, maar jy sal elke rekening self moet sinkroniseer om onlangse inligting in te samel.  En jy sal geen kennisgewings ontvang wanneer opdaterings plaasvind nie."</string>
@@ -3111,10 +3118,10 @@
     <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Demp klank en vibrasie"</string>
     <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"Moenie skerm aanskakel nie"</string>
     <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Moenie lig laat flikker nie"</string>
-    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Moenie kennisgewings op die skerm wys nie"</string>
+    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Geen skerm-opspringkennisgewings nie"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Versteek statusbalkikone"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Versteek kennisgewingkolle"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Moenie vir kennisgewings wakker maak nie"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"Moenie wakker maak vir kennisgewings nie"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Versteek van kennisgewinglys"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nooit"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Wanneer skerm af is"</string>
@@ -3887,9 +3894,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"geen"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Graderingvoorwerp ontbreek."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Graderingvoorwerp bevat nie hierdie sleutel nie."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simuleer \'n skerm met \'n knipmodel"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Skermuitsnede"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"skermuitsnede, uitkeep"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Geen"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Toestelverstek"</string>
     <string name="special_access" msgid="3458780842491881155">"Spesiale app-toegang"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> programme kan onbeperkte data gebruik</item>
@@ -4096,7 +4103,7 @@
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Aan"</string>
     <string name="install_type_instant" msgid="3174425974536078647">"Kitsprogram"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"Skakel die bergingbestuurder af?"</string>
-    <string name="storage_movies_tv" msgid="5498394447562086890">"Fliek en TV-programme"</string>
+    <string name="storage_movies_tv" msgid="5498394447562086890">"Fliek en TV-apps"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Diensverskaffervoorsiening-inligting"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Trigger-diensverskaffervoorsiening"</string>
     <string name="zen_suggestion_title" msgid="798067603460192693">"Dateer Moenie Steur Nie op"</string>
@@ -4134,6 +4141,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Onbeskikbaar tydens oproepe"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Onbeskikbaar"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Antwoord oproep op"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Hierdie toegangspuntnaam kan nie verander word nie."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Verbeter tablet se batterylewe"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Verbeter toestel se batterylewe"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Verbeter foon se batterylewe"</string>
@@ -4150,5 +4158,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Netwerkbesonderhede"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Programme op jou foon kan jou toestelnaam sien. Ander mense sal dit dalk ook kan sien wanneer jy aan Bluetooth-toestelle koppel of \'n Wi-Fi-warmkol opstel."</string>
     <string name="devices_title" msgid="7701726109334110391">"Toestelle"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Verstek"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Belangrike inligting"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"GAAN VOORT"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"NEE, DANKIE"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Ligging"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Jou diensverskaffer kan dalk jou ligging verkry om hierdie diens te verskaf.\n\nGaan jou diensverskaffer se privaatheidsbeleid na."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Noodoproepe"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Jou diensverskaffer steun nie noodoproepe oor Wi‑Fi nie.\nDie toestel skakel outomaties na \'n selnetwerk toe oor om \'n noodoproep te maak.\nNoodoproepe is net moontlik in gebiede met sellulêre dekking."</string>
 </resources>

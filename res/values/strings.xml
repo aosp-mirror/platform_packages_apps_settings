@@ -483,6 +483,10 @@
     <string name="proxy_url_title">"PAC URL: "</string>
 
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_subid">Current subId:</string>
+    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_dds">SubId of default data SIM:</string>
+    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_dl_kbps">DL Bandwidth (kbps):</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_ul_kbps">UL Bandwidth (kbps):</string>
@@ -528,6 +532,8 @@
     <string name="radio_info_voice_network_type_label">Voice Network Type:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_data_network_type_label">Data Network Type:</string>
+    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="phone_index_label">Select phone index</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_set_perferred_label">Set Preferred Network Type:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -2040,6 +2046,8 @@
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
+    <!-- Dialog text to tell the user that the selected network has incomplete Internet access. [CHAR LIMIT=100] -->
+    <string name="partial_connectivity_text">Some apps and services may not work due to limited connectivity. Use anyway?</string>
     <string name="no_internet_access_remember">Don\u2019t ask again for this network</string>
 
     <!-- Dialog text to tell the user that the selected network has lost Internet access, and asking the user whether they want to avoid this network. -->
@@ -2302,7 +2310,7 @@
     <!-- Title of WFC preference item [CHAR LIMIT=30] -->
     <string name="wifi_calling_mode_title">Calling preference</string>
     <!-- Title of WFC preference selection dialog [CHAR LIMIT=30] -->
-    <string name="wifi_calling_mode_dialog_title">Wi-Fi calling mode</string>
+    <string name="wifi_calling_mode_dialog_title">Calling preference</string>
     <!-- Title of WFC roaming preference item [CHAR LIMIT=45] -->
     <string name="wifi_calling_roaming_mode_title">Roaming preference</string>
     <!-- Summary of WFC roaming preference item [CHAR LIMIT=NONE]-->
@@ -2310,9 +2318,9 @@
     <!-- WFC mode dialog [CHAR LIMIT=45] -->
     <string name="wifi_calling_roaming_mode_dialog_title">Roaming preference</string>
     <string-array name="wifi_calling_mode_choices">
-        <item>Wi-Fi preferred</item>
-        <item>Mobile preferred</item>
-        <item>Wi-Fi only</item>
+        <item>@*android:string/wfc_mode_wifi_preferred_summary</item>
+        <item>@*android:string/wfc_mode_cellular_preferred_summary</item>
+        <item>@*android:string/wfc_mode_wifi_only_summary</item>
     </string-array>
     <string-array name="wifi_calling_mode_choices_v2">
         <item>Wi-Fi</item>
@@ -2325,8 +2333,8 @@
         <item>"0"</item>
     </string-array>
     <string-array name="wifi_calling_mode_choices_without_wifi_only">
-        <item>Wi-Fi preferred</item>
-        <item>Mobile preferred</item>
+        <item>@*android:string/wfc_mode_wifi_preferred_summary</item>
+        <item>@*android:string/wfc_mode_cellular_preferred_summary</item>
     </string-array>
     <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
         <item>Wi-Fi</item>
@@ -2336,8 +2344,16 @@
         <item>"2"</item>
         <item>"1"</item>
     </string-array>
+
+    <!-- Summary of WFC preference item on the WFC preference selection dialog. [CHAR LIMIT=70]-->
+    <string name="wifi_calling_mode_wifi_preferred_summary">If Wi\u2011Fi is unavailable, use mobile network</string>
+    <!-- Summary of WFC preference item on the WFC preference selection dialog. [CHAR LIMIT=70]-->
+    <string name="wifi_calling_mode_cellular_preferred_summary">If mobile network is unavailable, use Wi\u2011Fi</string>
+    <!-- Summary of WFC preference item on the WFC preference selection dialog. [CHAR LIMIT=70]-->
+    <string name="wifi_calling_mode_wifi_only_summary">Call over Wi\u2011Fi. If Wi\u2011Fi is lost, call will end.</string>
+
     <!-- Wi-Fi Calling settings. Text displayed when Wi-Fi Calling is off -->
-    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.</string>
+    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.<xliff:g id="additional_text" example="Learn More">%1$s</xliff:g></string>
     <!-- Wi-Fi Calling settings. Additional text displayed when Wi-Fi Calling is off. Default empty. [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_off_explanation_2"></string>
     <!-- Title of a preference for updating emergency address [CHAR LIMIT=40] -->
@@ -3393,9 +3409,9 @@
     <!-- Reset settings complete toast text [CHAR LIMIT=75] -->
     <string name="reset_network_complete_toast">Network settings have been reset</string>
     <!-- Title of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_title">Cant\u2019t reset eSIMs</string>
+    <string name="reset_esim_error_title">Can\u2019t reset eSIMs</string>
     <!-- Message of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_msg">The eSIMs can\u2019tt be reset due to an error.</string>
+    <string name="reset_esim_error_msg">The eSIMs can\u2019t be reset due to an error.</string>
 
     <!-- Master Clear -->
     <!-- Button title to factory data reset the entire device -->
@@ -10080,4 +10096,25 @@
 
     <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
     <string name="devices_title">Devices</string>
+
+    <!-- Label for the title on wfc disclaimer fragment. [CHAR LIMIT=40] -->
+    <string name="wfc_disclaimer_title_text">Important information</string>
+
+    <!-- Label for the agree button on wfc disclaimer fragment. [CHAR LIMIT=30] -->
+    <string name="wfc_disclaimer_agree_button_text">CONTINUE</string>
+
+    <!-- Label for the disagree button on wfc disclaimer fragment. [CHAR LIMIT=30] -->
+    <string name="wfc_disclaimer_disagree_text">NO THANKS</string>
+
+    <!-- Label for the title on wfc disclaimer location. [CHAR LIMIT=30] -->
+    <string name="wfc_disclaimer_location_title_text">Location</string>
+
+    <!-- Warn the user that the phone may share its location with the service provider. [CHAR LIMIT=NONE] -->
+    <string name="wfc_disclaimer_location_desc_text">Your service provider may collect your location in order to provide this service.\n\nPlease review your service provider\u2019s privacy policy.</string>
+
+    <!-- Label for the title on wfc disclaimer location. [CHAR LIMIT=30] -->
+    <string name="wfc_disclaimer_emergency_limitation_title_text">Emergency calls</string>
+
+    <!-- Warn the user that the phone have emergency call limitation. [CHAR LIMIT=NONE] -->
+    <string name="wfc_disclaimer_emergency_limitation_desc_text">Emergency calls over Wi\u2011Fi Calling are not supported by your carrier.\nThe device switches automatically to a cellular network to place an emergency call.\nEmergency calls are only possible in areas with cellular coverage.</string>
 </resources>

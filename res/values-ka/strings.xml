@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"თქვენს მიერ შეყვანილი პორტი არასწორია."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP პროქსი სერვერს იყენებს ბრაუზერი, თუმცა მისი გამოყენება სხვა აპლიკაციების მიერ დაუშვებელია."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"ამჟამინდელი subId:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"მონაცემების ნაგულისხმევი SIM-ის subId:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"ჩამოტვირთვის გამტარუნარიანობა (კბიტ/წმ):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"ატვირთვის გამტარუნარიანობა (კბიტ/წმ):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"ფიჭური მდებარეობის ინფორმაცია (მოძველდა):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"რადიოდიაპაზონის არჩევა"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"ხმოვანი კავშირის ტიპი:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"მობილური ინტერნეტის ტიპი:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"სატელეფონო ინდექსის არჩევა"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"მიუთითეთ ქსელის სასურველი ტიპი:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping-ის მოთხოვნა (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping-ის მოთხოვნა (www.google.com) IPv6:"</string>
@@ -343,11 +346,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"თარიღის დაყენება"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"ძიების რეგიონი"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"რეგიონი"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"დროის სარტყელი"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"დროის სარტყლები <xliff:g id="REGION">%1$s</xliff:g>-ში"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"აირჩიეთ მსოფლიო კოორდინირებული დროის წანაცვლება"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"ანბანური სორტირება"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"დროის სარტყელით სორტირება"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> იწყება რიცხვში: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -364,7 +363,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"დაუყოვნებლივ ძილის შემდეგ, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>-ის მიერ"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ძილის შემდეგ, გარდა <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>-ის მიერ განბლოკილ მდგომარეობაში დატოვებისას"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"მფლობელის ინფორმაციის დაბლოკვის ეკრანზე ჩვენება"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"ეკრ. დაბლოკ. შეტყობ."</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"ეკრანის ბლოკის შეტყობ."</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ვიჯეტების ჩართვა"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"გათიშულია ადმინისტრატორის მიერ"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"დაბლოკვის ვარიანტის ჩვენება"</string>
@@ -882,6 +881,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> საჭიროებს, რომ ქსელთან დაკავშირებამდე შეხვიდეთ ონლაინში."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"დაკავშირება"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"ამ ქსელს არ აქვს ინტერნეტზე წვდომა. შენარჩუნდეს კავშირი?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"ზოგიერთმა აპმა და სერვისმა შეიძლება არ იმუშაოს შეზღუდული კავშირის გამო. მაინც გამოიყენებთ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"აღარ მოითხოვოთ ეს ქსელი კიდევ ერთხელ."</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi-Fi არ არის დაკავშირებული ინტერნეტთან"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Wi‑Fi ქსელის სუსტი კავშირისას მობილურ ინტერნეტზე გადართვა შეგიძლიათ. შესაძლოა მოგიწიოთ მობილური ინტერნეტის საფასურის გადახდა."</string>
@@ -967,15 +967,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"გაზარდეთ ზარები Wi‑Fi დარეკვით"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"ჩართეთ Wi‑Fi დარეკვა დაფარვის არეალის გასავრცობად"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"ზარის პრეფერენციები"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-თი დარეკვის რეჟიმი"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"ზარის პარამეტრი"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"როუმინგის პარამეტრი"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"როუმინგის პარამეტრი"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"სასურველია Wi-Fi"</item>
-    <item msgid="1335127656328817518">"უპირატესობა მიენიჭოს მობილურს"</item>
-    <item msgid="3132912693346866895">"მხოლოდ Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -988,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"სასურველია Wi-Fi"</item>
-    <item msgid="5074515506087318555">"უპირატესობა მიენიჭოს მობილურს"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -999,7 +999,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"როდესაც Wi-Fi ზარი ჩართულია, თქვენს ტელეფონს შეუძლია გადაამისამართოს ზარი Wi-Fi ან თქვენს ოპერატორ ქსელზე, თქვენი პრეფერენციებისა და სიგნალის სიძლიერის მიხედვით. ამ ფუნქციის ჩართვამდე, დააზუსტეთ თქვენს ოპერატორთან შესაძლო თანხები და სხვა დეტალები."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"თუ Wi‑Fi მიუწვდომელია, ისარგებლეთ მობილური ქსელით"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"თუ მობილური ქსელი მიუწვდომელია, გამოიყენეთ Wi‑Fi"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"დარეკვა Wi-Fi-ის მეშვეობით. თუ Wi‑Fi გაითიშა, ზარი დასრულდება."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Wi-Fi დარეკვის ჩართვის შემთხვევაში, ტელეფონს ზარების მარშრუტიზაცია შეუძლია როგორც Wi-Fi ქსელების, ისე თქვენი ოპერატორის ქსელის მეშვეობით, რაც დამოკიდებულია თქვენ მიერ მითითებულ პარამეტრებსა და კონკრეტული სიგნალის სიძლიერეზე. ამ ფუნქციის ჩართვამდე მიმართეთ თქვენს ოპერატორს ტარიფებისა და სხვა დეტალების დასაზუსტებლად.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"საგანგებო მისამართი"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"მდებარეობა, რომელიც გადაუდებელი ზარის Wi-Fi-ს მეშვეობით განხორციელებისას თქვენს მდებარეობად გამოიყენება"</string>
@@ -1064,7 +1067,7 @@
     <string name="accelerometer_title" msgid="7854608399547349157">"ეკრანის ავტოროტაცია"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"ფერები"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"ბუნებრივი"</string>
-    <string name="color_mode_option_boosted" msgid="8588223970257287524">"კონტრასტული"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"გაძლიერებული"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"ინტენსიური"</string>
     <string name="color_mode_option_automatic" msgid="7996505473528529568">"ადაპტაციური"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"მხოლოდ მკვეთრი ფერების გამოყენება"</string>
@@ -1175,6 +1178,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN-ის შეცვლა შეუძლებელია.\nშესაძლოა შეყვანილია არასწორი PIN."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM-ის PIN-ი წარმატებით შეიცვალა"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"შეუძლებელი იყო SIM-ბარათის დაბლოკვის მდგომარეობის ცვლილება.\nშესაძლებელია, PIN-კოდი არასწორია."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN-კოდის გათიშვა ვერ მოხერხდა."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN-კოდის ჩართვა ვერ მოხერხდა."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"კარგი"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"გაუქმება"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"მოიძებნა სხვადასხვა SIM-ები"</string>
@@ -1459,8 +1464,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"ჩამოვყაროთ პარამეტრები?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"ქსელის გადაყენება ამ მომხმარებლისათვის მიუწვდომელია"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"ქსელის პარამეტრები ჩამოიყარა"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"eSIM-ების გადაყენება ვერ ხერხდება"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"eSIM-ების გადაყენება ვერ ხერხდება წარმოქმნილი შეცდომის გამო."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"ყველა მონაცემის ამოშლა (ქარხნული პარამეტრების დაბრუნება)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"ყველა მონაცემის ამოშლა (ქარხნული პარამეტრების დაბრუნება)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"ეს მოქმედება წაშლის ყველა მონაცემებს თქვენი ტაბლეტის "<b>"შიდა მეხსიერებიდან"</b>", მათ შორის:\n\n"<li>"თქვენს Google-ის ანგარიშს"</li>\n<li>"სისტემისა და აპების მონაცემებს და პარამეტრებს"</li>\n<li>"ჩამოტვირთულ აპებს"</li></string>
@@ -1885,7 +1892,7 @@
     <string name="user_dict_settings_add_word_option_name" msgid="7868879174905963135">"სიტყვა:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="660089258866063925">"მალსახმობი:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="5696358317061318532">"ენა:"</string>
-    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"სიტყვის დაწერა"</string>
+    <string name="user_dict_settings_add_word_hint" msgid="5725254076556821247">"აკრიფეთ სიტყვა"</string>
     <string name="user_dict_settings_add_shortcut_hint" msgid="7333763456561873445">"მალსახმობი (არასავალდ.)"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"სიტყვის შესწორება"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"რედაქტირება"</string>
@@ -1974,10 +1981,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"სუბტიტრების გამოყენება"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"სმენის დახმარებები"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"სმენის აპარატები არაა დაკავშირებული"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"სმენის აპარატის დამატება"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"სმენის მოწყობილობების დამატება"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"თქვენი სმენის აპარატების დასაწყვილებლად, იპოვეთ და შეეხეთ თქვენს მოწყობილობას მომდევნო ეკრანზე."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"დარწმუნდით, რომ თქვენი სმენის აპარატები დაწყვილების რეჟიმშია."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ამჟამად აქტიურია"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> აქტიურია"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> შენახული სმენის აპარატი</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> შენახული სმენის აპარატი</item>
@@ -3114,7 +3121,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"ეკრანზე შეტყობინებათა გამოტანის აკრძალვა"</string>
     <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"სტატუსის ზოლის ხატულების დამალვა"</string>
     <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"შეტყობინებათა ნიშნულების დამალვა"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"არ მოხდეს შეტყობინებების გამო გამოღვიძება"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"შეტყობინებებმა არ გააღვიძოს"</string>
     <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"შეტყობინებათა სიიდან დამალვა"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"არასოდეს"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"გამორთული ეკრანისას"</string>
@@ -3325,7 +3332,7 @@
     <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"სადაც პასუხი არის"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"დიახ, შესაძლოა, ან პასუხგაუცემელი"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"დიახ ან შეიძლება"</string>
-    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"კი"</string>
+    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"დიახ"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"წესი ვერ მოიძებნა."</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"ჩართული / <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
@@ -3887,9 +3894,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"არაფერი"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"აკლია კლასიფიკაციის ობიექტი."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"კლასიფიკაციის ობიექტი ამ გასაღებს არ შეიცავს."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"ეკრანის ამოჭრით სიმულაცია"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"ეკრანის ამოჭრა"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ეკრანის ამოჭრა, ჭრილი"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"არცერთი"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"მოწყობილობის ნაგულისხმევი"</string>
     <string name="special_access" msgid="3458780842491881155">"აპების სპეციალური წვდომა"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other">მონაცემთა შეუზღუდავად გამოყენება <xliff:g id="COUNT">%d</xliff:g> აპს შეუძლია</item>
@@ -4134,6 +4141,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"ზარების განხორციელებისას მიუწვდომელია"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"მიუწვდომელია"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"ზარის აღება მოწყობილობაზე:"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"ამ APN-ის შეცვლა ვერ მოხერხდება."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"გააუმჯობესეთ ტაბლეტის ბატარეის მუშაობის ხანგრძლივობა"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"გააუმჯობესეთ მოწყობილობის ბატარეის მუშაობის ხანგრძლივობა"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"გააუმჯობესეთ ტელეფონის ბატარეის მუშაობის ხანგრძლივობა"</string>
@@ -4150,5 +4158,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ქსელის დეტალები"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"თქვენი მოწყობილობის სახელი ხილულია თქვენს ტელეფონზე არსებული აპებისთვის. მისი დანახვას ასევე შეძლებენ სხვა პირები, როცა Bluetooth მოწყობილობებს დაუკავშირდებით ან Wi-Fi უსადენო ქსელით ისარგებლებთ."</string>
     <string name="devices_title" msgid="7701726109334110391">"მოწყობილობები"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"ნაგულისხმევი"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"მნიშვნელოვანი ინფორმაცია"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"გაგრძელება"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"არა, გმადლობთ"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"მდებარეობა"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"თქვენი სერვისის პროვაიდერი, ამ სერვისის მოწოდების მიზნით, შეიძლება აგროვებდეს ინფორმაციას თქვენი მდებარეობის შესახებ.\n\nგთხოვთ, გადახედოთ თქვენი სერვისის პროვაიდერის კონფიდენციალურობის დებულებას."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"გადაუდებელი ზარები"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"გადაუდებელი ზარების Wi‑Fi დარეკვის საშუალებით შესრულება არ არის მხარდაჭერილი თქვენი ოპერატორის მიერ.\nგადაუდებელი ზარის განსახორციელებლად მოწყობილობა ავტომატურად გადაერთვება ფიჭურ ქსელზე.\nგადაუდებელი ზარები მხოლოდ იმ არეალებშია შესაძლებელი, სადაც ფიჭური კავშირგაბმულობა არსებობს."</string>
 </resources>

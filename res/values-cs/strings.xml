@@ -213,6 +213,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Zadaný port není platný."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Proxy server protokolu HTTP může používat prohlížeč, ale nesmí jej používat další aplikace."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"Adresa URL PAC: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Stávající subId:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"SubId výchozí datové SIM karty:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"Rychlost stahování (kB/s):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"Rychlost nahrávání (kB/s):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Informace o poloze mobilní sítě (podpora ukončena):"</string>
@@ -235,6 +237,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Zvolit pásmo bezdrátového modulu"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Typ hlasové sítě:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Typ datové sítě:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Vybrat telefonní seznam"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Nastavit upřednostňovaný typ sítě:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping názvu hostitele (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping názvu hostitele (www.google.com) IPv6:"</string>
@@ -347,11 +350,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Nastavit datum"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Vyhledat oblast"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Region"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Časové pásmo"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"Časová pásma v zemi <xliff:g id="REGION">%1$s</xliff:g>"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Vyberte časový rozdíl"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Seřadit abecedně"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Seřadit podle časového pásma"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> začíná <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -904,6 +903,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> vyžaduje, abyste se před připojením k síti přihlásili na webu."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"PŘIPOJIT"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Tato síť nemá přístup k internetu. Chcete zůstat připojeni?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Některé aplikace služby kvůli omezenému připojení nebudou fungovat. Přesto použít?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"U této sítě se již nedotazovat"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Síť Wi‑Fi nemá přístup k internetu"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Při špatném připojení Wi‑Fi můžete přepnout na mobilní síť. Mohou být účtovány poplatky za data."</string>
@@ -991,15 +991,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Rozšiřte volání pomocí Wi-Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Chcete-li rozšířit pokrytí, zapněte volání přes Wi-Fi"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Předvolby volání"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Režim volání přes Wi-Fi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Předvolby volání"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Předvolba pro roaming"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Předvolba pro roaming"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Preferována síť W-Fi"</item>
-    <item msgid="1335127656328817518">"Preferována mobilní data"</item>
-    <item msgid="3132912693346866895">"Pouze Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -1012,8 +1012,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Preferována síť W-Fi"</item>
-    <item msgid="5074515506087318555">"Preferována mobilní data"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -1023,7 +1023,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Je-li zapnuto volání přes Wi-Fi, telefon může hovory v závislosti na zadaných nastaveních a na tom, který signál je silnější, směrovat přes sítě Wi-Fi nebo přes sítě operátora. Než tuto funkci zapnete, zeptejte se operátora na možné poplatky a další podrobnosti."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Pokud Wi-Fi není k dispozici, použít mobilní síť"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Pokud mobilní síť nebude k dispozici, použít Wi‑Fi"</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Volání přes Wi‑Fi. Pokud bude signál Wi-Fi ztracen, hovor skončí."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Je-li zapnuto volání přes Wi-Fi, telefon může hovory v závislosti na zadaných nastaveních a na tom, který signál je silnější, směrovat přes sítě Wi-Fi nebo přes sítě operátora. Než tuto funkci zapnete, zeptejte se operátora na možné poplatky a další podrobnosti.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Nouzová adresa"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Použije se jako vaše poloha, pokud uskutečníte tísňové volání přes Wi-Fi"</string>
@@ -1033,7 +1036,7 @@
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Zapněte volání přes Wi-Fi"</string>
     <string name="wifi_calling_not_supported" msgid="7878640438907807754">"Volání přes Wi‑Fi operátor %1$s nepodporuje"</string>
     <string name="carrier" msgid="5264014738689761132">"Operátor"</string>
-    <string name="display_settings_title" msgid="1708697328627382561">"Obrazovka"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"Displej"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Zvuk"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Hlasitost"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Hudební efekty"</string>
@@ -1084,7 +1087,7 @@
     <string name="accessibility_work_account_title" msgid="1231830766637939527">"Pracovní účet – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Osobní účet – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Vyhledávání"</string>
-    <string name="display_settings" msgid="7965901687241669598">"Obrazovka"</string>
+    <string name="display_settings" msgid="7965901687241669598">"Displej"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Autom. otočení obrazovky"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"Barvy"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Přirozené"</string>
@@ -1199,6 +1202,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"Kód PIN nelze změnit.\nMožná jste zadali nesprávný kód PIN."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"PIN SIM karty byl úspěšně změněn."</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"Stav zámku SIM karty nelze změnit.\nZřejmě jste zadali nesprávný kód PIN."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN nelze deaktivovat."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN nelze aktivovat."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Zrušit"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Bylo nalezeno několik SIM karet"</string>
@@ -1230,7 +1235,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Verze základního pásma"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Verze jádra"</string>
     <string name="build_number" msgid="3075795840572241758">"Číslo sestavení"</string>
-    <string name="device_info_not_available" msgid="8062521887156825182">"Nedostupný"</string>
+    <string name="device_info_not_available" msgid="8062521887156825182">"Nedostupné"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Stav"</string>
     <string name="device_status" msgid="607405385799807324">"Stav"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Stav baterie, sítě a další údaje"</string>
@@ -1482,15 +1487,17 @@
     <string name="reset_network_button_text" msgid="2035676527471089853">"Obnovit nastavení"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"Chcete resetovat všechna nastavení sítí? Tuto akci nelze vrátit zpět."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Obnovit nastavení"</string>
-    <string name="reset_network_confirm_title" msgid="1759888886976962773">"Resetovat?"</string>
+    <string name="reset_network_confirm_title" msgid="1759888886976962773">"Obnovit nastavení?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Pro tohoto uživatele resetování sítě není k dispozici"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Nastavení sítí bylo resetováno"</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"eSIM karty nelze resetovat"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"eSIM karty kvůli chybě nelze resetovat."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Vymazat data (tovární reset)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Vymazat data (tovární reset)"</string>
-    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" tabletu, mj. i:\n\n"<li>"váš účet Google"</li>\n<li>"nastavení a data systému a aplikací"</li>\n<li>"stažené aplikace"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" telefonu, mj. i:\n\n"<li>"váš účet Google"</li>\n<li>"nastavení a data systému a aplikací"</li>\n<li>"stažené aplikace"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" tabletu, např.:\n\n"<li>"váš účet Google"</li>\n<li>"nastavení a data systému a aplikací"</li>\n<li>"stažené aplikace"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Tato akce smaže veškerá data z "<b>"interního úložiště"</b>" telefonu, např.:\n\n"<li>"váš účet Google"</li>\n<li>"nastavení a data systému a aplikací"</li>\n<li>"stažené aplikace"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Aktuálně jste přihlášeni k těmto účtům:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"V tomto zařízení jsou přítomni další uživatelé.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"hudba"</li>\n<li>"fotky"</li>\n<li>"další uživatelské údaje"</li></string>
@@ -1742,7 +1749,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplikace k příjmu výstražných zpráv"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Obnovit nastavení aplikací"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Obnovit nastavení aplikací?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Tímto resetujete všechna nastavení následujících položek:\n\n "<li>"deaktivované aplikace,"</li>\n" "<li>"deaktivovaná oznámení aplikací,"</li>\n" "<li>"výchozí aplikace pro různé akce,"</li>\n" "<li>"omezení datových přenosů na pozadí pro aplikace,"</li>\n" "<li>"veškerá omezení oprávnění."</li>\n\n" Nepřijdete o žádná data aplikací."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Tímto obnovíte všechna nastavení následujících položek:\n\n "<li>"deaktivované aplikace,"</li>\n" "<li>"deaktivovaná oznámení aplikací,"</li>\n" "<li>"výchozí aplikace pro různé akce,"</li>\n" "<li>"omezení datových přenosů na pozadí pro aplikace,"</li>\n" "<li>"veškerá omezení oprávnění."</li>\n\n" Nepřijdete o žádná data aplikací."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Obnovit aplikace"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Správa paměti"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrovat"</string>
@@ -2002,10 +2009,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Používat titulky"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Naslouchátka"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nejsou připojena žádná naslouchátka"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Přidat naslouchátko"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Přidat naslouchátka"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Chcete-li spárovat naslouchátka, na další obrazovce najděte své zařízení a klepněte na něj."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Ujistěte se, zda jsou naslouchátka v režimu párování."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> je právě aktivní"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"Zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je aktivní"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="few"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> uložená naslouchátka</item>
       <item quantity="many"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> uloženého naslouchátka</item>
@@ -2251,9 +2258,9 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="6537761705584610231">"Aplikace bude moci využívat baterii na pozadí. Baterie se možná vybije dříve, než bylo očekáváno."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Odebrat"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="3058235875830858902">"Zrušit"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Vaše aplikace spotřebovávají běžné množství baterie. Pokud dojde k velkému zvýšení spotřeby, telefon vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
-    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Vaše aplikace spotřebovávají běžné množství baterie. Pokud dojde k velkému zvýšení spotřeby, tablet vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
-    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Vaše aplikace spotřebovávají běžné množství baterie. Pokud dojde k velkému zvýšení spotřeby, zařízení vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="4628448253185085796">"Vaše aplikace mají běžnou spotřebu baterie. Pokud dojde k velkému zvýšení spotřeby, telefon vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
+    <string name="battery_tip_dialog_summary_message" product="tablet" msgid="8327950887399420971">"Vaše aplikace mají běžnou spotřebu baterie. Pokud dojde k velkému zvýšení spotřeby, tablet vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
+    <string name="battery_tip_dialog_summary_message" product="device" msgid="6753742263807939789">"Vaše aplikace mají běžnou spotřebu baterie. Pokud dojde k velkému zvýšení spotřeby, zařízení vám doporučí možné akce.\n\nPokud vám dochází baterie, můžete podle potřeby zapnout spořič baterie."</string>
     <string name="smart_battery_manager_title" msgid="870632749556793417">"Správce baterie"</string>
     <string name="smart_battery_title" msgid="6218785691872466076">"Automatická správa aplikací"</string>
     <string name="smart_battery_summary" msgid="1339184602000004058">"Omezte využití baterie u aplikací, které používáte zřídka"</string>
@@ -2697,7 +2704,7 @@
     <string name="data_usage_restrict_background" msgid="434093644726734586">"Pokud omezíte využití mobilních dat na pozadí, některé aplikace a služby nebudou fungovat, dokud se nepřipojíte k síti Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7096707497743363380">"Pokud omezíte využití mobilních dat na pozadí, některé aplikace a služby nebudou fungovat, dokud se nepřipojíte k síti Wi-Fi.\n\nToto nastavení ovlivní všechny uživatele tohoto tabletu."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="7910798414964288424">"Pokud omezíte využití mobilních dat na pozadí, některé aplikace a služby nebudou fungovat, dokud se nepřipojíte k síti Wi-Fi.\n\nToto nastavení ovlivní všechny uživatele tohoto telefonu."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"upozornění"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"oznámení"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limit"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Odebrané aplikace"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Odebrané aplikace a odebraní uživatelé"</string>
@@ -3640,7 +3647,7 @@
     <string name="high_power_apps" msgid="3459065925679828230">"Optimalizace výdrže bat."</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Upozornění na využití"</string>
     <string name="show_all_apps" msgid="1512506948197818534">"Zobrazit úplné využití zařízení"</string>
-    <string name="hide_extra_apps" msgid="5016497281322459633">"Zobrazit využití aplikace"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"Zobrazit využití aplikací"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"Vysoká spotřeba"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
       <item quantity="few"><xliff:g id="NUMBER">%2$d</xliff:g> aplikace se chovají neobvykle</item>
@@ -3859,7 +3866,7 @@
     <string name="condition_device_vibrate_title" product="default" msgid="1087633233379991925">"V telefonu jsou nastaveny vibrace"</string>
     <string name="condition_device_vibrate_summary" product="tablet" msgid="433514444618164607">"Volání a oznámení budou vibrovat"</string>
     <string name="condition_device_vibrate_summary" product="default" msgid="5877034997839162763">"Volání a oznámení budou vibrovat"</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Nastavení plánu Nočního režimu"</string>
+    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Nastavení plánu nočního režimu"</string>
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"Každý večer automaticky zbarvit obrazovku do oranžova"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Noční režim je aktivní"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Obrazovka je tónována oranžově. Možná vám to pomůže usnout."</string>
@@ -4003,9 +4010,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"žádné"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Objekt hodnocení chybí."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Objekt hodnocení tento klíč neobsahuje."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Simulovat displej s výřezem"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Výřez displeje"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"výřez displeje"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"Žádné"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Výchozí nastavení zařízení"</string>
     <string name="special_access" msgid="3458780842491881155">"Přístup ke spec. aplikacím"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikace mohou využívat neomezená data</item>
@@ -4188,10 +4195,10 @@
     <string name="default_calendar_app_title" msgid="3545972964391065220">"Kalendářová aplikace"</string>
     <string name="default_contacts_app_title" msgid="3497370557378660098">"Aplikace pro kontakty"</string>
     <plurals name="default_email_app_title" formatted="false" msgid="42826975161049245">
-      <item quantity="few">Aplikace pro práci s e-maily</item>
-      <item quantity="many">Aplikace pro práci s e-maily</item>
-      <item quantity="other">Aplikace pro práci s e-maily</item>
-      <item quantity="one">Aplikace pro práci s e-maily</item>
+      <item quantity="few">Aplikace pro práci s e‑maily</item>
+      <item quantity="many">Aplikace pro práci s e‑maily</item>
+      <item quantity="other">Aplikace pro práci s e‑maily</item>
+      <item quantity="one">Aplikace pro práci s e‑maily</item>
     </plurals>
     <string name="default_map_app_title" msgid="7560143381633608567">"Mapová aplikace"</string>
     <plurals name="default_phone_app_title" formatted="false" msgid="6714041230953195024">
@@ -4272,6 +4279,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Při volání nedostupné"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Nedostupné"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Přijmout hovor v zařízení"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Tento APN nelze změnit."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Zvyšte životnost baterie tabletu"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Zvyšte životnost baterie zařízení"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Zvyšte životnost baterie telefonu"</string>
@@ -4288,5 +4296,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Podrobnosti sítě"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Název vašeho zařízení je viditelný pro aplikace v telefonu. Mohou ho vidět také ostatní uživatelé, když se připojíte k zařízení Bluetooth nebo hotspotu Wi-Fi."</string>
     <string name="devices_title" msgid="7701726109334110391">"Zařízení"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Výchozí"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Důležité informace"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"POKRAČOVAT"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"NE, DĚKUJI"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Místo"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Poskytovatel služeb může za účelem plnění své role shromažďovat údaje o vaší poloze.\n\nProstudujte si zásady ochrany soukromí poskytovatele."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Tísňová volání"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Tísňová volání pomocí funkce volání přes Wi-Fi váš operátor nepodporuje.\nZařízení se automaticky přepne na mobilní síť, aby mohlo provést tísňové volání.\nTísňová volání lze uskutečnit jen v oblastech s mobilním signálem."</string>
 </resources>

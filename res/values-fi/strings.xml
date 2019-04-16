@@ -211,6 +211,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Antamasi portti on virheellinen."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Selain saa käyttää HTTP-välityspalvelinta mutta muut sovellukset eivät."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"Välitysp. aut. määr. URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Nykyinen alitunnus:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Oletusarvoisen data-SIM-kortin alitunnus:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL-kaistanleveys (kt/s):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL-kaistanleveys (kt/s):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Matkapuhelimen sijaintitiedot (poistettu käytöstä):"</string>
@@ -233,6 +235,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Valitse radiotaajuus"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Äänipuhelujen verkon tyyppi:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Tietoverkon tyyppi:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Valitse puhelimen hakemisto"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Aseta ensisijainen verkon tyyppi:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Ping-kutsu isäntänimelle (www.google.com), IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Ping-kutsu isäntänimelle (www.google.com), IPv6:"</string>
@@ -343,15 +346,11 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Aseta päivämäärä"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"Hae aluetta"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"Alue"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"Aikavyöhyke"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"Aikavyöhykkeet: <xliff:g id="REGION">%1$s</xliff:g>"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Valitse ero UTC-aikaan"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Lajittelu aakkosjärjestyksessä"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Lajittelu aikavyöhykkeen mukaan"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> alkaa <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="4192803402331390389">"Käytössä on <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> alkaa seuraavana päivänä: <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"Käytössä on <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> alkaa <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Käytössä on <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Ei kesäaikaa."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Kesäaika"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Normaaliaika"</string>
@@ -882,6 +881,7 @@
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> edellyttää kirjautumista online-tilassa ennen verkkoon yhdistämistä."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"YHDISTÄ"</string>
     <string name="no_internet_access_text" msgid="5926979351959279577">"Tässä verkossa ei ole internetyhteyttä. Säilytetäänkö yhteys?"</string>
+    <string name="partial_connectivity_text" msgid="1287030663891772340">"Osa sovelluksista ei ehkä toimi rajallisen yhteyden vuoksi. Käytetäänkö silti?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Älä kysy uudelleen tässä verkossa"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi-Fi-yhteyttä ei voi muodostaa."</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Jos Wi-Fi-signaali on heikko, voit käyttää mobiilidataa. Datan käytöstä voi aiheutua maksuja."</string>
@@ -967,15 +967,15 @@
     <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Laajenna puhelumahdollisuuksia Wi‑Fillä"</string>
     <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Paranna tavoittavuutta ottamalla Wi-Fi-puhelut käyttöön"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Puheluasetus"</string>
-    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-puhelutila"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="7105195222267749226">"Puheluasetus"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Roaming-asetus"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
     <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Roaming-asetus"</string>
   <string-array name="wifi_calling_mode_choices">
-    <item msgid="2124257075906188844">"Wi-Fi ensisijainen"</item>
-    <item msgid="1335127656328817518">"Mobiiliverkko ensisijainen"</item>
-    <item msgid="3132912693346866895">"Vain Wi-Fi"</item>
+    <item msgid="772621647207148279">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="2226422868199612072">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
+    <item msgid="7041954411163832397">"@*android:string/wfc_mode_wifi_only_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
@@ -988,8 +988,8 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"Wi-Fi ensisijainen"</item>
-    <item msgid="5074515506087318555">"Mobiiliverkko ensisijainen"</item>
+    <item msgid="4430473354160964286">"@*android:string/wfc_mode_wifi_preferred_summary"</item>
+    <item msgid="5965810717958113109">"@*android:string/wfc_mode_cellular_preferred_summary"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
@@ -999,7 +999,10 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kun Wi-Fi-puhelut on käytössä, puhelimesi voi ohjata puhelut Wi-Fi-verkkojen tai operaattorisi verkon kautta, riippuen asetuksistasi ja siitä, kummassa on voimakkaampi signaali. Ennen kuin otat tämän ominaisuuden käyttöön, tarkista maksut ja muut tiedot operaattoriltasi."</string>
+    <string name="wifi_calling_mode_wifi_preferred_summary" msgid="9092988115148569860">"Jos Wi-Fi-yhteys ei ole käytettävissä, käytä mobiiliverkkoa"</string>
+    <string name="wifi_calling_mode_cellular_preferred_summary" msgid="240885549023046403">"Jos mobiiliverkkoa ei ole saatavilla, käytä Wi-Fi-yhteyttä."</string>
+    <string name="wifi_calling_mode_wifi_only_summary" msgid="3688265826855460036">"Soita Wi-Fi-yhteyden kautta. Jos Wi-Fi-yhteys katkeaa, puhelu päättyy."</string>
+    <string name="wifi_calling_off_explanation" msgid="564780186974911501">"Kun Wi-Fi-puhelut on käytössä, puhelimesi voi ohjata puhelut Wi-Fi-verkkojen tai operaattorisi verkon kautta, riippuen asetuksistasi ja siitä, kummassa on voimakkaampi signaali. Ennen kuin otat tämän ominaisuuden käyttöön, tarkista maksut ja muut tiedot operaattoriltasi.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Hätäosoite"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Sijaintisi, kun soitat hätäpuhelun Wi-Fillä"</string>
@@ -1175,6 +1178,8 @@
     <string name="sim_change_failed" msgid="3602072380172511475">"PIN-koodin vaihtaminen epäonnistui.\nSaatoit antaa väärän PIN-koodin."</string>
     <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM-kortin PIN-koodin vaihtaminen onnistui"</string>
     <string name="sim_lock_failed" msgid="2489611099235575984">"SIM-kortin lukitustilan muuttaminen epäonnistui.\nPIN-koodi on mahdollisesti virheellinen."</string>
+    <string name="sim_pin_disable_failed" msgid="7932981135799678220">"PIN-koodin käytöstä poistaminen epäonnistui."</string>
+    <string name="sim_pin_enable_failed" msgid="3414621075632931753">"PIN-koodin käyttöönotto epäonnistui."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Peruuta"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"SIM-kortteja löytyi useita"</string>
@@ -1459,8 +1464,10 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"Nollataanko?"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"Tämä käyttäjä ei voi palauttaa verkon asetuksia."</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Verkkoasetuksesi on nollattu."</string>
-    <string name="reset_esim_error_title" msgid="1464195710538232590">"eSIMien nollaus epäonnistui"</string>
-    <string name="reset_esim_error_msg" msgid="8434956817922668388">"eSIMien nollaus epäonnistui virheen vuoksi."</string>
+    <!-- no translation found for reset_esim_error_title (7192618265425728179) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (4513391470683673969) -->
+    <skip />
     <string name="master_clear_title" msgid="3531267871084279512">"Poista kaikki tiedot (palauta tehdasasetukset)"</string>
     <string name="master_clear_short_title" msgid="8652450915870274285">"Poista data (tehdasasetuksiin)"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Tämä poistaa kaikki tablet-laitteesi "<b>"sisäisen tallennustilan"</b>" tiedot, kuten:\n\n"<li>"Google-tilisi"</li>\n<li>"Järjestelmä- ja sovellustiedot ja -asetukset"</li>\n<li>"Ladatut sovellukset"</li></string>
@@ -1673,7 +1680,7 @@
     <string name="auto_launch_label" msgid="2669236885531442195">"Avaa oletuksena"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"Oletukset"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"Ruudun yhteensopivuus"</string>
-    <string name="permissions_label" msgid="2605296874922726203">"Käyttöluvat"</string>
+    <string name="permissions_label" msgid="2605296874922726203">"Käyttöoikeudet"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Välimuisti"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Tyhjennä välimuisti"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Välimuisti"</string>
@@ -1974,10 +1981,10 @@
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Käytä tekstityksiä"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Kuulolaitteet"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Ei yhdistettyjä kuulolaitteita"</string>
-    <string name="accessibility_hearingaid_adding_summary" msgid="6371077608778830020">"Lisää kuulolaite"</string>
+    <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Lisää kuulolaitteita"</string>
     <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Jos haluat muodostaa parin kuulolaitteen kanssa, etsi laitteesi seuraavalta näytöltä ja napauta sitä."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Varmista, että kuulolaitteesi on laiteparin muodostustilassa."</string>
-    <string name="accessibility_hearingaid_active_device_summary" msgid="1246354030808703545">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> on nyt aktiivinen"</string>
+    <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktiivinen"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> tallennettua kuulolaitetta</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> tallennettu kuulolaite</item>
@@ -2890,7 +2897,7 @@
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta."</string>
     <string name="restriction_location_enable_title" msgid="5020268888245775164">"Sijainti"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Anna sovellusten käyttää sijaintitietojasi"</string>
-    <string name="wizard_back" msgid="5567007959434765743">"Edellinen"</string>
+    <string name="wizard_back" msgid="5567007959434765743">"Takaisin"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Seuraava"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Valmis"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Ota kuva"</string>
@@ -3193,7 +3200,7 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Vilkuta valoa"</string>
     <string name="lock_screen_notifications_title" msgid="2583595963286467672">"Lukitusnäytöllä"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kun työprofiili on lukittu"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Näytä ilmoitusten koko sisältö"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Näytä ilmoitusten koko sisältö."</string>
     <string name="lock_screen_notifications_summary_hide" msgid="8301305044690264958">"Piilota arkaluontoinen sisältö"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Älä näytä ilmoituksia lainkaan"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Miten haluat ilmoitusten näkyvän, kun laite on lukittu?"</string>
@@ -3631,7 +3638,7 @@
     </plurals>
     <string name="running_frequency" msgid="6622624669948277693">"Toistuvuus"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"Enimmäiskäyttö"</string>
-    <string name="no_data_usage" msgid="9131454024293628063">"Tietoja ei käytetty."</string>
+    <string name="no_data_usage" msgid="9131454024293628063">"Dataa ei käytetty"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"Myönnetäänkö Älä häiritse -tilan käyttöoikeus sovellukselle <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"Sovellus voi ottaa Älä häiritse -tilan käyttöön tai poistaa sen käytöstä sekä muokata siihen liittyviä asetuksia."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"Tämän täytyy olla käytössä, sillä ilmoitusten käyttöoikeus on myönnetty."</string>
@@ -3887,9 +3894,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ei mitään"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Sijoitustiedot puuttuvat."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Tätä avainta ei ole sijoitustiedoissa."</string>
-    <string name="display_cutout_emulation" msgid="6306593933746393170">"Jäljittele näyttöä, jossa on aukko"</string>
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Näyttölovi"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"näyttölovi, näytön lovi"</string>
-    <string name="display_cutout_emulation_none" msgid="5144174674654097316">"–"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Laitteen oletusasetus"</string>
     <string name="special_access" msgid="3458780842491881155">"Sovellusten erikoiskäyttö"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sovelluksen datankäyttöä ei rajoiteta.</item>
@@ -3957,7 +3964,7 @@
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Tarkista ilmoitukset kaksoisnapauttamalla tabletin näyttöä"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Tarkista ilmoitukset kaksoisnapauttamalla laitteen näyttöä"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Kaksoisnapauta näyttöä, niin näet ajan, ilmoituskuvakkeet ja muita tietoja."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Tarkista ilmoitukset nostamalla puhelimesi"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Tarkista nostamalla"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Tarkista ilmoitukset nostamalla tablettisi"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Tarkista ilmoitukset nostamalla laitteesi"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Ota puhelin käteesi, niin näet ajan, ilmoituskuvakkeet ja muita tietoja."</string>
@@ -4134,6 +4141,7 @@
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Ei käytettävissä puhelujen aikana"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Ei käytettävissä"</string>
     <string name="take_call_on_title" msgid="6066362463436122655">"Vastaa puheluun:"</string>
+    <string name="cannot_change_apn_toast" msgid="4652498125702594916">"Tätä APN:ää ei voi muuttaa."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Paranna tabletin akunkestoa"</string>
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Paranna laitteen akunkestoa"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Paranna puhelimen akunkestoa"</string>
@@ -4150,5 +4158,11 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Verkon tiedot"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"Puhelimen sovellukset näkevät laitteesi nimen. Muut voivat myös nähdä nimen, kun muodostat Bluetooth-yhteyden laitteisiin tai aktivoit Wi-Fi-hotspotin."</string>
     <string name="devices_title" msgid="7701726109334110391">"Laitteet"</string>
-    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Oletus"</string>
+    <string name="wfc_disclaimer_title_text" msgid="6164569741719679613">"Tärkeää tietoa"</string>
+    <string name="wfc_disclaimer_agree_button_text" msgid="1405773141236165542">"JATKA"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="2700358281438736674">"EI KIITOS"</string>
+    <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Sijainti"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Palveluntarjoaja voi kerätä sijaintitietoja palvelun tarjoamiseksi.\n\nTutustu palveluntarjoajan tietosuojakäytäntöön."</string>
+    <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="3354031536141983602">"Hätäpuhelut"</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="6068582272230311464">"Operaattorisi ei tue hätäpuhelun soittamista Wi-Fi-puheluna.\nLaite vaihtaa automaattisesti mobiiliverkkoon soittaakseen hätäpuhelun.\nHätäpuheluja voi soittaa vain matkapuhelinverkon kantaman sisällä."</string>
 </resources>
