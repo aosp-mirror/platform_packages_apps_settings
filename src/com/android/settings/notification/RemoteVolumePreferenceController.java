@@ -43,7 +43,6 @@ public class RemoteVolumePreferenceController extends VolumeSeekBarPreferenceCon
     @VisibleForTesting
     static final int REMOTE_VOLUME = 100;
 
-    private MediaSessionManager mMediaSessionManager;
     private MediaSessions mMediaSessions;
     @VisibleForTesting
     MediaSession.Token mActiveToken;
@@ -86,28 +85,39 @@ public class RemoteVolumePreferenceController extends VolumeSeekBarPreferenceCon
 
     public RemoteVolumePreferenceController(Context context) {
         super(context, KEY_REMOTE_VOLUME);
-        mMediaSessionManager = context.getSystemService(MediaSessionManager.class);
         mMediaSessions = new MediaSessions(context, Looper.getMainLooper(), mCallbacks);
+        updateToken(getActiveRemoteToken(mContext));
     }
 
     @Override
     public int getAvailabilityStatus() {
-        final List<MediaController> controllers = mMediaSessionManager.getActiveSessions(null);
+        // Always return true to make it indexed in database
+        return AVAILABLE_UNSEARCHABLE;
+    }
+
+    /**
+     * Return {@link android.media.session.MediaSession.Token} for active remote token, or
+     * {@code null} if there is no active remote token.
+     */
+    public static MediaSession.Token getActiveRemoteToken(Context context) {
+        final MediaSessionManager sessionManager = context.getSystemService(
+                MediaSessionManager.class);
+        final List<MediaController> controllers = sessionManager.getActiveSessions(null);
         for (MediaController mediaController : controllers) {
             final MediaController.PlaybackInfo pi = mediaController.getPlaybackInfo();
             if (isRemote(pi)) {
-                updateToken(mediaController.getSessionToken());
-                return AVAILABLE;
+                return mediaController.getSessionToken();
             }
         }
 
         // No active remote media at this point
-        return CONDITIONALLY_UNAVAILABLE;
+        return null;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreference.setVisible(mActiveToken != null);
         if (mMediaController != null) {
             updatePreference(mPreference, mActiveToken, mMediaController.getPlaybackInfo());
         }

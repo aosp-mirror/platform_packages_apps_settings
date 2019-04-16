@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.notification.RemoteVolumePreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,9 @@ public class VolumePanel implements PanelContent {
     @Override
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
-        uris.add(VOLUME_REMOTE_MEDIA_URI);
+        if (RemoteVolumePreferenceController.getActiveRemoteToken(mContext) != null) {
+            uris.add(VOLUME_REMOTE_MEDIA_URI);
+        }
         uris.add(VOLUME_MEDIA_URI);
         uris.add(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
         uris.add(VOLUME_CALL_URI);
