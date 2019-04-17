@@ -31,6 +31,7 @@ import com.android.internal.telephony.CellNetworkScanResult;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.SettableFuture;
 
 import java.lang.annotation.Retention;
@@ -180,7 +181,7 @@ public class NetworkScanHelper {
                     int errCode = Integer.parseInt(t.getMessage());
                     onError(errCode);
                 }
-            });
+            }, MoreExecutors.directExecutor());
             mExecutor.execute(new NetworkScanSyncTask(
                     mTelephonyManager, (SettableFuture) mNetworkScanFuture));
         } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS) {

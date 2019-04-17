@@ -2690,10 +2690,12 @@
             android:excludeFromRecents="true"
             android:exported="false" />
 
-        <activity android:name=".sim.SimDialogActivity"
-                android:theme="@style/Theme.AlertDialog"
-                android:label="@string/sim_settings_title"
-                android:excludeFromRecents="true">
+        <activity
+            android:name=".sim.SimDialogActivity"
+            android:theme="@style/Theme.AlertDialog"
+            android:label="@string/sim_settings_title"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -2905,7 +2907,7 @@
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
-                <action android:name="android.settings.VIEW_ADVANCED_POWER_USAGE_DETAIL" />
+                <action android:name="android.settings.APP_BATTERY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>

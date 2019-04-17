@@ -244,7 +244,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mToggleInversionPreference;
     private ColorInversionPreferenceController mInversionPreferenceController;
     private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
-    private Preference mDarkUIModePreference;
+    private SwitchPreference mDarkUIModePreference;
     private DarkUIPreferenceController mDarkUIPreferenceController;
     private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
 
@@ -524,8 +524,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mDarkUIModePreference = findPreference(DARK_UI_MODE_PREFERENCE);
         mDarkUIPreferenceController = new DarkUIPreferenceController(getContext(),
                 DARK_UI_MODE_PREFERENCE);
+        mDarkUIPreferenceController.setParentFragment(this);
         mDarkUIPreferenceController.displayPreference(getPreferenceScreen());
-        mDarkUIModePreference.setSummary(mDarkUIPreferenceController.getSummary());
     }
 
     private void updateAllPreferences() {

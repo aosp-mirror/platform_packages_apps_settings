@@ -31,6 +31,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
@@ -65,6 +66,8 @@ public class MobileNetworkSummaryControllerTest {
     private EuiccManager mEuiccManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private UserManager mUserManager;
 
     private AddPreference mPreference;
     private Context mContext;
@@ -76,6 +79,7 @@ public class MobileNetworkSummaryControllerTest {
         mContext = spy(Robolectric.setupActivity(Activity.class));
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
         when(mEuiccManager.isEnabled()).thenReturn(true);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.EUICC_PROVISIONED, 1);
@@ -97,8 +101,21 @@ public class MobileNetworkSummaryControllerTest {
         final ConnectivityManager cm = mock(ConnectivityManager.class);
         when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        when(mUserManager.isAdminUser()).thenReturn(true);
+
         assertThat(mController.isAvailable()).isFalse();
     }
+
+    @Test
+    public void isAvailable_secondaryUser_notAvailable() {
+        final ConnectivityManager cm = mock(ConnectivityManager.class);
+        when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(true);
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        when(mUserManager.isAdminUser()).thenReturn(false);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
 
     @Test
     public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
@@ -280,6 +297,18 @@ public class MobileNetworkSummaryControllerTest {
         final ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
         verify(mPreference, atLeastOnce()).setAddWidgetEnabled(captor.capture());
         assertThat(captor.getValue()).isFalse();
+    }
+
+    @Test
+    public void onResume_noSubscriptionEsimDisabled_isDisabled() {
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
+        when(mEuiccManager.isEnabled()).thenReturn(false);
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.onResume();
+
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
