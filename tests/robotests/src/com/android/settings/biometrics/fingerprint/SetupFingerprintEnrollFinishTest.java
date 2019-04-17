@@ -142,4 +142,24 @@ public class SetupFingerprintEnrollFinishTest {
         assertThat(application.getPackageManager().getComponentEnabledSetting(
                 mComponentName)).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
     }
+
+    @Test
+    public void onBackPressed_fingerprintCountIsNotOne_fingerprintSuggestionActivityDisabled() {
+        Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(2);
+
+        mActivity.onBackPressed();
+
+        assertThat(application.getPackageManager().getComponentEnabledSetting(
+                mComponentName)).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+    }
+
+    @Test
+    public void onBackPressed_fingerprintCountIsOne_fngerprintSuggestionActivityEnabled() {
+        Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(1);
+
+        mActivity.onBackPressed();
+
+        assertThat(application.getPackageManager().getComponentEnabledSetting(
+                mComponentName)).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+    }
 }
