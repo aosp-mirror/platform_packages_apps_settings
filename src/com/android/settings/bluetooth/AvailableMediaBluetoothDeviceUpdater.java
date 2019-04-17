@@ -33,7 +33,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     private final AudioManager mAudioManager;
 
