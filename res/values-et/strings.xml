@@ -210,6 +210,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"Sisestatud port on kehtetu."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Brauser kasutab HTTP-puhverserverit, kuid muud rakendused ei tohi seda kasutada."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"Praegune alam-ID:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"Andmete vaike-SIM-kaardi alam-ID:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL ribalaius (kbit/s):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL ribalaius (kbit/s):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Kärje asukohateave (tugi on katkestatud):"</string>
@@ -232,6 +234,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"Raadioriba valimine"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"Häälvõrgu tüüp:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"Andmesidevõrgu tüüp:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"Telefoni registri valimine"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"Eelistatud võrgutüübi määramine:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"Pingi hosti nimi (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"Pingi hosti nimi (www.google.com) IPv6:"</string>
@@ -314,10 +317,10 @@
     <string name="roaming_disable" msgid="1295279574370898378">"Ühenda rändluse ajal andmesideteenustega"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Kaotasite andmesideühenduse, kuna jätsite oma koduvõrgu andmerändluse väljalülitatuks."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Lülita sisse"</string>
-    <string name="roaming_warning" msgid="4275443317524544705">"Lisanduda võivad suured tasud."</string>
+    <string name="roaming_warning" msgid="4275443317524544705">"See võib põhjustada suuri andmesidetasusid."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Kui lubate andmeside rändluse, siis võivad sellega kaasneda rändlustasud!\n\nSeade mõjutab tahvelarvuti kõiki kasutajaid."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Kui lubate andmeside rändluse, siis võivad sellega kaasneda rändlustasud!\n\nSeade mõjutab telefoni kõiki kasutajaid."</string>
-    <string name="roaming_reenable_title" msgid="6068100976707316772">"Kas lubada andmeside rändlus?"</string>
+    <string name="roaming_reenable_title" msgid="6068100976707316772">"Kas lubada andmesiderändlus?"</string>
     <string name="networks" msgid="6333316876545927039">"Operaatori valik"</string>
     <string name="sum_carrier_select" msgid="3616956422251879163">"Võrguoperaatori valimine"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Kuupäev ja kellaaeg"</string>
@@ -709,7 +712,7 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Tühista"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Järgmine"</string>
     <string name="lock_setup" msgid="3355847066343753943">"Seadistamine on lõpetatud."</string>
-    <string name="manage_device_admin" msgid="537804979483211453">"Seadme administraatori rakendused"</string>
+    <string name="manage_device_admin" msgid="537804979483211453">"Seadme admin. rakendused"</string>
     <string name="number_of_device_admins_none" msgid="7185056721919496069">"Aktiivseid rakendusi ei ole"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="3361891840111523393">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktiivset rakendust</item>
@@ -928,7 +931,7 @@
     <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"Eelistatud on 5,0 GHz riba"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"5,0 GHz"</string>
-    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Valige WiFi-leviala lubamiseks vähemalt üks sagedusriba:"</string>
+    <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"Valige WiFi-kuumkoha lubamiseks vähemalt üks sagedusriba:"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-seaded"</string>
     <string name="wifi_privacy_settings" msgid="5500777170960315928">"Privaatsus"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="1539659414108891004">"Juhuslik MAC-aadress"</string>
@@ -957,10 +960,10 @@
     <string name="wifi_dpp_device_found" msgid="8618134150169810107">"Leiti seade"</string>
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="5579154298588011712">"WiFi-võrgu jagamine selle seadmega …"</string>
     <string name="wifi_dpp_connecting" msgid="7111851118215580428">"Ühendamine …"</string>
-    <string name="wifi_dpp_share_hotspot" msgid="762408459341741405">"Leviala jagamine"</string>
+    <string name="wifi_dpp_share_hotspot" msgid="762408459341741405">"Kuumkoha jagamine"</string>
     <string name="wifi_dpp_lockscreen_title" msgid="8401802203867904622">"Kinnitage oma isik"</string>
     <string name="wifi_dpp_wifi_password" msgid="4938294574591503213">"WiFi-võrgu parool: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
-    <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"Leviala parool: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"Kuumkoha parool: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="4072206063308645677">"Lisa seade"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="8898075663321081592">"Looge võrguga ühendus QR-koodi abil"</string>
     <string name="retry" msgid="6472609612090877557">"Proovi uuesti"</string>
@@ -979,6 +982,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Operaatori WiFi-võrk"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"Ühendage operaatori <xliff:g id="NAME">%1$s</xliff:g> kaudu"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Täpsema asukoha ja muude toimingute jaoks tahab rakendus <xliff:g id="APP_NAME">%1$s</xliff:g> võrkude skannimise sisse lülitada, isegi kui WiFi on välja lülitatud.\n\nKas lubada see kõigi rakenduste jaoks, mis skannida tahavad?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"Täpsema asukoha ja muude toimingute jaoks tahab rakendus võrkude skannimise sisse lülitada, isegi kui WiFi on välja lülitatud.\n\nKas lubada see kõigi rakenduste jaoks, mis skannida tahavad?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Väljalülitamiseks avage ületäitemenüüs valik Täpsem."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Luba"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Keela"</string>
@@ -1056,16 +1060,16 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Kas unustada see rühm?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"WiFi-kuumkoht"</string>
     <string name="wifi_hotspot_off_subtext" msgid="2199911382555864644">"Interneti-ühendust ega sisu ei jagata teiste seadmetega"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"Tahvelarvuti Interneti-ühendust jagatakse leviala kaudu"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"Telefoni Interneti-ühendust jagatakse leviala kaudu"</string>
-    <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"Rakendus jagab sisu. Interneti-ühenduse jagamiseks lülitage leviala välja ja seejärel uuesti sisse"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"Tahvelarvuti Interneti-ühendust jagatakse kuumkoha kaudu"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"Telefoni Interneti-ühendust jagatakse kuumkoha kaudu"</string>
+    <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"Rakendus jagab sisu. Interneti-ühenduse jagamiseks lülitage kuumkoht välja ja seejärel uuesti sisse."</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="353306131026431089">"Parool on määramata"</string>
     <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Kuumkoha nimi"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Võrgu <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> sisselülitamine …"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Teised seadmed saavad luua ühenduse võrguga <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Kuumkoha parool"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-riba"</string>
-    <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Teiste seadmete jaoks WiFi-võrgu loomiseks kasutage leviala. Leviala kasutab Interneti pakkumiseks mobiilset andmesideühendust. Rakenduda võivad mobiilse andmeside tasud."</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Pääsupunkti sagedusriba"</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Teiste seadmete jaoks WiFi-võrgu loomiseks kasutage kuumkohta. Kuumkoht kasutab Interneti pakkumiseks mobiilset andmesideühendust. Rakenduda võivad mobiilse andmeside tasud."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Rakendused saavad luua kuumkoha, et jagada läheduses olevate seadmetega sisu."</string>
     <string name="wifi_hotspot_auto_off_title" msgid="1590313508558948079">"Lülita kuumkoht automaatselt välja"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="5858098059725925084">"Kui ükski seade pole ühendatud, lülitatakse WiFi-kuumkoht välja"</string>
@@ -1203,11 +1207,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Heledust optimeeritakse valgustingimuste järgi. Kui funktsioon on sisse lülitatud, saate heledust siiski ajutiselt reguleerida."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Teie ekraanikuva eredust kohandatakse automaatselt teie keskkonna ja tegevuste järgi. Võite liugurit käsitsi liigutada, et aidata kohanduval eredusel teie eelistusi õppida."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Ekraani valge tasakaal"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Kuvateadlik"</string>
+    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Sees / ekraan jääb sisselülitatuks, kui seda vaatate"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Väljas"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"Takistab ekraani väljalülitamist, kui seda vaatate."</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"Kuvateadlik funktsioon tuvastab esikaamera abil, kas keegi vaatab ekraani. See töötab ainult seadmes ja pilte ei talletata kunagi ega saadeta Google\'ile."</string>
+    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"Öövalgus"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Funktsioon Öövalgus toonib ekraani oranžkollaseks. Nii on hämaras ekraani mugavam vaadata ja sellelt teksti lugeda. See võib aidata teil ka hõlpsamini magama jääda."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Ajastamine"</string>
@@ -1233,11 +1239,11 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Lülita sisse kuni <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Lülita välja kuni <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"Öövalgus pole praegu sees"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"Unerežiim"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Ekraani ajalõpp"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekraan lülitub välja"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Pärast <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> tegevusetust"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Taustapilt"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"Stiilid ja taustapildid"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"Stiilid ja taustapildid"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"Vaikeseade"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"Kohandatud"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Muutke taustapilti"</string>
@@ -1616,7 +1622,7 @@
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="930464462687425777">"Kuumkoht on sees, jagamine"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="3473671453891735907">"Kuumkoht on sees"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"Jagamine"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Kui andmeside mahu säästja on sisse lülitatud, siis ei saa jagada ega kasutada teisaldatavat leviala"</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Kui andmemahu säästja on sisse lülitatud, siis ei saa jagada ega kasutada teisaldatavat kuumkohta"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB jagamine"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3711893746716442706">"Telefoni Interneti-ühenduse jagamine USB kaudu"</string>
@@ -1646,7 +1652,7 @@
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Looge Interneti-ühendus"</string>
     <string name="location_title" msgid="1029961368397484576">"Minu asukoht"</string>
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Tööprofiili asukoht"</string>
-    <string name="location_app_level_permissions" msgid="2777033567595680764">"Rakenduse luba"</string>
+    <string name="location_app_level_permissions" msgid="2777033567595680764">"Rakenduste load"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"Asukoht on välja lülitatud"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="6755614454444493071">
       <item quantity="other"> <xliff:g id="BACKGROUND_LOCATION_APP_COUNT_2">%1$d</xliff:g> rakendusel <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g>-st on piiramatu juurdepääs</item>
@@ -2283,9 +2289,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"Tahvelarvutit on kasutatud tavapärasest rohkem"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"Seadet on kasutatud tavapärasest rohkem"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"Aku võib tavapärasest kiiremini tühjaks saada"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"Teie telefoni on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim kasutatud rakendused pärast täislaadimist:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"Teie tahvelarvutit on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim kasutatud rakendused pärast täislaadimist:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"Teie seadet on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim kasutatud rakendused pärast täislaadimist:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"Teie telefoni on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"Teie tahvelarvutit on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"Teie seadet on kasutatud tavapärasest rohkem. Aku võib oodatust kiiremini tühjaks saada.\n\nEnim akut kasutanud rakendused:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"Hõlmab akut koormavaid taustategevusi"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Piira %1$d rakendust</item>
@@ -2567,7 +2573,7 @@
     <string name="remove_device_admin" msgid="9207368982033308173">"Inaktiveeri seadme administraatori rakendus"</string>
     <string name="uninstall_device_admin" msgid="271120195128542165">"Desinstalli rakendus"</string>
     <string name="remove_and_uninstall_device_admin" msgid="3837625952436169878">"Inaktiveeri ja desinstalli"</string>
-    <string name="select_device_admin_msg" msgid="7347389359013278077">"Seadme administraatori rakendused"</string>
+    <string name="select_device_admin_msg" msgid="7347389359013278077">"Seadme admin. rakendused"</string>
     <string name="no_device_admins" msgid="4846602835339095768">"Saadaval ei ole ühtki seadme administraatori rakendust"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Isiklik"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Töö"</string>
@@ -2576,10 +2582,10 @@
     <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"Keela seadme identifikaatori piirangud"</string>
     <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"Seadme identifikaatorite uute juurdepääsupiirangute keelamine"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Saadaval pole ühtegi usaldusväärset agenti"</string>
-    <string name="add_device_admin_msg" msgid="1501847129819382149">"Kas aktiveerida administraatori rakenduse?"</string>
+    <string name="add_device_admin_msg" msgid="1501847129819382149">"Kas aktiveerida admin. rakendus?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"Aktiveeri seadme administraatori rakendus"</string>
     <string name="device_admin_add_title" msgid="3140663753671809044">"Seadme administraator"</string>
-    <string name="device_admin_warning" msgid="7482834776510188134">"Selle administraatori rakenduse aktiveerimisel lubatakse rakendusel <xliff:g id="APP_NAME">%1$s</xliff:g> teha järgmisi toiminguid."</string>
+    <string name="device_admin_warning" msgid="7482834776510188134">"Selle administraatori rakenduse aktiveerimisel lubatakse rakendusel <xliff:g id="APP_NAME">%1$s</xliff:g> teha järgmisi toiminguid:"</string>
     <string name="device_admin_status" msgid="7234814785374977990">"See administraatori rakendus on aktiivne ja lubab rakendusel <xliff:g id="APP_NAME">%1$s</xliff:g> teha järgmisi toiminguid."</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Kas aktiveerida profiilihaldur?"</string>
     <string name="adding_profile_owner_warning" msgid="1354474524852805802">"Kui jätkate, haldab teie kasutajat edaspidi administraator, kes saab võib-olla talletada peale teie isiklike andmete ka seotud andmeid.\n\nTeie administraator saab jälgida ja hallata selle kasutajaga seotud seadeid, juurdepääsu, rakendusi ja andmeid, sealhulgas veebitegevusi ja seadme asukohateavet."</string>
@@ -2698,7 +2704,7 @@
     <string name="data_usage_background_label" msgid="2722008379947694926">"Taustal:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"Rakenduse seaded"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"Andmeside kasutus taustal"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="5853552187570622572">"Luba taustal mobiilse andmeside kasutus"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="5853552187570622572">"Luba mobiilse andmeside kasutus taustal"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Rakend. taustandm. piiramiseks määrake mob. andmeside piirang."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Kas soovite taustandmeid piirata?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Funktsiooni tõttu võivad taustaandmetel põhinev rakendus töötamast lakata, kui saadaval on ainult mobiilsidevõrgud.\n\nAndmekasutuse täpsemad juhtelemendid leiate rakenduse seadetest."</string>
@@ -3304,7 +3310,7 @@
     <string name="asst_capabilities_actions_replies_title" msgid="2482989905050401969">"Nutikad toimingud ja vastused"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2200584362919192199">"Lisa märguannetele automaatselt kontekstipõhised toimingud ja kiirvastused"</string>
     <string name="hide_silent_icons_title" msgid="2378514357635207742">"Peida vaigistatud märguannete olekuikoonid"</string>
-    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Peitke olekuribal vaigistatud märguannete ikoonid"</string>
+    <string name="hide_silent_icons_summary" msgid="7479863645940885952">"Peida olekuribal vaigistatud märguannete ikoonid"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Luba märguandetäpid"</string>
     <string name="notification_bubbles_title" msgid="526545466417027926">"Mullid"</string>
     <string name="notification_bubbles_summary" msgid="5269674863510678257">"Hõljuvate otseteede abil pääsete igal pool rakenduse sisule kiiresti juurde"</string>
@@ -3862,7 +3868,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"Sisemine salvestusruum: <xliff:g id="PERCENTAGE">%1$s</xliff:g> kasutatud, <xliff:g id="FREE_SPACE">%2$s</xliff:g> vaba"</string>
     <string name="display_summary" msgid="6737806235882127328">"Pärast <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> tegevusetut olekut lülitatakse unerežiimi"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Taustapilt, unerežiim, fondi suurus"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"Stiilid ja taustapildid, unerežiim, fondi suurus"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"Stiilid, taustapildid, ekraani ajalõpp, fondi suurus"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"Unerežiim, fondi suurus"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Lülita unerežiimi pärast 10-minutilist tegevuseta olekut"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Keskmiselt on kasutusel <xliff:g id="USED_MEMORY">%1$s</xliff:g> mälu <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>-st"</string>
@@ -3887,7 +3893,7 @@
     <string name="condition_turn_on" msgid="9089876276117874591">"Lülita sisse"</string>
     <string name="condition_expand_show" msgid="608202020023489939">"Kuva"</string>
     <string name="condition_expand_hide" msgid="948507739223760667">"Peida"</string>
-    <string name="condition_hotspot_title" msgid="5959815393203320845">"Leviala on aktiivne"</string>
+    <string name="condition_hotspot_title" msgid="5959815393203320845">"Kuumkoht on aktiivne"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Lennurežiim on sees"</string>
     <string name="condition_airplane_summary" msgid="2500054042183138980">"Võrgud pole saadaval"</string>
     <string name="condition_zen_title" msgid="2897779738211625">"Režiim Mitte segada on sees"</string>
@@ -3964,8 +3970,8 @@
     <string name="configure" msgid="1029654422228677273">"Seadistamine"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Muud kasutusandmetesse kaasatud rakendused"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> rakendusel on lubatud kasutada piiranguteta andmemahtu, kui andmeside mahu säästja on sisse lülitatud</item>
-      <item quantity="one">1 rakendusel on lubatud kasutada piiranguteta andmemahtu, kui andmeside mahu säästja on sisse lülitatud</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> rakendusel on lubatud kasutada piiranguteta andmemahtu, kui andmemahu säästja on sisse lülitatud</item>
+      <item quantity="one">1 rakendusel on lubatud kasutada piiranguteta andmemahtu, kui andmemahu säästja on sisse lülitatud</item>
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"Peamine andmeside"</string>
     <string name="data_usage_wifi_title" msgid="7063659423081820720">"WiFi-andmeside"</string>
@@ -3985,16 +3991,16 @@
     <string name="no_carrier_update_now_text" msgid="1766859656868932996">"Värskendati äsja"</string>
     <string name="launch_mdp_app_text" msgid="6751296320061773169">"Kuva pakett"</string>
     <string name="launch_wifi_text" msgid="2311424914664372687">"Kuva üksikasjad"</string>
-    <string name="data_saver_title" msgid="8034286939200289826">"Andmeside mahu säästja"</string>
+    <string name="data_saver_title" msgid="8034286939200289826">"Andmemahu säästja"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"Piiramata andmeside"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Taustaandmed on välja lülitatud"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Sees"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Väljas"</string>
     <string name="data_saver_switch_title" msgid="836312690356005669">"Andmemahu säästja kasutamine"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Piiranguteta andmekasutus"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Luba piiranguteta juurdepääs andmesidele, kui andmeside mahu säästja on sisse lülitatud"</string>
-    <string name="home_app" msgid="4066188520886810030">"Avaekraani rakendus"</string>
-    <string name="no_default_home" msgid="7184117487704520238">"Vaikimisi avaekraan puudub"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Luba piiranguteta juurdepääs andmesidele, kui andmemahu säästja on sisse lülitatud"</string>
+    <string name="home_app" msgid="4066188520886810030">"Avakuva rakendus"</string>
+    <string name="no_default_home" msgid="7184117487704520238">"Vaike-avakuva puudub"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"Turvaline käivitamine"</string>
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Seadme käivitamisel nõutakse mustrit. Kui seade on välja lülitatud, ei saa see vastu võtta kõnesid, sõnumeid, märguandeid ega alarme."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Seadme käivitamisel nõutakse PIN-koodi. Kui seade on välja lülitatud, ei saa see vastu võtta kõnesid, sõnumeid, märguandeid ega alarme."</string>
@@ -4074,10 +4080,11 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Ühendatud seadmega <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Ühendatud mitme seadmega"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Süsteemi kasutajaliidese demorežiim"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"Teema"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"Vali teema"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"See seade kehtib ka rakenduste puhul"</string>
+    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
+    <skip />
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Toetatud rakendused aktiveerivad samuti tumeda teema"</string>
+    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Arendaja kiirseadete paanid"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope Trace"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"Andurid on väljas"</string>
@@ -4117,8 +4124,8 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kaamera vahetamine"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Selfide kiiremini jäädvustamine"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Rakenduste vahetamiseks pühkige avaekraani nupul üles. Kõigi rakenduste nägemiseks pühkige uuesti üles. See töötab igal ekraanikuval. Ekraanikuva paremas alanurgas ei ole enam nuppu Ülevaade."</string>
-    <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Proovige uut avaekraani nuppu"</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Rakenduste vahetamiseks pühkige avakuva nupul üles. Kõigi rakenduste nägemiseks pühkige uuesti üles. See töötab igal ekraanikuval. Ekraanikuva paremas alanurgas ei ole enam nuppu Ülevaade."</string>
+    <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Proovige uut avakuva nuppu"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Rakenduste vahetamiseks lülitage sisse uus liigutus"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Telefoni kontrollimiseks topeltpuudutamine"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Topeltpuudutage tahvelarvuti kontrollimiseks"</string>
@@ -4335,7 +4342,7 @@
     <string name="devices_title" msgid="7701726109334110391">"Seadmed"</string>
     <string name="homepage_all_settings" msgid="1245540304900512919">"Kõik seaded"</string>
     <string name="homepage_personal_settings" msgid="1570415428680432319">"Soovitused"</string>
-    <string name="choose_network_title" msgid="5702586742615861037">"Vali võrk"</string>
+    <string name="choose_network_title" msgid="5702586742615861037">"Võrgu valimine"</string>
     <string name="network_disconnected" msgid="2933191767567503504">"Ühendus on katkestatud"</string>
     <string name="network_connected" msgid="4943925032253989621">"Ühendatud"</string>
     <string name="network_connecting" msgid="76404590784733557">"Ühendamine …"</string>
@@ -4437,7 +4444,7 @@
     <string name="cdma_subscription_summary" msgid="7191590908367194209">"RUIM/SIM-i ja NV vahetamine"</string>
     <string name="cdma_subscription_dialogtitle" msgid="9153005469617575361">"tellimus"</string>
     <string name="register_automatically" msgid="518185886971595020">"Automaatne registreerimine …"</string>
-    <string name="roaming_alert_title" msgid="7458177294163751484">"Kas lubada andmeside rändlus?"</string>
+    <string name="roaming_alert_title" msgid="7458177294163751484">"Kas lubada andmesiderändlus?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Hinnakirja küsige oma võrguteenuse pakkujalt."</string>
     <string name="mobile_data_usage_title" msgid="7862429216994894656">"Rakenduse andmekasutus"</string>
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"Võrgu režiim <xliff:g id="NETWORKMODEID">%1$d</xliff:g> on sobimatu. Eirake seda."</string>
@@ -4508,9 +4515,10 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"Asukoht"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"Teenusepakkuja võib selle teenuse pakkumiseks koguda teie asukohateavet.\n\nVaadake oma teenusepakkuja privaatsuseeskirju."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"Järelejäänud aeg või andmemaht võib kaotsi minna. Enne eemaldamist pidage nõu operaatoriga."</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"sisu jäädvustamine, nutikad soovitused"</string>
-    <string name="content_capture" msgid="4486543205504396210">"Nutikad soovitused"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Lubage Androidil salvestada ekraanil kuvatav teave või esitatav video- või helisisu. Android esitab seadme tegevuse alusel kasulikke soovitusi."</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"sisu jäädvustamine"</string>
+    <string name="content_capture" msgid="6456873729933463600">"Sisu jäädvustamine"</string>
+    <!-- no translation found for content_capture_summary (659506647507221852) -->
+    <skip />
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"Jäädvusta süsteemi mälutõmmis"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"Süsteemi mälutõmmise jäädvustamine"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"Süsteemi mälutõmmist ei saanud jäädvustada"</string>

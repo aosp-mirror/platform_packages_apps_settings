@@ -210,6 +210,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"तपाईंले टाइप गर्नुभएको पोर्ट मान्य छैन।"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP प्रोक्सी ब्राउजरद्वारा प्रयोग गरिन्छ तर अन्य अनुप्रयोगहरूद्वारा प्रयोग गर्न नसकिने पनि हुन सक्छ।"</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"हालको subId:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"पूर्वनिर्धारित मोबाइल डेटा SIM को SubId:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL ब्यान्डविथ (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL व्यान्डविथ (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"सेलको स्थान बारे जानकारी (प्रचलनमा नरहेको):"</string>
@@ -232,6 +234,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"रेडियोको ब्यान्डलाई चयन गर्नुहोस्"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"आवाज सम्बन्धी नेटवर्कको प्रकार:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"डेटा नेटवर्कको प्रकार:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"फोनको सूचक चयन गर्नुहोस्"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"रुचाइएको नेटवर्कको प्रकारलाई सेट गर्नुहोस्:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"पिङ् होस्टनाम (www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"पिङ होस्टनाम (www.google.com) IPv6:"</string>
@@ -979,6 +982,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"सेवा प्रदायकको Wi‑Fi नेटवर्क"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1$s</xliff:g> मार्फत जडान गर्नुहोस्"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"स्थान सटिकता सुधार गर्न र अन्य प्रायोजनहरूको लागि, <xliff:g id="APP_NAME">%1$s</xliff:g> नेटवर्क स्क्यानिङ खुला भएको चाहन्छ, Wi-Fi बन्द भएता पनि।\n\nके यसलाई सबै अनुप्रयोगहरूको लागि अनुमति दिन चाहनुहुन्छ जसले स्क्यान गर्न चाहन्छन्?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"स्थान पहिचानको सटीकता सुधार गर्न र अन्य प्रायोजनहरूका लागि, एउटा अज्ञात अनुप्रयोग Wi-Fi निष्क्रिय हुँदा समेत नेटवर्क स्क्यान गर्न चाहन्छ।\n\nस्क्यान गर्न चाहने सबै अनुप्रयोगहरूलाई अनुमति दिने हो?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"यो बन्द गर्न, अतिप्रवाह मेनुमा उन्नतमा जानुहोस्।"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"अनुमति दिनुहोस्"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"अस्वीकार गर्नुहोस्"</string>
@@ -1203,11 +1207,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"उपलब्ध प्रकाशमा चमकको स्तर अनुकूल बनाउनुहोस्। यो सुविधा सक्रिय गरिसकेपछि पनि तपाईं अस्थायी रूपमा चमकलाई समायोजन गर्न सक्नुहुन्छ।"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"तपाईंको स्क्रिनको उज्यालोपन तपाईंको वातावरण र गतिविधिहरूअनुसार स्वतः समायोजन हुने छ। तपाईं म्यानुअल रूपमा स्लाइडर सारेर अनुकूलित उज्यालोपनलाई आफ्ना प्राथमिकताहरू सिक्नमा मद्दत गर्न सक्नुहुन्छ।"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"श्वेत सन्तुलन देखाउनुहोस्"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"स्क्रिनसम्बन्धी ज्ञान"</string>
+    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"सक्रिय / तपाईं स्क्रिनमा हेर्दै हुनुहुन्छ भने यो बन्द हुने छैन"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"निष्क्रिय"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"तपाईं स्क्रिनमा हेर्दै हुनुहुन्छ भने त्यसलाई बन्द हुन दिँदैन।"</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"कुनै व्यक्तिले स्क्रिनमा हेरिरहेको छ या छैन भन्ने कुरा पत्ता लगाउन स्क्रिनसम्बन्धी ज्ञान नामक सुविधाले अगाडिको क्यामेरा प्रयोग गर्दछ। यसले यन्त्रमा काम गर्छ र छविहरू कहिल्यै पनि भण्डारण गरिँदैनन् वा Google मा पठाइँदैनन्।"</string>
+    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"रात्रिको प्रकाश"</string>
     <string name="night_display_text" msgid="1837277457033025056">"रात्रिको प्रकाशले तपाईँको यन्त्रको स्क्रिनलाई हल्का एम्बर रङको बनाउँछ। यसले मधुरो प्रकाशमा यन्त्रको स्क्रिन हेर्न र पढ्न सजिलो बनाउँछ र तपाईँलाई अझ सजिलैसँग निदाउन मद्दत गर्न सक्छ।"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"समय निर्धारण गर्नुहोस्"</string>
@@ -1233,11 +1239,11 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"<xliff:g id="ID_1">%1$s</xliff:g> सम्म सक्रिय गर्नुहोस्"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"<xliff:g id="ID_1">%1$s</xliff:g> सम्म निष्क्रिय पार्नुहोस्"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"रात्रि प्रकाश हाल सक्रिय छैन"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"सयन मोड"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"स्क्रिन समय समाप्त भयो"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"स्क्रिन बन्द हुन्छ"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> निष्क्रियता पछि"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"वालपेपर"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2399486839820145870">"शैली तथा वालपेपरहरू"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"शैली तथा वालपेपरहरू"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"पूर्वनिर्धारित मान"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"आफू अनुकूल"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"वालपेपरलाई परिवर्तन गर्नुहोस्"</string>
@@ -1663,8 +1669,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"अनुप्रयोग र सेवाहरूलाई जुनसुकै बेला (Wi‑Fi निष्क्रिय भएको बेलामा पनि) वरपरका Wi-Fi नेटवर्कहरू स्क्यान गर्न अनुमति दिनुहोस्। यसलाई स्थानमा आधारित सुविधा तथा सेवाहरू सुधार गर्ने जस्ता कार्यहरू गर्नाका लागि प्रयोग गर्न सकिन्छ।"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"ब्लुटुथ स्क्यान हुँदै"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"अनुप्रयोग तथा सेवाहरूलाई जुनसुकै बेला (ब्लुटुथ निष्क्रिय भएको बेलामा पनि) वरपरका यन्त्रहरू स्क्यान गर्न अनुमति दिनुहोस्‌। यसलाई स्थानमा आधारित सुविधा तथा सेवाहरू सुधार गर्ने जस्ता कार्यहरू गर्नाका लागि प्रयोग गर्न सकिन्छ।"</string>
-    <!-- no translation found for managed_profile_location_services (4723268446874715222) -->
-    <skip />
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"कार्यस्थलका स्थानसम्बन्धी सेवाहरू"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi; मोबाइल नेटवर्क स्थान"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"तपाईँको स्थानलाई सीघ्र अनुमान गर्न अनुप्रयोगहरूलाई Google स्थान सेवा प्रयोग गर्न अनुमति दिनुहोस्। बेनामी स्थान डेटा भेला गरिने छ र Googleमा पठाइने छ।"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"वाइ-फाइद्वारा निर्धारित स्थान"</string>
@@ -2284,9 +2289,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"ट्याब्लेट सामान्यभन्दा बढी प्रयोग भयो"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"यन्त्रलाई सामान्यभन्दा बढी प्रयोग भयो"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"ब्याट्री अरू बेलाभन्दा छिटै सकिन सक्छ"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"तपाईंको फोन असामान्य ढङ्गले धेरै पटक प्रयोग गरिएको छ। तपाईंको ब्याट्रीको चार्ज अपेक्षा गरिएभन्दा चाँडो सकिने छ।\n \n चार्ज पूरा भएपछि सबैभन्दा बढी प्रयोग गरिएका अनुप्रयोगहरू:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"तपाईंको ट्याब्लेट असामान्य ढङ्गले धेरै पटक प्रयोग गरिएको छ। तपाईंको ब्याट्रीको चार्ज अपेक्षा गरिएभन्दा चाँडो सकिने छ।\n \n चार्ज पूरा भएपछि सबैभन्दा बढी प्रयोग गरिएका अनुप्रयोगहरू:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"तपाईंको यन्त्र असामान्य ढङ्गले धेरै पटक प्रयोग गरिएको छ। तपाईंको ब्याट्रीको चार्ज अपेक्षा गरिएभन्दा चाँडो सकिने छ।\n \n चार्ज पूरा भएपछि सबैभन्दा बढी प्रयोग गरिएका अनुप्रयोगहरू:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"तपाईंको फोन सामान्यभन्दा धेरै प्रयोग भएको छ। तपाईंको ब्याट्रीको चार्ज अपेक्षा गरिएभन्दा चाँडो सकिन सक्छ।\n\nसबैभन्दा बढी ब्याट्री उपयोग गर्ने अनुप्रयोगहरू:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"तपाईंको ट्याब्लेट सामान्यभन्दा धेरै प्रयोग भएको छ। तपाईंको ब्याट्रीको चार्ज अपेक्षा गरिएभन्दा चाँडो सकिन सक्छ।\n\nसबैभन्दा बढी ब्याट्री उपयोग गर्ने अनुप्रयोगहरू:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"तपाईंको यन्त्र सामान्यभन्दा धेरै प्रयोग भएको छ। तपाईंको ब्याट्रीको चार्ज अपेक्षा गरिएभन्दा चाँडो सकिन सक्छ।\n\nसबैभन्दा बढी ब्याट्री उपयोग गर्ने अनुप्रयोगहरू:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"यसले उच्च क्षमतायुक्त पृष्ठभूमिको गतिविधि समावेश गर्दछ"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">%1$d अनुप्रयोगहरूमाथि बन्देज लगाउनुहोस्</item>
@@ -2709,7 +2714,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"तपाईंले वेबमा आफ्नो खातामा गर्न हुने कुनै पनि परिवर्तनहरू स्वचालित रूपमा तपाईँको फोनमा प्रतिलिपि गरिने छ।\n\nकेही खाता पनि स्वचालित वेब फोनमा तपाईंले बनाउने कुनै पनि परिवर्तनहरू प्रतिलिपि हुनसक्छ। Google खाताले यसरी कार्य गर्दछ।"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"डेटा स्वतः सिंक हुने कार्य बन्द गर्ने हो?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"यस कार्यले डेटा र ब्याट्री प्रयोगको बचत गर्दछ, तर तपाईंले प्रत्येक खाता म्यानुअल तरिकाले हालसालको जानकारी भेला पार्नु पर्ने हुन्छ। र तपाईंले अद्यावधिक हुने बेलामा सूचना प्राप्त गर्नु हुन्न।"</string>
-    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"प्रयोग चक्र पुनःसेट मिति"</string>
+    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"प्रयोग चक्र पुनःसेट गर्ने मिति"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"प्रत्येक महिनाको मिति:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"सेट गर्नुहोस्"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"डेटा उपयोगबारे चेतावनी सेट गर्नुहोस्"</string>
@@ -2735,7 +2740,7 @@
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"मिटर राखिएका Wi-Fi सञ्जालहरू"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"मिटर राखिएका सञ्जालहरू चयन गर्न, Wi-Fi खोल्नुहोस्।"</string>
     <string name="data_usage_metered_auto" msgid="1262028400911918865">"स्वचालित"</string>
-    <string name="data_usage_metered_yes" msgid="9217539611385225894">"मिटर गरिएको छ"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"मिटर चल्ने बनाइएको छ"</string>
     <string name="data_usage_metered_no" msgid="4025232961929071789">"मिटर गरिएको छैन"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"वाहक डेटा लेखाकृत गर्ने तपाईँको उपकरणबाट फरक हुन सक्छ।"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"आपतकालीन कल"</string>
@@ -3863,7 +3868,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"आन्तरिक भण्डारण: <xliff:g id="PERCENTAGE">%1$s</xliff:g> प्रयोग गरिएको - <xliff:g id="FREE_SPACE">%2$s</xliff:g> खाली"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> को निष्क्रियता पछिको शयन"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"वालपेपर, शयन अवस्था, फन्टको आकार"</string>
-    <string name="display_dashboard_summary_with_style" msgid="7707201466027514198">"शैली र वालपेपर, शयन, फन्टको आकार"</string>
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"शैली, वालपेपर, स्क्रिन टाइमआउट, फन्टको आकार"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"निद्रा, फन्टको आकार"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"१० मिनेटको निष्क्रियता पछिको शयन"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> मेमोरीमध्ये औसत <xliff:g id="USED_MEMORY">%1$s</xliff:g> प्रयोगमा छ"</string>
@@ -3956,8 +3961,8 @@
     </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"वाहकको डेटाको हिसाब-किताब राख्ने कार्य तपाईँको यन्त्रको हिसाब-किताब राख्ने कार्य भन्दा फरक हुन सक्छ"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> प्रयोग गरियो"</string>
-    <string name="set_data_warning" msgid="6115364758236594593">"डेटा बारे चेतावनी सेट गर्नुहोस्"</string>
-    <string name="data_warning" msgid="209133958008062117">"डेटा चेतावनी"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"डेटाबारे चेतावनी सेट गर्नुहोस्"</string>
+    <string name="data_warning" msgid="209133958008062117">"डेटाबारे चेतावनी"</string>
     <string name="data_warning_footnote" msgid="776341964125603711">"डेटासम्बन्धी चेतावनी र यसको सीमाको मापन तपाईंको यन्त्रले गरेको हो। यो सेवा प्रदायकको डेटाभन्दा फरक हुन सक्छ।"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"डेटाको सीमा सेट गर्नुहोस्"</string>
     <string name="data_limit" msgid="1885406964934590552">"डेटाको सीमा"</string>
@@ -4075,10 +4080,11 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> मा जडान गरियो"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"धेरै यन्त्रहरूमा जडान गरियो"</string>
     <string name="demo_mode" msgid="2798762752209330277">"प्रणालीको UI को प्रदर्शन मोड"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"विषयवस्तु"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"विषयवस्तु छनौट गर्नुहोस्"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"यो सेटिङ अनुप्रयोगहरूमा पनि लागू हुन्छ"</string>
+    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
+    <skip />
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"समर्थन गरिएका अनुप्रयोगहरू पनि बदलिएर गाढा विषयवस्तुमा जाने छन्"</string>
+    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"द्रुत सेटिङहरू सम्बन्धी विकासकर्ताका टाइलहरू"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope को ट्रेस"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"सेन्सरहरू निष्क्रिय पार्नु…"</string>
@@ -4509,9 +4515,10 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"स्थान"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"तपाईंका सेवा प्रदायकले यो सेवा प्रदान गर्नका लागि तपाईंको स्थानसम्बन्धी जानकारी सङ्कलन गर्ने छ।\n\nकृपया आफ्ना सेवा प्रदायकको गोपनीयता नीतिको समीक्षा गर्नुहोस्।"</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"तपाईं बाँकी जुनसुकै समय वा डेटामाथिको पहुँच गुमाउन सक्नुहुन्छ। हटाउनुभन्दा पहिले आफ्ना सेवा प्रदायकमार्फत जाँच गर्नुहोस्।"</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"सामग्री समावेश, स्मार्ट सुझावहरू"</string>
-    <string name="content_capture" msgid="4486543205504396210">"स्मार्ट सुझावहरू"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Android लाई तपाईंको स्क्रिनमा देखिएका वा भिडियो वा अडियो सामग्रीमा सुनिएका जानकारी सुरक्षित गर्न दिनुहोस्। Android ले तपाईंको यन्त्रको क्रियाकलापमा आधारित भई सहयोगी सुझावहरू दिने छ।"</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"सामग्री समावेश गर्ने सुविधा"</string>
+    <string name="content_capture" msgid="6456873729933463600">"सामग्री समावेश गर्ने सुविधा"</string>
+    <!-- no translation found for content_capture_summary (659506647507221852) -->
+    <skip />
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"प्रणालीको हिप डम्प समावेश गर्नुहोस्"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"प्रणालीको हिप डम्प समावेश गर्दै"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"प्रणालीको हिप डम्प समावेश गर्न सकिएन"</string>
